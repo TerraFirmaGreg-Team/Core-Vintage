@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.base.tile.BaseTile;
+
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,7 +16,7 @@ import net.dries007.tfc.objects.items.metal.ItemMetalSheet;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TEMetalSheet extends TEBase {
+public class TEMetalSheet extends BaseTile {
 
     private final boolean[] faces;
 

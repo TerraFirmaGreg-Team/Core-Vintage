@@ -79,7 +79,7 @@ public class HwylaBlockInterface implements IWailaDataProvider, IWailaPlugin {
 
     @NotNull
     @Override
-    public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, BlockPos pos) {
-        return te.writeToNBT(tag);
+    public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, BlockPos pos) {
+        return tile.writeToNBT(tag);
     }
 }

@@ -34,14 +34,14 @@ import static su.terrafirmagreg.data.Properties.SEALED;
 public class TESRWoodBarrel extends TileEntitySpecialRenderer<TileWoodBarrel> {
 
     @Override
-    public void render(TileWoodBarrel te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        IBlockState state = te.getWorld().getBlockState(te.getPos());
+    public void render(TileWoodBarrel tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        IBlockState state = tile.getWorld().getBlockState(tile.getPos());
         if (!(state.getBlock() instanceof BlockWoodBarrel) || state.getValue(SEALED)) {
             return;
         }
 
-        IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
         if (fluidHandler == null || itemHandler == null) {
             return;

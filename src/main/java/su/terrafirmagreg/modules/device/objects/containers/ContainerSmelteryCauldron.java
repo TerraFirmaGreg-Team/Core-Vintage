@@ -12,8 +12,8 @@ import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 public class ContainerSmelteryCauldron extends ContainerTE<TileSmelteryCauldron> {
 
-    public ContainerSmelteryCauldron(InventoryPlayer playerInv, TileSmelteryCauldron te) {
-        super(playerInv, te);
+    public ContainerSmelteryCauldron(InventoryPlayer playerInv, TileSmelteryCauldron tile) {
+        super(playerInv, tile);
     }
 
     @Override

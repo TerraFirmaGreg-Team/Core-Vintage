@@ -11,10 +11,10 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
-import tfcflorae.api.knapping.KnappingTypes;
-import tfcflorae.objects.items.rock.ItemMud;
+import net.dries007.tfc.objects.items.rock.ItemMud;
 
 import org.jetbrains.annotations.Nullable;
 

@@ -21,9 +21,9 @@ import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.types.DefaultPlants;
+import net.dries007.tfc.types.PlantsTFCF;
 import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.ConfigTFCF;
-import tfcflorae.types.PlantsTFCF;
 
 import java.util.Random;
 
@@ -39,18 +39,18 @@ public class GeneratorPlants implements IWorldGenerator {
     private int epiphyteCount = 1;
     private int standardCount = 1;
 
-    private float waterCountConfig = ConfigTFCF.General.WORLD.waterCount;
-    private float waterTallCountConfig = ConfigTFCF.General.WORLD.waterTallCount;
-    private float waterSeaCountConfig = ConfigTFCF.General.WORLD.waterSeaCount;
-    private float waterTallSeaCountConfig = ConfigTFCF.General.WORLD.waterTallSeaCount;
-    private float waterSeaAlgaeCountConfig = ConfigTFCF.General.WORLD.waterSeaAlgaeCount;
-    private float hangingCountConfig = ConfigTFCF.General.WORLD.hangingCount;
-    private float beardedMossConfig = ConfigTFCF.General.WORLD.beardedMossCount;
-    private float grassCountConfig = ConfigTFCF.General.WORLD.grassCount;
-    private float tallGrassCountConfig = ConfigTFCF.General.WORLD.tallGrassCount;
-    private float tallCountConfig = ConfigTFCF.General.WORLD.tallPlantCount;
-    private float epiphyteCountConfig = ConfigTFCF.General.WORLD.epiphyteCount;
-    private float standardCountConfig = ConfigTFCF.General.WORLD.standardCount;
+    private final float waterCountConfig = ConfigTFCF.General.WORLD.waterCount;
+    private final float waterTallCountConfig = ConfigTFCF.General.WORLD.waterTallCount;
+    private final float waterSeaCountConfig = ConfigTFCF.General.WORLD.waterSeaCount;
+    private final float waterTallSeaCountConfig = ConfigTFCF.General.WORLD.waterTallSeaCount;
+    private final float waterSeaAlgaeCountConfig = ConfigTFCF.General.WORLD.waterSeaAlgaeCount;
+    private final float hangingCountConfig = ConfigTFCF.General.WORLD.hangingCount;
+    private final float beardedMossConfig = ConfigTFCF.General.WORLD.beardedMossCount;
+    private final float grassCountConfig = ConfigTFCF.General.WORLD.grassCount;
+    private final float tallGrassCountConfig = ConfigTFCF.General.WORLD.tallGrassCount;
+    private final float tallCountConfig = ConfigTFCF.General.WORLD.tallPlantCount;
+    private final float epiphyteCountConfig = ConfigTFCF.General.WORLD.epiphyteCount;
+    private final float standardCountConfig = ConfigTFCF.General.WORLD.standardCount;
 
     public GeneratorPlants() {
         plantGen = new WorldGenPlants();
@@ -424,7 +424,8 @@ public class GeneratorPlants implements IWorldGenerator {
                                     }
                                 }
                             }
-                            if (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.SAWGRASS) && (b == BiomesWorld.BAYOU || b == BiomesWorld.MANGROVE)) {
+                            if (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.SAWGRASS) &&
+                                    (b == BiomesWorld.BAYOU || b == BiomesWorld.MANGROVE)) {
                                 for (int k = rng.nextInt(Math.round(grassCount / floraDiversity));
                                         k < (3 + floraDensity) * tallGrassCountConfig; k++) {
                                     BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));

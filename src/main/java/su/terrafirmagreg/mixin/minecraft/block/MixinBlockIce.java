@@ -54,7 +54,8 @@ public class MixinBlockIce extends BlockBreakable implements ITemperatureBlock {
         setTickRandomly(true);
     }
 
-    public void harvestBlock(@NotNull World worldIn, EntityPlayer player, @NotNull BlockPos pos, @NotNull IBlockState state, @Nullable TileEntity te,
+    public void harvestBlock(@NotNull World worldIn, EntityPlayer player, @NotNull BlockPos pos, @NotNull IBlockState state,
+                             @Nullable TileEntity tile,
                              @NotNull ItemStack stack) {
         //noinspection ConstantConditions
         player.addStat(StatList.getBlockStats(this));

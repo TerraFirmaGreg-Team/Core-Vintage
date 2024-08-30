@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.render;
 
+import su.terrafirmagreg.data.Properties;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -13,11 +15,10 @@ import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
 
-import com.eerussianguy.firmalife.blocks.BlockLargePlanter;
-import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.google.common.collect.ImmutableMap;
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.objects.blocks.BlockLargePlanter;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +45,7 @@ public class LargePlanterBakedModel implements IBakedModel {
         if (state == null || !(state.getBlock() instanceof BlockLargePlanter))
             return bake(dummy).getQuads(state, side, rand);
         Map<String, String> sprites = new HashMap<>();
-        sprites.put("soil", MODID_FL + (state.getValue(StatePropertiesFL.WET) ? ":blocks/potting_soil_wet" : ":blocks/potting_soil_dry"));
+        sprites.put("soil", MODID_FL + (state.getValue(Properties.WET) ? ":blocks/potting_soil_wet" : ":blocks/potting_soil_dry"));
         if (state instanceof IExtendedBlockState) {
             sprites.put("crop1", resolveTexture((IExtendedBlockState) state, BlockLargePlanter.CROP));
         }

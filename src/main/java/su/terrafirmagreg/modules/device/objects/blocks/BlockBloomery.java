@@ -38,6 +38,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
+import static su.terrafirmagreg.data.Properties.*;
+
 @SuppressWarnings("deprecation")
 public class BlockBloomery extends BaseBlock implements IProviderTile {
 
@@ -266,11 +268,13 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
 
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        return super.canPlaceBlockAt(worldIn, pos) && (canGateStayInPlace(worldIn, pos, EnumFacing.Axis.Z) || canGateStayInPlace(worldIn, pos, EnumFacing.Axis.X));
+        return super.canPlaceBlockAt(worldIn, pos) &&
+                (canGateStayInPlace(worldIn, pos, EnumFacing.Axis.Z) || canGateStayInPlace(worldIn, pos, EnumFacing.Axis.X));
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX,
+                                    float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             if (!state.getValue(LIT)) {
                 worldIn.setBlockState(pos, state.cycleProperty(OPEN));
@@ -292,7 +296,8 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
     }
 
     @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer) {
         EnumFacing placeDirection;
         float wrappedRotation = MathHelper.wrapDegrees(placer.rotationYaw);
         if (canGateStayInPlace(worldIn, pos, EnumFacing.Axis.X)) {

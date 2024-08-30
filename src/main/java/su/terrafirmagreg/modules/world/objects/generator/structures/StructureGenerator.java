@@ -33,12 +33,12 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
+import net.dries007.tfc.objects.blocks.blocktype.BlockRockVariantTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.TFCFlorae;
-import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
-import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -49,7 +49,7 @@ import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 public class StructureGenerator extends WorldGenerator {
 
-    private String structureName;
+    private final String structureName;
 
     public StructureGenerator(String structureName) {
         this.structureName = structureName;
@@ -94,21 +94,19 @@ public class StructureGenerator extends WorldGenerator {
         final Biome b2 = world.getBiome(x2);
         final Biome b3 = world.getBiome(x3);
 
-        if ((world.getBlockState(x1).getBlock() == ChunkGenClassic.FRESH_WATER.getBlock() || world.getBlockState(x1)
-                .getBlock() == ChunkGenClassic.SALT_WATER.getBlock() || world.getBlockState(x1)
-                .getBlock() == ChunkGenClassic.HOT_WATER.getBlock() || b1 == BiomesWorld.OCEAN || b1 == BiomesWorld.DEEP_OCEAN || b1 == BiomesWorld.LAKE ||
-                b1 == BiomesWorld.RIVER || b1 == BiomesWorld.BEACH || b1 == BiomesWorld.GRAVEL_BEACH) ||
-                (world.getBlockState(x2).getBlock() == ChunkGenClassic.FRESH_WATER.getBlock() || world.getBlockState(x2)
-                        .getBlock() == ChunkGenClassic.SALT_WATER.getBlock() || world.getBlockState(x2)
-                        .getBlock() == ChunkGenClassic.HOT_WATER.getBlock() || b2 == BiomesWorld.OCEAN || b2 == BiomesWorld.DEEP_OCEAN ||
-                        b2 == BiomesWorld.LAKE || b2 == BiomesWorld.RIVER || b2 == BiomesWorld.BEACH || b2 == BiomesWorld.GRAVEL_BEACH) ||
-                (world.getBlockState(x3).getBlock() == ChunkGenClassic.FRESH_WATER.getBlock() || world.getBlockState(x3)
-                        .getBlock() == ChunkGenClassic.SALT_WATER.getBlock() || world.getBlockState(x3)
-                        .getBlock() == ChunkGenClassic.HOT_WATER.getBlock() || b3 == BiomesWorld.OCEAN || b3 == BiomesWorld.DEEP_OCEAN ||
-                        b3 == BiomesWorld.LAKE || b3 == BiomesWorld.RIVER || b3 == BiomesWorld.BEACH || b3 == BiomesWorld.GRAVEL_BEACH))
-            return false;
-
-        return true;
+        return (world.getBlockState(x1).getBlock() != ChunkGenClassic.FRESH_WATER.getBlock() && world.getBlockState(x1)
+                .getBlock() != ChunkGenClassic.SALT_WATER.getBlock() && world.getBlockState(x1)
+                .getBlock() != ChunkGenClassic.HOT_WATER.getBlock() && b1 != BiomesWorld.OCEAN && b1 != BiomesWorld.DEEP_OCEAN &&
+                b1 != BiomesWorld.LAKE &&
+                b1 != BiomesWorld.RIVER && b1 != BiomesWorld.BEACH && b1 != BiomesWorld.GRAVEL_BEACH) &&
+                (world.getBlockState(x2).getBlock() != ChunkGenClassic.FRESH_WATER.getBlock() && world.getBlockState(x2)
+                        .getBlock() != ChunkGenClassic.SALT_WATER.getBlock() && world.getBlockState(x2)
+                        .getBlock() != ChunkGenClassic.HOT_WATER.getBlock() && b2 != BiomesWorld.OCEAN && b2 != BiomesWorld.DEEP_OCEAN &&
+                        b2 != BiomesWorld.LAKE && b2 != BiomesWorld.RIVER && b2 != BiomesWorld.BEACH && b2 != BiomesWorld.GRAVEL_BEACH) &&
+                (world.getBlockState(x3).getBlock() != ChunkGenClassic.FRESH_WATER.getBlock() && world.getBlockState(x3)
+                        .getBlock() != ChunkGenClassic.SALT_WATER.getBlock() && world.getBlockState(x3)
+                        .getBlock() != ChunkGenClassic.HOT_WATER.getBlock() && b3 != BiomesWorld.OCEAN && b3 != BiomesWorld.DEEP_OCEAN &&
+                        b3 != BiomesWorld.LAKE && b3 != BiomesWorld.RIVER && b3 != BiomesWorld.BEACH && b3 != BiomesWorld.GRAVEL_BEACH);
     }
 
     public static int getGroundFromAbove(World world, int x, int z) {
@@ -216,11 +214,11 @@ public class StructureGenerator extends WorldGenerator {
 
                     world.setBlockState(entry.getKey(), state, 3);
 
-                    TileEntity te = world.getTileEntity(entry.getKey());
-                    if (te == null) continue;
+                    TileEntity tile = world.getTileEntity(entry.getKey());
+                    if (tile == null) continue;
 
-                    if (te instanceof TileEntityLockableLoot)
-                        ((TileEntityLockableLoot) te).setLootTable(new ResourceLocation(data[1]), rand.nextLong());
+                    if (tile instanceof TileEntityLockableLoot tileEntityLockableLoot)
+                        tileEntityLockableLoot.setLootTable(new ResourceLocation(data[1]), rand.nextLong());
                 } catch (Exception e) {
                     e.printStackTrace();
                     continue;

@@ -1,7 +1,8 @@
 package net.dries007.tfc.objects.te;
 
-import su.terrafirmagreg.data.lib.MathConstants;
+import su.terrafirmagreg.api.base.tile.BaseTile;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.data.lib.MathConstants;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,7 +16,7 @@ import net.dries007.tfc.ConfigTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TEPlacedItemFlat extends TEBase {
+public class TEPlacedItemFlat extends BaseTile {
 
     private byte rotation;
     private ItemStack inventory;

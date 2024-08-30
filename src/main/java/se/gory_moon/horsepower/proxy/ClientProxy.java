@@ -60,22 +60,22 @@ public class ClientProxy extends CommonProxy {
         {
             if (worldIn != null && pos != null) {
                 TileEntity tileEntity = worldIn.getTileEntity(pos);
-                if (tileEntity instanceof TileEntityGrindstone te) {
-                    ItemStack outputStack = te.getStackInSlot(1);
-                    ItemStack secondaryStack = te.getStackInSlot(2);
+                if (tileEntity instanceof TileEntityGrindstone tile) {
+                    ItemStack outputStack = tile.getStackInSlot(1);
+                    ItemStack secondaryStack = tile.getStackInSlot(2);
                     if (outputStack.getCount() < secondaryStack.getCount())
                         outputStack = secondaryStack;
-                    if (!OreDictionary.itemMatches(te.renderStack, outputStack, true)) {
-                        te.renderStack = outputStack;
+                    if (!OreDictionary.itemMatches(tile.renderStack, outputStack, true)) {
+                        tile.renderStack = outputStack;
                         if (!outputStack.isEmpty())
-                            te.grindColor = ColorGetter.getColors(outputStack, 2).get(0);
+                            tile.grindColor = ColorGetter.getColors(outputStack, 2).get(0);
                         else
-                            te.grindColor = null;
-                        te.renderStack = outputStack;
+                            tile.grindColor = null;
+                        tile.renderStack = outputStack;
                     }
 
-                    if (te.grindColor != null)
-                        return te.grindColor.getRGB();
+                    if (tile.grindColor != null)
+                        return tile.grindColor.getRGB();
                 }
             }
             return -1;

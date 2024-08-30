@@ -6,7 +6,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 
-import pieman.caffeineaddon.blocks.TEDryingMat;
+import net.dries007.tfc.objects.te.TEDryingMat;
 import pieman.caffeineaddon.client.TESRDryingMat;
 
 import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;

@@ -14,8 +14,8 @@ import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 @MethodsReturnNonnullByDefault
 public class ContainerNestBox extends BaseContainerTile<TileNestBox> {
 
-    public ContainerNestBox(InventoryPlayer playerInv, TileNestBox te) {
-        super(playerInv, te);
+    public ContainerNestBox(InventoryPlayer playerInv, TileNestBox tile) {
+        super(playerInv, tile);
     }
 
     @Override

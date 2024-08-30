@@ -3,7 +3,7 @@ package pieman.caffeineaddon.init;
 import net.minecraft.block.Block;
 
 
-import pieman.caffeineaddon.blocks.BlockDryingMat;
+import net.dries007.tfc.objects.blocks.BlockDryingMat;
 
 import java.util.ArrayList;
 import java.util.List;

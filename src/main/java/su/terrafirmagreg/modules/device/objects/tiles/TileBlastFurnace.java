@@ -1,12 +1,13 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
@@ -23,7 +24,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EntitySelectors;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -35,8 +35,11 @@ import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
-import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TETickableInventory;
+
+
+import su.terrafirmagreg.api.base.tile.spi.ITileFields;
+
+
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.fuel.Fuel;
 import net.dries007.tfc.util.fuel.FuelManager;
@@ -46,8 +49,8 @@ import java.util.List;
 
 import static su.terrafirmagreg.data.Properties.LIT;
 
-public class TileBlastFurnace extends TETickableInventory
-        implements ITickable, ITileFields, IProviderContainer<ContainerBlastFurnace, GuiBlastFurnace> {
+public class TileBlastFurnace extends BaseTileTickableInventory
+        implements ITileFields, IProviderContainer<ContainerBlastFurnace, GuiBlastFurnace> {
 
     public static final int SLOT_TUYERE = 0;
     public static final int FIELD_TEMPERATURE = 0;
@@ -375,7 +378,8 @@ public class TileBlastFurnace extends TETickableInventory
 
     private void addItemsFromWorld() {
         EntityItem fluxEntity = null, oreEntity = null;
-        List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.up(), pos.up().add(1, 5, 1)), EntitySelectors.IS_ALIVE);
+        List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.up(), pos.up().add(1, 5, 1)),
+                EntitySelectors.IS_ALIVE);
         for (EntityItem entityItem : items) {
             ItemStack stack = entityItem.getItem();
             BlastFurnaceRecipe recipe = BlastFurnaceRecipe.get(stack);

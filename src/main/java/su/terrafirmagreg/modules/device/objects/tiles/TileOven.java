@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
@@ -25,7 +26,6 @@ import net.minecraft.world.World;
 
 import com.eerussianguy.firmalife.recipe.OvenRecipe;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.fuel.FuelManager;
@@ -35,7 +35,7 @@ import java.util.Optional;
 import static su.terrafirmagreg.data.Properties.CURED;
 import static su.terrafirmagreg.data.Properties.LIT;
 
-public class TileOven extends TEInventory implements ITickable, IAmbientalTileProvider {
+public class TileOven extends BaseTileInventory implements ITickable, IAmbientalTileProvider {
 
     public static final int SLOT_FUEL_1 = 0;
     public static final int SLOT_FUEL_2 = 1;

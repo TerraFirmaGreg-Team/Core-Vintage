@@ -15,7 +15,7 @@ import net.minecraftforge.items.IItemHandler;
 
 
 import com.eerussianguy.firmalife.registry.ItemsFL;
-import com.eerussianguy.firmalife.te.TETurntable;
+import net.dries007.tfc.objects.te.TETurntable;
 
 @SideOnly(Side.CLIENT)
 public class TESRTurntable extends TileEntitySpecialRenderer<TETurntable> {
@@ -29,12 +29,12 @@ public class TESRTurntable extends TileEntitySpecialRenderer<TETurntable> {
     };
 
     @Override
-    public void render(TETurntable te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+    public void render(TETurntable tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
-        if (te.hasWorld()) {
-            IBlockState state = te.getWorld().getBlockState(te.getPos());
-            IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (tile.hasWorld()) {
+            IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+            IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             RenderItem itemRenderer = Minecraft.getMinecraft().getRenderItem();
             if (cap != null) {
                 ItemStack stack = cap.getStackInSlot(0);
@@ -55,9 +55,9 @@ public class TESRTurntable extends TileEntitySpecialRenderer<TETurntable> {
             }
             GlStateManager.pushMatrix();
             GlStateManager.translate(x + 0.5D, y + 0.5D, z + 0.5D);
-            GlStateManager.rotate((10F * te.getInternalProgress() - partialTicks), 0.0F, 1.0F, 0.0F);
+            GlStateManager.rotate((10F * tile.getInternalProgress() - partialTicks), 0.0F, 1.0F, 0.0F);
             RenderHelper.enableStandardItemLighting();
-            itemRenderer.renderItem(ITEMS[te.getBlockMetadata()], ItemCameraTransforms.TransformType.FIXED);
+            itemRenderer.renderItem(ITEMS[tile.getBlockMetadata()], ItemCameraTransforms.TransformType.FIXED);
             RenderHelper.disableStandardItemLighting();
             GlStateManager.popMatrix();
         }

@@ -27,11 +27,11 @@ import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
-import tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -149,7 +149,7 @@ public class BlockCropDead extends BlockBush { //implements IGrowingPlant
                     Material material = stateDown.getMaterial();
                     return soil.getBlock()
                             .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) ||
-                            material == Material.WATER && (Integer) stateDown.getValue(BlockLiquid.LEVEL) == 0 &&
+                            material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 &&
                                     stateDown == ChunkGenClassic.FRESH_WATER || material == Material.ICE ||
                             material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
                 }

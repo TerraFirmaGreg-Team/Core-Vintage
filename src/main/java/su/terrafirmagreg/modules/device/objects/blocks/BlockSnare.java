@@ -47,6 +47,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.*;
+
 @SuppressWarnings("deprecation")
 public class BlockSnare extends BaseBlock implements IProviderTile {
 
@@ -91,14 +93,16 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
     }
 
     @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer) {
         return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
     }
 
     @Override
     public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
-        return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (float) 0 * 0.125F, axisalignedbb.maxZ);
+        return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (float) 0 * 0.125F,
+                axisalignedbb.maxZ);
     }
 
     @Override
@@ -116,21 +120,21 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
     }
 
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
-        if (!tile.isOpen()) {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack stack) {
+        if (tile instanceof TileSnare tileSnare && !tileSnare.isOpen()) {
             if (Math.random() < ConfigTFCThings.Items.SNARE.breakChance) {
                 worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
             } else {
-                super.harvestBlock(worldIn, player, pos, state, te, stack);
+                super.harvestBlock(worldIn, player, pos, state, tile, stack);
             }
         } else {
-            super.harvestBlock(worldIn, player, pos, state, te, stack);
+            super.harvestBlock(worldIn, player, pos, state, tile, stack);
         }
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                    float hitX, float hitY, float hitZ) {
         if (!state.getValue(BAITED)) {
             ItemStack stack = playerIn.getHeldItem(hand);
             if ((stack.getItem() instanceof ItemSeedsTFC || isFood(stack)) && !worldIn.isRemote) {
@@ -172,7 +176,8 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        AxisAlignedBB captureBox = new AxisAlignedBB(pos.getX() - 10.0D, pos.getY() - 5.0D, pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D, pos.getZ() + 10.0D);
+        AxisAlignedBB captureBox = new AxisAlignedBB(pos.getX() - 10.0D, pos.getY() - 5.0D, pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D,
+                pos.getZ() + 10.0D);
         var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
         if (tile.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox).isEmpty() && !worldIn.isRemote) {
             for (EntityAnimalBase animal : worldIn.getEntitiesWithinAABB(EntityAnimalBase.class, captureBox)) {

@@ -81,7 +81,7 @@ public class WorldRegenHandler {
         if (event.getWorld().provider.getDimension() == 0 && chunkData.isInitialized() && POSITIONS.size() < 1000) {
             //Only run this in the early months of each year
             if (Calendar.CALENDAR_TIME.getMonthOfYear()
-                                      .isWithin(Month.APRIL, Month.JULY) && !chunkData.isSpawnProtected() &&
+                    .isWithin(Month.APRIL, Month.JULY) && !chunkData.isSpawnProtected() &&
                     Calendar.CALENDAR_TIME.getTotalYears() > chunkData.getLastUpdateYear()) {
                 POSITIONS.add(event.getChunk().getPos());
             }
@@ -102,7 +102,7 @@ public class WorldRegenHandler {
                     IChunkGenerator chunkGenerator = ((ChunkProviderServer) chunkProvider).chunkGenerator;
 
                     if (Calendar.CALENDAR_TIME.getMonthOfYear()
-                                              .isWithin(Month.APRIL, Month.JULY) && !chunkData.isSpawnProtected() &&
+                            .isWithin(Month.APRIL, Month.JULY) && !chunkData.isSpawnProtected() &&
                             Calendar.CALENDAR_TIME.getTotalYears() > chunkData.getLastUpdateYear()) {
                         if (ConfigTFC.General.WORLD_REGEN.sticksRocksModifier > 0) {
                             //Nuke any rocks and sticks in chunk.
@@ -183,9 +183,9 @@ public class WorldRegenHandler {
         //Remove all the crops
         Map<BlockPos, TileEntity> teTargets = world.getChunk(pos.x, pos.z).getTileEntityMap();
         List<BlockPos> removals = new ArrayList<>();
-        teTargets.forEach((tePos, te) -> {
+        teTargets.forEach((tePos, tile) -> {
             IBlockState state = world.getBlockState(tePos);
-            if (te instanceof TECropBase && state.getProperties().containsKey(WILD) && state.getValue(WILD)) {
+            if (tile instanceof TECropBase && state.getProperties().containsKey(WILD) && state.getValue(WILD)) {
                 removals.add(tePos);
             }
         });
@@ -211,8 +211,8 @@ public class WorldRegenHandler {
 
     private static void removeAllPlacedItems(World world, ChunkPos pos) {
         List<BlockPos> removals = new ArrayList<>();
-        world.getChunk(pos.x, pos.z).getTileEntityMap().forEach((tePos, te) -> {
-            if (te instanceof TEPlacedItemFlat) {
+        world.getChunk(pos.x, pos.z).getTileEntityMap().forEach((tePos, tile) -> {
+            if (tile instanceof TEPlacedItemFlat) {
                 removals.add(tePos);
             }
         });

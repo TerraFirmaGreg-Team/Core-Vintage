@@ -28,17 +28,17 @@ import static su.terrafirmagreg.modules.device.objects.tiles.TileLatexExtractor.
 public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtractor> {
 
     @Override
-    public void render(TileLatexExtractor te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        if (te.hasWorld()) {
-            IBlockState state = te.getBlockState();
+    public void render(TileLatexExtractor tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        if (tile.hasWorld()) {
+            IBlockState state = tile.getBlockState();
             Fluid flowing = FluidsTFC.LATEX.get();
 
             //Update state values according to TE
 
             //noinspection ConstantConditions
-            state = state.withProperty(BASE, te.hasBase())
-                    .withProperty(POT, te.hasPot())
-                    .withProperty(CUT, te.cutState());
+            state = state.withProperty(BASE, tile.hasBase())
+                    .withProperty(POT, tile.hasPot())
+                    .withProperty(CUT, tile.cutState());
 
             Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
             BlockRendererDispatcher renderer = Minecraft.getMinecraft().getBlockRendererDispatcher();
@@ -76,7 +76,7 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
 
             double yMin = 0.1876D;
             double yMax = 0.36D;
-            double yPos = (te.getFluidAmount() / (double) MAX_FLUID) * (yMax - yMin) + yMin;
+            double yPos = (tile.getFluidAmount() / (double) MAX_FLUID) * (yMax - yMin) + yMin;
 
             switch (state.getValue(FACING)) {
                 case NORTH:
@@ -95,7 +95,7 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
                     break;
             }
             //From bark
-            if (te.cutState() > 1) {
+            if (tile.cutState() > 1) {
                 for (double zPos = 1.075D; zPos <= 1.375D; zPos += 0.075D) {
                     buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
@@ -235,7 +235,7 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
             }
 
             //Draws pot contents
-            if (te.hasFluid()) {
+            if (tile.hasFluid()) {
                 sprite = FluidSpriteCache.getStillSprite(flowing);
 
                 buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_TEX_NORMAL);

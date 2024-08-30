@@ -1,10 +1,12 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.api.base.block.BaseBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.device.objects.tiles.TileBearTrap;
 
 import net.minecraft.block.Block;
@@ -33,17 +35,12 @@ import net.minecraft.world.World;
 
 import gregtech.api.items.toolitem.ToolClasses;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 
 import org.jetbrains.annotations.Nullable;
+
+import static su.terrafirmagreg.data.Properties.*;
 
 @SuppressWarnings("deprecation")
 public class BlockBearTrap extends BaseBlock implements IProviderTile {
@@ -95,14 +92,16 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
     }
 
     @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer) {
         return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
     }
 
     @Override
     public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
-        return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (float) 0 * 0.125F, axisalignedbb.maxZ);
+        return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (float) 0 * 0.125F,
+                axisalignedbb.maxZ);
     }
 
     @Override
@@ -120,21 +119,21 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
     }
 
     @Override
-    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        var tile = TileUtils.getTile(world, pos, TileBearTrap.class);
-        if (!tile.isOpen()) {
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack stack) {
+        if (tile instanceof TileBearTrap tileBearTrap && !tileBearTrap.isOpen()) {
             if (Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
                 world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
             } else {
-                super.harvestBlock(world, player, pos, state, te, stack);
+                super.harvestBlock(world, player, pos, state, tile, stack);
             }
         } else {
-            super.harvestBlock(world, player, pos, state, te, stack);
+            super.harvestBlock(world, player, pos, state, tile, stack);
         }
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                    float hitX, float hitY, float hitZ) {
         if (playerIn.getHeldItem(hand).getItem() instanceof ItemSpade ||
                 (playerIn.getHeldItem(hand).getItem() instanceof ItemMetalTool &&
                         ((ItemMetalTool) playerIn.getHeldItem(hand).getItem()).getType().equals(Metal.ItemType.SHOVEL))) {

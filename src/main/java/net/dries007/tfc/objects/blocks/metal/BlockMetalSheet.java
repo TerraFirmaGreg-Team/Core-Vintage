@@ -216,8 +216,8 @@ public class BlockMetalSheet extends Block {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEMetalSheet te = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-        if (te != null) te.onBreakBlock(this.metal);
+        var tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
+        if (tile != null) tile.onBreakBlock(this.metal);
         super.breakBlock(worldIn, pos, state);
     }
 
@@ -225,7 +225,7 @@ public class BlockMetalSheet extends Block {
     @Override
     @SuppressWarnings("deprecation")
     public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
-        TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
+        var tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
         if (tile != null) {
             for (EnumFacing face : EnumFacing.values()) {
                 if (tile.getFace(face)) {

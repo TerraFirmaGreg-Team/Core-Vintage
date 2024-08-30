@@ -1,25 +1,19 @@
 package net.dries007.tfc.api.recipes.knapping;
 
+import lombok.Getter;
+
 public class KnappingType {
 
-    public static final KnappingType STONE = new KnappingType(1, false);
-    public static final KnappingType CLAY = new KnappingType(5, true);
-    public static final KnappingType FIRE_CLAY = new KnappingType(5, true);
-    public static final KnappingType LEATHER = new KnappingType(1, false);
-
+    /**
+     * How many of the required item this will consume The knapping source (whatever opens the GUI) should check this before starting the recipe
+     */
+    @Getter
     private final int amountToConsume;
     private final boolean consumeAfterComplete;
 
     public KnappingType(int amountToConsume, boolean consumeAfterComplete) {
         this.amountToConsume = amountToConsume;
         this.consumeAfterComplete = consumeAfterComplete;
-    }
-
-    /**
-     * How many of the required item this will consume The knapping source (whatever opens the GUI) should check this before starting the recipe
-     */
-    public int getAmountToConsume() {
-        return amountToConsume;
     }
 
     /**

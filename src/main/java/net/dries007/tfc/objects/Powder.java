@@ -13,5 +13,7 @@ public enum Powder {
     MALACHITE,
     SALT,
     FERTILIZER,
-    CHARCOAL
+    CHARCOAL,
+    PEARL,
+    BLACK_PEARL
 }

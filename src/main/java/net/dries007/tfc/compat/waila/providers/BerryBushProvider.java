@@ -38,9 +38,9 @@ public class BerryBushProvider implements IWailaBlock {
                     .isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(BlockBerryBush.FRUITING)) {
                 float temp = Climate.getActualTemp(world, pos);
                 float rainfall = ChunkData.getRainfall(world, pos);
-                TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-                if (te != null && block.getBush().isValidForGrowth(temp, rainfall)) {
-                    long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+                var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+                if (tile != null && block.getBush().isValidForGrowth(temp, rainfall)) {
+                    long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                     // Don't show 100% since it still needs to check on randomTick to grow
                     float perc = Math.min(0.99F, hours / (block.getBush()
                             .getGrowthTime() * (float) ConfigTFC.General.FOOD.berryBushGrowthTimeModifier)) * 100;

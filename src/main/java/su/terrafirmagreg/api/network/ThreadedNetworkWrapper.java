@@ -150,10 +150,10 @@ public class ThreadedNetworkWrapper {
      * Sends the specified message to all players around the given TileEntity.
      *
      * @param message The message to send.
-     * @param te      The TileEntity from which to calculate the position and world.
+     * @param tile    The TileEntity from which to calculate the position and world.
      */
-    public void sendToAllAround(IMessage message, TileEntity te) {
-        sendToAllAround(message, te.getPos(), te.getWorld());
+    public void sendToAllAround(IMessage message, TileEntity tile) {
+        sendToAllAround(message, tile.getPos(), tile.getWorld());
     }
 
     /**

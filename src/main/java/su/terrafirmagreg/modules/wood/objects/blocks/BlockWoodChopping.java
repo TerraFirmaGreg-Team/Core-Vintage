@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -90,11 +92,11 @@ public class BlockWoodChopping extends BlockWoodChoppingBase {
 
     @Override
     public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World world, BlockPos pos) {
-        TileEntityManualChopper te = getTileEntity(world, pos);
-        if (te != null) {
+        var tile = TileUtils.getTile(world, pos, TileEntityManualChopper.class);
+        if (tile != null) {
             ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
             if (isValidChoppingTool(heldItem, player)) {
-                if (te.canWork()) {
+                if (tile.canWork()) {
                     return -1;
                 }
             }
@@ -104,15 +106,15 @@ public class BlockWoodChopping extends BlockWoodChoppingBase {
     }
 
     @Override
-    public void onBlockClicked(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
+    public void onBlockClicked(@NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
         if (player instanceof FakePlayer || player == null)
             return;
 
-        TileEntityManualChopper te = getTileEntity(worldIn, pos);
-        if (te != null) {
+        var tile = TileUtils.getTile(world, pos, TileEntityManualChopper.class);
+        if (tile != null) {
             ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
             if (isValidChoppingTool(held, player)) {
-                if (te.chop(player, held)) {
+                if (tile.chop(player, held)) {
                     player.addExhaustion((float) Configs.general.choppingblockExhaustion);
                     if (Configs.general.shouldDamageAxe)
                         held.damageItem(1, player);

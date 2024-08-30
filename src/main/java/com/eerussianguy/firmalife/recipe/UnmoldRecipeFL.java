@@ -21,7 +21,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 
-import com.eerussianguy.firmalife.items.ItemMetalMalletMold;
+import net.dries007.tfc.objects.items.ItemMetalMalletMold;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import com.google.gson.JsonObject;
 import net.dries007.tfc.api.capability.IMoldHandler;

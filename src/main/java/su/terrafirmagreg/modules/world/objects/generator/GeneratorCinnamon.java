@@ -19,9 +19,9 @@ import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
+import net.dries007.tfc.types.TreesTFCF;
 import tfcflorae.ConfigTFCF;
-import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.types.TreesTFCF;
 
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -34,7 +34,7 @@ public class GeneratorCinnamon extends WorldGenerator {
     private static final String[] variants = IntStream.range(1, numVariants)
             .mapToObj(String::valueOf)
             .toArray(String[]::new);
-    private static boolean useRotation = false;
+    private static final boolean useRotation = false;
 
     @Override
     public boolean generate(World world, Random rand, BlockPos pos) {

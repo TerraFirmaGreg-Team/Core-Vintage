@@ -68,15 +68,15 @@ public class TESRRockGemDisplay extends TileEntitySpecialRenderer<TileRockGemDis
 
     public TESRRockGemDisplay() {}
 
-    public void render(TileRockGemDisplay te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        int dir = te.getBlockMetadata();
+    public void render(TileRockGemDisplay tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        int dir = tile.getBlockMetadata();
         float blockScale = 0.5F;
-        ArrayList<Vec3d> location = getLocation(te);
-        ModelGemBase model = getModel(te);
-        for (int i = 0; i < te.getSize(); ++i) {
-            ItemStack stack = te.getItems().get(i);
+        ArrayList<Vec3d> location = getLocation(tile);
+        ModelGemBase model = getModel(tile);
+        for (int i = 0; i < tile.getSize(); ++i) {
+            ItemStack stack = tile.getItems().get(i);
             ResourceLocation texture = getGemTexture(stack);
-            if (!te.getItems().get(i).isEmpty()) {
+            if (!tile.getItems().get(i).isEmpty()) {
                 GlStateManager.pushMatrix();
                 GlStateManager.disableCull();
                 Vec3d pos = location.get(i);
@@ -98,8 +98,8 @@ public class TESRRockGemDisplay extends TileEntitySpecialRenderer<TileRockGemDis
 
     }
 
-    private ArrayList<Vec3d> getLocation(TileRockGemDisplay te) {
-        switch (Gem.Grade.valueOf(te.getGrade())) {
+    private ArrayList<Vec3d> getLocation(TileRockGemDisplay tile) {
+        switch (Gem.Grade.valueOf(tile.getGrade())) {
             case EXQUISITE:
                 return EXQUISITE_LOCATION;
             case FLAWLESS:
@@ -113,8 +113,8 @@ public class TESRRockGemDisplay extends TileEntitySpecialRenderer<TileRockGemDis
         }
     }
 
-    private ModelGemBase getModel(TileRockGemDisplay te) {
-        switch (Gem.Grade.valueOf(te.getGrade())) {
+    private ModelGemBase getModel(TileRockGemDisplay tile) {
+        switch (Gem.Grade.valueOf(tile.getGrade())) {
             case EXQUISITE:
                 return EXQUISITE_MODEL;
             case FLAWLESS:

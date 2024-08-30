@@ -4,10 +4,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
 
-import pieman.caffeineaddon.items.ItemCoffee;
-import pieman.caffeineaddon.items.ItemCoffeeHeatable;
-import pieman.caffeineaddon.items.ItemMug;
-import pieman.caffeineaddon.items.ItemPotteryCA;
+import net.dries007.tfc.objects.items.ItemCoffee;
+import net.dries007.tfc.objects.items.ItemCoffeeHeatable;
+import net.dries007.tfc.objects.items.ItemMug;
+import net.dries007.tfc.objects.items.ItemPotteryCA;
 
 import java.util.ArrayList;
 import java.util.List;

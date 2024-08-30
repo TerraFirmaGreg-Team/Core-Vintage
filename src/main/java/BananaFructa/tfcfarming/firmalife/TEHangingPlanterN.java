@@ -7,7 +7,7 @@ import BananaFructa.tfcfarming.Config;
 import BananaFructa.tfcfarming.CropNutrients;
 import BananaFructa.tfcfarming.NutrientClass;
 import BananaFructa.tfcfarming.NutrientValues;
-import com.eerussianguy.firmalife.te.TEHangingPlanter;
+import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.util.climate.Climate;
 

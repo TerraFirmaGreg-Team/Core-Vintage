@@ -7,7 +7,7 @@ import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.objects.container.ContainerTE;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-import pieman.caffeineaddon.blocks.TEDryingMat;
+import net.dries007.tfc.objects.te.TEDryingMat;
 
 public class ContainerDryingMat extends ContainerTE<TEDryingMat> {
 

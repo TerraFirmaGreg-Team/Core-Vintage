@@ -23,10 +23,10 @@ public class TESRBellows extends BaseTESR<TileBellows> {
     private static final ResourceLocation TEXTURE = ModUtils.resource("textures/blocks/device/bellows/tesr.png");
 
     @Override
-    public void render(TileBellows te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileBellows tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.pushMatrix();
         GlStateManager.translate(x + 0.5D, y + 0.03125D, z + 0.5D);
-        GlStateManager.rotate((te.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate((tile.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
         GlStateManager.popMatrix();
 
         try {
@@ -36,14 +36,14 @@ public class TESRBellows extends BaseTESR<TileBellows> {
             GlStateManager.disableLighting();
 
             GlStateManager.translate(x + 0.5d, y, z + 0.5d);
-            GL11.glRotatef(180.0F - 90.0F * te.getBlockMetadata(), 0.0F, 1.0F, 0.0F);
+            GL11.glRotatef(180.0F - 90.0F * tile.getBlockMetadata(), 0.0F, 1.0F, 0.0F);
             GlStateManager.translate(-0.5d, 0.0d, -0.5d);
 
             Tessellator t = Tessellator.getInstance();
             BufferBuilder b = t.getBuffer();
 
             // TODO: make this render less of a clusterfuck
-            double tileY = 1 - te.getHeight();
+            double tileY = 1 - tile.getHeight();
 
             b.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
             drawMiddle(b, tileY);
@@ -55,7 +55,7 @@ public class TESRBellows extends BaseTESR<TileBellows> {
     }
 
     @Override
-    public boolean isGlobalRenderer(@NotNull TileBellows te) {
+    public boolean isGlobalRenderer(@NotNull TileBellows tile) {
         return false;
     }
 

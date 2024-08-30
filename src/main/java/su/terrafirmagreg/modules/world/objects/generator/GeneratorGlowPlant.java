@@ -14,10 +14,10 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
+import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
+import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
 import net.dries007.tfc.util.climate.Climate;
-import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.blocks.groundcover.BlockCoral;
-import tfcflorae.objects.blocks.groundcover.BlockCoralBlock;
 
 import java.util.Random;
 

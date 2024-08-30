@@ -11,16 +11,16 @@ import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.BlockEpiphyteTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockHangingPlantTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockTallGrassTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockTallGrassWater;
 import net.dries007.tfc.objects.blocks.plants.BlockTallPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockTallWaterPlantTFCF;
+import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
+import net.dries007.tfc.types.PlantsTFCF;
 import net.dries007.tfc.util.climate.Climate;
-import tfcflorae.objects.blocks.plants.BlockHangingPlantTFCF;
-import tfcflorae.objects.blocks.plants.BlockTallGrassWater;
-import tfcflorae.objects.blocks.plants.BlockTallWaterPlantTFCF;
-import tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
-import tfcflorae.types.PlantsTFCF;
 
 import java.util.Random;
 

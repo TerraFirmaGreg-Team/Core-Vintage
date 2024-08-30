@@ -1,9 +1,10 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TilePitKiln;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +25,7 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TEPlacedItem extends TEInventory {
+public class TEPlacedItem extends BaseTileInventory {
 
     public static final int SLOT_LARGE_ITEM = 0;
     public boolean isHoldingLargeItem;

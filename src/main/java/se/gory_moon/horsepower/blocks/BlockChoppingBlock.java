@@ -98,11 +98,11 @@ public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInf
 
     @Override
     public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World world, BlockPos pos) {
-        TileEntityManualChopper te = getTileEntity(world, pos);
-        if (te != null) {
+        var tile = getTileEntity(world, pos);
+        if (tile != null) {
             ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
             if (isValidChoppingTool(heldItem, player)) {
-                if (te.canWork()) {
+                if (tile.canWork()) {
                     return -1;
                 }
             }
@@ -116,11 +116,11 @@ public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInf
         if (player instanceof FakePlayer || player == null)
             return;
 
-        TileEntityManualChopper te = getTileEntity(worldIn, pos);
-        if (te != null) {
+        TileEntityManualChopper tile = getTileEntity(worldIn, pos);
+        if (tile != null) {
             ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
             if (isValidChoppingTool(held, player)) {
-                if (te.chop(player, held)) {
+                if (tile.chop(player, held)) {
                     player.addExhaustion((float) Configs.general.choppingblockExhaustion);
                     if (Configs.general.shouldDamageAxe)
                         held.damageItem(1, player);

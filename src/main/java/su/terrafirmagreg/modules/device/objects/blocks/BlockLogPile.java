@@ -140,7 +140,8 @@ public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
+                                    float hitY, float hitZ) {
         var tile = TileUtils.getTile(world, pos, TileLogPile.class);
         if (tile != null) {
             // Special Interactions
@@ -195,7 +196,8 @@ public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
     }
 
     @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer) {
         if (placer.getHorizontalFacing().getAxis().isHorizontal()) {
             return getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
         }
@@ -203,10 +205,10 @@ public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
     }
 
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack stack) {
         // This can't use breakBlock as it needs to not drop when broken in order to create a charcoal pile
-        if (!worldIn.isRemote && te instanceof BaseTileInventory tile) {
-            tile.onBreakBlock(worldIn, pos, state);
+        if (!worldIn.isRemote && tile instanceof BaseTileInventory tileInventory) {
+            tileInventory.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }

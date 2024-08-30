@@ -4,8 +4,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 
-import com.eerussianguy.firmalife.init.RegistriesFL;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +40,7 @@ public class PlanterRecipe extends IForgeRegistryEntry.Impl<PlanterRecipe> {
 
     @Nullable
     public static PlanterRecipe get(ItemStack item) {
-        return RegistriesFL.PLANTER_QUAD.getValuesCollection()
+        return TFCRegistries.PLANTER_QUAD.getValuesCollection()
                 .stream()
                 .filter(x -> x.isValidInput(item))
                 .findFirst()

@@ -70,19 +70,19 @@ public abstract class BlockHPChoppingBase extends BlockHPBase {
         return stack;
     }
 
-    public static IExtendedBlockState getExtendedState(TileEntityHPBase te, IExtendedBlockState state) {
-        String side_texture = te.getTileData().getString("side_texture");
-        String top_texture = te.getTileData().getString("top_texture");
+    public static IExtendedBlockState getExtendedState(TileEntityHPBase tile, IExtendedBlockState state) {
+        String side_texture = tile.getTileData().getString("side_texture");
+        String top_texture = tile.getTileData().getString("top_texture");
 
         if (side_texture.isEmpty() || top_texture.isEmpty()) {
-            ItemStack stack = new ItemStack(te.getTileData().getCompoundTag("textureBlock"));
-            if (!stack.isEmpty() && te.getWorld().isRemote) {
+            ItemStack stack = new ItemStack(tile.getTileData().getCompoundTag("textureBlock"));
+            if (!stack.isEmpty() && tile.getWorld().isRemote) {
                 Block block = Block.getBlockFromItem(stack.getItem());
                 IBlockState state1 = block.getStateFromMeta(stack.getMetadata());
                 side_texture = RenderUtils.getTextureFromBlockstate(state1).getIconName();
                 top_texture = RenderUtils.getTopTextureFromBlockstate(state1).getIconName();
-                te.getTileData().setString("side_texture", side_texture);
-                te.getTileData().setString("top_texture", top_texture);
+                tile.getTileData().setString("side_texture", side_texture);
+                tile.getTileData().setString("top_texture", top_texture);
             }
         }
 
@@ -183,12 +183,12 @@ public abstract class BlockHPChoppingBase extends BlockHPBase {
     private void writeDataOntoItemstack(@NotNull ItemStack item, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull IBlockState state,
                                         boolean inventorySave) {
         // get block data from the block
-        TileEntity te = world.getTileEntity(pos);
-        if (te != null && (te instanceof TileEntityChopper || te instanceof TileEntityManualChopper)) {
+        var tile = world.getTileEntity(pos);
+        if (tile != null && (tile instanceof TileEntityChopper || tile instanceof TileEntityManualChopper)) {
             NBTTagCompound tag = item.hasTagCompound() ? item.getTagCompound() : new NBTTagCompound();
 
             // texture
-            NBTTagCompound data = te.getTileData().getCompoundTag("textureBlock");
+            NBTTagCompound data = tile.getTileData().getCompoundTag("textureBlock");
 
             if (!data.isEmpty()) {
                 tag.setTag("textureBlock", data);

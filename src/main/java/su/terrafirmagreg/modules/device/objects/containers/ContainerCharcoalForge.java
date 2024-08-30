@@ -15,8 +15,8 @@ import static su.terrafirmagreg.modules.device.objects.tiles.TileCharcoalForge.*
 
 public class ContainerCharcoalForge extends ContainerTE<TileCharcoalForge> {
 
-    public ContainerCharcoalForge(InventoryPlayer playerInv, TileCharcoalForge te) {
-        super(playerInv, te);
+    public ContainerCharcoalForge(InventoryPlayer playerInv, TileCharcoalForge tile) {
+        super(playerInv, tile);
     }
 
     @Override

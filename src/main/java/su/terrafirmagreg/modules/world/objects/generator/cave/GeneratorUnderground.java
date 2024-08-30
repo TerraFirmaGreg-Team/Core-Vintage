@@ -16,9 +16,9 @@ import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.types.DefaultPlants;
+import net.dries007.tfc.types.PlantsTFCF;
 import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.ConfigTFCF;
-import tfcflorae.types.PlantsTFCF;
 
 import java.util.Random;
 
@@ -32,10 +32,10 @@ public class GeneratorUnderground implements IWorldGenerator {
     private final GeneratorCaveCreepingVines undergroundCreepingVines;
     //private final WorldGenUnderground undergroundPlant = new WorldGenUnderground();
 
-    private float fungiUndergroundCount = ConfigTFCF.General.WORLD.fungiUndergroundCount;
-    private float hangingVinesUndergroundCount = ConfigTFCF.General.WORLD.hangingVinesUndergroundCount;
-    private float creepingVinesUndergroundCount = ConfigTFCF.General.WORLD.creepingVinesUndergroundCount;
-    private float creepingUndergroundCount = ConfigTFCF.General.WORLD.creepingUndergroundCount;
+    private final float fungiUndergroundCount = ConfigTFCF.General.WORLD.fungiUndergroundCount;
+    private final float hangingVinesUndergroundCount = ConfigTFCF.General.WORLD.hangingVinesUndergroundCount;
+    private final float creepingVinesUndergroundCount = ConfigTFCF.General.WORLD.creepingVinesUndergroundCount;
+    private final float creepingUndergroundCount = ConfigTFCF.General.WORLD.creepingUndergroundCount;
 
     public GeneratorUnderground() {
         undergroundMushrooms = new GeneratorCaveMushrooms();

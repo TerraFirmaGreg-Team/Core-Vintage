@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-import com.eerussianguy.firmalife.te.TEClimateStation;
+import net.dries007.tfc.objects.te.TEClimateStation;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 import static su.terrafirmagreg.data.Properties.GLASS;
@@ -209,8 +209,8 @@ public class GreenhouseHelpers {
     }
 
     private static void seedPositionData(World world, BlockPos pos, IBlockState state, int arcs) {
-        TEClimateStation te = TileUtils.getTile(world, pos, TEClimateStation.class);
-        if (te != null) {
+        var tile = TileUtils.getTile(world, pos, TEClimateStation.class);
+        if (tile != null) {
             EnumFacing facing = state.getValue(FACING);
             int forwardCount = 1;
             int upCount = 1;
@@ -225,7 +225,7 @@ public class GreenhouseHelpers {
             if (foundWall) {
                 for (int j = 1; j < 40; j++) {
                     if (world.getBlockState(pos.up(j)).getBlock() instanceof BlockGreenhouseRoof) {
-                        te.setPositions(forwardCount, arcs, upCount);
+                        tile.setPositions(forwardCount, arcs, upCount);
                         return;
                     }
                     upCount++;
@@ -237,11 +237,11 @@ public class GreenhouseHelpers {
     public static void setApproval(World world, BlockPos pos, IBlockState state, EnumFacing wallDir, boolean approvalStatus, boolean visual,
                                    int tier) {
         final EnumFacing facing = state.getValue(FACING);
-        TEClimateStation te = TileUtils.getTile(world, pos, TEClimateStation.class);
-        if (te != null) {
-            for (int i = 0; i <= te.forward; i++) {
-                for (int j = 0; j <= te.arcs; j++) {
-                    for (int k = 0; k <= te.height; k++) {
+        var tile = TileUtils.getTile(world, pos, TEClimateStation.class);
+        if (tile != null) {
+            for (int i = 0; i <= tile.forward; i++) {
+                for (int j = 0; j <= tile.arcs; j++) {
+                    for (int k = 0; k <= tile.height; k++) {
                         BlockPos checkPos = pos.offset(facing, i).offset(wallDir, j).up(k);
                         TileEntity teFound = world.getTileEntity(checkPos);
                         if (teFound instanceof IGreenhouseReceiver) {
@@ -263,7 +263,7 @@ public class GreenhouseHelpers {
                 if (wallDir.getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE) {
                     pos = pos.offset(wallDir.getOpposite());
                 }
-                BlockPos secondPos = pos.offset(facing, te.forward).offset(wallDir, te.arcs).up(te.height);
+                BlockPos secondPos = pos.offset(facing, tile.forward).offset(wallDir, tile.arcs).up(tile.height);
                 HelpersFL.sendBoundingBoxPacket(world, pos, secondPos, 0.0F, 1.0F, 0.0F, false);
             }
         }

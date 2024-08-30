@@ -1,5 +1,8 @@
 package com.buuz135.hotornot.object.item;
 
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,10 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import net.dries007.tfc.api.types.Metal.Tier;
@@ -39,22 +38,14 @@ public class ItemHotHolder extends ItemTFC {
      * @return The damage chance of this Hot Holder Item
      */
     public float damageChance(final ItemStack itemStack) {
-        switch (tier) {
-            case TIER_0:
-            case TIER_I:
-                return 1;
-            case TIER_II:
-                return 0.9F;
-            case TIER_III:
-                return 0.8F;
-            case TIER_IV:
-                return 0.7F;
-            case TIER_V:
-                return 0.6F;
-            case TIER_VI:
-                return 0.5F;
-        }
-        return 1;
+        return switch (tier) {
+            case TIER_0, TIER_I -> 1;
+            case TIER_II -> 0.9F;
+            case TIER_III -> 0.8F;
+            case TIER_IV -> 0.7F;
+            case TIER_V -> 0.6F;
+            case TIER_VI -> 0.5F;
+        };
     }
 
     @Override

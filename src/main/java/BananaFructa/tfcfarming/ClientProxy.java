@@ -17,21 +17,22 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 
+import BananaFructa.floraefixes.Utils;
 import BananaFructa.tfcfarming.network.CPacketRequestNutrientData;
 import BananaFructa.tfcfarming.network.PacketHandler;
 import BananaFructa.tfcfarming.network.SPacketNutrientDataResponse;
-import com.eerussianguy.firmalife.blocks.BlockHangingPlanter;
-import com.eerussianguy.firmalife.blocks.BlockLargePlanter;
-import com.eerussianguy.firmalife.blocks.BlockQuadPlanter;
 import net.dries007.tfc.api.types.ICrop;
+import net.dries007.tfc.objects.blocks.BlockHangingPlanter;
+import net.dries007.tfc.objects.blocks.BlockLargePlanter;
+import net.dries007.tfc.objects.blocks.BlockQuadPlanter;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.objects.blocks.blocktype.farmland.FarmlandTFCF;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalHoe;
 import net.dries007.tfc.objects.items.rock.ItemRockHoe;
-import tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
-import tfcflorae.objects.items.tools.ItemHoeTFCF;
+import net.dries007.tfc.objects.items.tools.ItemHoeTFCF;
 
 import java.util.HashMap;
 

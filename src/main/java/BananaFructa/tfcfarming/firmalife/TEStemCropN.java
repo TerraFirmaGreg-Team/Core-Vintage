@@ -7,7 +7,7 @@ import BananaFructa.tfcfarming.Config;
 import BananaFructa.tfcfarming.CropNutrients;
 import BananaFructa.tfcfarming.NutrientValues;
 import BananaFructa.tfcfarming.TFCFarming;
-import com.eerussianguy.firmalife.te.TEStemCrop;
+import net.dries007.tfc.objects.te.TEStemCrop;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;

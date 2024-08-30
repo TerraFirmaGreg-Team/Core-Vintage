@@ -1,8 +1,8 @@
 package su.terrafirmagreg;
 
-import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.api.util.AnnotationUtils;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.proxy.IProxy;
 
 import net.minecraftforge.fml.common.Mod;
@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import lombok.Getter;
 
 import static net.minecraftforge.fml.common.Mod.EventHandler;
+import static su.terrafirmagreg.data.Constants.*;
 
 @Mod(modid = MOD_ID, version = MOD_VERSION, name = MOD_NAME, dependencies = DEPENDENCIES)
 public class TerraFirmaGreg {

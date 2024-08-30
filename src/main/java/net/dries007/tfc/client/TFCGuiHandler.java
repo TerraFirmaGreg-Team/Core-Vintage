@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.client.gui.GuiCalendar;
@@ -55,7 +55,8 @@ public class TFCGuiHandler implements IGuiHandler {
     public static final ResourceLocation LEATHER_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/leather_button.png");
     public static final ResourceLocation QUIVER_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/quiver_inventory.png");
     public static final ResourceLocation CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button_disabled.png");
-    public static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button_fire_disabled.png");
+    public static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFC,
+            "textures/gui/knapping/clay_button_fire_disabled.png");
 
     // use this instead of player.openGui() -> avoids magic numbers
     public static void openGui(World world, BlockPos pos, EntityPlayer player, Type type) {
@@ -74,22 +75,25 @@ public class TFCGuiHandler implements IGuiHandler {
         ItemStack stack = player.getHeldItemMainhand();
         Type type = Type.valueOf(ID);
         return switch (type) {
-            case SMALL_VESSEL -> new ContainerSmallVessel(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
-            case SMALL_VESSEL_LIQUID -> new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
+            case SMALL_VESSEL ->
+                    new ContainerSmallVessel(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
+            case SMALL_VESSEL_LIQUID ->
+                    new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
             case MOLD -> new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemMold ? stack : player.getHeldItemOffhand());
-            case KNAPPING_STONE -> new ContainerKnapping(KnappingType.STONE, player.inventory,
+            case KNAPPING_STONE -> new ContainerKnapping(KnappingTypes.STONE, player.inventory,
                     stack.getItem() instanceof ItemRock ? stack : player.getHeldItemOffhand());
-            case KNAPPING_CLAY -> new ContainerKnapping(KnappingType.CLAY, player.inventory,
+            case KNAPPING_CLAY -> new ContainerKnapping(KnappingTypes.CLAY, player.inventory,
                     OreDictionaryHelper.doesStackMatchOre(stack, "clay") ? stack : player.getHeldItemOffhand());
-            case KNAPPING_LEATHER -> new ContainerKnapping(KnappingType.LEATHER, player.inventory,
+            case KNAPPING_LEATHER -> new ContainerKnapping(KnappingTypes.LEATHER, player.inventory,
                     OreDictionaryHelper.doesStackMatchOre(stack, "leather") ? stack : player.getHeldItemOffhand());
-            case KNAPPING_FIRE_CLAY -> new ContainerKnapping(KnappingType.FIRE_CLAY, player.inventory,
+            case KNAPPING_FIRE_CLAY -> new ContainerKnapping(KnappingTypes.FIRE_CLAY, player.inventory,
                     OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") ? stack : player.getHeldItemOffhand());
             case LARGE_VESSEL -> new ContainerLargeVessel(player.inventory, TileUtils.getTile(world, pos, TELargeVessel.class));
             case CALENDAR, SKILLS, NUTRITION -> new ContainerSimple(player.inventory);
             case CRAFTING -> new ContainerInventoryCrafting(player.inventory, player.world);
             case QUIVER -> new ContainerQuiver(player.inventory, stack.getItem() instanceof ItemQuiver ? stack : player.getHeldItemOffhand());
-            case GLASSWORKING -> new ContainerGlassworking(player.inventory, stack.getItem() instanceof ItemBlowpipe ? stack : player.getHeldItemOffhand());
+            case GLASSWORKING ->
+                    new ContainerGlassworking(player.inventory, stack.getItem() instanceof ItemBlowpipe ? stack : player.getHeldItemOffhand());
             case SALAD -> new ContainerSalad(player.inventory);
             default -> null;
         };
@@ -110,11 +114,11 @@ public class TFCGuiHandler implements IGuiHandler {
                 Rock rock = stack.getItem() instanceof IRockObject iRockObject ? iRockObject.getRock(stack) :
                         ((IRockObject) player.getHeldItemOffhand().getItem()).getRock(player.getHeldItemOffhand());
                 //noinspection ConstantConditions
-                yield new GuiKnapping(container, player, KnappingType.STONE, rock.getTexture());
+                yield new GuiKnapping(container, player, KnappingTypes.STONE, rock.getTexture());
             }
-            case KNAPPING_CLAY -> new GuiKnapping(container, player, KnappingType.CLAY, CLAY_TEXTURE);
-            case KNAPPING_LEATHER -> new GuiKnapping(container, player, KnappingType.LEATHER, LEATHER_TEXTURE);
-            case KNAPPING_FIRE_CLAY -> new GuiKnapping(container, player, KnappingType.FIRE_CLAY, FIRE_CLAY_TEXTURE);
+            case KNAPPING_CLAY -> new GuiKnapping(container, player, KnappingTypes.CLAY, CLAY_TEXTURE);
+            case KNAPPING_LEATHER -> new GuiKnapping(container, player, KnappingTypes.LEATHER, LEATHER_TEXTURE);
+            case KNAPPING_FIRE_CLAY -> new GuiKnapping(container, player, KnappingTypes.FIRE_CLAY, FIRE_CLAY_TEXTURE);
             case LARGE_VESSEL -> new GuiLargeVessel(container, player.inventory, TileUtils.getTile(world, pos, TELargeVessel.class), world
                     .getBlockState(new BlockPos(x, y, z))
                     .getBlock()

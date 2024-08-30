@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
@@ -34,7 +35,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import gregtech.api.capability.GregtechCapabilities;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.te.TEInventory;
 import tfctech.TechConfig;
 
 import org.jetbrains.annotations.Nullable;
@@ -46,7 +46,7 @@ import java.util.Optional;
 import static su.terrafirmagreg.data.Properties.UPPER;
 
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
-public class TileFridge extends TEInventory implements ITickable, IAmbientalTileProvider {
+public class TileFridge extends BaseTileInventory implements ITickable, IAmbientalTileProvider {
 
     private static final float MAX_DEGREE = 90F;
     private static final float DOOR_SPEED = 6F;
@@ -162,9 +162,9 @@ public class TileFridge extends TEInventory implements ITickable, IAmbientalTile
     @SuppressWarnings("unchecked")
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if (!isMainBlock()) {
-            TileFridge te = TileUtils.getTile(world, pos.up(), TileFridge.class);
-            if (te != null) {
-                return te.getCapability(capability, facing);
+            var tile = TileUtils.getTile(world, pos.up(), TileFridge.class);
+            if (tile != null) {
+                return tile.getCapability(capability, facing);
             } else {
                 return null;
             }
@@ -216,9 +216,9 @@ public class TileFridge extends TEInventory implements ITickable, IAmbientalTile
     //    @Override
     //    public double getDemandedEnergy() {
     //        if (!isMainBlock()) {
-    //            TileFridge te = TileUtils.getTile(world, pos.up(), TileFridge.class);
-    //            if (te != null && te.addedToIc2Network) {
-    //                return Math.ceil(te.energyContainer.receiveEnergy(Integer.MAX_VALUE, true) / (double) TechConfig.DEVICES.ratioIc2);
+    //            TileFridge tile = TileUtils.getTile(world, pos.up(), TileFridge.class);
+    //            if (tile != null && tile.addedToIc2Network) {
+    //                return Math.ceil(tile.energyContainer.receiveEnergy(Integer.MAX_VALUE, true) / (double) TechConfig.DEVICES.ratioIc2);
     //            }
     //            return 0;
     //        }
@@ -233,9 +233,9 @@ public class TileFridge extends TEInventory implements ITickable, IAmbientalTile
     //    @Override
     //    public double injectEnergy(EnumFacing facing, double amount, double voltage) {
     //        if (!isMainBlock()) {
-    //            TileFridge te = TileUtils.getTile(world, pos.up(), TileFridge.class);
-    //            if (te != null && te.addedToIc2Network) {
-    //                te.energyContainer.receiveEnergy((int) Math.ceil(amount) * TechConfig.DEVICES.ratioIc2, false);
+    //            TileFridge tile = TileUtils.getTile(world, pos.up(), TileFridge.class);
+    //            if (tile != null && tile.addedToIc2Network) {
+    //                tile.energyContainer.receiveEnergy((int) Math.ceil(amount) * TechConfig.DEVICES.ratioIc2, false);
     //            }
     //            return 0;
     //        }
@@ -263,8 +263,8 @@ public class TileFridge extends TEInventory implements ITickable, IAmbientalTile
     //    @Override
     //    public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing facing) {
     //        if (!isMainBlock()) {
-    //            TileFridge te = TileUtils.getTile(world, pos.up(), TileFridge.class);
-    //            if (te == null || !te.addedToIc2Network) {
+    //            TileFridge tile = TileUtils.getTile(world, pos.up(), TileFridge.class);
+    //            if (tile == null || !tile.addedToIc2Network) {
     //                return false;
     //            }
     //        }

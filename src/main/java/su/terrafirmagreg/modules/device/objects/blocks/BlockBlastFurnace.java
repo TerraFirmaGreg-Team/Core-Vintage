@@ -128,7 +128,8 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                    float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             if (!state.getValue(LIT)) {
                 var tile = TileUtils.getTile(worldIn, pos, TileBlastFurnace.class);
@@ -137,7 +138,7 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
                 ItemStack held = playerIn.getHeldItem(hand);
                 if (tile.canIgnite() && ItemFireStarter.onIgnition(held)) {
                     worldIn.setBlockState(pos, state.withProperty(LIT, true));
-                    //te.onIgnite();
+                    //tile.onIgnite();
                     return true;
                 }
             }

@@ -155,11 +155,11 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
             // Attempt to grow
             float temp = Climate.getActualTemp(worldIn, pos);
             float rainfall = ChunkData.getRainfall(worldIn, pos);
-            TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-            if (te != null) {
-                long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+            var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+            if (tile != null) {
+                long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                 if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier) && tree.isValidForGrowth(temp, rainfall)) {
-                    te.resetCounter();
+                    tile.resetCounter();
                     if (worldIn.getBlockState(pos.up())
                             .getBlock() != this) //If the above block is a trunk, this one don't need to do anything
                     {

@@ -232,6 +232,10 @@ runServer {
 idea {
     module {
         inheritOutputDirs = true
+
+        excludeDirs = [file(".github"), file(".gradle"), file(".idea"), file("build"), file("gradle"), file("run"), file("resources_templates")]
+
+        
     }
     project {
         settings {

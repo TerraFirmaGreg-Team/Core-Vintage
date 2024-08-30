@@ -22,8 +22,8 @@ public interface ICalendarTickable {
      */
     @SuppressWarnings("ConstantConditions")
     default void checkForCalendarUpdate() {
-        TileEntity te = getTileEntity();
-        if (te.getWorld() != null && !te.getWorld().isRemote) {
+        TileEntity tile = getTileEntity();
+        if (tile.getWorld() != null && !tile.getWorld().isRemote) {
             long playerTick = Calendar.PLAYER_TIME.getTicks();
             long tickDelta = playerTick - getLastUpdateTick();
             if (tickDelta != 1) // Expect 1 tick

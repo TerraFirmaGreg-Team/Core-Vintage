@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
@@ -37,8 +38,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import gregtech.api.capability.GregtechCapabilities;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TEInventory;
+
+
+import su.terrafirmagreg.api.base.tile.spi.ITileFields;
+
+
 import tfctech.TFCTech;
 import tfctech.TechConfig;
 
@@ -52,7 +56,7 @@ import static su.terrafirmagreg.data.Properties.LIT;
 
 @SuppressWarnings("WeakerAccess")
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
-public class TileElectricForge extends TEInventory
+public class TileElectricForge extends BaseTileInventory
         implements ITickable, ITileFields, IMachineSoundEffect, IAmbientalTileProvider, IProviderContainer<ContainerElectricForge, GuiElectricForge> {
 
     public static final int SLOT_INPUT_MIN = 0;
@@ -69,7 +73,8 @@ public class TileElectricForge extends TEInventory
     public TileElectricForge() {
         super(12);
 
-        this.energyContainer = new MachineEnergyStorage(TechConfig.DEVICES.electricForgeEnergyCapacity, TechConfig.DEVICES.electricForgeEnergyCapacity, 0);
+        this.energyContainer = new MachineEnergyStorage(TechConfig.DEVICES.electricForgeEnergyCapacity,
+                TechConfig.DEVICES.electricForgeEnergyCapacity, 0);
         Arrays.fill(cachedRecipes, null);
     }
 

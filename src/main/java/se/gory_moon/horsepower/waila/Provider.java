@@ -107,9 +107,9 @@ public class Provider implements IWailaDataProvider {
         if (config.getConfig("horsepower:showItems") &&
                 (accessor.getTileEntity() instanceof TileEntityHPBase || accessor.getTileEntity() instanceof TileEntityFiller) && accessor.getPlayer()
                 .isSneaking()) {
-            TileEntity te = accessor.getTileEntity();
-            if (te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP)) {
-                IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+            TileEntity tile = accessor.getTileEntity();
+            if (tile.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP)) {
+                IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
                 if (itemHandler != null) {
                     {
                         final ItemStack stack = itemHandler.getStackInSlot(0);
@@ -147,18 +147,18 @@ public class Provider implements IWailaDataProvider {
     }
 
     @Override
-    public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, BlockPos pos) {
-        NBTTagCompound tile = new NBTTagCompound();
-        if (te instanceof TileEntityFiller)
-            te = ((TileEntityFiller) te).getFilledTileEntity();
-        if (te != null)
-            te.writeToNBT(tile);
-        if (te instanceof TileEntityGrindstone || te instanceof TileEntityHandGrindstone)
-            tag.setTag("horsepower:grindstone", tile);
-        else if (te instanceof TileEntityChopper || te instanceof TileEntityManualChopper)
-            tag.setTag("horsepower:chopper", tile);
-        else if (te instanceof TileEntityPress)
-            tag.setTag("horsepower:press", tile);
+    public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, BlockPos pos) {
+        NBTTagCompound nbt = new NBTTagCompound();
+        if (tile instanceof TileEntityFiller)
+            tile = ((TileEntityFiller) tile).getFilledTileEntity();
+        if (tile != null)
+            tile.writeToNBT(nbt);
+        if (tile instanceof TileEntityGrindstone || tile instanceof TileEntityHandGrindstone)
+            tag.setTag("horsepower:grindstone", nbt);
+        else if (tile instanceof TileEntityChopper || tile instanceof TileEntityManualChopper)
+            tag.setTag("horsepower:chopper", nbt);
+        else if (tile instanceof TileEntityPress)
+            tag.setTag("horsepower:press", nbt);
         return tag;
     }
 }

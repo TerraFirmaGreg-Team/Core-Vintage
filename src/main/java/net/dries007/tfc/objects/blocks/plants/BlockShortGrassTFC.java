@@ -54,11 +54,11 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
         return (BlockShortGrassTFC) MAP.get(plant);
     }
 
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack stack) {
         Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
-        int currentStage = (Integer) state.getValue(this.growthStageProperty);
+        int currentStage = state.getValue(this.growthStageProperty);
         this.plant.getStageForMonth(currentMonth);
-        int age = (Integer) state.getValue(AGE);
+        int age = state.getValue(AGE);
         if (!worldIn.isRemote) {
             if (stack.getItem().getHarvestLevel(stack, "knife", player, state) == -1 && stack.getItem()
                     .getHarvestLevel(stack, "scythe", player, state) == -1) {

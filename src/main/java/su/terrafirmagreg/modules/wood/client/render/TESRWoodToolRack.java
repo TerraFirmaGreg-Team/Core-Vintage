@@ -62,13 +62,13 @@ public class TESRWoodToolRack extends TileEntitySpecialRenderer<TileWoodToolRack
     }
 
     @Override
-    public void render(TileWoodToolRack te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileWoodToolRack tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         {
-            int dir = te.getBlockMetadata();
+            int dir = tile.getBlockMetadata();
             float blockScale = .5f;
             for (int i = 0; i < 4; i++) {
-                ItemStack stack = te.getItems().get(i);
-                if (!te.getItems().get(i).isEmpty()) {
+                ItemStack stack = tile.getItems().get(i);
+                if (!tile.getItems().get(i).isEmpty()) {
                     GlStateManager.pushMatrix();
                     GlStateManager.translate(x + ITEM_LOCATION[dir][i][0], y + ITEM_LOCATION[dir][i][1], z + ITEM_LOCATION[dir][i][2]);
                     GlStateManager.rotate(META_TO_ANGLE[dir], 0.0F, 1.0F, 0.0F);

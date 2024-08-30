@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.objects.entity;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 
 import net.minecraft.block.Block;
@@ -160,16 +161,16 @@ public class EntityFallingBlock
                         world.setBlockState(pos, currentSpecification.getResultingState(fallTile), 3);
                         // Only persist TE data when resulting state is the same as the beginning state
                         if (tileEntityData != null && block.hasTileEntity(fallTile)) {
-                            TileEntity te = world.getTileEntity(pos);
-                            if (te != null) {
-                                NBTTagCompound currentTeData = te.writeToNBT(new NBTTagCompound());
+                            var tile = TileUtils.getTile(world, pos);
+                            if (tile != null) {
+                                NBTTagCompound currentTeData = tile.writeToNBT(new NBTTagCompound());
                                 for (String s : tileEntityData.getKeySet()) {
                                     if (!"x".equals(s) && !"y".equals(s) && !"z".equals(s)) {
                                         currentTeData.setTag(s, tileEntityData.getTag(s).copy());
                                     }
                                 }
-                                te.readFromNBT(currentTeData);
-                                te.markDirty();
+                                tile.readFromNBT(currentTeData);
+                                tile.markDirty();
                             }
                         }
                     } else if (world.getGameRules().getBoolean("doEntityDrops")) {

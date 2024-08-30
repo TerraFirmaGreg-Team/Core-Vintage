@@ -16,8 +16,6 @@ import com.eerussianguy.firmalife.compat.jei.wrapper.KnappingRecipeWrapperFL;
 import com.eerussianguy.firmalife.compat.jei.wrapper.OvenRecipeWrapper;
 import com.eerussianguy.firmalife.compat.jei.wrapper.UnmoldRecipeWrapperFL;
 import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.init.KnappingFL;
-import com.eerussianguy.firmalife.init.RegistriesFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import mezz.jei.api.IModPlugin;
@@ -25,6 +23,7 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.jei.categories.KnappingCategory;
@@ -59,14 +58,14 @@ public class JEIPluginFL implements IModPlugin {
     public void register(IModRegistry registry) {
         REGISTRY = registry;
 
-        List<SimpleRecipeWrapper> ovenList = RegistriesFL.OVEN.getValuesCollection()
+        List<SimpleRecipeWrapper> ovenList = TFCRegistries.OVEN.getValuesCollection()
                 .stream()
                 .map(OvenRecipeWrapper::new)
                 .collect(Collectors.toList());
         registry.addRecipes(ovenList, OVEN_ID);
         registry.addRecipeCatalyst(new ItemStack(BlocksDevice.OVEN), OVEN_ID);
 
-        List<SimpleRecipeWrapper> dryList = RegistriesFL.DRYING.getValuesCollection()
+        List<SimpleRecipeWrapper> dryList = TFCRegistries.DRYING.getValuesCollection()
                 .stream()
                 .map(DryingRecipeWrapper::new)
                 .collect(Collectors.toList());
@@ -82,7 +81,7 @@ public class JEIPluginFL implements IModPlugin {
 
         // Pumpkin Knapping
         List<KnappingRecipeWrapper> pumpkinknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-                .filter(recipe -> recipe.getType() == KnappingFL.PUMPKIN)
+                .filter(recipe -> recipe.getType() == KnappingTypes.PUMPKIN)
                 .map(recipe -> new KnappingRecipeWrapperFL(recipe, registry.getJeiHelpers()
                         .getGuiHelper()))
                 .collect(Collectors.toList());

@@ -7,15 +7,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 
+import BananaFructa.floraefixes.Utils;
 import BananaFructa.tfcfarming.Config;
 import BananaFructa.tfcfarming.CropNutrients;
 import BananaFructa.tfcfarming.NutrientClass;
 import BananaFructa.tfcfarming.NutrientValues;
-import BananaFructa.tfcfarming.Utils;
-import com.eerussianguy.firmalife.te.TEPlanter;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.objects.te.TEPlanter;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -102,8 +102,7 @@ public class TEPlanterN extends TEPlanter {
     public boolean anyLowNutrients() {
         for (int i = 0; i < 4; i++) {
             ItemStack stack = this.inventory.getStackInSlot(i);
-            if (stack.getItem() instanceof ItemSeedsTFC) {
-                ItemSeedsTFC itemSeedsTFC = (ItemSeedsTFC) stack.getItem();
+            if (stack.getItem() instanceof ItemSeedsTFC itemSeedsTFC) {
 
                 CropNutrients cropNutrients = null;
                 for (ICrop c : CropNutrients.MAP.keySet()) {

@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
-import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -150,12 +150,12 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     //                break;
     //            case 3:
     //                if (state.getValue(LEAF_STATE) != FRUIT) {
-    //                    TETickCounter te = TileUtil.getTile(world, pos, TETickCounter.class);
-    //                    if (te != null) {
-    //                        long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+    //                    TETickCounter tile = TileUtil.getTile(world, pos, TETickCounter.class);
+    //                    if (tile != null) {
+    //                        long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
     //                        if (hours > (getTreeVariant().getMinGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
     //                            world.setBlockState(pos, state.withProperty(LEAF_STATE, FRUIT));
-    //                            te.resetCounter();
+    //                            tile.resetCounter();
     //                        }
     //                    }
     //                }
@@ -180,21 +180,21 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         }
     }
 
-    //    @Override
-    //    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    //        if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == FRUIT && this.getTreeVariant().getDrop() != null) {
-    //            if (!worldIn.isRemote) {
-    //                ItemHandlerHelper.giveItemToPlayer(playerIn, this.getTreeVariant().getFoodDrop());
-    //                worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, NORMAL));
-    //                TETickCounter te = TileUtil.getTile(worldIn, pos, TETickCounter.class);
-    //                if (te != null) {
-    //                    te.resetCounter();
+    //        @Override
+    //        public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    //            if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == FRUIT && this.getTreeVariant().getDrop() != null) {
+    //                if (!worldIn.isRemote) {
+    //                    ItemHandlerHelper.giveItemToPlayer(playerIn, this.getTreeVariant().getFoodDrop());
+    //                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, NORMAL));
+    //                    TETickCounter tile = TileUtil.getTile(worldIn, pos, TETickCounter.class);
+    //                    if (tile != null) {
+    //                        tile.resetCounter();
+    //                    }
     //                }
+    //                return true;
     //            }
-    //            return true;
+    //            return false;
     //        }
-    //        return false;
-    //    }
 
     @Override
     public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {

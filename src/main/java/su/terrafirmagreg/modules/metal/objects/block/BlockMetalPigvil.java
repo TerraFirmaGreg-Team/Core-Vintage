@@ -32,14 +32,15 @@ public class BlockMetalPigvil
                 .withProperty(HORIZONTAL, EnumFacing.EAST));
     }
 
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack stack) {
         EntityMetalPigvil pigvil = new EntityMetalPigvil(worldIn);
         pigvil.setAnvil(this);
         pigvil.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), state.getValue(HORIZONTAL).getHorizontalAngle(), 0);
         worldIn.spawnEntity(pigvil);
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                    float hitX, float hitY, float hitZ) {
         worldIn.playSound(playerIn, pos, SoundEvents.ENTITY_PIG_AMBIENT, SoundCategory.BLOCKS, 1.0f, 1.0f);
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }

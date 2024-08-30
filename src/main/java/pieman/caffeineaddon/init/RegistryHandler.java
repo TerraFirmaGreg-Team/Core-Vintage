@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 import pieman.caffeineaddon.CaffeineAddon;
-import pieman.caffeineaddon.blocks.TEDryingMat;
+import net.dries007.tfc.objects.te.TEDryingMat;
 import pieman.caffeineaddon.client.GUIHandler;
 
 import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;

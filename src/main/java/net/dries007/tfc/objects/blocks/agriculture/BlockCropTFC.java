@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.block.Block;
@@ -32,6 +32,7 @@ import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
@@ -39,7 +40,6 @@ import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
-import tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -206,25 +206,25 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
 
     public void checkGrowth(World worldIn, BlockPos pos, IBlockState state, Random random) {
         if (!worldIn.isRemote) {
-            TECropBase te = TileUtils.getTile(worldIn, pos, TECropBase.class);
-            if (te != null) {
+            var tile = TileUtils.getTile(worldIn, pos, TECropBase.class);
+            if (tile != null) {
                 // If can't see sky, or isn't moisturized, reset growth *evil laughter* >:)
                 IBlockState stateFarmland = worldIn.getBlockState(pos.down());
                 if (!state.getValue(WILD)) {
                     if (!worldIn.canSeeSky(pos) ||
                             (stateFarmland.getBlock() instanceof BlockFarmlandTFC && stateFarmland.getValue(BlockFarmlandTFC.MOISTURE) < 3)) {
-                        te.resetCounter();
+                        tile.resetCounter();
                         return;
                     }
                 }
 
                 long growthTicks = (long) (crop.getGrowthTicks() * ConfigTFC.General.FOOD.cropGrowthTimeModifier);
                 int fullGrownStages = 0;
-                while (te.getTicksSinceUpdate() > growthTicks) {
-                    te.reduceCounter(growthTicks);
+                while (tile.getTicksSinceUpdate() > growthTicks) {
+                    tile.reduceCounter(growthTicks);
 
                     // find stats for the time in which the crop would have grown
-                    float temp = Climate.getActualTemp(worldIn, pos, -te.getTicksSinceUpdate());
+                    float temp = Climate.getActualTemp(worldIn, pos, -tile.getTicksSinceUpdate());
                     float rainfall = ChunkData.getRainfall(worldIn, pos);
 
                     // check if the crop could grow, if so, grow
@@ -301,7 +301,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
                     Material material = stateDown.getMaterial();
                     return soil.getBlock()
                             .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) ||
-                            material == Material.WATER && (Integer) stateDown.getValue(BlockLiquid.LEVEL) == 0 &&
+                            material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 &&
                                     stateDown == ChunkGenClassic.FRESH_WATER || material == Material.ICE ||
                             material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
                 }

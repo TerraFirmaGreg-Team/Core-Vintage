@@ -5,8 +5,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 
-import com.eerussianguy.firmalife.init.RegistriesFL;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
@@ -34,7 +34,7 @@ public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe> implements 
 
     @Nullable
     public static OvenRecipe get(ItemStack item) {
-        return RegistriesFL.OVEN.getValuesCollection()
+        return TFCRegistries.OVEN.getValuesCollection()
                 .stream()
                 .filter(x -> x.isValidInput(item))
                 .findFirst()

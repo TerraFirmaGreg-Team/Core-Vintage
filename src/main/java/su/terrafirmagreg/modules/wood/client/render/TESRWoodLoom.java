@@ -19,14 +19,14 @@ import org.lwjgl.opengl.GL11;
 public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
 
     @Override
-    public void render(TileWoodLoom te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileWoodLoom tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.pushMatrix();
         GlStateManager.translate(x + 0.5D, y + 0.03125D, z + 0.5D);
-        GlStateManager.rotate((te.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate((tile.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
         GlStateManager.popMatrix();
-        var woodColor = te.getWood().getColor();
+        var woodColor = tile.getWood().getColor();
 
-        double tileZ = te.getAnimPos();
+        double tileZ = tile.getAnimPos();
 
         try {
             GlStateManager.pushMatrix();
@@ -37,14 +37,14 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
             GlStateManager.disableLighting();
 
             GlStateManager.translate(x + 0.5d, y, z + 0.5d);
-            GL11.glRotatef(180.0F - 90.0F * te.getBlockMetadata(), 0.0F, 1.0F, 0.0F);
+            GL11.glRotatef(180.0F - 90.0F * tile.getBlockMetadata(), 0.0F, 1.0F, 0.0F);
             GlStateManager.translate(-0.5d, 0.0d, -0.5d);
 
             Tessellator t = Tessellator.getInstance();
             BufferBuilder b = t.getBuffer();
 
             b.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-            if ("u".equals(te.getAnimElement())) {
+            if ("u".equals(tile.getAnimElement())) {
                 drawUpper(b, tileZ);
                 drawLower(b, 0);
             } else {
@@ -57,17 +57,17 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
             GlStateManager.popMatrix();
         }
 
-        if (te.hasRecipe()) {
+        if (tile.hasRecipe()) {
             try {
                 GlStateManager.pushMatrix();
 
                 ColourUtils.clearColor();
-                this.bindTexture(te.getInProgressTexture());
+                this.bindTexture(tile.getInProgressTexture());
 
                 GlStateManager.disableLighting();
 
                 GlStateManager.translate(x + 0.5d, y, z + 0.5d);
-                GL11.glRotatef(180.0F - 90.0F * te.getBlockMetadata(), 0.0F, 1.0F, 0.0F);
+                GL11.glRotatef(180.0F - 90.0F * tile.getBlockMetadata(), 0.0F, 1.0F, 0.0F);
                 GlStateManager.translate(-0.5d, 0.0d, -0.5d);
 
                 Tessellator t = Tessellator.getInstance();
@@ -77,9 +77,9 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
 
                 double Z = tileZ * 2 / 3;
 
-                drawMaterial(b, te.getMaxInputCount(), te.getCount(), te.getMaxProgress(), te.getProgress(),
-                        ("u".equals(te.getAnimElement())) ? Z : 0, ("l".equals(te.getAnimElement())) ? Z : 0);
-                drawProduct(b, te.getMaxProgress(), te.getProgress());
+                drawMaterial(b, tile.getMaxInputCount(), tile.getCount(), tile.getMaxProgress(), tile.getProgress(),
+                        ("u".equals(tile.getAnimElement())) ? Z : 0, ("l".equals(tile.getAnimElement())) ? Z : 0);
+                drawProduct(b, tile.getMaxProgress(), tile.getProgress());
 
                 t.draw();
             } finally {
@@ -89,7 +89,7 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
     }
 
     @Override
-    public boolean isGlobalRenderer(TileWoodLoom te) {
+    public boolean isGlobalRenderer(TileWoodLoom tile) {
         return false;
     }
 

@@ -5,8 +5,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 
-import com.eerussianguy.firmalife.init.RegistriesFL;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
@@ -34,7 +34,7 @@ public class DryingRecipe extends IForgeRegistryEntry.Impl<DryingRecipe> impleme
 
     @Nullable
     public static DryingRecipe get(ItemStack item) {
-        return RegistriesFL.DRYING.getValuesCollection()
+        return TFCRegistries.DRYING.getValuesCollection()
                 .stream()
                 .filter(x -> x.isValidInput(item))
                 .findFirst()

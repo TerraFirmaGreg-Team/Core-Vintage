@@ -22,10 +22,10 @@ import org.jetbrains.annotations.NotNull;
 public class TESRQuern extends TileEntitySpecialRenderer<TileQuern> {
 
     @Override
-    public void render(@NotNull TileQuern te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+    public void render(@NotNull TileQuern tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
-        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null) {
             ItemStack input = cap.getStackInSlot(TileQuern.SLOT_INPUT);
             ItemStack output = cap.getStackInSlot(TileQuern.SLOT_OUTPUT);
@@ -67,7 +67,7 @@ public class TESRQuern extends TileEntitySpecialRenderer<TileQuern> {
                         }
                         default: {
                             GlStateManager.translate(x + 0.5, y + 1.0, z + 0.5);
-                            GlStateManager.rotate((te.getWorld().getTotalWorldTime() + partialTicks) * 4, 0, 1, 0);
+                            GlStateManager.rotate((tile.getWorld().getTotalWorldTime() + partialTicks) * 4, 0, 1, 0);
                         }
                     }
 
@@ -75,7 +75,7 @@ public class TESRQuern extends TileEntitySpecialRenderer<TileQuern> {
 
                     IBakedModel outputModel = Minecraft.getMinecraft()
                             .getRenderItem()
-                            .getItemModelWithOverrides(output, te.getWorld(), null);
+                            .getItemModelWithOverrides(output, tile.getWorld(), null);
                     outputModel = ForgeHooksClient.handleCameraTransforms(outputModel, ItemCameraTransforms.TransformType.FIXED, false);
 
                     Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
@@ -88,8 +88,8 @@ public class TESRQuern extends TileEntitySpecialRenderer<TileQuern> {
             }
 
             if (!handstone.isEmpty()) {
-                int rotationTicks = te.getRotationTimer();
-                double center = (rotationTicks > 0) ? 0.497 + (te.getWorld().rand.nextDouble() * 0.006) : 0.5;
+                int rotationTicks = tile.getRotationTimer();
+                double center = (rotationTicks > 0) ? 0.497 + (tile.getWorld().rand.nextDouble() * 0.006) : 0.5;
 
                 GlStateManager.enableRescaleNormal();
                 GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1f);
@@ -105,7 +105,7 @@ public class TESRQuern extends TileEntitySpecialRenderer<TileQuern> {
 
                 IBakedModel handstoneModel = Minecraft.getMinecraft()
                         .getRenderItem()
-                        .getItemModelWithOverrides(handstone, te.getWorld(), null);
+                        .getItemModelWithOverrides(handstone, tile.getWorld(), null);
                 handstoneModel = ForgeHooksClient.handleCameraTransforms(handstoneModel, ItemCameraTransforms.TransformType.FIXED, false);
 
                 GlStateManager.scale(1.25, 1.25, 1.25);
@@ -131,7 +131,7 @@ public class TESRQuern extends TileEntitySpecialRenderer<TileQuern> {
 
                 IBakedModel inputModel = Minecraft.getMinecraft()
                         .getRenderItem()
-                        .getItemModelWithOverrides(input, te.getWorld(), null);
+                        .getItemModelWithOverrides(input, tile.getWorld(), null);
                 inputModel = ForgeHooksClient.handleCameraTransforms(inputModel, ItemCameraTransforms.TransformType.GROUND, false);
 
                 Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);

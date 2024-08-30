@@ -14,12 +14,12 @@ import net.minecraftforge.fml.relauncher.Side;
 
 
 import com.eerussianguy.firmalife.compat.ModuleManager;
-import com.eerussianguy.firmalife.gui.FLGuiHandler;
 import com.eerussianguy.firmalife.network.PacketDrawBoundingBox;
 import com.eerussianguy.firmalife.network.PacketSpawnVanillaParticle;
 import com.eerussianguy.firmalife.proxy.CommonProxy;
 import com.eerussianguy.firmalife.registry.LootTablesFL;
 import com.eerussianguy.firmalife.util.OreDictsFL;
+import net.dries007.tfc.client.gui.FLGuiHandler;
 
 import static su.terrafirmagreg.data.Constants.MODID_FL;
 

@@ -12,7 +12,7 @@ import com.google.common.base.CaseFormat;
 import com.google.common.base.Converter;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
-import tfcflorae.types.BlockTypesTFCF.RockTFCF;
+import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,7 +23,7 @@ public class OreDictionaryHelper {
 
     private static final Converter<String, String> UPPER_UNDERSCORE_TO_LOWER_CAMEL = CaseFormat.UPPER_UNDERSCORE.converterTo(CaseFormat.LOWER_CAMEL);
     private static final Joiner JOINER_UNDERSCORE = Joiner.on('_').skipNulls();
-    private static boolean done = false;
+    private static final boolean done = false;
 
     public static String toString(Object... parts) {
         return UPPER_UNDERSCORE_TO_LOWER_CAMEL.convert(JOINER_UNDERSCORE.join(parts));

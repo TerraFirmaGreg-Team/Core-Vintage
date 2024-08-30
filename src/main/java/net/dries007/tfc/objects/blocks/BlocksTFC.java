@@ -38,7 +38,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeBranch;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
-import net.dries007.tfc.objects.blocks.metal.BlockIngotPile;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
 import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
@@ -59,7 +58,6 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockSaplingTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TECropSpreading;
-import net.dries007.tfc.objects.te.TEIngotPile;
 import net.dries007.tfc.objects.te.TELargeVessel;
 import net.dries007.tfc.objects.te.TEMetalSheet;
 import net.dries007.tfc.objects.te.TEPlacedHide;
@@ -87,7 +85,6 @@ public final class BlocksTFC {
     public static final BlockPlacedItemFlat PLACED_ITEM_FLAT = getNull();
     public static final BlockPlacedItem PLACED_ITEM = getNull();
     public static final BlockPlacedHide PLACED_HIDE = getNull();
-    public static final BlockIngotPile INGOT_PILE = getNull();
     public static final BlockIceTFC SEA_ICE = getNull();
     public static final Block FIRE_BRICKS = getNull();
 
@@ -393,7 +390,6 @@ public final class BlocksTFC {
         // These have no ItemBlock or Creative Tab
         register(r, "placed_item_flat", new BlockPlacedItemFlat());
         register(r, "placed_hide", new BlockPlacedHide());
-        register(r, "ingot_pile", new BlockIngotPile());
 
         // Note: if you add blocks you don't need to put them in this list of todos. Feel free to add them where they make sense :)
 
@@ -409,7 +405,6 @@ public final class BlocksTFC {
         register(TEPlacedItem.class, "placed_item");
         register(TEPlacedItemFlat.class, "placed_item_flat");
         register(TEPlacedHide.class, "placed_hide");
-        register(TEIngotPile.class, "ingot_pile");
         register(TECropBase.class, "crop_base");
         register(TECropSpreading.class, "crop_spreading");
         register(TEMetalSheet.class, "metal_sheet");

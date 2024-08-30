@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 
 
-import pieman.caffeineaddon.blocks.TEDryingMat;
+import net.dries007.tfc.objects.te.TEDryingMat;
 
 public class TESRDryingMat extends TileEntitySpecialRenderer<TEDryingMat> {
 

@@ -36,34 +36,34 @@ public class TileEntityFiller extends TileEntity {
 
     @Override
     public void markDirty() {
-        TileEntityHPBase te = getFilledTileEntity();
-        if (te != null)
-            te.markDirty();
+        TileEntityHPBase tile = getFilledTileEntity();
+        if (tile != null)
+            tile.markDirty();
         super.markDirty();
     }
 
     @Override
     public ITextComponent getDisplayName() {
-        TileEntityHPBase te = getFilledTileEntity();
-        if (te != null)
-            return te.getDisplayName();
+        TileEntityHPBase tile = getFilledTileEntity();
+        if (tile != null)
+            return tile.getDisplayName();
         return null;
     }
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        TileEntityHPBase te = getFilledTileEntity();
-        if (te != null)
-            return te.hasCapability(capability, facing);
+        TileEntityHPBase tile = getFilledTileEntity();
+        if (tile != null)
+            return tile.hasCapability(capability, facing);
         return super.hasCapability(capability, facing);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable net.minecraft.util.EnumFacing facing) {
-        TileEntityHPBase te = getFilledTileEntity();
-        if (te != null)
-            return te.getCapability(capability, facing);
+        TileEntityHPBase tile = getFilledTileEntity();
+        if (tile != null)
+            return tile.getCapability(capability, facing);
         return super.getCapability(capability, facing);
     }
 }

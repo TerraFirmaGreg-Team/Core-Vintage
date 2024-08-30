@@ -11,11 +11,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * TE Implementation that syncs NBT on world / chunk load, and on block updates
+ * Tile Implementation that syncs NBT on world / chunk load, and on block updates
  */
 
 public abstract class BaseTile extends TileEntity {
@@ -43,7 +42,7 @@ public abstract class BaseTile extends TileEntity {
      * Handles updating on client side when a block update is received
      */
     @Override
-    public void onDataPacket(@NotNull NetworkManager net, @NotNull SPacketUpdateTileEntity pkt) {
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
         readFromNBT(pkt.getNbtCompound());
     }
 
@@ -51,12 +50,12 @@ public abstract class BaseTile extends TileEntity {
      * Reads the update tag attached to a chunk or TE packet
      */
     @Override
-    public void handleUpdateTag(@NotNull NBTTagCompound nbt) {
+    public void handleUpdateTag(NBTTagCompound nbt) {
         readFromNBT(nbt);
     }
 
     @Override
-    public boolean shouldRefresh(@NotNull World world, @NotNull BlockPos pos, IBlockState oldState, IBlockState newState) {
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
         //        return oldState.getBlock() != newState.getBlock(); old
 
         if (oldState.getBlock() == newState.getBlock()) {
@@ -67,7 +66,8 @@ public abstract class BaseTile extends TileEntity {
     }
 
     /**
-     * Syncs the TE data to client via means of a block update Use for stuff that is updated infrequently, for data that is analogous to changing the state. DO NOT call every tick
+     * Syncs the TE data to client via means of a block update Use for stuff that is updated infrequently, for data that is analogous to changing the
+     * state. DO NOT call every tick
      */
     public void markForBlockUpdate() {
         IBlockState state = world.getBlockState(pos);
@@ -86,8 +86,8 @@ public abstract class BaseTile extends TileEntity {
     }
 
     /**
-     * Marks a tile entity for syncing without sending a block update. Use preferentially over {@link BaseTile#markForBlockUpdate()} if there's no reason to have a block update.
-     * For container based integer synchronization, see ITileFields DO NOT call every tick
+     * Marks a tile entity for syncing without sending a block update. Use preferentially over {@link BaseTile#markForBlockUpdate()} if there's no
+     * reason to have a block update. For container based integer synchronization, see ITileFields DO NOT call every tick
      */
     public void markForSync() {
         sendVanillaUpdatePacket();

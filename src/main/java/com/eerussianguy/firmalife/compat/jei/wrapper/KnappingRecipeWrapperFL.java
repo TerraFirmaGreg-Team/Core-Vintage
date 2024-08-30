@@ -3,11 +3,11 @@ package com.eerussianguy.firmalife.compat.jei.wrapper;
 import net.minecraft.util.ResourceLocation;
 
 
-import com.eerussianguy.firmalife.init.KnappingFL;
 import com.google.common.collect.Maps;
 import mezz.jei.api.IGuiHelper;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 
 import java.util.Map;
@@ -21,8 +21,8 @@ public class KnappingRecipeWrapperFL extends KnappingRecipeWrapper {
     public static final Map<KnappingType, ResourceLocation> LOWMAP = Maps.newHashMap();
 
     static {
-        HIGHMAP.put(KnappingFL.PUMPKIN, PUMPKIN_TEXTURE);
-        LOWMAP.put(KnappingFL.PUMPKIN, null);
+        HIGHMAP.put(KnappingTypes.PUMPKIN, PUMPKIN_TEXTURE);
+        LOWMAP.put(KnappingTypes.PUMPKIN, null);
     }
 
     public KnappingRecipeWrapperFL(KnappingRecipe recipe, IGuiHelper guiHelper) {

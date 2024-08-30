@@ -1,5 +1,8 @@
 package pieman.caffeineaddon.recipes;
 
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
+
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidStack;
@@ -15,7 +18,6 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -57,7 +59,8 @@ public class Recipes {
     public static void onRegisterDryingMatRecipeEvent(RegistryEvent.Register<DryingMatRecipe> event) {
         IForgeRegistry<DryingMatRecipe> r = event.getRegistry();
         r.registerAll(
-                new DryingMatRecipe(IIngredient.of(new ItemStack(ItemFoodTFC.get(Food.COFFEE_CHERRIES))), new ItemStack(ItemsFL.getDriedFruit(Fruit.COFFEE_CHERRIES)),
+                new DryingMatRecipe(IIngredient.of(new ItemStack(ItemFoodTFC.get(Food.COFFEE_CHERRIES))),
+                        new ItemStack(ItemsFL.getDriedFruit(Fruit.COFFEE_CHERRIES)),
                         72000).setRegistryName("dried_coffee_cherries")
         );
     }
@@ -65,7 +68,7 @@ public class Recipes {
     @SubscribeEvent
     public static void onRegisterKnappingRecipeEvent(RegistryEvent.Register<KnappingRecipe> event) {
         event.getRegistry().registerAll(
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ModItems.MugUnfired),
+                new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(ModItems.MugUnfired),
                         "     ",
                         "XXXX ",
                         "XXX X",

@@ -1,6 +1,7 @@
 package com.eerussianguy.firmalife.compat.waila;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.Properties;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,10 +9,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-import com.eerussianguy.firmalife.blocks.BlockHangingPlanter;
-import com.eerussianguy.firmalife.init.StatePropertiesFL;
-import com.eerussianguy.firmalife.te.TEHangingPlanter;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
+import net.dries007.tfc.objects.blocks.BlockHangingPlanter;
+import net.dries007.tfc.objects.te.TEHangingPlanter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -27,8 +27,8 @@ public class HangingPlanterProvider implements IWailaBlock {
         List<String> currentTooltip = new ArrayList<>();
         IBlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof BlockHangingPlanter) {
-            int maxStage = Collections.max(StatePropertiesFL.STAGE.getAllowedValues());
-            int curStage = state.getValue(StatePropertiesFL.STAGE);
+            int maxStage = Collections.max(Properties.STAGE.getAllowedValues());
+            int curStage = state.getValue(Properties.STAGE);
             if (maxStage == curStage) {
                 currentTooltip.add("Mature");
             } else {
@@ -36,9 +36,9 @@ public class HangingPlanterProvider implements IWailaBlock {
                 String growth = String.format("%d%%", Math.round(curStagePercent));
                 currentTooltip.add(growth);
             }
-            TEHangingPlanter te = TileUtils.getTile(world, pos, TEHangingPlanter.class);
-            if (te != null) {
-                currentTooltip.add(te.isClimateValid() ? "Climate Valid" : "Climate Invalid");
+            var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
+            if (tile != null) {
+                currentTooltip.add(tile.isClimateValid() ? "Climate Valid" : "Climate Invalid");
             }
         }
         return currentTooltip;

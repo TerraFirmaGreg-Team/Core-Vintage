@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
@@ -21,7 +22,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
@@ -31,7 +31,6 @@ import net.minecraftforge.common.util.Constants;
 
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
-import net.dries007.tfc.objects.te.TETickableInventory;
 import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +43,7 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 import static su.terrafirmagreg.data.Properties.LIT;
 
 @SuppressWarnings("WeakerAccess")
-public class TileBloomery extends TETickableInventory implements ITickable, IAmbientalTileProvider {
+public class TileBloomery extends BaseTileTickableInventory implements IAmbientalTileProvider {
 
     // Gets the internal block, should be charcoal pile/bloom
     private static final Vec3i OFFSET_INTERNAL = new Vec3i(1, 0, 0);

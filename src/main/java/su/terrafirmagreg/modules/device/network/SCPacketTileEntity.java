@@ -23,9 +23,9 @@ public class SCPacketTileEntity implements IMessage, IMessageHandler<SCPacketTil
     @SuppressWarnings("unused")
     public SCPacketTileEntity() {}
 
-    public SCPacketTileEntity(TileEntity te) {
-        pos = te.getPos();
-        tileEntity = te.serializeNBT();
+    public SCPacketTileEntity(TileEntity tile) {
+        pos = tile.getPos();
+        tileEntity = tile.serializeNBT();
     }
 
     @Override
@@ -45,9 +45,9 @@ public class SCPacketTileEntity implements IMessage, IMessageHandler<SCPacketTil
         EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
         if (player != null) {
             World world = player.getEntityWorld();
-            TileEntity te = world.getTileEntity(message.pos);
-            if (te != null) {
-                te.readFromNBT(message.tileEntity);
+            TileEntity tile = world.getTileEntity(message.pos);
+            if (tile != null) {
+                tile.readFromNBT(message.tileEntity);
             }
         }
         return null;

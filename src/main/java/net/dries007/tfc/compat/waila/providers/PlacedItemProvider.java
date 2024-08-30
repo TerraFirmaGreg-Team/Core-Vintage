@@ -29,9 +29,9 @@ public class PlacedItemProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        TEPlacedItemFlat te = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
-        if (te != null) {
-            ItemStack stack = te.getStack();
+        var tile = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
+        if (tile != null) {
+            ItemStack stack = tile.getStack();
             if (stack.getItem() instanceof ItemSmallOre nugget) {
 
                 Ore ore = nugget.getOre();

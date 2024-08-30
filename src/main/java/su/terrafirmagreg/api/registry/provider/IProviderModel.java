@@ -4,6 +4,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
+import org.jetbrains.annotations.Nullable;
+
 // Configure automatic model registration
 public interface IProviderModel {
 
@@ -12,7 +15,7 @@ public interface IProviderModel {
 
     }
 
-    default ResourceLocation getResourceLocation() {
+    default @Nullable ResourceLocation getResourceLocation() {
         return null;
     }
 }

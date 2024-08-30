@@ -35,8 +35,8 @@ public class ItemBlockPlant extends ItemBlockTFC {
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
                                       float hitZ) {
         if (!world.isRemote && world.getBlockState(pos).getBlock() instanceof BlockFlowerPot) {
-            TileEntityFlowerPot te = TileUtils.getTile(world, pos, TileEntityFlowerPot.class);
-            if (te == null || te.getFlowerItemStack().isEmpty()) {
+            var tile = TileUtils.getTile(world, pos, TileEntityFlowerPot.class);
+            if (tile == null || tile.getFlowerItemStack().isEmpty()) {
                 world.setBlockState(pos, BlockFlowerPotTFC.get(plant).getDefaultState(), 3);
                 player.getHeldItem(hand).shrink(1);
                 return EnumActionResult.SUCCESS;

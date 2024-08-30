@@ -9,16 +9,16 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 
-import com.eerussianguy.firmalife.te.TELeafMat;
+import net.dries007.tfc.objects.te.TELeafMat;
 
 public class TESRLeafMat extends TileEntitySpecialRenderer<TELeafMat> {
 
     @Override
-    public void render(TELeafMat te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+    public void render(TELeafMat tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
-        if (te.hasWorld()) {
-            IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (tile.hasWorld()) {
+            IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             if (cap != null) {
                 double magic = 0.003125D;
                 GlStateManager.pushMatrix();

@@ -14,9 +14,9 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.TFCFlorae;
-import tfcflorae.objects.blocks.BlocksTFCF;
 
 import java.util.Random;
 
@@ -41,7 +41,8 @@ public class GeneratorGourds implements IWorldGenerator {
         float rainfall = ChunkData.getRainfall(world, chunkBlockPos);
         float floraDensity = ChunkData.getFloraDensity(world, chunkBlockPos);
 
-        if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0 && random.nextInt(20) == 0 && rainfall >= RAINFALL_MELON &&
+        if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0 && random.nextInt(20) == 0 &&
+                rainfall >= RAINFALL_MELON &&
                 temperature >= 18f && floraDensity >= 0.3f) {
             int melonsInChunk = 3 + random.nextInt(8);
             for (int i = 0; i < melonsInChunk; i++) {
@@ -79,7 +80,8 @@ public class GeneratorGourds implements IWorldGenerator {
         float rainfall = ChunkData.getRainfall(world, chunkBlockPos);
         float floraDensity = ChunkData.getFloraDensity(world, chunkBlockPos);
 
-        if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0 && random.nextInt(20) == 0 && rainfall >= RAINFALL_PUMPKIN &&
+        if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0 && random.nextInt(20) == 0 &&
+                rainfall >= RAINFALL_PUMPKIN &&
                 temperature >= 10f && floraDensity >= 0.2f) {
             int pumpkinsInChunk = 3 + random.nextInt(8);
             for (int i = 0; i < pumpkinsInChunk; i++) {

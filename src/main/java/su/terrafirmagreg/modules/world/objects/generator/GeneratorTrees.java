@@ -29,11 +29,11 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
+import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeFlower;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
+import net.dries007.tfc.types.TreesTFCF;
 import net.dries007.tfc.util.climate.Climate;
-import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.blocks.wood.BlockJoshuaTreeFlower;
-import tfcflorae.types.TreesTFCF;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -122,7 +122,8 @@ public class GeneratorTrees implements IWorldGenerator {
 
         // Dense foliage chaparral/shrubland forests in dry & sparsely populated mountain regions
         // Similarly to Mediterranean and Californian areas
-        if ((biome == BiomesWorld.MOUNTAINS || biome == BiomesWorld.MOUNTAINS_EDGE || biome == BiomesWorld.HIGH_HILLS || biome == BiomesWorld.HIGH_HILLS_EDGE) &&
+        if ((biome == BiomesWorld.MOUNTAINS || biome == BiomesWorld.MOUNTAINS_EDGE || biome == BiomesWorld.HIGH_HILLS ||
+                biome == BiomesWorld.HIGH_HILLS_EDGE) &&
                 (avgTemperature >= 4 + gauss)) {
             generateBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.3f, 60f + gauss, 200f + gauss, 4 + random.nextInt(10), trees);
         }
@@ -211,11 +212,13 @@ public class GeneratorTrees implements IWorldGenerator {
                 IBlockState down = world.getBlockState(blockPos.down());
                 final Biome b1 = world.getBiome(blockPos);
 
-                if (b1 != BiomesWorld.BAYOU && b1 != BiomesWorld.MARSH && !BiomeUtils.isOceanicBiome(b1) && !BiomeUtils.isLakeBiome(b1) && !BiomeUtils.isBeachBiome(b1) &&
+                if (b1 != BiomesWorld.BAYOU && b1 != BiomesWorld.MARSH && !BiomeUtils.isOceanicBiome(b1) && !BiomeUtils.isLakeBiome(b1) &&
+                        !BiomeUtils.isBeachBiome(b1) &&
                         !BiomeUtils.isMesaBiome(b1)) {
                     if ((BlocksTFC.isSand(down) || BlocksTFC.isSoilOrGravel(down) || BlocksTFCF.isSand(down) || BlocksTFCF.isSoilOrGravel(down)) &&
                             (down != Blocks.HARDENED_CLAY && down != Blocks.STAINED_HARDENED_CLAY)) {
-                        if (15f <= avgTemperature && 40f >= avgTemperature && 65f <= rainfall && 150f >= rainfall && blockPos.getY() >= WorldTypeClassic.SEALEVEL) {
+                        if (15f <= avgTemperature && 40f >= avgTemperature && 65f <= rainfall && 150f >= rainfall &&
+                                blockPos.getY() >= WorldTypeClassic.SEALEVEL) {
                             BlockJoshuaTreeFlower.get(TFCRegistries.TREES.getValue(TreesTFCF.JOSHUA_TREE)).generatePlant(world, blockPos, random, 8);
                         }
                     }
@@ -246,7 +249,8 @@ public class GeneratorTrees implements IWorldGenerator {
         return trees.get(1 + random.nextInt(trees.size() - 1));
     }
 
-    private void generateBush(Random random, int chunkX, int chunkZ, World world, ChunkData chunkData, float minFlora, float maxFlora, float minRainfall, float maxRainfall,
+    private void generateBush(Random random, int chunkX, int chunkZ, World world, ChunkData chunkData, float minFlora, float maxFlora,
+                              float minRainfall, float maxRainfall,
                               int numBushes, List<Tree> trees) {
         final TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
         final float density = chunkData.getFloraDensity();

@@ -8,11 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import su.terrafirmagreg.api.base.tile.spi.ITileFields;
 
-import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TEInventory;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 
 /**
  * This is the mother of all Container-with-a-Tile-Entity implementations
@@ -20,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
  * @param <T> The Tile Entity class
  */
 
-public abstract class ContainerTE<T extends TEInventory> extends ContainerSimple {
+public abstract class ContainerTE<T extends BaseTileInventory> extends ContainerSimple {
 
     protected final T tile;
     protected final EntityPlayer player;

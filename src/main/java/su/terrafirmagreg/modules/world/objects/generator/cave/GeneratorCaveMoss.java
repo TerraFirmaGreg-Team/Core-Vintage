@@ -11,8 +11,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.objects.blocks.plants.BlockCreepingPlantTFCF;
 import net.dries007.tfc.util.climate.Climate;
-import tfcflorae.objects.blocks.plants.BlockCreepingPlantTFCF;
 
 import java.util.Random;
 

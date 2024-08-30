@@ -1,5 +1,8 @@
 package lyeoj.tfcthings.registry;
 
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
+
+
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 
@@ -26,7 +29,6 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -91,12 +93,12 @@ public class RegistryHandlerCommon {
     public static void registerKnappingRecipes(RegistryEvent.Register<KnappingRecipe> event) {
         if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableSling) {
             event.getRegistry()
-                    .register(new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsDevice.SLING),
+                    .register(new KnappingRecipeSimple(KnappingTypes.LEATHER, true, new ItemStack(ItemsDevice.SLING),
                             "  XXX", "    X", " XXXX", "XX   ", "X    ").setRegistryName("sling"));
         }
         if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer) {
             event.getRegistry()
-                    .register(new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(TFCThingsItems.ITEM_PROSPECTORS_HAMMER_MOLD_UNFIRED),
+                    .register(new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TFCThingsItems.ITEM_PROSPECTORS_HAMMER_MOLD_UNFIRED),
                             "XXXXX", " XXX ", "     ", " X X ", "XXXXX").setRegistryName("prospectors_hammer_clay_mold"));
         }
     }
@@ -106,12 +108,12 @@ public class RegistryHandlerCommon {
         if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableCrowns) {
             event.getRegistry().register(new AnvilRecipe(
                     new ResourceLocation(MODID_TFCTHINGS + ":gold_crown"),
-                    IIngredient.of(OreDictionaryHelper.toString(new Object[] { "sheet", "double", DefaultMetals.GOLD.getPath() })),
+                    IIngredient.of(OreDictionaryHelper.toString("sheet", "double", DefaultMetals.GOLD.getPath())),
                     new ItemStack(TFCThingsItems.ITEM_GOLD_CROWN_EMPTY), Metal.Tier.TIER_II, SmithingSkill.Type.ARMOR,
                     ForgeRule.HIT_LAST, ForgeRule.UPSET_SECOND_LAST, ForgeRule.SHRINK_THIRD_LAST));
             event.getRegistry().register(new AnvilRecipe(
                     new ResourceLocation(MODID_TFCTHINGS + ":platinum_crown"),
-                    IIngredient.of(OreDictionaryHelper.toString(new Object[] { "sheet", "double", DefaultMetals.PLATINUM.getPath() })),
+                    IIngredient.of(OreDictionaryHelper.toString("sheet", "double", DefaultMetals.PLATINUM.getPath())),
                     new ItemStack(TFCThingsItems.ITEM_PLATINUM_CROWN_EMPTY), Metal.Tier.TIER_II, SmithingSkill.Type.ARMOR,
                     ForgeRule.HIT_LAST, ForgeRule.UPSET_SECOND_LAST, ForgeRule.SHRINK_THIRD_LAST));
         }
@@ -151,7 +153,7 @@ public class RegistryHandlerCommon {
         if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableWhetstones) {
             event.getRegistry().register(new AnvilRecipe(
                     new ResourceLocation(MODID_TFCTHINGS + ":honing_steel_head"),
-                    IIngredient.of(OreDictionaryHelper.toString(new Object[] { "ingot", "double", DefaultMetals.BLACK_STEEL.getPath() })),
+                    IIngredient.of(OreDictionaryHelper.toString("ingot", "double", DefaultMetals.BLACK_STEEL.getPath())),
                     new ItemStack(TFCThingsItems.ITEM_HONING_STEEL_HEAD), Metal.Tier.TIER_V, GENERAL,
                     SHRINK_LAST, HIT_NOT_LAST, DRAW_NOT_LAST));
         }

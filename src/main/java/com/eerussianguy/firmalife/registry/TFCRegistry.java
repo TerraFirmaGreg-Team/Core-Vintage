@@ -19,7 +19,6 @@ import net.minecraftforge.registries.IForgeRegistryModifiable;
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.FirmaLife;
 import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.init.KnappingFL;
 import com.eerussianguy.firmalife.init.PlantsFL;
 import com.eerussianguy.firmalife.init.StemCrop;
 import com.eerussianguy.firmalife.recipe.KnappingRecipeFood;
@@ -30,7 +29,7 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Metal;
@@ -51,6 +50,7 @@ import net.dries007.tfc.util.skills.SmithingSkill;
 import static net.dries007.tfc.util.forge.ForgeRule.*;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
+import static su.terrafirmagreg.data.Constants.*;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 public class TFCRegistry {
@@ -73,18 +73,19 @@ public class TFCRegistry {
     @SubscribeEvent
     public static void onRegisterKnappingRecipeEvent(RegistryEvent.Register<KnappingRecipe> event) {
         event.getRegistry().registerAll(
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksDevice.OVEN), "XXXXX", "XX XX", "X   X", "X   X",
+                new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(BlocksDevice.OVEN), "XXXXX", "XX XX", "X   X", "X   X",
                         "XXXXX").setRegistryName("clay_oven"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksDevice.OVEN_CHIMNEY), "XX XX", "X   X", "X   X", "X   X",
+                new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(BlocksDevice.OVEN_CHIMNEY), "XX XX", "X   X", "X   X", "X   X",
                         "X   X").setRegistryName("clay_oven_chimney"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksDevice.OVEN_WALL), "    X", "   XX", "   XX", "  XXX",
+                new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(BlocksDevice.OVEN_WALL), "    X", "   XX", "   XX", "  XXX",
                         "  XXX").setRegistryName("clay_oven_wall"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsFL.UNFIRED_MALLET_MOLD), "XXXXX", "     ", "   X ", "XXXXX",
+                new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(ItemsFL.UNFIRED_MALLET_MOLD), "XXXXX", "     ", "   X ", "XXXXX",
                         "XXXXX").setRegistryName("unfired_mallet_mold"),
 
-                new KnappingRecipeFood(KnappingFL.PUMPKIN, true, new ItemStack(ItemSeedsTFC.get(StemCrop.PUMPKIN)), "XXXXX", "X   X", "X   X",
+                new KnappingRecipeFood(KnappingTypes.PUMPKIN, true, new ItemStack(ItemSeedsTFC.get(StemCrop.PUMPKIN)), "XXXXX", "X   X", "X   X",
                         "X   X", "XXXXX").setRegistryName("pumpkin_scoop"),
-                new KnappingRecipeFood(KnappingFL.PUMPKIN, true, new ItemStack(ItemsFL.getFood(FoodFL.PUMPKIN_CHUNKS), 4), "XX XX", "XX XX", "     ",
+                new KnappingRecipeFood(KnappingTypes.PUMPKIN, true, new ItemStack(ItemsFL.getFood(FoodFL.PUMPKIN_CHUNKS), 4), "XX XX", "XX XX",
+                        "     ",
                         "XX XX", "XX XX").setRegistryName("pumpkin_chunk")
         );
 
@@ -92,7 +93,7 @@ public class TFCRegistry {
                 .registerAll(BlocksFL.getAllJackOLanterns()
                         .stream()
                         .map(j -> new KnappingRecipeSimple(
-                                KnappingFL.PUMPKIN, true,
+                                KnappingTypes.PUMPKIN, true,
                                 new ItemStack(Item.getItemFromBlock(j)), j.getCarving().getCraftPattern())
                                 .setRegistryName("pumpkin_carve_" + j.getCarving().getName()))
                         .toArray(KnappingRecipe[]::new));
@@ -215,7 +216,8 @@ public class TFCRegistry {
                 new ItemStack(BlocksDevice.GREENHOUSE_WALL, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, PUNCH_NOT_LAST, SHRINK_LAST));
         r.registerAll(new AnvilRecipe(new ResourceLocation(MODID_FL, "greenhouse_roof"),
                 IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
-                new ItemStack(BlocksDevice.GREENHOUSE_ROOF, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_THIRD_LAST, PUNCH_SECOND_LAST, PUNCH_LAST));
+                new ItemStack(BlocksDevice.GREENHOUSE_ROOF, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_THIRD_LAST, PUNCH_SECOND_LAST,
+                PUNCH_LAST));
         r.registerAll(new AnvilRecipe(new ResourceLocation(MODID_FL, "greenhouse_door"),
                 IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
                 new ItemStack(BlocksDevice.GREENHOUSE_DOOR), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, HIT_NOT_LAST, PUNCH_LAST));
@@ -226,28 +228,36 @@ public class TFCRegistry {
         event.getRegistry().registerAll(
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "bronze_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.BRONZE, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ItemMetal.get(Metal.BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BRONZE.getTier(), SmithingSkill.Type.TOOLS,
+                        iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "bismuth_bronze_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.BISMUTH_BRONZE, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ItemMetal.get(Metal.BISMUTH_BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BISMUTH_BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.BISMUTH_BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BISMUTH_BRONZE.getTier(),
+                        SmithingSkill.Type.TOOLS, iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "black_bronze_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLACK_BRONZE, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ItemMetal.get(Metal.BLACK_BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLACK_BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.BLACK_BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLACK_BRONZE.getTier(),
+                        SmithingSkill.Type.TOOLS, iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "wrought_iron_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.ICE_SAW_HEAD)), Metal.WROUGHT_IRON.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.ICE_SAW_HEAD)), Metal.WROUGHT_IRON.getTier(),
+                        SmithingSkill.Type.TOOLS, iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "steel_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.STEEL, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ItemMetal.get(Metal.STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.STEEL.getTier(), SmithingSkill.Type.TOOLS,
+                        iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "black_steel_ice_saw"), IIngredient.of(
                         new ItemStack(ItemMetal.get(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ItemMetal.get(Metal.BLACK_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLACK_STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.BLACK_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLACK_STEEL.getTier(),
+                        SmithingSkill.Type.TOOLS, iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "red_steel_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.RED_STEEL, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ItemMetal.get(Metal.RED_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.RED_STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.RED_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.RED_STEEL.getTier(),
+                        SmithingSkill.Type.TOOLS, iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "blue_steel_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLUE_STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules)
+                        new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLUE_STEEL.getTier(),
+                        SmithingSkill.Type.TOOLS, iceSawRules)
         );
     }
 }

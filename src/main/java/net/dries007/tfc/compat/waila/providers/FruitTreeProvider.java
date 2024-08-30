@@ -32,11 +32,11 @@ import java.util.List;
 
 public class FruitTreeProvider implements IWailaBlock {
 
-    private static void addInfo(IFruitTree tree, TETickCounter te, float temperature, float rainfall, List<String> currentTooltip) {
+    private static void addInfo(IFruitTree tree, TETickCounter tile, float temperature, float rainfall, List<String> currentTooltip) {
         if (tree.isValidForGrowth(temperature, rainfall)) {
             currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growing").getFormattedText());
-            if (te != null) {
-                long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+            if (tile != null) {
+                long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                 // Don't show 100% since it still needs to check on randomTick to grow
                 float perc = Math.min(0.99F, hours / (tree.getGrowthTime() * (float) ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) * 100;
                 String growth = String.format("%d%%", Math.round(perc));
@@ -56,8 +56,8 @@ public class FruitTreeProvider implements IWailaBlock {
             if (state.getValue(BlockFruitTreeLeaves.HARVESTABLE) && block.getTree()
                     .isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
                 if (state.getValue(BlockFruitTreeLeaves.LEAF_STATE) != BlockFruitTreeLeaves.EnumLeafState.FRUIT) {
-                    TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-                    addInfo(block.getTree(), te, Climate.getActualTemp(world, pos), ChunkData.getRainfall(world, pos), currentTooltip);
+                    var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+                    addInfo(block.getTree(), tile, Climate.getActualTemp(world, pos), ChunkData.getRainfall(world, pos), currentTooltip);
                 }
             } else {
                 currentTooltip.add(new TextComponentTranslation("waila.tfc.agriculture.harvesting_months").getFormattedText());
@@ -68,8 +68,8 @@ public class FruitTreeProvider implements IWailaBlock {
                 }
             }
         } else if (state.getBlock() instanceof BlockFruitTreeSapling block) {
-            TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-            addInfo(block.getTree(), te, Climate.getActualTemp(world, pos), ChunkData.getRainfall(world, pos), currentTooltip);
+            var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+            addInfo(block.getTree(), tile, Climate.getActualTemp(world, pos), ChunkData.getRainfall(world, pos), currentTooltip);
         } else if (state.getBlock() instanceof BlockFruitTreeTrunk) {
             // Gets the top most trunk, since that one is the responsible for growth
             IBlockState topMost = state;
@@ -82,8 +82,8 @@ public class FruitTreeProvider implements IWailaBlock {
                 return currentTooltip;
             }
             BlockFruitTreeTrunk block = (BlockFruitTreeTrunk) topMost.getBlock();
-            TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-            addInfo(block.getTree(), te, Climate.getActualTemp(world, pos), ChunkData.getRainfall(world, pos), currentTooltip);
+            var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+            addInfo(block.getTree(), tile, Climate.getActualTemp(world, pos), ChunkData.getRainfall(world, pos), currentTooltip);
         }
         return currentTooltip;
     }

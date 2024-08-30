@@ -17,9 +17,9 @@ import org.jetbrains.annotations.NotNull;
 @MethodsReturnNonnullByDefault
 public class ContainerLogPile extends BaseContainerTile<TileLogPile> {
 
-    public ContainerLogPile(InventoryPlayer playerInv, TileLogPile te) {
-        super(playerInv, te);
-        te.setContainerOpen(true);
+    public ContainerLogPile(InventoryPlayer playerInv, TileLogPile tile) {
+        super(playerInv, tile);
+        tile.setContainerOpen(true);
     }
 
     @Override

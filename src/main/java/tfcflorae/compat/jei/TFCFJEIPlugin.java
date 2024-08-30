@@ -12,15 +12,15 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.compat.jei.categories.CastingCategory;
 import net.dries007.tfc.compat.jei.categories.KnappingCategory;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
-import tfcflorae.api.knapping.KnappingTypes;
+import net.dries007.tfc.objects.items.rock.ItemMud;
 import tfcflorae.client.GuiKnappingTFCF;
 import tfcflorae.compat.jei.wrappers.KnappingRecipeWrapperTFCF;
-import tfcflorae.objects.items.rock.ItemMud;
 
 import java.util.Collection;
 import java.util.List;

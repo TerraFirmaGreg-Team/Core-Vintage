@@ -15,39 +15,39 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 
-import com.eerussianguy.firmalife.blocks.BlockBeeNest;
-import com.eerussianguy.firmalife.blocks.BlockBeehive;
-import com.eerussianguy.firmalife.blocks.BlockBonsai;
-import com.eerussianguy.firmalife.blocks.BlockBumper;
-import com.eerussianguy.firmalife.blocks.BlockBushTrellis;
-import com.eerussianguy.firmalife.blocks.BlockCheesewheel;
-import com.eerussianguy.firmalife.blocks.BlockCinnamonLeaves;
-import com.eerussianguy.firmalife.blocks.BlockCinnamonLog;
-import com.eerussianguy.firmalife.blocks.BlockCinnamonSapling;
-import com.eerussianguy.firmalife.blocks.BlockClimateStation;
-import com.eerussianguy.firmalife.blocks.BlockHangingPlanter;
-import com.eerussianguy.firmalife.blocks.BlockJackOLantern;
-import com.eerussianguy.firmalife.blocks.BlockJars;
-import com.eerussianguy.firmalife.blocks.BlockLargePlanter;
-import com.eerussianguy.firmalife.blocks.BlockLeafMat;
-import com.eerussianguy.firmalife.blocks.BlockQuadPlanter;
-import com.eerussianguy.firmalife.blocks.BlockSpout;
-import com.eerussianguy.firmalife.blocks.BlockStemCrop;
-import com.eerussianguy.firmalife.blocks.BlockStemFruit;
-import com.eerussianguy.firmalife.blocks.BlockString;
-import com.eerussianguy.firmalife.blocks.BlockTrellis;
-import com.eerussianguy.firmalife.blocks.BlockTurntable;
+import net.dries007.tfc.objects.blocks.BlockBeeNest;
+import net.dries007.tfc.objects.blocks.BlockBeehive;
+import net.dries007.tfc.objects.blocks.BlockBonsai;
+import net.dries007.tfc.objects.blocks.BlockBumper;
+import net.dries007.tfc.objects.blocks.BlockBushTrellis;
+import net.dries007.tfc.objects.blocks.BlockCheesewheel;
+import net.dries007.tfc.objects.blocks.BlockCinnamonLeaves;
+import net.dries007.tfc.objects.blocks.BlockCinnamonLog;
+import net.dries007.tfc.objects.blocks.BlockCinnamonSapling;
+import net.dries007.tfc.objects.blocks.BlockClimateStation;
+import net.dries007.tfc.objects.blocks.BlockHangingPlanter;
+import net.dries007.tfc.objects.blocks.BlockJackOLantern;
+import net.dries007.tfc.objects.blocks.BlockJars;
+import net.dries007.tfc.objects.blocks.BlockLargePlanter;
+import net.dries007.tfc.objects.blocks.BlockLeafMat;
+import net.dries007.tfc.objects.blocks.BlockQuadPlanter;
+import net.dries007.tfc.objects.blocks.BlockSpout;
+import net.dries007.tfc.objects.blocks.BlockStemCrop;
+import net.dries007.tfc.objects.blocks.BlockStemFruit;
+import net.dries007.tfc.objects.blocks.BlockString;
+import net.dries007.tfc.objects.blocks.BlockTrellis;
+import net.dries007.tfc.objects.blocks.BlockTurntable;
 import com.eerussianguy.firmalife.init.BushFL;
 import com.eerussianguy.firmalife.init.FruitTreeFL;
 import com.eerussianguy.firmalife.init.StemCrop;
-import com.eerussianguy.firmalife.items.ItemBlockRot;
-import com.eerussianguy.firmalife.te.TEClimateStation;
-import com.eerussianguy.firmalife.te.TEHangingPlanter;
-import com.eerussianguy.firmalife.te.TELeafMat;
-import com.eerussianguy.firmalife.te.TEPlanter;
-import com.eerussianguy.firmalife.te.TEStemCrop;
-import com.eerussianguy.firmalife.te.TEString;
-import com.eerussianguy.firmalife.te.TETurntable;
+import net.dries007.tfc.objects.items.ItemBlockRot;
+import net.dries007.tfc.objects.te.TEClimateStation;
+import net.dries007.tfc.objects.te.TEHangingPlanter;
+import net.dries007.tfc.objects.te.TELeafMat;
+import net.dries007.tfc.objects.te.TEPlanter;
+import net.dries007.tfc.objects.te.TEStemCrop;
+import net.dries007.tfc.objects.te.TEString;
+import net.dries007.tfc.objects.te.TETurntable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.api.types.IFruitTree;
@@ -288,7 +288,7 @@ public class BlocksFL {
         return block;
     }
 
-    private static <T extends TileEntity> void register(Class<T> te, String name) {
-        TileEntity.register(MODID_FL + ":" + name, te);
+    private static <T extends TileEntity> void register(Class<T> tile, String name) {
+        TileEntity.register(MODID_FL + ":" + name, tile);
     }
 }

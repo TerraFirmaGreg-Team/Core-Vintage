@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -31,8 +32,10 @@ import net.dries007.tfc.api.capability.fluid.FluidTankCallback;
 import net.dries007.tfc.api.capability.fluid.IFluidHandlerSidedCallback;
 import net.dries007.tfc.api.capability.fluid.IFluidTankCallback;
 import net.dries007.tfc.api.recipes.SmelteryRecipe;
-import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TEInventory;
+
+
+import su.terrafirmagreg.api.base.tile.spi.ITileFields;
+
 
 import org.jetbrains.annotations.Nullable;
 
@@ -42,7 +45,7 @@ import java.util.Optional;
 
 import static su.terrafirmagreg.data.Properties.LIT;
 
-public class TileSmelteryCauldron extends TEInventory
+public class TileSmelteryCauldron extends BaseTileInventory
         implements ITickable, IFluidHandlerSidedCallback, IFluidTankCallback, ITileFields, IAmbientalTileProvider,
                    IProviderContainer<ContainerSmelteryCauldron, GuiSmelteryCauldron> {
 

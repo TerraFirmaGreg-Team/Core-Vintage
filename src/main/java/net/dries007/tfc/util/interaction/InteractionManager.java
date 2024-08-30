@@ -21,7 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -45,7 +45,7 @@ public final class InteractionManager {
 
     static {
         // Clay knapping
-        putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "clay") && stack.getCount() >= KnappingType.CLAY.getAmountToConsume(),
+        putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "clay") && stack.getCount() >= KnappingTypes.CLAY.getAmountToConsume(),
                 (worldIn, playerIn, handIn) -> {
                     if (!worldIn.isRemote) {
                         TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.KNAPPING_CLAY);
@@ -54,7 +54,7 @@ public final class InteractionManager {
                 });
 
         // Fire clay knapping
-        putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") && stack.getCount() >= KnappingType.FIRE_CLAY.getAmountToConsume(),
+        putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") && stack.getCount() >= KnappingTypes.FIRE_CLAY.getAmountToConsume(),
                 ((worldIn, playerIn, handIn) -> {
                     if (!worldIn.isRemote) {
                         TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.KNAPPING_FIRE_CLAY);
@@ -93,10 +93,10 @@ public final class InteractionManager {
                         if (stateAt.getBlock() == BlocksDevice.LOG_PILE) {
                             // Clicked on a log pile, so try to insert into the original
                             // This is called first when player is sneaking, otherwise the call chain is passed to the BlockLogPile#onBlockActivated
-                            TileLogPile te = TileUtils.getTile(worldIn, pos, TileLogPile.class);
-                            if (te != null) {
+                            var tile = TileUtils.getTile(worldIn, pos, TileLogPile.class);
+                            if (tile != null) {
                                 if (!player.isSneaking()) {
-                                    if (te.insertLog(stack)) {
+                                    if (tile.insertLog(stack)) {
                                         if (!worldIn.isRemote) {
                                             worldIn.playSound(null, pos.offset(direction), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
                                                     1.0F);
@@ -106,7 +106,7 @@ public final class InteractionManager {
                                         return EnumActionResult.SUCCESS;
                                     }
                                 } else {
-                                    int inserted = te.insertLogs(stack.copy());
+                                    int inserted = tile.insertLogs(stack.copy());
                                     if (inserted > 0) {
                                         if (!worldIn.isRemote) {
                                             worldIn.playSound(null, pos.offset(direction), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
@@ -132,9 +132,9 @@ public final class InteractionManager {
                                     worldIn.setBlockState(posAt,
                                             BlocksDevice.LOG_PILE.getStateForPlacement(worldIn, posAt, direction, 0, 0, 0, 0, player));
 
-                                    TileLogPile te = TileUtils.getTile(worldIn, posAt, TileLogPile.class);
-                                    if (te != null) {
-                                        te.insertLog(stack.copy());
+                                    var tile = TileUtils.getTile(worldIn, posAt, TileLogPile.class);
+                                    if (tile != null) {
+                                        tile.insertLog(stack.copy());
                                     }
 
                                     worldIn.playSound(null, posAt, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);

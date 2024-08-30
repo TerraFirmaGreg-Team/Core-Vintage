@@ -40,8 +40,7 @@ public class EntityAIFindNest extends EntityAIBase {
 
     @Override
     public boolean shouldExecute() {
-        if (theCreature instanceof IAnimal && ((IAnimal) theCreature).getType() == IAnimal.Type.OVIPAROUS) {
-            IAnimal animal = (IAnimal) theCreature;
+        if (theCreature instanceof IAnimal animal && animal.getType() == IAnimal.Type.OVIPAROUS) {
             return animal.isReadyForAnimalProduct() && this.getNearbyNest();
         }
         return false;
@@ -80,22 +79,21 @@ public class EntityAIFindNest extends EntityAIBase {
                 this.end = true;
             }
         } else {
-            TileNestBox te = TileUtils.getTile(this.theWorld, nestPos, TileNestBox.class);
-            if (te != null && theCreature instanceof IAnimal && ((IAnimal) theCreature).getType() == IAnimal.Type.OVIPAROUS) {
-                IAnimal animal = (IAnimal) theCreature;
-                if (!te.hasBird()) {
-                    te.seatOnThis(theCreature);
+            var tile = TileUtils.getTile(this.theWorld, nestPos, TileNestBox.class);
+            if (tile != null && theCreature instanceof IAnimal animal && animal.getType() == IAnimal.Type.OVIPAROUS) {
+                if (!tile.hasBird()) {
+                    tile.seatOnThis(theCreature);
                     this.currentTick = 0;
                 }
                 if (this.currentTick >= this.maxSittingTicks) {
                     List<ItemStack> eggs = animal.getProducts();
                     for (ItemStack egg : eggs) {
-                        te.insertEgg(egg);
+                        tile.insertEgg(egg);
                     }
                     animal.setFertilized(false);
                     animal.setProductsCooldown();
                     this.end = true;
-                } else if (te.getBird() != theCreature) {
+                } else if (tile.getBird() != theCreature) {
                     //Used by another bird, give up on this one for now
                     failureDepressionMap.put(nestPos, theWorld.getTotalWorldTime() + ICalendar.TICKS_IN_HOUR * 4);
                     this.end = true;
@@ -131,7 +129,7 @@ public class EntityAIFindNest extends EntityAIBase {
             else
                 failureDepressionMap.remove(pos);
         }
-        TileNestBox te = TileUtils.getTile(world, pos, TileNestBox.class);
-        return te != null && te.hasFreeSlot() && (!te.hasBird() || te.getBird() == this.theCreature);
+        var tile = TileUtils.getTile(world, pos, TileNestBox.class);
+        return tile != null && tile.hasFreeSlot() && (!tile.hasBird() || tile.getBird() == this.theCreature);
     }
 }

@@ -33,17 +33,17 @@ public class ItemBlockTorch extends ItemBlockTFC {
             if (count > 160) {
                 if (state.getBlock() == BlocksDevice.LOG_PILE) {
                     world.setBlockState(pos, state.withProperty(LIT, true));
-                    TileLogPile te = TileUtils.getTile(world, pos, TileLogPile.class);
-                    if (te != null) {
-                        te.light();
+                    var tile = TileUtils.getTile(world, pos, TileLogPile.class);
+                    if (tile != null) {
+                        tile.light();
                     }
                     if (Blocks.FIRE.canPlaceBlockAt(world, pos.up())) {
                         world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
                     }
                 } else if (state.getBlock() == BlocksDevice.PIT_KILN) {
-                    TilePitKiln te = TileUtils.getTile(world, pos, TilePitKiln.class);
-                    if (te != null) {
-                        te.tryLight();
+                    var tile = TileUtils.getTile(world, pos, TilePitKiln.class);
+                    if (tile != null) {
+                        tile.tryLight();
                     }
                 }
                 entityItem.setDead();

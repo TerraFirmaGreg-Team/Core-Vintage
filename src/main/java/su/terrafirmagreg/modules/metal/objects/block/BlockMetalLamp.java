@@ -197,7 +197,8 @@ public class BlockMetalLamp
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                    float hitX, float hitY, float hitZ) {
         var tile = TileUtils.getTile(worldIn, pos, TileMetalLamp.class);
         ItemStack stack = playerIn.getHeldItem(hand);
         if (!worldIn.isRemote && tile != null) {
@@ -225,7 +226,8 @@ public class BlockMetalLamp
      * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the IBlockstate
      */
     @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer) {
         if (this.canPlaceAt(worldIn, pos, facing)) {
             return this.getDefaultState().withProperty(VERTICAL, facing);
         } else if (this.canPlaceAt(worldIn, pos, EnumFacing.UP)) {
@@ -238,8 +240,8 @@ public class BlockMetalLamp
     }
 
     @Override
-    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack tool) {
-        super.harvestBlock(world, player, pos, state, te, tool);
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack tool) {
+        super.harvestBlock(world, player, pos, state, tile, tool);
         world.setBlockToAir(pos);
     }
 

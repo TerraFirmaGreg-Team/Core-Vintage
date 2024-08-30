@@ -74,9 +74,9 @@ public class BlockSaplingTFC extends BlockBush implements IGrowable, IGrowingPla
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-        if (te != null) {
-            te.resetCounter();
+        var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+        if (tile != null) {
+            tile.resetCounter();
         }
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     }
@@ -113,9 +113,9 @@ public class BlockSaplingTFC extends BlockBush implements IGrowable, IGrowingPla
         super.updateTick(world, pos, state, random);
 
         if (!world.isRemote) {
-            TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-            if (te != null) {
-                long days = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
+            var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+            if (tile != null) {
+                long days = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
                 if (days > wood.getMinGrowthTime()) {
                     grow(world, random, pos, state);
                 }

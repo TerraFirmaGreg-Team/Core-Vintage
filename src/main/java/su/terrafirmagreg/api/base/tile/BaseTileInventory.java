@@ -16,14 +16,13 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.api.capability.inventory.ItemStackHandlerCallback;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiFunction;
 
 /**
- * This is a helper class for TE's with a simple inventory that will respect automation To provide side based automation, you must expose a IItemHandler wrapper based on the input
- * side Without overriding the getCapability methods, this will not accept items from external automation
+ * This is a helper class for TE's with a simple inventory that will respect automation To provide side based automation, you must expose a
+ * IItemHandler wrapper based on the input side Without overriding the getCapability methods, this will not accept items from external automation
  */
 
 public abstract class BaseTileInventory extends BaseTile implements ISlotCallback {
@@ -48,25 +47,25 @@ public abstract class BaseTileInventory extends BaseTile implements ISlotCallbac
     }
 
     @Override
-    public void readFromNBT(@NotNull NBTTagCompound nbt) {
+    public void readFromNBT(NBTTagCompound nbt) {
         inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
         super.readFromNBT(nbt);
     }
 
     @Override
-    public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setTag("inventory", inventory.serializeNBT());
         return super.writeToNBT(nbt);
     }
 
     @Override
-    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         return (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == null) || super.hasCapability(capability, facing);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == null) {
             return (T) inventory;
         }

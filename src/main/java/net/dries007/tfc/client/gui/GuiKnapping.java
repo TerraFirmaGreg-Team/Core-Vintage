@@ -1,5 +1,8 @@
 package net.dries007.tfc.client.gui;
 
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
+
+
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -82,10 +85,10 @@ public class GuiKnapping extends GuiContainerTFC {
             ((ContainerKnapping) inventorySlots).requiresReset = false;
         }
         super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-        if (type == KnappingType.CLAY || type == KnappingType.FIRE_CLAY) {
+        if (type == KnappingTypes.CLAY || type == KnappingTypes.FIRE_CLAY) {
             GlStateManager.color(1, 1, 1, 1);
             mc.getTextureManager()
-                    .bindTexture(type == KnappingType.CLAY ? TFCGuiHandler.CLAY_DISABLED_TEXTURE : TFCGuiHandler.FIRE_CLAY_DISABLED_TEXTURE);
+                    .bindTexture(type == KnappingTypes.CLAY ? TFCGuiHandler.CLAY_DISABLED_TEXTURE : TFCGuiHandler.FIRE_CLAY_DISABLED_TEXTURE);
             for (GuiButton button : buttonList) {
                 if (!button.visible) {
                     Gui.drawModalRectWithCustomSizedTexture(button.x, button.y, 0, 0, 16, 16, 16, 16);

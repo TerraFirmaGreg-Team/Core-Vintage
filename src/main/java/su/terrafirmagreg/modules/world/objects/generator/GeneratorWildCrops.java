@@ -13,11 +13,11 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.Climate;
-import tfcflorae.objects.blocks.BlocksTFCF;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +34,8 @@ public class GeneratorWildCrops implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0 && !CROPS.isEmpty() && ConfigTFC.General.FOOD.cropRarity > 0) {
+        if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0 && !CROPS.isEmpty() &&
+                ConfigTFC.General.FOOD.cropRarity > 0) {
             if (random.nextInt(ConfigTFC.General.FOOD.cropRarity) == 0) {
                 // Guarantees crop generation if possible (easier to balance by config file while also making it random)
                 BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);

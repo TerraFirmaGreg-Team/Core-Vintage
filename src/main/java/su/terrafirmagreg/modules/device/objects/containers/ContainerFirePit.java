@@ -18,10 +18,10 @@ public class ContainerFirePit extends ContainerTE<TileFirePit> {
 
     private final BlockFirePit.FirePitAttachment attachment;
 
-    public ContainerFirePit(InventoryPlayer playerInv, TileFirePit te) {
-        super(playerInv, te);
+    public ContainerFirePit(InventoryPlayer playerInv, TileFirePit tile) {
+        super(playerInv, tile);
 
-        attachment = te.getWorld().getBlockState(te.getPos()).getValue(BlockFirePit.ATTACHMENT);
+        attachment = tile.getWorld().getBlockState(tile.getPos()).getValue(BlockFirePit.ATTACHMENT);
     }
 
     @Override

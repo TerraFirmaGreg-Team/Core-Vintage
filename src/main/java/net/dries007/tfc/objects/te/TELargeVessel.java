@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
@@ -33,7 +34,7 @@ import static net.dries007.tfc.objects.blocks.BlockLargeVessel.SEALED;
  * @see BlockLargeVessel
  */
 
-public class TELargeVessel extends TEInventory implements IItemHandlerSidedCallback {
+public class TELargeVessel extends BaseTileInventory implements IItemHandlerSidedCallback {
 
     private boolean sealed;
     private long sealedTick, sealedCalendarTick;
@@ -43,7 +44,8 @@ public class TELargeVessel extends TEInventory implements IItemHandlerSidedCallb
     }
 
     /**
-     * Called when this TileEntity was created by placing a sealed Barrel Item. Loads its data from the Item's NBTTagCompound without loading xyz coordinates.
+     * Called when this TileEntity was created by placing a sealed Barrel Item. Loads its data from the Item's NBTTagCompound without loading xyz
+     * coordinates.
      *
      * @param nbt The NBTTagCompound to load from.
      */
@@ -56,7 +58,8 @@ public class TELargeVessel extends TEInventory implements IItemHandlerSidedCallb
     }
 
     /**
-     * Called once per side when the TileEntity has finished loading. On servers, this is the earliest point in time to safely access the TE's World object.
+     * Called once per side when the TileEntity has finished loading. On servers, this is the earliest point in time to safely access the TE's World
+     * object.
      */
     @Override
     public void onLoad() {

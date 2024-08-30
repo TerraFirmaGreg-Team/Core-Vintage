@@ -12,6 +12,12 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
 
 
+import com.eerussianguy.firmalife.recipe.CrackingRecipe;
+import com.eerussianguy.firmalife.recipe.DryingRecipe;
+import com.eerussianguy.firmalife.recipe.NutRecipe;
+import com.eerussianguy.firmalife.recipe.OvenRecipe;
+import com.eerussianguy.firmalife.recipe.PlanterRecipe;
+import com.eerussianguy.firmalife.recipe.StrainingRecipe;
 import net.dries007.tfc.api.recipes.AlloyRecipe;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
@@ -65,6 +71,13 @@ public final class Registries {
         newRegistry(BLAST_FURNACE_RECIPE, BlastFurnaceRecipe.class, false);
         newRegistry(SMELTERY, SmelteryRecipe.class, false);
         newRegistry(GLASSWORKING, GlassworkingRecipe.class, false);
+
+        newRegistry(OVEN_RECIPE, OvenRecipe.class, false);
+        newRegistry(DRYING_RECIPE, DryingRecipe.class, false);
+        newRegistry(PLANTER_QUAD_REGISTRY, PlanterRecipe.class, false);
+        newRegistry(NUT_TREES_REGISTRY, NutRecipe.class, false);
+        newRegistry(CRACKING_RECIPE, CrackingRecipe.class, false);
+        newRegistry(STRAINING_RECIPE, StrainingRecipe.class, false);
     }
 
     /**

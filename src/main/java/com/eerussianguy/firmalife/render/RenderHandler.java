@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import com.eerussianguy.firmalife.blocks.BlockClimateStation;
+import net.dries007.tfc.objects.blocks.BlockClimateStation;
 import com.eerussianguy.firmalife.util.ClientHelpers;
 
 import java.util.LinkedList;

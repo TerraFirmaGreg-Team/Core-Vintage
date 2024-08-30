@@ -22,22 +22,23 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
 
-import com.eerussianguy.firmalife.init.RegistriesFL;
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.objects.blocks.blocktype.farmland.FarmlandTFCF;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.objects.items.ItemsTFCF;
+import net.dries007.tfc.objects.items.food.ItemFoodTFCF;
 import net.dries007.tfc.util.agriculture.Crop;
-import tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
-import tfcflorae.objects.items.ItemsTFCF;
-import tfcflorae.objects.items.food.ItemFoodTFCF;
-import tfcflorae.util.agriculture.CropTFCF;
+import net.dries007.tfc.util.agriculture.CropTFCF;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Supplier;
 
 import static net.minecraftforge.fml.common.eventhandler.EventPriority.LOW;
+import static su.terrafirmagreg.data.Constants.*;
 
 @Mod(modid = MODID_FF, name = FloraeFixes.name, version = Tags.MOD_VERSION, dependencies = "after:firmalife;after:tfcflorae")
 public class FloraeFixes {
@@ -51,14 +52,14 @@ public class FloraeFixes {
     public static void removeRecipe(Item i) {
         ItemStack output = new ItemStack(i);
         ArrayList<PlanterRecipe> removeList = new ArrayList();
-        RegistriesFL.PLANTER_QUAD.getValuesCollection().stream().filter((x) -> {
+        TFCRegistries.PLANTER_QUAD.getValuesCollection().stream().filter((x) -> {
             return x.getOutputItem(ItemStack.EMPTY).isItemEqual(output);
         }).forEach(removeList::add);
         Iterator var2 = removeList.iterator();
 
         while (var2.hasNext()) {
             final PlanterRecipe recipe = (PlanterRecipe) var2.next();
-            IForgeRegistryModifiable<PlanterRecipe> Planter = (IForgeRegistryModifiable) RegistriesFL.PLANTER_QUAD;
+            IForgeRegistryModifiable<PlanterRecipe> Planter = (IForgeRegistryModifiable) TFCRegistries.PLANTER_QUAD;
             Planter.remove(recipe.getRegistryName());
         }
     }

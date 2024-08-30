@@ -1,8 +1,9 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.data.lib.MathConstants;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.data.lib.MathConstants;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
@@ -48,8 +49,11 @@ import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.objects.items.food.ItemDynamicBowlFood;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
-import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TETickableInventory;
+
+
+import su.terrafirmagreg.api.base.tile.spi.ITileFields;
+
+
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
@@ -69,8 +73,9 @@ import java.util.Queue;
 import static su.terrafirmagreg.data.Properties.LIT;
 import static su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit.ATTACHMENT;
 
-public class TileFirePit extends TETickableInventory
-        implements ICalendarTickable, ITileFields, IItemHandlerSidedCallback, IAmbientalTileProvider, IProviderContainer<ContainerFirePit, GuiFirePit> {
+public class TileFirePit extends BaseTileTickableInventory
+        implements ICalendarTickable, ITileFields, IItemHandlerSidedCallback, IAmbientalTileProvider,
+                   IProviderContainer<ContainerFirePit, GuiFirePit> {
 
     // Slot 0 - 3 = fuel slots with 3 being input, 4 = normal input slot, 5 and 6 are output slots 1 + 2
     public static final int SLOT_FUEL_CONSUME = 0;

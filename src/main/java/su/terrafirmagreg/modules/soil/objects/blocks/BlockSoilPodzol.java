@@ -16,6 +16,8 @@ import net.minecraft.world.IBlockAccess;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.*;
+
 @SuppressWarnings("deprecation")
 public class BlockSoilPodzol extends BlockSoil {
 

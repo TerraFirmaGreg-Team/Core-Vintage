@@ -88,11 +88,11 @@ public abstract class BlockHPBase extends Block implements ICapabilitySize {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
                                     float hitX, float hitY, float hitZ) {
         ItemStack stack = playerIn.getHeldItem(hand);
-        TileEntityHPBase te = (TileEntityHPBase) worldIn.getTileEntity(pos);
+        TileEntityHPBase tile = (TileEntityHPBase) worldIn.getTileEntity(pos);
         TileEntityHPHorseBase teH = null;
-        if (te == null) return false;
-        if (te instanceof TileEntityHPHorseBase)
-            teH = (TileEntityHPHorseBase) te;
+        if (tile == null) return false;
+        if (tile instanceof TileEntityHPHorseBase)
+            teH = (TileEntityHPHorseBase) tile;
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
@@ -123,16 +123,16 @@ public abstract class BlockHPBase extends Block implements ICapabilitySize {
             } else {
                 return false;
             }
-        } else if (!stack.isEmpty() && te.isItemValidForSlot(0, stack)) {
-            ItemStack itemStack = te.getStackInSlot(0);
+        } else if (!stack.isEmpty() && tile.isItemValidForSlot(0, stack)) {
+            ItemStack itemStack = tile.getStackInSlot(0);
             boolean flag = false;
 
             if (itemStack.isEmpty()) {
-                te.setInventorySlotContents(0, stack.copy());
-                stack.setCount(stack.getCount() - te.getInventoryStackLimit(stack));
+                tile.setInventorySlotContents(0, stack.copy());
+                stack.setCount(stack.getCount() - tile.getInventoryStackLimit(stack));
                 flag = true;
             } else if (TileEntityHPBase.canCombine(itemStack, stack)) {
-                int i = Math.min(te.getInventoryStackLimit(stack), stack.getMaxStackSize()) - itemStack.getCount();
+                int i = Math.min(tile.getInventoryStackLimit(stack), stack.getMaxStackSize()) - itemStack.getCount();
                 int j = Math.min(stack.getCount(), i);
                 stack.shrink(j);
                 itemStack.grow(j);
@@ -146,13 +146,13 @@ public abstract class BlockHPBase extends Block implements ICapabilitySize {
         int slot = getSlot(state.getBlock().getExtendedState(state, worldIn, pos), hitX, hitY, hitZ);
         ItemStack result = ItemStack.EMPTY;
         if (slot > -1) {
-            result = te.removeStackFromSlot(slot);
+            result = tile.removeStackFromSlot(slot);
         } else if (slot > -2) {
-            result = te.removeStackFromSlot(1);
+            result = tile.removeStackFromSlot(1);
             if (result.isEmpty()) {
-                result = te.removeStackFromSlot(2);
+                result = tile.removeStackFromSlot(2);
                 if (result.isEmpty() && stack.isEmpty() && hand != EnumHand.OFF_HAND) {
-                    result = te.removeStackFromSlot(0);
+                    result = tile.removeStackFromSlot(0);
                 }
             }
             if (!result.isEmpty())
@@ -169,7 +169,7 @@ public abstract class BlockHPBase extends Block implements ICapabilitySize {
         if (!result.isEmpty())
             ItemHandlerHelper.giveItemToPlayer(playerIn, result, EntityEquipmentSlot.MAINHAND.getSlotIndex());
 
-        te.markDirty();
+        tile.markDirty();
         return true;
     }
 
@@ -178,11 +178,11 @@ public abstract class BlockHPBase extends Block implements ICapabilitySize {
         super.onBlockHarvested(worldIn, pos, state, player);
 
         if (!player.capabilities.isCreativeMode && !worldIn.isRemote) {
-            TileEntityHPBase te = getTileEntity(worldIn, pos);
+            TileEntityHPBase tile = getTileEntity(worldIn, pos);
 
-            if (te != null) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, te.getInventory());
-                if (te instanceof TileEntityHPHorseBase && ((TileEntityHPHorseBase) te).hasWorker())
+            if (tile != null) {
+                InventoryHelper.dropInventoryItems(worldIn, pos, tile.getInventory());
+                if (tile instanceof TileEntityHPHorseBase && ((TileEntityHPHorseBase) tile).hasWorker())
                     InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY() + 1, pos.getZ(), new ItemStack(Items.LEAD));
             }
         }

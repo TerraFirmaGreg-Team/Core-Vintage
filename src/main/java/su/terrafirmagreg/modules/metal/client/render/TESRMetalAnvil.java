@@ -16,12 +16,12 @@ import org.jetbrains.annotations.NotNull;
 public class TESRMetalAnvil extends TileEntitySpecialRenderer<TileMetalAnvil> {
 
     @Override
-    public void render(@NotNull TileMetalAnvil te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+    public void render(@NotNull TileMetalAnvil tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
-        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null) {
-            int rotation = te.getBlockMetadata();
+            int rotation = tile.getBlockMetadata();
 
             GlStateManager.pushMatrix();
             GlStateManager.translate(x + 0.5, y + 0.003125D + 0.6875f, z + 0.5);

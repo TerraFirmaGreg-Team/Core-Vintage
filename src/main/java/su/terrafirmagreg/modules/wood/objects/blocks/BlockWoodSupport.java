@@ -28,6 +28,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static su.terrafirmagreg.data.Properties.*;
+
 @SuppressWarnings("deprecation")
 public class BlockWoodSupport extends BlockWood {
 
@@ -70,7 +72,8 @@ public class BlockWoodSupport extends BlockWood {
         if (!worldIn.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32))) {
             return true; // If world isn't loaded...
         }
-        for (BlockPos.MutableBlockPos searchSupport : BlockPos.getAllInBoxMutable(pos.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg), pos.add(sRangeHor, sRangeVert, sRangeHor))) {
+        for (BlockPos.MutableBlockPos searchSupport : BlockPos.getAllInBoxMutable(pos.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
+                pos.add(sRangeHor, sRangeVert, sRangeHor))) {
             IBlockState st = worldIn.getBlockState(searchSupport);
             if (st.getBlock() instanceof BlockWoodSupport blockWoodSupport) {
                 if (blockWoodSupport.canSupportBlocks(worldIn, searchSupport)) {
@@ -82,8 +85,8 @@ public class BlockWoodSupport extends BlockWood {
     }
 
     /**
-     * This is an optimized way to check for blocks that aren't supported during a cave in, instead of checking every single block individually and calling
-     * BlockSupper#isBeingSupported
+     * This is an optimized way to check for blocks that aren't supported during a cave in, instead of checking every single block individually and
+     * calling BlockSupper#isBeingSupported
      */
     public static Set<BlockPos> getAllUnsupportedBlocksIn(World worldIn, BlockPos from, BlockPos to) {
         Set<BlockPos> listSupported = new HashSet<>();
@@ -123,7 +126,8 @@ public class BlockWoodSupport extends BlockWood {
         //Searching point wasn't from points between from <-> to but
         //Time to remove the outsides that were added for convenience
         listUnsupported.removeIf(
-                content -> content.getX() < minX || content.getX() > maxX || content.getY() < minY || content.getY() > maxY || content.getZ() < minZ || content.getZ() > maxZ);
+                content -> content.getX() < minX || content.getX() > maxX || content.getY() < minY || content.getY() > maxY ||
+                        content.getZ() < minZ || content.getZ() > maxZ);
 
         return listUnsupported;
     }
@@ -166,7 +170,8 @@ public class BlockWoodSupport extends BlockWood {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
+                                      @Nullable Entity entityIn,
                                       boolean isActualState) {
         EnumFacing.Axis axis = state.getValue(AXIS);
         if (axis == EnumFacing.Axis.Y) {
@@ -208,7 +213,8 @@ public class BlockWoodSupport extends BlockWood {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX,
+                                    float hitY, float hitZ) {
         ItemStack heldStack = player.getHeldItem(hand);
         if (player.isSneaking() && heldStack.getItem() instanceof ItemBlock itemBlock) {
             Block block = itemBlock.getBlock();
@@ -232,7 +238,8 @@ public class BlockWoodSupport extends BlockWood {
     }
 
     @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer) {
         return this.getDefaultState().withProperty(AXIS, facing.getAxis());
     }
 

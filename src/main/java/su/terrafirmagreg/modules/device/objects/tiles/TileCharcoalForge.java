@@ -1,8 +1,9 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.data.lib.MathConstants;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.data.lib.MathConstants;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
@@ -32,8 +33,11 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
-import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TETickableInventory;
+
+
+import su.terrafirmagreg.api.base.tile.spi.ITileFields;
+
+
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.dries007.tfc.util.fuel.Fuel;
@@ -46,7 +50,7 @@ import java.util.Optional;
 
 import static su.terrafirmagreg.data.Properties.LIT;
 
-public class TileCharcoalForge extends TETickableInventory
+public class TileCharcoalForge extends BaseTileTickableInventory
         implements ICalendarTickable, ITileFields, IAmbientalTileProvider, IProviderContainer<ContainerCharcoalForge, GuiCharcoalForge> {
 
     public static final int SLOT_FUEL_MIN = 0;

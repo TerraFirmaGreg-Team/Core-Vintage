@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import tfcflorae.objects.items.ItemsTFCF;
+import net.dries007.tfc.objects.items.ItemsTFCF;
 
 import static su.terrafirmagreg.data.Constants.MODID_FL;
 import static su.terrafirmagreg.data.Constants.MODID_TFCF;

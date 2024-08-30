@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.render;
 
+import su.terrafirmagreg.data.Properties;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -10,10 +12,9 @@ import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
 
-import com.eerussianguy.firmalife.blocks.BlockQuadPlanter;
-import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import com.google.common.collect.ImmutableMap;
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.objects.blocks.BlockQuadPlanter;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -39,9 +40,8 @@ public class QuadPlanterBakedModel extends LargePlanterBakedModel implements IBa
         if (state == null || !(state.getBlock() instanceof BlockQuadPlanter))
             return bake(dummy).getQuads(state, side, rand);
         Map<String, String> sprites = new HashMap<>();
-        sprites.put("soil", MODID_FL + (state.getValue(StatePropertiesFL.WET) ? ":blocks/potting_soil_wet" : ":blocks/potting_soil_dry"));
-        if (state instanceof IExtendedBlockState) {
-            IExtendedBlockState extendedState = (IExtendedBlockState) state;
+        sprites.put("soil", MODID_FL + (state.getValue(Properties.WET) ? ":blocks/potting_soil_wet" : ":blocks/potting_soil_dry"));
+        if (state instanceof IExtendedBlockState extendedState) {
             sprites.put("crop1", resolveTexture(extendedState, BlockQuadPlanter.CROP_1));
             sprites.put("crop2", resolveTexture(extendedState, BlockQuadPlanter.CROP_2));
             sprites.put("crop3", resolveTexture(extendedState, BlockQuadPlanter.CROP_3));

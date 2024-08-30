@@ -38,9 +38,9 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
     }
 
     @Override
-    public void render(TilePitKiln te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TilePitKiln tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-        World world = te.getWorld();
+        World world = tile.getWorld();
         //noinspection ConstantConditions
         if (world == null) return;
 
@@ -50,14 +50,14 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
         GlStateManager.translate(x, y, z);
 
         GlStateManager.pushMatrix();
-        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null) {
             float timeD = (float) (360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
             GlStateManager.translate(0.25, 0.25, 0.25);
             RenderHelper.enableStandardItemLighting();
             GlStateManager.pushAttrib();
 
-            if (te.holdingLargeItem()) {
+            if (tile.holdingLargeItem()) {
                 GlStateManager.scale(1.0F, 1.0F, 1.0F);
                 ItemStack stack = cap.getStackInSlot(0);
                 if (!stack.isEmpty()) {
@@ -84,7 +84,7 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
             GlStateManager.popAttrib();
             GlStateManager.popMatrix();
 
-            int straw = te.getStrawCount();
+            int straw = tile.getStrawCount();
             if (straw != 0) {
                 GlStateManager.pushMatrix();
                 GlStateManager.pushAttrib();
@@ -98,7 +98,7 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
                 GlStateManager.popMatrix();
             }
 
-            int logs = te.getLogCount();
+            int logs = tile.getLogCount();
             if (logs != 0) {
                 GlStateManager.pushMatrix();
                 GlStateManager.pushAttrib();

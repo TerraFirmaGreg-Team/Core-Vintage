@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
-import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.device.client.render.TESROven;
@@ -73,8 +73,8 @@ public class BlockOven extends BaseBlock implements IProviderTile {
     }
 
     /**
-     * This is a local way for an oven to check if it's valid. Does not care about chimneys. The ifs are nested like that for readability, I know it's not something a real dev
-     * would write.
+     * This is a local way for an oven to check if it's valid. Does not care about chimneys. The ifs are nested like that for readability, I know it's
+     * not something a real dev would write.
      *
      * @param world     The world! What more did you want
      * @param ovenPos   The oven
@@ -169,7 +169,8 @@ public class BlockOven extends BaseBlock implements IProviderTile {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
+                                    float hitY, float hitZ) {
         if (!world.isRemote) {
             if (!state.getValue(LIT)) {
                 ItemStack held = player.getHeldItem(hand);
@@ -217,9 +218,9 @@ public class BlockOven extends BaseBlock implements IProviderTile {
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!worldIn.isRemote) {
             if (state.getValue(LIT) && !isValidHorizontal(worldIn, pos, false)) {
-                TileOven te = TileUtils.getTile(worldIn, pos, TileOven.class);
-                if (te != null) {
-                    te.turnOff();
+                var tile = TileUtils.getTile(worldIn, pos, TileOven.class);
+                if (tile != null) {
+                    tile.turnOff();
                 }
             }
         }
@@ -229,9 +230,9 @@ public class BlockOven extends BaseBlock implements IProviderTile {
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
         if (state.getValue(LIT)) {
             if (!isValidHorizontal(world, pos, false)) {
-                TileOven te = TileUtils.getTile(world, pos, TileOven.class);
-                if (te != null) {
-                    te.turnOff();
+                var tile = TileUtils.getTile(world, pos, TileOven.class);
+                if (tile != null) {
+                    tile.turnOff();
                 }
             } else {
                 EnumFacing facing = state.getValue(FACING);
@@ -267,7 +268,8 @@ public class BlockOven extends BaseBlock implements IProviderTile {
                     default -> TFCParticles.FIRE_PIT_SMOKE1;
                 };
                 //chimney particles
-                particle.spawn(worldIn, pos.getX() + (rand.nextFloat() / 2) + 0.25, pos.getY() + 3, pos.getZ() + (rand.nextFloat() / 2) + 0.25, 0f, 0.2F + rand.nextFloat() / 2, 0f,
+                particle.spawn(worldIn, pos.getX() + (rand.nextFloat() / 2) + 0.25, pos.getY() + 3, pos.getZ() + (rand.nextFloat() / 2) + 0.25, 0f,
+                        0.2F + rand.nextFloat() / 2, 0f,
                         110);
             }
             // inside the oven
@@ -283,7 +285,8 @@ public class BlockOven extends BaseBlock implements IProviderTile {
     }
 
     @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer) {
         if (facing.getAxis() == EnumFacing.Axis.Y) {
             facing = placer.getHorizontalFacing().getOpposite();
         }
@@ -316,9 +319,9 @@ public class BlockOven extends BaseBlock implements IProviderTile {
 
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TileOven te = TileUtils.getTile(world, pos, TileOven.class);
-        if (te != null) {
-            te.onBreakBlock(world, pos, state);
+        var tile = TileUtils.getTile(world, pos, TileOven.class);
+        if (tile != null) {
+            tile.onBreakBlock(world, pos, state);
         }
         super.breakBlock(world, pos, state);
     }

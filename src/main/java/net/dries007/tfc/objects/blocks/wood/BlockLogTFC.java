@@ -1,11 +1,11 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyBool;
@@ -149,12 +149,12 @@ public class BlockLogTFC extends BlockLog implements ICapabilitySize {
     }
 
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack stack) {
         // Do this check again, so we can drop items now
         final Set<String> toolClasses = stack.getItem().getToolClasses(stack);
         if (toolClasses.contains("axe") || toolClasses.contains("saw")) {
             // Harvest the block normally, saws and axes are valid tools regardless
-            super.harvestBlock(worldIn, player, pos, state, te, stack);
+            super.harvestBlock(worldIn, player, pos, state, tile, stack);
         } else if (toolClasses.contains("hammer") && ConfigTFC.General.TREE.enableHammerSticks) {
             // Hammers drop sticks here - we duplicate the original method
             //noinspection ConstantConditions
@@ -171,7 +171,7 @@ public class BlockLogTFC extends BlockLog implements ICapabilitySize {
             player.addExhaustion(0.005F);
         } else {
             // No tool, but handle normally
-            super.harvestBlock(worldIn, player, pos, state, te, stack);
+            super.harvestBlock(worldIn, player, pos, state, tile, stack);
         }
     }
 

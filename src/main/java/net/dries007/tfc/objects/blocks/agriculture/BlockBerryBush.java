@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.DamageSources;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -194,9 +194,9 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
             if (!worldIn.isRemote) {
                 ItemHandlerHelper.giveItemToPlayer(playerIn, bush.getFoodDrop());
                 worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(FRUITING, false));
-                TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-                if (te != null) {
-                    te.resetCounter();
+                var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+                if (tile != null) {
+                    tile.resetCounter();
                 }
             }
             return true;
@@ -206,7 +206,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 
     @Override
     public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (!(entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative())) {
+        if (!(entityIn instanceof EntityPlayer entityPlayer && entityPlayer.isCreative())) {
             // Entity motion is reduced (like leaves).
             entityIn.motionX *= ConfigTFC.General.MISC.berryBushMovementModifier;
             if (entityIn.motionY < 0) {

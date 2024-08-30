@@ -142,9 +142,9 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
             if (!worldIn.isRemote) {
                 ItemHandlerHelper.giveItemToPlayer(playerIn, tree.getFoodDrop());
                 worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, EnumLeafState.NORMAL));
-                TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-                if (te != null) {
-                    te.resetCounter();
+                var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+                if (tile != null) {
+                    tile.resetCounter();
                 }
             }
             return true;

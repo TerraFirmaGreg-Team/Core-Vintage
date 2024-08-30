@@ -30,8 +30,8 @@ public class TESRPlacedHide extends TileEntitySpecialRenderer<TEPlacedHide> {
     };
 
     @Override
-    public void render(TEPlacedHide te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        short positions = te.getScrapedPositions();
+    public void render(TEPlacedHide tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        short positions = tile.getScrapedPositions();
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, z);
         GlStateManager.disableLighting();
@@ -43,7 +43,7 @@ public class TESRPlacedHide extends TileEntitySpecialRenderer<TEPlacedHide> {
     }
 
     @Override
-    public boolean isGlobalRenderer(TEPlacedHide te) {
+    public boolean isGlobalRenderer(TEPlacedHide tile) {
         return false;
     }
 

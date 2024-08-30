@@ -34,14 +34,14 @@ import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 
 
 import com.eerussianguy.firmalife.entity.CombatGreenhouseTask;
-import com.eerussianguy.firmalife.gui.FLGuiHandler;
-import com.eerussianguy.firmalife.items.ItemFruitPole;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.client.gui.FLGuiHandler;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.objects.items.ItemFruitPole;
 
 import static su.terrafirmagreg.data.Constants.MODID_FL;
 import static su.terrafirmagreg.data.lib.MathConstants.RNG;
@@ -80,8 +80,8 @@ public class CommonEventHandlerFL {
             {
                 FluidActionResult fillResult = FluidUtil.tryFillContainer(item, FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)),
                         Fluid.BUCKET_VOLUME, player, false);
-                if (fillResult.isSuccess() && entity instanceof EntityAnimalCow) {
-                    EntityAnimalCow cow = (EntityAnimalCow) entity;//we can just cast the entity to a cow to test familiarity etc
+                if (fillResult.isSuccess() && entity instanceof EntityAnimalCow cow) {
+                    //we can just cast the entity to a cow to test familiarity etc
                     Fluid fluid = FluidsTFC.MILK.get();
                     boolean foundMilkable = false;
                     if (entity instanceof EntityAnimalYak)//have to check the original entity to get the proper instanceof however
@@ -148,8 +148,7 @@ public class CommonEventHandlerFL {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void onEntitySpawn(EntityJoinWorldEvent event) {
         Entity entity = event.getEntity();
-        if (entity instanceof EntityZombie) {
-            EntityZombie zombie = (EntityZombie) entity;
+        if (entity instanceof EntityZombie zombie) {
             zombie.tasks.addTask(4, new CombatGreenhouseTask(zombie));
         }
     }

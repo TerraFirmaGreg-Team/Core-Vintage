@@ -10,7 +10,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 
 import com.eerussianguy.firmalife.recipe.DryingRecipe;
-import com.eerussianguy.firmalife.te.TELeafMat;
+import net.dries007.tfc.objects.te.TELeafMat;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -27,9 +27,9 @@ public class LeafMatProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        TileEntity te = world.getTileEntity(pos);
-        if (te instanceof TELeafMat) {
-            TELeafMat leafMat = (TELeafMat) te;
+        var tile = world.getTileEntity(pos);
+        if (tile instanceof TELeafMat) {
+            TELeafMat leafMat = (TELeafMat) tile;
             ItemStack mainSlot = leafMat.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)
                     .getStackInSlot(0);
             DryingRecipe recipe = DryingRecipe.get(mainSlot);

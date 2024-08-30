@@ -90,11 +90,12 @@ public class BlockTorchTFC extends BlockTorch implements ICapabilitySize {
 
     @Override
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-        TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-        if (te != null) {
-            if (!worldIn.isRemote && te.getTicksSinceUpdate() > ConfigTFC.General.OVERRIDES.torchTime && ConfigTFC.General.OVERRIDES.torchTime > 0) {
+        var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+        if (tile != null) {
+            if (!worldIn.isRemote && tile.getTicksSinceUpdate() > ConfigTFC.General.OVERRIDES.torchTime &&
+                    ConfigTFC.General.OVERRIDES.torchTime > 0) {
                 worldIn.setBlockState(pos, state.withProperty(LIT, false));
-                te.resetCounter();
+                tile.resetCounter();
             }
         }
     }

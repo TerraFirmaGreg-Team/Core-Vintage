@@ -1,5 +1,8 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
+
+
 import su.terrafirmagreg.api.util.CollectionUtils;
 
 import net.minecraft.client.Minecraft;
@@ -50,11 +53,11 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
 
     @Nullable
     private static ResourceLocation getHighTexture(KnappingType type) {
-        if (type == KnappingType.CLAY) {
+        if (type == KnappingTypes.CLAY) {
             return CLAY_TEXTURE;
-        } else if (type == KnappingType.FIRE_CLAY) {
+        } else if (type == KnappingTypes.FIRE_CLAY) {
             return FIRE_CLAY_TEXTURE;
-        } else if (type == KnappingType.LEATHER) {
+        } else if (type == KnappingTypes.LEATHER) {
             return LEATHER_TEXTURE;
         }
         return null;
@@ -62,9 +65,9 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
 
     @Nullable
     private static ResourceLocation getLowTexture(KnappingType type) {
-        if (type == KnappingType.CLAY) {
+        if (type == KnappingTypes.CLAY) {
             return CLAY_DISABLED_TEXTURE;
-        } else if (type == KnappingType.FIRE_CLAY) {
+        } else if (type == KnappingTypes.FIRE_CLAY) {
             return FIRE_CLAY_DISABLED_TEXTURE;
         }
         return null;

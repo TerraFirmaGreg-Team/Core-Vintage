@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 
-import pieman.caffeineaddon.blocks.TEDryingMat;
+import net.dries007.tfc.objects.te.TEDryingMat;
 
 public class GUIHandler implements IGuiHandler {
 

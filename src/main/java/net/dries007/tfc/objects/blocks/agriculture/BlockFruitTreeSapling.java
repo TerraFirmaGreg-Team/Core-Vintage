@@ -66,13 +66,13 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
         super.updateTick(world, pos, state, random);
 
         if (!world.isRemote) {
-            TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-            if (te != null) {
+            var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+            if (tile != null) {
                 float temp = Climate.getActualTemp(world, pos);
                 float rainfall = ChunkData.getRainfall(world, pos);
-                long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+                long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                 if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier) && tree.isValidForGrowth(temp, rainfall)) {
-                    te.resetCounter();
+                    tile.resetCounter();
                     grow(world, random, pos, state);
                 }
             }
@@ -81,9 +81,9 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-        if (te != null) {
-            te.resetCounter();
+        var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+        if (tile != null) {
+            tile.resetCounter();
         }
     }
 

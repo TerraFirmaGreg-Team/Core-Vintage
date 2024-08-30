@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
-import su.terrafirmagreg.data.lib.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.data.lib.Unicode;
 import su.terrafirmagreg.modules.device.objects.tiles.TileCellarShelf;
 
 import net.minecraft.block.state.IBlockState;
@@ -20,14 +20,12 @@ import java.util.List;
 public class GuiCellarShelf extends GuiContainerTE<TileCellarShelf> {
 
     public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/cellar_shelf.png");
-    private static TileCellarShelf TE;
     private final String translationKey;
     private final InventoryPlayer playerInventory;
 
     public GuiCellarShelf(Container container, InventoryPlayer playerInv, TileCellarShelf tile, IBlockState state) {
         super(container, playerInv, tile, BACKGROUND);
         this.playerInventory = playerInv;
-        TE = tile;
         this.translationKey = state.getBlock().getTranslationKey();
     }
 
@@ -40,7 +38,7 @@ public class GuiCellarShelf extends GuiContainerTE<TileCellarShelf> {
 
         if (mouseX >= guiLeft + 5 && mouseX <= guiLeft + 15 && mouseY >= guiTop + 5 && mouseY <= guiTop + 15) {
             List<String> infoText = new ArrayList<String>();
-            float temperature = TE.getTemperature();
+            float temperature = tile.getTemperature();
 
             if (temperature <= -1000) {
                 infoText.add("[!] The shelf is not inside a cellar");

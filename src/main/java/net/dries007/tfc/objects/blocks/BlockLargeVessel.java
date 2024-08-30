@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -39,8 +39,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Large vessel is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state property, and cached in
- * the TE (for gui purposes)
+ * Large vessel is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block
+ * state property, and cached in the TE (for gui purposes)
  */
 
 public class BlockLargeVessel extends Block implements ICapabilitySize {
@@ -184,8 +184,8 @@ public class BlockLargeVessel extends Block implements ICapabilitySize {
                                     float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             ItemStack heldItem = playerIn.getHeldItem(hand);
-            TELargeVessel te = TileUtils.getTile(worldIn, pos, TELargeVessel.class);
-            if (te != null) {
+            var tile = TileUtils.getTile(worldIn, pos, TELargeVessel.class);
+            if (tile != null) {
                 if (heldItem.isEmpty() && playerIn.isSneaking()) {
                     worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
                     toggleLargeVesselSeal(worldIn, pos);
@@ -203,10 +203,10 @@ public class BlockLargeVessel extends Block implements ICapabilitySize {
         if (!worldIn.isRemote) {
             NBTTagCompound nbt = stack.getTagCompound();
             if (nbt != null) {
-                TELargeVessel te = TileUtils.getTile(worldIn, pos, TELargeVessel.class);
-                if (te != null) {
+                var tile = TileUtils.getTile(worldIn, pos, TELargeVessel.class);
+                if (tile != null) {
                     worldIn.setBlockState(pos, state.withProperty(SEALED, true));
-                    te.readFromItemTag(nbt);
+                    tile.readFromItemTag(nbt);
                 }
             }
         }

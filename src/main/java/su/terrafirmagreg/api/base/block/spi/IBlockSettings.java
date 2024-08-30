@@ -4,7 +4,9 @@ import su.terrafirmagreg.api.base.item.BaseItemBlock;
 import su.terrafirmagreg.api.base.item.spi.ItemRarity;
 import su.terrafirmagreg.api.registry.provider.IProviderAutoReg;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockState;
+import su.terrafirmagreg.api.registry.provider.IProviderModel;
 import su.terrafirmagreg.api.registry.provider.IProviderOreDict;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -28,6 +30,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -51,7 +54,7 @@ import java.util.function.Predicate;
 import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
 
 @SuppressWarnings("unused")
-public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, IProviderOreDict, ICapabilitySize {
+public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, IProviderModel, IProviderOreDict, ICapabilitySize {
 
     Settings getSettings();
 
@@ -147,6 +150,14 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
             return new StateMap.Builder().ignore(ignored).build();
         }
         return new StateMap.Builder().build();
+    }
+
+    @Override
+    default ResourceLocation getResourceLocation() {
+        if (getItemBlock() != null) {
+            return ModUtils.resource(getRegistryKey());
+        }
+        return null;
     }
 
     // Override IAutoRegProvider methods

@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
@@ -16,13 +17,12 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import su.terrafirmagreg.api.base.tile.spi.ITileFields;
 
-import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TETickableInventory;
+
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.dries007.tfc.util.fuel.Fuel;
@@ -34,8 +34,9 @@ import java.util.Optional;
 
 import static su.terrafirmagreg.data.Properties.LIT;
 
-public class TileSmelteryFirebox extends TETickableInventory
-        implements ITickable, ICalendarTickable, ITileFields, IAmbientalTileProvider, IProviderContainer<ContainerSmelteryFirebox, GuiSmelteryFirebox> {
+public class TileSmelteryFirebox extends BaseTileTickableInventory
+        implements ICalendarTickable, ITileFields, IAmbientalTileProvider,
+                   IProviderContainer<ContainerSmelteryFirebox, GuiSmelteryFirebox> {
 
     private float temperature;
     private float burnTemperature;

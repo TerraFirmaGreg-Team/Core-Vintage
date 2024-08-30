@@ -1,9 +1,10 @@
 package BananaFructa.tfcfarming;
 
+import BananaFructa.floraefixes.Utils;
 import com.eerussianguy.firmalife.init.StemCrop;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.util.agriculture.Crop;
-import tfcflorae.util.agriculture.CropTFCF;
+import net.dries007.tfc.util.agriculture.CropTFCF;
 
 import java.util.HashMap;
 

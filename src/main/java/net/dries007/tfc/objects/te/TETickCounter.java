@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.base.tile.BaseTile;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 
@@ -7,7 +9,7 @@ import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TETickCounter extends TEBase {
+public class TETickCounter extends BaseTile {
 
     private long lastUpdateTick;
 

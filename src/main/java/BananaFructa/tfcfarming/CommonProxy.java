@@ -16,22 +16,23 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 
+import BananaFructa.floraefixes.Utils;
 import BananaFructa.tfcfarming.firmalife.TEHangingPlanterN;
 import BananaFructa.tfcfarming.firmalife.TEPlanterN;
 import BananaFructa.tfcfarming.firmalife.TEStemCropN;
-import com.eerussianguy.firmalife.blocks.BlockBonsai;
-import com.eerussianguy.firmalife.blocks.BlockHangingPlanter;
-import com.eerussianguy.firmalife.blocks.BlockLargePlanter;
-import com.eerussianguy.firmalife.te.TEHangingPlanter;
-import com.eerussianguy.firmalife.te.TEPlanter;
-import com.eerussianguy.firmalife.te.TEStemCrop;
 import net.dries007.tfc.api.types.ICrop;
+import net.dries007.tfc.objects.blocks.BlockBonsai;
+import net.dries007.tfc.objects.blocks.BlockHangingPlanter;
+import net.dries007.tfc.objects.blocks.BlockLargePlanter;
+import net.dries007.tfc.objects.blocks.blocktype.farmland.FarmlandTFCF;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
+import net.dries007.tfc.objects.te.TEHangingPlanter;
+import net.dries007.tfc.objects.te.TEPlanter;
+import net.dries007.tfc.objects.te.TEStemCrop;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.Calendar;
-import tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -43,22 +44,23 @@ public class CommonProxy {
     /**
      * Each plant uses all the nutrient of its type from the soil block on which it is place in a complete growth phase
      * <p>
-     * The average plant in TFC takes ~4 months to mature The passive nutrient replenish parameters are set such that a nutrient goes from empty to full in a period of 32 months.
+     * The average plant in TFC takes ~4 months to mature The passive nutrient replenish parameters are set such that a nutrient goes from empty to
+     * full in a period of 32 months.
      * <p>
-     * Going a bit more in depth, if we exclude the usage of fertilizers, considering that a plant takes 4 months to mature (as that is the average time) the 32 month come into
-     * play like this:
+     * Going a bit more in depth, if we exclude the usage of fertilizers, considering that a plant takes 4 months to mature (as that is the average
+     * time) the 32 month come into play like this:
      * <p>
      * 4 growth months + 8 waiting months = 12 month = 1 year 24 waiting months            = 2 years
      * <p>
-     * Thus, a plant can be planted again on the same spot as it first grew after exactly 3 years (3 years after it started first growing). This is done to keep growing seasons in
-     * sync, otherwise if it were to be 3 years after the plant matured then if you planted a crop in June, and it matured in September then the soonest you will be able to plant
-     * it again would be in September after 3 years not in June.
+     * Thus, a plant can be planted again on the same spot as it first grew after exactly 3 years (3 years after it started first growing). This is
+     * done to keep growing seasons in sync, otherwise if it were to be 3 years after the plant matured then if you planted a crop in June, and it
+     * matured in September then the soonest you will be able to plant it again would be in September after 3 years not in June.
      * <p>
-     * The period is of 3 years because there are 3 types of nutrients and this makes the strategy of splitting farmland into 3/6/9/... slices (depending on how many times the
-     * temperatures allow you to grow a crop every year) the best way of growing stuff without using fertilizers
+     * The period is of 3 years because there are 3 types of nutrients and this makes the strategy of splitting farmland into 3/6/9/... slices
+     * (depending on how many times the temperatures allow you to grow a crop every year) the best way of growing stuff without using fertilizers
      * <p>
-     * Using a number that is not a multiple of three would break the symmetry of the rotation and using a multiple of 3 would invalidate the simple 3 slice split solution, fact
-     * which can make it harder or discourage others to understand the system.
+     * Using a number that is not a multiple of three would break the symmetry of the rotation and using a multiple of 3 would invalidate the simple 3
+     * slice split solution, fact which can make it harder or discourage others to understand the system.
      */
 
     private final List<Tuple<BlockPos, World>> awaiting = new ArrayList<>();
@@ -142,7 +144,8 @@ public class CommonProxy {
 
     }
 
-    private void setTileEntity(World w, BlockPos pos) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    private void setTileEntity(World w, BlockPos pos)
+            throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         TECropBase te = TileUtils.getTile(w, pos, TECropBase.class);
         if (te == null) return;
         if (TFCFarming.firmalifeLoaded && te instanceof TEStemCrop && !(te instanceof TEStemCropN)) {

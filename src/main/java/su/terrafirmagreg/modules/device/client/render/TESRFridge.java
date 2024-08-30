@@ -18,22 +18,22 @@ public class TESRFridge extends TileEntitySpecialRenderer<TileFridge> {
     private final ModelFridge model = new ModelFridge();
 
     @Override
-    public void render(TileFridge te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        if (te.hasWorld()) {
-            if (!te.isMainBlock()) return;
+    public void render(TileFridge tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        if (tile.hasWorld()) {
+            if (!tile.isMainBlock()) return;
             GlStateManager.pushMatrix(); // start
             GlStateManager.translate(x, y - 1, z); // position
 
             //Render itemstacks
-            Vec3d[] items = te.getItems();
+            Vec3d[] items = tile.getItems();
             for (int i = 0; i < 8; i++) {
-                ItemStack stack = te.getSlot(i);
+                ItemStack stack = tile.getSlot(i);
                 if (!stack.isEmpty()) {
                     GlStateManager.pushMatrix();
                     //noinspection ConstantConditions
                     Vec3d item = items[i];
                     GlStateManager.translate(item.x, item.y, item.z); // position
-                    switch (te.getRotation()) {
+                    switch (tile.getRotation()) {
                         case NORTH:
                             break;
                         case SOUTH:
@@ -60,7 +60,7 @@ public class TESRFridge extends TileEntitySpecialRenderer<TileFridge> {
             bindTexture(FRIDGE_TEXTURES); // texture
 
             GlStateManager.rotate(180, 1, 0, 0);
-            switch (te.getRotation()) {
+            switch (tile.getRotation()) {
                 case NORTH:
                     GlStateManager.rotate(-180, 0, 1, 0);
                     break;
@@ -74,7 +74,7 @@ public class TESRFridge extends TileEntitySpecialRenderer<TileFridge> {
                     break;
             }
 
-            model.setOpen(te.getOpen(), te.getLastOpen(), partialTicks);
+            model.setOpen(tile.getOpen(), tile.getLastOpen(), partialTicks);
 
             model.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
@@ -99,7 +99,7 @@ public class TESRFridge extends TileEntitySpecialRenderer<TileFridge> {
     }
 
     @Override
-    public boolean isGlobalRenderer(TileFridge te) {
+    public boolean isGlobalRenderer(TileFridge tile) {
         return true;
     }
 }

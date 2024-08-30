@@ -12,14 +12,14 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.types.DefaultPlants;
-import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.blocks.wood.BlockLogTFCF;
-import tfcflorae.objects.items.ItemsTFCF;
-import tfcflorae.types.PlantsTFCF;
-import tfcflorae.types.TreesTFCF;
+import net.dries007.tfc.types.PlantsTFCF;
+import net.dries007.tfc.types.TreesTFCF;
 
 import org.jetbrains.annotations.Nullable;
 

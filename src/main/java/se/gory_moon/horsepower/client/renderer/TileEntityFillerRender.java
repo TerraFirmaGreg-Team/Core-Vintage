@@ -12,26 +12,26 @@ import se.gory_moon.horsepower.tileentity.TileEntityFiller;
 public class TileEntityFillerRender extends TileEntitySpecialRenderer<TileEntityFiller> {
 
     @Override
-    public void render(TileEntityFiller te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        drawDisplayText(te, x, y, z);
-        super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+    public void render(TileEntityFiller tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        drawDisplayText(tile, x, y, z);
+        super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
     }
 
-    public void drawDisplayText(TileEntity te, double x, double y, double z) {
-        ITextComponent itextcomponent = te.getDisplayName();
+    public void drawDisplayText(TileEntity tile, double x, double y, double z) {
+        ITextComponent itextcomponent = tile.getDisplayName();
 
-        if (itextcomponent != null && this.rendererDispatcher.cameraHitResult != null && te.getPos()
+        if (itextcomponent != null && this.rendererDispatcher.cameraHitResult != null && tile.getPos()
                 .equals(this.rendererDispatcher.cameraHitResult.getBlockPos())) {
             this.setLightmapDisabled(true);
-            this.drawCustomNameplate(te, itextcomponent.getFormattedText(), x, y, z, 12, 0);
-            this.drawCustomNameplate(te, TileEntityHPBaseRenderer.LEAD_LOOKUP.getFormattedText(), x, y, z, 12, -0.25F);
+            this.drawCustomNameplate(tile, itextcomponent.getFormattedText(), x, y, z, 12, 0);
+            this.drawCustomNameplate(tile, TileEntityHPBaseRenderer.LEAD_LOOKUP.getFormattedText(), x, y, z, 12, -0.25F);
             this.setLightmapDisabled(false);
         }
     }
 
-    protected void drawCustomNameplate(TileEntity te, String str, double x, double y, double z, int maxDistance, float offset) {
+    protected void drawCustomNameplate(TileEntity tile, String str, double x, double y, double z, int maxDistance, float offset) {
         Entity entity = this.rendererDispatcher.entity;
-        double d0 = te.getDistanceSq(entity.posX, entity.posY, entity.posZ);
+        double d0 = tile.getDistanceSq(entity.posX, entity.posY, entity.posZ);
 
         if (d0 <= (double) (maxDistance * maxDistance)) {
             float f = this.rendererDispatcher.entityYaw;

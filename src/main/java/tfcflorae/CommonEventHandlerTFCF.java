@@ -1,5 +1,7 @@
 package tfcflorae;
 
+import su.terrafirmagreg.data.lib.MathConstants;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,23 +29,18 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.objects.blocks.blocktype.BlockRockVariantTFCF;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.objects.blocks.wood.bamboo.BlockBambooLeaves;
+import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCassiaCinnamonLeaves;
+import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
+import net.dries007.tfc.objects.items.ItemsTFCF;
+import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.skills.SmithingSkill;
-
-
-import su.terrafirmagreg.data.lib.MathConstants;
-
-
-import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
-import tfcflorae.objects.blocks.wood.bamboo.BlockBambooLeaves;
-import tfcflorae.objects.blocks.wood.cinnamon.BlockCassiaCinnamonLeaves;
-import tfcflorae.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
-import tfcflorae.objects.items.ItemsTFCF;
-import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
@@ -85,8 +82,7 @@ public final class CommonEventHandlerTFCF {
             IBlockState state = world.getBlockState(pos);
 
             if (ConfigTFC.General.OVERRIDES.enableHoeing) {
-                if (state.getBlock() instanceof BlockRockVariantTFCF) {
-                    BlockRockVariantTFCF blockRock = (BlockRockVariantTFCF) state.getBlock();
+                if (state.getBlock() instanceof BlockRockVariantTFCF blockRock) {
                     if
                     (
                             blockRock.getType() == RockTFCF.PODZOL ||

@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.Loader;
 
 
 import net.dries007.tfc.client.gui.GuiContainerTE;
-import pieman.caffeineaddon.blocks.TEDryingMat;
+import net.dries007.tfc.objects.te.TEDryingMat;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -9,10 +9,10 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 
-import com.eerussianguy.firmalife.blocks.BlockLargePlanter;
-import com.eerussianguy.firmalife.blocks.BlockQuadPlanter;
+import net.dries007.tfc.objects.blocks.BlockLargePlanter;
+import net.dries007.tfc.objects.blocks.BlockQuadPlanter;
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
-import com.eerussianguy.firmalife.te.TEPlanter;
+import net.dries007.tfc.objects.te.TEPlanter;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 
 import org.jetbrains.annotations.NotNull;
@@ -28,8 +28,8 @@ public class PlanterProvider implements IWailaBlock {
     public List<String> getTooltip(World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
         IBlockState state = world.getBlockState(pos);
-        TileEntity te = world.getTileEntity(pos);
-        if (te instanceof TEPlanter) {
+        var tile = world.getTileEntity(pos);
+        if (tile instanceof TEPlanter) {
             Block block = state.getBlock();
             if (block instanceof BlockQuadPlanter) {
                 PlanterRecipe.PlantInfo[] info = ((BlockQuadPlanter) block).getCrops(world, pos);
@@ -70,7 +70,7 @@ public class PlanterProvider implements IWailaBlock {
                     currentTooltip.add("Empty");
                 }
             }
-            currentTooltip.add(((TEPlanter) te).isClimateValid ? "Climate Valid" : "Climate Invalid");
+            currentTooltip.add(((TEPlanter) tile).isClimateValid ? "Climate Valid" : "Climate Invalid");
         }
         return currentTooltip;
     }

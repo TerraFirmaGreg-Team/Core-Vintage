@@ -13,8 +13,8 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.blocks.groundcover.BlockLightstone;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
+import net.dries007.tfc.objects.blocks.groundcover.BlockLightstone;
 
 import java.util.Random;
 

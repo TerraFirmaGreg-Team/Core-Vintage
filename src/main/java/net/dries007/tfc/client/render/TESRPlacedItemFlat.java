@@ -15,9 +15,9 @@ import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 public class TESRPlacedItemFlat extends TileEntitySpecialRenderer<TEPlacedItemFlat> {
 
     @Override
-    public void render(TEPlacedItemFlat te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        ItemStack stack = te.getStack();
-        byte rotation = te.getRotation();
+    public void render(TEPlacedItemFlat tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        ItemStack stack = tile.getStack();
+        byte rotation = tile.getRotation();
         GlStateManager.pushMatrix();
         GlStateManager.translate(x + 0.5D, y + 0.03125D, z + 0.5D);
         GlStateManager.scale(.5f, .5f, .5f);

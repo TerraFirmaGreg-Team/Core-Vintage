@@ -23,6 +23,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.fml.client.config.GuiUtils;
 
 
 import net.dries007.tfc.api.types.ICrop;
@@ -30,6 +31,7 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 public class Utils {
@@ -44,6 +46,44 @@ public class Utils {
                 modifiersField.setInt(f, f.getModifiers() & ~Modifier.FINAL);
             }
             f.set(target, value);
+
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+    }
+
+    public static Method getDeclaredMethod(Class<?> targetClass, String name, Class<?>... parameters) {
+        try {
+            Method m = targetClass.getDeclaredMethod(name, parameters);
+            m.setAccessible(true);
+            return m;
+        } catch (Exception err) {
+            err.printStackTrace();
+            return null;
+        }
+    }
+
+    public static <T> T readDeclaredField(Class<?> targetType, Object target, String name) {
+        try {
+            Field f = targetType.getDeclaredField(name);
+            f.setAccessible(true);
+            return (T) f.get(target);
+        } catch (Exception err) {
+            err.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void writeDeclaredDouble(Class<?> targetType, Object target, String name, double value, boolean final_) {
+        try {
+            Field f = targetType.getDeclaredField(name);
+            f.setAccessible(true);
+            if (final_) {
+                Field modifiersField = Field.class.getDeclaredField("modifiers");
+                modifiersField.setAccessible(true);
+                modifiersField.setInt(f, f.getModifiers() & ~Modifier.FINAL);
+            }
+            f.setDouble(target, value);
 
         } catch (Exception err) {
             err.printStackTrace();
@@ -86,7 +126,7 @@ public class Utils {
 
                     BlockPos blockpos1 = blockpos.up();
                     IBlockState iblockstate = worldIn.getBlockState(blockpos);
-                    if (iblockstate.getMaterial() == Material.WATER && (Integer) iblockstate.getValue(BlockLiquid.LEVEL) == 0 &&
+                    if (iblockstate.getMaterial() == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0 &&
                             worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenClassic.FRESH_WATER && material != Material.WATER) {
                         BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
                         worldIn.setBlockState(blockpos1, BlockCropTFC.get(crop).getDefaultState());
@@ -113,6 +153,23 @@ public class Utils {
         } else {
             return new ActionResult<>(EnumActionResult.FAIL, itemstack);
         }
+    }
+
+    public static void drawTooltipBox(int tooltipX, int tooltipY, int width, int height, int backgroundColor, int borderColorStart,
+                                      int borderColorEnd) {
+        GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY - 4, tooltipX + width + 3, tooltipY - 3, backgroundColor, backgroundColor);
+        GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY + height + 3, tooltipX + width + 3, tooltipY + height + 4, backgroundColor,
+                backgroundColor);
+        GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY - 3, tooltipX + width + 3, tooltipY + height + 3, backgroundColor, backgroundColor);
+        GuiUtils.drawGradientRect(0, tooltipX - 4, tooltipY - 3, tooltipX - 3, tooltipY + height + 3, backgroundColor, backgroundColor);
+        GuiUtils.drawGradientRect(0, tooltipX + width + 3, tooltipY - 3, tooltipX + width + 4, tooltipY + height + 3, backgroundColor,
+                backgroundColor);
+        GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY - 3 + 1, tooltipX - 3 + 1, tooltipY + height + 3 - 1, borderColorStart, borderColorEnd);
+        GuiUtils.drawGradientRect(0, tooltipX + width + 2, tooltipY - 3 + 1, tooltipX + width + 3, tooltipY + height + 3 - 1, borderColorStart,
+                borderColorEnd);
+        GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY - 3, tooltipX + width + 3, tooltipY - 3 + 1, borderColorStart, borderColorStart);
+        GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY + height + 2, tooltipX + width + 3, tooltipY + height + 3, borderColorEnd,
+                borderColorEnd);
     }
 
 }

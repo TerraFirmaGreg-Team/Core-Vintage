@@ -1,5 +1,8 @@
 package com.buuz135.hotornot.types;
 
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
+
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -15,7 +18,6 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Metal.ItemType;
@@ -48,7 +50,7 @@ public final class RegisterRecipes {
     public static void onRegisterKnappingRecipeEvent(final Register<KnappingRecipe> event) {
         event.getRegistry().register(
                 // TODO change the recipe to be something more interesting than a straight line
-                new KnappingRecipeSimple(KnappingType.CLAY, false, new ItemStack(HONItems.TONGS_JAW_UNFIRED_MOLD),
+                new KnappingRecipeSimple(KnappingTypes.CLAY, false, new ItemStack(HONItems.TONGS_JAW_UNFIRED_MOLD),
                         "X", "X", "X", "X", "X").setRegistryName("unfired_tongs_jaw_mold")
         );
     }

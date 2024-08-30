@@ -28,29 +28,29 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
     private final ModelChest largeChest = new ModelLargeChest();
 
     @Override
-    public void render(TileWoodChest te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileWoodChest tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.enableDepth();
         GlStateManager.depthFunc(515);
         GlStateManager.depthMask(true);
         int meta = 0;
-        var woodColor = Objects.requireNonNull(te.getWood()).getColor();
+        var woodColor = Objects.requireNonNull(tile.getWood()).getColor();
 
-        if (te.hasWorld()) {
-            Block block = te.getBlockType();
-            meta = te.getBlockMetadata();
+        if (tile.hasWorld()) {
+            Block block = tile.getBlockType();
+            meta = tile.getBlockMetadata();
 
             if (block instanceof BlockWoodChest blockWoodChest && meta == 0) {
-                blockWoodChest.checkForSurroundingChests(te.getWorld(), te.getPos(), te.getWorld().getBlockState(te.getPos()));
-                meta = te.getBlockMetadata();
+                blockWoodChest.checkForSurroundingChests(tile.getWorld(), tile.getPos(), tile.getWorld().getBlockState(tile.getPos()));
+                meta = tile.getBlockMetadata();
             }
 
-            te.checkForAdjacentChests();
+            tile.checkForAdjacentChests();
         }
 
-        if (te.adjacentChestZNeg != null || te.adjacentChestXNeg != null) return;
+        if (tile.adjacentChestZNeg != null || tile.adjacentChestXNeg != null) return;
 
         ModelChest modelchest;
-        if (te.adjacentChestXPos == null && te.adjacentChestZPos == null) {
+        if (tile.adjacentChestXPos == null && tile.adjacentChestZPos == null) {
             modelchest = simpleChest;
 
             if (destroyStage >= 0) {
@@ -94,27 +94,27 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
         switch (meta) {
             case 2 -> {
                 rotation = 180;
-                if (te.adjacentChestXPos != null) GlStateManager.translate(1.0F, 0.0F, 0.0F);
+                if (tile.adjacentChestXPos != null) GlStateManager.translate(1.0F, 0.0F, 0.0F);
             }
             case 3 -> rotation = 0;
             case 4 -> rotation = 90;
             case 5 -> {
                 rotation = -90;
-                if (te.adjacentChestZPos != null) GlStateManager.translate(0.0F, 0.0F, -1.0F);
+                if (tile.adjacentChestZPos != null) GlStateManager.translate(0.0F, 0.0F, -1.0F);
             }
         }
 
         GlStateManager.rotate((float) rotation, 0.0F, 1.0F, 0.0F);
         GlStateManager.translate(-0.5F, -0.5F, -0.5F);
-        float lidAngle = te.prevLidAngle + (te.lidAngle - te.prevLidAngle) * partialTicks;
+        float lidAngle = tile.prevLidAngle + (tile.lidAngle - tile.prevLidAngle) * partialTicks;
 
-        if (te.adjacentChestZNeg != null) {
-            float f1 = te.adjacentChestZNeg.prevLidAngle + (te.adjacentChestZNeg.lidAngle - te.adjacentChestZNeg.prevLidAngle) * partialTicks;
+        if (tile.adjacentChestZNeg != null) {
+            float f1 = tile.adjacentChestZNeg.prevLidAngle + (tile.adjacentChestZNeg.lidAngle - tile.adjacentChestZNeg.prevLidAngle) * partialTicks;
             if (f1 > lidAngle) lidAngle = f1;
         }
 
-        if (te.adjacentChestXNeg != null) {
-            float f2 = te.adjacentChestXNeg.prevLidAngle + (te.adjacentChestXNeg.lidAngle - te.adjacentChestXNeg.prevLidAngle) * partialTicks;
+        if (tile.adjacentChestXNeg != null) {
+            float f2 = tile.adjacentChestXNeg.prevLidAngle + (tile.adjacentChestXNeg.lidAngle - tile.adjacentChestXNeg.prevLidAngle) * partialTicks;
             if (f2 > lidAngle) lidAngle = f2;
         }
 
@@ -130,7 +130,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
 
         // Отрисовка ручки
 
-        if (te.getChestType() == BlockChest.Type.TRAP) GlStateManager.color(1.0F, 0.0F, 0.0F, 0.4F);
+        if (tile.getChestType() == BlockChest.Type.TRAP) GlStateManager.color(1.0F, 0.0F, 0.0F, 0.4F);
         modelchest.chestKnob.render(0.0625F);
 
         GlStateManager.disableRescaleNormal();

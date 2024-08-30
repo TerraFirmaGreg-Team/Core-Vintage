@@ -5,7 +5,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 
-import com.eerussianguy.firmalife.init.RegistriesFL;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +32,7 @@ public class StrainingRecipe extends IForgeRegistryEntry.Impl<StrainingRecipe> {
 
     @Nullable
     public static StrainingRecipe get(FluidStack fluidStack) {
-        return RegistriesFL.STRAINING.getValuesCollection()
+        return TFCRegistries.STRAINING.getValuesCollection()
                 .stream()
                 .filter(x -> x.isValidInput(fluidStack))
                 .findFirst()

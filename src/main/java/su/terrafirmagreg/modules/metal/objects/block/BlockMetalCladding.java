@@ -40,6 +40,8 @@ import lombok.Getter;
 
 import java.util.List;
 
+import static su.terrafirmagreg.data.Properties.*;
+
 @SuppressWarnings("deprecation")
 @Getter
 public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
@@ -123,7 +125,8 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
     }
 
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
+                                      @Nullable Entity entityIn,
                                       boolean isActualState) {
         var tile = TileUtils.getTile(worldIn, pos, TileMetalSheet.class);
         if (tile != null) {

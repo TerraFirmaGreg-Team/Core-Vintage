@@ -24,6 +24,8 @@ import lombok.Getter;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.*;
+
 @Getter
 public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
 

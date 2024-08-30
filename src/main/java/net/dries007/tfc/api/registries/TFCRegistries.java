@@ -4,6 +4,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 
+import com.eerussianguy.firmalife.recipe.CrackingRecipe;
+import com.eerussianguy.firmalife.recipe.DryingRecipe;
+import com.eerussianguy.firmalife.recipe.NutRecipe;
+import com.eerussianguy.firmalife.recipe.OvenRecipe;
+import com.eerussianguy.firmalife.recipe.PlanterRecipe;
+import com.eerussianguy.firmalife.recipe.StrainingRecipe;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.AlloyRecipe;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
@@ -32,8 +38,8 @@ import java.lang.reflect.Modifier;
 public class TFCRegistries {
 
     /**
-     * To developers: If you are considering creating one of these pre-block registries, take a minute to ask "is this the best idea" i.e create an interface + enum, so addons
-     * register their own instances of TFC block classes using a custom implementation of the enum - AlcatrazEscapee
+     * To developers: If you are considering creating one of these pre-block registries, take a minute to ask "is this the best idea" i.e create an
+     * interface + enum, so addons register their own instances of TFC block classes using a custom implementation of the enum - AlcatrazEscapee
      */
     public static final IForgeRegistry<Rock> ROCKS = GameRegistry.findRegistry(Rock.class);
     public static final IForgeRegistry<RockCategory> ROCK_CATEGORIES = GameRegistry.findRegistry(RockCategory.class);
@@ -53,6 +59,13 @@ public class TFCRegistries {
 
     public static final IForgeRegistry<SmelteryRecipe> SMELTERY = GameRegistry.findRegistry(SmelteryRecipe.class);
     public static final IForgeRegistry<GlassworkingRecipe> GLASSWORKING = GameRegistry.findRegistry(GlassworkingRecipe.class);
+
+    public static final IForgeRegistry<OvenRecipe> OVEN = GameRegistry.findRegistry(OvenRecipe.class);
+    public static final IForgeRegistry<DryingRecipe> DRYING = GameRegistry.findRegistry(DryingRecipe.class);
+    public static final IForgeRegistry<PlanterRecipe> PLANTER_QUAD = GameRegistry.findRegistry(PlanterRecipe.class);
+    public static final IForgeRegistry<NutRecipe> NUT_TREES = GameRegistry.findRegistry(NutRecipe.class);
+    public static final IForgeRegistry<CrackingRecipe> CRACKING = GameRegistry.findRegistry(CrackingRecipe.class);
+    public static final IForgeRegistry<StrainingRecipe> STRAINING = GameRegistry.findRegistry(StrainingRecipe.class);
 
     public static final IForgeRegistry<Plant> PLANTS = GameRegistry.findRegistry(Plant.class);
 

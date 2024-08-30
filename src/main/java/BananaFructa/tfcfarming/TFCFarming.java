@@ -19,7 +19,12 @@ import BananaFructa.tfcfarming.firmalife.TEPlanterN;
 import BananaFructa.tfcfarming.firmalife.TEStemCropN;
 import BananaFructa.tfcfarming.network.PacketHandler;
 
-@Mod(modid = MODID_TFCFARMING, name = TFCFarming.name, version = Tags.MOD_VERSION, dependencies = "required-after:tfc;after:tfcflorae;after:firmalife")
+import static su.terrafirmagreg.data.Constants.*;
+
+@Mod(modid = MODID_TFCFARMING,
+     name = TFCFarming.name,
+     version = Tags.MOD_VERSION,
+     dependencies = "required-after:tfc;after:tfcflorae;after:firmalife")
 public class TFCFarming {
 
     public static final String name = "TFC Farming";

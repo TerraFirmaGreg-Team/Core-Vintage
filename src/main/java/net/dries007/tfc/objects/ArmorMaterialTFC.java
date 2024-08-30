@@ -10,6 +10,7 @@ import net.dries007.tfc.api.types.IArmorMaterialTFC;
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
 /**
  * This is an extension enum for the vanilla's ArmorMaterials. We register a new material in vanilla and bind crushing, slashing and piercing
@@ -54,6 +55,34 @@ public class ArmorMaterialTFC implements IArmorMaterialTFC {
     public static final IArmorMaterialTFC RED_STEEL = new ArmorMaterialTFC(
             EnumHelper.addArmorMaterial("red_steel", MODID_TFC + ":red_steel", 68, new int[] { 3, 6, 8, 3 }, 23, SoundEvents.ITEM_ARMOR_EQUIP_IRON,
                     2.0F), 50, 62.5f, 50);
+
+    public static final IArmorMaterialTFC PINEAPPLE_LEATHER = new ArmorMaterialTFC(
+            EnumHelper.addArmorMaterial("pineapple_leather", MODID_TFCF + ":pineapple_leather", 5, new int[] { 1, 2, 3, 1 }, 15,
+                    SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F), 2, 2, 5);
+    public static final IArmorMaterialTFC BURLAP_CLOTH = new ArmorMaterialTFC(
+            EnumHelper.addArmorMaterial("burlap_cloth", MODID_TFCF + ":burlap_cloth", 5, new int[] { 1, 2, 3, 1 }, 15,
+                    SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F), 1.5f, 1.5f, 4);
+    public static final IArmorMaterialTFC WOOL_CLOTH = new ArmorMaterialTFC(
+            EnumHelper.addArmorMaterial("wool_cloth", MODID_TFCF + ":wool_cloth", 5, new int[] { 1, 2, 3, 1 }, 15,
+                    SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F), 1.5f, 1.5f, 4);
+    public static final IArmorMaterialTFC SILK_CLOTH = new ArmorMaterialTFC(
+            EnumHelper.addArmorMaterial("silk_cloth", MODID_TFCF + ":silk_cloth", 5, new int[] { 1, 2, 3, 1 }, 15,
+                    SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F), 1.5f, 1.5f, 4);
+    public static final IArmorMaterialTFC SISAL_CLOTH = new ArmorMaterialTFC(
+            EnumHelper.addArmorMaterial("sisal_cloth", MODID_TFCF + ":sisal_cloth", 5, new int[] { 1, 2, 3, 1 }, 15,
+                    SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F), 1.5f, 1.5f, 4);
+    public static final IArmorMaterialTFC COTTON_CLOTH = new ArmorMaterialTFC(
+            EnumHelper.addArmorMaterial("cotton_cloth", MODID_TFCF + ":cotton_cloth", 5, new int[] { 1, 2, 3, 1 }, 15,
+                    SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F), 1.5f, 1.5f, 4);
+    public static final IArmorMaterialTFC LINEN_CLOTH = new ArmorMaterialTFC(
+            EnumHelper.addArmorMaterial("linen_cloth", MODID_TFCF + ":linen_cloth", 5, new int[] { 1, 2, 3, 1 }, 15,
+                    SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F), 1.5f, 1.5f, 4);
+    public static final IArmorMaterialTFC HEMP_CLOTH = new ArmorMaterialTFC(
+            EnumHelper.addArmorMaterial("hemp_cloth", MODID_TFCF + ":hemp_cloth", 5, new int[] { 1, 2, 3, 1 }, 15,
+                    SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F), 1.5f, 1.5f, 4);
+    public static final IArmorMaterialTFC YUCCA_CANVAS = new ArmorMaterialTFC(
+            EnumHelper.addArmorMaterial("yucca_canvas", MODID_TFCF + ":yucca_canvas", 5, new int[] { 1, 2, 3, 1 }, 15,
+                    SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F), 1.5f, 1.5f, 4);
 
     private final float piercingRes, slashingRes, crushingRes;
     private final ArmorMaterial material;

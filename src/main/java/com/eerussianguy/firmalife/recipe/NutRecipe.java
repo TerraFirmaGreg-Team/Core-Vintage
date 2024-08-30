@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 
-import com.eerussianguy.firmalife.init.RegistriesFL;
+import net.dries007.tfc.api.registries.TFCRegistries;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,7 +28,7 @@ public class NutRecipe extends IForgeRegistryEntry.Impl<NutRecipe> {
 
     @Nullable
     public static NutRecipe get(Block block) {
-        return RegistriesFL.NUT_TREES.getValuesCollection()
+        return TFCRegistries.NUT_TREES.getValuesCollection()
                 .stream()
                 .filter(x -> x.isValidInput(block))
                 .findFirst()

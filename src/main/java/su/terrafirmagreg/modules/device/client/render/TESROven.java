@@ -23,14 +23,14 @@ import static su.terrafirmagreg.modules.device.objects.tiles.TileOven.*;
 public class TESROven extends TileEntitySpecialRenderer<TileOven> {
 
     @Override
-    public void render(TileOven te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+    public void render(TileOven tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
-        if (te.hasWorld()) {
-            IBlockState state = te.getWorld().getBlockState(te.getPos());
-            IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (tile.hasWorld()) {
+            IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+            IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             if (cap != null) {
-                int rotation = te.getBlockMetadata();
+                int rotation = tile.getBlockMetadata();
                 if (state.getValue(LIT))
                     rotation -= 4;
                 if (state.getValue(CURED))

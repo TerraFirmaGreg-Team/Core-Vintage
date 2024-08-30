@@ -11,7 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 
 
-import com.eerussianguy.firmalife.blocks.BlockStemCrop;
+import net.dries007.tfc.objects.blocks.BlockStemCrop;
 import com.google.common.collect.Maps;
 
 import java.util.Map;

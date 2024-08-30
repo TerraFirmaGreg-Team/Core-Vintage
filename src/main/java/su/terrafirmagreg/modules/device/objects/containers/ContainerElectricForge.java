@@ -16,8 +16,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class ContainerElectricForge extends ContainerTE<TileElectricForge> implements IButtonHandler {
 
-    public ContainerElectricForge(InventoryPlayer playerInv, TileElectricForge te) {
-        super(playerInv, te);
+    public ContainerElectricForge(InventoryPlayer playerInv, TileElectricForge tile) {
+        super(playerInv, tile);
     }
 
     @Override

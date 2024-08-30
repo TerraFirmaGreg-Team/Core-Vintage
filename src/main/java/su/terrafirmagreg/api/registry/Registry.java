@@ -1,7 +1,5 @@
 package su.terrafirmagreg.api.registry;
 
-import su.terrafirmagreg.data.lib.collection.RegistryList;
-import su.terrafirmagreg.data.lib.model.CustomModelLoader;
 import su.terrafirmagreg.api.registry.builder.LootBuilder;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockState;
@@ -12,6 +10,8 @@ import su.terrafirmagreg.api.registry.provider.IProviderOreDict;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.lib.collection.RegistryList;
+import su.terrafirmagreg.data.lib.model.CustomModelLoader;
 import su.terrafirmagreg.modules.core.objects.command.CommandManager;
 
 import net.minecraft.block.Block;
@@ -259,10 +259,13 @@ public class Registry {
 
         blocks.forEach(block -> {
             if (block instanceof IProviderModel provider) {
-                ModelUtils.registerBlockInventoryModel(block, provider.getResourceLocation());
-            } else {
-                ModelUtils.registerBlockInventoryModel(block);
+                if (provider.getResourceLocation() != null) {
+                    ModelUtils.registerBlockInventoryModel(block, provider.getResourceLocation());
+                }
             }
+            //            else {
+            //                ModelUtils.registerBlockInventoryModel(block);
+            //            }
 
             if (block instanceof IProviderBlockState provider) {
                 ModelUtils.registerStateMapper(block, provider.getStateMapper());
@@ -274,7 +277,9 @@ public class Registry {
 
         items.forEach(item -> {
             if (item instanceof IProviderModel provider) {
-                ModelUtils.registerInventoryModel(item, provider.getResourceLocation());
+                if (provider.getResourceLocation() != null) {
+                    ModelUtils.registerInventoryModel(item, provider.getResourceLocation());
+                }
             } else if (!(item instanceof ItemBlock)) {
                 ModelUtils.registerInventoryModel(item);
             }

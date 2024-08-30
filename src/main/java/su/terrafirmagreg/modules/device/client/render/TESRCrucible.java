@@ -26,10 +26,10 @@ import org.lwjgl.opengl.GL11;
 public class TESRCrucible extends TileEntitySpecialRenderer<TileCrucible> {
 
     @Override
-    public void render(TileCrucible te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        int amount = te.getAlloy().getAmount();
+    public void render(TileCrucible tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        int amount = tile.getAlloy().getAmount();
         if (amount < 1) return;
-        Metal metal = te.getAlloyResult();
+        Metal metal = tile.getAlloyResult();
         Fluid metalFluid = FluidsTFC.getFluidFromMetal(metal);
 
         GlStateManager.pushMatrix();
@@ -60,7 +60,7 @@ public class TESRCrucible extends TileEntitySpecialRenderer<TileCrucible> {
         BufferBuilder buffer = Tessellator.getInstance().getBuffer();
         buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
-        double height = 0.140625D + (0.75D - 0.015625D) * amount / te.getAlloy().getMaxAmount();
+        double height = 0.140625D + (0.75D - 0.015625D) * amount / tile.getAlloy().getMaxAmount();
 
         buffer.pos(0.1875D, height, 0.1875D)
                 .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(3))

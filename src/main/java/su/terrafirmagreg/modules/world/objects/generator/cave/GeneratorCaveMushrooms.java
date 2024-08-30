@@ -10,8 +10,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.blocks.plants.BlockCaveMushroom;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
+import net.dries007.tfc.objects.blocks.plants.BlockCaveMushroom;
 
 import java.util.Random;
 

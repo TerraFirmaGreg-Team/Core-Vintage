@@ -22,11 +22,11 @@ import se.gory_moon.horsepower.util.RenderUtils;
 public class TileEntityGrindstoneRender extends TileEntityHPBaseRenderer<TileEntityGrindstone> {
 
     @Override
-    public void render(TileEntityGrindstone te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        IBlockState blockState = te.getWorld().getBlockState(te.getPos());
+    public void render(TileEntityGrindstone tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        IBlockState blockState = tile.getWorld().getBlockState(tile.getPos());
         if (!(blockState.getBlock() instanceof BlockHPBase)) return;
-        ItemStack outputStack = te.getStackInSlot(1);
-        ItemStack secondaryStack = te.getStackInSlot(2);
+        ItemStack outputStack = tile.getStackInSlot(1);
+        ItemStack secondaryStack = tile.getStackInSlot(2);
         if (outputStack.getCount() < secondaryStack.getCount())
             outputStack = secondaryStack;
 
@@ -43,10 +43,10 @@ public class TileEntityGrindstoneRender extends TileEntityHPBaseRenderer<TileEnt
             setRenderSettings();
 
             buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
-            buffer.setTranslation(-te.getPos().getX(), -te.getPos().getY(), -te.getPos().getZ());
+            buffer.setTranslation(-tile.getPos().getX(), -tile.getPos().getY(), -tile.getPos().getZ());
 
             dispatcher.getBlockModelRenderer()
-                    .renderModel(te.getWorld(), filledModel, filledState, te.getPos(), buffer, false);
+                    .renderModel(tile.getWorld(), filledModel, filledState, tile.getPos(), buffer, false);
 
             GlStateManager.pushMatrix();
             GlStateManager.translate(x, y, z);
@@ -62,28 +62,28 @@ public class TileEntityGrindstoneRender extends TileEntityHPBaseRenderer<TileEnt
             buffer.setTranslation(0.0D, 0.0D, 0.0D);
             RenderHelper.enableStandardItemLighting();
         } else if (outputStack.isEmpty()) {
-            te.renderStack = ItemStack.EMPTY;
-            te.grindColor = null;
+            tile.renderStack = ItemStack.EMPTY;
+            tile.grindColor = null;
         }
 
-        if (te.hasWorker())
-            renderLeash(te.getWorker(), x, y, z, 0D, 0D, 0D, partialTicks, te.getPos());
+        if (tile.hasWorker())
+            renderLeash(tile.getWorker(), x, y, z, 0D, 0D, 0D, partialTicks, tile.getPos());
 
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, z);
-        if (!te.getStackInSlot(0).isEmpty()) {
-            renderItem(te, te.getStackInSlot(0), 0.5F, 1F, 0.5F, 1F);
-            if (getWorld().isAirBlock(te.getPos().up()))
-                drawString(te, String.valueOf(te.getStackInSlot(0).getCount()), 0, 0.35, 0);
+        if (!tile.getStackInSlot(0).isEmpty()) {
+            renderItem(tile, tile.getStackInSlot(0), 0.5F, 1F, 0.5F, 1F);
+            if (getWorld().isAirBlock(tile.getPos().up()))
+                drawString(tile, String.valueOf(tile.getStackInSlot(0).getCount()), 0, 0.35, 0);
         }
         GlStateManager.popMatrix();
 
         GlStateManager.pushMatrix();
 
-        drawDisplayText(te, x, y, z);
+        drawDisplayText(tile, x, y, z);
 
-        if (!te.isValid())
-            RenderUtils.renderInvalidArea(te.getWorld(), te.getPos(), -1);
+        if (!tile.isValid())
+            RenderUtils.renderInvalidArea(tile.getWorld(), tile.getPos(), -1);
         GlStateManager.popMatrix();
     }
 }

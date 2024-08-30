@@ -9,8 +9,8 @@ import net.minecraft.util.ResourceLocation;
 
 
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.client.gui.GuiKnapping;
-import tfcflorae.api.knapping.KnappingTypes;
 
 public class GuiKnappingTFCF extends GuiKnapping {
 

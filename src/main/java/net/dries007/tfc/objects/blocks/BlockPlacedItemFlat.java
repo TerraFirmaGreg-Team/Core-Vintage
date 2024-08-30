@@ -126,9 +126,9 @@ public class BlockPlacedItemFlat extends Block {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEPlacedItemFlat te = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
-        if (te != null) {
-            te.onBreakBlock(pos);
+        var tile = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
+        if (tile != null) {
+            tile.onBreakBlock(pos);
         }
         super.breakBlock(worldIn, pos, state);
     }
@@ -142,13 +142,13 @@ public class BlockPlacedItemFlat extends Block {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
                                     float hitX, float hitY, float hitZ) {
-        TEPlacedItemFlat te = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
-        if (te != null && !worldIn.isRemote) {
-            ItemStack stack = te.getStack();
+        var tile = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
+        if (tile != null && !worldIn.isRemote) {
+            ItemStack stack = tile.getStack();
             if (!stack.isEmpty()) {
                 ItemHandlerHelper.giveItemToPlayer(playerIn, stack);
             }
-            te.setStack(ItemStack.EMPTY);
+            tile.setStack(ItemStack.EMPTY);
             worldIn.setBlockToAir(pos);
         }
         return true;
@@ -173,9 +173,9 @@ public class BlockPlacedItemFlat extends Block {
     @NotNull
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        TEPlacedItemFlat te = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
-        if (te != null) {
-            return te.getStack().copy();
+        var tile = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
+        if (tile != null) {
+            return tile.getStack().copy();
         }
         return ItemStack.EMPTY;
     }

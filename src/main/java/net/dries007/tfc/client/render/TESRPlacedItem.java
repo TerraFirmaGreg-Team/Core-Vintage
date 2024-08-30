@@ -20,9 +20,9 @@ import net.dries007.tfc.objects.te.TEPlacedItem;
 public class TESRPlacedItem extends TileEntitySpecialRenderer<TEPlacedItem> {
 
     @Override
-    public void render(TEPlacedItem te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TEPlacedItem tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-        World world = te.getWorld();
+        World world = tile.getWorld();
         //noinspection ConstantConditions
         if (world == null) return;
 
@@ -32,14 +32,14 @@ public class TESRPlacedItem extends TileEntitySpecialRenderer<TEPlacedItem> {
         GlStateManager.translate(x, y, z);
 
         GlStateManager.pushMatrix();
-        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null) {
             float timeD = (float) (360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
             GlStateManager.translate(0.25, 0.25, 0.25);
             RenderHelper.enableStandardItemLighting();
             GlStateManager.pushAttrib();
 
-            if (te.holdingLargeItem()) {
+            if (tile.holdingLargeItem()) {
                 ItemStack stack = cap.getStackInSlot(0);
                 if (!stack.isEmpty()) {
                     GlStateManager.pushMatrix();

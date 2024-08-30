@@ -6,7 +6,7 @@ import net.minecraftforge.items.ItemStackHandler;
 /**
  * A merge of {@link BaseTileInventory} and {@link BaseTileTickable}
  */
-public class BaseTileTickableInventory extends BaseTileInventory implements ITickable {
+public abstract class BaseTileTickableInventory extends BaseTileInventory implements ITickable {
 
     protected boolean needsClientUpdate;
 

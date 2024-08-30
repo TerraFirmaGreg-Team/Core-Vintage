@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife;
 
+import su.terrafirmagreg.data.Properties;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockStem;
@@ -29,11 +31,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import com.eerussianguy.firmalife.blocks.BlockBonsai;
-import com.eerussianguy.firmalife.blocks.BlockStemCrop;
-import com.eerussianguy.firmalife.init.RegistriesFL;
-import com.eerussianguy.firmalife.init.StatePropertiesFL;
-import com.eerussianguy.firmalife.items.ItemMetalMalletMold;
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
@@ -45,16 +42,19 @@ import com.eerussianguy.firmalife.render.TESRLeafMat;
 import com.eerussianguy.firmalife.render.TESRString;
 import com.eerussianguy.firmalife.render.TESRTurntable;
 import com.eerussianguy.firmalife.render.VanillaStemStateMapper;
-import com.eerussianguy.firmalife.te.TELeafMat;
-import com.eerussianguy.firmalife.te.TEString;
-import com.eerussianguy.firmalife.te.TETurntable;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.GrassColorHandler;
+import net.dries007.tfc.objects.blocks.BlockBonsai;
+import net.dries007.tfc.objects.blocks.BlockStemCrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
+import net.dries007.tfc.objects.items.ItemMetalMalletMold;
+import net.dries007.tfc.objects.te.TELeafMat;
+import net.dries007.tfc.objects.te.TEString;
+import net.dries007.tfc.objects.te.TETurntable;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -78,13 +78,13 @@ public class ClientRegisterEventsFL {
             ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE)
                     .ignore(BlockFruitTreeLeaves.HARVESTABLE)
                     .build());
-        ModelLoader.setCustomStateMapper(BlocksFL.SPOUT, new StateMap.Builder().ignore(StatePropertiesFL.WATERED)
-                .ignore(StatePropertiesFL.NEEDS_SOURCE)
+        ModelLoader.setCustomStateMapper(BlocksFL.SPOUT, new StateMap.Builder().ignore(Properties.WATERED)
+                .ignore(Properties.NEEDS_SOURCE)
                 .build());
-        ModelLoader.setCustomStateMapper(BlocksFL.SPRINKLER, new StateMap.Builder().ignore(StatePropertiesFL.WATERED)
-                .ignore(StatePropertiesFL.NEEDS_SOURCE)
+        ModelLoader.setCustomStateMapper(BlocksFL.SPRINKLER, new StateMap.Builder().ignore(Properties.WATERED)
+                .ignore(Properties.NEEDS_SOURCE)
                 .build());
-        ModelLoader.setCustomStateMapper(BlocksFL.TURNTABLE, new StateMap.Builder().ignore(StatePropertiesFL.CLAY)
+        ModelLoader.setCustomStateMapper(BlocksFL.TURNTABLE, new StateMap.Builder().ignore(Properties.CLAY_LEVEL)
                 .build());
 
         ModelLoader.setCustomModelResourceLocation(ItemsFL.CHEESECLOTH, 0,
@@ -136,14 +136,14 @@ public class ClientRegisterEventsFL {
         for (BlockStemCrop block : BlocksFL.getAllCropBlocks())
             ModelLoader.setCustomStateMapper(block, new VanillaStemStateMapper());
 
-        ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(StatePropertiesFL.CAN_GROW)
+        ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(Properties.CAN_GROW)
                 .build());
         ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)
                 .build());
         ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE)
                 .build());
 
-        ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(StatePropertiesFL.CAN_GROW)
+        ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(Properties.CAN_GROW)
                 .build());
         ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)
                 .build());
@@ -221,7 +221,7 @@ public class ClientRegisterEventsFL {
 
     @SubscribeEvent
     public static void onTextureStitchEvent(TextureStitchEvent.Pre event) {
-        for (PlanterRecipe crop : RegistriesFL.PLANTER_QUAD.getValuesCollection()) {
+        for (PlanterRecipe crop : TFCRegistries.PLANTER_QUAD.getValuesCollection()) {
             if (crop.getRegistryName() != null) {
                 for (int stage = 0; stage <= PlanterRecipe.getMaxStage(crop); stage++) {
                     event.getMap()

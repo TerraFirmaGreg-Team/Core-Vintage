@@ -29,8 +29,8 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import tfcflorae.TFCFlorae;
-import tfcflorae.objects.blocks.BlocksTFCF;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -41,7 +41,7 @@ import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 public class StructureGeneratorCorals extends WorldGenerator {
 
-    private String structureName;
+    private final String structureName;
 
     public StructureGeneratorCorals(String structureName) {
         this.structureName = structureName;
@@ -195,11 +195,11 @@ public class StructureGeneratorCorals extends WorldGenerator {
 
                     world.setBlockState(entry.getKey(), state, 3);
 
-                    TileEntity te = world.getTileEntity(entry.getKey());
-                    if (te == null) continue;
+                    TileEntity tile = world.getTileEntity(entry.getKey());
+                    if (tile == null) continue;
 
-                    if (te instanceof TileEntityLockableLoot)
-                        ((TileEntityLockableLoot) te).setLootTable(new ResourceLocation(data[1]), rand.nextLong());
+                    if (tile instanceof TileEntityLockableLoot tileEntityLockableLoot)
+                        tileEntityLockableLoot.setLootTable(new ResourceLocation(data[1]), rand.nextLong());
                 } catch (Exception e) {
                     e.printStackTrace();
                     continue;

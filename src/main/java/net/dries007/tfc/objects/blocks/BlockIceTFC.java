@@ -51,7 +51,8 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
      * Copied from {@link BlockIce#harvestBlock(World, EntityPlayer, BlockPos, IBlockState, TileEntity, ItemStack)} with a few changes
      */
     @Override
-    public void harvestBlock(@NotNull World worldIn, EntityPlayer player, @NotNull BlockPos pos, @NotNull IBlockState state, @Nullable TileEntity te,
+    public void harvestBlock(@NotNull World worldIn, EntityPlayer player, @NotNull BlockPos pos, @NotNull IBlockState state,
+                             @Nullable TileEntity tile,
                              @NotNull ItemStack stack) {
         //noinspection ConstantConditions
         player.addStat(StatList.getBlockStats(this));

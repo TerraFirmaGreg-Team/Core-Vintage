@@ -50,7 +50,8 @@ public class BlockThatchBed extends BlockBed implements IBlockSettings {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                    float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             playerIn.setSpawnPoint(pos, false);
             playerIn.sendMessage(new TextComponentTranslation(ModUtils.localize("thatch_bed.spawnpoint")));
@@ -102,7 +103,7 @@ public class BlockThatchBed extends BlockBed implements IBlockSettings {
     }
 
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack) {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity tile, ItemStack stack) {
         super.harvestBlock(worldIn, player, pos, state, null, stack); //Force vanilla to use #dropBlockAsItemWithChance
     }
 

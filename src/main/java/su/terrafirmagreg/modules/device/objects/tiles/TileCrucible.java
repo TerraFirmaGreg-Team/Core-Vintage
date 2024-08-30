@@ -1,11 +1,12 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
@@ -16,7 +17,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -37,8 +37,11 @@ import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TETickableInventory;
+
+
+import su.terrafirmagreg.api.base.tile.spi.ITileFields;
+
+
 import net.dries007.tfc.util.Alloy;
 
 import org.jetbrains.annotations.NotNull;
@@ -47,8 +50,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 
 @SuppressWarnings("WeakerAccess")
-public class TileCrucible extends TETickableInventory
-        implements ITickable, ITileFields, IItemHandlerSidedCallback, IProviderContainer<ContainerCrucible, GuiCrucible> {
+public class TileCrucible extends BaseTileTickableInventory
+        implements ITileFields, IItemHandlerSidedCallback, IProviderContainer<ContainerCrucible, GuiCrucible> {
 
     public static final int SLOT_INPUT_START = 0;
     public static final int SLOT_INPUT_END = 8;

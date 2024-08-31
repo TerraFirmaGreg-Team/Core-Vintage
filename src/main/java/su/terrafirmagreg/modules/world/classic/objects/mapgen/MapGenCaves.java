@@ -1,6 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.mapgen;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.data.lib.MathConstants;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
 
 import net.minecraft.block.state.IBlockState;
@@ -8,12 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
-import net.minecraftforge.registries.ForgeRegistry;
 
-
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 import java.util.Random;
 
@@ -49,12 +46,8 @@ public class MapGenCaves extends MapGenBase {
         double width = 1.5d + rainfall / 500d;
         int caveChance = 30 + (int) (rainfall / 50d);
 
-        width += ((ForgeRegistry<Rock>) TFCRegistries.ROCKS).getValue(rockLayer1[dlIndex])
-                .getRockCategory()
-                .getCaveGenMod();
-        runs += ((ForgeRegistry<Rock>) TFCRegistries.ROCKS).getValue(rockLayer1[dlIndex])
-                .getRockCategory()
-                .getCaveFreqMod();
+        width += RockType.valueOf(rockLayer1[dlIndex]).getCategory().getCaveGenMod();
+        runs += RockType.valueOf(rockLayer1[dlIndex]).getCategory().getCaveFreqMod();
 
         if (yCoord < 32) width *= 0.5;
         else if (yCoord < 64) width *= 0.65;
@@ -168,7 +161,7 @@ public class MapGenCaves extends MapGenBase {
                 for (int xCoord = Math.max(initialX - 1, 0); xCoord < Math.min(maxX + 1, 16); ++xCoord) {
                     for (int zCoord = Math.max(initialZ - 1, 0); zCoord < Math.min(maxZ + 1, 16); ++zCoord) {
                         for (int yCoord = Math.min(initialY + 1, 250); yCoord > Math.max(minY - 1, 0); --yCoord) {
-                            if (BlocksTFC.isWater(primer.getBlockState(xCoord, yCoord, zCoord)))
+                            if (BlockUtils.isWater(primer.getBlockState(xCoord, yCoord, zCoord)))
                                 continue outer;
                         }
                     }
@@ -192,18 +185,18 @@ public class MapGenCaves extends MapGenBase {
 
                             final IBlockState current = primer.getBlockState(xCoord, y, zCoord);
 
-                            if (!BlocksTFC.isSoil(current) && !BlocksTFC.isRawStone(current)) continue;
+                            if (!BlockUtils.isSoil(current) && !BlockUtils.isRawStone(current)) continue;
 
-                            if (BlocksTFC.isGrass(current)) grass = primer.getBlockState(xCoord, y, zCoord);
+                            if (BlockUtils.isGrass(current)) grass = primer.getBlockState(xCoord, y, zCoord);
 
-                            for (int upCount = 1; BlocksTFC.isSoilOrGravel(primer.getBlockState(xCoord, y + upCount, zCoord)); upCount++)
+                            for (int upCount = 1; BlockUtils.isSoilOrGravel(primer.getBlockState(xCoord, y + upCount, zCoord)); upCount++)
                                 primer.setBlockState(xCoord, y + upCount, zCoord, AIR);
 
                             if (y < 20 /* todo make option? was 10*/ && stabilityLayer[(worldZ & 15) << 4 | (worldX & 15)].valueInt == 1) {
                                 primer.setBlockState(xCoord, y, zCoord, LAVA);
                             } else {
                                 primer.setBlockState(xCoord, y, zCoord, AIR);
-                                if (grass != null && BlocksTFC.isDirt(primer.getBlockState(xCoord, y - 1, zCoord))) {
+                                if (grass != null && BlockUtils.isDirt(primer.getBlockState(xCoord, y - 1, zCoord))) {
                                     primer.setBlockState(xCoord, y - 1, zCoord, grass);
                                 }
                             }

@@ -38,14 +38,15 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
         this.variant = variant;
         this.type = type;
         this.settings = Settings.of(Material.CIRCUITS)
-                .soundType(SoundType.STONE)
+                .sound(SoundType.STONE)
                 .hardness(0.5f)
-                .addOreDict(variant, "stone")
-                .addOreDict(variant, "stone", type);
+                .oreDict(variant, "stone")
+                .oreDict(variant, "stone", type);
     }
 
     @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer) {
         IBlockState state = getStateFromMeta(meta);
         return BlockButton.canPlaceBlock(worldIn, pos, facing) ? state.withProperty(BlockDirectional.FACING, facing) :
                 state.withProperty(BlockDirectional.FACING, EnumFacing.DOWN);
@@ -56,6 +57,6 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
     }
 }

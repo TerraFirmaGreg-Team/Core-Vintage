@@ -42,12 +42,12 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
         this.type = type;
 
         this.settings = Settings.of(Material.WOOD)
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .renderLayer(BlockRenderLayer.CUTOUT)
                 .hardness(2.0F)
                 .resistance(5.0F)
-                .addOreDict(variant)
-                .addOreDict(variant, type);
+                .oreDict(variant)
+                .oreDict(variant, type);
 
         setHarvestLevel(ToolClasses.AXE, 0);
 
@@ -55,7 +55,8 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, @Nullable EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, @Nullable EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                    float hitX, float hitY,
                                     float hitZ) {
         if (!worldIn.isRemote && playerIn != null) {
             playerIn.displayGui(new InterfaceCraftingTable(this, worldIn, pos));

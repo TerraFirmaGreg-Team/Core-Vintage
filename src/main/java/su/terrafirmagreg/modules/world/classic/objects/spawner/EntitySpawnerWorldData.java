@@ -19,6 +19,7 @@ import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalS
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalWolf;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalYak;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalZebu;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataAnimalRespawn;
 
 import net.minecraft.entity.Entity;
@@ -38,7 +39,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.Climate;
@@ -140,9 +140,9 @@ public final class EntitySpawnerWorldData {
         final BlockPos chunkBlockPos = new BlockPos(centerX, 0, centerZ);
 
         final float temperature = Climate.getAvgTemp(worldIn, chunkBlockPos);
-        final float rainfall = ChunkData.getRainfall(worldIn, chunkBlockPos);
-        final float floraDensity = ChunkData.getFloraDensity(worldIn, chunkBlockPos);
-        final float floraDiversity = ChunkData.getFloraDiversity(worldIn, chunkBlockPos);
+        final float rainfall = ProviderChunkData.getRainfall(worldIn, chunkBlockPos);
+        final float floraDensity = ProviderChunkData.getFloraDensity(worldIn, chunkBlockPos);
+        final float floraDiversity = ProviderChunkData.getFloraDiversity(worldIn, chunkBlockPos);
 
         // Spawns only one group
         ForgeRegistries.ENTITIES.getValuesCollection().stream()

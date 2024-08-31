@@ -18,7 +18,7 @@ public class BlockSoilMudBrick extends BlockSoilMud {
     public BlockSoilMudBrick(SoilBlockVariant variant, SoilType type) {
         super(variant, type);
         getSettings()
-                .soundType(SoundType.STONE);
+                .sound(SoundType.STONE);
 
         setHarvestLevel(ToolClasses.PICKAXE, 0);
     }

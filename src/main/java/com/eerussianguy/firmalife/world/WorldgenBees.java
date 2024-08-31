@@ -1,6 +1,7 @@
 package com.eerussianguy.firmalife.world;
 
 import su.terrafirmagreg.api.base.biome.BaseBiome;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 
 import net.minecraft.block.material.Material;
@@ -12,7 +13,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 
 import java.util.Random;
 
@@ -27,7 +27,7 @@ public class WorldgenBees extends WorldGenerator {
         if (rand.nextInt(beeRarity) != 1)
             return false;
 
-        ChunkData chunkData = ChunkData.get(world, pos);
+        var chunkData = CapabilityChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return false;
 
         final Biome b = world.getBiome(pos);

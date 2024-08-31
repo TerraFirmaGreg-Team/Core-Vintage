@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.structures;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 
@@ -13,7 +14,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import tfcflorae.ConfigTFCF;
 
 import java.util.Random;
@@ -27,14 +27,15 @@ public class WorldGenStructures implements IWorldGenerator {
             final int z = (chunkZ << 4) + random.nextInt(16) + 8;
             final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
             final Biome b = world.getBiome(pos);
-            ChunkData data = ChunkData.get(world, pos);
+            var data = CapabilityChunkData.get(world, pos);
             IBlockState down = world.getBlockState(pos.down());
 
             if (ConfigTFCF.General.STRUCTURES.activateStructureGeneration) {
                 if (!(world.getBlockState(pos)
                         .getBlock() == ChunkGenClassic.FRESH_WATER.getBlock() || world.getBlockState(pos)
                         .getBlock() == ChunkGenClassic.SALT_WATER.getBlock() || world.getBlockState(pos)
-                        .getBlock() == ChunkGenClassic.HOT_WATER.getBlock() || b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.LAKE ||
+                        .getBlock() == ChunkGenClassic.HOT_WATER.getBlock() || b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN ||
+                        b == BiomesWorld.LAKE ||
                         b == BiomesWorld.RIVER || b == BiomesWorld.BEACH || b == BiomesWorld.GRAVEL_BEACH)) {
                     if (data.isInitialized() && data.getRainfall() >= 100f && random.nextInt(ConfigTFCF.General.STRUCTURES.spawnChanceRuins) == 0) {
                         int chance = random.nextInt(7);

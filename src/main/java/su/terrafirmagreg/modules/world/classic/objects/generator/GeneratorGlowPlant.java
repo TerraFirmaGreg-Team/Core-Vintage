@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
@@ -13,7 +15,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
@@ -32,11 +33,11 @@ public class GeneratorGlowPlant implements IWorldGenerator {
 
     private void generateGlowPlant(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-        ChunkData data = ChunkData.get(world, chunkBlockPos);
+        var data = CapabilityChunkData.get(world, chunkBlockPos);
 
         Biome b = world.getBiome(chunkBlockPos);
         float avgTemperature = Climate.getAvgTemp(world, chunkBlockPos);
-        float rainfall = ChunkData.getRainfall(world, chunkBlockPos);
+        float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
         float floraDensity = data.getFloraDensity();
         float floraDiversity = data.getFloraDiversity();
 

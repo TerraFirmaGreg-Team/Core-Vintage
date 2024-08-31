@@ -8,8 +8,11 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
+
+
+import su.terrafirmagreg.api.util.BlockUtils;
+
 
 import java.util.Random;
 
@@ -56,7 +59,7 @@ public interface ITreeGenerator {
         }
 
         // Check if there is a solid block beneath
-        if (!BlocksTFC.isGrowableSoil(world.getBlockState(pos.down()))) {
+        if (!BlockUtils.isGrowableSoil(world.getBlockState(pos.down()))) {
             return false;
         }
 

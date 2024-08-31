@@ -4,7 +4,7 @@
     "model": "cube_all",
     "uvlock": true,
     "textures": {
-      "all": "tfg:blocks/rock/sand/blaimorite"
+      "all": "tfg:blocks/rock/sand/quartzite"
     }
   },
   "variants": {

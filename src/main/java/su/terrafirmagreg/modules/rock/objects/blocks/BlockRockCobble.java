@@ -13,7 +13,7 @@ public class BlockRockCobble extends BlockRockFallable {
 
         getSettings()
                 .renderLayer(BlockRenderLayer.CUTOUT)
-                .addOreDict("cobblestone")
-                .hardness(variant.getBaseHardness() + type.getRockCategory().getHardnessModifier());
+                .oreDict("cobblestone")
+                .hardness(variant.getBaseHardness() + type.getCategory().getHardnessModifier());
     }
 }

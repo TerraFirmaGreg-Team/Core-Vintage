@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
@@ -23,7 +24,6 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -51,7 +51,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
     }
 
     public static BlockTallGrassTFC get(Plant plant) {
-        return (BlockTallGrassTFC) MAP.get(plant);
+        return MAP.get(plant);
     }
 
     @NotNull
@@ -72,7 +72,8 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
         } else {
             return soil.getBlock()
                     .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) &&
-                    this.plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && this.plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+                    this.plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
+                    this.plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
         }
     }
 
@@ -126,9 +127,9 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
 
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
-        int currentStage = (Integer) state.getValue(this.growthStageProperty);
+        int currentStage = state.getValue(this.growthStageProperty);
         this.plant.getStageForMonth(currentMonth);
-        int age = (Integer) state.getValue(AGE);
+        int age = state.getValue(AGE);
         if (!worldIn.isRemote) {
             ItemStack stack = player.getHeldItemMainhand();
             int i;
@@ -157,7 +158,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
 
     public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
         IBlockState plant = plantable.getPlant(world, pos.offset(direction));
-        return plant.getBlock() == this ? true : super.canSustainPlant(state, world, pos, direction, plantable);
+        return plant.getBlock() == this || super.canSustainPlant(state, world, pos, direction, plantable);
     }
 
     @NotNull
@@ -170,7 +171,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
             int j;
             if (this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
                     this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-                j = (Integer) state.getValue(AGE);
+                j = state.getValue(AGE);
                 if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
                     if (j == 3 && this.canGrow(worldIn, pos, state, worldIn.isRemote)) {
                         this.grow(worldIn, rand, pos, state);
@@ -183,7 +184,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
                 }
             } else if (!this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                     !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-                j = (Integer) state.getValue(AGE);
+                j = state.getValue(AGE);
                 if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
                     if (j == 0 && this.canShrink(worldIn, pos)) {
                         this.shrink(worldIn, pos);
@@ -202,12 +203,12 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
 
     @NotNull
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return this.getTallBoundingBax((Integer) state.getValue(AGE), state, source, pos);
+        return this.getTallBoundingBax(state.getValue(AGE), state, source, pos);
     }
 
     @NotNull
     protected BlockStateContainer createPlantBlockState() {
-        return new BlockStateContainer(this, new IProperty[] { AGE, this.growthStageProperty, DAYPERIOD, PART });
+        return new BlockStateContainer(this, AGE, this.growthStageProperty, DAYPERIOD, PART);
     }
 
     public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {

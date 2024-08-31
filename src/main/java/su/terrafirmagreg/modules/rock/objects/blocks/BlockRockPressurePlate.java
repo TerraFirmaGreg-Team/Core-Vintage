@@ -34,11 +34,11 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
         this.variant = variant;
         this.type = type;
         this.settings = Settings.of(Material.ROCK)
-                .soundType(SoundType.STONE)
+                .sound(SoundType.STONE)
                 .hardness(0.5f)
-                .addOreDict(variant)
-                .addOreDict(variant, "stone")
-                .addOreDict(variant, "stone", type);
+                .oreDict(variant)
+                .oreDict(variant, "stone")
+                .oreDict(variant, "stone", type);
 
     }
 
@@ -48,6 +48,6 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
         tooltip.add(new TextComponentTranslation("rockcategory.name")
-                .getFormattedText() + ": " + type.getRockCategory().getLocalizedName());
+                .getFormattedText() + ": " + type.getCategory().getLocalizedName());
     }
 }

@@ -8,6 +8,6 @@ public class BlockRockSmooth extends BlockRock {
     public BlockRockSmooth(RockBlockVariant variant, RockType type) {
         super(variant, type);
 
-        getSettings().addOreDict("stoneSmooth");
+        getSettings().oreDict("stoneSmooth");
     }
 }

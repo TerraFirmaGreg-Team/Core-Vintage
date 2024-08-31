@@ -22,8 +22,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
@@ -123,8 +121,7 @@ public class BlockCassiaCinnamonLog extends Block {
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         IBlockState downState = worldIn.getBlockState(pos.down());
-        boolean shouldDestroy = !(downState.getBlock() instanceof BlockCassiaCinnamonLog) && !BlocksTFC.isGrowableSoil(downState) &&
-                !BlocksTFCF.isGrowableSoil(downState);
+        boolean shouldDestroy = !(downState.getBlock() instanceof BlockCassiaCinnamonLog) && !BlockUtils.isGrowableSoil(downState);
         if (shouldDestroy) {
             worldIn.destroyBlock(pos, true);
             return;

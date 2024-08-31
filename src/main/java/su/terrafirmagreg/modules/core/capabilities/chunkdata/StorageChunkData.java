@@ -41,6 +41,8 @@ public final class StorageChunkData implements IStorage<ICapabilityChunkData> {
         NBTTagCompound root = new NBTTagCompound();
         root.setBoolean("valid", true);
 
+        root.setTag("soilLayer1", new NBTTagIntArray(instance.getSoilLayer1()));
+
         root.setTag("rockLayer1", new NBTTagIntArray(instance.getRockLayer1()));
         root.setTag("rockLayer2", new NBTTagIntArray(instance.getRockLayer2()));
         root.setTag("rockLayer3", new NBTTagIntArray(instance.getRockLayer3()));
@@ -75,6 +77,7 @@ public final class StorageChunkData implements IStorage<ICapabilityChunkData> {
     public void readNBT(Capability<ICapabilityChunkData> capability, ICapabilityChunkData instance, EnumFacing side, NBTBase nbt) {
         NBTTagCompound root = (NBTTagCompound) nbt;
         if (nbt != null && root.getBoolean("valid")) {
+            System.arraycopy(root.getIntArray("soilLayer1"), 0, instance.getSoilLayer1(), 0, 256);
             System.arraycopy(root.getIntArray("rockLayer1"), 0, instance.getRockLayer1(), 0, 256);
             System.arraycopy(root.getIntArray("rockLayer2"), 0, instance.getRockLayer2(), 0, 256);
             System.arraycopy(root.getIntArray("rockLayer3"), 0, instance.getRockLayer3(), 0, 256);

@@ -22,7 +22,6 @@ public final class ModuleWorld extends ModuleBase {
     public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWorld.class.getSimpleName());
 
     public static final WorldTypeClassic WORLD_TYPE_CLASSIC = new WorldTypeClassic();
-    //public static final WorldTypeExperimental WORLD_TYPE_EXPERIMENTAL = new WorldTypeExperimental();
 
     public ModuleWorld() {
         this.enableAutoRegistry();

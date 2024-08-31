@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 
@@ -14,18 +17,11 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-
-import static net.dries007.tfc.api.capability.chunkdata.ChunkData.getRock3;
 
 /**
  * Rewrite on fissure generation logic *EXPERIMENTAL* Needs more tweaking in rock placement
@@ -52,12 +48,12 @@ public class GeneratorFissure implements IWorldGenerator {
 
         start = world.getTopSolidOrLiquidBlock(start).down(3);
 
-        final boolean stable = ChunkData.isStable(world, start);
+        final boolean stable = ProviderChunkData.isStable(world, start);
         if (checkStability && stable) {
             return;
         }
 
-        final IBlockState rock = BlockRockVariant.get(getRock3(world, start), Rock.Type.RAW).getDefaultState();
+        final IBlockState rock = BlocksRock.RAW.get(ProviderChunkData.getRock3(world, start)).getDefaultState();
 
         int depth = 2 + random.nextInt(3);
         int radius = 1 + random.nextInt(2);
@@ -67,7 +63,7 @@ public class GeneratorFissure implements IWorldGenerator {
         for (int y = 1; y < 4; y++) {
             for (BlockPos pos : clearing) {
                 IBlockState block = world.getBlockState(pos.up(y));
-                if (BlocksTFC.isWater(block) && !BlocksTFC.isGround(block)) return;
+                if (BlockUtils.isWater(block) && !BlockUtils.isGround(block)) return;
             }
         }
 

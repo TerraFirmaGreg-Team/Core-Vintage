@@ -61,9 +61,9 @@ public class RockCategory extends Category<RockCategory> {
      * Представляет слой породы и определяет, принадлежит ли порода к данному слою.
      */
     public enum Layer implements Predicate<RockType> {
-        BOTTOM(3, x -> x.getRockCategory().layer3),
-        MIDDLE(2, x -> x.getRockCategory().layer2),
-        TOP(1, x -> x.getRockCategory().layer1);
+        BOTTOM(3, x -> x.getCategory().layer3),
+        MIDDLE(2, x -> x.getCategory().layer2),
+        TOP(1, x -> x.getCategory().layer1);
 
         public final int layer;
         private final Predicate<RockType> filter;

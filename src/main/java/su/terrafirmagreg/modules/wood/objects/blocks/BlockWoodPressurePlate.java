@@ -26,11 +26,11 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
         this.type = type;
 
         this.settings = Settings.of(Material.WOOD)
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .hardness(0.5F)
-                .addOreDict(variant)
-                .addOreDict(variant, "wood")
-                .addOreDict(variant, "wood", type);
+                .oreDict(variant)
+                .oreDict(variant, "wood")
+                .oreDict(variant, "wood", type);
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }

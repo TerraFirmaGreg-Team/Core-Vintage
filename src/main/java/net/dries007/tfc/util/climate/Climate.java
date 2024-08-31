@@ -1,12 +1,16 @@
 package net.dries007.tfc.util.climate;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.util.calendar.Month;
+
+
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 public final class Climate {
 
@@ -19,7 +23,7 @@ public final class Climate {
     }
 
     public static float getActualTemp(World world, BlockPos pos, long timeOffset) {
-        ChunkData data = ChunkData.get(world, pos);
+        var data = CapabilityChunkData.get(world, pos);
         if (data.isInitialized()) {
             return ClimateHelper.actualTemp(data.getRegionalTemp(), pos.getY(), pos.getZ(), timeOffset);
         }
@@ -39,7 +43,7 @@ public final class Climate {
     }
 
     public static float getDailyTemp(World world, BlockPos pos, long timeOffset) {
-        ChunkData data = ChunkData.get(world, pos);
+        var data = CapabilityChunkData.get(world, pos);
         if (data.isInitialized()) {
             return ClimateHelper.dailyTemp(data.getRegionalTemp(), pos.getZ(), timeOffset);
         }
@@ -59,7 +63,7 @@ public final class Climate {
     }
 
     public static float getMonthlyTemp(World world, BlockPos pos, long timeOffset) {
-        ChunkData data = ChunkData.get(world, pos);
+        var data = CapabilityChunkData.get(world, pos);
         if (data.isInitialized()) {
             return ClimateHelper.monthlyTemp(data.getRegionalTemp(), pos.getZ(), timeOffset);
         }
@@ -75,7 +79,7 @@ public final class Climate {
     }
 
     public static float getAvgTemp(World world, BlockPos pos) {
-        ChunkData data = ChunkData.get(world, pos);
+        var data = CapabilityChunkData.get(world, pos);
         if (data.isInitialized()) {
             return data.getAverageTemp();
         }
@@ -88,7 +92,7 @@ public final class Climate {
     }
 
     public static float getRainfall(World world, BlockPos pos) {
-        return ChunkData.getRainfall(world, pos);
+        return ProviderChunkData.getRainfall(world, pos);
     }
 
     public static float getRainfall(BlockPos pos) {

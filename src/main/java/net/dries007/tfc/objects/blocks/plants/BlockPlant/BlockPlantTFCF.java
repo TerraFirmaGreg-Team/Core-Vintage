@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants.BlockPlant;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -30,10 +31,7 @@ import net.minecraftforge.common.ForgeHooks;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -245,7 +243,7 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
 
     @Override
     protected boolean canSustainBush(IBlockState state) {
-        if (plant.getIsClayMarking()) return BlocksTFC.isClay(state) || isValidSoil(state);
+        if (plant.getIsClayMarking()) return BlockUtils.isClay(state) || isValidSoil(state);
         else return isValidSoil(state);
     }
 
@@ -284,7 +282,7 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
         if (state.getBlock() == this) {
             return soil.getBlock()
                     .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) &&
-                    plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+                    plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
         }
         return this.canSustainBush(soil);
     }
@@ -340,41 +338,19 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
     }
 
     private boolean isValidSoil(IBlockState state) {
-        switch (plant.getPlantType()) {
-            case CACTUS:
-            case DESERT:
-            case DESERT_TALL_PLANT:
-                return BlocksTFC.isSand(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-            case DRY:
-            case DRY_TALL_PLANT:
-                return BlocksTFC.isSand(state) || BlocksTFC.isDryGrass(state) || BlocksTFCF.isDryGrass(state) ||
-                        state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-            case REED:
-            case REED_SEA:
-            case TALL_REED:
-            case TALL_REED_SEA:
-                return BlocksTFC.isSand(state) || BlocksTFC.isSoil(state) || BlocksTFCF.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY ||
-                        state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-            case WATER:
-            case TALL_WATER:
-            case EMERGENT_TALL_WATER:
-                return BlocksTFC.isSand(state) || BlocksTFC.isSoilOrGravel(state) || BlocksTFC.isSoil(state) || BlocksTFC.isGround(state) ||
-                        BlocksTFCF.isSoilOrGravel(state) || BlocksTFCF.isSoil(state) || BlocksTFCF.isGround(state) ||
-                        state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-            case WATER_SEA:
-            case TALL_WATER_SEA:
-            case EMERGENT_TALL_WATER_SEA:
-                return BlocksTFC.isSand(state) || BlocksTFC.isSoilOrGravel(state) || BlocksTFC.isSoil(state) || BlocksTFC.isGround(state) ||
-                        BlocksTFCF.isSoilOrGravel(state) || BlocksTFCF.isSoil(state) || BlocksTFCF.isGround(state) ||
-                        state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-            case CREEPING:
-            case HANGING:
-                return BlocksTFC.isSand(state) || BlocksTFC.isSoilOrGravel(state) || BlocksTFC.isSoil(state) || BlocksTFC.isGround(state) ||
-                        BlocksTFCF.isSoilOrGravel(state) || BlocksTFCF.isSoil(state) || BlocksTFCF.isGround(state) ||
-                        state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-            default:
-                return BlocksTFC.isSoil(state) || BlocksTFCF.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY ||
-                        state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-        }
+        return switch (plant.getPlantType()) {
+            case CACTUS, DESERT, DESERT_TALL_PLANT ->
+                    BlockUtils.isSand(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+            case DRY, DRY_TALL_PLANT -> BlockUtils.isSand(state) || BlockUtils.isDryGrass(state) ||
+                    state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+            case REED, REED_SEA, TALL_REED, TALL_REED_SEA ->
+                    BlockUtils.isSand(state) || BlockUtils.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY ||
+                            state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+            case WATER, TALL_WATER, EMERGENT_TALL_WATER, WATER_SEA, TALL_WATER_SEA, EMERGENT_TALL_WATER_SEA, CREEPING, HANGING ->
+                    BlockUtils.isSand(state) || BlockUtils.isSoilOrGravel(state) || BlockUtils.isSoil(state) || BlockUtils.isGround(state) ||
+                            state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+            default -> BlockUtils.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY ||
+                    state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+        };
     }
 }

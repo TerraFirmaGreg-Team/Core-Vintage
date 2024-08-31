@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
@@ -57,19 +57,20 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IProviderT
         this.type = type;
 
         this.settings = Settings.of(Material.WOOD)
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .hardness(2.5f)
                 .size(Size.LARGE)
                 .weight(Weight.MEDIUM)
-                .addOreDict("chest")
-                .addOreDict("chest", "wood")
-                .addOreDict("chest", "wood", type);
+                .oreDict("chest")
+                .oreDict("chest", "wood")
+                .oreDict("chest", "wood", type);
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                    float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             GuiHandler.openGui(worldIn, pos, playerIn);
         }
@@ -77,8 +78,8 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IProviderT
     }
 
     /**
-     * This and the following methods are copied from vanilla to allow us to hook into vanilla's chest stuff Hoppers are hardcoded for vanilla chest insertions, which means we need
-     * to block them (to stop inserting items that aren't the correct size)
+     * This and the following methods are copied from vanilla to allow us to hook into vanilla's chest stuff Hoppers are hardcoded for vanilla chest
+     * insertions, which means we need to block them (to stop inserting items that aren't the correct size)
      */
     @Nullable
     @Override

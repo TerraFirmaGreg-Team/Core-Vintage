@@ -53,7 +53,7 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
 
         getSettings()
                 .registryKey("device/smeltery_firebox")
-                .soundType(SoundType.STONE)
+                .sound(SoundType.STONE)
                 .hardness(3.0F)
                 .lightValue(1)
                 .nonFullCube()
@@ -135,7 +135,8 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
+                                    float hitY, float hitZ) {
         if (!player.isSneaking()) {
             if (!world.isRemote) {
                 ItemStack held = player.getHeldItem(hand);
@@ -173,7 +174,8 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
     }
 
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer, EnumHand hand) {
         return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 

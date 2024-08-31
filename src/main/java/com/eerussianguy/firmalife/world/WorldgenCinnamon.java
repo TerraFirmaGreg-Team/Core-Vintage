@@ -1,6 +1,8 @@
 package com.eerussianguy.firmalife.world;
 
 import su.terrafirmagreg.api.base.biome.BaseBiome;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 
 import net.minecraft.block.state.IBlockState;
@@ -14,8 +16,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.init.PlantsFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 import java.util.Random;
 
@@ -24,7 +24,7 @@ public class WorldgenCinnamon extends WorldGenerator {
     public static boolean generateCinnamon(World world, Random rand, BlockPos pos, boolean worldgen) {
         IBlockState state = world.getBlockState(pos.down());
         if (worldgen && !world.isAirBlock(pos)) return false;
-        if (state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state)) {
+        if (state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGrowableSoil(state)) {
             for (int air = 1; air < 15; air++) {
                 if (!world.isAirBlock(pos.offset(EnumFacing.UP, air)))
                     return false;
@@ -60,7 +60,7 @@ public class WorldgenCinnamon extends WorldGenerator {
         if (rand.nextInt(cinnamonRarity) != 1)
             return false;
 
-        ChunkData chunkData = ChunkData.get(world, pos);
+        var chunkData = CapabilityChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return false;
 
         final Biome b = world.getBiome(pos);

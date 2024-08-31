@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.util.math.BlockPos;
@@ -10,7 +11,6 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.util.climate.Climate;
@@ -30,14 +30,15 @@ public class GeneratorBerryBushes implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0 && !BUSHES.isEmpty() && ConfigTFC.General.FOOD.berryBushRarity > 0) {
+        if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0 && !BUSHES.isEmpty() &&
+                ConfigTFC.General.FOOD.berryBushRarity > 0) {
             if (random.nextInt(ConfigTFC.General.FOOD.berryBushRarity) == 0) {
                 // Guarantees bush generation if possible (easier to balance by config file while also making it random)
                 Collections.shuffle(BUSHES);
                 BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
                 float temperature = Climate.getAvgTemp(world, chunkBlockPos);
-                float rainfall = ChunkData.getRainfall(world, chunkBlockPos);
+                float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
                 IBerryBush bush = BUSHES.stream()
                         .filter(x -> x.isValidConditions(temperature, rainfall))
                         .findFirst()

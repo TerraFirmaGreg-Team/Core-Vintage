@@ -38,14 +38,14 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock {
         this.variant = variant;
         this.type = type;
         this.settings = Settings.of(Material.ROCK)
-                .soundType(SoundType.STONE)
+                .sound(SoundType.STONE)
                 .size(Size.SMALL)
                 .weight(Weight.LIGHT)
                 .renderLayer(BlockRenderLayer.CUTOUT)
                 .harvestLevel(ToolClasses.PICKAXE, 0)
                 .fallable(this, variant.getSpecification())
-                .addOreDict(variant)
-                .addOreDict(variant, type);
+                .oreDict(variant)
+                .oreDict(variant, type);
     }
 
     @Override
@@ -54,6 +54,6 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
         tooltip.add(new TextComponentTranslation(
-                "rockcategory.name").getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
+                "rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
     }
 }

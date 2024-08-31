@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.base.biome;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorPlant;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorSand;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorWildCrops;
@@ -14,7 +16,6 @@ import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.util.climate.Climate;
@@ -132,11 +133,11 @@ public class BaseBiomeDecorator extends BiomeDecorator {
         ChunkPos forgeChunkPos = new ChunkPos(chunkPos); // actual ChunkPos instead of BlockPos, used for events
         MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(world, rng, forgeChunkPos));
 
-        ChunkData data = ChunkData.get(world, chunkPos);
+        var data = CapabilityChunkData.get(world, chunkPos);
         if (!data.isInitialized()) return;
 
         final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
-        final float rainfall = ChunkData.getRainfall(world, chunkPos);
+        final float rainfall = ProviderChunkData.getRainfall(world, chunkPos);
         final float floraDensity = data.getFloraDensity(); // Use for various plant based decoration (tall grass, those vanilla jungle shrub things, etc.)
         final float floraDiversity = data.getFloraDiversity();
 

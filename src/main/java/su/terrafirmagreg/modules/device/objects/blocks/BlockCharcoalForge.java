@@ -88,7 +88,7 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
 
         getSettings()
                 .registryKey("device/charcoal_forge")
-                .soundType(SoundType.GROUND)
+                .sound(SoundType.GROUND)
                 .hardness(1.0F)
                 .nonFullCube()
                 .nonOpaque();
@@ -215,7 +215,8 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
+                                    float hitY, float hitZ) {
         if (!world.isRemote) {
             if (!state.getValue(LIT)) {
                 ItemStack held = player.getHeldItem(hand);

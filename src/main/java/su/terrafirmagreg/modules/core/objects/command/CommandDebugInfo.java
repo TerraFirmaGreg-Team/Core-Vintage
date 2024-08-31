@@ -3,17 +3,15 @@ package su.terrafirmagreg.modules.core.objects.command;
 import su.terrafirmagreg.api.base.command.BaseCommand;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.ModuleCore;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 
 import net.minecraft.command.ICommandSender;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistry;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 
@@ -39,7 +37,7 @@ public class CommandDebugInfo extends BaseCommand {
         BlockPos pos = sender.getPosition();
 
         // Chunk data
-        ChunkData chunkData = ChunkData.get(world, pos);
+        var chunkData = CapabilityChunkData.get(world, pos);
 
         ModuleCore.LOGGER.info("ROCK LAYER DATA");
         for (int x = 0; x < 16; x++) {
@@ -50,7 +48,7 @@ public class CommandDebugInfo extends BaseCommand {
         }
 
         ModuleCore.LOGGER.info("RAW CHUNK DATA VIEW");
-        NBTBase nbt = ChunkDataProvider.CHUNK_DATA_CAPABILITY.writeNBT(chunkData, null);
+        var nbt = CapabilityChunkData.CAPABILITY.writeNBT(chunkData, null);
         ModuleCore.LOGGER.info(nbt == null ? "writeNBT returned null" : nbt.toString());
 
         // Rock Registry Information

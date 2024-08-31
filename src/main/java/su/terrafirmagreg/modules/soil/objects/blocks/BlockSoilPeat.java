@@ -17,7 +17,7 @@ public class BlockSoilPeat extends BaseBlock {
 
         setHarvestLevel(ToolClasses.SHOVEL, 0);
         getSettings()
-                .soundType(SoundType.GROUND)
+                .sound(SoundType.GROUND)
                 .hardness(0.6F);
 
         BlockUtils.setFireInfo(this, 5, 10);

@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core.objects.command;
 
 import su.terrafirmagreg.api.base.command.BaseCommand;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -10,8 +11,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.chunk.Chunk;
 
-
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,7 +35,7 @@ public class CommandWorkChunk extends BaseCommand {
         Entity entity = iCommandSender.getCommandSenderEntity();
         if (entity != null) {
             Chunk chunk = minecraftServer.getEntityWorld().getChunk(entity.getPosition());
-            ChunkData data = ChunkData.get(chunk);
+            var data = CapabilityChunkData.get(chunk);
             if (action.equals("add")) {
                 data.addWork(work);
             } else if (action.equals("set")) {

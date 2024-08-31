@@ -1,7 +1,9 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
 import su.terrafirmagreg.api.base.biome.BaseBiome;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.StructureUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 
 import net.minecraft.block.state.IBlockState;
@@ -15,11 +17,8 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.types.TreesTFCF;
 import tfcflorae.ConfigTFCF;
 
@@ -41,7 +40,7 @@ public class GeneratorCinnamon extends WorldGenerator {
         if (rand.nextInt(ConfigTFCF.General.WORLD.cinnamonRarity) < 5)
             return false;
 
-        ChunkData chunkData = ChunkData.get(world, pos);
+        var chunkData = CapabilityChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return false;
 
         final Biome b = world.getBiome(pos);
@@ -60,14 +59,12 @@ public class GeneratorCinnamon extends WorldGenerator {
         int gen = rand.nextInt(8);
 
         if (gen == 0 && rain > 250 && temp > 20 && density > 0.3f && world.isAirBlock(pos) && world.getBlockState(pos.down())
-                .isSideSolid(world, pos.down(), EnumFacing.UP) &&
-                (BlocksTFC.isGround(world.getBlockState(pos.down())) || BlocksTFCF.isGround(world.getBlockState(pos.down())))) {
+                .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(world.getBlockState(pos.down()))) {
             //return generateCinnamon(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, BlocksTFCF.CASSIA_CINNAMON_LOG.getDefaultState());
             return generateCinnamonVariant(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, TreesTFCF.GEN_CASSIA_CINNAMON);
         }
         if (gen == 1 && rain > 250 && temp > 20 && density > 0.3f && world.isAirBlock(pos) && world.getBlockState(pos.down())
-                .isSideSolid(world, pos.down(), EnumFacing.UP) &&
-                (BlocksTFC.isGround(world.getBlockState(pos.down())) || BlocksTFCF.isGround(world.getBlockState(pos.down())))) {
+                .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(world.getBlockState(pos.down()))) {
             //return generateCinnamon(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, BlocksTFCF.CEYLON_CINNAMON_LOG.getDefaultState());
             return generateCinnamonVariant(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, TreesTFCF.GEN_CASSIA_CINNAMON);
         }
@@ -76,7 +73,7 @@ public class GeneratorCinnamon extends WorldGenerator {
 
     private boolean generateCinnamonVariant(World world, Random rand, BlockPos pos, Tree tree, ITreeGenerator CinnamonToGen) {
         IBlockState state = world.getBlockState(pos.down());
-        if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGrowableSoil(state))) {
+        if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && (BlockUtils.isGrowableSoil(state))) {
             TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
             /*String variant = variants[variants.length == 1 ? 0 : rand.nextInt(variants.length)];
             ResourceLocation base = new ResourceLocation(tree.getRegistryName() + "/" + variant);

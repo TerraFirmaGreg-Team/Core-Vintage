@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
@@ -14,16 +17,14 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.util.climate.Climate;
 
 import java.util.Random;
+
+import static su.terrafirmagreg.data.Properties.CLAY;
 
 /**
  * todo: make these bigger without causing cascading lag.
@@ -50,7 +51,7 @@ public class GeneratorSoilPits implements IWorldGenerator {
         int radius = rng.nextInt(6) + 2;
         int depth = rng.nextInt(3) + 1;
         if (rng.nextInt(ConfigWorld.MISC.clayRarity) != 0 || start.getY() > WorldTypeClassic.SEALEVEL + 6) return;
-        if (ChunkData.getRainfall(world, start) < ConfigWorld.MISC.clayRainfallThreshold) return;
+        if (ProviderChunkData.getRainfall(world, start) < ConfigWorld.MISC.clayRainfallThreshold) return;
 
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
@@ -61,13 +62,15 @@ public class GeneratorSoilPits implements IWorldGenerator {
                 for (int y = -depth; y <= +depth; y++) {
                     final BlockPos pos = posHorizontal.add(0, y, 0);
                     final IBlockState current = world.getBlockState(pos);
-                    if (BlocksTFC.isDirt(current)) {
-                        world.setBlockState(pos, BlockRockVariant.get(ChunkData.getRockHeight(world, pos), Rock.Type.CLAY)
-                                .getDefaultState(), 2);
+                    if (BlockUtils.isDirt(current)) {
+                        world.setBlockState(pos,
+                                BlocksSoil.DIRT.get(ProviderChunkData.getSoilHeight(world, pos)).getDefaultState().withProperty(CLAY, Boolean.TRUE),
+                                2);
                         flag = true;
-                    } else if (BlocksTFC.isGrass(current)) {
-                        world.setBlockState(pos, BlockRockVariant.get(ChunkData.getRockHeight(world, pos), Rock.Type.CLAY_GRASS)
-                                .getDefaultState(), 2);
+                    } else if (BlockUtils.isGrass(current)) {
+                        world.setBlockState(pos,
+                                BlocksSoil.GRASS.get(ProviderChunkData.getSoilHeight(world, pos)).getDefaultState().withProperty(CLAY, Boolean.TRUE),
+                                2);
                         flag = true;
                     }
                 }
@@ -81,7 +84,7 @@ public class GeneratorSoilPits implements IWorldGenerator {
                             int plantAge = plant.getAgeForWorldgen(rng, Climate.getActualTemp(world, pos));
 
                             if (!world.provider.isNether() && !world.isOutsideBuildHeight(pos) &&
-                                    plant.isValidLocation(Climate.getActualTemp(world, pos), ChunkData.getRainfall(world, pos),
+                                    plant.isValidLocation(Climate.getActualTemp(world, pos), ProviderChunkData.getRainfall(world, pos),
                                             world.getLightFor(EnumSkyBlock.SKY, pos)) &&
                                     world.isAirBlock(pos) &&
                                     plantBlock.canBlockStay(world, pos, state)) {
@@ -101,7 +104,7 @@ public class GeneratorSoilPits implements IWorldGenerator {
         byte depth = 2;
 
         if (rng.nextInt(30) != 0 || start.getY() > WorldTypeClassic.SEALEVEL) return;
-        ChunkData data = ChunkData.get(world, start);
+        var data = CapabilityChunkData.get(world, start);
         if (data.isInitialized() && data.getRainfall() >= 375f && data.getFloraDiversity() >= 0.5f && data.getFloraDensity() >= 0.5f &&
                 world.getBiome(start).getHeightVariation() < 0.15)
             return;
@@ -114,9 +117,9 @@ public class GeneratorSoilPits implements IWorldGenerator {
                     final BlockPos pos = start.add(x, y, z);
                     final IBlockState current = world.getBlockState(pos);
 
-                    if (BlocksTFC.isGrass(current)) {
+                    if (BlockUtils.isGrass(current)) {
                         world.setBlockState(pos, BlocksSoil.PEAT_GRASS.getDefaultState(), 2);
-                    } else if (BlocksTFC.isDirt(current) || BlocksTFC.isClay(current)) {
+                    } else if (BlockUtils.isDirt(current) || BlockUtils.isClay(current)) {
                         world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState(), 2);
                     }
                 }

@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
@@ -14,8 +17,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
 import net.dries007.tfc.util.climate.Climate;
@@ -33,11 +34,11 @@ public class GeneratorCorals implements IWorldGenerator {
 
     private void generateCoral(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-        ChunkData data = ChunkData.get(world, chunkBlockPos);
+        var data = CapabilityChunkData.get(world, chunkBlockPos);
 
         Biome b = world.getBiome(chunkBlockPos);
         float avgTemperature = Climate.getAvgTemp(world, chunkBlockPos);
-        float rainfall = ChunkData.getRainfall(world, chunkBlockPos);
+        float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
         float floraDensity = data.getFloraDensity();
         float floraDiversity = data.getFloraDiversity();
 
@@ -992,7 +993,7 @@ public class GeneratorCorals implements IWorldGenerator {
         IBlockState south = world.getBlockState(pos.south());
         IBlockState east = world.getBlockState(pos.east());
         IBlockState west = world.getBlockState(pos.west());
-        return ((BlocksTFC.isGround(down) || up.getBlock() instanceof BlockCoralBlock || down.getBlock() instanceof BlockCoralBlock ||
+        return ((BlockUtils.isGround(down) || up.getBlock() instanceof BlockCoralBlock || down.getBlock() instanceof BlockCoralBlock ||
                 north.getBlock() instanceof BlockCoralBlock || south.getBlock() instanceof BlockCoralBlock ||
                 east.getBlock() instanceof BlockCoralBlock || west.getBlock() instanceof BlockCoralBlock) && !(world.isAirBlock(pos.up())));
     }

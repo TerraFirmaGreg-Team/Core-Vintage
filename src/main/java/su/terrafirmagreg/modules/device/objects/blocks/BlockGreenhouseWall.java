@@ -41,8 +41,8 @@ public class BlockGreenhouseWall extends BaseBlock {
 
         getSettings()
                 .registryKey("device/greenhouse/wall")
-                .addOreDict("greenhouse")
-                .soundType(SoundType.METAL)
+                .oreDict("greenhouse")
+                .sound(SoundType.METAL)
                 .hardness(2.0f)
                 .resistance(3.0f)
                 .lightValue(0)
@@ -57,7 +57,8 @@ public class BlockGreenhouseWall extends BaseBlock {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
+                                    float hitY, float hitZ) {
         if (!world.isRemote) {
             ItemStack held = player.getHeldItem(hand);
             if (!state.getValue(GLASS)) {
@@ -116,7 +117,8 @@ public class BlockGreenhouseWall extends BaseBlock {
     }
 
     @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer) {
         if (facing.getAxis() == EnumFacing.Axis.Y) {
             facing = placer.getHorizontalFacing().getOpposite();
         }

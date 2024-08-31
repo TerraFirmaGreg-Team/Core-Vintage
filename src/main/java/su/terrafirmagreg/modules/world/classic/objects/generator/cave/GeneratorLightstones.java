@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.cave;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
@@ -12,7 +13,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.groundcover.BlockLightstone;
 
@@ -29,7 +29,7 @@ public class GeneratorLightstones implements IWorldGenerator {
         int y = rng.nextInt(70) + 1;
         BlockPos chunkPos = new BlockPos(chunkX << 4, y, chunkZ << 4);
 
-        ChunkData data = ChunkData.get(world, chunkPos);
+        var data = CapabilityChunkData.get(world, chunkPos);
         final float floraDensity = data.getFloraDensity();
         final float floraDiversity = data.getFloraDiversity();
 

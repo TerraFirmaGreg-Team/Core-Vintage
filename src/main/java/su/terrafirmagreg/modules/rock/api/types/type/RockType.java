@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.rock.api.types.type;
 
-import su.terrafirmagreg.data.lib.types.type.Type;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.data.lib.types.type.Type;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 
 import net.minecraft.util.ResourceLocation;
@@ -30,7 +30,7 @@ public class RockType extends Type<RockType> {
     private static final Set<RockType> types = new ObjectOpenHashSet<>();
 
     private final String name;
-    private final RockCategory rockCategory;
+    private final RockCategory category;
     private final OrePrefix orePrefix;
     private final Material material;
     private final boolean isFlux;
@@ -38,7 +38,7 @@ public class RockType extends Type<RockType> {
     private RockType(Builder builder) {
         super(builder.name);
         this.name = builder.name;
-        this.rockCategory = builder.rockCategory;
+        this.category = builder.category;
         this.orePrefix = builder.orePrefix;
         this.material = builder.material;
         this.isFlux = builder.isFlux;
@@ -100,7 +100,7 @@ public class RockType extends Type<RockType> {
     public static class Builder {
 
         private final String name;
-        private RockCategory rockCategory;
+        private RockCategory category;
         private OrePrefix orePrefix;
         private Material material;
         private boolean isFlux = false;
@@ -120,7 +120,7 @@ public class RockType extends Type<RockType> {
          * @param orePrefix Орпрефикс для типа породы.
          * @return Builder.
          */
-        public Builder setOrePrefix(@NotNull OrePrefix orePrefix) {
+        public Builder orePrefix(@NotNull OrePrefix orePrefix) {
             this.orePrefix = orePrefix;
             return this;
         }
@@ -131,7 +131,7 @@ public class RockType extends Type<RockType> {
          * @param material Материал для типа породы.
          * @return Builder.
          */
-        public Builder setMaterial(@NotNull Material material) {
+        public Builder material(@NotNull Material material) {
             this.material = material;
             return this;
         }
@@ -142,8 +142,8 @@ public class RockType extends Type<RockType> {
          * @param rockCategory Категория породы.
          * @return Builder.
          */
-        public Builder setRockCategory(@NotNull RockCategory rockCategory) {
-            this.rockCategory = rockCategory;
+        public Builder rockCategory(@NotNull RockCategory rockCategory) {
+            this.category = rockCategory;
             return this;
         }
 
@@ -152,7 +152,7 @@ public class RockType extends Type<RockType> {
          *
          * @return Builder.
          */
-        public Builder setFlux() {
+        public Builder isFlux() {
             this.isFlux = true;
             return this;
         }

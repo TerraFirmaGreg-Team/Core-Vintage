@@ -13,9 +13,6 @@ import su.terrafirmagreg.modules.world.classic.objects.generator.groundcover.Gen
 import su.terrafirmagreg.modules.world.classic.objects.generator.groundcover.GeneratorSurfacePinecone;
 import su.terrafirmagreg.modules.world.classic.objects.generator.groundcover.GeneratorSurfaceSeashells;
 import su.terrafirmagreg.modules.world.classic.objects.generator.groundcover.GeneratorSurfaceTwig;
-import su.terrafirmagreg.modules.world.classic.objects.generator.soil.GeneratorClays;
-import su.terrafirmagreg.modules.world.classic.objects.generator.soil.GeneratorSoilDecorative;
-import su.terrafirmagreg.modules.world.classic.objects.generator.soil.GeneratorSoilTypes;
 import su.terrafirmagreg.modules.world.classic.objects.generator.structures.WorldGenStructures;
 import su.terrafirmagreg.modules.world.classic.objects.generator.structures.WorldGenStructuresCorals;
 
@@ -70,9 +67,9 @@ public class CommonProxy {
             }
             if (ConfigTFCF.General.WORLD.enableSoilPits) {
                 //GameRegistry.registerWorldGenerator(new WorldGenSoil(), 0);
-                GameRegistry.registerWorldGenerator(new GeneratorSoilTypes(), 0);
-                GameRegistry.registerWorldGenerator(new GeneratorSoilDecorative(), 0);
-                GameRegistry.registerWorldGenerator(new GeneratorClays(), 0);
+                //                GameRegistry.registerWorldGenerator(new GeneratorSoilTypes(), 0);
+                //                GameRegistry.registerWorldGenerator(new GeneratorSoilDecorative(), 0);
+                //                GameRegistry.registerWorldGenerator(new GeneratorClays(), 0);
             }
             if (ConfigTFCF.General.WORLD.enableGroundcoverSeashell) {
                 GameRegistry.registerWorldGenerator(new GeneratorSurfaceSeashells(), 0);

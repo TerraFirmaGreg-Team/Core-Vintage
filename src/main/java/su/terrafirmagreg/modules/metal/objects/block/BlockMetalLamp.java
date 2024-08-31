@@ -77,10 +77,10 @@ public class BlockMetalLamp
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.METAL)
+                .sound(SoundType.METAL)
                 .nonCube()
                 .hardness(1f)
-                .addOreDict("lamp");
+                .oreDict("lamp");
 
         setTickRandomly(true);
         setDefaultState(getBlockState().getBaseState()

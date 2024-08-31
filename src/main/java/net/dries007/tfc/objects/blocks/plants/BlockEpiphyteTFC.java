@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
@@ -15,7 +17,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.util.climate.Climate;
@@ -95,7 +96,7 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
         for (EnumFacing enumfacing : FACING.getAllowedValues()) {
             if (this.canPlaceAt(worldIn, pos, enumfacing)) {
-                return plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+                return plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
             }
         }
 

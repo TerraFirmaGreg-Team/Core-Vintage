@@ -53,8 +53,8 @@ import static su.terrafirmagreg.data.Properties.LIT;
 import static su.terrafirmagreg.data.Properties.SEALED;
 
 /**
- * Powderkeg is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state property, and cached in
- * the TE (for gui purposes)
+ * Powderkeg is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block
+ * state property, and cached in the TE (for gui purposes)
  */
 @SuppressWarnings("deprecation")
 public class BlockPowderKeg extends BaseBlockContainer implements IProviderTile {
@@ -66,7 +66,7 @@ public class BlockPowderKeg extends BaseBlockContainer implements IProviderTile 
 
         getSettings()
                 .registryKey("device/powderkeg")
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .hardness(2F)
                 .nonCube()
                 .weight(Weight.VERY_HEAVY);
@@ -165,8 +165,8 @@ public class BlockPowderKeg extends BaseBlockContainer implements IProviderTile 
     }
 
     /**
-     * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor change. Cases may include when redstone power is updated,
-     * cactus blocks popping off due to a neighboring solid block, etc.
+     * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor change. Cases may include
+     * when redstone power is updated, cactus blocks popping off due to a neighboring solid block, etc.
      */
     @Override
     public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
@@ -211,7 +211,8 @@ public class BlockPowderKeg extends BaseBlockContainer implements IProviderTile 
      * Called when the block is right clicked by a player.
      */
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                    float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             ItemStack heldItem = playerIn.getHeldItem(hand);
             var tile = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);

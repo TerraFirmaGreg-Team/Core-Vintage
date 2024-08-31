@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.groundcover;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -32,8 +34,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.objects.items.rock.ItemRock;
@@ -231,8 +231,8 @@ public class BlockSurfaceRock extends BlockBush implements IRockObject {
         IBlockState soil = worldIn.getBlockState(pos.down());
 
         if (state.getBlock() == this) {
-            return (BlocksTFC.isGround(soil) || BlocksTFCF.isGround(soil) || worldIn.getBlockState(pos.down())
-                    .isFullBlock()) && !(BlocksTFC.isSaltWater(soil) || BlocksTFC.isFreshWater(soil));
+            return (BlockUtils.isGround(soil) || worldIn.getBlockState(pos.down())
+                    .isFullBlock()) && !(BlockUtils.isSaltWater(soil) || BlockUtils.isFreshWater(soil));
         }
         return this.canSustainBush(soil);
     }

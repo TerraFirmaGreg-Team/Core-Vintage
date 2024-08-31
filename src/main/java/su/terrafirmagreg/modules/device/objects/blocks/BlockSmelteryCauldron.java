@@ -44,7 +44,7 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProvi
 
         getSettings()
                 .registryKey("device/smeltery_cauldron")
-                .soundType(SoundType.STONE)
+                .sound(SoundType.STONE)
                 .nonOpaque()
                 .nonFullCube()
                 .size(Size.LARGE)
@@ -89,7 +89,8 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProvi
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
+                                    float hitY, float hitZ) {
         if (!player.isSneaking()) {
             if (!world.isRemote) {
                 if (world.getBlockState(pos.down()).getBlock() instanceof BlockSmelteryFirebox) {
@@ -124,7 +125,8 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProvi
     }
 
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer, EnumHand hand) {
         return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 

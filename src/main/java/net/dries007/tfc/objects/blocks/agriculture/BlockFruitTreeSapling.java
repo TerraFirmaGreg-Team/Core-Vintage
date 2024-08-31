@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -21,7 +22,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
@@ -69,7 +69,7 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
             var tile = TileUtils.getTile(world, pos, TETickCounter.class);
             if (tile != null) {
                 float temp = Climate.getActualTemp(world, pos);
-                float rainfall = ChunkData.getRainfall(world, pos);
+                float rainfall = ProviderChunkData.getRainfall(world, pos);
                 long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                 if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier) && tree.isValidForGrowth(temp, rainfall)) {
                     tile.resetCounter();
@@ -148,7 +148,7 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
     @Override
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
         float temp = Climate.getActualTemp(world, pos);
-        float rainfall = ChunkData.getRainfall(world, pos);
+        float rainfall = ProviderChunkData.getRainfall(world, pos);
         boolean canGrow = tree.isValidForGrowth(temp, rainfall);
         return canGrow ? GrowthStatus.GROWING : GrowthStatus.NOT_GROWING;
     }

@@ -4,6 +4,8 @@ import su.terrafirmagreg.api.util.WorldUtils;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorBerryBushes;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorPlant;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorTrees;
@@ -35,7 +37,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import com.google.common.collect.Lists;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
@@ -70,14 +71,14 @@ import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 public class WorldRegenHandler {
 
     public static final GeneratorPlant PLANT_GEN = new GeneratorPlant();
-    private static final RegenRocksSticks ROCKS_GEN = new RegenRocksSticks(true);
+    private static final RegenRocksSticks ROCKS_GEN = new RegenRocksSticks();
     private static final RegenWildCrops CROPS_GEN = new RegenWildCrops();
     private static final GeneratorBerryBushes BUSH_GEN = new GeneratorBerryBushes();
     private static final List<ChunkPos> POSITIONS = new LinkedList<>();
 
     @SubscribeEvent
     public static void onChunkLoad(ChunkDataEvent.Load event) {
-        ChunkData chunkData = ChunkData.get(event.getChunk());
+        var chunkData = CapabilityChunkData.get(event.getChunk());
         if (event.getWorld().provider.getDimension() == 0 && chunkData.isInitialized() && POSITIONS.size() < 1000) {
             //Only run this in the early months of each year
             if (Calendar.CALENDAR_TIME.getMonthOfYear()
@@ -97,7 +98,7 @@ public class WorldRegenHandler {
                 if (tps > ConfigTFC.General.WORLD_REGEN.minRegenTps) {
                     Chunk chunk = event.world.getChunk(pos.x, pos.z);
                     BlockPos blockPos = pos.getBlock(0, 0, 0);
-                    ChunkData chunkData = ChunkData.get(event.world, pos.getBlock(0, 0, 0));
+                    var chunkData = CapabilityChunkData.get(event.world, pos.getBlock(0, 0, 0));
                     IChunkProvider chunkProvider = event.world.getChunkProvider();
                     IChunkGenerator chunkGenerator = ((ChunkProviderServer) chunkProvider).chunkGenerator;
 
@@ -225,9 +226,9 @@ public class WorldRegenHandler {
     public static void regenPredators(World worldIn, Biome biomeIn, int centerX, int centerZ, int diameterX, int diameterZ, Random randomIn) {
         final BlockPos chunkBlockPos = new BlockPos(centerX, 0, centerZ);
         final float temperature = Climate.getAvgTemp(worldIn, chunkBlockPos);
-        final float rainfall = ChunkData.getRainfall(worldIn, chunkBlockPos);
-        final float floraDensity = ChunkData.getFloraDensity(worldIn, chunkBlockPos);
-        final float floraDiversity = ChunkData.getFloraDiversity(worldIn, chunkBlockPos);
+        final float rainfall = ProviderChunkData.getRainfall(worldIn, chunkBlockPos);
+        final float floraDensity = ProviderChunkData.getFloraDensity(worldIn, chunkBlockPos);
+        final float floraDiversity = ProviderChunkData.getFloraDiversity(worldIn, chunkBlockPos);
         ForgeRegistries.ENTITIES.getValuesCollection()
                 .stream()
                 .filter((x) -> {

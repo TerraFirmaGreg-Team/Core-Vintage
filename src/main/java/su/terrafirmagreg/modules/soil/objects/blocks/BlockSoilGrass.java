@@ -53,11 +53,12 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IProviderB
         this.variant = variant;
         this.type = type;
         this.settings = Settings.of(Material.GRASS)
-                .soundType(SoundType.PLANT)
+                .sound(SoundType.PLANT)
+                .hardness(2.1F)
+                .randomTicks()
                 .renderLayer(BlockRenderLayer.CUTOUT)
                 .harvestLevel(ToolClasses.SHOVEL, 0)
-                .fallable(this, variant.getSpecification())
-                .hardness(2.1F);
+                .fallable(this, variant.getSpecification());
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)
@@ -76,8 +77,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IProviderB
             if (!worldIn.isAreaLoaded(pos, 3))
                 return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
             Block block = worldIn.getBlockState(pos).getBlock();
-            if (block instanceof ISoilBlock soilBlockVariant) {
-                var soil = soilBlockVariant.getType();
+            if (block instanceof ISoilBlock soilBlock) {
+                var soil = soilBlock.getType();
 
                 if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {
                     worldIn.setBlockState(pos, BlocksSoil.DIRT.get(soil).getDefaultState());

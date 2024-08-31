@@ -51,7 +51,7 @@ public class BlockInductionCrucible extends BaseBlock implements IProviderTile {
 
         getSettings()
                 .registryKey("device/induction_crucible")
-                .soundType(SoundType.METAL)
+                .sound(SoundType.METAL)
                 .size(Size.LARGE)
                 .weight(Weight.MEDIUM)
                 .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
@@ -93,7 +93,8 @@ public class BlockInductionCrucible extends BaseBlock implements IProviderTile {
     }
 
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
+                                      @Nullable Entity entityIn,
                                       boolean isActualState) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_LEGS);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_WEST);
@@ -115,7 +116,8 @@ public class BlockInductionCrucible extends BaseBlock implements IProviderTile {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX,
+                                    float hitY, float hitZ) {
         if (!player.isSneaking()) {
             if (!world.isRemote) {
                 GuiHandler.openGui(world, pos, player);
@@ -136,7 +138,8 @@ public class BlockInductionCrucible extends BaseBlock implements IProviderTile {
     }
 
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer, EnumHand hand) {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 

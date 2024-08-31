@@ -1,7 +1,11 @@
 package su.terrafirmagreg.modules.core.features.falling;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.worldtracker.CapabilityWorldTracker;
+import su.terrafirmagreg.modules.core.capabilities.worldtracker.spi.CollapseData;
 import su.terrafirmagreg.modules.core.objects.entity.EntityFallingBlock;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
 
 import net.minecraft.block.Block;
@@ -22,12 +26,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
-import net.dries007.tfc.api.capability.worldtracker.CollapseData;
-import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -43,6 +42,8 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 import static su.terrafirmagreg.data.lib.MathConstants.RNG;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.FARMLAND;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS_PATH;
 
 public class FallingBlockManager {
 
@@ -134,9 +135,8 @@ public class FallingBlockManager {
     }
 
     public static boolean hasSupportingSideBlock(IBlockState state) {
-        return state.isNormalCube() || SIDE_SUPPORTS.contains(state) || state.getBlock() instanceof BlockRockVariant &&
-                (((BlockRockVariant) state.getBlock()).getType() == Rock.Type.FARMLAND ||
-                        ((BlockRockVariant) state.getBlock()).getType() == Rock.Type.PATH);
+        return state.isNormalCube() || SIDE_SUPPORTS.contains(state) ||
+                state.getBlock() instanceof ISoilBlock soilBlock && BlockUtils.isSoilBlockType(soilBlock, FARMLAND, GRASS_PATH);
     }
 
     public static boolean shouldFall(World world, BlockPos posToFallFrom, BlockPos originalPos, IBlockState originalState,
@@ -327,7 +327,7 @@ public class FallingBlockManager {
         }
 
         if (!secondaryPositions.isEmpty()) {
-            WorldTracker tracker = world.getCapability(CapabilityWorldTracker.CAPABILITY, null);
+            var tracker = CapabilityWorldTracker.get(world);
             if (tracker != null) {
                 tracker.addCollapseData(new CollapseData(centerPoint, secondaryPositions, radiusSquared));
             }
@@ -404,7 +404,8 @@ public class FallingBlockManager {
 
         }
 
-        public Specification(boolean canFallHorizontally, boolean collapsable, Supplier<SoundEvent> soundEventDelegate, IFallDropsProvider fallDropsProvider) {
+        public Specification(boolean canFallHorizontally, boolean collapsable, Supplier<SoundEvent> soundEventDelegate,
+                             IFallDropsProvider fallDropsProvider) {
             this.canFallHorizontally = canFallHorizontally;
             this.collapsable = collapsable;
             if (this.collapsable) {
@@ -437,7 +438,8 @@ public class FallingBlockManager {
             return resultingState == null ? originalState : resultingState;
         }
 
-        public Iterable<ItemStack> getDrops(World world, BlockPos pos, IBlockState state, @Nullable NBTTagCompound teData, int fallTime, float fallDistance) {
+        public Iterable<ItemStack> getDrops(World world, BlockPos pos, IBlockState state, @Nullable NBTTagCompound teData, int fallTime,
+                                            float fallDistance) {
             return fallDropsProvider.getDropsFromFall(world, pos, state, teData, fallTime, fallDistance);
         }
 

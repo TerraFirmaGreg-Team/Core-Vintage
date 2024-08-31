@@ -36,10 +36,10 @@ public class BlockRockWall extends BaseBlockWall implements IRockBlock {
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.STONE)
+                .sound(SoundType.STONE)
                 .renderLayer(BlockRenderLayer.CUTOUT)
-                .addOreDict("wall")
-                .addOreDict("wall", "stone");
+                .oreDict("wall")
+                .oreDict("wall", "stone");
 
         setHarvestLevel(ToolClasses.PICKAXE, 0);
     }
@@ -49,6 +49,6 @@ public class BlockRockWall extends BaseBlockWall implements IRockBlock {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + type.getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + type.getCategory().getLocalizedName());
     }
 }

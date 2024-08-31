@@ -24,13 +24,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.Climate;
+
+
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+
+
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -79,9 +81,8 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         Block block = worldIn.getBlockState(pos.down()).getBlock();
-        return (super.canPlaceBlockAt(worldIn, pos) || BlocksTFC.isSand(worldIn.getBlockState(pos.down())) ||
-                BlocksTFC.isSoilOrGravel(worldIn.getBlockState(pos.down())) || BlocksTFCF.isSand(worldIn.getBlockState(pos.down())) ||
-                BlocksTFCF.isSoilOrGravel(worldIn.getBlockState(pos.down())) || block == Blocks.HARDENED_CLAY ||
+        return (super.canPlaceBlockAt(worldIn, pos) || BlockUtils.isSand(worldIn.getBlockState(pos.down())) ||
+                BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down())) || block == Blocks.HARDENED_CLAY ||
                 block == Blocks.STAINED_HARDENED_CLAY);
     }
 
@@ -189,7 +190,7 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
         world.setBlockState(pos.offset(EnumFacing.UP, height), flower);*/
 
         float avgTemperature = Climate.getAvgTemp(world, pos);
-        float rainfall = ChunkData.getRainfall(world, pos);
+        float rainfall = ProviderChunkData.getRainfall(world, pos);
 
         int j = rand.nextInt(5);
         for (int k = 0; k < j; ++k) {
@@ -199,10 +200,8 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
             if (j1 > 0) {
                 int k1 = j1 - 1;
                 Block block = world.getBlockState(pos.down()).getBlock();
-                if (world.isAirBlock(pos.add(l, k1 + 1, i1)) && (BlocksTFC.isSand(world.getBlockState(pos.add(l, k1, i1))) ||
-                        BlocksTFC.isSoilOrGravel(world.getBlockState(pos.add(l, k1, i1))) ||
-                        BlocksTFCF.isSand(world.getBlockState(pos.add(l, k1, i1))) ||
-                        BlocksTFCF.isSoilOrGravel(world.getBlockState(pos.add(l, k1, i1))) || block == Blocks.HARDENED_CLAY ||
+                if (world.isAirBlock(pos.add(l, k1 + 1, i1)) && (BlockUtils.isSand(world.getBlockState(pos.add(l, k1, i1))) ||
+                        BlockUtils.isSoilOrGravel(world.getBlockState(pos.add(l, k1, i1))) || block == Blocks.HARDENED_CLAY ||
                         block == Blocks.STAINED_HARDENED_CLAY)) {
                     BlockJoshuaTreeFlower.get(wood).generatePlant(world, pos.add(l, k1 + 1, i1), rand, 8);
                 }

@@ -25,8 +25,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.types.TreesTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -98,9 +96,8 @@ public class BlockJoshuaTreeLog extends Block {
         Block block4 = worldIn.getBlockState(pos.south()).getBlock();
         Block block5 = worldIn.getBlockState(pos.west()).getBlock();
         return state.withProperty(DOWN, Boolean.valueOf(
-                        block == this || block == BlockJoshuaTreeFlower.get(wood) || BlocksTFC.isSand(worldIn.getBlockState(pos.down())) ||
-                                BlocksTFC.isSoilOrGravel(worldIn.getBlockState(pos.down())) || BlocksTFCF.isSand(worldIn.getBlockState(pos.down())) ||
-                                BlocksTFCF.isSoilOrGravel(worldIn.getBlockState(pos.down())) || block == Blocks.HARDENED_CLAY ||
+                        block == this || block == BlockJoshuaTreeFlower.get(wood) || BlockUtils.isSand(worldIn.getBlockState(pos.down())) ||
+                                BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down())) || block == Blocks.HARDENED_CLAY ||
                                 block == Blocks.STAINED_HARDENED_CLAY))
                 .withProperty(UP, Boolean.valueOf(block1 == this || block1 == BlockJoshuaTreeFlower.get(wood)))
                 .withProperty(NORTH, Boolean.valueOf(block2 == this || block2 == BlockJoshuaTreeFlower.get(wood)))
@@ -240,10 +237,8 @@ public class BlockJoshuaTreeLog extends Block {
 
                 Block block1 = worldIn.getBlockState(blockpos.down()).getBlock();
 
-                if (block1 == this || BlocksTFC.isSand(worldIn.getBlockState(blockpos.down())) ||
-                        BlocksTFC.isSoilOrGravel(worldIn.getBlockState(blockpos.down())) ||
-                        BlocksTFCF.isSand(worldIn.getBlockState(blockpos.down())) ||
-                        BlocksTFCF.isSoilOrGravel(worldIn.getBlockState(blockpos.down())) || block1 == Blocks.HARDENED_CLAY ||
+                if (block1 == this || BlockUtils.isSand(worldIn.getBlockState(blockpos.down())) ||
+                        BlockUtils.isSoilOrGravel(worldIn.getBlockState(blockpos.down())) || block1 == Blocks.HARDENED_CLAY ||
                         block1 == Blocks.STAINED_HARDENED_CLAY) {
                     return true;
                 }
@@ -251,8 +246,8 @@ public class BlockJoshuaTreeLog extends Block {
         }
 
         Block block2 = worldIn.getBlockState(pos.down()).getBlock();
-        return block2 == this || BlocksTFC.isSand(worldIn.getBlockState(pos.down())) || BlocksTFC.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
-                BlocksTFCF.isSand(worldIn.getBlockState(pos.down())) || BlocksTFCF.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
+        return block2 == this || BlockUtils.isSand(worldIn.getBlockState(pos.down())) ||
+                BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
                 block2 == Blocks.HARDENED_CLAY || block2 == Blocks.STAINED_HARDENED_CLAY;
     }
 
@@ -277,10 +272,8 @@ public class BlockJoshuaTreeLog extends Block {
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         Block block = blockAccess.getBlockState(pos.offset(side)).getBlock();
         return block != this && block != BlockJoshuaTreeFlower.get(wood) &&
-                (side != EnumFacing.DOWN || !BlocksTFC.isSand(blockAccess.getBlockState(pos.offset(side))) ||
-                        !BlocksTFC.isSoilOrGravel(blockAccess.getBlockState(pos.offset(side))) ||
-                        !BlocksTFCF.isSand(blockAccess.getBlockState(pos.offset(side))) ||
-                        !BlocksTFCF.isSoilOrGravel(blockAccess.getBlockState(pos.offset(side))) || block == Blocks.HARDENED_CLAY ||
+                (side != EnumFacing.DOWN || !BlockUtils.isSand(blockAccess.getBlockState(pos.offset(side))) ||
+                        !BlockUtils.isSoilOrGravel(blockAccess.getBlockState(pos.offset(side))) || block == Blocks.HARDENED_CLAY ||
                         block == Blocks.STAINED_HARDENED_CLAY);
     }
 

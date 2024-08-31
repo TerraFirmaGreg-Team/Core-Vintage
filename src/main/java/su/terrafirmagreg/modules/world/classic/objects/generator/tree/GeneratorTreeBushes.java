@@ -10,10 +10,13 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
+
+
+import su.terrafirmagreg.api.util.BlockUtils;
+
 
 import java.util.Random;
 
@@ -51,7 +54,7 @@ public class GeneratorTreeBushes implements ITreeGenerator {
     @Override
     public boolean canGenerateTree(World world, BlockPos pos, Tree treeType) {
         // Check if there is soil beneath
-        if (!BlocksTFC.isSoil(world.getBlockState(pos.down())))
+        if (!BlockUtils.isSoil(world.getBlockState(pos.down())))
             return false;
 
         // Check the position for liquids, etc.

@@ -2,9 +2,9 @@ package su.terrafirmagreg.modules.core;
 
 import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
-import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.damage.HandlerDamageResistance;
@@ -22,15 +22,17 @@ import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.HandlerSize;
 import su.terrafirmagreg.modules.core.capabilities.temperature.CapabilityTemperature;
+import su.terrafirmagreg.modules.core.capabilities.worldtracker.CapabilityWorldTracker;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayPlayerData;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayTemperature;
-import su.terrafirmagreg.modules.core.event.AmbientalEventHandler;
-import su.terrafirmagreg.modules.core.event.CapabilitiesChunkEventHandler;
-import su.terrafirmagreg.modules.core.event.CapabilitiesEntityEventHandler;
-import su.terrafirmagreg.modules.core.event.CapabilitiesItemEventHandler;
-import su.terrafirmagreg.modules.core.event.DebugInfoEventHandler;
-import su.terrafirmagreg.modules.core.event.PuddlesEventHandler;
+import su.terrafirmagreg.modules.core.event.EventHandlerAmbiental;
+import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesChunk;
+import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesEntity;
+import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesItem;
+import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesWorld;
+import su.terrafirmagreg.modules.core.event.EventHandlerDebugInfo;
+import su.terrafirmagreg.modules.core.event.EventHandlerPuddles;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.CommandsCore;
 import su.terrafirmagreg.modules.core.init.DataSerializersCore;
@@ -99,6 +101,7 @@ public final class ModuleCore extends ModuleBase {
         NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaGreg.getInstance(), new GuiHandler());
 
         CapabilityChunkData.register();
+        CapabilityWorldTracker.register();
         CapabilityEgg.register();
         CapabilityHeat.register();
         CapabilityFood.register();
@@ -110,11 +113,12 @@ public final class ModuleCore extends ModuleBase {
         CapabilityTemperature.register();
         CapabilityDamageResistance.register();
 
-        MinecraftForge.EVENT_BUS.register(new AmbientalEventHandler());
-        MinecraftForge.EVENT_BUS.register(new CapabilitiesChunkEventHandler());
-        MinecraftForge.EVENT_BUS.register(new CapabilitiesItemEventHandler());
-        MinecraftForge.EVENT_BUS.register(new CapabilitiesEntityEventHandler());
-        MinecraftForge.EVENT_BUS.register(new PuddlesEventHandler());
+        MinecraftForge.EVENT_BUS.register(new EventHandlerAmbiental());
+        MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesChunk());
+        MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesWorld());
+        MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesItem());
+        MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesEntity());
+        MinecraftForge.EVENT_BUS.register(new EventHandlerPuddles());
 
     }
 
@@ -123,7 +127,7 @@ public final class ModuleCore extends ModuleBase {
 
         MinecraftForge.EVENT_BUS.register(new OverlayTemperature());
         MinecraftForge.EVENT_BUS.register(new OverlayPlayerData());
-        MinecraftForge.EVENT_BUS.register(new DebugInfoEventHandler());
+        MinecraftForge.EVENT_BUS.register(new EventHandlerDebugInfo());
     }
 
     @Override

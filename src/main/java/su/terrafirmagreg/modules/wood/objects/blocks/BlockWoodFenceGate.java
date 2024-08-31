@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -33,11 +33,11 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
         this.type = type;
 
         this.settings = Settings.of(Material.WOOD)
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .hardness(2.0F)
                 .resistance(15.0F)
-                .addOreDict("fence", "gate", "wood")
-                .addOreDict("fence", "gate", "wood", type);
+                .oreDict("fence", "gate", "wood")
+                .oreDict("fence", "gate", "wood", type);
 
         setHarvestLevel(ToolClasses.AXE, 0);
 

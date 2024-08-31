@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.tree;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.StructureUtils;
 
 import net.minecraft.block.BlockLog;
@@ -17,7 +18,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
@@ -75,12 +75,12 @@ public class GeneratorTreeKapok implements ITreeGenerator {
     @Override
     public boolean canGenerateTree(World world, BlockPos pos, Tree treeType) {
         for (BlockPos p1 : trunkPos) {
-            if (BlocksTFC.isSoil(world.getBlockState(pos.add(p1))))
+            if (BlockUtils.isSoil(world.getBlockState(pos.add(p1))))
                 continue;
             if (world.getBlockState(pos.add(p1)).getMaterial().isReplaceable()) {
-                if (BlocksTFC.isSoil(world.getBlockState(pos.add(p1).down(1))))
+                if (BlockUtils.isSoil(world.getBlockState(pos.add(p1).down(1))))
                     continue;
-                if (BlocksTFC.isSoil(world.getBlockState(pos.add(p1)
+                if (BlockUtils.isSoil(world.getBlockState(pos.add(p1)
                         .down(2))) && world.getBlockState(pos.add(p1.down(1)))
                         .getMaterial()
                         .isReplaceable())
@@ -97,7 +97,7 @@ public class GeneratorTreeKapok implements ITreeGenerator {
         Template structureBase = manager.get(world.getMinecraftServer(), base);
 
         if (structureBase == null) {
-            TerraFirmaCraft.getLog().warn("Unable to find a template for " + base.toString());
+            TerraFirmaCraft.getLog().warn("Unable to find a template for " + base);
             return;
         }
         BlockPos size = structureBase.getSize();

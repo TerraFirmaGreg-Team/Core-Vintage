@@ -24,9 +24,9 @@ public class BlockWoodLadder extends BlockLadder implements IWoodBlock {
         this.type = type;
 
         this.settings = Settings.of(Material.CIRCUITS)
-                .soundType(SoundType.LADDER)
-                .addOreDict(variant)
-                .addOreDict(variant, "wood");
+                .sound(SoundType.LADDER)
+                .oreDict(variant)
+                .oreDict(variant, "wood");
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }

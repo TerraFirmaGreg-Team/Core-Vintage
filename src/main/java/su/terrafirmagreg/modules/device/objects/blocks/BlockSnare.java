@@ -59,7 +59,7 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
 
         getSettings()
                 .registryKey("device/snare")
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .hardness(1.5f)
                 .nonFullCube()
                 .nonOpaque()

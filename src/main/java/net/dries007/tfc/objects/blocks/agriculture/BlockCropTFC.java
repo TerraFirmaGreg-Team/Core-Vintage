@@ -1,6 +1,8 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
@@ -27,9 +29,7 @@ import net.minecraftforge.common.EnumPlantType;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
@@ -225,7 +225,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
 
                     // find stats for the time in which the crop would have grown
                     float temp = Climate.getActualTemp(worldIn, pos, -tile.getTicksSinceUpdate());
-                    float rainfall = ChunkData.getRainfall(worldIn, pos);
+                    float rainfall = ProviderChunkData.getRainfall(worldIn, pos);
 
                     // check if the crop could grow, if so, grow
                     if (crop.isValidForGrowth(temp, rainfall)) {
@@ -283,7 +283,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
         if (this.crop != Crop.RICE) {
             return super.canSustainBush(state);
         } else {
-            return BlocksTFC.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenClassic.FRESH_WATER ||
+            return BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenClassic.FRESH_WATER ||
                     state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
         }
     }

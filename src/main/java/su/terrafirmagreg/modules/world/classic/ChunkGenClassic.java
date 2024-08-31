@@ -1,7 +1,14 @@
 package su.terrafirmagreg.modules.world.classic;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorBerryBushes;
@@ -9,14 +16,13 @@ import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorFalls;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorFissure;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorFruitTrees;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorLargeRocks;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorLooseRocks;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorOreVeins;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorRarityBased;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorSnowIce;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorSoilPits;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorSpikes;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorSpeleothem;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorTrees;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorWildCrops;
+import su.terrafirmagreg.modules.world.classic.objects.generator.groundcover.GeneratorSurfaceRocks;
 import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerBase;
 import su.terrafirmagreg.modules.world.classic.objects.layer.datalayers.drainage.GenLayerDrainage;
 import su.terrafirmagreg.modules.world.classic.objects.layer.datalayers.ph.GenLayerPH;
@@ -45,16 +51,9 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.IWorldGenerator;
-import net.minecraftforge.registries.ForgeRegistry;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateHelper;
@@ -88,16 +87,14 @@ public class ChunkGenClassic implements IChunkGenerator {
     /* This is done here rather than GameRegistry.registerWorldGenerator since we need to control the ordering of them better */
     private static final IWorldGenerator LAVA_FISSURE_GEN = new GeneratorRarityBased(x -> x.lavaFissureRarity, new GeneratorFissure(true));
     private static final IWorldGenerator WATER_FISSURE_GEN = new GeneratorRarityBased(x -> x.waterFissureRarity, new GeneratorFissure(false));
-    private static final IWorldGenerator ORE_VEINS_GEN = new GeneratorOreVeins();
     private static final IWorldGenerator SOIL_PITS_GEN = new GeneratorSoilPits();
     private static final IWorldGenerator LARGE_ROCKS_GEN = new GeneratorRarityBased(x -> x.largeRockRarity, new GeneratorLargeRocks());
     private static final IWorldGenerator TREE_GEN = new GeneratorTrees();
     private static final IWorldGenerator BERRY_BUSH_GEN = new GeneratorBerryBushes();
     private static final IWorldGenerator FRUIT_TREE_GEN = new GeneratorFruitTrees();
     private static final IWorldGenerator WILD_CROPS_GEN = new GeneratorWildCrops();
-    private static final IWorldGenerator LOOSE_ROCKS_GEN = new GeneratorLooseRocks(true);
-    private static final IWorldGenerator STALACTITE_GEN = new GeneratorSpikes(true, 300);
-    private static final IWorldGenerator STALAGMITE_GEN = new GeneratorSpikes(false, 300);
+    private static final IWorldGenerator LOOSE_ROCKS_GEN = new GeneratorSurfaceRocks();
+    private static final IWorldGenerator SPELEOTHEM_GEN = new GeneratorSpeleothem();
     private static final IWorldGenerator WATERFALL_GEN = new GeneratorFalls(FRESH_WATER, 15);
     private static final IWorldGenerator LAVAFALL_GEN = new GeneratorFalls(Blocks.FLOWING_LAVA.getDefaultState(), 5);
     private static final IWorldGenerator SNOW_ICE_GEN = new GeneratorSnowIce();
@@ -126,6 +123,7 @@ public class ChunkGenClassic implements IChunkGenerator {
     private final NoiseGeneratorPerlin noiseGen8; // Flora Density
     private final NoiseGeneratorPerlin noiseGen9; // Flora Diversity
     private final NoiseGeneratorPerlin noiseGen10; // Temperature
+    private final GenLayerBase soilsGenLayer1;
     private final GenLayerBase rocksGenLayer1;
     private final GenLayerBase rocksGenLayer2;
     private final GenLayerBase rocksGenLayer3;
@@ -156,6 +154,7 @@ public class ChunkGenClassic implements IChunkGenerator {
     private int[] rockLayer1 = new int[256];
     private int[] rockLayer2 = new int[256];
     private int[] rockLayer3 = new int[256];
+    private int[] soilLayer1 = new int[256];
     private float rainfall;
     private float averageTemp;
 
@@ -173,6 +172,7 @@ public class ChunkGenClassic implements IChunkGenerator {
         noiseGen6 = new NoiseGeneratorOctaves(rand, 1);
         mobSpawnerNoise = new NoiseGeneratorOctaves(rand, 8);
 
+        soilsGenLayer1 = GenLayerBase.initializeSoil(seed + 1, settings.rockLayerSize);
         rocksGenLayer1 = GenLayerBase.initializeRock(seed + 1, RockCategory.Layer.TOP, settings.rockLayerSize);
         rocksGenLayer2 = GenLayerBase.initializeRock(seed + 2, RockCategory.Layer.MIDDLE, settings.rockLayerSize);
         rocksGenLayer3 = GenLayerBase.initializeRock(seed + 3, RockCategory.Layer.BOTTOM, settings.rockLayerSize);
@@ -226,6 +226,7 @@ public class ChunkGenClassic implements IChunkGenerator {
         float floraDensity = MathHelper.clamp(
                 (0.3f + 0.2f * rainfall / 500f) + 0.4f * floraDensitySpread * (float) noiseGen8.getValue(chunkX * 0.05, chunkZ * 0.05), 0, 1);
 
+        soilLayer1 = soilsGenLayer1.getInts(chunkX * 16, chunkZ * 16, 16, 16).clone();
         rockLayer1 = rocksGenLayer1.getInts(chunkX * 16, chunkZ * 16, 16, 16).clone();
         rockLayer2 = rocksGenLayer2.getInts(chunkX * 16, chunkZ * 16, 16, 16).clone();
         rockLayer3 = rocksGenLayer3.getInts(chunkX * 16, chunkZ * 16, 16, 16).clone();
@@ -262,9 +263,10 @@ public class ChunkGenClassic implements IChunkGenerator {
 
         Chunk chunk = new Chunk(world, chunkPrimerOut, chunkX, chunkZ);
 
-        ChunkData chunkData = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
+        var chunkData = CapabilityChunkData.get(chunk);
         if (chunkData == null) throw new IllegalStateException("ChunkData capability is missing.");
-        chunkData.setGenerationData(rockLayer1, rockLayer2, rockLayer3, stabilityLayer, drainageLayer, seaLevelOffsetMap, rainfall, regionalFactor,
+        chunkData.setGenerationData(rockLayer1, rockLayer2, rockLayer3, soilLayer1, stabilityLayer, drainageLayer, seaLevelOffsetMap, rainfall,
+                regionalFactor,
                 averageTemp, floraDensity, floraDiversity);
 
         byte[] biomeIds = chunk.getBiomeArray();
@@ -292,7 +294,6 @@ public class ChunkGenClassic implements IChunkGenerator {
 
         // First, do all terrain related features
         SOIL_PITS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
-        ORE_VEINS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         LAVA_FISSURE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         WATER_FISSURE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         LARGE_ROCKS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
@@ -310,8 +311,7 @@ public class ChunkGenClassic implements IChunkGenerator {
         LOOSE_ROCKS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         WATERFALL_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         LAVAFALL_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
-        STALACTITE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
-        STALAGMITE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
+        SPELEOTHEM_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         SNOW_ICE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
 
         if (TerrainGen.populate(this, world, rand, chunkX, chunkZ, false, ANIMALS)) {
@@ -508,26 +508,27 @@ public class ChunkGenClassic implements IChunkGenerator {
                 int colIndex = z << 4 | x;
                 Biome biome = getBiomeOffset(x, z);
 
-                Rock rock1 = ((ForgeRegistry<Rock>) TFCRegistries.ROCKS).getValue(rockLayer1[colIndex]);
-                Rock rock2 = ((ForgeRegistry<Rock>) TFCRegistries.ROCKS).getValue(rockLayer2[colIndex]);
-                Rock rock3 = ((ForgeRegistry<Rock>) TFCRegistries.ROCKS).getValue(rockLayer3[colIndex]);
+                var rock1 = RockType.valueOf(rockLayer1[colIndex]);
+                var rock2 = RockType.valueOf(rockLayer2[colIndex]);
+                var rock3 = RockType.valueOf(rockLayer3[colIndex]);
+
+                var soil1 = SoilType.valueOf(rockLayer1[colIndex]);
 
                 DataLayerClassic drainage = drainageLayer[colIndex];
                 DataLayerClassic stability = stabilityLayer[colIndex];
                 int noise = (int) (noise4[colIndex] / 3.0D + 6.0D);
                 int smooth = -1;
 
-                IBlockState surfaceBlock = BlockRockVariant.get(rock1,
-                                rainfall + 1.3 * rand.nextGaussian() >= 150f ? Rock.Type.GRASS : Rock.Type.DRY_GRASS)
+                IBlockState surfaceBlock = (rainfall + 1.3 * rand.nextGaussian() >= 150f ? BlocksSoil.GRASS : BlocksSoil.DRY_GRASS).get(soil1)
                         .getDefaultState();
-                IBlockState subSurfaceBlock = BlockRockVariant.get(rock1, Rock.Type.DIRT).getDefaultState();
+                IBlockState subSurfaceBlock = BlocksSoil.DIRT.get(soil1).getDefaultState();
 
                 if (BiomeUtils.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomeUtils.isBeachBiome(getBiomeOffset(x + 1, z)) ||
                         BiomeUtils.isBeachBiome(getBiomeOffset(x, z + 1)) || BiomeUtils.isBeachBiome(getBiomeOffset(x, z - 1))) {
                     if (!BiomeUtils.isBeachBiome(getBiomeOffset(x, z))) cliffMap[colIndex] = true;
                 }
 
-                //Used to make better rivers
+                // Используется для улучшения рек
                 int nonRiverTiles = 0;
                 int nonBeachTiles = 0;
                 for (int a = x - 1; a <= x + 1; a++) {
@@ -545,15 +546,16 @@ public class ChunkGenClassic implements IChunkGenerator {
 
                 int highestStone = 0;
 
+                // Итерируемся по оси Y сверху вниз
                 for (int y = 255 - yOffset; y >= 0; y--) {
                     /*
-                     * HIGH PART (yOffset is used)
+                     * ВЕРХНЯЯ ЧАСТЬ (используется yOffset)
                      */
                     if (outp.isEmpty(x, y + yOffset, z)) {
                         outp.setBlockState(x, y + yOffset, z, inp.getBlockState(x, y, z));
                         if (y + 1 < yOffset && outp.getBlockState(x, y + yOffset, z) ==
-                                AIR/* no need to check again && BlocksTFC.isSoilOrGravel(outp.getBlockState(x, y + yOffset + 1, z))*/) {
-                            for (int upCount = 1; BlocksTFC.isSoilOrGravel(outp.getBlockState(x, y + yOffset + upCount, z)); upCount++) {
+                                AIR/* нет необходимости проверять снова && BlockUtils.isSoilOrGravel(outp.getBlockState(x, y + yOffset + 1, z))*/) {
+                            for (int upCount = 1; BlockUtils.isSoilOrGravel(outp.getBlockState(x, y + yOffset + upCount, z)); upCount++) {
                                 outp.setBlockState(x, y + yOffset + upCount, z, AIR);
                             }
                         }
@@ -568,12 +570,12 @@ public class ChunkGenClassic implements IChunkGenerator {
                             nonBeachTiles > 0 ? (int) ((highestStone - highestBeachTheoretical) * (nonBeachTiles) / 6.0 + highestBeachTheoretical) :
                                     highestBeachTheoretical;
 
-                    //Redo cliffs
+                    // Перестраиваем утесы на пляже
                     if (BiomeUtils.isBeachBiome(biome) && y > seaLevel && outp.getBlockState(x, y + yOffset, z) != AIR && y >= beachCliffHeight) {
                         inp.setBlockState(x, y, z, AIR);
                         outp.setBlockState(x, y + yOffset, z, AIR);
                     }
-                    //Ensure rivers can't get blocked
+                    // Гарантируем, что реки не будут заблокированы
                     if (BiomeUtils.isRiverBiome(biome) && y >= seaLevel - 2 && outp.getBlockState(x, y + yOffset, z) != AIR) {
 
                         if (nonRiverTiles > 0) {
@@ -600,29 +602,23 @@ public class ChunkGenClassic implements IChunkGenerator {
                         if (chunkHeightMap[colIndex] == 0)
                             chunkHeightMap[colIndex] = y + yOffset;
 
-                        if (y + yOffset <= ROCKLAYER3 + seaLevelOffsetMap[colIndex])
-                            outp.setBlockState(x, y + yOffset, z, BlockRockVariant.get(rock3, Rock.Type.RAW)
-                                    .getDefaultState());
-                        else if (y + yOffset <= ROCKLAYER2 + seaLevelOffsetMap[colIndex])
-                            outp.setBlockState(x, y + yOffset, z, BlockRockVariant.get(rock2, Rock.Type.RAW)
-                                    .getDefaultState());
-                        else
-                            outp.setBlockState(x, y + yOffset, z, BlockRockVariant.get(rock1, Rock.Type.RAW)
-                                    .getDefaultState());
+                        if (y + yOffset <= ROCKLAYER3 + seaLevelOffsetMap[colIndex]) {
+                            outp.setBlockState(x, y + yOffset, z, BlocksRock.RAW.get(rock3).getDefaultState());
+                        } else if (y + yOffset <= ROCKLAYER2 + seaLevelOffsetMap[colIndex]) {
+                            outp.setBlockState(x, y + yOffset, z, BlocksRock.RAW.get(rock2).getDefaultState());
+                        } else {
+                            outp.setBlockState(x, y + yOffset, z, BlocksRock.RAW.get(rock1).getDefaultState());
+                        }
 
-                        // Deserts / dry areas
+                        // Пустыни / сухие районы
                         if (rainfall < +1.3 * rand.nextGaussian() + 75f) {
-                            subSurfaceBlock = surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.RAW)
-                                    .getVariant(Rock.Type.SAND)
-                                    .getDefaultState();
+                            subSurfaceBlock = surfaceBlock = BlocksRock.SAND.get(rock1).getDefaultState();
                         }
 
                         if (biome == BiomesWorld.BEACH || biome == BiomesWorld.OCEAN || biome == BiomesWorld.DEEP_OCEAN) {
-                            subSurfaceBlock = surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.SAND)
-                                    .getDefaultState();
+                            subSurfaceBlock = surfaceBlock = BlocksRock.SAND.get(rock1).getDefaultState();
                         } else if (biome == BiomesWorld.GRAVEL_BEACH) {
-                            subSurfaceBlock = surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL)
-                                    .getDefaultState();
+                            subSurfaceBlock = surfaceBlock = BlocksRock.GRAVEL.get(rock1).getDefaultState();
                         }
 
                         if (smooth == -1) {
@@ -648,7 +644,7 @@ public class ChunkGenClassic implements IChunkGenerator {
                                 if (yOffset + y + c > 256) continue;
 
                                 IBlockState current = outp.getBlockState(x, yOffset + y + c, z);
-                                if (current != surfaceBlock && current != subSurfaceBlock && !BlocksTFC.isWater(current)) {
+                                if (current != surfaceBlock && current != subSurfaceBlock && !BlockUtils.isWater(current)) {
                                     outp.setBlockState(x, yOffset + y + c, z, AIR);
                                     if (yOffset + y + c + 1 > 256) continue;
                                     if (outp.getBlockState(x, yOffset + y + c + 1, z) == SALT_WATER)
@@ -671,8 +667,8 @@ public class ChunkGenClassic implements IChunkGenerator {
                                     for (int c = 1; c < dirtH && !mountains && !cliffMap[colIndex]; c++) {
                                         outp.setBlockState(x, y - c + yOffset, z, subSurfaceBlock);
                                         if (c > 1 + (5 - drainage.valueInt))
-                                            outp.setBlockState(x, y - c + yOffset, z, BlockRockVariant.get(rock1, Rock.Type.GRAVEL)
-                                                    .getDefaultState());
+                                            outp.setBlockState(x, y - c + yOffset, z,
+                                                    BlocksRock.GRAVEL.get(rock1).getDefaultState());
                                     }
                                 }
                             }
@@ -682,15 +678,12 @@ public class ChunkGenClassic implements IChunkGenerator {
                                 y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER) {
                             if (biome == BiomesWorld.SWAMPLAND && biome == BiomesWorld.BAYOU && biome == BiomesWorld.MANGROVE &&
                                     biome == BiomesWorld.MARSH) {
-                                if (outp.getBlockState(x, y + yOffset, z) != BlockRockVariant.get(rock1, Rock.Type.SAND)
-                                        .getDefaultState()) {
-                                    outp.setBlockState(x, y + yOffset, z, BlockRockVariant.get(rock1, Rock.Type.DIRT)
-                                            .getDefaultState());
+                                if (outp.getBlockState(x, y + yOffset, z) != BlocksRock.SAND.get(rock1).getDefaultState()) {
+                                    outp.setBlockState(x, y + yOffset, z, BlocksSoil.DIRT.get(soil1).getDefaultState());
                                 }
-                            } else if (outp.getBlockState(x, y + yOffset, z) != BlockRockVariant.get(rock1, Rock.Type.SAND)
-                                    .getDefaultState() && this.rand.nextInt(5) != 0) {
-                                outp.setBlockState(x, y + yOffset, z, BlockRockVariant.get(rock1, Rock.Type.GRAVEL)
-                                        .getDefaultState());
+                            } else if (outp.getBlockState(x, y + yOffset, z) != BlocksRock.SAND.get(rock1).getDefaultState() &&
+                                    this.rand.nextInt(5) != 0) {
+                                outp.setBlockState(x, y + yOffset, z, BlocksRock.GRAVEL.get(rock1).getDefaultState());
                             }
                         }
                     }
@@ -710,19 +703,18 @@ public class ChunkGenClassic implements IChunkGenerator {
                     {
                         outp.setBlockState(x, y, z, BEDROCK);
                     } else if (outp.isEmpty(x, y, z)) {
-                        if (y <= ROCKLAYER3 + seaLevelOffsetMap[colIndex])
-                            outp.setBlockState(x, y, z, BlockRockVariant.get(rock3, Rock.Type.RAW).getDefaultState());
-                        else if (y <= ROCKLAYER2 + seaLevelOffsetMap[colIndex])
-                            outp.setBlockState(x, y, z, BlockRockVariant.get(rock2, Rock.Type.RAW).getDefaultState());
-                        else
-                            outp.setBlockState(x, y, z, BlockRockVariant.get(rock1, Rock.Type.RAW).getDefaultState());
+                        if (y <= ROCKLAYER3 + seaLevelOffsetMap[colIndex]) {
+                            outp.setBlockState(x, y, z, BlocksRock.RAW.get(rock3).getDefaultState());
+                        } else if (y <= ROCKLAYER2 + seaLevelOffsetMap[colIndex]) {
+                            outp.setBlockState(x, y, z, BlocksRock.RAW.get(rock2).getDefaultState());
+                        } else {
+                            outp.setBlockState(x, y, z, BlocksRock.RAW.get(rock1).getDefaultState());
+                        }
 
                         if (BiomeUtils.isBeachBiome(biome) || BiomeUtils.isOceanicBiome(biome)) {
                             if (outp.getBlockState(x, y + 1, z) == SALT_WATER) {
-                                outp.setBlockState(x, y, z, BlockRockVariant.get(rock1, Rock.Type.SAND)
-                                        .getDefaultState());
-                                outp.setBlockState(x, y - 1, z, BlockRockVariant.get(rock1, Rock.Type.SAND)
-                                        .getDefaultState());
+                                outp.setBlockState(x, y, z, BlocksRock.SAND.get(rock1).getDefaultState());
+                                outp.setBlockState(x, y - 1, z, BlocksRock.SAND.get(rock1).getDefaultState());
                             }
                         }
                     }

@@ -26,10 +26,10 @@ public class BlockSoilMudWall extends BaseBlockWall implements ISoilBlock {
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.STONE)
+                .sound(SoundType.STONE)
                 .renderLayer(BlockRenderLayer.CUTOUT)
-                .addOreDict("wall")
-                .addOreDict("wall", "mud", "bricks");
+                .oreDict("wall")
+                .oreDict("wall", "mud", "bricks");
 
         setHarvestLevel(ToolClasses.PICKAXE, 0);
     }

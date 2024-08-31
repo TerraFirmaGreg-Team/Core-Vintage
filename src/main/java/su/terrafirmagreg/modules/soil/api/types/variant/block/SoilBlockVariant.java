@@ -25,7 +25,7 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
     @Getter
     private static final Set<SoilBlockVariant> variants = new ObjectOpenHashSet<>();
 
-    private Specification specification;
+    private Specification specification = null;
     private BiFunction<SoilBlockVariant, SoilType, ? extends Block> factory;
 
     private SoilBlockVariant(String name) {

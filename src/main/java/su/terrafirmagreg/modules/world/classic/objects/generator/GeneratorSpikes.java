@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
+import su.terrafirmagreg.modules.rock.objects.blocks.BlockRockRaw;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import net.minecraft.block.state.IBlockState;
@@ -11,11 +14,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.stone.BlockRockSpike;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 
 import java.util.Random;
 
@@ -39,7 +38,7 @@ public class GeneratorSpikes implements IWorldGenerator {
             BlockPos topPos = ceiling ? basePos.down() : basePos.up();
             BlockPos stoneAttach = ceiling ? basePos.up() : basePos.down();
             BlockPos freeSpace = ceiling ? topPos.down() : topPos.up();
-            if (!BlocksTFC.isRawStone(world.getBlockState(stoneAttach)) || !world.isAirBlock(basePos) || !world.isAirBlock(topPos) ||
+            if (!BlockUtils.isRawStone(world.getBlockState(stoneAttach)) || !world.isAirBlock(basePos) || !world.isAirBlock(topPos) ||
                     !world.isAirBlock(freeSpace)) {
                 continue;
             }
@@ -51,12 +50,12 @@ public class GeneratorSpikes implements IWorldGenerator {
                 }
             }
             if (canPlace) {
-                BlockRockRaw rockBlock = (BlockRockRaw) world.getBlockState(stoneAttach).getBlock();
-                IBlockState baseState = BlockRockVariant.get(rockBlock.getRock(), Rock.Type.SPIKE)
+                var rockBlock = (BlockRockRaw) world.getBlockState(stoneAttach).getBlock();
+                IBlockState baseState = BlocksRock.SPELEOTHEM.get(rockBlock.getType())
                         .getDefaultState()
                         .withProperty(BlockRockSpike.BASE, true)
                         .withProperty(BlockRockSpike.CEILING, ceiling);
-                IBlockState topState = BlockRockVariant.get(rockBlock.getRock(), Rock.Type.SPIKE)
+                IBlockState topState = BlocksRock.SPELEOTHEM.get(rockBlock.getType())
                         .getDefaultState()
                         .withProperty(BlockRockSpike.BASE, false)
                         .withProperty(BlockRockSpike.CEILING, ceiling);

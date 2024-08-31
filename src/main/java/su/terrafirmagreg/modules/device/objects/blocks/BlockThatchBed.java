@@ -43,7 +43,7 @@ public class BlockThatchBed extends BlockBed implements IBlockSettings {
         this.settings = Settings.of(Material.CLOTH)
                 .registryKey("device/thatch_bed")
                 .ignoresProperties(OCCUPIED)
-                .soundType(SoundType.CLOTH)
+                .sound(SoundType.CLOTH)
                 .hardness(0.6F);
 
         BlockUtils.setFireInfo(this, 60, 20);

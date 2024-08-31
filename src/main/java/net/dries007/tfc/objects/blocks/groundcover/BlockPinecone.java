@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.groundcover;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -20,8 +22,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -151,7 +151,7 @@ public class BlockPinecone extends BlockBush {
         IBlockState soil = worldIn.getBlockState(pos.down());
 
         if (state.getBlock() == this) {
-            return (BlocksTFC.isGround(soil) || BlocksTFCF.isGround(soil)) && !(BlocksTFC.isSaltWater(soil) || BlocksTFC.isFreshWater(soil));
+            return BlockUtils.isGround(soil) && !(BlockUtils.isSaltWater(soil) || BlockUtils.isFreshWater(soil));
         }
         return this.canSustainBush(soil);
     }

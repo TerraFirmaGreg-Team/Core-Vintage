@@ -1,18 +1,16 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-
 import java.util.Random;
-
-import static net.dries007.tfc.api.types.Rock.Type.SAND;
 
 public class GeneratorSand extends WorldGenerator {
 
@@ -24,9 +22,9 @@ public class GeneratorSand extends WorldGenerator {
 
     @Override
     public boolean generate(World world, Random rng, BlockPos pos) {
-        if (BlocksTFC.isWater(world.getBlockState(pos))) return false;
+        if (BlockUtils.isWater(world.getBlockState(pos))) return false;
 
-        final BlockRockVariant sand = BlockRockVariant.get(ChunkData.getRock1(world, pos), SAND);
+        final var sand = BlocksRock.SAND.get(ProviderChunkData.getRock1(world, pos));
         final int rnd = rng.nextInt(this.radius - 2) + 2;
 
         for (int x = -rnd; x <= rnd; x++) {
@@ -34,7 +32,7 @@ public class GeneratorSand extends WorldGenerator {
                 if (x * x + z * z > rnd * rnd) continue;
                 for (int y = -2; y <= 2; y++) {
                     final IBlockState s = world.getBlockState(pos.add(x, y, z));
-                    if (BlocksTFC.isSoil(s) || BlocksTFC.isSand(s))
+                    if (BlockUtils.isSoil(s) || BlockUtils.isSand(s))
                         world.setBlockState(pos.add(x, y, z), sand.getDefaultState(), 2);
                 }
             }

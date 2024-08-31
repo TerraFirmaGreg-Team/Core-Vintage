@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.stone;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeat;
 
@@ -15,11 +17,9 @@ import net.minecraft.world.World;
 
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -59,7 +59,7 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
                     return;
                 }
                 IBlockState current = world.getBlockState(target);
-                if (!BlocksTFC.isSoil(current) || BlocksTFC.isGrass(current)) {
+                if (!BlockUtils.isSoil(current) || BlockUtils.isGrass(current)) {
                     continue;
                 }
                 BlockPos targetUp = target.up();
@@ -88,7 +88,7 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
                     BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
 
                     if (world.isAirBlock(upPos) &&
-                            plant.isValidLocation(temp, ChunkData.getRainfall(world, upPos),
+                            plant.isValidLocation(temp, ProviderChunkData.getRainfall(world, upPos),
                                     Math.subtractExact(world.getLightFor(EnumSkyBlock.SKY, upPos), world.getSkylightSubtracted())) &&
                             plant.isValidGrowthTemp(temp) &&
                             rand.nextDouble() < plantBlock.getGrowthRate(world, upPos)) {
@@ -108,10 +108,10 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
         pos = pos.add(0, -1, 0);
-        return state.withProperty(NORTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-                .withProperty(EAST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-                .withProperty(SOUTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-                .withProperty(WEST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+        return state.withProperty(NORTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+                .withProperty(EAST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+                .withProperty(SOUTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+                .withProperty(WEST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
     }
 
     @Override

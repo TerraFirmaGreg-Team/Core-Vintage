@@ -34,7 +34,7 @@ public class BlockElectricForge extends BaseBlockHorizontal implements IProvider
 
         getSettings()
                 .registryKey("device/electric_forge")
-                .soundType(SoundType.METAL)
+                .sound(SoundType.METAL)
                 .hardness(4.0F)
                 .size(Size.LARGE)
                 .weight(Weight.MEDIUM)
@@ -59,7 +59,8 @@ public class BlockElectricForge extends BaseBlockHorizontal implements IProvider
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
+                                    float hitY, float hitZ) {
         if (!player.isSneaking()) {
             if (!world.isRemote) {
                 GuiHandler.openGui(world, pos, player);
@@ -75,7 +76,8 @@ public class BlockElectricForge extends BaseBlockHorizontal implements IProvider
     }
 
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer, EnumHand hand) {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 

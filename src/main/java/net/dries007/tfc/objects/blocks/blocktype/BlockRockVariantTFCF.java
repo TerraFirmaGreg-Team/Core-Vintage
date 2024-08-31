@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.blocktype;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -25,7 +26,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockHumusFarmland;
 import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockLoamFarmland;
@@ -733,7 +733,7 @@ public class BlockRockVariantTFCF extends Block implements ICapabilitySize {
                     boolean flag = false;
                     for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                         for (int i = 1; i <= beachDistance; i++) {
-                            if (BlocksTFC.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i)))) {
+                            if (BlockUtils.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i)))) {
                                 flag = true;
                                 break;
                             }
@@ -791,7 +791,7 @@ public class BlockRockVariantTFCF extends Block implements ICapabilitySize {
                     boolean flag = false;
                     for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                         for (int i = 1; i <= beachDistance; i++)
-                            if (BlocksTFC.isSaltWater(world.getBlockState(pos.offset(facing, i)))) {
+                            if (BlockUtils.isSaltWater(world.getBlockState(pos.offset(facing, i)))) {
                                 flag = true;
                             }
                     }
@@ -1055,7 +1055,7 @@ public class BlockRockVariantTFCF extends Block implements ICapabilitySize {
                 boolean flag = false;
                 for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                     for (int i = 1; i <= beachDistance; i++)
-                        if (BlocksTFC.isWater(world.getBlockState(pos.offset(facing, i)))) {
+                        if (BlockUtils.isWater(world.getBlockState(pos.offset(facing, i)))) {
                             flag = true;
                         }
                 }

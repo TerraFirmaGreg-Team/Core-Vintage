@@ -13,7 +13,7 @@ public class BlockCellarDoor extends BaseBlockDoor {
 
         getSettings()
                 .registryKey("device/cellar/door")
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .hardness(2F);
 
         BlockUtils.setFireInfo(this, 5, 20);

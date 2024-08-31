@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.stone;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -24,7 +25,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
@@ -225,7 +225,7 @@ public class BlockRockVariant extends Block implements ICapabilitySize {
                     boolean flag = false;
                     for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                         for (int i = 1; i <= beachDistance; i++) {
-                            if (BlocksTFC.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i)))) {
+                            if (BlockUtils.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i)))) {
                                 flag = true;
                                 break;
                             }
@@ -237,7 +237,7 @@ public class BlockRockVariant extends Block implements ICapabilitySize {
                     boolean flag = false;
                     for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                         for (int i = 1; i <= beachDistance; i++)
-                            if (BlocksTFC.isSaltWater(world.getBlockState(pos.offset(facing, i)))) {
+                            if (BlockUtils.isSaltWater(world.getBlockState(pos.offset(facing, i)))) {
                                 flag = true;
                             }
                     }
@@ -273,7 +273,7 @@ public class BlockRockVariant extends Block implements ICapabilitySize {
                 boolean flag = false;
                 for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                     for (int i = 1; i <= beachDistance; i++)
-                        if (BlocksTFC.isWater(world.getBlockState(pos.offset(facing, i)))) {
+                        if (BlockUtils.isWater(world.getBlockState(pos.offset(facing, i)))) {
                             flag = true;
                         }
                 }

@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.cave;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
@@ -12,7 +14,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.types.DefaultPlants;
@@ -52,10 +53,10 @@ public class GeneratorUnderground implements IWorldGenerator {
         int y = rng.nextInt(WorldTypeClassic.SEALEVEL);
         BlockPos chunkPos = new BlockPos(chunkX << 4, y, chunkZ << 4);
 
-        ChunkData data = ChunkData.get(world, chunkPos);
+        var data = CapabilityChunkData.get(world, chunkPos);
         Biome b = world.getBiome(chunkPos);
         final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
-        final float rainfall = ChunkData.getRainfall(world, chunkPos);
+        final float rainfall = ProviderChunkData.getRainfall(world, chunkPos);
         final float floraDensity = data.getFloraDensity();
         final float floraDiversity = data.getFloraDiversity();
 

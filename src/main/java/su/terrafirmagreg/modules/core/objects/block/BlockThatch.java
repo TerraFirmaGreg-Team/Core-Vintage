@@ -24,13 +24,13 @@ public class BlockThatch extends BaseBlock {
 
         getSettings()
                 .registryKey("core/thatch")
-                .soundType(SoundType.PLANT)
+                .sound(SoundType.PLANT)
                 .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
                 .nonOpaque()
                 .nonFullCube()
                 .hardness(0.6F)
-                .addOreDict("thatch")
-                .addOreDict("block", "straw");
+                .oreDict("thatch")
+                .oreDict("block", "straw");
 
         BlockUtils.setFireInfo(this, 60, 20);
     }

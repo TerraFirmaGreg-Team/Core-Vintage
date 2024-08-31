@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.metal;
 
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
-import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.modules.core.event.MaterialEventHandler;
+import su.terrafirmagreg.data.lib.LoggingHelper;
+import su.terrafirmagreg.modules.core.event.EventHandlerMaterial;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalTypeHandler;
 import su.terrafirmagreg.modules.metal.init.BlocksMetal;
 import su.terrafirmagreg.modules.metal.init.EntitiesMetal;
@@ -34,7 +34,7 @@ public final class ModuleMetal extends ModuleBase {
         this.enableAutoRegistry(METAL_TAB);
         this.enableNetwork();
 
-        MinecraftForge.EVENT_BUS.register(new MaterialEventHandler());
+        MinecraftForge.EVENT_BUS.register(new EventHandlerMaterial());
     }
 
     @Override

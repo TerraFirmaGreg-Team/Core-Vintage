@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.groundcover;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.util.EnumFacing;
@@ -10,8 +12,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import tfcflorae.ConfigTFCF;
 
@@ -34,7 +34,7 @@ public class GeneratorSurfaceTwig implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-        final ChunkData baseChunkData = ChunkData.get(world, chunkBlockPos);
+        final var baseChunkData = CapabilityChunkData.get(world, chunkBlockPos);
 
         if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0) {
 
@@ -53,12 +53,12 @@ public class GeneratorSurfaceTwig implements IWorldGenerator {
     }
 
     private void generateRock(World world, BlockPos pos) {
-        ChunkData data = ChunkData.get(world, pos);
+        var data = CapabilityChunkData.get(world, pos);
         if (pos.getY() > 146 && pos.getY() < 170 && data.getRainfall() >= 75) {
             if (world.isAirBlock(pos) && world.getBlockState(pos.down())
                     .isSideSolid(world, pos.down(), EnumFacing.UP)) {
-                if (BlocksTFC.isSoil(world.getBlockState(pos.down())) || BlocksTFCF.isSoil(world.getBlockState(pos.down())) ||
-                        BlocksTFC.isGround(world.getBlockState(pos.down())) || BlocksTFCF.isGround(world.getBlockState(pos.down()))) {
+                if (BlockUtils.isSoil(world.getBlockState(pos.down())) ||
+                        BlockUtils.isGround(world.getBlockState(pos.down()))) {
                     world.setBlockState(pos, BlocksTFCF.TWIG.getDefaultState());
                 }
             }

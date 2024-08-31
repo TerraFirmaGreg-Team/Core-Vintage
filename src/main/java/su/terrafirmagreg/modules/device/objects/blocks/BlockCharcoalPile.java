@@ -59,7 +59,7 @@ public class BlockCharcoalPile extends BaseBlock {
         getSettings()
                 .registryKey("device/charcoal_pile")
                 .hardness(1.0F)
-                .soundType(TFCSounds.CHARCOAL_PILE);
+                .sound(TFCSounds.CHARCOAL_PILE);
         setHarvestLevel(ToolClasses.SHOVEL, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LAYERS, 1));
@@ -142,7 +142,8 @@ public class BlockCharcoalPile extends BaseBlock {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
+                                    float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
         if (state.getValue(LAYERS) >= 7 && BlockCharcoalForge.isValid(world, pos) && ItemFireStarter.onIgnition(stack)) {
             if (!world.isRemote) {

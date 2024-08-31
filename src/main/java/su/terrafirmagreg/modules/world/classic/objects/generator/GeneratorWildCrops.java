@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.util.math.BlockPos;
@@ -10,10 +12,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -42,7 +41,7 @@ public class GeneratorWildCrops implements IWorldGenerator {
 
                 Collections.shuffle(CROPS);
                 float temperature = Climate.getAvgTemp(world, chunkBlockPos);
-                float rainfall = ChunkData.getRainfall(world, chunkBlockPos);
+                float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
 
                 ICrop crop = CROPS.stream()
                         .filter(x -> x.isValidConditions(temperature, rainfall))
@@ -147,6 +146,6 @@ public class GeneratorWildCrops implements IWorldGenerator {
     }
 
     protected boolean isValidPosition(World world, BlockPos pos) {
-        return world.isAirBlock(pos) && (BlocksTFC.isSoil(world.getBlockState(pos.down())) || BlocksTFCF.isSoil(world.getBlockState(pos.down())));
+        return world.isAirBlock(pos) && BlockUtils.isSoil(world.getBlockState(pos.down()));
     }
 }

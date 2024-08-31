@@ -14,12 +14,15 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -144,7 +147,7 @@ public class BlockTallPlantTFC extends BlockPlantTFC implements IGrowable, ITall
         if (state.getBlock() == this) {
             return soil.getBlock()
                     .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) &&
-                    plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+                    plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
         }
         return this.canSustainBush(soil);
     }

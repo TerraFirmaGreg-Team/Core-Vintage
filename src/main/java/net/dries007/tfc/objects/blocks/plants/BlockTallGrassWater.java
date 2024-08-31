@@ -1,6 +1,8 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.data.lib.MathConstants;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
@@ -22,9 +24,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -61,7 +61,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 
     @Override
     protected boolean canSustainBush(IBlockState state) {
-        return (BlocksTFC.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) ||
+        return (BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) ||
                 (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
     }
 
@@ -80,7 +80,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
                     ((material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == plant.getWaterType()) ||
                             material == Material.ICE ||
                             (material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC)))) &&
-                    plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+                    plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
         } else {
             return this.canSustainBush(soil);
         }

@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.structures;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
@@ -14,8 +16,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import tfcflorae.ConfigTFCF;
 
@@ -32,7 +32,7 @@ public class WorldGenStructuresCorals implements IWorldGenerator {
                 final int z = (chunkZ << 4) + random.nextInt(16) + 8;
                 final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
                 final Biome b = world.getBiome(pos);
-                ChunkData data = ChunkData.get(world, pos);
+                var data = CapabilityChunkData.get(world, pos);
                 IBlockState down = world.getBlockState(pos.down());
                 IBlockState up = world.getBlockState(pos.up());
 
@@ -40,7 +40,7 @@ public class WorldGenStructuresCorals implements IWorldGenerator {
                     if (data.isInitialized() &&
                             (b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH || b == BiomesWorld.GRAVEL_BEACH)) {
                         if ((up.getBlock() instanceof BlockCoral || world.getBlockState(pos)
-                                .getBlock() instanceof BlockCoral || BlocksTFC.isGround(down) || world.getBlockState(pos)
+                                .getBlock() instanceof BlockCoral || BlockUtils.isGround(down) || world.getBlockState(pos)
                                 .getBlock() == ChunkGenClassic.SALT_WATER.getBlock()) &&
                                 (pos.getY() < WorldTypeClassic.SEALEVEL - 7 && pos.getY() > 119 && data.getFloraDiversity() >= 0.3f &&
                                         data.getFloraDensity() >= 0.4f && data.getFloraDensity() <= 0.6f && data.getFloraDiversity() <= 0.5f &&

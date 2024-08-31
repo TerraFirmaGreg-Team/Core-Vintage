@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public interface IRockBlock extends IType<RockType>, IVariant<RockBlockVariant>, IBlockSettings {
 
     default float getBlockHardness(@NotNull IBlockState blockState, @NotNull World worldIn, @NotNull BlockPos pos) {
-        return getVariant().getBaseHardness() + getType().getRockCategory().getHardnessModifier();
+        return getVariant().getBaseHardness() + getType().getCategory().getHardnessModifier();
     }
 
     @NotNull

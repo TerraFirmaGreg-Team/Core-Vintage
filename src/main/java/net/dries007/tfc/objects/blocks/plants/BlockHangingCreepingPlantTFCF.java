@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -17,10 +19,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.climate.Climate;
+
+
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+
+
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -117,9 +122,9 @@ public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implem
             Material material = blockState.getMaterial();
 
             if (material == Material.LEAVES || material == Material.GROUND || material == Material.ROCK || material == Material.WOOD ||
-                    BlocksTFC.isGround(blockState) || worldIn.getBlockState(pos.up())
+                    BlockUtils.isGround(blockState) || worldIn.getBlockState(pos.up())
                     .getBlock() == this) {
-                return plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+                return plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
             }
         }
         return false;
@@ -137,7 +142,7 @@ public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implem
         Material material = iblockstate.getMaterial();
 
         return material == Material.LEAVES || material == Material.GROUND || material == Material.ROCK || material == Material.WOOD ||
-                BlocksTFC.isGround(iblockstate);
+                BlockUtils.isGround(iblockstate);
     }
 
     @Override
@@ -199,7 +204,7 @@ public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implem
 
                 if (worldIn.isAirBlock(sidePos) && worldIn.isAirBlock(sidePos.down()) &&
                         (!sideMaterial.isSolid() || sideMaterial == Material.LEAVES || sideMaterial == Material.GROUND ||
-                                sideMaterial == Material.ROCK || sideMaterial == Material.WOOD || BlocksTFC.isGround(sideState)) &&
+                                sideMaterial == Material.ROCK || sideMaterial == Material.WOOD || BlockUtils.isGround(sideState)) &&
                         canBlockStay(worldIn, sidePos.down(), state)) {
                     flag = true;
                 }
@@ -234,7 +239,7 @@ public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implem
 
             if (worldIn.isAirBlock(sidePos) &&
                     (!sideMaterial.isSolid() || sideMaterial == Material.LEAVES || sideMaterial == Material.GROUND || sideMaterial == Material.ROCK ||
-                            sideMaterial == Material.WOOD || BlocksTFC.isGround(sideState)) && canBlockStay(worldIn, sidePos, state)) {
+                            sideMaterial == Material.WOOD || BlockUtils.isGround(sideState)) && canBlockStay(worldIn, sidePos, state)) {
                 flag = true;
             }
         }

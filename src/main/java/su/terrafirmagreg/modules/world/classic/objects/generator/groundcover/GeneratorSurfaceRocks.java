@@ -1,7 +1,11 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.groundcover;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
+import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
-import su.terrafirmagreg.modules.world.classic.objects.generator.vein.Vein;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -11,58 +15,53 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
-import net.dries007.tfc.objects.blocks.groundcover.BlockSurfaceRock;
-import tfcflorae.ConfigTFCF;
-
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Random;
 
-public class GeneratorSurfaceRocks implements IWorldGenerator {
+import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 
-    private double factor;
+public class GeneratorSurfaceRocks
+        implements IWorldGenerator {
 
-    public GeneratorSurfaceRocks() {
-        factor = 1;
-    }
-
-    public void setFactor(double factor) {
-        if (factor < 0) factor = 0;
-        if (factor > 1) factor = 1;
-        this.factor = factor;
-    }
+    protected double factor;
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0) {
-            final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-            final ChunkData baseChunkData = ChunkData.get(world, chunkBlockPos);
 
-            int xoff = chunkX * 16 + 8;
-            int zoff = chunkZ * 16 + 8;
+        if (ConfigWorld.MISC.enableLooseRocks) {
+            // Проверяем, является ли генератор чанков экземпляром ChunkGenClassic и находится ли мир в измерении 0
+            if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0) {
+                final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
+                final var baseChunkData = CapabilityChunkData.get(world, chunkBlockPos);
 
-            for (int i = 0; i < ConfigTFCF.General.WORLD.groundcoverRockFrequency * factor; i++) {
-                BlockPos pos = new BlockPos(
-                        xoff + random.nextInt(16),
-                        0,
-                        zoff + random.nextInt(16)
-                );
-                Rock rock = baseChunkData.getRock1(pos);
-                generateRock(world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()), null, rock);
+                // Получаем правильный список камней
+                int xoff = chunkX * 16 + 8;
+                int zoff = chunkZ * 16 + 8;
+
+                // Генерируем лежачии камни в заданном количестве
+                for (int i = 0; i < ConfigWorld.MISC.looseRocksFrequency; i++) {
+                    var pos = new BlockPos(
+                            xoff + random.nextInt(16),
+                            0,
+                            zoff + random.nextInt(16)
+                    );
+                    var rock = baseChunkData.getRock1(pos);
+                    generateRock(random, world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()), rock);
+                }
             }
         }
     }
 
-    private void generateRock(World world, BlockPos pos, @Nullable Vein vein, Rock rock) {
-        if (world.isAirBlock(pos) && world.getBlockState(pos.down())
-                .isSideSolid(world, pos.down(), EnumFacing.UP) &&
-                (BlocksTFC.isSoil(world.getBlockState(pos.down())) || BlocksTFCF.isSoil(world.getBlockState(pos.down())) ||
-                        BlocksTFC.isRawStone(world.getBlockState(pos.down())))) {
-            world.setBlockState(pos, BlockSurfaceRock.get(rock).getDefaultState());
+    protected void generateRock(Random random, World world, BlockPos pos, RockType type) {
+        // Используем воздух, чтобы не заменять другие генерируемые блоки
+        // Это соответствует проверке в BlockPlacedItemFlat, если блок может оставаться
+        // Также добавляем только на почву, так как это вызывается обработчиком регенерации мира позже
+
+        if (world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) &&
+                BlockUtils.isSoil(world.getBlockState(pos.down()))) {
+            world.setBlockState(pos,
+                    BlocksRock.SURFACE.get(type).getDefaultState()
+                            .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(random.nextInt(4))), 2);
         }
     }
+
 }

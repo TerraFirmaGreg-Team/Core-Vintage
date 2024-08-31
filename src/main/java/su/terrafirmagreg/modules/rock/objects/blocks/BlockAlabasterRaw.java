@@ -27,8 +27,8 @@ public class BlockAlabasterRaw extends BlockRockDecorative {
 
         getSettings()
                 .registryKey("rock/alabaster/raw/" + color.getName())
-                .addOreDict("alabaster")
-                .addOreDict("alabaster", "raw");
+                .oreDict("alabaster")
+                .oreDict("alabaster", "raw");
     }
 
 }

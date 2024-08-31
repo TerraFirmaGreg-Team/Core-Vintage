@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.util;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeFruit;
 
 import net.minecraft.util.math.BlockPos;
@@ -8,7 +9,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 
 import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 import java.util.Random;
 
@@ -42,7 +42,7 @@ public interface IFruitTreeGenerator {
                 return false;
 
         // Check if there is a solid block beneath
-        if (!BlocksTFC.isSoil(world.getBlockState(pos.down())))
+        if (!BlockUtils.isSoil(world.getBlockState(pos.down())))
             return false;
 
         // Check the position for liquids, etc.

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.rock.objects.items;
 
+import su.terrafirmagreg.api.base.item.BaseItem;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.base.item.BaseItem;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.IRockItem;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
@@ -24,6 +24,6 @@ public abstract class ItemRock extends BaseItem implements IRockItem {
                 .size(Size.SMALL)
                 .weight(Weight.LIGHT)
                 .addOreDict(variant)
-                .addOreDict(variant, type.getRockCategory());
+                .addOreDict(variant, type.getCategory());
     }
 }

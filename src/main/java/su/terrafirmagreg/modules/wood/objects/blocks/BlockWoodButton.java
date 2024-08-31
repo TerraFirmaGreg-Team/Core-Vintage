@@ -25,9 +25,9 @@ public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
 
         this.settings = Settings.of(Material.CIRCUITS)
                 .hardness(0.5F)
-                .soundType(SoundType.WOOD)
-                .addOreDict(variant, "wood")
-                .addOreDict(variant, "wood", type);
+                .sound(SoundType.WOOD)
+                .oreDict(variant, "wood")
+                .oreDict(variant, "wood", type);
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }

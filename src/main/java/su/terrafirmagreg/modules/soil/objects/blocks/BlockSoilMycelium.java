@@ -40,8 +40,8 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
         this.settings = Settings.of(Material.GRASS, MapColor.PURPLE)
                 .renderLayer(BlockRenderLayer.CUTOUT)
                 .fallable(this, variant.getSpecification())
-                .addOreDict(variant)
-                .addOreDict(variant, type);
+                .oreDict(variant)
+                .oreDict(variant, type);
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)

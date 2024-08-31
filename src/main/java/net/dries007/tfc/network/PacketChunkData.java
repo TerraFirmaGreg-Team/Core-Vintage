@@ -1,5 +1,7 @@
 package net.dries007.tfc.network;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -12,8 +14,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.util.climate.Climate;
 
 public class PacketChunkData implements IMessage {
@@ -61,9 +61,9 @@ public class PacketChunkData implements IMessage {
                 TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
                     // Update client-side chunk data capability
                     Chunk chunk = world.getChunk(message.x, message.z);
-                    ChunkData data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
+                    var data = CapabilityChunkData.get(chunk);
                     if (data != null) {
-                        ChunkDataProvider.CHUNK_DATA_CAPABILITY.readNBT(data, null, message.nbt);
+                        CapabilityChunkData.CAPABILITY.readNBT(data, null, message.nbt);
                     }
 
                     // Update climate cache

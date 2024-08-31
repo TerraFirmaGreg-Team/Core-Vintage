@@ -41,9 +41,9 @@ public class BlockRockRaw extends BlockRock {
                 .ignoresProperties(CAN_FALL)
                 .renderLayer(BlockRenderLayer.CUTOUT)
                 .fallable(this, variant.getSpecification().setResultingState(BlocksRock.COBBLE.get(type).getDefaultState()))
-                .addOreDict(variant)
-                .addOreDict(variant, type)
-                .addOreDict("stone");
+                .oreDict(variant)
+                .oreDict(variant, type)
+                .oreDict("stone");
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(CAN_FALL, true));
@@ -83,7 +83,8 @@ public class BlockRockRaw extends BlockRock {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                    float hitX, float hitY, float hitZ) {
         ItemStack stack = playerIn.getHeldItemMainhand();
         if (ConfigRock.BLOCKS.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
             if (!worldIn.isRemote) {

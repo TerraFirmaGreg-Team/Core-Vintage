@@ -116,9 +116,7 @@ public class BlockCinnamonLog extends Block {
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         IBlockState downState = worldIn.getBlockState(pos.down());
-        boolean shouldDestroy = true;
-        if (downState.getBlock() instanceof BlockCinnamonLog || BlocksTFC.isGrowableSoil(downState))
-            shouldDestroy = false;
+        boolean shouldDestroy = !(downState.getBlock() instanceof BlockCinnamonLog) && !BlockUtils.isGrowableSoil(downState);
         if (shouldDestroy) {
             worldIn.destroyBlock(pos, true);
             return;

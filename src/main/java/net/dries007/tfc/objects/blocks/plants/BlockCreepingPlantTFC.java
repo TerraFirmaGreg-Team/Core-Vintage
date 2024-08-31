@@ -17,13 +17,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -86,7 +89,7 @@ public class BlockCreepingPlantTFC extends BlockPlantTFC {
             if (!(blockState.getBlock() instanceof BlockLeavesTFC) &&
                     (blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
                             blockState.getBlock() instanceof BlockFence)) {
-                return plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+                return plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
             }
         }
         return false;

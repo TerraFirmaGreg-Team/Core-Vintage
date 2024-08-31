@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.groundcover;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -7,7 +8,6 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -37,7 +37,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -102,13 +101,14 @@ public class BlockPebbleWater extends BlockFluidTFC implements ICapabilitySize {
             return worldIn.getBlockState(pos)
                     .getBlock()
                     .isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down())
-                    .isFullBlock() && BlocksTFC.isSaltWater(worldIn.getBlockState(pos)) && BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) &&
+                    .isFullBlock() && BlockUtils.isSaltWater(worldIn.getBlockState(pos)) && BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) &&
                     !worldIn.isAirBlock(pos.up());
         else if (this.getFluid() == FRESH_WATER)
             return worldIn.getBlockState(pos)
                     .getBlock()
                     .isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down())
-                    .isFullBlock() && BlocksTFC.isFreshWater(worldIn.getBlockState(pos)) && BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up())) &&
+                    .isFullBlock() && BlockUtils.isFreshWater(worldIn.getBlockState(pos)) &&
+                    BlockUtils.isFreshWater(worldIn.getBlockState(pos.up())) &&
                     !worldIn.isAirBlock(pos.up());
         else
             return false;

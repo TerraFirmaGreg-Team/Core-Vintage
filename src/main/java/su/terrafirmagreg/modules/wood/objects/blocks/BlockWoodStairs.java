@@ -24,8 +24,8 @@ public class BlockWoodStairs extends BaseBlockStairs implements IWoodBlock {
         this.type = type;
 
         getSettings()
-                .addOreDict("stairs")
-                .addOreDict("stairs", "wood");
+                .oreDict("stairs")
+                .oreDict("stairs", "wood");
 
         setHarvestLevel(ToolClasses.AXE, 0);
 

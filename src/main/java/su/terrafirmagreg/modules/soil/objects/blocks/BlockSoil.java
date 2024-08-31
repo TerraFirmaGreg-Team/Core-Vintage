@@ -38,11 +38,11 @@ public abstract class BlockSoil extends BaseBlock implements ISoilBlock {
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.GROUND)
+                .sound(SoundType.GROUND)
                 .harvestLevel(ToolClasses.SHOVEL, 0)
                 .fallable(this, variant.getSpecification())
                 .hardness(2.0F)
-                .addOreDict(variant);
+                .oreDict(variant);
     }
 
     @Override

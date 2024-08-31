@@ -36,11 +36,11 @@ public abstract class BlockRock extends BaseBlock implements IRockBlock {
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.STONE)
+                .sound(SoundType.STONE)
                 .harvestLevel(ToolClasses.PICKAXE, 0)
                 .fallable(this, variant.getSpecification())
-                .addOreDict(variant)
-                .addOreDict(variant, type);
+                .oreDict(variant)
+                .oreDict(variant, type);
     }
 
     public BlockRock(RockBlockVariant variant, RockType type) {
@@ -53,6 +53,6 @@ public abstract class BlockRock extends BaseBlock implements IRockBlock {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
     }
 }

@@ -17,8 +17,8 @@ public class BlockAggregate extends BlockGravel implements IBlockSettings {
     public BlockAggregate() {
         this.settings = Settings.of(Material.SAND)
                 .registryKey("core/aggregate")
-                .addOreDict("aggregate")
-                .soundType(SoundType.SAND)
+                .oreDict("aggregate")
+                .sound(SoundType.SAND)
                 .hardness(0.4f);
     }
 }

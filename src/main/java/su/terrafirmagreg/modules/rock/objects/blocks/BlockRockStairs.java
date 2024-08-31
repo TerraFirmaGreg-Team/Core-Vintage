@@ -38,10 +38,10 @@ public class BlockRockStairs extends BaseBlockStairs implements IRockBlock {
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.STONE)
+                .sound(SoundType.STONE)
                 .renderLayer(BlockRenderLayer.CUTOUT)
-                .addOreDict("stairs")
-                .addOreDict("stairs", model);
+                .oreDict("stairs")
+                .oreDict("stairs", model);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class BlockRockStairs extends BaseBlockStairs implements IRockBlock {
 
         tooltip.add(
                 new TextComponentTranslation("rockcategory.name")
-                        .getFormattedText() + ": " + this.getType().getRockCategory().getLocalizedName());
+                        .getFormattedText() + ": " + this.getType().getCategory().getLocalizedName());
     }
 
 }

@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.properties.PropertyBool;
@@ -17,7 +19,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.BlockPlant.BlockPlantDummy2;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
@@ -85,7 +86,7 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
 
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        return plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+        return plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
 
     @Override
@@ -95,7 +96,7 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
             if (!(blockState.getBlock() instanceof BlockLeavesTFC) &&
                     (blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
                             blockState.getBlock() instanceof BlockFence)) {
-                return plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+                return plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
             }
         }
         return false;

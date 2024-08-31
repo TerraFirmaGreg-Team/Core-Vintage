@@ -27,8 +27,8 @@ public class BlockAlabasterSmooth extends BlockRockDecorative {
 
         getSettings()
                 .registryKey("rock/alabaster/smooth/" + color.getName())
-                .addOreDict("alabaster")
-                .addOreDict("alabaster", "smooth");
+                .oreDict("alabaster")
+                .oreDict("alabaster", "smooth");
     }
 
 }

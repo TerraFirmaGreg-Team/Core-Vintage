@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.base.block.BaseBlockDoor;
-import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -28,9 +28,9 @@ public class BlockWoodDoor extends BaseBlockDoor implements IWoodBlock {
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.WOOD)
-                .addOreDict(variant, "wood")
-                .addOreDict(variant, "wood", type);
+                .sound(SoundType.WOOD)
+                .oreDict(variant, "wood")
+                .oreDict(variant, "wood", type);
 
         disableStats();
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());

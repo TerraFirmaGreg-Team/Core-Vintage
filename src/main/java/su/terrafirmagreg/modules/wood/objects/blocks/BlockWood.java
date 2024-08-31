@@ -25,9 +25,9 @@ public abstract class BlockWood extends BaseBlock implements IWoodBlock {
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.WOOD)
-                .addOreDict(variant)
-                .addOreDict(variant, type);
+                .sound(SoundType.WOOD)
+                .oreDict(variant)
+                .oreDict(variant, type);
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }

@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.data.lib.MathConstants;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -35,7 +36,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.capability.food.FoodHeatHandler;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
@@ -195,7 +195,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         return Climate.getAvgTemp(worldIn, pos) >= -13f && Climate.getAvgTemp(worldIn, pos) <= 50f &&
-                ChunkData.getRainfall(worldIn, pos) >= 250f && ChunkData.getRainfall(worldIn, pos) <= 500;
+                ProviderChunkData.getRainfall(worldIn, pos) >= 250f && ProviderChunkData.getRainfall(worldIn, pos) <= 500;
     }
 
     @Override
@@ -205,7 +205,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
             if (!(blockState.getBlock() instanceof BlockLeavesTFC) &&
                     (blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID)) {
                 return Climate.getAvgTemp(worldIn, pos) >= -13f && Climate.getAvgTemp(worldIn, pos) <= 50f &&
-                        ChunkData.getRainfall(worldIn, pos) >= 250f && ChunkData.getRainfall(worldIn, pos) <= 500;
+                        ProviderChunkData.getRainfall(worldIn, pos) >= 250f && ProviderChunkData.getRainfall(worldIn, pos) <= 500;
             }
         }
         return false;

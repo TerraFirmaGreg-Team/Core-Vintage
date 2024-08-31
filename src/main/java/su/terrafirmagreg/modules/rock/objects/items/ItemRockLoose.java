@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.rock.objects.items;
 
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
@@ -42,7 +42,7 @@ public class ItemRockLoose extends ItemRock implements IProviderContainer<Contai
                 .weight(Weight.VERY_LIGHT)
                 .addOreDict("rock")
                 .addOreDict("rock", type)
-                .addOreDict("rock", type.getRockCategory());
+                .addOreDict("rock", type.getCategory());
 
         if (type.isFlux()) getSettings().addOreDict("rock", "flux");
     }
@@ -62,7 +62,7 @@ public class ItemRockLoose extends ItemRock implements IProviderContainer<Contai
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
         tooltip.add(new TextComponentTranslation(
-                "rockcategory.name").getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
+                "rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
 
         if (getType().isFlux())
             tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("is_flux_rock.name").getFormattedText());

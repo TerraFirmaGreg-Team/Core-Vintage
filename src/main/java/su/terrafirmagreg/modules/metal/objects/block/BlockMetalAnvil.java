@@ -70,7 +70,7 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.ANVIL)
+                .sound(SoundType.ANVIL)
                 .nonFullCube()
                 .nonOpaque()
                 .hardness(4.0F)
@@ -96,7 +96,8 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
     //		return 2016; //1400
     //	}
 
-    protected EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    protected EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
+                                         float hitX, float hitY, float hitZ) {
         if (facing != null) {
             BlockPos placedPos = pos.offset(facing);
             BlockPos supportPos = placedPos.down();
@@ -104,7 +105,8 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
             IBlockState stateSupport = worldIn.getBlockState(supportPos);
             if (state.getBlock().isReplaceable(worldIn, placedPos) && stateSupport.isSideSolid(worldIn, supportPos, EnumFacing.UP)) {
                 if (!worldIn.isRemote) {
-                    worldIn.setBlockState(placedPos, BlocksMetal.ANVIL.get(type).getDefaultState().withProperty(HORIZONTAL, player.getHorizontalFacing()));
+                    worldIn.setBlockState(placedPos,
+                            BlocksMetal.ANVIL.get(type).getDefaultState().withProperty(HORIZONTAL, player.getHorizontalFacing()));
                     worldIn.playSound(null, placedPos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     stack.shrink(1);
                     player.setHeldItem(hand, stack);
@@ -156,7 +158,8 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                    float hitX, float hitY, float hitZ) {
         if (hand == EnumHand.OFF_HAND) {
             return false;
         }

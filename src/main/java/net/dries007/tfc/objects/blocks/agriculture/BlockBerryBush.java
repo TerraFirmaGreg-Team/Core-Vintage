@@ -3,6 +3,7 @@ package net.dries007.tfc.objects.blocks.agriculture;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.data.DamageSources;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -29,10 +30,8 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -142,7 +141,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
             var tile = TileUtils.getTile(world, pos, TETickCounter.class);
             if (TileUtils.isNotNull(tile)) {
                 float temp = Climate.getActualTemp(world, pos);
-                float rainfall = ChunkData.getRainfall(world, pos);
+                float rainfall = ProviderChunkData.getRainfall(world, pos);
                 long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                 if (hours > (bush.getGrowthTime() * ConfigTFC.General.FOOD.berryBushGrowthTimeModifier) && bush.isValidForGrowth(temp, rainfall)) {
                     if (bush.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
@@ -245,15 +244,15 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
         IBlockState below = world.getBlockState(pos.down());
         if (bush.getSize() == IBerryBush.Size.LARGE && below.getBlock() instanceof BlockBerryBush &&
                 ((BlockBerryBush) below.getBlock()).bush == this.bush) {
-            return BlocksTFC.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
+            return BlockUtils.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
         }
-        return BlocksTFC.isGrowableSoil(below);
+        return BlockUtils.isGrowableSoil(below);
     }
 
     @Override
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
         float temp = Climate.getActualTemp(world, pos);
-        float rainfall = ChunkData.getRainfall(world, pos);
+        float rainfall = ProviderChunkData.getRainfall(world, pos);
         boolean canGrow = bush.isValidForGrowth(temp, rainfall);
         if (state.getValue(FRUITING)) {
             return GrowthStatus.FULLY_GROWN;

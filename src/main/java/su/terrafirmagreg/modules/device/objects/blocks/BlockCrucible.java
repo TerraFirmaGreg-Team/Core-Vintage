@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.base.block.BaseBlockContainer;
-import su.terrafirmagreg.data.Constants;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.Constants;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
@@ -60,7 +60,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
 
         getSettings()
                 .registryKey("device/crucible")
-                .soundType(SoundType.METAL)
+                .sound(SoundType.METAL)
                 .nonFullCube()
                 .nonOpaque()
                 .hardness(3.0f)
@@ -83,7 +83,8 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
 
     @Override
     public Size getSize(ItemStack stack) {
-        return stack.getTagCompound() == null ? Size.LARGE : Size.HUGE; // Can only store in chests if not full, overburden if full and more than one is carried
+        return stack.getTagCompound() == null ? Size.LARGE :
+                Size.HUGE; // Can only store in chests if not full, overburden if full and more than one is carried
     }
 
     @SideOnly(Side.CLIENT)
@@ -112,7 +113,8 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
     }
 
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
+                                      @Nullable Entity entityIn,
                                       boolean isActualState) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_LEGS);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_WEST);
@@ -142,7 +144,8 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
+                                    float hitY, float hitZ) {
         if (!world.isRemote && !playerIn.isSneaking()) {
             GuiHandler.openGui(world, pos, playerIn);
         }

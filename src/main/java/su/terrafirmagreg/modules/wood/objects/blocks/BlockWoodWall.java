@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.base.block.BaseBlockWall;
-import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -31,9 +31,9 @@ public class BlockWoodWall extends BaseBlockWall implements IWoodBlock {
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.WOOD)
-                .addOreDict("wall", "wood")
-                .addOreDict("wall", "wood", type);
+                .sound(SoundType.WOOD)
+                .oreDict("wall", "wood")
+                .oreDict("wall", "wood", type);
 
         setHarvestLevel(ToolClasses.AXE, model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
 

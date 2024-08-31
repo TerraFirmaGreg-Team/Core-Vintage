@@ -39,7 +39,7 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
-        return this.settings == null || (state.isFullCube() && this.settings.isOpaque());
+        return this.settings == null || this.settings.isOpaque();
     }
 
     @Override
@@ -91,6 +91,11 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
     @Override
     public String getTranslationKey() {
         return this.settings.getTranslationKey() == null ? super.getTranslationKey() : "tile." + this.settings.getTranslationKey();
+    }
+
+    @Override
+    public boolean getUseNeighborBrightness(IBlockState state) {
+        return getSettings().isUseNeighborBrightness();
     }
 
     @Override

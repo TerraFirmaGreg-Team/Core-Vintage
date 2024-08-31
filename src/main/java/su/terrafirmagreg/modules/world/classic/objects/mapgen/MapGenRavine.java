@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.mapgen;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.data.lib.MathConstants;
 
 import net.minecraft.util.math.MathHelper;
@@ -7,8 +8,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
 
-
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 import java.util.Random;
 
@@ -115,7 +114,7 @@ public class MapGenRavine extends MapGenBase {
             for (int x = Math.max(xMin - 1, 0); x < Math.min(xMax + 1, 16); ++x) {
                 for (int z = Math.max(zMin - 1, 0); z < Math.min(zMax + 1, 16); ++z) {
                     for (int y = Math.min(yMax + 1, 250); y >= Math.max(yMin - 2, 1); --y) {
-                        if (BlocksTFC.isWater(primer.getBlockState(x, y, z)))
+                        if (BlockUtils.isWater(primer.getBlockState(x, y, z)))
                             continue outer;
                     }
                 }
@@ -134,9 +133,9 @@ public class MapGenRavine extends MapGenBase {
 
                         if (!((xNormalized * xNormalized + zNormalized * zNormalized) * multipliers[y] + yNormalized * yNormalized / 6.0D < 1.0D))
                             continue;
-                        if (!BlocksTFC.isGround(primer.getBlockState(x, y, z))) continue;
+                        if (!BlockUtils.isGround(primer.getBlockState(x, y, z))) continue;
 
-                        for (int upCount = 1; BlocksTFC.isSoilOrGravel(primer.getBlockState(x, y + upCount, z)); upCount++)
+                        for (int upCount = 1; BlockUtils.isSoilOrGravel(primer.getBlockState(x, y + upCount, z)); upCount++)
                             primer.setBlockState(x, y + upCount, z, AIR);
 
                         primer.setBlockState(x, y, z, y < 20 /*todo: make option, was 10*/ ? LAVA : AIR); // todo: check stability?

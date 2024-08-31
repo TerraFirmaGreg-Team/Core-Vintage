@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.entity.animal;
 
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
@@ -42,7 +43,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
@@ -220,7 +220,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
         return this.world.checkNoEntityCollision(getEntityBoundingBox())
                 && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
                 && !this.world.containsAnyLiquid(getEntityBoundingBox())
-                && BlocksTFC.isGround(this.world.getBlockState(this.getPosition().down()));
+                && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
     }
 
     @Override

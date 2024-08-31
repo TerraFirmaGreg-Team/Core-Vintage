@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 @Getter
@@ -39,6 +40,16 @@ public class SoilType extends Type<SoilType> {
         values = types.toArray(values);
 
         return i >= 0 && i < values.length ? values[i] : values[i % values.length];
+    }
+
+    /**
+     * Возвращает индекс породы в списке.
+     *
+     * @param type Порода.
+     * @return Индекс породы.
+     */
+    public static int indexOf(SoilType type) {
+        return new ArrayList<>(types).indexOf(type);
     }
 
     public static Builder builder(String name) {

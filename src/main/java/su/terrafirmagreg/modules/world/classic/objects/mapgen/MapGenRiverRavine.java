@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.mapgen;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.data.lib.MathConstants;
 
 import net.minecraft.util.math.MathHelper;
@@ -7,8 +8,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
 
-
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 import java.util.Random;
 
@@ -117,7 +116,7 @@ public class MapGenRiverRavine extends MapGenBase {
             for (int x = Math.max(xMin - 1, 0); x < Math.min(xMax + 1, 16); ++x) {
                 for (int z = Math.max(zMin - 1, 0); z < Math.min(zMax + 1, 16); ++z) {
                     for (int y = Math.min(yMax + 1, 250); y >= Math.max(yMin - 2, 1); --y) {
-                        if (BlocksTFC.isWater(primer.getBlockState(x, y, z)))
+                        if (BlockUtils.isWater(primer.getBlockState(x, y, z)))
                             continue outer;
                     }
                 }
@@ -133,7 +132,7 @@ public class MapGenRiverRavine extends MapGenBase {
                         final double yNormalized = (y + 0.5D - startY) / max;
                         if ((xNormalized * xNormalized + zNormalized * zNormalized) * multipliers[y] + yNormalized * yNormalized / 6.0D >= 1.0D)
                             continue;
-                        if (!BlocksTFC.isRawStone(primer.getBlockState(x, y, z)) && !BlocksTFC.isSoil(primer.getBlockState(x, y, z)))
+                        if (!BlockUtils.isRawStone(primer.getBlockState(x, y, z)) && !BlockUtils.isSoil(primer.getBlockState(x, y, z)))
                             continue;
 
                         if (y < 20/* todo make option, was 10*/)

@@ -1,14 +1,10 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeat;
-import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeatGrass;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
@@ -428,87 +424,7 @@ public final class BlocksTFC {
         }
     }
 
-    public static boolean isWater(IBlockState current) {
-        return current.getMaterial() == Material.WATER;
-    }
-
-    public static boolean isFreshWater(IBlockState current) {
-        return current == FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState();
-    }
-
-    public static boolean isSaltWater(IBlockState current) {
-        return current == FluidsTFC.SALT_WATER.get().getBlock().getDefaultState();
-    }
-
-    public static boolean isFreshWaterOrIce(IBlockState current) {
-        return current.getBlock() == Blocks.ICE || isFreshWater(current);
-    }
-
-    public static boolean isRawStone(IBlockState current) {
-        if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-        Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-        return type == RAW;
-    }
-
-    public static boolean isClay(IBlockState current) {
-        if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-        Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-        return type == CLAY || type == CLAY_GRASS;
-    }
-
-    public static boolean isDirt(IBlockState current) {
-        if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-        Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-        return type == DIRT;
-    }
-
-    public static boolean isSand(IBlockState current) {
-        if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-        Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-        return type == SAND;
-    }
-
     // todo: change to property of type? (soil & stone maybe?)
-
-    public static boolean isSoil(IBlockState current) {
-        if (current.getBlock() instanceof BlockSoilPeat) return true;
-        if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-        Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-        return type == GRASS || type == DRY_GRASS || type == DIRT || type == CLAY || type == CLAY_GRASS;
-    }
-
-    public static boolean isGrowableSoil(IBlockState current) {
-        if (current.getBlock() instanceof BlockSoilPeat) return false;
-        if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-        Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-        return type == GRASS || type == DRY_GRASS || type == DIRT || type == CLAY || type == CLAY_GRASS;
-    }
-
-    public static boolean isSoilOrGravel(IBlockState current) {
-        if (current.getBlock() instanceof BlockSoilPeat) return true;
-        if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-        Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-        return type == GRASS || type == DRY_GRASS || type == DIRT || type == GRAVEL || type == CLAY;
-    }
-
-    public static boolean isGrass(IBlockState current) {
-        if (current.getBlock() instanceof BlockSoilPeatGrass) return true;
-        if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-        Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-        return type.isGrass;
-    }
-
-    public static boolean isDryGrass(IBlockState current) {
-        if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-        Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-        return type == DRY_GRASS;
-    }
-
-    public static boolean isGround(IBlockState current) {
-        if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-        Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-        return type == GRASS || type == DRY_GRASS || type == DIRT || type == GRAVEL || type == RAW || type == SAND;
-    }
 
     private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block, CreativeTabs ct) {
         block.setCreativeTab(ct);

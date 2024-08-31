@@ -26,6 +26,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 
 import lombok.Getter;
 
@@ -39,7 +40,9 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
     @Shadow
     protected Material material;
 
-    protected final Settings settings = Settings.of(Material.AIR);
+    @Unique
+    @Final
+    protected Settings core_Vintage$settings = Settings.of(Material.AIR);
 
     /**
      * @author Xikaro
@@ -48,7 +51,17 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
     @Override
     @Overwrite
     public boolean isOpaqueCube(IBlockState state) {
-        return getSettings() != null && getSettings().isOpaque();
+        return core_Vintage$settings != null && core_Vintage$settings.isOpaque();
+    }
+
+    /**
+     * @author Xikaro
+     * @reason Адаптация под ISettingsBlock
+     */
+    @Override
+    @Overwrite
+    public boolean getUseNeighborBrightness(IBlockState state) {
+        return core_Vintage$settings.isUseNeighborBrightness();
     }
 
     /**
@@ -58,7 +71,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
     @Override
     @Overwrite
     public boolean isFullCube(IBlockState state) {
-        return getSettings().isFullCube();
+        return core_Vintage$settings.isFullCube();
     }
 
     /**
@@ -68,7 +81,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
     @Override
     @Overwrite
     public boolean isCollidable() {
-        return getSettings().isCollidable();
+        return core_Vintage$settings.isCollidable();
     }
 
     /**
@@ -78,7 +91,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
     @Override
     @Overwrite
     public SoundType getSoundType() {
-        return getSettings().getSoundType();
+        return core_Vintage$settings.getSoundType();
     }
 
     /**
@@ -99,7 +112,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
     @Overwrite
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
-        return getSettings().getRenderLayer();
+        return core_Vintage$settings.getRenderLayer();
     }
 
     /**
@@ -109,7 +122,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
     @Override
     @Overwrite
     public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
-        return getSettings().getHardness().apply(blockState, worldIn, pos);
+        return core_Vintage$settings.getHardness().apply(blockState, worldIn, pos);
     }
 
     /**
@@ -119,7 +132,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
     @Override
     @Overwrite
     public float getExplosionResistance(Entity exploder) {
-        return getSettings().getResistance() / 5.0F;
+        return core_Vintage$settings.getResistance() / 5.0F;
     }
 
     /**
@@ -129,7 +142,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
     @Override
     @Overwrite
     public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity) {
-        return getSettings().getSlipperiness().apply(state, world, pos);
+        return core_Vintage$settings.getSlipperiness().apply(state, world, pos);
     }
 
     /**
@@ -139,7 +152,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
     @Override
     @Overwrite
     public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return getSettings().getLightValue().apply(state, world, pos);
+        return core_Vintage$settings.getLightValue().apply(state, world, pos);
     }
 
     @Override
@@ -149,22 +162,22 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
 
     @Override
     public boolean getHasItemSubtypes() {
-        return getSettings().isHasItemSubtypes();
+        return core_Vintage$settings.isHasItemSubtypes();
     }
 
     @Override
     public Size getSize(ItemStack stack) {
-        return getSettings().getSize();
+        return core_Vintage$settings.getSize();
     }
 
     @Override
     public Weight getWeight(ItemStack stack) {
-        return getSettings().getWeight();
+        return core_Vintage$settings.getWeight();
     }
 
     @Override
     public boolean canStack(ItemStack stack) {
-        return getSettings().isCanStack();
+        return core_Vintage$settings.isCanStack();
     }
 
 }

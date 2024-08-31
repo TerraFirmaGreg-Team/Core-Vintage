@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.groundcover;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -28,8 +29,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -123,7 +122,7 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
         IBlockState iblockstate = worldIn.getBlockState(blockpos);
         BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, blockpos, facing);
 
-        return blockfaceshape == BlockFaceShape.SOLID || BlocksTFC.isGround(iblockstate) || BlocksTFCF.isGround(iblockstate) ||
+        return blockfaceshape == BlockFaceShape.SOLID || BlockUtils.isGround(iblockstate) ||
                 worldIn.getBlockState(blockpos)
                         .isFullBlock();
     }

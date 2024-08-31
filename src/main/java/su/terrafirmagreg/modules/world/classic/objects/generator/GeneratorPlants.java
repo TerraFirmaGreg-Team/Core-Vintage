@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 
 import net.minecraft.block.BlockHardenedClay;
@@ -17,7 +19,6 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.types.DefaultPlants;
@@ -92,12 +93,12 @@ public class GeneratorPlants implements IWorldGenerator {
         ChunkPos forgeChunkPos = new ChunkPos(chunkPos); // actual ChunkPos instead of BlockPos, used for events
         MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(world, rng, forgeChunkPos));
 
-        ChunkData data = ChunkData.get(world, chunkPos);
+        var data = CapabilityChunkData.get(world, chunkPos);
         if (!data.isInitialized()) return;
 
         Biome b = world.getBiome(chunkPos);
         final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
-        final float rainfall = ChunkData.getRainfall(world, chunkPos);
+        final float rainfall = ProviderChunkData.getRainfall(world, chunkPos);
         final float floraDensity = data.getFloraDensity(); // Use for various plant based decoration (tall grass, those vanilla jungle shrub things, etc.)
         final float floraDiversity = data.getFloraDiversity();
 

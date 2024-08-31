@@ -26,10 +26,10 @@ public class BlockSoilMudStairs extends BaseBlockStairs implements ISoilBlock {
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.GROUND)
+                .sound(SoundType.GROUND)
                 .renderLayer(BlockRenderLayer.CUTOUT)
-                .addOreDict("stairs")
-                .addOreDict("stairs", "mud", "bricks");
+                .oreDict("stairs")
+                .oreDict("stairs", "mud", "bricks");
 
         setHarvestLevel(ToolClasses.PICKAXE, 0);
     }

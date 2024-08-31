@@ -26,8 +26,8 @@ public class BlockAlabasterBricks extends BlockRockDecorative {
         super(Settings.of(Material.ROCK, color));
 
         getSettings()
-                .addOreDict("alabaster")
-                .addOreDict("alabaster", "bricks")
+                .oreDict("alabaster")
+                .oreDict("alabaster", "bricks")
                 .registryKey("rock/alabaster/bricks/" + color.getName());
     }
 }

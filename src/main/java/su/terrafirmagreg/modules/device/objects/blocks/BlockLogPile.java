@@ -60,7 +60,7 @@ public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
 
         getSettings()
                 .registryKey("device/log_pile")
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .hardness(2.0F);
 
         setTickRandomly(true);

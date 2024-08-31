@@ -23,12 +23,15 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -272,7 +275,7 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
     @Override
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
         float temp = Climate.getActualTemp(world, pos);
-        float rainfall = ChunkData.getRainfall(world, pos);
+        float rainfall = ProviderChunkData.getRainfall(world, pos);
         boolean canGrow = tree.isValidForGrowth(temp, rainfall);
         if (canGrow) {
             return GrowthStatus.GROWING;

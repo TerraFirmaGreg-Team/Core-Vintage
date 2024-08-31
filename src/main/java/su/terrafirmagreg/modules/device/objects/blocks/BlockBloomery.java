@@ -170,7 +170,7 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
 
         getSettings()
                 .registryKey("device/bloomery")
-                .soundType(SoundType.METAL)
+                .sound(SoundType.METAL)
                 .hardness(20.0F)
                 .size(Size.LARGE)
                 .weight(Weight.VERY_HEAVY)

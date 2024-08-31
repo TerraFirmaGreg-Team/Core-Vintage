@@ -37,8 +37,8 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.data.Properties.SEALED;
 
 /**
- * Crate is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state property, and cached in the TE
- * (for gui purposes)
+ * Crate is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state
+ * property, and cached in the TE (for gui purposes)
  */
 @SuppressWarnings("deprecation")
 public class BlockCrate extends BaseBlockContainer implements IProviderTile {
@@ -51,7 +51,7 @@ public class BlockCrate extends BaseBlockContainer implements IProviderTile {
 
         getSettings()
                 .registryKey("device/crate")
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .hardness(2F)
                 .nonCube()
                 .weight(Weight.VERY_HEAVY);
@@ -133,7 +133,8 @@ public class BlockCrate extends BaseBlockContainer implements IProviderTile {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
+                                    float hitY, float hitZ) {
         if (!world.isRemote) {
             ItemStack heldItem = playerIn.getHeldItem(hand);
             var tile = TileUtils.getTile(world, pos, TileCrate.class);

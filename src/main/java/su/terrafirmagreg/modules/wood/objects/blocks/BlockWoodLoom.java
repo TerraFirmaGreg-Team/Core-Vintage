@@ -58,15 +58,15 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, IPr
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .nonOpaque()
                 .nonFullCube()
                 .hardness(0.5f)
                 .resistance(3f)
                 .weight(Weight.VERY_HEAVY)
                 .size(Size.LARGE)
-                .addOreDict(variant)
-                .addOreDict(variant, type);
+                .oreDict(variant)
+                .oreDict(variant, type);
 
         setHarvestLevel(ToolClasses.AXE, 0);
         setDefaultState(getBlockState().getBaseState()
@@ -96,7 +96,8 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, IPr
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                    float hitX, float hitY, float hitZ) {
         var tile = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
         if (tile != null) {
             return tile.onRightClick(playerIn);
@@ -105,7 +106,8 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, IPr
     }
 
     @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer) {
         if (facing.getAxis() == EnumFacing.Axis.Y) {
             facing = placer.getHorizontalFacing().getOpposite();
         }

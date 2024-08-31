@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -9,9 +12,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockCactusTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockCreepingPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
@@ -48,7 +49,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockMushroomTFC plantBlock = BlockMushroomTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position) / 16; ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 16; ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(4) - rand.nextInt(4), rand.nextInt(4) - rand.nextInt(4),
                             rand.nextInt(4) - rand.nextInt(4));
 
@@ -66,7 +67,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position) / 4; ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 4; ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(4) - rand.nextInt(4),
                             rand.nextInt(7) - rand.nextInt(7));
 
@@ -84,7 +85,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockTallGrassTFC plantBlock = BlockTallGrassTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position) / 16; ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 16; ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(4) - rand.nextInt(4),
                             rand.nextInt(7) - rand.nextInt(7));
 
@@ -106,7 +107,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockCreepingPlantTFC plantBlock = BlockCreepingPlantTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position) / 16; ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 16; ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(4) - rand.nextInt(4), rand.nextInt(4) - rand.nextInt(4),
                             rand.nextInt(4) - rand.nextInt(4));
 
@@ -114,7 +115,7 @@ public class GeneratorPlant extends WorldGenerator {
                             plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
                             worldIn.isAirBlock(blockpos) &&
                             plantBlock.canBlockStay(worldIn, blockpos, state) &&
-                            !BlocksTFC.isSand(worldIn.getBlockState(blockpos.down()))) {
+                            !BlockUtils.isSand(worldIn.getBlockState(blockpos.down()))) {
                         int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
                         setBlockAndNotifyAdequately(worldIn, blockpos, state.withProperty(BlockCreepingPlantTFC.AGE, plantAge));
                     }
@@ -125,7 +126,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockHangingPlantTFC plantBlock = BlockHangingPlantTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position) / 4; ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 4; ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(16), rand.nextInt(7) - rand.nextInt(7));
 
                     if (plant.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
@@ -143,7 +144,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockPlantTFC plantBlock = BlockPlantTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position) / 16; ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 16; ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(4) - rand.nextInt(4),
                             rand.nextInt(7) - rand.nextInt(7));
 
@@ -164,7 +165,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockTallPlantTFC plantBlock = BlockTallPlantTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position) / 16; ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 16; ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(4) - rand.nextInt(4),
                             rand.nextInt(7) - rand.nextInt(7));
 
@@ -186,7 +187,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockPlantTFC plantBlock = BlockPlantTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position); ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position); ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(4) - rand.nextInt(4),
                             rand.nextInt(7) - rand.nextInt(7));
 
@@ -205,7 +206,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockTallPlantTFC plantBlock = BlockTallPlantTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position); ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position); ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(4) - rand.nextInt(4),
                             rand.nextInt(7) - rand.nextInt(7));
 
@@ -227,7 +228,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockPlantTFC plantBlock = BlockPlantTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position); ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position); ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(4) - rand.nextInt(4),
                             rand.nextInt(7) - rand.nextInt(7));
 
@@ -246,7 +247,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockTallPlantTFC plantBlock = BlockTallPlantTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position); ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position); ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(4) - rand.nextInt(4),
                             rand.nextInt(7) - rand.nextInt(7));
 
@@ -268,7 +269,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockTallPlantTFC plantBlock = BlockTallPlantTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position) / 16; ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 16; ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(4) - rand.nextInt(4),
                             rand.nextInt(7) - rand.nextInt(7));
 
@@ -387,7 +388,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockCactusTFC plantBlock = BlockCactusTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position) / 8; ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 8; ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(4) - rand.nextInt(4),
                             rand.nextInt(7) - rand.nextInt(7));
 
@@ -408,7 +409,7 @@ public class GeneratorPlant extends WorldGenerator {
             case EPIPHYTE: {
                 BlockEpiphyteTFC plantBlock = BlockEpiphyteTFC.get(plant);
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position) / 4; ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 4; ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(16), rand.nextInt(7) - rand.nextInt(7));
 
                     if (plant.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
@@ -426,7 +427,7 @@ public class GeneratorPlant extends WorldGenerator {
                 BlockPlantTFC plantBlock = BlockPlantTFC.get(plant);
                 IBlockState state = plantBlock.getDefaultState();
 
-                for (int i = 0; i < ChunkData.getRainfall(worldIn, position) / 16; ++i) {
+                for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 16; ++i) {
                     BlockPos blockpos = position.add(
                             rand.nextInt(7) - rand.nextInt(7),
                             rand.nextInt(4) - rand.nextInt(4),

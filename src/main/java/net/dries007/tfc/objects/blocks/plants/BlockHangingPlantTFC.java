@@ -1,8 +1,9 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -14,7 +15,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -37,7 +37,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
     }
 
     public static BlockHangingPlantTFC get(Plant plant) {
-        return (BlockHangingPlantTFC) MAP.get(plant);
+        return MAP.get(plant);
     }
 
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
@@ -74,7 +74,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         IBlockState actualState = super.getActualState(state, worldIn, pos);
         if (worldIn.getBlockState(pos.down())
-                .getBlock() == this && (Boolean) actualState.getValue(UP) && !(Boolean) actualState.getValue(DOWN) &&
+                .getBlock() == this && actualState.getValue(UP) && !(Boolean) actualState.getValue(DOWN) &&
                 !(Boolean) actualState.getValue(NORTH) && !(Boolean) actualState.getValue(SOUTH) && !(Boolean) actualState.getValue(EAST) &&
                 !(Boolean) actualState.getValue(WEST)) {
             actualState = actualState.withProperty(NORTH, true)
@@ -108,7 +108,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
             Material material = blockState.getMaterial();
             if (material == Material.LEAVES || worldIn.getBlockState(pos.up()).getBlock() == this) {
                 return this.plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
-                        this.plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+                        this.plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
             }
         }
 
@@ -118,7 +118,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
     @NotNull
     protected BlockStateContainer createPlantBlockState() {
         return new BlockStateContainer(this,
-                new IProperty[] { DOWN, UP, NORTH, EAST, WEST, SOUTH, this.growthStageProperty, DAYPERIOD, AGE, BOTTOM });
+                DOWN, UP, NORTH, EAST, WEST, SOUTH, this.growthStageProperty, DAYPERIOD, AGE, BOTTOM);
     }
 
     protected boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
@@ -138,7 +138,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
             int j;
             if (this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
                     this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-                j = (Integer) state.getValue(AGE);
+                j = state.getValue(AGE);
                 if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.down(), state, true)) {
                     if (j == 3) {
                         if (this.canGrow(worldIn, pos, state, worldIn.isRemote)) {
@@ -157,7 +157,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
                 }
             } else if (!this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                     !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-                j = (Integer) state.getValue(AGE);
+                j = state.getValue(AGE);
                 if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
                     if (j == 0) {
                         if (this.canShrink(worldIn, pos)) {

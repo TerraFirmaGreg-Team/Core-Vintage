@@ -2,6 +2,10 @@ package su.terrafirmagreg.modules.world.classic.objects.generator;
 
 import su.terrafirmagreg.api.base.biome.BaseBiome;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ICapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
@@ -24,12 +28,10 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeFlower;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.types.TreesTFCF;
@@ -52,7 +54,7 @@ public class GeneratorTrees implements IWorldGenerator {
 
         final BlockPos chunkPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
         final BlockPos center = new BlockPos(chunkX * 16 + 8, world.getHeight(chunkX * 16 + 8, chunkZ * 16 + 8), chunkZ * 16 + 8);
-        ChunkData chunkData = ChunkData.get(world, chunkPos);
+        var chunkData = CapabilityChunkData.get(world, chunkPos);
         if (!chunkData.isInitialized()) return;
 
         final Biome biome = world.getBiome(chunkPos);
@@ -63,7 +65,7 @@ public class GeneratorTrees implements IWorldGenerator {
         final float diversity = chunkData.getFloraDiversity();
         final float density = chunkData.getFloraDensity();
         final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
-        final float rainfall = ChunkData.getRainfall(world, chunkPos);
+        final float rainfall = ProviderChunkData.getRainfall(world, chunkPos);
 
         float gauss = 2f * (float) random.nextGaussian();
 
@@ -165,7 +167,7 @@ public class GeneratorTrees implements IWorldGenerator {
             Biome b1 = world.getBiome(blockPos);
             //BlockPos blockPos = world.getHeight(chunkPos.add(random.nextInt(16) + 8, (random.nextInt(7) - random.nextInt(7)) * -1, random.nextInt(16) + 8));
 
-            if ((BlocksTFC.isGround(down) || BlocksTFCF.isGround(down) || world.getBlockState(blockPos)
+            if ((BlockUtils.isGround(down) || world.getBlockState(blockPos)
                     .getBlock() == ChunkGenClassic.FRESH_WATER.getBlock()) && b1 == BiomesWorld.BAYOU) {
                 //if (TFCRegistries.TREES.getValue(TreesTFCF.BALD_CYPRESS).isValidLocation(avgTemperature, rainfall, density))
                 if (10f <= avgTemperature && 38f >= avgTemperature && 180f <= rainfall && 500f >= rainfall &&
@@ -189,7 +191,7 @@ public class GeneratorTrees implements IWorldGenerator {
             final Biome b1 = world.getBiome(blockPos);
             //BlockPos blockPos = world.getHeight(chunkPos.add(random.nextInt(16) + 8, (random.nextInt(7) - random.nextInt(7)) * -1, random.nextInt(16) + 8));
 
-            if ((BlocksTFC.isGround(down) || BlocksTFCF.isGround(down) || world.getBlockState(blockPos)
+            if ((BlockUtils.isGround(down) || world.getBlockState(blockPos)
                     .getBlock() == ChunkGenClassic.SALT_WATER.getBlock()) && b1 == BiomesWorld.MANGROVE) {
                 //if (TFCRegistries.TREES.getValue(TreesTFCF.MANGROVE).isValidLocation(avgTemperature, rainfall, density))
                 if (15f <= avgTemperature && 40f >= avgTemperature && 200f <= rainfall && 500f >= rainfall &&
@@ -215,7 +217,7 @@ public class GeneratorTrees implements IWorldGenerator {
                 if (b1 != BiomesWorld.BAYOU && b1 != BiomesWorld.MARSH && !BiomeUtils.isOceanicBiome(b1) && !BiomeUtils.isLakeBiome(b1) &&
                         !BiomeUtils.isBeachBiome(b1) &&
                         !BiomeUtils.isMesaBiome(b1)) {
-                    if ((BlocksTFC.isSand(down) || BlocksTFC.isSoilOrGravel(down) || BlocksTFCF.isSand(down) || BlocksTFCF.isSoilOrGravel(down)) &&
+                    if ((BlockUtils.isSand(down) || BlockUtils.isSoilOrGravel(down)) &&
                             (down != Blocks.HARDENED_CLAY && down != Blocks.STAINED_HARDENED_CLAY)) {
                         if (15f <= avgTemperature && 40f >= avgTemperature && 65f <= rainfall && 150f >= rainfall &&
                                 blockPos.getY() >= WorldTypeClassic.SEALEVEL) {
@@ -249,7 +251,7 @@ public class GeneratorTrees implements IWorldGenerator {
         return trees.get(1 + random.nextInt(trees.size() - 1));
     }
 
-    private void generateBush(Random random, int chunkX, int chunkZ, World world, ChunkData chunkData, float minFlora, float maxFlora,
+    private void generateBush(Random random, int chunkX, int chunkZ, World world, ICapabilityChunkData chunkData, float minFlora, float maxFlora,
                               float minRainfall, float maxRainfall,
                               int numBushes, List<Tree> trees) {
         final TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
@@ -285,7 +287,7 @@ public class GeneratorTrees implements IWorldGenerator {
                 // This matches the check in BlockPlacedItemFlat for if the block can stay
                 // Also, only add on soil, since this is called by the world regen handler later
                 IBlockState stateDown = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && stateDown.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGround(stateDown)) {
+                if (world.isAirBlock(pos) && stateDown.isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(stateDown)) {
                     world.setBlockState(pos, BlocksTFC.PLACED_ITEM_FLAT.getDefaultState());
                     TEPlacedItemFlat tile = (TEPlacedItemFlat) world.getTileEntity(pos);
                     if (tile != null) {

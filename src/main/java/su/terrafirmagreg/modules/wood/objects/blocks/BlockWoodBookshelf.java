@@ -30,10 +30,10 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
         this.settings = Settings.of(Material.WOOD)
                 .hardness(2.0F)
                 .resistance(5.0F)
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
-                .addOreDict(variant)
-                .addOreDict(variant, type);
+                .oreDict(variant)
+                .oreDict(variant, type);
 
         setHarvestLevel(ToolClasses.AXE, 0);
 

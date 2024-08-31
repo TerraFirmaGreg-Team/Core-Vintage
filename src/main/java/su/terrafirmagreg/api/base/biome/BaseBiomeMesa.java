@@ -1,5 +1,8 @@
 package su.terrafirmagreg.api.base.biome;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.block.BlockColored;
@@ -13,10 +16,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
-
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -94,8 +93,8 @@ public abstract class BaseBiomeMesa extends BaseBiome {
 
         for (int j1 = 255; j1 >= 0; --j1) {
             if (chunkPrimerIn.getBlockState(l1, j1, k1).getMaterial() == Material.AIR && j1 < (int) d4) {
-                chunkPrimerIn.setBlockState(l1, j1, k1, BlockRockVariant.get(ChunkData.getRockHeight(worldIn, chunkBlockPos), Rock.Type.RAW)
-                        .getDefaultState());
+                chunkPrimerIn.setBlockState(l1, j1, k1,
+                        BlocksRock.RAW.get(ProviderChunkData.getRockHeight(worldIn, chunkBlockPos)).getDefaultState());
             }
 
             if (j1 <= rand.nextInt(5)) {
@@ -104,13 +103,13 @@ public abstract class BaseBiomeMesa extends BaseBiome {
                 IBlockState iblockstate1 = chunkPrimerIn.getBlockState(l1, j1, k1);
                 if (iblockstate1.getMaterial() == Material.AIR) {
                     l = -1;
-                } else if (iblockstate1.getBlock() == BlockRockVariant.get(ChunkData.getRockHeight(worldIn, chunkBlockPos), Rock.Type.RAW)
+                } else if (iblockstate1.getBlock() == BlocksRock.RAW.get(ProviderChunkData.getRockHeight(worldIn, chunkBlockPos))
                         .getDefaultState()) {
                     if (l == -1) {
                         flag1 = false;
                         if (k <= 0) {
                             iblockstate = AIR;
-                            iblockstate3 = BlockRockVariant.get(ChunkData.getRockHeight(worldIn, chunkBlockPos), Rock.Type.RAW)
+                            iblockstate3 = BlocksRock.RAW.get(ProviderChunkData.getRockHeight(worldIn, chunkBlockPos))
                                     .getDefaultState();
                         } else if (j1 >= i2 - 4 && j1 <= i2 + 1) {
                             iblockstate = STAINED_HARDENED_CLAY;
@@ -126,12 +125,10 @@ public abstract class BaseBiomeMesa extends BaseBiome {
                             if (this.hasForest && j1 > 86 + k * 2) {
                                 if (flag) {
                                     chunkPrimerIn.setBlockState(l1, j1, k1,
-                                            BlockRockVariant.get(ChunkData.getRockHeight(worldIn, chunkBlockPos), Rock.Type.DIRT)
-                                                    .getDefaultState());
+                                            BlocksSoil.DIRT.get(ProviderChunkData.getSoilHeight(worldIn, chunkBlockPos)).getDefaultState());
                                 } else {
                                     chunkPrimerIn.setBlockState(l1, j1, k1,
-                                            BlockRockVariant.get(ChunkData.getRockHeight(worldIn, chunkBlockPos), Rock.Type.GRASS)
-                                                    .getDefaultState());
+                                            BlocksSoil.GRASS.get(ProviderChunkData.getSoilHeight(worldIn, chunkBlockPos)).getDefaultState());
                                 }
                             } else if (j1 > i2 + 3 + k) {
                                 IBlockState iblockstate2;

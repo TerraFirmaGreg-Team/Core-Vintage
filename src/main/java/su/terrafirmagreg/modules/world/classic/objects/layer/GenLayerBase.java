@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.world.classic.objects.layer;
 
 import su.terrafirmagreg.api.base.biome.BaseBiome;
 import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 import su.terrafirmagreg.modules.world.classic.objects.layer.biome.GenLayerAddIsland;
 import su.terrafirmagreg.modules.world.classic.objects.layer.biome.GenLayerBiome;
@@ -11,6 +12,7 @@ import su.terrafirmagreg.modules.world.classic.objects.layer.biome.GenLayerIslan
 import su.terrafirmagreg.modules.world.classic.objects.layer.biome.GenLayerLakes;
 import su.terrafirmagreg.modules.world.classic.objects.layer.biome.GenLayerShore;
 import su.terrafirmagreg.modules.world.classic.objects.layer.datalayers.rock.GenLayerRockInit;
+import su.terrafirmagreg.modules.world.classic.objects.layer.datalayers.soil.GenLayerSoilInit;
 import su.terrafirmagreg.modules.world.classic.objects.layer.datalayers.stability.GenLayerStabilityInit;
 import su.terrafirmagreg.modules.world.classic.objects.layer.river.GenLayerRiver;
 import su.terrafirmagreg.modules.world.classic.objects.layer.river.GenLayerRiverInit;
@@ -22,7 +24,6 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.RockCategory;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -182,6 +183,25 @@ public abstract class GenLayerBase extends GenLayer {
         layer = new GenLayerVoronoiZoom(10L, layer);
         layer.initWorldGenSeed(seed);
         drawImage(1024, layer, "rock" + level.name());
+        return layer;
+    }
+
+    public static GenLayerBase initializeSoil(long seed, int soilLayerSize) {
+        GenLayerBase layer = new GenLayerSoilInit(1L);
+        layer = new GenLayerFuzzyZoom(2000L, layer);
+        layer = new GenLayerZoom(2001L, layer);
+        layer = new GenLayerZoom(2002L, layer);
+        layer = new GenLayerZoom(2003L, layer);
+        layer = new GenLayerSmooth(1000L, layer);
+
+        for (int zoomLevel = 0; zoomLevel < soilLayerSize; ++zoomLevel) {
+            layer = new GenLayerZoom(1000 + zoomLevel, layer);
+        }
+
+        layer = new GenLayerSmooth(1000L, layer);
+        layer = new GenLayerVoronoiZoom(10L, layer);
+        layer.initWorldGenSeed(seed);
+        drawImage(1024, layer, "soil");
         return layer;
     }
 

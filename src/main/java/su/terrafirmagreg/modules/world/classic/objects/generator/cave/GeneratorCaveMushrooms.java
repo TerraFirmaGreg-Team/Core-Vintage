@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.cave;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import net.minecraft.block.state.IBlockState;
@@ -9,7 +10,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockCaveMushroom;
 
@@ -24,7 +24,7 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
             BlockCaveMushroom mushroomBlock = BlocksTFCF.BLUESHROOM;
             IBlockState state = mushroomBlock.getDefaultState();
 
-            for (int i = 0; i < ChunkData.getRainfall(worldIn, pos) / 16; ++i) {
+            for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
                 BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
 
                 if (worldIn.isAirBlock(blockpos) &&
@@ -39,7 +39,7 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
             BlockCaveMushroom mushroomBlock = BlocksTFCF.GLOWSHROOM;
             IBlockState state = mushroomBlock.getDefaultState();
 
-            for (int i = 0; i < ChunkData.getRainfall(worldIn, pos) / 16; ++i) {
+            for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
                 BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
 
                 if (worldIn.isAirBlock(blockpos) &&
@@ -54,7 +54,7 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
             BlockCaveMushroom mushroomBlock = BlocksTFCF.MAGMA_SHROOM;
             IBlockState state = mushroomBlock.getDefaultState();
 
-            for (int i = 0; i < ChunkData.getRainfall(worldIn, pos) / 16; ++i) {
+            for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
                 BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
 
                 if (worldIn.isAirBlock(blockpos) &&
@@ -69,7 +69,7 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
             BlockCaveMushroom mushroomBlock = BlocksTFCF.POISON_SHROOM;
             IBlockState state = mushroomBlock.getDefaultState();
 
-            for (int i = 0; i < ChunkData.getRainfall(worldIn, pos) / 16; ++i) {
+            for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
                 BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
 
                 if (worldIn.isAirBlock(blockpos) &&
@@ -84,7 +84,7 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
             BlockCaveMushroom mushroomBlock = BlocksTFCF.SULPHUR_SHROOM;
             IBlockState state = mushroomBlock.getDefaultState();
 
-            for (int i = 0; i < ChunkData.getRainfall(worldIn, pos) / 16; ++i) {
+            for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
                 BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
 
                 if (worldIn.isAirBlock(blockpos) &&

@@ -1,6 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -12,7 +13,6 @@ import net.minecraft.world.World;
 
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
@@ -39,7 +39,7 @@ public class CropProvider implements IWailaBlock {
 
             boolean isWild = state.getValue(BlockCropTFC.WILD);
             float temp = Climate.getActualTemp(world, pos, -tile.getLastUpdateTick());
-            float rainfall = ChunkData.getRainfall(world, pos);
+            float rainfall = ProviderChunkData.getRainfall(world, pos);
 
             if (isWild) {
                 currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.wild").getFormattedText());
@@ -87,12 +87,10 @@ public class CropProvider implements IWailaBlock {
     @Override
     public ItemStack getIcon(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockCropTFC) {
-            BlockCropTFC b = (BlockCropTFC) state.getBlock();
+        if (state.getBlock() instanceof BlockCropTFC b) {
             ICrop crop = b.getCrop();
             return crop.getFoodDrop(state.getValue(b.getStageProperty()));
-        } else if (state.getBlock() instanceof BlockCropDead) {
-            BlockCropDead b = (BlockCropDead) state.getBlock();
+        } else if (state.getBlock() instanceof BlockCropDead b) {
             ICrop crop = b.getCrop();
             return new ItemStack(ItemSeedsTFC.get(crop));
         }

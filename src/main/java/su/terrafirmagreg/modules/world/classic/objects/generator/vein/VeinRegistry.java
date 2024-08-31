@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.world.classic.objects.generator.vein;
 
 import su.terrafirmagreg.data.Constants;
 import su.terrafirmagreg.data.lib.collection.WeightedCollection;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorOreVeins;
 
 
 import com.google.gson.JsonElement;
@@ -48,7 +47,7 @@ public enum VeinRegistry {
                 maxRadius = type.getWidth();
             }
         }
-        GeneratorOreVeins.CHUNK_RADIUS = 1 + (maxRadius >> 4);
+        //GeneratorOreVeins.CHUNK_RADIUS = 1 + (maxRadius >> 4);
         TerraFirmaCraft.getLog()
                 .info("Vein Registry Initialized, with {} veins, {} max radius, {} total weight", veinTypeRegistry.size(), maxRadius,
                         weightedVeinTypes.getTotalWeight());
@@ -58,7 +57,8 @@ public enum VeinRegistry {
      * Read file and load valid veins into registry
      *
      * @param jsonElements the json elements to read
-     * @param subfolder    the current subfolder, relative to TFC config directory (used to differentiate veins in case of more than one file registers a vein with the same name)
+     * @param subfolder    the current subfolder, relative to TFC config directory (used to differentiate veins in case of more than one file
+     *                     registers a vein with the same name)
      */
     public void readFile(Set<Map.Entry<String, JsonElement>> jsonElements, String subfolder) {
         for (Map.Entry<String, JsonElement> entry : jsonElements) {

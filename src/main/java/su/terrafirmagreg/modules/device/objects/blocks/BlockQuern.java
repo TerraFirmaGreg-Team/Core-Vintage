@@ -56,7 +56,7 @@ public class BlockQuern extends BaseBlock implements IHighlightHandler, IProvide
 
         getSettings()
                 .registryKey("device/quern")
-                .soundType(SoundType.STONE)
+                .sound(SoundType.STONE)
                 .hardness(3.0f)
                 .nonOpaque()
                 .nonFullCube()
@@ -115,7 +115,8 @@ public class BlockQuern extends BaseBlock implements IHighlightHandler, IProvide
     }
 
     @Override
-    public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
+    public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
+                                      @Nullable Entity entityIn,
                                       boolean isActualState) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, BASE_AABB);
         var tile = TileUtils.getTile(world, pos, TileQuern.class);
@@ -134,7 +135,8 @@ public class BlockQuern extends BaseBlock implements IHighlightHandler, IProvide
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
+                                    float hitY, float hitZ) {
         if (hand.equals(EnumHand.MAIN_HAND)) {
             var tile = TileUtils.getTile(world, pos, TileQuern.class);
             if (tile != null && !tile.isGrinding()) {

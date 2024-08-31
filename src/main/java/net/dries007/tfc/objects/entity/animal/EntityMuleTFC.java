@@ -1,8 +1,7 @@
 package net.dries007.tfc.objects.entity.animal;
 
-import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.data.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -10,6 +9,9 @@ import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.block.BlockChest;
@@ -28,9 +30,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
-
-import su.terrafirmagreg.api.network.datasync.DataSerializers;
-
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -49,7 +48,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -178,7 +176,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
         return this.world.checkNoEntityCollision(getEntityBoundingBox())
                 && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
                 && !this.world.containsAnyLiquid(getEntityBoundingBox())
-                && BlocksTFC.isGround(this.world.getBlockState(this.getPosition().down()));
+                && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
     }
 
     @Override
@@ -364,8 +362,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
 
         if (!stack.isEmpty()) {
             boolean holdingChest = false;
-            if (stack.getItem() instanceof ItemBlock) {
-                ItemBlock itemBlock = (ItemBlock) stack.getItem();
+            if (stack.getItem() instanceof ItemBlock itemBlock) {
                 holdingChest = itemBlock.getBlock() instanceof BlockChest;
             }
             if (stack.getItem() == Items.SPAWN_EGG) {

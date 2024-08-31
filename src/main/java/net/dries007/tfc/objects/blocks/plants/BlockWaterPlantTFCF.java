@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -34,10 +35,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -241,10 +240,10 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         IBlockState soil = worldIn.getBlockState(pos.down());
         if (plant.getWaterType() == SALT_WATER)
-            return BlocksTFC.isSaltWater(worldIn.getBlockState(pos)) && (this.canSustainBush(soil) || BlocksTFC.isGround(soil)) &&
-                    BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up()));
-        return BlocksTFC.isFreshWater(worldIn.getBlockState(pos)) && (this.canSustainBush(soil) || BlocksTFC.isGround(soil)) &&
-                BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up()));
+            return BlockUtils.isSaltWater(worldIn.getBlockState(pos)) && (this.canSustainBush(soil) || BlockUtils.isGround(soil)) &&
+                    BlockUtils.isSaltWater(worldIn.getBlockState(pos.up()));
+        return BlockUtils.isFreshWater(worldIn.getBlockState(pos)) && (this.canSustainBush(soil) || BlockUtils.isGround(soil)) &&
+                BlockUtils.isFreshWater(worldIn.getBlockState(pos.up()));
     }
 
     @Override
@@ -268,8 +267,8 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
         if (up.getBlock() instanceof BlockTallGrassWater) return false;
         if (state.getBlock() == this) {
             return (soil.getBlock()
-                    .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) || BlocksTFC.isGround(soil)) &&
-                    plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+                    .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) || BlockUtils.isGround(soil)) &&
+                    plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
         }
         return this.canSustainBush(soil);
     }

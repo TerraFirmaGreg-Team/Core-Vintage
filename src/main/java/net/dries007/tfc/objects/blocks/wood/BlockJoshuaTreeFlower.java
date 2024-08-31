@@ -38,15 +38,13 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.te.TETickCounter;
+import net.dries007.tfc.util.agriculture.SeasonalTrees;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.util.OreDictionaryHelper;
-import net.dries007.tfc.util.agriculture.SeasonalTrees;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -121,8 +119,7 @@ public class BlockJoshuaTreeFlower extends Block {
                     IBlockState iblockstate = worldIn.getBlockState(pos.down());
                     Block block = iblockstate.getBlock();
 
-                    if (BlocksTFC.isSand(iblockstate) || BlocksTFC.isSoilOrGravel(iblockstate) || BlocksTFCF.isSand(iblockstate) ||
-                            BlocksTFCF.isSoilOrGravel(iblockstate) || iblockstate == Blocks.HARDENED_CLAY ||
+                    if (BlockUtils.isSand(iblockstate) || BlockUtils.isSoilOrGravel(iblockstate) || iblockstate == Blocks.HARDENED_CLAY ||
                             iblockstate == Blocks.STAINED_HARDENED_CLAY) {
                         flag = true;
                     } else if (block == BlockJoshuaTreeLog.get(wood)) {
@@ -132,10 +129,8 @@ public class BlockJoshuaTreeFlower extends Block {
                             Block block1 = worldIn.getBlockState(pos.down(j + 1)).getBlock();
 
                             if (block1 != BlockJoshuaTreeLog.get(wood)) {
-                                if (BlocksTFC.isSand(worldIn.getBlockState(pos.down(j + 1))) ||
-                                        BlocksTFC.isSoilOrGravel(worldIn.getBlockState(pos.down(j + 1))) ||
-                                        BlocksTFCF.isSand(worldIn.getBlockState(pos.down(j + 1))) ||
-                                        BlocksTFCF.isSoilOrGravel(worldIn.getBlockState(pos.down(j + 1))) || block1 == Blocks.HARDENED_CLAY ||
+                                if (BlockUtils.isSand(worldIn.getBlockState(pos.down(j + 1))) ||
+                                        BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down(j + 1))) || block1 == Blocks.HARDENED_CLAY ||
                                         block1 == Blocks.STAINED_HARDENED_CLAY) {
                                     flag1 = true;
                                 }
@@ -371,8 +366,8 @@ public class BlockJoshuaTreeFlower extends Block {
                 IBlockState iblockstate = worldIn.getBlockState(currentBlock.down());
                 Block block = iblockstate.getBlock();
 
-                if (BlocksTFC.isSand(iblockstate) || BlocksTFC.isSoilOrGravel(iblockstate) || BlocksTFCF.isSand(iblockstate) ||
-                        BlocksTFCF.isSoilOrGravel(iblockstate) || block == Blocks.HARDENED_CLAY || block == Blocks.STAINED_HARDENED_CLAY) {
+                if (BlockUtils.isSand(iblockstate) || BlockUtils.isSoilOrGravel(iblockstate) || block == Blocks.HARDENED_CLAY ||
+                        block == Blocks.STAINED_HARDENED_CLAY) {
                     flag = true;
                 } else if (block == BlockJoshuaTreeLog.get(wood)) {
                     int j = 1;
@@ -381,10 +376,8 @@ public class BlockJoshuaTreeFlower extends Block {
                         Block block1 = worldIn.getBlockState(currentBlock.down(j + 1)).getBlock();
 
                         if (block1 != BlockJoshuaTreeLog.get(wood)) {
-                            if (BlocksTFC.isSand(worldIn.getBlockState(currentBlock.down(j + 1))) ||
-                                    BlocksTFC.isSoilOrGravel(worldIn.getBlockState(currentBlock.down(j + 1))) ||
-                                    BlocksTFCF.isSand(worldIn.getBlockState(currentBlock.down(j + 1))) ||
-                                    BlocksTFCF.isSoilOrGravel(worldIn.getBlockState(currentBlock.down(j + 1))) || block1 == Blocks.HARDENED_CLAY ||
+                            if (BlockUtils.isSand(worldIn.getBlockState(currentBlock.down(j + 1))) ||
+                                    BlockUtils.isSoilOrGravel(worldIn.getBlockState(currentBlock.down(j + 1))) || block1 == Blocks.HARDENED_CLAY ||
                                     block1 == Blocks.STAINED_HARDENED_CLAY) {
                                 flag1 = true;
                             }
@@ -526,8 +519,7 @@ public class BlockJoshuaTreeFlower extends Block {
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         Block block = worldIn.getBlockState(pos.down()).getBlock();
         return ((super.canPlaceBlockAt(worldIn, pos) && this.canSurvive(worldIn, pos)) ||
-                (BlocksTFC.isSand(worldIn.getBlockState(pos.down())) || BlocksTFC.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
-                        BlocksTFCF.isSand(worldIn.getBlockState(pos.down())) || BlocksTFCF.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
+                (BlockUtils.isSand(worldIn.getBlockState(pos.down())) || BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
                         block == Blocks.HARDENED_CLAY || block == Blocks.STAINED_HARDENED_CLAY));
     }
 
@@ -547,8 +539,7 @@ public class BlockJoshuaTreeFlower extends Block {
         Block block = iblockstate.getBlock();
 
         if (block != BlockJoshuaTreeLog.get(wood) &&
-                !(BlocksTFC.isSand(iblockstate) || BlocksTFC.isSoilOrGravel(iblockstate) || BlocksTFCF.isSand(iblockstate) ||
-                        BlocksTFCF.isSoilOrGravel(iblockstate) || iblockstate == Blocks.HARDENED_CLAY ||
+                !(BlockUtils.isSand(iblockstate) || BlockUtils.isSoilOrGravel(iblockstate) || iblockstate == Blocks.HARDENED_CLAY ||
                         iblockstate == Blocks.STAINED_HARDENED_CLAY)) {
             if (iblockstate.getMaterial() == Material.AIR) {
                 int i = 0;

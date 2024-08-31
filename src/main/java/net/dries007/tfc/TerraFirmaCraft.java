@@ -20,11 +20,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.server.FMLServerHandler;
 
 
-import net.dries007.tfc.api.capability.chunkdata.CapabilityChunkData;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.client.ClientEvents;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
@@ -124,10 +122,8 @@ public final class TerraFirmaCraft {
         EntitiesTFC.preInit();
         //JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
 
-        CapabilityChunkData.preInit();
         CapabilityForgeable.preInit();
         CapabilityFood.preInit();
-        CapabilityWorldTracker.preInit();
 
         if (event.getSide().isClient()) {
             ClientEvents.preInit();

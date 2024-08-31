@@ -39,10 +39,10 @@ public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock 
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.STONE)
+                .sound(SoundType.STONE)
                 .renderLayer(BlockRenderLayer.CUTOUT)
-                .addOreDict("slab")
-                .addOreDict("slab", "stone");
+                .oreDict("slab")
+                .oreDict("slab", "stone");
 
         setHarvestLevel(ToolClasses.PICKAXE, model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
     }
@@ -54,7 +54,7 @@ public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock 
 
         tooltip.add(
                 new TextComponentTranslation("rockcategory.name")
-                        .getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
+                        .getFormattedText() + ": " + getType().getCategory().getLocalizedName());
     }
 
     public static class Double extends BlockRockSlab {

@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.data.lib.MathConstants;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
@@ -21,7 +22,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -67,7 +67,7 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
         if (state.getBlock() == this) {
             return soil.getBlock()
                     .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) &&
-                    plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+                    plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
         }
         return this.canSustainBush(soil);
     }

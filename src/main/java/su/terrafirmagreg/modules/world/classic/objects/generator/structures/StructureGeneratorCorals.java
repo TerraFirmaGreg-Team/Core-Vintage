@@ -3,6 +3,7 @@
 
 package su.terrafirmagreg.modules.world.classic.objects.generator.structures;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 
@@ -29,7 +30,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import tfcflorae.TFCFlorae;
 
 import java.util.Map;
@@ -98,7 +98,7 @@ public class StructureGeneratorCorals extends WorldGenerator {
 
         while (!foundGround && y-- > 0) {
             IBlockState current = world.getBlockState(new BlockPos(x, y, z));
-            foundGround = BlocksTFC.isGround(current) || BlocksTFCF.isGround(current);
+            foundGround = BlockUtils.isGround(current);
         }
         BlockPos pos = new BlockPos(x, y, z);
 

@@ -32,7 +32,7 @@ public class BlockBloom extends BaseBlock implements IProviderTile {
         getSettings()
                 .registryKey("device/bloom")
                 .hardness(3.0f)
-                .soundType(SoundType.STONE);
+                .sound(SoundType.STONE);
         setHarvestLevel(ToolClasses.PICKAXE, 0);
     }
 

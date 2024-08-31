@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.block.BlockDirectional;
@@ -12,9 +14,6 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 
 import com.eerussianguy.firmalife.registry.BlocksFL;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.TFCFlorae;
 
@@ -38,8 +37,8 @@ public class GeneratorGourds implements IWorldGenerator {
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
         float temperature = Climate.getAvgTemp(world, chunkBlockPos);
-        float rainfall = ChunkData.getRainfall(world, chunkBlockPos);
-        float floraDensity = ChunkData.getFloraDensity(world, chunkBlockPos);
+        float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
+        float floraDensity = ProviderChunkData.getFloraDensity(world, chunkBlockPos);
 
         if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0 && random.nextInt(20) == 0 &&
                 rainfall >= RAINFALL_MELON &&
@@ -51,7 +50,7 @@ public class GeneratorGourds implements IWorldGenerator {
                 final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 
                 if (world.isAirBlock(pos) &&
-                        (BlocksTFC.isSoil(world.getBlockState(pos.down())) || BlocksTFCF.isGround(world.getBlockState(pos.down())))) {
+                        (BlockUtils.isSoil(world.getBlockState(pos.down())) || BlockUtils.isGround(world.getBlockState(pos.down())))) {
                     final int rotationValue = random.nextInt(4);
 
                     if (rotationValue == 0) {
@@ -77,8 +76,8 @@ public class GeneratorGourds implements IWorldGenerator {
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
         float temperature = Climate.getAvgTemp(world, chunkBlockPos);
-        float rainfall = ChunkData.getRainfall(world, chunkBlockPos);
-        float floraDensity = ChunkData.getFloraDensity(world, chunkBlockPos);
+        float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
+        float floraDensity = ProviderChunkData.getFloraDensity(world, chunkBlockPos);
 
         if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0 && random.nextInt(20) == 0 &&
                 rainfall >= RAINFALL_PUMPKIN &&
@@ -90,7 +89,7 @@ public class GeneratorGourds implements IWorldGenerator {
                 final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 
                 if (world.isAirBlock(pos) &&
-                        (BlocksTFC.isSoil(world.getBlockState(pos.down())) || BlocksTFCF.isGround(world.getBlockState(pos.down())))) {
+                        (BlockUtils.isSoil(world.getBlockState(pos.down())) || BlockUtils.isGround(world.getBlockState(pos.down())))) {
                     final int rotationValue = random.nextInt(4);
 
                     if (rotationValue == 0) {

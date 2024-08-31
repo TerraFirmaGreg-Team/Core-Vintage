@@ -1,6 +1,10 @@
 package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -26,21 +30,11 @@ import net.minecraft.world.chunk.Chunk;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
-import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -130,8 +124,7 @@ public class ItemGoldPan extends ItemTFC {
     @Override
     @NotNull
     public ItemStack onItemUseFinish(@NotNull ItemStack stack, World world, EntityLivingBase entityLiving) {
-        if (entityLiving instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entityLiving;
+        if (entityLiving instanceof EntityPlayer player) {
             if (stack.getItemDamage() > 0) {
                 RayTraceResult result = rayTrace(world, player, true);
                 if (result == null || result.typeOfHit != RayTraceResult.Type.BLOCK) {
@@ -145,7 +138,7 @@ public class ItemGoldPan extends ItemTFC {
                     final BlockPos position = player.getPosition();
                     if (!world.isRemote) {
                         Chunk chunk = world.getChunk(position);
-                        ChunkData chunkData = ChunkData.get(chunk);
+                        var chunkData = CapabilityChunkData.get(chunk);
                         if (chunkData.canWork(6)) {
                             if (damage == 1 || damage == 2) {
                                 Random rand = new Random(
@@ -161,9 +154,9 @@ public class ItemGoldPan extends ItemTFC {
                                         });
                                 // player.inventory.setInventorySlotContents(player.inventory.currentItem, stack); //only way to get it to refresh! <- do we really *need* this?
                             } else if (damage == 3 || damage == 4) {
-                                Rock rock = chunkData.getRockHeight(position);
+                                var rock = chunkData.getRockHeight(position);
                                 if (RNG.nextDouble() < 0.35) {
-                                    StackUtils.spawnItemStack(world, position, new ItemStack(ItemRock.get(rock), 1));
+                                    StackUtils.spawnItemStack(world, position, new ItemStack(ItemsRock.LOOSE.get(rock), 1));
                                 } else if (damage == 3 && RNG.nextDouble() < 0.1) {
                                     StackUtils.spawnItemStack(world, position, new ItemStack(Items.BONE, 1));
                                 } else if (damage != 3 && RNG.nextDouble() < 0.1) {

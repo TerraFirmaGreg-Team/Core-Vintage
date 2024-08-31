@@ -41,10 +41,10 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
         this.type = type;
         this.useNeighborBrightness = true;
         this.settings = Settings.of(Material.GROUND)
-                .soundType(SoundType.PLANT)
+                .sound(SoundType.PLANT)
                 .hardness(2.0F)
                 .nonCube()
-                .addOreDict(variant);
+                .oreDict(variant);
 
         setHarvestLevel(ToolClasses.SHOVEL, 0);
     }

@@ -1,11 +1,12 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -24,9 +25,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlant.BlockPlantDummy1;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.climate.Climate;
@@ -128,7 +127,7 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
                 .canSustainPlant(up, worldIn, pos.up(), net.minecraft.util.EnumFacing.DOWN, this) ||
                 isValidBlock(worldIn, pos.up(), worldIn.getBlockState(pos.up())) || worldIn.getBlockState(pos.up())
                 .getBlock() == this) && plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
-                plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+                plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
         //return this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
         //return true;
     }
@@ -143,7 +142,7 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
                     .canSustainPlant(up, worldIn, pos.up(), net.minecraft.util.EnumFacing.DOWN, this) ||
                     isValidBlock(worldIn, pos.up(), worldIn.getBlockState(pos.up())) || worldIn.getBlockState(pos.up())
                     .getBlock() == this) && plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
-                    plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
+                    plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
         }
         return this.canSustainBush(up);
     }
@@ -244,7 +243,7 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
         Material material = iblockstate.getMaterial();
 
         return blockState.isSideSolid(world, pos, EnumFacing.DOWN) || material == Material.LEAVES || material == Material.GROUND ||
-                material == Material.ROCK || material == Material.WOOD || BlocksTFC.isGround(iblockstate) || blockState.getBlock() == this;
+                material == Material.ROCK || material == Material.WOOD || BlockUtils.isGround(iblockstate) || blockState.getBlock() == this;
     }
 
     @Override

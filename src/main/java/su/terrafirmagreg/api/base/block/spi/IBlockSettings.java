@@ -89,6 +89,10 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
         return getSettings().isFullCube();
     }
 
+    default boolean getUseNeighborBrightness(IBlockState state) {
+        return getSettings().isUseNeighborBrightness();
+    }
+
     default String getHarvestTool(IBlockState state) {
         return getSettings().getHarvestTool();
     }
@@ -249,6 +253,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
         boolean hasItemSubtypes = false;
         boolean ticksRandomly = false;
         boolean requiresCorrectTool = false;
+        boolean useNeighborBrightness;
 
         boolean isAir;
 
@@ -340,7 +345,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
             return this;
         }
 
-        public Settings addOreDict(Object... oreDict) {
+        public Settings oreDict(Object... oreDict) {
             this.oreDict.add(oreDict);
             return this;
         }
@@ -355,7 +360,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
             return this;
         }
 
-        public Settings soundType(SoundType soundType) {
+        public Settings sound(SoundType soundType) {
             this.soundType = soundType;
             return this;
         }
@@ -406,6 +411,11 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
             return this;
         }
 
+        public Settings useNeighborBrightness() {
+            this.useNeighborBrightness = true;
+            return this;
+        }
+
         public Settings randomTicks() {
             this.ticksRandomly = true;
             return this;
@@ -448,6 +458,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
 
         public Settings air() {
             this.isAir = true;
+            this.useNeighborBrightness = false;
             return this;
         }
 

@@ -28,11 +28,11 @@ public class BlockWoodFence extends BlockFence implements IWoodBlock {
         this.type = type;
 
         this.settings = Settings.of(Material.WOOD)
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .hardness(2.0F)
                 .resistance(15.0F)
-                .addOreDict("fence", "wood")
-                .addOreDict("fence", "wood", type);
+                .oreDict("fence", "wood")
+                .oreDict("fence", "wood", type);
 
         setHarvestLevel(ToolClasses.AXE, 0);
 

@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
 
+import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -49,6 +50,8 @@ public final class ProviderChunkData implements ICapabilityChunkData {
     /**
      * Массивы для хранения данных о слоях горных пород.
      */
+    private final int[] soilLayer1 = new int[256];
+
     private final int[] rockLayer1 = new int[256];
     private final int[] rockLayer2 = new int[256];
     private final int[] rockLayer3 = new int[256];
@@ -240,7 +243,8 @@ public final class ProviderChunkData implements ICapabilityChunkData {
     /**
      * Устанавливает данные генерации для мира.
      * <p>
-     * ТОЛЬКО ВНУТРЕННЕЕ ИСПОЛЬЗОВАНИЕ. Нет необходимости помечать как "dirty", так как это будет вызываться только при генерации мира, перед первым сохранением чанка.
+     * ТОЛЬКО ВНУТРЕННЕЕ ИСПОЛЬЗОВАНИЕ. Нет необходимости помечать как "dirty", так как это будет вызываться только при генерации мира, перед первым
+     * сохранением чанка.
      *
      * @param rockLayer1     Массив данных первого слоя камня.
      * @param rockLayer2     Массив данных второго слоя камня.
@@ -254,12 +258,17 @@ public final class ProviderChunkData implements ICapabilityChunkData {
      * @param floraDensity   Плотность растительности.
      * @param floraDiversity Разнообразие растительности.
      */
-    public void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, DataLayerClassic[] stabilityLayer, DataLayerClassic[] drainageLayer,
+    public void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, int[] soilLayer1, DataLayerClassic[] stabilityLayer,
+                                  DataLayerClassic[] drainageLayer,
                                   int[] seaLevelOffset, float rainfall, float regionalTemp, float avgTemp, float floraDensity, float floraDiversity) {
         this.initialized = true;
+
+        System.arraycopy(soilLayer1, 0, this.soilLayer1, 0, 256);
+
         System.arraycopy(rockLayer1, 0, this.rockLayer1, 0, 256);
         System.arraycopy(rockLayer2, 0, this.rockLayer2, 0, 256);
         System.arraycopy(rockLayer3, 0, this.rockLayer3, 0, 256);
+
         System.arraycopy(stabilityLayer, 0, this.stabilityLayer, 0, 256);
         System.arraycopy(drainageLayer, 0, this.drainageLayer, 0, 256);
         System.arraycopy(seaLevelOffset, 0, this.seaLevelOffset, 0, 256);
@@ -476,6 +485,11 @@ public final class ProviderChunkData implements ICapabilityChunkData {
         return getSpawnProtection() > 0L;
     }
 
+    @Override
+    public boolean canWork(int amount) {
+        return ConfigTFC.Devices.SLUICE.maxWorkChunk == 0 || chunkWorkage <= ConfigTFC.Devices.SLUICE.maxWorkChunk + amount;
+    }
+
     /**
      * Сбрасывает значение последнего тика обновления на текущее время игрока.
      */
@@ -548,6 +562,10 @@ public final class ProviderChunkData implements ICapabilityChunkData {
         return RockType.valueOf(rockLayer3[z << 4 | x]);
     }
 
+    public SoilType getSoilLayer1(int x, int z) {
+        return SoilType.valueOf(soilLayer1[z << 4 | x]);
+    }
+
     /**
      * Возвращает слой стабильности по указанным координатам.
      *
@@ -594,7 +612,7 @@ public final class ProviderChunkData implements ICapabilityChunkData {
      * @return Тип почвы для указанных координат высоты.
      */
     public SoilType getSoilLayerHeight(int x, int y, int z) {
-        return SoilType.valueOf(rockLayer1[z << 4 | x]);
+        return getSoilLayer1(x, z);
     }
 
     @Override

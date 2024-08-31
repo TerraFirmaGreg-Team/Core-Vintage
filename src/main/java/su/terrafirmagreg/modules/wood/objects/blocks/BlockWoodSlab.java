@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.base.block.BaseBlockSlab;
-import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -36,7 +36,7 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.WOOD);
+                .sound(SoundType.WOOD);
 
         setHarvestLevel(ToolClasses.PICKAXE, model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
@@ -81,8 +81,8 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
             this.halfSlab = this;
 
             getSettings()
-                    .addOreDict("slab", "wood")
-                    .addOreDict("slab", "wood", type);
+                    .oreDict("slab", "wood")
+                    .oreDict("slab", "wood", type);
 
         }
 

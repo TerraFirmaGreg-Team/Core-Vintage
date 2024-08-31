@@ -37,7 +37,7 @@ public class BlockBellows extends BaseBlock implements IProviderTile {
 
         getSettings()
                 .registryKey("device/bellows")
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .nonFullCube()
                 .nonOpaque()
                 .hardness(2.0F)
@@ -61,7 +61,8 @@ public class BlockBellows extends BaseBlock implements IProviderTile {
         return face == state.getValue(FACING) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
     }
 
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
+                                    float hitY, float hitZ) {
         var tile = TileUtils.getTile(world, pos, TileBellows.class);
         if (tile != null) {
             return tile.onRightClick();
@@ -70,7 +71,8 @@ public class BlockBellows extends BaseBlock implements IProviderTile {
     }
 
     @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer) {
         if (facing.getAxis() == EnumFacing.Axis.Y) {
             if (placer.isSneaking()) {
                 facing = placer.getHorizontalFacing().getOpposite();

@@ -29,9 +29,9 @@ public abstract class BlockSoilMudSlab extends BaseBlockSlab implements ISoilBlo
         this.type = type;
 
         getSettings()
-                .soundType(SoundType.GROUND)
-                .addOreDict("slab")
-                .addOreDict("slab", "mud", "bricks");
+                .sound(SoundType.GROUND)
+                .oreDict("slab")
+                .oreDict("slab", "mud", "bricks");
 
         setHarvestLevel(ToolClasses.PICKAXE, model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
     }

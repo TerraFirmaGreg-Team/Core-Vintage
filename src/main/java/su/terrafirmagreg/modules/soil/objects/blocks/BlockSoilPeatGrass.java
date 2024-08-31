@@ -34,13 +34,13 @@ public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor
         super(Settings.of(Material.GRASS));
 
         getSettings()
-                .soundType(SoundType.PLANT)
                 .registryKey("soil/peat_grass")
+                .sound(SoundType.PLANT)
                 .renderLayer(BlockRenderLayer.CUTOUT)
-                .addOreDict("peat")
-                .addOreDict("peat", "grass");
+                .randomTicks()
+                .oreDict("peat")
+                .oreDict("peat", "grass");
 
-        setTickRandomly(true);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)
                 .withProperty(EAST, Boolean.FALSE)

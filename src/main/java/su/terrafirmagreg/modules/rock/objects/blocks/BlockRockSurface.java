@@ -37,6 +37,7 @@ public class BlockRockSurface extends BlockRock {
 
         getSettings()
                 .hardness(0.1f)
+                .useNeighborBrightness()
                 .nonCube();
 
         setDefaultState(getBlockState().getBaseState()
@@ -51,7 +52,8 @@ public class BlockRockSurface extends BlockRock {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                    float hitX, float hitY, float hitZ) {
         var itemStack = new ItemStack(ItemsRock.LOOSE.get(getType()));
 
         if (playerIn.addItemStackToInventory(itemStack)) {

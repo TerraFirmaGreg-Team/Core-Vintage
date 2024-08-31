@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.cave;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import net.minecraft.block.state.IBlockState;
@@ -9,7 +10,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.BlockHangingCreepingPlantTFCF;
 import net.dries007.tfc.util.climate.Climate;
@@ -29,7 +29,7 @@ public class GeneratorCaveCreepingVines extends WorldGenerator {
         BlockHangingCreepingPlantTFCF plantBlock = BlockHangingCreepingPlantTFCF.get(plant);
         IBlockState state = plantBlock.getDefaultState();
 
-        for (int i = 0; i < ChunkData.getRainfall(worldIn, pos) / 4; ++i) {
+        for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 4; ++i) {
             BlockPos blockpos = pos.add(rng.nextInt(7) - rng.nextInt(7), rng.nextInt(16), rng.nextInt(7) - rng.nextInt(7));
 
             int j = 1 + rng.nextInt(plant.getMaxHeight());

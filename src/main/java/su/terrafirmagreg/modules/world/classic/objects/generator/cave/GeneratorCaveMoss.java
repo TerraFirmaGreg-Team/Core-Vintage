@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.cave;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import net.minecraft.block.state.IBlockState;
@@ -9,7 +10,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.BlockCreepingPlantTFCF;
 import net.dries007.tfc.util.climate.Climate;
@@ -29,7 +29,7 @@ public class GeneratorCaveMoss extends WorldGenerator {
         BlockCreepingPlantTFCF plantBlock = BlockCreepingPlantTFCF.get(plant);
         IBlockState state = plantBlock.getDefaultState();
 
-        for (int i = 0; i < ChunkData.getRainfall(worldIn, pos) / 16; ++i) {
+        for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
             BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
 
             if (plant.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&

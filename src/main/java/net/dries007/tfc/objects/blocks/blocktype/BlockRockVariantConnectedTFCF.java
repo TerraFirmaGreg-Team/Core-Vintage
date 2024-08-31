@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.blocktype;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -11,16 +13,18 @@ import net.minecraft.world.World;
 
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 import net.dries007.tfc.util.climate.Climate;
+
+
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+
+
 import tfcflorae.TFCFlorae;
 
 import java.util.Random;
@@ -64,7 +68,7 @@ public class BlockRockVariantConnectedTFCF extends BlockRockVariantFallableTFCF 
                 BlockPos up = target.add(0, 1, 0);
 
                 IBlockState current = world.getBlockState(target);
-                if (!BlocksTFC.isSoil(current) || BlocksTFC.isGrass(current) || !BlocksTFCF.isSoil(current) || BlocksTFCF.isGrass(current))
+                if (!BlockUtils.isSoil(current) || BlockUtils.isGrass(current))
                     continue;
                 if (world.getLightFromNeighbors(up) < 4 || world.getBlockState(up)
                         .getLightOpacity(world, up) > 3 || world.getBlockState(up)
@@ -88,8 +92,7 @@ public class BlockRockVariantConnectedTFCF extends BlockRockVariantFallableTFCF 
                                 .getDefaultState());
                     } else {
                         BlockRockVariant block = ((BlockRockVariant) current.getBlock());
-                        world.setBlockState(target, block.getVariant(block.getType().getGrassVersion(Rock.Type.GRASS))
-                                .getDefaultState());
+                        world.setBlockState(target, block.getVariant(block.getType().getGrassVersion(Rock.Type.GRASS)).getDefaultState());
                     }
                 }
 
@@ -291,7 +294,7 @@ public class BlockRockVariantConnectedTFCF extends BlockRockVariantFallableTFCF 
                     BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
 
                     if (world.isAirBlock(pos.up()) &&
-                            plant.isValidLocation(temp, ChunkData.getRainfall(world, pos.up()),
+                            plant.isValidLocation(temp, ProviderChunkData.getRainfall(world, pos.up()),
                                     Math.subtractExact(world.getLightFor(EnumSkyBlock.SKY, pos.up()), world.getSkylightSubtracted())) &&
                             plant.isValidGrowthTemp(temp) &&
                             rand.nextDouble() < plantBlock.getGrowthRate(world, pos.up())) {
@@ -311,10 +314,10 @@ public class BlockRockVariantConnectedTFCF extends BlockRockVariantFallableTFCF 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
         pos = pos.add(0, -1, 0);
-        return state.withProperty(NORTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-                .withProperty(EAST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-                .withProperty(SOUTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-                .withProperty(WEST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+        return state.withProperty(NORTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+                .withProperty(EAST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+                .withProperty(SOUTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+                .withProperty(WEST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
     }
 
     @Override

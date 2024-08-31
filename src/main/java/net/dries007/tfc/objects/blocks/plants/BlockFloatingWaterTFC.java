@@ -14,9 +14,12 @@ import net.minecraft.world.World;
 
 
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.BlockUtils;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,7 +62,7 @@ public class BlockFloatingWaterTFC extends BlockPlantTFC {
 
     @Override
     protected boolean canSustainBush(IBlockState state) {
-        return (BlocksTFC.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) ||
+        return (BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) ||
                 (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
     }
 

@@ -44,7 +44,7 @@ public class BlockGrindstone extends BaseBlock implements IProviderTile {
 
         getSettings()
                 .registryKey("device/grindstone_base")
-                .soundType(SoundType.WOOD)
+                .sound(SoundType.WOOD)
                 .hardness(1.5f)
                 .nonOpaque()
                 .nonFullCube()
@@ -69,7 +69,8 @@ public class BlockGrindstone extends BaseBlock implements IProviderTile {
         return state.getValue(HORIZONTAL).getHorizontalIndex();
     }
 
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer) {
         return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
     }
 
@@ -86,7 +87,8 @@ public class BlockGrindstone extends BaseBlock implements IProviderTile {
         }
     }
 
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
+                                    float hitY, float hitZ) {
         if (hand.equals(EnumHand.MAIN_HAND)) {
             var tile = TileUtils.getTile(world, pos, TileGrindstone.class);
             if (tile != null) {

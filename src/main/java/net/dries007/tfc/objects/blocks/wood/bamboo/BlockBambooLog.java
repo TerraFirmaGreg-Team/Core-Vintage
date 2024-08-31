@@ -19,8 +19,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.items.ItemMisc;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -62,7 +60,7 @@ public class BlockBambooLog extends Block {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         IBlockState downState = worldIn.getBlockState(pos.down());
         boolean shouldDestroy =
-                !(downState.getBlock() instanceof BlockBambooLog) && !BlocksTFC.isGrowableSoil(downState) && !BlocksTFCF.isGrowableSoil(downState);
+                !(downState.getBlock() instanceof BlockBambooLog) && !BlockUtils.isGrowableSoil(downState);
         if (shouldDestroy) {
             worldIn.destroyBlock(pos, true);
             return;

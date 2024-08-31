@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.init;
 
-import su.terrafirmagreg.data.lib.Pair;
 import su.terrafirmagreg.api.registry.RegistryManager;
+import su.terrafirmagreg.data.lib.Pair;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilDirt;
@@ -137,7 +137,6 @@ public final class BlocksSoil {
         MUD_BRICKS = SoilBlockVariant
                 .builder("mud_bricks")
                 .setFactory(BlockSoilMudBrick::new)
-                .setFallingSpecification(VERTICAL_ONLY_SOIL)
                 .build();
 
         MUD_BRICKS_STAIRS = SoilBlockVariant

@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.groundcover;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -34,9 +35,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -299,10 +298,10 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
             IBlockState up = worldIn.getBlockState(pos.up());
             IBlockState blockState = worldIn.getBlockState(pos.offset(face));
             if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
-                    BlocksTFC.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
-                    (BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
+                    BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
+                    (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
                             up.getBlock() instanceof BlockCoral)) {
-                return Climate.getAvgTemp(worldIn, pos) >= 10f && ChunkData.getRainfall(worldIn, pos) >= 100f;
+                return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
             }
         }
         return false;
@@ -330,10 +329,10 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
             IBlockState up = worldIn.getBlockState(pos.up());
             IBlockState blockState = worldIn.getBlockState(pos.offset(face));
             if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
-                    BlocksTFC.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
-                    (BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
+                    BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
+                    (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
                             up.getBlock() instanceof BlockCoral)) {
-                return Climate.getAvgTemp(worldIn, pos) >= 10f && ChunkData.getRainfall(worldIn, pos) >= 100f;
+                return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
             }
         }
         return false;

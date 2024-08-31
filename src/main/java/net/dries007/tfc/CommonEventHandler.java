@@ -1,5 +1,6 @@
 package net.dries007.tfc;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.MathsUtils;
 import su.terrafirmagreg.api.util.WorldUtils;
 import su.terrafirmagreg.data.DamageSources;
@@ -7,6 +8,8 @@ import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
@@ -108,14 +111,11 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
-import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.IGrowingPlant;
@@ -124,7 +124,6 @@ import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
@@ -151,21 +150,26 @@ public final class CommonEventHandler {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onNeighborNotify(BlockEvent.NeighborNotifyEvent event) {
-        IBlockState state = event.getState();
-        FallingBlockManager.Specification spec = FallingBlockManager.getSpecification(state);
+        var state = event.getState();
+        var spec = FallingBlockManager.getSpecification(state);
+        var pos = event.getPos();
+        var world = event.getWorld();
+
         if (spec != null && !spec.isCollapsable()) {
-            if (FallingBlockManager.checkFalling(event.getWorld(), event.getPos(), state)) {
-                event.getWorld().playSound(null, event.getPos(), spec.getSoundEvent(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+            if (FallingBlockManager.checkFalling(world, pos, state)) {
+                world.playSound(null, pos, spec.getSoundEvent(), SoundCategory.BLOCKS, 1.0F, 1.0F);
             }
+
         } else {
             for (EnumFacing notifiedSide : event.getNotifiedSides()) {
-                BlockPos offsetPos = event.getPos().offset(notifiedSide);
-                IBlockState notifiedState = event.getWorld().getBlockState(offsetPos);
-                FallingBlockManager.Specification notifiedSpec = FallingBlockManager.getSpecification(notifiedState);
+
+                var offsetPos = pos.offset(notifiedSide);
+                var notifiedState = world.getBlockState(offsetPos);
+                var notifiedSpec = FallingBlockManager.getSpecification(notifiedState);
+
                 if (notifiedSpec != null && !notifiedSpec.isCollapsable()) {
-                    if (FallingBlockManager.checkFalling(event.getWorld(), offsetPos, notifiedState)) {
-                        event.getWorld()
-                                .playSound(null, offsetPos, notifiedSpec.getSoundEvent(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    if (FallingBlockManager.checkFalling(world, offsetPos, notifiedState)) {
+                        world.playSound(null, offsetPos, notifiedSpec.getSoundEvent(), SoundCategory.BLOCKS, 1.0F, 1.0F);
                     }
                 }
             }
@@ -174,15 +178,13 @@ public final class CommonEventHandler {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
-        if (event.getWorld().isRemote) {
-            return;
-        }
-        IBlockState state = event.getPlacedBlock();
-        FallingBlockManager.Specification spec = FallingBlockManager.getSpecification(state);
+        if (event.getWorld().isRemote) return;
+
+        var state = event.getPlacedBlock();
+        var spec = FallingBlockManager.getSpecification(state);
         if (spec != null && !spec.isCollapsable()) {
             if (FallingBlockManager.checkFalling(event.getWorld(), event.getPos(), state)) {
-                event.getWorld()
-                        .playSound(null, event.getPos(), spec.getSoundEvent(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+                event.getWorld().playSound(null, event.getPos(), spec.getSoundEvent(), SoundCategory.BLOCKS, 1.0F, 1.0F);
             }
         }
     }
@@ -323,7 +325,7 @@ public final class CommonEventHandler {
             RayTraceResult result = MathsUtils.rayTrace(event.getWorld(), player, true);
             if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
                 IBlockState waterState = world.getBlockState(result.getBlockPos());
-                boolean isFreshWater = BlocksTFC.isFreshWater(waterState), isSaltWater = BlocksTFC.isSaltWater(waterState);
+                boolean isFreshWater = BlockUtils.isFreshWater(waterState), isSaltWater = BlockUtils.isSaltWater(waterState);
                 if ((isFreshWater && foodStats.attemptDrink(10, true)) || (isSaltWater && foodStats.attemptDrink(-1, true))) {
                     //Simulated so client will check if he would drink before updating stats
                     if (!world.isRemote) {
@@ -606,7 +608,7 @@ public final class CommonEventHandler {
             if (ConfigTFC.General.SPAWN_PROTECTION.preventMobs && event.getEntity()
                     .isCreatureType(EnumCreatureType.MONSTER, false)) {
                 // Prevent Mobs
-                ChunkData data = ChunkData.get(event.getWorld(), pos);
+                var data = CapabilityChunkData.get(event.getWorld(), pos);
                 int minY = ConfigTFC.General.SPAWN_PROTECTION.minYMobs;
                 int maxY = ConfigTFC.General.SPAWN_PROTECTION.maxYMobs;
                 if (data.isSpawnProtected() && minY <= maxY && event.getY() >= minY && event.getY() <= maxY) {
@@ -616,7 +618,7 @@ public final class CommonEventHandler {
 
             if (ConfigTFC.General.SPAWN_PROTECTION.preventPredators && event.getEntity() instanceof IPredator) {
                 // Prevent Predators
-                ChunkData data = ChunkData.get(event.getWorld(), pos);
+                var data = CapabilityChunkData.get(event.getWorld(), pos);
                 int minY = ConfigTFC.General.SPAWN_PROTECTION.minYPredators;
                 int maxY = ConfigTFC.General.SPAWN_PROTECTION.maxYPredators;
                 if (data.isSpawnProtected() && minY <= maxY && event.getY() >= minY && event.getY() <= maxY) {
@@ -635,10 +637,10 @@ public final class CommonEventHandler {
 
             // Check creature spawning - Prevents vanilla's respawning mechanic to spawn creatures outside their allowed conditions
             if (event.getEntity() instanceof ICreature creature) {
-                float rainfall = ChunkData.getRainfall(world, pos);
+                float rainfall = ProviderChunkData.getRainfall(world, pos);
                 float temperature = Climate.getAvgTemp(world, pos);
-                float floraDensity = ChunkData.getFloraDensity(world, pos);
-                float floraDiversity = ChunkData.getFloraDiversity(world, pos);
+                float floraDensity = ProviderChunkData.getFloraDensity(world, pos);
+                float floraDiversity = ProviderChunkData.getFloraDiversity(world, pos);
                 Biome biome = world.getBiome(pos);
 
                 // We don't roll spawning again since vanilla is handling it
@@ -911,7 +913,7 @@ public final class CommonEventHandler {
                     BlockPos chunkPos = basePos.add(16 * i, 0, 16 * j);
                     World world = event.player.getEntityWorld();
                     if (world.isBlockLoaded(basePos)) {
-                        ChunkData data = ChunkData.get(world, chunkPos);
+                        var data = CapabilityChunkData.get(world, chunkPos);
                         data.addSpawnProtection(1);
                     }
                 }
@@ -984,21 +986,6 @@ public final class CommonEventHandler {
                     }
                     return;
                 }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void attachWorldCapabilities(AttachCapabilitiesEvent<World> event) {
-        event.addCapability(CapabilityWorldTracker.KEY, new WorldTracker());
-    }
-
-    @SubscribeEvent
-    public static void onWorldTick(TickEvent.WorldTickEvent event) {
-        if (event.phase == TickEvent.Phase.START) {
-            WorldTracker tracker = event.world.getCapability(CapabilityWorldTracker.CAPABILITY, null);
-            if (tracker != null) {
-                tracker.tick(event.world);
             }
         }
     }

@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.te.TETickCounter;
@@ -21,6 +20,10 @@ import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,7 +40,7 @@ public class BerryBushProvider implements IWailaBlock {
             if (block.getBush()
                     .isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(BlockBerryBush.FRUITING)) {
                 float temp = Climate.getActualTemp(world, pos);
-                float rainfall = ChunkData.getRainfall(world, pos);
+                float rainfall = ProviderChunkData.getRainfall(world, pos);
                 var tile = TileUtils.getTile(world, pos, TETickCounter.class);
                 if (tile != null && block.getBush().isValidForGrowth(temp, rainfall)) {
                     long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;

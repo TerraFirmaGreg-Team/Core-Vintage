@@ -63,12 +63,12 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IPro
         this.useNeighborBrightness = true;
         this.settings = Settings.of(Material.GROUND)
                 .ignoresProperties(MOISTURE)
-                .soundType(SoundType.GROUND)
+                .sound(SoundType.GROUND)
                 .hardness(2.0F)
                 .harvestLevel(ToolClasses.SHOVEL, 0)
                 .fallable(this, variant.getSpecification())
-                .addOreDict(variant)
-                .addOreDict(variant, type);
+                .oreDict(variant)
+                .oreDict(variant, type);
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt

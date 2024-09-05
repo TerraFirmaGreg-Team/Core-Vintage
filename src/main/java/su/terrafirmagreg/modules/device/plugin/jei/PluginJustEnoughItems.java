@@ -20,20 +20,20 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 @SuppressWarnings("unused")
 public final class PluginJustEnoughItems implements IModPlugin {
 
-    @Override
-    public void registerCategories(IRecipeCategoryRegistration registry) {
-        IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
+  @Override
+  public void registerCategories(IRecipeCategoryRegistration registry) {
+    IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
 
-        registry.addRecipeCategories(new QuernRecipeCategory(guiHelper));
-    }
+    registry.addRecipeCategories(new QuernRecipeCategory(guiHelper));
+  }
 
-    @Override
-    public void register(IModRegistry registry) {
+  @Override
+  public void register(IModRegistry registry) {
 
-        // ==== QUERN ====
-        registry.addRecipes(QuernRecipeMaker.getRecipes(), QuernRecipeCategory.UID);
-        registry.addRecipeCatalyst(new ItemStack(BlocksDevice.QUERN), QuernRecipeCategory.UID);
+    // ==== QUERN ====
+    registry.addRecipes(QuernRecipeMaker.getRecipes(), QuernRecipeCategory.UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.QUERN), QuernRecipeCategory.UID);
 
-    }
+  }
 }
 

@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.food;
 
-import su.terrafirmagreg.data.lib.MathConstants;
+import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 
 import net.minecraft.entity.player.EntityPlayer;

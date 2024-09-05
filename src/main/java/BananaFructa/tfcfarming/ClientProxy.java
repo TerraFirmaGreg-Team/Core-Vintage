@@ -1,5 +1,7 @@
 package BananaFructa.tfcfarming;
 
+import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilFarmland;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -27,8 +29,6 @@ import net.dries007.tfc.objects.blocks.BlockLargePlanter;
 import net.dries007.tfc.objects.blocks.BlockQuadPlanter;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.objects.blocks.blocktype.farmland.FarmlandTFCF;
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalHoe;
 import net.dries007.tfc.objects.items.rock.ItemRockHoe;
@@ -128,22 +128,20 @@ public class ClientProxy extends CommonProxy {
         ) {
 
             BlockPos blockpos = mc.objectMouseOver.getBlockPos();
-            Block b = mc.world.getBlockState(blockpos).getBlock();
+            Block block = mc.world.getBlockState(blockpos).getBlock();
 
-            boolean isTFCCrop = b instanceof BlockCropTFC;
-            boolean isTFCDeadCrop = b instanceof BlockCropDead;
-            boolean isFarmlandTFCF = TFCFarming.tfcfloraeLoaded && b instanceof FarmlandTFCF;
-            boolean isFarmlandTFC = b instanceof BlockFarmlandTFC;
+            boolean isTFCCrop = block instanceof BlockCropTFC;
+            boolean isTFCDeadCrop = block instanceof BlockCropDead;
+            boolean isFarmland = block instanceof BlockSoilFarmland;
             boolean isPlanter =
-                    TFCFarming.firmalifeLoaded && (b instanceof BlockLargePlanter || (Config.hangingPlanters && b instanceof BlockHangingPlanter));
+                    TFCFarming.firmalifeLoaded &&
+                            (block instanceof BlockLargePlanter || (Config.hangingPlanters && block instanceof BlockHangingPlanter));
 
-            if (!(isFarmlandTFC || isFarmlandTFCF || isPlanter || isTFCCrop || isTFCDeadCrop)) return;
+            if (!(isFarmland || isPlanter || isTFCCrop || isTFCDeadCrop)) return;
 
-            boolean invalidResponse = lastResponse == null ||
-                    lastResponse.x != blockpos.getX() ||
-                    lastResponse.z != blockpos.getZ() ||
-                    !lastResponse.accepted ||
-                    (isPlanter && lastResponse.y != blockpos.getY());
+            boolean invalidResponse =
+                    lastResponse == null || lastResponse.x != blockpos.getX() || lastResponse.z != blockpos.getZ() ||
+                            !lastResponse.accepted || (isPlanter && lastResponse.y != blockpos.getY());
 
             if (invalidResponse || ticksSinceLastResponse > 20) {
                 Minecraft.getMinecraft().addScheduledTask(new Runnable() {
@@ -173,7 +171,7 @@ public class ClientProxy extends CommonProxy {
             boolean enoughNutrients = true;
 
             if (isTFCCrop) {
-                BlockCropTFC plant = (BlockCropTFC) b;
+                BlockCropTFC plant = (BlockCropTFC) block;
                 ICrop crop = plant.getCrop();
                 CropNutrients nValues = CropNutrients.getCropNValues(crop);
                 enoughNutrients = nutrientValues.getNutrient(nValues.favouriteNutrient) >= nValues.stepCost;
@@ -193,7 +191,7 @@ public class ClientProxy extends CommonProxy {
 
             if (isPlanter) {
                 if (lastResponse.lowInPlanter) {
-                    if (b instanceof BlockQuadPlanter) {
+                    if (block instanceof BlockQuadPlanter) {
                         y = drawTextBox(mc, x, y, "\u00a7cOne or more plants have low nutrients!");
                     } else {
                         y = drawTextBox(mc, x, y, "\u00a7cLow nutrients!");

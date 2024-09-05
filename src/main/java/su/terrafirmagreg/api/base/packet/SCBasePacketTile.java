@@ -7,26 +7,27 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public abstract class SCBasePacketTile<REQ extends SCBasePacketTile> extends BasePacketBlockPos<REQ> {
+public abstract class SCBasePacketTile<REQ extends SCBasePacketTile> extends
+    BasePacketBlockPos<REQ> {
 
-    public SCBasePacketTile() {
-        // serialization
-    }
+  public SCBasePacketTile() {
+    // serialization
+  }
 
-    public SCBasePacketTile(BlockPos blockPos) {
+  public SCBasePacketTile(BlockPos blockPos) {
 
-        super(blockPos);
-    }
+    super(blockPos);
+  }
 
-    @Override
-    public IMessage onMessage(REQ message, MessageContext ctx) {
+  @Override
+  public IMessage onMessage(REQ message, MessageContext ctx) {
 
-        NetHandlerPlayServer serverHandler = ctx.getServerHandler();
-        EntityPlayerMP player = serverHandler.player;
-        TileEntity tileEntity = player.getEntityWorld().getTileEntity(message.blockPos);
+    NetHandlerPlayServer serverHandler = ctx.getServerHandler();
+    EntityPlayerMP player = serverHandler.player;
+    TileEntity tileEntity = player.getEntityWorld().getTileEntity(message.blockPos);
 
-        return this.onMessage(message, ctx, tileEntity);
-    }
+    return this.onMessage(message, ctx, tileEntity);
+  }
 
-    protected abstract IMessage onMessage(REQ message, MessageContext ctx, TileEntity tileEntity);
+  protected abstract IMessage onMessage(REQ message, MessageContext ctx, TileEntity tileEntity);
 }

@@ -12,31 +12,31 @@ import lombok.Getter;
 @Getter
 public class QuernRecipe implements IQuernRecipe {
 
-    protected IIngredient<ItemStack> inputItem;
-    protected ItemStack outputItem;
-    protected final ResourceLocation recipeName;
+  protected final ResourceLocation recipeName;
+  protected IIngredient<ItemStack> inputItem;
+  protected ItemStack outputItem;
 
-    public QuernRecipe(IIngredient<ItemStack> inputItem, ItemStack outputItem) {
-        this.inputItem = inputItem;
-        this.outputItem = outputItem;
-        this.recipeName = null;
+  public QuernRecipe(IIngredient<ItemStack> inputItem, ItemStack outputItem) {
+    this.inputItem = inputItem;
+    this.outputItem = outputItem;
+    this.recipeName = null;
 
-        if (inputItem == null || outputItem == null) {
-            throw new IllegalArgumentException("Input and output are not allowed to be empty");
-        }
+    if (inputItem == null || outputItem == null) {
+      throw new IllegalArgumentException("Input and output are not allowed to be empty");
     }
+  }
 
-    public ItemStack getOutputItem(ItemStack stack) {
-        return CapabilityFood.updateFoodFromPrevious(stack, outputItem.copy());
+  public ItemStack getOutputItem(ItemStack stack) {
+    return CapabilityFood.updateFoodFromPrevious(stack, outputItem.copy());
 
-    }
+  }
 
-    public boolean isValidInput(ItemStack inputItem) {
-        return this.inputItem.test(inputItem);
-    }
+  public boolean isValidInput(ItemStack inputItem) {
+    return this.inputItem.test(inputItem);
+  }
 
-    @Override
-    public ResourceLocation getRecipeName() {
-        return null;
-    }
+  @Override
+  public ResourceLocation getRecipeName() {
+    return null;
+  }
 }

@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.data.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public class EntityGrouseTFC extends EntityChickenTFC implements ILivestock {
 

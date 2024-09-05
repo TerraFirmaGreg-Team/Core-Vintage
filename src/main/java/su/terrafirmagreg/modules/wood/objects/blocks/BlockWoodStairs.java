@@ -14,21 +14,21 @@ import lombok.Getter;
 @Getter
 public class BlockWoodStairs extends BaseBlockStairs implements IWoodBlock {
 
-    private final WoodBlockVariant variant;
-    private final WoodType type;
+  private final WoodBlockVariant variant;
+  private final WoodType type;
 
-    public BlockWoodStairs(WoodBlockVariant modelBlock, WoodBlockVariant variant, WoodType type) {
-        super(modelBlock.get(type));
+  public BlockWoodStairs(WoodBlockVariant modelBlock, WoodBlockVariant variant, WoodType type) {
+    super(modelBlock.get(type));
 
-        this.variant = variant;
-        this.type = type;
+    this.variant = variant;
+    this.type = type;
 
-        getSettings()
-                .oreDict("stairs")
-                .oreDict("stairs", "wood");
+    getSettings()
+        .oreDict("stairs")
+        .oreDict("stairs", "wood");
 
-        setHarvestLevel(ToolClasses.AXE, 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
 
-        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
-    }
+    BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
+  }
 }

@@ -14,25 +14,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeldingRecipeWrapper
-        extends BaseRecipeWrapper<IQuernRecipe> {
+    extends BaseRecipeWrapper<IQuernRecipe> {
 
-    public WeldingRecipeWrapper(IQuernRecipe recipe) {
-        super(recipe);
-    }
+  public WeldingRecipeWrapper(IQuernRecipe recipe) {
+    super(recipe);
+  }
 
-    @Override
-    public void getIngredients(IIngredients ingredients) {
-        IQuernRecipe recipe = getRecipe();
+  @Override
+  public void getIngredients(IIngredients ingredients) {
+    IQuernRecipe recipe = getRecipe();
 
-        List<List<ItemStack>> allInputs = new ArrayList<>();
-        allInputs.add(recipe.getInputItem().getValidIngredients());
+    List<List<ItemStack>> allInputs = new ArrayList<>();
+    allInputs.add(recipe.getInputItem().getValidIngredients());
 
-        ingredients.setInputLists(VanillaTypes.ITEM, allInputs);
+    ingredients.setInputLists(VanillaTypes.ITEM, allInputs);
 
-        List<List<ItemStack>> allOutputs = new ArrayList<>();
-        allOutputs.add(NonNullList.withSize(1, recipe.getOutputItem()));
+    List<List<ItemStack>> allOutputs = new ArrayList<>();
+    allOutputs.add(NonNullList.withSize(1, recipe.getOutputItem()));
 
-        ingredients.setOutputLists(VanillaTypes.ITEM, allOutputs);
+    ingredients.setOutputLists(VanillaTypes.ITEM, allOutputs);
 
-    }
+  }
 }

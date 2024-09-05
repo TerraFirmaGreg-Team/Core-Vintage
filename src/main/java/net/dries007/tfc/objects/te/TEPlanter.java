@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 
 
-import static su.terrafirmagreg.data.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.MathConstants.RNG;
 
 /**
  *

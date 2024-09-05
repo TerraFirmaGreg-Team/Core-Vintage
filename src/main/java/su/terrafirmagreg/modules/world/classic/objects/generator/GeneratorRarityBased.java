@@ -14,20 +14,23 @@ import java.util.function.ToIntFunction;
 
 public final class GeneratorRarityBased implements IWorldGenerator {
 
-    private final ToIntFunction<WorldGenSettings> getRarityFunction;
-    private final IWorldGenerator worldGenerator;
+  private final ToIntFunction<WorldGenSettings> getRarityFunction;
+  private final IWorldGenerator worldGenerator;
 
-    public GeneratorRarityBased(ToIntFunction<WorldGenSettings> getRarityFunction, IWorldGenerator worldGenerator) {
-        this.getRarityFunction = getRarityFunction;
-        this.worldGenerator = worldGenerator;
-    }
+  public GeneratorRarityBased(ToIntFunction<WorldGenSettings> getRarityFunction,
+      IWorldGenerator worldGenerator) {
+    this.getRarityFunction = getRarityFunction;
+    this.worldGenerator = worldGenerator;
+  }
 
-    @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (chunkGenerator instanceof ChunkGenClassic chunkGen) {
-            int rarity = getRarityFunction.applyAsInt(chunkGen.settings);
-            if (rarity != 0 && random.nextInt(rarity) == 0)
-                worldGenerator.generate(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
-        }
+  @Override
+  public void generate(Random random, int chunkX, int chunkZ, World world,
+      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+    if (chunkGenerator instanceof ChunkGenClassic chunkGen) {
+      int rarity = getRarityFunction.applyAsInt(chunkGen.settings);
+      if (rarity != 0 && random.nextInt(rarity) == 0) {
+        worldGenerator.generate(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+      }
     }
+  }
 }

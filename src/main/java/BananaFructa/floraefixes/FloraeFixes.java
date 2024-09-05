@@ -1,6 +1,7 @@
 package BananaFructa.floraefixes;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilFarmland;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -24,8 +25,6 @@ import net.minecraftforge.registries.IForgeRegistryModifiable;
 
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.objects.blocks.blocktype.farmland.FarmlandTFCF;
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.ItemsTFCF;
@@ -108,9 +107,9 @@ public class FloraeFixes {
     @SubscribeEvent
     public void onBlockClick(PlayerInteractEvent.RightClickBlock event) {
         if (!Config.ricePlacing) return;
-        Block b = event.getWorld().getBlockState(event.getPos()).getBlock();
+        Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
         if (!event.getWorld().isRemote) {
-            if (b instanceof FarmlandTFCF) {
+            if (block instanceof BlockSoilFarmland) {
                 // if it's rice and the top block is not water
                 if (ItemSeedsTFC.get(Crop.RICE) == event.getEntityPlayer()
                         .getHeldItem(EnumHand.MAIN_HAND)
@@ -136,11 +135,9 @@ public class FloraeFixes {
                 if (result != null) {
                     BlockPos pos = result.getBlockPos();
                     Block down = event.getWorld().getBlockState(pos).getBlock();
-                    if ((down instanceof BlockFarmlandTFC || down instanceof FarmlandTFCF) && event.getWorld()
-                            .getBlockState(pos.up())
-                            .getMaterial() == Material.WATER) {
-                        Utils.ricePlaceFixed(Crop.RICE, event.getItemStack()
-                                .getItem(), event.getWorld(), event.getEntityPlayer(), event.getHand());
+                    if (down instanceof BlockSoilFarmland && event.getWorld().getBlockState(pos.up()).getMaterial() == Material.WATER) {
+
+                        Utils.ricePlaceFixed(Crop.RICE, event.getItemStack().getItem(), event.getWorld(), event.getEntityPlayer(), event.getHand());
                     }
                 }
             }

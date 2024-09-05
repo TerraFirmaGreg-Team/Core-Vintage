@@ -25,46 +25,49 @@ import lombok.Getter;
 
 @Getter
 public class RegistryManager
-        implements IRegistryBlock, IRegistryBiome, IRegistryKeyBinding, IRegistryDataSerializer, IRegistryEnchantment, IRegistryEntity, IRegistryItem, IRegistryLootTable,
-                   IRegistryPotion, IRegistryPotionType, IRegistrySound, IRegistryWorldGenerator, IRegistryCommand {
+    implements IRegistryBlock, IRegistryBiome, IRegistryKeyBinding, IRegistryDataSerializer,
+    IRegistryEnchantment, IRegistryEntity, IRegistryItem, IRegistryLootTable,
+    IRegistryPotion, IRegistryPotionType, IRegistrySound, IRegistryWorldGenerator,
+    IRegistryCommand {
 
-    /**
-     * The id of the mod the registry helper instance belongs to.
-     */
-    private final String modID;
+  /**
+   * The id of the mod the registry helper instance belongs to.
+   */
+  private final String modID;
 
-    /**
-     * The creative tab used by the mod. This can be null.
-     */
-    @Nullable
-    private final CreativeTabs tab;
+  /**
+   * The creative tab used by the mod. This can be null.
+   */
+  @Nullable
+  private final CreativeTabs tab;
 
-    /**
-     * The auto registry for the helper.
-     */
-    private final Registry registry;
+  /**
+   * The auto registry for the helper.
+   */
+  private final Registry registry;
 
-    private NetworkEntityIdSupplier networkEntityIdSupplier;
+  private NetworkEntityIdSupplier networkEntityIdSupplier;
 
-    /**
-     * Constructs a new Registry. The modid for the helper is equal to that of the active mod container, and auto model registration is enabled.
-     *
-     * @param tab The tab for the registry helper.
-     */
-    public RegistryManager(@Nullable CreativeTabs tab, String modID) {
+  /**
+   * Constructs a new Registry. The modid for the helper is equal to that of the active mod container, and auto model registration is enabled.
+   *
+   * @param tab The tab for the registry helper.
+   */
+  public RegistryManager(@Nullable CreativeTabs tab, String modID) {
 
-        this.modID = modID;
-        this.tab = tab;
+    this.modID = modID;
+    this.tab = tab;
 
-        this.registry = new Registry(this);
-        MinecraftForge.EVENT_BUS.register(this.registry);
+    this.registry = new Registry(this);
+    MinecraftForge.EVENT_BUS.register(this.registry);
+  }
+
+  public void setNetworkEntityIdSupplier(NetworkEntityIdSupplier supplier) {
+
+    if (this.networkEntityIdSupplier != null) {
+      throw new IllegalStateException("Network entity id supplier has already been set");
     }
 
-    public void setNetworkEntityIdSupplier(NetworkEntityIdSupplier supplier) {
-
-        if (this.networkEntityIdSupplier != null)
-            throw new IllegalStateException("Network entity id supplier has already been set");
-
-        this.networkEntityIdSupplier = supplier;
-    }
+    this.networkEntityIdSupplier = supplier;
+  }
 }

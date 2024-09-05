@@ -13,19 +13,19 @@ import org.jetbrains.annotations.NotNull;
 @Mixin(value = FluidStack.class, remap = false)
 public abstract class MixinFluidStack {
 
-    @Shadow
-    public int amount;
+  @Shadow
+  public int amount;
 
-    @Shadow
-    public NBTTagCompound tag;
+  @Shadow
+  public NBTTagCompound tag;
 
-    @NotNull
-    @Shadow
-    public abstract FluidStack copy();
+  @NotNull
+  @Shadow
+  public abstract FluidStack copy();
 
-    @Shadow
-    public abstract boolean isFluidEqual(FluidStack other);
+  @Shadow
+  public abstract boolean isFluidEqual(FluidStack other);
 
-    @Shadow
-    public abstract Fluid getFluid();
+  @Shadow
+  public abstract Fluid getFluid();
 }

@@ -7,11 +7,14 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 
 public class StorageTemperature implements IStorage<ICapabilityTemperature> {
 
-    @Override
-    public NBTBase writeNBT(Capability<ICapabilityTemperature> capability, ICapabilityTemperature instance, EnumFacing side) {
-        return null;
-    }
+  @Override
+  public NBTBase writeNBT(Capability<ICapabilityTemperature> capability,
+      ICapabilityTemperature instance, EnumFacing side) {
+    return null;
+  }
 
-    @Override
-    public void readNBT(Capability<ICapabilityTemperature> capability, ICapabilityTemperature instance, EnumFacing side, NBTBase nbt) {}
+  @Override
+  public void readNBT(Capability<ICapabilityTemperature> capability,
+      ICapabilityTemperature instance, EnumFacing side, NBTBase nbt) {
+  }
 }

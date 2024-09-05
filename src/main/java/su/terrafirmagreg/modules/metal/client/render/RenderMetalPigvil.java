@@ -17,34 +17,42 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.data.Constants.MODID_TFCTHINGS;
 
 public class RenderMetalPigvil
-        extends RenderLiving<EntityMetalPigvil> {
+    extends RenderLiving<EntityMetalPigvil> {
 
-    private static final ResourceLocation PIGVIL = new ResourceLocation(MODID_TFCTHINGS, "textures/entity/pigvil.png");
-    private static final ResourceLocation PIGVIL_BLACK = new ResourceLocation(MODID_TFCTHINGS, "textures/entity/pigvil_black.png");
-    private static final ResourceLocation PIGVIL_RED = new ResourceLocation(MODID_TFCTHINGS, "textures/entity/pigvil_red.png");
-    private static final ResourceLocation PIGVIL_BLUE = new ResourceLocation(MODID_TFCTHINGS, "textures/entity/pigvil_blue.png");
-    private static final ResourceLocation PIGVIL_PURPLE = new ResourceLocation(MODID_TFCTHINGS, "textures/entity/pigvil_purple.png");
+  private static final ResourceLocation PIGVIL = new ResourceLocation(MODID_TFCTHINGS,
+      "textures/entity/pigvil.png");
+  private static final ResourceLocation PIGVIL_BLACK = new ResourceLocation(MODID_TFCTHINGS,
+      "textures/entity/pigvil_black.png");
+  private static final ResourceLocation PIGVIL_RED = new ResourceLocation(MODID_TFCTHINGS,
+      "textures/entity/pigvil_red.png");
+  private static final ResourceLocation PIGVIL_BLUE = new ResourceLocation(MODID_TFCTHINGS,
+      "textures/entity/pigvil_blue.png");
+  private static final ResourceLocation PIGVIL_PURPLE = new ResourceLocation(MODID_TFCTHINGS,
+      "textures/entity/pigvil_purple.png");
 
-    public RenderMetalPigvil(RenderManager rendermanagerIn) {
-        super(rendermanagerIn, new ModelPigvil(), 0.7F);
+  public RenderMetalPigvil(RenderManager rendermanagerIn) {
+    super(rendermanagerIn, new ModelPigvil(), 0.7F);
 
+  }
+
+  @Nullable
+  @Override
+  protected ResourceLocation getEntityTexture(EntityMetalPigvil entity) {
+    Block anvil = entity.getAnvil();
+    if (anvil.getRegistryName() == BlocksMetal.PIGVIL.get(MetalTypes.STEEL).getRegistryName()) {
+      return PIGVIL;
+    } else if (anvil.getRegistryName() == BlocksMetal.PIGVIL.get(MetalTypes.BLACK_STEEL)
+        .getRegistryName()) {
+      return PIGVIL_BLACK;
+    } else if (anvil.getRegistryName() == BlocksMetal.PIGVIL.get(MetalTypes.BLUE_STEEL)
+        .getRegistryName()) {
+      return PIGVIL_BLUE;
+    } else if (anvil.getRegistryName() == BlocksMetal.PIGVIL.get(MetalTypes.RED_STEEL)
+        .getRegistryName()) {
+      return PIGVIL_RED;
+    } else {
+      return PIGVIL_PURPLE;
     }
-
-    @Nullable
-    @Override
-    protected ResourceLocation getEntityTexture(EntityMetalPigvil entity) {
-        Block anvil = entity.getAnvil();
-        if (anvil.getRegistryName() == BlocksMetal.PIGVIL.get(MetalTypes.STEEL).getRegistryName()) {
-            return PIGVIL;
-        } else if (anvil.getRegistryName() == BlocksMetal.PIGVIL.get(MetalTypes.BLACK_STEEL).getRegistryName()) {
-            return PIGVIL_BLACK;
-        } else if (anvil.getRegistryName() == BlocksMetal.PIGVIL.get(MetalTypes.BLUE_STEEL).getRegistryName()) {
-            return PIGVIL_BLUE;
-        } else if (anvil.getRegistryName() == BlocksMetal.PIGVIL.get(MetalTypes.RED_STEEL).getRegistryName()) {
-            return PIGVIL_RED;
-        } else {
-            return PIGVIL_PURPLE;
-        }
-    }
+  }
 
 }

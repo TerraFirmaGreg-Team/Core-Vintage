@@ -10,12 +10,15 @@ import org.jetbrains.annotations.Nullable;
 
 public class StorageHeat implements IStorage<ICapabilityHeat> {
 
-    @Nullable
-    @Override
-    public NBTBase writeNBT(Capability<ICapabilityHeat> capability, ICapabilityHeat instance, EnumFacing side) {
-        return null;
-    }
+  @Nullable
+  @Override
+  public NBTBase writeNBT(Capability<ICapabilityHeat> capability, ICapabilityHeat instance,
+      EnumFacing side) {
+    return null;
+  }
 
-    @Override
-    public void readNBT(Capability<ICapabilityHeat> capability, ICapabilityHeat instance, EnumFacing side, NBTBase nbt) {}
+  @Override
+  public void readNBT(Capability<ICapabilityHeat> capability, ICapabilityHeat instance,
+      EnumFacing side, NBTBase nbt) {
+  }
 }

@@ -39,121 +39,127 @@ import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 @SuppressWarnings("deprecation")
 public class BlockGrindstone extends BaseBlock implements IProviderTile {
 
-    public BlockGrindstone() {
-        super(Settings.of(Material.WOOD));
+  public BlockGrindstone() {
+    super(Settings.of(Material.WOOD));
 
-        getSettings()
-                .registryKey("device/grindstone_base")
-                .sound(SoundType.WOOD)
-                .hardness(1.5f)
-                .nonOpaque()
-                .nonFullCube()
-                .size(Size.LARGE)
-                .weight(Weight.HEAVY);
-        setHarvestLevel(ToolClasses.PICKAXE, 0);
-        setDefaultState(getBlockState().getBaseState()
-                .withProperty(HORIZONTAL, EnumFacing.NORTH));
+    getSettings()
+        .registryKey("device/grindstone_base")
+        .sound(SoundType.WOOD)
+        .hardness(1.5f)
+        .nonOpaque()
+        .nonFullCube()
+        .size(Size.LARGE)
+        .weight(Weight.HEAVY);
+    setHarvestLevel(ToolClasses.PICKAXE, 0);
+    setDefaultState(getBlockState().getBaseState()
+        .withProperty(HORIZONTAL, EnumFacing.NORTH));
+  }
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, HORIZONTAL);
+  }
+
+  @NotNull
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4));
+  }
+
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(HORIZONTAL).getHorizontalIndex();
+  }
+
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
+      float hitX, float hitY, float hitZ, int meta,
+      EntityLivingBase placer) {
+    return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
+  }
+
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    IBlockState iblockstate = worldIn.getBlockState(pos.down());
+    Block block = iblockstate.getBlock();
+
+    if (block != Blocks.BARRIER) {
+      BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(),
+          EnumFacing.UP);
+      return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock()
+          .isLeaves(iblockstate, worldIn, pos.down());
+    } else {
+      return false;
     }
+  }
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, HORIZONTAL);
-    }
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state,
+      EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
+      float hitY, float hitZ) {
+    if (hand.equals(EnumHand.MAIN_HAND)) {
+      var tile = TileUtils.getTile(world, pos, TileGrindstone.class);
+      if (tile != null) {
+        ItemStack heldStack = playerIn.getHeldItem(hand);
+        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
+            null);
+        if (inventory != null) {
 
-    @NotNull
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4));
-    }
+          int slot = inventory.getStackInSlot(TileGrindstone.SLOT_GRINDSTONE)
+              .isEmpty() && inventory.getStackInSlot(TileGrindstone.SLOT_INPUT)
+              .isEmpty() ? TileGrindstone.SLOT_GRINDSTONE : TileGrindstone.SLOT_INPUT;
 
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(HORIZONTAL).getHorizontalIndex();
-    }
-
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-                                            EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
-    }
-
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        IBlockState iblockstate = worldIn.getBlockState(pos.down());
-        Block block = iblockstate.getBlock();
-
-        if (block != Blocks.BARRIER) {
-            BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP);
-            return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock()
-                    .isLeaves(iblockstate, worldIn, pos.down());
-        } else {
-            return false;
-        }
-    }
-
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
-                                    float hitY, float hitZ) {
-        if (hand.equals(EnumHand.MAIN_HAND)) {
-            var tile = TileUtils.getTile(world, pos, TileGrindstone.class);
-            if (tile != null) {
-                ItemStack heldStack = playerIn.getHeldItem(hand);
-                IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                if (inventory != null) {
-
-                    int slot = inventory.getStackInSlot(TileGrindstone.SLOT_GRINDSTONE)
-                            .isEmpty() && inventory.getStackInSlot(TileGrindstone.SLOT_INPUT)
-                            .isEmpty() ? TileGrindstone.SLOT_GRINDSTONE : TileGrindstone.SLOT_INPUT;
-
-                    if (slot == TileGrindstone.SLOT_INPUT) {
-                        if (inventory.isItemValid(slot, heldStack)) {
-                            playerIn.setHeldItem(EnumHand.MAIN_HAND, tile.insertOrSwapItem(slot, heldStack));
-                            tile.setAndUpdateSlots(slot);
-                            return true;
-                        } else {
-                            if (!inventory.getStackInSlot(slot).isEmpty()) {
-                                ItemHandlerHelper.giveItemToPlayer(playerIn, inventory.extractItem(slot, inventory.getStackInSlot(slot)
-                                        .getCount(), false));
-                                return true;
-                            }
-                        }
-                    }
-
-                    if (slot == TileGrindstone.SLOT_GRINDSTONE && inventory.getStackInSlot(slot)
-                            .isEmpty() && inventory.isItemValid(slot, heldStack)) {
-                        playerIn.setHeldItem(EnumHand.MAIN_HAND, tile.insertOrSwapItem(slot, heldStack));
-                        tile.setAndUpdateSlots(slot);
-                        return true;
-                    }
-                }
+          if (slot == TileGrindstone.SLOT_INPUT) {
+            if (inventory.isItemValid(slot, heldStack)) {
+              playerIn.setHeldItem(EnumHand.MAIN_HAND, tile.insertOrSwapItem(slot, heldStack));
+              tile.setAndUpdateSlots(slot);
+              return true;
+            } else {
+              if (!inventory.getStackInSlot(slot).isEmpty()) {
+                ItemHandlerHelper.giveItemToPlayer(playerIn,
+                    inventory.extractItem(slot, inventory.getStackInSlot(slot)
+                        .getCount(), false));
+                return true;
+              }
             }
+          }
+
+          if (slot == TileGrindstone.SLOT_GRINDSTONE && inventory.getStackInSlot(slot)
+              .isEmpty() && inventory.isItemValid(slot, heldStack)) {
+            playerIn.setHeldItem(EnumHand.MAIN_HAND, tile.insertOrSwapItem(slot, heldStack));
+            tile.setAndUpdateSlots(slot);
+            return true;
+          }
         }
-
-        return false;
+      }
     }
 
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(world, pos, TileGrindstone.class);
-        if (tile != null) {
-            tile.onBreakBlock(world, pos, state);
-        }
-        super.breakBlock(world, pos, state);
-    }
+    return false;
+  }
 
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
-            this.dropBlockAsItem(worldIn, pos, state, 0);
-            worldIn.setBlockToAir(pos);
-        }
+  public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    var tile = TileUtils.getTile(world, pos, TileGrindstone.class);
+    if (tile != null) {
+      tile.onBreakBlock(world, pos, state);
     }
+    super.breakBlock(world, pos, state);
+  }
 
-    @Nullable
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileGrindstone();
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
+      BlockPos fromPos) {
+    if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
+      this.dropBlockAsItem(worldIn, pos, state, 0);
+      worldIn.setBlockToAir(pos);
     }
+  }
 
-    @Override
-    public Class<? extends TileEntity> getTileEntityClass() {
-        return TileGrindstone.class;
-    }
+  @Nullable
+  public TileEntity createNewTileEntity(World worldIn, int meta) {
+    return new TileGrindstone();
+  }
 
-    @Override
-    public TileEntitySpecialRenderer<?> getTileRenderer() {
-        return new TESRGrindstone();
-    }
+  @Override
+  public Class<? extends TileEntity> getTileEntityClass() {
+    return TileGrindstone.class;
+  }
+
+  @Override
+  public TileEntitySpecialRenderer<?> getTileRenderer() {
+    return new TESRGrindstone();
+  }
 }

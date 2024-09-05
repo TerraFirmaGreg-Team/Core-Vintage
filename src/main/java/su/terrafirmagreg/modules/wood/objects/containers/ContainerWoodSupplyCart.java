@@ -11,16 +11,18 @@ import org.jetbrains.annotations.NotNull;
 
 public class ContainerWoodSupplyCart extends ContainerChest {
 
-    private final EntityWoodCart drawn;
+  private final EntityWoodCart drawn;
 
-    public ContainerWoodSupplyCart(IInventory playerInventory, IInventory chestInventory, EntityWoodCart drawn, EntityPlayer player) {
-        super(playerInventory, chestInventory, player);
-        this.drawn = drawn;
-    }
+  public ContainerWoodSupplyCart(IInventory playerInventory, IInventory chestInventory,
+      EntityWoodCart drawn, EntityPlayer player) {
+    super(playerInventory, chestInventory, player);
+    this.drawn = drawn;
+  }
 
-    @Override
-    public boolean canInteractWith(@NotNull EntityPlayer playerIn) {
-        return super.canInteractWith(playerIn) && this.drawn.isEntityAlive() && this.drawn.getDistance(playerIn) < 8.0F;
-    }
+  @Override
+  public boolean canInteractWith(@NotNull EntityPlayer playerIn) {
+    return super.canInteractWith(playerIn) && this.drawn.isEntityAlive()
+        && this.drawn.getDistance(playerIn) < 8.0F;
+  }
 
 }

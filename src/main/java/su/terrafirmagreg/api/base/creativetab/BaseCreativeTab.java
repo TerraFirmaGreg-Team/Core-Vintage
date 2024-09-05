@@ -16,52 +16,55 @@ import java.util.function.Supplier;
 
 public class BaseCreativeTab extends CreativeTabs {
 
-    private final boolean hasSearchBar;
-    private final Supplier<ItemStack> iconSupplier;
+  private final boolean hasSearchBar;
+  private final Supplier<ItemStack> iconSupplier;
 
-    public BaseCreativeTab(String TabName, ResourceLocation iconSupplier, boolean hasSearchBar) {
-        super(ModUtils.localize(TabName));
+  public BaseCreativeTab(String TabName, ResourceLocation iconSupplier, boolean hasSearchBar) {
+    super(ModUtils.localize(TabName));
 
-        this.iconSupplier = () -> new ItemStack(ForgeRegistries.ITEMS.getValue(iconSupplier));
-        this.hasSearchBar = hasSearchBar;
+    this.iconSupplier = () -> new ItemStack(ForgeRegistries.ITEMS.getValue(iconSupplier));
+    this.hasSearchBar = hasSearchBar;
 
-        if (hasSearchBar) setBackgroundImageName("item_search.png");
+    if (hasSearchBar) {
+      setBackgroundImageName("item_search.png");
+    }
+  }
+
+  public static BaseCreativeTab of(String TabName, String iconSupplier, boolean hasSearchBar) {
+    return new BaseCreativeTab(TabName, ModUtils.resource(iconSupplier), hasSearchBar);
+  }
+
+  public static BaseCreativeTab of(String TabName, String iconSupplier) {
+    return BaseCreativeTab.of(TabName, iconSupplier, false);
+  }
+
+  @NotNull
+  @Override
+  public ItemStack createIcon() {
+    if (iconSupplier == null) {
+      TerraFirmaGreg.LOGGER.error("Icon supplier was null for CreativeTab {}", getTabLabel());
+      return new ItemStack(Items.STICK);
     }
 
-    public static BaseCreativeTab of(String TabName, String iconSupplier, boolean hasSearchBar) {
-        return new BaseCreativeTab(TabName, ModUtils.resource(iconSupplier), hasSearchBar);
+    ItemStack stack = iconSupplier.get();
+    if (stack == null) {
+      TerraFirmaGreg.LOGGER.error("Icon supplier return null for CreativeTab {}", getTabLabel());
+      return new ItemStack(Items.STICK);
     }
 
-    public static BaseCreativeTab of(String TabName, String iconSupplier) {
-        return BaseCreativeTab.of(TabName, iconSupplier, false);
+    if (stack.isEmpty()) {
+      TerraFirmaGreg.LOGGER.error("Icon built from iconSupplied is EMPTY for CreativeTab {}",
+          getTabLabel());
+      return new ItemStack(Items.STICK);
     }
 
-    @NotNull
-    @Override
-    public ItemStack createIcon() {
-        if (iconSupplier == null) {
-            TerraFirmaGreg.LOGGER.error("Icon supplier was null for CreativeTab {}", getTabLabel());
-            return new ItemStack(Items.STICK);
-        }
+    // Food stacks shouldn't rot in creative tabs, and these are created on demand instead of beforehand and cached
+    //CapabilityFood.setStackNonDecaying(stack);
+    return stack;
+  }
 
-        ItemStack stack = iconSupplier.get();
-        if (stack == null) {
-            TerraFirmaGreg.LOGGER.error("Icon supplier return null for CreativeTab {}", getTabLabel());
-            return new ItemStack(Items.STICK);
-        }
-
-        if (stack.isEmpty()) {
-            TerraFirmaGreg.LOGGER.error("Icon built from iconSupplied is EMPTY for CreativeTab {}", getTabLabel());
-            return new ItemStack(Items.STICK);
-        }
-
-        // Food stacks shouldn't rot in creative tabs, and these are created on demand instead of beforehand and cached
-        //CapabilityFood.setStackNonDecaying(stack);
-        return stack;
-    }
-
-    @Override
-    public boolean hasSearchBar() {
-        return hasSearchBar;
-    }
+  @Override
+  public boolean hasSearchBar() {
+    return hasSearchBar;
+  }
 }

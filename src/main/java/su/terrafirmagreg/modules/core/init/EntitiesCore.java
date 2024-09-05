@@ -12,22 +12,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class EntitiesCore {
 
-    public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registry) {
 
-        registry.entity("sitblock", EntityEntryBuilder.create()
-                .entity(EntitySeatOn.class)
-                .tracker(160, 20, true)
-        );
+    registry.entity("sitblock", EntityEntryBuilder.create()
+        .entity(EntitySeatOn.class)
+        .tracker(160, 20, true)
+    );
 
-        registry.entity("falling_block", EntityEntryBuilder.create()
-                .entity(EntityFallingBlock.class)
-                .tracker(160, 20, true)
-        );
-    }
+    registry.entity("falling_block", EntityEntryBuilder.create()
+        .entity(EntityFallingBlock.class)
+        .tracker(160, 20, true)
+    );
+  }
 
-    @SideOnly(Side.CLIENT)
-    public static void onClientRegister(RegistryManager registry) {
+  @SideOnly(Side.CLIENT)
+  public static void onClientRegister(RegistryManager registry) {
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlock.class, RenderFallingBlock::new);
-    }
+    RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlock.class,
+        RenderFallingBlock::new);
+  }
 }

@@ -57,7 +57,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.data.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock, IRidable {
 

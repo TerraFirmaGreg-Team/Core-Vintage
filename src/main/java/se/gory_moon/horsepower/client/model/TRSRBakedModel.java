@@ -21,6 +21,10 @@ import com.google.common.collect.ImmutableList;
 
 import org.jetbrains.annotations.NotNull;
 
+
+import su.terrafirmagreg.data.MathConstants;
+
+
 import javax.vecmath.Matrix3f;
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
@@ -67,7 +71,7 @@ public class TRSRBakedModel implements IBakedModel {
 
         this.faceOffset = 4 + EnumFacing.NORTH.getHorizontalIndex() - facing.getHorizontalIndex();
 
-        double r = Math.PI * (360 - facing.getOpposite().getHorizontalIndex() * 90) / 180d;
+        double r = MathConstants.PI * (360 - facing.getOpposite().getHorizontalIndex() * 90) / 180d;
         TRSRTransformation t = new TRSRTransformation(null, null, null, TRSRTransformation.quatFromXYZ(0, (float) r, 0));
         this.transformation = TRSRTransformation.blockCenterToCorner(t);
     }

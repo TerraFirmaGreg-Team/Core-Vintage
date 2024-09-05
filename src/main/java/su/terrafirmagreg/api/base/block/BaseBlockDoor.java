@@ -29,37 +29,38 @@ import java.util.Random;
 @Getter
 public abstract class BaseBlockDoor extends BlockDoor implements IBlockSettings {
 
-    protected final Settings settings;
+  protected final Settings settings;
 
-    protected BaseBlockDoor(Settings settings) {
-        super(settings.getMaterial());
+  protected BaseBlockDoor(Settings settings) {
+    super(settings.getMaterial());
 
-        this.settings = settings;
+    this.settings = settings;
 
-        getSettings()
-                .weight(Weight.HEAVY)
-                .size(Size.VERY_LARGE)
-                .hardness(3.0F);
-    }
+    getSettings()
+        .weight(Weight.HEAVY)
+        .size(Size.VERY_LARGE)
+        .hardness(3.0F);
+  }
 
-    @Override
-    public @Nullable BaseItemDoor getItemBlock() {
-        return new BaseItemDoor(this);
-    }
+  @Override
+  public @Nullable BaseItemDoor getItemBlock() {
+    return new BaseItemDoor(this);
+  }
 
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : Item.getItemFromBlock(this);
-    }
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : Item.getItemFromBlock(this);
+  }
 
-    @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(Item.getItemFromBlock(this));
-    }
+  @Override
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
+      EntityPlayer player) {
+    return new ItemStack(Item.getItemFromBlock(this));
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IStateMapper getStateMapper() {
-        return new StateMap.Builder().ignore(BlockDoor.POWERED).build();
-    }
+  @Override
+  @SideOnly(Side.CLIENT)
+  public IStateMapper getStateMapper() {
+    return new StateMap.Builder().ignore(BlockDoor.POWERED).build();
+  }
 }

@@ -17,24 +17,27 @@ import java.util.Random;
 
 public class GeneratorSoil implements IWorldGenerator {
 
-    public static final float RAINFALL_SAND = 75;
-    public static final float RAINFALL_SAND_SANDY_MIX = 125;
-    public static final float RAINFALL_SANDY = 200; // Upper thresholds
-    public static final float RAINFALL_SILTY = 275; // Lower thresholds
-    public static final float RAINFALL_SILT_SILTY_MIX = 350;
-    public static final float RAINFALL_SILT = 400;
+  public static final float RAINFALL_SAND = 75;
+  public static final float RAINFALL_SAND_SANDY_MIX = 125;
+  public static final float RAINFALL_SANDY = 200; // Upper thresholds
+  public static final float RAINFALL_SILTY = 275; // Lower thresholds
+  public static final float RAINFALL_SILT_SILTY_MIX = 350;
+  public static final float RAINFALL_SILT = 400;
 
-    protected static final IBlockState HARDENED_CLAY = Blocks.HARDENED_CLAY.getDefaultState();
-    protected static final IBlockState STAINED_HARDENED_CLAY = Blocks.STAINED_HARDENED_CLAY.getDefaultState();
-    public final int yOffset = 112;
-    public final int[] seaLevelOffsetMap = new int[256];
+  protected static final IBlockState HARDENED_CLAY = Blocks.HARDENED_CLAY.getDefaultState();
+  protected static final IBlockState STAINED_HARDENED_CLAY = Blocks.STAINED_HARDENED_CLAY.getDefaultState();
+  public final int yOffset = 112;
+  public final int[] seaLevelOffsetMap = new int[256];
 
-    @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (!(chunkGenerator instanceof ChunkGenClassic)) return;
-        final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
+  @Override
+  public void generate(Random random, int chunkX, int chunkZ, World world,
+      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+    if (!(chunkGenerator instanceof ChunkGenClassic)) {
+      return;
+    }
+    final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-        if (ConfigTFCF.General.WORLD.enableAllBlockTypes) {
+    if (ConfigTFCF.General.WORLD.enableAllBlockTypes) {
             /*if (ConfigTFCF.General.WORLD.enablePodzolGen)
             {
                 BlockPos pos = world.getTopSolidOrLiquidBlock(chunkBlockPos);
@@ -58,8 +61,8 @@ public class GeneratorSoil implements IWorldGenerator {
                 BlockPos pos = world.getTopSolidOrLiquidBlock(chunkBlockPos);
                 generateSand(world, random, pos);
             }*/
-        }
     }
+  }
 
     /*private void generateSand(World world, Random rng, BlockPos start)
     {

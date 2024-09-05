@@ -20,61 +20,61 @@ import lombok.Getter;
 @Mixin(value = Item.class, remap = false)
 public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implements IItemSettings {
 
-    @Unique
-    protected final Settings settings = Settings.of();
+  @Unique
+  protected final Settings settings = Settings.of();
 
-    /**
-     * @author Xikaro
-     * @reason Адаптация под ISettingsItem
-     */
-    @Override
-    @Overwrite
-    public IRarity getForgeRarity(ItemStack stack) {
-        return getSettings().getRarity();
-    }
+  /**
+   * @author Xikaro
+   * @reason Адаптация под ISettingsItem
+   */
+  @Override
+  @Overwrite
+  public IRarity getForgeRarity(ItemStack stack) {
+    return getSettings().getRarity();
+  }
 
-    /**
-     * @author Xikaro
-     * @reason Адаптация под ISettingsItem
-     */
-    @Override
-    @Overwrite
-    public int getMaxDamage() {
-        return getSettings().getMaxDamage();
-    }
+  /**
+   * @author Xikaro
+   * @reason Адаптация под ISettingsItem
+   */
+  @Override
+  @Overwrite
+  public int getMaxDamage() {
+    return getSettings().getMaxDamage();
+  }
 
-    /**
-     * @author Xikaro
-     * @reason Адаптация под ISettingsItem
-     */
-    @Override
-    @Overwrite
-    public int getItemStackLimit() {
-        return getSettings().getMaxCount();
-    }
+  /**
+   * @author Xikaro
+   * @reason Адаптация под ISettingsItem
+   */
+  @Override
+  @Overwrite
+  public int getItemStackLimit() {
+    return getSettings().getMaxCount();
+  }
 
-    /**
-     * @author Xikaro
-     * @reason Адаптация под ISettingsItem
-     */
-    @Override
-    @Overwrite
-    public int getItemStackLimit(ItemStack stack) {
-        return getStackSize(stack);
-    }
+  /**
+   * @author Xikaro
+   * @reason Адаптация под ISettingsItem
+   */
+  @Override
+  @Overwrite
+  public int getItemStackLimit(ItemStack stack) {
+    return getStackSize(stack);
+  }
 
-    @Override
-    public Size getSize(ItemStack stack) {
-        return getSettings().getSize();
-    }
+  @Override
+  public Size getSize(ItemStack stack) {
+    return getSettings().getSize();
+  }
 
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return getSettings().getWeight();
-    }
+  @Override
+  public Weight getWeight(ItemStack stack) {
+    return getSettings().getWeight();
+  }
 
-    @Override
-    public boolean canStack(ItemStack stack) {
-        return getSettings().isCanStack();
-    }
+  @Override
+  public boolean canStack(ItemStack stack) {
+    return getSettings().isCanStack();
+  }
 }

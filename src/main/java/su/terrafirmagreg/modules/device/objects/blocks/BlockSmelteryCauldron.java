@@ -39,106 +39,111 @@ import static su.terrafirmagreg.data.Properties.LIT;
 @SuppressWarnings("deprecation")
 public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProviderTile {
 
-    public BlockSmelteryCauldron() {
-        super(Settings.of(Material.IRON));
+  public BlockSmelteryCauldron() {
+    super(Settings.of(Material.IRON));
 
-        getSettings()
-                .registryKey("device/smeltery_cauldron")
-                .sound(SoundType.STONE)
-                .nonOpaque()
-                .nonFullCube()
-                .size(Size.LARGE)
-                .weight(Weight.MEDIUM)
-                .hardness(3.0F);
+    getSettings()
+        .registryKey("device/smeltery_cauldron")
+        .sound(SoundType.STONE)
+        .nonOpaque()
+        .nonFullCube()
+        .size(Size.LARGE)
+        .weight(Weight.MEDIUM)
+        .hardness(3.0F);
 
-        setHarvestLevel(ToolClasses.PICKAXE, 0);
-        setDefaultState(getBlockState().getBaseState()
-                .withProperty(LIT, false)
-                .withProperty(FACING, EnumFacing.NORTH));
+    setHarvestLevel(ToolClasses.PICKAXE, 0);
+    setDefaultState(getBlockState().getBaseState()
+        .withProperty(LIT, false)
+        .withProperty(FACING, EnumFacing.NORTH));
+  }
+
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState()
+        .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+        .withProperty(LIT, meta / 4 % 2 != 0);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(FACING).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
+  }
+
+  @Override
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return FULL_BLOCK_AABB;
+  }
+
+  @Override
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
+      EnumFacing face) {
+    return face == EnumFacing.UP ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+  }
+
+  @Override
+  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    var tile = TileUtils.getTile(worldIn, pos, TileSmelteryCauldron.class);
+    if (tile != null) {
+      tile.onBreakBlock(worldIn, pos, state);
     }
+    super.breakBlock(worldIn, pos, state);
+  }
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState()
-                .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
-                .withProperty(LIT, meta / 4 % 2 != 0);
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
-    }
-
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return FULL_BLOCK_AABB;
-    }
-
-    @Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return face == EnumFacing.UP ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
-    }
-
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TileSmelteryCauldron.class);
-        if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
-        }
-        super.breakBlock(worldIn, pos, state);
-    }
-
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                    float hitY, float hitZ) {
-        if (!player.isSneaking()) {
-            if (!world.isRemote) {
-                if (world.getBlockState(pos.down()).getBlock() instanceof BlockSmelteryFirebox) {
-                    var tile = TileUtils.getTile(world, pos, TileSmelteryCauldron.class);
-                    ItemStack held = player.getHeldItem(hand);
-                    if (held.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
-                        IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
-                        if (fluidHandler != null) {
-                            if (FluidUtil.interactWithFluidHandler(player, hand, fluidHandler)) {
-                                held = player.getHeldItem(hand); // Forge update item in hand
-                                var cap = CapabilityHeat.get(held);
-                                if (cap != null) {
-                                    cap.setTemperature(tile.getTemp());
-                                }
-                            }
-                        }
-                    } else {
-                        GuiHandler.openGui(world, pos, player);
-                    }
-                } else {
-                    player.sendStatusMessage(new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"), true);
+  @Override
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
+      EnumHand hand, EnumFacing side, float hitX,
+      float hitY, float hitZ) {
+    if (!player.isSneaking()) {
+      if (!world.isRemote) {
+        if (world.getBlockState(pos.down()).getBlock() instanceof BlockSmelteryFirebox) {
+          var tile = TileUtils.getTile(world, pos, TileSmelteryCauldron.class);
+          ItemStack held = player.getHeldItem(hand);
+          if (held.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
+            IFluidHandler fluidHandler = tile.getCapability(
+                CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
+            if (fluidHandler != null) {
+              if (FluidUtil.interactWithFluidHandler(player, hand, fluidHandler)) {
+                held = player.getHeldItem(hand); // Forge update item in hand
+                var cap = CapabilityHeat.get(held);
+                if (cap != null) {
+                  cap.setTemperature(tile.getTemp());
                 }
+              }
             }
-            return true;
+          } else {
+            GuiHandler.openGui(world, pos, player);
+          }
+        } else {
+          player.sendStatusMessage(new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"),
+              true);
         }
-        return false;
+      }
+      return true;
     }
+    return false;
+  }
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, LIT, FACING);
-    }
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, LIT, FACING);
+  }
 
-    @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-                                            EntityLivingBase placer, EnumHand hand) {
-        return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-    }
+  @Override
+  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX,
+      float hitY, float hitZ, int meta,
+      EntityLivingBase placer, EnumHand hand) {
+    return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+  }
 
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileSmelteryCauldron();
-    }
+  @Nullable
+  @Override
+  public TileEntity createNewTileEntity(World worldIn, int meta) {
+    return new TileSmelteryCauldron();
+  }
 
-    @Override
-    public Class<? extends TileEntity> getTileEntityClass() {
-        return TileSmelteryCauldron.class;
-    }
+  @Override
+  public Class<? extends TileEntity> getTileEntityClass() {
+    return TileSmelteryCauldron.class;
+  }
 
 }

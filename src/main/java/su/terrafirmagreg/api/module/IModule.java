@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.module;
 
-import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.api.registry.Registry;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
@@ -27,83 +27,102 @@ import java.util.Set;
 
 public interface IModule {
 
-    Registry getRegistry();
+  Registry getRegistry();
 
-    // ===== FML Lifecycle
+  // ===== FML Lifecycle
 
-    default void onConstruction(FMLConstructionEvent event) {}
+  default void onConstruction(FMLConstructionEvent event) {
+  }
 
-    default void onPreInit(FMLPreInitializationEvent event) {}
+  default void onPreInit(FMLPreInitializationEvent event) {
+  }
 
-    default void onInit(FMLInitializationEvent event) {}
+  default void onInit(FMLInitializationEvent event) {
+  }
 
-    default void onPostInit(FMLPostInitializationEvent event) {}
+  default void onPostInit(FMLPostInitializationEvent event) {
+  }
 
-    default void onLoadComplete(FMLLoadCompleteEvent event) {}
+  default void onLoadComplete(FMLLoadCompleteEvent event) {
+  }
 
-    // ===== FML Lifecycle: Client
+  // ===== FML Lifecycle: Client
 
-    @SideOnly(Side.CLIENT)
-    default void onClientPreInit(FMLPreInitializationEvent event) {}
+  @SideOnly(Side.CLIENT)
+  default void onClientPreInit(FMLPreInitializationEvent event) {
+  }
 
-    @SideOnly(Side.CLIENT)
-    default void onClientInit(FMLInitializationEvent event) {}
+  @SideOnly(Side.CLIENT)
+  default void onClientInit(FMLInitializationEvent event) {
+  }
 
-    @SideOnly(Side.CLIENT)
-    default void onClientPostInit(FMLPostInitializationEvent event) {}
+  @SideOnly(Side.CLIENT)
+  default void onClientPostInit(FMLPostInitializationEvent event) {
+  }
 
-    // ===== FML Lifecycle: Server
+  // ===== FML Lifecycle: Server
 
-    default void onServerAboutToStart(FMLServerAboutToStartEvent event) {}
+  default void onServerAboutToStart(FMLServerAboutToStartEvent event) {
+  }
 
-    default void onServerStarting(FMLServerStartingEvent event) {}
+  default void onServerStarting(FMLServerStartingEvent event) {
+  }
 
-    default void onServerStarted(FMLServerStartedEvent event) {}
+  default void onServerStarted(FMLServerStartedEvent event) {
+  }
 
-    default void onServerStopping(FMLServerStoppingEvent event) {}
+  default void onServerStopping(FMLServerStoppingEvent event) {
+  }
 
-    default void onServerStopped(FMLServerStoppedEvent event) {}
+  default void onServerStopped(FMLServerStoppedEvent event) {
+  }
 
-    // ===== Registration
+  // ===== Registration
 
-    default void onNetworkRegister() {}
+  default void onNetworkRegister() {
+  }
 
-    default void onNewRegister() {}
+  default void onNewRegister() {
+  }
 
-    default void onRegister() {}
+  default void onRegister() {
+  }
 
-    @SideOnly(Side.CLIENT)
-    default void onClientRegister() {}
+  @SideOnly(Side.CLIENT)
+  default void onClientRegister() {
+  }
 
-    default void onRecipesRegister() {}
+  default void onRecipesRegister() {
+  }
 
-    // ===== Other
+  // ===== Other
 
-    default boolean processIMC(FMLInterModComms.IMCMessage message) {
-        return false;
-    }
+  default boolean processIMC(FMLInterModComms.IMCMessage message) {
+    return false;
+  }
 
-    /**
-     * What other modules this module depends on.
-     * <p>
-     * for example <code>new ResourceLocation("tfg", "soil")</code> represents a dependency on the module "soil" in the container "tfg"
-     */
+  /**
+   * What other modules this module depends on.
+   * <p>
+   * for example <code>new ResourceLocation("tfg", "soil")</code> represents a dependency on the module "soil" in the container "tfg"
+   */
 
-    default @NotNull Set<ResourceLocation> getDependencyUids() {
-        return Collections.emptySet();
-    }
+  default @NotNull Set<ResourceLocation> getDependencyUids() {
+    return Collections.emptySet();
+  }
 
-    /**
-     * @return A list of classes to subscribe to the Forge event bus. As the class gets subscribed, not any specific instance, event handlers must be static!
-     */
+  /**
+   * @return A list of classes to subscribe to the Forge event bus. As the class gets subscribed, not any specific instance, event handlers must be
+   * static!
+   */
 
-    default @NotNull List<Class<?>> getEventBusSubscribers() {
-        return Collections.emptyList();
-    }
+  default @NotNull List<Class<?>> getEventBusSubscribers() {
+    return Collections.emptyList();
+  }
 
-    /**
-     * @return A logger to use for this module.
-     */
-    @NotNull
-    LoggingHelper getLogger();
+  /**
+   * @return A logger to use for this module.
+   */
+  @NotNull
+  LoggingHelper getLogger();
 }

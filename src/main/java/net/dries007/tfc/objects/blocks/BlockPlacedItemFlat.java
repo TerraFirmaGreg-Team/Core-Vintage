@@ -28,11 +28,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilFarmland;
+
 
 import java.util.Random;
 
@@ -118,8 +121,7 @@ public class BlockPlacedItemFlat extends Block {
     @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-        if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP) && !(worldIn.getBlockState(pos.down())
-                .getBlock() instanceof BlockFarmlandTFC)) {
+        if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP) && !(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockSoilFarmland)) {
             worldIn.setBlockToAir(pos);
         }
     }

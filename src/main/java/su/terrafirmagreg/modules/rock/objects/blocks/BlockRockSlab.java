@@ -27,71 +27,76 @@ import java.util.List;
 @Getter
 public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock {
 
-    protected final RockBlockVariant variant;
-    protected final RockType type;
-    protected Half halfSlab;
-    protected Double doubleSlab;
+  protected final RockBlockVariant variant;
+  protected final RockType type;
+  protected Half halfSlab;
+  protected Double doubleSlab;
 
-    private BlockRockSlab(RockBlockVariant model, RockBlockVariant variant, RockType type) {
-        super(Settings.of(Material.ROCK));
+  private BlockRockSlab(RockBlockVariant model, RockBlockVariant variant, RockType type) {
+    super(Settings.of(Material.ROCK));
 
-        this.variant = variant;
-        this.type = type;
+    this.variant = variant;
+    this.type = type;
 
-        getSettings()
-                .sound(SoundType.STONE)
-                .renderLayer(BlockRenderLayer.CUTOUT)
-                .oreDict("slab")
-                .oreDict("slab", "stone");
+    getSettings()
+        .registryKey(variant.getRegistryKey(type))
+        .hardness(variant.getHardness(type))
+        .sound(SoundType.STONE)
+        .renderLayer(BlockRenderLayer.CUTOUT)
+        .oreDict("slab")
+        .oreDict("slab", "stone");
 
-        setHarvestLevel(ToolClasses.PICKAXE, model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
+    setHarvestLevel(ToolClasses.PICKAXE,
+        model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
+      ITooltipFlag flagIn) {
+    super.addInformation(stack, worldIn, tooltip, flagIn);
+
+    tooltip.add(
+        new TextComponentTranslation("rockcategory.name")
+            .getFormattedText() + ": " + getType().getCategory().getLocalizedName());
+  }
+
+  public static class Double extends BlockRockSlab {
+
+    public Double(RockBlockVariant model, RockBlockVariant variant, RockType type) {
+      super(model, variant, type);
+
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-
-        tooltip.add(
-                new TextComponentTranslation("rockcategory.name")
-                        .getFormattedText() + ": " + getType().getCategory().getLocalizedName());
+    public boolean isDouble() {
+      return true;
     }
 
-    public static class Double extends BlockRockSlab {
+    @Override
+    public Double getDoubleSlab() {
+      return this;
+    }
+  }
 
-        public Double(RockBlockVariant model, RockBlockVariant variant, RockType type) {
-            super(model, variant, type);
+  public static class Half extends BlockRockSlab {
 
-        }
+    public Half(RockBlockVariant model, RockBlockVariant doubleSlab, RockBlockVariant variant,
+        RockType type) {
+      super(model, variant, type);
 
-        @Override
-        public boolean isDouble() {
-            return true;
-        }
-
-        @Override
-        public Double getDoubleSlab() {
-            return this;
-        }
+      this.doubleSlab = (Double) doubleSlab.get(type);
+      this.doubleSlab.halfSlab = this;
     }
 
-    public static class Half extends BlockRockSlab {
-
-        public Half(RockBlockVariant model, RockBlockVariant doubleSlab, RockBlockVariant variant, RockType type) {
-            super(model, variant, type);
-
-            this.doubleSlab = (Double) doubleSlab.get(type);
-            this.doubleSlab.halfSlab = this;
-        }
-
-        @Override
-        public boolean isDouble() {
-            return false;
-        }
-
-        @Override
-        public Half getHalfSlab() {
-            return this;
-        }
+    @Override
+    public boolean isDouble() {
+      return false;
     }
+
+    @Override
+    public Half getHalfSlab() {
+      return this;
+    }
+  }
 }

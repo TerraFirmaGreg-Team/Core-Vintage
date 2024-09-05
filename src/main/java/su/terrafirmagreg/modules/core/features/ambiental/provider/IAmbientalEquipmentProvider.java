@@ -10,8 +10,8 @@ import java.util.Optional;
 
 @FunctionalInterface
 public interface IAmbientalEquipmentProvider
-        extends IAmbientalBaseProvider {
+    extends IAmbientalBaseProvider {
 
-    Optional<ModifierBase> getModifier(EntityPlayer player, ItemStack stack);
+  Optional<ModifierBase> getModifier(EntityPlayer player, ItemStack stack);
 
 }

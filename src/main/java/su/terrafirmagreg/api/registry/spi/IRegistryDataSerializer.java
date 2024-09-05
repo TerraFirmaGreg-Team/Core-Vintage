@@ -5,20 +5,20 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.DataSerializerEntry;
 
 public interface IRegistryDataSerializer
-        extends IRegistryBase {
+    extends IRegistryBase {
 
-    /**
-     * Registers a new dataSerializer. Registration will be handled for you.
-     *
-     * @param serializer The command to add.
-     */
-    default DataSerializerEntry dataSerializerEntry(DataSerializer<?> serializer, String name) {
+  /**
+   * Registers a new dataSerializer. Registration will be handled for you.
+   *
+   * @param serializer The command to add.
+   */
+  default DataSerializerEntry dataSerializerEntry(DataSerializer<?> serializer, String name) {
 
-        var dataSerializerEntry = new DataSerializerEntry(serializer);
-        dataSerializerEntry.setRegistryName(new ResourceLocation(this.getModID(), name));
+    var dataSerializerEntry = new DataSerializerEntry(serializer);
+    dataSerializerEntry.setRegistryName(new ResourceLocation(this.getModID(), name));
 
-        this.getRegistry().getDataSerializerEntries().add(dataSerializerEntry);
+    this.getRegistry().getDataSerializerEntries().add(dataSerializerEntry);
 
-        return dataSerializerEntry;
-    }
+    return dataSerializerEntry;
+  }
 }

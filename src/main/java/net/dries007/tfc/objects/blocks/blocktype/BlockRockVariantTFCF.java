@@ -27,12 +27,6 @@ import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockHumusFarmland;
-import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockLoamFarmland;
-import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockLoamySandFarmland;
-import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockSandyLoamFarmland;
-import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockSiltFarmland;
-import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockSiltLoamFarmland;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
@@ -233,12 +227,6 @@ public class BlockRockVariantTFCF extends Block implements ICapabilitySize {
                  SPARSE_CLAY_LOAM_GRASS, SPARSE_SILTY_CLAY_GRASS, SPARSE_SILTY_CLAY_LOAM_GRASS, SPARSE_SILT_LOAM_GRASS, SPARSE_SILT_GRASS,
                  SPARSE_HUMUS_GRASS,
                  SPARSE_CLAY_HUMUS_GRASS -> new BlockRockVariantConnectedTFCF(rockTFCF, rock);
-            case LOAMY_SAND_FARMLAND -> new BlockLoamySandFarmland(rockTFCF, rock);
-            case SANDY_LOAM_FARMLAND -> new BlockSandyLoamFarmland(rockTFCF, rock);
-            case LOAM_FARMLAND -> new BlockLoamFarmland(rockTFCF, rock);
-            case SILT_LOAM_FARMLAND -> new BlockSiltLoamFarmland(rockTFCF, rock);
-            case SILT_FARMLAND -> new BlockSiltFarmland(rockTFCF, rock);
-            case HUMUS_FARMLAND -> new BlockHumusFarmland(rockTFCF, rock);
             default -> new BlockRockVariantTFCF(rockTFCF, rock);
         };
     }
@@ -257,47 +245,7 @@ public class BlockRockVariantTFCF extends Block implements ICapabilitySize {
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("deprecation")
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
-        switch (this.rockTFCF) {
-            case LOAMY_SAND_FARMLAND:
-            case SANDY_LOAM_FARMLAND:
-            case LOAM_FARMLAND:
-            case SILT_LOAM_FARMLAND:
-            case SILT_FARMLAND:
-            case HUMUS_FARMLAND:
-                switch (side) {
-                    case UP:
-                        return true;
-                    case NORTH:
-                    case SOUTH:
-                    case WEST:
-                    case EAST:
-                        IBlockState state = world.getBlockState(pos.offset(side));
-                        Block block = state.getBlock();
-                        if (state.isOpaqueCube()) return false;
-                        if (block instanceof BlockLoamySandFarmland || block instanceof BlockSandyLoamFarmland ||
-                                block instanceof BlockLoamFarmland || block instanceof BlockSiltLoamFarmland || block instanceof BlockSiltFarmland ||
-                                block instanceof BlockHumusFarmland)
-                            return false;
-                        if (block instanceof BlockRockVariantTFCF) {
-                            switch (((BlockRockVariantTFCF) block).rockTFCF) {
-                                case LOAMY_SAND_FARMLAND:
-                                case SANDY_LOAM_FARMLAND:
-                                case LOAM_FARMLAND:
-                                case SILT_LOAM_FARMLAND:
-                                case SILT_FARMLAND:
-                                case HUMUS_FARMLAND:
-                                    return false;
-                                default:
-                                    return true;
-                            }
-                        }
-                        return true;
-                    case DOWN:
-                        return super.shouldSideBeRendered(blockState, world, pos, side);
-                }
-            default:
-                return super.shouldSideBeRendered(blockState, world, pos, side);
-        }
+        return super.shouldSideBeRendered(blockState, world, pos, side);
     }
 
     @Override

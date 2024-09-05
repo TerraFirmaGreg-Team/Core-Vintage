@@ -10,7 +10,7 @@ import java.util.Optional;
 //Add an example of this into TemperatureRegistry for general modifiers
 @FunctionalInterface
 public interface IAmbientalEnvironmentalProvider
-        extends IAmbientalBaseProvider {
+    extends IAmbientalBaseProvider {
 
-    Optional<ModifierBase> getModifier(EntityPlayer player);
+  Optional<ModifierBase> getModifier(EntityPlayer player);
 }

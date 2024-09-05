@@ -18,72 +18,72 @@ import gregtech.api.unification.ore.OrePrefix;
 import org.jetbrains.annotations.NotNull;
 
 public class TileMetalSheet
-        extends BaseTile {
+    extends BaseTile {
 
-    private final boolean[] faces;
+  private final boolean[] faces;
 
-    public TileMetalSheet() {
-        this.faces = new boolean[6];
+  public TileMetalSheet() {
+    this.faces = new boolean[6];
+  }
+
+  @Override
+  public void onDataPacket(@NotNull NetworkManager net, @NotNull SPacketUpdateTileEntity pkt) {
+    super.onDataPacket(net, pkt);
+    markForBlockUpdate();
+  }
+
+  /**
+   * Gets the number of faces that are present
+   *
+   * @return a number in [0, 6]
+   */
+  public int getFaceCount() {
+    int n = 0;
+    for (boolean b : faces) {
+      if (b) {
+        n++;
+      }
     }
+    return n;
+  }
 
-    @Override
-    public void onDataPacket(@NotNull NetworkManager net, @NotNull SPacketUpdateTileEntity pkt) {
-        super.onDataPacket(net, pkt);
-        markForBlockUpdate();
-    }
+  /**
+   * Checks if sheet is present for the given face
+   *
+   * @param face The face to check
+   * @return true if present
+   */
+  public boolean getFace(EnumFacing face) {
+    return faces[face.getIndex()];
+  }
 
-    /**
-     * Gets the number of faces that are present
-     *
-     * @return a number in [0, 6]
-     */
-    public int getFaceCount() {
-        int n = 0;
-        for (boolean b : faces) {
-            if (b) {
-                n++;
-            }
-        }
-        return n;
+  public void setFace(EnumFacing facing, boolean value) {
+    if (!world.isRemote) {
+      faces[facing.getIndex()] = value;
+      markForBlockUpdate();
     }
+  }
 
-    /**
-     * Checks if sheet is present for the given face
-     *
-     * @param face The face to check
-     * @return true if present
-     */
-    public boolean getFace(EnumFacing face) {
-        return faces[face.getIndex()];
+  @Override
+  public void readFromNBT(NBTTagCompound nbt) {
+    for (EnumFacing face : EnumFacing.values()) {
+      faces[face.getIndex()] = nbt.getBoolean(face.getName());
     }
+    super.readFromNBT(nbt);
+  }
 
-    public void setFace(EnumFacing facing, boolean value) {
-        if (!world.isRemote) {
-            faces[facing.getIndex()] = value;
-            markForBlockUpdate();
-        }
+  @Override
+  @NotNull
+  public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+    for (EnumFacing face : EnumFacing.values()) {
+      NBTUtils.setGenericNBTValue(nbt, face.getName(), faces[face.getIndex()]);
     }
+    return super.writeToNBT(nbt);
+  }
 
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        for (EnumFacing face : EnumFacing.values()) {
-            faces[face.getIndex()] = nbt.getBoolean(face.getName());
-        }
-        super.readFromNBT(nbt);
-    }
-
-    @Override
-    @NotNull
-    public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
-        for (EnumFacing face : EnumFacing.values()) {
-            NBTUtils.setGenericNBTValue(nbt, face.getName(), faces[face.getIndex()]);
-        }
-        return super.writeToNBT(nbt);
-    }
-
-    public void onBreakBlock() {
-        var item = OreDictUnifier.get(OrePrefix.plate, Materials.Iron).getItem();
-        var output = new ItemStack(item, getFaceCount());
-        InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), output);
-    }
+  public void onBreakBlock() {
+    var item = OreDictUnifier.get(OrePrefix.plate, Materials.Iron).getItem();
+    var output = new ItemStack(item, getFaceCount());
+    InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), output);
+  }
 }

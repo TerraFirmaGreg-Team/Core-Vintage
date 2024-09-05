@@ -16,17 +16,17 @@ import mcjty.theoneprobe.api.ITheOneProbe;
 
 public final class PluginTheOneProbe {
 
-    public static void init() {
-        ITheOneProbe oneProbe = TheOneProbe.theOneProbeImp;
-        oneProbe.registerProvider(new ProviderFridge());
-        oneProbe.registerProvider(new ProviderLatexExtractor());
-        oneProbe.registerProvider(new ProviderPitKiln());
-        oneProbe.registerProvider(new ProviderCrucible());
-        oneProbe.registerProvider(new ProviderQuern());
-        oneProbe.registerProvider(new ProviderBlastFurnace());
-        oneProbe.registerProvider(new ProviderBloom());
-        oneProbe.registerProvider(new ProviderBloomery());
-        oneProbe.registerProvider(new ProviderLogPile());
+  public static void init() {
+    ITheOneProbe oneProbe = TheOneProbe.theOneProbeImp;
+    oneProbe.registerProvider(new ProviderFridge());
+    oneProbe.registerProvider(new ProviderLatexExtractor());
+    oneProbe.registerProvider(new ProviderPitKiln());
+    oneProbe.registerProvider(new ProviderCrucible());
+    oneProbe.registerProvider(new ProviderQuern());
+    oneProbe.registerProvider(new ProviderBlastFurnace());
+    oneProbe.registerProvider(new ProviderBloom());
+    oneProbe.registerProvider(new ProviderBloomery());
+    oneProbe.registerProvider(new ProviderLogPile());
 
-    }
+  }
 }

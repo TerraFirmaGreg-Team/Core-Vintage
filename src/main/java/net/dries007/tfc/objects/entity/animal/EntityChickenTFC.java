@@ -43,7 +43,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.data.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public class EntityChickenTFC extends EntityAnimalBase implements ILivestock {
 

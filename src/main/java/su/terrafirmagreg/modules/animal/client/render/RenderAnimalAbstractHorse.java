@@ -26,33 +26,34 @@ import java.util.Map;
 @SideOnly(Side.CLIENT)
 public class RenderAnimalAbstractHorse extends RenderLiving<AbstractHorse> {
 
-    private static final Map<Class<?>, ResourceLocation> MAP = Maps.newHashMap();
+  private static final Map<Class<?>, ResourceLocation> MAP = Maps.newHashMap();
 
-    static {
-        // Those are grabbed from vanilla, please don't change unless we add our own textures first.
-        MAP.put(EntityAnimalDonkey.class, new ResourceLocation("textures/entity/horse/donkey.png"));
-        MAP.put(EntityAnimalMule.class, new ResourceLocation("textures/entity/horse/mule.png"));
-    }
+  static {
+    // Those are grabbed from vanilla, please don't change unless we add our own textures first.
+    MAP.put(EntityAnimalDonkey.class, new ResourceLocation("textures/entity/horse/donkey.png"));
+    MAP.put(EntityAnimalMule.class, new ResourceLocation("textures/entity/horse/mule.png"));
+  }
 
-    private final float scale;
+  private final float scale;
 
-    public RenderAnimalAbstractHorse(RenderManager manager) {
-        this(manager, 1.0F);
-    }
+  public RenderAnimalAbstractHorse(RenderManager manager) {
+    this(manager, 1.0F);
+  }
 
-    public RenderAnimalAbstractHorse(RenderManager renderManagerIn, float scaleIn) {
-        super(renderManagerIn, new ModelAnimalHorse(), 0.75F);
-        this.scale = scaleIn;
-    }
+  public RenderAnimalAbstractHorse(RenderManager renderManagerIn, float scaleIn) {
+    super(renderManagerIn, new ModelAnimalHorse(), 0.75F);
+    this.scale = scaleIn;
+  }
 
-    @Override
-    protected void preRenderCallback(@NotNull AbstractHorse entitylivingbaseIn, float partialTickTime) {
-        GlStateManager.scale(this.scale, this.scale, this.scale);
-        super.preRenderCallback(entitylivingbaseIn, partialTickTime);
-    }
+  @Override
+  protected void preRenderCallback(@NotNull AbstractHorse entitylivingbaseIn,
+      float partialTickTime) {
+    GlStateManager.scale(this.scale, this.scale, this.scale);
+    super.preRenderCallback(entitylivingbaseIn, partialTickTime);
+  }
 
-    @Override
-    protected ResourceLocation getEntityTexture(AbstractHorse entity) {
-        return MAP.get(entity.getClass());
-    }
+  @Override
+  protected ResourceLocation getEntityTexture(AbstractHorse entity) {
+    return MAP.get(entity.getClass());
+  }
 }

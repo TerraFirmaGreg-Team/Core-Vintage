@@ -21,34 +21,35 @@ import static su.terrafirmagreg.data.Properties.CLAY;
 
 public class BlockSoilDirt extends BlockSoil {
 
-    public BlockSoilDirt(SoilBlockVariant variant, SoilType type) {
-        super(variant, type);
+  public BlockSoilDirt(SoilBlockVariant variant, SoilType type) {
+    super(variant, type);
 
-        setDefaultState(getBlockState().getBaseState().withProperty(CLAY, Boolean.FALSE));
+    setDefaultState(getBlockState().getBaseState().withProperty(CLAY, Boolean.FALSE));
 
-        //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
-    }
+    //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
+  }
 
-    @Override
-    public int quantityDropped(IBlockState state, int fortune, Random random) {
-        return state.getValue(CLAY) ? random.nextInt(4) : super.quantityDropped(state, fortune, random);
-    }
+  @Override
+  public int quantityDropped(IBlockState state, int fortune, Random random) {
+    return state.getValue(CLAY) ? random.nextInt(4) : super.quantityDropped(state, fortune, random);
+  }
 
-    @NotNull
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return state.getValue(CLAY) ? Items.CLAY_BALL : ItemsSoil.PILE.get(getType());
-    }
+  @NotNull
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return state.getValue(CLAY) ? Items.CLAY_BALL : ItemsSoil.PILE.get(getType());
+  }
 
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return this.getBlockState().getBaseState().getValue(CLAY) ? BlockRenderLayer.CUTOUT : BlockRenderLayer.SOLID;
-    }
+  @NotNull
+  @Override
+  @SideOnly(Side.CLIENT)
+  public BlockRenderLayer getRenderLayer() {
+    return this.getBlockState().getBaseState().getValue(CLAY) ? BlockRenderLayer.CUTOUT
+        : BlockRenderLayer.SOLID;
+  }
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, CLAY);
-    }
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, CLAY);
+  }
 }

@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 public class MetalAnvilRecipeMaker {
 
-    public static List<MetalAnvilRecipeWrapper> getRecipes() {
-        return RegistriesMetal.ANVIL.recipes()
-                .stream()
-                .map(MetalAnvilRecipeWrapper::new)
-                .collect(Collectors.toList());
-    }
+  public static List<MetalAnvilRecipeWrapper> getRecipes() {
+    return RegistriesMetal.ANVIL.recipes()
+        .stream()
+        .map(MetalAnvilRecipeWrapper::new)
+        .collect(Collectors.toList());
+  }
 }

@@ -14,33 +14,33 @@ import java.util.Set;
 
 public class QuernRecipeManager implements IQuernRecipeManager {
 
-    private static final Set<IQuernRecipe> recipes = new HashSet<>();
+  private static final Set<IQuernRecipe> recipes = new HashSet<>();
 
-    @Override
-    public void addRecipe(IIngredient<ItemStack> inputItem, ItemStack outputItem) {
-        addRecipe(new QuernRecipe(inputItem, outputItem));
-    }
+  @Nullable
+  public static IQuernRecipe findMatchingRecipe(ItemStack item) {
+    return recipes.stream()
+        .filter(x -> x.isValidInput(item))
+        .findFirst()
+        .orElse(null);
+  }
 
-    @Override
-    public boolean addRecipe(IQuernRecipe recipe) {
-        return recipes.add(recipe);
-    }
+  @Override
+  public void addRecipe(IIngredient<ItemStack> inputItem, ItemStack outputItem) {
+    addRecipe(new QuernRecipe(inputItem, outputItem));
+  }
 
-    @Override
-    public boolean removeRecipe(IQuernRecipe recipe) {
-        return recipes.remove(recipe);
-    }
+  @Override
+  public boolean addRecipe(IQuernRecipe recipe) {
+    return recipes.add(recipe);
+  }
 
-    @Nullable
-    public static IQuernRecipe findMatchingRecipe(ItemStack item) {
-        return recipes.stream()
-                .filter(x -> x.isValidInput(item))
-                .findFirst()
-                .orElse(null);
-    }
+  @Override
+  public boolean removeRecipe(IQuernRecipe recipe) {
+    return recipes.remove(recipe);
+  }
 
-    @Override
-    public Collection<IQuernRecipe> recipes() {
-        return Collections.unmodifiableSet(recipes);
-    }
+  @Override
+  public Collection<IQuernRecipe> recipes() {
+    return Collections.unmodifiableSet(recipes);
+  }
 }

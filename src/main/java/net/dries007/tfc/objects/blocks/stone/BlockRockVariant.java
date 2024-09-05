@@ -28,7 +28,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -61,7 +60,6 @@ public class BlockRockVariant extends Block implements ICapabilitySize {
             case BRICKS:
             case RAW:
             case ANVIL:
-            case SPIKE:
             case SMOOTH:
                 setSoundType(SoundType.STONE);
                 setHardness(rock.getRockCategory().getHardness()).setResistance(rock.getRockCategory().getResistance());
@@ -80,7 +78,6 @@ public class BlockRockVariant extends Block implements ICapabilitySize {
                 break;
             case DIRT:
             case PATH:
-            case FARMLAND:
                 setSoundType(SoundType.GROUND);
                 setHardness(rock.getRockCategory().getHardness() * 0.15F);
                 setHarvestLevel("shovel", 0);
@@ -99,10 +96,6 @@ public class BlockRockVariant extends Block implements ICapabilitySize {
                 setHarvestLevel("shovel", 0);
                 break;
         }
-        if (type != Rock.Type.SPIKE && type != Rock.Type.ANVIL) //since spikes and anvils don't generate ItemBlocks
-        {
-            OreDictionaryHelper.registerRockType(this, type);
-        }
     }
 
     public static BlockRockVariant get(Rock rock, Rock.Type type) {
@@ -118,8 +111,6 @@ public class BlockRockVariant extends Block implements ICapabilitySize {
             case RAW -> new BlockRockRaw(type, rock);
             case SMOOTH -> new BlockRockSmooth(type, rock);
             case ANVIL -> new BlockStoneAnvil(type, rock);
-            case SPIKE -> new BlockRockSpike(type, rock);
-            case FARMLAND -> new BlockFarmlandTFC(type, rock);
             case GRASS, DRY_GRASS, CLAY_GRASS -> new BlockRockVariantConnected(type, rock);
             case SAND, DIRT, CLAY, GRAVEL, COBBLE -> new BlockRockVariantFallable(type, rock);
             default -> new BlockRockVariant(type, rock);
@@ -136,7 +127,6 @@ public class BlockRockVariant extends Block implements ICapabilitySize {
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
         switch (this.type) {
             case PATH:
-            case FARMLAND:
                 switch (side) {
                     case UP:
                         return true;
@@ -150,7 +140,7 @@ public class BlockRockVariant extends Block implements ICapabilitySize {
                         if (block instanceof BlockFarmland || block instanceof BlockGrassPath) return false;
                         if (block instanceof BlockRockVariant blockRockVariant) {
                             return switch (blockRockVariant.type) {
-                                case FARMLAND, PATH -> false;
+                                case PATH -> false;
                                 default -> true;
                             };
                         }
@@ -173,7 +163,7 @@ public class BlockRockVariant extends Block implements ICapabilitySize {
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return switch (type) {
-            case RAW, SPIKE -> ItemRock.get(rock);
+            case RAW -> ItemRock.get(rock);
             case CLAY, CLAY_GRASS -> Items.CLAY_BALL;
             case GRASS, DRY_GRASS, PATH -> Item.getItemFromBlock(get(rock, Rock.Type.DIRT));
             default -> super.getItemDropped(state, rand, fortune);
@@ -195,7 +185,7 @@ public class BlockRockVariant extends Block implements ICapabilitySize {
     public int quantityDropped(IBlockState state, int fortune, Random random) {
         return switch (type) {
             case CLAY, CLAY_GRASS -> 4;
-            case RAW, SPIKE -> 1 + random.nextInt(3);
+            case RAW -> 1 + random.nextInt(3);
             default -> super.quantityDropped(state, fortune, random);
         };
     }

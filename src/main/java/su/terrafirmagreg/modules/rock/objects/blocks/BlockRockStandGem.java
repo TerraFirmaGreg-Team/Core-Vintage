@@ -35,95 +35,98 @@ import static su.terrafirmagreg.data.Properties.UP;
 @SuppressWarnings("deprecation")
 public class BlockRockStandGem extends BlockRock implements IProviderTile {
 
-    public BlockRockStandGem(RockBlockVariant variant, RockType type) {
-        super(variant, type);
+  public BlockRockStandGem(RockBlockVariant variant, RockType type) {
+    super(variant, type);
 
-        getSettings()
-                .hardness(1.0f)
-                .size(Size.LARGE)
-                .weight(Weight.HEAVY)
-                .nonFullCube()
-                .harvestLevel(ToolClasses.PICKAXE, 0)
-                .nonOpaque();
+    getSettings()
+        .hardness(1.0f)
+        .size(Size.LARGE)
+        .weight(Weight.HEAVY)
+        .nonFullCube()
+        .harvestLevel(ToolClasses.PICKAXE, 0)
+        .nonOpaque();
 
-        setDefaultState(getBlockState().getBaseState()
-                .withProperty(HORIZONTAL, EnumFacing.EAST)
-                .withProperty(UP, Boolean.TRUE));
+    setDefaultState(getBlockState().getBaseState()
+        .withProperty(HORIZONTAL, EnumFacing.EAST)
+        .withProperty(UP, Boolean.TRUE));
+  }
+
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, HORIZONTAL, UP);
+  }
+
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState()
+        .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta))
+        .withProperty(UP, meta / 4 % 2 != 0);
+  }
+
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(UP) ? 4 : 0);
+  }
+
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
+      float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
+  }
+
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
+      EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    if (!worldIn.isRemote) {
+      var tile = TileUtils.getTile(worldIn, pos, TileRockGemDisplay.class);
+      if (tile != null) {
+        return tile.onRightClick(playerIn, hand);
+      }
     }
 
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, HORIZONTAL, UP);
-    }
+    return true;
+  }
 
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState()
-                .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta))
-                .withProperty(UP, meta / 4 % 2 != 0);
+  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    var tile = TileUtils.getTile(worldIn, pos, TileRockGemDisplay.class);
+    if (tile != null) {
+      tile.onBreakBlock();
     }
+    super.breakBlock(worldIn, pos, state);
+  }
 
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(UP) ? 4 : 0);
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
+      BlockPos fromPos) {
+    if (fromPos.equals(pos.up())) {
+      if (worldIn.getBlockState(fromPos).getBlock() instanceof BlockAir) {
+        state = state.withProperty(UP, Boolean.TRUE);
+      } else {
+        state = state.withProperty(UP, Boolean.FALSE);
+      }
+      worldIn.setBlockState(pos, state, 2);
     }
+  }
 
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
-    }
+  @Override
+  public boolean hasComparatorInputOverride(IBlockState state) {
+    return true;
+  }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
-            var tile = TileUtils.getTile(worldIn, pos, TileRockGemDisplay.class);
-            if (tile != null) {
-                return tile.onRightClick(playerIn, hand);
-            }
-        }
+  @Override
+  public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
+    var tile = TileUtils.getTile(world, pos, TileRockGemDisplay.class);
+    return (int) Math.floor(15 * ((double) tile.getSize() / (double) tile.getMaxStackSize()));
+  }
 
-        return true;
-    }
+  @Override
+  public Class<? extends TileEntity> getTileEntityClass() {
+    return TileRockGemDisplay.class;
+  }
 
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TileRockGemDisplay.class);
-        if (tile != null) {
-            tile.onBreakBlock();
-        }
-        super.breakBlock(worldIn, pos, state);
-    }
+  @SideOnly(Side.CLIENT)
+  @Override
+  public TileEntitySpecialRenderer<?> getTileRenderer() {
+    return new TESRRockGemDisplay();
+  }
 
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (fromPos.equals(pos.up())) {
-            if (worldIn.getBlockState(fromPos).getBlock() instanceof BlockAir) {
-                state = state.withProperty(UP, Boolean.TRUE);
-            } else {
-                state = state.withProperty(UP, Boolean.FALSE);
-            }
-            worldIn.setBlockState(pos, state, 2);
-        }
-    }
-
-    @Override
-    public boolean hasComparatorInputOverride(IBlockState state) {
-        return true;
-    }
-
-    @Override
-    public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
-        var tile = TileUtils.getTile(world, pos, TileRockGemDisplay.class);
-        return (int) Math.floor(15 * ((double) tile.getSize() / (double) tile.getMaxStackSize()));
-    }
-
-    @Override
-    public Class<? extends TileEntity> getTileEntityClass() {
-        return TileRockGemDisplay.class;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public TileEntitySpecialRenderer<?> getTileRenderer() {
-        return new TESRRockGemDisplay();
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileRockGemDisplay();
-    }
+  @Nullable
+  @Override
+  public TileEntity createNewTileEntity(World worldIn, int meta) {
+    return new TileRockGemDisplay();
+  }
 }

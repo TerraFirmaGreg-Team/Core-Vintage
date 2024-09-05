@@ -11,8 +11,8 @@ import gregtech.api.unification.material.event.MaterialEvent;
 @SuppressWarnings("unused")
 public class EventHandlerMaterial {
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void registerMaterials(MaterialEvent event) {
-        MaterialMetalHandler.init();
-    }
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
+  public void registerMaterials(MaterialEvent event) {
+    MaterialMetalHandler.init();
+  }
 }

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.base.tile.BaseTile;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiAlloyCalculator;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerAlloyCalculator;
@@ -26,61 +26,67 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-public class TileAlloyCalculator extends BaseTile implements IProviderContainer<ContainerAlloyCalculator, GuiAlloyCalculator> {
+public class TileAlloyCalculator extends BaseTile implements
+    IProviderContainer<ContainerAlloyCalculator, GuiAlloyCalculator> {
 
-    public final ItemStackHandler stacks = new ItemStackHandler(9);
-    @Getter
-    private Alloy alloy;
+  public final ItemStackHandler stacks = new ItemStackHandler(9);
+  @Getter
+  private Alloy alloy;
 
-    public TileAlloyCalculator() {}
+  public TileAlloyCalculator() {
+  }
 
-    public void calculateAlloy() {
-        Alloy computedAlloy = new Alloy();
-        for (int slot = 0; slot < this.stacks.getSlots(); slot++) {
-            computedAlloy.add(this.stacks.getStackInSlot(slot));
-        }
-        if (computedAlloy.getAmount() == 0)
-            this.alloy = null;
-        else
-            this.alloy = computedAlloy;
+  public void calculateAlloy() {
+    Alloy computedAlloy = new Alloy();
+    for (int slot = 0; slot < this.stacks.getSlots(); slot++) {
+      computedAlloy.add(this.stacks.getStackInSlot(slot));
+    }
+    if (computedAlloy.getAmount() == 0) {
+      this.alloy = null;
+    } else {
+      this.alloy = computedAlloy;
+    }
+  }
+
+  @Override
+  public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+    nbt = super.writeToNBT(nbt);
+    NBTUtils.setGenericNBTValue(nbt, "stacks", this.stacks.serializeNBT());
+    return nbt;
+  }
+
+  @Override
+  public void readFromNBT(@NotNull NBTTagCompound nbt) {
+    super.readFromNBT(nbt);
+    this.stacks.deserializeNBT(nbt.getCompoundTag("stacks"));
+  }
+
+  @Nullable
+  @Override
+  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+    if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+      return (T) this.stacks;
     }
 
-    @Override
-    public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
-        nbt = super.writeToNBT(nbt);
-        NBTUtils.setGenericNBTValue(nbt, "stacks", this.stacks.serializeNBT());
-        return nbt;
-    }
+    return null;
+  }
 
-    @Override
-    public void readFromNBT(@NotNull NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
-        this.stacks.deserializeNBT(nbt.getCompoundTag("stacks"));
-    }
+  @Override
+  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+    return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(
+        capability, facing);
+  }
 
-    @Nullable
-    @Override
-    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return (T) this.stacks;
-        }
+  @Override
+  public ContainerAlloyCalculator getContainer(InventoryPlayer inventoryPlayer, World world,
+      IBlockState state, BlockPos pos) {
+    return new ContainerAlloyCalculator(inventoryPlayer, this);
+  }
 
-        return null;
-    }
-
-    @Override
-    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
-    }
-
-    @Override
-    public ContainerAlloyCalculator getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-        return new ContainerAlloyCalculator(inventoryPlayer, this);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public GuiAlloyCalculator getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-        return new GuiAlloyCalculator(getContainer(inventoryPlayer, world, state, pos));
-    }
+  @Override
+  @SideOnly(Side.CLIENT)
+  public GuiAlloyCalculator getGuiContainer(InventoryPlayer inventoryPlayer, World world,
+      IBlockState state, BlockPos pos) {
+    return new GuiAlloyCalculator(getContainer(inventoryPlayer, world, state, pos));
+  }
 }

@@ -5,11 +5,11 @@ import su.terrafirmagreg.modules.device.objects.recipes.quern.QuernRecipeManager
 
 public final class RegistriesDevice {
 
-    public static IQuernRecipeManager QUERN;
+  public static IQuernRecipeManager QUERN;
 
-    public static void onRegister() {
+  public static void onRegister() {
 
-        QUERN = new QuernRecipeManager();
-    }
+    QUERN = new QuernRecipeManager();
+  }
 
 }

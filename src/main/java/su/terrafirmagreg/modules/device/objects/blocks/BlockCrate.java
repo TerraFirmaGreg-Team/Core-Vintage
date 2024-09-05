@@ -43,156 +43,164 @@ import static su.terrafirmagreg.data.Properties.SEALED;
 @SuppressWarnings("deprecation")
 public class BlockCrate extends BaseBlockContainer implements IProviderTile {
 
-    private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.05D, 0.0D, 0.05D, 0.95D, 0.875D, 0.95D);
-    private static final AxisAlignedBB BOUNDING_BOX_SEALED = new AxisAlignedBB(0.05D, 0.0D, 0.05D, 0.95D, 0.875D, 0.95D);
+  private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.05D, 0.0D, 0.05D, 0.95D,
+      0.875D, 0.95D);
+  private static final AxisAlignedBB BOUNDING_BOX_SEALED = new AxisAlignedBB(0.05D, 0.0D, 0.05D,
+      0.95D, 0.875D, 0.95D);
 
-    public BlockCrate() {
-        super(Settings.of(Material.CIRCUITS));
+  public BlockCrate() {
+    super(Settings.of(Material.CIRCUITS));
 
-        getSettings()
-                .registryKey("device/crate")
-                .sound(SoundType.WOOD)
-                .hardness(2F)
-                .nonCube()
-                .weight(Weight.VERY_HEAVY);
+    getSettings()
+        .registryKey("device/crate")
+        .sound(SoundType.WOOD)
+        .hardness(2F)
+        .nonCube()
+        .weight(Weight.VERY_HEAVY);
 
-        setDefaultState(getBlockState().getBaseState()
-                .withProperty(SEALED, false));
+    setDefaultState(getBlockState().getBaseState()
+        .withProperty(SEALED, false));
+  }
+
+  /**
+   * Used to update the vessel seal state and the TE, in the correct order
+   */
+  public static void toggleCrateSeal(World world, BlockPos pos) {
+    var tile = TileUtils.getTile(world, pos, TileCrate.class);
+    if (tile != null) {
+      IBlockState state = world.getBlockState(pos);
+      boolean previousSealed = state.getValue(SEALED);
+      world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
+      if (previousSealed) {
+        tile.onUnseal();
+      } else {
+        tile.onSealed();
+      }
     }
+  }
 
-    /**
-     * Used to update the vessel seal state and the TE, in the correct order
-     */
-    public static void toggleCrateSeal(World world, BlockPos pos) {
+  @Override
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.MODEL;
+  }
+
+  @Override
+  public Class<? extends TileEntity> getTileEntityClass() {
+    return TileCrate.class;
+  }
+
+  @Override
+  public Size getSize(ItemStack stack) {
+    return stack.getTagCompound() == null ? Size.VERY_LARGE
+        : Size.HUGE; // Causes overburden if sealed
+  }
+
+  @Override
+  public boolean canStack(ItemStack stack) {
+    return stack.getTagCompound() == null;
+  }
+
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState().withProperty(SEALED, meta == 1);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(SEALED) ? 1 : 0;
+  }
+
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return state.getValue(SEALED) ? BOUNDING_BOX_SEALED : BOUNDING_BOX;
+  }
+
+  @Override
+  public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn,
+      BlockPos fromPos) {
+    if (!canStay(world, pos)) {
+      world.destroyBlock(pos, true);
+    }
+  }
+
+  @Override
+  public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    var tile = TileUtils.getTile(world, pos, TileCrate.class);
+    if (tile != null) {
+      tile.onBreakBlock(world, pos, state);
+    }
+    super.breakBlock(world, pos, state);
+  }
+
+  @Override
+  public boolean canPlaceBlockAt(World world, BlockPos pos) {
+    return canStay(world, pos);
+  }
+
+  @Override
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state,
+      EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
+      float hitY, float hitZ) {
+    if (!world.isRemote) {
+      ItemStack heldItem = playerIn.getHeldItem(hand);
+      var tile = TileUtils.getTile(world, pos, TileCrate.class);
+      if (tile != null) {
+        if (heldItem.isEmpty() && playerIn.isSneaking()) {
+          world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
+              0.85F);
+          toggleCrateSeal(world, pos);
+        } else {
+          GuiHandler.openGui(world, pos, playerIn);
+        }
+      }
+    }
+    return true;
+  }
+
+  @Override
+  public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer,
+      ItemStack stack) {
+    // If the barrel was sealed, then copy the contents from the item
+    if (!world.isRemote) {
+      NBTTagCompound nbt = stack.getTagCompound();
+      if (nbt != null) {
         var tile = TileUtils.getTile(world, pos, TileCrate.class);
         if (tile != null) {
-            IBlockState state = world.getBlockState(pos);
-            boolean previousSealed = state.getValue(SEALED);
-            world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
-            if (previousSealed) {
-                tile.onUnseal();
-            } else {
-                tile.onSealed();
-            }
+          world.setBlockState(pos, state.withProperty(SEALED, true));
+          tile.readFromItemTag(nbt);
         }
+      }
     }
+  }
 
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
-    }
+  @Override
+  public BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, SEALED);
+  }
 
-    @Override
-    public Class<? extends TileEntity> getTileEntityClass() {
-        return TileCrate.class;
-    }
+  @Nullable
+  @Override
+  public TileEntity createNewTileEntity(World worldIn, int meta) {
+    return new TileCrate();
+  }
 
-    @Override
-    public Size getSize(ItemStack stack) {
-        return stack.getTagCompound() == null ? Size.VERY_LARGE : Size.HUGE; // Causes overburden if sealed
+  @Override
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
+      IBlockState state, int fortune) {
+    // Only drop the barrel if it's not sealed, since the barrel with contents will be already dropped by the TE
+    if (!state.getValue(SEALED)) {
+      super.getDrops(drops, world, pos, state, fortune);
     }
+  }
 
-    @Override
-    public boolean canStack(ItemStack stack) {
-        return stack.getTagCompound() == null;
-    }
+  @Override
+  public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
+    // Unseal the barrel if an explosion destroys it, so it drops it's contents
+    world.setBlockState(pos, world.getBlockState(pos).withProperty(SEALED, false));
+    super.onBlockExploded(world, pos, explosion);
+  }
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(SEALED, meta == 1);
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(SEALED) ? 1 : 0;
-    }
-
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return state.getValue(SEALED) ? BOUNDING_BOX_SEALED : BOUNDING_BOX;
-    }
-
-    @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!canStay(world, pos)) {
-            world.destroyBlock(pos, true);
-        }
-    }
-
-    @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(world, pos, TileCrate.class);
-        if (tile != null) {
-            tile.onBreakBlock(world, pos, state);
-        }
-        super.breakBlock(world, pos, state);
-    }
-
-    @Override
-    public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        return canStay(world, pos);
-    }
-
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
-                                    float hitY, float hitZ) {
-        if (!world.isRemote) {
-            ItemStack heldItem = playerIn.getHeldItem(hand);
-            var tile = TileUtils.getTile(world, pos, TileCrate.class);
-            if (tile != null) {
-                if (heldItem.isEmpty() && playerIn.isSneaking()) {
-                    world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
-                    toggleCrateSeal(world, pos);
-                } else {
-                    GuiHandler.openGui(world, pos, playerIn);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        // If the barrel was sealed, then copy the contents from the item
-        if (!world.isRemote) {
-            NBTTagCompound nbt = stack.getTagCompound();
-            if (nbt != null) {
-                var tile = TileUtils.getTile(world, pos, TileCrate.class);
-                if (tile != null) {
-                    world.setBlockState(pos, state.withProperty(SEALED, true));
-                    tile.readFromItemTag(nbt);
-                }
-            }
-        }
-    }
-
-    @Override
-    public BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, SEALED);
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileCrate();
-    }
-
-    @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        // Only drop the barrel if it's not sealed, since the barrel with contents will be already dropped by the TE
-        if (!state.getValue(SEALED)) {
-            super.getDrops(drops, world, pos, state, fortune);
-        }
-    }
-
-    @Override
-    public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
-        // Unseal the barrel if an explosion destroys it, so it drops it's contents
-        world.setBlockState(pos, world.getBlockState(pos).withProperty(SEALED, false));
-        super.onBlockExploded(world, pos, explosion);
-    }
-
-    private boolean canStay(IBlockAccess world, BlockPos pos) {
-        return world.getBlockState(pos.down())
-                .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
-    }
+  private boolean canStay(IBlockAccess world, BlockPos pos) {
+    return world.getBlockState(pos.down())
+        .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+  }
 }

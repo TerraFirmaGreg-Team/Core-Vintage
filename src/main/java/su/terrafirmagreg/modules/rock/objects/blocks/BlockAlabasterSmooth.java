@@ -11,24 +11,25 @@ import static su.terrafirmagreg.modules.rock.init.BlocksRock.SMOOTH;
 
 public class BlockAlabasterSmooth extends BlockRockDecorative {
 
-    public BlockAlabasterSmooth() {
-        this(EnumDyeColor.WHITE);
+  public BlockAlabasterSmooth() {
+    this(EnumDyeColor.WHITE);
 
-        getSettings()
-                .registryKey("rock/alabaster/smooth/plain");
+    getSettings()
+        .registryKey("rock/alabaster/smooth/plain");
 
-        for (var color : EnumDyeColor.values()) {
-            BlocksRock.ALABASTER_COLOR_BLOCKS.put(Pair.of(SMOOTH, color), new BlockAlabasterSmooth(color));
-        }
+    for (var color : EnumDyeColor.values()) {
+      BlocksRock.ALABASTER_COLOR_BLOCKS.put(Pair.of(SMOOTH, color),
+          new BlockAlabasterSmooth(color));
     }
+  }
 
-    public BlockAlabasterSmooth(EnumDyeColor color) {
-        super(Settings.of(Material.ROCK, color));
+  public BlockAlabasterSmooth(EnumDyeColor color) {
+    super(Settings.of(Material.ROCK, color));
 
-        getSettings()
-                .registryKey("rock/alabaster/smooth/" + color.getName())
-                .oreDict("alabaster")
-                .oreDict("alabaster", "smooth");
-    }
+    getSettings()
+        .registryKey("rock/alabaster/smooth/" + color.getName())
+        .oreDict("alabaster")
+        .oreDict("alabaster", "smooth");
+  }
 
 }

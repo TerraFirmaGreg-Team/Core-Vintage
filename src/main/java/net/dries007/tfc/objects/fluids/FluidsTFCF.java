@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.data.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public final class FluidsTFCF {
 

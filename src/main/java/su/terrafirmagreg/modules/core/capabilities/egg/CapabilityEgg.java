@@ -10,22 +10,22 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public final class CapabilityEgg {
 
-    public static final ResourceLocation KEY = ModUtils.resource("egg_capability");
+  public static final ResourceLocation KEY = ModUtils.resource("egg_capability");
 
-    @CapabilityInject(ICapabilityEgg.class)
-    public static final Capability<ICapabilityEgg> CAPABILITY = ModUtils.getNull();
+  @CapabilityInject(ICapabilityEgg.class)
+  public static final Capability<ICapabilityEgg> CAPABILITY = ModUtils.getNull();
 
-    public static void register() {
-        CapabilityManager.INSTANCE.register(ICapabilityEgg.class, new StorageEgg(), ProviderEgg::new);
+  public static void register() {
+    CapabilityManager.INSTANCE.register(ICapabilityEgg.class, new StorageEgg(), ProviderEgg::new);
 
-    }
+  }
 
-    public static ICapabilityEgg get(ItemStack itemStack) {
-        return itemStack.getCapability(CAPABILITY, null);
-    }
+  public static ICapabilityEgg get(ItemStack itemStack) {
+    return itemStack.getCapability(CAPABILITY, null);
+  }
 
-    public static boolean has(ItemStack itemStack) {
-        return itemStack.hasCapability(CAPABILITY, null);
-    }
+  public static boolean has(ItemStack itemStack) {
+    return itemStack.hasCapability(CAPABILITY, null);
+  }
 
 }

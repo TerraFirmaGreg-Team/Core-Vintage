@@ -21,41 +21,46 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("unused")
 public class EventHandlerCapabilitiesChunk {
 
-    @SubscribeEvent
-    public void attachChunkCapabilities(AttachCapabilitiesEvent<Chunk> event) {
-        // Per #922, if there's no world or no world type, something is seriously violating our assumptions and we will just fail.
-        //noinspection ConstantConditions
+  @SubscribeEvent
+  public static void onChunkWatchWatch(ChunkWatchEvent.Watch event) {
+    Chunk chunk = event.getChunkInstance();
+    if (chunk != null) {
 
-        World world = event.getObject().getWorld();
+      var data = CapabilityChunkData.get(chunk);
+      if (data != null && data.isInitialized()) {
+        // Update server side climate
+        Climate.update(chunk.getPos(), data.getRegionalTemp(), data.getRainfall());
 
-        if (event.getObject().getWorld() == null) return;
+        // Update client side data
+        NBTTagCompound nbt = (NBTTagCompound) CapabilityChunkData.CAPABILITY.writeNBT(data, null);
+        ModuleCore.getPacketService()
+            .sendTo(new SCPacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(),
+                data.getRainfall()), event.getPlayer());
+      }
+    }
+  }
 
-        chunkData(event, world);
+  @SubscribeEvent
+  public void attachChunkCapabilities(AttachCapabilitiesEvent<Chunk> event) {
+    // Per #922, if there's no world or no world type, something is seriously violating our assumptions and we will just fail.
+    //noinspection ConstantConditions
+
+    World world = event.getObject().getWorld();
+
+    if (event.getObject().getWorld() == null) {
+      return;
     }
 
-    @SubscribeEvent
-    public static void onChunkWatchWatch(ChunkWatchEvent.Watch event) {
-        Chunk chunk = event.getChunkInstance();
-        if (chunk != null) {
+    chunkData(event, world);
+  }
 
-            var data = CapabilityChunkData.get(chunk);
-            if (data != null && data.isInitialized()) {
-                // Update server side climate
-                Climate.update(chunk.getPos(), data.getRegionalTemp(), data.getRainfall());
+  public void chunkData(AttachCapabilitiesEvent<Chunk> event, @NotNull World world) {
 
-                // Update client side data
-                NBTTagCompound nbt = (NBTTagCompound) CapabilityChunkData.CAPABILITY.writeNBT(data, null);
-                ModuleCore.getPacketService()
-                        .sendTo(new SCPacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(), data.getRainfall()), event.getPlayer());
-            }
-        }
+    if (world.getWorldType() != ModuleWorld.WORLD_TYPE_CLASSIC) {
+      return;
     }
 
-    public void chunkData(AttachCapabilitiesEvent<Chunk> event, @NotNull World world) {
-
-        if (world.getWorldType() != ModuleWorld.WORLD_TYPE_CLASSIC) return;
-
-        event.addCapability(CapabilityChunkData.KEY, new ProviderChunkData());
-    }
+    event.addCapability(CapabilityChunkData.KEY, new ProviderChunkData());
+  }
 
 }

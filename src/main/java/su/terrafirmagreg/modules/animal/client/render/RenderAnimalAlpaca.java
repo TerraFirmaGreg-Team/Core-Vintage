@@ -13,11 +13,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalAlpaca extends RenderAnimal<EntityAnimalAlpaca> {
 
-    private static final ResourceLocation ALPACA_OLD = ModUtils.resource("textures/entity/animal/livestock/alpaca_old.png");
-    private static final ResourceLocation ALPACA_YOUNG = ModUtils.resource("textures/entity/animal/livestock/alpaca_young.png");
+  private static final ResourceLocation ALPACA_OLD = ModUtils.resource(
+      "textures/entity/animal/livestock/alpaca_old.png");
+  private static final ResourceLocation ALPACA_YOUNG = ModUtils.resource(
+      "textures/entity/animal/livestock/alpaca_young.png");
 
-    public RenderAnimalAlpaca(RenderManager renderManager) {
-        super(renderManager, new ModelAnimalAlpacaBody(), 0.7F, ALPACA_YOUNG, ALPACA_OLD);
-        this.addLayer(new LayerAlpacaWool(this));
-    }
+  public RenderAnimalAlpaca(RenderManager renderManager) {
+    super(renderManager, new ModelAnimalAlpacaBody(), 0.7F, ALPACA_YOUNG, ALPACA_OLD);
+    this.addLayer(new LayerAlpacaWool(this));
+  }
 }

@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.entity.animal;
 
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.lib.MathConstants;
+import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;

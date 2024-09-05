@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
-import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.config.HealthDisplayFormat;
 import net.dries007.tfc.util.config.InventoryCraftingMode;
@@ -27,7 +26,6 @@ public final class ConfigTFC {
         if (event.getModID().equals(MODID_TFC)) {
             TerraFirmaCraft.getLog().warn("Config changed");
             ConfigManager.sync(MODID_TFC, Config.Type.INSTANCE);
-            GrassColorHandler.resetColors();
         }
     }
 

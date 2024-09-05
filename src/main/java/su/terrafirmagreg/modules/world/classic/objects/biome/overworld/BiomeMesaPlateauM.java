@@ -9,30 +9,30 @@ import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.MESA_PLAT
 
 public class BiomeMesaPlateauM extends BaseBiomeMesa {
 
-    public BiomeMesaPlateauM() {
-        super(false, false, new Settings("Mesa Plateau M")
-                .guiColour(0x470285)
-                .baseHeight(-0.1F)
-                .heightVariation(-1.5F)
-                .baseBiome(MESA_PLATEAU)
-                .spawnBiome()
-                .enableWorldGen());
-    }
+  public BiomeMesaPlateauM() {
+    super(false, false, new Settings("Mesa Plateau M")
+        .guiColour(0x470285)
+        .baseHeight(-0.1F)
+        .heightVariation(-1.5F)
+        .baseBiome(MESA_PLATEAU)
+        .spawnBiome()
+        .enableWorldGen());
+  }
 
-    @Override
-    public int getBiomeWeight() {
-        return 0;
-    }
+  @Override
+  public int getBiomeWeight() {
+    return 0;
+  }
 
-    @Override
-    public BiomeDictionary.Type[] getTypes() {
+  @Override
+  public BiomeDictionary.Type[] getTypes() {
 
-        return new BiomeDictionary.Type[] {
-                BiomeDictionary.Type.MESA,
-                BiomeDictionary.Type.HOT,
-                BiomeDictionary.Type.DRY,
-                BiomeDictionary.Type.SPARSE,
-                BiomeDictionary.Type.MOUNTAIN
-        };
-    }
+    return new BiomeDictionary.Type[]{
+        BiomeDictionary.Type.MESA,
+        BiomeDictionary.Type.HOT,
+        BiomeDictionary.Type.DRY,
+        BiomeDictionary.Type.SPARSE,
+        BiomeDictionary.Type.MOUNTAIN
+    };
+  }
 }

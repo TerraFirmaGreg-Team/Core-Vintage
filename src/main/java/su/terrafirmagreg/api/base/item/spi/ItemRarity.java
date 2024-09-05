@@ -8,15 +8,15 @@ import lombok.Getter;
 
 @Getter
 public enum ItemRarity {
-    COMMON(EnumRarity.COMMON),
-    UNCOMMON(EnumRarity.UNCOMMON),
-    RARE(EnumRarity.RARE),
-    EPIC(EnumRarity.EPIC);
+  COMMON(EnumRarity.COMMON),
+  UNCOMMON(EnumRarity.UNCOMMON),
+  RARE(EnumRarity.RARE),
+  EPIC(EnumRarity.EPIC);
 
-    private final IRarity rarity;
+  private final IRarity rarity;
 
-    ItemRarity(IRarity rarity) {
-        this.rarity = rarity;
-    }
+  ItemRarity(IRarity rarity) {
+    this.rarity = rarity;
+  }
 
 }

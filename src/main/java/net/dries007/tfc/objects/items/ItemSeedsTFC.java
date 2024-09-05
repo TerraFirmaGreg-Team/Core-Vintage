@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilFarmland;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.block.BlockLiquid;
@@ -30,7 +31,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 
 import org.jetbrains.annotations.NotNull;
@@ -61,13 +61,14 @@ public class ItemSeedsTFC extends Item implements IPlantable {
     }
 
     @NotNull
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
+                                      float hitZ) {
         BlockCropTFC cropBlock = BlockCropTFC.get(this.crop);
         ItemStack itemstack = player.getHeldItem(hand);
         IBlockState state = worldIn.getBlockState(pos);
         if (this.crop != Crop.RICE && facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, itemstack) && state.getBlock()
                 .canSustainPlant(state, worldIn, pos, EnumFacing.UP, this) && worldIn.isAirBlock(pos.up()) &&
-                state.getBlock() instanceof BlockFarmlandTFC) {
+                state.getBlock() instanceof BlockSoilFarmland) {
             worldIn.setBlockState(pos.up(), BlockCropTFC.get(this.crop).getDefaultState());
 
             itemstack.shrink(1);
@@ -86,7 +87,7 @@ public class ItemSeedsTFC extends Item implements IPlantable {
 
                     BlockPos blockpos1 = blockpos.up();
                     IBlockState iblockstate = worldIn.getBlockState(blockpos);
-                    if (iblockstate.getMaterial() == Material.WATER && (Integer) iblockstate.getValue(BlockLiquid.LEVEL) == 0 &&
+                    if (iblockstate.getMaterial() == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0 &&
                             worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenClassic.FRESH_WATER) {
                         BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
                         worldIn.setBlockState(blockpos1, BlockCropTFC.get(this.crop).getDefaultState());
@@ -132,7 +133,7 @@ public class ItemSeedsTFC extends Item implements IPlantable {
 
                     BlockPos blockpos1 = blockpos.up();
                     IBlockState iblockstate = worldIn.getBlockState(blockpos);
-                    if (iblockstate.getMaterial() == Material.WATER && (Integer) iblockstate.getValue(BlockLiquid.LEVEL) == 0 &&
+                    if (iblockstate.getMaterial() == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0 &&
                             worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenClassic.FRESH_WATER) {
                         BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
                         worldIn.setBlockState(blockpos1, BlockCropTFC.get(this.crop).getDefaultState());

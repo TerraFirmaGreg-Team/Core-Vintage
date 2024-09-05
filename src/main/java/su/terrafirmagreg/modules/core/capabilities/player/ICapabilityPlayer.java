@@ -24,71 +24,72 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface ICapabilityPlayer extends ICapabilitySerializable<NBTTagCompound> {
 
-    @Nullable
-    <S extends Skill> S getSkill(SkillType<S> skillType);
+  @Nullable
+  <S extends Skill> S getSkill(SkillType<S> skillType);
 
-    @NotNull
-    EntityPlayer getPlayer();
+  @NotNull
+  EntityPlayer getPlayer();
 
-    /*
-     * Gets the tool that was used in the last {@link net.minecraftforge.event.world.BlockEvent.BreakEvent} event
-     */
-    @NotNull
-    ItemStack getHarvestingTool();
+  /*
+   * Gets the tool that was used in the last {@link net.minecraftforge.event.world.BlockEvent.BreakEvent} event
+   */
+  @NotNull
+  ItemStack getHarvestingTool();
 
-    void setHarvestingTool(@NotNull ItemStack stack);
+  void setHarvestingTool(@NotNull ItemStack stack);
 
-    /**
-     * Gets the current chiseling mode.
-     *
-     * @return enum value of the chiseling mode
-     */
-    @NotNull
-    ChiselRecipe.Mode getChiselMode();
+  /**
+   * Gets the current chiseling mode.
+   *
+   * @return enum value of the chiseling mode
+   */
+  @NotNull
+  ChiselRecipe.Mode getChiselMode();
 
-    /**
-     * Sets the current chiseling mode.
-     *
-     * @param chiselMode enum value for the new chiseling mode
-     */
-    void setChiselMode(ChiselRecipe.Mode chiselMode);
+  /**
+   * Sets the current chiseling mode.
+   *
+   * @param chiselMode enum value for the new chiseling mode
+   */
+  void setChiselMode(ChiselRecipe.Mode chiselMode);
 
-    /**
-     * Makes the player intoxicated
-     *
-     * @param ticks Ticks for the player to be intoxicated
-     */
-    void addIntoxicatedTime(long ticks);
+  /**
+   * Makes the player intoxicated
+   *
+   * @param ticks Ticks for the player to be intoxicated
+   */
+  void addIntoxicatedTime(long ticks);
 
-    /**
-     * Gets the number of ticks the player is intoxicated for
-     */
-    long getIntoxicatedTime();
+  /**
+   * Gets the number of ticks the player is intoxicated for
+   */
+  long getIntoxicatedTime();
 
-    /**
-     * Sets the time the player last hit a nut tree to current time
-     */
-    void setNuttedTime();
+  /**
+   * Sets the time the player last hit a nut tree to current time
+   */
+  void setNuttedTime();
 
-    /**
-     * Retrieves the time the player last hit a nut tree
-     */
-    long getNuttedTime();
+  /**
+   * Retrieves the time the player last hit a nut tree
+   */
+  long getNuttedTime();
 
-    /**
-     * @param pos The block position of the last hammering
-     */
-    void setNutPosition(BlockPos pos);
+  /**
+   * @param pos The block position of the last hammering
+   */
+  void setNutPosition(BlockPos pos);
 
-    /**
-     * @return Distance in blocks of how far the last hammering was.
-     */
-    int getNutDistance(BlockPos pos);
+  /**
+   * @return Distance in blocks of how far the last hammering was.
+   */
+  int getNutDistance(BlockPos pos);
 
-    default void updateAndSync() {
-        EntityPlayer player = getPlayer();
-        if (player instanceof EntityPlayerMP entityPlayerMP) {
-            TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(serializeNBT()), entityPlayerMP);
-        }
+  default void updateAndSync() {
+    EntityPlayer player = getPlayer();
+    if (player instanceof EntityPlayerMP entityPlayerMP) {
+      TerraFirmaCraft.getNetwork()
+          .sendTo(new PacketPlayerDataUpdate(serializeNBT()), entityPlayerMP);
     }
+  }
 }

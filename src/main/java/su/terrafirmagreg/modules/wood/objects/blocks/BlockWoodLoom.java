@@ -43,108 +43,115 @@ import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 @SuppressWarnings("deprecation")
 public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, IProviderTile {
 
-    protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D, 0.5625D, 1.0D, 0.9375D);
-    protected static final AxisAlignedBB LOOM_WEST_AABB = new AxisAlignedBB(0.4375D, 0.0D, 0.0625D, 0.875D, 1.0D, 0.9375D);
-    protected static final AxisAlignedBB LOOM_SOUTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.125D, 0.9375D, 1.0D, 0.5625D);
-    protected static final AxisAlignedBB LOOM_NORTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.4375D, 0.9375D, 1.0D, 0.875D);
+  protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D,
+      0.5625D, 1.0D, 0.9375D);
+  protected static final AxisAlignedBB LOOM_WEST_AABB = new AxisAlignedBB(0.4375D, 0.0D, 0.0625D,
+      0.875D, 1.0D, 0.9375D);
+  protected static final AxisAlignedBB LOOM_SOUTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.125D,
+      0.9375D, 1.0D, 0.5625D);
+  protected static final AxisAlignedBB LOOM_NORTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.4375D,
+      0.9375D, 1.0D, 0.875D);
 
-    private final WoodBlockVariant variant;
-    private final WoodType type;
+  private final WoodBlockVariant variant;
+  private final WoodType type;
 
-    public BlockWoodLoom(WoodBlockVariant variant, WoodType type) {
-        super(Settings.of(Material.WOOD, MapColor.AIR));
+  public BlockWoodLoom(WoodBlockVariant variant, WoodType type) {
+    super(Settings.of(Material.WOOD, MapColor.AIR));
 
-        this.variant = variant;
-        this.type = type;
+    this.variant = variant;
+    this.type = type;
 
-        getSettings()
-                .sound(SoundType.WOOD)
-                .nonOpaque()
-                .nonFullCube()
-                .hardness(0.5f)
-                .resistance(3f)
-                .weight(Weight.VERY_HEAVY)
-                .size(Size.LARGE)
-                .oreDict(variant)
-                .oreDict(variant, type);
+    getSettings()
+        .sound(SoundType.WOOD)
+        .nonOpaque()
+        .nonFullCube()
+        .hardness(0.5f)
+        .resistance(3f)
+        .weight(Weight.VERY_HEAVY)
+        .size(Size.LARGE)
+        .oreDict(variant)
+        .oreDict(variant, type);
 
-        setHarvestLevel(ToolClasses.AXE, 0);
-        setDefaultState(getBlockState().getBaseState()
-                .withProperty(HORIZONTAL, EnumFacing.NORTH));
+    setHarvestLevel(ToolClasses.AXE, 0);
+    setDefaultState(getBlockState().getBaseState()
+        .withProperty(HORIZONTAL, EnumFacing.NORTH));
 
-        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
+    BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
+  }
+
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState()
+        .withProperty(BlockHorizontal.FACING, EnumFacing.byHorizontalIndex(meta));
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(BlockHorizontal.FACING).getHorizontalIndex();
+  }
+
+  @Override
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return switch (state.getValue(BlockHorizontal.FACING)) {
+      case SOUTH -> LOOM_SOUTH_AABB;
+      case WEST -> LOOM_WEST_AABB;
+      case EAST -> LOOM_EAST_AABB;
+      default -> LOOM_NORTH_AABB;
+    };
+  }
+
+  @Override
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
+      EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+      float hitX, float hitY, float hitZ) {
+    var tile = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
+    if (tile != null) {
+      return tile.onRightClick(playerIn);
     }
+    return true;
+  }
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.byHorizontalIndex(meta));
+  @Override
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
+      float hitX, float hitY, float hitZ, int meta,
+      EntityLivingBase placer) {
+    if (facing.getAxis() == EnumFacing.Axis.Y) {
+      facing = placer.getHorizontalFacing().getOpposite();
     }
+    return getDefaultState().withProperty(HORIZONTAL, facing);
+  }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(BlockHorizontal.FACING).getHorizontalIndex();
-    }
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, HORIZONTAL);
+  }
 
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return switch (state.getValue(BlockHorizontal.FACING)) {
-            case SOUTH -> LOOM_SOUTH_AABB;
-            case WEST -> LOOM_WEST_AABB;
-            case EAST -> LOOM_EAST_AABB;
-            default -> LOOM_NORTH_AABB;
-        };
-    }
+  @Override
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.MODEL;
+  }
 
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                    float hitX, float hitY, float hitZ) {
-        var tile = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
-        if (tile != null) {
-            return tile.onRightClick(playerIn);
-        }
-        return true;
+  @Override
+  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    var tile = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
+    if (tile != null) {
+      tile.onBreakBlock(worldIn, pos, state);
     }
+    super.breakBlock(worldIn, pos, state);
+  }
 
-    @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-                                            EntityLivingBase placer) {
-        if (facing.getAxis() == EnumFacing.Axis.Y) {
-            facing = placer.getHorizontalFacing().getOpposite();
-        }
-        return getDefaultState().withProperty(HORIZONTAL, facing);
-    }
+  @Override
+  public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
+    return new TileWoodLoom();
+  }
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, HORIZONTAL);
-    }
+  @Override
+  public Class<? extends TileEntity> getTileEntityClass() {
+    return TileWoodLoom.class;
+  }
 
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
-    }
-
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
-        if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
-        }
-        super.breakBlock(worldIn, pos, state);
-    }
-
-    @Override
-    public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileWoodLoom();
-    }
-
-    @Override
-    public Class<? extends TileEntity> getTileEntityClass() {
-        return TileWoodLoom.class;
-    }
-
-    @Override
-    public TileEntitySpecialRenderer<?> getTileRenderer() {
-        return new TESRWoodLoom();
-    }
+  @Override
+  public TileEntitySpecialRenderer<?> getTileRenderer() {
+    return new TESRWoodLoom();
+  }
 }

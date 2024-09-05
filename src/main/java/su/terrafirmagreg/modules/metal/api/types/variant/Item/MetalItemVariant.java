@@ -18,38 +18,45 @@ import java.util.function.BiFunction;
 @Getter
 public class MetalItemVariant extends Variant<MetalItemVariant> {
 
-    @Getter
-    private static final Set<MetalItemVariant> variants = new ObjectLinkedOpenHashSet<>();
+  @Getter
+  private static final Set<MetalItemVariant> variants = new ObjectLinkedOpenHashSet<>();
 
-    private BiFunction<MetalItemVariant, MetalType, ? extends Item> factory;
+  private BiFunction<MetalItemVariant, MetalType, ? extends Item> factory;
 
-    private MetalItemVariant(String name) {
-        super(name);
+  private MetalItemVariant(String name) {
+    super(name);
 
-        if (!variants.add(this)) throw new RuntimeException(String.format("MetalItemVariant: [%s] already exists!", name));
+    if (!variants.add(this)) {
+      throw new RuntimeException(String.format("MetalItemVariant: [%s] already exists!", name));
     }
+  }
 
-    public Item get(MetalType type) {
-        var item = ItemsMetal.METAL_ITEMS.get(Pair.of(this, type));
-        if (item != null) return item;
-        throw new RuntimeException(String.format("Item metal is null: %s, %s", this, type));
+  public static MetalItemVariant builder(String name) {
+
+    return new MetalItemVariant(name);
+  }
+
+  public Item get(MetalType type) {
+    var item = ItemsMetal.METAL_ITEMS.get(Pair.of(this, type));
+    if (item != null) {
+      return item;
     }
+    throw new RuntimeException(String.format("Item metal is null: %s, %s", this, type));
+  }
 
-    public static MetalItemVariant builder(String name) {
+  public MetalItemVariant setFactory(
+      BiFunction<MetalItemVariant, MetalType, ? extends Item> factory) {
+    this.factory = factory;
+    return this;
+  }
 
-        return new MetalItemVariant(name);
+  public MetalItemVariant build() {
+    for (var type : MetalType.getTypes()) {
+      if (ItemsMetal.METAL_ITEMS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
+        throw new RuntimeException(
+            String.format("Duplicate registry detected: %s, %s", this, type));
+      }
     }
-
-    public MetalItemVariant setFactory(BiFunction<MetalItemVariant, MetalType, ? extends Item> factory) {
-        this.factory = factory;
-        return this;
-    }
-
-    public MetalItemVariant build() {
-        for (var type : MetalType.getTypes()) {
-            if (ItemsMetal.METAL_ITEMS.put(Pair.of(this, type), factory.apply(this, type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-        }
-        return this;
-    }
+    return this;
+  }
 }

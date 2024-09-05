@@ -10,12 +10,15 @@ import org.jetbrains.annotations.Nullable;
 
 public class StorageSize implements IStorage<ICapabilitySize> {
 
-    @Nullable
-    @Override
-    public NBTBase writeNBT(Capability<ICapabilitySize> capability, ICapabilitySize instance, EnumFacing side) {
-        return null;
-    }
+  @Nullable
+  @Override
+  public NBTBase writeNBT(Capability<ICapabilitySize> capability, ICapabilitySize instance,
+      EnumFacing side) {
+    return null;
+  }
 
-    @Override
-    public void readNBT(Capability<ICapabilitySize> capability, ICapabilitySize instance, EnumFacing side, NBTBase nbt) {}
+  @Override
+  public void readNBT(Capability<ICapabilitySize> capability, ICapabilitySize instance,
+      EnumFacing side, NBTBase nbt) {
+  }
 }

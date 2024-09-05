@@ -18,30 +18,32 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalBlackBear extends RenderLiving<EntityAnimalBlackBear> {
 
-    private static final ResourceLocation BLACKBEAR_TEXTURE = ModUtils.resource("textures/entity/animal/predators/blackbear.png");
+  private static final ResourceLocation BLACKBEAR_TEXTURE = ModUtils.resource(
+      "textures/entity/animal/predators/blackbear.png");
 
-    public RenderAnimalBlackBear(RenderManager renderManager) {
-        super(renderManager, new ModelAnimalBlackBear(), 0.7F);
-    }
+  public RenderAnimalBlackBear(RenderManager renderManager) {
+    super(renderManager, new ModelAnimalBlackBear(), 0.7F);
+  }
 
-    @Override
-    public void doRender(@NotNull EntityAnimalBlackBear blackbear, double par2, double par4, double par6, float par8, float par9) {
-        this.shadowSize = (float) (0.35f + (blackbear.getPercentToAdulthood() * 0.35f));
-        super.doRender(blackbear, par2, par4, par6, par8, par9);
-    }
+  @Override
+  public void doRender(@NotNull EntityAnimalBlackBear blackbear, double par2, double par4,
+      double par6, float par8, float par9) {
+    this.shadowSize = (float) (0.35f + (blackbear.getPercentToAdulthood() * 0.35f));
+    super.doRender(blackbear, par2, par4, par6, par8, par9);
+  }
 
-    @Override
-    protected float handleRotationFloat(EntityAnimalBlackBear par1EntityLiving, float par2) {
-        return 1.0f;
-    }
+  @Override
+  protected float handleRotationFloat(EntityAnimalBlackBear par1EntityLiving, float par2) {
+    return 1.0f;
+  }
 
-    @Override
-    protected void preRenderCallback(EntityAnimalBlackBear blackbearTFC, float par2) {
-        GlStateManager.scale(1.4f, 1.4f, 1.4f);
-    }
+  @Override
+  protected void preRenderCallback(EntityAnimalBlackBear blackbearTFC, float par2) {
+    GlStateManager.scale(1.4f, 1.4f, 1.4f);
+  }
 
-    @Override
-    protected ResourceLocation getEntityTexture(EntityAnimalBlackBear entity) {
-        return BLACKBEAR_TEXTURE;
-    }
+  @Override
+  protected ResourceLocation getEntityTexture(EntityAnimalBlackBear entity) {
+    return BLACKBEAR_TEXTURE;
+  }
 }

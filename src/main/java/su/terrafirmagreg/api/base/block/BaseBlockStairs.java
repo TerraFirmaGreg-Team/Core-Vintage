@@ -15,29 +15,29 @@ import lombok.Getter;
 @Getter
 public abstract class BaseBlockStairs extends BlockStairs implements IBlockSettings {
 
-    protected final Settings settings;
+  protected final Settings settings;
 
-    // the super constructor is protected...
-    protected BaseBlockStairs(Block model) {
-        super(model.getDefaultState());
+  // the super constructor is protected...
+  protected BaseBlockStairs(Block model) {
+    super(model.getDefaultState());
 
-        this.settings = Settings.copy(model);
+    this.settings = Settings.copy(model);
 
-    }
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return this.settings.getRenderLayer();
-    }
+  @Override
+  @SideOnly(Side.CLIENT)
+  public BlockRenderLayer getRenderLayer() {
+    return this.settings.getRenderLayer();
+  }
 
-    @Override
-    public String getHarvestTool(IBlockState state) {
-        return this.settings.getHarvestTool();
-    }
+  @Override
+  public String getHarvestTool(IBlockState state) {
+    return this.settings.getHarvestTool();
+  }
 
-    @Override
-    public int getHarvestLevel(IBlockState state) {
-        return this.settings.getHarvestLevel();
-    }
+  @Override
+  public int getHarvestLevel(IBlockState state) {
+    return this.settings.getHarvestLevel();
+  }
 }

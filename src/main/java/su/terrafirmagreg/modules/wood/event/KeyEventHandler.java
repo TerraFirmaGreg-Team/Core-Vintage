@@ -17,41 +17,42 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class KeyEventHandler {
 
-    @SubscribeEvent
-    public void on(TickEvent.ClientTickEvent event) {
-        if (event.phase == TickEvent.Phase.END) {
-            if (Minecraft.getMinecraft().world != null) {
-                if (KeybindingsWood.ACTION_CART.isPressed()) {
-                    ModuleWood.getPacketService().sendToServer(new CSPacketActionKey());
-                }
-                if (GameUtils.getGameSettings().keyBindSprint.isPressed()) {
-                    ModuleWood.getPacketService().sendToServer(new CSPacketToggleSlow());
-                }
-            }
+  @SubscribeEvent
+  public void on(TickEvent.ClientTickEvent event) {
+    if (event.phase == TickEvent.Phase.END) {
+      if (Minecraft.getMinecraft().world != null) {
+        if (KeybindingsWood.ACTION_CART.isPressed()) {
+          ModuleWood.getPacketService().sendToServer(new CSPacketActionKey());
         }
-    }
-
-    //	@SubscribeEvent
-    //	public static void on(InputEvent event) {
-    //		if (KeybindingsWood.ACTION_CART.isPressed()) {
-    //			ModuleWood.PACKET_SERVICE.sendToServer(new CSPacketActionKey());
-    //			ModuleWood.LOGGER.info("key pressed");
-    //		}
-    //		if (GameUtils.getGameSettings().keyBindSprint.isPressed()) {
-    //			ModuleWood.PACKET_SERVICE.sendToServer(new CSPacketToggleSlow());
-    //			ModuleWood.LOGGER.info("key not pressed");
-    //		}
-    //	}
-
-    @SubscribeEvent
-    public void on(GuiOpenEvent event) {
-        if (event.getGui() instanceof GuiInventory) {
-            EntityPlayerSP player = Minecraft.getMinecraft().player;
-            if (player.getRidingEntity() instanceof EntityWoodSupplyCart entityWoodSupplyCart) {
-                event.setCanceled(true);
-                player.world.sendPacketToServer(
-                        ModuleWood.getPacketService().getPacketFrom(new CSPacketOpenCartGui(0, entityWoodSupplyCart.getEntityId())));
-            }
+        if (GameUtils.getGameSettings().keyBindSprint.isPressed()) {
+          ModuleWood.getPacketService().sendToServer(new CSPacketToggleSlow());
         }
+      }
     }
+  }
+
+  //	@SubscribeEvent
+  //	public static void on(InputEvent event) {
+  //		if (KeybindingsWood.ACTION_CART.isPressed()) {
+  //			ModuleWood.PACKET_SERVICE.sendToServer(new CSPacketActionKey());
+  //			ModuleWood.LOGGER.info("key pressed");
+  //		}
+  //		if (GameUtils.getGameSettings().keyBindSprint.isPressed()) {
+  //			ModuleWood.PACKET_SERVICE.sendToServer(new CSPacketToggleSlow());
+  //			ModuleWood.LOGGER.info("key not pressed");
+  //		}
+  //	}
+
+  @SubscribeEvent
+  public void on(GuiOpenEvent event) {
+    if (event.getGui() instanceof GuiInventory) {
+      EntityPlayerSP player = Minecraft.getMinecraft().player;
+      if (player.getRidingEntity() instanceof EntityWoodSupplyCart entityWoodSupplyCart) {
+        event.setCanceled(true);
+        player.world.sendPacketToServer(
+            ModuleWood.getPacketService()
+                .getPacketFrom(new CSPacketOpenCartGui(0, entityWoodSupplyCart.getEntityId())));
+      }
+    }
+  }
 }

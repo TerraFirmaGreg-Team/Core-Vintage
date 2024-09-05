@@ -15,36 +15,37 @@ import java.util.Map;
 @IFMLLoadingPlugin.SortingIndex(1001)
 public class EarlyMixinLoader implements IEarlyMixinLoader, IFMLLoadingPlugin {
 
-    @Override
-    public String[] getASMTransformerClass() {
-        return null;
-    }
+  @Override
+  public String[] getASMTransformerClass() {
+    return null;
+  }
 
-    @Override
-    public String getModContainerClass() {
-        return null;
-    }
+  @Override
+  public String getModContainerClass() {
+    return null;
+  }
 
-    @Nullable
-    @Override
-    public String getSetupClass() {
-        return null;
-    }
+  @Nullable
+  @Override
+  public String getSetupClass() {
+    return null;
+  }
 
-    @Override
-    public void injectData(Map<String, Object> data) {}
+  @Override
+  public void injectData(Map<String, Object> data) {
+  }
 
-    @Override
-    public String getAccessTransformerClass() {
-        return null;
-    }
+  @Override
+  public String getAccessTransformerClass() {
+    return null;
+  }
 
-    @Override
-    public List<String> getMixinConfigs() {
-        List<String> configs = new ArrayList<>();
+  @Override
+  public List<String> getMixinConfigs() {
+    List<String> configs = new ArrayList<>();
 
-        configs.add("mixins.tfg.json");
+    configs.add("mixins.tfg.json");
 
-        return configs;
-    }
+    return configs;
+  }
 }

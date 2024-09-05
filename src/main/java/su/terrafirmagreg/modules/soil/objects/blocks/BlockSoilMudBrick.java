@@ -15,16 +15,16 @@ import java.util.Random;
 
 public class BlockSoilMudBrick extends BlockSoilMud {
 
-    public BlockSoilMudBrick(SoilBlockVariant variant, SoilType type) {
-        super(variant, type);
-        getSettings()
-                .sound(SoundType.STONE);
+  public BlockSoilMudBrick(SoilBlockVariant variant, SoilType type) {
+    super(variant, type);
+    getSettings()
+        .sound(SoundType.STONE);
 
-        setHarvestLevel(ToolClasses.PICKAXE, 0);
-    }
+    setHarvestLevel(ToolClasses.PICKAXE, 0);
+  }
 
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ItemsSoil.MUD_BRICK.get(getType());
-    }
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return ItemsSoil.MUD_BRICK.get(getType());
+  }
 }

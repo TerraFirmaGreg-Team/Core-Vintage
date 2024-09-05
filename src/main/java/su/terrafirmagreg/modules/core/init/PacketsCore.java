@@ -10,30 +10,30 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public final class PacketsCore {
 
-    public static void onRegister(IPacketRegistry registry) {
+  public static void onRegister(IPacketRegistry registry) {
 
-        registry.register(
-                CSPacketGuiButton.class,
-                CSPacketGuiButton.class,
-                Side.SERVER
-        );
+    registry.register(
+        CSPacketGuiButton.class,
+        CSPacketGuiButton.class,
+        Side.SERVER
+    );
 
-        registry.register(
-                SCPacketSimpleMessage.class,
-                SCPacketSimpleMessage.class,
-                Side.CLIENT
-        );
+    registry.register(
+        SCPacketSimpleMessage.class,
+        SCPacketSimpleMessage.class,
+        Side.CLIENT
+    );
 
-        registry.register(
-                SCPacketTemperature.class,
-                SCPacketTemperature.class,
-                Side.CLIENT
-        );
+    registry.register(
+        SCPacketTemperature.class,
+        SCPacketTemperature.class,
+        Side.CLIENT
+    );
 
-        registry.register(
-                SCPacketChunkData.class,
-                SCPacketChunkData.class,
-                Side.CLIENT
-        );
-    }
+    registry.register(
+        SCPacketChunkData.class,
+        SCPacketChunkData.class,
+        Side.CLIENT
+    );
+  }
 }

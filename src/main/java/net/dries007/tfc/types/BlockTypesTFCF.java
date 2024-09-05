@@ -83,7 +83,7 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
     }
 
     public enum RockTFCF {
-        MOSSY_RAW(Material.ROCK, false, Specification.COLLAPSABLE),
+        MOSSY_RAW(Material.ROCK, false, Specification.COLLAPSABLE_ROCK),
         MUD_BRICKS(Material.ROCK, false, null),
         MUD(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
         BOG_IRON(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
@@ -226,16 +226,11 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
 
         public static Rock.Type getNonGrassVersionTFCStatic(RockTFCF rock) {
             if (!rock.isGrass) return null;
-            switch (rock) {
-                case SPARSE_CLAY_GRASS:
-                case DRY_CLAY_GRASS:
-                case CLAY_PODZOL:
-                    return Rock.Type.CLAY;
-                case PODZOL:
-                case SPARSE_GRASS:
-                    return Rock.Type.DIRT;
-            }
-            throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
+            return switch (rock) {
+                case SPARSE_CLAY_GRASS, DRY_CLAY_GRASS, CLAY_PODZOL -> Rock.Type.CLAY;
+                case PODZOL, SPARSE_GRASS -> Rock.Type.DIRT;
+                default -> throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
+            };
         }
 
         public static boolean isDryGrass(RockTFCF grass) {

@@ -16,32 +16,35 @@ import io.netty.buffer.ByteBuf;
 
 public class CSPacketToggleSlow implements IMessage, IMessageHandler<CSPacketToggleSlow, IMessage> {
 
-    public CSPacketToggleSlow() {}
+  public CSPacketToggleSlow() {
+  }
 
-    @Override
-    public void fromBytes(ByteBuf buf) {}
+  @Override
+  public void fromBytes(ByteBuf buf) {
+  }
 
-    @Override
-    public void toBytes(ByteBuf buf) {}
+  @Override
+  public void toBytes(ByteBuf buf) {
+  }
 
-    @Override
-    public IMessage onMessage(CSPacketToggleSlow message, MessageContext ctx) {
-        EntityPlayerMP player = ctx.getServerHandler().player;
-        if (player.isRiding()) {
-            Entity ridden = player.getRidingEntity();
-            if (ridden instanceof EntityLivingBase entityLivingBase && CapabilityPull.has(ridden)) {
-                if (CapabilityPull.get(ridden).getDrawn() != null) {
-                    if (entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-                            .hasModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER)) {
-                        entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-                                .removeModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
-                    } else {
-                        entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-                                .applyModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
-                    }
-                }
-            }
+  @Override
+  public IMessage onMessage(CSPacketToggleSlow message, MessageContext ctx) {
+    EntityPlayerMP player = ctx.getServerHandler().player;
+    if (player.isRiding()) {
+      Entity ridden = player.getRidingEntity();
+      if (ridden instanceof EntityLivingBase entityLivingBase && CapabilityPull.has(ridden)) {
+        if (CapabilityPull.get(ridden).getDrawn() != null) {
+          if (entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+              .hasModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER)) {
+            entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+                .removeModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
+          } else {
+            entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+                .applyModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
+          }
         }
-        return null;
+      }
     }
+    return null;
+  }
 }

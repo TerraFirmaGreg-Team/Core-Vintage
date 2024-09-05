@@ -4,8 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class PlantCategory implements Comparable<PlantCategory> {
 
-    @Override
-    public int compareTo(@NotNull PlantCategory category) {
-        return 0;
-    }
+  @Override
+  public int compareTo(@NotNull PlantCategory category) {
+    return 0;
+  }
 }

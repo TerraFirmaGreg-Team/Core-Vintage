@@ -10,8 +10,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderAnimalHorse extends RenderHorse {
 
-    public RenderAnimalHorse(RenderManager renderManager) {
-        super(renderManager);
-        this.mainModel = new ModelAnimalHorse();
-    }
+  public RenderAnimalHorse(RenderManager renderManager) {
+    super(renderManager);
+    this.mainModel = new ModelAnimalHorse();
+  }
 }

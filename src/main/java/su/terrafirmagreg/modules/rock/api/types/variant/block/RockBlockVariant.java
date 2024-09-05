@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.rock.api.types.variant.block;
 
-import su.terrafirmagreg.data.lib.types.variant.Variant;
 import su.terrafirmagreg.data.lib.Pair;
+import su.terrafirmagreg.data.lib.types.variant.Variant;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
@@ -24,77 +24,91 @@ import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManage
 @Getter
 public class RockBlockVariant extends Variant<RockBlockVariant> {
 
-    @Getter
-    private static final Set<RockBlockVariant> blockVariants = new ObjectOpenHashSet<>();
-    private static final AtomicInteger idCounter = new AtomicInteger(16);
+  @Getter
+  private static final Set<RockBlockVariant> blockVariants = new ObjectOpenHashSet<>();
+  private static final AtomicInteger idCounter = new AtomicInteger(16);
 
-    private float baseHardness;
-    private Specification specification;
-    private BiFunction<RockBlockVariant, RockType, ? extends Block> factory;
-    private boolean hasStoneType;
+  private float baseHardness;
+  private Specification specification;
+  private BiFunction<RockBlockVariant, RockType, ? extends Block> factory;
+  private boolean hasStoneType;
 
-    private RockBlockVariant(String name) {
-        super(name);
+  private RockBlockVariant(String name) {
+    super(name);
 
-        if (!blockVariants.add(this)) throw new RuntimeException(String.format("RockBlockVariant: [%s] already exists!", name));
+    if (!blockVariants.add(this)) {
+      throw new RuntimeException(String.format("RockBlockVariant: [%s] already exists!", name));
     }
+  }
 
-    public static RockBlockVariant builder(String name) {
+  public static RockBlockVariant builder(String name) {
 
-        return new RockBlockVariant(name);
+    return new RockBlockVariant(name);
+  }
+
+  public Block get(RockType type) {
+    var block = BlocksRock.ROCK_BLOCKS.get(Pair.of(this, type));
+    if (block != null) {
+      return block;
     }
+    throw new RuntimeException(String.format("Block rock is null: %s, %s", this, type));
+  }
 
-    public Block get(RockType type) {
-        var block = BlocksRock.ROCK_BLOCKS.get(Pair.of(this, type));
-        if (block != null) return block;
-        throw new RuntimeException(String.format("Block rock is null: %s, %s", this, type));
-    }
+  public RockBlockVariant baseHardness(float baseHardness) {
+    this.baseHardness = baseHardness;
+    return this;
+  }
 
-    public RockBlockVariant setBaseHardness(float baseHardness) {
-        this.baseHardness = baseHardness;
-        return this;
-    }
+  public RockBlockVariant factory(BiFunction<RockBlockVariant, RockType, ? extends Block> factory) {
+    this.factory = factory;
+    return this;
+  }
 
-    public RockBlockVariant setFactory(BiFunction<RockBlockVariant, RockType, ? extends Block> factory) {
-        this.factory = factory;
-        return this;
-    }
+  public RockBlockVariant fallingSpecification(Specification specification) {
+    this.specification = specification;
+    return this;
+  }
 
-    public RockBlockVariant setFallingSpecification(Specification specification) {
-        this.specification = specification;
-        return this;
-    }
+  public RockBlockVariant isStoneType() {
+    this.hasStoneType = true;
+    return this;
+  }
 
-    public RockBlockVariant setStoneType() {
-        this.hasStoneType = true;
-        return this;
-    }
+  public RockBlockVariant build() {
+    RockType.getTypes().forEach(type -> {
+      if (BlocksRock.ROCK_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
+        throw new RuntimeException(
+            String.format("Duplicate registry detected: %s, %s", this, type));
+      }
+      if (hasStoneType) {
+        createStoneType(idCounter.getAndIncrement(), type);
+      }
+    });
+    return this;
+  }
 
-    public RockBlockVariant build() {
-        RockType.getTypes().forEach(type -> {
-            if (BlocksRock.ROCK_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
-                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-            }
-            if (hasStoneType) {
-                createStoneType(idCounter.getAndIncrement(), type);
-            }
-        });
-        return this;
-    }
+  public boolean canFall() {
+    return specification != null;
+  }
 
-    public boolean canFall() {
-        return specification != null;
-    }
+  private void createStoneType(int id, RockType type) {
+    new StoneType(id, type + "_" + this.getName(), SoundType.STONE,
+        type.getOrePrefix(), type.getMaterial(),
+        () -> this.get(type).getDefaultState(),
+        state -> state.getBlock() == this.get(type), false
+    );
+  }
 
-    private void createStoneType(int id, RockType type) {
-        new StoneType(id, type + "_" + this.getName(), SoundType.STONE,
-                type.getOrePrefix(), type.getMaterial(),
-                () -> this.get(type).getDefaultState(),
-                state -> state.getBlock() == this.get(type), false
-        );
-    }
+  public float getHardness(RockType type) {
+    return this.getBaseHardness() + type.getCategory().getHardnessModifier();
+  }
 
-    public String getLocalizedName() {
-        return new TextComponentTranslation(String.format("rock.variant.%s.name", this)).getFormattedText();
-    }
+  public String getRegistryKey(RockType type) {
+    return String.format("rock/%s/%s", this.getName(), type);
+  }
+
+  public String getLocalizedName() {
+    return new TextComponentTranslation(
+        String.format("rock.variant.%s.name", this)).getFormattedText();
+  }
 }

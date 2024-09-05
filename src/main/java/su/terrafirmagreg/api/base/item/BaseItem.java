@@ -16,54 +16,55 @@ import lombok.Getter;
 @SuppressWarnings("deprecation")
 public abstract class BaseItem extends Item implements IItemSettings {
 
-    protected final Settings settings;
+  protected final Settings settings;
 
-    public BaseItem() {
-        this.settings = Settings.of();
-    }
+  public BaseItem() {
+    this.settings = Settings.of();
+  }
 
-    public IRarity getForgeRarity(ItemStack stack) {
-        return this.settings.getRarity();
-    }
+  public IRarity getForgeRarity(ItemStack stack) {
+    return this.settings.getRarity();
+  }
 
-    @Override
-    public String getTranslationKey() {
-        return this.settings.getTranslationKey() == null ? super.getTranslationKey() : "item." + this.settings.getTranslationKey();
-    }
+  @Override
+  public String getTranslationKey() {
+    return this.settings.getTranslationKey() == null ? super.getTranslationKey()
+        : "item." + this.settings.getTranslationKey();
+  }
 
-    @Override
-    public int getMaxDamage() {
-        return this.settings.getMaxDamage();
-    }
+  @Override
+  public int getMaxDamage() {
+    return this.settings.getMaxDamage();
+  }
 
-    @Override
-    public int getItemStackLimit() {
-        return this.settings.getMaxCount();
-    }
+  @Override
+  public int getItemStackLimit() {
+    return this.settings.getMaxCount();
+  }
 
-    /**
-     * This should NOT be overridden except for VERY SPECIAL cases If an item needs to not stack, i.e. small vessels, override {@link ICapabilitySize#canStack(ItemStack)} If an
-     * item needs a variable stack size, override {@link ICapabilitySize#getWeight(ItemStack)} / {@link ICapabilitySize#getSize(ItemStack)} and return a different value to get a
-     * different stack size
-     */
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return getStackSize(stack);
-    }
+  /**
+   * This should NOT be overridden except for VERY SPECIAL cases If an item needs to not stack, i.e. small vessels, override
+   * {@link ICapabilitySize#canStack(ItemStack)} If an item needs a variable stack size, override {@link ICapabilitySize#getWeight(ItemStack)} /
+   * {@link ICapabilitySize#getSize(ItemStack)} and return a different value to get a different stack size
+   */
+  @Override
+  public int getItemStackLimit(ItemStack stack) {
+    return getStackSize(stack);
+  }
 
-    @Override
-    public Size getSize(ItemStack stack) {
-        return this.settings.getSize();
-    }
+  @Override
+  public Size getSize(ItemStack stack) {
+    return this.settings.getSize();
+  }
 
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return this.settings.getWeight();
-    }
+  @Override
+  public Weight getWeight(ItemStack stack) {
+    return this.settings.getWeight();
+  }
 
-    @Override
-    public boolean canStack(ItemStack stack) {
-        return this.settings.isCanStack();
-    }
+  @Override
+  public boolean canStack(ItemStack stack) {
+    return this.settings.isCanStack();
+  }
 
 }

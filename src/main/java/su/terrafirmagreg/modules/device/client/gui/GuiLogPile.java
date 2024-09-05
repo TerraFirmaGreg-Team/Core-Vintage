@@ -9,9 +9,10 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiLogPile extends BaseGuiContainer {
 
-    public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/small_inventory.png");
+  public static final ResourceLocation BACKGROUND = ModUtils.resource(
+      "textures/gui/container/small_inventory.png");
 
-    public GuiLogPile(Container container, InventoryPlayer playerInv) {
-        super(container, playerInv, BACKGROUND);
-    }
+  public GuiLogPile(Container container, InventoryPlayer playerInv) {
+    super(container, playerInv, BACKGROUND);
+  }
 }

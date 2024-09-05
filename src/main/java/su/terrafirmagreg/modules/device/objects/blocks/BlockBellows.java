@@ -32,75 +32,78 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 @SuppressWarnings("deprecation")
 public class BlockBellows extends BaseBlock implements IProviderTile {
 
-    public BlockBellows() {
-        super(Settings.of(Material.CIRCUITS, MapColor.GRAY));
+  public BlockBellows() {
+    super(Settings.of(Material.CIRCUITS, MapColor.GRAY));
 
-        getSettings()
-                .registryKey("device/bellows")
-                .sound(SoundType.WOOD)
-                .nonFullCube()
-                .nonOpaque()
-                .hardness(2.0F)
-                .resistance(2.0F);
-        setHarvestLevel(ToolClasses.AXE, 0);
-        setDefaultState(getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH));
-    }
+    getSettings()
+        .registryKey("device/bellows")
+        .sound(SoundType.WOOD)
+        .nonFullCube()
+        .nonOpaque()
+        .hardness(2.0F)
+        .resistance(2.0F);
+    setHarvestLevel(ToolClasses.AXE, 0);
+    setDefaultState(getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH));
+  }
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
-    }
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
+  }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getHorizontalIndex();
-    }
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(FACING).getHorizontalIndex();
+  }
 
-    @Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return face == state.getValue(FACING) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
-    }
+  @Override
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
+      EnumFacing face) {
+    return face == state.getValue(FACING) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+  }
 
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
-                                    float hitY, float hitZ) {
-        var tile = TileUtils.getTile(world, pos, TileBellows.class);
-        if (tile != null) {
-            return tile.onRightClick();
-        }
-        return true;
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state,
+      EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
+      float hitY, float hitZ) {
+    var tile = TileUtils.getTile(world, pos, TileBellows.class);
+    if (tile != null) {
+      return tile.onRightClick();
     }
+    return true;
+  }
 
-    @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-                                            EntityLivingBase placer) {
-        if (facing.getAxis() == EnumFacing.Axis.Y) {
-            if (placer.isSneaking()) {
-                facing = placer.getHorizontalFacing().getOpposite();
-            } else {
-                facing = placer.getHorizontalFacing();
-            }
-        }
-        return getDefaultState().withProperty(FACING, facing);
+  @Override
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
+      float hitX, float hitY, float hitZ, int meta,
+      EntityLivingBase placer) {
+    if (facing.getAxis() == EnumFacing.Axis.Y) {
+      if (placer.isSneaking()) {
+        facing = placer.getHorizontalFacing().getOpposite();
+      } else {
+        facing = placer.getHorizontalFacing();
+      }
     }
+    return getDefaultState().withProperty(FACING, facing);
+  }
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
-    }
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, FACING);
+  }
 
-    @Override
-    public Class<? extends TileEntity> getTileEntityClass() {
-        return TileBellows.class;
-    }
+  @Override
+  public Class<? extends TileEntity> getTileEntityClass() {
+    return TileBellows.class;
+  }
 
-    @Override
-    public TileEntitySpecialRenderer<?> getTileRenderer() {
-        return new TESRBellows();
-    }
+  @Override
+  public TileEntitySpecialRenderer<?> getTileRenderer() {
+    return new TESRBellows();
+  }
 
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileBellows();
-    }
+  @Nullable
+  @Override
+  public TileEntity createNewTileEntity(World worldIn, int meta) {
+    return new TileBellows();
+  }
 }

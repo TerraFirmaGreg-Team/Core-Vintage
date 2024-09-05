@@ -7,14 +7,14 @@ import net.minecraft.entity.EntityLivingBase;
 
 public class PotionResistHeat extends BasePotion {
 
-    public PotionResistHeat() {
-        super(false, 0xFFCD72);
-        formatTexture("resist_heat");
-        setBeneficial();
-    }
+  public PotionResistHeat() {
+    super(false, 0xFFCD72);
+    formatTexture("resist_heat");
+    setBeneficial();
+  }
 
-    @Override
-    public void performEffect(EntityLivingBase entity, int amplifier) {
-        removePotionCoreEffect(entity, PotionsCore.HYPERTHERMIA);
-    }
+  @Override
+  public void performEffect(EntityLivingBase entity, int amplifier) {
+    removePotionCoreEffect(entity, PotionsCore.HYPERTHERMIA);
+  }
 }

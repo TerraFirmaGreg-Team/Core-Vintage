@@ -8,12 +8,12 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 public final class GeneratorWorld {
 
-    public static IWorldGenerator MOSSY_RAW;
-    public static IWorldGenerator LARGE_ROCKS;
+  public static IWorldGenerator MOSSY_RAW;
+  public static IWorldGenerator LARGE_ROCKS;
 
-    public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registry) {
 
-        MOSSY_RAW = registry.worldGenerator(new GeneratorMossyRaw());
-        LARGE_ROCKS = registry.worldGenerator(new GeneratorLargeRocks());
-    }
+    MOSSY_RAW = registry.worldGenerator(new GeneratorMossyRaw());
+    LARGE_ROCKS = registry.worldGenerator(new GeneratorLargeRocks());
+  }
 }

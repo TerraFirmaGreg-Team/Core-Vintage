@@ -26,67 +26,71 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ItemBlockMetalLamp
-        extends BaseItemBlock {
+    extends BaseItemBlock {
 
-    public static int CAPACITY;
+  public static int CAPACITY;
 
-    public ItemBlockMetalLamp(Block block) {
-        super(block);
-        CAPACITY = ConfigMetal.BLOCKS.LAMP.tank;
+  public ItemBlockMetalLamp(Block block) {
+    super(block);
+    CAPACITY = ConfigMetal.BLOCKS.LAMP.tank;
 
+  }
+
+  public static Set<Fluid> getValidFluids() {
+    String[] fluidNames = ConfigMetal.BLOCKS.LAMP.fuels;
+    Set<Fluid> validFluids = new HashSet<>();
+    for (String fluidName : fluidNames) {
+      validFluids.add(FluidRegistry.getFluid(fluidName));
     }
+    return validFluids;
+  }
 
-    public static Set<Fluid> getValidFluids() {
-        String[] fluidNames = ConfigMetal.BLOCKS.LAMP.fuels;
-        Set<Fluid> validFluids = new HashSet<>();
-        for (String fluidName : fluidNames) {
-            validFluids.add(FluidRegistry.getFluid(fluidName));
+  @Override
+  public boolean canStack(ItemStack stack) {
+    IFluidHandler lampCap = stack.getCapability(
+        CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+    if (lampCap != null) {
+      return lampCap.drain(CAPACITY, false) == null;
+    }
+    return true;
+  }
+
+  @Override
+  public String getItemStackDisplayName(ItemStack stack) {
+    IFluidHandler fluidCap = stack.getCapability(
+        CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+    if (fluidCap != null) {
+      FluidStack fluidStack = fluidCap.drain(CAPACITY, false);
+      if (fluidStack != null) {
+        String fluidName = fluidStack.getLocalizedName();
+        return new TextComponentTranslation(getTranslationKey() + ".filled.name",
+            fluidName).getFormattedText();
+      }
+    }
+    return super.getItemStackDisplayName(stack);
+  }
+
+  @Override
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    return new FluidWhitelistHandlerComplex(stack, CAPACITY, getValidFluids());
+  }
+
+  @Override
+  public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+    if (isInCreativeTab(tab)) {
+      items.add(new ItemStack(this));
+      for (Fluid fluid : getValidFluids()) {
+        ItemStack stack = new ItemStack(this);
+        IFluidHandlerItem cap = stack.getCapability(
+            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+        if (cap != null) {
+          cap.fill(new FluidStack(fluid, CAPACITY), true);
         }
-        return validFluids;
+        items.add(stack);
+      }
     }
+  }
 
-    @Override
-    public boolean canStack(ItemStack stack) {
-        IFluidHandler lampCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (lampCap != null) {
-            return lampCap.drain(CAPACITY, false) == null;
-        }
-        return true;
-    }
-
-    @Override
-    public String getItemStackDisplayName(ItemStack stack) {
-        IFluidHandler fluidCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (fluidCap != null) {
-            FluidStack fluidStack = fluidCap.drain(CAPACITY, false);
-            if (fluidStack != null) {
-                String fluidName = fluidStack.getLocalizedName();
-                return new TextComponentTranslation(getTranslationKey() + ".filled.name", fluidName).getFormattedText();
-            }
-        }
-        return super.getItemStackDisplayName(stack);
-    }
-
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new FluidWhitelistHandlerComplex(stack, CAPACITY, getValidFluids());
-    }
-
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if (isInCreativeTab(tab)) {
-            items.add(new ItemStack(this));
-            for (Fluid fluid : getValidFluids()) {
-                ItemStack stack = new ItemStack(this);
-                IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-                if (cap != null) {
-                    cap.fill(new FluidStack(fluid, CAPACITY), true);
-                }
-                items.add(stack);
-            }
-        }
-    }
-
-    //no need for @Override itemRightClick to fill or place since fluidhandler interactions and placement are handled before it is called
+  //no need for @Override itemRightClick to fill or place since fluidhandler interactions and placement are handled before it is called
 
 }

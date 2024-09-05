@@ -19,30 +19,33 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalTurkey extends RenderLiving<EntityAnimalTurkey> {
 
-    private static final ResourceLocation MALE = ModUtils.resource("textures/entity/animal/huntable/turkeym.png");
-    private static final ResourceLocation FEMALE = ModUtils.resource("textures/entity/animal/huntable/turkeyf.png");
+  private static final ResourceLocation MALE = ModUtils.resource(
+      "textures/entity/animal/huntable/turkeym.png");
+  private static final ResourceLocation FEMALE = ModUtils.resource(
+      "textures/entity/animal/huntable/turkeyf.png");
 
-    public RenderAnimalTurkey(RenderManager manager) {
-        super(manager, new ModelAnimalTurkey(), 0.5F);
-    }
+  public RenderAnimalTurkey(RenderManager manager) {
+    super(manager, new ModelAnimalTurkey(), 0.5F);
+  }
 
-    @Override
-    public void doRender(@NotNull EntityAnimalTurkey turkey, double par2, double par4, double par6, float par8, float par9) {
-        this.shadowSize = (float) (0.35f + (turkey.getPercentToAdulthood() * 0.35f));
-        super.doRender(turkey, par2, par4, par6, par8, par9);
-    }
+  @Override
+  public void doRender(@NotNull EntityAnimalTurkey turkey, double par2, double par4, double par6,
+      float par8, float par9) {
+    this.shadowSize = (float) (0.35f + (turkey.getPercentToAdulthood() * 0.35f));
+    super.doRender(turkey, par2, par4, par6, par8, par9);
+  }
 
-    @Override
-    protected ResourceLocation getEntityTexture(EntityAnimalTurkey turkey) {
-        if (turkey.getGender() == EntityAnimalBase.Gender.MALE) {
-            return MALE;
-        } else {
-            return FEMALE;
-        }
+  @Override
+  protected ResourceLocation getEntityTexture(EntityAnimalTurkey turkey) {
+    if (turkey.getGender() == EntityAnimalBase.Gender.MALE) {
+      return MALE;
+    } else {
+      return FEMALE;
     }
+  }
 
-    @Override
-    protected void preRenderCallback(EntityAnimalTurkey tukeyTFC, float par2) {
-        GlStateManager.scale(0.8f, 0.8f, 0.8f);
-    }
+  @Override
+  protected void preRenderCallback(EntityAnimalTurkey tukeyTFC, float par2) {
+    GlStateManager.scale(0.8f, 0.8f, 0.8f);
+  }
 }

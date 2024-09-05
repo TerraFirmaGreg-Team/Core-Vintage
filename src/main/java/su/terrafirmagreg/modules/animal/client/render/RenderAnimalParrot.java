@@ -10,8 +10,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderAnimalParrot extends RenderParrot {
 
-    public RenderAnimalParrot(RenderManager renderManager) {
-        super(renderManager);
-        this.mainModel = new ModelAnimalParrot();
-    }
+  public RenderAnimalParrot(RenderManager renderManager) {
+    super(renderManager);
+    this.mainModel = new ModelAnimalParrot();
+  }
 }

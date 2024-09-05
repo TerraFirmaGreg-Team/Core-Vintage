@@ -41,168 +41,176 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("deprecation")
 public class BlockIngotPile extends BaseBlock implements IProviderTile {
 
-    private static final AxisAlignedBB DEFAULT_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.125, 1);
+  private static final AxisAlignedBB DEFAULT_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.125, 1);
 
-    public BlockIngotPile() {
-        super(Settings.of(Material.IRON));
+  public BlockIngotPile() {
+    super(Settings.of(Material.IRON));
 
-        getSettings()
-                .registryKey("core/ingot_pile")
-                .hardness(3.0F)
-                .resistance(10.0F)
-                .nonFullCube()
-                .nonOpaque()
-                .noItemBlock()
-                .harvestLevel(ToolClasses.PICKAXE, 0);
+    getSettings()
+        .registryKey("core/ingot_pile")
+        .hardness(3.0F)
+        .resistance(10.0F)
+        .nonFullCube()
+        .nonOpaque()
+        .noItemBlock()
+        .harvestLevel(ToolClasses.PICKAXE, 0);
 
+  }
+
+  @Override
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    var tile = TileUtils.getTile(source, pos, TileIngotPile.class);
+    if (tile != null) {
+      double y = tile.getCount() / 64f;
+      return new AxisAlignedBB(0d, 0d, 0d, 1d, y, 1d);
     }
+    // Default is here for the default state bounding box query (comes from world#mayPlace)
+    return DEFAULT_AABB;
+  }
 
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        var tile = TileUtils.getTile(source, pos, TileIngotPile.class);
-        if (tile != null) {
-            double y = tile.getCount() / 64f;
-            return new AxisAlignedBB(0d, 0d, 0d, 1d, y, 1d);
-        }
-        // Default is here for the default state bounding box query (comes from world#mayPlace)
-        return DEFAULT_AABB;
+  @Override
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
+      EnumFacing face) {
+    var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
+    if (tile != null && tile.getCount() == 64 && face == EnumFacing.UP) {
+      return BlockFaceShape.SOLID;
     }
+    return BlockFaceShape.UNDEFINED;
+  }
 
-    @Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
-        if (tile != null && tile.getCount() == 64 && face == EnumFacing.UP) {
-            return BlockFaceShape.SOLID;
-        }
-        return BlockFaceShape.UNDEFINED;
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
+      BlockPos pos) {
+    var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
+    double y = tile != null ? 0.125 * (tile.getCount() / 8.0) : 1;
+    return new AxisAlignedBB(0d, 0d, 0d, 1d, y, 1d);
+  }
+
+  @SideOnly(Side.CLIENT)
+  @Override
+  public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+    var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
+    double y = tile != null ? 0.125 * (tile.getCount() / 8.0) : 1;
+    return new AxisAlignedBB(0d, 0d, 0d, 1d, y, 1d);
+  }
+
+  @Override
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
+      BlockPos fromPos) {
+    if (!collapseDown(worldIn, pos) && !worldIn.isSideSolid(pos.down(), EnumFacing.UP)) {
+      worldIn.setBlockToAir(pos);
     }
+  }
 
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
-        double y = tile != null ? 0.125 * (tile.getCount() / 8.0) : 1;
-        return new AxisAlignedBB(0d, 0d, 0d, 1d, y, 1d);
+  @Override
+  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
+    if (tile != null) {
+      tile.onBreakBlock();
     }
+    super.breakBlock(worldIn, pos, state);
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
-        var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
-        double y = tile != null ? 0.125 * (tile.getCount() / 8.0) : 1;
-        return new AxisAlignedBB(0d, 0d, 0d, 1d, y, 1d);
-    }
-
-    @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!collapseDown(worldIn, pos) && !worldIn.isSideSolid(pos.down(), EnumFacing.UP)) {
-            worldIn.setBlockToAir(pos);
-        }
-    }
-
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
-        if (tile != null) {
-            tile.onBreakBlock();
-        }
-        super.breakBlock(worldIn, pos, state);
-    }
-
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                    float hitX, float hitY, float hitZ) {
-        if (!playerIn.isSneaking()) {
-            var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
+  @Override
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
+      EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+      float hitX, float hitY, float hitZ) {
+    if (!playerIn.isSneaking()) {
+      var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
+      if (tile != null) {
+        BlockPos posTop = pos;
+        IBlockState stateTop;
+        do {
+          posTop = posTop.up();
+          stateTop = worldIn.getBlockState(posTop);
+          if (stateTop.getBlock() != BlocksCore.INGOT_PILE && tile != null) {
+            return removeIngot(worldIn, playerIn, tile);
+          } else {
+            tile = TileUtils.getTile(worldIn, posTop, TileIngotPile.class);
             if (tile != null) {
-                BlockPos posTop = pos;
-                IBlockState stateTop;
-                do {
-                    posTop = posTop.up();
-                    stateTop = worldIn.getBlockState(posTop);
-                    if (stateTop.getBlock() != BlocksCore.INGOT_PILE && tile != null) {
-                        return removeIngot(worldIn, playerIn, tile);
-                    } else {
-                        tile = TileUtils.getTile(worldIn, posTop, TileIngotPile.class);
-                        if (tile != null) {
-                            if (tile.getCount() < 64) {
-                                return removeIngot(worldIn, playerIn, tile);
-                            }
-                        }
-                    }
-                } while (posTop.getY() <= 256);
-                return false;
+              if (tile.getCount() < 64) {
+                return removeIngot(worldIn, playerIn, tile);
+              }
             }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side) {
-        var tile = TileUtils.getTile(world, pos, TileIngotPile.class);
-        if (tile == null) {
-            return false;
-        }
-        return tile.getCount() == 64;
-    }
-
-    @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        var tile = TileUtils.getTile(world, pos, TileIngotPile.class);
-        if (tile != null) {
-            return new ItemStack(ItemMetal.get(tile.getMetal(), Metal.ItemType.INGOT));
-        }
-        return ItemStack.EMPTY;
-    }
-
-    private boolean removeIngot(World worldIn, EntityPlayer playerIn, TileIngotPile tile) {
-        if (!worldIn.isRemote) {
-            tile.setCount(tile.getCount() - 1);
-            if (tile.getCount() <= 0) {
-                worldIn.setBlockState(tile.getPos(), Blocks.AIR.getDefaultState());
-            }
-            ItemHandlerHelper.giveItemToPlayer(playerIn, new ItemStack(ItemMetal.get(tile.getMetal(), Metal.ItemType.INGOT)));
-        }
-        return true;
-    }
-
-    private boolean collapseDown(World world, BlockPos pos) {
-        IBlockState stateDown = world.getBlockState(pos.down());
-        if (stateDown.getBlock() == BlocksCore.INGOT_PILE) {
-
-            var tile = TileUtils.getTile(world, pos.down(), TileIngotPile.class);
-            var tileUp = TileUtils.getTile(world, pos, TileIngotPile.class);
-            if (tile != null && tileUp != null && tile.getCount() < 64) {
-                if (tile.getCount() + tileUp.getCount() <= 64) {
-                    tile.setCount(tile.getCount() + tileUp.getCount());
-                    world.setBlockToAir(pos);
-                } else {
-                    tile.setCount(64);
-                    tileUp.setCount(tile.getCount() + tileUp.getCount() - 64);
-                }
-            }
-            return true;
-        }
+          }
+        } while (posTop.getY() <= 256);
         return false;
+      }
     }
+    return true;
+  }
 
-    @Override
-    public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileIngotPile();
+  @Override
+  public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos,
+      EnumFacing side) {
+    var tile = TileUtils.getTile(world, pos, TileIngotPile.class);
+    if (tile == null) {
+      return false;
     }
+    return tile.getCount() == 64;
+  }
 
-    @Override
-    public Class<? extends TileEntity> getTileEntityClass() {
-        return TileIngotPile.class;
+  @Override
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
+      EntityPlayer player) {
+    var tile = TileUtils.getTile(world, pos, TileIngotPile.class);
+    if (tile != null) {
+      return new ItemStack(ItemMetal.get(tile.getMetal(), Metal.ItemType.INGOT));
     }
+    return ItemStack.EMPTY;
+  }
 
-    @SideOnly(Side.CLIENT)
-    public @Nullable TileEntitySpecialRenderer<?> getTileRenderer() {
-        return new TESRIngotPile();
+  private boolean removeIngot(World worldIn, EntityPlayer playerIn, TileIngotPile tile) {
+    if (!worldIn.isRemote) {
+      tile.setCount(tile.getCount() - 1);
+      if (tile.getCount() <= 0) {
+        worldIn.setBlockState(tile.getPos(), Blocks.AIR.getDefaultState());
+      }
+      ItemHandlerHelper.giveItemToPlayer(playerIn,
+          new ItemStack(ItemMetal.get(tile.getMetal(), Metal.ItemType.INGOT)));
     }
+    return true;
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IStateMapper getStateMapper() {
-        return blockIn -> ImmutableMap.of(this.getDefaultState(), new ModelResourceLocation(ModUtils.resource("empty").toString()));
+  private boolean collapseDown(World world, BlockPos pos) {
+    IBlockState stateDown = world.getBlockState(pos.down());
+    if (stateDown.getBlock() == BlocksCore.INGOT_PILE) {
+
+      var tile = TileUtils.getTile(world, pos.down(), TileIngotPile.class);
+      var tileUp = TileUtils.getTile(world, pos, TileIngotPile.class);
+      if (tile != null && tileUp != null && tile.getCount() < 64) {
+        if (tile.getCount() + tileUp.getCount() <= 64) {
+          tile.setCount(tile.getCount() + tileUp.getCount());
+          world.setBlockToAir(pos);
+        } else {
+          tile.setCount(64);
+          tileUp.setCount(tile.getCount() + tileUp.getCount() - 64);
+        }
+      }
+      return true;
     }
+    return false;
+  }
+
+  @Override
+  public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
+    return new TileIngotPile();
+  }
+
+  @Override
+  public Class<? extends TileEntity> getTileEntityClass() {
+    return TileIngotPile.class;
+  }
+
+  @SideOnly(Side.CLIENT)
+  public @Nullable TileEntitySpecialRenderer<?> getTileRenderer() {
+    return new TESRIngotPile();
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public IStateMapper getStateMapper() {
+    return blockIn -> ImmutableMap.of(this.getDefaultState(),
+        new ModelResourceLocation(ModUtils.resource("empty").toString()));
+  }
 }

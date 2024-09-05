@@ -4,11 +4,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 
 
-import net.dries007.tfc.objects.te.TECropBase;
-
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public class TEStemCrop extends TECropBase {
 

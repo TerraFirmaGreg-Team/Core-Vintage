@@ -21,28 +21,30 @@ import lombok.Getter;
 @Getter
 public class BlockWoodWall extends BaseBlockWall implements IWoodBlock {
 
-    private final WoodBlockVariant variant;
-    private final WoodType type;
+  private final WoodBlockVariant variant;
+  private final WoodType type;
 
-    public BlockWoodWall(WoodBlockVariant model, WoodBlockVariant variant, WoodType type) {
-        super(model.get(type));
+  public BlockWoodWall(WoodBlockVariant model, WoodBlockVariant variant, WoodType type) {
+    super(model.get(type));
 
-        this.variant = variant;
-        this.type = type;
+    this.variant = variant;
+    this.type = type;
 
-        getSettings()
-                .sound(SoundType.WOOD)
-                .oreDict("wall", "wood")
-                .oreDict("wall", "wood", type);
+    getSettings()
+        .sound(SoundType.WOOD)
+        .oreDict("wall", "wood")
+        .oreDict("wall", "wood", type);
 
-        setHarvestLevel(ToolClasses.AXE, model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
+    setHarvestLevel(ToolClasses.AXE,
+        model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
 
-        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
-    }
+    BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IStateMapper getStateMapper() {
-        return new CustomStateMap.Builder().customResource(getResourceLocation()).ignore(BlockWall.VARIANT).build();
-    }
+  @Override
+  @SideOnly(Side.CLIENT)
+  public IStateMapper getStateMapper() {
+    return new CustomStateMap.Builder().customResource(getResourceLocation())
+        .ignore(BlockWall.VARIANT).build();
+  }
 }

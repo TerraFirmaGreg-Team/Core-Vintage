@@ -25,69 +25,75 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.*;
+import static su.terrafirmagreg.data.Properties.EAST;
+import static su.terrafirmagreg.data.Properties.NORTH;
+import static su.terrafirmagreg.data.Properties.SOUTH;
+import static su.terrafirmagreg.data.Properties.WEST;
 
 @SuppressWarnings("deprecation")
 public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor, IGrass {
 
-    public BlockSoilPeatGrass() {
-        super(Settings.of(Material.GRASS));
+  public BlockSoilPeatGrass() {
+    super(Settings.of(Material.GRASS));
 
-        getSettings()
-                .registryKey("soil/peat_grass")
-                .sound(SoundType.PLANT)
-                .renderLayer(BlockRenderLayer.CUTOUT)
-                .randomTicks()
-                .oreDict("peat")
-                .oreDict("peat", "grass");
+    getSettings()
+        .registryKey("soil/peat_grass")
+        .sound(SoundType.PLANT)
+        .renderLayer(BlockRenderLayer.CUTOUT)
+        .randomTicks()
+        .oreDict("peat")
+        .oreDict("peat", "grass");
 
-        setDefaultState(getBlockState().getBaseState()
-                .withProperty(NORTH, Boolean.FALSE)
-                .withProperty(EAST, Boolean.FALSE)
-                .withProperty(SOUTH, Boolean.FALSE)
-                .withProperty(WEST, Boolean.FALSE));
+    setDefaultState(getBlockState().getBaseState()
+        .withProperty(NORTH, Boolean.FALSE)
+        .withProperty(EAST, Boolean.FALSE)
+        .withProperty(SOUTH, Boolean.FALSE)
+        .withProperty(WEST, Boolean.FALSE));
 
-        BlockUtils.setFireInfo(this, 5, 5);
+    BlockUtils.setFireInfo(this, 5, 5);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return 0;
+  }
+
+  @NotNull
+  @Override
+  public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+    pos = pos.add(0, -1, 0);
+    return state.withProperty(NORTH,
+            BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+        .withProperty(EAST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+        .withProperty(SOUTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+        .withProperty(WEST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+  }
+
+  @Override
+  public void randomTick(World world, BlockPos pos, IBlockState state, Random rand) {
+    if (world.isRemote) {
+      return;
     }
+    spreadGrass(world, pos, state, rand);
+  }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return 0;
-    }
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return Item.getItemFromBlock(BlocksSoil.PEAT);
+  }
 
-    @NotNull
-    @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
-        pos = pos.add(0, -1, 0);
-        return state.withProperty(NORTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-                .withProperty(EAST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-                .withProperty(SOUTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-                .withProperty(WEST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
-    }
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
+  }
 
-    @Override
-    public void randomTick(World world, BlockPos pos, IBlockState state, Random rand) {
-        if (world.isRemote) return;
-        spreadGrass(world, pos, state, rand);
-    }
+  @Override
+  public IBlockColor getBlockColor() {
+    return GrassColorHandler::computeGrassColor;
+  }
 
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(BlocksSoil.PEAT);
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
-    }
-
-    @Override
-    public IBlockColor getBlockColor() {
-        return GrassColorHandler::computeGrassColor;
-    }
-
-    @Override
-    public IItemColor getItemColor() {
-        return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
-    }
+  @Override
+  public IItemColor getItemColor() {
+    return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
+  }
 }

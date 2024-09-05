@@ -12,19 +12,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockWoodFenceLog extends BlockWoodFence {
 
-    public BlockWoodFenceLog(WoodBlockVariant variant, WoodType type) {
-        super(variant, type);
+  public BlockWoodFenceLog(WoodBlockVariant variant, WoodType type) {
+    super(variant, type);
 
-    }
+  }
 
-    @Override
-    public ResourceLocation getResourceLocation() {
-        return ModUtils.resource(getRegistryKey());
-    }
+  @Override
+  public ResourceLocation getResourceLocation() {
+    return ModUtils.resource(getRegistryKey());
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IStateMapper getStateMapper() {
-        return new StateMap.Builder().build();
-    }
+  @Override
+  @SideOnly(Side.CLIENT)
+  public IStateMapper getStateMapper() {
+    return new StateMap.Builder().build();
+  }
 }

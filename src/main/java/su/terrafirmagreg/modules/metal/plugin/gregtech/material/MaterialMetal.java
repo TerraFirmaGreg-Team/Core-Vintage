@@ -8,10 +8,10 @@ import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 public class MaterialMetal
-        extends BaseMaterial {
+    extends BaseMaterial {
 
-    protected MaterialMetal(@NotNull ResourceLocation resourceLocation) {
-        super(resourceLocation);
-    }
+  protected MaterialMetal(@NotNull ResourceLocation resourceLocation) {
+    super(resourceLocation);
+  }
 
 }

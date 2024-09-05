@@ -8,23 +8,23 @@ import net.minecraft.entity.ai.EntityAIPanic;
  */
 public class EntityAnimalAIPanic extends EntityAIPanic {
 
-    protected int timer;
+  protected int timer;
 
-    public EntityAnimalAIPanic(EntityCreature creature, double speedIn) {
-        super(creature, speedIn);
-    }
+  public EntityAnimalAIPanic(EntityCreature creature, double speedIn) {
+    super(creature, speedIn);
+  }
 
-    @Override
-    public boolean shouldExecute() {
-        if (this.creature.hurtTime > 0) {
-            timer = 80;
-            return this.findRandomPosition();
-        }
-        return false;
+  @Override
+  public boolean shouldExecute() {
+    if (this.creature.hurtTime > 0) {
+      timer = 80;
+      return this.findRandomPosition();
     }
+    return false;
+  }
 
-    @Override
-    public boolean shouldContinueExecuting() {
-        return super.shouldContinueExecuting() && timer > 0;
-    }
+  @Override
+  public boolean shouldContinueExecuting() {
+    return super.shouldContinueExecuting() && timer > 0;
+  }
 }

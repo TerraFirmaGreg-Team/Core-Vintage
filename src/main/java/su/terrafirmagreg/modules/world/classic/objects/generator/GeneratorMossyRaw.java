@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
@@ -19,33 +19,41 @@ import java.util.Random;
 
 public class GeneratorMossyRaw implements IWorldGenerator {
 
-    public static final float RAINFALL_SAND = 75;
-    public static final float RAINFALL_SAND_SANDY_MIX = 125;
+  public static final float RAINFALL_SAND = 75;
+  public static final float RAINFALL_SAND_SANDY_MIX = 125;
 
-    @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (!(chunkGenerator instanceof ChunkGenClassic)) return;
-
-        int y = random.nextInt(200 - WorldTypeClassic.ROCKLAYER2) + WorldTypeClassic.ROCKLAYER2;
-        BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y, chunkZ << 4);
-
-        int rarity = random.nextInt(20) + 1;
-
-        for (float r = rarity; r < (5 + rarity); r++) {
-            var data = CapabilityChunkData.get(world, chunkBlockPos);
-            final float floraDensity = data.getFloraDensity();
-            final float floraDiversity = data.getFloraDiversity();
-
-            if (data.isInitialized() && data.getRainfall() >= RAINFALL_SAND_SANDY_MIX) {
-                int mossyCount = (random.nextInt(20) + 1);
-                for (int i = random.nextInt(Math.round(1 + floraDiversity)); i < (mossyCount + floraDensity) * 10; i++) {
-                    BlockPos blockPos = chunkBlockPos.add(random.nextInt(16) + 8, random.nextInt(16), random.nextInt(16) + 8);
-                    if (BlockUtils.isRawStone(world.getBlockState(blockPos)) && BlockUtils.isBlockSurroundedByAir(world, blockPos) &&
-                            world.getLightFor(EnumSkyBlock.SKY, blockPos) < 14 && !world.canSeeSky(blockPos)) {
-                        world.setBlockState(blockPos, BlocksRock.MOSSY_RAW.get(ProviderChunkData.getRockHeight(world, blockPos)).getDefaultState(), 2);
-                    }
-                }
-            }
-        }
+  @Override
+  public void generate(Random random, int chunkX, int chunkZ, World world,
+      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+    if (!(chunkGenerator instanceof ChunkGenClassic)) {
+      return;
     }
+
+    int y = random.nextInt(200 - WorldTypeClassic.ROCKLAYER2) + WorldTypeClassic.ROCKLAYER2;
+    BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y, chunkZ << 4);
+
+    int rarity = random.nextInt(20) + 1;
+
+    for (float r = rarity; r < (5 + rarity); r++) {
+      var data = CapabilityChunkData.get(world, chunkBlockPos);
+      final float floraDensity = data.getFloraDensity();
+      final float floraDiversity = data.getFloraDiversity();
+
+      if (data.isInitialized() && data.getRainfall() >= RAINFALL_SAND_SANDY_MIX) {
+        int mossyCount = (random.nextInt(20) + 1);
+        for (int i = random.nextInt(Math.round(1 + floraDiversity));
+            i < (mossyCount + floraDensity) * 10; i++) {
+          BlockPos blockPos = chunkBlockPos.add(random.nextInt(16) + 8, random.nextInt(16),
+              random.nextInt(16) + 8);
+          if (BlockUtils.isRawStone(world.getBlockState(blockPos))
+              && BlockUtils.isBlockSurroundedByAir(world, blockPos) &&
+              world.getLightFor(EnumSkyBlock.SKY, blockPos) < 14 && !world.canSeeSky(blockPos)) {
+            world.setBlockState(blockPos,
+                BlocksRock.MOSSY_RAW.get(ProviderChunkData.getRockHeight(world, blockPos))
+                    .getDefaultState(), 2);
+          }
+        }
+      }
+    }
+  }
 }

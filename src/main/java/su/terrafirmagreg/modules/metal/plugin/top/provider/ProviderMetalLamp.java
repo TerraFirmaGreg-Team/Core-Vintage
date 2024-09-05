@@ -27,38 +27,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProviderMetalLamp
-        implements IProbeInfoProvider {
+    implements IProbeInfoProvider {
 
-    @Override
-    public String getID() {
-        return ModUtils.localize("top", "metal.lamp");
+  @Override
+  public String getID() {
+    return ModUtils.localize("top", "metal.lamp");
+  }
+
+  @Override
+  public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
+      IBlockState state, IProbeHitData hitData) {
+    Block block = state.getBlock();
+    BlockPos pos = hitData.getPos();
+
+    if (block instanceof BlockMetalLamp) {
+      var tile = TileUtils.getTile(world, pos, TileMetalLamp.class);
+      if (tile == null) {
+        return;
+      }
+
+      List<String> currentTooltip = new ArrayList<>();
+
+      NBTTagCompound nbt = new NBTTagCompound();
+      nbt = tile.writeToNBT(nbt);
+
+      IFluidHandler fluidHandler = tile.getCapability(
+          CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+      FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
+      if (fluid != null && fluid.amount > 0) {
+        currentTooltip.add(
+            new TextComponentTranslation(ModUtils.localize("top", "barrel.contents"), fluid.amount,
+                fluid.getLocalizedName()).getFormattedText());
+      }
+
+      for (String string : currentTooltip) {
+        info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+            .text(string);
+      }
     }
 
-    @Override
-    public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
-        Block block = state.getBlock();
-        BlockPos pos = hitData.getPos();
-
-        if (block instanceof BlockMetalLamp) {
-            var tile = TileUtils.getTile(world, pos, TileMetalLamp.class);
-            if (tile == null) return;
-
-            List<String> currentTooltip = new ArrayList<>();
-
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt = tile.writeToNBT(nbt);
-
-            IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-            FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
-            if (fluid != null && fluid.amount > 0) {
-                currentTooltip.add(
-                        new TextComponentTranslation(ModUtils.localize("top", "barrel.contents"), fluid.amount, fluid.getLocalizedName()).getFormattedText());
-            }
-
-            for (String string : currentTooltip) {
-                info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).text(string);
-            }
-        }
-
-    }
+  }
 }

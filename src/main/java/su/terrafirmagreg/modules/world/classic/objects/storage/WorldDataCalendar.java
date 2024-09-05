@@ -17,54 +17,55 @@ import lombok.Getter;
 
 @Getter
 public class WorldDataCalendar
-        extends WorldSavedData {
+    extends WorldSavedData {
 
-    private static final String DATA_ID = ModUtils.localize("data.calendar");
+  private static final String DATA_ID = ModUtils.localize("data.calendar");
 
-    private static final LoggingHelper LOGGER = LoggingHelper.of(DATA_ID);
+  private static final LoggingHelper LOGGER = LoggingHelper.of(DATA_ID);
 
-    private final Calendar calendar;
+  private final Calendar calendar;
 
-    private WorldDataCalendar() {
-        super(DATA_ID);
-        this.calendar = new Calendar();
+  private WorldDataCalendar() {
+    super(DATA_ID);
+    this.calendar = new Calendar();
+  }
+
+  @NotNull
+  public static WorldDataCalendar get(@NotNull World world) {
+    MapStorage mapStorage = world.getMapStorage();
+    if (mapStorage != null) {
+      WorldDataCalendar data = (WorldDataCalendar) mapStorage.getOrLoadData(WorldDataCalendar.class,
+          DATA_ID);
+      if (data == null) {
+        // Unable to load data, so assign default values
+        LOGGER.info("Creating default calendar world data.");
+        data = new WorldDataCalendar();
+        data.markDirty();
+        mapStorage.setData(DATA_ID, data);
+      }
+      return data;
     }
+    throw new IllegalStateException("Unable to access calendar data!");
+  }
 
-    @NotNull
-    public static WorldDataCalendar get(@NotNull World world) {
-        MapStorage mapStorage = world.getMapStorage();
-        if (mapStorage != null) {
-            WorldDataCalendar data = (WorldDataCalendar) mapStorage.getOrLoadData(WorldDataCalendar.class, DATA_ID);
-            if (data == null) {
-                // Unable to load data, so assign default values
-                LOGGER.info("Creating default calendar world data.");
-                data = new WorldDataCalendar();
-                data.markDirty();
-                mapStorage.setData(DATA_ID, data);
-            }
-            return data;
-        }
-        throw new IllegalStateException("Unable to access calendar data!");
-    }
+  @Override
+  public void readFromNBT(NBTTagCompound nbt) {
 
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
+    calendar.deserializeNBT(nbt.getCompoundTag("calendar"));
+  }
 
-        calendar.deserializeNBT(nbt.getCompoundTag("calendar"));
-    }
+  @Override
+  public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+    nbt.setTag("calendar", Calendar.INSTANCE.serializeNBT());
+    return nbt;
+  }
 
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        nbt.setTag("calendar", Calendar.INSTANCE.serializeNBT());
-        return nbt;
-    }
-
-    /**
-     * Since this updates every tick, and doesn't store a local copy always assume it needs saving to disk
-     */
-    @Override
-    public boolean isDirty() {
-        return true;
-    }
+  /**
+   * Since this updates every tick, and doesn't store a local copy always assume it needs saving to disk
+   */
+  @Override
+  public boolean isDirty() {
+    return true;
+  }
 
 }

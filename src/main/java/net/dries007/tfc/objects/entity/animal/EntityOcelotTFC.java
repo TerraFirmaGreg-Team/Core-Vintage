@@ -53,7 +53,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.data.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.MathConstants.RNG;
 
 // Changes in config allow placing this animal in livestock and still respawn
 public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock {

@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.tools;
 
-import su.terrafirmagreg.data.lib.MathConstants;
+import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;

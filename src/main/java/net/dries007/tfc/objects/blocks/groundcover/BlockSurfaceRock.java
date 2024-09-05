@@ -34,9 +34,13 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.objects.items.rock.ItemRock;
+
+
+import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilFarmland;
+
+
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -186,7 +190,7 @@ public class BlockSurfaceRock extends BlockBush implements IRockObject {
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP) && !(worldIn.getBlockState(pos.down())
-                .getBlock() instanceof BlockFarmlandTFC)) {
+                .getBlock() instanceof BlockSoilFarmland)) {
             worldIn.setBlockToAir(pos);
         }
     }

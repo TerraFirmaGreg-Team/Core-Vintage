@@ -10,10 +10,10 @@ import net.minecraft.util.BlockRenderLayer;
  */
 public class BlockRockMossy extends BlockRock {
 
-    public BlockRockMossy(RockBlockVariant variant, RockType type) {
-        super(variant, type);
+  public BlockRockMossy(RockBlockVariant variant, RockType type) {
+    super(variant, type);
 
-        getSettings()
-                .renderLayer(BlockRenderLayer.CUTOUT);
-    }
+    getSettings()
+        .renderLayer(BlockRenderLayer.CUTOUT);
+  }
 }

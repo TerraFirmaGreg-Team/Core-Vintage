@@ -3,7 +3,7 @@ package net.dries007.tfc.client.model.animal;
 //Made with Blockbench
 //Paste this code into your mod.
 
-import su.terrafirmagreg.data.lib.MathConstants;
+import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import net.minecraft.client.model.ModelBase;

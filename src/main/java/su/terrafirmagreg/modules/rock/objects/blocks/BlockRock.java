@@ -26,33 +26,37 @@ import java.util.List;
 @Getter
 public abstract class BlockRock extends BaseBlock implements IRockBlock {
 
-    protected final RockBlockVariant variant;
-    protected final RockType type;
+  protected final RockBlockVariant variant;
+  protected final RockType type;
 
-    public BlockRock(Settings settings, RockBlockVariant variant, RockType type) {
-        super(settings);
+  public BlockRock(Settings settings, RockBlockVariant variant, RockType type) {
+    super(settings);
 
-        this.variant = variant;
-        this.type = type;
+    this.variant = variant;
+    this.type = type;
 
-        getSettings()
-                .sound(SoundType.STONE)
-                .harvestLevel(ToolClasses.PICKAXE, 0)
-                .fallable(this, variant.getSpecification())
-                .oreDict(variant)
-                .oreDict(variant, type);
-    }
+    getSettings()
+        .registryKey(variant.getRegistryKey(type))
+        .hardness(variant.getHardness(type))
+        .sound(SoundType.STONE)
+        .harvestLevel(ToolClasses.PICKAXE, 0)
+        .fallable(this, variant.getSpecification())
+        .oreDict(variant)
+        .oreDict(variant, type);
+  }
 
-    public BlockRock(RockBlockVariant variant, RockType type) {
-        this(Settings.of(Material.ROCK), variant, type);
+  public BlockRock(RockBlockVariant variant, RockType type) {
+    this(Settings.of(Material.ROCK), variant, type);
 
-    }
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
+      ITooltipFlag flagIn) {
+    super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
-    }
+    tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": "
+        + getType().getCategory().getLocalizedName());
+  }
 }

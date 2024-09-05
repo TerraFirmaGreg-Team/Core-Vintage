@@ -17,85 +17,90 @@ import java.util.Random;
 
 public class GeneratorCaveMushrooms extends WorldGenerator {
 
-    @Override
-    public boolean generate(World worldIn, Random rng, BlockPos pos) {
-        int chance = rng.nextInt(5);
-        if (chance == 0) {
-            BlockCaveMushroom mushroomBlock = BlocksTFCF.BLUESHROOM;
-            IBlockState state = mushroomBlock.getDefaultState();
+  @Override
+  public boolean generate(World worldIn, Random rng, BlockPos pos) {
+    int chance = rng.nextInt(5);
+    if (chance == 0) {
+      BlockCaveMushroom mushroomBlock = BlocksTFCF.BLUESHROOM;
+      IBlockState state = mushroomBlock.getDefaultState();
 
-            for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
-                BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
+      for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
+        BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4),
+            rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
 
-                if (worldIn.isAirBlock(blockpos) &&
-                        pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
-                        worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
-                        !worldIn.canSeeSky(blockpos) &&
-                        mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
-                    setBlockAndNotifyAdequately(worldIn, blockpos, state);
-                }
-            }
-        } else if (chance == 1) {
-            BlockCaveMushroom mushroomBlock = BlocksTFCF.GLOWSHROOM;
-            IBlockState state = mushroomBlock.getDefaultState();
-
-            for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
-                BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
-
-                if (worldIn.isAirBlock(blockpos) &&
-                        pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
-                        worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
-                        !worldIn.canSeeSky(blockpos) &&
-                        mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
-                    setBlockAndNotifyAdequately(worldIn, blockpos, state);
-                }
-            }
-        } else if (chance == 2) {
-            BlockCaveMushroom mushroomBlock = BlocksTFCF.MAGMA_SHROOM;
-            IBlockState state = mushroomBlock.getDefaultState();
-
-            for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
-                BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
-
-                if (worldIn.isAirBlock(blockpos) &&
-                        pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
-                        worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
-                        !worldIn.canSeeSky(blockpos) &&
-                        mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
-                    setBlockAndNotifyAdequately(worldIn, blockpos, state);
-                }
-            }
-        } else if (chance == 3) {
-            BlockCaveMushroom mushroomBlock = BlocksTFCF.POISON_SHROOM;
-            IBlockState state = mushroomBlock.getDefaultState();
-
-            for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
-                BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
-
-                if (worldIn.isAirBlock(blockpos) &&
-                        pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
-                        worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
-                        !worldIn.canSeeSky(blockpos) &&
-                        mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
-                    setBlockAndNotifyAdequately(worldIn, blockpos, state);
-                }
-            }
-        } else if (chance == 4) {
-            BlockCaveMushroom mushroomBlock = BlocksTFCF.SULPHUR_SHROOM;
-            IBlockState state = mushroomBlock.getDefaultState();
-
-            for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
-                BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
-
-                if (worldIn.isAirBlock(blockpos) &&
-                        pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
-                        worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
-                        !worldIn.canSeeSky(blockpos) &&
-                        mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
-                    setBlockAndNotifyAdequately(worldIn, blockpos, state);
-                }
-            }
+        if (worldIn.isAirBlock(blockpos) &&
+            pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
+            worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
+            !worldIn.canSeeSky(blockpos) &&
+            mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
+          setBlockAndNotifyAdequately(worldIn, blockpos, state);
         }
-        return true;
+      }
+    } else if (chance == 1) {
+      BlockCaveMushroom mushroomBlock = BlocksTFCF.GLOWSHROOM;
+      IBlockState state = mushroomBlock.getDefaultState();
+
+      for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
+        BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4),
+            rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
+
+        if (worldIn.isAirBlock(blockpos) &&
+            pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
+            worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
+            !worldIn.canSeeSky(blockpos) &&
+            mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
+          setBlockAndNotifyAdequately(worldIn, blockpos, state);
+        }
+      }
+    } else if (chance == 2) {
+      BlockCaveMushroom mushroomBlock = BlocksTFCF.MAGMA_SHROOM;
+      IBlockState state = mushroomBlock.getDefaultState();
+
+      for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
+        BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4),
+            rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
+
+        if (worldIn.isAirBlock(blockpos) &&
+            pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
+            worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
+            !worldIn.canSeeSky(blockpos) &&
+            mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
+          setBlockAndNotifyAdequately(worldIn, blockpos, state);
+        }
+      }
+    } else if (chance == 3) {
+      BlockCaveMushroom mushroomBlock = BlocksTFCF.POISON_SHROOM;
+      IBlockState state = mushroomBlock.getDefaultState();
+
+      for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
+        BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4),
+            rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
+
+        if (worldIn.isAirBlock(blockpos) &&
+            pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
+            worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
+            !worldIn.canSeeSky(blockpos) &&
+            mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
+          setBlockAndNotifyAdequately(worldIn, blockpos, state);
+        }
+      }
+    } else if (chance == 4) {
+      BlockCaveMushroom mushroomBlock = BlocksTFCF.SULPHUR_SHROOM;
+      IBlockState state = mushroomBlock.getDefaultState();
+
+      for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
+        BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4),
+            rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
+
+        if (worldIn.isAirBlock(blockpos) &&
+            pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
+            worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
+            !worldIn.canSeeSky(blockpos) &&
+            mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
+          setBlockAndNotifyAdequately(worldIn, blockpos, state);
+        }
+      }
     }
+    return true;
+  }
 }

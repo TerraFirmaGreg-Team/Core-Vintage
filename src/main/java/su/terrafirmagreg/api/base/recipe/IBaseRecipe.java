@@ -8,9 +8,9 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 public interface IBaseRecipe {
 
-    IIngredient<ItemStack> getInputItem();
+  IIngredient<ItemStack> getInputItem();
 
-    ItemStack getOutputItem();
+  ItemStack getOutputItem();
 
-    ResourceLocation getRecipeName();
+  ResourceLocation getRecipeName();
 }

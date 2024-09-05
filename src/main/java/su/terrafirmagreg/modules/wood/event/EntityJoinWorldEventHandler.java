@@ -8,10 +8,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityJoinWorldEventHandler {
 
-    @SubscribeEvent
-    public void on(EntityJoinWorldEvent event) {
-        if (event.getEntity() instanceof EntityLiving entityLiving) {
-            entityLiving.tasks.addTask(2, new EntityWoodAIPullCart(entityLiving));
-        }
+  @SubscribeEvent
+  public void on(EntityJoinWorldEvent event) {
+    if (event.getEntity() instanceof EntityLiving entityLiving) {
+      entityLiving.tasks.addTask(2, new EntityWoodAIPullCart(entityLiving));
     }
+  }
 }

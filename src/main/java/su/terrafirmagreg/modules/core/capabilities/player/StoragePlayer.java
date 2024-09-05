@@ -10,12 +10,15 @@ import org.jetbrains.annotations.Nullable;
 
 public class StoragePlayer implements IStorage<ICapabilityPlayer> {
 
-    @Nullable
-    @Override
-    public NBTBase writeNBT(Capability<ICapabilityPlayer> capability, ICapabilityPlayer instance, EnumFacing side) {
-        return null;
-    }
+  @Nullable
+  @Override
+  public NBTBase writeNBT(Capability<ICapabilityPlayer> capability, ICapabilityPlayer instance,
+      EnumFacing side) {
+    return null;
+  }
 
-    @Override
-    public void readNBT(Capability<ICapabilityPlayer> capability, ICapabilityPlayer instance, EnumFacing side, NBTBase nbt) {}
+  @Override
+  public void readNBT(Capability<ICapabilityPlayer> capability, ICapabilityPlayer instance,
+      EnumFacing side, NBTBase nbt) {
+  }
 }

@@ -17,24 +17,26 @@ import static su.terrafirmagreg.data.Constants.MODID_TFC;
 @SideOnly(Side.CLIENT)
 public class TESRIngotPile extends TileEntitySpecialRenderer<TileIngotPile> {
 
-    private final ModelIngotPile model = new ModelIngotPile();
+  private final ModelIngotPile model = new ModelIngotPile();
 
-    @Override
-    public void render(TileIngotPile tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        try {
-            GlStateManager.color(1, 1, 1, 1);
+  @Override
+  public void render(TileIngotPile tile, double x, double y, double z, float partialTicks,
+      int destroyStage, float alpha) {
+    try {
+      GlStateManager.color(1, 1, 1, 1);
 
-            Metal metal = tile.getMetal();
-            int count = tile.getCount();
-            //noinspection ConstantConditions
-            bindTexture(new ResourceLocation(MODID_TFC, "textures/blocks/metal/" + metal.getRegistryName().getPath() + ".png"));
-            GlStateManager.pushMatrix();
-            GlStateManager.translate(x, y, z);
+      Metal metal = tile.getMetal();
+      int count = tile.getCount();
+      //noinspection ConstantConditions
+      bindTexture(new ResourceLocation(MODID_TFC,
+          "textures/blocks/metal/" + metal.getRegistryName().getPath() + ".png"));
+      GlStateManager.pushMatrix();
+      GlStateManager.translate(x, y, z);
 
-            // Render Ingot Pile here
-            model.renderIngots(count);
-        } finally {
-            GlStateManager.popMatrix();
-        }
+      // Render Ingot Pile here
+      model.renderIngots(count);
+    } finally {
+      GlStateManager.popMatrix();
     }
+  }
 }

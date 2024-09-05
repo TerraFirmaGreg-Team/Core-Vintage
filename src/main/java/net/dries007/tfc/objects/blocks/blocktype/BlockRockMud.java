@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -97,15 +96,4 @@ public class BlockRockMud extends BlockRockVariantTFCF {
         return super.getItemDropped(state, rand, fortune);
     }
 
-    @Nullable
-    private BlockPos checkAreaClear(World world, BlockPos pos) {
-        // Check that there are no entities in the area, otherwise it would collide with them
-        if (!world.getEntitiesWithinAABB(EntityFallingBlock.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)))
-                .isEmpty()) {
-            // If we can't fall due to a collision, wait for the block to move out of the way and try again later
-            world.scheduleUpdate(pos, this, 20);
-            return null;
-        }
-        return pos;
-    }
 }

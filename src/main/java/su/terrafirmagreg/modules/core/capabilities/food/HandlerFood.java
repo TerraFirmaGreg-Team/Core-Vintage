@@ -18,30 +18,30 @@ import java.util.function.Supplier;
 
 public class HandlerFood {
 
-    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_FOODS = new HashMap<>(); //Used inside CT, set custom IFood for food items outside TFC
+  public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_FOODS = new HashMap<>(); //Used inside CT, set custom IFood for food items outside TFC
 
-    public static void init() {
-        // Add custom vanilla food instances
-        CUSTOM_FOODS.put(IIngredient.of(Items.ROTTEN_FLESH),
-                () -> new FoodHandler(null, FoodData.ROTTEN_FLESH));
+  public static void init() {
+    // Add custom vanilla food instances
+    CUSTOM_FOODS.put(IIngredient.of(Items.ROTTEN_FLESH),
+        () -> new FoodHandler(null, FoodData.ROTTEN_FLESH));
 
-        CUSTOM_FOODS.put(IIngredient.of(Items.GOLDEN_APPLE),
-                () -> new FoodHandler(null, FoodData.GOLDEN_APPLE));
+    CUSTOM_FOODS.put(IIngredient.of(Items.GOLDEN_APPLE),
+        () -> new FoodHandler(null, FoodData.GOLDEN_APPLE));
 
-        CUSTOM_FOODS.put(IIngredient.of(Items.GOLDEN_CARROT),
-                () -> new FoodHandler(null, FoodData.GOLDEN_CARROT));
+    CUSTOM_FOODS.put(IIngredient.of(Items.GOLDEN_CARROT),
+        () -> new FoodHandler(null, FoodData.GOLDEN_CARROT));
 
-        CUSTOM_FOODS.put(IIngredient.of(Items.EGG),
-                () -> new FoodHandler(null, FoodData.RAW_EGG));
+    CUSTOM_FOODS.put(IIngredient.of(Items.EGG),
+        () -> new FoodHandler(null, FoodData.RAW_EGG));
+  }
+
+  @Nullable
+  public static ICapabilityProvider getCustom(ItemStack stack) {
+    for (var entry : CUSTOM_FOODS.entrySet()) {
+      if (entry.getKey().testIgnoreCount(stack)) {
+        return entry.getValue().get();
+      }
     }
-
-    @Nullable
-    public static ICapabilityProvider getCustom(ItemStack stack) {
-        for (var entry : CUSTOM_FOODS.entrySet()) {
-            if (entry.getKey().testIgnoreCount(stack)) {
-                return entry.getValue().get();
-            }
-        }
-        return null;
-    }
+    return null;
+  }
 }

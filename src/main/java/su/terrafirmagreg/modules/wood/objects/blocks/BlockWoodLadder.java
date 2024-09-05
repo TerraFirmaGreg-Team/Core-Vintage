@@ -15,19 +15,19 @@ import lombok.Getter;
 @Getter
 public class BlockWoodLadder extends BlockLadder implements IWoodBlock {
 
-    protected final Settings settings;
-    private final WoodBlockVariant variant;
-    private final WoodType type;
+  protected final Settings settings;
+  private final WoodBlockVariant variant;
+  private final WoodType type;
 
-    public BlockWoodLadder(WoodBlockVariant variant, WoodType type) {
-        this.variant = variant;
-        this.type = type;
+  public BlockWoodLadder(WoodBlockVariant variant, WoodType type) {
+    this.variant = variant;
+    this.type = type;
 
-        this.settings = Settings.of(Material.CIRCUITS)
-                .sound(SoundType.LADDER)
-                .oreDict(variant)
-                .oreDict(variant, "wood");
+    this.settings = Settings.of(Material.CIRCUITS)
+        .sound(SoundType.LADDER)
+        .oreDict(variant)
+        .oreDict(variant, "wood");
 
-        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
-    }
+    BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
+  }
 }

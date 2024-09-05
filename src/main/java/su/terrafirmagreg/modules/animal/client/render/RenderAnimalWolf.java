@@ -10,8 +10,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderAnimalWolf extends RenderWolf {
 
-    public RenderAnimalWolf(RenderManager renderManager) {
-        super(renderManager);
-        this.mainModel = new ModelAnimalWolf();
-    }
+  public RenderAnimalWolf(RenderManager renderManager) {
+    super(renderManager);
+    this.mainModel = new ModelAnimalWolf();
+  }
 }

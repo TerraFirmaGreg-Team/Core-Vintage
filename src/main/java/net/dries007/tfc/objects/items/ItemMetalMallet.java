@@ -46,7 +46,6 @@ import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
-import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
@@ -56,7 +55,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static su.terrafirmagreg.data.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 public class ItemMetalMallet extends ItemTFC implements ICapabilityMetal {

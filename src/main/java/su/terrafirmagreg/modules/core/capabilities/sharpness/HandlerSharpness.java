@@ -17,28 +17,28 @@ import java.util.function.Supplier;
 
 public class HandlerSharpness {
 
-    //Used inside CT, set custom IItemHeat for items outside TFC
-    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>();
+  //Used inside CT, set custom IItemHeat for items outside TFC
+  public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>();
 
-    public static void init() {
-    }
+  public static void init() {
+  }
 
-    @Nullable
-    public static ICapabilityProvider getCustom(ItemStack stack) {
-        for (var entry : CUSTOM_ITEMS.entrySet()) {
-            if (entry.getKey().testIgnoreCount(stack)) {
-                return entry.getValue().get();
-            }
-        }
-        if (stack.getItem() instanceof ItemMetalTool) {
-            return new ProviderSharpness(stack);
-        }
-        if (stack.getItem() instanceof ItemMetalSword) {
-            return new ProviderSharpness(stack);
-        }
-        if (stack.getItem() instanceof ItemRopeJavelin) {
-            return new ProviderSharpness(stack);
-        }
-        return null;
+  @Nullable
+  public static ICapabilityProvider getCustom(ItemStack stack) {
+    for (var entry : CUSTOM_ITEMS.entrySet()) {
+      if (entry.getKey().testIgnoreCount(stack)) {
+        return entry.getValue().get();
+      }
     }
+    if (stack.getItem() instanceof ItemMetalTool) {
+      return new ProviderSharpness(stack);
+    }
+    if (stack.getItem() instanceof ItemMetalSword) {
+      return new ProviderSharpness(stack);
+    }
+    if (stack.getItem() instanceof ItemRopeJavelin) {
+      return new ProviderSharpness(stack);
+    }
+    return null;
+  }
 }

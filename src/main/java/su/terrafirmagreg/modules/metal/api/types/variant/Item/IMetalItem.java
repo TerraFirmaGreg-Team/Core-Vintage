@@ -13,14 +13,14 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface IMetalItem extends IType<MetalType>, IVariant<MetalItemVariant>, IItemSettings {
 
-    /**
-     * Возвращает расположение в реестре для данного подтипа предмета.
-     *
-     * @return Расположение в реестре
-     */
-    @NotNull
-    default String getRegistryKey() {
-        return String.format("metal/%s/%s", getVariant(), getType());
-    }
+  /**
+   * Возвращает расположение в реестре для данного подтипа предмета.
+   *
+   * @return Расположение в реестре
+   */
+  @NotNull
+  default String getRegistryKey() {
+    return String.format("metal/%s/%s", getVariant(), getType());
+  }
 
 }

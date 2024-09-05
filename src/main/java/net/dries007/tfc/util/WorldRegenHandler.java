@@ -6,6 +6,8 @@ import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorBerryBushes;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorPlant;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorTrees;
@@ -39,11 +41,9 @@ import com.google.common.collect.Lists;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.plants.BlockMushroomTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
@@ -60,7 +60,7 @@ import java.util.Random;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.data.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.MathConstants.RNG;
 
 /**
  * Seasonally regenerates rocks, sticks, snow, plants, crops and bushes.
@@ -171,9 +171,9 @@ public class WorldRegenHandler {
                 if (!topState.getMaterial()
                         .isLiquid() && (topBlock instanceof BlockCropDead || topBlock instanceof BlockMushroomTFC)) {
                     IBlockState soil = world.getBlockState(topPos.down());
-                    if (soil.getBlock() instanceof BlockRockVariant soilRock) {
+                    if (soil.getBlock() instanceof ISoilBlock soilRock) {
                         //Stop removing dead crops from farmland please!
-                        if (soilRock.getType() != Rock.Type.FARMLAND) {
+                        if (soilRock.getVariant() != BlocksSoil.FARMLAND) {
                             world.removeTileEntity(topPos);
                             world.setBlockToAir(topPos);
                         }

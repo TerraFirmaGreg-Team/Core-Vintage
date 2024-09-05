@@ -19,41 +19,48 @@ import java.util.function.BiFunction;
 @Getter
 public class RockItemVariant extends Variant<RockItemVariant> {
 
-    @Getter
-    private static final Set<RockItemVariant> itemVariants = new ObjectOpenHashSet<>();
+  @Getter
+  private static final Set<RockItemVariant> itemVariants = new ObjectOpenHashSet<>();
 
-    private BiFunction<RockItemVariant, RockType, ? extends Item> factory;
+  private BiFunction<RockItemVariant, RockType, ? extends Item> factory;
 
-    private RockItemVariant(String name) {
-        super(name);
+  private RockItemVariant(String name) {
+    super(name);
 
-        if (!itemVariants.add(this)) throw new RuntimeException(String.format("RockItemVariant: [%s] already exists!", name));
+    if (!itemVariants.add(this)) {
+      throw new RuntimeException(String.format("RockItemVariant: [%s] already exists!", name));
     }
+  }
 
-    public Item get(RockType type) {
-        var item = ItemsRock.ROCK_ITEMS.get(Pair.of(this, type));
-        if (item != null) return item;
-        throw new RuntimeException(String.format("Item rock is null: %s, %s", this, type));
-    }
+  public static RockItemVariant builder(String name) {
+    return new RockItemVariant(name);
+  }
 
-    public static RockItemVariant builder(String name) {
-        return new RockItemVariant(name);
+  public Item get(RockType type) {
+    var item = ItemsRock.ROCK_ITEMS.get(Pair.of(this, type));
+    if (item != null) {
+      return item;
     }
+    throw new RuntimeException(String.format("Item rock is null: %s, %s", this, type));
+  }
 
-    public RockItemVariant setFactory(BiFunction<RockItemVariant, RockType, ? extends Item> factory) {
-        this.factory = factory;
-        return this;
-    }
+  public RockItemVariant setFactory(BiFunction<RockItemVariant, RockType, ? extends Item> factory) {
+    this.factory = factory;
+    return this;
+  }
 
-    public RockItemVariant build() {
-        for (var type : RockType.getTypes()) {
-            if (ItemsRock.ROCK_ITEMS.put(Pair.of(this, type), factory.apply(this, type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-        }
-        return this;
+  public RockItemVariant build() {
+    for (var type : RockType.getTypes()) {
+      if (ItemsRock.ROCK_ITEMS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
+        throw new RuntimeException(
+            String.format("Duplicate registry detected: %s, %s", this, type));
+      }
     }
+    return this;
+  }
 
-    public String getLocalizedName() {
-        return new TextComponentTranslation(String.format("rock.variant.%s.name", this)).getFormattedText();
-    }
+  public String getLocalizedName() {
+    return new TextComponentTranslation(
+        String.format("rock.variant.%s.name", this)).getFormattedText();
+  }
 }

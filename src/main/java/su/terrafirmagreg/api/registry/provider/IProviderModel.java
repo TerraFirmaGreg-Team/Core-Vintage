@@ -10,12 +10,12 @@ import org.jetbrains.annotations.Nullable;
 // Configure automatic model registration
 public interface IProviderModel {
 
-    @SideOnly(Side.CLIENT)
-    default void onModelRegister() {
+  @SideOnly(Side.CLIENT)
+  default void onModelRegister() {
 
-    }
+  }
 
-    default @Nullable ResourceLocation getResourceLocation() {
-        return null;
-    }
+  default @Nullable ResourceLocation getResourceLocation() {
+    return null;
+  }
 }

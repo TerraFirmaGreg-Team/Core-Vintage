@@ -41,7 +41,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import static su.terrafirmagreg.data.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public class BlockLeavesTFC extends BlockLeaves {
 

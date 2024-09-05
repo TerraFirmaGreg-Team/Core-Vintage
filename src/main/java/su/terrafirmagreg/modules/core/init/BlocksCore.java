@@ -10,24 +10,24 @@ import su.terrafirmagreg.modules.core.objects.block.BlockThatch;
 
 public final class BlocksCore {
 
-    public static BlockDebug DEBUG;
-    public static BlockPuddle PUDDLE; //TODO: отключить регистрацию itemBlock
-    public static BlockThatch THATCH;
-    public static BlockAggregate AGGREGATE;
-    public static BlockIngotPile INGOT_PILE;
-    public static BlockJackOLantern JACK_O_LANTERN;
+  public static BlockDebug DEBUG;
+  public static BlockPuddle PUDDLE; //TODO: отключить регистрацию itemBlock
+  public static BlockThatch THATCH;
+  public static BlockAggregate AGGREGATE;
+  public static BlockIngotPile INGOT_PILE;
+  public static BlockJackOLantern JACK_O_LANTERN;
 
-    public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registry) {
 
-        //==== Other =================================================================================================//
+    //==== Other =================================================================================================//
 
-        DEBUG = registry.block(new BlockDebug());
-        PUDDLE = registry.block(new BlockPuddle());
-        THATCH = registry.block(new BlockThatch());
-        AGGREGATE = registry.block(new BlockAggregate());
-        INGOT_PILE = registry.block(new BlockIngotPile());
+    DEBUG = registry.block(new BlockDebug());
+    PUDDLE = registry.block(new BlockPuddle());
+    THATCH = registry.block(new BlockThatch());
+    AGGREGATE = registry.block(new BlockAggregate());
+    INGOT_PILE = registry.block(new BlockIngotPile());
 
-    }
+  }
 
 }
 

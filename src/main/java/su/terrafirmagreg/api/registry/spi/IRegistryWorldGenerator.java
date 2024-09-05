@@ -5,17 +5,17 @@ import su.terrafirmagreg.api.util.WorldUtils;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public interface IRegistryWorldGenerator
-        extends IRegistryBase {
+    extends IRegistryBase {
 
-    default IWorldGenerator worldGenerator(IWorldGenerator generator) {
+  default IWorldGenerator worldGenerator(IWorldGenerator generator) {
 
-        return worldGenerator(generator, 0);
-    }
+    return worldGenerator(generator, 0);
+  }
 
-    default IWorldGenerator worldGenerator(IWorldGenerator generator, int modGenerationWeight) {
-        WorldUtils.registerWorldGenerator(generator, modGenerationWeight);
+  default IWorldGenerator worldGenerator(IWorldGenerator generator, int modGenerationWeight) {
+    WorldUtils.registerWorldGenerator(generator, modGenerationWeight);
 
-        return generator;
-    }
+    return generator;
+  }
 
 }

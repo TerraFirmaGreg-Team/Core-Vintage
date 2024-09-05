@@ -6,8 +6,8 @@ import net.minecraft.item.ItemStack;
 
 public interface IQuernRecipe extends IBaseRecipe {
 
-    ItemStack getOutputItem(ItemStack stack);
+  ItemStack getOutputItem(ItemStack stack);
 
-    boolean isValidInput(ItemStack inputItem);
+  boolean isValidInput(ItemStack inputItem);
 
 }

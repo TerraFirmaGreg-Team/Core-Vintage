@@ -9,26 +9,26 @@ import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.OCEAN;
 
 public class BiomeDeepOcean extends BaseBiome {
 
-    public BiomeDeepOcean() {
-        super(new Settings("Deep Ocean")
-                .guiColour(0x000080)
-                .baseHeight(-3.2f)
-                .heightVariation(-2.49999f)
-                .baseBiome(OCEAN));
-    }
+  public BiomeDeepOcean() {
+    super(new Settings("Deep Ocean")
+        .guiColour(0x000080)
+        .baseHeight(-3.2f)
+        .heightVariation(-2.49999f)
+        .baseBiome(OCEAN));
+  }
 
-    @Override
-    public int getBiomeWeight() {
-        return 0;
-    }
+  @Override
+  public int getBiomeWeight() {
+    return 0;
+  }
 
-    @Override
-    public BiomeDictionary.Type[] getTypes() {
+  @Override
+  public BiomeDictionary.Type[] getTypes() {
 
-        return new BiomeDictionary.Type[] {
-                BiomeDictionary.Type.OCEAN,
-                BiomeDictionary.Type.WET,
-                BiomeDictionary.Type.WATER
-        };
-    }
+    return new BiomeDictionary.Type[]{
+        BiomeDictionary.Type.OCEAN,
+        BiomeDictionary.Type.WET,
+        BiomeDictionary.Type.WATER
+    };
+  }
 }

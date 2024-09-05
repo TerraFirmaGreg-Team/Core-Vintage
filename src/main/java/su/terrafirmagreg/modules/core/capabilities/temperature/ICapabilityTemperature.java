@@ -6,19 +6,19 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 public interface ICapabilityTemperature extends ICapabilitySerializable<NBTTagCompound> {
 
-    float getTemperature();
+  float getTemperature();
 
-    void setTemperature(float newTemp);
+  void setTemperature(float newTemp);
 
-    EntityPlayer getPlayer();
+  EntityPlayer getPlayer();
 
-    float getChange();
+  float getChange();
 
-    float getChangeSpeed();
+  float getChangeSpeed();
 
-    float getTarget();
+  float getTarget();
 
-    float getPotency();
+  float getPotency();
 
-    void update();
+  void update();
 }

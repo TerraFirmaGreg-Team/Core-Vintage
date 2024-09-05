@@ -10,22 +10,23 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public final class CapabilitySharpness {
 
-    public static final ResourceLocation KEY = ModUtils.resource("sharpness_capability");
+  public static final ResourceLocation KEY = ModUtils.resource("sharpness_capability");
 
-    @CapabilityInject(ICapabilitySharpness.class)
-    public static final Capability<ICapabilitySharpness> CAPABILITY = ModUtils.getNull();
+  @CapabilityInject(ICapabilitySharpness.class)
+  public static final Capability<ICapabilitySharpness> CAPABILITY = ModUtils.getNull();
 
-    public static void register() {
-        CapabilityManager.INSTANCE.register(ICapabilitySharpness.class, new StorageSharpness(), ProviderSharpness::new);
+  public static void register() {
+    CapabilityManager.INSTANCE.register(ICapabilitySharpness.class, new StorageSharpness(),
+        ProviderSharpness::new);
 
-    }
+  }
 
-    public static ICapabilitySharpness get(ItemStack itemStack) {
-        return itemStack.getCapability(CAPABILITY, null);
-    }
+  public static ICapabilitySharpness get(ItemStack itemStack) {
+    return itemStack.getCapability(CAPABILITY, null);
+  }
 
-    public static boolean has(ItemStack itemStack) {
-        return itemStack.hasCapability(CAPABILITY, null);
-    }
+  public static boolean has(ItemStack itemStack) {
+    return itemStack.hasCapability(CAPABILITY, null);
+  }
 
 }

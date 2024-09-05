@@ -18,30 +18,32 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalDireWolf extends RenderLiving<EntityAnimalDireWolf> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.resource("textures/entity/animal/predators/direwolf.png");
+  private static final ResourceLocation TEXTURE = ModUtils.resource(
+      "textures/entity/animal/predators/direwolf.png");
 
-    public RenderAnimalDireWolf(RenderManager renderManager) {
-        super(renderManager, new ModelAnimalDireWolf(), 0.7F);
-    }
+  public RenderAnimalDireWolf(RenderManager renderManager) {
+    super(renderManager, new ModelAnimalDireWolf(), 0.7F);
+  }
 
-    @Override
-    public void doRender(@NotNull EntityAnimalDireWolf direwolf, double par2, double par4, double par6, float par8, float par9) {
-        this.shadowSize = (float) (0.35f + (direwolf.getPercentToAdulthood() * 0.35f));
-        super.doRender(direwolf, par2, par4, par6, par8, par9);
-    }
+  @Override
+  public void doRender(@NotNull EntityAnimalDireWolf direwolf, double par2, double par4,
+      double par6, float par8, float par9) {
+    this.shadowSize = (float) (0.35f + (direwolf.getPercentToAdulthood() * 0.35f));
+    super.doRender(direwolf, par2, par4, par6, par8, par9);
+  }
 
-    @Override
-    protected float handleRotationFloat(EntityAnimalDireWolf par1EntityLiving, float par2) {
-        return 1.0f;
-    }
+  @Override
+  protected float handleRotationFloat(EntityAnimalDireWolf par1EntityLiving, float par2) {
+    return 1.0f;
+  }
 
-    @Override
-    protected void preRenderCallback(EntityAnimalDireWolf direwolfTFC, float par2) {
-        GlStateManager.scale(1.15f, 1.15f, 1.15f);
-    }
+  @Override
+  protected void preRenderCallback(EntityAnimalDireWolf direwolfTFC, float par2) {
+    GlStateManager.scale(1.15f, 1.15f, 1.15f);
+  }
 
-    @Override
-    protected ResourceLocation getEntityTexture(EntityAnimalDireWolf entity) {
-        return TEXTURE;
-    }
+  @Override
+  protected ResourceLocation getEntityTexture(EntityAnimalDireWolf entity) {
+    return TEXTURE;
+  }
 }

@@ -6,9 +6,9 @@ import net.minecraft.block.SoundType;
 
 public abstract class BlockRockDecorative extends BaseBlock {
 
-    public BlockRockDecorative(Settings settings) {
-        super(settings
-                .sound(SoundType.STONE)
-                .hardness(1.0F));
-    }
+  public BlockRockDecorative(Settings settings) {
+    super(settings
+        .sound(SoundType.STONE)
+        .hardness(1.0F));
+  }
 }

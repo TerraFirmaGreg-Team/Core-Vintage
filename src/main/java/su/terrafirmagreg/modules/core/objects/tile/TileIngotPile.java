@@ -19,55 +19,57 @@ import lombok.Getter;
 
 @Getter
 public class TileIngotPile
-        extends BaseTile {
+    extends BaseTile {
 
-    private Metal metal;
-    private int count;
+  private Metal metal;
+  private int count;
 
-    public TileIngotPile() {
-        metal = Metal.UNKNOWN;
-        count = 1;
-    }
+  public TileIngotPile() {
+    metal = Metal.UNKNOWN;
+    count = 1;
+  }
 
-    @Override
-    public void readFromNBT(NBTTagCompound tag) {
-        metal = TFCRegistries.METALS.getValue(new ResourceLocation(tag.getString("metal")));
-        count = tag.getInteger("count");
-        super.readFromNBT(tag);
-    }
+  @Override
+  public void readFromNBT(NBTTagCompound tag) {
+    metal = TFCRegistries.METALS.getValue(new ResourceLocation(tag.getString("metal")));
+    count = tag.getInteger("count");
+    super.readFromNBT(tag);
+  }
 
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-        //noinspection ConstantConditions
-        tag.setString("metal", (metal == null) ? Metal.UNKNOWN.getRegistryName().toString() : metal.getRegistryName()
-                .toString());
-        tag.setInteger("count", count);
-        return super.writeToNBT(tag);
-    }
+  @Override
+  public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+    //noinspection ConstantConditions
+    tag.setString("metal",
+        (metal == null) ? Metal.UNKNOWN.getRegistryName().toString() : metal.getRegistryName()
+            .toString());
+    tag.setInteger("count", count);
+    return super.writeToNBT(tag);
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public double getMaxRenderDistanceSquared() {
-        return 1024.0D;
-    }
+  @Override
+  @SideOnly(Side.CLIENT)
+  public double getMaxRenderDistanceSquared() {
+    return 1024.0D;
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getRenderBoundingBox() {
-        return INFINITE_EXTENT_AABB;
-    }
+  @Override
+  @SideOnly(Side.CLIENT)
+  public AxisAlignedBB getRenderBoundingBox() {
+    return INFINITE_EXTENT_AABB;
+  }
 
-    public void onBreakBlock() {
-        InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ItemIngot.get(metal, Metal.ItemType.INGOT), count));
-    }
+  public void onBreakBlock() {
+    InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(),
+        new ItemStack(ItemIngot.get(metal, Metal.ItemType.INGOT), count));
+  }
 
-    public void setMetal(Metal metal) {
-        this.metal = metal;
-        markForBlockUpdate();
-    }
+  public void setMetal(Metal metal) {
+    this.metal = metal;
+    markForBlockUpdate();
+  }
 
-    public void setCount(int count) {
-        this.count = count;
-        markForBlockUpdate();
-    }
+  public void setCount(int count) {
+    this.count = count;
+    markForBlockUpdate();
+  }
 }

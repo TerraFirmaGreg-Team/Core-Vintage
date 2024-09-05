@@ -11,23 +11,24 @@ import static su.terrafirmagreg.modules.rock.init.BlocksRock.BRICKS;
 
 public class BlockAlabasterBricks extends BlockRockDecorative {
 
-    public BlockAlabasterBricks() {
-        this(EnumDyeColor.WHITE);
+  public BlockAlabasterBricks() {
+    this(EnumDyeColor.WHITE);
 
-        getSettings()
-                .registryKey("rock/alabaster/bricks/plain");
+    getSettings()
+        .registryKey("rock/alabaster/bricks/plain");
 
-        for (var color : EnumDyeColor.values()) {
-            BlocksRock.ALABASTER_COLOR_BLOCKS.put(Pair.of(BRICKS, color), new BlockAlabasterBricks(color));
-        }
+    for (var color : EnumDyeColor.values()) {
+      BlocksRock.ALABASTER_COLOR_BLOCKS.put(Pair.of(BRICKS, color),
+          new BlockAlabasterBricks(color));
     }
+  }
 
-    public BlockAlabasterBricks(EnumDyeColor color) {
-        super(Settings.of(Material.ROCK, color));
+  public BlockAlabasterBricks(EnumDyeColor color) {
+    super(Settings.of(Material.ROCK, color));
 
-        getSettings()
-                .oreDict("alabaster")
-                .oreDict("alabaster", "bricks")
-                .registryKey("rock/alabaster/bricks/" + color.getName());
-    }
+    getSettings()
+        .oreDict("alabaster")
+        .oreDict("alabaster", "bricks")
+        .registryKey("rock/alabaster/bricks/" + color.getName());
+  }
 }

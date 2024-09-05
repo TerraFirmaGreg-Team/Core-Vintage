@@ -7,12 +7,12 @@ import net.minecraft.util.BlockRenderLayer;
 
 public class BlockSoilRootedDirt extends BlockSoil {
 
-    public BlockSoilRootedDirt(SoilBlockVariant variant, SoilType type) {
-        super(variant, type);
+  public BlockSoilRootedDirt(SoilBlockVariant variant, SoilType type) {
+    super(variant, type);
 
-        getSettings()
-                .renderLayer(BlockRenderLayer.CUTOUT);
+    getSettings()
+        .renderLayer(BlockRenderLayer.CUTOUT);
 
-        //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
-    }
+    //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
+  }
 }

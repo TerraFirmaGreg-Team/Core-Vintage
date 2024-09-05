@@ -17,125 +17,127 @@ import java.util.Set;
 
 public interface ICapabilityChunkData extends ICapabilitySerializable<NBTTagCompound> {
 
-    int[] getSoilLayer1();
+  int[] getSoilLayer1();
 
-    int[] getRockLayer1();
+  int[] getRockLayer1();
 
-    int[] getRockLayer2();
+  int[] getRockLayer2();
 
-    int[] getRockLayer3();
+  int[] getRockLayer3();
 
-    int[] getSeaLevelOffset();
+  int[] getSeaLevelOffset();
 
-    DataLayerClassic[] getDrainageLayer(); // To be removed / replaced?
+  DataLayerClassic[] getDrainageLayer(); // To be removed / replaced?
 
-    DataLayerClassic[] getStabilityLayer(); // To be removed / replaced?
+  DataLayerClassic[] getStabilityLayer(); // To be removed / replaced?
 
-    boolean isInitialized();
+  boolean isInitialized();
 
-    boolean isSpawnProtected();
+  void setInitialized(boolean initialized);
 
-    int getFishPopulation();
+  boolean isSpawnProtected();
 
-    float getRainfall();
+  int getFishPopulation();
 
-    float getRegionalTemp();
+  void setFishPopulation(int fishPopulation);
 
-    float getAverageTemp();
+  float getRainfall();
 
-    float getFloraDensity();
+  void setRainfall(float rainfall);
 
-    float getFloraDiversity();
+  float getRegionalTemp();
 
-    int getChunkWorkage();
+  void setRegionalTemp(float regionalTemp);
 
-    long getSpawnProtection();
+  float getAverageTemp();
 
-    long getProtectedTicks();
+  void setAverageTemp(float averageTemp);
 
-    long getLastUpdateTick();
+  float getFloraDensity();
 
-    long getLastUpdateYear();
+  void setFloraDensity(float density);
 
-    boolean canWork(int amount);
+  float getFloraDiversity();
 
-    void addWork(int amount);
+  void setFloraDiversity(float diversity);
 
-    void addWork();
+  int getChunkWorkage();
 
-    void setWork(int amount);
+  void setChunkWorkage(int workage);
 
-    void addSpawnProtection(int multiplier);
+  long getSpawnProtection();
 
-    void setInitialized(boolean initialized);
+  long getProtectedTicks();
 
-    void setFishPopulation(int fishPopulation);
+  void setProtectedTicks(long ticks);
 
-    void setRainfall(float rainfall);
+  long getLastUpdateTick();
 
-    void setRegionalTemp(float regionalTemp);
+  void setLastUpdateTick(long tick);
 
-    void setAverageTemp(float averageTemp);
+  long getLastUpdateYear();
 
-    void setFloraDensity(float density);
+  void setLastUpdateYear(long year);
 
-    void setFloraDiversity(float diversity);
+  boolean canWork(int amount);
 
-    void setChunkWorkage(int workage);
+  void addWork(int amount);
 
-    void setProtectedTicks(long ticks);
+  void addWork();
 
-    void setLastUpdateTick(long tick);
+  void setWork(int amount);
 
-    void setLastUpdateYear(long year);
+  void addSpawnProtection(int multiplier);
 
-    void resetLastUpdateTick();
+  void resetLastUpdateTick();
 
-    void resetLastUpdateYear();
+  void resetLastUpdateYear();
 
-    void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, int[] soilLayer1, DataLayerClassic[] stabilityLayer,
-                           DataLayerClassic[] drainageLayer,
-                           int[] seaLevelOffset, float rainfall, float regionalTemp, float avgTemp, float floraDensity, float floraDiversity);
+  void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, int[] soilLayer1,
+      DataLayerClassic[] stabilityLayer,
+      DataLayerClassic[] drainageLayer,
+      int[] seaLevelOffset, float rainfall, float regionalTemp, float avgTemp, float floraDensity,
+      float floraDiversity);
 
-    Set<Vein> getGeneratedVeins();
+  Set<Vein> getGeneratedVeins();
 
-    DataLayerClassic getStabilityLayer(int x, int z);
+  DataLayerClassic getStabilityLayer(int x, int z);
 
-    DataLayerClassic getDrainageLayer(int x, int z);
+  DataLayerClassic getDrainageLayer(int x, int z);
 
-    int getSeaLevelOffset(BlockPos pos);
+  int getSeaLevelOffset(BlockPos pos);
 
-    int getSeaLevelOffset(int x, int z);
+  int getSeaLevelOffset(int x, int z);
 
-    SoilType getSoilLayer1(int x, int z);
+  SoilType getSoilLayer1(int x, int z);
 
-    RockType getRockLayer1(int x, int z);
+  RockType getRockLayer1(int x, int z);
 
-    RockType getRockLayer2(int x, int z);
+  RockType getRockLayer2(int x, int z);
 
-    RockType getRockLayer3(int x, int z);
+  RockType getRockLayer3(int x, int z);
 
-    RockType getRockLayerHeight(int x, int y, int z);
+  RockType getRockLayerHeight(int x, int y, int z);
 
-    SoilType getSoilLayerHeight(int x, int y, int z);
+  SoilType getSoilLayerHeight(int x, int y, int z);
 
-    RockType getRock1(BlockPos pos);
+  RockType getRock1(BlockPos pos);
 
-    RockType getRock1(int x, int z);
+  RockType getRock1(int x, int z);
 
-    RockType getRock2(BlockPos pos);
+  RockType getRock2(BlockPos pos);
 
-    RockType getRock2(int x, int z);
+  RockType getRock2(int x, int z);
 
-    RockType getRock3(BlockPos pos);
+  RockType getRock3(BlockPos pos);
 
-    RockType getRock3(int x, int z);
+  RockType getRock3(int x, int z);
 
-    RockType getRockHeight(BlockPos pos);
+  RockType getRockHeight(BlockPos pos);
 
-    List<Tree> getValidTrees();
+  List<Tree> getValidTrees();
 
-    Tree getSparseGenTree();
+  Tree getSparseGenTree();
 
 }
 

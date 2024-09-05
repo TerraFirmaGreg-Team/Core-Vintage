@@ -10,12 +10,15 @@ import org.jetbrains.annotations.Nullable;
 
 public class StorageMetal implements IStorage<ICapabilityMetal> {
 
-    @Nullable
-    @Override
-    public NBTBase writeNBT(Capability<ICapabilityMetal> capability, ICapabilityMetal instance, EnumFacing side) {
-        return null;
-    }
+  @Nullable
+  @Override
+  public NBTBase writeNBT(Capability<ICapabilityMetal> capability, ICapabilityMetal instance,
+      EnumFacing side) {
+    return null;
+  }
 
-    @Override
-    public void readNBT(Capability<ICapabilityMetal> capability, ICapabilityMetal instance, EnumFacing side, NBTBase nbt) {}
+  @Override
+  public void readNBT(Capability<ICapabilityMetal> capability, ICapabilityMetal instance,
+      EnumFacing side, NBTBase nbt) {
+  }
 }

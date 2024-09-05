@@ -6,9 +6,9 @@ import net.minecraft.item.ItemSlab;
 
 public class BaseItemSlab extends ItemSlab {
 
-    public BaseItemSlab(BaseBlockSlab halfSlab, BaseBlockSlab doubleSlab) {
-        super(halfSlab, halfSlab, doubleSlab);
+  public BaseItemSlab(BaseBlockSlab halfSlab, BaseBlockSlab doubleSlab) {
+    super(halfSlab, halfSlab, doubleSlab);
 
-    }
+  }
 
 }

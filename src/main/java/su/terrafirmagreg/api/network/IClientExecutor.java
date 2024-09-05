@@ -6,6 +6,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface IClientExecutor {
 
-    @SideOnly(Side.CLIENT)
-    void executeClient(NetHandlerPlayClient handler);
+  @SideOnly(Side.CLIENT)
+  void executeClient(NetHandlerPlayClient handler);
 }

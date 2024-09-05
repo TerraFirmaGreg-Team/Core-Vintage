@@ -12,20 +12,20 @@ import net.dries007.tfc.util.forge.ForgeSteps;
 import net.dries007.tfc.util.skills.SmithingSkill;
 
 public interface IAnvilRecipe
-        extends IBaseRecipe {
+    extends IBaseRecipe {
 
-    ForgeRule[] getRules();
+  ForgeRule[] getRules();
 
-    Metal.Tier getTier();
+  Metal.Tier getTier();
 
-    SmithingSkill.Type getSkillBonusType();
+  SmithingSkill.Type getSkillBonusType();
 
-    NonNullList<ItemStack> getOutputItem(ItemStack stack);
+  NonNullList<ItemStack> getOutputItem(ItemStack stack);
 
-    boolean isValidInput(ItemStack inputItem);
+  boolean isValidInput(ItemStack inputItem);
 
-    boolean matches(ForgeSteps steps);
+  boolean matches(ForgeSteps steps);
 
-    int getTarget(long worldSeed);
+  int getTarget(long worldSeed);
 
 }

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.animal;
 
-import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.animal.event.EasyBreedingEventHandler;
 import su.terrafirmagreg.modules.animal.init.BlocksAnimal;
 import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;
@@ -21,35 +21,35 @@ import static su.terrafirmagreg.modules.ModuleContainer.ANIMAL;
 @Module(moduleID = ANIMAL)
 public final class ModuleAnimal extends ModuleBase {
 
-    public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAnimal.class.getSimpleName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAnimal.class.getSimpleName());
 
-    public ModuleAnimal() {
-        this.enableAutoRegistry(ModuleCore.CORE_TAB);
-        this.enableNetwork();
+  public ModuleAnimal() {
+    this.enableAutoRegistry(ModuleCore.CORE_TAB);
+    this.enableNetwork();
 
-    }
+  }
 
-    @Override
-    public void onRegister() {
-        BlocksAnimal.onRegister(registryManager);
-        ItemsAnimal.onRegister(registryManager);
-        EntitiesAnimal.onRegister(registryManager);
-        LootTablesAnimal.onRegister(registryManager);
-    }
+  @Override
+  public void onRegister() {
+    BlocksAnimal.onRegister(registryManager);
+    ItemsAnimal.onRegister(registryManager);
+    EntitiesAnimal.onRegister(registryManager);
+    LootTablesAnimal.onRegister(registryManager);
+  }
 
-    @Override
-    public void onClientRegister() {
-        EntitiesAnimal.onClientRegister(registryManager);
+  @Override
+  public void onClientRegister() {
+    EntitiesAnimal.onClientRegister(registryManager);
 
-    }
+  }
 
-    @Override
-    public void onInit(FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new EasyBreedingEventHandler());
-    }
+  @Override
+  public void onInit(FMLInitializationEvent event) {
+    MinecraftForge.EVENT_BUS.register(new EasyBreedingEventHandler());
+  }
 
-    @Override
-    public @NotNull LoggingHelper getLogger() {
-        return LOGGER;
-    }
+  @Override
+  public @NotNull LoggingHelper getLogger() {
+    return LOGGER;
+  }
 }

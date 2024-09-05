@@ -5,8 +5,8 @@ import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariant;
 
 public class ItemSoilPile extends ItemSoil {
 
-    public ItemSoilPile(SoilItemVariant variant, SoilType type) {
-        super(variant, type);
-    }
+  public ItemSoilPile(SoilItemVariant variant, SoilType type) {
+    super(variant, type);
+  }
 
 }

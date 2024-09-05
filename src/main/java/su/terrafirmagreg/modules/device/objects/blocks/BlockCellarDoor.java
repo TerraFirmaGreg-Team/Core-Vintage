@@ -8,14 +8,14 @@ import net.minecraft.block.material.Material;
 
 public class BlockCellarDoor extends BaseBlockDoor {
 
-    public BlockCellarDoor() {
-        super(Settings.of(Material.WOOD));
+  public BlockCellarDoor() {
+    super(Settings.of(Material.WOOD));
 
-        getSettings()
-                .registryKey("device/cellar/door")
-                .sound(SoundType.WOOD)
-                .hardness(2F);
+    getSettings()
+        .registryKey("device/cellar/door")
+        .sound(SoundType.WOOD)
+        .hardness(2F);
 
-        BlockUtils.setFireInfo(this, 5, 20);
-    }
+    BlockUtils.setFireInfo(this, 5, 20);
+  }
 }

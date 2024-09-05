@@ -17,40 +17,41 @@ import io.netty.buffer.ByteBuf;
 
 public class SCPacketTileEntity implements IMessage, IMessageHandler<SCPacketTileEntity, IMessage> {
 
-    private NBTTagCompound tileEntity;
-    private BlockPos pos;
+  private NBTTagCompound tileEntity;
+  private BlockPos pos;
 
-    @SuppressWarnings("unused")
-    public SCPacketTileEntity() {}
+  @SuppressWarnings("unused")
+  public SCPacketTileEntity() {
+  }
 
-    public SCPacketTileEntity(TileEntity tile) {
-        pos = tile.getPos();
-        tileEntity = tile.serializeNBT();
+  public SCPacketTileEntity(TileEntity tile) {
+    pos = tile.getPos();
+    tileEntity = tile.serializeNBT();
+  }
+
+  @Override
+  public void fromBytes(ByteBuf byteBuf) {
+    pos = BlockPos.fromLong(byteBuf.readLong());
+    tileEntity = ByteBufUtils.readTag(byteBuf);
+  }
+
+  @Override
+  public void toBytes(ByteBuf byteBuf) {
+    byteBuf.writeLong(pos.toLong());
+    ByteBufUtils.writeTag(byteBuf, tileEntity);
+  }
+
+  @Override
+  public IMessage onMessage(SCPacketTileEntity message, MessageContext ctx) {
+    EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
+    if (player != null) {
+      World world = player.getEntityWorld();
+      TileEntity tile = world.getTileEntity(message.pos);
+      if (tile != null) {
+        tile.readFromNBT(message.tileEntity);
+      }
     }
-
-    @Override
-    public void fromBytes(ByteBuf byteBuf) {
-        pos = BlockPos.fromLong(byteBuf.readLong());
-        tileEntity = ByteBufUtils.readTag(byteBuf);
-    }
-
-    @Override
-    public void toBytes(ByteBuf byteBuf) {
-        byteBuf.writeLong(pos.toLong());
-        ByteBufUtils.writeTag(byteBuf, tileEntity);
-    }
-
-    @Override
-    public IMessage onMessage(SCPacketTileEntity message, MessageContext ctx) {
-        EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
-        if (player != null) {
-            World world = player.getEntityWorld();
-            TileEntity tile = world.getTileEntity(message.pos);
-            if (tile != null) {
-                tile.readFromNBT(message.tileEntity);
-            }
-        }
-        return null;
-    }
+    return null;
+  }
 
 }

@@ -26,29 +26,33 @@ import java.util.List;
 @Getter
 public class BlockRockWall extends BaseBlockWall implements IRockBlock {
 
-    private final RockBlockVariant variant;
-    private final RockType type;
+  private final RockBlockVariant variant;
+  private final RockType type;
 
-    public BlockRockWall(RockBlockVariant modelBlock, RockBlockVariant variant, RockType type) {
-        super(modelBlock.get(type));
+  public BlockRockWall(RockBlockVariant modelBlock, RockBlockVariant variant, RockType type) {
+    super(modelBlock.get(type));
 
-        this.variant = variant;
-        this.type = type;
+    this.variant = variant;
+    this.type = type;
 
-        getSettings()
-                .sound(SoundType.STONE)
-                .renderLayer(BlockRenderLayer.CUTOUT)
-                .oreDict("wall")
-                .oreDict("wall", "stone");
+    getSettings()
+        .registryKey(variant.getRegistryKey(type))
+        .hardness(variant.getHardness(type))
+        .sound(SoundType.STONE)
+        .renderLayer(BlockRenderLayer.CUTOUT)
+        .oreDict("wall")
+        .oreDict("wall", "stone");
 
-        setHarvestLevel(ToolClasses.PICKAXE, 0);
-    }
+    setHarvestLevel(ToolClasses.PICKAXE, 0);
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
+      ITooltipFlag flagIn) {
+    super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + type.getCategory().getLocalizedName());
-    }
+    tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": "
+        + type.getCategory().getLocalizedName());
+  }
 }

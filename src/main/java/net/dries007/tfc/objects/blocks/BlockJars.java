@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -21,8 +20,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import su.terrafirmagreg.data.Properties;
-
 
 import mcp.MethodsReturnNonnullByDefault;
 
@@ -30,10 +27,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
+import static su.terrafirmagreg.data.Properties.JARS;
+
 @MethodsReturnNonnullByDefault
 public class BlockJars extends BlockNonCube {
 
-    public static final PropertyInteger JARS = Properties.JARS;
     private static final AxisAlignedBB SHAPE = new AxisAlignedBB(2D / 16, 0D, 2D / 16, 14D / 16, 6D / 16, 14D / 16);
     private final Supplier<? extends Item> item;
 

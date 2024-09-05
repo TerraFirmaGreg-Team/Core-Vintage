@@ -31,6 +31,10 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 import su.terrafirmagreg.modules.metal.objects.block.BlockMetalAnvil;
+import su.terrafirmagreg.modules.rock.api.types.type.RockTypes;
+import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
@@ -117,15 +121,12 @@ import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.network.PacketCalendarUpdate;
 import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
@@ -140,7 +141,9 @@ import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.skills.SmithingSkill;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.data.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.CAN_FALL;
+import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.*;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFC)
@@ -257,8 +260,7 @@ public final class CommonEventHandler {
         }
 
         // Drop shards from glass
-        ItemStack stackAt = new ItemStack(Item.getItemFromBlock(state.getBlock()), 1, state.getBlock()
-                .damageDropped(state));
+        ItemStack stackAt = new ItemStack(Item.getItemFromBlock(state.getBlock()), 1, state.getBlock().damageDropped(state));
         if (!event.isSilkTouching() && OreDictionaryHelper.doesStackMatchOre(stackAt, "blockGlass")) {
             event.getDrops().add(new ItemStack(ItemsCore.GLASS_SHARD));
         }
@@ -292,7 +294,7 @@ public final class CommonEventHandler {
                 event.setNewSpeed(event.getNewSpeed() + (event.getNewSpeed() * skillModifier));
             }
         }
-        if (event.getState().getBlock() instanceof BlockRockVariant) {
+        if (event.getState().getBlock() instanceof IRockBlock) {
             event.setNewSpeed((float) (event.getNewSpeed() / ConfigTFC.General.MISC.rockMiningTimeModifier));
         }
         if (event.getState().getBlock() instanceof BlockLogTFC) {
@@ -353,11 +355,17 @@ public final class CommonEventHandler {
         Block block = state.getBlock();
 
         if (ConfigTFC.General.OVERRIDES.enableHoeing) {
-            if (block instanceof BlockRockVariant blockRock) {
-                if (blockRock.getType() == Rock.Type.GRASS || blockRock.getType() == Rock.Type.DIRT) {
+            if (block instanceof ISoilBlock soilBlock) {
+                if (BlockUtils.isVariant(soilBlock.getVariant(), GRASS, DIRT, PODZOL, SPARSE_GRASS)) {
                     if (!world.isRemote) {
                         world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                        world.setBlockState(pos, BlockRockVariant.get(blockRock.getRock(), Rock.Type.FARMLAND).getDefaultState());
+                        world.setBlockState(pos, FARMLAND.get(soilBlock.getType()).getDefaultState());
+                    }
+                    event.setResult(Event.Result.ALLOW);
+                } else if (soilBlock.getVariant() == COARSE_DIRT) {
+                    if (!world.isRemote) {
+                        world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                        world.setBlockState(pos, DIRT.get(soilBlock.getType()).getDefaultState());
                     }
                     event.setResult(Event.Result.ALLOW);
                 }
@@ -365,10 +373,10 @@ public final class CommonEventHandler {
         }
         if (block instanceof IGrowingPlant plant && !world.isRemote) {
             Entity entity = event.getEntity();
-            if (entity instanceof EntityPlayerMP && entity.isSneaking()) {
+            if (entity instanceof EntityPlayerMP entityPlayerMP && entity.isSneaking()) {
                 TerraFirmaCraft.getNetwork()
                         .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, plant.getGrowingStatus(state, world, pos)
-                                .toString()), (EntityPlayerMP) entity);
+                                .toString()), entityPlayerMP);
             }
 
         }
@@ -594,9 +602,9 @@ public final class CommonEventHandler {
      */
     @SubscribeEvent
     public static void onContainerOpen(PlayerContainerEvent.Open event) {
-        if (event.getEntityPlayer() instanceof EntityPlayerMP) {
+        if (event.getEntityPlayer() instanceof EntityPlayerMP entityPlayerMP) {
             // Capability Sync Handler
-            CapabilityContainerListener.addTo(event.getContainer(), (EntityPlayerMP) event.getEntityPlayer());
+            CapabilityContainerListener.addTo(event.getContainer(), entityPlayerMP);
         }
     }
 
@@ -891,14 +899,14 @@ public final class CommonEventHandler {
         // Since cobble is a gravity block, placing it can lead to world crashes, so we avoid doing that and place rhyolite instead
         if (ConfigTFC.General.OVERRIDES.enableLavaWaterPlacesTFCBlocks) {
             if (event.getNewState().getBlock() == Blocks.STONE) {
-                event.setNewState(BlockRockVariant.get(Rock.BASALT, Rock.Type.RAW)
+                event.setNewState(BlocksRock.RAW.get(RockTypes.BASALT)
                         .getDefaultState()
-                        .withProperty(BlockRockRaw.CAN_FALL, false));
+                        .withProperty(CAN_FALL, false));
             }
             if (event.getNewState().getBlock() == Blocks.COBBLESTONE) {
-                event.setNewState(BlockRockVariant.get(Rock.RHYOLITE, Rock.Type.RAW)
+                event.setNewState(BlocksRock.RAW.get(RockTypes.RHYOLITE)
                         .getDefaultState()
-                        .withProperty(BlockRockRaw.CAN_FALL, false));
+                        .withProperty(CAN_FALL, false));
             }
         }
     }

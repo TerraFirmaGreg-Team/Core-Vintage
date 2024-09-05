@@ -8,7 +8,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 public interface ICapabilityWorldTracker extends ICapabilitySerializable<NBTTagCompound> {
 
-    void addCollapseData(CollapseData collapse);
+  void addCollapseData(CollapseData collapse);
 
-    void tick(World world);
+  void tick(World world);
 }

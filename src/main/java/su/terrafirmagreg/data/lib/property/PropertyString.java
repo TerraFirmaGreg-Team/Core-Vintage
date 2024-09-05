@@ -13,45 +13,45 @@ import java.util.Map;
 
 public class PropertyString extends PropertyHelper<String> {
 
-    private final Collection<String> possibleValues;
+  private final Collection<String> possibleValues;
 
-    private final Map<String, Integer> valueMap = new HashMap<>();
+  private final Map<String, Integer> valueMap = new HashMap<>();
 
-    private PropertyString(String name, String... values) {
+  private PropertyString(String name, String... values) {
 
-        super(name, String.class);
-        this.possibleValues = new ArrayList<>(Arrays.asList(values));
+    super(name, String.class);
+    this.possibleValues = new ArrayList<>(Arrays.asList(values));
 
-        for (int i = 0; i < values.length; i++) {
+    for (int i = 0; i < values.length; i++) {
 
-            this.valueMap.put(values[i], i);
-        }
+      this.valueMap.put(values[i], i);
     }
+  }
 
-    public static PropertyString create(String name, String... values) {
-        return new PropertyString(name, values);
-    }
+  public static PropertyString create(String name, String... values) {
+    return new PropertyString(name, values);
+  }
 
-    @Override
-    public Collection<String> getAllowedValues() {
+  @Override
+  public Collection<String> getAllowedValues() {
 
-        return this.possibleValues;
-    }
+    return this.possibleValues;
+  }
 
-    @Override
-    public Optional<String> parseValue(String value) {
+  @Override
+  public Optional<String> parseValue(String value) {
 
-        return Optional.of(value);
-    }
+    return Optional.of(value);
+  }
 
-    @Override
-    public String getName(String value) {
+  @Override
+  public String getName(String value) {
 
-        return value;
-    }
+    return value;
+  }
 
-    public int getMetaData(String string) {
+  public int getMetaData(String string) {
 
-        return this.valueMap.get(string);
-    }
+    return this.valueMap.get(string);
+  }
 }

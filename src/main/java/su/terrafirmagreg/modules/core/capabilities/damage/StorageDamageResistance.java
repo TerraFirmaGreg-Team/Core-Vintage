@@ -10,12 +10,15 @@ import org.jetbrains.annotations.Nullable;
 
 public class StorageDamageResistance implements IStorage<ICapabilityDamageResistance> {
 
-    @Nullable
-    @Override
-    public NBTBase writeNBT(Capability<ICapabilityDamageResistance> capability, ICapabilityDamageResistance instance, EnumFacing side) {
-        return null;
-    }
+  @Nullable
+  @Override
+  public NBTBase writeNBT(Capability<ICapabilityDamageResistance> capability,
+      ICapabilityDamageResistance instance, EnumFacing side) {
+    return null;
+  }
 
-    @Override
-    public void readNBT(Capability<ICapabilityDamageResistance> capability, ICapabilityDamageResistance instance, EnumFacing side, NBTBase nbt) {}
+  @Override
+  public void readNBT(Capability<ICapabilityDamageResistance> capability,
+      ICapabilityDamageResistance instance, EnumFacing side, NBTBase nbt) {
+  }
 }

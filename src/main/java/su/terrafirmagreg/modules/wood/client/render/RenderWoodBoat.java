@@ -19,80 +19,85 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderWoodBoat extends Render<EntityWoodBoat> {
 
-    private final ModelBase modelBoat = new ModelBoat();
+  private final ModelBase modelBoat = new ModelBoat();
 
-    public RenderWoodBoat(RenderManager renderManagerIn) {
-        super(renderManagerIn);
-        this.shadowSize = 0.5F;
+  public RenderWoodBoat(RenderManager renderManagerIn) {
+    super(renderManagerIn);
+    this.shadowSize = 0.5F;
+  }
+
+  @Override
+  public void doRender(EntityWoodBoat entity, double x, double y, double z, float entityYaw,
+      float partialTicks) {
+    var woodType = entity.getWood();
+    GlStateManager.pushMatrix();
+    this.setupTranslation(x, y, z);
+    this.setupRotation(entity, entityYaw, partialTicks);
+    this.bindEntityTexture(entity);
+
+    if (this.renderOutlines) {
+      GlStateManager.enableColorMaterial();
+      GlStateManager.enableOutlineMode(this.getTeamColor(entity));
     }
 
-    @Override
-    public void doRender(EntityWoodBoat entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        var woodType = entity.getWood();
-        GlStateManager.pushMatrix();
-        this.setupTranslation(x, y, z);
-        this.setupRotation(entity, entityYaw, partialTicks);
-        this.bindEntityTexture(entity);
+    ColourUtils.setColor(woodType.getColor());
 
-        if (this.renderOutlines) {
-            GlStateManager.enableColorMaterial();
-            GlStateManager.enableOutlineMode(this.getTeamColor(entity));
-        }
+    this.modelBoat.render(entity, partialTicks, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
-        ColourUtils.setColor(woodType.getColor());
-
-        this.modelBoat.render(entity, partialTicks, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-
-        if (this.renderOutlines) {
-            GlStateManager.disableOutlineMode();
-            GlStateManager.disableColorMaterial();
-        }
-
-        GlStateManager.popMatrix();
-        super.doRender(entity, x, y, z, entityYaw, partialTicks);
+    if (this.renderOutlines) {
+      GlStateManager.disableOutlineMode();
+      GlStateManager.disableColorMaterial();
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
-    @Override
-    protected ResourceLocation getEntityTexture(EntityWoodBoat entity) {
-        // Fallback
-        return ModUtils.resource("textures/entity/wood/boat.png");
+    GlStateManager.popMatrix();
+    super.doRender(entity, x, y, z, entityYaw, partialTicks);
+  }
+
+  /**
+   * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+   */
+  @Override
+  protected ResourceLocation getEntityTexture(EntityWoodBoat entity) {
+    // Fallback
+    return ModUtils.resource("textures/entity/wood/boat.png");
+  }
+
+  @Override
+  public boolean isMultipass() {
+    return true;
+  }
+
+  @Override
+  public void renderMultipass(EntityWoodBoat entityIn, double x, double y, double z,
+      float entityYaw, float partialTicks) {
+    GlStateManager.pushMatrix();
+    this.setupTranslation(x, y, z);
+    this.setupRotation(entityIn, entityYaw, partialTicks);
+    this.bindEntityTexture(entityIn);
+    ((IMultipassModel) this.modelBoat).renderMultipass(entityIn, partialTicks, 0.0F, -0.1F, 0.0F,
+        0.0F, 0.0625F);
+    GlStateManager.popMatrix();
+  }
+
+  private void setupRotation(EntityBoat entityIn, float entityYaw, float partialTicks) {
+    GlStateManager.rotate(180.0F - entityYaw, 0.0F, 1.0F, 0.0F);
+    float f = (float) entityIn.getTimeSinceHit() - partialTicks;
+    float f1 = entityIn.getDamageTaken() - partialTicks;
+
+    if (f1 < 0.0F) {
+      f1 = 0.0F;
     }
 
-    @Override
-    public boolean isMultipass() {
-        return true;
+    if (f > 0.0F) {
+      GlStateManager.rotate(
+          MathHelper.sin(f) * f * f1 / 10.0F * (float) entityIn.getForwardDirection(), 1.0F, 0.0F,
+          0.0F);
     }
 
-    @Override
-    public void renderMultipass(EntityWoodBoat entityIn, double x, double y, double z, float entityYaw, float partialTicks) {
-        GlStateManager.pushMatrix();
-        this.setupTranslation(x, y, z);
-        this.setupRotation(entityIn, entityYaw, partialTicks);
-        this.bindEntityTexture(entityIn);
-        ((IMultipassModel) this.modelBoat).renderMultipass(entityIn, partialTicks, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-        GlStateManager.popMatrix();
-    }
+    GlStateManager.scale(-1.0F, -1.0F, 1.0F);
+  }
 
-    private void setupRotation(EntityBoat entityIn, float entityYaw, float partialTicks) {
-        GlStateManager.rotate(180.0F - entityYaw, 0.0F, 1.0F, 0.0F);
-        float f = (float) entityIn.getTimeSinceHit() - partialTicks;
-        float f1 = entityIn.getDamageTaken() - partialTicks;
-
-        if (f1 < 0.0F) {
-            f1 = 0.0F;
-        }
-
-        if (f > 0.0F) {
-            GlStateManager.rotate(MathHelper.sin(f) * f * f1 / 10.0F * (float) entityIn.getForwardDirection(), 1.0F, 0.0F, 0.0F);
-        }
-
-        GlStateManager.scale(-1.0F, -1.0F, 1.0F);
-    }
-
-    private void setupTranslation(double x, double y, double z) {
-        GlStateManager.translate((float) x, (float) y + 0.375F, (float) z);
-    }
+  private void setupTranslation(double x, double y, double z) {
+    GlStateManager.translate((float) x, (float) y + 0.375F, (float) z);
+  }
 }

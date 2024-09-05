@@ -23,72 +23,75 @@ import lombok.Getter;
 @Getter
 public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock {
 
-    private final WoodBlockVariant variant;
-    private final WoodType type;
+  private final WoodBlockVariant variant;
+  private final WoodType type;
 
-    protected Half halfSlab;
-    protected Double doubleSlab;
+  protected Half halfSlab;
+  protected Double doubleSlab;
 
-    private BlockWoodSlab(WoodBlockVariant model, WoodBlockVariant variant, WoodType type) {
-        super(Settings.of(Material.WOOD));
+  private BlockWoodSlab(WoodBlockVariant model, WoodBlockVariant variant, WoodType type) {
+    super(Settings.of(Material.WOOD));
 
-        this.variant = variant;
-        this.type = type;
+    this.variant = variant;
+    this.type = type;
 
-        getSettings()
-                .sound(SoundType.WOOD);
+    getSettings()
+        .sound(SoundType.WOOD);
 
-        setHarvestLevel(ToolClasses.PICKAXE, model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
-        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
+    setHarvestLevel(ToolClasses.PICKAXE,
+        model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
+    BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
+  }
+
+  @Override
+  public IBlockColor getBlockColor() {
+    return (s, w, p, i) -> this.getType().getColor();
+  }
+
+  @Override
+  public IItemColor getItemColor() {
+    return (s, i) -> this.getType().getColor();
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public IStateMapper getStateMapper() {
+    return new CustomStateMap.Builder().customResource(getResourceLocation()).ignore(VARIANT)
+        .build();
+  }
+
+  public static class Double extends BlockWoodSlab {
+
+    public Double(WoodBlockVariant model, WoodBlockVariant variant, WoodType type) {
+      super(model, variant, type);
+
     }
 
     @Override
-    public IBlockColor getBlockColor() {
-        return (s, w, p, i) -> this.getType().getColor();
+    public boolean isDouble() {
+      return true;
+    }
+  }
+
+  public static class Half extends BlockWoodSlab {
+
+    public Half(WoodBlockVariant model, WoodBlockVariant doubleSlab, WoodBlockVariant variant,
+        WoodType type) {
+      super(model, variant, type);
+
+      this.doubleSlab = (Double) doubleSlab.get(type);
+      this.doubleSlab.halfSlab = this;
+      this.halfSlab = this;
+
+      getSettings()
+          .oreDict("slab", "wood")
+          .oreDict("slab", "wood", type);
+
     }
 
     @Override
-    public IItemColor getItemColor() {
-        return (s, i) -> this.getType().getColor();
+    public boolean isDouble() {
+      return false;
     }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IStateMapper getStateMapper() {
-        return new CustomStateMap.Builder().customResource(getResourceLocation()).ignore(VARIANT).build();
-    }
-
-    public static class Double extends BlockWoodSlab {
-
-        public Double(WoodBlockVariant model, WoodBlockVariant variant, WoodType type) {
-            super(model, variant, type);
-
-        }
-
-        @Override
-        public boolean isDouble() {
-            return true;
-        }
-    }
-
-    public static class Half extends BlockWoodSlab {
-
-        public Half(WoodBlockVariant model, WoodBlockVariant doubleSlab, WoodBlockVariant variant, WoodType type) {
-            super(model, variant, type);
-
-            this.doubleSlab = (Double) doubleSlab.get(type);
-            this.doubleSlab.halfSlab = this;
-            this.halfSlab = this;
-
-            getSettings()
-                    .oreDict("slab", "wood")
-                    .oreDict("slab", "wood", type);
-
-        }
-
-        @Override
-        public boolean isDouble() {
-            return false;
-        }
-    }
+  }
 }

@@ -1,8 +1,11 @@
 package net.dries007.tfc.objects.items.rock;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -23,15 +26,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.ConfigTFC;
-
-
-import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
-
-
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -40,6 +37,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.*;
 
 public class ItemRockShovel extends ItemSpade implements ICapabilitySize, IRockObject {
 
@@ -80,15 +79,13 @@ public class ItemRockShovel extends ItemSpade implements ICapabilitySize, IRockO
         } else {
             IBlockState iblockstate = worldIn.getBlockState(pos);
             Block block = iblockstate.getBlock();
-            if (!(block instanceof BlockRockVariant)) {
+            if (!(block instanceof ISoilBlock soilBlock)) {
                 return EnumActionResult.PASS;
             }
-            BlockRockVariant rockVariant = (BlockRockVariant) block;
-            if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up())
-                    .getMaterial() == Material.AIR && rockVariant.getType() == Rock.Type.GRASS || rockVariant.getType() == Rock.Type.DRY_GRASS ||
-                    rockVariant.getType() == Rock.Type.DIRT) {
-                IBlockState iblockstate1 = BlockRockVariant.get(rockVariant.getRock(), Rock.Type.PATH)
-                        .getDefaultState();
+            if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN &&
+                    worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR &&
+                    BlockUtils.isVariant(soilBlock.getVariant(), GRASS, DRY_GRASS, DIRT)) {
+                IBlockState iblockstate1 = GRASS_PATH.get(soilBlock.getType()).getDefaultState();
                 worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
                 if (!worldIn.isRemote) {

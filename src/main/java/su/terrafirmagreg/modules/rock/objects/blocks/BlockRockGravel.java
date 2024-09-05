@@ -8,12 +8,12 @@ import net.minecraft.block.material.Material;
 
 public class BlockRockGravel extends BlockRockFallable {
 
-    public BlockRockGravel(RockBlockVariant variant, RockType type) {
-        super(Settings.of(Material.SAND), variant, type);
+  public BlockRockGravel(RockBlockVariant variant, RockType type) {
+    super(Settings.of(Material.SAND), variant, type);
 
-        getSettings()
-                .sound(SoundType.GROUND);
-        //DirtHelper.registerSoil(this, DirtHelper.GRAVELLIKE);
-    }
+    getSettings()
+        .sound(SoundType.GROUND);
+    //DirtHelper.registerSoil(this, DirtHelper.GRAVELLIKE);
+  }
 
 }

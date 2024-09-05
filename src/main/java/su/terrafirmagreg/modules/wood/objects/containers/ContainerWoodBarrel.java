@@ -17,33 +17,37 @@ import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ContainerWoodBarrel extends BaseContainerTile<TileWoodBarrel> implements IButtonHandler {
+public class ContainerWoodBarrel extends BaseContainerTile<TileWoodBarrel> implements
+    IButtonHandler {
 
-    public ContainerWoodBarrel(InventoryPlayer playerInv, TileWoodBarrel teWoodBarrel) {
-        super(playerInv, teWoodBarrel);
+  public ContainerWoodBarrel(InventoryPlayer playerInv, TileWoodBarrel teWoodBarrel) {
+    super(playerInv, teWoodBarrel);
+  }
+
+  @Nullable
+  public IFluidHandler getBarrelTank() {
+    return tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+  }
+
+  @Override
+  public void onButtonPress(int buttonID, @Nullable NBTTagCompound extraNBT) {
+    // Slot will always be 0, extraNBT will be empty
+    if (!tile.getWorld().isRemote) {
+      BlockWoodBarrel.toggleBarrelSeal(tile.getWorld(), tile.getPos());
     }
+  }
 
-    @Nullable
-    public IFluidHandler getBarrelTank() {
-        return tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+  @Override
+  protected void addContainerSlots() {
+    IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
+        null);
+
+    if (inventory != null) {
+      addSlotToContainer(
+          new SlotCallback(inventory, TileWoodBarrel.SLOT_FLUID_CONTAINER_IN, 35, 20, tile));
+      addSlotToContainer(
+          new SlotCallback(inventory, TileWoodBarrel.SLOT_FLUID_CONTAINER_OUT, 35, 54, tile));
+      addSlotToContainer(new SlotCallback(inventory, TileWoodBarrel.SLOT_ITEM, 89, 37, tile));
     }
-
-    @Override
-    public void onButtonPress(int buttonID, @Nullable NBTTagCompound extraNBT) {
-        // Slot will always be 0, extraNBT will be empty
-        if (!tile.getWorld().isRemote) {
-            BlockWoodBarrel.toggleBarrelSeal(tile.getWorld(), tile.getPos());
-        }
-    }
-
-    @Override
-    protected void addContainerSlots() {
-        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-
-        if (inventory != null) {
-            addSlotToContainer(new SlotCallback(inventory, TileWoodBarrel.SLOT_FLUID_CONTAINER_IN, 35, 20, tile));
-            addSlotToContainer(new SlotCallback(inventory, TileWoodBarrel.SLOT_FLUID_CONTAINER_OUT, 35, 54, tile));
-            addSlotToContainer(new SlotCallback(inventory, TileWoodBarrel.SLOT_ITEM, 89, 37, tile));
-        }
-    }
+  }
 }

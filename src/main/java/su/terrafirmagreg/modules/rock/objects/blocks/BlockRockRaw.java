@@ -32,92 +32,96 @@ import static su.terrafirmagreg.data.Properties.CAN_FALL;
 public class BlockRockRaw extends BlockRock {
 
 
-    /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
+  /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
 
-    public BlockRockRaw(RockBlockVariant variant, RockType type) {
-        super(variant, type);
+  public BlockRockRaw(RockBlockVariant variant, RockType type) {
+    super(variant, type);
 
-        getSettings()
-                .ignoresProperties(CAN_FALL)
-                .renderLayer(BlockRenderLayer.CUTOUT)
-                .fallable(this, variant.getSpecification().setResultingState(BlocksRock.COBBLE.get(type).getDefaultState()))
-                .oreDict(variant)
-                .oreDict(variant, type)
-                .oreDict("stone");
+    getSettings()
+        .ignoresProperties(CAN_FALL)
+        .renderLayer(BlockRenderLayer.CUTOUT)
+        .fallable(this, variant.getSpecification(), BlocksRock.COBBLE.get(type).getDefaultState())
+        .oreDict(variant)
+        .oreDict(variant, type)
+        .oreDict("stone");
 
-        setDefaultState(getBlockState().getBaseState()
-                .withProperty(CAN_FALL, true));
+    setDefaultState(getBlockState().getBaseState()
+        .withProperty(CAN_FALL, true));
+  }
+
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(CAN_FALL, meta == 0);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    if (state.getBlock() != this) {
+      return 0;
+    } else {
+      return state.getValue(CAN_FALL) ? 0 : 1;
     }
+  }
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(CAN_FALL, meta == 0);
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        if (state.getBlock() != this) {
-            return 0;
-        } else {
-            return state.getValue(CAN_FALL) ? 0 : 1;
+  @Override
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
+      BlockPos fromPos) {
+    super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+    // Raw blocks that can't fall also can't pop off
+    if (state.getValue(CAN_FALL)) {
+      for (EnumFacing face : EnumFacing.VALUES) {
+        BlockPos offsetPos = pos.offset(face);
+        IBlockState faceState = worldIn.getBlockState(offsetPos);
+        if (faceState.getBlock().isSideSolid(faceState, worldIn, offsetPos, face.getOpposite())) {
+          return;
         }
+      }
+
+      // No supporting solid blocks, so pop off as an item
+      worldIn.setBlockToAir(pos);
+      StackUtils.spawnItemStack(worldIn, pos, new ItemStack(state.getBlock(), 1));
     }
+  }
 
-    @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-        // Raw blocks that can't fall also can't pop off
-        if (state.getValue(CAN_FALL)) {
-            for (EnumFacing face : EnumFacing.VALUES) {
-                BlockPos offsetPos = pos.offset(face);
-                IBlockState faceState = worldIn.getBlockState(offsetPos);
-                if (faceState.getBlock().isSideSolid(faceState, worldIn, offsetPos, face.getOpposite())) {
-                    return;
-                }
-            }
-
-            // No supporting solid blocks, so pop off as an item
-            worldIn.setBlockToAir(pos);
-            StackUtils.spawnItemStack(worldIn, pos, new ItemStack(state.getBlock(), 1));
+  @Override
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
+      EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+      float hitX, float hitY, float hitZ) {
+    ItemStack stack = playerIn.getHeldItemMainhand();
+    if (ConfigRock.BLOCKS.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get()
+        && !worldIn.isBlockNormalCube(pos.up(), true)) {
+      if (!worldIn.isRemote) {
+        // Create a stone anvil
+        var anvil = BlocksRock.ANVIL.get(getType());
+        if (anvil instanceof BlockRockAnvil) {
+          worldIn.setBlockState(pos, anvil.getDefaultState());
         }
+      }
+      return true;
     }
+    return false;
+  }
 
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                    float hitX, float hitY, float hitZ) {
-        ItemStack stack = playerIn.getHeldItemMainhand();
-        if (ConfigRock.BLOCKS.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
-            if (!worldIn.isRemote) {
-                // Create a stone anvil
-                var anvil = BlocksRock.ANVIL.get(getType());
-                if (anvil instanceof BlockRockAnvil) {
-                    worldIn.setBlockState(pos, anvil.getDefaultState());
-                }
-            }
-            return true;
-        }
-        return false;
-    }
+  @NotNull
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, CAN_FALL);
+  }
 
-    @NotNull
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, CAN_FALL);
-    }
+  @Override
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
+      IBlockState state, int fortune) {
+    super.getDrops(drops, world, pos, state, fortune);
 
-    @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        super.getDrops(drops, world, pos, state, fortune);
+    // TODO
+    //		if (RANDOM.nextDouble() < ModuleRockConfig.MISC.stoneGemDropChance) {
+    //			drops.add(GemsFromRawRocks.getRandomGem());
+    //		}
+  }
 
-        // TODO
-        //		if (RANDOM.nextDouble() < ModuleRockConfig.MISC.stoneGemDropChance) {
-        //			drops.add(GemsFromRawRocks.getRandomGem());
-        //		}
-    }
-
-    @Override
-    public int quantityDropped(IBlockState state, int fortune, Random random) {
-        return 1 + random.nextInt(3);
-    }
+  @Override
+  public int quantityDropped(IBlockState state, int fortune, Random random) {
+    return 1 + random.nextInt(3);
+  }
 
 }

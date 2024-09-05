@@ -20,58 +20,60 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AnvilRecipeManager
-        implements IAnvilRecipeManager {
+    implements IAnvilRecipeManager {
 
-    private static final Set<IAnvilRecipe> recipes = new HashSet<>();
+  private static final Set<IAnvilRecipe> recipes = new HashSet<>();
 
-    @Override
-    public void addRecipe(ResourceLocation recipeName, IIngredient<ItemStack> inputItem, ItemStack outputItem, Metal.Tier tier, ForgeRule... rules) {
-        addRecipe(recipeName, inputItem, outputItem, tier, null, rules);
+  @Nullable
+  public static IAnvilRecipe findMatchingRecipe(ItemStack item) {
+    return recipes.stream()
+        .filter(x -> x.isValidInput(item))
+        .findFirst()
+        .orElse(null);
+  }
 
-    }
+  @Nullable
+  public static IAnvilRecipe findMatchingRecipe(ResourceLocation resourceLocation) {
+    return recipes.stream()
+        .filter(x -> x.getRecipeName().equals(resourceLocation))
+        .findFirst()
+        .orElse(null);
+  }
 
-    @Override
-    public void addRecipe(ResourceLocation recipeName, IIngredient<ItemStack> inputItem, ItemStack outputItem, Metal.Tier tier, @Nullable SmithingSkill.Type skillBonusType,
-                          ForgeRule... rules) {
-        addRecipe(new AnvilRecipe(recipeName, inputItem, outputItem, tier, skillBonusType, rules));
+  @NotNull
+  public static List<IAnvilRecipe> getAllFor(ItemStack stack) {
+    return recipes.stream()
+        .filter(x -> x.isValidInput(stack))
+        .collect(Collectors.toList());
+  }
 
-    }
+  @Override
+  public void addRecipe(ResourceLocation recipeName, IIngredient<ItemStack> inputItem,
+      ItemStack outputItem, Metal.Tier tier, ForgeRule... rules) {
+    addRecipe(recipeName, inputItem, outputItem, tier, null, rules);
 
-    @Override
-    public boolean addRecipe(IAnvilRecipe recipe) {
-        return recipes.add(recipe);
-    }
+  }
 
-    @Override
-    public boolean removeRecipe(IAnvilRecipe recipe) {
-        return recipes.remove(recipe);
-    }
+  @Override
+  public void addRecipe(ResourceLocation recipeName, IIngredient<ItemStack> inputItem,
+      ItemStack outputItem, Metal.Tier tier, @Nullable SmithingSkill.Type skillBonusType,
+      ForgeRule... rules) {
+    addRecipe(new AnvilRecipe(recipeName, inputItem, outputItem, tier, skillBonusType, rules));
 
-    @Nullable
-    public static IAnvilRecipe findMatchingRecipe(ItemStack item) {
-        return recipes.stream()
-                .filter(x -> x.isValidInput(item))
-                .findFirst()
-                .orElse(null);
-    }
+  }
 
-    @Nullable
-    public static IAnvilRecipe findMatchingRecipe(ResourceLocation resourceLocation) {
-        return recipes.stream()
-                .filter(x -> x.getRecipeName().equals(resourceLocation))
-                .findFirst()
-                .orElse(null);
-    }
+  @Override
+  public boolean addRecipe(IAnvilRecipe recipe) {
+    return recipes.add(recipe);
+  }
 
-    @NotNull
-    public static List<IAnvilRecipe> getAllFor(ItemStack stack) {
-        return recipes.stream()
-                .filter(x -> x.isValidInput(stack))
-                .collect(Collectors.toList());
-    }
+  @Override
+  public boolean removeRecipe(IAnvilRecipe recipe) {
+    return recipes.remove(recipe);
+  }
 
-    @Override
-    public Collection<IAnvilRecipe> recipes() {
-        return Collections.unmodifiableSet(recipes);
-    }
+  @Override
+  public Collection<IAnvilRecipe> recipes() {
+    return Collections.unmodifiableSet(recipes);
+  }
 }

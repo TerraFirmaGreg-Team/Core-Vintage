@@ -18,21 +18,22 @@ import java.util.Random;
 
 public class GeneratorTreeFruit implements IFruitTreeGenerator {
 
-    private static final PlacementSettings SETTINGS = StructureUtils.getDefaultSettings();
+  private static final PlacementSettings SETTINGS = StructureUtils.getDefaultSettings();
 
-    @Override
-    public void generateTree(TemplateManager manager, World world, BlockPos pos, IFruitTree tree, Random rand) {
-        ResourceLocation base = new ResourceLocation("tfc:fruit_trees/" + tree.getName());
-        Template structureBase = manager.get(world.getMinecraftServer(), base);
+  @Override
+  public void generateTree(TemplateManager manager, World world, BlockPos pos, IFruitTree tree,
+      Random rand) {
+    ResourceLocation base = new ResourceLocation("tfc:fruit_trees/" + tree.getName());
+    Template structureBase = manager.get(world.getMinecraftServer(), base);
 
-        if (structureBase == null) {
-            TerraFirmaCraft.getLog().warn("Unable to find a template for " + base);
-            return;
-        }
-
-        BlockPos size = structureBase.getSize();
-        pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
-
-        StructureUtils.addStructureToWorld(world, pos, structureBase, SETTINGS);
+    if (structureBase == null) {
+      TerraFirmaCraft.getLog().warn("Unable to find a template for " + base);
+      return;
     }
+
+    BlockPos size = structureBase.getSize();
+    pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
+
+    StructureUtils.addStructureToWorld(world, pos, structureBase, SETTINGS);
+  }
 }

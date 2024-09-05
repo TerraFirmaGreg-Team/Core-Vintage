@@ -11,19 +11,19 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 @SuppressWarnings("unused")
 public class EventHandlerCapabilitiesWorld {
 
-    @SubscribeEvent
-    public void attachWorldCapabilities(AttachCapabilitiesEvent<World> event) {
-
-        event.addCapability(CapabilityWorldTracker.KEY, new ProviderWorldTracker());
+  @SubscribeEvent
+  public static void onChunkWatchWatch(TickEvent.WorldTickEvent event) {
+    if (event.phase == TickEvent.Phase.START) {
+      var tracker = CapabilityWorldTracker.get(event.world);
+      if (tracker != null) {
+        tracker.tick(event.world);
+      }
     }
+  }
 
-    @SubscribeEvent
-    public static void onChunkWatchWatch(TickEvent.WorldTickEvent event) {
-        if (event.phase == TickEvent.Phase.START) {
-            var tracker = CapabilityWorldTracker.get(event.world);
-            if (tracker != null) {
-                tracker.tick(event.world);
-            }
-        }
-    }
+  @SubscribeEvent
+  public void attachWorldCapabilities(AttachCapabilitiesEvent<World> event) {
+
+    event.addCapability(CapabilityWorldTracker.KEY, new ProviderWorldTracker());
+  }
 }

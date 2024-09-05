@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 public class QuernRecipeMaker {
 
-    public static List<QuernRecipeWrapper> getRecipes() {
-        return RegistriesDevice.QUERN.recipes()
-                                     .stream()
-                                     .map(QuernRecipeWrapper::new)
-                                     .collect(Collectors.toList());
-    }
+  public static List<QuernRecipeWrapper> getRecipes() {
+    return RegistriesDevice.QUERN.recipes()
+        .stream()
+        .map(QuernRecipeWrapper::new)
+        .collect(Collectors.toList());
+  }
 }

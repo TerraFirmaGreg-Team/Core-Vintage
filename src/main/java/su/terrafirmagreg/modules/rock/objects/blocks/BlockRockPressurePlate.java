@@ -24,30 +24,33 @@ import java.util.List;
 @Getter
 public class BlockRockPressurePlate extends BlockPressurePlate implements IRockBlock {
 
-    protected final Settings settings;
-    private final RockBlockVariant variant;
-    private final RockType type;
+  protected final Settings settings;
+  private final RockBlockVariant variant;
+  private final RockType type;
 
-    public BlockRockPressurePlate(RockBlockVariant variant, RockType type) {
-        super(Material.ROCK, Sensitivity.MOBS);
+  public BlockRockPressurePlate(RockBlockVariant variant, RockType type) {
+    super(Material.ROCK, Sensitivity.MOBS);
 
-        this.variant = variant;
-        this.type = type;
-        this.settings = Settings.of(Material.ROCK)
-                .sound(SoundType.STONE)
-                .hardness(0.5f)
-                .oreDict(variant)
-                .oreDict(variant, "stone")
-                .oreDict(variant, "stone", type);
+    this.variant = variant;
+    this.type = type;
+    this.settings = Settings.of(Material.ROCK)
+        .registryKey(variant.getRegistryKey(type))
+        .hardness(variant.getHardness(type))
+        .sound(SoundType.STONE)
+        .hardness(0.5f)
+        .oreDict(variant)
+        .oreDict(variant, "stone")
+        .oreDict(variant, "stone", type);
 
-    }
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
+      ITooltipFlag flagIn) {
+    super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name")
-                .getFormattedText() + ": " + type.getCategory().getLocalizedName());
-    }
+    tooltip.add(new TextComponentTranslation("rockcategory.name")
+        .getFormattedText() + ": " + type.getCategory().getLocalizedName());
+  }
 }

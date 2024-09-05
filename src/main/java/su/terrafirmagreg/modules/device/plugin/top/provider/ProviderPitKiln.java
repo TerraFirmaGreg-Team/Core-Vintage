@@ -28,59 +28,75 @@ import java.util.List;
 
 public class ProviderPitKiln implements IProbeInfoProvider {
 
-    @Override
-    public String getID() {
-        return ModUtils.id("device.pit_kiln");
-    }
+  @Override
+  public String getID() {
+    return ModUtils.id("device.pit_kiln");
+  }
 
-    @Override
-    public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
-        Block block = state.getBlock();
-        BlockPos pos = hitData.getPos();
+  @Override
+  public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
+      IBlockState state, IProbeHitData hitData) {
+    Block block = state.getBlock();
+    BlockPos pos = hitData.getPos();
 
-        if (block instanceof BlockPitKiln) {
-            var tile = TileUtils.getTile(world, pos, TilePitKiln.class);
-            if (tile == null) return;
+    if (block instanceof BlockPitKiln) {
+      var tile = TileUtils.getTile(world, pos, TilePitKiln.class);
+      if (tile == null) {
+        return;
+      }
 
-            List<String> currentTooltip = new ArrayList<>();
+      List<String> currentTooltip = new ArrayList<>();
 
-            if (tile.isLit()) {
-                long remainingTicks = ConfigDevice.BLOCKS.PIT_KILN.ticks - (Calendar.PLAYER_TIME.getTicks() - tile.getLitTick());
-                long remainingMinutes = Math.round(remainingTicks / 1200.0f);
-                long remainingHours = Math.round(remainingTicks / (float) ICalendar.TICKS_IN_HOUR);
-                switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {
-                    case NONE:
-                        break;
-                    case TICKS:
-                        currentTooltip.add(new TextComponentTranslation(ModUtils.localize("top", "devices.ticks_remaining"), remainingTicks).getFormattedText());
-                        break;
-                    case MINECRAFT_HOURS:
-                        currentTooltip.add(new TextComponentTranslation(ModUtils.localize("top", "devices.hours_remaining"), remainingHours).getFormattedText());
-                        break;
-                    case REAL_MINUTES:
-                        currentTooltip.add(new TextComponentTranslation(ModUtils.localize("top", "devices.minutes_remaining"), remainingMinutes).getFormattedText());
-                        break;
-                }
-            } else {
-                int straw = tile.getStrawCount();
-                int logs = tile.getLogCount();
-                if (straw == 8 && logs == 8) {
-                    currentTooltip.add(new TextComponentTranslation(ModUtils.localize("top", "devices.pitkiln.unlit")).getFormattedText());
-                } else {
-                    if (straw < 8) {
-                        currentTooltip.add(new TextComponentTranslation(ModUtils.localize("top", "devices.pitkiln.straw"), 8 - straw).getFormattedText());
-                    }
-                    if (logs < 8) {
-                        currentTooltip.add(new TextComponentTranslation(ModUtils.localize("top", "devices.pitkiln.logs"), 8 - logs).getFormattedText());
-                    }
-                }
-            }
-
-            for (String string : currentTooltip) {
-                info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).text(string);
-            }
-
+      if (tile.isLit()) {
+        long remainingTicks = ConfigDevice.BLOCKS.PIT_KILN.ticks - (Calendar.PLAYER_TIME.getTicks()
+            - tile.getLitTick());
+        long remainingMinutes = Math.round(remainingTicks / 1200.0f);
+        long remainingHours = Math.round(remainingTicks / (float) ICalendar.TICKS_IN_HOUR);
+        switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {
+          case NONE:
+            break;
+          case TICKS:
+            currentTooltip.add(
+                new TextComponentTranslation(ModUtils.localize("top", "devices.ticks_remaining"),
+                    remainingTicks).getFormattedText());
+            break;
+          case MINECRAFT_HOURS:
+            currentTooltip.add(
+                new TextComponentTranslation(ModUtils.localize("top", "devices.hours_remaining"),
+                    remainingHours).getFormattedText());
+            break;
+          case REAL_MINUTES:
+            currentTooltip.add(
+                new TextComponentTranslation(ModUtils.localize("top", "devices.minutes_remaining"),
+                    remainingMinutes).getFormattedText());
+            break;
         }
+      } else {
+        int straw = tile.getStrawCount();
+        int logs = tile.getLogCount();
+        if (straw == 8 && logs == 8) {
+          currentTooltip.add(new TextComponentTranslation(
+              ModUtils.localize("top", "devices.pitkiln.unlit")).getFormattedText());
+        } else {
+          if (straw < 8) {
+            currentTooltip.add(
+                new TextComponentTranslation(ModUtils.localize("top", "devices.pitkiln.straw"),
+                    8 - straw).getFormattedText());
+          }
+          if (logs < 8) {
+            currentTooltip.add(
+                new TextComponentTranslation(ModUtils.localize("top", "devices.pitkiln.logs"),
+                    8 - logs).getFormattedText());
+          }
+        }
+      }
+
+      for (String string : currentTooltip) {
+        info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+            .text(string);
+      }
 
     }
+
+  }
 }

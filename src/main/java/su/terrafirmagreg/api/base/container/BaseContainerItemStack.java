@@ -12,105 +12,109 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class BaseContainerItemStack extends Container {
 
-    protected final ItemStack stack;
-    protected final EntityPlayer player;
-    protected int itemIndex;
-    protected int itemDragIndex;
-    protected boolean isOffhand;
+  protected final ItemStack stack;
+  protected final EntityPlayer player;
+  protected int itemIndex;
+  protected int itemDragIndex;
+  protected boolean isOffhand;
 
-    protected BaseContainerItemStack(InventoryPlayer playerInv, ItemStack stack) {
-        this.player = playerInv.player;
-        this.stack = stack;
-        this.itemDragIndex = playerInv.currentItem;
+  protected BaseContainerItemStack(InventoryPlayer playerInv, ItemStack stack) {
+    this.player = playerInv.player;
+    this.stack = stack;
+    this.itemDragIndex = playerInv.currentItem;
 
-        if (stack == player.getHeldItemMainhand()) {
-            this.itemIndex = playerInv.currentItem + 27; // Mainhand opened inventory
-            this.isOffhand = false;
-        } else {
-            this.itemIndex = -100; // Offhand, so ignore this rule
-            this.isOffhand = true;
-        }
-
-        addContainerSlots();
-        addPlayerInventorySlots(playerInv);
+    if (stack == player.getHeldItemMainhand()) {
+      this.itemIndex = playerInv.currentItem + 27; // Mainhand opened inventory
+      this.isOffhand = false;
+    } else {
+      this.itemIndex = -100; // Offhand, so ignore this rule
+      this.isOffhand = true;
     }
 
-    @Override
-    @NotNull
-    public ItemStack transferStackInSlot(EntityPlayer player, int index) {
-        // Slot that was clicked
-        Slot slot = inventorySlots.get(index);
+    addContainerSlots();
+    addPlayerInventorySlots(playerInv);
+  }
 
-        ItemStack itemstack;
+  @Override
+  @NotNull
+  public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+    // Slot that was clicked
+    Slot slot = inventorySlots.get(index);
 
-        if (slot == null || !slot.getHasStack())
-            return ItemStack.EMPTY;
+    ItemStack itemstack;
 
-        if (index == itemIndex)
-            return ItemStack.EMPTY;
-
-        ItemStack itemstack1 = slot.getStack();
-        itemstack = itemstack1.copy();
-
-        // Begin custom transfer code here
-        int containerSlots = inventorySlots.size() - player.inventory.mainInventory.size(); // number of slots in the container
-        if (index < containerSlots) {
-            // Transfer out of the container
-            if (!this.mergeItemStack(itemstack1, containerSlots, inventorySlots.size(), true)) {
-                // Don't transfer anything
-                return ItemStack.EMPTY;
-            }
-        }
-        // Transfer into the container
-        else {
-            if (!this.mergeItemStack(itemstack1, 0, containerSlots, false)) {
-                return ItemStack.EMPTY;
-            }
-        }
-
-        if (itemstack1.getCount() == 0) {
-            slot.putStack(ItemStack.EMPTY);
-        } else {
-            slot.onSlotChanged();
-        }
-        if (itemstack1.getCount() == itemstack.getCount()) {
-            return ItemStack.EMPTY;
-        }
-        slot.onTake(player, itemstack1);
-        return itemstack;
+    if (slot == null || !slot.getHasStack()) {
+      return ItemStack.EMPTY;
     }
 
-    @Override
-    @NotNull
-    public ItemStack slotClick(int slotID, int dragType, ClickType clickType, EntityPlayer player) {
-        // Prevent moving of the item stack that is currently open
-        if (slotID == itemIndex &&
-                (clickType == ClickType.QUICK_MOVE || clickType == ClickType.PICKUP || clickType == ClickType.THROW || clickType == ClickType.SWAP)) {
-            return ItemStack.EMPTY;
-        } else if ((dragType == itemDragIndex) && clickType == ClickType.SWAP) {
-            return ItemStack.EMPTY;
-        } else {
-            return super.slotClick(slotID, dragType, clickType, player);
-        }
+    if (index == itemIndex) {
+      return ItemStack.EMPTY;
     }
 
-    @Override
-    public boolean canInteractWith(EntityPlayer playerIn) {
-        return true;
+    ItemStack itemstack1 = slot.getStack();
+    itemstack = itemstack1.copy();
+
+    // Begin custom transfer code here
+    int containerSlots = inventorySlots.size()
+        - player.inventory.mainInventory.size(); // number of slots in the container
+    if (index < containerSlots) {
+      // Transfer out of the container
+      if (!this.mergeItemStack(itemstack1, containerSlots, inventorySlots.size(), true)) {
+        // Don't transfer anything
+        return ItemStack.EMPTY;
+      }
+    }
+    // Transfer into the container
+    else {
+      if (!this.mergeItemStack(itemstack1, 0, containerSlots, false)) {
+        return ItemStack.EMPTY;
+      }
     }
 
-    protected abstract void addContainerSlots();
-
-    protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
-        // Add Player Inventory Slots
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 9; j++) {
-                addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-            }
-        }
-
-        for (int k = 0; k < 9; k++) {
-            addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
-        }
+    if (itemstack1.getCount() == 0) {
+      slot.putStack(ItemStack.EMPTY);
+    } else {
+      slot.onSlotChanged();
     }
+    if (itemstack1.getCount() == itemstack.getCount()) {
+      return ItemStack.EMPTY;
+    }
+    slot.onTake(player, itemstack1);
+    return itemstack;
+  }
+
+  @Override
+  @NotNull
+  public ItemStack slotClick(int slotID, int dragType, ClickType clickType, EntityPlayer player) {
+    // Prevent moving of the item stack that is currently open
+    if (slotID == itemIndex &&
+        (clickType == ClickType.QUICK_MOVE || clickType == ClickType.PICKUP
+            || clickType == ClickType.THROW || clickType == ClickType.SWAP)) {
+      return ItemStack.EMPTY;
+    } else if ((dragType == itemDragIndex) && clickType == ClickType.SWAP) {
+      return ItemStack.EMPTY;
+    } else {
+      return super.slotClick(slotID, dragType, clickType, player);
+    }
+  }
+
+  @Override
+  public boolean canInteractWith(EntityPlayer playerIn) {
+    return true;
+  }
+
+  protected abstract void addContainerSlots();
+
+  protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
+    // Add Player Inventory Slots
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 9; j++) {
+        addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+      }
+    }
+
+    for (int k = 0; k < 9; k++) {
+      addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
+    }
+  }
 }

@@ -1,6 +1,6 @@
 package BananaFructa.tfcpassingdays.fixes;
 
-import su.terrafirmagreg.data.lib.MathConstants;
+import su.terrafirmagreg.data.MathConstants;
 
 import net.minecraft.block.BlockDaylightDetector;
 import net.minecraft.block.state.IBlockState;

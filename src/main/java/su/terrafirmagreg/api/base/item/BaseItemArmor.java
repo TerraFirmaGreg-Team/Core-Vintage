@@ -12,21 +12,22 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseItemArmor extends ItemArmor implements IItemSettings {
 
-    protected final Settings settings;
+  protected final Settings settings;
 
-    // mark the armor material as nullable to take the null warning out of BaseItem
-    @SuppressWarnings("ConstantConditions")
-    public BaseItemArmor(@Nullable ArmorMaterial material, EntityEquipmentSlot slot, Settings settings) {
-        super(material, -1, slot);
+  // mark the armor material as nullable to take the null warning out of BaseItem
+  @SuppressWarnings("ConstantConditions")
+  public BaseItemArmor(@Nullable ArmorMaterial material, EntityEquipmentSlot slot,
+      Settings settings) {
+    super(material, -1, slot);
 
-        this.settings = settings;
+    this.settings = settings;
 
-        setMaxStackSize(1);
-        setTranslationKey(settings.getTranslationKey());
-    }
+    setMaxStackSize(1);
+    setTranslationKey(settings.getTranslationKey());
+  }
 
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return settings.getRarity();
-    }
+  @Override
+  public IRarity getForgeRarity(ItemStack stack) {
+    return settings.getRarity();
+  }
 }

@@ -9,9 +9,9 @@ import net.minecraft.server.MinecraftServer;
  */
 public abstract class BaseCommand extends CommandBase {
 
-    @Override
-    public boolean checkPermission(MinecraftServer server, ICommandSender sender) {
+  @Override
+  public boolean checkPermission(MinecraftServer server, ICommandSender sender) {
 
-        return this.getRequiredPermissionLevel() <= 0 || super.checkPermission(server, sender);
-    }
+    return this.getRequiredPermissionLevel() <= 0 || super.checkPermission(server, sender);
+  }
 }

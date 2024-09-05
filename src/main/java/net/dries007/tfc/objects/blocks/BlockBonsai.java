@@ -30,7 +30,7 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 import static su.terrafirmagreg.data.Properties.STAGE;
-import static su.terrafirmagreg.data.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 

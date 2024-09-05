@@ -13,15 +13,18 @@ import com.google.gson.JsonSerializer;
 
 import java.lang.reflect.Type;
 
-public final class ResourceLocationJson implements JsonDeserializer<ResourceLocation>, JsonSerializer<ResourceLocation> {
+public final class ResourceLocationJson implements JsonDeserializer<ResourceLocation>,
+    JsonSerializer<ResourceLocation> {
 
-    @Override
-    public ResourceLocation deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        return new ResourceLocation(json.getAsString());
-    }
+  @Override
+  public ResourceLocation deserialize(JsonElement json, Type typeOfT,
+      JsonDeserializationContext context) throws JsonParseException {
+    return new ResourceLocation(json.getAsString());
+  }
 
-    @Override
-    public JsonElement serialize(ResourceLocation src, Type typeOfSrc, JsonSerializationContext context) {
-        return new JsonPrimitive(src.toString());
-    }
+  @Override
+  public JsonElement serialize(ResourceLocation src, Type typeOfSrc,
+      JsonSerializationContext context) {
+    return new JsonPrimitive(src.toString());
+  }
 }

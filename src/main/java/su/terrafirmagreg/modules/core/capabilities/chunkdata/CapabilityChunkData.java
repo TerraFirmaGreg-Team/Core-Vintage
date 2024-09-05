@@ -12,38 +12,39 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public final class CapabilityChunkData {
 
-    public static final ResourceLocation KEY = ModUtils.resource("chunkdata_capability");
+  public static final ResourceLocation KEY = ModUtils.resource("chunkdata_capability");
 
-    @CapabilityInject(ICapabilityChunkData.class)
-    public static final Capability<ICapabilityChunkData> CAPABILITY = ModUtils.getNull();
+  @CapabilityInject(ICapabilityChunkData.class)
+  public static final Capability<ICapabilityChunkData> CAPABILITY = ModUtils.getNull();
 
-    public static void register() {
-        CapabilityManager.INSTANCE.register(ICapabilityChunkData.class, new StorageChunkData(), ProviderChunkData::new);
-    }
+  public static void register() {
+    CapabilityManager.INSTANCE.register(ICapabilityChunkData.class, new StorageChunkData(),
+        ProviderChunkData::new);
+  }
 
-    /**
-     * Возвращает экземпляр ChunkDataTFC для указанного мира и позиции.
-     *
-     * @param world Мир.
-     * @param pos   Позиция.
-     * @return Экземпляр ChunkDataTFC для указанного мира и позиции.
-     */
-    public static ICapabilityChunkData get(World world, BlockPos pos) {
-        return get(world.getChunk(pos));
-    }
+  /**
+   * Возвращает экземпляр ChunkDataTFC для указанного мира и позиции.
+   *
+   * @param world Мир.
+   * @param pos   Позиция.
+   * @return Экземпляр ChunkDataTFC для указанного мира и позиции.
+   */
+  public static ICapabilityChunkData get(World world, BlockPos pos) {
+    return get(world.getChunk(pos));
+  }
 
-    /**
-     * Возвращает экземпляр ChunkDataTFC для указанного чанка.
-     *
-     * @param chunk Чанк.
-     * @return Экземпляр ChunkDataTFC для указанного чанка.
-     */
-    public static ICapabilityChunkData get(Chunk chunk) {
-        var data = chunk.getCapability(CAPABILITY, null);
-        return data == null ? ProviderChunkData.EMPTY : data;
-    }
+  /**
+   * Возвращает экземпляр ChunkDataTFC для указанного чанка.
+   *
+   * @param chunk Чанк.
+   * @return Экземпляр ChunkDataTFC для указанного чанка.
+   */
+  public static ICapabilityChunkData get(Chunk chunk) {
+    var data = chunk.getCapability(CAPABILITY, null);
+    return data == null ? ProviderChunkData.EMPTY : data;
+  }
 
-    public static boolean has(Chunk chunk) {
-        return chunk.hasCapability(CAPABILITY, null);
-    }
+  public static boolean has(Chunk chunk) {
+    return chunk.hasCapability(CAPABILITY, null);
+  }
 }

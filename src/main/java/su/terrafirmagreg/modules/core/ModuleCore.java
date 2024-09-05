@@ -55,93 +55,93 @@ import org.jetbrains.annotations.NotNull;
 import static su.terrafirmagreg.modules.ModuleContainer.CORE;
 
 @Module(
-        moduleID = CORE,
-        description = "Core TFG content. Disabling this disables the entire mod and all its module.",
-        coreModule = true
+    moduleID = CORE,
+    description = "Core TFG content. Disabling this disables the entire mod and all its module.",
+    coreModule = true
 )
 public final class ModuleCore extends ModuleBase {
 
-    public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleCore.class.getSimpleName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleCore.class.getSimpleName());
 
-    public static CreativeTabs CORE_TAB;
+  public static CreativeTabs CORE_TAB;
 
-    public ModuleCore() {
-        CORE_TAB = BaseCreativeTab.of("misc", "core/wand");
+  public ModuleCore() {
+    CORE_TAB = BaseCreativeTab.of("misc", "core/wand");
 
-        this.enableAutoRegistry(CORE_TAB);
-        this.enableNetwork();
-    }
+    this.enableAutoRegistry(CORE_TAB);
+    this.enableNetwork();
+  }
 
-    @Override
-    public void onNetworkRegister() {
+  @Override
+  public void onNetworkRegister() {
 
-        PacketsCore.onRegister(packetRegistry);
-    }
+    PacketsCore.onRegister(packetRegistry);
+  }
 
-    @Override
-    public void onRegister() {
+  @Override
+  public void onRegister() {
 
-        DataSerializersCore.onRegister(registryManager);
-        BlocksCore.onRegister(registryManager);
-        EntitiesCore.onRegister(registryManager);
-        FluidsCore.onRegister(registryManager);
-        ItemsCore.onRegister(registryManager);
-        PotionsCore.onRegister(registryManager);
-        LootTablesCore.onRegister(registryManager);
-        CommandsCore.onRegister(registryManager);
-    }
+    DataSerializersCore.onRegister(registryManager);
+    BlocksCore.onRegister(registryManager);
+    EntitiesCore.onRegister(registryManager);
+    FluidsCore.onRegister(registryManager);
+    ItemsCore.onRegister(registryManager);
+    PotionsCore.onRegister(registryManager);
+    LootTablesCore.onRegister(registryManager);
+    CommandsCore.onRegister(registryManager);
+  }
 
-    public void onClientRegister() {
-        EntitiesCore.onClientRegister(registryManager);
-    }
+  public void onClientRegister() {
+    EntitiesCore.onClientRegister(registryManager);
+  }
 
-    @Override
-    public void onPreInit(FMLPreInitializationEvent event) {
+  @Override
+  public void onPreInit(FMLPreInitializationEvent event) {
 
-        NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaGreg.getInstance(), new GuiHandler());
+    NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaGreg.getInstance(), new GuiHandler());
 
-        CapabilityChunkData.register();
-        CapabilityWorldTracker.register();
-        CapabilityEgg.register();
-        CapabilityHeat.register();
-        CapabilityFood.register();
-        CapabilityMetal.register();
-        CapabilityPull.register();
-        CapabilitySharpness.register();
-        CapabilitySize.register();
-        CapabilityPlayer.register();
-        CapabilityTemperature.register();
-        CapabilityDamageResistance.register();
+    CapabilityChunkData.register();
+    CapabilityWorldTracker.register();
+    CapabilityEgg.register();
+    CapabilityHeat.register();
+    CapabilityFood.register();
+    CapabilityMetal.register();
+    CapabilityPull.register();
+    CapabilitySharpness.register();
+    CapabilitySize.register();
+    CapabilityPlayer.register();
+    CapabilityTemperature.register();
+    CapabilityDamageResistance.register();
 
-        MinecraftForge.EVENT_BUS.register(new EventHandlerAmbiental());
-        MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesChunk());
-        MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesWorld());
-        MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesItem());
-        MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesEntity());
-        MinecraftForge.EVENT_BUS.register(new EventHandlerPuddles());
+    MinecraftForge.EVENT_BUS.register(new EventHandlerAmbiental());
+    MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesChunk());
+    MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesWorld());
+    MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesItem());
+    MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesEntity());
+    MinecraftForge.EVENT_BUS.register(new EventHandlerPuddles());
 
-    }
+  }
 
-    @Override
-    public void onClientPreInit(FMLPreInitializationEvent event) {
+  @Override
+  public void onClientPreInit(FMLPreInitializationEvent event) {
 
-        MinecraftForge.EVENT_BUS.register(new OverlayTemperature());
-        MinecraftForge.EVENT_BUS.register(new OverlayPlayerData());
-        MinecraftForge.EVENT_BUS.register(new EventHandlerDebugInfo());
-    }
+    MinecraftForge.EVENT_BUS.register(new OverlayTemperature());
+    MinecraftForge.EVENT_BUS.register(new OverlayPlayerData());
+    MinecraftForge.EVENT_BUS.register(new EventHandlerDebugInfo());
+  }
 
-    @Override
-    public void onInit(FMLInitializationEvent event) {
-        HandlerSize.init();
-        HandlerFood.init();
-        HandlerEgg.init();
-        HandlerMetal.init();
-        HandlerHeat.init();
-        HandlerDamageResistance.init();
-    }
+  @Override
+  public void onInit(FMLInitializationEvent event) {
+    HandlerSize.init();
+    HandlerFood.init();
+    HandlerEgg.init();
+    HandlerMetal.init();
+    HandlerHeat.init();
+    HandlerDamageResistance.init();
+  }
 
-    @Override
-    public @NotNull LoggingHelper getLogger() {
-        return LOGGER;
-    }
+  @Override
+  public @NotNull LoggingHelper getLogger() {
+    return LOGGER;
+  }
 }

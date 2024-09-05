@@ -18,26 +18,27 @@ import lombok.Getter;
 @Getter
 public class BlockWoodDoor extends BaseBlockDoor implements IWoodBlock {
 
-    private final WoodBlockVariant variant;
-    private final WoodType type;
+  private final WoodBlockVariant variant;
+  private final WoodType type;
 
-    public BlockWoodDoor(WoodBlockVariant variant, WoodType type) {
-        super(Settings.of(Material.WOOD));
+  public BlockWoodDoor(WoodBlockVariant variant, WoodType type) {
+    super(Settings.of(Material.WOOD));
 
-        this.variant = variant;
-        this.type = type;
+    this.variant = variant;
+    this.type = type;
 
-        getSettings()
-                .sound(SoundType.WOOD)
-                .oreDict(variant, "wood")
-                .oreDict(variant, "wood", type);
+    getSettings()
+        .sound(SoundType.WOOD)
+        .oreDict(variant, "wood")
+        .oreDict(variant, "wood", type);
 
-        disableStats();
-        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
-    }
+    disableStats();
+    BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
+  }
 
-    @Override
-    public IStateMapper getStateMapper() {
-        return new CustomStateMap.Builder().customResource(getResourceLocation()).ignore(BlockDoor.POWERED).build();
-    }
+  @Override
+  public IStateMapper getStateMapper() {
+    return new CustomStateMap.Builder().customResource(getResourceLocation())
+        .ignore(BlockDoor.POWERED).build();
+  }
 }

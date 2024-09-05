@@ -6,11 +6,11 @@ import net.minecraft.block.material.Material;
 
 public class BlockDebug extends BaseBlock {
 
-    public BlockDebug() {
-        super(Settings.of(Material.SPONGE));
+  public BlockDebug() {
+    super(Settings.of(Material.SPONGE));
 
-        getSettings()
-                .registryKey("core/debug");
-    }
+    getSettings()
+        .registryKey("core/debug");
+  }
 
 }

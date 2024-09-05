@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariant;
 
 public class ItemSoilMudWetBrick extends ItemSoil {
 
-    public ItemSoilMudWetBrick(SoilItemVariant variant, SoilType type) {
-        super(variant, type);
-    }
+  public ItemSoilMudWetBrick(SoilItemVariant variant, SoilType type) {
+    super(variant, type);
+  }
 }

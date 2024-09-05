@@ -26,144 +26,147 @@ import java.util.Set;
 @Getter
 public class RockType extends Type<RockType> {
 
-    @Getter
-    private static final Set<RockType> types = new ObjectOpenHashSet<>();
+  @Getter
+  private static final Set<RockType> types = new ObjectOpenHashSet<>();
+
+  private final String name;
+  private final RockCategory category;
+  private final OrePrefix orePrefix;
+  private final Material material;
+  private final boolean isFlux;
+
+  private RockType(Builder builder) {
+    super(builder.name);
+    this.name = builder.name;
+    this.category = builder.category;
+    this.orePrefix = builder.orePrefix;
+    this.material = builder.material;
+    this.isFlux = builder.isFlux;
+
+    if (!types.add(this)) {
+      throw new RuntimeException(String.format("RockType: [%s] already exists!", name));
+    }
+  }
+
+  @Nullable
+  public static RockType getByName(@NotNull String name) {
+    return RockType.getTypes()
+        .stream()
+        .filter(s -> s.getName().equals(name))
+        .findFirst()
+        .orElse(null);
+  }
+
+  /**
+   * Возвращает экземпляр породы по индексу.
+   *
+   * @param i Индекс породы.
+   * @return Экземпляр породы.
+   */
+  public static RockType valueOf(int i) {
+    var values = new RockType[types.size()];
+    values = types.toArray(values);
+
+    return i >= 0 && i < values.length ? values[i] : values[i % values.length];
+  }
+
+  /**
+   * Возвращает индекс породы в списке.
+   *
+   * @param type Порода.
+   * @return Индекс породы.
+   */
+  public static int indexOf(RockType type) {
+    return new ArrayList<>(types).indexOf(type);
+  }
+
+  public static Builder builder(String name) {
+
+    return new Builder(name);
+  }
+
+  /**
+   * Возвращает ресурсное расположение текстуры породы.
+   *
+   * @return Ресурсное расположение текстуры породы.
+   */
+  @NotNull
+  public ResourceLocation getTexture() {
+    return ModUtils.resource("textures/blocks/rock/raw/" + this + ".png");
+  }
+
+  public String getLocalizedName() {
+    return new TextComponentTranslation(
+        String.format("rock.type.%s.name", this)).getFormattedText();
+  }
+
+  public static class Builder {
 
     private final String name;
-    private final RockCategory category;
-    private final OrePrefix orePrefix;
-    private final Material material;
-    private final boolean isFlux;
+    private RockCategory category;
+    private OrePrefix orePrefix;
+    private Material material;
+    private boolean isFlux = false;
 
-    private RockType(Builder builder) {
-        super(builder.name);
-        this.name = builder.name;
-        this.category = builder.category;
-        this.orePrefix = builder.orePrefix;
-        this.material = builder.material;
-        this.isFlux = builder.isFlux;
-
-        if (!types.add(this)) throw new RuntimeException(String.format("RockType: [%s] already exists!", name));
-    }
-
-    @Nullable
-    public static RockType getByName(@NotNull String name) {
-        return RockType.getTypes()
-                .stream()
-                .filter(s -> s.getName().equals(name))
-                .findFirst()
-                .orElse(null);
+    /**
+     * Создает экземпляр Builder с указанным именем.
+     *
+     * @param name Имя породы.
+     */
+    public Builder(@NotNull String name) {
+      this.name = name;
     }
 
     /**
-     * Возвращает экземпляр породы по индексу.
+     * Устанавливает орпрефикс для типа породы.
      *
-     * @param i Индекс породы.
-     * @return Экземпляр породы.
+     * @param orePrefix Орпрефикс для типа породы.
+     * @return Builder.
      */
-    public static RockType valueOf(int i) {
-        var values = new RockType[types.size()];
-        values = types.toArray(values);
-
-        return i >= 0 && i < values.length ? values[i] : values[i % values.length];
+    public Builder orePrefix(@NotNull OrePrefix orePrefix) {
+      this.orePrefix = orePrefix;
+      return this;
     }
 
     /**
-     * Возвращает индекс породы в списке.
+     * Устанавливает материал для типа породы.
      *
-     * @param type Порода.
-     * @return Индекс породы.
+     * @param material Материал для типа породы.
+     * @return Builder.
      */
-    public static int indexOf(RockType type) {
-        return new ArrayList<>(types).indexOf(type);
+    public Builder material(@NotNull Material material) {
+      this.material = material;
+      return this;
     }
 
     /**
-     * Возвращает ресурсное расположение текстуры породы.
+     * Устанавливает категорию породы.
      *
-     * @return Ресурсное расположение текстуры породы.
+     * @param rockCategory Категория породы.
+     * @return Builder.
      */
-    @NotNull
-    public ResourceLocation getTexture() {
-        return ModUtils.resource("textures/blocks/rock/raw/" + this + ".png");
+    public Builder rockCategory(@NotNull RockCategory rockCategory) {
+      this.category = rockCategory;
+      return this;
     }
 
-    public String getLocalizedName() {
-        return new TextComponentTranslation(String.format("rock.type.%s.name", this)).getFormattedText();
+    /**
+     * Устанавливает флаг, указывающий, является ли порода флюсом.
+     *
+     * @return Builder.
+     */
+    public Builder isFlux() {
+      this.isFlux = true;
+      return this;
     }
 
-    public static Builder builder(String name) {
-
-        return new Builder(name);
+    /**
+     * Создает экземпляр RockType на основе Builder.
+     *
+     * @return Экземпляр RockType.
+     */
+    public RockType build() {
+      return new RockType(this);
     }
-
-    public static class Builder {
-
-        private final String name;
-        private RockCategory category;
-        private OrePrefix orePrefix;
-        private Material material;
-        private boolean isFlux = false;
-
-        /**
-         * Создает экземпляр Builder с указанным именем.
-         *
-         * @param name Имя породы.
-         */
-        public Builder(@NotNull String name) {
-            this.name = name;
-        }
-
-        /**
-         * Устанавливает орпрефикс для типа породы.
-         *
-         * @param orePrefix Орпрефикс для типа породы.
-         * @return Builder.
-         */
-        public Builder orePrefix(@NotNull OrePrefix orePrefix) {
-            this.orePrefix = orePrefix;
-            return this;
-        }
-
-        /**
-         * Устанавливает материал для типа породы.
-         *
-         * @param material Материал для типа породы.
-         * @return Builder.
-         */
-        public Builder material(@NotNull Material material) {
-            this.material = material;
-            return this;
-        }
-
-        /**
-         * Устанавливает категорию породы.
-         *
-         * @param rockCategory Категория породы.
-         * @return Builder.
-         */
-        public Builder rockCategory(@NotNull RockCategory rockCategory) {
-            this.category = rockCategory;
-            return this;
-        }
-
-        /**
-         * Устанавливает флаг, указывающий, является ли порода флюсом.
-         *
-         * @return Builder.
-         */
-        public Builder isFlux() {
-            this.isFlux = true;
-            return this;
-        }
-
-        /**
-         * Создает экземпляр RockType на основе Builder.
-         *
-         * @return Экземпляр RockType.
-         */
-        public RockType build() {
-            return new RockType(this);
-        }
-    }
+  }
 }

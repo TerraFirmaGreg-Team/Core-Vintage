@@ -5,8 +5,8 @@ package su.terrafirmagreg.modules.animal.api.type;
  */
 public interface ILivestock extends ICreature {
 
-    @Override
-    default CreatureType getCreatureType() {
-        return CreatureType.LIVESTOCK;
-    }
+  @Override
+  default CreatureType getCreatureType() {
+    return CreatureType.LIVESTOCK;
+  }
 }

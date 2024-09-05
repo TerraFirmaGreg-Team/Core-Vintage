@@ -15,24 +15,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalGazelle extends RenderLiving<EntityAnimalGazelle> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.resource("textures/entity/animal/huntable/gazelle.png");
+  private static final ResourceLocation TEXTURE = ModUtils.resource(
+      "textures/entity/animal/huntable/gazelle.png");
 
-    public RenderAnimalGazelle(RenderManager manager) {
-        super(manager, new ModelAnimalGazelle(), 0.7F);
-    }
+  public RenderAnimalGazelle(RenderManager manager) {
+    super(manager, new ModelAnimalGazelle(), 0.7F);
+  }
 
-    @Override
-    protected float handleRotationFloat(EntityAnimalGazelle gazelle, float par2) {
-        return 1.0f;
-    }
+  @Override
+  protected float handleRotationFloat(EntityAnimalGazelle gazelle, float par2) {
+    return 1.0f;
+  }
 
-    @Override
-    protected void preRenderCallback(EntityAnimalGazelle gazelleTFC, float par2) {
-        GlStateManager.scale(0.9f, 0.9f, 0.9f);
-    }
+  @Override
+  protected void preRenderCallback(EntityAnimalGazelle gazelleTFC, float par2) {
+    GlStateManager.scale(0.9f, 0.9f, 0.9f);
+  }
 
-    @Override
-    protected ResourceLocation getEntityTexture(EntityAnimalGazelle entity) {
-        return TEXTURE;
-    }
+  @Override
+  protected ResourceLocation getEntityTexture(EntityAnimalGazelle entity) {
+    return TEXTURE;
+  }
 }

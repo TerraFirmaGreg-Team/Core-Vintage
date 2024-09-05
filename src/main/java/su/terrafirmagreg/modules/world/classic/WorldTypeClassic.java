@@ -19,57 +19,58 @@ import net.dries007.tfc.client.gui.GuiCustomizeWorld;
  */
 public class WorldTypeClassic extends WorldType {
 
-    public static final int SEALEVEL = 144;
-    public static final int ROCKLAYER2 = 110;
-    public static final int ROCKLAYER3 = 55;
+  public static final int SEALEVEL = 144;
+  public static final int ROCKLAYER2 = 110;
+  public static final int ROCKLAYER3 = 55;
 
-    public WorldTypeClassic() {
-        super("tfg:classic");
+  public WorldTypeClassic() {
+    super("tfg:classic");
 
+  }
+
+  @Override
+  public BiomeProvider getBiomeProvider(World world) {
+    return new BiomeProviderClassic(world);
+  }
+
+  @Override
+  public IChunkGenerator getChunkGenerator(World world, String generatorOptions) {
+    return new ChunkGenClassic(world, generatorOptions);
+  }
+
+  @Override
+  public int getMinimumSpawnHeight(World world) {
+    return SEALEVEL; // todo
+  }
+
+  @Override
+  public double getHorizon(World world) {
+    return SEALEVEL; // todo
+  }
+
+  @Override
+  public int getSpawnFuzz(WorldServer world, MinecraftServer server) {
+    if (world.getGameRules().hasRule("spawnRadius")) {
+      return world.getGameRules().getInt("spawnRadius");
     }
 
-    @Override
-    public BiomeProvider getBiomeProvider(World world) {
-        return new BiomeProviderClassic(world);
-    }
+    return ((ChunkGenClassic) world.getChunkProvider().chunkGenerator).settings.spawnFuzz;
+  }
 
-    @Override
-    public IChunkGenerator getChunkGenerator(World world, String generatorOptions) {
-        return new ChunkGenClassic(world, generatorOptions);
-    }
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void onCustomizeButton(Minecraft mc, GuiCreateWorld guiCreateWorld) {
+    mc.displayGuiScreen(
+        new GuiCustomizeWorld(guiCreateWorld, guiCreateWorld.chunkProviderSettingsJson));
+  }
 
-    @Override
-    public int getMinimumSpawnHeight(World world) {
-        return SEALEVEL; // todo
-    }
+  @Override
+  public boolean isCustomizable() {
+    return true;
+  }
 
-    @Override
-    public double getHorizon(World world) {
-        return SEALEVEL; // todo
-    }
-
-    @Override
-    public int getSpawnFuzz(WorldServer world, MinecraftServer server) {
-        if (world.getGameRules().hasRule("spawnRadius")) {
-            return world.getGameRules().getInt("spawnRadius");
-        }
-
-        return ((ChunkGenClassic) world.getChunkProvider().chunkGenerator).settings.spawnFuzz;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onCustomizeButton(Minecraft mc, GuiCreateWorld guiCreateWorld) {
-        mc.displayGuiScreen(new GuiCustomizeWorld(guiCreateWorld, guiCreateWorld.chunkProviderSettingsJson));
-    }
-
-    @Override
-    public boolean isCustomizable() {
-        return true;
-    }
-
-    @Override
-    public float getCloudHeight() {
-        return 2 * SEALEVEL;
-    }
+  @Override
+  public float getCloudHeight() {
+    return 2 * SEALEVEL;
+  }
 }

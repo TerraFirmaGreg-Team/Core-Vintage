@@ -12,20 +12,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class EntitiesMetal {
 
-    public static EntityEntry PIGVIL;
+  public static EntityEntry PIGVIL;
 
-    public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registry) {
 
-        PIGVIL = registry.entity("pigvil", EntityEntryBuilder.create()
-                .entity(EntityMetalPigvil.class)
-                .tracker(64, 3, true)
-                .egg(0xF1AAAA, 0x555555)
-        );
-    }
+    PIGVIL = registry.entity("pigvil", EntityEntryBuilder.create()
+        .entity(EntityMetalPigvil.class)
+        .tracker(64, 3, true)
+        .egg(0xF1AAAA, 0x555555)
+    );
+  }
 
-    @SideOnly(Side.CLIENT)
-    public static void onClientRegister(RegistryManager registry) {
+  @SideOnly(Side.CLIENT)
+  public static void onClientRegister(RegistryManager registry) {
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityMetalPigvil.class, RenderMetalPigvil::new);
-    }
+    RenderingRegistry.registerEntityRenderingHandler(EntityMetalPigvil.class,
+        RenderMetalPigvil::new);
+  }
 }

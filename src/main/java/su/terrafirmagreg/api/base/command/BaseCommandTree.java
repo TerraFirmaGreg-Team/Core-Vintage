@@ -15,40 +15,40 @@ import java.util.StringJoiner;
  */
 public abstract class BaseCommandTree extends CommandTreeBase {
 
-    @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+  @Override
+  public void execute(MinecraftServer server, ICommandSender sender, String[] args)
+      throws CommandException {
 
-        if (args.length == 0) {
+    if (args.length == 0) {
 
-            sender.sendMessage(new TextComponentString(this.getSubCommandDescriptions(sender)));
-        } else {
+      sender.sendMessage(new TextComponentString(this.getSubCommandDescriptions(sender)));
+    } else {
 
-            super.execute(server, sender, args);
-        }
+      super.execute(server, sender, args);
+    }
+  }
+
+  /**
+   * Creates a string with all the usage lines for the sub commands.
+   *
+   * @param sender The thing sending the command.
+   * @return A string with all the usage lines for sub commands.
+   */
+  private String getSubCommandDescriptions(ICommandSender sender) {
+
+    final StringJoiner joiner = new StringJoiner("\n");
+
+    for (final ICommand command : this.getSubCommands()) {
+
+      joiner.add(command.getUsage(sender));
     }
 
-    /**
-     * Creates a string with all the usage lines for the sub commands.
-     *
-     * @param sender The thing sending the command.
-     *
-     * @return A string with all the usage lines for sub commands.
-     */
-    private String getSubCommandDescriptions(ICommandSender sender) {
+    return joiner.toString();
+  }
 
-        final StringJoiner joiner = new StringJoiner("\n");
+  @Override
+  public boolean checkPermission(MinecraftServer server, ICommandSender sender) {
 
-        for (final ICommand command : this.getSubCommands()) {
-
-            joiner.add(command.getUsage(sender));
-        }
-
-        return joiner.toString();
-    }
-
-    @Override
-    public boolean checkPermission(MinecraftServer server, ICommandSender sender) {
-
-        return this.getRequiredPermissionLevel() <= 0 || super.checkPermission(server, sender);
-    }
+    return this.getRequiredPermissionLevel() <= 0 || super.checkPermission(server, sender);
+  }
 }

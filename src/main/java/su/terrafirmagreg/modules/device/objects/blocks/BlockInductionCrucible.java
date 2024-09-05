@@ -39,118 +39,130 @@ import static su.terrafirmagreg.data.Properties.LIT;
 @SuppressWarnings("deprecation")
 public class BlockInductionCrucible extends BaseBlock implements IProviderTile {
 
-    private static final AxisAlignedBB CRUCIBLE_AABB = new AxisAlignedBB(0.0625, 0, 0.0625, 0.9375, 0.9375, 0.9375);
-    private static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.9375D, 0.125D, 0.9375D);
-    private static final AxisAlignedBB AABB_WALL_NORTH = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.9375D, 0.1875D);
-    private static final AxisAlignedBB AABB_WALL_SOUTH = new AxisAlignedBB(0.0625D, 0.0D, 0.8125D, 0.9375D, 0.9375D, 0.9375D);
-    private static final AxisAlignedBB AABB_WALL_EAST = new AxisAlignedBB(0.8125D, 0.0D, 0.0625D, 0.9375D, 0.9375D, 0.9375D);
-    private static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.1875D, 0.9375D, 0.9375D);
+  private static final AxisAlignedBB CRUCIBLE_AABB = new AxisAlignedBB(0.0625, 0, 0.0625, 0.9375,
+      0.9375, 0.9375);
+  private static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.9375D,
+      0.125D, 0.9375D);
+  private static final AxisAlignedBB AABB_WALL_NORTH = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D,
+      0.9375D, 0.9375D, 0.1875D);
+  private static final AxisAlignedBB AABB_WALL_SOUTH = new AxisAlignedBB(0.0625D, 0.0D, 0.8125D,
+      0.9375D, 0.9375D, 0.9375D);
+  private static final AxisAlignedBB AABB_WALL_EAST = new AxisAlignedBB(0.8125D, 0.0D, 0.0625D,
+      0.9375D, 0.9375D, 0.9375D);
+  private static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D,
+      0.1875D, 0.9375D, 0.9375D);
 
-    public BlockInductionCrucible() {
-        super(Settings.of(Material.IRON));
+  public BlockInductionCrucible() {
+    super(Settings.of(Material.IRON));
 
-        getSettings()
-                .registryKey("device/induction_crucible")
-                .sound(SoundType.METAL)
-                .size(Size.LARGE)
-                .weight(Weight.MEDIUM)
-                .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
-                .nonFullCube()
-                .nonCanStack()
-                .nonOpaque()
-                .hardness(3.0f);
+    getSettings()
+        .registryKey("device/induction_crucible")
+        .sound(SoundType.METAL)
+        .size(Size.LARGE)
+        .weight(Weight.MEDIUM)
+        .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
+        .nonFullCube()
+        .nonCanStack()
+        .nonOpaque()
+        .hardness(3.0f);
 
-        setHarvestLevel(ToolClasses.PICKAXE, 0);
-        setDefaultState(getBlockState().getBaseState()
-                .withProperty(LIT, false)
-                .withProperty(FACING, EnumFacing.NORTH));
+    setHarvestLevel(ToolClasses.PICKAXE, 0);
+    setDefaultState(getBlockState().getBaseState()
+        .withProperty(LIT, false)
+        .withProperty(FACING, EnumFacing.NORTH));
 
+  }
+
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState()
+        .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+        .withProperty(LIT, meta >= 4);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(FACING).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
+  }
+
+  @Override
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return CRUCIBLE_AABB;
+  }
+
+  @Override
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
+      EnumFacing face) {
+    if (face == EnumFacing.UP) {
+      return BlockFaceShape.BOWL;
     }
+    return isSideSolid(state, worldIn, pos, face) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+  }
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState()
-                .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
-                .withProperty(LIT, meta >= 4);
-    }
+  @Override
+  public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos,
+      AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
+      @Nullable Entity entityIn,
+      boolean isActualState) {
+    addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_LEGS);
+    addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_WEST);
+    addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_NORTH);
+    addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_EAST);
+    addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_SOUTH);
+  }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
-    }
+  @Nullable
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
+      BlockPos pos) {
+    return CRUCIBLE_AABB;
+  }
 
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return CRUCIBLE_AABB;
-    }
+  @SideOnly(Side.CLIENT)
+  @Override
+  public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+    return CRUCIBLE_AABB;
+  }
 
-    @Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        if (face == EnumFacing.UP) {
-            return BlockFaceShape.BOWL;
-        }
-        return isSideSolid(state, worldIn, pos, face) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+  @Override
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
+      EnumHand hand, EnumFacing facing, float hitX,
+      float hitY, float hitZ) {
+    if (!player.isSneaking()) {
+      if (!world.isRemote) {
+        GuiHandler.openGui(world, pos, player);
+      }
+      return true;
     }
+    return false;
+  }
 
-    @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
-                                      @Nullable Entity entityIn,
-                                      boolean isActualState) {
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_LEGS);
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_WEST);
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_NORTH);
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_EAST);
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_SOUTH);
-    }
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, FACING, LIT);
+  }
 
-    @Nullable
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return CRUCIBLE_AABB;
-    }
+  @Override
+  public boolean isSideSolid(IBlockState baseState, IBlockAccess world, BlockPos pos,
+      EnumFacing side) {
+    return side == baseState.getValue(FACING);
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
-        return CRUCIBLE_AABB;
-    }
+  @Override
+  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX,
+      float hitY, float hitZ, int meta,
+      EntityLivingBase placer, EnumHand hand) {
+    return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+  }
 
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX,
-                                    float hitY, float hitZ) {
-        if (!player.isSneaking()) {
-            if (!world.isRemote) {
-                GuiHandler.openGui(world, pos, player);
-            }
-            return true;
-        }
-        return false;
-    }
+  @Nullable
+  @Override
+  public TileEntity createNewTileEntity(World worldIn, int meta) {
+    return new TileInductionCrucible();
+  }
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING, LIT);
-    }
-
-    @Override
-    public boolean isSideSolid(IBlockState baseState, IBlockAccess world, BlockPos pos, EnumFacing side) {
-        return side == baseState.getValue(FACING);
-    }
-
-    @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-                                            EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileInductionCrucible();
-    }
-
-    @Override
-    public Class<? extends TileEntity> getTileEntityClass() {
-        return TileInductionCrucible.class;
-    }
+  @Override
+  public Class<? extends TileEntity> getTileEntityClass() {
+    return TileInductionCrucible.class;
+  }
 }

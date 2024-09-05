@@ -10,9 +10,9 @@ import java.util.List;
 
 public abstract class BaseBiomeProvider extends BiomeProvider {
 
-    public static final List<Biome> WORLD_GEN_BIOMES = new ArrayList<>();
+  public static final List<Biome> WORLD_GEN_BIOMES = new ArrayList<>();
 
-    public BaseBiomeProvider(WorldInfo worldInfo) {
-        super(worldInfo);
-    }
+  public BaseBiomeProvider(WorldInfo worldInfo) {
+    super(worldInfo);
+  }
 }

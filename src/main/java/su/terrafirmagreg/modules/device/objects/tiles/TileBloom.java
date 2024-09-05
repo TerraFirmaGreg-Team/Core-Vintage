@@ -6,13 +6,13 @@ import net.minecraft.item.ItemStack;
 
 public class TileBloom extends BaseTileInventory {
 
-    public TileBloom() {
-        super(1);
+  public TileBloom() {
+    super(1);
 
-    }
+  }
 
-    public void setBloom(ItemStack stack) {
+  public void setBloom(ItemStack stack) {
 
-        inventory.setStackInSlot(0, stack);
-    }
+    inventory.setStackInSlot(0, stack);
+  }
 }

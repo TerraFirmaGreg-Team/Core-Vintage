@@ -5,8 +5,8 @@ package su.terrafirmagreg.modules.animal.api.type;
  */
 public interface IHuntable extends ICreature {
 
-    @Override
-    default CreatureType getCreatureType() {
-        return CreatureType.HUNTABLE;
-    }
+  @Override
+  default CreatureType getCreatureType() {
+    return CreatureType.HUNTABLE;
+  }
 }

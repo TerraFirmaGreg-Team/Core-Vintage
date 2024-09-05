@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.registry.RegistryManager;
 
 public class BlocksFood {
 
-    public static void onRegister(RegistryManager registry) {
-    }
+  public static void onRegister(RegistryManager registry) {
+  }
 
 }

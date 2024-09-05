@@ -16,22 +16,23 @@ import lombok.Getter;
 @Getter
 public class BlockSoilMudWall extends BaseBlockWall implements ISoilBlock {
 
-    private final SoilBlockVariant variant;
-    private final SoilType type;
+  private final SoilBlockVariant variant;
+  private final SoilType type;
 
-    public BlockSoilMudWall(SoilBlockVariant modelBlock, SoilBlockVariant variant, SoilType type) {
-        super(modelBlock.get(type));
+  public BlockSoilMudWall(SoilBlockVariant modelBlock, SoilBlockVariant variant, SoilType type) {
+    super(modelBlock.get(type));
 
-        this.variant = variant;
-        this.type = type;
+    this.variant = variant;
+    this.type = type;
 
-        getSettings()
-                .sound(SoundType.STONE)
-                .renderLayer(BlockRenderLayer.CUTOUT)
-                .oreDict("wall")
-                .oreDict("wall", "mud", "bricks");
+    getSettings()
+        .registryKey(variant.getRegistryKey(type))
+        .sound(SoundType.STONE)
+        .renderLayer(BlockRenderLayer.CUTOUT)
+        .oreDict("wall")
+        .oreDict("wall", "mud", "bricks");
 
-        setHarvestLevel(ToolClasses.PICKAXE, 0);
-    }
+    setHarvestLevel(ToolClasses.PICKAXE, 0);
+  }
 
 }

@@ -4,6 +4,7 @@ import su.terrafirmagreg.data.lib.Pair;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
@@ -50,7 +51,6 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
@@ -881,12 +881,11 @@ public final class DefaultRecipes {
     @SuppressWarnings("ConstantConditions")
     public static void onRegisterChiselRecipeEvent(RegistryEvent.Register<ChiselRecipe> event) {
         // Rock smoothing
-        for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-            Block rawRock = BlockRockVariant.get(rock, Rock.Type.RAW);
-            IBlockState smoothRock = BlockRockVariant.get(rock, Rock.Type.SMOOTH).getDefaultState();
-            event.getRegistry().register(
-                    new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rock.getRegistryName().getPath()));
-        }
+        RockType.getTypes().forEach(type -> {
+            Block rawRock = BlocksRock.RAW.get(type);
+            IBlockState smoothRock = BlocksRock.SMOOTH.get(type).getDefaultState();
+            event.getRegistry().register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + type.getName()));
+        });
 
         // Alabaster smoothing
         //		for (EnumColor color : EnumColor.values()) {

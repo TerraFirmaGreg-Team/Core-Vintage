@@ -16,29 +16,29 @@ import net.dries007.tfc.objects.container.IButtonHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class ContainerRockAnvil
-        extends BaseContainerTile<TileRockAnvil> implements IButtonHandler {
+    extends BaseContainerTile<TileRockAnvil> implements IButtonHandler {
 
-    public ContainerRockAnvil(InventoryPlayer playerInv, TileRockAnvil tile) {
-        super(playerInv, tile);
+  public ContainerRockAnvil(InventoryPlayer playerInv, TileRockAnvil tile) {
+    super(playerInv, tile);
 
+  }
+
+  @Override
+  public void onButtonPress(int buttonID, @Nullable NBTTagCompound extraNBT) {
+    if (extraNBT != null) {
+      // Set the tile recipe
+      String recipeName = extraNBT.getString("recipe");
+      IAnvilRecipe recipe = AnvilRecipeManager.findMatchingRecipe(new ResourceLocation(recipeName));
+      if (tile.setRecipe(recipe)) {
+        tile.markForSync();
+      }
+
+      // Switch to anvil GUI
+      GuiHandler.openGui(player.world, tile.getPos(), player, GuiHandler.Type.ROCK_ANVIL);
     }
+  }
 
-    @Override
-    public void onButtonPress(int buttonID, @Nullable NBTTagCompound extraNBT) {
-        if (extraNBT != null) {
-            // Set the tile recipe
-            String recipeName = extraNBT.getString("recipe");
-            IAnvilRecipe recipe = AnvilRecipeManager.findMatchingRecipe(new ResourceLocation(recipeName));
-            if (tile.setRecipe(recipe)) {
-                tile.markForSync();
-            }
-
-            // Switch to anvil GUI
-            GuiHandler.openGui(player.world, tile.getPos(), player, GuiHandler.Type.ROCK_ANVIL);
-        }
-    }
-
-    @Override
-    protected void addContainerSlots() {
-    }
+  @Override
+  protected void addContainerSlots() {
+  }
 }

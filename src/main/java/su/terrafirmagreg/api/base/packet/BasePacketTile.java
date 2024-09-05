@@ -11,62 +11,63 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public abstract class BasePacketTile<T extends TileEntity> extends BasePacketSerializable {
 
-    /**
-     * The serial version UID.
-     */
-    private static final long serialVersionUID = -8474561253790105901L;
+  /**
+   * The serial version UID.
+   */
+  private static final long serialVersionUID = -8474561253790105901L;
 
-    /**
-     * The position of the TileEntity.
-     */
-    public BlockPos pos;
+  /**
+   * The position of the TileEntity.
+   */
+  public BlockPos pos;
 
-    /**
-     * The TileEntity.
-     */
-    public transient T tile;
+  /**
+   * The TileEntity.
+   */
+  public transient T tile;
 
-    /**
-     * The message context.
-     */
-    public transient MessageContext context;
+  /**
+   * The message context.
+   */
+  public transient MessageContext context;
 
-    /**
-     * Blank constructor required for all messages.
-     */
-    public BasePacketTile() {}
+  /**
+   * Blank constructor required for all messages.
+   */
+  public BasePacketTile() {
+  }
 
-    /**
-     * Basic constructor for a tile entity update message.
-     *
-     * @param pos The position of the tile entity.
-     */
-    public BasePacketTile(BlockPos pos) {
+  /**
+   * Basic constructor for a tile entity update message.
+   *
+   * @param pos The position of the tile entity.
+   */
+  public BasePacketTile(BlockPos pos) {
 
-        this.pos = pos;
+    this.pos = pos;
+  }
+
+  @Override
+  public IMessage handleMessage(MessageContext context) {
+
+    this.context = context;
+    final World world = context.getServerHandler().player.getEntityWorld();
+    final TileEntity tileEntity = world.getTileEntity(this.pos);
+
+    if (tileEntity != null && world.isBlockLoaded(this.pos)) {
+      try {
+
+        final T castTile = (T) tileEntity;
+        this.tile = castTile;
+        ((WorldServer) world).addScheduledTask(this::getAction);
+      } catch (final ClassCastException e) {
+
+        TerraFirmaGreg.LOGGER.warn(e, "Tile entity could not be cast.");
+      }
     }
 
-    @Override
-    public IMessage handleMessage(MessageContext context) {
+    return null;
+  }
 
-        this.context = context;
-        final World world = context.getServerHandler().player.getEntityWorld();
-        final TileEntity tileEntity = world.getTileEntity(this.pos);
-
-        if (tileEntity != null && world.isBlockLoaded(this.pos)) {
-            try {
-
-                final T castTile = (T) tileEntity;
-                this.tile = castTile;
-                ((WorldServer) world).addScheduledTask(this::getAction);
-            } catch (final ClassCastException e) {
-
-                TerraFirmaGreg.LOGGER.warn(e, "Tile entity could not be cast.");
-            }
-        }
-
-        return null;
-    }
-
-    public abstract void getAction();
+  public abstract void getAction();
 }

@@ -27,54 +27,66 @@ import java.util.stream.IntStream;
 
 public class GeneratorCinnamon extends WorldGenerator {
 
-    private static final PlacementSettings settings = StructureUtils.getDefaultSettings();
+  private static final PlacementSettings settings = StructureUtils.getDefaultSettings();
 
-    private static final int numVariants = 1; // should always be 1 or higher
-    private static final String[] variants = IntStream.range(1, numVariants)
-            .mapToObj(String::valueOf)
-            .toArray(String[]::new);
-    private static final boolean useRotation = false;
+  private static final int numVariants = 1; // should always be 1 or higher
+  private static final String[] variants = IntStream.range(1, numVariants)
+      .mapToObj(String::valueOf)
+      .toArray(String[]::new);
+  private static final boolean useRotation = false;
 
-    @Override
-    public boolean generate(World world, Random rand, BlockPos pos) {
-        if (rand.nextInt(ConfigTFCF.General.WORLD.cinnamonRarity) < 5)
-            return false;
-
-        var chunkData = CapabilityChunkData.get(world, pos);
-        if (!chunkData.isInitialized()) return false;
-
-        final Biome b = world.getBiome(pos);
-        if (!(b instanceof BaseBiome) || b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN)
-            return false;
-
-        final float diversity = chunkData.getFloraDiversity();
-        final float density = chunkData.getFloraDensity();
-        final float temp = chunkData.getAverageTemp();
-        final float rain = chunkData.getRainfall();
-
-        int x = pos.getX() - 7 + rand.nextInt(14);
-        int z = pos.getZ() - 7 + rand.nextInt(14);
-        BlockPos genPos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
-
-        int gen = rand.nextInt(8);
-
-        if (gen == 0 && rain > 250 && temp > 20 && density > 0.3f && world.isAirBlock(pos) && world.getBlockState(pos.down())
-                .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(world.getBlockState(pos.down()))) {
-            //return generateCinnamon(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, BlocksTFCF.CASSIA_CINNAMON_LOG.getDefaultState());
-            return generateCinnamonVariant(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, TreesTFCF.GEN_CASSIA_CINNAMON);
-        }
-        if (gen == 1 && rain > 250 && temp > 20 && density > 0.3f && world.isAirBlock(pos) && world.getBlockState(pos.down())
-                .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(world.getBlockState(pos.down()))) {
-            //return generateCinnamon(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, BlocksTFCF.CEYLON_CINNAMON_LOG.getDefaultState());
-            return generateCinnamonVariant(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, TreesTFCF.GEN_CASSIA_CINNAMON);
-        }
-        return false;
+  @Override
+  public boolean generate(World world, Random rand, BlockPos pos) {
+    if (rand.nextInt(ConfigTFCF.General.WORLD.cinnamonRarity) < 5) {
+      return false;
     }
 
-    private boolean generateCinnamonVariant(World world, Random rand, BlockPos pos, Tree tree, ITreeGenerator CinnamonToGen) {
-        IBlockState state = world.getBlockState(pos.down());
-        if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && (BlockUtils.isGrowableSoil(state))) {
-            TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
+    var chunkData = CapabilityChunkData.get(world, pos);
+    if (!chunkData.isInitialized()) {
+      return false;
+    }
+
+    final Biome b = world.getBiome(pos);
+    if (!(b instanceof BaseBiome) || b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN) {
+      return false;
+    }
+
+    final float diversity = chunkData.getFloraDiversity();
+    final float density = chunkData.getFloraDensity();
+    final float temp = chunkData.getAverageTemp();
+    final float rain = chunkData.getRainfall();
+
+    int x = pos.getX() - 7 + rand.nextInt(14);
+    int z = pos.getZ() - 7 + rand.nextInt(14);
+    BlockPos genPos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
+
+    int gen = rand.nextInt(8);
+
+    if (gen == 0 && rain > 250 && temp > 20 && density > 0.3f && world.isAirBlock(pos)
+        && world.getBlockState(pos.down())
+        .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(
+        world.getBlockState(pos.down()))) {
+      //return generateCinnamon(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, BlocksTFCF.CASSIA_CINNAMON_LOG.getDefaultState());
+      return generateCinnamonVariant(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE,
+          TreesTFCF.GEN_CASSIA_CINNAMON);
+    }
+    if (gen == 1 && rain > 250 && temp > 20 && density > 0.3f && world.isAirBlock(pos)
+        && world.getBlockState(pos.down())
+        .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(
+        world.getBlockState(pos.down()))) {
+      //return generateCinnamon(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, BlocksTFCF.CEYLON_CINNAMON_LOG.getDefaultState());
+      return generateCinnamonVariant(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE,
+          TreesTFCF.GEN_CASSIA_CINNAMON);
+    }
+    return false;
+  }
+
+  private boolean generateCinnamonVariant(World world, Random rand, BlockPos pos, Tree tree,
+      ITreeGenerator CinnamonToGen) {
+    IBlockState state = world.getBlockState(pos.down());
+    if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP)
+        && (BlockUtils.isGrowableSoil(state))) {
+      TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
             /*String variant = variants[variants.length == 1 ? 0 : rand.nextInt(variants.length)];
             ResourceLocation base = new ResourceLocation(tree.getRegistryName() + "/" + variant);
 
@@ -92,11 +104,11 @@ public class GeneratorCinnamon extends WorldGenerator {
             pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
             StructureHelper.addStructureToWorld(world, pos, structureBase, settings2);*/
 
-            CinnamonToGen.generateTree(manager, world, pos, tree, rand, true);
-            return true;
-        }
-        return false;
+      CinnamonToGen.generateTree(manager, world, pos, tree, rand, true);
+      return true;
     }
+    return false;
+  }
 
     /*private boolean generateCinnamon(World world, Random rand, BlockPos pos, Tree tree, IBlockState log)
     {

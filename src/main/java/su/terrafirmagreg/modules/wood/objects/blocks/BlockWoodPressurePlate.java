@@ -15,23 +15,23 @@ import lombok.Getter;
 @Getter
 public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodBlock {
 
-    protected final Settings settings;
-    private final WoodBlockVariant variant;
-    private final WoodType type;
+  protected final Settings settings;
+  private final WoodBlockVariant variant;
+  private final WoodType type;
 
-    public BlockWoodPressurePlate(WoodBlockVariant variant, WoodType type) {
-        super(Material.WOOD, Sensitivity.EVERYTHING);
+  public BlockWoodPressurePlate(WoodBlockVariant variant, WoodType type) {
+    super(Material.WOOD, Sensitivity.EVERYTHING);
 
-        this.variant = variant;
-        this.type = type;
+    this.variant = variant;
+    this.type = type;
 
-        this.settings = Settings.of(Material.WOOD)
-                .sound(SoundType.WOOD)
-                .hardness(0.5F)
-                .oreDict(variant)
-                .oreDict(variant, "wood")
-                .oreDict(variant, "wood", type);
+    this.settings = Settings.of(Material.WOOD)
+        .sound(SoundType.WOOD)
+        .hardness(0.5F)
+        .oreDict(variant)
+        .oreDict(variant, "wood")
+        .oreDict(variant, "wood", type);
 
-        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
-    }
+    BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
+  }
 }

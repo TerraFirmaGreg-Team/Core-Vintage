@@ -31,64 +31,73 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
 
-    protected final Settings settings;
-    private final SoilBlockVariant variant;
-    private final SoilType type;
+  protected final Settings settings;
+  private final SoilBlockVariant variant;
+  private final SoilType type;
 
-    public BlockSoilGrassPath(SoilBlockVariant variant, SoilType type) {
+  public BlockSoilGrassPath(SoilBlockVariant variant, SoilType type) {
 
-        this.variant = variant;
-        this.type = type;
-        this.useNeighborBrightness = true;
-        this.settings = Settings.of(Material.GROUND)
-                .sound(SoundType.PLANT)
-                .hardness(2.0F)
-                .nonCube()
-                .oreDict(variant);
+    this.variant = variant;
+    this.type = type;
+    this.useNeighborBrightness = true;
+    this.settings = Settings.of(Material.GROUND)
+        .registryKey(variant.getRegistryKey(type))
+        .sound(SoundType.PLANT)
+        .hardness(2.0F)
+        .nonCube()
+        .oreDict(variant);
 
-        setHarvestLevel(ToolClasses.SHOVEL, 0);
+    setHarvestLevel(ToolClasses.SHOVEL, 0);
+  }
+
+  @Override
+  public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn,
+      BlockPos fromPos) {
+    if (fromPos.getY() == pos.getY() + 1) {
+      IBlockState up = world.getBlockState(fromPos);
+      if (up.isSideSolid(world, fromPos, EnumFacing.DOWN)
+          && FallingBlockManager.getSpecification(up) == null) {
+        BlockSoilFarmland.turnToDirt(world, pos);
+      }
     }
+  }
 
-    @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (fromPos.getY() == pos.getY() + 1) {
-            IBlockState up = world.getBlockState(fromPos);
-            if (up.isSideSolid(world, fromPos, EnumFacing.DOWN) && FallingBlockManager.getSpecification(up) == null) {
-                BlockSoilFarmland.turnToDirt(world, pos);
-            }
+  @Override
+  public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+    BlockPos upPos = pos.up();
+    IBlockState up = world.getBlockState(upPos);
+    if (up.isSideSolid(world, upPos, EnumFacing.DOWN)
+        && FallingBlockManager.getSpecification(up) == null) {
+      BlockSoilFarmland.turnToDirt(world, pos);
+    }
+  }
+
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return ItemsSoil.PILE.get(type);
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess,
+      BlockPos pos, EnumFacing side) {
+    switch (side) {
+      case UP:
+        return true;
+      case NORTH:
+      case SOUTH:
+      case WEST:
+      case EAST:
+        IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
+        Block block = iblockstate.getBlock();
+        if (iblockstate.isOpaqueCube()) {
+          return false;
         }
-    }
-
-    @Override
-    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-        BlockPos upPos = pos.up();
-        IBlockState up = world.getBlockState(upPos);
-        if (up.isSideSolid(world, upPos, EnumFacing.DOWN) && FallingBlockManager.getSpecification(up) == null) {
-            BlockSoilFarmland.turnToDirt(world, pos);
+        if (block instanceof BlockFarmland || block instanceof BlockGrassPath) {
+          return false;
         }
+      default:
+        return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
-
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ItemsSoil.PILE.get(type);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        switch (side) {
-            case UP:
-                return true;
-            case NORTH:
-            case SOUTH:
-            case WEST:
-            case EAST:
-                IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
-                Block block = iblockstate.getBlock();
-                if (iblockstate.isOpaqueCube()) return false;
-                if (block instanceof BlockFarmland || block instanceof BlockGrassPath) return false;
-            default:
-                return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
-        }
-    }
+  }
 }

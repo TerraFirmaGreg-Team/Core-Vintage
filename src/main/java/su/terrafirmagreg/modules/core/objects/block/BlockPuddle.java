@@ -24,73 +24,78 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class BlockPuddle extends BaseBlock {
 
-    public BlockPuddle() {
-        super(Settings.of(Material.GROUND));
+  public BlockPuddle() {
+    super(Settings.of(Material.GROUND));
 
-        setTickRandomly(true);
-        getSettings()
-                .registryKey("core/puddle")
-                .renderLayer(BlockRenderLayer.TRANSLUCENT)
-                .unbreakable()
-                .nonFullCube()
-                .noCollision();
-    }
+    setTickRandomly(true);
+    getSettings()
+        .registryKey("core/puddle")
+        .renderLayer(BlockRenderLayer.TRANSLUCENT)
+        .useNeighborBrightness()
+        .unbreakable()
+        .nonFullCube()
+        .noCollision();
+  }
 
-    @Override
-    public @Nullable RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
-        return null;
-    }
+  @Override
+  public @Nullable RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn,
+      BlockPos pos, Vec3d start, Vec3d end) {
+    return null;
+  }
 
-    @Override
-    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
-        super.updateTick(world, pos, state, rand);
-        if (!world.isRaining()) {
-            if (rand.nextInt(3) == 0) {
-                world.setBlockToAir(pos);
-            }
-        }
+  @Override
+  public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+    super.updateTick(world, pos, state, rand);
+    if (!world.isRaining()) {
+      if (rand.nextInt(3) == 0) {
+        world.setBlockToAir(pos);
+      }
     }
+  }
 
-    @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!world.isSideSolid(pos.down(), EnumFacing.UP)) {
-            world.setBlockToAir(pos);
-        }
+  @Override
+  public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn,
+      BlockPos fromPos) {
+    if (!world.isSideSolid(pos.down(), EnumFacing.UP)) {
+      world.setBlockToAir(pos);
     }
+  }
 
-    @Override
-    public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-        return true;
-    }
+  @Override
+  public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+    return true;
+  }
 
-    @Override
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
-        return true;
-    }
+  @Override
+  public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+    return true;
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        return blockAccess.getBlockState(pos.offset(side)).getBlock() != this;
-    }
+  @SideOnly(Side.CLIENT)
+  @Override
+  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess,
+      BlockPos pos, EnumFacing side) {
+    return blockAccess.getBlockState(pos.offset(side)).getBlock() != this;
+  }
 
-    @Override
-    public boolean isTranslucent(IBlockState state) {
-        return true;
-    }
+  @Override
+  public boolean isTranslucent(IBlockState state) {
+    return true;
+  }
 
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.00625D, 1.0D);
-    }
+  @Override
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.00625D, 1.0D);
+  }
 
-    @Override
-    public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return null;
-    }
+  @Override
+  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
+      IBlockAccess worldIn, BlockPos pos) {
+    return null;
+  }
 
-    @Override
-    public int quantityDropped(Random random) {
-        return 0;
-    }
+  @Override
+  public int quantityDropped(Random random) {
+    return 0;
+  }
 }

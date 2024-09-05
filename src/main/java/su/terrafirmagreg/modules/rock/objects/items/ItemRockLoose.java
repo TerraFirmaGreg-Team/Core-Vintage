@@ -32,49 +32,59 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class ItemRockLoose extends ItemRock implements IProviderContainer<ContainerKnappingRock, GuiContainerKnappingRock> {
+public class ItemRockLoose extends ItemRock implements
+    IProviderContainer<ContainerKnappingRock, GuiContainerKnappingRock> {
 
-    public ItemRockLoose(RockItemVariant variant, RockType type) {
-        super(variant, type);
+  public ItemRockLoose(RockItemVariant variant, RockType type) {
+    super(variant, type);
 
-        getSettings()
-                .size(Size.SMALL)
-                .weight(Weight.VERY_LIGHT)
-                .addOreDict("rock")
-                .addOreDict("rock", type)
-                .addOreDict("rock", type.getCategory());
+    getSettings()
+        .size(Size.SMALL)
+        .weight(Weight.VERY_LIGHT)
+        .addOreDict("rock")
+        .addOreDict("rock", type)
+        .addOreDict("rock", type.getCategory());
 
-        if (type.isFlux()) getSettings().addOreDict("rock", "flux");
+    if (type.isFlux()) {
+      getSettings().addOreDict("rock", "flux");
     }
+  }
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-        ItemStack stack = player.getHeldItem(hand);
-        if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
-            GuiHandler.openGui(world, player.getPosition(), player);
-        }
-        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+  @Override
+  public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+    ItemStack stack = player.getHeldItem(hand);
+    if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
+      GuiHandler.openGui(world, player.getPosition(), player);
     }
+    return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
+      ITooltipFlag flagIn) {
+    super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation(
-                "rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
+    tooltip.add(new TextComponentTranslation(
+        "rockcategory.name").getFormattedText() + ": " + getType().getCategory()
+        .getLocalizedName());
 
-        if (getType().isFlux())
-            tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("is_flux_rock.name").getFormattedText());
+    if (getType().isFlux()) {
+      tooltip.add(TextFormatting.GREEN + new TextComponentTranslation(
+          "is_flux_rock.name").getFormattedText());
     }
+  }
 
-    @Override
-    public ContainerKnappingRock getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-        return new ContainerKnappingRock(inventoryPlayer, inventoryPlayer.player.getHeldItemMainhand());
-    }
+  @Override
+  public ContainerKnappingRock getContainer(InventoryPlayer inventoryPlayer, World world,
+      IBlockState state, BlockPos pos) {
+    return new ContainerKnappingRock(inventoryPlayer, inventoryPlayer.player.getHeldItemMainhand());
+  }
 
-    @Override
-    public GuiContainerKnappingRock getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-        return new GuiContainerKnappingRock(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, getType().getTexture());
-    }
+  @Override
+  public GuiContainerKnappingRock getGuiContainer(InventoryPlayer inventoryPlayer, World world,
+      IBlockState state, BlockPos pos) {
+    return new GuiContainerKnappingRock(getContainer(inventoryPlayer, world, state, pos),
+        inventoryPlayer, getType().getTexture());
+  }
 }

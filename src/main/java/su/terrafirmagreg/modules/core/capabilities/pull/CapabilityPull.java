@@ -10,21 +10,22 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public final class CapabilityPull {
 
-    public static final ResourceLocation KEY = ModUtils.resource("pull_capability");
+  public static final ResourceLocation KEY = ModUtils.resource("pull_capability");
 
-    @CapabilityInject(ICapabilityPull.class)
-    public static final Capability<ICapabilityPull> CAPABILITY = ModUtils.getNull();
+  @CapabilityInject(ICapabilityPull.class)
+  public static final Capability<ICapabilityPull> CAPABILITY = ModUtils.getNull();
 
-    public static void register() {
-        CapabilityManager.INSTANCE.register(ICapabilityPull.class, new StoragePull(), ProviderPull::new);
+  public static void register() {
+    CapabilityManager.INSTANCE.register(ICapabilityPull.class, new StoragePull(),
+        ProviderPull::new);
 
-    }
+  }
 
-    public static ICapabilityPull get(Entity entity) {
-        return entity.getCapability(CAPABILITY, null);
-    }
+  public static ICapabilityPull get(Entity entity) {
+    return entity.getCapability(CAPABILITY, null);
+  }
 
-    public static boolean has(Entity entity) {
-        return entity.hasCapability(CAPABILITY, null);
-    }
+  public static boolean has(Entity entity) {
+    return entity.hasCapability(CAPABILITY, null);
+  }
 }

@@ -22,98 +22,107 @@ import static su.terrafirmagreg.modules.core.features.ambiental.AmbientalRegistr
 
 public class ModifierBlock extends ModifierBase {
 
-    static {
-        BLOCKS.register((player, pos, state) ->
-                Optional.of(new ModifierBase("torch", 3f, 0f)).filter((mod) -> state.getBlock() == Blocks.TORCH));
+  static {
+    BLOCKS.register((player, pos, state) ->
+        Optional.of(new ModifierBase("torch", 3f, 0f))
+            .filter((mod) -> state.getBlock() == Blocks.TORCH));
 
-        BLOCKS.register((player, pos, state) ->
-                Optional.of(new ModifierBase("fire", 3f, 0f)).filter((mod) -> state.getBlock() == Blocks.FIRE));
+    BLOCKS.register((player, pos, state) ->
+        Optional.of(new ModifierBase("fire", 3f, 0f))
+            .filter((mod) -> state.getBlock() == Blocks.FIRE));
 
-        BLOCKS.register((player, pos, state) ->
-                Optional.of(new ModifierBase("lava", 3f, 0f)).filter((mod) -> state.getBlock() == Blocks.LAVA));
+    BLOCKS.register((player, pos, state) ->
+        Optional.of(new ModifierBase("lava", 3f, 0f))
+            .filter((mod) -> state.getBlock() == Blocks.LAVA));
 
-        BLOCKS.register((player, pos, state) ->
-                Optional.of(new ModifierBase("flowing_lava", 3f, 0f)).filter((mod) -> state.getBlock() == Blocks.FLOWING_LAVA));
+    BLOCKS.register((player, pos, state) ->
+        Optional.of(new ModifierBase("flowing_lava", 3f, 0f))
+            .filter((mod) -> state.getBlock() == Blocks.FLOWING_LAVA));
 
-        BLOCKS.register((player, pos, state) ->
-                Optional.of(new ModifierBase("snow", -1.5f, 0.2f)).filter((mod) -> state.getBlock() == Blocks.SNOW_LAYER));
+    BLOCKS.register((player, pos, state) ->
+        Optional.of(new ModifierBase("snow", -1.5f, 0.2f))
+            .filter((mod) -> state.getBlock() == Blocks.SNOW_LAYER));
 
-        BLOCKS.register((player, pos, state) ->
-                Optional.of(new ModifierBase("snow", -0.5f, 0.2f)).filter((mod) -> state.getBlock() == Blocks.SNOW && player.world.getLightFor(EnumSkyBlock.SKY, pos) == 15));
-    }
+    BLOCKS.register((player, pos, state) ->
+        Optional.of(new ModifierBase("snow", -0.5f, 0.2f)).filter(
+            (mod) -> state.getBlock() == Blocks.SNOW
+                && player.world.getLightFor(EnumSkyBlock.SKY, pos) == 15));
+  }
 
-    public boolean affectedByDistance = false;
+  public boolean affectedByDistance = false;
 
-    public ModifierBlock(String name) {
-        super(name);
+  public ModifierBlock(String name) {
+    super(name);
 
-    }
+  }
 
-    public ModifierBlock(String name, float change, float potency) {
-        super(name, change, potency);
+  public ModifierBlock(String name, float change, float potency) {
+    super(name, change, potency);
 
-    }
+  }
 
-    public ModifierBlock(String name, float change, float potency, boolean affectedByDistance) {
-        super(name, change, potency);
-        this.affectedByDistance = affectedByDistance;
+  public ModifierBlock(String name, float change, float potency, boolean affectedByDistance) {
+    super(name, change, potency);
+    this.affectedByDistance = affectedByDistance;
 
-    }
+  }
 
-    public static void computeModifiers(EntityPlayer player, ModifierStorage storage) {
-        BlockPos p = player.getPosition();
-        BlockPos pos1 = new BlockPos(p.getX() - 9, p.getY() - 3, p.getZ() - 9);
-        BlockPos pos2 = new BlockPos(p.getX() + 9, p.getY() + 5, p.getZ() + 9);
-        World world = player.world;
-        Iterable<BlockPos.MutableBlockPos> allPositions = BlockPos.getAllInBoxMutable(pos1, pos2);
-        IBlockState skipState = Blocks.AIR.getDefaultState();
+  public static void computeModifiers(EntityPlayer player, ModifierStorage storage) {
+    BlockPos p = player.getPosition();
+    BlockPos pos1 = new BlockPos(p.getX() - 9, p.getY() - 3, p.getZ() - 9);
+    BlockPos pos2 = new BlockPos(p.getX() + 9, p.getY() + 5, p.getZ() + 9);
+    World world = player.world;
+    Iterable<BlockPos.MutableBlockPos> allPositions = BlockPos.getAllInBoxMutable(pos1, pos2);
+    IBlockState skipState = Blocks.AIR.getDefaultState();
 
-        for (BlockPos.MutableBlockPos pos : allPositions) {
-            IBlockState state = world.getBlockState(pos);
-            Block block = state.getBlock();
+    for (BlockPos.MutableBlockPos pos : allPositions) {
+      IBlockState state = world.getBlockState(pos);
+      Block block = state.getBlock();
 
-            if (state == skipState) {
-                continue;
-            }
-            if (block instanceof BlockRock || block instanceof BlockSoil) {
-                continue;
-            }
+      if (state == skipState) {
+        continue;
+      }
+      if (block instanceof BlockRock || block instanceof BlockSoil) {
+        continue;
+      }
 
-            double distance = Math.sqrt(player.getPosition().distanceSq(pos));
-            float distanceMultiplier = (float) distance / 9f;
+      double distance = Math.sqrt(player.getPosition().distanceSq(pos));
+      float distanceMultiplier = (float) distance / 9f;
 
-            distanceMultiplier = Math.min(1f, Math.max(0f, distanceMultiplier));
-            distanceMultiplier = 1f - distanceMultiplier;
+      distanceMultiplier = Math.min(1f, Math.max(0f, distanceMultiplier));
+      distanceMultiplier = 1f - distanceMultiplier;
 
-            boolean isInside = ModifierEnvironmental.getSkylight(player) < 14 && ModifierEnvironmental.getBlockLight(player) > 3;
-            if (isInside) {
-                distanceMultiplier *= 1.3f;
-            }
+      boolean isInside = ModifierEnvironmental.getSkylight(player) < 14
+          && ModifierEnvironmental.getBlockLight(player) > 3;
+      if (isInside) {
+        distanceMultiplier *= 1.3f;
+      }
 
-            final float finalDistanceMultiplier = distanceMultiplier;
-            if (block instanceof IAmbientalBlockProvider provider) {
-                storage.add(provider.getModifier(player, pos, state));
-            } else {
-                for (IAmbientalBlockProvider provider : BLOCKS) {
-                    storage.add(provider.getModifier(player, pos, state));
-                }
-            }
-
-            if (block.hasTileEntity(state)) {
-                var tile = TileUtils.getTile(world, pos);
-                if (tile instanceof IAmbientalTileProvider provider) {
-                    storage.add(provider.getModifier(player, tile));
-                } else
-                    for (IAmbientalTileProvider provider : AmbientalRegistry.TILE_ENTITIES) {
-                        provider.getModifier(player, tile).ifPresent(mod -> {
-                            mod.setChange(mod.getChange() * finalDistanceMultiplier);
-                            mod.setPotency(mod.getPotency() * finalDistanceMultiplier);
-                            storage.add(mod);
-                        });
-                        storage.add(provider.getModifier(player, tile));
-                    }
-            }
+      final float finalDistanceMultiplier = distanceMultiplier;
+      if (block instanceof IAmbientalBlockProvider provider) {
+        storage.add(provider.getModifier(player, pos, state));
+      } else {
+        for (IAmbientalBlockProvider provider : BLOCKS) {
+          storage.add(provider.getModifier(player, pos, state));
         }
+      }
+
+      if (block.hasTileEntity(state)) {
+        var tile = TileUtils.getTile(world, pos);
+        if (tile instanceof IAmbientalTileProvider provider) {
+          storage.add(provider.getModifier(player, tile));
+        } else {
+          for (IAmbientalTileProvider provider : AmbientalRegistry.TILE_ENTITIES) {
+            provider.getModifier(player, tile).ifPresent(mod -> {
+              mod.setChange(mod.getChange() * finalDistanceMultiplier);
+              mod.setPotency(mod.getPotency() * finalDistanceMultiplier);
+              storage.add(mod);
+            });
+            storage.add(provider.getModifier(player, tile));
+          }
+        }
+      }
     }
+  }
 
 }

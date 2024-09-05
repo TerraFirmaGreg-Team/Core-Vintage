@@ -8,14 +8,14 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 public final class RegistryWood {
 
-    public static IForgeRegistry<LoomRecipe> LOOM;
+  public static IForgeRegistry<LoomRecipe> LOOM;
 
-    public static void onRegister() {
+  public static void onRegister() {
 
-        LOOM = new RegistryBuilder<LoomRecipe>()
-                .setName(ModUtils.resource("loom_recipe"))
-                .setType(LoomRecipe.class)
-                .allowModification()
-                .create();
-    }
+    LOOM = new RegistryBuilder<LoomRecipe>()
+        .setName(ModUtils.resource("loom_recipe"))
+        .setType(LoomRecipe.class)
+        .allowModification()
+        .create();
+  }
 }

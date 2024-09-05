@@ -1,5 +1,7 @@
 package net.dries007.tfc.client.particle;
 
+import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
+
 import net.minecraft.client.particle.Particle;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -7,8 +9,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import net.dries007.tfc.client.GrassColorHandler;
 
 import java.awt.*;
 

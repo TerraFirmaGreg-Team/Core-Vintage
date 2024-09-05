@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilFarmland;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.block.Block;
@@ -33,7 +34,6 @@ import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.util.agriculture.Crop;
@@ -48,6 +48,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+
+import static net.minecraft.block.BlockFarmland.MOISTURE;
 
 public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlant
 
@@ -212,7 +214,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
                 IBlockState stateFarmland = worldIn.getBlockState(pos.down());
                 if (!state.getValue(WILD)) {
                     if (!worldIn.canSeeSky(pos) ||
-                            (stateFarmland.getBlock() instanceof BlockFarmlandTFC && stateFarmland.getValue(BlockFarmlandTFC.MOISTURE) < 3)) {
+                            (stateFarmland.getBlock() instanceof BlockSoilFarmland && stateFarmland.getValue(MOISTURE) < 3)) {
                         tile.resetCounter();
                         return;
                     }

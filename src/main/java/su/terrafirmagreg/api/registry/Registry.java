@@ -51,288 +51,290 @@ import lombok.Getter;
 @Getter
 public class Registry {
 
-    private final RegistryManager manager;
-
-    /**
-     * A list of all blocks registered by the helper.
-     */
-    private final RegistryList<Block> blocks;
-
-    /**
-     * A list of all items registered by the helper.
-     */
-    private final RegistryList<Item> items;
-
-    /**
-     * A list of all potions registered by the helper.
-     */
-    private final RegistryList<Potion> potions;
-
-    /**
-     * A list of all potion type registered by the helper.
-     */
-    private final RegistryList<PotionType> potionTypes;
-
-    /**
-     * A list of all biomes registered by the helper.
-     */
-    private final RegistryList<Biome> biomes;
-
-    /**
-     * A list of all the sounds registered by the helper.
-     */
-    private final RegistryList<SoundEvent> sounds;
-
-    /**
-     * A list of all enchantments registered.
-     */
-    private final RegistryList<Enchantment> enchantments;
-
-    /**
-     * A list of all professions registered by the helper.
-     */
-    private final RegistryList<VillagerProfession> professions;
-
-    /**
-     * A list of all entities registered by the helper.
-     */
-    private final RegistryList<EntityEntry> entities;
-
-    /**
-     * A list of all recipes registered by the helper.
-     */
-    private final RegistryList<IRecipe> recipes;
+  private final RegistryManager manager;
+
+  /**
+   * A list of all blocks registered by the helper.
+   */
+  private final RegistryList<Block> blocks;
+
+  /**
+   * A list of all items registered by the helper.
+   */
+  private final RegistryList<Item> items;
+
+  /**
+   * A list of all potions registered by the helper.
+   */
+  private final RegistryList<Potion> potions;
+
+  /**
+   * A list of all potion type registered by the helper.
+   */
+  private final RegistryList<PotionType> potionTypes;
+
+  /**
+   * A list of all biomes registered by the helper.
+   */
+  private final RegistryList<Biome> biomes;
+
+  /**
+   * A list of all the sounds registered by the helper.
+   */
+  private final RegistryList<SoundEvent> sounds;
+
+  /**
+   * A list of all enchantments registered.
+   */
+  private final RegistryList<Enchantment> enchantments;
+
+  /**
+   * A list of all professions registered by the helper.
+   */
+  private final RegistryList<VillagerProfession> professions;
+
+  /**
+   * A list of all entities registered by the helper.
+   */
+  private final RegistryList<EntityEntry> entities;
+
+  /**
+   * A list of all recipes registered by the helper.
+   */
+  private final RegistryList<IRecipe> recipes;
 
-    /**
-     * A list of all recipes registered by the helper.
-     */
-    private final RegistryList<DataSerializerEntry> dataSerializerEntries;
+  /**
+   * A list of all recipes registered by the helper.
+   */
+  private final RegistryList<DataSerializerEntry> dataSerializerEntries;
 
-    /**
-     * A list of all the keyBinding registered by the helper.
-     */
-    private final NonNullList<KeyBinding> keyBinding;
+  /**
+   * A list of all the keyBinding registered by the helper.
+   */
+  private final NonNullList<KeyBinding> keyBinding;
 
-    /**
-     * A list of all the commands registered here.
-     */
-    private final NonNullList<ICommand> commands;
+  /**
+   * A list of all the commands registered here.
+   */
+  private final NonNullList<ICommand> commands;
 
-    /**
-     * A local map of all the entries that have been added. This is on a per instance basis, used to get mod-specific entries.
-     */
-    private final Multimap<ResourceLocation, LootBuilder> lootTable;
+  /**
+   * A local map of all the entries that have been added. This is on a per instance basis, used to get mod-specific entries.
+   */
+  private final Multimap<ResourceLocation, LootBuilder> lootTable;
 
-    public Registry(RegistryManager manager) {
-        this.manager = manager;
+  public Registry(RegistryManager manager) {
+    this.manager = manager;
 
-        this.blocks = RegistryList.create();
-        this.items = RegistryList.create();
-        this.potions = RegistryList.create();
-        this.potionTypes = RegistryList.create();
-        this.biomes = RegistryList.create();
-        this.sounds = RegistryList.create();
-        this.enchantments = RegistryList.create();
-        this.professions = RegistryList.create();
-        this.entities = RegistryList.create();
-        this.recipes = RegistryList.create();
-        this.dataSerializerEntries = RegistryList.create();
+    this.blocks = RegistryList.create();
+    this.items = RegistryList.create();
+    this.potions = RegistryList.create();
+    this.potionTypes = RegistryList.create();
+    this.biomes = RegistryList.create();
+    this.sounds = RegistryList.create();
+    this.enchantments = RegistryList.create();
+    this.professions = RegistryList.create();
+    this.entities = RegistryList.create();
+    this.recipes = RegistryList.create();
+    this.dataSerializerEntries = RegistryList.create();
 
-        this.keyBinding = NonNullList.create();
-        this.commands = NonNullList.create();
-        this.lootTable = HashMultimap.create();
+    this.keyBinding = NonNullList.create();
+    this.commands = NonNullList.create();
+    this.lootTable = HashMultimap.create();
 
-    }
+  }
 
-    public void onRegisterBlock(RegistryEvent.Register<Block> event) {
+  public void onRegisterBlock(RegistryEvent.Register<Block> event) {
 
-        this.blocks.register(event);
-        this.onRegisterTileEntities();
-    }
+    this.blocks.register(event);
+    this.onRegisterTileEntities();
+  }
 
-    public void onRegisterTileEntities() {
+  public void onRegisterTileEntities() {
 
-        blocks.forEach(block -> {
-            if (block instanceof IProviderTile provider) {
-                TileUtils.registerTileEntity(provider.getTileEntityClass(), provider.getTileEntityClass().getSimpleName());
-            }
-        });
-    }
+    blocks.forEach(block -> {
+      if (block instanceof IProviderTile provider) {
+        TileUtils.registerTileEntity(provider.getTileEntityClass(),
+            provider.getTileEntityClass().getSimpleName());
+      }
+    });
+  }
 
-    public void onRegisterItem(RegistryEvent.Register<Item> event) {
+  public void onRegisterItem(RegistryEvent.Register<Item> event) {
 
-        this.items.register(event);
-    }
+    this.items.register(event);
+  }
 
-    public void onRegisterPotion(RegistryEvent.Register<Potion> event) {
+  public void onRegisterPotion(RegistryEvent.Register<Potion> event) {
 
-        this.potions.register(event);
-    }
+    this.potions.register(event);
+  }
 
-    public void onRegisterPotionType(RegistryEvent.Register<PotionType> event) {
+  public void onRegisterPotionType(RegistryEvent.Register<PotionType> event) {
 
-        this.potionTypes.register(event);
-    }
+    this.potionTypes.register(event);
+  }
 
-    public void onRegisterBiome(RegistryEvent.Register<Biome> event) {
+  public void onRegisterBiome(RegistryEvent.Register<Biome> event) {
 
-        this.biomes.register(event);
+    this.biomes.register(event);
 
-        this.biomes.forEach(biome -> {
-            if (biome instanceof BaseBiome provider) {
-                if (provider.getTypes().length > 0) {
-                    BiomeDictionary.addTypes(biome, provider.getTypes());
-                }
-            }
-        });
+    this.biomes.forEach(biome -> {
+      if (biome instanceof BaseBiome provider) {
+        if (provider.getTypes().length > 0) {
+          BiomeDictionary.addTypes(biome, provider.getTypes());
+        }
+      }
+    });
 
-    }
+  }
 
-    public void onRegisterSound(RegistryEvent.Register<SoundEvent> event) {
+  public void onRegisterSound(RegistryEvent.Register<SoundEvent> event) {
 
-        this.sounds.register(event);
-    }
+    this.sounds.register(event);
+  }
 
-    public void onRegisterEntity(RegistryEvent.Register<EntityEntry> event) {
+  public void onRegisterEntity(RegistryEvent.Register<EntityEntry> event) {
 
-        this.entities.register(event);
-    }
+    this.entities.register(event);
+  }
 
-    public void onRegisterEnchantment(RegistryEvent.Register<Enchantment> event) {
+  public void onRegisterEnchantment(RegistryEvent.Register<Enchantment> event) {
 
-        this.enchantments.register(event);
-    }
+    this.enchantments.register(event);
+  }
 
-    public void onRegisterVillagerProfession(RegistryEvent.Register<VillagerProfession> event) {
+  public void onRegisterVillagerProfession(RegistryEvent.Register<VillagerProfession> event) {
 
-        this.professions.register(event);
-    }
+    this.professions.register(event);
+  }
 
-    public void onRegisterRecipe(RegistryEvent.Register<IRecipe> event) {
+  public void onRegisterRecipe(RegistryEvent.Register<IRecipe> event) {
 
-        this.recipes.register(event);
-    }
+    this.recipes.register(event);
+  }
 
-    public void onRegisterDataSerializerEntry(RegistryEvent.Register<DataSerializerEntry> event) {
+  public void onRegisterDataSerializerEntry(RegistryEvent.Register<DataSerializerEntry> event) {
 
-        this.dataSerializerEntries.register(event);
-    }
+    this.dataSerializerEntries.register(event);
+  }
 
-    public void onRegisterLootTableLoad(LootTableLoadEvent event) {
+  public void onRegisterLootTableLoad(LootTableLoadEvent event) {
 
-        lootTable.get(event.getName())
-                .forEach(builder -> event.getTable()
-                        .getPool(builder.getPool())
-                        .addEntry(builder.build()));
-    }
+    lootTable.get(event.getName())
+        .forEach(builder -> event.getTable()
+            .getPool(builder.getPool())
+            .addEntry(builder.build()));
+  }
 
-    public void onRegisterCommand(FMLServerStartingEvent event) {
-        var manager = CommandManager.create(event);
-        commands.forEach(manager::addCommand);
-    }
+  public void onRegisterCommand(FMLServerStartingEvent event) {
+    var manager = CommandManager.create(event);
+    commands.forEach(manager::addCommand);
+  }
 
-    public void onRegisterOreDict() {
+  public void onRegisterOreDict() {
 
-        blocks.forEach(block -> {
-            if (block instanceof IProviderOreDict provider) {
-                provider.onRegisterOreDict();
-            }
-        });
-
-        items.forEach(item -> {
-            if (item instanceof IProviderOreDict provider) {
-                provider.onRegisterOreDict();
-            }
-        });
-    }
-
-    // --------------------------------------------------------------------------
-    // - Client
-    // --------------------------------------------------------------------------
-
-    @SideOnly(Side.CLIENT)
-    public void onRegisterModels(ModelRegistryEvent event) {
-        ModelLoaderRegistry.registerLoader(new CustomModelLoader());
-
-        onRegisterModelsBlock();
-        onRegisterModelsItem();
-        onRegisterModelsTile();
-    }
-
-    public void onRegisterModelsBlock() {
-
-        blocks.forEach(block -> {
-            if (block instanceof IProviderModel provider) {
-                if (provider.getResourceLocation() != null) {
-                    ModelUtils.registerBlockInventoryModel(block, provider.getResourceLocation());
-                }
-            }
-            //            else {
-            //                ModelUtils.registerBlockInventoryModel(block);
-            //            }
-
-            if (block instanceof IProviderBlockState provider) {
-                ModelUtils.registerStateMapper(block, provider.getStateMapper());
-            }
-        });
-    }
-
-    public void onRegisterModelsItem() {
-
-        items.forEach(item -> {
-            if (item instanceof IProviderModel provider) {
-                if (provider.getResourceLocation() != null) {
-                    ModelUtils.registerInventoryModel(item, provider.getResourceLocation());
-                }
-            } else if (!(item instanceof ItemBlock)) {
-                ModelUtils.registerInventoryModel(item);
-            }
-
-            if (item instanceof IProviderItemMesh provider) {
-                ModelUtils.registerCustomMeshDefinition(item, provider.getItemMesh());
-            }
-        });
-    }
-
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public void onRegisterModelsTile() {
-
-        blocks.forEach(block -> {
-            if (block instanceof IProviderTile provider) {
-                final TileEntitySpecialRenderer tesr = provider.getTileRenderer();
-
-                ModelUtils.registerTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
-            }
-        });
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void onRegisterBlockColor(ColorHandlerEvent.Block event) {
-
-        blocks.forEach(block -> {
-            if (block instanceof IProviderBlockColor provider) {
-                event.getBlockColors().registerBlockColorHandler(provider.getBlockColor(), block);
-            }
-        });
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void onRegisterItemColor(ColorHandlerEvent.Item event) {
-
-        blocks.forEach(block -> {
-            if (block instanceof IProviderBlockColor provider) {
-                if (provider.getItemColor() != null) {
-                    event.getItemColors().registerItemColorHandler(provider.getItemColor(), Item.getItemFromBlock(block));
-                }
-            }
-        });
-
-        items.forEach(item -> {
-            if (item instanceof IProviderItemColor provider) {
-                if (provider.getItemColor() != null) {
-                    event.getItemColors().registerItemColorHandler(provider.getItemColor(), item);
-                }
-            }
-        });
-    }
+    blocks.forEach(block -> {
+      if (block instanceof IProviderOreDict provider) {
+        provider.onRegisterOreDict();
+      }
+    });
+
+    items.forEach(item -> {
+      if (item instanceof IProviderOreDict provider) {
+        provider.onRegisterOreDict();
+      }
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // - Client
+  // --------------------------------------------------------------------------
+
+  @SideOnly(Side.CLIENT)
+  public void onRegisterModels(ModelRegistryEvent event) {
+    ModelLoaderRegistry.registerLoader(new CustomModelLoader());
+
+    onRegisterModelsBlock();
+    onRegisterModelsItem();
+    onRegisterModelsTile();
+  }
+
+  public void onRegisterModelsBlock() {
+
+    blocks.forEach(block -> {
+      if (block instanceof IProviderModel provider) {
+        if (provider.getResourceLocation() != null) {
+          ModelUtils.registerBlockInventoryModel(block, provider.getResourceLocation());
+        }
+      }
+      //            else {
+      //                ModelUtils.registerBlockInventoryModel(block);
+      //            }
+
+      if (block instanceof IProviderBlockState provider) {
+        ModelUtils.registerStateMapper(block, provider.getStateMapper());
+      }
+    });
+  }
+
+  public void onRegisterModelsItem() {
+
+    items.forEach(item -> {
+      if (item instanceof IProviderModel provider) {
+        if (provider.getResourceLocation() != null) {
+          ModelUtils.registerInventoryModel(item, provider.getResourceLocation());
+        }
+      } else if (!(item instanceof ItemBlock)) {
+        ModelUtils.registerInventoryModel(item);
+      }
+
+      if (item instanceof IProviderItemMesh provider) {
+        ModelUtils.registerCustomMeshDefinition(item, provider.getItemMesh());
+      }
+    });
+  }
+
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public void onRegisterModelsTile() {
+
+    blocks.forEach(block -> {
+      if (block instanceof IProviderTile provider) {
+        final TileEntitySpecialRenderer tesr = provider.getTileRenderer();
+
+        ModelUtils.registerTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
+      }
+    });
+  }
+
+  @SideOnly(Side.CLIENT)
+  public void onRegisterBlockColor(ColorHandlerEvent.Block event) {
+
+    blocks.forEach(block -> {
+      if (block instanceof IProviderBlockColor provider) {
+        event.getBlockColors().registerBlockColorHandler(provider.getBlockColor(), block);
+      }
+    });
+  }
+
+  @SideOnly(Side.CLIENT)
+  public void onRegisterItemColor(ColorHandlerEvent.Item event) {
+
+    blocks.forEach(block -> {
+      if (block instanceof IProviderBlockColor provider) {
+        if (provider.getItemColor() != null) {
+          event.getItemColors()
+              .registerItemColorHandler(provider.getItemColor(), Item.getItemFromBlock(block));
+        }
+      }
+    });
+
+    items.forEach(item -> {
+      if (item instanceof IProviderItemColor provider) {
+        if (provider.getItemColor() != null) {
+          event.getItemColors().registerItemColorHandler(provider.getItemColor(), item);
+        }
+      }
+    });
+  }
 }

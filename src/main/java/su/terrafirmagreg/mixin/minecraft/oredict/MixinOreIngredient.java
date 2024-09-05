@@ -12,16 +12,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = OreIngredient.class, remap = false)
 public class MixinOreIngredient {
 
-    @Unique
-    private String oreDict;
+  @Unique
+  private String oreDict;
 
-    @Inject(at = @At("TAIL"), method = "<init>(Ljava/lang/String;)V")
-    private void init(String ore, CallbackInfo ci) {
-        oreDict = ore;
-    }
+  @Inject(at = @At("TAIL"), method = "<init>(Ljava/lang/String;)V")
+  private void init(String ore, CallbackInfo ci) {
+    oreDict = ore;
+  }
 
-    @Unique
-    public String getOreDict() {
-        return oreDict;
-    }
+  @Unique
+  public String getOreDict() {
+    return oreDict;
+  }
 }

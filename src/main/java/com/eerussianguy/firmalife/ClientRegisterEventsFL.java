@@ -1,6 +1,7 @@
 package com.eerussianguy.firmalife;
 
 import su.terrafirmagreg.data.Properties;
+import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -45,7 +46,6 @@ import com.eerussianguy.firmalife.render.VanillaStemStateMapper;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.objects.blocks.BlockBonsai;
 import net.dries007.tfc.objects.blocks.BlockStemCrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;

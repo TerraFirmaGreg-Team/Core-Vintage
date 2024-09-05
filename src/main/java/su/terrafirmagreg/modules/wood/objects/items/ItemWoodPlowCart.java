@@ -9,13 +9,13 @@ import net.minecraft.world.World;
 
 public class ItemWoodPlowCart extends ItemWoodSupplyCart {
 
-    public ItemWoodPlowCart(WoodItemVariant variant, WoodType type) {
-        super(variant, type);
+  public ItemWoodPlowCart(WoodItemVariant variant, WoodType type) {
+    super(variant, type);
 
-    }
+  }
 
-    @Override
-    public EntityWoodCart newCart(World worldIn) {
-        return new EntityWoodPlowCart(worldIn);
-    }
+  @Override
+  public EntityWoodCart newCart(World worldIn) {
+    return new EntityWoodPlowCart(worldIn);
+  }
 }

@@ -1,5 +1,10 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -26,19 +31,14 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-
-
-import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
-
-
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
+
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.*;
 
 @MethodsReturnNonnullByDefault
 public class ItemMetalTool extends ItemMetal {
@@ -49,7 +49,7 @@ public class ItemMetalTool extends ItemMetal {
     private final int areaOfEffect;
     private final float attackSpeed;
     private float efficiency;
-    private boolean canDisableShield;
+    private final boolean canDisableShield;
 
     public ItemMetalTool(Metal metal, Metal.ItemType type) {
         super(metal, type);
@@ -214,7 +214,8 @@ public class ItemMetalTool extends ItemMetal {
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
+                                      float hitZ) {
         ItemStack itemstack = player.getHeldItem(hand);
 
         if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
@@ -222,14 +223,13 @@ public class ItemMetalTool extends ItemMetal {
         } else if (type == Metal.ItemType.SHOVEL) {
             IBlockState iblockstate = worldIn.getBlockState(pos);
             Block block = iblockstate.getBlock();
-            if (!(block instanceof BlockRockVariant rockVariant)) {
+            if (!(block instanceof ISoilBlock soilBlock)) {
                 return EnumActionResult.PASS;
             }
-            if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR &&
-                    rockVariant.getType() == Rock.Type.GRASS || rockVariant.getType() == Rock.Type.DRY_GRASS ||
-                    rockVariant.getType() == Rock.Type.DIRT) {
-                IBlockState iblockstate1 = BlockRockVariant.get(rockVariant.getRock(), Rock.Type.PATH)
-                        .getDefaultState();
+            if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN &&
+                    worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR &&
+                    BlockUtils.isVariant(soilBlock.getVariant(), GRASS, DRY_GRASS, DIRT)) {
+                IBlockState iblockstate1 = BlocksSoil.GRASS_PATH.get(soilBlock.getType()).getDefaultState();
                 worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
                 if (!worldIn.isRemote) {

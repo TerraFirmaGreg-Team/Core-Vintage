@@ -19,43 +19,46 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SuppressWarnings("deprecation")
 public class BlockThatch extends BaseBlock {
 
-    public BlockThatch() {
-        super(Settings.of(Material.PLANTS));
+  public BlockThatch() {
+    super(Settings.of(Material.PLANTS));
 
-        getSettings()
-                .registryKey("core/thatch")
-                .sound(SoundType.PLANT)
-                .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
-                .nonOpaque()
-                .nonFullCube()
-                .hardness(0.6F)
-                .oreDict("thatch")
-                .oreDict("block", "straw");
+    getSettings()
+        .registryKey("core/thatch")
+        .sound(SoundType.PLANT)
+        .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
+        .nonOpaque()
+        .nonFullCube()
+        .hardness(0.6F)
+        .oreDict("thatch")
+        .oreDict("block", "straw");
 
-        BlockUtils.setFireInfo(this, 60, 20);
-    }
+    BlockUtils.setFireInfo(this, 60, 20);
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
-        return true;
-    }
+  @SideOnly(Side.CLIENT)
+  @Override
+  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos,
+      EnumFacing side) {
+    return true;
+  }
 
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return NULL_AABB;
-    }
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
+      BlockPos pos) {
+    return NULL_AABB;
+  }
 
-    @Override
-    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        // Player will take damage when hitting thatch if fall is over 13 blocks, fall damage is then set to 0.
-        entityIn.fall((entityIn.fallDistance - 10), 1.0F); // TODO: 17/4/18 balance fall damage reduction.
-        entityIn.fallDistance = 0;
+  @Override
+  public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+    // Player will take damage when hitting thatch if fall is over 13 blocks, fall damage is then set to 0.
+    entityIn.fall((entityIn.fallDistance - 10),
+        1.0F); // TODO: 17/4/18 balance fall damage reduction.
+    entityIn.fallDistance = 0;
 
-        entityIn.motionX *= 0.1;
-        entityIn.motionZ *= 0.1;
+    entityIn.motionX *= 0.1;
+    entityIn.motionZ *= 0.1;
 
-        // This makes the player way too slow
-        //entityIn.setInWeb();
-    }
+    // This makes the player way too slow
+    //entityIn.setInWeb();
+  }
 }

@@ -12,5 +12,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface Packet {
 
-    String channel() default "id";
+  String channel() default "id";
 }

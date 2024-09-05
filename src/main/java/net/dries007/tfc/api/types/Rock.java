@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.types;
 
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -8,11 +10,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 
 import net.dries007.tfc.api.registries.TFCRegistries;
-
-
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
-
-
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.rock.ItemRockAxe;
 import net.dries007.tfc.objects.items.rock.ItemRockHammer;
@@ -119,10 +116,9 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
     }
 
     public enum Type {
-        RAW(Material.ROCK, false, Specification.COLLAPSABLE),
-        ANVIL(Material.ROCK, false, Specification.COLLAPSABLE),
-        SPIKE(Material.ROCK, false, null),
-        SMOOTH(Material.ROCK, false, Specification.COLLAPSABLE),
+        RAW(Material.ROCK, false, Specification.COLLAPSABLE_ROCK),
+        ANVIL(Material.ROCK, false, Specification.COLLAPSABLE_ROCK),
+        SMOOTH(Material.ROCK, false, Specification.COLLAPSABLE_ROCK),
         COBBLE(Material.ROCK, false, new Specification(true, () -> TFCSounds.ROCK_SLIDE_SHORT)),
         BRICKS(Material.ROCK, false, null),
         SAND(Material.SAND, false, Specification.VERTICAL_AND_HORIZONTAL),

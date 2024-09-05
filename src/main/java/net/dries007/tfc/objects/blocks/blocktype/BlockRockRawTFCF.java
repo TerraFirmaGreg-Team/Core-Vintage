@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,12 +26,11 @@ import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
+import static su.terrafirmagreg.data.Properties.CAN_FALL;
+
 @MethodsReturnNonnullByDefault
 
 public class BlockRockRawTFCF extends BlockRockVariantTFCF {
-
-    /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
-    public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
 
     public BlockRockRawTFCF(RockTFCF rockTFCF, Rock rock) {
         super(rockTFCF, rock);

@@ -7,11 +7,11 @@ import net.minecraft.creativetab.CreativeTabs;
 
 public interface IRegistryBase {
 
-    String getModID();
+  String getModID();
 
-    CreativeTabs getTab();
+  CreativeTabs getTab();
 
-    Registry getRegistry();
+  Registry getRegistry();
 
-    NetworkEntityIdSupplier getNetworkEntityIdSupplier();
+  NetworkEntityIdSupplier getNetworkEntityIdSupplier();
 }

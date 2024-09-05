@@ -6,23 +6,23 @@ import net.minecraftforge.common.BiomeDictionary;
 
 public class BiomeBeach extends BaseBiome {
 
-    public BiomeBeach() {
-        super(new Settings("Beach")
-                .guiColour(0xC7A03B)
-                .baseHeight(-1.69f)
-                .heightVariation(-2.68f));
-    }
+  public BiomeBeach() {
+    super(new Settings("Beach")
+        .guiColour(0xC7A03B)
+        .baseHeight(-1.69f)
+        .heightVariation(-2.68f));
+  }
 
-    @Override
-    public int getBiomeWeight() {
-        return 0;
-    }
+  @Override
+  public int getBiomeWeight() {
+    return 0;
+  }
 
-    @Override
-    public BiomeDictionary.Type[] getTypes() {
+  @Override
+  public BiomeDictionary.Type[] getTypes() {
 
-        return new BiomeDictionary.Type[] {
-                BiomeDictionary.Type.BEACH
-        };
-    }
+    return new BiomeDictionary.Type[]{
+        BiomeDictionary.Type.BEACH
+    };
+  }
 }

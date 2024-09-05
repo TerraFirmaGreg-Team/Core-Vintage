@@ -15,50 +15,50 @@ import lombok.Getter;
 @Getter
 public class ProviderSharpness implements ICapabilitySharpness, ICapabilityProvider {
 
-    protected ItemStack container;
+  protected ItemStack container;
 
-    public ProviderSharpness() {
-        this(null);
-    }
+  public ProviderSharpness() {
+    this(null);
+  }
 
-    public ProviderSharpness(ItemStack container) {
-        this.container = container;
-    }
+  public ProviderSharpness(ItemStack container) {
+    this.container = container;
+  }
 
-    public int getCharges() {
-        NBTTagCompound tag = container.getTagCompound();
-        if (tag != null && tag.hasKey("sharpness")) {
-            return tag.getInteger("sharpness");
-        }
-        return 0;
+  public int getCharges() {
+    NBTTagCompound tag = container.getTagCompound();
+    if (tag != null && tag.hasKey("sharpness")) {
+      return tag.getInteger("sharpness");
     }
+    return 0;
+  }
 
-    public void setCharges(int charges) {
-        if (!container.hasTagCompound()) {
-            container.setTagCompound(new NBTTagCompound());
-        }
-        container.getTagCompound().setInteger("sharpness", charges);
+  public void setCharges(int charges) {
+    if (!container.hasTagCompound()) {
+      container.setTagCompound(new NBTTagCompound());
     }
+    container.getTagCompound().setInteger("sharpness", charges);
+  }
 
-    public void addCharge() {
-        setCharges(getCharges() + 1);
-    }
+  public void addCharge() {
+    setCharges(getCharges() + 1);
+  }
 
-    public void removeCharge() {
-        if (getCharges() > 0) {
-            setCharges(getCharges() - 1);
-        }
+  public void removeCharge() {
+    if (getCharges() > 0) {
+      setCharges(getCharges() - 1);
     }
+  }
 
-    @Override
-    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilitySharpness.CAPABILITY;
-    }
+  @Override
+  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+    return capability == CapabilitySharpness.CAPABILITY;
+  }
 
-    @Nullable
-    @Override
-    @SuppressWarnings("unchecked")
-    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
-        return hasCapability(capability, facing) ? (T) this : null;
-    }
+  @Nullable
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+    return hasCapability(capability, facing) ? (T) this : null;
+  }
 }

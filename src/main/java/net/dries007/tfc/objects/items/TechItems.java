@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.data.Constants;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.data.Constants;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,10 +26,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.ToolMaterialsTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemFluidBowl;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
@@ -207,7 +204,8 @@ public final class TechItems {
         ImmutableList.Builder<Item> metalItems = ImmutableList.builder();
 
         metalItems.add(register(r, "metal/iron_groove", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.GROOVE), CT_METAL));
-        metalItems.add(register(r, "metal/iron_bowl_mount", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.BOWL_MOUNT), CT_METAL));
+        metalItems.add(
+                register(r, "metal/iron_bowl_mount", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.BOWL_MOUNT), CT_METAL));
 
         metalItems.add(register(r, "metal/iron_draw_plate", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.DRAW_PLATE)
                 .setMaxDamage(ToolMaterialsTFC.WROUGHT_IRON.getMaxUses())
@@ -299,28 +297,6 @@ public final class TechItems {
         }
 
         // This is probably safe since block registers first than items across all mods
-        registerTFCOreDict();
-    }
-
-    /**
-     * Register new ore dictionaries to TFC
-     */
-    private static void registerTFCOreDict() {
-        BlocksTFC.getAllBlockRockVariants().forEach(x -> {
-            if (x.getType() == Rock.Type.SAND && isSilica(x)) {
-                OreDictionary.registerOre("sandSilica", x);
-            }
-        });
-    }
-
-    private static boolean isSilica(BlockRockVariant block) {
-        //noinspection ConstantConditions
-        String rockName = block.getRock().getRegistryName().getPath().toLowerCase();
-        return rockName.equalsIgnoreCase("chert") ||
-                rockName.equalsIgnoreCase("granite") ||
-                rockName.equalsIgnoreCase("quartzite") ||
-                rockName.equalsIgnoreCase("rhyolite") ||
-                rockName.equalsIgnoreCase("phyllite");
     }
 
     private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {

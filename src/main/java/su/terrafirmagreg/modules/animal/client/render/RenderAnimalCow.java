@@ -13,10 +13,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalCow extends RenderAnimal<EntityAnimalCow> {
 
-    private static final ResourceLocation COW_YOUNG = ModUtils.resource("textures/entity/animal/livestock/cow_young.png");
-    private static final ResourceLocation COW_OLD = ModUtils.resource("textures/entity/animal/livestock/cow_old.png");
+  private static final ResourceLocation COW_YOUNG = ModUtils.resource(
+      "textures/entity/animal/livestock/cow_young.png");
+  private static final ResourceLocation COW_OLD = ModUtils.resource(
+      "textures/entity/animal/livestock/cow_old.png");
 
-    public RenderAnimalCow(RenderManager renderManager) {
-        super(renderManager, new ModelAnimalCow(), 0.7F, COW_YOUNG, COW_OLD);
-    }
+  public RenderAnimalCow(RenderManager renderManager) {
+    super(renderManager, new ModelAnimalCow(), 0.7F, COW_YOUNG, COW_OLD);
+  }
 }

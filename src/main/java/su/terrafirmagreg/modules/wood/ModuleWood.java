@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.wood;
 
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
-import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodTypeHandler;
 import su.terrafirmagreg.modules.wood.event.EntityJoinWorldEventHandler;
 import su.terrafirmagreg.modules.wood.event.KeyEventHandler;
@@ -30,70 +30,70 @@ import static su.terrafirmagreg.modules.ModuleContainer.WOOD;
 @Module(moduleID = WOOD)
 public final class ModuleWood extends ModuleBase {
 
-    public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWood.class.getSimpleName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWood.class.getSimpleName());
 
-    public final CreativeTabs WOOD_TAB;
+  public final CreativeTabs WOOD_TAB;
 
-    public ModuleWood() {
-        this.WOOD_TAB = BaseCreativeTab.of("wood", "wood/planks/pine");
+  public ModuleWood() {
+    this.WOOD_TAB = BaseCreativeTab.of("wood", "wood/planks/pine");
 
-        this.enableAutoRegistry(WOOD_TAB);
-        this.enableNetwork();
-    }
+    this.enableAutoRegistry(WOOD_TAB);
+    this.enableNetwork();
+  }
 
-    @Override
-    public void onNewRegister() {
-        RegistryWood.onRegister();
+  @Override
+  public void onNewRegister() {
+    RegistryWood.onRegister();
 
-    }
+  }
 
-    @Override
-    public void onNetworkRegister() {
-        PacketWood.onRegister(packetRegistry);
+  @Override
+  public void onNetworkRegister() {
+    PacketWood.onRegister(packetRegistry);
 
-    }
+  }
 
-    @Override
-    public void onRecipesRegister() {
-        LoomRecipes.onRegister();
+  @Override
+  public void onRecipesRegister() {
+    LoomRecipes.onRegister();
 
-    }
+  }
 
-    @Override
-    public void onRegister() {
-        WoodTypeHandler.init();
+  @Override
+  public void onRegister() {
+    WoodTypeHandler.init();
 
-        BlocksWood.onRegister(registryManager);
-        ItemsWood.onRegister(registryManager);
-        EntitiesWood.onRegister(registryManager);
+    BlocksWood.onRegister(registryManager);
+    ItemsWood.onRegister(registryManager);
+    EntitiesWood.onRegister(registryManager);
 
-    }
+  }
 
-    @Override
-    public void onClientRegister() {
-        BlocksWood.onClientRegister(registryManager);
-        EntitiesWood.onClientRegister(registryManager);
-        KeybindingsWood.onClientRegister(registryManager);
-    }
+  @Override
+  public void onClientRegister() {
+    BlocksWood.onClientRegister(registryManager);
+    EntitiesWood.onClientRegister(registryManager);
+    KeybindingsWood.onClientRegister(registryManager);
+  }
 
-    @Override
-    public void onPreInit(FMLPreInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new EntityJoinWorldEventHandler());
-    }
+  @Override
+  public void onPreInit(FMLPreInitializationEvent event) {
+    MinecraftForge.EVENT_BUS.register(new EntityJoinWorldEventHandler());
+  }
 
-    @Override
-    public void onClientPreInit(FMLPreInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new KeyEventHandler());
-    }
+  @Override
+  public void onClientPreInit(FMLPreInitializationEvent event) {
+    MinecraftForge.EVENT_BUS.register(new KeyEventHandler());
+  }
 
-    @Override
-    public @NotNull LoggingHelper getLogger() {
-        return LOGGER;
-    }
+  @Override
+  public @NotNull LoggingHelper getLogger() {
+    return LOGGER;
+  }
 
-    @NotNull
-    @Override
-    public List<Class<?>> getEventBusSubscribers() {
-        return Collections.singletonList(ModuleWood.class);
-    }
+  @NotNull
+  @Override
+  public List<Class<?>> getEventBusSubscribers() {
+    return Collections.singletonList(ModuleWood.class);
+  }
 }

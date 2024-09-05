@@ -8,30 +8,31 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 
 import io.netty.buffer.ByteBuf;
 
-public abstract class BasePacketBlockPos<REQ extends IMessage> implements IMessage, IMessageHandler<REQ, IMessage> {
+public abstract class BasePacketBlockPos<REQ extends IMessage> implements IMessage,
+    IMessageHandler<REQ, IMessage> {
 
-    protected BlockPos blockPos;
+  protected BlockPos blockPos;
 
-    public BasePacketBlockPos() {
-        // serialization
-    }
+  public BasePacketBlockPos() {
+    // serialization
+  }
 
-    public BasePacketBlockPos(BlockPos blockPos) {
+  public BasePacketBlockPos(BlockPos blockPos) {
 
-        this.blockPos = blockPos;
-    }
+    this.blockPos = blockPos;
+  }
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
+  @Override
+  public void fromBytes(ByteBuf buf) {
 
-        PacketBuffer packetBuffer = new PacketBuffer(buf);
-        this.blockPos = packetBuffer.readBlockPos();
-    }
+    PacketBuffer packetBuffer = new PacketBuffer(buf);
+    this.blockPos = packetBuffer.readBlockPos();
+  }
 
-    @Override
-    public void toBytes(ByteBuf buf) {
+  @Override
+  public void toBytes(ByteBuf buf) {
 
-        PacketBuffer packetBuffer = new PacketBuffer(buf);
-        packetBuffer.writeBlockPos(this.blockPos);
-    }
+    PacketBuffer packetBuffer = new PacketBuffer(buf);
+    packetBuffer.writeBlockPos(this.blockPos);
+  }
 }

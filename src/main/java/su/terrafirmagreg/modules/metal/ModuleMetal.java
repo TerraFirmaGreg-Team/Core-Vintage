@@ -24,53 +24,53 @@ import java.util.List;
 //@Module(moduleID = METAL)
 public final class ModuleMetal extends ModuleBase {
 
-    public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleMetal.class.getSimpleName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleMetal.class.getSimpleName());
 
-    public final CreativeTabs METAL_TAB;
+  public final CreativeTabs METAL_TAB;
 
-    public ModuleMetal() {
-        this.METAL_TAB = BaseCreativeTab.of("metal", "metal/anvil/red_steel");
+  public ModuleMetal() {
+    this.METAL_TAB = BaseCreativeTab.of("metal", "metal/anvil/red_steel");
 
-        this.enableAutoRegistry(METAL_TAB);
-        this.enableNetwork();
+    this.enableAutoRegistry(METAL_TAB);
+    this.enableNetwork();
 
-        MinecraftForge.EVENT_BUS.register(new EventHandlerMaterial());
-    }
+    MinecraftForge.EVENT_BUS.register(new EventHandlerMaterial());
+  }
 
-    @Override
-    public void onRegister() {
-        MetalTypeHandler.init();
+  @Override
+  public void onRegister() {
+    MetalTypeHandler.init();
 
-        BlocksMetal.onRegister(registryManager);
-        ItemsMetal.onRegister(registryManager);
-        EntitiesMetal.onRegister(registryManager);
-    }
+    BlocksMetal.onRegister(registryManager);
+    ItemsMetal.onRegister(registryManager);
+    EntitiesMetal.onRegister(registryManager);
+  }
 
-    @Override
-    public void onClientRegister() {
+  @Override
+  public void onClientRegister() {
 
-        EntitiesMetal.onClientRegister(registryManager);
-    }
+    EntitiesMetal.onClientRegister(registryManager);
+  }
 
-    @Override
-    public void onNewRegister() {
+  @Override
+  public void onNewRegister() {
 
-        RegistriesMetal.onRegister();
-    }
+    RegistriesMetal.onRegister();
+  }
 
-    @Override
-    public void onInit(FMLInitializationEvent event) {
+  @Override
+  public void onInit(FMLInitializationEvent event) {
 
-        PluginTheOneProbe.init();
-    }
+    PluginTheOneProbe.init();
+  }
 
-    @Override
-    public @NotNull LoggingHelper getLogger() {
-        return LOGGER;
-    }
+  @Override
+  public @NotNull LoggingHelper getLogger() {
+    return LOGGER;
+  }
 
-    @Override
-    public @NotNull List<Class<?>> getEventBusSubscribers() {
-        return Collections.singletonList(ModuleMetal.class);
-    }
+  @Override
+  public @NotNull List<Class<?>> getEventBusSubscribers() {
+    return Collections.singletonList(ModuleMetal.class);
+  }
 }

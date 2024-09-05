@@ -19,54 +19,62 @@ import org.jetbrains.annotations.Nullable;
 
 public class TileWoodFiller extends BaseTile {
 
-    public TileEntityHPBase getFilledTileEntity() {
-        BlockPos pos = getFilledPos();
-        TileEntity tileEntity = getWorld().getTileEntity(pos);
-        if (tileEntity instanceof TileEntityHPBase) {
-            return (TileEntityHPBase) tileEntity;
-        }
-        return null;
+  public TileEntityHPBase getFilledTileEntity() {
+    BlockPos pos = getFilledPos();
+    TileEntity tileEntity = getWorld().getTileEntity(pos);
+    if (tileEntity instanceof TileEntityHPBase) {
+      return (TileEntityHPBase) tileEntity;
     }
+    return null;
+  }
 
-    public BlockPos getFilledPos() {
-        IBlockState state = getWorld().getBlockState(getPos());
-        if (!(state.getBlock() instanceof BlockFiller)) return getPos();
-        EnumFacing facing = state.getValue(BlockDirectional.FACING);
-        IBlockState state1 = getWorld().getBlockState(pos.offset(facing));
-        if (!(state1.getBlock() instanceof BlockHPBase)) return getPos();
-        return pos.offset(facing);
+  public BlockPos getFilledPos() {
+    IBlockState state = getWorld().getBlockState(getPos());
+    if (!(state.getBlock() instanceof BlockFiller)) {
+      return getPos();
     }
+    EnumFacing facing = state.getValue(BlockDirectional.FACING);
+    IBlockState state1 = getWorld().getBlockState(pos.offset(facing));
+    if (!(state1.getBlock() instanceof BlockHPBase)) {
+      return getPos();
+    }
+    return pos.offset(facing);
+  }
 
-    @Override
-    public void markDirty() {
-        TileEntityHPBase tile = getFilledTileEntity();
-        if (tile != null)
-            tile.markDirty();
-        super.markDirty();
+  @Override
+  public void markDirty() {
+    TileEntityHPBase tile = getFilledTileEntity();
+    if (tile != null) {
+      tile.markDirty();
     }
+    super.markDirty();
+  }
 
-    @Override
-    public ITextComponent getDisplayName() {
-        TileEntityHPBase tile = getFilledTileEntity();
-        if (tile != null)
-            return tile.getDisplayName();
-        return null;
+  @Override
+  public ITextComponent getDisplayName() {
+    TileEntityHPBase tile = getFilledTileEntity();
+    if (tile != null) {
+      return tile.getDisplayName();
     }
+    return null;
+  }
 
-    @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        TileEntityHPBase tile = getFilledTileEntity();
-        if (tile != null)
-            return tile.hasCapability(capability, facing);
-        return super.hasCapability(capability, facing);
+  @Override
+  public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    TileEntityHPBase tile = getFilledTileEntity();
+    if (tile != null) {
+      return tile.hasCapability(capability, facing);
     }
+    return super.hasCapability(capability, facing);
+  }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        TileEntityHPBase tile = getFilledTileEntity();
-        if (tile != null)
-            return tile.getCapability(capability, facing);
-        return super.getCapability(capability, facing);
+  @SuppressWarnings("unchecked")
+  @Override
+  public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+    TileEntityHPBase tile = getFilledTileEntity();
+    if (tile != null) {
+      return tile.getCapability(capability, facing);
     }
+    return super.getCapability(capability, facing);
+  }
 }

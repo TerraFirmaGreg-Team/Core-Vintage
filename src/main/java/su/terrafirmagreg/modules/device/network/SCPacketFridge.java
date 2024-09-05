@@ -18,38 +18,39 @@ import org.jetbrains.annotations.NotNull;
 
 public class SCPacketFridge implements IMessage, IMessageHandler<SCPacketFridge, IMessage> {
 
-    private BlockPos pos;
-    private float efficiency;
+  private BlockPos pos;
+  private float efficiency;
 
-    public SCPacketFridge() {}
+  public SCPacketFridge() {
+  }
 
-    public SCPacketFridge(@NotNull BlockPos pos, float efficiency) {
-        this.pos = pos;
-        this.efficiency = efficiency;
+  public SCPacketFridge(@NotNull BlockPos pos, float efficiency) {
+    this.pos = pos;
+    this.efficiency = efficiency;
+  }
+
+  @Override
+  public void fromBytes(ByteBuf buf) {
+    pos = BlockPos.fromLong(buf.readLong());
+    efficiency = buf.readFloat();
+  }
+
+  @Override
+  public void toBytes(ByteBuf buf) {
+    buf.writeLong(pos.toLong());
+    buf.writeFloat(efficiency);
+  }
+
+  @Override
+  public IMessage onMessage(SCPacketFridge message, MessageContext ctx) {
+    EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
+    if (player != null) {
+      World world = player.getEntityWorld();
+      var tile = TileUtils.getTile(world, message.pos, TileFridge.class);
+      if (tile != null) {
+        tile.updateClient(message.efficiency);
+      }
     }
-
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        pos = BlockPos.fromLong(buf.readLong());
-        efficiency = buf.readFloat();
-    }
-
-    @Override
-    public void toBytes(ByteBuf buf) {
-        buf.writeLong(pos.toLong());
-        buf.writeFloat(efficiency);
-    }
-
-    @Override
-    public IMessage onMessage(SCPacketFridge message, MessageContext ctx) {
-        EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
-        if (player != null) {
-            World world = player.getEntityWorld();
-            var tile = TileUtils.getTile(world, message.pos, TileFridge.class);
-            if (tile != null) {
-                tile.updateClient(message.efficiency);
-            }
-        }
-        return null;
-    }
+    return null;
+  }
 }

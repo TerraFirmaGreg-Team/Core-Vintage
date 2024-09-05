@@ -10,11 +10,11 @@ import lombok.Getter;
 @Getter
 public abstract class BaseBlockTrapDoor extends BlockTrapDoor implements IBlockSettings {
 
-    protected final Settings settings;
+  protected final Settings settings;
 
-    protected BaseBlockTrapDoor(Settings settings) {
-        super(settings.getMaterial());
+  protected BaseBlockTrapDoor(Settings settings) {
+    super(settings.getMaterial());
 
-        this.settings = settings;
-    }
+    this.settings = settings;
+  }
 }

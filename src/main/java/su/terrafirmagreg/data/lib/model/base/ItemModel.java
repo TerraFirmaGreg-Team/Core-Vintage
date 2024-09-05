@@ -21,29 +21,30 @@ import java.util.function.Function;
 
 public class ItemModel implements IModel {
 
-    final ResourceLocation texture;
+  final ResourceLocation texture;
 
-    public ItemModel(ResourceLocation texture) {
-        this.texture = texture;
-    }
+  public ItemModel(ResourceLocation texture) {
+    this.texture = texture;
+  }
 
-    //Добавляем текстурки которые будем использовать
-    @Override
-    public @NotNull Collection<ResourceLocation> getTextures() {
-        return Lists.newArrayList(texture);
-    }
+  //Добавляем текстурки которые будем использовать
+  @Override
+  public @NotNull Collection<ResourceLocation> getTextures() {
+    return Lists.newArrayList(texture);
+  }
 
-    //Строим саму модель
-    @Override
-    public @NotNull IBakedModel bake(IModelState state, @NotNull VertexFormat format,
-                                     Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+  //Строим саму модель
+  @Override
+  public @NotNull IBakedModel bake(IModelState state, @NotNull VertexFormat format,
+      Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
 
-        //получаем TextureAtlasSprite из ResourceLocation
-        TextureAtlasSprite textureAtlasSprite = bakedTextureGetter.apply(texture);
+    //получаем TextureAtlasSprite из ResourceLocation
+    TextureAtlasSprite textureAtlasSprite = bakedTextureGetter.apply(texture);
 
-        //Получаем список квадратов из текструки, для этого уже есть удобный метод.
-        ImmutableList<BakedQuad> quads = ItemLayerModel.getQuadsForSprite(0, textureAtlasSprite, format, state.apply(Optional.empty()));
-        return new ItemBakedModel(quads, textureAtlasSprite);
-    }
+    //Получаем список квадратов из текструки, для этого уже есть удобный метод.
+    ImmutableList<BakedQuad> quads = ItemLayerModel.getQuadsForSprite(0, textureAtlasSprite, format,
+        state.apply(Optional.empty()));
+    return new ItemBakedModel(quads, textureAtlasSprite);
+  }
 }
 

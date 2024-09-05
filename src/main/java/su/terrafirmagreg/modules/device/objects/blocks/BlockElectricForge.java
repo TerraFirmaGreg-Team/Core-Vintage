@@ -29,67 +29,69 @@ import static su.terrafirmagreg.data.Properties.LIT;
 
 public class BlockElectricForge extends BaseBlockHorizontal implements IProviderTile {
 
-    public BlockElectricForge() {
-        super(Settings.of(Material.IRON));
+  public BlockElectricForge() {
+    super(Settings.of(Material.IRON));
 
-        getSettings()
-                .registryKey("device/electric_forge")
-                .sound(SoundType.METAL)
-                .hardness(4.0F)
-                .size(Size.LARGE)
-                .weight(Weight.MEDIUM)
-                .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
-                .nonCanStack();
-        setHarvestLevel(ToolClasses.PICKAXE, 0);
-        setDefaultState(getBlockState().getBaseState()
-                .withProperty(LIT, false)
-                .withProperty(FACING, EnumFacing.NORTH));
-    }
+    getSettings()
+        .registryKey("device/electric_forge")
+        .sound(SoundType.METAL)
+        .hardness(4.0F)
+        .size(Size.LARGE)
+        .weight(Weight.MEDIUM)
+        .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
+        .nonCanStack();
+    setHarvestLevel(ToolClasses.PICKAXE, 0);
+    setDefaultState(getBlockState().getBaseState()
+        .withProperty(LIT, false)
+        .withProperty(FACING, EnumFacing.NORTH));
+  }
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState()
-                .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
-                .withProperty(LIT, meta >= 4);
-    }
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState()
+        .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+        .withProperty(LIT, meta >= 4);
+  }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
-    }
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(FACING).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
+  }
 
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                    float hitY, float hitZ) {
-        if (!player.isSneaking()) {
-            if (!world.isRemote) {
-                GuiHandler.openGui(world, pos, player);
-            }
-            return true;
-        }
-        return false;
+  @Override
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
+      EnumHand hand, EnumFacing side, float hitX,
+      float hitY, float hitZ) {
+    if (!player.isSneaking()) {
+      if (!world.isRemote) {
+        GuiHandler.openGui(world, pos, player);
+      }
+      return true;
     }
+    return false;
+  }
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING, LIT);
-    }
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, FACING, LIT);
+  }
 
-    @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-                                            EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-    }
+  @Override
+  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX,
+      float hitY, float hitZ, int meta,
+      EntityLivingBase placer, EnumHand hand) {
+    return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+  }
 
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileElectricForge();
-    }
+  @Nullable
+  @Override
+  public TileEntity createNewTileEntity(World worldIn, int meta) {
+    return new TileElectricForge();
+  }
 
-    @Override
-    public Class<? extends TileEntity> getTileEntityClass() {
-        return TileElectricForge.class;
-    }
+  @Override
+  public Class<? extends TileEntity> getTileEntityClass() {
+    return TileElectricForge.class;
+  }
 
 }

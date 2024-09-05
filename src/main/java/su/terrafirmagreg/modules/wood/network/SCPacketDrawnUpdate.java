@@ -10,40 +10,43 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 
-public class SCPacketDrawnUpdate implements IMessage, IMessageHandler<SCPacketDrawnUpdate, IMessage> {
+public class SCPacketDrawnUpdate implements IMessage,
+    IMessageHandler<SCPacketDrawnUpdate, IMessage> {
 
-    private int pullingId;
-    private int cartId;
+  private int pullingId;
+  private int cartId;
 
-    public SCPacketDrawnUpdate() {}
+  public SCPacketDrawnUpdate() {
+  }
 
-    public SCPacketDrawnUpdate(int horseIn, int cartIn) {
-        pullingId = horseIn;
-        cartId = cartIn;
-    }
+  public SCPacketDrawnUpdate(int horseIn, int cartIn) {
+    pullingId = horseIn;
+    cartId = cartIn;
+  }
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        pullingId = buf.readInt();
-        cartId = buf.readInt();
-    }
+  @Override
+  public void fromBytes(ByteBuf buf) {
+    pullingId = buf.readInt();
+    cartId = buf.readInt();
+  }
 
-    @Override
-    public void toBytes(ByteBuf buf) {
-        buf.writeInt(pullingId);
-        buf.writeInt(cartId);
-    }
+  @Override
+  public void toBytes(ByteBuf buf) {
+    buf.writeInt(pullingId);
+    buf.writeInt(cartId);
+  }
 
-    @Override
-    public IMessage onMessage(SCPacketDrawnUpdate message, MessageContext ctx) {
-        Minecraft.getMinecraft().addScheduledTask(() -> {
-            EntityWoodCart cart = (EntityWoodCart) Minecraft.getMinecraft().world.getEntityByID(message.cartId);
-            if (message.pullingId < 0) {
-                cart.setPulling(null);
-            } else {
-                cart.setPullingId(message.pullingId);
-            }
-        });
-        return null;
-    }
+  @Override
+  public IMessage onMessage(SCPacketDrawnUpdate message, MessageContext ctx) {
+    Minecraft.getMinecraft().addScheduledTask(() -> {
+      EntityWoodCart cart = (EntityWoodCart) Minecraft.getMinecraft().world.getEntityByID(
+          message.cartId);
+      if (message.pullingId < 0) {
+        cart.setPulling(null);
+      } else {
+        cart.setPullingId(message.pullingId);
+      }
+    });
+    return null;
+  }
 }

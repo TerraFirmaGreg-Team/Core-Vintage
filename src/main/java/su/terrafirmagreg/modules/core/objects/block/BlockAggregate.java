@@ -12,13 +12,13 @@ import lombok.Getter;
 @Getter
 public class BlockAggregate extends BlockGravel implements IBlockSettings {
 
-    protected final Settings settings;
+  protected final Settings settings;
 
-    public BlockAggregate() {
-        this.settings = Settings.of(Material.SAND)
-                .registryKey("core/aggregate")
-                .oreDict("aggregate")
-                .sound(SoundType.SAND)
-                .hardness(0.4f);
-    }
+  public BlockAggregate() {
+    this.settings = Settings.of(Material.SAND)
+        .registryKey("core/aggregate")
+        .oreDict("aggregate")
+        .sound(SoundType.SAND)
+        .hardness(0.4f);
+  }
 }

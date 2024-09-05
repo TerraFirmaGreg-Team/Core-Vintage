@@ -14,28 +14,32 @@ import org.jetbrains.annotations.Nullable;
 
 public class TileInfectedAir extends BaseTile implements ITickable {
 
-    public TileInfectedAir() {}
+  public TileInfectedAir() {
+  }
 
-    @Override
-    public void update() {}
+  @Override
+  public void update() {
+  }
 
-    private void writeSyncData(NBTTagCompound nbt) {}
+  private void writeSyncData(NBTTagCompound nbt) {
+  }
 
-    private void readSyncData(NBTTagCompound nbt) {}
+  private void readSyncData(NBTTagCompound nbt) {
+  }
 
-    @Nullable
-    @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        NBTTagCompound nbt = new NBTTagCompound();
-        writeToNBT(nbt);
-        writeSyncData(nbt);
-        return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
-    }
+  @Nullable
+  @Override
+  public SPacketUpdateTileEntity getUpdatePacket() {
+    NBTTagCompound nbt = new NBTTagCompound();
+    writeToNBT(nbt);
+    writeSyncData(nbt);
+    return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
+  }
 
-    @Override
-    public void onDataPacket(@NotNull NetworkManager net, SPacketUpdateTileEntity packet) {
-        readFromNBT(packet.getNbtCompound());
-        readSyncData(packet.getNbtCompound());
-    }
+  @Override
+  public void onDataPacket(@NotNull NetworkManager net, SPacketUpdateTileEntity packet) {
+    readFromNBT(packet.getNbtCompound());
+    readSyncData(packet.getNbtCompound());
+  }
 }
 

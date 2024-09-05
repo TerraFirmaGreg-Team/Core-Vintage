@@ -5,8 +5,8 @@ package su.terrafirmagreg.modules.animal.api.type;
  */
 public interface IPredator extends ICreature {
 
-    @Override
-    default CreatureType getCreatureType() {
-        return CreatureType.PREDATOR;
-    }
+  @Override
+  default CreatureType getCreatureType() {
+    return CreatureType.PREDATOR;
+  }
 }

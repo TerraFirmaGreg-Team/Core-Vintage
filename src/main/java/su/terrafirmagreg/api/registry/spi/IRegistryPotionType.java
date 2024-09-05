@@ -5,20 +5,20 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 
 public interface IRegistryPotionType
-        extends IRegistryBase {
+    extends IRegistryBase {
 
-    default PotionType potionType(Potion potion, String name, int duration) {
+  default PotionType potionType(Potion potion, String name, int duration) {
 
-        PotionType potionType = new PotionType(new PotionEffect(potion, duration));
-        return potionType(potionType, name);
-    }
+    PotionType potionType = new PotionType(new PotionEffect(potion, duration));
+    return potionType(potionType, name);
+  }
 
-    default PotionType potionType(PotionType potionType, String name) {
+  default PotionType potionType(PotionType potionType, String name) {
 
-        potionType.setRegistryName(this.getModID(), name);
+    potionType.setRegistryName(this.getModID(), name);
 
-        this.getRegistry().getPotionTypes().add(potionType);
+    this.getRegistry().getPotionTypes().add(potionType);
 
-        return potionType;
-    }
+    return potionType;
+  }
 }

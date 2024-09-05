@@ -30,33 +30,39 @@ import java.util.List;
 @Getter
 public class BlockRockButton extends BlockButtonStone implements IRockBlock {
 
-    protected final Settings settings;
-    private final RockBlockVariant variant;
-    private final RockType type;
+  protected final Settings settings;
+  private final RockBlockVariant variant;
+  private final RockType type;
 
-    public BlockRockButton(RockBlockVariant variant, RockType type) {
-        this.variant = variant;
-        this.type = type;
-        this.settings = Settings.of(Material.CIRCUITS)
-                .sound(SoundType.STONE)
-                .hardness(0.5f)
-                .oreDict(variant, "stone")
-                .oreDict(variant, "stone", type);
-    }
+  public BlockRockButton(RockBlockVariant variant, RockType type) {
+    this.variant = variant;
+    this.type = type;
+    this.settings = Settings.of(Material.CIRCUITS)
+        .registryKey(variant.getRegistryKey(type))
+        .hardness(variant.getHardness(type))
+        .sound(SoundType.STONE)
+        .hardness(0.5f)
+        .oreDict(variant, "stone")
+        .oreDict(variant, "stone", type);
+  }
 
-    @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-                                            EntityLivingBase placer) {
-        IBlockState state = getStateFromMeta(meta);
-        return BlockButton.canPlaceBlock(worldIn, pos, facing) ? state.withProperty(BlockDirectional.FACING, facing) :
-                state.withProperty(BlockDirectional.FACING, EnumFacing.DOWN);
-    }
+  @Override
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
+      float hitX, float hitY, float hitZ, int meta,
+      EntityLivingBase placer) {
+    IBlockState state = getStateFromMeta(meta);
+    return BlockButton.canPlaceBlock(worldIn, pos, facing) ? state.withProperty(
+        BlockDirectional.FACING, facing) :
+        state.withProperty(BlockDirectional.FACING, EnumFacing.DOWN);
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
+      ITooltipFlag flagIn) {
+    super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
-    }
+    tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": "
+        + getType().getCategory().getLocalizedName());
+  }
 }

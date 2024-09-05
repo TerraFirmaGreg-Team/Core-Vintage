@@ -15,23 +15,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalLion extends RenderLiving<EntityAnimalLion> {
 
-    private static final ResourceLocation LIONS_TEXTURE = ModUtils.resource("textures/entity/animal/predators/lions.png");
+  private static final ResourceLocation LIONS_TEXTURE = ModUtils.resource(
+      "textures/entity/animal/predators/lions.png");
 
-    public RenderAnimalLion(RenderManager manager) {
-        super(manager, new ModelAnimalLion(), 0.3F);
-    }
+  public RenderAnimalLion(RenderManager manager) {
+    super(manager, new ModelAnimalLion(), 0.3F);
+  }
 
-    @Override
-    public void doRender(EntityAnimalLion lion, double par2, double par4, double par6, float par8, float par9) {
-        this.shadowSize = (float) (0.4f + lion.getPercentToAdulthood() * 0.4f);
-        super.doRender(lion, par2, par4, par6, par8, par9);
-    }
+  @Override
+  public void doRender(EntityAnimalLion lion, double par2, double par4, double par6, float par8,
+      float par9) {
+    this.shadowSize = (float) (0.4f + lion.getPercentToAdulthood() * 0.4f);
+    super.doRender(lion, par2, par4, par6, par8, par9);
+  }
 
-    protected void preRenderCallback(EntityAnimalLion lionTFC, float par2) {
-        GlStateManager.scale(1.1f, 1.1f, 1.1f);
-    }
+  protected void preRenderCallback(EntityAnimalLion lionTFC, float par2) {
+    GlStateManager.scale(1.1f, 1.1f, 1.1f);
+  }
 
-    protected ResourceLocation getEntityTexture(EntityAnimalLion lion) {
-        return LIONS_TEXTURE;
-    }
+  protected ResourceLocation getEntityTexture(EntityAnimalLion lion) {
+    return LIONS_TEXTURE;
+  }
 }

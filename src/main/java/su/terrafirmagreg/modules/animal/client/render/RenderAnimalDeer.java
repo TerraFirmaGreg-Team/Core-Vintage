@@ -15,29 +15,31 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalDeer extends RenderLiving<EntityAnimalDeer> {
 
-    private static final ResourceLocation DEER_TEXTURE = ModUtils.resource("textures/entity/animal/huntable/deer.png");
+  private static final ResourceLocation DEER_TEXTURE = ModUtils.resource(
+      "textures/entity/animal/huntable/deer.png");
 
-    private static final ResourceLocation FAWN_TEXTURE = ModUtils.resource("textures/entity/animal/huntable/deer_fawn.png");
+  private static final ResourceLocation FAWN_TEXTURE = ModUtils.resource(
+      "textures/entity/animal/huntable/deer_fawn.png");
 
-    public RenderAnimalDeer(RenderManager manager) {
-        super(manager, new ModelAnimalDeer(), 0.7F);
+  public RenderAnimalDeer(RenderManager manager) {
+    super(manager, new ModelAnimalDeer(), 0.7F);
+  }
+
+  @Override
+  protected ResourceLocation getEntityTexture(EntityAnimalDeer deer) {
+    if (deer.isChild()) {
+      return FAWN_TEXTURE;
+    } else {
+      return DEER_TEXTURE;
     }
+  }
 
-    @Override
-    protected ResourceLocation getEntityTexture(EntityAnimalDeer deer) {
-        if (deer.isChild()) {
-            return FAWN_TEXTURE;
-        } else {
-            return DEER_TEXTURE;
-        }
-    }
+  @Override
+  protected float handleRotationFloat(EntityAnimalDeer deer, float par2) {
+    return 1.0f;
+  }
 
-    @Override
-    protected float handleRotationFloat(EntityAnimalDeer deer, float par2) {
-        return 1.0f;
-    }
-
-    protected void preRenderCallback(EntityAnimalDeer deerTFC, float par2) {
-        GlStateManager.scale(0.8f, 0.8f, 0.8f);
-    }
+  protected void preRenderCallback(EntityAnimalDeer deerTFC, float par2) {
+    GlStateManager.scale(0.8f, 0.8f, 0.8f);
+  }
 }

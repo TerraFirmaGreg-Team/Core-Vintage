@@ -10,8 +10,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderAnimalLlama extends RenderLlama {
 
-    public RenderAnimalLlama(RenderManager renderManager) {
-        super(renderManager);
-        this.mainModel = new ModelAnimalLlama(0);
-    }
+  public RenderAnimalLlama(RenderManager renderManager) {
+    super(renderManager);
+    this.mainModel = new ModelAnimalLlama(0);
+  }
 }

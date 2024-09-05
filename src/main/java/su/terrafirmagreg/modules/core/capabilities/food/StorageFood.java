@@ -10,12 +10,15 @@ import org.jetbrains.annotations.Nullable;
 
 public class StorageFood implements IStorage<ICapabilityFood> {
 
-    @Nullable
-    @Override
-    public NBTBase writeNBT(Capability<ICapabilityFood> capability, ICapabilityFood instance, EnumFacing side) {
-        return null;
-    }
+  @Nullable
+  @Override
+  public NBTBase writeNBT(Capability<ICapabilityFood> capability, ICapabilityFood instance,
+      EnumFacing side) {
+    return null;
+  }
 
-    @Override
-    public void readNBT(Capability<ICapabilityFood> capability, ICapabilityFood instance, EnumFacing side, NBTBase nbt) {}
+  @Override
+  public void readNBT(Capability<ICapabilityFood> capability, ICapabilityFood instance,
+      EnumFacing side, NBTBase nbt) {
+  }
 }

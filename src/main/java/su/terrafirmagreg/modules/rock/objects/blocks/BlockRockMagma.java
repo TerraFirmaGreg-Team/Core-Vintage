@@ -29,31 +29,35 @@ import java.util.List;
 @Getter
 public class BlockRockMagma extends BlockMagma implements IRockBlock {
 
-    protected final Settings settings;
-    private final RockBlockVariant variant;
-    private final RockType type;
+  protected final Settings settings;
+  private final RockBlockVariant variant;
+  private final RockType type;
 
-    public BlockRockMagma(RockBlockVariant variant, RockType type) {
+  public BlockRockMagma(RockBlockVariant variant, RockType type) {
 
-        this.variant = variant;
-        this.type = type;
-        this.settings = Settings.of(Material.ROCK)
-                .sound(SoundType.STONE)
-                .size(Size.SMALL)
-                .weight(Weight.LIGHT)
-                .renderLayer(BlockRenderLayer.CUTOUT)
-                .harvestLevel(ToolClasses.PICKAXE, 0)
-                .fallable(this, variant.getSpecification())
-                .oreDict(variant)
-                .oreDict(variant, type);
-    }
+    this.variant = variant;
+    this.type = type;
+    this.settings = Settings.of(Material.ROCK)
+        .registryKey(variant.getRegistryKey(type))
+        .hardness(variant.getHardness(type))
+        .sound(SoundType.STONE)
+        .size(Size.SMALL)
+        .weight(Weight.LIGHT)
+        .renderLayer(BlockRenderLayer.CUTOUT)
+        .harvestLevel(ToolClasses.PICKAXE, 0)
+        .fallable(this, variant.getSpecification())
+        .oreDict(variant)
+        .oreDict(variant, type);
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
+      ITooltipFlag flagIn) {
+    super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation(
-                "rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
-    }
+    tooltip.add(new TextComponentTranslation(
+        "rockcategory.name").getFormattedText() + ": " + getType().getCategory()
+        .getLocalizedName());
+  }
 }

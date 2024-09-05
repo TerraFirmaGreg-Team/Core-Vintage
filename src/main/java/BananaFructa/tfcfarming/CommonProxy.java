@@ -1,6 +1,7 @@
 package BananaFructa.tfcfarming;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilFarmland;
 import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataFarming;
 
 import net.minecraft.block.Block;
@@ -25,7 +26,6 @@ import net.dries007.tfc.objects.blocks.BlockBonsai;
 import net.dries007.tfc.objects.blocks.BlockHangingPlanter;
 import net.dries007.tfc.objects.blocks.BlockLargePlanter;
 import net.dries007.tfc.objects.blocks.blocktype.farmland.FarmlandTFCF;
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
@@ -170,12 +170,12 @@ public class CommonProxy {
      */
     @SubscribeEvent
     public void onBlockClick(PlayerInteractEvent.RightClickBlock event) {
-        Block b = event.getWorld().getBlockState(event.getPos()).getBlock();
+        Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
         if (!event.getWorld().isRemote) {
-            boolean farmlandTFC = b instanceof BlockFarmlandTFC;
-            boolean planter = TFCFarming.firmalifeLoaded && b instanceof BlockLargePlanter;
-            boolean hangingPlanter = Config.hangingPlanters && TFCFarming.firmalifeLoaded && b instanceof BlockHangingPlanter;
-            if (farmlandTFC || planter || hangingPlanter) {
+            boolean farmland = block instanceof BlockSoilFarmland;
+            boolean planter = TFCFarming.firmalifeLoaded && block instanceof BlockLargePlanter;
+            boolean hangingPlanter = Config.hangingPlanters && TFCFarming.firmalifeLoaded && block instanceof BlockHangingPlanter;
+            if (farmland || planter || hangingPlanter) {
 
                 // fertilizer logic
                 if (hangingPlanter || planter || canSeeSky(event.getPos(), event.getWorld())) {
@@ -183,26 +183,30 @@ public class CommonProxy {
                         int meta = event.getItemStack().getItem().getHasSubtypes() ? event.getItemStack().getMetadata() : 0;
                         NutrientClass nutrientClass = TFCFarmingContent.getFertilizerClass(event.getItemStack());
                         int value = TFCFarmingContent.getFertilizerValue(event.getItemStack());
-                        if (!planter && TFCFarming.INSTANCE.worldStorage.fertilizerBlock(event.getPos()
-                                .getX(), event.getPos()
-                                .getZ(), nutrientClass, value)) {
+                        if (!planter && TFCFarming.INSTANCE.worldStorage.fertilizerBlock(
+                                event.getPos().getX(),
+                                event.getPos().getZ(),
+                                nutrientClass, value)) {
                             event.getItemStack().setCount(event.getItemStack().getCount() - 1);
+
                         } else if (planter) {
                             TEPlanterN tePlanterN = TileUtils.getTile(event.getWorld(), event.getPos(), TEPlanterN.class);
                             if (tePlanterN != null && tePlanterN.fertilize(nutrientClass, value)) {
                                 event.getItemStack().setCount(event.getItemStack().getCount() - 1);
                             }
+
                         } else if (hangingPlanter) {
                             TEHangingPlanterN teHangingPlanterN = TileUtils.getTile(event.getWorld(), event.getPos(), TEHangingPlanterN.class);
                             if (teHangingPlanterN != null && teHangingPlanterN.fertilize(nutrientClass, value)) {
                                 event.getItemStack().setCount(event.getItemStack().getCount() - 1);
                             }
+
                         }
                     }
                 }
             }
             // put block in await list, if it's tile entity isn't already set and should be set, then set it
-            if (TFCFarming.tfcfloraeLoaded && b instanceof FarmlandTFCF) {
+            if (TFCFarming.tfcfloraeLoaded && block instanceof FarmlandTFCF) {
                 synchronized (awaiting) {
                     awaiting.add(new Tuple<>(event.getPos().add(0, 1, 0), event.getWorld()));
                 }

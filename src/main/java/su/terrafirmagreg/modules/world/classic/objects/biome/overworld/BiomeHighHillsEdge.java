@@ -9,25 +9,25 @@ import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.HIGH_HILL
 
 public class BiomeHighHillsEdge extends BaseBiome {
 
-    public BiomeHighHillsEdge() {
-        super(new Settings("High Hills Edge")
-                .guiColour(0x92567C)
-                .baseHeight(-1.5f)
-                .heightVariation(-2.3f)
-                .baseBiome(HIGH_HILLS));
-    }
+  public BiomeHighHillsEdge() {
+    super(new Settings("High Hills Edge")
+        .guiColour(0x92567C)
+        .baseHeight(-1.5f)
+        .heightVariation(-2.3f)
+        .baseBiome(HIGH_HILLS));
+  }
 
-    @Override
-    public int getBiomeWeight() {
-        return 0;
-    }
+  @Override
+  public int getBiomeWeight() {
+    return 0;
+  }
 
-    @Override
-    public BiomeDictionary.Type[] getTypes() {
+  @Override
+  public BiomeDictionary.Type[] getTypes() {
 
-        return new BiomeDictionary.Type[] {
-                BiomeDictionary.Type.HILLS,
-                BiomeDictionary.Type.PLAINS
-        };
-    }
+    return new BiomeDictionary.Type[]{
+        BiomeDictionary.Type.HILLS,
+        BiomeDictionary.Type.PLAINS
+    };
+  }
 }

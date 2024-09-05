@@ -13,11 +13,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.objects.blocks.BlockJars;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 
 import org.jetbrains.annotations.NotNull;
+
+import static su.terrafirmagreg.data.Properties.JARS;
 
 @MethodsReturnNonnullByDefault
 public class ItemBlockJar extends ItemBlockTFC {
@@ -28,13 +29,14 @@ public class ItemBlockJar extends ItemBlockTFC {
 
     @Override
     @NotNull
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
+                                      float hitZ) {
         IBlockState state = worldIn.getBlockState(pos);
         if (state.getBlock() == block) {
             if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
-                int jars = state.getValue(BlockJars.JARS);
+                int jars = state.getValue(JARS);
                 if (jars < 4) {
-                    worldIn.setBlockState(pos, state.withProperty(BlockJars.JARS, jars + 1));
+                    worldIn.setBlockState(pos, state.withProperty(JARS, jars + 1));
                     player.getHeldItem(hand).shrink(1);
                     return EnumActionResult.SUCCESS;
                 }

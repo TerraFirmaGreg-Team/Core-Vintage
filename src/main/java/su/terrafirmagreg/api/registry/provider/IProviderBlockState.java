@@ -6,6 +6,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface IProviderBlockState {
 
-    @SideOnly(Side.CLIENT)
-    IStateMapper getStateMapper();
+  @SideOnly(Side.CLIENT)
+  IStateMapper getStateMapper();
 }

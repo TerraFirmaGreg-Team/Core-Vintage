@@ -8,12 +8,12 @@ import net.minecraft.util.BlockRenderLayer;
 
 public class BlockRockCobble extends BlockRockFallable {
 
-    public BlockRockCobble(RockBlockVariant variant, RockType type) {
-        super(Settings.of(Material.ROCK), variant, type);
+  public BlockRockCobble(RockBlockVariant variant, RockType type) {
+    super(Settings.of(Material.ROCK), variant, type);
 
-        getSettings()
-                .renderLayer(BlockRenderLayer.CUTOUT)
-                .oreDict("cobblestone")
-                .hardness(variant.getBaseHardness() + type.getCategory().getHardnessModifier());
-    }
+    getSettings()
+        .renderLayer(BlockRenderLayer.CUTOUT)
+        .oreDict("cobblestone")
+        .hardness(variant.getBaseHardness() + type.getCategory().getHardnessModifier());
+  }
 }

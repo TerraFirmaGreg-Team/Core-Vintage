@@ -14,26 +14,26 @@ import static su.terrafirmagreg.data.Constants.MOD_ID;
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public final class MissingMappingEventHandler {
 
-    @SubscribeEvent
-    public static void onMissingItemMapping(RegistryEvent.MissingMappings<Item> event) {
-        for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getAllMappings()) {
-            String mappingKey = mapping.key.toString();
-        }
+  @SubscribeEvent
+  public static void onMissingItemMapping(RegistryEvent.MissingMappings<Item> event) {
+    for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getAllMappings()) {
+      String mappingKey = mapping.key.toString();
     }
+  }
 
-    @SubscribeEvent
-    public static void onMissingBlockMapping(RegistryEvent.MissingMappings<Block> event) {
-        for (RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getAllMappings()) {
-            String mappingKey = mapping.key.toString();
+  @SubscribeEvent
+  public static void onMissingBlockMapping(RegistryEvent.MissingMappings<Block> event) {
+    for (RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getAllMappings()) {
+      String mappingKey = mapping.key.toString();
 
-            switch (mappingKey) {
-                case "tfc:firestarter":
-                    mapping.remap(Block.getBlockFromItem(ItemsDevice.FIRESTARTER));
+      switch (mappingKey) {
+        case "tfc:firestarter":
+          mapping.remap(Block.getBlockFromItem(ItemsDevice.FIRESTARTER));
 
-                default:
-                    break;
-            }
+        default:
+          break;
+      }
 
-        }
     }
+  }
 }

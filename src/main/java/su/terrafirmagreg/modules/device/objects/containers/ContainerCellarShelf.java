@@ -12,21 +12,23 @@ import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 public class ContainerCellarShelf extends BaseContainerTile<TileCellarShelf> {
 
-    public ContainerCellarShelf(InventoryPlayer playerInv, TileCellarShelf tile) {
-        super(playerInv, tile);
-    }
+  public ContainerCellarShelf(InventoryPlayer playerInv, TileCellarShelf tile) {
+    super(playerInv, tile);
+  }
 
-    @Override
-    protected void addContainerSlots() {
-        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+  @Override
+  protected void addContainerSlots() {
+    IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
+        null);
 
-        if (inventory != null) {
-            for (int y = 0; y < 2; y++) {
-                for (int x = 0; x < 7; x++) {
+    if (inventory != null) {
+      for (int y = 0; y < 2; y++) {
+        for (int x = 0; x < 7; x++) {
 
-                    addSlotToContainer(new SlotCallback(inventory, x + y * 7, x * 18 + 26, y * 18 + 25, tile));
-                }
-            }
+          addSlotToContainer(
+              new SlotCallback(inventory, x + y * 7, x * 18 + 26, y * 18 + 25, tile));
         }
+      }
     }
+  }
 }

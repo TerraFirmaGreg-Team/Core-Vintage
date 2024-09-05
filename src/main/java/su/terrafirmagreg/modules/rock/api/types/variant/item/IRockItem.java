@@ -13,14 +13,14 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface IRockItem extends IType<RockType>, IVariant<RockItemVariant>, IItemSettings {
 
-    /**
-     * Возвращает имя объекта.
-     *
-     * @return Имя объекта.
-     */
-    @NotNull
-    default String getRegistryKey() {
-        return String.format("rock/%s/%s", getVariant(), getType());
-    }
+  /**
+   * Возвращает имя объекта.
+   *
+   * @return Имя объекта.
+   */
+  @NotNull
+  default String getRegistryKey() {
+    return String.format("rock/%s/%s", getVariant(), getType());
+  }
 
 }

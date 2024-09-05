@@ -13,17 +13,17 @@ import lombok.Getter;
 @Getter
 public abstract class ItemRock extends BaseItem implements IRockItem {
 
-    private final RockItemVariant variant;
-    private final RockType type;
+  private final RockItemVariant variant;
+  private final RockType type;
 
-    public ItemRock(RockItemVariant variant, RockType type) {
-        this.variant = variant;
-        this.type = type;
+  public ItemRock(RockItemVariant variant, RockType type) {
+    this.variant = variant;
+    this.type = type;
 
-        getSettings()
-                .size(Size.SMALL)
-                .weight(Weight.LIGHT)
-                .addOreDict(variant)
-                .addOreDict(variant, type.getCategory());
-    }
+    getSettings()
+        .size(Size.SMALL)
+        .weight(Weight.LIGHT)
+        .addOreDict(variant)
+        .addOreDict(variant, type.getCategory());
+  }
 }

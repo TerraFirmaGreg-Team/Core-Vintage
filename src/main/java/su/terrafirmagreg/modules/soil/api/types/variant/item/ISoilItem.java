@@ -10,13 +10,13 @@ import org.jetbrains.annotations.NotNull;
 
 public interface ISoilItem extends IType<SoilType>, IVariant<SoilItemVariant>, IItemSettings {
 
-    /**
-     * Возвращает расположение в реестре для данного подтипа деревянного предмета.
-     *
-     * @return расположение в реестре
-     */
-    @NotNull
-    default String getRegistryKey() {
-        return String.format("soil/%s/%s", getVariant(), getType());
-    }
+  /**
+   * Возвращает расположение в реестре для данного подтипа деревянного предмета.
+   *
+   * @return расположение в реестре
+   */
+  @NotNull
+  default String getRegistryKey() {
+    return String.format("soil/%s/%s", getVariant(), getType());
+  }
 }

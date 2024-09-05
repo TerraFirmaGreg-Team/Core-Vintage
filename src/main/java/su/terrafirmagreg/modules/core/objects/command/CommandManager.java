@@ -14,32 +14,33 @@ import java.util.List;
 
 public class CommandManager extends BaseCommandTree {
 
-    private static final CommandManager INSTANCE = new CommandManager();
+  private static final CommandManager INSTANCE = new CommandManager();
 
-    private CommandManager() {}
+  private CommandManager() {
+  }
 
-    public static CommandManager create(FMLServerStartingEvent event) {
-        event.registerServerCommand(INSTANCE);
-        return INSTANCE;
-    }
+  public static CommandManager create(FMLServerStartingEvent event) {
+    event.registerServerCommand(INSTANCE);
+    return INSTANCE;
+  }
 
-    @Override
-    public String getName() {
-        return "terrafirmagreg";
-    }
+  @Override
+  public String getName() {
+    return "terrafirmagreg";
+  }
 
-    @Override
-    public List<String> getAliases() {
-        return Lists.newArrayList("tfg");
-    }
+  @Override
+  public List<String> getAliases() {
+    return Lists.newArrayList("tfg");
+  }
 
-    @Override
-    public String getUsage(ICommandSender sender) {
-        return ModUtils.localize("command", "usage");
-    }
+  @Override
+  public String getUsage(ICommandSender sender) {
+    return ModUtils.localize("command", "usage");
+  }
 
-    public void addCommand(ICommand command) {
-        this.addSubcommand(command);
-    }
+  public void addCommand(ICommand command) {
+    this.addSubcommand(command);
+  }
 
 }

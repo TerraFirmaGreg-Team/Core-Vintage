@@ -9,19 +9,19 @@ import net.minecraft.world.gen.layer.GenLayer;
 
 public class BiomeProviderClassic extends BaseBiomeProvider {
 
-    public BiomeProviderClassic(World world) {
-        super(world.getWorldInfo());
+  public BiomeProviderClassic(World world) {
+    super(world.getWorldInfo());
 
-        if (!(world.getWorldType() instanceof WorldTypeClassic)) {
-            throw new RuntimeException("Terrible things have gone wrong here.");
-        }
+    if (!(world.getWorldType() instanceof WorldTypeClassic)) {
+      throw new RuntimeException("Terrible things have gone wrong here.");
     }
+  }
 
-    /**
-     * This is where we do the actual override of the generation, we discard the original and insert our own.
-     */
-    @Override
-    public GenLayer[] getModdedBiomeGenerators(WorldType worldType, long seed, GenLayer[] original) {
-        return GenLayerBase.initializeBiomes(seed);
-    }
+  /**
+   * This is where we do the actual override of the generation, we discard the original and insert our own.
+   */
+  @Override
+  public GenLayer[] getModdedBiomeGenerators(WorldType worldType, long seed, GenLayer[] original) {
+    return GenLayerBase.initializeBiomes(seed);
+  }
 }

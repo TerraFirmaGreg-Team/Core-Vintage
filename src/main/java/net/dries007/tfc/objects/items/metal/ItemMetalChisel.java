@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
 
 import net.minecraft.block.Block;
@@ -28,17 +29,13 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.api.recipes.ChiselRecipe.Mode;
 import net.dries007.tfc.api.types.Metal;
-
-
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-
-
-import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
 import net.dries007.tfc.objects.container.ContainerEmpty;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import static su.terrafirmagreg.data.Properties.CAN_FALL;
 
 public class ItemMetalChisel extends ItemMetalTool {
 
@@ -52,11 +49,12 @@ public class ItemMetalChisel extends ItemMetalTool {
     }
 
     /**
-     * Calculates the block that would be set in the specified position if the chisel were used. In most conditions will return null. If not null, then a successful chisel
-     * operation can be completed.
+     * Calculates the block that would be set in the specified position if the chisel were used. In most conditions will return null. If not null,
+     * then a successful chisel operation can be completed.
      * <br><br>
-     * code logic overview for finding result state:<br> state = world.getStateAt(pos)<br> block = state.getBlock()<br> itemStack = block.getPickBlock(state, pos)<br> resultStack =
-     * CraftingInventory.getResult(itemStack)<br> resultBlock = (resultStack.getItem() as ItemBlock).getBlock()<br> resultState = resultBlock.getPlacementState()<br>
+     * code logic overview for finding result state:<br> state = world.getStateAt(pos)<br> block = state.getBlock()<br> itemStack =
+     * block.getPickBlock(state, pos)<br> resultStack = CraftingInventory.getResult(itemStack)<br> resultBlock = (resultStack.getItem() as
+     * ItemBlock).getBlock()<br> resultState = resultBlock.getPlacementState()<br>
      * <br>
      *
      * @param player  player who clicked on the block
@@ -66,7 +64,8 @@ public class ItemMetalChisel extends ItemMetalTool {
      * @return null if the operation would not succeed. resulting state for if it would succeed.
      */
     @Nullable
-    public static IBlockState getChiselResultState(EntityPlayer player, World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public static IBlockState getChiselResultState(EntityPlayer player, World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+                                                   float hitZ) {
         // no chiseling if no hammer is present
         if (hasHammerForChisel(player)) {
             IBlockState state = worldIn.getBlockState(pos);
@@ -157,9 +156,9 @@ public class ItemMetalChisel extends ItemMetalTool {
     }
 
     /**
-     * attempts to change a block in place using the chisel. If the chiselMode is stair and the block can be crafted into a stair, it will be turned into that stair. If the
-     * chiselMode is slab and the block can be crafted into a slab, it will be crafted into a slab. If the chiselMode is polish and the block is a TFC Raw stone, it will be crafted
-     * into a polished stone.
+     * attempts to change a block in place using the chisel. If the chiselMode is stair and the block can be crafted into a stair, it will be turned
+     * into that stair. If the chiselMode is slab and the block can be crafted into a slab, it will be crafted into a slab. If the chiselMode is
+     * polish and the block is a TFC Raw stone, it will be crafted into a polished stone.
      *
      * @return SUCCESS if the block was chiseled, FAIL if no block was changed
      */
@@ -187,8 +186,8 @@ public class ItemMetalChisel extends ItemMetalTool {
                         }
                     }
                 }
-                if (newState.getProperties().containsKey(BlockRockSmooth.CAN_FALL)) {
-                    newState = newState.withProperty(BlockRockSmooth.CAN_FALL, true);
+                if (newState.getProperties().containsKey(CAN_FALL)) {
+                    newState = newState.withProperty(CAN_FALL, true);
                 }
                 worldIn.setBlockState(pos, newState);
 

@@ -4,7 +4,7 @@ import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 
 public interface ICapabilityPull {
 
-    EntityWoodCart getDrawn();
+  EntityWoodCart getDrawn();
 
-    void setDrawn(EntityWoodCart drawnIn);
+  void setDrawn(EntityWoodCart drawnIn);
 }

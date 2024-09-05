@@ -6,13 +6,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface IProviderBlockColor
-        extends IProviderItemColor {
+    extends IProviderItemColor {
 
-    @SideOnly(Side.CLIENT)
-    IBlockColor getBlockColor();
+  @SideOnly(Side.CLIENT)
+  IBlockColor getBlockColor();
 
-    @SideOnly(Side.CLIENT)
-    default IItemColor getItemColor() {
-        return null;
-    }
+  @SideOnly(Side.CLIENT)
+  default IItemColor getItemColor() {
+    return null;
+  }
 }

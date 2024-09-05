@@ -15,21 +15,21 @@ import lombok.Getter;
 @Getter
 public class BlockWoodTrapDoor extends BaseBlockTrapDoor implements IWoodBlock {
 
-    private final WoodBlockVariant variant;
-    private final WoodType type;
+  private final WoodBlockVariant variant;
+  private final WoodType type;
 
-    public BlockWoodTrapDoor(WoodBlockVariant variant, WoodType type) {
-        super(Settings.of(Material.WOOD));
+  public BlockWoodTrapDoor(WoodBlockVariant variant, WoodType type) {
+    super(Settings.of(Material.WOOD));
 
-        this.variant = variant;
-        this.type = type;
+    this.variant = variant;
+    this.type = type;
 
-        getSettings()
-                .sound(SoundType.WOOD)
-                .hardness(0.5F)
-                .oreDict(variant, "wood")
-                .oreDict(variant, "wood", type);
+    getSettings()
+        .sound(SoundType.WOOD)
+        .hardness(0.5F)
+        .oreDict(variant, "wood")
+        .oreDict(variant, "wood", type);
 
-        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
-    }
+    BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
+  }
 }

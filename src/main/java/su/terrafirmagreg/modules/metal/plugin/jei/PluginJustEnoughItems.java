@@ -21,26 +21,28 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 @SideOnly(Side.CLIENT)
 @SuppressWarnings("unused")
 public final class PluginJustEnoughItems
-        implements IModPlugin {
+    implements IModPlugin {
 
-    @Override
-    public void registerCategories(IRecipeCategoryRegistration registry) {
-        IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
+  @Override
+  public void registerCategories(IRecipeCategoryRegistration registry) {
+    IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
 
-        registry.addRecipeCategories(new MetalAnvilRecipeCategory(guiHelper));
-        registry.addRecipeCategories(new WeldingRecipeCategory(guiHelper));
-    }
+    registry.addRecipeCategories(new MetalAnvilRecipeCategory(guiHelper));
+    registry.addRecipeCategories(new WeldingRecipeCategory(guiHelper));
+  }
 
-    @Override
-    public void register(IModRegistry registry) {
+  @Override
+  public void register(IModRegistry registry) {
 
-        // ==== ANVIL ====
-        registry.addRecipes(MetalAnvilRecipeMaker.getRecipes(), MetalAnvilRecipeCategory.UID);
+    // ==== ANVIL ====
+    registry.addRecipes(MetalAnvilRecipeMaker.getRecipes(), MetalAnvilRecipeCategory.UID);
 
-        MetalType.getTypes().forEach(type -> {
-            registry.addRecipeCatalyst(new ItemStack(BlocksMetal.ANVIL.get(type)), MetalAnvilRecipeCategory.UID);
-            registry.addRecipeCatalyst(new ItemStack(BlocksMetal.ANVIL.get(type)), WeldingRecipeCategory.UID);
-        });
+    MetalType.getTypes().forEach(type -> {
+      registry.addRecipeCatalyst(new ItemStack(BlocksMetal.ANVIL.get(type)),
+          MetalAnvilRecipeCategory.UID);
+      registry.addRecipeCatalyst(new ItemStack(BlocksMetal.ANVIL.get(type)),
+          WeldingRecipeCategory.UID);
+    });
 
-    }
+  }
 }

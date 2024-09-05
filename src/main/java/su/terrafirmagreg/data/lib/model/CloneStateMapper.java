@@ -18,34 +18,34 @@ import java.util.Map;
  */
 public class CloneStateMapper extends StateMapperBase {
 
-    private static final Map<Block, CloneStateMapper> CACHE = new IdentityHashMap<>();
+  private static final Map<Block, CloneStateMapper> CACHE = new IdentityHashMap<>();
 
-    private final Block block;
+  private final Block block;
 
-    private CloneStateMapper(Block block) {
+  private CloneStateMapper(Block block) {
 
-        this.block = block;
+    this.block = block;
+  }
+
+  public static CloneStateMapper forBlock(Block block) {
+
+    CloneStateMapper cloneStateMapper = CACHE.get(block);
+
+    if (cloneStateMapper == null) {
+      cloneStateMapper = new CloneStateMapper(block);
+      CACHE.put(block, cloneStateMapper);
     }
 
-    public static CloneStateMapper forBlock(Block block) {
+    return cloneStateMapper;
+  }
 
-        CloneStateMapper cloneStateMapper = CACHE.get(block);
+  @NotNull
+  @Override
+  protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
 
-        if (cloneStateMapper == null) {
-            cloneStateMapper = new CloneStateMapper(block);
-            CACHE.put(block, cloneStateMapper);
-        }
-
-        return cloneStateMapper;
-    }
-
-    @NotNull
-    @Override
-    protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
-
-        return new ModelResourceLocation(
-                Block.REGISTRY.getNameForObject(this.block),
-                this.getPropertyString(state.getProperties())
-        );
-    }
+    return new ModelResourceLocation(
+        Block.REGISTRY.getNameForObject(this.block),
+        this.getPropertyString(state.getProperties())
+    );
+  }
 }

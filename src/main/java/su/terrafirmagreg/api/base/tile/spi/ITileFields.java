@@ -5,9 +5,9 @@ package su.terrafirmagreg.api.base.tile.spi;
  */
 public interface ITileFields {
 
-    int getFieldCount();
+  int getFieldCount();
 
-    void setField(int index, int value);
+  void setField(int index, int value);
 
-    int getField(int index);
+  int getField(int index);
 }

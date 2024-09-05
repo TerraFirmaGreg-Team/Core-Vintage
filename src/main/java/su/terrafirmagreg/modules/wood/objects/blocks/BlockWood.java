@@ -15,20 +15,20 @@ import lombok.Getter;
 @Getter
 public abstract class BlockWood extends BaseBlock implements IWoodBlock {
 
-    private final WoodBlockVariant variant;
-    private final WoodType type;
+  private final WoodBlockVariant variant;
+  private final WoodType type;
 
-    protected BlockWood(WoodBlockVariant variant, WoodType type) {
-        super(Settings.of(Material.WOOD));
+  protected BlockWood(WoodBlockVariant variant, WoodType type) {
+    super(Settings.of(Material.WOOD));
 
-        this.variant = variant;
-        this.type = type;
+    this.variant = variant;
+    this.type = type;
 
-        getSettings()
-                .sound(SoundType.WOOD)
-                .oreDict(variant)
-                .oreDict(variant, type);
+    getSettings()
+        .sound(SoundType.WOOD)
+        .oreDict(variant)
+        .oreDict(variant, type);
 
-        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
-    }
+    BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
+  }
 }

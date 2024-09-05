@@ -13,12 +13,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalCamel extends RenderAnimal<EntityAnimalCamel> {
 
-    private static final ResourceLocation OLD = ModUtils.resource("textures/entity/animal/livestock/camel_old.png");
-    private static final ResourceLocation YOUNG = ModUtils.resource("textures/entity/animal/livestock/camel_young.png");
+  private static final ResourceLocation OLD = ModUtils.resource(
+      "textures/entity/animal/livestock/camel_old.png");
+  private static final ResourceLocation YOUNG = ModUtils.resource(
+      "textures/entity/animal/livestock/camel_young.png");
 
-    public RenderAnimalCamel(RenderManager renderManager) {
-        super(renderManager, new ModelAnimalCamel(0.0F), 0.7F, YOUNG, OLD);
-        this.addLayer(new LayerCamelDecor(this));
-    }
+  public RenderAnimalCamel(RenderManager renderManager) {
+    super(renderManager, new ModelAnimalCamel(0.0F), 0.7F, YOUNG, OLD);
+    this.addLayer(new LayerCamelDecor(this));
+  }
 
 }

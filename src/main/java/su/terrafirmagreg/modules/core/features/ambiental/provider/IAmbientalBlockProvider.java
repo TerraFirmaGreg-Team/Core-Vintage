@@ -12,8 +12,8 @@ import java.util.Optional;
 // Add an example of this into TemperatureRegistry for blocks you didn't create personally
 @FunctionalInterface
 public interface IAmbientalBlockProvider
-        extends IAmbientalBaseProvider {
+    extends IAmbientalBaseProvider {
 
-    Optional<ModifierBase> getModifier(EntityPlayer player, BlockPos pos, IBlockState state);
+  Optional<ModifierBase> getModifier(EntityPlayer player, BlockPos pos, IBlockState state);
 
 }

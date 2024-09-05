@@ -13,39 +13,44 @@ import net.minecraft.world.World;
 
 public interface IRidable {
 
-    default <A extends EntityAnimal & IAnimal> boolean attemptApplyHalter(A animal, World world, EntityPlayer player, ItemStack stack) {
-        if (animal.getAge() != IAnimal.Age.CHILD && animal.getFamiliarity() > 0.15f) {
-            if (!world.isRemote) {
-                // Can't use EntityAnimal#consumeItemFromStack since thats protected
-                if (!player.capabilities.isCreativeMode) {
-                    stack.shrink(1);
-                }
-                setHalter(true);
-            }
-            return true;
-        } else {
-            // Show tooltips
-            if (!world.isRemote) {
-                if (animal.getAge() == IAnimal.Age.CHILD) {
-                    ModuleAnimal.getPacketService().sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                            ModUtils.localize("tooltip", "animal.product.young"), animal.getAnimalName()), (EntityPlayerMP) player);
-                } else {
-                    ModuleAnimal.getPacketService().sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                            ModUtils.localize("tooltip", "animal.product.low_familiarity"), animal.getAnimalName()), (EntityPlayerMP) player);
-                }
-            }
-            return false;
+  default <A extends EntityAnimal & IAnimal> boolean attemptApplyHalter(A animal, World world,
+      EntityPlayer player, ItemStack stack) {
+    if (animal.getAge() != IAnimal.Age.CHILD && animal.getFamiliarity() > 0.15f) {
+      if (!world.isRemote) {
+        // Can't use EntityAnimal#consumeItemFromStack since thats protected
+        if (!player.capabilities.isCreativeMode) {
+          stack.shrink(1);
         }
+        setHalter(true);
+      }
+      return true;
+    } else {
+      // Show tooltips
+      if (!world.isRemote) {
+        if (animal.getAge() == IAnimal.Age.CHILD) {
+          ModuleAnimal.getPacketService().sendTo(
+              SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
+                  ModUtils.localize("tooltip", "animal.product.young"), animal.getAnimalName()),
+              (EntityPlayerMP) player);
+        } else {
+          ModuleAnimal.getPacketService().sendTo(
+              SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
+                  ModUtils.localize("tooltip", "animal.product.low_familiarity"),
+                  animal.getAnimalName()), (EntityPlayerMP) player);
+        }
+      }
+      return false;
     }
+  }
 
-    /**
-     * @return true if itemstack is in 'halter' oredict and the animal does not have a halter
-     */
-    default boolean canAcceptHalter(ItemStack stack) {
-        return !isHalter() && OreDictUtils.contains(stack, "halter");
-    }
+  /**
+   * @return true if itemstack is in 'halter' oredict and the animal does not have a halter
+   */
+  default boolean canAcceptHalter(ItemStack stack) {
+    return !isHalter() && OreDictUtils.contains(stack, "halter");
+  }
 
-    boolean isHalter();
+  boolean isHalter();
 
-    void setHalter(boolean state);
+  void setHalter(boolean state);
 }

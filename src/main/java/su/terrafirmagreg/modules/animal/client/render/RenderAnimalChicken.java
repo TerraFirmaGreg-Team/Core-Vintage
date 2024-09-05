@@ -18,46 +18,52 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalChicken extends RenderLiving<EntityAnimalChicken> {
 
-    private static final ResourceLocation CHICKEN_YOUNG = ModUtils.resource("textures/entity/animal/livestock/chicken_young.png");
-    private static final ResourceLocation CHICKEN_OLD = ModUtils.resource("textures/entity/animal/livestock/chicken_old.png");
+  private static final ResourceLocation CHICKEN_YOUNG = ModUtils.resource(
+      "textures/entity/animal/livestock/chicken_young.png");
+  private static final ResourceLocation CHICKEN_OLD = ModUtils.resource(
+      "textures/entity/animal/livestock/chicken_old.png");
 
-    private static final ResourceLocation ROOSTER_YOUNG = ModUtils.resource("textures/entity/animal/livestock/rooster_young.png");
-    private static final ResourceLocation ROOSTER_OLD = ModUtils.resource("textures/entity/animal/livestock/rooster_old.png");
+  private static final ResourceLocation ROOSTER_YOUNG = ModUtils.resource(
+      "textures/entity/animal/livestock/rooster_young.png");
+  private static final ResourceLocation ROOSTER_OLD = ModUtils.resource(
+      "textures/entity/animal/livestock/rooster_old.png");
 
-    private static final ResourceLocation CHICK_TEXTURE = ModUtils.resource("textures/entity/animal/livestock/chick.png");
+  private static final ResourceLocation CHICK_TEXTURE = ModUtils.resource(
+      "textures/entity/animal/livestock/chick.png");
 
-    public RenderAnimalChicken(RenderManager manager) {
-        super(manager, new ModelAnimalChicken(), 0.3F);
+  public RenderAnimalChicken(RenderManager manager) {
+    super(manager, new ModelAnimalChicken(), 0.3F);
+  }
+
+  @Override
+  public void doRender(EntityAnimalChicken chicken, double par2, double par4, double par6,
+      float par8, float par9) {
+    this.shadowSize = (float) (0.15f + chicken.getPercentToAdulthood() * 0.15f);
+    super.doRender(chicken, par2, par4, par6, par8, par9);
+  }
+
+  @Override
+  protected ResourceLocation getEntityTexture(EntityAnimalChicken chicken) {
+    float percent = (float) chicken.getPercentToAdulthood();
+
+    if (percent < 0.65f) {
+      return CHICK_TEXTURE;
+    } else if (chicken.getGender() == EntityAnimalBase.Gender.MALE) {
+      return chicken.getAge() == IAnimal.Age.OLD ? ROOSTER_OLD : ROOSTER_YOUNG;
+    } else {
+      return chicken.getAge() == IAnimal.Age.OLD ? CHICKEN_OLD : CHICKEN_YOUNG;
     }
+  }
 
-    @Override
-    public void doRender(EntityAnimalChicken chicken, double par2, double par4, double par6, float par8, float par9) {
-        this.shadowSize = (float) (0.15f + chicken.getPercentToAdulthood() * 0.15f);
-        super.doRender(chicken, par2, par4, par6, par8, par9);
-    }
+  @Override
+  protected float handleRotationFloat(EntityAnimalChicken livingBase, float partialTicks) {
+    float f = livingBase.oFlap + (livingBase.wingRotation - livingBase.oFlap) * partialTicks;
+    float f1 = livingBase.oFlapSpeed + (livingBase.destPos - livingBase.oFlapSpeed) * partialTicks;
+    return (MathHelper.sin(f) + 1.0F) * f1;
+  }
 
-    @Override
-    protected ResourceLocation getEntityTexture(EntityAnimalChicken chicken) {
-        float percent = (float) chicken.getPercentToAdulthood();
-
-        if (percent < 0.65f) {
-            return CHICK_TEXTURE;
-        } else if (chicken.getGender() == EntityAnimalBase.Gender.MALE) {
-            return chicken.getAge() == IAnimal.Age.OLD ? ROOSTER_OLD : ROOSTER_YOUNG;
-        } else {
-            return chicken.getAge() == IAnimal.Age.OLD ? CHICKEN_OLD : CHICKEN_YOUNG;
-        }
-    }
-
-    @Override
-    protected float handleRotationFloat(EntityAnimalChicken livingBase, float partialTicks) {
-        float f = livingBase.oFlap + (livingBase.wingRotation - livingBase.oFlap) * partialTicks;
-        float f1 = livingBase.oFlapSpeed + (livingBase.destPos - livingBase.oFlapSpeed) * partialTicks;
-        return (MathHelper.sin(f) + 1.0F) * f1;
-    }
-
-    @Override
-    protected void preRenderCallback(EntityAnimalChicken bear, float par2) {
-        GlStateManager.scale(0.7f, 0.7f, 0.7f);
-    }
+  @Override
+  protected void preRenderCallback(EntityAnimalChicken bear, float par2) {
+    GlStateManager.scale(0.7f, 0.7f, 0.7f);
+  }
 }

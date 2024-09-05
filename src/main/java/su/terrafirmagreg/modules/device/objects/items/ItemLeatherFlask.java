@@ -6,15 +6,15 @@ import su.terrafirmagreg.modules.device.ConfigDevice;
 
 public class ItemLeatherFlask extends ItemFlask {
 
-    protected static int capacity = ConfigDevice.ITEMS.WATER_FLASKS.leatherCap;
-    protected static int drink = 100; //matches amount of water in TFC Jug
+  protected static int capacity = ConfigDevice.ITEMS.WATER_FLASKS.leatherCap;
+  protected static int drink = 100; //matches amount of water in TFC Jug
 
-    public ItemLeatherFlask() {
-        super("leather", capacity, drink);
+  public ItemLeatherFlask() {
+    super("leather", capacity, drink);
 
-        getSettings()
-                .size(Size.SMALL)
-                .weight(Weight.MEDIUM);
-    }
+    getSettings()
+        .size(Size.SMALL)
+        .weight(Weight.MEDIUM);
+  }
 
 }

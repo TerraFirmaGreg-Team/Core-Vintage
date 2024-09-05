@@ -10,8 +10,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderAnimalOcelot extends RenderOcelot {
 
-    public RenderAnimalOcelot(RenderManager renderManager) {
-        super(renderManager);
-        this.mainModel = new ModelAnimalOcelot();
-    }
+  public RenderAnimalOcelot(RenderManager renderManager) {
+    super(renderManager);
+    this.mainModel = new ModelAnimalOcelot();
+  }
 }

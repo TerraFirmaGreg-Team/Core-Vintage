@@ -20,65 +20,67 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("unused")
 public class EventHandlerCapabilitiesEntity {
 
-    @SubscribeEvent
-    public void attachItemCapabilities(AttachCapabilitiesEvent<Entity> event) {
+  @SubscribeEvent
+  public void attachItemCapabilities(AttachCapabilitiesEvent<Entity> event) {
 
-        Entity entity = event.getObject();
-        if (entity == null) return;
-
-        skill(event, entity);
-        temperature(event, entity);
-        pull(event, entity);
-        //damageResistance(event, entity);
+    Entity entity = event.getObject();
+    if (entity == null) {
+      return;
     }
 
-    public void skill(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
+    skill(event, entity);
+    temperature(event, entity);
+    pull(event, entity);
+    //damageResistance(event, entity);
+  }
 
-        if (entity instanceof EntityPlayer player) {
-            // Player skills
-            if (!CapabilityPlayer.has(player)) {
-                event.addCapability(CapabilityPlayer.KEY, new ProviderPlayer(player));
-            }
-        }
+  public void skill(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
 
+    if (entity instanceof EntityPlayer player) {
+      // Player skills
+      if (!CapabilityPlayer.has(player)) {
+        event.addCapability(CapabilityPlayer.KEY, new ProviderPlayer(player));
+      }
     }
 
-    public void temperature(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
+  }
 
-        if (entity instanceof EntityPlayer player) {
-            // Each player should have their own instance for each stat, as associated values may vary
+  public void temperature(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
 
-            //if (!event.getCapabilities().containsKey(CapabilityTemperature.KEY))
-            if (!CapabilityTemperature.has(player)) {
-                event.addCapability(CapabilityTemperature.KEY, new ProviderTemperature(player));
-            }
-        }
+    if (entity instanceof EntityPlayer player) {
+      // Each player should have their own instance for each stat, as associated values may vary
+
+      //if (!event.getCapabilities().containsKey(CapabilityTemperature.KEY))
+      if (!CapabilityTemperature.has(player)) {
+        event.addCapability(CapabilityTemperature.KEY, new ProviderTemperature(player));
+      }
+    }
+  }
+
+  public void pull(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
+
+    if (entity instanceof EntityPlayer player) {
+      // null check because of a compability issue with MrCrayfish's Furniture Mod and probably others
+      // since this event is being fired even when an entity is initialized in the main menu
+
+      //if (event.getObject().world != null && !event.getObject().world.isRemote) {
+      if (!CapabilityPull.has(player)) {
+        event.addCapability(CapabilityPull.KEY, new ProviderPull());
+      }
     }
 
-    public void pull(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
+  }
 
-        if (entity instanceof EntityPlayer player) {
-            // null check because of a compability issue with MrCrayfish's Furniture Mod and probably others
-            // since this event is being fired even when an entity is initialized in the main menu
+  public void damageResistance(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
 
-            //if (event.getObject().world != null && !event.getObject().world.isRemote) {
-            if (!CapabilityPull.has(player)) {
-                event.addCapability(CapabilityPull.KEY, new ProviderPull());
-            }
-        }
+    // Give certain entities damage resistance
+    if (!CapabilityDamageResistance.has(entity)) {
 
+      var capabilityProvider = HandlerDamageResistance.getCustom(entity);
+      if (capabilityProvider != null) {
+        event.addCapability(CapabilityDamageResistance.KEY, capabilityProvider);
+      }
     }
-
-    public void damageResistance(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
-
-        // Give certain entities damage resistance
-        if (!CapabilityDamageResistance.has(entity)) {
-
-            var capabilityProvider = HandlerDamageResistance.getCustom(entity);
-            if (capabilityProvider != null) {
-                event.addCapability(CapabilityDamageResistance.KEY, capabilityProvider);
-            }
-        }
-    }
+  }
 
 }

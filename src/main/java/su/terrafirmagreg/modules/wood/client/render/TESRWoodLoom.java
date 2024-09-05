@@ -18,191 +18,205 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
 
-    @Override
-    public void render(TileWoodLoom tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+  @Override
+  public void render(TileWoodLoom tile, double x, double y, double z, float partialTicks,
+      int destroyStage, float alpha) {
+    GlStateManager.pushMatrix();
+    GlStateManager.translate(x + 0.5D, y + 0.03125D, z + 0.5D);
+    GlStateManager.rotate((tile.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
+    GlStateManager.popMatrix();
+    var woodColor = tile.getWood().getColor();
+
+    double tileZ = tile.getAnimPos();
+
+    try {
+      GlStateManager.pushMatrix();
+
+      ColourUtils.setColor(woodColor);
+      bindTexture(ModUtils.resource("textures/blocks/wood/planks.png"));
+
+      GlStateManager.disableLighting();
+
+      GlStateManager.translate(x + 0.5d, y, z + 0.5d);
+      GL11.glRotatef(180.0F - 90.0F * tile.getBlockMetadata(), 0.0F, 1.0F, 0.0F);
+      GlStateManager.translate(-0.5d, 0.0d, -0.5d);
+
+      Tessellator t = Tessellator.getInstance();
+      BufferBuilder b = t.getBuffer();
+
+      b.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+      if ("u".equals(tile.getAnimElement())) {
+        drawUpper(b, tileZ);
+        drawLower(b, 0);
+      } else {
+        drawUpper(b, 0);
+        drawLower(b, tileZ);
+      }
+
+      t.draw();
+    } finally {
+      GlStateManager.popMatrix();
+    }
+
+    if (tile.hasRecipe()) {
+      try {
         GlStateManager.pushMatrix();
-        GlStateManager.translate(x + 0.5D, y + 0.03125D, z + 0.5D);
-        GlStateManager.rotate((tile.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
+
+        ColourUtils.clearColor();
+        this.bindTexture(tile.getInProgressTexture());
+
+        GlStateManager.disableLighting();
+
+        GlStateManager.translate(x + 0.5d, y, z + 0.5d);
+        GL11.glRotatef(180.0F - 90.0F * tile.getBlockMetadata(), 0.0F, 1.0F, 0.0F);
+        GlStateManager.translate(-0.5d, 0.0d, -0.5d);
+
+        Tessellator t = Tessellator.getInstance();
+        BufferBuilder b = t.getBuffer();
+
+        b.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+
+        double Z = tileZ * 2 / 3;
+
+        drawMaterial(b, tile.getMaxInputCount(), tile.getCount(), tile.getMaxProgress(),
+            tile.getProgress(),
+            ("u".equals(tile.getAnimElement())) ? Z : 0,
+            ("l".equals(tile.getAnimElement())) ? Z : 0);
+        drawProduct(b, tile.getMaxProgress(), tile.getProgress());
+
+        t.draw();
+      } finally {
         GlStateManager.popMatrix();
-        var woodColor = tile.getWood().getColor();
+      }
+    }
+  }
 
-        double tileZ = tile.getAnimPos();
+  @Override
+  public boolean isGlobalRenderer(TileWoodLoom tile) {
+    return false;
+  }
 
-        try {
-            GlStateManager.pushMatrix();
+  private void drawProduct(BufferBuilder b, int maxProgress, int progress) {
+    double[][] sidesZ = getPlaneVertices(0.1875, 0.9375, 0.75 - 0.001, 0.8125,
+        0.9375 - (0.625 / maxProgress) * progress, 0.75 - 0.001, 0, 0, 1,
+        (double) progress / (double) 16);
 
-            ColourUtils.setColor(woodColor);
-            bindTexture(ModUtils.resource("textures/blocks/wood/planks.png"));
+    for (double[] v : sidesZ) {
+      b.pos(v[0], v[1], v[2]).tex(v[3], v[4]).endVertex();
+    }
+  }
 
-            GlStateManager.disableLighting();
+  private void drawMaterial(BufferBuilder b, int maxPieces, int pieces, int maxProgress,
+      int progress, double Z1, double Z2) {
+    double y1 = 0.9375 - (0.625 / maxProgress) * progress, y2, z1 = 0.75, z2;
+    double texX1, texX2, texY1, texY2;
+    for (int i = 0; i < pieces; i++) {
 
-            GlStateManager.translate(x + 0.5d, y, z + 0.5d);
-            GL11.glRotatef(180.0F - 90.0F * tile.getBlockMetadata(), 0.0F, 1.0F, 0.0F);
-            GlStateManager.translate(-0.5d, 0.0d, -0.5d);
+      if (i % 2 == 0) {
+        texX1 = 0;
+        texY1 = 0;
+        texX2 = 0.0625;
+        texY2 = 0.125;
+        z2 = 0.75 - Z1;
+        y2 = 0.34375;
+      } else {
+        texX1 = 0.125;
+        texY1 = 0;
+        texX2 = 0.1875;
+        texY2 = 0.1875;
+        z2 = 0.75 - Z2;
+        y2 = 0.125;
+      }
 
-            Tessellator t = Tessellator.getInstance();
-            BufferBuilder b = t.getBuffer();
+      double[][] sidesZ = getPlaneVertices(0.1875 + (0.625 / maxPieces) * i, y1, z1 - 0.001,
+          0.1875 + (0.625 / maxPieces) * (i + 1), y2,
+          z2 - 0.001, texX1, texY1, texX2, texY2);
 
-            b.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-            if ("u".equals(tile.getAnimElement())) {
-                drawUpper(b, tileZ);
-                drawLower(b, 0);
-            } else {
-                drawUpper(b, 0);
-                drawLower(b, tileZ);
-            }
+      for (double[] v : sidesZ) {
+        b.pos(v[0], v[1], v[2]).tex(v[3], v[4]).endVertex();
+      }
 
-            t.draw();
-        } finally {
-            GlStateManager.popMatrix();
-        }
+      if (i % 2 == 0) {
+        texX1 = 0;
+        texY1 = 0.5;
+        texX2 = 0.0625;
+        texY2 = 0.5625;
+      } else {
+        texX1 = 0.125;
+        texY1 = 0.5;
+        texX2 = 0.1875;
+        texY2 = 0.5625;
+      }
 
-        if (tile.hasRecipe()) {
-            try {
-                GlStateManager.pushMatrix();
+      sidesZ = getPlaneVertices(0.1875 + (0.625 / maxPieces) * i, 0, z1 - 0.001,
+          0.1875 + (0.625 / maxPieces) * (i + 1), y2, z2 - 0.001, texX1,
+          texY1, texX2, texY2);
 
-                ColourUtils.clearColor();
-                this.bindTexture(tile.getInProgressTexture());
+      for (double[] v : sidesZ) {
+        b.pos(v[0], v[1], v[2]).tex(v[3], v[4]).endVertex();
+      }
+    }
+  }
 
-                GlStateManager.disableLighting();
+  private double[][] getPlaneVertices(double X1, double Y1, double Z1, double X2, double Y2,
+      double Z2, double texX1, double texY1, double texX2,
+      double texY2) {
+    return new double[][]{
+        {X1, Y1, Z1, texX1, texY1},
+        {X2, Y1, Z1, texX2, texY1},
+        {X2, Y2, Z2, texX2, texY2},
+        {X1, Y2, Z2, texX1, texY2},
 
-                GlStateManager.translate(x + 0.5d, y, z + 0.5d);
-                GL11.glRotatef(180.0F - 90.0F * tile.getBlockMetadata(), 0.0F, 1.0F, 0.0F);
-                GlStateManager.translate(-0.5d, 0.0d, -0.5d);
+        {X2, Y1, Z1, texX2, texY1},
+        {X1, Y1, Z1, texX1, texY1},
+        {X1, Y2, Z2, texX1, texY2},
+        {X2, Y2, Z2, texX2, texY2}
+    };
+  }
 
-                Tessellator t = Tessellator.getInstance();
-                BufferBuilder b = t.getBuffer();
+  private void drawUpper(BufferBuilder b, double z) {
+    double[][] sidesX = BaseTESR.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375,
+        0.625 - z, "x");
 
-                b.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-
-                double Z = tileZ * 2 / 3;
-
-                drawMaterial(b, tile.getMaxInputCount(), tile.getCount(), tile.getMaxProgress(), tile.getProgress(),
-                        ("u".equals(tile.getAnimElement())) ? Z : 0, ("l".equals(tile.getAnimElement())) ? Z : 0);
-                drawProduct(b, tile.getMaxProgress(), tile.getProgress());
-
-                t.draw();
-            } finally {
-                GlStateManager.popMatrix();
-            }
-        }
+    for (double[] v : sidesX) {
+      b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.0625).endVertex();
     }
 
-    @Override
-    public boolean isGlobalRenderer(TileWoodLoom tile) {
-        return false;
+    double[][] sidesY = BaseTESR.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375,
+        0.625 - z, "y");
+
+    for (double[] v : sidesY) {
+      b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.875).endVertex();
     }
 
-    private void drawProduct(BufferBuilder b, int maxProgress, int progress) {
-        double[][] sidesZ = getPlaneVertices(0.1875, 0.9375, 0.75 - 0.001, 0.8125, 0.9375 - (0.625 / maxProgress) * progress, 0.75 - 0.001, 0, 0, 1,
-                (double) progress / (double) 16);
+    double[][] sidesZ = BaseTESR.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375,
+        0.625 - z, "z");
 
-        for (double[] v : sidesZ) {
-            b.pos(v[0], v[1], v[2]).tex(v[3], v[4]).endVertex();
-        }
+    for (double[] v : sidesZ) {
+      b.pos(v[0], v[1], v[2]).tex(v[3] * 0.875, v[4] * 0.0625).endVertex();
+    }
+  }
+
+  private void drawLower(BufferBuilder b, double z) {
+    double[][] sidesX = BaseTESR.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625,
+        0.625 - z, "x");
+
+    for (double[] v : sidesX) {
+      b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.0625).endVertex();
     }
 
-    private void drawMaterial(BufferBuilder b, int maxPieces, int pieces, int maxProgress, int progress, double Z1, double Z2) {
-        double y1 = 0.9375 - (0.625 / maxProgress) * progress, y2, z1 = 0.75, z2;
-        double texX1, texX2, texY1, texY2;
-        for (int i = 0; i < pieces; i++) {
+    double[][] sidesY = BaseTESR.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625,
+        0.625 - z, "y");
 
-            if (i % 2 == 0) {
-                texX1 = 0;
-                texY1 = 0;
-                texX2 = 0.0625;
-                texY2 = 0.125;
-                z2 = 0.75 - Z1;
-                y2 = 0.34375;
-            } else {
-                texX1 = 0.125;
-                texY1 = 0;
-                texX2 = 0.1875;
-                texY2 = 0.1875;
-                z2 = 0.75 - Z2;
-                y2 = 0.125;
-            }
-
-            double[][] sidesZ = getPlaneVertices(0.1875 + (0.625 / maxPieces) * i, y1, z1 - 0.001, 0.1875 + (0.625 / maxPieces) * (i + 1), y2,
-                    z2 - 0.001, texX1, texY1, texX2, texY2);
-
-            for (double[] v : sidesZ) {
-                b.pos(v[0], v[1], v[2]).tex(v[3], v[4]).endVertex();
-            }
-
-            if (i % 2 == 0) {
-                texX1 = 0;
-                texY1 = 0.5;
-                texX2 = 0.0625;
-                texY2 = 0.5625;
-            } else {
-                texX1 = 0.125;
-                texY1 = 0.5;
-                texX2 = 0.1875;
-                texY2 = 0.5625;
-            }
-
-            sidesZ = getPlaneVertices(0.1875 + (0.625 / maxPieces) * i, 0, z1 - 0.001, 0.1875 + (0.625 / maxPieces) * (i + 1), y2, z2 - 0.001, texX1,
-                    texY1, texX2, texY2);
-
-            for (double[] v : sidesZ) {
-                b.pos(v[0], v[1], v[2]).tex(v[3], v[4]).endVertex();
-            }
-        }
+    for (double[] v : sidesY) {
+      b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.875).endVertex();
     }
 
-    private double[][] getPlaneVertices(double X1, double Y1, double Z1, double X2, double Y2, double Z2, double texX1, double texY1, double texX2,
-                                        double texY2) {
-        return new double[][] {
-                { X1, Y1, Z1, texX1, texY1 },
-                { X2, Y1, Z1, texX2, texY1 },
-                { X2, Y2, Z2, texX2, texY2 },
-                { X1, Y2, Z2, texX1, texY2 },
+    double[][] sidesZ = BaseTESR.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625,
+        0.625 - z, "z");
 
-                { X2, Y1, Z1, texX2, texY1 },
-                { X1, Y1, Z1, texX1, texY1 },
-                { X1, Y2, Z2, texX1, texY2 },
-                { X2, Y2, Z2, texX2, texY2 }
-        };
+    for (double[] v : sidesZ) {
+      b.pos(v[0], v[1], v[2]).tex(v[3] * 0.875, v[4] * 0.0625).endVertex();
     }
-
-    private void drawUpper(BufferBuilder b, double z) {
-        double[][] sidesX = BaseTESR.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "x");
-
-        for (double[] v : sidesX) {
-            b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.0625).endVertex();
-        }
-
-        double[][] sidesY = BaseTESR.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "y");
-
-        for (double[] v : sidesY) {
-            b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.875).endVertex();
-        }
-
-        double[][] sidesZ = BaseTESR.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "z");
-
-        for (double[] v : sidesZ) {
-            b.pos(v[0], v[1], v[2]).tex(v[3] * 0.875, v[4] * 0.0625).endVertex();
-        }
-    }
-
-    private void drawLower(BufferBuilder b, double z) {
-        double[][] sidesX = BaseTESR.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "x");
-
-        for (double[] v : sidesX) {
-            b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.0625).endVertex();
-        }
-
-        double[][] sidesY = BaseTESR.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "y");
-
-        for (double[] v : sidesY) {
-            b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.875).endVertex();
-        }
-
-        double[][] sidesZ = BaseTESR.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "z");
-
-        for (double[] v : sidesZ) {
-            b.pos(v[0], v[1], v[2]).tex(v[3] * 0.875, v[4] * 0.0625).endVertex();
-        }
-    }
+  }
 }

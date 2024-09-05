@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
@@ -10,25 +11,24 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-
 
 import java.util.Random;
 
 public abstract class BlockRockFallable extends BlockRock {
 
-    public BlockRockFallable(Settings settings, RockBlockVariant variant, RockType type) {
-        super(settings, variant, type);
-    }
+  public BlockRockFallable(Settings settings, RockBlockVariant variant, RockType type) {
+    super(settings, variant, type);
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-        if (rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
-            double d0 = (float) pos.getX() + rand.nextFloat();
-            double d1 = (double) pos.getY() - 0.05D;
-            double d2 = (float) pos.getZ() + rand.nextFloat();
-            world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, getStateId(state));
-        }
+  @SideOnly(Side.CLIENT)
+  @Override
+  public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+    if (rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
+      double d0 = (float) pos.getX() + rand.nextFloat();
+      double d1 = (double) pos.getY() - 0.05D;
+      double d2 = (float) pos.getZ() + rand.nextFloat();
+      world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D,
+          getStateId(state));
     }
+  }
 }

@@ -21,51 +21,52 @@ import org.jetbrains.annotations.NotNull;
  */
 public class SCPacketLatex implements IMessage, IMessageHandler<SCPacketLatex, IMessage> {
 
-    private BlockPos pos;
-    private int cutState = -1;
-    private int fluid = 0;
-    private boolean pot = false;
-    private boolean base = false;
+  private BlockPos pos;
+  private int cutState = -1;
+  private int fluid = 0;
+  private boolean pot = false;
+  private boolean base = false;
 
-    @SuppressWarnings("unused")
-    public SCPacketLatex() {}
+  @SuppressWarnings("unused")
+  public SCPacketLatex() {
+  }
 
-    public SCPacketLatex(@NotNull TileLatexExtractor tile) {
-        this.pos = tile.getPos();
-        this.cutState = tile.cutState();
-        this.fluid = tile.getFluidAmount();
-        this.pot = tile.hasPot();
-        this.base = tile.hasBase();
+  public SCPacketLatex(@NotNull TileLatexExtractor tile) {
+    this.pos = tile.getPos();
+    this.cutState = tile.cutState();
+    this.fluid = tile.getFluidAmount();
+    this.pot = tile.hasPot();
+    this.base = tile.hasBase();
+  }
+
+  @Override
+  public void fromBytes(ByteBuf buf) {
+    this.pos = BlockPos.fromLong(buf.readLong());
+    this.cutState = buf.readInt();
+    this.fluid = buf.readInt();
+    this.pot = buf.readBoolean();
+    this.base = buf.readBoolean();
+  }
+
+  @Override
+  public void toBytes(ByteBuf buf) {
+    buf.writeLong(pos.toLong());
+    buf.writeInt(cutState);
+    buf.writeInt(fluid);
+    buf.writeBoolean(pot);
+    buf.writeBoolean(base);
+  }
+
+  @Override
+  public IMessage onMessage(SCPacketLatex message, MessageContext ctx) {
+    EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
+    if (player != null) {
+      World world = player.getEntityWorld();
+      var tile = TileUtils.getTile(world, message.pos, TileLatexExtractor.class);
+      if (tile != null) {
+        tile.updateClient(message.cutState, message.fluid, message.pot, message.base);
+      }
     }
-
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        this.pos = BlockPos.fromLong(buf.readLong());
-        this.cutState = buf.readInt();
-        this.fluid = buf.readInt();
-        this.pot = buf.readBoolean();
-        this.base = buf.readBoolean();
-    }
-
-    @Override
-    public void toBytes(ByteBuf buf) {
-        buf.writeLong(pos.toLong());
-        buf.writeInt(cutState);
-        buf.writeInt(fluid);
-        buf.writeBoolean(pot);
-        buf.writeBoolean(base);
-    }
-
-    @Override
-    public IMessage onMessage(SCPacketLatex message, MessageContext ctx) {
-        EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
-        if (player != null) {
-            World world = player.getEntityWorld();
-            var tile = TileUtils.getTile(world, message.pos, TileLatexExtractor.class);
-            if (tile != null) {
-                tile.updateClient(message.cutState, message.fluid, message.pot, message.base);
-            }
-        }
-        return null;
-    }
+    return null;
+  }
 }

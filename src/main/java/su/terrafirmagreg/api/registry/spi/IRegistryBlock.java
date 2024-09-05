@@ -11,51 +11,52 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 
 public interface IRegistryBlock
-        extends IRegistryBase {
+    extends IRegistryBase {
 
-    default <T extends Block> Collection<T> blocks(Collection<T> collection) {
-        for (var block : collection) {
-            if (block instanceof IBlockSettings provider) {
-                this.block(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
-            }
-        }
-        return collection;
+  default <T extends Block> Collection<T> blocks(Collection<T> collection) {
+    for (var block : collection) {
+      if (block instanceof IBlockSettings provider) {
+        this.block(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
+      }
+    }
+    return collection;
+  }
+
+  default <B extends Block & IBlockSettings> B block(B provider) {
+
+    return this.block(provider, provider.getItemBlock(), provider.getRegistryKey());
+  }
+
+  default <B extends Block> B block(B block, String name) {
+
+    return this.block(block, null, name);
+  }
+
+  /**
+   * Registers a block to the game. This will also set the unlocalized name, and creative tab if tab has been set.
+   *
+   * @param block     The block to register.
+   * @param itemBlock The ItemBlock for the block.
+   * @param name      The name to register the block with.
+   */
+  default <B extends Block, I extends Item> B block(B block, @Nullable I itemBlock, String name) {
+
+    block.setRegistryName(this.getModID(), name);
+    block.setTranslationKey(
+        this.getModID() + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
+    if (this.getTab() != null) {
+      block.setCreativeTab(this.getTab());
     }
 
-    default <B extends Block & IBlockSettings> B block(B provider) {
+    this.getRegistry().getBlocks().add(block);
 
-        return this.block(provider, provider.getItemBlock(), provider.getRegistryKey());
+    if (itemBlock != null) {
+      itemBlock.setRegistryName(this.getModID(), name);
+
+      this.getRegistry().getItems().add(itemBlock);
     }
 
-    default <B extends Block> B block(B block, String name) {
-
-        return this.block(block, null, name);
-    }
-
-    /**
-     * Registers a block to the game. This will also set the unlocalized name, and creative tab if tab has been set.
-     *
-     * @param block     The block to register.
-     * @param itemBlock The ItemBlock for the block.
-     * @param name      The name to register the block with.
-     */
-    default <B extends Block, I extends Item> B block(B block, @Nullable I itemBlock, String name) {
-
-        block.setRegistryName(this.getModID(), name);
-        block.setTranslationKey(this.getModID() + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
-        if (this.getTab() != null) {
-            block.setCreativeTab(this.getTab());
-        }
-
-        this.getRegistry().getBlocks().add(block);
-
-        if (itemBlock != null) {
-            itemBlock.setRegistryName(this.getModID(), name);
-
-            this.getRegistry().getItems().add(itemBlock);
-        }
-
-        return block;
-    }
+    return block;
+  }
 
 }

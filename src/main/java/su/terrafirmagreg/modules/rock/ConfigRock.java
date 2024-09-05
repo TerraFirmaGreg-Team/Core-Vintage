@@ -15,55 +15,55 @@ import static su.terrafirmagreg.data.Constants.MOD_NAME;
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "rock")
 public class ConfigRock {
 
-    @Config.Name("Blocks")
-    @Config.Comment("Block settings")
+  @Config.Name("Blocks")
+  @Config.Comment("Block settings")
 
-    public static final BlocksCategory BLOCKS = new BlocksCategory();
+  public static final BlocksCategory BLOCKS = new BlocksCategory();
 
-    @Config.Name("Items")
-    @Config.Comment("Item settings")
+  @Config.Name("Items")
+  @Config.Comment("Item settings")
 
-    public static final ItemsCategory ITEMS = new ItemsCategory();
+  public static final ItemsCategory ITEMS = new ItemsCategory();
 
-    @Config.Name("Misc")
-    @Config.Comment("Miscellaneous")
+  @Config.Name("Misc")
+  @Config.Comment("Miscellaneous")
 
-    public static final MiscCategory MISC = new MiscCategory();
+  public static final MiscCategory MISC = new MiscCategory();
 
-    static {
-        ConfigAnytime.register(ConfigRock.class);
+  static {
+    ConfigAnytime.register(ConfigRock.class);
+  }
+
+  public static final class BlocksCategory {
+
+    @Config.Comment("Enable the creation of stone anvils.")
+
+    public boolean enableStoneAnvil = true;
+
+  }
+
+  public static final class ItemsCategory {
+
+    @Config.Comment("Enable the creation of stone anvils.")
+
+    public boolean enableStoneAnvil = true;
+
+  }
+
+  public static final class MiscCategory {
+
+  }
+
+  @Mod.EventBusSubscriber(modid = MOD_ID)
+  public static class EventHandler {
+
+    @SubscribeEvent
+    public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+      if (event.getModID().equals(MOD_ID)) {
+        ModuleRock.LOGGER.warn("Config changed");
+        ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
+      }
     }
-
-    public static final class BlocksCategory {
-
-        @Config.Comment("Enable the creation of stone anvils.")
-
-        public boolean enableStoneAnvil = true;
-
-    }
-
-    public static final class ItemsCategory {
-
-        @Config.Comment("Enable the creation of stone anvils.")
-
-        public boolean enableStoneAnvil = true;
-
-    }
-
-    public static final class MiscCategory {
-
-    }
-
-    @Mod.EventBusSubscriber(modid = MOD_ID)
-    public static class EventHandler {
-
-        @SubscribeEvent
-        public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
-            if (event.getModID().equals(MOD_ID)) {
-                ModuleRock.LOGGER.warn("Config changed");
-                ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
-            }
-        }
-    }
+  }
 
 }

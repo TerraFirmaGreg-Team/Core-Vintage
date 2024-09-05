@@ -29,76 +29,80 @@ import static su.terrafirmagreg.api.base.biome.BaseBiomeProvider.WORLD_GEN_BIOME
 @Getter
 public abstract class BaseBiome extends Biome implements IBiomeSettings {
 
-    public final Settings settings;
+  public final Settings settings;
 
-    public BaseBiome(Settings settings) {
+  public BaseBiome(Settings settings) {
 
-        super(settings.build());
+    super(settings.build());
 
-        this.settings = settings;
+    this.settings = settings;
 
-        // throw out the first decorator, because it's missing the lilypad & plant settings
-        this.decorator = createBiomeDecorator();
-        this.spawnableCreatureList.clear();
+    // throw out the first decorator, because it's missing the lilypad & plant settings
+    this.decorator = createBiomeDecorator();
+    this.spawnableCreatureList.clear();
 
-        if (settings.isWorldGen()) WORLD_GEN_BIOMES.add(this);
+    if (settings.isWorldGen()) {
+      WORLD_GEN_BIOMES.add(this);
+    }
 
-        // Add creatures to respawn listgetBiomeWeight
-        for (String input : ConfigWorld.MISC.respawnableCreatures) {
-            String[] split = input.split(" ");
-            if (split.length == 4) {
-                ResourceLocation key = new ResourceLocation(split[0]);
-                int rarity;
-                int min;
-                int max;
-                try {
-                    rarity = Integer.parseInt(split[1]);
-                    min = Integer.parseInt(split[2]);
-                    max = Integer.parseInt(split[3]);
-                } catch (NumberFormatException e) {
-                    continue;
-                }
-                EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
-                if (entityEntry != null) {
-                    Class<? extends Entity> entityClass = entityEntry.getEntityClass();
-                    if (EntityLiving.class.isAssignableFrom(entityClass)) {
-                        //noinspection unchecked
-                        spawnableCreatureList.add(new Biome.SpawnListEntry((Class<? extends EntityLiving>) entityClass, rarity, min, max));
-                    }
-                }
-            }
+    // Add creatures to respawn listgetBiomeWeight
+    for (String input : ConfigWorld.MISC.respawnableCreatures) {
+      String[] split = input.split(" ");
+      if (split.length == 4) {
+        ResourceLocation key = new ResourceLocation(split[0]);
+        int rarity;
+        int min;
+        int max;
+        try {
+          rarity = Integer.parseInt(split[1]);
+          min = Integer.parseInt(split[2]);
+          max = Integer.parseInt(split[3]);
+        } catch (NumberFormatException e) {
+          continue;
         }
-
-        // todo: Experimental Livestock respawning
-        for (Class<? extends EntityLiving> entityClass : EntitySpawnerWorldData.LIVESTOCK.keySet()) {
-            spawnableCreatureList.add(new Biome.SpawnListEntry(entityClass, 300, 1, 1));
+        EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
+        if (entityEntry != null) {
+          Class<? extends Entity> entityClass = entityEntry.getEntityClass();
+          if (EntityLiving.class.isAssignableFrom(entityClass)) {
+            //noinspection unchecked
+            spawnableCreatureList.add(
+                new Biome.SpawnListEntry((Class<? extends EntityLiving>) entityClass, rarity, min,
+                    max));
+          }
         }
+      }
     }
 
-    public abstract int getBiomeWeight();
-
-    public abstract BiomeDictionary.Type[] getTypes();
-
-    public BaseBiome mutate(Random rand) {
-
-        return this;
+    // todo: Experimental Livestock respawning
+    for (Class<? extends EntityLiving> entityClass : EntitySpawnerWorldData.LIVESTOCK.keySet()) {
+      spawnableCreatureList.add(new Biome.SpawnListEntry(entityClass, 300, 1, 1));
     }
+  }
 
-    @Override
-    public float getTemperature(@NotNull BlockPos pos) {
-        // Vanilla spec: 0.15 = snow threshold, range = [-1, 1] for overworld temps.
-        return MathHelper.clamp(0.15f + Climate.getDailyTemp(pos) / 35, -1, 1);
-    }
+  public abstract int getBiomeWeight();
 
-    @Override
-    public boolean ignorePlayerSpawnSuitability() {
+  public abstract BiomeDictionary.Type[] getTypes();
 
-        return getSettings().isSpawnBiome();
-    }
+  public BaseBiome mutate(Random rand) {
 
-    @Override
-    public BiomeDecorator createBiomeDecorator() {
-        return new BaseBiomeDecorator(0, 0);
-    }
+    return this;
+  }
+
+  @Override
+  public float getTemperature(@NotNull BlockPos pos) {
+    // Vanilla spec: 0.15 = snow threshold, range = [-1, 1] for overworld temps.
+    return MathHelper.clamp(0.15f + Climate.getDailyTemp(pos) / 35, -1, 1);
+  }
+
+  @Override
+  public boolean ignorePlayerSpawnSuitability() {
+
+    return getSettings().isSpawnBiome();
+  }
+
+  @Override
+  public BiomeDecorator createBiomeDecorator() {
+    return new BaseBiomeDecorator(0, 0);
+  }
 
 }

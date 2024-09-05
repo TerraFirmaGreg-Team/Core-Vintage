@@ -2,11 +2,11 @@ package su.terrafirmagreg.modules.core.capabilities.sharpness;
 
 public interface ICapabilitySharpness {
 
-    int getCharges();
+  int getCharges();
 
-    void setCharges(int charges);
+  void setCharges(int charges);
 
-    void addCharge();
+  void addCharge();
 
-    void removeCharge();
+  void removeCharge();
 }

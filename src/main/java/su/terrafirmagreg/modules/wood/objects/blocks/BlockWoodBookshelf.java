@@ -20,29 +20,29 @@ import lombok.Getter;
 @Getter
 public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
 
-    protected final Settings settings;
-    private final WoodBlockVariant variant;
-    private final WoodType type;
+  protected final Settings settings;
+  private final WoodBlockVariant variant;
+  private final WoodType type;
 
-    public BlockWoodBookshelf(WoodBlockVariant variant, WoodType type) {
-        this.variant = variant;
-        this.type = type;
-        this.settings = Settings.of(Material.WOOD)
-                .hardness(2.0F)
-                .resistance(5.0F)
-                .sound(SoundType.WOOD)
-                .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
-                .oreDict(variant)
-                .oreDict(variant, type);
+  public BlockWoodBookshelf(WoodBlockVariant variant, WoodType type) {
+    this.variant = variant;
+    this.type = type;
+    this.settings = Settings.of(Material.WOOD)
+        .hardness(2.0F)
+        .resistance(5.0F)
+        .sound(SoundType.WOOD)
+        .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
+        .oreDict(variant)
+        .oreDict(variant, type);
 
-        setHarvestLevel(ToolClasses.AXE, 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
 
-        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
-    }
+    BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
+  }
 
-    @Override
-    public float getEnchantPowerBonus(World world, BlockPos pos) {
-        return 1.0F;
-    }
+  @Override
+  public float getEnchantPowerBonus(World world, BlockPos pos) {
+    return 1.0F;
+  }
 
 }

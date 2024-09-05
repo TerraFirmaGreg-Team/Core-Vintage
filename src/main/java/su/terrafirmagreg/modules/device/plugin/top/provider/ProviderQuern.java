@@ -26,39 +26,43 @@ import static su.terrafirmagreg.modules.device.objects.tiles.TileQuern.SLOT_HAND
 
 public class ProviderQuern implements IProbeInfoProvider {
 
-    @Override
-    public String getID() {
-        return ModUtils.localize("top", "device.quern");
-    }
+  @Override
+  public String getID() {
+    return ModUtils.localize("top", "device.quern");
+  }
 
-    @Override
-    public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
-        Block block = state.getBlock();
-        BlockPos pos = hitData.getPos();
+  @Override
+  public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
+      IBlockState state, IProbeHitData hitData) {
+    Block block = state.getBlock();
+    BlockPos pos = hitData.getPos();
 
-        if (block instanceof BlockQuern) {
-            var tile = TileUtils.getTile(world, pos, TileQuern.class);
-            if (tile == null) return;
+    if (block instanceof BlockQuern) {
+      var tile = TileUtils.getTile(world, pos, TileQuern.class);
+      if (tile == null) {
+        return;
+      }
 
-            IItemHandler handler;
-            ItemStack handstone;
+      IItemHandler handler;
+      ItemStack handstone;
 
-            if (tile.hasHandstone()) {
+      if (tile.hasHandstone()) {
 
-                handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                if (handler != null) {
-                    handstone = handler.getStackInSlot(SLOT_HANDSTONE);
+        handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (handler != null) {
+          handstone = handler.getStackInSlot(SLOT_HANDSTONE);
 
-                    if (!handstone.isEmpty()) {
-                        info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                                .text(new TextComponentTranslation(ModUtils.localize("top", "device.quern.handstone.durability"),
-                                        handstone.getItemDamage(),
-                                        handstone.getMaxDamage()).getFormattedText());
-                    }
-                }
-            }
-
+          if (!handstone.isEmpty()) {
+            info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+                .text(new TextComponentTranslation(
+                    ModUtils.localize("top", "device.quern.handstone.durability"),
+                    handstone.getItemDamage(),
+                    handstone.getMaxDamage()).getFormattedText());
+          }
         }
+      }
+
     }
+  }
 
 }

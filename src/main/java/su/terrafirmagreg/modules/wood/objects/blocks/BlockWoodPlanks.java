@@ -9,15 +9,15 @@ import gregtech.api.items.toolitem.ToolClasses;
 
 public class BlockWoodPlanks extends BlockWood {
 
-    public BlockWoodPlanks(WoodBlockVariant variant, WoodType type) {
-        super(variant, type);
+  public BlockWoodPlanks(WoodBlockVariant variant, WoodType type) {
+    super(variant, type);
 
-        getSettings()
-                .hardness(2.0F)
-                .resistance(5.0F);
+    getSettings()
+        .hardness(2.0F)
+        .resistance(5.0F);
 
-        setHarvestLevel(ToolClasses.AXE, 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
 
-        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
-    }
+    BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
+  }
 }

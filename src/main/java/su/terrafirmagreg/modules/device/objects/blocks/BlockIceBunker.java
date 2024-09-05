@@ -25,53 +25,55 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("deprecation")
 public class BlockIceBunker extends BaseBlockContainer implements IProviderTile {
 
-    public BlockIceBunker() {
-        super(Settings.of(Material.WOOD));
+  public BlockIceBunker() {
+    super(Settings.of(Material.WOOD));
 
-        getSettings()
-                .registryKey("device/ice_bunker")
-                .hardness(2F);
+    getSettings()
+        .registryKey("device/ice_bunker")
+        .hardness(2F);
+  }
+
+  @Override
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
+      EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
+      float hitZ) {
+    if (!worldIn.isRemote) {
+      GuiHandler.openGui(worldIn, pos, player);
+    }
+    return true;
+  }
+
+  @Override
+  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    var tile = TileUtils.getTile(worldIn, pos, TileIceBunker.class);
+    if (tile != null) {
+      InventoryHelper.dropInventoryItems(worldIn, pos, tile);
+    }
+    super.breakBlock(worldIn, pos, state);
+  }
+
+  @Override
+  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
+      EntityLivingBase placer, ItemStack stack) {
+    if (stack.hasDisplayName()) {
+      var tile = TileUtils.getTile(worldIn, pos, TileIceBunker.class);
+      //tile.setCustomName(stack.getDisplayName());
     }
 
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
-                                    float hitZ) {
-        if (!worldIn.isRemote) {
-            GuiHandler.openGui(worldIn, pos, player);
-        }
-        return true;
-    }
+  }
 
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TileIceBunker.class);
-        if (tile != null) {
-            InventoryHelper.dropInventoryItems(worldIn, pos, tile);
-        }
-        super.breakBlock(worldIn, pos, state);
-    }
+  @Override
+  public @Nullable TileEntity createNewTileEntity(World world, int i) {
+    return new TileIceBunker();
+  }
 
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        if (stack.hasDisplayName()) {
-            var tile = TileUtils.getTile(worldIn, pos, TileIceBunker.class);
-            //tile.setCustomName(stack.getDisplayName());
-        }
+  @Override
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.MODEL;
+  }
 
-    }
-
-    @Override
-    public @Nullable TileEntity createNewTileEntity(World world, int i) {
-        return new TileIceBunker();
-    }
-
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
-    }
-
-    @Override
-    public Class<? extends TileEntity> getTileEntityClass() {
-        return TileIceBunker.class;
-    }
+  @Override
+  public Class<? extends TileEntity> getTileEntityClass() {
+    return TileIceBunker.class;
+  }
 }

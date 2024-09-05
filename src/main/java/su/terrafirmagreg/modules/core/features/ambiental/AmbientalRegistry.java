@@ -16,42 +16,43 @@ import java.util.Iterator;
 
 public class AmbientalRegistry<Type extends IAmbientalBaseProvider> implements Iterable<Type> {
 
-    public static final AmbientalRegistry<IAmbientalItemProvider> ITEMS = new AmbientalRegistry<>();
-    public static final AmbientalRegistry<IAmbientalBlockProvider> BLOCKS = new AmbientalRegistry<>();
-    public static final AmbientalRegistry<IAmbientalTileProvider> TILE_ENTITIES = new AmbientalRegistry<>();
-    public static final AmbientalRegistry<IAmbientalEnvironmentalProvider> ENVIRONMENT = new AmbientalRegistry<>();
-    public static final AmbientalRegistry<IAmbientalEquipmentProvider> EQUIPMENT = new AmbientalRegistry<>();
+  public static final AmbientalRegistry<IAmbientalItemProvider> ITEMS = new AmbientalRegistry<>();
+  public static final AmbientalRegistry<IAmbientalBlockProvider> BLOCKS = new AmbientalRegistry<>();
+  public static final AmbientalRegistry<IAmbientalTileProvider> TILE_ENTITIES = new AmbientalRegistry<>();
+  public static final AmbientalRegistry<IAmbientalEnvironmentalProvider> ENVIRONMENT = new AmbientalRegistry<>();
+  public static final AmbientalRegistry<IAmbientalEquipmentProvider> EQUIPMENT = new AmbientalRegistry<>();
 
-    private final ArrayList<Type> list = new ArrayList<>();
-    private final HashMap<String, Type> map = new HashMap<>();
+  private final ArrayList<Type> list = new ArrayList<>();
+  private final HashMap<String, Type> map = new HashMap<>();
 
-    private AmbientalRegistry() {}
+  private AmbientalRegistry() {
+  }
 
-    public void register(Type type) {
-        list.add(type);
-    }
+  public void register(Type type) {
+    list.add(type);
+  }
 
-    public boolean has(Type type) {
-        return map.containsValue(type) || list.contains(type);
-    }
+  public boolean has(Type type) {
+    return map.containsValue(type) || list.contains(type);
+  }
 
-    @Override
-    public @NotNull Iterator<Type> iterator() {
-        return new Iterator<>() {
+  @Override
+  public @NotNull Iterator<Type> iterator() {
+    return new Iterator<>() {
 
-            private final Iterator<Type> listIterator = list.iterator();
+      private final Iterator<Type> listIterator = list.iterator();
 
-            @Override
-            public boolean hasNext() {
-                return listIterator.hasNext();
-            }
+      @Override
+      public boolean hasNext() {
+        return listIterator.hasNext();
+      }
 
-            @Override
-            public Type next() {
-                return listIterator.next();
-            }
+      @Override
+      public Type next() {
+        return listIterator.next();
+      }
 
-        };
-    }
+    };
+  }
 
 }

@@ -16,69 +16,72 @@ import java.util.EnumMap;
 
 public class ProviderSize implements ICapabilitySize, ICapabilityProvider {
 
-    private static final EnumMap<Size, EnumMap<Weight, ProviderSize[]>> CACHE = new EnumMap<>(Size.class);
-    private final Size size;
-    private final Weight weight;
-    private final boolean canStack;
+  private static final EnumMap<Size, EnumMap<Weight, ProviderSize[]>> CACHE = new EnumMap<>(
+      Size.class);
+  private final Size size;
+  private final Weight weight;
+  private final boolean canStack;
 
-    public ProviderSize() {
+  public ProviderSize() {
 
-        this(Size.SMALL, Weight.LIGHT, true);
+    this(Size.SMALL, Weight.LIGHT, true);
+  }
+
+  public ProviderSize(Size size, Weight weight, boolean canStack) {
+
+    this.size = size;
+    this.weight = weight;
+    this.canStack = canStack;
+  }
+
+  public static ProviderSize getDefault() {
+    return get(Size.SMALL, Weight.LIGHT,
+        true); // Default to fitting in small vessels and stacksize = 32
+  }
+
+  public static ProviderSize get(Size size, Weight weight, boolean canStack) {
+    EnumMap<Weight, ProviderSize[]> nested = CACHE.computeIfAbsent(size,
+        k -> new EnumMap<>(Weight.class));
+    ProviderSize[] handlers = nested.computeIfAbsent(weight, k -> new ProviderSize[2]);
+    if (handlers[canStack ? 1 : 0] == null) {
+      handlers[canStack ? 1 : 0] = new ProviderSize(size, weight, canStack);
     }
+    return handlers[canStack ? 1 : 0];
+  }
 
-    public static ProviderSize getDefault() {
-        return get(Size.SMALL, Weight.LIGHT, true); // Default to fitting in small vessels and stacksize = 32
-    }
+  @Override
+  public @NotNull Size getSize(@NotNull ItemStack stack) {
+    return this.size;
+  }
 
-    public ProviderSize(Size size, Weight weight, boolean canStack) {
+  @Override
+  public @NotNull Weight getWeight(@NotNull ItemStack stack) {
+    return this.weight;
+  }
 
-        this.size = size;
-        this.weight = weight;
-        this.canStack = canStack;
-    }
+  @Override
+  public boolean canStack(@NotNull ItemStack stack) {
+    return canStack;
+  }
 
-    public static ProviderSize get(Size size, Weight weight, boolean canStack) {
-        EnumMap<Weight, ProviderSize[]> nested = CACHE.computeIfAbsent(size, k -> new EnumMap<>(Weight.class));
-        ProviderSize[] handlers = nested.computeIfAbsent(weight, k -> new ProviderSize[2]);
-        if (handlers[canStack ? 1 : 0] == null) {
-            handlers[canStack ? 1 : 0] = new ProviderSize(size, weight, canStack);
-        }
-        return handlers[canStack ? 1 : 0];
-    }
+  /**
+   * Should be called from {@link net.minecraft.item.Item#getItemStackLimit(ItemStack)}
+   */
+  @Override
+  public int getStackSize(@NotNull ItemStack stack) {
+    return this.canStack ? this.weight.stackSize : 1;
+  }
 
-    @Override
-    public @NotNull Size getSize(@NotNull ItemStack stack) {
-        return this.size;
-    }
+  @Override
+  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+    return capability == CapabilitySize.CAPABILITY;
+  }
 
-    @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack stack) {
-        return this.weight;
-    }
-
-    @Override
-    public boolean canStack(@NotNull ItemStack stack) {
-        return canStack;
-    }
-
-    /**
-     * Should be called from {@link net.minecraft.item.Item#getItemStackLimit(ItemStack)}
-     */
-    @Override
-    public int getStackSize(@NotNull ItemStack stack) {
-        return this.canStack ? this.weight.stackSize : 1;
-    }
-
-    @Override
-    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilitySize.CAPABILITY;
-    }
-
-    @Nullable
-    @Override
-    @SuppressWarnings("unchecked")
-    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
-        return hasCapability(capability, facing) ? (T) this : null;
-    }
+  @Nullable
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+    return hasCapability(capability, facing) ? (T) this : null;
+  }
 
 }

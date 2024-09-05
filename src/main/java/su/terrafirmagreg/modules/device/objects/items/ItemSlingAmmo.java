@@ -8,11 +8,11 @@ import lombok.Getter;
 @Getter
 public class ItemSlingAmmo extends BaseItem {
 
-    private final int type;
+  private final int type;
 
-    public ItemSlingAmmo(int type, String name) {
-        this.type = type;
+  public ItemSlingAmmo(int type, String name) {
+    this.type = type;
 
-        getSettings().registryKey("device/sling/ammo/" + name);
-    }
+    getSettings().registryKey("device/sling/ammo/" + name);
+  }
 }

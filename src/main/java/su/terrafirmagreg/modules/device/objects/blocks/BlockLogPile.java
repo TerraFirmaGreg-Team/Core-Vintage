@@ -65,7 +65,7 @@ public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
 
     setTickRandomly(true);
     setHarvestLevel(ToolClasses.AXE, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(AXIS, EnumFacing.Axis.Z)
         .withProperty(LIT, false));
   }

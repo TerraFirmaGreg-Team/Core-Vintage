@@ -40,9 +40,11 @@ public abstract class ModuleBase implements IModule {
 
   @Getter
   protected static IPacketService packetService;
+
   private final String name;
   @NotNull
   private final String modID;
+
   protected RegistryManager registryManager;
   protected Registry registry;
   protected IPacketRegistry packetRegistry;

@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-import su.terrafirmagreg.modules.core.objects.entity.EntitySeatOn;
+import su.terrafirmagreg.modules.core.object.entity.EntitySeatOn;
 
 @UtilityClass
 public final class SitUtils {
@@ -30,7 +30,7 @@ public final class SitUtils {
    * @param yOffset  the y offset of the top facing
    */
   public static void sitOnBlock(@NotNull World world, @NotNull BlockPos pos,
-      @NotNull EntityLiving creature, double yOffset) {
+          @NotNull EntityLiving creature, double yOffset) {
     if (!world.isRemote && !world.getBlockState(pos).getMaterial().isReplaceable()) {
       EntitySeatOn seat = new EntitySeatOn(world, pos, yOffset);
       world.spawnEntity(seat);
@@ -49,7 +49,7 @@ public final class SitUtils {
   public static Entity getSittingEntity(@NotNull World world, @NotNull BlockPos pos) {
     if (!world.isRemote) {
       List<EntitySeatOn> seats = world.getEntitiesWithinAABB(EntitySeatOn.class,
-          new AxisAlignedBB(pos).grow(1D));
+              new AxisAlignedBB(pos).grow(1D));
       for (EntitySeatOn seat : seats) {
         if (pos.equals(seat.getPos())) {
           return seat.getSittingEntity();

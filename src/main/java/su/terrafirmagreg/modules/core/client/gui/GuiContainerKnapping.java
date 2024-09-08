@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.core.client.gui;
 import su.terrafirmagreg.api.base.gui.BaseGuiContainer;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.client.button.GuiButtonKnapping;
-import su.terrafirmagreg.modules.core.objects.container.ContainerBaseKnapping;
+import su.terrafirmagreg.modules.core.object.container.ContainerBaseKnapping;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 
 
@@ -21,16 +20,16 @@ import net.dries007.tfc.client.TFCGuiHandler;
 
 import org.jetbrains.annotations.NotNull;
 
+import static net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent;
+
 public abstract class GuiContainerKnapping extends BaseGuiContainer {
 
-  private static final ResourceLocation BACKGROUND = ModUtils.resource(
-      "textures/gui/container/knapping.png");
+  private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/knapping.png");
 
-  private final ResourceLocation buttonTexture;
-  private final KnappingType type;
+  protected final ResourceLocation buttonTexture;
+  protected final KnappingType type;
 
-  public GuiContainerKnapping(Container container, InventoryPlayer inventoryPlayer,
-      KnappingType type, ResourceLocation buttonTexture) {
+  public GuiContainerKnapping(Container container, InventoryPlayer inventoryPlayer, KnappingType type, ResourceLocation buttonTexture) {
     super(container, inventoryPlayer, BACKGROUND);
     this.buttonTexture = buttonTexture;
     this.type = type;
@@ -55,12 +54,11 @@ public abstract class GuiContainerKnapping extends BaseGuiContainer {
 
   @Override
   protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton,
-      long timeSinceLastClick) {
+          long timeSinceLastClick) {
     if (clickedMouseButton == 0) {
       for (GuiButton button : this.buttonList) {
         if (button instanceof GuiButtonKnapping && button.mousePressed(mc, mouseX, mouseY)) {
-          GuiScreenEvent.ActionPerformedEvent.Pre event = new GuiScreenEvent.ActionPerformedEvent.Pre(
-              this, button, buttonList);
+          ActionPerformedEvent.Pre event = new ActionPerformedEvent.Pre(this, button, buttonList);
           if (MinecraftForge.EVENT_BUS.post(event)) {
             break;
           } else if (selectedButton == event.getButton()) {
@@ -72,7 +70,7 @@ public abstract class GuiContainerKnapping extends BaseGuiContainer {
           actionPerformed(event.getButton());
 
           MinecraftForge.EVENT_BUS.post(
-              new GuiScreenEvent.ActionPerformedEvent.Post(this, event.getButton(), buttonList));
+                  new ActionPerformedEvent.Post(this, event.getButton(), buttonList));
         }
       }
     }
@@ -81,8 +79,7 @@ public abstract class GuiContainerKnapping extends BaseGuiContainer {
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     // Check if the container has been updated
-    if (inventorySlots instanceof ContainerBaseKnapping containerBaseKnapping
-        && containerBaseKnapping.requiresReset) {
+    if (inventorySlots instanceof ContainerBaseKnapping containerBaseKnapping && containerBaseKnapping.requiresReset) {
       for (GuiButton button : buttonList) {
         if (button instanceof GuiButtonKnapping) {
           button.visible = containerBaseKnapping.getSlotState(button.id);
@@ -94,8 +91,9 @@ public abstract class GuiContainerKnapping extends BaseGuiContainer {
     if (type == KnappingTypes.CLAY || type == KnappingTypes.FIRE_CLAY) {
       GlStateManager.color(1, 1, 1, 1);
       mc.getTextureManager()
-          .bindTexture(type == KnappingTypes.CLAY ? TFCGuiHandler.CLAY_DISABLED_TEXTURE
-              : TFCGuiHandler.FIRE_CLAY_DISABLED_TEXTURE);
+              .bindTexture(type == KnappingTypes.CLAY
+                      ? TFCGuiHandler.CLAY_DISABLED_TEXTURE
+                      : TFCGuiHandler.FIRE_CLAY_DISABLED_TEXTURE);
       for (GuiButton button : buttonList) {
         if (!button.visible) {
           Gui.drawModalRectWithCustomSizedTexture(button.x, button.y, 0, 0, 16, 16, 16, 16);
@@ -106,8 +104,8 @@ public abstract class GuiContainerKnapping extends BaseGuiContainer {
 
   @Override
   protected void actionPerformed(@NotNull GuiButton button) {
-    if (button instanceof GuiButtonKnapping) {
-      ((GuiButtonKnapping) button).onClick();
+    if (button instanceof GuiButtonKnapping guiButtonKnapping) {
+      guiButtonKnapping.onClick();
       button.playPressSound(mc.getSoundHandler());
       // Set the client-side matrix
       if (inventorySlots instanceof ContainerBaseKnapping containerBaseKnapping) {

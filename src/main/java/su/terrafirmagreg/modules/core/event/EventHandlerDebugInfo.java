@@ -32,7 +32,7 @@ public class EventHandlerDebugInfo {
 
   @SubscribeEvent()
   @SideOnly(Side.CLIENT)
-  public void on(RenderGameOverlayEvent.Text event) {
+  public void onRenderGameOverlayText(RenderGameOverlayEvent.Text event) {
 
     if (!GameUtils.getGameSettings().showDebugInfo) {
       return;
@@ -50,7 +50,7 @@ public class EventHandlerDebugInfo {
 
     var data = CapabilityChunkData.get(chunk);
 
-    if (data == null || !data.isInitialized()) {
+    if (!data.isInitialized()) {
       if (mc.world.provider.getDimension() == 0) {
         list.add(String.format("%sInvalid Chunk Data (?)", RED));
       }
@@ -68,8 +68,7 @@ public class EventHandlerDebugInfo {
 
   private BlockPos getPlayerBlockPos(Minecraft mc) {
     //noinspection ConstantConditions
-    return new BlockPos(mc.getRenderViewEntity().posX,
-        mc.getRenderViewEntity().getEntityBoundingBox().minY, mc.getRenderViewEntity().posZ);
+    return new BlockPos(mc.getRenderViewEntity().posX, mc.getRenderViewEntity().getEntityBoundingBox().minY, mc.getRenderViewEntity().posZ);
   }
 
   private void addChunkData(List<String> list, ICapabilityChunkData data, BlockPos blockPos) {
@@ -79,21 +78,17 @@ public class EventHandlerDebugInfo {
 
     var regionTemp = String.format("%s%.1f" + DEGREE + "C", AQUA, data.getRegionalTemp());
     var averageTemp = String.format("%s%.1f" + DEGREE + "C", AQUA, data.getAverageTemp());
+
     var minTemp = String.format("%s%.1f" + DEGREE + "C", AQUA,
-        ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JANUARY.getTemperatureModifier(),
-            blockPos.getZ()));
+        ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JANUARY.getTemperatureModifier(), blockPos.getZ()));
     var maxTemp = String.format("%s%.1f" + DEGREE + "C", AQUA,
-        ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JULY.getTemperatureModifier(),
-            blockPos.getZ()));
+        ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JULY.getTemperatureModifier(), blockPos.getZ()));
 
     var monthlyTemp = String.format("%s%.1f", AQUA, Climate.getMonthlyTemp(blockPos));
     var actualTemp = String.format("%s%.1f", AQUA, Climate.getActualTemp(blockPos));
 
-    list.add(String.format("%sRegion: %s %sAvg: %s %sMin: %s %sMax: %s", YELLOW, regionTemp, YELLOW,
-        averageTemp, YELLOW, minTemp, YELLOW,
-        maxTemp));
-    list.add(String.format("%sTemperature: %s" + DEGREE + "C %sDaily: %s" + DEGREE + "C", YELLOW,
-        monthlyTemp, YELLOW, actualTemp));
+    list.add(String.format("%sRegion: %s %sAvg: %s %sMin: %s %sMax: %s", YELLOW, regionTemp, YELLOW, averageTemp, YELLOW, minTemp, YELLOW, maxTemp));
+    list.add(String.format("%sTemperature: %s" + DEGREE + "C %sDaily: %s" + DEGREE + "C", YELLOW, monthlyTemp, YELLOW, actualTemp));
     list.add(String.format("%sRainfall: %s%.1f", YELLOW, AQUA, data.getRainfall()));
     list.add(String.format("%sSea level offset: %s%s", YELLOW, AQUA, data.getSeaLevelOffset(x, z)));
   }
@@ -119,24 +114,17 @@ public class EventHandlerDebugInfo {
 
   private void addTimeData(List<String> list) {
     list.add(I18n.format("tfc.tooltip.date", Calendar.CALENDAR_TIME.getTimeAndDate()));
-    list.add(I18n.format("tfc.tooltip.debug_times", Calendar.PLAYER_TIME.getTicks(),
-        Calendar.CALENDAR_TIME.getTicks()));
+    list.add(I18n.format("tfc.tooltip.debug_times", Calendar.PLAYER_TIME.getTicks(), Calendar.CALENDAR_TIME.getTicks()));
   }
 
   private void addRegisteredIdsData(List<String> list) {
     list.add("");
-    list.add(String.format("%sBiome IDs Registered: %s%s", YELLOW, AQUA,
-        ForgeRegistries.BIOMES.getKeys().size()));
-    list.add(String.format("%sBlock IDs Registered: %s%s", YELLOW, AQUA,
-        ForgeRegistries.BLOCKS.getKeys().size()));
-    list.add(String.format("%sItem IDs Registered: %s%s", YELLOW, AQUA,
-        ForgeRegistries.ITEMS.getKeys().size()));
-    list.add(String.format("%sPotion IDs Registered: %s%s", YELLOW, AQUA,
-        ForgeRegistries.POTIONS.getKeys().size()));
-    list.add(String.format("%sEnchantment IDs Registered: %s%s", YELLOW, AQUA,
-        ForgeRegistries.ENCHANTMENTS.getKeys().size()));
-    list.add(String.format("%sEntity IDs Registered: %s%s", YELLOW, AQUA,
-        ForgeRegistries.ENTITIES.getKeys().size()));
+    list.add(String.format("%sBiome IDs Registered: %s%s", YELLOW, AQUA, ForgeRegistries.BIOMES.getKeys().size()));
+    list.add(String.format("%sBlock IDs Registered: %s%s", YELLOW, AQUA, ForgeRegistries.BLOCKS.getKeys().size()));
+    list.add(String.format("%sItem IDs Registered: %s%s", YELLOW, AQUA, ForgeRegistries.ITEMS.getKeys().size()));
+    list.add(String.format("%sPotion IDs Registered: %s%s", YELLOW, AQUA, ForgeRegistries.POTIONS.getKeys().size()));
+    list.add(String.format("%sEnchantment IDs Registered: %s%s", YELLOW, AQUA, ForgeRegistries.ENCHANTMENTS.getKeys().size()));
+    list.add(String.format("%sEntity IDs Registered: %s%s", YELLOW, AQUA, ForgeRegistries.ENTITIES.getKeys().size()));
   }
 
 }

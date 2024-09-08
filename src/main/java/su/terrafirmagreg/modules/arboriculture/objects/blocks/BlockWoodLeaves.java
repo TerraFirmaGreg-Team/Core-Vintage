@@ -80,7 +80,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     this.leavesFancy = true; // Fast / Fancy graphics works correctly
 
     setTickRandomly(true);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(LEAF_STATE, NORMAL)
         .withProperty(HARVESTABLE, false)
         .withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it

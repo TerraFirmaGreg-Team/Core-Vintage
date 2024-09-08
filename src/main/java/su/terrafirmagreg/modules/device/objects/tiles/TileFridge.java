@@ -1,10 +1,11 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.network.SCPacketFridge;
@@ -27,7 +28,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -64,7 +64,7 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
   public TileFridge() {
     super(8);
     energyContainer = new MachineEnergyStorage(TechConfig.DEVICES.fridgeEnergyCapacity,
-        TechConfig.DEVICES.fridgeEnergyCapacity, 0);
+            TechConfig.DEVICES.fridgeEnergyCapacity, 0);
   }
 
   /**
@@ -116,7 +116,7 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
   @Override
   public void setAndUpdateSlots(int slot) {
     ModuleDevice.getPacketService()
-        .sendToAllAround(new SCPacketTileEntity(this), world.provider.getDimension(), pos, 64);
+            .sendToAllAround(new SCPacketTileEntity(this), world.provider.getDimension(), pos, 64);
     super.setAndUpdateSlots(slot);
   }
 
@@ -152,8 +152,8 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
     if (facing == null || facing == this.getRotation().getOpposite()) {
       if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
         return true;
-      } else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") &&
-          capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
+      } else if (TechConfig.DEVICES.acceptGTCEEU && GameUtils.isModLoaded("gregtech") &&
+              capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
         return true;
       }
     }
@@ -174,8 +174,8 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
     if (facing == null || facing == this.getRotation().getOpposite()) {
       if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
         return (T) this.energyContainer;
-      } else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") &&
-          capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
+      } else if (TechConfig.DEVICES.acceptGTCEEU && GameUtils.isModLoaded("gregtech") &&
+              capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
         return (T) this.energyContainer.getGTCEHandler();
       }
     }
@@ -184,7 +184,7 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
 
   @Override
   public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
-    //        if (Loader.isModLoaded("ic2")) {
+    //        if (GameUtils.isModLoaded("ic2")) {
     //            ic2Unload();
     //            if (isMainBlock()) {
     //                TileFridge child = TileUtils.getTile(world, pos.down(), TileFridge.class);
@@ -204,7 +204,7 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
   @Override
   public void onChunkUnload() {
     super.onChunkUnload();
-    //        if (Loader.isModLoaded("ic2")) {
+    //        if (GameUtils.isModLoaded("ic2")) {
     //            ic2Unload();
     //        }
   }
@@ -329,7 +329,7 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
 
   @Override
   public void update() {
-    //        if (Loader.isModLoaded("ic2")) {
+    //        if (GameUtils.isModLoaded("ic2")) {
     //            ic2Load();
     //        }
     if (!isMainBlock()) {
@@ -360,13 +360,13 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
       }
       if (this.isOpen() || !energyContainer.consumeEnergy(consumption, false)) {
         efficiency -= (100.0F / (6000.0F
-            / TechConfig.DEVICES.fridgeLoseEfficiency)); //5 Minutes to 0 default
+                / TechConfig.DEVICES.fridgeLoseEfficiency)); //5 Minutes to 0 default
         if (efficiency <= 0) {
           efficiency = 0;
         }
       } else {
         efficiency += (100.0F / (36000.0F
-            / TechConfig.DEVICES.fridgeEfficiency)); //30 Minutes to 100 default
+                / TechConfig.DEVICES.fridgeEfficiency)); //30 Minutes to 100 default
         if (efficiency >= 100) {
           efficiency = 100;
         }
@@ -402,8 +402,8 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
       if (++serverUpdate % 40 == 0) {
         serverUpdate = 0;
         ModuleDevice.getPacketService()
-            .sendToAllAround(new SCPacketFridge(pos, efficiency), world.provider.getDimension(),
-                pos, 20);
+                .sendToAllAround(new SCPacketFridge(pos, efficiency), world.provider.getDimension(),
+                        pos, 20);
       }
     }
   }

@@ -120,6 +120,7 @@ public class ChunkGenClassic implements IChunkGenerator {
   private final World world;
   private final long seed;
   private final Random rand;
+
   private final NoiseGeneratorOctaves noiseGen1;
   private final NoiseGeneratorOctaves noiseGen2;
   private final NoiseGeneratorOctaves noiseGen3;
@@ -131,13 +132,16 @@ public class ChunkGenClassic implements IChunkGenerator {
   private final NoiseGeneratorPerlin noiseGen8; // Flora Density
   private final NoiseGeneratorPerlin noiseGen9; // Flora Diversity
   private final NoiseGeneratorPerlin noiseGen10; // Temperature
+
   private final GenLayerBase soilsGenLayer1;
   private final GenLayerBase rocksGenLayer1;
   private final GenLayerBase rocksGenLayer2;
   private final GenLayerBase rocksGenLayer3;
+
   private final GenLayerBase stabilityGenLayer;
   private final GenLayerBase phGenLayer;
   private final GenLayerBase drainageGenLayer;
+
   private final double[] noise1 = new double[425];
   private final double[] noise2 = new double[425];
   private final double[] noise3 = new double[425];
@@ -145,9 +149,11 @@ public class ChunkGenClassic implements IChunkGenerator {
   private final double[] noise5 = new double[425];
   private final double[] noise6 = new double[425];
   private final double[] heightMap = new double[425];
+
   private final Biome[] biomes = new Biome[324];
   private final DataLayerClassic[] stabilityLayer = new DataLayerClassic[256];
   private final DataLayerClassic[] drainageLayer = new DataLayerClassic[256];
+
   private final int[] seaLevelOffsetMap = new int[256];
   private final int[] chunkHeightMap = new int[256];
 
@@ -158,11 +164,16 @@ public class ChunkGenClassic implements IChunkGenerator {
 
   private final int seaLevel = 32;
   private final int yOffset = 112;
-  private final float rainfallSpread, floraDensitySpread, floraDiversitySpread;
+
+  private final float rainfallSpread;
+  private final float floraDensitySpread;
+  private final float floraDiversitySpread;
+
+  private int[] soilLayer1 = new int[256];
   private int[] rockLayer1 = new int[256];
   private int[] rockLayer2 = new int[256];
   private int[] rockLayer3 = new int[256];
-  private int[] soilLayer1 = new int[256];
+
   private float rainfall;
   private float averageTemp;
 
@@ -181,12 +192,9 @@ public class ChunkGenClassic implements IChunkGenerator {
     mobSpawnerNoise = new NoiseGeneratorOctaves(rand, 8);
 
     soilsGenLayer1 = GenLayerBase.initializeSoil(seed + 1, settings.rockLayerSize);
-    rocksGenLayer1 = GenLayerBase.initializeRock(seed + 1, RockCategory.Layer.TOP,
-        settings.rockLayerSize);
-    rocksGenLayer2 = GenLayerBase.initializeRock(seed + 2, RockCategory.Layer.MIDDLE,
-        settings.rockLayerSize);
-    rocksGenLayer3 = GenLayerBase.initializeRock(seed + 3, RockCategory.Layer.BOTTOM,
-        settings.rockLayerSize);
+    rocksGenLayer1 = GenLayerBase.initializeRock(seed + 1, RockCategory.Layer.TOP, settings.rockLayerSize);
+    rocksGenLayer2 = GenLayerBase.initializeRock(seed + 2, RockCategory.Layer.MIDDLE, settings.rockLayerSize);
+    rocksGenLayer3 = GenLayerBase.initializeRock(seed + 3, RockCategory.Layer.BOTTOM, settings.rockLayerSize);
 
     noiseGen7 = new NoiseGeneratorPerlin(new Random(seed + 4), 4);
     noiseGen8 = new NoiseGeneratorPerlin(new Random(seed + 5), 4);
@@ -294,10 +302,8 @@ public class ChunkGenClassic implements IChunkGenerator {
     if (chunkData == null) {
       throw new IllegalStateException("ChunkData capability is missing.");
     }
-    chunkData.setGenerationData(rockLayer1, rockLayer2, rockLayer3, soilLayer1, stabilityLayer,
-        drainageLayer, seaLevelOffsetMap, rainfall,
-        regionalFactor,
-        averageTemp, floraDensity, floraDiversity);
+    chunkData.setGenerationData(rockLayer1, rockLayer2, rockLayer3, soilLayer1, stabilityLayer, drainageLayer, seaLevelOffsetMap, rainfall,
+        regionalFactor, averageTemp, floraDensity, floraDiversity);
 
     byte[] biomeIds = chunk.getBiomeArray();
     for (int x = 0; x < 16; ++x) {

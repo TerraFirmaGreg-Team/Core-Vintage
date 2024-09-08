@@ -66,7 +66,7 @@ public class BlockOven extends BaseBlock implements IProviderTile {
         .weight(Weight.HEAVY);
 
     setTickRandomly(true);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(CURED, Boolean.FALSE)
         .withProperty(FACING, EnumFacing.NORTH)
         .withProperty(LIT, Boolean.FALSE));

@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
+import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
 
 @Getter
 public class WoodBlockVariant extends Variant<WoodBlockVariant> {
@@ -61,7 +61,7 @@ public class WoodBlockVariant extends Variant<WoodBlockVariant> {
   }
 
   public WoodBlockVariant setFactory(
-      BiFunction<WoodBlockVariant, WoodType, ? extends Block> factory) {
+          BiFunction<WoodBlockVariant, WoodType, ? extends Block> factory) {
     this.factory = factory;
     return this;
   }
@@ -81,7 +81,7 @@ public class WoodBlockVariant extends Variant<WoodBlockVariant> {
     for (var type : WoodType.getTypes()) {
       if (BlocksWood.WOOD_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
         throw new RuntimeException(
-            String.format("Duplicate registry detected: %s, %s", this, type));
+                String.format("Duplicate registry detected: %s, %s", this, type));
       }
     }
     return this;

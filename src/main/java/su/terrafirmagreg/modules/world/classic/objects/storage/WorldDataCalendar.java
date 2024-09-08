@@ -17,7 +17,7 @@ import lombok.Getter;
 
 @Getter
 public class WorldDataCalendar
-    extends WorldSavedData {
+        extends WorldSavedData {
 
   private static final String DATA_ID = ModUtils.localize("data.calendar");
 
@@ -34,8 +34,7 @@ public class WorldDataCalendar
   public static WorldDataCalendar get(@NotNull World world) {
     MapStorage mapStorage = world.getMapStorage();
     if (mapStorage != null) {
-      WorldDataCalendar data = (WorldDataCalendar) mapStorage.getOrLoadData(WorldDataCalendar.class,
-          DATA_ID);
+      var data = (WorldDataCalendar) mapStorage.getOrLoadData(WorldDataCalendar.class, DATA_ID);
       if (data == null) {
         // Unable to load data, so assign default values
         LOGGER.info("Creating default calendar world data.");

@@ -64,7 +64,7 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
 
     setTickRandomly(true);
     setHarvestLevel(ToolClasses.PICKAXE, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(LIT, false)
         .withProperty(FACING, EnumFacing.NORTH));
 

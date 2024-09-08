@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.data.Unicode;
 import su.terrafirmagreg.data.lib.MCColor;
@@ -17,7 +18,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 
-import net.dries007.tfc.client.gui.GuiContainerTE;
 import org.lwjgl.opengl.GL11;
 import pieman.caffeineaddon.ModConfig;
 
@@ -25,15 +25,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
+public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
 
   public static final ResourceLocation BACKGROUND = ModUtils.resource(
-      "textures/gui/container/freeze_dryer.png");
+          "textures/gui/container/freeze_dryer.png");
   private final String translationKey;
   private final InventoryPlayer playerInventory;
 
   public GuiFreezeDryer(Container container, InventoryPlayer playerInv, TileFreezeDryer tile,
-      IBlockState state) {
+          IBlockState state) {
     super(container, playerInv, tile, BACKGROUND);
 
     this.playerInventory = playerInv;
@@ -45,32 +45,32 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
     super.mouseClicked(mouseX, mouseY, mouseButton);
 
     if (mouseX >= guiLeft + 61 && mouseX <= guiLeft + 79 && mouseY >= guiTop + 16
-        && mouseY <= guiTop + 34) {
+            && mouseY <= guiTop + 34) {
       if (!tile.getSeal()) {
         ModuleDevice.getPacketService().sendToServer(
-            new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos().getY(), tile.getPos()
-                .getZ(), 0, true));
+                new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos().getY(), tile.getPos()
+                        .getZ(), 0, true));
         //TE.seal();
       } else {
         ModuleDevice.getPacketService().sendToServer(
-            new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos().getY(), tile.getPos()
-                .getZ(), 0, false));
+                new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos().getY(), tile.getPos()
+                        .getZ(), 0, false));
         //TE.unseal();
       }
     } else if (mouseX >= guiLeft + 141 && mouseX <= guiLeft + 159 && mouseY >= guiTop + 52
-        && mouseY <= guiTop + 70) {
+            && mouseY <= guiTop + 70) {
       if ((tile.getSeal() && tile.getPower() > 0) || tile.getPump()) {
         if (!tile.getPump()) {
           ModuleDevice.getPacketService()
-              .sendToServer(new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos()
-                  .getY(), tile.getPos()
-                  .getZ(), 1, true));
+                  .sendToServer(new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos()
+                          .getY(), tile.getPos()
+                          .getZ(), 1, true));
           //TE.startPump();
         } else {
           ModuleDevice.getPacketService()
-              .sendToServer(new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos()
-                  .getY(), tile.getPos()
-                  .getZ(), 1, false));
+                  .sendToServer(new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos()
+                          .getY(), tile.getPos()
+                          .getZ(), 1, false));
           //TE.stopPump();
         }
       }
@@ -81,13 +81,13 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
     String name = I18n.format(translationKey + ".name");
     fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6,
-        MCColor.BLACK.getRGB());
+            MCColor.BLACK.getRGB());
     this.fontRenderer.drawString(this.playerInventory.getDisplayName()
-        .getUnformattedText(), 8, this.ySize - 92, MCColor.BLACK.getRGB());
+            .getUnformattedText(), 8, this.ySize - 92, MCColor.BLACK.getRGB());
 
     if (tile.getSeal()) {
       IItemHandler handler = (this.tile).getCapability(
-          CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+              CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
       if (handler != null) {
         GL11.glDisable(2929);
 
@@ -101,20 +101,20 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
 
     List<String> infoText = new ArrayList<String>();
     if (mouseX >= guiLeft + 5 && mouseX <= guiLeft + 15 && mouseY >= guiTop + 5
-        && mouseY <= guiTop + 15) {
+            && mouseY <= guiTop + 15) {
 
       if (ModConfig.isDebugging) {
         infoText.add("---Debug---");
         infoText.add(
-            "Pump Temperature: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
+                "Pump Temperature: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
         infoText.add("Internal Pressure: " + String.format("%.2f", tile.getPressure()));
         infoText.add("External Temperature: " + String.format("%.2f", tile.getLocalTemperature())
-            + Unicode.CELSIUS);
+                + Unicode.CELSIUS);
         infoText.add("External Pressure: " + String.format("%.2f", tile.getLocalPressure()));
         infoText.add("Temperature Delta: " + String.format("%.2f",
-            (tile.getTemperature() - tile.getLocalTemperature())) + Unicode.CELSIUS);
+                (tile.getTemperature() - tile.getLocalTemperature())) + Unicode.CELSIUS);
         infoText.add("Pressure Delta: " + String.format("%.2f",
-            (tile.getPressure() - tile.getLocalPressure())));
+                (tile.getPressure() - tile.getLocalPressure())));
         infoText.add("Coolant: " + String.format("%.2f", tile.getCoolant()));
         infoText.add("Progress: " + (tile.getSealedFor() / ModConfig.sealedDuration) * 100 + "%");
         infoText.add("Sealed: " + ((tile.getSeal()) ? "Yes" : "No"));
@@ -123,8 +123,8 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
         infoText.add("Overheating Ticks: " + tile.overheatTick);
         infoText.add("Power Level: " + tile.getPower());
         infoText.add(
-            "Max Pressure: " + (ModConfig.seaLevelPressure + ModConfig.pressureChange * (256
-                - ModConfig.seaLevel)));
+                "Max Pressure: " + (ModConfig.seaLevelPressure + ModConfig.pressureChange * (256
+                        - ModConfig.seaLevel)));
         infoText.add("------------");
         infoText.add("-- Config --");
         infoText.add("------------");
@@ -140,7 +140,7 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
       } else {
         infoText.add("---Info---");
         infoText.add(
-            "Temperature: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
+                "Temperature: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
         infoText.add("Pressure: " + String.format("%.2f", tile.getPressure()));
         infoText.add("Coolant: " + String.format("%.2f", tile.getCoolant()));
         infoText.add("Progress: " + (tile.getSealedFor() / ModConfig.sealedDuration) * 100 + "%");
@@ -156,7 +156,7 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
 
     // Freeze Drier Seal
     if (mouseX >= guiLeft + 62 && mouseX <= guiLeft + 78 && mouseY >= guiTop + 17
-        && mouseY <= guiTop + 33) {
+            && mouseY <= guiTop + 33) {
 
       if (tile.getSeal()) {
         infoText.add("Unseal Chamber");
@@ -170,14 +170,14 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
 
     // Freeze Drier Snow Flake
     if ((mouseX >= guiLeft + 73 && mouseX <= guiLeft + 103 && mouseY >= guiTop + 36
-        && mouseY <= guiTop + 50)
-        || (mouseX >= guiLeft + 80 && mouseX <= guiLeft + 96 && mouseY >= guiTop + 28
-        && mouseY <= guiTop + 58)) {
+            && mouseY <= guiTop + 50)
+            || (mouseX >= guiLeft + 80 && mouseX <= guiLeft + 96 && mouseY >= guiTop + 28
+            && mouseY <= guiTop + 58)) {
 
       if (ModConfig.isDebugging) {
         infoText.add("Progress: " + String.format("%d", tile.getSealedFor()) + "%");
         infoText.add(
-            "Ticks Vacuum Sealed: " + String.format("%.2f", tile.getSealedTicks()) + " ticks");
+                "Ticks Vacuum Sealed: " + String.format("%.2f", tile.getSealedTicks()) + " ticks");
       } else {
         infoText.add("Progress: " + String.format("%d", tile.getSealedFor()) + "%");
       }
@@ -188,7 +188,7 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
 
     // Seal
     if (mouseX >= guiLeft + 125 && mouseX <= guiLeft + 129 && mouseY >= guiTop + 18
-        && mouseY <= guiTop + 69) {
+            && mouseY <= guiTop + 69) {
 
       if (ModConfig.isDebugging) {
         infoText.add("Vacuum: " + String.format("%.5f", tile.getPressure()));
@@ -204,16 +204,16 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
 
     // Heat
     if (mouseX >= guiLeft + 133 && mouseX <= guiLeft + 137 && mouseY >= guiTop + 18
-        && mouseY <= guiTop + 69) {
+            && mouseY <= guiTop + 69) {
 
       if (ModConfig.isDebugging) {
         infoText.add("Heat: " + String.format("%.5f", tile.getTemperature()) + Unicode.CELSIUS);
         infoText.add("External Temperature: " + String.format("%.5f", tile.getLocalTemperature())
-            + Unicode.CELSIUS);
+                + Unicode.CELSIUS);
       } else {
         infoText.add("Heat: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
         infoText.add("External Temperature: " + String.format("%.2f", tile.getLocalTemperature())
-            + Unicode.CELSIUS);
+                + Unicode.CELSIUS);
       }
 
       this.drawHoveringText(infoText, mouseX - guiLeft, mouseY - guiTop);
@@ -222,7 +222,7 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
 
     // Pump Power
     if (mouseX >= guiLeft + 141 && mouseX <= guiLeft + 158 && mouseY >= guiTop + 53
-        && mouseY <= guiTop + 70) {
+            && mouseY <= guiTop + 70) {
 
       if (tile.getPump()) {
         infoText.add("Stop Pump");
@@ -236,13 +236,13 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
 
     // Coolant
     if (mouseX >= guiLeft + 163 && mouseX <= guiLeft + 167 && mouseY >= guiTop + 18
-        && mouseY <= guiTop + 69) {
+            && mouseY <= guiTop + 69) {
 
       if (ModConfig.isDebugging) {
         infoText.add("Coolant: " + String.format("%.5f", tile.getCoolant()));
       } else {
         infoText.add(
-            "Coolant: " + String.format("%.1f", (tile.getCoolant() / ModConfig.coolantMax)) + "%");
+                "Coolant: " + String.format("%.1f", (tile.getCoolant() / ModConfig.coolantMax)) + "%");
       }
 
       this.drawHoveringText(infoText, mouseX - guiLeft, mouseY - guiTop);
@@ -259,37 +259,37 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
     {
       int k = (int) this.getPressureLeftScaled(51);
       this.drawTexturedModalRect(this.guiLeft + 125, this.guiTop + 17 + 52 - k, 180, 52 - k - 1, 5,
-          k + 1);
+              k + 1);
     }
 
     {
       int k = (int) this.getHeatLeftScaled(51);
       this.drawTexturedModalRect(this.guiLeft + 133, this.guiTop + 17 + 52 - k, 188, 52 - k - 1, 5,
-          k + 1);
+              k + 1);
     }
 
     {
       int k = (int) this.getCoolentLeftScaled(51);
       this.drawTexturedModalRect(this.guiLeft + 163, this.guiTop + 17 + 52 - k, 196, 52 - k - 1, 5,
-          k + 1);
+              k + 1);
     }
 
     {
       int k = (int) this.getLocalPressureScaled(51);
       this.drawTexturedModalRect(this.guiLeft + 126, this.guiTop + 17 + 52 - k, 204, 52 - k - 1, 3,
-          1);
+              1);
     }
 
     {
       int k = (int) this.getLocalTempatureScaled(51);
       this.drawTexturedModalRect(this.guiLeft + 134, this.guiTop + 17 + 52 - k, 204, 52 - k - 1, 3,
-          1);
+              1);
     }
 
     {
       int k = (int) this.getProgressScaled(27);
       this.drawTexturedModalRect(this.guiLeft + 74, this.guiTop + 28 + 28 - k, 180, 84 - k - 1, 28,
-          k + 1);
+              k + 1);
     }
 
     if (tile.getSeal()) {
@@ -316,7 +316,7 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
 
   private float getPressureLeftScaled(int pixels) {
     return (float) tile.getPressure() * pixels / (ModConfig.seaLevelPressure
-        + ModConfig.pressureChange * (256 - ModConfig.seaLevel));
+            + ModConfig.pressureChange * (256 - ModConfig.seaLevel));
   }
 
   private float getCoolentLeftScaled(int pixels) {
@@ -325,7 +325,7 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
 
   private float getLocalPressureScaled(int pixels) {
     return (float) tile.getLocalPressure() * pixels / (ModConfig.seaLevelPressure
-        + ModConfig.pressureChange * (256 - ModConfig.seaLevel));
+            + ModConfig.pressureChange * (256 - ModConfig.seaLevel));
   }
 
   private float getLocalTempatureScaled(int pixels) {

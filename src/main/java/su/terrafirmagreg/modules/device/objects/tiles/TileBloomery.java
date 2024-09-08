@@ -3,9 +3,9 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockBloomery;
@@ -155,16 +155,16 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
         turnOff = true;
         // Structure lost one or more chimney levels
         InventoryHelper.spawnItemStack(world, getExternalBlock().getX(), getExternalBlock().getY(),
-            getExternalBlock().getZ(),
-            oreStacks.get(0));
+                getExternalBlock().getZ(),
+                oreStacks.get(0));
         oreStacks.remove(0);
         markForSync();
       }
       while (maxFuel < fuelStacks.size()) {
         turnOff = true;
         InventoryHelper.spawnItemStack(world, getExternalBlock().getX(), getExternalBlock().getY(),
-            getExternalBlock().getZ(),
-            fuelStacks.get(0));
+                getExternalBlock().getZ(),
+                fuelStacks.get(0));
         fuelStacks.remove(0);
         markForSync();
       }
@@ -227,8 +227,8 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
     if (internalBlock == null) {
       EnumFacing direction = world.getBlockState(pos).getValue(FACING);
       internalBlock = pos.up(OFFSET_INTERNAL.getY())
-          .offset(direction, OFFSET_INTERNAL.getX())
-          .offset(direction.rotateY(), OFFSET_INTERNAL.getZ());
+              .offset(direction, OFFSET_INTERNAL.getX())
+              .offset(direction.rotateY(), OFFSET_INTERNAL.getZ());
     }
     return internalBlock;
   }
@@ -242,8 +242,8 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
     if (externalBlock == null) {
       EnumFacing direction = world.getBlockState(pos).getValue(FACING);
       externalBlock = pos.up(OFFSET_EXTERNAL.getY())
-          .offset(direction, OFFSET_EXTERNAL.getX())
-          .offset(direction.rotateY(), OFFSET_EXTERNAL.getZ());
+              .offset(direction, OFFSET_EXTERNAL.getX())
+              .offset(direction.rotateY(), OFFSET_EXTERNAL.getZ());
     }
     return externalBlock;
   }
@@ -256,17 +256,17 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
       }
     }
     oreStacks.forEach(
-        i -> InventoryHelper.spawnItemStack(world, getExternalBlock().getX(),
-            getExternalBlock().getY(), getExternalBlock().getZ(), i));
+            i -> InventoryHelper.spawnItemStack(world, getExternalBlock().getX(),
+                    getExternalBlock().getY(), getExternalBlock().getZ(), i));
     fuelStacks.forEach(
-        i -> InventoryHelper.spawnItemStack(world, getExternalBlock().getX(),
-            getExternalBlock().getY(), getExternalBlock().getZ(), i));
+            i -> InventoryHelper.spawnItemStack(world, getExternalBlock().getX(),
+                    getExternalBlock().getY(), getExternalBlock().getZ(), i));
   }
 
   protected boolean isInternalBlockComplete() {
     IBlockState inside = world.getBlockState(getInternalBlock());
     return inside.getBlock() == BlocksDevice.CHARCOAL_PILE
-        && inside.getValue(BlockCharcoalPile.LAYERS) >= 8;
+            && inside.getValue(BlockCharcoalPile.LAYERS) >= 8;
   }
 
   protected void addItemsFromWorld() {
@@ -277,8 +277,8 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
       }
     }
     for (EntityItem entityItem : world.getEntitiesWithinAABB(EntityItem.class,
-        new AxisAlignedBB(getInternalBlock().up(), getInternalBlock().add(1, 4, 1)),
-        EntitySelectors.IS_ALIVE)) {
+            new AxisAlignedBB(getInternalBlock().up(), getInternalBlock().add(1, 4, 1)),
+            EntitySelectors.IS_ALIVE)) {
       ItemStack stack = entityItem.getItem();
       if (cachedRecipe == null) {
         cachedRecipe = BloomeryRecipe.get(stack);
@@ -320,12 +320,12 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
         if (slagLayers >= 4) {
           slagLayers -= 4;
           world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState()
-              .withProperty(LIT, cooking)
-              .withProperty(BlockMolten.LAYERS, 4));
+                  .withProperty(LIT, cooking)
+                  .withProperty(BlockMolten.LAYERS, 4));
         } else {
           world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState()
-              .withProperty(LIT, cooking)
-              .withProperty(BlockMolten.LAYERS, slagLayers));
+                  .withProperty(LIT, cooking)
+                  .withProperty(BlockMolten.LAYERS, slagLayers));
           slagLayers = 0;
         }
       } else {

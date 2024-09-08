@@ -51,7 +51,7 @@ public class BlockGrindstone extends BaseBlock implements IProviderTile {
         .size(Size.LARGE)
         .weight(Weight.HEAVY);
     setHarvestLevel(ToolClasses.PICKAXE, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 

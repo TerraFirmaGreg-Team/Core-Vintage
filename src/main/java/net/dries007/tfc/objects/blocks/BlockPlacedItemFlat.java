@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -33,175 +34,171 @@ import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-
-import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilFarmland;
-
-
 import java.util.Random;
 
 public class BlockPlacedItemFlat extends Block {
 
-    private static final AxisAlignedBB AABB = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.0625D, 0.75D);
+  private static final AxisAlignedBB AABB = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.0625D, 0.75D);
 
-    public BlockPlacedItemFlat() {
-        super(Material.CIRCUITS);
-        setHardness(0.1F);
-    }
+  public BlockPlacedItemFlat() {
+    super(Material.CIRCUITS);
+    setHardness(0.1F);
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isTopSolid(IBlockState state) {
-        return false;
-    }
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isTopSolid(IBlockState state) {
+    return false;
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullBlock(IBlockState state) {
-        return false;
-    }
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isFullBlock(IBlockState state) {
+    return false;
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isBlockNormalCube(IBlockState state) {
-        return false;
-    }
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isBlockNormalCube(IBlockState state) {
+    return false;
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isNormalCube(IBlockState state) {
-        return false;
-    }
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isNormalCube(IBlockState state) {
+    return false;
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isFullCube(IBlockState state) {
+    return false;
+  }
 
-    @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
-    }
+  @Override
+  @NotNull
+  @SuppressWarnings("deprecation")
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+  }
 
-    @Override
-    public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-        return true;
-    }
+  @Override
+  public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+    return true;
+  }
 
-    @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return AABB;
-    }
+  @Override
+  @NotNull
+  @SuppressWarnings("deprecation")
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return AABB;
+  }
 
-    @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
+  @Override
+  @NotNull
+  @SuppressWarnings("deprecation")
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    return BlockFaceShape.UNDEFINED;
+  }
 
-    @Nullable
-    @Override
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return NULL_AABB;
-    }
+  @Nullable
+  @Override
+  @SuppressWarnings("deprecation")
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return NULL_AABB;
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isOpaqueCube(IBlockState state) {
+    return false;
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-        if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP) && !(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockSoilFarmland)) {
-            worldIn.setBlockToAir(pos);
-        }
+  @Override
+  @SuppressWarnings("deprecation")
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+    if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP) && !(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockSoilFarmland)) {
+      worldIn.setBlockToAir(pos);
     }
+  }
 
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
-        if (tile != null) {
-            tile.onBreakBlock(pos);
-        }
-        super.breakBlock(worldIn, pos, state);
+  @Override
+  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    var tile = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
+    if (tile != null) {
+      tile.onBreakBlock(pos);
     }
+    super.breakBlock(worldIn, pos, state);
+  }
 
-    @NotNull
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Items.AIR;
-    }
+  @NotNull
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return Items.AIR;
+  }
 
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                    float hitX, float hitY, float hitZ) {
-        var tile = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
-        if (tile != null && !worldIn.isRemote) {
-            ItemStack stack = tile.getStack();
-            if (!stack.isEmpty()) {
-                ItemHandlerHelper.giveItemToPlayer(playerIn, stack);
-            }
-            tile.setStack(ItemStack.EMPTY);
-            worldIn.setBlockToAir(pos);
-        }
-        return true;
+  @Override
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+          float hitX, float hitY, float hitZ) {
+    var tile = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
+    if (tile != null && !worldIn.isRemote) {
+      ItemStack stack = tile.getStack();
+      if (!stack.isEmpty()) {
+        ItemHandlerHelper.giveItemToPlayer(playerIn, stack);
+      }
+      tile.setStack(ItemStack.EMPTY);
+      worldIn.setBlockToAir(pos);
     }
+    return true;
+  }
 
-    @Override
-    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return false;
-    }
+  @Override
+  public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+    return false;
+  }
 
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
+  }
 
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TEPlacedItemFlat();
-    }
+  @Nullable
+  @Override
+  public TileEntity createTileEntity(World world, IBlockState state) {
+    return new TEPlacedItemFlat();
+  }
 
-    @NotNull
-    @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        var tile = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
-        if (tile != null) {
-            return tile.getStack().copy();
-        }
-        return ItemStack.EMPTY;
+  @NotNull
+  @Override
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    var tile = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
+    if (tile != null) {
+      return tile.getStack().copy();
     }
+    return ItemStack.EMPTY;
+  }
 
-    @Override
-    public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate,
-                                     EntityLivingBase entity, int numberOfParticles) {
-        return true;
-    }
+  @Override
+  public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate,
+          EntityLivingBase entity, int numberOfParticles) {
+    return true;
+  }
 
-    @Override
-    public boolean addRunningEffects(IBlockState state, World world, BlockPos pos, Entity entity) {
-        return true;
-    }
+  @Override
+  public boolean addRunningEffects(IBlockState state, World world, BlockPos pos, Entity entity) {
+    return true;
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager manager) {
-        return true;
-    }
+  @SideOnly(Side.CLIENT)
+  @Override
+  public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager manager) {
+    return true;
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager) {
-        return true;
-    }
+  @SideOnly(Side.CLIENT)
+  @Override
+  public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager) {
+    return true;
+  }
 }

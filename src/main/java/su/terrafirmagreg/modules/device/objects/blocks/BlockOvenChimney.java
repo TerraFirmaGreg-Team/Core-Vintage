@@ -41,7 +41,7 @@ public class BlockOvenChimney extends BaseBlock {
         .weight(Weight.HEAVY)
         .lightValue(0);
 
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(CURED, false));
   }
 

@@ -22,42 +22,42 @@ public final class Properties {
    * Used to hold another block state. This is useful for mimicking other blocks.
    */
   public static final PropertyObject<IBlockState> HELD_STATE = new PropertyObject<>("held_state",
-      IBlockState.class);
+          IBlockState.class);
 
   /**
    * Used to hold an IBlockAccess of the block.
    */
   public static final PropertyObject<IBlockAccess> BLOCK_ACCESS = new PropertyObject<>("world",
-      IBlockAccess.class);
+          IBlockAccess.class);
 
   /**
    * Used to hold the BlockPos of the block.
    */
   public static final PropertyObject<BlockPos> BLOCK_POS = new PropertyObject<>("pos",
-      BlockPos.class);
+          BlockPos.class);
 
   /**
    * Used to determine the color of a block. Only supports the 16 vanilla colors.
    */
   public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color",
-      EnumDyeColor.class);
+          EnumDyeColor.class);
 
   /**
    * Used to determine the direction a block is facing.
    */
   public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing",
-      EnumFacing.class);
+          EnumFacing.class);
 
   public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis",
-      EnumFacing.Axis.class);
+          EnumFacing.Axis.class);
 
   /**
    * Used to determine the direction a block is facing. Only includes horizontal directions. (N-S-W-E)
    */
   public static final PropertyDirection HORIZONTAL = PropertyDirection.create("facing",
-      EnumFacing.Plane.HORIZONTAL);
+          EnumFacing.Plane.HORIZONTAL);
   public static final PropertyDirection VERTICAL = PropertyDirection.create("facing",
-      EnumFacing.Plane.VERTICAL);
+          EnumFacing.Plane.VERTICAL);
 
   /**
    * Used to determine if a block is connected on the bottom face.
@@ -123,6 +123,7 @@ public final class Properties {
   public static final PropertyBool WATERED = PropertyBool.create("watered");
   public static final PropertyBool NEEDS_SOURCE = PropertyBool.create("needs_source");
   public static final PropertyBool STASIS = PropertyBool.create("stasis");
+  public static final PropertyBool SNOWY = PropertyBool.create("snowy");
 
   public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 2);
   public static final PropertyInteger JARS = PropertyInteger.create("jars", 1, 4);
@@ -130,8 +131,7 @@ public final class Properties {
   public static final PropertyInteger CLAY_LEVEL = PropertyInteger.create("clay", 0, 4);
 
   public static final PropertyEnum<AgingFL> AGE = PropertyEnum.create("age", AgingFL.class);
-  public static final PropertyEnum<EnumFacing.Axis> XZ = PropertyEnum.create("axis",
-      EnumFacing.Axis.class, EnumFacing.Axis.X, EnumFacing.Axis.Z);
+  public static final PropertyEnum<EnumFacing.Axis> XZ = PropertyEnum.create("axis", EnumFacing.Axis.class, EnumFacing.Axis.X, EnumFacing.Axis.Z);
 
   private Properties() {
     throw new IllegalAccessError("Utility class");

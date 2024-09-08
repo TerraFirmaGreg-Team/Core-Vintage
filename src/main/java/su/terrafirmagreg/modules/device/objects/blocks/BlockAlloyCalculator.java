@@ -42,7 +42,7 @@ public class BlockAlloyCalculator extends BaseBlockContainer implements IProvide
         .registryKey("device/alloy_calculator")
         .nonCube();
 
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 

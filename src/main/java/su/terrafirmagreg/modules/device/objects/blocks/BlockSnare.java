@@ -71,7 +71,7 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
 
     setTickRandomly(true);
     setHarvestLevel(ToolClasses.AXE, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(HORIZONTAL, EnumFacing.NORTH)
         .withProperty(BAITED, Boolean.FALSE)
         .withProperty(CLOSED, Boolean.FALSE));

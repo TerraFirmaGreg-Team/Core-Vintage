@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.data.Constants;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
@@ -20,7 +21,6 @@ import net.minecraftforge.fluids.FluidStack;
 
 
 import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.client.gui.GuiContainerTE;
 import org.lwjgl.opengl.GL11;
 
 import org.jetbrains.annotations.Nullable;
@@ -30,13 +30,12 @@ import java.util.List;
 
 import static tfctech.client.TechGuiHandler.GUI_ELEMENTS;
 
-public class GuiSmelteryCauldron extends GuiContainerTE<TileSmelteryCauldron> {
+public class GuiSmelteryCauldron extends BaseGuiContainerTile<TileSmelteryCauldron> {
 
-  private static final ResourceLocation BACKGROUND = ModUtils.resource(
-      "textures/gui/container/smeltery_cauldron.png");
+  private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/smeltery_cauldron.png");
 
   public GuiSmelteryCauldron(Container container, InventoryPlayer playerInv,
-      TileSmelteryCauldron tile) {
+          TileSmelteryCauldron tile) {
     super(container, playerInv, tile, BACKGROUND);
   }
 
@@ -51,9 +50,9 @@ public class GuiSmelteryCauldron extends GuiContainerTE<TileSmelteryCauldron> {
    */
   @Nullable
   public static List<String> getFluidTooltip(@Nullable FluidStack fluid, int mouseX, int mouseY,
-      int posX, int posY) {
+          int posX, int posY) {
     if (fluid != null && mouseX >= posX && mouseX <= posX + 18 && mouseY >= posY
-        && mouseY <= posY + 49) {
+            && mouseY <= posY + 49) {
       List<String> tooltip = new ArrayList<>();
       tooltip.add(fluid.getLocalizedName());
       tooltip.add(fluid.amount + " / " + TileSmelteryCauldron.FLUID_CAPACITY);
@@ -74,9 +73,9 @@ public class GuiSmelteryCauldron extends GuiContainerTE<TileSmelteryCauldron> {
 
     // the temperature indicator <->
     int temperaturePixels = (int) (51 * Math.min(Heat.maxVisibleTemperature(), tile.getField(0)) /
-        Heat.maxVisibleTemperature()); //Max temperature is brilliant white in tfc
+            Heat.maxVisibleTemperature()); //Max temperature is brilliant white in tfc
     this.drawTexturedModalRect(this.guiLeft + 26 - 3, this.guiTop + 13 + 49 - temperaturePixels, 36,
-        54, 15, 5);
+            54, 15, 5);
 
     // Draw tank
     mc.getTextureManager().bindTexture(GUI_ELEMENTS);
@@ -95,8 +94,8 @@ public class GuiSmelteryCauldron extends GuiContainerTE<TileSmelteryCauldron> {
       GlStateManager.enableAlpha();
       GlStateManager.enableBlend();
       GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
-          GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-          GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+              GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+              GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
       int color = tile.getFluid().getFluid().getColor();
 

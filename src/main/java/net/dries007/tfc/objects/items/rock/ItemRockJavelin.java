@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items.rock;
 
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -24,11 +25,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
-
-
-import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
-
-
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
@@ -50,108 +46,107 @@ import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public class ItemRockJavelin extends ItemTool implements ICapabilitySize, IRockObject {
 
-    private static final Map<RockCategory, ItemRockJavelin> MAP = new HashMap<>();
-    public final RockCategory category;
+  private static final Map<RockCategory, ItemRockJavelin> MAP = new HashMap<>();
+  public final RockCategory category;
 
-    public ItemRockJavelin(RockCategory category) {
-        // Vanilla ItemTool constructor actually treats this as "bonus attack damage", and as a result, adds + getAttackDamage(). So for our purposes, this is 0.7 * attack damage.
-        super(-0.3f * category.getToolMaterial()
-                .getAttackDamage(), -1.8f, category.getToolMaterial(), ImmutableSet.of());
-        this.category = category;
-        if (MAP.put(category, this) != null) {
-            throw new IllegalStateException("There can only be one.");
+  public ItemRockJavelin(RockCategory category) {
+    // Vanilla ItemTool constructor actually treats this as "bonus attack damage", and as a result, adds + getAttackDamage(). So for our purposes, this is 0.7 * attack damage.
+    super(-0.3f * category.getToolMaterial()
+        .getAttackDamage(), -1.8f, category.getToolMaterial(), ImmutableSet.of());
+    this.category = category;
+    if (MAP.put(category, this) != null) {
+      throw new IllegalStateException("There can only be one.");
+    }
+
+    setMaxDamage((int) (category.getToolMaterial().getMaxUses() * 0.1));
+
+    OreDictionaryHelper.registerDamageType(this, DamageType.PIERCING);
+    OreDictionaryHelper.register(this, "javelin");
+    OreDictionaryHelper.register(this, "javelin", "stone");
+    OreDictionaryHelper.register(this, "javelin", "stone", category);
+  }
+
+  public static ItemRockJavelin get(RockCategory category) {
+    return MAP.get(category);
+  }
+
+  @Override
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.LARGE; // Stored only in chests
+  }
+
+  @Override
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.MEDIUM;
+  }
+
+  @Override
+  public boolean canStack(ItemStack stack) {
+    return false;
+  }
+
+  @Nullable
+  @Override
+  public Rock getRock(ItemStack stack) {
+    return null;
+  }
+
+  @NotNull
+  @Override
+  public RockCategory getRockCategory(ItemStack stack) {
+    return category;
+  }
+
+  @Override
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    ItemStack itemstack = playerIn.getHeldItem(handIn);
+    playerIn.setActiveHand(handIn);
+    return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+  }
+
+  @Override
+  public EnumAction getItemUseAction(ItemStack stack) {
+    return EnumAction.BOW;
+  }
+
+  @Override
+  public int getMaxItemUseDuration(ItemStack stack) {
+    return 72000;
+  }
+
+  @SuppressWarnings("ConstantConditions")
+  @Override
+  public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
+    if (entityLiving instanceof EntityPlayer player) {
+      int charge = this.getMaxItemUseDuration(stack) - timeLeft;
+      if (charge > 5) {
+        float f = ItemBow.getArrowVelocity(charge); //Same charge time as bow
+
+        if (!worldIn.isRemote) {
+          EntityThrownJavelin javelin = new EntityThrownJavelin(worldIn, player);
+          javelin.setDamage(2.5f *
+              attackDamage); // When thrown, it does approx 1.8x the tool material (attack damage is already 0.7x of the tool). This makes it slightly more damaging than axes but more difficult to use
+          javelin.setWeapon(stack);
+          javelin.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 1.5F, 0.5F);
+          worldIn.spawnEntity(javelin);
+          worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
+              1.0F / (RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
         }
-
-        setMaxDamage((int) (category.getToolMaterial().getMaxUses() * 0.1));
-
-        OreDictionaryHelper.registerDamageType(this, DamageType.PIERCING);
-        OreDictionaryHelper.register(this, "javelin");
-        OreDictionaryHelper.register(this, "javelin", "stone");
-        OreDictionaryHelper.register(this, "javelin", "stone", category);
+        player.inventory.deleteStack(stack);
+        player.addStat(StatList.getObjectUseStats(this));
+        ItemQuiver.replenishJavelin(player.inventory); //Use a quiver if possible
+      }
     }
+  }
 
-    public static ItemRockJavelin get(RockCategory category) {
-        return MAP.get(category);
-    }
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    tooltip.add("Rock type: " + OreDictionaryHelper.toString(category));
+  }
 
-    @Override
-    public @NotNull Size getSize(ItemStack stack) {
-        return Size.LARGE; // Stored only in chests
-    }
-
-    @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return Weight.MEDIUM;
-    }
-
-    @Override
-    public boolean canStack(ItemStack stack) {
-        return false;
-    }
-
-    @Nullable
-    @Override
-    public Rock getRock(ItemStack stack) {
-        return null;
-    }
-
-    @NotNull
-    @Override
-    public RockCategory getRockCategory(ItemStack stack) {
-        return category;
-    }
-
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        playerIn.setActiveHand(handIn);
-        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
-    }
-
-    @Override
-    public EnumAction getItemUseAction(ItemStack stack) {
-        return EnumAction.BOW;
-    }
-
-    @Override
-    public int getMaxItemUseDuration(ItemStack stack) {
-        return 72000;
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
-        if (entityLiving instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entityLiving;
-            int charge = this.getMaxItemUseDuration(stack) - timeLeft;
-            if (charge > 5) {
-                float f = ItemBow.getArrowVelocity(charge); //Same charge time as bow
-
-                if (!worldIn.isRemote) {
-                    EntityThrownJavelin javelin = new EntityThrownJavelin(worldIn, player);
-                    javelin.setDamage(2.5f *
-                            attackDamage); // When thrown, it does approx 1.8x the tool material (attack damage is already 0.7x of the tool). This makes it slightly more damaging than axes but more difficult to use
-                    javelin.setWeapon(stack);
-                    javelin.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 1.5F, 0.5F);
-                    worldIn.spawnEntity(javelin);
-                    worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
-                            1.0F / (RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-                }
-                player.inventory.deleteStack(stack);
-                player.addStat(StatList.getObjectUseStats(this));
-                ItemQuiver.replenishJavelin(player.inventory); //Use a quiver if possible
-            }
-        }
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add("Rock type: " + OreDictionaryHelper.toString(category));
-    }
-
-    @Override
-    public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player) {
-        return false;
-    }
+  @Override
+  public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player) {
+    return false;
+  }
 }

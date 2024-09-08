@@ -4,13 +4,13 @@ import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.ModuleCore;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBlock;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierEnvironmental;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierEquipment;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierItem;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierStorage;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBlock;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierEnvironmental;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierEquipment;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierItem;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierStorage;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.modules.core.network.SCPacketTemperature;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 
@@ -83,7 +83,7 @@ public class ProviderTemperature implements ICapabilityTemperature {
     float newTemp = temperature + change;
     boolean isRising = true;
     if ((temperature < AVERAGE && newTemp > temperature) || (temperature > AVERAGE
-        && newTemp < temperature)) {
+            && newTemp < temperature)) {
       speed *= GOOD_MULTIPLIER * ConfigCore.MISC.TEMPERATURE.positiveModifier;
     } else {
       speed *= BAD_MULTIPLIER * ConfigCore.MISC.TEMPERATURE.negativeModifier;
@@ -96,7 +96,7 @@ public class ProviderTemperature implements ICapabilityTemperature {
     boolean server = !player.world.isRemote;
     if (server) {
       this.setTemperature(this.getTemperature()
-          + this.getTemperatureChange() / ConfigCore.MISC.TEMPERATURE.tickInterval);
+              + this.getTemperatureChange() / ConfigCore.MISC.TEMPERATURE.tickInterval);
 
       if (tick <= ConfigCore.MISC.TEMPERATURE.tickInterval) {
         tick++;
@@ -137,17 +137,17 @@ public class ProviderTemperature implements ICapabilityTemperature {
     StringBuilder str = new StringBuilder();
     for (ModifierBase modifier : modifiers) {
       str.append(modifier.getName()).append(" -> ").append(modifier.getChange()).append(" @ ")
-          .append(modifier.getPotency()).append("\n");
+              .append(modifier.getPotency()).append("\n");
     }
     return String.format(
-        """
-            Body: %.1f ( %.4f )
-            Target: %.1f
-            Potency: %.4f""",
-        getTemperature(),
-        getTemperatureChange(),
-        getTarget(),
-        modifiers.getTotalPotency()
+            """
+                    Body: %.1f ( %.4f )
+                    Target: %.1f
+                    Potency: %.4f""",
+            getTemperature(),
+            getTemperatureChange(),
+            getTarget(),
+            modifiers.getTotalPotency()
     ) + "\n" + str;
   }
 

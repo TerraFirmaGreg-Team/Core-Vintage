@@ -13,6 +13,7 @@ public class EventHandlerMaterial {
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public void registerMaterials(MaterialEvent event) {
+
     MaterialMetalHandler.init();
   }
 }

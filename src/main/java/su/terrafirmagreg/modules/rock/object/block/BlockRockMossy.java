@@ -1,0 +1,19 @@
+package su.terrafirmagreg.modules.rock.object.block;
+
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
+import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
+
+import net.minecraft.util.BlockRenderLayer;
+
+/**
+ * Пока это почти полная копия {@link BlockRock} Этот клас в будущем планируется использовать для механики распространения мха
+ */
+public class BlockRockMossy extends BlockRock {
+
+  public BlockRockMossy(RockBlockVariant variant, RockType type) {
+    super(variant, type);
+
+    getSettings()
+            .renderLayer(BlockRenderLayer.CUTOUT);
+  }
+}

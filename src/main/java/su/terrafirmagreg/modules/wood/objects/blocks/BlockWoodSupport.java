@@ -59,7 +59,7 @@ public class BlockWoodSupport extends BlockWood {
         .nonOpaque();
 
     setHarvestLevel(ToolClasses.AXE, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(AXIS, EnumFacing.Axis.Y)
         .withProperty(NORTH, Boolean.FALSE)
         .withProperty(SOUTH, Boolean.FALSE)

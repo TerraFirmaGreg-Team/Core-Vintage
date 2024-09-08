@@ -3,16 +3,12 @@ package su.terrafirmagreg.data;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.data.lib.json.LowercaseEnumTypeAdapterFactory;
 import su.terrafirmagreg.data.lib.json.ResourceLocationJson;
-import su.terrafirmagreg.modules.world.classic.objects.generator.vein.VeinType;
 
 import net.minecraft.util.ResourceLocation;
 
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.dries007.tfc.objects.entity.animal.AnimalFood;
-import net.dries007.tfc.util.json.AnimalFoodJson;
-import net.dries007.tfc.util.json.VeinTypeJson;
 
 public final class Constants {
 
@@ -26,8 +22,6 @@ public final class Constants {
       .disableHtmlEscaping()
       .registerTypeAdapter(ResourceLocation.class, new ResourceLocationJson())
       .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
-      .registerTypeAdapter(VeinType.class, new VeinTypeJson())
-      .registerTypeAdapter(AnimalFood.class, new AnimalFoodJson())
       .create();
 
   public static final String MODID_TFC = "tfc";

@@ -94,7 +94,7 @@ public interface IItemSettings extends IProviderAutoReg, ICapabilitySize {
     Weight weight = Weight.LIGHT;
     boolean canStack = true;
     int maxCount = 64;
-    int maxDamage = 0;
+    int maxDamage;
     IRarity rarity = ItemRarity.COMMON.getRarity();
 
     private Settings() {

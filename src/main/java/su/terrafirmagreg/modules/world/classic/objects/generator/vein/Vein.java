@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.vein;
 
-import net.minecraft.block.state.IBlockState;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
 
 import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Rock;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -39,8 +39,7 @@ public class Vein {
   }
 
   /**
-   * Create a dummy vein from chunk data. Note: this is NOT an exact copy - it should ONLY be used to check equality, as it will not actually generate
-   * the vein
+   * Create a dummy vein from chunk data. Note: this is NOT an exact copy - it should ONLY be used to check equality, as it will not actually generate the vein
    *
    * @param nbt The nbt data for a vein
    * @return a new vein representing the NBT
@@ -61,20 +60,13 @@ public class Vein {
    */
   public boolean inRange(int x, int z, int extraDistance) {
     return pos.distanceSq(x, pos.getY(), z) < (type.getWidth() + extraDistance) * (type.getWidth()
-        + extraDistance);
-  }
-
-  /**
-   * Gets the state to generate, at a specific position
-   */
-  public IBlockState getOreState(Rock rock) {
-    return type.getOreState(rock, grade);
+            + extraDistance);
   }
 
   /**
    * Can the vein spawn in the specified rock type
    */
-  public boolean canSpawnIn(Rock rock) {
+  public boolean canSpawnIn(RockType rock) {
     return type.canSpawnIn(rock);
   }
 
@@ -104,8 +96,7 @@ public class Vein {
   }
 
   /**
-   * Should mostly always returns a VeinType obj (loaded from ore vein config) Unless this vein generated before config was changed, and this vein
-   * registry deleted
+   * Should mostly always returns a VeinType obj (loaded from ore vein config) Unless this vein generated before config was changed, and this vein registry deleted
    */
   @Nullable
   public VeinType getType() {
@@ -123,8 +114,7 @@ public class Vein {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj instanceof Vein) {
-      Vein other = (Vein) obj;
+    if (obj instanceof Vein other) {
       return other.pos.equals(this.pos) && other.type == this.type && other.grade == this.grade;
     }
     return false;

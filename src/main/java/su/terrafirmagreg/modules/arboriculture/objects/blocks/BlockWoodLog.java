@@ -79,7 +79,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     setHardness(20.0F); //TODO 2.0 в тфк
     setResistance(5.0F);
 
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(LOG_AXIS, EnumAxis.Y)
         .withProperty(PLACED, true)
         .withProperty(SMALL, false));

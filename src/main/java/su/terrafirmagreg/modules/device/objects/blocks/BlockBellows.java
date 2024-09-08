@@ -43,7 +43,7 @@ public class BlockBellows extends BaseBlock implements IProviderTile {
         .hardness(2.0F)
         .resistance(2.0F);
     setHarvestLevel(ToolClasses.AXE, 0);
-    setDefaultState(getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH));
+    setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
   }
 
   @Override

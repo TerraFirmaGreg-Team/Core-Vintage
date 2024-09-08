@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.debug;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.WorldUtils;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 
@@ -7,7 +8,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.ChunkGeneratorDebug;
 import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraftforge.fml.common.Loader;
 
 public class WorldTypeDebug extends WorldType {
 
@@ -44,7 +44,7 @@ public class WorldTypeDebug extends WorldType {
     final String modid = WorldUtils.getWorldName(world).toLowerCase();
 
     // If the mod actually exists, use that generator.
-    if (Loader.isModLoaded(modid)) {
+    if (GameUtils.isModLoaded(modid)) {
       return new ChunkGenDebug(world, modid);
     }
 

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.core.init;
 
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.modules.core.objects.loot.ApplyRequiredSkill;
-import su.terrafirmagreg.modules.core.objects.loot.ApplySimpleSkill;
+import su.terrafirmagreg.modules.core.object.loot.ApplyRequiredSkill;
+import su.terrafirmagreg.modules.core.object.loot.ApplySimpleSkill;
 
 public final class LootTablesCore {
 

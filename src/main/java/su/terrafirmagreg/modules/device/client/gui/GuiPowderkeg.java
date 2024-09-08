@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.base.gui.component.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
@@ -17,21 +18,19 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 
-import net.dries007.tfc.client.gui.GuiContainerTE;
 import org.lwjgl.opengl.GL11;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public class GuiPowderkeg extends GuiContainerTE<TilePowderKeg> {
+public class GuiPowderkeg extends BaseGuiContainerTile<TilePowderKeg> {
 
-  public static final ResourceLocation BACKGROUND = ModUtils.resource(
-      "textures/gui/container/powderkeg.png");
+  public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/powderkeg.png");
   private final String translationKey;
 
   public GuiPowderkeg(Container container, InventoryPlayer playerInv, TilePowderKeg tile,
-      IBlockState state) {
+          IBlockState state) {
     super(container, playerInv, tile, BACKGROUND);
 
     this.translationKey = state.getBlock().getTranslationKey();
@@ -65,7 +64,7 @@ public class GuiPowderkeg extends GuiContainerTE<TilePowderKeg> {
     if (tile.isSealed()) {
       // Draw over the input items, making them look unavailable
       IItemHandler handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-          null);
+              null);
       if (handler != null) {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         for (int slotId = 0; slotId < handler.getSlots(); slotId++) {

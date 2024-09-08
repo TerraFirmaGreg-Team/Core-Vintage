@@ -28,7 +28,7 @@ public class BlockMetalPigvil
   public BlockMetalPigvil(MetalBlockVariant variant, MetalType type) {
     super(variant, type);
 
-    setDefaultState(this.getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(HORIZONTAL, EnumFacing.EAST));
   }
 

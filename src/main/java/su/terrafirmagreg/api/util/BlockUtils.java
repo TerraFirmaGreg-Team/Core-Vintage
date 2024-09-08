@@ -1,11 +1,13 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.data.lib.types.type.IType;
 import su.terrafirmagreg.data.lib.types.type.Type;
+import su.terrafirmagreg.data.lib.types.variant.IVariant;
 import su.terrafirmagreg.data.lib.types.variant.Variant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.soil.api.spi.IGrass;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
-import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeat;
+import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeat;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -81,18 +83,18 @@ public final class BlockUtils {
   public static boolean isBlockSurroundedByAirHorizontal(World world, BlockPos pos) {
 
     return world.isAirBlock(pos.offset(EnumFacing.NORTH))
-        && world.isAirBlock(pos.offset(EnumFacing.SOUTH))
-        && world.isAirBlock(pos.offset(EnumFacing.EAST))
-        && world.isAirBlock(pos.offset(EnumFacing.WEST));
+            && world.isAirBlock(pos.offset(EnumFacing.SOUTH))
+            && world.isAirBlock(pos.offset(EnumFacing.EAST))
+            && world.isAirBlock(pos.offset(EnumFacing.WEST));
   }
 
   public static boolean isBlockSurroundedByAir(World world, BlockPos blockPos) {
     return (world.isAirBlock(blockPos.up()) ||
-        world.isAirBlock(blockPos.down()) ||
-        world.isAirBlock(blockPos.north()) ||
-        world.isAirBlock(blockPos.south()) ||
-        world.isAirBlock(blockPos.east()) ||
-        world.isAirBlock(blockPos.west()));
+            world.isAirBlock(blockPos.down()) ||
+            world.isAirBlock(blockPos.north()) ||
+            world.isAirBlock(blockPos.south()) ||
+            world.isAirBlock(blockPos.east()) ||
+            world.isAirBlock(blockPos.west()));
   }
 
   /**
@@ -136,7 +138,7 @@ public final class BlockUtils {
    * @param action действие, которое выполняется для каждого блока
    */
   public static void forBlocksInRangeShuffled(World world, BlockPos pos, int range,
-      IBlockAction action) {
+          IBlockAction action) {
 
     ArrayList<BlockPos> blockList = new ArrayList<>();
     BlockUtils.findBlocksInCube(world, pos, range, range, range, IBlockFilter.TRUE, blockList);
@@ -169,7 +171,7 @@ public final class BlockUtils {
    * @param action действие, которое выполняется для каждого блока
    */
   public static void forBlocksInCube(World world, BlockPos pos, int rangeX, int rangeY, int rangeZ,
-      IBlockAction action) {
+          IBlockAction action) {
 
     complete:
     for (int x = pos.getX() - rangeX; x <= pos.getX() + rangeX; x++) {
@@ -198,7 +200,7 @@ public final class BlockUtils {
    * @param action действие, которое выполняется для каждого блока
    */
   public static void forBlocksInCubeShuffled(World world, BlockPos pos, int rangeX, int rangeY,
-      int rangeZ, IBlockAction action) {
+          int rangeZ, IBlockAction action) {
 
     ArrayList<BlockPos> blockList = new ArrayList<>();
     BlockUtils.findBlocksInCube(world, pos, rangeX, rangeY, rangeZ, IBlockFilter.TRUE, blockList);
@@ -226,8 +228,8 @@ public final class BlockUtils {
    * @return список найденных блоков
    */
   public static List<BlockPos> findBlocksInCube(World world, BlockPos pos, int rangeX, int rangeY,
-      int rangeZ, IBlockFilter filter,
-      List<BlockPos> result) {
+          int rangeZ, IBlockFilter filter,
+          List<BlockPos> result) {
 
     for (int x = pos.getX() - rangeX; x <= pos.getX() + rangeX; x++) {
       for (int y = pos.getY() - rangeY; y <= pos.getY() + rangeY; y++) {
@@ -257,7 +259,7 @@ public final class BlockUtils {
    * @return список найденных блоков
    */
   public static List<BlockPos> findBlocksInRange(World world, BlockPos pos, int range,
-      IBlockFilter filter, List<BlockPos> result) {
+          IBlockFilter filter, List<BlockPos> result) {
 
     int rangeSq = range * range;
 
@@ -286,8 +288,8 @@ public final class BlockUtils {
   }
 
   /**
-   * Проверяет, содержит ли ItemStack элемент руды. Это делается путем проверки элемента, расширяющего BlockOre, или наличия в словаре руд записей,
-   * начинающихся с «ore». Это также будет проверять отображаемое имя стака, чтобы увидеть, есть ли в ней слово Ore.
+   * Проверяет, содержит ли ItemStack элемент руды. Это делается путем проверки элемента, расширяющего BlockOre, или наличия в словаре руд записей, начинающихся с
+   * «ore». Это также будет проверять отображаемое имя стака, чтобы увидеть, есть ли в ней слово Ore.
    *
    * @param stack     Стек ItemStack для проверки.
    * @param checkName Следует ли проверять имя ItemStack.
@@ -306,7 +308,7 @@ public final class BlockUtils {
     }
 
     return checkName && stack.getItem().getItemStackDisplayName(stack)
-        .matches(".*(^|\\s)([oO]re)($|\\s).");
+            .matches(".*(^|\\s)([oO]re)($|\\s).");
   }
 
   /**
@@ -384,7 +386,7 @@ public final class BlockUtils {
     } else if (block instanceof BlockStaticLiquid && isFluidFull(state)) {
 
       final Fluid fluid = block == Blocks.WATER ? FluidRegistry.WATER
-          : block == Blocks.LAVA ? FluidRegistry.LAVA : null;
+              : block == Blocks.LAVA ? FluidRegistry.LAVA : null;
 
       if (fluid != null) {
 
@@ -396,13 +398,13 @@ public final class BlockUtils {
   }
 
   /**
-   * Метод подвешивания блоков, чтобы проверить, могут ли они висеть. Описание 11/10. ПРИМЕЧАНИЕ. Там, где это применимо, не забудьте проверить,
-   * допускает ли состояние блока указанное направление!
+   * Метод подвешивания блоков, чтобы проверить, могут ли они висеть. Описание 11/10. ПРИМЕЧАНИЕ. Там, где это применимо, не забудьте проверить, допускает ли
+   * состояние блока указанное направление!
    *
    * @param worldIn мир
    * @param pos     позиция блока, который выполняет проверку
-   * @param facing  в том направлении, в котором смотрит блок. Это направление, в котором должен быть указан блок, и сторона, НА которой он висит, а
-   *                не сторона, С которой он прилипает. Например: знак, обращенный к северу также висит на северной стороне опорного блока
+   * @param facing  в том направлении, в котором смотрит блок. Это направление, в котором должен быть указан блок, и сторона, НА которой он висит, а не сторона, С
+   *                которой он прилипает. Например: знак, обращенный к северу также висит на северной стороне опорного блока
    * @return true, если сторона сплошная, в противном случае — false.
    */
   public static boolean canHangAt(World worldIn, BlockPos pos, EnumFacing facing) {
@@ -417,20 +419,20 @@ public final class BlockUtils {
    * @param pos             позиция проверяемого блока/пространства.
    * @param preferredFacing это выравнивание проверяется в первую очередь. Оно может быть недействительным или нулевым.
    * @param possibleSides   — список/массив всех сторон, к которым может прикрепиться блок.
-   * @return Обнаружено столкновение или значение null означает, что ничего не найдено. Это направление, в котором должен быть указан блок, и сторона,
-   * К которой он прилипает, а не сторона, С которой он прилипает.
+   * @return Обнаружено столкновение или значение null означает, что ничего не найдено. Это направление, в котором должен быть указан блок, и сторона, К которой он
+   * прилипает, а не сторона, С которой он прилипает.
    */
   public static EnumFacing getASolidFacing(World worldIn, BlockPos pos,
-      @Nullable EnumFacing preferredFacing, EnumFacing... possibleSides) {
+          @Nullable EnumFacing preferredFacing, EnumFacing... possibleSides) {
 
     return getASolidFacing(worldIn, pos, preferredFacing, Arrays.asList(possibleSides));
   }
 
   public static EnumFacing getASolidFacing(World worldIn, BlockPos pos,
-      @Nullable EnumFacing preferredFacing,
-      Collection<EnumFacing> possibleSides) {
+          @Nullable EnumFacing preferredFacing,
+          Collection<EnumFacing> possibleSides) {
     if (preferredFacing != null && possibleSides.contains(preferredFacing) && canHangAt(worldIn,
-        pos, preferredFacing)) {
+            pos, preferredFacing)) {
       return preferredFacing;
     }
     for (EnumFacing side : possibleSides) {
@@ -465,11 +467,25 @@ public final class BlockUtils {
     return blockState.getPropertyKeys().contains(property);
   }
 
+  public static boolean isVariant(IBlockState blockState, Variant<?>... variants) {
+    if (blockState.getBlock() instanceof IVariant<?> variantIn) {
+      return isVariant(variantIn.getVariant(), variants);
+    }
+    return false;
+  }
+
   public static boolean isVariant(Variant<?> variantIn, Variant<?>... variants) {
     for (var variant : variants) {
       if (variantIn == variant) {
         return true;
       }
+    }
+    return false;
+  }
+
+  public static boolean isType(IBlockState blockState, Type<?>... types) {
+    if (blockState.getBlock() instanceof IType<?> variantIn) {
+      return isType(variantIn.getType(), types);
     }
     return false;
   }
@@ -502,9 +518,9 @@ public final class BlockUtils {
     }
     if (block instanceof ISoilBlock soil) {
       return isVariant(soil.getVariant(),
-          GRASS, DRY_GRASS, PODZOL,
-          MYCELIUM, DIRT, COARSE_DIRT,
-          SPARSE_GRASS, ROOTED_DIRT);
+              GRASS, DRY_GRASS, PODZOL,
+              MYCELIUM, DIRT, COARSE_DIRT,
+              SPARSE_GRASS, ROOTED_DIRT);
     }
     return false;
   }
@@ -536,9 +552,9 @@ public final class BlockUtils {
     }
     if (block instanceof ISoilBlock soil) {
       return isVariant(soil.getVariant(),
-          GRASS, DRY_GRASS, COARSE_DIRT,
-          SPARSE_GRASS, ROOTED_DIRT, DIRT,
-          MUD, PODZOL, MYCELIUM);
+              GRASS, DRY_GRASS, COARSE_DIRT,
+              SPARSE_GRASS, ROOTED_DIRT, DIRT,
+              MUD, PODZOL, MYCELIUM);
     }
     return false;
   }
@@ -547,8 +563,8 @@ public final class BlockUtils {
     var block = current.getBlock();
     if (block instanceof ISoilBlock soil) {
       return isVariant(soil.getVariant(),
-          GRASS, DRY_GRASS, SPARSE_GRASS,
-          DIRT, PODZOL, MYCELIUM);
+              GRASS, DRY_GRASS, SPARSE_GRASS,
+              DIRT, PODZOL, MYCELIUM);
     }
     return false;
   }
@@ -560,9 +576,9 @@ public final class BlockUtils {
     }
     if (block instanceof ISoilBlock soil) {
       return isVariant(soil.getVariant(),
-          GRASS, DRY_GRASS, COARSE_DIRT,
-          SPARSE_GRASS, ROOTED_DIRT, DIRT,
-          MUD, PODZOL, MYCELIUM);
+              GRASS, DRY_GRASS, COARSE_DIRT,
+              SPARSE_GRASS, ROOTED_DIRT, DIRT,
+              MUD, PODZOL, MYCELIUM);
     }
     return false;
   }
@@ -575,25 +591,11 @@ public final class BlockUtils {
     return false;
   }
 
-  public static boolean isGravel(IBlockState current) {
-    if (current.getBlock() instanceof IRockBlock rock) {
-      return isVariant(rock.getVariant(), GRAVEL);
-    }
-    return false;
-  }
 
   public static boolean isSand(IBlockState current) {
     var block = current.getBlock();
     if (block instanceof IRockBlock rock) {
       return isVariant(rock.getVariant(), SAND);
-    }
-    return false;
-  }
-
-  public static boolean isPodzol(IBlockState current) {
-    var block = current.getBlock();
-    if (block instanceof ISoilBlock soil) {
-      return isVariant(soil.getVariant(), PODZOL);
     }
     return false;
   }

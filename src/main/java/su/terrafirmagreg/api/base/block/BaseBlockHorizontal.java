@@ -39,7 +39,7 @@ public abstract class BaseBlockHorizontal extends BlockHorizontal implements IBl
     super(settings.getMaterial(), settings.getMapColor());
     this.settings = settings;
 
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(FACING, EnumFacing.NORTH));
   }
 

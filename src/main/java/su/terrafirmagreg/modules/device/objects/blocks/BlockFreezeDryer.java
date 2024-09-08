@@ -35,7 +35,7 @@ public class BlockFreezeDryer extends BaseBlockContainer implements IProviderTil
         .registryKey("device/freeze_dryer")
         .nonCube()
         .hardness(2F);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 

@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.data.Unicode;
 import su.terrafirmagreg.modules.device.objects.tiles.TileCellarShelf;
@@ -12,15 +13,12 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 
-import net.dries007.tfc.client.gui.GuiContainerTE;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiCellarShelf extends GuiContainerTE<TileCellarShelf> {
+public class GuiCellarShelf extends BaseGuiContainerTile<TileCellarShelf> {
 
-  public static final ResourceLocation BACKGROUND = ModUtils.resource(
-      "textures/gui/container/cellar_shelf.png");
+  public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/cellar_shelf.png");
   private final String translationKey;
   private final InventoryPlayer playerInventory;
 

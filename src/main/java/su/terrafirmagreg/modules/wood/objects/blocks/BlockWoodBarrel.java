@@ -65,7 +65,7 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
         .weight(Weight.VERY_HEAVY)
         .nonCube();
 
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(SEALED, false));
   }
 

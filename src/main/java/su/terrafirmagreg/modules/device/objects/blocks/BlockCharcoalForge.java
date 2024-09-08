@@ -98,7 +98,7 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
 
     setTickRandomly(true); // Used for chimney checks -> extinguish
     setHarvestLevel(ToolClasses.SHOVEL, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(LIT, false));
   }
 

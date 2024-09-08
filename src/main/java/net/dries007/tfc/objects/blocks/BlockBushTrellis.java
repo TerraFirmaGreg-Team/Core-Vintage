@@ -37,110 +37,115 @@ import static su.terrafirmagreg.data.Properties.GROWN;
 
 public class BlockBushTrellis extends BlockTrellis {
 
-    private static final Map<IBerryBush, BlockBushTrellis> MAP = new HashMap<>();
-    private final IBerryBush bush;
+  private static final Map<IBerryBush, BlockBushTrellis> MAP = new HashMap<>();
+  private final IBerryBush bush;
 
-    public BlockBushTrellis(IBerryBush bush) {
-        super();
-        this.bush = bush;
-        if (MAP.put(bush, this) != null) {
-            throw new IllegalStateException("There can only be one.");
-        }
-        setTickRandomly(true);
-        setDefaultState(getBlockState().getBaseState().withProperty(GROWN, false));
+  public BlockBushTrellis(IBerryBush bush) {
+    super();
+    this.bush = bush;
+    if (MAP.put(bush, this) != null) {
+      throw new IllegalStateException("There can only be one.");
     }
+    setTickRandomly(true);
+    setDefaultState(blockState.getBaseState().withProperty(GROWN, false));
+  }
 
-    public static BlockBushTrellis get(IBerryBush bush) {
-        return MAP.get(bush);
-    }
+  public static BlockBushTrellis get(IBerryBush bush) {
+    return MAP.get(bush);
+  }
 
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                    float hitY, float hitZ) {
-        if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
-            Item held = player.getHeldItem(hand).getItem();
-            if (held instanceof ItemBlock && ((ItemBlock) held).getBlock() instanceof BlockTrellis) return false;
-            if (state.getValue(GROWN)) {
-                ItemHandlerHelper.giveItemToPlayer(player, bush.getFoodDrop());
-                world.setBlockState(pos, state.withProperty(GROWN, false));
-                var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
-                if (tile != null)
-                    tile.resetCounter();
-                return true;
-            } else if (player.isSneaking()) {
-                ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(BlockBerryBush.get(bush)));
-                world.setBlockState(pos, BlocksFL.TRELLIS.getDefaultState());
-                var tile = TileUtils.getTile(world, pos.down(), TEHangingPlanter.class);
-                if (tile != null)
-                    tile.resetCounter();
-                return true;
-            }
-        }
+  @Override
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
+      float hitY, float hitZ) {
+    if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
+      Item held = player.getHeldItem(hand).getItem();
+      if (held instanceof ItemBlock && ((ItemBlock) held).getBlock() instanceof BlockTrellis) {
         return false;
-    }
-
-    @Override
-    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-        if (!world.isRemote) {
-            var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
-            boolean grown = state.getValue(GROWN);
-            if (tile != null) {
-                boolean climateValid = tile.isClimateValid();
-                if (!climateValid) {
-                    tile.resetCounter();
-                } else if (tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * 30)) {
-                    if (!grown) {
-                        world.setBlockState(pos, state.withProperty(GROWN, true));
-                    } else {
-                        BlockPos upPos = pos.up();
-                        Block upBlock = world.getBlockState(upPos).getBlock();
-                        if (tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * 50) && upBlock instanceof BlockTrellis &&
-                                !(upBlock instanceof BlockBushTrellis)) {
-                            world.setBlockState(upPos, getDefaultState());
-                            TEHangingPlanter teNew = TileUtils.getTile(world, upPos, TEHangingPlanter.class);
-                            if (teNew != null)
-                                teNew.resetCounter();
-                            tile.resetCounter();
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(GROWN, meta == 1);
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(GROWN) ? 1 : 0;
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, GROWN);
-    }
-
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TEHangingPlanter();
-    }
-
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        TEHangingPlanter tile = TileUtils.getTile(worldIn, pos, TEHangingPlanter.class);
+      }
+      if (state.getValue(GROWN)) {
+        ItemHandlerHelper.giveItemToPlayer(player, bush.getFoodDrop());
+        world.setBlockState(pos, state.withProperty(GROWN, false));
+        var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
         if (tile != null) {
-            tile.resetCounter();
+          tile.resetCounter();
         }
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+        return true;
+      } else if (player.isSneaking()) {
+        ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(BlockBerryBush.get(bush)));
+        world.setBlockState(pos, BlocksFL.TRELLIS.getDefaultState());
+        var tile = TileUtils.getTile(world, pos.down(), TEHangingPlanter.class);
+        if (tile != null) {
+          tile.resetCounter();
+        }
+        return true;
+      }
     }
+    return false;
+  }
+
+  @Override
+  public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+    if (!world.isRemote) {
+      var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
+      boolean grown = state.getValue(GROWN);
+      if (tile != null) {
+        boolean climateValid = tile.isClimateValid();
+        if (!climateValid) {
+          tile.resetCounter();
+        } else if (tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * 30)) {
+          if (!grown) {
+            world.setBlockState(pos, state.withProperty(GROWN, true));
+          } else {
+            BlockPos upPos = pos.up();
+            Block upBlock = world.getBlockState(upPos).getBlock();
+            if (tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * 50) && upBlock instanceof BlockTrellis &&
+                !(upBlock instanceof BlockBushTrellis)) {
+              world.setBlockState(upPos, getDefaultState());
+              TEHangingPlanter teNew = TileUtils.getTile(world, upPos, TEHangingPlanter.class);
+              if (teNew != null) {
+                teNew.resetCounter();
+              }
+              tile.resetCounter();
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState().withProperty(GROWN, meta == 1);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(GROWN) ? 1 : 0;
+  }
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, GROWN);
+  }
+
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
+  }
+
+  @Nullable
+  @Override
+  public TileEntity createTileEntity(World world, IBlockState state) {
+    return new TEHangingPlanter();
+  }
+
+  @Override
+  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    TEHangingPlanter tile = TileUtils.getTile(worldIn, pos, TEHangingPlanter.class);
+    if (tile != null) {
+      tile.resetCounter();
+    }
+    super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+  }
 }

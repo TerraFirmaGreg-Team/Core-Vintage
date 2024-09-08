@@ -58,7 +58,7 @@ public class BlockCrate extends BaseBlockContainer implements IProviderTile {
         .nonCube()
         .weight(Weight.VERY_HEAVY);
 
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(SEALED, false));
   }
 

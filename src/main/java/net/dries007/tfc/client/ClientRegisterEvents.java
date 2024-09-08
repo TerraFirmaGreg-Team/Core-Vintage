@@ -1,40 +1,7 @@
 package net.dries007.tfc.client;
 
-import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
-import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.data.Properties.CAN_FALL;
+import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableMap;
-import java.util.Arrays;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.client.render.TESRPlacedHide;
-import net.dries007.tfc.client.render.TESRPlacedItem;
-import net.dries007.tfc.client.render.TESRPlacedItemFlat;
-import net.dries007.tfc.objects.Gem;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.objects.items.ItemAnimalHide;
-import net.dries007.tfc.objects.items.ItemGem;
-import net.dries007.tfc.objects.items.ItemGoldPan;
-import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.objects.items.ceramics.ItemMold;
-import net.dries007.tfc.objects.items.metal.ItemOreTFC;
-import net.dries007.tfc.objects.te.TEPlacedHide;
-import net.dries007.tfc.objects.te.TEPlacedItem;
-import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -62,8 +29,44 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+
+import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableMap;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.IMoldHandler;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.types.Ore;
+import net.dries007.tfc.client.render.TESRPlacedHide;
+import net.dries007.tfc.client.render.TESRPlacedItem;
+import net.dries007.tfc.client.render.TESRPlacedItemFlat;
+import net.dries007.tfc.objects.Gem;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
+import net.dries007.tfc.objects.items.ItemAnimalHide;
+import net.dries007.tfc.objects.items.ItemGem;
+import net.dries007.tfc.objects.items.ItemGoldPan;
+import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.objects.items.ceramics.ItemMold;
+import net.dries007.tfc.objects.items.metal.ItemOreTFC;
+import net.dries007.tfc.objects.te.TEPlacedHide;
+import net.dries007.tfc.objects.te.TEPlacedItem;
+import net.dries007.tfc.objects.te.TEPlacedItemFlat;
+
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
+
+import java.util.Arrays;
+
+import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
+import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_TFC)
@@ -85,11 +88,11 @@ public final class ClientRegisterEvents {
         new ModelResourceLocation(ItemsTFC.RED_STEEL_BUCKET.getRegistryName(), "inventory"));
 
     // Simple Items
-      for (Item item : ItemsTFC.getAllSimpleItems()) {
-          ModelLoader.setCustomModelResourceLocation(item, 0,
-              new ModelResourceLocation(item.getRegistryName()
-                  .toString()));
-      }
+    for (Item item : ItemsTFC.getAllSimpleItems()) {
+      ModelLoader.setCustomModelResourceLocation(item, 0,
+          new ModelResourceLocation(item.getRegistryName()
+              .toString()));
+    }
 
     // Dye color Items
     for (EnumDyeColor color : EnumDyeColor.values()) {
@@ -105,31 +108,31 @@ public final class ClientRegisterEvents {
     }
 
     // Gems
-      for (ItemGem item : ItemsTFC.getAllGemItems()) {
-          for (Gem.Grade grade : Gem.Grade.values()) {
-              registerEnumBasedMetaItems("gem", grade, item);
-          }
+    for (ItemGem item : ItemsTFC.getAllGemItems()) {
+      for (Gem.Grade grade : Gem.Grade.values()) {
+        registerEnumBasedMetaItems("gem", grade, item);
       }
+    }
 
     // Ore Items
-      for (ItemOreTFC item : ItemsTFC.getAllOreItems()) {
-          if (item.ore.isGraded()) {
-              for (Ore.Grade grade : Ore.Grade.values()) {
-                  registerEnumBasedMetaItems("ore", grade, item);
-              }
-          } else {
-              registerEnumBasedMetaItems("ore", Ore.Grade.NORMAL, item);
-          }
+    for (ItemOreTFC item : ItemsTFC.getAllOreItems()) {
+      if (item.ore.isGraded()) {
+        for (Ore.Grade grade : Ore.Grade.values()) {
+          registerEnumBasedMetaItems("ore", grade, item);
+        }
+      } else {
+        registerEnumBasedMetaItems("ore", Ore.Grade.NORMAL, item);
       }
+    }
 
     // Gold Pan
     ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES)
         .map(e -> new ResourceLocation(MODID_TFC, "goldpan/" + e))
         .toArray(ResourceLocation[]::new));
-      for (int meta = 0; meta < ItemGoldPan.TYPES.length; meta++) {
-          ModelLoader.setCustomModelResourceLocation(ItemsTFC.GOLDPAN, meta,
-              new ModelResourceLocation(MODID_TFC + ":goldpan/" + ItemGoldPan.TYPES[meta]));
-      }
+    for (int meta = 0; meta < ItemGoldPan.TYPES.length; meta++) {
+      ModelLoader.setCustomModelResourceLocation(ItemsTFC.GOLDPAN, meta,
+          new ModelResourceLocation(MODID_TFC + ":goldpan/" + ItemGoldPan.TYPES[meta]));
+    }
     ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES)
         .map(e -> new ResourceLocation(MODID_TFC, "goldpan/" + e))
         .toArray(ResourceLocation[]::new));
@@ -140,9 +143,9 @@ public final class ClientRegisterEvents {
             .getRegistryName() + "/unknown"));
     for (Metal.ItemType value : Metal.ItemType.values()) {
       ItemMold item = ItemMold.get(value);
-        if (item == null) {
-            continue;
-        }
+      if (item == null) {
+        continue;
+      }
 
       ModelBakery.registerItemVariants(item, new ModelResourceLocation(item.getRegistryName()
           .toString() + "/empty"));
@@ -178,57 +181,49 @@ public final class ClientRegisterEvents {
     }
 
     // Item Blocks
-      for (ItemBlock item : BlocksTFC.getAllNormalItemBlocks()) {
-          ModelLoader.setCustomModelResourceLocation(item, 0,
-              new ModelResourceLocation(item.getRegistryName(), "normal"));
-      }
+    for (ItemBlock item : BlocksTFC.getAllNormalItemBlocks()) {
+      ModelLoader.setCustomModelResourceLocation(item, 0,
+          new ModelResourceLocation(item.getRegistryName(), "normal"));
+    }
 
-      for (ItemBlock item : BlocksTFC.getAllInventoryItemBlocks()) {
-          ModelLoader.setCustomModelResourceLocation(item, 0,
-              new ModelResourceLocation(item.getRegistryName(), "inventory"));
-      }
+    for (ItemBlock item : BlocksTFC.getAllInventoryItemBlocks()) {
+      ModelLoader.setCustomModelResourceLocation(item, 0,
+          new ModelResourceLocation(item.getRegistryName(), "inventory"));
+    }
 
     // BLOCKS - STATE MAPPERS //
 
     // Blocks with Ignored Properties
-      for (Block block : BlocksTFC.getAllFluidBlocks()) {
-          ModelLoader.setCustomStateMapper(block,
-              new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
-      }
+    for (Block block : BlocksTFC.getAllFluidBlocks()) {
+      ModelLoader.setCustomStateMapper(block,
+          new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
+    }
 
-      for (Block block : BlocksTFC.getAllLeafBlocks()) {
-          ModelLoader.setCustomStateMapper(block,
-              new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
-      }
+    for (Block block : BlocksTFC.getAllLeafBlocks()) {
+      ModelLoader.setCustomStateMapper(block,
+          new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
+    }
 
-      for (Block block : BlocksTFC.getAllLogBlocks()) {
-          ModelLoader.setCustomStateMapper(block,
-              new StateMap.Builder().ignore(BlockLogTFC.PLACED).build());
-      }
+    for (Block block : BlocksTFC.getAllLogBlocks()) {
+      ModelLoader.setCustomStateMapper(block,
+          new StateMap.Builder().ignore(BlockLogTFC.PLACED).build());
+    }
 
-      for (Block block : BlocksTFC.getAllSaplingBlocks()) {
-          ModelLoader.setCustomStateMapper(block,
-              new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
-      }
+    for (Block block : BlocksTFC.getAllSaplingBlocks()) {
+      ModelLoader.setCustomStateMapper(block,
+          new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
+    }
 
-      for (Block block : BlocksTFC.getAllCropBlocks()) {
-          ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(WILD).build());
-      }
+    for (Block block : BlocksTFC.getAllCropBlocks()) {
+      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(WILD).build());
+    }
 
-      for (Block block : BlocksTFC.getAllFruitTreeLeavesBlocks()) {
-          ModelLoader.setCustomStateMapper(block,
-              new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE)
-                  .ignore(BlockFruitTreeLeaves.HARVESTABLE)
-                  .build());
-      }
-
-    BlocksTFC.getAllBlockRockVariants().forEach(e -> {
-      if (e.getType() == Rock.Type.RAW) {
-        ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(CAN_FALL).build());
-      } else if (e.getType() == Rock.Type.SMOOTH) {
-        ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(CAN_FALL).build());
-      }
-    });
+    for (Block block : BlocksTFC.getAllFruitTreeLeavesBlocks()) {
+      ModelLoader.setCustomStateMapper(block,
+          new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE)
+              .ignore(BlockFruitTreeLeaves.HARVESTABLE)
+              .build());
+    }
 
     // Empty Models
     final ModelResourceLocation empty = new ModelResourceLocation(MODID_TFC + ":empty");
@@ -331,16 +326,16 @@ public final class ClientRegisterEvents {
     //noinspection ConstantConditions
     String registryName = item.getRegistryName().getPath();
     StringBuilder path = new StringBuilder(MODID_TFC).append(':');
-      if (!Strings.isNullOrEmpty(prefix)) {
-          path.append(prefix).append('/');
-      }
+    if (!Strings.isNullOrEmpty(prefix)) {
+      path.append(prefix).append('/');
+    }
     path.append(e.name());
-      if (!Strings.isNullOrEmpty(prefix)) {
-          path.append(registryName.replace(prefix,
-              "")); // There well be a '/' at the start of registryName due to the prefix, so don't add an extra one.
-      } else {
-          path.append('/').append(registryName);
-      }
+    if (!Strings.isNullOrEmpty(prefix)) {
+      path.append(registryName.replace(prefix,
+          "")); // There well be a '/' at the start of registryName due to the prefix, so don't add an extra one.
+    } else {
+      path.append('/').append(registryName);
+    }
     ModelLoader.setCustomModelResourceLocation(item, e.ordinal(),
         new ModelResourceLocation(path.toString()
             .toLowerCase()));

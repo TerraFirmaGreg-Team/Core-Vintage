@@ -1,17 +1,23 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.vein;
 
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
+import su.terrafirmagreg.modules.rock.api.types.type.RockTypes;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
 
 import com.google.common.collect.ImmutableSet;
+import gregtech.api.worldgen.config.OreConfigUtils;
 import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockOreTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.Collection;
 import java.util.Random;
@@ -19,25 +25,33 @@ import java.util.Set;
 
 public class VeinType {
 
+  @Getter
   private final Ore ore;
   private final ItemStack looseRock;
-  private final Set<Rock> baseRocks;
+  private final Set<RockType> baseRocks;
 
+  @Getter
   private final int width;
+  @Getter
   private final int height;
+  @Getter
   private final int minY;
+  @Getter
   private final int maxY;
 
+  @Getter
   private final double weight;
+  @Getter
   private final double density;
 
+  @Getter
   private final int rarity;
   private final Shape shape;
   private String name;
 
-  public VeinType(@Nullable Ore ore, ItemStack looseRock, Collection<Rock> baseRocks, Shape shape,
-      int width, int height, int rarity, int minY,
-      int maxY, int density) {
+  public VeinType(@Nullable Ore ore, ItemStack looseRock, Collection<RockType> baseRocks, Shape shape,
+          int width, int height, int rarity, int minY,
+          int maxY, int density) {
     this.ore = ore;
     this.looseRock = looseRock;
     this.baseRocks = ImmutableSet.copyOf(baseRocks);
@@ -50,7 +64,7 @@ public class VeinType {
     this.minY = minY;
     this.maxY = maxY;
     this.density = 0.006
-        * density; // For debug purposes, removing the factor here will lead to ore veins being full size, easy to see shapes
+            * density; // For debug purposes, removing the factor here will lead to ore veins being full size, easy to see shapes
   }
 
   /**
@@ -58,7 +72,7 @@ public class VeinType {
    */
   public Vein createVein(Random rand, int chunkX, int chunkZ) {
     BlockPos startPos = new BlockPos(chunkX * 16 + 8 + rand.nextInt(16),
-        minY + rand.nextInt(maxY - minY), chunkZ * 16 + 8 + rand.nextInt(16));
+            minY + rand.nextInt(maxY - minY), chunkZ * 16 + 8 + rand.nextInt(16));
     Ore.Grade grade = Ore.Grade.NORMAL;
     if (ore != null && ore.isGraded()) {
       float randomGrade = rand.nextFloat();
@@ -80,15 +94,12 @@ public class VeinType {
    * @return true if the given block state is part of this ore vein
    */
   public boolean isOreBlock(IBlockState state) {
-    return state.getBlock() instanceof BlockOreTFC
-        && ((BlockOreTFC) state.getBlock()).ore == this.getOre();
+    return state.getBlock() instanceof BlockOreTFC blockOre && blockOre.ore == this.getOre();
   }
 
-  /**
-   * Get the ore state for placement at a specific rock position
-   */
-  public IBlockState getOreState(Rock rock, Ore.Grade grade) {
-    return BlockOreTFC.get(ore, rock, grade);
+  public IBlockState getOreState(RockType rock) {
+
+    return OreConfigUtils.getOreForMaterial(rock.getMaterial()).get(BlocksRock.RAW.getStoneType());
   }
 
   public boolean hasLooseRocks() {
@@ -113,53 +124,21 @@ public class VeinType {
     String ore = "special";
     if (getOre() != null) {
       ore = getOre().toString();
-    } else if (getOreState(Rock.GRANITE, Ore.Grade.NORMAL) != null) {
+    } else if (getOreState(RockTypes.GRANITE) != null) {
       // print the registry name
       //noinspection ConstantConditions
-      ore = getOreState(Rock.GRANITE, Ore.Grade.NORMAL).getBlock().getRegistryName().toString();
+      ore = getOreState(RockTypes.GRANITE).getBlock().getRegistryName().toString();
     }
     return String.format(
-        "%s: {ore=%s, shape=%s, size=%s, rarity=%d, baseRocks=%s, minY=%d, maxY=%d, density=%.2f}",
-        name, ore, shape, getWidth(),
-        getRarity(), baseRocks, getMinY(), getMaxY(), getDensity());
-  }
-
-  public int getWidth() {
-    return width;
-  }
-
-  public int getHeight() {
-    return height;
-  }
-
-  public int getMinY() {
-    return minY;
-  }
-
-  public int getMaxY() {
-    return maxY;
-  }
-
-  public double getWeight() {
-    return weight;
-  }
-
-  public double getDensity() {
-    return density;
-  }
-
-  public int getRarity() {
-    return rarity;
-  }
-
-  public Ore getOre() {
-    return ore;
+            "%s: {ore=%s, shape=%s, size=%s, rarity=%d, baseRocks=%s, minY=%d, maxY=%d, density=%.2f}",
+            name, ore, shape, getWidth(),
+            getRarity(), baseRocks, getMinY(), getMaxY(), getDensity());
   }
 
   /**
    * Can the vein spawn in the specified rock type
    */
-  public boolean canSpawnIn(Rock rock) {
+  public boolean canSpawnIn(RockType rock) {
     return baseRocks.contains(rock);
   }
 
@@ -168,25 +147,4 @@ public class VeinType {
     CLUSTER
   }
 
-  public static class CustomVeinType extends VeinType {
-
-    private final IBlockState oreState;
-
-    public CustomVeinType(@NotNull IBlockState oreState, ItemStack looseRock,
-        @NotNull Collection<Rock> rocks, Shape shape, int width, int height,
-        int rarity, int minY, int maxY, int density) {
-      super(null, looseRock, rocks, shape, width, height, rarity, minY, maxY, density);
-      this.oreState = oreState;
-    }
-
-    @Override
-    public boolean isOreBlock(IBlockState state) {
-      return state == this.oreState;
-    }
-
-    @Override
-    public IBlockState getOreState(Rock rock, Ore.Grade grade) {
-      return this.oreState;
-    }
-  }
 }

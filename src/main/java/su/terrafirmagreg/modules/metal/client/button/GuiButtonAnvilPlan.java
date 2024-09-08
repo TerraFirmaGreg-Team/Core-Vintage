@@ -16,7 +16,7 @@ import net.dries007.tfc.client.button.IButtonTooltip;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil.ANVIL_BACKGROUND;
+import static su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil.BACKGROUND;
 
 @SideOnly(Side.CLIENT)
 public class GuiButtonAnvilPlan extends BaseGuiButton implements IButtonTooltip {
@@ -35,9 +35,9 @@ public class GuiButtonAnvilPlan extends BaseGuiButton implements IButtonTooltip 
   public void drawButton(@NotNull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
     if (this.visible) {
       GlStateManager.color(1, 1, 1, 1);
-      mc.getTextureManager().bindTexture(ANVIL_BACKGROUND);
+      mc.getTextureManager().bindTexture(BACKGROUND);
       hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
-          && mouseY < this.y + this.height;
+              && mouseY < this.y + this.height;
       drawModalRectWithCustomSizedTexture(x, y, 218, 0, 18, 18, 256, 256);
       IAnvilRecipe recipe = tile.getRecipe();
       if (recipe != null) {

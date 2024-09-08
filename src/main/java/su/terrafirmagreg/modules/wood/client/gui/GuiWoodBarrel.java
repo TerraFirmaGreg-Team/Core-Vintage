@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.client.gui;
 
+import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
 import su.terrafirmagreg.modules.wood.ModuleWood;
@@ -25,7 +27,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -33,22 +34,20 @@ import net.minecraftforge.items.IItemHandler;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.client.gui.GuiContainerTE;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiWoodBarrel extends GuiContainerTE<TileWoodBarrel> {
+public class GuiWoodBarrel extends BaseGuiContainerTile<TileWoodBarrel> {
 
-  public static final ResourceLocation BARREL_BACKGROUND = ModUtils.resource(
-      "textures/gui/container/barrel.png");
+  public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/barrel.png");
   private final String translationKey;
 
   public GuiWoodBarrel(Container container, InventoryPlayer playerInv, TileWoodBarrel tile,
-      IBlockState state) {
-    super(container, playerInv, tile, BARREL_BACKGROUND);
+          IBlockState state) {
+    super(container, playerInv, tile, BACKGROUND);
 
     this.translationKey = state.getBlock().getTranslationKey();
   }
@@ -78,8 +77,8 @@ public class GuiWoodBarrel extends GuiContainerTE<TileWoodBarrel> {
         } else {
           tooltip.add(fluid.getLocalizedName());
           tooltip.add(
-              TextFormatting.GRAY + I18n.format(ModUtils.localize("tooltip", "barrel_fluid_amount"),
-                  fluid.amount));
+                  TextFormatting.GRAY + I18n.format(ModUtils.localize("tooltip", "barrel_fluid_amount"),
+                          fluid.amount));
         }
 
         this.drawHoveringText(tooltip, mouseX, mouseY, fontRenderer);
@@ -104,7 +103,7 @@ public class GuiWoodBarrel extends GuiContainerTE<TileWoodBarrel> {
     if (tile.isSealed()) {
       // Draw over the input items, making them look unavailable
       IItemHandler handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-          null);
+              null);
       if (handler != null) {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         for (int slotId = 0; slotId < handler.getSlots(); slotId++) {
@@ -123,18 +122,18 @@ public class GuiWoodBarrel extends GuiContainerTE<TileWoodBarrel> {
           isLong = true;
         }
         fontRenderer.drawString(resultName, xSize / 2 - (isLong ? recipeWidth / 2 - 6 : 28),
-            isLong ? 73 : 61, 0x404040);
+                isLong ? 73 : 61, 0x404040);
       }
       fontRenderer.drawString(tile.getSealedDate(),
-          xSize / 2 - (isLong ? 28 : fontRenderer.getStringWidth(tile.getSealedDate()) / 2),
-          isLong ? 19 : 73, 0x404040);
+              xSize / 2 - (isLong ? 28 : fontRenderer.getStringWidth(tile.getSealedDate()) / 2),
+              isLong ? 19 : 73, 0x404040);
     }
   }
 
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-    if (Loader.isModLoaded("jei")) {
+    if (GameUtils.isModLoaded("jei")) {
       drawTexturedModalRect(guiLeft + 92, guiTop + 21, 227, 0, 9, 14);
     }
 
@@ -161,8 +160,8 @@ public class GuiWoodBarrel extends GuiContainerTE<TileWoodBarrel> {
           GlStateManager.enableAlpha();
           GlStateManager.enableBlend();
           GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
-              GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-              GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                  GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+                  GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
           int color = fluid.getColor();
 
@@ -178,12 +177,12 @@ public class GuiWoodBarrel extends GuiContainerTE<TileWoodBarrel> {
           while (fillHeightPixels > 15) {
             buffer.pos(positionX, positionY, 0).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
             buffer.pos(positionX, positionY + 16, 0).tex(sprite.getMinU(), sprite.getMaxV())
-                .endVertex();
+                    .endVertex();
             buffer.pos(positionX + 16, positionY + 16, 0)
-                .tex(sprite.getMaxU(), sprite.getMaxV())
-                .endVertex();
+                    .tex(sprite.getMaxU(), sprite.getMaxV())
+                    .endVertex();
             buffer.pos(positionX + 16, positionY, 0).tex(sprite.getMaxU(), sprite.getMinV())
-                .endVertex();
+                    .endVertex();
 
             fillHeightPixels -= 16;
             positionY -= 16;
@@ -193,22 +192,22 @@ public class GuiWoodBarrel extends GuiContainerTE<TileWoodBarrel> {
             int blank = 16 - fillHeightPixels;
             positionY += blank;
             buffer.pos(positionX, positionY, 0)
-                .tex(sprite.getMinU(), sprite.getInterpolatedV(blank))
-                .endVertex();
+                    .tex(sprite.getMinU(), sprite.getInterpolatedV(blank))
+                    .endVertex();
             buffer.pos(positionX, positionY + fillHeightPixels, 0)
-                .tex(sprite.getMinU(), sprite.getMaxV())
-                .endVertex();
+                    .tex(sprite.getMinU(), sprite.getMaxV())
+                    .endVertex();
             buffer.pos(positionX + 16, positionY + fillHeightPixels, 0)
-                .tex(sprite.getMaxU(), sprite.getMaxV())
-                .endVertex();
+                    .tex(sprite.getMaxU(), sprite.getMaxV())
+                    .endVertex();
             buffer.pos(positionX + 16, positionY, 0)
-                .tex(sprite.getMaxU(), sprite.getInterpolatedV(blank))
-                .endVertex();
+                    .tex(sprite.getMaxU(), sprite.getInterpolatedV(blank))
+                    .endVertex();
           }
 
           Tessellator.getInstance().draw();
 
-          Minecraft.getMinecraft().renderEngine.bindTexture(BARREL_BACKGROUND);
+          Minecraft.getMinecraft().renderEngine.bindTexture(BACKGROUND);
           GlStateManager.color(1, 1, 1, 1);
         }
       }

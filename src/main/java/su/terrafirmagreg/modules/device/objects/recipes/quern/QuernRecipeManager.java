@@ -19,9 +19,9 @@ public class QuernRecipeManager implements IQuernRecipeManager {
   @Nullable
   public static IQuernRecipe findMatchingRecipe(ItemStack item) {
     return recipes.stream()
-        .filter(x -> x.isValidInput(item))
-        .findFirst()
-        .orElse(null);
+            .filter(x -> x.isValidInput(item))
+            .findFirst()
+            .orElse(null);
   }
 
   @Override
@@ -30,8 +30,8 @@ public class QuernRecipeManager implements IQuernRecipeManager {
   }
 
   @Override
-  public boolean addRecipe(IQuernRecipe recipe) {
-    return recipes.add(recipe);
+  public void addRecipe(IQuernRecipe recipe) {
+    recipes.add(recipe);
   }
 
   @Override

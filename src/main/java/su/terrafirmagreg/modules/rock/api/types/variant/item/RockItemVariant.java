@@ -59,6 +59,10 @@ public class RockItemVariant extends Variant<RockItemVariant> {
     return this;
   }
 
+  public String getRegistryKey(RockType type) {
+    return String.format("rock/%s/%s", this, type);
+  }
+
   public String getLocalizedName() {
     return new TextComponentTranslation(
         String.format("rock.variant.%s.name", this)).getFormattedText();

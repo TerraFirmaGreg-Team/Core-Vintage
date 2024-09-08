@@ -1,7 +1,8 @@
 package com.eerussianguy.firmalife.compat;
 
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -18,34 +19,31 @@ import static su.terrafirmagreg.data.Constants.MODID_FL;
 @Mod.EventBusSubscriber(modid = MODID_FL)
 public class ModuleManager {
 
-    private static final ArrayList<ModuleCore> modules = new ArrayList<>();
+  private static final ArrayList<ModuleCore> modules = new ArrayList<>();
 
-    public static void registerModule(ModuleCore module) {
-        if (isLoaded(module.getDep())) {
-            modules.add(module);
-        }
+  public static void registerModule(ModuleCore module) {
+    if (GameUtils.isModLoaded(module.getDep())) {
+      modules.add(module);
     }
+  }
 
-    public static ArrayList<ModuleCore> getModules() {
-        return modules;
+  public static ArrayList<ModuleCore> getModules() {
+    return modules;
+  }
+
+  public static void initModules() {
+    registerModule(new DTModule());
+  }
+
+  @SubscribeEvent(priority = EventPriority.LOWEST)
+  public static void onRegisterNutRecipeEvent(RegistryEvent.Register<NutRecipe> event) {
+    IForgeRegistry<NutRecipe> r = event.getRegistry();
+
+    for (ModuleCore module : modules) {
+      if (module.getRegistry() != null) {
+        module.getRegistry().registerNutRecipes(r);
+      }
     }
+  }
 
-    public static void initModules() {
-        registerModule(new DTModule());
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void onRegisterNutRecipeEvent(RegistryEvent.Register<NutRecipe> event) {
-        IForgeRegistry<NutRecipe> r = event.getRegistry();
-
-        for (ModuleCore module : modules) {
-            if (module.getRegistry() != null) {
-                module.getRegistry().registerNutRecipes(r);
-            }
-        }
-    }
-
-    private static boolean isLoaded(String modName) {
-        return Loader.isModLoaded(modName);
-    }
 }

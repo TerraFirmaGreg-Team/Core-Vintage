@@ -13,7 +13,7 @@ import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.data.lib.collection.RegistryList;
 import su.terrafirmagreg.data.lib.model.CustomModelLoader;
-import su.terrafirmagreg.modules.core.objects.command.CommandManager;
+import su.terrafirmagreg.modules.core.object.command.CommandManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -155,7 +155,7 @@ public class Registry {
     blocks.forEach(block -> {
       if (block instanceof IProviderTile provider) {
         TileUtils.registerTileEntity(provider.getTileEntityClass(),
-            provider.getTileEntityClass().getSimpleName());
+                provider.getTileEntityClass().getSimpleName());
       }
     });
   }
@@ -222,9 +222,9 @@ public class Registry {
   public void onRegisterLootTableLoad(LootTableLoadEvent event) {
 
     lootTable.get(event.getName())
-        .forEach(builder -> event.getTable()
-            .getPool(builder.getPool())
-            .addEntry(builder.build()));
+            .forEach(builder -> event.getTable()
+                    .getPool(builder.getPool())
+                    .addEntry(builder.build()));
   }
 
   public void onRegisterCommand(FMLServerStartingEvent event) {
@@ -312,7 +312,9 @@ public class Registry {
 
     blocks.forEach(block -> {
       if (block instanceof IProviderBlockColor provider) {
-        event.getBlockColors().registerBlockColorHandler(provider.getBlockColor(), block);
+        if (provider.getBlockColor() != null) {
+          event.getBlockColors().registerBlockColorHandler(provider.getBlockColor(), block);
+        }
       }
     });
   }
@@ -324,7 +326,7 @@ public class Registry {
       if (block instanceof IProviderBlockColor provider) {
         if (provider.getItemColor() != null) {
           event.getItemColors()
-              .registerItemColorHandler(provider.getItemColor(), Item.getItemFromBlock(block));
+                  .registerItemColorHandler(provider.getItemColor(), Item.getItemFromBlock(block));
         }
       }
     });

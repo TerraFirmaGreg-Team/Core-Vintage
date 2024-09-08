@@ -51,10 +51,10 @@ public class RockType extends Type<RockType> {
   @Nullable
   public static RockType getByName(@NotNull String name) {
     return RockType.getTypes()
-        .stream()
-        .filter(s -> s.getName().equals(name))
-        .findFirst()
-        .orElse(null);
+            .stream()
+            .filter(s -> s.getName().equals(name))
+            .findFirst()
+            .orElse(null);
   }
 
   /**
@@ -96,8 +96,7 @@ public class RockType extends Type<RockType> {
   }
 
   public String getLocalizedName() {
-    return new TextComponentTranslation(
-        String.format("rock.type.%s.name", this)).getFormattedText();
+    return new TextComponentTranslation(String.format("rock.type.%s.name", this)).getFormattedText();
   }
 
   public static class Builder {

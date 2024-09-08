@@ -36,7 +36,7 @@ public class GuiButtonBarrelSeal extends BaseGuiButton implements IButtonTooltip
   public void drawButton(@NotNull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
     if (this.visible) {
       GlStateManager.color(1, 1, 1, 1);
-      mc.getTextureManager().bindTexture(GuiWoodBarrel.BARREL_BACKGROUND);
+      mc.getTextureManager().bindTexture(GuiWoodBarrel.BACKGROUND);
       hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
           && mouseY < this.y + this.height;
       if (tile.isSealed()) {

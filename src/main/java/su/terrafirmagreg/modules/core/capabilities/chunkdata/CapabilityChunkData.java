@@ -10,6 +10,9 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
+
+import org.jetbrains.annotations.NotNull;
+
 public final class CapabilityChunkData {
 
   public static final ResourceLocation KEY = ModUtils.resource("chunkdata_capability");
@@ -18,8 +21,7 @@ public final class CapabilityChunkData {
   public static final Capability<ICapabilityChunkData> CAPABILITY = ModUtils.getNull();
 
   public static void register() {
-    CapabilityManager.INSTANCE.register(ICapabilityChunkData.class, new StorageChunkData(),
-        ProviderChunkData::new);
+    CapabilityManager.INSTANCE.register(ICapabilityChunkData.class, new StorageChunkData(), ProviderChunkData::new);
   }
 
   /**
@@ -29,6 +31,7 @@ public final class CapabilityChunkData {
    * @param pos   Позиция.
    * @return Экземпляр ChunkDataTFC для указанного мира и позиции.
    */
+  @NotNull
   public static ICapabilityChunkData get(World world, BlockPos pos) {
     return get(world.getChunk(pos));
   }
@@ -39,6 +42,7 @@ public final class CapabilityChunkData {
    * @param chunk Чанк.
    * @return Экземпляр ChunkDataTFC для указанного чанка.
    */
+  @NotNull
   public static ICapabilityChunkData get(Chunk chunk) {
     var data = chunk.getCapability(CAPABILITY, null);
     return data == null ? ProviderChunkData.EMPTY : data;

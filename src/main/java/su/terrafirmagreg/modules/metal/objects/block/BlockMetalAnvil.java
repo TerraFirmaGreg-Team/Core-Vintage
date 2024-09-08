@@ -70,19 +70,19 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
     this.type = type;
 
     getSettings()
-        .sound(SoundType.ANVIL)
-        .nonFullCube()
-        .nonOpaque()
-        .hardness(4.0F)
-        .resistance(10F)
-        .nonCanStack()
-        .harvestLevel(ToolClasses.PICKAXE, 0)
-        .fallable(this, variant.getSpecification())
-        .size(HUGE)
-        .weight(VERY_HEAVY);
+            .sound(SoundType.ANVIL)
+            .nonFullCube()
+            .nonOpaque()
+            .hardness(4.0F)
+            .resistance(10F)
+            .nonCanStack()
+            .harvestLevel(ToolClasses.PICKAXE, 0)
+            .fallable(this, variant.getSpecification())
+            .size(HUGE)
+            .weight(VERY_HEAVY);
 
-    setDefaultState(getBlockState().getBaseState()
-        .withProperty(HORIZONTAL, EnumFacing.NORTH));
+    setDefaultState(blockState.getBaseState()
+            .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 
   //	@Nullable
@@ -97,21 +97,21 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
   //	}
 
   protected EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World worldIn,
-      BlockPos pos, EnumHand hand, EnumFacing facing,
-      float hitX, float hitY, float hitZ) {
+          BlockPos pos, EnumHand hand, EnumFacing facing,
+          float hitX, float hitY, float hitZ) {
     if (facing != null) {
       BlockPos placedPos = pos.offset(facing);
       BlockPos supportPos = placedPos.down();
       IBlockState state = worldIn.getBlockState(placedPos);
       IBlockState stateSupport = worldIn.getBlockState(supportPos);
       if (state.getBlock().isReplaceable(worldIn, placedPos) && stateSupport.isSideSolid(worldIn,
-          supportPos, EnumFacing.UP)) {
+              supportPos, EnumFacing.UP)) {
         if (!worldIn.isRemote) {
           worldIn.setBlockState(placedPos,
-              BlocksMetal.ANVIL.get(type).getDefaultState()
-                  .withProperty(HORIZONTAL, player.getHorizontalFacing()));
+                  BlocksMetal.ANVIL.get(type).getDefaultState()
+                          .withProperty(HORIZONTAL, player.getHorizontalFacing()));
           worldIn.playSound(null, placedPos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS,
-              1.0F, 1.0F);
+                  1.0F, 1.0F);
           stack.shrink(1);
           player.setHeldItem(hand, stack);
         }
@@ -138,7 +138,7 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
 
   @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-      EnumFacing face) {
+          EnumFacing face) {
     return BlockFaceShape.UNDEFINED;
   }
 
@@ -164,8 +164,8 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-      EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-      float hitX, float hitY, float hitZ) {
+          EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+          float hitX, float hitY, float hitZ) {
     if (hand == EnumHand.OFF_HAND) {
       return false;
     }
@@ -202,8 +202,8 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
           double z = pos.getZ() + 0.5;
           for (int i = 0; i < RNG.nextInt(5) + 3; i++) {
             TFCParticles.SPARK.sendToAllNear(worldIn, x + (RNG.nextFloat() - 0.5) / 7, y,
-                z + (RNG.nextFloat() - 0.5) / 7, 6 * (RNG.nextFloat() - 0.5), 2D,
-                6 * (RNG.nextFloat() - 0.5), 22);
+                    z + (RNG.nextFloat() - 0.5) / 7, 6 * (RNG.nextFloat() - 0.5), 2D,
+                    6 * (RNG.nextFloat() - 0.5), 22);
           }
           return true;
         }
@@ -219,7 +219,7 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
           // Try to insert an item
           // Hammers will not be inserted since we already checked if heldItem is a hammer for attemptWelding
           if (tile.isItemValid(i, heldItem) && tile.getSlotLimit(i) > cap.getStackInSlot(i)
-              .getCount()) {
+                  .getCount()) {
             ItemStack result = cap.insertItem(i, heldItem, false);
             playerIn.setHeldItem(hand, result);
             ModuleMetal.LOGGER.info("Inserted {} into slot {}", heldItem.getDisplayName(), i);
@@ -230,7 +230,7 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
     } else {
       // not sneaking, so try and open GUI
       if (!worldIn.isRemote) {
-        GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.ANVIL);
+        GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.METAL_ANVIL);
       }
       return true;
     }
@@ -244,7 +244,7 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
 
   @Override
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-      EntityPlayer player) {
+          EntityPlayer player) {
     return new ItemStack(BlocksMetal.ANVIL.get(type));
   }
 

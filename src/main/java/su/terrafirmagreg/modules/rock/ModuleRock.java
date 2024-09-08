@@ -8,9 +8,11 @@ import su.terrafirmagreg.modules.rock.api.types.type.RockTypeHandler;
 import su.terrafirmagreg.modules.rock.event.MaterialEventHandler;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
+import su.terrafirmagreg.modules.rock.plugin.top.TheOneProbeRock;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 
@@ -48,6 +50,12 @@ public final class ModuleRock extends ModuleBase {
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
 
+  }
+
+  @Override
+  public void onInit(FMLInitializationEvent event) {
+
+    TheOneProbeRock.init();
   }
 
   @Override

@@ -1,9 +1,10 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.client.audio.IMachineSoundEffect;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiInductionCrucible;
@@ -23,7 +24,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -42,7 +42,7 @@ import static su.terrafirmagreg.data.Properties.LIT;
 
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
 public class TileInductionCrucible extends TileCrucible implements IMachineSoundEffect,
-    IAmbientalTileProvider {
+        IAmbientalTileProvider {
 
   private final MachineEnergyStorage energyContainer;
   private final boolean addedToIc2Network = false;
@@ -52,7 +52,7 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
   public TileInductionCrucible() {
     super();
     energyContainer = new MachineEnergyStorage(TechConfig.DEVICES.inductionCrucibleEnergyCapacity,
-        TechConfig.DEVICES.inductionCrucibleEnergyCapacity, 0);
+            TechConfig.DEVICES.inductionCrucibleEnergyCapacity, 0);
   }
 
   //    @Optional.Method(modid = "ic2")
@@ -155,8 +155,8 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
     if (facing == null || facing == world.getBlockState(pos).getValue(HORIZONTAL)) {
       if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
         return true;
-      } else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") &&
-          capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
+      } else if (TechConfig.DEVICES.acceptGTCEEU && GameUtils.isModLoaded("gregtech") &&
+              capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
         return true;
       }
     }
@@ -169,8 +169,8 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
     if (facing == null || facing == world.getBlockState(pos).getValue(HORIZONTAL)) {
       if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
         return (T) this.energyContainer;
-      } else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") &&
-          capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
+      } else if (TechConfig.DEVICES.acceptGTCEEU && GameUtils.isModLoaded("gregtech") &&
+              capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
         return (T) this.energyContainer.getGTCEHandler();
       }
     }
@@ -218,7 +218,7 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
     }
     IBlockState state = world.getBlockState(pos);
     return state.getBlock() instanceof BlockInductionCrucible && world.getBlockState(pos)
-        .getValue(LIT);
+            .getValue(LIT);
   }
 
   @Override
@@ -243,9 +243,9 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
 
   @Override
   public GuiCrucible getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new GuiInductionCrucible(getContainer(inventoryPlayer, world, state, pos),
-        inventoryPlayer, this);
+            inventoryPlayer, this);
   }
 
   @Override

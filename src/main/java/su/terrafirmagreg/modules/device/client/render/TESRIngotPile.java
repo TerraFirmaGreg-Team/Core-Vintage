@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.modules.core.objects.tile.TileIngotPile;
+import su.terrafirmagreg.modules.core.object.tile.TileIngotPile;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -21,7 +21,7 @@ public class TESRIngotPile extends TileEntitySpecialRenderer<TileIngotPile> {
 
   @Override
   public void render(TileIngotPile tile, double x, double y, double z, float partialTicks,
-      int destroyStage, float alpha) {
+          int destroyStage, float alpha) {
     try {
       GlStateManager.color(1, 1, 1, 1);
 
@@ -29,7 +29,7 @@ public class TESRIngotPile extends TileEntitySpecialRenderer<TileIngotPile> {
       int count = tile.getCount();
       //noinspection ConstantConditions
       bindTexture(new ResourceLocation(MODID_TFC,
-          "textures/blocks/metal/" + metal.getRegistryName().getPath() + ".png"));
+              "textures/blocks/metal/" + metal.getRegistryName().getPath() + ".png"));
       GlStateManager.pushMatrix();
       GlStateManager.translate(x, y, z);
 

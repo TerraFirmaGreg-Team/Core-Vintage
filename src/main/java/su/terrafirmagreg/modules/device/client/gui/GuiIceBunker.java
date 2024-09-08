@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.data.Unicode;
 import su.terrafirmagreg.modules.device.objects.tiles.TileIceBunker;
@@ -11,12 +12,10 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 
-import net.dries007.tfc.client.gui.GuiContainerTE;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiIceBunker extends GuiContainerTE<TileIceBunker> {
+public class GuiIceBunker extends BaseGuiContainerTile<TileIceBunker> {
 
   private static final ResourceLocation BACKGROUND = ModUtils.resource(
       "textures/gui/container/ice_bunker.png");

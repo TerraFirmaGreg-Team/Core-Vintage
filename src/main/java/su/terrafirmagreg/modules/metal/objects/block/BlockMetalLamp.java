@@ -85,7 +85,7 @@ public class BlockMetalLamp
         .oreDict("lamp");
 
     setTickRandomly(true);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(VERTICAL, EnumFacing.UP)
         .withProperty(LIT, false));
 

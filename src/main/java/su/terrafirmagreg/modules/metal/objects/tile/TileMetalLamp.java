@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.metal.objects.tile;
 
 import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierEnvironmental;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierEnvironmental;
+import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.metal.ConfigMetal;
 import su.terrafirmagreg.modules.metal.objects.itemblock.ItemBlockMetalLamp;
 
@@ -36,8 +36,8 @@ import lombok.Setter;
 import java.util.Optional;
 
 public class TileMetalLamp
-    extends TETickCounter
-    implements IFluidTankCallback, IFluidHandlerSidedCallback, IAmbientalTileProvider {
+        extends TETickCounter
+        implements IFluidTankCallback, IFluidHandlerSidedCallback, IAmbientalTileProvider {
 
   public static int CAPACITY;
   private final FluidTank tank = new FluidTankCallback(this, 0, CAPACITY);
@@ -91,7 +91,7 @@ public class TileMetalLamp
   public ItemStack getItemStack(TileMetalLamp tile, IBlockState state) {
     ItemStack stack = new ItemStack(state.getBlock());
     IFluidHandlerItem itemCap = stack.getCapability(
-        CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     IFluidHandler teCap = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
     if (itemCap != null && teCap != null) {
       itemCap.fill(teCap.drain(CAPACITY, false), true); //don't drain creative item
@@ -129,7 +129,7 @@ public class TileMetalLamp
    */
   public void loadFromItemStack(ItemStack stack) {
     IFluidHandler lampCap = stack.getCapability(
-        CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (lampCap instanceof FluidWhitelistHandlerComplex) {
       NBTTagCompound contents = stack.getTagCompound();
       if (contents != null) {

@@ -86,7 +86,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
         .lightValue(15);
     disableStats();
     setTickRandomly(true);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(LIT, false)
         .withProperty(ATTACHMENT, FirePitAttachment.NONE));
   }

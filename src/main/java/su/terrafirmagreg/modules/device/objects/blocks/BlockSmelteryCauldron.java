@@ -52,7 +52,7 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProvi
         .hardness(3.0F);
 
     setHarvestLevel(ToolClasses.PICKAXE, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(LIT, false)
         .withProperty(FACING, EnumFacing.NORTH));
   }

@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.world.classic.objects.generator;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
-import su.terrafirmagreg.modules.rock.objects.blocks.BlockRockSpeleothem;
+import su.terrafirmagreg.modules.rock.object.block.BlockRockSpeleothem;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.block.Block;
@@ -20,11 +20,11 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class GeneratorSpeleothem
-    implements IWorldGenerator {
+        implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0) {
       // Вычисляем координаты центра чанка
       int x = chunkX * 16 + 8;
@@ -40,7 +40,7 @@ public class GeneratorSpeleothem
       for (int i = 0; i < tries; i++) {
         // Генерируем случайную позицию в пределах разброса и устанавливаем высоту в пределах верхней границы
         var target = new BlockPos(x + random.nextInt(spread), random.nextInt(upperBound) + offset,
-            z + random.nextInt(spread));
+                z + random.nextInt(spread));
         if (placeSpeleothemCluster(random, world, target, innerSpread, innerTries)) {
           i++;
         }
@@ -49,7 +49,7 @@ public class GeneratorSpeleothem
   }
 
   private boolean placeSpeleothemCluster(Random random, World world, BlockPos pos, int spread,
-      int tries) {
+          int tries) {
     if (!findAndPlaceSpeleothem(random, world, pos)) {
       return false;
     }
@@ -57,8 +57,8 @@ public class GeneratorSpeleothem
     for (int i = 0; i < tries; i++) {
       // Генерируем случайную позицию внутри кластера
       var target = pos.add(random.nextInt(spread * 2 + 1) - spread,
-          random.nextInt(spread + 1) - spread,
-          random.nextInt(spread * 2 + 1) - spread);
+              random.nextInt(spread + 1) - spread,
+              random.nextInt(spread * 2 + 1) - spread);
       findAndPlaceSpeleothem(random, world, target);
     }
 
@@ -72,10 +72,10 @@ public class GeneratorSpeleothem
     }
 
     int off = world.provider.isNether() ? -1000 :
-        0; // Определяем смещение по вертикали. Если мир является "Nether", устанавливаем смещение в -1000, иначе 0.
+            0; // Определяем смещение по вертикали. Если мир является "Nether", устанавливаем смещение в -1000, иначе 0.
     boolean up = random.nextBoolean(); // Генерируем случайное булево значение для определения направления (вверх или вниз).
     var diff = (up ? EnumFacing.UP
-        : EnumFacing.DOWN); // Определяем направление движения в зависимости от значения переменной "up".
+            : EnumFacing.DOWN); // Определяем направление движения в зависимости от значения переменной "up".
 
     // Если направление движения вниз и блок виден небу, возвращаем false.
     if (!up && world.canBlockSeeSky(pos)) {
@@ -123,8 +123,8 @@ public class GeneratorSpeleothem
         BlockRockSpeleothem.EnumSize sizeType = BlockRockSpeleothem.EnumSize.values()[size - i - 1];
         // Создаем блок сталактита с указанным размером и типом породы
         IBlockState targetBlock = BlocksRock.SPELEOTHEM.get(rockTypeBlock.getType())
-            .getDefaultState()
-            .withProperty(BlockRockSpeleothem.SIZE, sizeType);
+                .getDefaultState()
+                .withProperty(BlockRockSpeleothem.SIZE, sizeType);
         // Устанавливаем блок сталактита в мир
         world.setBlockState(pos, targetBlock);
       }

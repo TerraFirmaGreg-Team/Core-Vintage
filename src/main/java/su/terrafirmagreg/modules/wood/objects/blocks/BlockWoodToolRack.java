@@ -62,7 +62,7 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
         .nonFullCube();
 
     setHarvestLevel(ToolClasses.AXE, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(FACING, NORTH));
   }
 
@@ -84,10 +84,10 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     return switch (state.getValue(FACING)) {
-      default -> RACK_NORTH_AABB;
       case SOUTH -> RACK_SOUTH_AABB;
       case WEST -> RACK_WEST_AABB;
       case EAST -> RACK_EAST_AABB;
+      default -> RACK_NORTH_AABB;
     };
   }
 

@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public interface ICraftingProvider<T extends IBaseRecipe> {
 
-  boolean addRecipe(T recipe);
+  void addRecipe(T recipe);
 
   boolean removeRecipe(T recipe);
 

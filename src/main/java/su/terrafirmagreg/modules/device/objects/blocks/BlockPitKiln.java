@@ -77,7 +77,7 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile {
         .hardness(0.5f);
 
     setHarvestLevel("axe", 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(FULL, false)
         .withProperty(LIT, false));
   }

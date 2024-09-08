@@ -73,7 +73,7 @@ public class BlockPowderKeg extends BaseBlockContainer implements IProviderTile 
         .weight(Weight.VERY_HEAVY);
 
     setTickRandomly(true);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(LIT, false)
         .withProperty(SEALED, false));
   }

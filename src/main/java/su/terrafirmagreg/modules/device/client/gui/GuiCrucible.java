@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.modules.device.objects.tiles.TileCrucible;
@@ -21,7 +22,6 @@ import net.minecraftforge.fluids.Fluid;
 
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.Alloy;
 import org.lwjgl.input.Mouse;
@@ -34,10 +34,9 @@ import java.util.Map;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
-public class GuiCrucible extends GuiContainerTE<TileCrucible> {
+public class GuiCrucible extends BaseGuiContainerTile<TileCrucible> {
 
-  private static final ResourceLocation BACKGROUND = ModUtils.resource(
-      "textures/gui/container/crucible.png");
+  private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/crucible.png");
   private static final int MAX_ELEMENTS = 3;
   private int scrollPos;
   private boolean scrollPress;

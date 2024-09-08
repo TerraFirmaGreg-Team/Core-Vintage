@@ -6,6 +6,7 @@ import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import net.minecraft.item.Item;
+import net.minecraft.util.text.TextComponentTranslation;
 
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -57,5 +58,14 @@ public class SoilItemVariant extends Variant<SoilItemVariant> {
     }
 
     return this;
+  }
+
+  public String getRegistryKey(SoilType type) {
+    return String.format("soil/%s/%s", this.getName(), type);
+  }
+
+  public String getLocalizedName() {
+    return new TextComponentTranslation(
+        String.format("soil.variant.%s.name", this)).getFormattedText();
   }
 }

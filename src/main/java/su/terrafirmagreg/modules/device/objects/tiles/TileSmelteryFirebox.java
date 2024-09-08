@@ -5,9 +5,9 @@ import su.terrafirmagreg.api.base.tile.spi.ITileFields;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryFirebox;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockSmelteryCauldron;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerSmelteryFirebox;
@@ -34,8 +34,8 @@ import java.util.Optional;
 import static su.terrafirmagreg.data.Properties.LIT;
 
 public class TileSmelteryFirebox extends BaseTileTickableInventory
-    implements ICalendarTickable, ITileFields, IAmbientalTileProvider,
-    IProviderContainer<ContainerSmelteryFirebox, GuiSmelteryFirebox> {
+        implements ICalendarTickable, ITileFields, IAmbientalTileProvider,
+        IProviderContainer<ContainerSmelteryFirebox, GuiSmelteryFirebox> {
 
   private float temperature;
   private float burnTemperature;
@@ -115,7 +115,7 @@ public class TileSmelteryFirebox extends BaseTileTickableInventory
         if (temperature != targetTemperature) {
           float delta = (float) ConfigCore.MISC.HEAT.heatingModifier;
           temperature = CapabilityHeat.adjustTempTowards(temperature, targetTemperature,
-              delta * (airTicks > 0 ? 2 : 1));
+                  delta * (airTicks > 0 ? 2 : 1));
         }
       }
     }
@@ -230,15 +230,15 @@ public class TileSmelteryFirebox extends BaseTileTickableInventory
 
   @Override
   public ContainerSmelteryFirebox getContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new ContainerSmelteryFirebox(inventoryPlayer, this);
   }
 
   @Override
   public GuiSmelteryFirebox getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new GuiSmelteryFirebox(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-        this);
+            this);
   }
 
   @Override

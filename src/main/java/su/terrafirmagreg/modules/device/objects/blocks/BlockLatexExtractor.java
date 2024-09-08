@@ -64,7 +64,7 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
         .nonOpaque();
 
     setHarvestLevel(ToolClasses.PICKAXE, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(FACING, NORTH)
         .withProperty(BASE, false)
         .withProperty(POT, false)

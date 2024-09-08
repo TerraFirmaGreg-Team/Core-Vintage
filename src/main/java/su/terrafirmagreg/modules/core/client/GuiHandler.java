@@ -20,7 +20,7 @@ public class GuiHandler implements IGuiHandler {
   // use this instead of player.openGui() -> avoids magic numbers
   public static void openGui(World world, BlockPos pos, EntityPlayer player, Type type) {
     player.openGui(TerraFirmaGreg.getInstance(), type.ordinal(), world, pos.getX(), pos.getY(),
-        pos.getZ());
+            pos.getZ());
 
   }
 
@@ -118,11 +118,16 @@ public class GuiHandler implements IGuiHandler {
     POWDERKEG,
 
     // Metal modules
-    ANVIL,
+    METAL_ANVIL,
 
     // Rock modules
     ROCK_ANVIL,
     ROCK_KNAPPING,
+
+    // Soil modules
+    SOIL_MUD,
+
+
     NULL;
 
     private static final Type[] values = values();

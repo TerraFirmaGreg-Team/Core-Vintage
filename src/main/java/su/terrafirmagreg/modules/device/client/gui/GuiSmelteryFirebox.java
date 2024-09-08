@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TileSmelteryFirebox;
 
@@ -7,13 +8,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
+public class GuiSmelteryFirebox extends BaseGuiContainerTile<TileSmelteryFirebox> {
 
-import net.dries007.tfc.client.gui.GuiContainerTE;
-
-public class GuiSmelteryFirebox extends GuiContainerTE<TileSmelteryFirebox> {
-
-  private static final ResourceLocation BACKGROUND = ModUtils.resource(
-      "textures/gui/container/smeltery_firebox.png");
+  private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/smeltery_firebox.png");
 
   public GuiSmelteryFirebox(Container container, InventoryPlayer playerInv,
       TileSmelteryFirebox tile) {

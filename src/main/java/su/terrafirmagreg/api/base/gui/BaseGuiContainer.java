@@ -20,8 +20,7 @@ public abstract class BaseGuiContainer extends GuiContainer {
   protected final ResourceLocation background;
   protected final InventoryPlayer playerInv;
 
-  public BaseGuiContainer(Container container, InventoryPlayer playerInv,
-      ResourceLocation background) {
+  public BaseGuiContainer(Container container, InventoryPlayer playerInv, ResourceLocation background) {
     super(container);
     this.playerInv = playerInv;
     this.background = background;

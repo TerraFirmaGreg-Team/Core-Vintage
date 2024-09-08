@@ -49,7 +49,7 @@ public class BlockOvenWall extends BaseBlock {
         .size(Size.NORMAL)
         .weight(Weight.HEAVY);
 
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(CURED, Boolean.FALSE)
         .withProperty(FACING, EnumFacing.NORTH));
   }

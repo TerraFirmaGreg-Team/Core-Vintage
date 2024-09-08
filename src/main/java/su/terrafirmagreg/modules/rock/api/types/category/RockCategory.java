@@ -10,9 +10,11 @@ import net.minecraft.util.text.TextFormatting;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -53,6 +55,38 @@ public class RockCategory extends Category<RockCategory> {
   public static Builder builder(String name) {
 
     return new Builder(name);
+  }
+
+  @Nullable
+  public static RockCategory getByName(@NotNull String name) {
+    return RockCategory.getCategories()
+        .stream()
+        .filter(s -> s.getName().equals(name))
+        .findFirst()
+        .orElse(null);
+  }
+
+  /**
+   * Возвращает экземпляр породы по индексу.
+   *
+   * @param i Индекс породы.
+   * @return Экземпляр породы.
+   */
+  public static RockCategory valueOf(int i) {
+    var values = new RockCategory[categories.size()];
+    values = categories.toArray(values);
+
+    return i >= 0 && i < values.length ? values[i] : values[i % values.length];
+  }
+
+  /**
+   * Возвращает индекс породы в списке.
+   *
+   * @param type Порода.
+   * @return Индекс породы.
+   */
+  public static int indexOf(RockCategory type) {
+    return new ArrayList<>(categories).indexOf(type);
   }
 
   /**

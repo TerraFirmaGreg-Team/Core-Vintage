@@ -41,7 +41,7 @@ public class BlockElectricForge extends BaseBlockHorizontal implements IProvider
         .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
         .nonCanStack();
     setHarvestLevel(ToolClasses.PICKAXE, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(LIT, false)
         .withProperty(FACING, EnumFacing.NORTH));
   }

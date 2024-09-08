@@ -17,7 +17,7 @@ import lombok.Getter;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
+import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.COARSE_DIRT;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DIRT;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DRY_GRASS;
@@ -47,7 +47,7 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
   }
 
   public SoilBlockVariant setFactory(
-      BiFunction<SoilBlockVariant, SoilType, ? extends Block> factory) {
+          BiFunction<SoilBlockVariant, SoilType, ? extends Block> factory) {
     this.factory = factory;
     return this;
   }
@@ -60,13 +60,13 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
   public SoilBlockVariant build() {
     if (!variants.add(this)) {
       throw new RuntimeException(
-          String.format("SoilBlockVariant: [%s] already exists!", getName()));
+              String.format("SoilBlockVariant: [%s] already exists!", getName()));
     }
 
     for (var type : SoilType.getTypes()) {
       if (BlocksSoil.SOIL_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
         throw new RuntimeException(
-            String.format("Duplicate registry detected: %s, %s", this, type));
+                String.format("Duplicate registry detected: %s, %s", this, type));
       }
     }
     return this;
@@ -86,7 +86,7 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
 
   public String getLocalizedName() {
     return new TextComponentTranslation(
-        String.format("soil.variant.%s.name", this)).getFormattedText();
+            String.format("soil.variant.%s.name", this)).getFormattedText();
   }
 
   /**
@@ -105,10 +105,10 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
    */
   public SoilBlockVariant getNonGrassVersion() {
     if (this == GRASS ||
-        this == DRY_GRASS ||
-        this == SPARSE_GRASS ||
-        this == PODZOL ||
-        this == MYCELIUM) {
+            this == DRY_GRASS ||
+            this == SPARSE_GRASS ||
+            this == PODZOL ||
+            this == MYCELIUM) {
       return DIRT;
     }
 
@@ -133,7 +133,7 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
     }
 
     throw new IllegalArgumentException(
-        String.format("You cannot get grass from [%s] types.", this));
+            String.format("You cannot get grass from [%s] types.", this));
   }
 
   private SoilBlockVariant transform() {
@@ -142,17 +142,17 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
     } else if (this == COARSE_DIRT) {
       return SPARSE_GRASS;
     } else if (this == GRASS ||
-        this == DRY_GRASS ||
-        this == SPARSE_GRASS ||
-        this == PODZOL ||
-        this == MYCELIUM ||
-        this == FARMLAND ||
-        this == GRASS_PATH ||
-        this == ROOTED_DIRT) {
+            this == DRY_GRASS ||
+            this == SPARSE_GRASS ||
+            this == PODZOL ||
+            this == MYCELIUM ||
+            this == FARMLAND ||
+            this == GRASS_PATH ||
+            this == ROOTED_DIRT) {
       return DIRT;
     } else {
       throw new IllegalArgumentException(
-          String.format("You cannot get grass from [%s] types.", this));
+              String.format("You cannot get grass from [%s] types.", this));
     }
   }
 

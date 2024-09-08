@@ -21,10 +21,12 @@ public final class ModuleWorld extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWorld.class.getSimpleName());
 
-  public static final WorldTypeClassic WORLD_TYPE_CLASSIC = new WorldTypeClassic();
+  public static WorldTypeClassic WORLD_TYPE_CLASSIC;
 
   public ModuleWorld() {
     this.enableAutoRegistry();
+
+    WORLD_TYPE_CLASSIC = new WorldTypeClassic();
 
   }
 
@@ -45,8 +47,7 @@ public final class ModuleWorld extends ModuleBase {
     // the same ID.
     InjectorUtils.setFinalStaticFieldWithReflection(WorldType.class, "field_180272_g", null);
     // Sets the world type to the new type.
-    InjectorUtils.setFinalStaticFieldWithReflection(WorldType.class, "field_180272_g",
-        new WorldTypeDebug());
+    InjectorUtils.setFinalStaticFieldWithReflection(WorldType.class, "field_180272_g", new WorldTypeDebug());
   }
 
   @Override

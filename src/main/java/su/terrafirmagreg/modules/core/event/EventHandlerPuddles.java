@@ -107,16 +107,12 @@ public class EventHandlerPuddles {
           if (!world.isRemote) {
             stack.shrink(1);
             if (!player.inventory.addItemStackToInventory(
-                PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM),
-                    PotionTypes.WATER))) {
-              player.dropItem(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM),
-                  PotionTypes.WATER), false);
+                PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER))) {
+              player.dropItem(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), false);
             }
             world.setBlockToAir(pos);
           } else {
-            world.playSound(player, player.posX, player.posY, player.posZ,
-                SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F,
-                1.0F);
+            world.playSound(player, player.posX, player.posY, player.posZ, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
           }
         }
       }
@@ -166,11 +162,9 @@ public class EventHandlerPuddles {
           }
           ((WorldServer) world).spawnParticle(
               EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, i,
-              0.0D, 0.0D, 0.0D, 0.4D,
-              Block.getStateId(BlocksCore.PUDDLE.getDefaultState()));
+              0.0D, 0.0D, 0.0D, 0.4D, Block.getStateId(BlocksCore.PUDDLE.getDefaultState()));
 
-          world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH, SoundCategory.NEUTRAL, 1.0F,
-              1.0F);
+          world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
         }
       }
     }

@@ -11,7 +11,7 @@ import su.terrafirmagreg.modules.device.init.PacketsDevice;
 import su.terrafirmagreg.modules.device.init.RecipesDevice;
 import su.terrafirmagreg.modules.device.init.RegistriesDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
-import su.terrafirmagreg.modules.device.plugin.top.PluginTheOneProbe;
+import su.terrafirmagreg.modules.device.plugin.top.TheOneProbeDevice;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -72,7 +72,7 @@ public final class ModuleDevice extends ModuleBase {
   @Override
   public void onInit(FMLInitializationEvent event) {
 
-    PluginTheOneProbe.init();
+    TheOneProbeDevice.init();
   }
 
   @Override

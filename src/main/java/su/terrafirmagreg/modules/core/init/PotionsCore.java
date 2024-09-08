@@ -1,14 +1,14 @@
 package su.terrafirmagreg.modules.core.init;
 
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.modules.core.objects.potion.PotionHyperthermia;
-import su.terrafirmagreg.modules.core.objects.potion.PotionHypothermia;
-import su.terrafirmagreg.modules.core.objects.potion.PotionOverburdened;
-import su.terrafirmagreg.modules.core.objects.potion.PotionParasites;
-import su.terrafirmagreg.modules.core.objects.potion.PotionResistCold;
-import su.terrafirmagreg.modules.core.objects.potion.PotionResistHeat;
-import su.terrafirmagreg.modules.core.objects.potion.PotionSwarm;
-import su.terrafirmagreg.modules.core.objects.potion.PotionThirst;
+import su.terrafirmagreg.modules.core.object.potion.PotionHyperthermia;
+import su.terrafirmagreg.modules.core.object.potion.PotionHypothermia;
+import su.terrafirmagreg.modules.core.object.potion.PotionOverburdened;
+import su.terrafirmagreg.modules.core.object.potion.PotionParasites;
+import su.terrafirmagreg.modules.core.object.potion.PotionResistCold;
+import su.terrafirmagreg.modules.core.object.potion.PotionResistHeat;
+import su.terrafirmagreg.modules.core.object.potion.PotionSwarm;
+import su.terrafirmagreg.modules.core.object.potion.PotionThirst;
 
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
@@ -40,12 +40,12 @@ public final class PotionsCore {
     HEAT_RESIST = registry.potion("resist_heat", new PotionResistHeat());
 
     COLD_RESIST_TYPE = registry.potionType(COLD_RESIST, "cold_resist_type",
-        1200);           //TODO cfg duration
+            1200);           //TODO cfg duration
     LONG_COLD_RESIST_TYPE = registry.potionType(COLD_RESIST, "long_cold_resist_type",
-        2400); //TODO cfg duration
+            2400); //TODO cfg duration
     HEAT_RESIST_TYPE = registry.potionType(HEAT_RESIST, "heat_resist_type",
-        1200);           //TODO cfg duration
+            1200);           //TODO cfg duration
     LONG_HEAT_RESIST_TYPE = registry.potionType(HEAT_RESIST, "long_heat_resist_type",
-        2400); //TODO cfg duration
+            2400); //TODO cfg duration
   }
 }

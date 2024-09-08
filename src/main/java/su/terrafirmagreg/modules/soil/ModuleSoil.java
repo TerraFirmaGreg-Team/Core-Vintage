@@ -7,8 +7,10 @@ import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilTypeHandler;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
+import su.terrafirmagreg.modules.soil.plugin.top.TheOneProbeSoil;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -37,6 +39,12 @@ public final class ModuleSoil extends ModuleBase {
 
     BlocksSoil.onRegister(registryManager);
     ItemsSoil.onRegister(registryManager);
+  }
+
+  @Override
+  public void onInit(FMLInitializationEvent event) {
+
+    TheOneProbeSoil.init();
   }
 
   @Override

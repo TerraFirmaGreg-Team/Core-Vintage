@@ -1,6 +1,9 @@
 package su.terrafirmagreg.modules.soil.api.types.type;
 
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.data.lib.types.type.Type;
+
+import net.minecraft.util.ResourceLocation;
 
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -52,6 +55,16 @@ public class SoilType extends Type<SoilType> {
    */
   public static int indexOf(SoilType type) {
     return new ArrayList<>(types).indexOf(type);
+  }
+
+  /**
+   * Возвращает ресурсное расположение текстуры породы.
+   *
+   * @return Ресурсное расположение текстуры породы.
+   */
+  @NotNull
+  public ResourceLocation getTexture() {
+    return ModUtils.resource("textures/blocks/soil/mud/" + this + ".png");
   }
 
   public static Builder builder(String name) {

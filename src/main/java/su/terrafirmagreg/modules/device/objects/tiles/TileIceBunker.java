@@ -2,9 +2,9 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiIceBunker;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
@@ -59,8 +59,8 @@ import static su.terrafirmagreg.data.Constants.MODID_CELLARS;
 import static su.terrafirmagreg.data.Properties.LIT;
 
 public class TileIceBunker extends TileEntityLockableLoot
-    implements IInventory, ITickable, IAmbientalTileProvider,
-    IProviderContainer<ContainerIceBunker, GuiIceBunker> {
+        implements IInventory, ITickable, IAmbientalTileProvider,
+        IProviderContainer<ContainerIceBunker, GuiIceBunker> {
 
   private final int[] entrance = new int[4];    //x, z of the first door + offsetX, offsetZ of the second door
   private final int[] size = new int[4];        //internal size, +z -x -z + x
@@ -90,7 +90,7 @@ public class TileIceBunker extends TileEntityLockableLoot
   public void getCellarInfo(EntityPlayer player) {
     if (ModConfig.isDebugging) {
       player.sendMessage(
-          new TextComponentString("Temperature: " + temperature + " Coolant: " + coolantAmount));
+              new TextComponentString("Temperature: " + temperature + " Coolant: " + coolantAmount));
       player.sendMessage(new TextComponentString("Check console for more information"));
       player.sendMessage(new TextComponentString("The current error number is: " + error));
       player.sendMessage(new TextComponentString("Is the cellar complete: " + isComplete));
@@ -108,7 +108,7 @@ public class TileIceBunker extends TileEntityLockableLoot
       }
     } else {
       player.sendMessage(
-          new TextComponentString("The cellar is not complete or is not chilled yet"));
+              new TextComponentString("The cellar is not complete or is not chilled yet"));
     }
   }
 
@@ -157,12 +157,12 @@ public class TileIceBunker extends TileEntityLockableLoot
           if (!chestContents.get(slot).isEmpty()) {
             Item item = chestContents.get(slot).getItem();
             if (item == ItemsCore.PACKED_ICE_SHARD
-                || Block.getBlockFromItem(item) == Blocks.PACKED_ICE) {
+                    || Block.getBlockFromItem(item) == Blocks.PACKED_ICE) {
               coolantAmount = coolantAmount + ModConfig.packedIceCoolant;
               seaIce = false;
               dryIce = true;
             } else if (item == ItemsCore.SEA_ICE_SHARD
-                || Block.getBlockFromItem(item) == BlocksTFC.SEA_ICE) {
+                    || Block.getBlockFromItem(item) == BlocksTFC.SEA_ICE) {
               coolantAmount = coolantAmount + ModConfig.seaIceCoolant;
               seaIce = true;
               dryIce = false;
@@ -195,10 +195,10 @@ public class TileIceBunker extends TileEntityLockableLoot
           if (outsideTemp > -10) {    //magic
             int volume = (size[1] + size[3] + 1) * (size[0] + size[2] + 1);
             coolantAmount = coolantAmount -
-                (int) (ModConfig.coolantConsumptionMultiplier * (0.05 * volume * (1 + lossMult) * (
-                    outsideTemp + volume + 2)));
+                    (int) (ModConfig.coolantConsumptionMultiplier * (0.05 * volume * (1 + lossMult) * (
+                            outsideTemp + volume + 2)));
             coolantRate = (int) (ModConfig.coolantConsumptionMultiplier * (0.05 * volume * (1
-                + lossMult) * (outsideTemp + volume + 2)));
+                    + lossMult) * (outsideTemp + volume + 2)));
           }
           lastUpdate++;
         }
@@ -246,7 +246,7 @@ public class TileIceBunker extends TileEntityLockableLoot
     //1st door
     Block door = world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock();
     if (door == BlocksDevice.CELLAR_DOOR && BlockDoor.isOpen(world,
-        new BlockPos(posX, posY, posZ))) {
+            new BlockPos(posX, posY, posZ))) {
 
       loss = 0.05f;
     }
@@ -258,9 +258,9 @@ public class TileIceBunker extends TileEntityLockableLoot
     }
 
     door = world.getBlockState(new BlockPos(posX + entrance[2], posY, posZ + entrance[3]))
-        .getBlock();
+            .getBlock();
     if (door == BlocksDevice.CELLAR_DOOR && BlockDoor.isOpen(world,
-        new BlockPos(posX + entrance[2], posY, posZ + entrance[3]))) {
+            new BlockPos(posX + entrance[2], posY, posZ + entrance[3]))) {
 
       return loss * 13 + 0.05f;
     }
@@ -286,7 +286,7 @@ public class TileIceBunker extends TileEntityLockableLoot
         if (distance == 5) {
           if (ModConfig.isDebugging) {
             System.out.println("Cellar at " + pos.getX() + " " + pos.getY() + " " + pos.getZ()
-                + " can't find a wall on " + direction + " side");
+                    + " can't find a wall on " + direction + " side");
           }
           error = 1;
           return false;
@@ -374,7 +374,7 @@ public class TileIceBunker extends TileEntityLockableLoot
 
             if (ModConfig.isDebugging) {
               System.out.println("Cellar at " + pos.getX() + " " + pos.getY() + " " + pos.getZ()
-                  + " has too many doors");
+                      + " has too many doors");
             }
             error = 3;
             return false;
@@ -393,7 +393,7 @@ public class TileIceBunker extends TileEntityLockableLoot
     if (entrance[0] == 0 && entrance[1] == 0) {
       if (ModConfig.isDebugging) {
         System.out.println("Cellar at " + pos.getX() + " " + pos.getY() + " " + pos.getZ()
-            + " has no doors");
+                + " has no doors");
       }
       error = 3;
       return false;
@@ -416,7 +416,7 @@ public class TileIceBunker extends TileEntityLockableLoot
               hasAirlock = false;
               if (ModConfig.isDebugging) {
                 System.out.println("Cellar at " + pos.getX() + " " + pos.getY() + " " + pos.getZ()
-                    + " doesn't has the second door, block there is " + blockType);
+                        + " doesn't has the second door, block there is " + blockType);
               }
             }
           }
@@ -427,7 +427,7 @@ public class TileIceBunker extends TileEntityLockableLoot
           hasAirlock = false;
           if (ModConfig.isDebugging) {
             System.out.println("Door at " + pos.getX() + " " + pos.getY() + " " + pos.getZ()
-                + " doesn't surrounded by wall, block there is " + blockType);
+                    + " doesn't surrounded by wall, block there is " + blockType);
           }
         }
       }
@@ -435,7 +435,7 @@ public class TileIceBunker extends TileEntityLockableLoot
 
     if (ModConfig.isDebugging) {
       System.out.println(
-          "Cellar at " + pos.getX() + " " + pos.getY() + " " + pos.getZ() + " is complete");
+              "Cellar at " + pos.getX() + " " + pos.getY() + " " + pos.getZ() + " is complete");
     }
 
     return true;
@@ -443,24 +443,24 @@ public class TileIceBunker extends TileEntityLockableLoot
 
   private int getBlockType(int x, int y, int z) {
     Block block = world.getBlockState(
-        new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z)).getBlock();
+            new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z)).getBlock();
     IBlockState blockState = block.getBlockState().getBaseState();
     if (block instanceof BlockCellarWall) {
       return 0;
     } else if (block instanceof BlockCellarDoor) {
       return 1;
     } else if (block instanceof BlockCellarShelf || block instanceof BlockWallSign ||
-        block instanceof BlockStandingSign || block instanceof BlockTorch ||
-        block instanceof BlockRedstoneTorch || blockState.getProperties().containsKey(LIT) ||
-        block instanceof BlockRedstoneLight ||
-        world.isAirBlock(
-            new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z))) {
+            block instanceof BlockStandingSign || block instanceof BlockTorch ||
+            block instanceof BlockRedstoneTorch || blockState.getProperties().containsKey(LIT) ||
+            block instanceof BlockRedstoneLight ||
+            world.isAirBlock(
+                    new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z))) {
       return 2;
     }
 
     if (ModConfig.isDebugging) {
       System.out.println(
-          "Incorrect cellar block at " + x + " " + y + " " + z + " " + block.getRegistryName());
+              "Incorrect cellar block at " + x + " " + y + " " + z + " " + block.getRegistryName());
     }
 
     return -1;
@@ -478,11 +478,11 @@ public class TileIceBunker extends TileEntityLockableLoot
 
   private void updateContainer(int x, int y, int z) {
     Block block = world.getBlockState(
-            new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z))
-        .getBlock();
+                    new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z))
+            .getBlock();
     if (block instanceof BlockCellarShelf) {
       TileEntity tileEntity = world.getTileEntity(
-          new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
+              new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
       if (tileEntity != null) {
         ((TileCellarShelf) tileEntity).updateShelf(temperature);
       }
@@ -592,7 +592,7 @@ public class TileIceBunker extends TileEntityLockableLoot
 
   @Override
   public @NotNull Container createContainer(@NotNull InventoryPlayer inventoryPlayer,
-      @NotNull EntityPlayer entityPlayer) {
+          @NotNull EntityPlayer entityPlayer) {
     return new ContainerIceBunker(inventoryPlayer, this, entityPlayer);
   }
 
@@ -631,15 +631,15 @@ public class TileIceBunker extends TileEntityLockableLoot
 
   @Override
   public ContainerIceBunker getContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new ContainerIceBunker(inventoryPlayer, this, inventoryPlayer.player);
   }
 
   @Override
   public GuiIceBunker getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new GuiIceBunker(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-        this);
+            this);
   }
 
   @Override

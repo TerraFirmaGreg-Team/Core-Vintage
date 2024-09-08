@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.device.init;
 import su.terrafirmagreg.modules.device.objects.recipes.quern.IQuernRecipeManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypes;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
+import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -24,15 +25,13 @@ import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
-import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
 import net.dries007.tfc.types.DefaultPlants;
-import net.dries007.tfc.types.DefaultRocks;
 import net.dries007.tfc.types.PlantsTFCF;
 import net.dries007.tfc.util.agriculture.Food;
 import pieman.caffeineaddon.init.ModItems;
 
 import static net.dries007.tfc.api.registries.TFCRegistries.PLANTS;
-import static net.dries007.tfc.api.registries.TFCRegistries.ROCKS;
+import static su.terrafirmagreg.modules.rock.api.types.type.RockTypes.QUARTZITE;
 
 public final class RecipesDevice {
 
@@ -598,7 +597,7 @@ public final class RecipesDevice {
         new ItemStack(ModItems.GreenCoffeeBeans, 1));
     manager.addRecipe(IIngredient.of(ModItems.CoffeeBeans),
         new ItemStack(ModItems.GroundCoffee, 1));
-    manager.addRecipe(IIngredient.of(ItemBrickTFC.get(ROCKS.getValue(DefaultRocks.QUARTZITE))),
+    manager.addRecipe(IIngredient.of(ItemsRock.BRICK.get(QUARTZITE)),
         new ItemStack((TFCThingsItems.ITEM_WHETSTONE)));
 
     manager.addRecipe(IIngredient.of("gemHalite"), new ItemStack(ItemPowder.get(Powder.SALT), 2));

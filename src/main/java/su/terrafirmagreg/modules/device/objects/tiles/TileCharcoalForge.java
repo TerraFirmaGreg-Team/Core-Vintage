@@ -7,9 +7,9 @@ import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiCharcoalForge;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerCharcoalForge;
@@ -47,8 +47,8 @@ import java.util.Optional;
 import static su.terrafirmagreg.data.Properties.LIT;
 
 public class TileCharcoalForge extends BaseTileTickableInventory
-    implements ICalendarTickable, ITileFields, IAmbientalTileProvider,
-    IProviderContainer<ContainerCharcoalForge, GuiCharcoalForge> {
+        implements ICalendarTickable, ITileFields, IAmbientalTileProvider,
+        IProviderContainer<ContainerCharcoalForge, GuiCharcoalForge> {
 
   public static final int SLOT_FUEL_MIN = 0;
   public static final int SLOT_FUEL_MAX = 4;
@@ -86,15 +86,15 @@ public class TileCharcoalForge extends BaseTileTickableInventory
 
   @Override
   public ContainerCharcoalForge getContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new ContainerCharcoalForge(inventoryPlayer, this);
   }
 
   @Override
   public GuiCharcoalForge getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new GuiCharcoalForge(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-        this);
+            this);
   }
 
   public void onAirIntake(int amount) {
@@ -111,7 +111,7 @@ public class TileCharcoalForge extends BaseTileTickableInventory
     burnTicks -= ConfigDevice.BLOCKS.CHARCOAL_FORGE.rainTicks;
     // Play the "tsssss" sound
     world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f,
-        0.8f + MathConstants.RNG.nextFloat() * 0.4f);
+            0.8f + MathConstants.RNG.nextFloat() * 0.4f);
   }
 
   @Override
@@ -158,7 +158,7 @@ public class TileCharcoalForge extends BaseTileTickableInventory
       if (temperature > 0 || burnTemperature > 0) {
         // Update temperature
         temperature = CapabilityHeat.adjustToTargetTemperature(temperature, burnTemperature,
-            airTicks, MAX_AIR_TICKS);
+                airTicks, MAX_AIR_TICKS);
 
         // Provide heat to blocks that are one block above
         Block blockUp = world.getBlockState(pos.up()).getBlock();
@@ -298,7 +298,7 @@ public class TileCharcoalForge extends BaseTileTickableInventory
     } else {
       // Extra slots - anything that can heat up and hold fluids
       return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) &&
-          CapabilityHeat.has(stack);
+              CapabilityHeat.has(stack);
     }
   }
 
@@ -345,7 +345,7 @@ public class TileCharcoalForge extends BaseTileTickableInventory
           ItemStack output = inventory.getStackInSlot(i);
           // Fill the fluid
           IFluidHandler fluidHandler = output.getCapability(
-              CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+                  CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
           if (fluidHandler != null) {
             int amountFilled = fluidHandler.fill(fluidStack.copy(), true);
             if (amountFilled > 0) {

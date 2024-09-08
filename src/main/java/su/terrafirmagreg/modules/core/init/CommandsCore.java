@@ -1,14 +1,14 @@
 package su.terrafirmagreg.modules.core.init;
 
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.modules.core.objects.command.CommandDebugInfo;
-import su.terrafirmagreg.modules.core.objects.command.CommandGenTree;
-import su.terrafirmagreg.modules.core.objects.command.CommandHeat;
-import su.terrafirmagreg.modules.core.objects.command.CommandHorsePower;
-import su.terrafirmagreg.modules.core.objects.command.CommandPlayer;
-import su.terrafirmagreg.modules.core.objects.command.CommandStripWorld;
-import su.terrafirmagreg.modules.core.objects.command.CommandTime;
-import su.terrafirmagreg.modules.core.objects.command.CommandWorkChunk;
+import su.terrafirmagreg.modules.core.object.command.CommandDebugInfo;
+import su.terrafirmagreg.modules.core.object.command.CommandGenTree;
+import su.terrafirmagreg.modules.core.object.command.CommandHeat;
+import su.terrafirmagreg.modules.core.object.command.CommandHorsePower;
+import su.terrafirmagreg.modules.core.object.command.CommandPlayer;
+import su.terrafirmagreg.modules.core.object.command.CommandStripWorld;
+import su.terrafirmagreg.modules.core.object.command.CommandTime;
+import su.terrafirmagreg.modules.core.object.command.CommandWorkChunk;
 
 public final class CommandsCore {
 

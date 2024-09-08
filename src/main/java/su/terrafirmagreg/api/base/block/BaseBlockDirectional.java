@@ -40,7 +40,7 @@ public abstract class BaseBlockDirectional extends BlockDirectional implements I
 
     this.settings = settings;
 
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(FACING, EnumFacing.NORTH));
   }
 

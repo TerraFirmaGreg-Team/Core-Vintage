@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.rock.client.model.ModelGemExquisite;
 import su.terrafirmagreg.modules.rock.client.model.ModelGemFlawed;
 import su.terrafirmagreg.modules.rock.client.model.ModelGemFlawless;
 import su.terrafirmagreg.modules.rock.client.model.ModelGemNormal;
-import su.terrafirmagreg.modules.rock.objects.tiles.TileRockGemDisplay;
+import su.terrafirmagreg.modules.rock.object.tile.TileRockGemDisplay;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -70,7 +70,7 @@ public class TESRRockGemDisplay extends TileEntitySpecialRenderer<TileRockGemDis
   }
 
   public void render(TileRockGemDisplay tile, double x, double y, double z, float partialTicks,
-      int destroyStage, float alpha) {
+          int destroyStage, float alpha) {
     int dir = tile.getBlockMetadata();
     float blockScale = 0.5F;
     ArrayList<Vec3d> location = getLocation(tile);
@@ -86,7 +86,7 @@ public class TESRRockGemDisplay extends TileEntitySpecialRenderer<TileRockGemDis
           pos = new Vec3d(1 - pos.x, pos.y, 1 - pos.z);
         }
         GlStateManager.translate(x + (dir % 2 == 0 ? pos.x : pos.z), y + pos.y,
-            z + (dir % 2 == 0 ? pos.z : pos.x));
+                z + (dir % 2 == 0 ? pos.z : pos.x));
         GlStateManager.rotate(180, 0.0F, 0.0F, 0.0F);
         GlStateManager.enableRescaleNormal();
         GlStateManager.scale(blockScale, blockScale, blockScale);
@@ -136,7 +136,7 @@ public class TESRRockGemDisplay extends TileEntitySpecialRenderer<TileRockGemDis
       String type = gemItem.gem.toString().toLowerCase();
       String grade = Gem.Grade.valueOf(gem.getItemDamage()).toString().toLowerCase();
       return new ResourceLocation(
-          "tfcthings:textures/blocks/gem_display/" + grade + "/" + type + ".png");
+              "tfcthings:textures/blocks/gem_display/" + grade + "/" + type + ".png");
     }
     return null;
   }

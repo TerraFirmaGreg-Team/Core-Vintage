@@ -11,9 +11,9 @@ import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
@@ -70,8 +70,8 @@ import static su.terrafirmagreg.data.Properties.LIT;
 import static su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit.ATTACHMENT;
 
 public class TileFirePit extends BaseTileTickableInventory
-    implements ICalendarTickable, ITileFields, IItemHandlerSidedCallback, IAmbientalTileProvider,
-    IProviderContainer<ContainerFirePit, GuiFirePit> {
+        implements ICalendarTickable, ITileFields, IItemHandlerSidedCallback, IAmbientalTileProvider,
+        IProviderContainer<ContainerFirePit, GuiFirePit> {
 
   // Slot 0 - 3 = fuel slots with 3 being input, 4 = normal input slot, 5 and 6 are output slots 1 + 2
   public static final int SLOT_FUEL_CONSUME = 0;
@@ -133,8 +133,8 @@ public class TileFirePit extends BaseTileTickableInventory
     cachedGrillRecipes = new HeatRecipe[5];
 
     inventoryWrappers = Arrays.stream(EnumFacing.values())
-        .map(e -> new ItemHandlerSidedWrapper(this, inventory, e))
-        .toArray(IItemHandler[]::new);
+            .map(e -> new ItemHandlerSidedWrapper(this, inventory, e))
+            .toArray(IItemHandler[]::new);
   }
 
   /**
@@ -144,7 +144,7 @@ public class TileFirePit extends BaseTileTickableInventory
     burnTicks -= ConfigDevice.BLOCKS.FIRE_PIT.rainTicks;
     // Play the "tsssss" sound
     world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f,
-        0.8f + MathConstants.RNG.nextFloat() * 0.4f);
+            0.8f + MathConstants.RNG.nextFloat() * 0.4f);
   }
 
   @Override
@@ -186,7 +186,7 @@ public class TileFirePit extends BaseTileTickableInventory
       if (temperature > 0 || burnTemperature > 0) {
         // Update temperature
         temperature = CapabilityHeat.adjustToTargetTemperature(temperature, burnTemperature,
-            airTicks, MAX_AIR_TICKS);
+                airTicks, MAX_AIR_TICKS);
       }
 
       BlockFirePit.FirePitAttachment attachment = state.getValue(ATTACHMENT);
@@ -256,7 +256,7 @@ public class TileFirePit extends BaseTileTickableInventory
               }
               if (ingredientCount > 0) {
                 float multiplier =
-                    1 - (0.05f * ingredientCount); // per-serving multiplier of nutrition
+                        1 - (0.05f * ingredientCount); // per-serving multiplier of nutrition
                 water *= multiplier;
                 saturation *= multiplier;
                 Nutrient maxNutrient = Nutrient.GRAIN; // default nutrient in case there is no nutrition
@@ -270,8 +270,8 @@ public class TileFirePit extends BaseTileTickableInventory
                 }
 
                 soupContents = new FoodData(4, water, saturation, nutrition,
-                    Food.SOUP_GRAIN.getData()
-                        .getDecayModifier());
+                        Food.SOUP_GRAIN.getData()
+                                .getDecayModifier());
                 soupServings = (int) (ingredientCount / 2f) + 1;
                 soupNutrient = maxNutrient; // the max nutrient determines the item you get
                 soupCreationDate = CapabilityFood.getRoundedCreationDate();
@@ -391,7 +391,7 @@ public class TileFirePit extends BaseTileTickableInventory
     attachedItemStack = new ItemStack(nbt.getCompoundTag("attachedItemStack"));
 
     BlockFirePit.FirePitAttachment attachment = BlockFirePit.FirePitAttachment.valueOf(
-        nbt.getInteger("attachment"));
+            nbt.getInteger("attachment"));
     if (attachment == BlockFirePit.FirePitAttachment.COOKING_POT) {
       cookingPotStage = CookingPotStage.valueOf(nbt.getInteger("cookingPotStage"));
       if (cookingPotStage == CookingPotStage.FINISHED) {
@@ -432,7 +432,7 @@ public class TileFirePit extends BaseTileTickableInventory
 
     BlockFirePit.FirePitAttachment attachment = world.getBlockState(pos).getValue(ATTACHMENT);
     NBTUtils.setGenericNBTValue(nbt, "attachment",
-        attachment.ordinal()); // to de-serialize the correct stuff
+            attachment.ordinal()); // to de-serialize the correct stuff
     if (attachment == BlockFirePit.FirePitAttachment.COOKING_POT) {
       NBTUtils.setGenericNBTValue(nbt, "cookingPotStage", cookingPotStage.ordinal());
       if (cookingPotStage == CookingPotStage.BOILING) {
@@ -480,7 +480,7 @@ public class TileFirePit extends BaseTileTickableInventory
       case SLOT_OUTPUT_1:
       case SLOT_OUTPUT_2: // Valid insert into output as long as it can hold fluids and is heat-able
         return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) &&
-            CapabilityHeat.has(stack);
+                CapabilityHeat.has(stack);
       case SLOT_EXTRA_INPUT_START:
       case SLOT_EXTRA_INPUT_START + 1:
       case SLOT_EXTRA_INPUT_START + 2:
@@ -490,9 +490,9 @@ public class TileFirePit extends BaseTileTickableInventory
         if (attachment == BlockFirePit.FirePitAttachment.COOKING_POT) {
           // Cooking pot inputs must be food & category of veg, cooked or uncooked meat
           return stack.hasCapability(CapabilityFood.CAPABILITY, null) &&
-              Food.Category.doesStackMatchCategories(stack, Food.Category.FRUIT,
-                  Food.Category.VEGETABLE, Food.Category.COOKED_MEAT,
-                  Food.Category.MEAT);
+                  Food.Category.doesStackMatchCategories(stack, Food.Category.FRUIT,
+                          Food.Category.VEGETABLE, Food.Category.COOKED_MEAT,
+                          Food.Category.MEAT);
         } else if (attachment == BlockFirePit.FirePitAttachment.GRILL) {
           // Grill can only do food + heatable
           return stack.hasCapability(CapabilityFood.CAPABILITY, null) && CapabilityHeat.has(stack);
@@ -587,7 +587,7 @@ public class TileFirePit extends BaseTileTickableInventory
       if (soupFood instanceof ItemDynamicBowlFood.DynamicFoodHandler) {
         soupFood.setCreationDate(soupCreationDate);
         ((ItemDynamicBowlFood.DynamicFoodHandler) soupFood).initCreationDataAndBowl(
-            stack.splitStack(1), soupContents);
+                stack.splitStack(1), soupContents);
       }
       ItemHandlerHelper.giveItemToPlayer(player, soupStack);
       if (soupServings == 0) {
@@ -600,13 +600,13 @@ public class TileFirePit extends BaseTileTickableInventory
   @Override
   public boolean canInsert(int slot, ItemStack stack, EnumFacing side) {
     return slot == SLOT_FUEL_INPUT || (cookingPotStage != CookingPotStage.BOILING
-        && cookingPotStage != CookingPotStage.FINISHED);
+            && cookingPotStage != CookingPotStage.FINISHED);
   }
 
   @Override
   public boolean canExtract(int slot, EnumFacing side) {
     return slot == SLOT_FUEL_INPUT || (cookingPotStage != CookingPotStage.BOILING
-        && cookingPotStage != CookingPotStage.FINISHED);
+            && cookingPotStage != CookingPotStage.FINISHED);
   }
 
   private void updateCachedGrillRecipes() {
@@ -646,7 +646,7 @@ public class TileFirePit extends BaseTileTickableInventory
     var cap = CapabilityHeat.get(stack);
 
     if (cachedRecipe != null && cap != null && cachedRecipe.isValidTemperature(
-        cap.getTemperature())) {
+            cap.getTemperature())) {
       HeatRecipe recipe = cachedRecipe; // Avoids NPE on slot changes
       // Handle possible metal output
       FluidStack fluidStack = recipe.getOutputFluid(stack);
@@ -654,7 +654,7 @@ public class TileFirePit extends BaseTileTickableInventory
       if (fluidStack != null) {
         ItemStack output = inventory.getStackInSlot(SLOT_OUTPUT_1);
         IFluidHandler fluidHandler = output.getCapability(
-            CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+                CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
         if (fluidHandler != null) {
           int amountFilled = fluidHandler.fill(fluidStack.copy(), true);
           fluidStack.amount -= amountFilled;
@@ -668,7 +668,7 @@ public class TileFirePit extends BaseTileTickableInventory
         if (fluidStack.amount > 0) {
           output = inventory.getStackInSlot(SLOT_OUTPUT_2);
           fluidHandler = output.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY,
-              null);
+                  null);
 
           if (fluidHandler != null) {
             int amountFilled = fluidHandler.fill(fluidStack, true);
@@ -717,12 +717,12 @@ public class TileFirePit extends BaseTileTickableInventory
   private ItemStack mergeOutputStack(ItemStack outputStack) {
     outputStack = inventory.insertItem(SLOT_OUTPUT_1, outputStack, false);
     inventory.setStackInSlot(SLOT_OUTPUT_1,
-        CapabilityFood.mergeItemStacksIgnoreCreationDate(inventory.getStackInSlot(SLOT_OUTPUT_1),
-            outputStack));
+            CapabilityFood.mergeItemStacksIgnoreCreationDate(inventory.getStackInSlot(SLOT_OUTPUT_1),
+                    outputStack));
     outputStack = inventory.insertItem(SLOT_OUTPUT_2, outputStack, false);
     inventory.setStackInSlot(SLOT_OUTPUT_2,
-        CapabilityFood.mergeItemStacksIgnoreCreationDate(inventory.getStackInSlot(SLOT_OUTPUT_2),
-            outputStack));
+            CapabilityFood.mergeItemStacksIgnoreCreationDate(inventory.getStackInSlot(SLOT_OUTPUT_2),
+                    outputStack));
     return outputStack;
   }
 
@@ -738,13 +738,13 @@ public class TileFirePit extends BaseTileTickableInventory
 
   @Override
   public ContainerFirePit getContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new ContainerFirePit(inventoryPlayer, this);
   }
 
   @Override
   public GuiFirePit getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state,
-      BlockPos pos) {
+          BlockPos pos) {
     return new GuiFirePit(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
   }
 

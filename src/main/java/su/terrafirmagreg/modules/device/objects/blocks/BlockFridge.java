@@ -86,7 +86,7 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {
         .nonCanStack();
 
     setHarvestLevel(ToolClasses.PICKAXE, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(FACING, NORTH)
         .withProperty(UPPER, false));
   }

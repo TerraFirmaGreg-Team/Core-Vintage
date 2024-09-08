@@ -11,7 +11,7 @@ import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -52,11 +52,11 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
+import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
 
 @SuppressWarnings("unused")
 public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, IProviderModel,
-    IProviderOreDict, ICapabilitySize {
+        IProviderOreDict, ICapabilitySize {
 
   Settings getSettings();
 
@@ -73,87 +73,86 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
 
   default float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
 
-    return getSettings().getHardness().apply(blockState, worldIn, pos);
+    return this.getSettings().getHardness().apply(blockState, worldIn, pos);
   }
 
   default float getExplosionResistance(Entity exploder) {
 
-    return getSettings().getResistance() / 5.0F;
+    return this.getSettings().getResistance() / 5.0F;
   }
 
   default boolean isOpaqueCube(IBlockState state) {
 
-    return getSettings().isOpaque();
+    return true; //this.getSettings() == null || this.getSettings().isOpaque();
   }
 
   default boolean isFullCube(IBlockState state) {
 
-    return getSettings().isFullCube();
+    return this.getSettings().isFullCube();
   }
 
   default boolean getUseNeighborBrightness(IBlockState state) {
-    return getSettings().isUseNeighborBrightness();
+    return this.getSettings().isUseNeighborBrightness();
   }
 
   default String getHarvestTool(IBlockState state) {
-    return getSettings().getHarvestTool();
+    return this.getSettings().getHarvestTool();
   }
 
   default int getHarvestLevel(IBlockState state) {
-    return getSettings().getHarvestLevel();
+    return this.getSettings().getHarvestLevel();
   }
 
   default boolean isCollidable() {
 
-    return getSettings().isCollidable();
+    return this.getSettings().isCollidable();
   }
 
-  default BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos,
-      EnumFacing face) {
+  default BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face) {
 
     return isOpaqueCube(state) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 
   default float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos,
-      @Nullable Entity entity) {
+          @Nullable Entity entity) {
 
-    return getSettings().getSlipperiness().apply(state, world, pos);
+    return this.getSettings().getSlipperiness().apply(state, world, pos);
   }
 
   default int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
 
-    return getSettings().getLightValue().apply(state, world, pos);
+    return this.getSettings().getLightValue().apply(state, world, pos);
   }
 
   default MapColor getMapColor(IBlockState state, IBlockAccess world, BlockPos pos) {
 
-    return getSettings().getMapColor();
+    return this.getSettings().getMapColor();
   }
 
   @SideOnly(Side.CLIENT)
   default BlockRenderLayer getRenderLayer() {
 
-    return getSettings().getRenderLayer();
+    return this.getSettings().getRenderLayer();
   }
 
   default boolean getTickRandomly() {
-    return getSettings().isTicksRandomly();
+    return this.getSettings().isTicksRandomly();
   }
 
   // Override IOreDictProvider methods
 
   @Override
   default void onRegisterOreDict() {
-    if (!getSettings().getOreDict().isEmpty()) {
-      getSettings().getOreDict().forEach(ore -> OreDictUtils.register(getBlock(), ore));
-      getSettings().getOreDict().clear();
+    if (!this.getSettings().getOreDict().isEmpty()) {
+      this.getSettings().getOreDict().forEach(ore -> OreDictUtils.register(getBlock(), ore));
+      this.getSettings().getOreDict().clear();
     }
   }
 
   @Override
   @SideOnly(Side.CLIENT)
   default IStateMapper getStateMapper() {
-    var ignored = getSettings().getIgnoredProperties();
+    var ignored = this.getSettings().getIgnoredProperties();
     if (ignored != null && ignored.length > 0) {
       return new StateMap.Builder().ignore(ignored).build();
     }
@@ -173,7 +172,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
   @Override
   default String getRegistryKey() {
 
-    return getSettings().getRegistryKey();
+    return this.getSettings().getRegistryKey();
   }
 
   // Override IItemSize methods
@@ -181,31 +180,31 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
   @Override
   default Size getSize(ItemStack stack) {
 
-    return getSettings().getSize();
+    return this.getSettings().getSize();
   }
 
   @Override
   default Weight getWeight(ItemStack stack) {
 
-    return getSettings().getWeight();
+    return this.getSettings().getWeight();
   }
 
   @Override
   default boolean canStack(ItemStack stack) {
 
-    return getSettings().isCanStack();
+    return this.getSettings().isCanStack();
   }
 
   // New methods
 
   default boolean getHasItemSubtypes() {
 
-    return getSettings().isHasItemSubtypes();
+    return this.getSettings().isHasItemSubtypes();
   }
 
   default @Nullable Item getItemBlock() {
 
-    return getSettings().isHasItemBlock() ? new BaseItemBlock(getBlock()) : null;
+    return this.getSettings().isHasItemBlock() ? new BaseItemBlock(getBlock()) : null;
   }
 
   default Block getBlock() {
@@ -238,8 +237,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
     ContextFunction<Float> hardness = (state, world, pos) -> 1.0F;
     ContextFunction<Integer> lightValue = (state, world, pos) -> 0;
     ContextFunction<Float> slipperiness = (state, world, pos) -> 0.6F;
-    Predicate<IBlockState> isSuffocating = (state) -> state.getMaterial().blocksMovement()
-        && state.isFullCube();
+    Predicate<IBlockState> isSuffocating = (state) -> state.getMaterial().blocksMovement() && state.isFullCube();
     IRarity rarity = ItemRarity.COMMON.getRarity();
     BlockRenderLayer renderLayer = BlockRenderLayer.SOLID;
     Size size = Size.SMALL;
@@ -258,7 +256,8 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
     boolean hasItemSubtypes = false;
     boolean ticksRandomly = false;
     boolean requiresCorrectTool = false;
-    boolean useNeighborBrightness;
+    boolean useNeighborBrightness = false;
+    boolean isReplaceable;
 
     boolean isAir;
 
@@ -407,7 +406,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
     }
 
     public Settings fallable(IBlockState state, Specification specification,
-        IBlockState resultingState) {
+            IBlockState resultingState) {
       if (specification != null) {
         var spec = new Specification(specification);
         spec.setResultingState(resultingState);
@@ -441,6 +440,11 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
 
     public Settings randomTicks() {
       this.ticksRandomly = true;
+      return this;
+    }
+
+    public Settings replaceable() {
+      this.isReplaceable = true;
       return this;
     }
 

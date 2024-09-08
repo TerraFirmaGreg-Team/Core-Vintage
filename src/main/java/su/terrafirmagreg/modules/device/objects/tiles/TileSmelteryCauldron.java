@@ -6,9 +6,9 @@ import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerSmelteryCauldron;
 
@@ -43,9 +43,9 @@ import java.util.Optional;
 import static su.terrafirmagreg.data.Properties.LIT;
 
 public class TileSmelteryCauldron extends BaseTileInventory
-    implements ITickable, IFluidHandlerSidedCallback, IFluidTankCallback, ITileFields,
-    IAmbientalTileProvider,
-    IProviderContainer<ContainerSmelteryCauldron, GuiSmelteryCauldron> {
+        implements ITickable, IFluidHandlerSidedCallback, IFluidTankCallback, ITileFields,
+        IAmbientalTileProvider,
+        IProviderContainer<ContainerSmelteryCauldron, GuiSmelteryCauldron> {
 
   public static final int FLUID_CAPACITY = 4000;
   private final FluidTank tank = new FluidTankCallback(this, 0, FLUID_CAPACITY);
@@ -144,7 +144,7 @@ public class TileSmelteryCauldron extends BaseTileInventory
   @Override
   public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
     return (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) || super.hasCapability(
-        capability, facing);
+            capability, facing);
   }
 
   @Override
@@ -183,15 +183,15 @@ public class TileSmelteryCauldron extends BaseTileInventory
 
   @Override
   public ContainerSmelteryCauldron getContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new ContainerSmelteryCauldron(inventoryPlayer, this);
   }
 
   @Override
   public GuiSmelteryCauldron getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new GuiSmelteryCauldron(getContainer(inventoryPlayer, world, state, pos),
-        inventoryPlayer, this);
+            inventoryPlayer, this);
   }
 
   @Override

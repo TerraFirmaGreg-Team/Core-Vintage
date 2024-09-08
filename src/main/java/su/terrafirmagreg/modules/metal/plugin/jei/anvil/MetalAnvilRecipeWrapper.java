@@ -24,7 +24,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class MetalAnvilRecipeWrapper
-    extends BaseRecipeWrapper<IAnvilRecipe> {
+        extends BaseRecipeWrapper<IAnvilRecipe> {
 
   public MetalAnvilRecipeWrapper(IAnvilRecipe recipe) {
     super(recipe);
@@ -49,8 +49,8 @@ public class MetalAnvilRecipeWrapper
 
   @Override
   public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX,
-      int mouseY) {
-    minecraft.renderEngine.bindTexture(GuiMetalAnvil.ANVIL_BACKGROUND);
+          int mouseY) {
+    minecraft.renderEngine.bindTexture(GuiMetalAnvil.BACKGROUND);
     for (int i = 0; i < getRecipe().getRules().length; i++) {
       ForgeRule rule = getRecipe().getRules()[i];
       if (rule != null) {
@@ -84,9 +84,9 @@ public class MetalAnvilRecipeWrapper
         int y = 0;
         if (mouseX >= x && mouseX <= x + 14 && mouseY >= y && mouseY <= y + 19) {
           GuiUtils.drawHoveringText(
-              Collections.singletonList(I18n.format(Helpers.getEnumName(rule))), mouseX, mouseY,
-              154, 80, -1,
-              minecraft.fontRenderer);
+                  Collections.singletonList(I18n.format(Helpers.getEnumName(rule))), mouseX, mouseY,
+                  154, 80, -1,
+                  minecraft.fontRenderer);
         }
       }
     }

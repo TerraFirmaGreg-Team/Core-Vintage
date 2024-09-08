@@ -1,8 +1,8 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfg:rock/wall/mossy/inventory",
     "uvlock": true,
+    "model": "tfg:rock/wall/mossy/post",
     "textures": {
       "overlay": "tfg:blocks/rock/overlay/mossy/raw",
       "all": "tfg:blocks/rock/raw/mylonite"

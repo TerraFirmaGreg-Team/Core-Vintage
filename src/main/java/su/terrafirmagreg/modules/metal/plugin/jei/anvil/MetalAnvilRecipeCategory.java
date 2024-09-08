@@ -12,17 +12,17 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 
 public class MetalAnvilRecipeCategory
-    extends BaseRecipeCategory<MetalAnvilRecipeWrapper> {
+        extends BaseRecipeCategory<MetalAnvilRecipeWrapper> {
 
   public static final String UID = ModUtils.localize("metal.anvil");
 
   public MetalAnvilRecipeCategory(IGuiHelper helper) {
-    super(helper.createDrawable(GuiMetalAnvil.ANVIL_BACKGROUND, 11, 7, 154, 80), UID);
+    super(helper.createDrawable(GuiMetalAnvil.BACKGROUND, 11, 7, 154, 80), UID);
   }
 
   @Override
   public void setRecipe(IRecipeLayout recipeLayout, MetalAnvilRecipeWrapper recipeWrapper,
-      IIngredients ingredients) {
+          IIngredients ingredients) {
     IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
     itemStackGroup.init(0, true, 19, 60);
     itemStackGroup.init(1, true, 117, 60);

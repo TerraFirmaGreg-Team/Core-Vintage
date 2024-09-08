@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.client.button.GuiButtonCrate;
 import su.terrafirmagreg.modules.device.objects.tiles.TileCrate;
@@ -16,16 +17,14 @@ import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.network.PacketGuiButton;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
-public class GuiCrate extends GuiContainerTE<TileCrate> {
+public class GuiCrate extends BaseGuiContainerTile<TileCrate> {
 
-  public static final ResourceLocation BACKGROUND = ModUtils.resource(
-      "textures/gui/container/crate.png");
+  public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/crate.png");
   private final String translationKey;
 
   public GuiCrate(Container container, InventoryPlayer playerInv, TileCrate tile,

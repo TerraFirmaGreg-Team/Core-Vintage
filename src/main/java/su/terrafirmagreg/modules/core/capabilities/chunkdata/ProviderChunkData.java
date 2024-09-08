@@ -78,7 +78,7 @@ public final class ProviderChunkData implements ICapabilityChunkData {
   @Setter
   private int fishPopulation = FISH_POP_MAX; // todo: Set this based on biome? temp? rng?
   /**
-   * Данные о осадках, региональной температуре, средней температуре, плотности и разнообразии растительности.
+   * Данные об осадках, региональной температуре, средней температуре, плотности и разнообразии растительности.
    */
   @Setter
   private float rainfall;
@@ -262,11 +262,10 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    * @param floraDensity   Плотность растительности.
    * @param floraDiversity Разнообразие растительности.
    */
-  public void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3,
-      int[] soilLayer1, DataLayerClassic[] stabilityLayer,
-      DataLayerClassic[] drainageLayer,
-      int[] seaLevelOffset, float rainfall, float regionalTemp, float avgTemp, float floraDensity,
-      float floraDiversity) {
+  public void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, int[] soilLayer1,
+      DataLayerClassic[] stabilityLayer, DataLayerClassic[] drainageLayer, int[] seaLevelOffset,
+      float rainfall, float regionalTemp, float avgTemp, float floraDensity, float floraDiversity) {
+
     this.initialized = true;
 
     System.arraycopy(soilLayer1, 0, this.soilLayer1, 0, 256);

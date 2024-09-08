@@ -1,11 +1,11 @@
 package net.dries007.tfc.objects.items;
 
-import static net.minecraft.block.BlockFarmland.MOISTURE;
-import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.WET;
+import su.terrafirmagreg.api.util.MathsUtils;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
 
-import com.eerussianguy.firmalife.util.IWaterable;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,11 +19,14 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import su.terrafirmagreg.api.util.MathsUtils;
-import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilFarmland;
+
+
+import com.eerussianguy.firmalife.util.IWaterable;
+import mcp.MethodsReturnNonnullByDefault;
+
+import static net.minecraft.block.BlockFarmland.MOISTURE;
+import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.WET;
 
 @MethodsReturnNonnullByDefault
 
@@ -46,7 +49,7 @@ public class ItemWateringCan extends ItemMisc {
 
   @Override
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player,
-      EnumHand handIn) {
+          EnumHand handIn) {
     ItemStack itemstack = player.getHeldItem(handIn);
     if (!worldIn.isRemote && player.isWet()) {
       int dmg = itemstack.getItemDamage();
@@ -63,12 +66,12 @@ public class ItemWateringCan extends ItemMisc {
 
   @Override
   public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entity,
-      int countLeft) {
+          int countLeft) {
     World world = entity.getEntityWorld();
     BlockPos pos = entity.getPosition();
-      if (world.isRemote) {
-          return;
-      }
+    if (world.isRemote) {
+      return;
+    }
     for (int x = -2; x <= 2; x++) {
       for (int y = -2; y <= 2; y++) {
         for (int z = -2; z <= 2; z++) {
@@ -82,9 +85,9 @@ public class ItemWateringCan extends ItemMisc {
             IBlockState farmland = world.getBlockState(addPos);
             if (farmland.getBlock() instanceof BlockSoilFarmland) {
               int current = farmland.getValue(MOISTURE);
-                if (current < MOISTURE.getAllowedValues().size()) {
-                    world.setBlockState(addPos, farmland.withProperty(MOISTURE, current + 1));
-                }
+              if (current < MOISTURE.getAllowedValues().size()) {
+                world.setBlockState(addPos, farmland.withProperty(MOISTURE, current + 1));
+              }
             }
           }
         }
@@ -98,15 +101,15 @@ public class ItemWateringCan extends ItemMisc {
     World world = entity.getEntityWorld();
     if (world.isRemote && entity instanceof EntityPlayer && countLeft % 2 == 0) {
       RayTraceResult result = MathsUtils.rayTrace(world, (EntityPlayer) entity, false);
-        if (result == null || result.typeOfHit != RayTraceResult.Type.BLOCK) {
-            return;
-        }
+      if (result == null || result.typeOfHit != RayTraceResult.Type.BLOCK) {
+        return;
+      }
       BlockPos pos = result.getBlockPos();
       double x = pos.getX() + RNG.nextFloat();
       double y = pos.getY() + 1.5f;
       double z = pos.getZ() + RNG.nextFloat();
       world.spawnParticle(EnumParticleTypes.WATER_SPLASH, x, y, z, RNG.nextFloat(), -0.2f,
-          RNG.nextFloat());
+              RNG.nextFloat());
     }
   }
 }

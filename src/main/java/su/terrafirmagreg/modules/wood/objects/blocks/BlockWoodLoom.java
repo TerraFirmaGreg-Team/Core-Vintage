@@ -73,7 +73,7 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, IPr
         .oreDict(variant, type);
 
     setHarvestLevel(ToolClasses.AXE, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(HORIZONTAL, EnumFacing.NORTH));
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());

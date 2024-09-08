@@ -125,9 +125,9 @@ public final class ModuleCore extends ModuleBase {
   @Override
   public void onClientPreInit(FMLPreInitializationEvent event) {
 
+    MinecraftForge.EVENT_BUS.register(new EventHandlerDebugInfo());
     MinecraftForge.EVENT_BUS.register(new OverlayTemperature());
     MinecraftForge.EVENT_BUS.register(new OverlayPlayerData());
-    MinecraftForge.EVENT_BUS.register(new EventHandlerDebugInfo());
   }
 
   @Override

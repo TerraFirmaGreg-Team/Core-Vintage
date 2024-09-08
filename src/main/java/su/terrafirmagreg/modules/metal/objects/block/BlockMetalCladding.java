@@ -79,7 +79,7 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
         .resistance(25F);
 
     setHarvestLevel(ToolClasses.PICKAXE, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(FACE_PROPERTIES[0], false)
         .withProperty(FACE_PROPERTIES[1], false)
         .withProperty(FACE_PROPERTIES[2], false)

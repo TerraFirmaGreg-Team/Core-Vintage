@@ -261,30 +261,30 @@ public class StructureGenerator extends WorldGenerator {
                     world.getBlockState(new BlockPos(posX, posY, posZ))
                         .getBlock() == BlockPlantTFC.get(plant)) {
                   final IBlockState current = world.getBlockState(position);
+
                   if (BlockUtils.isSand(current)) {
                     world.setBlockState(new BlockPos(posX, posY, posZ),
-                        BlocksRock.SAND.get(ProviderChunkData.getRockHeight(world, position))
-                            .getDefaultState(), 2);
+                        BlocksRock.SAND.get(ProviderChunkData.getRockHeight(world, position)).getDefaultState(), 2);
+
                   } else if (BlockUtils.isDirt(current)) {
                     world.setBlockState(new BlockPos(posX, posY, posZ),
-                        BlocksSoil.DIRT.get(ProviderChunkData.getSoilHeight(world, position))
-                            .getDefaultState(), 2);
+                        BlocksSoil.DIRT.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
+
                   } else if (BlockUtils.isDryGrass(current)) {
                     world.setBlockState(new BlockPos(posX, posY, posZ),
-                        BlocksSoil.DRY_GRASS.get(ProviderChunkData.getSoilHeight(world, position))
-                            .getDefaultState(), 2);
+                        BlocksSoil.DRY_GRASS.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
+
                   } else if (BlockUtils.isGrass(current)) {
                     world.setBlockState(new BlockPos(posX, posY, posZ),
-                        BlocksSoil.GRASS.get(ProviderChunkData.getSoilHeight(world, position))
-                            .getDefaultState(), 2);
+                        BlocksSoil.GRASS.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
+
                   } else if (BlockUtils.isSparseGrass(current)) {
                     world.setBlockState(new BlockPos(posX, posY, posZ),
-                        BlocksSoil.SPARSE_GRASS.get(
-                            ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
+                        BlocksSoil.SPARSE_GRASS.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
+
                   } else {
                     world.setBlockState(new BlockPos(posX, posY, posZ),
-                        BlocksSoil.DIRT.get(ProviderChunkData.getSoilHeight(world, position))
-                            .getDefaultState(), 2);
+                        BlocksSoil.DIRT.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
                   }
                   posY = posY - 1;
                 }

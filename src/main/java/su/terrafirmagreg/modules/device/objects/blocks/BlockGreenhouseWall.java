@@ -54,7 +54,7 @@ public class BlockGreenhouseWall extends BaseBlock {
         .weight(Weight.MEDIUM)
         .nonCube();
 
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(GLASS, Boolean.FALSE)
         .withProperty(FACING, EnumFacing.EAST)
         .withProperty(TOP, Boolean.FALSE));

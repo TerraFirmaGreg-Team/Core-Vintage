@@ -26,7 +26,6 @@ public abstract class BaseContainerTile<T extends BaseTileInventory> extends Bas
 
   private final boolean shouldSyncFields;
   private final int yOffset; // The number of pixels higher than normal (If the gui is larger than normal, see Anvil)
-
   private int[] cachedFields;
 
   protected BaseContainerTile(InventoryPlayer playerInv, T tile) {

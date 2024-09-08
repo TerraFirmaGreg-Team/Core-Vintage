@@ -58,8 +58,12 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
   }
 
   @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos,
-      EnumFacing face) {
+  public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+    return this.settings.isReplaceable() || super.isReplaceable(worldIn, pos);
+  }
+
+  @Override
+  public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face) {
     return isOpaqueCube(state) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 
@@ -92,7 +96,7 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
   @Override
   public String getTranslationKey() {
     return this.settings.getTranslationKey() == null ? super.getTranslationKey()
-        : "tile." + this.settings.getTranslationKey();
+            : "tile." + this.settings.getTranslationKey();
   }
 
   @Override
@@ -102,7 +106,7 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
 
   @Override
   public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos,
-      @Nullable Entity entity) {
+          @Nullable Entity entity) {
     return this.settings.getSlipperiness().apply(state, world, pos);
   }
 
@@ -118,9 +122,9 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
 
   @Override
   public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-      BlockPos pos) {
+          BlockPos pos) {
     return this.settings.isCollidable() ? super.getCollisionBoundingBox(blockState, worldIn, pos)
-        : NULL_AABB;
+            : NULL_AABB;
   }
 
   @Override

@@ -67,7 +67,7 @@ public class BlockInductionCrucible extends BaseBlock implements IProviderTile {
         .hardness(3.0f);
 
     setHarvestLevel(ToolClasses.PICKAXE, 0);
-    setDefaultState(getBlockState().getBaseState()
+    setDefaultState(blockState.getBaseState()
         .withProperty(LIT, false)
         .withProperty(FACING, EnumFacing.NORTH));
 

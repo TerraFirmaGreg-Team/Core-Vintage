@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.core.objects.tile.TileIngotPile;
+import su.terrafirmagreg.modules.core.object.tile.TileIngotPile;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,29 +20,29 @@ import java.util.List;
 
 public class IngotPileProvider implements IWailaBlock {
 
-    @NotNull
-    @Override
-    public ItemStack getIcon(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
-        var tile = TileUtils.getTile(world, pos, TileIngotPile.class);
-        if (tile != null) {
-            return new ItemStack(ItemIngot.get(tile.getMetal(), Metal.ItemType.INGOT), tile.getCount());
-        }
-        return ItemStack.EMPTY;
+  @NotNull
+  @Override
+  public ItemStack getIcon(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
+    var tile = TileUtils.getTile(world, pos, TileIngotPile.class);
+    if (tile != null) {
+      return new ItemStack(ItemIngot.get(tile.getMetal(), Metal.ItemType.INGOT), tile.getCount());
     }
+    return ItemStack.EMPTY;
+  }
 
-    @NotNull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(TileIngotPile.class);
-    }
+  @NotNull
+  @Override
+  public List<Class<?>> getLookupClass() {
+    return Collections.singletonList(TileIngotPile.class);
+  }
 
-    @Override
-    public boolean appendBody() {
-        return false;
-    }
+  @Override
+  public boolean appendBody() {
+    return false;
+  }
 
-    @Override
-    public boolean overrideIcon() {
-        return true;
-    }
+  @Override
+  public boolean overrideIcon() {
+    return true;
+  }
 }

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.capabilities.worldtracker;
 
 import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.spi.CollapseData;
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Set;
 
 public class ProviderWorldTracker
-    implements ICapabilityWorldTracker {
+        implements ICapabilityWorldTracker {
 
   private final List<CollapseData> collapsesInProgress;
 
@@ -48,13 +48,13 @@ public class ProviderWorldTracker
             // Check the current position for collapsing
             IBlockState stateAt = world.getBlockState(posAt);
             FallingBlockManager.Specification specAt = FallingBlockManager.getSpecification(
-                stateAt);
+                    stateAt);
             if (specAt != null && specAt.isCollapsable() && FallingBlockManager.canFallThrough(
-                world, posAt.down(), Material.ROCK) &&
-                specAt.canCollapse(world, posAt)
-                && posAt.distanceSq(collapse.centerPos) < collapse.radiusSquared &&
-                MathConstants.RNG.nextFloat()
-                    < ConfigTFC.General.FALLABLE.propagateCollapseChance) {
+                    world, posAt.down(), Material.ROCK) &&
+                    specAt.canCollapse(world, posAt)
+                    && posAt.distanceSq(collapse.centerPos) < collapse.radiusSquared &&
+                    MathConstants.RNG.nextFloat()
+                            < ConfigTFC.General.FALLABLE.propagateCollapseChance) {
               IBlockState fallState = specAt.getResultingState(stateAt);
               world.setBlockState(posAt, fallState);
               FallingBlockManager.checkFalling(world, posAt, fallState, true);
@@ -65,7 +65,7 @@ public class ProviderWorldTracker
           collapse.nextPositions.clear();
           if (!updatedPositions.isEmpty()) {
             world.playSound(null, collapse.centerPos, TFCSounds.ROCK_SLIDE_SHORT,
-                SoundCategory.BLOCKS, 0.6f, 1.0f);
+                    SoundCategory.BLOCKS, 0.6f, 1.0f);
             collapse.nextPositions.addAll(updatedPositions);
             collapse.radiusSquared *= 0.8; // lower radius each successive time
           }

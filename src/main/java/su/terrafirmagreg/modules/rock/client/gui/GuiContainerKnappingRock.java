@@ -11,8 +11,7 @@ import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 
 public class GuiContainerKnappingRock extends GuiContainerKnapping {
 
-  public GuiContainerKnappingRock(Container container, InventoryPlayer inventoryPlayer,
-      ResourceLocation buttonTexture) {
+  public GuiContainerKnappingRock(Container container, InventoryPlayer inventoryPlayer, ResourceLocation buttonTexture) {
     super(container, inventoryPlayer, KnappingTypes.STONE, buttonTexture);
   }
 }

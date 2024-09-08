@@ -19,7 +19,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 
-import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
+import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
 
 @Getter
 public class RockBlockVariant extends Variant<RockBlockVariant> {
@@ -32,6 +32,7 @@ public class RockBlockVariant extends Variant<RockBlockVariant> {
   private Specification specification;
   private BiFunction<RockBlockVariant, RockType, ? extends Block> factory;
   private boolean hasStoneType;
+  private StoneType stoneType;
 
   private RockBlockVariant(String name) {
     super(name);
@@ -78,7 +79,7 @@ public class RockBlockVariant extends Variant<RockBlockVariant> {
     RockType.getTypes().forEach(type -> {
       if (BlocksRock.ROCK_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
         throw new RuntimeException(
-            String.format("Duplicate registry detected: %s, %s", this, type));
+                String.format("Duplicate registry detected: %s, %s", this, type));
       }
       if (hasStoneType) {
         createStoneType(idCounter.getAndIncrement(), type);
@@ -92,10 +93,10 @@ public class RockBlockVariant extends Variant<RockBlockVariant> {
   }
 
   private void createStoneType(int id, RockType type) {
-    new StoneType(id, type + "_" + this.getName(), SoundType.STONE,
-        type.getOrePrefix(), type.getMaterial(),
-        () -> this.get(type).getDefaultState(),
-        state -> state.getBlock() == this.get(type), false
+    stoneType = new StoneType(id, type + "_" + this.getName(), SoundType.STONE,
+            type.getOrePrefix(), type.getMaterial(),
+            () -> this.get(type).getDefaultState(),
+            state -> state.getBlock() == this.get(type), false
     );
   }
 
@@ -109,6 +110,6 @@ public class RockBlockVariant extends Variant<RockBlockVariant> {
 
   public String getLocalizedName() {
     return new TextComponentTranslation(
-        String.format("rock.variant.%s.name", this)).getFormattedText();
+            String.format("rock.variant.%s.name", this)).getFormattedText();
   }
 }

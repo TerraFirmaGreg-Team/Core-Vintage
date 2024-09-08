@@ -26,21 +26,25 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 
 import javax.annotation.Nullable;
 
 @Mixin(value = Block.class, remap = false)
 public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> implements IBlockSettings {
 
-  @Final
+
   @Shadow
+  @Final
   public Material material;
 
-  @Unique
-  @Final
-  protected Settings core_Vintage$settings = Settings.of(Material.AIR);
+  @Shadow
+  public boolean fullBlock = getSettings().isOpaque();
 
+
+  @Final
+  public Settings core_Vintage$settings = Settings.of(Material.AIR);
+
+  @Override
   public Settings getSettings() {
     return core_Vintage$settings;
   }

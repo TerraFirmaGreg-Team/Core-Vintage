@@ -15,7 +15,7 @@ import lombok.Getter;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
+import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
 
 @Getter
 public class MetalBlockVariant extends Variant<MetalBlockVariant> {
@@ -47,7 +47,7 @@ public class MetalBlockVariant extends Variant<MetalBlockVariant> {
   }
 
   public MetalBlockVariant setFactory(
-      BiFunction<MetalBlockVariant, MetalType, ? extends Block> factory) {
+          BiFunction<MetalBlockVariant, MetalType, ? extends Block> factory) {
     this.factory = factory;
     return this;
   }
@@ -61,7 +61,7 @@ public class MetalBlockVariant extends Variant<MetalBlockVariant> {
     MetalType.getTypes().forEach(type -> {
       if (BlocksMetal.METAL_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
         throw new RuntimeException(
-            String.format("Duplicate registry detected: %s, %s", this, type));
+                String.format("Duplicate registry detected: %s, %s", this, type));
       }
     });
     return this;

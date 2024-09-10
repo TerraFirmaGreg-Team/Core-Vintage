@@ -104,6 +104,7 @@ public final class BlocksRock {
   public static BlockAlabasterRaw ALABASTER_RAW;
 
   public static void onRegister(RegistryManager registry) {
+
     COBBLE = RockBlockVariant
             .builder("cobble")
             .baseHardness(6f)

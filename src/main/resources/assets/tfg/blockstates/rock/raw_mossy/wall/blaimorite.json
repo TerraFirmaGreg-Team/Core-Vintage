@@ -13,7 +13,9 @@
       {}
     ],
     "inventory": [
-      {}
+      {
+        "model": "tfg:rock/wall/mossy/inventory"
+      }
     ],
     "north": {
       "true": {

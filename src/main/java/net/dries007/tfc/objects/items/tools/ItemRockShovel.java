@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.items.rock;
+package net.dries007.tfc.objects.items.tools;
 
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
@@ -76,7 +76,7 @@ public class ItemRockShovel extends ItemSpade implements ICapabilitySize, IRockO
   @Override
   @NotNull
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-      float hitZ) {
+          float hitZ) {
     ItemStack itemstack = player.getHeldItem(hand);
 
     if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
@@ -88,8 +88,8 @@ public class ItemRockShovel extends ItemSpade implements ICapabilitySize, IRockO
         return EnumActionResult.PASS;
       }
       if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN &&
-          worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR &&
-          BlockUtils.isVariant(soilBlock.getVariant(), GRASS, DRY_GRASS, DIRT)) {
+              worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR &&
+              BlockUtils.isVariant(soilBlock.getVariant(), GRASS, DRY_GRASS, DIRT)) {
         IBlockState iblockstate1 = GRASS_PATH.get(soilBlock.getType()).getDefaultState();
         worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 

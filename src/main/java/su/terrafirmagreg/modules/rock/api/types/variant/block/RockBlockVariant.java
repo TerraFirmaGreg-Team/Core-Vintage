@@ -40,6 +40,7 @@ public class RockBlockVariant extends Variant<RockBlockVariant> {
     if (!blockVariants.add(this)) {
       throw new RuntimeException(String.format("RockBlockVariant: [%s] already exists!", name));
     }
+
   }
 
   public static RockBlockVariant builder(String name) {

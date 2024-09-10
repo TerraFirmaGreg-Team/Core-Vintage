@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.items.rock;
+package net.dries007.tfc.objects.items.tools;
 
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;

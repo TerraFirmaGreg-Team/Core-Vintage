@@ -9,9 +9,19 @@ import net.minecraft.item.Item;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.Map;
 
 public interface IRegistryBlock
-    extends IRegistryBase {
+        extends IRegistryBase {
+
+  default <T extends Block, A> Map<A, T> blocks(Map<A, T> map) {
+    for (var block : map.values()) {
+      if (block instanceof IBlockSettings provider) {
+        this.block(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
+      }
+    }
+    return map;
+  }
 
   default <T extends Block> Collection<T> blocks(Collection<T> collection) {
     for (var block : collection) {
@@ -43,7 +53,7 @@ public interface IRegistryBlock
 
     block.setRegistryName(this.getModID(), name);
     block.setTranslationKey(
-        this.getModID() + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
+            this.getModID() + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
     if (this.getTab() != null) {
       block.setCreativeTab(this.getTab());
     }

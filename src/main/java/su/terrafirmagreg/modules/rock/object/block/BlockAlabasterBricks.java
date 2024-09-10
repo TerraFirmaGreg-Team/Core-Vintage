@@ -31,4 +31,5 @@ public class BlockAlabasterBricks extends BlockRockDecorative {
             .oreDict("alabaster", "bricks")
             .registryKey("rock/alabaster/bricks/" + color.getName());
   }
+
 }

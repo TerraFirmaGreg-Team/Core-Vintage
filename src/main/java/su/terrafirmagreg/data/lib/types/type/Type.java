@@ -26,4 +26,5 @@ public abstract class Type<T> implements Comparable<Type<T>> {
   public int compareTo(@NotNull Type<T> type) {
     return this.name.compareTo(type.getName());
   }
+
 }

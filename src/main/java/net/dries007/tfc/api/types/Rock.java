@@ -1,24 +1,21 @@
 package net.dries007.tfc.api.types;
 
-import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
-
-import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.items.rock.ItemRockAxe;
-import net.dries007.tfc.objects.items.rock.ItemRockHammer;
-import net.dries007.tfc.objects.items.rock.ItemRockHoe;
-import net.dries007.tfc.objects.items.rock.ItemRockJavelin;
-import net.dries007.tfc.objects.items.rock.ItemRockKnife;
-import net.dries007.tfc.objects.items.rock.ItemRockShovel;
+import net.dries007.tfc.objects.items.tools.ItemRockAxe;
+import net.dries007.tfc.objects.items.tools.ItemRockHammer;
+import net.dries007.tfc.objects.items.tools.ItemRockHoe;
+import net.dries007.tfc.objects.items.tools.ItemRockJavelin;
+import net.dries007.tfc.objects.items.tools.ItemRockKnife;
+import net.dries007.tfc.objects.items.tools.ItemRockShovel;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.function.Function;
 
@@ -26,6 +23,7 @@ import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class Rock extends IForgeRegistryEntry.Impl<Rock> {
 
+  @Getter
   private final RockCategory rockCategory;
   private final ResourceLocation textureLocation;
   private final boolean isFluxStone;
@@ -62,10 +60,6 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
     return textureLocation;
   }
 
-  public RockCategory getRockCategory() {
-    return rockCategory;
-  }
-
   public boolean isFluxStone() {
     return isFluxStone;
   }
@@ -89,6 +83,7 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
     HAMMER(ItemRockHammer::new, "XXXXX", "XXXXX", "  X  ");
 
     private final Function<RockCategory, Item> supplier;
+    @Getter
     private final String[] pattern;
 
     ToolType(@NotNull Function<RockCategory, Item> supplier, String... pattern) {
@@ -100,77 +95,5 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
       return supplier.apply(category);
     }
 
-    public String[] getPattern() {
-      return pattern;
-    }
   }
-
-  public enum Type {
-    RAW(Material.ROCK, false, Specification.COLLAPSABLE_ROCK),
-    ANVIL(Material.ROCK, false, Specification.COLLAPSABLE_ROCK),
-    SMOOTH(Material.ROCK, false, Specification.COLLAPSABLE_ROCK),
-    COBBLE(Material.ROCK, false, new Specification(true, () -> TFCSounds.ROCK_SLIDE_SHORT)),
-    BRICKS(Material.ROCK, false, null),
-    SAND(Material.SAND, false, Specification.VERTICAL_AND_HORIZONTAL),
-    GRAVEL(Material.SAND, false, Specification.VERTICAL_AND_HORIZONTAL),
-    DIRT(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-    GRASS(Material.GRASS, true, Specification.VERTICAL_AND_HORIZONTAL),
-    DRY_GRASS(Material.GRASS, true, Specification.VERTICAL_AND_HORIZONTAL),
-    CLAY(Material.CLAY, false, Specification.VERTICAL_ONLY),
-    CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-    FARMLAND(Material.GROUND, false, Specification.VERTICAL_ONLY),
-    PATH(Material.GROUND, false, Specification.VERTICAL_ONLY);
-
-    public final Material material;
-    public final boolean isGrass;
-
-    @Nullable
-    private final Specification fallingSpecification;
-
-    Type(Material material, boolean isGrass, @Nullable Specification fallingSpecification) {
-      this.material = material;
-      this.isGrass = isGrass;
-      this.fallingSpecification = fallingSpecification;
-    }
-
-    public boolean canFall() {
-      return fallingSpecification != null;
-    }
-
-    public boolean canFallHorizontal() {
-      return fallingSpecification != null && fallingSpecification.canFallHorizontally();
-    }
-
-    public boolean canFallHorizontally() {
-      return fallingSpecification != null && fallingSpecification.canFallHorizontally();
-    }
-
-    public Type getNonGrassVersion() {
-      if (!isGrass) {
-        return this;
-      }
-      return switch (this) {
-        case GRASS, DRY_GRASS -> DIRT;
-        case CLAY_GRASS -> CLAY;
-        default -> throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
-      };
-    }
-
-    public Type getGrassVersion(Type spreader) {
-      if (!spreader.isGrass) {
-        throw new IllegalArgumentException("Non-grass can't spread.");
-      }
-      return switch (this) {
-        case DIRT -> spreader == DRY_GRASS ? DRY_GRASS : GRASS;
-        case CLAY -> CLAY_GRASS;
-        default -> throw new IllegalArgumentException("You cannot get grass from rock types.");
-      };
-    }
-
-    @Nullable
-    public Specification getFallingSpecification() {
-      return fallingSpecification;
-    }
-  }
-
 }

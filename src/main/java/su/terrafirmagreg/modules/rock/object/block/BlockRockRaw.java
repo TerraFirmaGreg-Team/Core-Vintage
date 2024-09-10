@@ -52,15 +52,6 @@ public class BlockRockRaw extends BlockRock {
             .withProperty(CAN_FALL, true));
   }
 
-  @Override
-  public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(CAN_FALL, meta == 0);
-  }
-
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(CAN_FALL) ? 0 : 1;
-  }
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
@@ -83,8 +74,8 @@ public class BlockRockRaw extends BlockRock {
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
-          float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
+          float hitZ) {
 
     ItemStack stack = playerIn.getHeldItemMainhand();
     if (ConfigRock.BLOCKS.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
@@ -108,8 +99,7 @@ public class BlockRockRaw extends BlockRock {
   }
 
   @Override
-  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
-          IBlockState state, int fortune) {
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
     super.getDrops(drops, world, pos, state, fortune);
 
     // Raw rocks drop random gems

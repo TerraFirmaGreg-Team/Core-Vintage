@@ -85,7 +85,7 @@ import net.dries007.tfc.objects.items.TechItems;
 import net.dries007.tfc.objects.items.glassworking.ItemBlowpipe;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
-import net.dries007.tfc.objects.items.rock.ItemRockKnife;
+import net.dries007.tfc.objects.items.tools.ItemRockKnife;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 
 import java.util.ArrayList;

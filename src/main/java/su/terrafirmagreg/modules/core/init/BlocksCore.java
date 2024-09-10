@@ -32,6 +32,7 @@ public final class BlocksCore {
     INGOT_PILE = registry.block(new BlockIngotPile());
     FIRE_CLAY = registry.block(new BlockFireClay());
     FIRE_BRICKS = registry.block(new BlockFireBricks());
+   
 
   }
 

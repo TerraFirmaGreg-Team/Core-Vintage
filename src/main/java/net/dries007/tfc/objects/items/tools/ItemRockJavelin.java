@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.items.rock;
+package net.dries007.tfc.objects.items.tools;
 
 import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
@@ -52,7 +52,7 @@ public class ItemRockJavelin extends ItemTool implements ICapabilitySize, IRockO
   public ItemRockJavelin(RockCategory category) {
     // Vanilla ItemTool constructor actually treats this as "bonus attack damage", and as a result, adds + getAttackDamage(). So for our purposes, this is 0.7 * attack damage.
     super(-0.3f * category.getToolMaterial()
-        .getAttackDamage(), -1.8f, category.getToolMaterial(), ImmutableSet.of());
+            .getAttackDamage(), -1.8f, category.getToolMaterial(), ImmutableSet.of());
     this.category = category;
     if (MAP.put(category, this) != null) {
       throw new IllegalStateException("There can only be one.");
@@ -125,12 +125,12 @@ public class ItemRockJavelin extends ItemTool implements ICapabilitySize, IRockO
         if (!worldIn.isRemote) {
           EntityThrownJavelin javelin = new EntityThrownJavelin(worldIn, player);
           javelin.setDamage(2.5f *
-              attackDamage); // When thrown, it does approx 1.8x the tool material (attack damage is already 0.7x of the tool). This makes it slightly more damaging than axes but more difficult to use
+                  attackDamage); // When thrown, it does approx 1.8x the tool material (attack damage is already 0.7x of the tool). This makes it slightly more damaging than axes but more difficult to use
           javelin.setWeapon(stack);
           javelin.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 1.5F, 0.5F);
           worldIn.spawnEntity(javelin);
           worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
-              1.0F / (RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                  1.0F / (RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
         }
         player.inventory.deleteStack(stack);
         player.addStat(StatList.getObjectUseStats(this));

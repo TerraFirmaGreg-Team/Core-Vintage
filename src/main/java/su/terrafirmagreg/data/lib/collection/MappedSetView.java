@@ -36,13 +36,13 @@ public class MappedSetView<R, T> implements Set<T> {
   @Override
   public boolean contains(Object o) {
     throw new UnsupportedOperationException(
-        "Mapped sets cannot be checked for contained elements!");
+            "Mapped sets cannot be checked for contained elements!");
   }
 
   @Override
   public @NotNull Iterator<T> iterator() {
     Iterator<R> iterator = this.set.iterator();
-    return new Iterator<T>() {
+    return new Iterator<>() {
 
       @Override
       public boolean hasNext() {
@@ -79,7 +79,7 @@ public class MappedSetView<R, T> implements Set<T> {
   @Override
   public boolean containsAll(@NotNull Collection<?> c) {
     throw new UnsupportedOperationException(
-        "Mapped sets cannot be checked for contained elements!");
+            "Mapped sets cannot be checked for contained elements!");
   }
 
   @Override

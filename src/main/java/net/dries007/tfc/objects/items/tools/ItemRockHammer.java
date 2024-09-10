@@ -1,18 +1,13 @@
-package net.dries007.tfc.objects.items.rock;
+package net.dries007.tfc.objects.items.tools;
 
 import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -33,29 +28,26 @@ import java.util.List;
 import java.util.Map;
 
 @MethodsReturnNonnullByDefault
+public class ItemRockHammer extends ItemTool implements ICapabilitySize, IRockObject {
 
-public class ItemRockKnife extends ItemTool implements ICapabilitySize, IRockObject {
-
-  private static final Map<RockCategory, ItemRockKnife> MAP = new HashMap<>();
+  private static final Map<RockCategory, ItemRockHammer> MAP = new HashMap<>();
   public final RockCategory category;
 
-  public ItemRockKnife(RockCategory category) {
-    // Vanilla ItemTool constructor actually treats this as "bonus attack damage", and as a result, adds + getAttackDamage(). So for our purposes, this is 0.54 * attack damage.
-    super(-0.46f * category.getToolMaterial()
-        .getAttackDamage(), -1.5f, category.getToolMaterial(), ImmutableSet.of());
+  public ItemRockHammer(RockCategory category) {
+    // Vanilla ItemTool constructor actually treats this as "bonus attack damage", and as a result, adds + getAttackDamage(). So for our purposes, this is 1.0 * attack damage.
+    super(0f, -3f, category.getToolMaterial(), ImmutableSet.of());
     this.category = category;
     if (MAP.put(category, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
-    setHarvestLevel("knife", category.getToolMaterial().getHarvestLevel());
-
-    OreDictionaryHelper.registerDamageType(this, DamageType.PIERCING);
-    OreDictionaryHelper.register(this, "knife");
-    OreDictionaryHelper.register(this, "knife", "stone");
-    OreDictionaryHelper.register(this, "knife", "stone", category);
+    setHarvestLevel("hammer", category.getToolMaterial().getHarvestLevel());
+    OreDictionaryHelper.registerDamageType(this, DamageType.CRUSHING);
+    OreDictionaryHelper.register(this, "hammer");
+    OreDictionaryHelper.register(this, "hammer", "stone");
+    OreDictionaryHelper.register(this, "hammer", "stone", category);
   }
 
-  public static ItemRockKnife get(RockCategory category) {
+  public static ItemRockHammer get(RockCategory category) {
     return MAP.get(category);
   }
 
@@ -66,13 +58,8 @@ public class ItemRockKnife extends ItemTool implements ICapabilitySize, IRockObj
   }
 
   @Override
-  public boolean doesSneakBypassUse(ItemStack stack, IBlockAccess world, BlockPos pos, EntityPlayer player) {
-    return true;
-  }
-
-  @Override
   public @NotNull Size getSize(ItemStack stack) {
-    return Size.NORMAL; // Stored in large vessels
+    return Size.LARGE;  // Stored only in chests
   }
 
   @Override
@@ -95,14 +82,5 @@ public class ItemRockKnife extends ItemTool implements ICapabilitySize, IRockObj
   @Override
   public RockCategory getRockCategory(ItemStack stack) {
     return category;
-  }
-
-  @Override
-  public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
-    // Knives always take damage
-    if (!worldIn.isRemote) {
-      stack.damageItem(1, entityLiving);
-    }
-    return true;
   }
 }

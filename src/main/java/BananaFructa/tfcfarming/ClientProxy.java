@@ -31,8 +31,8 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalHoe;
-import net.dries007.tfc.objects.items.rock.ItemRockHoe;
 import net.dries007.tfc.objects.items.tools.ItemHoeTFCF;
+import net.dries007.tfc.objects.items.tools.ItemRockHoe;
 
 import java.util.HashMap;
 

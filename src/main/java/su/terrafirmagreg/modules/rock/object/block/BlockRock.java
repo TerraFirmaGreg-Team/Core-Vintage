@@ -7,6 +7,7 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -51,12 +52,15 @@ public abstract class BlockRock extends BaseBlock implements IRockBlock {
   }
 
   @Override
+  public int getMetaFromState(IBlockState state) {
+    return 0;
+  }
+
+  @Override
   @SideOnly(Side.CLIENT)
-  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
-          ITooltipFlag flagIn) {
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 
-    tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": "
-            + getType().getCategory().getLocalizedName());
+    tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
   }
 }

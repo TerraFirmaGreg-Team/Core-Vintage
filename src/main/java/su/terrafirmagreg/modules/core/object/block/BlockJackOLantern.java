@@ -31,6 +31,7 @@ import lombok.Getter;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 import static su.terrafirmagreg.data.Properties.LIT;
 
 @Getter
@@ -47,12 +48,12 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
             .registryKey("core/jack_o_lantern/" + carving)
             .hardness(1f)
             .lightValue(1)
+            .randomTicks()
             .size(Size.LARGE)
             .weight(Weight.HEAVY);
 
-    setTickRandomly(true);
     setDefaultState(blockState.getBaseState()
-            .withProperty(FACING, EnumFacing.NORTH)
+            .withProperty(HORIZONTAL, EnumFacing.NORTH)
             .withProperty(LIT, Boolean.FALSE));
 
   }
@@ -63,8 +64,7 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
   }
 
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta))
-            .withProperty(LIT, meta >= 4);
+    return getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta)).withProperty(LIT, meta >= 4);
   }
 
   public int getMetaFromState(IBlockState state) {
@@ -75,21 +75,22 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
     return new BlockStateContainer(this, FACING, LIT);
   }
 
+  @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     //taken from BlockTorchTFC
     var tile = TileUtils.getTile(world, pos, TETickCounter.class);
     if (TileUtils.isNotNull(tile)) {
       //last twice as long as a torch. balance this by being less bright
-      if (!world.isRemote && tile.getTicksSinceUpdate() > (2L
-              * ConfigTFC.General.OVERRIDES.torchTime) && ConfigTFC.General.OVERRIDES.torchTime > 0) {
+      if (!world.isRemote && tile.getTicksSinceUpdate() > (2L * ConfigTFC.General.OVERRIDES.torchTime) && ConfigTFC.General.OVERRIDES.torchTime > 0) {
         world.setBlockState(pos, state.withProperty(LIT, false));
         tile.resetCounter();
       }
     }
   }
 
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+  @Override
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
+          float hitZ) {
     //taken from BlockTorchTFC
     if (!worldIn.isRemote) {
       ItemStack stack = playerIn.getHeldItem(hand);
@@ -106,8 +107,8 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
     return true;
   }
 
-  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-          EntityLivingBase placer, ItemStack stack) {
+  @Override
+  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     //taken from BlockTorchTFC
     // Set the initial counter value
     var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
@@ -117,6 +118,7 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 
+  @Override
   public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
     return state.getValue(LIT) ? super.getLightValue(state, world, pos) : 0;
   }

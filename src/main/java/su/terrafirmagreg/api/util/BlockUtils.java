@@ -44,7 +44,6 @@ import java.util.List;
 
 import static su.terrafirmagreg.data.Properties.CLAY;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.GRAVEL;
-import static su.terrafirmagreg.modules.rock.init.BlocksRock.MOSSY_RAW;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.COARSE_DIRT;
@@ -586,7 +585,7 @@ public final class BlockUtils {
   public static boolean isRawStone(IBlockState current) {
     var block = current.getBlock();
     if (block instanceof IRockBlock rock) {
-      return isVariant(rock.getVariant(), RAW, MOSSY_RAW);
+      return isVariant(rock.getVariant(), RAW);
     }
     return false;
   }

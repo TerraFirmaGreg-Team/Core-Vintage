@@ -40,15 +40,15 @@ public interface ISoilBlock extends IType<SoilType>, IVariant<SoilBlockVariant>,
       switch (plant.getPlantTypeTFC()) {
         case CLAY -> {
           return BlockUtils.isVariant(getVariant(), DIRT, GRASS, DRY_GRASS, COARSE_DIRT, MUD, PODZOL, SPARSE_GRASS)
-              && BlockUtils.isClay(blockState);
+                  && BlockUtils.isClay(blockState);
         }
         case DESERT_CLAY -> {
           return BlockUtils.isVariant(getVariant(), MUD, SAND)
-              || BlockUtils.isClay(blockState);
+                  || BlockUtils.isClay(blockState);
         }
         case DRY_CLAY -> {
           return BlockUtils.isVariant(getVariant(), DIRT, DRY_GRASS, COARSE_DIRT, MUD, PODZOL, SAND, SPARSE_GRASS)
-              || BlockUtils.isClay(blockState);
+                  || BlockUtils.isClay(blockState);
         }
         case DRY -> {
           return BlockUtils.isVariant(getVariant(), DIRT, COARSE_DIRT, DRY_GRASS, MUD, SAND, SPARSE_GRASS);
@@ -89,7 +89,7 @@ public interface ISoilBlock extends IType<SoilType>, IVariant<SoilBlockVariant>,
         boolean isWild = cropState.getValue(WILD);
         if (isWild) {
           if (BlockUtils.isVariant(getVariant(), DIRT, GRASS, DRY_GRASS, PODZOL, SPARSE_GRASS, COARSE_DIRT)
-              || BlockUtils.isClay(blockState)) {
+                  || BlockUtils.isClay(blockState)) {
             return true;
           }
         }
@@ -100,7 +100,7 @@ public interface ISoilBlock extends IType<SoilType>, IVariant<SoilBlockVariant>,
     switch (plantable.getPlantType(world, pos.offset(direction))) {
       case Plains -> {
         return BlockUtils.isVariant(getVariant(), DIRT, GRASS, FARMLAND, DRY_GRASS, COARSE_DIRT, MUD, PODZOL, SPARSE_GRASS)
-            || BlockUtils.isClay(blockState);
+                || BlockUtils.isClay(blockState);
       }
       case Crop -> {
         return BlockUtils.isVariant(getVariant(), FARMLAND);
@@ -130,4 +130,7 @@ public interface ISoilBlock extends IType<SoilType>, IVariant<SoilBlockVariant>,
     return false;
   }
 
+  default String getRegistryKey(SoilBlockVariant variant, SoilType type) {
+    return String.format("soil/%s/%s", variant, type);
+  }
 }

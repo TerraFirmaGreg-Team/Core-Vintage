@@ -91,15 +91,6 @@ public final class RecipesTFCF {
       }
     }
 
-    for (var rock : RockType.getTypes()) {
-      event.getRegistry().registerAll(
-              new BarrelRecipe(IIngredient.of(FluidsTFC.HOT_WATER.get(), 200), IIngredient.of(BlocksRock.RAW.get(rock)),
-                      new FluidStack(FluidsTFC.FRESH_WATER.get(), 50),
-                      new ItemStack(BlocksRock.MOSSY_RAW.get(rock), 1),
-                      8 * ICalendar.TICKS_IN_HOUR).setRegistryName(MODID_TFCF, "mossy_raw_" + rock.getName())
-      );
-    }
-
     r.registerAll(
 
             // Sugar

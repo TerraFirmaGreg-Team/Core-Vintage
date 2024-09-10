@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.util.BlockRenderLayer;
 
@@ -19,8 +20,8 @@ public class BlockSoilMudWall extends BaseBlockWall implements ISoilBlock {
   protected final SoilBlockVariant variant;
   protected final SoilType type;
 
-  public BlockSoilMudWall(SoilBlockVariant modelBlock, SoilBlockVariant variant, SoilType type) {
-    super(modelBlock.get(type));
+  public BlockSoilMudWall(Block model, SoilBlockVariant variant, SoilType type) {
+    super(model);
 
     this.variant = variant;
     this.type = type;

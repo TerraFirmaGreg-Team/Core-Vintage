@@ -58,8 +58,7 @@ public abstract class BaseBlockRotatedPillar extends BlockRotatedPillar implemen
   }
 
   @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos,
-      EnumFacing face) {
+  public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face) {
     return isOpaqueCube(state) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 
@@ -92,12 +91,12 @@ public abstract class BaseBlockRotatedPillar extends BlockRotatedPillar implemen
   @Override
   public String getTranslationKey() {
     return this.settings.getTranslationKey() == null ? super.getTranslationKey()
-        : "tile." + this.settings.getTranslationKey();
+            : "tile." + this.settings.getTranslationKey();
   }
 
   @Override
   public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos,
-      @Nullable Entity entity) {
+          @Nullable Entity entity) {
     return this.settings.getSlipperiness().apply(state, world, pos);
   }
 
@@ -113,9 +112,9 @@ public abstract class BaseBlockRotatedPillar extends BlockRotatedPillar implemen
 
   @Override
   public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-      BlockPos pos) {
+          BlockPos pos) {
     return this.settings.isCollidable() ? super.getCollisionBoundingBox(blockState, worldIn, pos)
-        : NULL_AABB;
+            : NULL_AABB;
   }
 
   @Override

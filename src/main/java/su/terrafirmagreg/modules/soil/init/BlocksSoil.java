@@ -25,7 +25,6 @@ import net.minecraft.block.Block;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 
 import java.util.Map;
-import java.util.Set;
 
 import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;
 import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification.VERTICAL_ONLY_SOIL;
@@ -33,8 +32,6 @@ import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager
 public final class BlocksSoil {
 
   public static final Map<Pair<SoilBlockVariant, SoilType>, Block> SOIL_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
-
-  public static final Map<Pair<SoilBlockVariant, Set<SoilType>>, Block> SOIL_BLOCKS2 = new Object2ObjectLinkedOpenHashMap<>();
 
   public static SoilBlockVariant GRASS;
   public static SoilBlockVariant DRY_GRASS;
@@ -57,12 +54,6 @@ public final class BlocksSoil {
   public static SoilBlockVariant MUD_BRICKS_SLAB_DOUBLE;
   public static SoilBlockVariant MUD_BRICKS_SLAB;
   public static SoilBlockVariant MUD_BRICKS_WALL;
-
-  public static SoilBlockVariant MUD_BRICKS_MOSSY;
-  public static SoilBlockVariant MUD_BRICKS_MOSSY_STAIRS;
-  public static SoilBlockVariant MUD_BRICKS_MOSSY_SLAB_DOUBLE;
-  public static SoilBlockVariant MUD_BRICKS_MOSSY_SLAB;
-  public static SoilBlockVariant MUD_BRICKS_MOSSY_WALL;
 
   public static SoilBlockVariant DRYING_BRICKS;
 
@@ -144,50 +135,22 @@ public final class BlocksSoil {
 
     MUD_BRICKS_STAIRS = SoilBlockVariant
             .builder("mud_bricks/stairs")
-            .setFactory((v, t) -> new BlockSoilMudStairs(MUD_BRICKS, v, t))
+            .setFactory((v, t) -> new BlockSoilMudStairs(MUD_BRICKS.get(t), v, t))
             .build();
 
     MUD_BRICKS_SLAB_DOUBLE = SoilBlockVariant
             .builder("mud_bricks/slab_double")
-            .setFactory((v, t) -> new BlockSoilMudSlab.Double(MUD_BRICKS, v, t))
+            .setFactory((v, t) -> new BlockSoilMudSlab.Double(MUD_BRICKS.get(t), v, t))
             .build();
 
     MUD_BRICKS_SLAB = SoilBlockVariant
             .builder("mud_bricks/slab")
-            .setFactory((v, t) -> new BlockSoilMudSlab.Half(MUD_BRICKS, MUD_BRICKS_SLAB_DOUBLE, v, t))
+            .setFactory((v, t) -> new BlockSoilMudSlab.Half(MUD_BRICKS.get(t), MUD_BRICKS_SLAB_DOUBLE.get(t), v, t))
             .build();
 
     MUD_BRICKS_WALL = SoilBlockVariant
             .builder("mud_bricks/wall")
-            .setFactory((v, t) -> new BlockSoilMudWall(MUD_BRICKS, v, t))
-            .build();
-
-    MUD_BRICKS_MOSSY = SoilBlockVariant
-            .builder("mud_bricks_mossy")
-            .setFactory(BlockSoilMudBricks::new)
-            .setFallingSpecification(VERTICAL_ONLY_SOIL)
-            .build();
-
-    MUD_BRICKS_MOSSY_STAIRS = SoilBlockVariant
-            .builder("mud_bricks_mossy/stairs")
-            .setFactory((v, t) -> new BlockSoilMudStairs(MUD_BRICKS_MOSSY, v, t))
-            .build();
-
-    MUD_BRICKS_MOSSY_SLAB_DOUBLE = SoilBlockVariant
-            .builder("mud_bricks_mossy/slab_double")
-            .setFactory((v, t) -> new BlockSoilMudSlab.Double(MUD_BRICKS_MOSSY, v, t))
-            .build();
-
-    MUD_BRICKS_MOSSY_SLAB = SoilBlockVariant
-            .builder("mud_bricks_mossy/slab")
-            .setFactory(
-                    (v, t) -> new BlockSoilMudSlab.Half(MUD_BRICKS_MOSSY, MUD_BRICKS_MOSSY_SLAB_DOUBLE, v,
-                            t))
-            .build();
-
-    MUD_BRICKS_MOSSY_WALL = SoilBlockVariant
-            .builder("mud_bricks_mossy/wall")
-            .setFactory((v, t) -> new BlockSoilMudWall(MUD_BRICKS_MOSSY, v, t))
+            .setFactory((v, t) -> new BlockSoilMudWall(MUD_BRICKS.get(t), v, t))
             .build();
 
     PEAT_GRASS = registry.block(new BlockSoilPeatGrass());

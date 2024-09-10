@@ -18,6 +18,7 @@ public abstract class BlockRockFallable extends BlockRock {
 
   public BlockRockFallable(Settings settings, RockBlockVariant variant, RockType type) {
     super(settings, variant, type);
+
   }
 
   @SideOnly(Side.CLIENT)

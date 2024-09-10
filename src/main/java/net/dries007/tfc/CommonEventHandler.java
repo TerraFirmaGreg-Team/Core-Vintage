@@ -863,7 +863,7 @@ public final class CommonEventHandler {
   @SubscribeEvent
   public static void onGameRuleChange(GameRuleChangeEvent event) {
     GameRules rules = event.getRules();
-    if ("naturalRegeneration".equals(event.getRuleName()) && ConfigTFC.General.OVERRIDES.forceNoVanillaNaturalRegeneration) {
+    if ("naturalRegeneration" .equals(event.getRuleName()) && ConfigTFC.General.OVERRIDES.forceNoVanillaNaturalRegeneration) {
       // Natural regeneration should be disabled, allows TFC to have custom regeneration
       event.getRules().setOrCreateGameRule("naturalRegeneration", "false");
       TerraFirmaCraft.getLog().warn("Something tried to set natural regeneration to true, reverting!");

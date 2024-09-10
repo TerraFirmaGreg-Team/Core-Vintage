@@ -14,7 +14,6 @@ import su.terrafirmagreg.modules.rock.object.block.BlockRockCobble;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockDecorative;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockGravel;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockMagma;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockMossy;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockPressurePlate;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockRaw;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockSand;
@@ -50,35 +49,17 @@ public final class BlocksRock {
   public static RockBlockVariant COBBLE_SLAB;
   public static RockBlockVariant COBBLE_WALL;
 
-  public static RockBlockVariant MOSSY_COBBLE;
-  public static RockBlockVariant MOSSY_COBBLE_STAIRS;
-  public static RockBlockVariant MOSSY_COBBLE_SLAB_DOUBLE;
-  public static RockBlockVariant MOSSY_COBBLE_SLAB;
-  public static RockBlockVariant MOSSY_COBBLE_WALL;
-
   public static RockBlockVariant RAW;
   public static RockBlockVariant RAW_STAIRS;
   public static RockBlockVariant RAW_SLAB_DOUBLE;
   public static RockBlockVariant RAW_SLAB;
   public static RockBlockVariant RAW_WALL;
-
-  public static RockBlockVariant MOSSY_RAW;
-  public static RockBlockVariant MOSSY_RAW_STAIRS;
-  public static RockBlockVariant MOSSY_RAW_SLAB_DOUBLE;
-  public static RockBlockVariant MOSSY_RAW_SLAB;
-  public static RockBlockVariant MOSSY_RAW_WALL;
-
+  
   public static RockBlockVariant BRICKS;
   public static RockBlockVariant BRICKS_STAIRS;
   public static RockBlockVariant BRICKS_SLAB_DOUBLE;
   public static RockBlockVariant BRICKS_SLAB;
   public static RockBlockVariant BRICKS_WALL;
-
-  public static RockBlockVariant BRICKS_MOSSY;
-  public static RockBlockVariant BRICKS_MOSSY_STAIRS;
-  public static RockBlockVariant BRICKS_MOSSY_SLAB_DOUBLE;
-  public static RockBlockVariant BRICKS_MOSSY_SLAB;
-  public static RockBlockVariant BRICKS_MOSSY_WALL;
 
   public static RockBlockVariant SMOOTH;
   public static RockBlockVariant SMOOTH_STAIRS;
@@ -102,6 +83,7 @@ public final class BlocksRock {
   public static BlockAlabasterBricks ALABASTER_BRICKS;
   public static BlockAlabasterSmooth ALABASTER_SMOOTH;
   public static BlockAlabasterRaw ALABASTER_RAW;
+
 
   public static void onRegister(RegistryManager registry) {
 
@@ -136,37 +118,6 @@ public final class BlocksRock {
             .factory((v, t) -> new BlockRockWall(COBBLE, v, t))
             .build();
 
-    MOSSY_COBBLE = RockBlockVariant
-            .builder("cobble_mossy")
-            .baseHardness(6f)
-            .factory(BlockRockMossy::new)
-            .fallingSpecification(VERTICAL_AND_HORIZONTAL_ROCK)
-            .build();
-
-    MOSSY_COBBLE_STAIRS = RockBlockVariant
-            .builder("cobble_mossy/stairs")
-            .baseHardness(6f)
-            .factory((v, t) -> new BlockRockStairs(MOSSY_COBBLE, v, t))
-            .build();
-
-    MOSSY_COBBLE_SLAB_DOUBLE = RockBlockVariant
-            .builder("cobble_mossy/slab_double")
-            .baseHardness(6f)
-            .factory((v, t) -> new BlockRockSlab.Double(MOSSY_COBBLE, v, t))
-            .build();
-
-    MOSSY_COBBLE_SLAB = RockBlockVariant
-            .builder("cobble_mossy/slab")
-            .baseHardness(6f)
-            .factory((v, t) -> new BlockRockSlab.Half(MOSSY_COBBLE, MOSSY_COBBLE_SLAB_DOUBLE, v, t))
-            .build();
-
-    MOSSY_COBBLE_WALL = RockBlockVariant
-            .builder("cobble_mossy/wall")
-            .baseHardness(6f)
-            .factory((v, t) -> new BlockRockWall(MOSSY_COBBLE, v, t))
-            .build();
-
     RAW = RockBlockVariant
             .builder("raw")
             .baseHardness(6f)
@@ -199,38 +150,6 @@ public final class BlocksRock {
             .factory((v, t) -> new BlockRockWall(RAW, v, t))
             .build();
 
-    MOSSY_RAW = RockBlockVariant
-            .builder("raw_mossy")
-            .baseHardness(6f)
-            .factory(BlockRockRaw::new)
-            .isStoneType()
-            .fallingSpecification(COLLAPSABLE_ROCK)
-            .build();
-
-    MOSSY_RAW_STAIRS = RockBlockVariant
-            .builder("raw_mossy/stairs")
-            .baseHardness(6f)
-            .factory((v, t) -> new BlockRockStairs(MOSSY_RAW, v, t))
-            .build();
-
-    MOSSY_RAW_SLAB_DOUBLE = RockBlockVariant
-            .builder("raw_mossy/slab_double")
-            .baseHardness(6f)
-            .factory((v, t) -> new BlockRockSlab.Double(MOSSY_RAW, v, t))
-            .build();
-
-    MOSSY_RAW_SLAB = RockBlockVariant
-            .builder("raw_mossy/slab")
-            .baseHardness(6f)
-            .factory((v, t) -> new BlockRockSlab.Half(MOSSY_RAW, MOSSY_RAW_SLAB_DOUBLE, v, t))
-            .build();
-
-    MOSSY_RAW_WALL = RockBlockVariant
-            .builder("raw_mossy/wall")
-            .baseHardness(6f)
-            .factory((v, t) -> new BlockRockWall(MOSSY_RAW, v, t))
-            .build();
-
     BRICKS = RockBlockVariant
             .builder("bricks")
             .baseHardness(6f)
@@ -259,36 +178,6 @@ public final class BlocksRock {
             .builder("bricks/wall")
             .baseHardness(6f)
             .factory((v, t) -> new BlockRockWall(BRICKS, v, t))
-            .build();
-
-    BRICKS_MOSSY = RockBlockVariant
-            .builder("bricks_mossy")
-            .baseHardness(6f)
-            .factory(BlockRockMossy::new)
-            .build();
-
-    BRICKS_MOSSY_STAIRS = RockBlockVariant
-            .builder("bricks_mossy/stairs")
-            .baseHardness(6f)
-            .factory((v, t) -> new BlockRockStairs(BRICKS_MOSSY, v, t))
-            .build();
-
-    BRICKS_MOSSY_SLAB_DOUBLE = RockBlockVariant
-            .builder("bricks_mossy/slab_double")
-            .baseHardness(6f)
-            .factory((v, t) -> new BlockRockSlab.Double(BRICKS_MOSSY, v, t))
-            .build();
-
-    BRICKS_MOSSY_SLAB = RockBlockVariant
-            .builder("bricks_mossy/slab")
-            .baseHardness(6f)
-            .factory((v, t) -> new BlockRockSlab.Half(BRICKS_MOSSY, BRICKS_MOSSY_SLAB_DOUBLE, v, t))
-            .build();
-
-    BRICKS_MOSSY_WALL = RockBlockVariant
-            .builder("bricks_mossy/wall")
-            .baseHardness(6f)
-            .factory((v, t) -> new BlockRockWall(BRICKS_MOSSY, v, t))
             .build();
 
     SMOOTH = RockBlockVariant

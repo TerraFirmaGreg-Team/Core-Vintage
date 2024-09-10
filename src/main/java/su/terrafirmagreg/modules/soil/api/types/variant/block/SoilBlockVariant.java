@@ -35,6 +35,7 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
   @Getter
   private static final Set<SoilBlockVariant> variants = new ObjectOpenHashSet<>();
 
+
   private Specification specification = null;
   private BiFunction<SoilBlockVariant, SoilType, ? extends Block> factory;
 
@@ -46,8 +47,7 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
     return new SoilBlockVariant(name);
   }
 
-  public SoilBlockVariant setFactory(
-          BiFunction<SoilBlockVariant, SoilType, ? extends Block> factory) {
+  public SoilBlockVariant setFactory(BiFunction<SoilBlockVariant, SoilType, ? extends Block> factory) {
     this.factory = factory;
     return this;
   }
@@ -59,16 +59,13 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
 
   public SoilBlockVariant build() {
     if (!variants.add(this)) {
-      throw new RuntimeException(
-              String.format("SoilBlockVariant: [%s] already exists!", getName()));
+      throw new RuntimeException(String.format("SoilBlockVariant: [%s] already exists!", getName()));
     }
-
-    for (var type : SoilType.getTypes()) {
+    SoilType.getTypes().forEach(type -> {
       if (BlocksSoil.SOIL_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
-        throw new RuntimeException(
-                String.format("Duplicate registry detected: %s, %s", this, type));
+        throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
       }
-    }
+    });
     return this;
   }
 

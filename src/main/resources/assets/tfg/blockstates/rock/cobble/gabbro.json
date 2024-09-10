@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "cube_all",
+    "model": "tfg:rock/cobble",
     "uvlock": true,
     "textures": {
       "all": "tfg:blocks/rock/cobble/gabbro"
@@ -13,6 +13,14 @@
     ],
     "inventory": [
       {}
-    ]
+    ],
+    "mossy": {
+      "true": {
+        "textures": {
+        "overlay": "tfg:blocks/soil/overlay/mossy/cobble"
+        }
+      },
+      "false": {}
+    }
   }
 }

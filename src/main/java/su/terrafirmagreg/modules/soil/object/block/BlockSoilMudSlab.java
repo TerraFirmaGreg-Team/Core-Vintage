@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
@@ -22,7 +23,7 @@ public abstract class BlockSoilMudSlab extends BaseBlockSlab implements ISoilBlo
   protected Half halfSlab;
   protected Double doubleSlab;
 
-  private BlockSoilMudSlab(SoilBlockVariant model, SoilBlockVariant variant, SoilType type) {
+  private BlockSoilMudSlab(Block model, SoilBlockVariant variant, SoilType type) {
     super(Settings.of(Material.GROUND));
 
     this.variant = variant;
@@ -31,14 +32,14 @@ public abstract class BlockSoilMudSlab extends BaseBlockSlab implements ISoilBlo
     getSettings()
             .registryKey(variant.getRegistryKey(type))
             .sound(SoundType.GROUND)
-            .harvestLevel(ToolClasses.PICKAXE, model.get(type).getHarvestLevel(model.get(type).getDefaultState()))
+            .harvestLevel(ToolClasses.PICKAXE, model.getHarvestLevel(model.getDefaultState()))
             .oreDict("slab")
             .oreDict("slab", "mud", "bricks");
   }
 
   public static class Double extends BlockSoilMudSlab {
 
-    public Double(SoilBlockVariant model, SoilBlockVariant variant, SoilType type) {
+    public Double(Block model, SoilBlockVariant variant, SoilType type) {
       super(model, variant, type);
     }
 
@@ -56,11 +57,10 @@ public abstract class BlockSoilMudSlab extends BaseBlockSlab implements ISoilBlo
 
   public static class Half extends BlockSoilMudSlab {
 
-    public Half(SoilBlockVariant model, SoilBlockVariant doubleSlab, SoilBlockVariant variant,
-            SoilType type) {
+    public Half(Block model, Block doubleSlab, SoilBlockVariant variant, SoilType type) {
       super(model, variant, type);
 
-      this.doubleSlab = (Double) doubleSlab.get(type);
+      this.doubleSlab = (Double) doubleSlab;
       this.doubleSlab.halfSlab = this;
       this.halfSlab = this;
     }

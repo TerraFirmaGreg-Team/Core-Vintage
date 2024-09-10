@@ -25,11 +25,10 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ItemGem;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Random;
 
 import static su.terrafirmagreg.data.Properties.CAN_FALL;
+import static su.terrafirmagreg.data.Properties.MOSSY;
 
 @SuppressWarnings("deprecation")
 public class BlockRockRaw extends BlockRock {
@@ -49,7 +48,8 @@ public class BlockRockRaw extends BlockRock {
             .oreDict("stone");
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(CAN_FALL, true));
+            .withProperty(CAN_FALL, true)
+            .withProperty(MOSSY, false));
   }
 
 
@@ -92,10 +92,9 @@ public class BlockRockRaw extends BlockRock {
     return false;
   }
 
-  @NotNull
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, CAN_FALL);
+    return new BlockStateContainer(this, CAN_FALL, MOSSY);
   }
 
   @Override

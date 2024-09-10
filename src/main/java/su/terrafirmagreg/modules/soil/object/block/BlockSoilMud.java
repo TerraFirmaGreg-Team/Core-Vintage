@@ -23,7 +23,6 @@ public class BlockSoilMud extends BlockSoil {
 
   public BlockSoilMud(SoilBlockVariant variant, SoilType type) {
     super(variant, type);
-
   }
 
   @Override
@@ -50,4 +49,6 @@ public class BlockSoilMud extends BlockSoil {
     entityIn.motionX *= 0.7D;
     entityIn.motionZ *= 0.7D;
   }
+
+
 }

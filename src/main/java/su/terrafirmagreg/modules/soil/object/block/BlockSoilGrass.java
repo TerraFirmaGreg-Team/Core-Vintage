@@ -38,6 +38,7 @@ import static su.terrafirmagreg.data.Properties.NORTH;
 import static su.terrafirmagreg.data.Properties.SNOWY;
 import static su.terrafirmagreg.data.Properties.SOUTH;
 import static su.terrafirmagreg.data.Properties.WEST;
+import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;
 
 @Getter
 @SuppressWarnings("deprecation")
@@ -48,10 +49,11 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
     super(Settings.of(Material.GRASS), variant, type);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
+            .registryKey(getRegistryKey(variant, type))
             .sound(SoundType.PLANT)
             .hardness(2.1F)
             .randomTicks()
+            .fallable(this, VERTICAL_AND_HORIZONTAL)
             .renderLayer(BlockRenderLayer.CUTOUT);
 
     setDefaultState(blockState.getBaseState()

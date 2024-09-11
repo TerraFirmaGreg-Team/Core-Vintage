@@ -24,26 +24,12 @@ import java.util.List;
 public interface ICapabilityEgg extends ICapabilitySerializable<NBTTagCompound> {
 
   /**
-   * returns the day which this egg will hatch into the entity
-   *
-   * @return the day value, as in CalendarTFC#getTotalDays
-   */
-  long getHatchDay();
-
-  /**
    * return the entity this egg will hatch to
    *
    * @return the Entity that is hatched from this egg, or null if none
    */
   @Nullable
   Entity getEntity(World world);
-
-  /**
-   * Is this egg fertilized?
-   *
-   * @return true if this egg is fertilized.
-   */
-  boolean isFertilized();
 
   /**
    * Fertilizes this egg, setting what entity and which day this egg will hatch
@@ -71,4 +57,18 @@ public interface ICapabilityEgg extends ICapabilitySerializable<NBTTagCompound> 
       }
     }
   }
+
+  /**
+   * Is this egg fertilized?
+   *
+   * @return true if this egg is fertilized.
+   */
+  boolean isFertilized();
+
+  /**
+   * returns the day which this egg will hatch into the entity
+   *
+   * @return the day value, as in CalendarTFC#getTotalDays
+   */
+  long getHatchDay();
 }

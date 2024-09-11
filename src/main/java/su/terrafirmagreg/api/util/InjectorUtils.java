@@ -11,7 +11,7 @@ import java.lang.reflect.Modifier;
 public class InjectorUtils {
 
   public static void setFinalStaticFieldWithReflection(Class<?> apiClass, String srgName,
-      Object value) {
+          Object value) {
     try {
       Field field = ObfuscationReflectionHelper.findField(apiClass, srgName);
       InjectorUtils.setFinalStatic(field, value);
@@ -43,7 +43,7 @@ public class InjectorUtils {
 
     } catch (Exception e) {
       throw new RuntimeException(
-          String.format("Unable to inject [%s] into [%s]", fieldName, apiClass), e);
+              String.format("Unable to inject [%s] into [%s]", fieldName, apiClass), e);
     }
   }
 

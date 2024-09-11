@@ -26,7 +26,7 @@ import static su.terrafirmagreg.data.Constants.MODID_TFC;
 public class GuiBlastFurnace extends BaseGuiContainerTile<TileBlastFurnace> {
 
   private static final ResourceLocation BACKGROUND = ModUtils.resource(
-      "textures/gui/container/blast_furnace.png");
+          "textures/gui/container/blast_furnace.png");
 
   List<Float> tempList = new ArrayList<>();
   long lastBurningTicks = 0;
@@ -50,7 +50,7 @@ public class GuiBlastFurnace extends BaseGuiContainerTile<TileBlastFurnace> {
 
     // Отображение текущей температуры
     int temperature = (int) (51 * tile.getField(TileBlastFurnace.FIELD_TEMPERATURE)
-        / Heat.maxVisibleTemperature());
+            / Heat.maxVisibleTemperature());
     if (temperature > 0) {
       if (temperature > 51) {
         temperature = 51;
@@ -82,52 +82,52 @@ public class GuiBlastFurnace extends BaseGuiContainerTile<TileBlastFurnace> {
 
     // Отображение текста с количеством руды, топлива и сплавленного материала
     fontRenderer.drawString(I18n.format(MODID_TFC + ".tooltip.blast_furnace_ore_amount"),
-        guiLeft + 40, guiTop + 17, 0x000000);
+            guiLeft + 40, guiTop + 17, 0x000000);
     fontRenderer.drawString(I18n.format(MODID_TFC + ".tooltip.blast_furnace_fuel_amount"),
-        guiLeft + 40, guiTop + 35, 0x000000);
+            guiLeft + 40, guiTop + 35, 0x000000);
     fontRenderer.drawString(I18n.format(MODID_TFC + ".tooltip.blast_furnace_melt_amount"),
-        guiLeft + 40, guiTop + 53, 0x000000);
+            guiLeft + 40, guiTop + 53, 0x000000);
 
     // Отображение предупреждения, если нет дымохода
     if (tile.getField(TileBlastFurnace.CHIMNEY_LEVELS) < 1) {
       fontRenderer.drawString(I18n.format(MODID_TFC + ".tooltip.blast_furnace_invalid_structure"),
-          guiLeft + 40, guiTop + 71, 0xDC2400);
+              guiLeft + 40, guiTop + 71, 0xDC2400);
     }
 
     if (!tempList.isEmpty()) {
 
       Gui.drawRect(
-          scaledWidth / 2 - 206,
-          scaledHeight / 2 - 82,
-          scaledWidth / 2 - 91,
-          scaledHeight / 2 - 81 + 11 * ((tempList.size()) / 4),
-          0x77000000);
+              scaledWidth / 2 - 206,
+              scaledHeight / 2 - 82,
+              scaledWidth / 2 - 91,
+              scaledHeight / 2 - 81 + 11 * ((tempList.size()) / 4),
+              0x77000000);
 
       Gui.drawRect(
-          scaledWidth / 2 - 206,
-          scaledHeight / 2 - 81,
-          scaledWidth / 2 - 91,
-          scaledHeight / 2 - 82,
-          0xff000000);
+              scaledWidth / 2 - 206,
+              scaledHeight / 2 - 81,
+              scaledWidth / 2 - 91,
+              scaledHeight / 2 - 82,
+              0xff000000);
       Gui.drawRect(
-          scaledWidth / 2 - 206,
-          scaledHeight / 2 - 81 + 11 * ((tempList.size()) / 4),
-          scaledWidth / 2 - 91,
-          scaledHeight / 2 - 82 + 11 * ((tempList.size()) / 4),
-          0xff000000);
+              scaledWidth / 2 - 206,
+              scaledHeight / 2 - 81 + 11 * ((tempList.size()) / 4),
+              scaledWidth / 2 - 91,
+              scaledHeight / 2 - 82 + 11 * ((tempList.size()) / 4),
+              0xff000000);
 
       Gui.drawRect(
-          scaledWidth / 2 - 206,
-          scaledHeight / 2 - 81,
-          scaledWidth / 2 - 207,
-          scaledHeight / 2 - 82 + 11 * ((tempList.size()) / 4),
-          0xff000000);
+              scaledWidth / 2 - 206,
+              scaledHeight / 2 - 81,
+              scaledWidth / 2 - 207,
+              scaledHeight / 2 - 82 + 11 * ((tempList.size()) / 4),
+              0xff000000);
       Gui.drawRect(
-          scaledWidth / 2 - 91,
-          scaledHeight / 2 - 81,
-          scaledWidth / 2 - 90,
-          scaledHeight / 2 - 82 + 11 * ((tempList.size()) / 4),
-          0xff000000);
+              scaledWidth / 2 - 91,
+              scaledHeight / 2 - 81,
+              scaledWidth / 2 - 90,
+              scaledHeight / 2 - 82 + 11 * ((tempList.size()) / 4),
+              0xff000000);
 
       float sum = 0;
 
@@ -136,43 +136,23 @@ public class GuiBlastFurnace extends BaseGuiContainerTile<TileBlastFurnace> {
         if ((i + 1) % 4 == 0) {
           sum /= 4;
           fontRenderer.drawString(
-              "Layer " + ((i + 1) / 4) + ": " + getLayerTemp(sum),
-              scaledWidth / 2 - 205,
-              scaledHeight / 2 - 80 + 11 * ((i + 1) / 4 - 1),
-              0xffffff);
+                  "Layer " + ((i + 1) / 4) + ": " + getLayerTemp(sum),
+                  scaledWidth / 2 - 205,
+                  scaledHeight / 2 - 80 + 11 * ((i + 1) / 4 - 1),
+                  0xffffff);
           sum = 0;
         } else if (i + 1 == tempList.size()) {
           sum /= (i + 1) % 4;
           fontRenderer.drawString(
-              "Layer " + ((i + 1) / 4 + 1) + ": " + getLayerTemp(sum),
-              scaledWidth / 2 - 205,
-              scaledHeight / 2 - 80 + 11 * ((i + 1) / 4),
-              0xffffff);
+                  "Layer " + ((i + 1) / 4 + 1) + ": " + getLayerTemp(sum),
+                  scaledWidth / 2 - 205,
+                  scaledHeight / 2 - 80 + 11 * ((i + 1) / 4),
+                  0xffffff);
           sum = 0;
         }
       }
 
     }
-  }
-
-  @Override
-  protected void renderHoveredToolTip(int mouseX, int mouseY) {
-    if (mouseX > guiLeft + 40 && mouseX < guiLeft + 120 && mouseY > guiTop + 25
-        && mouseY < guiTop + 33) {
-      int amount = tile.getField(TileBlastFurnace.FIELD_ORE_UNITS);
-      drawHoveringText(I18n.format(MODID_TFC + ".tooltip.units", amount), mouseX, mouseY);
-    }
-    if (mouseX > guiLeft + 40 && mouseX < guiLeft + 120 && mouseY > guiTop + 43
-        && mouseY < guiTop + 51) {
-      int amount = tile.getField(TileBlastFurnace.FIELD_FUEL);
-      drawHoveringText(I18n.format(MODID_TFC + ".tooltip.units", amount), mouseX, mouseY);
-    }
-    if (mouseX > guiLeft + 40 && mouseX < guiLeft + 120 && mouseY > guiTop + 61
-        && mouseY < guiTop + 69) {
-      int amount = tile.getField(TileBlastFurnace.FIELD_MELT);
-      drawHoveringText(I18n.format(MODID_TFC + ".tooltip.units", amount), mouseX, mouseY);
-    }
-    super.renderHoveredToolTip(mouseX, mouseY);
   }
 
   @SideOnly(Side.CLIENT)
@@ -204,5 +184,25 @@ public class GuiBlastFurnace extends BaseGuiContainerTile<TileBlastFurnace> {
       return ttString.replaceAll(Unicode.STAR, "");
     }
 
+  }
+
+  @Override
+  protected void renderHoveredToolTip(int mouseX, int mouseY) {
+    if (mouseX > guiLeft + 40 && mouseX < guiLeft + 120 && mouseY > guiTop + 25
+            && mouseY < guiTop + 33) {
+      int amount = tile.getField(TileBlastFurnace.FIELD_ORE_UNITS);
+      drawHoveringText(I18n.format(MODID_TFC + ".tooltip.units", amount), mouseX, mouseY);
+    }
+    if (mouseX > guiLeft + 40 && mouseX < guiLeft + 120 && mouseY > guiTop + 43
+            && mouseY < guiTop + 51) {
+      int amount = tile.getField(TileBlastFurnace.FIELD_FUEL);
+      drawHoveringText(I18n.format(MODID_TFC + ".tooltip.units", amount), mouseX, mouseY);
+    }
+    if (mouseX > guiLeft + 40 && mouseX < guiLeft + 120 && mouseY > guiTop + 61
+            && mouseY < guiTop + 69) {
+      int amount = tile.getField(TileBlastFurnace.FIELD_MELT);
+      drawHoveringText(I18n.format(MODID_TFC + ".tooltip.units", amount), mouseX, mouseY);
+    }
+    super.renderHoveredToolTip(mouseX, mouseY);
   }
 }

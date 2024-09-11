@@ -50,40 +50,24 @@ import static su.terrafirmagreg.data.Properties.LIT;
 public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
 
   private static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis",
-      EnumFacing.Axis.class,
-      EnumFacing.Axis.X,
-      EnumFacing.Axis.Z
+          EnumFacing.Axis.class,
+          EnumFacing.Axis.X,
+          EnumFacing.Axis.Z
   );
 
   public BlockLogPile() {
     super(Settings.of(Material.WOOD));
 
     getSettings()
-        .registryKey("device/log_pile")
-        .sound(SoundType.WOOD)
-        .hardness(2.0F);
+            .registryKey("device/log_pile")
+            .sound(SoundType.WOOD)
+            .hardness(2.0F);
 
     setTickRandomly(true);
     setHarvestLevel(ToolClasses.AXE, 0);
     setDefaultState(blockState.getBaseState()
-        .withProperty(AXIS, EnumFacing.Axis.Z)
-        .withProperty(LIT, false));
-  }
-
-  private static boolean isValidCoverBlock(IBlockState offsetState, World world, BlockPos pos,
-      EnumFacing side) {
-    if (offsetState.getBlock() instanceof BlockLogPile
-        || offsetState.getBlock() == BlocksDevice.CHARCOAL_PILE) {
-      return true;
-    } else if (offsetState.getMaterial() == Material.GLASS
-        && ConfigDevice.BLOCKS.CHARCOAL_PIT.canAcceptGlass) {
-      return offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID
-          || offsetState.isSideSolid(world, pos, side);
-    }
-    return !offsetState.getMaterial()
-        .getCanBurn() && (offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID)
-        ||
-        offsetState.isSideSolid(world, pos, side);
+            .withProperty(AXIS, EnumFacing.Axis.Z)
+            .withProperty(LIT, false));
   }
 
   @Override
@@ -92,10 +76,20 @@ public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
   }
 
   @Override
+  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
+          @Nullable TileEntity tile, ItemStack stack) {
+    // This can't use breakBlock as it needs to not drop when broken in order to create a charcoal pile
+    if (!worldIn.isRemote && tile instanceof BaseTileInventory tileInventory) {
+      tileInventory.onBreakBlock(worldIn, pos, state);
+    }
+    super.breakBlock(worldIn, pos, state);
+  }
+
+  @Override
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-        .withProperty(AXIS, meta == 0 ? EnumFacing.Axis.Z : EnumFacing.Axis.X)
-        .withProperty(LIT, meta >= 2);
+            .withProperty(AXIS, meta == 0 ? EnumFacing.Axis.Z : EnumFacing.Axis.X)
+            .withProperty(LIT, meta >= 2);
   }
 
   @Override
@@ -120,24 +114,40 @@ public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
     }
   }
 
+  private static boolean isValidCoverBlock(IBlockState offsetState, World world, BlockPos pos,
+          EnumFacing side) {
+    if (offsetState.getBlock() instanceof BlockLogPile
+            || offsetState.getBlock() == BlocksDevice.CHARCOAL_PILE) {
+      return true;
+    } else if (offsetState.getMaterial() == Material.GLASS
+            && ConfigDevice.BLOCKS.CHARCOAL_PIT.canAcceptGlass) {
+      return offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID
+              || offsetState.isSideSolid(world, pos, side);
+    }
+    return !offsetState.getMaterial()
+            .getCanBurn() && (offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID)
+            ||
+            offsetState.isSideSolid(world, pos, side);
+  }
+
   @Override
   @SideOnly(Side.CLIENT)
   public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (stateIn.getValue(LIT)) {
       worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + rand.nextFloat(),
-          pos.getY() + 1, pos.getZ() + rand.nextFloat(),
-          0f, 0.1f + 0.1f * rand.nextFloat(), 0f);
+              pos.getY() + 1, pos.getZ() + rand.nextFloat(),
+              0f, 0.1f + 0.1f * rand.nextFloat(), 0f);
       if (worldIn.getTotalWorldTime() % 80 == 0) {
         worldIn.playSound((double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D,
-            SoundEvents.BLOCK_FIRE_AMBIENT,
-            SoundCategory.BLOCKS, 0.5F, 0.6F, false);
+                SoundEvents.BLOCK_FIRE_AMBIENT,
+                SoundCategory.BLOCKS, 0.5F, 0.6F, false);
       }
     }
   }
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-      BlockPos fromPos) {
+          BlockPos fromPos) {
     if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.FIRE) {
       worldIn.setBlockState(pos, state.withProperty(LIT, true));
       var tile = TileUtils.getTile(worldIn, pos, TileLogPile.class);
@@ -149,8 +159,8 @@ public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-      EnumHand hand, EnumFacing side, float hitX,
-      float hitY, float hitZ) {
+          EnumHand hand, EnumFacing side, float hitX,
+          float hitY, float hitZ) {
     var tile = TileUtils.getTile(world, pos, TileLogPile.class);
     if (tile != null) {
       // Special Interactions
@@ -159,15 +169,15 @@ public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
       // 3. Open the GUI
       ItemStack stack = player.getHeldItem(hand);
       if (!state.getValue(LIT) && side == EnumFacing.UP && world.getBlockState(pos.up())
-          .getBlock()
-          .isReplaceable(world, pos) && ItemFireStarter.onIgnition(stack)) {
+              .getBlock()
+              .isReplaceable(world, pos) && ItemFireStarter.onIgnition(stack)) {
         // Light the Pile
         if (!world.isRemote) {
           world.setBlockState(pos, state.withProperty(LIT, true));
           tile.light();
           world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
           world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.PLAYERS,
-              1.0F, 1.0F);
+                  1.0F, 1.0F);
         }
         return true;
       }
@@ -177,7 +187,7 @@ public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
           if (tile.insertLog(stack.copy())) {
             if (!world.isRemote) {
               world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
-                  1.0F);
+                      1.0F);
               stack.shrink(1);
               player.setHeldItem(hand, stack);
             }
@@ -188,7 +198,7 @@ public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
           if (inserted > 0) {
             if (!world.isRemote) {
               world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
-                  1.0F);
+                      1.0F);
               stack.shrink(inserted);
               player.setHeldItem(hand, stack);
             }
@@ -209,22 +219,12 @@ public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
 
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-      float hitX, float hitY, float hitZ, int meta,
-      EntityLivingBase placer) {
+          float hitX, float hitY, float hitZ, int meta,
+          EntityLivingBase placer) {
     if (placer.getHorizontalFacing().getAxis().isHorizontal()) {
       return getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
     }
     return getDefaultState();
-  }
-
-  @Override
-  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
-      @Nullable TileEntity tile, ItemStack stack) {
-    // This can't use breakBlock as it needs to not drop when broken in order to create a charcoal pile
-    if (!worldIn.isRemote && tile instanceof BaseTileInventory tileInventory) {
-      tileInventory.onBreakBlock(worldIn, pos, state);
-    }
-    super.breakBlock(worldIn, pos, state);
   }
 
   @Override
@@ -244,13 +244,13 @@ public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
 
   @Override
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
-      IBlockState state, int fortune) {
+          IBlockState state, int fortune) {
     drops.clear();
   }
 
   @Override
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-      EntityPlayer player) {
+          EntityPlayer player) {
     var tile = TileUtils.getTile(world, pos, TileLogPile.class);
     if (tile != null) {
       return tile.getLog().copy();

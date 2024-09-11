@@ -17,7 +17,7 @@ public abstract class BaseItemArmor extends ItemArmor implements IItemSettings {
   // mark the armor material as nullable to take the null warning out of BaseItem
   @SuppressWarnings("ConstantConditions")
   public BaseItemArmor(@Nullable ArmorMaterial material, EntityEquipmentSlot slot,
-      Settings settings) {
+          Settings settings) {
     super(material, -1, slot);
 
     this.settings = settings;

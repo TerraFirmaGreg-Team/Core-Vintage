@@ -16,7 +16,7 @@ import java.util.Objects;
 public class GenLayerBiome extends GenLayerBase {
 
   private final int[] biomes = BaseBiomeProvider.WORLD_GEN_BIOMES.stream()
-      .mapToInt(Biome::getIdForBiome).toArray();
+          .mapToInt(Biome::getIdForBiome).toArray();
 
   public GenLayerBiome(long seed, GenLayer parent) {
     super(seed);
@@ -24,9 +24,9 @@ public class GenLayerBiome extends GenLayerBase {
     if (ConfigCore.MISC.DEBUG.debugWorldGenSafe) {
       TerraFirmaGreg.LOGGER.info("Worldgen biome list (ints): {}", biomes);
       TerraFirmaGreg.LOGGER.info("Worldgen biome list (names): {}", (Object) Arrays.stream(biomes)
-          .mapToObj(Biome::getBiomeForId)
-          .map(Objects::toString)
-          .toArray());
+              .mapToObj(Biome::getBiomeForId)
+              .map(Objects::toString)
+              .toArray());
     }
   }
 

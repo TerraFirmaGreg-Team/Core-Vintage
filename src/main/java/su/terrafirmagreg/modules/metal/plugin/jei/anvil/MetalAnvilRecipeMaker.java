@@ -10,8 +10,8 @@ public class MetalAnvilRecipeMaker {
 
   public static List<MetalAnvilRecipeWrapper> getRecipes() {
     return RegistriesMetal.ANVIL.recipes()
-        .stream()
-        .map(MetalAnvilRecipeWrapper::new)
-        .collect(Collectors.toList());
+            .stream()
+            .map(MetalAnvilRecipeWrapper::new)
+            .collect(Collectors.toList());
   }
 }

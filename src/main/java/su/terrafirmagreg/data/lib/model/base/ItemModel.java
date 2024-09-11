@@ -36,14 +36,14 @@ public class ItemModel implements IModel {
   //Строим саму модель
   @Override
   public @NotNull IBakedModel bake(IModelState state, @NotNull VertexFormat format,
-      Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+          Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
 
     //получаем TextureAtlasSprite из ResourceLocation
     TextureAtlasSprite textureAtlasSprite = bakedTextureGetter.apply(texture);
 
     //Получаем список квадратов из текструки, для этого уже есть удобный метод.
     ImmutableList<BakedQuad> quads = ItemLayerModel.getQuadsForSprite(0, textureAtlasSprite, format,
-        state.apply(Optional.empty()));
+            state.apply(Optional.empty()));
     return new ItemBakedModel(quads, textureAtlasSprite);
   }
 }

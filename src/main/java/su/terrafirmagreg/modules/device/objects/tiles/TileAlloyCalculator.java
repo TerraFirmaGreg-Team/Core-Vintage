@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import lombok.Getter;
 
 public class TileAlloyCalculator extends BaseTile implements
-    IProviderContainer<ContainerAlloyCalculator, GuiAlloyCalculator> {
+        IProviderContainer<ContainerAlloyCalculator, GuiAlloyCalculator> {
 
   public final ItemStackHandler stacks = new ItemStackHandler(9);
   @Getter
@@ -49,6 +49,12 @@ public class TileAlloyCalculator extends BaseTile implements
   }
 
   @Override
+  public void readFromNBT(@NotNull NBTTagCompound nbt) {
+    super.readFromNBT(nbt);
+    this.stacks.deserializeNBT(nbt.getCompoundTag("stacks"));
+  }
+
+  @Override
   public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
     nbt = super.writeToNBT(nbt);
     NBTUtils.setGenericNBTValue(nbt, "stacks", this.stacks.serializeNBT());
@@ -56,9 +62,9 @@ public class TileAlloyCalculator extends BaseTile implements
   }
 
   @Override
-  public void readFromNBT(@NotNull NBTTagCompound nbt) {
-    super.readFromNBT(nbt);
-    this.stacks.deserializeNBT(nbt.getCompoundTag("stacks"));
+  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+    return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(
+            capability, facing);
   }
 
   @Nullable
@@ -72,21 +78,15 @@ public class TileAlloyCalculator extends BaseTile implements
   }
 
   @Override
-  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-    return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(
-        capability, facing);
-  }
-
-  @Override
   public ContainerAlloyCalculator getContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new ContainerAlloyCalculator(inventoryPlayer, this);
   }
 
   @Override
   @SideOnly(Side.CLIENT)
   public GuiAlloyCalculator getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new GuiAlloyCalculator(getContainer(inventoryPlayer, world, state, pos));
   }
 }

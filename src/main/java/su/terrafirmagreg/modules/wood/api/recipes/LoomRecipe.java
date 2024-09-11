@@ -33,13 +33,13 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements 
     this.inProgressTexture = builder.inProgressTexture;
 
     if (inputItem == null || builder.inputStack.getAmount() == 0 || outputItem == null
-        || builder.stepCount == 0) {
+            || builder.stepCount == 0) {
       throw new IllegalArgumentException("Input and output are not allowed to be empty");
     }
 
     if (builder.name.isEmpty()) {
       throw new RuntimeException(
-          String.format("LoomRecipe name must contain any character: [%s]", builder.name));
+              String.format("LoomRecipe name must contain any character: [%s]", builder.name));
     }
 
     RegistryWood.LOOM.register(this.setRegistryName(ModUtils.resource(builder.name)));
@@ -49,10 +49,14 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements 
   @Nullable
   public static LoomRecipe get(ItemStack item) {
     return RegistryWood.LOOM.getValuesCollection()
-        .stream()
-        .filter(x -> x.isValidInput(item))
-        .findFirst()
-        .orElse(null);
+            .stream()
+            .filter(x -> x.isValidInput(item))
+            .findFirst()
+            .orElse(null);
+  }
+
+  private boolean isValidInput(ItemStack inputItem) {
+    return this.inputItem.testIgnoreCount(inputItem);
   }
 
   public int getInputCount() {
@@ -71,10 +75,6 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements 
   @Override
   public NonNullList<ItemStack> getOutputs() {
     return NonNullList.withSize(1, outputItem);
-  }
-
-  private boolean isValidInput(ItemStack inputItem) {
-    return this.inputItem.testIgnoreCount(inputItem);
   }
 
   public static class Builder {

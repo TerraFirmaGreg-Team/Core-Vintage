@@ -36,12 +36,12 @@ public class BlockBellows extends BaseBlock implements IProviderTile {
     super(Settings.of(Material.CIRCUITS, MapColor.GRAY));
 
     getSettings()
-        .registryKey("device/bellows")
-        .sound(SoundType.WOOD)
-        .nonFullCube()
-        .nonOpaque()
-        .hardness(2.0F)
-        .resistance(2.0F);
+            .registryKey("device/bellows")
+            .sound(SoundType.WOOD)
+            .nonFullCube()
+            .nonOpaque()
+            .hardness(2.0F)
+            .resistance(2.0F);
     setHarvestLevel(ToolClasses.AXE, 0);
     setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
   }
@@ -56,15 +56,9 @@ public class BlockBellows extends BaseBlock implements IProviderTile {
     return state.getValue(FACING).getHorizontalIndex();
   }
 
-  @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-      EnumFacing face) {
-    return face == state.getValue(FACING) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
-  }
-
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state,
-      EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
-      float hitY, float hitZ) {
+          EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
+          float hitY, float hitZ) {
     var tile = TileUtils.getTile(world, pos, TileBellows.class);
     if (tile != null) {
       return tile.onRightClick();
@@ -74,8 +68,8 @@ public class BlockBellows extends BaseBlock implements IProviderTile {
 
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-      float hitX, float hitY, float hitZ, int meta,
-      EntityLivingBase placer) {
+          float hitX, float hitY, float hitZ, int meta,
+          EntityLivingBase placer) {
     if (facing.getAxis() == EnumFacing.Axis.Y) {
       if (placer.isSneaking()) {
         facing = placer.getHorizontalFacing().getOpposite();
@@ -89,6 +83,12 @@ public class BlockBellows extends BaseBlock implements IProviderTile {
   @Override
   protected BlockStateContainer createBlockState() {
     return new BlockStateContainer(this, FACING);
+  }
+
+  @Override
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
+          EnumFacing face) {
+    return face == state.getValue(FACING) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 
   @Override

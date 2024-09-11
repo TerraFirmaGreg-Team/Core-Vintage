@@ -16,21 +16,21 @@ import static su.terrafirmagreg.data.Constants.MODID_AGEDDRINKS;
 @Mod(modid = MODID_AGEDDRINKS, name = TFCAgedDrinks.NAME, version = Tags.MOD_VERSION)
 public class TFCAgedDrinks {
 
-    public static final String NAME = "TFC Aged Drinks";
+  public static final String NAME = "TFC Aged Drinks";
 
-    @EventHandler
-    public void init(FMLInitializationEvent event) {
+  @EventHandler
+  public void init(FMLInitializationEvent event) {
 
+  }
+
+  @Mod.EventBusSubscriber
+  public static class ObjectRegistryHandler {
+
+    @SubscribeEvent
+    public static void onRegisterBarrelRecipeEvent(RegistryEvent.Register<BarrelRecipe> event) {
+
+      AgedRegistry.registerAgedDrinks(event);
     }
-
-    @Mod.EventBusSubscriber
-    public static class ObjectRegistryHandler {
-
-        @SubscribeEvent
-        public static void onRegisterBarrelRecipeEvent(RegistryEvent.Register<BarrelRecipe> event) {
-
-            AgedRegistry.registerAgedDrinks(event);
-        }
-    }
+  }
 
 }

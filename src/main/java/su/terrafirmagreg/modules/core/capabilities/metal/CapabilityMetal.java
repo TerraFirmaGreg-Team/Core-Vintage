@@ -21,12 +21,7 @@ public final class CapabilityMetal {
 
   public static void register() {
     CapabilityManager.INSTANCE.register(ICapabilityMetal.class, new StorageMetal(),
-        ProviderMetal::new);
-  }
-
-  public static ICapabilityMetal get(ItemStack itemStack) {
-
-    return itemStack.getCapability(CAPABILITY, null);
+            ProviderMetal::new);
   }
 
   public static boolean has(ItemStack itemStack) {
@@ -49,11 +44,16 @@ public final class CapabilityMetal {
       } else if (item instanceof ICapabilityMetal metalCapability) {
         return metalCapability;
       } else if (item instanceof ItemBlock itemBlock
-          && itemBlock.getBlock() instanceof ICapabilityMetal metalCapability) {
+              && itemBlock.getBlock() instanceof ICapabilityMetal metalCapability) {
         return metalCapability;
       }
     }
     return null;
+  }
+
+  public static ICapabilityMetal get(ItemStack itemStack) {
+
+    return itemStack.getCapability(CAPABILITY, null);
   }
 
 }

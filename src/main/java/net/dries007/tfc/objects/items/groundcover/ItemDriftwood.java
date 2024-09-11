@@ -16,25 +16,25 @@ import org.jetbrains.annotations.NotNull;
 @MethodsReturnNonnullByDefault
 public class ItemDriftwood extends ItemBlockTFC {
 
-    public ItemDriftwood(BlockDriftwood block) {
-        super(block);
-        OreDictionaryHelper.register(this, "wood");
-        OreDictionaryHelper.register(this, "wood_driftwood");
-        OreDictionaryHelper.register(this, "driftwood");
-    }
+  public ItemDriftwood(BlockDriftwood block) {
+    super(block);
+    OreDictionaryHelper.register(this, "wood");
+    OreDictionaryHelper.register(this, "wood_driftwood");
+    OreDictionaryHelper.register(this, "driftwood");
+  }
 
-    @Override
-    public @NotNull Size getSize(ItemStack stack) {
-        return Size.SMALL;
-    }
+  @Override
+  public int getItemStackLimit(ItemStack stack) {
+    return getStackSize(stack);
+  }
 
-    @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return Weight.LIGHT;
-    }
+  @Override
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.LIGHT;
+  }
 
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return getStackSize(stack);
-    }
+  @Override
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.SMALL;
+  }
 }

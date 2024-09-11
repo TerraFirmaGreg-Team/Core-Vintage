@@ -21,38 +21,38 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemMetalShield extends ItemMetalTool {
 
-    public ItemMetalShield(Metal metal, Metal.ItemType type) {
-        super(metal, type);
-        this.addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter() {
+  public ItemMetalShield(Metal metal, Metal.ItemType type) {
+    super(metal, type);
+    this.addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter() {
 
-            @SideOnly(Side.CLIENT)
-            public float apply(@NotNull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
-                return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
-            }
-        });
-    }
+      @SideOnly(Side.CLIENT)
+      public float apply(@NotNull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+        return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
+      }
+    });
+  }
 
-    @Override
-    @NotNull
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        playerIn.setActiveHand(handIn);
-        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
-    }
+  @Override
+  @NotNull
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
+    ItemStack itemstack = playerIn.getHeldItem(handIn);
+    playerIn.setActiveHand(handIn);
+    return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+  }
 
-    @NotNull
-    public EnumAction getItemUseAction(ItemStack stack) {
-        return EnumAction.BLOCK;
-    }
+  @NotNull
+  public EnumAction getItemUseAction(ItemStack stack) {
+    return EnumAction.BLOCK;
+  }
 
-    @Override
-    public int getMaxItemUseDuration(ItemStack stack) {
-        return 72000;
-    }
+  @Override
+  public int getMaxItemUseDuration(ItemStack stack) {
+    return 72000;
+  }
 
-    @Override
-    public boolean isShield(ItemStack stack, @Nullable EntityLivingBase entity) {
-        return true;
-    }
+  @Override
+  public boolean isShield(ItemStack stack, @Nullable EntityLivingBase entity) {
+    return true;
+  }
 
 }

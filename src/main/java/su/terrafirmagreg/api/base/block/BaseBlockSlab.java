@@ -2,14 +2,12 @@ package su.terrafirmagreg.api.base.block;
 
 import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 import su.terrafirmagreg.api.base.item.BaseItemSlab;
-import su.terrafirmagreg.data.lib.model.CustomStateMap;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
@@ -35,7 +33,10 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings 
     super(settings.getMaterial());
 
     this.settings = settings;
-    this.useNeighborBrightness = true;
+
+    getSettings()
+            .ignoresProperties(VARIANT)
+            .useNeighborBrightness();
 
     var state = getBlockState().getBaseState();
     if (!isDouble()) {
@@ -45,30 +46,11 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings 
   }
 
   @Override
-  public @Nullable BaseItemSlab getItemBlock() {
-    return this.isDouble() ? null : new BaseItemSlab(this.getHalfSlab(), this.getDoubleSlab());
-  }
-
-  public abstract boolean isDouble();
-
-  public abstract BaseBlockSlab getHalfSlab();
-
-  public abstract BaseBlockSlab getDoubleSlab();
-
-  @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return Item.getItemFromBlock(getHalfSlab());
-  }
-
-  @Override
-  public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-    return new ItemStack(getHalfSlab());
-  }
-
-  @Override
   public String getTranslationKey(int meta) {
     return super.getTranslationKey();
   }
+
+  public abstract boolean isDouble();
 
   @Override
   public IProperty<?> getVariantProperty() {
@@ -81,12 +63,17 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings 
   }
 
   @Override
+  public boolean getUseNeighborBrightness(IBlockState state) {
+    return getSettings().isUseNeighborBrightness();
+  }
+
+  @Override
   public IBlockState getStateFromMeta(int meta) {
     IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
 
     if (!this.isDouble()) {
       iblockstate = iblockstate.withProperty(BlockSlab.HALF,
-          (meta & 8) == 0 ? EnumBlockHalf.BOTTOM : EnumBlockHalf.TOP);
+              (meta & 8) == 0 ? EnumBlockHalf.BOTTOM : EnumBlockHalf.TOP);
     }
 
     return iblockstate;
@@ -104,15 +91,28 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings 
   }
 
   @Override
-  protected BlockStateContainer createBlockState() {
-    return this.isDouble() ? new BlockStateContainer(this, VARIANT)
-        : new BlockStateContainer(this, BlockSlab.HALF, VARIANT);
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return Item.getItemFromBlock(getHalfSlab());
   }
 
   @Override
-  public IStateMapper getStateMapper() {
-    return new CustomStateMap.Builder().ignore(VARIANT).build();
+  public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+    return new ItemStack(getHalfSlab());
   }
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, BlockSlab.HALF, VARIANT);
+  }
+
+  public abstract BaseBlockSlab getHalfSlab();
+
+  @Override
+  public @Nullable BaseItemSlab getItemBlock() {
+    return this.isDouble() ? null : new BaseItemSlab(this.getHalfSlab(), this.getDoubleSlab());
+  }
+
+  public abstract BaseBlockSlab getDoubleSlab();
 
   public enum Variant implements IStringSerializable {
     DEFAULT;

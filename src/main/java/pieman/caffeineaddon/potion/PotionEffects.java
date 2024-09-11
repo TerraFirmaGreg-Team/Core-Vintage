@@ -16,13 +16,13 @@ import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;
 @GameRegistry.ObjectHolder(MODID_CAFFEINEADDON)
 public final class PotionEffects {
 
-    public static final Potion CAFFEINE = getNull();
+  public static final Potion CAFFEINE = getNull();
 
-    @SubscribeEvent
-    public static void registerPotionEffects(RegistryEvent.Register<Potion> event) {
-        event.getRegistry().registerAll(
-                new PotionCaffeine().setRegistryName(MODID_CAFFEINEADDON, "caffeine")
-                        .registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", 0.15D, 2)
-        );
-    }
+  @SubscribeEvent
+  public static void registerPotionEffects(RegistryEvent.Register<Potion> event) {
+    event.getRegistry().registerAll(
+            new PotionCaffeine().setRegistryName(MODID_CAFFEINEADDON, "caffeine")
+                    .registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", 0.15D, 2)
+    );
+  }
 }

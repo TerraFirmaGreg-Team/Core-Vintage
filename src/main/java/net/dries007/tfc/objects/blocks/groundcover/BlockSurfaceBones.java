@@ -59,20 +59,6 @@ public class BlockSurfaceBones extends BlockBush {
   }
 
   @Override
-  public int quantityDropped(Random random) {
-    int dropAmount = random.nextInt(amount[index]);
-
-    return dropAmount + 1;
-  }
-
-  @NotNull
-  @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    int chance = rand.nextInt(100) + 1;
-    return getWeightedDrop(chance, 0, this.chance[0]);
-  }
-
-  @Override
   @SuppressWarnings("deprecation")
   public boolean isTopSolid(IBlockState state) {
     return false;
@@ -97,56 +83,27 @@ public class BlockSurfaceBones extends BlockBush {
   }
 
   @Override
-  public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
-    return false;
-  }
-
-  @Override
-  @NotNull
-  @SuppressWarnings("deprecation")
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-    return BlockFaceShape.UNDEFINED;
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public boolean isFullCube(IBlockState state) {
-    return false;
-  }
-
-  @Override
-  @NotNull
-  @SuppressWarnings("deprecation")
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return AABB.offset(state.getOffset(source, pos));
-  }
-
-  @Nullable
-  @Override
-  @SuppressWarnings("deprecation")
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-    return NULL_AABB;
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public boolean isOpaqueCube(IBlockState state) {
-    return false;
-  }
-
-  @Override
   public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
     return true;
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-    super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-    if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP) && !(worldIn.getBlockState(pos.down())
-            .getBlock() instanceof BlockSoilFarmland)) {
-      worldIn.setBlockToAir(pos);
-    }
+  public int quantityDropped(Random random) {
+    int dropAmount = random.nextInt(amount[index]);
+
+    return dropAmount + 1;
+  }
+
+  @NotNull
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    int chance = rand.nextInt(100) + 1;
+    return getWeightedDrop(chance, 0, this.chance[0]);
+  }
+
+  @Override
+  public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+    return false;
   }
 
   @Override
@@ -173,6 +130,16 @@ public class BlockSurfaceBones extends BlockBush {
   }
 
   @Override
+  @SuppressWarnings("deprecation")
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+    if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP) && !(worldIn.getBlockState(pos.down())
+            .getBlock() instanceof BlockSoilFarmland)) {
+      worldIn.setBlockToAir(pos);
+    }
+  }
+
+  @Override
   public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
     IBlockState soil = worldIn.getBlockState(pos.down());
 
@@ -181,5 +148,38 @@ public class BlockSurfaceBones extends BlockBush {
               .isFullBlock()) && !(BlockUtils.isSaltWater(soil) || BlockUtils.isFreshWater(soil));
     }
     return this.canSustainBush(soil);
+  }
+
+  @Override
+  @NotNull
+  @SuppressWarnings("deprecation")
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return AABB.offset(state.getOffset(source, pos));
+  }
+
+  @Nullable
+  @Override
+  @SuppressWarnings("deprecation")
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return NULL_AABB;
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isOpaqueCube(IBlockState state) {
+    return false;
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isFullCube(IBlockState state) {
+    return false;
+  }
+
+  @Override
+  @NotNull
+  @SuppressWarnings("deprecation")
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    return BlockFaceShape.UNDEFINED;
   }
 }

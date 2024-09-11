@@ -1,13 +1,13 @@
 package su.terrafirmagreg.modules.animal.client.render;
 
+import su.terrafirmagreg.modules.animal.client.model.ModelAnimalMuskOxWool;
+import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMuskOx;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import su.terrafirmagreg.modules.animal.client.model.ModelAnimalMuskOxWool;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMuskOx;
 
 @SideOnly(Side.CLIENT)
 
@@ -22,8 +22,8 @@ public class LayerMuskOxWool implements LayerRenderer<EntityAnimalMuskOx> {
 
   @Override
   public void doRenderLayer(EntityAnimalMuskOx muskox, float limbSwing, float limbSwingAmount,
-      float partialTicks, float ageInTicks,
-      float netHeadYaw, float headPitch, float scale) {
+          float partialTicks, float ageInTicks,
+          float netHeadYaw, float headPitch, float scale) {
     if (muskox.hasWool() && !muskox.isInvisible()) {
       this.muskoxRenderer.bindTexture(this.muskoxRenderer.getEntityTexture(muskox));
 
@@ -33,7 +33,7 @@ public class LayerMuskOxWool implements LayerRenderer<EntityAnimalMuskOx> {
       this.muskoxModel.setModelAttributes(this.muskoxRenderer.getMainModel());
       this.muskoxModel.setLivingAnimations(muskox, limbSwing, limbSwingAmount, partialTicks);
       this.muskoxModel.render(muskox, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
-          scale);
+              scale);
     }
   }
 

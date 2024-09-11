@@ -322,9 +322,15 @@ public class ModelAnimalDeer extends ModelBase {
     antler21.addChild(antler24);
   }
 
+  private void setRotation(ModelRenderer model, float x, float y, float z) {
+    model.rotateAngleX = x;
+    model.rotateAngleY = y;
+    model.rotateAngleZ = z;
+  }
+
   @Override
   public void render(@NotNull Entity entity, float f, float f1, float f2, float f3, float f4,
-      float f5) {
+          float f5) {
     super.render(entity, f, f1, f2, f3, f4, f5);
     this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
@@ -384,7 +390,7 @@ public class ModelAnimalDeer extends ModelBase {
 
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,
-      Entity entity) {
+          Entity entity) {
     super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
     f1 = Math.min(f1 * 7.5f, 0.75f);
@@ -400,13 +406,13 @@ public class ModelAnimalDeer extends ModelBase {
     antler24.isHidden = true;
     setRotation(antler21, f4 / (180F / MathConstants.PI), f3 / (180F / MathConstants.PI), 0F);
     setRotation(head, f4 / (180F / MathConstants.PI) + 0.1570796F, f3 / (180F / MathConstants.PI),
-        0F);
+            0F);
     setRotation(antler11, f4 / (180F / MathConstants.PI), f3 / (180F / MathConstants.PI), 0F);
     setRotation(torso, 0.122173F, 0F, 0F);
     setRotation(collar, f4 / (3 * (180F / MathConstants.PI)) + 1.151917F,
-        f3 / (3 * (180F / MathConstants.PI)), 0F);
+            f3 / (3 * (180F / MathConstants.PI)), 0F);
     setRotation(neck, f4 / (1.5F * (180F / MathConstants.PI)) + 1.815142F,
-        f3 / (1.5F * (180F / MathConstants.PI)), 0F);
+            f3 / (1.5F * (180F / MathConstants.PI)), 0F);
     setRotation(rump, -0.0872665F, 0F, 0F);
     setRotation(body, 1.43117F, 0F, 0F);
     setRotation(calf1, 0.5585054F, 0F, -0.1745329F);
@@ -431,106 +437,100 @@ public class ModelAnimalDeer extends ModelBase {
 
     if (!running) {
       setRotation(upperLeg4,
-          MathHelper.cos(f / 1.5F + 3F * MathConstants.PI / 2F) * 0.7F * f1 + 0.3490659F, 0F,
-          0.0349066F);
+              MathHelper.cos(f / 1.5F + 3F * MathConstants.PI / 2F) * 0.7F * f1 + 0.3490659F, 0F,
+              0.0349066F);
       setRotation(upperLeg3,
-          MathHelper.cos(f / 1.5F + MathConstants.PI / 2F) * 0.7F * f1 + 0.3490659F, 0F,
-          -0.0349066F);
+              MathHelper.cos(f / 1.5F + MathConstants.PI / 2F) * 0.7F * f1 + 0.3490659F, 0F,
+              -0.0349066F);
       setRotation(thigh1,
-          MathHelper.cos(f / 1.5F + MathConstants.PI * 7F / 4F) * 0.7F * f1 - 0.1745329F, 0F,
-          0.1745329F);
+              MathHelper.cos(f / 1.5F + MathConstants.PI * 7F / 4F) * 0.7F * f1 - 0.1745329F, 0F,
+              0.1745329F);
       setRotation(thigh2,
-          MathHelper.cos(f / 1.5F + 3f * MathConstants.PI / 4F) * 0.7F * f1 - 0.1745329F, 0F,
-          -0.1745329F);
+              MathHelper.cos(f / 1.5F + 3f * MathConstants.PI / 4F) * 0.7F * f1 - 0.1745329F, 0F,
+              -0.1745329F);
       if (MathHelper.sin(f / 1.5F + MathConstants.PI / 2F) * 0.7F * f1 > 0) {
         setRotation(lowerleg3, MathHelper.sin(f / 1.5F + MathConstants.PI / 2F) * 1.4F * f1, 0F,
-            0F);
+                0F);
         setRotation(leg3,
-            -MathHelper.sin(f / 1.5F + MathConstants.PI / 2F) * 0.7F * f1 - 0.3490659F, 0F,
-            0.0349066F);
+                -MathHelper.sin(f / 1.5F + MathConstants.PI / 2F) * 0.7F * f1 - 0.3490659F, 0F,
+                0.0349066F);
         setRotation(toes3, MathHelper.sin(f / 1.5F + MathConstants.PI / 2F) * 2.1F * f1 + 1.134464F,
-            0, 0);
+                0, 0);
       }
       if (MathHelper.sin(f / 1.5F + MathConstants.PI / 2F) * 0.7F * f1 < 0) {
         setRotation(lowerleg4, MathHelper.sin(f / 1.5F + 3F * MathConstants.PI / 2F) * 1.4F * f1,
-            0F, 0F);
+                0F, 0F);
         setRotation(leg4,
-            -MathHelper.sin(f / 1.5F + 3F * MathConstants.PI / 2F) * 0.7F * f1 - 0.3490659F, 0F,
-            -0.0349066F);
+                -MathHelper.sin(f / 1.5F + 3F * MathConstants.PI / 2F) * 0.7F * f1 - 0.3490659F, 0F,
+                -0.0349066F);
         setRotation(toes4,
-            MathHelper.sin(f / 1.5F + 3F * MathConstants.PI / 2F) * 2.1F * f1 + 1.134464F, 0, 0);
+                MathHelper.sin(f / 1.5F + 3F * MathConstants.PI / 2F) * 2.1F * f1 + 1.134464F, 0, 0);
       }
       if (MathHelper.sin(f / 1.5F + MathConstants.PI * 7F / 4F) * 0.7F * f1 > 0) {
         setRotation(calf1,
-            MathHelper.sin(f / 1.5F + MathConstants.PI * 7F / 4F) * 1.4F * f1 + 0.5585054F, 0F,
-            -0.1745329F);
+                MathHelper.sin(f / 1.5F + MathConstants.PI * 7F / 4F) * 1.4F * f1 + 0.5585054F, 0F,
+                -0.1745329F);
         setRotation(leg1, -MathHelper.sin(f / 1.5F + MathConstants.PI * 7F / 4F) * 1.4F * f1
-            - 22F / 180F * MathConstants.PI, 0F, 0F);
+                - 22F / 180F * MathConstants.PI, 0F, 0F);
         setRotation(toes1,
-            MathHelper.sin(f / 1.5F + MathConstants.PI * 7F / 4F) * 2.1F * f1 + 1.134464F, 0F, 0F);
+                MathHelper.sin(f / 1.5F + MathConstants.PI * 7F / 4F) * 2.1F * f1 + 1.134464F, 0F, 0F);
       }
       if (MathHelper.sin(f / 1.5F + 3f * MathConstants.PI / 4F) * 0.7F * f1 > 0) {
         setRotation(calf2,
-            MathHelper.sin(f / 1.5F + 3f * MathConstants.PI / 4F) * 1.4F * f1 + 0.5585054F, 0F,
-            0.1745329F);
+                MathHelper.sin(f / 1.5F + 3f * MathConstants.PI / 4F) * 1.4F * f1 + 0.5585054F, 0F,
+                0.1745329F);
         setRotation(leg2, -MathHelper.sin(f / 1.5F + 3f * MathConstants.PI / 4F) * 1.4F * f1
-            - 22F / 180F * MathConstants.PI, 0F, 0F);
+                - 22F / 180F * MathConstants.PI, 0F, 0F);
         setRotation(toes2,
-            MathHelper.sin(f / 1.5F + 3f * MathConstants.PI / 4F) * 2.1F * f1 + 1.134464F, 0F, 0F);
+                MathHelper.sin(f / 1.5F + 3f * MathConstants.PI / 4F) * 2.1F * f1 + 1.134464F, 0F, 0F);
       }
 
     } else {
       if (MathHelper.cos(f / 1.5F + 5 * MathConstants.PI / 4F) > -Math.sqrt(0.5) &&
-          MathHelper.cos(f / 1.5F + 5 * MathConstants.PI / 4F) < Math.sqrt(0.5)) {
+              MathHelper.cos(f / 1.5F + 5 * MathConstants.PI / 4F) < Math.sqrt(0.5)) {
         setRotation(upperLeg4,
-            MathHelper.cos(f / 1.5F + 5F * MathConstants.PI / 4F) * 2.8F * f1 + 0.3490659F, 0F,
-            0.0349066F);
+                MathHelper.cos(f / 1.5F + 5F * MathConstants.PI / 4F) * 2.8F * f1 + 0.3490659F, 0F,
+                0.0349066F);
       }
       if (MathHelper.sin(f / 1.5F + 5F * MathConstants.PI / 4F - 3F * MathConstants.PI / 8) > 0) {
         setRotation(lowerleg4,
-            MathHelper.sin(f / 1.5F + 5F * MathConstants.PI / 4F - 3F * MathConstants.PI / 8) * 3.5F
-                * f1, 0F, 0F);
+                MathHelper.sin(f / 1.5F + 5F * MathConstants.PI / 4F - 3F * MathConstants.PI / 8) * 3.5F
+                        * f1, 0F, 0F);
         setRotation(leg4,
-            -MathHelper.sin(f / 1.5F + 5F * MathConstants.PI / 4F - 3F * MathConstants.PI / 8)
-                * 3.5F * f1 - 0.3490659F, 0F,
-            -0.0349066F);
+                -MathHelper.sin(f / 1.5F + 5F * MathConstants.PI / 4F - 3F * MathConstants.PI / 8)
+                        * 3.5F * f1 - 0.3490659F, 0F,
+                -0.0349066F);
         setRotation(toes4,
-            MathHelper.sin(f / 1.5F + 5F * MathConstants.PI / 4F - 3F * MathConstants.PI / 8) * 2.1F
-                * f1 + 1.134464F, 0, 0);
+                MathHelper.sin(f / 1.5F + 5F * MathConstants.PI / 4F - 3F * MathConstants.PI / 8) * 2.1F
+                        * f1 + 1.134464F, 0, 0);
       }
 
       if (MathHelper.cos(f / 1.5F + MathConstants.PI / 2F) > -Math.sqrt(0.5) &&
-          MathHelper.cos(f / 1.5F + MathConstants.PI / 2F) < Math.sqrt(0.5)) {
+              MathHelper.cos(f / 1.5F + MathConstants.PI / 2F) < Math.sqrt(0.5)) {
         setRotation(upperLeg3,
-            MathHelper.cos(f / 1.5F + MathConstants.PI / 2F) * 2.8F * f1 + 0.3490659F, 0F,
-            -0.0349066F);
+                MathHelper.cos(f / 1.5F + MathConstants.PI / 2F) * 2.8F * f1 + 0.3490659F, 0F,
+                -0.0349066F);
       }
       if (MathHelper.sin(f / 1.5F + MathConstants.PI / 2F - 3F * MathConstants.PI / 8) > 0) {
         setRotation(lowerleg3,
-            MathHelper.sin(f / 1.5F + MathConstants.PI / 2F - 3F * MathConstants.PI / 8) * 3.5F
-                * f1, 0F, 0F);
+                MathHelper.sin(f / 1.5F + MathConstants.PI / 2F - 3F * MathConstants.PI / 8) * 3.5F
+                        * f1, 0F, 0F);
         setRotation(leg3,
-            -MathHelper.sin(f / 1.5F + MathConstants.PI / 2F - 3F * MathConstants.PI / 8) * 3.5F
-                * f1 - 0.3490659F, 0F,
-            0.0349066F);
+                -MathHelper.sin(f / 1.5F + MathConstants.PI / 2F - 3F * MathConstants.PI / 8) * 3.5F
+                        * f1 - 0.3490659F, 0F,
+                0.0349066F);
         setRotation(toes3,
-            MathHelper.sin(f / 1.5F + MathConstants.PI / 2F - 3F * MathConstants.PI / 8) * 2.1F * f1
-                + 1.134464F, 0, 0);
+                MathHelper.sin(f / 1.5F + MathConstants.PI / 2F - 3F * MathConstants.PI / 8) * 2.1F * f1
+                        + 1.134464F, 0, 0);
       }
 
       setRotation(thigh1,
-          MathHelper.cos(f / 1.5F + MathConstants.PI * 7F / 4F) * 2.8F * f1 - 0.1745329F, 0F,
-          0.1745329F);
+              MathHelper.cos(f / 1.5F + MathConstants.PI * 7F / 4F) * 2.8F * f1 - 0.1745329F, 0F,
+              0.1745329F);
       setRotation(thigh2,
-          MathHelper.cos(f / 1.5F + 3f * MathConstants.PI / 4F) * 2.8F * f1 - 0.1745329F, 0F,
-          -0.1745329F);
+              MathHelper.cos(f / 1.5F + 3f * MathConstants.PI / 4F) * 2.8F * f1 - 0.1745329F, 0F,
+              -0.1745329F);
     }
-  }
-
-  private void setRotation(ModelRenderer model, float x, float y, float z) {
-    model.rotateAngleX = x;
-    model.rotateAngleY = y;
-    model.rotateAngleZ = z;
   }
 
 }

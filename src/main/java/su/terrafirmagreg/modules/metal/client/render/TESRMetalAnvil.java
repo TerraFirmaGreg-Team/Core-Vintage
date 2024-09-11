@@ -17,7 +17,7 @@ public class TESRMetalAnvil extends TileEntitySpecialRenderer<TileMetalAnvil> {
 
   @Override
   public void render(@NotNull TileMetalAnvil tile, double x, double y, double z, float partialTicks,
-      int destroyStage, float alpha) {
+          int destroyStage, float alpha) {
     super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
     IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
@@ -35,21 +35,21 @@ public class TESRMetalAnvil extends TileEntitySpecialRenderer<TileMetalAnvil> {
       ItemStack hammer = cap.getStackInSlot(TileMetalAnvil.SLOT_HAMMER);
       if (!hammer.isEmpty()) {
         Minecraft.getMinecraft().getRenderItem()
-            .renderItem(hammer, ItemCameraTransforms.TransformType.FIXED);
+                .renderItem(hammer, ItemCameraTransforms.TransformType.FIXED);
       }
 
       GlStateManager.translate(-1.3f, 0, 0);
       ItemStack input1 = cap.getStackInSlot(TileMetalAnvil.SLOT_INPUT_1);
       if (!input1.isEmpty()) {
         Minecraft.getMinecraft().getRenderItem()
-            .renderItem(input1, ItemCameraTransforms.TransformType.FIXED);
+                .renderItem(input1, ItemCameraTransforms.TransformType.FIXED);
       }
 
       GlStateManager.translate(-0.4f, 0, -0.05f);
       ItemStack input2 = cap.getStackInSlot(TileMetalAnvil.SLOT_INPUT_2);
       if (!input2.isEmpty()) {
         Minecraft.getMinecraft().getRenderItem()
-            .renderItem(input2, ItemCameraTransforms.TransformType.FIXED);
+                .renderItem(input2, ItemCameraTransforms.TransformType.FIXED);
       }
 
       ItemStack flux = cap.getStackInSlot(TileMetalAnvil.SLOT_FLUX);
@@ -58,7 +58,7 @@ public class TESRMetalAnvil extends TileEntitySpecialRenderer<TileMetalAnvil> {
         GlStateManager.translate(0.9f, -0.25f, 0.05f);
         GlStateManager.scale(0.6f, 0.6f, 0.6f);
         Minecraft.getMinecraft().getRenderItem()
-            .renderItem(flux, ItemCameraTransforms.TransformType.FIXED);
+                .renderItem(flux, ItemCameraTransforms.TransformType.FIXED);
         GlStateManager.popMatrix();
       }
 

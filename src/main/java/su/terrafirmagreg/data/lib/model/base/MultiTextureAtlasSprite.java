@@ -31,13 +31,8 @@ public class MultiTextureAtlasSprite extends TextureAtlasSprite {
   }
 
   @Override
-  public Collection<ResourceLocation> getDependencies() {
-    return dependencies;
-  }
-
-  @Override
   public boolean load(IResourceManager manager, ResourceLocation location,
-      Function<ResourceLocation, TextureAtlasSprite> textureGetter) {
+          Function<ResourceLocation, TextureAtlasSprite> textureGetter) {
     //получаем текстуры по отдельности
     TextureAtlasSprite sprite = textureGetter.apply(texture1);
     TextureAtlasSprite mappingSprite = textureGetter.apply(texture2);
@@ -71,5 +66,10 @@ public class MultiTextureAtlasSprite extends TextureAtlasSprite {
     this.framesTextureData.add(pixels);
     //возвращаем false, чтобы наш TextureAtlasSprite не загружался обычным способом
     return false;
+  }
+
+  @Override
+  public Collection<ResourceLocation> getDependencies() {
+    return dependencies;
   }
 }

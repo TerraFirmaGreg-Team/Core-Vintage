@@ -17,7 +17,7 @@ public final class CapabilitySharpness {
 
   public static void register() {
     CapabilityManager.INSTANCE.register(ICapabilitySharpness.class, new StorageSharpness(),
-        ProviderSharpness::new);
+            ProviderSharpness::new);
 
   }
 

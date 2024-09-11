@@ -308,6 +308,112 @@ public class TileFirePit extends BaseTileTickableInventory
     }
   }
 
+  private void handleInputMelting(ItemStack stack) {
+    var cap = CapabilityHeat.get(stack);
+
+    if (cachedRecipe != null && cap != null && cachedRecipe.isValidTemperature(
+            cap.getTemperature())) {
+      HeatRecipe recipe = cachedRecipe; // Avoids NPE on slot changes
+      // Handle possible metal output
+      FluidStack fluidStack = recipe.getOutputFluid(stack);
+      float itemTemperature = cap.getTemperature();
+      if (fluidStack != null) {
+        ItemStack output = inventory.getStackInSlot(SLOT_OUTPUT_1);
+        IFluidHandler fluidHandler = output.getCapability(
+                CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        if (fluidHandler != null) {
+          int amountFilled = fluidHandler.fill(fluidStack.copy(), true);
+          fluidStack.amount -= amountFilled;
+
+          // If the fluid was filled, make sure to make it the same temperature
+          var capability = CapabilityHeat.get(output);
+          if (capability != null) {
+            capability.setTemperature(itemTemperature);
+          }
+        }
+        if (fluidStack.amount > 0) {
+          output = inventory.getStackInSlot(SLOT_OUTPUT_2);
+          fluidHandler = output.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY,
+                  null);
+
+          if (fluidHandler != null) {
+            int amountFilled = fluidHandler.fill(fluidStack, true);
+
+            if (amountFilled > 0) {
+              // If the fluid was filled, make sure to make it the same temperature
+              var capability = CapabilityHeat.get(output);
+              if (capability != null) {
+                capability.setTemperature(itemTemperature);
+              }
+            }
+          }
+        }
+      }
+
+      // Handle removal of input
+      ItemStack inputStack = inventory.getStackInSlot(SLOT_ITEM_INPUT);
+      ItemStack outputStack = recipe.getOutputStack(inputStack);
+
+      inputStack.shrink(1);
+      if (!outputStack.isEmpty()) {
+        outputStack = mergeOutputStack(outputStack);
+        if (!outputStack.isEmpty()) {
+          leftover.add(outputStack);
+        }
+      }
+    }
+  }
+
+  /**
+   * Merges a stack into the two output slots
+   *
+   * @param outputStack the stack to merge.
+   * @return the leftover outputStack that wasn't merged
+   */
+  private ItemStack mergeOutputStack(ItemStack outputStack) {
+    outputStack = inventory.insertItem(SLOT_OUTPUT_1, outputStack, false);
+    inventory.setStackInSlot(SLOT_OUTPUT_1,
+            CapabilityFood.mergeItemStacksIgnoreCreationDate(inventory.getStackInSlot(SLOT_OUTPUT_1),
+                    outputStack));
+    outputStack = inventory.insertItem(SLOT_OUTPUT_2, outputStack, false);
+    inventory.setStackInSlot(SLOT_OUTPUT_2,
+            CapabilityFood.mergeItemStacksIgnoreCreationDate(inventory.getStackInSlot(SLOT_OUTPUT_2),
+                    outputStack));
+    return outputStack;
+  }
+
+  private void handleGrillCooking(int slot, ItemStack stack, ICapabilityHeat heat) {
+    HeatRecipe recipe = cachedGrillRecipes[slot - SLOT_EXTRA_INPUT_START];
+    if (recipe != null && recipe.isValidTemperature(heat.getTemperature())) {
+      ItemStack output = recipe.getOutputStack(stack);
+      CapabilityFood.applyTrait(output, FoodTrait.WOOD_GRILLED);
+      inventory.setStackInSlot(slot, output);
+      markForSync();
+    }
+  }
+
+  private void cascadeFuelSlots() {
+    // This will cascade all fuel down to the lowest available slot
+    int lowestAvailSlot = 0;
+    for (int i = 0; i < 4; i++) {
+      ItemStack stack = inventory.getStackInSlot(i);
+      if (!stack.isEmpty()) {
+        // Move to lowest avail slot
+        if (i > lowestAvailSlot) {
+          inventory.setStackInSlot(lowestAvailSlot, stack.copy());
+          inventory.setStackInSlot(i, ItemStack.EMPTY);
+        }
+        lowestAvailSlot++;
+      }
+    }
+    requiresSlotUpdate = false;
+  }
+
+  @Override
+  public long getLastUpdateTick() {
+    return lastPlayerTick;
+  }
+
   @Override
   public void onCalendarUpdate(long deltaPlayerTicks) {
     IBlockState state = world.getBlockState(pos);
@@ -348,11 +454,6 @@ public class TileFirePit extends BaseTileTickableInventory
       }
       world.setBlockState(pos, state.withProperty(LIT, false));
     }
-  }
-
-  @Override
-  public long getLastUpdateTick() {
-    return lastPlayerTick;
   }
 
   @Override
@@ -464,6 +565,12 @@ public class TileFirePit extends BaseTileTickableInventory
     super.onBreakBlock(world, pos, state);
   }
 
+  private void updateCachedGrillRecipes() {
+    for (int i = SLOT_EXTRA_INPUT_START; i <= SLOT_EXTRA_INPUT_END; i++) {
+      cachedGrillRecipes[i - SLOT_EXTRA_INPUT_START] = HeatRecipe.get(inventory.getStackInSlot(i));
+    }
+  }
+
   @Override
   public int getSlotLimit(int slot) {
     // Output slots can have anything, everything else is 1 max
@@ -512,6 +619,16 @@ public class TileFirePit extends BaseTileTickableInventory
     dumpNonExtraItems(player);
     cookingPotStage = CookingPotStage.EMPTY;
     attachedItemStack = stack.splitStack(1);
+  }
+
+  private void dumpNonExtraItems(EntityPlayer player) {
+    for (int i = SLOT_ITEM_INPUT; i < SLOT_OUTPUT_2; i++) {
+      ItemStack stack = inventory.getStackInSlot(i);
+      if (!stack.isEmpty()) {
+        ItemHandlerHelper.giveItemToPlayer(player, stack);
+      }
+      inventory.setStackInSlot(i, ItemStack.EMPTY);
+    }
   }
 
   public void onConvertToGrill(EntityPlayer player, ItemStack stack) {
@@ -597,135 +714,6 @@ public class TileFirePit extends BaseTileTickableInventory
     }
   }
 
-  @Override
-  public boolean canInsert(int slot, ItemStack stack, EnumFacing side) {
-    return slot == SLOT_FUEL_INPUT || (cookingPotStage != CookingPotStage.BOILING
-            && cookingPotStage != CookingPotStage.FINISHED);
-  }
-
-  @Override
-  public boolean canExtract(int slot, EnumFacing side) {
-    return slot == SLOT_FUEL_INPUT || (cookingPotStage != CookingPotStage.BOILING
-            && cookingPotStage != CookingPotStage.FINISHED);
-  }
-
-  private void updateCachedGrillRecipes() {
-    for (int i = SLOT_EXTRA_INPUT_START; i <= SLOT_EXTRA_INPUT_END; i++) {
-      cachedGrillRecipes[i - SLOT_EXTRA_INPUT_START] = HeatRecipe.get(inventory.getStackInSlot(i));
-    }
-  }
-
-  private void dumpNonExtraItems(EntityPlayer player) {
-    for (int i = SLOT_ITEM_INPUT; i < SLOT_OUTPUT_2; i++) {
-      ItemStack stack = inventory.getStackInSlot(i);
-      if (!stack.isEmpty()) {
-        ItemHandlerHelper.giveItemToPlayer(player, stack);
-      }
-      inventory.setStackInSlot(i, ItemStack.EMPTY);
-    }
-  }
-
-  private void cascadeFuelSlots() {
-    // This will cascade all fuel down to the lowest available slot
-    int lowestAvailSlot = 0;
-    for (int i = 0; i < 4; i++) {
-      ItemStack stack = inventory.getStackInSlot(i);
-      if (!stack.isEmpty()) {
-        // Move to lowest avail slot
-        if (i > lowestAvailSlot) {
-          inventory.setStackInSlot(lowestAvailSlot, stack.copy());
-          inventory.setStackInSlot(i, ItemStack.EMPTY);
-        }
-        lowestAvailSlot++;
-      }
-    }
-    requiresSlotUpdate = false;
-  }
-
-  private void handleInputMelting(ItemStack stack) {
-    var cap = CapabilityHeat.get(stack);
-
-    if (cachedRecipe != null && cap != null && cachedRecipe.isValidTemperature(
-            cap.getTemperature())) {
-      HeatRecipe recipe = cachedRecipe; // Avoids NPE on slot changes
-      // Handle possible metal output
-      FluidStack fluidStack = recipe.getOutputFluid(stack);
-      float itemTemperature = cap.getTemperature();
-      if (fluidStack != null) {
-        ItemStack output = inventory.getStackInSlot(SLOT_OUTPUT_1);
-        IFluidHandler fluidHandler = output.getCapability(
-                CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (fluidHandler != null) {
-          int amountFilled = fluidHandler.fill(fluidStack.copy(), true);
-          fluidStack.amount -= amountFilled;
-
-          // If the fluid was filled, make sure to make it the same temperature
-          var capability = CapabilityHeat.get(output);
-          if (capability != null) {
-            capability.setTemperature(itemTemperature);
-          }
-        }
-        if (fluidStack.amount > 0) {
-          output = inventory.getStackInSlot(SLOT_OUTPUT_2);
-          fluidHandler = output.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY,
-                  null);
-
-          if (fluidHandler != null) {
-            int amountFilled = fluidHandler.fill(fluidStack, true);
-
-            if (amountFilled > 0) {
-              // If the fluid was filled, make sure to make it the same temperature
-              var capability = CapabilityHeat.get(output);
-              if (capability != null) {
-                capability.setTemperature(itemTemperature);
-              }
-            }
-          }
-        }
-      }
-
-      // Handle removal of input
-      ItemStack inputStack = inventory.getStackInSlot(SLOT_ITEM_INPUT);
-      ItemStack outputStack = recipe.getOutputStack(inputStack);
-
-      inputStack.shrink(1);
-      if (!outputStack.isEmpty()) {
-        outputStack = mergeOutputStack(outputStack);
-        if (!outputStack.isEmpty()) {
-          leftover.add(outputStack);
-        }
-      }
-    }
-  }
-
-  private void handleGrillCooking(int slot, ItemStack stack, ICapabilityHeat heat) {
-    HeatRecipe recipe = cachedGrillRecipes[slot - SLOT_EXTRA_INPUT_START];
-    if (recipe != null && recipe.isValidTemperature(heat.getTemperature())) {
-      ItemStack output = recipe.getOutputStack(stack);
-      CapabilityFood.applyTrait(output, FoodTrait.WOOD_GRILLED);
-      inventory.setStackInSlot(slot, output);
-      markForSync();
-    }
-  }
-
-  /**
-   * Merges a stack into the two output slots
-   *
-   * @param outputStack the stack to merge.
-   * @return the leftover outputStack that wasn't merged
-   */
-  private ItemStack mergeOutputStack(ItemStack outputStack) {
-    outputStack = inventory.insertItem(SLOT_OUTPUT_1, outputStack, false);
-    inventory.setStackInSlot(SLOT_OUTPUT_1,
-            CapabilityFood.mergeItemStacksIgnoreCreationDate(inventory.getStackInSlot(SLOT_OUTPUT_1),
-                    outputStack));
-    outputStack = inventory.insertItem(SLOT_OUTPUT_2, outputStack, false);
-    inventory.setStackInSlot(SLOT_OUTPUT_2,
-            CapabilityFood.mergeItemStacksIgnoreCreationDate(inventory.getStackInSlot(SLOT_OUTPUT_2),
-                    outputStack));
-    return outputStack;
-  }
-
   private Item getSoupItem() {
     return switch (soupNutrient) {
       case GRAIN -> ItemFoodTFC.get(Food.SOUP_GRAIN);
@@ -737,15 +725,15 @@ public class TileFirePit extends BaseTileTickableInventory
   }
 
   @Override
-  public ContainerFirePit getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
-    return new ContainerFirePit(inventoryPlayer, this);
+  public boolean canInsert(int slot, ItemStack stack, EnumFacing side) {
+    return slot == SLOT_FUEL_INPUT || (cookingPotStage != CookingPotStage.BOILING
+            && cookingPotStage != CookingPotStage.FINISHED);
   }
 
   @Override
-  public GuiFirePit getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state,
-          BlockPos pos) {
-    return new GuiFirePit(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
+  public boolean canExtract(int slot, EnumFacing side) {
+    return slot == SLOT_FUEL_INPUT || (cookingPotStage != CookingPotStage.BOILING
+            && cookingPotStage != CookingPotStage.FINISHED);
   }
 
   @Override
@@ -771,4 +759,19 @@ public class TileFirePit extends BaseTileTickableInventory
       return id >= 0 && id < VALUES.length ? VALUES[id] : EMPTY;
     }
   }
+
+  @Override
+  public ContainerFirePit getContainer(InventoryPlayer inventoryPlayer, World world,
+          IBlockState state, BlockPos pos) {
+    return new ContainerFirePit(inventoryPlayer, this);
+  }
+
+
+  @Override
+  public GuiFirePit getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state,
+          BlockPos pos) {
+    return new GuiFirePit(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
+  }
+
+
 }

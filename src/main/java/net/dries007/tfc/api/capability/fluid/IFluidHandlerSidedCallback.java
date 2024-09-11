@@ -5,7 +5,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface IFluidHandlerSidedCallback {
 
-    boolean canFill(FluidStack resource, EnumFacing side);
+  boolean canFill(FluidStack resource, EnumFacing side);
 
-    boolean canDrain(EnumFacing side);
+  boolean canDrain(EnumFacing side);
 }

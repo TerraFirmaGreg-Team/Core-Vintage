@@ -51,8 +51,13 @@ public class ModifierEnvironmental extends ModifierBase {
     }
   }
 
-  public static float getEnvironmentTemperatureWithTimeOfDay(EntityPlayer player) {
-    return getEnvironmentTemperature(player) + handleTimeOfDay(player).get().getChange();
+  public static Optional<ModifierBase> handleFire(EntityPlayer player) {
+    return player.isBurning() ? ModifierBase.defined("on_fire", 4f, 4f) : ModifierBase.none();
+  }
+
+  public static Optional<ModifierBase> handleGeneralTemperature(EntityPlayer player) {
+    return ModifierBase.defined("environment", getEnvironmentTemperature(player),
+            getEnvironmentHumidity(player));
   }
 
   public static float getEnvironmentTemperature(EntityPlayer player) {
@@ -71,28 +76,6 @@ public class ModifierEnvironmental extends ModifierBase {
 
   public static float getEnvironmentHumidity(EntityPlayer player) {
     return Climate.getRainfall(player.world, player.getPosition()) / 3000;
-  }
-
-  public static Optional<ModifierBase> handleFire(EntityPlayer player) {
-    return player.isBurning() ? ModifierBase.defined("on_fire", 4f, 4f) : ModifierBase.none();
-  }
-
-  public static Optional<ModifierBase> handleGeneralTemperature(EntityPlayer player) {
-    return ModifierBase.defined("environment", getEnvironmentTemperature(player),
-            getEnvironmentHumidity(player));
-  }
-
-  public static Optional<ModifierBase> handleTimeOfDay(EntityPlayer player) {
-    int dayTicks = (int) (player.world.getWorldTime() % 24000);
-    if (dayTicks < 6000) {
-      return ModifierBase.defined("morning", 2f, 0);
-    } else if (dayTicks < 12000) {
-      return ModifierBase.defined("afternoon", 4f, 0);
-    } else if (dayTicks < 18000) {
-      return ModifierBase.defined("evening", 1f, 0);
-    } else {
-      return ModifierBase.defined("night", 1f, 0);
-    }
   }
 
   public static Optional<ModifierBase> handleWater(EntityPlayer player) {
@@ -127,6 +110,12 @@ public class ModifierEnvironmental extends ModifierBase {
     }
   }
 
+  public static int getSkylight(EntityPlayer player) {
+    BlockPos pos = new BlockPos(player.getPosition());
+    BlockPos pos2 = pos.add(0, 1, 0);
+    return player.world.getLightFor(EnumSkyBlock.SKY, pos2);
+  }
+
   public static Optional<ModifierBase> handleSprinting(EntityPlayer player) {
     if (player.isSprinting()) {
       return ModifierBase.defined("sprint", 2f, 0.3f);
@@ -155,6 +144,23 @@ public class ModifierEnvironmental extends ModifierBase {
     }
   }
 
+  public static float getEnvironmentTemperatureWithTimeOfDay(EntityPlayer player) {
+    return getEnvironmentTemperature(player) + handleTimeOfDay(player).get().getChange();
+  }
+
+  public static Optional<ModifierBase> handleTimeOfDay(EntityPlayer player) {
+    int dayTicks = (int) (player.world.getWorldTime() % 24000);
+    if (dayTicks < 6000) {
+      return ModifierBase.defined("morning", 2f, 0);
+    } else if (dayTicks < 12000) {
+      return ModifierBase.defined("afternoon", 4f, 0);
+    } else if (dayTicks < 18000) {
+      return ModifierBase.defined("evening", 1f, 0);
+    } else {
+      return ModifierBase.defined("night", 1f, 0);
+    }
+  }
+
   public static Optional<ModifierBase> handleCozy(EntityPlayer player) {
     int skyLight = getSkylight(player);
     skyLight = Math.max(12, skyLight);
@@ -167,6 +173,12 @@ public class ModifierEnvironmental extends ModifierBase {
     } else {
       return ModifierBase.none();
     }
+  }
+
+  public static int getBlockLight(EntityPlayer player) {
+    BlockPos pos = new BlockPos(player.getPosition());
+    BlockPos pos2 = pos.add(0, 1, 0);
+    return player.world.getLightFor(EnumSkyBlock.BLOCK, pos2);
   }
 
   public static Optional<ModifierBase> handleThirst(EntityPlayer player) {
@@ -211,18 +223,6 @@ public class ModifierEnvironmental extends ModifierBase {
       return ModifierBase.defined("heating_effect", 10F, 0);
     }
     return ModifierBase.none();
-  }
-
-  public static int getSkylight(EntityPlayer player) {
-    BlockPos pos = new BlockPos(player.getPosition());
-    BlockPos pos2 = pos.add(0, 1, 0);
-    return player.world.getLightFor(EnumSkyBlock.SKY, pos2);
-  }
-
-  public static int getBlockLight(EntityPlayer player) {
-    BlockPos pos = new BlockPos(player.getPosition());
-    BlockPos pos2 = pos.add(0, 1, 0);
-    return player.world.getLightFor(EnumSkyBlock.BLOCK, pos2);
   }
 
 }

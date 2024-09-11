@@ -11,15 +11,15 @@ import net.dries007.tfc.api.types.Metal;
 @SuppressWarnings("WeakerAccess")
 public class ItemGear extends ItemTechMetal {
 
-    public ItemGear(Metal metal, ItemType type) {
-        super(metal, type);
-    }
+  public ItemGear(Metal metal, ItemType type) {
+    super(metal, type);
+  }
 
-    public Metal getSleeveMetal() {
-        return switch (this.metal.getTier()) {
-            default -> TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "tin"));
-            case TIER_III, TIER_IV -> TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "brass"));
-            case TIER_V, TIER_VI -> TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "steel"));
-        };
-    }
+  public Metal getSleeveMetal() {
+    return switch (this.metal.getTier()) {
+      case TIER_III, TIER_IV -> TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "brass"));
+      case TIER_V, TIER_VI -> TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "steel"));
+      default -> TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "tin"));
+    };
+  }
 }

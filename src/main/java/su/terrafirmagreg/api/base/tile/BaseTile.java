@@ -20,6 +20,46 @@ import org.jetbrains.annotations.Nullable;
 public abstract class BaseTile extends TileEntity {
 
   /**
+   * Syncs the TE data to client via means of a block update Use for stuff that is updated infrequently, for data that is analogous to changing the state. DO NOT call
+   * every tick
+   */
+  public void markForBlockUpdate() {
+    IBlockState state = world.getBlockState(pos);
+    world.notifyBlockUpdate(pos, state, state, 3);
+    markDirty();
+  }
+
+  public void notifyBlockUpdate() {
+
+    this.markDirty();
+
+    if (this.world != null && !this.world.isRemote) {
+      IBlockState blockState = this.world.getBlockState(this.getPos());
+      this.world.notifyBlockUpdate(this.getPos(), blockState, blockState, 3);
+    }
+  }
+
+  /**
+   * Marks a tile entity for syncing without sending a block update. Use preferentially over {@link BaseTile#markForBlockUpdate()} if there's no reason to have a
+   * block update. For container based integer synchronization, see ITileFields DO NOT call every tick
+   */
+  public void markForSync() {
+    sendVanillaUpdatePacket();
+    markDirty();
+  }
+
+  private void sendVanillaUpdatePacket() {
+    SPacketUpdateTileEntity packet = getUpdatePacket();
+    if (packet != null && world instanceof WorldServer worldServer) {
+      PlayerChunkMapEntry chunk = worldServer.getPlayerChunkMap()
+              .getEntry(pos.getX() >> 4, pos.getZ() >> 4);
+      if (chunk != null) {
+        chunk.sendPacket(packet);
+      }
+    }
+  }
+
+  /**
    * Gets the update packet that is used to sync the TE on load
    */
   @Override
@@ -56,7 +96,7 @@ public abstract class BaseTile extends TileEntity {
 
   @Override
   public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState,
-      IBlockState newState) {
+          IBlockState newState) {
     //        return oldState.getBlock() != newState.getBlock(); old
 
     if (oldState.getBlock() == newState.getBlock()) {
@@ -64,45 +104,5 @@ public abstract class BaseTile extends TileEntity {
     }
 
     return super.shouldRefresh(world, pos, oldState, newState);
-  }
-
-  /**
-   * Syncs the TE data to client via means of a block update Use for stuff that is updated infrequently, for data that is analogous to changing the
-   * state. DO NOT call every tick
-   */
-  public void markForBlockUpdate() {
-    IBlockState state = world.getBlockState(pos);
-    world.notifyBlockUpdate(pos, state, state, 3);
-    markDirty();
-  }
-
-  public void notifyBlockUpdate() {
-
-    this.markDirty();
-
-    if (this.world != null && !this.world.isRemote) {
-      IBlockState blockState = this.world.getBlockState(this.getPos());
-      this.world.notifyBlockUpdate(this.getPos(), blockState, blockState, 3);
-    }
-  }
-
-  /**
-   * Marks a tile entity for syncing without sending a block update. Use preferentially over {@link BaseTile#markForBlockUpdate()} if there's no
-   * reason to have a block update. For container based integer synchronization, see ITileFields DO NOT call every tick
-   */
-  public void markForSync() {
-    sendVanillaUpdatePacket();
-    markDirty();
-  }
-
-  private void sendVanillaUpdatePacket() {
-    SPacketUpdateTileEntity packet = getUpdatePacket();
-    if (packet != null && world instanceof WorldServer worldServer) {
-      PlayerChunkMapEntry chunk = worldServer.getPlayerChunkMap()
-          .getEntry(pos.getX() >> 4, pos.getZ() >> 4);
-      if (chunk != null) {
-        chunk.sendPacket(packet);
-      }
-    }
   }
 }

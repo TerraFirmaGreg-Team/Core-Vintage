@@ -60,10 +60,10 @@ public class RockCategory extends Category<RockCategory> {
   @Nullable
   public static RockCategory getByName(@NotNull String name) {
     return RockCategory.getCategories()
-        .stream()
-        .filter(s -> s.getName().equals(name))
-        .findFirst()
-        .orElse(null);
+            .stream()
+            .filter(s -> s.getName().equals(name))
+            .findFirst()
+            .orElse(null);
   }
 
   /**
@@ -96,7 +96,7 @@ public class RockCategory extends Category<RockCategory> {
    */
   public String getLocalizedName() {
     return textFormatting + new TextComponentTranslation(
-        String.format("rock.category.%s.name", this)).getFormattedText();
+            String.format("rock.category.%s.name", this)).getFormattedText();
   }
 
   /**

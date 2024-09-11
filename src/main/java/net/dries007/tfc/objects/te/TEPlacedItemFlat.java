@@ -18,58 +18,58 @@ import org.jetbrains.annotations.NotNull;
 
 public class TEPlacedItemFlat extends BaseTile {
 
-    private byte rotation;
-    private ItemStack inventory;
+  private byte rotation;
+  private ItemStack inventory;
 
-    public TEPlacedItemFlat() {
-        rotation = (byte) MathConstants.RNG.nextInt(4);
-        inventory = ItemStack.EMPTY;
-    }
+  public TEPlacedItemFlat() {
+    rotation = (byte) MathConstants.RNG.nextInt(4);
+    inventory = ItemStack.EMPTY;
+  }
 
-    public void onBreakBlock(BlockPos pos) {
-        if (!world.isRemote && !inventory.isEmpty()) {
-            StackUtils.spawnItemStack(world, pos, getStack());
-        }
+  public void onBreakBlock(BlockPos pos) {
+    if (!world.isRemote && !inventory.isEmpty()) {
+      StackUtils.spawnItemStack(world, pos, getStack());
     }
+  }
 
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        rotation = nbt.hasKey("rotation") ? nbt.getByte("rotation") : 0;
-        inventory = new ItemStack(nbt.getCompoundTag("stack"));
-        super.readFromNBT(nbt);
-    }
+  public ItemStack getStack() {
+    return inventory;
+  }
 
-    @Override
-    @NotNull
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        nbt.setByte("rotation", rotation);
-        nbt.setTag("stack", inventory.serializeNBT());
-        return super.writeToNBT(nbt);
-    }
+  public void setStack(ItemStack stack) {
+    this.inventory = stack;
+    markDirty();
+  }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public double getMaxRenderDistanceSquared() {
-        return ConfigTFC.Client.RENDER.placedItemFlatDistance * ConfigTFC.Client.RENDER.placedItemFlatDistance;
-    }
+  @Override
+  public void readFromNBT(NBTTagCompound nbt) {
+    rotation = nbt.hasKey("rotation") ? nbt.getByte("rotation") : 0;
+    inventory = new ItemStack(nbt.getCompoundTag("stack"));
+    super.readFromNBT(nbt);
+  }
 
-    @Override
-    @NotNull
-    @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getRenderBoundingBox() {
-        return new AxisAlignedBB(getPos(), getPos().add(1D, 1D, 1D));
-    }
+  @Override
+  @NotNull
+  public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+    nbt.setByte("rotation", rotation);
+    nbt.setTag("stack", inventory.serializeNBT());
+    return super.writeToNBT(nbt);
+  }
 
-    public byte getRotation() {
-        return rotation;
-    }
+  @Override
+  @SideOnly(Side.CLIENT)
+  public double getMaxRenderDistanceSquared() {
+    return ConfigTFC.Client.RENDER.placedItemFlatDistance * ConfigTFC.Client.RENDER.placedItemFlatDistance;
+  }
 
-    public ItemStack getStack() {
-        return inventory;
-    }
+  @Override
+  @NotNull
+  @SideOnly(Side.CLIENT)
+  public AxisAlignedBB getRenderBoundingBox() {
+    return new AxisAlignedBB(getPos(), getPos().add(1D, 1D, 1D));
+  }
 
-    public void setStack(ItemStack stack) {
-        this.inventory = stack;
-        markDirty();
-    }
+  public byte getRotation() {
+    return rotation;
+  }
 }

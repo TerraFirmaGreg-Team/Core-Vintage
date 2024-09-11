@@ -16,18 +16,6 @@ import java.util.List;
 public interface IRockObject {
 
   /**
-   * This is nullable because some objects don't have a rock type, just a category (like tool heads)
-   *
-   * @param stack The item stack to check
-   * @return The rock, or null if it isn't relavant / doesn't exist
-   */
-  @Nullable
-  Rock getRock(ItemStack stack);
-
-  @NotNull
-  RockCategory getRockCategory(ItemStack stack);
-
-  /**
    * Adds rock info to the item stack This is only shown when advanced item tooltips is enabled
    *
    * @param stack The item stack
@@ -42,4 +30,16 @@ public interface IRockObject {
     }
     text.add("Category: " + getRockCategory(stack));
   }
+
+  /**
+   * This is nullable because some objects don't have a rock type, just a category (like tool heads)
+   *
+   * @param stack The item stack to check
+   * @return The rock, or null if it isn't relavant / doesn't exist
+   */
+  @Nullable
+  Rock getRock(ItemStack stack);
+
+  @NotNull
+  RockCategory getRockCategory(ItemStack stack);
 }

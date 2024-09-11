@@ -35,7 +35,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
   public static final float PASSIVE_HEAL_AMOUNT = 20 * 0.0002f; // On the display: 1 HP / 5 seconds
   public static final float EXHAUSTION_MULTIPLIER = 0.4f; // Multiplier for vanilla sources of exhaustion (we use passive exhaustion to keep hunger decaying even when not sprinting everywhere. That said, vanilla exhaustion should be reduced to compensate
   public static final float PASSIVE_EXHAUSTION = 20f * 4f / (2.5f *
-      ICalendar.TICKS_IN_DAY); // Passive exhaustion will deplete your food bar once every 2.5 days. Food bar holds ~5 "meals", this requires two per day
+          ICalendar.TICKS_IN_DAY); // Passive exhaustion will deplete your food bar once every 2.5 days. Food bar holds ~5 "meals", this requires two per day
   private final EntityPlayer sourcePlayer;
   private final FoodStats originalStats; // We keep this here to do normal vanilla tracking (rather than using super). This is also friendlier to other mods if they replace this
   private final NutritionStats nutritionStats; // Separate handler for nutrition, because it's a bit complex
@@ -74,9 +74,9 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
       addStats(foodCap);
     } else {
       TerraFirmaCraft.getLog()
-          .info(
-              "Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...",
-              foodItem, stack);
+              .info(
+                      "Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...",
+                      foodItem, stack);
     }
   }
 
@@ -102,6 +102,57 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
     }
   }
 
+  @Override
+  public float getHealthModifier() {
+    return 0.25f + 1.5f * nutritionStats.getAverageNutrition();
+  }
+
+  @NotNull
+  @Override
+  public NutritionStats getNutrition() {
+    return nutritionStats;
+  }
+
+  @Override
+  public boolean attemptDrink(float value, boolean simulate) {
+    int ticksPassed = (int) (sourcePlayer.world.getTotalWorldTime() - lastDrinkTick);
+    if (ticksPassed >= ConfigTFC.General.PLAYER.drinkDelay && thirst < MAX_PLAYER_THIRST) {
+      if (!simulate) {
+        // One drink every so often
+        resetCooldown();
+        addThirst(value);
+        // Salty drink effect
+        if (value < 0 && RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
+          sourcePlayer.addPotionEffect(new PotionEffect(PotionsCore.THIRST, 600, 0));
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public float getThirst() {
+    return thirst;
+  }
+
+  @Override
+  public void setThirst(float thirst) {
+    this.thirst = thirst;
+    if (thirst < 0) {
+      this.thirst = 0;
+    }
+    if (thirst > MAX_PLAYER_THIRST) {
+      this.thirst = MAX_PLAYER_THIRST;
+    }
+  }
+
+  @Override
+  public void resetCooldown() {
+    // Using total world time is okay here because it's done on a per-player basis
+    lastDrinkTick = sourcePlayer.world.getTotalWorldTime();
+  }
+
   /**
    * Called from {@link EntityPlayer#onUpdate()} on server side only
    *
@@ -113,7 +164,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 
     // Extra-Peaceful Difficulty
     if (difficulty == EnumDifficulty.PEACEFUL
-        && ConfigTFC.General.PLAYER.peacefulDifficultyPassiveRegeneration) {
+            && ConfigTFC.General.PLAYER.peacefulDifficultyPassiveRegeneration) {
       // Copied / Modified from EntityPlayer#onLivingUpdate
       if (player.shouldHeal() && player.ticksExisted % 20 == 0) {
         player.heal(1.0F);
@@ -131,7 +182,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
     } else {
       // Passive exhaustion - call the source player instead of the local method
       player.addExhaustion(PASSIVE_EXHAUSTION / EXHAUSTION_MULTIPLIER
-          * (float) ConfigTFC.General.PLAYER.passiveExhaustionMultiplier);
+              * (float) ConfigTFC.General.PLAYER.passiveExhaustionMultiplier);
 
       // Same check as the original food stats, so hunger and thirst loss are synced
       if (originalStats.foodExhaustionLevel >= 4.0F) {
@@ -159,7 +210,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 
       if (healTimer > 10) {
         player.heal(multiplier * PASSIVE_HEAL_AMOUNT
-            * (float) ConfigTFC.General.PLAYER.naturalRegenerationModifier);
+                * (float) ConfigTFC.General.PLAYER.naturalRegenerationModifier);
         healTimer = 0;
       }
     }
@@ -184,8 +235,8 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
     // Since this is only called server side, and vanilla has a custom packet for this stuff, we need our own
     if (player instanceof EntityPlayerMP) {
       TerraFirmaCraft.getNetwork()
-          .sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst),
-              (EntityPlayerMP) player);
+              .sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst),
+                      (EntityPlayerMP) player);
     }
   }
 
@@ -225,6 +276,12 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
     originalStats.setFoodLevel(foodLevelIn);
   }
 
+  @SideOnly(Side.CLIENT)
+  @Override
+  public void setFoodSaturationLevel(float foodSaturationLevelIn) {
+    originalStats.setFoodSaturationLevel(foodSaturationLevelIn);
+  }
+
   @Override
   public boolean needFood() {
     return originalStats.needFood();
@@ -233,12 +290,6 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
   @Override
   public void addExhaustion(float exhaustion) {
     originalStats.addExhaustion(EXHAUSTION_MULTIPLIER * exhaustion);
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Override
-  public void setFoodSaturationLevel(float foodSaturationLevelIn) {
-    originalStats.setFoodSaturationLevel(foodSaturationLevelIn);
   }
 
   /**
@@ -252,56 +303,5 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
   public void onReceivePacket(float[] nutrients, float thirst) {
     this.nutritionStats.onReceivePacket(nutrients);
     this.thirst = thirst;
-  }
-
-  @Override
-  public float getHealthModifier() {
-    return 0.25f + 1.5f * nutritionStats.getAverageNutrition();
-  }
-
-  @Override
-  public float getThirst() {
-    return thirst;
-  }
-
-  @Override
-  public void setThirst(float thirst) {
-    this.thirst = thirst;
-    if (thirst < 0) {
-      this.thirst = 0;
-    }
-    if (thirst > MAX_PLAYER_THIRST) {
-      this.thirst = MAX_PLAYER_THIRST;
-    }
-  }
-
-  @NotNull
-  @Override
-  public NutritionStats getNutrition() {
-    return nutritionStats;
-  }
-
-  @Override
-  public boolean attemptDrink(float value, boolean simulate) {
-    int ticksPassed = (int) (sourcePlayer.world.getTotalWorldTime() - lastDrinkTick);
-    if (ticksPassed >= ConfigTFC.General.PLAYER.drinkDelay && thirst < MAX_PLAYER_THIRST) {
-      if (!simulate) {
-        // One drink every so often
-        resetCooldown();
-        addThirst(value);
-        // Salty drink effect
-        if (value < 0 && RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
-          sourcePlayer.addPotionEffect(new PotionEffect(PotionsCore.THIRST, 600, 0));
-        }
-      }
-      return true;
-    }
-    return false;
-  }
-
-  @Override
-  public void resetCooldown() {
-    // Using total world time is okay here because it's done on a per-player basis
-    lastDrinkTick = sourcePlayer.world.getTotalWorldTime();
   }
 }

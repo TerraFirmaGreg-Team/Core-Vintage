@@ -38,17 +38,9 @@ public final class ModuleDevice extends ModuleBase {
   }
 
   @Override
-  public void onRegister() {
-    BlocksDevice.onRegister(registryManager);
-    ItemsDevice.onRegister(registryManager);
-    EntitiesDevice.onRegister(registryManager);
-    SoundsDevice.onRegister(registryManager);
-  }
+  public void onInit(FMLInitializationEvent event) {
 
-  @SideOnly(Side.CLIENT)
-  public void onClientRegister() {
-    EntitiesDevice.onClientRegister(registryManager);
-
+    TheOneProbeDevice.init();
   }
 
   @Override
@@ -64,15 +56,23 @@ public final class ModuleDevice extends ModuleBase {
   }
 
   @Override
-  public void onRecipesRegister() {
+  public void onRegister() {
+    BlocksDevice.onRegister(registryManager);
+    ItemsDevice.onRegister(registryManager);
+    EntitiesDevice.onRegister(registryManager);
+    SoundsDevice.onRegister(registryManager);
+  }
 
-    RecipesDevice.onRegister();
+  @SideOnly(Side.CLIENT)
+  public void onClientRegister() {
+    EntitiesDevice.onClientRegister(registryManager);
+
   }
 
   @Override
-  public void onInit(FMLInitializationEvent event) {
+  public void onRecipesRegister() {
 
-    TheOneProbeDevice.init();
+    RecipesDevice.onRegister();
   }
 
   @Override

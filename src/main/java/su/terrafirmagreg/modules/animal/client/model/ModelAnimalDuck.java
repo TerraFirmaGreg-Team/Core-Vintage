@@ -170,9 +170,15 @@ public class ModelAnimalDuck extends ModelBase {
     legL2.addChild(feetL);
   }
 
+  private void setRotateAngle(ModelRenderer model, float x, float y, float z) {
+    model.rotateAngleX = x;
+    model.rotateAngleY = y;
+    model.rotateAngleZ = z;
+  }
+
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-      float par6, float par7) {
+          float par6, float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
     EntityAnimalDuck duck = ((EntityAnimalDuck) entity);
@@ -201,7 +207,7 @@ public class ModelAnimalDuck extends ModelBase {
 
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
-      float par6, Entity ent) {
+          float par6, Entity ent) {
     this.neck.rotateAngleX = -(par5 / (180F / MathConstants.PI));
     this.neck.rotateAngleY = par4 / (180F / MathConstants.PI);
     this.legR1.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
@@ -217,11 +223,5 @@ public class ModelAnimalDuck extends ModelBase {
     //setRotateAngle(bodyBack3, 0.227590F, 0.0F, 0.0F);
     //setRotateAngle(bodyBack4, 0.318697F, 0.0F, 0.0F);
 
-  }
-
-  private void setRotateAngle(ModelRenderer model, float x, float y, float z) {
-    model.rotateAngleX = x;
-    model.rotateAngleY = y;
-    model.rotateAngleZ = z;
   }
 }

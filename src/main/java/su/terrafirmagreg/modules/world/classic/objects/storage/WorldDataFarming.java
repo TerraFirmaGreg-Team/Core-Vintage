@@ -69,21 +69,6 @@ public class WorldDataFarming
     throw new IllegalStateException("Unable to access farming data!");
   }
 
-  private long convertPosition(int x, int z) {
-    long v = 0;
-    v |= x + 30000000;
-    v <<= 7 * 4;
-    v |= z + 30000000;
-    return v;
-  }
-
-  private Tuple<Integer, Integer> getPosition(long v) {
-    int z = (int) (v & ft) - 30000000;
-    v >>= 7 * 4;
-    int x = (int) (v & ft) - 30000000;
-    return new Tuple<>(x, z);
-  }
-
   public void performCleanup() {
     synchronized (nutrientMap) {
       List<Long> toRemove = new ArrayList<>();
@@ -104,8 +89,11 @@ public class WorldDataFarming
 
   }
 
-  private NutrientValues getDefNutrients() {
-    return new NutrientValues(maximumNaturalNPK);
+  private Tuple<Integer, Integer> getPosition(long v) {
+    int z = (int) (v & ft) - 30000000;
+    v >>= 7 * 4;
+    int x = (int) (v & ft) - 30000000;
+    return new Tuple<>(x, z);
   }
 
   public void globalIncreaseUpdate(World world, NutrientClass nutrientClass, int amount) {
@@ -158,30 +146,6 @@ public class WorldDataFarming
     }
   }
 
-  public void resetCounter() {
-    teTickCounter.resetCounter();
-    markDirty();
-  }
-
-  public NutrientValues getNutrientValues(int x, int z) {
-    synchronized (nutrientMap) {
-      long pos = convertPosition(x, z);
-      if (!nutrientMap.containsKey(pos)) {
-        return getDefNutrients();
-      } else {
-        return new NutrientValues(nutrientMap.get(pos));
-      }
-    }
-  }
-
-  public void setNutrientValues(int x, int z, NutrientValues values) {
-    synchronized (nutrientMap) {
-      long pos = convertPosition(x, z);
-      nutrientMap.put(pos, values.packToInt());
-    }
-    markDirty();
-  }
-
   public boolean fertilizerBlock(long l, NutrientClass nutrientClass, int amount) {
     synchronized (nutrientMap) {
       if (nutrientMap.containsKey(l)) {
@@ -199,6 +163,42 @@ public class WorldDataFarming
         return false;
       }
     }
+  }
+
+  public void resetCounter() {
+    teTickCounter.resetCounter();
+    markDirty();
+  }
+
+  public NutrientValues getNutrientValues(int x, int z) {
+    synchronized (nutrientMap) {
+      long pos = convertPosition(x, z);
+      if (!nutrientMap.containsKey(pos)) {
+        return getDefNutrients();
+      } else {
+        return new NutrientValues(nutrientMap.get(pos));
+      }
+    }
+  }
+
+  private long convertPosition(int x, int z) {
+    long v = 0;
+    v |= x + 30000000;
+    v <<= 7 * 4;
+    v |= z + 30000000;
+    return v;
+  }
+
+  private NutrientValues getDefNutrients() {
+    return new NutrientValues(maximumNaturalNPK);
+  }
+
+  public void setNutrientValues(int x, int z, NutrientValues values) {
+    synchronized (nutrientMap) {
+      long pos = convertPosition(x, z);
+      nutrientMap.put(pos, values.packToInt());
+    }
+    markDirty();
   }
 
   public boolean fertilizerBlock(int x, int y, NutrientClass nutrientClass, int amount) {

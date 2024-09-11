@@ -22,68 +22,68 @@ import java.util.List;
  */
 public class TOPEntityInterface implements IProbeInfoEntityProvider, IEntityDisplayOverride {
 
-    protected final IWailaEntity internal;
+  protected final IWailaEntity internal;
 
-    public TOPEntityInterface(IWailaEntity internal) {
-        this.internal = internal;
+  public TOPEntityInterface(IWailaEntity internal) {
+    this.internal = internal;
+  }
+
+  @Override
+  public String getID() {
+    return "top.tfc." + internal.getClass().getName();
+  }
+
+  @Override
+  public void addProbeEntityInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, Entity entity, IProbeHitEntityData hitData) {
+    if (entity == null) {
+      return;
+    }
+    if (!isLookingAtProvider(entity)) {
+      return;
     }
 
-    @Override
-    public String getID() {
-        return "top.tfc." + internal.getClass().getName();
+    NBTTagCompound nbt = entity.writeToNBT(new NBTTagCompound());
+
+    List<String> tooltip = internal.getTooltip(entity, nbt);
+    for (String string : tooltip) {
+      info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).text(string);
     }
+  }
 
-    @Override
-    public void addProbeEntityInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, Entity entity, IProbeHitEntityData hitData) {
-        if (entity == null) {
-            return;
-        }
-        if (!isLookingAtProvider(entity)) {
-            return;
-        }
-
-        NBTTagCompound nbt = entity.writeToNBT(new NBTTagCompound());
-
-        List<String> tooltip = internal.getTooltip(entity, nbt);
-        for (String string : tooltip) {
-            info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).text(string);
-        }
+  protected boolean isLookingAtProvider(Entity entity) {
+    for (Class<?> clazz : internal.getLookupClass()) {
+      if (clazz.isInstance(entity)) {
+        return true;
+      }
     }
+    return false;
+  }
 
-    @Override
-    public boolean overrideStandardInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, Entity entity,
-                                        IProbeHitEntityData hitData) {
-        if (entity == null) {
-            return false;
-        }
-        if (!isLookingAtProvider(entity)) {
-            return false;
-        }
-        NBTTagCompound nbt = entity.writeToNBT(new NBTTagCompound());
-
-        String title = internal.getTitle(entity, nbt);
-
-        if (title.isEmpty()) {
-            return false;
-        } else {
-            info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                    .vertical()
-                    .text(TextStyleClass.NAME + title)
-                    .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
-            return true;
-        }
+  @Override
+  public boolean overrideStandardInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, Entity entity,
+          IProbeHitEntityData hitData) {
+    if (entity == null) {
+      return false;
     }
-
-    public boolean overridesHeadInfo() {
-        return internal.overrideTitle();
+    if (!isLookingAtProvider(entity)) {
+      return false;
     }
+    NBTTagCompound nbt = entity.writeToNBT(new NBTTagCompound());
 
-    protected boolean isLookingAtProvider(Entity entity) {
-        for (Class<?> clazz : internal.getLookupClass()) {
-            if (clazz.isInstance(entity)) {
-                return true;
-            }
-        }
-        return false;
+    String title = internal.getTitle(entity, nbt);
+
+    if (title.isEmpty()) {
+      return false;
+    } else {
+      info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+              .vertical()
+              .text(TextStyleClass.NAME + title)
+              .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
+      return true;
     }
+  }
+
+  public boolean overridesHeadInfo() {
+    return internal.overrideTitle();
+  }
 }

@@ -55,9 +55,9 @@ import org.jetbrains.annotations.NotNull;
 import static su.terrafirmagreg.modules.ModuleContainer.CORE;
 
 @Module(
-    moduleID = CORE,
-    description = "Core TFG content. Disabling this disables the entire mod and all its module.",
-    coreModule = true
+        moduleID = CORE,
+        description = "Core TFG content. Disabling this disables the entire mod and all its module.",
+        coreModule = true
 )
 public final class ModuleCore extends ModuleBase {
 
@@ -70,29 +70,6 @@ public final class ModuleCore extends ModuleBase {
 
     this.enableAutoRegistry(CORE_TAB);
     this.enableNetwork();
-  }
-
-  @Override
-  public void onNetworkRegister() {
-
-    PacketsCore.onRegister(packetRegistry);
-  }
-
-  @Override
-  public void onRegister() {
-
-    DataSerializersCore.onRegister(registryManager);
-    BlocksCore.onRegister(registryManager);
-    EntitiesCore.onRegister(registryManager);
-    FluidsCore.onRegister(registryManager);
-    ItemsCore.onRegister(registryManager);
-    PotionsCore.onRegister(registryManager);
-    LootTablesCore.onRegister(registryManager);
-    CommandsCore.onRegister(registryManager);
-  }
-
-  public void onClientRegister() {
-    EntitiesCore.onClientRegister(registryManager);
   }
 
   @Override
@@ -123,6 +100,16 @@ public final class ModuleCore extends ModuleBase {
   }
 
   @Override
+  public void onInit(FMLInitializationEvent event) {
+    HandlerSize.init();
+    HandlerFood.init();
+    HandlerEgg.init();
+    HandlerMetal.init();
+    HandlerHeat.init();
+    HandlerDamageResistance.init();
+  }
+
+  @Override
   public void onClientPreInit(FMLPreInitializationEvent event) {
 
     MinecraftForge.EVENT_BUS.register(new EventHandlerDebugInfo());
@@ -131,13 +118,26 @@ public final class ModuleCore extends ModuleBase {
   }
 
   @Override
-  public void onInit(FMLInitializationEvent event) {
-    HandlerSize.init();
-    HandlerFood.init();
-    HandlerEgg.init();
-    HandlerMetal.init();
-    HandlerHeat.init();
-    HandlerDamageResistance.init();
+  public void onNetworkRegister() {
+
+    PacketsCore.onRegister(packetRegistry);
+  }
+
+  @Override
+  public void onRegister() {
+
+    DataSerializersCore.onRegister(registryManager);
+    BlocksCore.onRegister(registryManager);
+    EntitiesCore.onRegister(registryManager);
+    FluidsCore.onRegister(registryManager);
+    ItemsCore.onRegister(registryManager);
+    PotionsCore.onRegister(registryManager);
+    LootTablesCore.onRegister(registryManager);
+    CommandsCore.onRegister(registryManager);
+  }
+
+  public void onClientRegister() {
+    EntitiesCore.onClientRegister(registryManager);
   }
 
   @Override

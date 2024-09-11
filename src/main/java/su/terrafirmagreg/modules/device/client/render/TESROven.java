@@ -26,7 +26,7 @@ public class TESROven extends TileEntitySpecialRenderer<TileOven> {
 
   @Override
   public void render(TileOven tile, double x, double y, double z, float partialTicks,
-      int destroyStage, float alpha) {
+          int destroyStage, float alpha) {
     super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
     if (tile.hasWorld()) {

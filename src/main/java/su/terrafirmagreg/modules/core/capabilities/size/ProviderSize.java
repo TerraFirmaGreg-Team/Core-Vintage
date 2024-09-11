@@ -17,7 +17,7 @@ import java.util.EnumMap;
 public class ProviderSize implements ICapabilitySize, ICapabilityProvider {
 
   private static final EnumMap<Size, EnumMap<Weight, ProviderSize[]>> CACHE = new EnumMap<>(
-      Size.class);
+          Size.class);
   private final Size size;
   private final Weight weight;
   private final boolean canStack;
@@ -36,12 +36,12 @@ public class ProviderSize implements ICapabilitySize, ICapabilityProvider {
 
   public static ProviderSize getDefault() {
     return get(Size.SMALL, Weight.LIGHT,
-        true); // Default to fitting in small vessels and stacksize = 32
+            true); // Default to fitting in small vessels and stacksize = 32
   }
 
   public static ProviderSize get(Size size, Weight weight, boolean canStack) {
     EnumMap<Weight, ProviderSize[]> nested = CACHE.computeIfAbsent(size,
-        k -> new EnumMap<>(Weight.class));
+            k -> new EnumMap<>(Weight.class));
     ProviderSize[] handlers = nested.computeIfAbsent(weight, k -> new ProviderSize[2]);
     if (handlers[canStack ? 1 : 0] == null) {
       handlers[canStack ? 1 : 0] = new ProviderSize(size, weight, canStack);
@@ -50,18 +50,13 @@ public class ProviderSize implements ICapabilitySize, ICapabilityProvider {
   }
 
   @Override
-  public @NotNull Size getSize(@NotNull ItemStack stack) {
-    return this.size;
-  }
-
-  @Override
   public @NotNull Weight getWeight(@NotNull ItemStack stack) {
     return this.weight;
   }
 
   @Override
-  public boolean canStack(@NotNull ItemStack stack) {
-    return canStack;
+  public @NotNull Size getSize(@NotNull ItemStack stack) {
+    return this.size;
   }
 
   /**
@@ -70,6 +65,11 @@ public class ProviderSize implements ICapabilitySize, ICapabilityProvider {
   @Override
   public int getStackSize(@NotNull ItemStack stack) {
     return this.canStack ? this.weight.stackSize : 1;
+  }
+
+  @Override
+  public boolean canStack(@NotNull ItemStack stack) {
+    return canStack;
   }
 
   @Override

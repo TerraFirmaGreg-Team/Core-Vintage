@@ -98,20 +98,8 @@ public class TileSmelteryCauldron extends BaseTileInventory
     }
   }
 
-  /*
-   * For visuals only
-   */
-  public FluidStack getFluid() {
-    return tank.drain(FLUID_CAPACITY, false);
-  }
-
   public float getTemp() {
     return temp;
-  }
-
-  public boolean isSolidified() {
-    FluidStack fluid = getFluid();
-    return fluid != null && temp + 273 < fluid.getFluid().getTemperature();
   }
 
   @Override
@@ -122,6 +110,18 @@ public class TileSmelteryCauldron extends BaseTileInventory
   @Override
   public boolean canDrain(EnumFacing enumFacing) {
     return !isSolidified();
+  }
+
+  public boolean isSolidified() {
+    FluidStack fluid = getFluid();
+    return fluid != null && temp + 273 < fluid.getFluid().getTemperature();
+  }
+
+  /*
+   * For visuals only
+   */
+  public FluidStack getFluid() {
+    return tank.drain(FLUID_CAPACITY, false);
   }
 
   @Override
@@ -182,6 +182,17 @@ public class TileSmelteryCauldron extends BaseTileInventory
   }
 
   @Override
+  public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
+    float temp = TileCrucible.FIELD_TEMPERATURE;
+    float change = temp / 120f;
+    float potency = temp / 370f;
+    if (ModifierTile.hasProtection(player)) {
+      change = change * 0.3f;
+    }
+    return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
+  }
+
+  @Override
   public ContainerSmelteryCauldron getContainer(InventoryPlayer inventoryPlayer, World world,
           IBlockState state, BlockPos pos) {
     return new ContainerSmelteryCauldron(inventoryPlayer, this);
@@ -194,14 +205,5 @@ public class TileSmelteryCauldron extends BaseTileInventory
             inventoryPlayer, this);
   }
 
-  @Override
-  public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
-    float temp = TileCrucible.FIELD_TEMPERATURE;
-    float change = temp / 120f;
-    float potency = temp / 370f;
-    if (ModifierTile.hasProtection(player)) {
-      change = change * 0.3f;
-    }
-    return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
-  }
+
 }

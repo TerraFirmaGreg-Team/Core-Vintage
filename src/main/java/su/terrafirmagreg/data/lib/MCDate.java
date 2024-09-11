@@ -17,17 +17,17 @@ public class MCDate {
    * An array of all the days in a week.
    */
   public static final String[] NAMES_DAYS = {
-      "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"
+          "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"
   };
 
   /**
    * An array of all the months in a year.
    */
   public static final String[] NAMES_MONTHS = {
-      "january", "february", "march",
-      "april", "may", "june",
-      "july", "august", "september",
-      "october", "november", "december"
+          "january", "february", "march",
+          "april", "may", "june",
+          "july", "august", "september",
+          "october", "november", "december"
   };
 
   /**
@@ -108,16 +108,6 @@ public class MCDate {
   }
 
   /**
-   * Gets the name of the represented day in a week.
-   *
-   * @return The represented day of the week.
-   */
-  public String getDayName() {
-
-    return NAMES_DAYS[(int) this.day];
-  }
-
-  /**
    * Gets the localized day name.
    *
    * @return The localized day name.
@@ -129,13 +119,13 @@ public class MCDate {
   }
 
   /**
-   * Gets the name of the represented month.
+   * Gets the name of the represented day in a week.
    *
-   * @return The name of the represented month.
+   * @return The represented day of the week.
    */
-  public String getMonthName() {
+  public String getDayName() {
 
-    return NAMES_MONTHS[this.month];
+    return NAMES_DAYS[(int) this.day];
   }
 
   /**
@@ -147,5 +137,15 @@ public class MCDate {
   public String getLocalizedMonthName() {
 
     return I18n.format("time.tfg.month." + this.getMonthName() + ".name");
+  }
+
+  /**
+   * Gets the name of the represented month.
+   *
+   * @return The name of the represented month.
+   */
+  public String getMonthName() {
+
+    return NAMES_MONTHS[this.month];
   }
 }

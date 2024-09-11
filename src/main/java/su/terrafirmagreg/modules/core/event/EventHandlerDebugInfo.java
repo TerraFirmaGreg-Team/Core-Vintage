@@ -80,9 +80,9 @@ public class EventHandlerDebugInfo {
     var averageTemp = String.format("%s%.1f" + DEGREE + "C", AQUA, data.getAverageTemp());
 
     var minTemp = String.format("%s%.1f" + DEGREE + "C", AQUA,
-        ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JANUARY.getTemperatureModifier(), blockPos.getZ()));
+            ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JANUARY.getTemperatureModifier(), blockPos.getZ()));
     var maxTemp = String.format("%s%.1f" + DEGREE + "C", AQUA,
-        ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JULY.getTemperatureModifier(), blockPos.getZ()));
+            ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JULY.getTemperatureModifier(), blockPos.getZ()));
 
     var monthlyTemp = String.format("%s%.1f", AQUA, Climate.getMonthlyTemp(blockPos));
     var actualTemp = String.format("%s%.1f", AQUA, Climate.getActualTemp(blockPos));

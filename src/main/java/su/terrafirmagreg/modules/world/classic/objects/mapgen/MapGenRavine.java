@@ -32,7 +32,7 @@ public class MapGenRavine extends MapGenBase {
 
   @Override
   protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int originalX,
-      int originalZ, ChunkPrimer primer) {
+          int originalZ, ChunkPrimer primer) {
     if (ravineRarity > 0 && rand.nextInt(ravineRarity) == 0) {
       double startX = chunkX * 16 + rand.nextInt(16);
       double startY = rand.nextInt(variability) + height;
@@ -42,13 +42,13 @@ public class MapGenRavine extends MapGenBase {
       float angleX = (rand.nextFloat() * 2.0F + rand.nextFloat()) * 2.0F;
       double scaleY = 1.2 + rand.nextFloat() + rand.nextFloat();
       generateRavine(rand.nextLong(), originalX, originalZ, primer, startX, startY, startZ, angleX,
-          angleY, angleZ, scaleY);
+              angleY, angleZ, scaleY);
     }
   }
 
   private void generateRavine(long seed, int chunkX, int chunkZ, ChunkPrimer primer, double xCoord,
-      double yCoord, double zCoord, float angleX,
-      float angleY, float angleZ, double yScale) {
+          double yCoord, double zCoord, float angleX,
+          float angleY, float angleZ, double yScale) {
     final Random RNG = new Random(seed);
     final double chunkMidX = chunkX * 16 + 8;
     final double chunkMidZ = chunkZ * 16 + 8;
@@ -71,7 +71,7 @@ public class MapGenRavine extends MapGenBase {
     outer:
     for (int round = 0; round < rounds; ++round) {
       final double min = (1.5D + MathHelper.sin(round * MathConstants.PI / rounds) * angleX * 1.0F)
-          * RNG.nextFloat() * 0.25D + 0.75D;
+              * RNG.nextFloat() * 0.25D + 0.75D;
       final double max = (min * yScale) * RNG.nextFloat() * 0.25D + 0.75D;
       final float cosZ = MathHelper.cos(angleZ);
       final float sinZ = MathHelper.sin(angleZ);
@@ -102,9 +102,9 @@ public class MapGenRavine extends MapGenBase {
       }
 
       if (!(xCoord >= chunkMidX - 16.0D - min * 2.0D &&
-          zCoord >= chunkMidZ - 16.0D - min * 2.0D &&
-          xCoord <= chunkMidX + 16.0D + min * 2.0D &&
-          zCoord <= chunkMidZ + 16.0D + min * 2.0D)) {
+              zCoord >= chunkMidZ - 16.0D - min * 2.0D &&
+              xCoord <= chunkMidX + 16.0D + min * 2.0D &&
+              zCoord <= chunkMidZ + 16.0D + min * 2.0D)) {
         continue;
       }
 
@@ -158,7 +158,7 @@ public class MapGenRavine extends MapGenBase {
             final double yNormalized = (y + 0.5D - yCoord) / max;
 
             if (!((xNormalized * xNormalized + zNormalized * zNormalized) * multipliers[y]
-                + yNormalized * yNormalized / 6.0D < 1.0D)) {
+                    + yNormalized * yNormalized / 6.0D < 1.0D)) {
               continue;
             }
             if (!BlockUtils.isGround(primer.getBlockState(x, y, z))) {
@@ -166,12 +166,12 @@ public class MapGenRavine extends MapGenBase {
             }
 
             for (int upCount = 1;
-                BlockUtils.isSoilOrGravel(primer.getBlockState(x, y + upCount, z)); upCount++) {
+                    BlockUtils.isSoilOrGravel(primer.getBlockState(x, y + upCount, z)); upCount++) {
               primer.setBlockState(x, y + upCount, z, AIR);
             }
 
             primer.setBlockState(x, y, z,
-                y < 20 /*todo: make option, was 10*/ ? LAVA : AIR); // todo: check stability?
+                    y < 20 /*todo: make option, was 10*/ ? LAVA : AIR); // todo: check stability?
           }
         }
       }

@@ -28,7 +28,7 @@ public final class ProviderLatexExtractor implements IProbeInfoProvider {
 
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
-      IBlockState state, IProbeHitData hitData) {
+          IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
 
@@ -40,10 +40,10 @@ public final class ProviderLatexExtractor implements IProbeInfoProvider {
 
       if (tile.getFluidAmount() > 0) {
         IProbeInfo horizontalPane = info.horizontal(
-            info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
+                info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
         horizontalPane.text(
-            new TextComponentTranslation(ModUtils.localize("top", "device.latex.quantity"),
-                tile.getFluidAmount()).getFormattedText());
+                new TextComponentTranslation(ModUtils.localize("top", "device.latex.quantity"),
+                        tile.getFluidAmount()).getFormattedText());
       }
     }
   }

@@ -23,9 +23,9 @@ public class GenLayerAddPH extends GenLayerBase {
 
     for (int var11 = 0; var11 < zSize; ++var11) {
       for (int var12 = 0; var12 < xSize; ++var12) {
-        int id0 = inCache[var12 + 0 + (var11 + 0) * var7];
-        int id1 = inCache[var12 + 2 + (var11 + 0) * var7];
-        int id2 = inCache[var12 + 0 + (var11 + 2) * var7];
+        int id0 = inCache[var12 + (var11) * var7];
+        int id1 = inCache[var12 + 2 + (var11) * var7];
+        int id2 = inCache[var12 + (var11 + 2) * var7];
         int id3 = inCache[var12 + 2 + (var11 + 2) * var7];
         int thisID = inCache[var12 + 1 + (var11 + 1) * var7];
         this.initChunkSeed(var12 + xCoord, var11 + zCoord);

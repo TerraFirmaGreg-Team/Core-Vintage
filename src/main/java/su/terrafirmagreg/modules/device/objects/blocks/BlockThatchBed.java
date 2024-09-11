@@ -41,25 +41,25 @@ public class BlockThatchBed extends BlockBed implements IBlockSettings {
   public BlockThatchBed() {
 
     this.settings = Settings.of(Material.CLOTH)
-        .registryKey("device/thatch_bed")
-        .ignoresProperties(OCCUPIED)
-        .sound(SoundType.CLOTH)
-        .hardness(0.6F);
+            .registryKey("device/thatch_bed")
+            .ignoresProperties(OCCUPIED)
+            .sound(SoundType.CLOTH)
+            .hardness(0.6F);
 
     BlockUtils.setFireInfo(this, 60, 20);
   }
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-      EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-      float hitX, float hitY, float hitZ) {
+          EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+          float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       playerIn.setSpawnPoint(pos, false);
       playerIn.sendMessage(
-          new TextComponentTranslation(ModUtils.localize("thatch_bed.spawnpoint")));
+              new TextComponentTranslation(ModUtils.localize("thatch_bed.spawnpoint")));
       if (!worldIn.isThundering()) {
         playerIn.sendStatusMessage(
-            new TextComponentTranslation(ModUtils.localize("thatch_bed.not_thundering")), true);
+                new TextComponentTranslation(ModUtils.localize("thatch_bed.not_thundering")), true);
         return true;
       }
     }
@@ -68,14 +68,14 @@ public class BlockThatchBed extends BlockBed implements IBlockSettings {
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-      BlockPos fromPos) {
+          BlockPos fromPos) {
     EnumFacing enumfacing = state.getValue(FACING);
     if (state.getValue(PART) == EnumPartType.FOOT) {
       if (!(worldIn.getBlockState(pos.offset(enumfacing)).getBlock() instanceof BlockThatchBed)) {
         worldIn.setBlockToAir(pos);
       }
     } else if (!(worldIn.getBlockState(pos.offset(enumfacing))
-        .getBlock() instanceof BlockThatchBed)) {
+            .getBlock() instanceof BlockThatchBed)) {
       if (!worldIn.isRemote) {
         this.dropBlockAsItem(worldIn, pos, state, 0);
       }
@@ -91,10 +91,10 @@ public class BlockThatchBed extends BlockBed implements IBlockSettings {
 
   @Override
   public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state,
-      float chance, int fortune) {
+          float chance, int fortune) {
     if (state.getValue(PART) == EnumPartType.HEAD) {
       spawnAsEntity(worldIn, pos, new ItemStack(
-          ItemAnimalHide.get(ItemAnimalHide.HideType.RAW, ItemAnimalHide.HideSize.LARGE)));
+              ItemAnimalHide.get(ItemAnimalHide.HideType.RAW, ItemAnimalHide.HideSize.LARGE)));
       spawnAsEntity(worldIn, pos, new ItemStack(BlocksCore.THATCH, 2));
     }
   }
@@ -111,14 +111,9 @@ public class BlockThatchBed extends BlockBed implements IBlockSettings {
 
   @Override
   public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
-      TileEntity tile, ItemStack stack) {
+          TileEntity tile, ItemStack stack) {
     super.harvestBlock(worldIn, player, pos, state, null,
-        stack); //Force vanilla to use #dropBlockAsItemWithChance
-  }
-
-  @Override
-  public boolean hasTileEntity(IBlockState state) {
-    return false;
+            stack); //Force vanilla to use #dropBlockAsItemWithChance
   }
 
   @Nullable
@@ -128,8 +123,13 @@ public class BlockThatchBed extends BlockBed implements IBlockSettings {
   }
 
   @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return false;
+  }
+
+  @Override
   public boolean isBed(IBlockState state, IBlockAccess world, BlockPos pos,
-      @Nullable Entity player) {
+          @Nullable Entity player) {
     return true;
   }
 

@@ -71,6 +71,14 @@ public abstract class ContainerBaseKnapping extends BaseContainerItemStack imple
     }
   }
 
+  private KnappingRecipe getMatchingRecipe() {
+    return TFCRegistries.KNAPPING.getValuesCollection()
+            .stream()
+            .filter(x -> x.getType() == type && matrix.matches(x.getMatrix()))
+            .findFirst()
+            .orElse(null);
+  }
+
   @Override
   public void onContainerClosed(EntityPlayer player) {
     Slot slot = inventorySlots.get(0);
@@ -82,6 +90,18 @@ public abstract class ContainerBaseKnapping extends BaseContainerItemStack imple
       }
     }
     super.onContainerClosed(player);
+  }
+
+  private void consumeIngredientStackAfterComplete() {
+    if (type.consumeAfterComplete() && !hasConsumedIngredient) {
+      ItemStack stack = StackUtils.consumeItem(this.stack, type.getAmountToConsume());
+      if (isOffhand) {
+        player.setHeldItem(EnumHand.OFF_HAND, stack);
+      } else {
+        player.setHeldItem(EnumHand.MAIN_HAND, stack);
+      }
+      hasConsumedIngredient = true;
+    }
   }
 
   /**
@@ -128,25 +148,5 @@ public abstract class ContainerBaseKnapping extends BaseContainerItemStack imple
     matrix.setAll(false);
     requiresReset = true;
     consumeIngredientStackAfterComplete();
-  }
-
-  private KnappingRecipe getMatchingRecipe() {
-    return TFCRegistries.KNAPPING.getValuesCollection()
-            .stream()
-            .filter(x -> x.getType() == type && matrix.matches(x.getMatrix()))
-            .findFirst()
-            .orElse(null);
-  }
-
-  private void consumeIngredientStackAfterComplete() {
-    if (type.consumeAfterComplete() && !hasConsumedIngredient) {
-      ItemStack stack = StackUtils.consumeItem(this.stack, type.getAmountToConsume());
-      if (isOffhand) {
-        player.setHeldItem(EnumHand.OFF_HAND, stack);
-      } else {
-        player.setHeldItem(EnumHand.MAIN_HAND, stack);
-      }
-      hasConsumedIngredient = true;
-    }
   }
 }

@@ -32,8 +32,8 @@ import static su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil.BUTTON_ID
 import static su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil.BUTTON_ID_STEP_MIN;
 
 public class ContainerMetalAnvil
-    extends BaseContainerTile<TileMetalAnvil>
-    implements IButtonHandler {
+        extends BaseContainerTile<TileMetalAnvil>
+        implements IButtonHandler {
 
   public ContainerMetalAnvil(InventoryPlayer playerInv, TileMetalAnvil tile) {
     super(playerInv, tile, 26);
@@ -56,25 +56,6 @@ public class ContainerMetalAnvil
         }
       }
     }
-  }
-
-  @Override
-  protected void addContainerSlots() {
-    IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-        null);
-    if (inventory != null) {
-      addSlotToContainer(new SlotCallback(inventory, TileMetalAnvil.SLOT_INPUT_1, 31, 68, tile));
-      addSlotToContainer(new SlotCallback(inventory, TileMetalAnvil.SLOT_INPUT_2, 13, 68, tile));
-      addSlotToContainer(new SlotCallback(inventory, TileMetalAnvil.SLOT_HAMMER, 129, 68, tile));
-      addSlotToContainer(new SlotCallback(inventory, TileMetalAnvil.SLOT_FLUX, 147, 68, tile));
-    }
-  }
-
-  @Override
-  protected boolean transferStackIntoContainer(ItemStack stack, int containerSlots) {
-    return !mergeItemStack(stack, TileMetalAnvil.SLOT_FLUX, TileMetalAnvil.SLOT_FLUX + 1, false) &&
-        !mergeItemStack(stack, TileMetalAnvil.SLOT_HAMMER, TileMetalAnvil.SLOT_HAMMER + 1, false) &&
-        !mergeItemStack(stack, TileMetalAnvil.SLOT_INPUT_1, TileMetalAnvil.SLOT_INPUT_2 + 1, false);
   }
 
   private boolean attemptWork() {
@@ -107,7 +88,7 @@ public class ContainerMetalAnvil
 
     if (!cap.isWorkable()) {
       player.sendMessage(
-          new TextComponentTranslation(ModUtils.localize("tooltip", "anvil_too_cold")));
+              new TextComponentTranslation(ModUtils.localize("tooltip", "anvil_too_cold")));
       return false;
     }
 
@@ -133,9 +114,28 @@ public class ContainerMetalAnvil
         return true;
       } else {
         player.sendMessage(new TextComponentString("" + TextFormatting.RED).appendSibling(
-            new TextComponentTranslation(ModUtils.localize("tooltip", "anvil_no_hammer"))));
+                new TextComponentTranslation(ModUtils.localize("tooltip", "anvil_no_hammer"))));
         return false;
       }
     }
+  }
+
+  @Override
+  protected void addContainerSlots() {
+    IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
+            null);
+    if (inventory != null) {
+      addSlotToContainer(new SlotCallback(inventory, TileMetalAnvil.SLOT_INPUT_1, 31, 68, tile));
+      addSlotToContainer(new SlotCallback(inventory, TileMetalAnvil.SLOT_INPUT_2, 13, 68, tile));
+      addSlotToContainer(new SlotCallback(inventory, TileMetalAnvil.SLOT_HAMMER, 129, 68, tile));
+      addSlotToContainer(new SlotCallback(inventory, TileMetalAnvil.SLOT_FLUX, 147, 68, tile));
+    }
+  }
+
+  @Override
+  protected boolean transferStackIntoContainer(ItemStack stack, int containerSlots) {
+    return !mergeItemStack(stack, TileMetalAnvil.SLOT_FLUX, TileMetalAnvil.SLOT_FLUX + 1, false) &&
+            !mergeItemStack(stack, TileMetalAnvil.SLOT_HAMMER, TileMetalAnvil.SLOT_HAMMER + 1, false) &&
+            !mergeItemStack(stack, TileMetalAnvil.SLOT_INPUT_1, TileMetalAnvil.SLOT_INPUT_2 + 1, false);
   }
 }

@@ -37,7 +37,7 @@ public class GeneratorSurfaceTwig implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
     final var baseChunkData = CapabilityChunkData.get(world, chunkBlockPos);
 
@@ -48,9 +48,9 @@ public class GeneratorSurfaceTwig implements IWorldGenerator {
 
       for (int i = 0; i < ConfigTFCF.General.WORLD.groundcoverTwigFrequency * factor; i++) {
         BlockPos pos = new BlockPos(
-            xoff + random.nextInt(16),
-            0,
-            zoff + random.nextInt(16)
+                xoff + random.nextInt(16),
+                0,
+                zoff + random.nextInt(16)
         );
         generateRock(world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()));
       }
@@ -61,9 +61,9 @@ public class GeneratorSurfaceTwig implements IWorldGenerator {
     var data = CapabilityChunkData.get(world, pos);
     if (pos.getY() > 146 && pos.getY() < 170 && data.getRainfall() >= 75) {
       if (world.isAirBlock(pos) && world.getBlockState(pos.down())
-          .isSideSolid(world, pos.down(), EnumFacing.UP)) {
+              .isSideSolid(world, pos.down(), EnumFacing.UP)) {
         if (BlockUtils.isSoil(world.getBlockState(pos.down())) ||
-            BlockUtils.isGround(world.getBlockState(pos.down()))) {
+                BlockUtils.isGround(world.getBlockState(pos.down()))) {
           world.setBlockState(pos, BlocksTFCF.TWIG.getDefaultState());
         }
       }

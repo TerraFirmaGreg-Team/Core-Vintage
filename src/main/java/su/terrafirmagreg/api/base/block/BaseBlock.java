@@ -38,8 +38,13 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
   }
 
   @Override
-  public boolean isOpaqueCube(IBlockState state) {
-    return this.settings == null || this.settings.isOpaque();
+  public boolean getUseNeighborBrightness(IBlockState state) {
+    return getSettings().isUseNeighborBrightness();
+  }
+
+  @Override
+  public boolean causesSuffocation(IBlockState state) {
+    return this.settings.getIsSuffocating().test(state);
   }
 
   @Override
@@ -48,23 +53,45 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
   }
 
   @Override
-  public boolean isCollidable() {
-    return this.settings.isCollidable();
-  }
-
-  @Override
-  public SoundType getSoundType() {
-    return this.settings.getSoundType();
-  }
-
-  @Override
   public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
     return this.settings.isReplaceable() || super.isReplaceable(worldIn, pos);
   }
 
   @Override
+  public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+    return this.settings.getHardness().apply(blockState, worldIn, pos);
+  }
+
+  @Override
+  public boolean getTickRandomly() {
+    return this.settings.isTicksRandomly();
+  }
+
+  @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face) {
     return isOpaqueCube(state) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+  }
+
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
+          BlockPos pos) {
+    return this.settings.isCollidable() ? super.getCollisionBoundingBox(blockState, worldIn, pos)
+            : NULL_AABB;
+  }
+
+  @Override
+  public boolean isOpaqueCube(IBlockState state) {
+    return this.settings == null || this.settings.isOpaque();
+  }
+
+  @Override
+  public boolean isCollidable() {
+    return this.settings.isCollidable();
+  }
+
+  @Override
+  public float getExplosionResistance(Entity exploder) {
+    return this.settings.getResistance() / 5.0F;
   }
 
   @Override
@@ -74,34 +101,14 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
   }
 
   @Override
-  public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
-    return this.settings.getHardness().apply(blockState, worldIn, pos);
-  }
-
-  @Override
-  public float getExplosionResistance(Entity exploder) {
-    return this.settings.getResistance() / 5.0F;
-  }
-
-  @Override
-  public boolean isAir(IBlockState state, IBlockAccess world, BlockPos pos) {
-    return this.settings.isAir();
-  }
-
-  @Override
-  public boolean causesSuffocation(IBlockState state) {
-    return this.settings.getIsSuffocating().test(state);
-  }
-
-  @Override
   public String getTranslationKey() {
     return this.settings.getTranslationKey() == null ? super.getTranslationKey()
             : "tile." + this.settings.getTranslationKey();
   }
 
   @Override
-  public boolean getUseNeighborBrightness(IBlockState state) {
-    return getSettings().isUseNeighborBrightness();
+  public SoundType getSoundType() {
+    return this.settings.getSoundType();
   }
 
   @Override
@@ -116,20 +123,8 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
   }
 
   @Override
-  public Item asItem() {
-    return Item.getItemFromBlock(this);
-  }
-
-  @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-          BlockPos pos) {
-    return this.settings.isCollidable() ? super.getCollisionBoundingBox(blockState, worldIn, pos)
-            : NULL_AABB;
-  }
-
-  @Override
-  public boolean getTickRandomly() {
-    return this.settings.isTicksRandomly();
+  public boolean isAir(IBlockState state, IBlockAccess world, BlockPos pos) {
+    return this.settings.isAir();
   }
 
   @Override
@@ -143,8 +138,8 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
   }
 
   @Override
-  public boolean getHasItemSubtypes() {
-    return this.settings.isHasItemSubtypes();
+  public Weight getWeight(ItemStack stack) {
+    return this.settings.getWeight();
   }
 
   @Override
@@ -153,13 +148,18 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
   }
 
   @Override
-  public Weight getWeight(ItemStack stack) {
-    return this.settings.getWeight();
+  public boolean canStack(ItemStack stack) {
+    return this.settings.isCanStack();
   }
 
   @Override
-  public boolean canStack(ItemStack stack) {
-    return this.settings.isCanStack();
+  public boolean getHasItemSubtypes() {
+    return this.settings.isHasItemSubtypes();
+  }
+
+  @Override
+  public Item asItem() {
+    return Item.getItemFromBlock(this);
   }
 
 }

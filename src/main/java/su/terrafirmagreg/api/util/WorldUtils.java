@@ -92,18 +92,6 @@ public final class WorldUtils {
   }
 
   /**
-   * Checks if the dimension type of a world matches the provided dimension type.
-   *
-   * @param world The world to check.
-   * @param type  The dimension type you are looking for.
-   * @return Whether or not they are the same.
-   */
-  public static boolean isDimension(World world, DimensionType type) {
-
-    return getDimensionType(world) == type;
-  }
-
-  /**
    * Gets the dimension id of a world.
    *
    * @param world The world you are looking into.
@@ -123,6 +111,18 @@ public final class WorldUtils {
   public static DimensionType getDimensionType(World world) {
 
     return world.provider.getDimensionType();
+  }
+
+  /**
+   * Checks if the dimension type of a world matches the provided dimension type.
+   *
+   * @param world The world to check.
+   * @param type  The dimension type you are looking for.
+   * @return Whether or not they are the same.
+   */
+  public static boolean isDimension(World world, DimensionType type) {
+
+    return getDimensionType(world) == type;
   }
 
   public static double getTPS(World world, int dimId) {

@@ -336,12 +336,18 @@ public class ModelAnimalWildebeest extends ModelBase {
     thighRBackAnkle.addChild(thighRBackHoof);
   }
 
+  public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    modelRenderer.rotateAngleX = x;
+    modelRenderer.rotateAngleY = y;
+    modelRenderer.rotateAngleZ = z;
+  }
+
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount,
-      float ageInTicks, float netHeadYaw, float headPitch,
-      float scale) {
+          float ageInTicks, float netHeadYaw, float headPitch,
+          float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-        entity);
+            entity);
 
     if (((EntityAnimal) entity).isChild()) {
       double ageScale = 1;
@@ -373,29 +379,23 @@ public class ModelAnimalWildebeest extends ModelBase {
 
   @Override
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks,
-      float netHeadYaw, float headPitch, float scaleFactor,
-      Entity entityIn) {
+          float netHeadYaw, float headPitch, float scaleFactor,
+          Entity entityIn) {
     {
       headBase.rotateAngleX = headPitch / (180F / MathConstants.PI);
       headBase.rotateAngleY = netHeadYaw / (180F / MathConstants.PI);
 
       legRFront.rotateAngleX =
-          MathHelper.cos(limbSwing * 0.4662F) * 0.8F * limbSwingAmount + 0.3490658503988659F;
+              MathHelper.cos(limbSwing * 0.4662F) * 0.8F * limbSwingAmount + 0.3490658503988659F;
       legLFront.rotateAngleX =
-          MathHelper.cos(limbSwing * 0.4662F + MathConstants.PI) * 0.8F * limbSwingAmount
-              + 0.3490658503988659F;
+              MathHelper.cos(limbSwing * 0.4662F + MathConstants.PI) * 0.8F * limbSwingAmount
+                      + 0.3490658503988659F;
       thighRBack.rotateAngleX =
-          MathHelper.cos(limbSwing * 0.4662F + MathConstants.PI) * 0.8F * limbSwingAmount
-              + -0.17453292519943295F;
+              MathHelper.cos(limbSwing * 0.4662F + MathConstants.PI) * 0.8F * limbSwingAmount
+                      + -0.17453292519943295F;
       thighLBack.rotateAngleX =
-          MathHelper.cos(limbSwing * 0.4662F) * 0.8F * limbSwingAmount + -0.17453292519943295F;
+              MathHelper.cos(limbSwing * 0.4662F) * 0.8F * limbSwingAmount + -0.17453292519943295F;
     }
-  }
-
-  public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-    modelRenderer.rotateAngleX = x;
-    modelRenderer.rotateAngleY = y;
-    modelRenderer.rotateAngleZ = z;
   }
 
 }

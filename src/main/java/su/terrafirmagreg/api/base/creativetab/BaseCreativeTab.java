@@ -30,12 +30,12 @@ public class BaseCreativeTab extends CreativeTabs {
     }
   }
 
-  public static BaseCreativeTab of(String TabName, String iconSupplier, boolean hasSearchBar) {
-    return new BaseCreativeTab(TabName, ModUtils.resource(iconSupplier), hasSearchBar);
-  }
-
   public static BaseCreativeTab of(String TabName, String iconSupplier) {
     return BaseCreativeTab.of(TabName, iconSupplier, false);
+  }
+
+  public static BaseCreativeTab of(String TabName, String iconSupplier, boolean hasSearchBar) {
+    return new BaseCreativeTab(TabName, ModUtils.resource(iconSupplier), hasSearchBar);
   }
 
   @NotNull
@@ -54,7 +54,7 @@ public class BaseCreativeTab extends CreativeTabs {
 
     if (stack.isEmpty()) {
       TerraFirmaGreg.LOGGER.error("Icon built from iconSupplied is EMPTY for CreativeTab {}",
-          getTabLabel());
+              getTabLabel());
       return new ItemStack(Items.STICK);
     }
 

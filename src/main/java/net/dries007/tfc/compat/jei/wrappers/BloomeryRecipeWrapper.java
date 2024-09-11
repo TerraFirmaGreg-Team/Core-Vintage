@@ -15,33 +15,33 @@ import java.util.List;
 
 public class BloomeryRecipeWrapper implements IRecipeWrapper {
 
-    private final List<ItemStack> ingredients;
-    private final List<ItemStack> additives;
-    private final ItemStack output;
+  private final List<ItemStack> ingredients;
+  private final List<ItemStack> additives;
+  private final ItemStack output;
 
-    public BloomeryRecipeWrapper(BloomeryRecipe recipe) {
-        ingredients = new ArrayList<>();
-        additives = new ArrayList<>();
-        // Although this looks resource-intensive, it's done one time only
-        TFCJEIPlugin.getAllIngredients().forEach(stack -> {
-            if (recipe.isValidInput(stack)) {
-                ingredients.add(stack);
-            } else if (recipe.isValidAdditive(stack)) {
-                additives.add(stack);
-            }
-        });
-        output = recipe.getOutput();
-    }
+  public BloomeryRecipeWrapper(BloomeryRecipe recipe) {
+    ingredients = new ArrayList<>();
+    additives = new ArrayList<>();
+    // Although this looks resource-intensive, it's done one time only
+    TFCJEIPlugin.getAllIngredients().forEach(stack -> {
+      if (recipe.isValidInput(stack)) {
+        ingredients.add(stack);
+      } else if (recipe.isValidAdditive(stack)) {
+        additives.add(stack);
+      }
+    });
+    output = recipe.getOutput();
+  }
 
-    @Override
-    public void getIngredients(IIngredients recipeIngredients) {
-        List<List<ItemStack>> allInputs = new ArrayList<>();
-        allInputs.add(ingredients);
-        allInputs.add(additives);
-        recipeIngredients.setInputLists(VanillaTypes.ITEM, allInputs);
+  @Override
+  public void getIngredients(IIngredients recipeIngredients) {
+    List<List<ItemStack>> allInputs = new ArrayList<>();
+    allInputs.add(ingredients);
+    allInputs.add(additives);
+    recipeIngredients.setInputLists(VanillaTypes.ITEM, allInputs);
 
-        List<List<ItemStack>> allOutputs = new ArrayList<>();
-        allOutputs.add(Lists.newArrayList(output));
-        recipeIngredients.setOutputLists(VanillaTypes.ITEM, allOutputs);
-    }
+    List<List<ItemStack>> allOutputs = new ArrayList<>();
+    allOutputs.add(Lists.newArrayList(output));
+    recipeIngredients.setOutputLists(VanillaTypes.ITEM, allOutputs);
+  }
 }

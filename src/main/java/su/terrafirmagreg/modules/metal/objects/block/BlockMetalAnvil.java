@@ -136,12 +136,6 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
     return state.getValue(HORIZONTAL).getAxis() == EnumFacing.Axis.X ? AABB_Z : AABB_X;
   }
 
-  @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-          EnumFacing face) {
-    return BlockFaceShape.UNDEFINED;
-  }
-
   @SideOnly(Side.CLIENT)
   @Override
   public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
@@ -246,6 +240,12 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
           EntityPlayer player) {
     return new ItemStack(BlocksMetal.ANVIL.get(type));
+  }
+
+  @Override
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
+          EnumFacing face) {
+    return BlockFaceShape.UNDEFINED;
   }
 
   @Override

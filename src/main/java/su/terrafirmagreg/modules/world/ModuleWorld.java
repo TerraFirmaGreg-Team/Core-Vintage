@@ -31,13 +31,6 @@ public final class ModuleWorld extends ModuleBase {
   }
 
   @Override
-  public void onRegister() {
-
-    BiomesWorld.onRegister(registryManager);
-    //GeneratorWorld.onRegister(registryManager);
-  }
-
-  @Override
   public void onPreInit(FMLPreInitializationEvent event) {
     // Get the debug world field so we can change the value. We need to replace this
     // field specifically, because vanilla hardcodes for it everywhere.
@@ -48,6 +41,13 @@ public final class ModuleWorld extends ModuleBase {
     InjectorUtils.setFinalStaticFieldWithReflection(WorldType.class, "field_180272_g", null);
     // Sets the world type to the new type.
     InjectorUtils.setFinalStaticFieldWithReflection(WorldType.class, "field_180272_g", new WorldTypeDebug());
+  }
+
+  @Override
+  public void onRegister() {
+
+    BiomesWorld.onRegister(registryManager);
+    //GeneratorWorld.onRegister(registryManager);
   }
 
   @Override

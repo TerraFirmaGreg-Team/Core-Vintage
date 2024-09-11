@@ -34,7 +34,7 @@ public class ProviderCrucible implements IProbeInfoProvider {
 
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
-      IBlockState state, IProbeHitData hitData) {
+          IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
 
@@ -53,9 +53,9 @@ public class ProviderCrucible implements IProbeInfoProvider {
       if (amount > 0) {
         Metal metal = tile.getAlloyResult();
         currentTooltip.add(
-            new TextComponentTranslation(ModUtils.localize("top", "metal.output"), amount,
-                new TextComponentTranslation(
-                    metal.getTranslationKey()).getFormattedText()).getFormattedText());
+                new TextComponentTranslation(ModUtils.localize("top", "metal.output"), amount,
+                        new TextComponentTranslation(
+                                metal.getTranslationKey()).getFormattedText()).getFormattedText());
       }
       float temperature = nbt.getFloat("temp");
       String heatTooltip = Heat.getTooltip(temperature);
@@ -65,7 +65,7 @@ public class ProviderCrucible implements IProbeInfoProvider {
 
       for (String string : currentTooltip) {
         info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-            .text(string);
+                .text(string);
       }
 
     }

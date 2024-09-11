@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.container;
 
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -21,65 +21,65 @@ import org.jetbrains.annotations.NotNull;
 
 public class ContainerLiquidTransfer extends ContainerItemStack implements ISlotCallback {
 
-    private IItemHandlerModifiable inventory;
+  private IItemHandlerModifiable inventory;
 
-    public ContainerLiquidTransfer(InventoryPlayer playerInv, ItemStack stack) {
-        super(playerInv, stack);
-        this.itemIndex += 1;
-    }
+  public ContainerLiquidTransfer(InventoryPlayer playerInv, ItemStack stack) {
+    super(playerInv, stack);
+    this.itemIndex += 1;
+  }
 
-    @Override
-    public void detectAndSendChanges() {
-        // This is where we transfer liquid metal into a mold
-        IFluidHandler capFluidHandler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (capFluidHandler instanceof IMoldHandler) {
-            ItemStack outputStack = inventory.getStackInSlot(0);
-            if (!outputStack.isEmpty()) {
-                IFluidHandler outFluidHandler = outputStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-                if (outFluidHandler instanceof IMoldHandler) {
-                    FluidStack fStack = capFluidHandler.drain(1, false);
-                    if (fStack != null && outFluidHandler.fill(fStack, false) == 1) {
-                        outFluidHandler.fill(capFluidHandler.drain(1, true), true);
+  @Override
+  public void detectAndSendChanges() {
+    // This is where we transfer liquid metal into a mold
+    IFluidHandler capFluidHandler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+    if (capFluidHandler instanceof IMoldHandler) {
+      ItemStack outputStack = inventory.getStackInSlot(0);
+      if (!outputStack.isEmpty()) {
+        IFluidHandler outFluidHandler = outputStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        if (outFluidHandler instanceof IMoldHandler) {
+          FluidStack fStack = capFluidHandler.drain(1, false);
+          if (fStack != null && outFluidHandler.fill(fStack, false) == 1) {
+            outFluidHandler.fill(capFluidHandler.drain(1, true), true);
 
-                        // Copy the input temperature onto the output temperature
-                        ((IMoldHandler) outFluidHandler).setTemperature(((IMoldHandler) capFluidHandler).getTemperature());
-                    }
-                }
-            }
+            // Copy the input temperature onto the output temperature
+            ((IMoldHandler) outFluidHandler).setTemperature(((IMoldHandler) capFluidHandler).getTemperature());
+          }
         }
-        super.detectAndSendChanges();
+      }
     }
+    super.detectAndSendChanges();
+  }
 
-    @Override
-    public void onContainerClosed(EntityPlayer player) {
-        if (!player.getEntityWorld().isRemote) {
-            ItemStack stack = inventory.getStackInSlot(0);
-            if (!stack.isEmpty()) {
-                StackUtils.spawnItemStack(player.getEntityWorld(), player.getPosition(), stack);
-            }
-        }
-        super.onContainerClosed(player);
+  @Override
+  public void onContainerClosed(EntityPlayer player) {
+    if (!player.getEntityWorld().isRemote) {
+      ItemStack stack = inventory.getStackInSlot(0);
+      if (!stack.isEmpty()) {
+        StackUtils.spawnItemStack(player.getEntityWorld(), player.getPosition(), stack);
+      }
     }
+    super.onContainerClosed(player);
+  }
 
-    @Override
-    public boolean canInteractWith(@NotNull EntityPlayer player) {
-        var cap = CapabilityHeat.get(stack);
-        return cap != null && cap.isMolten() && super.canInteractWith(player);
-    }
+  @Override
+  protected void addContainerSlots() {
+    inventory = new ItemStackHandlerCallback(this, 1);
+    addSlotToContainer(new SlotItemHandler(inventory, 0, 80, 34));
+  }
 
-    @Override
-    protected void addContainerSlots() {
-        inventory = new ItemStackHandlerCallback(this, 1);
-        addSlotToContainer(new SlotItemHandler(inventory, 0, 80, 34));
-    }
+  @Override
+  public boolean canInteractWith(@NotNull EntityPlayer player) {
+    var cap = CapabilityHeat.get(stack);
+    return cap != null && cap.isMolten() && super.canInteractWith(player);
+  }
 
-    @Override
-    public int getSlotLimit(int slot) {
-        return 1;
-    }
+  @Override
+  public int getSlotLimit(int slot) {
+    return 1;
+  }
 
-    @Override
-    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-        return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-    }
+  @Override
+  public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+    return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+  }
 }

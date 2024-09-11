@@ -78,18 +78,6 @@ public class TileRockAnvil
     this.recipe = null;
   }
 
-  // TODO попробовать int
-  public Metal.Tier getTier() {
-    IBlockState state = world.getBlockState(pos);
-    //        if (state.getBlock() instanceof BlockMetalAnvil anvil) {
-    //            return anvil.getType()
-    //                    .getMaterial()
-    //                    .getProperty(TFGPropertyKey.HEAT)
-    //                    .getTier();
-    //        }
-    return Metal.Tier.TIER_0;
-  }
-
   @Nullable
   public IAnvilRecipe getRecipe() {
     return recipe;
@@ -98,41 +86,6 @@ public class TileRockAnvil
   @NotNull
   public ForgeSteps getSteps() {
     return steps;
-  }
-
-  /**
-   * Sets the anvil TE recipe, called after pressing the recipe button This is the ONLY place that should write to {@link this#recipe}
-   *
-   * @param recipe the recipe to set to
-   * @return true if a packet needs to be sent to the client for a recipe update
-   */
-  public boolean setRecipe(@Nullable IAnvilRecipe recipe) {
-    ItemStack stack = inventory.getStackInSlot(SLOT_INPUT_1);
-    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-    boolean recipeChanged;
-
-    if (cap != null && recipe != null) {
-      // Update recipe in both
-      recipeChanged = this.recipe != recipe;
-      cap.setRecipe(recipe);
-      this.recipe = recipe;
-
-      // Update server side fields
-      workingProgress = cap.getWork();
-      steps = cap.getSteps().copy();
-
-      workingTarget = recipe.getTarget(world.getSeed());
-    } else {
-      // Set recipe to null because either item is missing, or it was requested
-      recipeChanged = this.recipe != null;
-      this.recipe = null;
-      if (cap != null) {
-        cap.reset();
-      }
-      resetFields();
-    }
-
-    return recipeChanged;
   }
 
   /**
@@ -176,6 +129,64 @@ public class TileRockAnvil
     NBTUtils.setGenericNBTValue(nbt, "work", this.workingProgress);
     NBTUtils.setGenericNBTValue(nbt, "target", this.workingTarget);
     return super.writeToNBT(nbt);
+  }
+
+  private void checkRecipeUpdate() {
+    ItemStack stack = inventory.getStackInSlot(SLOT_INPUT_1);
+    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    if (cap == null && recipe != null) {
+      // Check for item removed / broken
+      setRecipe(null);
+    } else if (cap != null) {
+      // Check for mismatched recipe
+      IAnvilRecipe capRecipe = AnvilRecipeManager.findMatchingRecipe(cap.getRecipeName());
+      if (capRecipe != recipe) {
+        setRecipe(capRecipe);
+      } else if (AnvilRecipeManager.getAllFor(stack).size() == 1) {
+        setRecipe(AnvilRecipeManager.getAllFor(stack).get(0));
+      }
+    }
+  }
+
+  /**
+   * Sets the anvil TE recipe, called after pressing the recipe button This is the ONLY place that should write to {@link this#recipe}
+   *
+   * @param recipe the recipe to set to
+   * @return true if a packet needs to be sent to the client for a recipe update
+   */
+  public boolean setRecipe(@Nullable IAnvilRecipe recipe) {
+    ItemStack stack = inventory.getStackInSlot(SLOT_INPUT_1);
+    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    boolean recipeChanged;
+
+    if (cap != null && recipe != null) {
+      // Update recipe in both
+      recipeChanged = this.recipe != recipe;
+      cap.setRecipe(recipe);
+      this.recipe = recipe;
+
+      // Update server side fields
+      workingProgress = cap.getWork();
+      steps = cap.getSteps().copy();
+
+      workingTarget = recipe.getTarget(world.getSeed());
+    } else {
+      // Set recipe to null because either item is missing, or it was requested
+      recipeChanged = this.recipe != null;
+      this.recipe = null;
+      if (cap != null) {
+        cap.reset();
+      }
+      resetFields();
+    }
+
+    return recipeChanged;
+  }
+
+  private void resetFields() {
+    workingProgress = 0;
+    workingTarget = 0;
+    steps.reset();
   }
 
   @Override
@@ -352,37 +363,16 @@ public class TileRockAnvil
     return false;
   }
 
-  private void checkRecipeUpdate() {
-    ItemStack stack = inventory.getStackInSlot(SLOT_INPUT_1);
-    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-    if (cap == null && recipe != null) {
-      // Check for item removed / broken
-      setRecipe(null);
-    } else if (cap != null) {
-      // Check for mismatched recipe
-      IAnvilRecipe capRecipe = AnvilRecipeManager.findMatchingRecipe(cap.getRecipeName());
-      if (capRecipe != recipe) {
-        setRecipe(capRecipe);
-      } else if (AnvilRecipeManager.getAllFor(stack).size() == 1) {
-        setRecipe(AnvilRecipeManager.getAllFor(stack).get(0));
-      }
-    }
-  }
-
-  private void resetFields() {
-    workingProgress = 0;
-    workingTarget = 0;
-    steps.reset();
-  }
-
-  @Override
-  public ContainerRockAnvil getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-    return new ContainerRockAnvil(inventoryPlayer, this);
-  }
-
-  @Override
-  public GuiRockAnvil getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-    return new GuiRockAnvil(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
+  // TODO попробовать int
+  public Metal.Tier getTier() {
+    IBlockState state = world.getBlockState(pos);
+    //        if (state.getBlock() instanceof BlockMetalAnvil anvil) {
+    //            return anvil.getType()
+    //                    .getMaterial()
+    //                    .getProperty(TFGPropertyKey.HEAT)
+    //                    .getTier();
+    //        }
+    return Metal.Tier.TIER_0;
   }
 
   private static class AnvilItemHandler extends ItemStackHandlerCallback {
@@ -405,5 +395,16 @@ public class TileRockAnvil
       return result;
     }
   }
+
+  @Override
+  public ContainerRockAnvil getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new ContainerRockAnvil(inventoryPlayer, this);
+  }
+
+  @Override
+  public GuiRockAnvil getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new GuiRockAnvil(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
+  }
+
 
 }

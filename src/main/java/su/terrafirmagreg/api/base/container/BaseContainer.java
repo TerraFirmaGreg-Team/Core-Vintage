@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A very simple container implementation. Used for gui's that have no internal inventory, or no TE they need to access Prefer using
- * {@link BaseContainerTile} instead for tile entities or {@link BaseContainerItemStack} for items
+ * A very simple container implementation. Used for gui's that have no internal inventory, or no TE they need to access Prefer using {@link BaseContainerTile} instead
+ * for tile entities or {@link BaseContainerItemStack} for items
  */
 public abstract class BaseContainer extends Container {
 
@@ -20,6 +20,23 @@ public abstract class BaseContainer extends Container {
 
   public BaseContainer(InventoryPlayer playerInv) {
     addPlayerInventorySlots(playerInv);
+  }
+
+  protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
+    addPlayerInventorySlots(playerInv, 0);
+  }
+
+  protected void addPlayerInventorySlots(InventoryPlayer playerInv, int yOffset) {
+    // Add Player Inventory Slots
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 9; j++) {
+        addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18 + yOffset));
+      }
+    }
+
+    for (int k = 0; k < 9; k++) {
+      addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142 + yOffset));
+    }
   }
 
   @Override
@@ -64,22 +81,5 @@ public abstract class BaseContainer extends Container {
   @Override
   public boolean canInteractWith(EntityPlayer playerIn) {
     return true;
-  }
-
-  protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
-    addPlayerInventorySlots(playerInv, 0);
-  }
-
-  protected void addPlayerInventorySlots(InventoryPlayer playerInv, int yOffset) {
-    // Add Player Inventory Slots
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 9; j++) {
-        addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18 + yOffset));
-      }
-    }
-
-    for (int k = 0; k < 9; k++) {
-      addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142 + yOffset));
-    }
   }
 }

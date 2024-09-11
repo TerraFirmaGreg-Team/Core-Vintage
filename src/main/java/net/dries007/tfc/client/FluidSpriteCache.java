@@ -10,33 +10,33 @@ import java.util.Map;
 
 public class FluidSpriteCache {
 
-    private static final Map<Fluid, TextureAtlasSprite> CACHESTILL = new HashMap<>();
-    private static final Map<Fluid, TextureAtlasSprite> CACHEFLOWING = new HashMap<>();
+  private static final Map<Fluid, TextureAtlasSprite> CACHESTILL = new HashMap<>();
+  private static final Map<Fluid, TextureAtlasSprite> CACHEFLOWING = new HashMap<>();
 
-    public static TextureAtlasSprite getStillSprite(Fluid fluid) {
-        TextureAtlasSprite sprite = CACHESTILL.get(fluid);
+  public static TextureAtlasSprite getStillSprite(Fluid fluid) {
+    TextureAtlasSprite sprite = CACHESTILL.get(fluid);
 
-        if (sprite == null) {
-            sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluid.getStill().toString());
-            CACHESTILL.put(fluid, sprite);
-        }
-
-        return sprite;
+    if (sprite == null) {
+      sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluid.getStill().toString());
+      CACHESTILL.put(fluid, sprite);
     }
 
-    public static TextureAtlasSprite getFlowingSprite(Fluid fluid) {
-        TextureAtlasSprite sprite = CACHEFLOWING.get(fluid);
+    return sprite;
+  }
 
-        if (sprite == null) {
-            sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluid.getFlowing().toString());
-            CACHEFLOWING.put(fluid, sprite);
-        }
+  public static TextureAtlasSprite getFlowingSprite(Fluid fluid) {
+    TextureAtlasSprite sprite = CACHEFLOWING.get(fluid);
 
-        return sprite;
+    if (sprite == null) {
+      sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluid.getFlowing().toString());
+      CACHEFLOWING.put(fluid, sprite);
     }
 
-    public static void clear() {
-        CACHEFLOWING.clear();
-        CACHESTILL.clear();
-    }
+    return sprite;
+  }
+
+  public static void clear() {
+    CACHEFLOWING.clear();
+    CACHESTILL.clear();
+  }
 }

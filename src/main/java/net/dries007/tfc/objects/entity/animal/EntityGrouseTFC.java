@@ -1,10 +1,10 @@
 package net.dries007.tfc.objects.entity.animal;
 
-import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
+import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
@@ -31,85 +31,85 @@ import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public class EntityGrouseTFC extends EntityChickenTFC implements ILivestock {
 
-    public EntityGrouseTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-                getRandomGrowth(ConfigTFC.Animals.GROUSE.adulthood, ConfigTFC.Animals.GROUSE.elder));
-    }
+  public EntityGrouseTFC(World worldIn) {
+    this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+            getRandomGrowth(ConfigTFC.Animals.GROUSE.adulthood, ConfigTFC.Animals.GROUSE.elder));
+  }
 
-    public EntityGrouseTFC(World worldIn, Gender gender, int birthDay) {
-        super(worldIn, gender, birthDay);
-        this.setSize(0.8F, 0.8F);
-    }
+  public EntityGrouseTFC(World worldIn, Gender gender, int birthDay) {
+    super(worldIn, gender, birthDay);
+    this.setSize(0.8F, 0.8F);
+  }
 
-    @Override
-    public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-        BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
-        if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-                (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-            return ConfigTFC.Animals.GROUSE.rarity;
-        }
-        return 0;
+  @Override
+  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
+    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+            (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
+      return ConfigTFC.Animals.GROUSE.rarity;
     }
+    return 0;
+  }
 
-    @Override
-    public int getDaysToAdulthood() {
-        return ConfigTFC.Animals.GROUSE.adulthood;
-    }
+  @Override
+  public int getDaysToAdulthood() {
+    return ConfigTFC.Animals.GROUSE.adulthood;
+  }
 
-    @Override
-    public int getDaysToElderly() {
-        return ConfigTFC.Animals.GROUSE.elder;
-    }
+  @Override
+  public int getDaysToElderly() {
+    return ConfigTFC.Animals.GROUSE.elder;
+  }
 
-    @Override
-    public List<ItemStack> getProducts() {
-        List<ItemStack> eggs = new ArrayList<>();
-        ItemStack egg = new ItemStack(Items.EGG);
-        if (this.isFertilized()) {
-            var cap = CapabilityEgg.get(egg);
-            if (cap != null) {
-                EntityGrouseTFC chick = new EntityGrouseTFC(this.world);
-                chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-                cap.setFertilized(chick, ConfigTFC.Animals.GROUSE.hatch + Calendar.PLAYER_TIME.getTotalDays());
-            }
-        }
-        eggs.add(egg);
-        return eggs;
+  @Override
+  public List<ItemStack> getProducts() {
+    List<ItemStack> eggs = new ArrayList<>();
+    ItemStack egg = new ItemStack(Items.EGG);
+    if (this.isFertilized()) {
+      var cap = CapabilityEgg.get(egg);
+      if (cap != null) {
+        EntityGrouseTFC chick = new EntityGrouseTFC(this.world);
+        chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
+        cap.setFertilized(chick, ConfigTFC.Animals.GROUSE.hatch + Calendar.PLAYER_TIME.getTotalDays());
+      }
     }
+    eggs.add(egg);
+    return eggs;
+  }
 
-    @Override
-    public long getProductsCooldown() {
-        return Math.max(0, ConfigTFC.Animals.GROUSE.eggTicks + getLaidTicks() - Calendar.PLAYER_TIME.getTicks());
-    }
+  @Override
+  public long getProductsCooldown() {
+    return Math.max(0, ConfigTFC.Animals.GROUSE.eggTicks + getLaidTicks() - Calendar.PLAYER_TIME.getTicks());
+  }
 
-    @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundsAnimal.ANIMAL_GROUSE_HURT;
-    }
+  @Override
+  protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    return SoundsAnimal.ANIMAL_GROUSE_HURT;
+  }
 
-    @Override
-    protected SoundEvent getDeathSound() {
-        return SoundsAnimal.ANIMAL_GROUSE_DEATH;
-    }
+  @Override
+  protected SoundEvent getDeathSound() {
+    return SoundsAnimal.ANIMAL_GROUSE_DEATH;
+  }
 
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return SoundsAnimal.ANIMAL_GROUSE_SAY;
-    }
+  @Override
+  protected SoundEvent getAmbientSound() {
+    return SoundsAnimal.ANIMAL_GROUSE_SAY;
+  }
 
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return LootTablesAnimal.ANIMALS_GROUSE;
-    }
+  @Nullable
+  protected ResourceLocation getLootTable() {
+    return LootTablesAnimal.ANIMALS_GROUSE;
+  }
 
-    @Override
-    protected void playStepSound(BlockPos pos, Block blockIn) {
-        // Same sound, no need to create another
-        this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
-    }
+  @Override
+  protected void playStepSound(BlockPos pos, Block blockIn) {
+    // Same sound, no need to create another
+    this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
+  }
 
-    @Override
-    public double getOldDeathChance() {
-        return ConfigTFC.Animals.GROUSE.oldDeathChance;
-    }
+  @Override
+  public double getOldDeathChance() {
+    return ConfigTFC.Animals.GROUSE.oldDeathChance;
+  }
 }

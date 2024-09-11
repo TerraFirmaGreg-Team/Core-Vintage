@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockCrate;
 
 public class ItemBlockCrate extends ItemBlockTFC implements ICapabilitySize {
 
-    public ItemBlockCrate(BlockCrate block) {
-        super(block);
-    }
+  public ItemBlockCrate(BlockCrate block) {
+    super(block);
+  }
 }

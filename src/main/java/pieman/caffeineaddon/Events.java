@@ -10,16 +10,16 @@ import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;
 @Mod.EventBusSubscriber(modid = MODID_CAFFEINEADDON)
 public class Events {
 
-    @SubscribeEvent
-    public static void onFoodStartEating(LivingEntityUseItemEvent.Start event) {
-        //if (AppleCoreAPI.accessor.isFood(event.getItem()))
-        //{
-        //int hunger = ((ItemFood)(event.getItem())).;
+  @SubscribeEvent
+  public static void onFoodStartEating(LivingEntityUseItemEvent.Start event) {
+    //if (AppleCoreAPI.accessor.isFood(event.getItem()))
+    //{
+    //int hunger = ((ItemFood)(event.getItem())).;
 
-        //if (hunger > 0)
-        //{
-        //event.setDuration(1);
-        //}
-        //}
-    }
+    //if (hunger > 0)
+    //{
+    //event.setDuration(1);
+    //}
+    //}
+  }
 }

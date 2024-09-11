@@ -39,11 +39,6 @@ public abstract class BasePotion extends Potion {
     this.texture = ModUtils.resource("textures/gui/icons/potion/" + icon + ".png");
   }
 
-  @Override
-  public boolean hasStatusIcon() {
-    return statusIcon;
-  }
-
   public void removePotionCoreEffect(EntityLivingBase entity, final Potion potion) {
     //Potion Core Compatibility
     if (entity.isPotionActive(potion)) {
@@ -60,49 +55,8 @@ public abstract class BasePotion extends Potion {
     return isReadyVar(duration, amplifier, 50);
   }
 
-  public boolean isReadyVar(int duration, int amplifier, int var) {
-    int k = var >> amplifier;
-
-    if (k > 0) {
-      return duration % k == 0;
-    } else {
-      return true;
-    }
-  }
-
-  @SideOnly(Side.CLIENT)
   @Override
-  public void renderInventoryEffect(PotionEffect effect, Gui gui, int x, int y, float z) {
-    renderInventoryEffect(x, y, effect, Minecraft.getMinecraft());
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Override
-  public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc) {
-    if (texture != null) {
-      mc.getTextureManager().bindTexture(texture);
-      Gui.drawModalRectWithCustomSizedTexture(x + xOffset + 6, y + yOffset + 7, 0, 0, 18, 18, 18,
-          18);
-    }
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Override
-  public void renderHUDEffect(PotionEffect effect, Gui gui, int x, int y, float z, float alpha) {
-    renderHUDEffect(x, y, effect, Minecraft.getMinecraft(), alpha);
-  }
-
-  @Override
-  public void renderHUDEffect(int x, int y, PotionEffect effect, Minecraft mc, float alpha) {
-    if (texture != null) {
-      mc.getTextureManager().bindTexture(texture);
-      Gui.drawModalRectWithCustomSizedTexture(x + xOffset + 3, y + yOffset + 3, 0, 0, 18, 18, 18,
-          18);
-    }
-  }
-
-  @Override
-  public boolean shouldRenderHUD(PotionEffect effect) {
+  public boolean hasStatusIcon() {
     return statusIcon;
   }
 
@@ -114,6 +68,52 @@ public abstract class BasePotion extends Potion {
   @Override
   public boolean shouldRenderInvText(PotionEffect effect) {
     return drawInventoryText;
+  }
+
+  @Override
+  public boolean shouldRenderHUD(PotionEffect effect) {
+    return statusIcon;
+  }
+
+  @SideOnly(Side.CLIENT)
+  @Override
+  public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc) {
+    if (texture != null) {
+      mc.getTextureManager().bindTexture(texture);
+      Gui.drawModalRectWithCustomSizedTexture(x + xOffset + 6, y + yOffset + 7, 0, 0, 18, 18, 18,
+              18);
+    }
+  }
+
+  @SideOnly(Side.CLIENT)
+  @Override
+  public void renderInventoryEffect(PotionEffect effect, Gui gui, int x, int y, float z) {
+    renderInventoryEffect(x, y, effect, Minecraft.getMinecraft());
+  }
+
+  @Override
+  public void renderHUDEffect(int x, int y, PotionEffect effect, Minecraft mc, float alpha) {
+    if (texture != null) {
+      mc.getTextureManager().bindTexture(texture);
+      Gui.drawModalRectWithCustomSizedTexture(x + xOffset + 3, y + yOffset + 3, 0, 0, 18, 18, 18,
+              18);
+    }
+  }
+
+  @SideOnly(Side.CLIENT)
+  @Override
+  public void renderHUDEffect(PotionEffect effect, Gui gui, int x, int y, float z, float alpha) {
+    renderHUDEffect(x, y, effect, Minecraft.getMinecraft(), alpha);
+  }
+
+  public boolean isReadyVar(int duration, int amplifier, int var) {
+    int k = var >> amplifier;
+
+    if (k > 0) {
+      return duration % k == 0;
+    } else {
+      return true;
+    }
   }
 
 }

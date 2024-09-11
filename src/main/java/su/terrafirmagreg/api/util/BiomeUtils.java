@@ -34,8 +34,8 @@ import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.RIVER;
 public final class BiomeUtils {
 
   /**
-   * A cache of type names to their value. This is implemented to make type lookup much faster as forge does not offer this for some reason. This is
-   * populated by the first call to {@link #getType(String)}
+   * A cache of type names to their value. This is implemented to make type lookup much faster as forge does not offer this for some reason. This is populated by the
+   * first call to {@link #getType(String)}
    */
   private static final Map<String, BiomeDictionary.Type> typeMap = new HashMap<>();
 

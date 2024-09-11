@@ -12,60 +12,60 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 public class CombatGreenhouseTask extends EntityAIBreakDoor {
 
-    private int breakingTime;
+  private int breakingTime;
 
-    public CombatGreenhouseTask(EntityLiving entityIn) {
-        super(entityIn);
-    }
+  public CombatGreenhouseTask(EntityLiving entityIn) {
+    super(entityIn);
+  }
 
-    @Override
-    public void startExecuting() {
-        super.startExecuting();
-        breakingTime = 0;
-    }
+  @Override
+  public boolean shouldExecute() {
+    return shouldExecuteSuper()
+            && ForgeEventFactory.getMobGriefingEvent(entity.world, entity)
+            && entity.world.getBlockState(doorPosition)
+            .getBlock()
+            .canEntityDestroy(entity.world.getBlockState(doorPosition), entity.world, doorPosition, entity)
+            && ForgeEventFactory.onEntityDestroyBlock(entity, doorPosition, entity.world.getBlockState(doorPosition));
+  }
 
-    @Override
-    public void updateTask() {
-        super.updateTask();
-        breakingTime++;
-    }
+  @Override
+  public void startExecuting() {
+    super.startExecuting();
+    breakingTime = 0;
+  }
 
-    @Override
-    public boolean shouldExecute() {
-        return shouldExecuteSuper()
-                && ForgeEventFactory.getMobGriefingEvent(entity.world, entity)
-                && entity.world.getBlockState(doorPosition)
-                .getBlock()
-                .canEntityDestroy(entity.world.getBlockState(doorPosition), entity.world, doorPosition, entity)
-                && ForgeEventFactory.onEntityDestroyBlock(entity, doorPosition, entity.world.getBlockState(doorPosition));
-    }
+  @Override
+  public boolean shouldContinueExecuting() {
+    return breakingTime <= 240;
+  }
 
-    /**
-     * I am growing more object oriented every second
-     */
-    private boolean shouldExecuteSuper() {
-        PathNavigateGround pathnavigateground = (PathNavigateGround) entity.getNavigator();
-        Path path = pathnavigateground.getPath();
+  @Override
+  public void updateTask() {
+    super.updateTask();
+    breakingTime++;
+  }
 
-        if (path != null && !path.isFinished() && pathnavigateground.getEnterDoors()) {
-            for (int i = 0; i < Math.min(path.getCurrentPathIndex() + 2, path.getCurrentPathLength()); ++i) {
-                PathPoint pathpoint = path.getPathPointFromIndex(i);
-                doorPosition = new BlockPos(pathpoint.x, pathpoint.y + 1, pathpoint.z);
+  /**
+   * I am growing more object oriented every second
+   */
+  private boolean shouldExecuteSuper() {
+    PathNavigateGround pathnavigateground = (PathNavigateGround) entity.getNavigator();
+    Path path = pathnavigateground.getPath();
 
-                if (entity.getDistanceSq(doorPosition.getX(), entity.posY, doorPosition.getZ()) <= 5.0D &&
-                        entity.world.getBlockState(doorPosition).getBlock() instanceof BlockGreenhouseWall) {
-                    return true;
-                }
-            }
+    if (path != null && !path.isFinished() && pathnavigateground.getEnterDoors()) {
+      for (int i = 0; i < Math.min(path.getCurrentPathIndex() + 2, path.getCurrentPathLength()); ++i) {
+        PathPoint pathpoint = path.getPathPointFromIndex(i);
+        doorPosition = new BlockPos(pathpoint.x, pathpoint.y + 1, pathpoint.z);
 
-            doorPosition = (new BlockPos(entity)).up();
-            return entity.world.getBlockState(doorPosition).getBlock() instanceof BlockGreenhouseWall;
+        if (entity.getDistanceSq(doorPosition.getX(), entity.posY, doorPosition.getZ()) <= 5.0D &&
+                entity.world.getBlockState(doorPosition).getBlock() instanceof BlockGreenhouseWall) {
+          return true;
         }
-        return false;
-    }
+      }
 
-    @Override
-    public boolean shouldContinueExecuting() {
-        return breakingTime <= 240;
+      doorPosition = (new BlockPos(entity)).up();
+      return entity.world.getBlockState(doorPosition).getBlock() instanceof BlockGreenhouseWall;
     }
+    return false;
+  }
 }

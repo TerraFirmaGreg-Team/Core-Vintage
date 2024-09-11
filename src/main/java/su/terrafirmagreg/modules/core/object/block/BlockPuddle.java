@@ -38,9 +38,36 @@ public class BlockPuddle extends BaseBlock {
   }
 
   @Override
-  public @Nullable RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn,
-          BlockPos pos, Vec3d start, Vec3d end) {
+  public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+    return true;
+  }
+
+  @Override
+  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
+          IBlockAccess worldIn, BlockPos pos) {
     return null;
+  }
+
+  @Override
+  public boolean isTranslucent(IBlockState state) {
+    return true;
+  }
+
+  @Override
+  public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+    return true;
+  }
+
+  @Override
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.00625D, 1.0D);
+  }
+
+  @SideOnly(Side.CLIENT)
+  @Override
+  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess,
+          BlockPos pos, EnumFacing side) {
+    return blockAccess.getBlockState(pos.offset(side)).getBlock() != this;
   }
 
   @Override
@@ -62,40 +89,13 @@ public class BlockPuddle extends BaseBlock {
   }
 
   @Override
-  public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return true;
-  }
-
-  @Override
-  public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
-    return true;
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Override
-  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess,
-          BlockPos pos, EnumFacing side) {
-    return blockAccess.getBlockState(pos.offset(side)).getBlock() != this;
-  }
-
-  @Override
-  public boolean isTranslucent(IBlockState state) {
-    return true;
-  }
-
-  @Override
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.00625D, 1.0D);
-  }
-
-  @Override
-  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
-          IBlockAccess worldIn, BlockPos pos) {
-    return null;
-  }
-
-  @Override
   public int quantityDropped(Random random) {
     return 0;
+  }
+
+  @Override
+  public @Nullable RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn,
+          BlockPos pos, Vec3d start, Vec3d end) {
+    return null;
   }
 }

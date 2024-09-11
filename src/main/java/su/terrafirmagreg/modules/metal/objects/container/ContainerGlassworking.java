@@ -59,6 +59,44 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
     requiresReset = true;
   }
 
+  private void addContainerSlots() {
+    this.addSlotToContainer(
+            new SlotKnappingOutput(new ItemStackHandler(1), 0, 128, 44, this::finishCraft));
+  }
+
+  private void addPlayerInventorySlots(InventoryPlayer playerInv) {
+    // Add Player Inventory Slots (lower down)
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 9; j++) {
+        addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18 + 18));
+      }
+    }
+
+    for (int k = 0; k < 9; k++) {
+      addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142 + 18));
+    }
+  }
+
+  private void finishCraft() {
+    matrix.setAll(false);
+    requiresReset = true;
+    ItemStack emptyBlowpipe = stack;
+    IFluidHandlerItem cap = emptyBlowpipe.getCapability(
+            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+    if (cap instanceof ItemGlassMolder.GlassMolderCapability) {
+      ((ItemGlassMolder.GlassMolderCapability) cap).empty();
+    }
+    emptyBlowpipe.attemptDamageItem(1, MathConstants.RNG, null);
+    if (emptyBlowpipe.getItemDamage() >= emptyBlowpipe.getMaxDamage()) {
+      emptyBlowpipe = ItemStack.EMPTY;
+    }
+    if (this.isOffhand) {
+      this.player.setHeldItem(EnumHand.OFF_HAND, emptyBlowpipe);
+    } else {
+      this.player.setHeldItem(EnumHand.MAIN_HAND, emptyBlowpipe);
+    }
+  }
+
   @NotNull
   public ItemStack transferStackInSlot(EntityPlayer player, int index) {
     Slot slot = this.inventorySlots.get(index);
@@ -98,12 +136,12 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
   @NotNull
   public ItemStack slotClick(int slotID, int dragType, ClickType clickType, EntityPlayer player) {
     if (slotID == this.itemIndex &&
-        (clickType == ClickType.QUICK_MOVE || clickType == ClickType.PICKUP
-            || clickType == ClickType.THROW || clickType == ClickType.SWAP)) {
+            (clickType == ClickType.QUICK_MOVE || clickType == ClickType.PICKUP
+                    || clickType == ClickType.THROW || clickType == ClickType.SWAP)) {
       return ItemStack.EMPTY;
     } else {
       return dragType == this.itemDragIndex && clickType == ClickType.SWAP ? ItemStack.EMPTY :
-          super.slotClick(slotID, dragType, clickType, player);
+              super.slotClick(slotID, dragType, clickType, player);
     }
   }
 
@@ -126,6 +164,20 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
     }
   }
 
+  public void setSlotState(int index, boolean value) {
+    matrix.set(index, value);
+    // Check if glass has not solidified
+    if (!canWork()) {
+      matrix.setAll(false);
+    }
+  }
+
+  public boolean canWork() {
+    var cap = CapabilityHeat.get(stack);
+    return cap instanceof ItemGlassMolder.GlassMolderCapability
+            && ((ItemGlassMolder.GlassMolderCapability) cap).canWork();
+  }
+
   public boolean requiresReset() {
     return this.requiresReset;
   }
@@ -144,61 +196,9 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
     return matrix.get(index);
   }
 
-  public void setSlotState(int index, boolean value) {
-    matrix.set(index, value);
-    // Check if glass has not solidified
-    if (!canWork()) {
-      matrix.setAll(false);
-    }
-  }
-
   public boolean isSolidified() {
     var cap = CapabilityHeat.get(stack);
     return cap instanceof ItemGlassMolder.GlassMolderCapability
-        && ((ItemGlassMolder.GlassMolderCapability) cap).isSolidified();
-  }
-
-  public boolean canWork() {
-    var cap = CapabilityHeat.get(stack);
-    return cap instanceof ItemGlassMolder.GlassMolderCapability
-        && ((ItemGlassMolder.GlassMolderCapability) cap).canWork();
-  }
-
-  private void addContainerSlots() {
-    this.addSlotToContainer(
-        new SlotKnappingOutput(new ItemStackHandler(1), 0, 128, 44, this::finishCraft));
-  }
-
-  private void finishCraft() {
-    matrix.setAll(false);
-    requiresReset = true;
-    ItemStack emptyBlowpipe = stack;
-    IFluidHandlerItem cap = emptyBlowpipe.getCapability(
-        CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-    if (cap instanceof ItemGlassMolder.GlassMolderCapability) {
-      ((ItemGlassMolder.GlassMolderCapability) cap).empty();
-    }
-    emptyBlowpipe.attemptDamageItem(1, MathConstants.RNG, null);
-    if (emptyBlowpipe.getItemDamage() >= emptyBlowpipe.getMaxDamage()) {
-      emptyBlowpipe = ItemStack.EMPTY;
-    }
-    if (this.isOffhand) {
-      this.player.setHeldItem(EnumHand.OFF_HAND, emptyBlowpipe);
-    } else {
-      this.player.setHeldItem(EnumHand.MAIN_HAND, emptyBlowpipe);
-    }
-  }
-
-  private void addPlayerInventorySlots(InventoryPlayer playerInv) {
-    // Add Player Inventory Slots (lower down)
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 9; j++) {
-        addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18 + 18));
-      }
-    }
-
-    for (int k = 0; k < 9; k++) {
-      addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142 + 18));
-    }
+            && ((ItemGlassMolder.GlassMolderCapability) cap).isSolidified();
   }
 }

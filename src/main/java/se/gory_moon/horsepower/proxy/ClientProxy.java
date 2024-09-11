@@ -31,54 +31,57 @@ import se.gory_moon.horsepower.util.color.ColorGetter;
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 
-    @Override
-    public void preInit() {
-        super.preInit();
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrindstone.class, new TileEntityGrindstoneRender());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChopper.class, new TileEntityChopperRender());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFiller.class, new TileEntityFillerRender());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHandGrindstone.class, new TileEntityHandGrindstoneRender());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManualChopper.class, new TileEntityChoppingBlockRender());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPress.class, new TileEntityPressRender());
-    }
+  @Override
+  public void preInit() {
+    super.preInit();
+    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrindstone.class, new TileEntityGrindstoneRender());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChopper.class, new TileEntityChopperRender());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFiller.class, new TileEntityFillerRender());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHandGrindstone.class, new TileEntityHandGrindstoneRender());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManualChopper.class, new TileEntityChoppingBlockRender());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPress.class, new TileEntityPressRender());
+  }
 
-    @Override
-    public void init() {
-        MinecraftForge.EVENT_BUS.register(ClientHandler.class);
-    }
+  @Override
+  public void init() {
+    MinecraftForge.EVENT_BUS.register(ClientHandler.class);
+  }
 
-    @Override
-    public void loadComplete() {
+  @Override
+  public void loadComplete() {
 
-        ((IReloadableResourceManager) Minecraft.getMinecraft()
-                .getResourceManager()).registerReloadListener(resourceManager ->
-        {
-            TileEntityHPBaseRenderer.clearDestroyStageicons();
-        });
+    ((IReloadableResourceManager) Minecraft.getMinecraft()
+            .getResourceManager()).registerReloadListener(resourceManager ->
+    {
+      TileEntityHPBaseRenderer.clearDestroyStageicons();
+    });
 
-        Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) ->
-        {
-            if (worldIn != null && pos != null) {
-                TileEntity tileEntity = worldIn.getTileEntity(pos);
-                if (tileEntity instanceof TileEntityGrindstone tile) {
-                    ItemStack outputStack = tile.getStackInSlot(1);
-                    ItemStack secondaryStack = tile.getStackInSlot(2);
-                    if (outputStack.getCount() < secondaryStack.getCount())
-                        outputStack = secondaryStack;
-                    if (!OreDictionary.itemMatches(tile.renderStack, outputStack, true)) {
-                        tile.renderStack = outputStack;
-                        if (!outputStack.isEmpty())
-                            tile.grindColor = ColorGetter.getColors(outputStack, 2).get(0);
-                        else
-                            tile.grindColor = null;
-                        tile.renderStack = outputStack;
-                    }
-
-                    if (tile.grindColor != null)
-                        return tile.grindColor.getRGB();
-                }
+    Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) ->
+    {
+      if (worldIn != null && pos != null) {
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+        if (tileEntity instanceof TileEntityGrindstone tile) {
+          ItemStack outputStack = tile.getStackInSlot(1);
+          ItemStack secondaryStack = tile.getStackInSlot(2);
+          if (outputStack.getCount() < secondaryStack.getCount()) {
+            outputStack = secondaryStack;
+          }
+          if (!OreDictionary.itemMatches(tile.renderStack, outputStack, true)) {
+            tile.renderStack = outputStack;
+            if (!outputStack.isEmpty()) {
+              tile.grindColor = ColorGetter.getColors(outputStack, 2).get(0);
+            } else {
+              tile.grindColor = null;
             }
-            return -1;
-        }, ModBlocks.BLOCK_GRINDSTONE);
-    }
+            tile.renderStack = outputStack;
+          }
+
+          if (tile.grindColor != null) {
+            return tile.grindColor.getRGB();
+          }
+        }
+      }
+      return -1;
+    }, ModBlocks.BLOCK_GRINDSTONE);
+  }
 }

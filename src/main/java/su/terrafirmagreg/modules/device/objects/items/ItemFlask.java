@@ -53,7 +53,7 @@ import static su.terrafirmagreg.modules.food.api.IFoodStatsTFC.MAX_PLAYER_THIRST
 
 @Getter
 public abstract class ItemFlask extends ItemFluidContainer implements IItemSettings,
-    IProviderItemMesh {
+        IProviderItemMesh {
 
   protected final Settings settings;
   private final int capacity;
@@ -66,8 +66,8 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
     this.drink = drink;
 
     this.settings = Settings.of()
-        .registryKey("device/flask/" + name)
-        .notCanStack();
+            .registryKey("device/flask/" + name)
+            .notCanStack();
 
     setHasSubtypes(true);
 
@@ -79,19 +79,13 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
 
   }
 
-  // Fix #12 by actually implementing the MC function that limits stack sizes
-  @Override
-  public int getItemStackLimit(ItemStack stack) {
-    return getStackSize(stack);
-  }
-
   @Override
   public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
     return new FluidWhitelistHandlerComplex(stack, capacity, FluidsTFC.getAllWrappers()
-        .stream()
-        .filter(x -> x.get(DrinkableProperty.DRINKABLE) != null)
-        .map(FluidWrapper::get)
-        .collect(Collectors.toSet()));
+            .stream()
+            .filter(x -> x.get(DrinkableProperty.DRINKABLE) != null)
+            .map(FluidWrapper::get)
+            .collect(Collectors.toSet()));
   }
 
   @Override
@@ -116,7 +110,7 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
   public int getLiquidAmount(ItemStack stack) {
     int content = 0;
     IFluidHandler flaskCap = stack.getCapability(
-        CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (flaskCap != null) {
       FluidStack drained = flaskCap.drain(capacity, false);
       if (drained != null) {
@@ -124,26 +118,6 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
       }
     }
     return content;
-  }
-
-  /**
-   * Returns the packed int RGB value used to render the durability bar in the GUI. Retrieves no-alpha RGB color from liquid to use in durability bar
-   *
-   * @param stack Stack to get color from
-   * @return A packed RGB value for the durability colour (0x00RRGGBB)
-   */
-  @Override
-  public int getRGBDurabilityForDisplay(ItemStack stack) {
-    IFluidHandler flaskCap = stack.getCapability(
-        CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-    if (flaskCap != null) {
-      FluidStack drained = flaskCap.drain(capacity, false);
-      if (drained != null) {
-        Fluid fluid = drained.getFluid();
-        return fluid.getColor();
-      }
-    }
-    return super.getRGBDurabilityForDisplay(stack);
   }
 
   @SuppressWarnings("ConstantConditions")
@@ -157,7 +131,7 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
       }
 
       IFluidHandler flaskCap = stack.getCapability(
-          CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+              CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
       if (flaskCap != null) {
         // If contains fluid, allow emptying with shift-right-click
         if (player.isSneaking()) {
@@ -169,12 +143,12 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
         RayTraceResult rayTrace = rayTrace(world, player, true);
         FluidStack cont = flaskCap.drain(capacity, false);
         if (!world.isRemote && (cont == null || cont.amount < capacity) && rayTrace != null &&
-            rayTrace.typeOfHit == RayTraceResult.Type.BLOCK) {
+                rayTrace.typeOfHit == RayTraceResult.Type.BLOCK) {
           ItemStack single = stack.copy();
           single.setCount(1);
           FluidActionResult result = FluidTransferHelper.tryPickUpFluidGreedy(single, player, world,
-              rayTrace.getBlockPos(),
-              rayTrace.sideHit, Fluid.BUCKET_VOLUME, false);
+                  rayTrace.getBlockPos(),
+                  rayTrace.sideHit, Fluid.BUCKET_VOLUME, false);
           if (result.isSuccess()) {
             stack.shrink(1);
             ItemStack res = result.getResult();
@@ -188,7 +162,7 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
         //Try to Drink
         FoodStats stats = player.getFoodStats();
         if (stats instanceof FoodStatsTFC
-            && ((FoodStatsTFC) stats).getThirst() >= MAX_PLAYER_THIRST) {
+                && ((FoodStatsTFC) stats).getThirst() >= MAX_PLAYER_THIRST) {
           // Don't drink if not thirsty
           return new ActionResult<>(EnumActionResult.FAIL, stack);
         } else if (cont != null && cont.amount >= drink) {
@@ -203,30 +177,30 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
   @Override
   public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
     IFluidHandler flaskCap = stack.getCapability(
-        CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (flaskCap != null) {
       FluidStack total = flaskCap.drain(capacity, false);
       if (total != null && total.amount > 0) {
         FluidStack fluidConsumed = flaskCap.drain(drink, true);
         if (fluidConsumed != null) {
           DrinkableProperty drinkable = FluidsTFC.getWrapper(fluidConsumed.getFluid())
-              .get(DrinkableProperty.DRINKABLE);
+                  .get(DrinkableProperty.DRINKABLE);
           if (drinkable != null) {
             drinkable.onDrink((EntityPlayer) entityLiving);
             if (stack.getItemDamage() == stack.getMaxDamage()) {
               ResourceLocation name = stack.getItem().getRegistryName();
               //break item, play sound
               worldIn.playSound(null, entityLiving.getPosition(), SoundsDevice.FLASK_BREAK,
-                  SoundCategory.PLAYERS, 1.0f, 1.0f);
+                      SoundCategory.PLAYERS, 1.0f, 1.0f);
               if (name.toString().contains("leather")) {
                 ItemHandlerHelper.giveItemToPlayer((EntityPlayer) entityLiving,
-                    new ItemStack(ItemsDevice.BROKEN_LEATHER_FLASK));
+                        new ItemStack(ItemsDevice.BROKEN_LEATHER_FLASK));
               } else {
                 ItemHandlerHelper.giveItemToPlayer((EntityPlayer) entityLiving,
-                    new ItemStack(ItemsDevice.BROKEN_IRON_FLASK));
+                        new ItemStack(ItemsDevice.BROKEN_IRON_FLASK));
               }
               stack.shrink(
-                  1); //race condition here, seems to only sometimes work if done before giving broken flask
+                      1); //race condition here, seems to only sometimes work if done before giving broken flask
             } else {
               stack.damageItem(1, entityLiving);
             }
@@ -250,14 +224,14 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
   @Override
   public String getItemStackDisplayName(ItemStack stack) {
     IFluidHandler bucketCap = stack.getCapability(
-        CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (bucketCap != null) {
       FluidStack fluidStack = bucketCap.drain(capacity, false);
       if (fluidStack != null) {
         String fluidname = fluidStack.getLocalizedName();
         return new TextComponentTranslation(
-            "item." + MOD_ID + this.getRegistryKey().replaceAll("/", ".") + ".filled.name",
-            fluidname).getFormattedText();
+                "item." + MOD_ID + this.getRegistryKey().replaceAll("/", ".") + ".filled.name",
+                fluidname).getFormattedText();
       }
     }
     return super.getItemStackDisplayName(stack);
@@ -278,6 +252,32 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
       //				}
       //			}
     }
+  }
+
+  /**
+   * Returns the packed int RGB value used to render the durability bar in the GUI. Retrieves no-alpha RGB color from liquid to use in durability bar
+   *
+   * @param stack Stack to get color from
+   * @return A packed RGB value for the durability colour (0x00RRGGBB)
+   */
+  @Override
+  public int getRGBDurabilityForDisplay(ItemStack stack) {
+    IFluidHandler flaskCap = stack.getCapability(
+            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+    if (flaskCap != null) {
+      FluidStack drained = flaskCap.drain(capacity, false);
+      if (drained != null) {
+        Fluid fluid = drained.getFluid();
+        return fluid.getColor();
+      }
+    }
+    return super.getRGBDurabilityForDisplay(stack);
+  }
+
+  // Fix #12 by actually implementing the MC function that limits stack sizes
+  @Override
+  public int getItemStackLimit(ItemStack stack) {
+    return getStackSize(stack);
   }
 
 }

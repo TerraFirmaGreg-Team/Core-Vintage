@@ -64,7 +64,7 @@ public class ClientRegisterEventsTFCF {
 
     for (Item item : ItemsTFCF.getAllSimpleItems()) {
       ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName()
-          .toString()));
+              .toString()));
     }
 
     for (ItemGemTFCF item : ItemsTFCF.getAllGemTFCFItems()) {
@@ -75,19 +75,19 @@ public class ClientRegisterEventsTFCF {
 
     for (Item item : ItemsTFCF.getAllItemBows()) {
       ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName()
-          .toString()));
+              .toString()));
     }
 
     for (ItemArmorTFCF item : ItemsTFCF.getAllArmorItems()) {
       ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName()
-          .toString()));
+              .toString()));
     }
 
     // BLOCKS
 
     for (ItemBlock itemBlock : BlocksTFCF.getAllNormalItemBlocks()) {
       ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(itemBlock.getRegistryName()
-          .toString()));
+              .toString()));
     }
 
     for (Block block : BlocksTFCF.getAllCoralPlants()) {
@@ -139,14 +139,14 @@ public class ClientRegisterEventsTFCF {
 
     for (BlockFruitTreeLeaves leaves : BlocksTFCF.getAllFruitLeaves()) {
       ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE)
-          .ignore(BlockFruitTreeLeaves.HARVESTABLE)
-          .build());
+              .ignore(BlockFruitTreeLeaves.HARVESTABLE)
+              .build());
     }
 
     for (BlockLeavesTFCF leaves : BlocksTFCF.getAllNormalTreeLeaves()) {
       ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockLeavesTFCF.DECAYABLE)
-          .ignore(BlockLeavesTFCF.HARVESTABLE)
-          .build());
+              .ignore(BlockLeavesTFCF.HARVESTABLE)
+              .build());
     }
 
     for (BlockLogTFCF Logs : BlocksTFCF.getAllNormalTreeLog()) {
@@ -163,7 +163,7 @@ public class ClientRegisterEventsTFCF {
 
     for (Block block : BlocksTFCF.getAllBambooLog()) {
       ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(Properties.CAN_GROW)
-          .build());
+              .build());
     }
 
     for (Block block : BlocksTFCF.getAllBambooLeaves()) {
@@ -175,18 +175,37 @@ public class ClientRegisterEventsTFCF {
     }
 
     ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LOG, new StateMap.Builder().ignore(Properties.CAN_GROW)
-        .build());
+            .build());
     ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)
-        .build());
+            .build());
     ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE)
-        .build());
+            .build());
 
     ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LOG, new StateMap.Builder().ignore(Properties.CAN_GROW)
-        .build());
+            .build());
     ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)
-        .build());
+            .build());
     ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE)
-        .build());
+            .build());
+  }
+
+  @SideOnly(Side.CLIENT)
+  private static void registerEnumBasedMetaItems(String prefix, Enum e, Item item) {
+    //noinspection ConstantConditions
+    String registryName = item.getRegistryName().getPath();
+    StringBuilder path = new StringBuilder(MODID_TFCF).append(':');
+    if (!Strings.isNullOrEmpty(prefix)) {
+      path.append(prefix).append('/');
+    }
+    path.append(e.name());
+    if (!Strings.isNullOrEmpty(prefix)) {
+      path.append(registryName.replace(prefix,
+              "")); // There well be a '/' at the start of registryName due to the prefix, so don't add an extra one.
+    } else {
+      path.append('/').append(registryName);
+    }
+    ModelLoader.setCustomModelResourceLocation(item, e.ordinal(), new ModelResourceLocation(path.toString()
+            .toLowerCase()));
   }
 
   @SuppressWarnings("deprecation")
@@ -204,40 +223,40 @@ public class ClientRegisterEventsTFCF {
         }, ItemsTFCF.getAllArmorItems().toArray(new ItemArmorTFCF[0]));*/
 
     itemColors.registerItemColorHandler((stack, tintIndex) ->
-            tintIndex > 0 ? -1 : ((ItemArmorTFCF) stack.getItem()).getColor(stack),
-        ItemsTFCF.getAllArmorItems().toArray(new ItemArmorTFCF[0]));
+                    tintIndex > 0 ? -1 : ((ItemArmorTFCF) stack.getItem()).getColor(stack),
+            ItemsTFCF.getAllArmorItems().toArray(new ItemArmorTFCF[0]));
 
     itemColors.registerItemColorHandler((stack, tintIndex) ->
-            event.getBlockColors()
-                .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-        BlocksTFCF.getAllFruitLeaves().toArray(new BlockFruitTreeLeaves[0])
+                    event.getBlockColors()
+                            .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+                                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+            BlocksTFCF.getAllFruitLeaves().toArray(new BlockFruitTreeLeaves[0])
     );
 
     itemColors.registerItemColorHandler((stack, tintIndex) ->
-            event.getBlockColors()
-                .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-        BlocksTFCF.getAllNormalTreeLeaves().toArray(new BlockLeavesTFCF[0])
+                    event.getBlockColors()
+                            .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+                                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+            BlocksTFCF.getAllNormalTreeLeaves().toArray(new BlockLeavesTFCF[0])
     );
 
     itemColors.registerItemColorHandler((stack, tintIndex) ->
-            event.getBlockColors()
-                .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-        BlocksTFCF.CASSIA_CINNAMON_LEAVES);
+                    event.getBlockColors()
+                            .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+                                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+            BlocksTFCF.CASSIA_CINNAMON_LEAVES);
 
     itemColors.registerItemColorHandler((stack, tintIndex) ->
-            event.getBlockColors()
-                .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-        BlocksTFCF.CEYLON_CINNAMON_LEAVES);
+                    event.getBlockColors()
+                            .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+                                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+            BlocksTFCF.CEYLON_CINNAMON_LEAVES);
 
     itemColors.registerItemColorHandler((stack, tintIndex) ->
-            event.getBlockColors()
-                .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-        BlocksTFCF.getAllTallGrassWaterBlocks().toArray(new BlockTallGrassWater[0]));
+                    event.getBlockColors()
+                            .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+                                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+            BlocksTFCF.getAllTallGrassWaterBlocks().toArray(new BlockTallGrassWater[0]));
 
         /*itemColors.registerItemColorHandler((stack, tintIndex) ->
                 event.getBlockColors().colorMultiplier(((ItemBlock) stack.get()).get().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
@@ -268,25 +287,6 @@ public class ClientRegisterEventsTFCF {
             BlocksTFCF.getAllCreepingPlantBlocks().toArray(new BlockCreepingPlantTFCF[0]));*/
   }
 
-  @SideOnly(Side.CLIENT)
-  private static void registerEnumBasedMetaItems(String prefix, Enum e, Item item) {
-    //noinspection ConstantConditions
-    String registryName = item.getRegistryName().getPath();
-    StringBuilder path = new StringBuilder(MODID_TFCF).append(':');
-    if (!Strings.isNullOrEmpty(prefix)) {
-      path.append(prefix).append('/');
-    }
-    path.append(e.name());
-    if (!Strings.isNullOrEmpty(prefix)) {
-      path.append(registryName.replace(prefix,
-          "")); // There well be a '/' at the start of registryName due to the prefix, so don't add an extra one.
-    } else {
-      path.append('/').append(registryName);
-    }
-    ModelLoader.setCustomModelResourceLocation(item, e.ordinal(), new ModelResourceLocation(path.toString()
-        .toLowerCase()));
-  }
-
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
   public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
@@ -295,7 +295,7 @@ public class ClientRegisterEventsTFCF {
     IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
 
     blockColors.registerBlockColorHandler(grassColor, BlocksTFCF.getAllShortGrassBlocks()
-        .toArray(new BlockShortGrassTFCF[0]));
+            .toArray(new BlockShortGrassTFCF[0]));
     //blockColors.registerBlockColorHandler(grassColor, BlocksTFCF.getAllTallGrassBlocks().toArray(new BlockTallGrassTFCF[0]));
 
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllFruitLeaves().toArray(new Block[0]));
@@ -312,18 +312,18 @@ public class ClientRegisterEventsTFCF {
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.CASSIA_CINNAMON_LEAVES);
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.CEYLON_CINNAMON_LEAVES);
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllWaterPlantBlocks()
-        .toArray(new BlockWaterPlantTFCF[0]));
+            .toArray(new BlockWaterPlantTFCF[0]));
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllHangingPlantBlocks()
-        .toArray(new BlockHangingPlantTFCF[0]));
+            .toArray(new BlockHangingPlantTFCF[0]));
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllHangingCreepingPlantBlocks()
-        .toArray(new BlockHangingCreepingPlantTFCF[0]));
+            .toArray(new BlockHangingCreepingPlantTFCF[0]));
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllCreepingPlantBlocks()
-        .toArray(new BlockCreepingPlantTFCF[0]));
+            .toArray(new BlockCreepingPlantTFCF[0]));
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllTallGrassWaterBlocks()
-        .toArray(new BlockTallGrassWater[0]));
+            .toArray(new BlockTallGrassWater[0]));
     //blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllStandardBlocks().toArray(new BlockPlantTFCF[0]));
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllStandardBlocks()
-        .toArray(new BlockPlantDummy1[0]));
+            .toArray(new BlockPlantDummy1[0]));
     //blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllStandardBlocks().toArray(new BlockPlantDummy2[0]));
 
   }

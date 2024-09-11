@@ -121,6 +121,28 @@ public class TileSmelteryFirebox extends BaseTileTickableInventory
     }
   }
 
+  private void consumeFuel() {
+    burnTicks = 0;
+    IBlockState state = world.getBlockState(pos);
+    for (int i = 0; i < 8; i++) {
+      ItemStack stack = inventory.extractItem(i, 1, false);
+      if (!stack.isEmpty()) {
+        Fuel fuel = FuelManager.getFuel(stack);
+        burnTicks = fuel.getAmount();
+        burnTemperature = fuel.getTemperature();
+        world.setBlockState(pos, state.withProperty(LIT, true));
+        break;
+      }
+    }
+    // Didn't find a fuel to consume
+    if (burnTicks <= 0) {
+      world.setBlockState(pos, state.withProperty(LIT, false));
+      burnTicks = 0;
+      airTicks = 0;
+      burnTemperature = 0;
+    }
+  }
+
   public float getTemperature() {
     return temperature;
   }
@@ -136,6 +158,11 @@ public class TileSmelteryFirebox extends BaseTileTickableInventory
       return state.getValue(LIT);
     }
     return false;
+  }
+
+  @Override
+  public long getLastUpdateTick() {
+    return lastPlayerTick;
   }
 
   @Override
@@ -157,11 +184,6 @@ public class TileSmelteryFirebox extends BaseTileTickableInventory
         consumeFuel();
       }
     }
-  }
-
-  @Override
-  public long getLastUpdateTick() {
-    return lastPlayerTick;
   }
 
   @Override
@@ -206,26 +228,15 @@ public class TileSmelteryFirebox extends BaseTileTickableInventory
     }
   }
 
-  private void consumeFuel() {
-    burnTicks = 0;
-    IBlockState state = world.getBlockState(pos);
-    for (int i = 0; i < 8; i++) {
-      ItemStack stack = inventory.extractItem(i, 1, false);
-      if (!stack.isEmpty()) {
-        Fuel fuel = FuelManager.getFuel(stack);
-        burnTicks = fuel.getAmount();
-        burnTemperature = fuel.getTemperature();
-        world.setBlockState(pos, state.withProperty(LIT, true));
-        break;
-      }
+  @Override
+  public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
+    float temp = TileCrucible.FIELD_TEMPERATURE;
+    float change = temp / 120f;
+    float potency = temp / 370f;
+    if (ModifierTile.hasProtection(player)) {
+      change = change * 0.3f;
     }
-    // Didn't find a fuel to consume
-    if (burnTicks <= 0) {
-      world.setBlockState(pos, state.withProperty(LIT, false));
-      burnTicks = 0;
-      airTicks = 0;
-      burnTemperature = 0;
-    }
+    return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
   }
 
   @Override
@@ -241,14 +252,5 @@ public class TileSmelteryFirebox extends BaseTileTickableInventory
             this);
   }
 
-  @Override
-  public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
-    float temp = TileCrucible.FIELD_TEMPERATURE;
-    float change = temp / 120f;
-    float potency = temp / 370f;
-    if (ModifierTile.hasProtection(player)) {
-      change = change * 0.3f;
-    }
-    return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
-  }
+
 }

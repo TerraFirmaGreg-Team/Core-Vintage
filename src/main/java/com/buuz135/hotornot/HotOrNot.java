@@ -42,32 +42,32 @@ import static su.terrafirmagreg.data.Constants.MODID_HOTORNOT;
 @Mod(modid = MODID_HOTORNOT, name = HotOrNot.MOD_NAME, version = Tags.MOD_VERSION, useMetadata = true)
 public class HotOrNot {
 
-    public static final String MOD_NAME = "Hot Or Not - TFC";
+  public static final String MOD_NAME = "Hot Or Not - TFC";
 
-    @Instance(MODID_HOTORNOT)
-    private static HotOrNot INSTANCE;
-    private static SimpleNetworkWrapper network;
+  @Instance(MODID_HOTORNOT)
+  private static HotOrNot INSTANCE;
+  private static SimpleNetworkWrapper network;
 
-    private final LoggingHelper log = LoggingHelper.of(MODID_HOTORNOT);
+  private final LoggingHelper log = LoggingHelper.of(MODID_HOTORNOT);
 
-    public static SimpleNetworkWrapper getNetwork() {
-        return network;
-    }
+  public static SimpleNetworkWrapper getNetwork() {
+    return network;
+  }
 
-    @SuppressWarnings("unused")
-    public static LoggingHelper getLog() {
-        return INSTANCE.log;
-    }
+  @SuppressWarnings("unused")
+  public static LoggingHelper getLog() {
+    return INSTANCE.log;
+  }
 
-    public static HotOrNot getInstance() {
-        return INSTANCE;
-    }
+  public static HotOrNot getInstance() {
+    return INSTANCE;
+  }
 
-    @EventHandler
-    public void onPreInit(final FMLPreInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new HotGuiHandler());
-        network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID_HOTORNOT);
-        network.registerMessage(new PacketServerSettings.Handler(), PacketServerSettings.class, 1, Side.CLIENT);
-        network.registerMessage(new PacketClientSettings.Handler(), PacketClientSettings.class, 2, Side.SERVER);
-    }
+  @EventHandler
+  public void onPreInit(final FMLPreInitializationEvent event) {
+    NetworkRegistry.INSTANCE.registerGuiHandler(this, new HotGuiHandler());
+    network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID_HOTORNOT);
+    network.registerMessage(new PacketServerSettings.Handler(), PacketServerSettings.class, 1, Side.CLIENT);
+    network.registerMessage(new PacketClientSettings.Handler(), PacketClientSettings.class, 2, Side.SERVER);
+  }
 }

@@ -183,7 +183,7 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    */
   public static boolean isStable(World world, BlockPos pos) {
     return CapabilityChunkData.get(world, pos)
-        .getStabilityLayer(pos.getX() & 15, pos.getZ() & 15).valueInt == 0;
+            .getStabilityLayer(pos.getX() & 15, pos.getZ() & 15).valueInt == 0;
   }
 
   /**
@@ -195,7 +195,7 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    */
   public static int getDrainage(World world, BlockPos pos) {
     return CapabilityChunkData.get(world, pos)
-        .getDrainageLayer(pos.getX() & 15, pos.getZ() & 15).valueInt;
+            .getDrainageLayer(pos.getX() & 15, pos.getZ() & 15).valueInt;
   }
 
   /**
@@ -229,7 +229,7 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    */
   public static RockType getRockHeight(World world, BlockPos pos) {
     return CapabilityChunkData.get(world, pos)
-        .getRockLayerHeight(pos.getX() & 15, pos.getY(), pos.getZ() & 15);
+            .getRockLayerHeight(pos.getX() & 15, pos.getY(), pos.getZ() & 15);
   }
 
   /**
@@ -241,14 +241,127 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    */
   public static SoilType getSoilHeight(World world, BlockPos pos) {
     return CapabilityChunkData.get(world, pos)
-        .getSoilLayerHeight(pos.getX() & 15, pos.getY(), pos.getZ() & 15);
+            .getSoilLayerHeight(pos.getX() & 15, pos.getY(), pos.getZ() & 15);
+  }
+
+  /**
+   * Adds generated ores to this chunk list of ores Should be used by ore vein generators to save in this chunk which ores generated here
+   *
+   * @param vein the ore added by ore vein generator
+   */
+  public void markVeinGenerated(@NotNull Vein vein) {
+    generatedVeins.add(vein);
+  }
+
+  /**
+   * Проверяет, является ли указанная позиция стабильной.
+   *
+   * @param x Координата X.
+   * @param z Координата Z.
+   * @return {@code true}, если указанная позиция стабильна, иначе {@code false}.
+   */
+  public boolean isStable(int x, int z) {
+    return getStabilityLayer(x, z).valueInt == 0;
+  }
+
+  /**
+   * Возвращает значение дренажа для указанных координат.
+   *
+   * @param x Координата X.
+   * @param z Координата Z.
+   * @return Значение дренажа для указанных координат.
+   */
+  public int getDrainage(int x, int z) {
+    return getDrainageLayer(x, z).valueInt;
+  }
+
+  public SoilType getSoilHeight(BlockPos pos) {
+    return getSoilHeight(pos.getX(), pos.getY(), pos.getZ());
+  }
+
+  public SoilType getSoilHeight(int x, int y, int z) {
+    return getSoilLayerHeight(x & 15, y, z & 15);
+  }
+
+  /**
+   * Проверяет, находится ли объект под защитой спавна.
+   *
+   * @return {@code true}, если объект находится под защитой спавна, иначе {@code false}.
+   */
+  public boolean isSpawnProtected() {
+    return getSpawnProtection() > 0L;
+  }
+
+  /**
+   * Возвращает оставшуюся защиту спавна.
+   *
+   * @return Оставшаяся защита спавна.
+   */
+  public long getSpawnProtection() {
+    return protectedTicks - (24 * ICalendar.TICKS_IN_HOUR) - Calendar.PLAYER_TIME.getTicks();
+  }
+
+  @Override
+  public boolean canWork(int amount) {
+    return ConfigTFC.Devices.SLUICE.maxWorkChunk == 0
+            || chunkWorkage <= ConfigTFC.Devices.SLUICE.maxWorkChunk + amount;
+  }
+
+  /**
+   * Увеличивает количество работы на указанное значение.
+   *
+   * @param amount Количество работы для добавления.
+   */
+  public void addWork(int amount) {
+    chunkWorkage += amount;
+  }
+
+  /**
+   * Увеличивает количество работы на 1.
+   */
+  public void addWork() {
+    addWork(1);
+  }
+
+  /**
+   * Устанавливает количество работы.
+   *
+   * @param amount Количество работы.
+   */
+  public void setWork(int amount) {
+    chunkWorkage = amount;
+  }
+
+  /**
+   * Увеличивает защиту спавна на указанный множитель.
+   *
+   * @param multiplier Множитель защиты спавна.
+   */
+  public void addSpawnProtection(int multiplier) {
+    if (protectedTicks < Calendar.PLAYER_TIME.getTicks()) {
+      protectedTicks = Calendar.PLAYER_TIME.getTicks();
+    }
+    protectedTicks += multiplier * 600L;
+  }
+
+  /**
+   * Сбрасывает значение последнего тика обновления на текущее время игрока.
+   */
+  public void resetLastUpdateTick() {
+    this.lastUpdateTick = Calendar.PLAYER_TIME.getTicks();
+  }
+
+  /**
+   * Сбрасывает значение последнего года обновления на текущий год в календаре.
+   */
+  public void resetLastUpdateYear() {
+    this.lastUpdateYear = Calendar.CALENDAR_TIME.getTotalYears();
   }
 
   /**
    * Устанавливает данные генерации для мира.
    * <p>
-   * ТОЛЬКО ВНУТРЕННЕЕ ИСПОЛЬЗОВАНИЕ. Нет необходимости помечать как "dirty", так как это будет вызываться только при генерации мира, перед первым
-   * сохранением чанка.
+   * ТОЛЬКО ВНУТРЕННЕЕ ИСПОЛЬЗОВАНИЕ. Нет необходимости помечать как "dirty", так как это будет вызываться только при генерации мира, перед первым сохранением чанка.
    *
    * @param rockLayer1     Массив данных первого слоя камня.
    * @param rockLayer2     Массив данных второго слоя камня.
@@ -263,8 +376,8 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    * @param floraDiversity Разнообразие растительности.
    */
   public void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, int[] soilLayer1,
-      DataLayerClassic[] stabilityLayer, DataLayerClassic[] drainageLayer, int[] seaLevelOffset,
-      float rainfall, float regionalTemp, float avgTemp, float floraDensity, float floraDiversity) {
+          DataLayerClassic[] stabilityLayer, DataLayerClassic[] drainageLayer, int[] seaLevelOffset,
+          float rainfall, float regionalTemp, float avgTemp, float floraDensity, float floraDiversity) {
 
     this.initialized = true;
 
@@ -291,37 +404,114 @@ public final class ProviderChunkData implements ICapabilityChunkData {
   }
 
   /**
-   * Adds generated ores to this chunk list of ores Should be used by ore vein generators to save in this chunk which ores generated here
+   * Возвращает слой стабильности по указанным координатам.
    *
-   * @param vein the ore added by ore vein generator
+   * @param x Координата X.
+   * @param z Координата Z.
+   * @return Слой стабильности.
    */
-  public void markVeinGenerated(@NotNull Vein vein) {
-    generatedVeins.add(vein);
+  public DataLayerClassic getStabilityLayer(int x, int z) {
+    return stabilityLayer[z << 4 | x];
   }
 
   /**
-   * Увеличивает количество работы на указанное значение.
+   * Возвращает слой дренажа по указанным координатам.
    *
-   * @param amount Количество работы для добавления.
+   * @param x Координата X.
+   * @param z Координата Z.
+   * @return Слой дренажа.
    */
-  public void addWork(int amount) {
-    chunkWorkage += amount;
+  public DataLayerClassic getDrainageLayer(int x, int z) {
+    return drainageLayer[z << 4 | x];
   }
 
   /**
-   * Увеличивает количество работы на 1.
+   * Возвращает смещение уровня моря для указанной позиции.
+   *
+   * @param pos Позиция блока.
+   * @return Смещение уровня моря для указанной позиции.
    */
-  public void addWork() {
-    addWork(1);
+  public int getSeaLevelOffset(BlockPos pos) {
+    return getSeaLevelOffset(pos.getX() & 15, pos.getY() & 15);
   }
 
   /**
-   * Устанавливает количество работы.
+   * Возвращает смещение уровня моря для указанных координат.
    *
-   * @param amount Количество работы.
+   * @param x Координата X.
+   * @param z Координата Z.
+   * @return Смещение уровня моря для указанных координат.
    */
-  public void setWork(int amount) {
-    chunkWorkage = amount;
+  public int getSeaLevelOffset(int x, int z) {
+    return seaLevelOffset[z << 4 | x];
+  }
+
+  public SoilType getSoilLayer1(int x, int z) {
+    return SoilType.valueOf(soilLayer1[z << 4 | x]);
+  }
+
+  /**
+   * Возвращает тип горной породы для слоя 1 по указанным координатам.
+   *
+   * @param x Координата X.
+   * @param z Координата Z.
+   * @return Тип горной породы для слоя 1.
+   */
+  public RockType getRockLayer1(int x, int z) {
+    return RockType.valueOf(rockLayer1[z << 4 | x]);
+  }
+
+  /**
+   * Возвращает тип горной породы для слоя 2 по указанным координатам.
+   *
+   * @param x Координата X.
+   * @param z Координата Z.
+   * @return Тип горной породы для слоя 2.
+   */
+  public RockType getRockLayer2(int x, int z) {
+    return RockType.valueOf(rockLayer2[z << 4 | x]);
+  }
+
+  /**
+   * Возвращает тип горной породы для слоя 3 по указанным координатам.
+   *
+   * @param x Координата X.
+   * @param z Координата Z.
+   * @return Тип горной породы для слоя 3.
+   */
+  public RockType getRockLayer3(int x, int z) {
+    return RockType.valueOf(rockLayer3[z << 4 | x]);
+  }
+
+  /**
+   * Возвращает тип горной породы для указанных координат высоты.
+   *
+   * @param x Координата X.
+   * @param y Координата Y.
+   * @param z Координата Z.
+   * @return Тип горной породы для указанных координат высоты.
+   */
+  public RockType getRockLayerHeight(int x, int y, int z) {
+    int offset = getSeaLevelOffset(x, z);
+    if (y <= ROCKLAYER3 + offset) {
+      return getRockLayer3(x, z);
+    }
+    if (y <= ROCKLAYER2 + offset) {
+      return getRockLayer2(x, z);
+    }
+    return getRockLayer1(x, z);
+  }
+
+  /**
+   * Возвращает тип почвы для указанных координат высоты.
+   *
+   * @param x Координата X.
+   * @param y Координата Y.
+   * @param z Координата Z.
+   * @return Тип почвы для указанных координат высоты.
+   */
+  public SoilType getSoilLayerHeight(int x, int y, int z) {
+    return getSoilLayer1(x, z);
   }
 
   /**
@@ -388,28 +578,6 @@ public final class ProviderChunkData implements ICapabilityChunkData {
   }
 
   /**
-   * Проверяет, является ли указанная позиция стабильной.
-   *
-   * @param x Координата X.
-   * @param z Координата Z.
-   * @return {@code true}, если указанная позиция стабильна, иначе {@code false}.
-   */
-  public boolean isStable(int x, int z) {
-    return getStabilityLayer(x, z).valueInt == 0;
-  }
-
-  /**
-   * Возвращает значение дренажа для указанных координат.
-   *
-   * @param x Координата X.
-   * @param z Координата Z.
-   * @return Значение дренажа для указанных координат.
-   */
-  public int getDrainage(int x, int z) {
-    return getDrainageLayer(x, z).valueInt;
-  }
-
-  /**
    * Возвращает тип горной породы для указанной позиции.
    *
    * @param pos Позиция блока.
@@ -417,10 +585,6 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    */
   public RockType getRockHeight(BlockPos pos) {
     return getRockHeight(pos.getX(), pos.getY(), pos.getZ());
-  }
-
-  public SoilType getSoilHeight(BlockPos pos) {
-    return getSoilHeight(pos.getX(), pos.getY(), pos.getZ());
   }
 
   /**
@@ -435,81 +599,6 @@ public final class ProviderChunkData implements ICapabilityChunkData {
     return getRockLayerHeight(x & 15, y, z & 15);
   }
 
-  public SoilType getSoilHeight(int x, int y, int z) {
-    return getSoilLayerHeight(x & 15, y, z & 15);
-  }
-
-  /**
-   * Возвращает смещение уровня моря для указанной позиции.
-   *
-   * @param pos Позиция блока.
-   * @return Смещение уровня моря для указанной позиции.
-   */
-  public int getSeaLevelOffset(BlockPos pos) {
-    return getSeaLevelOffset(pos.getX() & 15, pos.getY() & 15);
-  }
-
-  /**
-   * Возвращает смещение уровня моря для указанных координат.
-   *
-   * @param x Координата X.
-   * @param z Координата Z.
-   * @return Смещение уровня моря для указанных координат.
-   */
-  public int getSeaLevelOffset(int x, int z) {
-    return seaLevelOffset[z << 4 | x];
-  }
-
-  /**
-   * Увеличивает защиту спавна на указанный множитель.
-   *
-   * @param multiplier Множитель защиты спавна.
-   */
-  public void addSpawnProtection(int multiplier) {
-    if (protectedTicks < Calendar.PLAYER_TIME.getTicks()) {
-      protectedTicks = Calendar.PLAYER_TIME.getTicks();
-    }
-    protectedTicks += multiplier * 600L;
-  }
-
-  /**
-   * Возвращает оставшуюся защиту спавна.
-   *
-   * @return Оставшаяся защита спавна.
-   */
-  public long getSpawnProtection() {
-    return protectedTicks - (24 * ICalendar.TICKS_IN_HOUR) - Calendar.PLAYER_TIME.getTicks();
-  }
-
-  /**
-   * Проверяет, находится ли объект под защитой спавна.
-   *
-   * @return {@code true}, если объект находится под защитой спавна, иначе {@code false}.
-   */
-  public boolean isSpawnProtected() {
-    return getSpawnProtection() > 0L;
-  }
-
-  @Override
-  public boolean canWork(int amount) {
-    return ConfigTFC.Devices.SLUICE.maxWorkChunk == 0
-        || chunkWorkage <= ConfigTFC.Devices.SLUICE.maxWorkChunk + amount;
-  }
-
-  /**
-   * Сбрасывает значение последнего тика обновления на текущее время игрока.
-   */
-  public void resetLastUpdateTick() {
-    this.lastUpdateTick = Calendar.PLAYER_TIME.getTicks();
-  }
-
-  /**
-   * Сбрасывает значение последнего года обновления на текущий год в календаре.
-   */
-  public void resetLastUpdateYear() {
-    this.lastUpdateYear = Calendar.CALENDAR_TIME.getTotalYears();
-  }
-
   /**
    * Возвращает список допустимых типов деревьев, основываясь на климатических условиях.
    *
@@ -517,9 +606,9 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    */
   public List<Tree> getValidTrees() {
     return TFCRegistries.TREES.getValuesCollection().stream()
-        .filter(t -> t.isValidLocation(averageTemp, rainfall, floraDensity))
-        .sorted((s, t) -> (int) (t.getDominance() - s.getDominance()))
-        .collect(Collectors.toList());
+            .filter(t -> t.isValidLocation(averageTemp, rainfall, floraDensity))
+            .sorted((s, t) -> (int) (t.getDominance() - s.getDominance()))
+            .collect(Collectors.toList());
   }
 
   /**
@@ -530,113 +619,9 @@ public final class ProviderChunkData implements ICapabilityChunkData {
   @Nullable
   public Tree getSparseGenTree() {
     return TFCRegistries.TREES.getValuesCollection().stream()
-        .filter(t -> t.isValidLocation(0.5f * averageTemp + 10f, 0.5f * rainfall + 120f, 0.5f))
-        .min((s, t) -> (int) (t.getDominance() - s.getDominance()))
-        .orElse(null);
-  }
-
-  /**
-   * Возвращает тип горной породы для слоя 1 по указанным координатам.
-   *
-   * @param x Координата X.
-   * @param z Координата Z.
-   * @return Тип горной породы для слоя 1.
-   */
-  public RockType getRockLayer1(int x, int z) {
-    return RockType.valueOf(rockLayer1[z << 4 | x]);
-  }
-
-  /**
-   * Возвращает тип горной породы для слоя 2 по указанным координатам.
-   *
-   * @param x Координата X.
-   * @param z Координата Z.
-   * @return Тип горной породы для слоя 2.
-   */
-  public RockType getRockLayer2(int x, int z) {
-    return RockType.valueOf(rockLayer2[z << 4 | x]);
-  }
-
-  /**
-   * Возвращает тип горной породы для слоя 3 по указанным координатам.
-   *
-   * @param x Координата X.
-   * @param z Координата Z.
-   * @return Тип горной породы для слоя 3.
-   */
-  public RockType getRockLayer3(int x, int z) {
-    return RockType.valueOf(rockLayer3[z << 4 | x]);
-  }
-
-  public SoilType getSoilLayer1(int x, int z) {
-    return SoilType.valueOf(soilLayer1[z << 4 | x]);
-  }
-
-  /**
-   * Возвращает слой стабильности по указанным координатам.
-   *
-   * @param x Координата X.
-   * @param z Координата Z.
-   * @return Слой стабильности.
-   */
-  public DataLayerClassic getStabilityLayer(int x, int z) {
-    return stabilityLayer[z << 4 | x];
-  }
-
-  /**
-   * Возвращает слой дренажа по указанным координатам.
-   *
-   * @param x Координата X.
-   * @param z Координата Z.
-   * @return Слой дренажа.
-   */
-  public DataLayerClassic getDrainageLayer(int x, int z) {
-    return drainageLayer[z << 4 | x];
-  }
-
-  /**
-   * Возвращает тип горной породы для указанных координат высоты.
-   *
-   * @param x Координата X.
-   * @param y Координата Y.
-   * @param z Координата Z.
-   * @return Тип горной породы для указанных координат высоты.
-   */
-  public RockType getRockLayerHeight(int x, int y, int z) {
-    int offset = getSeaLevelOffset(x, z);
-    if (y <= ROCKLAYER3 + offset) {
-      return getRockLayer3(x, z);
-    }
-    if (y <= ROCKLAYER2 + offset) {
-      return getRockLayer2(x, z);
-    }
-    return getRockLayer1(x, z);
-  }
-
-  /**
-   * Возвращает тип почвы для указанных координат высоты.
-   *
-   * @param x Координата X.
-   * @param y Координата Y.
-   * @param z Координата Z.
-   * @return Тип почвы для указанных координат высоты.
-   */
-  public SoilType getSoilLayerHeight(int x, int y, int z) {
-    return getSoilLayer1(x, z);
-  }
-
-  @Override
-  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-
-    return capability == CapabilityChunkData.CAPABILITY;
-  }
-
-  @Nullable
-  @Override
-  @SuppressWarnings("unchecked")
-  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
-
-    return hasCapability(capability, facing) ? (T) this : null;
+            .filter(t -> t.isValidLocation(0.5f * averageTemp + 10f, 0.5f * rainfall + 120f, 0.5f))
+            .min((s, t) -> (int) (t.getDominance() - s.getDominance()))
+            .orElse(null);
   }
 
   @Override
@@ -648,5 +633,21 @@ public final class ProviderChunkData implements ICapabilityChunkData {
   public void deserializeNBT(NBTTagCompound nbt) {
     CapabilityChunkData.CAPABILITY.readNBT(this, null, nbt);
   }
+
+  @Override
+  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+
+    return capability == CapabilityChunkData.CAPABILITY;
+  }
+
+
+  @Nullable
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+
+    return hasCapability(capability, facing) ? (T) this : null;
+  }
+
 
 }

@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 @FunctionalInterface
 public interface DrinkableProperty {
 
-    FluidProperty<DrinkableProperty> DRINKABLE = new FluidProperty<>("drinkable");
+  FluidProperty<DrinkableProperty> DRINKABLE = new FluidProperty<>("drinkable");
 
-    void onDrink(@NotNull EntityPlayer player);
+  void onDrink(@NotNull EntityPlayer player);
 }

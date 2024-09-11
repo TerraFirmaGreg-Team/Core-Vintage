@@ -12,10 +12,10 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 
 
-import net.dries007.tfc.objects.items.ItemTrailMix;
 import com.google.gson.JsonObject;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.objects.items.ItemTrailMix;
 import net.dries007.tfc.objects.recipes.RecipeUtils;
 import net.dries007.tfc.util.calendar.Calendar;
 
@@ -27,42 +27,46 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class TrailMixRecipe extends SandwichBasedRecipe {
 
-    public TrailMixRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @NotNull ItemStack result, int damage) {
-        super(group, input, result, damage);
-    }
+  public TrailMixRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @NotNull ItemStack result, int damage) {
+    super(group, input, result, damage);
+  }
 
-    @NotNull
+  @NotNull
+  @Override
+  public ItemStack getCraftingResult(@NotNull InventoryCrafting inv) {
+    ItemStack output = super.getCraftingResult(inv);
+    IFood food = output.getCapability(CapabilityFood.CAPABILITY, null);
+    if (food instanceof ItemTrailMix.TrailMixHandler trailMix) {
+      List<FoodData> ingredients = new ArrayList<>();
+      getIngredients(inv, ingredients);
+      if (ingredients.isEmpty()) {
+        return ItemStack.EMPTY;
+      }
+
+      trailMix.initCreationFoods(ingredients);
+      // Meals get decay reset as they have on average, high decay modifiers. Also it's too much of a pain to re-calculate a remaining decay fraction average
+      trailMix.setCreationDate(Calendar.PLAYER_TIME.getTicks());
+    }
+    return output;
+  }
+
+  @SuppressWarnings("unused")
+  public static class Factory implements IRecipeFactory {
+
     @Override
-    public ItemStack getCraftingResult(@NotNull InventoryCrafting inv) {
-        ItemStack output = super.getCraftingResult(inv);
-        IFood food = output.getCapability(CapabilityFood.CAPABILITY, null);
-        if (food instanceof ItemTrailMix.TrailMixHandler trailMix) {
-            List<FoodData> ingredients = new ArrayList<>();
-            getIngredients(inv, ingredients);
-            if (ingredients.isEmpty()) return ItemStack.EMPTY;
+    public IRecipe parse(final JsonContext context, final JsonObject json) {
+      String group = JsonUtils.getString(json, "group", "");
 
-            trailMix.initCreationFoods(ingredients);
-            // Meals get decay reset as they have on average, high decay modifiers. Also it's too much of a pain to re-calculate a remaining decay fraction average
-            trailMix.setCreationDate(Calendar.PLAYER_TIME.getTicks());
-        }
-        return output;
+      CraftingHelper.ShapedPrimer primer = RecipeUtils.parsePhaped(context, json);
+
+      ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
+      final int damage;
+      if (JsonUtils.hasField(json, "damage")) {
+        damage = JsonUtils.getInt(json, "damage");
+      } else {
+        damage = 1;
+      }
+      return new TrailMixRecipe(group.isEmpty() ? null : new ResourceLocation(group), primer, result, damage);
     }
-
-    @SuppressWarnings("unused")
-    public static class Factory implements IRecipeFactory {
-
-        @Override
-        public IRecipe parse(final JsonContext context, final JsonObject json) {
-            String group = JsonUtils.getString(json, "group", "");
-
-            CraftingHelper.ShapedPrimer primer = RecipeUtils.parsePhaped(context, json);
-
-            ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
-            final int damage;
-            if (JsonUtils.hasField(json, "damage"))
-                damage = JsonUtils.getInt(json, "damage");
-            else damage = 1;
-            return new TrailMixRecipe(group.isEmpty() ? null : new ResourceLocation(group), primer, result, damage);
-        }
-    }
+  }
 }

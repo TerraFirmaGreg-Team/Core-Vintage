@@ -17,7 +17,7 @@ public abstract class BaseCommandTree extends CommandTreeBase {
 
   @Override
   public void execute(MinecraftServer server, ICommandSender sender, String[] args)
-      throws CommandException {
+          throws CommandException {
 
     if (args.length == 0) {
 

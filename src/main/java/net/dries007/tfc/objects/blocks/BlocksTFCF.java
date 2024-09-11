@@ -258,7 +258,15 @@ public final class BlocksTFCF {
 
   @GameRegistry.ObjectHolder("groundcover/lightstone")
   public static final BlockLightstone LIGHTSTONE = getNull();
-
+  @Getter
+  private static final ImmutableList<BlockCaveMushroom> allMushroomPlantBlocks = Helpers.getNull();
+  @Getter
+  private static final ImmutableList<BlockJoshuaTreeFlower> allJoshuaTreeFlowerBlocks = Helpers.getNull();
+  //private static ImmutableList<MultiBlockBase> allMultiBlocks = Helpers.getNull();
+  @Getter
+  private static final ImmutableList<BlockJoshuaTreeLog> allJoshuaTreeLogBlocks = Helpers.getNull();
+  @Getter
+  private static final ImmutableList<BlockJoshuaTreeSapling> allJoshuaTreeSaplingBlocks = Helpers.getNull();
   //MultiBlocks
     /*@GameRegistry.ObjectHolder("multiblock/campfire")
     public static final BlockCampfire Campfire = Helpers.getNull();
@@ -330,16 +338,7 @@ public final class BlocksTFCF {
   @Getter
   private static ImmutableList<BlockPlantDummy1> allStandardBlocks = Helpers.getNull();
   @Getter
-  private static final ImmutableList<BlockCaveMushroom> allMushroomPlantBlocks = Helpers.getNull();
-  @Getter
   private static ImmutableList<BlockLightstone> allLightstoneBlocks = Helpers.getNull();
-  @Getter
-  private static final ImmutableList<BlockJoshuaTreeFlower> allJoshuaTreeFlowerBlocks = Helpers.getNull();
-  //private static ImmutableList<MultiBlockBase> allMultiBlocks = Helpers.getNull();
-  @Getter
-  private static final ImmutableList<BlockJoshuaTreeLog> allJoshuaTreeLogBlocks = Helpers.getNull();
-  @Getter
-  private static final ImmutableList<BlockJoshuaTreeSapling> allJoshuaTreeSaplingBlocks = Helpers.getNull();
 
     /*public static ImmutableList<MultiBlockBase> getAllMultiBlocks()
     {
@@ -858,14 +857,6 @@ public final class BlocksTFCF {
     register(TEUrn.class, "urn");
   }
 
-  public static Block registerWoodBlock(IForgeRegistry<Block> r, String name, Block block) {
-    block.setRegistryName(MODID_TFCF, name);
-    block.setTranslationKey(MODID_TFCF + "." + name.replace('/', '.'));
-    block.setCreativeTab(CreativeTabsTFC.CT_MISC);
-    r.register(block);
-    return block;
-  }
-
   private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block, CreativeTabs ct) {
     block.setCreativeTab(ct);
     return register(r, name, block);
@@ -880,5 +871,13 @@ public final class BlocksTFCF {
 
   private static <T extends TileEntity> void register(Class<T> te, String name) {
     TileEntity.register(MODID_TFCF + ":" + name, te);
+  }
+
+  public static Block registerWoodBlock(IForgeRegistry<Block> r, String name, Block block) {
+    block.setRegistryName(MODID_TFCF, name);
+    block.setTranslationKey(MODID_TFCF + "." + name.replace('/', '.'));
+    block.setCreativeTab(CreativeTabsTFC.CT_MISC);
+    r.register(block);
+    return block;
   }
 }

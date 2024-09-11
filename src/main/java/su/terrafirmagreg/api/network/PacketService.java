@@ -1,8 +1,5 @@
 package su.terrafirmagreg.api.network;
 
-import static net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.Packet;
@@ -11,6 +8,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+
+
+import static net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class PacketService implements IPacketService {
 
@@ -29,9 +29,9 @@ public class PacketService implements IPacketService {
 
   @Override
   public void sendToAllAround(IMessage message, int dimension, double x, double y, double z,
-      double range) {
+          double range) {
     this.threadedNetworkWrapper.sendToAllAround(message,
-        new TargetPoint(dimension, x, y, z, range));
+            new TargetPoint(dimension, x, y, z, range));
   }
 
   @Override
@@ -42,7 +42,7 @@ public class PacketService implements IPacketService {
   @Override
   public void sendToAllAround(IMessage message, int dimension, BlockPos blockPos, double range) {
     this.sendToAllAround(message, dimension, blockPos.getX(), blockPos.getY(), blockPos.getZ(),
-        range);
+            range);
   }
 
   @Override

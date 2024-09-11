@@ -55,149 +55,64 @@ import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 public class BlockSnare extends BaseBlock implements IProviderTile {
 
   protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D,
-      1.0D);
+          1.0D);
 
   public BlockSnare() {
     super(Settings.of(Material.WOOD));
 
     getSettings()
-        .registryKey("device/snare")
-        .sound(SoundType.WOOD)
-        .hardness(1.5f)
-        .nonFullCube()
-        .nonOpaque()
-        .size(Size.LARGE)
-        .weight(Weight.MEDIUM);
+            .registryKey("device/snare")
+            .sound(SoundType.WOOD)
+            .hardness(1.5f)
+            .nonFullCube()
+            .nonOpaque()
+            .size(Size.LARGE)
+            .weight(Weight.MEDIUM);
 
     setTickRandomly(true);
     setHarvestLevel(ToolClasses.AXE, 0);
     setDefaultState(blockState.getBaseState()
-        .withProperty(HORIZONTAL, EnumFacing.NORTH)
-        .withProperty(BAITED, Boolean.FALSE)
-        .withProperty(CLOSED, Boolean.FALSE));
-  }
-
-  @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, HORIZONTAL, BAITED, CLOSED);
+            .withProperty(HORIZONTAL, EnumFacing.NORTH)
+            .withProperty(BAITED, Boolean.FALSE)
+            .withProperty(CLOSED, Boolean.FALSE));
   }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-        .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
-        .withProperty(BAITED, meta / 4 % 2 != 0)
-        .withProperty(CLOSED, meta / 8 != 0);
+            .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
+            .withProperty(BAITED, meta / 4 % 2 != 0)
+            .withProperty(CLOSED, meta / 8 != 0);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
     return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(BAITED) ? 4 : 0) + (
-        state.getValue(CLOSED) ? 8 : 0);
+            state.getValue(CLOSED) ? 8 : 0);
   }
 
   @Override
-  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-      float hitX, float hitY, float hitZ, int meta,
-      EntityLivingBase placer) {
-    return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
-  }
-
-  @Override
-  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
-      IBlockAccess worldIn, BlockPos pos) {
-    AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
-    return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ,
-        axisalignedbb.maxX, (float) 0 * 0.125F,
-        axisalignedbb.maxZ);
-  }
-
-  @Override
-  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    IBlockState iblockstate = worldIn.getBlockState(pos.down());
-    Block block = iblockstate.getBlock();
-
-    if (block != Blocks.BARRIER) {
-      BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(),
-          EnumFacing.UP);
-      return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock()
-          .isLeaves(iblockstate, worldIn, pos.down());
-    } else {
-      return false;
-    }
-  }
-
-  @Override
-  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
-      @Nullable TileEntity tile, ItemStack stack) {
-    if (tile instanceof TileSnare tileSnare && !tileSnare.isOpen()) {
-      if (Math.random() < ConfigTFCThings.Items.SNARE.breakChance) {
-        worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f,
-            0.8f);
-      } else {
-        super.harvestBlock(worldIn, player, pos, state, tile, stack);
-      }
-    } else {
-      super.harvestBlock(worldIn, player, pos, state, tile, stack);
-    }
-  }
-
-  @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-      EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-      float hitX, float hitY, float hitZ) {
-    if (!state.getValue(BAITED)) {
-      ItemStack stack = playerIn.getHeldItem(hand);
-      if ((stack.getItem() instanceof ItemSeedsTFC || isFood(stack)) && !worldIn.isRemote) {
-        if (!playerIn.isCreative()) {
-          stack.shrink(1);
-          if (stack.isEmpty()) {
-            playerIn.inventory.deleteStack(stack);
-          }
-        }
-        state = state.withProperty(BAITED, Boolean.TRUE);
-        worldIn.setBlockState(pos, state, 2);
-      }
-    }
+  public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
     return true;
   }
 
-  private boolean isFood(ItemStack stack) {
-    AnimalFood food = AnimalFood.get(EntityAnimalChicken.class);
-    return food != null && food.isFood(stack);
-  }
-
   @Override
-  public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-    if (isCapturable(entityIn)) {
-      var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
-      EntityLivingBase entityLiving = (EntityLivingBase) entityIn;
-      if (tile.isOpen()) {
-        tile.setCapturedEntity(entityLiving);
-        entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-        tile.setOpen(false);
-        state = state.withProperty(CLOSED, Boolean.TRUE);
-        state = state.withProperty(BAITED, Boolean.FALSE);
-        worldIn.setBlockState(pos, state, 2);
-      } else if (tile.getCapturedEntity() != null && tile.getCapturedEntity()
-          .equals(entityLiving)) {
-        entityLiving.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-      }
-    }
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return TRAP_AABB;
   }
 
   @Override
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     AxisAlignedBB captureBox = new AxisAlignedBB(pos.getX() - 10.0D, pos.getY() - 5.0D,
-        pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D,
-        pos.getZ() + 10.0D);
+            pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D,
+            pos.getZ() + 10.0D);
     var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
     if (tile.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox).isEmpty()
-        && !worldIn.isRemote) {
+            && !worldIn.isRemote) {
       for (EntityAnimalBase animal : worldIn.getEntitiesWithinAABB(EntityAnimalBase.class,
-          captureBox)) {
+              captureBox)) {
         if ((isCapturable(animal)) && !(worldIn.getBlockState(animal.getPosition())
-            .getBlock() instanceof BlockSnare)) {
+                .getBlock() instanceof BlockSnare)) {
           tile.setCapturedEntity(animal);
           tile.setOpen(false);
           state = state.withProperty(CLOSED, Boolean.TRUE);
@@ -245,21 +160,15 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
     }
   }
 
-  private boolean isCapturable(Entity entityIn) {
-    return entityIn instanceof EntityAnimalRabbit || entityIn instanceof EntityAnimalPheasant
-        || entityIn instanceof EntityAnimalDuck ||
-        entityIn instanceof EntityAnimalChicken || entityIn instanceof EntityAnimalTurkey;
-  }
-
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-      BlockPos fromPos) {
+          BlockPos fromPos) {
     if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
       var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
       if (!tile.isOpen()) {
         if (Math.random() < ConfigTFCThings.Items.SNARE.breakChance) {
           worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f,
-              0.8f);
+                  0.8f);
         } else {
           this.dropBlockAsItem(worldIn, pos, state, 0);
         }
@@ -271,13 +180,104 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
   }
 
   @Override
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return TRAP_AABB;
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    IBlockState iblockstate = worldIn.getBlockState(pos.down());
+    Block block = iblockstate.getBlock();
+
+    if (block != Blocks.BARRIER) {
+      BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(),
+              EnumFacing.UP);
+      return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock()
+              .isLeaves(iblockstate, worldIn, pos.down());
+    } else {
+      return false;
+    }
   }
 
   @Override
-  public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
+          EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+          float hitX, float hitY, float hitZ) {
+    if (!state.getValue(BAITED)) {
+      ItemStack stack = playerIn.getHeldItem(hand);
+      if ((stack.getItem() instanceof ItemSeedsTFC || isFood(stack)) && !worldIn.isRemote) {
+        if (!playerIn.isCreative()) {
+          stack.shrink(1);
+          if (stack.isEmpty()) {
+            playerIn.inventory.deleteStack(stack);
+          }
+        }
+        state = state.withProperty(BAITED, Boolean.TRUE);
+        worldIn.setBlockState(pos, state, 2);
+      }
+    }
     return true;
+  }
+
+  @Override
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
+          float hitX, float hitY, float hitZ, int meta,
+          EntityLivingBase placer) {
+    return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
+  }
+
+  @Override
+  public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+    if (isCapturable(entityIn)) {
+      var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
+      EntityLivingBase entityLiving = (EntityLivingBase) entityIn;
+      if (tile.isOpen()) {
+        tile.setCapturedEntity(entityLiving);
+        entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+        tile.setOpen(false);
+        state = state.withProperty(CLOSED, Boolean.TRUE);
+        state = state.withProperty(BAITED, Boolean.FALSE);
+        worldIn.setBlockState(pos, state, 2);
+      } else if (tile.getCapturedEntity() != null && tile.getCapturedEntity()
+              .equals(entityLiving)) {
+        entityLiving.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+      }
+    }
+  }
+
+  @Override
+  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
+          @Nullable TileEntity tile, ItemStack stack) {
+    if (tile instanceof TileSnare tileSnare && !tileSnare.isOpen()) {
+      if (Math.random() < ConfigTFCThings.Items.SNARE.breakChance) {
+        worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f,
+                0.8f);
+      } else {
+        super.harvestBlock(worldIn, player, pos, state, tile, stack);
+      }
+    } else {
+      super.harvestBlock(worldIn, player, pos, state, tile, stack);
+    }
+  }
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, HORIZONTAL, BAITED, CLOSED);
+  }
+
+  private boolean isFood(ItemStack stack) {
+    AnimalFood food = AnimalFood.get(EntityAnimalChicken.class);
+    return food != null && food.isFood(stack);
+  }
+
+  private boolean isCapturable(Entity entityIn) {
+    return entityIn instanceof EntityAnimalRabbit || entityIn instanceof EntityAnimalPheasant
+            || entityIn instanceof EntityAnimalDuck ||
+            entityIn instanceof EntityAnimalChicken || entityIn instanceof EntityAnimalTurkey;
+  }
+
+  @Override
+  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
+          IBlockAccess worldIn, BlockPos pos) {
+    AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
+    return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ,
+            axisalignedbb.maxX, (float) 0 * 0.125F,
+            axisalignedbb.maxZ);
   }
 
   @Override

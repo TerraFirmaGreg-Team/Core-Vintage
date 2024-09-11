@@ -13,6 +13,13 @@ public class ModifierStorage implements Iterable<ModifierBase> {
 
   private final Map<String, ModifierBase> map = new Object2ObjectOpenHashMap<>();
 
+  public ModifierBase add(ModifierBase value) {
+    if (value == null) {
+      return null;
+    }
+    return this.put(value.getName(), value);
+  }
+
   private ModifierBase put(String key, ModifierBase value) {
     if ((value.getChange() == 0f && value.getPotency() == 0f)) {
       return null;
@@ -24,13 +31,6 @@ public class ModifierStorage implements Iterable<ModifierBase> {
     } else {
       return map.put(key, value);
     }
-  }
-
-  public ModifierBase add(ModifierBase value) {
-    if (value == null) {
-      return null;
-    }
-    return this.put(value.getName(), value);
   }
 
   public void add(Optional<? extends ModifierBase> tempModifier) {

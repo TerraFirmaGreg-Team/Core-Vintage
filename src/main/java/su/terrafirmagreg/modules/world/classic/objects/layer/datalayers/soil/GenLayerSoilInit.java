@@ -9,15 +9,15 @@ import net.minecraft.world.gen.layer.IntCache;
 import org.jetbrains.annotations.NotNull;
 
 public class GenLayerSoilInit
-    extends GenLayerBase {
+        extends GenLayerBase {
 
   private final int[] layerRocks;
 
   public GenLayerSoilInit(long par1) {
     super(par1);
     layerRocks = SoilType.getTypes().stream()
-        .mapToInt(SoilType::indexOf)
-        .sorted().toArray();
+            .mapToInt(SoilType::indexOf)
+            .sorted().toArray();
 
   }
 

@@ -46,11 +46,11 @@ public class LootBuilder {
   public LootBuilder(String name, String pool, int weight, Item item) {
 
     this(name, pool, weight, 0, item, new ArrayList<LootCondition>(),
-        new ArrayList<LootFunction>());
+            new ArrayList<LootFunction>());
   }
 
   public LootBuilder(String name, String pool, int weight, int quality, Item item,
-      List<LootCondition> conditions, List<LootFunction> functions) {
+          List<LootCondition> conditions, List<LootFunction> functions) {
 
     this.name = name;
     this.pool = pool;
@@ -211,15 +211,15 @@ public class LootBuilder {
   public LootEntryItem build() {
 
     return new LootEntryItem(this.item, this.weight, this.quality,
-        this.functions.toArray(new LootFunction[0]),
-        this.conditions.toArray(new LootCondition[0]), this.name);
+            this.functions.toArray(new LootFunction[0]),
+            this.conditions.toArray(new LootCondition[0]), this.name);
   }
 
   @Override
   public String toString() {
 
     return String.format("Name: %s - Pool: %s - Weight: %d - Quality: %d Item: %s", this.name,
-        this.pool, this.weight, this.quality,
-        this.item.getRegistryName());
+            this.pool, this.weight, this.quality,
+            this.item.getRegistryName());
   }
 }

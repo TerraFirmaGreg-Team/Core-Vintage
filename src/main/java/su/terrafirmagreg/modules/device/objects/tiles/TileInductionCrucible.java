@@ -205,10 +205,23 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
     }
   }
 
+  @Override
+  public GuiCrucible getGuiContainer(InventoryPlayer inventoryPlayer, World world,
+          IBlockState state, BlockPos pos) {
+    return new GuiInductionCrucible(getContainer(inventoryPlayer, world, state, pos),
+            inventoryPlayer, this);
+  }
+
   @SideOnly(Side.CLIENT)
   @Override
   public SoundEvent getSoundEvent() {
     return SoundsDevice.INDUCTION_WORK;
+  }
+
+  @SideOnly(Side.CLIENT)
+  @Override
+  public BlockPos getSoundPos() {
+    return this.getPos();
   }
 
   @Override
@@ -231,21 +244,8 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
     soundPlay = value;
   }
 
-  @SideOnly(Side.CLIENT)
-  @Override
-  public BlockPos getSoundPos() {
-    return this.getPos();
-  }
-
   public int getEnergyStored() {
     return energyContainer.getEnergyStored();
-  }
-
-  @Override
-  public GuiCrucible getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
-    return new GuiInductionCrucible(getContainer(inventoryPlayer, world, state, pos),
-            inventoryPlayer, this);
   }
 
   @Override

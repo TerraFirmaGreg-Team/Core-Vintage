@@ -25,51 +25,52 @@ import org.jetbrains.annotations.NotNull;
 
 public class ItemKnifeTFCF extends ItemTool implements ICapabilitySize {
 
-    public final ToolMaterial material;
+  public final ToolMaterial material;
 
-    public ItemKnifeTFCF(ToolMaterial material, float AttackDamage, float AttackSpeed, int Durability, Object... oreNameParts) {
-        super(material.getAttackDamage(), AttackSpeed, material, ImmutableSet.of());
-        this.material = material;
-        this.attackDamage = AttackDamage;
-        this.attackSpeed = AttackSpeed;
-        this.setMaxDamage(Durability);
-        this.setHarvestLevel("knife", material.getHarvestLevel());
+  public ItemKnifeTFCF(ToolMaterial material, float AttackDamage, float AttackSpeed, int Durability, Object... oreNameParts) {
+    super(material.getAttackDamage(), AttackSpeed, material, ImmutableSet.of());
+    this.material = material;
+    this.attackDamage = AttackDamage;
+    this.attackSpeed = AttackSpeed;
+    this.setMaxDamage(Durability);
+    this.setHarvestLevel("knife", material.getHarvestLevel());
 
-        for (Object obj : oreNameParts) {
-            if (obj instanceof Object[])
-                OreDictionaryHelper.register(this, (Object[]) obj);
-            else
-                OreDictionaryHelper.register(this, obj);
-        }
-        OreDictionaryHelper.registerDamageType(this, DamageType.PIERCING);
+    for (Object obj : oreNameParts) {
+      if (obj instanceof Object[]) {
+        OreDictionaryHelper.register(this, (Object[]) obj);
+      } else {
+        OreDictionaryHelper.register(this, obj);
+      }
     }
+    OreDictionaryHelper.registerDamageType(this, DamageType.PIERCING);
+  }
 
-    @Override
-    public boolean doesSneakBypassUse(ItemStack stack, IBlockAccess world, BlockPos pos, EntityPlayer player) {
-        return true;
-    }
+  @Override
+  public boolean doesSneakBypassUse(ItemStack stack, IBlockAccess world, BlockPos pos, EntityPlayer player) {
+    return true;
+  }
 
-    @Override
-    public @NotNull Size getSize(ItemStack stack) {
-        return Size.NORMAL; // Stored in large vessels
-    }
+  @Override
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.MEDIUM;
+  }
 
-    @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return Weight.MEDIUM;
-    }
+  @Override
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.NORMAL; // Stored in large vessels
+  }
 
-    @Override
-    public boolean canStack(ItemStack stack) {
-        return false;
-    }
+  @Override
+  public boolean canStack(ItemStack stack) {
+    return false;
+  }
 
-    @Override
-    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
-        // Knives always take damage
-        if (!worldIn.isRemote) {
-            stack.damageItem(1, entityLiving);
-        }
-        return true;
+  @Override
+  public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
+    // Knives always take damage
+    if (!worldIn.isRemote) {
+      stack.damageItem(1, entityLiving);
     }
+    return true;
+  }
 }

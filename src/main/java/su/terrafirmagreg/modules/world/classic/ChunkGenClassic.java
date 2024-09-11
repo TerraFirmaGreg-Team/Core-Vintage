@@ -74,28 +74,28 @@ public class ChunkGenClassic implements IChunkGenerator {
   public static final IBlockState STONE = Blocks.STONE.getDefaultState();
   public static final IBlockState AIR = Blocks.AIR.getDefaultState();
   public static final IBlockState SALT_WATER = FluidsTFC.SALT_WATER.get().getBlock()
-      .getDefaultState();
+          .getDefaultState();
   public static final IBlockState FRESH_WATER = FluidsTFC.FRESH_WATER.get().getBlock()
-      .getDefaultState();
+          .getDefaultState();
   public static final IBlockState HOT_WATER = FluidsTFC.HOT_WATER.get().getBlock()
-      .getDefaultState();
+          .getDefaultState();
   public static final IBlockState LAVA = Blocks.LAVA.getDefaultState(); // todo: replace
   public static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
   /* Layers must be one here - otherwise snow becomes non-replaceable and wrecks the rest of world gen */
   public static final IBlockState SNOW = Blocks.SNOW_LAYER.getDefaultState()
-      .withProperty(BlockSnow.LAYERS, 1);
+          .withProperty(BlockSnow.LAYERS, 1);
   public static final IBlockState SALT_WATER_ICE = BlocksTFC.SEA_ICE.getDefaultState();
   public static final IBlockState FRESH_WATER_ICE = Blocks.ICE.getDefaultState();
   private static final float[] parabolicField = new float[25];
 
   /* This is done here rather than GameRegistry.registerWorldGenerator since we need to control the ordering of them better */
   private static final IWorldGenerator LAVA_FISSURE_GEN = new GeneratorRarityBased(
-      x -> x.lavaFissureRarity, new GeneratorFissure(true));
+          x -> x.lavaFissureRarity, new GeneratorFissure(true));
   private static final IWorldGenerator WATER_FISSURE_GEN = new GeneratorRarityBased(
-      x -> x.waterFissureRarity, new GeneratorFissure(false));
+          x -> x.waterFissureRarity, new GeneratorFissure(false));
   private static final IWorldGenerator SOIL_PITS_GEN = new GeneratorSoilPits();
   private static final IWorldGenerator LARGE_ROCKS_GEN = new GeneratorRarityBased(
-      x -> x.largeRockRarity, new GeneratorLargeRocks());
+          x -> x.largeRockRarity, new GeneratorLargeRocks());
   private static final IWorldGenerator TREE_GEN = new GeneratorTrees();
   private static final IWorldGenerator BERRY_BUSH_GEN = new GeneratorBerryBushes();
   private static final IWorldGenerator FRUIT_TREE_GEN = new GeneratorFruitTrees();
@@ -104,7 +104,7 @@ public class ChunkGenClassic implements IChunkGenerator {
   private static final IWorldGenerator SPELEOTHEM_GEN = new GeneratorSpeleothem();
   private static final IWorldGenerator WATERFALL_GEN = new GeneratorFalls(FRESH_WATER, 15);
   private static final IWorldGenerator LAVAFALL_GEN = new GeneratorFalls(
-      Blocks.FLOWING_LAVA.getDefaultState(), 5);
+          Blocks.FLOWING_LAVA.getDefaultState(), 5);
   private static final IWorldGenerator SNOW_ICE_GEN = new GeneratorSnowIce();
 
   static {
@@ -206,11 +206,11 @@ public class ChunkGenClassic implements IChunkGenerator {
     drainageGenLayer = GenLayerDrainage.initialize(seed + 11);
 
     caveGen = TerrainGen.getModdedMapGen(new MapGenCaves(stabilityLayer),
-        InitMapGenEvent.EventType.CAVE);
+            InitMapGenEvent.EventType.CAVE);
     surfaceRavineGen = new MapGenRavine(settings.surfaceRavineRarity, settings.surfaceRavineHeight,
-        settings.surfaceRavineVariability);
+            settings.surfaceRavineVariability);
     ravineGen = new MapGenRavine(settings.ravineRarity, settings.ravineHeight,
-        settings.ravineVariability);
+            settings.ravineVariability);
     riverRavineGen = new MapGenRiverRavine(settings.riverRavineRarity);
 
     // Load these now, because if config changes, shit will break
@@ -243,15 +243,15 @@ public class ChunkGenClassic implements IChunkGenerator {
     loadLayerGeneratorData(drainageGenLayer, drainageLayer, chunkX * 16, chunkZ * 16, 16, 16);
 
     rainfall = MathHelper.clamp(
-        250f + 250f * rainfallSpread * (float) noiseGen7.getValue(chunkX * 0.005, chunkZ * 0.005),
-        0, 500);
+            250f + 250f * rainfallSpread * (float) noiseGen7.getValue(chunkX * 0.005, chunkZ * 0.005),
+            0, 500);
     float floraDiversity = MathHelper.clamp(
-        0.5f + 0.5f * floraDiversitySpread * (float) noiseGen9.getValue(chunkX * 0.005,
-            chunkZ * 0.005), 0,
-        1);
+            0.5f + 0.5f * floraDiversitySpread * (float) noiseGen9.getValue(chunkX * 0.005,
+                    chunkZ * 0.005), 0,
+            1);
     float floraDensity = MathHelper.clamp(
-        (0.3f + 0.2f * rainfall / 500f) + 0.4f * floraDensitySpread * (float) noiseGen8.getValue(
-            chunkX * 0.05, chunkZ * 0.05), 0, 1);
+            (0.3f + 0.2f * rainfall / 500f) + 0.4f * floraDensitySpread * (float) noiseGen8.getValue(
+                    chunkX * 0.05, chunkZ * 0.05), 0, 1);
 
     soilLayer1 = soilsGenLayer1.getInts(chunkX * 16, chunkZ * 16, 16, 16).clone();
     rockLayer1 = rocksGenLayer1.getInts(chunkX * 16, chunkZ * 16, 16, 16).clone();
@@ -259,9 +259,9 @@ public class ChunkGenClassic implements IChunkGenerator {
     rockLayer3 = rocksGenLayer3.getInts(chunkX * 16, chunkZ * 16, 16, 16).clone();
 
     final float regionalFactor =
-        5f * 0.09f * (float) noiseGen10.getValue(chunkX * 0.05, chunkZ * 0.05); // Range -5 <> 5
+            5f * 0.09f * (float) noiseGen10.getValue(chunkX * 0.05, chunkZ * 0.05); // Range -5 <> 5
     averageTemp = ClimateHelper.monthFactor(regionalFactor, Month.AVERAGE_TEMPERATURE_MODIFIER,
-        chunkZ << 4);
+            chunkZ << 4);
 
     ChunkPrimerClassic chunkPrimerOut = new ChunkPrimerClassic();
     replaceBlocksForBiomeHigh(chunkX, chunkZ, chunkPrimerIn, chunkPrimerOut);
@@ -279,19 +279,19 @@ public class ChunkGenClassic implements IChunkGenerator {
       for (int x = 0; x < 16; ++x) {
         for (int z = 0; z < 16; ++z) {
           chunkPrimerOut.setBlockState(x, 240, z, Blocks.STAINED_GLASS.getStateFromMeta(
-              Biome.getIdForBiome(getBiomeOffset(x, z)) & 15));
+                  Biome.getIdForBiome(getBiomeOffset(x, z)) & 15));
 
           chunkPrimerOut.setBlockState(x, 230, z,
-              Blocks.STAINED_GLASS.getStateFromMeta(rockLayer1[z << 4 | x] & 15));
+                  Blocks.STAINED_GLASS.getStateFromMeta(rockLayer1[z << 4 | x] & 15));
           chunkPrimerOut.setBlockState(x, 220, z,
-              Blocks.STAINED_GLASS.getStateFromMeta(rockLayer2[z << 4 | x] & 15));
+                  Blocks.STAINED_GLASS.getStateFromMeta(rockLayer2[z << 4 | x] & 15));
           chunkPrimerOut.setBlockState(x, 210, z,
-              Blocks.STAINED_GLASS.getStateFromMeta(rockLayer3[z << 4 | x] & 15));
+                  Blocks.STAINED_GLASS.getStateFromMeta(rockLayer3[z << 4 | x] & 15));
 
           chunkPrimerOut.setBlockState(x, 252, z,
-              Blocks.STAINED_GLASS.getStateFromMeta(stabilityLayer[x << 4 | z].layerID & 15));
+                  Blocks.STAINED_GLASS.getStateFromMeta(stabilityLayer[x << 4 | z].layerID & 15));
           chunkPrimerOut.setBlockState(x, 250, z,
-              Blocks.STAINED_GLASS.getStateFromMeta(drainageLayer[x << 4 | z].layerID & 15));
+                  Blocks.STAINED_GLASS.getStateFromMeta(drainageLayer[x << 4 | z].layerID & 15));
         }
       }
     }
@@ -303,7 +303,7 @@ public class ChunkGenClassic implements IChunkGenerator {
       throw new IllegalStateException("ChunkData capability is missing.");
     }
     chunkData.setGenerationData(rockLayer1, rockLayer2, rockLayer3, soilLayer1, stabilityLayer, drainageLayer, seaLevelOffsetMap, rainfall,
-        regionalFactor, averageTemp, floraDensity, floraDiversity);
+            regionalFactor, averageTemp, floraDensity, floraDiversity);
 
     byte[] biomeIds = chunk.getBiomeArray();
     for (int x = 0; x < 16; ++x) {
@@ -327,7 +327,7 @@ public class ChunkGenClassic implements IChunkGenerator {
     final Biome biome = world.getBiome(blockpos.add(16, 0, 16));
     rand.setSeed(world.getSeed());
     rand.setSeed((long) chunkX * (rand.nextLong() / 2L * 2L + 1L) + (long) chunkZ * (
-        rand.nextLong() / 2L * 2L + 1L) ^ world.getSeed());
+            rand.nextLong() / 2L * 2L + 1L) ^ world.getSeed());
 
     // First, do all terrain related features
     SOIL_PITS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
@@ -353,7 +353,7 @@ public class ChunkGenClassic implements IChunkGenerator {
 
     if (TerrainGen.populate(this, world, rand, chunkX, chunkZ, false, ANIMALS)) {
       EntitySpawnerWorldData.performWorldGenSpawning(world, biome, worldX + 8, worldZ + 8, 16, 16,
-          rand);
+              rand);
     }
 
     // To minimize the effects of this change, i'm putting this here, in the end of chunk generation
@@ -370,7 +370,7 @@ public class ChunkGenClassic implements IChunkGenerator {
 
   @Override
   public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType,
-      BlockPos pos) {
+          BlockPos pos) {
     // This is a temporary measure for making 1.12 closer to playable
     return world.getBiome(pos).getSpawnableList(creatureType);
   }
@@ -378,7 +378,7 @@ public class ChunkGenClassic implements IChunkGenerator {
   @Nullable
   @Override
   public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position,
-      boolean findUnexplored) {
+          boolean findUnexplored) {
     return null; //todo
   }
 
@@ -390,16 +390,6 @@ public class ChunkGenClassic implements IChunkGenerator {
   @Override
   public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
     return false; //todo
-  }
-
-  @SuppressWarnings("SameParameterValue")
-  private void loadLayerGeneratorData(GenLayerBase gen, DataLayerClassic[] layers, int x, int y,
-      int width, int height) {
-    IntCache.resetIntCache();
-    int[] ints = gen.getInts(x, y, width, height);
-    for (int i = 0; i < width * height; ++i) {
-      layers[i] = DataLayerClassic.get(ints[i]);
-    }
   }
 
   @SuppressWarnings("PointlessArithmeticExpression")
@@ -415,13 +405,13 @@ public class ChunkGenClassic implements IChunkGenerator {
           double noiseDR = heightMap[((x + 1) * 5 + z + 0) * 17 + y];
           double noiseUR = heightMap[((x + 1) * 5 + z + 1) * 17 + y];
           final double noiseDLA =
-              (heightMap[((x + 0) * 5 + z + 0) * 17 + y + 1] - noiseDL) * 0.125D;
+                  (heightMap[((x + 0) * 5 + z + 0) * 17 + y + 1] - noiseDL) * 0.125D;
           final double noiseULA =
-              (heightMap[((x + 0) * 5 + z + 1) * 17 + y + 1] - noiseUL) * 0.125D;
+                  (heightMap[((x + 0) * 5 + z + 1) * 17 + y + 1] - noiseUL) * 0.125D;
           final double noiseDRA =
-              (heightMap[((x + 1) * 5 + z + 0) * 17 + y + 1] - noiseDR) * 0.125D;
+                  (heightMap[((x + 1) * 5 + z + 0) * 17 + y + 1] - noiseDR) * 0.125D;
           final double noiseURA =
-              (heightMap[((x + 1) * 5 + z + 1) * 17 + y + 1] - noiseUR) * 0.125D;
+                  (heightMap[((x + 1) * 5 + z + 1) * 17 + y + 1] - noiseUR) * 0.125D;
 
           for (int yy = 0; yy < 8; ++yy) {
             double var34 = noiseDL;
@@ -453,6 +443,292 @@ public class ChunkGenClassic implements IChunkGenerator {
         }
       }
     }
+  }
+
+  @SuppressWarnings("SameParameterValue")
+  private void loadLayerGeneratorData(GenLayerBase gen, DataLayerClassic[] layers, int x, int y,
+          int width, int height) {
+    IntCache.resetIntCache();
+    int[] ints = gen.getInts(x, y, width, height);
+    for (int i = 0; i < width * height; ++i) {
+      layers[i] = DataLayerClassic.get(ints[i]);
+    }
+  }
+
+  private void replaceBlocksForBiomeHigh(int chunkX, int chunkZ, ChunkPrimer inp,
+          ChunkPrimerClassic outp) {
+    double var6 = 0.03125D;
+    noiseGen4.generateNoiseOctaves(noise4, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, var6 * 4.0D,
+            var6, var6 * 4.0D);
+    boolean[] cliffMap = new boolean[256];
+    for (int x = 0; x < 16; ++x) {
+      for (int z = 0; z < 16; ++z) {
+        int colIndex = z << 4 | x;
+        Biome biome = getBiomeOffset(x, z);
+
+        var rock1 = RockType.valueOf(rockLayer1[colIndex]);
+        var rock2 = RockType.valueOf(rockLayer2[colIndex]);
+        var rock3 = RockType.valueOf(rockLayer3[colIndex]);
+
+        var soil1 = SoilType.valueOf(rockLayer1[colIndex]);
+
+        DataLayerClassic drainage = drainageLayer[colIndex];
+        DataLayerClassic stability = stabilityLayer[colIndex];
+        int noise = (int) (noise4[colIndex] / 3.0D + 6.0D);
+        int smooth = -1;
+
+        IBlockState surfaceBlock = (rainfall + 1.3 * rand.nextGaussian() >= 150f ? BlocksSoil.GRASS
+                : BlocksSoil.DRY_GRASS).get(soil1)
+                .getDefaultState();
+        IBlockState subSurfaceBlock = BlocksSoil.DIRT.get(soil1).getDefaultState();
+
+        if (BiomeUtils.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomeUtils.isBeachBiome(
+                getBiomeOffset(x + 1, z)) ||
+                BiomeUtils.isBeachBiome(getBiomeOffset(x, z + 1)) || BiomeUtils.isBeachBiome(
+                getBiomeOffset(x, z - 1))) {
+          if (!BiomeUtils.isBeachBiome(getBiomeOffset(x, z))) {
+            cliffMap[colIndex] = true;
+          }
+        }
+
+        // Используется для улучшения рек
+        int nonRiverTiles = 0;
+        int nonBeachTiles = 0;
+        for (int a = x - 1; a <= x + 1; a++) {
+          for (int b = z - 1; b <= z + 1; b++) {
+            Biome BiomeAtOffset = getBiomeOffset(a, b);
+            if (!BiomeUtils.isRiverBiome(BiomeAtOffset)) {
+              nonRiverTiles++;
+            }
+            if (!BiomeUtils.isBeachBiome(BiomeAtOffset) && !BiomeUtils.isOceanicBiome(BiomeAtOffset)
+                    &&
+                    BiomeAtOffset != BiomesWorld.DEEP_OCEAN && BiomeAtOffset != BiomesWorld.OCEAN) {
+              nonBeachTiles++;
+            }
+          }
+        }
+
+        int highestStone = 0;
+
+        // Итерируемся по оси Y сверху вниз
+        for (int y = 255 - yOffset; y >= 0; y--) {
+          /*
+           * ВЕРХНЯЯ ЧАСТЬ (используется yOffset)
+           */
+          if (outp.isEmpty(x, y + yOffset, z)) {
+            outp.setBlockState(x, y + yOffset, z, inp.getBlockState(x, y, z));
+            if (y + 1 < yOffset && outp.getBlockState(x, y + yOffset, z) ==
+                    AIR/* нет необходимости проверять снова && BlockUtils.isSoilOrGravel(outp.getBlockState(x, y + yOffset + 1, z))*/) {
+              for (int upCount = 1;
+                      BlockUtils.isSoilOrGravel(outp.getBlockState(x, y + yOffset + upCount, z));
+                      upCount++) {
+                outp.setBlockState(x, y + yOffset + upCount, z, AIR);
+              }
+            }
+          }
+
+          if (outp.getBlockState(x, y + yOffset, z) == STONE) {
+            highestStone = Math.max(highestStone, y);
+          }
+
+          int highestBeachTheoretical = (highestStone - seaLevel) / 4 + seaLevel;
+          int beachCliffHeight =
+                  nonBeachTiles > 0 ? (int) (
+                          (highestStone - highestBeachTheoretical) * (nonBeachTiles) / 6.0
+                                  + highestBeachTheoretical) :
+                          highestBeachTheoretical;
+
+          // Перестраиваем утесы на пляже
+          if (BiomeUtils.isBeachBiome(biome) && y > seaLevel
+                  && outp.getBlockState(x, y + yOffset, z) != AIR && y >= beachCliffHeight) {
+            inp.setBlockState(x, y, z, AIR);
+            outp.setBlockState(x, y + yOffset, z, AIR);
+          }
+          // Гарантируем, что реки не будут заблокированы
+          if (BiomeUtils.isRiverBiome(biome) && y >= seaLevel - 2
+                  && outp.getBlockState(x, y + yOffset, z) != AIR) {
+
+            if (nonRiverTiles > 0) {
+              if (y >= seaLevel - 1) {
+                inp.setBlockState(x, y, z, y >= seaLevel ? AIR : SALT_WATER);
+                outp.setBlockState(x, y + yOffset, z, y >= seaLevel ? AIR : SALT_WATER);
+              }
+            } else {
+              inp.setBlockState(x, y, z, y >= seaLevel ? AIR : SALT_WATER);
+              outp.setBlockState(x, y + yOffset, z, y >= seaLevel ? AIR : SALT_WATER);
+            }
+
+            //outp.setBlockState(x, y + yOffset, z, y >= seaLevel ? AIR : SALT_WATER);
+          } else if (!BiomeUtils.isRiverBiome(biome) && nonRiverTiles < 9
+                  && outp.getBlockState(x, y + yOffset, z) == STONE &&
+                  ((y >= ((highestStone - seaLevel) / (10 - nonRiverTiles) + seaLevel)) || (
+                          nonRiverTiles <= 5 && y >= seaLevel))) {
+            inp.setBlockState(x, y, z, y >= seaLevel ? AIR : SALT_WATER);
+            outp.setBlockState(x, y + yOffset, z, y >= seaLevel ? AIR : SALT_WATER);
+          }
+
+          if (outp.getBlockState(x, y + yOffset, z) == STONE) {
+            if (seaLevelOffsetMap[colIndex] == 0 && y - seaLevel >= 0) {
+              seaLevelOffsetMap[colIndex] = y - seaLevel;
+            }
+
+            if (chunkHeightMap[colIndex] == 0) {
+              chunkHeightMap[colIndex] = y + yOffset;
+            }
+
+            if (y + yOffset <= ROCKLAYER3 + seaLevelOffsetMap[colIndex]) {
+              outp.setBlockState(x, y + yOffset, z, BlocksRock.RAW.get(rock3).getDefaultState());
+            } else if (y + yOffset <= ROCKLAYER2 + seaLevelOffsetMap[colIndex]) {
+              outp.setBlockState(x, y + yOffset, z, BlocksRock.RAW.get(rock2).getDefaultState());
+            } else {
+              outp.setBlockState(x, y + yOffset, z, BlocksRock.RAW.get(rock1).getDefaultState());
+            }
+
+            // Пустыни / сухие районы
+            if (rainfall < +1.3 * rand.nextGaussian() + 75f) {
+              subSurfaceBlock = surfaceBlock = BlocksRock.SAND.get(rock1).getDefaultState();
+            }
+
+            if (biome == BiomesWorld.BEACH || biome == BiomesWorld.OCEAN
+                    || biome == BiomesWorld.DEEP_OCEAN) {
+              subSurfaceBlock = surfaceBlock = BlocksRock.SAND.get(rock1).getDefaultState();
+            } else if (biome == BiomesWorld.GRAVEL_BEACH) {
+              subSurfaceBlock = surfaceBlock = BlocksRock.GRAVEL.get(rock1).getDefaultState();
+            }
+
+            if (smooth == -1) {
+              //The following makes dirt behave nicer and more smoothly, instead of forming sharp cliffs.
+              int arrayIndexx = x > 0 ? x - 1 + (z * 16) : -1;
+              int arrayIndexX = x < 15 ? x + 1 + (z * 16) : -1;
+              int arrayIndexz = z > 0 ? x + ((z - 1) * 16) : -1;
+              int arrayIndexZ = z < 15 ? x + ((z + 1) * 16) : -1;
+              for (int counter = 1; counter < noise / 3; counter++) {
+                if (arrayIndexx >= 0
+                        && seaLevelOffsetMap[colIndex] - (3 * counter) > seaLevelOffsetMap[arrayIndexx]
+                        &&
+                        arrayIndexX >= 0
+                        && seaLevelOffsetMap[colIndex] - (3 * counter) > seaLevelOffsetMap[arrayIndexX]
+                        &&
+                        arrayIndexz >= 0
+                        && seaLevelOffsetMap[colIndex] - (3 * counter) > seaLevelOffsetMap[arrayIndexz]
+                        &&
+                        arrayIndexZ >= 0 && seaLevelOffsetMap[colIndex] - (3 * counter)
+                        > seaLevelOffsetMap[arrayIndexZ]) {
+                  seaLevelOffsetMap[colIndex]--;
+                  noise--;
+                  y--;
+                }
+              }
+              smooth = (int) (noise * (1d - Math.max(Math.min((y - 16) / 80d, 1), 0)));
+
+              // Set soil below water
+              for (int c = 1; c < 3; c++) {
+                if (yOffset + y + c > 256) {
+                  continue;
+                }
+
+                IBlockState current = outp.getBlockState(x, yOffset + y + c, z);
+                if (current != surfaceBlock && current != subSurfaceBlock && !BlockUtils.isWater(
+                        current)) {
+                  outp.setBlockState(x, yOffset + y + c, z, AIR);
+                  if (yOffset + y + c + 1 > 256) {
+                    continue;
+                  }
+                  if (outp.getBlockState(x, yOffset + y + c + 1, z) == SALT_WATER) {
+                    outp.setBlockState(x, yOffset + y + c, z, subSurfaceBlock);
+                  }
+                }
+              }
+
+              // Determine the soil depth based on world y
+              int dirtH = Math.max(8 - ((y + yOffset - 24 - WorldTypeClassic.SEALEVEL) / 16), 0);
+
+              if (smooth > 0) {
+                if (y >= seaLevel - 1 && y + 1 < yOffset
+                        && inp.getBlockState(x, y + 1, z) != SALT_WATER && dirtH > 0 &&
+                        !(BiomeUtils.isBeachBiome(biome) && y > highestBeachTheoretical + 2)) {
+                  outp.setBlockState(x, y + yOffset, z, surfaceBlock);
+
+                  boolean mountains =
+                          BiomeUtils.isMountainBiome(biome) || biome == BiomesWorld.HIGH_HILLS ||
+                                  biome == BiomesWorld.HIGH_HILLS_EDGE ||
+                                  biome == BiomesWorld.MOUNTAINS || biome == BiomesWorld.MOUNTAINS_EDGE;
+                  for (int c = 1; c < dirtH && !mountains && !cliffMap[colIndex]; c++) {
+                    outp.setBlockState(x, y - c + yOffset, z, subSurfaceBlock);
+                    if (c > 1 + (5 - drainage.valueInt)) {
+                      outp.setBlockState(x, y - c + yOffset, z,
+                              BlocksRock.GRAVEL.get(rock1).getDefaultState());
+                    }
+                  }
+                }
+              }
+            }
+
+            if (y > seaLevel - 2 && y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER ||
+                    y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER) {
+              if (biome == BiomesWorld.SWAMPLAND && biome == BiomesWorld.BAYOU
+                      && biome == BiomesWorld.MANGROVE &&
+                      biome == BiomesWorld.MARSH) {
+                if (outp.getBlockState(x, y + yOffset, z) != BlocksRock.SAND.get(rock1)
+                        .getDefaultState()) {
+                  outp.setBlockState(x, y + yOffset, z,
+                          BlocksSoil.DIRT.get(soil1).getDefaultState());
+                }
+              } else if (outp.getBlockState(x, y + yOffset, z) != BlocksRock.SAND.get(rock1)
+                      .getDefaultState() &&
+                      this.rand.nextInt(5) != 0) {
+                outp.setBlockState(x, y + yOffset, z,
+                        BlocksRock.GRAVEL.get(rock1).getDefaultState());
+              }
+            }
+          }
+          //  && biome != BiomesWorld.OCEAN && biome != BiomesWorld.DEEP_OCEAN && biome != BiomesWorld.BEACH && biome != BiomesWorld.GRAVEL_BEACH
+          else if (inp.getBlockState(x, y, z) == SALT_WATER && !(BiomeUtils.isOceanicBiome(biome)
+                  || BiomeUtils.isBeachBiome(biome))) {
+            outp.setBlockState(x, y + yOffset, z, FRESH_WATER);
+          }
+        }
+
+        for (int y = yOffset - 1;
+                y >= 0;
+                y--) // This cannot be optimized with the prev for loop, because the sealeveloffset won't be ready yet.
+        {
+          /*
+           * LOW PART (yOffset is NOT used)
+           */
+          if (y < 1 + (settings.flatBedrock ? 0
+                  : rand.nextInt(3))) //  + (seaLevelOffsetMap[colIndex] / 3)
+          {
+            outp.setBlockState(x, y, z, BEDROCK);
+          } else if (outp.isEmpty(x, y, z)) {
+            if (y <= ROCKLAYER3 + seaLevelOffsetMap[colIndex]) {
+              outp.setBlockState(x, y, z, BlocksRock.RAW.get(rock3).getDefaultState());
+            } else if (y <= ROCKLAYER2 + seaLevelOffsetMap[colIndex]) {
+              outp.setBlockState(x, y, z, BlocksRock.RAW.get(rock2).getDefaultState());
+            } else {
+              outp.setBlockState(x, y, z, BlocksRock.RAW.get(rock1).getDefaultState());
+            }
+
+            if (BiomeUtils.isBeachBiome(biome) || BiomeUtils.isOceanicBiome(biome)) {
+              if (outp.getBlockState(x, y + 1, z) == SALT_WATER) {
+                outp.setBlockState(x, y, z, BlocksRock.SAND.get(rock1).getDefaultState());
+                outp.setBlockState(x, y - 1, z, BlocksRock.SAND.get(rock1).getDefaultState());
+              }
+            }
+          }
+          if (y <= 6 && stability.valueInt == 1 && outp.getBlockState(x, y, z) == AIR) {
+            outp.setBlockState(x, y, z, LAVA);
+            if (outp.getBlockState(x, y + 1, z) != LAVA && rand.nextBoolean()) {
+              outp.setBlockState(x, y + 1, z, LAVA);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  private Biome getBiomeOffset(int x, int z) {
+    return biomes[(z + 1) * 18 + (x + 1)]; //todo: check, was (z + 1) + (x + 1) * 18
   }
 
   private void generateHeightMap(int xPos, int zPos) {
@@ -494,13 +770,13 @@ public class ChunkGenClassic implements IChunkGenerator {
 
         if (scaledNoise6Value < 0.0D) {
           scaledNoise6Value =
-              -scaledNoise6Value * 0.3D; //If negative, make positive and shrink by a third?
+                  -scaledNoise6Value * 0.3D; //If negative, make positive and shrink by a third?
         }
 
         scaledNoise6Value = scaledNoise6Value * 3.0D - 2.0D;
 
         if (scaledNoise6Value
-            < 0.0D) // Only true when noise6[index2] is between -17,777 and 0, scaledNoise6Value will be at maximum -2
+                < 0.0D) // Only true when noise6[index2] is between -17,777 and 0, scaledNoise6Value will be at maximum -2
         {
           scaledNoise6Value /= 2.0D; // Results in values between 0 and -1
           if (scaledNoise6Value < -1.0D) //Error Checking
@@ -546,282 +822,6 @@ public class ChunkGenClassic implements IChunkGenerator {
           }
 
           heightMap[i++] = output;
-        }
-      }
-    }
-  }
-
-  private Biome getBiomeOffset(int x, int z) {
-    return biomes[(z + 1) * 18 + (x + 1)]; //todo: check, was (z + 1) + (x + 1) * 18
-  }
-
-  private void replaceBlocksForBiomeHigh(int chunkX, int chunkZ, ChunkPrimer inp,
-      ChunkPrimerClassic outp) {
-    double var6 = 0.03125D;
-    noiseGen4.generateNoiseOctaves(noise4, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, var6 * 4.0D,
-        var6, var6 * 4.0D);
-    boolean[] cliffMap = new boolean[256];
-    for (int x = 0; x < 16; ++x) {
-      for (int z = 0; z < 16; ++z) {
-        int colIndex = z << 4 | x;
-        Biome biome = getBiomeOffset(x, z);
-
-        var rock1 = RockType.valueOf(rockLayer1[colIndex]);
-        var rock2 = RockType.valueOf(rockLayer2[colIndex]);
-        var rock3 = RockType.valueOf(rockLayer3[colIndex]);
-
-        var soil1 = SoilType.valueOf(rockLayer1[colIndex]);
-
-        DataLayerClassic drainage = drainageLayer[colIndex];
-        DataLayerClassic stability = stabilityLayer[colIndex];
-        int noise = (int) (noise4[colIndex] / 3.0D + 6.0D);
-        int smooth = -1;
-
-        IBlockState surfaceBlock = (rainfall + 1.3 * rand.nextGaussian() >= 150f ? BlocksSoil.GRASS
-            : BlocksSoil.DRY_GRASS).get(soil1)
-            .getDefaultState();
-        IBlockState subSurfaceBlock = BlocksSoil.DIRT.get(soil1).getDefaultState();
-
-        if (BiomeUtils.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomeUtils.isBeachBiome(
-            getBiomeOffset(x + 1, z)) ||
-            BiomeUtils.isBeachBiome(getBiomeOffset(x, z + 1)) || BiomeUtils.isBeachBiome(
-            getBiomeOffset(x, z - 1))) {
-          if (!BiomeUtils.isBeachBiome(getBiomeOffset(x, z))) {
-            cliffMap[colIndex] = true;
-          }
-        }
-
-        // Используется для улучшения рек
-        int nonRiverTiles = 0;
-        int nonBeachTiles = 0;
-        for (int a = x - 1; a <= x + 1; a++) {
-          for (int b = z - 1; b <= z + 1; b++) {
-            Biome BiomeAtOffset = getBiomeOffset(a, b);
-            if (!BiomeUtils.isRiverBiome(BiomeAtOffset)) {
-              nonRiverTiles++;
-            }
-            if (!BiomeUtils.isBeachBiome(BiomeAtOffset) && !BiomeUtils.isOceanicBiome(BiomeAtOffset)
-                &&
-                BiomeAtOffset != BiomesWorld.DEEP_OCEAN && BiomeAtOffset != BiomesWorld.OCEAN) {
-              nonBeachTiles++;
-            }
-          }
-        }
-
-        int highestStone = 0;
-
-        // Итерируемся по оси Y сверху вниз
-        for (int y = 255 - yOffset; y >= 0; y--) {
-          /*
-           * ВЕРХНЯЯ ЧАСТЬ (используется yOffset)
-           */
-          if (outp.isEmpty(x, y + yOffset, z)) {
-            outp.setBlockState(x, y + yOffset, z, inp.getBlockState(x, y, z));
-            if (y + 1 < yOffset && outp.getBlockState(x, y + yOffset, z) ==
-                AIR/* нет необходимости проверять снова && BlockUtils.isSoilOrGravel(outp.getBlockState(x, y + yOffset + 1, z))*/) {
-              for (int upCount = 1;
-                  BlockUtils.isSoilOrGravel(outp.getBlockState(x, y + yOffset + upCount, z));
-                  upCount++) {
-                outp.setBlockState(x, y + yOffset + upCount, z, AIR);
-              }
-            }
-          }
-
-          if (outp.getBlockState(x, y + yOffset, z) == STONE) {
-            highestStone = Math.max(highestStone, y);
-          }
-
-          int highestBeachTheoretical = (highestStone - seaLevel) / 4 + seaLevel;
-          int beachCliffHeight =
-              nonBeachTiles > 0 ? (int) (
-                  (highestStone - highestBeachTheoretical) * (nonBeachTiles) / 6.0
-                      + highestBeachTheoretical) :
-                  highestBeachTheoretical;
-
-          // Перестраиваем утесы на пляже
-          if (BiomeUtils.isBeachBiome(biome) && y > seaLevel
-              && outp.getBlockState(x, y + yOffset, z) != AIR && y >= beachCliffHeight) {
-            inp.setBlockState(x, y, z, AIR);
-            outp.setBlockState(x, y + yOffset, z, AIR);
-          }
-          // Гарантируем, что реки не будут заблокированы
-          if (BiomeUtils.isRiverBiome(biome) && y >= seaLevel - 2
-              && outp.getBlockState(x, y + yOffset, z) != AIR) {
-
-            if (nonRiverTiles > 0) {
-              if (y >= seaLevel - 1) {
-                inp.setBlockState(x, y, z, y >= seaLevel ? AIR : SALT_WATER);
-                outp.setBlockState(x, y + yOffset, z, y >= seaLevel ? AIR : SALT_WATER);
-              }
-            } else {
-              inp.setBlockState(x, y, z, y >= seaLevel ? AIR : SALT_WATER);
-              outp.setBlockState(x, y + yOffset, z, y >= seaLevel ? AIR : SALT_WATER);
-            }
-
-            //outp.setBlockState(x, y + yOffset, z, y >= seaLevel ? AIR : SALT_WATER);
-          } else if (!BiomeUtils.isRiverBiome(biome) && nonRiverTiles < 9
-              && outp.getBlockState(x, y + yOffset, z) == STONE &&
-              ((y >= ((highestStone - seaLevel) / (10 - nonRiverTiles) + seaLevel)) || (
-                  nonRiverTiles <= 5 && y >= seaLevel))) {
-            inp.setBlockState(x, y, z, y >= seaLevel ? AIR : SALT_WATER);
-            outp.setBlockState(x, y + yOffset, z, y >= seaLevel ? AIR : SALT_WATER);
-          }
-
-          if (outp.getBlockState(x, y + yOffset, z) == STONE) {
-            if (seaLevelOffsetMap[colIndex] == 0 && y - seaLevel >= 0) {
-              seaLevelOffsetMap[colIndex] = y - seaLevel;
-            }
-
-            if (chunkHeightMap[colIndex] == 0) {
-              chunkHeightMap[colIndex] = y + yOffset;
-            }
-
-            if (y + yOffset <= ROCKLAYER3 + seaLevelOffsetMap[colIndex]) {
-              outp.setBlockState(x, y + yOffset, z, BlocksRock.RAW.get(rock3).getDefaultState());
-            } else if (y + yOffset <= ROCKLAYER2 + seaLevelOffsetMap[colIndex]) {
-              outp.setBlockState(x, y + yOffset, z, BlocksRock.RAW.get(rock2).getDefaultState());
-            } else {
-              outp.setBlockState(x, y + yOffset, z, BlocksRock.RAW.get(rock1).getDefaultState());
-            }
-
-            // Пустыни / сухие районы
-            if (rainfall < +1.3 * rand.nextGaussian() + 75f) {
-              subSurfaceBlock = surfaceBlock = BlocksRock.SAND.get(rock1).getDefaultState();
-            }
-
-            if (biome == BiomesWorld.BEACH || biome == BiomesWorld.OCEAN
-                || biome == BiomesWorld.DEEP_OCEAN) {
-              subSurfaceBlock = surfaceBlock = BlocksRock.SAND.get(rock1).getDefaultState();
-            } else if (biome == BiomesWorld.GRAVEL_BEACH) {
-              subSurfaceBlock = surfaceBlock = BlocksRock.GRAVEL.get(rock1).getDefaultState();
-            }
-
-            if (smooth == -1) {
-              //The following makes dirt behave nicer and more smoothly, instead of forming sharp cliffs.
-              int arrayIndexx = x > 0 ? x - 1 + (z * 16) : -1;
-              int arrayIndexX = x < 15 ? x + 1 + (z * 16) : -1;
-              int arrayIndexz = z > 0 ? x + ((z - 1) * 16) : -1;
-              int arrayIndexZ = z < 15 ? x + ((z + 1) * 16) : -1;
-              for (int counter = 1; counter < noise / 3; counter++) {
-                if (arrayIndexx >= 0
-                    && seaLevelOffsetMap[colIndex] - (3 * counter) > seaLevelOffsetMap[arrayIndexx]
-                    &&
-                    arrayIndexX >= 0
-                    && seaLevelOffsetMap[colIndex] - (3 * counter) > seaLevelOffsetMap[arrayIndexX]
-                    &&
-                    arrayIndexz >= 0
-                    && seaLevelOffsetMap[colIndex] - (3 * counter) > seaLevelOffsetMap[arrayIndexz]
-                    &&
-                    arrayIndexZ >= 0 && seaLevelOffsetMap[colIndex] - (3 * counter)
-                    > seaLevelOffsetMap[arrayIndexZ]) {
-                  seaLevelOffsetMap[colIndex]--;
-                  noise--;
-                  y--;
-                }
-              }
-              smooth = (int) (noise * (1d - Math.max(Math.min((y - 16) / 80d, 1), 0)));
-
-              // Set soil below water
-              for (int c = 1; c < 3; c++) {
-                if (yOffset + y + c > 256) {
-                  continue;
-                }
-
-                IBlockState current = outp.getBlockState(x, yOffset + y + c, z);
-                if (current != surfaceBlock && current != subSurfaceBlock && !BlockUtils.isWater(
-                    current)) {
-                  outp.setBlockState(x, yOffset + y + c, z, AIR);
-                  if (yOffset + y + c + 1 > 256) {
-                    continue;
-                  }
-                  if (outp.getBlockState(x, yOffset + y + c + 1, z) == SALT_WATER) {
-                    outp.setBlockState(x, yOffset + y + c, z, subSurfaceBlock);
-                  }
-                }
-              }
-
-              // Determine the soil depth based on world y
-              int dirtH = Math.max(8 - ((y + yOffset - 24 - WorldTypeClassic.SEALEVEL) / 16), 0);
-
-              if (smooth > 0) {
-                if (y >= seaLevel - 1 && y + 1 < yOffset
-                    && inp.getBlockState(x, y + 1, z) != SALT_WATER && dirtH > 0 &&
-                    !(BiomeUtils.isBeachBiome(biome) && y > highestBeachTheoretical + 2)) {
-                  outp.setBlockState(x, y + yOffset, z, surfaceBlock);
-
-                  boolean mountains =
-                      BiomeUtils.isMountainBiome(biome) || biome == BiomesWorld.HIGH_HILLS ||
-                          biome == BiomesWorld.HIGH_HILLS_EDGE ||
-                          biome == BiomesWorld.MOUNTAINS || biome == BiomesWorld.MOUNTAINS_EDGE;
-                  for (int c = 1; c < dirtH && !mountains && !cliffMap[colIndex]; c++) {
-                    outp.setBlockState(x, y - c + yOffset, z, subSurfaceBlock);
-                    if (c > 1 + (5 - drainage.valueInt)) {
-                      outp.setBlockState(x, y - c + yOffset, z,
-                          BlocksRock.GRAVEL.get(rock1).getDefaultState());
-                    }
-                  }
-                }
-              }
-            }
-
-            if (y > seaLevel - 2 && y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER ||
-                y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER) {
-              if (biome == BiomesWorld.SWAMPLAND && biome == BiomesWorld.BAYOU
-                  && biome == BiomesWorld.MANGROVE &&
-                  biome == BiomesWorld.MARSH) {
-                if (outp.getBlockState(x, y + yOffset, z) != BlocksRock.SAND.get(rock1)
-                    .getDefaultState()) {
-                  outp.setBlockState(x, y + yOffset, z,
-                      BlocksSoil.DIRT.get(soil1).getDefaultState());
-                }
-              } else if (outp.getBlockState(x, y + yOffset, z) != BlocksRock.SAND.get(rock1)
-                  .getDefaultState() &&
-                  this.rand.nextInt(5) != 0) {
-                outp.setBlockState(x, y + yOffset, z,
-                    BlocksRock.GRAVEL.get(rock1).getDefaultState());
-              }
-            }
-          }
-          //  && biome != BiomesWorld.OCEAN && biome != BiomesWorld.DEEP_OCEAN && biome != BiomesWorld.BEACH && biome != BiomesWorld.GRAVEL_BEACH
-          else if (inp.getBlockState(x, y, z) == SALT_WATER && !(BiomeUtils.isOceanicBiome(biome)
-              || BiomeUtils.isBeachBiome(biome))) {
-            outp.setBlockState(x, y + yOffset, z, FRESH_WATER);
-          }
-        }
-
-        for (int y = yOffset - 1;
-            y >= 0;
-            y--) // This cannot be optimized with the prev for loop, because the sealeveloffset won't be ready yet.
-        {
-          /*
-           * LOW PART (yOffset is NOT used)
-           */
-          if (y < 1 + (settings.flatBedrock ? 0
-              : rand.nextInt(3))) //  + (seaLevelOffsetMap[colIndex] / 3)
-          {
-            outp.setBlockState(x, y, z, BEDROCK);
-          } else if (outp.isEmpty(x, y, z)) {
-            if (y <= ROCKLAYER3 + seaLevelOffsetMap[colIndex]) {
-              outp.setBlockState(x, y, z, BlocksRock.RAW.get(rock3).getDefaultState());
-            } else if (y <= ROCKLAYER2 + seaLevelOffsetMap[colIndex]) {
-              outp.setBlockState(x, y, z, BlocksRock.RAW.get(rock2).getDefaultState());
-            } else {
-              outp.setBlockState(x, y, z, BlocksRock.RAW.get(rock1).getDefaultState());
-            }
-
-            if (BiomeUtils.isBeachBiome(biome) || BiomeUtils.isOceanicBiome(biome)) {
-              if (outp.getBlockState(x, y + 1, z) == SALT_WATER) {
-                outp.setBlockState(x, y, z, BlocksRock.SAND.get(rock1).getDefaultState());
-                outp.setBlockState(x, y - 1, z, BlocksRock.SAND.get(rock1).getDefaultState());
-              }
-            }
-          }
-          if (y <= 6 && stability.valueInt == 1 && outp.getBlockState(x, y, z) == AIR) {
-            outp.setBlockState(x, y, z, LAVA);
-            if (outp.getBlockState(x, y + 1, z) != LAVA && rand.nextBoolean()) {
-              outp.setBlockState(x, y + 1, z, LAVA);
-            }
-          }
         }
       }
     }

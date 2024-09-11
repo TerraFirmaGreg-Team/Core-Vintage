@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -29,8 +30,8 @@ public class BlockRockWall extends BaseBlockWall implements IRockBlock {
   private final RockBlockVariant variant;
   private final RockType type;
 
-  public BlockRockWall(RockBlockVariant modelBlock, RockBlockVariant variant, RockType type) {
-    super(modelBlock.get(type));
+  public BlockRockWall(Block model, RockBlockVariant variant, RockType type) {
+    super(model);
 
     this.variant = variant;
     this.type = type;

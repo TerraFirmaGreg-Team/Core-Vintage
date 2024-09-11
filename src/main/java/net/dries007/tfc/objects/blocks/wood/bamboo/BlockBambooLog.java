@@ -29,120 +29,120 @@ import static su.terrafirmagreg.data.Properties.GROWN;
 
 public class BlockBambooLog extends Block {
 
-    public static final AxisAlignedBB SMALL_LOG = new AxisAlignedBB(0.3, 0, 0.3, 0.7, 1, 0.7);
+  public static final AxisAlignedBB SMALL_LOG = new AxisAlignedBB(0.3, 0, 0.3, 0.7, 1, 0.7);
 
-    private ItemMisc drop;
+  private ItemMisc drop;
 
-    public BlockBambooLog() {
-        super(Material.WOOD, MapColor.GREEN_STAINED_HARDENED_CLAY);
-        setHarvestLevel("axe", 0);
-        setHardness(2.0F);
-        setResistance(5.0F);
-        BlockUtils.setFireInfo(this, 5, 5);
-        setTickRandomly(true);
-        setSoundType(SoundType.WOOD);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(GROWN, true).withProperty(CONNECTED, false));
-        OreDictionaryHelper.register(this, "log", "wood");
+  public BlockBambooLog() {
+    super(Material.WOOD, MapColor.GREEN_STAINED_HARDENED_CLAY);
+    setHarvestLevel("axe", 0);
+    setHardness(2.0F);
+    setResistance(5.0F);
+    BlockUtils.setFireInfo(this, 5, 5);
+    setTickRandomly(true);
+    setSoundType(SoundType.WOOD);
+    this.setDefaultState(this.blockState.getBaseState().withProperty(GROWN, true).withProperty(CONNECTED, false));
+    OreDictionaryHelper.register(this, "log", "wood");
+  }
+
+  public void setDrop(ItemMisc drop) {
+    this.drop = drop;
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  @NotNull
+  public IBlockState getStateFromMeta(int meta) {
+    boolean grown = false;
+    if (meta >= 2) {
+      meta -= 2;
+      grown = true;
     }
+    return this.getDefaultState().withProperty(CONNECTED, meta == 1).withProperty(GROWN, grown);
+  }
 
-    @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(drop, 1));
-    }
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    int wet = state.getValue(CONNECTED) ? 1 : 0;
+    int grown = state.getValue(GROWN) ? 2 : 0;
+    return wet + grown;
+  }
 
-    public void setDrop(ItemMisc drop) {
-        this.drop = drop;
-    }
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isFullCube(IBlockState state) {
+    return false;
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-        IBlockState downState = worldIn.getBlockState(pos.down());
-        boolean shouldDestroy =
-                !(downState.getBlock() instanceof BlockBambooLog) && !BlockUtils.isGrowableSoil(downState);
-        if (shouldDestroy) {
-            worldIn.destroyBlock(pos, true);
-            return;
-        }
-        boolean shouldConnect = false;
-        for (EnumFacing facing : EnumFacing.HORIZONTALS) {
-            if (worldIn.getBlockState(pos.offset(facing)).getBlock() instanceof BlockBambooLeaves) {
-                worldIn.setBlockState(pos, state.withProperty(CONNECTED, true));
-                shouldConnect = true;
-                break;
-            }
-        }
-        worldIn.setBlockState(pos, state.withProperty(CONNECTED, shouldConnect));
-    }
+  @Override
+  @SuppressWarnings("deprecation")
+  @NotNull
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.MODEL;
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
+  @Override
+  @SuppressWarnings("deprecation")
+  @NotNull
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    if (state.getValue(CONNECTED)) {
+      return FULL_BLOCK_AABB;
     }
+    return SMALL_LOG;
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
+  @Override
+  @NotNull
+  @SuppressWarnings("deprecation")
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    return BlockFaceShape.UNDEFINED;
+  }
 
-    @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
+  @Override
+  @SuppressWarnings("deprecation")
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+    if (state.getValue(CONNECTED)) {
+      return FULL_BLOCK_AABB;
     }
+    return SMALL_LOG;
+  }
 
-    @Override
-    @NotNull
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, GROWN, CONNECTED);
-    }
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isOpaqueCube(IBlockState state) {
+    return false;
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public IBlockState getStateFromMeta(int meta) {
-        boolean grown = false;
-        if (meta >= 2) {
-            meta -= 2;
-            grown = true;
-        }
-        return this.getDefaultState().withProperty(CONNECTED, meta == 1).withProperty(GROWN, grown);
+  @Override
+  @SuppressWarnings("deprecation")
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+    IBlockState downState = worldIn.getBlockState(pos.down());
+    boolean shouldDestroy =
+            !(downState.getBlock() instanceof BlockBambooLog) && !BlockUtils.isGrowableSoil(downState);
+    if (shouldDestroy) {
+      worldIn.destroyBlock(pos, true);
+      return;
     }
+    boolean shouldConnect = false;
+    for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+      if (worldIn.getBlockState(pos.offset(facing)).getBlock() instanceof BlockBambooLeaves) {
+        worldIn.setBlockState(pos, state.withProperty(CONNECTED, true));
+        shouldConnect = true;
+        break;
+      }
+    }
+    worldIn.setBlockState(pos, state.withProperty(CONNECTED, shouldConnect));
+  }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        int wet = state.getValue(CONNECTED) ? 1 : 0;
-        int grown = state.getValue(GROWN) ? 2 : 0;
-        return wet + grown;
-    }
+  @Override
+  @NotNull
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, GROWN, CONNECTED);
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        if (state.getValue(CONNECTED)) {
-            return FULL_BLOCK_AABB;
-        }
-        return SMALL_LOG;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        if (state.getValue(CONNECTED)) {
-            return FULL_BLOCK_AABB;
-        }
-        return SMALL_LOG;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
-    }
+  @Override
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    drops.add(new ItemStack(drop, 1));
+  }
 }

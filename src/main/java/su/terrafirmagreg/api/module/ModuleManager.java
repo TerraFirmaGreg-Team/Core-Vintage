@@ -37,13 +37,6 @@ public final class ModuleManager {
     MinecraftForge.EVENT_BUS.register(this.moduleEventRouter);
   }
 
-  private static IModule getCoreModule(List<IModule> modules) {
-    return modules.stream()
-        .filter(module -> module.getClass().getAnnotation(Module.class).coreModule())
-        .findFirst()
-        .orElse(null);
-  }
-
   public void setup() {
 
     configureModules(getModules());
@@ -54,15 +47,6 @@ public final class ModuleManager {
     });
   }
 
-  private Map<String, List<IModule>> getModules() {
-    return AnnotationUtils.getAnnotations(Module.class, IModule.class).keySet().stream()
-        .collect(Collectors.groupingBy(
-            module -> module.getClass().getAnnotation(Module.class).moduleID().getID(),
-            LinkedHashMap::new,
-            Collectors.toList()
-        ));
-  }
-
   private void configureModules(Map<String, List<IModule>> modules) {
     Set<ResourceLocation> toLoad = new HashSet<>();
     Set<IModule> modulesToLoad = new HashSet<>();
@@ -70,20 +54,20 @@ public final class ModuleManager {
     modules.forEach((container, containerModules) -> {
       IModule coreModule = getCoreModule(containerModules);
       Preconditions.checkNotNull(coreModule,
-          "Could not find core module for module container " + container);
+              "Could not find core module for module container " + container);
 
       containerModules.remove(coreModule);
       containerModules.add(0, coreModule);
 
       modulesToLoad.addAll(containerModules.stream()
-          .filter(this::isModuleEnabled)
-          .collect(Collectors.toSet()));
+              .filter(this::isModuleEnabled)
+              .collect(Collectors.toSet()));
 
       toLoad.addAll(containerModules.stream()
-          .filter(this::isModuleEnabled)
-          .map(module -> new ResourceLocation(container,
-              module.getClass().getAnnotation(Module.class).moduleID().getName()))
-          .collect(Collectors.toSet()));
+              .filter(this::isModuleEnabled)
+              .map(module -> new ResourceLocation(container,
+                      module.getClass().getAnnotation(Module.class).moduleID().getName()))
+              .collect(Collectors.toSet()));
     });
 
     modulesToLoad.removeIf(module -> {
@@ -93,16 +77,16 @@ public final class ModuleManager {
         String moduleID = annotation.moduleID().getName();
         toLoad.remove(new ResourceLocation(moduleID));
         ModuleManager.LOGGER.info(
-            "Module {} is missing at least one of module dependencies: {}, skipping loading...",
-            moduleID, dependencies);
+                "Module {} is missing at least one of module dependencies: {}, skipping loading...",
+                moduleID, dependencies);
         return true;
       }
       return false;
     });
 
     List<IModule> sortedModulesList = modulesToLoad.stream()
-        .filter(module -> sortedModules.keySet().containsAll(module.getDependencyUids()))
-        .collect(Collectors.toList());
+            .filter(module -> sortedModules.keySet().containsAll(module.getDependencyUids()))
+            .collect(Collectors.toList());
 
     sortedModulesList.forEach(module -> {
       var annotation = module.getClass().getAnnotation(Module.class).moduleID();
@@ -112,13 +96,29 @@ public final class ModuleManager {
     loadedModules.addAll(sortedModules.values());
   }
 
-  public boolean isModuleEnabled(ResourceLocation id) {
-    return sortedModules.containsKey(id);
+  private Map<String, List<IModule>> getModules() {
+    return AnnotationUtils.getAnnotations(Module.class, IModule.class).keySet().stream()
+            .collect(Collectors.groupingBy(
+                    module -> module.getClass().getAnnotation(Module.class).moduleID().getID(),
+                    LinkedHashMap::new,
+                    Collectors.toList()
+            ));
+  }
+
+  private static IModule getCoreModule(List<IModule> modules) {
+    return modules.stream()
+            .filter(module -> module.getClass().getAnnotation(Module.class).coreModule())
+            .findFirst()
+            .orElse(null);
   }
 
   public boolean isModuleEnabled(IModule module) {
     var annotation = module.getClass().getAnnotation(Module.class);
     return annotation.moduleID().isEnabled();
+  }
+
+  public boolean isModuleEnabled(ResourceLocation id) {
+    return sortedModules.containsKey(id);
   }
 
   public void routeFMLStateEvent(FMLStateEvent event) {

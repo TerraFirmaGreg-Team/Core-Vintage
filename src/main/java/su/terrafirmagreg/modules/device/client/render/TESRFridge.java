@@ -15,12 +15,12 @@ import net.minecraft.util.math.Vec3d;
 public class TESRFridge extends TileEntitySpecialRenderer<TileFridge> {
 
   private static final ResourceLocation FRIDGE_TEXTURES = ModUtils.resource(
-      "textures/blocks/device/fridge/base.png");
+          "textures/blocks/device/fridge/base.png");
   private final ModelFridge model = new ModelFridge();
 
   @Override
   public void render(TileFridge tile, double x, double y, double z, float partialTicks,
-      int destroyStage, float alpha) {
+          int destroyStage, float alpha) {
     if (tile.hasWorld()) {
       if (!tile.isMainBlock()) {
         return;
@@ -53,8 +53,8 @@ public class TESRFridge extends TileEntitySpecialRenderer<TileFridge> {
           GlStateManager.rotate(90, 1, 0, 0);
           GlStateManager.scale(0.25F, 0.25F, 0.25F);
           Minecraft.getMinecraft()
-              .getRenderItem()
-              .renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
+                  .getRenderItem()
+                  .renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
           GlStateManager.popMatrix();
         }
       }

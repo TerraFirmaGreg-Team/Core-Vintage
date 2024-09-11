@@ -28,41 +28,41 @@ import org.jetbrains.annotations.NotNull;
 @MethodsReturnNonnullByDefault
 public abstract class BlockNonCube extends Block implements ICapabilitySize {
 
-    public BlockNonCube(Material materialIn) {
-        super(materialIn);
-    }
+  public BlockNonCube(Material materialIn) {
+    super(materialIn);
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  public boolean isFullCube(IBlockState state) {
+    return false;
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
+  @Override
+  @SuppressWarnings("deprecation")
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    return BlockFaceShape.UNDEFINED;
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isOpaqueCube(IBlockState state) {
+    return false;
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
+  @SideOnly(Side.CLIENT)
+  @Override
+  public BlockRenderLayer getRenderLayer() {
+    return BlockRenderLayer.CUTOUT;
+  }
 
-    @Override
-    public @NotNull Size getSize(@NotNull ItemStack itemStack) {
-        return Size.NORMAL;
-    }
+  @Override
+  public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
+    return Weight.MEDIUM;
+  }
 
-    @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
-        return Weight.MEDIUM;
-    }
+  @Override
+  public @NotNull Size getSize(@NotNull ItemStack itemStack) {
+    return Size.NORMAL;
+  }
 }

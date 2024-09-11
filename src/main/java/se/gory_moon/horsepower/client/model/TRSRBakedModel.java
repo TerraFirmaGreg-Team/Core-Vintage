@@ -1,5 +1,7 @@
 package se.gory_moon.horsepower.client.model;
 
+import su.terrafirmagreg.data.MathConstants;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -21,10 +23,6 @@ import com.google.common.collect.ImmutableList;
 
 import org.jetbrains.annotations.NotNull;
 
-
-import su.terrafirmagreg.data.MathConstants;
-
-
 import javax.vecmath.Matrix3f;
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
@@ -34,165 +32,165 @@ import java.util.List;
 // for those wondering TRSR stands for Translation Rotation Scale Rotation
 public class TRSRBakedModel implements IBakedModel {
 
-    protected final IBakedModel original;
-    protected final TRSRTransformation transformation;
-    private final TRSROverride override;
-    private final int faceOffset;
+  protected final IBakedModel original;
+  protected final TRSRTransformation transformation;
+  private final TRSROverride override;
+  private final int faceOffset;
 
-    public TRSRBakedModel(IBakedModel original, float x, float y, float z, float scale) {
-        this(original, x, y, z, 0, 0, 0, scale, scale, scale);
+  public TRSRBakedModel(IBakedModel original, float x, float y, float z, float scale) {
+    this(original, x, y, z, 0, 0, 0, scale, scale, scale);
+  }
+
+  public TRSRBakedModel(IBakedModel original, float x, float y, float z, float rotX, float rotY, float rotZ, float scaleX, float scaleY,
+          float scaleZ) {
+    this(original, new TRSRTransformation(new Vector3f(x, y, z),
+            null,
+            new Vector3f(scaleX, scaleY, scaleZ),
+            TRSRTransformation.quatFromXYZ(rotX, rotY, rotZ)));
+  }
+
+  public TRSRBakedModel(IBakedModel original, TRSRTransformation transform) {
+    this.original = original;
+    this.transformation = TRSRTransformation.blockCenterToCorner(transform);
+    this.override = new TRSROverride(this);
+    this.faceOffset = 0;
+  }
+
+  public TRSRBakedModel(IBakedModel original, float x, float y, float z, float rotX, float rotY, float rotZ, float scale) {
+    this(original, x, y, z, rotX, rotY, rotZ, scale, scale, scale);
+  }
+
+  /**
+   * Rotates around the Y axis and adjusts culling appropriately. South is default.
+   */
+  public TRSRBakedModel(IBakedModel original, EnumFacing facing) {
+    this.original = original;
+    this.override = new TRSROverride(this);
+
+    this.faceOffset = 4 + EnumFacing.NORTH.getHorizontalIndex() - facing.getHorizontalIndex();
+
+    double r = MathConstants.PI * (360 - facing.getOpposite().getHorizontalIndex() * 90) / 180d;
+    TRSRTransformation t = new TRSRTransformation(null, null, null, TRSRTransformation.quatFromXYZ(0, (float) r, 0));
+    this.transformation = TRSRTransformation.blockCenterToCorner(t);
+  }
+
+  @NotNull
+  @Override
+  public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
+    // transform quads obtained from parent
+
+    ImmutableList.Builder<BakedQuad> builder = ImmutableList.builder();
+
+    if (!original.isBuiltInRenderer()) {
+      try {
+        // adjust side to facing-rotation
+        if (side != null && side.getHorizontalIndex() > -1) {
+          side = EnumFacing.byHorizontalIndex((side.getHorizontalIndex() + faceOffset) % 4);
+        }
+        for (BakedQuad quad : original.getQuads(state, side, rand)) {
+          Transformer transformer = new Transformer(transformation, quad.getFormat());
+          quad.pipe(transformer);
+          builder.add(transformer.build());
+        }
+      } catch (Exception e) {
+        // do nothing. Seriously, why are you using immutable lists?!
+      }
     }
 
-    public TRSRBakedModel(IBakedModel original, float x, float y, float z, float rotX, float rotY, float rotZ, float scale) {
-        this(original, x, y, z, rotX, rotY, rotZ, scale, scale, scale);
-    }
+    return builder.build();
+  }
 
-    public TRSRBakedModel(IBakedModel original, float x, float y, float z, float rotX, float rotY, float rotZ, float scaleX, float scaleY,
-                          float scaleZ) {
-        this(original, new TRSRTransformation(new Vector3f(x, y, z),
-                null,
-                new Vector3f(scaleX, scaleY, scaleZ),
-                TRSRTransformation.quatFromXYZ(rotX, rotY, rotZ)));
-    }
+  @Override
+  public boolean isAmbientOcclusion() {
+    return false;
+  }
 
-    public TRSRBakedModel(IBakedModel original, TRSRTransformation transform) {
-        this.original = original;
-        this.transformation = TRSRTransformation.blockCenterToCorner(transform);
-        this.override = new TRSROverride(this);
-        this.faceOffset = 0;
-    }
+  @Override
+  public boolean isGui3d() {
+    return original.isGui3d();
+  }
 
-    /**
-     * Rotates around the Y axis and adjusts culling appropriately. South is default.
-     */
-    public TRSRBakedModel(IBakedModel original, EnumFacing facing) {
-        this.original = original;
-        this.override = new TRSROverride(this);
+  @Override
+  public boolean isBuiltInRenderer() {
+    return original.isBuiltInRenderer();
+  }
 
-        this.faceOffset = 4 + EnumFacing.NORTH.getHorizontalIndex() - facing.getHorizontalIndex();
+  @NotNull
+  @Override
+  public TextureAtlasSprite getParticleTexture() {
+    return original.getParticleTexture();
+  }
 
-        double r = MathConstants.PI * (360 - facing.getOpposite().getHorizontalIndex() * 90) / 180d;
-        TRSRTransformation t = new TRSRTransformation(null, null, null, TRSRTransformation.quatFromXYZ(0, (float) r, 0));
-        this.transformation = TRSRTransformation.blockCenterToCorner(t);
+  @NotNull
+  @Override
+  public ItemCameraTransforms getItemCameraTransforms() {
+    return original.getItemCameraTransforms();
+  }
+
+  @NotNull
+  @Override
+  public ItemOverrideList getOverrides() {
+    return override;
+  }
+
+  private static class TRSROverride extends ItemOverrideList {
+
+    private final TRSRBakedModel model;
+
+    public TRSROverride(TRSRBakedModel model) {
+      super(ImmutableList.of());
+
+      this.model = model;
     }
 
     @NotNull
     @Override
-    public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
-        // transform quads obtained from parent
+    public IBakedModel handleItemState(@NotNull IBakedModel originalModel, ItemStack stack, @NotNull World world,
+            @NotNull EntityLivingBase entity) {
+      IBakedModel baked = model.original.getOverrides().handleItemState(originalModel, stack, world, entity);
 
-        ImmutableList.Builder<BakedQuad> builder = ImmutableList.builder();
+      return new TRSRBakedModel(baked, model.transformation);
+    }
+  }
 
-        if (!original.isBuiltInRenderer()) {
-            try {
-                // adjust side to facing-rotation
-                if (side != null && side.getHorizontalIndex() > -1) {
-                    side = EnumFacing.byHorizontalIndex((side.getHorizontalIndex() + faceOffset) % 4);
-                }
-                for (BakedQuad quad : original.getQuads(state, side, rand)) {
-                    Transformer transformer = new Transformer(transformation, quad.getFormat());
-                    quad.pipe(transformer);
-                    builder.add(transformer.build());
-                }
-            } catch (Exception e) {
-                // do nothing. Seriously, why are you using immutable lists?!
-            }
-        }
+  private static class Transformer extends VertexTransformer {
 
-        return builder.build();
+    protected Matrix4f transformation;
+    protected Matrix3f normalTransformation;
+
+    public Transformer(TRSRTransformation transformation, VertexFormat format) {
+      super(new UnpackedBakedQuad.Builder(format));
+      // position transform
+      this.transformation = transformation.getMatrix();
+      // normal transform
+      this.normalTransformation = new Matrix3f();
+      this.transformation.getRotationScale(this.normalTransformation);
+      this.normalTransformation.invert();
+      this.normalTransformation.transpose();
     }
 
     @Override
-    public boolean isAmbientOcclusion() {
-        return false;
+    public void put(int element, float... data) {
+      VertexFormatElement.EnumUsage usage = parent.getVertexFormat().getElement(element).getUsage();
+
+      // transform normals and position
+      if (usage == VertexFormatElement.EnumUsage.POSITION && data.length >= 3) {
+        Vector4f vec = new Vector4f(data[0], data[1], data[2], 1f);
+        transformation.transform(vec);
+        data = new float[4];
+        vec.get(data);
+      } else if (usage == VertexFormatElement.EnumUsage.NORMAL && data.length >= 3) {
+        Vector3f vec = new Vector3f(data);
+        normalTransformation.transform(vec);
+        vec.normalize();
+        data = new float[4];
+        vec.get(data);
+      }
+      super.put(element, data);
     }
 
-    @Override
-    public boolean isGui3d() {
-        return original.isGui3d();
+    public UnpackedBakedQuad build() {
+      return ((UnpackedBakedQuad.Builder) parent).build();
     }
-
-    @Override
-    public boolean isBuiltInRenderer() {
-        return original.isBuiltInRenderer();
-    }
-
-    @NotNull
-    @Override
-    public TextureAtlasSprite getParticleTexture() {
-        return original.getParticleTexture();
-    }
-
-    @NotNull
-    @Override
-    public ItemCameraTransforms getItemCameraTransforms() {
-        return original.getItemCameraTransforms();
-    }
-
-    @NotNull
-    @Override
-    public ItemOverrideList getOverrides() {
-        return override;
-    }
-
-    private static class TRSROverride extends ItemOverrideList {
-
-        private final TRSRBakedModel model;
-
-        public TRSROverride(TRSRBakedModel model) {
-            super(ImmutableList.of());
-
-            this.model = model;
-        }
-
-        @NotNull
-        @Override
-        public IBakedModel handleItemState(@NotNull IBakedModel originalModel, ItemStack stack, @NotNull World world,
-                                           @NotNull EntityLivingBase entity) {
-            IBakedModel baked = model.original.getOverrides().handleItemState(originalModel, stack, world, entity);
-
-            return new TRSRBakedModel(baked, model.transformation);
-        }
-    }
-
-    private static class Transformer extends VertexTransformer {
-
-        protected Matrix4f transformation;
-        protected Matrix3f normalTransformation;
-
-        public Transformer(TRSRTransformation transformation, VertexFormat format) {
-            super(new UnpackedBakedQuad.Builder(format));
-            // position transform
-            this.transformation = transformation.getMatrix();
-            // normal transform
-            this.normalTransformation = new Matrix3f();
-            this.transformation.getRotationScale(this.normalTransformation);
-            this.normalTransformation.invert();
-            this.normalTransformation.transpose();
-        }
-
-        @Override
-        public void put(int element, float... data) {
-            VertexFormatElement.EnumUsage usage = parent.getVertexFormat().getElement(element).getUsage();
-
-            // transform normals and position
-            if (usage == VertexFormatElement.EnumUsage.POSITION && data.length >= 3) {
-                Vector4f vec = new Vector4f(data[0], data[1], data[2], 1f);
-                transformation.transform(vec);
-                data = new float[4];
-                vec.get(data);
-            } else if (usage == VertexFormatElement.EnumUsage.NORMAL && data.length >= 3) {
-                Vector3f vec = new Vector3f(data);
-                normalTransformation.transform(vec);
-                vec.normalize();
-                data = new float[4];
-                vec.get(data);
-            }
-            super.put(element, data);
-        }
-
-        public UnpackedBakedQuad build() {
-            return ((UnpackedBakedQuad.Builder) parent).build();
-        }
-    }
+  }
 }

@@ -24,36 +24,36 @@ import org.jetbrains.annotations.NotNull;
 
 public class BlockBale extends BlockRotatedPillar implements ICapabilitySize {
 
-    public BlockBale() {
-        super(new Material(MapColor.FOLIAGE));
-        this.setSoundType(SoundType.PLANT);
-        setHardness(0.6F);
-        OreDictionaryHelper.register(this, "thatch");
-        OreDictionaryHelper.register(this, "bale");
-        BlockUtils.setFireInfo(this, 60, 20);
-    }
+  public BlockBale() {
+    super(new Material(MapColor.FOLIAGE));
+    this.setSoundType(SoundType.PLANT);
+    setHardness(0.6F);
+    OreDictionaryHelper.register(this, "thatch");
+    OreDictionaryHelper.register(this, "bale");
+    BlockUtils.setFireInfo(this, 60, 20);
+  }
 
-    @Override
-    public @NotNull Size getSize(ItemStack stack) {
-        return Size.VERY_SMALL;
-    }
+  @Override
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.HEAVY;
+  }
 
-    @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return Weight.HEAVY;
-    }
+  @Override
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.VERY_SMALL;
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    @NotNull
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
+  @SideOnly(Side.CLIENT)
+  @Override
+  @NotNull
+  public BlockRenderLayer getRenderLayer() {
+    return BlockRenderLayer.CUTOUT_MIPPED;
+  }
 
-    /**
-     * Block's chance to react to a living entity falling on it.
-     */
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.fall(fallDistance, 0.2F);
-    }
+  /**
+   * Block's chance to react to a living entity falling on it.
+   */
+  public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+    entityIn.fall(fallDistance, 0.2F);
+  }
 }

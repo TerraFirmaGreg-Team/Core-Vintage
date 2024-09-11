@@ -21,7 +21,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 @SideOnly(Side.CLIENT)
 @SuppressWarnings("unused")
 public final class PluginJustEnoughItems
-    implements IModPlugin {
+        implements IModPlugin {
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -39,9 +39,9 @@ public final class PluginJustEnoughItems
 
     MetalType.getTypes().forEach(type -> {
       registry.addRecipeCatalyst(new ItemStack(BlocksMetal.ANVIL.get(type)),
-          MetalAnvilRecipeCategory.UID);
+              MetalAnvilRecipeCategory.UID);
       registry.addRecipeCatalyst(new ItemStack(BlocksMetal.ANVIL.get(type)),
-          WeldingRecipeCategory.UID);
+              WeldingRecipeCategory.UID);
     });
 
   }

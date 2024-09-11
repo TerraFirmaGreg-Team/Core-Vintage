@@ -42,19 +42,6 @@ public class GuiDryingMat extends BaseGuiContainerTile<TEDryingMat> {
   }
 
   @Override
-  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-    if (GameUtils.isModLoaded("jei")) {
-      drawTexturedModalRect(guiLeft + 103, guiTop + 35, 176, 0, 9, 14);
-    }
-    int progress = (int) Math.min(18 * tile.getProgress(), 18);
-    if (tile.getProgress() > 0) {
-      drawTexturedModalRect(guiLeft + 79, guiTop + 52, 185, 2, 18, 2);
-      drawTexturedModalRect(guiLeft + 79, guiTop + 52, 185, 0, progress, 2);
-    }
-  }
-
-  @Override
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
     String name = I18n.format(translationKey + ".name");
     fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
@@ -66,5 +53,18 @@ public class GuiDryingMat extends BaseGuiContainerTile<TEDryingMat> {
     fontRenderer.drawString(date, xSize / 2 - fontRenderer.getStringWidth(date) / 2, 57, 0x404040);
 
     fontRenderer.drawString(playerInv.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040);
+  }
+
+  @Override
+  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+    if (GameUtils.isModLoaded("jei")) {
+      drawTexturedModalRect(guiLeft + 103, guiTop + 35, 176, 0, 9, 14);
+    }
+    int progress = (int) Math.min(18 * tile.getProgress(), 18);
+    if (tile.getProgress() > 0) {
+      drawTexturedModalRect(guiLeft + 79, guiTop + 52, 185, 2, 18, 2);
+      drawTexturedModalRect(guiLeft + 79, guiTop + 52, 185, 0, progress, 2);
+    }
   }
 }

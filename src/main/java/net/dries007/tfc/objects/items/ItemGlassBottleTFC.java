@@ -23,20 +23,20 @@ import org.jetbrains.annotations.NotNull;
 
 public class ItemGlassBottleTFC extends ItemGlassBottle {
 
-    @Override
-    @NotNull
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        RayTraceResult result = rayTrace(worldIn, playerIn, true);
+  @Override
+  @NotNull
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    RayTraceResult result = rayTrace(worldIn, playerIn, true);
 
-        //noinspection ConstantConditions
-        if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
-            IBlockState targetState = worldIn.getBlockState(result.getBlockPos());
-            if (targetState.getMaterial() == Material.WATER && targetState.getBlock() != Blocks.WATER &&
-                    targetState.getBlock() != FluidsTFC.FRESH_WATER.get()
-                            .getBlock()) {
-                return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
-            }
-        }
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+    //noinspection ConstantConditions
+    if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
+      IBlockState targetState = worldIn.getBlockState(result.getBlockPos());
+      if (targetState.getMaterial() == Material.WATER && targetState.getBlock() != Blocks.WATER &&
+              targetState.getBlock() != FluidsTFC.FRESH_WATER.get()
+                      .getBlock()) {
+        return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+      }
     }
+    return super.onItemRightClick(worldIn, playerIn, handIn);
+  }
 }

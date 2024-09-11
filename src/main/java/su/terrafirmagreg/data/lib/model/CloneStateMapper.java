@@ -44,8 +44,8 @@ public class CloneStateMapper extends StateMapperBase {
   protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
 
     return new ModelResourceLocation(
-        Block.REGISTRY.getNameForObject(this.block),
-        this.getPropertyString(state.getProperties())
+            Block.REGISTRY.getNameForObject(this.block),
+            this.getPropertyString(state.getProperties())
     );
   }
 }

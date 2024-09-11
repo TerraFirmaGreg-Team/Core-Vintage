@@ -34,6 +34,10 @@ public class Ore extends IForgeRegistryEntry.Impl<Ore> {
   @Getter
   private final double panChance;
 
+  public Ore(ResourceLocation name, @NotNull ResourceLocation metal, boolean canMelt, double chunkChance, double panChance) {
+    this(name, TFCRegistries.METALS.getValue(metal), canMelt, chunkChance, panChance);
+  }
+
   /**
    * Creates a registry object for an ore type
    *
@@ -51,10 +55,6 @@ public class Ore extends IForgeRegistryEntry.Impl<Ore> {
     this.panChance = panChance;
 
     setRegistryName(name);
-  }
-
-  public Ore(ResourceLocation name, @NotNull ResourceLocation metal, boolean canMelt, double chunkChance, double panChance) {
-    this(name, TFCRegistries.METALS.getValue(metal), canMelt, chunkChance, panChance);
   }
 
   public Ore(ResourceLocation name, @NotNull ResourceLocation metal) {

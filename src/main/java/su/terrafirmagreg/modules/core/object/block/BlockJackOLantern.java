@@ -58,11 +58,6 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
 
   }
 
-  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos) && worldIn.isSideSolid(
-            pos.down(), EnumFacing.UP);
-  }
-
   public IBlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta)).withProperty(LIT, meta >= 4);
   }
@@ -76,6 +71,11 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
   }
 
   @Override
+  public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+    return state.getValue(LIT) ? super.getLightValue(state, world, pos) : 0;
+  }
+
+  @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     //taken from BlockTorchTFC
     var tile = TileUtils.getTile(world, pos, TETickCounter.class);
@@ -86,6 +86,11 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
         tile.resetCounter();
       }
     }
+  }
+
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos) && worldIn.isSideSolid(
+            pos.down(), EnumFacing.UP);
   }
 
   @Override
@@ -116,11 +121,6 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
       tile.resetCounter();
     }
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-  }
-
-  @Override
-  public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-    return state.getValue(LIT) ? super.getLightValue(state, world, pos) : 0;
   }
 
   @Override

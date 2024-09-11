@@ -74,6 +74,15 @@ public final class Triple<L, M, R> implements Serializable {
   }
 
   /**
+   * Возвращает хэш-код этой тройки.
+   *
+   * @return хэш-код
+   */
+  public int hashCode() {
+    return Objects.hash(left, middle, right);
+  }
+
+  /**
    * Сравнивает эту тройку с другим объектом на равенство.
    *
    * @param obj объект, с которым нужно сравнить
@@ -87,16 +96,7 @@ public final class Triple<L, M, R> implements Serializable {
       return false;
     }
     return Objects.equals(left, other.left) && Objects.equals(middle, other.middle)
-        && Objects.equals(right, other.right);
-  }
-
-  /**
-   * Возвращает хэш-код этой тройки.
-   *
-   * @return хэш-код
-   */
-  public int hashCode() {
-    return Objects.hash(left, middle, right);
+            && Objects.equals(right, other.right);
   }
 
   /**

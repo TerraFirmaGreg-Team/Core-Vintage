@@ -33,8 +33,8 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 /**
- * A Sheep of the colder regions! Actually, they produce wool faster, but takes longer to reach maturity, have long gestation periods and only give
- * birth to one individual
+ * A Sheep of the colder regions! Actually, they produce wool faster, but takes longer to reach maturity, have long gestation periods and only give birth to one
+ * individual
  */
 
 public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock {
@@ -42,9 +42,9 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
   @SuppressWarnings("unused")
   public EntityAnimalAlpaca(World worldIn) {
     this(worldIn, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
-        EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.ALPACA.adulthood,
-            ConfigAnimal.ENTITIES.ALPACA.elder),
-        EntitySheep.getRandomSheepColor(MathConstants.RNG));
+            EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.ALPACA.adulthood,
+                    ConfigAnimal.ENTITIES.ALPACA.elder),
+            EntitySheep.getRandomSheepColor(MathConstants.RNG));
   }
 
   public EntityAnimalAlpaca(World worldIn, IAnimal.Gender gender, int birthDay, EnumDyeColor dye) {
@@ -53,10 +53,10 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TAIGA)) {
+            (biomeType == BiomeHelper.BiomeType.TAIGA)) {
       return ConfigAnimal.ENTITIES.ALPACA.rarity;
     }
     return 0;
@@ -78,22 +78,22 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
   }
 
   @Override
+  public long gestationDays() {
+    return ConfigAnimal.ENTITIES.ALPACA.gestation;
+  }
+
+  @Override
   public void birthChildren() {
     int numberOfChildren = ConfigAnimal.ENTITIES.ALPACA.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalAlpaca baby = new EntityAnimalAlpaca(world,
-          Gender.valueOf(MathConstants.RNG.nextBoolean()),
-          (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
+              Gender.valueOf(MathConstants.RNG.nextBoolean()),
+              (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(
-          getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
+              getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
       world.spawnEntity(baby);
     }
-  }
-
-  @Override
-  public long gestationDays() {
-    return ConfigAnimal.ENTITIES.ALPACA.gestation;
   }
 
   @Override
@@ -119,7 +119,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
   @Override
   public long getProductsCooldown() {
     return Math.max(0, ConfigAnimal.ENTITIES.ALPACA.woolTicks + getShearedTick()
-        - Calendar.PLAYER_TIME.getTicks());
+            - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override
@@ -135,7 +135,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
   @Override
   protected SoundEvent getAmbientSound() {
     return MathConstants.RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_ALPACA_CRY
-        : SoundsAnimal.ANIMAL_ALPACA_SAY;
+            : SoundsAnimal.ANIMAL_ALPACA_SAY;
   }
 
   @Nullable

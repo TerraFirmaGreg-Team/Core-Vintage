@@ -8,25 +8,25 @@ import org.jetbrains.annotations.NotNull;
 
 public class ItemStackHandlerCallback extends ItemStackHandler {
 
-    private final ISlotCallback callback;
+  private final ISlotCallback callback;
 
-    public ItemStackHandlerCallback(ISlotCallback callback, int slots) {
-        super(slots);
-        this.callback = callback;
-    }
+  public ItemStackHandlerCallback(ISlotCallback callback, int slots) {
+    super(slots);
+    this.callback = callback;
+  }
 
-    @Override
-    public int getSlotLimit(int slot) {
-        return callback.getSlotLimit(slot);
-    }
+  @Override
+  public int getSlotLimit(int slot) {
+    return callback.getSlotLimit(slot);
+  }
 
-    @Override
-    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-        return callback.isItemValid(slot, stack);
-    }
+  @Override
+  public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+    return callback.isItemValid(slot, stack);
+  }
 
-    @Override
-    protected void onContentsChanged(int slot) {
-        callback.setAndUpdateSlots(slot);
-    }
+  @Override
+  protected void onContentsChanged(int slot) {
+    callback.setAndUpdateSlots(slot);
+  }
 }

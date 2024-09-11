@@ -19,25 +19,29 @@ import net.dries007.tfc.objects.te.TEString;
 @SideOnly(Side.CLIENT)
 public class TESRString extends TileEntitySpecialRenderer<TEString> {
 
-    @Override
-    public void render(TEString tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
+  @Override
+  public void render(TEString tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
-        if (tile.hasWorld()) {
-            IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            if (cap != null) {
-                IBlockState state = tile.getWorld().getBlockState(tile.getPos());
-                if (!(state.getBlock() instanceof BlockString)) return;
-                GlStateManager.pushMatrix();
-                GlStateManager.translate(x + 0.5D, y + 0.38D, z + 0.5D);
-                GlStateManager.scale(0.5f, 0.5f, 0.5f);
-                if (state.getValue(BlockString.AXIS) == EnumFacing.Axis.Z)
-                    GlStateManager.rotate(90f, 0f, 1f, 0f);
-                ItemStack item = cap.getStackInSlot(0);
-                if (!item.isEmpty())
-                    Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
-                GlStateManager.popMatrix();
-            }
+    if (tile.hasWorld()) {
+      IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+      if (cap != null) {
+        IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+        if (!(state.getBlock() instanceof BlockString)) {
+          return;
         }
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x + 0.5D, y + 0.38D, z + 0.5D);
+        GlStateManager.scale(0.5f, 0.5f, 0.5f);
+        if (state.getValue(BlockString.AXIS) == EnumFacing.Axis.Z) {
+          GlStateManager.rotate(90f, 0f, 1f, 0f);
+        }
+        ItemStack item = cap.getStackInSlot(0);
+        if (!item.isEmpty()) {
+          Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
+        }
+        GlStateManager.popMatrix();
+      }
     }
+  }
 }

@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 public class GuiWoodPlow extends BaseGuiContainer {
 
   private static final ResourceLocation PLOW_GUI_TEXTURES = ModUtils.resource(
-      "textures/gui/container/plow.png");
+          "textures/gui/container/plow.png");
   private final IInventory plowInventory;
 
   public GuiWoodPlow(Container container, InventoryPlayer playerInv, IInventory plowInventory) {
@@ -24,9 +24,9 @@ public class GuiWoodPlow extends BaseGuiContainer {
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
     String name = this.plowInventory.getDisplayName().getUnformattedText();
     this.fontRenderer.drawString(name, this.xSize / 2 - this.fontRenderer.getStringWidth(name) / 2,
-        6, 4210752);
+            6, 4210752);
     this.fontRenderer.drawString(this.playerInv.getDisplayName().getUnformattedText(), 8,
-        this.ySize - 96 + 2, 4210752);
+            this.ySize - 96 + 2, 4210752);
   }
 
   @Override

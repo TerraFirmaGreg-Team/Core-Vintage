@@ -5,8 +5,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * This interface is used by the registry system to automatically detect and register item color handlers appropriately, without using proxies or any
- * other complicated spread out code.
+ * This interface is used by the registry system to automatically detect and register item color handlers appropriately, without using proxies or any other
+ * complicated spread out code.
  */
 public interface IProviderItemColor {
 

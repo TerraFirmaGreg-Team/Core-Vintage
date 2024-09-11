@@ -9,7 +9,7 @@ import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockFallable;
-import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
+import su.terrafirmagreg.modules.wood.object.block.BlockWoodSupport;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -71,29 +71,17 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
   }
 
   @Override
-  public @NotNull Size getSize(@NotNull ItemStack itemStack) {
-    return Size.NORMAL;
-  }
-
-  @Override
   public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
     return Weight.MEDIUM;
   }
 
-  public boolean canStack(@NotNull ItemStack itemStack) {
-    return false;
+  @Override
+  public @NotNull Size getSize(@NotNull ItemStack itemStack) {
+    return Size.NORMAL;
   }
 
-  public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
-    Multimap<String, AttributeModifier> multimap = HashMultimap.create();
-    if (slot == EntityEquipmentSlot.MAINHAND) {
-      multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-              new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage, 0));
-      multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
-              new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", this.attackSpeed, 0));
-    }
-
-    return multimap;
+  public boolean canStack(@NotNull ItemStack itemStack) {
+    return false;
   }
 
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
@@ -182,64 +170,21 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
     }
   }
 
-  private boolean isThisBlockSafe(World worldIn, BlockPos pos) {
-    int radX = 4;
-    int radY = 2;
-    int radZ = 4;
-    Iterator var6 = BlockWoodSupport.getAllUnsupportedBlocksIn(worldIn, pos.add(-radX, -radY, -radZ), pos.add(radX, radY, radZ))
-            .iterator();
-
-    while (var6.hasNext()) {
-      BlockPos checking = (BlockPos) var6.next();
-      if (FallingBlockManager.getSpecification(worldIn.getBlockState(checking)) != null && FallingBlockManager
-              .getSpecification(worldIn.getBlockState(checking))
-              .isCollapsable()) {
-        if (FallingBlockManager.canCollapse(worldIn, checking)) {
-          return false;
-        }
-      }
+  public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+    Multimap<String, AttributeModifier> multimap = HashMultimap.create();
+    if (slot == EntityEquipmentSlot.MAINHAND) {
+      multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
+              new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage, 0));
+      multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
+              new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", this.attackSpeed, 0));
     }
-    return true;
-  }
 
-  private boolean supportingFallable(World worldIn, BlockPos pos) {
-    IBlockState iblockstate = worldIn.getBlockState(pos.up());
-    Block block = iblockstate.getBlock();
-    if (block instanceof BlockRockFallable || block instanceof BlockFalling) {
-      return !BlockWoodSupport.isBeingSupported(worldIn, pos.up());
-    }
-    return false;
-  }
-
-  @Nullable
-  @Override
-  public Metal getMetal(ItemStack itemStack) {
-    return metal;
-  }
-
-  @Override
-  public int getSmeltAmount(ItemStack itemStack) {
-    if (this.isDamageable() && itemStack.isItemDamaged()) {
-      double d = (double) (itemStack.getMaxDamage() - itemStack.getItemDamage()) / (double) itemStack.getMaxDamage() - 0.1D;
-      return d < 0.0D ? 0 : MathHelper.floor((double) 100 * d);
-    } else {
-      return 100;
-    }
-  }
-
-  @Override
-  public boolean canMelt(ItemStack stack) {
-    return true;
+    return multimap;
   }
 
   @Nullable
   public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
     return new ForgeableHeatableHandler(nbt, metal.getSpecificHeat(), metal.getMeltTemp());
-  }
-
-  @Override
-  public void initOreDict() {
-    OreDictionary.registerOre("tool", new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE));
   }
 
   private void checkRockLayers(EntityPlayer playerIn, World worldIn, BlockPos pos, ProspectingSkill skill) {
@@ -277,6 +222,35 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
     }
   }
 
+  private boolean isThisBlockSafe(World worldIn, BlockPos pos) {
+    int radX = 4;
+    int radY = 2;
+    int radZ = 4;
+    Iterator var6 = BlockWoodSupport.getAllUnsupportedBlocksIn(worldIn, pos.add(-radX, -radY, -radZ), pos.add(radX, radY, radZ))
+            .iterator();
+
+    while (var6.hasNext()) {
+      BlockPos checking = (BlockPos) var6.next();
+      if (FallingBlockManager.getSpecification(worldIn.getBlockState(checking)) != null && FallingBlockManager
+              .getSpecification(worldIn.getBlockState(checking))
+              .isCollapsable()) {
+        if (FallingBlockManager.canCollapse(worldIn, checking)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  private boolean supportingFallable(World worldIn, BlockPos pos) {
+    IBlockState iblockstate = worldIn.getBlockState(pos.up());
+    Block block = iblockstate.getBlock();
+    if (block instanceof BlockRockFallable || block instanceof BlockFalling) {
+      return !BlockWoodSupport.isBeingSupported(worldIn, pos.up());
+    }
+    return false;
+  }
+
   private void addRock(BlockPos pos, List<RockType> rocks, World worldIn) {
     if (worldIn.getBlockState(pos).getBlock() instanceof IRockBlock rockBlock) {
       var type = rockBlock.getType();
@@ -284,6 +258,32 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
         rocks.add(type);
       }
     }
+  }
+
+  @Override
+  public boolean canMelt(ItemStack stack) {
+    return true;
+  }
+
+  @Nullable
+  @Override
+  public Metal getMetal(ItemStack itemStack) {
+    return metal;
+  }
+
+  @Override
+  public int getSmeltAmount(ItemStack itemStack) {
+    if (this.isDamageable() && itemStack.isItemDamaged()) {
+      double d = (double) (itemStack.getMaxDamage() - itemStack.getItemDamage()) / (double) itemStack.getMaxDamage() - 0.1D;
+      return d < 0.0D ? 0 : MathHelper.floor((double) 100 * d);
+    } else {
+      return 100;
+    }
+  }
+
+  @Override
+  public void initOreDict() {
+    OreDictionary.registerOre("tool", new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE));
   }
 
   @Override

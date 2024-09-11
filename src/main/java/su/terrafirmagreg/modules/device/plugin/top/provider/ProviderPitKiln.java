@@ -35,7 +35,7 @@ public class ProviderPitKiln implements IProbeInfoProvider {
 
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
-      IBlockState state, IProbeHitData hitData) {
+          IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
 
@@ -49,7 +49,7 @@ public class ProviderPitKiln implements IProbeInfoProvider {
 
       if (tile.isLit()) {
         long remainingTicks = ConfigDevice.BLOCKS.PIT_KILN.ticks - (Calendar.PLAYER_TIME.getTicks()
-            - tile.getLitTick());
+                - tile.getLitTick());
         long remainingMinutes = Math.round(remainingTicks / 1200.0f);
         long remainingHours = Math.round(remainingTicks / (float) ICalendar.TICKS_IN_HOUR);
         switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {
@@ -57,18 +57,18 @@ public class ProviderPitKiln implements IProbeInfoProvider {
             break;
           case TICKS:
             currentTooltip.add(
-                new TextComponentTranslation(ModUtils.localize("top", "devices.ticks_remaining"),
-                    remainingTicks).getFormattedText());
+                    new TextComponentTranslation(ModUtils.localize("top", "devices.ticks_remaining"),
+                            remainingTicks).getFormattedText());
             break;
           case MINECRAFT_HOURS:
             currentTooltip.add(
-                new TextComponentTranslation(ModUtils.localize("top", "devices.hours_remaining"),
-                    remainingHours).getFormattedText());
+                    new TextComponentTranslation(ModUtils.localize("top", "devices.hours_remaining"),
+                            remainingHours).getFormattedText());
             break;
           case REAL_MINUTES:
             currentTooltip.add(
-                new TextComponentTranslation(ModUtils.localize("top", "devices.minutes_remaining"),
-                    remainingMinutes).getFormattedText());
+                    new TextComponentTranslation(ModUtils.localize("top", "devices.minutes_remaining"),
+                            remainingMinutes).getFormattedText());
             break;
         }
       } else {
@@ -76,24 +76,24 @@ public class ProviderPitKiln implements IProbeInfoProvider {
         int logs = tile.getLogCount();
         if (straw == 8 && logs == 8) {
           currentTooltip.add(new TextComponentTranslation(
-              ModUtils.localize("top", "devices.pitkiln.unlit")).getFormattedText());
+                  ModUtils.localize("top", "devices.pitkiln.unlit")).getFormattedText());
         } else {
           if (straw < 8) {
             currentTooltip.add(
-                new TextComponentTranslation(ModUtils.localize("top", "devices.pitkiln.straw"),
-                    8 - straw).getFormattedText());
+                    new TextComponentTranslation(ModUtils.localize("top", "devices.pitkiln.straw"),
+                            8 - straw).getFormattedText());
           }
           if (logs < 8) {
             currentTooltip.add(
-                new TextComponentTranslation(ModUtils.localize("top", "devices.pitkiln.logs"),
-                    8 - logs).getFormattedText());
+                    new TextComponentTranslation(ModUtils.localize("top", "devices.pitkiln.logs"),
+                            8 - logs).getFormattedText());
           }
         }
       }
 
       for (String string : currentTooltip) {
         info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-            .text(string);
+                .text(string);
       }
 
     }

@@ -14,17 +14,17 @@ import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
 
 public final class ResourceLocationJson implements JsonDeserializer<ResourceLocation>,
-    JsonSerializer<ResourceLocation> {
+        JsonSerializer<ResourceLocation> {
 
   @Override
   public ResourceLocation deserialize(JsonElement json, Type typeOfT,
-      JsonDeserializationContext context) throws JsonParseException {
+          JsonDeserializationContext context) throws JsonParseException {
     return new ResourceLocation(json.getAsString());
   }
 
   @Override
   public JsonElement serialize(ResourceLocation src, Type typeOfSrc,
-      JsonSerializationContext context) {
+          JsonSerializationContext context) {
     return new JsonPrimitive(src.toString());
   }
 }

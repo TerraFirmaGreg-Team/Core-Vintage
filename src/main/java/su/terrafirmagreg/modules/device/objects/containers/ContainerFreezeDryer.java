@@ -19,7 +19,7 @@ public class ContainerFreezeDryer extends BaseContainerTile<TileFreezeDryer> {
   @Override
   protected void addContainerSlots() {
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-        null);
+            null);
 
     if (inventory != null) {
       for (int y = 0; y < 3; y++) {

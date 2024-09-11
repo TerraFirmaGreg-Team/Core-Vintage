@@ -16,25 +16,25 @@ import org.jetbrains.annotations.NotNull;
 @MethodsReturnNonnullByDefault
 public class ItemBone extends ItemBlockTFC {
 
-    public ItemBone(BlockSurfaceBones block) {
-        super(block);
-        OreDictionaryHelper.register(this, "bone");
-        OreDictionaryHelper.register(this, "bones");
-        OreDictionaryHelper.register(this, "dye_white");
-    }
+  public ItemBone(BlockSurfaceBones block) {
+    super(block);
+    OreDictionaryHelper.register(this, "bone");
+    OreDictionaryHelper.register(this, "bones");
+    OreDictionaryHelper.register(this, "dye_white");
+  }
 
-    @Override
-    public @NotNull Size getSize(ItemStack stack) {
-        return Size.SMALL;
-    }
+  @Override
+  public int getItemStackLimit(ItemStack stack) {
+    return getStackSize(stack);
+  }
 
-    @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return Weight.LIGHT;
-    }
+  @Override
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.LIGHT;
+  }
 
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return getStackSize(stack);
-    }
+  @Override
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.SMALL;
+  }
 }

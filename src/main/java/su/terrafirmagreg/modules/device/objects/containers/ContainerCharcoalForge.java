@@ -26,7 +26,7 @@ public class ContainerCharcoalForge extends ContainerTE<TileCharcoalForge> {
   @Override
   protected void addContainerSlots() {
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-        null);
+            null);
     if (inventory != null) {
       // Fuel slots
       // Note: the order of these statements is important
@@ -49,7 +49,7 @@ public class ContainerCharcoalForge extends ContainerTE<TileCharcoalForge> {
       // Extra slots (for ceramic molds)
       for (int i = SLOT_EXTRA_MIN; i <= SLOT_EXTRA_MAX; i++) {
         addSlotToContainer(
-            new SlotCallback(inventory, i, 152, 8 + 18 * (i - SLOT_EXTRA_MIN), tile));
+                new SlotCallback(inventory, i, 152, 8 + 18 * (i - SLOT_EXTRA_MIN), tile));
       }
     }
   }
@@ -57,6 +57,6 @@ public class ContainerCharcoalForge extends ContainerTE<TileCharcoalForge> {
   @Override
   protected boolean transferStackIntoContainer(ItemStack stack, int containerSlots) {
     return !mergeItemStack(stack, SLOT_EXTRA_MIN, SLOT_EXTRA_MAX + 1, false) && !mergeItemStack(
-        stack, SLOT_FUEL_MIN, SLOT_INPUT_MAX + 1, false);
+            stack, SLOT_FUEL_MIN, SLOT_INPUT_MAX + 1, false);
   }
 }

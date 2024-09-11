@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 
 public class CSPacketFreezeDryer implements IMessage,
-    IMessageHandler<CSPacketFreezeDryer, IMessage> {
+        IMessageHandler<CSPacketFreezeDryer, IMessage> {
 
   private int xCoord;
   private int yCoord;
@@ -54,7 +54,7 @@ public class CSPacketFreezeDryer implements IMessage,
   public IMessage onMessage(CSPacketFreezeDryer msg, MessageContext ctx) {
     if (ctx.side == Side.SERVER) {
       TileEntity tile = ctx.getServerHandler().player.world.getTileEntity(
-          new BlockPos(msg.xCoord, msg.yCoord, msg.zCoord));
+              new BlockPos(msg.xCoord, msg.yCoord, msg.zCoord));
       TileFreezeDryer freezeDryer = (TileFreezeDryer) tile;
 
       if (msg.bool == 0) {

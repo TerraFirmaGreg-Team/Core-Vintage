@@ -21,18 +21,18 @@ import java.util.function.Function;
 public class TOPPlugin implements Function<ITheOneProbe, Void> {
 
   public static final List<TOPBlockInterface> TOP_BLOCK_INTERFACES = Arrays.asList(
-      new TOPBlockInterface(new BarrelProvider()),
-      new TOPBlockInterface(new BerryBushProvider()),
-      new TOPBlockInterface(new CropProvider()),
-      new TOPBlockInterface(new FruitTreeProvider()),
-      new TOPBlockInterface(new OreProvider()),
-      new TOPBlockInterface(new PlacedItemProvider()),
-      new TOPBlockInterface(new TreeProvider()),
-      new TOPBlockInterface(new IngotPileProvider())
+          new TOPBlockInterface(new BarrelProvider()),
+          new TOPBlockInterface(new BerryBushProvider()),
+          new TOPBlockInterface(new CropProvider()),
+          new TOPBlockInterface(new FruitTreeProvider()),
+          new TOPBlockInterface(new OreProvider()),
+          new TOPBlockInterface(new PlacedItemProvider()),
+          new TOPBlockInterface(new TreeProvider()),
+          new TOPBlockInterface(new IngotPileProvider())
   );
 
   public static final List<TOPEntityInterface> TOP_ENTITY_INTERFACES = Collections.singletonList(
-      new TOPEntityInterface(new AnimalProvider())
+          new TOPEntityInterface(new AnimalProvider())
   );
 
   @Override

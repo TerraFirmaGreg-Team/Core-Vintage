@@ -21,8 +21,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.BiFunction;
 
 /**
- * This is a helper class for TE's with a simple inventory that will respect automation To provide side based automation, you must expose a
- * IItemHandler wrapper based on the input side Without overriding the getCapability methods, this will not accept items from external automation
+ * This is a helper class for TE's with a simple inventory that will respect automation To provide side based automation, you must expose a IItemHandler wrapper based
+ * on the input side Without overriding the getCapability methods, this will not accept items from external automation
  */
 
 public abstract class BaseTileInventory extends BaseTile implements ISlotCallback {
@@ -38,7 +38,7 @@ public abstract class BaseTileInventory extends BaseTile implements ISlotCallbac
   }
 
   protected BaseTileInventory(BiFunction<ISlotCallback, Integer, ItemStackHandler> builder,
-      int inventorySize) {
+          int inventorySize) {
     this.inventory = builder.apply(this, inventorySize);
   }
 
@@ -62,7 +62,7 @@ public abstract class BaseTileInventory extends BaseTile implements ISlotCallbac
   @Override
   public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
     return (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == null)
-        || super.hasCapability(capability, facing);
+            || super.hasCapability(capability, facing);
   }
 
   @Override
@@ -77,7 +77,7 @@ public abstract class BaseTileInventory extends BaseTile implements ISlotCallbac
   public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
     for (int i = 0; i < inventory.getSlots(); i++) {
       InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(),
-          inventory.getStackInSlot(i));
+              inventory.getStackInSlot(i));
     }
   }
 
@@ -86,6 +86,6 @@ public abstract class BaseTileInventory extends BaseTile implements ISlotCallbac
    */
   public boolean canInteractWith(EntityPlayer player) {
     return this.world.getTileEntity(pos) == this
-        && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+            && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
   }
 }

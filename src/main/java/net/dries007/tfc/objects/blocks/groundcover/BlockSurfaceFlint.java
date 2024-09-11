@@ -40,7 +40,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 public class BlockSurfaceFlint
-    extends BlockBush {
+        extends BlockBush {
 
   private static final AxisAlignedBB AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.9, 0.4, 0.9);
 
@@ -63,20 +63,6 @@ public class BlockSurfaceFlint
     } else {
       return getWeightedDrop(chance, index + 1, currentNumber + this.chance[index + 1]);
     }
-  }
-
-  @Override
-  public int quantityDropped(Random random) {
-    int dropAmount = random.nextInt(amount[index]);
-
-    return dropAmount + 1;
-  }
-
-  @NotNull
-  @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    int chance = rand.nextInt(100);
-    return getWeightedDrop(chance, 0, this.chance[0]);
   }
 
   @Override
@@ -104,22 +90,74 @@ public class BlockSurfaceFlint
   }
 
   @Override
+  public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+    return true;
+  }
+
+  @Override
+  public int quantityDropped(Random random) {
+    int dropAmount = random.nextInt(amount[index]);
+
+    return dropAmount + 1;
+  }
+
+  @NotNull
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    int chance = rand.nextInt(100);
+    return getWeightedDrop(chance, 0, this.chance[0]);
+  }
+
+  @Override
   public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
     return false;
   }
 
   @Override
-  @NotNull
-  @SuppressWarnings("deprecation")
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-      EnumFacing face) {
-    return BlockFaceShape.UNDEFINED;
+  public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition,
+          IBlockState iblockstate,
+          EntityLivingBase entity, int numberOfParticles) {
+    return true;
+  }
+
+  @Override
+  public boolean addRunningEffects(IBlockState state, World world, BlockPos pos, Entity entity) {
+    return true;
+  }
+
+  @SideOnly(Side.CLIENT)
+  @Override
+  public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target,
+          ParticleManager manager) {
+    return true;
+  }
+
+  @SideOnly(Side.CLIENT)
+  @Override
+  public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager) {
+    return true;
   }
 
   @Override
   @SuppressWarnings("deprecation")
-  public boolean isFullCube(IBlockState state) {
-    return false;
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
+          BlockPos fromPos) {
+    super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+    if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP) && !(worldIn.getBlockState(pos.down())
+            .getBlock() instanceof BlockSoilFarmland)) {
+      worldIn.setBlockToAir(pos);
+    }
+  }
+
+  @Override
+  public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+    IBlockState soil = worldIn.getBlockState(pos.down());
+
+    if (state.getBlock() == this) {
+      return (BlockUtils.isGround(soil) || worldIn.getBlockState(pos.down())
+              .isFullBlock()) && !(BlockUtils.isSaltWater(soil) || BlockUtils.isFreshWater(soil));
+    }
+    return this.canSustainBush(soil);
   }
 
   @Override
@@ -133,7 +171,7 @@ public class BlockSurfaceFlint
   @Override
   @SuppressWarnings("deprecation")
   public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-      BlockPos pos) {
+          BlockPos pos) {
     return NULL_AABB;
   }
 
@@ -144,60 +182,22 @@ public class BlockSurfaceFlint
   }
 
   @Override
-  public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return true;
-  }
-
-  @Override
   @SuppressWarnings("deprecation")
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-      BlockPos fromPos) {
-    super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-    if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP) && !(worldIn.getBlockState(pos.down())
-        .getBlock() instanceof BlockSoilFarmland)) {
-      worldIn.setBlockToAir(pos);
-    }
+  public boolean isFullCube(IBlockState state) {
+    return false;
   }
 
   @Override
-  public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition,
-      IBlockState iblockstate,
-      EntityLivingBase entity, int numberOfParticles) {
-    return true;
-  }
-
-  @Override
-  public boolean addRunningEffects(IBlockState state, World world, BlockPos pos, Entity entity) {
-    return true;
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Override
-  public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target,
-      ParticleManager manager) {
-    return true;
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Override
-  public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager) {
-    return true;
-  }
-
-  @Override
-  public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-    IBlockState soil = worldIn.getBlockState(pos.down());
-
-    if (state.getBlock() == this) {
-      return (BlockUtils.isGround(soil) || worldIn.getBlockState(pos.down())
-          .isFullBlock()) && !(BlockUtils.isSaltWater(soil) || BlockUtils.isFreshWater(soil));
-    }
-    return this.canSustainBush(soil);
+  @NotNull
+  @SuppressWarnings("deprecation")
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
+          EnumFacing face) {
+    return BlockFaceShape.UNDEFINED;
   }
 
   @NotNull
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player,
-      @NotNull EnumHand hand) {
+          @NotNull EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
     if (!world.isRemote && !player.isSneaking() && stack.getCount() > 0) {
       GuiHandler.openGui(world, player.getPosition(), player, GuiHandler.Type.FLINT);
@@ -209,7 +209,7 @@ public class BlockSurfaceFlint
   public void onRightClick(PlayerInteractEvent.RightClickItem event) {
     EnumHand hand = event.getHand();
     if (OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "flint")
-        && hand == EnumHand.MAIN_HAND) {
+            && hand == EnumHand.MAIN_HAND) {
       EntityPlayer player = event.getEntityPlayer();
       World world = event.getWorld();
       if (!world.isRemote && !player.isSneaking()) {

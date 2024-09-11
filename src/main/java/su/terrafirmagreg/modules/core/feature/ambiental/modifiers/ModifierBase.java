@@ -46,10 +46,6 @@ public class ModifierBase implements Comparable<ModifierBase> {
     return Optional.empty();
   }
 
-  public void addMultiplier(float multiplier) {
-    this.setMultiplier(this.getMultiplier() * multiplier);
-  }
-
   public float getChange() {
     return change * multiplier * (count == 1 ? 1f
             : ConfigCore.MISC.TEMPERATURE.diminishedModifierMultiplier);
@@ -72,6 +68,10 @@ public class ModifierBase implements Comparable<ModifierBase> {
     this.change += modifier.change;
     this.potency += modifier.potency;
     this.addMultiplier(modifier.getMultiplier());
+  }
+
+  public void addMultiplier(float multiplier) {
+    this.setMultiplier(this.getMultiplier() * multiplier);
   }
 
   public String getDisplayName() {

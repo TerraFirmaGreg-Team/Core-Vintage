@@ -25,37 +25,37 @@ import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 
 /**
- * This is a tree generator only used for the willow tree shapes. Requires two structure blocks: both found in /assets/tfc/[TREE NAME]/, named
- * base.nbt and overlay.nbt respectively. See the examples for TFC willow tree for what the structure blocks should look like.
+ * This is a tree generator only used for the willow tree shapes. Requires two structure blocks: both found in /assets/tfc/[TREE NAME]/, named base.nbt and
+ * overlay.nbt respectively. See the examples for TFC willow tree for what the structure blocks should look like.
  */
 public class GeneratorTreeWillow implements ITreeGenerator {
 
   private static final PlacementSettings settingsFull = StructureUtils.getDefaultSettings();
   private static final PlacementSettings settingsWeak = StructureUtils.getDefaultSettings()
-      .setIntegrity(0.5F);
+          .setIntegrity(0.5F);
   private Template structureBase;
   private Template structureOverlay;
 
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-      Random rand, boolean isWorldGen) {
+          Random rand, boolean isWorldGen) {
     //noinspection ConstantConditions
     ResourceLocation base = new ResourceLocation(Constants.MODID_TFC,
-        tree.getRegistryName().getPath() + "/base");
+            tree.getRegistryName().getPath() + "/base");
     ResourceLocation overlay = new ResourceLocation(Constants.MODID_TFC, tree.getRegistryName()
-        .getPath() + "/overlay");
+            .getPath() + "/overlay");
 
     structureBase = manager.get(world.getMinecraftServer(), base);
     structureOverlay = manager.get(world.getMinecraftServer(), overlay);
 
     if (structureBase == null || structureOverlay == null) {
       TerraFirmaCraft.getLog()
-          .warn("Unable to find a template for " + base.toString() + " or " + overlay.toString());
+              .warn("Unable to find a template for " + base + " or " + overlay);
       return;
     }
 
     int height = 5 + rand.nextInt(3),
-        branches = 2 + rand.nextInt(3), x1, z1, y1;
+            branches = 2 + rand.nextInt(3), x1, z1, y1;
     for (int n = 0; n <= height; n++) {
       if (n > 3) {
         createLeafGroup(world, pos.up(n));
@@ -72,10 +72,29 @@ public class GeneratorTreeWillow implements ITreeGenerator {
     }
   }
 
+  private void createLeafGroup(World world, BlockPos pos) {
+    BlockPos size = structureBase.getSize();
+    pos = pos.add(-size.getX() / 2, -size.getY() / 2, -size.getZ() / 2);
+
+    StructureUtils.addStructureToWorld(world, pos, structureBase, settingsFull);
+    StructureUtils.addStructureToWorld(world, pos, structureOverlay, settingsWeak);
+  }
+
+  private void tryPlaceLog(World world, BlockPos pos, Tree tree, BlockLog.EnumAxis axis) {
+    if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos)
+            .getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos)
+            .getBlock() instanceof BlockLeavesTFC) {
+      world.setBlockState(pos, BlockLogTFC.get(tree)
+              .getDefaultState()
+              .withProperty(LOG_AXIS, axis)
+              .withProperty(PLACED, false));
+    }
+  }
+
   private void createBranch(World world, BlockPos pos1, int x, int y, int z, Random rand,
-      Tree tree) {
+          Tree tree) {
     int x1 = x < 0 ? 1 : -1,
-        z1 = z < 0 ? 1 : -1;
+            z1 = z < 0 ? 1 : -1;
     do {
       if (x != 0 && rand.nextBoolean()) {
         x += x1;
@@ -89,24 +108,5 @@ public class GeneratorTreeWillow implements ITreeGenerator {
       }
     }
     while (Math.abs(x) + Math.abs(z) > 0);
-  }
-
-  private void createLeafGroup(World world, BlockPos pos) {
-    BlockPos size = structureBase.getSize();
-    pos = pos.add(-size.getX() / 2, -size.getY() / 2, -size.getZ() / 2);
-
-    StructureUtils.addStructureToWorld(world, pos, structureBase, settingsFull);
-    StructureUtils.addStructureToWorld(world, pos, structureOverlay, settingsWeak);
-  }
-
-  private void tryPlaceLog(World world, BlockPos pos, Tree tree, BlockLog.EnumAxis axis) {
-    if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos)
-        .getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos)
-        .getBlock() instanceof BlockLeavesTFC) {
-      world.setBlockState(pos, BlockLogTFC.get(tree)
-          .getDefaultState()
-          .withProperty(LOG_AXIS, axis)
-          .withProperty(PLACED, false));
-    }
   }
 }

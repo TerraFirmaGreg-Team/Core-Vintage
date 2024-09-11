@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.client.model;
 
 import su.terrafirmagreg.data.MathConstants;
-import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodPlowCart;
+import su.terrafirmagreg.modules.wood.object.entity.EntityWoodPlowCart;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -121,10 +121,10 @@ public class ModelWoodPlowCart extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount,
-      float ageInTicks, float rotationYaw, float rotationPitch,
-      float scale) {
+          float ageInTicks, float rotationYaw, float rotationPitch,
+          float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, rotationYaw, rotationPitch,
-        scale, entity);
+            scale, entity);
     this.axis.render(scale);
     this.shaft.renderWithRotation(scale);
     this.shaftConnector.renderWithRotation(scale);
@@ -135,9 +135,9 @@ public class ModelWoodPlowCart extends ModelBase {
 
   @Override
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks,
-      float rotationYaw, float rotationPitch, float scale, @NotNull Entity entity) {
+          float rotationYaw, float rotationPitch, float scale, @NotNull Entity entity) {
     super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, rotationYaw, rotationPitch,
-        scale, entity);
+            scale, entity);
     this.leftWheel.rotateAngleX = ((EntityWoodPlowCart) entity).getWheelRotation();
     this.rightWheel.rotateAngleX = this.leftWheel.rotateAngleX;
 

@@ -43,39 +43,6 @@ public class ItemDebug extends BaseItem {
             .rarity(EnumRarity.EPIC);
   }
 
-  public static void changeMode(EntityPlayer player) {
-    ItemStack stack = player.getHeldItemMainhand();
-    NBTTagCompound nbt = stack.getTagCompound();
-    if (nbt == null) {
-      NBTUtils.resetNBT(stack);
-    }
-    int mode = nbt.getInteger("mode");
-    int newMode = (mode > 4) ? 0 : mode + 1;
-    NBTUtils.setGenericNBTValue(nbt, "mode", newMode);
-    switch (newMode) {
-      case 0: {
-        player.sendStatusMessage(new TextComponentString(RED + "Blockstate"), true);
-        break;
-      }
-      case 1: {
-        player.sendStatusMessage(new TextComponentString(RED + "NBT"), true);
-        break;
-      }
-      case 2: {
-        player.sendStatusMessage(new TextComponentString(RED + "Blockstate list"), true);
-        break;
-      }
-      case 3: {
-        player.sendStatusMessage(new TextComponentString(RED + "Transform"), true);
-        break;
-      }
-      case 4: {
-        player.sendStatusMessage(new TextComponentString(RED + "Temperature Capability"), true);
-        break;
-      }
-    }
-  }
-
   @Override
   public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand,
           EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -146,6 +113,39 @@ public class ItemDebug extends BaseItem {
     }
 
     return super.onItemRightClick(world, player, hand);
+  }
+
+  public static void changeMode(EntityPlayer player) {
+    ItemStack stack = player.getHeldItemMainhand();
+    NBTTagCompound nbt = stack.getTagCompound();
+    if (nbt == null) {
+      NBTUtils.resetNBT(stack);
+    }
+    int mode = nbt.getInteger("mode");
+    int newMode = (mode > 4) ? 0 : mode + 1;
+    NBTUtils.setGenericNBTValue(nbt, "mode", newMode);
+    switch (newMode) {
+      case 0: {
+        player.sendStatusMessage(new TextComponentString(RED + "Blockstate"), true);
+        break;
+      }
+      case 1: {
+        player.sendStatusMessage(new TextComponentString(RED + "NBT"), true);
+        break;
+      }
+      case 2: {
+        player.sendStatusMessage(new TextComponentString(RED + "Blockstate list"), true);
+        break;
+      }
+      case 3: {
+        player.sendStatusMessage(new TextComponentString(RED + "Transform"), true);
+        break;
+      }
+      case 4: {
+        player.sendStatusMessage(new TextComponentString(RED + "Temperature Capability"), true);
+        break;
+      }
+    }
   }
 
   @Override

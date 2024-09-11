@@ -26,11 +26,11 @@ public interface ICreature {
    * @return 0 if can't spawn, 1 or more for how ofter this creature spawn in conditions
    */
   int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity);
+          float floraDiversity);
 
   /**
-   * Returns the grouping rules (one or more) for spawn Override this if you want your groups to have some form of rules applied to them (ie for
-   * animals: Mother and children, one male and all female)
+   * Returns the grouping rules (one or more) for spawn Override this if you want your groups to have some form of rules applied to them (ie for animals: Mother and
+   * children, one male and all female)
    *
    * @return Consumer method to apply rules to all individuals at once
    */

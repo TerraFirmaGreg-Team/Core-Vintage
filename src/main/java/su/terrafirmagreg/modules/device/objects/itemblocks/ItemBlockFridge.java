@@ -26,12 +26,12 @@ public class ItemBlockFridge extends BaseItemBlock {
   }
 
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
-      EnumFacing facing, float hitX, float hitY, float hitZ) {
+          EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!worldIn.getBlockState(pos).getMaterial().isReplaceable()) {
       pos = pos.offset(facing);
     }
     if (!worldIn.getBlockState(pos).getMaterial().isReplaceable() || !worldIn.getBlockState(
-        pos.up()).getMaterial().isReplaceable()) {
+            pos.up()).getMaterial().isReplaceable()) {
       return EnumActionResult.PASS;
     }
     ItemStack stack = player.getHeldItem(hand);
@@ -39,11 +39,11 @@ public class ItemBlockFridge extends BaseItemBlock {
       if (!worldIn.isRemote) {
         stack.shrink(1);
         IBlockState lowerState = this.block.getDefaultState()
-            .withProperty(HORIZONTAL, player.getHorizontalFacing().getOpposite())
-            .withProperty(UPPER, false);
+                .withProperty(HORIZONTAL, player.getHorizontalFacing().getOpposite())
+                .withProperty(UPPER, false);
         IBlockState upperState = this.block.getDefaultState()
-            .withProperty(HORIZONTAL, player.getHorizontalFacing().getOpposite())
-            .withProperty(UPPER, true);
+                .withProperty(HORIZONTAL, player.getHorizontalFacing().getOpposite())
+                .withProperty(UPPER, true);
         worldIn.setBlockState(pos, lowerState);
         worldIn.setBlockState(pos.up(), upperState);
       }

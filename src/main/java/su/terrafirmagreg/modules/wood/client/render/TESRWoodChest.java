@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.wood.client.render;
 
 import su.terrafirmagreg.api.util.ColourUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodChest;
-import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodChest;
+import su.terrafirmagreg.modules.wood.object.block.BlockWoodChest;
+import su.terrafirmagreg.modules.wood.object.tile.TileWoodChest;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
@@ -22,16 +22,16 @@ import java.util.Objects;
 public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
 
   private static final ResourceLocation SINGLE_TEXTURE = ModUtils.resource(
-      "textures/entity/wood/chests/single.png");
+          "textures/entity/wood/chests/single.png");
   private static final ResourceLocation DOUBLE_TEXTURE = ModUtils.resource(
-      "textures/entity/wood/chests/double.png");
+          "textures/entity/wood/chests/double.png");
 
   private final ModelChest simpleChest = new ModelChest();
   private final ModelChest largeChest = new ModelLargeChest();
 
   @Override
   public void render(TileWoodChest tile, double x, double y, double z, float partialTicks,
-      int destroyStage, float alpha) {
+          int destroyStage, float alpha) {
     GlStateManager.enableDepth();
     GlStateManager.depthFunc(515);
     GlStateManager.depthMask(true);
@@ -44,7 +44,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
 
       if (block instanceof BlockWoodChest blockWoodChest && meta == 0) {
         blockWoodChest.checkForSurroundingChests(tile.getWorld(), tile.getPos(),
-            tile.getWorld().getBlockState(tile.getPos()));
+                tile.getWorld().getBlockState(tile.getPos()));
         meta = tile.getBlockMetadata();
       }
 
@@ -120,7 +120,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
 
     if (tile.adjacentChestZNeg != null) {
       float f1 = tile.adjacentChestZNeg.prevLidAngle
-          + (tile.adjacentChestZNeg.lidAngle - tile.adjacentChestZNeg.prevLidAngle) * partialTicks;
+              + (tile.adjacentChestZNeg.lidAngle - tile.adjacentChestZNeg.prevLidAngle) * partialTicks;
       if (f1 > lidAngle) {
         lidAngle = f1;
       }
@@ -128,7 +128,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
 
     if (tile.adjacentChestXNeg != null) {
       float f2 = tile.adjacentChestXNeg.prevLidAngle
-          + (tile.adjacentChestXNeg.lidAngle - tile.adjacentChestXNeg.prevLidAngle) * partialTicks;
+              + (tile.adjacentChestXNeg.lidAngle - tile.adjacentChestXNeg.prevLidAngle) * partialTicks;
       if (f2 > lidAngle) {
         lidAngle = f2;
       }

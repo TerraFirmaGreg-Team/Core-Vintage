@@ -72,7 +72,7 @@ public class CustomStateMap extends StateMapperBase {
   }
 
   private <T extends Comparable<T>> String removeName(IProperty<T> property,
-      Map<IProperty<?>, Comparable<?>> values) {
+          Map<IProperty<?>, Comparable<?>> values) {
     return property.getName((T) values.remove(this.name));
   }
 

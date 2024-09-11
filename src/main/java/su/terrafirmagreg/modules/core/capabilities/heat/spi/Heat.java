@@ -34,6 +34,10 @@ public enum Heat {
   @Getter
   private final float max;
 
+  Heat(float min, float max, TextFormatting format) {
+    this(min, max, format, format);
+  }
+
   Heat(float min, float max, TextFormatting format, TextFormatting alternate) {
     this.min = min;
     this.max = max;
@@ -41,26 +45,8 @@ public enum Heat {
     this.alternate = alternate;
   }
 
-  Heat(float min, float max, TextFormatting format) {
-    this(min, max, format, format);
-  }
-
   public static float maxVisibleTemperature() {
     return BRILLIANT_WHITE.getMax();
-  }
-
-  @Nullable
-  public static Heat getHeat(float temperature) {
-    for (Heat heat : VALUES) {
-      if (heat.min <= temperature && temperature < heat.max) {
-        return heat;
-      }
-    }
-    if (temperature > BRILLIANT_WHITE.max) {
-      // Default to "hotter than brilliant white" for max
-      return BRILLIANT_WHITE;
-    }
-    return null;
   }
 
   @Nullable
@@ -78,16 +64,17 @@ public enum Heat {
   }
 
   @Nullable
-  public static String getTooltipAlternate(float temperature) {
-    Heat heat = Heat.getHeat(temperature);
-    String tooltip = getTooltipColorless(temperature);
-    if (tooltip != null && heat != null) {
-      tooltip = heat.alternate + tooltip;
-      if (ConfigCore.MISC.HEAT.oreTooltipMode == OreTooltipMode.ADVANCED) {
-        tooltip = tooltip + " : " + I18n.format("tfc.tooltip.melttemp", Math.round(temperature));
+  public static Heat getHeat(float temperature) {
+    for (Heat heat : VALUES) {
+      if (heat.min <= temperature && temperature < heat.max) {
+        return heat;
       }
     }
-    return tooltip;
+    if (temperature > BRILLIANT_WHITE.max) {
+      // Default to "hotter than brilliant white" for max
+      return BRILLIANT_WHITE;
+    }
+    return null;
   }
 
   @Nullable
@@ -107,6 +94,19 @@ public enum Heat {
       return b.toString();
     }
     return null;
+  }
+
+  @Nullable
+  public static String getTooltipAlternate(float temperature) {
+    Heat heat = Heat.getHeat(temperature);
+    String tooltip = getTooltipColorless(temperature);
+    if (tooltip != null && heat != null) {
+      tooltip = heat.alternate + tooltip;
+      if (ConfigCore.MISC.HEAT.oreTooltipMode == OreTooltipMode.ADVANCED) {
+        tooltip = tooltip + " : " + I18n.format("tfc.tooltip.melttemp", Math.round(temperature));
+      }
+    }
+    return tooltip;
   }
 
 }

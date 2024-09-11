@@ -23,7 +23,7 @@ import java.util.Map;
  * Saves animal respawning data to world save
  */
 public class WorldDataAnimalRespawn
-    extends WorldSavedData {
+        extends WorldSavedData {
 
   private static final String DATA_ID = ModUtils.localize("data.animal_respawn");
 
@@ -39,7 +39,7 @@ public class WorldDataAnimalRespawn
     MapStorage mapStorage = world.getMapStorage();
     if (mapStorage != null) {
       WorldDataAnimalRespawn data = (WorldDataAnimalRespawn) mapStorage.getOrLoadData(
-          WorldDataAnimalRespawn.class, DATA_ID);
+              WorldDataAnimalRespawn.class, DATA_ID);
       if (data == null) {
         data = new WorldDataAnimalRespawn();
         data.markDirty();

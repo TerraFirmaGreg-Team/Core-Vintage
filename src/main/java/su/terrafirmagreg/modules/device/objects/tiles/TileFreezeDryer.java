@@ -48,7 +48,7 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 
 public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSidedCallback,
-    ITickable, IProviderContainer<ContainerFreezeDryer, GuiFreezeDryer> {
+        ITickable, IProviderContainer<ContainerFreezeDryer, GuiFreezeDryer> {
 
   public boolean overheating = false;
   public int overheatTick;
@@ -75,7 +75,7 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
       localTemperature = Climate.getActualTemp(this.getPos());
       temperature = localTemperature;
       localPressure = (ModConfig.seaLevelPressure + ((-(this.getPos()
-          .getY() - ModConfig.seaLevel)) * ModConfig.pressureChange));
+              .getY() - ModConfig.seaLevel)) * ModConfig.pressureChange));
       System.out.println("Local pos: " + this.getPos());
       System.out.println("Local pressure is: " + localPressure);
       pressure = localPressure;
@@ -100,19 +100,19 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
 
     //Dissipate Heat
     if (coolant > ModConfig.coolantConsumptionMultiplier * Math.abs(temperature - localTemperature)
-        && pump) {
+            && pump) {
       temperature =
-          temperature + ModConfig.temperatureDissipation * (localTemperature - temperature);
+              temperature + ModConfig.temperatureDissipation * (localTemperature - temperature);
 
       //Only consume coolant if needed.
       if (temperature >= ModConfig.maxTemp) {
         coolant = coolant - ModConfig.coolantConsumptionMultiplier * Math.abs(
-            temperature - localTemperature);
+                temperature - localTemperature);
         temperature = temperature - (ModConfig.temperatureDissipation * temperature);
       }
     } else {
       temperature =
-          temperature + ModConfig.temperatureDissipation * (localTemperature - temperature);
+              temperature + ModConfig.temperatureDissipation * (localTemperature - temperature);
     }
 
     //Disabled till it cools back down
@@ -129,7 +129,7 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
       //Decrease pressure
       if (sealed) {
         pressure = pressure - (getPowerLevel() * ModConfig.workPerPower * pressure) / Math.pow(
-            localPressure, 2);
+                localPressure, 2);
       }
 
       if (pressure < ModConfig.targetPressure) {
@@ -160,25 +160,25 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     if (!inventory.getStackInSlot(9).isEmpty()) {
       Item item = inventory.getStackInSlot(9).getItem();
       if ((item == ItemsCore.PACKED_ICE_SHARD || Block.getBlockFromItem(item) == Blocks.PACKED_ICE)
-          &&
-          coolant < ModConfig.coolantMax - ModConfig.packedIceCoolant) {
+              &&
+              coolant < ModConfig.coolantMax - ModConfig.packedIceCoolant) {
         coolant = coolant + ModConfig.packedIceCoolant;
         inventory.extractItem(9, 1, false);
       } else if (
-          (item == ItemsCore.SEA_ICE_SHARD || Block.getBlockFromItem(item) == BlocksTFC.SEA_ICE) &&
-              coolant < ModConfig.coolantMax - ModConfig.seaIceCoolant) {
+              (item == ItemsCore.SEA_ICE_SHARD || Block.getBlockFromItem(item) == BlocksTFC.SEA_ICE) &&
+                      coolant < ModConfig.coolantMax - ModConfig.seaIceCoolant) {
         coolant = coolant + ModConfig.seaIceCoolant;
         inventory.extractItem(9, 1, false);
       } else if ((item == ItemsCore.ICE_SHARD || Block.getBlockFromItem(item) == Blocks.ICE) &&
-          coolant < ModConfig.coolantMax - ModConfig.iceCoolant) {
+              coolant < ModConfig.coolantMax - ModConfig.iceCoolant) {
         coolant = coolant + ModConfig.iceCoolant;
         inventory.extractItem(9, 1, false);
       } else if ((Block.getBlockFromItem(item) == Blocks.SNOW)
-          && coolant < ModConfig.coolantMax - ModConfig.snowCoolant) {
+              && coolant < ModConfig.coolantMax - ModConfig.snowCoolant) {
         coolant = coolant + ModConfig.snowCoolant;
         inventory.extractItem(9, 1, false);
       } else if ((item == Items.SNOWBALL)
-          && coolant < ModConfig.coolantMax - ModConfig.snowBallCoolant) {
+              && coolant < ModConfig.coolantMax - ModConfig.snowBallCoolant) {
         coolant = coolant + ModConfig.snowBallCoolant;
         inventory.extractItem(9, 1, false);
       }
@@ -187,15 +187,15 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
 
   private void overheatTick() {
     world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5,
-        this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+            this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
     world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5,
-        this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+            this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
     world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5,
-        this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+            this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
     world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5,
-        this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+            this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
     world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5,
-        this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+            this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
     if (temperature <= localTemperature) {
       if ((++overheatTick) % 100 != 0) {
         return;
@@ -228,45 +228,17 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     if (world.isRemote) {
       if (EnumFacing.NORTH == facing) {
         world.spawnParticle(EnumParticleTypes.WATER_DROP, this.pos.getX() + 0.7,
-            this.pos.getY() + 0.6, this.pos.getZ() + 1, 0, 0.1, 0);
+                this.pos.getY() + 0.6, this.pos.getZ() + 1, 0, 0.1, 0);
       } else if (EnumFacing.EAST == facing) {
         world.spawnParticle(EnumParticleTypes.WATER_DROP, this.pos.getX(), this.pos.getY() + 0.6,
-            this.pos.getZ() + 0.7, 0, 0.1, 0);
+                this.pos.getZ() + 0.7, 0, 0.1, 0);
       } else if (EnumFacing.SOUTH == facing) {
         world.spawnParticle(EnumParticleTypes.WATER_DROP, this.pos.getX() + 0.3,
-            this.pos.getY() + 0.6, this.pos.getZ(), 0, 0.1, 0);
+                this.pos.getY() + 0.6, this.pos.getZ(), 0, 0.1, 0);
       } else if (EnumFacing.WEST == facing) {
         world.spawnParticle(EnumParticleTypes.WATER_DROP, this.pos.getX() + 1,
-            this.pos.getY() + 0.6, this.pos.getZ() + 0.3, 0, 0.1, 0);
+                this.pos.getY() + 0.6, this.pos.getZ() + 0.3, 0, 0.1, 0);
       }
-    }
-  }
-
-  private void applyTrait(ItemStack stack, FoodTrait trait) {
-    IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
-    if (!stack.isEmpty() && food != null) {
-      if (trait == FoodTrait.PRESERVING && (food.getTraits().contains(FoodTrait.DRY))) {
-        return;
-      }
-    }
-    CapabilityFood.applyTrait(stack, trait);
-  }
-
-  private void removeTrait(ItemStack stack, FoodTrait trait) {
-    CapabilityFood.removeTrait(stack, trait);
-  }
-
-  private void applyTraits() {
-    for (int x = 0; x < inventory.getSlots() - 1; x++) {
-      ItemStack stack = inventory.getStackInSlot(x);
-      applyTrait(stack, FoodTrait.PRESERVING);
-    }
-  }
-
-  private void removeTraits() {
-    for (int x = 0; x < inventory.getSlots() - 1; x++) {
-      ItemStack stack = inventory.getStackInSlot(x);
-      removeTrait(stack, FoodTrait.PRESERVING);
     }
   }
 
@@ -279,6 +251,20 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
         applyTrait(stack, FoodTrait.DRY);
       }
     }
+  }
+
+  private void removeTrait(ItemStack stack, FoodTrait trait) {
+    CapabilityFood.removeTrait(stack, trait);
+  }
+
+  private void applyTrait(ItemStack stack, FoodTrait trait) {
+    IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+    if (!stack.isEmpty() && food != null) {
+      if (trait == FoodTrait.PRESERVING && (food.getTraits().contains(FoodTrait.DRY))) {
+        return;
+      }
+    }
+    CapabilityFood.applyTrait(stack, trait);
   }
 
   public double getTemperature() {
@@ -319,6 +305,13 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     this.markForSync();
   }
 
+  private void applyTraits() {
+    for (int x = 0; x < inventory.getSlots() - 1; x++) {
+      ItemStack stack = inventory.getStackInSlot(x);
+      applyTrait(stack, FoodTrait.PRESERVING);
+    }
+  }
+
   public void unseal() {
     sealed = false;
     pump = false;
@@ -326,6 +319,13 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     pressure = localPressure;
     removeTraits();
     this.markForSync();
+  }
+
+  private void removeTraits() {
+    for (int x = 0; x < inventory.getSlots() - 1; x++) {
+      ItemStack stack = inventory.getStackInSlot(x);
+      removeTrait(stack, FoodTrait.PRESERVING);
+    }
   }
 
   public void startPump() {
@@ -336,6 +336,15 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
   public void stopPump() {
     pump = false;
     this.markForSync();
+  }
+
+  @Nullable
+  @Override
+  public SPacketUpdateTileEntity getUpdatePacket() {
+    NBTTagCompound nbt = new NBTTagCompound();
+    writeToNBT(nbt);
+    writeSyncData(nbt);
+    return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
   }
 
   private void writeSyncData(NBTTagCompound nbt) {
@@ -351,7 +360,15 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     NBTUtils.setGenericNBTValue(nbt, "Initialized", initialized);
   }
 
-  private void readSyncData(NBTTagCompound nbt) {
+  @Override
+  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+    readFromNBT(packet.getNbtCompound());
+    readSyncData(packet.getNbtCompound());
+  }
+
+  public void readFromNBT(NBTTagCompound nbt) {
+    super.readFromNBT(nbt);
+
     temperature = nbt.getFloat("Temperature");
     pressure = nbt.getDouble("Pressure");
     localPressure = nbt.getDouble("LocalPressure");
@@ -364,9 +381,7 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     initialized = nbt.getBoolean("Initialized");
   }
 
-  public void readFromNBT(NBTTagCompound nbt) {
-    super.readFromNBT(nbt);
-
+  private void readSyncData(NBTTagCompound nbt) {
     temperature = nbt.getFloat("Temperature");
     pressure = nbt.getDouble("Pressure");
     localPressure = nbt.getDouble("LocalPressure");
@@ -396,32 +411,6 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     return nbt;
   }
 
-  @Nullable
-  @Override
-  public SPacketUpdateTileEntity getUpdatePacket() {
-    NBTTagCompound nbt = new NBTTagCompound();
-    writeToNBT(nbt);
-    writeSyncData(nbt);
-    return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
-  }
-
-  @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-    readFromNBT(packet.getNbtCompound());
-    readSyncData(packet.getNbtCompound());
-  }
-
-  @Override
-  public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
-    for (int i = 0; i < 10; ++i) {
-      ItemStack stack = inventory.getStackInSlot(i);
-
-      removeTraits();
-
-      InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
-    }
-  }
-
   @Override
   public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
     return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
@@ -437,6 +426,17 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
   }
 
   @Override
+  public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
+    for (int i = 0; i < 10; ++i) {
+      ItemStack stack = inventory.getStackInSlot(i);
+
+      removeTraits();
+
+      InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+    }
+  }
+
+  @Override
   public boolean canInsert(int i, ItemStack itemStack, EnumFacing enumFacing) {
 
     if (sealed && i < 9) {
@@ -444,13 +444,13 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     }
 
     return (itemStack.getItem() != ItemsCore.SEA_ICE_SHARD &&
-        itemStack.getItem() != ItemsCore.PACKED_ICE_SHARD &&
-        itemStack.getItem() != ItemsCore.ICE_SHARD &&
-        itemStack.getItem() != Items.SNOWBALL &&
-        itemStack.getItem() != Item.getItemFromBlock(Blocks.ICE) &&
-        itemStack.getItem() != Item.getItemFromBlock(Blocks.PACKED_ICE) &&
-        itemStack.getItem() != Item.getItemFromBlock(BlocksTFC.SEA_ICE) &&
-        itemStack.getItem() != Item.getItemFromBlock(Blocks.SNOW)) || i == 9;
+            itemStack.getItem() != ItemsCore.PACKED_ICE_SHARD &&
+            itemStack.getItem() != ItemsCore.ICE_SHARD &&
+            itemStack.getItem() != Items.SNOWBALL &&
+            itemStack.getItem() != Item.getItemFromBlock(Blocks.ICE) &&
+            itemStack.getItem() != Item.getItemFromBlock(Blocks.PACKED_ICE) &&
+            itemStack.getItem() != Item.getItemFromBlock(BlocksTFC.SEA_ICE) &&
+            itemStack.getItem() != Item.getItemFromBlock(Blocks.SNOW)) || i == 9;
   }
 
   @Override
@@ -475,21 +475,8 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     return ticksSealed;
   }
 
-  @Override
-  public ContainerFreezeDryer getContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
-    return new ContainerFreezeDryer(inventoryPlayer, this);
-  }
-
-  @Override
-  public GuiFreezeDryer getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
-    return new GuiFreezeDryer(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-        this, state);
-  }
-
   private static class FreezeDryerItemStackHandler extends ItemStackHandler
-      implements IItemHandlerModifiable, IItemHandler, INBTSerializable<NBTTagCompound> {
+          implements IItemHandlerModifiable, IItemHandler, INBTSerializable<NBTTagCompound> {
 
     public FreezeDryerItemStackHandler(int size) {
       super(size);
@@ -507,5 +494,19 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     }
 
   }
+
+  @Override
+  public ContainerFreezeDryer getContainer(InventoryPlayer inventoryPlayer, World world,
+          IBlockState state, BlockPos pos) {
+    return new ContainerFreezeDryer(inventoryPlayer, this);
+  }
+
+  @Override
+  public GuiFreezeDryer getGuiContainer(InventoryPlayer inventoryPlayer, World world,
+          IBlockState state, BlockPos pos) {
+    return new GuiFreezeDryer(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
+            this, state);
+  }
+
 
 }

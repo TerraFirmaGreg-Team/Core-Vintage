@@ -32,11 +32,11 @@ public class GenLayerZoom extends GenLayerBase {
     for (int z = 0; z < newZSize - 1; ++z) {
       l2 = (z << 1) * i2;
       int i3 = 0;
-      int thisID = parentCache[i3 + 0 + (z + 0) * newXSize];
+      int thisID = parentCache[i3 + (z) * newXSize];
 
-      for (int x = parentCache[i3 + 0 + (z + 1) * newXSize]; i3 < newXSize - 1; ++i3) {
-        this.initChunkSeed(i3 + xCoord << 1, z + zCoord << 1);
-        int rightID = parentCache[i3 + 1 + (z + 0) * newXSize];
+      for (int x = parentCache[i3 + (z + 1) * newXSize]; i3 < newXSize - 1; ++i3) {
+        this.initChunkSeed((long) i3 + xCoord << 1, (long) z + zCoord << 1);
+        int rightID = parentCache[i3 + 1 + (z) * newXSize];
         int upRightID = parentCache[i3 + 1 + (z + 1) * newXSize];
         out[l2] = thisID;
         out[l2++ + i2] = this.selectRandom(thisID, x);

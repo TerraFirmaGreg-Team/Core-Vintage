@@ -61,6 +61,45 @@ public class BlockString extends BlockNonCube {
     setDefaultState(blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
   }
 
+  @Override
+  @SuppressWarnings("deprecation")
+  @NotNull
+  public IBlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(AXIS, meta == 1 ? EnumFacing.Axis.X : EnumFacing.Axis.Z);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(AXIS) == EnumFacing.Axis.X ? 1 : 0;
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  @NotNull
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return state.getValue(AXIS) == EnumFacing.Axis.X ? SHAPE : SHAPE_90;
+  }
+
+  @Override
+  public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+    if (world.isRemote) {
+      return;
+    }
+    var tile = TileUtils.getTile(world, pos, TEString.class);
+    if (tile == null) {
+      return;
+    }
+
+    if (world.isRainingAt(pos.up()) || !isFired(world, pos)) {
+      tile.resetCounter();
+    } else if (tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_HOUR * 4)) {
+      IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+      if (cap != null) {
+        tile.tryCook();
+      }
+    }
+  }
+
   private static boolean isFired(World world, BlockPos pos) {
     pos = pos.down();
     IBlockState state = world.getBlockState(pos);
@@ -85,32 +124,13 @@ public class BlockString extends BlockNonCube {
     return false;
   }
 
-  @Override
-  @SuppressWarnings("deprecation")
-  @NotNull
-  public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(AXIS, meta == 1 ? EnumFacing.Axis.X : EnumFacing.Axis.Z);
-  }
-
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(AXIS) == EnumFacing.Axis.X ? 1 : 0;
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  @NotNull
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return state.getValue(AXIS) == EnumFacing.Axis.X ? SHAPE : SHAPE_90;
-  }
-
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
     return item.get();
   }
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-      float hitY, float hitZ) {
+          float hitY, float hitZ) {
     if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
       var tile = TileUtils.getTile(world, pos, TEString.class);
       if (tile == null) {
@@ -130,7 +150,7 @@ public class BlockString extends BlockNonCube {
         if (cap != null) {
           List<FoodTrait> traits = cap.getTraits();
           boolean isFoodValid = (traits.contains(FoodTrait.BRINED) && OreDictionaryHelper.doesStackMatchOre(held, "categoryMeat") &&
-              HeatRecipe.get(held) != null) || OreDictionaryHelper.doesStackMatchOre(held, "cheese");
+                  HeatRecipe.get(held) != null) || OreDictionaryHelper.doesStackMatchOre(held, "cheese");
           if (!traits.contains(FoodTrait.SMOKED) && isFoodValid) {
             ItemStack leftover = inv.insertItem(0, held.splitStack(1), false);
             StackUtils.spawnItemStack(world, pos.add(0.5D, 0.5D, 0.5D), leftover);
@@ -148,30 +168,10 @@ public class BlockString extends BlockNonCube {
   }
 
   @Override
-  public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-    if (world.isRemote) {
-      return;
-    }
-    var tile = TileUtils.getTile(world, pos, TEString.class);
-    if (tile == null) {
-      return;
-    }
-
-    if (world.isRainingAt(pos.up()) || !isFired(world, pos)) {
-      tile.resetCounter();
-    } else if (tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_HOUR * 4)) {
-      IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-      if (cap != null) {
-        tile.tryCook();
-      }
-    }
-  }
-
-  @Override
   @SuppressWarnings("deprecation")
   @NotNull
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-      EntityLivingBase placer) {
+          EntityLivingBase placer) {
     return getStateForPlacement(worldIn, placer, facing, pos);
   }
 

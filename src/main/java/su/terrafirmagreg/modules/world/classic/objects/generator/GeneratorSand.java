@@ -1,16 +1,16 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
-import java.util.Random;
-
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-import su.terrafirmagreg.modules.rock.init.BlocksRock;
+
+import java.util.Random;
 
 public class GeneratorSand extends WorldGenerator {
 

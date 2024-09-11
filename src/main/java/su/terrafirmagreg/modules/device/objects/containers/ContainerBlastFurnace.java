@@ -21,7 +21,7 @@ public class ContainerBlastFurnace extends ContainerTE<TileBlastFurnace> {
   @Override
   protected void addContainerSlots() {
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-        null);
+            null);
     if (inventory != null) {
       addSlotToContainer(new SlotCallback(inventory, SLOT_TUYERE, 153, 7, tile));
     }

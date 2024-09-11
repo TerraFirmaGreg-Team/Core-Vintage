@@ -15,53 +15,53 @@ import org.jetbrains.annotations.Nullable;
 
 public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe> implements IJEISimpleRecipe {
 
-    private final int duration;
-    protected IIngredient<ItemStack> inputItem;
-    protected ItemStack outputItem;
+  private final int duration;
+  protected IIngredient<ItemStack> inputItem;
+  protected ItemStack outputItem;
 
-    public OvenRecipe(IIngredient<ItemStack> input, ItemStack output, int duration) {
-        this.inputItem = input;
-        this.outputItem = output;
-        this.duration = duration;
+  public OvenRecipe(IIngredient<ItemStack> input, ItemStack output, int duration) {
+    this.inputItem = input;
+    this.outputItem = output;
+    this.duration = duration;
 
-        if (inputItem == null || outputItem == null) {
-            throw new IllegalArgumentException("Sorry, but you can't have oven recipes that don't have an input and output.");
-        }
-        if (duration < 1) {
-            throw new IllegalArgumentException("Sorry, but oven recipes have to have a duration.");
-        }
+    if (inputItem == null || outputItem == null) {
+      throw new IllegalArgumentException("Sorry, but you can't have oven recipes that don't have an input and output.");
     }
-
-    @Nullable
-    public static OvenRecipe get(ItemStack item) {
-        return TFCRegistries.OVEN.getValuesCollection()
-                .stream()
-                .filter(x -> x.isValidInput(item))
-                .findFirst()
-                .orElse(null);
+    if (duration < 1) {
+      throw new IllegalArgumentException("Sorry, but oven recipes have to have a duration.");
     }
+  }
 
-    public static int getDuration(OvenRecipe recipe) {
-        return recipe.duration;
-    }
+  @Nullable
+  public static OvenRecipe get(ItemStack item) {
+    return TFCRegistries.OVEN.getValuesCollection()
+            .stream()
+            .filter(x -> x.isValidInput(item))
+            .findFirst()
+            .orElse(null);
+  }
 
-    @NotNull
-    public ItemStack getOutputItem(ItemStack stack) {
-        return CapabilityFood.updateFoodFromPrevious(stack, outputItem.copy());
-    }
+  private boolean isValidInput(ItemStack inputItem) {
+    return this.inputItem.test(inputItem);
+  }
 
-    // for JEI
-    @Override
-    public NonNullList<IIngredient<ItemStack>> getIngredients() {
-        return NonNullList.withSize(1, inputItem);
-    }
+  public static int getDuration(OvenRecipe recipe) {
+    return recipe.duration;
+  }
 
-    @Override
-    public NonNullList<ItemStack> getOutputs() {
-        return NonNullList.withSize(1, outputItem);
-    }
+  @NotNull
+  public ItemStack getOutputItem(ItemStack stack) {
+    return CapabilityFood.updateFoodFromPrevious(stack, outputItem.copy());
+  }
 
-    private boolean isValidInput(ItemStack inputItem) {
-        return this.inputItem.test(inputItem);
-    }
+  // for JEI
+  @Override
+  public NonNullList<IIngredient<ItemStack>> getIngredients() {
+    return NonNullList.withSize(1, inputItem);
+  }
+
+  @Override
+  public NonNullList<ItemStack> getOutputs() {
+    return NonNullList.withSize(1, outputItem);
+  }
 }

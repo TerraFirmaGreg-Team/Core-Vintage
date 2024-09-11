@@ -41,128 +41,129 @@ import java.util.List;
 
 public class ItemWhetstone extends Item implements ICapabilitySize, ICapabilityMetal, ItemOreDict, TFCThingsConfigurableItem {
 
-    private int tier;
+  private final int tier;
 
-    public ItemWhetstone(int tier, int durability) {
-        setCreativeTab(CreativeTabs.MISC);
-        setMaxDamage(durability);
-        this.tier = tier;
-        setNoRepair();
-        setMaxStackSize(1);
+  public ItemWhetstone(int tier, int durability) {
+    setCreativeTab(CreativeTabs.MISC);
+    setMaxDamage(durability);
+    this.tier = tier;
+    setNoRepair();
+    setMaxStackSize(1);
+  }
+
+  @Override
+  public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
+    return Weight.MEDIUM;
+  }
+
+  @Override
+  public @NotNull Size getSize(@NotNull ItemStack itemStack) {
+    return Size.SMALL;
+  }
+
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    ItemStack itemstack = playerIn.getHeldItem(handIn);
+    if (handIn.equals(EnumHand.MAIN_HAND)) {
+      if (playerIn.getHeldItemOffhand() != null && CapabilitySharpness.has(playerIn.getHeldItemOffhand())) {
+        playerIn.setActiveHand(handIn);
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+      }
     }
+    return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+  }
 
-    @Override
-    public @NotNull Size getSize(@NotNull ItemStack itemStack) {
-        return Size.SMALL;
-    }
+  @SideOnly(Side.CLIENT)
+  public boolean isFull3D() {
+    return true;
+  }
 
-    @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
-        return Weight.MEDIUM;
-    }
+  public EnumAction getItemUseAction(ItemStack stack) {
+    return EnumAction.BOW;
+  }
 
-    @SideOnly(Side.CLIENT)
-    public boolean isFull3D() {
-        return true;
-    }
+  public int getMaxItemUseDuration(ItemStack stack) {
+    return 1000;
+  }
 
-    public int getMaxItemUseDuration(ItemStack stack) {
-        return 1000;
-    }
-
-    public EnumAction getItemUseAction(ItemStack stack) {
-        return EnumAction.BOW;
-    }
-
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        if (handIn.equals(EnumHand.MAIN_HAND)) {
-            if (playerIn.getHeldItemOffhand() != null && CapabilitySharpness.has(playerIn.getHeldItemOffhand())) {
-                playerIn.setActiveHand(handIn);
-                return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+  public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
+    if (entityLiving instanceof EntityPlayer playerIn) {
+      if (timeLeft < 985 && playerIn.getHeldItemOffhand() != null && CapabilitySharpness.has(playerIn.getHeldItemOffhand())) {
+        ItemStack item = playerIn.getHeldItemOffhand();
+        var capability = CapabilitySharpness.get(item);
+        if (capability != null && capability.getCharges() < getMaxCharges()) {
+          for (int i = 0; i < tier; i++) {
+            if (capability.getCharges() >= getMaxCharges()) {
+              break;
             }
+            capability.addCharge();
+          }
+          if (Math.random() < 0.8) {
+            item.damageItem(1, entityLiving);
+          }
+          stack.damageItem(1, entityLiving);
+          playerIn.playSound(TFCThingsSoundEvents.WHETSTONE_SHARPEN, 1.0f, 1.0f);
+        } else {
+          if (!worldIn.isRemote) {
+            playerIn.sendMessage(new TextComponentTranslation("tfcthings.tooltip.maximum_sharpness"));
+          }
         }
-        return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+      }
     }
+  }
 
-    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
-        if (entityLiving instanceof EntityPlayer playerIn) {
-            if (timeLeft < 985 && playerIn.getHeldItemOffhand() != null && CapabilitySharpness.has(playerIn.getHeldItemOffhand())) {
-                ItemStack item = playerIn.getHeldItemOffhand();
-                var capability = CapabilitySharpness.get(item);
-                if (capability != null && capability.getCharges() < getMaxCharges()) {
-                    for (int i = 0; i < tier; i++) {
-                        if (capability.getCharges() >= getMaxCharges())
-                            break;
-                        capability.addCharge();
-                    }
-                    if (Math.random() < 0.8) {
-                        item.damageItem(1, entityLiving);
-                    }
-                    stack.damageItem(1, entityLiving);
-                    playerIn.playSound(TFCThingsSoundEvents.WHETSTONE_SHARPEN, 1.0f, 1.0f);
-                } else {
-                    if (!worldIn.isRemote) {
-                        playerIn.sendMessage(new TextComponentTranslation("tfcthings.tooltip.maximum_sharpness", new Object[0]));
-                    }
-                }
-            }
-        }
+  private int getMaxCharges() {
+    switch (tier) {
+      case 2:
+        return 256;
+      case 3:
+        return 384;
+      default:
+        return 64;
     }
+  }
 
-    private int getMaxCharges() {
-        switch (tier) {
-            case 2:
-                return 256;
-            case 3:
-                return 384;
-            default:
-                return 64;
-        }
-    }
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    tooltip.add(I18n.format("tfcthings.tooltip.whetstone"));
+    super.addInformation(stack, worldIn, tooltip, flagIn);
+  }
 
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(I18n.format("tfcthings.tooltip.whetstone", new Object[0]));
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-    }
+  @Nullable
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    return tier > 1 ? new ForgeableHeatableHandler(nbt, 0.35F, 1540.0F) : null;
+  }
 
-    @Nullable
-    @Override
-    public Metal getMetal(ItemStack itemStack) {
-        return tier > 1 ? TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL) : null;
-    }
+  @Override
+  public boolean canMelt(ItemStack stack) {
+    return tier > 1;
+  }
 
-    @Override
-    public int getSmeltAmount(ItemStack itemStack) {
-        if (tier > 1) {
-            if (this.isDamageable() && itemStack.isItemDamaged()) {
-                double d = (double) (itemStack.getMaxDamage() - itemStack.getItemDamage()) / (double) itemStack.getMaxDamage() - 0.1D;
-                return d < 0.0D ? 0 : MathHelper.floor((double) 200 * d);
-            } else {
-                return 200;
-            }
-        }
-        return 0;
-    }
+  @Nullable
+  @Override
+  public Metal getMetal(ItemStack itemStack) {
+    return tier > 1 ? TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL) : null;
+  }
 
-    @Override
-    public boolean canMelt(ItemStack stack) {
-        return tier > 1 ? true : false;
+  @Override
+  public int getSmeltAmount(ItemStack itemStack) {
+    if (tier > 1) {
+      if (this.isDamageable() && itemStack.isItemDamaged()) {
+        double d = (double) (itemStack.getMaxDamage() - itemStack.getItemDamage()) / (double) itemStack.getMaxDamage() - 0.1D;
+        return d < 0.0D ? 0 : MathHelper.floor((double) 200 * d);
+      } else {
+        return 200;
+      }
     }
+    return 0;
+  }
 
-    @Nullable
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return tier > 1 ? new ForgeableHeatableHandler(nbt, 0.35F, 1540.0F) : null;
-    }
+  @Override
+  public void initOreDict() {
+    OreDictionary.registerOre("tool", new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE));
+  }
 
-    @Override
-    public void initOreDict() {
-        OreDictionary.registerOre("tool", new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE));
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableWhetstones;
-    }
+  @Override
+  public boolean isEnabled() {
+    return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableWhetstones;
+  }
 }

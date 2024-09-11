@@ -10,8 +10,8 @@ public class QuernRecipeMaker {
 
   public static List<QuernRecipeWrapper> getRecipes() {
     return RegistriesDevice.QUERN.recipes()
-        .stream()
-        .map(QuernRecipeWrapper::new)
-        .collect(Collectors.toList());
+            .stream()
+            .map(QuernRecipeWrapper::new)
+            .collect(Collectors.toList());
   }
 }

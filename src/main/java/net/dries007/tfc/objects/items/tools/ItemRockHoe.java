@@ -75,13 +75,13 @@ public class ItemRockHoe extends ItemHoe implements ICapabilitySize, IRockObject
   }
 
   @Override
-  public @NotNull Size getSize(ItemStack stack) {
-    return Size.LARGE; // Stored only in chests
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.LIGHT;
   }
 
   @Override
-  public @NotNull Weight getWeight(ItemStack stack) {
-    return Weight.LIGHT;
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.LARGE; // Stored only in chests
   }
 
   @Override

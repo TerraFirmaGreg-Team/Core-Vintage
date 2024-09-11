@@ -60,20 +60,22 @@ public class ProviderTemperature implements ICapabilityTemperature {
     this.player = player;
   }
 
-  public void clearModifiers() {
-    this.modifiers = new ModifierStorage();
-  }
-
-  public void evaluateModifiers() {
-    this.clearModifiers();
-    ModifierItem.computeModifiers(player, modifiers);
-    ModifierEnvironmental.computeModifiers(player, modifiers);
-    ModifierBlock.computeModifiers(player, modifiers);
-    ModifierTile.computeModifiers(player, modifiers);
-    ModifierEquipment.getModifiers(player, modifiers);
-
-    target = modifiers.getTargetTemperature();
-    potency = modifiers.getTotalPotency();
+  public String toString() {
+    StringBuilder str = new StringBuilder();
+    for (ModifierBase modifier : modifiers) {
+      str.append(modifier.getName()).append(" -> ").append(modifier.getChange()).append(" @ ")
+              .append(modifier.getPotency()).append("\n");
+    }
+    return String.format(
+            """
+                    Body: %.1f ( %.4f )
+                    Target: %.1f
+                    Potency: %.4f""",
+            getTemperature(),
+            getTemperatureChange(),
+            getTarget(),
+            modifiers.getTotalPotency()
+    ) + "\n" + str;
   }
 
   public float getTemperatureChange() {
@@ -90,6 +92,23 @@ public class ProviderTemperature implements ICapabilityTemperature {
     }
     return (change * speed);
   }
+
+  public void clearModifiers() {
+    this.modifiers = new ModifierStorage();
+  }
+
+  public void evaluateModifiers() {
+    this.clearModifiers();
+    ModifierItem.computeModifiers(player, modifiers);
+    ModifierEnvironmental.computeModifiers(player, modifiers);
+    ModifierBlock.computeModifiers(player, modifiers);
+    ModifierTile.computeModifiers(player, modifiers);
+    ModifierEquipment.getModifiers(player, modifiers);
+
+    target = modifiers.getTargetTemperature();
+    potency = modifiers.getTotalPotency();
+  }
+
 
   @Override
   public void update() {
@@ -133,23 +152,6 @@ public class ProviderTemperature implements ICapabilityTemperature {
 
   }
 
-  public String toString() {
-    StringBuilder str = new StringBuilder();
-    for (ModifierBase modifier : modifiers) {
-      str.append(modifier.getName()).append(" -> ").append(modifier.getChange()).append(" @ ")
-              .append(modifier.getPotency()).append("\n");
-    }
-    return String.format(
-            """
-                    Body: %.1f ( %.4f )
-                    Target: %.1f
-                    Potency: %.4f""",
-            getTemperature(),
-            getTemperatureChange(),
-            getTarget(),
-            modifiers.getTotalPotency()
-    ) + "\n" + str;
-  }
 
   @Override
   public void setTemperature(float newTemp) {

@@ -30,6 +30,11 @@ public final class ModuleAnimal extends ModuleBase {
   }
 
   @Override
+  public void onInit(FMLInitializationEvent event) {
+    MinecraftForge.EVENT_BUS.register(new EasyBreedingEventHandler());
+  }
+
+  @Override
   public void onRegister() {
     BlocksAnimal.onRegister(registryManager);
     ItemsAnimal.onRegister(registryManager);
@@ -41,11 +46,6 @@ public final class ModuleAnimal extends ModuleBase {
   public void onClientRegister() {
     EntitiesAnimal.onClientRegister(registryManager);
 
-  }
-
-  @Override
-  public void onInit(FMLInitializationEvent event) {
-    MinecraftForge.EVENT_BUS.register(new EasyBreedingEventHandler());
   }
 
   @Override

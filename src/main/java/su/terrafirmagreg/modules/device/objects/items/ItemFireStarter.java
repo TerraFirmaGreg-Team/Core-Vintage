@@ -41,11 +41,11 @@ public class ItemFireStarter extends BaseItem {
   public ItemFireStarter() {
     setNoRepair();
     getSettings()
-        .registryKey("device/firestarter")
-        .addOreDict("firestarter")
-        .notCanStack()
-        .maxDamage(8)
-        .maxCount(1);
+            .registryKey("device/firestarter")
+            .addOreDict("firestarter")
+            .notCanStack()
+            .maxDamage(8)
+            .maxCount(1);
 
   }
 
@@ -82,12 +82,12 @@ public class ItemFireStarter extends BaseItem {
       return false;
     }
     return OreDictUtils.contains(stack, "fireStarter") || OreDictUtils.contains(stack,
-        "infiniteFire");
+            "infiniteFire");
   }
 
   @Override
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
-      EnumFacing facing, float hitX, float hitY, float hitZ) {
+          EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (hand != EnumHand.MAIN_HAND || worldIn.isRemote) {
       return EnumActionResult.PASS;
     }
@@ -133,11 +133,11 @@ public class ItemFireStarter extends BaseItem {
     {
       if (itemRand.nextFloat() + 0.3 < count / (double) total) {
         world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, result.hitVec.x, result.hitVec.y,
-            result.hitVec.z, 0.0F, 0.1F, 0.0F);
+                result.hitVec.z, 0.0F, 0.1F, 0.0F);
       }
       if (countLeft < 10 && itemRand.nextFloat() + 0.3 < count / (double) total) {
         world.spawnParticle(EnumParticleTypes.FLAME, result.hitVec.x, result.hitVec.y,
-            result.hitVec.z, 0.0F, 0.0F, 0.0F);
+                result.hitVec.z, 0.0F, 0.0F, 0.0F);
       }
 
       if (count % 3 == 1) {
@@ -171,7 +171,7 @@ public class ItemFireStarter extends BaseItem {
         // Try to make a fire pit
 
         final List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
-            new AxisAlignedBB(pos, pos.add(1, 2, 1)));
+                new AxisAlignedBB(pos, pos.add(1, 2, 1)));
         final List<EntityItem> stuffToUse = new ArrayList<>();
 
         int sticks = 0, kindling = 0;
@@ -185,8 +185,8 @@ public class ItemFireStarter extends BaseItem {
             kindling += entity.getItem().getCount();
             stuffToUse.add(entity);
           } else if (log == null && (OreDictUtils.contains(entity.getItem(), "logWood") ||
-              OreDictUtils.contains(entity.getItem(), "driftwood") ||
-              OreDictUtils.contains(entity.getItem(), "twig"))) {
+                  OreDictUtils.contains(entity.getItem(), "driftwood") ||
+                  OreDictUtils.contains(entity.getItem(), "twig"))) {
             log = entity;
           }
         }
@@ -195,7 +195,7 @@ public class ItemFireStarter extends BaseItem {
           final float kindlingModifier = Math.min(0.1f * (float) kindling, 0.5f);
           if (itemRand.nextFloat() < chance + kindlingModifier) {
             world.setBlockState(pos,
-                BlocksDevice.FIRE_PIT.getDefaultState().withProperty(LIT, true));
+                    BlocksDevice.FIRE_PIT.getDefaultState().withProperty(LIT, true));
             var tile = TileUtils.getTile(world, pos, TileFirePit.class);
             if (tile != null) {
               tile.onCreate(log.getItem());
@@ -224,8 +224,8 @@ public class ItemFireStarter extends BaseItem {
       BlockPos pos = result.getBlockPos();
       final IBlockState current = world.getBlockState(pos);
       if (result.sideHit == EnumFacing.UP && current.isSideSolid(world, pos, EnumFacing.UP)
-          && !current.getMaterial()
-          .isLiquid()) {
+              && !current.getMaterial()
+              .isLiquid()) {
         if (world.isAirBlock(pos.up())) {
           return result;
         }

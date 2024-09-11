@@ -71,7 +71,7 @@ public class ModelAnimalChicken extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-      float par6, float par7) {
+          float par6, float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
     EntityAnimalChicken chicken = ((EntityAnimalChicken) entity);
@@ -124,7 +124,7 @@ public class ModelAnimalChicken extends ModelBase {
 
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
-      float par6, Entity ent) {
+          float par6, Entity ent) {
     this.head.rotateAngleX = -(par5 / (180F / MathConstants.PI));
     this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
     this.crown.rotateAngleX = -(par5 / (180F / MathConstants.PI));
@@ -138,7 +138,7 @@ public class ModelAnimalChicken extends ModelBase {
 
     for (int i = 0; i < 32; i++) {
       tails[i].rotateAngleX =
-          MathConstants.PI * 3 / 5F + (float) ((i % 3) * Math.PI / 32) * (i % 2 != 0 ? 1 : -1);
+              MathConstants.PI * 3 / 5F + (float) ((i % 3) * Math.PI / 32) * (i % 2 != 0 ? 1 : -1);
       tails[i].rotateAngleZ = MathConstants.PI / -2 + MathConstants.PI * i / 31;
     }
     this.rightLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;

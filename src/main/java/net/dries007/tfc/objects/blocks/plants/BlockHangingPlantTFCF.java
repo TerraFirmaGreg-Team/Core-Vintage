@@ -76,12 +76,6 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
   }
 
   @Override
-  @NotNull
-  public Block.EnumOffsetType getOffsetType() {
-    return Block.EnumOffsetType.XZ;
-  }
-
-  @Override
   public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
     worldIn.setBlockState(pos.down(), this.getDefaultState());
     IBlockState iblockstate = state.withProperty(AGE, 0)
@@ -98,29 +92,41 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
 
   @Override
   @NotNull
+  protected BlockStateContainer createPlantBlockState() {
+    return new BlockStateContainer(this, growthStageProperty, DAYPERIOD, AGE, PART);
+  }
+
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState().withProperty(AGE, meta);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(AGE);
+  }
+
+  @Override
+  @NotNull
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     return super.getActualState(state, worldIn, pos).withProperty(PART, getPlantPart(worldIn, pos));
   }
 
   @Override
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return AABB;
-  }
-
-  @Override
-  public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity) {
-    return true;
-  }
-
-  @Override
-  public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
-          net.minecraftforge.common.IPlantable plantable) {
-    IBlockState plant = plantable.getPlant(world, pos.offset(direction));
-
-    if (plant.getBlock() == this) {
-      return true;
+  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+    if (!worldIn.isRemote) {
+      if (stack.getItem() == Items.SHEARS || stack.getItem()
+              .getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
+              .getHarvestLevel(stack, "scythe", player, state) != -1) {
+        spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
+      }
     }
-    return super.canSustainPlant(state, world, pos, direction, plantable);
+  }
+
+  @Override
+  @NotNull
+  public Block.EnumOffsetType getOffsetType() {
+    return Block.EnumOffsetType.XZ;
   }
 
   @Override
@@ -133,73 +139,6 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
             plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     //return this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
     //return true;
-  }
-
-  @Override
-  public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-    IBlockState up = worldIn.getBlockState(pos.up());
-
-    if (worldIn.getBlockState(pos.up(plant.getMaxHeight())).getBlock() == this) {
-      return false;
-    }
-    if (state.getBlock() == this) {
-      return (up.getBlock()
-              .canSustainPlant(up, worldIn, pos.up(), net.minecraft.util.EnumFacing.DOWN, this) ||
-              isValidBlock(worldIn, pos.up(), worldIn.getBlockState(pos.up())) || worldIn.getBlockState(pos.up())
-              .getBlock() == this) && plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
-              plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
-    }
-    return this.canSustainBush(up);
-  }
-
-  @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, PART);
-  }
-
-  @Override
-  @NotNull
-  protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, growthStageProperty, DAYPERIOD, AGE, PART);
-  }
-
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(AGE);
-  }
-
-  @Override
-  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer, EnumHand hand) {
-    return this.getDefaultState().withProperty(PART, EnumBlockPart.LOWER);
-  }
-
-  @Override
-  public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(AGE, meta);
-  }
-
-  @Override
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-    if (!this.canBlockStay(worldIn, pos, state)) {
-      worldIn.destroyBlock(pos, false);
-    }
-  }
-
-  @Override
-  public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-    if (pos.getY() < WorldTypeClassic.SEALEVEL) {
-      if (rand.nextInt(40) == 0) {
-        float dripRange = 0.4F;
-        float px = rand.nextFloat() - 0.5F;
-        float py = rand.nextFloat();
-        float pz = rand.nextFloat() - 0.5F;
-        float u = Math.max(Math.abs(px), Math.abs(pz));
-        px = px / u * dripRange + 0.5F;
-        pz = pz / u * dripRange + 0.5F;
-        worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, pos.getX() + px, pos.getY() + py, pos.getZ() + pz, 0, -1, 0);
-      }
-    }
   }
 
   @Override
@@ -240,9 +179,26 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
     checkAndDropBlock(worldIn, pos, state);
   }
 
-  private boolean canShrink(World worldIn, BlockPos pos) {
-    return worldIn.getBlockState(pos.up()).getBlock() == this && worldIn.getBlockState(pos.down())
-            .getBlock() != this;
+  @Override
+  public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+    IBlockState up = worldIn.getBlockState(pos.up());
+
+    if (worldIn.getBlockState(pos.up(plant.getMaxHeight())).getBlock() == this) {
+      return false;
+    }
+    if (state.getBlock() == this) {
+      return (up.getBlock()
+              .canSustainPlant(up, worldIn, pos.up(), net.minecraft.util.EnumFacing.DOWN, this) ||
+              isValidBlock(worldIn, pos.up(), worldIn.getBlockState(pos.up())) || worldIn.getBlockState(pos.up())
+              .getBlock() == this) && plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
+              plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+    }
+    return this.canSustainBush(up);
+  }
+
+  @Override
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return AABB;
   }
 
   protected boolean isValidBlock(World world, BlockPos pos, IBlockState blockState) {
@@ -254,6 +210,13 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
   }
 
   @Override
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    if (!this.canBlockStay(worldIn, pos, state)) {
+      worldIn.destroyBlock(pos, false);
+    }
+  }
+
+  @Override
   public void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
     if (!this.canBlockStay(worldIn, pos, state)) {
       worldIn.destroyBlock(pos, false);
@@ -261,13 +224,50 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
   }
 
   @Override
-  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-    if (!worldIn.isRemote) {
-      if (stack.getItem() == Items.SHEARS || stack.getItem()
-              .getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-              .getHarvestLevel(stack, "scythe", player, state) != -1) {
-        spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
+  public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+    if (pos.getY() < WorldTypeClassic.SEALEVEL) {
+      if (rand.nextInt(40) == 0) {
+        float dripRange = 0.4F;
+        float px = rand.nextFloat() - 0.5F;
+        float py = rand.nextFloat();
+        float pz = rand.nextFloat() - 0.5F;
+        float u = Math.max(Math.abs(px), Math.abs(pz));
+        px = px / u * dripRange + 0.5F;
+        pz = pz / u * dripRange + 0.5F;
+        worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, pos.getX() + px, pos.getY() + py, pos.getZ() + pz, 0, -1, 0);
       }
     }
+  }
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, PART);
+  }
+
+  @Override
+  public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity) {
+    return true;
+  }
+
+  @Override
+  public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
+          net.minecraftforge.common.IPlantable plantable) {
+    IBlockState plant = plantable.getPlant(world, pos.offset(direction));
+
+    if (plant.getBlock() == this) {
+      return true;
+    }
+    return super.canSustainPlant(state, world, pos, direction, plantable);
+  }
+
+  @Override
+  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+          EntityLivingBase placer, EnumHand hand) {
+    return this.getDefaultState().withProperty(PART, EnumBlockPart.LOWER);
+  }
+
+  private boolean canShrink(World worldIn, BlockPos pos) {
+    return worldIn.getBlockState(pos.up()).getBlock() == this && worldIn.getBlockState(pos.down())
+            .getBlock() != this;
   }
 }

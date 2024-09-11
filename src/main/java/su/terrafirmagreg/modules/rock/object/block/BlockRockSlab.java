@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
@@ -32,7 +33,7 @@ public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock 
   protected Half halfSlab;
   protected Double doubleSlab;
 
-  private BlockRockSlab(RockBlockVariant model, RockBlockVariant variant, RockType type) {
+  private BlockRockSlab(Block model, RockBlockVariant variant, RockType type) {
     super(Settings.of(Material.ROCK));
 
     this.variant = variant;
@@ -46,8 +47,7 @@ public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock 
             .oreDict("slab")
             .oreDict("slab", "stone");
 
-    setHarvestLevel(ToolClasses.PICKAXE,
-            model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
+    setHarvestLevel(ToolClasses.PICKAXE, model.getHarvestLevel(model.getDefaultState()));
   }
 
   @Override
@@ -63,7 +63,7 @@ public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock 
 
   public static class Double extends BlockRockSlab {
 
-    public Double(RockBlockVariant model, RockBlockVariant variant, RockType type) {
+    public Double(Block model, RockBlockVariant variant, RockType type) {
       super(model, variant, type);
 
     }
@@ -81,11 +81,10 @@ public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock 
 
   public static class Half extends BlockRockSlab {
 
-    public Half(RockBlockVariant model, RockBlockVariant doubleSlab, RockBlockVariant variant,
-            RockType type) {
+    public Half(Block model, Block doubleSlab, RockBlockVariant variant, RockType type) {
       super(model, variant, type);
 
-      this.doubleSlab = (Double) doubleSlab.get(type);
+      this.doubleSlab = (Double) doubleSlab;
       this.doubleSlab.halfSlab = this;
     }
 

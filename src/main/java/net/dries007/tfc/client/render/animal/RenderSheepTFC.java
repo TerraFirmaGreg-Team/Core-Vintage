@@ -15,11 +15,11 @@ import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class RenderSheepTFC extends RenderAnimalTFC<EntitySheepTFC> {
 
-    private static final ResourceLocation SHEEP_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/sheep_young.png");
-    private static final ResourceLocation SHEEP_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/sheep_old.png");
+  private static final ResourceLocation SHEEP_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/sheep_young.png");
+  private static final ResourceLocation SHEEP_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/sheep_old.png");
 
-    public RenderSheepTFC(RenderManager renderManager) {
-        super(renderManager, new ModelSheepBodyTFC(), 0.7F, SHEEP_YOUNG, SHEEP_OLD);
-        this.addLayer(new LayerSheepWoolTFC(this));
-    }
+  public RenderSheepTFC(RenderManager renderManager) {
+    super(renderManager, new ModelSheepBodyTFC(), 0.7F, SHEEP_YOUNG, SHEEP_OLD);
+    this.addLayer(new LayerSheepWoolTFC(this));
+  }
 }

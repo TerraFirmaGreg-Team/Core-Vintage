@@ -27,9 +27,6 @@ public interface ICapabilityPlayer extends ICapabilitySerializable<NBTTagCompoun
   @Nullable
   <S extends Skill> S getSkill(SkillType<S> skillType);
 
-  @NotNull
-  EntityPlayer getPlayer();
-
   /*
    * Gets the tool that was used in the last {@link net.minecraftforge.event.world.BlockEvent.BreakEvent} event
    */
@@ -89,7 +86,10 @@ public interface ICapabilityPlayer extends ICapabilitySerializable<NBTTagCompoun
     EntityPlayer player = getPlayer();
     if (player instanceof EntityPlayerMP entityPlayerMP) {
       TerraFirmaCraft.getNetwork()
-          .sendTo(new PacketPlayerDataUpdate(serializeNBT()), entityPlayerMP);
+              .sendTo(new PacketPlayerDataUpdate(serializeNBT()), entityPlayerMP);
     }
   }
+
+  @NotNull
+  EntityPlayer getPlayer();
 }

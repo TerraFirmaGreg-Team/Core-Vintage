@@ -28,6 +28,7 @@ import net.dries007.tfc.api.capability.fluid.IFluidHandlerSidedCallback;
 import net.dries007.tfc.api.capability.fluid.IFluidTankCallback;
 import net.dries007.tfc.objects.te.TETickCounter;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -50,10 +51,6 @@ public class TileMetalLamp
     CAPACITY = ConfigMetal.BLOCKS.LAMP.tank;
     this.tank.setCapacity(CAPACITY);
     this.tank.setTileEntity(this);
-  }
-
-  public int getFuel() {
-    return tank.getFluidAmount();
   }
 
   @Override
@@ -116,7 +113,7 @@ public class TileMetalLamp
   }
 
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+  public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
     nbt.setTag("tank", tank.writeToNBT(new NBTTagCompound()));
     nbt.setBoolean("powered", powered);
     return super.writeToNBT(nbt);
@@ -148,5 +145,9 @@ public class TileMetalLamp
     } else {
       return ModifierBase.none();
     }
+  }
+
+  public int getFuel() {
+    return tank.getFluidAmount();
   }
 }

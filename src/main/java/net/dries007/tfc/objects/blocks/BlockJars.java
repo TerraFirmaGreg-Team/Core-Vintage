@@ -45,11 +45,6 @@ public class BlockJars extends BlockNonCube {
   }
 
   @Override
-  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-    drops.add(new ItemStack(item.get(), state.getValue(JARS)));
-  }
-
-  @Override
   @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(JARS, meta + 1);
@@ -76,7 +71,7 @@ public class BlockJars extends BlockNonCube {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-      float hitY, float hitZ) {
+          float hitY, float hitZ) {
     if (world.isRemote || hand == EnumHand.OFF_HAND) {
       return false;
     }
@@ -102,6 +97,16 @@ public class BlockJars extends BlockNonCube {
   }
 
   @Override
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    drops.add(new ItemStack(item.get(), state.getValue(JARS)));
+  }
+
+  private boolean canStay(IBlockAccess world, BlockPos pos) {
+    IBlockState state = world.getBlockState(pos.down());
+    return state.getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+  }
+
+  @Override
   public @NotNull Size getSize(@NotNull ItemStack stack) {
     return Size.VERY_LARGE;
   }
@@ -109,10 +114,5 @@ public class BlockJars extends BlockNonCube {
   @Override
   public @NotNull Weight getWeight(@NotNull ItemStack stack) {
     return Weight.MEDIUM;
-  }
-
-  private boolean canStay(IBlockAccess world, BlockPos pos) {
-    IBlockState state = world.getBlockState(pos.down());
-    return state.getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
   }
 }

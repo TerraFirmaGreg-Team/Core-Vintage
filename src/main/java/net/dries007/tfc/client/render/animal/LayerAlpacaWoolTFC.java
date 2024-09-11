@@ -14,30 +14,30 @@ import net.dries007.tfc.objects.entity.animal.EntityAlpacaTFC;
 
 public class LayerAlpacaWoolTFC implements LayerRenderer<EntityAlpacaTFC> {
 
-    private final RenderAlpacaTFC alpacaRenderer;
-    private final ModelAlpacaWoolTFC alpacaModel = new ModelAlpacaWoolTFC();
+  private final RenderAlpacaTFC alpacaRenderer;
+  private final ModelAlpacaWoolTFC alpacaModel = new ModelAlpacaWoolTFC();
 
-    public LayerAlpacaWoolTFC(RenderAlpacaTFC renderer) {
-        this.alpacaRenderer = renderer;
+  public LayerAlpacaWoolTFC(RenderAlpacaTFC renderer) {
+    this.alpacaRenderer = renderer;
+  }
+
+  @Override
+  public void doRenderLayer(EntityAlpacaTFC alpaca, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
+          float headPitch, float scale) {
+    if (alpaca.hasWool() && !alpaca.isInvisible()) {
+      this.alpacaRenderer.bindTexture(this.alpacaRenderer.getEntityTexture(alpaca));
+
+      float[] afloat = EntitySheep.getDyeRgb(alpaca.getDyeColor());
+      GlStateManager.color(afloat[0], afloat[1], afloat[2]);
+
+      this.alpacaModel.setModelAttributes(this.alpacaRenderer.getMainModel());
+      this.alpacaModel.setLivingAnimations(alpaca, limbSwing, limbSwingAmount, partialTicks);
+      this.alpacaModel.render(alpaca, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
     }
+  }
 
-    @Override
-    public void doRenderLayer(EntityAlpacaTFC alpaca, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
-                              float headPitch, float scale) {
-        if (alpaca.hasWool() && !alpaca.isInvisible()) {
-            this.alpacaRenderer.bindTexture(this.alpacaRenderer.getEntityTexture(alpaca));
-
-            float[] afloat = EntitySheep.getDyeRgb(alpaca.getDyeColor());
-            GlStateManager.color(afloat[0], afloat[1], afloat[2]);
-
-            this.alpacaModel.setModelAttributes(this.alpacaRenderer.getMainModel());
-            this.alpacaModel.setLivingAnimations(alpaca, limbSwing, limbSwingAmount, partialTicks);
-            this.alpacaModel.render(alpaca, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-        }
-    }
-
-    @Override
-    public boolean shouldCombineTextures() {
-        return true;
-    }
+  @Override
+  public boolean shouldCombineTextures() {
+    return true;
+  }
 }

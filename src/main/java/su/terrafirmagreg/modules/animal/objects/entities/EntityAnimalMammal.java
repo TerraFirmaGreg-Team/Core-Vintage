@@ -22,7 +22,7 @@ public abstract class EntityAnimalMammal extends EntityAnimalBase {
 
   // The time(in days) this entity became pregnant
   private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(
-      EntityAnimalMammal.class, DataSerializers.LONG);
+          EntityAnimalMammal.class, DataSerializers.LONG);
 
   @SuppressWarnings("unused")
   public EntityAnimalMammal(World worldIn) {
@@ -32,14 +32,6 @@ public abstract class EntityAnimalMammal extends EntityAnimalBase {
   public EntityAnimalMammal(World worldIn, IAnimal.Gender gender, int birthDay) {
     super(worldIn, gender, birthDay);
     setPregnantTime(-1);
-  }
-
-  public long getPregnantTime() {
-    return dataManager.get(PREGNANT_TIME);
-  }
-
-  private void setPregnantTime(long day) {
-    dataManager.set(PREGNANT_TIME, day);
   }
 
   @Override
@@ -53,18 +45,6 @@ public abstract class EntityAnimalMammal extends EntityAnimalBase {
     return Type.MAMMAL;
   }
 
-  /**
-   * Spawns children of this animal
-   */
-  public abstract void birthChildren();
-
-  /**
-   * Return the number of days for a full gestation
-   *
-   * @return long value in days
-   */
-  public abstract long gestationDays();
-
   @Override
   protected void entityInit() {
     super.entityInit();
@@ -76,12 +56,32 @@ public abstract class EntityAnimalMammal extends EntityAnimalBase {
     super.onLivingUpdate();
     if (!this.world.isRemote) {
       if (this.isFertilized()
-          && Calendar.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {
+              && Calendar.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {
         birthChildren();
         this.setFertilized(false);
       }
     }
   }
+
+  public long getPregnantTime() {
+    return dataManager.get(PREGNANT_TIME);
+  }
+
+  private void setPregnantTime(long day) {
+    dataManager.set(PREGNANT_TIME, day);
+  }
+
+  /**
+   * Return the number of days for a full gestation
+   *
+   * @return long value in days
+   */
+  public abstract long gestationDays();
+
+  /**
+   * Spawns children of this animal
+   */
+  public abstract void birthChildren();
 
   @Override
   public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {

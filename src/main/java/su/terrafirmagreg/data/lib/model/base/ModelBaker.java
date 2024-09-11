@@ -46,10 +46,96 @@ public class ModelBaker {
     return this;
   }
 
+  public ModelBaker putTexturedCube(float offsetX, float offsetY, float offsetZ, float size) {
+    if (texture == null) {
+      throw new ModelBakerException("No texture!");
+    }
+    putCube(offsetX, offsetY, offsetZ, size, texture.getMinU(), texture.getMaxU(),
+            texture.getMinV(), texture.getMaxV());
+    return this;
+  }
+
+  public ModelBaker putCube(float offsetX, float offsetY, float offsetZ, float size, float uMin,
+          float uMax, float vMin, float vMax) {
+    putCube(offsetX, offsetY, offsetZ, size, size, size, uMin, uMax, vMin, vMax);
+    return this;
+  }
+
+  public ModelBaker putCube(float offsetX, float offsetY, float offsetZ, float scaleX, float scaleY,
+          float scaleZ, float uMin, float uMax,
+          float vMin, float vMax) {
+    for (EnumFacing facing : EnumFacing.values()) {
+      putQuad(offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ, uMin, uMax, vMin, vMax, facing);
+    }
+    return this;
+  }
+
+  public ModelBaker putQuad(float offsetX, float offsetY, float offsetZ, float scaleX, float scaleY,
+          float scaleZ, float uMin, float uMax,
+          float vMin, float vMax, EnumFacing rotate) {
+    switch (rotate) {
+      case NORTH:
+        putQuad(
+                offsetX + 0.5f - scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f - scaleZ, uMin, vMax,
+                offsetX + 0.5f - scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f - scaleZ, uMin, vMin,
+                offsetX + 0.5f + scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f - scaleZ, uMax, vMin,
+                offsetX + 0.5f + scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f - scaleZ, uMax, vMax,
+                EnumFacing.NORTH
+        );
+        break;
+      case SOUTH:
+        putQuad(
+                offsetX + 0.5f + scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f + scaleZ, uMin, vMax,
+                offsetX + 0.5f + scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f + scaleZ, uMin, vMin,
+                offsetX + 0.5f - scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f + scaleZ, uMax, vMin,
+                offsetX + 0.5f - scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f + scaleZ, uMax, vMax,
+                EnumFacing.SOUTH
+        );
+        break;
+      case EAST:
+        putQuad(
+                offsetX + 0.5f + scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f - scaleZ, uMin, vMax,
+                offsetX + 0.5f + scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f - scaleZ, uMin, vMin,
+                offsetX + 0.5f + scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f + scaleZ, uMax, vMin,
+                offsetX + 0.5f + scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f + scaleZ, uMax, vMax,
+                EnumFacing.EAST
+        );
+        break;
+      case WEST:
+        putQuad(
+                offsetX + 0.5f - scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f + scaleZ, uMin, vMax,
+                offsetX + 0.5f - scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f + scaleZ, uMin, vMin,
+                offsetX + 0.5f - scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f - scaleZ, uMax, vMin,
+                offsetX + 0.5f - scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f - scaleZ, uMax, vMax,
+                EnumFacing.WEST
+        );
+        break;
+      case DOWN:
+        putQuad(
+                offsetX + 0.5f - scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f - scaleZ, uMin, vMax,
+                offsetX + 0.5f + scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f - scaleZ, uMin, vMin,
+                offsetX + 0.5f + scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f + scaleZ, uMax, vMin,
+                offsetX + 0.5f - scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f + scaleZ, uMax, vMax,
+                EnumFacing.DOWN
+        );
+        break;
+      case UP:
+        putQuad(
+                offsetX + 0.5f + scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f + scaleZ, uMin, vMax,
+                offsetX + 0.5f + scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f - scaleZ, uMin, vMin,
+                offsetX + 0.5f - scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f - scaleZ, uMax, vMin,
+                offsetX + 0.5f - scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f + scaleZ, uMax, vMax,
+                EnumFacing.UP
+        );
+        break;
+    }
+    return this;
+  }
+
   public ModelBaker putQuad(float x0, float y0, float z0, float u0, float v0,
-      float x1, float y1, float z1, float u1, float v1,
-      float x2, float y2, float z2, float u2, float v2,
-      float x3, float y3, float z3, float u3, float v3, EnumFacing side) {
+          float x1, float y1, float z1, float u1, float v1,
+          float x2, float y2, float z2, float u2, float v2,
+          float x3, float y3, float z3, float u3, float v3, EnumFacing side) {
     if (!readyForUse) {
       throw new ModelBakerException("Not ready to put quad!");
     }
@@ -72,94 +158,8 @@ public class ModelBaker {
     return this;
   }
 
-  public ModelBaker putQuad(float offsetX, float offsetY, float offsetZ, float scaleX, float scaleY,
-      float scaleZ, float uMin, float uMax,
-      float vMin, float vMax, EnumFacing rotate) {
-    switch (rotate) {
-      case NORTH:
-        putQuad(
-            offsetX + 0.5f - scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f - scaleZ, uMin, vMax,
-            offsetX + 0.5f - scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f - scaleZ, uMin, vMin,
-            offsetX + 0.5f + scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f - scaleZ, uMax, vMin,
-            offsetX + 0.5f + scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f - scaleZ, uMax, vMax,
-            EnumFacing.NORTH
-        );
-        break;
-      case SOUTH:
-        putQuad(
-            offsetX + 0.5f + scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f + scaleZ, uMin, vMax,
-            offsetX + 0.5f + scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f + scaleZ, uMin, vMin,
-            offsetX + 0.5f - scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f + scaleZ, uMax, vMin,
-            offsetX + 0.5f - scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f + scaleZ, uMax, vMax,
-            EnumFacing.SOUTH
-        );
-        break;
-      case EAST:
-        putQuad(
-            offsetX + 0.5f + scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f - scaleZ, uMin, vMax,
-            offsetX + 0.5f + scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f - scaleZ, uMin, vMin,
-            offsetX + 0.5f + scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f + scaleZ, uMax, vMin,
-            offsetX + 0.5f + scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f + scaleZ, uMax, vMax,
-            EnumFacing.EAST
-        );
-        break;
-      case WEST:
-        putQuad(
-            offsetX + 0.5f - scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f + scaleZ, uMin, vMax,
-            offsetX + 0.5f - scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f + scaleZ, uMin, vMin,
-            offsetX + 0.5f - scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f - scaleZ, uMax, vMin,
-            offsetX + 0.5f - scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f - scaleZ, uMax, vMax,
-            EnumFacing.WEST
-        );
-        break;
-      case DOWN:
-        putQuad(
-            offsetX + 0.5f - scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f - scaleZ, uMin, vMax,
-            offsetX + 0.5f + scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f - scaleZ, uMin, vMin,
-            offsetX + 0.5f + scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f + scaleZ, uMax, vMin,
-            offsetX + 0.5f - scaleX, offsetY + 0.5f - scaleY, offsetZ + 0.5f + scaleZ, uMax, vMax,
-            EnumFacing.DOWN
-        );
-        break;
-      case UP:
-        putQuad(
-            offsetX + 0.5f + scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f + scaleZ, uMin, vMax,
-            offsetX + 0.5f + scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f - scaleZ, uMin, vMin,
-            offsetX + 0.5f - scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f - scaleZ, uMax, vMin,
-            offsetX + 0.5f - scaleX, offsetY + 0.5f + scaleY, offsetZ + 0.5f + scaleZ, uMax, vMax,
-            EnumFacing.UP
-        );
-        break;
-    }
-    return this;
-  }
-
   public ModelBaker putQuad(BakedQuad quad) {
     builder.add(quad);
-    return this;
-  }
-
-  public ModelBaker putTexturedCube(float offsetX, float offsetY, float offsetZ, float size) {
-    if (texture == null) {
-      throw new ModelBakerException("No texture!");
-    }
-    putCube(offsetX, offsetY, offsetZ, size, texture.getMinU(), texture.getMaxU(),
-        texture.getMinV(), texture.getMaxV());
-    return this;
-  }
-
-  public ModelBaker putCube(float offsetX, float offsetY, float offsetZ, float size, float uMin,
-      float uMax, float vMin, float vMax) {
-    putCube(offsetX, offsetY, offsetZ, size, size, size, uMin, uMax, vMin, vMax);
-    return this;
-  }
-
-  public ModelBaker putCube(float offsetX, float offsetY, float offsetZ, float scaleX, float scaleY,
-      float scaleZ, float uMin, float uMax,
-      float vMin, float vMax) {
-    for (EnumFacing facing : EnumFacing.values()) {
-      putQuad(offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ, uMin, uMax, vMin, vMax, facing);
-    }
     return this;
   }
 

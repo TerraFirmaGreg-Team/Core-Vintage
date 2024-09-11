@@ -91,7 +91,7 @@ public abstract class BlockCropSpreading extends BlockCropTFC {
             } else if (newState.getBlock().isAir(newState, worldIn, newPos)) {
               IBlockState stateDown = worldIn.getBlockState(newPos.down());
               if (stateDown.getBlock()
-                  .canSustainPlant(stateDown, worldIn, newPos.down(), EnumFacing.UP, this)) {
+                      .canSustainPlant(stateDown, worldIn, newPos.down(), EnumFacing.UP, this)) {
                 // Spawn a crop on the new block
                 worldIn.setBlockState(newPos, getDefaultState().withProperty(getStageProperty(), currentGrowthStage / 2));
                 TECropSpreading newTile = TileUtils.getTile(worldIn, newPos, TECropSpreading.class);

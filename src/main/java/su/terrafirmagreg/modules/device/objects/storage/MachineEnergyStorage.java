@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
  */
 @SuppressWarnings("WeakerAccess")
 public class MachineEnergyStorage
-    extends EnergyStorage implements INBTSerializable<NBTTagCompound> {
+        extends EnergyStorage implements INBTSerializable<NBTTagCompound> {
 
   private final GTCEHandler gtceHandler = new GTCEHandler(this);
 
@@ -93,7 +93,7 @@ public class MachineEnergyStorage
       if (voltage > 0L && amperage > 0L) {
         if (canAccept >= voltage) {
           long amperesAccepted = Math.min(canAccept / voltage,
-              Math.min(amperage, getInputAmperage()));
+                  Math.min(amperage, getInputAmperage()));
           if (amperesAccepted > 0) {
             setEnergyStored(getEnergyStored() + voltage * amperesAccepted);
             return amperesAccepted;
@@ -112,8 +112,8 @@ public class MachineEnergyStorage
     public long changeEnergy(long energyToAdd) {
       long oldEnergyStored = getEnergyStored();
       long newEnergyStored =
-          (getEnergyCapacity() - getEnergyStored() < energyToAdd) ? getEnergyCapacity()
-              : (oldEnergyStored + energyToAdd);
+              (getEnergyCapacity() - getEnergyStored() < energyToAdd) ? getEnergyCapacity()
+                      : (oldEnergyStored + energyToAdd);
       if (newEnergyStored < 0) {
         newEnergyStored = 0;
       }
@@ -124,7 +124,7 @@ public class MachineEnergyStorage
     @Override
     public long getEnergyStored() {
       return (long) Math.floor(
-          this.container.getEnergyStored() / (double) TechConfig.DEVICES.ratioGTCE);
+              this.container.getEnergyStored() / (double) TechConfig.DEVICES.ratioGTCE);
     }
 
     public void setEnergyStored(long energyStored) {
@@ -134,7 +134,7 @@ public class MachineEnergyStorage
     @Override
     public long getEnergyCapacity() {
       return (long) Math.ceil(
-          this.container.getMaxEnergyStored() / (double) TechConfig.DEVICES.ratioGTCE);
+              this.container.getMaxEnergyStored() / (double) TechConfig.DEVICES.ratioGTCE);
     }
 
     @Override

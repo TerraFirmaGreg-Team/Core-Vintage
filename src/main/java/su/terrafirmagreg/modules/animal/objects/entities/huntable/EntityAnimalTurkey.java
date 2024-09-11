@@ -51,11 +51,11 @@ public class EntityAnimalTurkey extends EntityAnimalBase implements IHuntable {
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS
-            || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
+            (biomeType == BiomeHelper.BiomeType.PLAINS
+                    || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
       return ConfigAnimal.ENTITIES.TURKEY.rarity;
     }
     return 0;

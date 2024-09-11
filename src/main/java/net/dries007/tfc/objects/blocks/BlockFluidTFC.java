@@ -29,14 +29,14 @@ import java.util.Random;
 
 public class BlockFluidTFC extends BlockFluidClassic {
 
-  public BlockFluidTFC(Fluid fluid, Material material) {
-    super(fluid, material);
-  }
-
   public BlockFluidTFC(Fluid fluid, Material material, boolean canCreateSources) {
     this(fluid, material);
     this.canCreateSources = canCreateSources;
     setHardness(100.0F);
+  }
+
+  public BlockFluidTFC(Fluid fluid, Material material) {
+    super(fluid, material);
   }
 
   @Override

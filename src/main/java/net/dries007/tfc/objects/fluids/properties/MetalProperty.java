@@ -6,16 +6,16 @@ import org.jetbrains.annotations.NotNull;
 
 public class MetalProperty {
 
-    public static final FluidProperty<MetalProperty> METAL = new FluidProperty<>("metal");
+  public static final FluidProperty<MetalProperty> METAL = new FluidProperty<>("metal");
 
-    private final Metal metal;
+  private final Metal metal;
 
-    public MetalProperty(@NotNull Metal metal) {
-        this.metal = metal;
-    }
+  public MetalProperty(@NotNull Metal metal) {
+    this.metal = metal;
+  }
 
-    @NotNull
-    public Metal getMetal() {
-        return metal;
-    }
+  @NotNull
+  public Metal getMetal() {
+    return metal;
+  }
 }

@@ -36,8 +36,8 @@ public abstract class BaseBlockWall extends BlockWall implements IBlockSettings 
     super(modelBlock);
 
     this.settings = Settings
-        .copy(modelBlock)
-        .ignoresProperties(VARIANT);
+            .copy(modelBlock)
+            .ignoresProperties(VARIANT);
 
     this.modelBlock = modelBlock;
     this.modelState = modelBlock.getDefaultState();
@@ -68,25 +68,20 @@ public abstract class BaseBlockWall extends BlockWall implements IBlockSettings 
     return 0;
   }
 
+  @Override
+  public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+    return this.modelBlock.getMapColor(this.modelState, worldIn, pos);
+  }
+
+  @Override
+  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    this.modelBlock.updateTick(worldIn, pos, state, rand);
+  }
+
   @SideOnly(Side.CLIENT)
   @Override
   public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     this.modelBlock.randomDisplayTick(stateIn, worldIn, pos, rand);
-  }
-
-  @Override
-  public float getExplosionResistance(Entity exploder) {
-    return this.modelBlock.getExplosionResistance(exploder);
-  }
-
-  @Override
-  public Vec3d modifyAcceleration(World worldIn, BlockPos pos, Entity entityIn, Vec3d motion) {
-    return this.modelBlock.modifyAcceleration(worldIn, pos, entityIn, motion);
-  }
-
-  @Override
-  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    return this.modelBlock.canPlaceBlockAt(worldIn, pos);
   }
 
   @Override
@@ -95,13 +90,8 @@ public abstract class BaseBlockWall extends BlockWall implements IBlockSettings 
   }
 
   @Override
-  public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-    this.modelBlock.onEntityWalk(worldIn, pos, entityIn);
-  }
-
-  @Override
-  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-    this.modelBlock.updateTick(worldIn, pos, state, rand);
+  public float getExplosionResistance(Entity exploder) {
+    return this.modelBlock.getExplosionResistance(exploder);
   }
 
   @Override
@@ -110,8 +100,18 @@ public abstract class BaseBlockWall extends BlockWall implements IBlockSettings 
   }
 
   @Override
-  public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-    return this.modelBlock.getMapColor(this.modelState, worldIn, pos);
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    return this.modelBlock.canPlaceBlockAt(worldIn, pos);
+  }
+
+  @Override
+  public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
+    this.modelBlock.onEntityWalk(worldIn, pos, entityIn);
+  }
+
+  @Override
+  public Vec3d modifyAcceleration(World worldIn, BlockPos pos, Entity entityIn, Vec3d motion) {
+    return this.modelBlock.modifyAcceleration(worldIn, pos, entityIn, motion);
   }
 
 }

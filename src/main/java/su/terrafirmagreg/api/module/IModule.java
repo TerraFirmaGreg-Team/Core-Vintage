@@ -112,8 +112,7 @@ public interface IModule {
   }
 
   /**
-   * @return A list of classes to subscribe to the Forge event bus. As the class gets subscribed, not any specific instance, event handlers must be
-   * static!
+   * @return A list of classes to subscribe to the Forge event bus. As the class gets subscribed, not any specific instance, event handlers must be static!
    */
 
   default @NotNull List<Class<?>> getEventBusSubscribers() {

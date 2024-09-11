@@ -1,9 +1,6 @@
 package su.terrafirmagreg.modules.core.api.util;
 
-import java.util.List;
-
-import lombok.experimental.UtilityClass;
-
+import su.terrafirmagreg.modules.core.object.entity.EntitySeatOn;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -15,8 +12,9 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.experimental.UtilityClass;
 
-import su.terrafirmagreg.modules.core.object.entity.EntitySeatOn;
+import java.util.List;
 
 @UtilityClass
 public final class SitUtils {

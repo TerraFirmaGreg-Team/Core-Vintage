@@ -15,6 +15,8 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+import java.util.Map;
 import java.util.Random;
 
 public class BlockSoilMud extends BlockSoil {
@@ -23,6 +25,20 @@ public class BlockSoilMud extends BlockSoil {
 
   public BlockSoilMud(SoilBlockVariant variant, SoilType type) {
     super(variant, type);
+  }
+
+
+  public static Collection<BlockSoilMud> create(Map<SoilType, BlockSoilMud> map_block) {
+    SoilBlockVariant.getVariants().forEach(variant -> {
+      SoilType.getTypes().forEach(type -> {
+
+        var block = new BlockSoilMud(variant, type);
+        if (map_block.put(type, block) != null) {
+          throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
+        }
+      });
+    });
+    return map_block.values();
   }
 
   @Override

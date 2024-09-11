@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import io.netty.buffer.ByteBuf;
 
 public abstract class BasePacketBlockPos<REQ extends IMessage> implements IMessage,
-    IMessageHandler<REQ, IMessage> {
+        IMessageHandler<REQ, IMessage> {
 
   protected BlockPos blockPos;
 

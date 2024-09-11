@@ -58,17 +58,6 @@ public class PerformanceInfo {
   }
 
   /**
-   * Simple util to convert bytes to megabytes.
-   *
-   * @param bytes The amount of bytes.
-   * @return The amount of megabytes.
-   */
-  public static long bytesToMb(long bytes) {
-
-    return bytes / 1024L / 1024L;
-  }
-
-  /**
    * Gets the FPS at time of construction.
    *
    * @return The FPS.
@@ -86,26 +75,6 @@ public class PerformanceInfo {
   public int getChunkUpdates() {
 
     return this.chunkUpdates;
-  }
-
-  /**
-   * The maximum amount of memory that the JVM will try to use.
-   *
-   * @return The maxium memory.
-   */
-  public long getMaxMemory() {
-
-    return this.maxMemory;
-  }
-
-  /**
-   * Gets the maximum aount of memory that the JVM will try to use, in megabytes.
-   *
-   * @return The maximum memory in megabytes.
-   */
-  public long getMaxMemoryMb() {
-
-    return bytesToMb(this.maxMemory);
   }
 
   /**
@@ -129,6 +98,17 @@ public class PerformanceInfo {
   }
 
   /**
+   * Simple util to convert bytes to megabytes.
+   *
+   * @param bytes The amount of bytes.
+   * @return The amount of megabytes.
+   */
+  public static long bytesToMb(long bytes) {
+
+    return bytes / 1024L / 1024L;
+  }
+
+  /**
    * Gets the total amount of unused memory.
    *
    * @return The amount of unused memory.
@@ -149,6 +129,18 @@ public class PerformanceInfo {
   }
 
   /**
+   * Gets a string which shows the memory being used.
+   *
+   * @return A string which shows the memory being used.
+   */
+  public String getMemoryString() {
+
+    return String.format("Mem:% 2d%% %03d/%03dMB",
+            this.getUsedMemory() * 100L / this.getMaxMemory(), this.getUsedMemoryMb(),
+            this.getMaxMemoryMb());
+  }
+
+  /**
    * Gets the amount of memory being used.
    *
    * @return The amount of memory used.
@@ -156,6 +148,16 @@ public class PerformanceInfo {
   public long getUsedMemory() {
 
     return this.usedMemory;
+  }
+
+  /**
+   * The maximum amount of memory that the JVM will try to use.
+   *
+   * @return The maxium memory.
+   */
+  public long getMaxMemory() {
+
+    return this.maxMemory;
   }
 
   /**
@@ -169,15 +171,13 @@ public class PerformanceInfo {
   }
 
   /**
-   * Gets a string which shows the memory being used.
+   * Gets the maximum aount of memory that the JVM will try to use, in megabytes.
    *
-   * @return A string which shows the memory being used.
+   * @return The maximum memory in megabytes.
    */
-  public String getMemoryString() {
+  public long getMaxMemoryMb() {
 
-    return String.format("Mem:% 2d%% %03d/%03dMB",
-        this.getUsedMemory() * 100L / this.getMaxMemory(), this.getUsedMemoryMb(),
-        this.getMaxMemoryMb());
+    return bytesToMb(this.maxMemory);
   }
 
   /**
@@ -188,6 +188,6 @@ public class PerformanceInfo {
   public String getAllocatedString() {
 
     return String.format("Allocated:% 2d%% %03dMB",
-        this.getUsedMemory() * 100L / this.getMaxMemory(), this.getUsedMemoryMb());
+            this.getUsedMemory() * 100L / this.getMaxMemory(), this.getUsedMemoryMb());
   }
 }

@@ -24,9 +24,9 @@ public class VeinCluster extends Vein {
     spawnPoints[0] = new Cluster(pos, maxClusterSize * (0.6 + 0.4 * rand.nextDouble()));
     for (int i = 1; i < clusters; i++) {
       final BlockPos clusterPos = pos.add(
-          maxWidth * 0.4 * rand.nextDouble(),
-          maxHeight * 0.4 * rand.nextDouble(),
-          maxWidth * 0.4 * rand.nextDouble()
+              maxWidth * 0.4 * rand.nextDouble(),
+              maxHeight * 0.4 * rand.nextDouble(),
+              maxWidth * 0.4 * rand.nextDouble()
       );
       spawnPoints[i] = new Cluster(clusterPos, maxClusterSize * (0.4 + 0.6 * rand.nextDouble()));
     }

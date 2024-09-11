@@ -62,21 +62,21 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 
   //Values that has a visual effect on client
   private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(
-      EntityAnimalMule.class, DataSerializers.BOOLEAN);
+          EntityAnimalMule.class, DataSerializers.BOOLEAN);
   private static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(
-      EntityAnimalMule.class, DataSerializers.VARINT);
+          EntityAnimalMule.class, DataSerializers.VARINT);
   private static final DataParameter<Float> FAMILIARITY = EntityDataManager.createKey(
-      EntityAnimalMule.class, DataSerializers.FLOAT);
+          EntityAnimalMule.class, DataSerializers.FLOAT);
   private static final DataParameter<Boolean> HALTER = EntityDataManager.createKey(
-      EntityAnimalMule.class, DataSerializers.BOOLEAN);
+          EntityAnimalMule.class, DataSerializers.BOOLEAN);
   private long lastFed; //Last time(in days) this entity was fed
   private long lastFDecay; //Last time(in days) this entity's familiarity had decayed
   private long lastDeath; //Last time(in days) this entity checked for dying of old age
 
   public EntityAnimalMule(World world) {
     this(world, Gender.valueOf(RNG.nextBoolean()),
-        EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.MULE.adulthood,
-            ConfigAnimal.ENTITIES.MULE.elder));
+            EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.MULE.adulthood,
+                    ConfigAnimal.ENTITIES.MULE.elder));
   }
 
   public EntityAnimalMule(World world, Gender gender, int birthDay) {
@@ -90,6 +90,34 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
   }
 
   @Override
+  public void setGrowingAge(int age) {
+    super.setGrowingAge(0); // Ignoring this
+  }
+
+  @Override
+  public boolean isChild() {
+    return this.getAge() == Age.CHILD;
+  }
+
+  @Override
+  public boolean getCanSpawnHere() {
+    return this.world.checkNoEntityCollision(getEntityBoundingBox())
+            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+            && !this.world.containsAnyLiquid(getEntityBoundingBox())
+            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+  }
+
+  @NotNull
+  @Override
+  public String getName() {
+    if (this.hasCustomName()) {
+      return this.getCustomNameTag();
+    } else {
+      return getAnimalName().getFormattedText();
+    }
+  }
+
+  @Override
   public Gender getGender() {
     return Gender.valueOf(this.dataManager.get(GENDER));
   }
@@ -97,6 +125,11 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
   @Override
   public void setGender(Gender gender) {
     this.dataManager.set(GENDER, gender.toBool());
+  }
+
+  @Override
+  public float getAdultFamiliarityCap() {
+    return 0.35f;
   }
 
   @Override
@@ -110,8 +143,13 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
   }
 
   @Override
-  public float getAdultFamiliarityCap() {
-    return 0.35f;
+  public int getDaysToAdulthood() {
+    return ConfigAnimal.ENTITIES.MULE.adulthood;
+  }
+
+  @Override
+  public boolean isReadyToMate() {
+    return false; // Prevent mating, like vanilla and IRL
   }
 
   @Override
@@ -140,23 +178,13 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
   }
 
   @Override
-  public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.MULE.adulthood;
+  public boolean isHungry() {
+    return lastFed < Calendar.PLAYER_TIME.getTotalDays();
   }
 
   @Override
   public int getDaysToElderly() {
     return ConfigAnimal.ENTITIES.MULE.elder;
-  }
-
-  @Override
-  public boolean isReadyToMate() {
-    return false; // Prevent mating, like vanilla and IRL
-  }
-
-  @Override
-  public boolean isHungry() {
-    return lastFed < Calendar.PLAYER_TIME.getTotalDays();
   }
 
   @Override
@@ -168,48 +196,12 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
     return new TextComponentTranslation(
-        ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
-  }
-
-  public boolean isHalter() {
-    return dataManager.get(HALTER);
-  }
-
-  public void setHalter(boolean value) {
-    dataManager.set(HALTER, value);
-  }
-
-  @Override
-  public boolean getCanSpawnHere() {
-    return this.world.checkNoEntityCollision(getEntityBoundingBox())
-        && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-        && !this.world.containsAnyLiquid(getEntityBoundingBox())
-        && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
-  }
-
-  @Override
-  public void setGrowingAge(int age) {
-    super.setGrowingAge(0); // Ignoring this
-  }
-
-  @Override
-  public boolean isChild() {
-    return this.getAge() == Age.CHILD;
-  }
-
-  @NotNull
-  @Override
-  public String getName() {
-    if (this.hasCustomName()) {
-      return this.getCustomNameTag();
-    } else {
-      return getAnimalName().getFormattedText();
-    }
+            ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
   }
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     return ConfigAnimal.ENTITIES.MULE.rarity; // Not naturally spawned, must be bred
   }
 
@@ -254,6 +246,14 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
     }
   }
 
+  public boolean isHalter() {
+    return dataManager.get(HALTER);
+  }
+
+  public void setHalter(boolean value) {
+    dataManager.set(HALTER, value);
+  }
+
   @Override
   public void onLivingUpdate() {
     super.onLivingUpdate();
@@ -293,7 +293,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
         this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
-            this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
+                this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
         if (random.nextDouble() < ConfigAnimal.ENTITIES.MULE.oldDeathChance) {
           this.setDead();
         }
@@ -312,7 +312,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
     if (other == this) {
       // Only called if this animal is interacted with a spawn egg
       EntityAnimalMule baby = new EntityAnimalMule(this.world, Gender.valueOf(RNG.nextBoolean()),
-          (int) Calendar.PLAYER_TIME.getTotalDays());
+              (int) Calendar.PLAYER_TIME.getTotalDays());
       this.setOffspringAttributes(this, baby);
       return baby;
     }
@@ -407,7 +407,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
               this.setFamiliarity(familiarity);
             }
             world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP,
-                SoundCategory.AMBIENT, 1.0F, 1.0F);
+                    SoundCategory.AMBIENT, 1.0F, 1.0F);
           }
           return true;
         } else {
@@ -415,9 +415,9 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
               ModuleAnimal.getPacketService().sendTo(SCPacketSimpleMessage.translateMessage(
-                      SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                      ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
-                  (EntityPlayerMP) player);
+                              SCPacketSimpleMessage.MessageCategory.ANIMAL,
+                              ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
+                      (EntityPlayerMP) player);
             }
           }
         }

@@ -36,7 +36,7 @@ public final class ProviderFridge implements IProbeInfoProvider {
 
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
-      IBlockState state, IProbeHitData hitData) {
+          IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
     if (block instanceof BlockFridge) {
@@ -51,20 +51,20 @@ public final class ProviderFridge implements IProbeInfoProvider {
       }
 
       IProbeInfo horizontalPane = info.horizontal(
-          info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
+              info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
       horizontalPane.text(
-          new TextComponentTranslation(ModUtils.localize("top", "device.fridge.efficiency"),
-              (int) tile.getEfficiency()).getFormattedText());
+              new TextComponentTranslation(ModUtils.localize("top", "device.fridge.efficiency"),
+                      (int) tile.getEfficiency()).getFormattedText());
       if (tile.isOpen()) {
         int slot = BlockFridge.getPlayerLookingItem(pos.down(), player,
-            state.getValue(BlockFridge.FACING));
+                state.getValue(BlockFridge.FACING));
         if (slot > -1) {
           ItemStack stack = tile.getSlot(slot);
           if (!stack.isEmpty()) {
             info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                .item(stack)
-                .vertical()
-                .itemLabel(stack);
+                    .item(stack)
+                    .vertical()
+                    .itemLabel(stack);
             IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
             List<String> list = new ArrayList<>();
             if (cap != null) {

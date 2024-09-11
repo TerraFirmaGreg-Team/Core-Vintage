@@ -23,7 +23,7 @@ public class GuiCellarShelf extends BaseGuiContainerTile<TileCellarShelf> {
   private final InventoryPlayer playerInventory;
 
   public GuiCellarShelf(Container container, InventoryPlayer playerInv, TileCellarShelf tile,
-      IBlockState state) {
+          IBlockState state) {
     super(container, playerInv, tile, BACKGROUND);
     this.playerInventory = playerInv;
     this.translationKey = state.getBlock().getTranslationKey();
@@ -34,10 +34,10 @@ public class GuiCellarShelf extends BaseGuiContainerTile<TileCellarShelf> {
     String name = I18n.format(translationKey + ".name");
     fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 00000000);
     this.fontRenderer.drawString(this.playerInventory.getDisplayName()
-        .getUnformattedText(), 8, this.ySize - 92, 00000000);
+            .getUnformattedText(), 8, this.ySize - 92, 00000000);
 
     if (mouseX >= guiLeft + 5 && mouseX <= guiLeft + 15 && mouseY >= guiTop + 5
-        && mouseY <= guiTop + 15) {
+            && mouseY <= guiTop + 15) {
       List<String> infoText = new ArrayList<String>();
       float temperature = tile.getTemperature();
 

@@ -1,9 +1,9 @@
 package su.terrafirmagreg.api.base.recipe;
 
-import net.minecraft.util.ResourceLocation;
-
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.data.Constants;
+
+import net.minecraft.util.ResourceLocation;
 
 public class RecipeName {
 

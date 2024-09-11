@@ -31,16 +31,16 @@ public enum MoonPhase {
     this.key = key;
   }
 
-  public static MoonPhase getPhase(int phase) {
-
-    final int safePhase = phase < 0 ? 0 : Math.min(phase, 7);
-    return MoonPhase.values()[safePhase];
-  }
-
   @SideOnly(Side.CLIENT)
   public static MoonPhase getCurrentPhase() {
 
     return getPhase(Minecraft.getMinecraft().world.getMoonPhase());
+  }
+
+  public static MoonPhase getPhase(int phase) {
+
+    final int safePhase = phase < 0 ? 0 : Math.min(phase, 7);
+    return MoonPhase.values()[safePhase];
   }
 
   @SideOnly(Side.CLIENT)

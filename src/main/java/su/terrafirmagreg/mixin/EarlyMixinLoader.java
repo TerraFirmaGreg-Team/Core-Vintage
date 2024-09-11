@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@IFMLLoadingPlugin.Name("TFGLoadingPlugin")
-@IFMLLoadingPlugin.SortingIndex(1001)
+@IFMLLoadingPlugin.Name("EarlyMixinLoader")
 public class EarlyMixinLoader implements IEarlyMixinLoader, IFMLLoadingPlugin {
 
   @Override

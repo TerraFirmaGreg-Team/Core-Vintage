@@ -18,11 +18,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderAnimalPheasant extends RenderLiving<EntityAnimalPheasant> {
 
   private static final ResourceLocation CHICK_TEXTURE = ModUtils.resource(
-      "textures/entity/animal/huntable/pheasant_chick.png");
+          "textures/entity/animal/huntable/pheasant_chick.png");
   private static final ResourceLocation MALE_TEXTURE = ModUtils.resource(
-      "textures/entity/animal/huntable/pheasant_male.png");
+          "textures/entity/animal/huntable/pheasant_male.png");
   private static final ResourceLocation FEMALE_TEXTURE = ModUtils.resource(
-      "textures/entity/animal/huntable/pheasant_female.png");
+          "textures/entity/animal/huntable/pheasant_female.png");
 
   public RenderAnimalPheasant(RenderManager manager) {
     super(manager, new ModelAnimalPheasant(), 0.3F);
@@ -30,7 +30,7 @@ public class RenderAnimalPheasant extends RenderLiving<EntityAnimalPheasant> {
 
   @Override
   public void doRender(EntityAnimalPheasant pheasent, double par2, double par4, double par6,
-      float par8, float par9) {
+          float par8, float par9) {
     this.shadowSize = (float) (0.15f + pheasent.getPercentToAdulthood() * 0.15f);
     super.doRender(pheasent, par2, par4, par6, par8, par9);
   }

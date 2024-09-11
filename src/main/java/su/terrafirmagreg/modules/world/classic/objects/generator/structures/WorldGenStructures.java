@@ -22,7 +22,7 @@ public class WorldGenStructures implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0) {
       final int x = (chunkX << 4) + random.nextInt(16) + 8;
       final int z = (chunkZ << 4) + random.nextInt(16) + 8;
@@ -33,14 +33,14 @@ public class WorldGenStructures implements IWorldGenerator {
 
       if (ConfigTFCF.General.STRUCTURES.activateStructureGeneration) {
         if (!(world.getBlockState(pos)
-            .getBlock() == ChunkGenClassic.FRESH_WATER.getBlock() || world.getBlockState(pos)
-            .getBlock() == ChunkGenClassic.SALT_WATER.getBlock() || world.getBlockState(pos)
-            .getBlock() == ChunkGenClassic.HOT_WATER.getBlock() || b == BiomesWorld.OCEAN
-            || b == BiomesWorld.DEEP_OCEAN ||
-            b == BiomesWorld.LAKE ||
-            b == BiomesWorld.RIVER || b == BiomesWorld.BEACH || b == BiomesWorld.GRAVEL_BEACH)) {
+                .getBlock() == ChunkGenClassic.FRESH_WATER.getBlock() || world.getBlockState(pos)
+                .getBlock() == ChunkGenClassic.SALT_WATER.getBlock() || world.getBlockState(pos)
+                .getBlock() == ChunkGenClassic.HOT_WATER.getBlock() || b == BiomesWorld.OCEAN
+                || b == BiomesWorld.DEEP_OCEAN ||
+                b == BiomesWorld.LAKE ||
+                b == BiomesWorld.RIVER || b == BiomesWorld.BEACH || b == BiomesWorld.GRAVEL_BEACH)) {
           if (data.isInitialized() && data.getRainfall() >= 100f
-              && random.nextInt(ConfigTFCF.General.STRUCTURES.spawnChanceRuins) == 0) {
+                  && random.nextInt(ConfigTFCF.General.STRUCTURES.spawnChanceRuins) == 0) {
             int chance = random.nextInt(7);
 
             if (chance == 0) {
@@ -60,8 +60,8 @@ public class WorldGenStructures implements IWorldGenerator {
             }
           }
           if (data.isInitialized() && data.getRainfall() >= 320f && data.getFloraDensity() >= 0.3f
-              && data.getAverageTemp() >= 9f &&
-              random.nextInt(ConfigTFCF.General.STRUCTURES.spawnChanceMoai) == 0) {
+                  && data.getAverageTemp() >= 9f &&
+                  random.nextInt(ConfigTFCF.General.STRUCTURES.spawnChanceMoai) == 0) {
             int chance = random.nextInt(6);
 
             if (chance == 0) {
@@ -79,8 +79,8 @@ public class WorldGenStructures implements IWorldGenerator {
             }
           }
           if (data.isInitialized() && data.getRainfall() >= 320f && data.getFloraDensity() >= 0.2f
-              && data.getAverageTemp() >= 13f &&
-              random.nextInt(ConfigTFCF.General.STRUCTURES.spawnChanceMaya) == 0) {
+                  && data.getAverageTemp() >= 13f &&
+                  random.nextInt(ConfigTFCF.General.STRUCTURES.spawnChanceMaya) == 0) {
             generateStructure(StructureList.MAYAN_TEMPLE_1A, world, random, pos);
           }
         }
@@ -89,7 +89,7 @@ public class WorldGenStructures implements IWorldGenerator {
   }
 
   private void generateStructure(WorldGenerator generator, World world, Random random,
-      BlockPos pos) {
+          BlockPos pos) {
     generator.generate(world, random, pos);
   }
 }

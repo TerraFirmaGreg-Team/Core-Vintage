@@ -57,6 +57,11 @@ public class SoilType extends Type<SoilType> {
     return new ArrayList<>(types).indexOf(type);
   }
 
+  public static Builder builder(String name) {
+
+    return new Builder(name);
+  }
+
   /**
    * Возвращает ресурсное расположение текстуры породы.
    *
@@ -65,11 +70,6 @@ public class SoilType extends Type<SoilType> {
   @NotNull
   public ResourceLocation getTexture() {
     return ModUtils.resource("textures/blocks/soil/mud/" + this + ".png");
-  }
-
-  public static Builder builder(String name) {
-
-    return new Builder(name);
   }
 
   public static class Builder {

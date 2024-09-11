@@ -79,32 +79,32 @@ public final class ClientRegisterEvents {
 
     // Registering fluid containers
     ModelLoader.setCustomModelResourceLocation(ItemsTFC.WOODEN_BUCKET, 0,
-        new ModelResourceLocation(ItemsTFC.WOODEN_BUCKET.getRegistryName(), "inventory"));
+            new ModelResourceLocation(ItemsTFC.WOODEN_BUCKET.getRegistryName(), "inventory"));
     ModelLoader.setCustomModelResourceLocation(ItemsTFC.FIRED_JUG, 0,
-        new ModelResourceLocation(ItemsTFC.FIRED_JUG.getRegistryName(), "inventory"));
+            new ModelResourceLocation(ItemsTFC.FIRED_JUG.getRegistryName(), "inventory"));
     ModelLoader.setCustomModelResourceLocation(ItemsTFC.BLUE_STEEL_BUCKET, 0,
-        new ModelResourceLocation(ItemsTFC.BLUE_STEEL_BUCKET.getRegistryName(), "inventory"));
+            new ModelResourceLocation(ItemsTFC.BLUE_STEEL_BUCKET.getRegistryName(), "inventory"));
     ModelLoader.setCustomModelResourceLocation(ItemsTFC.RED_STEEL_BUCKET, 0,
-        new ModelResourceLocation(ItemsTFC.RED_STEEL_BUCKET.getRegistryName(), "inventory"));
+            new ModelResourceLocation(ItemsTFC.RED_STEEL_BUCKET.getRegistryName(), "inventory"));
 
     // Simple Items
     for (Item item : ItemsTFC.getAllSimpleItems()) {
       ModelLoader.setCustomModelResourceLocation(item, 0,
-          new ModelResourceLocation(item.getRegistryName()
-              .toString()));
+              new ModelResourceLocation(item.getRegistryName()
+                      .toString()));
     }
 
     // Dye color Items
     for (EnumDyeColor color : EnumDyeColor.values()) {
       ModelLoader.setCustomModelResourceLocation(ItemsTFC.UNFIRED_VESSEL_GLAZED,
-          color.getDyeDamage(),
-          new ModelResourceLocation(ItemsTFC.UNFIRED_VESSEL_GLAZED
-              .getRegistryName()
-              .toString()));
+              color.getDyeDamage(),
+              new ModelResourceLocation(ItemsTFC.UNFIRED_VESSEL_GLAZED
+                      .getRegistryName()
+                      .toString()));
       ModelLoader.setCustomModelResourceLocation(ItemsTFC.FIRED_VESSEL_GLAZED, color.getDyeDamage(),
-          new ModelResourceLocation(ItemsTFC.FIRED_VESSEL_GLAZED
-              .getRegistryName()
-              .toString()));
+              new ModelResourceLocation(ItemsTFC.FIRED_VESSEL_GLAZED
+                      .getRegistryName()
+                      .toString()));
     }
 
     // Gems
@@ -127,20 +127,20 @@ public final class ClientRegisterEvents {
 
     // Gold Pan
     ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES)
-        .map(e -> new ResourceLocation(MODID_TFC, "goldpan/" + e))
-        .toArray(ResourceLocation[]::new));
+            .map(e -> new ResourceLocation(MODID_TFC, "goldpan/" + e))
+            .toArray(ResourceLocation[]::new));
     for (int meta = 0; meta < ItemGoldPan.TYPES.length; meta++) {
       ModelLoader.setCustomModelResourceLocation(ItemsTFC.GOLDPAN, meta,
-          new ModelResourceLocation(MODID_TFC + ":goldpan/" + ItemGoldPan.TYPES[meta]));
+              new ModelResourceLocation(MODID_TFC + ":goldpan/" + ItemGoldPan.TYPES[meta]));
     }
     ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES)
-        .map(e -> new ResourceLocation(MODID_TFC, "goldpan/" + e))
-        .toArray(ResourceLocation[]::new));
+            .map(e -> new ResourceLocation(MODID_TFC, "goldpan/" + e))
+            .toArray(ResourceLocation[]::new));
 
     // Ceramic Molds
     ModelBakery.registerItemVariants(ItemMold.get(Metal.ItemType.INGOT),
-        new ModelResourceLocation(ItemMold.get(Metal.ItemType.INGOT)
-            .getRegistryName() + "/unknown"));
+            new ModelResourceLocation(ItemMold.get(Metal.ItemType.INGOT)
+                    .getRegistryName() + "/unknown"));
     for (Metal.ItemType value : Metal.ItemType.values()) {
       ItemMold item = ItemMold.get(value);
       if (item == null) {
@@ -148,31 +148,31 @@ public final class ClientRegisterEvents {
       }
 
       ModelBakery.registerItemVariants(item, new ModelResourceLocation(item.getRegistryName()
-          .toString() + "/empty"));
+              .toString() + "/empty"));
       ModelBakery.registerItemVariants(item, TFCRegistries.METALS.getValuesCollection()
-          .stream()
-          .filter(value::hasMold)
-          .map(x -> new ModelResourceLocation(item.getRegistryName()
-              .toString() + "/" + x.getRegistryName()
-              .getPath()))
-          .toArray(ModelResourceLocation[]::new));
+              .stream()
+              .filter(value::hasMold)
+              .map(x -> new ModelResourceLocation(item.getRegistryName()
+                      .toString() + "/" + x.getRegistryName()
+                      .getPath()))
+              .toArray(ModelResourceLocation[]::new));
       ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 
         private final ModelResourceLocation FALLBACK = new ModelResourceLocation(
-            item.getRegistryName()
-                .toString() + "/empty");
+                item.getRegistryName()
+                        .toString() + "/empty");
 
         @Override
         @NotNull
         public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
           IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY,
-              null);
+                  null);
           if (cap instanceof IMoldHandler) {
             Metal metal = ((IMoldHandler) cap).getMetal();
             if (metal != null) {
               return new ModelResourceLocation(stack.getItem()
-                  .getRegistryName() + "/" + metal.getRegistryName()
-                  .getPath());
+                      .getRegistryName() + "/" + metal.getRegistryName()
+                      .getPath());
             }
           }
           return FALLBACK;
@@ -183,12 +183,12 @@ public final class ClientRegisterEvents {
     // Item Blocks
     for (ItemBlock item : BlocksTFC.getAllNormalItemBlocks()) {
       ModelLoader.setCustomModelResourceLocation(item, 0,
-          new ModelResourceLocation(item.getRegistryName(), "normal"));
+              new ModelResourceLocation(item.getRegistryName(), "normal"));
     }
 
     for (ItemBlock item : BlocksTFC.getAllInventoryItemBlocks()) {
       ModelLoader.setCustomModelResourceLocation(item, 0,
-          new ModelResourceLocation(item.getRegistryName(), "inventory"));
+              new ModelResourceLocation(item.getRegistryName(), "inventory"));
     }
 
     // BLOCKS - STATE MAPPERS //
@@ -196,22 +196,22 @@ public final class ClientRegisterEvents {
     // Blocks with Ignored Properties
     for (Block block : BlocksTFC.getAllFluidBlocks()) {
       ModelLoader.setCustomStateMapper(block,
-          new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
+              new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
     }
 
     for (Block block : BlocksTFC.getAllLeafBlocks()) {
       ModelLoader.setCustomStateMapper(block,
-          new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
+              new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
     }
 
     for (Block block : BlocksTFC.getAllLogBlocks()) {
       ModelLoader.setCustomStateMapper(block,
-          new StateMap.Builder().ignore(BlockLogTFC.PLACED).build());
+              new StateMap.Builder().ignore(BlockLogTFC.PLACED).build());
     }
 
     for (Block block : BlocksTFC.getAllSaplingBlocks()) {
       ModelLoader.setCustomStateMapper(block,
-          new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
+              new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
     }
 
     for (Block block : BlocksTFC.getAllCropBlocks()) {
@@ -220,9 +220,9 @@ public final class ClientRegisterEvents {
 
     for (Block block : BlocksTFC.getAllFruitTreeLeavesBlocks()) {
       ModelLoader.setCustomStateMapper(block,
-          new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE)
-              .ignore(BlockFruitTreeLeaves.HARVESTABLE)
-              .build());
+              new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE)
+                      .ignore(BlockFruitTreeLeaves.HARVESTABLE)
+                      .build());
     }
 
     // Empty Models
@@ -231,91 +231,22 @@ public final class ClientRegisterEvents {
     final ModelResourceLocation hideRack = new ModelResourceLocation(MODID_TFC + ":hide_rack");
 
     ModelLoader.setCustomStateMapper(BlocksTFC.PLACED_ITEM_FLAT,
-        blockIn -> ImmutableMap.of(BlocksTFC.PLACED_ITEM_FLAT.getDefaultState(), empty));
+            blockIn -> ImmutableMap.of(BlocksTFC.PLACED_ITEM_FLAT.getDefaultState(), empty));
     ModelLoader.setCustomStateMapper(BlocksTFC.PLACED_ITEM,
-        blockIn -> ImmutableMap.of(BlocksTFC.PLACED_ITEM.getDefaultState(), empty));
+            blockIn -> ImmutableMap.of(BlocksTFC.PLACED_ITEM.getDefaultState(), empty));
     ModelLoader.setCustomStateMapper(BlocksTFC.PLACED_HIDE,
-        blockIn -> ImmutableMap.of(BlocksTFC.PLACED_HIDE.getDefaultState()
-                .withProperty(SIZE, ItemAnimalHide.HideSize.SMALL), empty,
-            BlocksTFC.PLACED_HIDE.getDefaultState()
-                .withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM), empty,
-            BlocksTFC.PLACED_HIDE.getDefaultState()
-                .withProperty(SIZE, ItemAnimalHide.HideSize.LARGE), empty));
+            blockIn -> ImmutableMap.of(BlocksTFC.PLACED_HIDE.getDefaultState()
+                            .withProperty(SIZE, ItemAnimalHide.HideSize.SMALL), empty,
+                    BlocksTFC.PLACED_HIDE.getDefaultState()
+                            .withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM), empty,
+                    BlocksTFC.PLACED_HIDE.getDefaultState()
+                            .withProperty(SIZE, ItemAnimalHide.HideSize.LARGE), empty));
 
     // TESRs //
 
     ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItemFlat.class, new TESRPlacedItemFlat());
     ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItem.class, new TESRPlacedItem());
     ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedHide.class, new TESRPlacedHide());
-  }
-
-  @SubscribeEvent
-  @SideOnly(Side.CLIENT)
-  public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
-    BlockColors blockColors = event.getBlockColors();
-
-    // Grass Colors
-    IBlockColor grassColor = GrassColorHandler::computeGrassColor;
-
-    // Foliage Color
-    // todo: do something different for conifers - they should have a different color mapping through the seasons
-    IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
-
-    // This is talking about tall grass vs actual grass blocks
-    blockColors.registerBlockColorHandler(grassColor,
-        BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
-
-    blockColors.registerBlockColorHandler(foliageColor,
-        BlocksTFC.getAllLeafBlocks().toArray(new Block[0]));
-    blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllPlantBlocks()
-        .toArray(new BlockPlantTFC[0]));
-
-    blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllFruitTreeLeavesBlocks()
-        .toArray(new Block[0]));
-
-    blockColors.registerBlockColorHandler(foliageColor,
-        BlocksTFC.getAllFlowerPots().toArray(new Block[0]));
-  }
-
-  @SubscribeEvent
-  @SideOnly(Side.CLIENT)
-  @SuppressWarnings("deprecation")
-  public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
-    ItemColors itemColors = event.getItemColors();
-
-    itemColors.registerItemColorHandler((stack, tintIndex) ->
-            event.getBlockColors()
-                .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-        BlocksTFC.getAllLeafBlocks().toArray(new BlockLeavesTFC[0]));
-
-    itemColors.registerItemColorHandler((stack, tintIndex) ->
-            event.getBlockColors()
-                .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-        BlocksTFC.getAllFruitTreeLeavesBlocks().toArray(new BlockFruitTreeLeaves[0]));
-
-    itemColors.registerItemColorHandler(
-        (stack, tintIndex) -> tintIndex == 1 ? EnumDyeColor.byDyeDamage(stack.getItemDamage())
-            .getColorValue() : 0xFFFFFF,
-        ItemsTFC.UNFIRED_VESSEL_GLAZED, ItemsTFC.FIRED_VESSEL_GLAZED);
-
-    itemColors.registerItemColorHandler((stack, tintIndex) ->
-            event.getBlockColors()
-                .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-        BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
-
-    itemColors.registerItemColorHandler((stack, tintIndex) -> {
-      IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
-      if (food != null) {
-        return food.isRotten() ? ConfigTFC.Client.DISPLAY.rottenFoodOverlayColor : 0xFFFFFF;
-      }
-      return 0xFFFFFF;
-    }, ForgeRegistries.ITEMS.getValuesCollection()
-        .stream()
-        .filter(x -> x instanceof ItemFood)
-        .toArray(Item[]::new));
   }
 
   /**
@@ -332,12 +263,81 @@ public final class ClientRegisterEvents {
     path.append(e.name());
     if (!Strings.isNullOrEmpty(prefix)) {
       path.append(registryName.replace(prefix,
-          "")); // There well be a '/' at the start of registryName due to the prefix, so don't add an extra one.
+              "")); // There well be a '/' at the start of registryName due to the prefix, so don't add an extra one.
     } else {
       path.append('/').append(registryName);
     }
     ModelLoader.setCustomModelResourceLocation(item, e.ordinal(),
-        new ModelResourceLocation(path.toString()
-            .toLowerCase()));
+            new ModelResourceLocation(path.toString()
+                    .toLowerCase()));
+  }
+
+  @SubscribeEvent
+  @SideOnly(Side.CLIENT)
+  public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
+    BlockColors blockColors = event.getBlockColors();
+
+    // Grass Colors
+    IBlockColor grassColor = GrassColorHandler::computeGrassColor;
+
+    // Foliage Color
+    // todo: do something different for conifers - they should have a different color mapping through the seasons
+    IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
+
+    // This is talking about tall grass vs actual grass blocks
+    blockColors.registerBlockColorHandler(grassColor,
+            BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
+
+    blockColors.registerBlockColorHandler(foliageColor,
+            BlocksTFC.getAllLeafBlocks().toArray(new Block[0]));
+    blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllPlantBlocks()
+            .toArray(new BlockPlantTFC[0]));
+
+    blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllFruitTreeLeavesBlocks()
+            .toArray(new Block[0]));
+
+    blockColors.registerBlockColorHandler(foliageColor,
+            BlocksTFC.getAllFlowerPots().toArray(new Block[0]));
+  }
+
+  @SubscribeEvent
+  @SideOnly(Side.CLIENT)
+  @SuppressWarnings("deprecation")
+  public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
+    ItemColors itemColors = event.getItemColors();
+
+    itemColors.registerItemColorHandler((stack, tintIndex) ->
+                    event.getBlockColors()
+                            .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+                                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+            BlocksTFC.getAllLeafBlocks().toArray(new BlockLeavesTFC[0]));
+
+    itemColors.registerItemColorHandler((stack, tintIndex) ->
+                    event.getBlockColors()
+                            .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+                                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+            BlocksTFC.getAllFruitTreeLeavesBlocks().toArray(new BlockFruitTreeLeaves[0]));
+
+    itemColors.registerItemColorHandler(
+            (stack, tintIndex) -> tintIndex == 1 ? EnumDyeColor.byDyeDamage(stack.getItemDamage())
+                    .getColorValue() : 0xFFFFFF,
+            ItemsTFC.UNFIRED_VESSEL_GLAZED, ItemsTFC.FIRED_VESSEL_GLAZED);
+
+    itemColors.registerItemColorHandler((stack, tintIndex) ->
+                    event.getBlockColors()
+                            .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+                                    .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+            BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
+
+    itemColors.registerItemColorHandler((stack, tintIndex) -> {
+      IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      if (food != null) {
+        return food.isRotten() ? ConfigTFC.Client.DISPLAY.rottenFoodOverlayColor : 0xFFFFFF;
+      }
+      return 0xFFFFFF;
+    }, ForgeRegistries.ITEMS.getValuesCollection()
+            .stream()
+            .filter(x -> x instanceof ItemFood)
+            .toArray(Item[]::new));
   }
 }

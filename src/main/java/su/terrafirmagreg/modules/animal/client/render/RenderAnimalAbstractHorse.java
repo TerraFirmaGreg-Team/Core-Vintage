@@ -47,7 +47,7 @@ public class RenderAnimalAbstractHorse extends RenderLiving<AbstractHorse> {
 
   @Override
   protected void preRenderCallback(@NotNull AbstractHorse entitylivingbaseIn,
-      float partialTickTime) {
+          float partialTickTime) {
     GlStateManager.scale(this.scale, this.scale, this.scale);
     super.preRenderCallback(entitylivingbaseIn, partialTickTime);
   }

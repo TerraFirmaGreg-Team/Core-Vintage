@@ -12,7 +12,7 @@ import net.dries007.tfc.client.gui.GuiContainerTFC;
 public class GuiQuern extends GuiContainerTFC {
 
   public static final ResourceLocation BACKGROUND = ModUtils.resource(
-      "textures/gui/container/small_inventory.png");
+          "textures/gui/container/small_inventory.png");
 
   public GuiQuern(Container container, InventoryPlayer playerInv) {
     super(container, playerInv, BACKGROUND);

@@ -43,26 +43,26 @@ public class BlockCharcoalPile extends BaseBlock {
   public static final PropertyInteger LAYERS = PropertyInteger.create("type", 1, 8);
 
   private static final AxisAlignedBB[] PILE_AABB = new AxisAlignedBB[]{
-      new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D),
-      new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D),
-      new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D),
-      new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D),
-      new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D),
-      new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D),
-      new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D),
-      new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D),
-      new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
+          new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D),
+          new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D),
+          new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D),
+          new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D),
+          new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D),
+          new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D),
+          new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D),
+          new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D),
+          new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
 
   public BlockCharcoalPile() {
     super(Settings.of(CHARCOAL_MATERIAL));
 
     getSettings()
-        .registryKey("device/charcoal_pile")
-        .hardness(1.0F)
-        .sound(TFCSounds.CHARCOAL_PILE);
+            .registryKey("device/charcoal_pile")
+            .hardness(1.0F)
+            .sound(TFCSounds.CHARCOAL_PILE);
     setHarvestLevel(ToolClasses.SHOVEL, 0);
     setDefaultState(blockState.getBaseState()
-        .withProperty(LAYERS, 1));
+            .withProperty(LAYERS, 1));
   }
 
   @Override
@@ -81,36 +81,13 @@ public class BlockCharcoalPile extends BaseBlock {
   }
 
   @Override
-  public boolean isFullCube(IBlockState state) {
-    return state.getValue(LAYERS) == 8;
-  }
-
-  @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     return PILE_AABB[state.getValue(LAYERS)];
   }
 
   @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-      EnumFacing face) {
-    return face == EnumFacing.DOWN || state.getValue(LAYERS) == 8 ? BlockFaceShape.SOLID
-        : BlockFaceShape.UNDEFINED;
-  }
-
-  @Override
-  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn,
-      BlockPos pos) {
-    return PILE_AABB[state.getValue(LAYERS)];
-  }
-
-  @Override
-  public boolean isOpaqueCube(IBlockState state) {
-    return state.getValue(LAYERS) == 8;
-  }
-
-  @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-      BlockPos fromPos) {
+          BlockPos fromPos) {
     if (!worldIn.isRemote) {
       // Try to drop the rock down
       IBlockState stateUnder = worldIn.getBlockState(pos.down());
@@ -120,7 +97,7 @@ public class BlockCharcoalPile extends BaseBlock {
         if (layersUnder < 8) {
           if (layersUnder + layersAt <= 8) {
             worldIn.setBlockState(pos.down(),
-                stateUnder.withProperty(LAYERS, layersAt + layersUnder));
+                    stateUnder.withProperty(LAYERS, layersAt + layersUnder));
             worldIn.setBlockToAir(pos);
           } else {
             worldIn.setBlockState(pos.down(), stateUnder.withProperty(LAYERS, 8));
@@ -148,14 +125,14 @@ public class BlockCharcoalPile extends BaseBlock {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-      EnumHand hand, EnumFacing side, float hitX,
-      float hitY, float hitZ) {
+          EnumHand hand, EnumFacing side, float hitX,
+          float hitY, float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
     if (state.getValue(LAYERS) >= 7 && BlockCharcoalForge.isValid(world, pos)
-        && ItemFireStarter.onIgnition(stack)) {
+            && ItemFireStarter.onIgnition(stack)) {
       if (!world.isRemote) {
         world.setBlockState(pos,
-            BlocksDevice.CHARCOAL_FORGE.getDefaultState().withProperty(LIT, true));
+                BlocksDevice.CHARCOAL_FORGE.getDefaultState().withProperty(LIT, true));
         var tile = TileUtils.getTile(world, pos, TileCharcoalForge.class);
         if (tile != null) {
           tile.onCreate();
@@ -173,7 +150,7 @@ public class BlockCharcoalPile extends BaseBlock {
 
   @Override
   public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player,
-      boolean willHarvest) {
+          boolean willHarvest) {
     this.onBlockHarvested(world, pos, state, player);
 
     if (player.isCreative()) {
@@ -193,8 +170,31 @@ public class BlockCharcoalPile extends BaseBlock {
 
   @Override
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-      EntityPlayer player) {
+          EntityPlayer player) {
     return new ItemStack(Items.COAL, 1, 1);
+  }
+
+  @Override
+  public boolean isFullCube(IBlockState state) {
+    return state.getValue(LAYERS) == 8;
+  }
+
+  @Override
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
+          EnumFacing face) {
+    return face == EnumFacing.DOWN || state.getValue(LAYERS) == 8 ? BlockFaceShape.SOLID
+            : BlockFaceShape.UNDEFINED;
+  }
+
+  @Override
+  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn,
+          BlockPos pos) {
+    return PILE_AABB[state.getValue(LAYERS)];
+  }
+
+  @Override
+  public boolean isOpaqueCube(IBlockState state) {
+    return state.getValue(LAYERS) == 8;
   }
 
 }

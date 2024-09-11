@@ -35,6 +35,52 @@ public class GuiHandler implements IGuiHandler {
 
   }
 
+  public enum Type {
+    // Wood modules
+    WOOD_SUPPLY_CART,
+    WOOD_PLOW,
+    WOOD_BARREL,
+    WOOD_CHEST,
+
+    // Device modules
+    ALLOY_CALCULATOR,
+    CRATE,
+    CHARCOAL_FORGE,
+    BLAST_FURNACE,
+    FIRE_PIT,
+    NEST_BOX,
+    LOG_PILE,
+    CRUCIBLE,
+    CELLAR_SHELF,
+    ICE_BUNKER,
+    FREEZE_DRYER,
+    ELECTRIC_FORGE,
+    INDUCTION_CRUCIBLE,
+    SMELTERY_CAULDRON,
+    SMELTERY_FIREBOX,
+    POWDERKEG,
+
+    // Metal modules
+    METAL_ANVIL,
+
+    // Rock modules
+    ROCK_ANVIL,
+    ROCK_KNAPPING,
+
+    // Soil modules
+    SOIL_MUD,
+
+
+    NULL;
+
+    private static final Type[] values = values();
+
+    @NotNull
+    public static Type valueOf(int id) {
+      return id < 0 || id >= values.length ? NULL : values[id];
+    }
+  }
+
   @Override
   @Nullable
   public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -92,49 +138,5 @@ public class GuiHandler implements IGuiHandler {
     return null;
   }
 
-  public enum Type {
-    // Wood modules
-    WOOD_SUPPLY_CART,
-    WOOD_PLOW,
-    WOOD_BARREL,
-    WOOD_CHEST,
 
-    // Device modules
-    ALLOY_CALCULATOR,
-    CRATE,
-    CHARCOAL_FORGE,
-    BLAST_FURNACE,
-    FIRE_PIT,
-    NEST_BOX,
-    LOG_PILE,
-    CRUCIBLE,
-    CELLAR_SHELF,
-    ICE_BUNKER,
-    FREEZE_DRYER,
-    ELECTRIC_FORGE,
-    INDUCTION_CRUCIBLE,
-    SMELTERY_CAULDRON,
-    SMELTERY_FIREBOX,
-    POWDERKEG,
-
-    // Metal modules
-    METAL_ANVIL,
-
-    // Rock modules
-    ROCK_ANVIL,
-    ROCK_KNAPPING,
-
-    // Soil modules
-    SOIL_MUD,
-
-
-    NULL;
-
-    private static final Type[] values = values();
-
-    @NotNull
-    public static Type valueOf(int id) {
-      return id < 0 || id >= values.length ? NULL : values[id];
-    }
-  }
 }

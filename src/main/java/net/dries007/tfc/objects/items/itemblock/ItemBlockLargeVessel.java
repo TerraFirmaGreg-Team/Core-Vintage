@@ -14,14 +14,14 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemBlockLargeVessel extends ItemBlockTFC implements ICapabilitySize {
 
-    public ItemBlockLargeVessel(BlockLargeVessel block) {
-        super(block);
-    }
+  public ItemBlockLargeVessel(BlockLargeVessel block) {
+    super(block);
+  }
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        // Since this is technically still a pottery item, despite being a block
-        return new ProviderHeat(nbt, 1.0f, 1599f);
-    }
+  @Nullable
+  @Override
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    // Since this is technically still a pottery item, despite being a block
+    return new ProviderHeat(nbt, 1.0f, 1599f);
+  }
 }

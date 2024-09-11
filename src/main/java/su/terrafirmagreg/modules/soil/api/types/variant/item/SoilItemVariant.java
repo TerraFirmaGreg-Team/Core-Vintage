@@ -1,18 +1,19 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.item;
 
-import su.terrafirmagreg.data.lib.Pair;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.types.variant.Variant;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.text.TextComponentTranslation;
 
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import lombok.Getter;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -22,6 +23,7 @@ public class SoilItemVariant extends Variant<SoilItemVariant> {
   @Getter
   private static final Set<SoilItemVariant> variants = new ObjectOpenHashSet<>();
 
+  private final Map<SoilType, Item> map = new Object2ObjectOpenHashMap<>();
   private BiFunction<SoilItemVariant, SoilType, ? extends Item> factory;
 
   private SoilItemVariant(String name) {
@@ -37,7 +39,7 @@ public class SoilItemVariant extends Variant<SoilItemVariant> {
   }
 
   public Item get(SoilType type) {
-    var item = ItemsSoil.SOIL_ITEMS.get(Pair.of(this, type));
+    var item = map.get(type);
     if (item != null) {
       return item;
     }
@@ -49,14 +51,13 @@ public class SoilItemVariant extends Variant<SoilItemVariant> {
     return this;
   }
 
-  public SoilItemVariant build() {
-    for (var type : SoilType.getTypes()) {
-      if (ItemsSoil.SOIL_ITEMS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
-        throw new RuntimeException(
-            String.format("Duplicate registry detected: %s, %s", this, type));
+  public SoilItemVariant build(RegistryManager registry) {
+    SoilType.getTypes().forEach(type -> {
+      if (map.put(type, factory.apply(this, type)) != null) {
+        throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
       }
-    }
-
+    });
+    registry.items(map.values());
     return this;
   }
 
@@ -66,6 +67,6 @@ public class SoilItemVariant extends Variant<SoilItemVariant> {
 
   public String getLocalizedName() {
     return new TextComponentTranslation(
-        String.format("soil.variant.%s.name", this)).getFormattedText();
+            String.format("soil.variant.%s.name", this)).getFormattedText();
   }
 }

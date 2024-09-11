@@ -35,7 +35,7 @@ public class JsonCreator {
   public static void end() {
     if (enable) {
       Util.write(Util.replace(Util.read(JsonCreator.currentType.getTemplateFileName()),
-          currentTypeReplaceable), currentFileName);
+              currentTypeReplaceable), currentFileName);
       currentTypeReplaceable.clear();
     }
   }

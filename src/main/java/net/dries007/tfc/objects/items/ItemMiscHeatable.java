@@ -15,24 +15,24 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("WeakerAccess")
 public class ItemMiscHeatable extends ItemMisc {
 
-    private final float heatCapacity;
-    private final float meltTemp;
+  private final float heatCapacity;
+  private final float meltTemp;
 
-    public ItemMiscHeatable(Size size, Weight weight, float heatCapacity, float meltTemp) {
-        super(size, weight);
-        this.heatCapacity = heatCapacity;
-        this.meltTemp = meltTemp;
-    }
+  public ItemMiscHeatable(Size size, Weight weight, float heatCapacity, float meltTemp) {
+    super(size, weight);
+    this.heatCapacity = heatCapacity;
+    this.meltTemp = meltTemp;
+  }
 
-    public ItemMiscHeatable(Size size, Weight weight, float heatCapacity, float meltTemp, String oreDictionary) {
-        super(size, weight, oreDictionary);
-        this.heatCapacity = heatCapacity;
-        this.meltTemp = meltTemp;
-    }
+  public ItemMiscHeatable(Size size, Weight weight, float heatCapacity, float meltTemp, String oreDictionary) {
+    super(size, weight, oreDictionary);
+    this.heatCapacity = heatCapacity;
+    this.meltTemp = meltTemp;
+  }
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new ProviderHeat(nbt, heatCapacity, meltTemp);
-    }
+  @Nullable
+  @Override
+  public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+    return new ProviderHeat(nbt, heatCapacity, meltTemp);
+  }
 }

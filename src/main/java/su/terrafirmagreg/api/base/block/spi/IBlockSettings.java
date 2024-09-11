@@ -8,6 +8,7 @@ import su.terrafirmagreg.api.registry.provider.IProviderModel;
 import su.terrafirmagreg.api.registry.provider.IProviderOreDict;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -21,7 +22,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumDyeColor;
@@ -58,14 +58,14 @@ import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager
 public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, IProviderModel,
         IProviderOreDict, ICapabilitySize {
 
-  Settings getSettings();
-
-  // Override Block methods
-
   default SoundType getSoundType() {
 
     return getSettings().getSoundType();
   }
+
+  // Override Block methods
+
+  Settings getSettings();
 
   default String getTranslationKey() {
     return "tile." + getSettings().getTranslationKey();
@@ -79,11 +79,6 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
   default float getExplosionResistance(Entity exploder) {
 
     return this.getSettings().getResistance() / 5.0F;
-  }
-
-  default boolean isOpaqueCube(IBlockState state) {
-
-    return true; //this.getSettings() == null || this.getSettings().isOpaque();
   }
 
   default boolean isFullCube(IBlockState state) {
@@ -111,6 +106,11 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
   default BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face) {
 
     return isOpaqueCube(state) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+  }
+
+  default boolean isOpaqueCube(IBlockState state) {
+
+    return true; //this.getSettings() == null || this.getSettings().isOpaque();
   }
 
   default float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos,
@@ -149,38 +149,54 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
     }
   }
 
-  @Override
-  @SideOnly(Side.CLIENT)
-  default IStateMapper getStateMapper() {
-    var ignored = this.getSettings().getIgnoredProperties();
-    if (ignored != null && ignored.length > 0) {
-      return new StateMap.Builder().ignore(ignored).build();
-    }
-    return new StateMap.Builder().build();
+  default Block getBlock() {
+
+    return (Block) this;
   }
 
   @Override
-  default ResourceLocation getResourceLocation() {
-    if (getItemBlock() != null) {
-      return ModUtils.resource(getRegistryKey());
+  @SideOnly(Side.CLIENT)
+  default IStateMapper getStateMapper() {
+    var stateMapper = new CustomStateMap.Builder();
+
+    var ignored = this.getSettings().getIgnoredProperties();
+    if (ignored != null && ignored.length > 0) {
+      stateMapper.ignore(ignored);
     }
-    return null;
+
+    if (this.getSettings().getResource() != null) {
+      stateMapper.customResource(this.getSettings().getResource());
+    }
+
+    return stateMapper.build();
   }
 
   // Override IAutoRegProvider methods
 
   @Override
-  default String getRegistryKey() {
+  default ResourceLocation getResourceLocation() {
+    if (this.getSettings().getResource() != null) {
+      return this.getSettings().getResource();
+    }
 
-    return this.getSettings().getRegistryKey();
+    if (getItemBlock() != null) {
+      return ModUtils.resource(getRegistryKey());
+    }
+
+    return null;
   }
 
   // Override IItemSize methods
 
-  @Override
-  default Size getSize(ItemStack stack) {
+  default @Nullable Item getItemBlock() {
 
-    return this.getSettings().getSize();
+    return this.getSettings().isHasItemBlock() ? new BaseItemBlock(getBlock()) : null;
+  }
+
+  @Override
+  default String getRegistryKey() {
+
+    return this.getSettings().getRegistryKey();
   }
 
   @Override
@@ -189,27 +205,23 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
     return this.getSettings().getWeight();
   }
 
+  // New methods
+
+  @Override
+  default Size getSize(ItemStack stack) {
+
+    return this.getSettings().getSize();
+  }
+
   @Override
   default boolean canStack(ItemStack stack) {
 
     return this.getSettings().isCanStack();
   }
 
-  // New methods
-
   default boolean getHasItemSubtypes() {
 
     return this.getSettings().isHasItemSubtypes();
-  }
-
-  default @Nullable Item getItemBlock() {
-
-    return this.getSettings().isHasItemBlock() ? new BaseItemBlock(getBlock()) : null;
-  }
-
-  default Block getBlock() {
-
-    return (Block) this;
   }
 
   default Item asItem() {
@@ -229,6 +241,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
     final MapColor mapColor;
 
     IProperty<?>[] ignoredProperties;
+    ResourceLocation resource;
 
     String translationKey;
     String registryKey;
@@ -268,10 +281,6 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
       this.isAir = material == Material.AIR;
     }
 
-    public static Settings of(Material material, MapColor color) {
-      return new Settings(material, color);
-    }
-
     public static Settings of(Material material, EnumDyeColor color) {
       return new Settings(material, MapColor.getBlockColor(color));
     }
@@ -304,6 +313,10 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
       settings.harvestLevel = block.getHarvestLevel(state);
 
       return settings;
+    }
+
+    public static Settings of(Material material, MapColor color) {
+      return new Settings(material, color);
     }
 
     public Settings registryKey(String registryKey) {
@@ -501,6 +514,16 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
 
     public Settings ignoresProperties(IProperty<?>... properties) {
       this.ignoredProperties = properties;
+      return this;
+    }
+
+    public Settings customResource(String path) {
+      this.resource = ModUtils.resource(path);
+      return this;
+    }
+
+    public Settings customResource(ResourceLocation resourceLocation) {
+      this.resource = resourceLocation;
       return this;
     }
 

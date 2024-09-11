@@ -38,16 +38,6 @@ public class ItemWateringCan extends ItemMisc {
   }
 
   @Override
-  public int getMaxItemUseDuration(ItemStack stack) {
-    return 72000;
-  }
-
-  @Override
-  public EnumAction getItemUseAction(ItemStack stack) {
-    return EnumAction.BOW;
-  }
-
-  @Override
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player,
           EnumHand handIn) {
     ItemStack itemstack = player.getHeldItem(handIn);
@@ -62,6 +52,16 @@ public class ItemWateringCan extends ItemMisc {
 
     player.setActiveHand(handIn);
     return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+  }
+
+  @Override
+  public EnumAction getItemUseAction(ItemStack stack) {
+    return EnumAction.BOW;
+  }
+
+  @Override
+  public int getMaxItemUseDuration(ItemStack stack) {
+    return 72000;
   }
 
   @Override

@@ -12,25 +12,25 @@ import lyeoj.tfcthings.init.TFCThingsEntities;
 
 import static su.terrafirmagreg.data.Constants.MODID_FL;
 
-@Mod.EventBusSubscriber(value = { Side.CLIENT }, modid = MODID_FL)
+@Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = MODID_FL)
 @SuppressWarnings("unused")
 public class ClientProxy extends CommonProxy {
 
-    @Override
-    public void preInit(FMLPreInitializationEvent e) {
-        super.preInit(e);
+  @Override
+  public void preInit(FMLPreInitializationEvent e) {
+    super.preInit(e);
 
-        TFCThingsEntities.registerEntityModels();
-    }
+    TFCThingsEntities.registerEntityModels();
+  }
 
-    @Override
-    public void init(FMLInitializationEvent event) {
-        super.init(event);
-    }
+  @Override
+  public void init(FMLInitializationEvent event) {
+    super.init(event);
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void postInit(FMLPostInitializationEvent e) {
+  @SideOnly(Side.CLIENT)
+  @Override
+  public void postInit(FMLPostInitializationEvent e) {
 
-    }
+  }
 }

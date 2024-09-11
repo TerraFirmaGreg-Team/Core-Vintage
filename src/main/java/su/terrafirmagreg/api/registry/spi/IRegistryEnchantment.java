@@ -4,7 +4,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.ResourceLocation;
 
 public interface IRegistryEnchantment
-    extends IRegistryBase {
+        extends IRegistryBase {
 
   /**
    * Registers an enchantment.

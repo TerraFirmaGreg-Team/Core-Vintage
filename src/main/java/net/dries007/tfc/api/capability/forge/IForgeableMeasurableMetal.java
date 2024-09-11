@@ -7,31 +7,31 @@ import net.dries007.tfc.api.types.Metal;
  */
 public interface IForgeableMeasurableMetal extends IForgeableHeatable {
 
-    /**
-     * Gets the metal content in this item
-     *
-     * @return the metal amount contained in this item
-     */
-    int getMetalAmount();
+  /**
+   * Gets the metal content in this item
+   *
+   * @return the metal amount contained in this item
+   */
+  int getMetalAmount();
 
-    /**
-     * Sets the metal content in this item
-     *
-     * @param metalAmount the amount of metal to set this item to
-     */
-    void setMetalAmount(int metalAmount);
+  /**
+   * Sets the metal content in this item
+   *
+   * @param metalAmount the amount of metal to set this item to
+   */
+  void setMetalAmount(int metalAmount);
 
-    /**
-     * Gets the metal this item stores
-     *
-     * @return the metal obj
-     */
-    Metal getMetal();
+  /**
+   * Gets the metal this item stores
+   *
+   * @return the metal obj
+   */
+  Metal getMetal();
 
-    /**
-     * Sets the metal this item stores
-     *
-     * @param metal the metal obj
-     */
-    void setMetal(Metal metal);
+  /**
+   * Sets the metal this item stores
+   *
+   * @param metal the metal obj
+   */
+  void setMetal(Metal metal);
 }

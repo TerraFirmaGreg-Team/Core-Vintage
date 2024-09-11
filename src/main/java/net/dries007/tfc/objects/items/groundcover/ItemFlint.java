@@ -16,23 +16,23 @@ import org.jetbrains.annotations.NotNull;
 @MethodsReturnNonnullByDefault
 public class ItemFlint extends ItemBlockTFC {
 
-    public ItemFlint(BlockSurfaceFlint block) {
-        super(block);
-        OreDictionaryHelper.register(this, "flint");
-    }
+  public ItemFlint(BlockSurfaceFlint block) {
+    super(block);
+    OreDictionaryHelper.register(this, "flint");
+  }
 
-    @Override
-    public @NotNull Size getSize(ItemStack stack) {
-        return Size.SMALL;
-    }
+  @Override
+  public int getItemStackLimit(ItemStack stack) {
+    return getStackSize(stack);
+  }
 
-    @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return Weight.LIGHT;
-    }
+  @Override
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.LIGHT;
+  }
 
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return getStackSize(stack);
-    }
+  @Override
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.SMALL;
+  }
 }

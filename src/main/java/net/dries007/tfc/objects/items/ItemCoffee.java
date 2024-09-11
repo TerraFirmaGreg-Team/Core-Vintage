@@ -11,18 +11,18 @@ import pieman.caffeineaddon.init.ModItems;
 
 public class ItemCoffee extends Item implements IProviderModel {
 
-    public ItemCoffee(String name) {
-        super();
-        this.setTranslationKey(name);
-        this.setRegistryName(name);
-        this.setCreativeTab(CreativeTabsTFC.CT_FOOD);
+  public ItemCoffee(String name) {
+    super();
+    this.setTranslationKey(name);
+    this.setRegistryName(name);
+    this.setCreativeTab(CreativeTabsTFC.CT_FOOD);
 
-        ModItems.ITEMS.add(this);
-    }
+    ModItems.ITEMS.add(this);
+  }
 
-    @Override
-    public void onModelRegister() {
-        CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
-    }
+  @Override
+  public void onModelRegister() {
+    CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
+  }
 
 }

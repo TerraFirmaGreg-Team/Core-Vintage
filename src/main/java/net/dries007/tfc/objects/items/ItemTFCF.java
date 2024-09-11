@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 
 public abstract class ItemTFCF extends Item implements ICapabilitySize {
 
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return getStackSize(stack);
-    }
+  @Override
+  public int getItemStackLimit(ItemStack stack) {
+    return getStackSize(stack);
+  }
 }

@@ -52,7 +52,7 @@ public class CollapseData implements INBTSerializable<NBTTagCompound> {
       for (int i = 0; i < list.tagCount(); i++) {
         NBTTagCompound posTag = list.getCompoundTagAt(i);
         nextPositions.add(
-            new BlockPos(posTag.getInteger("x"), posTag.getInteger("y"), posTag.getInteger("z")));
+                new BlockPos(posTag.getInteger("x"), posTag.getInteger("y"), posTag.getInteger("z")));
       }
       radiusSquared = nbt.getDouble("radiusSquared");
     }

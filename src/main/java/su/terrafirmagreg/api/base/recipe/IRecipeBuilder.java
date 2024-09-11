@@ -12,8 +12,7 @@ public interface IRecipeBuilder<T> {
   boolean validate();
 
   /**
-   * This method creates and registers a recipe using the values of this builder. Should call {@link #validate()} and return null if values are not
-   * valid.
+   * This method creates and registers a recipe using the values of this builder. Should call {@link #validate()} and return null if values are not valid.
    *
    * @return the built recipe or null if values are invalid
    */

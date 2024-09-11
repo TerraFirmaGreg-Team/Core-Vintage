@@ -14,14 +14,14 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemBlockUrn extends ItemBlockTFC implements ICapabilitySize {
 
-    public ItemBlockUrn(BlockUrn block) {
-        super(block);
-    }
+  public ItemBlockUrn(BlockUrn block) {
+    super(block);
+  }
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        // Since this is technically still a pottery item, despite being a block
-        return new ProviderHeat(nbt, 1.0f, 1599f);
-    }
+  @Nullable
+  @Override
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    // Since this is technically still a pottery item, despite being a block
+    return new ProviderHeat(nbt, 1.0f, 1599f);
+  }
 }

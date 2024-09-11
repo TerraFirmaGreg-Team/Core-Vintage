@@ -13,8 +13,7 @@ public abstract class Variant<T> implements Comparable<Variant<T>> {
     this.name = name;
 
     if (name.isEmpty()) {
-      throw new RuntimeException(
-          String.format("Variant name must contain any character: [%s]", name));
+      throw new RuntimeException(String.format("Variant name must contain any character: [%s]", name));
     }
   }
 

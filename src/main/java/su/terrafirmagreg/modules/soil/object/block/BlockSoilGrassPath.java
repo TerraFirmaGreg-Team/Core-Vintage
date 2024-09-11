@@ -53,32 +53,6 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
   }
 
   @Override
-  public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-    if (fromPos.getY() == pos.getY() + 1) {
-      IBlockState up = world.getBlockState(fromPos);
-      if (up.isSideSolid(world, fromPos, EnumFacing.DOWN)
-              && FallingBlockManager.getSpecification(up) == null) {
-        IDirt.turnToDirt(world, pos);
-      }
-    }
-  }
-
-  @Override
-  public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-    BlockPos upPos = pos.up();
-    IBlockState up = world.getBlockState(upPos);
-    if (up.isSideSolid(world, upPos, EnumFacing.DOWN)
-            && FallingBlockManager.getSpecification(up) == null) {
-      IDirt.turnToDirt(world, pos);
-    }
-  }
-
-  @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return ItemsSoil.PILE.get(type);
-  }
-
-  @Override
   @SideOnly(Side.CLIENT)
   public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
     switch (side) {
@@ -98,6 +72,32 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
         }
       default:
         return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+    }
+  }
+
+  @Override
+  public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+    BlockPos upPos = pos.up();
+    IBlockState up = world.getBlockState(upPos);
+    if (up.isSideSolid(world, upPos, EnumFacing.DOWN)
+            && FallingBlockManager.getSpecification(up) == null) {
+      IDirt.turnToDirt(world, pos);
+    }
+  }
+
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return ItemsSoil.PILE.get(type);
+  }
+
+  @Override
+  public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    if (fromPos.getY() == pos.getY() + 1) {
+      IBlockState up = world.getBlockState(fromPos);
+      if (up.isSideSolid(world, fromPos, EnumFacing.DOWN)
+              && FallingBlockManager.getSpecification(up) == null) {
+        IDirt.turnToDirt(world, pos);
+      }
     }
   }
 }

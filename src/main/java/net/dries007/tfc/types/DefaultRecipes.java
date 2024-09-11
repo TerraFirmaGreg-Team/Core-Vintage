@@ -937,48 +937,6 @@ public final class DefaultRecipes {
     });
   }
 
-  @SubscribeEvent
-  public static void onRegisterWeldingRecipeEvent(RegistryEvent.Register<WeldingRecipe> event) {
-    IForgeRegistry<WeldingRecipe> r = event.getRegistry();
-
-    // Basic Parts
-    addWelding(r, INGOT, DOUBLE_INGOT, null);
-    addWelding(r, SHEET, DOUBLE_SHEET, null);
-
-    // Armor
-    addWelding(r, UNFINISHED_HELMET, SHEET, HELMET, true, ARMOR);
-    addWelding(r, UNFINISHED_CHESTPLATE, DOUBLE_SHEET, CHESTPLATE, true, ARMOR);
-    addWelding(r, UNFINISHED_GREAVES, SHEET, GREAVES, true, ARMOR);
-    addWelding(r, UNFINISHED_BOOTS, SHEET, BOOTS, true, ARMOR);
-
-    // Steel Welding
-    addWelding(r, WEAK_STEEL, PIG_IRON, HIGH_CARBON_BLACK_STEEL);
-    addWelding(r, WEAK_BLUE_STEEL, BLACK_STEEL, HIGH_CARBON_BLUE_STEEL);
-    addWelding(r, WEAK_RED_STEEL, BLACK_STEEL, HIGH_CARBON_RED_STEEL);
-
-    // Special Recipes
-    addWelding(r, KNIFE_BLADE, KNIFE_BLADE, SHEARS, true, TOOLS);
-  }
-
-  @SubscribeEvent
-  @SuppressWarnings("ConstantConditions")
-  public static void onRegisterChiselRecipeEvent(RegistryEvent.Register<ChiselRecipe> event) {
-    // Rock smoothing
-    RockType.getTypes().forEach(type -> {
-      Block rawRock = BlocksRock.RAW.get(type);
-      IBlockState smoothRock = BlocksRock.SMOOTH.get(type).getDefaultState();
-      event.getRegistry().register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + type.getName()));
-    });
-
-    // Alabaster smoothing
-    //		for (EnumColor color : EnumColor.values()) {
-    //			Block rawColoredAlabaster = BlocksRock.ALABASTER_BLOCKS.get(Pair.of(color, RAW));
-    //			IBlockState smoothColoredAlabaster = BlocksRock.ALABASTER_BLOCKS.get(Pair.of(color, SMOOTH)).getDefaultState();
-    //			event.getRegistry().register(
-    //					new ChiselRecipe(rawColoredAlabaster, smoothColoredAlabaster).setRegistryName("smooth_" + color.getName() + "_alabaster"));
-    //		}
-  }
-
   private static void addAnvil(IForgeRegistry<AnvilRecipe> registry, Metal.ItemType inputType, Metal.ItemType outputType, boolean onlyToolMetals,
           @Nullable SmithingSkill.Type skillType, ForgeRule... rules) {
     // Helper method for adding all recipes that take ItemType -> ItemType
@@ -1046,6 +1004,29 @@ public final class DefaultRecipes {
                 new AnvilRecipe(new ResourceLocation(MODID_TFC, recipeName), IIngredient.of(input), output, tier, skillType, rules));
       }
     }
+  }
+
+  @SubscribeEvent
+  public static void onRegisterWeldingRecipeEvent(RegistryEvent.Register<WeldingRecipe> event) {
+    IForgeRegistry<WeldingRecipe> r = event.getRegistry();
+
+    // Basic Parts
+    addWelding(r, INGOT, DOUBLE_INGOT, null);
+    addWelding(r, SHEET, DOUBLE_SHEET, null);
+
+    // Armor
+    addWelding(r, UNFINISHED_HELMET, SHEET, HELMET, true, ARMOR);
+    addWelding(r, UNFINISHED_CHESTPLATE, DOUBLE_SHEET, CHESTPLATE, true, ARMOR);
+    addWelding(r, UNFINISHED_GREAVES, SHEET, GREAVES, true, ARMOR);
+    addWelding(r, UNFINISHED_BOOTS, SHEET, BOOTS, true, ARMOR);
+
+    // Steel Welding
+    addWelding(r, WEAK_STEEL, PIG_IRON, HIGH_CARBON_BLACK_STEEL);
+    addWelding(r, WEAK_BLUE_STEEL, BLACK_STEEL, HIGH_CARBON_BLUE_STEEL);
+    addWelding(r, WEAK_RED_STEEL, BLACK_STEEL, HIGH_CARBON_RED_STEEL);
+
+    // Special Recipes
+    addWelding(r, KNIFE_BLADE, KNIFE_BLADE, SHEARS, true, TOOLS);
   }
 
   private static void addWelding(IForgeRegistry<WeldingRecipe> registry, Metal.ItemType inputType, Metal.ItemType outputType,
@@ -1121,5 +1102,24 @@ public final class DefaultRecipes {
                 .previous(), null));
       }
     }
+  }
+
+  @SubscribeEvent
+  @SuppressWarnings("ConstantConditions")
+  public static void onRegisterChiselRecipeEvent(RegistryEvent.Register<ChiselRecipe> event) {
+    // Rock smoothing
+    RockType.getTypes().forEach(type -> {
+      Block rawRock = BlocksRock.RAW.get(type);
+      IBlockState smoothRock = BlocksRock.SMOOTH.get(type).getDefaultState();
+      event.getRegistry().register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + type.getName()));
+    });
+
+    // Alabaster smoothing
+    //		for (EnumColor color : EnumColor.values()) {
+    //			Block rawColoredAlabaster = BlocksRock.ALABASTER_BLOCKS.get(Pair.of(color, RAW));
+    //			IBlockState smoothColoredAlabaster = BlocksRock.ALABASTER_BLOCKS.get(Pair.of(color, SMOOTH)).getDefaultState();
+    //			event.getRegistry().register(
+    //					new ChiselRecipe(rawColoredAlabaster, smoothColoredAlabaster).setRegistryName("smooth_" + color.getName() + "_alabaster"));
+    //		}
   }
 }

@@ -34,6 +34,12 @@ public final class ModuleSoil extends ModuleBase {
   }
 
   @Override
+  public void onInit(FMLInitializationEvent event) {
+
+    TheOneProbeSoil.init();
+  }
+
+  @Override
   public void onRegister() {
     SoilTypeHandler.init();
 
@@ -41,20 +47,14 @@ public final class ModuleSoil extends ModuleBase {
     ItemsSoil.onRegister(registryManager);
   }
 
+  @NotNull
   @Override
-  public void onInit(FMLInitializationEvent event) {
-
-    TheOneProbeSoil.init();
+  public List<Class<?>> getEventBusSubscribers() {
+    return Collections.singletonList(ModuleSoil.class);
   }
 
   @Override
   public @NotNull LoggingHelper getLogger() {
     return LOGGER;
-  }
-
-  @NotNull
-  @Override
-  public List<Class<?>> getEventBusSubscribers() {
-    return Collections.singletonList(ModuleSoil.class);
   }
 }

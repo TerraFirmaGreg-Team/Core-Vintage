@@ -19,17 +19,17 @@ public class EntitySeatOn extends Entity {
 
   private BlockPos pos;
 
+  public EntitySeatOn(World world, BlockPos pos, double y0ffset) {
+    this(world);
+    this.pos = pos;
+    setPosition(pos.getX() + 0.5D, pos.getY() + y0ffset, pos.getZ() + 0.5D);
+  }
+
   public EntitySeatOn(World world) {
     super(world);
     this.noClip = true;
     this.height = 0.01F;
     this.width = 0.01F;
-  }
-
-  public EntitySeatOn(World world, BlockPos pos, double y0ffset) {
-    this(world);
-    this.pos = pos;
-    setPosition(pos.getX() + 0.5D, pos.getY() + y0ffset, pos.getZ() + 0.5D);
   }
 
   @Nullable

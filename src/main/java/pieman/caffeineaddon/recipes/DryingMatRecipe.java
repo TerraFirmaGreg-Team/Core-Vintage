@@ -14,61 +14,61 @@ import org.jetbrains.annotations.Nullable;
 
 public class DryingMatRecipe extends IForgeRegistryEntry.Impl<DryingMatRecipe> implements IJEISimpleRecipe {
 
-    private IIngredient<ItemStack> inputItem;
-    private ItemStack outputItem;
-    private int duration;
+  private final IIngredient<ItemStack> inputItem;
+  private final ItemStack outputItem;
+  private final int duration;
 
-    public DryingMatRecipe(IIngredient<ItemStack> input, ItemStack output, int duration) {
-        this.inputItem = input;
-        this.outputItem = output;
-        this.duration = duration;
+  public DryingMatRecipe(IIngredient<ItemStack> input, ItemStack output, int duration) {
+    this.inputItem = input;
+    this.outputItem = output;
+    this.duration = duration;
 
-        if (inputItem == null || outputItem == null) {
-            throw new IllegalArgumentException("Input and output are not allowed to be empty");
-        }
+    if (inputItem == null || outputItem == null) {
+      throw new IllegalArgumentException("Input and output are not allowed to be empty");
     }
+  }
 
-    @Nullable
-    public static DryingMatRecipe get(ItemStack item) {
-        return Registries.DRYINGMAT.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst()
-                .orElse(null);
-    }
+  @Nullable
+  public static DryingMatRecipe get(ItemStack item) {
+    return Registries.DRYINGMAT.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst()
+            .orElse(null);
+  }
 
-    public int getDuration() {
-        return duration;
-    }
+  private boolean isValidInput(ItemStack inputItem) {
+    return this.inputItem.testIgnoreCount(inputItem);
+  }
 
-    /**
-     * Only for GUI purposes - not intended as a crafting mechanic
-     *
-     * @return the output item stack
-     */
-    @NotNull
-    public ItemStack getOutputStack() {
-        return outputItem;
-    }
+  public int getDuration() {
+    return duration;
+  }
 
-    @NotNull
-    public IIngredient<ItemStack> getItemIngredient() {
-        return inputItem;
-    }
+  /**
+   * Only for GUI purposes - not intended as a crafting mechanic
+   *
+   * @return the output item stack
+   */
+  @NotNull
+  public ItemStack getOutputStack() {
+    return outputItem;
+  }
 
-    @NotNull
-    public ItemStack getOutputItem(ItemStack stack) {
-        return CapabilityFood.updateFoodFromPrevious(stack, outputItem.copy());
-    }
+  @NotNull
+  public IIngredient<ItemStack> getItemIngredient() {
+    return inputItem;
+  }
 
-    @Override
-    public NonNullList<IIngredient<ItemStack>> getIngredients() {
-        return NonNullList.withSize(1, inputItem);
-    }
+  @NotNull
+  public ItemStack getOutputItem(ItemStack stack) {
+    return CapabilityFood.updateFoodFromPrevious(stack, outputItem.copy());
+  }
 
-    @Override
-    public NonNullList<ItemStack> getOutputs() {
-        return NonNullList.withSize(1, outputItem);
-    }
+  @Override
+  public NonNullList<IIngredient<ItemStack>> getIngredients() {
+    return NonNullList.withSize(1, inputItem);
+  }
 
-    private boolean isValidInput(ItemStack inputItem) {
-        return this.inputItem.testIgnoreCount(inputItem);
-    }
+  @Override
+  public NonNullList<ItemStack> getOutputs() {
+    return NonNullList.withSize(1, outputItem);
+  }
 }

@@ -11,35 +11,36 @@ import net.dries007.tfc.util.calendar.Calendar;
 
 public class PacketCalendarUpdate implements IMessage {
 
-    private Calendar instance;
+  private Calendar instance;
 
-    @SuppressWarnings("unused")
-    @Deprecated
-    public PacketCalendarUpdate() {}
+  @SuppressWarnings("unused")
+  @Deprecated
+  public PacketCalendarUpdate() {
+  }
 
-    public PacketCalendarUpdate(Calendar instance) {
-        this.instance = instance;
-    }
+  public PacketCalendarUpdate(Calendar instance) {
+    this.instance = instance;
+  }
+
+  @Override
+  public void fromBytes(ByteBuf buf) {
+    instance = new Calendar();
+    instance.read(buf);
+  }
+
+  @Override
+  public void toBytes(ByteBuf buf) {
+    instance.write(buf);
+  }
+
+  public static class Handler implements IMessageHandler<PacketCalendarUpdate, IMessage> {
 
     @Override
-    public void fromBytes(ByteBuf buf) {
-        instance = new Calendar();
-        instance.read(buf);
+    public IMessage onMessage(PacketCalendarUpdate message, MessageContext ctx) {
+      TerraFirmaCraft.getProxy()
+              .getThreadListener(ctx)
+              .addScheduledTask(() -> Calendar.INSTANCE.resetTo(message.instance));
+      return null;
     }
-
-    @Override
-    public void toBytes(ByteBuf buf) {
-        instance.write(buf);
-    }
-
-    public static class Handler implements IMessageHandler<PacketCalendarUpdate, IMessage> {
-
-        @Override
-        public IMessage onMessage(PacketCalendarUpdate message, MessageContext ctx) {
-            TerraFirmaCraft.getProxy()
-                    .getThreadListener(ctx)
-                    .addScheduledTask(() -> Calendar.INSTANCE.resetTo(message.instance));
-            return null;
-        }
-    }
+  }
 }

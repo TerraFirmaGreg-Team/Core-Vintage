@@ -20,38 +20,38 @@ import java.util.List;
 
 public class AlloyRecipeWrapper implements IRecipeWrapper {
 
-    private final String[] slotContent = { "", "", "", "" };
-    private final AlloyRecipe recipe;
+  private final String[] slotContent = {"", "", "", ""};
+  private final AlloyRecipe recipe;
 
-    public AlloyRecipeWrapper(AlloyRecipe recipe) {
-        this.recipe = recipe;
-    }
+  public AlloyRecipeWrapper(AlloyRecipe recipe) {
+    this.recipe = recipe;
+  }
 
-    @Override
-    public void getIngredients(IIngredients ingredients) {
-        int i = 0;
-        List<List<FluidStack>> allInputs = new ArrayList<>();
-        for (Metal metal : recipe.getMetals().keySet()) {
-            int min = (int) (recipe.getMetals().get(metal).getMin() * 100);
-            int max = (int) (recipe.getMetals().get(metal).getMax() * 100);
-            slotContent[i] = min + "-" + max + "%";
-            FluidStack fluidInput = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 1000);
-            allInputs.add(Lists.newArrayList(fluidInput));
-            i++;
-        }
-        ingredients.setInputLists(VanillaTypes.FLUID, allInputs);
-        ingredients.setOutput(VanillaTypes.FLUID, new FluidStack(FluidsTFC.getFluidFromMetal(recipe.getResult()), 1000));
+  @Override
+  public void getIngredients(IIngredients ingredients) {
+    int i = 0;
+    List<List<FluidStack>> allInputs = new ArrayList<>();
+    for (Metal metal : recipe.getMetals().keySet()) {
+      int min = (int) (recipe.getMetals().get(metal).getMin() * 100);
+      int max = (int) (recipe.getMetals().get(metal).getMax() * 100);
+      slotContent[i] = min + "-" + max + "%";
+      FluidStack fluidInput = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 1000);
+      allInputs.add(Lists.newArrayList(fluidInput));
+      i++;
     }
+    ingredients.setInputLists(VanillaTypes.FLUID, allInputs);
+    ingredients.setOutput(VanillaTypes.FLUID, new FluidStack(FluidsTFC.getFluidFromMetal(recipe.getResult()), 1000));
+  }
 
-    @Override
-    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        for (int i = 0; i < 4; i++) {
-            int row = i / 2;
-            int column = i % 2;
-            float x = 20f + column * 60f;
-            float y = 17f + row * 26f;
-            String text = slotContent[i];
-            minecraft.fontRenderer.drawString(text, x, y, 0x000000, false);
-        }
+  @Override
+  public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
+    for (int i = 0; i < 4; i++) {
+      int row = i / 2;
+      int column = i % 2;
+      float x = 20f + column * 60f;
+      float y = 17f + row * 26f;
+      String text = slotContent[i];
+      minecraft.fontRenderer.drawString(text, x, y, 0x000000, false);
     }
+  }
 }

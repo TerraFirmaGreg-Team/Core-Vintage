@@ -18,18 +18,20 @@ import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class RenderMongooseTFC extends RenderLiving<EntityMongooseTFC> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/mongoose.png");
+  private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/mongoose.png");
 
-    public RenderMongooseTFC(RenderManager renderManager) {super(renderManager, new ModelMongooseTFC(), 0.7F);}
+  public RenderMongooseTFC(RenderManager renderManager) {
+    super(renderManager, new ModelMongooseTFC(), 0.7F);
+  }
 
-    @Override
-    public void doRender(@NotNull EntityMongooseTFC mongoose, double par2, double par4, double par6, float par8, float par9) {
-        this.shadowSize = (float) (0.35f + (mongoose.getPercentToAdulthood() * 0.35f));
-        super.doRender(mongoose, par2, par4, par6, par8, par9);
-    }
+  @Override
+  public void doRender(@NotNull EntityMongooseTFC mongoose, double par2, double par4, double par6, float par8, float par9) {
+    this.shadowSize = (float) (0.35f + (mongoose.getPercentToAdulthood() * 0.35f));
+    super.doRender(mongoose, par2, par4, par6, par8, par9);
+  }
 
-    @Override
-    protected ResourceLocation getEntityTexture(EntityMongooseTFC entity) {
-        return TEXTURE;
-    }
+  @Override
+  protected ResourceLocation getEntityTexture(EntityMongooseTFC entity) {
+    return TEXTURE;
+  }
 }

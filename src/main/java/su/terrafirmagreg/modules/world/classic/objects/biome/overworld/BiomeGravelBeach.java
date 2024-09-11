@@ -11,11 +11,11 @@ public class BiomeGravelBeach extends BaseBiome {
 
   public BiomeGravelBeach() {
     super(new Settings("Gravel Beach")
-        .guiColour(0x7E7450)
-        .baseHeight(-1.69f)
-        .heightVariation(-2.68f)
-        .enableWorldGen()
-        .baseBiome(BEACH));
+            .guiColour(0x7E7450)
+            .baseHeight(-1.69f)
+            .heightVariation(-2.68f)
+            .enableWorldGen()
+            .baseBiome(BEACH));
   }
 
   @Override
@@ -27,7 +27,7 @@ public class BiomeGravelBeach extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-        BiomeDictionary.Type.BEACH
+            BiomeDictionary.Type.BEACH
     };
   }
 }

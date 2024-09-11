@@ -20,7 +20,7 @@ import java.util.Random;
 public class GrassColorHandler {
 
   public static NoiseGeneratorPerlin noiseGenerator = new NoiseGeneratorPerlin(
-      new Random("NOISE_GRASS".hashCode()), 2);
+          new Random("NOISE_GRASS".hashCode()), 2);
   public static Color[] monthlyColors = new Color[12];
 
   static {
@@ -50,9 +50,19 @@ public class GrassColorHandler {
     }
   }
 
+  public static Color blendWithAlphas(Color c0, Color c1, double weight0) {
+    double weight1 = 1.0d - weight0;
+    double r = weight0 * c0.getRed() + weight1 * c1.getRed();
+    double g = weight0 * c0.getGreen() + weight1 * c1.getGreen();
+    double b = weight0 * c0.getBlue() + weight1 * c1.getBlue();
+    double a = weight0 * c0.getAlpha() + weight1 * c1.getAlpha();
+
+    return new Color((int) r, (int) g, (int) b, (int) a);
+  }
+
   // Extended grass coloring
   public static int computeGrassColor(IBlockState state, IBlockAccess worldIn, BlockPos pos,
-      int tintIndex) {
+          int tintIndex) {
     if (pos != null) {
       Color originalColor = new Color(computeInitialGrassColor(state, worldIn, pos, tintIndex));
       Color seasonalColor = getSeasonalColor();
@@ -68,7 +78,7 @@ public class GrassColorHandler {
         double darkness = ConfigSoil.CLIENT.noiseDarkness;
         double value = noiseGenerator.getValue(pos.getX() / scale, pos.getZ() / scale);
         value =
-            curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
+                curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
         finalColor = blendByWeight(Color.BLACK, finalColor, value);
       }
 
@@ -78,13 +88,24 @@ public class GrassColorHandler {
     return ColorizerGrass.getGrassColor(0.5, 0.5);
   }
 
+  // Default TFC grass coloring
+  private static int computeInitialGrassColor(IBlockState state, IBlockAccess worldIn, BlockPos pos,
+          int tintIndex) {
+    if (pos != null) {
+      double temp = MathHelper.clamp((Climate.getMonthlyTemp(pos) + 30) / 60, 0, 1);
+      double rain = MathHelper.clamp((Climate.getRainfall(pos) - 50) / 400, 0, 1);
+      return ColorizerGrass.getGrassColor(temp, rain);
+    }
+
+    return ColorizerGrass.getGrassColor(0.5, 0.5);
+  }
+
   public static Color getSeasonalColor() {
     return monthlyColors[Calendar.CALENDAR_TIME.getMonthOfYear().ordinal()];
   }
 
-  public static double remap(double value, double currentLow, double currentHigh, double newLow,
-      double newHigh) {
-    return newLow + (value - currentLow) * (newHigh - newLow) / (currentHigh - currentLow);
+  public static Color blendByAlpha(Color c0, Color c1) {
+    return blendByWeight(c0, c1, 1d - (double) c1.getAlpha() / 255d);
   }
 
   public static double curve(double start, double end, double amount, double waves) {
@@ -92,8 +113,13 @@ public class GrassColorHandler {
     amount = MathHelper.clamp((amount - start) / (end - start), 0, 1);
 
     return MathHelper.clamp(
-        0.5 + 0.5 * MathHelper.sin(MathHelper.cos((float) (Math.PI * Math.tan(90 * amount)))) *
-            MathHelper.cos(MathHelper.sin((float) Math.tan(amount))), 0, 1);
+            0.5 + 0.5 * MathHelper.sin(MathHelper.cos((float) (Math.PI * Math.tan(90 * amount)))) *
+                    MathHelper.cos(MathHelper.sin((float) Math.tan(amount))), 0, 1);
+  }
+
+  public static double remap(double value, double currentLow, double currentHigh, double newLow,
+          double newHigh) {
+    return newLow + (value - currentLow) * (newHigh - newLow) / (currentHigh - currentLow);
   }
 
   public static Color blendByWeight(Color c0, Color c1, double weight0) {
@@ -104,31 +130,5 @@ public class GrassColorHandler {
     double a = Math.max(c0.getAlpha(), c1.getAlpha());
 
     return new Color((int) r, (int) g, (int) b, (int) a);
-  }
-
-  public static Color blendWithAlphas(Color c0, Color c1, double weight0) {
-    double weight1 = 1.0d - weight0;
-    double r = weight0 * c0.getRed() + weight1 * c1.getRed();
-    double g = weight0 * c0.getGreen() + weight1 * c1.getGreen();
-    double b = weight0 * c0.getBlue() + weight1 * c1.getBlue();
-    double a = weight0 * c0.getAlpha() + weight1 * c1.getAlpha();
-
-    return new Color((int) r, (int) g, (int) b, (int) a);
-  }
-
-  public static Color blendByAlpha(Color c0, Color c1) {
-    return blendByWeight(c0, c1, 1d - (double) c1.getAlpha() / 255d);
-  }
-
-  // Default TFC grass coloring
-  private static int computeInitialGrassColor(IBlockState state, IBlockAccess worldIn, BlockPos pos,
-      int tintIndex) {
-    if (pos != null) {
-      double temp = MathHelper.clamp((Climate.getMonthlyTemp(pos) + 30) / 60, 0, 1);
-      double rain = MathHelper.clamp((Climate.getRainfall(pos) - 50) / 400, 0, 1);
-      return ColorizerGrass.getGrassColor(temp, rain);
-    }
-
-    return ColorizerGrass.getGrassColor(0.5, 0.5);
   }
 }

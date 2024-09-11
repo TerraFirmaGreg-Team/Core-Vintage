@@ -28,25 +28,25 @@ public class OverlayModel implements IModel {
   }
 
   @Override
-  public @NotNull IModel smoothLighting(boolean value) {
-    return new OverlayModel(texture, overlayTexture);
-  }
-
-  @Override
   public @NotNull Collection<ResourceLocation> getTextures() {
     return Collections.singletonList(texture);
   }
 
   @Override
   public @NotNull IBakedModel bake(@NotNull IModelState state, @NotNull VertexFormat format,
-      Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+          Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
 
     ModelBaker baker = ModelBaker.getInstance();
     baker.begin(state, format);
     baker.setTexture(sprite);
     baker.putCube(0, 0, 0, 0.5f, sprite.getMaxU(), sprite.getMinU(), sprite.getMinV(),
-        sprite.getMaxV());
+            sprite.getMaxV());
     return new OverlayBakedModel(baker.bake(), bakedTextureGetter.apply(overlayTexture));
+  }
+
+  @Override
+  public @NotNull IModel smoothLighting(boolean value) {
+    return new OverlayModel(texture, overlayTexture);
   }
 
 }

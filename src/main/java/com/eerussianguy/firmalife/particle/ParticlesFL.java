@@ -23,33 +23,33 @@ import static su.terrafirmagreg.data.Constants.MODID_FL;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_FL)
 public enum ParticlesFL {
-    SPRINKLE(new ResourceLocation(MODID_FL, "particle/sprinkle"), () -> ParticleSprinkle::new);
+  SPRINKLE(new ResourceLocation(MODID_FL, "particle/sprinkle"), () -> ParticleSprinkle::new);
 
-    private final ResourceLocation location;
-    private final Supplier<TFCParticles.IParticleFactoryTFC> factorySupplier;
-    private TextureAtlasSprite sprite;
+  private final ResourceLocation location;
+  private final Supplier<TFCParticles.IParticleFactoryTFC> factorySupplier;
+  private TextureAtlasSprite sprite;
 
-    ParticlesFL(ResourceLocation location, Supplier<TFCParticles.IParticleFactoryTFC> factorySupplier) {
-        this.location = location;
-        this.factorySupplier = factorySupplier;
+  ParticlesFL(ResourceLocation location, Supplier<TFCParticles.IParticleFactoryTFC> factorySupplier) {
+    this.location = location;
+    this.factorySupplier = factorySupplier;
+  }
+
+  @SubscribeEvent
+  public static void onTextureStitchEvent(TextureStitchEvent.Pre event) {
+    for (ParticlesFL particle : ParticlesFL.values()) {
+      particle.registerSprite(event.getMap());
     }
+  }
 
-    @SubscribeEvent
-    public static void onTextureStitchEvent(TextureStitchEvent.Pre event) {
-        for (ParticlesFL particle : ParticlesFL.values()) {
-            particle.registerSprite(event.getMap());
-        }
-    }
+  @SideOnly(Side.CLIENT)
+  private void registerSprite(@NotNull TextureMap map) {
+    this.sprite = map.registerSprite(location);
+  }
 
-    @SideOnly(Side.CLIENT)
-    private void registerSprite(@NotNull TextureMap map) {
-        this.sprite = map.registerSprite(location);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void spawn(World worldIn, double x, double y, double z, double speedX, double speedY, double speedZ, int duration) {
-        Particle particle = factorySupplier.get().createParticle(worldIn, x, y, z, speedX, speedY, speedZ, duration);
-        particle.setParticleTexture(sprite);
-        Minecraft.getMinecraft().effectRenderer.addEffect(particle);
-    }
+  @SideOnly(Side.CLIENT)
+  public void spawn(World worldIn, double x, double y, double z, double speedX, double speedY, double speedZ, int duration) {
+    Particle particle = factorySupplier.get().createParticle(worldIn, x, y, z, speedX, speedY, speedZ, duration);
+    particle.setParticleTexture(sprite);
+    Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+  }
 }

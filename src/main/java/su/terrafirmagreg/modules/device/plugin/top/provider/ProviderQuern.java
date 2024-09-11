@@ -33,7 +33,7 @@ public class ProviderQuern implements IProbeInfoProvider {
 
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
-      IBlockState state, IProbeHitData hitData) {
+          IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
 
@@ -54,10 +54,10 @@ public class ProviderQuern implements IProbeInfoProvider {
 
           if (!handstone.isEmpty()) {
             info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                .text(new TextComponentTranslation(
-                    ModUtils.localize("top", "device.quern.handstone.durability"),
-                    handstone.getItemDamage(),
-                    handstone.getMaxDamage()).getFormattedText());
+                    .text(new TextComponentTranslation(
+                            ModUtils.localize("top", "device.quern.handstone.durability"),
+                            handstone.getItemDamage(),
+                            handstone.getMaxDamage()).getFormattedText());
           }
         }
       }

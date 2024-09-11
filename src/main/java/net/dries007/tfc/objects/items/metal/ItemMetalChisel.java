@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.items.metal;
 
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
-import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
+import su.terrafirmagreg.modules.wood.object.block.BlockWoodSupport;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
@@ -46,6 +46,61 @@ public class ItemMetalChisel extends ItemMetalTool {
 
   public ItemMetalChisel(Metal metal, Metal.ItemType type) {
     super(metal, type);
+  }
+
+  /**
+   * attempts to change a block in place using the chisel. If the chiselMode is stair and the block can be crafted into a stair, it will be turned into that stair. If
+   * the chiselMode is slab and the block can be crafted into a slab, it will be crafted into a slab. If the chiselMode is polish and the block is a TFC Raw stone, it
+   * will be crafted into a polished stone.
+   *
+   * @return SUCCESS if the block was chiseled, FAIL if no block was changed
+   */
+  @Override
+  @NotNull
+  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
+          float hitZ) {
+    // Find the block to place for this action
+    IBlockState newState = getChiselResultState(player, worldIn, pos, facing, hitX, hitY, hitZ);
+    if (newState != null) {
+      // play a sound matching the new block
+      SoundType soundType = newState.getBlock().getSoundType(newState, worldIn, pos, player);
+      worldIn.playSound(player, pos, soundType.getHitSound(), SoundCategory.BLOCKS, 1.0f, soundType.getPitch());
+
+      // only update the world state on the server side
+      if (!worldIn.isRemote) {
+        // replace the block with a new block
+        if (ConfigTFC.General.FALLABLE.chiselCausesCollapse) {
+          IBlockState oldState = worldIn.getBlockState(pos);
+          FallingBlockManager.Specification oldSpec = FallingBlockManager.getSpecification(oldState);
+          if (oldSpec != null && oldSpec.isCollapsable() && !BlockWoodSupport.isBeingSupported(worldIn, pos)) {
+            worldIn.setBlockToAir(pos); // Set block to air before attempting a collapse mechanic
+            if (FallingBlockManager.checkCollapsingArea(worldIn, pos)) {
+              return EnumActionResult.SUCCESS; // Collapse mechanic triggered, cancel chisel!
+            }
+          }
+        }
+        if (newState.getProperties().containsKey(CAN_FALL)) {
+          newState = newState.withProperty(CAN_FALL, true);
+        }
+        worldIn.setBlockState(pos, newState);
+
+        // spawn a slab if necessary
+        var cap = CapabilityPlayer.get(player);
+        if (cap != null) {
+          if (cap.getChiselMode() == Mode.SLAB) {
+            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(newState.getBlock(), 1));
+          }
+        }
+
+        player.getHeldItem(hand).damageItem(1, player);
+        if (ConfigTFC.Devices.CHISEL.hasDelay) {
+          // if setting is on for chisel cooldown, trigger cooldown
+          player.getCooldownTracker().setCooldown(this, COOLDOWN);
+        }
+      }
+      return EnumActionResult.SUCCESS;
+    }
+    return EnumActionResult.FAIL;
   }
 
   /**
@@ -155,60 +210,5 @@ public class ItemMetalChisel extends ItemMetalTool {
       }
     }
     return null;
-  }
-
-  /**
-   * attempts to change a block in place using the chisel. If the chiselMode is stair and the block can be crafted into a stair, it will be turned into that stair. If
-   * the chiselMode is slab and the block can be crafted into a slab, it will be crafted into a slab. If the chiselMode is polish and the block is a TFC Raw stone, it
-   * will be crafted into a polished stone.
-   *
-   * @return SUCCESS if the block was chiseled, FAIL if no block was changed
-   */
-  @Override
-  @NotNull
-  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
-    // Find the block to place for this action
-    IBlockState newState = getChiselResultState(player, worldIn, pos, facing, hitX, hitY, hitZ);
-    if (newState != null) {
-      // play a sound matching the new block
-      SoundType soundType = newState.getBlock().getSoundType(newState, worldIn, pos, player);
-      worldIn.playSound(player, pos, soundType.getHitSound(), SoundCategory.BLOCKS, 1.0f, soundType.getPitch());
-
-      // only update the world state on the server side
-      if (!worldIn.isRemote) {
-        // replace the block with a new block
-        if (ConfigTFC.General.FALLABLE.chiselCausesCollapse) {
-          IBlockState oldState = worldIn.getBlockState(pos);
-          FallingBlockManager.Specification oldSpec = FallingBlockManager.getSpecification(oldState);
-          if (oldSpec != null && oldSpec.isCollapsable() && !BlockWoodSupport.isBeingSupported(worldIn, pos)) {
-            worldIn.setBlockToAir(pos); // Set block to air before attempting a collapse mechanic
-            if (FallingBlockManager.checkCollapsingArea(worldIn, pos)) {
-              return EnumActionResult.SUCCESS; // Collapse mechanic triggered, cancel chisel!
-            }
-          }
-        }
-        if (newState.getProperties().containsKey(CAN_FALL)) {
-          newState = newState.withProperty(CAN_FALL, true);
-        }
-        worldIn.setBlockState(pos, newState);
-
-        // spawn a slab if necessary
-        var cap = CapabilityPlayer.get(player);
-        if (cap != null) {
-          if (cap.getChiselMode() == Mode.SLAB) {
-            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(newState.getBlock(), 1));
-          }
-        }
-
-        player.getHeldItem(hand).damageItem(1, player);
-        if (ConfigTFC.Devices.CHISEL.hasDelay) {
-          // if setting is on for chisel cooldown, trigger cooldown
-          player.getCooldownTracker().setCooldown(this, COOLDOWN);
-        }
-      }
-      return EnumActionResult.SUCCESS;
-    }
-    return EnumActionResult.FAIL;
   }
 }

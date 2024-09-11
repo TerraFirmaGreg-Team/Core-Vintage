@@ -32,8 +32,8 @@ import static su.terrafirmagreg.data.Constants.MOD_NAME;
 public final class ModUtils {
 
   /**
-   * This cache is used by {@link #getSortedEntries(IForgeRegistry)} to improve repeat performance of the method. Calling
-   * {@link #getSortedEntries(IForgeRegistry)} before all entries have been registered will lock out new ones from being found.
+   * This cache is used by {@link #getSortedEntries(IForgeRegistry)} to improve repeat performance of the method. Calling {@link #getSortedEntries(IForgeRegistry)}
+   * before all entries have been registered will lock out new ones from being found.
    */
   private static final Map<IForgeRegistry<?>, Multimap<String, ?>> REGISTRY_CACHE = new HashMap<>();
 
@@ -77,11 +77,11 @@ public final class ModUtils {
   }
 
   /**
-   * Gets the name of a mod that registered the passed object. Has support for a wide range of registerable objects such as blocks, items,
-   * enchantments, potions, sounds, villagers, biomes, and so on.
+   * Gets the name of a mod that registered the passed object. Has support for a wide range of registerable objects such as blocks, items, enchantments, potions,
+   * sounds, villagers, biomes, and so on.
    *
-   * @param registerable The registerable object. Accepts anything that extends IForgeRegistryEntry.Impl. Current list includes BiomeGenBase, Block,
-   *                     Enchantment, Item, Potion, PotionType, SoundEvent and VillagerProfession.
+   * @param registerable The registerable object. Accepts anything that extends IForgeRegistryEntry.Impl. Current list includes BiomeGenBase, Block, Enchantment,
+   *                     Item, Potion, PotionType, SoundEvent and VillagerProfession.
    * @return String The name of the mod that registered the object.
    */
   public static String getModName(IForgeRegistryEntry.Impl<?> registerable) {
@@ -90,6 +90,17 @@ public final class ModUtils {
 
     final ModContainer mod = getModContainer(modID);
     return mod != null ? mod.getName() : "minecraft".equals(modID) ? "Minecraft" : "Unknown";
+  }
+
+  /**
+   * Gets a mod container by it's ID.
+   *
+   * @param modID The ID of the mod to grab.
+   * @return The ModContainer using that ID.
+   */
+  public static ModContainer getModContainer(String modID) {
+
+    return Loader.instance().getIndexedModList().get(modID);
   }
 
   /**
@@ -143,17 +154,6 @@ public final class ModUtils {
   }
 
   /**
-   * Gets a mod container by it's ID.
-   *
-   * @param modID The ID of the mod to grab.
-   * @return The ModContainer using that ID.
-   */
-  public static ModContainer getModContainer(String modID) {
-
-    return Loader.instance().getIndexedModList().get(modID);
-  }
-
-  /**
    * Gets the name of a mod from it's ID.
    *
    * @param modId The mod to look up.
@@ -195,24 +195,24 @@ public final class ModUtils {
     final String entryName = index == -1 ? id : id.substring(index + 1);
     final ModContainer mod = Loader.instance().activeModContainer();
     final String prefix =
-        mod == null || mod instanceof InjectedModContainer
-            && ((InjectedModContainer) mod).wrappedContainer instanceof FMLContainer ?
-            "minecraft" : mod.getModId()
-            .toLowerCase();
+            mod == null || mod instanceof InjectedModContainer
+                    && ((InjectedModContainer) mod).wrappedContainer instanceof FMLContainer ?
+                    "minecraft" : mod.getModId()
+                    .toLowerCase();
 
     return new ResourceLocation(prefix, entryName);
   }
 
   /**
-   * Creates a sorted version of a ForgeRegistry. This will only contain entries that were present at the time of calling it. Entries are sorted by
-   * their owning modid.
+   * Creates a sorted version of a ForgeRegistry. This will only contain entries that were present at the time of calling it. Entries are sorted by their owning
+   * modid.
    *
    * @param registry The registry to sort.
    * @return A map of all entries sorted by the owning mod id.
    */
   @SuppressWarnings("unchecked")
   public static <T extends IForgeRegistryEntry<T>> Multimap<String, T> getSortedEntries(
-      IForgeRegistry<T> registry) {
+          IForgeRegistry<T> registry) {
 
     if (REGISTRY_CACHE.containsKey(registry)) {
 

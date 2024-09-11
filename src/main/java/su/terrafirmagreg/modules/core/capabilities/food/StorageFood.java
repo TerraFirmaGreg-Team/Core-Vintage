@@ -13,12 +13,12 @@ public class StorageFood implements IStorage<ICapabilityFood> {
   @Nullable
   @Override
   public NBTBase writeNBT(Capability<ICapabilityFood> capability, ICapabilityFood instance,
-      EnumFacing side) {
+          EnumFacing side) {
     return null;
   }
 
   @Override
   public void readNBT(Capability<ICapabilityFood> capability, ICapabilityFood instance,
-      EnumFacing side, NBTBase nbt) {
+          EnumFacing side, NBTBase nbt) {
   }
 }

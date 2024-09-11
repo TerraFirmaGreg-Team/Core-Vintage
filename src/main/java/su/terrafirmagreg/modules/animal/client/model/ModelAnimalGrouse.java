@@ -176,9 +176,15 @@ public class ModelAnimalGrouse extends ModelBase {
     legL2.addChild(feetL);
   }
 
+  public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    modelRenderer.rotateAngleX = x;
+    modelRenderer.rotateAngleY = y;
+    modelRenderer.rotateAngleZ = z;
+  }
+
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-      float par6, float par7) {
+          float par6, float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
     EntityAnimalGrouse grouse = ((EntityAnimalGrouse) entity);
@@ -256,7 +262,7 @@ public class ModelAnimalGrouse extends ModelBase {
 
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
-      float par6, Entity ent) {
+          float par6, Entity ent) {
     this.head.rotateAngleX = -(par5 / (180F / MathConstants.PI));
     this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
 
@@ -280,11 +286,5 @@ public class ModelAnimalGrouse extends ModelBase {
     tails7.isHidden = false;
     tails8.isHidden = false;
     tails9.isHidden = false;
-  }
-
-  public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-    modelRenderer.rotateAngleX = x;
-    modelRenderer.rotateAngleY = y;
-    modelRenderer.rotateAngleZ = z;
   }
 }

@@ -154,8 +154,7 @@ public class Registry {
 
     blocks.forEach(block -> {
       if (block instanceof IProviderTile provider) {
-        TileUtils.registerTileEntity(provider.getTileEntityClass(),
-                provider.getTileEntityClass().getSimpleName());
+        TileUtils.registerTileEntity(provider.getTileEntityClass(), provider.getTileEntityClass().getSimpleName());
       }
     });
   }

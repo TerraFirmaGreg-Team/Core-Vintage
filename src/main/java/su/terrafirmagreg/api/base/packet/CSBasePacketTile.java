@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public abstract class CSBasePacketTile<REQ extends CSBasePacketTile> extends
-    BasePacketBlockPos<REQ> {
+        BasePacketBlockPos<REQ> {
 
   public CSBasePacketTile() {
     // serialization

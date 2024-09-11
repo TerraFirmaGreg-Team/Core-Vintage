@@ -7,8 +7,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * A hackish adapter that allows lambdas to be used as {@link ItemMeshDefinition} implementations without breaking ForgeGradle's reobfuscation and
- * causing {@link AbstractMethodError}s.
+ * A hackish adapter that allows lambdas to be used as {@link ItemMeshDefinition} implementations without breaking ForgeGradle's reobfuscation and causing
+ * {@link AbstractMethodError}s.
  * <p>
  * Written by diesieben07 in this thread: http://www.minecraftforge.net/forum/index.php/topic,34034.0.html
  *
@@ -17,14 +17,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 interface MeshDefinitionFix extends ItemMeshDefinition {
 
-    // Helper method to easily create lambda instances of this class
-    static ItemMeshDefinition create(MeshDefinitionFix lambda) {
-        return lambda;
-    }
+  // Helper method to easily create lambda instances of this class
+  static ItemMeshDefinition create(MeshDefinitionFix lambda) {
+    return lambda;
+  }
 
-    ModelResourceLocation getLocation(ItemStack stack);
+  default ModelResourceLocation getModelLocation(ItemStack stack) {
+    return getLocation(stack);
+  }
 
-    default ModelResourceLocation getModelLocation(ItemStack stack) {
-        return getLocation(stack);
-    }
+  ModelResourceLocation getLocation(ItemStack stack);
 }

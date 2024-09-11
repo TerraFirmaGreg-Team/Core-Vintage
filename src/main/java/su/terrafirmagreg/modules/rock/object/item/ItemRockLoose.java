@@ -59,13 +59,6 @@ public class ItemRockLoose extends ItemRock
     return new ActionResult<>(EnumActionResult.SUCCESS, stack);
   }
 
-  @Nullable
-  @Override
-  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-    // Since this is technically still a pottery item, despite being a block
-    return new ProviderHeat(stack.getTagCompound(), 0.2f, 2000f);
-  }
-
   @Override
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
@@ -76,6 +69,13 @@ public class ItemRockLoose extends ItemRock
     if (type.isFlux()) {
       tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("is_flux_rock.name").getFormattedText());
     }
+  }
+
+  @Nullable
+  @Override
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    // Since this is technically still a pottery item, despite being a block
+    return new ProviderHeat(stack.getTagCompound(), 0.2f, 2000f);
   }
 
   @Override

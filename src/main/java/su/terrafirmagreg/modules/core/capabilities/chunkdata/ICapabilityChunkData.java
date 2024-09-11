@@ -94,10 +94,10 @@ public interface ICapabilityChunkData extends ICapabilitySerializable<NBTTagComp
   void resetLastUpdateYear();
 
   void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, int[] soilLayer1,
-      DataLayerClassic[] stabilityLayer,
-      DataLayerClassic[] drainageLayer,
-      int[] seaLevelOffset, float rainfall, float regionalTemp, float avgTemp, float floraDensity,
-      float floraDiversity);
+          DataLayerClassic[] stabilityLayer,
+          DataLayerClassic[] drainageLayer,
+          int[] seaLevelOffset, float rainfall, float regionalTemp, float avgTemp, float floraDensity,
+          float floraDiversity);
 
   Set<Vein> getGeneratedVeins();
 

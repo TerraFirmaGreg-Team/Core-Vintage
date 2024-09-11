@@ -14,30 +14,30 @@ import net.dries007.tfc.objects.entity.animal.EntityMuskOxTFC;
 
 public class LayerMuskOxWoolTFC implements LayerRenderer<EntityMuskOxTFC> {
 
-    private final RenderMuskOxTFC muskoxRenderer;
-    private final ModelMuskOxWoolTFC muskoxModel = new ModelMuskOxWoolTFC();
+  private final RenderMuskOxTFC muskoxRenderer;
+  private final ModelMuskOxWoolTFC muskoxModel = new ModelMuskOxWoolTFC();
 
-    public LayerMuskOxWoolTFC(RenderMuskOxTFC renderer) {
-        this.muskoxRenderer = renderer;
+  public LayerMuskOxWoolTFC(RenderMuskOxTFC renderer) {
+    this.muskoxRenderer = renderer;
+  }
+
+  @Override
+  public void doRenderLayer(EntityMuskOxTFC muskox, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
+          float headPitch, float scale) {
+    if (muskox.hasWool() && !muskox.isInvisible()) {
+      this.muskoxRenderer.bindTexture(this.muskoxRenderer.getEntityTexture(muskox));
+
+      float[] afloat = EntitySheep.getDyeRgb(muskox.getDyeColor());
+      GlStateManager.color(afloat[0], afloat[1], afloat[2]);
+
+      this.muskoxModel.setModelAttributes(this.muskoxRenderer.getMainModel());
+      this.muskoxModel.setLivingAnimations(muskox, limbSwing, limbSwingAmount, partialTicks);
+      this.muskoxModel.render(muskox, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
     }
+  }
 
-    @Override
-    public void doRenderLayer(EntityMuskOxTFC muskox, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
-                              float headPitch, float scale) {
-        if (muskox.hasWool() && !muskox.isInvisible()) {
-            this.muskoxRenderer.bindTexture(this.muskoxRenderer.getEntityTexture(muskox));
-
-            float[] afloat = EntitySheep.getDyeRgb(muskox.getDyeColor());
-            GlStateManager.color(afloat[0], afloat[1], afloat[2]);
-
-            this.muskoxModel.setModelAttributes(this.muskoxRenderer.getMainModel());
-            this.muskoxModel.setLivingAnimations(muskox, limbSwing, limbSwingAmount, partialTicks);
-            this.muskoxModel.render(muskox, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-        }
-    }
-
-    @Override
-    public boolean shouldCombineTextures() {
-        return true;
-    }
+  @Override
+  public boolean shouldCombineTextures() {
+    return true;
+  }
 }

@@ -20,14 +20,14 @@ import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
 public class AnvilRecipe {
 
   public static void register(
-      RegistryEvent.Register<net.dries007.tfc.api.recipes.anvil.AnvilRecipe> event) {
+          RegistryEvent.Register<net.dries007.tfc.api.recipes.anvil.AnvilRecipe> event) {
     event.getRegistry().registerAll(
-        new net.dries007.tfc.api.recipes.anvil.AnvilRecipe(
-            ModUtils.resource("unfinished_iron_flask"),
-            IIngredient.of(new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, SHEET))),
-            new ItemStack(ItemsDevice.UNFINISHED_FLASK), Metal.WROUGHT_IRON.getTier(), GENERAL,
-            PUNCH_LAST, BEND_SECOND_LAST,
-            BEND_THIRD_LAST)
+            new net.dries007.tfc.api.recipes.anvil.AnvilRecipe(
+                    ModUtils.resource("unfinished_iron_flask"),
+                    IIngredient.of(new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, SHEET))),
+                    new ItemStack(ItemsDevice.UNFINISHED_FLASK), Metal.WROUGHT_IRON.getTier(), GENERAL,
+                    PUNCH_LAST, BEND_SECOND_LAST,
+                    BEND_THIRD_LAST)
     );
   }
 }

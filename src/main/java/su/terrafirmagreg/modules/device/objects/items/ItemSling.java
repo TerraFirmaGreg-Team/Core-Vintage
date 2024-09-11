@@ -81,6 +81,41 @@ public class ItemSling extends BaseItem {
     }
   }
 
+  private ItemStack findAmmo(EntityPlayer player) {
+    if (this.isStone(player.getHeldItem(EnumHand.OFF_HAND))) {
+      return player.getHeldItem(EnumHand.OFF_HAND);
+    } else if (this.isStone(player.getHeldItem(EnumHand.MAIN_HAND))) {
+      return player.getHeldItem(EnumHand.MAIN_HAND);
+    } else {
+      for (int i = 0; i < player.inventory.getSizeInventory(); ++i) {
+        ItemStack itemstack = player.inventory.getStackInSlot(i);
+
+        if (this.isStone(itemstack)) {
+          return itemstack;
+        }
+      }
+
+      return ItemStack.EMPTY;
+    }
+  }
+
+  protected boolean isStone(ItemStack stack) {
+    if (stack.getItem() instanceof ItemRockLoose) {
+      return true;
+    } else if (stack.getItem() instanceof ItemIngot ingot) {
+      return ingot.getMetal(stack) == Metal.UNKNOWN;
+    }
+    return false;
+  }
+
+  public EnumAction getItemUseAction(ItemStack stack) {
+    return EnumAction.BOW;
+  }
+
+  public int getMaxItemUseDuration(ItemStack stack) {
+    return 72000;
+  }
+
   public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving,
           int timeLeft) {
     if (entityLiving instanceof EntityPlayer entityplayer) {
@@ -159,41 +194,6 @@ public class ItemSling extends BaseItem {
     entitySlingStone.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F,
             adjustedVelocity, inaccuracy);
     worldIn.spawnEntity(entitySlingStone);
-  }
-
-  private ItemStack findAmmo(EntityPlayer player) {
-    if (this.isStone(player.getHeldItem(EnumHand.OFF_HAND))) {
-      return player.getHeldItem(EnumHand.OFF_HAND);
-    } else if (this.isStone(player.getHeldItem(EnumHand.MAIN_HAND))) {
-      return player.getHeldItem(EnumHand.MAIN_HAND);
-    } else {
-      for (int i = 0; i < player.inventory.getSizeInventory(); ++i) {
-        ItemStack itemstack = player.inventory.getStackInSlot(i);
-
-        if (this.isStone(itemstack)) {
-          return itemstack;
-        }
-      }
-
-      return ItemStack.EMPTY;
-    }
-  }
-
-  protected boolean isStone(ItemStack stack) {
-    if (stack.getItem() instanceof ItemRockLoose) {
-      return true;
-    } else if (stack.getItem() instanceof ItemIngot ingot) {
-      return ingot.getMetal(stack) == Metal.UNKNOWN;
-    }
-    return false;
-  }
-
-  public int getMaxItemUseDuration(ItemStack stack) {
-    return 72000;
-  }
-
-  public EnumAction getItemUseAction(ItemStack stack) {
-    return EnumAction.BOW;
   }
 
 }

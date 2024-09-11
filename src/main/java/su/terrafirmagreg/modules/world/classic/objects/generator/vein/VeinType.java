@@ -97,11 +97,6 @@ public class VeinType {
     return state.getBlock() instanceof BlockOreTFC blockOre && blockOre.ore == this.getOre();
   }
 
-  public IBlockState getOreState(RockType rock) {
-
-    return OreConfigUtils.getOreForMaterial(rock.getMaterial()).get(BlocksRock.RAW.getStoneType());
-  }
-
   public boolean hasLooseRocks() {
     return !looseRock.isEmpty();
   }
@@ -133,6 +128,11 @@ public class VeinType {
             "%s: {ore=%s, shape=%s, size=%s, rarity=%d, baseRocks=%s, minY=%d, maxY=%d, density=%.2f}",
             name, ore, shape, getWidth(),
             getRarity(), baseRocks, getMinY(), getMaxY(), getDensity());
+  }
+
+  public IBlockState getOreState(RockType rock) {
+
+    return OreConfigUtils.getOreForMaterial(rock.getMaterial()).get(BlocksRock.RAW.getStoneType());
   }
 
   /**

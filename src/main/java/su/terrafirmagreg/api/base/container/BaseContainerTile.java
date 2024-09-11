@@ -42,20 +42,11 @@ public abstract class BaseContainerTile<T extends BaseTileInventory> extends Bas
     addPlayerInventorySlots(playerInv);
   }
 
-  @Override
-  public void detectAndSendChanges() {
-    if (shouldSyncFields) {
-      detectAndSendFieldChanges();
-    }
-    super.detectAndSendChanges();
-  }
+  protected abstract void addContainerSlots();
 
   @Override
-  @SideOnly(Side.CLIENT)
-  public void updateProgressBar(int id, int data) {
-    if (shouldSyncFields) {
-      ((ITileFields) tile).setField(id, data);
-    }
+  protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
+    super.addPlayerInventorySlots(playerInv, yOffset);
   }
 
   @Override
@@ -98,12 +89,29 @@ public abstract class BaseContainerTile<T extends BaseTileInventory> extends Bas
     return tile.canInteractWith(player);
   }
 
-  @Override
-  protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
-    super.addPlayerInventorySlots(playerInv, yOffset);
+  protected boolean transferStackOutOfContainer(ItemStack stack, int containerSlots) {
+    return !mergeItemStack(stack, containerSlots, inventorySlots.size(), true);
   }
 
-  protected abstract void addContainerSlots();
+  protected boolean transferStackIntoContainer(ItemStack stack, int containerSlots) {
+    return !mergeItemStack(stack, 0, containerSlots, false);
+  }
+
+  @Override
+  public void detectAndSendChanges() {
+    if (shouldSyncFields) {
+      detectAndSendFieldChanges();
+    }
+    super.detectAndSendChanges();
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void updateProgressBar(int id, int data) {
+    if (shouldSyncFields) {
+      ((ITileFields) tile).setField(id, data);
+    }
+  }
 
   protected void detectAndSendFieldChanges() {
     ITileFields tileFields = (ITileFields) tile;
@@ -131,13 +139,5 @@ public abstract class BaseContainerTile<T extends BaseTileInventory> extends Bas
         }
       }
     }
-  }
-
-  protected boolean transferStackOutOfContainer(ItemStack stack, int containerSlots) {
-    return !mergeItemStack(stack, containerSlots, inventorySlots.size(), true);
-  }
-
-  protected boolean transferStackIntoContainer(ItemStack stack, int containerSlots) {
-    return !mergeItemStack(stack, 0, containerSlots, false);
   }
 }

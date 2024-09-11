@@ -12,11 +12,11 @@ import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 
 public class RegenWildCrops extends GeneratorWildCrops {
 
-    @Override
-    protected boolean isValidPosition(World world, BlockPos pos) {
-        //Modified to allow replacement of grass during spring regen
-        Block block = world.getBlockState(pos).getBlock();
-        return (block instanceof BlockShortGrassTFC ||
-                block.isAir(world.getBlockState(pos), world, pos) && BlockUtils.isSoil(world.getBlockState(pos.down())));
-    }
+  @Override
+  protected boolean isValidPosition(World world, BlockPos pos) {
+    //Modified to allow replacement of grass during spring regen
+    Block block = world.getBlockState(pos).getBlock();
+    return (block instanceof BlockShortGrassTFC ||
+            block.isAir(world.getBlockState(pos), world, pos) && BlockUtils.isSoil(world.getBlockState(pos.down())));
+  }
 }

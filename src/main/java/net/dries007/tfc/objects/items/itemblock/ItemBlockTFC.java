@@ -14,38 +14,38 @@ import org.jetbrains.annotations.NotNull;
 
 public class ItemBlockTFC extends ItemBlock implements ICapabilitySize {
 
-    private final ICapabilitySize size;
+  private final ICapabilitySize size;
 
-    public ItemBlockTFC(Block block) {
-        this(block, block instanceof ICapabilitySize itemSize ? itemSize : ProviderSize.getDefault());
-    }
+  public ItemBlockTFC(Block block) {
+    this(block, block instanceof ICapabilitySize itemSize ? itemSize : ProviderSize.getDefault());
+  }
 
-    public ItemBlockTFC(Block block, ICapabilitySize size) {
-        super(block);
+  public ItemBlockTFC(Block block, ICapabilitySize size) {
+    super(block);
 
-        this.size = size;
-    }
+    this.size = size;
+  }
 
-    @Override
-    public @NotNull Size getSize(@NotNull ItemStack stack) {
-        return size.getSize(stack);
-    }
+  /**
+   * @see net.dries007.tfc.objects.items.ItemTFC#getItemStackLimit(ItemStack)
+   */
+  @Override
+  public int getItemStackLimit(ItemStack stack) {
+    return getWeight(stack).stackSize;
+  }
 
-    @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack stack) {
-        return size.getWeight(stack);
-    }
+  @Override
+  public @NotNull Weight getWeight(@NotNull ItemStack stack) {
+    return size.getWeight(stack);
+  }
 
-    @Override
-    public boolean canStack(@NotNull ItemStack stack) {
-        return size.canStack(stack);
-    }
+  @Override
+  public @NotNull Size getSize(@NotNull ItemStack stack) {
+    return size.getSize(stack);
+  }
 
-    /**
-     * @see net.dries007.tfc.objects.items.ItemTFC#getItemStackLimit(ItemStack)
-     */
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return getWeight(stack).stackSize;
-    }
+  @Override
+  public boolean canStack(@NotNull ItemStack stack) {
+    return size.canStack(stack);
+  }
 }

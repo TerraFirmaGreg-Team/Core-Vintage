@@ -365,15 +365,21 @@ public class ModelAnimalCamel extends ModelBase {
     frontLegRightTop.addChild(this.frontLegRightMiddle);
   }
 
+  private void setRotation(ModelRenderer model, float x, float y, float z) {
+    model.rotateAngleX = x;
+    model.rotateAngleY = y;
+    model.rotateAngleZ = z;
+  }
+
   @Override
   public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
-      float netHeadYaw, float headPitch, float scale) {
+          float netHeadYaw, float headPitch, float scale) {
     AbstractChestHorse abstractchesthorse = (AbstractChestHorse) entityIn;
     boolean flag1 = !abstractchesthorse.isChild() && abstractchesthorse.hasChest();
     boolean flag2 = !abstractchesthorse.isChild() && abstractchesthorse.isHorseSaddled();
     boolean flag3 = !abstractchesthorse.isChild() && abstractchesthorse.isBeingRidden();
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-        entityIn);
+            entityIn);
 
     if (((EntityAnimal) entityIn).isChild()) {
       double ageScale = 1;
@@ -462,7 +468,7 @@ public class ModelAnimalCamel extends ModelBase {
         strapBellyLeftAngle.isHidden = true;
       }
     } else if (abstractchesthorse instanceof EntityAnimalCamel
-        && ((EntityAnimalCamel) abstractchesthorse).isHalter()) {
+            && ((EntityAnimalCamel) abstractchesthorse).isHalter()) {
       bridleFront1.isHidden = false;
       bridleFront2.isHidden = false;
       bridleBack1.isHidden = false;
@@ -484,29 +490,29 @@ public class ModelAnimalCamel extends ModelBase {
 
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,
-      Entity entity) {
+          Entity entity) {
     head.rotateAngleX = f4 / (180F / MathConstants.PI);
     head.rotateAngleY = f3 / (180F / MathConstants.PI);
 
     frontLegRightTop.rotateAngleX = MathHelper.cos(f * 0.4662F) * 1.0F * f1 + 0.13962634015954636F;
     frontLegLeftTop.rotateAngleX =
-        MathHelper.cos(f * 0.4662F + MathConstants.PI) * 1.0F * f1 + 0.13962634015954636F;
+            MathHelper.cos(f * 0.4662F + MathConstants.PI) * 1.0F * f1 + 0.13962634015954636F;
     backLegLeftTop.rotateAngleX =
-        MathHelper.cos(f * 0.4662F + MathConstants.PI) * 1.0F * f1 + -0.10471975511965977F;
+            MathHelper.cos(f * 0.4662F + MathConstants.PI) * 1.0F * f1 + -0.10471975511965977F;
     backLegRightTop.rotateAngleX = MathHelper.cos(f * 0.4662F) * 1.0F * f1 + -0.10471975511965977F;
   }
 
   @Override
   public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing,
-      float limbSwingAmount, float partialTickTime) {
+          float limbSwingAmount, float partialTickTime) {
     super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
     float f = this.updateHorseRotation(entitylivingbaseIn.prevRenderYawOffset,
-        entitylivingbaseIn.renderYawOffset, partialTickTime);
+            entitylivingbaseIn.renderYawOffset, partialTickTime);
     float f1 = this.updateHorseRotation(entitylivingbaseIn.prevRotationYawHead,
-        entitylivingbaseIn.rotationYawHead, partialTickTime);
+            entitylivingbaseIn.rotationYawHead, partialTickTime);
     float f2 = entitylivingbaseIn.prevRotationPitch
-        + (entitylivingbaseIn.rotationPitch - entitylivingbaseIn.prevRotationPitch)
-        * partialTickTime;
+            + (entitylivingbaseIn.rotationPitch - entitylivingbaseIn.prevRotationPitch)
+            * partialTickTime;
     float f3 = f1 - f;
     float f4 = f2 * 0.017453292F;
 
@@ -542,11 +548,5 @@ public class ModelAnimalCamel extends ModelBase {
     }
 
     return f1 + f3 * f;
-  }
-
-  private void setRotation(ModelRenderer model, float x, float y, float z) {
-    model.rotateAngleX = x;
-    model.rotateAngleY = y;
-    model.rotateAngleZ = z;
   }
 }

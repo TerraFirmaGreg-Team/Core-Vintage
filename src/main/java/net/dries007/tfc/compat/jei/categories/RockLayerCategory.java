@@ -19,26 +19,28 @@ import java.util.List;
 
 public class RockLayerCategory extends BaseRecipeCategory<RockLayerWrapper> {
 
-    private static final ResourceLocation BACKGROUND = new ResourceLocation(Constants.MODID_TFC, "textures/gui/jei_rocklayer.png");
+  private static final ResourceLocation BACKGROUND = new ResourceLocation(Constants.MODID_TFC, "textures/gui/jei_rocklayer.png");
 
-    public RockLayerCategory(IGuiHelper helper, String Uid) {
-        super(new BackgroundDrawable(BACKGROUND, 164, 110), Uid);
+  public RockLayerCategory(IGuiHelper helper, String Uid) {
+    super(new BackgroundDrawable(BACKGROUND, 164, 110), Uid);
+  }
+
+  @Override
+  public void setRecipe(IRecipeLayout recipeLayout, RockLayerWrapper recipeWrapper, IIngredients ingredients) {
+    IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
+    itemStackGroup.init(0, true, 73, 5);
+    itemStackGroup.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
+
+    int slot = 1;
+    for (List<ItemStack> oreStacks : ingredients.getOutputs(VanillaTypes.ITEM)) {
+      if (slot > 27) {
+        break; // Avoid overflow
+      }
+      int x = 1 + ((slot - 1) % 9) * 18;
+      int y = 55 + ((slot - 1) / 9) * 18;
+      itemStackGroup.init(slot, false, x, y);
+      itemStackGroup.set(slot, oreStacks);
+      slot++;
     }
-
-    @Override
-    public void setRecipe(IRecipeLayout recipeLayout, RockLayerWrapper recipeWrapper, IIngredients ingredients) {
-        IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
-        itemStackGroup.init(0, true, 73, 5);
-        itemStackGroup.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
-
-        int slot = 1;
-        for (List<ItemStack> oreStacks : ingredients.getOutputs(VanillaTypes.ITEM)) {
-            if (slot > 27) break; // Avoid overflow
-            int x = 1 + ((slot - 1) % 9) * 18;
-            int y = 55 + ((slot - 1) / 9) * 18;
-            itemStackGroup.init(slot, false, x, y);
-            itemStackGroup.set(slot, oreStacks);
-            slot++;
-        }
-    }
+  }
 }

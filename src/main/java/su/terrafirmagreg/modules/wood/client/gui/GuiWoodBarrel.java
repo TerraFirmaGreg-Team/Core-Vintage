@@ -6,8 +6,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
 import su.terrafirmagreg.modules.wood.ModuleWood;
 import su.terrafirmagreg.modules.wood.client.button.GuiButtonBarrelSeal;
-import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodBarrel;
-import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodBarrel;
+import su.terrafirmagreg.modules.wood.object.container.ContainerWoodBarrel;
+import su.terrafirmagreg.modules.wood.object.tile.TileWoodBarrel;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

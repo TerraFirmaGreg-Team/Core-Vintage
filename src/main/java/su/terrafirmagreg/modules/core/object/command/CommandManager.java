@@ -30,13 +30,13 @@ public class CommandManager extends BaseCommandTree {
   }
 
   @Override
-  public List<String> getAliases() {
-    return Lists.newArrayList("tfg");
+  public String getUsage(ICommandSender sender) {
+    return ModUtils.localize("command", "usage");
   }
 
   @Override
-  public String getUsage(ICommandSender sender) {
-    return ModUtils.localize("command", "usage");
+  public List<String> getAliases() {
+    return Lists.newArrayList("tfg");
   }
 
   public void addCommand(ICommand command) {

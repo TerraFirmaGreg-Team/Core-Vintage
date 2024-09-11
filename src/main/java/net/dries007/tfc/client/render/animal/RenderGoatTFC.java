@@ -15,10 +15,10 @@ import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class RenderGoatTFC extends RenderAnimalTFC<EntityGoatTFC> {
 
-    private static final ResourceLocation GOAT_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/goat_old.png");
-    private static final ResourceLocation GOAT_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/goat_young.png");
+  private static final ResourceLocation GOAT_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/goat_old.png");
+  private static final ResourceLocation GOAT_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/goat_young.png");
 
-    public RenderGoatTFC(RenderManager renderManager) {
-        super(renderManager, new ModelGoatTFC(), 0.7F, GOAT_YOUNG, GOAT_OLD);
-    }
+  public RenderGoatTFC(RenderManager renderManager) {
+    super(renderManager, new ModelGoatTFC(), 0.7F, GOAT_YOUNG, GOAT_OLD);
+  }
 }

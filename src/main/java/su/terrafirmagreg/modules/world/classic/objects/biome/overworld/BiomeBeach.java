@@ -8,9 +8,9 @@ public class BiomeBeach extends BaseBiome {
 
   public BiomeBeach() {
     super(new Settings("Beach")
-        .guiColour(0xC7A03B)
-        .baseHeight(-1.69f)
-        .heightVariation(-2.68f));
+            .guiColour(0xC7A03B)
+            .baseHeight(-1.69f)
+            .heightVariation(-2.68f));
   }
 
   @Override
@@ -22,7 +22,7 @@ public class BiomeBeach extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-        BiomeDictionary.Type.BEACH
+            BiomeDictionary.Type.BEACH
     };
   }
 }

@@ -34,115 +34,115 @@ import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public class EntityPigTFC extends EntityAnimalMammal implements ILivestock {
 
-    @SuppressWarnings("unused")
-    public EntityPigTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.PIG.adulthood, ConfigTFC.Animals.PIG.elder));
-    }
+  @SuppressWarnings("unused")
+  public EntityPigTFC(World worldIn) {
+    this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.PIG.adulthood, ConfigTFC.Animals.PIG.elder));
+  }
 
-    public EntityPigTFC(World worldIn, Gender gender, int birthDay) {
-        super(worldIn, gender, birthDay);
-        setSize(0.9F, 0.9F);
-    }
+  public EntityPigTFC(World worldIn, Gender gender, int birthDay) {
+    super(worldIn, gender, birthDay);
+    setSize(0.9F, 0.9F);
+  }
 
-    @Override
-    public double getOldDeathChance() {
-        return ConfigTFC.Animals.PIG.oldDeathChance;
-    }
+  @Override
+  public double getOldDeathChance() {
+    return ConfigTFC.Animals.PIG.oldDeathChance;
+  }
 
-    @Override
-    public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-        BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
-        if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-                (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
-            return ConfigTFC.Animals.PIG.rarity;
-        }
-        return 0;
+  @Override
+  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
+    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+            (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
+      return ConfigTFC.Animals.PIG.rarity;
     }
+    return 0;
+  }
 
-    @Override
-    public BiConsumer<List<EntityLiving>, Random> getGroupingRules() {
-        return AnimalGroupingRules.MALE_AND_FEMALES;
+  @Override
+  public BiConsumer<List<EntityLiving>, Random> getGroupingRules() {
+    return AnimalGroupingRules.MALE_AND_FEMALES;
+  }
+
+  @Override
+  public int getMinGroupSize() {
+    return 4;
+  }
+
+  @Override
+  public int getMaxGroupSize() {
+    return 5;
+  }
+
+  @Override
+  public long gestationDays() {
+    return ConfigTFC.Animals.PIG.gestation;
+  }
+
+  @Override
+  public void birthChildren() {
+    int numberOfChildren = ConfigTFC.Animals.PIG.babies;
+    for (int i = 0; i < numberOfChildren; i++) {
+      EntityPigTFC baby = new EntityPigTFC(world, Gender.valueOf(RNG.nextBoolean()),
+              (int) Calendar.PLAYER_TIME.getTotalDays());
+      baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
+      baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
+      world.spawnEntity(baby);
     }
+  }
 
-    @Override
-    public int getMinGroupSize() {
-        return 4;
-    }
+  @Override
+  public float getAdultFamiliarityCap() {
+    return 0.35F;
+  }
 
-    @Override
-    public int getMaxGroupSize() {
-        return 5;
-    }
+  @Override
+  public int getDaysToAdulthood() {
+    return ConfigTFC.Animals.PIG.adulthood;
+  }
 
-    @Override
-    public void birthChildren() {
-        int numberOfChildren = ConfigTFC.Animals.PIG.babies;
-        for (int i = 0; i < numberOfChildren; i++) {
-            EntityPigTFC baby = new EntityPigTFC(world, Gender.valueOf(RNG.nextBoolean()),
-                    (int) Calendar.PLAYER_TIME.getTotalDays());
-            baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
-            baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
-            world.spawnEntity(baby);
-        }
-    }
+  @Override
+  public int getDaysToElderly() {
+    return ConfigTFC.Animals.PIG.elder;
+  }
 
-    @Override
-    public long gestationDays() {
-        return ConfigTFC.Animals.PIG.gestation;
-    }
+  @Override
+  protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    return SoundEvents.ENTITY_PIG_HURT;
+  }
 
-    @Override
-    public float getAdultFamiliarityCap() {
-        return 0.35F;
-    }
+  @Override
+  protected SoundEvent getDeathSound() {
+    return SoundEvents.ENTITY_PIG_DEATH;
+  }
 
-    @Override
-    public int getDaysToAdulthood() {
-        return ConfigTFC.Animals.PIG.adulthood;
-    }
+  @Override
+  protected void initEntityAI() {
+    EntityAnimalBase.addCommonLivestockAI(this, 1.3D);
+    EntityAnimalBase.addCommonPreyAI(this, 1.3D);
 
-    @Override
-    public int getDaysToElderly() {
-        return ConfigTFC.Animals.PIG.elder;
-    }
+    tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
+  }
 
-    @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundEvents.ENTITY_PIG_HURT;
-    }
+  @Override
+  protected void applyEntityAttributes() {
+    super.applyEntityAttributes();
+    getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
+  }
 
-    @Override
-    protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_PIG_DEATH;
-    }
+  @Override
+  protected SoundEvent getAmbientSound() {
+    return SoundEvents.ENTITY_PIG_AMBIENT;
+  }
 
-    @Override
-    protected void initEntityAI() {
-        EntityAnimalBase.addCommonLivestockAI(this, 1.3D);
-        EntityAnimalBase.addCommonPreyAI(this, 1.3D);
+  @Nullable
+  protected ResourceLocation getLootTable() {
+    return LootTablesAnimal.ANIMALS_PIG;
+  }
 
-        tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
-    }
-
-    @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
-        getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
-    }
-
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_PIG_AMBIENT;
-    }
-
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return LootTablesAnimal.ANIMALS_PIG;
-    }
-
-    @Override
-    protected void playStepSound(BlockPos pos, Block blockIn) {
-        playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
-    }
+  @Override
+  protected void playStepSound(BlockPos pos, Block blockIn) {
+    playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
+  }
 }

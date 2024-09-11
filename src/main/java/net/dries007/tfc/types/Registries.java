@@ -99,18 +99,18 @@ public final class Registries {
     newRegistry(STRAINING_RECIPE, StrainingRecipe.class, false);
   }
 
+  private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass, boolean isPreBlockRegistry) {
+    IForgeRegistry<T> reg = new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
+    if (isPreBlockRegistry) {
+      preBlockRegistries.put(name, reg);
+    }
+  }
+
   /**
    * Danger: dirty hack.
    */
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onRegisterBlock(RegistryEvent.Register<Block> event) {
     preBlockRegistries.forEach((e, r) -> MinecraftForge.EVENT_BUS.post(new TFCRegistryEvent.RegisterPreBlock<>(e, r)));
-  }
-
-  private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass, boolean isPreBlockRegistry) {
-    IForgeRegistry<T> reg = new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
-    if (isPreBlockRegistry) {
-      preBlockRegistries.put(name, reg);
-    }
   }
 }

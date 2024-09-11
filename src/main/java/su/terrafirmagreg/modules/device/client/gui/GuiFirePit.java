@@ -71,6 +71,22 @@ public class GuiFirePit extends BaseGuiContainerTile<TileFirePit> {
     }
   }
 
+  protected void drawBackground() {
+    GlStateManager.color(1, 1, 1, 1);
+    switch (attachment) {
+      case NONE:
+        mc.getTextureManager().bindTexture(FIRE_PIT_BACKGROUND);
+        break;
+      case COOKING_POT:
+        mc.getTextureManager().bindTexture(FIRE_PIT_COOKING_POT_BACKGROUND);
+        break;
+      case GRILL:
+        mc.getTextureManager().bindTexture(FIRE_PIT_GRILL_BACKGROUND);
+        break;
+    }
+    drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+  }
+
   @Override
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
     super.drawGuiContainerForegroundLayer(mouseX, mouseY);
@@ -88,21 +104,5 @@ public class GuiFirePit extends BaseGuiContainerTile<TileFirePit> {
         GL11.glEnable(GL11.GL_DEPTH_TEST);
       }
     }
-  }
-
-  protected void drawBackground() {
-    GlStateManager.color(1, 1, 1, 1);
-    switch (attachment) {
-      case NONE:
-        mc.getTextureManager().bindTexture(FIRE_PIT_BACKGROUND);
-        break;
-      case COOKING_POT:
-        mc.getTextureManager().bindTexture(FIRE_PIT_COOKING_POT_BACKGROUND);
-        break;
-      case GRILL:
-        mc.getTextureManager().bindTexture(FIRE_PIT_GRILL_BACKGROUND);
-        break;
-    }
-    drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
   }
 }

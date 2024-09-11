@@ -43,6 +43,13 @@ public class TileBearTrap extends BaseTile {
   }
 
   @Override
+  public void readFromNBT(NBTTagCompound nbt) {
+    this.open = nbt.getBoolean("open");
+    this.capturedId = nbt.getUniqueId("capturedId");
+    super.readFromNBT(nbt);
+  }
+
+  @Override
   public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
     NBTUtils.setGenericNBTValue(nbt, "open", open);
     if (this.capturedEntity != null) {
@@ -51,19 +58,22 @@ public class TileBearTrap extends BaseTile {
     return super.writeToNBT(nbt);
   }
 
-  @Override
-  public void readFromNBT(NBTTagCompound nbt) {
-    this.open = nbt.getBoolean("open");
-    this.capturedId = nbt.getUniqueId("capturedId");
-    super.readFromNBT(nbt);
+  public void setOpen(boolean isOpen) {
+    this.open = isOpen;
+    sendUpdates();
   }
 
   protected void sendUpdates() {
     this.world.markBlockRangeForRenderUpdate(pos, pos);
     this.world.notifyBlockUpdate(pos, this.world.getBlockState(pos), this.world.getBlockState(pos),
-        3);
+            3);
     this.world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
     markDirty();
+  }
+
+  public EntityLivingBase getCapturedEntity() {
+    readCapturedEntity();
+    return this.capturedEntity;
   }
 
   private void readCapturedEntity() {
@@ -79,16 +89,6 @@ public class TileBearTrap extends BaseTile {
         }
       }
     }
-  }
-
-  public void setOpen(boolean isOpen) {
-    this.open = isOpen;
-    sendUpdates();
-  }
-
-  public EntityLivingBase getCapturedEntity() {
-    readCapturedEntity();
-    return this.capturedEntity;
   }
 
   public void setCapturedEntity(@Nullable EntityLivingBase entity) {

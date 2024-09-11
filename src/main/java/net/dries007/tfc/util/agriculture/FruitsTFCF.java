@@ -14,7 +14,7 @@ import static net.dries007.tfc.util.agriculture.FoodDataTFCF.DRIED_FRUIT_DECAY;
  * This is an easy way to wrap all the TFC fruits with our data
  */
 public enum FruitsTFCF {
-    // TFC Foods
+  // TFC Foods
     /*
     BANANA(ItemFoodTFC.get(Food.BANANA), true, DRIED_FRUIT_DECAY, true),
     BLACKBERRY(ItemFoodTFC.get(Food.BLACKBERRY), true, DRIED_FRUIT_CATEGORY, true),
@@ -104,42 +104,42 @@ public enum FruitsTFCF {
     VANILLA(ItemFoodTFCF.get(ItemsTFCF.VANILLA), true, DRIED_FRUIT_DECAY, false),
     */
 
-    // Normal Tree Fruits
-    BAOBAB_FRUIT(ItemFoodTFCF.get(ItemsTFCF.BAOBAB_FRUIT), true, DRIED_FRUIT_DECAY, false),
-    BARREL_CACTUS_FRUIT(ItemFoodTFCF.get(ItemsTFCF.BARREL_CACTUS_FRUIT), true, DRIED_FRUIT_DECAY, false),
-    HAWTHORN(ItemFoodTFCF.get(ItemsTFCF.HAWTHORN), true, DRIED_FRUIT_DECAY, false),
-    OSAGE_ORANGE(ItemFoodTFCF.get(ItemsTFCF.OSAGE_ORANGE), true, DRIED_FRUIT_DECAY, false),
-    PINK_IVORY_DRUPE(ItemFoodTFCF.get(ItemsTFCF.PINK_IVORY_DRUPE), true, DRIED_FRUIT_DECAY, false),
-    RIBERRY(ItemFoodTFCF.get(ItemsTFCF.RIBERRY), true, DRIED_FRUIT_DECAY, false),
-    ROWAN_BERRY(ItemFoodTFCF.get(ItemsTFCF.ROWAN_BERRY), true, DRIED_FRUIT_DECAY, false),
-    SKY_FRUIT(ItemFoodTFCF.get(ItemsTFCF.SKY_FRUIT), true, DRIED_FRUIT_DECAY, false),
-    YEW_BERRY(ItemFoodTFCF.get(ItemsTFCF.YEW_BERRY), true, DRIED_FRUIT_DECAY, false),
+  // Normal Tree Fruits
+  BAOBAB_FRUIT(ItemFoodTFCF.get(ItemsTFCF.BAOBAB_FRUIT), true, DRIED_FRUIT_DECAY, false),
+  BARREL_CACTUS_FRUIT(ItemFoodTFCF.get(ItemsTFCF.BARREL_CACTUS_FRUIT), true, DRIED_FRUIT_DECAY, false),
+  HAWTHORN(ItemFoodTFCF.get(ItemsTFCF.HAWTHORN), true, DRIED_FRUIT_DECAY, false),
+  OSAGE_ORANGE(ItemFoodTFCF.get(ItemsTFCF.OSAGE_ORANGE), true, DRIED_FRUIT_DECAY, false),
+  PINK_IVORY_DRUPE(ItemFoodTFCF.get(ItemsTFCF.PINK_IVORY_DRUPE), true, DRIED_FRUIT_DECAY, false),
+  RIBERRY(ItemFoodTFCF.get(ItemsTFCF.RIBERRY), true, DRIED_FRUIT_DECAY, false),
+  ROWAN_BERRY(ItemFoodTFCF.get(ItemsTFCF.ROWAN_BERRY), true, DRIED_FRUIT_DECAY, false),
+  SKY_FRUIT(ItemFoodTFCF.get(ItemsTFCF.SKY_FRUIT), true, DRIED_FRUIT_DECAY, false),
+  YEW_BERRY(ItemFoodTFCF.get(ItemsTFCF.YEW_BERRY), true, DRIED_FRUIT_DECAY, false),
 
-    // Crop Foods
-    GREEN_GRAPE(ItemFoodTFCF.get(ItemsTFCF.GREEN_GRAPE), true, DRIED_FRUIT_DECAY, false),
-    PURPLE_GRAPE(ItemFoodTFCF.get(ItemsTFCF.PURPLE_GRAPE), true, DRIED_FRUIT_DECAY, false);
+  // Crop Foods
+  GREEN_GRAPE(ItemFoodTFCF.get(ItemsTFCF.GREEN_GRAPE), true, DRIED_FRUIT_DECAY, false),
+  PURPLE_GRAPE(ItemFoodTFCF.get(ItemsTFCF.PURPLE_GRAPE), true, DRIED_FRUIT_DECAY, false);
 
-    public final boolean isVanillaFood;
-    private final Item fruit;
-    private final boolean dry;
-    private final FoodData driedData;
+  public final boolean isVanillaFood;
+  private final Item fruit;
+  private final boolean dry;
+  private final FoodData driedData;
 
-    FruitsTFCF(Item fruit, boolean dry, FoodData driedData, boolean isVanillaFood) {
-        this.fruit = fruit;
-        this.dry = dry;
-        this.driedData = driedData;
-        this.isVanillaFood = isVanillaFood;
-    }
+  FruitsTFCF(Item fruit, boolean dry, FoodData driedData, boolean isVanillaFood) {
+    this.fruit = fruit;
+    this.dry = dry;
+    this.driedData = driedData;
+    this.isVanillaFood = isVanillaFood;
+  }
 
-    public Item getFruit() {
-        return this.fruit;
-    }
+  public Item getFruit() {
+    return this.fruit;
+  }
 
-    public boolean canDry() {
-        return this.dry;
-    }
+  public boolean canDry() {
+    return this.dry;
+  }
 
-    public FoodData getDriedData() {
-        return this.driedData;
-    }
+  public FoodData getDriedData() {
+    return this.driedData;
+  }
 }

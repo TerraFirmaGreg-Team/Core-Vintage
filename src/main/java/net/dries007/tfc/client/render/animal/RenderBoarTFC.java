@@ -18,18 +18,20 @@ import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class RenderBoarTFC extends RenderLiving<EntityBoarTFC> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/boar.png");
+  private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/boar.png");
 
-    public RenderBoarTFC(RenderManager renderManager) {super(renderManager, new ModelBoarTFC(), 0.7F);}
+  public RenderBoarTFC(RenderManager renderManager) {
+    super(renderManager, new ModelBoarTFC(), 0.7F);
+  }
 
-    @Override
-    public void doRender(@NotNull EntityBoarTFC hog, double par2, double par4, double par6, float par8, float par9) {
-        this.shadowSize = (float) (0.35f + (hog.getPercentToAdulthood() * 0.35f));
-        super.doRender(hog, par2, par4, par6, par8, par9);
-    }
+  @Override
+  public void doRender(@NotNull EntityBoarTFC hog, double par2, double par4, double par6, float par8, float par9) {
+    this.shadowSize = (float) (0.35f + (hog.getPercentToAdulthood() * 0.35f));
+    super.doRender(hog, par2, par4, par6, par8, par9);
+  }
 
-    @Override
-    protected ResourceLocation getEntityTexture(EntityBoarTFC entity) {
-        return TEXTURE;
-    }
+  @Override
+  protected ResourceLocation getEntityTexture(EntityBoarTFC entity) {
+    return TEXTURE;
+  }
 }

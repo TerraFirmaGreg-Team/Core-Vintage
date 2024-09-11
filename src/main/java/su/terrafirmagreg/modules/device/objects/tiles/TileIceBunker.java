@@ -236,36 +236,14 @@ public class TileIceBunker extends TileEntityLockableLoot
     world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
   }
 
-  private float doorsLossMult() {
-    float loss = 0;
-
-    int posX = pos.getX() + entrance[0];
-    int posY = pos.getY() + 1;
-    int posZ = pos.getZ() + entrance[1];
-
-    //1st door
-    Block door = world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock();
-    if (door == BlocksDevice.CELLAR_DOOR && BlockDoor.isOpen(world,
-            new BlockPos(posX, posY, posZ))) {
-
-      loss = 0.05f;
+  public void updateContainers() {
+    for (int y = 1; y <= 2; y++) {
+      for (int z = -size[2]; z <= size[0]; z++) {
+        for (int x = -size[1]; x <= size[3]; x++) {
+          updateContainer(x, y, z);
+        }
+      }
     }
-
-    //2nd door
-    //Does it even exist?
-    if (!hasAirlock) {
-      return loss * 8 + 0.3f;
-    }
-
-    door = world.getBlockState(new BlockPos(posX + entrance[2], posY, posZ + entrance[3]))
-            .getBlock();
-    if (door == BlocksDevice.CELLAR_DOOR && BlockDoor.isOpen(world,
-            new BlockPos(posX + entrance[2], posY, posZ + entrance[3]))) {
-
-      return loss * 13 + 0.05f;
-    }
-
-    return loss;
   }
 
   private boolean isStructureComplete() {
@@ -441,6 +419,52 @@ public class TileIceBunker extends TileEntityLockableLoot
     return true;
   }
 
+  private float doorsLossMult() {
+    float loss = 0;
+
+    int posX = pos.getX() + entrance[0];
+    int posY = pos.getY() + 1;
+    int posZ = pos.getZ() + entrance[1];
+
+    //1st door
+    Block door = world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock();
+    if (door == BlocksDevice.CELLAR_DOOR && BlockDoor.isOpen(world,
+            new BlockPos(posX, posY, posZ))) {
+
+      loss = 0.05f;
+    }
+
+    //2nd door
+    //Does it even exist?
+    if (!hasAirlock) {
+      return loss * 8 + 0.3f;
+    }
+
+    door = world.getBlockState(new BlockPos(posX + entrance[2], posY, posZ + entrance[3]))
+            .getBlock();
+    if (door == BlocksDevice.CELLAR_DOOR && BlockDoor.isOpen(world,
+            new BlockPos(posX + entrance[2], posY, posZ + entrance[3]))) {
+
+      return loss * 13 + 0.05f;
+    }
+
+    return loss;
+  }
+
+  private void updateContainer(int x, int y, int z) {
+    Block block = world.getBlockState(
+                    new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z))
+            .getBlock();
+    if (block instanceof BlockCellarShelf) {
+      TileEntity tileEntity = world.getTileEntity(
+              new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
+      if (tileEntity != null) {
+        ((TileCellarShelf) tileEntity).updateShelf(temperature);
+      }
+
+    }
+  }
+
   private int getBlockType(int x, int y, int z) {
     Block block = world.getBlockState(
             new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z)).getBlock();
@@ -466,48 +490,19 @@ public class TileIceBunker extends TileEntityLockableLoot
     return -1;
   }
 
-  public void updateContainers() {
-    for (int y = 1; y <= 2; y++) {
-      for (int z = -size[2]; z <= size[0]; z++) {
-        for (int x = -size[1]; x <= size[3]; x++) {
-          updateContainer(x, y, z);
-        }
-      }
-    }
-  }
-
-  private void updateContainer(int x, int y, int z) {
-    Block block = world.getBlockState(
-                    new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z))
-            .getBlock();
-    if (block instanceof BlockCellarShelf) {
-      TileEntity tileEntity = world.getTileEntity(
-              new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
-      if (tileEntity != null) {
-        ((TileCellarShelf) tileEntity).updateShelf(temperature);
-      }
-
-    }
-  }
-
-  @Override
-  public int getSizeInventory() {
-    return 4;
-  }
-
-  @Override
-  public boolean isEmpty() {
-    for (ItemStack stack : this.chestContents) {
-      if (stack.isEmpty()) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   @Override
   public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
     return true;
+  }
+
+  @Override
+  public void openInventory(@NotNull EntityPlayer entityPlayer) {
+    this.world.notifyNeighborsOfStateChange(pos, this.getBlockType(), false);
+  }
+
+  @Override
+  public void closeInventory(@NotNull EntityPlayer player) {
+    this.world.notifyNeighborsOfStateChange(pos, this.getBlockType(), false);
   }
 
   @Override
@@ -515,13 +510,29 @@ public class TileIceBunker extends TileEntityLockableLoot
     return true;
   }
 
+  @Override
+  protected @NotNull NonNullList<ItemStack> getItems() {
+    return this.chestContents;
+  }
+
+  @Nullable
+  @Override
+  public SPacketUpdateTileEntity getUpdatePacket() {
+    NBTTagCompound nbt = new NBTTagCompound();
+    writeToNBT(nbt);
+    writeSyncData(nbt);
+    return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
+  }
+
   private void writeSyncData(NBTTagCompound nbt) {
     float temp = (error == 0) ? temperature : (-1 * error * 1000);
     NBTUtils.setGenericNBTValue(nbt, "Temperature", temp);
   }
 
-  private void readSyncData(NBTTagCompound nbt) {
-    temperature = nbt.getFloat("Temperature");
+  @Override
+  public void onDataPacket(@NotNull NetworkManager net, SPacketUpdateTileEntity packet) {
+    readFromNBT(packet.getNbtCompound());
+    readSyncData(packet.getNbtCompound());
   }
 
   @Override
@@ -545,6 +556,30 @@ public class TileIceBunker extends TileEntityLockableLoot
     iceTemp = nbt.getFloat("iceTemp");
     dryIce = nbt.getBoolean("dryIce");
     seaIce = nbt.getBoolean("seaIce");
+  }
+
+  private void readSyncData(NBTTagCompound nbt) {
+    temperature = nbt.getFloat("Temperature");
+  }
+
+  @Override
+  public int getSizeInventory() {
+    return 4;
+  }
+
+  @Override
+  public boolean isEmpty() {
+    for (ItemStack stack : this.chestContents) {
+      if (stack.isEmpty()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  @Override
+  public int getInventoryStackLimit() {
+    return 64;
   }
 
   @Override
@@ -571,21 +606,6 @@ public class TileIceBunker extends TileEntityLockableLoot
   }
 
   @Override
-  public void onDataPacket(@NotNull NetworkManager net, SPacketUpdateTileEntity packet) {
-    readFromNBT(packet.getNbtCompound());
-    readSyncData(packet.getNbtCompound());
-  }
-
-  @Nullable
-  @Override
-  public SPacketUpdateTileEntity getUpdatePacket() {
-    NBTTagCompound nbt = new NBTTagCompound();
-    writeToNBT(nbt);
-    writeSyncData(nbt);
-    return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
-  }
-
-  @Override
   public String getName() {
     return this.hasCustomName() ? this.customName : "container.ice_bunker";
   }
@@ -601,45 +621,12 @@ public class TileIceBunker extends TileEntityLockableLoot
     return MODID_CELLARS + "ice_bunker";
   }
 
-  @Override
-  public int getInventoryStackLimit() {
-    return 64;
-  }
-
-  @Override
-  protected @NotNull NonNullList<ItemStack> getItems() {
-    return this.chestContents;
-  }
-
-  @Override
-  public void openInventory(@NotNull EntityPlayer entityPlayer) {
-    this.world.notifyNeighborsOfStateChange(pos, this.getBlockType(), false);
-  }
-
-  @Override
-  public void closeInventory(@NotNull EntityPlayer player) {
-    this.world.notifyNeighborsOfStateChange(pos, this.getBlockType(), false);
-  }
-
   public int getCoolant() {
     return coolantAmount;
   }
 
   public float getCoolantRate() {
     return coolantRate / 100.0F;
-  }
-
-  @Override
-  public ContainerIceBunker getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
-    return new ContainerIceBunker(inventoryPlayer, this, inventoryPlayer.player);
-  }
-
-  @Override
-  public GuiIceBunker getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
-    return new GuiIceBunker(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-            this);
   }
 
   @Override
@@ -661,4 +648,19 @@ public class TileIceBunker extends TileEntityLockableLoot
 
     return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
   }
+
+  @Override
+  public ContainerIceBunker getContainer(InventoryPlayer inventoryPlayer, World world,
+          IBlockState state, BlockPos pos) {
+    return new ContainerIceBunker(inventoryPlayer, this, inventoryPlayer.player);
+  }
+
+  @Override
+  public GuiIceBunker getGuiContainer(InventoryPlayer inventoryPlayer, World world,
+          IBlockState state, BlockPos pos) {
+    return new GuiIceBunker(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
+            this);
+  }
+
+
 }

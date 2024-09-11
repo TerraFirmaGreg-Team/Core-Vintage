@@ -24,7 +24,7 @@ import java.util.Map;
 public class ProviderPlayer implements ICapabilityPlayer, ICapabilitySerializable<NBTTagCompound> {
 
   public static final int MAX_INTOXICATED_TICKS =
-      36 * ICalendar.TICKS_IN_HOUR; // A day and a half. Each drink gives you 4 hours of time
+          36 * ICalendar.TICKS_IN_HOUR; // A day and a half. Each drink gives you 4 hours of time
 
   private final Map<String, Skill> skills;
   private final EntityPlayer player;
@@ -77,12 +77,6 @@ public class ProviderPlayer implements ICapabilityPlayer, ICapabilitySerializabl
   @SuppressWarnings("unchecked")
   public <S extends Skill> S getSkill(SkillType<S> skillType) {
     return (S) skills.get(skillType.getName());
-  }
-
-  @NotNull
-  @Override
-  public EntityPlayer getPlayer() {
-    return player;
   }
 
   @NotNull
@@ -142,6 +136,12 @@ public class ProviderPlayer implements ICapabilityPlayer, ICapabilitySerializabl
   @Override
   public int getNutDistance(BlockPos pos) {
     return (int) Math.sqrt(nutPosition.distanceSq(pos));
+  }
+
+  @NotNull
+  @Override
+  public EntityPlayer getPlayer() {
+    return player;
   }
 
   @Override

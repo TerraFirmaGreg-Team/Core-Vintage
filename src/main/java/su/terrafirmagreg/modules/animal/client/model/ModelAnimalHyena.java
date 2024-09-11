@@ -238,12 +238,18 @@ public class ModelAnimalHyena extends ModelBase {
     backLeftLegBottom.addChild(backLeftPaw);
   }
 
+  private void setRotation(ModelRenderer model, float x, float y, float z) {
+    model.rotateAngleX = x;
+    model.rotateAngleY = y;
+    model.rotateAngleZ = z;
+  }
+
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount,
-      float ageInTicks, float netHeadYaw, float headPitch,
-      float scale) {
+          float ageInTicks, float netHeadYaw, float headPitch,
+          float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-        entity);
+            entity);
 
     if (((EntityAnimal) entity).isChild()) {
       double ageScale = 1;
@@ -272,7 +278,7 @@ public class ModelAnimalHyena extends ModelBase {
 
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,
-      Entity entity) {
+          Entity entity) {
     head.rotateAngleX = f4 / (180F / MathConstants.PI);
     head.rotateAngleY = f3 / (180F / MathConstants.PI);
 
@@ -280,11 +286,5 @@ public class ModelAnimalHyena extends ModelBase {
     frontLeftLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1;
     backRightLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1;
     backLeftLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
-  }
-
-  private void setRotation(ModelRenderer model, float x, float y, float z) {
-    model.rotateAngleX = x;
-    model.rotateAngleY = y;
-    model.rotateAngleZ = z;
   }
 }

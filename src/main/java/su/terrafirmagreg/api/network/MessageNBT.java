@@ -10,7 +10,13 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 
 public abstract class MessageNBT<REQ extends MessageNBT> implements IMessage,
-    IMessageHandler<REQ, IMessage> {
+        IMessageHandler<REQ, IMessage> {
+
+  @Override
+  public final IMessage onMessage(REQ message, MessageContext context) {
+
+    return message.handleMessage(context);
+  }
 
   /**
    * Called when the message is received and handled. This is where you process the message.
@@ -19,26 +25,6 @@ public abstract class MessageNBT<REQ extends MessageNBT> implements IMessage,
    * @return A message to send as a response.
    */
   public abstract IMessage handleMessage(MessageContext context);
-
-  /**
-   * Read from the nbt tag.
-   *
-   * @param tag Tag you can read from.
-   */
-  public abstract void read(NBTTagCompound tag);
-
-  /**
-   * Write to the nbt tag.
-   *
-   * @param tag Tag you can write to.
-   */
-  public abstract void write(NBTTagCompound tag);
-
-  @Override
-  public final IMessage onMessage(REQ message, MessageContext context) {
-
-    return message.handleMessage(context);
-  }
 
   @Override
   public final void fromBytes(ByteBuf buf) {
@@ -51,6 +37,13 @@ public abstract class MessageNBT<REQ extends MessageNBT> implements IMessage,
       throw new RuntimeException("Error at reading packet " + this.getClass(), e);
     }
   }
+
+  /**
+   * Read from the nbt tag.
+   *
+   * @param tag Tag you can read from.
+   */
+  public abstract void read(NBTTagCompound tag);
 
   @Override
   public final void toBytes(ByteBuf buf) {
@@ -65,4 +58,11 @@ public abstract class MessageNBT<REQ extends MessageNBT> implements IMessage,
       throw new RuntimeException("Error at writing packet " + this.getClass(), e);
     }
   }
+
+  /**
+   * Write to the nbt tag.
+   *
+   * @param tag Tag you can write to.
+   */
+  public abstract void write(NBTTagCompound tag);
 }

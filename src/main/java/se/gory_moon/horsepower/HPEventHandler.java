@@ -39,121 +39,126 @@ import java.util.Map;
 @Mod.EventBusSubscriber(modid = Constants.MODID_HORSEPOWER)
 public class HPEventHandler {
 
-    public static Map<ItemStack, Pair<Integer, Integer>> choppingAxes = new HashMap<>();
-    public static Map<Integer, Pair<Integer, Integer>> harvestPercentages = new HashMap<>();
+  public static Map<ItemStack, Pair<Integer, Integer>> choppingAxes = new HashMap<>();
+  public static Map<Integer, Pair<Integer, Integer>> harvestPercentages = new HashMap<>();
 
-    @SubscribeEvent
-    public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-        if (event.getModID().equals(Constants.MODID_HORSEPOWER)) {
-            reloadConfig();
-            Utils.sendSavedErrors();
-        }
+  @SubscribeEvent
+  public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+    if (event.getModID().equals(Constants.MODID_HORSEPOWER)) {
+      reloadConfig();
+      Utils.sendSavedErrors();
     }
+  }
 
-    public static void reloadConfig() {
-        ConfigManager.sync(Constants.MODID_HORSEPOWER, Config.Type.INSTANCE);
+  public static void reloadConfig() {
+    ConfigManager.sync(Constants.MODID_HORSEPOWER, Config.Type.INSTANCE);
+    HPRecipes.instance().reloadRecipes();
+    choppingAxes.clear();
+    Arrays.stream(Configs.general.choppingBlockAxes).forEach(s ->
+    {
+      String[] data = s.split("=");
+      int base = Utils.getBaseAmount(data[1]);
+      int chance = Utils.getChance(data[1]);
+      ItemStack stack = ItemStack.EMPTY;
+
+      try {
+        stack = (ItemStack) Utils.parseItemStack(data[0], false, false);
+      } catch (Exception e) {
+        Utils.errorMessage("Parse error with item for custom axes for the chopping block", false);
+      }
+
+      if (!stack.isEmpty()) {
+        choppingAxes.put(stack, Pair.of(base, chance));
+      }
+    });
+
+    harvestPercentages.clear();
+    Arrays.stream(Configs.general.harvestable_percentage).forEach(s ->
+    {
+      String[] data = s.split("=");
+      try {
+        int harvestLevel = Integer.parseInt(data[0]);
+        int base = Utils.getBaseAmount(data[1]);
+        int chance = Utils.getChance(data[1]);
+
+        harvestPercentages.put(harvestLevel, Pair.of(base, chance));
+      } catch (NumberFormatException e) {
+        Utils.errorMessage("HarvestLevel config is malformed, make sure only numbers are used as values, (" + s + ")", false);
+      }
+    });
+  }
+
+  @SubscribeEvent
+  public static void onWorldJoin(EntityJoinWorldEvent event) {
+    if (FMLCommonHandler.instance()
+            .getSide()
+            .isClient() && event.getEntity() instanceof EntityPlayerSP && event.getWorld() instanceof WorldClient && FMLClientHandler.instance()
+            .getClientPlayerEntity() != null) {
+      Utils.sendSavedErrors();
+      //HPEventHandler.reloadConfig();
+    }
+  }
+
+  @SubscribeEvent
+  public static void onServerJoined(PlayerEvent.PlayerLoggedInEvent event) {
+    if (FMLCommonHandler.instance().getSide().isServer()) {
+      PacketHandler.INSTANCE.sendTo(new SyncServerRecipesMessage(), (EntityPlayerMP) event.player);
+    }
+  }
+
+  @SubscribeEvent
+  public static void onServerLeave(WorldEvent.Unload event) {
+    if (FMLCommonHandler.instance().getSide().isClient()) {
+      NetworkManager manager = FMLClientHandler.instance().getClientToServerNetworkManager();
+      if (manager != null && !manager.isLocalChannel() && HPRecipes.serverSyncedRecipes) {
+        HPRecipes.serverSyncedRecipes = false;
         HPRecipes.instance().reloadRecipes();
-        choppingAxes.clear();
-        Arrays.stream(Configs.general.choppingBlockAxes).forEach(s ->
-        {
-            String[] data = s.split("=");
-            int base = Utils.getBaseAmount(data[1]);
-            int chance = Utils.getChance(data[1]);
-            ItemStack stack = ItemStack.EMPTY;
-
-            try {
-                stack = (ItemStack) Utils.parseItemStack(data[0], false, false);
-            } catch (Exception e) {
-                Utils.errorMessage("Parse error with item for custom axes for the chopping block", false);
-            }
-
-            if (!stack.isEmpty())
-                choppingAxes.put(stack, Pair.of(base, chance));
-        });
-
-        harvestPercentages.clear();
-        Arrays.stream(Configs.general.harvestable_percentage).forEach(s ->
-        {
-            String[] data = s.split("=");
-            try {
-                int harvestLevel = Integer.parseInt(data[0]);
-                int base = Utils.getBaseAmount(data[1]);
-                int chance = Utils.getChance(data[1]);
-
-                harvestPercentages.put(harvestLevel, Pair.of(base, chance));
-            } catch (NumberFormatException e) {
-                Utils.errorMessage("HarvestLevel config is malformed, make sure only numbers are used as values, (" + s + ")", false);
-            }
-        });
+      }
     }
+  }
 
-    @SubscribeEvent
-    public static void onWorldJoin(EntityJoinWorldEvent event) {
-        if (FMLCommonHandler.instance()
-                .getSide()
-                .isClient() && event.getEntity() instanceof EntityPlayerSP && event.getWorld() instanceof WorldClient && FMLClientHandler.instance()
-                .getClientPlayerEntity() != null) {
-            Utils.sendSavedErrors();
-            //HPEventHandler.reloadConfig();
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
+  @SideOnly(Side.CLIENT)
+  public static void onToolTip(ItemTooltipEvent event) {
+    if (!event.getItemStack().isEmpty()) {
+      String part = "";
+      if (Configs.misc.showOreDictionaries) {
+        StringBuilder out = null;
+        for (int id : OreDictionary.getOreIDs(event.getItemStack())) {
+          String s = OreDictionary.getOreName(id);
+          if (out == null) {
+            out = new StringBuilder(Colors.LIGHTGRAY + "Ores: " + Colors.ORANGE + s);
+          } else {
+            out.append(", ").append(s);
+          }
         }
-    }
-
-    @SubscribeEvent
-    public static void onServerJoined(PlayerEvent.PlayerLoggedInEvent event) {
-        if (FMLCommonHandler.instance().getSide().isServer())
-            PacketHandler.INSTANCE.sendTo(new SyncServerRecipesMessage(), (EntityPlayerMP) event.player);
-    }
-
-    @SubscribeEvent
-    public static void onServerLeave(WorldEvent.Unload event) {
-        if (FMLCommonHandler.instance().getSide().isClient()) {
-            NetworkManager manager = FMLClientHandler.instance().getClientToServerNetworkManager();
-            if (manager != null && !manager.isLocalChannel() && HPRecipes.serverSyncedRecipes) {
-                HPRecipes.serverSyncedRecipes = false;
-                HPRecipes.instance().reloadRecipes();
-            }
+        if (out != null) {
+          event.getToolTip().add(out.toString());
+          part = "OreDict";
         }
-    }
+      }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    @SideOnly(Side.CLIENT)
-    public static void onToolTip(ItemTooltipEvent event) {
-        if (!event.getItemStack().isEmpty()) {
-            String part = "";
-            if (Configs.misc.showOreDictionaries) {
-                StringBuilder out = null;
-                for (int id : OreDictionary.getOreIDs(event.getItemStack())) {
-                    String s = OreDictionary.getOreName(id);
-                    if (out == null) out = new StringBuilder(Colors.LIGHTGRAY + "Ores: " + Colors.ORANGE + s);
-                    else out.append(", ").append(s);
-                }
-                if (out != null) {
-                    event.getToolTip().add(out.toString());
-                    part = "OreDict";
-                }
+      if (Configs.misc.showHarvestLevel) {
+        boolean added = false;
+        for (String harv : Configs.misc.harvestTypes) {
+          int harvestLevel = event.getItemStack()
+                  .getItem()
+                  .getHarvestLevel(event.getItemStack(), harv, null, null);
+          if (harvestLevel > -1) {
+            event.getToolTip()
+                    .add(Colors.LIGHTGRAY + "HarvestLevel: " + Colors.ORANGE + StringUtils.capitalize(harv) + " (" + harvestLevel + ")");
+            if (!added) {
+              part += (!part.isEmpty() ? " and " : "") + "HarvestLevel";
+              added = true;
             }
-
-            if (Configs.misc.showHarvestLevel) {
-                boolean added = false;
-                for (String harv : Configs.misc.harvestTypes) {
-                    int harvestLevel = event.getItemStack()
-                            .getItem()
-                            .getHarvestLevel(event.getItemStack(), harv, null, null);
-                    if (harvestLevel > -1) {
-                        event.getToolTip()
-                                .add(Colors.LIGHTGRAY + "HarvestLevel: " + Colors.ORANGE + StringUtils.capitalize(harv) + " (" + harvestLevel + ")");
-                        if (!added) {
-                            part += (!part.isEmpty() ? " and " : "") + "HarvestLevel";
-                            added = true;
-                        }
-                    }
-                }
-            }
-
-            if (!part.isEmpty()) {
-                event.getToolTip()
-                        .add(Colors.LIGHTGRAY + "The " + part + " tooltip was added by HorsePower, to disabled check the config.");
-            }
+          }
         }
+      }
+
+      if (!part.isEmpty()) {
+        event.getToolTip()
+                .add(Colors.LIGHTGRAY + "The " + part + " tooltip was added by HorsePower, to disabled check the config.");
+      }
     }
+  }
 }

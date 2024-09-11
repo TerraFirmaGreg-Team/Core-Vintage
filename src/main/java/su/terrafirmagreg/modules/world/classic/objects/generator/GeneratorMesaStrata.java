@@ -33,7 +33,7 @@ public class GeneratorMesaStrata implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
     var data = CapabilityChunkData.get(world, chunkBlockPos);
     if (!data.isInitialized() && !ConfigTFCF.General.WORLD.enableMesaStrata) {
@@ -53,144 +53,144 @@ public class GeneratorMesaStrata implements IWorldGenerator {
           //if (b == BiomesTFC.MESA || b == BiomesTFC.MESA_PLATEAU || b == BiomesTFC.MESA_BRYCE || b == BiomesTFC.MESA_PLATEAU_M || BiomeUtils.isMesaBiome(b))
           if (BiomeUtils.isMesaBiome(b)) {
             for (int y = WorldTypeClassic.SEALEVEL;
-                y < world.getTopSolidOrLiquidBlock(strataLayer).getY(); ++y) {
+                    y < world.getTopSolidOrLiquidBlock(strataLayer).getY(); ++y) {
               BlockPos currentBlock = chunkBlockPos.add(x, y, z);
               IBlockState currentBlockState = world.getBlockState(currentBlock);
               IBlockState currentBlockStateTop = world.getBlockState(currentBlock.up());
               //TFCFlorae.getLog().warn("TFCFlorae: Current 'currentBlock' is " + "X: " + currentBlock.getX() + ", Y: " + currentBlock.getY() + ", Z: " + currentBlock.getZ());
               //if (currentBlockState instanceof BlockRockVariant && ((BlockRockVariant)(currentBlockState.get())).getRock().getRockCategory() == TFCRegistries.ROCK_CATEGORIES.getValue(DefaultRocks.SEDIMENTARY))
               if ((y <= WorldTypeClassic.SEALEVEL + 5 &&
-                  (BlockUtils.isRawStone(currentBlockState) || BlockUtils.isGround(
-                      currentBlockState) ||
-                      BlockUtils.isSoil(currentBlockState)) &&
-                  !(BlockUtils.isGrass(currentBlockState) || BlockUtils.isSand(currentBlockState) ||
-                      BlockUtils.isClay(currentBlockState))) ||
-                  (y > WorldTypeClassic.SEALEVEL + 5 &&
                       (BlockUtils.isRawStone(currentBlockState) || BlockUtils.isGround(
-                          currentBlockState) ||
-                          BlockUtils.isSoil(currentBlockState)))) {
+                              currentBlockState) ||
+                              BlockUtils.isSoil(currentBlockState)) &&
+                      !(BlockUtils.isGrass(currentBlockState) || BlockUtils.isSand(currentBlockState) ||
+                              BlockUtils.isClay(currentBlockState))) ||
+                      (y > WorldTypeClassic.SEALEVEL + 5 &&
+                              (BlockUtils.isRawStone(currentBlockState) || BlockUtils.isGround(
+                                      currentBlockState) ||
+                                      BlockUtils.isSoil(currentBlockState)))) {
                 if (y >= strataLayer.getY() && y <= strataLayer.getY() + 2) {
                   world.setBlockState(currentBlock, HARDENED_CLAY, 2);
                 }
                 if (y >= strataLayer.getY() + 3 && y <= strataLayer.getY() + 5) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.BLUE), 2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.BLUE), 2);
                 }
                 if (y >= strataLayer.getY() + 6 && y <= strataLayer.getY() + 9) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.GREEN),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.GREEN),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 10 && y <= strataLayer.getY() + 12) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.ORANGE),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.ORANGE),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 13 && y <= strataLayer.getY() + 15) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.MAGENTA),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.MAGENTA),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 16 && y <= strataLayer.getY() + 19) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.PINK), 2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.PINK), 2);
                 }
                 if (y >= strataLayer.getY() + 20 && y <= strataLayer.getY() + 23) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.PURPLE),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.PURPLE),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 24 && y <= strataLayer.getY() + 26) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.ORANGE),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.ORANGE),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 27 && y <= strataLayer.getY() + 28) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.PINK), 2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.PINK), 2);
                 }
                 if (y >= strataLayer.getY() + 29 && y <= strataLayer.getY() + 32) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.WHITE),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.WHITE),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 33 && y <= strataLayer.getY() + 35) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.SILVER),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.SILVER),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 36 && y <= strataLayer.getY() + 38) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.CYAN), 2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.CYAN), 2);
                 }
                 if (y >= strataLayer.getY() + 39 && y <= strataLayer.getY() + 46) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR,
-                          EnumDyeColor.LIGHT_BLUE),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR,
+                                  EnumDyeColor.LIGHT_BLUE),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 47 && y <= strataLayer.getY() + 54) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.RED), 2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.RED), 2);
                 }
                 if (y >= strataLayer.getY() + 55 && y <= strataLayer.getY() + 56) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.YELLOW),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.YELLOW),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 57 && y <= strataLayer.getY() + 59) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.PINK), 2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.PINK), 2);
                 }
                 if (y >= strataLayer.getY() + 60 && y <= strataLayer.getY() + 61) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.BROWN),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.BROWN),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 62 && y <= strataLayer.getY() + 65) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.PURPLE),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.PURPLE),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 66 && y <= strataLayer.getY() + 67) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.WHITE),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.WHITE),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 68 && y <= strataLayer.getY() + 70) {
                   world.setBlockState(currentBlock, HARDENED_CLAY, 2);
                 }
                 if (y >= strataLayer.getY() + 71 && y <= strataLayer.getY() + 72) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.ORANGE),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.ORANGE),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 73 && y <= strataLayer.getY() + 75) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.SILVER),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.SILVER),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 76 && y <= strataLayer.getY() + 79) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.BLUE), 2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.BLUE), 2);
                 }
                 if (y >= strataLayer.getY() + 80 && y <= strataLayer.getY() + 84) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.PURPLE),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.PURPLE),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 85 && y <= strataLayer.getY() + 86) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.LIME), 2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.LIME), 2);
                 }
                 if (y >= strataLayer.getY() + 87 && y <= strataLayer.getY() + 91) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.CYAN), 2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.CYAN), 2);
                 }
                 if (y >= strataLayer.getY() + 92 && y <= strataLayer.getY() + 95) {
                   world.setBlockState(currentBlock,
-                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.YELLOW),
-                      2);
+                          STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.YELLOW),
+                          2);
                 }
                 if (y >= strataLayer.getY() + 95) {
                   world.setBlockState(currentBlock, HARDENED_CLAY, 2);

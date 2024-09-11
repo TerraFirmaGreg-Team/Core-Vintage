@@ -20,8 +20,8 @@ public final class CapabilityFood {
   public static final ResourceLocation KEY = ModUtils.resource("food_capability");
 
   /**
-   * Most TFC foods have decay modifiers in the range [1, 4] (high = faster decay) That puts decay times at 25% - 100% of this value So meat / fruit
-   * will decay in ~5 days, grains take ~20 days Other modifiers are applied on top of that
+   * Most TFC foods have decay modifiers in the range [1, 4] (high = faster decay) That puts decay times at 25% - 100% of this value So meat / fruit will decay in ~5
+   * days, grains take ~20 days Other modifiers are applied on top of that
    */
   public static final int DEFAULT_ROT_TICKS = ICalendar.TICKS_IN_DAY * 22;
 
@@ -31,31 +31,11 @@ public final class CapabilityFood {
   public static void register() {
 
     CapabilityManager.INSTANCE.register(ICapabilityFood.class, new StorageFood(),
-        ProviderFood::new);
-  }
-
-  public static ICapabilityFood get(ItemStack itemStack) {
-    return itemStack.getCapability(CAPABILITY, null);
+            ProviderFood::new);
   }
 
   public static boolean has(ItemStack itemStack) {
     return itemStack.hasCapability(CAPABILITY, null);
-  }
-
-  /**
-   * Helper method to handle applying a trait to a food item. Do NOT just directly apply the trait, as that can lead to strange interactions with
-   * decay dates / creation dates This calculates a creation date that interpolates between no preservation (if the food is rotten), to full
-   * preservation (if the food is new)
-   */
-  public static void applyTrait(ICapabilityFood instance, FoodTrait trait) {
-    if (!instance.getTraits().contains(trait)) {
-      if (!instance.isRotten()) {
-        // Applied decay DATE modifier = 1 / decay mod
-        instance.setCreationDate(
-            calculateNewCreationDate(instance.getCreationDate(), 1f / trait.getDecayModifier()));
-      }
-      instance.getTraits().add(trait);
-    }
   }
 
   public static void applyTrait(ItemStack stack, FoodTrait trait) {
@@ -65,19 +45,41 @@ public final class CapabilityFood {
     }
   }
 
+  public static ICapabilityFood get(ItemStack itemStack) {
+    return itemStack.getCapability(CAPABILITY, null);
+  }
+
   /**
-   * Helper method to handle removing a trait to a food item. Do NOT just directly remove the trait, as that can lead to strange interactions with
-   * decay dates / creation dates
+   * Helper method to handle applying a trait to a food item. Do NOT just directly apply the trait, as that can lead to strange interactions with decay dates /
+   * creation dates This calculates a creation date that interpolates between no preservation (if the food is rotten), to full preservation (if the food is new)
    */
-  public static void removeTrait(ICapabilityFood instance, FoodTrait trait) {
-    if (instance.getTraits().contains(trait)) {
+  public static void applyTrait(ICapabilityFood instance, FoodTrait trait) {
+    if (!instance.getTraits().contains(trait)) {
       if (!instance.isRotten()) {
-        // Removed trait = 1 / apply trait
+        // Applied decay DATE modifier = 1 / decay mod
         instance.setCreationDate(
-            calculateNewCreationDate(instance.getCreationDate(), trait.getDecayModifier()));
+                calculateNewCreationDate(instance.getCreationDate(), 1f / trait.getDecayModifier()));
       }
-      instance.getTraits().remove(trait);
+      instance.getTraits().add(trait);
     }
+  }
+
+  /**
+   * T = current time, Ci / Cf = initial / final creation date, Ei / Ef = initial / final expiration date, d = decay time, p = preservation modifier
+   * <p>
+   * To apply preservation p at time T: want remaining decay fraction to be invariant under preservation Let Ri = (T - Ci) / (Ei - Ci) = (T - Ci) / d, Rf = (T - Cf) /
+   * (d * p) Then if Ri = Rf => d * p * (T - Ci) = d * (T - Cf) => Cf = (1 - p) * T + p * Ci (affine combination)
+   * <p>
+   * In order to show that E > T is invariant under preservation: (i.e. see TerraFirmaCraft#352) Let T, Ci, Ei, d, p > 0 such that Ei > T (1.), and Ei = Ci + d Cf =
+   * (1 - p) * T + p * Ci => Ef = Cf + p * d = (1 - p) * T + p * Ci + p * d = (1 - p) * T + p * (Ci + d) via 1. > (1 - p) * T + p * T = T QED
+   *
+   * @param ci The initial creation date
+   * @param p  The decay date modifier (1 / standard decay modifier)
+   * @return cf the final creation date
+   */
+  private static long calculateNewCreationDate(long ci, float p) {
+    // Cf = (1 - p) * T + p * Ci
+    return (long) ((1 - p) * Calendar.PLAYER_TIME.getTicks() + p * ci);
   }
 
   public static void removeTrait(ItemStack stack, FoodTrait trait) {
@@ -88,8 +90,23 @@ public final class CapabilityFood {
   }
 
   /**
-   * This is used to update a stack from an old stack, in the case where a food is created from another Any method that creates derivative food should
-   * call this, as it avoids extending the decay of the item If called with non food items, nothing happens
+   * Helper method to handle removing a trait to a food item. Do NOT just directly remove the trait, as that can lead to strange interactions with decay dates /
+   * creation dates
+   */
+  public static void removeTrait(ICapabilityFood instance, FoodTrait trait) {
+    if (instance.getTraits().contains(trait)) {
+      if (!instance.isRotten()) {
+        // Removed trait = 1 / apply trait
+        instance.setCreationDate(
+                calculateNewCreationDate(instance.getCreationDate(), trait.getDecayModifier()));
+      }
+      instance.getTraits().remove(trait);
+    }
+  }
+
+  /**
+   * This is used to update a stack from an old stack, in the case where a food is created from another Any method that creates derivative food should call this, as
+   * it avoids extending the decay of the item If called with non food items, nothing happens
    *
    * @param oldStack the old stack
    * @param newStack the new stack
@@ -110,8 +127,8 @@ public final class CapabilityFood {
 
   /**
    * Call this from any function that is meant to create a new item stack. In MOST cases, you should use
-   * {@link CapabilityFood#updateFoodFromPrevious(ItemStack, ItemStack)}, as the decay should transfer from input -> output This is only for where
-   * there is no input. (i.e. on a direct {@code stack.copy()} from non-food inputs
+   * {@link CapabilityFood#updateFoodFromPrevious(ItemStack, ItemStack)}, as the decay should transfer from input -> output This is only for where there is no input.
+   * (i.e. on a direct {@code stack.copy()} from non-food inputs
    *
    * @param stack the new stack
    * @return the input stack, for chaining
@@ -138,7 +155,7 @@ public final class CapabilityFood {
    * @return the result of stackToMergeInto.
    */
   public static ItemStack mergeItemStacksIgnoreCreationDate(ItemStack stackToMergeInto,
-      ItemStack stackToMerge) {
+          ItemStack stackToMerge) {
     if (!stackToMerge.isEmpty()) {
       if (!stackToMergeInto.isEmpty()) {
         if (CapabilityFood.areStacksStackableExceptCreationDate(stackToMergeInto, stackToMerge)) {
@@ -146,10 +163,10 @@ public final class CapabilityFood {
           ICapabilityFood mergeFood = CapabilityFood.get(stackToMerge);
           if (mergeIntoFood != null && mergeFood != null) {
             int mergeAmount = Math.min(stackToMerge.getCount(),
-                stackToMergeInto.getMaxStackSize() - stackToMergeInto.getCount());
+                    stackToMergeInto.getMaxStackSize() - stackToMergeInto.getCount());
             if (mergeAmount > 0) {
               mergeIntoFood.setCreationDate(
-                  Math.min(mergeIntoFood.getCreationDate(), mergeFood.getCreationDate()));
+                      Math.min(mergeIntoFood.getCreationDate(), mergeFood.getCreationDate()));
               stackToMerge.shrink(mergeAmount);
               stackToMergeInto.grow(mergeAmount);
             }
@@ -165,8 +182,8 @@ public final class CapabilityFood {
   }
 
   /**
-   * This is a nice way of checking if two stacks are stackable, ignoring the creation date: copy both stacks, give them the same creation date, then
-   * check compatibility This will also not stack stacks which have different traits, which is intended
+   * This is a nice way of checking if two stacks are stackable, ignoring the creation date: copy both stacks, give them the same creation date, then check
+   * compatibility This will also not stack stacks which have different traits, which is intended
    *
    * @return true if the stacks are otherwise stackable ignoring their creation date
    */
@@ -191,25 +208,6 @@ public final class CapabilityFood {
    */
   public static long getRoundedCreationDate() {
     return (Calendar.PLAYER_TIME.getTotalHours() / ConfigFood.MISC.DECAY.stackTime)
-        * ICalendar.TICKS_IN_HOUR * ConfigFood.MISC.DECAY.stackTime;
-  }
-
-  /**
-   * T = current time, Ci / Cf = initial / final creation date, Ei / Ef = initial / final expiration date, d = decay time, p = preservation modifier
-   * <p>
-   * To apply preservation p at time T: want remaining decay fraction to be invariant under preservation Let Ri = (T - Ci) / (Ei - Ci) = (T - Ci) / d,
-   * Rf = (T - Cf) / (d * p) Then if Ri = Rf => d * p * (T - Ci) = d * (T - Cf) => Cf = (1 - p) * T + p * Ci (affine combination)
-   * <p>
-   * In order to show that E > T is invariant under preservation: (i.e. see TerraFirmaCraft#352) Let T, Ci, Ei, d, p > 0 such that Ei > T (1.), and Ei
-   * = Ci + d Cf = (1 - p) * T + p * Ci => Ef = Cf + p * d = (1 - p) * T + p * Ci + p * d = (1 - p) * T + p * (Ci + d) via 1. > (1 - p) * T + p * T =
-   * T QED
-   *
-   * @param ci The initial creation date
-   * @param p  The decay date modifier (1 / standard decay modifier)
-   * @return cf the final creation date
-   */
-  private static long calculateNewCreationDate(long ci, float p) {
-    // Cf = (1 - p) * T + p * Ci
-    return (long) ((1 - p) * Calendar.PLAYER_TIME.getTicks() + p * ci);
+            * ICalendar.TICKS_IN_HOUR * ConfigFood.MISC.DECAY.stackTime;
   }
 }

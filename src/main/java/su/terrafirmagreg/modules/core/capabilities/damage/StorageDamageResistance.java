@@ -13,12 +13,12 @@ public class StorageDamageResistance implements IStorage<ICapabilityDamageResist
   @Nullable
   @Override
   public NBTBase writeNBT(Capability<ICapabilityDamageResistance> capability,
-      ICapabilityDamageResistance instance, EnumFacing side) {
+          ICapabilityDamageResistance instance, EnumFacing side) {
     return null;
   }
 
   @Override
   public void readNBT(Capability<ICapabilityDamageResistance> capability,
-      ICapabilityDamageResistance instance, EnumFacing side, NBTBase nbt) {
+          ICapabilityDamageResistance instance, EnumFacing side, NBTBase nbt) {
   }
 }

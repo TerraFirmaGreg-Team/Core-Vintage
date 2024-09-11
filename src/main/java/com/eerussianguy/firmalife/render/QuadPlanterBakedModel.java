@@ -28,26 +28,28 @@ import static su.terrafirmagreg.data.Constants.MODID_FL;
 @MethodsReturnNonnullByDefault
 public class QuadPlanterBakedModel extends LargePlanterBakedModel implements IBakedModel {
 
-    private static final IModel dummy = ModelLoaderRegistry.getModelOrMissing(new ResourceLocation(MODID_FL, "block/quad_planter"));
+  private static final IModel dummy = ModelLoaderRegistry.getModelOrMissing(new ResourceLocation(MODID_FL, "block/quad_planter"));
 
-    public QuadPlanterBakedModel() {}
+  public QuadPlanterBakedModel() {
+  }
 
-    /**
-     * Are you not entertained?
-     */
-    @Override
-    public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
-        if (state == null || !(state.getBlock() instanceof BlockQuadPlanter))
-            return bake(dummy).getQuads(state, side, rand);
-        Map<String, String> sprites = new HashMap<>();
-        sprites.put("soil", MODID_FL + (state.getValue(Properties.WET) ? ":blocks/potting_soil_wet" : ":blocks/potting_soil_dry"));
-        if (state instanceof IExtendedBlockState extendedState) {
-            sprites.put("crop1", resolveTexture(extendedState, BlockQuadPlanter.CROP_1));
-            sprites.put("crop2", resolveTexture(extendedState, BlockQuadPlanter.CROP_2));
-            sprites.put("crop3", resolveTexture(extendedState, BlockQuadPlanter.CROP_3));
-            sprites.put("crop4", resolveTexture(extendedState, BlockQuadPlanter.CROP_4));
-        }
-        IModel newModel = dummy.retexture(ImmutableMap.copyOf(sprites));
-        return bake(newModel).getQuads(state, side, rand);
+  /**
+   * Are you not entertained?
+   */
+  @Override
+  public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
+    if (state == null || !(state.getBlock() instanceof BlockQuadPlanter)) {
+      return bake(dummy).getQuads(state, side, rand);
     }
+    Map<String, String> sprites = new HashMap<>();
+    sprites.put("soil", MODID_FL + (state.getValue(Properties.WET) ? ":blocks/potting_soil_wet" : ":blocks/potting_soil_dry"));
+    if (state instanceof IExtendedBlockState extendedState) {
+      sprites.put("crop1", resolveTexture(extendedState, BlockQuadPlanter.CROP_1));
+      sprites.put("crop2", resolveTexture(extendedState, BlockQuadPlanter.CROP_2));
+      sprites.put("crop3", resolveTexture(extendedState, BlockQuadPlanter.CROP_3));
+      sprites.put("crop4", resolveTexture(extendedState, BlockQuadPlanter.CROP_4));
+    }
+    IModel newModel = dummy.retexture(ImmutableMap.copyOf(sprites));
+    return bake(newModel).getQuads(state, side, rand);
+  }
 }

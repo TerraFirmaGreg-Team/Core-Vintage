@@ -22,7 +22,7 @@ public class ServerProxy implements IProxy {
       return context.getServerHandler().player.server;
     } else {
       throw new WrongSideException(
-          "Tried to get the IThreadListener from a client-side MessageContext on the dedicated server");
+              "Tried to get the IThreadListener from a client-side MessageContext on the dedicated server");
     }
   }
 
@@ -33,7 +33,7 @@ public class ServerProxy implements IProxy {
       return context.getServerHandler().player;
     } else {
       throw new WrongSideException(
-          "Tried to get the player from a client-side MessageContext on the dedicated server");
+              "Tried to get the player from a client-side MessageContext on the dedicated server");
     }
   }
 
@@ -44,7 +44,7 @@ public class ServerProxy implements IProxy {
       return context.getServerHandler().player.getServerWorld();
     } else {
       throw new WrongSideException(
-          "Tried to get the player from a client-side MessageContext on the dedicated server");
+              "Tried to get the player from a client-side MessageContext on the dedicated server");
     }
   }
 

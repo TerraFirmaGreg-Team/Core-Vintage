@@ -18,49 +18,49 @@ public final class FoodCategoryHandler {
   public static void init() {
 
     FRUIT = new FoodCategory
-        .Builder("fruit")
-        .setTextFormatting(TextFormatting.GREEN)
-        .build();
+            .Builder("fruit")
+            .setTextFormatting(TextFormatting.GREEN)
+            .build();
 
     GRAIN = new FoodCategory
-        .Builder("grain")
-        .setTextFormatting(TextFormatting.YELLOW)
-        .build();
+            .Builder("grain")
+            .setTextFormatting(TextFormatting.YELLOW)
+            .build();
 
     BREAD = new FoodCategory
-        .Builder("bread")
-        .setTextFormatting(TextFormatting.GOLD)
-        .build();
+            .Builder("bread")
+            .setTextFormatting(TextFormatting.GOLD)
+            .build();
 
     VEGETABLE = new FoodCategory
-        .Builder("vegetable")
-        .setTextFormatting(TextFormatting.GRAY)
-        .build();
+            .Builder("vegetable")
+            .setTextFormatting(TextFormatting.GRAY)
+            .build();
 
     MEAT = new FoodCategory
-        .Builder("meat")
-        .setTextFormatting(TextFormatting.RED)
-        .build();
+            .Builder("meat")
+            .setTextFormatting(TextFormatting.RED)
+            .build();
 
     COOKED_MEAT = new FoodCategory
-        .Builder("cooked_meat")
-        .setTextFormatting(TextFormatting.RED)
-        .build();
+            .Builder("cooked_meat")
+            .setTextFormatting(TextFormatting.RED)
+            .build();
 
     DAIRY = new FoodCategory
-        .Builder("dairy")
-        .setTextFormatting(TextFormatting.WHITE)
-        .build();
+            .Builder("dairy")
+            .setTextFormatting(TextFormatting.WHITE)
+            .build();
 
     MEAL = new FoodCategory
-        .Builder("meal")
-        .setTextFormatting(TextFormatting.AQUA)
-        .build();
+            .Builder("meal")
+            .setTextFormatting(TextFormatting.AQUA)
+            .build();
 
     OTHER = new FoodCategory
-        .Builder("other")
-        .setTextFormatting(TextFormatting.DARK_GRAY)
-        .build();
+            .Builder("other")
+            .setTextFormatting(TextFormatting.DARK_GRAY)
+            .build();
 
   }
 }

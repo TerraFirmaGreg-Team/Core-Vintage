@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class RenderAnimalBoar extends RenderLiving<EntityAnimalBoar> {
 
   private static final ResourceLocation TEXTURE = ModUtils.resource(
-      "textures/entity/animal/huntable/boar.png");
+          "textures/entity/animal/huntable/boar.png");
 
   public RenderAnimalBoar(RenderManager renderManager) {
     super(renderManager, new ModelAnimalBoar(), 0.7F);
@@ -26,7 +26,7 @@ public class RenderAnimalBoar extends RenderLiving<EntityAnimalBoar> {
 
   @Override
   public void doRender(@NotNull EntityAnimalBoar hog, double par2, double par4, double par6,
-      float par8, float par9) {
+          float par8, float par9) {
     this.shadowSize = (float) (0.35f + (hog.getPercentToAdulthood() * 0.35f));
     super.doRender(hog, par2, par4, par6, par8, par9);
   }

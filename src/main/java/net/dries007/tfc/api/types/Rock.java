@@ -29,6 +29,10 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
   private final boolean isFluxStone;
   private final boolean isNaturallyGenerating;
 
+  public Rock(@NotNull ResourceLocation name, @NotNull RockCategory rockCategory, boolean isFluxStone) {
+    this(name, rockCategory, isFluxStone, true);
+  }
+
   public Rock(@NotNull ResourceLocation name, @NotNull RockCategory rockCategory, boolean isFluxStone, boolean isNaturallyGenerating) {
     //noinspection ConstantConditions
     if (rockCategory == null) {
@@ -40,10 +44,6 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
     this.textureLocation = new ResourceLocation(MODID_TFC, "textures/blocks/stonetypes/raw/" + name.getPath() + ".png");
     this.isFluxStone = isFluxStone;
     this.isNaturallyGenerating = isNaturallyGenerating;
-  }
-
-  public Rock(@NotNull ResourceLocation name, @NotNull RockCategory rockCategory, boolean isFluxStone) {
-    this(name, rockCategory, isFluxStone, true);
   }
 
   public Rock(@NotNull ResourceLocation name, @NotNull ResourceLocation categoryName, boolean isFluxStone) {

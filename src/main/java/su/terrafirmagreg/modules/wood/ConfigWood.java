@@ -17,17 +17,14 @@ public class ConfigWood {
 
   @Config.Name("Blocks")
   @Config.Comment("Block settings")
-
   public static final BlocksCategory BLOCKS = new BlocksCategory();
 
   @Config.Name("Items")
   @Config.Comment("Item settings")
-
   public static final ItemsCategory ITEMS = new ItemsCategory();
 
   @Config.Name("Misc")
   @Config.Comment("Miscellaneous")
-
   public static final MiscCategory MISC = new MiscCategory();
 
   static {
@@ -50,43 +47,43 @@ public class ConfigWood {
 
       @Config.Comment("List of fluids allowed to be inserted into a barrel.")
       public String[] fluidWhitelist = {
-          "fresh_water",
-          "hot_water",
-          "salt_water",
-          "water",
-          "limewater",
-          "tannin",
-          "olive_oil",
-          "olive_oil_water",
-          "vinegar",
-          "rum",
-          "beer",
-          "whiskey",
-          "rye_whiskey",
-          "corn_whiskey",
-          "sake",
-          "vodka",
-          "cider",
-          "brine",
-          "milk",
-          "milk_curdled",
-          "milk_vinegar",
-          "white_dye",
-          "orange_dye",
-          "magenta_dye",
-          "light_blue_dye",
-          "yellow_dye",
-          "lime_dye",
-          "pink_dye",
-          "gray_dye",
-          "light_gray_dye",
-          "cyan_dye",
-          "purple_dye",
-          "blue_dye",
-          "brown_dye",
-          "green_dye",
-          "red_dye",
-          "black_dye"
+              "fresh_water",
+              "hot_water",
+              "salt_water",
+              "water",
+              "limewater",
+              "tannin",
+              "olive_oil",
+              "olive_oil_water",
+              "vinegar",
+              "rum",
+              "beer",
+              "whiskey",
+              "rye_whiskey",
+              "corn_whiskey",
+              "sake",
+              "vodka",
+              "cider",
+              "brine",
+              "milk",
+              "milk_curdled",
+              "milk_vinegar",
+              "white_dye",
+              "orange_dye",
+              "magenta_dye",
+              "light_blue_dye",
+              "yellow_dye",
+              "lime_dye",
+              "pink_dye",
+              "gray_dye",
+              "light_gray_dye",
+              "cyan_dye",
+              "purple_dye",
+              "blue_dye",
+              "brown_dye",
+              "green_dye",
+              "red_dye",
+              "black_dye"
       };
     }
 
@@ -109,51 +106,51 @@ public class ConfigWood {
   public static final class ItemsCategory {
 
     public final SupplyCart SUPPLY_CART = new SupplyCart();
-    public final Plow PLOW = new Plow();
+    public final PlowCart PLOW_CART = new PlowCart();
     public final AnimalCart ANIMAL_CART = new AnimalCart();
 
     public static class SupplyCart {
 
       public String[] canPull = {
-          "minecraft:donkey",
-          "minecraft:horse",
-          "minecraft:mule",
-          "minecraft:pig",
-          "minecraft:player",
-          "tfg:camel",
-          "tfg:donkey",
-          "tfg:horse",
-          "tfg:mule"
+              "minecraft:donkey",
+              "minecraft:horse",
+              "minecraft:mule",
+              "minecraft:pig",
+              "minecraft:player",
+              "tfg:camel",
+              "tfg:donkey",
+              "tfg:horse",
+              "tfg:mule"
       };
     }
 
-    public static class Plow {
+    public static class PlowCart {
 
       public String[] canPull = {
-          "minecraft:donkey",
-          "minecraft:horse",
-          "minecraft:mule",
-          "minecraft:pig",
-          "minecraft:player",
-          "tfg:camel",
-          "tfg:donkey",
-          "tfg:horse",
-          "tfg:mule"
+              "minecraft:donkey",
+              "minecraft:horse",
+              "minecraft:mule",
+              "minecraft:pig",
+              "minecraft:player",
+              "tfg:camel",
+              "tfg:donkey",
+              "tfg:horse",
+              "tfg:mule"
       };
     }
 
     public static class AnimalCart {
 
       public String[] canPull = {
-          "minecraft:donkey",
-          "minecraft:horse",
-          "minecraft:mule",
-          "minecraft:pig",
-          "minecraft:player",
-          "tfg:camel",
-          "tfg:donkey",
-          "tfg:horse",
-          "tfg:mule"
+              "minecraft:donkey",
+              "minecraft:horse",
+              "minecraft:mule",
+              "minecraft:pig",
+              "minecraft:player",
+              "tfg:camel",
+              "tfg:donkey",
+              "tfg:horse",
+              "tfg:mule"
       };
     }
 

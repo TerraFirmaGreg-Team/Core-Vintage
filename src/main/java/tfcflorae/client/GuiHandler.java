@@ -73,6 +73,38 @@ public class GuiHandler
     player.openGui(TFCFlorae.instance, type.ordinal(), world, 0, 0, 0);
   }
 
+  public enum Type {
+    SACK,
+    BAG,
+    PINEAPPLE_LEATHER,
+    BURLAP_CLOTH,
+    WOOL_CLOTH,
+    SILK_CLOTH,
+    SISAL_CLOTH,
+    COTTON_CLOTH,
+    LINEN_CLOTH,
+    HEMP_CLOTH,
+    YUCCA_CANVAS,
+    MUD,
+    FLINT,
+    CHEST,
+    URN,
+    NULL;
+
+    private static final Type[] values = values();
+
+    @NotNull
+    public static Type valueOf(int id) {
+      while (id >= values.length) {
+        id -= values.length;
+      }
+      while (id < 0) {
+        id += values.length;
+      }
+      return values[id];
+    }
+  }
+
   @Override
   @Nullable
   public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y,
@@ -172,35 +204,5 @@ public class GuiHandler
     }
   }
 
-  public enum Type {
-    SACK,
-    BAG,
-    PINEAPPLE_LEATHER,
-    BURLAP_CLOTH,
-    WOOL_CLOTH,
-    SILK_CLOTH,
-    SISAL_CLOTH,
-    COTTON_CLOTH,
-    LINEN_CLOTH,
-    HEMP_CLOTH,
-    YUCCA_CANVAS,
-    MUD,
-    FLINT,
-    CHEST,
-    URN,
-    NULL;
 
-    private static final Type[] values = values();
-
-    @NotNull
-    public static Type valueOf(int id) {
-      while (id >= values.length) {
-        id -= values.length;
-      }
-      while (id < 0) {
-        id += values.length;
-      }
-      return values[id];
-    }
-  }
 }

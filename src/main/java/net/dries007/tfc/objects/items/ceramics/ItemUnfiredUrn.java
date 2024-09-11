@@ -10,13 +10,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class ItemUnfiredUrn extends ItemPottery {
 
-    @Override
-    public @NotNull Size getSize(@NotNull ItemStack stack) {
-        return Size.VERY_LARGE; // Don't fit in chests
-    }
+  @Override
+  public @NotNull Weight getWeight(@NotNull ItemStack stack) {
+    return Weight.VERY_HEAVY; // Stack size = 1
+  }
 
-    @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack stack) {
-        return Weight.VERY_HEAVY; // Stack size = 1
-    }
+  @Override
+  public @NotNull Size getSize(@NotNull ItemStack stack) {
+    return Size.VERY_LARGE; // Don't fit in chests
+  }
 }

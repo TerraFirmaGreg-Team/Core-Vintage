@@ -5,5 +5,5 @@ import net.minecraft.item.ItemStack;
 
 public interface IHPInventory extends IInventory {
 
-    void setSlotContent(int index, ItemStack stack);
+  void setSlotContent(int index, ItemStack stack);
 }

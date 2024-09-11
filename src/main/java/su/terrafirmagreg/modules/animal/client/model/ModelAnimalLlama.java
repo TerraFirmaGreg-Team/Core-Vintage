@@ -70,11 +70,11 @@ public class ModelAnimalLlama extends ModelQuadruped {
 
   @Override
   public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
-      float netHeadYaw, float headPitch, float scale) {
+          float netHeadYaw, float headPitch, float scale) {
     AbstractChestHorse abstractchesthorse = (AbstractChestHorse) entityIn;
     boolean flag = !abstractchesthorse.isChild() && abstractchesthorse.hasChest();
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-        entityIn);
+            entityIn);
 
     if (((EntityAnimal) entityIn).isChild()) {
       double ageScale = 1;

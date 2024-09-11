@@ -1,29 +1,18 @@
 package su.terrafirmagreg.modules.wood.init;
 
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.data.lib.Pair;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
-import su.terrafirmagreg.modules.wood.objects.items.ItemWoodAnimalCart;
-import su.terrafirmagreg.modules.wood.objects.items.ItemWoodBoat;
-import su.terrafirmagreg.modules.wood.objects.items.ItemWoodLumber;
-import su.terrafirmagreg.modules.wood.objects.items.ItemWoodMisc;
-import su.terrafirmagreg.modules.wood.objects.items.ItemWoodPlowCart;
-import su.terrafirmagreg.modules.wood.objects.items.ItemWoodSupplyCart;
-import su.terrafirmagreg.modules.wood.objects.items.ItemWoodWheel;
-
-import net.minecraft.item.Item;
-
-
-import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-
-import java.util.Map;
+import su.terrafirmagreg.modules.wood.object.item.ItemWoodAnimalCart;
+import su.terrafirmagreg.modules.wood.object.item.ItemWoodBoat;
+import su.terrafirmagreg.modules.wood.object.item.ItemWoodLumber;
+import su.terrafirmagreg.modules.wood.object.item.ItemWoodMisc;
+import su.terrafirmagreg.modules.wood.object.item.ItemWoodPlowCart;
+import su.terrafirmagreg.modules.wood.object.item.ItemWoodSupplyCart;
+import su.terrafirmagreg.modules.wood.object.item.ItemWoodWheel;
 
 public final class ItemsWood {
-
-  public static final Map<Pair<WoodItemVariant, WoodType>, Item> WOOD_ITEMS = new Object2ObjectLinkedOpenHashMap<>();
 
   public static WoodItemVariant BOAT;
   public static WoodItemVariant LUMBER;
@@ -37,40 +26,36 @@ public final class ItemsWood {
 
   public static void onRegister(RegistryManager registry) {
     BOAT = WoodItemVariant
-        .builder("boat")
-        .setFactory(ItemWoodBoat::new)
-        .build();
+            .builder("boat")
+            .setFactory(ItemWoodBoat::new)
+            .build(registry);
 
     LUMBER = WoodItemVariant
-        .builder("lumber")
-        .setFactory(ItemWoodLumber::new)
-        .build();
+            .builder("lumber")
+            .setFactory(ItemWoodLumber::new)
+            .build(registry);
 
     WHEEL = WoodItemVariant
-        .builder("wheel")
-        .setFactory(ItemWoodWheel::new)
-        .build();
+            .builder("wheel")
+            .setFactory(ItemWoodWheel::new)
+            .build(registry);
 
     SUPPLY_CART = WoodItemVariant
-        .builder("supply_cart")
-        .setFactory(ItemWoodSupplyCart::new)
-        .build();
+            .builder("supply_cart")
+            .setFactory(ItemWoodSupplyCart::new)
+            .build(registry);
 
     ANIMAL_CART = WoodItemVariant
-        .builder("animal_cart")
-        .setFactory(ItemWoodAnimalCart::new)
-        .build();
+            .builder("animal_cart")
+            .setFactory(ItemWoodAnimalCart::new)
+            .build(registry);
 
     PLOW_CART = WoodItemVariant
-        .builder("plow_cart")
-        .setFactory(ItemWoodPlowCart::new)
-        .build();
+            .builder("plow_cart")
+            .setFactory(ItemWoodPlowCart::new)
+            .build(registry);
 
-    STICK_BUNDLE = registry.item(
-        new ItemWoodMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, "log_wood",
-            "stick_bundle"));
+    STICK_BUNDLE = registry.item(new ItemWoodMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"));
     STICK_BUNCH = registry.item(new ItemWoodMisc("stick_bunch", Size.NORMAL, Weight.LIGHT));
-
-    registry.items(WOOD_ITEMS.values());
   }
 }

@@ -21,7 +21,7 @@ public class ContainerNestBox extends BaseContainerTile<TileNestBox> {
   @Override
   protected void addContainerSlots() {
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-        null);
+            null);
     if (inventory != null) {
       addSlotToContainer(new SlotCallback(inventory, 0, 71, 23, tile));
       addSlotToContainer(new SlotCallback(inventory, 1, 89, 23, tile));

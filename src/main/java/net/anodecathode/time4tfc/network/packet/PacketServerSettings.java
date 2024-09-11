@@ -13,19 +13,19 @@ import net.anodecathode.time4tfc.data.SessionData;
  */
 public class PacketServerSettings implements IMessage, IMessageHandler<PacketServerSettings, IMessage> {
 
-    @Override
-    public void toBytes(ByteBuf buf) {
-        SessionData.writeToBuffer(buf);
-    }
+  @Override
+  public void fromBytes(ByteBuf buf) {
+    SessionData.readFromBuffer(buf);
+  }
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        SessionData.readFromBuffer(buf);
-    }
+  @Override
+  public void toBytes(ByteBuf buf) {
+    SessionData.writeToBuffer(buf);
+  }
 
-    @Override
-    public IMessage onMessage(PacketServerSettings message, MessageContext ctx) {
-        SessionData.modEnabled = true;
-        return null;
-    }
+  @Override
+  public IMessage onMessage(PacketServerSettings message, MessageContext ctx) {
+    SessionData.modEnabled = true;
+    return null;
+  }
 }

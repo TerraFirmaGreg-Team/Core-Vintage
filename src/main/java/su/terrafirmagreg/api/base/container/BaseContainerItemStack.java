@@ -35,6 +35,21 @@ public abstract class BaseContainerItemStack extends Container {
     addPlayerInventorySlots(playerInv);
   }
 
+  protected abstract void addContainerSlots();
+
+  protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
+    // Add Player Inventory Slots
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 9; j++) {
+        addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+      }
+    }
+
+    for (int k = 0; k < 9; k++) {
+      addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
+    }
+  }
+
   @Override
   @NotNull
   public ItemStack transferStackInSlot(EntityPlayer player, int index) {
@@ -56,7 +71,7 @@ public abstract class BaseContainerItemStack extends Container {
 
     // Begin custom transfer code here
     int containerSlots = inventorySlots.size()
-        - player.inventory.mainInventory.size(); // number of slots in the container
+            - player.inventory.mainInventory.size(); // number of slots in the container
     if (index < containerSlots) {
       // Transfer out of the container
       if (!this.mergeItemStack(itemstack1, containerSlots, inventorySlots.size(), true)) {
@@ -88,8 +103,8 @@ public abstract class BaseContainerItemStack extends Container {
   public ItemStack slotClick(int slotID, int dragType, ClickType clickType, EntityPlayer player) {
     // Prevent moving of the item stack that is currently open
     if (slotID == itemIndex &&
-        (clickType == ClickType.QUICK_MOVE || clickType == ClickType.PICKUP
-            || clickType == ClickType.THROW || clickType == ClickType.SWAP)) {
+            (clickType == ClickType.QUICK_MOVE || clickType == ClickType.PICKUP
+                    || clickType == ClickType.THROW || clickType == ClickType.SWAP)) {
       return ItemStack.EMPTY;
     } else if ((dragType == itemDragIndex) && clickType == ClickType.SWAP) {
       return ItemStack.EMPTY;
@@ -101,20 +116,5 @@ public abstract class BaseContainerItemStack extends Container {
   @Override
   public boolean canInteractWith(EntityPlayer playerIn) {
     return true;
-  }
-
-  protected abstract void addContainerSlots();
-
-  protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
-    // Add Player Inventory Slots
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 9; j++) {
-        addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-      }
-    }
-
-    for (int k = 0; k < 9; k++) {
-      addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
-    }
   }
 }

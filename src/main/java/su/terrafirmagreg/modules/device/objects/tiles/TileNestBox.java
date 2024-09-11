@@ -31,8 +31,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class TileNestBox extends BaseTileInventory
-    implements ITickable, IItemHandlerSidedCallback,
-    IProviderContainer<ContainerNestBox, GuiNestBox> {
+        implements ITickable, IItemHandlerSidedCallback,
+        IProviderContainer<ContainerNestBox, GuiNestBox> {
 
   private static final int NUM_SLOTS = 4;
   private final IItemHandler inventoryWrapperExtract;
@@ -50,14 +50,14 @@ public class TileNestBox extends BaseTileInventory
         if (!stack.isEmpty()) {
           var cap = CapabilityEgg.get(stack);
           if (cap != null && cap.getHatchDay() > 0
-              && cap.getHatchDay() <= Calendar.PLAYER_TIME.getTotalDays()) {
+                  && cap.getHatchDay() <= Calendar.PLAYER_TIME.getTotalDays()) {
             Entity baby = cap.getEntity(this.world);
             if (baby != null) {
               if (baby instanceof IAnimal) {
                 ((IAnimal) baby).setBirthDay((int) Calendar.PLAYER_TIME.getTotalDays());
               }
               baby.setLocationAndAngles(this.pos.getX(), this.pos.getY() + 0.5D, this.pos.getZ(),
-                  0.0F, 0.0F);
+                      0.0F, 0.0F);
               world.spawnEntity(baby);
               inventory.setStackInSlot(i, ItemStack.EMPTY);
             }
@@ -98,28 +98,28 @@ public class TileNestBox extends BaseTileInventory
     return getBird() != null;
   }
 
-  public void seatOnThis(EntityLiving bird) {
-    SitUtils.sitOnBlock(this.world, this.pos, bird, 0.0D);
-  }
-
   @Nullable
   public Entity getBird() {
     return SitUtils.getSittingEntity(this.world, this.pos);
   }
 
+  public void seatOnThis(EntityLiving bird) {
+    SitUtils.sitOnBlock(this.world, this.pos, bird, 0.0D);
+  }
+
   @Override
   public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
     return
-        (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.DOWN)
-            || super.hasCapability(capability, facing);
+            (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.DOWN)
+                    || super.hasCapability(capability, facing);
   }
 
   @Override
   @SuppressWarnings("unchecked")
   public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
     return
-        (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.DOWN) ?
-            (T) inventoryWrapperExtract : super.getCapability(capability, facing);
+            (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.DOWN) ?
+                    (T) inventoryWrapperExtract : super.getCapability(capability, facing);
   }
 
   @Override
@@ -134,13 +134,13 @@ public class TileNestBox extends BaseTileInventory
 
   @Override
   public ContainerNestBox getContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new ContainerNestBox(inventoryPlayer, this);
   }
 
   @Override
   public GuiNestBox getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state,
-      BlockPos pos) {
+          BlockPos pos) {
     return new GuiNestBox(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer);
   }
 }

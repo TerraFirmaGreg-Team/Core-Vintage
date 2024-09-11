@@ -22,44 +22,47 @@ import java.util.Map;
 
 public class ItemFoodTFCF extends ItemFood implements IItemFoodTFC {
 
-    private static final Map<ItemTFCF, ItemFoodTFCF> MAP = new HashMap<>();
-    public FoodData data;
-    ArrayList<PotionEffectToHave> PotionEffects = new ArrayList<PotionEffectToHave>();
+  private static final Map<ItemTFCF, ItemFoodTFCF> MAP = new HashMap<>();
+  public FoodData data;
+  ArrayList<PotionEffectToHave> PotionEffects = new ArrayList<PotionEffectToHave>();
 
-    public ItemFoodTFCF(FoodData data, Object... objs) {
-        super(0, 0.0F, false);
-        this.setMaxDamage(0);
-        this.data = data;
+  public ItemFoodTFCF(FoodData data, Object... objs) {
+    super(0, 0.0F, false);
+    this.setMaxDamage(0);
+    this.data = data;
 
-        for (Object obj : objs) {
-            if (obj instanceof PotionEffectToHave Effect) {
-                PotionEffects.add(Effect);
-            } else if (obj instanceof Object[])
-                OreDictionaryHelper.register(this, (Object[]) obj);
-            else
-                OreDictionaryHelper.register(this, obj);
+    for (Object obj : objs) {
+      if (obj instanceof PotionEffectToHave Effect) {
+        PotionEffects.add(Effect);
+      } else if (obj instanceof Object[]) {
+        OreDictionaryHelper.register(this, (Object[]) obj);
+      } else {
+        OreDictionaryHelper.register(this, obj);
+      }
+    }
+  }
+
+  public static ItemFoodTFCF get(ItemFoodTFCF food) {
+    return MAP.get(food);
+  }
+
+  public static ItemStack get(ItemTFCF food, int amount) {
+    return new ItemStack(MAP.get(food), amount);
+  }
+
+  @Override
+  public ICapabilityProvider getCustomFoodHandler() {
+    return new FoodHeatHandler(null, data, 1.0F, 200.0F);
+  }
+
+  @Override
+  protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
+    if (!PotionEffects.isEmpty()) {
+      for (PotionEffectToHave Effect : PotionEffects) {
+        if (MathConstants.RNG.nextInt(Effect.chance) == 0) {
+          player.addPotionEffect(new PotionEffect(Effect.PotionEffect, Effect.Duration, Effect.Power));
         }
+      }
     }
-
-    public static ItemFoodTFCF get(ItemFoodTFCF food) {
-        return MAP.get(food);
-    }
-
-    public static ItemStack get(ItemTFCF food, int amount) {
-        return new ItemStack(MAP.get(food), amount);
-    }
-
-    @Override
-    public ICapabilityProvider getCustomFoodHandler() {
-        return new FoodHeatHandler(null, data, 1.0F, 200.0F);
-    }
-
-    @Override
-    protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
-        if (!PotionEffects.isEmpty())
-            for (PotionEffectToHave Effect : PotionEffects) {
-                if (MathConstants.RNG.nextInt(Effect.chance) == 0)
-                    player.addPotionEffect(new PotionEffect(Effect.PotionEffect, Effect.Duration, Effect.Power));
-            }
-    }
+  }
 }

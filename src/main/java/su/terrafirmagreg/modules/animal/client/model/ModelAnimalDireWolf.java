@@ -204,9 +204,15 @@ public class ModelAnimalDireWolf extends ModelBase {
     tailMain.addChild(tailBody);
   }
 
+  public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    modelRenderer.rotateAngleX = x;
+    modelRenderer.rotateAngleY = y;
+    modelRenderer.rotateAngleZ = z;
+  }
+
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-      float par6, float par7) {
+          float par6, float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
     EntityAnimalDireWolf direwolf = ((EntityAnimalDireWolf) entity);
@@ -235,7 +241,7 @@ public class ModelAnimalDireWolf extends ModelBase {
 
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,
-      Entity entity) {
+          Entity entity) {
     setRotateAngle(head, f4 / (180F / MathConstants.PI), f3 / (180F / MathConstants.PI), 0F);
     //setRotateAngle(neckMane1, f4 / (1.5F * (180F / MathConstants.PI)) + -0.47123889803846897F, f3 / (1.5F * (180F / MathConstants.PI)), 0F);
     //setRotateAngle(neckManeLower1, f4 / (1.5F * (180F / MathConstants.PI)) + 0.3141592653589793F, f3 / (1.5F * (180F / MathConstants.PI)), 0F);
@@ -244,11 +250,5 @@ public class ModelAnimalDireWolf extends ModelBase {
     frontLLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1;
     backRLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1;
     backLLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
-  }
-
-  public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-    modelRenderer.rotateAngleX = x;
-    modelRenderer.rotateAngleY = y;
-    modelRenderer.rotateAngleZ = z;
   }
 }

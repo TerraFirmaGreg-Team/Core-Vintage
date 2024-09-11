@@ -24,8 +24,13 @@ public class BlockModel implements IModel {
   }
 
   @Override
+  public @NotNull Collection<ResourceLocation> getTextures() {
+    return Lists.newArrayList(loc);
+  }
+
+  @Override
   public @NotNull IBakedModel bake(@NotNull IModelState state, @NotNull VertexFormat format,
-      Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+          Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
     //текстурка
     TextureAtlasSprite sprite = bakedTextureGetter.apply(loc);
 
@@ -40,11 +45,6 @@ public class BlockModel implements IModel {
 
     /*Испекаем нашу модель*/
     return new BlockBakedModel(baker.bake(), bakedTextureGetter.apply(loc), format, state);
-  }
-
-  @Override
-  public @NotNull Collection<ResourceLocation> getTextures() {
-    return Lists.newArrayList(loc);
   }
 
 }

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.client.button;
 
-import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
-import static su.terrafirmagreg.data.Constants.MODID_TFCF;
-
+import su.terrafirmagreg.api.base.gui.component.button.BaseGuiButton;
+import su.terrafirmagreg.api.base.gui.component.button.IButtonTooltip;
+import su.terrafirmagreg.modules.device.objects.tiles.TileCrate;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -10,10 +10,8 @@ import net.minecraft.client.renderer.GlStateManager;
 
 import org.jetbrains.annotations.NotNull;
 
-
-import su.terrafirmagreg.api.base.gui.component.button.BaseGuiButton;
-import su.terrafirmagreg.api.base.gui.component.button.IButtonTooltip;
-import su.terrafirmagreg.modules.device.objects.tiles.TileCrate;
+import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
+import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
 public class GuiButtonCrate extends BaseGuiButton implements IButtonTooltip {
 
@@ -40,7 +38,7 @@ public class GuiButtonCrate extends BaseGuiButton implements IButtonTooltip {
       GlStateManager.color(1, 1, 1, 1);
       mc.getTextureManager().bindTexture(LARGE_VESSEL_BACKGROUND);
       hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
-          && mouseY < this.y + this.height;
+              && mouseY < this.y + this.height;
       if (tile.isSealed()) {
         drawModalRectWithCustomSizedTexture(x, y, 236, 0, 20, 20, 256, 256);
       } else {

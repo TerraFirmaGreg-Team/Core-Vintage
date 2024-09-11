@@ -35,18 +35,18 @@ public class GeneratorSoilPits implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (!(chunkGenerator instanceof ChunkGenClassic)) {
       return;
     }
     final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
     BlockPos pos = world.getTopSolidOrLiquidBlock(
-        chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
+            chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
     generateClay(world, random, pos);
 
     pos = world.getTopSolidOrLiquidBlock(
-        chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
+            chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
     generatePeat(world, random, pos);
   }
 
@@ -56,7 +56,7 @@ public class GeneratorSoilPits implements IWorldGenerator {
     int radius = rng.nextInt(6) + 2;
     int depth = rng.nextInt(3) + 1;
     if (rng.nextInt(ConfigWorld.MISC.clayRarity) != 0
-        || start.getY() > WorldTypeClassic.SEALEVEL + 6) {
+            || start.getY() > WorldTypeClassic.SEALEVEL + 6) {
       return;
     }
     if (ProviderChunkData.getRainfall(world, start) < ConfigWorld.MISC.clayRainfallThreshold) {
@@ -76,15 +76,15 @@ public class GeneratorSoilPits implements IWorldGenerator {
           final IBlockState current = world.getBlockState(pos);
           if (BlockUtils.isDirt(current)) {
             world.setBlockState(pos,
-                BlocksSoil.DIRT.get(ProviderChunkData.getSoilHeight(world, pos)).getDefaultState()
-                    .withProperty(CLAY, Boolean.TRUE),
-                2);
+                    BlocksSoil.DIRT.get(ProviderChunkData.getSoilHeight(world, pos)).getDefaultState()
+                            .withProperty(CLAY, Boolean.TRUE),
+                    2);
             flag = true;
           } else if (BlockUtils.isGrass(current)) {
             world.setBlockState(pos,
-                BlocksSoil.GRASS.get(ProviderChunkData.getSoilHeight(world, pos)).getDefaultState()
-                    .withProperty(CLAY, Boolean.TRUE),
-                2);
+                    BlocksSoil.GRASS.get(ProviderChunkData.getSoilHeight(world, pos)).getDefaultState()
+                            .withProperty(CLAY, Boolean.TRUE),
+                    2);
             flag = true;
           }
         }
@@ -98,11 +98,11 @@ public class GeneratorSoilPits implements IWorldGenerator {
               int plantAge = plant.getAgeForWorldgen(rng, Climate.getActualTemp(world, pos));
 
               if (!world.provider.isNether() && !world.isOutsideBuildHeight(pos) &&
-                  plant.isValidLocation(Climate.getActualTemp(world, pos),
-                      ProviderChunkData.getRainfall(world, pos),
-                      world.getLightFor(EnumSkyBlock.SKY, pos)) &&
-                  world.isAirBlock(pos) &&
-                  plantBlock.canBlockStay(world, pos, state)) {
+                      plant.isValidLocation(Climate.getActualTemp(world, pos),
+                              ProviderChunkData.getRainfall(world, pos),
+                              world.getLightFor(EnumSkyBlock.SKY, pos)) &&
+                      world.isAirBlock(pos) &&
+                      plantBlock.canBlockStay(world, pos, state)) {
                 world.setBlockState(pos, state.withProperty(BlockPlantTFC.AGE, plantAge), 2);
               }
             }
@@ -123,8 +123,8 @@ public class GeneratorSoilPits implements IWorldGenerator {
     }
     var data = CapabilityChunkData.get(world, start);
     if (data.isInitialized() && data.getRainfall() >= 375f && data.getFloraDiversity() >= 0.5f
-        && data.getFloraDensity() >= 0.5f &&
-        world.getBiome(start).getHeightVariation() < 0.15) {
+            && data.getFloraDensity() >= 0.5f &&
+            world.getBiome(start).getHeightVariation() < 0.15) {
       return;
     }
 

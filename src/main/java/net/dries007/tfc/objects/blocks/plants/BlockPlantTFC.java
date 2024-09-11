@@ -52,301 +52,300 @@ import java.util.Random;
 
 public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
 
-    public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
-    public static final PropertyInteger DAYPERIOD = PropertyInteger.create("dayperiod", 0, 3);
-    private static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 1.0, 0.875);
-    private static final Map<Plant, BlockPlantTFC> MAP = new HashMap<>();
-    public final PropertyInteger growthStageProperty;
-    protected final Plant plant;
-    protected final BlockStateContainer blockState;
+  public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
+  public static final PropertyInteger DAYPERIOD = PropertyInteger.create("dayperiod", 0, 3);
+  private static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 1.0, 0.875);
+  private static final Map<Plant, BlockPlantTFC> MAP = new HashMap<>();
+  public final PropertyInteger growthStageProperty;
+  protected final Plant plant;
+  protected final BlockStateContainer blockState;
 
-    public BlockPlantTFC(Plant plant) {
-        super(plant.getMaterial());
-        if (MAP.put(plant, this) != null) {
-            throw new IllegalStateException("There can only be one.");
+  public BlockPlantTFC(Plant plant) {
+    super(plant.getMaterial());
+    if (MAP.put(plant, this) != null) {
+      throw new IllegalStateException("There can only be one.");
+    } else {
+      plant.getOreDictName().ifPresent((name) -> {
+        OreDictionaryHelper.register(this, name);
+      });
+      this.plant = plant;
+      this.growthStageProperty = PropertyInteger.create("stage", 0, plant.getNumStages());
+      this.setTickRandomly(true);
+      this.setSoundType(SoundType.PLANT);
+      this.setHardness(0.0F);
+      BlockUtils.setFireInfo(this, 5, 20);
+      this.blockState = this.createPlantBlockState();
+      this.setDefaultState(this.blockState.getBaseState());
+    }
+  }
+
+  @NotNull
+  protected BlockStateContainer createPlantBlockState() {
+    return new BlockStateContainer(this, this.growthStageProperty, DAYPERIOD, AGE);
+  }
+
+  public static BlockPlantTFC get(Plant plant) {
+    return MAP.get(plant);
+  }
+
+  @NotNull
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState().withProperty(AGE, meta);
+  }
+
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(AGE);
+  }
+
+  @NotNull
+  public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+    return state.withProperty(DAYPERIOD, this.getDayPeriod())
+            .withProperty(this.growthStageProperty, this.plant.getStageForMonth());
+  }
+
+  public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+    return true;
+  }
+
+  public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
+    if (worldIn.isAreaLoaded(pos, 1)) {
+      Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
+      int currentStage = state.getValue(this.growthStageProperty);
+      int expectedStage = this.plant.getStageForMonth(currentMonth);
+      int currentTime = state.getValue(DAYPERIOD);
+      int expectedTime = this.getDayPeriod();
+      if (currentTime != expectedTime) {
+        worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, expectedTime)
+                .withProperty(this.growthStageProperty, currentStage));
+      }
+
+      if (currentStage != expectedStage && random.nextDouble() < 0.5) {
+        worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, expectedTime)
+                .withProperty(this.growthStageProperty, expectedStage));
+      }
+
+      this.updateTick(worldIn, pos, state, random);
+    }
+  }
+
+  public int tickRate(World worldIn) {
+    return 10;
+  }
+
+  public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+    world.setBlockState(pos, state.withProperty(DAYPERIOD, this.getDayPeriod())
+            .withProperty(this.growthStageProperty, this.plant.getStageForMonth()));
+    this.checkAndDropBlock(world, pos, state);
+  }
+
+  @NotNull
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return !this.plant.getOreDictName().isPresent() ? Items.AIR : Item.getItemFromBlock(this);
+  }
+
+  public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+    if (!(entityIn instanceof EntityPlayer) || !((EntityPlayer) entityIn).isCreative()) {
+      double modifier = 0.25 * (double) (4 - state.getValue(AGE));
+      modifier += (1.0 - modifier) * this.plant.getMovementMod();
+      if (modifier < ConfigTFC.General.MISC.minimumPlantMovementModifier) {
+        modifier = ConfigTFC.General.MISC.minimumPlantMovementModifier;
+      }
+
+      entityIn.motionX *= modifier;
+      entityIn.motionZ *= modifier;
+    }
+
+  }
+
+  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack stack) {
+    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
+    int currentStage = state.getValue(this.growthStageProperty);
+    int expectedStage = this.plant.getStageForMonth(currentMonth);
+    if (!this.plant.getOreDictName().isPresent() && !worldIn.isRemote && (stack.getItem()
+            .getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
+            .getHarvestLevel(stack, "scythe", player, state) != -1) && this.plant.getPlantType() != Plant.PlantType.SHORT_GRASS &&
+            this.plant.getPlantType() != Plant.PlantType.TALL_GRASS) {
+      if (this.plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BLUE_GINGER)) {
+        int chance;
+        if (currentStage != 0 && expectedStage != 0) {
+          chance = MathConstants.RNG.nextInt(2);
+          if (chance == 0) {
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), MathConstants.RNG.nextInt(2)));
+          }
         } else {
-            plant.getOreDictName().ifPresent((name) -> {
-                OreDictionaryHelper.register(this, name);
-            });
-            this.plant = plant;
-            this.growthStageProperty = PropertyInteger.create("stage", 0, plant.getNumStages());
-            this.setTickRandomly(true);
-            this.setSoundType(SoundType.PLANT);
-            this.setHardness(0.0F);
-            BlockUtils.setFireInfo(this, 5, 20);
-            this.blockState = this.createPlantBlockState();
-            this.setDefaultState(this.blockState.getBaseState());
+          chance = MathConstants.RNG.nextInt(2);
+          if (chance == 0) {
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.GINGER, 1 + MathConstants.RNG.nextInt(2)));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), MathConstants.RNG.nextInt(2)));
+          } else if (chance == 1) {
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), 1 + MathConstants.RNG.nextInt(2)));
+          }
         }
+      } else {
+        spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
+      }
     }
 
-    public static BlockPlantTFC get(Plant plant) {
-        return MAP.get(plant);
+    super.harvestBlock(worldIn, player, pos, state, tile, stack);
+  }
+
+  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    if (!this.canBlockStay(worldIn, pos, state) && placer instanceof EntityPlayer && !((EntityPlayer) placer).isCreative() &&
+            !this.plant.getOreDictName()
+                    .isPresent()) {
+      spawnAsEntity(worldIn, pos, new ItemStack(this));
     }
 
-    @NotNull
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(AGE, meta);
-    }
+  }
 
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(AGE);
-    }
+  @NotNull
+  public BlockStateContainer getBlockState() {
+    return this.blockState;
+  }
 
-    @NotNull
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return state.withProperty(DAYPERIOD, this.getDayPeriod())
-                .withProperty(this.growthStageProperty, this.plant.getStageForMonth());
-    }
+  @NotNull
+  public Block.EnumOffsetType getOffsetType() {
+    return EnumOffsetType.XYZ;
+  }
 
-    public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+  public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player) {
+    ItemStack stack = player.getHeldItemMainhand();
+    IBlockState state = world.getBlockState(pos);
+    switch (this.plant.getPlantType()) {
+      case REED:
+      case REED_SEA:
+      case TALL_REED:
+      case TALL_REED_SEA:
+      case SHORT_GRASS:
+      case TALL_GRASS:
+        return stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
+                .getHarvestLevel(stack, "scythe", player, state) != -1;
+      default:
         return true;
     }
+  }
 
-    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-        if (worldIn.isAreaLoaded(pos, 1)) {
-            Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
-            int currentStage = state.getValue(this.growthStageProperty);
-            int expectedStage = this.plant.getStageForMonth(currentMonth);
-            int currentTime = state.getValue(DAYPERIOD);
-            int expectedTime = this.getDayPeriod();
-            if (currentTime != expectedTime) {
-                worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, expectedTime)
-                        .withProperty(this.growthStageProperty, currentStage));
-            }
+  private boolean isValidSoil(IBlockState state) {
+    return switch (this.plant.getPlantType()) {
+      case REED, REED_SEA, TALL_REED, TALL_REED_SEA -> BlockUtils.isSand(state) || BlockUtils.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY ||
+              state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+      case SHORT_GRASS, TALL_GRASS, FLOATING, FLOATING_SEA, MUSHROOM, CACTUS, DESERT, DESERT_TALL_PLANT ->
+              BlockUtils.isSand(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+      case DRY, DRY_TALL_PLANT -> BlockUtils.isSand(state) || BlockUtils.isDryGrass(state) ||
+              state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+      case WATER, TALL_WATER, EMERGENT_TALL_WATER, WATER_SEA, TALL_WATER_SEA, EMERGENT_TALL_WATER_SEA ->
+              BlockUtils.isSand(state) || BlockUtils.isSoilOrGravel(state) || BlockUtils.isSoil(state) || BlockUtils.isGround(state) ||
+                      state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+      default -> BlockUtils.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY ||
+              state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+    };
+  }
 
-            if (currentStage != expectedStage && random.nextDouble() < 0.5) {
-                worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, expectedTime)
-                        .withProperty(this.growthStageProperty, expectedStage));
-            }
+  public double getGrowthRate(World world, BlockPos pos) {
+    return world.isRainingAt(pos) ? ConfigTFC.General.MISC.plantGrowthRate * 5.0 : ConfigTFC.General.MISC.plantGrowthRate;
+  }
 
-            this.updateTick(worldIn, pos, state, random);
+  int getDayPeriod() {
+    return Calendar.CALENDAR_TIME.getHourOfDay() / 6;
+  }
+
+  public Plant getPlant() {
+    return this.plant;
+  }
+
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.VERY_LIGHT;
+  }
+
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.TINY;
+  }
+
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    IBlockState soil = worldIn.getBlockState(pos.down());
+    Block blockAt = worldIn.getBlockState(pos).getBlock();
+    return blockAt.isReplaceable(worldIn, pos) && blockAt != this && soil.getBlock()
+            .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
+  }
+
+  protected boolean canSustainBush(IBlockState state) {
+    if (!this.plant.getIsClayMarking()) {
+      return this.isValidSoil(state);
+    } else {
+      return BlockUtils.isClay(state) || this.isValidSoil(state);
+    }
+  }
+
+  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    if (worldIn.isAreaLoaded(pos, 1)) {
+      int j;
+      if (this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
+              this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+        j = state.getValue(AGE);
+        if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
+          if (j < 3) {
+            worldIn.setBlockState(pos, state.withProperty(AGE, j + 1));
+          }
+
+          ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
         }
-    }
+      } else if (!this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
+              !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+        j = state.getValue(AGE);
+        if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+          if (j > 0) {
+            worldIn.setBlockState(pos, state.withProperty(AGE, j - 1));
+          }
 
-    public int tickRate(World worldIn) {
-        return 10;
-    }
-
-    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-        world.setBlockState(pos, state.withProperty(DAYPERIOD, this.getDayPeriod())
-                .withProperty(this.growthStageProperty, this.plant.getStageForMonth()));
-        this.checkAndDropBlock(world, pos, state);
-    }
-
-    @NotNull
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return !this.plant.getOreDictName().isPresent() ? Items.AIR : Item.getItemFromBlock(this);
-    }
-
-    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (!(entityIn instanceof EntityPlayer) || !((EntityPlayer) entityIn).isCreative()) {
-            double modifier = 0.25 * (double) (4 - state.getValue(AGE));
-            modifier += (1.0 - modifier) * this.plant.getMovementMod();
-            if (modifier < ConfigTFC.General.MISC.minimumPlantMovementModifier) {
-                modifier = ConfigTFC.General.MISC.minimumPlantMovementModifier;
-            }
-
-            entityIn.motionX *= modifier;
-            entityIn.motionZ *= modifier;
+          ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
         }
+      }
 
+      this.checkAndDropBlock(worldIn, pos, state);
     }
+  }
 
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack stack) {
-        Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
-        int currentStage = state.getValue(this.growthStageProperty);
-        int expectedStage = this.plant.getStageForMonth(currentMonth);
-        if (!this.plant.getOreDictName().isPresent() && !worldIn.isRemote && (stack.getItem()
-                .getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-                .getHarvestLevel(stack, "scythe", player, state) != -1) && this.plant.getPlantType() != Plant.PlantType.SHORT_GRASS &&
-                this.plant.getPlantType() != Plant.PlantType.TALL_GRASS) {
-            if (this.plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BLUE_GINGER)) {
-                int chance;
-                if (currentStage != 0 && expectedStage != 0) {
-                    chance = MathConstants.RNG.nextInt(2);
-                    if (chance == 0) {
-                        spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), MathConstants.RNG.nextInt(2)));
-                    }
-                } else {
-                    chance = MathConstants.RNG.nextInt(2);
-                    if (chance == 0) {
-                        spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.GINGER, 1 + MathConstants.RNG.nextInt(2)));
-                        spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), MathConstants.RNG.nextInt(2)));
-                    } else if (chance == 1) {
-                        spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), 1 + MathConstants.RNG.nextInt(2)));
-                    }
-                }
-            } else {
-                spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
-            }
-        }
-
-        super.harvestBlock(worldIn, player, pos, state, tile, stack);
+  public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+    IBlockState soil = worldIn.getBlockState(pos.down());
+    if (state.getBlock() != this) {
+      return this.canSustainBush(soil);
+    } else {
+      return soil.getBlock()
+              .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) &&
+              this.plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
+              this.plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
+  }
 
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        if (!this.canBlockStay(worldIn, pos, state) && placer instanceof EntityPlayer && !((EntityPlayer) placer).isCreative() &&
-                !this.plant.getOreDictName()
-                        .isPresent()) {
-            spawnAsEntity(worldIn, pos, new ItemStack(this));
-        }
+  @NotNull
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return PLANT_AABB.offset(state.getOffset(source, pos));
+  }
 
+  @Nullable
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return this.plant.getMovementMod() == 0.0 ? blockState.getBoundingBox(worldIn, pos) : NULL_AABB;
+  }
+
+  @NotNull
+  public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+    switch (this.plant.getPlantType()) {
+      case CACTUS:
+      case DESERT:
+      case DESERT_TALL_PLANT:
+        return EnumPlantType.Desert;
+      case FLOATING:
+      case FLOATING_SEA:
+        return EnumPlantType.Water;
+      case MUSHROOM:
+        return EnumPlantType.Cave;
+      default:
+        return EnumPlantType.Plains;
     }
+  }
 
-    @NotNull
-    public BlockStateContainer getBlockState() {
-        return this.blockState;
-    }
-
-    @NotNull
-    public Block.EnumOffsetType getOffsetType() {
-        return EnumOffsetType.XYZ;
-    }
-
-    public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player) {
-        ItemStack stack = player.getHeldItemMainhand();
-        IBlockState state = world.getBlockState(pos);
-        switch (this.plant.getPlantType()) {
-            case REED:
-            case REED_SEA:
-            case TALL_REED:
-            case TALL_REED_SEA:
-            case SHORT_GRASS:
-            case TALL_GRASS:
-                return stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-                        .getHarvestLevel(stack, "scythe", player, state) != -1;
-            default:
-                return true;
-        }
-    }
-
-    public Plant getPlant() {
-        return this.plant;
-    }
-
-    public @NotNull Size getSize(ItemStack stack) {
-        return Size.TINY;
-    }
-
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return Weight.VERY_LIGHT;
-    }
-
-    public double getGrowthRate(World world, BlockPos pos) {
-        return world.isRainingAt(pos) ? ConfigTFC.General.MISC.plantGrowthRate * 5.0 : ConfigTFC.General.MISC.plantGrowthRate;
-    }
-
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        IBlockState soil = worldIn.getBlockState(pos.down());
-        Block blockAt = worldIn.getBlockState(pos).getBlock();
-        return blockAt.isReplaceable(worldIn, pos) && blockAt != this && soil.getBlock()
-                .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
-    }
-
-    protected boolean canSustainBush(IBlockState state) {
-        if (!this.plant.getIsClayMarking()) {
-            return this.isValidSoil(state);
-        } else {
-            return BlockUtils.isClay(state) || this.isValidSoil(state);
-        }
-    }
-
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if (worldIn.isAreaLoaded(pos, 1)) {
-            int j;
-            if (this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
-                    this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-                j = state.getValue(AGE);
-                if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
-                    if (j < 3) {
-                        worldIn.setBlockState(pos, state.withProperty(AGE, j + 1));
-                    }
-
-                    ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-                }
-            } else if (!this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
-                    !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-                j = state.getValue(AGE);
-                if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
-                    if (j > 0) {
-                        worldIn.setBlockState(pos, state.withProperty(AGE, j - 1));
-                    }
-
-                    ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-                }
-            }
-
-            this.checkAndDropBlock(worldIn, pos, state);
-        }
-    }
-
-    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-        IBlockState soil = worldIn.getBlockState(pos.down());
-        if (state.getBlock() != this) {
-            return this.canSustainBush(soil);
-        } else {
-            return soil.getBlock()
-                    .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) &&
-                    this.plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
-                    this.plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
-        }
-    }
-
-    @NotNull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return PLANT_AABB.offset(state.getOffset(source, pos));
-    }
-
-    @Nullable
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return this.plant.getMovementMod() == 0.0 ? blockState.getBoundingBox(worldIn, pos) : NULL_AABB;
-    }
-
-    @NotNull
-    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-        switch (this.plant.getPlantType()) {
-            case CACTUS:
-            case DESERT:
-            case DESERT_TALL_PLANT:
-                return EnumPlantType.Desert;
-            case FLOATING:
-            case FLOATING_SEA:
-                return EnumPlantType.Water;
-            case MUSHROOM:
-                return EnumPlantType.Cave;
-            default:
-                return EnumPlantType.Plains;
-        }
-    }
-
-    @NotNull
-    public Plant.EnumPlantTypeTFC getPlantTypeTFC() {
-        return this.plant.getEnumPlantTypeTFC();
-    }
-
-    @NotNull
-    protected BlockStateContainer createPlantBlockState() {
-        return new BlockStateContainer(this, this.growthStageProperty, DAYPERIOD, AGE);
-    }
-
-    int getDayPeriod() {
-        return Calendar.CALENDAR_TIME.getHourOfDay() / 6;
-    }
-
-    private boolean isValidSoil(IBlockState state) {
-        return switch (this.plant.getPlantType()) {
-            case REED, REED_SEA, TALL_REED, TALL_REED_SEA ->
-                    BlockUtils.isSand(state) || BlockUtils.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY ||
-                            state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-            case SHORT_GRASS, TALL_GRASS, FLOATING, FLOATING_SEA, MUSHROOM, CACTUS, DESERT, DESERT_TALL_PLANT ->
-                    BlockUtils.isSand(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-            case DRY, DRY_TALL_PLANT -> BlockUtils.isSand(state) || BlockUtils.isDryGrass(state) ||
-                    state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-            case WATER, TALL_WATER, EMERGENT_TALL_WATER, WATER_SEA, TALL_WATER_SEA, EMERGENT_TALL_WATER_SEA ->
-                    BlockUtils.isSand(state) || BlockUtils.isSoilOrGravel(state) || BlockUtils.isSoil(state) || BlockUtils.isGround(state) ||
-                            state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-            default -> BlockUtils.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY ||
-                    state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-        };
-    }
+  @NotNull
+  public Plant.EnumPlantTypeTFC getPlantTypeTFC() {
+    return this.plant.getEnumPlantTypeTFC();
+  }
 }

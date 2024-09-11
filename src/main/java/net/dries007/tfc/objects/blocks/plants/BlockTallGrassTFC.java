@@ -98,68 +98,6 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
 
   }
 
-  public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-    int i;
-    for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i) {
-    }
-
-    return i < this.plant.getMaxHeight() && worldIn.isAirBlock(pos.up()) && this.canBlockStay(worldIn, pos.up(), state);
-  }
-
-  public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-    return false;
-  }
-
-  public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-    worldIn.setBlockState(pos.up(), this.getDefaultState());
-    IBlockState iblockstate = state.withProperty(AGE, 0)
-            .withProperty(this.growthStageProperty, this.plant.getStageForMonth())
-            .withProperty(PART, this.getPlantPart(worldIn, pos));
-    worldIn.setBlockState(pos, iblockstate);
-    iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
-  }
-
-  public void shrink(World worldIn, BlockPos pos) {
-    worldIn.setBlockToAir(pos);
-    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
-  }
-
-  public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
-    int currentStage = state.getValue(this.growthStageProperty);
-    this.plant.getStageForMonth(currentMonth);
-    int age = state.getValue(AGE);
-    if (!worldIn.isRemote) {
-      ItemStack stack = player.getHeldItemMainhand();
-      int i;
-      if (stack.getItem().getHarvestLevel(stack, "knife", player, state) == -1 && stack.getItem()
-              .getHarvestLevel(stack, "scythe", player, state) == -1) {
-        if (stack.getItem() == Items.SHEARS) {
-          for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
-            spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
-          }
-        }
-      } else {
-        for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
-          if (RNG.nextDouble() <= (double) (age + 1) / 4.0) {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
-          }
-        }
-      }
-    }
-
-  }
-
-  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
-    this.onBlockHarvested(world, pos, state, player);
-    return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
-  }
-
-  public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
-    IBlockState plant = plantable.getPlant(world, pos.offset(direction));
-    return plant.getBlock() == this || super.canSustainPlant(state, world, pos, direction, plantable);
-  }
-
   @NotNull
   public Block.EnumOffsetType getOffsetType() {
     return EnumOffsetType.XZ;
@@ -200,6 +138,67 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
     }
   }
 
+  public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+    int i;
+    for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i) {
+    }
+
+    return i < this.plant.getMaxHeight() && worldIn.isAirBlock(pos.up()) && this.canBlockStay(worldIn, pos.up(), state);
+  }
+
+  public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+    return false;
+  }
+
+  public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+    worldIn.setBlockState(pos.up(), this.getDefaultState());
+    IBlockState iblockstate = state.withProperty(AGE, 0)
+            .withProperty(this.growthStageProperty, this.plant.getStageForMonth())
+            .withProperty(PART, this.getPlantPart(worldIn, pos));
+    worldIn.setBlockState(pos, iblockstate);
+    iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
+  }  public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
+    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
+    int currentStage = state.getValue(this.growthStageProperty);
+    this.plant.getStageForMonth(currentMonth);
+    int age = state.getValue(AGE);
+    if (!worldIn.isRemote) {
+      ItemStack stack = player.getHeldItemMainhand();
+      int i;
+      if (stack.getItem().getHarvestLevel(stack, "knife", player, state) == -1 && stack.getItem()
+              .getHarvestLevel(stack, "scythe", player, state) == -1) {
+        if (stack.getItem() == Items.SHEARS) {
+          for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
+            spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
+          }
+        }
+      } else {
+        for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
+          if (RNG.nextDouble() <= (double) (age + 1) / 4.0) {
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
+          }
+        }
+      }
+    }
+
+  }
+
+  private boolean canShrink(World worldIn, BlockPos pos) {
+    return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
+            .getBlock() != this;
+  }  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+    this.onBlockHarvested(world, pos, state, player);
+    return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
+  }
+
+  public void shrink(World worldIn, BlockPos pos) {
+    worldIn.setBlockToAir(pos);
+    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
+  }  public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
+    IBlockState plant = plantable.getPlant(world, pos.offset(direction));
+    return plant.getBlock() == this || super.canSustainPlant(state, world, pos, direction, plantable);
+  }
+
   @NotNull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     return this.getTallBoundingBax(state.getValue(AGE), state, source, pos);
@@ -219,8 +218,9 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
     return NonNullList.withSize(1, new ItemStack(this, 1));
   }
 
-  private boolean canShrink(World worldIn, BlockPos pos) {
-    return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
-            .getBlock() != this;
-  }
+
+
+
+
+
 }

@@ -27,34 +27,34 @@ public class BlockBakedModel implements IBakedModel {
   IModelState state;
   //Трансформация от первого лица в правой руке
   ItemTransformVec3f firstperson_righthand = new ItemTransformVec3f(new Vector3f(0, 45, 0),
-      new Vector3f(0, 0, 0),
-      new Vector3f(0.40f, 0.40f, 0.40f));
+          new Vector3f(0, 0, 0),
+          new Vector3f(0.40f, 0.40f, 0.40f));
   //От первого лица в левой руке
   ItemTransformVec3f firstperson_lefthand = new ItemTransformVec3f(new Vector3f(0, 225, 0),
-      new Vector3f(0, 0, 0),
-      new Vector3f(0.40f, 0.40f, 0.40f));
+          new Vector3f(0, 0, 0),
+          new Vector3f(0.40f, 0.40f, 0.40f));
   //От третьего лица
   ItemTransformVec3f thirdperson_righthand = new ItemTransformVec3f(new Vector3f(75, 45, 0),
-      new Vector3f(0, 0.15f, 0),
-      new Vector3f(0.375f, 0.375f, 0.375f));
+          new Vector3f(0, 0.15f, 0),
+          new Vector3f(0.375f, 0.375f, 0.375f));
   //На голове
   ItemTransformVec3f fixed = new ItemTransformVec3f(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0),
-      new Vector3f(0.5f, 0.5f, 0.5f));
+          new Vector3f(0.5f, 0.5f, 0.5f));
   //В виде предмета в мире(EntityItem)
   ItemTransformVec3f ground = new ItemTransformVec3f(new Vector3f(0, 0, 0),
-      new Vector3f(0, 0.15f, 0), new Vector3f(0.25f, 0.25f, 0.25f));
+          new Vector3f(0, 0.15f, 0), new Vector3f(0.25f, 0.25f, 0.25f));
   //В графическом интерфейсе
   ItemTransformVec3f gui = new ItemTransformVec3f(new Vector3f(30, 225, 0), new Vector3f(0, 0, 0),
-      new Vector3f(0.625f, 0.625f, 0.625f));
+          new Vector3f(0.625f, 0.625f, 0.625f));
   //Общая транфсормация
   ItemCameraTransforms itemCameraTransforms = new ItemCameraTransforms(thirdperson_righthand,
-      thirdperson_righthand, firstperson_lefthand,
-      firstperson_righthand, ItemTransformVec3f.DEFAULT, gui, ground, fixed);
+          thirdperson_righthand, firstperson_lefthand,
+          firstperson_righthand, ItemTransformVec3f.DEFAULT, gui, ground, fixed);
 
   //Копируем все трансформации из block/generated.json
 
   public BlockBakedModel(List<BakedQuad> bakedQuads, TextureAtlasSprite textureParticle,
-      VertexFormat format, IModelState state) {
+          VertexFormat format, IModelState state) {
     this.bakedQuads = bakedQuads;
     this.textureParticle = textureParticle;
     this.format = format;
@@ -63,7 +63,7 @@ public class BlockBakedModel implements IBakedModel {
 
   @Override
   public @NotNull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side,
-      long rand) {
+          long rand) {
     return bakedQuads;
   }
 
@@ -88,13 +88,13 @@ public class BlockBakedModel implements IBakedModel {
   }
 
   @Override
-  public @NotNull ItemOverrideList getOverrides() {
-    return ItemOverrideList.NONE;
+  public ItemCameraTransforms getItemCameraTransforms() {
+    return itemCameraTransforms;
   }
 
   @Override
-  public ItemCameraTransforms getItemCameraTransforms() {
-    return itemCameraTransforms;
+  public @NotNull ItemOverrideList getOverrides() {
+    return ItemOverrideList.NONE;
   }
 
 }

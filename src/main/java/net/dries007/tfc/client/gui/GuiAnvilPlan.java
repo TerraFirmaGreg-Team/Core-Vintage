@@ -75,31 +75,6 @@ public class GuiAnvilPlan extends BaseGuiContainerTile<TileMetalAnvil> {
     super.drawGuiContainerForegroundLayer(mouseX, mouseY);
   }
 
-  @Override
-  protected void actionPerformed(GuiButton button) throws IOException {
-    if (button instanceof GuiButtonAnvilPlanIcon) {
-      // This fires when you select a plan in the Plan GUI
-      ResourceLocation recipeName = ((GuiButtonAnvilPlanIcon) button).getRecipeName();
-      TerraFirmaCraft.getNetwork()
-              .sendToServer(new PacketGuiButton(button.id, new NBTBuilder().setString("recipe", recipeName.toString())
-                      .build()));
-    } else if (button == buttonLeft) {
-      page--;
-      updatePage();
-    } else if (button == buttonRight) {
-      page++;
-      updatePage();
-    }
-    super.actionPerformed(button);
-  }
-
-  @Override
-  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    GlStateManager.color(1, 1, 1, 1);
-    mc.getTextureManager().bindTexture(background);
-    drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-  }
-
   private void updatePage() {
     buttonList.clear();
     int buttonID = -1;
@@ -124,5 +99,30 @@ public class GuiAnvilPlan extends BaseGuiContainerTile<TileMetalAnvil> {
         buttonRight.enabled = false;
       }
     }
+  }
+
+  @Override
+  protected void actionPerformed(GuiButton button) throws IOException {
+    if (button instanceof GuiButtonAnvilPlanIcon) {
+      // This fires when you select a plan in the Plan GUI
+      ResourceLocation recipeName = ((GuiButtonAnvilPlanIcon) button).getRecipeName();
+      TerraFirmaCraft.getNetwork()
+              .sendToServer(new PacketGuiButton(button.id, new NBTBuilder().setString("recipe", recipeName.toString())
+                      .build()));
+    } else if (button == buttonLeft) {
+      page--;
+      updatePage();
+    } else if (button == buttonRight) {
+      page++;
+      updatePage();
+    }
+    super.actionPerformed(button);
+  }
+
+  @Override
+  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    GlStateManager.color(1, 1, 1, 1);
+    mc.getTextureManager().bindTexture(background);
+    drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
   }
 }

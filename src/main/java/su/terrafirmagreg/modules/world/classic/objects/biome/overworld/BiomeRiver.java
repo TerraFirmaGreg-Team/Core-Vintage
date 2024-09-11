@@ -8,9 +8,9 @@ public class BiomeRiver extends BaseBiome {
 
   public BiomeRiver() {
     super(new Settings("River")
-        .guiColour(0x2B8CBA)
-        .baseHeight(-2.3f)
-        .heightVariation(-3f));
+            .guiColour(0x2B8CBA)
+            .baseHeight(-2.3f)
+            .heightVariation(-3f));
   }
 
   @Override
@@ -22,9 +22,9 @@ public class BiomeRiver extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-        BiomeDictionary.Type.RIVER,
-        BiomeDictionary.Type.WET,
-        BiomeDictionary.Type.WATER
+            BiomeDictionary.Type.RIVER,
+            BiomeDictionary.Type.WET,
+            BiomeDictionary.Type.WATER
     };
   }
 }

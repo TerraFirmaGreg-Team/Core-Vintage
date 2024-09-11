@@ -18,38 +18,40 @@ import org.jetbrains.annotations.NotNull;
 @MethodsReturnNonnullByDefault
 public class BlockTrellis extends BlockNonCube {
 
-    private static final AxisAlignedBB SHAPE = new AxisAlignedBB(2.0D / 16, 0.0D, 2.0D / 16, 14.0D / 16, 1.0D, 14.0D / 16);
+  private static final AxisAlignedBB SHAPE = new AxisAlignedBB(2.0D / 16, 0.0D, 2.0D / 16, 14.0D / 16, 1.0D, 14.0D / 16);
 
-    public BlockTrellis() {
-        super(Material.IRON);
-        setHardness(1.0f);
-        setResistance(1.0f);
-        setLightOpacity(0);
-    }
+  public BlockTrellis() {
+    super(Material.IRON);
+    setHardness(1.0f);
+    setResistance(1.0f);
+    setLightOpacity(0);
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return SHAPE;
-    }
+  @Override
+  @SuppressWarnings("deprecation")
+  @NotNull
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return SHAPE;
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!canStay(world, pos)) {
-            world.destroyBlock(pos, true);
-        }
+  @SuppressWarnings("deprecation")
+  @Override
+  public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    if (!canStay(world, pos)) {
+      world.destroyBlock(pos, true);
     }
+  }
 
-    private boolean canStay(IBlockAccess world, BlockPos pos) {
-        IBlockState state = world.getBlockState(pos.down());
-        return state.getBlock() instanceof BlockTrellis || state.getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
-    }
+  private boolean canStay(IBlockAccess world, BlockPos pos) {
+    IBlockState state = world.getBlockState(pos.down());
+    return state.getBlock() instanceof BlockTrellis || state.getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+  }
 
-    @Override
-    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
-        if (!canStay(worldIn, pos)) return false;
-        return super.canPlaceBlockOnSide(worldIn, pos, side);
+  @Override
+  public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
+    if (!canStay(worldIn, pos)) {
+      return false;
     }
+    return super.canPlaceBlockOnSide(worldIn, pos, side);
+  }
 }

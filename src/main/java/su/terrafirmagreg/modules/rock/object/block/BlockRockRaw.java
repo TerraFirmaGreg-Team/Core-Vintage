@@ -98,6 +98,11 @@ public class BlockRockRaw extends BlockRock {
   }
 
   @Override
+  public int quantityDropped(IBlockState state, int fortune, Random random) {
+    return 1 + random.nextInt(3);
+  }
+
+  @Override
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
     super.getDrops(drops, world, pos, state, fortune);
 
@@ -110,11 +115,6 @@ public class BlockRockRaw extends BlockRock {
     //		if (RANDOM.nextDouble() < ModuleRockConfig.MISC.stoneGemDropChance) {
     //			drops.add(GemsFromRawRocks.getRandomGem());
     //		}
-  }
-
-  @Override
-  public int quantityDropped(IBlockState state, int fortune, Random random) {
-    return 1 + random.nextInt(3);
   }
 
 }

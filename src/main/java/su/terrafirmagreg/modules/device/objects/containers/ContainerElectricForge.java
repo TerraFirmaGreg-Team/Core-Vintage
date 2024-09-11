@@ -15,7 +15,7 @@ import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import org.jetbrains.annotations.Nullable;
 
 public class ContainerElectricForge extends ContainerTE<TileElectricForge> implements
-    IButtonHandler {
+        IButtonHandler {
 
   public ContainerElectricForge(InventoryPlayer playerInv, TileElectricForge tile) {
     super(playerInv, tile);
@@ -37,7 +37,7 @@ public class ContainerElectricForge extends ContainerTE<TileElectricForge> imple
   @Override
   protected void addContainerSlots() {
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-        null);
+            null);
     if (inventory != null) {
       for (int i = 0; i < 9; i++) {
         int row = i / 3;

@@ -17,27 +17,27 @@ import net.dries007.tfc.objects.items.metal.ItemTechMetal;
 
 public class UnmoldRecipeWrapper implements IRecipeWrapper {
 
-    private final ItemStack mold;
-    private final ItemStack output;
+  private final ItemStack mold;
+  private final ItemStack output;
 
-    public UnmoldRecipeWrapper(Metal metal, ItemTechMetal.ItemType type) {
-        mold = new ItemStack(ItemTechMold.get(type));
-        IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler) {
-            cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100), true);
-        }
-        //noinspection ConstantConditions
-        output = new ItemStack(ItemTechMetal.get(metal, type));
+  public UnmoldRecipeWrapper(Metal metal, ItemTechMetal.ItemType type) {
+    mold = new ItemStack(ItemTechMold.get(type));
+    IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+    if (cap instanceof IMoldHandler) {
+      cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100), true);
     }
+    //noinspection ConstantConditions
+    output = new ItemStack(ItemTechMetal.get(metal, type));
+  }
 
-    public UnmoldRecipeWrapper(ItemStack inputMold, ItemStack output) {
-        this.mold = inputMold;
-        this.output = output;
-    }
+  public UnmoldRecipeWrapper(ItemStack inputMold, ItemStack output) {
+    this.mold = inputMold;
+    this.output = output;
+  }
 
-    @Override
-    public void getIngredients(IIngredients ingredients) {
-        ingredients.setInput(VanillaTypes.ITEM, mold);
-        ingredients.setOutput(VanillaTypes.ITEM, output);
-    }
+  @Override
+  public void getIngredients(IIngredients ingredients) {
+    ingredients.setInput(VanillaTypes.ITEM, mold);
+    ingredients.setOutput(VanillaTypes.ITEM, output);
+  }
 }

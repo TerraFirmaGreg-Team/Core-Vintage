@@ -25,84 +25,84 @@ import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class AgedRegistry {
 
-    private static final ResourceLocation STILL = new ResourceLocation(MODID_TFC, "blocks/fluid_still");
-    private static final ResourceLocation FLOW = new ResourceLocation(MODID_TFC, "blocks/fluid_flow");
-    public static Fluid
-            RUM,
-            BEER,
-            WHISKEY,
-            CORN_WHISKEY,
-            RYE_WHISKEY,
-            VODKA,
-            CIDER,
-            SAKE;
+  private static final ResourceLocation STILL = new ResourceLocation(MODID_TFC, "blocks/fluid_still");
+  private static final ResourceLocation FLOW = new ResourceLocation(MODID_TFC, "blocks/fluid_flow");
+  public static Fluid
+          RUM,
+          BEER,
+          WHISKEY,
+          CORN_WHISKEY,
+          RYE_WHISKEY,
+          VODKA,
+          CIDER,
+          SAKE;
 
-    public static Fluid createAgedDrink(String name, Potion potion, int duration, int amplifier) {
-        Fluid youngFluid = FluidRegistry.getFluid(name);
-        DrinkableProperty property = (player) -> {
-            player.addPotionEffect(new PotionEffect(potion, duration, amplifier, false, false));
-            if (AgedDrinksConfig.General.enableDrunkness) {
-                if (Math.random() < 0.25) {
-                    PotionEffect effect = new PotionEffect(MobEffects.NAUSEA, 1500, 0, false, false);
-                    effect.setCurativeItems(new ArrayList<>());
-                    player.addPotionEffect(effect);
-                }
-            }
-        };
+  public static void registerAgedDrinks(RegistryEvent.Register<BarrelRecipe> event) {
+    RUM = createAgedDrink("rum", MobEffects.JUMP_BOOST, AgedDrinksConfig.General.jumpBoostTicks, AgedDrinksConfig.General.jumpBoostLevel);
+    event.getRegistry().register(getRecipeFor("rum"));
 
-        Fluid agedFluid = new Fluid("aged_" + name, STILL, FLOW, youngFluid.getColor()).setRarity(EnumRarity.UNCOMMON);
-        FluidWrapper agedFluidWrapper = registerFluid(agedFluid).with(DrinkableProperty.DRINKABLE, property);
+    WHISKEY = createAgedDrink("whiskey", MobEffects.HASTE, AgedDrinksConfig.General.hasteTicks, AgedDrinksConfig.General.hasteLevel);
+    event.getRegistry().register(getRecipeFor("whiskey"));
 
-        return agedFluid;
-    }
+    RYE_WHISKEY = createAgedDrink("rye_whiskey", MobEffects.HASTE, AgedDrinksConfig.General.hasteTicks, AgedDrinksConfig.General.hasteLevel);
+    event.getRegistry().register(getRecipeFor("rye_whiskey"));
 
-    public static BarrelRecipe getRecipeFor(String name) {
-        int len = 8 * 24000 * 3;
-        BarrelRecipe br = new BarrelRecipe(
-                IIngredient.of(FluidRegistry.getFluid(name), 1000),
-                IIngredient.of(Items.AIR),
-                new FluidStack(FluidRegistry.getFluid("aged_" + name), 1000),
-                new ItemStack(Items.AIR),
-                len
-        );
-        br.setRegistryName("aged_" + name);
-        return br;
-    }
+    CORN_WHISKEY = createAgedDrink("corn_whiskey", MobEffects.HASTE, AgedDrinksConfig.General.hasteTicks, AgedDrinksConfig.General.hasteLevel);
+    event.getRegistry().register(getRecipeFor("corn_whiskey"));
 
-    public static FluidWrapper registerFluid(Fluid newFluid) {
-        boolean isDefault = FluidRegistry.registerFluid(newFluid);
-        if (!isDefault) {
-            newFluid = FluidRegistry.getFluid(newFluid.getName());
+    VODKA = createAgedDrink("vodka", MobEffects.RESISTANCE, AgedDrinksConfig.General.resistanceTicks, AgedDrinksConfig.General.resistanceLevel);
+    event.getRegistry().register(getRecipeFor("vodka"));
+
+    CIDER = createAgedDrink("cider", MobEffects.SPEED, AgedDrinksConfig.General.speedTicks, AgedDrinksConfig.General.speedLevel);
+    event.getRegistry().register(getRecipeFor("cider"));
+
+    BEER = createAgedDrink("beer", MobEffects.SPEED, AgedDrinksConfig.General.speedTicks, AgedDrinksConfig.General.speedLevel);
+    event.getRegistry().register(getRecipeFor("beer"));
+
+    SAKE = createAgedDrink("sake", MobEffects.STRENGTH, AgedDrinksConfig.General.strengthTicks, AgedDrinksConfig.General.strengthLevel);
+    event.getRegistry().register(getRecipeFor("sake"));
+
+  }
+
+  public static Fluid createAgedDrink(String name, Potion potion, int duration, int amplifier) {
+    Fluid youngFluid = FluidRegistry.getFluid(name);
+    DrinkableProperty property = (player) -> {
+      player.addPotionEffect(new PotionEffect(potion, duration, amplifier, false, false));
+      if (AgedDrinksConfig.General.enableDrunkness) {
+        if (Math.random() < 0.25) {
+          PotionEffect effect = new PotionEffect(MobEffects.NAUSEA, 1500, 0, false, false);
+          effect.setCurativeItems(new ArrayList<>());
+          player.addPotionEffect(effect);
         }
-        FluidRegistry.addBucketForFluid(newFluid);
-        return FluidsTFC.getWrapper(newFluid);
+      }
+    };
+
+    Fluid agedFluid = new Fluid("aged_" + name, STILL, FLOW, youngFluid.getColor()).setRarity(EnumRarity.UNCOMMON);
+    FluidWrapper agedFluidWrapper = registerFluid(agedFluid).with(DrinkableProperty.DRINKABLE, property);
+
+    return agedFluid;
+  }
+
+  public static BarrelRecipe getRecipeFor(String name) {
+    int len = 8 * 24000 * 3;
+    BarrelRecipe br = new BarrelRecipe(
+            IIngredient.of(FluidRegistry.getFluid(name), 1000),
+            IIngredient.of(Items.AIR),
+            new FluidStack(FluidRegistry.getFluid("aged_" + name), 1000),
+            new ItemStack(Items.AIR),
+            len
+    );
+    br.setRegistryName("aged_" + name);
+    return br;
+  }
+
+  public static FluidWrapper registerFluid(Fluid newFluid) {
+    boolean isDefault = FluidRegistry.registerFluid(newFluid);
+    if (!isDefault) {
+      newFluid = FluidRegistry.getFluid(newFluid.getName());
     }
-
-    public static void registerAgedDrinks(RegistryEvent.Register<BarrelRecipe> event) {
-        RUM = createAgedDrink("rum", MobEffects.JUMP_BOOST, AgedDrinksConfig.General.jumpBoostTicks, AgedDrinksConfig.General.jumpBoostLevel);
-        event.getRegistry().register(getRecipeFor("rum"));
-
-        WHISKEY = createAgedDrink("whiskey", MobEffects.HASTE, AgedDrinksConfig.General.hasteTicks, AgedDrinksConfig.General.hasteLevel);
-        event.getRegistry().register(getRecipeFor("whiskey"));
-
-        RYE_WHISKEY = createAgedDrink("rye_whiskey", MobEffects.HASTE, AgedDrinksConfig.General.hasteTicks, AgedDrinksConfig.General.hasteLevel);
-        event.getRegistry().register(getRecipeFor("rye_whiskey"));
-
-        CORN_WHISKEY = createAgedDrink("corn_whiskey", MobEffects.HASTE, AgedDrinksConfig.General.hasteTicks, AgedDrinksConfig.General.hasteLevel);
-        event.getRegistry().register(getRecipeFor("corn_whiskey"));
-
-        VODKA = createAgedDrink("vodka", MobEffects.RESISTANCE, AgedDrinksConfig.General.resistanceTicks, AgedDrinksConfig.General.resistanceLevel);
-        event.getRegistry().register(getRecipeFor("vodka"));
-
-        CIDER = createAgedDrink("cider", MobEffects.SPEED, AgedDrinksConfig.General.speedTicks, AgedDrinksConfig.General.speedLevel);
-        event.getRegistry().register(getRecipeFor("cider"));
-
-        BEER = createAgedDrink("beer", MobEffects.SPEED, AgedDrinksConfig.General.speedTicks, AgedDrinksConfig.General.speedLevel);
-        event.getRegistry().register(getRecipeFor("beer"));
-
-        SAKE = createAgedDrink("sake", MobEffects.STRENGTH, AgedDrinksConfig.General.strengthTicks, AgedDrinksConfig.General.strengthLevel);
-        event.getRegistry().register(getRecipeFor("sake"));
-
-    }
+    FluidRegistry.addBucketForFluid(newFluid);
+    return FluidsTFC.getWrapper(newFluid);
+  }
 }
 

@@ -3,7 +3,7 @@ package su.terrafirmagreg.api.registry.spi;
 import net.minecraft.command.ICommand;
 
 public interface IRegistryCommand
-    extends IRegistryBase {
+        extends IRegistryBase {
 
   /**
    * Registers a new command. Registration will be handled for you.

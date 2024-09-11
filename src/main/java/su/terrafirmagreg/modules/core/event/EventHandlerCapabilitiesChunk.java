@@ -34,8 +34,8 @@ public class EventHandlerCapabilitiesChunk {
         // Update client side data
         NBTTagCompound nbt = (NBTTagCompound) CapabilityChunkData.CAPABILITY.writeNBT(data, null);
         ModuleCore.getPacketService()
-            .sendTo(new SCPacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(),
-                data.getRainfall()), event.getPlayer());
+                .sendTo(new SCPacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(),
+                        data.getRainfall()), event.getPlayer());
       }
     }
   }

@@ -13,12 +13,12 @@ public class StorageMetal implements IStorage<ICapabilityMetal> {
   @Nullable
   @Override
   public NBTBase writeNBT(Capability<ICapabilityMetal> capability, ICapabilityMetal instance,
-      EnumFacing side) {
+          EnumFacing side) {
     return null;
   }
 
   @Override
   public void readNBT(Capability<ICapabilityMetal> capability, ICapabilityMetal instance,
-      EnumFacing side, NBTBase nbt) {
+          EnumFacing side, NBTBase nbt) {
   }
 }

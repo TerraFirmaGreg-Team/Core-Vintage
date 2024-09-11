@@ -37,7 +37,7 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
 
   public EntityAnimalDuck(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-        getRandomGrowth(ConfigAnimal.ENTITIES.DUCK.adulthood, ConfigAnimal.ENTITIES.DUCK.elder));
+            getRandomGrowth(ConfigAnimal.ENTITIES.DUCK.adulthood, ConfigAnimal.ENTITIES.DUCK.elder));
   }
 
   public EntityAnimalDuck(World worldIn, Gender gender, int birthDay) {
@@ -47,11 +47,11 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS
-            || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
+            (biomeType == BiomeHelper.BiomeType.PLAINS
+                    || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
       return ConfigAnimal.ENTITIES.DUCK.rarity;
     }
     return 0;
@@ -76,9 +76,9 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
       if (cap != null) {
         EntityAnimalDuck chick = new EntityAnimalDuck(this.world);
         chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
-            : this.getFamiliarity() * 0.9F);
+                : this.getFamiliarity() * 0.9F);
         cap.setFertilized(chick,
-            ConfigAnimal.ENTITIES.DUCK.hatch + Calendar.PLAYER_TIME.getTotalDays());
+                ConfigAnimal.ENTITIES.DUCK.hatch + Calendar.PLAYER_TIME.getTotalDays());
       }
     }
     eggs.add(egg);
@@ -88,7 +88,7 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
   @Override
   public long getProductsCooldown() {
     return Math.max(0,
-        ConfigAnimal.ENTITIES.DUCK.eggTicks + getLaidTicks() - Calendar.PLAYER_TIME.getTicks());
+            ConfigAnimal.ENTITIES.DUCK.eggTicks + getLaidTicks() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override

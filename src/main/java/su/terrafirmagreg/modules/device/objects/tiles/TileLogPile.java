@@ -37,7 +37,7 @@ import static su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile.
 
 @MethodsReturnNonnullByDefault
 public class TileLogPile extends BaseTileInventory implements ITickable,
-    IProviderContainer<ContainerLogPile, GuiLogPile> {
+        IProviderContainer<ContainerLogPile, GuiLogPile> {
 
   private static final int NUM_SLOTS = 4;
 
@@ -97,7 +97,7 @@ public class TileLogPile extends BaseTileInventory implements ITickable,
     if (!world.isRemote) {
       if (burning) {
         if ((int) (Calendar.PLAYER_TIME.getTicks() - startBurningTick)
-            > ConfigDevice.BLOCKS.CHARCOAL_PIT.ticks) {
+                > ConfigDevice.BLOCKS.CHARCOAL_PIT.ticks) {
           // Attempt to turn this log pile into charcoal
           createCharcoal();
         }
@@ -108,6 +108,74 @@ public class TileLogPile extends BaseTileInventory implements ITickable,
         }
       }
     }
+  }
+
+  /**
+   * This function does some magic **** to not create floating charcoal. Don't touch unless broken
+   *
+   * @author AlcatrazEscapee
+   */
+  private void createCharcoal() {
+    int j = 0;
+    Block block;
+    do {
+      j++;
+      block = world.getBlockState(pos.down(j)).getBlock();
+      // This is here so that the charcoal pile will collapse Bottom > Top
+      // Because the pile scans Top > Bottom this is necessary to avoid floating blocks
+      if (block instanceof BlockLogPile) {
+        return;
+      }
+    } while (block == Blocks.AIR || block instanceof BlockCharcoalPile);
+
+    double logs = countLogs() * (0.25 + 0.25 * MathConstants.RNG.nextFloat());
+    int charcoal = (int) MathHelper.clamp(logs, 0, 8);
+    if (charcoal == 0) {
+      world.setBlockState(pos, Blocks.AIR.getDefaultState());
+      return;
+    }
+    if (j == 1) {
+      // This log pile is at the bottom of the charcoal pit
+      world.setBlockState(pos,
+              BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
+      return;
+    }
+    for (int k = j - 1; k >= 0; k--) {
+      // Climb back up from the bottom
+      IBlockState state = world.getBlockState(pos.down(k));
+      if (state.getBlock() == Blocks.AIR) {
+        // If it hits air, place the remaining pile in that block
+        world.setBlockState(pos.down(k), BlocksDevice.CHARCOAL_PILE.getDefaultState()
+                .withProperty(LAYERS, charcoal));
+        world.setBlockState(pos, Blocks.AIR.getDefaultState());
+        return;
+      }
+
+      if (state.getBlock() instanceof BlockCharcoalPile) {
+        // Place what it can in the existing charcoal pit, then continue climbing
+        charcoal += state.getValue(LAYERS);
+        int toCreate = Math.min(charcoal, 8);
+        world.setBlockState(pos.down(k), BlocksDevice.CHARCOAL_PILE.getDefaultState()
+                .withProperty(LAYERS, toCreate));
+        charcoal -= toCreate;
+      }
+
+      if (charcoal <= 0) {
+        world.setBlockState(pos, Blocks.AIR.getDefaultState());
+        return;
+      }
+    }
+    // If you exit the loop, its arrived back at the original position OR needs to rest the original position, and needs to replace that block
+    world.setBlockState(pos,
+            BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
+  }
+
+  public int countLogs() {
+    int logs = 0;
+    for (int i = 0; i < inventory.getSlots(); i++) {
+      logs += inventory.getStackInSlot(i).getCount();
+    }
+    return logs;
   }
 
   @Override
@@ -170,14 +238,6 @@ public class TileLogPile extends BaseTileInventory implements ITickable,
     markDirty();
   }
 
-  public int countLogs() {
-    int logs = 0;
-    for (int i = 0; i < inventory.getSlots(); i++) {
-      logs += inventory.getStackInSlot(i).getCount();
-    }
-    return logs;
-  }
-
   private void tryLightNearby() {
     for (EnumFacing side : EnumFacing.values()) {
       IBlockState state = world.getBlockState(pos.offset(side));
@@ -194,75 +254,15 @@ public class TileLogPile extends BaseTileInventory implements ITickable,
     }
   }
 
-  /**
-   * This function does some magic **** to not create floating charcoal. Don't touch unless broken
-   *
-   * @author AlcatrazEscapee
-   */
-  private void createCharcoal() {
-    int j = 0;
-    Block block;
-    do {
-      j++;
-      block = world.getBlockState(pos.down(j)).getBlock();
-      // This is here so that the charcoal pile will collapse Bottom > Top
-      // Because the pile scans Top > Bottom this is necessary to avoid floating blocks
-      if (block instanceof BlockLogPile) {
-        return;
-      }
-    } while (block == Blocks.AIR || block instanceof BlockCharcoalPile);
-
-    double logs = countLogs() * (0.25 + 0.25 * MathConstants.RNG.nextFloat());
-    int charcoal = (int) MathHelper.clamp(logs, 0, 8);
-    if (charcoal == 0) {
-      world.setBlockState(pos, Blocks.AIR.getDefaultState());
-      return;
-    }
-    if (j == 1) {
-      // This log pile is at the bottom of the charcoal pit
-      world.setBlockState(pos,
-          BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
-      return;
-    }
-    for (int k = j - 1; k >= 0; k--) {
-      // Climb back up from the bottom
-      IBlockState state = world.getBlockState(pos.down(k));
-      if (state.getBlock() == Blocks.AIR) {
-        // If it hits air, place the remaining pile in that block
-        world.setBlockState(pos.down(k), BlocksDevice.CHARCOAL_PILE.getDefaultState()
-            .withProperty(LAYERS, charcoal));
-        world.setBlockState(pos, Blocks.AIR.getDefaultState());
-        return;
-      }
-
-      if (state.getBlock() instanceof BlockCharcoalPile) {
-        // Place what it can in the existing charcoal pit, then continue climbing
-        charcoal += state.getValue(LAYERS);
-        int toCreate = Math.min(charcoal, 8);
-        world.setBlockState(pos.down(k), BlocksDevice.CHARCOAL_PILE.getDefaultState()
-            .withProperty(LAYERS, toCreate));
-        charcoal -= toCreate;
-      }
-
-      if (charcoal <= 0) {
-        world.setBlockState(pos, Blocks.AIR.getDefaultState());
-        return;
-      }
-    }
-    // If you exit the loop, its arrived back at the original position OR needs to rest the original position, and needs to replace that block
-    world.setBlockState(pos,
-        BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
-  }
-
   @Override
   public ContainerLogPile getContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new ContainerLogPile(inventoryPlayer, this);
   }
 
   @Override
   public GuiLogPile getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state,
-      BlockPos pos) {
+          BlockPos pos) {
     return new GuiLogPile(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer);
   }
 }

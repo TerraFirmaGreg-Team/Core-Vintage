@@ -23,87 +23,87 @@ import java.util.List;
  */
 public class FoodHeatHandler extends ProviderHeat implements IFood, ICapabilitySerializable<NBTTagCompound> {
 
-    private final FoodHandler internalFoodCap;
+  private final FoodHandler internalFoodCap;
 
-    public FoodHeatHandler() {
-        this(null, new FoodData(), 1, 100);
+  public FoodHeatHandler() {
+    this(null, new FoodData(), 1, 100);
+  }
+
+  public FoodHeatHandler(@Nullable NBTTagCompound nbt, FoodData data, float heatCapacity, float meltTemp) {
+    this.heatCapacity = heatCapacity;
+    this.meltTemp = meltTemp;
+
+    this.internalFoodCap = new FoodHandler(nbt, data);
+
+    deserializeNBT(nbt);
+  }
+
+  public FoodHeatHandler(@Nullable NBTTagCompound nbt, @NotNull Food food) {
+    this(nbt, food.getData(), food.getHeatCapacity(), food.getCookingTemp());
+  }
+
+  @Override
+  public float getDecayDateModifier() {
+    return internalFoodCap.getDecayDateModifier();
+  }
+
+  @Override
+  public void setNonDecaying() {
+    internalFoodCap.setNonDecaying();
+  }
+
+  @Override
+  public long getRottenDate() {
+    return internalFoodCap.getRottenDate();
+  }
+
+  @Override
+  public long getCreationDate() {
+    return internalFoodCap.getCreationDate();
+  }
+
+  @Override
+  public void setCreationDate(long creationDate) {
+    internalFoodCap.setCreationDate(creationDate);
+  }
+
+  @NotNull
+  @Override
+  public FoodData getData() {
+    return internalFoodCap.getData();
+  }
+
+  @NotNull
+  @Override
+  public List<FoodTrait> getTraits() {
+    return internalFoodCap.getTraits();
+  }
+
+  @Override
+  @NotNull
+  public NBTTagCompound serializeNBT() {
+    NBTTagCompound nbt = super.serializeNBT();
+    nbt.setTag("food", internalFoodCap.serializeNBT());
+    return nbt;
+  }
+
+  @Override
+  public void deserializeNBT(@Nullable NBTTagCompound nbt) {
+    if (nbt != null) {
+      internalFoodCap.deserializeNBT(nbt.getCompoundTag("food"));
+      super.deserializeNBT(nbt);
     }
+  }
 
-    public FoodHeatHandler(@Nullable NBTTagCompound nbt, @NotNull Food food) {
-        this(nbt, food.getData(), food.getHeatCapacity(), food.getCookingTemp());
-    }
+  @Override
+  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+    return capability == CapabilityFood.CAPABILITY || capability == CapabilityHeat.CAPABILITY;
+  }
 
-    public FoodHeatHandler(@Nullable NBTTagCompound nbt, FoodData data, float heatCapacity, float meltTemp) {
-        this.heatCapacity = heatCapacity;
-        this.meltTemp = meltTemp;
-
-        this.internalFoodCap = new FoodHandler(nbt, data);
-
-        deserializeNBT(nbt);
-    }
-
-    @Override
-    public long getCreationDate() {
-        return internalFoodCap.getCreationDate();
-    }
-
-    @Override
-    public void setCreationDate(long creationDate) {
-        internalFoodCap.setCreationDate(creationDate);
-    }
-
-    @Override
-    public long getRottenDate() {
-        return internalFoodCap.getRottenDate();
-    }
-
-    @NotNull
-    @Override
-    public FoodData getData() {
-        return internalFoodCap.getData();
-    }
-
-    @Override
-    public float getDecayDateModifier() {
-        return internalFoodCap.getDecayDateModifier();
-    }
-
-    @Override
-    public void setNonDecaying() {
-        internalFoodCap.setNonDecaying();
-    }
-
-    @NotNull
-    @Override
-    public List<FoodTrait> getTraits() {
-        return internalFoodCap.getTraits();
-    }
-
-    @Override
-    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityFood.CAPABILITY || capability == CapabilityHeat.CAPABILITY;
-    }
-
-    @Nullable
-    @Override
-    @SuppressWarnings("unchecked")
-    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
-        return hasCapability(capability, facing) ? (T) this : null;
-    }
-
-    @Override
-    @NotNull
-    public NBTTagCompound serializeNBT() {
-        NBTTagCompound nbt = super.serializeNBT();
-        nbt.setTag("food", internalFoodCap.serializeNBT());
-        return nbt;
-    }
-
-    @Override
-    public void deserializeNBT(@Nullable NBTTagCompound nbt) {
-        if (nbt != null) {
-            internalFoodCap.deserializeNBT(nbt.getCompoundTag("food"));
-            super.deserializeNBT(nbt);
-        }
-    }
+  @Nullable
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+    return hasCapability(capability, facing) ? (T) this : null;
+  }
 }

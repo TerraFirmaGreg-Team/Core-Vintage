@@ -43,17 +43,17 @@ public class ConfigMetal {
       public int tank = 250;
 
       @Config.Comment({"How fast lamps consume fuel (mb/hour)? " +
-          "1 = lamp life of 1 hour per mB, 0.125 = lamp life of 2000 hours by default, 0 = infinite fuel"})
+              "1 = lamp life of 1 hour per mB, 0.125 = lamp life of 2000 hours by default, 0 = infinite fuel"})
       @Config.RangeDouble(min = 0)
       public double burnRate = 0.125;
 
       @Config.Comment("Which fluids are valid fuels for lamps?")
       public String[] fuels = {
-          "olive_oil",
-          "linseed_oil",
-          "rape_seed_oil",
-          "sunflower_seed_oil",
-          "opium_poppy_seed_oil"
+              "olive_oil",
+              "linseed_oil",
+              "rape_seed_oil",
+              "sunflower_seed_oil",
+              "opium_poppy_seed_oil"
       };
     }
   }

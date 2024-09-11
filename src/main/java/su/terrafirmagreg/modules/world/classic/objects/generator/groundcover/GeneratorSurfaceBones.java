@@ -35,19 +35,9 @@ public class GeneratorSurfaceBones implements IWorldGenerator {
     this.factor = factor;
   }
 
-  public int getBoneFrequency(World world, BlockPos pos, double groundBoneFrequency) {
-    float rainfall = CapabilityChunkData.get(world, pos).getRainfall();
-
-    if (rainfall <= 20) {
-      return (int) (groundBoneFrequency / (1D + Math.pow(0.7D, (double) rainfall - 5.9D)));
-    } else {
-      return (int) (groundBoneFrequency / (1D + Math.pow(1.15D, (double) rainfall - 50D)));
-    }
-  }
-
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
     final var baseChunkData = CapabilityChunkData.get(world, chunkBlockPos);
 
@@ -58,14 +48,24 @@ public class GeneratorSurfaceBones implements IWorldGenerator {
 
       //for (int i = 0; i < ConfigTFCF.General.WORLD.groundcoverBonesFrequency * factor; i++)
       for (int i = 0; i < getBoneFrequency(world, chunkBlockPos,
-          ConfigTFCF.General.WORLD.groundcoverBonesFrequency); i++) {
+              ConfigTFCF.General.WORLD.groundcoverBonesFrequency); i++) {
         BlockPos pos = new BlockPos(
-            xoff + random.nextInt(16),
-            0,
-            zoff + random.nextInt(16)
+                xoff + random.nextInt(16),
+                0,
+                zoff + random.nextInt(16)
         );
         generateRock(world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()));
       }
+    }
+  }
+
+  public int getBoneFrequency(World world, BlockPos pos, double groundBoneFrequency) {
+    float rainfall = CapabilityChunkData.get(world, pos).getRainfall();
+
+    if (rainfall <= 20) {
+      return (int) (groundBoneFrequency / (1D + Math.pow(0.7D, (double) rainfall - 5.9D)));
+    } else {
+      return (int) (groundBoneFrequency / (1D + Math.pow(1.15D, (double) rainfall - 50D)));
     }
   }
 
@@ -73,8 +73,8 @@ public class GeneratorSurfaceBones implements IWorldGenerator {
     var data = CapabilityChunkData.get(world, pos);
     if (pos.getY() > 146 && pos.getY() < 170 && data.getRainfall() <= 75) {
       if (world.isAirBlock(pos) && world.getBlockState(pos.down())
-          .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(
-          world.getBlockState(pos.down()))) {
+              .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(
+              world.getBlockState(pos.down()))) {
         world.setBlockState(pos, BlocksTFCF.BONES.getDefaultState());
       }
     }

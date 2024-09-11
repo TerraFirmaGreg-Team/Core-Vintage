@@ -343,6 +343,25 @@ public final class BlocksTFC {
     register(TELargeVessel.class, "large_vessel");
   }
 
+  private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block,
+          CreativeTabs ct) {
+    block.setCreativeTab(ct);
+    return register(r, name, block);
+  }
+
+  // todo: change to property of type? (soil & stone maybe?)
+
+  private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block) {
+    block.setRegistryName(MODID_TFC, name);
+    block.setTranslationKey(MODID_TFC + "." + name.replace('/', '.'));
+    r.register(block);
+    return block;
+  }
+
+  private static <T extends TileEntity> void register(Class<T> te, String name) {
+    TileEntity.register(MODID_TFC + ":" + name, te);
+  }
+
   @SubscribeEvent(priority = EventPriority.LOWEST)
   public static void registerVanillaOverrides(RegistryEvent.Register<Block> event) {
     // Vanilla Overrides. Used for small tweaks on vanilla items, rather than replacing them outright
@@ -360,24 +379,5 @@ public final class BlocksTFC {
               .register(
                       new BlockTorchTFC().setRegistryName("minecraft", "torch").setTranslationKey("torch"));
     }
-  }
-
-  // todo: change to property of type? (soil & stone maybe?)
-
-  private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block,
-          CreativeTabs ct) {
-    block.setCreativeTab(ct);
-    return register(r, name, block);
-  }
-
-  private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block) {
-    block.setRegistryName(MODID_TFC, name);
-    block.setTranslationKey(MODID_TFC + "." + name.replace('/', '.'));
-    r.register(block);
-    return block;
-  }
-
-  private static <T extends TileEntity> void register(Class<T> te, String name) {
-    TileEntity.register(MODID_TFC + ":" + name, te);
   }
 }

@@ -51,20 +51,6 @@ public class ProviderEgg implements ICapabilityEgg {
   }
 
   @Override
-  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-
-    return capability == CapabilityEgg.CAPABILITY;
-  }
-
-  @Nullable
-  @Override
-  @SuppressWarnings("unchecked")
-  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
-
-    return hasCapability(capability, facing) ? (T) this : null;
-  }
-
-  @Override
   public NBTTagCompound serializeNBT() {
     NBTTagCompound nbt = new NBTTagCompound();
     if (entitytag != null) {
@@ -87,4 +73,21 @@ public class ProviderEgg implements ICapabilityEgg {
       hatchDay = 0;
     }
   }
+
+  @Override
+  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+
+    return capability == CapabilityEgg.CAPABILITY;
+  }
+
+
+  @Nullable
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+
+    return hasCapability(capability, facing) ? (T) this : null;
+  }
+
+
 }

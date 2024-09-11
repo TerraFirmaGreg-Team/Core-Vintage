@@ -70,12 +70,6 @@ public class EntityFallingBlock
     this.setOrigin(pos);
   }
 
-  @Nullable
-  @Override
-  public IBlockState getBlock() {
-    return this.renderState == null ? this.fallTile : this.renderState;
-  }
-
   @Override
   public void onUpdate() {
     Block block = fallTile.getBlock();
@@ -226,6 +220,12 @@ public class EntityFallingBlock
     if (compound.hasKey("TileEntityData", 10)) {
       this.tileEntityData = compound.getCompoundTag("TileEntityData");
     }
+  }
+
+  @Nullable
+  @Override
+  public IBlockState getBlock() {
+    return this.renderState == null ? this.fallTile : this.renderState;
   }
 
   @Override

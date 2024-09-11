@@ -10,11 +10,16 @@ public class BiomeSwampland extends BaseBiome {
 
   public BiomeSwampland() {
     super(new Settings("Swampland")
-        .guiColour(0x099200)
-        .baseHeight(-1.8f)
-        .heightVariation(-2.6000001f)
-        .spawnBiome()
-        .enableWorldGen());
+            .guiColour(0x099200)
+            .baseHeight(-1.8f)
+            .heightVariation(-2.6000001f)
+            .spawnBiome()
+            .enableWorldGen());
+  }
+
+  @Override
+  public BiomeDecorator createBiomeDecorator() {
+    return new BaseBiomeDecorator(16, 45);
   }
 
   @Override
@@ -26,12 +31,7 @@ public class BiomeSwampland extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-        BiomeDictionary.Type.SWAMP
+            BiomeDictionary.Type.SWAMP
     };
-  }
-
-  @Override
-  public BiomeDecorator createBiomeDecorator() {
-    return new BaseBiomeDecorator(16, 45);
   }
 }

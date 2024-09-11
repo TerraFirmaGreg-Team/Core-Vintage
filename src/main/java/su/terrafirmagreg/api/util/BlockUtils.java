@@ -160,6 +160,39 @@ public final class BlockUtils {
   }
 
   /**
+   * Находит все блоки в заданном кубе и добавляет их в заданный список.
+   *
+   * @param world  мир, в котором выполняется поиск блоков
+   * @param pos    начальная позиция
+   * @param rangeX радиус действия по оси X
+   * @param rangeY радиус действия по оси Y
+   * @param rangeZ радиус действия по оси Z
+   * @param filter фильтр, который определяет, какие блоки добавляются в список
+   * @param result список, в который добавляются найденные блоки
+   * @return список найденных блоков
+   */
+  public static List<BlockPos> findBlocksInCube(World world, BlockPos pos, int rangeX, int rangeY,
+          int rangeZ, IBlockFilter filter,
+          List<BlockPos> result) {
+
+    for (int x = pos.getX() - rangeX; x <= pos.getX() + rangeX; x++) {
+      for (int y = pos.getY() - rangeY; y <= pos.getY() + rangeY; y++) {
+        for (int z = pos.getZ() - rangeZ; z <= pos.getZ() + rangeZ; z++) {
+
+          BlockPos candidatePos = new BlockPos(x, y, z);
+          IBlockState blockState = world.getBlockState(candidatePos);
+
+          if (filter.allow(world, candidatePos, blockState)) {
+            result.add(candidatePos);
+          }
+        }
+      }
+    }
+
+    return result;
+  }
+
+  /**
    * Выполняет действие для каждого блока в заданном кубе вокруг заданной позиции.
    *
    * @param world  мир, в котором выполняется действие
@@ -212,39 +245,6 @@ public final class BlockUtils {
         break;
       }
     }
-  }
-
-  /**
-   * Находит все блоки в заданном кубе и добавляет их в заданный список.
-   *
-   * @param world  мир, в котором выполняется поиск блоков
-   * @param pos    начальная позиция
-   * @param rangeX радиус действия по оси X
-   * @param rangeY радиус действия по оси Y
-   * @param rangeZ радиус действия по оси Z
-   * @param filter фильтр, который определяет, какие блоки добавляются в список
-   * @param result список, в который добавляются найденные блоки
-   * @return список найденных блоков
-   */
-  public static List<BlockPos> findBlocksInCube(World world, BlockPos pos, int rangeX, int rangeY,
-          int rangeZ, IBlockFilter filter,
-          List<BlockPos> result) {
-
-    for (int x = pos.getX() - rangeX; x <= pos.getX() + rangeX; x++) {
-      for (int y = pos.getY() - rangeY; y <= pos.getY() + rangeY; y++) {
-        for (int z = pos.getZ() - rangeZ; z <= pos.getZ() + rangeZ; z++) {
-
-          BlockPos candidatePos = new BlockPos(x, y, z);
-          IBlockState blockState = world.getBlockState(candidatePos);
-
-          if (filter.allow(world, candidatePos, blockState)) {
-            result.add(candidatePos);
-          }
-        }
-      }
-    }
-
-    return result;
   }
 
   /**
@@ -345,15 +345,15 @@ public final class BlockUtils {
   }
 
   /**
-   * Проверьте уровень жидкости.
+   * Получает фактическое состояние блока.
    *
    * @param world Мир.
    * @param pos   Позиция.
-   * @return Уровень жидкости. 0 заполнен.
+   * @return Фактическое состояние блока.
    */
-  public static int getFluidLevel(World world, BlockPos pos) {
+  public static IBlockState getActualState(IBlockAccess world, BlockPos pos) {
 
-    return getFluidLevel(getActualState(world, pos));
+    return world.getBlockState(pos).getActualState(world, pos);
   }
 
   /**
@@ -365,6 +365,18 @@ public final class BlockUtils {
   public static int getFluidLevel(IBlockState state) {
 
     return state.getValue(BlockLiquid.LEVEL);
+  }
+
+  /**
+   * Проверьте уровень жидкости.
+   *
+   * @param world Мир.
+   * @param pos   Позиция.
+   * @return Уровень жидкости. 0 заполнен.
+   */
+  public static int getFluidLevel(World world, BlockPos pos) {
+
+    return getFluidLevel(getActualState(world, pos));
   }
 
   /**
@@ -394,21 +406,6 @@ public final class BlockUtils {
     }
 
     return null;
-  }
-
-  /**
-   * Метод подвешивания блоков, чтобы проверить, могут ли они висеть. Описание 11/10. ПРИМЕЧАНИЕ. Там, где это применимо, не забудьте проверить, допускает ли
-   * состояние блока указанное направление!
-   *
-   * @param worldIn мир
-   * @param pos     позиция блока, который выполняет проверку
-   * @param facing  в том направлении, в котором смотрит блок. Это направление, в котором должен быть указан блок, и сторона, НА которой он висит, а не сторона, С
-   *                которой он прилипает. Например: знак, обращенный к северу также висит на северной стороне опорного блока
-   * @return true, если сторона сплошная, в противном случае — false.
-   */
-  public static boolean canHangAt(World worldIn, BlockPos pos, EnumFacing facing) {
-
-    return worldIn.isSideSolid(pos.offset(facing.getOpposite()), facing);
   }
 
   /**
@@ -443,27 +440,18 @@ public final class BlockUtils {
   }
 
   /**
-   * Получает фактическое состояние блока.
+   * Метод подвешивания блоков, чтобы проверить, могут ли они висеть. Описание 11/10. ПРИМЕЧАНИЕ. Там, где это применимо, не забудьте проверить, допускает ли
+   * состояние блока указанное направление!
    *
-   * @param world Мир.
-   * @param pos   Позиция.
-   * @return Фактическое состояние блока.
+   * @param worldIn мир
+   * @param pos     позиция блока, который выполняет проверку
+   * @param facing  в том направлении, в котором смотрит блок. Это направление, в котором должен быть указан блок, и сторона, НА которой он висит, а не сторона, С
+   *                которой он прилипает. Например: знак, обращенный к северу также висит на северной стороне опорного блока
+   * @return true, если сторона сплошная, в противном случае — false.
    */
-  public static IBlockState getActualState(IBlockAccess world, BlockPos pos) {
+  public static boolean canHangAt(World worldIn, BlockPos pos, EnumFacing facing) {
 
-    return world.getBlockState(pos).getActualState(world, pos);
-  }
-
-  /**
-   * Проверяет наличие определенного свойства у блока.
-   *
-   * @param blockState Состояние блока для проверки.
-   * @param property   Свойство для проверки.
-   * @return true, если свойство присутствует у блока, иначе false.
-   */
-  public static boolean hasProperty(IBlockState blockState, IProperty<?> property) {
-
-    return blockState.getPropertyKeys().contains(property);
+    return worldIn.isSideSolid(pos.offset(facing.getOpposite()), facing);
   }
 
   public static boolean isVariant(IBlockState blockState, Variant<?>... variants) {
@@ -544,6 +532,18 @@ public final class BlockUtils {
     return hasProperty(current, CLAY);
   }
 
+  /**
+   * Проверяет наличие определенного свойства у блока.
+   *
+   * @param blockState Состояние блока для проверки.
+   * @param property   Свойство для проверки.
+   * @return true, если свойство присутствует у блока, иначе false.
+   */
+  public static boolean hasProperty(IBlockState blockState, IProperty<?> property) {
+
+    return blockState.getPropertyKeys().contains(property);
+  }
+
   public static boolean isGround(IBlockState current) {
     var block = current.getBlock();
     if (block instanceof IRockBlock rock) {
@@ -603,16 +603,16 @@ public final class BlockUtils {
     return current.getMaterial() == Material.WATER;
   }
 
-  public static boolean isFreshWater(IBlockState current) {
-    return current == FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState();
-  }
-
   public static boolean isSaltWater(IBlockState current) {
     return current == FluidsTFC.SALT_WATER.get().getBlock().getDefaultState();
   }
 
   public static boolean isFreshWaterOrIce(IBlockState current) {
     return current.getBlock() == Blocks.ICE || BlockUtils.isFreshWater(current);
+  }
+
+  public static boolean isFreshWater(IBlockState current) {
+    return current == FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState();
   }
 
   public interface IBlockAction {

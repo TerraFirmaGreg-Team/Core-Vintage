@@ -11,10 +11,10 @@ public class BiomeHighHillsEdge extends BaseBiome {
 
   public BiomeHighHillsEdge() {
     super(new Settings("High Hills Edge")
-        .guiColour(0x92567C)
-        .baseHeight(-1.5f)
-        .heightVariation(-2.3f)
-        .baseBiome(HIGH_HILLS));
+            .guiColour(0x92567C)
+            .baseHeight(-1.5f)
+            .heightVariation(-2.3f)
+            .baseBiome(HIGH_HILLS));
   }
 
   @Override
@@ -26,8 +26,8 @@ public class BiomeHighHillsEdge extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-        BiomeDictionary.Type.HILLS,
-        BiomeDictionary.Type.PLAINS
+            BiomeDictionary.Type.HILLS,
+            BiomeDictionary.Type.PLAINS
     };
   }
 }

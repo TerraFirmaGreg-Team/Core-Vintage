@@ -23,11 +23,7 @@ public final class CapabilitySize {
 
   public static void register() {
     CapabilityManager.INSTANCE.register(ICapabilitySize.class, new StorageSize(),
-        ProviderSize::new);
-  }
-
-  public static ICapabilitySize get(ItemStack itemStack) {
-    return itemStack.getCapability(CAPABILITY, null);
+            ProviderSize::new);
   }
 
   public static boolean has(ItemStack itemStack) {
@@ -60,11 +56,15 @@ public final class CapabilitySize {
       } else if (stack.getItem() instanceof ICapabilitySize item) {
         return item;
       } else if (stack.getItem() instanceof ItemBlock itemBlock
-          && itemBlock.getBlock() instanceof ICapabilitySize capabilitySize) {
+              && itemBlock.getBlock() instanceof ICapabilitySize capabilitySize) {
         return capabilitySize;
       }
     }
     return null;
+  }
+
+  public static ICapabilitySize get(ItemStack itemStack) {
+    return itemStack.getCapability(CAPABILITY, null);
   }
 
 }

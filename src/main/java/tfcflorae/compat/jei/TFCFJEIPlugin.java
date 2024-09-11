@@ -55,23 +55,23 @@ public class TFCFJEIPlugin implements IModPlugin {
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
     registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers()
-        .getGuiHelper(), KNAP_PINEAPPLE_LEATHER_UID));
+            .getGuiHelper(), KNAP_PINEAPPLE_LEATHER_UID));
     registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers()
-        .getGuiHelper(), KNAP_BURLAP_CLOTH_UID));
+            .getGuiHelper(), KNAP_BURLAP_CLOTH_UID));
     registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers()
-        .getGuiHelper(), KNAP_WOOL_CLOTH_UID));
+            .getGuiHelper(), KNAP_WOOL_CLOTH_UID));
     registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers()
-        .getGuiHelper(), KNAP_SILK_CLOTH_UID));
+            .getGuiHelper(), KNAP_SILK_CLOTH_UID));
     registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers()
-        .getGuiHelper(), KNAP_SISAL_CLOTH_UID));
+            .getGuiHelper(), KNAP_SISAL_CLOTH_UID));
     registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers()
-        .getGuiHelper(), KNAP_COTTON_CLOTH_UID));
+            .getGuiHelper(), KNAP_COTTON_CLOTH_UID));
     registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers()
-        .getGuiHelper(), KNAP_LINEN_CLOTH_UID));
+            .getGuiHelper(), KNAP_LINEN_CLOTH_UID));
     registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers()
-        .getGuiHelper(), KNAP_HEMP_CLOTH_UID));
+            .getGuiHelper(), KNAP_HEMP_CLOTH_UID));
     registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers()
-        .getGuiHelper(), KNAP_YUCCA_CANVAS_UID));
+            .getGuiHelper(), KNAP_YUCCA_CANVAS_UID));
     registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_MUD_UID));
     registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_FLINT_UID));
     registry.addRecipeCategories(new CastingCategory(registry.getJeiHelpers().getGuiHelper(), CASTING_UID));
@@ -83,10 +83,10 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Pineapple Leather
     List<KnappingRecipeWrapperTFCF> leatherPineappleRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-        .filter(recipe -> recipe.getType() == KnappingTypes.PINEAPPLE_LEATHER)
-        .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
-            .getGuiHelper()))
-        .collect(Collectors.toList());
+            .filter(recipe -> recipe.getType() == KnappingTypes.PINEAPPLE_LEATHER)
+            .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
+                    .getGuiHelper()))
+            .collect(Collectors.toList());
     registry.addRecipes(leatherPineappleRecipes, KNAP_PINEAPPLE_LEATHER_UID);
     NonNullList<ItemStack> leatherPineapple = OreDictionary.getOres("leatherPineapple");
     for (ItemStack itemStack : leatherPineapple) {
@@ -95,10 +95,10 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Burlap Cloth
     List<KnappingRecipeWrapperTFCF> clothBurlapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-        .filter(recipe -> recipe.getType() == KnappingTypes.BURLAP_CLOTH)
-        .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
-            .getGuiHelper()))
-        .collect(Collectors.toList());
+            .filter(recipe -> recipe.getType() == KnappingTypes.BURLAP_CLOTH)
+            .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
+                    .getGuiHelper()))
+            .collect(Collectors.toList());
     registry.addRecipes(clothBurlapRecipes, KNAP_BURLAP_CLOTH_UID);
     NonNullList<ItemStack> clothBurlap = OreDictionary.getOres("clothBurlap");
     for (ItemStack itemStack : clothBurlap) {
@@ -107,10 +107,10 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Wool Cloth
     List<KnappingRecipeWrapperTFCF> clothWoolRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-        .filter(recipe -> recipe.getType() == KnappingTypes.WOOL_CLOTH)
-        .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
-            .getGuiHelper()))
-        .collect(Collectors.toList());
+            .filter(recipe -> recipe.getType() == KnappingTypes.WOOL_CLOTH)
+            .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
+                    .getGuiHelper()))
+            .collect(Collectors.toList());
     registry.addRecipes(clothWoolRecipes, KNAP_WOOL_CLOTH_UID);
     NonNullList<ItemStack> clothWool = OreDictionary.getOres("clothWool");
     for (ItemStack itemStack : clothWool) {
@@ -119,9 +119,9 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Silk Cloth
     List<KnappingRecipeWrapperTFCF> clothSilkRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-        .filter(recipe -> recipe.getType() == KnappingTypes.SILK_CLOTH)
-        .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers().getGuiHelper()))
-        .collect(Collectors.toList());
+            .filter(recipe -> recipe.getType() == KnappingTypes.SILK_CLOTH)
+            .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers().getGuiHelper()))
+            .collect(Collectors.toList());
     registry.addRecipes(clothSilkRecipes, KNAP_SILK_CLOTH_UID);
     NonNullList<ItemStack> clothSilk = OreDictionary.getOres("clothSilk");
     for (ItemStack itemStack : clothSilk) {
@@ -130,10 +130,10 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Sisal Cloth
     List<KnappingRecipeWrapperTFCF> clothSisalRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-        .filter(recipe -> recipe.getType() == KnappingTypes.SISAL_CLOTH)
-        .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
-            .getGuiHelper()))
-        .collect(Collectors.toList());
+            .filter(recipe -> recipe.getType() == KnappingTypes.SISAL_CLOTH)
+            .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
+                    .getGuiHelper()))
+            .collect(Collectors.toList());
     registry.addRecipes(clothSisalRecipes, KNAP_SISAL_CLOTH_UID);
     NonNullList<ItemStack> clothSisal = OreDictionary.getOres("clothSisal");
     for (ItemStack itemStack : clothSisal) {
@@ -142,10 +142,10 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Cotton Cloth
     List<KnappingRecipeWrapperTFCF> clothCottonRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-        .filter(recipe -> recipe.getType() == KnappingTypes.COTTON_CLOTH)
-        .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
-            .getGuiHelper()))
-        .collect(Collectors.toList());
+            .filter(recipe -> recipe.getType() == KnappingTypes.COTTON_CLOTH)
+            .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
+                    .getGuiHelper()))
+            .collect(Collectors.toList());
     registry.addRecipes(clothCottonRecipes, KNAP_COTTON_CLOTH_UID);
     NonNullList<ItemStack> clothCotton = OreDictionary.getOres("clothCotton");
     for (ItemStack itemStack : clothCotton) {
@@ -154,10 +154,10 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Linen Cloth
     List<KnappingRecipeWrapperTFCF> clothLinenRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-        .filter(recipe -> recipe.getType() == KnappingTypes.LINEN_CLOTH)
-        .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
-            .getGuiHelper()))
-        .collect(Collectors.toList());
+            .filter(recipe -> recipe.getType() == KnappingTypes.LINEN_CLOTH)
+            .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
+                    .getGuiHelper()))
+            .collect(Collectors.toList());
     registry.addRecipes(clothLinenRecipes, KNAP_LINEN_CLOTH_UID);
     NonNullList<ItemStack> oresLinen = OreDictionary.getOres("clothLinen");
     for (ItemStack itemStack : oresLinen) {
@@ -166,10 +166,10 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Hemp Cloth
     List<KnappingRecipeWrapperTFCF> clothHempRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-        .filter(recipe -> recipe.getType() == KnappingTypes.HEMP_CLOTH)
-        .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
-            .getGuiHelper()))
-        .collect(Collectors.toList());
+            .filter(recipe -> recipe.getType() == KnappingTypes.HEMP_CLOTH)
+            .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
+                    .getGuiHelper()))
+            .collect(Collectors.toList());
     registry.addRecipes(clothHempRecipes, KNAP_HEMP_CLOTH_UID);
     NonNullList<ItemStack> oresHemp = OreDictionary.getOres("clothHemp");
     for (ItemStack itemStack : oresHemp) {
@@ -178,10 +178,10 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Yucca Canvas
     List<KnappingRecipeWrapperTFCF> canvasYuccaRecipes = TFCRegistries.KNAPPING.getValuesCollection()
-        .stream()
-        .filter(recipe -> recipe.getType() == KnappingTypes.YUCCA_CANVAS)
-        .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers().getGuiHelper()))
-        .collect(Collectors.toList());
+            .stream()
+            .filter(recipe -> recipe.getType() == KnappingTypes.YUCCA_CANVAS)
+            .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers().getGuiHelper()))
+            .collect(Collectors.toList());
     registry.addRecipes(canvasYuccaRecipes, KNAP_YUCCA_CANVAS_UID);
     NonNullList<ItemStack> oresYucca = OreDictionary.getOres("canvasYucca");
     for (ItemStack itemStack : oresYucca) {
@@ -204,10 +204,10 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Flint
     List<KnappingRecipeWrapperTFCF> flintKnapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-        .filter(recipe -> recipe.getType() == KnappingTypes.FLINT)
-        .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
-            .getGuiHelper()))
-        .collect(Collectors.toList());
+            .filter(recipe -> recipe.getType() == KnappingTypes.FLINT)
+            .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
+                    .getGuiHelper()))
+            .collect(Collectors.toList());
     registry.addRecipes(flintKnapRecipes, KNAP_FLINT_UID);
     NonNullList<ItemStack> oresFlint = OreDictionary.getOres("flint");
     for (ItemStack itemStack : oresFlint) {

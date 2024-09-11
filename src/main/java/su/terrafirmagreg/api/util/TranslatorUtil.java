@@ -22,13 +22,6 @@ public final class TranslatorUtil {
   }
 
   /**
-   * Simple wrapper for I18n, for consistency
-   */
-  public static String resolveKey(String s, Object... args) {
-    return I18n.format(s, args);
-  }
-
-  /**
    * Wrapper for I18n but cuts up the result using line break character ($)
    */
   public static String[] resolveKeyArray(String s, Object... args) {
@@ -36,10 +29,17 @@ public final class TranslatorUtil {
   }
 
   /**
+   * Simple wrapper for I18n, for consistency
+   */
+  public static String resolveKey(String s, Object... args) {
+    return I18n.format(s, args);
+  }
+
+  /**
    * The same as autoBreak, but it also respects break character ($) for manual line breaking in addition to the automatic ones
    */
   public static List<String> autoBreakWithParagraphs(FontRenderer fontRenderer, String text,
-      int width) {
+          int width) {
 
     String[] paragraphs = text.split("\\$");
     List<String> lines = new ArrayList<>();

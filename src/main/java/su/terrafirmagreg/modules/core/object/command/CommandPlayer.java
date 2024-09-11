@@ -80,30 +80,6 @@ public class CommandPlayer extends BaseCommand {
     }
   }
 
-  @Override
-  public int getRequiredPermissionLevel() {
-    return 2;
-  }
-
-  @Override
-  public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender,
-          String[] args, @Nullable BlockPos targetPos) {
-    if (args.length == 1) {
-      return getListOfStringsMatchingLastWord(args, "get", "set", "reset", "add");
-    } else if (args.length == 2) {
-      return getListOfStringsMatchingLastWord(args, "nutrition", "skill", "food", "saturation",
-              "water");
-    } else if (args.length == 3) {
-      if ("skill".equals(args[2])) {
-        return getListOfStringsMatchingLastWord(args, SkillType.getSkills()
-                .stream()
-                .map(s -> s.getName().toLowerCase())
-                .collect(Collectors.toList()));
-      }
-    }
-    return Collections.emptyList();
-  }
-
   private void executeNutrient(ICommandSender sender, EntityPlayer player, ExecuteType executeType)
           throws CommandException {
     NutritionStats nutritionStats = ((IFoodStatsTFC) player.getFoodStats()).getNutrition();
@@ -283,6 +259,30 @@ public class CommandPlayer extends BaseCommand {
                 new TextComponentTranslation(ModUtils.localize("command", "player.set_water"), value));
       }
     }
+  }
+
+  @Override
+  public int getRequiredPermissionLevel() {
+    return 2;
+  }
+
+  @Override
+  public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender,
+          String[] args, @Nullable BlockPos targetPos) {
+    if (args.length == 1) {
+      return getListOfStringsMatchingLastWord(args, "get", "set", "reset", "add");
+    } else if (args.length == 2) {
+      return getListOfStringsMatchingLastWord(args, "nutrition", "skill", "food", "saturation",
+              "water");
+    } else if (args.length == 3) {
+      if ("skill".equals(args[2])) {
+        return getListOfStringsMatchingLastWord(args, SkillType.getSkills()
+                .stream()
+                .map(s -> s.getName().toLowerCase())
+                .collect(Collectors.toList()));
+      }
+    }
+    return Collections.emptyList();
   }
 
   private enum ExecuteType {

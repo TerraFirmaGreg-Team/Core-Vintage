@@ -39,36 +39,22 @@ import java.util.Set;
 import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 
 public class EntityMetalPigvil
-    extends EntityCreature {
+        extends EntityCreature {
 
   private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(
-      ItemIngot.get(Metal.PIG_IRON, Metal.ItemType.INGOT),
-      TFCThingsItems.ITEM_PIG_IRON_CARROT,
-      TFCThingsItems.ITEM_BLACK_STEEL_CARROT,
-      TFCThingsItems.ITEM_RED_STEEL_CARROT,
-      TFCThingsItems.ITEM_BLUE_STEEL_CARROT
+          ItemIngot.get(Metal.PIG_IRON, Metal.ItemType.INGOT),
+          TFCThingsItems.ITEM_PIG_IRON_CARROT,
+          TFCThingsItems.ITEM_BLACK_STEEL_CARROT,
+          TFCThingsItems.ITEM_RED_STEEL_CARROT,
+          TFCThingsItems.ITEM_BLUE_STEEL_CARROT
   );
 
   private static final DataParameter<String> ANVIL_TYPE = EntityDataManager.createKey(
-      EntityMetalPigvil.class, DataSerializers.STRING);
+          EntityMetalPigvil.class, DataSerializers.STRING);
 
   public EntityMetalPigvil(World worldIn) {
     super(worldIn);
     this.setSize(0.9F, 0.9F);
-  }
-
-  protected void entityInit() {
-    super.entityInit();
-    this.dataManager.register(ANVIL_TYPE,
-        BlocksMetal.PIGVIL.get(MetalTypes.STEEL).getRegistryName().toString());
-  }
-
-  public Block getAnvil() {
-    return Block.getBlockFromName(this.dataManager.get(ANVIL_TYPE));
-  }
-
-  public void setAnvil(Block anvil) {
-    this.dataManager.set(ANVIL_TYPE, anvil.getRegistryName().toString());
   }
 
   protected void initEntityAI() {
@@ -85,34 +71,27 @@ public class EntityMetalPigvil
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D);
   }
 
-  public boolean attackEntityFrom(DamageSource source, float amount) {
-    if (source.equals(DamageSource.OUT_OF_WORLD) || source.equals(DamageSource.LAVA)
-        || source.equals(DamageSource.IN_FIRE) ||
-        source.equals((DamageSource.DROWN))) {
-      return super.attackEntityFrom(source, amount);
-    }
-    return false;
+  protected void entityInit() {
+    super.entityInit();
+    this.dataManager.register(ANVIL_TYPE,
+            BlocksMetal.PIGVIL.get(MetalTypes.STEEL).getRegistryName().toString());
   }
 
   protected SoundEvent getAmbientSound() {
     return SoundEvents.ENTITY_PIG_AMBIENT;
   }
 
-  protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundEvents.ENTITY_PIG_HURT;
-  }
-
-  protected SoundEvent getDeathSound() {
-    return SoundEvents.ENTITY_PIG_DEATH;
-  }
-
-  protected SoundEvent getFallSound(int heightIn) {
-    return SoundEvents.BLOCK_ANVIL_LAND;
-  }
-
   public void writeEntityToNBT(NBTTagCompound compound) {
     compound.setString("anvil", getAnvil().getRegistryName().toString());
     super.writeEntityToNBT(compound);
+  }
+
+  public Block getAnvil() {
+    return Block.getBlockFromName(this.dataManager.get(ANVIL_TYPE));
+  }
+
+  public void setAnvil(Block anvil) {
+    this.dataManager.set(ANVIL_TYPE, anvil.getRegistryName().toString());
   }
 
   public void readEntityFromNBT(NBTTagCompound compound) {
@@ -134,13 +113,40 @@ public class EntityMetalPigvil
     BlockPos blockpos = new BlockPos(i, j, k);
     if (this.world.getBlockState(blockpos).getBlock().isReplaceable(world, blockpos)) {
       this.world.playSound(player, blockpos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS,
-          1.0f, 1.0f);
+              1.0f, 1.0f);
       this.world.setBlockState(blockpos, getAnvil().getDefaultState()
-          .withProperty(HORIZONTAL, this.getAdjustedHorizontalFacing()));
+              .withProperty(HORIZONTAL, this.getAdjustedHorizontalFacing()));
       this.setDead();
       return true;
     }
     return super.processInteract(player, hand);
+  }
+
+  public boolean attackEntityFrom(DamageSource source, float amount) {
+    if (source.equals(DamageSource.OUT_OF_WORLD) || source.equals(DamageSource.LAVA)
+            || source.equals(DamageSource.IN_FIRE) ||
+            source.equals((DamageSource.DROWN))) {
+      return super.attackEntityFrom(source, amount);
+    }
+    return false;
+  }
+
+  protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    return SoundEvents.ENTITY_PIG_HURT;
+  }
+
+  protected SoundEvent getDeathSound() {
+    return SoundEvents.ENTITY_PIG_DEATH;
+  }
+
+  protected SoundEvent getFallSound(int heightIn) {
+    return SoundEvents.BLOCK_ANVIL_LAND;
+  }
+
+  public void onCollideWithPlayer(EntityPlayer playerIn) {
+    if (this.fallDistance > 3 && this.posY > playerIn.posY) {
+      playerIn.attackEntityFrom(DamageSources.PIGVIL, fallDistance * 3.0f);
+    }
   }
 
   public EnumFacing getAdjustedHorizontalFacing() {
@@ -154,12 +160,6 @@ public class EntityMetalPigvil
         return EnumFacing.NORTH;
       default:
         return EnumFacing.EAST;
-    }
-  }
-
-  public void onCollideWithPlayer(EntityPlayer playerIn) {
-    if (this.fallDistance > 3 && this.posY > playerIn.posY) {
-      playerIn.attackEntityFrom(DamageSources.PIGVIL, fallDistance * 3.0f);
     }
   }
 

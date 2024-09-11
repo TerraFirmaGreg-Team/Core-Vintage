@@ -21,6 +21,10 @@ public class CustomModelLoader implements ICustomModelLoader {
   }
 
   @Override
+  public void onResourceManagerReload(@NotNull IResourceManager resourceManager) {
+  }
+
+  @Override
   public boolean accepts(@NotNull ResourceLocation modelLocation) {
     /*
      * напрямую modelLocation'ы лучше не сравнивать, т.к.
@@ -50,10 +54,6 @@ public class CustomModelLoader implements ICustomModelLoader {
     //			return new BlockModel(new ResourceLocation("blocks/enchanting_table_top"));
     //		}
     return null;
-  }
-
-  @Override
-  public void onResourceManagerReload(@NotNull IResourceManager resourceManager) {
   }
 }
 

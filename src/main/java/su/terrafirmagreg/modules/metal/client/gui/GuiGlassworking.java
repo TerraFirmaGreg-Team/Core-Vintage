@@ -23,11 +23,11 @@ import static su.terrafirmagreg.data.Constants.MODID_TFCTECH;
 public class GuiGlassworking extends GuiContainerTFC {
 
   private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Constants.MODID_TFC,
-      "textures/gui/knapping.png");
+          "textures/gui/knapping.png");
   private static final ResourceLocation GLASS_TEXTURE = new ResourceLocation(MODID_TFCTECH,
-      "textures/gui/glassworking/button.png");
+          "textures/gui/glassworking/button.png");
   private static final ResourceLocation GLASS_DISABLED_TEXTURE = new ResourceLocation(MODID_TFCTECH,
-      "textures/gui/glassworking/disabled.png");
+          "textures/gui/glassworking/disabled.png");
 
   public GuiGlassworking(Container container, EntityPlayer player) {
     super(container, player.inventory, BG_TEXTURE);
@@ -52,12 +52,12 @@ public class GuiGlassworking extends GuiContainerTFC {
 
   @Override
   protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton,
-      long timeSinceLastClick) {
+          long timeSinceLastClick) {
     if (clickedMouseButton == 0) {
       for (GuiButton button : this.buttonList) {
         if (button instanceof GuiButtonKnapping && button.mousePressed(mc, mouseX, mouseY)) {
           GuiScreenEvent.ActionPerformedEvent.Pre event = new GuiScreenEvent.ActionPerformedEvent.Pre(
-              this, button, buttonList);
+                  this, button, buttonList);
           if (MinecraftForge.EVENT_BUS.post(event)) {
             break;
           } else if (selectedButton == event.getButton()) {
@@ -68,37 +68,9 @@ public class GuiGlassworking extends GuiContainerTFC {
           event.getButton().mousePressed(mc, mouseX, mouseY);
           actionPerformed(event.getButton());
           MinecraftForge.EVENT_BUS.post(
-              new GuiScreenEvent.ActionPerformedEvent.Post(this, event.getButton(), buttonList));
+                  new GuiScreenEvent.ActionPerformedEvent.Post(this, event.getButton(), buttonList));
         }
       }
-    }
-  }
-
-  @Override
-  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    // Check if the container has been updated
-    if (inventorySlots instanceof ContainerGlassworking
-        && ((ContainerGlassworking) inventorySlots).requiresReset()) {
-      updateButtons();
-      ((ContainerGlassworking) inventorySlots).setRequiresReset(false);
-    }
-    super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-    GlStateManager.color(1, 1, 1, 1);
-    mc.getTextureManager().bindTexture(GLASS_DISABLED_TEXTURE);
-    for (GuiButton button : buttonList) {
-      if (!button.visible) {
-        Gui.drawModalRectWithCustomSizedTexture(button.x, button.y, 0, 0, 16, 16, 16, 16);
-      }
-    }
-
-    // Solidified?
-    if (inventorySlots instanceof ContainerGlassworking
-        && ((ContainerGlassworking) inventorySlots).isSolidified()) {
-      float x = 135F;
-      float y = 30F;
-      String text = TextFormatting.DARK_GRAY + I18n.format("tooltip.tfctech.smeltery.solid");
-      x = x - fontRenderer.getStringWidth(text) / 2.0f;
-      fontRenderer.drawString(text, guiLeft + x, guiTop + y, 0xFFFFFF, false);
     }
   }
 
@@ -121,6 +93,34 @@ public class GuiGlassworking extends GuiContainerTFC {
       if (button instanceof GuiButtonKnapping) {
         button.visible = ((ContainerGlassworking) inventorySlots).getSlotState(button.id);
       }
+    }
+  }
+
+  @Override
+  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    // Check if the container has been updated
+    if (inventorySlots instanceof ContainerGlassworking
+            && ((ContainerGlassworking) inventorySlots).requiresReset()) {
+      updateButtons();
+      ((ContainerGlassworking) inventorySlots).setRequiresReset(false);
+    }
+    super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+    GlStateManager.color(1, 1, 1, 1);
+    mc.getTextureManager().bindTexture(GLASS_DISABLED_TEXTURE);
+    for (GuiButton button : buttonList) {
+      if (!button.visible) {
+        Gui.drawModalRectWithCustomSizedTexture(button.x, button.y, 0, 0, 16, 16, 16, 16);
+      }
+    }
+
+    // Solidified?
+    if (inventorySlots instanceof ContainerGlassworking
+            && ((ContainerGlassworking) inventorySlots).isSolidified()) {
+      float x = 135F;
+      float y = 30F;
+      String text = TextFormatting.DARK_GRAY + I18n.format("tooltip.tfctech.smeltery.solid");
+      x = x - fontRenderer.getStringWidth(text) / 2.0f;
+      fontRenderer.drawString(text, guiLeft + x, guiTop + y, 0xFFFFFF, false);
     }
   }
 

@@ -16,37 +16,39 @@ import org.jetbrains.annotations.Nullable;
 
 public class PacketClientSettings implements IMessage {
 
-    private boolean replaceBrokenHotHolder;
+  private boolean replaceBrokenHotHolder;
 
-    @Deprecated
-    public PacketClientSettings() {
-    }
+  @Deprecated
+  public PacketClientSettings() {
+  }
 
-    @SideOnly(Side.CLIENT)
-    public PacketClientSettings(final boolean replaceBrokenHotHolder) {
-        this.replaceBrokenHotHolder = replaceBrokenHotHolder;
-    }
+  @SideOnly(Side.CLIENT)
+  public PacketClientSettings(final boolean replaceBrokenHotHolder) {
+    this.replaceBrokenHotHolder = replaceBrokenHotHolder;
+  }
 
+  @Override
+  public void fromBytes(final ByteBuf byteBuf) {
+    replaceBrokenHotHolder = byteBuf.readBoolean();
+  }
+
+  @Override
+  public void toBytes(final ByteBuf byteBuf) {
+    byteBuf.writeBoolean(replaceBrokenHotHolder);
+  }
+
+  public static class Handler implements IMessageHandler<PacketClientSettings, IMessage> {
+
+    @Nullable
     @Override
-    public void fromBytes(final ByteBuf byteBuf) {
-        replaceBrokenHotHolder = byteBuf.readBoolean();
+    public IMessage onMessage(final PacketClientSettings message, final MessageContext ctx) {
+      final EntityPlayer player = ctx.getServerHandler().player;
+      if (player == null) {
+        return null;
+      }
+      ServerEvents.setReplaceHotHolderConfigForPlayer(player, message.replaceBrokenHotHolder);
+      HotOrNot.getLog().info("Player {} has replace as {}", player.getName(), message.replaceBrokenHotHolder);
+      return null;
     }
-
-    @Override
-    public void toBytes(final ByteBuf byteBuf) {
-        byteBuf.writeBoolean(replaceBrokenHotHolder);
-    }
-
-    public static class Handler implements IMessageHandler<PacketClientSettings, IMessage> {
-
-        @Nullable
-        @Override
-        public IMessage onMessage(final PacketClientSettings message, final MessageContext ctx) {
-            final EntityPlayer player = ctx.getServerHandler().player;
-            if (player == null) return null;
-            ServerEvents.setReplaceHotHolderConfigForPlayer(player, message.replaceBrokenHotHolder);
-            HotOrNot.getLog().info("Player {} has replace as {}", player.getName(), message.replaceBrokenHotHolder);
-            return null;
-        }
-    }
+  }
 }

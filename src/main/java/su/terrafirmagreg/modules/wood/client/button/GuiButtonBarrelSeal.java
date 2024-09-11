@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.base.gui.component.button.BaseGuiButton;
 import su.terrafirmagreg.api.base.gui.component.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
-import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodBarrel;
+import su.terrafirmagreg.modules.wood.object.tile.TileWoodBarrel;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -38,7 +38,7 @@ public class GuiButtonBarrelSeal extends BaseGuiButton implements IButtonTooltip
       GlStateManager.color(1, 1, 1, 1);
       mc.getTextureManager().bindTexture(GuiWoodBarrel.BACKGROUND);
       hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
-          && mouseY < this.y + this.height;
+              && mouseY < this.y + this.height;
       if (tile.isSealed()) {
         Gui.drawModalRectWithCustomSizedTexture(x, y, 236, 0, 20, 20, 256, 256);
       } else {

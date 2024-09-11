@@ -36,17 +36,8 @@ public interface IIngredient<T> extends Predicate<T> {
   }
 
   /**
-   * This is used by recipes to test if the ingredient matches the input
-   *
-   * @param input the input supplied to the recipe
-   * @return true if the ingredient matches the input
-   */
-  @Override
-  boolean test(T input);
-
-  /**
-   * This is used by recipes to test if an input is valid, but necessarily high enough quantity i.e. used to check if an item is valid for a slot, not
-   * if the recipe will complete.
+   * This is used by recipes to test if an input is valid, but necessarily high enough quantity i.e. used to check if an item is valid for a slot, not if the recipe
+   * will complete.
    *
    * @param input the input supplied to the recipe
    * @return true if the ingredient matches the input, ignoring the amount of input
@@ -54,6 +45,15 @@ public interface IIngredient<T> extends Predicate<T> {
   default boolean testIgnoreCount(T input) {
     return test(input);
   }
+
+  /**
+   * This is used by recipes to test if the ingredient matches the input
+   *
+   * @param input the input supplied to the recipe
+   * @return true if the ingredient matches the input
+   */
+  @Override
+  boolean test(T input);
 
   /**
    * Consume one recipe's worth of input Depending on the input type, this may modify input and return it, or create a new output

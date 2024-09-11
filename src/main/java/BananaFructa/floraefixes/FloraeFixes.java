@@ -50,33 +50,6 @@ public class FloraeFixes {
     MinecraftForge.EVENT_BUS.register(this);
   }
 
-  public static void removeRecipe(Item i) {
-    ItemStack output = new ItemStack(i);
-    ArrayList<PlanterRecipe> removeList = new ArrayList();
-    TFCRegistries.PLANTER_QUAD.getValuesCollection().stream().filter((x) -> {
-      return x.getOutputItem(ItemStack.EMPTY).isItemEqual(output);
-    }).forEach(removeList::add);
-    Iterator var2 = removeList.iterator();
-
-    while (var2.hasNext()) {
-      final PlanterRecipe recipe = (PlanterRecipe) var2.next();
-      IForgeRegistryModifiable<PlanterRecipe> Planter = (IForgeRegistryModifiable) TFCRegistries.PLANTER_QUAD;
-      Planter.remove(recipe.getRegistryName());
-    }
-  }
-
-  public void fixCropItemSupplierTFCFlorae(Class<?> objType, Object obj, ItemFoodTFCF food) {
-    Supplier<ItemStack> foodDrop = () -> new ItemStack(food);
-    Utils.writeDeclaredField(objType, obj, "foodDrop", foodDrop, true);
-  }
-
-  public void fixCropPartialItemSupplierTFCFlorae(Class<?> objType, Object obj, ItemFoodTFCF food) {
-    Supplier<ItemStack> foodDrop = () -> {
-      return new ItemStack(food);
-    };
-    Utils.writeDeclaredField(objType, obj, "foodDropEarly", foodDrop, true);
-  }
-
   @Mod.EventHandler
   public void preInit(FMLPreInitializationEvent event) {
     Config.init(event.getModConfigurationDirectory());
@@ -106,6 +79,18 @@ public class FloraeFixes {
     fixCropItemSupplierTFCFlorae(CropTFCF.PURPLE_GRAPE.getClass(), CropTFCF.PURPLE_GRAPE, ItemsTFCF.PURPLE_GRAPE);
     fixCropItemSupplierTFCFlorae(CropTFCF.GREEN_GRAPE.getClass(), CropTFCF.GREEN_GRAPE, ItemsTFCF.GREEN_GRAPE);
     fixCropItemSupplierTFCFlorae(CropTFCF.LIQUORICE_ROOT.getClass(), CropTFCF.LIQUORICE_ROOT, ItemsTFCF.LIQUORICE_ROOT);
+  }
+
+  public void fixCropItemSupplierTFCFlorae(Class<?> objType, Object obj, ItemFoodTFCF food) {
+    Supplier<ItemStack> foodDrop = () -> new ItemStack(food);
+    Utils.writeDeclaredField(objType, obj, "foodDrop", foodDrop, true);
+  }
+
+  public void fixCropPartialItemSupplierTFCFlorae(Class<?> objType, Object obj, ItemFoodTFCF food) {
+    Supplier<ItemStack> foodDrop = () -> {
+      return new ItemStack(food);
+    };
+    Utils.writeDeclaredField(objType, obj, "foodDropEarly", foodDrop, true);
   }
 
   @SubscribeEvent
@@ -240,6 +225,21 @@ public class FloraeFixes {
     registerPlanterRecipe(r, CropTFCF.TURNIP, ItemsTFCF.TURNIP, 7, false, "turnip");
     registerPlanterRecipe(r, CropTFCF.WELD, ItemsTFCF.WELD, 4, false, "weld");
     registerPlanterRecipe(r, CropTFCF.WOAD, ItemsTFCF.WOAD, 5, false, "woad");
+  }
+
+  public static void removeRecipe(Item i) {
+    ItemStack output = new ItemStack(i);
+    ArrayList<PlanterRecipe> removeList = new ArrayList();
+    TFCRegistries.PLANTER_QUAD.getValuesCollection().stream().filter((x) -> {
+      return x.getOutputItem(ItemStack.EMPTY).isItemEqual(output);
+    }).forEach(removeList::add);
+    Iterator var2 = removeList.iterator();
+
+    while (var2.hasNext()) {
+      final PlanterRecipe recipe = (PlanterRecipe) var2.next();
+      IForgeRegistryModifiable<PlanterRecipe> Planter = (IForgeRegistryModifiable) TFCRegistries.PLANTER_QUAD;
+      Planter.remove(recipe.getRegistryName());
+    }
   }
 
   private void registerPlanterRecipe(IForgeRegistry<PlanterRecipe> r, CropTFCF crop, Item i, int s, boolean p, String name) {

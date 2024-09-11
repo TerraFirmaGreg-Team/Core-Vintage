@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.capabilities.pull;
 
-import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
+import su.terrafirmagreg.modules.wood.object.entity.EntityWoodCart;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;

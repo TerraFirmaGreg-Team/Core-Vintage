@@ -104,8 +104,8 @@ public class MCColor extends Color {
    * An array of the vanilla colors.
    */
   public static final MCColor[] VANILLA_COLORS = {DYE_BLACK, DYE_RED, DYE_GREEN, DYE_BROWN,
-      DYE_BLUE, DYE_PURPLE, DYE_CYAN, DYE_LIGHT_GRAY,
-      DYE_GRAY, DYE_PINK, DYE_LIME, DYE_YELLOW, DYE_LIGHT_BLUE, DYE_MAGENTA, DYE_ORANGE, DYE_WHITE};
+          DYE_BLUE, DYE_PURPLE, DYE_CYAN, DYE_LIGHT_GRAY,
+          DYE_GRAY, DYE_PINK, DYE_LIME, DYE_YELLOW, DYE_LIGHT_BLUE, DYE_MAGENTA, DYE_ORANGE, DYE_WHITE};
 
   /**
    * Constructs an MCColor from an ItemStack. Expects the stack to have already been checked for validity.
@@ -115,27 +115,6 @@ public class MCColor extends Color {
   public MCColor(@NotNull ItemStack stack) {
 
     this(stack.getTagCompound());
-  }
-
-  /**
-   * Constructs an MCColor from a position in the world. Expects the position to have already been checked for validity.
-   *
-   * @param world The World.
-   * @param pos   A position in the world.
-   */
-  public MCColor(IBlockAccess world, BlockPos pos) {
-
-    this(world.getTileEntity(pos));
-  }
-
-  /**
-   * Constructs an MCColor from a TileEntity. Expects the TileEntity to have already been checked for validity.
-   *
-   * @param tile The TileEntity to construct a color from.
-   */
-  public MCColor(TileEntity tile) {
-
-    this(tile.getTileData());
   }
 
   /**
@@ -168,6 +147,27 @@ public class MCColor extends Color {
   public MCColor(int red, int green, int blue) {
 
     super(red, green, blue);
+  }
+
+  /**
+   * Constructs an MCColor from a position in the world. Expects the position to have already been checked for validity.
+   *
+   * @param world The World.
+   * @param pos   A position in the world.
+   */
+  public MCColor(IBlockAccess world, BlockPos pos) {
+
+    this(world.getTileEntity(pos));
+  }
+
+  /**
+   * Constructs an MCColor from a TileEntity. Expects the TileEntity to have already been checked for validity.
+   *
+   * @param tile The TileEntity to construct a color from.
+   */
+  public MCColor(TileEntity tile) {
+
+    this(tile.getTileData());
   }
 
   /**
@@ -210,8 +210,8 @@ public class MCColor extends Color {
   }
 
   /**
-   * Checks if an ItemStack is acceptable. For an ItemStack to be acceptable, it must not be null or empty, and must have an NBTTagCompound which is
-   * deemed acceptable by {@link #isAcceptable(NBTTagCompound)}.
+   * Checks if an ItemStack is acceptable. For an ItemStack to be acceptable, it must not be null or empty, and must have an NBTTagCompound which is deemed acceptable
+   * by {@link #isAcceptable(NBTTagCompound)}.
    *
    * @param stack The ItemStack to check.
    * @return Whether or not the ItemStack was acceptable.
@@ -219,6 +219,18 @@ public class MCColor extends Color {
   public static boolean isAcceptable(@NotNull ItemStack stack) {
 
     return !stack.isEmpty() && stack.hasTagCompound() && isAcceptable(stack.getTagCompound());
+  }
+
+  /**
+   * Checks if a NBTTagCompound is acceptable. For an NBTTagCompound to be acceptable, it must not be null, and must have an integer array named Color with 3
+   * elements.
+   *
+   * @param tag The NBTTagCompound to check.
+   * @return Whether or not the ItemStack was acceptable.
+   */
+  public static boolean isAcceptable(NBTTagCompound tag) {
+
+    return tag.hasKey("Color") && tag.getIntArray("Color").length == 3;
   }
 
   /**
@@ -234,8 +246,8 @@ public class MCColor extends Color {
   }
 
   /**
-   * Checks if a tile entity is acceptable. For a TileEntity to be acceptable, it must not be null or invalid, and must have an NBTTagCompound which
-   * is deemed acceptable by {@link #isAcceptable(NBTTagCompound)}.
+   * Checks if a tile entity is acceptable. For a TileEntity to be acceptable, it must not be null or invalid, and must have an NBTTagCompound which is deemed
+   * acceptable by {@link #isAcceptable(NBTTagCompound)}.
    *
    * @param tile The TileEntity to check.
    * @return Whether or not the TileEntity was acceptable.
@@ -243,18 +255,6 @@ public class MCColor extends Color {
   public static boolean isAcceptable(TileEntity tile) {
 
     return tile != null && !tile.isInvalid() && isAcceptable(tile.getTileData());
-  }
-
-  /**
-   * Checks if a NBTTagCompound is acceptable. For an NBTTagCompound to be acceptable, it must not be null, and must have an integer array named Color
-   * with 3 elements.
-   *
-   * @param tag The NBTTagCompound to check.
-   * @return Whether or not the ItemStack was acceptable.
-   */
-  public static boolean isAcceptable(NBTTagCompound tag) {
-
-    return tag.hasKey("Color") && tag.getIntArray("Color").length == 3;
   }
 
   /**

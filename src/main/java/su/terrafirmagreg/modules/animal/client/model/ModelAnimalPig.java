@@ -46,7 +46,7 @@ public class ModelAnimalPig extends ModelQuadruped {
 
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-      float par6, float par7) {
+          float par6, float par7) {
     EntityAnimalPig pig = ((EntityAnimalPig) entity);
 
     float percent = (float) pig.getPercentToAdulthood();
@@ -75,7 +75,7 @@ public class ModelAnimalPig extends ModelQuadruped {
 
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
-      float par6, Entity par7Entity) {
+          float par6, Entity par7Entity) {
     tusk1.isHidden = true;
     tusk2.isHidden = true;
     this.head.rotateAngleX = par5 / (180F / MathConstants.PI);

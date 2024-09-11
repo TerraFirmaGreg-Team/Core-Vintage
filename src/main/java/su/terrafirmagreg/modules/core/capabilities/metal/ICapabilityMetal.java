@@ -23,21 +23,7 @@ import java.util.List;
 public interface ICapabilityMetal {
 
   /**
-   * @param stack the item stack. This can assume that it is of the right item type and do casts without checking
-   * @return the metal of the stack
-   */
-  @Nullable
-  Metal getMetal(ItemStack stack);
-
-  /**
-   * @param stack The item stack
-   * @return the amount of liquid metal that this item will create (in TFC units or mB: 1 unit = 1 mB)
-   */
-  int getSmeltAmount(ItemStack stack);
-
-  /**
-   * Can the metal melt directly from the stack into a fluid? This is used by {@link HeatRecipeMetalMelting} to determine if metal melting is
-   * possible
+   * Can the metal melt directly from the stack into a fluid? This is used by {@link HeatRecipeMetalMelting} to determine if metal melting is possible
    *
    * @param stack The item stack
    * @return true if the metal can be melted
@@ -68,4 +54,17 @@ public interface ICapabilityMetal {
       text.add(I18n.format(Helpers.getEnumName(metal.getTier())));
     }
   }
+
+  /**
+   * @param stack the item stack. This can assume that it is of the right item type and do casts without checking
+   * @return the metal of the stack
+   */
+  @Nullable
+  Metal getMetal(ItemStack stack);
+
+  /**
+   * @param stack The item stack
+   * @return the amount of liquid metal that this item will create (in TFC units or mB: 1 unit = 1 mB)
+   */
+  int getSmeltAmount(ItemStack stack);
 }

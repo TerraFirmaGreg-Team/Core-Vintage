@@ -21,9 +21,9 @@ public class GenLayerRiver extends GenLayerBase {
 
     for (int zz = 0; zz < sizeZ; ++zz) {
       for (int xx = 0; xx < sizeX; ++xx) {
-        int k2 = this.calcWidth(ints[xx + 0 + (zz + 1) * sizeX2]);
+        int k2 = this.calcWidth(ints[xx + (zz + 1) * sizeX2]);
         int l2 = this.calcWidth(ints[xx + 2 + (zz + 1) * sizeX2]);
-        int i3 = this.calcWidth(ints[xx + 1 + (zz + 0) * sizeX2]);
+        int i3 = this.calcWidth(ints[xx + 1 + (zz) * sizeX2]);
         int j3 = this.calcWidth(ints[xx + 1 + (zz + 2) * sizeX2]);
         int k3 = this.calcWidth(ints[xx + 1 + (zz + 1) * sizeX2]);
 

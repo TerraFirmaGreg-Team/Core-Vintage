@@ -18,8 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Resistances are positive, weaknesses are negative Calculations are done per <a href="https://www.desmos.com/calculator/689oqycw1t">this
- * spreadsheet</a>
+ * Resistances are positive, weaknesses are negative Calculations are done per <a href="https://www.desmos.com/calculator/689oqycw1t">this spreadsheet</a>
  */
 
 public enum DamageType {
@@ -114,18 +113,6 @@ public enum DamageType {
     return GENERIC;
   }
 
-  @NotNull
-  private static DamageType getFromItem(ItemStack stack) {
-    if (OreDictUtils.contains(stack, "damageTypeCrushing")) {
-      return CRUSHING;
-    } else if (OreDictUtils.contains(stack, "damageTypeSlashing")) {
-      return SLASHING;
-    } else if (OreDictUtils.contains(stack, "damageTypePiercing")) {
-      return PIERCING;
-    }
-    return GENERIC;
-  }
-
   private float getModifier(@Nullable ICapabilityDamageResistance resistSource) {
     if (resistSource != null) {
       switch (this) {
@@ -138,5 +125,17 @@ public enum DamageType {
       }
     }
     return 1f;
+  }
+
+  @NotNull
+  private static DamageType getFromItem(ItemStack stack) {
+    if (OreDictUtils.contains(stack, "damageTypeCrushing")) {
+      return CRUSHING;
+    } else if (OreDictUtils.contains(stack, "damageTypeSlashing")) {
+      return SLASHING;
+    } else if (OreDictUtils.contains(stack, "damageTypePiercing")) {
+      return PIERCING;
+    }
+    return GENERIC;
   }
 }

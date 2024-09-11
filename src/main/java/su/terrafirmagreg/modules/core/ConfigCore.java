@@ -48,11 +48,11 @@ public class ConfigCore {
 
       @Config.Name("Puddle Rate")
       @Config.Comment({
-          "The game will pick a random block every tick for every active chunk",
-          "Then it will check if a puddle can be placed there",
-          "Then it generates a random number between 0-99",
-          "And if that number is less than this puddle rate number, it puts a puddle",
-          "That means any value over 99 will flood your world with puddles"
+              "The game will pick a random block every tick for every active chunk",
+              "Then it will check if a puddle can be placed there",
+              "Then it generates a random number between 0-99",
+              "And if that number is less than this puddle rate number, it puts a puddle",
+              "That means any value over 99 will flood your world with puddles"
       })
       @Config.RangeInt(min = 0, max = 99)
       public int puddleRate = 15;
@@ -134,7 +134,7 @@ public class ConfigCore {
       public double globalModifier = 0.5;
 
       @Config.Comment(
-          "Modifier for how quickly devices (i.e. charcoal forge, fire pit) will gain or lose heat. Smaller number = slower temperature changes.")
+              "Modifier for how quickly devices (i.e. charcoal forge, fire pit) will gain or lose heat. Smaller number = slower temperature changes.")
       @Config.RangeDouble(min = 0, max = 10)
       public double heatingModifier = 1;
 
@@ -161,15 +161,15 @@ public class ConfigCore {
       public float positiveModifier = 5f;
 
       @Config.Comment({"How fast does temperature change when it's going away from the average. " +
-          "If you think you are giving yourself a challenge by increasing this number, think twice. "
-          +
-          "It makes it so that you have to warm yourself up every so often. Default = 1"})
+              "If you think you are giving yourself a challenge by increasing this number, think twice. "
+              +
+              "It makes it so that you have to warm yourself up every so often. Default = 1"})
       public float negativeModifier = 1f;
 
       @Config.Comment({"How many ticks between modifier calculations. " +
-          "Too high values help performance but behave weirdly. " +
-          "20 = 1 second means modifiers are checked every second. " +
-          "Also affects the packet sending interval. Default = 20"})
+              "Too high values help performance but behave weirdly. " +
+              "20 = 1 second means modifiers are checked every second. " +
+              "Also affects the packet sending interval. Default = 20"})
       public int tickInterval = 20;
 
       @Config.Comment("How potent are multipliers with more than one instance. (Eg. 2 fire pits nearby means they have 2 * this effectiveness). Default = 0.7")
@@ -188,29 +188,29 @@ public class ConfigCore {
       public boolean harsherTemperateAreas = true;
 
       @Config.Comment({
-          "If harsherTemperateAreas is true, environmental temperatures going away from the average are multiplied by this number. "
-              +
-              "(The less temperate an area is, the less the modifier affects it). Default = 1.2 "})
+              "If harsherTemperateAreas is true, environmental temperatures going away from the average are multiplied by this number. "
+                      +
+                      "(The less temperate an area is, the less the modifier affects it). Default = 1.2 "})
       public float harsherMultiplier = 1.20f;
 
       @Config.Comment({"The temperature at which you are at equilibrium. " +
-          "It's advisable to not change this by a lot since the entire ecosystem revolves around this. Default = 15"})
+              "It's advisable to not change this by a lot since the entire ecosystem revolves around this. Default = 15"})
       public float averageTemperature = 15f;
 
       @Config.Comment({"The temperature at which your screen starts heating. " +
-          "It's advisable to not change this by a lot since the entire ecosystem revolves around this. Default = 20"})
+              "It's advisable to not change this by a lot since the entire ecosystem revolves around this. Default = 20"})
       public float hotTemperature = 20f;
 
       @Config.Comment({"The temperature at which your screen starts freezing. " +
-          "It's advisable to not change this by a lot since the entire ecosystem revolves around this. Default = 10"})
+              "It's advisable to not change this by a lot since the entire ecosystem revolves around this. Default = 10"})
       public float coldTemperature = 10f;
 
       @Config.Comment({"The temperature at which you start burning and taking damage. " +
-          "It's advisable to not change this by a lot since the entire ecosystem revolves around this. Default = 25"})
+              "It's advisable to not change this by a lot since the entire ecosystem revolves around this. Default = 25"})
       public float burningTemperature = 25f;
 
       @Config.Comment({"The temperature at which you start freezing and taking damage. " +
-          "It's advisable to not change this by a lot since the entire ecosystem revolves around this. Default = 5"})
+              "It's advisable to not change this by a lot since the entire ecosystem revolves around this. Default = 5"})
       public float freezingTemperature = 5f;
 
     }
@@ -224,31 +224,31 @@ public class ConfigCore {
 
       @Config.Comment("Damage Source Types that will default to Piercing damage.")
       public String[] piercingSources = new String[]{
-          "arrow", "cactus", "thorns"
+              "arrow", "cactus", "thorns"
       };
 
       @Config.Comment("Damage Source Types that will default to Crushing damage.")
       public String[] crushingSources = new String[]{
-          "anvil", "falling_block"
+              "anvil", "falling_block"
       };
 
       @Config.Comment("Damage Source Entities that will default to Slashing damage.")
       public String[] slashingEntities = new String[]{
-          "minecraft:wither_skeleton", "minecraft:vex", "minecraft:vindication_illager",
-          "minecraft:zombie_pigman", "minecraft:wolf", "minecraft:polar_bear"
+              "minecraft:wither_skeleton", "minecraft:vex", "minecraft:vindication_illager",
+              "minecraft:zombie_pigman", "minecraft:wolf", "minecraft:polar_bear"
       };
 
       @Config.Comment("Damage Source Entities that will default to Piercing damage.")
       public String[] piercingEntities = new String[]{
-          "minecraft:stray", "minecraft:skeleton"
+              "minecraft:stray", "minecraft:skeleton"
       };
 
       @Config.Comment("Damage Source Entities that will default to Crushing damage.")
       public String[] crushingEntities = new String[]{
-          "minecraft:husk", "minecraft:skeleton_horse", "minecraft:zombie_horse",
-          "minecraft:spider", "minecraft:giant",
-          "minecraft:zombie", "minecraft:slime", "minecraft:cave_spider", "minecraft:silverfish",
-          "minecraft:villager_golem", "minecraft:zombie_villager"
+              "minecraft:husk", "minecraft:skeleton_horse", "minecraft:zombie_horse",
+              "minecraft:spider", "minecraft:giant",
+              "minecraft:zombie", "minecraft:slime", "minecraft:cave_spider", "minecraft:silverfish",
+              "minecraft:villager_golem", "minecraft:zombie_villager"
       };
     }
 
@@ -263,14 +263,14 @@ public class ConfigCore {
       public boolean debugCreatePath = false;
 
       @Config.Comment({"Debug worldgen (the danger part) " +
-          "This will glass maps at max world height to help debug world gen. " +
-          "THIS WILL MESS UP YOUR WORLD!"})
+              "This will glass maps at max world height to help debug world gen. " +
+              "THIS WILL MESS UP YOUR WORLD!"})
       @Config.RequiresWorldRestart
       public boolean debugWorldGenDanger = false;
 
       @Config.Comment("Debug worldgen (safe part) " +
-          "This will output map images of world gen steps and print some debug info. " +
-          "This is safe to use.")
+              "This will output map images of world gen steps and print some debug info. " +
+              "This is safe to use.")
       @Config.RequiresWorldRestart
       public boolean debugWorldGenSafe = false;
     }

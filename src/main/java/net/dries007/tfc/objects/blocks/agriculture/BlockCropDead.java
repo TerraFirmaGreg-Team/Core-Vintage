@@ -42,147 +42,147 @@ import java.util.Set;
 
 public class BlockCropDead extends BlockBush { //implements IGrowingPlant
 
-    /* true if the crop spawned in the wild, means it ignores growth conditions i.e. farmland */
-    public static final PropertyBool MATURE = PropertyBool.create("mature");
+  /* true if the crop spawned in the wild, means it ignores growth conditions i.e. farmland */
+  public static final PropertyBool MATURE = PropertyBool.create("mature");
 
-    // binary flags for state and metadata conversion
-    private static final int META_MATURE = 1;
+  // binary flags for state and metadata conversion
+  private static final int META_MATURE = 1;
 
-    // static field and methods for conversion from crop to Block
-    private static final Map<ICrop, BlockCropDead> MAP = new HashMap<>();
-    protected final ICrop crop;
+  // static field and methods for conversion from crop to Block
+  private static final Map<ICrop, BlockCropDead> MAP = new HashMap<>();
+  protected final ICrop crop;
 
-    public BlockCropDead(ICrop crop) {
-        super(Material.PLANTS);
+  public BlockCropDead(ICrop crop) {
+    super(Material.PLANTS);
 
-        this.crop = crop;
-        if (MAP.put(crop, this) != null) {
-            throw new IllegalStateException("There can only be one.");
+    this.crop = crop;
+    if (MAP.put(crop, this) != null) {
+      throw new IllegalStateException("There can only be one.");
+    }
+
+    setSoundType(SoundType.PLANT);
+    setHardness(0.6f);
+  }
+
+  public static BlockCropDead get(ICrop crop) {
+    return MAP.get(crop);
+  }
+
+  public static Set<ICrop> getCrops() {
+    return MAP.keySet();
+  }
+
+  @NotNull
+  public ICrop getCrop() {
+    return crop;
+  }
+
+  @Override
+  @NotNull
+  @SuppressWarnings("deprecation")
+  public IBlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(MATURE, (meta & META_MATURE) > 0);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(MATURE) ? META_MATURE : 0;
+  }
+
+  @NotNull
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return ItemSeedsTFC.get(crop);
+  }
+
+  @Override
+  @NotNull
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, MATURE);
+  }
+
+  @Override
+  @NotNull
+  public Block.EnumOffsetType getOffsetType() {
+    return Block.EnumOffsetType.XZ;
+  }
+
+  @Override
+  public int quantityDropped(IBlockState state, int fortune, Random random) {
+    // dead crops always drop at least 1 seed
+    int count = 1;
+    if (state.getValue(MATURE)) {
+      // (mature and dead) crops always drop 1 extra seed
+      count++;
+      // mature crops have a chance to drop a bonus, dead or alive
+      EntityPlayer player = harvesters.get();
+      if (player != null) {
+        SimpleSkill skill = CapabilityPlayer.getSkill(player, SkillType.AGRICULTURE);
+        if (skill != null) {
+          count += Crop.getSkillSeedBonus(skill, RANDOM);
+          skill.add(0.04f);
         }
-
-        setSoundType(SoundType.PLANT);
-        setHardness(0.6f);
+      }
     }
 
-    public static BlockCropDead get(ICrop crop) {
-        return MAP.get(crop);
+    return count;
+  }
+
+  @Override
+  @NotNull
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    return new ItemStack(ItemSeedsTFC.get(crop));
+  }
+
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    if (this.crop != Crop.RICE) {
+      return super.canPlaceBlockAt(worldIn, pos);
+    } else {
+      return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
     }
+  }
 
-    public static Set<ICrop> getCrops() {
-        return MAP.keySet();
+  protected boolean canSustainBush(IBlockState state) {
+    if (this.crop != Crop.RICE) {
+      return super.canSustainBush(state);
+    } else {
+      return BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenClassic.FRESH_WATER ||
+              state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
     }
+  }
 
-    @NotNull
-    public ICrop getCrop() {
-        return crop;
-    }
-
-    @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
-    public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(MATURE, (meta & META_MATURE) > 0);
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(MATURE) ? META_MATURE : 0;
-    }
-
-    @NotNull
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ItemSeedsTFC.get(crop);
-    }
-
-    @Override
-    @NotNull
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, MATURE);
-    }
-
-    @Override
-    @NotNull
-    public Block.EnumOffsetType getOffsetType() {
-        return Block.EnumOffsetType.XZ;
-    }
-
-    @Override
-    public int quantityDropped(IBlockState state, int fortune, Random random) {
-        // dead crops always drop at least 1 seed
-        int count = 1;
-        if (state.getValue(MATURE)) {
-            // (mature and dead) crops always drop 1 extra seed
-            count++;
-            // mature crops have a chance to drop a bonus, dead or alive
-            EntityPlayer player = harvesters.get();
-            if (player != null) {
-                SimpleSkill skill = CapabilityPlayer.getSkill(player, SkillType.AGRICULTURE);
-                if (skill != null) {
-                    count += Crop.getSkillSeedBonus(skill, RANDOM);
-                    skill.add(0.04f);
-                }
-            }
-        }
-
-        return count;
-    }
-
-    @Override
-    @NotNull
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(ItemSeedsTFC.get(crop));
-    }
-
-    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-        IBlockState soil;
-        if (this.crop != Crop.RICE) {
-            soil = worldIn.getBlockState(pos.down());
-            return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
+  public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+    IBlockState soil;
+    if (this.crop != Crop.RICE) {
+      soil = worldIn.getBlockState(pos.down());
+      return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
+    } else {
+      soil = worldIn.getBlockState(pos.down());
+      if (!(soil.getBlock() instanceof BlockWaterPlantTFCF) && !(soil.getBlock() instanceof BlockWaterPlantTFC)) {
+        if (state.getBlock() != this) {
+          return this.canSustainBush(soil);
         } else {
-            soil = worldIn.getBlockState(pos.down());
-            if (!(soil.getBlock() instanceof BlockWaterPlantTFCF) && !(soil.getBlock() instanceof BlockWaterPlantTFC)) {
-                if (state.getBlock() != this) {
-                    return this.canSustainBush(soil);
-                } else {
-                    IBlockState stateDown = worldIn.getBlockState(pos.down());
-                    Material material = stateDown.getMaterial();
-                    return soil.getBlock()
-                            .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) ||
-                            material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 &&
-                                    stateDown == ChunkGenClassic.FRESH_WATER || material == Material.ICE ||
-                            material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
-                }
-            } else {
-                return false;
-            }
+          IBlockState stateDown = worldIn.getBlockState(pos.down());
+          Material material = stateDown.getMaterial();
+          return soil.getBlock()
+                  .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) ||
+                  material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 &&
+                          stateDown == ChunkGenClassic.FRESH_WATER || material == Material.ICE ||
+                  material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
         }
+      } else {
+        return false;
+      }
     }
+  }
 
-    @NotNull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 1.0, 0.875);
-    }
+  @NotNull
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 1.0, 0.875);
+  }
 
-    @NotNull
-    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-        return EnumPlantType.Crop;
-    }
-
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        if (this.crop != Crop.RICE) {
-            return super.canPlaceBlockAt(worldIn, pos);
-        } else {
-            return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
-        }
-    }
-
-    protected boolean canSustainBush(IBlockState state) {
-        if (this.crop != Crop.RICE) {
-            return super.canSustainBush(state);
-        } else {
-            return BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenClassic.FRESH_WATER ||
-                    state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
-        }
-    }
+  @NotNull
+  public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+    return EnumPlantType.Crop;
+  }
 }

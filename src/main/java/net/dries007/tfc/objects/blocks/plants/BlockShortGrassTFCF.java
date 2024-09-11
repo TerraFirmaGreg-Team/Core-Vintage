@@ -35,31 +35,39 @@ import java.util.Random;
 
 public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
 
-    private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
-    private static final AxisAlignedBB SHORTER_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.5D, 0.875D);
-    private static final AxisAlignedBB SHORT_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.75D, 0.875D);
-    private static final AxisAlignedBB SHORTEST_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D);
-    private static final Map<Plant, BlockShortGrassTFCF> MAP = new HashMap<>();
+  private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
+  private static final AxisAlignedBB SHORTER_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.5D, 0.875D);
+  private static final AxisAlignedBB SHORT_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.75D, 0.875D);
+  private static final AxisAlignedBB SHORTEST_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D);
+  private static final Map<Plant, BlockShortGrassTFCF> MAP = new HashMap<>();
 
-    public BlockShortGrassTFCF(Plant plant) {
-        super(plant);
-        if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+  public BlockShortGrassTFCF(Plant plant) {
+    super(plant);
+    if (MAP.put(plant, this) != null) {
+      throw new IllegalStateException("There can only be one.");
     }
+  }
 
-    public static BlockShortGrassTFCF get(Plant plant) {
-        return BlockShortGrassTFCF.MAP.get(plant);
-    }
+  public static BlockShortGrassTFCF get(Plant plant) {
+    return BlockShortGrassTFCF.MAP.get(plant);
+  }
 
-    @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
-        int currentStage = state.getValue(growthStageProperty);
-        int expectedStage = plant.getStageForMonth(currentMonth);
-        int age = state.getValue(AGE);
+  @Override
+  @NotNull
+  protected BlockStateContainer createPlantBlockState() {
+    return new BlockStateContainer(this, AGE, growthStageProperty, DAYPERIOD);
+  }
 
-        if (!worldIn.isRemote) {
-            if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-                    .getHarvestLevel(stack, "scythe", player, state) != -1) {
+  @Override
+  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
+    int currentStage = state.getValue(growthStageProperty);
+    int expectedStage = plant.getStageForMonth(currentMonth);
+    int age = state.getValue(AGE);
+
+    if (!worldIn.isRemote) {
+      if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
+              .getHarvestLevel(stack, "scythe", player, state) != -1) {
                 /*if (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.WILD_BARLEY))
                 {
                     if (age == 3 && (currentStage == 1 || expectedStage == 1))
@@ -121,104 +129,100 @@ public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
                     }
                 }
                 else*/
-                {
-                    if (MathConstants.RNG.nextDouble() <= (age + 1) / 4.0D) //+25% change for each age
-                    {
-                        spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
-                    }
-                }
-            } else if (stack.getItem() == Items.SHEARS) {
-                spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
-            }
+        {
+          if (MathConstants.RNG.nextDouble() <= (age + 1) / 4.0D) //+25% change for each age
+          {
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
+          }
         }
-        //super.harvestBlock(worldIn, player, pos, state, te, stack);
+      } else if (stack.getItem() == Items.SHEARS) {
+        spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
+      }
+    }
+    //super.harvestBlock(worldIn, player, pos, state, te, stack);
+  }
+
+  @Override
+  @NotNull
+  public Block.EnumOffsetType getOffsetType() {
+    return Block.EnumOffsetType.XZ;
+  }
+
+  @Override
+  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    if (!worldIn.isAreaLoaded(pos, 1)) {
+      return;
     }
 
-    @Override
-    @NotNull
-    public Block.EnumOffsetType getOffsetType() {
-        return Block.EnumOffsetType.XZ;
-    }
+    if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
+            plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+      int j = state.getValue(AGE);
 
-    @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if (!worldIn.isAreaLoaded(pos, 1)) return;
-
-        if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
-                plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-            int j = state.getValue(AGE);
-
-            if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
-                    net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
-                if (j < 3) {
-                    worldIn.setBlockState(pos, state.withProperty(AGE, j + 1));
-                }
-                net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-            }
-        } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
-                !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-            int j = state.getValue(AGE);
-
-            if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
-                if (j > 0) {
-                    worldIn.setBlockState(pos, state.withProperty(AGE, j - 1));
-                } else {
-                    worldIn.setBlockToAir(pos);
-                }
-                net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-            }
+      if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
+              net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
+        if (j < 3) {
+          worldIn.setBlockState(pos, state.withProperty(AGE, j + 1));
         }
+        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+      }
+    } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
+            !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+      int j = state.getValue(AGE);
 
-        checkAndDropBlock(worldIn, pos, state);
-    }
-
-    @Override
-    @NotNull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        switch (state.getValue(AGE)) {
-            case 0:
-                return SHORTEST_GRASS_AABB.offset(state.getOffset(source, pos));
-            case 1:
-                return SHORTER_GRASS_AABB.offset(state.getOffset(source, pos));
-            case 2:
-                return SHORT_GRASS_AABB.offset(state.getOffset(source, pos));
-            default:
-                return GRASS_AABB.offset(state.getOffset(source, pos));
+      if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+        if (j > 0) {
+          worldIn.setBlockState(pos, state.withProperty(AGE, j - 1));
+        } else {
+          worldIn.setBlockToAir(pos);
         }
+        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+      }
     }
 
-    @Override
-    @NotNull
-    protected BlockStateContainer createPlantBlockState() {
-        return new BlockStateContainer(this, AGE, growthStageProperty, DAYPERIOD);
-    }
+    checkAndDropBlock(worldIn, pos, state);
+  }
 
-    @Override
-    public int quantityDroppedWithBonus(int fortune, Random random) {
-        return 1 + random.nextInt(fortune * 2 + 1);
+  @Override
+  @NotNull
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    switch (state.getValue(AGE)) {
+      case 0:
+        return SHORTEST_GRASS_AABB.offset(state.getOffset(source, pos));
+      case 1:
+        return SHORTER_GRASS_AABB.offset(state.getOffset(source, pos));
+      case 2:
+        return SHORT_GRASS_AABB.offset(state.getOffset(source, pos));
+      default:
+        return GRASS_AABB.offset(state.getOffset(source, pos));
     }
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    @NotNull
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(this, 1);
-    }
+  @Override
+  public int quantityDroppedWithBonus(int fortune, Random random) {
+    return 1 + random.nextInt(fortune * 2 + 1);
+  }
 
-    @Override
-    @NotNull
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(this, 1);
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  @NotNull
+  public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+    return new ItemStack(this, 1);
+  }
 
-    @Override
-    public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
-        return true;
-    }
+  @Override
+  @NotNull
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    return new ItemStack(this, 1);
+  }
 
-    @Override
-    @NotNull
-    public NonNullList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return NonNullList.withSize(1, new ItemStack(this, 1));
-    }
+  @Override
+  public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
+    return true;
+  }
+
+  @Override
+  @NotNull
+  public NonNullList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+    return NonNullList.withSize(1, new ItemStack(this, 1));
+  }
 }

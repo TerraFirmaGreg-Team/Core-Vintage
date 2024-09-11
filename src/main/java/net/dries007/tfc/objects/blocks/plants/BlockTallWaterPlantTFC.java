@@ -46,40 +46,6 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
   }
 
   @Override
-  public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-    IBlockState water = plant.getWaterType();
-    int i;
-    //noinspection StatementWithEmptyBody
-    for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i)
-      ;
-    if (water == SALT_WATER) {
-      return i < plant.getMaxHeight() && BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
-    } else {
-      return i < plant.getMaxHeight() && BlockUtils.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
-    }
-  }
-
-  @Override
-  public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-    return false;
-  }
-
-  @Override
-  public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-    worldIn.setBlockState(pos.up(), this.getDefaultState());
-    IBlockState iblockstate = state.withProperty(AGE, 0)
-            .withProperty(growthStageProperty, plant.getStageForMonth())
-            .withProperty(PART, getPlantPart(worldIn, pos));
-    worldIn.setBlockState(pos, iblockstate);
-    iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
-  }
-
-  public void shrink(World worldIn, BlockPos pos) {
-    worldIn.setBlockState(pos, plant.getWaterType());
-    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
-  }
-
-  @Override
   public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
     super.onBlockHarvested(worldIn, pos, state, player);
   }
@@ -93,6 +59,12 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
       return true;
     }
     return super.canSustainPlant(state, world, pos, direction, plantable);
+  }
+
+  @Override
+  @NotNull
+  protected BlockStateContainer createPlantBlockState() {
+    return new BlockStateContainer(this, AGE, growthStageProperty, PART, DAYPERIOD);
   }
 
   @Override
@@ -146,6 +118,45 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
   }
 
   @Override
+  public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+    IBlockState water = plant.getWaterType();
+    int i;
+    //noinspection StatementWithEmptyBody
+    for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i)
+      ;
+    if (water == SALT_WATER) {
+      return i < plant.getMaxHeight() && BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
+    } else {
+      return i < plant.getMaxHeight() && BlockUtils.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
+    }
+  }
+
+  @Override
+  public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+    return false;
+  }
+
+  @Override
+  public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+    worldIn.setBlockState(pos.up(), this.getDefaultState());
+    IBlockState iblockstate = state.withProperty(AGE, 0)
+            .withProperty(growthStageProperty, plant.getStageForMonth())
+            .withProperty(PART, getPlantPart(worldIn, pos));
+    worldIn.setBlockState(pos, iblockstate);
+    iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
+  }
+
+  private boolean canShrink(World worldIn, BlockPos pos) {
+    return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
+            .getBlock() != this;
+  }
+
+  public void shrink(World worldIn, BlockPos pos) {
+    worldIn.setBlockState(pos, plant.getWaterType());
+    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
+  }
+
+  @Override
   public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
     IBlockState soil = worldIn.getBlockState(pos.down());
 
@@ -167,18 +178,7 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
   }
 
   @Override
-  @NotNull
-  protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, AGE, growthStageProperty, PART, DAYPERIOD);
-  }
-
-  @Override
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
-  }
-
-  private boolean canShrink(World worldIn, BlockPos pos) {
-    return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
-            .getBlock() != this;
   }
 }

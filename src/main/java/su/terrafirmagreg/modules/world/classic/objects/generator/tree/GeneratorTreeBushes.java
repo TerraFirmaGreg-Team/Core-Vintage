@@ -26,14 +26,14 @@ public class GeneratorTreeBushes implements ITreeGenerator {
 
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-      Random rand, boolean isWorldGen) {
+          Random rand, boolean isWorldGen) {
     IBlockState leaves = BlockLeavesTFC.get(tree).getDefaultState().withProperty(DECAYABLE, true);
 
     // Has to fake being placed, otherwise the log will just poof out of existence. todo: better fix for this.
     checkAndPlace(BlockLogTFC.get(tree)
-        .getDefaultState()
-        .withProperty(PLACED, true)
-        .withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE), world, pos);
+            .getDefaultState()
+            .withProperty(PLACED, true)
+            .withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE), world, pos);
     checkAndPlace(leaves, world, pos.add(0, 1, 0));
 
     for (EnumFacing face : EnumFacing.HORIZONTALS) {
@@ -61,8 +61,8 @@ public class GeneratorTreeBushes implements ITreeGenerator {
 
     // Check the position for liquids, etc.
     if (world.getBlockState(pos).getMaterial().isLiquid() || !world.getBlockState(pos)
-        .getMaterial()
-        .isReplaceable()) {
+            .getMaterial()
+            .isReplaceable()) {
       if (!(world.getBlockState(pos) instanceof BlockSaplingTFC)) {
         return false;
       }

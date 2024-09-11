@@ -40,7 +40,7 @@ import static net.dries007.tfc.objects.blocks.BlockLargeVessel.SEALED;
  */
 
 public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCallback,
-    IProviderContainer<ContainerCrate, GuiCrate> {
+        IProviderContainer<ContainerCrate, GuiCrate> {
 
   private boolean sealed;
   private long sealedTick, sealedCalendarTick;
@@ -50,8 +50,7 @@ public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCal
   }
 
   /**
-   * Called when this TileEntity was created by placing a sealed Barrel Item. Loads its data from the Item's NBTTagCompound without loading xyz
-   * coordinates.
+   * Called when this TileEntity was created by placing a sealed Barrel Item. Loads its data from the Item's NBTTagCompound without loading xyz coordinates.
    *
    * @param nbt The NBTTagCompound to load from.
    */
@@ -64,8 +63,7 @@ public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCal
   }
 
   /**
-   * Called once per side when the TileEntity has finished loading. On servers, this is the earliest point in time to safely access the TE's World
-   * object.
+   * Called once per side when the TileEntity has finished loading. On servers, this is the earliest point in time to safely access the TE's World object.
    */
   @Override
   public void onLoad() {
@@ -77,7 +75,7 @@ public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCal
   @NotNull
   public String getSealedDate() {
     return ICalendarFormatted.getTimeAndDate(sealedCalendarTick,
-        Calendar.CALENDAR_TIME.getDaysInMonth());
+            Calendar.CALENDAR_TIME.getDaysInMonth());
   }
 
   @Override
@@ -88,6 +86,15 @@ public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCal
   @Override
   public boolean canExtract(int slot, EnumFacing side) {
     return !sealed;
+  }
+
+  @Override
+  public boolean isItemValid(int slot, ItemStack stack) {
+    ICapabilitySize sizeCap = CapabilitySize.getIItemSize(stack);
+    if (sizeCap != null) {
+      return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
+    }
+    return true;
   }
 
   public void onSealed() {
@@ -161,15 +168,6 @@ public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCal
     }
   }
 
-  @Override
-  public boolean isItemValid(int slot, ItemStack stack) {
-    ICapabilitySize sizeCap = CapabilitySize.getIItemSize(stack);
-    if (sizeCap != null) {
-      return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
-    }
-    return true;
-  }
-
   /**
    * Called to get the NBTTagCompound that is put on Barrel Items. This happens when a sealed Barrel was broken.
    *
@@ -181,19 +179,6 @@ public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCal
     nbt.setLong("sealedTick", sealedTick);
     nbt.setLong("sealedCalendarTick", sealedCalendarTick);
     return nbt;
-  }
-
-  @Override
-  public ContainerCrate getContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
-    return new ContainerCrate(inventoryPlayer, this);
-  }
-
-  @Override
-  public GuiCrate getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state,
-      BlockPos pos) {
-    return new GuiCrate(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this,
-        state);
   }
 
   private static class LargeVesselItemStackHandler extends ItemStackHandler {
@@ -210,4 +195,19 @@ public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCal
       return stack;
     }
   }
+
+  @Override
+  public ContainerCrate getContainer(InventoryPlayer inventoryPlayer, World world,
+          IBlockState state, BlockPos pos) {
+    return new ContainerCrate(inventoryPlayer, this);
+  }
+
+  @Override
+  public GuiCrate getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state,
+          BlockPos pos) {
+    return new GuiCrate(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this,
+            state);
+  }
+
+
 }

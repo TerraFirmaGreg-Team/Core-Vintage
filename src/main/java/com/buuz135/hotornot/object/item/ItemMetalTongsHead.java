@@ -17,43 +17,43 @@ import java.util.Map;
 
 public class ItemMetalTongsHead extends ItemTFC implements ICapabilityMetal {
 
-    private static final Map<Metal, ItemMetalTongsHead> TONGS_HEAD_MAP = new HashMap<>();
+  private static final Map<Metal, ItemMetalTongsHead> TONGS_HEAD_MAP = new HashMap<>();
 
-    private final Metal metal;
+  private final Metal metal;
 
-    public ItemMetalTongsHead(final Metal metal) {
-        this.metal = metal;
+  public ItemMetalTongsHead(final Metal metal) {
+    this.metal = metal;
 
-        TONGS_HEAD_MAP.put(metal, this);
-    }
+    TONGS_HEAD_MAP.put(metal, this);
+  }
 
-    /**
-     * Gets the Tongs Head item for the metal MUST BE A TOOL METAL
-     *
-     * @param metal Metal type to get
-     * @return Item instance for the given metal type
-     */
-    public static ItemMetalTongsHead get(final Metal metal) {
-        return TONGS_HEAD_MAP.get(metal);
-    }
+  /**
+   * Gets the Tongs Head item for the metal MUST BE A TOOL METAL
+   *
+   * @param metal Metal type to get
+   * @return Item instance for the given metal type
+   */
+  public static ItemMetalTongsHead get(final Metal metal) {
+    return TONGS_HEAD_MAP.get(metal);
+  }
 
-    @Override
-    public Metal getMetal(final ItemStack itemStack) {
-        return metal;
-    }
+  @Override
+  public Metal getMetal(final ItemStack itemStack) {
+    return metal;
+  }
 
-    @Override
-    public int getSmeltAmount(final ItemStack itemStack) {
-        return 100;
-    }
+  @Override
+  public int getSmeltAmount(final ItemStack itemStack) {
+    return 100;
+  }
 
-    @Override
-    public @NotNull Size getSize(final ItemStack itemStack) {
-        return Size.NORMAL;
-    }
+  @Override
+  public @NotNull Weight getWeight(final ItemStack itemStack) {
+    return Weight.MEDIUM;
+  }
 
-    @Override
-    public @NotNull Weight getWeight(final ItemStack itemStack) {
-        return Weight.MEDIUM;
-    }
+  @Override
+  public @NotNull Size getSize(final ItemStack itemStack) {
+    return Size.NORMAL;
+  }
 }

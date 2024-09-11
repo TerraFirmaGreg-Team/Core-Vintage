@@ -32,38 +32,38 @@ import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 @Mod.EventBusSubscriber(modid = MODID_TFCF)
 public final class CommonEventHandlerTFCF {
 
-    private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+  private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
-    @SubscribeEvent
-    public void onBlockHarvestDrops(BlockEvent.HarvestDropsEvent event) {
-        World world = event.getWorld();
-        BlockPos pos = event.getPos();
-        IBlockState state = event.getState();
-        Block block = state.getBlock();
-        Month month = Calendar.CALENDAR_TIME.getMonthOfYear();
+  @SubscribeEvent
+  public void onBlockHarvestDrops(BlockEvent.HarvestDropsEvent event) {
+    World world = event.getWorld();
+    BlockPos pos = event.getPos();
+    IBlockState state = event.getState();
+    Block block = state.getBlock();
+    Month month = Calendar.CALENDAR_TIME.getMonthOfYear();
 
-        for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-            if (plant == TFCRegistries.PLANTS.getValue(DefaultPlants.BARREL_CACTUS) &&
-                    (month == Month.SEPTEMBER || month == Month.OCTOBER || month == Month.NOVEMBER)) {
-                int chance = MathConstants.RNG.nextInt(2);
-                if (chance == 0) {
-                    event.getDrops().clear();
-                    event.getDrops().add(new ItemStack(ItemsTFCF.BARREL_CACTUS_FRUIT, 1 + MathConstants.RNG.nextInt(3)));
-                }
-            }
+    for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
+      if (plant == TFCRegistries.PLANTS.getValue(DefaultPlants.BARREL_CACTUS) &&
+              (month == Month.SEPTEMBER || month == Month.OCTOBER || month == Month.NOVEMBER)) {
+        int chance = MathConstants.RNG.nextInt(2);
+        if (chance == 0) {
+          event.getDrops().clear();
+          event.getDrops().add(new ItemStack(ItemsTFCF.BARREL_CACTUS_FRUIT, 1 + MathConstants.RNG.nextInt(3)));
         }
-        if (TFCFlorae.FirmaLifeAdded) {
-            EntityPlayer playerHarvest = event.getHarvester();
-            ItemStack held = playerHarvest == null ? ItemStack.EMPTY : playerHarvest.getHeldItemMainhand();
-
-            if (block instanceof BlockCassiaCinnamonLeaves || block instanceof BlockCeylonCinnamonLeaves || block instanceof BlockBambooLeaves) {
-                event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + MathConstants.RNG.nextInt(4)));
-            }
-            if (block == BlocksFL.MELON_FRUIT && (held.getItem()
-                    .getHarvestLevel(held, "knife", playerHarvest, state) != -1)) {
-                event.getDrops().clear();
-                event.getDrops().add(new ItemStack(ItemsFL.getFood(FoodFL.MELON), 2 + MathConstants.RNG.nextInt(4)));
-            }
-        }
+      }
     }
+    if (TFCFlorae.FirmaLifeAdded) {
+      EntityPlayer playerHarvest = event.getHarvester();
+      ItemStack held = playerHarvest == null ? ItemStack.EMPTY : playerHarvest.getHeldItemMainhand();
+
+      if (block instanceof BlockCassiaCinnamonLeaves || block instanceof BlockCeylonCinnamonLeaves || block instanceof BlockBambooLeaves) {
+        event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + MathConstants.RNG.nextInt(4)));
+      }
+      if (block == BlocksFL.MELON_FRUIT && (held.getItem()
+              .getHarvestLevel(held, "knife", playerHarvest, state) != -1)) {
+        event.getDrops().clear();
+        event.getDrops().add(new ItemStack(ItemsFL.getFood(FoodFL.MELON), 2 + MathConstants.RNG.nextInt(4)));
+      }
+    }
+  }
 }

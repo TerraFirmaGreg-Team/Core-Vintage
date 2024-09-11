@@ -71,13 +71,13 @@ public class ItemRockKnife extends ItemTool implements ICapabilitySize, IRockObj
   }
 
   @Override
-  public @NotNull Size getSize(ItemStack stack) {
-    return Size.NORMAL; // Stored in large vessels
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.MEDIUM;
   }
 
   @Override
-  public @NotNull Weight getWeight(ItemStack stack) {
-    return Weight.MEDIUM;
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.NORMAL; // Stored in large vessels
   }
 
   @Override

@@ -23,7 +23,7 @@ public class ContainerQuern extends BaseContainerTile<TileQuern> {
   @Override
   protected void addContainerSlots() {
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-        null);
+            null);
     if (inventory != null) {
       addSlotToContainer(new SlotCallback(inventory, SLOT_HANDSTONE, 93, 20, tile));
       addSlotToContainer(new SlotCallback(inventory, SLOT_INPUT, 66, 47, tile));

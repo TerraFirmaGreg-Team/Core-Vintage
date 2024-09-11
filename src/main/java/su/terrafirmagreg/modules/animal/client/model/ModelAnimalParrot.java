@@ -75,10 +75,10 @@ public class ModelAnimalParrot extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount,
-      float ageInTicks, float netHeadYaw, float headPitch,
-      float scale) {
+          float ageInTicks, float netHeadYaw, float headPitch,
+          float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-        entity);
+            entity);
 
     if (((EntityAnimal) entity).isChild()) {
       double ageScale = 1;
@@ -106,8 +106,8 @@ public class ModelAnimalParrot extends ModelBase {
 
   @Override
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks,
-      float netHeadYaw, float headPitch, float scaleFactor,
-      Entity entityIn) {
+          float netHeadYaw, float headPitch, float scaleFactor,
+          Entity entityIn) {
     float f = ageInTicks * 0.3F;
     this.head.rotateAngleX = headPitch * 0.017453292F;
     this.head.rotateAngleY = netHeadYaw * 0.017453292F;
@@ -147,7 +147,7 @@ public class ModelAnimalParrot extends ModelBase {
       var10000.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
       var10000 = this.legRight;
       var10000.rotateAngleX +=
-          MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * 1.4F * limbSwingAmount;
+              MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * 1.4F * limbSwingAmount;
     }
 
     this.head.rotationPointY = 15.69F + f;
@@ -164,7 +164,7 @@ public class ModelAnimalParrot extends ModelBase {
 
   @Override
   public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing,
-      float limbSwingAmount, float partialTickTime) {
+          float limbSwingAmount, float partialTickTime) {
     this.feather.rotateAngleX = -0.2214F;
     this.body.rotateAngleX = 0.4937F;
     this.wingLeft.rotateAngleX = -0.69813174F;

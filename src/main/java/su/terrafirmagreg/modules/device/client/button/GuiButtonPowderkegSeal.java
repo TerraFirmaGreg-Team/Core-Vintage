@@ -25,7 +25,7 @@ public class GuiButtonPowderkegSeal extends BaseGuiButton implements IButtonTool
   @Override
   public String getTooltip() {
     return ModUtils.localize("tooltip", "") + (tile.isSealed() ? "powderkeg_unseal"
-        : "powderkeg_seal");
+            : "powderkeg_seal");
   }
 
   @Override
@@ -39,7 +39,7 @@ public class GuiButtonPowderkegSeal extends BaseGuiButton implements IButtonTool
       GlStateManager.color(1, 1, 1, 1);
       mc.getTextureManager().bindTexture(BACKGROUND);
       hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
-          && mouseY < this.y + this.height;
+              && mouseY < this.y + this.height;
       if (tile.isSealed()) {
         drawModalRectWithCustomSizedTexture(x, y, 236, 0, 20, 20, 256, 256);
       } else {

@@ -47,34 +47,34 @@ import static su.terrafirmagreg.data.Properties.LIT;
 
 @SuppressWarnings("deprecation")
 public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellowsConsumerBlock,
-    IProviderTile {
+        IProviderTile {
 
   public BlockSmelteryFirebox() {
     super(Settings.of(Material.IRON));
 
     getSettings()
-        .registryKey("device/smeltery_firebox")
-        .sound(SoundType.STONE)
-        .hardness(3.0F)
-        .lightValue(1)
-        .nonFullCube()
-        .nonOpaque()
-        .weight(Weight.MEDIUM)
-        .size(Size.LARGE);
+            .registryKey("device/smeltery_firebox")
+            .sound(SoundType.STONE)
+            .hardness(3.0F)
+            .lightValue(1)
+            .nonFullCube()
+            .nonOpaque()
+            .weight(Weight.MEDIUM)
+            .size(Size.LARGE);
 
     setTickRandomly(true);
     setHarvestLevel(ToolClasses.PICKAXE, 0);
     setDefaultState(blockState.getBaseState()
-        .withProperty(LIT, false)
-        .withProperty(FACING, EnumFacing.NORTH));
+            .withProperty(LIT, false)
+            .withProperty(FACING, EnumFacing.NORTH));
 
   }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-        .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
-        .withProperty(LIT, meta / 4 % 2 != 0);
+            .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+            .withProperty(LIT, meta / 4 % 2 != 0);
   }
 
   @Override
@@ -83,14 +83,24 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
   }
 
   @Override
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return FULL_BLOCK_AABB;
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
+          EnumFacing face) {
+    return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 
   @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-      EnumFacing face) {
-    return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, LIT, FACING);
+  }
+
+  @Override
+  public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+    return state.getValue(LIT) ? 15 : 0;
+  }
+
+  @Override
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return FULL_BLOCK_AABB;
   }
 
   @SideOnly(Side.CLIENT)
@@ -102,8 +112,8 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
 
     if (rng.nextInt(24) == 0) {
       world.playSound((float) pos.getX() + 0.5F, (float) pos.getY() + 0.5F,
-          (float) pos.getZ() + 0.5F, SoundEvents.BLOCK_FIRE_AMBIENT,
-          SoundCategory.BLOCKS, 1.0F + rng.nextFloat(), rng.nextFloat() * 0.7F + 0.3F, false);
+              (float) pos.getZ() + 0.5F, SoundEvents.BLOCK_FIRE_AMBIENT,
+              SoundCategory.BLOCKS, 1.0F + rng.nextFloat(), rng.nextFloat() * 0.7F + 0.3F, false);
     }
     if (rng.nextFloat() < 0.4f) {
       double x = pos.getX() + 0.5;
@@ -142,8 +152,8 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-      EnumHand hand, EnumFacing side, float hitX,
-      float hitY, float hitZ) {
+          EnumHand hand, EnumFacing side, float hitX,
+          float hitY, float hitZ) {
     if (!player.isSneaking()) {
       if (!world.isRemote) {
         ItemStack held = player.getHeldItem(hand);
@@ -156,14 +166,14 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
           }
         } else {
           if (held.getItem() instanceof ItemBlock
-              && ((ItemBlock) held.getItem()).getBlock() instanceof BlockSmelteryCauldron && world
-              .getBlockState(pos.up())
-              .getMaterial()
-              .isReplaceable()) {
+                  && ((ItemBlock) held.getItem()).getBlock() instanceof BlockSmelteryCauldron && world
+                  .getBlockState(pos.up())
+                  .getMaterial()
+                  .isReplaceable()) {
             held.getItem().onItemUse(player, world, pos.up(), hand, side, hitX, hitY, hitZ);
           } else {
             player.sendStatusMessage(
-                new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"), true);
+                    new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"), true);
           }
         }
       }
@@ -173,19 +183,9 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
   }
 
   @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, LIT, FACING);
-  }
-
-  @Override
-  public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-    return state.getValue(LIT) ? 15 : 0;
-  }
-
-  @Override
   public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX,
-      float hitY, float hitZ, int meta,
-      EntityLivingBase placer, EnumHand hand) {
+          float hitY, float hitZ, int meta,
+          EntityLivingBase placer, EnumHand hand) {
     return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
   }
 

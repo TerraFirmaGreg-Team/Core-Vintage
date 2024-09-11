@@ -120,6 +120,15 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
   }
 
   @Override
+  public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    var tile = TileUtils.getTile(world, pos, TileBlastFurnace.class);
+    if (tile != null) {
+      tile.onBreakBlock(world, pos, state);
+    }
+    super.breakBlock(world, pos, state);
+  }
+
+  @Override
   public IBlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(LIT, meta == 1);
   }
@@ -127,15 +136,6 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
   @Override
   public int getMetaFromState(IBlockState state) {
     return state.getValue(LIT) ? 1 : 0;
-  }
-
-  @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(world, pos, TileBlastFurnace.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
-    super.breakBlock(world, pos, state);
   }
 
   @Override

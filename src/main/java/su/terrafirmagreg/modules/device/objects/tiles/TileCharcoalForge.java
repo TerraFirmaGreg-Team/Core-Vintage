@@ -84,19 +84,6 @@ public class TileCharcoalForge extends BaseTileTickableInventory
     Arrays.fill(cachedRecipes, null);
   }
 
-  @Override
-  public ContainerCharcoalForge getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
-    return new ContainerCharcoalForge(inventoryPlayer, this);
-  }
-
-  @Override
-  public GuiCharcoalForge getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
-    return new GuiCharcoalForge(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-            this);
-  }
-
   public void onAirIntake(int amount) {
     airTicks += amount;
     if (airTicks > MAX_AIR_TICKS) {
@@ -190,139 +177,10 @@ public class TileCharcoalForge extends BaseTileTickableInventory
       }
       markDirty();
     }
-  }
-
-  @Override
-  public void onCalendarUpdate(long deltaPlayerTicks) {
-    IBlockState state = world.getBlockState(pos);
-    if (!state.getValue(LIT)) {
-      return;
-    }
-    // Consume fuel as dictated by the delta player ticks (don't simulate any input changes), and then extinguish
-    if (burnTicks > deltaPlayerTicks) {
-      burnTicks -= deltaPlayerTicks;
-      return;
-    } else {
-      deltaPlayerTicks -= burnTicks;
-      burnTicks = 0;
-    }
-    // Need to consume fuel
-    requiresSlotUpdate = true;
-    for (int i = SLOT_FUEL_MIN; i <= SLOT_FUEL_MAX; i++) {
-      ItemStack fuelStack = inventory.getStackInSlot(i);
-      Fuel fuel = FuelManager.getFuel(fuelStack);
-      inventory.setStackInSlot(i, ItemStack.EMPTY);
-      if (fuel.getAmount() > deltaPlayerTicks) {
-        burnTicks = (int) (fuel.getAmount() - deltaPlayerTicks);
-        burnTemperature = fuel.getTemperature();
-        return;
-      } else {
-        deltaPlayerTicks -= fuel.getAmount();
-        burnTicks = 0;
-      }
-    }
-    if (deltaPlayerTicks > 0) {
-      // Consumed all fuel, so extinguish and cool instantly
-      burnTemperature = 0;
-      temperature = 0;
-      for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++) {
-        ItemStack stack = inventory.getStackInSlot(i);
-        var cap = CapabilityHeat.get(stack);
-        if (cap != null) {
-          cap.setTemperature(0f);
-        }
-      }
-      world.setBlockState(pos, state.withProperty(LIT, false));
-    }
-  }
-
-  @Override
-  public long getLastUpdateTick() {
-    return lastPlayerTick;
-  }
-
-  @Override
-  public void setLastUpdateTick(long tick) {
-    this.lastPlayerTick = tick;
-  }
-
-  public void onCreate() {
-    burnTicks = 200;
-    burnTemperature = 500;
-  }
-
-  @Override
-  public void setAndUpdateSlots(int slot) {
-    super.setAndUpdateSlots(slot);
-    requiresSlotUpdate = true;
-    updateCachedRecipes();
-  }
-
-  @Override
-  public void readFromNBT(NBTTagCompound nbt) {
-    temperature = nbt.getFloat("temperature");
-    burnTicks = nbt.getInteger("burnTicks");
-    airTicks = nbt.getInteger("airTicks");
-    burnTemperature = nbt.getFloat("burnTemperature");
-    lastPlayerTick = nbt.getLong("lastPlayerTick");
-    super.readFromNBT(nbt);
-
-    updateCachedRecipes();
-  }
-
-  @Override
-  @NotNull
-  public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-    NBTUtils.setGenericNBTValue(nbt, "temperature", temperature);
-    NBTUtils.setGenericNBTValue(nbt, "burnTicks", burnTicks);
-    NBTUtils.setGenericNBTValue(nbt, "airTicks", airTicks);
-    NBTUtils.setGenericNBTValue(nbt, "burnTemperature", burnTemperature);
-    NBTUtils.setGenericNBTValue(nbt, "lastPlayerTick", lastPlayerTick);
-    return super.writeToNBT(nbt);
-  }
-
-  @Override
-  public int getSlotLimit(int slot) {
-    // All slots have limit 1
-    return 1;
-  }
-
-  @Override
-  public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-    if (slot <= SLOT_FUEL_MAX) {
-      // Fuel slots - anything that is a valid TFC fuel
-      return FuelManager.isItemForgeFuel(stack);
-    } else if (slot <= SLOT_INPUT_MAX) {
-      // Input slots - anything that can heat up
-      return CapabilityHeat.has(stack);
-    } else {
-      // Extra slots - anything that can heat up and hold fluids
-      return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) &&
-              CapabilityHeat.has(stack);
-    }
-  }
-
-  @Override
-  public int getFieldCount() {
-    return 1;
-  }
-
-  @Override
-  public void setField(int index, int value) {
-    if (index == FIELD_TEMPERATURE) {
-      this.temperature = (float) value;
-    } else {
-      TerraFirmaCraft.getLog().warn("Invalid field ID {} in TECharcoalForge#setField", index);
-    }
-  }
-
-  @Override
-  public int getField(int index) {
-    if (index == FIELD_TEMPERATURE) {
-      return (int) temperature;
-    }
-    TerraFirmaCraft.getLog().warn("Invalid field ID {} in TECharcoalForge#getField", index);
-    return 0;
+  }  @Override
+  public ContainerCharcoalForge getContainer(InventoryPlayer inventoryPlayer, World world,
+          IBlockState state, BlockPos pos) {
+    return new ContainerCharcoalForge(inventoryPlayer, this);
   }
 
   private void handleInputMelting(ItemStack stack, int startIndex) {
@@ -386,6 +244,100 @@ public class TileCharcoalForge extends BaseTileTickableInventory
     requiresSlotUpdate = false;
   }
 
+  @Override
+  public long getLastUpdateTick() {
+    return lastPlayerTick;
+  }  @Override
+  public GuiCharcoalForge getGuiContainer(InventoryPlayer inventoryPlayer, World world,
+          IBlockState state, BlockPos pos) {
+    return new GuiCharcoalForge(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
+            this);
+  }
+
+  @Override
+  public void onCalendarUpdate(long deltaPlayerTicks) {
+    IBlockState state = world.getBlockState(pos);
+    if (!state.getValue(LIT)) {
+      return;
+    }
+    // Consume fuel as dictated by the delta player ticks (don't simulate any input changes), and then extinguish
+    if (burnTicks > deltaPlayerTicks) {
+      burnTicks -= deltaPlayerTicks;
+      return;
+    } else {
+      deltaPlayerTicks -= burnTicks;
+      burnTicks = 0;
+    }
+    // Need to consume fuel
+    requiresSlotUpdate = true;
+    for (int i = SLOT_FUEL_MIN; i <= SLOT_FUEL_MAX; i++) {
+      ItemStack fuelStack = inventory.getStackInSlot(i);
+      Fuel fuel = FuelManager.getFuel(fuelStack);
+      inventory.setStackInSlot(i, ItemStack.EMPTY);
+      if (fuel.getAmount() > deltaPlayerTicks) {
+        burnTicks = (int) (fuel.getAmount() - deltaPlayerTicks);
+        burnTemperature = fuel.getTemperature();
+        return;
+      } else {
+        deltaPlayerTicks -= fuel.getAmount();
+        burnTicks = 0;
+      }
+    }
+    if (deltaPlayerTicks > 0) {
+      // Consumed all fuel, so extinguish and cool instantly
+      burnTemperature = 0;
+      temperature = 0;
+      for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++) {
+        ItemStack stack = inventory.getStackInSlot(i);
+        var cap = CapabilityHeat.get(stack);
+        if (cap != null) {
+          cap.setTemperature(0f);
+        }
+      }
+      world.setBlockState(pos, state.withProperty(LIT, false));
+    }
+  }
+
+  @Override
+  public void setLastUpdateTick(long tick) {
+    this.lastPlayerTick = tick;
+  }
+
+  public void onCreate() {
+    burnTicks = 200;
+    burnTemperature = 500;
+  }
+
+  @Override
+  public void setAndUpdateSlots(int slot) {
+    super.setAndUpdateSlots(slot);
+    requiresSlotUpdate = true;
+    updateCachedRecipes();
+  }
+
+  @Override
+  public void readFromNBT(NBTTagCompound nbt) {
+    temperature = nbt.getFloat("temperature");
+    burnTicks = nbt.getInteger("burnTicks");
+    airTicks = nbt.getInteger("airTicks");
+    burnTemperature = nbt.getFloat("burnTemperature");
+    lastPlayerTick = nbt.getLong("lastPlayerTick");
+    super.readFromNBT(nbt);
+
+    updateCachedRecipes();
+  }
+
+  @Override
+  @NotNull
+  public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+    NBTUtils.setGenericNBTValue(nbt, "temperature", temperature);
+    NBTUtils.setGenericNBTValue(nbt, "burnTicks", burnTicks);
+    NBTUtils.setGenericNBTValue(nbt, "airTicks", airTicks);
+    NBTUtils.setGenericNBTValue(nbt, "burnTemperature", burnTemperature);
+    NBTUtils.setGenericNBTValue(nbt, "lastPlayerTick", lastPlayerTick);
+    return super.writeToNBT(nbt);
+  }
+
   private void updateCachedRecipes() {
     // cache heat recipes for each input
     for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++) {
@@ -398,6 +350,50 @@ public class TileCharcoalForge extends BaseTileTickableInventory
   }
 
   @Override
+  public int getSlotLimit(int slot) {
+    // All slots have limit 1
+    return 1;
+  }
+
+  @Override
+  public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+    if (slot <= SLOT_FUEL_MAX) {
+      // Fuel slots - anything that is a valid TFC fuel
+      return FuelManager.isItemForgeFuel(stack);
+    } else if (slot <= SLOT_INPUT_MAX) {
+      // Input slots - anything that can heat up
+      return CapabilityHeat.has(stack);
+    } else {
+      // Extra slots - anything that can heat up and hold fluids
+      return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) &&
+              CapabilityHeat.has(stack);
+    }
+  }
+
+  @Override
+  public int getFieldCount() {
+    return 1;
+  }
+
+  @Override
+  public void setField(int index, int value) {
+    if (index == FIELD_TEMPERATURE) {
+      this.temperature = (float) value;
+    } else {
+      TerraFirmaCraft.getLog().warn("Invalid field ID {} in TECharcoalForge#setField", index);
+    }
+  }
+
+  @Override
+  public int getField(int index) {
+    if (index == FIELD_TEMPERATURE) {
+      return (int) temperature;
+    }
+    TerraFirmaCraft.getLog().warn("Invalid field ID {} in TECharcoalForge#getField", index);
+    return 0;
+  }
+
+  @Override
   public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
 
     float change = FIELD_TEMPERATURE / 140f;
@@ -407,4 +403,10 @@ public class TileCharcoalForge extends BaseTileTickableInventory
     }
     return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
   }
+
+
+
+
+
+
 }

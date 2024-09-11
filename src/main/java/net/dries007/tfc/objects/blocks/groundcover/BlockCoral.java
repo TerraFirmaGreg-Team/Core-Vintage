@@ -47,331 +47,331 @@ import java.util.Map;
 
 public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlantable {
 
-    public static final Map<EnumDyeColor, BlockCoral> TUBE_CORAL = new HashMap<>();
-    public static final Map<EnumDyeColor, BlockCoral> BRAIN_CORAL = new HashMap<>();
-    public static final Map<EnumDyeColor, BlockCoral> BUBBLE_CORAL = new HashMap<>();
-    public static final Map<EnumDyeColor, BlockCoral> FIRE_CORAL = new HashMap<>();
-    public static final Map<EnumDyeColor, BlockCoral> HORN_CORAL = new HashMap<>();
-    public static final Map<EnumDyeColor, BlockCoral> TUBE_CORAL_FAN = new HashMap<>();
-    public static final Map<EnumDyeColor, BlockCoral> BRAIN_CORAL_FAN = new HashMap<>();
-    public static final Map<EnumDyeColor, BlockCoral> BUBBLE_CORAL_FAN = new HashMap<>();
-    public static final Map<EnumDyeColor, BlockCoral> FIRE_CORAL_FAN = new HashMap<>();
-    public static final Map<EnumDyeColor, BlockCoral> HORN_CORAL_FAN = new HashMap<>();
-    static final PropertyBool DOWN = PropertyBool.create("down");
-    static final PropertyBool UP = PropertyBool.create("up");
-    static final PropertyBool NORTH = PropertyBool.create("north");
-    static final PropertyBool EAST = PropertyBool.create("east");
-    static final PropertyBool SOUTH = PropertyBool.create("south");
-    static final PropertyBool WEST = PropertyBool.create("west");
-    private static final PropertyBool[] ALL_FACES = new PropertyBool[] { DOWN, UP, NORTH, SOUTH, WEST, EAST };
-    private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.1D, 0.2D, 0.1D, 0.9D, 1.0D, 0.9D);
-    private static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
-    private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.1D, 0.1D, 0.0D, 0.9D, 0.9D, 0.8D);
-    private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.1D, 0.1D, 0.2D, 0.9D, 0.9D, 1.0D);
-    private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.2D, 0.1D, 0.1D, 1.0D, 0.9D, 0.9D);
-    private static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0.1D, 0.1D, 0.8D, 0.9D, 0.9D);
+  public static final Map<EnumDyeColor, BlockCoral> TUBE_CORAL = new HashMap<>();
+  public static final Map<EnumDyeColor, BlockCoral> BRAIN_CORAL = new HashMap<>();
+  public static final Map<EnumDyeColor, BlockCoral> BUBBLE_CORAL = new HashMap<>();
+  public static final Map<EnumDyeColor, BlockCoral> FIRE_CORAL = new HashMap<>();
+  public static final Map<EnumDyeColor, BlockCoral> HORN_CORAL = new HashMap<>();
+  public static final Map<EnumDyeColor, BlockCoral> TUBE_CORAL_FAN = new HashMap<>();
+  public static final Map<EnumDyeColor, BlockCoral> BRAIN_CORAL_FAN = new HashMap<>();
+  public static final Map<EnumDyeColor, BlockCoral> BUBBLE_CORAL_FAN = new HashMap<>();
+  public static final Map<EnumDyeColor, BlockCoral> FIRE_CORAL_FAN = new HashMap<>();
+  public static final Map<EnumDyeColor, BlockCoral> HORN_CORAL_FAN = new HashMap<>();
+  static final PropertyBool DOWN = PropertyBool.create("down");
+  static final PropertyBool UP = PropertyBool.create("up");
+  static final PropertyBool NORTH = PropertyBool.create("north");
+  static final PropertyBool EAST = PropertyBool.create("east");
+  static final PropertyBool SOUTH = PropertyBool.create("south");
+  static final PropertyBool WEST = PropertyBool.create("west");
+  private static final PropertyBool[] ALL_FACES = new PropertyBool[]{DOWN, UP, NORTH, SOUTH, WEST, EAST};
+  private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.1D, 0.2D, 0.1D, 0.9D, 1.0D, 0.9D);
+  private static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
+  private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.1D, 0.1D, 0.0D, 0.9D, 0.9D, 0.8D);
+  private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.1D, 0.1D, 0.2D, 0.9D, 0.9D, 1.0D);
+  private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.2D, 0.1D, 0.1D, 1.0D, 0.9D, 0.9D);
+  private static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0.1D, 0.1D, 0.8D, 0.9D, 0.9D);
 
-    public BlockCoral(Fluid fluid, MapColor blockMapColorIn) {
-        this(fluid, Material.WATER);
+  public BlockCoral(Fluid fluid, MapColor blockMapColorIn) {
+    this(fluid, Material.WATER);
+  }
+
+  public BlockCoral(Fluid fluid, Material materialIn) {
+    super(fluid, Material.WATER, false);
+    this.setSoundType(SoundType.PLANT);
+    this.setHardness(0.0F);
+    this.setLightOpacity(0);
+    //this.setLightLevel(1F);
+    BlockUtils.setFireInfo(this, 5, 20);
+    this.setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, 0));
+    this.canCreateSources = false;
+  }
+
+  @Override
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.LIGHT;
+  }
+
+  @Override
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.SMALL;
+  }
+
+  @SuppressWarnings("deprecation")
+  @Override
+  @NotNull
+  public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+    return super.getActualState(state, worldIn, pos)
+            .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
+            .withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
+            .withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
+            .withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
+            .withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
+            .withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
+  }
+
+  @SuppressWarnings("deprecation")
+  @Override
+  @NotNull
+  public IBlockState withRotation(IBlockState state, Rotation rot) {
+    return switch (rot) {
+      case CLOCKWISE_180 -> state.withProperty(NORTH, state.getValue(SOUTH))
+              .withProperty(EAST, state.getValue(WEST))
+              .withProperty(SOUTH, state.getValue(NORTH))
+              .withProperty(WEST, state.getValue(EAST));
+      case COUNTERCLOCKWISE_90 -> state.withProperty(NORTH, state.getValue(EAST))
+              .withProperty(EAST, state.getValue(SOUTH))
+              .withProperty(SOUTH, state.getValue(WEST))
+              .withProperty(WEST, state.getValue(NORTH));
+      case CLOCKWISE_90 -> state.withProperty(NORTH, state.getValue(WEST))
+              .withProperty(EAST, state.getValue(NORTH))
+              .withProperty(SOUTH, state.getValue(EAST))
+              .withProperty(WEST, state.getValue(SOUTH));
+      default -> state;
+    };
+  }
+
+  @SuppressWarnings("deprecation")
+  @Override
+  @NotNull
+  public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
+    switch (mirrorIn) {
+      case LEFT_RIGHT:
+        return state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(NORTH));
+      case FRONT_BACK:
+        return state.withProperty(EAST, state.getValue(WEST)).withProperty(WEST, state.getValue(EAST));
+      default:
+        return super.withMirror(state, mirrorIn);
     }
+  }
 
-    public BlockCoral(Fluid fluid, Material materialIn) {
-        super(fluid, Material.WATER, false);
-        this.setSoundType(SoundType.PLANT);
-        this.setHardness(0.0F);
-        this.setLightOpacity(0);
-        //this.setLightLevel(1F);
-        BlockUtils.setFireInfo(this, 5, 20);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, 0));
-        this.canCreateSources = false;
-    }
+  @Override
+  public boolean isBlockNormalCube(IBlockState blockState) {
+    return false;
+  }
 
-    @Override
-    public @NotNull Size getSize(ItemStack stack) {
-        return Size.SMALL;
-    }
+  @NotNull
+  @Override
+  public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
+    return true;
+  }
 
-    @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return Weight.LIGHT;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  @NotNull
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    state = state.getActualState(source, pos);
 
-    @SuppressWarnings("deprecation")
-    @Override
-    @NotNull
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return super.getActualState(state, worldIn, pos)
-                .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
-                .withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
-                .withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
-                .withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
-                .withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
-                .withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
-    }
+    int i = 0;
+    AxisAlignedBB axisalignedbb = FULL_BLOCK_AABB;
 
-    protected boolean canSustainBush(IBlockState state) {
-        return true;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    @NotNull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        state = state.getActualState(source, pos);
-
-        int i = 0;
-        AxisAlignedBB axisalignedbb = FULL_BLOCK_AABB;
-
-        for (PropertyBool propertybool : ALL_FACES) {
-            if ((state.getValue(propertybool))) {
-                switch (propertybool.getName()) {
-                    case "down":
-                        axisalignedbb = DOWN_AABB;
-                        ++i;
-                        break;
-                    case "up":
-                        axisalignedbb = UP_AABB;
-                        ++i;
-                        break;
-                    case "north":
-                        axisalignedbb = NORTH_AABB;
-                        ++i;
-                        break;
-                    case "south":
-                        axisalignedbb = SOUTH_AABB;
-                        ++i;
-                        break;
-                    case "west":
-                        axisalignedbb = WEST_AABB;
-                        ++i;
-                        break;
-                    case "east":
-                        axisalignedbb = EAST_AABB;
-                        ++i;
-                        break;
-                    default:
-                        axisalignedbb = FULL_BLOCK_AABB;
-                }
-            }
+    for (PropertyBool propertybool : ALL_FACES) {
+      if ((state.getValue(propertybool))) {
+        switch (propertybool.getName()) {
+          case "down":
+            axisalignedbb = DOWN_AABB;
+            ++i;
+            break;
+          case "up":
+            axisalignedbb = UP_AABB;
+            ++i;
+            break;
+          case "north":
+            axisalignedbb = NORTH_AABB;
+            ++i;
+            break;
+          case "south":
+            axisalignedbb = SOUTH_AABB;
+            ++i;
+            break;
+          case "west":
+            axisalignedbb = WEST_AABB;
+            ++i;
+            break;
+          case "east":
+            axisalignedbb = EAST_AABB;
+            ++i;
+            break;
+          default:
+            axisalignedbb = FULL_BLOCK_AABB;
         }
-
-        return i == 1 ? axisalignedbb : FULL_BLOCK_AABB;
+      }
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    @Nullable
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return NULL_AABB;
-    }
+    return i == 1 ? axisalignedbb : FULL_BLOCK_AABB;
+  }
 
-    @NotNull
-    @Override
-    protected BlockStateContainer createBlockState() {
-        //return new BlockStateContainer(this, LEVEL, DOWN, UP, NORTH, EAST, WEST, SOUTH);
-        return new BlockStateContainer.Builder(this)
-                .add(LEVEL)
-                .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
-                .add(DOWN)
-                .add(UP)
-                .add(NORTH)
-                .add(EAST)
-                .add(WEST)
-                .add(SOUTH)
-                .build();
-    }
+  @SuppressWarnings("deprecation")
+  @NotNull
+  @Override
+  @SideOnly(Side.CLIENT)
+  public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+    return state.getBoundingBox(worldIn, pos).offset(pos);
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    @NotNull
-    public IBlockState withRotation(IBlockState state, Rotation rot) {
-        return switch (rot) {
-            case CLOCKWISE_180 -> state.withProperty(NORTH, state.getValue(SOUTH))
-                    .withProperty(EAST, state.getValue(WEST))
-                    .withProperty(SOUTH, state.getValue(NORTH))
-                    .withProperty(WEST, state.getValue(EAST));
-            case COUNTERCLOCKWISE_90 -> state.withProperty(NORTH, state.getValue(EAST))
-                    .withProperty(EAST, state.getValue(SOUTH))
-                    .withProperty(SOUTH, state.getValue(WEST))
-                    .withProperty(WEST, state.getValue(NORTH));
-            case CLOCKWISE_90 -> state.withProperty(NORTH, state.getValue(WEST))
-                    .withProperty(EAST, state.getValue(NORTH))
-                    .withProperty(SOUTH, state.getValue(EAST))
-                    .withProperty(WEST, state.getValue(SOUTH));
-            default -> state;
-        };
+  @Override
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    for (EnumFacing face : EnumFacing.values()) {
+      IBlockState up = worldIn.getBlockState(pos.up());
+      IBlockState blockState = worldIn.getBlockState(pos.offset(face));
+      if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
+              BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
+              (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
+                      up.getBlock() instanceof BlockCoral)) {
+        return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
+      }
     }
+    return false;
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    @NotNull
-    public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
-        switch (mirrorIn) {
-            case LEFT_RIGHT:
-                return state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(NORTH));
-            case FRONT_BACK:
-                return state.withProperty(EAST, state.getValue(WEST)).withProperty(WEST, state.getValue(EAST));
-            default:
-                return super.withMirror(state, mirrorIn);
-        }
+  @Override
+  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+    if (!worldIn.isRemote) {
+      spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
     }
+  }
 
-    @NotNull
-    @Override
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
-        return true;
-    }
+  @NotNull
+  @Override
+  @SideOnly(Side.CLIENT)
+  public Block.EnumOffsetType getOffsetType() {
+    return Block.EnumOffsetType.NONE;
+  }
 
-    @NotNull
-    @Override
-    public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
-        return true;
-    }
+  @NotNull
+  @Override
+  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+    this.onBlockHarvested(world, pos, state, player);
+    return world.setBlockState(pos, FluidsTFC.SALT_WATER.get()
+            .getBlock()
+            .getDefaultState(), world.isRemote ? 11 : 3);
+  }
 
-    @SuppressWarnings("deprecation")
-    @NotNull
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+  @NotNull
+  @Override
+  @SideOnly(Side.CLIENT)
+  public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+    return layer == BlockRenderLayer.TRANSLUCENT || layer == BlockRenderLayer.CUTOUT;
+  }
 
-    @SuppressWarnings("deprecation")
-    @NotNull
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
+  @NotNull
+  @Override
+  public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+    return canConnectTo(world, pos.offset(facing), facing.getOpposite()) && !(world.getBlockState(pos.offset(facing))
+            .getBlock() instanceof BlockFence);
+  }
 
-    @Override
-    public boolean isBlockNormalCube(IBlockState blockState) {
-        return false;
-    }
+  protected boolean canPlantConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+    BlockPos other = pos.offset(facing);
+    Block block = world.getBlockState(other).getBlock();
+    return block.canBeConnectedTo(world, other, facing.getOpposite()) || canConnectTo(world, other, facing.getOpposite());
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    @NotNull
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
+  protected boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
+    IBlockState iblockstate = worldIn.getBlockState(pos);
+    BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos, facing);
+    Block block = iblockstate.getBlock();
+    return blockfaceshape == BlockFaceShape.SOLID || block instanceof BlockFence;
+  }
 
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.TRANSLUCENT;
-    }
+  protected boolean canSustainBush(IBlockState state) {
+    return true;
+  }
 
-    @SuppressWarnings("deprecation")
-    @NotNull
-    @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!worldIn.isRemote) {
-            if (!canBlockStay(worldIn, pos, state)) {
-                worldIn.destroyBlock(pos, true);
-            }
-        }
-    }
+  @NotNull
+  @Override
+  protected BlockStateContainer createBlockState() {
+    //return new BlockStateContainer(this, LEVEL, DOWN, UP, NORTH, EAST, WEST, SOUTH);
+    return new BlockStateContainer.Builder(this)
+            .add(LEVEL)
+            .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
+            .add(DOWN)
+            .add(UP)
+            .add(NORTH)
+            .add(EAST)
+            .add(WEST)
+            .add(SOUTH)
+            .build();
+  }
 
-    @NotNull
-    @Override
-    public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
-        return canConnectTo(world, pos.offset(facing), facing.getOpposite()) && !(world.getBlockState(pos.offset(facing))
-                .getBlock() instanceof BlockFence);
+  @SuppressWarnings("deprecation")
+  @NotNull
+  @Override
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    if (!worldIn.isRemote) {
+      if (!canBlockStay(worldIn, pos, state)) {
+        worldIn.destroyBlock(pos, true);
+      }
     }
+  }
 
-    protected boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
-        BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos, facing);
-        Block block = iblockstate.getBlock();
-        return blockfaceshape == BlockFaceShape.SOLID || block instanceof BlockFence;
-    }
+  @NotNull
+  @Override
+  public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+    return true;
+  }
 
-    protected boolean canPlantConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
-        BlockPos other = pos.offset(facing);
-        Block block = world.getBlockState(other).getBlock();
-        return block.canBeConnectedTo(world, other, facing.getOpposite()) || canConnectTo(world, other, facing.getOpposite());
-    }
+  @SuppressWarnings("deprecation")
+  @NotNull
+  @Override
+  public boolean isOpaqueCube(IBlockState state) {
+    return false;
+  }
 
-    @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        for (EnumFacing face : EnumFacing.values()) {
-            IBlockState up = worldIn.getBlockState(pos.up());
-            IBlockState blockState = worldIn.getBlockState(pos.offset(face));
-            if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
-                    BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
-                    (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
-                            up.getBlock() instanceof BlockCoral)) {
-                return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
-            }
-        }
-        return false;
-    }
+  @SuppressWarnings("deprecation")
+  @NotNull
+  @Override
+  public boolean isFullCube(IBlockState state) {
+    return false;
+  }
 
-    @NotNull
-    @Override
-    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
-        this.onBlockHarvested(world, pos, state, player);
-        return world.setBlockState(pos, FluidsTFC.SALT_WATER.get()
-                .getBlock()
-                .getDefaultState(), world.isRemote ? 11 : 3);
-    }
+  @NotNull
+  @Override
+  @SideOnly(Side.CLIENT)
+  public BlockRenderLayer getRenderLayer() {
+    return BlockRenderLayer.TRANSLUCENT;
+  }
 
-    protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
-        if (!this.canBlockStay(worldIn, pos, state)) {
-            this.dropBlockAsItem(worldIn, pos, state, 0);
-            worldIn.setBlockState(pos, FluidsTFC.SALT_WATER.get().getBlock().getDefaultState());
-        }
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  @NotNull
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    return BlockFaceShape.UNDEFINED;
+  }
 
-    @NotNull
-    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-        for (EnumFacing face : EnumFacing.values()) {
-            IBlockState up = worldIn.getBlockState(pos.up());
-            IBlockState blockState = worldIn.getBlockState(pos.offset(face));
-            if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
-                    BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
-                    (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
-                            up.getBlock() instanceof BlockCoral)) {
-                return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
-            }
-        }
-        return false;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  @Nullable
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return NULL_AABB;
+  }
 
-    @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        if (!worldIn.isRemote) {
-            spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
-        }
+  @NotNull
+  public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+    for (EnumFacing face : EnumFacing.values()) {
+      IBlockState up = worldIn.getBlockState(pos.up());
+      IBlockState blockState = worldIn.getBlockState(pos.offset(face));
+      if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
+              BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
+              (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
+                      up.getBlock() instanceof BlockCoral)) {
+        return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
+      }
     }
+    return false;
+  }
 
-    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-        return EnumPlantType.Plains;
+  protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
+    if (!this.canBlockStay(worldIn, pos, state)) {
+      this.dropBlockAsItem(worldIn, pos, state, 0);
+      worldIn.setBlockState(pos, FluidsTFC.SALT_WATER.get().getBlock().getDefaultState());
     }
+  }
 
-    public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
-        return getDefaultState();
-    }
+  public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+    return EnumPlantType.Plains;
+  }
 
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public Block.EnumOffsetType getOffsetType() {
-        return Block.EnumOffsetType.NONE;
-    }
-
-    @SuppressWarnings("deprecation")
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
-        return state.getBoundingBox(worldIn, pos).offset(pos);
-    }
-
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-        return layer == BlockRenderLayer.TRANSLUCENT || layer == BlockRenderLayer.CUTOUT;
-    }
+  public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
+    return getDefaultState();
+  }
 }

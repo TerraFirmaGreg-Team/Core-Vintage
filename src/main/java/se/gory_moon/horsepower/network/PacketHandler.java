@@ -11,9 +11,9 @@ import static se.gory_moon.horsepower.lib.Reference.CHANNEL;
 
 public class PacketHandler {
 
-    public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(CHANNEL);
+  public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(CHANNEL);
 
-    public static void init() {
-        INSTANCE.registerMessage(SyncServerRecipesMessage.class, SyncServerRecipesMessage.class, 0, Side.CLIENT);
-    }
+  public static void init() {
+    INSTANCE.registerMessage(SyncServerRecipesMessage.class, SyncServerRecipesMessage.class, 0, Side.CLIENT);
+  }
 }

@@ -11,17 +11,17 @@ import org.jetbrains.annotations.NotNull;
 
 public class HeatRecipeVessel extends HeatRecipe {
 
-    public HeatRecipeVessel(IIngredient<ItemStack> ingredient, float transformTemp, Metal.Tier minTier) {
-        super(ingredient, transformTemp, minTier);
-    }
+  public HeatRecipeVessel(IIngredient<ItemStack> ingredient, float transformTemp, Metal.Tier minTier) {
+    super(ingredient, transformTemp, minTier);
+  }
 
-    @Override
-    @NotNull
-    public ItemStack getOutputStack(ItemStack input) {
-        ItemStack output = input.copy();
-        if (output.getItem() instanceof ItemSmallVessel) {
-            return ((ItemSmallVessel) output.getItem()).getFiringResult(output);
-        }
-        return output;
+  @Override
+  @NotNull
+  public ItemStack getOutputStack(ItemStack input) {
+    ItemStack output = input.copy();
+    if (output.getItem() instanceof ItemSmallVessel) {
+      return ((ItemSmallVessel) output.getItem()).getFiringResult(output);
     }
+    return output;
+  }
 }

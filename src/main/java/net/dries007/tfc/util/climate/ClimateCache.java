@@ -14,19 +14,19 @@ import java.util.Map;
  */
 public final class ClimateCache {
 
-    private final Map<ChunkPos, ClimateData> backingMap = new HashMap<>();
+  private final Map<ChunkPos, ClimateData> backingMap = new HashMap<>();
 
-    @NotNull
-    public ClimateData get(BlockPos pos) {
-        return get(new ChunkPos(pos));
-    }
+  @NotNull
+  public ClimateData get(BlockPos pos) {
+    return get(new ChunkPos(pos));
+  }
 
-    @NotNull
-    public ClimateData get(ChunkPos pos) {
-        return backingMap.getOrDefault(pos, ClimateData.DEFAULT);
-    }
+  @NotNull
+  public ClimateData get(ChunkPos pos) {
+    return backingMap.getOrDefault(pos, ClimateData.DEFAULT);
+  }
 
-    public void update(ChunkPos pos, float temperature, float rainfall) {
-        backingMap.put(pos, new ClimateData(temperature, rainfall));
-    }
+  public void update(ChunkPos pos, float temperature, float rainfall) {
+    backingMap.put(pos, new ClimateData(temperature, rainfall));
+  }
 }

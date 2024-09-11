@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.event;
 
-import su.terrafirmagreg.modules.wood.objects.entities.ai.EntityWoodAIPullCart;
+import su.terrafirmagreg.modules.wood.object.entity.ai.EntityWoodAIPullCart;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;

@@ -58,14 +58,14 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
 
   //Values that has a visual effect on client
   private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(
-      EntityAnimalBase.class, DataSerializers.BOOLEAN);
+          EntityAnimalBase.class, DataSerializers.BOOLEAN);
   private static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(
-      EntityAnimalBase.class, DataSerializers.VARINT);
+          EntityAnimalBase.class, DataSerializers.VARINT);
   private static final DataParameter<Float> FAMILIARITY = EntityDataManager.createKey(
-      EntityAnimalBase.class, DataSerializers.FLOAT);
+          EntityAnimalBase.class, DataSerializers.FLOAT);
   //Is this female fertilized? (in oviparous, the egg laying is fertilized, for mammals this is pregnancy)
   private static final DataParameter<Boolean> FERTILIZED = EntityDataManager.createKey(
-      EntityAnimalBase.class, DataSerializers.BOOLEAN);
+          EntityAnimalBase.class, DataSerializers.BOOLEAN);
   private long lastFed; //Last time(in days) this entity was fed
   private long lastFDecay; //Last time(in days) this entity's familiarity had decayed
   private long matingTime; //The last time(in ticks) this male tried fertilizing females
@@ -93,8 +93,8 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
    *
    * @param daysToAdult number of days needed for this animal to be an adult
    * @param daysToElder number of days needed after adult to this animal be an elder. 0 = ignore
-   * @return a random long value containing the days of growth for this animal to spawn **Always spawn adults** (so vanilla respawn mechanics only
-   * creates adults of this animal)
+   * @return a random long value containing the days of growth for this animal to spawn **Always spawn adults** (so vanilla respawn mechanics only creates adults of
+   * this animal)
    */
   public static int getRandomGrowth(int daysToAdult, int daysToElder) {
     int randomFactor = daysToElder > 0 ? (int) (daysToElder * 1.25f) : daysToAdult * 4;
@@ -102,26 +102,8 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     return (int) (Calendar.PLAYER_TIME.getTotalDays() - lifeTimeDays);
   }
 
-  /**
-   * Find and charms a near female animal of this animal Used by males to try mating with females
-   */
-  public static <T extends EntityAnimal & IAnimal> void findFemaleMate(T maleAnimal) {
-    List<EntityAnimal> list = maleAnimal.world.getEntitiesWithinAABB(maleAnimal.getClass(),
-        maleAnimal.getEntityBoundingBox()
-            .grow(8.0D));
-    for (EntityAnimal femaleAnimal : list) {
-      IAnimal female = (IAnimal) femaleAnimal;
-      if (female.getGender() == Gender.FEMALE && !femaleAnimal.isInLove()
-          && female.isReadyToMate()) {
-        femaleAnimal.setInLove(null);
-        maleAnimal.setInLove(null);
-        break;
-      }
-    }
-  }
-
   public static <T extends EntityAnimal & IAnimal> void addCommonLivestockAI(T entity,
-      double speedMult) {
+          double speedMult) {
     entity.tasks.addTask(2, new EntityAIMate(entity, 1.0D));
 
     for (ItemStack is : OreDictionary.getOres("grain")) {
@@ -132,7 +114,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     double farSpeed = .8D * speedMult;
     double nearSpeed = 1.1D * speedMult;
     entity.tasks.addTask(4,
-        new EntityAnimalAITamableAvoidPlayer<>(entity, 6.0F, farSpeed, nearSpeed));
+            new EntityAnimalAITamableAvoidPlayer<>(entity, 6.0F, farSpeed, nearSpeed));
     entity.tasks.addTask(6, new EntityAIEatGrass(entity));
   }
 
@@ -141,7 +123,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     double nearSpeed = 1.1D * speedMult;
 
     entity.tasks.addTask(4,
-        new EntityAIAvoidEntity<>(entity, EntityPlayer.class, 12.0F, farSpeed, nearSpeed));
+            new EntityAIAvoidEntity<>(entity, EntityPlayer.class, 12.0F, farSpeed, nearSpeed));
   }
 
   public static void addCommonPreyAI(EntityAnimal entity, double speedMult) {
@@ -152,17 +134,41 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     entity.tasks.addTask(1, new EntityAnimalAIPanic(entity, 1.4D * speedMult));
     //space for livestock AIMate and AITempt
     entity.tasks.addTask(4,
-        new EntityAIAvoidEntity<>(entity, EntityAnimalWolf.class, 8.0F, farSpeed, nearSpeed));
+            new EntityAIAvoidEntity<>(entity, EntityAnimalWolf.class, 8.0F, farSpeed, nearSpeed));
     entity.tasks.addTask(4,
-        new EntityAIAvoidEntity<>(entity, EntityAnimalMammal.class,
-            Predicates.instanceOf(IPredator.class), 12.0F, farSpeed, nearSpeed));
+            new EntityAIAvoidEntity<>(entity, EntityAnimalMammal.class,
+                    Predicates.instanceOf(IPredator.class), 12.0F, farSpeed, nearSpeed));
     entity.tasks.addTask(4,
-        new EntityAIAvoidEntity<>(entity, EntityMob.class, 8.0F, farSpeed * 0.7D,
-            nearSpeed * 0.7D));
+            new EntityAIAvoidEntity<>(entity, EntityMob.class, 8.0F, farSpeed * 0.7D,
+                    nearSpeed * 0.7D));
     // space for follow parent for mammals, find nest for oviparous, and eat grass for livestock
     entity.tasks.addTask(7, new EntityAIWanderAvoidWater(entity, 1.0D));
     entity.tasks.addTask(8, new EntityAIWatchClosest(entity, EntityPlayer.class, 6.0F));
     entity.tasks.addTask(9, new EntityAILookIdle(entity));
+  }
+
+  @Nullable
+  @Override
+  public EntityAgeable createChild(@NotNull EntityAgeable other) {
+    // Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
+    if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
+      this.setFertilized(true);
+      this.resetInLove();
+      this.onFertilized((IAnimal) other);
+    } else if (other == this) {
+      // Only called if this animal is interacted with a spawn egg
+      // Try to return to vanilla's default method a baby of this animal, as if bred normally
+      try {
+        EntityAnimalBase baby = this.getClass().getConstructor(World.class).newInstance(this.world);
+        baby.setGender(Gender.valueOf(MathConstants.RNG.nextBoolean()));
+        baby.setBirthDay((int) Calendar.PLAYER_TIME.getTotalDays());
+        baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
+                : this.getFamiliarity() * 0.9F);
+        return baby;
+      } catch (Exception ignored) {
+      }
+    }
+    return null;
   }
 
   @Override
@@ -183,6 +189,15 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
   @Override
   public void setBirthDay(int value) {
     this.dataManager.set(BIRTHDAY, value);
+  }
+
+  @Override
+  public boolean isReadyToMate() {
+    if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized()
+            || this.isHungry()) {
+      return false;
+    }
+    return this.matingTime + MATING_COOLDOWN_DEFAULT_TICKS <= Calendar.PLAYER_TIME.getTicks();
   }
 
   @Override
@@ -212,15 +227,6 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
   }
 
   @Override
-  public boolean isReadyToMate() {
-    if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized()
-        || this.isHungry()) {
-      return false;
-    }
-    return this.matingTime + MATING_COOLDOWN_DEFAULT_TICKS <= Calendar.PLAYER_TIME.getTicks();
-  }
-
-  @Override
   public boolean isHungry() {
     return lastFed < Calendar.PLAYER_TIME.getTotalDays();
   }
@@ -229,31 +235,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
     return new TextComponentTranslation(
-        ModUtils.localize("animal." + entityString + "." + this.getGender().name().toLowerCase()));
-  }
-
-  @Nullable
-  @Override
-  public EntityAgeable createChild(@NotNull EntityAgeable other) {
-    // Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
-    if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
-      this.setFertilized(true);
-      this.resetInLove();
-      this.onFertilized((IAnimal) other);
-    } else if (other == this) {
-      // Only called if this animal is interacted with a spawn egg
-      // Try to return to vanilla's default method a baby of this animal, as if bred normally
-      try {
-        EntityAnimalBase baby = this.getClass().getConstructor(World.class).newInstance(this.world);
-        baby.setGender(Gender.valueOf(MathConstants.RNG.nextBoolean()));
-        baby.setBirthDay((int) Calendar.PLAYER_TIME.getTotalDays());
-        baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
-            : this.getFamiliarity() * 0.9F);
-        return baby;
-      } catch (Exception ignored) {
-      }
-    }
-    return null;
+            ModUtils.localize("animal." + entityString + "." + this.getGender().name().toLowerCase()));
   }
 
   @Override
@@ -282,8 +264,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
   }
 
   /**
-   * Ignore fall damage like vanilla chickens. Implemented here because all TFC Oviparous animals don't take fall damage. Ostriches would escape fall
-   * damage too.
+   * Ignore fall damage like vanilla chickens. Implemented here because all TFC Oviparous animals don't take fall damage. Ostriches would escape fall damage too.
    */
   @Override
   public void fall(float distance, float damageMultiplier) {
@@ -328,7 +309,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
         this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
-            this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
+                this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
         if (random.nextDouble() < getOldDeathChance()) {
           this.setDead();
         }
@@ -336,14 +317,34 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
       if (this instanceof ILivestock) {
         // Wild livestock disappear after 125% lifespan
         if (this.getDaysToElderly() > 0 && this.getFamiliarity() < 0.10F
-            && (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F <=
-            Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
+                && (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F <=
+                Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
           this.setDead();
         }
       }
 
     }
   }
+
+  /**
+   * Find and charms a near female animal of this animal Used by males to try mating with females
+   */
+  public static <T extends EntityAnimal & IAnimal> void findFemaleMate(T maleAnimal) {
+    List<EntityAnimal> list = maleAnimal.world.getEntitiesWithinAABB(maleAnimal.getClass(),
+            maleAnimal.getEntityBoundingBox()
+                    .grow(8.0D));
+    for (EntityAnimal femaleAnimal : list) {
+      IAnimal female = (IAnimal) femaleAnimal;
+      if (female.getGender() == Gender.FEMALE && !femaleAnimal.isInLove()
+              && female.isReadyToMate()) {
+        femaleAnimal.setInLove(null);
+        maleAnimal.setInLove(null);
+        break;
+      }
+    }
+  }
+
+  public abstract double getOldDeathChance();
 
   @Override
   public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
@@ -375,9 +376,9 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-        //&& this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-        && !this.world.containsAnyLiquid(getEntityBoundingBox())
-        && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+            //&& this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+            && !this.world.containsAnyLiquid(getEntityBoundingBox())
+            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @Override
@@ -388,7 +389,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
       if (itemstack.getItem() == Items.SPAWN_EGG) {
         return super.processInteract(player, hand); // Let vanilla spawn a baby
       } else if (this.isFood(itemstack) && player.isSneaking()
-          && getCreatureType() == CreatureType.LIVESTOCK) {
+              && getCreatureType() == CreatureType.LIVESTOCK) {
         if (this.isHungry()) {
           return eatFood(itemstack, player);
         } else {
@@ -396,9 +397,9 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
               ModuleAnimal.getPacketService().sendTo(SCPacketSimpleMessage.translateMessage(
-                      SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                      ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
-                  (EntityPlayerMP) player);
+                              SCPacketSimpleMessage.MessageCategory.ANIMAL,
+                              ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
+                      (EntityPlayerMP) player);
             }
           }
         }
@@ -416,11 +417,9 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     return this.getGender() != other.getGender() && this.isInLove() && other.isInLove();
   }
 
-  public abstract double getOldDeathChance();
-
   /**
-   * Eat food + raises familiarization If your animal would refuse to eat said stack (because rotten or anything), return false here This function is
-   * called after every other check is made (animal is hungry for the day + this is a valid food)
+   * Eat food + raises familiarization If your animal would refuse to eat said stack (because rotten or anything), return false here This function is called after
+   * every other check is made (animal is hungry for the day + this is a valid food)
    *
    * @param stack the food stack to eat
    * @return true if eaten, false otherwise
@@ -438,7 +437,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
         this.setFamiliarity(familiarity);
       }
       world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP,
-          SoundCategory.AMBIENT, 1.0F, 1.0F);
+              SoundCategory.AMBIENT, 1.0F, 1.0F);
     }
     return true;
   }

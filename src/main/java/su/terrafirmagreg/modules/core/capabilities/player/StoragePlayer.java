@@ -13,12 +13,12 @@ public class StoragePlayer implements IStorage<ICapabilityPlayer> {
   @Nullable
   @Override
   public NBTBase writeNBT(Capability<ICapabilityPlayer> capability, ICapabilityPlayer instance,
-      EnumFacing side) {
+          EnumFacing side) {
     return null;
   }
 
   @Override
   public void readNBT(Capability<ICapabilityPlayer> capability, ICapabilityPlayer instance,
-      EnumFacing side, NBTBase nbt) {
+          EnumFacing side, NBTBase nbt) {
   }
 }

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.network;
 
 import su.terrafirmagreg.modules.core.capabilities.pull.CapabilityPull;
-import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
+import su.terrafirmagreg.modules.wood.object.entity.EntityWoodCart;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -35,12 +35,12 @@ public class CSPacketToggleSlow implements IMessage, IMessageHandler<CSPacketTog
       if (ridden instanceof EntityLivingBase entityLivingBase && CapabilityPull.has(ridden)) {
         if (CapabilityPull.get(ridden).getDrawn() != null) {
           if (entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-              .hasModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER)) {
+                  .hasModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER)) {
             entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-                .removeModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
+                    .removeModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
           } else {
             entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-                .applyModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
+                    .applyModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
           }
         }
       }

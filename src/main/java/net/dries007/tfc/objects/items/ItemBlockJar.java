@@ -23,40 +23,40 @@ import static su.terrafirmagreg.data.Properties.JARS;
 @MethodsReturnNonnullByDefault
 public class ItemBlockJar extends ItemBlockTFC {
 
-    public ItemBlockJar(Block block) {
-        super(block);
-    }
+  public ItemBlockJar(Block block) {
+    super(block);
+  }
 
-    @Override
-    @NotNull
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-                                      float hitZ) {
-        IBlockState state = worldIn.getBlockState(pos);
-        if (state.getBlock() == block) {
-            if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
-                int jars = state.getValue(JARS);
-                if (jars < 4) {
-                    worldIn.setBlockState(pos, state.withProperty(JARS, jars + 1));
-                    player.getHeldItem(hand).shrink(1);
-                    return EnumActionResult.SUCCESS;
-                }
-            }
-            return EnumActionResult.FAIL;
+  @Override
+  @NotNull
+  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
+          float hitZ) {
+    IBlockState state = worldIn.getBlockState(pos);
+    if (state.getBlock() == block) {
+      if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
+        int jars = state.getValue(JARS);
+        if (jars < 4) {
+          worldIn.setBlockState(pos, state.withProperty(JARS, jars + 1));
+          player.getHeldItem(hand).shrink(1);
+          return EnumActionResult.SUCCESS;
         }
-        if (worldIn.getBlockState(pos).isSideSolid(worldIn, pos, EnumFacing.UP)) {
-            return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
-        } else {
-            return EnumActionResult.FAIL;
-        }
+      }
+      return EnumActionResult.FAIL;
     }
+    if (worldIn.getBlockState(pos).isSideSolid(worldIn, pos, EnumFacing.UP)) {
+      return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+    } else {
+      return EnumActionResult.FAIL;
+    }
+  }
 
-    @Override
-    public ItemStack getContainerItem(ItemStack itemStack) {
-        return new ItemStack(ItemsCore.JAR);
-    }
+  @Override
+  public ItemStack getContainerItem(ItemStack itemStack) {
+    return new ItemStack(ItemsCore.JAR);
+  }
 
-    @Override
-    public boolean hasContainerItem(ItemStack stack) {
-        return true;
-    }
+  @Override
+  public boolean hasContainerItem(ItemStack stack) {
+    return true;
+  }
 }

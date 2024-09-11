@@ -10,12 +10,12 @@ import static su.terrafirmagreg.data.Constants.MODID_HORSEPOWER;
 
 public class HorsePowerCreativeTab extends CreativeTabs {
 
-    public HorsePowerCreativeTab() {
-        super(MODID_HORSEPOWER);
-    }
+  public HorsePowerCreativeTab() {
+    super(MODID_HORSEPOWER);
+  }
 
-    @Override
-    public ItemStack createIcon() {
-        return new ItemStack(ModBlocks.BLOCK_HAND_GRINDSTONE);
-    }
+  @Override
+  public ItemStack createIcon() {
+    return new ItemStack(ModBlocks.BLOCK_HAND_GRINDSTONE);
+  }
 }

@@ -24,69 +24,69 @@ import java.util.Map;
 
 public class ItemTFCThingsToolHead extends ItemTFC implements ICapabilityMetal, TFCThingsConfigurableItem {
 
-    private final Metal metal;
-    private final int smeltAmount;
-    private boolean isEnabled;
+  private final Metal metal;
+  private final int smeltAmount;
+  private final boolean isEnabled;
 
-    public ItemTFCThingsToolHead(Metal metal, int smeltAmount, boolean enabled, String... name) {
-        this.metal = metal;
-        this.smeltAmount = smeltAmount;
-        this.isEnabled = enabled;
-        String registryName = "";
-        String translationKey = "";
-        if (TFCThingsItems.TOOLS_HEADS_BY_METAL.containsKey(name[0])) {
-            TFCThingsItems.TOOLS_HEADS_BY_METAL.get(name[0]).put(metal, this);
-        } else {
-            Map<Metal, Item> toolMap = new HashMap<>();
-            toolMap.put(metal, this);
-            TFCThingsItems.TOOLS_HEADS_BY_METAL.put(name[0], toolMap);
-        }
-        for (int i = 0; i < name.length; i++) {
-            registryName += name[i];
-            translationKey += name[i];
-            if (i + 1 < name.length) {
-                registryName += "/";
-                translationKey += "_";
-            }
-        }
-        this.setRegistryName(registryName);
-        this.setTranslationKey(translationKey);
-        setCreativeTab(CreativeTabsTFC.CT_METAL);
+  public ItemTFCThingsToolHead(Metal metal, int smeltAmount, boolean enabled, String... name) {
+    this.metal = metal;
+    this.smeltAmount = smeltAmount;
+    this.isEnabled = enabled;
+    String registryName = "";
+    String translationKey = "";
+    if (TFCThingsItems.TOOLS_HEADS_BY_METAL.containsKey(name[0])) {
+      TFCThingsItems.TOOLS_HEADS_BY_METAL.get(name[0]).put(metal, this);
+    } else {
+      Map<Metal, Item> toolMap = new HashMap<>();
+      toolMap.put(metal, this);
+      TFCThingsItems.TOOLS_HEADS_BY_METAL.put(name[0], toolMap);
     }
+    for (int i = 0; i < name.length; i++) {
+      registryName += name[i];
+      translationKey += name[i];
+      if (i + 1 < name.length) {
+        registryName += "/";
+        translationKey += "_";
+      }
+    }
+    this.setRegistryName(registryName);
+    this.setTranslationKey(translationKey);
+    setCreativeTab(CreativeTabsTFC.CT_METAL);
+  }
 
-    @Nullable
-    @Override
-    public Metal getMetal(ItemStack itemStack) {
-        return metal;
-    }
+  @Override
+  public boolean canMelt(ItemStack stack) {
+    return true;
+  }
 
-    @Override
-    public int getSmeltAmount(ItemStack itemStack) {
-        return smeltAmount;
-    }
+  @Nullable
+  @Override
+  public Metal getMetal(ItemStack itemStack) {
+    return metal;
+  }
 
-    @Override
-    public boolean canMelt(ItemStack stack) {
-        return true;
-    }
+  @Override
+  public int getSmeltAmount(ItemStack itemStack) {
+    return smeltAmount;
+  }
 
-    @Override
-    public @NotNull Size getSize(@NotNull ItemStack itemStack) {
-        return Size.SMALL;
-    }
+  @Override
+  public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
+    return Weight.LIGHT;
+  }
 
-    @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
-        return Weight.LIGHT;
-    }
+  @Override
+  public @NotNull Size getSize(@NotNull ItemStack itemStack) {
+    return Size.SMALL;
+  }
 
-    @Nullable
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new ForgeableHeatableHandler(nbt, metal.getSpecificHeat(), metal.getMeltTemp());
-    }
+  @Nullable
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    return new ForgeableHeatableHandler(nbt, metal.getSpecificHeat(), metal.getMeltTemp());
+  }
 
-    @Override
-    public boolean isEnabled() {
-        return isEnabled;
-    }
+  @Override
+  public boolean isEnabled() {
+    return isEnabled;
+  }
 }

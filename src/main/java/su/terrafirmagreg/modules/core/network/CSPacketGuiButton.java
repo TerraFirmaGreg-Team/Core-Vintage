@@ -18,8 +18,8 @@ import io.netty.buffer.ByteBuf;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * This is a generic packet that sends a button notification to the players open container, which can delegate to the tile entity if needed See
- * {@link GuiMetalAnvil} for an example of its usage, and {@link ContainerMetalAnvil} for an example of the message handling
+ * This is a generic packet that sends a button notification to the players open container, which can delegate to the tile entity if needed See {@link GuiMetalAnvil}
+ * for an example of its usage, and {@link ContainerMetalAnvil} for an example of the message handling
  *
  * @author AlcatrazEscapee
  */
@@ -32,13 +32,13 @@ public class CSPacketGuiButton implements IMessage, IMessageHandler<CSPacketGuiB
   public CSPacketGuiButton() {
   }
 
+  public CSPacketGuiButton(int buttonID) {
+    this(buttonID, null);
+  }
+
   public CSPacketGuiButton(int buttonID, @Nullable NBTTagCompound extraNBT) {
     this.buttonID = buttonID;
     this.extraNBT = extraNBT;
-  }
-
-  public CSPacketGuiButton(int buttonID) {
-    this(buttonID, null);
   }
 
   @Override

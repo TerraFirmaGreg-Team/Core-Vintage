@@ -1,8 +1,8 @@
 package su.terrafirmagreg.api.util;
 
-import javax.annotation.Nullable;
-
 import lombok.experimental.UtilityClass;
+
+import javax.annotation.Nullable;
 
 @UtilityClass
 public final class StringUtils {

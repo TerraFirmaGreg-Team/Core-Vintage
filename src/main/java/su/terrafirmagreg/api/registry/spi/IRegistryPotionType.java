@@ -5,7 +5,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 
 public interface IRegistryPotionType
-    extends IRegistryBase {
+        extends IRegistryBase {
 
   default PotionType potionType(Potion potion, String name, int duration) {
 

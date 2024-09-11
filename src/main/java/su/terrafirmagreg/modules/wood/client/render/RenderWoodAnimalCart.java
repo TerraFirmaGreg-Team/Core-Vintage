@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.wood.client.render;
 import su.terrafirmagreg.api.util.ColourUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.wood.client.model.ModelWoodAnimalCart;
-import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodAnimalCart;
+import su.terrafirmagreg.modules.wood.object.entity.EntityWoodAnimalCart;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
@@ -28,7 +28,7 @@ public class RenderWoodAnimalCart extends Render<EntityWoodAnimalCart> {
 
   @Override
   public void doRender(EntityWoodAnimalCart entity, double x, double y, double z, float entityYaw,
-      float partialTicks) {
+          float partialTicks) {
     var woodType = entity.getWood();
     GlStateManager.pushMatrix();
     this.setupTranslation(x, y, z);
@@ -57,13 +57,13 @@ public class RenderWoodAnimalCart extends Render<EntityWoodAnimalCart> {
     return ModUtils.resource("textures/entity/wood/animal_cart.png");
   }
 
+  public void setupTranslation(double x, double y, double z) {
+    GlStateManager.translate((float) x, (float) y + 1.0F, (float) z);
+  }
+
   public void setupRotation(float entityYaw) {
     GlStateManager.rotate(180.0F - entityYaw, 0.0F, 1.0F, 0.0F);
     GlStateManager.scale(-1.0F, -1.0F, 1.0F);
-  }
-
-  public void setupTranslation(double x, double y, double z) {
-    GlStateManager.translate((float) x, (float) y + 1.0F, (float) z);
   }
 
 }

@@ -63,17 +63,17 @@ public class ModelGemExquisite extends ModelBase implements ModelGemBase {
     Side4.cubeList.add(new ModelBox(Side4, 30, 52, -0.5F, -4.0F, -2.0F, 1, 8, 4, 0.0F, false));
   }
 
+  public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    modelRenderer.rotateAngleX = x;
+    modelRenderer.rotateAngleY = y;
+    modelRenderer.rotateAngleZ = z;
+  }
+
   public void render(float f5) {
     Core.render(f5);
     Side.render(f5);
     Side2.render(f5);
     Side3.render(f5);
     Side4.render(f5);
-  }
-
-  public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-    modelRenderer.rotateAngleX = x;
-    modelRenderer.rotateAngleY = y;
-    modelRenderer.rotateAngleZ = z;
   }
 }

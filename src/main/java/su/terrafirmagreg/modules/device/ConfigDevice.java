@@ -62,7 +62,7 @@ public class ConfigDevice {
     public static final class Bellows {
 
       @Config.Comment(
-          "The max number of air ticks, devices get a temperature bonus up to this amount. (1000 = 1 in game hour = 50 seconds), default is 600 ticks.")
+              "The max number of air ticks, devices get a temperature bonus up to this amount. (1000 = 1 in game hour = 50 seconds), default is 600 ticks.")
       @Config.RangeInt(min = 0)
       public int maxTicks = 600;
 
@@ -95,7 +95,7 @@ public class ConfigDevice {
     public static final class BlastFurnace {
 
       @Config.Comment({"How fast the blast furnace consume fuels (compared to the charcoal forge).",
-          "Example: Charcoal (without bellows) lasts for 1800 ticks in forge while 1800 / 4 = 450 ticks in blast furnace."})
+              "Example: Charcoal (without bellows) lasts for 1800 ticks in forge while 1800 / 4 = 450 ticks in blast furnace."})
       @Config.RangeDouble(min = 0.1D)
       public double consumption = 4;
     }
@@ -112,8 +112,8 @@ public class ConfigDevice {
     public static final class CharcoalForge {
 
       @Config.Comment({
-          "Number of burning ticks that is removed when the charcoal forge is on rain (random ticks).",
-          "This effectively makes the charcoal forge consumes more fuel when it is raining above it."})
+              "Number of burning ticks that is removed when the charcoal forge is on rain (random ticks).",
+              "This effectively makes the charcoal forge consumes more fuel when it is raining above it."})
       @Config.RangeInt(min = 0)
       public int rainTicks = 600;
     }
@@ -121,13 +121,13 @@ public class ConfigDevice {
     public static final class FirePit {
 
       @Config.Comment(
-          "Number of ticks required for a cooking pot on a fire pit to boil before turning into soup, per serving. (1000 = 1 in game hour = 50 seconds). Default is 1 hour.")
+              "Number of ticks required for a cooking pot on a fire pit to boil before turning into soup, per serving. (1000 = 1 in game hour = 50 seconds). Default is 1 hour.")
       @Config.RangeInt(min = 20)
       public int ticks = 1000;
 
       @Config.Comment({
-          "Number of burning ticks that is removed when the fire pit is on rain (random ticks).",
-          "This effectively makes the fire pit consumes more fuel when it is raining above it."})
+              "Number of burning ticks that is removed when the fire pit is on rain (random ticks).",
+              "This effectively makes the fire pit consumes more fuel when it is raining above it."})
       @Config.RangeInt(min = 0)
       public int rainTicks = 1000;
     }

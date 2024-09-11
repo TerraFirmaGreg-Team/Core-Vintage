@@ -13,8 +13,8 @@ public class ItemMetalFlask extends ItemFlask {
     super("metal", capacity, drink);
 
     getSettings()
-        .weight(Weight.HEAVY)
-        .size(Size.NORMAL);
+            .weight(Weight.HEAVY)
+            .size(Size.NORMAL);
   }
 
 }

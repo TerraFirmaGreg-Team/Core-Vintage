@@ -26,7 +26,7 @@ public class GeneratorGourds implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (!(chunkGenerator instanceof ChunkGenClassic) && !TFCFlorae.FirmaLifeAdded) {
       return;
     }
@@ -36,7 +36,7 @@ public class GeneratorGourds implements IWorldGenerator {
   }
 
   private void generateMelons(Random random, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     // Guarantees crop generation if possible (easier to balance by config file while also making it random)
     BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
@@ -45,9 +45,9 @@ public class GeneratorGourds implements IWorldGenerator {
     float floraDensity = ProviderChunkData.getFloraDensity(world, chunkBlockPos);
 
     if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0
-        && random.nextInt(20) == 0 &&
-        rainfall >= RAINFALL_MELON &&
-        temperature >= 18f && floraDensity >= 0.3f) {
+            && random.nextInt(20) == 0 &&
+            rainfall >= RAINFALL_MELON &&
+            temperature >= 18f && floraDensity >= 0.3f) {
       int melonsInChunk = 3 + random.nextInt(8);
       for (int i = 0; i < melonsInChunk; i++) {
         final int x = (chunkX << 4) + random.nextInt(16) + 8;
@@ -55,22 +55,22 @@ public class GeneratorGourds implements IWorldGenerator {
         final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 
         if (world.isAirBlock(pos) &&
-            (BlockUtils.isSoil(world.getBlockState(pos.down())) || BlockUtils.isGround(
-                world.getBlockState(pos.down())))) {
+                (BlockUtils.isSoil(world.getBlockState(pos.down())) || BlockUtils.isGround(
+                        world.getBlockState(pos.down())))) {
           final int rotationValue = random.nextInt(4);
 
           if (rotationValue == 0) {
             world.setBlockState(pos, BlocksFL.MELON_FRUIT.getDefaultState()
-                .withProperty(BlockDirectional.FACING, EnumFacing.NORTH), 2);
+                    .withProperty(BlockDirectional.FACING, EnumFacing.NORTH), 2);
           } else if (rotationValue == 1) {
             world.setBlockState(pos, BlocksFL.MELON_FRUIT.getDefaultState()
-                .withProperty(BlockDirectional.FACING, EnumFacing.EAST), 2);
+                    .withProperty(BlockDirectional.FACING, EnumFacing.EAST), 2);
           } else if (rotationValue == 2) {
             world.setBlockState(pos, BlocksFL.MELON_FRUIT.getDefaultState()
-                .withProperty(BlockDirectional.FACING, EnumFacing.SOUTH), 2);
+                    .withProperty(BlockDirectional.FACING, EnumFacing.SOUTH), 2);
           } else if (rotationValue == 3) {
             world.setBlockState(pos, BlocksFL.MELON_FRUIT.getDefaultState()
-                .withProperty(BlockDirectional.FACING, EnumFacing.WEST), 2);
+                    .withProperty(BlockDirectional.FACING, EnumFacing.WEST), 2);
           }
         }
       }
@@ -78,7 +78,7 @@ public class GeneratorGourds implements IWorldGenerator {
   }
 
   private void generatePumpkins(Random random, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     // Guarantees crop generation if possible (easier to balance by config file while also making it random)
     BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
@@ -87,9 +87,9 @@ public class GeneratorGourds implements IWorldGenerator {
     float floraDensity = ProviderChunkData.getFloraDensity(world, chunkBlockPos);
 
     if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0
-        && random.nextInt(20) == 0 &&
-        rainfall >= RAINFALL_PUMPKIN &&
-        temperature >= 10f && floraDensity >= 0.2f) {
+            && random.nextInt(20) == 0 &&
+            rainfall >= RAINFALL_PUMPKIN &&
+            temperature >= 10f && floraDensity >= 0.2f) {
       int pumpkinsInChunk = 3 + random.nextInt(8);
       for (int i = 0; i < pumpkinsInChunk; i++) {
         final int x = (chunkX << 4) + random.nextInt(16) + 8;
@@ -97,22 +97,22 @@ public class GeneratorGourds implements IWorldGenerator {
         final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 
         if (world.isAirBlock(pos) &&
-            (BlockUtils.isSoil(world.getBlockState(pos.down())) || BlockUtils.isGround(
-                world.getBlockState(pos.down())))) {
+                (BlockUtils.isSoil(world.getBlockState(pos.down())) || BlockUtils.isGround(
+                        world.getBlockState(pos.down())))) {
           final int rotationValue = random.nextInt(4);
 
           if (rotationValue == 0) {
             world.setBlockState(pos, BlocksFL.PUMPKIN_FRUIT.getDefaultState()
-                .withProperty(BlockDirectional.FACING, EnumFacing.NORTH), 2);
+                    .withProperty(BlockDirectional.FACING, EnumFacing.NORTH), 2);
           } else if (rotationValue == 1) {
             world.setBlockState(pos, BlocksFL.PUMPKIN_FRUIT.getDefaultState()
-                .withProperty(BlockDirectional.FACING, EnumFacing.EAST), 2);
+                    .withProperty(BlockDirectional.FACING, EnumFacing.EAST), 2);
           } else if (rotationValue == 2) {
             world.setBlockState(pos, BlocksFL.PUMPKIN_FRUIT.getDefaultState()
-                .withProperty(BlockDirectional.FACING, EnumFacing.SOUTH), 2);
+                    .withProperty(BlockDirectional.FACING, EnumFacing.SOUTH), 2);
           } else if (rotationValue == 3) {
             world.setBlockState(pos, BlocksFL.PUMPKIN_FRUIT.getDefaultState()
-                .withProperty(BlockDirectional.FACING, EnumFacing.WEST), 2);
+                    .withProperty(BlockDirectional.FACING, EnumFacing.WEST), 2);
           }
         }
       }

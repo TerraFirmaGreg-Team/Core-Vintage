@@ -218,9 +218,15 @@ public class ModelAnimalCoyote extends ModelBase {
     backRLegBottom.addChild(backRLegPaw);
   }
 
+  public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    modelRenderer.rotateAngleX = x;
+    modelRenderer.rotateAngleY = y;
+    modelRenderer.rotateAngleZ = z;
+  }
+
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-      float par6, float par7) {
+          float par6, float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
     EntityAnimalCoyote coyote = ((EntityAnimalCoyote) entity);
@@ -249,21 +255,15 @@ public class ModelAnimalCoyote extends ModelBase {
 
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,
-      Entity entity) {
+          Entity entity) {
     setRotateAngle(head, f4 / (180F / MathConstants.PI), f3 / (180F / MathConstants.PI), 0F);
     setRotateAngle(neck, f4 / (1.5F * (180F / MathConstants.PI)) + -0.7853981633974483F,
-        f3 / (1.5F * (180F / MathConstants.PI)), 0F);
+            f3 / (1.5F * (180F / MathConstants.PI)), 0F);
 
     frontRLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1 + 0.13962634015954636F;
     frontLLegTop.rotateAngleX =
-        MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1 + 0.13962634015954636F;
+            MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1 + 0.13962634015954636F;
     backRLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1;
     backLLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
-  }
-
-  public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-    modelRenderer.rotateAngleX = x;
-    modelRenderer.rotateAngleY = y;
-    modelRenderer.rotateAngleZ = z;
   }
 }

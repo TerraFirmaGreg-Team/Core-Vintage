@@ -21,12 +21,6 @@ public class TileInfectedAir extends BaseTile implements ITickable {
   public void update() {
   }
 
-  private void writeSyncData(NBTTagCompound nbt) {
-  }
-
-  private void readSyncData(NBTTagCompound nbt) {
-  }
-
   @Nullable
   @Override
   public SPacketUpdateTileEntity getUpdatePacket() {
@@ -36,10 +30,16 @@ public class TileInfectedAir extends BaseTile implements ITickable {
     return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
   }
 
+  private void writeSyncData(NBTTagCompound nbt) {
+  }
+
   @Override
   public void onDataPacket(@NotNull NetworkManager net, SPacketUpdateTileEntity packet) {
     readFromNBT(packet.getNbtCompound());
     readSyncData(packet.getNbtCompound());
+  }
+
+  private void readSyncData(NBTTagCompound nbt) {
   }
 }
 

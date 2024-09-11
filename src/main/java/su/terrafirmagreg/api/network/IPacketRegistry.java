@@ -10,14 +10,14 @@ public interface IPacketRegistry {
   IPacketRegistry register(Class clazz, Side side);
 
   <REQ extends IMessage, REPLY extends IMessage> IPacketRegistry register(
-      Class<? extends IMessageHandler<REQ, REPLY>> messageHandler,
-      Class<REQ> requestMessageType,
-      Side side
+          Class<? extends IMessageHandler<REQ, REPLY>> messageHandler,
+          Class<REQ> requestMessageType,
+          Side side
   );
 
   <REQ extends IMessage, REPLY extends IMessage> IPacketRegistry register(
-      IMessageHandler<REQ, REPLY> messageHandler,
-      Class<REQ> requestMessageType,
-      Side side
+          IMessageHandler<REQ, REPLY> messageHandler,
+          Class<REQ> requestMessageType,
+          Side side
   );
 }

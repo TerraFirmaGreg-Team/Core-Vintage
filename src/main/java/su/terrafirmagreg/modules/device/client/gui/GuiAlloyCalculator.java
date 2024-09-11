@@ -20,7 +20,7 @@ import java.util.Map;
 public class GuiAlloyCalculator extends GuiContainer {
 
   public static final ResourceLocation BACKGROUND = ModUtils.resource(
-      "textures/gui/container/alloy_calculator.png");
+          "textures/gui/container/alloy_calculator.png");
 
   private final ContainerAlloyCalculator container;
 
@@ -28,14 +28,6 @@ public class GuiAlloyCalculator extends GuiContainer {
     super(container);
     this.container = container;
     this.ySize = 186;
-  }
-
-  @Override
-  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    this.drawDefaultBackground();
-    this.mc.getTextureManager().bindTexture(BACKGROUND);
-    this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
-    //drawRect(this.guiLeft, this.guiTop, this.guiLeft + this.xSize, this.guiTop + this.ySize, 0xFFC6C6C6);
   }
 
   @Override
@@ -49,8 +41,8 @@ public class GuiAlloyCalculator extends GuiContainer {
       GlStateManager.pushMatrix();
       GlStateManager.scale(scale, scale, scale);
       this.fontRenderer.drawString(
-          I18n.format(result.getTranslationKey()) + " - " + alloy.getAmount() + " units",
-          8 / scale, 18 / scale, 0x404040, false
+              I18n.format(result.getTranslationKey()) + " - " + alloy.getAmount() + " units",
+              8 / scale, 18 / scale, 0x404040, false
       );
       GlStateManager.popMatrix();
       scale = 0.7f;
@@ -62,17 +54,25 @@ public class GuiAlloyCalculator extends GuiContainer {
         Metal metal = entry.getKey();
         double amount = entry.getValue();
         this.fontRenderer.drawString(
-            String.format("%5.2f%%", (amount / alloy.getAmount()) * 100) + " - " + I18n.format(
-                metal.getTranslationKey()) + " " +
-                (int) amount,
-            70 / scale,
-            (20 + this.fontRenderer.FONT_HEIGHT + i * (this.fontRenderer.FONT_HEIGHT - 1)) / scale,
-            0x404040, false
+                String.format("%5.2f%%", (amount / alloy.getAmount()) * 100) + " - " + I18n.format(
+                        metal.getTranslationKey()) + " " +
+                        (int) amount,
+                70 / scale,
+                (20 + this.fontRenderer.FONT_HEIGHT + i * (this.fontRenderer.FONT_HEIGHT - 1)) / scale,
+                0x404040, false
         );
         i++;
       }
       GlStateManager.popMatrix();
     }
     this.renderHoveredToolTip(mouseX - this.guiLeft, mouseY - this.guiTop);
+  }
+
+  @Override
+  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    this.drawDefaultBackground();
+    this.mc.getTextureManager().bindTexture(BACKGROUND);
+    this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
+    //drawRect(this.guiLeft, this.guiTop, this.guiLeft + this.xSize, this.guiTop + this.ySize, 0xFFC6C6C6);
   }
 }

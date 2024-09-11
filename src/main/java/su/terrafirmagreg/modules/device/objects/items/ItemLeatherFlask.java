@@ -13,8 +13,8 @@ public class ItemLeatherFlask extends ItemFlask {
     super("leather", capacity, drink);
 
     getSettings()
-        .size(Size.SMALL)
-        .weight(Weight.MEDIUM);
+            .size(Size.SMALL)
+            .weight(Weight.MEDIUM);
   }
 
 }

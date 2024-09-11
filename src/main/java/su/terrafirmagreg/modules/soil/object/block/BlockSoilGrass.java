@@ -80,11 +80,6 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
   }
 
   @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, SNOWY, CLAY);
-  }
-
-  @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random rand) {
     if (world.isRemote) {
       return;
@@ -130,6 +125,11 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
         }
       }
     }
+  }
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, SNOWY, CLAY);
   }
 
   @SideOnly(Side.CLIENT)

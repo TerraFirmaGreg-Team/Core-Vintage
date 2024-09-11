@@ -40,14 +40,6 @@ public final class ModuleRock extends ModuleBase {
   }
 
   @Override
-  public void onRegister() {
-    RockTypeHandler.init();
-
-    BlocksRock.onRegister(registryManager);
-    ItemsRock.onRegister(registryManager);
-  }
-
-  @Override
   public void onPreInit(FMLPreInitializationEvent event) {
 
   }
@@ -59,13 +51,21 @@ public final class ModuleRock extends ModuleBase {
   }
 
   @Override
-  public @NotNull LoggingHelper getLogger() {
-    return LOGGER;
+  public void onRegister() {
+    RockTypeHandler.init();
+
+    BlocksRock.onRegister(registryManager);
+    ItemsRock.onRegister(registryManager);
   }
 
   @NotNull
   @Override
   public List<Class<?>> getEventBusSubscribers() {
     return Collections.singletonList(ModuleRock.class);
+  }
+
+  @Override
+  public @NotNull LoggingHelper getLogger() {
+    return LOGGER;
   }
 }

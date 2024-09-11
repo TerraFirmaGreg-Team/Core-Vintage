@@ -18,7 +18,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import org.jetbrains.annotations.NotNull;
 
 public class TileMetalSheet
-    extends BaseTile {
+        extends BaseTile {
 
   private final boolean[] faces;
 
@@ -30,21 +30,6 @@ public class TileMetalSheet
   public void onDataPacket(@NotNull NetworkManager net, @NotNull SPacketUpdateTileEntity pkt) {
     super.onDataPacket(net, pkt);
     markForBlockUpdate();
-  }
-
-  /**
-   * Gets the number of faces that are present
-   *
-   * @return a number in [0, 6]
-   */
-  public int getFaceCount() {
-    int n = 0;
-    for (boolean b : faces) {
-      if (b) {
-        n++;
-      }
-    }
-    return n;
   }
 
   /**
@@ -85,5 +70,20 @@ public class TileMetalSheet
     var item = OreDictUnifier.get(OrePrefix.plate, Materials.Iron).getItem();
     var output = new ItemStack(item, getFaceCount());
     InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), output);
+  }
+
+  /**
+   * Gets the number of faces that are present
+   *
+   * @return a number in [0, 6]
+   */
+  public int getFaceCount() {
+    int n = 0;
+    for (boolean b : faces) {
+      if (b) {
+        n++;
+      }
+    }
+    return n;
   }
 }

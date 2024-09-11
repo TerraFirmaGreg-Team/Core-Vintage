@@ -8,11 +8,11 @@ public class BiomePlains extends BaseBiome {
 
   public BiomePlains() {
     super(new Settings("Plains")
-        .guiColour(0x346B25)
-        .baseHeight(-1.6000001f)
-        .heightVariation(-2.54f)
-        .spawnBiome()
-        .enableWorldGen());
+            .guiColour(0x346B25)
+            .baseHeight(-1.6000001f)
+            .heightVariation(-2.54f)
+            .spawnBiome()
+            .enableWorldGen());
   }
 
   @Override
@@ -24,7 +24,7 @@ public class BiomePlains extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-        BiomeDictionary.Type.PLAINS
+            BiomeDictionary.Type.PLAINS
     };
   }
 }

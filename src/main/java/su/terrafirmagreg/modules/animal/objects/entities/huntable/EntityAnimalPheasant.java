@@ -44,7 +44,7 @@ public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable 
   @SuppressWarnings("unused")
   public EntityAnimalPheasant(World worldIn) {
     this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-        getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+            getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
   public EntityAnimalPheasant(World worldIn, Gender gender, int birthDay) {
@@ -54,11 +54,11 @@ public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable 
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST
-            || biomeType == BiomeHelper.BiomeType.TAIGA)) {
+            (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST
+                    || biomeType == BiomeHelper.BiomeType.TAIGA)) {
       return ConfigAnimal.ENTITIES.PHEASANT.rarity;
     }
     return 0;

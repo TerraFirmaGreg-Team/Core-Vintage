@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.core.object.potion;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayerMP;
-
 import su.terrafirmagreg.api.base.effects.BasePotion;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 
 public class PotionThirst extends BasePotion {
 

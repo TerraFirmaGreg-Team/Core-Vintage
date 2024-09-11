@@ -18,7 +18,7 @@ public final class CapabilityDamageResistance {
 
   public static void register() {
     CapabilityManager.INSTANCE.register(ICapabilityDamageResistance.class,
-        new StorageDamageResistance(), ProviderDamageResistance::new);
+            new StorageDamageResistance(), ProviderDamageResistance::new);
   }
 
   public static ICapabilityDamageResistance get(ItemStack itemStack) {

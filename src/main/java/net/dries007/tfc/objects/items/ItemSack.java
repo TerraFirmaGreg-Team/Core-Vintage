@@ -36,157 +36,158 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemSack extends ItemTFCF {
 
-    public ItemSack(Object... oreNameParts) {
-        for (Object obj : oreNameParts) {
-            if (obj instanceof Object[])
-                OreDictionaryHelper.register(this, (Object[]) obj);
-            else
-                OreDictionaryHelper.register(this, obj);
+  public ItemSack(Object... oreNameParts) {
+    for (Object obj : oreNameParts) {
+      if (obj instanceof Object[]) {
+        OreDictionaryHelper.register(this, (Object[]) obj);
+      } else {
+        OreDictionaryHelper.register(this, obj);
+      }
+    }
+  }
+
+  @Override
+  @NotNull
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    ItemStack stack = playerIn.getHeldItem(handIn);
+    if (!worldIn.isRemote && !playerIn.isSneaking()) {
+      GuiHandler.openGui(worldIn, playerIn, GuiHandler.Type.SACK);
+    }
+    return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+  }
+
+  @Override
+  @NotNull
+  public String getTranslationKey(ItemStack stack) {
+    return super.getTranslationKey(stack);
+  }
+
+  @Override
+  public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+    if (isInCreativeTab(tab)) {
+      items.add(new ItemStack(this));
+    }
+  }
+
+  @Nullable
+  @Override
+  public NBTTagCompound getNBTShareTag(ItemStack stack) {
+    return CapabilityContainerListener.readShareTag(stack);
+  }
+
+  @Override
+  public void readNBTShareTag(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    CapabilityContainerListener.applyShareTag(stack, nbt);
+  }
+
+  @Nullable
+  @Override
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    return new SackCapability(nbt);
+  }
+
+  @Override
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.VERY_HEAVY; // Stacksize = 1
+  }
+
+  @Override
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.NORMAL; // Can't be stored in itself
+  }
+
+  @Override
+  public boolean canStack(ItemStack stack) {
+    return false;
+  }
+
+  // Extends ItemStackHandler for ease of use. Duplicates most of ItemHeatHandler functionality
+  public class SackCapability extends ItemStackHandler implements ICapabilityProvider, ISlotCallback {
+
+    SackCapability(@Nullable NBTTagCompound nbt) {
+      super(4);
+
+      if (nbt != null) {
+        deserializeNBT(nbt);
+      }
+    }
+
+    @Override
+    public void setStackInSlot(int slot, @NotNull ItemStack stack) {
+      IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      if (cap != null) {
+        CapabilityFood.applyTrait(cap, FoodTrait.PRESERVED);
+      }
+      super.setStackInSlot(slot, stack);
+    }    @Override
+    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+      return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
+    }
+
+    @NotNull
+    @Override
+    public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+      if (!simulate) {
+        IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        if (cap != null) {
+          CapabilityFood.applyTrait(cap, FoodTrait.PRESERVED);
         }
+      }
+      return super.insertItem(slot, stack, simulate);
+    }    @Nullable
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+      return hasCapability(capability, facing) ? (T) this : null;
     }
 
     @Override
     @NotNull
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        ItemStack stack = playerIn.getHeldItem(handIn);
-        if (!worldIn.isRemote && !playerIn.isSneaking()) {
-            GuiHandler.openGui(worldIn, playerIn, GuiHandler.Type.SACK);
-        }
-        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+      ItemStack stack = super.extractItem(slot, amount, simulate).copy();
+      IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      if (cap != null) {
+        CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
+      }
+      return stack;
     }
 
     @Override
-    @NotNull
-    public String getTranslationKey(ItemStack stack) {
-        return super.getTranslationKey(stack);
+    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+      ICapabilitySize size = CapabilitySize.getIItemSize(stack);
+      if (size != null) {
+        return size.getSize(stack).isSmallerThan(Size.NORMAL);
+      }
+      return false;
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if (isInCreativeTab(tab)) {
-            items.add(new ItemStack(this));
-        }
+    public NBTTagCompound serializeNBT() {
+      NBTTagCompound nbt = new NBTTagCompound();
+      {
+        // Save item data
+        nbt.setTag("items", super.serializeNBT());
+      }
+      return nbt;
     }
 
-    @Nullable
+    /**
+     * This is used for a very unique situation, see #1083 By tracing the call path through
+     * {@link net.minecraft.inventory.Container#slotClick(int, int, ClickType, EntityPlayer)}, the *only* method that can possibly intercept in that massive chain,
+     * for clicking on a slot with a stack is either this one (in which case we handle the previous item stack in the slot which a reference has been obtained to)
+     * Thus, we don't actually care about the stack being put in the slot. We do assume that since this stack is being put in the slot, a different stack is being
+     * taken out.
+     */
     @Override
-    public NBTTagCompound getNBTShareTag(ItemStack stack) {
-        return CapabilityContainerListener.readShareTag(stack);
+    public void beforePutStack(SlotCallback slot, @NotNull ItemStack stack) {
+      IFood cap = slot.getStack().getCapability(CapabilityFood.CAPABILITY, null);
+      if (cap != null) {
+        CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
+      }
     }
 
-    @Override
-    public void readNBTShareTag(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        CapabilityContainerListener.applyShareTag(stack, nbt);
-    }
 
-    @Override
-    public boolean canStack(ItemStack stack) {
-        return false;
-    }
 
-    @Override
-    public @NotNull Size getSize(ItemStack stack) {
-        return Size.NORMAL; // Can't be stored in itself
-    }
 
-    @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return Weight.VERY_HEAVY; // Stacksize = 1
-    }
-
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new SackCapability(nbt);
-    }
-
-    // Extends ItemStackHandler for ease of use. Duplicates most of ItemHeatHandler functionality
-    public class SackCapability extends ItemStackHandler implements ICapabilityProvider, ISlotCallback {
-
-        SackCapability(@Nullable NBTTagCompound nbt) {
-            super(4);
-
-            if (nbt != null) {
-                deserializeNBT(nbt);
-            }
-        }
-
-        @Override
-        public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-            return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
-        }
-
-        @Nullable
-        @Override
-        @SuppressWarnings("unchecked")
-        public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
-            return hasCapability(capability, facing) ? (T) this : null;
-        }
-
-        @Override
-        public void setStackInSlot(int slot, @NotNull ItemStack stack) {
-            IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
-            if (cap != null) {
-                CapabilityFood.applyTrait(cap, FoodTrait.PRESERVED);
-            }
-            super.setStackInSlot(slot, stack);
-        }
-
-        @NotNull
-        @Override
-        public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-            if (!simulate) {
-                IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
-                if (cap != null) {
-                    CapabilityFood.applyTrait(cap, FoodTrait.PRESERVED);
-                }
-            }
-            return super.insertItem(slot, stack, simulate);
-        }
-
-        @Override
-        @NotNull
-        public ItemStack extractItem(int slot, int amount, boolean simulate) {
-            ItemStack stack = super.extractItem(slot, amount, simulate).copy();
-            IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
-            if (cap != null) {
-                CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
-            }
-            return stack;
-        }
-
-        @Override
-        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            ICapabilitySize size = CapabilitySize.getIItemSize(stack);
-            if (size != null) {
-                return size.getSize(stack).isSmallerThan(Size.NORMAL);
-            }
-            return false;
-        }
-
-        @Override
-        public NBTTagCompound serializeNBT() {
-            NBTTagCompound nbt = new NBTTagCompound();
-            {
-                // Save item data
-                nbt.setTag("items", super.serializeNBT());
-            }
-            return nbt;
-        }
-
-        /**
-         * This is used for a very unique situation, see #1083 By tracing the call path through
-         * {@link net.minecraft.inventory.Container#slotClick(int, int, ClickType, EntityPlayer)}, the *only* method that can possibly intercept in
-         * that massive chain, for clicking on a slot with a stack is either this one (in which case we handle the previous item stack in the slot
-         * which a reference has been obtained to) Thus, we don't actually care about the stack being put in the slot. We do assume that since this
-         * stack is being put in the slot, a different stack is being taken out.
-         */
-        @Override
-        public void beforePutStack(SlotCallback slot, @NotNull ItemStack stack) {
-            IFood cap = slot.getStack().getCapability(CapabilityFood.CAPABILITY, null);
-            if (cap != null) {
-                CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
-            }
-        }
-    }
+  }
 }

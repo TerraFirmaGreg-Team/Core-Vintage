@@ -14,12 +14,12 @@ import net.dries007.tfc.util.skills.SmithingSkill;
 import org.jetbrains.annotations.Nullable;
 
 public interface IAnvilRecipeManager
-    extends ICraftingProvider<IAnvilRecipe> {
+        extends ICraftingProvider<IAnvilRecipe> {
 
   void addRecipe(ResourceLocation recipeName, IIngredient<ItemStack> inputItem,
-      ItemStack outputItem, Metal.Tier tier, ForgeRule... rules);
+          ItemStack outputItem, Metal.Tier tier, ForgeRule... rules);
 
   void addRecipe(ResourceLocation recipeName, IIngredient<ItemStack> inputItem,
-      ItemStack outputItem, Metal.Tier tier, @Nullable SmithingSkill.Type skillBonusType,
-      ForgeRule... rules);
+          ItemStack outputItem, Metal.Tier tier, @Nullable SmithingSkill.Type skillBonusType,
+          ForgeRule... rules);
 }

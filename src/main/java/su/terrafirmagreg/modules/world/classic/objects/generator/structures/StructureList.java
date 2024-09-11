@@ -3,11 +3,11 @@ package su.terrafirmagreg.modules.world.classic.objects.generator.structures;
 public class StructureList {
 
   public static final StructureGenerator STONE_CIRCLE_RUIN = new StructureGenerator(
-      "stone_circle_ruin");
+          "stone_circle_ruin");
   public static final StructureGenerator STONE_CIRCLE_RUIN_A = new StructureGenerator(
-      "stone_circle_ruin_a");
+          "stone_circle_ruin_a");
   public static final StructureGenerator STONE_CIRCLE_RUIN_B = new StructureGenerator(
-      "stone_circle_ruin_b");
+          "stone_circle_ruin_b");
   public static final StructureGenerator MOAI_1 = new StructureGenerator("moai_1");
   public static final StructureGenerator MOAI_1A = new StructureGenerator("moai_1a");
   public static final StructureGenerator MOAI_1B = new StructureGenerator("moai_1b");
@@ -19,5 +19,5 @@ public class StructureList {
   public static final StructureGenerator RUIN_TEMPLE_1A = new StructureGenerator("ruin_temple_1a");
   public static final StructureGenerator RUIN_TEMPLE_1B = new StructureGenerator("ruin_temple_1b");
   public static final StructureGenerator MAYAN_TEMPLE_1A = new StructureGenerator(
-      "mayan_temple_1a");
+          "mayan_temple_1a");
 }

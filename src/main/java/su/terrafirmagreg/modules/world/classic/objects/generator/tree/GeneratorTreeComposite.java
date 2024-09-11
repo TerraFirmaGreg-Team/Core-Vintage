@@ -30,7 +30,7 @@ public class GeneratorTreeComposite implements ITreeGenerator {
 
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-      Random rand, boolean isWorldGen) {
+          Random rand, boolean isWorldGen) {
     if (gens.isEmpty()) {
       return;
     }

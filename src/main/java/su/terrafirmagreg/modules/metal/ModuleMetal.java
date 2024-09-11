@@ -38,6 +38,18 @@ public final class ModuleMetal extends ModuleBase {
   }
 
   @Override
+  public void onInit(FMLInitializationEvent event) {
+
+    PluginTheOneProbe.init();
+  }
+
+  @Override
+  public void onNewRegister() {
+
+    RegistriesMetal.onRegister();
+  }
+
+  @Override
   public void onRegister() {
     MetalTypeHandler.init();
 
@@ -53,24 +65,12 @@ public final class ModuleMetal extends ModuleBase {
   }
 
   @Override
-  public void onNewRegister() {
-
-    RegistriesMetal.onRegister();
-  }
-
-  @Override
-  public void onInit(FMLInitializationEvent event) {
-
-    PluginTheOneProbe.init();
+  public @NotNull List<Class<?>> getEventBusSubscribers() {
+    return Collections.singletonList(ModuleMetal.class);
   }
 
   @Override
   public @NotNull LoggingHelper getLogger() {
     return LOGGER;
-  }
-
-  @Override
-  public @NotNull List<Class<?>> getEventBusSubscribers() {
-    return Collections.singletonList(ModuleMetal.class);
   }
 }

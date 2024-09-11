@@ -11,10 +11,10 @@ public class BiomeDeepOcean extends BaseBiome {
 
   public BiomeDeepOcean() {
     super(new Settings("Deep Ocean")
-        .guiColour(0x000080)
-        .baseHeight(-3.2f)
-        .heightVariation(-2.49999f)
-        .baseBiome(OCEAN));
+            .guiColour(0x000080)
+            .baseHeight(-3.2f)
+            .heightVariation(-2.49999f)
+            .baseBiome(OCEAN));
   }
 
   @Override
@@ -26,9 +26,9 @@ public class BiomeDeepOcean extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-        BiomeDictionary.Type.OCEAN,
-        BiomeDictionary.Type.WET,
-        BiomeDictionary.Type.WATER
+            BiomeDictionary.Type.OCEAN,
+            BiomeDictionary.Type.WET,
+            BiomeDictionary.Type.WATER
     };
   }
 }

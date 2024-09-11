@@ -13,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * This is an implementation of ItemHeat that automatically cools down over time Prefer extending or using this than implementing IItemHeat directly
- * Exceptions if you want to extend another capability object (see SmallVessel) but you should still implement this functionality somewhere
+ * This is an implementation of ItemHeat that automatically cools down over time Prefer extending or using this than implementing IItemHeat directly Exceptions if you
+ * want to extend another capability object (see SmallVessel) but you should still implement this functionality somewhere
  */
 public class ProviderHeat implements ICapabilityHeat {
 
@@ -52,56 +52,6 @@ public class ProviderHeat implements ICapabilityHeat {
   public ProviderHeat() {
   } // This is here so you can do a custom implementation
 
-  /**
-   * This gets the outwards facing temperature. It will differ from the internal temperature value or the value saved to NBT Note: if checking the
-   * temperature internally, DO NOT use temperature, use this instead, as temperature does not represent the current temperature
-   *
-   * @return The current temperature
-   */
-  @Override
-  public float getTemperature() {
-    return CapabilityHeat.adjustTemp(temperature, heatCapacity,
-        Calendar.PLAYER_TIME.getTicks() - lastUpdateTick);
-  }
-
-  /**
-   * Update the temperature, and save the timestamp of when it was updated
-   *
-   * @param temperature the temperature to set. Between 0 - 1600
-   */
-  @Override
-  public void setTemperature(float temperature) {
-    this.temperature = temperature;
-    this.lastUpdateTick = Calendar.PLAYER_TIME.getTicks();
-  }
-
-  @Override
-  public float getHeatCapacity() {
-    return heatCapacity;
-  }
-
-  @Override
-  public float getMeltTemp() {
-    return meltTemp;
-  }
-
-  @Override
-  public boolean isMolten() {
-    return getTemperature() >= meltTemp;
-  }
-
-  @Override
-  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-    return capability == CapabilityHeat.CAPABILITY;
-  }
-
-  @Nullable
-  @Override
-  @SuppressWarnings("unchecked")
-  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
-    return hasCapability(capability, facing) ? (T) this : null;
-  }
-
   @Override
   @NotNull
   public NBTTagCompound serializeNBT() {
@@ -126,4 +76,56 @@ public class ProviderHeat implements ICapabilityHeat {
       lastUpdateTick = nbt.getLong("ticks");
     }
   }
+
+  @Override
+  public float getHeatCapacity() {
+    return heatCapacity;
+  }
+
+  @Override
+  public boolean isMolten() {
+    return getTemperature() >= meltTemp;
+  }
+
+  /**
+   * This gets the outwards facing temperature. It will differ from the internal temperature value or the value saved to NBT Note: if checking the temperature
+   * internally, DO NOT use temperature, use this instead, as temperature does not represent the current temperature
+   *
+   * @return The current temperature
+   */
+  @Override
+  public float getTemperature() {
+    return CapabilityHeat.adjustTemp(temperature, heatCapacity,
+            Calendar.PLAYER_TIME.getTicks() - lastUpdateTick);
+  }
+
+  /**
+   * Update the temperature, and save the timestamp of when it was updated
+   *
+   * @param temperature the temperature to set. Between 0 - 1600
+   */
+  @Override
+  public void setTemperature(float temperature) {
+    this.temperature = temperature;
+    this.lastUpdateTick = Calendar.PLAYER_TIME.getTicks();
+  }
+
+  @Override
+  public float getMeltTemp() {
+    return meltTemp;
+  }
+
+  @Override
+  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+    return capability == CapabilityHeat.CAPABILITY;
+  }
+
+  @Nullable
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+    return hasCapability(capability, facing) ? (T) this : null;
+  }
+
+
 }

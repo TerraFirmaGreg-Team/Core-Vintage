@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
  * Интерфейс ICropItem представляет деревянный предмет.
  */
 public interface IWoodItem extends IType<WoodType>, IVariant<WoodItemVariant>, IItemSettings,
-    IProviderModel, IProviderItemColor {
+        IProviderModel, IProviderItemColor {
 
   /**
    * Возвращает расположение в реестре для данного подтипа предмета.

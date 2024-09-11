@@ -24,17 +24,17 @@ import java.util.Set;
 @SuppressWarnings("unused")
 public interface IItemSettings extends IProviderAutoReg, ICapabilitySize {
 
-  Settings getSettings();
-
-  // Override Item methods
-
   default int getItemStackLimit(@NotNull ItemStack stack) {
     return getStackSize(stack);
   }
 
+  // Override Item methods
+
   default IRarity getForgeRarity(ItemStack stack) {
     return getSettings().getRarity();
   }
+
+  Settings getSettings();
 
   default String getTranslationKey() {
     return "item." + getSettings().getTranslationKey();
@@ -69,12 +69,12 @@ public interface IItemSettings extends IProviderAutoReg, ICapabilitySize {
 
   // Override IItemSize methods
 
-  default Size getSize(ItemStack stack) {
-    return getSettings().getSize();
-  }
-
   default Weight getWeight(ItemStack stack) {
     return getSettings().getWeight();
+  }
+
+  default Size getSize(ItemStack stack) {
+    return getSettings().getSize();
   }
 
   default boolean canStack(ItemStack stack) {

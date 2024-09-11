@@ -52,42 +52,6 @@ public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGro
   }
 
   @Override
-  public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-    IBlockState water = plant.getWaterType();
-    int i;
-    //noinspection StatementWithEmptyBody
-    for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i)
-      ;
-    if (water == SALT_WATER) {
-      return i < plant.getMaxHeight() && BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state) &&
-              !worldIn.isAirBlock(pos.up());
-    } else {
-      return i < plant.getMaxHeight() && BlockUtils.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state) &&
-              !worldIn.isAirBlock(pos.up());
-    }
-  }
-
-  @Override
-  public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-    return false;
-  }
-
-  @Override
-  public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-    worldIn.setBlockState(pos.up(), this.getDefaultState());
-    IBlockState iblockstate = state.withProperty(AGE, 0)
-            .withProperty(growthStageProperty, plant.getStageForMonth())
-            .withProperty(PART, getPlantPart(worldIn, pos));
-    worldIn.setBlockState(pos, iblockstate);
-    iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
-  }
-
-  public void shrink(World worldIn, BlockPos pos) {
-    worldIn.setBlockState(pos, plant.getWaterType());
-    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
-  }
-
-  @Override
   public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
     super.onBlockHarvested(worldIn, pos, state, player);
   }
@@ -105,14 +69,56 @@ public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGro
 
   @Override
   @NotNull
+  protected BlockStateContainer createPlantBlockState() {
+    return new BlockStateContainer.Builder(this)
+            .add(LEVEL)
+            .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
+            .add(growthStageProperty)
+            .add(DAYPERIOD)
+            .add(AGE)
+            .add(PART)
+            .build();
+  }
+
+  @Override
+  @NotNull
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     return super.getActualState(state, worldIn, pos).withProperty(PART, getPlantPart(worldIn, pos));
   }
 
   @Override
   @NotNull
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return getTallBoundingBax(state.getValue(AGE), state, source, pos);
+  }
+
+  @Override
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
+  }
+
+  @Override
+  @NotNull
   public Block.EnumOffsetType getOffsetType() {
     return EnumOffsetType.XZ;
+  }
+
+  @Override
+  public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+    IBlockState soil = worldIn.getBlockState(pos.down());
+
+    if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).getBlock() == this) {
+      return false;
+    }
+    if (worldIn.isAirBlock(pos.up())) {
+      return false;
+    }
+    if (state.getBlock() == this) {
+      return (soil.getBlock()
+              .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) || BlockUtils.isGround(soil)) &&
+              plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+    }
+    return this.canSustainBush(soil);
   }
 
   @Override
@@ -154,49 +160,43 @@ public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGro
   }
 
   @Override
-  public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-    IBlockState soil = worldIn.getBlockState(pos.down());
-
-    if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).getBlock() == this) {
-      return false;
+  public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+    IBlockState water = plant.getWaterType();
+    int i;
+    //noinspection StatementWithEmptyBody
+    for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i)
+      ;
+    if (water == SALT_WATER) {
+      return i < plant.getMaxHeight() && BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state) &&
+              !worldIn.isAirBlock(pos.up());
+    } else {
+      return i < plant.getMaxHeight() && BlockUtils.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state) &&
+              !worldIn.isAirBlock(pos.up());
     }
-    if (worldIn.isAirBlock(pos.up())) {
-      return false;
-    }
-    if (state.getBlock() == this) {
-      return (soil.getBlock()
-              .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) || BlockUtils.isGround(soil)) &&
-              plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
-    }
-    return this.canSustainBush(soil);
   }
 
   @Override
-  @NotNull
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return getTallBoundingBax(state.getValue(AGE), state, source, pos);
+  public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+    return false;
   }
 
   @Override
-  @NotNull
-  protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer.Builder(this)
-            .add(LEVEL)
-            .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
-            .add(growthStageProperty)
-            .add(DAYPERIOD)
-            .add(AGE)
-            .add(PART)
-            .build();
-  }
-
-  @Override
-  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
+  public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+    worldIn.setBlockState(pos.up(), this.getDefaultState());
+    IBlockState iblockstate = state.withProperty(AGE, 0)
+            .withProperty(growthStageProperty, plant.getStageForMonth())
+            .withProperty(PART, getPlantPart(worldIn, pos));
+    worldIn.setBlockState(pos, iblockstate);
+    iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
   }
 
   private boolean canShrink(World worldIn, BlockPos pos) {
     return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
             .getBlock() != this;
+  }
+
+  public void shrink(World worldIn, BlockPos pos) {
+    worldIn.setBlockState(pos, plant.getWaterType());
+    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
   }
 }

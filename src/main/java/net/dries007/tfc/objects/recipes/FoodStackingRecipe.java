@@ -19,89 +19,89 @@ import org.jetbrains.annotations.NotNull;
 
 public class FoodStackingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
-    @Override
-    public boolean matches(InventoryCrafting inv, World worldIn) {
-        ItemStack foodStack = ItemStack.EMPTY;
-        for (int i = 0; i < inv.getSizeInventory(); i++) {
-            ItemStack stack = inv.getStackInSlot(i);
-            if (!stack.isEmpty()) {
-                // All nonempty stacks must be a food
-                if (!stack.hasCapability(CapabilityFood.CAPABILITY, null)) {
-                    return false;
-                }
-                // If there's more than one stack, keep count of the previous ones
-                if (foodStack.isEmpty()) {
-                    // First stack, so save and move on
-                    foodStack = stack;
-                } else {
-                    // Another stack, so compare. If not equal, or one is not a food, the recipe is invalid
-                    if (!CapabilityFood.areStacksStackableExceptCreationDate(stack, foodStack)) {
-                        return false;
-                    }
-                }
-            }
+  @Override
+  public boolean matches(InventoryCrafting inv, World worldIn) {
+    ItemStack foodStack = ItemStack.EMPTY;
+    for (int i = 0; i < inv.getSizeInventory(); i++) {
+      ItemStack stack = inv.getStackInSlot(i);
+      if (!stack.isEmpty()) {
+        // All nonempty stacks must be a food
+        if (!stack.hasCapability(CapabilityFood.CAPABILITY, null)) {
+          return false;
         }
-        return true;
+        // If there's more than one stack, keep count of the previous ones
+        if (foodStack.isEmpty()) {
+          // First stack, so save and move on
+          foodStack = stack;
+        } else {
+          // Another stack, so compare. If not equal, or one is not a food, the recipe is invalid
+          if (!CapabilityFood.areStacksStackableExceptCreationDate(stack, foodStack)) {
+            return false;
+          }
+        }
+      }
     }
+    return true;
+  }
 
-    @Override
-    @NotNull
-    public ItemStack getCraftingResult(InventoryCrafting inv) {
-        ItemStack resultStack = ItemStack.EMPTY;
-        int outputAmount = 0;
-        long minCreationDate = -1;
-        for (int i = 0; i < inv.getSizeInventory(); i++) {
-            ItemStack stack = inv.getStackInSlot(i);
-            if (!stack.isEmpty()) {
-                // Get the food capability
-                IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
-                if (cap != null) {
-                    // Increment output amount
-                    outputAmount++;
-
-                    // Find the min creation date
-                    if (minCreationDate == -1 || minCreationDate > cap.getCreationDate()) {
-                        minCreationDate = cap.getCreationDate();
-                    }
-
-                    // And save the stack
-                    if (resultStack.isEmpty()) {
-                        resultStack = stack.copy();
-                    }
-                }
-            }
-        }
-
-        // Update the capability and count of the result
-        resultStack.setCount(outputAmount);
-        IFood cap = resultStack.getCapability(CapabilityFood.CAPABILITY, null);
+  @Override
+  @NotNull
+  public ItemStack getCraftingResult(InventoryCrafting inv) {
+    ItemStack resultStack = ItemStack.EMPTY;
+    int outputAmount = 0;
+    long minCreationDate = -1;
+    for (int i = 0; i < inv.getSizeInventory(); i++) {
+      ItemStack stack = inv.getStackInSlot(i);
+      if (!stack.isEmpty()) {
+        // Get the food capability
+        IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (cap != null) {
-            cap.setCreationDate(minCreationDate);
+          // Increment output amount
+          outputAmount++;
+
+          // Find the min creation date
+          if (minCreationDate == -1 || minCreationDate > cap.getCreationDate()) {
+            minCreationDate = cap.getCreationDate();
+          }
+
+          // And save the stack
+          if (resultStack.isEmpty()) {
+            resultStack = stack.copy();
+          }
         }
-        return resultStack;
+      }
     }
+
+    // Update the capability and count of the result
+    resultStack.setCount(outputAmount);
+    IFood cap = resultStack.getCapability(CapabilityFood.CAPABILITY, null);
+    if (cap != null) {
+      cap.setCreationDate(minCreationDate);
+    }
+    return resultStack;
+  }
+
+  @Override
+  public boolean canFit(int width, int height) {
+    return true;
+  }
+
+  @Override
+  @NotNull
+  public ItemStack getRecipeOutput() {
+    return ItemStack.EMPTY;
+  }
+
+  @Override
+  public boolean isDynamic() {
+    return true;
+  }
+
+  public static class Factory implements IRecipeFactory {
 
     @Override
-    public boolean canFit(int width, int height) {
-        return true;
+    public IRecipe parse(JsonContext context, JsonObject json) {
+      return new FoodStackingRecipe();
     }
-
-    @Override
-    @NotNull
-    public ItemStack getRecipeOutput() {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public boolean isDynamic() {
-        return true;
-    }
-
-    public static class Factory implements IRecipeFactory {
-
-        @Override
-        public IRecipe parse(JsonContext context, JsonObject json) {
-            return new FoodStackingRecipe();
-        }
-    }
+  }
 }

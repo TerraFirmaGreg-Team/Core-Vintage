@@ -58,10 +58,31 @@ public final class ModelUtils {
       ResourceLocation registryName = block.getRegistryName();
       Preconditions.checkNotNull(registryName, "Item %s has null registry name", block);
       String modelLocation =
-          registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
+              registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
 
       ModelUtils.registerBlockInventoryModel(block, modelLocation);
     }
+  }
+
+  public static void registerBlockInventoryModel(Block block, String modelLocation) {
+
+    ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
+  }
+
+  public static void registerInventoryModel(Item item, String modelLocation) {
+
+    ModelUtils.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
+  }
+
+  public static void registerInventoryModel(Item item, ModelResourceLocation resourceLocation) {
+
+    ModelUtils.registerInventoryModel(item, 0, resourceLocation);
+  }
+
+  public static void registerInventoryModel(@NotNull Item item, int metadata,
+          @NotNull ModelResourceLocation resourceLocation) {
+
+    ModelLoader.setCustomModelResourceLocation(item, metadata, resourceLocation);
   }
 
   public static void registerBlockInventoryModes(Block... blocks) {
@@ -70,6 +91,10 @@ public final class ModelUtils {
     }
   }
 
+  //endregion
+
+  //region ===== Item
+
   public static void registerBlockInventoryModel(Block block) {
     ResourceLocation registryName = block.getRegistryName();
     Preconditions.checkNotNull(registryName, "block %s has null registry name", block);
@@ -77,9 +102,9 @@ public final class ModelUtils {
     ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), registryName);
   }
 
-  public static void registerBlockInventoryModel(Block block, String modelLocation) {
+  public static void registerInventoryModel(Item item, ResourceLocation modelLocation) {
 
-    ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
+    ModelUtils.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
   }
 
   public static void registerBlockInventoryModel(Block block, ResourceLocation modelLocation) {
@@ -92,10 +117,6 @@ public final class ModelUtils {
     ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(block), meshDefinition);
   }
 
-  //endregion
-
-  //region ===== Item
-
   public static void registerInventoryModel(String subfolder, Item... items) {
     for (Item item : items) {
       ModelUtils.registerInventoryModel(subfolder, item);
@@ -106,7 +127,7 @@ public final class ModelUtils {
     ResourceLocation registryName = item.getRegistryName();
     Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
     String modelLocation =
-        registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
+            registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
 
     ModelUtils.registerInventoryModel(item, modelLocation);
   }
@@ -125,34 +146,13 @@ public final class ModelUtils {
     ModelUtils.registerInventoryModel(item, registryName);
   }
 
-  public static void registerInventoryModel(Item item, String modelLocation) {
-
-    ModelUtils.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
-  }
-
-  public static void registerInventoryModel(Item item, ResourceLocation modelLocation) {
-
-    ModelUtils.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
-  }
-
-  public static void registerInventoryModel(Item item, ModelResourceLocation resourceLocation) {
-
-    ModelUtils.registerInventoryModel(item, 0, resourceLocation);
-  }
-
   public static void registerInventoryModel(@NotNull Item item, int metadata,
-      @NotNull String variant) {
+          @NotNull String variant) {
     ResourceLocation registryName = item.getRegistryName();
     Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
 
     ModelUtils.registerInventoryModel(item, metadata,
-        new ModelResourceLocation(registryName, variant));
-  }
-
-  public static void registerInventoryModel(@NotNull Item item, int metadata,
-      @NotNull ModelResourceLocation resourceLocation) {
-
-    ModelLoader.setCustomModelResourceLocation(item, metadata, resourceLocation);
+            new ModelResourceLocation(registryName, variant));
   }
 
   public static void registerCustomMeshDefinition(Item item, ItemMeshDefinition meshDefinition) {
@@ -176,7 +176,7 @@ public final class ModelUtils {
   //region ===== TileEntitySpecialRenderer
 
   public static <T extends TileEntity> void registerTileEntitySpecialRenderer(
-      Class<T> tileEntityClass, TileEntitySpecialRenderer<? super T> specialRenderer) {
+          Class<T> tileEntityClass, TileEntitySpecialRenderer<? super T> specialRenderer) {
 
     if (specialRenderer != null) {
       ClientRegistry.bindTileEntitySpecialRenderer(tileEntityClass, specialRenderer);

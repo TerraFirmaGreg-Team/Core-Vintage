@@ -28,15 +28,15 @@ public class BlockCellarShelf extends BaseBlockContainer implements IProviderTil
     super(Settings.of(Material.WOOD));
 
     getSettings()
-        .registryKey("device/cellar/shelf")
-        .hardness(2F)
-        .nonOpaque();
+            .registryKey("device/cellar/shelf")
+            .hardness(2F)
+            .nonOpaque();
   }
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-      EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
-      float hitZ) {
+          EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
+          float hitZ) {
     if (!worldIn.isRemote) {
       GuiHandler.openGui(worldIn, pos, player);
     }
@@ -45,12 +45,17 @@ public class BlockCellarShelf extends BaseBlockContainer implements IProviderTil
 
   @Override
   public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer,
-      ItemStack stack) {
+          ItemStack stack) {
     if (stack.hasDisplayName()) {
       var tile = TileUtils.getTile(world, pos, TileCellarShelf.class);
       //tile.setCustomName(stack.getDisplayName());
     }
 
+  }
+
+  @Override
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.MODEL;
   }
 
   @Override
@@ -60,11 +65,6 @@ public class BlockCellarShelf extends BaseBlockContainer implements IProviderTil
       tile.onBreakBlock(world, pos, state);
     }
     super.breakBlock(world, pos, state);
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
   }
 
   @Override

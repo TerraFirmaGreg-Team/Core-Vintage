@@ -13,7 +13,7 @@ public class TEISRFridge extends TileEntityItemStackRenderer {
   public void renderByItem(ItemStack itemStack, float partialTicks) {
     if (itemStack.getItem() instanceof ItemBlockFridge) {
       TileEntityRendererDispatcher.instance.render(new TileFridge(), 0.0D, 0.0D, 0.0D,
-          partialTicks);
+              partialTicks);
     }
   }
 }

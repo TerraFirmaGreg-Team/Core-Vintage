@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.client.gui;
 
 import su.terrafirmagreg.api.base.gui.BaseGuiContainer;
-import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodChest;
+import su.terrafirmagreg.modules.wood.object.container.ContainerWoodChest;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 public class GuiWoodChest extends BaseGuiContainer {
 
   private static final ResourceLocation CHEST_GUI_TEXTURE = new ResourceLocation(
-      "textures/gui/container/generic_54.png");
+          "textures/gui/container/generic_54.png");
   private final int inventoryRows;
 
   public GuiWoodChest(ContainerWoodChest container, InventoryPlayer playerInv) {

@@ -82,35 +82,10 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
     return energyContainer.getEnergyStored();
   }
 
-  public boolean isMainBlock() {
-    if (mainBlock == 0) {
-      if (!hasWorld() || world.isAirBlock(pos)) {
-        return false;
-      }
-      if (world.getBlockState(pos).getValue(UPPER)) {
-        mainBlock = 1;
-      } else {
-        mainBlock = -1;
-      }
-    }
-    return mainBlock == 1;
-  }
-
   public ItemStack insertItem(int slot, ItemStack stack) {
     ItemStack output = inventory.insertItem(slot, stack, false);
     setAndUpdateSlots(slot);
     return output;
-  }
-
-  public ItemStack extractItem(int slot) {
-    ItemStack stack = inventory.extractItem(slot, 64, false);
-    IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
-    if (cap != null) {
-      CapabilityFood.removeTrait(cap, FoodTrait.FROZEN);
-      CapabilityFood.removeTrait(cap, FoodTrait.COLD);
-    }
-    setAndUpdateSlots(slot);
-    return stack;
   }
 
   @Override
@@ -201,6 +176,17 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
     super.onBreakBlock(world, pos, state);
   }
 
+  public ItemStack extractItem(int slot) {
+    ItemStack stack = inventory.extractItem(slot, 64, false);
+    IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+    if (cap != null) {
+      CapabilityFood.removeTrait(cap, FoodTrait.FROZEN);
+      CapabilityFood.removeTrait(cap, FoodTrait.COLD);
+    }
+    setAndUpdateSlots(slot);
+    return stack;
+  }
+
   @Override
   public void onChunkUnload() {
     super.onChunkUnload();
@@ -213,6 +199,10 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
   @Override
   public AxisAlignedBB getRenderBoundingBox() {
     return INFINITE_EXTENT_AABB;
+  }
+
+  public ItemStack getSlot(int slot) {
+    return inventory.extractItem(slot, 64, true);
   }
 
   //    @Override
@@ -273,10 +263,6 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
   //        return TechConfig.DEVICES.acceptIc2EU && facing == this.getRotation().getOpposite();
   //    }
 
-  public ItemStack getSlot(int slot) {
-    return inventory.extractItem(slot, 64, true);
-  }
-
   public float getOpen() {
     return open;
   }
@@ -285,16 +271,8 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
     return lastOpen;
   }
 
-  public boolean isOpen() {
-    return open >= MAX_DEGREE;
-  }
-
   public boolean hasStack(int slot) {
     return inventory.extractItem(slot, 64, true) != ItemStack.EMPTY;
-  }
-
-  public EnumFacing getRotation() {
-    return world.getBlockState(pos).getValue(BlockHorizontal.FACING);
   }
 
   public boolean isAnimating() {
@@ -307,6 +285,10 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
       return null;
     }
     return BlockFridge.getItems(this.getRotation());
+  }
+
+  public EnumFacing getRotation() {
+    return world.getBlockState(pos).getValue(BlockHorizontal.FACING);
   }
 
   public boolean setOpening(boolean value) {
@@ -406,6 +388,24 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
                         pos, 20);
       }
     }
+  }
+
+  public boolean isMainBlock() {
+    if (mainBlock == 0) {
+      if (!hasWorld() || world.isAirBlock(pos)) {
+        return false;
+      }
+      if (world.getBlockState(pos).getValue(UPPER)) {
+        mainBlock = 1;
+      } else {
+        mainBlock = -1;
+      }
+    }
+    return mainBlock == 1;
+  }
+
+  public boolean isOpen() {
+    return open >= MAX_DEGREE;
   }
 
   @Override

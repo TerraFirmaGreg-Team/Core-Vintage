@@ -106,6 +106,18 @@ public class GeneratorSpeleothem
     return true;
   }
 
+  @Nullable
+  private Block getSpeleothemType(IBlockState state) {
+    var block = state.getBlock();
+    for (var rock : RockType.getTypes()) {
+      if (BlocksRock.RAW.get(rock) == block) {
+        return BlocksRock.RAW.get(rock);
+      }
+    }
+
+    return null;
+  }
+
   private void placeSpeleothem(Random random, World world, BlockPos pos, Block block, boolean up) {
     EnumFacing diff = up ? EnumFacing.UP : EnumFacing.DOWN;
     int size = random.nextInt(3) == 0 ? 2 : 3;
@@ -129,17 +141,5 @@ public class GeneratorSpeleothem
         world.setBlockState(pos, targetBlock);
       }
     }
-  }
-
-  @Nullable
-  private Block getSpeleothemType(IBlockState state) {
-    var block = state.getBlock();
-    for (var rock : RockType.getTypes()) {
-      if (BlocksRock.RAW.get(rock) == block) {
-        return BlocksRock.RAW.get(rock);
-      }
-    }
-
-    return null;
   }
 }

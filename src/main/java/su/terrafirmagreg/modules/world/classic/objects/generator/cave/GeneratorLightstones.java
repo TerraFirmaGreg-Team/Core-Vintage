@@ -24,7 +24,7 @@ public class GeneratorLightstones implements IWorldGenerator {
 
   @Override
   public void generate(Random rng, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (!(chunkGenerator instanceof ChunkGenClassic)) {
       return;
     }
@@ -38,15 +38,15 @@ public class GeneratorLightstones implements IWorldGenerator {
 
     int lightstoneCount = (RNG.nextInt(8) + 1);
     for (int i = rng.nextInt(Math.round(1 / floraDiversity));
-        i < (4 + floraDensity + floraDiversity) * lightstoneCount; i++) {
+            i < (4 + floraDensity + floraDiversity) * lightstoneCount; i++) {
       BlockPos blockPos = chunkPos.add(rng.nextInt(16) + 8, rng.nextInt(16), rng.nextInt(16) + 8);
       if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 30 && blockPos.getY() > 10) {
         BlockLightstone lightstoneBlock = BlocksTFCF.LIGHTSTONE;
         IBlockState state = lightstoneBlock.getDefaultState();
         if (world.isAirBlock(blockPos) &&
-            world.getLightFor(EnumSkyBlock.SKY, blockPos) < 14 && !world.canSeeSky(blockPos) &&
-            lightstoneBlock.canBlockStay(world, blockPos, state) &&
-            lightstoneBlock.canPlaceBlockAt(world, blockPos)) {
+                world.getLightFor(EnumSkyBlock.SKY, blockPos) < 14 && !world.canSeeSky(blockPos) &&
+                lightstoneBlock.canBlockStay(world, blockPos, state) &&
+                lightstoneBlock.canPlaceBlockAt(world, blockPos)) {
           //TFCFlorae.getLog().warn("TFCFlorae: Lightstones attempted to generate at " + "X: " + blockPos.getX() + ", Y: " + blockPos.getY() + ", Z: " + blockPos.getZ());
           world.setBlockState(blockPos, BlocksTFCF.LIGHTSTONE.getDefaultState());
         }

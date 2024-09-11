@@ -44,27 +44,15 @@ public class TileBellows extends BaseTile {
   private long lastPushed = 0L;
 
   /**
-   * Notify the bellows that it should check a certain offset when blowing air X: front of the bellows, positive values go forward Y: vertical,
-   * self-explanatory, negative is below. Z: X but rotated 90 degrees clockwise, positive values go right. in most cases you want this to be 0 For
-   * example: a block that must sit right in front of the bellows(like fire pits) must check {@code Vec3i(1,0,0)}, {@link BlockFirePit} meanwhile,
-   * blocks that sink into ground( like forges) must check {@code Vec3i(1,-1,0)}. {@link BlockCharcoalForge}
+   * Notify the bellows that it should check a certain offset when blowing air X: front of the bellows, positive values go forward Y: vertical, self-explanatory,
+   * negative is below. Z: X but rotated 90 degrees clockwise, positive values go right. in most cases you want this to be 0 For example: a block that must sit right
+   * in front of the bellows(like fire pits) must check {@code Vec3i(1,0,0)}, {@link BlockFirePit} meanwhile, blocks that sink into ground( like forges) must check
+   * {@code Vec3i(1,-1,0)}. {@link BlockCharcoalForge}
    *
    * @param offset The offset to check
    */
   public static void addBellowsOffset(Vec3i offset) {
     OFFSETS.add(offset);
-  }
-
-  // Min 0.125, Max 0.625
-  @SideOnly(Side.CLIENT)
-  public double getHeight() {
-    int time = (int) (world.getTotalWorldTime() - lastPushed);
-    if (time < 10) {
-      return (double) time * 0.05 + 0.125;
-    } else if (time < 20) {
-      return (double) (20 - time) * 0.05 + 0.125;
-    }
-    return 0.125;
   }
 
   public boolean onRightClick() {
@@ -79,19 +67,19 @@ public class TileBellows extends BaseTile {
       markForBlockUpdate();
     }
     EnumFacing direction = world.getBlockState(pos)
-        .getValue(FACING); // It is a better idea to inherit the direction directly from the block.
+            .getValue(FACING); // It is a better idea to inherit the direction directly from the block.
     for (Vec3i offset : OFFSETS) {
       BlockPos posx = pos.up(offset.getY())
-          .offset(direction, offset.getX())
-          .offset(direction.rotateY(), offset.getZ());
+              .offset(direction, offset.getX())
+              .offset(direction.rotateY(), offset.getZ());
       Block block = world.getBlockState(posx).getBlock();
       if (block instanceof IBellowsConsumerBlock bellowsConsumerBlock
-          && bellowsConsumerBlock.canIntakeFrom(offset, direction)) {
+              && bellowsConsumerBlock.canIntakeFrom(offset, direction)) {
         bellowsConsumerBlock.onAirIntake(world, posx, BELLOWS_AIR);
         if (world.isRemote) {
           posx = pos.offset(direction);
           world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posx.getX() + .5d, posx.getY() + .5d,
-              posx.getZ() + .5d, 0, 0, 0);
+                  posx.getZ() + .5d, 0, 0, 0);
         }
         return true;
       }
@@ -102,9 +90,21 @@ public class TileBellows extends BaseTile {
   public void debug() {
     TerraFirmaCraft.getLog().debug("Debugging Bellows");
     TerraFirmaCraft.getLog()
-        .debug("Now: {} | Then: {} | Difference: {}", world.getTotalWorldTime(), lastPushed,
-            world.getTotalWorldTime() - lastPushed);
+            .debug("Now: {} | Then: {} | Difference: {}", world.getTotalWorldTime(), lastPushed,
+                    world.getTotalWorldTime() - lastPushed);
     TerraFirmaCraft.getLog().debug("Total Height: {}", getHeight());
+  }
+
+  // Min 0.125, Max 0.625
+  @SideOnly(Side.CLIENT)
+  public double getHeight() {
+    int time = (int) (world.getTotalWorldTime() - lastPushed);
+    if (time < 10) {
+      return (double) time * 0.05 + 0.125;
+    } else if (time < 20) {
+      return (double) (20 - time) * 0.05 + 0.125;
+    }
+    return 0.125;
   }
 
   @Override

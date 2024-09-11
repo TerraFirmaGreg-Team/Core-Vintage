@@ -49,7 +49,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 
   //The last time(in ticks) this chicken has laid eggs
   private static final DataParameter<Long> LAID = EntityDataManager.createKey(
-      EntityAnimalChicken.class, DataSerializers.LONG);
+          EntityAnimalChicken.class, DataSerializers.LONG);
   //Copy from vanilla's EntityChicken, used by renderer to properly handle wing flap
   public float wingRotation;
   public float destPos;
@@ -59,8 +59,8 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 
   public EntityAnimalChicken(World worldIn) {
     this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-        getRandomGrowth(ConfigAnimal.ENTITIES.CHICKEN.adulthood,
-            ConfigAnimal.ENTITIES.CHICKEN.elder));
+            getRandomGrowth(ConfigAnimal.ENTITIES.CHICKEN.adulthood,
+                    ConfigAnimal.ENTITIES.CHICKEN.elder));
   }
 
   public EntityAnimalChicken(World worldIn, Gender gender, int birthDay) {
@@ -70,10 +70,10 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
+            (biomeType == BiomeHelper.BiomeType.PLAINS)) {
       return ConfigAnimal.ENTITIES.CHICKEN.rarity;
     }
     return 0;
@@ -129,9 +129,9 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
       if (cap != null) {
         EntityAnimalChicken chick = new EntityAnimalChicken(this.world);
         chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
-            : this.getFamiliarity() * 0.9F);
+                : this.getFamiliarity() * 0.9F);
         cap.setFertilized(chick,
-            ConfigAnimal.ENTITIES.CHICKEN.hatch + Calendar.PLAYER_TIME.getTotalDays());
+                ConfigAnimal.ENTITIES.CHICKEN.hatch + Calendar.PLAYER_TIME.getTotalDays());
       }
     }
     eggs.add(egg);
@@ -146,7 +146,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
   @Override
   public long getProductsCooldown() {
     return Math.max(0,
-        ConfigAnimal.ENTITIES.CHICKEN.eggTicks + getLaidTicks() - Calendar.PLAYER_TIME.getTicks());
+            ConfigAnimal.ENTITIES.CHICKEN.eggTicks + getLaidTicks() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override
@@ -155,18 +155,23 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
       return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.male_egg"));
     } else if (this.getAge() == Age.OLD) {
       return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.old"),
-          getAnimalName());
+              getAnimalName());
     } else if (this.getAge() == Age.CHILD) {
       return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.young"),
-          getAnimalName());
+              getAnimalName());
     } else if (getFamiliarity() <= 0.15f) {
       return new TextComponentTranslation(
-          ModUtils.localize("tooltip", "animal.product.low_familiarity"), getAnimalName());
+              ModUtils.localize("tooltip", "animal.product.low_familiarity"), getAnimalName());
     } else if (!hasEggs()) {
       return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.no_egg"),
-          getAnimalName());
+              getAnimalName());
     }
     return null;
+  }
+
+  protected boolean hasEggs() {
+    return this.getGender() == Gender.FEMALE && this.getAge() == Age.ADULT && (getLaidTicks() <= 0
+            || getProductsCooldown() <= 0);
   }
 
   public long getLaidTicks() {
@@ -217,11 +222,6 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
     this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
   }
 
-  protected boolean hasEggs() {
-    return this.getGender() == Gender.FEMALE && this.getAge() == Age.ADULT && (getLaidTicks() <= 0
-        || getProductsCooldown() <= 0);
-  }
-
   @Override
   protected void entityInit() {
     super.entityInit();
@@ -232,10 +232,10 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
   public void onLivingUpdate() {
     super.onLivingUpdate();
     if (this.getClass() == EntityAnimalChicken.class && this.getGender() == Gender.MALE
-        && !this.world.isRemote && !this.isChild() &&
-        Calendar.CALENDAR_TIME.getHourOfDay() == 6 && rand.nextInt(600) == 0) {
+            && !this.world.isRemote && !this.isChild() &&
+            Calendar.CALENDAR_TIME.getHourOfDay() == 6 && rand.nextInt(600) == 0) {
       this.world.playSound(null, this.getPosition(), SoundsAnimal.ANIMAL_ROOSTER_CRY,
-          SoundCategory.AMBIENT, 0.8f, 1.0f);
+              SoundCategory.AMBIENT, 0.8f, 1.0f);
     }
     this.oFlap = this.wingRotation;
     this.oFlapSpeed = this.destPos;
@@ -256,6 +256,11 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
   }
 
   @Override
+  public double getOldDeathChance() {
+    return ConfigAnimal.ENTITIES.CHICKEN.oldDeathChance;
+  }
+
+  @Override
   public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
     super.writeEntityToNBT(nbt);
     NBTUtils.setGenericNBTValue(nbt, "laidTicks", getLaidTicks());
@@ -265,10 +270,5 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
   public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
     super.readEntityFromNBT(nbt);
     this.setLaidTicks(nbt.getLong("laidTicks"));
-  }
-
-  @Override
-  public double getOldDeathChance() {
-    return ConfigAnimal.ENTITIES.CHICKEN.oldDeathChance;
   }
 }

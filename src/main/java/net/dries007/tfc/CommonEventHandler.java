@@ -36,7 +36,7 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockAnvil;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
-import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
+import su.terrafirmagreg.modules.wood.object.block.BlockWoodSupport;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataCalendar;
@@ -863,7 +863,7 @@ public final class CommonEventHandler {
   @SubscribeEvent
   public static void onGameRuleChange(GameRuleChangeEvent event) {
     GameRules rules = event.getRules();
-    if ("naturalRegeneration" .equals(event.getRuleName()) && ConfigTFC.General.OVERRIDES.forceNoVanillaNaturalRegeneration) {
+    if ("naturalRegeneration".equals(event.getRuleName()) && ConfigTFC.General.OVERRIDES.forceNoVanillaNaturalRegeneration) {
       // Natural regeneration should be disabled, allows TFC to have custom regeneration
       event.getRules().setOrCreateGameRule("naturalRegeneration", "false");
       TerraFirmaCraft.getLog().warn("Something tried to set natural regeneration to true, reverting!");
@@ -953,6 +953,36 @@ public final class CommonEventHandler {
       // We do this for containers (such as the player's inventory), which don't sync capability changes through detectAndSendChanges
       CapabilityContainerListener.syncCapabilityOnlyChanges(event.player.openContainer, (EntityPlayerMP) event.player);
     }
+  }
+
+  private static int countPlayerOverburdened(InventoryPlayer inventory) {
+    // This is just optimized (probably uselessly, but whatever) for use in onPlayerTick
+    int hugeHeavyCount = 0;
+    for (ItemStack stack : inventory.mainInventory) {
+      if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+        hugeHeavyCount++;
+        if (hugeHeavyCount >= 2) {
+          return hugeHeavyCount;
+        }
+      }
+    }
+    for (ItemStack stack : inventory.armorInventory) {
+      if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+        hugeHeavyCount++;
+        if (hugeHeavyCount >= 2) {
+          return hugeHeavyCount;
+        }
+      }
+    }
+    for (ItemStack stack : inventory.offHandInventory) {
+      if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+        hugeHeavyCount++;
+        if (hugeHeavyCount >= 2) {
+          return hugeHeavyCount;
+        }
+      }
+    }
+    return hugeHeavyCount;
   }
 
   //go last, so if other mods handle this event, we don't.
@@ -1048,35 +1078,5 @@ public final class CommonEventHandler {
         event.setComponent(new TextComponentTranslation("<" + event.getUsername() + "> " + String.join(" ", words)));
       }
     }
-  }
-
-  private static int countPlayerOverburdened(InventoryPlayer inventory) {
-    // This is just optimized (probably uselessly, but whatever) for use in onPlayerTick
-    int hugeHeavyCount = 0;
-    for (ItemStack stack : inventory.mainInventory) {
-      if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
-        hugeHeavyCount++;
-        if (hugeHeavyCount >= 2) {
-          return hugeHeavyCount;
-        }
-      }
-    }
-    for (ItemStack stack : inventory.armorInventory) {
-      if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
-        hugeHeavyCount++;
-        if (hugeHeavyCount >= 2) {
-          return hugeHeavyCount;
-        }
-      }
-    }
-    for (ItemStack stack : inventory.offHandInventory) {
-      if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
-        hugeHeavyCount++;
-        if (hugeHeavyCount >= 2) {
-          return hugeHeavyCount;
-        }
-      }
-    }
-    return hugeHeavyCount;
   }
 }

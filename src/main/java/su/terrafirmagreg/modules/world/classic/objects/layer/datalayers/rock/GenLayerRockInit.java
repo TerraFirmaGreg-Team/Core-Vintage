@@ -22,17 +22,17 @@ public class GenLayerRockInit extends GenLayerBase {
   public GenLayerRockInit(long par1, final RockCategory.Layer rocks) {
     super(par1);
     layerRocks = RockType.getTypes().stream()
-        .filter(rocks)
-        .mapToInt(RockType::indexOf)
-        .sorted().toArray();
+            .filter(rocks)
+            .mapToInt(RockType::indexOf)
+            .sorted().toArray();
 
     if (ConfigCore.MISC.DEBUG.debugWorldGenSafe) {
       TerraFirmaCraft.getLog().info("Worldgen rock list (ints): {}", layerRocks);
       TerraFirmaCraft.getLog().info("Worldgen rock list (names): {}",
-          Arrays.stream(layerRocks)
-              .mapToObj(RockType::valueOf)
-              .map(RockType::getName)
-              .collect(Collectors.joining(", ")));
+              Arrays.stream(layerRocks)
+                      .mapToObj(RockType::valueOf)
+                      .map(RockType::getName)
+                      .collect(Collectors.joining(", ")));
     }
   }
 

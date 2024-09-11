@@ -29,14 +29,14 @@ public class BlockIceBunker extends BaseBlockContainer implements IProviderTile 
     super(Settings.of(Material.WOOD));
 
     getSettings()
-        .registryKey("device/ice_bunker")
-        .hardness(2F);
+            .registryKey("device/ice_bunker")
+            .hardness(2F);
   }
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-      EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
-      float hitZ) {
+          EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
+          float hitZ) {
     if (!worldIn.isRemote) {
       GuiHandler.openGui(worldIn, pos, player);
     }
@@ -44,17 +44,8 @@ public class BlockIceBunker extends BaseBlockContainer implements IProviderTile 
   }
 
   @Override
-  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TileIceBunker.class);
-    if (tile != null) {
-      InventoryHelper.dropInventoryItems(worldIn, pos, tile);
-    }
-    super.breakBlock(worldIn, pos, state);
-  }
-
-  @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-      EntityLivingBase placer, ItemStack stack) {
+          EntityLivingBase placer, ItemStack stack) {
     if (stack.hasDisplayName()) {
       var tile = TileUtils.getTile(worldIn, pos, TileIceBunker.class);
       //tile.setCustomName(stack.getDisplayName());
@@ -70,6 +61,15 @@ public class BlockIceBunker extends BaseBlockContainer implements IProviderTile 
   @Override
   public EnumBlockRenderType getRenderType(IBlockState state) {
     return EnumBlockRenderType.MODEL;
+  }
+
+  @Override
+  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    var tile = TileUtils.getTile(worldIn, pos, TileIceBunker.class);
+    if (tile != null) {
+      InventoryHelper.dropInventoryItems(worldIn, pos, tile);
+    }
+    super.breakBlock(worldIn, pos, state);
   }
 
   @Override

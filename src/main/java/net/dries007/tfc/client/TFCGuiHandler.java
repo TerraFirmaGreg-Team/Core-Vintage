@@ -64,7 +64,33 @@ public class TFCGuiHandler implements IGuiHandler {
     player.openGui(TerraFirmaCraft.getInstance(), type.ordinal(), world, 0, 0, 0);
   }
 
-  @Override
+  public enum Type {
+    SMALL_VESSEL,
+    SMALL_VESSEL_LIQUID,
+    MOLD,
+    KNAPPING_STONE,
+    KNAPPING_CLAY,
+    KNAPPING_FIRE_CLAY,
+    KNAPPING_LEATHER,
+    LARGE_VESSEL,
+    POWDERKEG,
+    CALENDAR,
+    NUTRITION,
+    SKILLS,
+    SALAD,
+    INVENTORY, // This is special, it is used by GuiButtonPlayerInventoryTab to signal to open the vanilla inventory
+    CRAFTING, // In-inventory 3x3 crafting grid
+    QUIVER,
+    GLASSWORKING,
+    NULL; // This is special, it is a non-null null.
+
+    private static final Type[] values = values();
+
+    @NotNull
+    public static Type valueOf(int id) {
+      return id < 0 || id >= values.length ? NULL : values[id];
+    }
+  }  @Override
   @Nullable
   public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
     BlockPos pos = new BlockPos(x, y, z);
@@ -118,31 +144,5 @@ public class TFCGuiHandler implements IGuiHandler {
     };
   }
 
-  public enum Type {
-    SMALL_VESSEL,
-    SMALL_VESSEL_LIQUID,
-    MOLD,
-    KNAPPING_STONE,
-    KNAPPING_CLAY,
-    KNAPPING_FIRE_CLAY,
-    KNAPPING_LEATHER,
-    LARGE_VESSEL,
-    POWDERKEG,
-    CALENDAR,
-    NUTRITION,
-    SKILLS,
-    SALAD,
-    INVENTORY, // This is special, it is used by GuiButtonPlayerInventoryTab to signal to open the vanilla inventory
-    CRAFTING, // In-inventory 3x3 crafting grid
-    QUIVER,
-    GLASSWORKING,
-    NULL; // This is special, it is a non-null null.
 
-    private static final Type[] values = values();
-
-    @NotNull
-    public static Type valueOf(int id) {
-      return id < 0 || id >= values.length ? NULL : values[id];
-    }
-  }
 }

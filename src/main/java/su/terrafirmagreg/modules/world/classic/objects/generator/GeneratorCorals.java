@@ -27,7 +27,7 @@ public class GeneratorCorals implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (!(chunkGenerator instanceof ChunkGenClassic)) {
       return;
     }
@@ -36,7 +36,7 @@ public class GeneratorCorals implements IWorldGenerator {
   }
 
   private void generateCoral(Random random, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
     var data = CapabilityChunkData.get(world, chunkBlockPos);
 
@@ -53,541 +53,541 @@ public class GeneratorCorals implements IWorldGenerator {
       final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 
       if ((b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH
-          || b == BiomesWorld.GRAVEL_BEACH) &&
-          world.provider.getDimension() == 0) {
+              || b == BiomesWorld.GRAVEL_BEACH) &&
+              world.provider.getDimension() == 0) {
         if (isValidPosition(world, pos) && pos.getY() < WorldTypeClassic.SEALEVEL - 1
-            && pos.getY() > 119 && floraDensity >= 0.4f &&
-            floraDiversity >= 0.3f && floraDensity <= 0.6f && floraDiversity <= 0.5f
-            && avgTemperature >= 10f && avgTemperature <= 28f &&
-            rainfall >= 150f) {
+                && pos.getY() > 119 && floraDensity >= 0.4f &&
+                floraDiversity >= 0.3f && floraDensity <= 0.6f && floraDiversity <= 0.5f
+                && avgTemperature >= 10f && avgTemperature <= 28f &&
+                rainfall >= 150f) {
           int dyeColorRandom = random.nextInt(16);
           if (dyeColorRandom == 0) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.BLACK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.BLACK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.BLACK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.BLACK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.BLACK)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 1) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 2) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.BROWN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.BROWN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.BROWN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.BROWN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.BROWN)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 3) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.CYAN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.CYAN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.CYAN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.CYAN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.CYAN)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 4) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.GRAY)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.GRAY)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.GRAY)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.GRAY)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.GRAY)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 5) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.GREEN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.GREEN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.GREEN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.GREEN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.GREEN)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 6) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 7) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.LIME).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.LIME).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.LIME).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.LIME).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.LIME).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.LIME).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.LIME).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.LIME).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.LIME).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.LIME).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.LIME)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.LIME)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.LIME)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.LIME)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.LIME)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 8) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.MAGENTA).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.MAGENTA).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.MAGENTA).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.MAGENTA).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.MAGENTA).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.MAGENTA).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 9) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.ORANGE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.ORANGE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.ORANGE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.ORANGE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.ORANGE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.ORANGE)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 10) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.PINK).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.PINK).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.PINK).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.PINK).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.PINK).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.PINK).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.PINK).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.PINK).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.PINK).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.PINK).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.PINK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.PINK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.PINK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.PINK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.PINK)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 11) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.PURPLE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.PURPLE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.PURPLE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.PURPLE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.PURPLE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.PURPLE)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 12) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.RED)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.RED)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.RED).getDefaultState());
             }
           } else if (dyeColorRandom == 13) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.SILVER)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.SILVER)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.SILVER)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.SILVER)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.SILVER)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.SILVER)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 14) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.WHITE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.WHITE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.WHITE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.WHITE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.WHITE)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 15) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.YELLOW)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.YELLOW)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.YELLOW)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.YELLOW)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.YELLOW)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.YELLOW)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           }
         }
@@ -599,539 +599,539 @@ public class GeneratorCorals implements IWorldGenerator {
       final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 
       if ((b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH
-          || b == BiomesWorld.GRAVEL_BEACH) &&
-          world.provider.getDimension() == 0) {
+              || b == BiomesWorld.GRAVEL_BEACH) &&
+              world.provider.getDimension() == 0) {
         if (isValidPosition2(world, pos) && pos.getY() < WorldTypeClassic.SEALEVEL - 1
-            && pos.getY() > 119 && floraDensity >= 0.4f &&
-            floraDiversity >= 0.3f && avgTemperature >= 10f && rainfall >= 150f) {
+                && pos.getY() > 119 && floraDensity >= 0.4f &&
+                floraDiversity >= 0.3f && avgTemperature >= 10f && rainfall >= 150f) {
           int dyeColorRandom = random.nextInt(16);
           if (dyeColorRandom == 0) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.BLACK).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.BLACK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.BLACK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.BLACK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.BLACK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.BLACK)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 1) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.BLUE).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 2) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.BROWN).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.BROWN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.BROWN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.BROWN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.BROWN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.BROWN)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 3) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.CYAN).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.CYAN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.CYAN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.CYAN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.CYAN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.CYAN)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 4) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.GRAY).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.GRAY)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.GRAY)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.GRAY)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.GRAY)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.GRAY)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 5) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.GREEN).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.GREEN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.GREEN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.GREEN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.GREEN)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.GREEN)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 6) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.LIGHT_BLUE)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 7) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.LIME).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.LIME).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.LIME).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.LIME).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.LIME).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.LIME).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.LIME).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.LIME).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.LIME).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.LIME).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.LIME)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.LIME)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.LIME)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.LIME)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.LIME)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 8) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.MAGENTA).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.MAGENTA).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.MAGENTA).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.MAGENTA).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.MAGENTA).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.MAGENTA).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.MAGENTA)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 9) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.ORANGE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.ORANGE).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.ORANGE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.ORANGE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.ORANGE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.ORANGE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.ORANGE)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 10) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.PINK).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.PINK).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.PINK).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.PINK).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.PINK).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.PINK).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.PINK).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.PINK).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.PINK).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.PINK).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.PINK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.PINK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.PINK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.PINK)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.PINK)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 11) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.PURPLE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.PURPLE).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.PURPLE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.PURPLE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.PURPLE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.PURPLE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.PURPLE)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 12) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.RED)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.RED)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.RED).getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.RED).getDefaultState());
+                      BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.RED).getDefaultState());
             }
           } else if (dyeColorRandom == 13) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.SILVER)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.SILVER).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.SILVER)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.SILVER)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.SILVER)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.SILVER)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.SILVER)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 14) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos,
-                  BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
+                      BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.WHITE).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.WHITE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.WHITE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.WHITE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.WHITE)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.WHITE)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           } else if (dyeColorRandom == 15) {
             int coralType = random.nextInt(10);
             if (coralType == 0) {
               world.setBlockState(pos,
-                  BlockCoral.TUBE_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
+                      BlockCoral.TUBE_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
             } else if (coralType == 1) {
               world.setBlockState(pos,
-                  BlockCoral.BRAIN_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
+                      BlockCoral.BRAIN_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
             } else if (coralType == 2) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL.get(EnumDyeColor.YELLOW)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 3) {
               world.setBlockState(pos,
-                  BlockCoral.FIRE_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
+                      BlockCoral.FIRE_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
             } else if (coralType == 4) {
               world.setBlockState(pos,
-                  BlockCoral.HORN_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
+                      BlockCoral.HORN_CORAL.get(EnumDyeColor.YELLOW).getDefaultState());
             } else if (coralType == 5) {
               world.setBlockState(pos, BlockCoral.TUBE_CORAL_FAN.get(EnumDyeColor.YELLOW)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 6) {
               world.setBlockState(pos, BlockCoral.BRAIN_CORAL_FAN.get(EnumDyeColor.YELLOW)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 7) {
               world.setBlockState(pos, BlockCoral.BUBBLE_CORAL_FAN.get(EnumDyeColor.YELLOW)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 8) {
               world.setBlockState(pos, BlockCoral.FIRE_CORAL_FAN.get(EnumDyeColor.YELLOW)
-                  .getDefaultState());
+                      .getDefaultState());
             } else if (coralType == 9) {
               world.setBlockState(pos, BlockCoral.HORN_CORAL_FAN.get(EnumDyeColor.YELLOW)
-                  .getDefaultState());
+                      .getDefaultState());
             }
           }
         }
@@ -1147,11 +1147,11 @@ public class GeneratorCorals implements IWorldGenerator {
     IBlockState east = world.getBlockState(pos.east());
     IBlockState west = world.getBlockState(pos.west());
     return ((BlockUtils.isGround(down) || up.getBlock() instanceof BlockCoralBlock
-        || down.getBlock() instanceof BlockCoralBlock ||
-        north.getBlock() instanceof BlockCoralBlock || south.getBlock() instanceof BlockCoralBlock
-        ||
-        east.getBlock() instanceof BlockCoralBlock || west.getBlock() instanceof BlockCoralBlock)
-        && !(world.isAirBlock(pos.up())));
+            || down.getBlock() instanceof BlockCoralBlock ||
+            north.getBlock() instanceof BlockCoralBlock || south.getBlock() instanceof BlockCoralBlock
+            ||
+            east.getBlock() instanceof BlockCoralBlock || west.getBlock() instanceof BlockCoralBlock)
+            && !(world.isAirBlock(pos.up())));
   }
 
   protected boolean isValidPosition2(World world, BlockPos pos) {
@@ -1162,10 +1162,10 @@ public class GeneratorCorals implements IWorldGenerator {
     IBlockState east = world.getBlockState(pos.east());
     IBlockState west = world.getBlockState(pos.west());
     return (
-        (up.getBlock() instanceof BlockCoralBlock || down.getBlock() instanceof BlockCoralBlock ||
-            north.getBlock() instanceof BlockCoralBlock
-            || south.getBlock() instanceof BlockCoralBlock ||
-            east.getBlock() instanceof BlockCoralBlock
-            || west.getBlock() instanceof BlockCoralBlock) && !(world.isAirBlock(pos.up())));
+            (up.getBlock() instanceof BlockCoralBlock || down.getBlock() instanceof BlockCoralBlock ||
+                    north.getBlock() instanceof BlockCoralBlock
+                    || south.getBlock() instanceof BlockCoralBlock ||
+                    east.getBlock() instanceof BlockCoralBlock
+                    || west.getBlock() instanceof BlockCoralBlock) && !(world.isAirBlock(pos.up())));
   }
 }

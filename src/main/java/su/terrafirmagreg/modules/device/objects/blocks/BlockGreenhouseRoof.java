@@ -27,23 +27,42 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
 
   public static final AxisAlignedBB BASE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
   public static final AxisAlignedBB ROOF_SHAPE_EAST = new AxisAlignedBB(0.5D, 0.5D, 0.0D, 1.0D,
-      1.0D, 0.5D).union(BASE);
+          1.0D, 0.5D).union(BASE);
   public static final AxisAlignedBB ROOF_SHAPE_WEST = new AxisAlignedBB(0.0D, 0.5D, 0.5D, 1.0D,
-      1.0D, 1.0D).union(BASE);
+          1.0D, 1.0D).union(BASE);
   public static final AxisAlignedBB ROOF_SHAPE_SOUTH = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 0.5D,
-      1.0D, 1.0D).union(BASE);
+          1.0D, 1.0D).union(BASE);
   public static final AxisAlignedBB ROOF_SHAPE_NORTH = new AxisAlignedBB(0.5D, 0.5D, 0.0D, 1.0D,
-      1.0D, 1.0D).union(BASE);
+          1.0D, 1.0D).union(BASE);
 
   public BlockGreenhouseRoof() {
 
     getSettings()
-        .registryKey("device/greenhouse/roof");
+            .registryKey("device/greenhouse/roof");
+  }
+
+  @Override
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    if (state.getValue(TOP)) {
+      return BASE;
+    }
+    return switch (state.getValue(FACING)) {
+      case SOUTH -> ROOF_SHAPE_SOUTH;
+      case WEST -> ROOF_SHAPE_WEST;
+      case EAST -> ROOF_SHAPE_EAST;
+      default -> ROOF_SHAPE_NORTH;
+    };
+  }
+
+  @Override
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
+          BlockPos fromPos) {
+    //do nothing, for now
   }
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-      EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+          EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     if (!world.isRemote) {
       ItemStack held = player.getHeldItem(hand);
       if (OreDictionaryHelper.doesStackMatchOre(held, "greenhouse")) {
@@ -71,14 +90,8 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
 
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-      float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+          float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-  }
-
-  @Override
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-      BlockPos fromPos) {
-    //do nothing, for now
   }
 
   @Override
@@ -87,28 +100,15 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
   }
 
   @Override
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    if (state.getValue(TOP)) {
-      return BASE;
-    }
-    return switch (state.getValue(FACING)) {
-      case SOUTH -> ROOF_SHAPE_SOUTH;
-      case WEST -> ROOF_SHAPE_WEST;
-      case EAST -> ROOF_SHAPE_EAST;
-      default -> ROOF_SHAPE_NORTH;
-    };
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
+          EnumFacing face) {
+    return (state.getValue(GLASS) && (face == EnumFacing.DOWN || face == state.getValue(FACING)
+            .getOpposite())) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 
   @Override
   public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-      BlockPos pos) {
+          BlockPos pos) {
     return blockState.getValue(TOP) ? BASE : FULL_BLOCK_AABB;
-  }
-
-  @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-      EnumFacing face) {
-    return (state.getValue(GLASS) && (face == EnumFacing.DOWN || face == state.getValue(FACING)
-        .getOpposite())) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 }

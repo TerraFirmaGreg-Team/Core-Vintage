@@ -77,70 +77,35 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {
     super(Settings.of(Material.IRON));
 
     getSettings()
-        .registryKey("device/fridge")
-        .hardness(3.0F)
-        .nonOpaque()
-        .nonFullCube()
-        .size(Size.HUGE)
-        .weight(Weight.MEDIUM)
-        .nonCanStack();
+            .registryKey("device/fridge")
+            .hardness(3.0F)
+            .nonOpaque()
+            .nonFullCube()
+            .size(Size.HUGE)
+            .weight(Weight.MEDIUM)
+            .nonCanStack();
 
     setHarvestLevel(ToolClasses.PICKAXE, 0);
     setDefaultState(blockState.getBaseState()
-        .withProperty(FACING, NORTH)
-        .withProperty(UPPER, false));
-  }
-
-  public static Vec3d[] getItems(EnumFacing facing) {
-    Vec3d[] items = new Vec3d[8];
-    for (int i = 0; i < 8; i++) {
-      Vec3d itemPos = ITEMS[i];
-      if (facing == EnumFacing.EAST || facing == EnumFacing.WEST) {
-        itemPos = itemPos.rotateYaw((float) Math.toRadians(90D));
-        itemPos = itemPos.add(0, 0, 1);
-      }
-      items[i] = itemPos;
-    }
-    return items;
-  }
-
-  public static int getPlayerLookingItem(BlockPos bottomPos, EntityPlayer player,
-      EnumFacing facing) {
-    double length =
-        Math.sqrt(bottomPos.distanceSqToCenter(player.posX, player.posY, player.posZ)) + 0.7D;
-    Vec3d startPos = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ);
-    Vec3d endPos = startPos.add(
-        new Vec3d(player.getLookVec().x * length, player.getLookVec().y * length,
-            player.getLookVec().z * length));
-    Vec3d[] items = getItems(facing);
-    for (int i = 0; i < 8; i++) {
-      Vec3d itemPos = items[i];
-      AxisAlignedBB offsetAABB = new AxisAlignedBB(itemPos.x, itemPos.y, itemPos.z, itemPos.x,
-          itemPos.y, itemPos.z).grow(0.1D)
-          .offset(bottomPos)
-          .grow(0.002D);
-      if (offsetAABB.calculateIntercept(startPos, endPos) != null) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  @Override
-  public @Nullable BaseItemBlock getItemBlock() {
-    return new ItemBlockFridge(this);
+            .withProperty(FACING, NORTH)
+            .withProperty(UPPER, false));
   }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-        .withProperty(FACING, EnumFacing.byHorizontalIndex(meta))
-        .withProperty(UPPER, meta > 3);
+            .withProperty(FACING, EnumFacing.byHorizontalIndex(meta))
+            .withProperty(UPPER, meta > 3);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
     return state.getValue(FACING).getHorizontalIndex() + (state.getValue(UPPER) ? 4 : 0);
+  }
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, FACING, UPPER);
   }
 
   @Override
@@ -167,7 +132,7 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-      BlockPos fromPos) {
+          BlockPos fromPos) {
     if (!state.getValue(UPPER)) {
       if (worldIn.getBlockState(pos.up()).getBlock() != this) {
         worldIn.setBlockToAir(pos);
@@ -196,7 +161,7 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {
 
   @Override
   public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state,
-      float chance, int fortune) {
+          float chance, int fortune) {
     if (state.getValue(UPPER)) {
       super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
     }
@@ -204,14 +169,14 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-      EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+          EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     BlockPos tilePos = pos;
     if (!state.getValue(UPPER)) {
       tilePos = pos.up();
     }
     var tile = TileUtils.getTile(world, tilePos, TileFridge.class);
     if (tile != null && !tile.isAnimating() && hand == EnumHand.MAIN_HAND
-        && facing == state.getValue(FACING)) {
+            && facing == state.getValue(FACING)) {
       if (tile.isOpen()) {
         int slot = getPlayerLookingItem(tilePos.down(), player, facing);
         ItemStack stack = player.getHeldItem(hand);
@@ -241,14 +206,44 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {
     return false;
   }
 
-  @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, UPPER);
+  public static int getPlayerLookingItem(BlockPos bottomPos, EntityPlayer player,
+          EnumFacing facing) {
+    double length =
+            Math.sqrt(bottomPos.distanceSqToCenter(player.posX, player.posY, player.posZ)) + 0.7D;
+    Vec3d startPos = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ);
+    Vec3d endPos = startPos.add(
+            new Vec3d(player.getLookVec().x * length, player.getLookVec().y * length,
+                    player.getLookVec().z * length));
+    Vec3d[] items = getItems(facing);
+    for (int i = 0; i < 8; i++) {
+      Vec3d itemPos = items[i];
+      AxisAlignedBB offsetAABB = new AxisAlignedBB(itemPos.x, itemPos.y, itemPos.z, itemPos.x,
+              itemPos.y, itemPos.z).grow(0.1D)
+              .offset(bottomPos)
+              .grow(0.002D);
+      if (offsetAABB.calculateIntercept(startPos, endPos) != null) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public static Vec3d[] getItems(EnumFacing facing) {
+    Vec3d[] items = new Vec3d[8];
+    for (int i = 0; i < 8; i++) {
+      Vec3d itemPos = ITEMS[i];
+      if (facing == EnumFacing.EAST || facing == EnumFacing.WEST) {
+        itemPos = itemPos.rotateYaw((float) Math.toRadians(90D));
+        itemPos = itemPos.add(0, 0, 1);
+      }
+      items[i] = itemPos;
+    }
+    return items;
   }
 
   @Override
   public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition,
-      IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles) {
+          IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles) {
     return true;
   }
 
@@ -260,7 +255,7 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {
   @SideOnly(Side.CLIENT)
   @Override
   public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target,
-      ParticleManager manager) {
+          ParticleManager manager) {
     return true;
   }
 
@@ -293,9 +288,14 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {
       @Override
       @NotNull
       public Map<IBlockState, ModelResourceLocation> putStateModelLocations(
-          @NotNull Block blockIn) {
+              @NotNull Block blockIn) {
         return Collections.emptyMap();
       }
     };
+  }
+
+  @Override
+  public @Nullable BaseItemBlock getItemBlock() {
+    return new ItemBlockFridge(this);
   }
 }

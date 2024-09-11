@@ -8,11 +8,11 @@ public class BiomeMeadows extends BaseBiome {
 
   public BiomeMeadows() {
     super(new Settings("Meadows")
-        .guiColour(0x013240)
-        .baseHeight(-1.7F)
-        .heightVariation(-2.88F)
-        .spawnBiome()
-        .enableWorldGen());
+            .guiColour(0x013240)
+            .baseHeight(-1.7F)
+            .heightVariation(-2.88F)
+            .spawnBiome()
+            .enableWorldGen());
   }
 
   @Override
@@ -24,8 +24,8 @@ public class BiomeMeadows extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-        BiomeDictionary.Type.PLAINS,
-        BiomeDictionary.Type.LUSH
+            BiomeDictionary.Type.PLAINS,
+            BiomeDictionary.Type.LUSH
     };
   }
 }

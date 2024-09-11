@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.wood.init.KeybindingsWood;
 import su.terrafirmagreg.modules.wood.network.CSPacketActionKey;
 import su.terrafirmagreg.modules.wood.network.CSPacketOpenCartGui;
 import su.terrafirmagreg.modules.wood.network.CSPacketToggleSlow;
-import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodSupplyCart;
+import su.terrafirmagreg.modules.wood.object.entity.EntityWoodSupplyCart;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -50,8 +50,8 @@ public class KeyEventHandler {
       if (player.getRidingEntity() instanceof EntityWoodSupplyCart entityWoodSupplyCart) {
         event.setCanceled(true);
         player.world.sendPacketToServer(
-            ModuleWood.getPacketService()
-                .getPacketFrom(new CSPacketOpenCartGui(0, entityWoodSupplyCart.getEntityId())));
+                ModuleWood.getPacketService()
+                        .getPacketFrom(new CSPacketOpenCartGui(0, entityWoodSupplyCart.getEntityId())));
       }
     }
   }

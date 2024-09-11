@@ -17,33 +17,33 @@ import org.jetbrains.annotations.NotNull;
 
 public class ItemMug extends ItemJug implements IProviderModel {
 
-    public ItemMug(String name) {
-        super();
-        this.setTranslationKey(name);
-        this.setRegistryName(name);
-        this.setCreativeTab(CreativeTabsTFC.CT_FOOD);
+  public ItemMug(String name) {
+    super();
+    this.setTranslationKey(name);
+    this.setRegistryName(name);
+    this.setCreativeTab(CreativeTabsTFC.CT_FOOD);
 
-        ModItems.ITEMS.add(this);
-    }
+    ModItems.ITEMS.add(this);
+  }
 
-    //TODO: this is hardcoded as Mug should fix
-    @Override
-    @NotNull
-    public String getItemStackDisplayName(@NotNull ItemStack stack) {
-        IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (bucketCap != null) {
-            FluidStack fluidStack = bucketCap.drain(100, false);
-            if (fluidStack != null) {
-                String fluidname = fluidStack.getLocalizedName();
-                return fluidname + " Mug";
-            }
-        }
-        return super.getItemStackDisplayName(stack);
+  //TODO: this is hardcoded as Mug should fix
+  @Override
+  @NotNull
+  public String getItemStackDisplayName(@NotNull ItemStack stack) {
+    IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+    if (bucketCap != null) {
+      FluidStack fluidStack = bucketCap.drain(100, false);
+      if (fluidStack != null) {
+        String fluidname = fluidStack.getLocalizedName();
+        return fluidname + " Mug";
+      }
     }
+    return super.getItemStackDisplayName(stack);
+  }
 
-    @Override
-    public void onModelRegister() {
-        CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
-    }
+  @Override
+  public void onModelRegister() {
+    CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
+  }
 
 }

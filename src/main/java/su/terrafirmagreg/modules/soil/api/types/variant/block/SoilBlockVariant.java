@@ -1,19 +1,20 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.block;
 
-import su.terrafirmagreg.data.lib.Pair;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.types.variant.Variant;
 import su.terrafirmagreg.modules.soil.api.spi.IGrass;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.text.TextComponentTranslation;
 
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import lombok.Getter;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -35,12 +36,17 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
   @Getter
   private static final Set<SoilBlockVariant> variants = new ObjectOpenHashSet<>();
 
+  private final Map<SoilType, Block> map = new Object2ObjectOpenHashMap<>();
 
   private Specification specification = null;
   private BiFunction<SoilBlockVariant, SoilType, ? extends Block> factory;
 
   private SoilBlockVariant(String name) {
     super(name);
+
+    if (!variants.add(this)) {
+      throw new RuntimeException(String.format("Variant: [%s] already exists!", getName()));
+    }
   }
 
   public static SoilBlockVariant builder(String name) {
@@ -57,20 +63,18 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
     return this;
   }
 
-  public SoilBlockVariant build() {
-    if (!variants.add(this)) {
-      throw new RuntimeException(String.format("SoilBlockVariant: [%s] already exists!", getName()));
-    }
+  public SoilBlockVariant build(RegistryManager registry) {
     SoilType.getTypes().forEach(type -> {
-      if (BlocksSoil.SOIL_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
+      if (map.put(type, factory.apply(this, type)) != null) {
         throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
       }
     });
+    registry.blocks(map.values());
     return this;
   }
 
   public Block get(SoilType type) {
-    var block = BlocksSoil.SOIL_BLOCKS.get(Pair.of(this, type));
+    var block = this.map.get(type);
     if (block != null) {
       return block;
     }

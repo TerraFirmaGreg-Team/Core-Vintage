@@ -9,12 +9,12 @@ public class StoragePull implements IStorage<ICapabilityPull> {
 
   @Override
   public NBTBase writeNBT(Capability<ICapabilityPull> capability, ICapabilityPull instance,
-      EnumFacing side) {
+          EnumFacing side) {
     return null;
   }
 
   @Override
   public void readNBT(Capability<ICapabilityPull> capability, ICapabilityPull instance,
-      EnumFacing side, NBTBase nbt) {
+          EnumFacing side, NBTBase nbt) {
   }
 }

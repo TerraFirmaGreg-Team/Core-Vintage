@@ -32,6 +32,15 @@ public final class GameUtils {
   }
 
   /**
+   * Gets the current client difficulty.
+   *
+   * @return The difficulty for the client.
+   */
+  public static EnumDifficulty getClientDifficulty() {
+    return getGameSettings().difficulty;
+  }
+
+  /**
    * Static way to get the game settings.
    *
    * @return The current game settings.
@@ -39,15 +48,6 @@ public final class GameUtils {
   @SideOnly(Side.CLIENT)
   public static GameSettings getGameSettings() {
     return Minecraft.getMinecraft().gameSettings;
-  }
-
-  /**
-   * Gets the current client difficulty.
-   *
-   * @return The difficulty for the client.
-   */
-  public static EnumDifficulty getClientDifficulty() {
-    return getGameSettings().difficulty;
   }
 
   public static String getEnumName(Enum<?> anEnum) {

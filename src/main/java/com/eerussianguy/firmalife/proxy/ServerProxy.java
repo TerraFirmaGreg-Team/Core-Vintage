@@ -11,14 +11,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SuppressWarnings("unused")
 public class ServerProxy extends CommonProxy {
 
-    @Override
-    public void preInit(FMLPreInitializationEvent e) {
-        super.preInit(e);
-    }
+  @Override
+  public void preInit(FMLPreInitializationEvent e) {
+    super.preInit(e);
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void postInit(FMLPostInitializationEvent e) {
+  @SideOnly(Side.CLIENT)
+  @Override
+  public void postInit(FMLPostInitializationEvent e) {
 
-    }
+  }
 }

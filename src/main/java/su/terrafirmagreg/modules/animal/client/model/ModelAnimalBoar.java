@@ -311,9 +311,15 @@ public class ModelAnimalBoar extends ModelBase {
     head.addChild(mouthTop);
   }
 
+  public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    modelRenderer.rotateAngleX = x;
+    modelRenderer.rotateAngleY = y;
+    modelRenderer.rotateAngleZ = z;
+  }
+
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-      float par6, float par7) {
+          float par6, float par7) {
     EntityAnimalBoar hog = ((EntityAnimalBoar) entity);
 
     float percent = (float) hog.getPercentToAdulthood();
@@ -341,7 +347,7 @@ public class ModelAnimalBoar extends ModelBase {
 
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
-      float par6, Entity par7Entity) {
+          float par6, Entity par7Entity) {
     tuskR1.isHidden = true;
     tuskL1.isHidden = true;
 
@@ -349,14 +355,8 @@ public class ModelAnimalBoar extends ModelBase {
     this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
     this.legRFrontTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
     this.legLFrontTop.rotateAngleX =
-        MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
+            MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
     this.legRBackTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
     this.legLBackTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-  }
-
-  public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-    modelRenderer.rotateAngleX = x;
-    modelRenderer.rotateAngleY = y;
-    modelRenderer.rotateAngleZ = z;
   }
 }

@@ -28,48 +28,48 @@ import java.util.List;
 @JEIPlugin
 public class TechJEIPlugin implements IModPlugin {
 
-    @Override
-    public void registerCategories(IRecipeCategoryRegistration registry) {
-        //Add new JEI recipe categories
+  @Override
+  public void registerCategories(IRecipeCategoryRegistration registry) {
+    //Add new JEI recipe categories
 
+  }
+
+  @Override
+  public void register(IModRegistry registry) {
+
+    //Wraps all unmold and casting recipes
+    List<UnmoldRecipeWrapper> unmoldList = new ArrayList<>();
+    List<CastingRecipeWrapper> castingList = new ArrayList<>();
+    TFCRegistries.METALS.getValuesCollection()
+            .forEach(metal -> {
+              if (ObfuscationReflectionHelper.getPrivateValue(Metal.class, metal, "usable").equals(true)) {
+                for (ItemTechMetal.ItemType type : ItemTechMetal.ItemType.values()) {
+                  if (type.hasMold() && ItemTechMetal.get(metal, type) != null) {
+                    unmoldList.add(new UnmoldRecipeWrapper(metal, type));
+                    castingList.add(new CastingRecipeWrapper(metal, type));
+                  }
+                }
+              }
+            });
+
+    // Glass unmolding
+    ItemStack input = new ItemStack(TechItems.MOLD_BLOCK);
+    IFluidHandlerItem cap = input.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+    if (cap != null) {
+      cap.fill(new FluidStack(FluidsTFC.GLASS.get(), 1000), true);
     }
+    unmoldList.add(new UnmoldRecipeWrapper(input, new ItemStack(Blocks.GLASS)));
+    registry.addIngredientInfo(input, VanillaTypes.ITEM, "jei.information.tfctech.fill_mold");
 
-    @Override
-    public void register(IModRegistry registry) {
-
-        //Wraps all unmold and casting recipes
-        List<UnmoldRecipeWrapper> unmoldList = new ArrayList<>();
-        List<CastingRecipeWrapper> castingList = new ArrayList<>();
-        TFCRegistries.METALS.getValuesCollection()
-                .forEach(metal -> {
-                    if (ObfuscationReflectionHelper.getPrivateValue(Metal.class, metal, "usable").equals(true)) {
-                        for (ItemTechMetal.ItemType type : ItemTechMetal.ItemType.values()) {
-                            if (type.hasMold() && ItemTechMetal.get(metal, type) != null) {
-                                unmoldList.add(new UnmoldRecipeWrapper(metal, type));
-                                castingList.add(new CastingRecipeWrapper(metal, type));
-                            }
-                        }
-                    }
-                });
-
-        // Glass unmolding
-        ItemStack input = new ItemStack(TechItems.MOLD_BLOCK);
-        IFluidHandlerItem cap = input.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (cap != null) {
-            cap.fill(new FluidStack(FluidsTFC.GLASS.get(), 1000), true);
-        }
-        unmoldList.add(new UnmoldRecipeWrapper(input, new ItemStack(Blocks.GLASS)));
-        registry.addIngredientInfo(input, VanillaTypes.ITEM, "jei.information.tfctech.fill_mold");
-
-        input = new ItemStack(TechItems.MOLD_PANE);
-        cap = input.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (cap != null) {
-            cap.fill(new FluidStack(FluidsTFC.GLASS.get(), 375), true);
-        }
-        unmoldList.add(new UnmoldRecipeWrapper(input, new ItemStack(Blocks.GLASS_PANE)));
-        registry.addIngredientInfo(input, VanillaTypes.ITEM, "jei.information.tfctech.fill_mold");
-
-        registry.addRecipes(unmoldList, VanillaRecipeCategoryUid.CRAFTING);
-        registry.addRecipes(castingList, "tfc.casting");
+    input = new ItemStack(TechItems.MOLD_PANE);
+    cap = input.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+    if (cap != null) {
+      cap.fill(new FluidStack(FluidsTFC.GLASS.get(), 375), true);
     }
+    unmoldList.add(new UnmoldRecipeWrapper(input, new ItemStack(Blocks.GLASS_PANE)));
+    registry.addIngredientInfo(input, VanillaTypes.ITEM, "jei.information.tfctech.fill_mold");
+
+    registry.addRecipes(unmoldList, VanillaRecipeCategoryUid.CRAFTING);
+    registry.addRecipes(castingList, "tfc.casting");
+  }
 }

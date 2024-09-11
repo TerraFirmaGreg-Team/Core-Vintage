@@ -89,15 +89,6 @@ public class ClientProxy extends CommonProxy {
 
   }
 
-  private void rectangleAt(int x, int y, int width, int height, int color) {
-    GlStateManager.pushMatrix();
-    GlStateManager.enableAlpha();
-    GlStateManager.enableBlend();
-    GlStateManager.resetColor();
-    Gui.drawRect(x, y - height, x + width, y, color);
-    GlStateManager.popMatrix();
-  }
-
   @SubscribeEvent
   public void onClientTick(TickEvent.ClientTickEvent event) {
     ticksSinceLastResponse++;
@@ -242,5 +233,14 @@ public class ClientProxy extends CommonProxy {
       mc.fontRenderer.drawStringWithShadow(text[i], x + 2, y + 14 + 10 * i, 0xffffffff);
     }
     return y;
+  }
+
+  private void rectangleAt(int x, int y, int width, int height, int color) {
+    GlStateManager.pushMatrix();
+    GlStateManager.enableAlpha();
+    GlStateManager.enableBlend();
+    GlStateManager.resetColor();
+    Gui.drawRect(x, y - height, x + width, y, color);
+    GlStateManager.popMatrix();
   }
 }

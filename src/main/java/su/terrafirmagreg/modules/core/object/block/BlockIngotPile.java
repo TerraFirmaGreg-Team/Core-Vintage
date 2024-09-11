@@ -68,24 +68,6 @@ public class BlockIngotPile extends BaseBlock implements IProviderTile {
     return DEFAULT_AABB;
   }
 
-  @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-          EnumFacing face) {
-    var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
-    if (tile != null && tile.getCount() == 64 && face == EnumFacing.UP) {
-      return BlockFaceShape.SOLID;
-    }
-    return BlockFaceShape.UNDEFINED;
-  }
-
-  @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-          BlockPos pos) {
-    var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
-    double y = tile != null ? 0.125 * (tile.getCount() / 8.0) : 1;
-    return new AxisAlignedBB(0d, 0d, 0d, 1d, y, 1d);
-  }
-
   @SideOnly(Side.CLIENT)
   @Override
   public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
@@ -190,6 +172,24 @@ public class BlockIngotPile extends BaseBlock implements IProviderTile {
       return true;
     }
     return false;
+  }
+
+  @Override
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
+          EnumFacing face) {
+    var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
+    if (tile != null && tile.getCount() == 64 && face == EnumFacing.UP) {
+      return BlockFaceShape.SOLID;
+    }
+    return BlockFaceShape.UNDEFINED;
+  }
+
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
+          BlockPos pos) {
+    var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
+    double y = tile != null ? 0.125 * (tile.getCount() / 8.0) : 1;
+    return new AxisAlignedBB(0d, 0d, 0d, 1d, y, 1d);
   }
 
   @Override

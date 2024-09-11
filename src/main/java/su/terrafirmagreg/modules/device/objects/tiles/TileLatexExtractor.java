@@ -56,20 +56,16 @@ public class TileLatexExtractor extends BaseTile implements ITickable {
     return super.writeToNBT(nbt);
   }
 
+  public int getFluidAmount() {
+    return !hasFluid() ? 0 : Math.min(MAX_FLUID, fluid);
+  }
+
   public boolean hasFluid() {
     return fluid > 0 && hasPot();
   }
 
   public boolean hasPot() {
     return pot;
-  }
-
-  public boolean hasBase() {
-    return base;
-  }
-
-  public int getFluidAmount() {
-    return !hasFluid() ? 0 : Math.min(MAX_FLUID, fluid);
   }
 
   /**
@@ -100,10 +96,14 @@ public class TileLatexExtractor extends BaseTile implements ITickable {
   public boolean makeCut() {
     if (flowTicks < 1 && hasPot() && hasBase()) {
       flowTicks =
-          ICalendar.TICKS_IN_DAY / 2 + MathConstants.RNG.nextInt(ICalendar.TICKS_IN_DAY * 2);
+              ICalendar.TICKS_IN_DAY / 2 + MathConstants.RNG.nextInt(ICalendar.TICKS_IN_DAY * 2);
       return true;
     }
     return false;
+  }
+
+  public boolean hasBase() {
+    return base;
   }
 
   public void onBreakBlock() {
@@ -122,46 +122,10 @@ public class TileLatexExtractor extends BaseTile implements ITickable {
     StackUtils.spawnItemStack(world, pos, new ItemStack(TechItems.IRON_GROOVE));
   }
 
-  public boolean isValidPot(ItemStack pot) {
-    return pot.getItem() == TechItems.FLUID_BOWL;
-  }
-
-  public boolean isValidBase(ItemStack base) {
-    return base.getItem() == TechItems.IRON_BOWL_MOUNT;
-  }
-
-  public boolean addPot(ItemStack stack) {
-    if (!hasPot() && hasBase() && isValidPot(stack)) {
-      IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY,
-          null);
-      if (cap != null) {
-        FluidStack fluidStack = cap.drain(MAX_FLUID, false);
-        if (fluidStack != null) {
-          if (fluidStack.getFluid() != FluidsTFC.LATEX.get()) {
-            return false;
-          } else {
-            fluid = Math.min(fluidStack.amount, MAX_FLUID);
-          }
-        }
-      }
-      pot = true;
-      return true;
-    }
-    return false;
-  }
-
-  public boolean addBase(ItemStack stack) {
-    if (!hasBase() && isValidBase(stack)) {
-      base = true;
-      return true;
-    }
-    return false;
-  }
-
   public ItemStack removePot() {
     ItemStack stack = new ItemStack(TechItems.FLUID_BOWL);
     IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY,
-        null);
+            null);
     if (cap != null && hasFluid()) {
       cap.fill(new FluidStack(FluidsTFC.LATEX.get(), fluid), true);
     }
@@ -181,6 +145,42 @@ public class TileLatexExtractor extends BaseTile implements ITickable {
     return ItemStack.EMPTY;
   }
 
+  public boolean addPot(ItemStack stack) {
+    if (!hasPot() && hasBase() && isValidPot(stack)) {
+      IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY,
+              null);
+      if (cap != null) {
+        FluidStack fluidStack = cap.drain(MAX_FLUID, false);
+        if (fluidStack != null) {
+          if (fluidStack.getFluid() != FluidsTFC.LATEX.get()) {
+            return false;
+          } else {
+            fluid = Math.min(fluidStack.amount, MAX_FLUID);
+          }
+        }
+      }
+      pot = true;
+      return true;
+    }
+    return false;
+  }
+
+  public boolean isValidPot(ItemStack pot) {
+    return pot.getItem() == TechItems.FLUID_BOWL;
+  }
+
+  public boolean addBase(ItemStack stack) {
+    if (!hasBase() && isValidBase(stack)) {
+      base = true;
+      return true;
+    }
+    return false;
+  }
+
+  public boolean isValidBase(ItemStack base) {
+    return base.getItem() == TechItems.IRON_BOWL_MOUNT;
+  }
+
   @Override
   public void update() {
     if (!world.isRemote) {
@@ -196,7 +196,7 @@ public class TileLatexExtractor extends BaseTile implements ITickable {
       if (++serverUpdate % 40 == 0) {
         serverUpdate = 0;
         ModuleDevice.getPacketService()
-            .sendToAllAround(new SCPacketLatex(this), world.provider.getDimension(), pos, 64);
+                .sendToAllAround(new SCPacketLatex(this), world.provider.getDimension(), pos, 64);
       }
     }
   }

@@ -41,8 +41,34 @@ public class BlockTurntable extends BlockNonCube {
   }
 
   @Override
+  @SuppressWarnings("deprecation")
+  public IBlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(CLAY_LEVEL, meta);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(CLAY_LEVEL);
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return SHAPE;
+  }
+
+  @Override
+  public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    TETurntable tile = TileUtils.getTile(world, pos, TETurntable.class);
+    if (tile != null) {
+      tile.onBreakBlock(world, pos, state);
+    }
+    super.breakBlock(world, pos, state);
+  }
+
+  @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-      float hitY, float hitZ) {
+          float hitY, float hitZ) {
     if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
       ItemStack held = player.getHeldItem(hand);
       if (player.isSneaking()) {
@@ -82,17 +108,6 @@ public class BlockTurntable extends BlockNonCube {
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(CLAY_LEVEL, meta);
-  }
-
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(CLAY_LEVEL);
-  }
-
-  @Override
   @NotNull
   protected BlockStateContainer createBlockState() {
     return new BlockStateContainer(this, CLAY_LEVEL);
@@ -107,20 +122,5 @@ public class BlockTurntable extends BlockNonCube {
   @Override
   public TileEntity createTileEntity(World world, IBlockState state) {
     return new TETurntable();
-  }
-
-  @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    TETurntable tile = TileUtils.getTile(world, pos, TETurntable.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
-    super.breakBlock(world, pos, state);
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return SHAPE;
   }
 }

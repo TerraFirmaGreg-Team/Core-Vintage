@@ -23,27 +23,6 @@ public class GenLayerRiverMix extends GenLayerBase {
     this.riverPatternGeneratorChain = par4GenLayer;
   }
 
-  public void removeRiver(int index, int biomeToReplaceWith) {
-    if (layerOut[index] == riverID) {
-      if (xn >= 0 && layerBiomes[xn] == biomeToReplaceWith) {
-        layerOut[index] = biomeToReplaceWith;
-      }
-      if (zn >= 0 && layerBiomes[zn] == biomeToReplaceWith) {
-        layerOut[index] = biomeToReplaceWith;
-      }
-      if (xp < layerBiomes.length && layerBiomes[xp] == biomeToReplaceWith) {
-        layerOut[index] = biomeToReplaceWith;
-      }
-      if (zp < layerBiomes.length && layerBiomes[zp] == biomeToReplaceWith) {
-        layerOut[index] = biomeToReplaceWith;
-      }
-    }
-  }
-
-  public boolean inBounds(int index, int[] array) {
-    return index < array.length && index >= 0;
-  }
-
   /**
    * Initialize layer's local worldGenSeed based on its own baseSeed and the world's global seed (passed in as an argument).
    */
@@ -107,5 +86,26 @@ public class GenLayerRiverMix extends GenLayerBase {
       }
     }
     return layerOut.clone();
+  }
+
+  public boolean inBounds(int index, int[] array) {
+    return index < array.length && index >= 0;
+  }
+
+  public void removeRiver(int index, int biomeToReplaceWith) {
+    if (layerOut[index] == riverID) {
+      if (xn >= 0 && layerBiomes[xn] == biomeToReplaceWith) {
+        layerOut[index] = biomeToReplaceWith;
+      }
+      if (zn >= 0 && layerBiomes[zn] == biomeToReplaceWith) {
+        layerOut[index] = biomeToReplaceWith;
+      }
+      if (xp < layerBiomes.length && layerBiomes[xp] == biomeToReplaceWith) {
+        layerOut[index] = biomeToReplaceWith;
+      }
+      if (zp < layerBiomes.length && layerBiomes[zp] == biomeToReplaceWith) {
+        layerOut[index] = biomeToReplaceWith;
+      }
+    }
   }
 }

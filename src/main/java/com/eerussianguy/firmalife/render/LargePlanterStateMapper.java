@@ -11,9 +11,9 @@ import static su.terrafirmagreg.data.Constants.MODID_FL;
 
 public class LargePlanterStateMapper extends StateMapperBase {
 
-    @Override
-    @NotNull
-    protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
-        return new ModelResourceLocation(MODID_FL + ":large_planter");
-    }
+  @Override
+  @NotNull
+  protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
+    return new ModelResourceLocation(MODID_FL + ":large_planter");
+  }
 }

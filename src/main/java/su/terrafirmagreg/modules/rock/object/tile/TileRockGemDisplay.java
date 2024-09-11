@@ -39,20 +39,6 @@ public class TileRockGemDisplay extends BaseTile {
     this.size = 0;
   }
 
-  public boolean isItemEligible(@Nullable ItemStack stack) {
-    if (stack != null && !stack.isEmpty()) {
-      Item item = stack.getItem();
-      if (item instanceof ItemGem) {
-        if (size == 0) {
-          grade = Objects.requireNonNull(Gem.Grade.valueOf(stack.getItemDamage())).ordinal();
-          return true;
-        }
-        return grade == stack.getItemDamage();
-      }
-    }
-    return false;
-  }
-
   public void onBreakBlock() {
     this.items.forEach((i) -> {
       InventoryHelper.spawnItemStack(this.world, this.pos.getX(), this.pos.getY(), this.pos.getZ(),
@@ -101,6 +87,20 @@ public class TileRockGemDisplay extends BaseTile {
     }
     this.markForBlockUpdate();
     return true;
+  }
+
+  public boolean isItemEligible(@Nullable ItemStack stack) {
+    if (stack != null && !stack.isEmpty()) {
+      Item item = stack.getItem();
+      if (item instanceof ItemGem) {
+        if (size == 0) {
+          grade = Objects.requireNonNull(Gem.Grade.valueOf(stack.getItemDamage())).ordinal();
+          return true;
+        }
+        return grade == stack.getItemDamage();
+      }
+    }
+    return false;
   }
 
   public int getMaxStackSize() {

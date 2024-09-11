@@ -56,11 +56,74 @@ public class BlockRockSurface extends BlockRock {
   }
 
   @Override
+  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return STONE_AABB;
+  }
+
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta));
+  }
+
+  @Override
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return STONE_AABB;
+  }
+
+  @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
     if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP)) {
       worldIn.destroyBlock(pos, false);
     }
+  }
+
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return ItemsRock.LOOSE.get(type);
+  }
+
+  @Override
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    IBlockState state = worldIn.getBlockState(pos);
+    IBlockState stateDown = worldIn.getBlockState(pos.down());
+
+    return stateDown.isSideSolid(worldIn, pos, EnumFacing.DOWN) && state.getBlock().equals(Blocks.AIR);
+  }
+
+  @Override
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY,
+          float hitZ) {
+    var itemStack = new ItemStack(ItemsRock.LOOSE.get(type));
+
+    if (player.addItemStackToInventory(itemStack)) {
+      world.setBlockToAir(pos);
+
+      player.swingArm(EnumHand.MAIN_HAND);
+      player.playSound(SoundEvents.ENTITY_ITEMFRAME_REMOVE_ITEM, 1.0f, 1.0f);
+    }
+
+    return true;
+  }
+
+  @Override
+  public BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, HORIZONTAL);
+  }
+
+  @Override
+  public Block.EnumOffsetType getOffsetType() {
+    return Block.EnumOffsetType.XZ;
+  }
+
+  @Override
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    drops.add(new ItemStack(ItemsRock.LOOSE.get(type)));
+  }
+
+  @Override
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    return new ItemStack(ItemsRock.LOOSE.get(type));
   }
 
   @Override
@@ -86,70 +149,7 @@ public class BlockRockSurface extends BlockRock {
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
-    var itemStack = new ItemStack(ItemsRock.LOOSE.get(type));
-
-    if (player.addItemStackToInventory(itemStack)) {
-      world.setBlockToAir(pos);
-
-      player.swingArm(EnumHand.MAIN_HAND);
-      player.playSound(SoundEvents.ENTITY_ITEMFRAME_REMOVE_ITEM, 1.0f, 1.0f);
-    }
-
-    return true;
-  }
-
-  @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return ItemsRock.LOOSE.get(type);
-  }
-
-  @Override
-  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-    drops.add(new ItemStack(ItemsRock.LOOSE.get(type)));
-  }
-
-  @Override
-  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-    return new ItemStack(ItemsRock.LOOSE.get(type));
-  }
-
-  @Override
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return STONE_AABB;
-  }
-
-  @Override
-  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-    return STONE_AABB;
-  }
-
-  @Override
-  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    IBlockState state = worldIn.getBlockState(pos);
-    IBlockState stateDown = worldIn.getBlockState(pos.down());
-
-    return stateDown.isSideSolid(worldIn, pos, EnumFacing.DOWN) && state.getBlock().equals(Blocks.AIR);
-  }
-
-  @Override
-  public Block.EnumOffsetType getOffsetType() {
-    return Block.EnumOffsetType.XZ;
-  }
-
-  @Override
-  public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta));
-  }
-
-  @Override
   public int getMetaFromState(IBlockState state) {
     return state.getValue(HORIZONTAL).getHorizontalIndex();
-  }
-
-  @Override
-  public BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, HORIZONTAL);
   }
 }

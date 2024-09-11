@@ -9,12 +9,12 @@ public class StorageTemperature implements IStorage<ICapabilityTemperature> {
 
   @Override
   public NBTBase writeNBT(Capability<ICapabilityTemperature> capability,
-      ICapabilityTemperature instance, EnumFacing side) {
+          ICapabilityTemperature instance, EnumFacing side) {
     return null;
   }
 
   @Override
   public void readNBT(Capability<ICapabilityTemperature> capability,
-      ICapabilityTemperature instance, EnumFacing side, NBTBase nbt) {
+          ICapabilityTemperature instance, EnumFacing side, NBTBase nbt) {
   }
 }

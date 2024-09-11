@@ -43,90 +43,15 @@ public class BlockRockSpeleothem extends BlockRock {
   }
 
   @Override
-  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    return getBearing(worldIn, pos) > 0;
-  }
-
-  @Override
-  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-          EntityLivingBase placer, ItemStack stack) {
-    var size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
-    worldIn.setBlockState(pos, state.withProperty(SIZE, size));
-  }
-
-  @Override
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
-    int size = state.getValue(SIZE).strength;
-    if (getBearing(worldIn, pos) < size + 1) {
-      worldIn.playEvent(2001, pos, Block.getStateId(worldIn.getBlockState(pos)));
-      dropBlockAsItem(worldIn, pos, state, 0);
-      worldIn.setBlockToAir(pos);
-    }
-  }
-
-  @Override
-  public int quantityDropped(IBlockState state, int fortune, Random random) {
-    return 1 + random.nextInt(3);
-  }
-
-  @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return ItemsRock.LOOSE.get(type);
-  }
-
-  @Override
-  public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-    return true;
-  }
-
-  @Override
-  public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
-    return false;
-  }
-
-  private int getBearing(IBlockAccess world, BlockPos pos) {
-    return Math.max(getStrength(world, pos.down()), getStrength(world, pos.up()));
-  }
-
-  private int getStrength(IBlockAccess world, BlockPos pos) {
-    var state = world.getBlockState(pos);
-    if (state.isFullBlock()) {
-      return 3;
-    }
-
-    if (state.getPropertyKeys().contains(SIZE)) {
-      return state.getValue(SIZE).strength;
-    }
-
-    return 0;
-  }
-
-  @Override
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return state.getValue(SIZE).aabb;
-  }
-
-  @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-          BlockPos pos) {
-    return getBoundingBox(blockState, worldIn, pos);
-  }
-
-  @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state,
           BlockPos blockPos, EnumFacing face) {
     return BlockFaceShape.UNDEFINED;
   }
 
   @Override
-  public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
-    return true;
-  }
-
-  @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, SIZE);
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
+          BlockPos pos) {
+    return getBoundingBox(blockState, worldIn, pos);
   }
 
   @Override
@@ -150,8 +75,83 @@ public class BlockRockSpeleothem extends BlockRock {
     return state.withProperty(SIZE, size);
   }
 
+  @Override
+  public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+    return false;
+  }
+
+  @Override
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return state.getValue(SIZE).aabb;
+  }
+
+  @Override
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
+          BlockPos fromPos) {
+    int size = state.getValue(SIZE).strength;
+    if (getBearing(worldIn, pos) < size + 1) {
+      worldIn.playEvent(2001, pos, Block.getStateId(worldIn.getBlockState(pos)));
+      dropBlockAsItem(worldIn, pos, state, 0);
+      worldIn.setBlockToAir(pos);
+    }
+  }
+
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return ItemsRock.LOOSE.get(type);
+  }
+
+  @Override
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    return getBearing(worldIn, pos) > 0;
+  }
+
+  @Override
+  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
+          EntityLivingBase placer, ItemStack stack) {
+    var size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
+    worldIn.setBlockState(pos, state.withProperty(SIZE, size));
+  }
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, SIZE);
+  }
+
+  @Override
+  public int quantityDropped(IBlockState state, int fortune, Random random) {
+    return 1 + random.nextInt(3);
+  }
+
+  @Override
+  public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+    return true;
+  }
+
+  @Override
+  public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
+    return true;
+  }
+
+  private int getBearing(IBlockAccess world, BlockPos pos) {
+    return Math.max(getStrength(world, pos.down()), getStrength(world, pos.up()));
+  }
+
   private boolean isCenter(IBlockAccess world, BlockPos pos) {
     return isThis(world, pos.down()) && isThis(world, pos.up());
+  }
+
+  private int getStrength(IBlockAccess world, BlockPos pos) {
+    var state = world.getBlockState(pos);
+    if (state.isFullBlock()) {
+      return 3;
+    }
+
+    if (state.getPropertyKeys().contains(SIZE)) {
+      return state.getValue(SIZE).strength;
+    }
+
+    return 0;
   }
 
   private boolean isThis(IBlockAccess world, BlockPos pos) {

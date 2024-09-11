@@ -22,97 +22,99 @@ import java.util.List;
 
 public class PacketStackFood implements IMessage {
 
-    private int slotNumber;
+  private int slotNumber;
 
-    @SuppressWarnings("unused")
-    @Deprecated
-    public PacketStackFood() {
-    }
+  @SuppressWarnings("unused")
+  @Deprecated
+  public PacketStackFood() {
+  }
 
-    public PacketStackFood(int slotNumber) {
-        this.slotNumber = slotNumber;
-    }
+  public PacketStackFood(int slotNumber) {
+    this.slotNumber = slotNumber;
+  }
+
+  @Override
+  public void fromBytes(ByteBuf byteBuf) {
+    slotNumber = byteBuf.readInt();
+  }
+
+  @Override
+  public void toBytes(ByteBuf byteBuf) {
+    byteBuf.writeInt(slotNumber);
+  }
+
+  public static final class Handler implements IMessageHandler<PacketStackFood, IMessage> {
 
     @Override
-    public void fromBytes(ByteBuf byteBuf) {
-        slotNumber = byteBuf.readInt();
-    }
+    public IMessage onMessage(PacketStackFood message, MessageContext ctx) {
+      TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+        EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+        if (player != null) {
+          if (!(player.openContainer instanceof ContainerPlayer) || message.slotNumber < 0 ||
+                  message.slotNumber >= player.openContainer.inventorySlots.size()) {
+            return;
+          }
 
-    @Override
-    public void toBytes(ByteBuf byteBuf) {
-        byteBuf.writeInt(slotNumber);
-    }
+          Slot targetSlot = player.openContainer.getSlot(message.slotNumber);
+          ItemStack targetStack = targetSlot.getStack();
+          IFood targetCap = targetStack.getCapability(CapabilityFood.CAPABILITY, null);
 
-    public static final class Handler implements IMessageHandler<PacketStackFood, IMessage> {
+          if (targetCap == null || targetStack.getMaxStackSize() == targetStack.getCount() || targetCap.isRotten()) {
+            return;
+          }
 
-        @Override
-        public IMessage onMessage(PacketStackFood message, MessageContext ctx) {
-            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-                if (player != null) {
-                    if (!(player.openContainer instanceof ContainerPlayer) || message.slotNumber < 0 ||
-                            message.slotNumber >= player.openContainer.inventorySlots.size()) {
-                        return;
-                    }
+          List<Slot> stackableSlots = getStackableSlots(targetSlot, player.openContainer.inventorySlots);
+          int currentAmount = targetStack.getCount();
+          int remaining = targetStack.getMaxStackSize() - currentAmount;
+          long minCreationDate = targetCap.getCreationDate();
 
-                    Slot targetSlot = player.openContainer.getSlot(message.slotNumber);
-                    ItemStack targetStack = targetSlot.getStack();
-                    IFood targetCap = targetStack.getCapability(CapabilityFood.CAPABILITY, null);
+          Iterator<Slot> slotIterator = stackableSlots.iterator();
+          while (remaining > 0 && slotIterator.hasNext()) {
+            Slot slot = slotIterator.next();
+            ItemStack stack = slot.getStack();
+            IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
 
-                    if (targetCap == null || targetStack.getMaxStackSize() == targetStack.getCount() || targetCap.isRotten()) {
-                        return;
-                    }
-
-                    List<Slot> stackableSlots = getStackableSlots(targetSlot, player.openContainer.inventorySlots);
-                    int currentAmount = targetStack.getCount();
-                    int remaining = targetStack.getMaxStackSize() - currentAmount;
-                    long minCreationDate = targetCap.getCreationDate();
-
-                    Iterator<Slot> slotIterator = stackableSlots.iterator();
-                    while (remaining > 0 && slotIterator.hasNext()) {
-                        Slot slot = slotIterator.next();
-                        ItemStack stack = slot.getStack();
-                        IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
-
-                        if (cap == null || cap.isRotten()) continue;
-
-                        if (cap.getCreationDate() < minCreationDate) {
-                            minCreationDate = cap.getCreationDate();
-                        }
-
-                        if (remaining < stack.getCount()) {
-                            currentAmount += remaining;
-                            stack.shrink(remaining);
-                            remaining = 0;
-                        } else {
-                            currentAmount += stack.getCount();
-                            remaining -= stack.getCount();
-                            stack.shrink(stack.getCount());
-                        }
-                    }
-
-                    targetStack.setCount(currentAmount);
-                    targetCap.setCreationDate(minCreationDate);
-
-                    player.openContainer.onCraftMatrixChanged(((ContainerPlayer) player.openContainer).craftMatrix);
-                }
-            });
-            return null;
-        }
-
-        private List<Slot> getStackableSlots(Slot targetSlot, List<Slot> inventorySlots) {
-            List<Slot> stackableSlots = new ArrayList<>();
-            for (Slot slot : inventorySlots) {
-                if (slot.getSlotIndex() != targetSlot.getSlotIndex() && !(slot instanceof SlotCrafting)) {
-                    ItemStack stack = slot.getStack();
-                    if (CapabilityFood.areStacksStackableExceptCreationDate(targetSlot.getStack(), stack)) {
-                        stackableSlots.add(slot);
-                    }
-                }
+            if (cap == null || cap.isRotten()) {
+              continue;
             }
-            stackableSlots.sort(Comparator.comparingInt(slot -> slot.getStack().getCount()));
-            return stackableSlots;
-        }
 
+            if (cap.getCreationDate() < minCreationDate) {
+              minCreationDate = cap.getCreationDate();
+            }
+
+            if (remaining < stack.getCount()) {
+              currentAmount += remaining;
+              stack.shrink(remaining);
+              remaining = 0;
+            } else {
+              currentAmount += stack.getCount();
+              remaining -= stack.getCount();
+              stack.shrink(stack.getCount());
+            }
+          }
+
+          targetStack.setCount(currentAmount);
+          targetCap.setCreationDate(minCreationDate);
+
+          player.openContainer.onCraftMatrixChanged(((ContainerPlayer) player.openContainer).craftMatrix);
+        }
+      });
+      return null;
     }
+
+    private List<Slot> getStackableSlots(Slot targetSlot, List<Slot> inventorySlots) {
+      List<Slot> stackableSlots = new ArrayList<>();
+      for (Slot slot : inventorySlots) {
+        if (slot.getSlotIndex() != targetSlot.getSlotIndex() && !(slot instanceof SlotCrafting)) {
+          ItemStack stack = slot.getStack();
+          if (CapabilityFood.areStacksStackableExceptCreationDate(targetSlot.getStack(), stack)) {
+            stackableSlots.add(slot);
+          }
+        }
+      }
+      stackableSlots.sort(Comparator.comparingInt(slot -> slot.getStack().getCount()));
+      return stackableSlots;
+    }
+
+  }
 }

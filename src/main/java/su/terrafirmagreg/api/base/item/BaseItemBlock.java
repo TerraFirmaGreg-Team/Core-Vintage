@@ -36,24 +36,8 @@ public class BaseItemBlock extends ItemBlock implements ICapabilitySize {
   }
 
   @Override
-  public IRarity getForgeRarity(ItemStack stack) {
-    return rarity;
-  }
-
-  @Override
   public int getMetadata(int damage) {
     return damage;
-  }
-
-  @Override
-  public String getTranslationKey(ItemStack stack) {
-    if (block instanceof IProviderMultiItemBlock multiItemBlock
-        && multiItemBlock.getTranslationKey(stack.getMetadata()) != null) {
-      return super.getTranslationKey(stack) + "." + multiItemBlock.getTranslationKey(
-          stack.getMetadata());
-    } else {
-      return super.getTranslationKey(stack);
-    }
   }
 
   /**
@@ -62,6 +46,22 @@ public class BaseItemBlock extends ItemBlock implements ICapabilitySize {
   @Override
   public int getItemStackLimit(ItemStack stack) {
     return getWeight(stack).getStackSize();
+  }
+
+  @Override
+  public IRarity getForgeRarity(ItemStack stack) {
+    return rarity;
+  }
+
+  @Override
+  public String getTranslationKey(ItemStack stack) {
+    if (block instanceof IProviderMultiItemBlock multiItemBlock
+            && multiItemBlock.getTranslationKey(stack.getMetadata()) != null) {
+      return super.getTranslationKey(stack) + "." + multiItemBlock.getTranslationKey(
+              stack.getMetadata());
+    } else {
+      return super.getTranslationKey(stack);
+    }
   }
 
 }

@@ -54,122 +54,122 @@ import static su.terrafirmagreg.data.Constants.MOD_VERSION;
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber
 @Mod(modid = MODID_TFC,
-     name = TerraFirmaCraft.MOD_NAME,
-     version = MOD_VERSION,
-     useMetadata = true,
-     guiFactory = GUI_FACTORY,
-     dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
+        name = TerraFirmaCraft.MOD_NAME,
+        version = MOD_VERSION,
+        useMetadata = true,
+        guiFactory = GUI_FACTORY,
+        dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
 public final class TerraFirmaCraft {
 
-    public static final String MOD_NAME = "TerraFirmaCraft";
-    public static final String GUI_FACTORY = "net.dries007.tfc.client.TFCModGuiFactory";
+  public static final String MOD_NAME = "TerraFirmaCraft";
+  public static final String GUI_FACTORY = "net.dries007.tfc.client.TFCModGuiFactory";
 
-    @Mod.Instance(MODID_TFC)
-    private static TerraFirmaCraft INSTANCE = null;
+  @Mod.Instance(MODID_TFC)
+  private static TerraFirmaCraft INSTANCE = null;
 
-    @SidedProxy(modId = MODID_TFC, clientSide = "net.dries007.tfc.proxy.ClientProxy", serverSide = "net.dries007.tfc.proxy.ServerProxy")
-    private static IProxy PROXY = null;
+  @SidedProxy(modId = MODID_TFC, clientSide = "net.dries007.tfc.proxy.ClientProxy", serverSide = "net.dries007.tfc.proxy.ServerProxy")
+  private static IProxy PROXY = null;
 
-    static {
-        FluidRegistry.enableUniversalBucket();
+  static {
+    FluidRegistry.enableUniversalBucket();
+  }
+
+  private final LoggingHelper log = LoggingHelper.of(MODID_TFC);
+  private SimpleNetworkWrapper network;
+
+  public static IProxy getProxy() {
+    return PROXY;
+  }
+
+  public static SimpleNetworkWrapper getNetwork() {
+    return INSTANCE.network;
+  }
+
+  public static TerraFirmaCraft getInstance() {
+    return INSTANCE;
+  }
+
+  @Mod.EventHandler
+  public void preInit(FMLPreInitializationEvent event) {
+    // No need to sync config here, forge magic
+
+    NetworkRegistry.INSTANCE.registerGuiHandler(this, new TFCGuiHandler());
+    network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID_TFC);
+    int id = 0;
+    // Received on server
+    network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, ++id, Side.SERVER);
+    network.registerMessage(new PacketPlaceBlockSpecial.Handler(), PacketPlaceBlockSpecial.class, ++id, Side.SERVER);
+    network.registerMessage(new PacketSwitchPlayerInventoryTab.Handler(), PacketSwitchPlayerInventoryTab.class, ++id, Side.SERVER);
+    network.registerMessage(new PacketOpenCraftingGui.Handler(), PacketOpenCraftingGui.class, ++id, Side.SERVER);
+    network.registerMessage(new PacketCycleItemMode.Handler(), PacketCycleItemMode.class, ++id, Side.SERVER);
+    network.registerMessage(new PacketStackFood.Handler(), PacketStackFood.class, ++id, Side.SERVER);
+
+    // Received on client
+    network.registerMessage(new PacketChunkData.Handler(), PacketChunkData.class, ++id, Side.CLIENT);
+    network.registerMessage(new PacketCapabilityContainerUpdate.Handler(), PacketCapabilityContainerUpdate.class, ++id, Side.CLIENT);
+    network.registerMessage(new PacketCalendarUpdate.Handler(), PacketCalendarUpdate.class, ++id, Side.CLIENT);
+    network.registerMessage(new PacketFoodStatsUpdate.Handler(), PacketFoodStatsUpdate.class, ++id, Side.CLIENT);
+    network.registerMessage(new PacketFoodStatsReplace.Handler(), PacketFoodStatsReplace.class, ++id, Side.CLIENT);
+    network.registerMessage(new PacketPlayerDataUpdate.Handler(), PacketPlayerDataUpdate.class, ++id, Side.CLIENT);
+    network.registerMessage(new PacketSpawnTFCParticle.Handler(), PacketSpawnTFCParticle.class, ++id, Side.CLIENT);
+    network.registerMessage(new PacketSimpleMessage.Handler(), PacketSimpleMessage.class, ++id, Side.CLIENT);
+    network.registerMessage(new PacketProspectResult.Handler(), PacketProspectResult.class, ++id, Side.CLIENT);
+
+    EntitiesTFC.preInit();
+    //JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
+
+    CapabilityForgeable.preInit();
+    CapabilityFood.preInit();
+
+    if (event.getSide().isClient()) {
+      ClientEvents.preInit();
     }
+  }
 
-    private final LoggingHelper log = LoggingHelper.of(MODID_TFC);
-    private SimpleNetworkWrapper network;
+  @Mod.EventHandler
+  public void init(FMLInitializationEvent event) {
 
-    public static LoggingHelper getLog() {
-        return INSTANCE.log;
-    }
+    ItemsTFC.init();
 
-    public static IProxy getProxy() {
-        return PROXY;
-    }
-
-    public static SimpleNetworkWrapper getNetwork() {
-        return INSTANCE.network;
-    }
-
-    public static TerraFirmaCraft getInstance() {
-        return INSTANCE;
-    }
-
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        // No need to sync config here, forge magic
-
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new TFCGuiHandler());
-        network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID_TFC);
-        int id = 0;
-        // Received on server
-        network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, ++id, Side.SERVER);
-        network.registerMessage(new PacketPlaceBlockSpecial.Handler(), PacketPlaceBlockSpecial.class, ++id, Side.SERVER);
-        network.registerMessage(new PacketSwitchPlayerInventoryTab.Handler(), PacketSwitchPlayerInventoryTab.class, ++id, Side.SERVER);
-        network.registerMessage(new PacketOpenCraftingGui.Handler(), PacketOpenCraftingGui.class, ++id, Side.SERVER);
-        network.registerMessage(new PacketCycleItemMode.Handler(), PacketCycleItemMode.class, ++id, Side.SERVER);
-        network.registerMessage(new PacketStackFood.Handler(), PacketStackFood.class, ++id, Side.SERVER);
-
-        // Received on client
-        network.registerMessage(new PacketChunkData.Handler(), PacketChunkData.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketCapabilityContainerUpdate.Handler(), PacketCapabilityContainerUpdate.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketCalendarUpdate.Handler(), PacketCalendarUpdate.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketFoodStatsUpdate.Handler(), PacketFoodStatsUpdate.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketFoodStatsReplace.Handler(), PacketFoodStatsReplace.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketPlayerDataUpdate.Handler(), PacketPlayerDataUpdate.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketSpawnTFCParticle.Handler(), PacketSpawnTFCParticle.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketSimpleMessage.Handler(), PacketSimpleMessage.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketProspectResult.Handler(), PacketProspectResult.class, ++id, Side.CLIENT);
-
-        EntitiesTFC.preInit();
-        //JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
-
-        CapabilityForgeable.preInit();
-        CapabilityFood.preInit();
-
-        if (event.getSide().isClient()) {
-            ClientEvents.preInit();
+    if (event.getSide().isClient()) {
+      TFCKeybindings.init();
+    } else {
+      MinecraftServer server = FMLServerHandler.instance().getServer();
+      if (server instanceof DedicatedServer dedicatedServer) {
+        PropertyManager settings = dedicatedServer.settings;
+        if (ConfigTFC.General.OVERRIDES.forceTFCWorldType) {
+          // This is called before vanilla defaults it, meaning we intercept it's default with ours
+          // However, we can't actually set this due to fears of overriding the existing world
+          TerraFirmaCraft.getLog().info("Setting default level-type to `tfg:classic`");
+          settings.getStringProperty("level-type", "tfg:classic");
         }
+      }
     }
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
+    FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "net.dries007.tfc.compat.waila.TOPPlugin");
+  }
 
-        ItemsTFC.init();
+  public static LoggingHelper getLog() {
+    return INSTANCE.log;
+  }
 
-        if (event.getSide().isClient()) {
-            TFCKeybindings.init();
-        } else {
-            MinecraftServer server = FMLServerHandler.instance().getServer();
-            if (server instanceof DedicatedServer dedicatedServer) {
-                PropertyManager settings = dedicatedServer.settings;
-                if (ConfigTFC.General.OVERRIDES.forceTFCWorldType) {
-                    // This is called before vanilla defaults it, meaning we intercept it's default with ours
-                    // However, we can't actually set this due to fears of overriding the existing world
-                    TerraFirmaCraft.getLog().info("Setting default level-type to `tfg:classic`");
-                    settings.getStringProperty("level-type", "tfg:classic");
-                }
-            }
-        }
+  @Mod.EventHandler
+  public void postInit(FMLPostInitializationEvent event) {
+    FuelManager.postInit();
+    //JsonConfigRegistry.INSTANCE.postInit();
+  }
 
-        FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "net.dries007.tfc.compat.waila.TOPPlugin");
-    }
+  @Mod.EventHandler
+  public void onLoadComplete(FMLLoadCompleteEvent event) {
+    // This is the latest point that we can possibly stop creating non-decaying stacks on both server + client
+    // It should be safe to use as we're only using it internally
+    FoodHandler.setNonDecaying(false);
+  }
 
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        FuelManager.postInit();
-        //JsonConfigRegistry.INSTANCE.postInit();
-    }
+  @Mod.EventHandler
+  public void onServerStarting(FMLServerStartingEvent event) {
 
-    @Mod.EventHandler
-    public void onLoadComplete(FMLLoadCompleteEvent event) {
-        // This is the latest point that we can possibly stop creating non-decaying stacks on both server + client
-        // It should be safe to use as we're only using it internally
-        FoodHandler.setNonDecaying(false);
-    }
-
-    @Mod.EventHandler
-    public void onServerStarting(FMLServerStartingEvent event) {
-
-        // Initialize calendar for the current server
-        Calendar.INSTANCE.init(event.getServer());
-    }
+    // Initialize calendar for the current server
+    Calendar.INSTANCE.init(event.getServer());
+  }
 }

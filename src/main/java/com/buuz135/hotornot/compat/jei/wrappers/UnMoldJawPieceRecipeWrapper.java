@@ -17,22 +17,22 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 
 public class UnMoldJawPieceRecipeWrapper implements IRecipeWrapper {
 
-    private final ItemStack input = new ItemStack(HONItems.TONGS_JAW_FIRED_MOLD);
+  private final ItemStack input = new ItemStack(HONItems.TONGS_JAW_FIRED_MOLD);
 
-    private final ItemStack output;
+  private final ItemStack output;
 
-    public UnMoldJawPieceRecipeWrapper(final Metal metal) {
-        final IFluidHandler fluidHandler = input.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (fluidHandler instanceof IMoldHandler) {
-            fluidHandler.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100), true);
-        }
-
-        this.output = new ItemStack(ItemMetalTongsHead.get(metal));
+  public UnMoldJawPieceRecipeWrapper(final Metal metal) {
+    final IFluidHandler fluidHandler = input.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+    if (fluidHandler instanceof IMoldHandler) {
+      fluidHandler.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100), true);
     }
 
-    @Override
-    public void getIngredients(final IIngredients iIngredients) {
-        iIngredients.setInput(VanillaTypes.ITEM, input);
-        iIngredients.setOutput(VanillaTypes.ITEM, output);
-    }
+    this.output = new ItemStack(ItemMetalTongsHead.get(metal));
+  }
+
+  @Override
+  public void getIngredients(final IIngredients iIngredients) {
+    iIngredients.setInput(VanillaTypes.ITEM, input);
+    iIngredients.setOutput(VanillaTypes.ITEM, output);
+  }
 }

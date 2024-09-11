@@ -53,7 +53,7 @@ public class PathEventHandler {
       double player_distance_X = player.posX - player.prevPosX;
       double player_distance_Z = player.posZ - player.prevPosZ;
       double player_speed_current = MathHelper.sqrt(
-          player_distance_X * player_distance_X + player_distance_Z * player_distance_Z);
+              player_distance_X * player_distance_X + player_distance_Z * player_distance_Z);
 
       // UPDATE PLAYER SPEED ON UPDATE PACKET
       if (player_speed_current > 0.0) {
@@ -73,14 +73,14 @@ public class PathEventHandler {
       if (!world.isRemote && state.getBlock() instanceof ISoilBlock soil && player_speed > 0.2) {
 
         if (player_random < ConfigSoil.BLOCKS.PATH.PLAYER_GRASS_TO_DIRT
-            && soil.getVariant() == GRASS ||
-            soil.getVariant() == DRY_GRASS) {
+                && soil.getVariant() == GRASS ||
+                soil.getVariant() == DRY_GRASS) {
           world.setBlockState(posPlayer, DIRT.get(soil.getType()).getDefaultState());
           if (ConfigSoil.BLOCKS.PATH.DESTROY_VEGETATION) {
             BlockPos upPos = posPlayer.up();
             Material upMaterial = world.getBlockState(upPos).getMaterial();
             if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(
-                upPos).getBlock() instanceof BlockPlacedItemFlat) {
+                    upPos).getBlock() instanceof BlockPlacedItemFlat) {
               world.destroyBlock(upPos, true);
             }
           }
@@ -88,7 +88,7 @@ public class PathEventHandler {
         }
 
         if (player_random < ConfigSoil.BLOCKS.PATH.PLAYER_DIRT_TO_PATH
-            && soil.getVariant() == DIRT) {
+                && soil.getVariant() == DIRT) {
           world.setBlockState(posPlayer, GRASS_PATH.get(soil.getType()).getDefaultState());
           return;
         }
@@ -110,8 +110,8 @@ public class PathEventHandler {
         // MOB MATH
         double mob_random = Math.random() * 1000.0D + 1.0D;
         double mob_speed = Math.sqrt(
-            entity.motionX * entity.motionX + entity.motionY * entity.motionY
-                + entity.motionZ * entity.motionZ);
+                entity.motionX * entity.motionX + entity.motionY * entity.motionY
+                        + entity.motionZ * entity.motionZ);
 
         if (ConfigCore.MISC.DEBUG.enable) {
           if (mob_debug_cooldown == 0) {
@@ -126,14 +126,14 @@ public class PathEventHandler {
         if (!world.isRemote && state.getBlock() instanceof ISoilBlock soil && mob_speed > 0.08) {
 
           if (mob_random < ConfigSoil.BLOCKS.PATH.MOB_GRASS_TO_DIRT && soil.getVariant() == GRASS ||
-              soil.getVariant() == DRY_GRASS) {
+                  soil.getVariant() == DRY_GRASS) {
             world.setBlockState(posEntity, DIRT.get(soil.getType()).getDefaultState());
             if (ConfigSoil.BLOCKS.PATH.DESTROY_VEGETATION) {
               BlockPos upPos = posEntity.up();
               Material upMaterial = world.getBlockState(upPos).getMaterial();
               if (upMaterial == Material.PLANTS || upMaterial == Material.VINE
-                  || world.getBlockState(upPos)
-                  .getBlock() instanceof BlockPlacedItemFlat) {
+                      || world.getBlockState(upPos)
+                      .getBlock() instanceof BlockPlacedItemFlat) {
                 world.destroyBlock(upPos, true);
               }
             }
@@ -141,7 +141,7 @@ public class PathEventHandler {
           }
 
           if (mob_random < ConfigSoil.BLOCKS.PATH.MOB_DIRT_TO_PATH && soil.getVariant() == DIRT ||
-              soil.getVariant() == COARSE_DIRT) {
+                  soil.getVariant() == COARSE_DIRT) {
             world.setBlockState(posEntity, GRASS_PATH.get(soil.getType()).getDefaultState());
           }
         }

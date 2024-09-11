@@ -55,21 +55,21 @@ import java.util.function.BiConsumer;
 import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, IPredator,
-    EntityAnimalAIStandAttack.IEntityStandAttack {
+        EntityAnimalAIStandAttack.IEntityStandAttack {
 
   private static final int DAYS_TO_ADULTHOOD = 180;
   //Values that has a visual effect on client
   private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(
-      EntityAnimalPolarBear.class, DataSerializers.BOOLEAN);
+          EntityAnimalPolarBear.class, DataSerializers.BOOLEAN);
   private static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(
-      EntityAnimalPolarBear.class, DataSerializers.VARINT);
+          EntityAnimalPolarBear.class, DataSerializers.VARINT);
 
   private int warningSoundTicks = 0;
 
   @SuppressWarnings("unused")
   public EntityAnimalPolarBear(World world) {
     this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-        EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+            EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
   public EntityAnimalPolarBear(World world, IAnimal.Gender gender, int birthDay) {
@@ -82,9 +82,25 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
   }
 
   @Override
+  public void setGrowingAge(int age) {
+    super.setGrowingAge(0); // Ignoring this
+  }
+
+  @Override
+  public boolean isChild() {
+    return this.getAge() == IAnimal.Age.CHILD;
+  }
+
+  @Override
+  public void setScaleForAge(boolean child) {
+    double ageScale = 1 / (2.0D - getPercentToAdulthood());
+    this.setScale((float) ageScale);
+  }
+
+  @Override
   public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
     return new EntityAnimalPolarBear(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-        (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
+            (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
   }
 
   @Override
@@ -92,14 +108,14 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
     EntityAIWander wander = new EntityAnimalAIWanderHuntArea(this, 1.0D);
     this.tasks.addTask(0, new EntityAISwimming(this));
     this.tasks.addTask(1,
-        new EntityAnimalAIStandAttack<>(this, 1.2D, 2.0D,
-            EntityAnimalAIAttackMelee.AttackBehavior.DAYLIGHT_ONLY).setWanderAI(wander));
+            new EntityAnimalAIStandAttack<>(this, 1.2D, 2.0D,
+                    EntityAnimalAIAttackMelee.AttackBehavior.DAYLIGHT_ONLY).setWanderAI(wander));
     this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
     this.tasks.addTask(5, wander);
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
     this.tasks.addTask(7, new EntityAILookIdle(this));
     this.targetTasks.addTask(1,
-        new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+            new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
     int priority = 2;
     for (String input : ConfigAnimal.ENTITIES.POLAR_BEAR.huntCreatures) {
@@ -110,8 +126,8 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
         if (EntityLivingBase.class.isAssignableFrom(entityClass)) {
           //noinspection unchecked
           this.targetTasks.addTask(priority++,
-              new EntityAINearestAttackableTarget<>(this, (Class<EntityLivingBase>) entityClass,
-                  false));
+                  new EntityAINearestAttackableTarget<>(this, (Class<EntityLivingBase>) entityClass,
+                          false));
         }
       }
     }
@@ -153,12 +169,12 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
   @Override
   public boolean attackEntityAsMob(@NotNull Entity entityIn) {
     double attackDamage = this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE)
-        .getAttributeValue();
+            .getAttributeValue();
     if (this.isChild()) {
       attackDamage /= 2;
     }
     boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this),
-        (float) attackDamage);
+            (float) attackDamage);
     if (flag) {
       this.applyEnchantments(this, entityIn);
     }
@@ -178,6 +194,16 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
     }
   }
 
+  @NotNull
+  @Override
+  public String getName() {
+    if (this.hasCustomName()) {
+      return this.getCustomNameTag();
+    } else {
+      return getAnimalName().getFormattedText();
+    }
+  }
+
   @Override
   public IAnimal.Gender getGender() {
     return IAnimal.Gender.valueOf(this.dataManager.get(GENDER));
@@ -186,6 +212,11 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
   @Override
   public void setGender(IAnimal.Gender gender) {
     this.dataManager.set(GENDER, gender.toBool());
+  }
+
+  @Override
+  public float getAdultFamiliarityCap() {
+    return 0;
   }
 
   @Override
@@ -199,8 +230,8 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
   }
 
   @Override
-  public float getAdultFamiliarityCap() {
-    return 0;
+  public int getDaysToAdulthood() {
+    return DAYS_TO_ADULTHOOD;
   }
 
   @Override
@@ -222,18 +253,13 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
   }
 
   @Override
-  public int getDaysToAdulthood() {
-    return DAYS_TO_ADULTHOOD;
+  public boolean isHungry() {
+    return false;
   }
 
   @Override
   public int getDaysToElderly() {
     return 0;
-  }
-
-  @Override
-  public boolean isHungry() {
-    return false;
   }
 
   @Override
@@ -245,41 +271,15 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
     return new TextComponentTranslation(
-        ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
-  }
-
-  @Override
-  public void setGrowingAge(int age) {
-    super.setGrowingAge(0); // Ignoring this
-  }
-
-  @Override
-  public boolean isChild() {
-    return this.getAge() == IAnimal.Age.CHILD;
-  }
-
-  @Override
-  public void setScaleForAge(boolean child) {
-    double ageScale = 1 / (2.0D - getPercentToAdulthood());
-    this.setScale((float) ageScale);
-  }
-
-  @NotNull
-  @Override
-  public String getName() {
-    if (this.hasCustomName()) {
-      return this.getCustomNameTag();
-    } else {
-      return getAnimalName().getFormattedText();
-    }
+            ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
   }
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TUNDRA || biomeType == BiomeHelper.BiomeType.TAIGA)) {
+            (biomeType == BiomeHelper.BiomeType.TUNDRA || biomeType == BiomeHelper.BiomeType.TAIGA)) {
       return ConfigAnimal.ENTITIES.POLAR_BEAR.rarity;
     }
     return 0;
@@ -325,9 +325,9 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-        && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-        && !this.world.containsAnyLiquid(getEntityBoundingBox())
-        && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+            && !this.world.containsAnyLiquid(getEntityBoundingBox())
+            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @Override

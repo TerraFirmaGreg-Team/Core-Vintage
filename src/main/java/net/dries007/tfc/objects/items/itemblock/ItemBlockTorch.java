@@ -18,43 +18,43 @@ import static su.terrafirmagreg.data.Properties.LIT;
 
 public class ItemBlockTorch extends ItemBlockTFC {
 
-    public ItemBlockTorch(Block block) {
-        super(block);
-    }
+  public ItemBlockTorch(Block block) {
+    super(block);
+  }
 
-    @Override
-    public boolean onEntityItemUpdate(EntityItem entityItem) {
-        BlockPos pos = entityItem.getPosition().down();
-        World world = entityItem.getEntityWorld();
-        IBlockState state = entityItem.getEntityWorld().getBlockState(pos);
+  @Override
+  public boolean onEntityItemUpdate(EntityItem entityItem) {
+    BlockPos pos = entityItem.getPosition().down();
+    World world = entityItem.getEntityWorld();
+    IBlockState state = entityItem.getEntityWorld().getBlockState(pos);
 
-        if (state.getBlock() == BlocksDevice.LOG_PILE || state.getBlock() == BlocksDevice.PIT_KILN) {
-            int count = entityItem.getEntityData().getInteger("torchCount");
-            if (count > 160) {
-                if (state.getBlock() == BlocksDevice.LOG_PILE) {
-                    world.setBlockState(pos, state.withProperty(LIT, true));
-                    var tile = TileUtils.getTile(world, pos, TileLogPile.class);
-                    if (tile != null) {
-                        tile.light();
-                    }
-                    if (Blocks.FIRE.canPlaceBlockAt(world, pos.up())) {
-                        world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
-                    }
-                } else if (state.getBlock() == BlocksDevice.PIT_KILN) {
-                    var tile = TileUtils.getTile(world, pos, TilePitKiln.class);
-                    if (tile != null) {
-                        tile.tryLight();
-                    }
-                }
-                entityItem.setDead();
-            } else {
-                if (Math.random() <= 0.1) {
-                    world.spawnParticle(EnumParticleTypes.LAVA, entityItem.posX, entityItem.posY, entityItem.posZ,
-                            -0.5F + Math.random(), -0.5F + Math.random(), -0.5F + Math.random());
-                }
-                entityItem.getEntityData().setInteger("torchCount", count + 1);
-            }
+    if (state.getBlock() == BlocksDevice.LOG_PILE || state.getBlock() == BlocksDevice.PIT_KILN) {
+      int count = entityItem.getEntityData().getInteger("torchCount");
+      if (count > 160) {
+        if (state.getBlock() == BlocksDevice.LOG_PILE) {
+          world.setBlockState(pos, state.withProperty(LIT, true));
+          var tile = TileUtils.getTile(world, pos, TileLogPile.class);
+          if (tile != null) {
+            tile.light();
+          }
+          if (Blocks.FIRE.canPlaceBlockAt(world, pos.up())) {
+            world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
+          }
+        } else if (state.getBlock() == BlocksDevice.PIT_KILN) {
+          var tile = TileUtils.getTile(world, pos, TilePitKiln.class);
+          if (tile != null) {
+            tile.tryLight();
+          }
         }
-        return super.onEntityItemUpdate(entityItem);
+        entityItem.setDead();
+      } else {
+        if (Math.random() <= 0.1) {
+          world.spawnParticle(EnumParticleTypes.LAVA, entityItem.posX, entityItem.posY, entityItem.posZ,
+                  -0.5F + Math.random(), -0.5F + Math.random(), -0.5F + Math.random());
+        }
+        entityItem.getEntityData().setInteger("torchCount", count + 1);
+      }
     }
+    return super.onEntityItemUpdate(entityItem);
+  }
 }

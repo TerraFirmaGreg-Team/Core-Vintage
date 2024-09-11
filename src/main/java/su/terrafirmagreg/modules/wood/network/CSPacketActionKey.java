@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.network;
 
 import su.terrafirmagreg.modules.core.capabilities.pull.CapabilityPull;
-import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
+import su.terrafirmagreg.modules.wood.object.entity.EntityWoodCart;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -33,8 +33,8 @@ public class CSPacketActionKey implements IMessage, IMessageHandler<CSPacketActi
     EntityPlayerMP sender = ctx.getServerHandler().player;
     sender.getServerWorld().addScheduledTask(() -> {
       List<EntityWoodCart> result = sender.getServerWorld()
-          .getEntitiesWithinAABB(EntityWoodCart.class, sender.getEntityBoundingBox()
-              .grow(3), entity -> entity != sender.getRidingEntity() && entity.isEntityAlive());
+              .getEntitiesWithinAABB(EntityWoodCart.class, sender.getEntityBoundingBox()
+                      .grow(3), entity -> entity != sender.getRidingEntity() && entity.isEntityAlive());
       if (!result.isEmpty()) {
         Entity target = sender.isRiding() ? sender.getRidingEntity() : sender;
         EntityWoodCart closest = result.get(0);
@@ -44,9 +44,9 @@ public class CSPacketActionKey implements IMessage, IMessageHandler<CSPacketActi
             return;
           }
           if (new Vec3d(cart.posX - sender.posX, cart.posY - sender.posY,
-              cart.posZ - sender.posZ).length() <
-              new Vec3d(closest.posX - sender.posX, closest.posY - sender.posY,
-                  closest.posZ - sender.posZ).length()) {
+                  cart.posZ - sender.posZ).length() <
+                  new Vec3d(closest.posX - sender.posX, closest.posY - sender.posY,
+                          closest.posZ - sender.posZ).length()) {
             closest = cart;
           }
         }

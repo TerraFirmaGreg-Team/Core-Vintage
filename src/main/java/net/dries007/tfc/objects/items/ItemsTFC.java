@@ -339,6 +339,35 @@ public final class ItemsTFC {
 
   }
 
+  private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {
+    item.setRegistryName(MODID_TFC, name);
+    item.setTranslationKey(MODID_TFC + "." + name.replace('/', '.'));
+    item.setCreativeTab(ct);
+    r.register(item);
+    return item;
+  }
+
+  @SuppressWarnings("ConstantConditions")
+  private static void registerItemBlock(IForgeRegistry<Item> r, ItemBlock item) {
+    item.setRegistryName(item.getBlock().getRegistryName());
+    item.setCreativeTab(item.getBlock().getCreativeTab());
+    r.register(item);
+  }
+
+  private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired, ItemPottery unfiredItem,
+          ItemPottery firedItem) {
+    register(r, nameFired, firedItem, CT_POTTERY);
+    register(r, nameUnfired, unfiredItem, CT_POTTERY);
+
+    if (items != null) {
+      items.add(firedItem, unfiredItem);
+    }
+  }
+
+  private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired) {
+    registerPottery(items, r, nameUnfired, nameFired, new ItemPottery(), new ItemPottery());
+  }
+
   @SuppressWarnings("ConstantConditions")
   @SubscribeEvent(priority = EventPriority.LOWEST)
   public static void registerVanillaOverrides(RegistryEvent.Register<Item> event) {
@@ -360,34 +389,5 @@ public final class ItemsTFC {
         metal.getToolMetal().setRepairItem(new ItemStack(ItemMetal.get(metal, Metal.ItemType.SCRAP)));
       }
     }
-  }
-
-  private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired) {
-    registerPottery(items, r, nameUnfired, nameFired, new ItemPottery(), new ItemPottery());
-  }
-
-  private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired, ItemPottery unfiredItem,
-          ItemPottery firedItem) {
-    register(r, nameFired, firedItem, CT_POTTERY);
-    register(r, nameUnfired, unfiredItem, CT_POTTERY);
-
-    if (items != null) {
-      items.add(firedItem, unfiredItem);
-    }
-  }
-
-  @SuppressWarnings("ConstantConditions")
-  private static void registerItemBlock(IForgeRegistry<Item> r, ItemBlock item) {
-    item.setRegistryName(item.getBlock().getRegistryName());
-    item.setCreativeTab(item.getBlock().getCreativeTab());
-    r.register(item);
-  }
-
-  private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {
-    item.setRegistryName(MODID_TFC, name);
-    item.setTranslationKey(MODID_TFC + "." + name.replace('/', '.'));
-    item.setCreativeTab(ct);
-    r.register(item);
-    return item;
   }
 }

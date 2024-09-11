@@ -16,27 +16,27 @@ import org.jetbrains.annotations.NotNull;
 @MethodsReturnNonnullByDefault
 public class ItemTwig extends ItemBlockTFC {
 
-    public ItemTwig(BlockTwig block) {
-        super(block);
-        OreDictionaryHelper.register(this, "wood");
-        OreDictionaryHelper.register(this, "wood_twig");
-        OreDictionaryHelper.register(this, "twig");
-        OreDictionaryHelper.register(this, "wood_stick");
-        OreDictionaryHelper.register(this, "stick");
-    }
+  public ItemTwig(BlockTwig block) {
+    super(block);
+    OreDictionaryHelper.register(this, "wood");
+    OreDictionaryHelper.register(this, "wood_twig");
+    OreDictionaryHelper.register(this, "twig");
+    OreDictionaryHelper.register(this, "wood_stick");
+    OreDictionaryHelper.register(this, "stick");
+  }
 
-    @Override
-    public @NotNull Size getSize(ItemStack stack) {
-        return Size.SMALL;
-    }
+  @Override
+  public int getItemStackLimit(ItemStack stack) {
+    return getStackSize(stack);
+  }
 
-    @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return Weight.LIGHT;
-    }
+  @Override
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.LIGHT;
+  }
 
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return getStackSize(stack);
-    }
+  @Override
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.SMALL;
+  }
 }

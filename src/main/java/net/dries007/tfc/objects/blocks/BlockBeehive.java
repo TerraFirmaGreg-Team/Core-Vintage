@@ -52,11 +52,11 @@ public class BlockBeehive extends Block implements ICapabilitySize {
 
   public static final PropertyInteger STAGE = Properties.STAGE;
   private static final Vec3i[] VECTORS = {
-      new Vec3i(0, -1, 0),
-      new Vec3i(-1, -1, 0),
-      new Vec3i(0, -1, -1),
-      new Vec3i(1, -1, 0),
-      new Vec3i(0, -1, 1)
+          new Vec3i(0, -1, 0),
+          new Vec3i(-1, -1, 0),
+          new Vec3i(0, -1, -1),
+          new Vec3i(1, -1, 0),
+          new Vec3i(0, -1, 1)
   };
 
   public BlockBeehive() {
@@ -67,59 +67,22 @@ public class BlockBeehive extends Block implements ICapabilitySize {
     setDefaultState(blockState.getBaseState().withProperty(STAGE, 0));
   }
 
-  private static int countFlowers(World world, BlockPos pos) {
-    int flowers = 0;
-    BlockPos searchPos;
-    for (int x = -4; x <= 4; x++) {
-      for (int y = -1; y <= 1; y++) {
-        for (int z = -4; z <= 4; z++) {
-          if (flowers == 10) {
-            return flowers;
-          }
-          searchPos = pos.add(x, y, z);
-          Block block = world.getBlockState(searchPos).getBlock();
-          if (block instanceof BlockPlantTFC) {
-            if (((BlockPlantTFC) block).getPlant().getPlantType() == Plant.PlantType.STANDARD) {
-              flowers++;
-            }
-          } else if (block instanceof BlockFlowerPotTFC || block instanceof BlockBushTrellis || block instanceof BlockLargePlanter ||
-              block instanceof BlockHangingPlanter) {
-            flowers++;
-          }
-        }
-      }
-    }
-    return flowers;
-  }
-
-  private static boolean isNotCalm(World world, BlockPos pos, IBlockState state) {
-    if (state.getValue(STAGE) == 0 || !world.isDaytime()) {
-      return false;
-    }
-    for (Vec3i v : VECTORS) {
-      BlockPos searchPos = pos.add(v);
-      IBlockState searchState = world.getBlockState(searchPos);
-      if (searchState.getBlock() instanceof BlockFirePit && searchState.getValue(LIT)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  @SideOnly(Side.CLIENT)
   @Override
-  public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-    if (state.getValue(STAGE) > 0 && world.isDaytime()) {
-      double x = pos.getX() + 0.5;
-      double y = pos.getY() + 0.5;
-      double z = pos.getZ() + 0.5;
-      for (int i = 0; i < 3 + rand.nextInt(4); i++) {
-        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + rand.nextFloat() - rand.nextFloat(), y + rand.nextFloat(),
-            z + rand.nextFloat() - rand.nextFloat(),
-            0.5 * (rand.nextFloat() - rand.nextFloat()), 0.5 * (rand.nextFloat() - rand.nextFloat()),
-            0.5 * (rand.nextFloat() - rand.nextFloat()));
-      }
-    }
+  @SuppressWarnings("deprecation")
+  public IBlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(STAGE, meta);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(STAGE);
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  @NotNull
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.MODEL;
   }
 
   @Override
@@ -148,20 +111,32 @@ public class BlockBeehive extends Block implements ICapabilitySize {
     }
   }
 
-  private boolean isValid(World world, BlockPos pos, TEHangingPlanter tile) {
-    return tile.isClimateValid() || Climate.getDailyTemp(world, pos) > 10;
+  @SideOnly(Side.CLIENT)
+  @Override
+  public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+    if (state.getValue(STAGE) > 0 && world.isDaytime()) {
+      double x = pos.getX() + 0.5;
+      double y = pos.getY() + 0.5;
+      double z = pos.getZ() + 0.5;
+      for (int i = 0; i < 3 + rand.nextInt(4); i++) {
+        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + rand.nextFloat() - rand.nextFloat(), y + rand.nextFloat(),
+                z + rand.nextFloat() - rand.nextFloat(),
+                0.5 * (rand.nextFloat() - rand.nextFloat()), 0.5 * (rand.nextFloat() - rand.nextFloat()),
+                0.5 * (rand.nextFloat() - rand.nextFloat()));
+      }
+    }
   }
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-      float hitY, float hitZ) {
+          float hitY, float hitZ) {
     if (world.isRemote || hand == EnumHand.OFF_HAND) {
       return false;
     }
     if (state.getValue(STAGE) == 2) {
       world.setBlockState(pos, state.withProperty(STAGE, 1));
       Item giveItem =
-          !OreDictionaryHelper.doesStackMatchOre(player.getHeldItem(hand), "knife") ? ItemsFL.getFood(FoodFL.RAW_HONEY) : ItemsFL.HONEYCOMB;
+              !OreDictionaryHelper.doesStackMatchOre(player.getHeldItem(hand), "knife") ? ItemsFL.getFood(FoodFL.RAW_HONEY) : ItemsFL.HONEYCOMB;
       ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(giveItem));
       if (isNotCalm(world, pos, state)) {
         player.addPotionEffect(new PotionEffect(PotionsCore.SWARM, 30 * 20));
@@ -175,12 +150,18 @@ public class BlockBeehive extends Block implements ICapabilitySize {
     return false;
   }
 
-  @Override
-  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
-    if (isNotCalm(world, pos, state)) {
-      player.addPotionEffect(new PotionEffect(PotionsCore.SWARM, 30 * 20));
+  private static boolean isNotCalm(World world, BlockPos pos, IBlockState state) {
+    if (state.getValue(STAGE) == 0 || !world.isDaytime()) {
+      return false;
     }
-    return super.removedByPlayer(state, world, pos, player, willHarvest);
+    for (Vec3i v : VECTORS) {
+      BlockPos searchPos = pos.add(v);
+      IBlockState searchState = world.getBlockState(searchPos);
+      if (searchState.getBlock() instanceof BlockFirePit && searchState.getValue(LIT)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @Override
@@ -189,31 +170,11 @@ public class BlockBeehive extends Block implements ICapabilitySize {
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(STAGE, meta);
-  }
-
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(STAGE);
-  }
-
-  @Override
-  public @NotNull Size getSize(@NotNull ItemStack stack) {
-    return Size.NORMAL;
-  }
-
-  @Override
-  public @NotNull Weight getWeight(@NotNull ItemStack stack) {
-    return Weight.HEAVY;
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  @NotNull
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
+  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+    if (isNotCalm(world, pos, state)) {
+      player.addPotionEffect(new PotionEffect(PotionsCore.SWARM, 30 * 20));
+    }
+    return super.removedByPlayer(state, world, pos, player, willHarvest);
   }
 
   @Override
@@ -225,5 +186,44 @@ public class BlockBeehive extends Block implements ICapabilitySize {
   @Override
   public TileEntity createTileEntity(World world, IBlockState state) {
     return new TEHangingPlanter();
+  }
+
+  private boolean isValid(World world, BlockPos pos, TEHangingPlanter tile) {
+    return tile.isClimateValid() || Climate.getDailyTemp(world, pos) > 10;
+  }
+
+  private static int countFlowers(World world, BlockPos pos) {
+    int flowers = 0;
+    BlockPos searchPos;
+    for (int x = -4; x <= 4; x++) {
+      for (int y = -1; y <= 1; y++) {
+        for (int z = -4; z <= 4; z++) {
+          if (flowers == 10) {
+            return flowers;
+          }
+          searchPos = pos.add(x, y, z);
+          Block block = world.getBlockState(searchPos).getBlock();
+          if (block instanceof BlockPlantTFC) {
+            if (((BlockPlantTFC) block).getPlant().getPlantType() == Plant.PlantType.STANDARD) {
+              flowers++;
+            }
+          } else if (block instanceof BlockFlowerPotTFC || block instanceof BlockBushTrellis || block instanceof BlockLargePlanter ||
+                  block instanceof BlockHangingPlanter) {
+            flowers++;
+          }
+        }
+      }
+    }
+    return flowers;
+  }
+
+  @Override
+  public @NotNull Weight getWeight(@NotNull ItemStack stack) {
+    return Weight.HEAVY;
+  }
+
+  @Override
+  public @NotNull Size getSize(@NotNull ItemStack stack) {
+    return Size.NORMAL;
   }
 }

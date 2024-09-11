@@ -56,8 +56,8 @@ import java.util.List;
 // TODO делать отдельный класс для каменной наковали, без интерфейса
 
 public class TileMetalAnvil
-    extends BaseTileInventory
-    implements IProviderContainer<ContainerMetalAnvil, GuiMetalAnvil> {
+        extends BaseTileInventory
+        implements IProviderContainer<ContainerMetalAnvil, GuiMetalAnvil> {
 
   public static final int WORK_MAX = 145;
   public static final int SLOT_INPUT_1 = 0;
@@ -78,18 +78,6 @@ public class TileMetalAnvil
     this.recipe = null;
   }
 
-  // TODO попробовать int
-  public Metal.Tier getTier() {
-    IBlockState state = world.getBlockState(pos);
-    //        if (state.getBlock() instanceof BlockMetalAnvil anvil) {
-    //            return anvil.getType()
-    //                    .getMaterial()
-    //                    .getProperty(TFGPropertyKey.HEAT)
-    //                    .getTier();
-    //        }
-    return Metal.Tier.TIER_0;
-  }
-
   @Nullable
   public IAnvilRecipe getRecipe() {
     return recipe;
@@ -98,41 +86,6 @@ public class TileMetalAnvil
   @NotNull
   public ForgeSteps getSteps() {
     return steps;
-  }
-
-  /**
-   * Sets the anvil TE recipe, called after pressing the recipe button This is the ONLY place that should write to {@link this#recipe}
-   *
-   * @param recipe the recipe to set to
-   * @return true if a packet needs to be sent to the client for a recipe update
-   */
-  public boolean setRecipe(@Nullable IAnvilRecipe recipe) {
-    ItemStack stack = inventory.getStackInSlot(SLOT_INPUT_1);
-    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-    boolean recipeChanged;
-
-    if (cap != null && recipe != null) {
-      // Update recipe in both
-      recipeChanged = this.recipe != recipe;
-      cap.setRecipe(recipe);
-      this.recipe = recipe;
-
-      // Update server side fields
-      workingProgress = cap.getWork();
-      steps = cap.getSteps().copy();
-
-      workingTarget = recipe.getTarget(world.getSeed());
-    } else {
-      // Set recipe to null because either item is missing, or it was requested
-      recipeChanged = this.recipe != null;
-      this.recipe = null;
-      if (cap != null) {
-        cap.reset();
-      }
-      resetFields();
-    }
-
-    return recipeChanged;
   }
 
   /**
@@ -178,6 +131,64 @@ public class TileMetalAnvil
     return super.writeToNBT(nbt);
   }
 
+  private void checkRecipeUpdate() {
+    ItemStack stack = inventory.getStackInSlot(SLOT_INPUT_1);
+    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    if (cap == null && recipe != null) {
+      // Check for item removed / broken
+      setRecipe(null);
+    } else if (cap != null) {
+      // Check for mismatched recipe
+      IAnvilRecipe capRecipe = AnvilRecipeManager.findMatchingRecipe(cap.getRecipeName());
+      if (capRecipe != recipe) {
+        setRecipe(capRecipe);
+      } else if (AnvilRecipeManager.getAllFor(stack).size() == 1) {
+        setRecipe(AnvilRecipeManager.getAllFor(stack).get(0));
+      }
+    }
+  }
+
+  /**
+   * Sets the anvil TE recipe, called after pressing the recipe button This is the ONLY place that should write to {@link this#recipe}
+   *
+   * @param recipe the recipe to set to
+   * @return true if a packet needs to be sent to the client for a recipe update
+   */
+  public boolean setRecipe(@Nullable IAnvilRecipe recipe) {
+    ItemStack stack = inventory.getStackInSlot(SLOT_INPUT_1);
+    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    boolean recipeChanged;
+
+    if (cap != null && recipe != null) {
+      // Update recipe in both
+      recipeChanged = this.recipe != recipe;
+      cap.setRecipe(recipe);
+      this.recipe = recipe;
+
+      // Update server side fields
+      workingProgress = cap.getWork();
+      steps = cap.getSteps().copy();
+
+      workingTarget = recipe.getTarget(world.getSeed());
+    } else {
+      // Set recipe to null because either item is missing, or it was requested
+      recipeChanged = this.recipe != null;
+      this.recipe = null;
+      if (cap != null) {
+        cap.reset();
+      }
+      resetFields();
+    }
+
+    return recipeChanged;
+  }
+
+  private void resetFields() {
+    workingProgress = 0;
+    workingTarget = 0;
+    steps.reset();
+  }
+
   @Override
   public int getSlotLimit(int slot) {
     return slot == SLOT_FLUX ? super.getSlotLimit(slot) : 1;
@@ -220,7 +231,7 @@ public class TileMetalAnvil
         int workMin = workingTarget - ConfigTFC.General.DIFFICULTY.acceptableAnvilRange;
         int workMax = workingTarget + ConfigTFC.General.DIFFICULTY.acceptableAnvilRange;
         if ((workingProgress <= workMax && workingProgress >= workMin) && completedRecipe.matches(
-            steps)) {
+                steps)) {
           //Consume input
           inventory.setStackInSlot(SLOT_INPUT_1, ItemStack.EMPTY);
 
@@ -259,7 +270,7 @@ public class TileMetalAnvil
           IAnvilRecipe newRecipe = null;
           if (inventory.getStackInSlot(SLOT_INPUT_2).isEmpty()) {
             List<IAnvilRecipe> recipes = AnvilRecipeManager.getAllFor(
-                inventory.getStackInSlot(SLOT_INPUT_1));
+                    inventory.getStackInSlot(SLOT_INPUT_1));
             if (recipes.size() == 1) {
               newRecipe = recipes.get(0);
             }
@@ -269,7 +280,7 @@ public class TileMetalAnvil
           // Consume input, produce no output
           inventory.setStackInSlot(SLOT_INPUT_1, ItemStack.EMPTY);
           world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0f,
-              1.0f);
+                  1.0f);
         }
       }
       markForSync();
@@ -284,7 +295,7 @@ public class TileMetalAnvil
    */
   public boolean attemptWelding(EntityPlayer player) {
     ItemStack input1 = inventory.getStackInSlot(SLOT_INPUT_1), input2 = inventory.getStackInSlot(
-        SLOT_INPUT_2);
+            SLOT_INPUT_2);
     if (input1.isEmpty() || input2.isEmpty()) {
       // No message as this will happen whenever the player clicks the anvil with a hammer
       return false;
@@ -297,10 +308,10 @@ public class TileMetalAnvil
       if (fluxStack.isEmpty()) {
         // No flux
         ModuleMetal.getPacketService()
-            .sendTo(
-                SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
-                    ModUtils.localize("tooltip", "metal.anvil_no_flux")),
-                (EntityPlayerMP) player);
+                .sendTo(
+                        SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
+                                ModUtils.localize("tooltip", "metal.anvil_no_flux")),
+                        (EntityPlayerMP) player);
         return false;
       }
 
@@ -310,15 +321,15 @@ public class TileMetalAnvil
       if (cap1 == null || cap2 == null || !cap1.isWeldable() || !cap2.isWeldable()) {
         if (cap1 instanceof ICapabilityHeat && cap2 instanceof ICapabilityHeat) {
           ModuleMetal.getPacketService()
-              .sendTo(SCPacketSimpleMessage.translateMessage(
-                      SCPacketSimpleMessage.MessageCategory.ANVIL,
-                      ModUtils.localize("tooltip", "metal.anvil_too_cold")),
-                  (EntityPlayerMP) player);
+                  .sendTo(SCPacketSimpleMessage.translateMessage(
+                                  SCPacketSimpleMessage.MessageCategory.ANVIL,
+                                  ModUtils.localize("tooltip", "metal.anvil_too_cold")),
+                          (EntityPlayerMP) player);
         } else {
           ModuleMetal.getPacketService().sendTo(
-              SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
-                  ModUtils.localize("tooltip", "metal.anvil_not_weldable")),
-              (EntityPlayerMP) player);
+                  SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
+                          ModUtils.localize("tooltip", "metal.anvil_not_weldable")),
+                  (EntityPlayerMP) player);
         }
         return false;
       }
@@ -347,45 +358,21 @@ public class TileMetalAnvil
 
     // For when there is both inputs but no recipe that matches
     ModuleMetal.getPacketService().sendTo(
-        SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
-            ModUtils.localize("tooltip", "anvil_not_weldable")), (EntityPlayerMP) player);
+            SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
+                    ModUtils.localize("tooltip", "anvil_not_weldable")), (EntityPlayerMP) player);
     return false;
   }
 
-  private void checkRecipeUpdate() {
-    ItemStack stack = inventory.getStackInSlot(SLOT_INPUT_1);
-    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-    if (cap == null && recipe != null) {
-      // Check for item removed / broken
-      setRecipe(null);
-    } else if (cap != null) {
-      // Check for mismatched recipe
-      IAnvilRecipe capRecipe = AnvilRecipeManager.findMatchingRecipe(cap.getRecipeName());
-      if (capRecipe != recipe) {
-        setRecipe(capRecipe);
-      } else if (AnvilRecipeManager.getAllFor(stack).size() == 1) {
-        setRecipe(AnvilRecipeManager.getAllFor(stack).get(0));
-      }
-    }
-  }
-
-  private void resetFields() {
-    workingProgress = 0;
-    workingTarget = 0;
-    steps.reset();
-  }
-
-  @Override
-  public ContainerMetalAnvil getContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
-    return new ContainerMetalAnvil(inventoryPlayer, this);
-  }
-
-  @Override
-  public GuiMetalAnvil getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
-    return new GuiMetalAnvil(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-        this);
+  // TODO попробовать int
+  public Metal.Tier getTier() {
+    IBlockState state = world.getBlockState(pos);
+    //        if (state.getBlock() instanceof BlockMetalAnvil anvil) {
+    //            return anvil.getType()
+    //                    .getMaterial()
+    //                    .getProperty(TFGPropertyKey.HEAT)
+    //                    .getTier();
+    //        }
+    return Metal.Tier.TIER_0;
   }
 
   private static class AnvilItemHandler extends ItemStackHandlerCallback {
@@ -400,7 +387,7 @@ public class TileMetalAnvil
       if (slot == SLOT_INPUT_1 || slot == SLOT_INPUT_2) {
         IForgeable cap = result.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
         if (cap != null && cap.getRecipeName() != null && (!cap.getSteps().hasWork()
-            || cap.getWork() == 0)) {
+                || cap.getWork() == 0)) {
           cap.reset();
         }
 
@@ -408,5 +395,19 @@ public class TileMetalAnvil
       return result;
     }
   }
+
+  @Override
+  public ContainerMetalAnvil getContainer(InventoryPlayer inventoryPlayer, World world,
+          IBlockState state, BlockPos pos) {
+    return new ContainerMetalAnvil(inventoryPlayer, this);
+  }
+
+  @Override
+  public GuiMetalAnvil getGuiContainer(InventoryPlayer inventoryPlayer, World world,
+          IBlockState state, BlockPos pos) {
+    return new GuiMetalAnvil(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
+            this);
+  }
+
 
 }

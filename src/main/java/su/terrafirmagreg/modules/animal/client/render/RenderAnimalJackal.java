@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class RenderAnimalJackal extends RenderLiving<EntityAnimalJackal> {
 
   private static final ResourceLocation TEXTURE = ModUtils.resource(
-      "textures/entity/animal/predators/jackal.png");
+          "textures/entity/animal/predators/jackal.png");
 
   public RenderAnimalJackal(RenderManager renderManager) {
     super(renderManager, new ModelAnimalJackal(), 0.7F);
@@ -27,7 +27,7 @@ public class RenderAnimalJackal extends RenderLiving<EntityAnimalJackal> {
 
   @Override
   public void doRender(@NotNull EntityAnimalJackal jackal, double par2, double par4, double par6,
-      float par8, float par9) {
+          float par8, float par9) {
     this.shadowSize = (float) (0.35f + (jackal.getPercentToAdulthood() * 0.35f));
     super.doRender(jackal, par2, par4, par6, par8, par9);
   }

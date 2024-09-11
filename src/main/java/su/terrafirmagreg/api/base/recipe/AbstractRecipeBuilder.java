@@ -22,10 +22,6 @@ public abstract class AbstractRecipeBuilder<T> implements IRecipeBuilder<T> {
   protected final FluidStackList fluidOutput = new FluidStackList();
   protected ResourceLocation name;
 
-  public String getRecipeNamePrefix() {
-    return "tfg/";
-  }
-
   public AbstractRecipeBuilder<T> name(String name) {
     if (name.contains(":")) {
       this.name = new ResourceLocation(name);
@@ -40,15 +36,15 @@ public abstract class AbstractRecipeBuilder<T> implements IRecipeBuilder<T> {
     return this;
   }
 
-  public AbstractRecipeBuilder<T> input(IIngredient ingredient) {
-    this.input.add(ingredient);
-    return this;
-  }
-
   public AbstractRecipeBuilder<T> input(IIngredient... ingredients) {
     for (IIngredient ingredient : ingredients) {
       input(ingredient);
     }
+    return this;
+  }
+
+  public AbstractRecipeBuilder<T> input(IIngredient ingredient) {
+    this.input.add(ingredient);
     return this;
   }
 
@@ -59,15 +55,15 @@ public abstract class AbstractRecipeBuilder<T> implements IRecipeBuilder<T> {
     return this;
   }
 
-  public AbstractRecipeBuilder<T> output(ItemStack output) {
-    this.output.add(output);
-    return this;
-  }
-
   public AbstractRecipeBuilder<T> output(ItemStack... outputs) {
     for (ItemStack output : outputs) {
       output(output);
     }
+    return this;
+  }
+
+  public AbstractRecipeBuilder<T> output(ItemStack output) {
+    this.output.add(output);
     return this;
   }
 
@@ -78,15 +74,15 @@ public abstract class AbstractRecipeBuilder<T> implements IRecipeBuilder<T> {
     return this;
   }
 
-  public AbstractRecipeBuilder<T> fluidInput(FluidStack ingredient) {
-    this.fluidInput.add(ingredient);
-    return this;
-  }
-
   public AbstractRecipeBuilder<T> fluidInput(FluidStack... ingredients) {
     for (FluidStack ingredient : ingredients) {
       fluidInput(ingredient);
     }
+    return this;
+  }
+
+  public AbstractRecipeBuilder<T> fluidInput(FluidStack ingredient) {
+    this.fluidInput.add(ingredient);
     return this;
   }
 
@@ -97,15 +93,15 @@ public abstract class AbstractRecipeBuilder<T> implements IRecipeBuilder<T> {
     return this;
   }
 
-  public AbstractRecipeBuilder<T> fluidOutput(FluidStack output) {
-    this.fluidOutput.add(output);
-    return this;
-  }
-
   public AbstractRecipeBuilder<T> fluidOutput(FluidStack... outputs) {
     for (FluidStack output : outputs) {
       fluidOutput(output);
     }
+    return this;
+  }
+
+  public AbstractRecipeBuilder<T> fluidOutput(FluidStack output) {
+    this.fluidOutput.add(output);
     return this;
   }
 
@@ -125,6 +121,10 @@ public abstract class AbstractRecipeBuilder<T> implements IRecipeBuilder<T> {
     if (name == null) {
       name = RecipeName.generateRl(getRecipeNamePrefix());
     }
+  }
+
+  public String getRecipeNamePrefix() {
+    return "tfg/";
   }
 
 }

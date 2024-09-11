@@ -1142,6 +1142,7 @@ public final class ItemsTFCF {
   public static final ItemArmorTFCF YUCCA_CANVAS_LEGGINGS = Helpers.getNull();
   @GameRegistry.ObjectHolder("armor/boots/yucca_canvas")
   public static final ItemArmorTFCF YUCCA_CANVAS_BOOTS = Helpers.getNull();
+  private static final Map<FruitsTFCF, Item> driedFruits = new HashMap<>();
   @Getter
   private static ImmutableList<Item> allSimpleItems;
   @Getter
@@ -1154,7 +1155,6 @@ public final class ItemsTFCF {
   private static ImmutableList<Item> allCeramicMoldItems;
   @Getter
   private static ImmutableList<ItemArmorTFCF> allArmorItems;
-  private static final Map<FruitsTFCF, Item> driedFruits = new HashMap<>();
 
   public static Item getDriedFruit(FruitsTFCF fruit) {
     return driedFruits.get(fruit);
@@ -2251,6 +2251,21 @@ public final class ItemsTFCF {
     allArmorItems = armorItems.build();
   }
 
+  private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {
+    item.setRegistryName(MODID_TFCF, name);
+    item.setTranslationKey(MODID_TFCF + "." + name.replace('/', '.'));
+    item.setCreativeTab(ct);
+    r.register(item);
+    return item;
+  }
+
+  @SuppressWarnings("ConstantConditions")
+  private static void registerItemBlock(IForgeRegistry<Item> r, ItemBlock item) {
+    item.setRegistryName(item.getBlock().getRegistryName());
+    item.setCreativeTab(item.getBlock().getCreativeTab());
+    r.register(item);
+  }
+
   @SuppressWarnings("ConstantConditions")
   @SubscribeEvent(priority = EventPriority.LOWEST)
   public static void registerVanillaOverrides(RegistryEvent.Register<Item> event) {
@@ -2284,20 +2299,5 @@ public final class ItemsTFCF {
     if (items != null) {
       items.add(firedItem, unfiredItem);
     }
-  }
-
-  private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {
-    item.setRegistryName(MODID_TFCF, name);
-    item.setTranslationKey(MODID_TFCF + "." + name.replace('/', '.'));
-    item.setCreativeTab(ct);
-    r.register(item);
-    return item;
-  }
-
-  @SuppressWarnings("ConstantConditions")
-  private static void registerItemBlock(IForgeRegistry<Item> r, ItemBlock item) {
-    item.setRegistryName(item.getBlock().getRegistryName());
-    item.setCreativeTab(item.getBlock().getCreativeTab());
-    r.register(item);
   }
 }

@@ -86,6 +86,86 @@ public class TileOven extends BaseTileInventory implements ITickable, IAmbiental
     }
   }
 
+  public boolean isCuringRecipe() {
+    if (recipeExists()) {
+      ItemStack input = inventory.getStackInSlot(SLOT_MAIN);
+      return input.isItemEqual(new ItemStack(ItemsCore.STRAW));
+    }
+    return false;
+  }
+
+  private void cureSelfWallsAndChimney() {
+    IBlockState state = world.getBlockState(pos);
+    if (!isCuredBlock(state)) {
+      world.setBlockState(pos, state.withProperty(CURED, true));
+    }
+    for (EnumFacing side : EnumFacing.HORIZONTALS) {
+      BlockPos changePos = pos.offset(side);
+      IBlockState changeState = world.getBlockState(changePos);
+      if (changeState.getBlock() instanceof BlockOvenWall && !isCuredBlock(changeState)) {
+        world.setBlockState(changePos, changeState.withProperty(CURED, true));
+      }
+    }
+    BlockPos chimPos = pos.up();
+    while (world.getBlockState(chimPos).getBlock() instanceof BlockOvenChimney) {
+      world.setBlockState(chimPos, world.getBlockState(chimPos).withProperty(CURED, true));
+      chimPos = chimPos.up();
+    }
+  }
+
+  private void cook() {
+    ItemStack input = inventory.getStackInSlot(SLOT_MAIN);
+    if (!input.isEmpty()) {
+      OvenRecipe recipe = OvenRecipe.get(input);
+      if (recipe != null && !world.isRemote) {
+        inventory.setStackInSlot(SLOT_MAIN,
+                CapabilityFood.updateFoodFromPrevious(input, recipe.getOutputItem(input)));
+        inventory.setStackInSlot(SLOT_FUEL_1, ItemStack.EMPTY);
+        inventory.setStackInSlot(SLOT_FUEL_2, ItemStack.EMPTY);
+        setAndUpdateSlots(SLOT_MAIN);
+        setAndUpdateSlots(SLOT_FUEL_1);
+        setAndUpdateSlots(SLOT_FUEL_2);
+      }
+      turnOff();
+    }
+  }
+
+  public void turnOff() {
+    world.setBlockState(pos, world.getBlockState(pos).withProperty(LIT, false));
+    isBurning = false;
+    startTick = 0;
+    tickGoal = 0;
+    offTick = Calendar.PLAYER_TIME.getTicks();
+    isWarmed = false;
+    markDirty();
+  }
+
+  private void clear() {
+    inventory.setStackInSlot(SLOT_MAIN, ItemStack.EMPTY);
+    inventory.setStackInSlot(SLOT_FUEL_1, ItemStack.EMPTY);
+    inventory.setStackInSlot(SLOT_FUEL_2, ItemStack.EMPTY);
+    setAndUpdateSlots(SLOT_MAIN);
+    setAndUpdateSlots(SLOT_FUEL_1);
+    setAndUpdateSlots(SLOT_FUEL_2);
+  }
+
+  private boolean recipeExists() {
+    ItemStack input = inventory.getStackInSlot(SLOT_MAIN);
+    OvenRecipe recipe = null;
+    if (!input.isEmpty() && !world.isRemote) {
+      recipe = OvenRecipe.get(input);
+    }
+    return recipe != null;
+  }
+
+  private boolean isCuredBlock(IBlockState state) {
+    if ((state.getBlock() instanceof BlockOven || state.getBlock() instanceof BlockOvenChimney)
+            || state.getBlock() instanceof BlockOvenWall) {
+      return state.getValue(CURED);
+    }
+    return false;
+  }
+
   @Override
   public int getSlotLimit(int slot) {
     return 1;
@@ -116,6 +196,13 @@ public class TileOven extends BaseTileInventory implements ITickable, IAmbiental
     return super.writeToNBT(nbt);
   }
 
+  public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
+    for (int i = 0; i < 3; i++) {
+      InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(),
+              inventory.getStackInSlot(i));
+    }
+  }
+
   @Override
   public boolean canInteractWith(EntityPlayer player) {
     return !isBurning && world.getTileEntity(pos) == this;
@@ -138,19 +225,6 @@ public class TileOven extends BaseTileInventory implements ITickable, IAmbiental
     markDirty();
   }
 
-  private boolean recipeExists() {
-    ItemStack input = inventory.getStackInSlot(SLOT_MAIN);
-    OvenRecipe recipe = null;
-    if (!input.isEmpty() && !world.isRemote) {
-      recipe = OvenRecipe.get(input);
-    }
-    return recipe != null;
-  }
-
-  public void setWarmed() {
-    isWarmed = true;
-  }
-
   private boolean hasFuel() {
     return isWarmed ||
             (FuelManager.isItemFuel(inventory.getStackInSlot(SLOT_FUEL_1)) && FuelManager.isItemFuel(
@@ -169,86 +243,12 @@ public class TileOven extends BaseTileInventory implements ITickable, IAmbiental
     tickGoal = recipeTime;
   }
 
-  private void cook() {
-    ItemStack input = inventory.getStackInSlot(SLOT_MAIN);
-    if (!input.isEmpty()) {
-      OvenRecipe recipe = OvenRecipe.get(input);
-      if (recipe != null && !world.isRemote) {
-        inventory.setStackInSlot(SLOT_MAIN,
-                CapabilityFood.updateFoodFromPrevious(input, recipe.getOutputItem(input)));
-        inventory.setStackInSlot(SLOT_FUEL_1, ItemStack.EMPTY);
-        inventory.setStackInSlot(SLOT_FUEL_2, ItemStack.EMPTY);
-        setAndUpdateSlots(SLOT_MAIN);
-        setAndUpdateSlots(SLOT_FUEL_1);
-        setAndUpdateSlots(SLOT_FUEL_2);
-      }
-      turnOff();
-    }
-  }
-
-  private void clear() {
-    inventory.setStackInSlot(SLOT_MAIN, ItemStack.EMPTY);
-    inventory.setStackInSlot(SLOT_FUEL_1, ItemStack.EMPTY);
-    inventory.setStackInSlot(SLOT_FUEL_2, ItemStack.EMPTY);
-    setAndUpdateSlots(SLOT_MAIN);
-    setAndUpdateSlots(SLOT_FUEL_1);
-    setAndUpdateSlots(SLOT_FUEL_2);
-  }
-
-  public void turnOff() {
-    world.setBlockState(pos, world.getBlockState(pos).withProperty(LIT, false));
-    isBurning = false;
-    startTick = 0;
-    tickGoal = 0;
-    offTick = Calendar.PLAYER_TIME.getTicks();
-    isWarmed = false;
-    markDirty();
+  public void setWarmed() {
+    isWarmed = true;
   }
 
   public boolean willDamage() {
     return (Calendar.PLAYER_TIME.getTicks() - offTick) > (2 * ICalendar.TICKS_IN_HOUR);
-  }
-
-  public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
-    for (int i = 0; i < 3; i++) {
-      InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(),
-              inventory.getStackInSlot(i));
-    }
-  }
-
-  public boolean isCuringRecipe() {
-    if (recipeExists()) {
-      ItemStack input = inventory.getStackInSlot(SLOT_MAIN);
-      return input.isItemEqual(new ItemStack(ItemsCore.STRAW));
-    }
-    return false;
-  }
-
-  private boolean isCuredBlock(IBlockState state) {
-    if ((state.getBlock() instanceof BlockOven || state.getBlock() instanceof BlockOvenChimney)
-            || state.getBlock() instanceof BlockOvenWall) {
-      return state.getValue(CURED);
-    }
-    return false;
-  }
-
-  private void cureSelfWallsAndChimney() {
-    IBlockState state = world.getBlockState(pos);
-    if (!isCuredBlock(state)) {
-      world.setBlockState(pos, state.withProperty(CURED, true));
-    }
-    for (EnumFacing side : EnumFacing.HORIZONTALS) {
-      BlockPos changePos = pos.offset(side);
-      IBlockState changeState = world.getBlockState(changePos);
-      if (changeState.getBlock() instanceof BlockOvenWall && !isCuredBlock(changeState)) {
-        world.setBlockState(changePos, changeState.withProperty(CURED, true));
-      }
-    }
-    BlockPos chimPos = pos.up();
-    while (world.getBlockState(chimPos).getBlock() instanceof BlockOvenChimney) {
-      world.setBlockState(chimPos, world.getBlockState(chimPos).withProperty(CURED, true));
-      chimPos = chimPos.up();
-    }
   }
 
   public long getTicksRemaining() {

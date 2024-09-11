@@ -66,8 +66,8 @@ public abstract class BaseBiome extends Biome implements IBiomeSettings {
           if (EntityLiving.class.isAssignableFrom(entityClass)) {
             //noinspection unchecked
             spawnableCreatureList.add(
-                new Biome.SpawnListEntry((Class<? extends EntityLiving>) entityClass, rarity, min,
-                    max));
+                    new Biome.SpawnListEntry((Class<? extends EntityLiving>) entityClass, rarity, min,
+                            max));
           }
         }
       }
@@ -79,13 +79,9 @@ public abstract class BaseBiome extends Biome implements IBiomeSettings {
     }
   }
 
-  public abstract int getBiomeWeight();
-
-  public abstract BiomeDictionary.Type[] getTypes();
-
-  public BaseBiome mutate(Random rand) {
-
-    return this;
+  @Override
+  public BiomeDecorator createBiomeDecorator() {
+    return new BaseBiomeDecorator(0, 0);
   }
 
   @Override
@@ -100,9 +96,13 @@ public abstract class BaseBiome extends Biome implements IBiomeSettings {
     return getSettings().isSpawnBiome();
   }
 
-  @Override
-  public BiomeDecorator createBiomeDecorator() {
-    return new BaseBiomeDecorator(0, 0);
+  public abstract int getBiomeWeight();
+
+  public abstract BiomeDictionary.Type[] getTypes();
+
+  public BaseBiome mutate(Random rand) {
+
+    return this;
   }
 
 }

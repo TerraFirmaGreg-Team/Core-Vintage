@@ -43,12 +43,6 @@ public class BlockThatch extends BaseBlock {
   }
 
   @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-          BlockPos pos) {
-    return NULL_AABB;
-  }
-
-  @Override
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
     // Player will take damage when hitting thatch if fall is over 13 blocks, fall damage is then set to 0.
     entityIn.fall((entityIn.fallDistance - 10),
@@ -60,5 +54,11 @@ public class BlockThatch extends BaseBlock {
 
     // This makes the player way too slow
     //entityIn.setInWeb();
+  }
+
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
+          BlockPos pos) {
+    return NULL_AABB;
   }
 }

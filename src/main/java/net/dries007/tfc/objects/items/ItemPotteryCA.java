@@ -10,17 +10,17 @@ import pieman.caffeineaddon.init.ModItems;
 
 public class ItemPotteryCA extends ItemPottery implements IProviderModel {
 
-    public ItemPotteryCA(String name) {
-        super();
-        this.setTranslationKey(name);
-        this.setRegistryName(name);
-        this.setCreativeTab(CreativeTabsTFC.CT_POTTERY);
+  public ItemPotteryCA(String name) {
+    super();
+    this.setTranslationKey(name);
+    this.setRegistryName(name);
+    this.setCreativeTab(CreativeTabsTFC.CT_POTTERY);
 
-        ModItems.ITEMS.add(this);
-    }
+    ModItems.ITEMS.add(this);
+  }
 
-    @Override
-    public void onModelRegister() {
-        CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
-    }
+  @Override
+  public void onModelRegister() {
+    CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
+  }
 }

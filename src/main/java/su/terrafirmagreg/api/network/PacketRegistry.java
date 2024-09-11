@@ -33,23 +33,23 @@ public class PacketRegistry implements IPacketRegistry {
 
   @Override
   public <REQ extends IMessage, REPLY extends IMessage> IPacketRegistry register(
-      Class<? extends IMessageHandler<REQ, REPLY>> messageHandler,
-      Class<REQ> requestMessageType,
-      Side side) {
+          Class<? extends IMessageHandler<REQ, REPLY>> messageHandler,
+          Class<REQ> requestMessageType,
+          Side side) {
 
     this.threadedNetworkWrapper.registerMessage(messageHandler, requestMessageType, this.nextId(),
-        side);
+            side);
     return this;
   }
 
   @Override
   public <REQ extends IMessage, REPLY extends IMessage> IPacketRegistry register(
-      IMessageHandler<REQ, REPLY> messageHandler,
-      Class<REQ> requestMessageType,
-      Side side) {
+          IMessageHandler<REQ, REPLY> messageHandler,
+          Class<REQ> requestMessageType,
+          Side side) {
 
     this.threadedNetworkWrapper.registerMessage(messageHandler, requestMessageType, this.nextId(),
-        side);
+            side);
     return this;
   }
 

@@ -10,47 +10,47 @@ import org.jetbrains.annotations.Nullable;
 
 public class FluidHandlerSided implements IFluidHandler {
 
-    private final IFluidHandlerSidedCallback callback;
-    private final IFluidHandler handler;
-    private final EnumFacing side;
+  private final IFluidHandlerSidedCallback callback;
+  private final IFluidHandler handler;
+  private final EnumFacing side;
 
-    public FluidHandlerSided(IFluidHandlerSidedCallback callback, IFluidHandler handler, EnumFacing side) {
-        this.callback = callback;
-        this.handler = handler;
-        this.side = side;
+  public FluidHandlerSided(IFluidHandlerSidedCallback callback, IFluidHandler handler, EnumFacing side) {
+    this.callback = callback;
+    this.handler = handler;
+    this.side = side;
+  }
+
+  @Override
+  public IFluidTankProperties[] getTankProperties() {
+    return handler.getTankProperties();
+  }
+
+  @Override
+  public int fill(FluidStack resource, boolean doFill) {
+    if (callback.canFill(resource, side)) {
+      return handler.fill(resource, doFill);
     }
 
-    @Override
-    public IFluidTankProperties[] getTankProperties() {
-        return handler.getTankProperties();
+    return 0;
+  }
+
+  @Override
+  @Nullable
+  public FluidStack drain(FluidStack resource, boolean doDrain) {
+    if (callback.canDrain(side)) {
+      return handler.drain(resource, doDrain);
     }
 
-    @Override
-    public int fill(FluidStack resource, boolean doFill) {
-        if (callback.canFill(resource, side)) {
-            return handler.fill(resource, doFill);
-        }
+    return null;
+  }
 
-        return 0;
+  @Override
+  @Nullable
+  public FluidStack drain(int maxDrain, boolean doDrain) {
+    if (callback.canDrain(side)) {
+      return handler.drain(maxDrain, doDrain);
     }
 
-    @Override
-    @Nullable
-    public FluidStack drain(FluidStack resource, boolean doDrain) {
-        if (callback.canDrain(side)) {
-            return handler.drain(resource, doDrain);
-        }
-
-        return null;
-    }
-
-    @Override
-    @Nullable
-    public FluidStack drain(int maxDrain, boolean doDrain) {
-        if (callback.canDrain(side)) {
-            return handler.drain(maxDrain, doDrain);
-        }
-
-        return null;
-    }
+    return null;
+  }
 }

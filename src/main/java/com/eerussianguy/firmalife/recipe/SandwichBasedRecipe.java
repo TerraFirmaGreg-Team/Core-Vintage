@@ -20,32 +20,32 @@ import java.util.List;
 
 public abstract class SandwichBasedRecipe extends ShapedDamageRecipe {
 
-    public SandwichBasedRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @NotNull ItemStack result, int damage) {
-        super(group, input, result, damage);
-    }
+  public SandwichBasedRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @NotNull ItemStack result, int damage) {
+    super(group, input, result, damage);
+  }
 
-    @Override
-    public boolean matches(@NotNull InventoryCrafting inv, @NotNull World world) {
-        if (super.matches(inv, world)) {
-            List<FoodData> ingredients = new ArrayList<>();
-            getIngredients(inv, ingredients);
-            return ingredients.size() > 0;
-        }
-        return false;
+  @Override
+  public boolean matches(@NotNull InventoryCrafting inv, @NotNull World world) {
+    if (super.matches(inv, world)) {
+      List<FoodData> ingredients = new ArrayList<>();
+      getIngredients(inv, ingredients);
+      return ingredients.size() > 0;
     }
+    return false;
+  }
 
-    protected void getIngredients(InventoryCrafting inv, List<FoodData> ingredients) {
-        for (int i = 0; i < inv.getSizeInventory(); i++) {
-            ItemStack ingredientStack = inv.getStackInSlot(i);
-            IFood ingredientCap = ingredientStack.getCapability(CapabilityFood.CAPABILITY, null);
-            if (ingredientCap != null) {
-                if (ingredientCap.isRotten()) {
-                    // Found a rotten ingredient, aborting
-                    ingredients.clear();
-                    return;
-                }
-                ingredients.add(ingredientCap.getData());
-            }
+  protected void getIngredients(InventoryCrafting inv, List<FoodData> ingredients) {
+    for (int i = 0; i < inv.getSizeInventory(); i++) {
+      ItemStack ingredientStack = inv.getStackInSlot(i);
+      IFood ingredientCap = ingredientStack.getCapability(CapabilityFood.CAPABILITY, null);
+      if (ingredientCap != null) {
+        if (ingredientCap.isRotten()) {
+          // Found a rotten ingredient, aborting
+          ingredients.clear();
+          return;
         }
+        ingredients.add(ingredientCap.getData());
+      }
     }
+  }
 }

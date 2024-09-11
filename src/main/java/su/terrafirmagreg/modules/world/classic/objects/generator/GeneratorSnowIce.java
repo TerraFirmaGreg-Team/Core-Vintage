@@ -19,7 +19,7 @@ public class GeneratorSnowIce implements IWorldGenerator {
 
   @Override
   public void generate(Random rand, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0) {
       for (int x = 0; x < 16; x++) {
         for (int z = 0; z < 16; z++) {
@@ -33,14 +33,14 @@ public class GeneratorSnowIce implements IWorldGenerator {
           IBlockState stateAt = world.getBlockState(posDown);
           float actualTemp = Climate.getActualTemp(world, posDown);
           if (actualTemp < IceMeltHandler.ICE_MELT_THRESHOLD - 4 + 4 * (rand.nextFloat()
-              - rand.nextFloat()) &&
-              stateAt.getBlock() == ChunkGenClassic.FRESH_WATER.getBlock()) {
+                  - rand.nextFloat()) &&
+                  stateAt.getBlock() == ChunkGenClassic.FRESH_WATER.getBlock()) {
             world.setBlockState(posDown, ChunkGenClassic.FRESH_WATER_ICE);
           }
 
           if (world.isAirBlock(pos) && ChunkGenClassic.SNOW.getBlock()
-              .canPlaceBlockAt(world, pos) && actualTemp < -4 + 4 * (rand.nextFloat()
-              - rand.nextFloat())) {
+                  .canPlaceBlockAt(world, pos) && actualTemp < -4 + 4 * (rand.nextFloat()
+                  - rand.nextFloat())) {
             world.setBlockState(pos, ChunkGenClassic.SNOW);
           }
         }

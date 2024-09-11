@@ -47,218 +47,221 @@ import java.util.Random;
 @MethodsReturnNonnullByDefault
 public class BlockBerryBush extends Block implements IGrowingPlant {
 
-    public static final PropertyBool FRUITING = PropertyBool.create("fruiting");
+  public static final PropertyBool FRUITING = PropertyBool.create("fruiting");
 
-    private static final AxisAlignedBB SMALL_SIZE_AABB = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.25D, 1D);
-    private static final AxisAlignedBB MEDIUM_SIZE_AABB = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.5D, 1D);
+  private static final AxisAlignedBB SMALL_SIZE_AABB = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.25D, 1D);
+  private static final AxisAlignedBB MEDIUM_SIZE_AABB = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.5D, 1D);
 
-    private static final Map<IBerryBush, BlockBerryBush> MAP = new HashMap<>();
-    public final IBerryBush bush;
+  private static final Map<IBerryBush, BlockBerryBush> MAP = new HashMap<>();
+  public final IBerryBush bush;
 
-    public BlockBerryBush(IBerryBush bush) {
-        super(Material.PLANTS);
-        this.bush = bush;
-        if (MAP.put(bush, this) != null) throw new IllegalStateException("There can only be one.");
-        BlockUtils.setFireInfo(this, 30, 60);
-        setHardness(1.0F);
-        setTickRandomly(true);
-        setSoundType(SoundType.PLANT);
-        setDefaultState(blockState.getBaseState().withProperty(FRUITING, false));
+  public BlockBerryBush(IBerryBush bush) {
+    super(Material.PLANTS);
+    this.bush = bush;
+    if (MAP.put(bush, this) != null) {
+      throw new IllegalStateException("There can only be one.");
     }
+    BlockUtils.setFireInfo(this, 30, 60);
+    setHardness(1.0F);
+    setTickRandomly(true);
+    setSoundType(SoundType.PLANT);
+    setDefaultState(blockState.getBaseState().withProperty(FRUITING, false));
+  }
 
-    public static BlockBerryBush get(IBerryBush bush) {
-        return MAP.get(bush);
+  public static BlockBerryBush get(IBerryBush bush) {
+    return MAP.get(bush);
+  }
+
+  @SuppressWarnings("deprecation")
+  @Override
+  @NotNull
+  public IBlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(FRUITING, meta == 1);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(FRUITING) ? 1 : 0;
+  }
+
+  @SuppressWarnings("deprecation")
+  @Override
+  public boolean causesSuffocation(IBlockState state) {
+    return false;
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isFullCube(IBlockState state) {
+    return bush.getSize() == IBerryBush.Size.LARGE;
+  }
+
+  @Override
+  public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+    return true;
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  @NotNull
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    switch (bush.getSize()) {
+      case SMALL:
+        return SMALL_SIZE_AABB;
+      case MEDIUM:
+        return MEDIUM_SIZE_AABB;
+      default:
+        return FULL_BLOCK_AABB;
     }
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    @NotNull
-    public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(FRUITING, meta == 1);
+  @Override
+  @NotNull
+  @SuppressWarnings("deprecation")
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    if (bush.getSize() == IBerryBush.Size.LARGE && face == EnumFacing.UP) {
+      return BlockFaceShape.SOLID;
+    } else {
+      return BlockFaceShape.UNDEFINED;
     }
+  }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(FRUITING) ? 1 : 0;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return NULL_AABB;
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean causesSuffocation(IBlockState state) {
-        return false;
-    }
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isOpaqueCube(IBlockState state) {
+    return false;
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
-        return bush.getSize() == IBerryBush.Size.LARGE;
-    }
-
-    @Override
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
-        return true;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        switch (bush.getSize()) {
-            case SMALL:
-                return SMALL_SIZE_AABB;
-            case MEDIUM:
-                return MEDIUM_SIZE_AABB;
-            default:
-                return FULL_BLOCK_AABB;
-        }
-    }
-
-    @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        if (bush.getSize() == IBerryBush.Size.LARGE && face == EnumFacing.UP)
-            return BlockFaceShape.SOLID;
-        else
-            return BlockFaceShape.UNDEFINED;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return NULL_AABB;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-        if (!world.isRemote) {
-            var tile = TileUtils.getTile(world, pos, TETickCounter.class);
-            if (TileUtils.isNotNull(tile)) {
-                float temp = Climate.getActualTemp(world, pos);
-                float rainfall = ProviderChunkData.getRainfall(world, pos);
-                long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-                if (hours > (bush.getGrowthTime() * ConfigTFC.General.FOOD.berryBushGrowthTimeModifier) && bush.isValidForGrowth(temp, rainfall)) {
-                    if (bush.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
-                        //Fruiting
-                        world.setBlockState(pos, world.getBlockState(pos).withProperty(FRUITING, true));
-                    }
-                    tile.resetCounter();
-                }
-            }
-        }
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-        if (!canStay(worldIn, pos)) {
-            worldIn.destroyBlock(pos, true);
-        }
-    }
-
-    @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-        if (tile != null) {
-            tile.resetCounter();
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    @NotNull
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
-
-    @Override
-    public boolean canPlaceBlockAt(World worldIn, @NotNull BlockPos pos) {
-        if (super.canPlaceBlockAt(worldIn, pos)) {
-            return canStay(worldIn, pos);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                    float hitX, float hitY, float hitZ) {
-        if (worldIn.getBlockState(pos).getValue(FRUITING)) {
-            if (!worldIn.isRemote) {
-                ItemHandlerHelper.giveItemToPlayer(playerIn, bush.getFoodDrop());
-                worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(FRUITING, false));
-                var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-                if (tile != null) {
-                    tile.resetCounter();
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (!(entityIn instanceof EntityPlayer entityPlayer && entityPlayer.isCreative())) {
-            // Entity motion is reduced (like leaves).
-            entityIn.motionX *= ConfigTFC.General.MISC.berryBushMovementModifier;
-            if (entityIn.motionY < 0) {
-                entityIn.motionY *= ConfigTFC.General.MISC.berryBushMovementModifier;
-            }
-            entityIn.motionZ *= ConfigTFC.General.MISC.berryBushMovementModifier;
-            if (bush.isSpiky() && entityIn instanceof EntityLivingBase) {
-                entityIn.attackEntityFrom(DamageSources.BERRYBUSH, 1.0F);
-            }
-        }
-    }
-
-    @Override
-    @NotNull
-    public BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FRUITING);
-    }
-
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TETickCounter();
-    }
-
-    @NotNull
-    public IBerryBush getBush() {
-        return bush;
-    }
-
-    private boolean canStay(IBlockAccess world, BlockPos pos) {
-        IBlockState below = world.getBlockState(pos.down());
-        if (bush.getSize() == IBerryBush.Size.LARGE && below.getBlock() instanceof BlockBerryBush &&
-                ((BlockBerryBush) below.getBlock()).bush == this.bush) {
-            return BlockUtils.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
-        }
-        return BlockUtils.isGrowableSoil(below);
-    }
-
-    @Override
-    public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
+  @Override
+  public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+    if (!world.isRemote) {
+      var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+      if (TileUtils.isNotNull(tile)) {
         float temp = Climate.getActualTemp(world, pos);
         float rainfall = ProviderChunkData.getRainfall(world, pos);
-        boolean canGrow = bush.isValidForGrowth(temp, rainfall);
-        if (state.getValue(FRUITING)) {
-            return GrowthStatus.FULLY_GROWN;
-        } else if (canGrow && bush.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
-            return GrowthStatus.GROWING;
+        long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+        if (hours > (bush.getGrowthTime() * ConfigTFC.General.FOOD.berryBushGrowthTimeModifier) && bush.isValidForGrowth(temp, rainfall)) {
+          if (bush.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
+            //Fruiting
+            world.setBlockState(pos, world.getBlockState(pos).withProperty(FRUITING, true));
+          }
+          tile.resetCounter();
         }
-        return canGrow ? GrowthStatus.CAN_GROW : GrowthStatus.NOT_GROWING;
+      }
     }
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+    if (!canStay(worldIn, pos)) {
+      worldIn.destroyBlock(pos, true);
+    }
+  }
+
+  @Override
+  public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+    TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+    if (tile != null) {
+      tile.resetCounter();
+    }
+  }
+
+  @SideOnly(Side.CLIENT)
+  @Override
+  @NotNull
+  public BlockRenderLayer getRenderLayer() {
+    return BlockRenderLayer.CUTOUT_MIPPED;
+  }
+
+  @Override
+  public boolean canPlaceBlockAt(World worldIn, @NotNull BlockPos pos) {
+    if (super.canPlaceBlockAt(worldIn, pos)) {
+      return canStay(worldIn, pos);
+    }
+    return false;
+  }
+
+  @Override
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+          float hitX, float hitY, float hitZ) {
+    if (worldIn.getBlockState(pos).getValue(FRUITING)) {
+      if (!worldIn.isRemote) {
+        ItemHandlerHelper.giveItemToPlayer(playerIn, bush.getFoodDrop());
+        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(FRUITING, false));
+        var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+        if (tile != null) {
+          tile.resetCounter();
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+    if (!(entityIn instanceof EntityPlayer entityPlayer && entityPlayer.isCreative())) {
+      // Entity motion is reduced (like leaves).
+      entityIn.motionX *= ConfigTFC.General.MISC.berryBushMovementModifier;
+      if (entityIn.motionY < 0) {
+        entityIn.motionY *= ConfigTFC.General.MISC.berryBushMovementModifier;
+      }
+      entityIn.motionZ *= ConfigTFC.General.MISC.berryBushMovementModifier;
+      if (bush.isSpiky() && entityIn instanceof EntityLivingBase) {
+        entityIn.attackEntityFrom(DamageSources.BERRYBUSH, 1.0F);
+      }
+    }
+  }
+
+  @Override
+  @NotNull
+  public BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, FRUITING);
+  }
+
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
+  }
+
+  @Nullable
+  @Override
+  public TileEntity createTileEntity(World world, IBlockState state) {
+    return new TETickCounter();
+  }
+
+  private boolean canStay(IBlockAccess world, BlockPos pos) {
+    IBlockState below = world.getBlockState(pos.down());
+    if (bush.getSize() == IBerryBush.Size.LARGE && below.getBlock() instanceof BlockBerryBush &&
+            ((BlockBerryBush) below.getBlock()).bush == this.bush) {
+      return BlockUtils.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
+    }
+    return BlockUtils.isGrowableSoil(below);
+  }
+
+  @NotNull
+  public IBerryBush getBush() {
+    return bush;
+  }
+
+  @Override
+  public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
+    float temp = Climate.getActualTemp(world, pos);
+    float rainfall = ProviderChunkData.getRainfall(world, pos);
+    boolean canGrow = bush.isValidForGrowth(temp, rainfall);
+    if (state.getValue(FRUITING)) {
+      return GrowthStatus.FULLY_GROWN;
+    } else if (canGrow && bush.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
+      return GrowthStatus.GROWING;
+    }
+    return canGrow ? GrowthStatus.CAN_GROW : GrowthStatus.NOT_GROWING;
+  }
 }

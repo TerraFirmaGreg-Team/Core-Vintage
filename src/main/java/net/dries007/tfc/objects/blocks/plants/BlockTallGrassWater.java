@@ -185,6 +185,10 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
   }
 
   @Override
+  @NotNull
+  protected BlockStateContainer createPlantBlockState() {
+    return new BlockStateContainer(this, AGE, growthStageProperty, DAYPERIOD, PART);
+  }  @Override
   public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
     if (!worldIn.isRemote && player != null) {
       ItemStack stack = player.getHeldItemMainhand();
@@ -202,26 +206,13 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
   }
 
   @Override
-  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
-    this.onBlockHarvested(world, pos, state, player);
-    return world.setBlockState(pos, net.minecraft.init.Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
-  }
-
-  @Override
-  public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
-          net.minecraftforge.common.IPlantable plantable) {
-    IBlockState plant = plantable.getPlant(world, pos.offset(direction));
-
-    if (plant.getBlock() == this) {
-      return true;
-    }
-    return super.canSustainPlant(state, world, pos, direction, plantable);
-  }
-
-  @Override
   @NotNull
   public Block.EnumOffsetType getOffsetType() {
     return Block.EnumOffsetType.XZ;
+  }  @Override
+  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+    this.onBlockHarvested(world, pos, state, player);
+    return world.setBlockState(pos, net.minecraft.init.Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
   }
 
   @Override
@@ -260,18 +251,21 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
     }
 
     checkAndDropBlock(worldIn, pos, state);
+  }  @Override
+  public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
+          net.minecraftforge.common.IPlantable plantable) {
+    IBlockState plant = plantable.getPlant(world, pos.offset(direction));
+
+    if (plant.getBlock() == this) {
+      return true;
+    }
+    return super.canSustainPlant(state, world, pos, direction, plantable);
   }
 
   @Override
   @NotNull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     return getTallBoundingBax(state.getValue(AGE), state, source, pos);
-  }
-
-  @Override
-  @NotNull
-  protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, AGE, growthStageProperty, DAYPERIOD, PART);
   }
 
   @Override
@@ -289,4 +283,10 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
     return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
             .getBlock() != this;
   }
+
+
+
+
+
+
 }

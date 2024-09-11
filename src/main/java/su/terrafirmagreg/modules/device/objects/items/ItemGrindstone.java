@@ -25,12 +25,12 @@ public class ItemGrindstone extends BaseItem {
 
     setNoRepair();
     getSettings()
-        .registryKey("device/grindstone/" + name)
-        .weight(Weight.HEAVY)
-        .size(Size.LARGE)
-        .notCanStack()
-        .maxDamage(durability)
-        .maxCount(1);
+            .registryKey("device/grindstone/" + name)
+            .weight(Weight.HEAVY)
+            .size(Size.LARGE)
+            .notCanStack()
+            .maxDamage(durability)
+            .maxCount(1);
 
   }
 

@@ -121,7 +121,7 @@ public class ModelAnimalPheasant extends ModelBase {
 
   @Override
   public void render(Entity entity, float par2, float par3, float par4, float par5, float par6,
-      float par7) {
+          float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
     float percent = (float) ((EntityAnimalPheasant) entity).getPercentToAdulthood();
     float ageScale = 2.0F - percent;
@@ -152,7 +152,7 @@ public class ModelAnimalPheasant extends ModelBase {
 
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
-      float par6, Entity entity) {
+          float par6, Entity entity) {
     this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
     this.beak.rotateAngleY = this.head.rotateAngleY;
     this.neck.rotateAngleZ = -(5 * (float) (Math.PI / 18F));
@@ -187,9 +187,9 @@ public class ModelAnimalPheasant extends ModelBase {
     this.tail.rotateAngleZ = -((float) (Math.PI / 18F));
     this.tailFeather.rotateAngleZ = -((float) (Math.PI / 36F));
     this.rightLeg.rotateAngleZ =
-        ((float) (Math.PI / 9F)) + MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
+            ((float) (Math.PI / 9F)) + MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
     this.leftLeg.rotateAngleZ =
-        ((float) (Math.PI / 9F)) + MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
+            ((float) (Math.PI / 9F)) + MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
     this.rightLowerLeg.rotateAngleZ = -((float) (Math.PI / 9F));
     this.leftLowerLeg.rotateAngleZ = -((float) (Math.PI / 9F));
     this.rightFoot.rotateAngleZ = 0;

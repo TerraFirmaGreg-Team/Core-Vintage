@@ -15,22 +15,22 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class RenderAnimalTFC<T extends EntityLiving> extends RenderLiving<T> {
 
-    private final ResourceLocation youngTexture;
-    private final ResourceLocation oldTexture;
+  private final ResourceLocation youngTexture;
+  private final ResourceLocation oldTexture;
 
-    protected RenderAnimalTFC(RenderManager rendermanagerIn, ModelBase modelbaseIn, float shadowsizeIn, @NotNull ResourceLocation youngTextures,
-                              @NotNull ResourceLocation oldTextures) {
-        super(rendermanagerIn, modelbaseIn, shadowsizeIn);
-        this.youngTexture = youngTextures;
-        this.oldTexture = oldTextures;
-    }
+  protected RenderAnimalTFC(RenderManager rendermanagerIn, ModelBase modelbaseIn, float shadowsizeIn, @NotNull ResourceLocation youngTextures,
+          @NotNull ResourceLocation oldTextures) {
+    super(rendermanagerIn, modelbaseIn, shadowsizeIn);
+    this.youngTexture = youngTextures;
+    this.oldTexture = oldTextures;
+  }
 
-    @NotNull
-    @Override
-    protected ResourceLocation getEntityTexture(T entity) {
-        if (entity instanceof IAnimal && ((IAnimal) entity).getAge() == IAnimal.Age.OLD) {
-            return oldTexture;
-        }
-        return youngTexture;
+  @NotNull
+  @Override
+  protected ResourceLocation getEntityTexture(T entity) {
+    if (entity instanceof IAnimal && ((IAnimal) entity).getAge() == IAnimal.Age.OLD) {
+      return oldTexture;
     }
+    return youngTexture;
+  }
 }

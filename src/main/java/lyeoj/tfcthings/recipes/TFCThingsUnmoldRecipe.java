@@ -1,7 +1,7 @@
 package lyeoj.tfcthings.recipes;
 
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
@@ -36,167 +36,167 @@ import org.jetbrains.annotations.Nullable;
 
 public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
-    private final NonNullList<Ingredient> input;
-    private final ResourceLocation group;
-    private final String type;
-    private final float chance;
+  private final NonNullList<Ingredient> input;
+  private final ResourceLocation group;
+  private final String type;
+  private final float chance;
 
-    private TFCThingsUnmoldRecipe(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @NotNull String type, float chance) {
-        this.group = group;
-        this.input = input;
-        this.type = type;
-        this.chance = chance;
-    }
+  private TFCThingsUnmoldRecipe(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @NotNull String type, float chance) {
+    this.group = group;
+    this.input = input;
+    this.type = type;
+    this.chance = chance;
+  }
 
-    public boolean matches(@NotNull InventoryCrafting inv, @NotNull World world) {
-        boolean foundMold = false;
+  public boolean matches(@NotNull InventoryCrafting inv, @NotNull World world) {
+    boolean foundMold = false;
 
-        for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
-            ItemStack stack = inv.getStackInSlot(slot);
-            if (!stack.isEmpty()) {
-                if (!(stack.getItem() instanceof ItemTFCThingsMold moldItem)) {
-                    return false;
-                }
-
-                IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, (EnumFacing) null);
-                if (!(cap instanceof IMoldHandler moldHandler)) {
-                    return false;
-                }
-
-                if (moldHandler.isMolten()) {
-                    return false;
-                }
-
-                Metal metal = moldHandler.getMetal();
-                if (metal == null || !moldItem.getToolName().equals(this.type) || foundMold) {
-                    return false;
-                }
-
-                foundMold = true;
-            }
+    for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
+      ItemStack stack = inv.getStackInSlot(slot);
+      if (!stack.isEmpty()) {
+        if (!(stack.getItem() instanceof ItemTFCThingsMold moldItem)) {
+          return false;
         }
 
-        return foundMold;
-    }
-
-    @NotNull
-    public ItemStack getCraftingResult(InventoryCrafting inv) {
-        ItemStack moldStack = null;
-
-        for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
-            ItemStack stack = inv.getStackInSlot(slot);
-            if (!stack.isEmpty()) {
-                if (!(stack.getItem() instanceof ItemTFCThingsMold tmp)) {
-                    return ItemStack.EMPTY;
-                }
-
-                if (!tmp.getToolName().equals(this.type) || moldStack != null) {
-                    return ItemStack.EMPTY;
-                }
-
-                moldStack = stack;
-            }
+        IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        if (!(cap instanceof IMoldHandler moldHandler)) {
+          return false;
         }
 
-        if (moldStack != null) {
-            IFluidHandler moldCap = moldStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, (EnumFacing) null);
-            if (moldCap instanceof IMoldHandler moldHandler) {
-                if (!moldHandler.isMolten() && moldHandler.getAmount() == 100) {
-                    return this.getOutputItem(moldHandler);
-                }
-            }
+        if (moldHandler.isMolten()) {
+          return false;
         }
 
-        return ItemStack.EMPTY;
-    }
-
-    public boolean canFit(int width, int height) {
-        return true;
-    }
-
-    @NotNull
-    public ItemStack getRecipeOutput() {
-        return ItemStack.EMPTY;
-    }
-
-    @NotNull
-    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
-        for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
-            ItemStack stack = inv.getStackInSlot(slot);
-            if (!stack.isEmpty() && stack.getItem() instanceof ItemTFCThingsMold) {
-                EntityPlayer player = ForgeHooks.getCraftingPlayer();
-                if (!player.world.isRemote) {
-                    stack = this.getMoldResult(stack);
-                    if (!stack.isEmpty()) {
-                        ItemHandlerHelper.giveItemToPlayer(player, stack);
-                    } else {
-                        player.world.playSound((EntityPlayer) null, player.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0F, 1.0F);
-                    }
-                }
-            }
+        Metal metal = moldHandler.getMetal();
+        if (metal == null || !moldItem.getToolName().equals(this.type) || foundMold) {
+          return false;
         }
 
-        return ForgeHooks.defaultRecipeGetRemainingItems(inv);
+        foundMold = true;
+      }
     }
 
-    @NotNull
-    public NonNullList<Ingredient> getIngredients() {
-        return this.input;
-    }
+    return foundMold;
+  }
 
-    public boolean isDynamic() {
-        return true;
-    }
+  @NotNull
+  public ItemStack getCraftingResult(InventoryCrafting inv) {
+    ItemStack moldStack = null;
 
-    @NotNull
-    public String getGroup() {
-        return this.group == null ? "" : this.group.toString();
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
-    public float getChance() {
-        return this.chance;
-    }
-
-    public ItemStack getMoldResult(ItemStack moldIn) {
-        return MathConstants.RNG.nextFloat() <= this.chance ? new ItemStack(moldIn.getItem()) : ItemStack.EMPTY;
-    }
-
-    public ItemStack getOutputItem(IMoldHandler moldHandler) {
-        Metal m = moldHandler.getMetal();
-        if (m != null) {
-            ItemStack output = new ItemStack(TFCThingsItems.TOOLS_HEADS_BY_METAL.get(type).get(m));
-
-            var cap = CapabilityHeat.get(output);
-            if (cap != null) {
-                cap.setTemperature(moldHandler.getTemperature());
-            }
-
-            return output;
-        } else {
-            return ItemStack.EMPTY;
-        }
-    }
-
-    public static class Factory implements IRecipeFactory {
-
-        public Factory() {
+    for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
+      ItemStack stack = inv.getStackInSlot(slot);
+      if (!stack.isEmpty()) {
+        if (!(stack.getItem() instanceof ItemTFCThingsMold tmp)) {
+          return ItemStack.EMPTY;
         }
 
-        public IRecipe parse(JsonContext context, JsonObject json) {
-            NonNullList<Ingredient> ingredients = RecipeUtils.parseShapeless(context, json);
-            String result = JsonUtils.getString(json, "result");
-            String type = result.toLowerCase();
-            String group = JsonUtils.getString(json, "group", "");
-            float chance = 0.0F;
-            if (JsonUtils.hasField(json, "chance")) {
-                chance = JsonUtils.getFloat(json, "chance");
-            }
-
-            return new TFCThingsUnmoldRecipe(group.isEmpty() ? new ResourceLocation(result) : new ResourceLocation(group), ingredients, type, chance);
+        if (!tmp.getToolName().equals(this.type) || moldStack != null) {
+          return ItemStack.EMPTY;
         }
+
+        moldStack = stack;
+      }
     }
+
+    if (moldStack != null) {
+      IFluidHandler moldCap = moldStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+      if (moldCap instanceof IMoldHandler moldHandler) {
+        if (!moldHandler.isMolten() && moldHandler.getAmount() == 100) {
+          return this.getOutputItem(moldHandler);
+        }
+      }
+    }
+
+    return ItemStack.EMPTY;
+  }
+
+  public boolean canFit(int width, int height) {
+    return true;
+  }
+
+  @NotNull
+  public ItemStack getRecipeOutput() {
+    return ItemStack.EMPTY;
+  }
+
+  @NotNull
+  public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
+    for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
+      ItemStack stack = inv.getStackInSlot(slot);
+      if (!stack.isEmpty() && stack.getItem() instanceof ItemTFCThingsMold) {
+        EntityPlayer player = ForgeHooks.getCraftingPlayer();
+        if (!player.world.isRemote) {
+          stack = this.getMoldResult(stack);
+          if (!stack.isEmpty()) {
+            ItemHandlerHelper.giveItemToPlayer(player, stack);
+          } else {
+            player.world.playSound(null, player.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0F, 1.0F);
+          }
+        }
+      }
+    }
+
+    return ForgeHooks.defaultRecipeGetRemainingItems(inv);
+  }
+
+  @NotNull
+  public NonNullList<Ingredient> getIngredients() {
+    return this.input;
+  }
+
+  public boolean isDynamic() {
+    return true;
+  }
+
+  @NotNull
+  public String getGroup() {
+    return this.group == null ? "" : this.group.toString();
+  }
+
+  public ItemStack getMoldResult(ItemStack moldIn) {
+    return MathConstants.RNG.nextFloat() <= this.chance ? new ItemStack(moldIn.getItem()) : ItemStack.EMPTY;
+  }
+
+  public ItemStack getOutputItem(IMoldHandler moldHandler) {
+    Metal m = moldHandler.getMetal();
+    if (m != null) {
+      ItemStack output = new ItemStack(TFCThingsItems.TOOLS_HEADS_BY_METAL.get(type).get(m));
+
+      var cap = CapabilityHeat.get(output);
+      if (cap != null) {
+        cap.setTemperature(moldHandler.getTemperature());
+      }
+
+      return output;
+    } else {
+      return ItemStack.EMPTY;
+    }
+  }
+
+  public String getType() {
+    return this.type;
+  }
+
+  public float getChance() {
+    return this.chance;
+  }
+
+  public static class Factory implements IRecipeFactory {
+
+    public Factory() {
+    }
+
+    public IRecipe parse(JsonContext context, JsonObject json) {
+      NonNullList<Ingredient> ingredients = RecipeUtils.parseShapeless(context, json);
+      String result = JsonUtils.getString(json, "result");
+      String type = result.toLowerCase();
+      String group = JsonUtils.getString(json, "group", "");
+      float chance = 0.0F;
+      if (JsonUtils.hasField(json, "chance")) {
+        chance = JsonUtils.getFloat(json, "chance");
+      }
+
+      return new TFCThingsUnmoldRecipe(group.isEmpty() ? new ResourceLocation(result) : new ResourceLocation(group), ingredients, type, chance);
+    }
+  }
 }

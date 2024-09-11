@@ -4,7 +4,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
 public interface IRegistrySound
-    extends IRegistryBase {
+        extends IRegistryBase {
 
   /**
    * Registers a new sound with the game. The sound must also exist in the sounds.json file.

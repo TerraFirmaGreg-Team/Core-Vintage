@@ -110,6 +110,23 @@ public class CommonProxy {
     }
   }
 
+  private void setTileEntity(World w, BlockPos pos)
+          throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    var tile = TileUtils.getTile(w, pos, TECropBase.class);
+    if (tile == null) {
+      return;
+    }
+    if (TFCFarming.firmalifeLoaded && tile instanceof TEStemCrop && !(tile instanceof TEStemCropN)) {
+      TETickCounter teStemCropN = TEStemCropN.class.getConstructor(TECropBase.class).newInstance(tile);
+      teStemCropN.resetCounter();
+      w.setTileEntity(pos, teStemCropN);
+    } else if (!(tile instanceof TECropBaseN)) {
+      TECropBaseN teCropBaseN = new TECropBaseN(tile);
+      teCropBaseN.resetCounter();
+      w.setTileEntity(pos, teCropBaseN);
+    }
+  }
+
   /**
    * sets tile entity to awaited blocks, nutrient map cleanup, passive nutrient growth
    */
@@ -141,30 +158,6 @@ public class CommonProxy {
       TFCFarming.INSTANCE.worldStorage.resetCounter();
     }
 
-  }
-
-  private void setTileEntity(World w, BlockPos pos)
-          throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-    var tile = TileUtils.getTile(w, pos, TECropBase.class);
-    if (tile == null) {
-      return;
-    }
-    if (TFCFarming.firmalifeLoaded && tile instanceof TEStemCrop && !(tile instanceof TEStemCropN)) {
-      TETickCounter teStemCropN = TEStemCropN.class.getConstructor(TECropBase.class).newInstance(tile);
-      teStemCropN.resetCounter();
-      w.setTileEntity(pos, teStemCropN);
-    } else if (!(tile instanceof TECropBaseN)) {
-      TECropBaseN teCropBaseN = new TECropBaseN(tile);
-      teCropBaseN.resetCounter();
-      w.setTileEntity(pos, teCropBaseN);
-    }
-  }
-
-  public boolean canSeeSky(BlockPos pos, World world) {
-    BlockPos up = pos.up();
-    for (; !world.getBlockState(up).isOpaqueCube() && up.getY() < 256; up = up.up())
-      ;
-    return up.getY() == 256;
   }
 
   /**
@@ -208,5 +201,12 @@ public class CommonProxy {
         }
       }
     }
+  }
+
+  public boolean canSeeSky(BlockPos pos, World world) {
+    BlockPos up = pos.up();
+    for (; !world.getBlockState(up).isOpaqueCube() && up.getY() < 256; up = up.up())
+      ;
+    return up.getY() == 256;
   }
 }

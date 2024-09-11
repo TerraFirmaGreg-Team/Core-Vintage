@@ -11,12 +11,6 @@ public interface IMachineSoundEffect {
   @SideOnly(Side.CLIENT)
   SoundEvent getSoundEvent();
 
-  boolean shouldPlay();
-
-  boolean isPlaying();
-
-  void setPlaying(boolean value);
-
   @SideOnly(Side.CLIENT)
   BlockPos getSoundPos();
 
@@ -31,4 +25,10 @@ public interface IMachineSoundEffect {
       setPlaying(false);
     }
   }
+
+  boolean shouldPlay();
+
+  boolean isPlaying();
+
+  void setPlaying(boolean value);
 }

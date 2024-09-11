@@ -17,23 +17,25 @@ import static su.terrafirmagreg.data.Constants.MODID_HOTORNOT;
 @EventBusSubscriber(modid = MODID_HOTORNOT)
 public final class RegistryFixerUpper {
 
-    @SubscribeEvent
-    public static void onMissingMapping(final MissingMappings<Item> event) {
+  @SubscribeEvent
+  public static void onMissingMapping(final MissingMappings<Item> event) {
 
-        nextMapping:
-        for (final Mapping<Item> itemMapping : event.getMappings()) {
-            final String oldItemName = itemMapping.key.getPath();
+    nextMapping:
+    for (final Mapping<Item> itemMapping : event.getMappings()) {
+      final String oldItemName = itemMapping.key.getPath();
 
-            for (final Metal metal : TFCRegistries.METALS.getValuesCollection()) {
-                // We only made tongs for tool metals
-                if (!metal.isToolMetal()) continue;
-
-                // Found the metal type the old item was
-                if (oldItemName.equals(metal + "_tongs")) {
-                    itemMapping.remap(ItemMetalTongs.get(metal));
-                    continue nextMapping;
-                }
-            }
+      for (final Metal metal : TFCRegistries.METALS.getValuesCollection()) {
+        // We only made tongs for tool metals
+        if (!metal.isToolMetal()) {
+          continue;
         }
+
+        // Found the metal type the old item was
+        if (oldItemName.equals(metal + "_tongs")) {
+          itemMapping.remap(ItemMetalTongs.get(metal));
+          continue nextMapping;
+        }
+      }
     }
+  }
 }

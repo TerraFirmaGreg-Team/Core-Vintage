@@ -11,14 +11,14 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemCoffeeHeatable extends ItemCoffee {
 
-    public ItemCoffeeHeatable(String name) {
-        super(name);
-    }
+  public ItemCoffeeHeatable(String name) {
+    super(name);
+  }
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new ProviderHeat(nbt, 1.0f, 1599f);
-    }
+  @Nullable
+  @Override
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    return new ProviderHeat(nbt, 1.0f, 1599f);
+  }
 
 }

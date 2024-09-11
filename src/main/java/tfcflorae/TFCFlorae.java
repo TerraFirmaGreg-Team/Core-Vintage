@@ -21,54 +21,57 @@ import tfcflorae.proxy.CommonProxy;
 import static su.terrafirmagreg.data.Constants.MODID_FL;
 import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
-@SuppressWarnings({ "WeakerAccess", "unused" })
+@SuppressWarnings({"WeakerAccess", "unused"})
 @Mod(modid = MODID_TFCF, name = TFCFlorae.NAME, version = Tags.MOD_VERSION, dependencies = TFCFlorae.DEPENDENCIES)
 public class TFCFlorae {
 
-    public static final String NAME = "TFC Florae";
-    public static final String DEPENDENCIES = "after:tfc;"
-            + "after:firmalife;"
-            + "after:tfcelementia;"
-            + "after:tfc_ph_compat;";
-    public static final LoggingHelper LOGGER = LoggingHelper.of(MODID_TFCF);
-    @Mod.Instance(MODID_TFCF)
-    public static TFCFlorae instance;
-    public static boolean signedBuild = true;
+  public static final String NAME = "TFC Florae";
+  public static final String DEPENDENCIES = "after:tfc;"
+          + "after:firmalife;"
+          + "after:tfcelementia;"
+          + "after:tfc_ph_compat;";
+  public static final LoggingHelper LOGGER = LoggingHelper.of(MODID_TFCF);
+  @Mod.Instance(MODID_TFCF)
+  public static TFCFlorae instance;
+  public static boolean signedBuild = true;
 
-    public static boolean FirmaLifeAdded = false;
-    public static boolean TFCElementiaAdded = false;
-    public static boolean TFCPHCompatAdded = false;
+  public static boolean FirmaLifeAdded = false;
+  public static boolean TFCElementiaAdded = false;
+  public static boolean TFCPHCompatAdded = false;
 
-    @SidedProxy(serverSide = "tfcflorae.proxy.CommonProxy", clientSide = "tfcflorae.proxy.ClientProxy")
-    public static CommonProxy proxy;
+  @SidedProxy(serverSide = "tfcflorae.proxy.CommonProxy", clientSide = "tfcflorae.proxy.ClientProxy")
+  public static CommonProxy proxy;
 
-    public static LoggingHelper getLog() {
-        return LOGGER;
-    }
+  public static LoggingHelper getLog() {
+    return LOGGER;
+  }
 
-    public static TFCFlorae getInstance() {
-        return instance;
-    }
+  public static TFCFlorae getInstance() {
+    return instance;
+  }
 
-    @EventHandler
-    public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
+  @EventHandler
+  public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
         /*if (!event.isDirectory())
         {
             signedBuild = false; // todo disabled for the time being
         }*/
+  }
+
+  @EventHandler
+  public void preInit(FMLPreInitializationEvent event) {
+
+    for (ModContainer Mod : Loader.instance().getActiveModList()) {
+      if (Mod.getModId().equals(MODID_FL)) {
+        FirmaLifeAdded = true;
+      }
+      if (Mod.getModId().equals("tfcelementia")) {
+        TFCElementiaAdded = true;
+      }
+      if (Mod.getModId().equals("tfc_ph_compat")) {
+        TFCPHCompatAdded = true;
+      }
     }
-
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-
-        for (ModContainer Mod : Loader.instance().getActiveModList()) {
-            if (Mod.getModId().equals(MODID_FL))
-                FirmaLifeAdded = true;
-            if (Mod.getModId().equals("tfcelementia"))
-                TFCElementiaAdded = true;
-            if (Mod.getModId().equals("tfc_ph_compat"))
-                TFCPHCompatAdded = true;
-        }
         /*
         if (TFCFlorae.FirmaLifeAdded)
         {
@@ -89,18 +92,18 @@ public class TFCFlorae {
         }
         */
 
-        proxy.preInit(event);
-    }
+    proxy.preInit(event);
+  }
 
-    @EventHandler
-    public void init(FMLInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-        proxy.init(event);
-    }
+  @EventHandler
+  public void init(FMLInitializationEvent event) {
+    NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+    proxy.init(event);
+  }
 
-    @Mod.EventHandler
-    public void onLoadComplete(FMLLoadCompleteEvent event) {
-        // This is the latest point that we can possibly stop creating non-decaying stacks on both server + client
-        // It should be safe to use as we're only using it internally
-    }
+  @Mod.EventHandler
+  public void onLoadComplete(FMLLoadCompleteEvent event) {
+    // This is the latest point that we can possibly stop creating non-decaying stacks on both server + client
+    // It should be safe to use as we're only using it internally
+  }
 }

@@ -19,10 +19,10 @@ public final class EntityUtils {
    * An array of armor equipment slots.
    */
   private static final EntityEquipmentSlot[] EQUIPMENT_SLOTS = new EntityEquipmentSlot[]{
-      EntityEquipmentSlot.HEAD,
-      EntityEquipmentSlot.CHEST,
-      EntityEquipmentSlot.LEGS,
-      EntityEquipmentSlot.FEET
+          EntityEquipmentSlot.HEAD,
+          EntityEquipmentSlot.CHEST,
+          EntityEquipmentSlot.LEGS,
+          EntityEquipmentSlot.FEET
   };
 
   /**
@@ -86,7 +86,7 @@ public final class EntityUtils {
   public static double getKnockbackResistance(EntityLivingBase entity) {
 
     return entity.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE)
-        .getAttributeValue();
+            .getAttributeValue();
   }
 
   /**

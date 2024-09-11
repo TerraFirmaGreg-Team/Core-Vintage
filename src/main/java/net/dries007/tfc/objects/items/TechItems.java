@@ -302,6 +302,14 @@ public final class TechItems {
     // This is probably safe since block registers first than items across all mods
   }
 
+  private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {
+    item.setRegistryName(MODID_TFCTECH, name);
+    item.setTranslationKey(MODID_TFCTECH + "." + name.replace('/', '.'));
+    item.setCreativeTab(ct);
+    r.register(item);
+    return item;
+  }
+
   private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
     ItemBlock itemBlock = producer.apply(block);
     //noinspection ConstantConditions
@@ -314,13 +322,5 @@ public final class TechItems {
     item.setRegistryName(item.getBlock().getRegistryName());
     item.setCreativeTab(item.getBlock().getCreativeTab());
     r.register(item);
-  }
-
-  private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {
-    item.setRegistryName(MODID_TFCTECH, name);
-    item.setTranslationKey(MODID_TFCTECH + "." + name.replace('/', '.'));
-    item.setCreativeTab(ct);
-    r.register(item);
-    return item;
   }
 }

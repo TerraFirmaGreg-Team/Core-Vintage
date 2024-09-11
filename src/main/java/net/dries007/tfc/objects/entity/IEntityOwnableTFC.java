@@ -9,9 +9,9 @@ import java.util.UUID;
 
 public interface IEntityOwnableTFC {
 
-    @Nullable
-    UUID getOwnerId();
+  @Nullable
+  UUID getOwnerId();
 
-    @Nullable
-    Entity getOwner();
+  @Nullable
+  Entity getOwner();
 }

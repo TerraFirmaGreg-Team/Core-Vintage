@@ -41,43 +41,6 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
   }
 
   @Override
-  protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-    super.mouseClicked(mouseX, mouseY, mouseButton);
-
-    if (mouseX >= guiLeft + 61 && mouseX <= guiLeft + 79 && mouseY >= guiTop + 16
-            && mouseY <= guiTop + 34) {
-      if (!tile.getSeal()) {
-        ModuleDevice.getPacketService().sendToServer(
-                new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos().getY(), tile.getPos()
-                        .getZ(), 0, true));
-        //TE.seal();
-      } else {
-        ModuleDevice.getPacketService().sendToServer(
-                new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos().getY(), tile.getPos()
-                        .getZ(), 0, false));
-        //TE.unseal();
-      }
-    } else if (mouseX >= guiLeft + 141 && mouseX <= guiLeft + 159 && mouseY >= guiTop + 52
-            && mouseY <= guiTop + 70) {
-      if ((tile.getSeal() && tile.getPower() > 0) || tile.getPump()) {
-        if (!tile.getPump()) {
-          ModuleDevice.getPacketService()
-                  .sendToServer(new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos()
-                          .getY(), tile.getPos()
-                          .getZ(), 1, true));
-          //TE.startPump();
-        } else {
-          ModuleDevice.getPacketService()
-                  .sendToServer(new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos()
-                          .getY(), tile.getPos()
-                          .getZ(), 1, false));
-          //TE.stopPump();
-        }
-      }
-    }
-  }
-
-  @Override
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
     String name = I18n.format(translationKey + ".name");
     fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6,
@@ -251,6 +214,43 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
   }
 
   @Override
+  protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+    super.mouseClicked(mouseX, mouseY, mouseButton);
+
+    if (mouseX >= guiLeft + 61 && mouseX <= guiLeft + 79 && mouseY >= guiTop + 16
+            && mouseY <= guiTop + 34) {
+      if (!tile.getSeal()) {
+        ModuleDevice.getPacketService().sendToServer(
+                new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos().getY(), tile.getPos()
+                        .getZ(), 0, true));
+        //TE.seal();
+      } else {
+        ModuleDevice.getPacketService().sendToServer(
+                new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos().getY(), tile.getPos()
+                        .getZ(), 0, false));
+        //TE.unseal();
+      }
+    } else if (mouseX >= guiLeft + 141 && mouseX <= guiLeft + 159 && mouseY >= guiTop + 52
+            && mouseY <= guiTop + 70) {
+      if ((tile.getSeal() && tile.getPower() > 0) || tile.getPump()) {
+        if (!tile.getPump()) {
+          ModuleDevice.getPacketService()
+                  .sendToServer(new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos()
+                          .getY(), tile.getPos()
+                          .getZ(), 1, true));
+          //TE.startPump();
+        } else {
+          ModuleDevice.getPacketService()
+                  .sendToServer(new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos()
+                          .getY(), tile.getPos()
+                          .getZ(), 1, false));
+          //TE.stopPump();
+        }
+      }
+    }
+  }
+
+  @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
     this.mc.getTextureManager().bindTexture(BACKGROUND);
@@ -306,17 +306,13 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
 
   }
 
-  private float getProgressScaled(int pixels) {
-    return tile.getSealedTicks() * pixels / ModConfig.sealedDuration;
+  private float getPressureLeftScaled(int pixels) {
+    return (float) tile.getPressure() * pixels / (ModConfig.seaLevelPressure
+            + ModConfig.pressureChange * (256 - ModConfig.seaLevel));
   }
 
   private float getHeatLeftScaled(int pixels) {
     return Math.round(tile.getTemperature()) * pixels / ModConfig.maxTemp;
-  }
-
-  private float getPressureLeftScaled(int pixels) {
-    return (float) tile.getPressure() * pixels / (ModConfig.seaLevelPressure
-            + ModConfig.pressureChange * (256 - ModConfig.seaLevel));
   }
 
   private float getCoolentLeftScaled(int pixels) {
@@ -330,6 +326,10 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
 
   private float getLocalTempatureScaled(int pixels) {
     return Math.round(tile.getLocalTemperature()) * pixels / ModConfig.maxTemp;
+  }
+
+  private float getProgressScaled(int pixels) {
+    return tile.getSealedTicks() * pixels / ModConfig.sealedDuration;
   }
 
 }

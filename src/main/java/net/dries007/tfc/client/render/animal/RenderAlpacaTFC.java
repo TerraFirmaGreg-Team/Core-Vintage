@@ -15,11 +15,11 @@ import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class RenderAlpacaTFC extends RenderAnimalTFC<EntityAlpacaTFC> {
 
-    private static final ResourceLocation ALPACA_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/alpaca_old.png");
-    private static final ResourceLocation ALPACA_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/alpaca_young.png");
+  private static final ResourceLocation ALPACA_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/alpaca_old.png");
+  private static final ResourceLocation ALPACA_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/alpaca_young.png");
 
-    public RenderAlpacaTFC(RenderManager renderManager) {
-        super(renderManager, new ModelAlpacaBodyTFC(), 0.7F, ALPACA_YOUNG, ALPACA_OLD);
-        this.addLayer(new LayerAlpacaWoolTFC(this));
-    }
+  public RenderAlpacaTFC(RenderManager renderManager) {
+    super(renderManager, new ModelAlpacaBodyTFC(), 0.7F, ALPACA_YOUNG, ALPACA_OLD);
+    this.addLayer(new LayerAlpacaWoolTFC(this));
+  }
 }

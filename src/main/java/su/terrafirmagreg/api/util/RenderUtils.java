@@ -32,8 +32,8 @@ import java.util.Optional;
 public final class RenderUtils {
 
   public static void putVertex(UnpackedBakedQuad.Builder builder, VertexFormat format,
-      Optional<TRSRTransformation> transform, EnumFacing side,
-      float x, float y, float z, float u, float v, float r, float g, float b, float a) {
+          Optional<TRSRTransformation> transform, EnumFacing side,
+          float x, float y, float z, float u, float v, float r, float g, float b, float a) {
     Vector4f vec = new Vector4f();
     for (int e = 0; e < format.getElementCount(); e++) {
       switch (format.getElement(e).getUsage()) {
@@ -61,7 +61,7 @@ public final class RenderUtils {
           }
         case NORMAL:
           builder.put(e, (float) side.getXOffset(), (float) side.getYOffset(),
-              (float) side.getZOffset(), 0f);
+                  (float) side.getZOffset(), 0f);
           break;
         default:
           builder.put(e);
@@ -114,26 +114,6 @@ public final class RenderUtils {
     return builder.build();
   }
 
-  public static IBakedModel getBakedModel(ItemStack stack) {
-
-    Item item = stack.getItem();
-
-    if (item instanceof ItemBlock itemBlock) {
-      Block block = itemBlock.getBlock();
-      IBlockState blockState = block.getStateFromMeta(stack.getMetadata());
-      return getBakedModel(blockState);
-
-    } else {
-      return Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(stack);
-    }
-  }
-
-  public static IBakedModel getBakedModel(IBlockState blockState) {
-
-    return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes()
-        .getModelForState(blockState);
-  }
-
   public static List<BakedQuad> getQuads(ItemStack stack, long rand) {
 
     Item item = stack.getItem();
@@ -153,6 +133,26 @@ public final class RenderUtils {
     } else {
       IBakedModel bakedModel = getBakedModel(stack);
       return bakedModel.getQuads(null, null, rand);
+    }
+  }
+
+  public static IBakedModel getBakedModel(IBlockState blockState) {
+
+    return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes()
+            .getModelForState(blockState);
+  }
+
+  public static IBakedModel getBakedModel(ItemStack stack) {
+
+    Item item = stack.getItem();
+
+    if (item instanceof ItemBlock itemBlock) {
+      Block block = itemBlock.getBlock();
+      IBlockState blockState = block.getStateFromMeta(stack.getMetadata());
+      return getBakedModel(blockState);
+
+    } else {
+      return Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(stack);
     }
   }
 }

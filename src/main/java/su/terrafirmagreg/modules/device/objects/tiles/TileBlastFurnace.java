@@ -46,7 +46,7 @@ import java.util.List;
 import static su.terrafirmagreg.data.Properties.LIT;
 
 public class TileBlastFurnace extends BaseTileTickableInventory
-    implements ITileFields, IProviderContainer<ContainerBlastFurnace, GuiBlastFurnace> {
+        implements ITileFields, IProviderContainer<ContainerBlastFurnace, GuiBlastFurnace> {
 
   public static final int SLOT_TUYERE = 0;
   public static final int FIELD_TEMPERATURE = 0;
@@ -140,11 +140,11 @@ public class TileBlastFurnace extends BaseTileTickableInventory
     }
     for (ItemStack stack : oreStacks) {
       InventoryHelper.spawnItemStack(world, pos.north().getX(), pos.getY(), pos.north().getZ(),
-          stack);
+              stack);
     }
     for (ItemStack stack : fuelStacks) {
       InventoryHelper.spawnItemStack(world, pos.north().getX(), pos.getY(), pos.north().getZ(),
-          stack);
+              stack);
     }
     super.onBreakBlock(world, pos, state);
   }
@@ -232,7 +232,7 @@ public class TileBlastFurnace extends BaseTileTickableInventory
             fuelStacks.remove(0);
             Fuel fuel = FuelManager.getFuel(fuelStack);
             burnTicksLeft = (int) (Math.ceil(
-                fuel.getAmount() / ConfigDevice.BLOCKS.BLAST_FURNACE.consumption));
+                    fuel.getAmount() / ConfigDevice.BLOCKS.BLAST_FURNACE.consumption));
             burnTemperature = fuel.getTemperature();
           } else {
             burnTemperature = 0;
@@ -242,7 +242,7 @@ public class TileBlastFurnace extends BaseTileTickableInventory
 
         if (temperature > 0 || burnTemperature > 0) {
           temperature = CapabilityHeat.adjustToTargetTemperature(temperature, burnTemperature,
-              airTicks, MAX_AIR_TICKS);
+                  airTicks, MAX_AIR_TICKS);
           // Provide heat to blocks that are one block bellow AKA crucible
           Block blockCrucible = world.getBlockState(pos.down()).getBlock();
           if (blockCrucible instanceof IHeatConsumerBlock heatConsumerBlock) {
@@ -301,12 +301,12 @@ public class TileBlastFurnace extends BaseTileTickableInventory
         while (maxOre < oreStacks.size()) {
           //Structure lost one or more chimney levels
           InventoryHelper.spawnItemStack(world, pos.north().getX(), pos.getY(), pos.north()
-              .getZ(), oreStacks.get(0));
+                  .getZ(), oreStacks.get(0));
           oreStacks.remove(0);
         }
         while (maxFuel < fuelStacks.size()) {
           InventoryHelper.spawnItemStack(world, pos.north().getX(), pos.north().getY(), pos.north()
-              .getZ(), fuelStacks.get(0));
+                  .getZ(), fuelStacks.get(0));
           fuelStacks.remove(0);
         }
         addItemsFromWorld();
@@ -338,33 +338,6 @@ public class TileBlastFurnace extends BaseTileTickableInventory
     }
   }
 
-  public void debug() {
-    TerraFirmaCraft.getLog().debug("Debugging Blast Furnace:");
-    TerraFirmaCraft.getLog()
-        .debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature,
-            burnTicksLeft);
-    TerraFirmaCraft.getLog().debug("Burning? {}", world.getBlockState(pos).getValue(LIT));
-    int i = 0;
-    for (ItemStack item : oreStacks) {
-      TerraFirmaCraft.getLog().debug("Slot: {} - NBT: {}", i, item.serializeNBT().toString());
-    }
-  }
-
-  /**
-   * Passed from BlockBlastFurnace's IBellowsConsumerBlock
-   *
-   * @param airAmount the air amount
-   */
-  public void onAirIntake(int airAmount) {
-    ItemStack stack = inventory.getStackInSlot(SLOT_TUYERE);
-    if (!stack.isEmpty() && burnTicksLeft > 0) {
-      airTicks += airAmount;
-      if (airTicks > MAX_AIR_TICKS) {
-        airTicks = MAX_AIR_TICKS;
-      }
-    }
-  }
-
   /**
    * Melts stacks
    */
@@ -381,8 +354,8 @@ public class TileBlastFurnace extends BaseTileTickableInventory
   private void addItemsFromWorld() {
     EntityItem fluxEntity = null, oreEntity = null;
     List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
-        new AxisAlignedBB(pos.up(), pos.up().add(1, 5, 1)),
-        EntitySelectors.IS_ALIVE);
+            new AxisAlignedBB(pos.up(), pos.up().add(1, 5, 1)),
+            EntitySelectors.IS_ALIVE);
     for (EntityItem entityItem : items) {
       ItemStack stack = entityItem.getItem();
       BlastFurnaceRecipe recipe = BlastFurnaceRecipe.get(stack);
@@ -450,12 +423,12 @@ public class TileBlastFurnace extends BaseTileTickableInventory
         if (slagLayers >= 4) {
           slagLayers -= 4;
           world.setBlockState(pos.up(i), BlocksDevice.MOLTEN.getDefaultState()
-              .withProperty(LIT, cooking)
-              .withProperty(BlockMolten.LAYERS, 4));
+                  .withProperty(LIT, cooking)
+                  .withProperty(BlockMolten.LAYERS, 4));
         } else {
           world.setBlockState(pos.up(i), BlocksDevice.MOLTEN.getDefaultState()
-              .withProperty(LIT, cooking)
-              .withProperty(BlockMolten.LAYERS, slagLayers));
+                  .withProperty(LIT, cooking)
+                  .withProperty(BlockMolten.LAYERS, slagLayers));
           slagLayers = 0;
         }
       } else {
@@ -467,16 +440,43 @@ public class TileBlastFurnace extends BaseTileTickableInventory
     }
   }
 
+  public void debug() {
+    TerraFirmaCraft.getLog().debug("Debugging Blast Furnace:");
+    TerraFirmaCraft.getLog()
+            .debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature,
+                    burnTicksLeft);
+    TerraFirmaCraft.getLog().debug("Burning? {}", world.getBlockState(pos).getValue(LIT));
+    int i = 0;
+    for (ItemStack item : oreStacks) {
+      TerraFirmaCraft.getLog().debug("Slot: {} - NBT: {}", i, item.serializeNBT().toString());
+    }
+  }
+
+  /**
+   * Passed from BlockBlastFurnace's IBellowsConsumerBlock
+   *
+   * @param airAmount the air amount
+   */
+  public void onAirIntake(int airAmount) {
+    ItemStack stack = inventory.getStackInSlot(SLOT_TUYERE);
+    if (!stack.isEmpty() && burnTicksLeft > 0) {
+      airTicks += airAmount;
+      if (airTicks > MAX_AIR_TICKS) {
+        airTicks = MAX_AIR_TICKS;
+      }
+    }
+  }
+
   @Override
   public ContainerBlastFurnace getContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new ContainerBlastFurnace(inventoryPlayer, this);
   }
 
   @Override
   public GuiBlastFurnace getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-      IBlockState state, BlockPos pos) {
+          IBlockState state, BlockPos pos) {
     return new GuiBlastFurnace(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-        this);
+            this);
   }
 }

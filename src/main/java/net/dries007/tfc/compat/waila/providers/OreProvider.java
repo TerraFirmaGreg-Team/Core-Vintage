@@ -18,29 +18,29 @@ import java.util.List;
 
 public class OreProvider implements IWailaBlock {
 
-    @NotNull
-    @Override
-    public ItemStack getIcon(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
-        IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockOreTFC b) {
-            return ItemOreTFC.get(b.ore, 1);
-        }
-        return ItemStack.EMPTY;
+  @NotNull
+  @Override
+  public ItemStack getIcon(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
+    IBlockState state = world.getBlockState(pos);
+    if (state.getBlock() instanceof BlockOreTFC b) {
+      return ItemOreTFC.get(b.ore, 1);
     }
+    return ItemStack.EMPTY;
+  }
 
-    @NotNull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(BlockOreTFC.class);
-    }
+  @NotNull
+  @Override
+  public List<Class<?>> getLookupClass() {
+    return Collections.singletonList(BlockOreTFC.class);
+  }
 
-    @Override
-    public boolean appendBody() {
-        return false;
-    }
+  @Override
+  public boolean appendBody() {
+    return false;
+  }
 
-    @Override
-    public boolean overrideIcon() {
-        return true;
-    }
+  @Override
+  public boolean overrideIcon() {
+    return true;
+  }
 }

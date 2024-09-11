@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeldingRecipeWrapper
-    extends BaseRecipeWrapper<IQuernRecipe> {
+        extends BaseRecipeWrapper<IQuernRecipe> {
 
   public WeldingRecipeWrapper(IQuernRecipe recipe) {
     super(recipe);

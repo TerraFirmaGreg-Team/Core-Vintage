@@ -28,9 +28,9 @@ public interface IFoodStatsTFC {
       addStats(foodCap);
     } else {
       TerraFirmaCraft.getLog()
-          .info(
-              "Player ate a weird food: {} / {} that was missing a food capability! This is likely the error of an addon!",
-              stack.getItem(), stack);
+              .info(
+                      "Player ate a weird food: {} / {} that was missing a food capability! This is likely the error of an addon!",
+                      stack.getItem(), stack);
     }
   }
 
@@ -45,16 +45,12 @@ public interface IFoodStatsTFC {
 
   float getHealthModifier();
 
-  float getThirst();
-
-  void setThirst(float value);
-
   @NotNull
   NutritionStats getNutrition();
 
   /**
-   * Used to drink from a water source. Has an internal cooldown Attention: Simulation updates the cooldown, if you need to update the value after a
-   * simulation, use #addThirst
+   * Used to drink from a water source. Has an internal cooldown Attention: Simulation updates the cooldown, if you need to update the value after a simulation, use
+   * #addThirst
    *
    * @param value    the amount to drink = the value to increase thirst by
    * @param simulate determines if this is a simulated drink (eg: the thirst value is not updated, but still checks if this attempt would happen)
@@ -69,9 +65,12 @@ public interface IFoodStatsTFC {
     setThirst(getThirst() + value);
   }
 
+  float getThirst();
+
+  void setThirst(float value);
+
   /**
-   * Resets cooldown to prevent arm swinging in client when it attempts to drink water Client also needs to update cooldown after a sucessful drink
-   * attempt
+   * Resets cooldown to prevent arm swinging in client when it attempts to drink water Client also needs to update cooldown after a sucessful drink attempt
    */
   void resetCooldown();
 }

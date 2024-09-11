@@ -24,27 +24,27 @@ public final class EntitiesDevice {
 
   public static void onRegister(RegistryManager registry) {
     SLING_STONE = registry.entity("slingstone",
-        EntityEntryBuilder.create()
-            .entity(EntitySlingStone.class)
-            .tracker(64, 1, true)
+            EntityEntryBuilder.create()
+                    .entity(EntitySlingStone.class)
+                    .tracker(64, 1, true)
     );
 
     SLING_STONE_METAL = registry.entity("slingstonemetal",
-        EntityEntryBuilder.create()
-            .entity(EntitySlingStoneMetal.class)
-            .tracker(64, 1, true)
+            EntityEntryBuilder.create()
+                    .entity(EntitySlingStoneMetal.class)
+                    .tracker(64, 1, true)
     );
 
     SLING_STONE_METAL_LIGHT = registry.entity("slingstonemetallight",
-        EntityEntryBuilder.create()
-            .entity(EntitySlingStoneMetalLight.class)
-            .tracker(64, 1, true)
+            EntityEntryBuilder.create()
+                    .entity(EntitySlingStoneMetalLight.class)
+                    .tracker(64, 1, true)
     );
 
     UNKNOWN_PROJECTILE = registry.entity("unknownprojectile",
-        EntityEntryBuilder.create()
-            .entity(EntityUnknownProjectile.class)
-            .tracker(64, 1, true)
+            EntityEntryBuilder.create()
+                    .entity(EntityUnknownProjectile.class)
+                    .tracker(64, 1, true)
     );
   }
 
@@ -52,11 +52,11 @@ public final class EntitiesDevice {
   public static void onClientRegister(RegistryManager registry) {
     RenderingRegistry.registerEntityRenderingHandler(EntitySlingStone.class, RenderSlingStone::new);
     RenderingRegistry.registerEntityRenderingHandler(EntitySlingStoneMetal.class,
-        RenderSlingMetal::new);
+            RenderSlingMetal::new);
     RenderingRegistry.registerEntityRenderingHandler(EntitySlingStoneMetalLight.class,
-        RenderSlingMetal::new);
+            RenderSlingMetal::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityUnknownProjectile.class,
-        RenderSlingUnknownMetal::new);
+            RenderSlingUnknownMetal::new);
 
   }
 }

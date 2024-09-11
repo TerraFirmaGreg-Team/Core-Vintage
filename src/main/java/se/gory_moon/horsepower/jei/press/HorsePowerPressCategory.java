@@ -18,49 +18,52 @@ import static su.terrafirmagreg.data.Constants.MODID_HORSEPOWER;
 
 public class HorsePowerPressCategory extends HorsePowerCategory<PressRecipeWrapper> {
 
-    private static final int inputSlot = 0;
-    private static final int outputSlot = 1;
+  private static final int inputSlot = 0;
+  private static final int outputSlot = 1;
 
-    private final String localizedName;
-    private final boolean isLiquid;
+  private final String localizedName;
+  private final boolean isLiquid;
 
-    public HorsePowerPressCategory(IGuiHelper guiHelper, boolean isLiquid) {
-        super(guiHelper);
-        this.isLiquid = isLiquid;
-        if (isLiquid)
-            background = guiHelper.createDrawable(new ResourceLocation(MODID_HORSEPOWER, "textures/gui/jei_fluid.png"), 0, 0, 146, 74);
-        localizedName = isLiquid ? Localization.GUI.CATEGORY_PRESS_FLUID.translate() : Localization.GUI.CATEGORY_PRESS_ITEM.translate();
+  public HorsePowerPressCategory(IGuiHelper guiHelper, boolean isLiquid) {
+    super(guiHelper);
+    this.isLiquid = isLiquid;
+    if (isLiquid) {
+      background = guiHelper.createDrawable(new ResourceLocation(MODID_HORSEPOWER, "textures/gui/jei_fluid.png"), 0, 0, 146, 74);
+    }
+    localizedName = isLiquid ? Localization.GUI.CATEGORY_PRESS_FLUID.translate() : Localization.GUI.CATEGORY_PRESS_ITEM.translate();
+  }
+
+  @Override
+  public String getUid() {
+    return isLiquid ? HorsePowerPlugin.PRESS_FLUID : HorsePowerPlugin.PRESS_ITEM;
+  }
+
+  @Override
+  public String getTitle() {
+    return localizedName;
+  }
+
+  @Override
+  public String getModName() {
+    return Reference.NAME;
+  }
+
+  @Override
+  public void setRecipe(IRecipeLayout recipeLayout, PressRecipeWrapper recipeWrapper, IIngredients ingredients) {
+    IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
+    IGuiFluidStackGroup guiFluidStack = recipeLayout.getFluidStacks();
+
+    guiItemStacks.init(inputSlot, true, 34, 32);
+    if (isLiquid) {
+      guiFluidStack.init(outputSlot, false, 95, 23, 16, 27, Configs.general.pressFluidTankSize, true, null);
+    } else {
+      guiItemStacks.init(outputSlot, false, 90, 32);
     }
 
-    @Override
-    public String getUid() {
-        return isLiquid ? HorsePowerPlugin.PRESS_FLUID : HorsePowerPlugin.PRESS_ITEM;
+    guiItemStacks.set(ingredients);
+    if (isLiquid) {
+      guiFluidStack.set(ingredients);
     }
-
-    @Override
-    public String getTitle() {
-        return localizedName;
-    }
-
-    @Override
-    public String getModName() {
-        return Reference.NAME;
-    }
-
-    @Override
-    public void setRecipe(IRecipeLayout recipeLayout, PressRecipeWrapper recipeWrapper, IIngredients ingredients) {
-        IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
-        IGuiFluidStackGroup guiFluidStack = recipeLayout.getFluidStacks();
-
-        guiItemStacks.init(inputSlot, true, 34, 32);
-        if (isLiquid)
-            guiFluidStack.init(outputSlot, false, 95, 23, 16, 27, Configs.general.pressFluidTankSize, true, null);
-        else
-            guiItemStacks.init(outputSlot, false, 90, 32);
-
-        guiItemStacks.set(ingredients);
-        if (isLiquid)
-            guiFluidStack.set(ingredients);
-        super.openRecipe();
-    }
+    super.openRecipe();
+  }
 }

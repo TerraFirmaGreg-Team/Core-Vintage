@@ -193,6 +193,12 @@ public class ModelAnimalCougar extends ModelBase {
     frontRightLegTop.addChild(frontRightLegMiddle);
   }
 
+  private void setRotateAngle(ModelRenderer model, float x, float y, float z) {
+    model.rotateAngleX = x;
+    model.rotateAngleY = y;
+    model.rotateAngleZ = z;
+  }
+
   @Override
   public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
     super.render(entity, f, f1, f2, f3, f4, f5);
@@ -227,20 +233,14 @@ public class ModelAnimalCougar extends ModelBase {
 
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,
-      Entity entity) {
+          Entity entity) {
     setRotateAngle(head, f4 / (180F / MathConstants.PI), f3 / (180F / MathConstants.PI), 0F);
     setRotateAngle(neck, f4 / (1.5F * (180F / MathConstants.PI)) + -0.18203784098300857F,
-        f3 / (1.5F * (180F / MathConstants.PI)), 0F);
+            f3 / (1.5F * (180F / MathConstants.PI)), 0F);
 
     frontRightLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
     frontLeftLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1;
     backRightLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1;
     backLeftLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
-  }
-
-  private void setRotateAngle(ModelRenderer model, float x, float y, float z) {
-    model.rotateAngleX = x;
-    model.rotateAngleY = y;
-    model.rotateAngleZ = z;
   }
 }

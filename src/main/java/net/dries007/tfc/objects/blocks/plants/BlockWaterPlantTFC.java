@@ -19,36 +19,39 @@ import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER
 
 public class BlockWaterPlantTFC extends BlockPlantTFC {
 
-    private static final Map<Plant, BlockWaterPlantTFC> MAP = new HashMap<>();
+  private static final Map<Plant, BlockWaterPlantTFC> MAP = new HashMap<>();
 
-    public BlockWaterPlantTFC(Plant plant) {
-        super(plant);
-        if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+  public BlockWaterPlantTFC(Plant plant) {
+    super(plant);
+    if (MAP.put(plant, this) != null) {
+      throw new IllegalStateException("There can only be one.");
     }
+  }
 
-    public static BlockWaterPlantTFC get(Plant plant) {
-        return MAP.get(plant);
-    }
+  public static BlockWaterPlantTFC get(Plant plant) {
+    return MAP.get(plant);
+  }
 
-    @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        IBlockState soil = worldIn.getBlockState(pos.down());
-        if (plant.getWaterType() == SALT_WATER)
-            return BlockUtils.isSaltWater(worldIn.getBlockState(pos)) && this.canSustainBush(soil);
-        return BlockUtils.isFreshWater(worldIn.getBlockState(pos)) && this.canSustainBush(soil);
+  @Override
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    IBlockState soil = worldIn.getBlockState(pos.down());
+    if (plant.getWaterType() == SALT_WATER) {
+      return BlockUtils.isSaltWater(worldIn.getBlockState(pos)) && this.canSustainBush(soil);
     }
+    return BlockUtils.isFreshWater(worldIn.getBlockState(pos)) && this.canSustainBush(soil);
+  }
 
-    @Override
-    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
-        this.onBlockHarvested(world, pos, state, player);
-        return world.setBlockState(pos, plant.getWaterType(), world.isRemote ? 11 : 3);
-    }
+  @Override
+  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+    this.onBlockHarvested(world, pos, state, player);
+    return world.setBlockState(pos, plant.getWaterType(), world.isRemote ? 11 : 3);
+  }
 
-    @Override
-    protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
-        if (!this.canBlockStay(worldIn, pos, state)) {
-            this.dropBlockAsItem(worldIn, pos, state, 0);
-            worldIn.setBlockState(pos, plant.getWaterType());
-        }
+  @Override
+  protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
+    if (!this.canBlockStay(worldIn, pos, state)) {
+      this.dropBlockAsItem(worldIn, pos, state, 0);
+      worldIn.setBlockState(pos, plant.getWaterType());
     }
+  }
 }

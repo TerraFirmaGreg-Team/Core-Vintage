@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public final class ModuleAgriculture extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(
-      ModuleAgriculture.class.getSimpleName());
+          ModuleAgriculture.class.getSimpleName());
 
   public final CreativeTabs AGRICULTURE_TAB;
 

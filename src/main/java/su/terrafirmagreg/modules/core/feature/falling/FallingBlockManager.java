@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.core.capabilities.worldtracker.CapabilityWorldT
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.spi.CollapseData;
 import su.terrafirmagreg.modules.core.object.entity.EntityFallingBlock;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile;
-import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
+import su.terrafirmagreg.modules.wood.object.block.BlockWoodSupport;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -406,12 +406,6 @@ public class FallingBlockManager {
     }
 
     public Specification(boolean canFallHorizontally, boolean collapsable,
-            Supplier<SoundEvent> soundEventDelegate) {
-      this(canFallHorizontally, collapsable, soundEventDelegate, DEFAULT_DROPS_PROVIDER);
-
-    }
-
-    public Specification(boolean canFallHorizontally, boolean collapsable,
             Supplier<SoundEvent> soundEventDelegate,
             IFallDropsProvider fallDropsProvider) {
       this.canFallHorizontally = canFallHorizontally;
@@ -421,6 +415,12 @@ public class FallingBlockManager {
       }
       this.soundEventDelegate = soundEventDelegate;
       this.fallDropsProvider = fallDropsProvider;
+    }
+
+    public Specification(boolean canFallHorizontally, boolean collapsable,
+            Supplier<SoundEvent> soundEventDelegate) {
+      this(canFallHorizontally, collapsable, soundEventDelegate, DEFAULT_DROPS_PROVIDER);
+
     }
 
     public Specification setResultingState(IBlockState resultingState) {

@@ -120,15 +120,6 @@ public final class TFCJEIPlugin implements IModPlugin {
 
   private static IModRegistry REGISTRY;
 
-  /**
-   * Helper method to return a collection containing all possible itemstacks registered in JEI
-   *
-   * @return Collection of ItemStacks
-   */
-  public static Collection<ItemStack> getAllIngredients() {
-    return REGISTRY.getIngredientRegistry().getAllIngredients(VanillaTypes.ITEM);
-  }
-
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
     //Add new JEI recipe categories
@@ -286,7 +277,7 @@ public final class TFCJEIPlugin implements IModPlugin {
             .collect(Collectors.toList());
 
     registry.addRecipes(barrelRecipes, BARREL_UID);
-    for (var barrelItem : BlocksWood.BARREL.get()) {
+    for (var barrelItem : BlocksWood.BARREL.getMap().values()) {
       registry.addRecipeCatalyst(new ItemStack(barrelItem), BARREL_UID);
     }
 
@@ -428,5 +419,14 @@ public final class TFCJEIPlugin implements IModPlugin {
     //ContainerInventoryCrafting - Add ability to transfer recipe items
     IRecipeTransferRegistry transferRegistry = registry.getRecipeTransferRegistry();
     transferRegistry.addRecipeTransferHandler(ContainerInventoryCrafting.class, VanillaRecipeCategoryUid.CRAFTING, 1, 9, 10, 36);
+  }
+
+  /**
+   * Helper method to return a collection containing all possible itemstacks registered in JEI
+   *
+   * @return Collection of ItemStacks
+   */
+  public static Collection<ItemStack> getAllIngredients() {
+    return REGISTRY.getIngredientRegistry().getAllIngredients(VanillaTypes.ITEM);
   }
 }

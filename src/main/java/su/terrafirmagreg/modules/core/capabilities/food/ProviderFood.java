@@ -38,11 +38,6 @@ public class ProviderFood implements ICapabilityFood, ICapabilitySerializable<NB
     this(null, new FoodData(4, 0, 0, 0, 0, 0, 0, 0, 1));
   }
 
-  public ProviderFood(@Nullable NBTTagCompound nbt, @NotNull Food food) {
-
-    this(nbt, food.getData());
-  }
-
   public ProviderFood(@Nullable NBTTagCompound nbt, FoodData data) {
 
     this.foodTraits = new ArrayList<>(2);
@@ -52,8 +47,77 @@ public class ProviderFood implements ICapabilityFood, ICapabilitySerializable<NB
     deserializeNBT(nbt);
   }
 
+  /**
+   * This marks if the food data should be serialized. For normal food items, it isn't, because all values are provided on construction via CapabilityFood. Only mark
+   * this if food data will change per item stack
+   */
+  protected boolean isDynamic() {
+    return false;
+  }
+
+  public ProviderFood(@Nullable NBTTagCompound nbt, @NotNull Food food) {
+
+    this(nbt, food.getData());
+  }
+
   public static void setNonDecaying(boolean markStacksNonDecaying) {
     ProviderFood.markStacksNonDecaying = markStacksNonDecaying;
+  }
+
+  @Override
+  public NBTTagCompound serializeNBT() {
+    NBTTagCompound nbt = new NBTTagCompound();
+    nbt.setLong("creationDate", getCreationDate());
+    if (isDynamic()) {
+      nbt.setTag("foodData", data.serializeNBT());
+    }
+    // Traits are sorted so they match when trying to stack them
+    NBTTagList traitList = new NBTTagList();
+    for (FoodTrait trait : foodTraits) {
+      traitList.appendTag(new NBTTagString(trait.getName()));
+    }
+    nbt.setTag("traits", traitList);
+    return nbt;
+  }
+
+  private long calculateRottenDate(long creationDateIn) {
+    float decayMod = getDecayDateModifier();
+    if (decayMod == Float.POSITIVE_INFINITY) {
+      // Infinite decay modifier
+      return Long.MAX_VALUE;
+    }
+    return creationDateIn + (long) (decayMod * CapabilityFood.DEFAULT_ROT_TICKS);
+  }
+
+  @Override
+  public float getDecayDateModifier() {
+    // Decay modifiers are higher = shorter
+    float mod = data.getDecayModifier() * (float) ConfigFood.MISC.DECAY.modifier;
+    for (FoodTrait trait : foodTraits) {
+      mod *= trait.getDecayModifier();
+    }
+    // The modifier returned is used to calculate time, so higher = longer
+    return mod == 0 ? Float.POSITIVE_INFINITY : 1 / mod;
+  }
+
+  @Override
+  public void setNonDecaying() {
+    isNonDecaying = true;
+  }
+
+  @Override
+  public long getRottenDate() {
+    if (isNonDecaying) {
+      return NEVER_DECAY_DATE;
+    }
+    if (creationDate == ROTTEN_DATE) {
+      return ROTTEN_DATE;
+    }
+    long rottenDate = calculateRottenDate(creationDate);
+    if (rottenDate < Calendar.PLAYER_TIME.getTicks()) {
+      return ROTTEN_DATE;
+    }
+    return rottenDate;
   }
 
   @Override
@@ -73,75 +137,18 @@ public class ProviderFood implements ICapabilityFood, ICapabilitySerializable<NB
   }
 
   @Override
-  public long getRottenDate() {
-    if (isNonDecaying) {
-      return NEVER_DECAY_DATE;
-    }
-    if (creationDate == ROTTEN_DATE) {
-      return ROTTEN_DATE;
-    }
-    long rottenDate = calculateRottenDate(creationDate);
-    if (rottenDate < Calendar.PLAYER_TIME.getTicks()) {
-      return ROTTEN_DATE;
-    }
-    return rottenDate;
-  }
-
-  @Override
   @NotNull
   public FoodData getData() {
     return data;
-  }
-
-  @Override
-  public float getDecayDateModifier() {
-    // Decay modifiers are higher = shorter
-    float mod = data.getDecayModifier() * (float) ConfigFood.MISC.DECAY.modifier;
-    for (FoodTrait trait : foodTraits) {
-      mod *= trait.getDecayModifier();
-    }
-    // The modifier returned is used to calculate time, so higher = longer
-    return mod == 0 ? Float.POSITIVE_INFINITY : 1 / mod;
-  }
-
-  @Override
-  public void setNonDecaying() {
-    isNonDecaying = true;
   }
 
   @NotNull
   @Override
   public List<FoodTrait> getTraits() {
     return foodTraits;
-  }
-
-  @Override
+  }  @Override
   public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
     return capability == CapabilityFood.CAPABILITY;
-  }
-
-  @Nullable
-  @Override
-  @SuppressWarnings("unchecked")
-  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
-
-    return hasCapability(capability, facing) ? (T) this : null;
-  }
-
-  @Override
-  public NBTTagCompound serializeNBT() {
-    NBTTagCompound nbt = new NBTTagCompound();
-    nbt.setLong("creationDate", getCreationDate());
-    if (isDynamic()) {
-      nbt.setTag("foodData", data.serializeNBT());
-    }
-    // Traits are sorted so they match when trying to stack them
-    NBTTagList traitList = new NBTTagList();
-    for (FoodTrait trait : foodTraits) {
-      traitList.appendTag(new NBTTagString(trait.getName()));
-    }
-    nbt.setTag("traits", traitList);
-    return nbt;
   }
 
   @Override
@@ -163,21 +170,15 @@ public class ProviderFood implements ICapabilityFood, ICapabilitySerializable<NB
     }
   }
 
-  /**
-   * This marks if the food data should be serialized. For normal food items, it isn't, because all values are provided on construction via
-   * CapabilityFood. Only mark this if food data will change per item stack
-   */
-  protected boolean isDynamic() {
-    return false;
+
+
+  @Nullable
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+
+    return hasCapability(capability, facing) ? (T) this : null;
   }
 
-  private long calculateRottenDate(long creationDateIn) {
-    float decayMod = getDecayDateModifier();
-    if (decayMod == Float.POSITIVE_INFINITY) {
-      // Infinite decay modifier
-      return Long.MAX_VALUE;
-    }
-    return creationDateIn + (long) (decayMod * CapabilityFood.DEFAULT_ROT_TICKS);
-  }
 
 }

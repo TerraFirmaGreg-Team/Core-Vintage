@@ -33,19 +33,6 @@ public class TileGrindstone extends BaseTileInventory implements ITickable {
     super(2);
   }
 
-  public void readFromNBT(@NotNull NBTTagCompound nbt) {
-    this.rotationTimer = nbt.getInteger("rotationTimer");
-    this.hasGrindstone = this.inventory.getStackInSlot(SLOT_GRINDSTONE)
-        .getItem() instanceof ItemGrindstone;
-    super.readFromNBT(nbt);
-  }
-
-  @NotNull
-  public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
-    nbt.setInteger("rotationTimer", this.rotationTimer);
-    return super.writeToNBT(nbt);
-  }
-
   public ItemStack getGrindstone() {
     return this.inventory.getStackInSlot(SLOT_GRINDSTONE);
   }
@@ -58,6 +45,10 @@ public class TileGrindstone extends BaseTileInventory implements ITickable {
     return this.rotationTimer;
   }
 
+  public int getSlotLimit(int slot) {
+    return 1;
+  }
+
   public boolean isItemValid(int slot, @NotNull ItemStack stack) {
     return switch (slot) {
       case SLOT_GRINDSTONE -> stack.getItem() instanceof ItemGrindstone;
@@ -66,33 +57,19 @@ public class TileGrindstone extends BaseTileInventory implements ITickable {
     };
   }
 
-  public int getSlotLimit(int slot) {
-    return 1;
-  }
-
   public ItemStack insertOrSwapItem(int slot, ItemStack playerStack) {
     ItemStack grindstoneStack = this.inventory.getStackInSlot(slot);
     if (!grindstoneStack.isEmpty() &&
-        (!playerStack.isStackable() || !grindstoneStack.isStackable()
-            || grindstoneStack.getItem() != playerStack.getItem() ||
-            playerStack.getHasSubtypes()
-                && playerStack.getMetadata() != grindstoneStack.getMetadata() ||
-            !ItemStack.areItemStackTagsEqual(playerStack, grindstoneStack))) {
+            (!playerStack.isStackable() || !grindstoneStack.isStackable()
+                    || grindstoneStack.getItem() != playerStack.getItem() ||
+                    playerStack.getHasSubtypes()
+                            && playerStack.getMetadata() != grindstoneStack.getMetadata() ||
+                    !ItemStack.areItemStackTagsEqual(playerStack, grindstoneStack))) {
       this.inventory.setStackInSlot(slot, playerStack);
       return grindstoneStack;
     } else {
       return this.inventory.insertItem(slot, playerStack, false);
     }
-  }
-
-  public void setAndUpdateSlots(int slot) {
-    this.markForBlockUpdate();
-    if (slot == 0) {
-      this.hasGrindstone = this.inventory.getStackInSlot(SLOT_GRINDSTONE)
-          .getItem() instanceof ItemGrindstone;
-    }
-
-    super.setAndUpdateSlots(slot);
   }
 
   @Override
@@ -106,29 +83,29 @@ public class TileGrindstone extends BaseTileInventory implements ITickable {
       if (this.rotationTimer == 1) {
         sharpenItem(inputStack, grindstoneStack);
         world.playSound(null, pos, TFCThingsSoundEvents.WHETSTONE_SHARPEN, SoundCategory.BLOCKS,
-            0.2F,
-            0.6F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
+                0.2F,
+                0.6F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
         if (grindstoneStack.isEmpty()) {
           for (int i = 0; i < 15; ++i) {
             this.world.spawnParticle(EnumParticleTypes.ITEM_CRACK, (double) this.pos.getX() + 0.5D,
-                (double) this.pos.getY() + 0.875D,
-                (double) this.pos.getZ() + 0.5D,
-                (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D,
-                this.world.rand.nextDouble() / 4.0D,
-                (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D,
-                Item.getIdFromItem(ItemsDevice.GRINDSTONE_QUARTZ));
+                    (double) this.pos.getY() + 0.875D,
+                    (double) this.pos.getZ() + 0.5D,
+                    (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D,
+                    this.world.rand.nextDouble() / 4.0D,
+                    (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D,
+                    Item.getIdFromItem(ItemsDevice.GRINDSTONE_QUARTZ));
           }
           this.world.playSound(null, this.pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS,
-              1.0F, 0.8F);
+                  1.0F, 0.8F);
           this.world.playSound(null, this.pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS,
-              0.7F, 0.6F);
+                  0.7F, 0.6F);
         }
         this.setAndUpdateSlots(0);
       }
       if (this.rotationTimer == 0) {
         this.rotationTimer = 90;
         world.playSound(null, pos, TFCSounds.QUERN_USE, SoundCategory.BLOCKS, 0.2F,
-            0.8F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
+                0.8F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
       }
     } else {
       this.rotationTimer = 0;
@@ -136,16 +113,55 @@ public class TileGrindstone extends BaseTileInventory implements ITickable {
 
   }
 
-  private BlockPos getFluidLocation() {
-    int dir = getBlockMetadata();
-    BlockPos check = pos.down();
-    check = switch (dir) {
-      case 0 -> check.east();
-      case 1 -> check.south();
-      case 2 -> check.west();
-      default -> check.north();
-    };
-    return check;
+  private boolean shouldStartGrinding(ItemStack inputStack, ItemStack grindstoneStack) {
+    if (inputStack.isEmpty() || grindstoneStack.isEmpty() || getFlowDirection() == 0) {
+      return false;
+    }
+    if (CapabilitySharpness.has(inputStack)) {
+      var capability = CapabilitySharpness.get(inputStack);
+      ItemGrindstone grindstone = (ItemGrindstone) grindstoneStack.getItem();
+      return inputStack.getMaxDamage() - inputStack.getItemDamage() > 1
+              && capability.getCharges() < grindstone.getMaxCharges();
+    }
+    return false;
+  }
+
+  private void sharpenItem(ItemStack inputStack, ItemStack grindstoneStack) {
+    var capability = CapabilitySharpness.get(inputStack);
+    ItemGrindstone grindstone = (ItemGrindstone) grindstoneStack.getItem();
+    if (capability != null && capability.getCharges() < grindstone.getMaxCharges()) {
+      for (int i = 0; i < grindstone.getTier(); i++) {
+        if (capability.getCharges() >= grindstone.getMaxCharges()) {
+          break;
+        }
+        capability.addCharge();
+      }
+      inputStack.damageItem(1, new EntityCow(this.world));
+      grindstoneStack.damageItem(1, new EntityCow(this.world));
+    }
+  }
+
+  public void setAndUpdateSlots(int slot) {
+    this.markForBlockUpdate();
+    if (slot == 0) {
+      this.hasGrindstone = this.inventory.getStackInSlot(SLOT_GRINDSTONE)
+              .getItem() instanceof ItemGrindstone;
+    }
+
+    super.setAndUpdateSlots(slot);
+  }
+
+  public void readFromNBT(@NotNull NBTTagCompound nbt) {
+    this.rotationTimer = nbt.getInteger("rotationTimer");
+    this.hasGrindstone = this.inventory.getStackInSlot(SLOT_GRINDSTONE)
+            .getItem() instanceof ItemGrindstone;
+    super.readFromNBT(nbt);
+  }
+
+  @NotNull
+  public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+    nbt.setInteger("rotationTimer", this.rotationTimer);
+    return super.writeToNBT(nbt);
   }
 
   public int getFlowDirection() {
@@ -169,31 +185,15 @@ public class TileGrindstone extends BaseTileInventory implements ITickable {
     return 0;
   }
 
-  private boolean shouldStartGrinding(ItemStack inputStack, ItemStack grindstoneStack) {
-    if (inputStack.isEmpty() || grindstoneStack.isEmpty() || getFlowDirection() == 0) {
-      return false;
-    }
-    if (CapabilitySharpness.has(inputStack)) {
-      var capability = CapabilitySharpness.get(inputStack);
-      ItemGrindstone grindstone = (ItemGrindstone) grindstoneStack.getItem();
-      return inputStack.getMaxDamage() - inputStack.getItemDamage() > 1
-          && capability.getCharges() < grindstone.getMaxCharges();
-    }
-    return false;
-  }
-
-  private void sharpenItem(ItemStack inputStack, ItemStack grindstoneStack) {
-    var capability = CapabilitySharpness.get(inputStack);
-    ItemGrindstone grindstone = (ItemGrindstone) grindstoneStack.getItem();
-    if (capability != null && capability.getCharges() < grindstone.getMaxCharges()) {
-      for (int i = 0; i < grindstone.getTier(); i++) {
-        if (capability.getCharges() >= grindstone.getMaxCharges()) {
-          break;
-        }
-        capability.addCharge();
-      }
-      inputStack.damageItem(1, new EntityCow(this.world));
-      grindstoneStack.damageItem(1, new EntityCow(this.world));
-    }
+  private BlockPos getFluidLocation() {
+    int dir = getBlockMetadata();
+    BlockPos check = pos.down();
+    check = switch (dir) {
+      case 0 -> check.east();
+      case 1 -> check.south();
+      case 2 -> check.west();
+      default -> check.north();
+    };
+    return check;
   }
 }

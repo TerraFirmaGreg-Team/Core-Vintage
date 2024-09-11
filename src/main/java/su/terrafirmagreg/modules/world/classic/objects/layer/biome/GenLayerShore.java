@@ -17,20 +17,20 @@ public class GenLayerShore extends GenLayerBase {
 
     for (int zz = 0; zz < sizeZ; ++zz) {
       for (int xx = 0; xx < sizeX; ++xx) {
-        this.initChunkSeed((long) (zz + x), (long) (xx + z));
+        this.initChunkSeed(zz + x, xx + z);
         int thisID = ints[xx + 1 + (zz + 1) * (sizeX + 2)];
         if (!this.isOceanicBiome(thisID) && thisID != this.riverID && thisID != this.bayouID
-            && thisID != this.marshID &&
-            thisID != this.swamplandID && thisID != this.highHillsID) {
+                && thisID != this.marshID &&
+                thisID != this.swamplandID && thisID != this.highHillsID) {
           int zn = ints[xx + 1 + (zz + 1 - 1) * (sizeX + 2)];
           int xp = ints[xx + 1 + 1 + (zz + 1) * (sizeX + 2)];
           int xn = ints[xx + 1 - 1 + (zz + 1) * (sizeX + 2)];
           int zp = ints[xx + 1 + (zz + 1 + 1) * (sizeX + 2)];
           if (!this.isOceanicBiome(zn) && !this.isOceanicBiome(xp) && !this.isOceanicBiome(xn)
-              && !this.isOceanicBiome(zp)) {
+                  && !this.isOceanicBiome(zp)) {
             out[xx + zz * sizeX] = thisID;
           } else if (thisID != this.bayouID && thisID != this.marshID
-              && thisID != this.swamplandID) {
+                  && thisID != this.swamplandID) {
             out[xx + zz * sizeX] = this.isMountainBiome(thisID) ? this.gravelBeachID : this.beachID;
           } else {
             out[xx + zz * sizeX] = this.mangroveID;

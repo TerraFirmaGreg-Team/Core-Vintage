@@ -11,11 +11,11 @@ public class BiomeMountainsEdge extends BaseBiome {
 
   public BiomeMountainsEdge() {
     super(new Settings("Mountains Edge")
-        .guiColour(0x924A4C)
-        .baseHeight(-1.3f)
-        .heightVariation(-1.9000001f)
-        .baseBiome(MOUNTAINS)
-        .spawnBiome());
+            .guiColour(0x924A4C)
+            .baseHeight(-1.3f)
+            .heightVariation(-1.9000001f)
+            .baseBiome(MOUNTAINS)
+            .spawnBiome());
   }
 
   @Override
@@ -27,7 +27,7 @@ public class BiomeMountainsEdge extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-        BiomeDictionary.Type.MOUNTAIN
+            BiomeDictionary.Type.MOUNTAIN
     };
   }
 }

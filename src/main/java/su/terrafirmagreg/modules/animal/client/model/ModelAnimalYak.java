@@ -280,9 +280,15 @@ public class ModelAnimalYak extends ModelBase {
     hornLeftF1A.addChild(hornLeftF2);
   }
 
+  private void setRotateAngle(ModelRenderer model, float x, float y, float z) {
+    model.rotateAngleX = x;
+    model.rotateAngleY = y;
+    model.rotateAngleZ = z;
+  }
+
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-      float par6, float par7) {
+          float par6, float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
     EntityAnimalYak yak = ((EntityAnimalYak) entity);
 
@@ -425,15 +431,15 @@ public class ModelAnimalYak extends ModelBase {
 
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
-      float par6, Entity ent) {
+          float par6, Entity ent) {
     this.head.rotateAngleX = par5 / (180F / MathConstants.PI);
     this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
 
     this.legFrontRight.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
     this.legFrontLeft.rotateAngleX =
-        MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
+            MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
     this.legBackRight.rotateAngleX =
-        MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
+            MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
     this.legBackLeft.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
 
     udder.isHidden = false;
@@ -459,11 +465,5 @@ public class ModelAnimalYak extends ModelBase {
     hornLeftF1C.isHidden = false;
     hornLeftF1D.isHidden = false;
     hornLeftF2.isHidden = false;
-  }
-
-  private void setRotateAngle(ModelRenderer model, float x, float y, float z) {
-    model.rotateAngleX = x;
-    model.rotateAngleY = y;
-    model.rotateAngleZ = z;
   }
 }

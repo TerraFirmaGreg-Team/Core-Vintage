@@ -53,115 +53,115 @@ public class ModuleEventRouter {
     this.routes = new HashMap<>();
 
     this.routes.put(FMLConstructionEvent.class,
-        (IFMLStateEventRoute<FMLConstructionEvent>) (event) ->
-            this.fireEvent(module -> {
-              module.getLogger().debug("Registering packets");
-              module.onNetworkRegister();
+            (IFMLStateEventRoute<FMLConstructionEvent>) (event) ->
+                    this.fireEvent(module -> {
+                      module.getLogger().debug("Registering packets");
+                      module.onNetworkRegister();
 
-              module.getLogger().debug("Construction start");
-              module.onConstruction(event);
+                      module.getLogger().debug("Construction start");
+                      module.onConstruction(event);
 
-              module.getLogger().debug("Construction complete");
-            })
+                      module.getLogger().debug("Construction complete");
+                    })
     );
     this.routes.put(FMLPreInitializationEvent.class,
-        (IFMLStateEventRoute<FMLPreInitializationEvent>) (event) ->
-            this.fireEvent(module -> {
-              module.getLogger().debug("Pre-Init start");
-              module.onPreInit(event);
+            (IFMLStateEventRoute<FMLPreInitializationEvent>) (event) ->
+                    this.fireEvent(module -> {
+                      module.getLogger().debug("Pre-Init start");
+                      module.onPreInit(event);
 
-              module.getLogger().debug("Registering");
-              module.onRegister();
+                      module.getLogger().debug("Registering");
+                      module.onRegister();
 
-              module.getLogger().debug("Pre-Init complete");
+                      module.getLogger().debug("Pre-Init complete");
 
-              if (event.getSide().isClient()) {
-                module.getLogger().debug("Client Pre-Init start");
-                module.onClientPreInit(event);
+                      if (event.getSide().isClient()) {
+                        module.getLogger().debug("Client Pre-Init start");
+                        module.onClientPreInit(event);
 
-                module.getLogger().debug("Client Registering");
-                module.onClientRegister();
+                        module.getLogger().debug("Client Registering");
+                        module.onClientRegister();
 
-                module.getLogger().debug("Client Pre-Init complete");
-              }
-            })
+                        module.getLogger().debug("Client Pre-Init complete");
+                      }
+                    })
     );
     this.routes.put(FMLInitializationEvent.class,
-        (IFMLStateEventRoute<FMLInitializationEvent>) (event) ->
-            this.fireEvent(module -> {
-              module.getLogger().debug("Init start");
-              module.onInit(event);
-              module.getLogger().debug("Init complete");
+            (IFMLStateEventRoute<FMLInitializationEvent>) (event) ->
+                    this.fireEvent(module -> {
+                      module.getLogger().debug("Init start");
+                      module.onInit(event);
+                      module.getLogger().debug("Init complete");
 
-              if (GameUtils.isClient()) {
-                module.getLogger().debug("Client Init start");
-                module.onClientInit(event);
-                module.getLogger().debug("Client Init complete");
-              }
-            })
+                      if (GameUtils.isClient()) {
+                        module.getLogger().debug("Client Init start");
+                        module.onClientInit(event);
+                        module.getLogger().debug("Client Init complete");
+                      }
+                    })
     );
     this.routes.put(FMLPostInitializationEvent.class,
-        (IFMLStateEventRoute<FMLPostInitializationEvent>) (event) ->
-            this.fireEvent(module -> {
-              module.getLogger().debug("Post-Init start");
-              module.onPostInit(event);
-              module.getLogger().debug("Post-Init complete");
+            (IFMLStateEventRoute<FMLPostInitializationEvent>) (event) ->
+                    this.fireEvent(module -> {
+                      module.getLogger().debug("Post-Init start");
+                      module.onPostInit(event);
+                      module.getLogger().debug("Post-Init complete");
 
-              if (GameUtils.isClient()) {
-                module.getLogger().debug("Client Post-Init start");
-                module.onClientPostInit(event);
-                module.getLogger().debug("Client Post-Init complete");
-              }
-            })
+                      if (GameUtils.isClient()) {
+                        module.getLogger().debug("Client Post-Init start");
+                        module.onClientPostInit(event);
+                        module.getLogger().debug("Client Post-Init complete");
+                      }
+                    })
     );
     this.routes.put(FMLLoadCompleteEvent.class,
-        (IFMLStateEventRoute<FMLLoadCompleteEvent>) (event) ->
-            this.fireEvent(module -> {
-              module.getLogger().debug("Load-complete start");
-              module.onLoadComplete(event);
-              module.getLogger().debug("Load-complete complete");
-            })
+            (IFMLStateEventRoute<FMLLoadCompleteEvent>) (event) ->
+                    this.fireEvent(module -> {
+                      module.getLogger().debug("Load-complete start");
+                      module.onLoadComplete(event);
+                      module.getLogger().debug("Load-complete complete");
+                    })
     );
     this.routes.put(FMLServerAboutToStartEvent.class,
-        (IFMLStateEventRoute<FMLServerAboutToStartEvent>) (event) ->
-            this.fireEvent(module -> {
-              module.getLogger().debug("Server-about-to-start start");
-              module.onServerAboutToStart(event);
-              module.getLogger().debug("Server-about-to-start complete");
-            })
+            (IFMLStateEventRoute<FMLServerAboutToStartEvent>) (event) ->
+                    this.fireEvent(module -> {
+                      module.getLogger().debug("Server-about-to-start start");
+                      module.onServerAboutToStart(event);
+                      module.getLogger().debug("Server-about-to-start complete");
+                    })
     );
     this.routes.put(FMLServerStartingEvent.class,
-        (IFMLStateEventRoute<FMLServerStartingEvent>) (event) ->
-            this.fireEvent(module -> {
-              module.getLogger().debug("Server-starting start");
-              module.onServerStarting(event);
-              module.getRegistry().onRegisterCommand(event);
-              module.getLogger().debug("Server-starting complete");
-            })
+            (IFMLStateEventRoute<FMLServerStartingEvent>) (event) ->
+                    this.fireEvent(module -> {
+                      module.getLogger().debug("Server-starting start");
+                      module.onServerStarting(event);
+                      module.getRegistry().onRegisterCommand(event);
+                      module.getLogger().debug("Server-starting complete");
+                    })
     );
     this.routes.put(FMLServerStartedEvent.class,
-        (IFMLStateEventRoute<FMLServerStartedEvent>) (event) ->
-            this.fireEvent(module -> {
-              module.getLogger().debug("Server-started start");
-              module.onServerStarted(event);
-              module.getLogger().debug("Server-started complete");
-            })
+            (IFMLStateEventRoute<FMLServerStartedEvent>) (event) ->
+                    this.fireEvent(module -> {
+                      module.getLogger().debug("Server-started start");
+                      module.onServerStarted(event);
+                      module.getLogger().debug("Server-started complete");
+                    })
     );
     this.routes.put(FMLServerStoppingEvent.class,
-        (IFMLStateEventRoute<FMLServerStoppingEvent>) (event) ->
-            this.fireEvent(module -> {
-              module.getLogger().debug("Server-stopping start");
-              module.onServerStopping(event);
-              module.getLogger().debug("Server-stopping complete");
-            })
+            (IFMLStateEventRoute<FMLServerStoppingEvent>) (event) ->
+                    this.fireEvent(module -> {
+                      module.getLogger().debug("Server-stopping start");
+                      module.onServerStopping(event);
+                      module.getLogger().debug("Server-stopping complete");
+                    })
     );
     this.routes.put(FMLServerStoppedEvent.class,
-        (IFMLStateEventRoute<FMLServerStoppedEvent>) (event) ->
-            this.fireEvent(module -> {
-              module.getLogger().debug("Server-stopped start");
-              module.onServerStopped(event);
-              module.getLogger().debug("Server-stopped complete");
-            })
+            (IFMLStateEventRoute<FMLServerStoppedEvent>) (event) ->
+                    this.fireEvent(module -> {
+                      module.getLogger().debug("Server-stopped start");
+                      module.onServerStopped(event);
+                      module.getLogger().debug("Server-stopped complete");
+                    })
     );
   }
 
@@ -289,7 +289,7 @@ public class ModuleEventRouter {
   @SubscribeEvent
   @SuppressWarnings("unused")
   protected void onRegisterVillagerProfessionEvent(
-      RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
+          RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register VillagerProfessionEvent start");
       module.getRegistry().onRegisterVillagerProfession(event);
@@ -310,7 +310,7 @@ public class ModuleEventRouter {
   @SubscribeEvent
   @SuppressWarnings("unused")
   protected void onRegisterDataSerializerEntryEvent(
-      RegistryEvent.Register<DataSerializerEntry> event) {
+          RegistryEvent.Register<DataSerializerEntry> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register RecipeEvent start");
       module.getRegistry().onRegisterDataSerializerEntry(event);

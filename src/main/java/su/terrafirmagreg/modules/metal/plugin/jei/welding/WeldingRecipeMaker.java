@@ -10,8 +10,8 @@ public class WeldingRecipeMaker {
 
   public static List<WeldingRecipeWrapper> getRecipes() {
     return RegistriesDevice.QUERN.recipes()
-        .stream()
-        .map(WeldingRecipeWrapper::new)
-        .collect(Collectors.toList());
+            .stream()
+            .map(WeldingRecipeWrapper::new)
+            .collect(Collectors.toList());
   }
 }

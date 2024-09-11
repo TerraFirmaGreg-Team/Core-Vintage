@@ -24,16 +24,10 @@ public class BlockInfectedAir extends BaseBlock implements IProviderTile {
     super(Settings.of(Material.AIR));
 
     getSettings()
-        .registryKey("device/infected_air")
-        .hardness(2F)
-        .nonOpaque()
-        .nonFullCube();
-  }
-
-  @Nullable
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-      BlockPos pos) {
-    return NULL_AABB;
+            .registryKey("device/infected_air")
+            .hardness(2F)
+            .nonOpaque()
+            .nonFullCube();
   }
 
   public boolean canCollideCheck(IBlockState state, boolean hitIfLiquid) {
@@ -41,7 +35,7 @@ public class BlockInfectedAir extends BaseBlock implements IProviderTile {
   }
 
   public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state,
-      float chance, int fortune) {
+          float chance, int fortune) {
   }
 
   public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
@@ -49,8 +43,14 @@ public class BlockInfectedAir extends BaseBlock implements IProviderTile {
   }
 
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-      EnumFacing face) {
+          EnumFacing face) {
     return BlockFaceShape.UNDEFINED;
+  }
+
+  @Nullable
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
+          BlockPos pos) {
+    return NULL_AABB;
   }
 
   @Override

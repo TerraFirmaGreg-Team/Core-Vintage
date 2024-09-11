@@ -1,6 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,52 +22,48 @@ import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
-
-import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class BerryBushProvider implements IWailaBlock {
 
-    @NotNull
-    @Override
-    public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
-        List<String> currentTooltip = new ArrayList<>();
-        IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockBerryBush block) {
-            if (block.getBush()
-                    .isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(BlockBerryBush.FRUITING)) {
-                float temp = Climate.getActualTemp(world, pos);
-                float rainfall = ProviderChunkData.getRainfall(world, pos);
-                var tile = TileUtils.getTile(world, pos, TETickCounter.class);
-                if (tile != null && block.getBush().isValidForGrowth(temp, rainfall)) {
-                    long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-                    // Don't show 100% since it still needs to check on randomTick to grow
-                    float perc = Math.min(0.99F, hours / (block.getBush()
-                            .getGrowthTime() * (float) ConfigTFC.General.FOOD.berryBushGrowthTimeModifier)) * 100;
-                    String growth = String.format("%d%%", Math.round(perc));
-                    currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
-                } else {
-                    currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
-                }
-            } else {
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.agriculture.harvesting_months").getFormattedText());
-                for (Month month : Month.values()) {
-                    if (block.getBush().isHarvestMonth(month)) {
-                        currentTooltip.add(TerraFirmaCraft.getProxy().getMonthName(month, true));
-                    }
-                }
-            }
+  @NotNull
+  @Override
+  public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
+    List<String> currentTooltip = new ArrayList<>();
+    IBlockState state = world.getBlockState(pos);
+    if (state.getBlock() instanceof BlockBerryBush block) {
+      if (block.getBush()
+              .isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(BlockBerryBush.FRUITING)) {
+        float temp = Climate.getActualTemp(world, pos);
+        float rainfall = ProviderChunkData.getRainfall(world, pos);
+        var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+        if (tile != null && block.getBush().isValidForGrowth(temp, rainfall)) {
+          long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+          // Don't show 100% since it still needs to check on randomTick to grow
+          float perc = Math.min(0.99F, hours / (block.getBush()
+                  .getGrowthTime() * (float) ConfigTFC.General.FOOD.berryBushGrowthTimeModifier)) * 100;
+          String growth = String.format("%d%%", Math.round(perc));
+          currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
+        } else {
+          currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
         }
-        return currentTooltip;
+      } else {
+        currentTooltip.add(new TextComponentTranslation("waila.tfc.agriculture.harvesting_months").getFormattedText());
+        for (Month month : Month.values()) {
+          if (block.getBush().isHarvestMonth(month)) {
+            currentTooltip.add(TerraFirmaCraft.getProxy().getMonthName(month, true));
+          }
+        }
+      }
     }
+    return currentTooltip;
+  }
 
-    @NotNull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(BlockBerryBush.class);
-    }
+  @NotNull
+  @Override
+  public List<Class<?>> getLookupClass() {
+    return Collections.singletonList(BlockBerryBush.class);
+  }
 }

@@ -23,16 +23,12 @@ import org.jetbrains.annotations.NotNull;
  * Интерфейс, представляющий блок металла.
  */
 public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVariant>, IBlockSettings,
-    IProviderModel, IProviderBlockColor {
+        IProviderModel, IProviderBlockColor {
 
-  /**
-   * Возвращает местоположение регистрации блока почвы.
-   *
-   * @return Местоположение регистрации блока почвы.
-   */
-  @NotNull
-  default String getRegistryKey() {
-    return String.format("metal/%s/%s", getVariant(), getType());
+  @Override
+  @SideOnly(Side.CLIENT)
+  default @NotNull IStateMapper getStateMapper() {
+    return new CustomStateMap.Builder().customResource(getResourceLocation()).build();
   }
 
   /**
@@ -45,10 +41,14 @@ public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVarian
     return ModUtils.resource(String.format("metal/%s", getVariant()));
   }
 
-  @Override
-  @SideOnly(Side.CLIENT)
-  default @NotNull IStateMapper getStateMapper() {
-    return new CustomStateMap.Builder().customResource(getResourceLocation()).build();
+  /**
+   * Возвращает местоположение регистрации блока почвы.
+   *
+   * @return Местоположение регистрации блока почвы.
+   */
+  @NotNull
+  default String getRegistryKey() {
+    return String.format("metal/%s/%s", getVariant(), getType());
   }
 
   @Override

@@ -29,12 +29,12 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
 
   private static final int DAYS_TO_ADULTHOOD = 16;
   private static final DataParameter<Integer> HARE_TYPE = EntityDataManager.createKey(
-      EntityAnimalHare.class, DataSerializers.VARINT);
+          EntityAnimalHare.class, DataSerializers.VARINT);
 
   @SuppressWarnings("unused")
   public EntityAnimalHare(World worldIn) {
     this(worldIn, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
-        EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+            EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
   public EntityAnimalHare(World worldIn, IAnimal.Gender gender, int birthDay) {
@@ -47,13 +47,13 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST
-            || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST ||
-            biomeType == BiomeHelper.BiomeType.SAVANNA ||
-            biomeType == BiomeHelper.BiomeType.DESERT)) {
+            (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST
+                    || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST ||
+                    biomeType == BiomeHelper.BiomeType.SAVANNA ||
+                    biomeType == BiomeHelper.BiomeType.DESERT)) {
       return ConfigAnimal.ENTITIES.HARE.rarity;
     }
     return 0;
@@ -82,7 +82,7 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
 
   @Nullable
   public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-      @Nullable IEntityLivingData livingdata) {
+          @Nullable IEntityLivingData livingdata) {
     livingdata = super.onInitialSpawn(difficulty, livingdata);
     int i = this.getRandomHareType();
 
@@ -95,14 +95,6 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
     this.setHareType(i);
 
     return livingdata;
-  }
-
-  public int getHareType() {
-    return this.dataManager.get(HARE_TYPE);
-  }
-
-  public void setHareType(int hareTypeId) {
-    this.dataManager.set(HARE_TYPE, hareTypeId);
   }
 
   private int getRandomHareType() {
@@ -120,6 +112,14 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
     } else {
       return i < 50 ? 0 : (i < 90 ? 1 : 2);
     }
+  }
+
+  public int getHareType() {
+    return this.dataManager.get(HARE_TYPE);
+  }
+
+  public void setHareType(int hareTypeId) {
+    this.dataManager.set(HARE_TYPE, hareTypeId);
   }
 
   public static class HareTypeData implements IEntityLivingData {

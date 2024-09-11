@@ -62,7 +62,7 @@ public final class MathsUtils {
   public static double round(double value, int places) {
 
     return value >= 0 && places > 0 ? BigDecimal.valueOf(value)
-        .setScale(places, RoundingMode.HALF_UP).doubleValue() : value;
+            .setScale(places, RoundingMode.HALF_UP).doubleValue() : value;
   }
 
   /**
@@ -101,17 +101,17 @@ public final class MathsUtils {
   @Nullable
   public static RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {
     Vec3d playerVec = new Vec3d(playerIn.posX, playerIn.posY + playerIn.getEyeHeight(),
-        playerIn.posZ);
+            playerIn.posZ);
     float cosYaw = MathHelper.cos(-playerIn.rotationYaw * 0.017453292F - MathConstants.PI);
     float sinYaw = MathHelper.sin(-playerIn.rotationYaw * 0.017453292F - MathConstants.PI);
     float cosPitch = -MathHelper.cos(-playerIn.rotationPitch * 0.017453292F);
     float sinPitch = MathHelper.sin(-playerIn.rotationPitch * 0.017453292F);
     double reachDistance = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE)
-        .getAttributeValue();
+            .getAttributeValue();
     Vec3d targetVec = playerVec.add(
-        (sinYaw * cosPitch) * reachDistance,
-        sinPitch * reachDistance,
-        (cosYaw * cosPitch) * reachDistance
+            (sinYaw * cosPitch) * reachDistance,
+            sinPitch * reachDistance,
+            (cosYaw * cosPitch) * reachDistance
     );
     return worldIn.rayTraceBlocks(playerVec, targetVec, useLiquids, !useLiquids, false);
   }
@@ -125,20 +125,19 @@ public final class MathsUtils {
    */
   @Nullable
   public static RayTraceResult rayTrace(Entity entity, double blockReachDistance,
-      float partialTicks) {
+          float partialTicks) {
     Vec3d eyePosition = entity.getPositionEyes(partialTicks);
     Vec3d lookVector = entity.getLook(partialTicks);
     Vec3d rayTraceVector = eyePosition.add(
-        lookVector.x * blockReachDistance,
-        lookVector.y * blockReachDistance,
-        lookVector.z * blockReachDistance
+            lookVector.x * blockReachDistance,
+            lookVector.y * blockReachDistance,
+            lookVector.z * blockReachDistance
     );
     return entity.world.rayTraceBlocks(eyePosition, rayTraceVector, false, false, true);
   }
 
   /**
-   * A method which handles the calculating of percentages. While this isn't a particularly difficult piece of code, it has been added for the sake of
-   * simplicity.
+   * A method which handles the calculating of percentages. While this isn't a particularly difficult piece of code, it has been added for the sake of simplicity.
    *
    * @param percent: The percent chance that this method should return true. 1.00 = 100%
    * @return boolean: Returns are randomly true or false, based on the suplied percentage.
@@ -186,17 +185,6 @@ public final class MathsUtils {
   }
 
   /**
-   * Gets the distance in world for an amount of pixels. A basic block is a cubic meter, and each pixel is 1/16th of a block.
-   *
-   * @param pixels The amount of pixels
-   * @return The distance in game for those pixels.
-   */
-  public static double getPixelDistance(int pixels) {
-
-    return pixels / 16d;
-  }
-
-  /**
    * Creates a bounding box using pixel size.
    *
    * @param minX The min X pos.
@@ -208,15 +196,26 @@ public final class MathsUtils {
    * @return A bounding box that is made to a pixel specific size.
    */
   public static AxisAlignedBB getBoundsForPixels(int minX, int minY, int minZ, int maxX, int maxY,
-      int maxZ) {
+          int maxZ) {
 
     return new AxisAlignedBB(getPixelDistance(minX), getPixelDistance(minY), getPixelDistance(minZ),
-        getPixelDistance(maxX), getPixelDistance(maxY), getPixelDistance(maxZ));
+            getPixelDistance(maxX), getPixelDistance(maxY), getPixelDistance(maxZ));
   }
 
   /**
-   * Takes an integer value and fits it within a range. If the initial value is less than the minimum it will be set to the minimum. If the initial
-   * value is greater than the maximum it will be lowered to the maximum.
+   * Gets the distance in world for an amount of pixels. A basic block is a cubic meter, and each pixel is 1/16th of a block.
+   *
+   * @param pixels The amount of pixels
+   * @return The distance in game for those pixels.
+   */
+  public static double getPixelDistance(int pixels) {
+
+    return pixels / 16d;
+  }
+
+  /**
+   * Takes an integer value and fits it within a range. If the initial value is less than the minimum it will be set to the minimum. If the initial value is greater
+   * than the maximum it will be lowered to the maximum.
    *
    * @param initial The initial value.
    * @param min     The minimum value.

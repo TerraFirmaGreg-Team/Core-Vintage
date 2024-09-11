@@ -31,8 +31,8 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
   @SuppressWarnings("unused")
   public EntityAnimalMuskOx(World worldIn) {
     this(worldIn, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-        getRandomGrowth(ConfigAnimal.ENTITIES.MUSKOX.adulthood, ConfigAnimal.ENTITIES.MUSKOX.elder),
-        EntitySheep.getRandomSheepColor(RNG));
+            getRandomGrowth(ConfigAnimal.ENTITIES.MUSKOX.adulthood, ConfigAnimal.ENTITIES.MUSKOX.elder),
+            EntitySheep.getRandomSheepColor(RNG));
   }
 
   public EntityAnimalMuskOx(World worldIn, IAnimal.Gender gender, int birthDay, EnumDyeColor dye) {
@@ -42,10 +42,10 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TUNDRA)) {
+            (biomeType == BiomeHelper.BiomeType.TUNDRA)) {
       return ConfigAnimal.ENTITIES.MUSKOX.rarity;
     }
     return 0;
@@ -62,22 +62,22 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
   }
 
   @Override
+  public long gestationDays() {
+    return ConfigAnimal.ENTITIES.MUSKOX.gestation;
+  }
+
+  @Override
   public void birthChildren() {
     int numberOfChildren = ConfigAnimal.ENTITIES.MUSKOX.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalMuskOx baby = new EntityAnimalMuskOx(world,
-          IAnimal.Gender.valueOf(RNG.nextBoolean()),
-          (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
+              IAnimal.Gender.valueOf(RNG.nextBoolean()),
+              (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(
-          getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
+              getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
       world.spawnEntity(baby);
     }
-  }
-
-  @Override
-  public long gestationDays() {
-    return ConfigAnimal.ENTITIES.MUSKOX.gestation;
   }
 
   @Override
@@ -103,7 +103,7 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
   @Override
   public long getProductsCooldown() {
     return Math.max(0, ConfigAnimal.ENTITIES.MUSKOX.woolTicks + getShearedTick()
-        - Calendar.PLAYER_TIME.getTicks());
+            - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override

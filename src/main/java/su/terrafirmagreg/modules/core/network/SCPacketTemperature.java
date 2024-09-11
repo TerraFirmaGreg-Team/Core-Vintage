@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 
 public class SCPacketTemperature implements IMessage,
-    IMessageHandler<SCPacketTemperature, IMessage> {
+        IMessageHandler<SCPacketTemperature, IMessage> {
 
   public NBTTagCompound tag = new NBTTagCompound();
 

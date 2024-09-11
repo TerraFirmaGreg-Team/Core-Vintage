@@ -98,11 +98,6 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IPro
   }
 
   @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return ItemsSoil.PILE.get(type);
-  }
-
-  @Override
   @SideOnly(Side.CLIENT)
   public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess,
           BlockPos pos, EnumFacing side) {
@@ -124,6 +119,11 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IPro
       default:
         return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
+  }
+
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return ItemsSoil.PILE.get(type);
   }
 
   @Override

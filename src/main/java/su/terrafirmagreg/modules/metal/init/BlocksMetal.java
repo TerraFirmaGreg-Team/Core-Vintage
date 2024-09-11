@@ -29,24 +29,24 @@ public final class BlocksMetal {
   public static void onRegister(RegistryManager registry) {
 
     ANVIL = MetalBlockVariant
-        .builder("anvil")
-        .setFactory(BlockMetalAnvil::new)
-        .build();
+            .builder("anvil")
+            .setFactory(BlockMetalAnvil::new)
+            .build();
 
     PIGVIL = MetalBlockVariant
-        .builder("pigvil")
-        .setFactory(BlockMetalPigvil::new)
-        .build();
+            .builder("pigvil")
+            .setFactory(BlockMetalPigvil::new)
+            .build();
 
     CLADDING = MetalBlockVariant
-        .builder("cladding")
-        .setFactory(BlockMetalCladding::new)
-        .build();
+            .builder("cladding")
+            .setFactory(BlockMetalCladding::new)
+            .build();
 
     LAMP = MetalBlockVariant
-        .builder("lamp")
-        .setFactory(BlockMetalLamp::new)
-        .build();
+            .builder("lamp")
+            .setFactory(BlockMetalLamp::new)
+            .build();
 
     registry.blocks(METAL_BLOCKS.values());
 

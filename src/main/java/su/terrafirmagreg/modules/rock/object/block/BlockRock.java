@@ -30,6 +30,11 @@ public abstract class BlockRock extends BaseBlock implements IRockBlock {
   protected final RockBlockVariant variant;
   protected final RockType type;
 
+  public BlockRock(RockBlockVariant variant, RockType type) {
+    this(Settings.of(Material.ROCK), variant, type);
+
+  }
+
   public BlockRock(Settings settings, RockBlockVariant variant, RockType type) {
     super(settings);
 
@@ -44,11 +49,6 @@ public abstract class BlockRock extends BaseBlock implements IRockBlock {
             .fallable(this, variant.getSpecification())
             .oreDict(variant)
             .oreDict(variant, type);
-  }
-
-  public BlockRock(RockBlockVariant variant, RockType type) {
-    this(Settings.of(Material.ROCK), variant, type);
-
   }
 
   @Override

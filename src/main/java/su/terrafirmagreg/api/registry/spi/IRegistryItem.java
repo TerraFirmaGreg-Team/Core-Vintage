@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import java.util.Collection;
 
 public interface IRegistryItem
-    extends IRegistryBase {
+        extends IRegistryBase {
 
   default <T extends Item> void items(Collection<T> collection) {
     for (var item : collection) {
@@ -18,14 +18,9 @@ public interface IRegistryItem
     }
   }
 
-  default <T extends Item & IItemSettings> T item(T item) {
-
-    return this.item(item, item.getRegistryKey());
-  }
-
   /**
-   * Registers an item to the game. This will also set the unlocalized name, and creative tab if {@link #tab} has been set. The item will also be
-   * cached in {@link #items}.
+   * Registers an item to the game. This will also set the unlocalized name, and creative tab if {@link #tab} has been set. The item will also be cached in
+   * {@link #items}.
    *
    * @param item The item to register.
    * @param name The name to register the item with.
@@ -34,7 +29,7 @@ public interface IRegistryItem
 
     item.setRegistryName(this.getModID(), name);
     item.setTranslationKey(
-        this.getModID() + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
+            this.getModID() + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
     if (this.getTab() != null) {
       item.setCreativeTab(this.getTab());
     }
@@ -42,6 +37,16 @@ public interface IRegistryItem
     this.getRegistry().getItems().add(item);
 
     return item;
+  }
+
+  default <T extends Item & IItemSettings> T item(T item) {
+
+    return this.item(item, item.getRegistryKey());
+  }
+
+  default void item(IItemSettings item) {
+
+    this.item(item.getItem(), item.getRegistryKey());
   }
 
 }

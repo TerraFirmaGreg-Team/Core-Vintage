@@ -39,127 +39,129 @@ import java.util.Random;
 
 public class BlockSaplingTFC extends BlockBush implements IGrowable, IGrowingPlant {
 
-    public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
-    protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
-    private static final Map<Tree, BlockSaplingTFC> MAP = new HashMap<>();
-    private final Tree wood;
+  public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
+  protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
+  private static final Map<Tree, BlockSaplingTFC> MAP = new HashMap<>();
+  private final Tree wood;
 
-    public BlockSaplingTFC(Tree wood) {
-        if (MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
-        this.wood = wood;
-        setDefaultState(blockState.getBaseState().withProperty(STAGE, 0));
-        setSoundType(SoundType.PLANT);
-        setHardness(0.0F);
-        OreDictionaryHelper.register(this, "tree", "sapling");
-        //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "tree", "sapling", wood.getRegistryName().getPath());
-        BlockUtils.setFireInfo(this, 5, 20);
+  public BlockSaplingTFC(Tree wood) {
+    if (MAP.put(wood, this) != null) {
+      throw new IllegalStateException("There can only be one.");
     }
+    this.wood = wood;
+    setDefaultState(blockState.getBaseState().withProperty(STAGE, 0));
+    setSoundType(SoundType.PLANT);
+    setHardness(0.0F);
+    OreDictionaryHelper.register(this, "tree", "sapling");
+    //noinspection ConstantConditions
+    OreDictionaryHelper.register(this, "tree", "sapling", wood.getRegistryName().getPath());
+    BlockUtils.setFireInfo(this, 5, 20);
+  }
 
-    public static BlockSaplingTFC get(Tree wood) {
-        return MAP.get(wood);
+  public static BlockSaplingTFC get(Tree wood) {
+    return MAP.get(wood);
+  }
+
+  @SuppressWarnings("deprecation")
+  @Override
+  @NotNull
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState().withProperty(STAGE, meta);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(STAGE);
+  }
+
+  @Override
+  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+    if (tile != null) {
+      tile.resetCounter();
     }
+    super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    @NotNull
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(STAGE, meta);
-    }
+  @Override
+  @NotNull
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, STAGE);
+  }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(STAGE);
-    }
+  @Override
+  @NotNull
+  public Block.EnumOffsetType getOffsetType() {
+    return Block.EnumOffsetType.XZ;
+  }
 
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-        if (tile != null) {
-            tile.resetCounter();
+  @SideOnly(Side.CLIENT)
+  @Override
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    super.addInformation(stack, worldIn, tooltip, flagIn);
+    wood.addInfo(stack, worldIn, tooltip, flagIn);
+  }
+
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
+  }
+
+  @Nullable
+  @Override
+  public TileEntity createTileEntity(World world, IBlockState state) {
+    return new TETickCounter();
+  }
+
+  public Tree getWood() {
+    return wood;
+  }
+
+  @Override
+  public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
+    super.updateTick(world, pos, state, random);
+
+    if (!world.isRemote) {
+      var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+      if (tile != null) {
+        long days = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
+        if (days > wood.getMinGrowthTime()) {
+          grow(world, random, pos, state);
         }
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+      }
     }
+  }
 
-    @Override
-    @NotNull
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, STAGE);
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  @NotNull
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return SAPLING_AABB;
+  }
 
-    @Override
-    @NotNull
-    public Block.EnumOffsetType getOffsetType() {
-        return Block.EnumOffsetType.XZ;
-    }
+  @Override
+  @NotNull
+  public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+    return EnumPlantType.Plains;
+  }
 
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
+  @Override
+  public boolean canGrow(World world, BlockPos blockPos, IBlockState iBlockState, boolean b) {
+    return true;
+  }
 
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TETickCounter();
-    }
+  @Override
+  public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, IBlockState iBlockState) {
+    return false;
+  }
 
-    public Tree getWood() {
-        return wood;
-    }
+  @Override
+  public void grow(World world, Random random, BlockPos blockPos, IBlockState blockState) {
+    wood.makeTree(world, blockPos, random, false);
+  }
 
-    @Override
-    public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
-        super.updateTick(world, pos, state, random);
-
-        if (!world.isRemote) {
-            var tile = TileUtils.getTile(world, pos, TETickCounter.class);
-            if (tile != null) {
-                long days = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
-                if (days > wood.getMinGrowthTime()) {
-                    grow(world, random, pos, state);
-                }
-            }
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    @NotNull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return SAPLING_AABB;
-    }
-
-    @Override
-    @NotNull
-    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-        return EnumPlantType.Plains;
-    }
-
-    @Override
-    public boolean canGrow(World world, BlockPos blockPos, IBlockState iBlockState, boolean b) {
-        return true;
-    }
-
-    @Override
-    public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, IBlockState iBlockState) {
-        return false;
-    }
-
-    @Override
-    public void grow(World world, Random random, BlockPos blockPos, IBlockState blockState) {
-        wood.makeTree(world, blockPos, random, false);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-        wood.addInfo(stack, worldIn, tooltip, flagIn);
-    }
-
-    @Override
-    public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-        return GrowthStatus.GROWING;
-    }
+  @Override
+  public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
+    return GrowthStatus.GROWING;
+  }
 }

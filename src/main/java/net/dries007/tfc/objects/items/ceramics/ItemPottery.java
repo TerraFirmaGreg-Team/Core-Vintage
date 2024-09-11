@@ -16,32 +16,32 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemPottery extends ItemTFC {
 
-    private final Size size;
-    private final Weight weight;
+  private final Size size;
+  private final Weight weight;
 
-    public ItemPottery() {
-        this(Size.NORMAL, Weight.LIGHT);
-    }
+  public ItemPottery() {
+    this(Size.NORMAL, Weight.LIGHT);
+  }
 
-    public ItemPottery(Size size, Weight weight) {
-        this.size = size;
-        this.weight = weight;
-    }
+  public ItemPottery(Size size, Weight weight) {
+    this.size = size;
+    this.weight = weight;
+  }
 
-    @Override
-    public @NotNull Size getSize(ItemStack stack) {
-        return size;
-    }
+  @Override
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return weight;
+  }
 
-    @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return weight;
-    }
+  @Override
+  public @NotNull Size getSize(ItemStack stack) {
+    return size;
+  }
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        // Heat capability, as pottery needs to be able to be fired, or survive despite not having a heat capability
-        return new ProviderHeat(nbt, 1.0f, 1599f);
-    }
+  @Nullable
+  @Override
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    // Heat capability, as pottery needs to be able to be fired, or survive despite not having a heat capability
+    return new ProviderHeat(nbt, 1.0f, 1599f);
+  }
 }

@@ -23,28 +23,28 @@ import java.util.List;
 
 public class TreeProvider implements IWailaBlock {
 
-    @NotNull
-    @Override
-    public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
-        List<String> currentTooltip = new ArrayList<>();
-        IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockSaplingTFC block) {
-            Tree wood = block.getWood();
-            var tile = TileUtils.getTile(world, pos, TETickCounter.class);
-            if (tile != null) {
-                long days = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
-                float perc = Math.min(0.99F, days / wood.getMinGrowthTime()) * 100;
-                String growth = String.format("%d%%", Math.round(perc));
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
-            }
+  @NotNull
+  @Override
+  public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
+    List<String> currentTooltip = new ArrayList<>();
+    IBlockState state = world.getBlockState(pos);
+    if (state.getBlock() instanceof BlockSaplingTFC block) {
+      Tree wood = block.getWood();
+      var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+      if (tile != null) {
+        long days = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
+        float perc = Math.min(0.99F, days / wood.getMinGrowthTime()) * 100;
+        String growth = String.format("%d%%", Math.round(perc));
+        currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
+      }
 
-        }
-        return currentTooltip;
     }
+    return currentTooltip;
+  }
 
-    @NotNull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(BlockSaplingTFC.class);
-    }
+  @NotNull
+  @Override
+  public List<Class<?>> getLookupClass() {
+    return Collections.singletonList(BlockSaplingTFC.class);
+  }
 }

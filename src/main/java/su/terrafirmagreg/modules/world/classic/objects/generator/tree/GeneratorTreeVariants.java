@@ -24,18 +24,6 @@ public class GeneratorTreeVariants implements ITreeGenerator {
   private final boolean useRotation;
 
   /**
-   * A tree generator which select a random structure to place. Can choose to use a random rotation as well
-   *
-   * @param useRotation Should it try and randomly rotate the structures on placement
-   * @param variants    The list of variants for the generator to look for. Structure files should be placed in assets/tfc/[TREE NAME]/ This needs to
-   *                    be the list of file names, (i.e. "tree1.nbt" should pass in "tree1")
-   */
-  public GeneratorTreeVariants(boolean useRotation, String... variants) {
-    this.variants = variants;
-    this.useRotation = useRotation;
-  }
-
-  /**
    * Alternate constructor which will auto populate the list of variants
    *
    * @param useRotation Should it try and randomly rotate the structures on placement
@@ -43,18 +31,30 @@ public class GeneratorTreeVariants implements ITreeGenerator {
    */
   public GeneratorTreeVariants(boolean useRotation, int numVariants) {
     this(useRotation,
-        IntStream.range(1, numVariants + 1).mapToObj(String::valueOf).toArray(String[]::new));
+            IntStream.range(1, numVariants + 1).mapToObj(String::valueOf).toArray(String[]::new));
+  }
+
+  /**
+   * A tree generator which select a random structure to place. Can choose to use a random rotation as well
+   *
+   * @param useRotation Should it try and randomly rotate the structures on placement
+   * @param variants    The list of variants for the generator to look for. Structure files should be placed in assets/tfc/[TREE NAME]/ This needs to be the list of
+   *                    file names, (i.e. "tree1.nbt" should pass in "tree1")
+   */
+  public GeneratorTreeVariants(boolean useRotation, String... variants) {
+    this.variants = variants;
+    this.useRotation = useRotation;
   }
 
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-      Random rand, boolean isWorldGen) {
+          Random rand, boolean isWorldGen) {
     String variant = variants[variants.length == 1 ? 0 : rand.nextInt(variants.length)];
     ResourceLocation base = new ResourceLocation(tree.getRegistryName() + "/" + variant);
 
     Template structureBase = manager.get(world.getMinecraftServer(), base);
     if (structureBase == null) {
-      TerraFirmaCraft.getLog().warn("Unable to find a template for " + base.toString());
+      TerraFirmaCraft.getLog().warn("Unable to find a template for " + base);
       return;
     }
 

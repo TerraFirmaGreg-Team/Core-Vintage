@@ -25,7 +25,7 @@ public class WorldGenStructuresCorals implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0) {
       int coralsInChunk = 3 + random.nextInt(15);
       for (int i = 0; i < coralsInChunk; i++) {
@@ -39,41 +39,41 @@ public class WorldGenStructuresCorals implements IWorldGenerator {
 
         if (ConfigTFCF.General.STRUCTURES.activateStructureGeneration) {
           if (data.isInitialized() &&
-              (b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH
-                  || b == BiomesWorld.GRAVEL_BEACH)) {
+                  (b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH
+                          || b == BiomesWorld.GRAVEL_BEACH)) {
             if ((up.getBlock() instanceof BlockCoral || world.getBlockState(pos)
-                .getBlock() instanceof BlockCoral || BlockUtils.isGround(down)
-                || world.getBlockState(pos)
-                .getBlock() == ChunkGenClassic.SALT_WATER.getBlock()) &&
-                (pos.getY() < WorldTypeClassic.SEALEVEL - 7 && pos.getY() > 119
-                    && data.getFloraDiversity() >= 0.3f &&
-                    data.getFloraDensity() >= 0.4f && data.getFloraDensity() <= 0.6f
-                    && data.getFloraDiversity() <= 0.5f &&
-                    data.getAverageTemp() >= 10f && data.getAverageTemp() <= 28f
-                    && data.getRainfall() >= 150f)) {
+                    .getBlock() instanceof BlockCoral || BlockUtils.isGround(down)
+                    || world.getBlockState(pos)
+                    .getBlock() == ChunkGenClassic.SALT_WATER.getBlock()) &&
+                    (pos.getY() < WorldTypeClassic.SEALEVEL - 7 && pos.getY() > 119
+                            && data.getFloraDiversity() >= 0.3f &&
+                            data.getFloraDensity() >= 0.4f && data.getFloraDensity() <= 0.6f
+                            && data.getFloraDiversity() <= 0.5f &&
+                            data.getAverageTemp() >= 10f && data.getAverageTemp() <= 28f
+                            && data.getRainfall() >= 150f)) {
               int chance = random.nextInt(5);
 
               int randomCoral = random.nextInt(180) + 1;
 
               if (chance == 0) {
                 StructureGeneratorCorals gen = new StructureGeneratorCorals(
-                    "coral/brain/" + randomCoral);
+                        "coral/brain/" + randomCoral);
                 generateStructure(gen, world, random, pos);
               } else if (chance == 1) {
                 StructureGeneratorCorals gen = new StructureGeneratorCorals(
-                    "coral/bubble/" + randomCoral);
+                        "coral/bubble/" + randomCoral);
                 generateStructure(gen, world, random, pos);
               } else if (chance == 2) {
                 StructureGeneratorCorals gen = new StructureGeneratorCorals(
-                    "coral/fire/" + randomCoral);
+                        "coral/fire/" + randomCoral);
                 generateStructure(gen, world, random, pos);
               } else if (chance == 3) {
                 StructureGeneratorCorals gen = new StructureGeneratorCorals(
-                    "coral/horn/" + randomCoral);
+                        "coral/horn/" + randomCoral);
                 generateStructure(gen, world, random, pos);
               } else if (chance == 4) {
                 StructureGeneratorCorals gen = new StructureGeneratorCorals(
-                    "coral/tube/" + randomCoral);
+                        "coral/tube/" + randomCoral);
                 generateStructure(gen, world, random, pos);
               }
             }
@@ -84,7 +84,7 @@ public class WorldGenStructuresCorals implements IWorldGenerator {
   }
 
   private void generateStructure(WorldGenerator generator, World world, Random random,
-      BlockPos pos) {
+          BlockPos pos) {
     generator.generate(world, random, pos);
   }
 }

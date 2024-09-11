@@ -21,18 +21,18 @@ public class ModuleManager {
 
   private static final ArrayList<ModuleCore> modules = new ArrayList<>();
 
-  public static void registerModule(ModuleCore module) {
-    if (GameUtils.isModLoaded(module.getDep())) {
-      modules.add(module);
-    }
-  }
-
   public static ArrayList<ModuleCore> getModules() {
     return modules;
   }
 
   public static void initModules() {
     registerModule(new DTModule());
+  }
+
+  public static void registerModule(ModuleCore module) {
+    if (GameUtils.isModLoaded(module.getDep())) {
+      modules.add(module);
+    }
   }
 
   @SubscribeEvent(priority = EventPriority.LOWEST)

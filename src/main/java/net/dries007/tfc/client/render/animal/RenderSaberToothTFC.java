@@ -19,30 +19,30 @@ import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class RenderSaberToothTFC extends RenderLiving<EntitySaberToothTFC> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/predators/sabertooth.png");
+  private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/predators/sabertooth.png");
 
-    public RenderSaberToothTFC(RenderManager renderManager) {
-        super(renderManager, new ModelSaberToothTFC(), 0.7F);
-    }
+  public RenderSaberToothTFC(RenderManager renderManager) {
+    super(renderManager, new ModelSaberToothTFC(), 0.7F);
+  }
 
-    @Override
-    public void doRender(@NotNull EntitySaberToothTFC sabertooth, double par2, double par4, double par6, float par8, float par9) {
-        this.shadowSize = (float) (0.35f + (sabertooth.getPercentToAdulthood() * 0.35f));
-        super.doRender(sabertooth, par2, par4, par6, par8, par9);
-    }
+  @Override
+  public void doRender(@NotNull EntitySaberToothTFC sabertooth, double par2, double par4, double par6, float par8, float par9) {
+    this.shadowSize = (float) (0.35f + (sabertooth.getPercentToAdulthood() * 0.35f));
+    super.doRender(sabertooth, par2, par4, par6, par8, par9);
+  }
 
-    @Override
-    protected float handleRotationFloat(EntitySaberToothTFC par1EntityLiving, float par2) {
-        return 1.0f;
-    }
+  @Override
+  protected float handleRotationFloat(EntitySaberToothTFC par1EntityLiving, float par2) {
+    return 1.0f;
+  }
 
-    @Override
-    protected void preRenderCallback(EntitySaberToothTFC sabertooth, float par2) {
-        GlStateManager.scale(1.3f, 1.3f, 1.3f);
-    }
+  @Override
+  protected void preRenderCallback(EntitySaberToothTFC sabertooth, float par2) {
+    GlStateManager.scale(1.3f, 1.3f, 1.3f);
+  }
 
-    @Override
-    protected ResourceLocation getEntityTexture(EntitySaberToothTFC entity) {
-        return TEXTURE;
-    }
+  @Override
+  protected ResourceLocation getEntityTexture(EntitySaberToothTFC entity) {
+    return TEXTURE;
+  }
 }

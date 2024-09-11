@@ -15,54 +15,54 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class Skill implements INBTSerializable<NBTTagCompound> {
 
-    private final ICapabilityPlayer playerData;
+  private final ICapabilityPlayer playerData;
 
-    public Skill(ICapabilityPlayer playerData) {
-        this.playerData = playerData;
-    }
+  public Skill(ICapabilityPlayer playerData) {
+    this.playerData = playerData;
+  }
 
-    /**
-     * @return the current tier of the skill
-     */
-    @NotNull
-    public abstract SkillTier getTier();
+  /**
+   * Helper method to add levels to this skill's total level. Should match getTotalLevel()
+   *
+   * @param value a value between [0, 1]
+   */
+  public void addTotalLevel(double value) {
+    setTotalLevel(Math.min(getTotalLevel() + value, 1D));
+  }
 
-    /**
-     * This is the progress per skill tier, not the total skill. Should return a value between [0, 1)
-     *
-     * @return the current level of the skill
-     */
-    public abstract float getLevel();
+  /**
+   * Helper function to calculate the total progress of the skill
+   *
+   * @return a value between [0, 1]
+   */
+  public float getTotalLevel() {
+    return 0.25f * (getTier().ordinal() + getLevel());
+  }
 
-    /**
-     * Helper function to calculate the total progress of the skill
-     *
-     * @return a value between [0, 1]
-     */
-    public float getTotalLevel() {
-        return 0.25f * (getTier().ordinal() + getLevel());
-    }
+  /**
+   * @return the current tier of the skill
+   */
+  @NotNull
+  public abstract SkillTier getTier();
 
-    /**
-     * Helper method to set this skill total level. Should match getTotalLevel()
-     *
-     * @param value a value between [0, 1]
-     */
-    public abstract void setTotalLevel(double value);
+  /**
+   * This is the progress per skill tier, not the total skill. Should return a value between [0, 1)
+   *
+   * @return the current level of the skill
+   */
+  public abstract float getLevel();
 
-    /**
-     * Helper method to add levels to this skill's total level. Should match getTotalLevel()
-     *
-     * @param value a value between [0, 1]
-     */
-    public void addTotalLevel(double value) {
-        setTotalLevel(Math.min(getTotalLevel() + value, 1D));
-    }
+  /**
+   * Helper method to set this skill total level. Should match getTotalLevel()
+   *
+   * @param value a value between [0, 1]
+   */
+  public abstract void setTotalLevel(double value);
 
-    /**
-     * Subclasses should call this when the skill updates
-     */
-    protected final void updateAndSync() {
-        playerData.updateAndSync();
-    }
+  /**
+   * Subclasses should call this when the skill updates
+   */
+  protected final void updateAndSync() {
+    playerData.updateAndSync();
+  }
 }

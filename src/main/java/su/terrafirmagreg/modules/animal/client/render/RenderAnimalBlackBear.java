@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class RenderAnimalBlackBear extends RenderLiving<EntityAnimalBlackBear> {
 
   private static final ResourceLocation BLACKBEAR_TEXTURE = ModUtils.resource(
-      "textures/entity/animal/predators/blackbear.png");
+          "textures/entity/animal/predators/blackbear.png");
 
   public RenderAnimalBlackBear(RenderManager renderManager) {
     super(renderManager, new ModelAnimalBlackBear(), 0.7F);
@@ -27,7 +27,7 @@ public class RenderAnimalBlackBear extends RenderLiving<EntityAnimalBlackBear> {
 
   @Override
   public void doRender(@NotNull EntityAnimalBlackBear blackbear, double par2, double par4,
-      double par6, float par8, float par9) {
+          double par6, float par8, float par9) {
     this.shadowSize = (float) (0.35f + (blackbear.getPercentToAdulthood() * 0.35f));
     super.doRender(blackbear, par2, par4, par6, par8, par9);
   }

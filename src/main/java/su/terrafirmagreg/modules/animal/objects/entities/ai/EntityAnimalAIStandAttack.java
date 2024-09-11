@@ -10,14 +10,14 @@ import net.minecraft.entity.EntityLivingBase;
  */
 
 public class EntityAnimalAIStandAttack<T extends EntityCreature & IAnimal & EntityAnimalAIStandAttack.IEntityStandAttack>
-    extends EntityAnimalAIAttackMelee<T> {
+        extends EntityAnimalAIAttackMelee<T> {
 
   public EntityAnimalAIStandAttack(T creature, double speedIn, double attackReach) {
     super(creature, speedIn, attackReach);
   }
 
   public EntityAnimalAIStandAttack(T creature, double speedIn, double attackReach,
-      AttackBehavior attackBehavior) {
+          AttackBehavior attackBehavior) {
     super(creature, speedIn, attackReach, attackBehavior);
   }
 

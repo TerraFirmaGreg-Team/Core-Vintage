@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderAnimalLion extends RenderLiving<EntityAnimalLion> {
 
   private static final ResourceLocation LIONS_TEXTURE = ModUtils.resource(
-      "textures/entity/animal/predators/lions.png");
+          "textures/entity/animal/predators/lions.png");
 
   public RenderAnimalLion(RenderManager manager) {
     super(manager, new ModelAnimalLion(), 0.3F);
@@ -24,7 +24,7 @@ public class RenderAnimalLion extends RenderLiving<EntityAnimalLion> {
 
   @Override
   public void doRender(EntityAnimalLion lion, double par2, double par4, double par6, float par8,
-      float par9) {
+          float par9) {
     this.shadowSize = (float) (0.4f + lion.getPercentToAdulthood() * 0.4f);
     super.doRender(lion, par2, par4, par6, par8, par9);
   }

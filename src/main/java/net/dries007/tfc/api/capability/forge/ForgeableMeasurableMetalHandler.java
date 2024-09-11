@@ -22,70 +22,70 @@ import java.util.List;
  */
 public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler implements IForgeableMeasurableMetal {
 
-    private int metalAmount;
-    private Metal metal;
+  private int metalAmount;
+  private Metal metal;
 
-    public ForgeableMeasurableMetalHandler(Metal metal, int metalAmount) {
-        this.metalAmount = metalAmount;
-        this.metal = metal;
-        this.heatCapacity = metal.getSpecificHeat();
-        this.meltTemp = metal.getMeltTemp();
-    }
+  public ForgeableMeasurableMetalHandler(Metal metal, int metalAmount) {
+    this.metalAmount = metalAmount;
+    this.metal = metal;
+    this.heatCapacity = metal.getSpecificHeat();
+    this.meltTemp = metal.getMeltTemp();
+  }
 
-    public ForgeableMeasurableMetalHandler(@NotNull NBTTagCompound nbt) {
-        this.metalAmount = 0;
-        this.metal = Metal.UNKNOWN;
-        this.heatCapacity = Metal.UNKNOWN.getSpecificHeat();
-        this.meltTemp = Metal.UNKNOWN.getMeltTemp();
-        deserializeNBT(nbt);
-    }
+  public ForgeableMeasurableMetalHandler(@NotNull NBTTagCompound nbt) {
+    this.metalAmount = 0;
+    this.metal = Metal.UNKNOWN;
+    this.heatCapacity = Metal.UNKNOWN.getSpecificHeat();
+    this.meltTemp = Metal.UNKNOWN.getMeltTemp();
+    deserializeNBT(nbt);
+  }
 
-    public int getMetalAmount() {
-        return metalAmount;
-    }
+  public int getMetalAmount() {
+    return metalAmount;
+  }
 
-    public void setMetalAmount(int metalAmount) {
-        this.metalAmount = metalAmount;
-    }
+  public void setMetalAmount(int metalAmount) {
+    this.metalAmount = metalAmount;
+  }
 
-    public Metal getMetal() {
-        return metal;
-    }
+  public Metal getMetal() {
+    return metal;
+  }
 
-    public void setMetal(Metal metal) {
-        this.metal = metal;
-    }
+  public void setMetal(Metal metal) {
+    this.metal = metal;
+  }
 
-    @Override
-    @NotNull
-    public NBTTagCompound serializeNBT() {
-        NBTTagCompound nbt = super.serializeNBT();
-        nbt.setInteger("metalAmount", metalAmount);
-        //noinspection ConstantConditions
-        nbt.setString("metal", metal.getRegistryName().toString());
-        return nbt;
-    }
+  @Override
+  @NotNull
+  public NBTTagCompound serializeNBT() {
+    NBTTagCompound nbt = super.serializeNBT();
+    nbt.setInteger("metalAmount", metalAmount);
+    //noinspection ConstantConditions
+    nbt.setString("metal", metal.getRegistryName().toString());
+    return nbt;
+  }
 
-    @Override
-    public void deserializeNBT(@Nullable NBTTagCompound nbt) {
-        if (nbt != null) {
-            metalAmount = nbt.getInteger("metalAmount");
-            ResourceLocation location = new ResourceLocation(nbt.getString("metal"));
-            metal = TFCRegistries.METALS.getValue(location);
-            if (metal == null) {
-                metal = Metal.UNKNOWN;
-            }
-            this.meltTemp = metal.getMeltTemp();
-            this.heatCapacity = metal.getSpecificHeat();
-        }
-        super.deserializeNBT(nbt);
+  @Override
+  public void deserializeNBT(@Nullable NBTTagCompound nbt) {
+    if (nbt != null) {
+      metalAmount = nbt.getInteger("metalAmount");
+      ResourceLocation location = new ResourceLocation(nbt.getString("metal"));
+      metal = TFCRegistries.METALS.getValue(location);
+      if (metal == null) {
+        metal = Metal.UNKNOWN;
+      }
+      this.meltTemp = metal.getMeltTemp();
+      this.heatCapacity = metal.getSpecificHeat();
     }
+    super.deserializeNBT(nbt);
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
-        String desc = TextFormatting.WHITE + I18n.format("tfc.tooltip.units", metalAmount);
-        text.add(desc);
-        super.addHeatInfo(stack, text);
-    }
+  @SideOnly(Side.CLIENT)
+  @Override
+  public void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
+    String desc = TextFormatting.WHITE + I18n.format("tfc.tooltip.units", metalAmount);
+    text.add(desc);
+    super.addHeatInfo(stack, text);
+  }
 }

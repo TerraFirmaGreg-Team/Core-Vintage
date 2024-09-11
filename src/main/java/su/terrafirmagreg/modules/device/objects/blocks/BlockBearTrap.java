@@ -48,28 +48,36 @@ import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 public class BlockBearTrap extends BaseBlock implements IProviderTile {
 
   protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D,
-      1.0D);
+          1.0D);
 
   public BlockBearTrap() {
     super(Settings.of(Material.IRON));
 
     getSettings()
-        .registryKey("device/bear_trap")
-        .hardness(10.0F)
-        .resistance(10.0F)
-        .nonCube()
-        .size(Size.LARGE)
-        .weight(Weight.HEAVY);
+            .registryKey("device/bear_trap")
+            .hardness(10.0F)
+            .resistance(10.0F)
+            .nonCube()
+            .size(Size.LARGE)
+            .weight(Weight.HEAVY);
     setHarvestLevel(ToolClasses.PICKAXE, 0);
     setDefaultState(blockState.getBaseState()
-        .withProperty(HORIZONTAL, EnumFacing.NORTH)
-        .withProperty(BURIED, Boolean.FALSE)
-        .withProperty(CLOSED, Boolean.FALSE));
+            .withProperty(HORIZONTAL, EnumFacing.NORTH)
+            .withProperty(BURIED, Boolean.FALSE)
+            .withProperty(CLOSED, Boolean.FALSE));
+  }
+
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState()
+            .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
+            .withProperty(BURIED, meta / 4 % 2 != 0)
+            .withProperty(CLOSED, meta / 8 != 0);
   }
 
   @Override
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return TRAP_AABB;
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(BURIED) ? 4 : 0) + (
+            state.getValue(CLOSED) ? 8 : 0);
   }
 
   @Override
@@ -78,37 +86,27 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
   }
 
   @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, HORIZONTAL, BURIED, CLOSED);
-  }
-
-  public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState()
-        .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
-        .withProperty(BURIED, meta / 4 % 2 != 0)
-        .withProperty(CLOSED, meta / 8 != 0);
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return TRAP_AABB;
   }
 
   @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(BURIED) ? 4 : 0) + (
-        state.getValue(CLOSED) ? 8 : 0);
-  }
-
-  @Override
-  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-      float hitX, float hitY, float hitZ, int meta,
-      EntityLivingBase placer) {
-    return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
-  }
-
-  @Override
-  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
-      IBlockAccess worldIn, BlockPos pos) {
-    AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
-    return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ,
-        axisalignedbb.maxX, (float) 0 * 0.125F,
-        axisalignedbb.maxZ);
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
+          BlockPos fromPos) {
+    if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
+      TileBearTrap trap = TileUtils.getTile(worldIn, pos, TileBearTrap.class);
+      if (!trap.isOpen()) {
+        if (Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
+          worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f,
+                  0.8f);
+        } else {
+          this.dropBlockAsItem(worldIn, pos, state, 0);
+        }
+      } else {
+        this.dropBlockAsItem(worldIn, pos, state, 0);
+      }
+      worldIn.setBlockToAir(pos);
+    }
   }
 
   @Override
@@ -118,44 +116,37 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
 
     if (block != Blocks.BARRIER) {
       BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(),
-          EnumFacing.UP);
+              EnumFacing.UP);
       return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock()
-          .isLeaves(iblockstate, worldIn, pos.down());
+              .isLeaves(iblockstate, worldIn, pos.down());
     } else {
       return false;
     }
   }
 
   @Override
-  public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state,
-      @Nullable TileEntity tile, ItemStack stack) {
-    if (tile instanceof TileBearTrap tileBearTrap && !tileBearTrap.isOpen()) {
-      if (Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
-        world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
-      } else {
-        super.harvestBlock(world, player, pos, state, tile, stack);
-      }
-    } else {
-      super.harvestBlock(world, player, pos, state, tile, stack);
-    }
-  }
-
-  @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-      EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-      float hitX, float hitY, float hitZ) {
+          EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+          float hitX, float hitY, float hitZ) {
     if (playerIn.getHeldItem(hand).getItem() instanceof ItemSpade ||
-        (playerIn.getHeldItem(hand).getItem() instanceof ItemMetalTool &&
-            ((ItemMetalTool) playerIn.getHeldItem(hand).getItem()).getType()
-                .equals(Metal.ItemType.SHOVEL))) {
+            (playerIn.getHeldItem(hand).getItem() instanceof ItemMetalTool &&
+                    ((ItemMetalTool) playerIn.getHeldItem(hand).getItem()).getType()
+                            .equals(Metal.ItemType.SHOVEL))) {
 
       playerIn.getHeldItem(hand).damageItem(1, playerIn);
       state = state.cycleProperty(BURIED);
       worldIn.setBlockState(pos, state, 2);
       worldIn.playSound(playerIn, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0f,
-          1.0f);
+              1.0f);
     }
     return true;
+  }
+
+  @Override
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
+          float hitX, float hitY, float hitZ, int meta,
+          EntityLivingBase placer) {
+    return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
   }
 
   @Override
@@ -174,10 +165,10 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
         entityLiving.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, debuffDuration));
         if (ConfigTFCThings.Items.BEAR_TRAP.fixedDamage > 0) {
           entityLiving.attackEntityFrom(DamageSources.BEAR_TRAP,
-              (float) ConfigTFCThings.Items.BEAR_TRAP.fixedDamage);
+                  (float) ConfigTFCThings.Items.BEAR_TRAP.fixedDamage);
         } else if (healthCut > 0) {
           entityLiving.attackEntityFrom(DamageSources.BEAR_TRAP,
-              entityLiving.getHealth() / (float) healthCut);
+                  entityLiving.getHealth() / (float) healthCut);
         }
         tile.setCapturedEntity(entityLiving);
         entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
@@ -186,12 +177,12 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
         world.setBlockState(pos, state, 2);
         entityLiving.playSound(SoundEvents.ENTITY_ITEM_BREAK, 2.0F, 0.4F);
       } else if (tile.getCapturedEntity() != null && tile.getCapturedEntity()
-          .equals(entityLiving)) {
+              .equals(entityLiving)) {
         entityLiving.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
         if (entityLiving instanceof IPredator
-            && Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakoutChance) {
+                && Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakoutChance) {
           world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f,
-              0.8f);
+                  0.8f);
           if (Math.random() > 2 * ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
             this.dropBlockAsItem(world, pos, state, 0);
           }
@@ -205,22 +196,31 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
   }
 
   @Override
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-      BlockPos fromPos) {
-    if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
-      TileBearTrap trap = TileUtils.getTile(worldIn, pos, TileBearTrap.class);
-      if (!trap.isOpen()) {
-        if (Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
-          worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f,
-              0.8f);
-        } else {
-          this.dropBlockAsItem(worldIn, pos, state, 0);
-        }
+  public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state,
+          @Nullable TileEntity tile, ItemStack stack) {
+    if (tile instanceof TileBearTrap tileBearTrap && !tileBearTrap.isOpen()) {
+      if (Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
+        world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
       } else {
-        this.dropBlockAsItem(worldIn, pos, state, 0);
+        super.harvestBlock(world, player, pos, state, tile, stack);
       }
-      worldIn.setBlockToAir(pos);
+    } else {
+      super.harvestBlock(world, player, pos, state, tile, stack);
     }
+  }
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, HORIZONTAL, BURIED, CLOSED);
+  }
+
+  @Override
+  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
+          IBlockAccess worldIn, BlockPos pos) {
+    AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
+    return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ,
+            axisalignedbb.maxX, (float) 0 * 0.125F,
+            axisalignedbb.maxZ);
   }
 
   @Override

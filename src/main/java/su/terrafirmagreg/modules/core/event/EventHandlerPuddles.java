@@ -107,7 +107,7 @@ public class EventHandlerPuddles {
           if (!world.isRemote) {
             stack.shrink(1);
             if (!player.inventory.addItemStackToInventory(
-                PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER))) {
+                    PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER))) {
               player.dropItem(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), false);
             }
             world.setBlockToAir(pos);
@@ -138,13 +138,13 @@ public class EventHandlerPuddles {
         float distance = event.getDistance();
         if (distance < 3.0F) {
           ((WorldServer) world).spawnParticle(
-              EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, 15, 0.0D, 0.0D,
-              0.0D, 0.13D,
-              Block.getStateId(BlocksCore.PUDDLE.getDefaultState()));
+                  EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, 15, 0.0D, 0.0D,
+                  0.0D, 0.13D,
+                  Block.getStateId(BlocksCore.PUDDLE.getDefaultState()));
           ((WorldServer) world).spawnParticle(
-              EnumParticleTypes.WATER_SPLASH, entity.posX, entity.posY, entity.posZ, 15, 0.0D, 0.0D,
-              0.0D, 0.13D,
-              Block.getStateId(BlocksCore.PUDDLE.getDefaultState()));
+                  EnumParticleTypes.WATER_SPLASH, entity.posX, entity.posY, entity.posZ, 15, 0.0D, 0.0D,
+                  0.0D, 0.13D,
+                  Block.getStateId(BlocksCore.PUDDLE.getDefaultState()));
         } else {
           float f = (float) MathHelper.ceil(distance - 3.0F);
 
@@ -155,14 +155,14 @@ public class EventHandlerPuddles {
             double x = 0.8 * (world.rand.nextDouble() - world.rand.nextDouble());
             double z = 0.8 * (world.rand.nextDouble() - world.rand.nextDouble());
             ((WorldServer) world).spawnParticle(
-                EnumParticleTypes.WATER_SPLASH,
-                entity.posX + x, entity.posY, entity.posZ + z, i / 2,
-                0.0D, 0.0D, 0.0D, 0.25D
+                    EnumParticleTypes.WATER_SPLASH,
+                    entity.posX + x, entity.posY, entity.posZ + z, i / 2,
+                    0.0D, 0.0D, 0.0D, 0.25D
             );
           }
           ((WorldServer) world).spawnParticle(
-              EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, i,
-              0.0D, 0.0D, 0.0D, 0.4D, Block.getStateId(BlocksCore.PUDDLE.getDefaultState()));
+                  EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, i,
+                  0.0D, 0.0D, 0.0D, 0.4D, Block.getStateId(BlocksCore.PUDDLE.getDefaultState()));
 
           world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
         }

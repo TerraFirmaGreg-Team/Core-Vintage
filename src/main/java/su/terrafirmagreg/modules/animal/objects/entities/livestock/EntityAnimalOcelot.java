@@ -59,11 +59,11 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 
   //Values that has a visual effect on client
   private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(
-      EntityAnimalOcelot.class, DataSerializers.BOOLEAN);
+          EntityAnimalOcelot.class, DataSerializers.BOOLEAN);
   private static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(
-      EntityAnimalOcelot.class, DataSerializers.VARINT);
+          EntityAnimalOcelot.class, DataSerializers.VARINT);
   private static final DataParameter<Float> FAMILIARITY = EntityDataManager.createKey(
-      EntityAnimalOcelot.class, DataSerializers.FLOAT);
+          EntityAnimalOcelot.class, DataSerializers.FLOAT);
   private long lastFed; //Last time(in days) this entity was fed
   private long lastFDecay; //Last time(in days) this entity's familiarity had decayed
   private boolean fertilized; //Is this female fertilized?
@@ -74,8 +74,8 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
   @SuppressWarnings("unused")
   public EntityAnimalOcelot(World world) {
     this(world, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
-        EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.OCELOT.adulthood,
-            ConfigAnimal.ENTITIES.OCELOT.elder));
+            EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.OCELOT.adulthood,
+                    ConfigAnimal.ENTITIES.OCELOT.elder));
   }
 
   public EntityAnimalOcelot(World world, IAnimal.Gender gender, int birthDay) {
@@ -91,6 +91,114 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
   }
 
   @Override
+  public void setGrowingAge(int age) {
+    super.setGrowingAge(0); // Ignoring this
+  }
+
+  @Override
+  public boolean isChild() {
+    return this.getAge() == IAnimal.Age.CHILD;
+  }
+
+  @Override
+  public void setScaleForAge(boolean child) {
+    double ageScale = 1 / (2.0D - getPercentToAdulthood());
+    this.setScale((float) ageScale);
+  }
+
+  @Override
+  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
+          float floraDiversity) {
+    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+            (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST
+                    || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
+      return ConfigAnimal.ENTITIES.OCELOT.rarity;
+    }
+    return 0;
+  }
+
+  @Override
+  public BiConsumer<List<EntityLiving>, Random> getGroupingRules() {
+    return AnimalGroupingRules.MOTHER_AND_CHILDREN_OR_SOLO_MALE;
+  }
+
+  @Override
+  public int getMinGroupSize() {
+    return 1;
+  }
+
+  @Override
+  public int getMaxGroupSize() {
+    return 4;
+  }
+
+  @Override
+  public void onLivingUpdate() {
+    super.onLivingUpdate();
+    if (this.ticksExisted % 100 == 0) {
+      setScaleForAge(false);
+    }
+    if (!this.world.isRemote) {
+      if (this.isFertilized()
+              && Calendar.PLAYER_TIME.getTotalDays() >= pregnantTime + gestationDays()) {
+        birthChildren();
+        this.setFertilized(false);
+      }
+      // Is it time to decay familiarity?
+      // If this entity was never fed(eg: new born, wild)
+      // or wasn't fed yesterday(this is the starting of the second day)
+      if (this.lastFDecay > -1 && this.lastFDecay + 1 < Calendar.PLAYER_TIME.getTotalDays()) {
+        float familiarity = getFamiliarity();
+        if (familiarity < 0.3f) {
+          familiarity -= 0.02 * (Calendar.PLAYER_TIME.getTotalDays() - this.lastFDecay);
+          this.lastFDecay = Calendar.PLAYER_TIME.getTotalDays();
+          this.setFamiliarity(familiarity);
+        }
+      }
+      if (this.getGender() == Gender.MALE && this.isReadyToMate()) {
+        this.matingTime = Calendar.PLAYER_TIME.getTicks();
+        EntityAnimalBase.findFemaleMate(this);
+      }
+      if (this.getAge() == Age.OLD && lastDeath < Calendar.PLAYER_TIME.getTotalDays()) {
+        this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
+        // Randomly die of old age, tied to entity UUID and calendar time
+        final Random random = new Random(
+                this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
+        if (random.nextDouble() < ConfigAnimal.ENTITIES.OCELOT.oldDeathChance) {
+          this.setDead();
+        }
+      }
+      // Wild animals disappear after 125% lifespan
+      if (this.getDaysToElderly() > 0 && this.getFamiliarity() < 0.10F &&
+              (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F
+                      <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
+        this.setDead();
+      }
+    }
+  }
+
+  public long gestationDays() {
+    return ConfigAnimal.ENTITIES.OCELOT.gestation;
+  }
+
+  public void birthChildren() {
+    int numberOfChildren = ConfigAnimal.ENTITIES.OCELOT.babies;
+    for (int i = 0; i < numberOfChildren; i++) {
+      EntityAnimalOcelot baby = new EntityAnimalOcelot(this.world,
+              Gender.valueOf(MathConstants.RNG.nextBoolean()),
+              (int) Calendar.PLAYER_TIME.getTotalDays());
+      baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
+      if (this.isTamed()) {
+        baby.setOwnerId(this.getOwnerId());
+        baby.setTamed(true);
+        baby.setTameSkin(this.getTameSkin());
+      }
+      this.world.spawnEntity(baby);
+    }
+  }
+
+  @Override
   public Gender getGender() {
     return Gender.valueOf(this.dataManager.get(GENDER));
   }
@@ -98,6 +206,16 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
   @Override
   public void setGender(Gender gender) {
     this.dataManager.set(GENDER, gender.toBool());
+  }
+
+  @Override
+  public float getAdultFamiliarityCap() {
+    return 0.4f;
+  }
+
+  @Override
+  public void onFertilized(@NotNull IAnimal male) {
+    this.pregnantTime = Calendar.PLAYER_TIME.getTotalDays();
   }
 
   @Override
@@ -111,8 +229,18 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
   }
 
   @Override
-  public float getAdultFamiliarityCap() {
-    return 0.4f;
+  public int getDaysToAdulthood() {
+    return ConfigAnimal.ENTITIES.OCELOT.adulthood;
+  }
+
+  @Override
+  public boolean isReadyToMate() {
+    if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized()
+            || this.isHungry()) {
+      return false;
+    }
+    return this.matingTime + EntityAnimalBase.MATING_COOLDOWN_DEFAULT_TICKS
+            <= Calendar.PLAYER_TIME.getTicks();
   }
 
   @Override
@@ -142,33 +270,13 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
   }
 
   @Override
-  public void onFertilized(@NotNull IAnimal male) {
-    this.pregnantTime = Calendar.PLAYER_TIME.getTotalDays();
-  }
-
-  @Override
-  public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.OCELOT.adulthood;
+  public boolean isHungry() {
+    return lastFed < Calendar.PLAYER_TIME.getTotalDays();
   }
 
   @Override
   public int getDaysToElderly() {
     return ConfigAnimal.ENTITIES.OCELOT.elder;
-  }
-
-  @Override
-  public boolean isReadyToMate() {
-    if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized()
-        || this.isHungry()) {
-      return false;
-    }
-    return this.matingTime + EntityAnimalBase.MATING_COOLDOWN_DEFAULT_TICKS
-        <= Calendar.PLAYER_TIME.getTicks();
-  }
-
-  @Override
-  public boolean isHungry() {
-    return lastFed < Calendar.PLAYER_TIME.getTotalDays();
   }
 
   @Override
@@ -180,115 +288,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
   public TextComponentTranslation getAnimalName() {
     String entityString = isTamed() ? "cattfc" : EntityList.getEntityString(this);
     return new TextComponentTranslation(
-        ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
-  }
-
-  @Override
-  public void setGrowingAge(int age) {
-    super.setGrowingAge(0); // Ignoring this
-  }
-
-  @Override
-  public boolean isChild() {
-    return this.getAge() == IAnimal.Age.CHILD;
-  }
-
-  @Override
-  public void setScaleForAge(boolean child) {
-    double ageScale = 1 / (2.0D - getPercentToAdulthood());
-    this.setScale((float) ageScale);
-  }
-
-  @Override
-  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST
-            || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-      return ConfigAnimal.ENTITIES.OCELOT.rarity;
-    }
-    return 0;
-  }
-
-  @Override
-  public BiConsumer<List<EntityLiving>, Random> getGroupingRules() {
-    return AnimalGroupingRules.MOTHER_AND_CHILDREN_OR_SOLO_MALE;
-  }
-
-  @Override
-  public int getMinGroupSize() {
-    return 1;
-  }
-
-  @Override
-  public int getMaxGroupSize() {
-    return 4;
-  }
-
-  public long gestationDays() {
-    return ConfigAnimal.ENTITIES.OCELOT.gestation;
-  }
-
-  @Override
-  public void onLivingUpdate() {
-    super.onLivingUpdate();
-    if (this.ticksExisted % 100 == 0) {
-      setScaleForAge(false);
-    }
-    if (!this.world.isRemote) {
-      if (this.isFertilized()
-          && Calendar.PLAYER_TIME.getTotalDays() >= pregnantTime + gestationDays()) {
-        birthChildren();
-        this.setFertilized(false);
-      }
-      // Is it time to decay familiarity?
-      // If this entity was never fed(eg: new born, wild)
-      // or wasn't fed yesterday(this is the starting of the second day)
-      if (this.lastFDecay > -1 && this.lastFDecay + 1 < Calendar.PLAYER_TIME.getTotalDays()) {
-        float familiarity = getFamiliarity();
-        if (familiarity < 0.3f) {
-          familiarity -= 0.02 * (Calendar.PLAYER_TIME.getTotalDays() - this.lastFDecay);
-          this.lastFDecay = Calendar.PLAYER_TIME.getTotalDays();
-          this.setFamiliarity(familiarity);
-        }
-      }
-      if (this.getGender() == Gender.MALE && this.isReadyToMate()) {
-        this.matingTime = Calendar.PLAYER_TIME.getTicks();
-        EntityAnimalBase.findFemaleMate(this);
-      }
-      if (this.getAge() == Age.OLD && lastDeath < Calendar.PLAYER_TIME.getTotalDays()) {
-        this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
-        // Randomly die of old age, tied to entity UUID and calendar time
-        final Random random = new Random(
-            this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
-        if (random.nextDouble() < ConfigAnimal.ENTITIES.OCELOT.oldDeathChance) {
-          this.setDead();
-        }
-      }
-      // Wild animals disappear after 125% lifespan
-      if (this.getDaysToElderly() > 0 && this.getFamiliarity() < 0.10F &&
-          (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F
-              <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
-        this.setDead();
-      }
-    }
-  }
-
-  public void birthChildren() {
-    int numberOfChildren = ConfigAnimal.ENTITIES.OCELOT.babies;
-    for (int i = 0; i < numberOfChildren; i++) {
-      EntityAnimalOcelot baby = new EntityAnimalOcelot(this.world,
-          Gender.valueOf(MathConstants.RNG.nextBoolean()),
-          (int) Calendar.PLAYER_TIME.getTotalDays());
-      baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
-      if (this.isTamed()) {
-        baby.setOwnerId(this.getOwnerId());
-        baby.setTamed(true);
-        baby.setTameSkin(this.getTameSkin());
-      }
-      this.world.spawnEntity(baby);
-    }
+            ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
   }
 
   @Override
@@ -304,8 +304,8 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
         if (EntityLivingBase.class.isAssignableFrom(entityClass)) {
           //noinspection unchecked
           this.targetTasks.addTask(priority++,
-              new EntityAITargetNonTamed<>(this, (Class<EntityLivingBase>) entityClass, false,
-                  ent -> true));
+                  new EntityAITargetNonTamed<>(this, (Class<EntityLivingBase>) entityClass, false,
+                          ent -> true));
         }
       }
     }
@@ -401,7 +401,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
               this.setFamiliarity(familiarity);
             }
             world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP,
-                SoundCategory.AMBIENT, 1.0F, 1.0F);
+                    SoundCategory.AMBIENT, 1.0F, 1.0F);
           }
           return true;
         } else {
@@ -409,9 +409,9 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
               ModuleAnimal.getPacketService().sendTo(SCPacketSimpleMessage.translateMessage(
-                      SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                      ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
-                  (EntityPlayerMP) player);
+                              SCPacketSimpleMessage.MessageCategory.ANIMAL,
+                              ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
+                      (EntityPlayerMP) player);
             }
           }
         }
@@ -432,8 +432,8 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
       // Only called if this animal is interacted with a spawn egg
       // Try to return to vanilla's default method a baby of this animal, as if bred normally
       EntityAnimalOcelot baby = new EntityAnimalOcelot(this.world,
-          Gender.valueOf(MathConstants.RNG.nextBoolean()),
-          (int) Calendar.PLAYER_TIME.getTotalDays());
+              Gender.valueOf(MathConstants.RNG.nextBoolean()),
+              (int) Calendar.PLAYER_TIME.getTotalDays());
       if (this.isTamed()) {
         baby.setOwnerId(this.getOwnerId());
         baby.setTamed(true);
@@ -456,9 +456,9 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-        && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-        && !this.world.containsAnyLiquid(getEntityBoundingBox())
-        && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+            && !this.world.containsAnyLiquid(getEntityBoundingBox())
+            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @NotNull

@@ -34,64 +34,19 @@ import java.util.List;
 public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
 
   /**
-   * The timestamp that this food was created Used to calculate expiration date Rotten food uses {@code Long.MIN_VALUE} as the creation date
-   *
-   * @return the calendar time of creation
-   */
-  long getCreationDate();
-
-  /**
-   * Sets the creation date. DO NOT USE TO PRESERVE FOOD! Use {@link FoodTrait} instead
-   *
-   * @param creationDate A calendar time
-   */
-  void setCreationDate(long creationDate);
-
-  /**
-   * Get the date at which this food item will rot
-   *
-   * @return a calendar time
-   */
-  long getRottenDate();
-
-  /**
-   * @return true if the food is rotten / decayed.
-   */
-  default boolean isRotten() {
-    return getRottenDate() < Calendar.PLAYER_TIME.getTicks();
-  }
-
-  /**
-   * Get a visible measure of all immutable data associated with food - Nutrition information - Hunger / Saturation - Water (Thirst)
-   *
-   * @see FoodData
-   */
-  @NotNull
-  FoodData getData();
-
-  /**
-   * Gets the current decay date modifier, including traits Note: there's a difference between the DECAY modifier, and the DECAY DATE modifier, in
-   * that they are reciprocals of eachother
+   * Gets the current decay date modifier, including traits Note: there's a difference between the DECAY modifier, and the DECAY DATE modifier, in that they are
+   * reciprocals of eachother
    *
    * @return a value between 0 and infinity (0 = instant decay, infinity = never decay)
    */
   float getDecayDateModifier();
 
   /**
-   * Called from {@link net.dries007.tfc.CommonEventHandler#attachItemCapabilities(AttachCapabilitiesEvent)} If the item is a food capability item,
-   * and it was created before the post configureModules, we assume that it is a technical stack, and will not appear in the world without a copy. As
-   * such, we set it to non-decaying. This is NOT SERIALIZED on the capability - as a result it will not persist across {@link ItemStack#copy()}, See
-   * TerraFirmaCraft#458
+   * Called from {@link net.dries007.tfc.CommonEventHandler#attachItemCapabilities(AttachCapabilitiesEvent)} If the item is a food capability item, and it was created
+   * before the post configureModules, we assume that it is a technical stack, and will not appear in the world without a copy. As such, we set it to non-decaying.
+   * This is NOT SERIALIZED on the capability - as a result it will not persist across {@link ItemStack#copy()}, See TerraFirmaCraft#458
    */
   void setNonDecaying();
-
-  /**
-   * Gets the current list of traits on this food Can also be used to add traits to the food
-   *
-   * @return the traits of the food
-   */
-  @NotNull
-  List<FoodTrait> getTraits();
 
   /**
    * Tooltip added to the food item Called from {@link net.dries007.tfc.client.ClientEvents}
@@ -101,7 +56,7 @@ public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
    */
   @SideOnly(Side.CLIENT)
   default void addTooltipInfo(@NotNull ItemStack stack, @NotNull List<String> text,
-      @Nullable EntityPlayer player) {
+          @Nullable EntityPlayer player) {
     // Expiration dates
     if (isRotten()) {
       text.add(TextFormatting.RED + I18n.format("tfc.tooltip.food_rotten"));
@@ -112,7 +67,7 @@ public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
       } else {
         // Date food rots on.
         long rottenCalendarTime =
-            rottenDate - Calendar.PLAYER_TIME.getTicks() + Calendar.CALENDAR_TIME.getTicks();
+                rottenDate - Calendar.PLAYER_TIME.getTicks() + Calendar.CALENDAR_TIME.getTicks();
         // Days till food rots.
         long daysToRotInTicks = rottenCalendarTime - Calendar.CALENDAR_TIME.getTicks();
         switch (ConfigFood.MISC.DECAY.tooltipMode) {
@@ -120,21 +75,21 @@ public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
             break;
           case EXPIRATION_ONLY:
             text.add(TextFormatting.DARK_GREEN + I18n.format("tfc.tooltip.food_expiry_date",
-                ICalendarFormatted.getTimeAndDate(rottenCalendarTime,
-                    Calendar.CALENDAR_TIME.getDaysInMonth())));
+                    ICalendarFormatted.getTimeAndDate(rottenCalendarTime,
+                            Calendar.CALENDAR_TIME.getDaysInMonth())));
             break;
           case TIME_REMAINING_ONLY:
             text.add(TextFormatting.BLUE +
-                I18n.format("tfc.tooltip.food_expiry_date.days",
-                    String.valueOf(ICalendar.getTotalDays(daysToRotInTicks))));
+                    I18n.format("tfc.tooltip.food_expiry_date.days",
+                            String.valueOf(ICalendar.getTotalDays(daysToRotInTicks))));
             break;
           case ALL_INFO:
             text.add(TextFormatting.DARK_GREEN + I18n.format("tfc.tooltip.food_expiry_date",
-                ICalendarFormatted.getTimeAndDate(rottenCalendarTime,
-                    Calendar.CALENDAR_TIME.getDaysInMonth())));
+                    ICalendarFormatted.getTimeAndDate(rottenCalendarTime,
+                            Calendar.CALENDAR_TIME.getDaysInMonth())));
             text.add(TextFormatting.BLUE +
-                I18n.format("tfc.tooltip.food_expiry_date.days",
-                    String.valueOf(ICalendar.getTotalDays(daysToRotInTicks))));
+                    I18n.format("tfc.tooltip.food_expiry_date.days",
+                            String.valueOf(ICalendar.getTotalDays(daysToRotInTicks))));
             break;
         }
       }
@@ -152,19 +107,19 @@ public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
       if (saturation > 0) {
         // This display makes it so 100% saturation means a full hunger bar worth of saturation.
         text.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.nutrition_saturation",
-            String.format("%d", (int) (saturation * 5))));
+                String.format("%d", (int) (saturation * 5))));
       }
       float water = getData().getWater();
       if (water > 0) {
         text.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.nutrition_water",
-            String.format("%d", (int) water)));
+                String.format("%d", (int) water)));
       }
       for (Nutrient nutrient : Nutrient.values()) {
         float value = getData().getNutrients()[nutrient.ordinal()];
         if (value > 0) {
           text.add(nutrient.getColor() +
-              I18n.format("tfc.tooltip.nutrition_nutrient",
-                  I18n.format(GameUtils.getEnumName(nutrient)), String.format("%.1f", value)));
+                  I18n.format("tfc.tooltip.nutrition_nutrient",
+                          I18n.format(GameUtils.getEnumName(nutrient)), String.format("%.1f", value)));
         }
       }
     } else {
@@ -176,4 +131,48 @@ public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
       trait.addTraitInfo(stack, text);
     }
   }
+
+  /**
+   * @return true if the food is rotten / decayed.
+   */
+  default boolean isRotten() {
+    return getRottenDate() < Calendar.PLAYER_TIME.getTicks();
+  }
+
+  /**
+   * Get the date at which this food item will rot
+   *
+   * @return a calendar time
+   */
+  long getRottenDate();
+
+  /**
+   * The timestamp that this food was created Used to calculate expiration date Rotten food uses {@code Long.MIN_VALUE} as the creation date
+   *
+   * @return the calendar time of creation
+   */
+  long getCreationDate();
+
+  /**
+   * Sets the creation date. DO NOT USE TO PRESERVE FOOD! Use {@link FoodTrait} instead
+   *
+   * @param creationDate A calendar time
+   */
+  void setCreationDate(long creationDate);
+
+  /**
+   * Get a visible measure of all immutable data associated with food - Nutrition information - Hunger / Saturation - Water (Thirst)
+   *
+   * @see FoodData
+   */
+  @NotNull
+  FoodData getData();
+
+  /**
+   * Gets the current list of traits on this food Can also be used to add traits to the food
+   *
+   * @return the traits of the food
+   */
+  @NotNull
+  List<FoodTrait> getTraits();
 }

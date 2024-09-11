@@ -35,13 +35,13 @@ public class BlockRockSmooth extends BlockRock {
   }
 
   @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(CAN_FALL) ? 1 : 0;
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, CAN_FALL);
   }
 
   @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, CAN_FALL);
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(CAN_FALL) ? 1 : 0;
   }
 
 

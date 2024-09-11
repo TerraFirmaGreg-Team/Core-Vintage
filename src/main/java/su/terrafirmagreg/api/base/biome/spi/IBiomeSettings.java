@@ -12,11 +12,11 @@ import java.awt.Color;
 
 public interface IBiomeSettings extends IProviderAutoReg {
 
-  Settings getSettings();
-
   default String getRegistryKey() {
     return getSettings().registryKey;
   }
+
+  Settings getSettings();
 
   @Getter
   class Settings {

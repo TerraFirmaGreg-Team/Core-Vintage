@@ -54,17 +54,6 @@ public class LoggingHelper {
     return new LoggingHelper(LogManager.getLogger(MOD_NAME));
   }
 
-  public static List<String> wrapString(String string, int lnLength, boolean wrapLongWords,
-      List<String> list) {
-
-    final String[] lines = WordUtils.wrap(string, lnLength, null, wrapLongWords)
-        .split(SystemUtils.LINE_SEPARATOR);
-
-    list.addAll(Arrays.asList(lines));
-
-    return list;
-  }
-
   /**
    * Logs an exception or error. This is intended for when you're catching an error and should be used over {@link Throwable#printStackTrace()}.
    *
@@ -87,19 +76,8 @@ public class LoggingHelper {
   }
 
   /**
-   * Logs an error message. Error messages are printed to the console and the log file.
-   *
-   * @param message The message to print. Likely uses log4J's format, which is {}, for parameters.
-   * @param params  The parameters for the messages. This can be used to insert info directly to the message, or completely ignored.
-   */
-  public void error(String message, Object... params) {
-
-    this.logger.error(message, params);
-  }
-
-  /**
-   * Logs a fatal error message. This should be used to log errors which will prevent the game from working as expected and are likely to cause a
-   * crash. Fatal messages are printed to the console and the log file.
+   * Logs a fatal error message. This should be used to log errors which will prevent the game from working as expected and are likely to cause a crash. Fatal
+   * messages are printed to the console and the log file.
    *
    * @param message The message to print. Likely uses log4J's format, which is {}, for parameters.
    * @param params  The parameters for the messages. This can be used to insert info directly to the message, or completely ignored.
@@ -133,8 +111,7 @@ public class LoggingHelper {
   }
 
   /**
-   * Logs a trace message. This is for fine-grained debug messages. Trace messages aren't printed to the console, but they're added to the console
-   * file.
+   * Logs a trace message. This is for fine-grained debug messages. Trace messages aren't printed to the console, but they're added to the console file.
    *
    * @param message The message to print. Likely uses log4J's format, which is {}, for parameters.
    * @param params  The parameters for the messages. This can be used to insert info directly to the message, or completely ignored.
@@ -142,17 +119,6 @@ public class LoggingHelper {
   public void trace(String message, Object... params) {
 
     this.logger.trace(message, params);
-  }
-
-  /**
-   * Logs a warning message. These messages will also include a stack trace. Warning messages are printed to the console and the log file.
-   *
-   * @param message The message to print. Likely uses log4J's format, which is {}, for parameters.
-   * @param params  The parameters for the messages. This can be used to insert info directly to the message, or completely ignored.
-   */
-  public void warn(String message, Object... params) {
-
-    this.logger.warn(message, params);
   }
 
   /**
@@ -171,8 +137,7 @@ public class LoggingHelper {
    * Creates a noticeable warning, similar to the ones created by the FMLLog.
    *
    * @param trace If true, a small stack trace will be included in the error message.
-   * @param lines Each entry will be printed as part of the error message. If any entry is longer than 78 chars, it will be an auto wrapped into
-   *              multiple lines.
+   * @param lines Each entry will be printed as part of the error message. If any entry is longer than 78 chars, it will be an auto wrapped into multiple lines.
    */
   public void noticableWarning(boolean trace, List<String> lines) {
 
@@ -196,5 +161,38 @@ public class LoggingHelper {
     }
 
     this.error("********************************************************************************");
+  }
+
+  /**
+   * Logs an error message. Error messages are printed to the console and the log file.
+   *
+   * @param message The message to print. Likely uses log4J's format, which is {}, for parameters.
+   * @param params  The parameters for the messages. This can be used to insert info directly to the message, or completely ignored.
+   */
+  public void error(String message, Object... params) {
+
+    this.logger.error(message, params);
+  }
+
+  public static List<String> wrapString(String string, int lnLength, boolean wrapLongWords,
+          List<String> list) {
+
+    final String[] lines = WordUtils.wrap(string, lnLength, null, wrapLongWords)
+            .split(SystemUtils.LINE_SEPARATOR);
+
+    list.addAll(Arrays.asList(lines));
+
+    return list;
+  }
+
+  /**
+   * Logs a warning message. These messages will also include a stack trace. Warning messages are printed to the console and the log file.
+   *
+   * @param message The message to print. Likely uses log4J's format, which is {}, for parameters.
+   * @param params  The parameters for the messages. This can be used to insert info directly to the message, or completely ignored.
+   */
+  public void warn(String message, Object... params) {
+
+    this.logger.warn(message, params);
   }
 }

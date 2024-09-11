@@ -33,17 +33,6 @@ public abstract class BaseGuiContainer extends GuiContainer {
     this.renderHoveredToolTip(mouseX, mouseY);
   }
 
-  @Override
-  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    drawSimpleBackground();
-  }
-
-  protected final void drawSimpleBackground() {
-    GlStateManager.color(1, 1, 1, 1);
-    mc.getTextureManager().bindTexture(background);
-    drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-  }
-
   protected void drawItemStack(ItemStack stack, int x, int y, @NotNull String altText) {
     this.zLevel = 200.0F;
     this.itemRender.zLevel = 200.0F;
@@ -55,6 +44,17 @@ public abstract class BaseGuiContainer extends GuiContainer {
     this.itemRender.renderItemOverlayIntoGUI(font, stack, x, y, altText);
     this.zLevel = 0.0F;
     this.itemRender.zLevel = 0.0F;
+  }
+
+  @Override
+  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    drawSimpleBackground();
+  }
+
+  protected final void drawSimpleBackground() {
+    GlStateManager.color(1, 1, 1, 1);
+    mc.getTextureManager().bindTexture(background);
+    drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
   }
 
   protected void drawSlotOverlay(Slot slot) {

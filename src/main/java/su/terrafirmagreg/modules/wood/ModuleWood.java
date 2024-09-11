@@ -42,9 +42,13 @@ public final class ModuleWood extends ModuleBase {
   }
 
   @Override
-  public void onNewRegister() {
-    RegistryWood.onRegister();
+  public void onPreInit(FMLPreInitializationEvent event) {
+    MinecraftForge.EVENT_BUS.register(new EntityJoinWorldEventHandler());
+  }
 
+  @Override
+  public void onClientPreInit(FMLPreInitializationEvent event) {
+    MinecraftForge.EVENT_BUS.register(new KeyEventHandler());
   }
 
   @Override
@@ -54,8 +58,8 @@ public final class ModuleWood extends ModuleBase {
   }
 
   @Override
-  public void onRecipesRegister() {
-    LoomRecipes.onRegister();
+  public void onNewRegister() {
+    RegistryWood.onRegister();
 
   }
 
@@ -77,23 +81,19 @@ public final class ModuleWood extends ModuleBase {
   }
 
   @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
-    MinecraftForge.EVENT_BUS.register(new EntityJoinWorldEventHandler());
-  }
+  public void onRecipesRegister() {
+    LoomRecipes.onRegister();
 
-  @Override
-  public void onClientPreInit(FMLPreInitializationEvent event) {
-    MinecraftForge.EVENT_BUS.register(new KeyEventHandler());
-  }
-
-  @Override
-  public @NotNull LoggingHelper getLogger() {
-    return LOGGER;
   }
 
   @NotNull
   @Override
   public List<Class<?>> getEventBusSubscribers() {
     return Collections.singletonList(ModuleWood.class);
+  }
+
+  @Override
+  public @NotNull LoggingHelper getLogger() {
+    return LOGGER;
   }
 }

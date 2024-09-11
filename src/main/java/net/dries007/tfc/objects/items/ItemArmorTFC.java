@@ -16,41 +16,41 @@ import org.jetbrains.annotations.NotNull;
 
 public class ItemArmorTFC extends ItemArmor implements ICapabilitySize, ICapabilityDamageResistance {
 
-    private final IArmorMaterialTFC materialTFC;
+  private final IArmorMaterialTFC materialTFC;
 
-    public ItemArmorTFC(IArmorMaterialTFC materialTFC, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
-        super(materialTFC.getMaterial(), renderIndexIn, equipmentSlotIn);
-        this.materialTFC = materialTFC;
-        setNoRepair();
-    }
+  public ItemArmorTFC(IArmorMaterialTFC materialTFC, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
+    super(materialTFC.getMaterial(), renderIndexIn, equipmentSlotIn);
+    this.materialTFC = materialTFC;
+    setNoRepair();
+  }
 
-    @Override
-    public float getCrushingModifier() {
-        return materialTFC.getCrushingModifier();
-    }
+  @Override
+  public float getCrushingModifier() {
+    return materialTFC.getCrushingModifier();
+  }
 
-    @Override
-    public float getPiercingModifier() {
-        return materialTFC.getPiercingModifier();
-    }
+  @Override
+  public float getPiercingModifier() {
+    return materialTFC.getPiercingModifier();
+  }
 
-    @Override
-    public float getSlashingModifier() {
-        return materialTFC.getSlashingModifier();
-    }
+  @Override
+  public float getSlashingModifier() {
+    return materialTFC.getSlashingModifier();
+  }
 
-    @Override
-    public @NotNull Size getSize(@NotNull ItemStack stack) {
-        return Size.LARGE; // Stored in chests
-    }
+  @Override
+  public @NotNull Weight getWeight(@NotNull ItemStack stack) {
+    return Weight.HEAVY; // Stacksize is already restricted to 1
+  }
 
-    @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack stack) {
-        return Weight.HEAVY; // Stacksize is already restricted to 1
-    }
+  @Override
+  public @NotNull Size getSize(@NotNull ItemStack stack) {
+    return Size.LARGE; // Stored in chests
+  }
 
-    @Override
-    public boolean canStack(@NotNull ItemStack stack) {
-        return false;
-    }
+  @Override
+  public boolean canStack(@NotNull ItemStack stack) {
+    return false;
+  }
 }

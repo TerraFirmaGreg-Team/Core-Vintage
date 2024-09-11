@@ -98,6 +98,50 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
   }
 
   @Override
+  @NotNull
+  public Block.EnumOffsetType getOffsetType() {
+    return Block.EnumOffsetType.XZ;
+  }
+
+  @Override
+  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    if (!worldIn.isAreaLoaded(pos, 1)) {
+      return;
+    }
+
+    if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
+            plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+      int j = state.getValue(AGE);
+
+      if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
+              net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
+        if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
+          grow(worldIn, rand, pos, state);
+        } else if (j < 3) {
+          worldIn.setBlockState(pos, state.withProperty(AGE, j + 1)
+                  .withProperty(PART, getPlantPart(worldIn, pos)));
+        }
+        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+      }
+    } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
+            !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+      int j = state.getValue(AGE);
+
+      if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+        if (j == 0 && canShrink(worldIn, pos)) {
+          shrink(worldIn, pos);
+        } else if (j > 0) {
+          worldIn.setBlockState(pos, state.withProperty(AGE, j - 1)
+                  .withProperty(PART, getPlantPart(worldIn, pos)));
+        }
+        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+      }
+    }
+
+    checkAndDropBlock(worldIn, pos, state);
+  }
+
+  @Override
   public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
     int i;
     //noinspection StatementWithEmptyBody
@@ -119,14 +163,7 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
             .withProperty(PART, getPlantPart(worldIn, pos));
     worldIn.setBlockState(pos, iblockstate);
     iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
-  }
-
-  public void shrink(World worldIn, BlockPos pos) {
-    worldIn.setBlockToAir(pos);
-    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
-  }
-
-  @Override
+  }  @Override
   public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
     Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int currentStage = state.getValue(growthStageProperty);
@@ -214,13 +251,19 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
     }
   }
 
-  @Override
+  private boolean canShrink(World worldIn, BlockPos pos) {
+    return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
+            .getBlock() != this;
+  }  @Override
   public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
     this.onBlockHarvested(world, pos, state, player);
     return world.setBlockState(pos, net.minecraft.init.Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
   }
 
-  @Override
+  public void shrink(World worldIn, BlockPos pos) {
+    worldIn.setBlockToAir(pos);
+    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
+  }  @Override
   public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
           net.minecraftforge.common.IPlantable plantable) {
     IBlockState plant = plantable.getPlant(world, pos.offset(direction));
@@ -229,50 +272,6 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
       return true;
     }
     return super.canSustainPlant(state, world, pos, direction, plantable);
-  }
-
-  @Override
-  @NotNull
-  public Block.EnumOffsetType getOffsetType() {
-    return Block.EnumOffsetType.XZ;
-  }
-
-  @Override
-  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-    if (!worldIn.isAreaLoaded(pos, 1)) {
-      return;
-    }
-
-    if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
-            plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-      int j = state.getValue(AGE);
-
-      if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
-              net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
-        if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
-          grow(worldIn, rand, pos, state);
-        } else if (j < 3) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j + 1)
-                  .withProperty(PART, getPlantPart(worldIn, pos)));
-        }
-        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-      }
-    } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
-            !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-      int j = state.getValue(AGE);
-
-      if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
-        if (j == 0 && canShrink(worldIn, pos)) {
-          shrink(worldIn, pos);
-        } else if (j > 0) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j - 1)
-                  .withProperty(PART, getPlantPart(worldIn, pos)));
-        }
-        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-      }
-    }
-
-    checkAndDropBlock(worldIn, pos, state);
   }
 
   @Override
@@ -298,8 +297,9 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
     return NonNullList.withSize(1, new ItemStack(this, 1));
   }
 
-  private boolean canShrink(World worldIn, BlockPos pos) {
-    return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
-            .getBlock() != this;
-  }
+
+
+
+
+
 }

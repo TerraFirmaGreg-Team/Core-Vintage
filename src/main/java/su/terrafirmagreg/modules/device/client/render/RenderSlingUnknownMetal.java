@@ -16,37 +16,24 @@ import org.jetbrains.annotations.Nullable;
 public class RenderSlingUnknownMetal extends Render<EntityUnknownProjectile> {
 
   private static final ResourceLocation UNKNOWN_INGOT_TEXTURE = ModUtils.resource(
-      "textures/blocks/metal/base.png");
+          "textures/blocks/metal/base.png");
   private final ModelUnknownProjectile unknownModel = new ModelUnknownProjectile();
 
   public RenderSlingUnknownMetal(RenderManager renderManager) {
     super(renderManager);
   }
 
-  private float getRenderYaw(float p_82400_1_, float p_82400_2_, float p_82400_3_) {
-    float f;
-
-    for (f = p_82400_2_ - p_82400_1_; f < -180.0F; f += 360.0F) {
-    }
-
-    while (f >= 180.0F) {
-      f -= 360.0F;
-    }
-
-    return p_82400_1_ + p_82400_3_ * f;
-  }
-
   public void doRender(EntityUnknownProjectile entity, double x, double y, double z,
-      float entityYaw, float partialTicks) {
+          float entityYaw, float partialTicks) {
     GlStateManager.pushMatrix();
     GlStateManager.disableCull();
     float f = this.getRenderYaw(entity.prevRotationYaw, entity.rotationYaw, partialTicks);
     float f1 =
-        entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
+            entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
     GlStateManager.translate((float) x, (float) y, (float) z);
     GlStateManager.rotate(
-        entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks
-            - 90.0F, 0.0F, 1.0F, 0.0F);
+            entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks
+                    - 90.0F, 0.0F, 1.0F, 0.0F);
     float f2 = 0.0625F;
     GlStateManager.enableRescaleNormal();
     GlStateManager.scale(-1.0F, -1.0F, 1.0F);
@@ -66,6 +53,19 @@ public class RenderSlingUnknownMetal extends Render<EntityUnknownProjectile> {
 
     GlStateManager.popMatrix();
     super.doRender(entity, x, y, z, entityYaw, partialTicks);
+  }
+
+  private float getRenderYaw(float p_82400_1_, float p_82400_2_, float p_82400_3_) {
+    float f;
+
+    for (f = p_82400_2_ - p_82400_1_; f < -180.0F; f += 360.0F) {
+    }
+
+    while (f >= 180.0F) {
+      f -= 360.0F;
+    }
+
+    return p_82400_1_ + p_82400_3_ * f;
   }
 
   @Nullable

@@ -36,97 +36,97 @@ import java.util.List;
 @Optional.Interface(iface = "mcjty.theoneprobe.api.IProbeInfoAccessor", modid = "theoneprobe")
 public class BlockGrindstone extends BlockHPBase implements IProbeInfoAccessor {
 
-    public static final PropertyBool FILLED = PropertyBool.create("filled");
-    public static final PropertyEnum<GrindStoneModels> PART = PropertyEnum.create("part", GrindStoneModels.class);
+  public static final PropertyBool FILLED = PropertyBool.create("filled");
+  public static final PropertyEnum<GrindStoneModels> PART = PropertyEnum.create("part", GrindStoneModels.class);
 
-    private static final AxisAlignedBB COLLISION_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 8D / 16D, 1.0D);
-    private static final AxisAlignedBB BOUNDING_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 13D / 16D, 1.0D);
+  private static final AxisAlignedBB COLLISION_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 8D / 16D, 1.0D);
+  private static final AxisAlignedBB BOUNDING_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 13D / 16D, 1.0D);
 
-    public BlockGrindstone() {
-        super(Material.ROCK);
-        setHardness(1.5F);
-        setResistance(10F);
-        setHarvestLevel("pickaxe", 1);
-        setSoundType(SoundType.STONE);
-        setRegistryName(Constants.GRINDSTONE_BLOCK);
-        setTranslationKey(Constants.GRINDSTONE_BLOCK);
+  public BlockGrindstone() {
+    super(Material.ROCK);
+    setHardness(1.5F);
+    setResistance(10F);
+    setHarvestLevel("pickaxe", 1);
+    setSoundType(SoundType.STONE);
+    setRegistryName(Constants.GRINDSTONE_BLOCK);
+    setTranslationKey(Constants.GRINDSTONE_BLOCK);
+  }
+
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(FILLED, meta == 1).withProperty(PART, GrindStoneModels.BASE);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(FILLED) ? 1 : 0;
+  }
+
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return BOUNDING_AABB;
+  }
+
+  @Nullable
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return COLLISION_AABB;
+  }
+
+  @Override
+  public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+    if (!worldIn.isRemote) {
+      boolean filled = state.getValue(FILLED);
+      worldIn.setBlockState(pos, state.withProperty(FILLED, filled).withProperty(PART, GrindStoneModels.BASE), 2);
     }
+  }
 
-    public static void setState(boolean filled, World worldIn, BlockPos pos) {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
-        keepInventory = true;
-        worldIn.setBlockState(pos, ModBlocks.BLOCK_GRINDSTONE.getDefaultState()
-                .withProperty(FILLED, filled)
-                .withProperty(PART, GrindStoneModels.BASE), 3);
-        keepInventory = false;
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, FILLED, PART);
+  }
 
-        if (tileentity != null) {
-            tileentity.validate();
-            worldIn.setTileEntity(pos, tileentity);
-            tileentity.validate();
-        }
+  @Override
+  public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
+    tooltip.add(Localization.ITEM.HORSE_GRINDSTONE.SIZE.translate(Colors.WHITE.toString(), Colors.LIGHTGRAY.toString()));
+    tooltip.add(Localization.ITEM.HORSE_GRINDSTONE.LOCATION.translate(Colors.WHITE.toString(), Colors.LIGHTGRAY.toString()));
+    tooltip.add(Localization.ITEM.HORSE_GRINDSTONE.USE.translate());
+  }
+
+  // The One Probe Integration
+  @Optional.Method(modid = "theoneprobe")
+  @Override
+  public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
+    TileEntityGrindstone tileEntity = getTileEntity(world, data.getPos());
+    if (tileEntity != null) {
+      probeInfo.progress((long) ((((double) tileEntity.getField(1)) / ((double) tileEntity.getField(0))) * 100L), 100L,
+              new ProgressStyle().prefix(Localization.TOP.GRINDSTONE_PROGRESS.translate() + " ")
+                      .suffix("%"));
     }
+  }
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(FILLED, meta == 1).withProperty(PART, GrindStoneModels.BASE);
-    }
+  @Override
+  public void emptiedOutput(World world, BlockPos pos) {
+    BlockGrindstone.setState(false, world, pos);
+  }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(FILLED) ? 1 : 0;
-    }
+  public static void setState(boolean filled, World worldIn, BlockPos pos) {
+    TileEntity tileentity = worldIn.getTileEntity(pos);
+    keepInventory = true;
+    worldIn.setBlockState(pos, ModBlocks.BLOCK_GRINDSTONE.getDefaultState()
+            .withProperty(FILLED, filled)
+            .withProperty(PART, GrindStoneModels.BASE), 3);
+    keepInventory = false;
 
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return BOUNDING_AABB;
+    if (tileentity != null) {
+      tileentity.validate();
+      worldIn.setTileEntity(pos, tileentity);
+      tileentity.validate();
     }
+  }
 
-    @Nullable
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return COLLISION_AABB;
-    }
-
-    @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        if (!worldIn.isRemote) {
-            boolean filled = state.getValue(FILLED);
-            worldIn.setBlockState(pos, state.withProperty(FILLED, filled).withProperty(PART, GrindStoneModels.BASE), 2);
-        }
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FILLED, PART);
-    }
-
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
-        tooltip.add(Localization.ITEM.HORSE_GRINDSTONE.SIZE.translate(Colors.WHITE.toString(), Colors.LIGHTGRAY.toString()));
-        tooltip.add(Localization.ITEM.HORSE_GRINDSTONE.LOCATION.translate(Colors.WHITE.toString(), Colors.LIGHTGRAY.toString()));
-        tooltip.add(Localization.ITEM.HORSE_GRINDSTONE.USE.translate());
-    }
-
-    // The One Probe Integration
-    @Optional.Method(modid = "theoneprobe")
-    @Override
-    public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
-        TileEntityGrindstone tileEntity = getTileEntity(world, data.getPos());
-        if (tileEntity != null) {
-            probeInfo.progress((long) ((((double) tileEntity.getField(1)) / ((double) tileEntity.getField(0))) * 100L), 100L,
-                    new ProgressStyle().prefix(Localization.TOP.GRINDSTONE_PROGRESS.translate() + " ")
-                            .suffix("%"));
-        }
-    }
-
-    @Override
-    public void emptiedOutput(World world, BlockPos pos) {
-        BlockGrindstone.setState(false, world, pos);
-    }
-
-    @NotNull
-    @Override
-    public Class<?> getTileClass() {
-        return TileEntityGrindstone.class;
-    }
+  @NotNull
+  @Override
+  public Class<?> getTileClass() {
+    return TileEntityGrindstone.class;
+  }
 }

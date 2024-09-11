@@ -38,114 +38,114 @@ import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public class EntityGazelleTFC extends EntityAnimalMammal implements IHuntable {
 
-    private static final int DAYS_TO_ADULTHOOD = 128;
+  private static final int DAYS_TO_ADULTHOOD = 128;
 
-    @SuppressWarnings("unused")
-    public EntityGazelleTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+  @SuppressWarnings("unused")
+  public EntityGazelleTFC(World worldIn) {
+    this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+  }
+
+  public EntityGazelleTFC(World worldIn, Gender gender, int birthDay) {
+    super(worldIn, gender, birthDay);
+    this.setSize(1.0F, 1.5F);
+  }
+
+  @Override
+  public double getOldDeathChance() {
+    return 0;
+  }
+
+  @Override
+  public boolean canMateWith(EntityAnimal otherAnimal) {
+    return false;
+  }
+
+  @Override
+  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
+    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+            (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
+      return ConfigTFC.Animals.GAZELLE.rarity;
     }
+    return 0;
+  }
 
-    public EntityGazelleTFC(World worldIn, Gender gender, int birthDay) {
-        super(worldIn, gender, birthDay);
-        this.setSize(1.0F, 1.5F);
-    }
+  @Override
+  public BiConsumer<List<EntityLiving>, Random> getGroupingRules() {
+    return AnimalGroupingRules.ELDER_AND_POPULATION;
+  }
 
-    @Override
-    public boolean canMateWith(EntityAnimal otherAnimal) {
-        return false;
-    }
+  @Override
+  public int getMinGroupSize() {
+    return 3;
+  }
 
-    @Override
-    public double getOldDeathChance() {
-        return 0;
-    }
+  @Override
+  public int getMaxGroupSize() {
+    return 5;
+  }
 
-    @Override
-    public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-        BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
-        if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-                (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-            return ConfigTFC.Animals.GAZELLE.rarity;
-        }
-        return 0;
-    }
+  @Override
+  public long gestationDays() {
+    return 0;
+  }
 
-    @Override
-    public BiConsumer<List<EntityLiving>, Random> getGroupingRules() {
-        return AnimalGroupingRules.ELDER_AND_POPULATION;
-    }
+  @Override
+  public void birthChildren() {
+    // Not farmable
+  }
 
-    @Override
-    public int getMinGroupSize() {
-        return 3;
-    }
+  @Override
+  public int getDaysToAdulthood() {
+    return DAYS_TO_ADULTHOOD;
+  }
 
-    @Override
-    public int getMaxGroupSize() {
-        return 5;
-    }
+  @Override
+  public int getDaysToElderly() {
+    return 0;
+  }
 
-    @Override
-    public void birthChildren() {
-        // Not farmable
-    }
+  @Override
+  protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    return SoundsAnimal.ANIMAL_DEER_HURT;
+  }
 
-    @Override
-    public long gestationDays() {
-        return 0;
-    }
+  @Override
+  protected SoundEvent getDeathSound() {
+    return SoundsAnimal.ANIMAL_DEER_DEATH;
+  }
 
-    @Override
-    public int getDaysToAdulthood() {
-        return DAYS_TO_ADULTHOOD;
-    }
+  @Override
+  protected void initEntityAI() {
+    double speedMult = 1.4D;
+    EntityAnimalBase.addWildPreyAI(this, speedMult);
+    EntityAnimalBase.addCommonPreyAI(this, speedMult);
 
-    @Override
-    public int getDaysToElderly() {
-        return 0;
-    }
+    this.tasks.addTask(3, new EntityAITempt(this, 1.1D, ItemsTFC.SALT, false));
 
-    @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundsAnimal.ANIMAL_DEER_HURT;
-    }
+    this.tasks.addTask(5, new EntityAIFollowParent(this, 1.0D));
+    this.tasks.addTask(6, new EntityAIEatGrass(this));
+  }
 
-    @Override
-    protected SoundEvent getDeathSound() {
-        return SoundsAnimal.ANIMAL_DEER_DEATH;
-    }
+  @Override
+  protected void applyEntityAttributes() {
+    super.applyEntityAttributes();
+    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.33D);
+  }
 
-    @Override
-    protected void initEntityAI() {
-        double speedMult = 1.4D;
-        EntityAnimalBase.addWildPreyAI(this, speedMult);
-        EntityAnimalBase.addCommonPreyAI(this, speedMult);
+  @Override
+  protected SoundEvent getAmbientSound() {
+    return SoundsAnimal.ANIMAL_GAZELLE_SAY;
+  }
 
-        this.tasks.addTask(3, new EntityAITempt(this, 1.1D, ItemsTFC.SALT, false));
+  @Nullable
+  protected ResourceLocation getLootTable() {
+    return LootTablesAnimal.ANIMALS_GAZELLE;
+  }
 
-        this.tasks.addTask(5, new EntityAIFollowParent(this, 1.0D));
-        this.tasks.addTask(6, new EntityAIEatGrass(this));
-    }
-
-    @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.33D);
-    }
-
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return SoundsAnimal.ANIMAL_GAZELLE_SAY;
-    }
-
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return LootTablesAnimal.ANIMALS_GAZELLE;
-    }
-
-    @Override
-    protected void playStepSound(BlockPos pos, Block blockIn) {
-        this.playSound(SoundEvents.ENTITY_HORSE_STEP, 0.14F, 0.8F);
-    }
+  @Override
+  protected void playStepSound(BlockPos pos, Block blockIn) {
+    this.playSound(SoundEvents.ENTITY_HORSE_STEP, 0.14F, 0.8F);
+  }
 }

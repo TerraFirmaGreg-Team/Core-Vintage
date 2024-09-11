@@ -37,7 +37,7 @@ public class GeneratorSurfacePinecone implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
     final var baseChunkData = CapabilityChunkData.get(world, chunkBlockPos);
 
@@ -48,9 +48,9 @@ public class GeneratorSurfacePinecone implements IWorldGenerator {
 
       for (int i = 0; i < ConfigTFCF.General.WORLD.groundcoverPineconeFrequency * factor; i++) {
         BlockPos pos = new BlockPos(
-            xoff + random.nextInt(16),
-            0,
-            zoff + random.nextInt(16)
+                xoff + random.nextInt(16),
+                0,
+                zoff + random.nextInt(16)
         );
         generateRock(world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()));
       }
@@ -71,9 +71,9 @@ public class GeneratorSurfacePinecone implements IWorldGenerator {
     if (pos.getY() > 146 && pos.getY() < 170) {
       if (temp <= 15 && density > 0.3f) {
         if (world.isAirBlock(pos) && world.getBlockState(pos.down())
-            .isSideSolid(world, pos.down(), EnumFacing.UP)) {
+                .isSideSolid(world, pos.down(), EnumFacing.UP)) {
           if (BlockUtils.isSoil(world.getBlockState(pos.down())) || BlockUtils.isSoilOrGravel(
-              world.getBlockState(pos.down()))) {
+                  world.getBlockState(pos.down()))) {
             world.setBlockState(pos, BlocksTFCF.PINECONE.getDefaultState());
           }
         }

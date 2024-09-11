@@ -1,5 +1,9 @@
 package su.terrafirmagreg.modules.core.object.command;
 
+import su.terrafirmagreg.api.base.command.BaseCommand;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -7,10 +11,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-
-import su.terrafirmagreg.api.base.command.BaseCommand;
-import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 
 public class CommandHeat extends BaseCommand {
 

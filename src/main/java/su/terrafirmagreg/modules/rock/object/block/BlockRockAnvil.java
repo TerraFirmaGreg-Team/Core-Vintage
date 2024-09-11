@@ -50,17 +50,7 @@ public class BlockRockAnvil extends BlockRock implements IProviderTile {
   }
 
   @Override
-  public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
-    return side == EnumFacing.DOWN;
-  }
-
-  @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return AABB;
-  }
-
-  @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return AABB;
   }
 
@@ -68,6 +58,25 @@ public class BlockRockAnvil extends BlockRock implements IProviderTile {
   @Override
   public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
     return AABB;
+  }
+
+  @Override
+  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    var tile = TileUtils.getTile(worldIn, pos, TileRockAnvil.class);
+    if (tile != null) {
+      tile.onBreakBlock(worldIn, pos, state);
+    }
+    super.breakBlock(worldIn, pos, state);
+  }
+
+  @Override
+  public int quantityDropped(Random random) {
+    return 1 + random.nextInt(3);
+  }
+
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return ItemsRock.LOOSE.get(type);
   }
 
   @Override
@@ -144,27 +153,18 @@ public class BlockRockAnvil extends BlockRock implements IProviderTile {
   }
 
   @Override
-  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TileRockAnvil.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
-    super.breakBlock(worldIn, pos, state);
-  }
-
-  @Override
-  public int quantityDropped(Random random) {
-    return 1 + random.nextInt(3);
-  }
-
-  @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return ItemsRock.LOOSE.get(type);
+  public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+    return side == EnumFacing.DOWN;
   }
 
   @Override
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
     return new ItemStack(BlocksRock.RAW.get(type));
+  }
+
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return AABB;
   }
 
   @Override

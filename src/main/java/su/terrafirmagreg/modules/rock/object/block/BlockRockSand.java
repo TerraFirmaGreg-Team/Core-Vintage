@@ -29,13 +29,13 @@ public class BlockRockSand extends BlockRockFallable {
     //DirtHelper.registerSoil(this.getDefaultState().get(), DirtHelper.SANDLIKE);
   }
 
+  private static String isSilica(RockType type) {
+    return BlockUtils.isType(type, CHERT, GRANITE, QUARTZITE, RHYOLITE, PHYLLITE) ? "silica" : null;
+  }
+
   @Override
   public @Nullable BaseItemHeat getItemBlock() {
     return new BaseItemHeat(this, 1, 600);
-  }
-
-  private static String isSilica(RockType type) {
-    return BlockUtils.isType(type, CHERT, GRANITE, QUARTZITE, RHYOLITE, PHYLLITE) ? "silica" : null;
   }
 
 }

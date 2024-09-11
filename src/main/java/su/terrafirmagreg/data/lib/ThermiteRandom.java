@@ -3,13 +3,12 @@ package su.terrafirmagreg.data.lib;
 /**
  * A subclass of java.util.random that implements the Xorshift random number generator
  * <p>
- * - it is 30% faster than the generator from Java's library - it produces random sequences of higher quality than java.util.Random - this class also
- * provides a clone() function
+ * - it is 30% faster than the generator from Java's library - it produces random sequences of higher quality than java.util.Random - this class also provides a
+ * clone() function
  * <p>
  * Usage: XSRandom rand = new XSRandom(); //Instantiation x = rand.nextInt(); //pull a random number
  * <p>
- * To use the class in legacy code, you may also instantiate an XSRandom object and assign it to a java.util.Random object: java.util.Random rand =
- * new XSRandom();
+ * To use the class in legacy code, you may also instantiate an XSRandom object and assign it to a java.util.Random object: java.util.Random rand = new XSRandom();
  * <p>
  * for an explanation of the algorithm, see http://demesos.blogspot.com/2011/09/pseudo-random-number-generators.html
  *
@@ -68,12 +67,12 @@ public class ThermiteRandom extends Random {
     }
   }
 
-  public boolean nextBoolean() {
-    return next(1) != 0;
-  }
-
-  public double nextDouble() {
-    return (((long) (next(26)) << 27) + next(27)) * DOUBLE_UNIT;
+  /**
+   * @return Returns an XSRandom object with the same state as the original
+   */
+  @Override
+  public ThermiteRandom clone() {
+    return new ThermiteRandom(getSeed());
   }
 
   /**
@@ -86,21 +85,13 @@ public class ThermiteRandom extends Random {
   }
 
   /**
-   * Sets the seed for this pseudo random number generator. As described above, two instances of the same random class, starting with the same seed, produce the same results, if
-   * the same methods are called.
+   * Sets the seed for this pseudo random number generator. As described above, two instances of the same random class, starting with the same seed, produce the same
+   * results, if the same methods are called.
    *
    * @param seed the new seed
    */
   public synchronized void setSeed(long seed) {
     this.seed = seed;
-  }
-
-  /**
-   * @return Returns an XSRandom object with the same state as the original
-   */
-  @Override
-  public ThermiteRandom clone() {
-    return new ThermiteRandom(getSeed());
   }
 
   /**
@@ -117,29 +108,24 @@ public class ThermiteRandom extends Random {
     return (int) x;
   }
 
-  synchronized public double nextGaussian() {
-    // See Knuth, ACP, Section 3.4.1 Algorithm C.
-    if (haveNextNextGaussian) {
-      haveNextNextGaussian = false;
-      return nextNextGaussian;
-    } else {
-      double v1, v2, s;
-      do {
-        v1 = 2 * nextDouble() - 1; // between -1 and 1
-        v2 = 2 * nextDouble() - 1; // between -1 and 1
-        s = v1 * v1 + v2 * v2;
-      } while (s >= 1 || s == 0);
-      double multiplier = StrictMath.sqrt(-2 * StrictMath.log(s) / s);
-      nextNextGaussian = v2 * multiplier;
-      haveNextNextGaussian = true;
-      return v1 * multiplier;
+  public void nextBytes(byte[] bytes_arr) {
+    for (int iba = 0, lenba = bytes_arr.length; iba < lenba; ) {
+      for (int rndba = nextInt(),
+              nba = Math.min(lenba - iba, Integer.SIZE / Byte.SIZE); nba-- > 0; rndba >>= Byte.SIZE) {
+        bytes_arr[iba++] = (byte) rndba;
+      }
     }
   }
 
+  public int nextInt() {
+    return next(32);
+  }
+
   /**
-   * Returns a pseudorandom, uniformly distributed {@code int} value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's
-   * sequence. The general contract of {@code nextInt} is that one {@code int} value in the specified range is pseudorandomly generated and returned. All {@code bound} possible
-   * {@code int} values are produced with (approximately) equal probability. The method {@code nextInt(int bound)} is implemented by class {@code Random} as if by:
+   * Returns a pseudorandom, uniformly distributed {@code int} value between 0 (inclusive) and the specified value (exclusive), drawn from this random number
+   * generator's sequence. The general contract of {@code nextInt} is that one {@code int} value in the specified range is pseudorandomly generated and returned. All
+   * {@code bound} possible {@code int} values are produced with (approximately) equal probability. The method {@code nextInt(int bound)} is implemented by class
+   * {@code Random} as if by:
    *
    * <pre>
    *  {@code
@@ -160,20 +146,22 @@ public class ThermiteRandom extends Random {
    * </pre>
    *
    * <p>
-   * The hedge "approx imately" is used in the foregoing description only because the next method is only approximately an unbiased source of independently chosen bits. If it
-   * were a perfect source of randomly chosen bits, then the algorithm shown would choose {@code int} values from the stated range with perfect uniformity.
+   * The hedge "approx imately" is used in the foregoing description only because the next method is only approximately an unbiased source of independently chosen
+   * bits. If it were a perfect source of randomly chosen bits, then the algorithm shown would choose {@code int} values from the stated range with perfect
+   * uniformity.
    * <p>
-   * The algorithm is slightly tricky. It rejects values that would result in an uneven distribution (due to the fact that 2^31 is not divisible by n). The probability of a value
-   * being rejected depends on n. The worst case is n=2^30+1, for which the probability of a reject is 1/2, and the expected number of iterations before the loop terminates is
-   * 2.
+   * The algorithm is slightly tricky. It rejects values that would result in an uneven distribution (due to the fact that 2^31 is not divisible by n). The
+   * probability of a value being rejected depends on n. The worst case is n=2^30+1, for which the probability of a reject is 1/2, and the expected number of
+   * iterations before the loop terminates is 2.
    * <p>
-   * The algorithm treats the case where n is a power of two specially: it returns the correct number of high-order bits from the underlying pseudo-random number generator. In
-   * the absence of special treatment, the correct number of <i>low-order</i> bits would be returned. Linear congruential pseudo-random number generators such as the one
-   * implemented by this class are known to have short periods in the sequence of values of their low-order bits. Thus, this special case greatly increases the length of the
-   * sequence of values returned by successive calls to this method if n is a small power of two.
+   * The algorithm treats the case where n is a power of two specially: it returns the correct number of high-order bits from the underlying pseudo-random number
+   * generator. In the absence of special treatment, the correct number of <i>low-order</i> bits would be returned. Linear congruential pseudo-random number
+   * generators such as the one implemented by this class are known to have short periods in the sequence of values of their low-order bits. Thus, this special case
+   * greatly increases the length of the sequence of values returned by successive calls to this method if n is a small power of two.
    *
    * @param bound the upper bound (exclusive). Must be positive.
-   * @return the next pseudorandom, uniformly distributed {@code int} value between zero (inclusive) and {@code bound} (exclusive) from this random number generator's sequence
+   * @return the next pseudorandom, uniformly distributed {@code int} value between zero (inclusive) and {@code bound} (exclusive) from this random number generator's
+   * sequence
    * @throws IllegalArgumentException if bound is not positive
    * @since 1.2
    */
@@ -186,25 +174,39 @@ public class ThermiteRandom extends Random {
     return (out < 0) ? -out : out;
   }
 
-  public int nextInt() {
-    return next(32);
+  public long nextLong() {
+    // it's okay that the bottom word remains signed.
+    return ((long) (next(32)) << 32) + next(32);
+  }
+
+  public boolean nextBoolean() {
+    return next(1) != 0;
   }
 
   public float nextFloat() {
     return next(24) * FLOAT_UNIT;
   }
 
-  public long nextLong() {
-    // it's okay that the bottom word remains signed.
-    return ((long) (next(32)) << 32) + next(32);
+  public double nextDouble() {
+    return (((long) (next(26)) << 27) + next(27)) * DOUBLE_UNIT;
   }
 
-  public void nextBytes(byte[] bytes_arr) {
-    for (int iba = 0, lenba = bytes_arr.length; iba < lenba; ) {
-      for (int rndba = nextInt(),
-          nba = Math.min(lenba - iba, Integer.SIZE / Byte.SIZE); nba-- > 0; rndba >>= Byte.SIZE) {
-        bytes_arr[iba++] = (byte) rndba;
-      }
+  synchronized public double nextGaussian() {
+    // See Knuth, ACP, Section 3.4.1 Algorithm C.
+    if (haveNextNextGaussian) {
+      haveNextNextGaussian = false;
+      return nextNextGaussian;
+    } else {
+      double v1, v2, s;
+      do {
+        v1 = 2 * nextDouble() - 1; // between -1 and 1
+        v2 = 2 * nextDouble() - 1; // between -1 and 1
+        s = v1 * v1 + v2 * v2;
+      } while (s >= 1 || s == 0);
+      double multiplier = StrictMath.sqrt(-2 * StrictMath.log(s) / s);
+      nextNextGaussian = v2 * multiplier;
+      haveNextNextGaussian = true;
+      return v1 * multiplier;
     }
   }
 }

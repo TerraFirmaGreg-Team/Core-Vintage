@@ -25,9 +25,9 @@ public abstract class BaseBiomeMesa extends BaseBiome {
   protected static final IBlockState HARDENED_CLAY = Blocks.HARDENED_CLAY.getDefaultState();
   protected static final IBlockState STAINED_HARDENED_CLAY = Blocks.STAINED_HARDENED_CLAY.getDefaultState();
   protected static final IBlockState ORANGE_STAINED_HARDENED_CLAY = STAINED_HARDENED_CLAY.withProperty(
-      BlockColored.COLOR, EnumDyeColor.ORANGE);
+          BlockColored.COLOR, EnumDyeColor.ORANGE);
   protected static final IBlockState SAND = Blocks.SAND.getDefaultState()
-      .withProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND);
+          .withProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND);
 
   private final boolean brycePillars;
   private final boolean hasForest;
@@ -50,14 +50,14 @@ public abstract class BaseBiomeMesa extends BaseBiome {
 
   @Override
   public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z,
-      double noiseVal) {
+          double noiseVal) {
     BlockPos chunkBlockPos = new BlockPos(x << 4, 0, z << 4);
     if (this.clayBands == null || this.worldSeed != worldIn.getSeed()) {
       this.generateBands(worldIn.getSeed());
     }
 
     if (this.pillarNoise == null || this.pillarRoofNoise == null
-        || this.worldSeed != worldIn.getSeed()) {
+            || this.worldSeed != worldIn.getSeed()) {
       Random random = new Random(this.worldSeed);
       this.pillarNoise = new NoiseGeneratorPerlin(random, 4);
       this.pillarRoofNoise = new NoiseGeneratorPerlin(random, 1);
@@ -71,11 +71,11 @@ public abstract class BaseBiomeMesa extends BaseBiome {
       k1 = (x & -16) + (z & 15);
       l1 = (z & -16) + (x & 15);
       double d0 = Math.min(Math.abs(noiseVal),
-          this.pillarNoise.getValue((double) k1 * 0.25, (double) l1 * 0.25));
+              this.pillarNoise.getValue((double) k1 * 0.25, (double) l1 * 0.25));
       if (d0 > 0.0) {
         double d1 = 0.001953125;
         double d2 = Math.abs(
-            this.pillarRoofNoise.getValue((double) k1 * 0.001953125, (double) l1 * 0.001953125));
+                this.pillarRoofNoise.getValue((double) k1 * 0.001953125, (double) l1 * 0.001953125));
         d4 = d0 * d0 * 2.5;
         double d3 = Math.ceil(d2 * 50.0) + 14.0;
         if (d4 > d3) {
@@ -100,8 +100,8 @@ public abstract class BaseBiomeMesa extends BaseBiome {
     for (int j1 = 255; j1 >= 0; --j1) {
       if (chunkPrimerIn.getBlockState(l1, j1, k1).getMaterial() == Material.AIR && j1 < (int) d4) {
         chunkPrimerIn.setBlockState(l1, j1, k1,
-            BlocksRock.RAW.get(ProviderChunkData.getRockHeight(worldIn, chunkBlockPos))
-                .getDefaultState());
+                BlocksRock.RAW.get(ProviderChunkData.getRockHeight(worldIn, chunkBlockPos))
+                        .getDefaultState());
       }
 
       if (j1 <= rand.nextInt(5)) {
@@ -111,15 +111,15 @@ public abstract class BaseBiomeMesa extends BaseBiome {
         if (iblockstate1.getMaterial() == Material.AIR) {
           l = -1;
         } else if (iblockstate1.getBlock() == BlocksRock.RAW.get(
-                ProviderChunkData.getRockHeight(worldIn, chunkBlockPos))
-            .getDefaultState()) {
+                        ProviderChunkData.getRockHeight(worldIn, chunkBlockPos))
+                .getDefaultState()) {
           if (l == -1) {
             flag1 = false;
             if (k <= 0) {
               iblockstate = AIR;
               iblockstate3 = BlocksRock.RAW.get(
-                      ProviderChunkData.getRockHeight(worldIn, chunkBlockPos))
-                  .getDefaultState();
+                              ProviderChunkData.getRockHeight(worldIn, chunkBlockPos))
+                      .getDefaultState();
             } else if (j1 >= i2 - 4 && j1 <= i2 + 1) {
               iblockstate = STAINED_HARDENED_CLAY;
               iblockstate3 = this.fillerBlock;
@@ -134,12 +134,12 @@ public abstract class BaseBiomeMesa extends BaseBiome {
               if (this.hasForest && j1 > 86 + k * 2) {
                 if (flag) {
                   chunkPrimerIn.setBlockState(l1, j1, k1,
-                      BlocksSoil.DIRT.get(ProviderChunkData.getSoilHeight(worldIn, chunkBlockPos))
-                          .getDefaultState());
+                          BlocksSoil.DIRT.get(ProviderChunkData.getSoilHeight(worldIn, chunkBlockPos))
+                                  .getDefaultState());
                 } else {
                   chunkPrimerIn.setBlockState(l1, j1, k1,
-                      BlocksSoil.GRASS.get(ProviderChunkData.getSoilHeight(worldIn, chunkBlockPos))
-                          .getDefaultState());
+                          BlocksSoil.GRASS.get(ProviderChunkData.getSoilHeight(worldIn, chunkBlockPos))
+                                  .getDefaultState());
                 }
               } else if (j1 > i2 + 3 + k) {
                 IBlockState iblockstate2;
@@ -206,7 +206,7 @@ public abstract class BaseBiomeMesa extends BaseBiome {
 
       for (j4 = 0; k3 + j4 < 144 && j4 < l2; ++j4) {
         this.clayBands[k3 + j4] = STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR,
-            EnumDyeColor.YELLOW);
+                EnumDyeColor.YELLOW);
       }
     }
 
@@ -219,7 +219,7 @@ public abstract class BaseBiomeMesa extends BaseBiome {
 
       for (k4 = 0; j4 + k4 < 144 && k4 < k3; ++k4) {
         this.clayBands[j4 + k4] = STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR,
-            EnumDyeColor.BROWN);
+                EnumDyeColor.BROWN);
       }
     }
 
@@ -231,7 +231,7 @@ public abstract class BaseBiomeMesa extends BaseBiome {
 
       for (int j1 = 0; k4 + j1 < 144 && j1 < j4; ++j1) {
         this.clayBands[k4 + j1] = STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR,
-            EnumDyeColor.RED);
+                EnumDyeColor.RED);
       }
     }
 
@@ -244,15 +244,15 @@ public abstract class BaseBiomeMesa extends BaseBiome {
 
       for (int k1 = 0; j4 + k1 < 144 && k1 < 1; ++k1) {
         this.clayBands[j4 + k1] = STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR,
-            EnumDyeColor.WHITE);
+                EnumDyeColor.WHITE);
         if (j4 + k1 > 1 && random.nextBoolean()) {
           this.clayBands[j4 + k1 - 1] = STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR,
-              EnumDyeColor.SILVER);
+                  EnumDyeColor.SILVER);
         }
 
         if (j4 + k1 < 63 && random.nextBoolean()) {
           this.clayBands[j4 + k1 + 1] = STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR,
-              EnumDyeColor.SILVER);
+                  EnumDyeColor.SILVER);
         }
       }
     }
@@ -261,7 +261,7 @@ public abstract class BaseBiomeMesa extends BaseBiome {
 
   public IBlockState getBand(int p_180629_1_, int p_180629_2_, int p_180629_3_) {
     int i = (int) Math.round(this.clayBandsOffsetNoise.getValue((double) p_180629_1_ / 512.0,
-        (double) p_180629_1_ / 512.0) * 2.0);
+            (double) p_180629_1_ / 512.0) * 2.0);
     return this.clayBands[(p_180629_2_ + i + 144) % 144];
   }
 }

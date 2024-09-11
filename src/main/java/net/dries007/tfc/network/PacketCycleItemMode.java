@@ -14,26 +14,26 @@ import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 
 public class PacketCycleItemMode implements IMessageEmpty {
 
-    public static final class Handler implements IMessageHandler<PacketCycleItemMode, IMessage> {
+  public static final class Handler implements IMessageHandler<PacketCycleItemMode, IMessage> {
 
-        @Override
-        public IMessage onMessage(PacketCycleItemMode message, MessageContext ctx) {
-            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-                if (player != null) {
-                    if (player.getHeldItemMainhand().getItem() instanceof ItemMetalChisel) {
-                        var cap = CapabilityPlayer.get(player);
+    @Override
+    public IMessage onMessage(PacketCycleItemMode message, MessageContext ctx) {
+      TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+        EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+        if (player != null) {
+          if (player.getHeldItemMainhand().getItem() instanceof ItemMetalChisel) {
+            var cap = CapabilityPlayer.get(player);
 
-                        if (cap != null) {
-                            ChiselRecipe.Mode mode = cap.getChiselMode();
-                            cap.setChiselMode(mode.next());
-                            cap.updateAndSync();
-                        }
-                    }
+            if (cap != null) {
+              ChiselRecipe.Mode mode = cap.getChiselMode();
+              cap.setChiselMode(mode.next());
+              cap.updateAndSync();
+            }
+          }
 
-                }
-            });
-            return null;
         }
+      });
+      return null;
     }
+  }
 }

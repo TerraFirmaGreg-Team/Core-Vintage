@@ -17,14 +17,19 @@ public class ProviderMetal implements ICapabilityMetal, ICapabilityProvider {
   private final int amount;
   private final boolean canMelt;
 
+  public ProviderMetal() {
+    this(Metal.UNKNOWN, 0, false);
+  }
+
   public ProviderMetal(Metal metal, int amount, boolean canMelt) {
     this.metal = metal;
     this.amount = amount;
     this.canMelt = canMelt;
   }
 
-  public ProviderMetal() {
-    this(Metal.UNKNOWN, 0, false);
+  @Override
+  public boolean canMelt(ItemStack stack) {
+    return canMelt;
   }
 
   @Nullable
@@ -36,11 +41,6 @@ public class ProviderMetal implements ICapabilityMetal, ICapabilityProvider {
   @Override
   public int getSmeltAmount(ItemStack stack) {
     return amount;
-  }
-
-  @Override
-  public boolean canMelt(ItemStack stack) {
-    return canMelt;
   }
 
   @Override

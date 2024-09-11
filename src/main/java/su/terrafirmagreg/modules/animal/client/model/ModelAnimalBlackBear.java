@@ -119,12 +119,18 @@ public class ModelAnimalBlackBear extends ModelBase {
     //this.childZOffset += 2.0F;
   }
 
+  private void setRotation(ModelRenderer model, float x, float y, float z) {
+    model.rotateAngleX = x;
+    model.rotateAngleY = y;
+    model.rotateAngleZ = z;
+  }
+
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount,
-      float ageInTicks, float netHeadYaw, float headPitch,
-      float scale) {
+          float ageInTicks, float netHeadYaw, float headPitch,
+          float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-        entity);
+            entity);
 
     if (((EntityAnimal) entity).isChild()) {
       double ageScale = 1;
@@ -152,16 +158,16 @@ public class ModelAnimalBlackBear extends ModelBase {
 
   @Override
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks,
-      float netHeadYaw, float headPitch, float scaleFactor,
-      Entity entityIn) {
+          float netHeadYaw, float headPitch, float scaleFactor,
+          Entity entityIn) {
     bearHead.rotateAngleX = headPitch / (180F / MathConstants.PI);
     bearHead.rotateAngleY = netHeadYaw / (180F / MathConstants.PI);
 
     leg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
     leg2.rotateAngleX =
-        MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
+            MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
     leg3.rotateAngleX =
-        MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
+            MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
     leg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 
     float f1 = ((EntityAnimalBlackBear) entityIn).getStandingAnimationScale(ageInTicks);
@@ -178,11 +184,5 @@ public class ModelAnimalBlackBear extends ModelBase {
     this.bearHead.rotationPointY = 8.0F * f2 + -12.0F * f1;
     this.bearHead.rotationPointZ = -14.8F * f2 + -3.0F * f1;
     this.leg1.rotateAngleX += f1 * 3.1415927F * 0.15F;
-  }
-
-  private void setRotation(ModelRenderer model, float x, float y, float z) {
-    model.rotateAngleX = x;
-    model.rotateAngleY = y;
-    model.rotateAngleZ = z;
   }
 }

@@ -58,13 +58,13 @@ public class ItemRockHammer extends ItemTool implements ICapabilitySize, IRockOb
   }
 
   @Override
-  public @NotNull Size getSize(ItemStack stack) {
-    return Size.LARGE;  // Stored only in chests
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.MEDIUM;
   }
 
   @Override
-  public @NotNull Weight getWeight(ItemStack stack) {
-    return Weight.MEDIUM;
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.LARGE;  // Stored only in chests
   }
 
   @Override

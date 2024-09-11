@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.client.model;
 
 import su.terrafirmagreg.data.MathConstants;
-import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodAnimalCart;
+import su.terrafirmagreg.modules.wood.object.entity.EntityWoodAnimalCart;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -97,10 +97,10 @@ public class ModelWoodAnimalCart extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount,
-      float ageInTicks, float rotationYaw, float rotationPitch,
-      float scale) {
+          float ageInTicks, float rotationYaw, float rotationPitch,
+          float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, rotationYaw, rotationPitch,
-        scale, entity);
+            scale, entity);
 
     this.leftWheel.rotateAngleX = ((EntityWoodAnimalCart) entity).getWheelRotation();
     this.rightWheel.rotateAngleX = this.leftWheel.rotateAngleX;

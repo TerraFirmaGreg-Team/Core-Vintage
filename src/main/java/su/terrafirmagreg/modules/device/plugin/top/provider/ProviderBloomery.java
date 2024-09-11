@@ -40,7 +40,7 @@ public class ProviderBloomery implements IProbeInfoProvider {
 
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
-      IBlockState state, IProbeHitData hitData) {
+          IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
 
@@ -62,20 +62,20 @@ public class ProviderBloomery implements IProbeInfoProvider {
             break;
           case TICKS:
             currentTooltip.add(
-                new TextComponentTranslation(ModUtils.localize("top", "devices.ticks_remaining"),
-                    remainingTicks).getFormattedText());
+                    new TextComponentTranslation(ModUtils.localize("top", "devices.ticks_remaining"),
+                            remainingTicks).getFormattedText());
             break;
           case MINECRAFT_HOURS:
             long remainingHours = Math.round(remainingTicks / (float) ICalendar.TICKS_IN_HOUR);
             currentTooltip.add(
-                new TextComponentTranslation(ModUtils.localize("top", "devices.hours_remaining"),
-                    remainingHours).getFormattedText());
+                    new TextComponentTranslation(ModUtils.localize("top", "devices.hours_remaining"),
+                            remainingHours).getFormattedText());
             break;
           case REAL_MINUTES:
             long remainingMinutes = Math.round(remainingTicks / 1200.0f);
             currentTooltip.add(
-                new TextComponentTranslation(ModUtils.localize("top", "devices.minutes_remaining"),
-                    remainingMinutes).getFormattedText());
+                    new TextComponentTranslation(ModUtils.localize("top", "devices.minutes_remaining"),
+                            remainingMinutes).getFormattedText());
             break;
         }
         if (recipe != null) {
@@ -83,10 +83,10 @@ public class ProviderBloomery implements IProbeInfoProvider {
           IForgeable cap = output.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
           if (cap instanceof IForgeableMeasurableMetal forgeCap) {
             currentTooltip.add(
-                new TextComponentTranslation(ModUtils.localize("top", "devices.bloomery.output"),
-                    forgeCap.getMetalAmount(),
-                    new TextComponentTranslation(forgeCap.getMetal()
-                        .getTranslationKey()).getFormattedText()).getFormattedText());
+                    new TextComponentTranslation(ModUtils.localize("top", "devices.bloomery.output"),
+                            forgeCap.getMetalAmount(),
+                            new TextComponentTranslation(forgeCap.getMetal()
+                                    .getTranslationKey()).getFormattedText()).getFormattedText());
           }
         }
       } else {
@@ -94,16 +94,16 @@ public class ProviderBloomery implements IProbeInfoProvider {
         int fuel = tile.getFuelStacks().size();
         int max = BlockBloomery.getChimneyLevels(world, tile.getInternalBlock()) * 8;
         currentTooltip.add(
-            new TextComponentTranslation(ModUtils.localize("top", "devices.bloomery.ores"), ores,
-                max).getFormattedText());
+                new TextComponentTranslation(ModUtils.localize("top", "devices.bloomery.ores"), ores,
+                        max).getFormattedText());
         currentTooltip.add(
-            new TextComponentTranslation(ModUtils.localize("top", "devices.bloomery.fuel"), fuel,
-                max).getFormattedText());
+                new TextComponentTranslation(ModUtils.localize("top", "devices.bloomery.fuel"), fuel,
+                        max).getFormattedText());
       }
 
       for (String string : currentTooltip) {
         info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-            .text(string);
+                .text(string);
       }
     }
   }

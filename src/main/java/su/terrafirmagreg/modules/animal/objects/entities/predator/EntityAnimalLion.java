@@ -53,7 +53,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
   //Values that has a visual effect on client
   private static final DataParameter<Integer> MOUTH_TICKS = EntityDataManager.createKey(
-      EntityAnimalLion.class, DataSerializers.VARINT);
+          EntityAnimalLion.class, DataSerializers.VARINT);
 
   @SuppressWarnings("unused")
   public EntityAnimalLion(World worldIn) {
@@ -67,10 +67,10 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.SAVANNA)) {
+            (biomeType == BiomeHelper.BiomeType.SAVANNA)) {
       return ConfigAnimal.ENTITIES.LION.rarity;
     }
     return 0;
@@ -102,14 +102,9 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
   }
 
   @Override
-  public void birthChildren() {
-    int numberOfChildren = 1; //one always
-    for (int i = 0; i < numberOfChildren; i++) {
-      EntityAnimalLion baby = new EntityAnimalLion(this.world, Gender.valueOf(RNG.nextBoolean()),
-          (int) Calendar.PLAYER_TIME.getTotalDays());
-      baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
-      this.world.spawnEntity(baby);
-    }
+  protected void entityInit() {
+    super.entityInit();
+    getDataManager().register(MOUTH_TICKS, 0);
   }
 
   @Override
@@ -118,19 +113,24 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
   }
 
   @Override
-  protected void entityInit() {
-    super.entityInit();
-    getDataManager().register(MOUTH_TICKS, 0);
-  }
-
-  @Override
-  public boolean canMateWith(EntityAnimal otherAnimal) {
-    return false;
+  public void birthChildren() {
+    int numberOfChildren = 1; //one always
+    for (int i = 0; i < numberOfChildren; i++) {
+      EntityAnimalLion baby = new EntityAnimalLion(this.world, Gender.valueOf(RNG.nextBoolean()),
+              (int) Calendar.PLAYER_TIME.getTotalDays());
+      baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
+      this.world.spawnEntity(baby);
+    }
   }
 
   @Override
   public double getOldDeathChance() {
     return 0;
+  }
+
+  @Override
+  public boolean canMateWith(EntityAnimal otherAnimal) {
+    return false;
   }
 
   public int getMouthTicks() {
@@ -154,12 +154,12 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
   @Override
   public boolean attackEntityAsMob(Entity entityIn) {
     double attackDamage = this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE)
-        .getAttributeValue();
+            .getAttributeValue();
     if (this.isChild()) {
       attackDamage /= 2;
     }
     boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this),
-        (float) attackDamage);
+            (float) attackDamage);
     if (flag) {
       this.applyEnchantments(this, entityIn);
     }
@@ -178,7 +178,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
     this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 16.0F, 1.0D, 1.25D));
 
     this.targetTasks.addTask(1,
-        new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+            new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
     int priority = 2;
     for (String input : ConfigAnimal.ENTITIES.LION.huntCreatures) {
@@ -189,8 +189,8 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
         if (EntityLivingBase.class.isAssignableFrom(entityClass)) {
           //noinspection unchecked
           this.targetTasks.addTask(priority++,
-              new EntityAINearestAttackableTarget<>(this, (Class<EntityLivingBase>) entityClass,
-                  false));
+                  new EntityAINearestAttackableTarget<>(this, (Class<EntityLivingBase>) entityClass,
+                          false));
         }
       }
     }

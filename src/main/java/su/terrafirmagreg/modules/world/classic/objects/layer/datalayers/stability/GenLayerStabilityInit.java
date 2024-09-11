@@ -19,7 +19,7 @@ public class GenLayerStabilityInit extends GenLayerBase {
       for (int x = 0; x < maxX; ++x) {
         this.initChunkSeed(par1 + x, par2 + z);
         cache[x + z * maxX] = this.nextInt(3) == 0 ? DataLayerClassic.SEISMIC_UNSTABLE.layerID
-            : DataLayerClassic.SEISMIC_STABLE.layerID;
+                : DataLayerClassic.SEISMIC_STABLE.layerID;
       }
     }
 

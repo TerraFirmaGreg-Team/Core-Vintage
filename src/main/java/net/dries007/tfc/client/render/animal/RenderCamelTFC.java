@@ -15,12 +15,12 @@ import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class RenderCamelTFC extends RenderAnimalTFC<EntityCamelTFC> {
 
-    private static final ResourceLocation OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/camel_old.png");
-    private static final ResourceLocation YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/camel_young.png");
+  private static final ResourceLocation OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/camel_old.png");
+  private static final ResourceLocation YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/camel_young.png");
 
-    public RenderCamelTFC(RenderManager p_i47203_1_) {
-        super(p_i47203_1_, new ModelCamelTFC(0.0F), 0.7F, YOUNG, OLD);
-        this.addLayer(new LayerCamelDecor(this));
-    }
+  public RenderCamelTFC(RenderManager p_i47203_1_) {
+    super(p_i47203_1_, new ModelCamelTFC(0.0F), 0.7F, YOUNG, OLD);
+    this.addLayer(new LayerCamelDecor(this));
+  }
 
 }

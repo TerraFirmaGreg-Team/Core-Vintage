@@ -52,22 +52,22 @@ public class EntityAnimalDeer extends EntityAnimalMammal implements IHuntable {
   }
 
   @Override
-  public boolean canMateWith(EntityAnimal otherAnimal) {
-    return false;
-  }
-
-  @Override
   public double getOldDeathChance() {
     return 0;
   }
 
   @Override
+  public boolean canMateWith(EntityAnimal otherAnimal) {
+    return false;
+  }
+
+  @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TAIGA
-            || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
+            (biomeType == BiomeHelper.BiomeType.TAIGA
+                    || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
       return ConfigAnimal.ENTITIES.DEER.rarity;
     }
     return 0;
@@ -89,13 +89,13 @@ public class EntityAnimalDeer extends EntityAnimalMammal implements IHuntable {
   }
 
   @Override
-  public void birthChildren() {
-    // Not farmable
+  public long gestationDays() {
+    return 0;
   }
 
   @Override
-  public long gestationDays() {
-    return 0;
+  public void birthChildren() {
+    // Not farmable
   }
 
   @Override

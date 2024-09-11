@@ -419,9 +419,15 @@ public class ModelAnimalZebu extends ModelBase {
     hornLeftF1A.addChild(hornLeftF2);
   }
 
+  public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    modelRenderer.rotateAngleX = x;
+    modelRenderer.rotateAngleY = y;
+    modelRenderer.rotateAngleZ = z;
+  }
+
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-      float par6, float par7) {
+          float par6, float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
     EntityAnimalZebu zebu = ((EntityAnimalZebu) entity);
 
@@ -564,10 +570,10 @@ public class ModelAnimalZebu extends ModelBase {
 
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,
-      Entity entity) {
+          Entity entity) {
     setRotateAngle(headNode, f4 / (180F / MathConstants.PI), f3 / (180F / MathConstants.PI), 0F);
     setRotateAngle(neck, f4 / (1.5F * (180F / MathConstants.PI)) + -0.7475245186291712F,
-        f3 / (1.5F * (180F / MathConstants.PI)), 0F);
+            f3 / (1.5F * (180F / MathConstants.PI)), 0F);
 
     this.legRFrontTop.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
     this.legLFrontTop.rotateAngleX = MathHelper.cos(f * 0.6662F + MathConstants.PI) * 1.4F * f1;
@@ -600,11 +606,5 @@ public class ModelAnimalZebu extends ModelBase {
     hornLeftF2.isHidden = false;
     udders.isHidden = false;
     maleNeck.isHidden = false;
-  }
-
-  public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-    modelRenderer.rotateAngleX = x;
-    modelRenderer.rotateAngleY = y;
-    modelRenderer.rotateAngleZ = z;
   }
 }

@@ -31,9 +31,9 @@ public abstract class BaseBlockPartial extends BaseBlock {
   // ---------------------------------------------------------------------------
 
   @Override
-  public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+  public boolean isFullCube(IBlockState state) {
 
-    return false;
+    return this.isFullBlock(state);
   }
 
   @Override
@@ -43,15 +43,10 @@ public abstract class BaseBlockPartial extends BaseBlock {
   }
 
   @Override
-  public boolean isFullCube(IBlockState state) {
+  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess,
+          BlockPos pos, EnumFacing side) {
 
-    return this.isFullBlock(state);
-  }
-
-  @Override
-  public boolean isOpaqueCube(IBlockState state) {
-
-    return this.isFullBlock(state);
+    return true;
   }
 
   @Override
@@ -60,25 +55,30 @@ public abstract class BaseBlockPartial extends BaseBlock {
     return this.isFullBlock(state);
   }
 
+  @Override
+  public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos,
+          EnumFacing face) {
+
+    return false;
+  }
+
+  @Override
+  public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+
+    return false;
+  }
+
   @NotNull
   @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-      EnumFacing face) {
+          EnumFacing face) {
 
     return BlockFaceShape.UNDEFINED;
   }
 
   @Override
-  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess,
-      BlockPos pos, EnumFacing side) {
+  public boolean isOpaqueCube(IBlockState state) {
 
-    return true;
-  }
-
-  @Override
-  public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos,
-      EnumFacing face) {
-
-    return false;
+    return this.isFullBlock(state);
   }
 }

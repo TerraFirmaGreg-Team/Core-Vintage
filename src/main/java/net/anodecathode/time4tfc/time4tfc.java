@@ -21,22 +21,22 @@ import static su.terrafirmagreg.data.Constants.MODID_TIME4TFC;
 @Mod(modid = MODID_TIME4TFC, name = "Time4TFC", version = Tags.MOD_VERSION, dependencies = "required-after:tfc")
 public class time4tfc {
 
-    public static Configuration configuration;
+  public static Configuration configuration;
 
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        configuration = new Configuration(event.getSuggestedConfigurationFile());
-        configuration.load();
+  @Mod.EventHandler
+  public void preInit(FMLPreInitializationEvent event) {
+    configuration = new Configuration(event.getSuggestedConfigurationFile());
+    configuration.load();
 
-        SessionData.loadFromConfiguration(configuration);
+    SessionData.loadFromConfiguration(configuration);
 
-        PacketHandler.initialize();
-        NetworkEventHandler.register();
+    PacketHandler.initialize();
+    NetworkEventHandler.register();
 
-    }
+  }
 
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        WorldProviderTooMuchTime.overrideDefault();
-    }
+  @Mod.EventHandler
+  public void postInit(FMLPostInitializationEvent event) {
+    WorldProviderTooMuchTime.overrideDefault();
+  }
 }

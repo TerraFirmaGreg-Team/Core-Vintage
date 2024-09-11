@@ -29,7 +29,7 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
   @SuppressWarnings("unused")
   public EntityAnimalYak(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-        getRandomGrowth(ConfigAnimal.ENTITIES.YAK.adulthood, ConfigAnimal.ENTITIES.YAK.elder));
+            getRandomGrowth(ConfigAnimal.ENTITIES.YAK.adulthood, ConfigAnimal.ENTITIES.YAK.elder));
   }
 
   public EntityAnimalYak(World worldIn, Gender gender, int birthDay) {
@@ -39,13 +39,18 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TAIGA)) {
+            (biomeType == BiomeHelper.BiomeType.TAIGA)) {
       return ConfigAnimal.ENTITIES.YAK.rarity;
     }
     return 0;
+  }
+
+  @Override
+  public long gestationDays() {
+    return ConfigAnimal.ENTITIES.YAK.gestation;
   }
 
   @Override
@@ -53,17 +58,12 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
     int numberOfChildren = ConfigAnimal.ENTITIES.YAK.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalYak baby = new EntityAnimalYak(this.world, Gender.valueOf(RNG.nextBoolean()),
-          (int) Calendar.PLAYER_TIME.getTotalDays());
+              (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
-          : this.getFamiliarity() * 0.9F);
+              : this.getFamiliarity() * 0.9F);
       this.world.spawnEntity(baby);
     }
-  }
-
-  @Override
-  public long gestationDays() {
-    return ConfigAnimal.ENTITIES.YAK.gestation;
   }
 
   @Override
@@ -89,7 +89,7 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
   @Override
   public long getProductsCooldown() {
     return Math.max(0,
-        ConfigAnimal.ENTITIES.YAK.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
+            ConfigAnimal.ENTITIES.YAK.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override

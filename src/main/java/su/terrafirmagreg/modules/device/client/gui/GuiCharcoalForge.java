@@ -27,7 +27,7 @@ public class GuiCharcoalForge extends BaseGuiContainerTile<TileCharcoalForge> {
 
     // Draw the temperature indicator
     int temperature = (int) (51 * tile.getField(TileCharcoalForge.FIELD_TEMPERATURE)
-        / Heat.maxVisibleTemperature());
+            / Heat.maxVisibleTemperature());
     if (temperature > 0) {
       if (temperature > 51) {
         temperature = 51;

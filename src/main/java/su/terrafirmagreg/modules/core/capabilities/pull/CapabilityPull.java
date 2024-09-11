@@ -17,7 +17,7 @@ public final class CapabilityPull {
 
   public static void register() {
     CapabilityManager.INSTANCE.register(ICapabilityPull.class, new StoragePull(),
-        ProviderPull::new);
+            ProviderPull::new);
 
   }
 

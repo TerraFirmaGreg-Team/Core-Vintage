@@ -33,14 +33,14 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IPredator,
-    EntityAnimalAIStandAttack.IEntityStandAttack {
+        EntityAnimalAIStandAttack.IEntityStandAttack {
 
   private static final int DAYS_TO_ADULTHOOD = 240;
 
   @SuppressWarnings("unused")
   public EntityAnimalBlackBear(World worldIn) {
     this(worldIn, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-        EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+            EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
   public EntityAnimalBlackBear(World worldIn, IAnimal.Gender gender, int birthDay) {
@@ -50,10 +50,10 @@ public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IP
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
+            (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
       return ConfigAnimal.ENTITIES.BLACK_BEAR.rarity;
     }
     return 0;
@@ -64,14 +64,14 @@ public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IP
     EntityAIWander wander = new EntityAnimalAIWanderHuntArea(this, 1.0D);
     this.tasks.addTask(0, new EntityAISwimming(this));
     this.tasks.addTask(1,
-        new EntityAnimalAIStandAttack<>(this, 1.2D, 2.0D,
-            EntityAnimalAIAttackMelee.AttackBehavior.DAYLIGHT_ONLY).setWanderAI(wander));
+            new EntityAnimalAIStandAttack<>(this, 1.2D, 2.0D,
+                    EntityAnimalAIAttackMelee.AttackBehavior.DAYLIGHT_ONLY).setWanderAI(wander));
     this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
     this.tasks.addTask(5, wander);
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
     this.tasks.addTask(7, new EntityAILookIdle(this));
     this.targetTasks.addTask(1,
-        new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+            new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
     int priority = 2;
     for (String input : ConfigAnimal.ENTITIES.BLACK_BEAR.huntCreatures) {
@@ -82,8 +82,8 @@ public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IP
         if (EntityLivingBase.class.isAssignableFrom(entityClass)) {
           //noinspection unchecked
           this.targetTasks.addTask(priority++,
-              new EntityAINearestAttackableTarget<>(this, (Class<EntityLivingBase>) entityClass,
-                  false));
+                  new EntityAINearestAttackableTarget<>(this, (Class<EntityLivingBase>) entityClass,
+                          false));
         }
       }
     }

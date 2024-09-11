@@ -8,11 +8,11 @@ public class BiomeRollingHills extends BaseBiome {
 
   public BiomeRollingHills() {
     super(new Settings("Rolling Hills")
-        .guiColour(0x734B92)
-        .baseHeight(-1.6000001f)
-        .heightVariation(-2.3f)
-        .spawnBiome()
-        .enableWorldGen());
+            .guiColour(0x734B92)
+            .baseHeight(-1.6000001f)
+            .heightVariation(-2.3f)
+            .spawnBiome()
+            .enableWorldGen());
   }
 
   @Override
@@ -24,7 +24,7 @@ public class BiomeRollingHills extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-        BiomeDictionary.Type.HILLS
+            BiomeDictionary.Type.HILLS
     };
   }
 }

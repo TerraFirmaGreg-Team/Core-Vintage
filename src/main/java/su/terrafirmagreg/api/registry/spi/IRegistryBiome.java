@@ -6,7 +6,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeManager;
 
 public interface IRegistryBiome
-    extends IRegistryBase {
+        extends IRegistryBase {
 
   default <B extends BaseBiome> B biome(B biome) {
 

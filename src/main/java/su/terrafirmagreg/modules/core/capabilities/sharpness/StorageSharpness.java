@@ -15,13 +15,13 @@ public class StorageSharpness implements IStorage<ICapabilitySharpness> {
   @Nullable
   @Override
   public NBTBase writeNBT(Capability<ICapabilitySharpness> capability,
-      ICapabilitySharpness instance, EnumFacing side) {
+          ICapabilitySharpness instance, EnumFacing side) {
     return new NBTTagInt(instance.getCharges());
   }
 
   @Override
   public void readNBT(Capability<ICapabilitySharpness> capability, ICapabilitySharpness instance,
-      EnumFacing side, NBTBase nbt) {
+          EnumFacing side, NBTBase nbt) {
     instance.setCharges(((NBTPrimitive) nbt).getInt());
   }
 }

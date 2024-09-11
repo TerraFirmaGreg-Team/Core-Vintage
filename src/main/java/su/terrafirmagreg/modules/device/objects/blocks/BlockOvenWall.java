@@ -28,46 +28,37 @@ import static su.terrafirmagreg.data.Properties.CURED;
 public class BlockOvenWall extends BaseBlock {
 
   public static final AxisAlignedBB OVEN_WALL_WEST = new AxisAlignedBB(0.0D, 0.0D, 9.0 / 16,
-      16.0D / 16, 16.0D / 16, 16.0D / 16);
+          16.0D / 16, 16.0D / 16, 16.0D / 16);
   public static final AxisAlignedBB OVEN_WALL_EAST = new AxisAlignedBB(0.0D, 0.0D, 7.0D / 16,
-      16.0D / 16, 16.0D / 16, 0.0D);
+          16.0D / 16, 16.0D / 16, 0.0D);
   public static final AxisAlignedBB OVEN_WALL_NORTH = new AxisAlignedBB(7.0D / 16, 0.0D, 0.0D, 0.0D,
-      16.0D / 16, 16.0D / 16);
+          16.0D / 16, 16.0D / 16);
   public static final AxisAlignedBB OVEN_WALL_SOUTH = new AxisAlignedBB(9.0D / 16, 0.0D, 0.0D,
-      16.0D / 16, 16.0D / 16, 16.0D / 16);
+          16.0D / 16, 16.0D / 16, 16.0D / 16);
 
   public BlockOvenWall() {
     super(Settings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
 
     getSettings()
-        .registryKey("device/oven_wall")
-        .hardness(2.0F)
-        .resistance(3.0F)
-        .lightValue(0)
-        .nonOpaque()
-        .nonFullCube()
-        .size(Size.NORMAL)
-        .weight(Weight.HEAVY);
+            .registryKey("device/oven_wall")
+            .hardness(2.0F)
+            .resistance(3.0F)
+            .lightValue(0)
+            .nonOpaque()
+            .nonFullCube()
+            .size(Size.NORMAL)
+            .weight(Weight.HEAVY);
 
     setDefaultState(blockState.getBaseState()
-        .withProperty(CURED, Boolean.FALSE)
-        .withProperty(FACING, EnumFacing.NORTH));
-  }
-
-  @Override
-  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-      float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-    if (facing.getAxis() == EnumFacing.Axis.Y) {
-      facing = placer.getHorizontalFacing().getOpposite();
-    }
-    return getDefaultState().withProperty(FACING, facing);
+            .withProperty(CURED, Boolean.FALSE)
+            .withProperty(FACING, EnumFacing.NORTH));
   }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-        .withProperty(FACING, EnumFacing.byHorizontalIndex(meta))
-        .withProperty(CURED, meta > 3);
+            .withProperty(FACING, EnumFacing.byHorizontalIndex(meta))
+            .withProperty(CURED, meta > 3);
   }
 
   @Override
@@ -76,8 +67,8 @@ public class BlockOvenWall extends BaseBlock {
   }
 
   @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, CURED);
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.MODEL;
   }
 
   @Override
@@ -91,17 +82,26 @@ public class BlockOvenWall extends BaseBlock {
   }
 
   @Override
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
+          float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    if (facing.getAxis() == EnumFacing.Axis.Y) {
+      facing = placer.getHorizontalFacing().getOpposite();
+    }
+    return getDefaultState().withProperty(FACING, facing);
+  }
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, FACING, CURED);
+  }
+
+  @Override
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
-      IBlockState state, int fortune) {
+          IBlockState state, int fortune) {
     if (state.getValue(CURED)) {
       drops.add(new ItemStack(Items.BRICK, 3 + RNG.nextInt(3)));
     } else {
       super.getDrops(drops, world, pos, state, fortune);
     }
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
   }
 }

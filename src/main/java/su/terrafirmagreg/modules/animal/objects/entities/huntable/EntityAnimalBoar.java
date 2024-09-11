@@ -47,11 +47,11 @@ public class EntityAnimalBoar extends EntityAnimalMammal implements IHuntable {
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.SAVANNA
-            || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
+            (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.SAVANNA
+                    || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
       return ConfigAnimal.ENTITIES.BOAR.rarity;
     }
     return 0;
@@ -83,23 +83,23 @@ public class EntityAnimalBoar extends EntityAnimalMammal implements IHuntable {
   }
 
   @Override
-  public void birthChildren() {
-    // Not farmable
-  }
-
-  @Override
   public long gestationDays() {
     return 0; // not farmable
   }
 
   @Override
-  public boolean canMateWith(EntityAnimal otherAnimal) {
-    return false;
+  public void birthChildren() {
+    // Not farmable
   }
 
   @Override
   public double getOldDeathChance() {
     return 0;
+  }
+
+  @Override
+  public boolean canMateWith(EntityAnimal otherAnimal) {
+    return false;
   }
 
   @Override

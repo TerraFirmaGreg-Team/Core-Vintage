@@ -36,12 +36,12 @@ public class GeneratorTreeAcacia implements ITreeGenerator {
 
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-      Random rand, boolean isWorldGen) {
+          Random rand, boolean isWorldGen) {
     trunk = BlockLogTFC.get(tree).getDefaultState().withProperty(PLACED, false);
     bark = BlockLogTFC.get(tree)
-        .getDefaultState()
-        .withProperty(PLACED, false)
-        .withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
+            .getDefaultState()
+            .withProperty(PLACED, false)
+            .withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
 
     final boolean smallBranch = rand.nextBoolean();
     final int branches = 2 + rand.nextInt(2);
@@ -55,7 +55,7 @@ public class GeneratorTreeAcacia implements ITreeGenerator {
       y3 = rand.nextInt(3) + 2;
       side = sides.get(rand.nextInt(sides.size()));
       placeBranch(manager, world, pos.offset(side).add(0, y3, 0),
-          tree.getRegistryName() + "/branch3");
+              tree.getRegistryName() + "/branch3");
     }
     for (int i = 0; i < branches; i++) {
       x1 = 2 + rand.nextInt(3);
@@ -69,7 +69,7 @@ public class GeneratorTreeAcacia implements ITreeGenerator {
       }
       int branch = 1 + rand.nextInt(2);
       placeBranch(manager, world, pos.add(0, y1, 0)
-          .offset(face, x1), tree.getRegistryName() + "/branch" + branch);
+              .offset(face, x1), tree.getRegistryName() + "/branch" + branch);
     }
     for (int i = 0; i < height; i++) {
       if (smallBranch && i == y3) {
@@ -88,7 +88,7 @@ public class GeneratorTreeAcacia implements ITreeGenerator {
     Template structureBase = manager.get(world.getMinecraftServer(), base);
 
     if (structureBase == null) {
-      TerraFirmaCraft.getLog().warn("Unable to find a template for " + base.toString());
+      TerraFirmaCraft.getLog().warn("Unable to find a template for " + base);
       return;
     }
     BlockPos size = structureBase.getSize();
@@ -99,8 +99,8 @@ public class GeneratorTreeAcacia implements ITreeGenerator {
 
   private void placeLog(World world, BlockPos pos, boolean useBark) {
     if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos)
-        .getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos)
-        .getBlock() instanceof BlockLeavesTFC) {
+            .getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos)
+            .getBlock() instanceof BlockLeavesTFC) {
       world.setBlockState(pos, useBark ? bark : trunk);
     }
   }

@@ -12,24 +12,24 @@ import net.minecraftforge.items.IItemHandlerModifiable;
  */
 public interface ISmallVesselHandler extends IItemHandlerModifiable, IFluidHandler, INBTSerializable<NBTTagCompound>, ICapabilityHeat, IMoldHandler {
 
-    /**
-     * This gets the fluid mode, including liquid temperature status
-     *
-     * @return INVENTORY = items, LIQUID = fluids molten or solid based on temperature
-     */
-    Mode getFluidMode();
+  /**
+   * This gets the fluid mode, including liquid temperature status
+   *
+   * @return INVENTORY = items, LIQUID = fluids molten or solid based on temperature
+   */
+  Mode getFluidMode();
 
-    /**
-     * This sets the fluid mode. When fluid is empty, it defaults to item mode
-     *
-     * @param fluidMode true = fluids, false = items
-     */
-    void setFluidMode(boolean fluidMode);
+  /**
+   * This sets the fluid mode. When fluid is empty, it defaults to item mode
+   *
+   * @param fluidMode true = fluids, false = items
+   */
+  void setFluidMode(boolean fluidMode);
 
-    enum Mode {
-        INVENTORY,
-        LIQUID_MOLTEN,
-        LIQUID_SOLID
-    }
+  enum Mode {
+    INVENTORY,
+    LIQUID_MOLTEN,
+    LIQUID_SOLID
+  }
 
 }

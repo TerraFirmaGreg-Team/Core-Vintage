@@ -22,14 +22,9 @@ public abstract class BaseItem extends Item implements IItemSettings {
     this.settings = Settings.of();
   }
 
-  public IRarity getForgeRarity(ItemStack stack) {
-    return this.settings.getRarity();
-  }
-
   @Override
-  public String getTranslationKey() {
-    return this.settings.getTranslationKey() == null ? super.getTranslationKey()
-        : "item." + this.settings.getTranslationKey();
+  public int getItemStackLimit() {
+    return this.settings.getMaxCount();
   }
 
   @Override
@@ -38,8 +33,9 @@ public abstract class BaseItem extends Item implements IItemSettings {
   }
 
   @Override
-  public int getItemStackLimit() {
-    return this.settings.getMaxCount();
+  public String getTranslationKey() {
+    return this.settings.getTranslationKey() == null ? super.getTranslationKey()
+            : "item." + this.settings.getTranslationKey();
   }
 
   /**
@@ -52,14 +48,18 @@ public abstract class BaseItem extends Item implements IItemSettings {
     return getStackSize(stack);
   }
 
-  @Override
-  public Size getSize(ItemStack stack) {
-    return this.settings.getSize();
+  public IRarity getForgeRarity(ItemStack stack) {
+    return this.settings.getRarity();
   }
 
   @Override
   public Weight getWeight(ItemStack stack) {
     return this.settings.getWeight();
+  }
+
+  @Override
+  public Size getSize(ItemStack stack) {
+    return this.settings.getSize();
   }
 
   @Override

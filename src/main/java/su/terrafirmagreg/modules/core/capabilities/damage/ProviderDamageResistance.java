@@ -19,7 +19,7 @@ public class ProviderDamageResistance implements ICapabilityDamageResistance, IC
   }
 
   public ProviderDamageResistance(float crushingModifier, float piercingModifier,
-      float slashingModifier) {
+          float slashingModifier) {
     this.crushingModifier = crushingModifier;
     this.piercingModifier = piercingModifier;
     this.slashingModifier = slashingModifier;

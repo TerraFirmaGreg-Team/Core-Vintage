@@ -14,7 +14,7 @@ public class ContainerIceBunker extends Container {
   private final TileIceBunker chestInventory;
 
   public ContainerIceBunker(InventoryPlayer playerInv, TileIceBunker chestInventory,
-      EntityPlayer player) {
+          EntityPlayer player) {
     this.chestInventory = chestInventory;
     this.numRows = chestInventory.getSizeInventory() / 2;
     chestInventory.openInventory(player);
@@ -23,7 +23,7 @@ public class ContainerIceBunker extends Container {
     for (int i = 0; i < this.numRows; ++i) {
       for (int j = 0; j < 2; ++j) {
         this.addSlotToContainer(
-            new Slot(chestInventory, j + i * 2, 8 + j * 18 + 63, 18 + i * 18 + 7));
+                new Slot(chestInventory, j + i * 2, 8 + j * 18 + 63, 18 + i * 18 + 7));
       }
     }
 
@@ -39,17 +39,6 @@ public class ContainerIceBunker extends Container {
       this.addSlotToContainer(new Slot(playerInv, x, 8 + x * 18, 142));
     }
 
-  }
-
-  @Override
-  public boolean canInteractWith(EntityPlayer entityPlayer) {
-    return this.chestInventory.isUsableByPlayer(entityPlayer);
-  }
-
-  @Override
-  public void onContainerClosed(EntityPlayer entityPlayer) {
-    super.onContainerClosed(entityPlayer);
-    chestInventory.closeInventory(entityPlayer);
   }
 
   @Override
@@ -77,6 +66,17 @@ public class ContainerIceBunker extends Container {
     }
 
     return itemstack;
+  }
+
+  @Override
+  public void onContainerClosed(EntityPlayer entityPlayer) {
+    super.onContainerClosed(entityPlayer);
+    chestInventory.closeInventory(entityPlayer);
+  }
+
+  @Override
+  public boolean canInteractWith(EntityPlayer entityPlayer) {
+    return this.chestInventory.isUsableByPlayer(entityPlayer);
   }
 
   public TileIceBunker getChestInventory() {

@@ -54,14 +54,14 @@ import static su.terrafirmagreg.data.MathConstants.RNG;
 public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILivestock, IRidable {
 
   private static final DataParameter<Integer> DATA_COLOR_ID = EntityDataManager.createKey(
-      EntityAnimalCamel.class, DataSerializers.VARINT);
+          EntityAnimalCamel.class, DataSerializers.VARINT);
   private static final DataParameter<Boolean> HALTER = EntityDataManager.createKey(
-      EntityAnimalCamel.class, DataSerializers.BOOLEAN);
+          EntityAnimalCamel.class, DataSerializers.BOOLEAN);
 
   public EntityAnimalCamel(World world) {
     this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-        EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.CAMEL.adulthood,
-            ConfigAnimal.ENTITIES.CAMEL.elder));
+            EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.CAMEL.adulthood,
+                    ConfigAnimal.ENTITIES.CAMEL.elder));
     this.setSize(0.9F, 2.0F);
   }
 
@@ -102,14 +102,14 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
           this.playGallopSound(soundtype);
         } else if (this.gallopTime <= 5) {
           this.playSound(SoundEvents.ENTITY_HORSE_STEP_WOOD, soundtype.getVolume() * 0.15F,
-              soundtype.getPitch());
+                  soundtype.getPitch());
         }
       } else if (soundtype == SoundType.WOOD) {
         this.playSound(SoundEvents.ENTITY_HORSE_STEP_WOOD, soundtype.getVolume() * 0.15F,
-            soundtype.getPitch());
+                soundtype.getPitch());
       } else {
         this.playSound(SoundEvents.ENTITY_HORSE_STEP, soundtype.getVolume() * 0.15F,
-            soundtype.getPitch());
+                soundtype.getPitch());
       }
     }
   }
@@ -157,6 +157,24 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
     this.dataManager.set(DATA_COLOR_ID, color == null ? -1 : color.getMetadata());
   }
 
+  private void setColorByItem(ItemStack stack) {
+    if (this.isArmor(stack)) {
+      this.setColor(EnumDyeColor.byMetadata(stack.getMetadata()));
+    } else {
+      this.setColor(null);
+    }
+  }
+
+  protected void playGallopSound(SoundType p_190680_1_) {
+    this.playSound(SoundEvents.ENTITY_HORSE_GALLOP, p_190680_1_.getVolume() * 0.15F,
+            p_190680_1_.getPitch());
+  }
+
+  @Nullable
+  public Entity getControllingPassenger() {
+    return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
+  }
+
   @Override
   public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
@@ -182,14 +200,14 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
     this.geneVariant = i;
     EntityAnimalCamel father = (EntityAnimalCamel) male;
     this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-        .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-        .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+            .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+            .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
     this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-        .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-        .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+            .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+            .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
     this.geneJump = (float) ((father.getEntityAttribute(JUMP_STRENGTH)
-        .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
-        .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+            .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
+            .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
 
     this.geneStrength = this.rand.nextInt(Math.max(this.getStrength(), father.getStrength())) + 1;
     if (this.rand.nextFloat() < 0.03F) {
@@ -209,10 +227,10 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.DESERT || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
+            (biomeType == BiomeHelper.BiomeType.DESERT || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
       return ConfigAnimal.ENTITIES.CAMEL.rarity;
     }
     return 0;
@@ -231,18 +249,6 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
   @Override
   public int getMaxGroupSize() {
     return 2;
-  }
-
-  @Override
-  protected void mountTo(EntityPlayer player) {
-    if (isHalter()) {
-      super.mountTo(player);
-    }
-  }
-
-  @Override
-  public long gestationDays() {
-    return ConfigAnimal.ENTITIES.CAMEL.gestation;
   }
 
   @Override
@@ -276,6 +282,13 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
   }
 
   @Override
+  protected void mountTo(EntityPlayer player) {
+    if (isHalter()) {
+      super.mountTo(player);
+    }
+  }
+
+  @Override
   protected ResourceLocation getLootTable() {
     return LootTablesAnimal.ANIMALS_CAMEL;
   }
@@ -301,9 +314,14 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
       // Only called if this animal is interacted with a spawn egg
       // Try to return to vanilla's default method a baby of this animal, as if bred normally
       return new EntityAnimalCamel(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-          (int) Calendar.PLAYER_TIME.getTotalDays());
+              (int) Calendar.PLAYER_TIME.getTotalDays());
     }
     return null;
+  }
+
+  @Override
+  public long gestationDays() {
+    return ConfigAnimal.ENTITIES.CAMEL.gestation;
   }
 
   @Override
@@ -311,14 +329,14 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
     int numberOfChildren = ConfigAnimal.ENTITIES.CAMEL.babies; //one always
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalCamel baby = new EntityAnimalCamel(this.world, Gender.valueOf(RNG.nextBoolean()),
-          (int) Calendar.PLAYER_TIME.getTotalDays());
+              (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       if (this.geneHealth > 0) {
         baby.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(this.geneHealth);
       }
       if (this.geneSpeed > 0) {
         baby.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-            .setBaseValue(this.geneSpeed);
+                .setBaseValue(this.geneSpeed);
       }
       if (this.geneJump > 0) {
         baby.getEntityAttribute(JUMP_STRENGTH).setBaseValue(this.geneJump);
@@ -342,23 +360,5 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
   public void setHalter(boolean value) {
     dataManager.set(HALTER, value);
-  }
-
-  protected void playGallopSound(SoundType p_190680_1_) {
-    this.playSound(SoundEvents.ENTITY_HORSE_GALLOP, p_190680_1_.getVolume() * 0.15F,
-        p_190680_1_.getPitch());
-  }
-
-  @Nullable
-  public Entity getControllingPassenger() {
-    return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
-  }
-
-  private void setColorByItem(ItemStack stack) {
-    if (this.isArmor(stack)) {
-      this.setColor(EnumDyeColor.byMetadata(stack.getMetadata()));
-    } else {
-      this.setColor(null);
-    }
   }
 }

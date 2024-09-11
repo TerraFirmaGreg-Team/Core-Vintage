@@ -22,7 +22,7 @@ public class GeneratorTreeFruit implements IFruitTreeGenerator {
 
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, IFruitTree tree,
-      Random rand) {
+          Random rand) {
     ResourceLocation base = new ResourceLocation("tfc:fruit_trees/" + tree.getName());
     Template structureBase = manager.get(world.getMinecraftServer(), base);
 

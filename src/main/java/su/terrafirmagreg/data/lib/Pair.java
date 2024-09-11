@@ -72,6 +72,11 @@ public class Pair<X, Y> {
   }
 
   @Override
+  public int hashCode() {
+    return Objects.hashCode(this.left, this.right);
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
@@ -81,10 +86,5 @@ public class Pair<X, Y> {
     }
     Pair<?, ?> pair = (Pair<?, ?>) o;
     return Objects.equal(this.left, pair.left) && Objects.equal(this.right, pair.right);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hashCode(this.left, this.right);
   }
 }

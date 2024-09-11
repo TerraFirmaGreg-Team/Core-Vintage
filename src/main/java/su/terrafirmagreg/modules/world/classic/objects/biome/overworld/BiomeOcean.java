@@ -8,10 +8,10 @@ public class BiomeOcean extends BaseBiome {
 
   public BiomeOcean() {
     super(new Settings("Ocean")
-        .guiColour(0x3232C8)
-        .baseHeight(-2.6f)
-        .heightVariation(-2.69999f)
-        .enableWorldGen());
+            .guiColour(0x3232C8)
+            .baseHeight(-2.6f)
+            .heightVariation(-2.69999f)
+            .enableWorldGen());
   }
 
   @Override
@@ -23,9 +23,9 @@ public class BiomeOcean extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-        BiomeDictionary.Type.OCEAN,
-        BiomeDictionary.Type.WET,
-        BiomeDictionary.Type.WATER
+            BiomeDictionary.Type.OCEAN,
+            BiomeDictionary.Type.WET,
+            BiomeDictionary.Type.WATER
     };
   }
 }

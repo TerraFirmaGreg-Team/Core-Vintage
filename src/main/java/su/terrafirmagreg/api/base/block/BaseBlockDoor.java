@@ -7,8 +7,6 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -16,8 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import org.jetbrains.annotations.Nullable;
@@ -37,9 +33,10 @@ public abstract class BaseBlockDoor extends BlockDoor implements IBlockSettings 
     this.settings = settings;
 
     getSettings()
-        .weight(Weight.HEAVY)
-        .size(Size.VERY_LARGE)
-        .hardness(3.0F);
+            .ignoresProperties(BlockDoor.POWERED)
+            .weight(Weight.HEAVY)
+            .size(Size.VERY_LARGE)
+            .hardness(3.0F);
   }
 
   @Override
@@ -53,14 +50,8 @@ public abstract class BaseBlockDoor extends BlockDoor implements IBlockSettings 
   }
 
   @Override
-  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-      EntityPlayer player) {
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
     return new ItemStack(Item.getItemFromBlock(this));
   }
 
-  @Override
-  @SideOnly(Side.CLIENT)
-  public IStateMapper getStateMapper() {
-    return new StateMap.Builder().ignore(BlockDoor.POWERED).build();
-  }
 }

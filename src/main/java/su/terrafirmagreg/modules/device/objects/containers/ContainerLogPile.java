@@ -23,20 +23,20 @@ public class ContainerLogPile extends BaseContainerTile<TileLogPile> {
   }
 
   @Override
-  public boolean canInteractWith(@NotNull EntityPlayer player) {
-    return tile.canInteractWith(player);
-  }
-
-  @Override
   protected void addContainerSlots() {
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-        null);
+            null);
     if (inventory != null) {
       addSlotToContainer(new SlotCallback(inventory, 0, 71, 23, tile));
       addSlotToContainer(new SlotCallback(inventory, 1, 89, 23, tile));
       addSlotToContainer(new SlotCallback(inventory, 2, 71, 41, tile));
       addSlotToContainer(new SlotCallback(inventory, 3, 89, 41, tile));
     }
+  }
+
+  @Override
+  public boolean canInteractWith(@NotNull EntityPlayer player) {
+    return tile.canInteractWith(player);
   }
 
   @Override

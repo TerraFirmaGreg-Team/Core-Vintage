@@ -9,10 +9,10 @@ public class ItemAnimalMisc extends BaseItem {
   public ItemAnimalMisc(String name, Size size, Weight weight, Object... oreNameParts) {
 
     getSettings()
-        .registryKey("animal/" + name)
-        .size(size)
-        .weight(weight)
-        .addOreDict(oreNameParts);
+            .registryKey("animal/" + name)
+            .size(size)
+            .weight(weight)
+            .addOreDict(oreNameParts);
   }
 
 }

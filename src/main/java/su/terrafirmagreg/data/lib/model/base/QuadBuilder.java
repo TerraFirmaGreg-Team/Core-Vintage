@@ -76,10 +76,10 @@ public class QuadBuilder {
 
     if (!textured) {
       RenderUtils.putVertex(builderQ, currentFormat, transform, currentSide, x, y, z, -1, -1, r, g,
-          b, a);
+              b, a);
     } else {
       RenderUtils.putVertex(builderQ, currentFormat, transform, currentSide, x, y, z, u, v, r, g, b,
-          a);
+              a);
     }
     return this;
   }

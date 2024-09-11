@@ -25,32 +25,26 @@ public class ContainerAlloyCalculator extends Container {
       for (int stackSlotX = 0; stackSlotX < 3; stackSlotX++) {
         int slot = stackSlotY * 3 + stackSlotX;
         this.addSlotToContainer(
-            new SlotItemHandler(this.stacks, slot, 10 + stackSlotX * 18, 31 + stackSlotY * 18) {
+                new SlotItemHandler(this.stacks, slot, 10 + stackSlotX * 18, 31 + stackSlotY * 18) {
 
-              @Override
-              public void onSlotChanged() {
-                ContainerAlloyCalculator.this.tile.calculateAlloy();
-              }
-            });
+                  @Override
+                  public void onSlotChanged() {
+                    ContainerAlloyCalculator.this.tile.calculateAlloy();
+                  }
+                });
       }
     }
 
     for (int slotY = 0; slotY < 3; ++slotY) {
       for (int slotX = 0; slotX < 9; ++slotX) {
         this.addSlotToContainer(
-            new Slot(playerInv, slotX + slotY * 9 + 9, 8 + slotX * 18, 103 + slotY * 18));
+                new Slot(playerInv, slotX + slotY * 9 + 9, 8 + slotX * 18, 103 + slotY * 18));
       }
     }
 
     for (int hotbar = 0; hotbar < 9; ++hotbar) {
       this.addSlotToContainer(new Slot(playerInv, hotbar, 8 + hotbar * 18, 161));
     }
-  }
-
-  @Override
-  protected boolean mergeItemStack(ItemStack stack, int startIndex, int endIndex,
-      boolean reverseDirection) {
-    return super.mergeItemStack(stack, startIndex, endIndex, reverseDirection);
   }
 
   @Override
@@ -83,6 +77,12 @@ public class ContainerAlloyCalculator extends Container {
   @Override
   public boolean canInteractWith(EntityPlayer playerIn) {
     return true;
+  }
+
+  @Override
+  protected boolean mergeItemStack(ItemStack stack, int startIndex, int endIndex,
+          boolean reverseDirection) {
+    return super.mergeItemStack(stack, startIndex, endIndex, reverseDirection);
   }
 
 }

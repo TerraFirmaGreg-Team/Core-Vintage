@@ -23,11 +23,7 @@ public final class CapabilityPlayer {
 
   public static void register() {
     CapabilityManager.INSTANCE.register(ICapabilityPlayer.class, new StoragePlayer(),
-        ProviderPlayer::new);
-  }
-
-  public static ICapabilityPlayer get(EntityPlayer player) {
-    return player.getCapability(CAPABILITY, null);
+            ProviderPlayer::new);
   }
 
   public static boolean has(EntityPlayer player) {
@@ -48,5 +44,9 @@ public final class CapabilityPlayer {
       return cap.getSkill(skillType);
     }
     return null;
+  }
+
+  public static ICapabilityPlayer get(EntityPlayer player) {
+    return player.getCapability(CAPABILITY, null);
   }
 }

@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -35,8 +35,8 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.render.UnlistedCropProperty;
-import net.dries007.tfc.objects.te.TEPlanter;
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.objects.te.TEPlanter;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -46,154 +46,154 @@ import static su.terrafirmagreg.data.Properties.WET;
 @MethodsReturnNonnullByDefault
 public class BlockLargePlanter extends Block implements ICapabilitySize {
 
-    public static final UnlistedCropProperty CROP = new UnlistedCropProperty(1);
-    public static final AxisAlignedBB HALF_BLOCK_SHAPE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
+  public static final UnlistedCropProperty CROP = new UnlistedCropProperty(1);
+  public static final AxisAlignedBB HALF_BLOCK_SHAPE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 
-    public BlockLargePlanter() {
-        super(Material.CLAY, MapColor.BROWN);
-        setHardness(1.0f);
-        setResistance(1.0f);
-        setLightOpacity(0);
-        setTickRandomly(true);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(WET, false));
+  public BlockLargePlanter() {
+    super(Material.CLAY, MapColor.BROWN);
+    setHardness(1.0f);
+    setResistance(1.0f);
+    setLightOpacity(0);
+    setTickRandomly(true);
+    this.setDefaultState(this.blockState.getBaseState().withProperty(WET, false));
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState().withProperty(WET, meta == 1);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(WET) ? 1 : 0;
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isFullCube(IBlockState state) {
+    return false;
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.MODEL;
+  }
+
+  @Override
+  public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+    return false;
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return HALF_BLOCK_SHAPE;
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    return (face == EnumFacing.DOWN) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return HALF_BLOCK_SHAPE;
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean isOpaqueCube(IBlockState state) {
+    return false;
+  }
+
+  @SuppressWarnings("deprecation")
+  @Override
+  public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    if (!canStay(world, pos)) {
+      world.destroyBlock(pos, true);
     }
+  }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(WET, meta == 1);
-    }
+  @SideOnly(Side.CLIENT)
+  @Override
+  public BlockRenderLayer getRenderLayer() {
+    return BlockRenderLayer.CUTOUT;
+  }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(WET) ? 1 : 0;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
-    }
-
-    @Override
-    public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return HALF_BLOCK_SHAPE;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return (face == EnumFacing.DOWN) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return HALF_BLOCK_SHAPE;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!canStay(world, pos)) {
-            world.destroyBlock(pos, true);
+  @Override
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
+          float hitY, float hitZ) {
+    if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
+      ItemStack held = player.getHeldItem(hand);
+      var tile = TileUtils.getTile(world, pos, TEPlanter.class);
+      if (tile != null) {
+        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (inventory != null) {
+          ItemStack slotStack = inventory.getStackInSlot(0);
+          PlanterRecipe recipe = PlanterRecipe.get(held);
+          if (slotStack.isEmpty() && !held.isEmpty() && recipe != null && recipe.isLarge()) {
+            ItemStack leftover = inventory.insertItem(0, held.splitStack(1), false);
+            ItemHandlerHelper.giveItemToPlayer(player, leftover);
+            tile.onInsert(0);
+            return true;
+          } else if (player.isSneaking() && held.isEmpty() && !slotStack.isEmpty()) {
+            tile.tryHarvest(player, 0);
+            return true;
+          }
         }
+      }
     }
+    return false;
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new ExtendedBlockState(this, new IProperty[]{WET}, new IUnlistedProperty[]{CROP});
+  }
 
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                    float hitY, float hitZ) {
-        if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
-            ItemStack held = player.getHeldItem(hand);
-            var tile = TileUtils.getTile(world, pos, TEPlanter.class);
-            if (tile != null) {
-                IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                if (inventory != null) {
-                    ItemStack slotStack = inventory.getStackInSlot(0);
-                    PlanterRecipe recipe = PlanterRecipe.get(held);
-                    if (slotStack.isEmpty() && !held.isEmpty() && recipe != null && recipe.isLarge()) {
-                        ItemStack leftover = inventory.insertItem(0, held.splitStack(1), false);
-                        ItemHandlerHelper.giveItemToPlayer(player, leftover);
-                        tile.onInsert(0);
-                        return true;
-                    } else if (player.isSneaking() && held.isEmpty() && !slotStack.isEmpty()) {
-                        tile.tryHarvest(player, 0);
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
+  }
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new ExtendedBlockState(this, new IProperty[] { WET }, new IUnlistedProperty[] { CROP });
-    }
+  @Nullable
+  @Override
+  public TileEntity createTileEntity(World world, IBlockState state) {
+    return new TEPlanter();
+  }
 
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
+  @Override
+  public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
+    if (state instanceof IExtendedBlockState extension) {
+      PlanterRecipe.PlantInfo plant = getCrop(world, pos);
+      extension = extension.withProperty(CROP, plant);
+      return extension;
     }
+    return state;
+  }
 
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TEPlanter();
-    }
+  @Nullable
+  public PlanterRecipe.PlantInfo getCrop(IBlockAccess world, BlockPos pos) {
+    var tile = TileUtils.getTile(world, pos, TEPlanter.class);
+    return tile != null ? new PlanterRecipe.PlantInfo(tile.getRecipe(0), tile.getStage(0)) : null;
+  }
 
-    @Override
-    public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
-        if (state instanceof IExtendedBlockState extension) {
-            PlanterRecipe.PlantInfo plant = getCrop(world, pos);
-            extension = extension.withProperty(CROP, plant);
-            return extension;
-        }
-        return state;
-    }
+  private boolean canStay(IBlockAccess world, BlockPos pos) {
+    return world.getBlockState(pos.down())
+            .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+  }
 
-    @Override
-    public @NotNull Size getSize(ItemStack stack) {
-        return Size.NORMAL;
-    }
+  @Override
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.HEAVY;
+  }
 
-    @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return Weight.HEAVY;
-    }
-
-    @Nullable
-    public PlanterRecipe.PlantInfo getCrop(IBlockAccess world, BlockPos pos) {
-        var tile = TileUtils.getTile(world, pos, TEPlanter.class);
-        return tile != null ? new PlanterRecipe.PlantInfo(tile.getRecipe(0), tile.getStage(0)) : null;
-    }
-
-    private boolean canStay(IBlockAccess world, BlockPos pos) {
-        return world.getBlockState(pos.down())
-                .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
-    }
+  @Override
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.NORMAL;
+  }
 }

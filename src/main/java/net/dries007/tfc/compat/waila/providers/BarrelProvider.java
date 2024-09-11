@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodBarrel;
+import su.terrafirmagreg.modules.wood.object.tile.TileWoodBarrel;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -23,35 +23,35 @@ import java.util.List;
 
 public class BarrelProvider implements IWailaBlock {
 
-    @NotNull
-    @Override
-    public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
-        List<String> currentTooltip = new ArrayList<>();
-        var tile = TileUtils.getTile(world, pos, TileWoodBarrel.class);
-        if (tile != null) {
-            IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-            FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
+  @NotNull
+  @Override
+  public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
+    List<String> currentTooltip = new ArrayList<>();
+    var tile = TileUtils.getTile(world, pos, TileWoodBarrel.class);
+    if (tile != null) {
+      IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+      FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
 
-            if (tile.isSealed()) {
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.barrel.sealed", tile.getSealedDate()).getFormattedText());
-                BarrelRecipe recipe = tile.getRecipe();
-                if (recipe != null) {
-                    currentTooltip.add(new TextComponentTranslation("waila.tfc.barrel.recipe", recipe.getResultName()).getFormattedText());
-                } else {
-                    currentTooltip.add(new TextComponentTranslation("waila.tfc.barrel.no_recipe").getFormattedText());
-                }
-            }
-            if (fluid != null && fluid.amount > 0) {
-                currentTooltip.add(
-                        new TextComponentTranslation("waila.tfc.barrel.contents", fluid.amount, fluid.getLocalizedName()).getFormattedText());
-            }
+      if (tile.isSealed()) {
+        currentTooltip.add(new TextComponentTranslation("waila.tfc.barrel.sealed", tile.getSealedDate()).getFormattedText());
+        BarrelRecipe recipe = tile.getRecipe();
+        if (recipe != null) {
+          currentTooltip.add(new TextComponentTranslation("waila.tfc.barrel.recipe", recipe.getResultName()).getFormattedText());
+        } else {
+          currentTooltip.add(new TextComponentTranslation("waila.tfc.barrel.no_recipe").getFormattedText());
         }
-        return currentTooltip;
+      }
+      if (fluid != null && fluid.amount > 0) {
+        currentTooltip.add(
+                new TextComponentTranslation("waila.tfc.barrel.contents", fluid.amount, fluid.getLocalizedName()).getFormattedText());
+      }
     }
+    return currentTooltip;
+  }
 
-    @NotNull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(TileWoodBarrel.class);
-    }
+  @NotNull
+  @Override
+  public List<Class<?>> getLookupClass() {
+    return Collections.singletonList(TileWoodBarrel.class);
+  }
 }

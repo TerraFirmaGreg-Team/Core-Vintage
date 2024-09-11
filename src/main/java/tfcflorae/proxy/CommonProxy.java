@@ -34,70 +34,70 @@ import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 @Mod.EventBusSubscriber(modid = MODID_TFCF)
 public class CommonProxy {
 
-    @SubscribeEvent
-    public static void registerItems(RegistryEvent.Register<Item> event) {
-    }
+  @SubscribeEvent
+  public static void registerItems(RegistryEvent.Register<Item> event) {
+  }
 
-    public void preInit(FMLPreInitializationEvent event) {
-        if (ConfigTFCF.General.STRUCTURES.activateStructureGeneration) {
-            GameRegistry.registerWorldGenerator(new WorldGenStructures(), 0);
-            if (ConfigTFCF.General.WORLD.enableCoralWorldGen) {
-                GameRegistry.registerWorldGenerator(new WorldGenStructuresCorals(), 0);
-            }
-        }
-        if (ConfigTFCF.General.WORLD.enableAllWorldGen) {
-            if (ConfigTFCF.General.WORLD.enableMesaStrata) {
-                GameRegistry.registerWorldGenerator(new GeneratorMesaStrata(), 0);
-            }
-            //GameRegistry.registerWorldGenerator(new WorldGenWildCropsTFCF(), 0);
-            if (ConfigTFCF.General.WORLD.enableCoralWorldGen) {
-                GameRegistry.registerWorldGenerator(new GeneratorCorals(), 0);
-            }
-            if (ConfigTFCF.General.WORLD.enablePlantWorldGen) {
-                GameRegistry.registerWorldGenerator(new GeneratorPlants(), 0);
-            }
-            if (ConfigTFCF.General.WORLD.enableUndergroundPlantWorldGen) {
-                GameRegistry.registerWorldGenerator(new GeneratorUnderground(), 0);
-            }
-            if (ConfigTFCF.General.WORLD.enableLightstoneWorldGen) {
-                GameRegistry.registerWorldGenerator(new GeneratorLightstones(), 0);
-            }
-            if (ConfigTFCF.General.WORLD.enableOceanGlowPlantWorldGen) {
-                GameRegistry.registerWorldGenerator(new GeneratorGlowPlant(), 0);
-            }
-            if (ConfigTFCF.General.WORLD.enableSoilPits) {
-                //GameRegistry.registerWorldGenerator(new WorldGenSoil(), 0);
-                //                GameRegistry.registerWorldGenerator(new GeneratorSoilTypes(), 0);
-                //                GameRegistry.registerWorldGenerator(new GeneratorSoilDecorative(), 0);
-                //                GameRegistry.registerWorldGenerator(new GeneratorClays(), 0);
-            }
-            if (ConfigTFCF.General.WORLD.enableGroundcoverSeashell) {
-                GameRegistry.registerWorldGenerator(new GeneratorSurfaceSeashells(), 0);
-            }
-            if (ConfigTFCF.General.WORLD.enableGroundcoverFlint) {
-                GameRegistry.registerWorldGenerator(new GeneratorSurfaceFlint(), 0);
-            }
-            if (ConfigTFCF.General.WORLD.enableGroundcoverBones) {
-                GameRegistry.registerWorldGenerator(new GeneratorSurfaceBones(), 0);
-            }
-            if (ConfigTFCF.General.WORLD.enableGroundcoverPinecone) {
-                GameRegistry.registerWorldGenerator(new GeneratorSurfacePinecone(), 0);
-            }
-            if (ConfigTFCF.General.WORLD.enableGroundcoverDriftwood) {
-                GameRegistry.registerWorldGenerator(new GeneratorSurfaceDriftwood(), 0);
-            }
-            if (ConfigTFCF.General.WORLD.enableGroundcoverTwig) {
-                GameRegistry.registerWorldGenerator(new GeneratorSurfaceTwig(), 0);
-            }
-            if (ConfigTFCF.General.WORLD.enableGourdWorldGen && TFCFlorae.FirmaLifeAdded) {
-                GameRegistry.registerWorldGenerator(new GeneratorGourds(), 0);
-            }
-        }
+  public void preInit(FMLPreInitializationEvent event) {
+    if (ConfigTFCF.General.STRUCTURES.activateStructureGeneration) {
+      GameRegistry.registerWorldGenerator(new WorldGenStructures(), 0);
+      if (ConfigTFCF.General.WORLD.enableCoralWorldGen) {
+        GameRegistry.registerWorldGenerator(new WorldGenStructuresCorals(), 0);
+      }
     }
+    if (ConfigTFCF.General.WORLD.enableAllWorldGen) {
+      if (ConfigTFCF.General.WORLD.enableMesaStrata) {
+        GameRegistry.registerWorldGenerator(new GeneratorMesaStrata(), 0);
+      }
+      //GameRegistry.registerWorldGenerator(new WorldGenWildCropsTFCF(), 0);
+      if (ConfigTFCF.General.WORLD.enableCoralWorldGen) {
+        GameRegistry.registerWorldGenerator(new GeneratorCorals(), 0);
+      }
+      if (ConfigTFCF.General.WORLD.enablePlantWorldGen) {
+        GameRegistry.registerWorldGenerator(new GeneratorPlants(), 0);
+      }
+      if (ConfigTFCF.General.WORLD.enableUndergroundPlantWorldGen) {
+        GameRegistry.registerWorldGenerator(new GeneratorUnderground(), 0);
+      }
+      if (ConfigTFCF.General.WORLD.enableLightstoneWorldGen) {
+        GameRegistry.registerWorldGenerator(new GeneratorLightstones(), 0);
+      }
+      if (ConfigTFCF.General.WORLD.enableOceanGlowPlantWorldGen) {
+        GameRegistry.registerWorldGenerator(new GeneratorGlowPlant(), 0);
+      }
+      if (ConfigTFCF.General.WORLD.enableSoilPits) {
+        //GameRegistry.registerWorldGenerator(new WorldGenSoil(), 0);
+        //                GameRegistry.registerWorldGenerator(new GeneratorSoilTypes(), 0);
+        //                GameRegistry.registerWorldGenerator(new GeneratorSoilDecorative(), 0);
+        //                GameRegistry.registerWorldGenerator(new GeneratorClays(), 0);
+      }
+      if (ConfigTFCF.General.WORLD.enableGroundcoverSeashell) {
+        GameRegistry.registerWorldGenerator(new GeneratorSurfaceSeashells(), 0);
+      }
+      if (ConfigTFCF.General.WORLD.enableGroundcoverFlint) {
+        GameRegistry.registerWorldGenerator(new GeneratorSurfaceFlint(), 0);
+      }
+      if (ConfigTFCF.General.WORLD.enableGroundcoverBones) {
+        GameRegistry.registerWorldGenerator(new GeneratorSurfaceBones(), 0);
+      }
+      if (ConfigTFCF.General.WORLD.enableGroundcoverPinecone) {
+        GameRegistry.registerWorldGenerator(new GeneratorSurfacePinecone(), 0);
+      }
+      if (ConfigTFCF.General.WORLD.enableGroundcoverDriftwood) {
+        GameRegistry.registerWorldGenerator(new GeneratorSurfaceDriftwood(), 0);
+      }
+      if (ConfigTFCF.General.WORLD.enableGroundcoverTwig) {
+        GameRegistry.registerWorldGenerator(new GeneratorSurfaceTwig(), 0);
+      }
+      if (ConfigTFCF.General.WORLD.enableGourdWorldGen && TFCFlorae.FirmaLifeAdded) {
+        GameRegistry.registerWorldGenerator(new GeneratorGourds(), 0);
+      }
+    }
+  }
 
-    public void init(FMLInitializationEvent event) {
-    }
+  public void init(FMLInitializationEvent event) {
+  }
 
-    public void postInit(FMLPostInitializationEvent event) {
-    }
+  public void postInit(FMLPostInitializationEvent event) {
+  }
 }

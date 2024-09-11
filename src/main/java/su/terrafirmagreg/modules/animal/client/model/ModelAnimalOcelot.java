@@ -63,10 +63,10 @@ public class ModelAnimalOcelot extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount,
-      float ageInTicks, float netHeadYaw, float headPitch,
-      float scale) {
+          float ageInTicks, float netHeadYaw, float headPitch,
+          float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-        entity);
+            entity);
 
     if (((EntityAnimal) entity).isChild()) {
       double ageScale = 1;
@@ -94,8 +94,8 @@ public class ModelAnimalOcelot extends ModelBase {
   }
 
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks,
-      float netHeadYaw, float headPitch, float scaleFactor,
-      Entity entityIn) {
+          float netHeadYaw, float headPitch, float scaleFactor,
+          Entity entityIn) {
     this.ocelotHead.rotateAngleX = headPitch * 0.017453292F;
     this.ocelotHead.rotateAngleY = netHeadYaw * 0.017453292F;
     if (this.state != 3) {
@@ -103,27 +103,27 @@ public class ModelAnimalOcelot extends ModelBase {
       if (this.state == 2) {
         this.ocelotBackLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount;
         this.ocelotBackRightLeg.rotateAngleX =
-            MathHelper.cos(limbSwing * 0.6662F + 0.3F) * limbSwingAmount;
+                MathHelper.cos(limbSwing * 0.6662F + 0.3F) * limbSwingAmount;
         this.ocelotFrontLeftLeg.rotateAngleX =
-            MathHelper.cos(limbSwing * 0.6662F + 3.1415927F + 0.3F) * limbSwingAmount;
+                MathHelper.cos(limbSwing * 0.6662F + 3.1415927F + 0.3F) * limbSwingAmount;
         this.ocelotFrontRightLeg.rotateAngleX =
-            MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * limbSwingAmount;
+                MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * limbSwingAmount;
         this.ocelotTail2.rotateAngleX =
-            1.7278761F + 0.31415927F * MathHelper.cos(limbSwing) * limbSwingAmount;
+                1.7278761F + 0.31415927F * MathHelper.cos(limbSwing) * limbSwingAmount;
       } else {
         this.ocelotBackLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount;
         this.ocelotBackRightLeg.rotateAngleX =
-            MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * limbSwingAmount;
+                MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * limbSwingAmount;
         this.ocelotFrontLeftLeg.rotateAngleX =
-            MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * limbSwingAmount;
+                MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * limbSwingAmount;
         this.ocelotFrontRightLeg.rotateAngleX =
-            MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount;
+                MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount;
         if (this.state == 1) {
           this.ocelotTail2.rotateAngleX =
-              1.7278761F + 0.7853982F * MathHelper.cos(limbSwing) * limbSwingAmount;
+                  1.7278761F + 0.7853982F * MathHelper.cos(limbSwing) * limbSwingAmount;
         } else {
           this.ocelotTail2.rotateAngleX =
-              1.7278761F + 0.47123894F * MathHelper.cos(limbSwing) * limbSwingAmount;
+                  1.7278761F + 0.47123894F * MathHelper.cos(limbSwing) * limbSwingAmount;
         }
       }
     }
@@ -131,7 +131,7 @@ public class ModelAnimalOcelot extends ModelBase {
   }
 
   public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing,
-      float limbSwingAmount, float partialTickTime) {
+          float limbSwingAmount, float partialTickTime) {
     EntityOcelot entityocelot = (EntityOcelot) entitylivingbaseIn;
     this.ocelotBody.rotationPointY = 12.0F;
     this.ocelotBody.rotationPointZ = -10.0F;

@@ -9,10 +9,10 @@ public class ItemDeviceMisc extends BaseItem {
   public ItemDeviceMisc(String name, Size size, Weight weight, Object... oreNameParts) {
 
     getSettings()
-        .registryKey("device/" + name)
-        .size(size)
-        .weight(weight)
-        .addOreDict(oreNameParts);
+            .registryKey("device/" + name)
+            .size(size)
+            .weight(weight)
+            .addOreDict(oreNameParts);
   }
 
 }

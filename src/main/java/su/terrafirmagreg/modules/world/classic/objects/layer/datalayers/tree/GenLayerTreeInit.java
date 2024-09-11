@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerBase;
 
 public class GenLayerTreeInit extends GenLayerBase {
 
-  private DataLayerClassic[] layerTrees;
+  private final DataLayerClassic[] layerTrees;
 
   public GenLayerTreeInit(long par1, DataLayerClassic[] trees) {
     super(par1);

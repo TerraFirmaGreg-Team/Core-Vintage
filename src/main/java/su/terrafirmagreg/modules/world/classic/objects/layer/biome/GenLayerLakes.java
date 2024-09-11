@@ -27,7 +27,7 @@ public class GenLayerLakes extends GenLayerBase {
         int zp = ints[xx + 1 + (zz + 1 + 1) * (sizeX + 2)]; // z+1
 
         if (isOceanicBiome(thisID) && !isOceanicBiome(zn) && !isOceanicBiome(xp) && !isOceanicBiome(
-            xn) && !isOceanicBiome(zp)) {
+                xn) && !isOceanicBiome(zp)) {
           out[xx + zz * sizeX] = lakeID;
         } else {
           out[xx + zz * sizeX] = thisID;

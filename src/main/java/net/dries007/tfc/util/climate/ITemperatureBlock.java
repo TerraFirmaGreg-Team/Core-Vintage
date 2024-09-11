@@ -6,5 +6,5 @@ import net.minecraft.world.World;
 
 public interface ITemperatureBlock {
 
-    void onTemperatureUpdateTick(World world, BlockPos pos, IBlockState state);
+  void onTemperatureUpdateTick(World world, BlockPos pos, IBlockState state);
 }

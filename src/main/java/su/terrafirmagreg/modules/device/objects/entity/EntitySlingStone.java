@@ -32,19 +32,6 @@ public class EntitySlingStone extends EntityThrowable {
     this.power = power;
   }
 
-  private boolean shouldHit(RayTraceResult result) {
-    if (result.entityHit == null) {
-      return false;
-    } else {
-      if (getThrower() != null && getThrower().isRiding()) {
-        return
-            (result.entityHit != getThrower() && result.entityHit != getThrower().getRidingEntity())
-                || this.ticksExisted > 20;
-      }
-      return result.entityHit != getThrower() || this.ticksExisted > 10;
-    }
-  }
-
   @Override
   protected void onImpact(@NotNull RayTraceResult result) {
     if (shouldHit(result)) {
@@ -67,10 +54,23 @@ public class EntitySlingStone extends EntityThrowable {
           this.setDead();
         }
       } else if (world.getBlockState(result.getBlockPos())
-          .getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB) {
+              .getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB) {
         this.world.setEntityState(this, (byte) 3);
         this.setDead();
       }
+    }
+  }
+
+  private boolean shouldHit(RayTraceResult result) {
+    if (result.entityHit == null) {
+      return false;
+    } else {
+      if (getThrower() != null && getThrower().isRiding()) {
+        return
+                (result.entityHit != getThrower() && result.entityHit != getThrower().getRidingEntity())
+                        || this.ticksExisted > 20;
+      }
+      return result.entityHit != getThrower() || this.ticksExisted > 10;
     }
   }
 

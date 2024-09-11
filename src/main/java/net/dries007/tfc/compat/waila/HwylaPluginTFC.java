@@ -22,15 +22,15 @@ import java.util.List;
 public class HwylaPluginTFC implements IWailaPlugin {
 
   public static final List<IWailaPlugin> WAILA_PLUGINS = Arrays.asList(
-      new HwylaEntityInterface(new AnimalProvider()),
-      new HwylaBlockInterface(new BarrelProvider()),
-      new HwylaBlockInterface(new BerryBushProvider()),
-      new HwylaBlockInterface(new CropProvider()),
-      new HwylaBlockInterface(new FruitTreeProvider()),
-      new HwylaBlockInterface(new OreProvider()),
-      new HwylaBlockInterface(new PlacedItemProvider()),
-      new HwylaBlockInterface(new TreeProvider()),
-      new HwylaBlockInterface(new IngotPileProvider())
+          new HwylaEntityInterface(new AnimalProvider()),
+          new HwylaBlockInterface(new BarrelProvider()),
+          new HwylaBlockInterface(new BerryBushProvider()),
+          new HwylaBlockInterface(new CropProvider()),
+          new HwylaBlockInterface(new FruitTreeProvider()),
+          new HwylaBlockInterface(new OreProvider()),
+          new HwylaBlockInterface(new PlacedItemProvider()),
+          new HwylaBlockInterface(new TreeProvider()),
+          new HwylaBlockInterface(new IngotPileProvider())
   );
 
   @Override

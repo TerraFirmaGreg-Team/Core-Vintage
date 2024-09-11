@@ -17,10 +17,10 @@ public class GeneratorLargeRocks implements IWorldGenerator {
 
   @Override
   public void generate(Random rng, int chunkX, int chunkZ, World world,
-      IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
     BlockPos start = world.getTopSolidOrLiquidBlock(
-        chunkBlockPos.add(8 + rng.nextInt(16), 0, 8 + rng.nextInt(16))).add(0, -1, 0);
+            chunkBlockPos.add(8 + rng.nextInt(16), 0, 8 + rng.nextInt(16))).add(0, -1, 0);
     if (start.getY() > 155 && !BlockUtils.isSoil(world.getBlockState(start))) {
       return;
     }
@@ -50,10 +50,10 @@ public class GeneratorLargeRocks implements IWorldGenerator {
     genFromPoint(world, rng, start.add(0, y, 0));
     if (rng.nextInt(1) == 0) {
       genFromPoint(world, rng,
-          start.add(
-              (rng.nextInt(2) + 1) * (rng.nextBoolean() ? 1 : -1),
-              y + (rng.nextInt(2) + 1) * (rng.nextBoolean() ? 1 : -1),
-              (rng.nextInt(2) + 1) * (rng.nextBoolean() ? 1 : -1)));
+              start.add(
+                      (rng.nextInt(2) + 1) * (rng.nextBoolean() ? 1 : -1),
+                      y + (rng.nextInt(2) + 1) * (rng.nextBoolean() ? 1 : -1),
+                      (rng.nextInt(2) + 1) * (rng.nextBoolean() ? 1 : -1)));
     }
   }
 

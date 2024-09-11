@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.client.render;
 
-import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodToolRack;
+import su.terrafirmagreg.modules.wood.object.tile.TileWoodToolRack;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -66,7 +66,7 @@ public class TESRWoodToolRack extends TileEntitySpecialRenderer<TileWoodToolRack
 
   @Override
   public void render(TileWoodToolRack tile, double x, double y, double z, float partialTicks,
-      int destroyStage, float alpha) {
+          int destroyStage, float alpha) {
     {
       int dir = tile.getBlockMetadata();
       float blockScale = .5f;
@@ -75,12 +75,12 @@ public class TESRWoodToolRack extends TileEntitySpecialRenderer<TileWoodToolRack
         if (!tile.getItems().get(i).isEmpty()) {
           GlStateManager.pushMatrix();
           GlStateManager.translate(x + ITEM_LOCATION[dir][i][0], y + ITEM_LOCATION[dir][i][1],
-              z + ITEM_LOCATION[dir][i][2]);
+                  z + ITEM_LOCATION[dir][i][2]);
           GlStateManager.rotate(META_TO_ANGLE[dir], 0.0F, 1.0F, 0.0F);
           GlStateManager.scale(blockScale, blockScale, blockScale);
           Minecraft.getMinecraft()
-              .getRenderItem()
-              .renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
+                  .getRenderItem()
+                  .renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
           GlStateManager.popMatrix();
         }
       }

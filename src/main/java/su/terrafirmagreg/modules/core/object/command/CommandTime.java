@@ -1,11 +1,6 @@
 package su.terrafirmagreg.modules.core.object.command;
 
-import java.util.Collections;
-import java.util.List;
-
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
-
+import su.terrafirmagreg.api.base.command.BaseCommand;
 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.CommandResultStats;
@@ -16,10 +11,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
+import net.dries007.tfc.util.calendar.Calendar;
+import net.dries007.tfc.util.calendar.ICalendar;
+
 import org.jetbrains.annotations.Nullable;
 
-
-import su.terrafirmagreg.api.base.command.BaseCommand;
+import java.util.Collections;
+import java.util.List;
 
 public class CommandTime extends BaseCommand {
 
@@ -80,7 +78,7 @@ public class CommandTime extends BaseCommand {
             break;
           case "days":
             int days = parseInt(args[2], 0);
-            timeToAdd = ICalendar.TICKS_IN_DAY * days;
+            timeToAdd = (long) ICalendar.TICKS_IN_DAY * days;
             notifyCommandListener(sender, this, "tfc.command.timetfc.add_days", days, timeToAdd);
             break;
           default:
@@ -123,6 +121,17 @@ public class CommandTime extends BaseCommand {
     }
   }
 
+  private void setAllWorldTimes(MinecraftServer server, long worldTime) {
+    // Update the actual world times
+    for (World world : server.worlds) {
+      long worldTimeJump = worldTime - (world.getWorldTime() % ICalendar.TICKS_IN_DAY);
+      if (worldTimeJump < 0) {
+        worldTimeJump += ICalendar.TICKS_IN_DAY;
+      }
+      world.setWorldTime(world.getWorldTime() + worldTimeJump);
+    }
+  }
+
   @Override
   public int getRequiredPermissionLevel() {
     return 2;
@@ -144,16 +153,5 @@ public class CommandTime extends BaseCommand {
       }
     }
     return Collections.emptyList();
-  }
-
-  private void setAllWorldTimes(MinecraftServer server, long worldTime) {
-    // Update the actual world times
-    for (World world : server.worlds) {
-      long worldTimeJump = worldTime - (world.getWorldTime() % ICalendar.TICKS_IN_DAY);
-      if (worldTimeJump < 0) {
-        worldTimeJump += ICalendar.TICKS_IN_DAY;
-      }
-      world.setWorldTime(world.getWorldTime() + worldTimeJump);
-    }
   }
 }

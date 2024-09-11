@@ -19,10 +19,10 @@ public final class Constants {
   public static final String SERVER_PROXY = "su.terrafirmagreg.proxy.ServerProxy";
   public static final String CLIENT_PROXY = "su.terrafirmagreg.proxy.ClientProxy";
   public static final Gson GSON = new GsonBuilder()
-      .disableHtmlEscaping()
-      .registerTypeAdapter(ResourceLocation.class, new ResourceLocationJson())
-      .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
-      .create();
+          .disableHtmlEscaping()
+          .registerTypeAdapter(ResourceLocation.class, new ResourceLocationJson())
+          .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
+          .create();
 
   public static final String MODID_TFC = "tfc";
   public static final String MODID_TFCF = "tfcflorae";

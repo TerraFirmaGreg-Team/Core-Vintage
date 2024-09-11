@@ -21,32 +21,32 @@ import java.util.List;
 
 public class HangingPlanterProvider implements IWailaBlock {
 
-    @NotNull
-    @Override
-    public List<String> getTooltip(World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
-        List<String> currentTooltip = new ArrayList<>();
-        IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockHangingPlanter) {
-            int maxStage = Collections.max(Properties.STAGE.getAllowedValues());
-            int curStage = state.getValue(Properties.STAGE);
-            if (maxStage == curStage) {
-                currentTooltip.add("Mature");
-            } else {
-                float curStagePercent = (float) curStage * 100 / maxStage;
-                String growth = String.format("%d%%", Math.round(curStagePercent));
-                currentTooltip.add(growth);
-            }
-            var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
-            if (tile != null) {
-                currentTooltip.add(tile.isClimateValid() ? "Climate Valid" : "Climate Invalid");
-            }
-        }
-        return currentTooltip;
+  @NotNull
+  @Override
+  public List<String> getTooltip(World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
+    List<String> currentTooltip = new ArrayList<>();
+    IBlockState state = world.getBlockState(pos);
+    if (state.getBlock() instanceof BlockHangingPlanter) {
+      int maxStage = Collections.max(Properties.STAGE.getAllowedValues());
+      int curStage = state.getValue(Properties.STAGE);
+      if (maxStage == curStage) {
+        currentTooltip.add("Mature");
+      } else {
+        float curStagePercent = (float) curStage * 100 / maxStage;
+        String growth = String.format("%d%%", Math.round(curStagePercent));
+        currentTooltip.add(growth);
+      }
+      var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
+      if (tile != null) {
+        currentTooltip.add(tile.isClimateValid() ? "Climate Valid" : "Climate Invalid");
+      }
     }
+    return currentTooltip;
+  }
 
-    @NotNull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(TEHangingPlanter.class);
-    }
+  @NotNull
+  @Override
+  public List<Class<?>> getLookupClass() {
+    return Collections.singletonList(TEHangingPlanter.class);
+  }
 }

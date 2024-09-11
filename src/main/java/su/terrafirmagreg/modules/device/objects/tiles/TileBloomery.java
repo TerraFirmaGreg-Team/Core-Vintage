@@ -101,6 +101,51 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
     super.onBreakBlock(world, pos, state);
   }
 
+  protected void dumpItems() {
+    //Dump everything in world
+    for (int i = 1; i < 4; i++) {
+      if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN) {
+        world.setBlockToAir(getInternalBlock().up(i));
+      }
+    }
+    oreStacks.forEach(
+            i -> InventoryHelper.spawnItemStack(world, getExternalBlock().getX(),
+                    getExternalBlock().getY(), getExternalBlock().getZ(), i));
+    fuelStacks.forEach(
+            i -> InventoryHelper.spawnItemStack(world, getExternalBlock().getX(),
+                    getExternalBlock().getY(), getExternalBlock().getZ(), i));
+  }
+
+  /**
+   * Gets the internal (charcoal pile / bloom) position
+   *
+   * @return BlockPos of the internal block
+   */
+  public BlockPos getInternalBlock() {
+    if (internalBlock == null) {
+      EnumFacing direction = world.getBlockState(pos).getValue(FACING);
+      internalBlock = pos.up(OFFSET_INTERNAL.getY())
+              .offset(direction, OFFSET_INTERNAL.getX())
+              .offset(direction.rotateY(), OFFSET_INTERNAL.getZ());
+    }
+    return internalBlock;
+  }
+
+  /**
+   * Gets the external (front facing) position
+   *
+   * @return BlockPos to dump items in world
+   */
+  public BlockPos getExternalBlock() {
+    if (externalBlock == null) {
+      EnumFacing direction = world.getBlockState(pos).getValue(FACING);
+      externalBlock = pos.up(OFFSET_EXTERNAL.getY())
+              .offset(direction, OFFSET_EXTERNAL.getX())
+              .offset(direction.rotateY(), OFFSET_EXTERNAL.getZ());
+    }
+    return externalBlock;
+  }
+
   public ImmutableList<ItemStack> getFuelStacks() {
     return ImmutableList.copyOf(fuelStacks);
   }
@@ -194,73 +239,34 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
     }
   }
 
-  @Override
-  public void onLoad() {
-    // This caches the bloomery block as otherwise it can be null when broken
-    getExternalBlock();
-  }
-
   public long getRemainingTicks() {
     return ConfigDevice.BLOCKS.BLOOMERY.ticks - (Calendar.PLAYER_TIME.getTicks() - litTick);
   }
 
-  public boolean canIgnite() {
-    if (world.isRemote) {
-      return false;
-    }
-    if (this.fuelStacks.size() < this.oreStacks.size() || this.oreStacks.isEmpty()) {
-      return false;
-    }
-    return isInternalBlockComplete();
-  }
-
-  public void onIgnite() {
-    this.litTick = Calendar.PLAYER_TIME.getTicks();
-  }
-
-  /**
-   * Gets the internal (charcoal pile / bloom) position
-   *
-   * @return BlockPos of the internal block
-   */
-  public BlockPos getInternalBlock() {
-    if (internalBlock == null) {
-      EnumFacing direction = world.getBlockState(pos).getValue(FACING);
-      internalBlock = pos.up(OFFSET_INTERNAL.getY())
-              .offset(direction, OFFSET_INTERNAL.getX())
-              .offset(direction.rotateY(), OFFSET_INTERNAL.getZ());
-    }
-    return internalBlock;
-  }
-
-  /**
-   * Gets the external (front facing) position
-   *
-   * @return BlockPos to dump items in world
-   */
-  public BlockPos getExternalBlock() {
-    if (externalBlock == null) {
-      EnumFacing direction = world.getBlockState(pos).getValue(FACING);
-      externalBlock = pos.up(OFFSET_EXTERNAL.getY())
-              .offset(direction, OFFSET_EXTERNAL.getX())
-              .offset(direction.rotateY(), OFFSET_EXTERNAL.getZ());
-    }
-    return externalBlock;
-  }
-
-  protected void dumpItems() {
-    //Dump everything in world
+  protected void updateSlagBlock(boolean cooking) {
+    int slag = fuelStacks.size() + oreStacks.size();
+    //If there's at least one item, show one layer so player knows that it is holding stacks
+    int slagLayers = slag > 0 && slag < 4 ? 1 : slag / 4;
     for (int i = 1; i < 4; i++) {
-      if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN) {
-        world.setBlockToAir(getInternalBlock().up(i));
+      if (slagLayers > 0) {
+        if (slagLayers >= 4) {
+          slagLayers -= 4;
+          world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState()
+                  .withProperty(LIT, cooking)
+                  .withProperty(BlockMolten.LAYERS, 4));
+        } else {
+          world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState()
+                  .withProperty(LIT, cooking)
+                  .withProperty(BlockMolten.LAYERS, slagLayers));
+          slagLayers = 0;
+        }
+      } else {
+        //Remove any surplus slag(ie: after cooking/structure became compromised)
+        if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN) {
+          world.setBlockToAir(getInternalBlock().up(i));
+        }
       }
     }
-    oreStacks.forEach(
-            i -> InventoryHelper.spawnItemStack(world, getExternalBlock().getX(),
-                    getExternalBlock().getY(), getExternalBlock().getZ(), i));
-    fuelStacks.forEach(
-            i -> InventoryHelper.spawnItemStack(world, getExternalBlock().getX(),
-                    getExternalBlock().getY(), getExternalBlock().getZ(), i));
   }
 
   protected boolean isInternalBlockComplete() {
@@ -311,30 +317,24 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
     }
   }
 
-  protected void updateSlagBlock(boolean cooking) {
-    int slag = fuelStacks.size() + oreStacks.size();
-    //If there's at least one item, show one layer so player knows that it is holding stacks
-    int slagLayers = slag > 0 && slag < 4 ? 1 : slag / 4;
-    for (int i = 1; i < 4; i++) {
-      if (slagLayers > 0) {
-        if (slagLayers >= 4) {
-          slagLayers -= 4;
-          world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState()
-                  .withProperty(LIT, cooking)
-                  .withProperty(BlockMolten.LAYERS, 4));
-        } else {
-          world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState()
-                  .withProperty(LIT, cooking)
-                  .withProperty(BlockMolten.LAYERS, slagLayers));
-          slagLayers = 0;
-        }
-      } else {
-        //Remove any surplus slag(ie: after cooking/structure became compromised)
-        if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN) {
-          world.setBlockToAir(getInternalBlock().up(i));
-        }
-      }
+  @Override
+  public void onLoad() {
+    // This caches the bloomery block as otherwise it can be null when broken
+    getExternalBlock();
+  }
+
+  public boolean canIgnite() {
+    if (world.isRemote) {
+      return false;
     }
+    if (this.fuelStacks.size() < this.oreStacks.size() || this.oreStacks.isEmpty()) {
+      return false;
+    }
+    return isInternalBlockComplete();
+  }
+
+  public void onIgnite() {
+    this.litTick = Calendar.PLAYER_TIME.getTicks();
   }
 
   @Override

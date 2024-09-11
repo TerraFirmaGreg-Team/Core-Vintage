@@ -176,73 +176,73 @@ public final class EntitiesAnimal {
   @SideOnly(Side.CLIENT)
   public static void onClientRegister(RegistryManager registry) {
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalSheep.class,
-        RenderAnimalSheep::new);
+            RenderAnimalSheep::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalCow.class, RenderAnimalCow::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalGrizzlyBear.class,
-        RenderAnimalGrizzlyBear::new);
+            RenderAnimalGrizzlyBear::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalChicken.class,
-        RenderAnimalChicken::new);
+            RenderAnimalChicken::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalPheasant.class,
-        RenderAnimalPheasant::new);
+            RenderAnimalPheasant::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalDeer.class, RenderAnimalDeer::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalPig.class, RenderAnimalPig::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalWolf.class, RenderAnimalWolf::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalRabbit.class,
-        RenderAnimalRabbit::new);
+            RenderAnimalRabbit::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalHorse.class,
-        RenderAnimalHorse::new);
+            RenderAnimalHorse::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalDonkey.class,
-        RenderAnimalAbstractHorse::new);
+            RenderAnimalAbstractHorse::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalMule.class,
-        RenderAnimalAbstractHorse::new);
+            RenderAnimalAbstractHorse::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalPolarBear.class,
-        RenderAnimalPolarBear::new);
+            RenderAnimalPolarBear::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalParrot.class,
-        RenderAnimalParrot::new);
+            RenderAnimalParrot::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalLlama.class,
-        RenderAnimalLlama::new);
+            RenderAnimalLlama::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalOcelot.class,
-        RenderAnimalOcelot::new);
+            RenderAnimalOcelot::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalPanther.class,
-        RenderAnimalPanther::new);
+            RenderAnimalPanther::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalDuck.class, RenderAnimalDuck::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalAlpaca.class,
-        RenderAnimalAlpaca::new);
+            RenderAnimalAlpaca::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalGoat.class, RenderAnimalGoat::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalSaberTooth.class,
-        RenderAnimalSaberTooth::new);
+            RenderAnimalSaberTooth::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalCamel.class,
-        RenderAnimalCamel::new);
+            RenderAnimalCamel::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalLion.class, RenderAnimalLion::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalHyena.class,
-        RenderAnimalHyena::new);
+            RenderAnimalHyena::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalDireWolf.class,
-        RenderAnimalDireWolf::new);
+            RenderAnimalDireWolf::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalHare.class, RenderAnimalHare::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalBoar.class, RenderAnimalBoar::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalZebu.class, RenderAnimalZebu::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalGazelle.class,
-        RenderAnimalGazelle::new);
+            RenderAnimalGazelle::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalWildebeest.class,
-        RenderAnimalWildebeest::new);
+            RenderAnimalWildebeest::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalQuail.class,
-        RenderAnimalQuail::new);
+            RenderAnimalQuail::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalGrouse.class,
-        RenderAnimalGrouse::new);
+            RenderAnimalGrouse::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalMongoose.class,
-        RenderAnimalMongoose::new);
+            RenderAnimalMongoose::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalTurkey.class,
-        RenderAnimalTurkey::new);
+            RenderAnimalTurkey::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalJackal.class,
-        RenderAnimalJackal::new);
+            RenderAnimalJackal::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalMuskOx.class,
-        RenderAnimalMuskOx::new);
+            RenderAnimalMuskOx::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalYak.class, RenderAnimalYak::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalBlackBear.class,
-        RenderAnimalBlackBear::new);
+            RenderAnimalBlackBear::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalCougar.class,
-        RenderAnimalCougar::new);
+            RenderAnimalCougar::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalCoyote.class,
-        RenderAnimalCoyote::new);
+            RenderAnimalCoyote::new);
   }
 }

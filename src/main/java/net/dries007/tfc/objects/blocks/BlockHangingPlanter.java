@@ -36,9 +36,9 @@ public class BlockHangingPlanter extends BlockBonsai {
   public BlockHangingPlanter(Supplier<? extends Item> fruit, Supplier<? extends Item> seed, int period) {
     super(fruit, seed, period, 0, Material.IRON);
     setDefaultState(blockState
-        .getBaseState()
-        .withProperty(AXIS, EnumFacing.Axis.X)
-        .withProperty(STAGE, 0));
+            .getBaseState()
+            .withProperty(AXIS, EnumFacing.Axis.X)
+            .withProperty(STAGE, 0));
   }
 
   @Override
@@ -60,14 +60,14 @@ public class BlockHangingPlanter extends BlockBonsai {
   }
 
   @Override
-  @NotNull
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, AXIS, STAGE);
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return SHAPE;
   }
 
   @Override
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return SHAPE;
+  @NotNull
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, AXIS, STAGE);
   }
 
   @Override
@@ -88,7 +88,7 @@ public class BlockHangingPlanter extends BlockBonsai {
   @SuppressWarnings("deprecation")
   @NotNull
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-      EntityLivingBase placer) {
+          EntityLivingBase placer) {
     if (facing.getAxis() == EnumFacing.Axis.Y) {
       facing = placer.getHorizontalFacing();
     }

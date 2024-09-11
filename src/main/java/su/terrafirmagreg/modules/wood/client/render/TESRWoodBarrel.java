@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.client.render;
 
-import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
-import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodBarrel;
+import su.terrafirmagreg.modules.wood.object.block.BlockWoodBarrel;
+import su.terrafirmagreg.modules.wood.object.tile.TileWoodBarrel;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -35,16 +35,16 @@ public class TESRWoodBarrel extends TileEntitySpecialRenderer<TileWoodBarrel> {
 
   @Override
   public void render(TileWoodBarrel tile, double x, double y, double z, float partialTicks,
-      int destroyStage, float alpha) {
+          int destroyStage, float alpha) {
     IBlockState state = tile.getWorld().getBlockState(tile.getPos());
     if (!(state.getBlock() instanceof BlockWoodBarrel) || state.getValue(SEALED)) {
       return;
     }
 
     IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY,
-        null);
+            null);
     IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-        null);
+            null);
 
     if (fluidHandler == null || itemHandler == null) {
       return;
@@ -63,7 +63,7 @@ public class TESRWoodBarrel extends TileEntitySpecialRenderer<TileWoodBarrel> {
       GlStateManager.scale(0.5F, 0.5F, 0.5F);
       GlStateManager.rotate(90F, 1F, 0F, 0F);
       Minecraft.getMinecraft().getRenderItem()
-          .renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
+              .renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
       GlStateManager.popMatrix();
     }
 
@@ -75,8 +75,8 @@ public class TESRWoodBarrel extends TileEntitySpecialRenderer<TileWoodBarrel> {
       GlStateManager.enableAlpha();
       GlStateManager.enableBlend();
       GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
-          GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-          GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+              GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+              GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
       int color = fluid.getColor();
 
@@ -101,21 +101,21 @@ public class TESRWoodBarrel extends TileEntitySpecialRenderer<TileWoodBarrel> {
       double height = 0.140625D + (0.75D - 0.015625D) * content.amount / properties.getCapacity();
 
       buffer.pos(0.1875D, height, 0.1875D)
-          .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(3))
-          .normal(0, 0, 1)
-          .endVertex();
+              .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(3))
+              .normal(0, 0, 1)
+              .endVertex();
       buffer.pos(0.1875D, height, 0.8125D)
-          .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(13))
-          .normal(0, 0, 1)
-          .endVertex();
+              .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(13))
+              .normal(0, 0, 1)
+              .endVertex();
       buffer.pos(0.8125D, height, 0.8125D)
-          .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(13))
-          .normal(0, 0, 1)
-          .endVertex();
+              .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(13))
+              .normal(0, 0, 1)
+              .endVertex();
       buffer.pos(0.8125D, height, 0.1875D)
-          .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(3))
-          .normal(0, 0, 1)
-          .endVertex();
+              .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(3))
+              .normal(0, 0, 1)
+              .endVertex();
 
       Tessellator.getInstance().draw();
     }

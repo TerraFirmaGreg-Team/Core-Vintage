@@ -24,13 +24,13 @@ public class GeneratorTreeNormal implements ITreeGenerator {
 
   private static final PlacementSettings settingsFull = StructureUtils.getDefaultSettings();
   private static final PlacementSettings settingsWeak = StructureUtils.getDefaultSettings()
-      .setIntegrity(0.5f);
+          .setIntegrity(0.5f);
   private final int heightMin;
   private final int heightRange;
 
   /**
-   * A basic tree generator. It will generate a structure found in /assets/tfc/[TREE NAME]/base.nbt Additionally, it will try and apply an overlay
-   * with the name /overlay.nbt at 50% integrity.
+   * A basic tree generator. It will generate a structure found in /assets/tfc/[TREE NAME]/base.nbt Additionally, it will try and apply an overlay with the name
+   * /overlay.nbt at 50% integrity.
    *
    * @param heightMin   The minimum amount of logs to add to the bottom of the trunk Set to 0 for no extra height
    * @param heightRange The maximum amount of logs to add to the bottom of the trunk. Set to 0 for no extra height
@@ -42,7 +42,7 @@ public class GeneratorTreeNormal implements ITreeGenerator {
 
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-      Random rand, boolean isWorldGen) {
+          Random rand, boolean isWorldGen) {
     ResourceLocation base = new ResourceLocation(tree.getRegistryName() + "/base");
     ResourceLocation overlay = new ResourceLocation(tree.getRegistryName() + "/overlay");
 
@@ -50,7 +50,7 @@ public class GeneratorTreeNormal implements ITreeGenerator {
     Template structureOverlay = manager.get(world.getMinecraftServer(), overlay);
 
     if (structureBase == null) {
-      TerraFirmaCraft.getLog().warn("Unable to find a template for " + base.toString());
+      TerraFirmaCraft.getLog().warn("Unable to find a template for " + base);
       return;
     }
 

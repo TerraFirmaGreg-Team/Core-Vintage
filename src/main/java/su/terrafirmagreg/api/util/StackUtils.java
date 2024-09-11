@@ -83,6 +83,12 @@ public final class StackUtils {
   }
 
   @NotNull
+  public static ItemStack consumeItem(ItemStack stack, EntityPlayer player, int amount) {
+
+    return player.isCreative() ? stack : consumeItem(stack, amount);
+  }
+
+  @NotNull
   public static ItemStack consumeItem(ItemStack stack, int amount) {
     if (stack.getCount() <= amount) {
       return ItemStack.EMPTY;
@@ -91,20 +97,9 @@ public final class StackUtils {
     return stack;
   }
 
-  @NotNull
-  public static ItemStack consumeItem(ItemStack stack, EntityPlayer player, int amount) {
-
-    return player.isCreative() ? stack : consumeItem(stack, amount);
-  }
-
   public static void damageItem(ItemStack stack) {
 
     damageItem(stack, 1);
-  }
-
-  public static boolean doesStackMatchTool(ItemStack stack, String toolClass) {
-    Set<String> toolClasses = stack.getItem().getToolClasses(stack);
-    return toolClasses.contains(toolClass);
   }
 
   /**
@@ -119,6 +114,11 @@ public final class StackUtils {
     }
   }
 
+  public static boolean doesStackMatchTool(ItemStack stack, String toolClass) {
+    Set<String> toolClasses = stack.getItem().getToolClasses(stack);
+    return toolClasses.contains(toolClass);
+  }
+
   /**
    * Simple method to spawn items in the world at a precise location, rather than using InventoryHelper
    */
@@ -128,6 +128,18 @@ public final class StackUtils {
     }
     EntityItem entityitem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack);
     world.spawnEntity(entityitem);
+  }
+
+  /**
+   * Sets a stack compound to an ItemStack if it does not have one.
+   *
+   * @param stack The stack to set the tag of.
+   * @return The stack, for convenience.
+   */
+  public static ItemStack prepareStack(ItemStack stack) {
+
+    prepareStackTag(stack);
+    return stack;
   }
 
   /**
@@ -142,18 +154,6 @@ public final class StackUtils {
     }
 
     return stack.getTagCompound();
-  }
-
-  /**
-   * Sets a stack compound to an ItemStack if it does not have one.
-   *
-   * @param stack The stack to set the tag of.
-   * @return The stack, for convenience.
-   */
-  public static ItemStack prepareStack(ItemStack stack) {
-
-    prepareStackTag(stack);
-    return stack;
   }
 
   /**
@@ -172,43 +172,6 @@ public final class StackUtils {
     }
 
     return setLoreTag(stack, loreList);
-  }
-
-  /**
-   * Reads the lore strings off of an ItemStack.
-   *
-   * @param stack The ItemStack to read.
-   * @return The lore on the stack. Can be empty.
-   */
-  public static List<String> getLore(ItemStack stack) {
-
-    final List<String> result = new ArrayList<>();
-    final NBTTagList lore = getLoreTag(stack);
-
-    if (!lore.isEmpty()) {
-      for (int l1 = 0; l1 < lore.tagCount(); ++l1) {
-        result.add(lore.getStringTagAt(l1));
-      }
-    }
-
-    return result;
-  }
-
-  /**
-   * Adds lore to the ItemStack, preserving the old lore.
-   *
-   * @param stack The stack to append the lore to.
-   * @param lore  The lore to append.
-   * @return The stack that was updated.
-   */
-  public static ItemStack appendLore(ItemStack stack, String... lore) {
-
-    final NBTTagList loreTag = getLoreTag(stack);
-
-    for (final String line : lore) {
-      loreTag.appendTag(new NBTTagString(line));
-    }
-    return stack;
   }
 
   /**
@@ -244,6 +207,26 @@ public final class StackUtils {
   }
 
   /**
+   * Reads the lore strings off of an ItemStack.
+   *
+   * @param stack The ItemStack to read.
+   * @return The lore on the stack. Can be empty.
+   */
+  public static List<String> getLore(ItemStack stack) {
+
+    final List<String> result = new ArrayList<>();
+    final NBTTagList lore = getLoreTag(stack);
+
+    if (!lore.isEmpty()) {
+      for (int l1 = 0; l1 < lore.tagCount(); ++l1) {
+        result.add(lore.getStringTagAt(l1));
+      }
+    }
+
+    return result;
+  }
+
+  /**
    * Gets the lore tag from a stack, creates it if it does not exist.
    *
    * @param stack The stack to get the lore tag of.
@@ -259,6 +242,23 @@ public final class StackUtils {
     }
 
     return nbt.getTagList("Lore", NBT.TAG_STRING);
+  }
+
+  /**
+   * Adds lore to the ItemStack, preserving the old lore.
+   *
+   * @param stack The stack to append the lore to.
+   * @param lore  The lore to append.
+   * @return The stack that was updated.
+   */
+  public static ItemStack appendLore(ItemStack stack, String... lore) {
+
+    final NBTTagList loreTag = getLoreTag(stack);
+
+    for (final String line : lore) {
+      loreTag.appendTag(new NBTTagString(line));
+    }
+    return stack;
   }
 
   /**
@@ -287,6 +287,25 @@ public final class StackUtils {
     final int damage = parts.length > 1 ? Integer.parseInt(parts[1]) : 0;
     return contents instanceof Item ? new ItemStack((Item) contents, 1, damage)
             : new ItemStack((Block) contents, 1, damage);
+  }
+
+  /**
+   * A blend between the itemRegistry.getObject and bockRegistry.getObject methods. Used for grabbing something from an ID, when you have no clue what it might be.
+   *
+   * @param name The ID of the thing you're looking for. Domains are often preferred.
+   * @return Hopefully the thing you're looking for.
+   */
+  public static Object getThingByName(String name) {
+
+    Object thing = Item.getByNameOrId(name);
+
+    if (thing != null) {
+      return thing;
+    }
+
+    thing = Block.getBlockFromName(name);
+
+    return thing;
   }
 
   /**
@@ -328,6 +347,20 @@ public final class StackUtils {
   }
 
   /**
+   * Checks if two item stacks are similar, and the first stack contains all nbt of the second stack.
+   *
+   * @param firstStack  The first stack to check.
+   * @param secondStack The second stack to check.
+   * @return Whether or not the stacks are similar.
+   */
+  public static boolean areStacksSimilarWithPartialNBT(ItemStack firstStack,
+          ItemStack secondStack) {
+
+    return areStacksSimilar(firstStack, secondStack) && NBTUtils.containsAllTags(
+            getTagCleanly(firstStack), getTagCleanly(secondStack));
+  }
+
+  /**
    * Checks to see if two ItemStacks are similar. A similar stack has the same item, and the same damage.
    *
    * @param firstStack  The first stack to check.
@@ -342,30 +375,15 @@ public final class StackUtils {
   }
 
   /**
-   * Checks to see if two ItemStacks are similar. A similar stack has the same item, and the same damage and same size.
+   * Gets an NBTTagCompound from a stack without polluting the original input stack. If the stack does not have a tag, you will get a new one. This new tag will NOT
+   * be set to the stack automatically.
    *
-   * @param firstStack  The first stack to check.
-   * @param secondStack The second stack to check.
-   * @return booleanTrue if stacks are similar, or if both are null.
+   * @param stack The stack to check.
+   * @return The nbt data for the stack.
    */
-  public static boolean areStacksSimilarWithSize(ItemStack firstStack, ItemStack secondStack) {
+  public static NBTTagCompound getTagCleanly(ItemStack stack) {
 
-    return areStacksSimilar(firstStack, secondStack)
-            && firstStack.getCount() == secondStack.getCount();
-  }
-
-  /**
-   * Checks if two item stacks are similar, and the first stack contains all nbt of the second stack.
-   *
-   * @param firstStack  The first stack to check.
-   * @param secondStack The second stack to check.
-   * @return Whether or not the stacks are similar.
-   */
-  public static boolean areStacksSimilarWithPartialNBT(ItemStack firstStack,
-          ItemStack secondStack) {
-
-    return areStacksSimilar(firstStack, secondStack) && NBTUtils.containsAllTags(
-            getTagCleanly(firstStack), getTagCleanly(secondStack));
+    return stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
   }
 
   /**
@@ -401,6 +419,19 @@ public final class StackUtils {
       return hasOreName(stack, (String) recipe);
     }
     return false;
+  }
+
+  /**
+   * Checks to see if two ItemStacks are similar. A similar stack has the same item, and the same damage and same size.
+   *
+   * @param firstStack  The first stack to check.
+   * @param secondStack The second stack to check.
+   * @return booleanTrue if stacks are similar, or if both are null.
+   */
+  public static boolean areStacksSimilarWithSize(ItemStack firstStack, ItemStack secondStack) {
+
+    return areStacksSimilar(firstStack, secondStack)
+            && firstStack.getCount() == secondStack.getCount();
   }
 
   /**
@@ -456,6 +487,25 @@ public final class StackUtils {
   }
 
   /**
+   * A check to see if an ItemStack exists within an array of other ItemStack.
+   *
+   * @param stack    The ItemStack you are searching for.
+   * @param checkNBT Should the stacks need the same NBT for them to be the same?
+   * @param stacks   The array of ItemStack to search through.
+   * @return booleanWhether or not the array contains the stack you are looking for.
+   */
+  public static boolean isStackInArray(ItemStack stack, boolean checkNBT, ItemStack... stacks) {
+
+    for (final ItemStack currentStack : stacks) {
+      if (areStacksEqual(stack, currentStack, checkNBT)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
    * Checks if two given ItemStack are equal. For them to be equal, both must be null, or both must have a null item, or both must share a damage value. If either
    * stack has a wild card damage value, they will also be considered the same. If the checkNBT parameter is true, they will also need the same item nbt.
    *
@@ -495,25 +545,6 @@ public final class StackUtils {
   }
 
   /**
-   * A check to see if an ItemStack exists within an array of other ItemStack.
-   *
-   * @param stack    The ItemStack you are searching for.
-   * @param checkNBT Should the stacks need the same NBT for them to be the same?
-   * @param stacks   The array of ItemStack to search through.
-   * @return booleanWhether or not the array contains the stack you are looking for.
-   */
-  public static boolean isStackInArray(ItemStack stack, boolean checkNBT, ItemStack... stacks) {
-
-    for (final ItemStack currentStack : stacks) {
-      if (areStacksEqual(stack, currentStack, checkNBT)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  /**
    * Copies an ItemStack with a new size value.
    *
    * @param stack The ItemStack to copy.
@@ -525,25 +556,6 @@ public final class StackUtils {
     final ItemStack output = stack.copy();
     output.setCount(size);
     return output;
-  }
-
-  /**
-   * A blend between the itemRegistry.getObject and bockRegistry.getObject methods. Used for grabbing something from an ID, when you have no clue what it might be.
-   *
-   * @param name The ID of the thing you're looking for. Domains are often preferred.
-   * @return Hopefully the thing you're looking for.
-   */
-  public static Object getThingByName(String name) {
-
-    Object thing = Item.getByNameOrId(name);
-
-    if (thing != null) {
-      return thing;
-    }
-
-    thing = Block.getBlockFromName(name);
-
-    return thing;
   }
 
   /**
@@ -629,6 +641,17 @@ public final class StackUtils {
   }
 
   /**
+   * Gets an array of all variations of an item. This method will grab items from the creative tab entries of an item, and can possibly be slow.
+   *
+   * @param item The item to get variations of.
+   * @return An array of all the variations of the item.
+   */
+  public static ItemStack[] getAllItems(Item item) {
+
+    return findVariations(item).toArray(new ItemStack[0]);
+  }
+
+  /**
    * Finds all the variations of an item, but checking it's {@link Item#getSubItems(CreativeTabs, NonNullList)} results.
    *
    * @param item The item to check for variations of.
@@ -672,17 +695,6 @@ public final class StackUtils {
   }
 
   /**
-   * Gets an array of all variations of an item. This method will grab items from the creative tab entries of an item, and can possibly be slow.
-   *
-   * @param item The item to get variations of.
-   * @return An array of all the variations of the item.
-   */
-  public static ItemStack[] getAllItems(Item item) {
-
-    return findVariations(item).toArray(new ItemStack[0]);
-  }
-
-  /**
    * Gets the identifier for an ItemStack. If the stack is empty or null, the id for air will be given.
    *
    * @param stack The ItemStack to get the identifier of.
@@ -692,18 +704,6 @@ public final class StackUtils {
 
     return stack != null && !stack.isEmpty() ? stack.getItem().getRegistryName().toString()
             : "minecraft:air";
-  }
-
-  /**
-   * Gets an NBTTagCompound from a stack without polluting the original input stack. If the stack does not have a tag, you will get a new one. This new tag will NOT
-   * be set to the stack automatically.
-   *
-   * @param stack The stack to check.
-   * @return The nbt data for the stack.
-   */
-  public static NBTTagCompound getTagCleanly(ItemStack stack) {
-
-    return stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
   }
 
   /**

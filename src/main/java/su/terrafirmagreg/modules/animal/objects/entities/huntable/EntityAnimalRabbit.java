@@ -55,7 +55,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
 
   private static final int DAYS_TO_ADULTHOOD = 16;
   private static final DataParameter<Integer> RABBIT_TYPE = EntityDataManager.createKey(
-      EntityAnimalRabbit.class, DataSerializers.VARINT);
+          EntityAnimalRabbit.class, DataSerializers.VARINT);
 
   private int jumpTicks;
   private int jumpDuration;
@@ -65,7 +65,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
   @SuppressWarnings("unused")
   public EntityAnimalRabbit(World worldIn) {
     this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-        getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+            getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
   public EntityAnimalRabbit(World worldIn, Gender gender, int birthDay) {
@@ -76,13 +76,19 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
     this.setMovementSpeed(0.0D);
   }
 
+  public void setMovementSpeed(double newSpeed) {
+    this.getNavigator().setSpeed(newSpeed);
+    this.moveHelper.setMoveTo(this.moveHelper.getX(), this.moveHelper.getY(),
+            this.moveHelper.getZ(), newSpeed);
+  }
+
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TAIGA || biomeType == BiomeHelper.BiomeType.PLAINS
-            || biomeType == BiomeHelper.BiomeType.TUNDRA)) {
+            (biomeType == BiomeHelper.BiomeType.TAIGA || biomeType == BiomeHelper.BiomeType.PLAINS
+                    || biomeType == BiomeHelper.BiomeType.TUNDRA)) {
       return ConfigAnimal.ENTITIES.RABBIT.rarity;
     }
     return 0;
@@ -123,7 +129,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
         if (this.moveHelper.isUpdating() && this.currentMoveTypeDuration == 0) {
           Path path = this.navigator.getPath();
           Vec3d vec3d = new Vec3d(this.moveHelper.getX(), this.moveHelper.getY(),
-              this.moveHelper.getZ());
+                  this.moveHelper.getZ());
 
           if (path != null && path.getCurrentPathIndex() < path.getCurrentPathLength()) {
             vec3d = path.getPosition(this);
@@ -151,24 +157,14 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
     }
   }
 
-  public int getRabbitType() {
-    return this.dataManager.get(RABBIT_TYPE);
+  private void checkLandingDelay() {
+    this.updateMoveTypeDuration();
+    this.disableJumpControl();
   }
 
-  public void setRabbitType(int rabbitTypeId) {
-    this.dataManager.set(RABBIT_TYPE, rabbitTypeId);
-  }
-
-  @SideOnly(Side.CLIENT)
-  public float getJumpCompletion(float p_175521_1_) {
-    return this.jumpDuration == 0 ? 0.0F
-        : ((float) this.jumpTicks + p_175521_1_) / (float) this.jumpDuration;
-  }
-
-  public void setMovementSpeed(double newSpeed) {
-    this.getNavigator().setSpeed(newSpeed);
-    this.moveHelper.setMoveTo(this.moveHelper.getX(), this.moveHelper.getY(),
-        this.moveHelper.getZ(), newSpeed);
+  private void calculateRotationYaw(double x, double z) {
+    this.rotationYaw =
+            (float) (MathHelper.atan2(z - this.posZ, x - this.posX) * (180D / Math.PI)) - 90.0F;
   }
 
   public void startJumping() {
@@ -177,21 +173,30 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
     this.jumpTicks = 0;
   }
 
-  @Override
-  public void birthChildren() {
-    int numberOfChildren = 5 + rand.nextInt(5); // 5-10
-    for (int i = 0; i < numberOfChildren; i++) {
-      EntityAnimalRabbit baby = new EntityAnimalRabbit(this.world,
-          Gender.valueOf(MathConstants.RNG.nextBoolean()),
-          (int) Calendar.PLAYER_TIME.getTotalDays());
-      baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
-      this.world.spawnEntity(baby);
+  private void enableJumpControl() {
+    ((RabbitJumpHelper) this.jumpHelper).setCanJump(true);
+  }
+
+  protected SoundEvent getJumpSound() {
+    return SoundEvents.ENTITY_RABBIT_JUMP;
+  }
+
+  private void updateMoveTypeDuration() {
+    if (this.moveHelper.getSpeed() < 2.2D) {
+      this.currentMoveTypeDuration = 10;
+    } else {
+      this.currentMoveTypeDuration = 1;
     }
   }
 
-  @Override
-  public long gestationDays() {
-    return 0;
+  private void disableJumpControl() {
+    ((RabbitJumpHelper) this.jumpHelper).setCanJump(false);
+  }
+
+  @SideOnly(Side.CLIENT)
+  public float getJumpCompletion(float p_175521_1_) {
+    return this.jumpDuration == 0 ? 0.0F
+            : ((float) this.jumpTicks + p_175521_1_) / (float) this.jumpDuration;
   }
 
   @Override
@@ -212,9 +217,34 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
     }
   }
 
+  @Override
+  public long gestationDays() {
+    return 0;
+  }
+
+  @Override
+  public void birthChildren() {
+    int numberOfChildren = 5 + rand.nextInt(5); // 5-10
+    for (int i = 0; i < numberOfChildren; i++) {
+      EntityAnimalRabbit baby = new EntityAnimalRabbit(this.world,
+              Gender.valueOf(MathConstants.RNG.nextBoolean()),
+              (int) Calendar.PLAYER_TIME.getTotalDays());
+      baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
+      this.world.spawnEntity(baby);
+    }
+  }
+
   public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
     super.writeEntityToNBT(nbt);
     NBTUtils.setGenericNBTValue(nbt, "RabbitType", this.getRabbitType());
+  }
+
+  public int getRabbitType() {
+    return this.dataManager.get(RABBIT_TYPE);
+  }
+
+  public void setRabbitType(int rabbitTypeId) {
+    this.dataManager.set(RABBIT_TYPE, rabbitTypeId);
   }
 
   public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
@@ -239,13 +269,13 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
   }
 
   @Override
-  public boolean canMateWith(EntityAnimal otherAnimal) {
-    return false;
+  public double getOldDeathChance() {
+    return 0;
   }
 
   @Override
-  public double getOldDeathChance() {
-    return 0;
+  public boolean canMateWith(EntityAnimal otherAnimal) {
+    return false;
   }
 
   @Override
@@ -269,7 +299,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
     super.applyEntityAttributes();
     this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(3.0D);
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-        .setBaseValue(0.30000001192092896D);
+            .setBaseValue(0.30000001192092896D);
   }
 
   @Override
@@ -284,7 +314,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
 
   @Nullable
   public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-      @Nullable IEntityLivingData livingdata) {
+          @Nullable IEntityLivingData livingdata) {
     livingdata = super.onInitialSpawn(difficulty, livingdata);
     int i = this.getRandomRabbitType();
 
@@ -299,8 +329,14 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
     return livingdata;
   }
 
-  protected SoundEvent getJumpSound() {
-    return SoundEvents.ENTITY_RABBIT_JUMP;
+  private int getRandomRabbitType() {
+    Biome biome = this.world.getBiome(new BlockPos(this));
+    int i = this.rand.nextInt(100);
+    if (biome.isSnowyBiome()) {
+      return i < 5 ? 7 : (i < 10 ? 6 : (i < 80 ? 1 : 3));
+    } else {
+      return i < 50 ? 0 : (i < 90 ? 5 : (i < 95 ? 2 : 4));
+    }
   }
 
   @Override
@@ -315,7 +351,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
 
   protected float getJumpUpwardsMotion() {
     if (!this.collidedHorizontally && (!this.moveHelper.isUpdating()
-        || this.moveHelper.getY() <= this.posY + 0.5D)) {
+            || this.moveHelper.getY() <= this.posY + 0.5D)) {
       Path path = this.navigator.getPath();
 
       if (path != null && path.getCurrentPathIndex() < path.getCurrentPathLength()) {
@@ -354,43 +390,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
 
     if (jumping) {
       this.playSound(this.getJumpSound(), this.getSoundVolume(),
-          ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) * 0.8F);
-    }
-  }
-
-  private void calculateRotationYaw(double x, double z) {
-    this.rotationYaw =
-        (float) (MathHelper.atan2(z - this.posZ, x - this.posX) * (180D / Math.PI)) - 90.0F;
-  }
-
-  private void enableJumpControl() {
-    ((RabbitJumpHelper) this.jumpHelper).setCanJump(true);
-  }
-
-  private void disableJumpControl() {
-    ((RabbitJumpHelper) this.jumpHelper).setCanJump(false);
-  }
-
-  private void updateMoveTypeDuration() {
-    if (this.moveHelper.getSpeed() < 2.2D) {
-      this.currentMoveTypeDuration = 10;
-    } else {
-      this.currentMoveTypeDuration = 1;
-    }
-  }
-
-  private void checkLandingDelay() {
-    this.updateMoveTypeDuration();
-    this.disableJumpControl();
-  }
-
-  private int getRandomRabbitType() {
-    Biome biome = this.world.getBiome(new BlockPos(this));
-    int i = this.rand.nextInt(100);
-    if (biome.isSnowyBiome()) {
-      return i < 5 ? 7 : (i < 10 ? 6 : (i < 80 ? 1 : 3));
-    } else {
-      return i < 50 ? 0 : (i < 90 ? 5 : (i < 95 ? 2 : 4));
+              ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) * 0.8F);
     }
   }
 
@@ -418,7 +418,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
 
     public void onUpdateMoveHelper() {
       if (this.rabbit.onGround && !this.rabbit.isJumping
-          && !((RabbitJumpHelper) this.rabbit.jumpHelper).isJumping()) {
+              && !((RabbitJumpHelper) this.rabbit.jumpHelper).isJumping()) {
         this.rabbit.setMovementSpeed(0.0D);
       } else if (this.isUpdating()) {
         this.rabbit.setMovementSpeed(this.nextJumpSpeed);

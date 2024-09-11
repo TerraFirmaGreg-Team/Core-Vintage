@@ -50,11 +50,11 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
   private static final int DAYS_TO_ADULTHOOD = 96;
   //Values that has a visual effect on client
   private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(
-      EntityAnimalParrot.class, DataSerializers.BOOLEAN);
+          EntityAnimalParrot.class, DataSerializers.BOOLEAN);
   private static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(
-      EntityAnimalParrot.class, DataSerializers.VARINT);
+          EntityAnimalParrot.class, DataSerializers.VARINT);
   private static final DataParameter<Float> FAMILIARITY = EntityDataManager.createKey(
-      EntityAnimalParrot.class, DataSerializers.FLOAT);
+          EntityAnimalParrot.class, DataSerializers.FLOAT);
   private long lastFed; //Last time(in days) this entity was fed
   private long lastFDecay; //Last time(in days) this entity's familiarity had decayed
   private boolean fertilized; //Is this female fertilized? (in oviparous, the egg laying is fertilized, for mammals this is pregnancy)
@@ -64,7 +64,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
   @SuppressWarnings("unused")
   public EntityAnimalParrot(World world) {
     this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-        EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+            EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
   public EntityAnimalParrot(World world, IAnimal.Gender gender, int birthDay) {
@@ -77,6 +77,22 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
     this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
     this.lastFDecay = Calendar.PLAYER_TIME.getTotalDays();
     this.fertilized = false;
+  }
+
+  @Override
+  public void setGrowingAge(int age) {
+    super.setGrowingAge(0); // Ignoring this
+  }
+
+  @Override
+  public boolean isChild() {
+    return this.getAge() == IAnimal.Age.CHILD;
+  }
+
+  @Override
+  public void setScaleForAge(boolean child) {
+    double ageScale = 1 / (2.0D - getPercentToAdulthood());
+    this.setScale((float) ageScale);
   }
 
   @Override
@@ -150,7 +166,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
               this.setFamiliarity(familiarity);
             }
             world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP,
-                SoundCategory.AMBIENT, 1.0F, 1.0F);
+                    SoundCategory.AMBIENT, 1.0F, 1.0F);
           }
           return true;
         }
@@ -167,9 +183,9 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-        && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-        && !this.world.containsAnyLiquid(getEntityBoundingBox())
-        && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+            && !this.world.containsAnyLiquid(getEntityBoundingBox())
+            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @Override
@@ -183,7 +199,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
   @Override
   public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
     return new EntityAnimalParrot(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-        (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
+            (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
   }
 
   @Override
@@ -236,6 +252,11 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
   }
 
   @Override
+  public float getAdultFamiliarityCap() {
+    return 0.4f;
+  }
+
+  @Override
   public int getBirthDay() {
     return this.dataManager.get(BIRTHDAY);
   }
@@ -246,8 +267,16 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
   }
 
   @Override
-  public float getAdultFamiliarityCap() {
-    return 0.4f;
+  public int getDaysToAdulthood() {
+    return DAYS_TO_ADULTHOOD;
+  }
+
+  @Override
+  public boolean isReadyToMate() {
+    // At the time I wrote this, I decided to stick to vanilla.
+    // Should we change this I think we also need to think how they would lay eggs
+    // Because copying chicken mechanics for parrots is weird
+    return false;
   }
 
   @Override
@@ -277,26 +306,13 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
   }
 
   @Override
-  public int getDaysToAdulthood() {
-    return DAYS_TO_ADULTHOOD;
+  public boolean isHungry() {
+    return lastFed < Calendar.PLAYER_TIME.getTotalDays();
   }
 
   @Override
   public int getDaysToElderly() {
     return 0;
-  }
-
-  @Override
-  public boolean isReadyToMate() {
-    // At the time I wrote this, I decided to stick to vanilla.
-    // Should we change this I think we also need to think how they would lay eggs
-    // Because copying chicken mechanics for parrots is weird
-    return false;
-  }
-
-  @Override
-  public boolean isHungry() {
-    return lastFed < Calendar.PLAYER_TIME.getTotalDays();
   }
 
   @Override
@@ -308,23 +324,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
     return new TextComponentTranslation(
-        ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
-  }
-
-  @Override
-  public void setGrowingAge(int age) {
-    super.setGrowingAge(0); // Ignoring this
-  }
-
-  @Override
-  public boolean isChild() {
-    return this.getAge() == IAnimal.Age.CHILD;
-  }
-
-  @Override
-  public void setScaleForAge(boolean child) {
-    double ageScale = 1 / (2.0D - getPercentToAdulthood());
-    this.setScale((float) ageScale);
+            ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
   }
 
   @NotNull
@@ -339,11 +339,11 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST
-            || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
+            (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST
+                    || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
       return ConfigAnimal.ENTITIES.PARROT.rarity;
     }
     return 0;

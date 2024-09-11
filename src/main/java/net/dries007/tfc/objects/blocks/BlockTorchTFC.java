@@ -50,18 +50,14 @@ public class BlockTorchTFC extends BlockTorch implements ICapabilitySize {
     OreDictionaryHelper.register(this, "torch");
   }
 
-  public static boolean canLight(ItemStack stack) {
-    return stack.getItem() == Item.getItemFromBlock(Blocks.TORCH) || ItemFireStarter.canIgnite(stack);
+  @Override
+  public @NotNull Weight getWeight(@NotNull ItemStack stack) {
+    return Weight.LIGHT; // Stacksize = 32
   }
 
   @Override
   public @NotNull Size getSize(@NotNull ItemStack stack) {
     return Size.SMALL; // Can store anywhere
-  }
-
-  @Override
-  public @NotNull Weight getWeight(@NotNull ItemStack stack) {
-    return Weight.LIGHT; // Stacksize = 32
   }
 
   @Override
@@ -128,6 +124,10 @@ public class BlockTorchTFC extends BlockTorch implements ICapabilitySize {
       }
     }
     return true;
+  }
+
+  public static boolean canLight(ItemStack stack) {
+    return stack.getItem() == Item.getItemFromBlock(Blocks.TORCH) || ItemFireStarter.canIgnite(stack);
   }
 
   @Override

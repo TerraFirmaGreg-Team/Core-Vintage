@@ -77,6 +77,18 @@ public abstract class GuiContainerKnapping extends BaseGuiContainer {
   }
 
   @Override
+  protected void actionPerformed(@NotNull GuiButton button) {
+    if (button instanceof GuiButtonKnapping guiButtonKnapping) {
+      guiButtonKnapping.onClick();
+      button.playPressSound(mc.getSoundHandler());
+      // Set the client-side matrix
+      if (inventorySlots instanceof ContainerBaseKnapping containerBaseKnapping) {
+        containerBaseKnapping.setSlotState(button.id, false);
+      }
+    }
+  }
+
+  @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     // Check if the container has been updated
     if (inventorySlots instanceof ContainerBaseKnapping containerBaseKnapping && containerBaseKnapping.requiresReset) {
@@ -98,18 +110,6 @@ public abstract class GuiContainerKnapping extends BaseGuiContainer {
         if (!button.visible) {
           Gui.drawModalRectWithCustomSizedTexture(button.x, button.y, 0, 0, 16, 16, 16, 16);
         }
-      }
-    }
-  }
-
-  @Override
-  protected void actionPerformed(@NotNull GuiButton button) {
-    if (button instanceof GuiButtonKnapping guiButtonKnapping) {
-      guiButtonKnapping.onClick();
-      button.playPressSound(mc.getSoundHandler());
-      // Set the client-side matrix
-      if (inventorySlots instanceof ContainerBaseKnapping containerBaseKnapping) {
-        containerBaseKnapping.setSlotState(button.id, false);
       }
     }
   }

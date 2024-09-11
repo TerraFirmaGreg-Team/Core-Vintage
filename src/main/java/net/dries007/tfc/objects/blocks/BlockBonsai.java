@@ -66,6 +66,12 @@ public class BlockBonsai extends BlockNonCube {
   }
 
   @Override
+  @SuppressWarnings("deprecation")
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return BlockLargePlanter.HALF_BLOCK_SHAPE;
+  }
+
+  @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     if (!world.isRemote) {
       var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
@@ -80,7 +86,7 @@ public class BlockBonsai extends BlockNonCube {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-      float hitY, float hitZ) {
+          float hitY, float hitZ) {
     if (!world.isRemote) {
       var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
       if (tile == null) {
@@ -108,12 +114,6 @@ public class BlockBonsai extends BlockNonCube {
       tile.resetCounter();
     }
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return BlockLargePlanter.HALF_BLOCK_SHAPE;
   }
 
   @Override

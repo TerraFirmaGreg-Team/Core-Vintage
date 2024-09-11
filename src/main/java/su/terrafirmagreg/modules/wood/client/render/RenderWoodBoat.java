@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.wood.client.render;
 
 import su.terrafirmagreg.api.util.ColourUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodBoat;
+import su.terrafirmagreg.modules.wood.object.entity.EntityWoodBoat;
 
 import net.minecraft.client.model.IMultipassModel;
 import net.minecraft.client.model.ModelBase;
@@ -28,7 +28,7 @@ public class RenderWoodBoat extends Render<EntityWoodBoat> {
 
   @Override
   public void doRender(EntityWoodBoat entity, double x, double y, double z, float entityYaw,
-      float partialTicks) {
+          float partialTicks) {
     var woodType = entity.getWood();
     GlStateManager.pushMatrix();
     this.setupTranslation(x, y, z);
@@ -69,14 +69,18 @@ public class RenderWoodBoat extends Render<EntityWoodBoat> {
 
   @Override
   public void renderMultipass(EntityWoodBoat entityIn, double x, double y, double z,
-      float entityYaw, float partialTicks) {
+          float entityYaw, float partialTicks) {
     GlStateManager.pushMatrix();
     this.setupTranslation(x, y, z);
     this.setupRotation(entityIn, entityYaw, partialTicks);
     this.bindEntityTexture(entityIn);
     ((IMultipassModel) this.modelBoat).renderMultipass(entityIn, partialTicks, 0.0F, -0.1F, 0.0F,
-        0.0F, 0.0625F);
+            0.0F, 0.0625F);
     GlStateManager.popMatrix();
+  }
+
+  private void setupTranslation(double x, double y, double z) {
+    GlStateManager.translate((float) x, (float) y + 0.375F, (float) z);
   }
 
   private void setupRotation(EntityBoat entityIn, float entityYaw, float partialTicks) {
@@ -90,14 +94,10 @@ public class RenderWoodBoat extends Render<EntityWoodBoat> {
 
     if (f > 0.0F) {
       GlStateManager.rotate(
-          MathHelper.sin(f) * f * f1 / 10.0F * (float) entityIn.getForwardDirection(), 1.0F, 0.0F,
-          0.0F);
+              MathHelper.sin(f) * f * f1 / 10.0F * (float) entityIn.getForwardDirection(), 1.0F, 0.0F,
+              0.0F);
     }
 
     GlStateManager.scale(-1.0F, -1.0F, 1.0F);
-  }
-
-  private void setupTranslation(double x, double y, double z) {
-    GlStateManager.translate((float) x, (float) y + 0.375F, (float) z);
   }
 }

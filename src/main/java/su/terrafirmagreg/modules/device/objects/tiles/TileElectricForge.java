@@ -147,6 +147,46 @@ public class TileElectricForge extends BaseTileInventory
     }
   }
 
+  private void handleInputMelting(ItemStack stack, int index) {
+    HeatRecipe recipe = cachedRecipes[index];
+    var cap = CapabilityHeat.get(stack);
+
+    if (recipe != null && cap != null && recipe.isValidTemperature(cap.getTemperature())) {
+      // Handle possible metal output
+      FluidStack fluidStack = recipe.getOutputFluid(stack);
+      float itemTemperature = cap.getTemperature();
+      if (fluidStack != null) {
+        // Loop through all input slots
+        for (int i = SLOT_EXTRA_MIN; i <= SLOT_EXTRA_MAX; i++) {
+          // While the fluid is still waiting
+          if (fluidStack.amount <= 0) {
+            break;
+          }
+          // Try an output slot
+          ItemStack output = inventory.getStackInSlot(i);
+          // Fill the fluid
+          IFluidHandler fluidHandler = output.getCapability(
+                  CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+          if (fluidHandler != null) {
+            int amountFilled = fluidHandler.fill(fluidStack.copy(), true);
+            if (amountFilled > 0) {
+              fluidStack.amount -= amountFilled;
+
+              // If the fluid was filled, make sure to make it the same temperature
+              var heatHandler = CapabilityHeat.get(stack);
+              if (heatHandler != null) {
+                heatHandler.setTemperature(itemTemperature);
+              }
+            }
+          }
+        }
+      }
+
+      // Handle possible item output
+      inventory.setStackInSlot(index, recipe.getOutputStack(stack));
+    }
+  }
+
   @Override
   public void setAndUpdateSlots(int slot) {
     this.markDirty();
@@ -203,6 +243,16 @@ public class TileElectricForge extends BaseTileInventory
     return super.getCapability(capability, facing);
   }
 
+  private void updateCachedRecipes() {
+    for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; ++i) {
+      this.cachedRecipes[i] = null;
+      ItemStack inputStack = this.inventory.getStackInSlot(i);
+      if (!inputStack.isEmpty()) {
+        this.cachedRecipes[i] = HeatRecipe.get(inputStack);
+      }
+    }
+  }
+
   @Override
   public int getSlotLimit(int slot) {
     return 1;
@@ -256,6 +306,12 @@ public class TileElectricForge extends BaseTileInventory
     return SoundsDevice.INDUCTION_WORK;
   }
 
+  @SideOnly(Side.CLIENT)
+  @Override
+  public BlockPos getSoundPos() {
+    return this.getPos();
+  }
+
   @Override
   public boolean shouldPlay() {
     if (!this.isInvalid()) {
@@ -268,21 +324,6 @@ public class TileElectricForge extends BaseTileInventory
   @Override
   public boolean isPlaying() {
     return soundPlay;
-  }
-
-  @Override
-  public void setPlaying(boolean value) {
-    soundPlay = value;
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Override
-  public BlockPos getSoundPos() {
-    return this.getPos();
-  }
-
-  public int getEnergyStored() {
-    return energyContainer.getEnergyStored();
   }
 
   //    @Override
@@ -309,54 +350,24 @@ public class TileElectricForge extends BaseTileInventory
   //                .getOpposite());
   //    }
 
-  private void handleInputMelting(ItemStack stack, int index) {
-    HeatRecipe recipe = cachedRecipes[index];
-    var cap = CapabilityHeat.get(stack);
-
-    if (recipe != null && cap != null && recipe.isValidTemperature(cap.getTemperature())) {
-      // Handle possible metal output
-      FluidStack fluidStack = recipe.getOutputFluid(stack);
-      float itemTemperature = cap.getTemperature();
-      if (fluidStack != null) {
-        // Loop through all input slots
-        for (int i = SLOT_EXTRA_MIN; i <= SLOT_EXTRA_MAX; i++) {
-          // While the fluid is still waiting
-          if (fluidStack.amount <= 0) {
-            break;
-          }
-          // Try an output slot
-          ItemStack output = inventory.getStackInSlot(i);
-          // Fill the fluid
-          IFluidHandler fluidHandler = output.getCapability(
-                  CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-          if (fluidHandler != null) {
-            int amountFilled = fluidHandler.fill(fluidStack.copy(), true);
-            if (amountFilled > 0) {
-              fluidStack.amount -= amountFilled;
-
-              // If the fluid was filled, make sure to make it the same temperature
-              var heatHandler = CapabilityHeat.get(stack);
-              if (heatHandler != null) {
-                heatHandler.setTemperature(itemTemperature);
-              }
-            }
-          }
-        }
-      }
-
-      // Handle possible item output
-      inventory.setStackInSlot(index, recipe.getOutputStack(stack));
-    }
+  @Override
+  public void setPlaying(boolean value) {
+    soundPlay = value;
   }
 
-  private void updateCachedRecipes() {
-    for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; ++i) {
-      this.cachedRecipes[i] = null;
-      ItemStack inputStack = this.inventory.getStackInSlot(i);
-      if (!inputStack.isEmpty()) {
-        this.cachedRecipes[i] = HeatRecipe.get(inputStack);
-      }
+  public int getEnergyStored() {
+    return energyContainer.getEnergyStored();
+  }
+
+  @Override
+  public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
+    float temp = TileCrucible.FIELD_TEMPERATURE;
+    float change = temp / 100f;
+    float potency = temp / 350f;
+    if (ModifierTile.hasProtection(player)) {
+      change = change * 0.3F;
     }
+    return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
   }
 
   @Override
@@ -372,14 +383,5 @@ public class TileElectricForge extends BaseTileInventory
             this);
   }
 
-  @Override
-  public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
-    float temp = TileCrucible.FIELD_TEMPERATURE;
-    float change = temp / 100f;
-    float potency = temp / 350f;
-    if (ModifierTile.hasProtection(player)) {
-      change = change * 0.3F;
-    }
-    return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
-  }
+
 }

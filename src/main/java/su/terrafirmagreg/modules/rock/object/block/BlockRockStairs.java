@@ -31,8 +31,8 @@ public class BlockRockStairs extends BaseBlockStairs implements IRockBlock {
   private final RockBlockVariant variant;
   private final RockType type;
 
-  public BlockRockStairs(RockBlockVariant model, RockBlockVariant variant, RockType type) {
-    super(model.get(type));
+  public BlockRockStairs(Block model, RockBlockVariant variant, RockType type) {
+    super(model);
 
     this.variant = variant;
     this.type = type;
@@ -53,16 +53,6 @@ public class BlockRockStairs extends BaseBlockStairs implements IRockBlock {
   }
 
   @Override
-  public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state) {
-    // Prevents chiseled smooth stone stairs from collapsing
-  }
-
-  @Override
-  public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    // Prevents cobble stairs from falling
-  }
-
-  @Override
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
           ITooltipFlag flagIn) {
@@ -71,6 +61,16 @@ public class BlockRockStairs extends BaseBlockStairs implements IRockBlock {
     tooltip.add(
             new TextComponentTranslation("rockcategory.name")
                     .getFormattedText() + ": " + this.getType().getCategory().getLocalizedName());
+  }
+
+  @Override
+  public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state) {
+    // Prevents chiseled smooth stone stairs from collapsing
+  }
+
+  @Override
+  public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+    // Prevents cobble stairs from falling
   }
 
 }

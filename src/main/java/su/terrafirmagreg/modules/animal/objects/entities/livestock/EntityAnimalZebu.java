@@ -29,7 +29,7 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
   @SuppressWarnings("unused")
   public EntityAnimalZebu(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-        getRandomGrowth(ConfigAnimal.ENTITIES.ZEBU.adulthood, ConfigAnimal.ENTITIES.ZEBU.elder));
+            getRandomGrowth(ConfigAnimal.ENTITIES.ZEBU.adulthood, ConfigAnimal.ENTITIES.ZEBU.elder));
   }
 
   public EntityAnimalZebu(World worldIn, Gender gender, int birthDay) {
@@ -39,13 +39,18 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
+            (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
       return ConfigAnimal.ENTITIES.ZEBU.rarity;
     }
     return 0;
+  }
+
+  @Override
+  public long gestationDays() {
+    return ConfigAnimal.ENTITIES.ZEBU.gestation;
   }
 
   @Override
@@ -53,17 +58,12 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
     int numberOfChildren = ConfigAnimal.ENTITIES.ZEBU.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalZebu baby = new EntityAnimalZebu(this.world, Gender.valueOf(RNG.nextBoolean()),
-          (int) Calendar.PLAYER_TIME.getTotalDays());
+              (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
-          : this.getFamiliarity() * 0.9F);
+              : this.getFamiliarity() * 0.9F);
       this.world.spawnEntity(baby);
     }
-  }
-
-  @Override
-  public long gestationDays() {
-    return ConfigAnimal.ENTITIES.ZEBU.gestation;
   }
 
   @Override
@@ -89,7 +89,7 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
   @Override
   public long getProductsCooldown() {
     return Math.max(0,
-        ConfigAnimal.ENTITIES.ZEBU.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
+            ConfigAnimal.ENTITIES.ZEBU.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override

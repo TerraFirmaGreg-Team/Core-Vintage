@@ -24,24 +24,27 @@ public class OreDictionaryHelper {
   private static final Joiner JOINER_UNDERSCORE = Joiner.on('_').skipNulls();
   private static final boolean done = false;
 
-  public static String toString(Object... parts) {
-    return UPPER_UNDERSCORE_TO_LOWER_CAMEL.convert(JOINER_UNDERSCORE.join(parts));
+  public static String toString(Object[] prefix, Object... parts) {
+    return toString(ImmutableList.builder().add(prefix).add(parts).build());
   }
 
   public static String toString(Iterable<Object> parts) {
     return UPPER_UNDERSCORE_TO_LOWER_CAMEL.convert(JOINER_UNDERSCORE.join(parts));
   }
 
-  public static String toString(Object[] prefix, Object... parts) {
-    return toString(ImmutableList.builder().add(prefix).add(parts).build());
-  }
-
   public static void register(Block thing, Object... parts) {
     register(new Thing(thing), parts);
   }
 
-  public static void register(Item thing, Object... parts) {
-    register(new Thing(thing), parts);
+  private static void register(Thing thing, Object... parts) {
+    if (done) {
+      throw new IllegalStateException("Cannot use the helper to register after postInit");
+    }
+    MAP.put(thing, toString(parts));
+  }
+
+  public static String toString(Object... parts) {
+    return UPPER_UNDERSCORE_TO_LOWER_CAMEL.convert(JOINER_UNDERSCORE.join(parts));
   }
 
   public static void registerMeta(Item thing, int meta, Object... parts) {
@@ -50,6 +53,10 @@ public class OreDictionaryHelper {
 
   public static void registerDamageType(Item thing, DamageType type) {
     register(thing, "damage", "type", type.name().toLowerCase());
+  }
+
+  public static void register(Item thing, Object... parts) {
+    register(new Thing(thing), parts);
   }
 
   /**
@@ -70,13 +77,6 @@ public class OreDictionaryHelper {
       }
     }
     return false;
-  }
-
-  private static void register(Thing thing, Object... parts) {
-    if (done) {
-      throw new IllegalStateException("Cannot use the helper to register after postInit");
-    }
-    MAP.put(thing, toString(parts));
   }
 
 }

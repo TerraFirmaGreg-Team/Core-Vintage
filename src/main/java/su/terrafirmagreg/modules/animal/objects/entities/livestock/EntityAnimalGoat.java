@@ -30,8 +30,8 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.data.MathConstants.RNG;
 
 /**
- * A Cow of the colder regions! Actually, goats also reach maturity + finish gestation faster than cows, and even give birth to more than one
- * individual, but produce milk once every 3 days
+ * A Cow of the colder regions! Actually, goats also reach maturity + finish gestation faster than cows, and even give birth to more than one individual, but produce
+ * milk once every 3 days
  */
 
 public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
@@ -42,7 +42,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
   @SuppressWarnings("unused")
   public EntityAnimalGoat(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-        getRandomGrowth(ConfigAnimal.ENTITIES.GOAT.adulthood, ConfigAnimal.ENTITIES.GOAT.elder));
+            getRandomGrowth(ConfigAnimal.ENTITIES.GOAT.adulthood, ConfigAnimal.ENTITIES.GOAT.elder));
   }
 
   public EntityAnimalGoat(World worldIn, Gender gender, int birthDay) {
@@ -56,14 +56,6 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
   }
 
   @Override
-  public void onLivingUpdate() {
-    if (world.isRemote) {
-      sheepTimer = Math.max(0, this.sheepTimer - 1);
-    }
-    super.onLivingUpdate();
-  }
-
-  @Override
   @SideOnly(Side.CLIENT)
   public void handleStatusUpdate(byte id) {
     if (id == (byte) 10) {
@@ -74,22 +66,27 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
   }
 
   @Override
-  protected void initEntityAI() {
-    super.initEntityAI();
-    tasks.taskEntries.removeIf(task -> task.action instanceof EntityAIEatGrass);
-    entityAnimalAILawnmower = new EntityAnimalAILawnmower(this);
-    tasks.addTask(6, entityAnimalAILawnmower);
+  public void onLivingUpdate() {
+    if (world.isRemote) {
+      sheepTimer = Math.max(0, this.sheepTimer - 1);
+    }
+    super.onLivingUpdate();
   }
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-      float floraDiversity) {
+          float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
+            (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
       return ConfigAnimal.ENTITIES.GOAT.rarity;
     }
     return 0;
+  }
+
+  @Override
+  public long gestationDays() {
+    return ConfigAnimal.ENTITIES.GOAT.gestation;
   }
 
   @Override
@@ -97,17 +94,12 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
     int numberOfChildren = ConfigAnimal.ENTITIES.GOAT.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalGoat baby = new EntityAnimalGoat(this.world, Gender.valueOf(RNG.nextBoolean()),
-          (int) Calendar.PLAYER_TIME.getTotalDays());
+              (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
-          : this.getFamiliarity() * 0.9F);
+              : this.getFamiliarity() * 0.9F);
       this.world.spawnEntity(baby);
     }
-  }
-
-  @Override
-  public long gestationDays() {
-    return ConfigAnimal.ENTITIES.GOAT.gestation;
   }
 
   @Override
@@ -133,7 +125,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
   @Override
   public long getProductsCooldown() {
     return Math.max(0,
-        ConfigAnimal.ENTITIES.GOAT.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
+            ConfigAnimal.ENTITIES.GOAT.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override
@@ -144,6 +136,14 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
   @Override
   protected SoundEvent getDeathSound() {
     return SoundsAnimal.ANIMAL_GOAT_DEATH;
+  }
+
+  @Override
+  protected void initEntityAI() {
+    super.initEntityAI();
+    tasks.taskEntries.removeIf(task -> task.action instanceof EntityAIEatGrass);
+    entityAnimalAILawnmower = new EntityAnimalAILawnmower(this);
+    tasks.addTask(6, entityAnimalAILawnmower);
   }
 
   @Override

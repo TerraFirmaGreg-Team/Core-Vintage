@@ -37,18 +37,6 @@ public final class ColourUtils {
     return (r & 0x0ff) << 16 | (g & 0x0ff) << 8 | b & 0x0ff;
   }
 
-  public static int multiplyRGBComponents(int colour, float factor) {
-    int r = (int) (getRed(colour) * factor);
-    int g = (int) (getGreen(colour) * factor);
-    int b = (int) (getBlue(colour) * factor);
-
-    r = Math.min(r, 255);
-    g = Math.min(g, 255);
-    b = Math.min(b, 255);
-
-    return (r & 0x0ff) << 16 | (g & 0x0ff) << 8 | b & 0x0ff;
-  }
-
   public static int getRed(int colour) {
     return (colour & 0xff0000) >> 16;
   }
@@ -59,6 +47,18 @@ public final class ColourUtils {
 
   public static int getBlue(int colour) {
     return colour & 0xff;
+  }
+
+  public static int multiplyRGBComponents(int colour, float factor) {
+    int r = (int) (getRed(colour) * factor);
+    int g = (int) (getGreen(colour) * factor);
+    int b = (int) (getBlue(colour) * factor);
+
+    r = Math.min(r, 255);
+    g = Math.min(g, 255);
+    b = Math.min(b, 255);
+
+    return (r & 0x0ff) << 16 | (g & 0x0ff) << 8 | b & 0x0ff;
   }
 
   public static float getRedAsFloat(int colour) {

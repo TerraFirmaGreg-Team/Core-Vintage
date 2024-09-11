@@ -201,11 +201,6 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
     return new ItemStack(ItemSeedsTFC.get(crop));
   }
 
-  @NotNull
-  public ICrop getCrop() {
-    return crop;
-  }
-
   public void checkGrowth(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (!worldIn.isRemote) {
       var tile = TileUtils.getTile(worldIn, pos, TECropBase.class);
@@ -260,17 +255,11 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
     }
   }
 
-  @Override
-  @NotNull
-  @SuppressWarnings("deprecation")
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return CROPS_AABB[state.getValue(getStageProperty())];
-  }
+  public abstract PropertyInteger getStageProperty();
 
   @NotNull
-  @Override
-  public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-    return EnumPlantType.Crop;
+  public ICrop getCrop() {
+    return crop;
   }
 
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
@@ -313,5 +302,16 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
     }
   }
 
-  public abstract PropertyInteger getStageProperty();
+  @Override
+  @NotNull
+  @SuppressWarnings("deprecation")
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return CROPS_AABB[state.getValue(getStageProperty())];
+  }
+
+  @NotNull
+  @Override
+  public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+    return EnumPlantType.Crop;
+  }
 }

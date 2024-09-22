@@ -12,13 +12,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 
 /**
  * This is the mother of all Container-with-a-Tile-Entity implementations
  *
  * @param <T> The Tile Entity class
  */
+@Getter
 public abstract class BaseContainerTile<T extends BaseTileInventory> extends BaseContainer {
 
   protected final T tile;
@@ -50,8 +51,8 @@ public abstract class BaseContainerTile<T extends BaseTileInventory> extends Bas
   }
 
   @Override
-  @NotNull
   public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+    ItemStack itemstack = ItemStack.EMPTY;
     // Slot that was clicked
     Slot slot = inventorySlots.get(index);
     if (slot != null && slot.getHasStack()) {
@@ -81,7 +82,7 @@ public abstract class BaseContainerTile<T extends BaseTileInventory> extends Bas
       slot.onTake(player, stackCopy);
       return stackCopy;
     }
-    return ItemStack.EMPTY;
+    return itemstack;
   }
 
   @Override

@@ -2,7 +2,7 @@ package lyeoj.tfcthings.event;
 
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalSheep;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep;
 import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
 
 import net.minecraft.block.state.IBlockState;

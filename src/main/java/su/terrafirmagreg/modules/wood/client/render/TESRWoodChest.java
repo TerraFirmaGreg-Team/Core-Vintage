@@ -68,7 +68,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
         GlStateManager.matrixMode(5888);
       } else {
         bindTexture(SINGLE_TEXTURE);
-        ColourUtils.setColor(woodColor);
+        ColourUtils.setGlColor(woodColor);
       }
     } else {
       modelchest = largeChest;
@@ -89,7 +89,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
     GlStateManager.enableRescaleNormal();
 
     if (destroyStage < 0) {
-      ColourUtils.setColor(woodColor);
+      ColourUtils.setGlColor(woodColor);
     }
 
     GlStateManager.translate((float) x, (float) y + 1.0F, (float) z + 1.0F);
@@ -139,10 +139,10 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
     modelchest.chestLid.rotateAngleX = -(lidAngle * ((float) Math.PI / 2F));
 
     // Отрисовка частей сундука, кроме ручки
-    ColourUtils.setColor(woodColor);
+    ColourUtils.setGlColor(woodColor);
     modelchest.chestLid.render(0.0625F);
     modelchest.chestBelow.render(0.0625F);
-    ColourUtils.clearColor();
+    ColourUtils.resetGlColor();
 
     // Отрисовка ручки
 

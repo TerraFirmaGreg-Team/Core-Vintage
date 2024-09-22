@@ -63,11 +63,11 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
   }
 
   public int getMetaFromState(IBlockState state) {
-    return (state.getValue(LIT) ? 4 : 0) + state.getValue(FACING).getHorizontalIndex();
+    return (state.getValue(LIT) ? 4 : 0) + state.getValue(HORIZONTAL).getHorizontalIndex();
   }
 
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, LIT);
+    return new BlockStateContainer(this, HORIZONTAL, LIT);
   }
 
   @Override
@@ -124,7 +124,7 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
   }
 
   @Override
-  public Class<? extends TileEntity> getTileEntityClass() {
+  public Class<TETickCounter> getTileClass() {
     return TETickCounter.class;
   }
 

@@ -173,7 +173,7 @@ public class BlockRockAnvil extends BlockRock implements IProviderTile {
   }
 
   @Override
-  public Class<? extends TileEntity> getTileEntityClass() {
+  public Class<TileRockAnvil> getTileClass() {
     return TileRockAnvil.class;
   }
 

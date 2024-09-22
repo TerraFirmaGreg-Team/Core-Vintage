@@ -44,7 +44,7 @@ public class TileWoodLoom extends BaseTileInventory implements ITickable {
   public WoodType getWood() {
     if (cachedWoodType == null) {
       if (world != null) {
-        cachedWoodType = ((BlockWoodLoom) world.getBlockState(pos).getBlock()).getType();
+        cachedWoodType = ((BlockWoodLoom) getBlockType()).getType();
       }
     }
     return cachedWoodType;
@@ -55,8 +55,7 @@ public class TileWoodLoom extends BaseTileInventory implements ITickable {
     super.readFromNBT(nbt);
     progress = nbt.getInteger("progress");
     lastPushed = nbt.getLong("lastPushed");
-    recipe = nbt.hasKey("recipe") ? RegistryWood.LOOM.getValue(
-            new ResourceLocation(nbt.getString("recipe"))) : null;
+    recipe = nbt.hasKey("recipe") ? RegistryWood.LOOM.getValue(new ResourceLocation(nbt.getString("recipe"))) : null;
   }
 
   @Override

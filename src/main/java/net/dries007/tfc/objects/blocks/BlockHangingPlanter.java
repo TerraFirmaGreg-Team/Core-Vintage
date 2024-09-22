@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.data.Properties;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockGreenhouseWall;
+import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseWall;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;

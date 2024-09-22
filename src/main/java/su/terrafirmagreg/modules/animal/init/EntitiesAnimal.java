@@ -40,46 +40,46 @@ import su.terrafirmagreg.modules.animal.client.render.RenderAnimalWildebeest;
 import su.terrafirmagreg.modules.animal.client.render.RenderAnimalWolf;
 import su.terrafirmagreg.modules.animal.client.render.RenderAnimalYak;
 import su.terrafirmagreg.modules.animal.client.render.RenderAnimalZebu;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalBoar;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalDeer;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalGazelle;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalHare;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalMongoose;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalPheasant;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalRabbit;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalTurkey;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalWildebeest;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalAlpaca;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCamel;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalChicken;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCow;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDonkey;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDuck;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGoat;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGrouse;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalHorse;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalLlama;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMule;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMuskOx;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalOcelot;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalParrot;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalPig;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalQuail;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalSheep;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalWolf;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalYak;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalZebu;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalBlackBear;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalCougar;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalCoyote;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalDireWolf;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalGrizzlyBear;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalHyena;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalJackal;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalLion;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalPanther;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalPolarBear;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalSaberTooth;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalBoar;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalDeer;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalGazelle;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalHare;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalMongoose;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalPheasant;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalRabbit;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalTurkey;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalWildebeest;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalAlpaca;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCamel;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalChicken;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCow;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDonkey;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDuck;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGoat;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGrouse;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalHorse;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalLlama;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalMule;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalMuskOx;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalOcelot;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalParrot;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalPig;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalQuail;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalWolf;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalYak;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalZebu;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalBlackBear;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalCougar;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalCoyote;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalDireWolf;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalGrizzlyBear;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalHyena;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalJackal;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalLion;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalPanther;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalPolarBear;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalSaberTooth;
 
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntry;
@@ -175,74 +175,46 @@ public final class EntitiesAnimal {
 
   @SideOnly(Side.CLIENT)
   public static void onClientRegister(RegistryManager registry) {
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalSheep.class,
-            RenderAnimalSheep::new);
+
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalSheep.class, RenderAnimalSheep::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalCow.class, RenderAnimalCow::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalGrizzlyBear.class,
-            RenderAnimalGrizzlyBear::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalChicken.class,
-            RenderAnimalChicken::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalPheasant.class,
-            RenderAnimalPheasant::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalGrizzlyBear.class, RenderAnimalGrizzlyBear::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalChicken.class, RenderAnimalChicken::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalPheasant.class, RenderAnimalPheasant::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalDeer.class, RenderAnimalDeer::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalPig.class, RenderAnimalPig::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalWolf.class, RenderAnimalWolf::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalRabbit.class,
-            RenderAnimalRabbit::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalHorse.class,
-            RenderAnimalHorse::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalDonkey.class,
-            RenderAnimalAbstractHorse::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalMule.class,
-            RenderAnimalAbstractHorse::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalPolarBear.class,
-            RenderAnimalPolarBear::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalParrot.class,
-            RenderAnimalParrot::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalLlama.class,
-            RenderAnimalLlama::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalOcelot.class,
-            RenderAnimalOcelot::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalPanther.class,
-            RenderAnimalPanther::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalRabbit.class, RenderAnimalRabbit::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalHorse.class, RenderAnimalHorse::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalDonkey.class, RenderAnimalAbstractHorse::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalMule.class, RenderAnimalAbstractHorse::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalPolarBear.class, RenderAnimalPolarBear::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalParrot.class, RenderAnimalParrot::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalLlama.class, RenderAnimalLlama::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalOcelot.class, RenderAnimalOcelot::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalPanther.class, RenderAnimalPanther::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalDuck.class, RenderAnimalDuck::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalAlpaca.class,
-            RenderAnimalAlpaca::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalAlpaca.class, RenderAnimalAlpaca::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalGoat.class, RenderAnimalGoat::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalSaberTooth.class,
-            RenderAnimalSaberTooth::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalCamel.class,
-            RenderAnimalCamel::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalSaberTooth.class, RenderAnimalSaberTooth::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalCamel.class, RenderAnimalCamel::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalLion.class, RenderAnimalLion::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalHyena.class,
-            RenderAnimalHyena::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalDireWolf.class,
-            RenderAnimalDireWolf::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalHyena.class, RenderAnimalHyena::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalDireWolf.class, RenderAnimalDireWolf::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalHare.class, RenderAnimalHare::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalBoar.class, RenderAnimalBoar::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalZebu.class, RenderAnimalZebu::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalGazelle.class,
-            RenderAnimalGazelle::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalWildebeest.class,
-            RenderAnimalWildebeest::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalQuail.class,
-            RenderAnimalQuail::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalGrouse.class,
-            RenderAnimalGrouse::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalMongoose.class,
-            RenderAnimalMongoose::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalTurkey.class,
-            RenderAnimalTurkey::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalJackal.class,
-            RenderAnimalJackal::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalMuskOx.class,
-            RenderAnimalMuskOx::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalGazelle.class, RenderAnimalGazelle::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalWildebeest.class, RenderAnimalWildebeest::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalQuail.class, RenderAnimalQuail::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalGrouse.class, RenderAnimalGrouse::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalMongoose.class, RenderAnimalMongoose::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalTurkey.class, RenderAnimalTurkey::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalJackal.class, RenderAnimalJackal::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalMuskOx.class, RenderAnimalMuskOx::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityAnimalYak.class, RenderAnimalYak::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalBlackBear.class,
-            RenderAnimalBlackBear::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalCougar.class,
-            RenderAnimalCougar::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalCoyote.class,
-            RenderAnimalCoyote::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalBlackBear.class, RenderAnimalBlackBear::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalCougar.class, RenderAnimalCougar::new);
+    RenderingRegistry.registerEntityRenderingHandler(EntityAnimalCoyote.class, RenderAnimalCoyote::new);
   }
 }

@@ -78,8 +78,6 @@ public final class ClientRegisterEvents {
     // ITEMS //
 
     // Registering fluid containers
-    ModelLoader.setCustomModelResourceLocation(ItemsTFC.WOODEN_BUCKET, 0,
-            new ModelResourceLocation(ItemsTFC.WOODEN_BUCKET.getRegistryName(), "inventory"));
     ModelLoader.setCustomModelResourceLocation(ItemsTFC.FIRED_JUG, 0,
             new ModelResourceLocation(ItemsTFC.FIRED_JUG.getRegistryName(), "inventory"));
     ModelLoader.setCustomModelResourceLocation(ItemsTFC.BLUE_STEEL_BUCKET, 0,

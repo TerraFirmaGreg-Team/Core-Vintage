@@ -4,7 +4,7 @@
     "model": "tfg:wood/sapling",
     "textures": {
       "side": "tfg:blocks/wood/log/side/hornbeam",
-      "leaves": "tfg:blocks/wood/log/leaves/hornbeam"
+      "leaves": "tfg:blocks/wood/leaves/hornbeam"
     }
   },
   "variants": {

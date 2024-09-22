@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
-import su.terrafirmagreg.modules.device.objects.tiles.TileFirePit;
+import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
+import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -28,8 +28,8 @@ import org.lwjgl.opengl.GL11;
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.data.Properties.LIT;
-import static su.terrafirmagreg.modules.device.objects.tiles.TileFirePit.SLOT_EXTRA_INPUT_END;
-import static su.terrafirmagreg.modules.device.objects.tiles.TileFirePit.SLOT_EXTRA_INPUT_START;
+import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_EXTRA_INPUT_END;
+import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_EXTRA_INPUT_START;
 
 /**
  * Render water in the cooking pot

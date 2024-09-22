@@ -1,5 +1,6 @@
 package net.dries007.tfc.util.calendar;
 
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataCalendar;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,7 +11,6 @@ import net.minecraftforge.common.util.INBTSerializable;
 
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketCalendarUpdate;
 
@@ -18,6 +18,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static su.terrafirmagreg.modules.core.ConfigCore.MISC;
 
 public final class Calendar implements INBTSerializable<NBTTagCompound> {
 
@@ -45,7 +47,6 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     }
   };
 
-  public static final String[] DAY_NAMES = new String[]{"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
   public static final Map<String, String> BIRTHDAYS = new HashMap<>();
 
   static {
@@ -63,16 +64,28 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     BIRTHDAYS.put("JANUARY20", "Therighthon's Birthday");
     BIRTHDAYS.put("FEBRUARY21", "CtrlAltDavid's Birthday");
     BIRTHDAYS.put("MARCH10", "Disastermoo's Birthday");
+
+    // TFC Things
+    BIRTHDAYS.put("OCTOBER4", "Lyeoj's Birthday");
+    BIRTHDAYS.put("APRIL2", "MeteorFreak's Birthday");
+    BIRTHDAYS.put("APRIL10", "Pakratt0013's Birthday");
+    BIRTHDAYS.put("NOVEMBER11", "HonneyPlay's Birthday");
+
+    for (int i = 0; i < MISC.CALENDAR.BIRTHDAYS.dayList.length; i++) {
+      addBirthday(MISC.CALENDAR.BIRTHDAYS.dayList[i]);
+    }
   }
 
-  private long playerTime, calendarTime;
+  private long playerTime;
+  private long calendarTime;
   private int daysInMonth;
-  private boolean doDaylightCycle, arePlayersLoggedOn;
+  private boolean doDaylightCycle;
+  private boolean arePlayersLoggedOn;
   private MinecraftServer server;
 
   public Calendar() {
     // Initialize to default values
-    daysInMonth = ConfigTFC.General.MISC.defaultMonthLength;
+    daysInMonth = ConfigCore.MISC.CALENDAR.MONTH.defaultMonthLength;
     playerTime = 0;
     calendarTime = (5L * daysInMonth * ICalendar.TICKS_IN_DAY) + (6 * ICalendar.TICKS_IN_HOUR);
     doDaylightCycle = true;
@@ -96,6 +109,18 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
       // Always reset after transaction complete
       INSTANCE.playerTime -= transactionPlayerTimeOffset;
       INSTANCE.calendarTime -= transactionCalendarTimeOffset;
+    }
+  }
+
+  public static void addBirthday(String birthday) {
+    if (birthday != null) {
+      String[] text = birthday.split(" ");
+      String day = text[0];
+      StringBuilder name = new StringBuilder();
+      for (int i = 1; i < text.length; i++) {
+        name.append(" ").append(text[i]);
+      }
+      BIRTHDAYS.computeIfAbsent(day, k -> name.toString());
     }
   }
 

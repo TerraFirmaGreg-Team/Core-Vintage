@@ -23,5 +23,4 @@ public interface IWoodBlock extends IType<WoodType>, IVariant<WoodBlockVariant>,
   default IItemColor getItemColor() {
     return (s, i) -> this.getType().getColor();
   }
-
 }

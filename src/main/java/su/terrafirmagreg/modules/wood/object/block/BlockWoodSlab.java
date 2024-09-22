@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlockSlab;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.ToolClasses;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -12,8 +13,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 
-
-import gregtech.api.items.toolitem.ToolClasses;
 
 import lombok.Getter;
 
@@ -34,7 +33,7 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
 
     getSettings()
             .registryKey(variant.getRegistryKey(type))
-            .customResource(String.format("wood/%s", variant))
+            .customResource(variant.getCustomResource())
             .harvestLevel(ToolClasses.AXE, model.getHarvestLevel(model.getDefaultState()))
             .sound(SoundType.WOOD);
 

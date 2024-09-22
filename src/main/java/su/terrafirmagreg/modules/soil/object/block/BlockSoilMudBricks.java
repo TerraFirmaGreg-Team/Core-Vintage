@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
+import su.terrafirmagreg.data.ToolClasses;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
@@ -10,8 +11,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 
-
-import gregtech.api.items.toolitem.ToolClasses;
 
 import java.util.Random;
 

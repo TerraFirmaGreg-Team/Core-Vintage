@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.module;
 
 import su.terrafirmagreg.api.registry.Registry;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 
 import net.minecraft.util.ResourceLocation;
@@ -28,6 +29,8 @@ import java.util.Set;
 public interface IModule {
 
   Registry getRegistry();
+
+  RegistryManager getRegistryManager();
 
   // ===== FML Lifecycle
 

@@ -40,6 +40,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
+@SuppressWarnings("unused")
 public class ModuleEventRouter {
 
   private final Set<IModule> loadedModules;
@@ -186,7 +187,6 @@ public class ModuleEventRouter {
   // --------------------------------------------------------------------------
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
   protected void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register NewRegistryEvent start");
@@ -196,7 +196,6 @@ public class ModuleEventRouter {
   }
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
   protected void onRegisterRecipesEvent(RegistryEvent.Register<IRecipe> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register RecipesEvent start");
@@ -206,17 +205,16 @@ public class ModuleEventRouter {
   }
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
   protected void onRegisterBlockEvent(RegistryEvent.Register<Block> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register BlockEvent start");
       module.getRegistry().onRegisterBlock(event);
+      module.getRegistry().onRegisterTileEntities();
       module.getLogger().debug("Register BlockEvent complete");
     });
   }
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
   protected void onRegisterItemEvent(RegistryEvent.Register<Item> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register ItemEvent start");
@@ -227,7 +225,6 @@ public class ModuleEventRouter {
   }
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
   protected void onRegisterPotionEvent(RegistryEvent.Register<Potion> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register PotionEvent start");
@@ -237,7 +234,6 @@ public class ModuleEventRouter {
   }
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
   protected void onRegisterPotionTypeEvent(RegistryEvent.Register<PotionType> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register PotionTypeEvent start");
@@ -247,7 +243,6 @@ public class ModuleEventRouter {
   }
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
   protected void onRegisterBiomeEvent(RegistryEvent.Register<Biome> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register BiomeEvent start");
@@ -257,7 +252,6 @@ public class ModuleEventRouter {
   }
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
   protected void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register SoundEvent start");
@@ -267,7 +261,6 @@ public class ModuleEventRouter {
   }
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
   protected void onRegisterEntityEvent(RegistryEvent.Register<EntityEntry> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register EntityEvent start");
@@ -277,7 +270,6 @@ public class ModuleEventRouter {
   }
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
   protected void onRegisterEnchantmentEvent(RegistryEvent.Register<Enchantment> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register EnchantmentEvent start");
@@ -287,9 +279,7 @@ public class ModuleEventRouter {
   }
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
-  protected void onRegisterVillagerProfessionEvent(
-          RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
+  protected void onRegisterVillagerProfessionEvent(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register VillagerProfessionEvent start");
       module.getRegistry().onRegisterVillagerProfession(event);
@@ -298,7 +288,6 @@ public class ModuleEventRouter {
   }
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
   protected void onRegisterRecipeEvent(RegistryEvent.Register<IRecipe> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register RecipeEvent start");
@@ -308,9 +297,7 @@ public class ModuleEventRouter {
   }
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
-  protected void onRegisterDataSerializerEntryEvent(
-          RegistryEvent.Register<DataSerializerEntry> event) {
+  protected void onRegisterDataSerializerEntryEvent(RegistryEvent.Register<DataSerializerEntry> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register RecipeEvent start");
       module.getRegistry().onRegisterDataSerializerEntry(event);
@@ -319,7 +306,6 @@ public class ModuleEventRouter {
   }
 
   @SubscribeEvent
-  @SuppressWarnings("unused")
   protected void onRegisterLootTableLoadEvent(LootTableLoadEvent event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register LootTableLoadEvent start");
@@ -334,7 +320,6 @@ public class ModuleEventRouter {
 
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
-  @SuppressWarnings("unused")
   protected void onClientRegisterModelsEvent(ModelRegistryEvent event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register ModelsEvent start");
@@ -345,7 +330,6 @@ public class ModuleEventRouter {
 
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
-  @SuppressWarnings("unused")
   protected void onClientRegisterBlockColor(ColorHandlerEvent.Block event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register ColorHandlerEvent Block start");
@@ -356,7 +340,6 @@ public class ModuleEventRouter {
 
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
-  @SuppressWarnings("unused")
   protected void onClientRegisterItemColor(ColorHandlerEvent.Item event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register ColorHandlerEvent Item start");

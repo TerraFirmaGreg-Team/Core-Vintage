@@ -1,17 +1,17 @@
 package lyeoj.tfcthings.blocks;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -199,7 +199,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
   private void giveLadderToPlayer(EntityPlayer player, BlockPos pos) {
     ItemStack ladderStack = new ItemStack(TFCThingsBlocks.ROPE_LADDER_ITEM, 1);
     if (!player.inventory.addItemStackToInventory(ladderStack) && !player.world.isRemote) {
-      InventoryHelper.spawnItemStack(player.world, pos.getX(), pos.getY(), pos.getZ(), ladderStack);
+      StackUtils.spawnItemStack(player.world, pos, ladderStack);
     }
   }
 

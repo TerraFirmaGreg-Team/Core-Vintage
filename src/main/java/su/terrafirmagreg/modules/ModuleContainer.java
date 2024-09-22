@@ -33,14 +33,15 @@ public enum ModuleContainer
   ModuleContainer(boolean enabled) {
     this.enabled = enabled;
   }
-
-  @Override
-  public String getID() {
-    return MOD_ID;
-  }
+  
 
   @Override
   public @NotNull String getName() {
     return this.name().toLowerCase();
+  }
+
+  @Override
+  public String getID() {
+    return MOD_ID;
   }
 }

@@ -44,11 +44,13 @@ public final class ModuleWood extends ModuleBase {
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
     MinecraftForge.EVENT_BUS.register(new EntityJoinWorldEventHandler());
+
   }
 
   @Override
   public void onClientPreInit(FMLPreInitializationEvent event) {
     MinecraftForge.EVENT_BUS.register(new KeyEventHandler());
+
   }
 
   @Override

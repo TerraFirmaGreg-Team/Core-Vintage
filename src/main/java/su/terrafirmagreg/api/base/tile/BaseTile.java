@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.base.tile;
 
+import su.terrafirmagreg.api.util.BlockUtils;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -24,8 +26,7 @@ public abstract class BaseTile extends TileEntity {
    * every tick
    */
   public void markForBlockUpdate() {
-    IBlockState state = world.getBlockState(pos);
-    world.notifyBlockUpdate(pos, state, state, 3);
+    BlockUtils.notifyBlockUpdate(world, pos);
     markDirty();
   }
 
@@ -34,8 +35,7 @@ public abstract class BaseTile extends TileEntity {
     this.markDirty();
 
     if (this.world != null && !this.world.isRemote) {
-      IBlockState blockState = this.world.getBlockState(this.getPos());
-      this.world.notifyBlockUpdate(this.getPos(), blockState, blockState, 3);
+      BlockUtils.notifyBlockUpdate(this.world, this.getPos());
     }
   }
 
@@ -51,8 +51,7 @@ public abstract class BaseTile extends TileEntity {
   private void sendVanillaUpdatePacket() {
     SPacketUpdateTileEntity packet = getUpdatePacket();
     if (packet != null && world instanceof WorldServer worldServer) {
-      PlayerChunkMapEntry chunk = worldServer.getPlayerChunkMap()
-              .getEntry(pos.getX() >> 4, pos.getZ() >> 4);
+      PlayerChunkMapEntry chunk = worldServer.getPlayerChunkMap().getEntry(pos.getX() >> 4, pos.getZ() >> 4);
       if (chunk != null) {
         chunk.sendPacket(packet);
       }
@@ -73,9 +72,7 @@ public abstract class BaseTile extends TileEntity {
    */
   @Override
   public NBTTagCompound getUpdateTag() {
-    NBTTagCompound nbt = new NBTTagCompound();
-    writeToNBT(nbt);
-    return nbt;
+    return writeToNBT(new NBTTagCompound());
   }
 
   /**
@@ -95,14 +92,8 @@ public abstract class BaseTile extends TileEntity {
   }
 
   @Override
-  public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState,
-          IBlockState newState) {
-    //        return oldState.getBlock() != newState.getBlock(); old
+  public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+    return oldState.getBlock() != newState.getBlock() && super.shouldRefresh(world, pos, oldState, newState);
 
-    if (oldState.getBlock() == newState.getBlock()) {
-      return false;
-    }
-
-    return super.shouldRefresh(world, pos, oldState, newState);
   }
 }

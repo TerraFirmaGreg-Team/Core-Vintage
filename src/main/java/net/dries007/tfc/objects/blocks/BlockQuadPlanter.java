@@ -70,6 +70,18 @@ public class BlockQuadPlanter extends BlockLargePlanter implements IHighlightHan
     return true;
   }
 
+  private int getSlotForHit(double hitX, double hitZ) {
+    if (hitX > 0.5 && hitZ > 0.5) {
+      return 1;
+    } else if (hitX > 0.5 && hitZ < 0.5) {
+      return 2;
+    } else if (hitX < 0.5 && hitZ > 0.5) {
+      return 3;
+    } else {
+      return 0;
+    }
+  }
+
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     return QUAD_SHAPE;
@@ -108,9 +120,7 @@ public class BlockQuadPlanter extends BlockLargePlanter implements IHighlightHan
 
   @Override
   protected BlockStateContainer createBlockState() {
-    IProperty[] listedProperties = new IProperty[]{WET};
-    IUnlistedProperty[] unlistedProperties = new IUnlistedProperty[]{CROP_1, CROP_2, CROP_3, CROP_4};
-    return new ExtendedBlockState(this, listedProperties, unlistedProperties);
+    return new ExtendedBlockState(this, new IProperty[]{WET}, new IUnlistedProperty[]{CROP_1, CROP_2, CROP_3, CROP_4});
   }
 
   @Override
@@ -135,17 +145,5 @@ public class BlockQuadPlanter extends BlockLargePlanter implements IHighlightHan
       }
     }
     return plants;
-  }
-
-  private int getSlotForHit(double hitX, double hitZ) {
-    if (hitX > 0.5 && hitZ > 0.5) {
-      return 1;
-    } else if (hitX > 0.5 && hitZ < 0.5) {
-      return 2;
-    } else if (hitX < 0.5 && hitZ > 0.5) {
-      return 3;
-    } else {
-      return 0;
-    }
   }
 }

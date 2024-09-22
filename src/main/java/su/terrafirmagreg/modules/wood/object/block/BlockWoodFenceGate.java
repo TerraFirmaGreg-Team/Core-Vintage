@@ -11,7 +11,7 @@ public class BlockWoodFenceGate extends BlockWoodFenceGateLog implements IWoodBl
     super(variant, type);
 
     getSettings()
-            .customResource(String.format("wood/%s", variant));
+            .customResource(variant.getCustomResource());
   }
 
 }

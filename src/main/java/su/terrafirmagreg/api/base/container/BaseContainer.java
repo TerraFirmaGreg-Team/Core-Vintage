@@ -6,9 +6,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-
-import org.jetbrains.annotations.NotNull;
-
 /**
  * A very simple container implementation. Used for gui's that have no internal inventory, or no TE they need to access Prefer using {@link BaseContainerTile} instead
  * for tile entities or {@link BaseContainerItemStack} for items
@@ -20,6 +17,7 @@ public abstract class BaseContainer extends Container {
 
   public BaseContainer(InventoryPlayer playerInv) {
     addPlayerInventorySlots(playerInv);
+
   }
 
   protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
@@ -28,19 +26,18 @@ public abstract class BaseContainer extends Container {
 
   protected void addPlayerInventorySlots(InventoryPlayer playerInv, int yOffset) {
     // Add Player Inventory Slots
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 9; j++) {
-        addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18 + yOffset));
+    for (int stackSlotY = 0; stackSlotY < 3; stackSlotY++) {
+      for (int stackSlotX = 0; stackSlotX < 9; stackSlotX++) {
+        addSlotToContainer(new Slot(playerInv, stackSlotX + stackSlotY * 9 + 9, 8 + stackSlotX * 18, 84 + stackSlotY * 18 + yOffset));
       }
     }
 
-    for (int k = 0; k < 9; k++) {
-      addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142 + yOffset));
+    for (int hotbar = 0; hotbar < 9; hotbar++) {
+      addSlotToContainer(new Slot(playerInv, hotbar, 8 + hotbar * 18, 142 + yOffset));
     }
   }
 
   @Override
-  @NotNull
   public ItemStack transferStackInSlot(EntityPlayer player, int index) {
     ItemStack stackCopy = ItemStack.EMPTY;
     Slot slot = this.inventorySlots.get(index);

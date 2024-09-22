@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TileSmelteryFirebox;
+import su.terrafirmagreg.modules.device.object.tile.TileSmelteryFirebox;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

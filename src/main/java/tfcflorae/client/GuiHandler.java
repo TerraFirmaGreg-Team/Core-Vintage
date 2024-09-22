@@ -12,11 +12,9 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 
 
 import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
-import net.dries007.tfc.client.gui.GuiChestTFC;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
 import net.dries007.tfc.client.gui.GuiUrn;
 import net.dries007.tfc.objects.container.ContainerBag;
-import net.dries007.tfc.objects.container.ContainerChestTFC;
 import net.dries007.tfc.objects.container.ContainerKnapping;
 import net.dries007.tfc.objects.container.ContainerSack;
 import net.dries007.tfc.objects.container.ContainerUrn;
@@ -87,7 +85,6 @@ public class GuiHandler
     YUCCA_CANVAS,
     MUD,
     FLINT,
-    CHEST,
     URN,
     NULL;
 
@@ -194,11 +191,6 @@ public class GuiHandler
                 world.getBlockState(new BlockPos(x, y, z))
                         .getBlock()
                         .getTranslationKey());
-      case CHEST:
-        if (container instanceof ContainerChestTFC) {
-          return new GuiChestTFC((ContainerChestTFC) container, player.inventory);
-        }
-        return null;
       default:
         return null;
     }

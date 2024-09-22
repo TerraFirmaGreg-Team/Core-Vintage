@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlockWall;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.ToolClasses;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -10,8 +11,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
 
-
-import gregtech.api.items.toolitem.ToolClasses;
 
 import lombok.Getter;
 
@@ -29,7 +28,7 @@ public class BlockWoodWall extends BaseBlockWall implements IWoodBlock {
 
     getSettings()
             .registryKey(variant.getRegistryKey(type))
-            .customResource(String.format("wood/%s", variant))
+            .customResource(variant.getCustomResource())
             .ignoresProperties(BlockWall.VARIANT)
             .harvestLevel(ToolClasses.AXE, model.getHarvestLevel(model.getDefaultState()))
             .sound(SoundType.WOOD)

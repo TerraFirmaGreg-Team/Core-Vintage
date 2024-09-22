@@ -24,8 +24,7 @@ public final class NBTUtils {
    * A Comparator used to compare NBTTagCompound.
    */
   public static final Comparator<NBTTagCompound> NBT_COMPARATOR = (firstTag, secondTag) ->
-          firstTag != null ? firstTag.equals(secondTag) ? 0 : 1 :
-                  secondTag != null ? -1 : 0;
+          firstTag != null ? firstTag.equals(secondTag) ? 0 : 1 : secondTag != null ? -1 : 0;
 
   public static void setGenericNBTValue(String tagName, Object value) {
     setGenericNBTValue(new NBTTagCompound(), tagName, value);
@@ -69,8 +68,7 @@ public final class NBTUtils {
       dataTag.setTag(tagName, newTag);
     } else {
       throw new RuntimeException(
-              "The data type of " + value.getClass().getName() + " is currently not supported."
-                      + System.lineSeparator() + "Raw Data: " + value
+              "The data type of " + value.getClass().getName() + " is currently not supported." + System.lineSeparator() + "Raw Data: " + value
       );
     }
   }

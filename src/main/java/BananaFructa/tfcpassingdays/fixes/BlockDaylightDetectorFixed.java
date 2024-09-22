@@ -22,30 +22,35 @@ public class BlockDaylightDetectorFixed extends BlockDaylightDetector {
   }
 
   public void updatePower(World worldIn, BlockPos pos) {
-    if (worldIn.provider.hasSkyLight()) {
-      boolean modifiedProvider = worldIn.provider instanceof PassingDayWorldProviderServer;
-      IBlockState iblockstate = worldIn.getBlockState(pos);
-      int i = worldIn.getLightFor(EnumSkyBlock.SKY, pos) -
-              (modifiedProvider ? ((PassingDayWorldProviderServer) worldIn.provider).getSubtractedSkylight(pos.getZ()) :
-                      worldIn.getSkylightSubtracted());
-      float f = (modifiedProvider ? ((PassingDayWorldProviderServer) worldIn.provider).getCelestialAngleRadians(1, pos.getZ()) :
-              worldIn.getCelestialAngleRadians(1.0F));
+    if (!worldIn.provider.hasSkyLight()) {
+      return;
+    }
 
-      if (this.inverted) {
-        i = 15 - i;
-      }
+    boolean modifiedProvider = worldIn.provider instanceof PassingDayWorldProviderServer;
+    IBlockState iblockstate = worldIn.getBlockState(pos);
+    int i = worldIn.getLightFor(EnumSkyBlock.SKY, pos) - (modifiedProvider
+            ? ((PassingDayWorldProviderServer) worldIn.provider).getSubtractedSkylight(pos.getZ())
+            : worldIn.getSkylightSubtracted());
 
-      if (i > 0 && !this.inverted) {
-        float f1 = f < MathConstants.PI ? 0.0F : ((float) Math.PI * 2F);
-        f = f + (f1 - f) * 0.2F;
-        i = Math.round((float) i * MathHelper.cos(f));
-      }
+    float f = (modifiedProvider
+            ? ((PassingDayWorldProviderServer) worldIn.provider).getCelestialAngleRadians(1, pos.getZ())
+            : worldIn.getCelestialAngleRadians(1.0F));
 
-      i = MathHelper.clamp(i, 0, 15);
+    if (this.inverted) {
+      i = 15 - i;
+    }
 
-      if (iblockstate.getValue(POWER) != i) {
-        worldIn.setBlockState(pos, iblockstate.withProperty(POWER, i), 3);
-      }
+    if (i > 0 && !this.inverted) {
+      float f1 = f < MathConstants.PI ? 0.0F : ((float) Math.PI * 2F);
+      f = f + (f1 - f) * 0.2F;
+      i = Math.round((float) i * MathHelper.cos(f));
+    }
+
+    i = MathHelper.clamp(i, 0, 15);
+
+    if (iblockstate.getValue(POWER) != i) {
+      worldIn.setBlockState(pos, iblockstate.withProperty(POWER, i), 3);
     }
   }
+
 }

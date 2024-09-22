@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMuskOx;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalMuskOx;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

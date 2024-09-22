@@ -5,6 +5,7 @@ import lombok.experimental.UtilityClass;
 import javax.annotation.Nullable;
 
 @UtilityClass
+@SuppressWarnings("unused")
 public final class StringUtils {
 
   /**

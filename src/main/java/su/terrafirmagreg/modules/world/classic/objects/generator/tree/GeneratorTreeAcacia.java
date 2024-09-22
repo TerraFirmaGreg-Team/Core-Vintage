@@ -35,8 +35,7 @@ public class GeneratorTreeAcacia implements ITreeGenerator {
   private IBlockState bark;
 
   @Override
-  public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-          Random rand, boolean isWorldGen) {
+  public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree, Random rand, boolean isWorldGen) {
     trunk = BlockLogTFC.get(tree).getDefaultState().withProperty(PLACED, false);
     bark = BlockLogTFC.get(tree)
             .getDefaultState()
@@ -68,8 +67,7 @@ public class GeneratorTreeAcacia implements ITreeGenerator {
         placeLog(world, pos.add(0, y1 - j, 0).offset(face, x1 - j), true);
       }
       int branch = 1 + rand.nextInt(2);
-      placeBranch(manager, world, pos.add(0, y1, 0)
-              .offset(face, x1), tree.getRegistryName() + "/branch" + branch);
+      placeBranch(manager, world, pos.add(0, y1, 0).offset(face, x1), tree.getRegistryName() + "/branch" + branch);
     }
     for (int i = 0; i < height; i++) {
       if (smallBranch && i == y3) {

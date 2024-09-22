@@ -1,6 +1,8 @@
 package se.gory_moon.horsepower.blocks;
 
+import su.terrafirmagreg.api.base.block.spi.IBlockSettings.Settings;
 import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.data.ToolClasses;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -15,12 +17,12 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 
 import net.dries007.tfc.objects.items.ItemBlockDouble;
-import se.gory_moon.horsepower.tileentity.TileEntityChopper;
-import se.gory_moon.horsepower.tileentity.TileEntityFiller;
-import se.gory_moon.horsepower.tileentity.TileEntityGrindstone;
-import se.gory_moon.horsepower.tileentity.TileEntityHandGrindstone;
-import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
-import se.gory_moon.horsepower.tileentity.TileEntityPress;
+import se.gory_moon.horsepower.tileentity.TileChopper;
+import se.gory_moon.horsepower.tileentity.TileFiller;
+import se.gory_moon.horsepower.tileentity.TileGrindstone;
+import se.gory_moon.horsepower.tileentity.TileHandGrindstone;
+import se.gory_moon.horsepower.tileentity.TileManualChopper;
+import se.gory_moon.horsepower.tileentity.TilePress;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,26 +35,22 @@ public class ModBlocks {
   public static final BlockGrindstone BLOCK_GRINDSTONE = new BlockGrindstone();
   public static final BlockChoppingBlock BLOCK_MANUAL_CHOPPER = new BlockChoppingBlock();
   public static final BlockChopper BLOCK_CHOPPER = new BlockChopper();
-  public static final BlockFiller BLOCK_CHOPPER_FILLER = (BlockFiller) new BlockFiller(Material.WOOD, "chopper_", true).setHarvestLevel1("axe", 0)
-          .setHardness(5F)
-          .setResistance(5F);
+  public static final BlockFiller BLOCK_CHOPPER_FILLER = new BlockFiller(Settings.of(Material.WOOD).harvestLevel(ToolClasses.AXE, 0), "chopper_");
   public static final BlockPress BLOCK_PRESS = new BlockPress();
-  public static final BlockFiller BLOCK_PRESS_FILLER = (BlockFiller) new BlockFiller(Material.WOOD, "press_", true).setHarvestLevel1("axe", 1)
-          .setHardness(5F)
-          .setResistance(5F);
+  public static final BlockFiller BLOCK_PRESS_FILLER = new BlockFiller(Settings.of(Material.WOOD).harvestLevel(ToolClasses.AXE, 1), "press_");
 
   public static void registerTileEntities() {
-    registerTileEntity(TileEntityHandGrindstone.class);
-    registerTileEntity(TileEntityGrindstone.class);
-    registerTileEntity(TileEntityManualChopper.class);
-    registerTileEntity(TileEntityChopper.class);
-    registerTileEntity(TileEntityFiller.class);
-    registerTileEntity(TileEntityPress.class);
+    registerTileEntity(TileHandGrindstone.class);
+    registerTileEntity(TileGrindstone.class);
+    registerTileEntity(TileManualChopper.class);
+    registerTileEntity(TileChopper.class);
+    registerTileEntity(TileFiller.class);
+    registerTileEntity(TilePress.class);
   }
 
   private static void registerTileEntity(Class<? extends TileEntity> tileEntityClass) {
     GameRegistry.registerTileEntity(tileEntityClass, RESOURCE_PREFIX + tileEntityClass.getSimpleName()
-            .replaceFirst("TileEntity", ""));
+            .replaceFirst("Tile", ""));
   }
 
   @Mod.EventBusSubscriber(modid = Constants.MODID_HORSEPOWER)

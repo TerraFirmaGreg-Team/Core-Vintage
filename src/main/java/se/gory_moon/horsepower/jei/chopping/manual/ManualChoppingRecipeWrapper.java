@@ -19,7 +19,7 @@ import se.gory_moon.horsepower.blocks.BlockChoppingBlock;
 import se.gory_moon.horsepower.jei.HorsePowerCategory;
 import se.gory_moon.horsepower.jei.HorsePowerPlugin;
 import se.gory_moon.horsepower.recipes.ChoppingBlockRecipe;
-import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
+import se.gory_moon.horsepower.tileentity.TileManualChopper;
 import se.gory_moon.horsepower.util.Localization;
 
 import java.util.ArrayList;
@@ -67,7 +67,7 @@ public class ManualChoppingRecipeWrapper implements IRecipeWrapper {
     List<ItemStack> outputs = new ArrayList<>(axes.size());
     for (ItemStack stack : axes) {
       ItemStack result = output.copy();
-      double base = TileEntityManualChopper.getBaseAmount(stack, null) / 100D;
+      double base = TileManualChopper.getBaseAmount(stack, null) / 100D;
 
       result.setCount((int) Math.ceil((double) result.getCount() * base));
       outputs.add(result);

@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.base.container.BaseContainerItemStack;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 
@@ -19,7 +20,7 @@ import net.dries007.tfc.api.capability.inventory.ItemStackHandlerCallback;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ContainerLiquidTransfer extends ContainerItemStack implements ISlotCallback {
+public class ContainerLiquidTransfer extends BaseContainerItemStack implements ISlotCallback {
 
   private IItemHandlerModifiable inventory;
 

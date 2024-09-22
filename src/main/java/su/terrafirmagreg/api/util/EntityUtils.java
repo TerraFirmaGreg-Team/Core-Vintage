@@ -37,7 +37,9 @@ public final class EntityUtils {
   @SuppressWarnings("unchecked")
   public static <T extends Entity> T getEntity(World world, BlockPos pos, Class<T> aClass) {
     Entity entity = world.getEntityByID(pos.getX());
-    //		if (!aClass.isInstance(entity)) return null;
+    if (!aClass.isInstance(entity)) {
+      return null;
+    }
     return (T) entity;
   }
 

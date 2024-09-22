@@ -40,7 +40,7 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings 
 
     var state = getBlockState().getBaseState();
     if (!isDouble()) {
-      state = state.withProperty(BlockSlab.HALF, EnumBlockHalf.BOTTOM);
+      state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
     }
     setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
   }
@@ -102,7 +102,7 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings 
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, BlockSlab.HALF, VARIANT);
+    return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, HALF, VARIANT);
   }
 
   public abstract BaseBlockSlab getHalfSlab();

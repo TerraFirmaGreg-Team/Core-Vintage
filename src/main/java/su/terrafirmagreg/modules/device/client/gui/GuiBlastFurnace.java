@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.data.Unicode;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
-import su.terrafirmagreg.modules.device.objects.tiles.TileBlastFurnace;
+import su.terrafirmagreg.modules.device.object.tile.TileBlastFurnace;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;

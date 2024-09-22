@@ -78,7 +78,7 @@ public class BlockRockRaw extends BlockRock {
           float hitZ) {
 
     ItemStack stack = playerIn.getHeldItemMainhand();
-    if (ConfigRock.BLOCKS.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
+    if (ConfigRock.BLOCK.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
       if (!worldIn.isRemote) {
 
         // Create a stone anvil

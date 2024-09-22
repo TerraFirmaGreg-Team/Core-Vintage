@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDonkey;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalHorse;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMule;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDonkey;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalHorse;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalMule;
 
 import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.model.ModelRenderer;

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TilePitKiln;
+import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;

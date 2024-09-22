@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public abstract class Variant<T> implements Comparable<Variant<T>> {
 
-  private final String name;
+  protected final String name;
 
   protected Variant(String name) {
     this.name = name;

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalRabbit;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalRabbit;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalRabbit;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

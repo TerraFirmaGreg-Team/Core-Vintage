@@ -147,14 +147,13 @@ public class Registry {
   public void onRegisterBlock(RegistryEvent.Register<Block> event) {
 
     this.blocks.register(event);
-    this.onRegisterTileEntities();
   }
 
   public void onRegisterTileEntities() {
 
     blocks.forEach(block -> {
       if (block instanceof IProviderTile provider) {
-        TileUtils.registerTileEntity(provider.getTileEntityClass(), provider.getTileEntityClass().getSimpleName());
+        TileUtils.registerTileEntity(provider.getTileClass(), provider.getTileClass().getSimpleName());
       }
     });
   }
@@ -220,7 +219,7 @@ public class Registry {
 
   public void onRegisterLootTableLoad(LootTableLoadEvent event) {
 
-    lootTable.get(event.getName())
+    this.lootTable.get(event.getName())
             .forEach(builder -> event.getTable()
                     .getPool(builder.getPool())
                     .addEntry(builder.build()));
@@ -228,18 +227,18 @@ public class Registry {
 
   public void onRegisterCommand(FMLServerStartingEvent event) {
     var manager = CommandManager.create(event);
-    commands.forEach(manager::addCommand);
+    this.commands.forEach(manager::addCommand);
   }
 
   public void onRegisterOreDict() {
 
-    blocks.forEach(block -> {
+    this.blocks.forEach(block -> {
       if (block instanceof IProviderOreDict provider) {
         provider.onRegisterOreDict();
       }
     });
 
-    items.forEach(item -> {
+    this.items.forEach(item -> {
       if (item instanceof IProviderOreDict provider) {
         provider.onRegisterOreDict();
       }
@@ -261,7 +260,7 @@ public class Registry {
 
   public void onRegisterModelsBlock() {
 
-    blocks.forEach(block -> {
+    this.blocks.forEach(block -> {
       if (block instanceof IProviderModel provider) {
         if (provider.getResourceLocation() != null) {
           ModelUtils.registerBlockInventoryModel(block, provider.getResourceLocation());
@@ -279,13 +278,13 @@ public class Registry {
 
   public void onRegisterModelsItem() {
 
-    items.forEach(item -> {
+    this.items.forEach(item -> {
       if (item instanceof IProviderModel provider) {
         if (provider.getResourceLocation() != null) {
           ModelUtils.registerInventoryModel(item, provider.getResourceLocation());
+        } else if (!(item instanceof ItemBlock)) {
+          ModelUtils.registerInventoryModel(item);
         }
-      } else if (!(item instanceof ItemBlock)) {
-        ModelUtils.registerInventoryModel(item);
       }
 
       if (item instanceof IProviderItemMesh provider) {
@@ -297,19 +296,20 @@ public class Registry {
   @SuppressWarnings({"unchecked", "rawtypes"})
   public void onRegisterModelsTile() {
 
-    blocks.forEach(block -> {
+    this.blocks.forEach(block -> {
       if (block instanceof IProviderTile provider) {
         final TileEntitySpecialRenderer tesr = provider.getTileRenderer();
 
-        ModelUtils.registerTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
+        ModelUtils.registerTileEntitySpecialRenderer(provider.getTileClass(), tesr);
       }
     });
   }
 
+
   @SideOnly(Side.CLIENT)
   public void onRegisterBlockColor(ColorHandlerEvent.Block event) {
 
-    blocks.forEach(block -> {
+    this.blocks.forEach(block -> {
       if (block instanceof IProviderBlockColor provider) {
         if (provider.getBlockColor() != null) {
           event.getBlockColors().registerBlockColorHandler(provider.getBlockColor(), block);
@@ -321,16 +321,15 @@ public class Registry {
   @SideOnly(Side.CLIENT)
   public void onRegisterItemColor(ColorHandlerEvent.Item event) {
 
-    blocks.forEach(block -> {
+    this.blocks.forEach(block -> {
       if (block instanceof IProviderBlockColor provider) {
         if (provider.getItemColor() != null) {
-          event.getItemColors()
-                  .registerItemColorHandler(provider.getItemColor(), Item.getItemFromBlock(block));
+          event.getItemColors().registerItemColorHandler(provider.getItemColor(), Item.getItemFromBlock(block));
         }
       }
     });
 
-    items.forEach(item -> {
+    this.items.forEach(item -> {
       if (item instanceof IProviderItemColor provider) {
         if (provider.getItemColor() != null) {
           event.getItemColors().registerItemColorHandler(provider.getItemColor(), item);

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.client.model;
 
 import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalWolf;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalWolf;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

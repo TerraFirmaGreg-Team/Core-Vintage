@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalJackal;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalJackal;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalJackal;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

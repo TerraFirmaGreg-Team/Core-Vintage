@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
-import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-public class EntityTurkeyTFC extends su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase implements IHuntable {
+public class EntityTurkeyTFC extends su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase implements IHuntable {
 
   private static final int DAYS_TO_ADULTHOOD = 32;
 

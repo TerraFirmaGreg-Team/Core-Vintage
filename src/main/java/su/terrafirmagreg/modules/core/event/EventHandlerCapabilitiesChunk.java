@@ -33,9 +33,7 @@ public class EventHandlerCapabilitiesChunk {
 
         // Update client side data
         NBTTagCompound nbt = (NBTTagCompound) CapabilityChunkData.CAPABILITY.writeNBT(data, null);
-        ModuleCore.getPacketService()
-                .sendTo(new SCPacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(),
-                        data.getRainfall()), event.getPlayer());
+        ModuleCore.getPacketService().sendTo(new SCPacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(), data.getRainfall()), event.getPlayer());
       }
     }
   }
@@ -45,7 +43,7 @@ public class EventHandlerCapabilitiesChunk {
     // Per #922, if there's no world or no world type, something is seriously violating our assumptions and we will just fail.
     //noinspection ConstantConditions
 
-    World world = event.getObject().getWorld();
+    var world = event.getObject().getWorld();
 
     if (event.getObject().getWorld() == null) {
       return;

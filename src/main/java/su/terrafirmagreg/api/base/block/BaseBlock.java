@@ -35,6 +35,9 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
     super(settings.getMaterial(), settings.getMapColor());
 
     this.settings = settings;
+
+    this.fullBlock = this.getDefaultState().isOpaqueCube();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
   }
 
   @Override

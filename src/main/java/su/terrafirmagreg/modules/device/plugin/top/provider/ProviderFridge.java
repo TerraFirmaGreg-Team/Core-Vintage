@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.device.plugin.top.provider;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockFridge;
-import su.terrafirmagreg.modules.device.objects.tiles.TileFridge;
+import su.terrafirmagreg.modules.device.object.block.BlockFridge;
+import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -25,6 +25,7 @@ import net.dries007.tfc.api.capability.food.IFood;
 import java.util.ArrayList;
 import java.util.List;
 
+import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 import static su.terrafirmagreg.data.Properties.UPPER;
 
 public final class ProviderFridge implements IProbeInfoProvider {
@@ -50,14 +51,13 @@ public final class ProviderFridge implements IProbeInfoProvider {
         pos = pos.up();
       }
 
-      IProbeInfo horizontalPane = info.horizontal(
-              info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
+      IProbeInfo horizontalPane = info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
       horizontalPane.text(
               new TextComponentTranslation(ModUtils.localize("top", "device.fridge.efficiency"),
                       (int) tile.getEfficiency()).getFormattedText());
       if (tile.isOpen()) {
         int slot = BlockFridge.getPlayerLookingItem(pos.down(), player,
-                state.getValue(BlockFridge.FACING));
+                state.getValue(HORIZONTAL));
         if (slot > -1) {
           ItemStack stack = tile.getSlot(slot);
           if (!stack.isEmpty()) {

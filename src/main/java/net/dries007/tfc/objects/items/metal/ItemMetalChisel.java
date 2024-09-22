@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodSupport;
@@ -11,7 +12,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -88,7 +88,7 @@ public class ItemMetalChisel extends ItemMetalTool {
         var cap = CapabilityPlayer.get(player);
         if (cap != null) {
           if (cap.getChiselMode() == Mode.SLAB) {
-            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(newState.getBlock(), 1));
+            StackUtils.spawnItemStack(worldIn, pos, new ItemStack(newState.getBlock(), 1));
           }
         }
 

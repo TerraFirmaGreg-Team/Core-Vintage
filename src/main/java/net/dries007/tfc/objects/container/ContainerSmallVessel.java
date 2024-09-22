@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.base.container.BaseContainerItemStack;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +18,7 @@ import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ContainerSmallVessel extends ContainerItemStack implements ISlotCallback {
+public class ContainerSmallVessel extends BaseContainerItemStack implements ISlotCallback {
 
   public ContainerSmallVessel(InventoryPlayer playerInv, ItemStack stack) {
     super(playerInv, stack);

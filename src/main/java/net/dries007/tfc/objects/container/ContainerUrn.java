@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.base.container.BaseContainerTile;
+
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -12,7 +14,7 @@ import net.dries007.tfc.objects.te.TEUrn;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ContainerUrn extends ContainerTE<TEUrn> implements IButtonHandler {
+public class ContainerUrn extends BaseContainerTile<TEUrn> implements IButtonHandler {
 
   public ContainerUrn(InventoryPlayer playerInv, TEUrn tile) {
     super(playerInv, tile);

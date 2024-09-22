@@ -4,7 +4,7 @@
     "model": "tfg:wood/sapling",
     "textures": {
       "side": "tfg:blocks/wood/log/side/mahogany",
-      "leaves": "tfg:blocks/wood/log/leaves/mahogany"
+      "leaves": "tfg:blocks/wood/leaves/mahogany"
     }
   },
   "variants": {

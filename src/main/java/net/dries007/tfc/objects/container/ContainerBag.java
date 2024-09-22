@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.base.container.BaseContainerItemStack;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,11 +18,24 @@ import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ContainerBag extends ContainerItemStack implements ISlotCallback {
+public class ContainerBag extends BaseContainerItemStack implements ISlotCallback {
 
   public ContainerBag(InventoryPlayer playerInv, ItemStack stack) {
     super(playerInv, stack);
     this.itemIndex += 6;
+  }
+
+  @Override
+  protected void addContainerSlots() {
+    IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+    if (inventory instanceof ISlotCallback callback) {
+      addSlotToContainer(new SlotCallback(inventory, 0, 62, 23, callback));
+      addSlotToContainer(new SlotCallback(inventory, 1, 80, 23, callback));
+      addSlotToContainer(new SlotCallback(inventory, 2, 98, 23, callback));
+      addSlotToContainer(new SlotCallback(inventory, 3, 62, 41, callback));
+      addSlotToContainer(new SlotCallback(inventory, 4, 80, 41, callback));
+      addSlotToContainer(new SlotCallback(inventory, 5, 98, 41, callback));
+    }
   }
 
   /**
@@ -88,18 +102,5 @@ public class ContainerBag extends ContainerItemStack implements ISlotCallback {
     }
     slot.onTake(player, itemstack1);
     return itemstack;
-  }
-
-  @Override
-  protected void addContainerSlots() {
-    IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-    if (inventory instanceof ISlotCallback callback) {
-      addSlotToContainer(new SlotCallback(inventory, 0, 62, 23, callback));
-      addSlotToContainer(new SlotCallback(inventory, 1, 80, 23, callback));
-      addSlotToContainer(new SlotCallback(inventory, 2, 98, 23, callback));
-      addSlotToContainer(new SlotCallback(inventory, 3, 62, 41, callback));
-      addSlotToContainer(new SlotCallback(inventory, 4, 80, 41, callback));
-      addSlotToContainer(new SlotCallback(inventory, 5, 98, 41, callback));
-    }
   }
 }

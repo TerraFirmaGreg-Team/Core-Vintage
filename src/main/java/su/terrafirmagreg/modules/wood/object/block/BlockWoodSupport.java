@@ -53,7 +53,7 @@ public class BlockWoodSupport extends BlockWood {
 
     getSettings()
             .registryKey(variant.getRegistryKey(type))
-            .customResource(String.format("wood/%s", variant))
+            .customResource(variant.getCustomResource())
             .hardness(2.0F)
             .nonFullCube()
             .nonOpaque();
@@ -74,10 +74,10 @@ public class BlockWoodSupport extends BlockWood {
    * @return true if there is a support in 4 block radius
    */
   public static boolean isBeingSupported(World worldIn, BlockPos pos) {
-    int sRangeHor = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeHor;
-    int sRangeVert = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeUp;
-    int sRangeHorNeg = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeHor * -1;
-    int sRangeVertNeg = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeDown * -1;
+    int sRangeHor = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor;
+    int sRangeVert = ConfigWood.BLOCK.SUPPORT.supportBeamRangeUp;
+    int sRangeHorNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor * -1;
+    int sRangeVertNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeDown * -1;
     if (!worldIn.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32))) {
       return true; // If world isn't loaded...
     }
@@ -153,10 +153,10 @@ public class BlockWoodSupport extends BlockWood {
     int maxY = Math.max(from.getY(), to.getY());
     int minZ = Math.min(from.getZ(), to.getZ());
     int maxZ = Math.max(from.getZ(), to.getZ());
-    int sRangeHor = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeHor;
-    int sRangeVert = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeUp;
-    int sRangeHorNeg = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeHor * -1;
-    int sRangeVertNeg = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeDown * -1;
+    int sRangeHor = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor;
+    int sRangeVert = ConfigWood.BLOCK.SUPPORT.supportBeamRangeUp;
+    int sRangeHorNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor * -1;
+    int sRangeVertNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeDown * -1;
     BlockPos minPoint = new BlockPos(minX, minY, minZ);
     BlockPos maxPoint = new BlockPos(maxX, maxY, maxZ);
     for (BlockPos.MutableBlockPos searchingPoint : BlockPos.getAllInBoxMutable(

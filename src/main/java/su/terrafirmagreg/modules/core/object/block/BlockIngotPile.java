@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.base.block.BaseBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.ToolClasses;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.object.tile.TileIngotPile;
 import su.terrafirmagreg.modules.device.client.render.TESRIngotPile;
@@ -32,7 +33,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 
 import com.google.common.collect.ImmutableMap;
-import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 
@@ -198,7 +198,7 @@ public class BlockIngotPile extends BaseBlock implements IProviderTile {
   }
 
   @Override
-  public Class<? extends TileEntity> getTileEntityClass() {
+  public Class<TileIngotPile> getTileClass() {
     return TileIngotPile.class;
   }
 

@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.metal;
 
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
@@ -10,7 +11,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -204,8 +204,7 @@ public class BlockMetalSheet extends Block {
     if (tile != null) {
       for (EnumFacing face : EnumFacing.values()) {
         if (tile.getFace(face) && !worldIn.isSideSolid(pos.offset(face.getOpposite()), face)) {
-          InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(),
-                  new ItemStack(ItemMetalSheet.get(metal, Metal.ItemType.SHEET)));
+          StackUtils.spawnItemStack(worldIn, pos, new ItemStack(ItemMetalSheet.get(metal, Metal.ItemType.SHEET)));
           tile.setFace(face, false);
         }
       }

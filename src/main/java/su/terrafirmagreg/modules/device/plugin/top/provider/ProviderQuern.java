@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.device.plugin.top.provider;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
-import su.terrafirmagreg.modules.device.objects.tiles.TileQuern;
+import su.terrafirmagreg.modules.device.object.block.BlockQuern;
+import su.terrafirmagreg.modules.device.object.tile.TileQuern;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -22,7 +22,7 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 
-import static su.terrafirmagreg.modules.device.objects.tiles.TileQuern.SLOT_HANDSTONE;
+import static su.terrafirmagreg.modules.device.object.tile.TileQuern.SLOT_HANDSTONE;
 
 public class ProviderQuern implements IProbeInfoProvider {
 

@@ -22,6 +22,10 @@ public abstract class BaseItem extends Item implements IItemSettings {
     this.settings = Settings.of();
   }
 
+  public BaseItem(Settings settings) {
+    this.settings = settings;
+  }
+
   @Override
   public int getItemStackLimit() {
     return this.settings.getMaxCount();
@@ -34,8 +38,7 @@ public abstract class BaseItem extends Item implements IItemSettings {
 
   @Override
   public String getTranslationKey() {
-    return this.settings.getTranslationKey() == null ? super.getTranslationKey()
-            : "item." + this.settings.getTranslationKey();
+    return this.settings.getTranslationKey() == null ? super.getTranslationKey() : "item." + this.settings.getTranslationKey();
   }
 
   /**

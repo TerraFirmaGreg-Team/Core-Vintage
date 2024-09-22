@@ -12,7 +12,7 @@ public class ItemCoreMisc extends BaseItem {
             .registryKey("core/" + name)
             .size(size)
             .weight(weight)
-            .addOreDict(oreNameParts);
+            .oreDict(oreNameParts);
   }
 
 }

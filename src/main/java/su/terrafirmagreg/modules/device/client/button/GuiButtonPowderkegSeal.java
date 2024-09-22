@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.client.button;
 import su.terrafirmagreg.api.base.gui.component.button.BaseGuiButton;
 import su.terrafirmagreg.api.base.gui.component.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TilePowderKeg;
+import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

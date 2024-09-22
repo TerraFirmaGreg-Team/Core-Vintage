@@ -15,7 +15,7 @@ import net.dries007.tfc.util.config.TemperatureMode;
 import static su.terrafirmagreg.data.Constants.MOD_ID;
 import static su.terrafirmagreg.data.Constants.MOD_NAME;
 
-@Config(modid = MOD_ID, name = MOD_NAME + "/" + "world")
+@Config(modid = MOD_ID, name = MOD_NAME + "/module/World")
 public class ConfigWorld {
 
   @Config.Name("Blocks")

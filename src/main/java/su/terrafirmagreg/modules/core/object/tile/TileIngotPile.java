@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.core.object.tile;
 
 import su.terrafirmagreg.api.base.tile.BaseTile;
+import su.terrafirmagreg.api.util.StackUtils;
 
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -59,8 +59,7 @@ public class TileIngotPile
   }
 
   public void onBreakBlock() {
-    InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(),
-            new ItemStack(ItemIngot.get(metal, Metal.ItemType.INGOT), count));
+    StackUtils.spawnItemStack(world, pos, new ItemStack(ItemIngot.get(metal, Metal.ItemType.INGOT), count));
   }
 
   public void setMetal(Metal metal) {

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.init;
 
-import su.terrafirmagreg.modules.device.objects.recipes.quern.IQuernRecipeManager;
+import su.terrafirmagreg.modules.device.object.recipe.quern.IQuernRecipeManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypes;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;

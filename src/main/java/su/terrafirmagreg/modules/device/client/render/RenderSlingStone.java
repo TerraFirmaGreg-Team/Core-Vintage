@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.client.model.ModelSlingStone;
-import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStone;
+import su.terrafirmagreg.modules.device.object.entity.EntitySlingStone;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;

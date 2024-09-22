@@ -1,14 +1,17 @@
 package su.terrafirmagreg.api.base.item.spi;
 
 import su.terrafirmagreg.api.registry.provider.IProviderAutoReg;
+import su.terrafirmagreg.api.registry.provider.IProviderModel;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.data.ItemRarity;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.IRarity;
 
 
@@ -22,38 +25,38 @@ import java.util.List;
 import java.util.Set;
 
 @SuppressWarnings("unused")
-public interface IItemSettings extends IProviderAutoReg, ICapabilitySize {
+public interface IItemSettings extends IProviderAutoReg, IProviderModel {
 
   default int getItemStackLimit(@NotNull ItemStack stack) {
-    return getStackSize(stack);
+    return this.getStackSize(stack);
   }
 
   // Override Item methods
 
   default IRarity getForgeRarity(ItemStack stack) {
-    return getSettings().getRarity();
+    return this.getSettings().getRarity();
   }
 
   Settings getSettings();
 
   default String getTranslationKey() {
-    return "item." + getSettings().getTranslationKey();
+    return "item." + this.getSettings().getTranslationKey();
   }
 
   default int getMaxDamage() {
-    return getSettings().getMaxDamage();
+    return this.getSettings().getMaxDamage();
   }
 
   default int getItemStackLimit() {
-    return getSettings().getMaxCount();
+    return this.getSettings().getMaxCount();
   }
 
   // Override IOreDictProvider methods
 
   default void onRegisterOreDict() {
-    if (!getSettings().getOreDict().isEmpty()) {
-      getSettings().getOreDict().forEach(ore -> OreDictUtils.register(getItem(), ore));
-      getSettings().getOreDict().clear();
+    if (!this.getSettings().getOreDict().isEmpty()) {
+      this.getSettings().getOreDict().forEach(ore -> OreDictUtils.register(getItem(), ore));
+      this.getSettings().getOreDict().clear();
     }
   }
 
@@ -63,22 +66,33 @@ public interface IItemSettings extends IProviderAutoReg, ICapabilitySize {
 
   // Override IAutoRegProvider methods
 
+  @Override
+  default ResourceLocation getResourceLocation() {
+    if (this.getSettings().getResource() != null) {
+      return this.getSettings().getResource();
+    }
+
+    return null;
+  }
+
+  // Override IProviderModel methods
+
   default String getRegistryKey() {
-    return getSettings().getRegistryKey();
+    return this.getSettings().getRegistryKey();
   }
 
   // Override IItemSize methods
 
   default Weight getWeight(ItemStack stack) {
-    return getSettings().getWeight();
+    return this.getSettings().getWeight();
   }
 
   default Size getSize(ItemStack stack) {
-    return getSettings().getSize();
+    return this.getSettings().getSize();
   }
 
   default boolean canStack(ItemStack stack) {
-    return getSettings().isCanStack();
+    return this.getSettings().isCanStack();
   }
 
   @Getter
@@ -89,6 +103,8 @@ public interface IItemSettings extends IProviderAutoReg, ICapabilitySize {
 
     String registryKey;
     String translationKey;
+
+    ResourceLocation resource;
 
     Size size = Size.SMALL;
     Weight weight = Weight.LIGHT;
@@ -140,7 +156,12 @@ public interface IItemSettings extends IProviderAutoReg, ICapabilitySize {
       return this;
     }
 
-    public Settings addOreDict(Object... oreDict) {
+    public Settings customResource(String path) {
+      this.resource = ModUtils.resource(path);
+      return this;
+    }
+
+    public Settings oreDict(Object... oreDict) {
       this.oreDict.add(oreDict);
       return this;
     }

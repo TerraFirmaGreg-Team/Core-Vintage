@@ -142,9 +142,7 @@ public class OversizedItemInStorageArea {
               }
 
               //Check to see if we can place a fire below the player because daum look at that hot... block.
-              if (ModConfig.overheatOptions.incineratedPlayersStartFires && world.getBlockState(playerPos)
-                      .getBlock()
-                      .isReplaceable(world, playerPos)) {
+              if (ModConfig.overheatOptions.incineratedPlayersStartFires && world.getBlockState(playerPos).getBlock().isReplaceable(world, playerPos)) {
                 world.setBlockState(playerPos, Blocks.FIRE.getDefaultState(), 11);
               }
 

@@ -4,6 +4,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Consumer;
@@ -17,7 +19,7 @@ public class TETriggerList extends ArrayList<TileEntity> {
   }
 
   @Override
-  public Iterator<TileEntity> iterator() {
+  public @NotNull Iterator<TileEntity> iterator() {
     return new ItrWrapper(super.iterator());
   }
 

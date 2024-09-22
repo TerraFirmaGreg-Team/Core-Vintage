@@ -12,7 +12,7 @@ public abstract class BaseBlockTrapDoor extends BlockTrapDoor implements IBlockS
 
   protected final Settings settings;
 
-  protected BaseBlockTrapDoor(Settings settings) {
+  public BaseBlockTrapDoor(Settings settings) {
     super(settings.getMaterial());
 
     this.settings = settings;

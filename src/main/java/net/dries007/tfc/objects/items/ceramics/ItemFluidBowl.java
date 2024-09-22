@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.ceramics;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TileLatexExtractor;
+import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;

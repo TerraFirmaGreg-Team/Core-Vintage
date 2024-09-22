@@ -16,7 +16,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.Month;
+
+
+import su.terrafirmagreg.data.lib.MCDate.Month;
+
+
 import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.climate.ClimateHelper;
 

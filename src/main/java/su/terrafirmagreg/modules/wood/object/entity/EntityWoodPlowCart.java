@@ -74,7 +74,7 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
     if (this.isPassenger(pullingIn)) {
       return false;
     }
-    for (String entry : ConfigWood.ITEMS.PLOW_CART.canPull) {
+    for (String entry : ConfigWood.ITEM.PLOW_CART.canPull) {
       if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player"
               : EntityList.getKey(pullingIn).toString())) {
         return true;

@@ -1,15 +1,16 @@
 package pieman.caffeineaddon.client;
 
+import su.terrafirmagreg.api.base.container.BaseContainerTile;
+
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 
-import net.dries007.tfc.objects.container.ContainerTE;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.objects.te.TEDryingMat;
 
-public class ContainerDryingMat extends ContainerTE<TEDryingMat> {
+public class ContainerDryingMat extends BaseContainerTile<TEDryingMat> {
 
   public ContainerDryingMat(InventoryPlayer playerInv, TEDryingMat te) {
     super(playerInv, te);

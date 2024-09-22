@@ -1,6 +1,7 @@
 package se.gory_moon.horsepower.blocks;
 
-import net.minecraft.block.properties.IProperty;
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -17,8 +18,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.property.ExtendedBlockState;
-import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.common.Optional;
 
 
@@ -30,8 +29,8 @@ import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.client.model.modelvariants.ChopperModels;
 import se.gory_moon.horsepower.lib.Constants;
-import se.gory_moon.horsepower.tileentity.TileEntityChopper;
-import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
+import se.gory_moon.horsepower.tileentity.TileChopper;
+import se.gory_moon.horsepower.tileentity.TileHPBase;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
 
@@ -49,9 +48,11 @@ public class BlockChopper extends BlockHPChoppingBase implements IProbeInfoAcces
   private static final AxisAlignedBB COLLISION_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 2.0D, 1.0D);
 
   public BlockChopper() {
-    super();
-    setHardness(5.0F);
-    setResistance(5.0F);
+
+    getSettings()
+            .hardness(5.0F)
+            .resistance(5.0F);
+
     setRegistryName(Constants.CHOPPER_BLOCK);
     setTranslationKey(Constants.CHOPPER_BLOCK);
   }
@@ -87,12 +88,6 @@ public class BlockChopper extends BlockHPChoppingBase implements IProbeInfoAcces
     return COLLISION_AABB;
   }
 
-  @Nullable
-  @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-    return COLLISION_AABB;
-  }
-
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
     if (!worldIn.isRemote) {
@@ -102,9 +97,20 @@ public class BlockChopper extends BlockHPChoppingBase implements IProbeInfoAcces
     }
   }
 
+  public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    world.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
+
+    var tile = TileUtils.getTile(world, pos, TileHPBase.class);
+    if (tile == null) {
+      return;
+    }
+    tile.setForward(placer.getHorizontalFacing().getOpposite());
+    super.onBlockPlacedBy(world, pos, state, placer, stack);
+  }
+
   @Override
   protected BlockStateContainer createBlockState() {
-    return new ExtendedBlockState(this, new IProperty[]{PART, FACING}, new IUnlistedProperty[]{SIDE_TEXTURE, TOP_TEXTURE});
+    return new BlockStateContainer(this, PART, FACING);
   }
 
   @Override
@@ -116,8 +122,7 @@ public class BlockChopper extends BlockHPChoppingBase implements IProbeInfoAcces
 
   @Override
   public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
-    if (!((World) world).isRemote && pos.up().equals(neighbor) && !(world.getBlockState(neighbor)
-            .getBlock() instanceof BlockFiller)) {
+    if (!((World) world).isRemote && pos.up().equals(neighbor) && !(world.getBlockState(neighbor).getBlock() instanceof BlockFiller)) {
       ((World) world).setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
     }
   }
@@ -129,15 +134,10 @@ public class BlockChopper extends BlockHPChoppingBase implements IProbeInfoAcces
             .withProperty(PART, ChopperModels.BASE);
   }
 
-  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-    worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
-
-    TileEntityHPBase tile = getTileEntity(worldIn, pos);
-    if (tile == null) {
-      return;
-    }
-    tile.setForward(placer.getHorizontalFacing().getOpposite());
-    super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+  @Nullable
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return COLLISION_AABB;
   }
 
   @Override
@@ -146,25 +146,31 @@ public class BlockChopper extends BlockHPChoppingBase implements IProbeInfoAcces
 
   @NotNull
   @Override
-  public Class<?> getTileClass() {
-    return TileEntityChopper.class;
+  public Class<TileChopper> getTileClass() {
+    return TileChopper.class;
   }
 
   // The One Probe Integration
   @Optional.Method(modid = "theoneprobe")
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
-    TileEntityChopper tileEntity = getTileEntity(world, data.getPos());
-    if (tileEntity != null) {
+    var tile = TileUtils.getTile(world, data.getPos(), TileChopper.class);
+
+    if (tile != null) {
       double totalWindup = Configs.general.pointsForWindup > 0 ? Configs.general.pointsForWindup : 1;
-      probeInfo.progress((long) ((((double) tileEntity.getField(2)) / totalWindup) * 100L), 100L,
+      probeInfo.progress((long) ((((double) tile.getField(2)) / totalWindup) * 100L), 100L,
               new ProgressStyle().prefix(Localization.TOP.WINDUP_PROGRESS.translate() + " ")
                       .suffix("%"));
-      if (tileEntity.getField(0) > 1) {
-        probeInfo.progress((long) ((((double) tileEntity.getField(1)) / ((double) tileEntity.getField(0))) * 100L), 100L,
+      if (tile.getField(0) > 1) {
+        probeInfo.progress((long) ((((double) tile.getField(1)) / ((double) tile.getField(0))) * 100L), 100L,
                 new ProgressStyle().prefix(Localization.TOP.CHOPPING_PROGRESS.translate() + " ")
                         .suffix("%"));
       }
     }
+  }
+
+  @Override
+  public @Nullable TileChopper createNewTileEntity(World worldIn, int meta) {
+    return new TileChopper();
   }
 }

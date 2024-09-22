@@ -40,7 +40,7 @@ public class RenderWoodBoat extends Render<EntityWoodBoat> {
       GlStateManager.enableOutlineMode(this.getTeamColor(entity));
     }
 
-    ColourUtils.setColor(woodType.getColor());
+    ColourUtils.setGlColor(woodType.getColor());
 
     this.modelBoat.render(entity, partialTicks, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 

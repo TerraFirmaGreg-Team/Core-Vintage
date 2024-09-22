@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.CapabilityWorldTracker;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.spi.CollapseData;
 import su.terrafirmagreg.modules.core.object.entity.EntityFallingBlock;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile;
+import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodSupport;
 
 import net.minecraft.block.Block;

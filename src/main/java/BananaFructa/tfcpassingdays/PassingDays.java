@@ -35,8 +35,8 @@ public class PassingDays {
   @SubscribeEvent
   public void onTick(TickEvent.ClientTickEvent event) {
     if (await && Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null) {
-      Utils.writeDeclaredField(World.class, Minecraft.getMinecraft().world, "provider",
-              new PassingDayWorldProviderClient(Minecraft.getMinecraft().world.provider), true);
+      Utils.writeDeclaredField(World.class, Minecraft.getMinecraft().world, "provider", new PassingDayWorldProviderClient(Minecraft.getMinecraft().world.provider),
+              true);
       await = false;
     }
   }

@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.block.Block;
@@ -13,7 +14,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -228,7 +228,7 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
             .contains("saw")) {
       if (!worldIn.isRemote && RANDOM.nextBoolean()) {
         ItemStack dropStack = new ItemStack(BlockFruitTreeSapling.get(tree));
-        InventoryHelper.spawnItemStack(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, dropStack);
+        StackUtils.spawnItemStack(worldIn, pos, dropStack);
       }
     }
     super.onBlockHarvested(worldIn, pos, state, player);

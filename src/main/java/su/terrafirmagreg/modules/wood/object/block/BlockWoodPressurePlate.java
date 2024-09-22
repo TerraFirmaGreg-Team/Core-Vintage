@@ -29,7 +29,7 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
 
     getSettings()
             .registryKey(variant.getRegistryKey(type))
-            .customResource(String.format("wood/%s", variant))
+            .customResource(variant.getCustomResource())
             .sound(SoundType.WOOD)
             .hardness(0.5F)
             .oreDict(variant)

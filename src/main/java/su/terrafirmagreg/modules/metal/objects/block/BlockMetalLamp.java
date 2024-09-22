@@ -353,7 +353,7 @@ public class BlockMetalLamp
   }
 
   @Override
-  public Class<? extends TileEntity> getTileEntityClass() {
+  public Class<TileMetalLamp> getTileClass() {
     return TileMetalLamp.class;
   }
 

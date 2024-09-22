@@ -18,11 +18,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class ItemBlockDouble extends ItemBlock {
 
-  private static Block fillerBlock = null;
+  private final Block filler;
 
   public ItemBlockDouble(Block block, Block filler) {
     super(block);
-    fillerBlock = filler;
+    this.filler = filler;
   }
 
   @Override
@@ -44,10 +44,10 @@ public class ItemBlockDouble extends ItemBlock {
 
     if (!itemstack.isEmpty()
             && player.canPlayerEdit(pos, facing, itemstack) && worldIn.mayPlace(this.block, pos, false, facing, null)
-            && player.canPlayerEdit(posUp, facing, itemstack) && worldIn.mayPlace(fillerBlock, pos, false, facing, null)) {
+            && player.canPlayerEdit(posUp, facing, itemstack) && worldIn.mayPlace(this.filler, pos, false, facing, null)) {
       int i = this.getMetadata(itemstack.getMetadata());
       IBlockState blockState = this.block.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, i, player, hand);
-      IBlockState blockStateUp = fillerBlock.getStateForPlacement(worldIn, posUp, facing, hitX, hitY, hitZ, EnumFacing.DOWN.getIndex(), player,
+      IBlockState blockStateUp = this.filler.getStateForPlacement(worldIn, posUp, facing, hitX, hitY, hitZ, EnumFacing.DOWN.getIndex(), player,
               hand);
 
       if (placeBlockAt(itemstack, player, worldIn, pos, facing, hitX, hitY, hitZ, blockState)) {

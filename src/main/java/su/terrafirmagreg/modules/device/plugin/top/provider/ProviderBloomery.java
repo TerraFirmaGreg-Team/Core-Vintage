@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.device.plugin.top.provider;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockBloomery;
-import su.terrafirmagreg.modules.device.objects.tiles.TileBloomery;
+import su.terrafirmagreg.modules.device.object.block.BlockBloomery;
+import su.terrafirmagreg.modules.device.object.tile.TileBloomery;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

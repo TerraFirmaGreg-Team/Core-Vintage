@@ -2,10 +2,10 @@ package com.eerussianguy.firmalife;
 
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCow;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGoat;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalYak;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalZebu;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCow;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGoat;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalYak;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalZebu;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

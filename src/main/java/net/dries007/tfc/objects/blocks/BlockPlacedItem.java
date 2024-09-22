@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TilePitKiln;
+import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

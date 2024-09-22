@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalBlackBear;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalBlackBear;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalBlackBear;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

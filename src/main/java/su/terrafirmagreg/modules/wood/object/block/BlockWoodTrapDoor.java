@@ -26,7 +26,7 @@ public class BlockWoodTrapDoor extends BaseBlockTrapDoor implements IWoodBlock {
 
     getSettings()
             .registryKey(variant.getRegistryKey(type))
-            .customResource(String.format("wood/%s", variant))
+            .customResource(variant.getCustomResource())
             .sound(SoundType.WOOD)
             .hardness(0.5F)
             .oreDict(variant, "wood")

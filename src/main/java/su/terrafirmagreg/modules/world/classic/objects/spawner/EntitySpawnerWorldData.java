@@ -1,24 +1,24 @@
 package su.terrafirmagreg.modules.world.classic.objects.spawner;
 
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalAlpaca;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCamel;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalChicken;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCow;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDonkey;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDuck;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGoat;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGrouse;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalHorse;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalLlama;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMuskOx;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalOcelot;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalPig;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalQuail;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalSheep;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalWolf;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalYak;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalZebu;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalAlpaca;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCamel;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalChicken;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCow;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDonkey;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDuck;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGoat;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGrouse;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalHorse;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalLlama;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalMuskOx;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalOcelot;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalPig;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalQuail;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalWolf;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalYak;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalZebu;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataAnimalRespawn;
 
@@ -126,8 +126,7 @@ public final class EntitySpawnerWorldData {
             .getSpawnableList(EnumCreatureType.CREATURE);
 
     if (LIVESTOCK.containsKey(entity.getClass())) {
-      event.setResult(
-              Event.Result.ALLOW); // Always cancel vanilla's spawning since we take it from here
+      event.setResult(Event.Result.ALLOW); // Always cancel vanilla's spawning since we take it from here
       WorldDataAnimalRespawn data = WorldDataAnimalRespawn.get(worldIn);
       ChunkPos pos = new ChunkPos(new BlockPos(event.getX(), event.getY(), event.getZ()));
       long lastSpawnTick = data.getLastRespawnTick(entity, pos);

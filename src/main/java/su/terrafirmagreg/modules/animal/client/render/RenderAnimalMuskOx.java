@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalMuskOxBody;
-import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMuskOx;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalMuskOx;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;

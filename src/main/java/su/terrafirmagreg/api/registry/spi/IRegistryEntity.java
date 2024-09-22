@@ -41,8 +41,7 @@ public interface IRegistryEntity
    * @param name     The string name for the entity.
    * @return The entity that was registered.
    */
-  default <T extends Entity> EntityEntry entity(String name, Class<T> entClass, int primary,
-          int seconday) {
+  default <T extends Entity> EntityEntry entity(String name, Class<T> entClass, int primary, int seconday) {
 
     final EntityEntryBuilder<T> builder = EntityEntryBuilder.create();
     builder.entity(entClass);

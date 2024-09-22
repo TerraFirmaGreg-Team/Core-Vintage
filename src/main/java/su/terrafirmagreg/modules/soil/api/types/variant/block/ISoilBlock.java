@@ -129,8 +129,4 @@ public interface ISoilBlock extends IType<SoilType>, IVariant<SoilBlockVariant>,
 
     return false;
   }
-
-  default String getRegistryKey(SoilBlockVariant variant, SoilType type) {
-    return String.format("soil/%s/%s", variant, type);
-  }
 }

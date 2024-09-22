@@ -17,11 +17,11 @@ import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ContainerWoodBarrel extends BaseContainerTile<TileWoodBarrel> implements
-        IButtonHandler {
+public class ContainerWoodBarrel extends BaseContainerTile<TileWoodBarrel> implements IButtonHandler {
 
   public ContainerWoodBarrel(InventoryPlayer playerInv, TileWoodBarrel teWoodBarrel) {
     super(playerInv, teWoodBarrel);
+    
   }
 
   @Nullable

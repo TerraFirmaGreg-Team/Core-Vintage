@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.rock.object.block;
 
+import su.terrafirmagreg.data.ToolClasses;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
@@ -17,8 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import gregtech.api.items.toolitem.ToolClasses;
 
 import org.jetbrains.annotations.Nullable;
 

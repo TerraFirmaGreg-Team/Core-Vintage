@@ -27,7 +27,7 @@ public abstract class BaseBlockDoor extends BlockDoor implements IBlockSettings 
 
   protected final Settings settings;
 
-  protected BaseBlockDoor(Settings settings) {
+  public BaseBlockDoor(Settings settings) {
     super(settings.getMaterial());
 
     this.settings = settings;

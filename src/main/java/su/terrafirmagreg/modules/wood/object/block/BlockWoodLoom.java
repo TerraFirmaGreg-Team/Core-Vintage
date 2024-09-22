@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlockContainer;
-import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.ToolClasses;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -31,8 +31,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-import gregtech.api.items.toolitem.ToolClasses;
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -41,7 +39,7 @@ import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, IProviderTile {
+public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock {
 
   protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D,
           0.5625D, 1.0D, 0.9375D);
@@ -63,7 +61,7 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, IPr
 
     getSettings()
             .registryKey(variant.getRegistryKey(type))
-            .customResource(String.format("wood/%s", variant))
+            .customResource(variant.getCustomResource())
             .harvestLevel(ToolClasses.AXE, 0)
             .sound(SoundType.WOOD)
             .nonOpaque()
@@ -147,7 +145,7 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, IPr
   }
 
   @Override
-  public Class<? extends TileEntity> getTileEntityClass() {
+  public Class<TileWoodLoom> getTileClass() {
     return TileWoodLoom.class;
   }
 

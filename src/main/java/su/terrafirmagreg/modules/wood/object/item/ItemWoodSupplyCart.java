@@ -9,7 +9,6 @@ import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodCart;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodSupplyCart;
 
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -28,29 +27,29 @@ import lombok.Getter;
 @Getter
 public class ItemWoodSupplyCart extends BaseItem implements IWoodItem {
 
-  private final WoodItemVariant variant;
-  private final WoodType type;
+  protected final WoodItemVariant variant;
+  protected final WoodType type;
 
   public ItemWoodSupplyCart(WoodItemVariant variant, WoodType type) {
     this.type = type;
     this.variant = variant;
 
     getSettings()
+            .registryKey(variant.getRegistryKey(type))
+            .customResource(variant.getCustomResource())
             .size(Size.HUGE)
             .weight(Weight.VERY_HEAVY)
             .maxCount(1)
-            .addOreDict(variant)
-            .addOreDict(variant, type);
+            .oreDict(variant)
+            .oreDict(variant, type);
   }
 
   @NotNull
-  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn,
-          EnumHand handIn) {
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
     ItemStack itemstack = playerIn.getHeldItem(handIn);
     Vec3d vec3d = new Vec3d(playerIn.posX, playerIn.posY + playerIn.getEyeHeight(), playerIn.posZ);
     Vec3d lookVec = playerIn.getLookVec();
-    Vec3d vec3d1 = new Vec3d(lookVec.x * 5.0 + vec3d.x, lookVec.y * 5.0 + vec3d.y,
-            lookVec.z * 5.0 + vec3d.z);
+    Vec3d vec3d1 = new Vec3d(lookVec.x * 5.0 + vec3d.x, lookVec.y * 5.0 + vec3d.y, lookVec.z * 5.0 + vec3d.z);
 
     RayTraceResult result = worldIn.rayTraceBlocks(vec3d, vec3d1, false);
     if (result != null) {
@@ -75,10 +74,5 @@ public class ItemWoodSupplyCart extends BaseItem implements IWoodItem {
 
   public EntityWoodCart newCart(World worldIn) {
     return new EntityWoodSupplyCart(worldIn);
-  }
-
-  @Override
-  public IItemColor getItemColor() {
-    return (s, i) -> this.getType().getColor();
   }
 }

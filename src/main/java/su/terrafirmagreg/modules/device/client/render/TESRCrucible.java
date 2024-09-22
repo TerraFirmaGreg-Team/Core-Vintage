@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TileCrucible;
+import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

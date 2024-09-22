@@ -22,7 +22,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -257,7 +256,7 @@ public class TileMetalAnvil
               } else if (inventory.getStackInSlot(SLOT_INPUT_2).isEmpty()) {
                 inventory.setStackInSlot(SLOT_INPUT_2, output);
               } else {
-                InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), output);
+                StackUtils.spawnItemStack(world, pos, output);
               }
             }
           }

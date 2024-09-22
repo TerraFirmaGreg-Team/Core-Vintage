@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.init;
 
-import su.terrafirmagreg.modules.device.objects.recipes.quern.IQuernRecipeManager;
-import su.terrafirmagreg.modules.device.objects.recipes.quern.QuernRecipeManager;
+import su.terrafirmagreg.modules.device.object.recipe.quern.IQuernRecipeManager;
+import su.terrafirmagreg.modules.device.object.recipe.quern.QuernRecipeManager;
 
 public final class RegistriesDevice {
 

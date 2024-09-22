@@ -3,10 +3,10 @@ package su.terrafirmagreg.modules.wood.object.tile;
 import su.terrafirmagreg.api.base.tile.BaseTile;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
+import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemFlintAndSteel;
@@ -35,8 +35,7 @@ public class TileWoodToolRack extends BaseTile {
   private final NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
 
   public void onBreakBlock() {
-    items.forEach(
-            i -> InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), i));
+    items.forEach(i -> StackUtils.spawnItemStack(world, pos, i));
   }
 
   @Override

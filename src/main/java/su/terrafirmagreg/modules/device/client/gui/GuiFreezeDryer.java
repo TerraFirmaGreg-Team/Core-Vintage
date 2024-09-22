@@ -6,7 +6,7 @@ import su.terrafirmagreg.data.Unicode;
 import su.terrafirmagreg.data.lib.MCColor;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.network.CSPacketFreezeDryer;
-import su.terrafirmagreg.modules.device.objects.tiles.TileFreezeDryer;
+import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;

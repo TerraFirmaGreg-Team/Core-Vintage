@@ -2,9 +2,9 @@ package su.terrafirmagreg.modules.rock.object.tile;
 
 import su.terrafirmagreg.api.base.tile.BaseTile;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -40,10 +40,7 @@ public class TileRockGemDisplay extends BaseTile {
   }
 
   public void onBreakBlock() {
-    this.items.forEach((i) -> {
-      InventoryHelper.spawnItemStack(this.world, this.pos.getX(), this.pos.getY(), this.pos.getZ(),
-              i);
-    });
+    this.items.forEach((i) -> StackUtils.spawnItemStack(this.world, this.pos, i));
   }
 
   public void readFromNBT(NBTTagCompound nbt) {

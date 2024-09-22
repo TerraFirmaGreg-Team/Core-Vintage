@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
-import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;

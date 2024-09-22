@@ -1,7 +1,6 @@
 package su.terrafirmagreg.api.registry.provider;
 
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
@@ -21,7 +20,7 @@ public interface IProviderTile
    *
    * @return The TileEntity class to register associated to this block.
    */
-  Class<? extends TileEntity> getTileEntityClass();
+  Class<? extends TileEntity> getTileClass();
 
   /**
    * Gets the TESR for the tile entity. If null is returned nothing will be done.
@@ -31,9 +30,5 @@ public interface IProviderTile
   @SideOnly(Side.CLIENT)
   default @Nullable TileEntitySpecialRenderer<?> getTileRenderer() {
     return null;
-  }
-
-  default boolean hasTileEntity(IBlockState state) {
-    return true;
   }
 }

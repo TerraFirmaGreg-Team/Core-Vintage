@@ -97,7 +97,7 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemM
             }
             FluidStack fluidStack = handler.drain(Fluid.BUCKET_VOLUME, true);
             if (canCreateSources && fluidStack != null) {
-              fluidStack.amount = ConfigWood.BLOCKS.BARREL.tank;
+              fluidStack.amount = ConfigWood.BLOCK.BARREL.tank;
             }
             barrelCap.fill(fluidStack, true);
             return EnumActionResult.SUCCESS;
@@ -184,7 +184,7 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemM
           IBlockState state = worldIn.getBlockState(pos);
           IFluidHandler handler = FluidUtil.getFluidHandler(worldIn, pos, rayTrace.sideHit);
           if (handler != null && handler.drain(Fluid.BUCKET_VOLUME, false) != null) {
-            FluidTank tank = new FluidTank(ConfigWood.BLOCKS.BARREL.tank);
+            FluidTank tank = new FluidTank(ConfigWood.BLOCK.BARREL.tank);
             boolean canCreateSources = false; //default
             if (state.getBlock() instanceof BlockFluidClassic) {
               BlockFluidClassic fluidblock = (BlockFluidClassic) worldIn.getBlockState(pos)
@@ -198,7 +198,7 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemM
             }
             FluidStack fluidStack = handler.drain(Fluid.BUCKET_VOLUME, true);
             if (canCreateSources && fluidStack != null) {
-              fluidStack.amount = ConfigWood.BLOCKS.BARREL.tank;
+              fluidStack.amount = ConfigWood.BLOCK.BARREL.tank;
             }
             barrelCap.fill(fluidStack, true);
             return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
@@ -230,7 +230,7 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemM
   public static class ItemBarrelFluidHandler extends FluidWhitelistHandlerComplex {
 
     protected ItemBarrelFluidHandler(@NotNull ItemStack container) {
-      super(container, ConfigWood.BLOCKS.BARREL.tank, ConfigWood.BLOCKS.BARREL.fluidWhitelist);
+      super(container, ConfigWood.BLOCK.BARREL.tank, ConfigWood.BLOCK.BARREL.fluidWhitelist);
     }
 
     @Override

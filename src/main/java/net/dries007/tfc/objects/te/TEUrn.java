@@ -1,13 +1,13 @@
 package net.dries007.tfc.objects.te;
 
 import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -152,7 +152,7 @@ public class TEUrn extends BaseTileInventory implements IItemHandlerSidedCallbac
       // Need to create the full barrel and drop it now
       ItemStack stack = new ItemStack(state.getBlock());
       stack.setTagCompound(getItemTag());
-      InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+      StackUtils.spawnItemStack(world, pos, stack);
     }
   }
 

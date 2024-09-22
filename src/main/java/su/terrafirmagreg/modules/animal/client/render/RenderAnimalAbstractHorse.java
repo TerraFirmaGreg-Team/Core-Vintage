@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalHorse;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDonkey;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMule;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDonkey;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalMule;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

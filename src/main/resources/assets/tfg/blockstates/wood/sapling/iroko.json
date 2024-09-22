@@ -4,7 +4,7 @@
     "model": "tfg:wood/sapling",
     "textures": {
       "side": "tfg:blocks/wood/log/side/iroko",
-      "leaves": "tfg:blocks/wood/log/leaves/iroko"
+      "leaves": "tfg:blocks/wood/leaves/iroko"
     }
   },
   "variants": {

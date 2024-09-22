@@ -3,14 +3,13 @@ package su.terrafirmagreg.api.base.container;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 
 import org.jetbrains.annotations.NotNull;
 
-public abstract class BaseContainerItemStack extends Container {
+public abstract class BaseContainerItemStack extends BaseContainer {
 
   protected final ItemStack stack;
   protected final EntityPlayer player;
@@ -39,62 +38,59 @@ public abstract class BaseContainerItemStack extends Container {
 
   protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
     // Add Player Inventory Slots
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 9; j++) {
-        addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+    for (int stackSlotY = 0; stackSlotY < 3; stackSlotY++) {
+      for (int stackSlotX = 0; stackSlotX < 9; stackSlotX++) {
+        addSlotToContainer(new Slot(playerInv, stackSlotX + stackSlotY * 9 + 9, 8 + stackSlotX * 18, 84 + stackSlotY * 18));
       }
     }
 
-    for (int k = 0; k < 9; k++) {
-      addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
+    for (int hotbar = 0; hotbar < 9; hotbar++) {
+      addSlotToContainer(new Slot(playerInv, hotbar, 8 + hotbar * 18, 142));
     }
   }
 
   @Override
-  @NotNull
   public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+    ItemStack itemstack = ItemStack.EMPTY;
     // Slot that was clicked
     Slot slot = inventorySlots.get(index);
 
-    ItemStack itemstack;
-
     if (slot == null || !slot.getHasStack()) {
-      return ItemStack.EMPTY;
+      return itemstack;
     }
 
     if (index == itemIndex) {
-      return ItemStack.EMPTY;
+      return itemstack;
     }
 
-    ItemStack itemstack1 = slot.getStack();
-    itemstack = itemstack1.copy();
+    ItemStack stack = slot.getStack();
+    itemstack = stack.copy();
 
     // Begin custom transfer code here
-    int containerSlots = inventorySlots.size()
-            - player.inventory.mainInventory.size(); // number of slots in the container
+    int containerSlots = inventorySlots.size() - player.inventory.mainInventory.size(); // number of slots in the container
     if (index < containerSlots) {
       // Transfer out of the container
-      if (!this.mergeItemStack(itemstack1, containerSlots, inventorySlots.size(), true)) {
+      if (!this.mergeItemStack(stack, containerSlots, inventorySlots.size(), true)) {
         // Don't transfer anything
         return ItemStack.EMPTY;
       }
     }
     // Transfer into the container
     else {
-      if (!this.mergeItemStack(itemstack1, 0, containerSlots, false)) {
+      if (!this.mergeItemStack(stack, 0, containerSlots, false)) {
         return ItemStack.EMPTY;
       }
     }
 
-    if (itemstack1.getCount() == 0) {
+    if (stack.getCount() == 0) {
       slot.putStack(ItemStack.EMPTY);
     } else {
       slot.onSlotChanged();
     }
-    if (itemstack1.getCount() == itemstack.getCount()) {
+    if (stack.getCount() == itemstack.getCount()) {
       return ItemStack.EMPTY;
     }
-    slot.onTake(player, itemstack1);
+    slot.onTake(player, stack);
     return itemstack;
   }
 
@@ -113,8 +109,4 @@ public abstract class BaseContainerItemStack extends Container {
     }
   }
 
-  @Override
-  public boolean canInteractWith(EntityPlayer playerIn) {
-    return true;
-  }
 }

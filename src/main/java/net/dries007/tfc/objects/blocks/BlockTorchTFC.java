@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
+import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.SoundType;

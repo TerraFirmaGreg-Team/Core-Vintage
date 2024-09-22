@@ -30,8 +30,7 @@ public final class TileUtils {
    * @return экземпляр типизированного объекта TileEntity
    */
   @SuppressWarnings("unchecked")
-  public static @Nullable <T extends TileEntity> T getTile(IBlockAccess world, BlockPos pos,
-          Class<T> aClass) {
+  public static @Nullable <T extends TileEntity> T getTile(IBlockAccess world, BlockPos pos, Class<T> aClass) {
     var tile = TileUtils.getTile(world, pos);
     if (!aClass.isInstance(tile)) {
       return null;

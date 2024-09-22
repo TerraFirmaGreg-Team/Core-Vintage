@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.entity.ai;
 
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.device.objects.tiles.TileNestBox;
+import su.terrafirmagreg.modules.device.object.tile.TileNestBox;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityAnimal;

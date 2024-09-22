@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.base.container.BaseContainerItemStack;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,11 +18,22 @@ import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ContainerSack extends ContainerItemStack implements ISlotCallback {
+public class ContainerSack extends BaseContainerItemStack implements ISlotCallback {
 
   public ContainerSack(InventoryPlayer playerInv, ItemStack stack) {
     super(playerInv, stack);
     this.itemIndex += 4;
+  }
+
+  @Override
+  protected void addContainerSlots() {
+    IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+    if (inventory instanceof ISlotCallback callback) {
+      addSlotToContainer(new SlotCallback(inventory, 0, 71, 23, callback));
+      addSlotToContainer(new SlotCallback(inventory, 1, 89, 23, callback));
+      addSlotToContainer(new SlotCallback(inventory, 2, 71, 41, callback));
+      addSlotToContainer(new SlotCallback(inventory, 3, 89, 41, callback));
+    }
   }
 
   /**
@@ -88,16 +100,5 @@ public class ContainerSack extends ContainerItemStack implements ISlotCallback {
     }
     slot.onTake(player, itemstack1);
     return itemstack;
-  }
-
-  @Override
-  protected void addContainerSlots() {
-    IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-    if (inventory instanceof ISlotCallback callback) {
-      addSlotToContainer(new SlotCallback(inventory, 0, 71, 23, callback));
-      addSlotToContainer(new SlotCallback(inventory, 1, 89, 23, callback));
-      addSlotToContainer(new SlotCallback(inventory, 2, 71, 41, callback));
-      addSlotToContainer(new SlotCallback(inventory, 3, 89, 41, callback));
-    }
   }
 }

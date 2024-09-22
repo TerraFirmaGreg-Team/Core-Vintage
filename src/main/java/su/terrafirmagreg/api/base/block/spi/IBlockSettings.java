@@ -1,15 +1,13 @@
 package su.terrafirmagreg.api.base.block.spi;
 
 import su.terrafirmagreg.api.base.item.BaseItemBlock;
-import su.terrafirmagreg.api.base.item.spi.ItemRarity;
 import su.terrafirmagreg.api.registry.provider.IProviderAutoReg;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockState;
 import su.terrafirmagreg.api.registry.provider.IProviderModel;
-import su.terrafirmagreg.api.registry.provider.IProviderOreDict;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.data.ItemRarity;
 import su.terrafirmagreg.data.lib.model.CustomStateMap;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
@@ -55,8 +53,7 @@ import java.util.function.Predicate;
 import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
 
 @SuppressWarnings("unused")
-public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, IProviderModel,
-        IProviderOreDict, ICapabilitySize {
+public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, IProviderModel {
 
   default SoundType getSoundType() {
 
@@ -154,6 +151,8 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
     return (Block) this;
   }
 
+  // Override IProviderBlockState methods
+
   @Override
   @SideOnly(Side.CLIENT)
   default IStateMapper getStateMapper() {
@@ -171,7 +170,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
     return stateMapper.build();
   }
 
-  // Override IAutoRegProvider methods
+  // Override IProviderModel methods
 
   @Override
   default ResourceLocation getResourceLocation() {
@@ -269,7 +268,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
     boolean hasItemSubtypes = false;
     boolean ticksRandomly = false;
     boolean requiresCorrectTool = false;
-    boolean useNeighborBrightness = false;
+    boolean useNeighborBrightness;
     boolean isReplaceable;
 
     boolean isAir;
@@ -363,7 +362,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
     }
 
     public Settings oreDict(@NotNull Object... oreDict) {
-      if (oreDict != null) {
+      if (oreDict != null && oreDict.length > 0) {
         this.oreDict.add(oreDict);
       }
       return this;
@@ -507,8 +506,8 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
       return this;
     }
 
-    public Settings isSuffocating(boolean isSuffocating) {
-      this.isSuffocating = state -> isSuffocating;
+    public Settings isSuffocating() {
+      this.isSuffocating = state -> true;
       return this;
     }
 

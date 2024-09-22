@@ -4,10 +4,10 @@ import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.device.client.render.RenderSlingMetal;
 import su.terrafirmagreg.modules.device.client.render.RenderSlingStone;
 import su.terrafirmagreg.modules.device.client.render.RenderSlingUnknownMetal;
-import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStone;
-import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStoneMetal;
-import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStoneMetalLight;
-import su.terrafirmagreg.modules.device.objects.entity.EntityUnknownProjectile;
+import su.terrafirmagreg.modules.device.object.entity.EntitySlingStone;
+import su.terrafirmagreg.modules.device.object.entity.EntitySlingStoneMetal;
+import su.terrafirmagreg.modules.device.object.entity.EntitySlingStoneMetalLight;
+import su.terrafirmagreg.modules.device.object.entity.EntityUnknownProjectile;
 
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntry;

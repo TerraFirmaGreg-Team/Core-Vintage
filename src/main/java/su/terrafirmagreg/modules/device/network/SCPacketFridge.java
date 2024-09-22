@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.network;
 
 import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TileFridge;
+import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;

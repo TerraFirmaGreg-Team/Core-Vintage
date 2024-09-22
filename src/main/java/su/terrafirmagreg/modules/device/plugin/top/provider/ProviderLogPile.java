@@ -3,8 +3,8 @@ package su.terrafirmagreg.modules.device.plugin.top.provider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.data.Constants;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockLogPile;
-import su.terrafirmagreg.modules.device.objects.tiles.TileLogPile;
+import su.terrafirmagreg.modules.device.object.block.BlockLogPile;
+import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

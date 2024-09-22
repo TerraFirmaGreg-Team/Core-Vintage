@@ -1,7 +1,9 @@
 package su.terrafirmagreg.modules.metal.objects.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.ToolClasses;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 import su.terrafirmagreg.modules.metal.api.types.variant.block.IMetalBlock;
 import su.terrafirmagreg.modules.metal.api.types.variant.block.MetalBlockVariant;
@@ -15,7 +17,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -29,7 +30,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import gregtech.api.items.toolitem.ToolClasses;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
@@ -153,10 +153,7 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
     if (TileUtils.isNotNull(tile)) {
       for (EnumFacing face : EnumFacing.values()) {
         if (tile.getFace(face) && !worldIn.isSideSolid(pos.offset(face.getOpposite()), face)) {
-          InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(),
-                  new ItemStack(OreDictUnifier
-                          .get(OrePrefix.plate, Materials.Iron)
-                          .getItem()));
+          StackUtils.spawnItemStack(worldIn, pos, new ItemStack(OreDictUnifier.get(OrePrefix.plate, Materials.Iron).getItem()));
           tile.setFace(face, false);
         }
       }

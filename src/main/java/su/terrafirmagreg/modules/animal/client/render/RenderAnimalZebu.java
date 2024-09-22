@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalZebu;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalZebu;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalZebu;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;

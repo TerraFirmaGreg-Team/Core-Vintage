@@ -1,5 +1,8 @@
 package se.gory_moon.horsepower.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.ToolClasses;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
@@ -32,12 +35,11 @@ import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.client.model.modelvariants.PressModels;
 import se.gory_moon.horsepower.lib.Constants;
-import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
-import se.gory_moon.horsepower.tileentity.TileEntityPress;
+import se.gory_moon.horsepower.tileentity.TileHPBase;
+import se.gory_moon.horsepower.tileentity.TilePress;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -53,11 +55,13 @@ public class BlockPress extends BlockHPBase implements IProbeInfoAccessor {
   private static final AxisAlignedBB COLLISION_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D + 3D / 16D, 1.0D);
 
   public BlockPress() {
-    super(Material.WOOD);
-    setHardness(5.0F);
-    setResistance(5.0F);
-    setHarvestLevel("axe", 1);
-    setSoundType(SoundType.WOOD);
+    super(Settings.of(Material.WOOD));
+
+    getSettings()
+            .hardness(5.0F)
+            .resistance(5.0F)
+            .sound(SoundType.WOOD)
+            .harvestLevel(ToolClasses.AXE, 1);
     setRegistryName(Constants.PRESS_BLOCK);
     setTranslationKey(Constants.PRESS_BLOCK);
   }
@@ -77,12 +81,6 @@ public class BlockPress extends BlockHPBase implements IProbeInfoAccessor {
     return BOUND_AABB;
   }
 
-  @Nullable
-  @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-    return COLLISION_AABB;
-  }
-
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
     if (!worldIn.isRemote) {
@@ -92,15 +90,15 @@ public class BlockPress extends BlockHPBase implements IProbeInfoAccessor {
   }
 
   @Override
-  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-    worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
+  public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    world.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
 
-    TileEntityHPBase tile = getTileEntity(worldIn, pos);
+    var tile = TileUtils.getTile(world, pos, TileHPBase.class);
     if (tile == null) {
       return;
     }
     tile.setForward(placer.getHorizontalFacing().getOpposite());
-    super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+    super.onBlockPlacedBy(world, pos, state, placer, stack);
   }
 
   @Override
@@ -124,38 +122,40 @@ public class BlockPress extends BlockHPBase implements IProbeInfoAccessor {
   }
 
   @Override
-  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer, EnumHand hand) {
-    return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite())
-            .withProperty(PART, PressModels.BASE);
+  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer,
+          EnumHand hand) {
+    return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(PART, PressModels.BASE);
+  }
+
+  @Nullable
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return COLLISION_AABB;
   }
 
   // The One Probe Integration
   @Optional.Method(modid = "theoneprobe")
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
-    TileEntityPress tileEntity = getTileEntity(world, data.getPos());
-    if (tileEntity != null) {
+
+    var tile = TileUtils.getTile(world, data.getPos(), TilePress.class);
+    if (tile != null) {
       probeInfo.progress(
-              (long) ((((double) tileEntity.getField(0)) / (float) (Configs.general.pointsForPress > 0 ? Configs.general.pointsForPress : 1)) *
+              (long) ((((double) tile.getField(0)) / (float) (Configs.general.pointsForPress > 0 ? Configs.general.pointsForPress : 1)) *
                       100L), 100L, new ProgressStyle().prefix(Localization.TOP.PRESS_PROGRESS.translate() + " ")
                       .suffix("%"));
     }
   }
 
   @Override
-  public void emptiedOutput(World world, BlockPos pos) {
-  }
-
-  @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
+          float hitZ) {
     if (worldIn.isRemote) {
       return true;
     }
 
     TileEntity tileentity = worldIn.getTileEntity(pos);
-    if (!worldIn.isRemote && tileentity != null) {
+    if (tileentity != null) {
       final IFluidHandler fluidHandler = tileentity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
       if (fluidHandler != null && FluidUtil.interactWithFluidHandler(playerIn, hand, fluidHandler)) {
         tileentity.markDirty();
@@ -165,15 +165,19 @@ public class BlockPress extends BlockHPBase implements IProbeInfoAccessor {
     return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
   }
 
-  @Nullable
   @Override
-  public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TileEntityPress();
+  public void emptiedOutput(World world, BlockPos pos) {
   }
 
-  @NotNull
+  @Nullable
   @Override
-  public Class<?> getTileClass() {
-    return TileEntityPress.class;
+  public TilePress createNewTileEntity(World worldIn, int meta) {
+    return new TilePress();
+  }
+
+
+  @Override
+  public Class<TilePress> getTileClass() {
+    return TilePress.class;
   }
 }

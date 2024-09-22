@@ -1,11 +1,13 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.objects.containers.ContainerAlloyCalculator;
+import su.terrafirmagreg.modules.device.object.tile.TileAlloyCalculator;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -17,16 +19,12 @@ import net.dries007.tfc.util.Alloy;
 import java.util.Map;
 
 @SideOnly(Side.CLIENT)
-public class GuiAlloyCalculator extends GuiContainer {
+public class GuiAlloyCalculator extends BaseGuiContainerTile<TileAlloyCalculator> {
 
-  public static final ResourceLocation BACKGROUND = ModUtils.resource(
-          "textures/gui/container/alloy_calculator.png");
+  public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/alloy_calculator.png");
 
-  private final ContainerAlloyCalculator container;
-
-  public GuiAlloyCalculator(ContainerAlloyCalculator container) {
-    super(container);
-    this.container = container;
+  public GuiAlloyCalculator(Container container, InventoryPlayer playerInv, TileAlloyCalculator tile) {
+    super(container, playerInv, tile, BACKGROUND);
     this.ySize = 186;
   }
 
@@ -34,7 +32,7 @@ public class GuiAlloyCalculator extends GuiContainer {
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 
     this.fontRenderer.drawString("Alloy Calculator", 8, 6, 0x404040);
-    Alloy alloy = this.container.tile.getAlloy();
+    Alloy alloy = this.tile.getAlloy();
     if (alloy != null) {
       Metal result = alloy.getResult();
       float scale = 0.85f;
@@ -68,11 +66,4 @@ public class GuiAlloyCalculator extends GuiContainer {
     this.renderHoveredToolTip(mouseX - this.guiLeft, mouseY - this.guiTop);
   }
 
-  @Override
-  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    this.drawDefaultBackground();
-    this.mc.getTextureManager().bindTexture(BACKGROUND);
-    this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
-    //drawRect(this.guiLeft, this.guiTop, this.guiLeft + this.xSize, this.guiTop + this.ySize, 0xFFC6C6C6);
-  }
 }

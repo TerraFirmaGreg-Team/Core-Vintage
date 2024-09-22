@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfg:wood/leaves",
     "textures": {
-      "all": "tfg:blocks/wood/log/leaves/jungle"
+      "all": "tfg:blocks/wood/leaves/ebony"
     }
   },
   "variants": {

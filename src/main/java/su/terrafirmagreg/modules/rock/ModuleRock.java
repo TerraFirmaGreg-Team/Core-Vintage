@@ -13,7 +13,6 @@ import su.terrafirmagreg.modules.rock.plugin.top.TheOneProbeRock;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -39,10 +38,6 @@ public final class ModuleRock extends ModuleBase {
 
   }
 
-  @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
-
-  }
 
   @Override
   public void onInit(FMLInitializationEvent event) {

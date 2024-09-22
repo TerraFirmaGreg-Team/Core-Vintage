@@ -10,16 +10,16 @@ import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Адаптация {@link NonNullList}
  */
-public class RegistryList<E extends IForgeRegistryEntry<E>> extends AbstractList<E> {
+public class RegistryList<E extends IForgeRegistryEntry<E>> extends LinkedList<E> {
 
   private final List<E> delegate;
   private final E defaultElement;
@@ -44,6 +44,7 @@ public class RegistryList<E extends IForgeRegistryEntry<E>> extends AbstractList
     return new RegistryList<>(Collections.nCopies(size, fill), fill);
   }
 
+  @SafeVarargs
   public static <E extends IForgeRegistryEntry<E>> RegistryList<E> from(E defaultElementIn, E... elements) {
     return new RegistryList<>(Arrays.asList(elements), defaultElementIn);
   }
@@ -54,6 +55,18 @@ public class RegistryList<E extends IForgeRegistryEntry<E>> extends AbstractList
 
   public void register(RegistryEvent.Register<E> registry) {
     this.forEach(registry.getRegistry()::register);
+  }
+
+  public int size() {
+    return this.delegate.size();
+  }
+
+  public void clear() {
+    if (this.defaultElement == null) {
+      super.clear();
+    } else {
+      Collections.fill(this, this.defaultElement);
+    }
   }
 
   @Nonnull
@@ -73,17 +86,5 @@ public class RegistryList<E extends IForgeRegistryEntry<E>> extends AbstractList
 
   public E remove(int index) {
     return this.delegate.remove(index);
-  }
-
-  public void clear() {
-    if (this.defaultElement == null) {
-      super.clear();
-    } else {
-      Collections.fill(this, this.defaultElement);
-    }
-  }
-
-  public int size() {
-    return this.delegate.size();
   }
 }

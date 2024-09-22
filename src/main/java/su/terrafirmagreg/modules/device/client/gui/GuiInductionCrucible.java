@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TileInductionCrucible;
+import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;

@@ -6,6 +6,7 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
 import su.terrafirmagreg.modules.wood.object.item.ItemWoodAnimalCart;
 import su.terrafirmagreg.modules.wood.object.item.ItemWoodBoat;
+import su.terrafirmagreg.modules.wood.object.item.ItemWoodBucket;
 import su.terrafirmagreg.modules.wood.object.item.ItemWoodLumber;
 import su.terrafirmagreg.modules.wood.object.item.ItemWoodMisc;
 import su.terrafirmagreg.modules.wood.object.item.ItemWoodPlowCart;
@@ -23,39 +24,41 @@ public final class ItemsWood {
 
   public static ItemWoodMisc STICK_BUNDLE;
   public static ItemWoodMisc STICK_BUNCH;
+  public static ItemWoodBucket BUCKET;
 
   public static void onRegister(RegistryManager registry) {
     BOAT = WoodItemVariant
             .builder("boat")
-            .setFactory(ItemWoodBoat::new)
+            .factory(ItemWoodBoat::new)
             .build(registry);
 
     LUMBER = WoodItemVariant
             .builder("lumber")
-            .setFactory(ItemWoodLumber::new)
+            .factory(ItemWoodLumber::new)
             .build(registry);
 
     WHEEL = WoodItemVariant
             .builder("wheel")
-            .setFactory(ItemWoodWheel::new)
+            .factory(ItemWoodWheel::new)
             .build(registry);
 
     SUPPLY_CART = WoodItemVariant
             .builder("supply_cart")
-            .setFactory(ItemWoodSupplyCart::new)
+            .factory(ItemWoodSupplyCart::new)
             .build(registry);
 
     ANIMAL_CART = WoodItemVariant
             .builder("animal_cart")
-            .setFactory(ItemWoodAnimalCart::new)
+            .factory(ItemWoodAnimalCart::new)
             .build(registry);
 
     PLOW_CART = WoodItemVariant
             .builder("plow_cart")
-            .setFactory(ItemWoodPlowCart::new)
+            .factory(ItemWoodPlowCart::new)
             .build(registry);
 
     STICK_BUNDLE = registry.item(new ItemWoodMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"));
     STICK_BUNCH = registry.item(new ItemWoodMisc("stick_bunch", Size.NORMAL, Weight.LIGHT));
+    BUCKET = registry.item(new ItemWoodBucket());
   }
 }

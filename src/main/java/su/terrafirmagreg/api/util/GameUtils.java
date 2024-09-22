@@ -59,7 +59,7 @@ public final class GameUtils {
     return JOINER_DOT.join(Constants.MODID_TFC, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
   }
 
-  public static boolean isModLoaded(String modname) {
-    return Loader.isModLoaded(modname);
+  public static boolean isModLoaded(String modName) {
+    return Loader.isModLoaded(modName);
   }
 }

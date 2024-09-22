@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.network;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TileFreezeDryer;
+import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;

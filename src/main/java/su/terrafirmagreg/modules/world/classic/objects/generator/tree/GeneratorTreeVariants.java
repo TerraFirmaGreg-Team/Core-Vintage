@@ -30,8 +30,7 @@ public class GeneratorTreeVariants implements ITreeGenerator {
    * @param numVariants The number of variant files. Files need to be named 1.nbt, 2.nbt, 3.nbt ...
    */
   public GeneratorTreeVariants(boolean useRotation, int numVariants) {
-    this(useRotation,
-            IntStream.range(1, numVariants + 1).mapToObj(String::valueOf).toArray(String[]::new));
+    this(useRotation, IntStream.range(1, numVariants + 1).mapToObj(String::valueOf).toArray(String[]::new));
   }
 
   /**
@@ -47,8 +46,7 @@ public class GeneratorTreeVariants implements ITreeGenerator {
   }
 
   @Override
-  public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-          Random rand, boolean isWorldGen) {
+  public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree, Random rand, boolean isWorldGen) {
     String variant = variants[variants.length == 1 ? 0 : rand.nextInt(variants.length)];
     ResourceLocation base = new ResourceLocation(tree.getRegistryName() + "/" + variant);
 

@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockGrindstone;
 import se.gory_moon.horsepower.blocks.BlockHPBase;
-import se.gory_moon.horsepower.tileentity.TileEntityHPHorseBase;
+import se.gory_moon.horsepower.tileentity.TileHPHorseBase;
 import se.gory_moon.horsepower.util.RenderUtils;
 
 import java.util.stream.StreamSupport;
@@ -25,9 +25,10 @@ public class ClientHandler {
   public static void renderWorld(RenderWorldLastEvent event) {
     final ItemStack[] itemStack = {ItemStack.EMPTY};
     if (Configs.client.showObstructedPlace) {
-      if (StreamSupport.stream(Minecraft.getMinecraft().player.getHeldEquipment().spliterator(), false)
+      Minecraft mc = Minecraft.getMinecraft();
+      if (StreamSupport.stream(mc.player.getHeldEquipment().spliterator(), false)
               .anyMatch(stack -> !stack.isEmpty() && isHPBlock((itemStack[0] = stack).getItem()))) {
-        Minecraft mc = Minecraft.getMinecraft();
+
         if (mc.objectMouseOver == null || mc.objectMouseOver.typeOfHit != RayTraceResult.Type.BLOCK) {
           return;
         }
@@ -52,8 +53,8 @@ public class ClientHandler {
   }
 
   private static boolean isHPBlock(Item item) {
-    if (item instanceof ItemBlock && ((ItemBlock) item).getBlock() instanceof BlockHPBase) {
-      return TileEntityHPHorseBase.class.isAssignableFrom(((BlockHPBase) ((ItemBlock) item).getBlock()).getTileClass());
+    if (item instanceof ItemBlock itemBlock && itemBlock.getBlock() instanceof BlockHPBase blockHPBase) {
+      return TileHPHorseBase.class.isAssignableFrom(blockHPBase.getTileClass());
     }
     return false;
   }

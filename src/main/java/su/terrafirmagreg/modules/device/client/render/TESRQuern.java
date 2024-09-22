@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TileQuern;
+import su.terrafirmagreg.modules.device.object.tile.TileQuern;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

@@ -7,30 +7,26 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
 
-import net.minecraft.client.renderer.color.IItemColor;
-
 
 import lombok.Getter;
 
 @Getter
 public class ItemWoodWheel extends BaseItem implements IWoodItem {
 
-  private final WoodItemVariant variant;
-  private final WoodType type;
+  protected final WoodItemVariant variant;
+  protected final WoodType type;
 
   public ItemWoodWheel(WoodItemVariant variant, WoodType type) {
     this.variant = variant;
     this.type = type;
 
     getSettings()
+            .registryKey(variant.getRegistryKey(type))
+            .customResource(variant.getCustomResource())
             .weight(Weight.HEAVY)
             .size(Size.NORMAL)
-            .addOreDict(variant)
-            .addOreDict(variant, type);
+            .oreDict(variant)
+            .oreDict(variant, type);
   }
 
-  @Override
-  public IItemColor getItemColor() {
-    return (s, i) -> this.getType().getColor();
-  }
 }

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
 import su.terrafirmagreg.data.MathConstants;
-import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalCoyote;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalCoyote;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

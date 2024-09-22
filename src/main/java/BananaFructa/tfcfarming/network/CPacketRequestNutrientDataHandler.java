@@ -27,16 +27,15 @@ public class CPacketRequestNutrientDataHandler implements IMessageHandler<CPacke
     var cap = CapabilityPlayer.get(player);
     Skill skill = cap.getSkill(SkillType.AGRICULTURE);
     // TODO: V config
-    if (Math.abs(player.posX - message.x) <= 5 && Math.abs(player.posZ - message.z) <= 5 && (skill.getTier()
-            .isAtLeast(SkillTier.ADEPT) || player.capabilities.isCreativeMode)) {
+    if (Math.abs(player.posX - message.x) <= 5 && Math.abs(player.posZ - message.z) <= 5 && (skill.getTier().isAtLeast(SkillTier.ADEPT)
+            || player.capabilities.isCreativeMode)) {
       if (message.y == -1) {
         NutrientValues values = TFCFarming.INSTANCE.worldStorage.getNutrientValues(message.x, message.z);
         int[] NPK = values.getNPKSet();
         return new SPacketNutrientDataResponse(true, NPK[0], NPK[1], NPK[2], message.x, message.z);
       } else if (Math.abs(player.posY - message.y) <= 5 && TFCFarming.firmalifeLoaded) {
         TEPlanterN tePlanterN = TileUtils.getTile(player.getEntityWorld(), new BlockPos(message.x, message.y, message.z), TEPlanterN.class);
-        TEHangingPlanterN teHangingPlanterN = TileUtils.getTile(player.getEntityWorld(), new BlockPos(message.x, message.y, message.z),
-                TEHangingPlanterN.class);
+        TEHangingPlanterN teHangingPlanterN = TileUtils.getTile(player.getEntityWorld(), new BlockPos(message.x, message.y, message.z), TEHangingPlanterN.class);
         if (tePlanterN == null && teHangingPlanterN == null) {
           return new SPacketNutrientDataResponse(false, 0, 0, 0, message.x, message.y, message.z, false);
         }

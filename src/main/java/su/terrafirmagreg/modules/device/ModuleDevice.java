@@ -31,7 +31,7 @@ public final class ModuleDevice extends ModuleBase {
   public final CreativeTabs DEVICES_TAB;
 
   public ModuleDevice() {
-    this.DEVICES_TAB = BaseCreativeTab.of("device", "device/firestarter");
+    this.DEVICES_TAB = BaseCreativeTab.of("device", "device/bellows");
 
     this.enableAutoRegistry(DEVICES_TAB);
     this.enableNetwork();

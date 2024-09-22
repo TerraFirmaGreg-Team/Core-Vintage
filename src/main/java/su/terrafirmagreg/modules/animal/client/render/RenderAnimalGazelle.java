@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalGazelle;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalGazelle;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalGazelle;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

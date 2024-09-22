@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.render.animal;
 
-import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

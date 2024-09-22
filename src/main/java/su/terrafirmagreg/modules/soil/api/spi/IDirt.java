@@ -22,8 +22,7 @@ public interface IDirt {
       world.setBlockState(pos, DIRT.get(soil).getDefaultState());
       AxisAlignedBB axisalignedbb = BlockSoilFarmland.FLIPPED_AABB.offset(pos);
       for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb)) {
-        double d0 = Math.min(axisalignedbb.maxY - axisalignedbb.minY,
-                axisalignedbb.maxY - entity.getEntityBoundingBox().minY);
+        double d0 = Math.min(axisalignedbb.maxY - axisalignedbb.minY, axisalignedbb.maxY - entity.getEntityBoundingBox().minY);
         entity.setPositionAndUpdate(entity.posX, entity.posY + d0 + 0.001D, entity.posZ);
       }
     }

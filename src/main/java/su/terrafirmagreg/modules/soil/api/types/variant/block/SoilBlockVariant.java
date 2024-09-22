@@ -53,12 +53,12 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
     return new SoilBlockVariant(name);
   }
 
-  public SoilBlockVariant setFactory(BiFunction<SoilBlockVariant, SoilType, ? extends Block> factory) {
+  public SoilBlockVariant factory(BiFunction<SoilBlockVariant, SoilType, ? extends Block> factory) {
     this.factory = factory;
     return this;
   }
 
-  public SoilBlockVariant setFallingSpecification(Specification specification) {
+  public SoilBlockVariant fallingSpecification(Specification specification) {
     this.specification = specification;
     return this;
   }

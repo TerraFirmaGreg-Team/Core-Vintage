@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.gui.overlay;
 
-import su.terrafirmagreg.modules.device.objects.blocks.BlockFridge;
+import su.terrafirmagreg.modules.device.object.block.BlockFridge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
@@ -25,6 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 import static su.terrafirmagreg.data.Properties.UPPER;
 
 /**
@@ -138,9 +139,9 @@ public interface IHighlightHandler {
         if (state.getValue(UPPER)) {
           pos = pos.down();
         }
-        int slot = BlockFridge.getPlayerLookingItem(pos, player, state.getValue(BlockFridge.FACING));
+        int slot = BlockFridge.getPlayerLookingItem(pos, player, state.getValue(HORIZONTAL));
         if (slot > -1) {
-          Vec3d itemPos = BlockFridge.getItems(state.getValue(BlockFridge.FACING))[slot];
+          Vec3d itemPos = BlockFridge.getItems(state.getValue(HORIZONTAL))[slot];
           double d3 = player.lastTickPosX + (player.posX - player.lastTickPosX) * (double) event.getPartialTicks();
           double d4 = player.lastTickPosY + (player.posY - player.lastTickPosY) * (double) event.getPartialTicks();
           double d5 = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * (double) event.getPartialTicks();

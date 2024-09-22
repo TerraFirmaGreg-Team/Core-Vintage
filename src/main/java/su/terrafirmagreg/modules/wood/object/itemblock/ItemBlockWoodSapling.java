@@ -19,8 +19,7 @@ public class ItemBlockWoodSapling extends BaseItemBlock {
 
   @Override
   public boolean onEntityItemUpdate(EntityItem entityItem) {
-    if (!entityItem.world.isRemote && entityItem.age >= entityItem.lifespan && !entityItem.getItem()
-            .isEmpty()) {
+    if (!entityItem.world.isRemote && entityItem.age >= entityItem.lifespan && !entityItem.getItem().isEmpty()) {
       final BlockPos pos = entityItem.getPosition();
       if (placeAndDecreaseCount(entityItem, pos)) {
         entityItem.setDead();
@@ -38,8 +37,7 @@ public class ItemBlockWoodSapling extends BaseItemBlock {
   }
 
   private boolean placeAndDecreaseCount(EntityItem entityItem, BlockPos pos) {
-    if (entityItem.world.mayPlace(block, pos, false, EnumFacing.UP, null)
-            && entityItem.world.setBlockState(pos, block.getDefaultState())) {
+    if (entityItem.world.mayPlace(block, pos, false, EnumFacing.UP, null) && entityItem.world.setBlockState(pos, block.getDefaultState())) {
       entityItem.getItem().shrink(1);
     }
     return entityItem.getItem().isEmpty();

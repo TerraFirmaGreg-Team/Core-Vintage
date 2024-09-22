@@ -41,7 +41,11 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.calendar.Month;
+
+
+import su.terrafirmagreg.data.lib.MCDate.Month;
+
+
 import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -222,6 +226,28 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
     return layer == BlockRenderLayer.TRANSLUCENT || layer == BlockRenderLayer.CUTOUT;
   }
 
+  public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+    IBlockState soil = worldIn.getBlockState(pos.down());
+    IBlockState up = worldIn.getBlockState(pos.up());
+
+    if (worldIn.isAirBlock(pos.up())) {
+      return false;
+    }
+    if (up.getBlock() instanceof BlockTallGrassWater) {
+      return false;
+    }
+    if (state.getBlock() == this) {
+      return (soil.getBlock()
+              .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) || BlockUtils.isGround(soil)) &&
+              plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+    }
+    return this.canSustainBush(soil);
+  }
+
+  protected boolean canSustainBush(IBlockState state) {
+    return true;
+  }
+
   int getDayPeriod() {
     return Calendar.CALENDAR_TIME.getHourOfDay() / (ICalendar.HOURS_IN_DAY / 4);
   }
@@ -315,6 +341,13 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
     }
   }
 
+  protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
+    if (!this.canBlockStay(worldIn, pos, state)) {
+      this.dropBlockAsItem(worldIn, pos, state, 0);
+      worldIn.setBlockState(pos, plant.getWaterType());
+    }
+  }
+
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (!worldIn.isAreaLoaded(pos, 1)) {
@@ -344,35 +377,6 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
     } else {
       return ConfigTFC.General.MISC.plantGrowthRate;
     }
-  }
-
-  protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
-    if (!this.canBlockStay(worldIn, pos, state)) {
-      this.dropBlockAsItem(worldIn, pos, state, 0);
-      worldIn.setBlockState(pos, plant.getWaterType());
-    }
-  }
-
-  public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-    IBlockState soil = worldIn.getBlockState(pos.down());
-    IBlockState up = worldIn.getBlockState(pos.up());
-
-    if (worldIn.isAirBlock(pos.up())) {
-      return false;
-    }
-    if (up.getBlock() instanceof BlockTallGrassWater) {
-      return false;
-    }
-    if (state.getBlock() == this) {
-      return (soil.getBlock()
-              .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) || BlockUtils.isGround(soil)) &&
-              plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
-    }
-    return this.canSustainBush(soil);
-  }
-
-  protected boolean canSustainBush(IBlockState state) {
-    return true;
   }
 
   @Override

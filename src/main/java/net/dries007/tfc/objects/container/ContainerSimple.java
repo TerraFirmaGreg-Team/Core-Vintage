@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.base.container.BaseContainerItemStack;
+import su.terrafirmagreg.api.base.container.BaseContainerTile;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -10,8 +13,8 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A very simple container implementation. Used for gui's that have no internal inventory, or no TE they need to access Prefer using {@link ContainerTE} instead for
- * tile entities or {@link ContainerItemStack} for items
+ * A very simple container implementation. Used for gui's that have no internal inventory, or no TE they need to access Prefer using {@link BaseContainerTile} instead
+ * for tile entities or {@link BaseContainerItemStack} for items
  */
 
 public class ContainerSimple extends Container {

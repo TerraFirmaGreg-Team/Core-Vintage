@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.entity;
 
-import su.terrafirmagreg.modules.device.objects.blocks.BlockGreenhouseWall;
+import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseWall;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBreakDoor;

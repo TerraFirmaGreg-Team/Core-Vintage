@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public abstract class Type<T> implements Comparable<Type<T>> {
 
-  private final String name;
+  protected final String name;
 
   protected Type(String name) {
     this.name = name;

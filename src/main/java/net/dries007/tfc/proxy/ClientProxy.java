@@ -1,5 +1,8 @@
 package net.dries007.tfc.proxy;
 
+import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.data.lib.MCDate;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +15,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.Month;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -65,7 +67,7 @@ public class ClientProxy implements IProxy {
     if (birthday != null) {
       return birthday;
     }
-    return I18n.format("tfc.enum.day." + Calendar.DAY_NAMES[(int) (totalDays % 7)]);
+    return I18n.format("tfc.enum.day." + MCDate.Week.valueOf((int) (totalDays % 7)).getName());
   }
 
   @NotNull

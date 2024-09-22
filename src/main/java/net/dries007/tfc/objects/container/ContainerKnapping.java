@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.base.container.BaseContainerItemStack;
 import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +21,7 @@ import net.dries007.tfc.util.SimpleCraftMatrix;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ContainerKnapping extends ContainerItemStack implements IButtonHandler {
+public class ContainerKnapping extends BaseContainerItemStack implements IButtonHandler {
 
   private final SimpleCraftMatrix matrix;
   private final KnappingType type;
@@ -127,6 +128,12 @@ public class ContainerKnapping extends ContainerItemStack implements IButtonHand
     addSlotToContainer(new SlotKnappingOutput(new ItemStackHandler(1), 0, 128, 44, this::resetMatrix));
   }
 
+  private void resetMatrix() {
+    matrix.setAll(false);
+    requiresReset = true;
+    consumeIngredientStackAfterComplete();
+  }
+
   @Override
   protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
     // Add Player Inventory Slots (lower down)
@@ -139,11 +146,5 @@ public class ContainerKnapping extends ContainerItemStack implements IButtonHand
     for (int k = 0; k < 9; k++) {
       addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142 + 18));
     }
-  }
-
-  private void resetMatrix() {
-    matrix.setAll(false);
-    requiresReset = true;
-    consumeIngredientStackAfterComplete();
   }
 }

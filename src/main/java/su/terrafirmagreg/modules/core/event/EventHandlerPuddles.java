@@ -58,7 +58,7 @@ public class EventHandlerPuddles {
             BlockPos puddlePos = pos.add(0, y, 0);
 
             if (this.canSpawnPuddle(world, puddlePos)) {
-              if (random.nextInt(100) < ConfigCore.BLOCKS.PUDDLE.puddleRate) {
+              if (random.nextInt(100) < ConfigCore.BLOCK.PUDDLE.puddleRate) {
                 world.setBlockState(puddlePos.up(), BlocksCore.PUDDLE.getDefaultState(), 2);
               }
             }
@@ -102,7 +102,7 @@ public class EventHandlerPuddles {
     BlockPos pos = event.getPos().up();
     EntityPlayer player = event.getEntityPlayer();
     if (world.getBlockState(pos).getBlock() == BlocksCore.PUDDLE) {
-      if (stack.getItem() == Items.GLASS_BOTTLE && ConfigCore.BLOCKS.PUDDLE.canUseGlassBottle) {
+      if (stack.getItem() == Items.GLASS_BOTTLE && ConfigCore.BLOCK.PUDDLE.canUseGlassBottle) {
         if (event.getFace() == EnumFacing.UP) {
           if (!world.isRemote) {
             stack.shrink(1);

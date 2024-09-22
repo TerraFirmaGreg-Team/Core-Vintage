@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.device.objects.tiles.TilePitKiln;
+import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

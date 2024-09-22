@@ -48,17 +48,16 @@ import net.dries007.tfc.objects.items.metal.ItemMetalBucket;
 import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.objects.items.tools.ItemRockToolHead;
-import net.dries007.tfc.objects.items.wood.ItemWoodenBucket;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
 
+import lombok.Getter;
+
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_GEMS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_ROCK_BLOCKS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
 import static net.dries007.tfc.util.Helpers.getNull;
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
@@ -124,8 +123,6 @@ public final class ItemsTFC {
   @GameRegistry.ObjectHolder("quiver")
   public static final ItemQuiver QUIVER = getNull();
 
-  public static final ItemWoodenBucket WOODEN_BUCKET = getNull();
-
   @GameRegistry.ObjectHolder("metal/bucket/blue_steel")
   public static final ItemMetalBucket BLUE_STEEL_BUCKET = getNull();
   @GameRegistry.ObjectHolder("metal/bucket/red_steel")
@@ -158,21 +155,12 @@ public final class ItemsTFC {
   @GameRegistry.ObjectHolder("food/olive_paste")
   public static final Item OLIVE_PASTE = getNull();
 
+  @Getter
   private static ImmutableList<Item> allSimpleItems;
+  @Getter
   private static ImmutableList<ItemOreTFC> allOreItems;
+  @Getter
   private static ImmutableList<ItemGem> allGemItems;
-
-  public static ImmutableList<Item> getAllSimpleItems() {
-    return allSimpleItems;
-  }
-
-  public static ImmutableList<ItemOreTFC> getAllOreItems() {
-    return allOreItems;
-  }
-
-  public static ImmutableList<ItemGem> getAllGemItems() {
-    return allGemItems;
-  }
 
   @SuppressWarnings("ConstantConditions")
   @SubscribeEvent
@@ -180,7 +168,6 @@ public final class ItemsTFC {
     IForgeRegistry<Item> r = event.getRegistry();
     Builder<Item> simpleItems = ImmutableList.builder();
 
-    register(r, "wooden_bucket", new ItemWoodenBucket(), CT_WOOD); //not a simple item, use a custom model
     register(r, "metal/bucket/blue_steel", new ItemMetalBucket(Metal.BLUE_STEEL, Metal.ItemType.BUCKET),
             CT_METAL); //not a simple item, use a custom model
     register(r, "metal/bucket/red_steel", new ItemMetalBucket(Metal.RED_STEEL, Metal.ItemType.BUCKET),
@@ -189,10 +176,10 @@ public final class ItemsTFC {
     {
       Builder<ItemOreTFC> b = new Builder<>();
       for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
-        b.add(register(r, "ore/" + ore.getRegistryName().getPath(), new ItemOreTFC(ore), CT_ROCK_BLOCKS));
+        b.add(register(r, "ore/" + ore.getRegistryName().getPath(), new ItemOreTFC(ore), CT_METAL));
         if (ore.isGraded()) {
           simpleItems.add(register(r, "ore/small/" + ore.getRegistryName()
-                  .getPath(), new ItemSmallOre(ore), CT_ROCK_BLOCKS));
+                  .getPath(), new ItemSmallOre(ore), CT_METAL));
         }
       }
       allOreItems = b.build();
@@ -202,7 +189,7 @@ public final class ItemsTFC {
     {
       Builder<ItemGem> b = new Builder<>();
       for (Gem gem : Gem.values()) {
-        b.add(register(r, "gem/" + gem.name().toLowerCase(), new ItemGem(gem), CT_GEMS));
+        b.add(register(r, "gem/" + gem.name().toLowerCase(), new ItemGem(gem), CT_MISC));
       }
       allGemItems = b.build();
     }
@@ -228,9 +215,9 @@ public final class ItemsTFC {
     for (RockCategory cat : TFCRegistries.ROCK_CATEGORIES.getValuesCollection()) {
       for (Rock.ToolType type : Rock.ToolType.values()) {
         simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "/" + cat.getRegistryName()
-                .getPath(), type.create(cat), CT_ROCK_BLOCKS));
+                .getPath(), type.create(cat), CT_MISC));
         simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "_head/" + cat.getRegistryName()
-                .getPath(), new ItemRockToolHead(cat, type), CT_ROCK_BLOCKS));
+                .getPath(), new ItemRockToolHead(cat, type), CT_MISC));
       }
     }
 

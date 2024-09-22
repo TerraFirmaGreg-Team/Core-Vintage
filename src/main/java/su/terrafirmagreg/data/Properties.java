@@ -1,6 +1,9 @@
 package su.terrafirmagreg.data;
 
-import su.terrafirmagreg.data.lib.property.PropertyObject;
+
+import su.terrafirmagreg.data.lib.property.PropertyUnlistedDirection;
+import su.terrafirmagreg.data.lib.property.PropertyUnlistedObject;
+import su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState;
 
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
@@ -13,84 +16,58 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 
-import com.eerussianguy.firmalife.init.AgingFL;
+import com.eerussianguy.firmalife.init.EnumAging;
+
+import lombok.experimental.UtilityClass;
+
+import java.util.Arrays;
 
 @SuppressWarnings("unused")
+@UtilityClass
 public final class Properties {
 
-  /**
-   * Used to hold another block state. This is useful for mimicking other blocks.
-   */
-  public static final PropertyObject<IBlockState> HELD_STATE = new PropertyObject<>("held_state", IBlockState.class);
 
-  /**
-   * Used to hold an IBlockAccess of the block.
-   */
-  public static final PropertyObject<IBlockAccess> BLOCK_ACCESS = new PropertyObject<>("world", IBlockAccess.class);
+  public static final PropertyUnlistedObject<IBlockState> HELD_STATE = new PropertyUnlistedObject<>("held_state", IBlockState.class);
+  public static final PropertyUnlistedObject<IBlockAccess> BLOCK_ACCESS = new PropertyUnlistedObject<>("world", IBlockAccess.class);
+  public static final PropertyUnlistedObject<BlockPos> BLOCK_POS = new PropertyUnlistedObject<>("pos", BlockPos.class);
 
-  /**
-   * Used to hold the BlockPos of the block.
-   */
-  public static final PropertyObject<BlockPos> BLOCK_POS = new PropertyObject<>("pos", BlockPos.class);
 
-  /**
-   * Used to determine the color of a block. Only supports the 16 vanilla colors.
-   */
+  public static final PropertyUnlistedDirection UNLISTED_FACING = new PropertyUnlistedDirection("facing");
+
+
   public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
-
-  /**
-   * Used to determine the direction a block is facing.
-   */
   public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
-
   public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
+  public static final PropertyEnum<EnumFacing.Axis> XZ = PropertyEnum.create("axis", EnumFacing.Axis.class, EnumFacing.Axis.X, EnumFacing.Axis.Z);
+  public static final PropertyEnum<EnumAging> AGE = PropertyEnum.create("age", EnumAging.class);
+  public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", EnumLeafState.class);
+//  public static final PropertyEnum<EnumChopperPart> CHOPPER_PART = PropertyEnum.create("part", EnumChopperPart.class);
+//  public static final PropertyEnum<EnumGrindStonePart> GRINDSTONE_PART = PropertyEnum.create("part", EnumGrindStonePart.class);
+//  public static final PropertyEnum<EnumHandGrindstonePart> HAND_GRINDSTONE_PART = PropertyEnum.create("part", EnumHandGrindstonePart.class);
+//  public static final PropertyEnum<EnumPressPart> PRESS_PART = PropertyEnum.create("part", EnumPressPart.class);
 
-  /**
-   * Used to determine the direction a block is facing. Only includes horizontal directions. (N-S-W-E)
-   */
+
+  public static final PropertyDirection DIRECTIONAL = PropertyDirection.create("facing");
   public static final PropertyDirection HORIZONTAL = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+  public static final PropertyDirection HORIZONTALS = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
   public static final PropertyDirection VERTICAL = PropertyDirection.create("facing", EnumFacing.Plane.VERTICAL);
 
-  /**
-   * Used to determine if a block is connected on the bottom face.
-   */
+
+  public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 2);
+  public static final PropertyInteger JARS = PropertyInteger.create("jars", 1, 4);
+  public static final PropertyInteger WEDGES = PropertyInteger.create("wedges", 0, 3);
+  public static final PropertyInteger CLAY_LEVEL = PropertyInteger.create("clay", 0, 4);
+  public static final PropertyInteger SAPLING_STAGE = PropertyInteger.create("stage", 0, 4);
+
+
   public static final PropertyBool DOWN = PropertyBool.create("down");
-
-  /**
-   * Used to determine if a block is connected on the upward face.
-   */
   public static final PropertyBool UP = PropertyBool.create("up");
-
-  /**
-   * Used to determine if a block is connected on the northern face.
-   */
   public static final PropertyBool NORTH = PropertyBool.create("north");
-
-  /**
-   * Used to determine if a block is connected on the southern face.
-   */
   public static final PropertyBool SOUTH = PropertyBool.create("south");
-
-  /**
-   * Used to determine if a block is connected on the eastern face.
-   */
   public static final PropertyBool EAST = PropertyBool.create("east");
-
-  /**
-   * Used to determine if a block is connected on the western face.
-   */
   public static final PropertyBool WEST = PropertyBool.create("west");
-
-  /**
-   * Used to determine if a block has been enabled or not.
-   */
   public static final PropertyBool ENABLED = PropertyBool.create("enabled");
-
-  /**
-   * Used to handle whether or not the block is on or off. Used mainly by redstone blocks.
-   */
   public static final PropertyBool POWERED = PropertyBool.create("powered");
-
   public static final PropertyBool MOSSY = PropertyBool.create("mossy");
   public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
   public static final PropertyBool SEALED = PropertyBool.create("sealed");
@@ -116,16 +93,7 @@ public final class Properties {
   public static final PropertyBool NEEDS_SOURCE = PropertyBool.create("needs_source");
   public static final PropertyBool STASIS = PropertyBool.create("stasis");
   public static final PropertyBool SNOWY = PropertyBool.create("snowy");
+  public static final PropertyBool FANCY = PropertyBool.create("fancy");
+  public static final PropertyBool FILLED = PropertyBool.create("filled");
 
-  public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 2);
-  public static final PropertyInteger JARS = PropertyInteger.create("jars", 1, 4);
-  public static final PropertyInteger WEDGES = PropertyInteger.create("wedges", 0, 3);
-  public static final PropertyInteger CLAY_LEVEL = PropertyInteger.create("clay", 0, 4);
-
-  public static final PropertyEnum<AgingFL> AGE = PropertyEnum.create("age", AgingFL.class);
-  public static final PropertyEnum<EnumFacing.Axis> XZ = PropertyEnum.create("axis", EnumFacing.Axis.class, EnumFacing.Axis.X, EnumFacing.Axis.Z);
-
-  private Properties() {
-    throw new IllegalAccessError("Utility class");
-  }
 }

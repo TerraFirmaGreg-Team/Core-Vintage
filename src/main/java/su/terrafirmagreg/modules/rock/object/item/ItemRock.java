@@ -24,8 +24,8 @@ public abstract class ItemRock extends BaseItem implements IRockItem {
             .registryKey(variant.getRegistryKey(type))
             .size(Size.SMALL)
             .weight(Weight.LIGHT)
-            .addOreDict(variant)
-            .addOreDict(variant, type)
-            .addOreDict(variant, type.getCategory());
+            .oreDict(variant)
+            .oreDict(variant, type)
+            .oreDict(variant, type.getCategory());
   }
 }

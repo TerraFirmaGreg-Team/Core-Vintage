@@ -1,5 +1,8 @@
 package se.gory_moon.horsepower.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.ToolClasses;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -24,7 +27,7 @@ import mcjty.theoneprobe.api.ProbeMode;
 import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
 import se.gory_moon.horsepower.client.model.modelvariants.GrindStoneModels;
 import se.gory_moon.horsepower.lib.Constants;
-import se.gory_moon.horsepower.tileentity.TileEntityGrindstone;
+import se.gory_moon.horsepower.tileentity.TileGrindstone;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
 
@@ -43,11 +46,14 @@ public class BlockGrindstone extends BlockHPBase implements IProbeInfoAccessor {
   private static final AxisAlignedBB BOUNDING_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 13D / 16D, 1.0D);
 
   public BlockGrindstone() {
-    super(Material.ROCK);
-    setHardness(1.5F);
-    setResistance(10F);
-    setHarvestLevel("pickaxe", 1);
-    setSoundType(SoundType.STONE);
+    super(Settings.of(Material.ROCK));
+
+    getSettings()
+            .sound(SoundType.STONE)
+            .hardness(1.5F)
+            .resistance(10F)
+            .harvestLevel(ToolClasses.PICKAXE, 1);
+
     setRegistryName(Constants.GRINDSTONE_BLOCK);
     setTranslationKey(Constants.GRINDSTONE_BLOCK);
   }
@@ -64,12 +70,6 @@ public class BlockGrindstone extends BlockHPBase implements IProbeInfoAccessor {
 
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     return BOUNDING_AABB;
-  }
-
-  @Nullable
-  @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-    return COLLISION_AABB;
   }
 
   @Override
@@ -92,13 +92,19 @@ public class BlockGrindstone extends BlockHPBase implements IProbeInfoAccessor {
     tooltip.add(Localization.ITEM.HORSE_GRINDSTONE.USE.translate());
   }
 
+  @Nullable
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return COLLISION_AABB;
+  }
+
   // The One Probe Integration
   @Optional.Method(modid = "theoneprobe")
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
-    TileEntityGrindstone tileEntity = getTileEntity(world, data.getPos());
-    if (tileEntity != null) {
-      probeInfo.progress((long) ((((double) tileEntity.getField(1)) / ((double) tileEntity.getField(0))) * 100L), 100L,
+    var tile = TileUtils.getTile(world, data.getPos(), TileGrindstone.class);
+    if (tile != null) {
+      probeInfo.progress((long) ((((double) tile.getField(1)) / ((double) tile.getField(0))) * 100L), 100L,
               new ProgressStyle().prefix(Localization.TOP.GRINDSTONE_PROGRESS.translate() + " ")
                       .suffix("%"));
     }
@@ -126,7 +132,12 @@ public class BlockGrindstone extends BlockHPBase implements IProbeInfoAccessor {
 
   @NotNull
   @Override
-  public Class<?> getTileClass() {
-    return TileEntityGrindstone.class;
+  public Class<TileGrindstone> getTileClass() {
+    return TileGrindstone.class;
+  }
+
+  @Override
+  public @Nullable TileGrindstone createNewTileEntity(World worldIn, int meta) {
+    return new TileGrindstone();
   }
 }

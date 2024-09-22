@@ -1,7 +1,7 @@
 package lyeoj.tfcthings.items;
 
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalPig;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalPig;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalTypes;

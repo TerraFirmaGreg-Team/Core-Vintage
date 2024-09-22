@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalAlpacaWool;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalAlpaca;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalAlpaca;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;

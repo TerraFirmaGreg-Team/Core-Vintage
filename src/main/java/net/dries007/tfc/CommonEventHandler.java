@@ -27,7 +27,7 @@ import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
+import su.terrafirmagreg.modules.device.object.block.BlockQuern;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 import su.terrafirmagreg.modules.metal.objects.block.BlockMetalAnvil;
@@ -883,7 +883,7 @@ public final class CommonEventHandler {
 
     if (ConfigTFC.General.OVERRIDES.forceNoVanillaNaturalRegeneration) {
       // Natural regeneration should be disabled, allows TFC to have custom regeneration
-      event.getWorld().getGameRules().setOrCreateGameRule("naturalRegeneration", "false");
+      world.getGameRules().setOrCreateGameRule("naturalRegeneration", "false");
       TerraFirmaCraft.getLog().warn("Updating gamerule naturalRegeneration to false!");
     }
   }
@@ -1017,8 +1017,7 @@ public final class CommonEventHandler {
     Entity target = event.getTarget();
     EntityPlayer player = event.getEntityPlayer();
 
-    if (entityType != null && target.hurtResistantTime == 0 && !target.getEntityWorld().isRemote && player.getHeldItemMainhand()
-            .isEmpty() && player.isSneaking()) {
+    if (entityType != null && target.hurtResistantTime == 0 && !target.getEntityWorld().isRemote && player.getHeldItemMainhand().isEmpty() && player.isSneaking()) {
       String entityTypeName = entityType.toString();
       for (String pluckable : ConfigTFC.General.MISC.pluckableEntities) {
         if (pluckable.equals(entityTypeName)) {

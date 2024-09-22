@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
 import su.terrafirmagreg.data.MathConstants;
-import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalPig;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalPig;
 
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;

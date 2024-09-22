@@ -7,7 +7,7 @@ import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityAgeable;

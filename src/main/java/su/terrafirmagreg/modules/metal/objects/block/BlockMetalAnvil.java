@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.metal.objects.block;
 import su.terrafirmagreg.api.base.block.BaseBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.ToolClasses;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
@@ -22,7 +23,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -38,7 +38,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 
-import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;
 
@@ -254,7 +253,7 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
   }
 
   @Override
-  public Class<? extends TileEntity> getTileEntityClass() {
+  public Class<TileMetalAnvil> getTileClass() {
     return TileMetalAnvil.class;
   }
 

@@ -3,7 +3,7 @@ package net.dries007.tfc.util.interaction;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
-import su.terrafirmagreg.modules.device.objects.tiles.TileLogPile;
+import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile.LAYERS;
+import static su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile.LAYERS;
 
 @Mod.EventBusSubscriber(modid = MODID_TFC)
 public final class InteractionManager {

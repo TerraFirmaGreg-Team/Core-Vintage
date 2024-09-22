@@ -3,15 +3,15 @@ package su.terrafirmagreg.modules.device.init;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.modules.device.objects.items.ItemCraftingTool;
-import su.terrafirmagreg.modules.device.objects.items.ItemDeviceMisc;
-import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
-import su.terrafirmagreg.modules.device.objects.items.ItemGrindstone;
-import su.terrafirmagreg.modules.device.objects.items.ItemLeatherFlask;
-import su.terrafirmagreg.modules.device.objects.items.ItemMetalFlask;
-import su.terrafirmagreg.modules.device.objects.items.ItemSling;
-import su.terrafirmagreg.modules.device.objects.items.ItemSlingAmmo;
-import su.terrafirmagreg.modules.device.objects.items.ItemSlingReinforced;
+import su.terrafirmagreg.modules.device.object.item.ItemCraftingTool;
+import su.terrafirmagreg.modules.device.object.item.ItemDeviceMisc;
+import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
+import su.terrafirmagreg.modules.device.object.item.ItemGrindstone;
+import su.terrafirmagreg.modules.device.object.item.ItemLeatherFlask;
+import su.terrafirmagreg.modules.device.object.item.ItemMetalFlask;
+import su.terrafirmagreg.modules.device.object.item.ItemSling;
+import su.terrafirmagreg.modules.device.object.item.ItemSlingAmmo;
+import su.terrafirmagreg.modules.device.object.item.ItemSlingReinforced;
 
 public final class ItemsDevice {
 

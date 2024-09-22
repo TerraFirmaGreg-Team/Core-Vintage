@@ -1,10 +1,10 @@
 {
   "forge_marker": 1,
   "defaults": {
+    "model": "tfg:wood/fence_gate_log/closed",
     "textures": {
       "planks": "tfg:blocks/wood/planks",
-      "side": "tfg:blocks/wood/log/side/pine",
-      "end": "tfg:blocks/wood/log/end/pine"
+      "side": "tfg:blocks/wood/log/side/pine"
     }
   },
   "variants": {
@@ -12,9 +12,7 @@
       {}
     ],
     "inventory": [
-      {
-        "model": "tfg:wood/fence_gate_log/closed"
-      }
+      {}
     ],
     "facing": {
       "south": {},
@@ -30,7 +28,6 @@
     },
     "open": {
       "false": {
-        "model": "tfg:wood/fence_gate_log/closed"
       },
       "true": {
         "model": "tfg:wood/fence_gate_log/open"

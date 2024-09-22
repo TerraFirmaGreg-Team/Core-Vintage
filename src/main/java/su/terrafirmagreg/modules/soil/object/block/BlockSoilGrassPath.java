@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
+import su.terrafirmagreg.data.ToolClasses;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.soil.api.spi.IDirt;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
@@ -21,8 +22,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import gregtech.api.items.toolitem.ToolClasses;
 
 import lombok.Getter;
 

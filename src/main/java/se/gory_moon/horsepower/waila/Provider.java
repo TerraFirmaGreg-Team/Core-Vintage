@@ -27,13 +27,13 @@ import se.gory_moon.horsepower.blocks.BlockHandGrindstone;
 import se.gory_moon.horsepower.blocks.BlockPress;
 import se.gory_moon.horsepower.blocks.ModBlocks;
 import se.gory_moon.horsepower.lib.Reference;
-import se.gory_moon.horsepower.tileentity.TileEntityChopper;
-import se.gory_moon.horsepower.tileentity.TileEntityFiller;
-import se.gory_moon.horsepower.tileentity.TileEntityGrindstone;
-import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
-import se.gory_moon.horsepower.tileentity.TileEntityHandGrindstone;
-import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
-import se.gory_moon.horsepower.tileentity.TileEntityPress;
+import se.gory_moon.horsepower.tileentity.TileChopper;
+import se.gory_moon.horsepower.tileentity.TileGrindstone;
+import se.gory_moon.horsepower.tileentity.TileHPBase;
+import se.gory_moon.horsepower.tileentity.TileHandGrindstone;
+import se.gory_moon.horsepower.tileentity.TileManualChopper;
+import se.gory_moon.horsepower.tileentity.TilePress;
+import se.gory_moon.horsepower.tileentity.TileFiller;
 import se.gory_moon.horsepower.util.Localization;
 
 import java.util.List;
@@ -92,10 +92,10 @@ public class Provider implements IWailaDataProvider {
       double progressWindup = Math.round(((windup / totalWindup) * 100D) * 100D) / 100D;
       double progressChopping = Math.round(((current / total) * 100D) * 100D) / 100D;
 
-      if (accessor.getTileEntity() instanceof TileEntityChopper || accessor.getTileEntity() instanceof TileEntityFiller) {
+      if (accessor.getTileEntity() instanceof TileChopper || accessor.getTileEntity() instanceof TileFiller) {
         currenttip.add(Localization.WAILA.WINDUP_PROGRESS.translate(progressWindup));
       }
-      if (total > 1 || accessor.getTileEntity() instanceof TileEntityManualChopper) {
+      if (total > 1 || accessor.getTileEntity() instanceof TileManualChopper) {
         currenttip.add(Localization.WAILA.CHOPPING_PROGRESS.translate(progressChopping));
       }
     } else if (nbt.hasKey("horsepower:press")) {
@@ -107,7 +107,7 @@ public class Provider implements IWailaDataProvider {
     }
 
     if (config.getConfig("horsepower:showItems") &&
-            (accessor.getTileEntity() instanceof TileEntityHPBase || accessor.getTileEntity() instanceof TileEntityFiller) && accessor.getPlayer()
+            (accessor.getTileEntity() instanceof TileHPBase || accessor.getTileEntity() instanceof TileFiller) && accessor.getPlayer()
             .isSneaking()) {
       TileEntity tile = accessor.getTileEntity();
       if (tile.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP)) {
@@ -154,17 +154,17 @@ public class Provider implements IWailaDataProvider {
   @Override
   public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, BlockPos pos) {
     NBTTagCompound nbt = new NBTTagCompound();
-    if (tile instanceof TileEntityFiller) {
-      tile = ((TileEntityFiller) tile).getFilledTileEntity();
+    if (tile instanceof TileFiller) {
+      tile = ((TileFiller) tile).getFilledTileEntity();
     }
     if (tile != null) {
       tile.writeToNBT(nbt);
     }
-    if (tile instanceof TileEntityGrindstone || tile instanceof TileEntityHandGrindstone) {
+    if (tile instanceof TileGrindstone || tile instanceof TileHandGrindstone) {
       tag.setTag("horsepower:grindstone", nbt);
-    } else if (tile instanceof TileEntityChopper || tile instanceof TileEntityManualChopper) {
+    } else if (tile instanceof TileChopper || tile instanceof TileManualChopper) {
       tag.setTag("horsepower:chopper", nbt);
-    } else if (tile instanceof TileEntityPress) {
+    } else if (tile instanceof TilePress) {
       tag.setTag("horsepower:press", nbt);
     }
     return tag;

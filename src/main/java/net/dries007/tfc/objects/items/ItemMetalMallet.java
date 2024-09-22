@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -15,7 +16,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -48,7 +48,6 @@ import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.Month;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -92,7 +91,7 @@ public class ItemMetalMallet extends ItemTFC implements ICapabilityMetal {
         }
 
         if (RNG.nextInt(100) < entry.getChance()) {
-          InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), entry.getOutputItem(tile.getStack()));
+          StackUtils.spawnItemStack(worldIn, pos, entry.getOutputItem(tile.getStack()));
           worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 2.0F, 1.0F);
         } else {
           worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_FALL, SoundCategory.BLOCKS, 2.0F, 1.0F);

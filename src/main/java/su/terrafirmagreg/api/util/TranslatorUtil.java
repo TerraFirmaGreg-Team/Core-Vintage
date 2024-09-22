@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.util;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.TextComponentString;
 
 
 import lombok.experimental.UtilityClass;
@@ -83,5 +84,13 @@ public final class TranslatorUtil {
     }
 
     return lines;
+  }
+
+  public static TextComponentString formatMessage(String unformattedText) {
+    return new TextComponentString(formattedString(unformattedText));
+  }
+
+  public static String formattedString(String unformattedString) {
+    return unformattedString.replace("&", "\u00a7");
   }
 }

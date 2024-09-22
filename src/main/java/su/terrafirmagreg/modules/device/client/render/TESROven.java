@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TileOven;
+import su.terrafirmagreg.modules.device.object.tile.TileOven;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -17,9 +17,9 @@ import net.minecraftforge.items.IItemHandler;
 
 import static su.terrafirmagreg.data.Properties.CURED;
 import static su.terrafirmagreg.data.Properties.LIT;
-import static su.terrafirmagreg.modules.device.objects.tiles.TileOven.SLOT_FUEL_1;
-import static su.terrafirmagreg.modules.device.objects.tiles.TileOven.SLOT_FUEL_2;
-import static su.terrafirmagreg.modules.device.objects.tiles.TileOven.SLOT_MAIN;
+import static su.terrafirmagreg.modules.device.object.tile.TileOven.SLOT_FUEL_1;
+import static su.terrafirmagreg.modules.device.object.tile.TileOven.SLOT_FUEL_2;
+import static su.terrafirmagreg.modules.device.object.tile.TileOven.SLOT_MAIN;
 
 @SideOnly(Side.CLIENT)
 public class TESROven extends TileEntitySpecialRenderer<TileOven> {

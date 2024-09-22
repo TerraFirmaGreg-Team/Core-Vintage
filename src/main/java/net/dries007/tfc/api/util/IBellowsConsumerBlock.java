@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.util;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TileBellows;
+import su.terrafirmagreg.modules.device.object.tile.TileBellows;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;

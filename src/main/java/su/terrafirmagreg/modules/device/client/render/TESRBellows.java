@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.client.render;
 
 import su.terrafirmagreg.api.base.tesr.BaseTESR;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TileBellows;
+import su.terrafirmagreg.modules.device.object.tile.TileBellows;
 
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

@@ -11,7 +11,7 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodChest;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
-import su.terrafirmagreg.modules.wood.object.inventory.capability.InventoryWoodLargeChest;
+import su.terrafirmagreg.modules.wood.object.inventory.InventoryWoodLargeChest;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodChest;
 
 import net.minecraft.block.Block;
@@ -56,7 +56,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IProviderT
 
     getSettings()
             .registryKey(variant.getRegistryKey(type))
-            .customResource(String.format("wood/%s", variant))
+            .customResource(variant.getCustomResource())
             .ignoresProperties(BlockChest.FACING)
             .sound(SoundType.WOOD)
             .hardness(2.5f)
@@ -106,11 +106,9 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IProviderT
 
           if (tileentity1 instanceof TileEntityChest tileEntityChest1) {
             if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH) {
-              ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble",
-                      ilockablecontainer, tileEntityChest1);
+              ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", ilockablecontainer, tileEntityChest1);
             } else {
-              ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble",
-                      tileEntityChest1, ilockablecontainer);
+              ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", tileEntityChest1, ilockablecontainer);
             }
           }
         }
@@ -147,7 +145,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IProviderT
 
 
   @Override
-  public Class<? extends TileEntity> getTileEntityClass() {
+  public Class<TileWoodChest> getTileClass() {
     return TileWoodChest.class;
   }
 

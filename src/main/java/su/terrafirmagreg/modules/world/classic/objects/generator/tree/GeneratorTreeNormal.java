@@ -23,8 +23,7 @@ import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
 public class GeneratorTreeNormal implements ITreeGenerator {
 
   private static final PlacementSettings settingsFull = StructureUtils.getDefaultSettings();
-  private static final PlacementSettings settingsWeak = StructureUtils.getDefaultSettings()
-          .setIntegrity(0.5f);
+  private static final PlacementSettings settingsWeak = StructureUtils.getDefaultSettings().setIntegrity(0.5f);
   private final int heightMin;
   private final int heightRange;
 
@@ -41,8 +40,7 @@ public class GeneratorTreeNormal implements ITreeGenerator {
   }
 
   @Override
-  public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-          Random rand, boolean isWorldGen) {
+  public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree, Random rand, boolean isWorldGen) {
     ResourceLocation base = new ResourceLocation(tree.getRegistryName() + "/base");
     ResourceLocation overlay = new ResourceLocation(tree.getRegistryName() + "/overlay");
 

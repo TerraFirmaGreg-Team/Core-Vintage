@@ -41,7 +41,8 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
    */
   public static final double EPSILON = 1d / SAFE_MAX_ALLOY;
 
-  private final Object2DoubleMap<Metal> metalMap, sanitizedMetalMap;
+  private final Object2DoubleMap<Metal> metalMap;
+  private final Object2DoubleMap<Metal> sanitizedMetalMap;
   private int totalUnits;
   private int maxUnits;
 

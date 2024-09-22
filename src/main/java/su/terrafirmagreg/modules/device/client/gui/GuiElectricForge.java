@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.modules.core.client.button.GuiButtonSetter;
-import su.terrafirmagreg.modules.device.objects.tiles.TileElectricForge;
+import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;

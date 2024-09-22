@@ -33,10 +33,10 @@ public class GrassColorHandler {
     int januaryCode = 0x00;
     int aprilCode = 0x00;
     try {
-      julyCode = Integer.parseUnsignedInt(ConfigSoil.CLIENT.seasonColorSummer, 16);
-      octoberCode = Integer.parseUnsignedInt(ConfigSoil.CLIENT.seasonColorAutumn, 16);
-      januaryCode = Integer.parseUnsignedInt(ConfigSoil.CLIENT.seasonColorWinter, 16);
-      aprilCode = Integer.parseUnsignedInt(ConfigSoil.CLIENT.seasonColorSpring, 16);
+      julyCode = Integer.parseUnsignedInt(ConfigSoil.MISC.seasonColorSummer, 16);
+      octoberCode = Integer.parseUnsignedInt(ConfigSoil.MISC.seasonColorAutumn, 16);
+      januaryCode = Integer.parseUnsignedInt(ConfigSoil.MISC.seasonColorWinter, 16);
+      aprilCode = Integer.parseUnsignedInt(ConfigSoil.MISC.seasonColorSpring, 16);
     } finally {
       monthlyColors[Month.JULY.ordinal()] = new Color(julyCode, true);
       monthlyColors[Month.OCTOBER.ordinal()] = new Color(octoberCode, true);
@@ -68,14 +68,14 @@ public class GrassColorHandler {
       Color seasonalColor = getSeasonalColor();
       Color finalColor = originalColor;
 
-      if (ConfigSoil.CLIENT.seasonColorEnable) {
+      if (ConfigSoil.MISC.seasonColorEnable) {
         finalColor = blendByAlpha(finalColor, seasonalColor);
       }
 
-      if (ConfigSoil.CLIENT.noiseEnable) {
-        int levels = ConfigSoil.CLIENT.noiseLevels;
-        float scale = ConfigSoil.CLIENT.noiseScale;
-        double darkness = ConfigSoil.CLIENT.noiseDarkness;
+      if (ConfigSoil.MISC.noiseEnable) {
+        int levels = ConfigSoil.MISC.noiseLevels;
+        float scale = ConfigSoil.MISC.noiseScale;
+        double darkness = ConfigSoil.MISC.noiseDarkness;
         double value = noiseGenerator.getValue(pos.getX() / scale, pos.getZ() / scale);
         value =
                 curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;

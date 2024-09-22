@@ -1,8 +1,5 @@
 package se.gory_moon.horsepower.client.model;
 
-import java.util.Objects;
-
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -22,7 +19,6 @@ import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.SimpleModelState;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
-import net.minecraftforge.common.property.IExtendedBlockState;
 
 
 import com.google.common.base.Function;
@@ -32,8 +28,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.tuple.Pair;
-import se.gory_moon.horsepower.blocks.BlockChopper;
-import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
 import se.gory_moon.horsepower.util.RenderUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +36,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.vecmath.Matrix4f;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class BakedChopperModel implements IBakedModel {
@@ -77,19 +72,6 @@ public class BakedChopperModel implements IBakedModel {
     String side_texture = null;
     String top_texture = null;
     EnumFacing face = EnumFacing.SOUTH;
-
-    if (state instanceof IExtendedBlockState extendedState) {
-      if (extendedState.getUnlistedNames().contains(BlockHPChoppingBase.SIDE_TEXTURE)) {
-        side_texture = extendedState.getValue(BlockHPChoppingBase.SIDE_TEXTURE);
-      }
-      if (extendedState.getUnlistedNames().contains(BlockHPChoppingBase.TOP_TEXTURE)) {
-        top_texture = extendedState.getValue(BlockHPChoppingBase.TOP_TEXTURE);
-      }
-
-      if (extendedState.getPropertyKeys().contains(BlockChopper.FACING)) {
-        face = extendedState.getValue(BlockChopper.FACING);
-      }
-    }
 
     // models are symmetric, no need to rotate if there's nothing on it where rotation matters, so we just use default
     if (side_texture == null) {

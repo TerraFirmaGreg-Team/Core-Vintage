@@ -8,7 +8,11 @@ import net.minecraft.util.math.MathHelper;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
-import net.dries007.tfc.util.calendar.Month;
+
+
+import su.terrafirmagreg.data.lib.MCDate.Month;
+
+
 import net.dries007.tfc.util.config.TemperatureMode;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;

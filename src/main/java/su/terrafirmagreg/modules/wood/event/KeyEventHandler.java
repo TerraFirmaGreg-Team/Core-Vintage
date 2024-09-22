@@ -49,9 +49,7 @@ public class KeyEventHandler {
       EntityPlayerSP player = Minecraft.getMinecraft().player;
       if (player.getRidingEntity() instanceof EntityWoodSupplyCart entityWoodSupplyCart) {
         event.setCanceled(true);
-        player.world.sendPacketToServer(
-                ModuleWood.getPacketService()
-                        .getPacketFrom(new CSPacketOpenCartGui(0, entityWoodSupplyCart.getEntityId())));
+        player.world.sendPacketToServer(ModuleWood.getPacketService().getPacketFrom(new CSPacketOpenCartGui(0, entityWoodSupplyCart.getEntityId())));
       }
     }
   }

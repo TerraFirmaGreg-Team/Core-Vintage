@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.event;
 
-import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
-import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIEasyBreeding;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIEasyBreeding;
 
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalCamel;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCamel;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCamel;
 
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

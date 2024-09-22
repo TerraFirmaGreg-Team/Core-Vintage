@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.data.Properties;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
-import su.terrafirmagreg.modules.device.objects.tiles.TileFirePit;
+import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
+import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalSheepWool;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalSheep;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;

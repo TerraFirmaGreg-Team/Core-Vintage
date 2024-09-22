@@ -38,8 +38,7 @@ public class WorldDataAnimalRespawn
   public static WorldDataAnimalRespawn get(World world) {
     MapStorage mapStorage = world.getMapStorage();
     if (mapStorage != null) {
-      WorldDataAnimalRespawn data = (WorldDataAnimalRespawn) mapStorage.getOrLoadData(
-              WorldDataAnimalRespawn.class, DATA_ID);
+      WorldDataAnimalRespawn data = (WorldDataAnimalRespawn) mapStorage.getOrLoadData(WorldDataAnimalRespawn.class, DATA_ID);
       if (data == null) {
         data = new WorldDataAnimalRespawn();
         data.markDirty();

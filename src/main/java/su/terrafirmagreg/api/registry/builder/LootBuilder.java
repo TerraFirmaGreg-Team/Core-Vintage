@@ -44,13 +44,11 @@ public class LootBuilder {
   private Item item;
 
   public LootBuilder(String name, String pool, int weight, Item item) {
+    this(name, pool, weight, 0, item, new ArrayList<>(), new ArrayList<>());
 
-    this(name, pool, weight, 0, item, new ArrayList<LootCondition>(),
-            new ArrayList<LootFunction>());
   }
 
-  public LootBuilder(String name, String pool, int weight, int quality, Item item,
-          List<LootCondition> conditions, List<LootFunction> functions) {
+  public LootBuilder(String name, String pool, int weight, int quality, Item item, List<LootCondition> conditions, List<LootFunction> functions) {
 
     this.name = name;
     this.pool = pool;

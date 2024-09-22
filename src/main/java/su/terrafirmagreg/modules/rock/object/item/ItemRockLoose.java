@@ -44,10 +44,10 @@ public class ItemRockLoose extends ItemRock
 
     getSettings()
             .weight(Weight.VERY_LIGHT)
-            .addOreDict("rock")
-            .addOreDict("rock", type)
-            .addOreDict("rock", type.isFlux() ? "flux" : null)
-            .addOreDict("rock", type.getCategory());
+            .oreDict("rock")
+            .oreDict("rock", type)
+            .oreDict("rock", type.isFlux() ? "flux" : null)
+            .oreDict("rock", type.getCategory());
   }
 
   @Override

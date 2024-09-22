@@ -29,8 +29,7 @@ public interface IRegistryLootTable
     return LootTableList.register(new ResourceLocation(this.getModID(), name));
   }
 
-  default <T extends LootFunction> void lootFunction(
-          LootFunction.Serializer<? extends T> serializer) {
+  default <T extends LootFunction> void lootFunction(LootFunction.Serializer<? extends T> serializer) {
 
     LootFunctionManager.registerFunction(serializer);
   }
@@ -47,8 +46,7 @@ public interface IRegistryLootTable
    * @param amount   The amount of the item to set.
    * @return A builder object. It can be used to fine tune the loot entry.
    */
-  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight,
-          Item item, int meta, int amount) {
+  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item, int meta, int amount) {
 
     return this.loot(location, name, pool, weight, item, meta, amount, amount);
   }
@@ -66,8 +64,7 @@ public interface IRegistryLootTable
    * @param max      The largest item size.
    * @return A builder object. It can be used to fine tune the loot entry.
    */
-  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight,
-          Item item, int meta, int min, int max) {
+  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item, int meta, int min, int max) {
 
     final LootBuilder loot = this.loot(location, name, pool, weight, item, meta);
     loot.addFunction(new SetCount(new LootCondition[0], new RandomValueRange(min, max)));
@@ -85,8 +82,7 @@ public interface IRegistryLootTable
    * @param meta     The metadata for the loot.
    * @return A builder object. It can be used to fine tune the loot entry.
    */
-  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight,
-          Item item, int meta) {
+  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item, int meta) {
 
     final LootBuilder loot = this.loot(location, name, pool, weight, item);
     loot.addFunction(new SetMetadata(new LootCondition[0], new RandomValueRange(meta, meta)));
@@ -103,8 +99,7 @@ public interface IRegistryLootTable
    * @param item     The item to add.
    * @return A builder object. It can be used to fine tune the loot entry.
    */
-  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight,
-          Item item) {
+  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item) {
 
     return this.loot(location, new LootBuilder(this.getModID() + ":" + name, pool, weight, item));
   }
@@ -136,12 +131,9 @@ public interface IRegistryLootTable
    * @param functions  A list of loot functions.
    * @return A builder object. It can be used to fine tune the loot entry.
    */
-  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight,
-          int quality, Item item, List<LootCondition> conditions,
+  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight, int quality, Item item, List<LootCondition> conditions,
           List<LootFunction> functions) {
 
-    return this.loot(location,
-            new LootBuilder(this.getModID() + ":" + name, pool, weight, quality, item, conditions,
-                    functions));
+    return this.loot(location, new LootBuilder(this.getModID() + ":" + name, pool, weight, quality, item, conditions, functions));
   }
 }

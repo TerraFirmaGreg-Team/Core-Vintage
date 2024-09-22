@@ -3,10 +3,11 @@ package su.terrafirmagreg.modules.wood.object.block;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.modules.arboriculture.ConfigArboriculture;
+import su.terrafirmagreg.data.ToolClasses;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -32,9 +33,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-import gregtech.api.items.toolitem.ToolClasses;
-
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -52,6 +50,7 @@ import static su.terrafirmagreg.data.Properties.SMALL;
 
 
 @Getter
+@SuppressWarnings("deprecation")
 public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
   public static final AxisAlignedBB SMALL_AABB_Y = new AxisAlignedBB(0.25, 0, 0.25, 0.75, 1, 0.75);
@@ -75,7 +74,12 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
             .ignoresProperties(PLACED)
             .harvestLevel(ToolClasses.AXE, 0)
             .resistance(5.0F)
-            .hardness(20.0F);//TODO 2.0 в тфк
+            .hardness(20.0F)//TODO 2.0 в тфк
+            .lightValue(this.getDefaultState().getValue(SMALL) ? 0 : 255)
+            .oreDict(variant)
+            .oreDict(variant, type)
+            .oreDict("logWood")
+            .oreDict(type.isCanMakeTannin() ? "tannin" : null);
 
     setDefaultState(blockState.getBaseState()
             .withProperty(LOG_AXIS, EnumAxis.Y)
@@ -84,26 +88,14 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
     BlockUtils.setFireInfo(this, 5, 5);
 
-    //        OreDictUtils.register(this, "logWood");
-    //        OreDictUtils.register(this, variant.toString(), "wood", type.toString());
-    //        if (type.canMakeTannin()) {
-    //            OreDictUtils.register(this, variant.toString(), "wood", "tannin");
-    //        }
   }
 
-  @SuppressWarnings("deprecation")
+
   @Override
   public boolean isFullBlock(IBlockState state) {
     return !state.getValue(SMALL);
   }
 
-  @SuppressWarnings("deprecation")
-  @Override
-  public int getLightOpacity(IBlockState state) {
-    return state.getValue(SMALL) ? 0 : 255;
-  }
-
-  @SuppressWarnings("deprecation")
   @Override
   public boolean isFullCube(IBlockState state) {
     return !state.getValue(SMALL);
@@ -111,13 +103,11 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
   //TODO в этом не вижу смысла после добавления dt, так как все бревна, что имели бы свойство PLACED,
   // генерируются dt, а у них свой подсчет Hardness
-  @SuppressWarnings("deprecation")
   @Override
   public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
     return (blockState.getValue(PLACED) ? 1.0f : 2.5f) * super.getBlockHardness(blockState, worldIn, pos);
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     if (!state.getValue(SMALL)) {
@@ -131,7 +121,6 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     };
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   public boolean isOpaqueCube(IBlockState state) {
     return !state.getValue(SMALL);
@@ -146,8 +135,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     for (int x = -1; x <= 1; x++) {
       for (int y = -1; y <= 1; y++) {
         for (int z = -1; z <= 1; z++) {
-          if (world.getBlockState(pos.add(x, y, z)).getBlock() == this && (z != 0 || y != 0
-                  || x != 0)) {
+          if (world.getBlockState(pos.add(x, y, z)).getBlock() == this && (z != 0 || y != 0 || x != 0)) {
             return;
           }
         }
@@ -170,17 +158,16 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     if (toolClasses.contains("axe") || toolClasses.contains("saw")) {
       // Harvest the block normally, saws and axes are valid tools regardless
       super.harvestBlock(worldIn, player, pos, state, tile, stack);
-    } else if (toolClasses.contains("hammer") && ConfigArboriculture.MISC.enableHammerSticks) {
+    } else if (toolClasses.contains("hammer") && ConfigWood.MISC.enableHammerSticks) {
       // Hammers drop sticks here - we duplicate the original method
       //noinspection ConstantConditions
       player.addStat(StatList.getBlockStats(this));
       player.addExhaustion(0.005F);
 
       if (!worldIn.isRemote) {
-        StackUtils.spawnItemStack(worldIn, pos.add(0.5D, 0.5D, 0.5D),
-                new ItemStack(Items.STICK, 1 + (int) (Math.random() * 3)));
+        StackUtils.spawnItemStack(worldIn, pos.add(0.5D, 0.5D, 0.5D), new ItemStack(Items.STICK, 1 + (int) (Math.random() * 3)));
       }
-    } else if (ConfigArboriculture.MISC.requiresAxe) {
+    } else if (ConfigWood.MISC.requiresAxe) {
       // Here, there was no valid tool used. Deny spawning any drops since logs require axes
       //noinspection ConstantConditions
       player.addStat(StatList.getBlockStats(this));
@@ -204,7 +191,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     final Set<String> toolClasses = stack.getItem().getToolClasses(stack);
     if (toolClasses.contains("axe") && !toolClasses.contains("saw")) {
       // Axes, not saws, cause tree felling
-      if (!state.getValue(PLACED) && ConfigArboriculture.MISC.enableFelling) {
+      if (!state.getValue(PLACED) && ConfigWood.MISC.enableFelling) {
         player.setHeldItem(EnumHand.MAIN_HAND,
                 stack); // Reset so we can damage however we want before vanilla
         if (!removeTree(world, pos, player, stack,
@@ -215,10 +202,10 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
         }
         return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
       }
-    } else if (toolClasses.contains("hammer") && ConfigArboriculture.MISC.enableHammerSticks) {
+    } else if (toolClasses.contains("hammer") && ConfigWood.MISC.enableHammerSticks) {
       // Hammers drop sticks instead
       return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
-    } else if (!toolClasses.contains("saw") && ConfigArboriculture.MISC.requiresAxe) {
+    } else if (!toolClasses.contains("saw") && ConfigWood.MISC.requiresAxe) {
       // Don't drop anything if broken by hand
       return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
     }
@@ -227,13 +214,11 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
   @Override
   public boolean isToolEffective(String type, IBlockState state) {
-    return ("hammer".equals(type) && ConfigArboriculture.MISC.enableHammerSticks) ||
-            super.isToolEffective(type, state);
+    return ("hammer".equals(type) && ConfigWood.MISC.enableHammerSticks) || super.isToolEffective(type, state);
   }
 
   // TODO это нужно?
-  private boolean removeTree(World world, BlockPos pos, @Nullable EntityPlayer player,
-          ItemStack stack, boolean stoneTool) {
+  private boolean removeTree(World world, BlockPos pos, @Nullable EntityPlayer player, ItemStack stack, boolean stoneTool) {
     final boolean explosion = stack.isEmpty() || player == null;
     final int maxLogs =
             explosion ? Integer.MAX_VALUE : 1 + stack.getMaxDamage() - stack.getItemDamage();
@@ -276,7 +261,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
       } else {
         // Stone tools are 60% efficient (default config)
         if (!stoneTool
-                || RNG.nextFloat() < ConfigArboriculture.MISC.stoneAxeReturnRate && !world.isRemote) {
+                || RNG.nextFloat() < ConfigWood.MISC.stoneAxeReturnRate && !world.isRemote) {
           harvestBlock(world, player, pos1, world.getBlockState(pos1), null, stack);
         }
         stack.damageItem(1, player);
@@ -288,7 +273,6 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     return maxLogs >= logs.size();
   }
 
-  @NotNull
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return getDefaultState()
@@ -304,7 +288,6 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
             (state.getValue(SMALL) ? 0b1000 : 0);
   }
 
-  @NotNull
   @Override
   protected BlockStateContainer createBlockState() {
     return new BlockStateContainer(this, LOG_AXIS, PLACED, SMALL);
@@ -315,7 +298,6 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     // Don't do vanilla leaf decay
   }
 
-  @NotNull
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     // Small logs are a weird feature, for now they shall be disabled via shift placement since it interferes with log pile placement

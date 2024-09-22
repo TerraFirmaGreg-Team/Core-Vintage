@@ -7,6 +7,9 @@ import net.dries007.tfc.TerraFirmaCraft;
 
 import org.jetbrains.annotations.NotNull;
 
+
+import su.terrafirmagreg.data.lib.MCDate.Month;
+
 public interface ICalendarFormatted extends ICalendar {
   /* Total calculation methods */
 

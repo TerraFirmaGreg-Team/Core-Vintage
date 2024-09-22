@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TileLatexExtractor;
+import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -22,10 +22,10 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.modules.device.objects.blocks.BlockLatexExtractor.BASE;
-import static su.terrafirmagreg.modules.device.objects.blocks.BlockLatexExtractor.CUT;
-import static su.terrafirmagreg.modules.device.objects.blocks.BlockLatexExtractor.POT;
-import static su.terrafirmagreg.modules.device.objects.tiles.TileLatexExtractor.MAX_FLUID;
+import static su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor.BASE;
+import static su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor.CUT;
+import static su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor.POT;
+import static su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor.MAX_FLUID;
 
 public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtractor> {
 

@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
@@ -9,7 +10,6 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -126,7 +126,7 @@ public class BlockPlacedHide extends Block {
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), getItemStackDropped(worldIn, pos, state));
+    StackUtils.spawnItemStack(worldIn, pos, getItemStackDropped(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
   }
 

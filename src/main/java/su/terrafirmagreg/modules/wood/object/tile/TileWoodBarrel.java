@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.wood.object.tile;
 import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -14,7 +15,6 @@ import su.terrafirmagreg.modules.wood.object.itemblock.ItemBlockWoodBarrel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -214,12 +214,12 @@ public class TileWoodBarrel extends BaseTileTickableInventory
         ItemStack fluidContainerIn = inventory.getStackInSlot(SLOT_FLUID_CONTAINER_IN);
         FluidActionResult result = FluidTransferHelper.emptyContainerIntoTank(fluidContainerIn,
                 tank, inventory, SLOT_FLUID_CONTAINER_OUT,
-                ConfigWood.BLOCKS.BARREL.tank, world, pos);
+                ConfigWood.BLOCK.BARREL.tank, world, pos);
 
         if (!result.isSuccess()) {
           result = FluidTransferHelper.fillContainerFromTank(fluidContainerIn, tank, inventory,
                   SLOT_FLUID_CONTAINER_OUT,
-                  ConfigWood.BLOCKS.BARREL.tank, world, pos);
+                  ConfigWood.BLOCK.BARREL.tank, world, pos);
         }
 
         if (result.isSuccess()) {
@@ -283,8 +283,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
   public void onSealed() {
     if (!world.isRemote) {
       for (int slot : new int[]{SLOT_FLUID_CONTAINER_IN, SLOT_FLUID_CONTAINER_OUT}) {
-        InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(),
-                inventory.getStackInSlot(slot));
+        StackUtils.spawnItemStack(world, pos, inventory.getStackInSlot(slot));
         inventory.setStackInSlot(slot, ItemStack.EMPTY);
       }
     }
@@ -379,21 +378,20 @@ public class TileWoodBarrel extends BaseTileTickableInventory
 
     if (state.getValue(SEALED)) {
       saveToItemStack(barrelStack);
-      InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), barrelStack);
+      StackUtils.spawnItemStack(world, pos, barrelStack);
     } else {
       int slotsToDrop = inventory.getSlots();
       for (int i = 0; i < slotsToDrop; i++) {
-        InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(),
-                inventory.getStackInSlot(i));
+        StackUtils.spawnItemStack(world, pos, inventory.getStackInSlot(i));
         inventory.setStackInSlot(i, new ItemStack(Items.AIR, 0));
       }
       if (!surplus.isEmpty()) {
         for (ItemStack surplusToDrop : surplus) {
-          InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), surplusToDrop);
+          StackUtils.spawnItemStack(world, pos, surplusToDrop);
         }
         surplus.clear();
       }
-      InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), barrelStack);
+      StackUtils.spawnItemStack(world, pos, barrelStack);
     }
   }
 
@@ -477,8 +475,8 @@ public class TileWoodBarrel extends BaseTileTickableInventory
     private final Set<Fluid> whitelist;
 
     public BarrelFluidTank(IFluidTankCallback callback, int fluidTankID) {
-      super(callback, fluidTankID, ConfigWood.BLOCKS.BARREL.tank);
-      whitelist = Arrays.stream(ConfigWood.BLOCKS.BARREL.fluidWhitelist)
+      super(callback, fluidTankID, ConfigWood.BLOCK.BARREL.tank);
+      whitelist = Arrays.stream(ConfigWood.BLOCK.BARREL.fluidWhitelist)
               .map(FluidRegistry::getFluid)
               .filter(Objects::nonNull)
               .collect(Collectors.toSet());

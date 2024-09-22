@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.client.gui;
 import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.client.button.GuiButtonCrate;
-import su.terrafirmagreg.modules.device.objects.tiles.TileCrate;
+import su.terrafirmagreg.modules.device.object.tile.TileCrate;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiButton;

@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.data.Constants;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
-import su.terrafirmagreg.modules.device.objects.tiles.TileSmelteryCauldron;
+import su.terrafirmagreg.modules.device.object.tile.TileSmelteryCauldron;
 
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
 import su.terrafirmagreg.data.MathConstants;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalAlpaca;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalAlpaca;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

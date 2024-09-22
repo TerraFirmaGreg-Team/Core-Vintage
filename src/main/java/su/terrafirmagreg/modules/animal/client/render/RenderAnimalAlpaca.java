@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalAlpacaBody;
-import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalAlpaca;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalAlpaca;
 
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

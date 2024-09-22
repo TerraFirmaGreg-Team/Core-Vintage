@@ -68,8 +68,13 @@ public final class BlockUtils {
    */
   public static void notifyBlockUpdate(World world, BlockPos pos) {
 
+    BlockUtils.notifyBlockUpdate(world, pos, 3);
+  }
+
+  public static void notifyBlockUpdate(World world, BlockPos pos, int flags) {
+
     IBlockState blockState = world.getBlockState(pos);
-    world.notifyBlockUpdate(pos, blockState, blockState, 3);
+    world.notifyBlockUpdate(pos, blockState, blockState, flags);
   }
 
   /**

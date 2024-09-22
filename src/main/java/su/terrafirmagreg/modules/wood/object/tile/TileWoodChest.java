@@ -7,7 +7,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodChest;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodChest;
 import su.terrafirmagreg.modules.wood.object.container.ContainerWoodChest;
-import su.terrafirmagreg.modules.wood.object.inventory.capability.WoodDoubleChestItemHandler;
+import su.terrafirmagreg.modules.wood.object.inventory.WoodDoubleChestItemHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

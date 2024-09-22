@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.recipes;
 
+import su.terrafirmagreg.data.lib.DoubleRange;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -7,9 +9,10 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.util.Alloy;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 /**
  * todo: in 1.13+ move this to a json recipe type
@@ -17,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 public class AlloyRecipe extends IForgeRegistryEntry.Impl<AlloyRecipe> {
 
   private final ImmutableMap<Metal, DoubleRange> metalMap;
+  @Getter
   private final Metal result;
 
   private AlloyRecipe(@NotNull Metal result, ImmutableMap<Metal, DoubleRange> alloyMap) {
@@ -27,10 +31,6 @@ public class AlloyRecipe extends IForgeRegistryEntry.Impl<AlloyRecipe> {
     // Required so that we can search for alloys by result registry name
     //noinspection ConstantConditions
     setRegistryName(result.getRegistryName());
-  }
-
-  public Metal getResult() {
-    return result;
   }
 
   @SuppressWarnings("ConstantConditions")
@@ -87,31 +87,4 @@ public class AlloyRecipe extends IForgeRegistryEntry.Impl<AlloyRecipe> {
     }
   }
 
-  /**
-   * A range that an alloy must fall within Values are to be interpreted as percentages, and are compared with an accuracy of epsilon
-   *
-   * @see Alloy#EPSILON
-   */
-  public static final class DoubleRange {
-
-    private final double min;
-    private final double max;
-
-    DoubleRange(double min, double max) {
-      this.min = min;
-      this.max = max;
-    }
-
-    public double getMin() {
-      return min;
-    }
-
-    public double getMax() {
-      return max;
-    }
-
-    public boolean test(double value) {
-      return value >= min - Alloy.EPSILON && value <= max + Alloy.EPSILON;
-    }
-  }
 }

@@ -31,19 +31,15 @@ import static net.minecraft.block.BlockLog.LOG_AXIS;
 public class GeneratorTreeWillow implements ITreeGenerator {
 
   private static final PlacementSettings settingsFull = StructureUtils.getDefaultSettings();
-  private static final PlacementSettings settingsWeak = StructureUtils.getDefaultSettings()
-          .setIntegrity(0.5F);
+  private static final PlacementSettings settingsWeak = StructureUtils.getDefaultSettings().setIntegrity(0.5F);
   private Template structureBase;
   private Template structureOverlay;
 
   @Override
-  public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-          Random rand, boolean isWorldGen) {
+  public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree, Random rand, boolean isWorldGen) {
     //noinspection ConstantConditions
-    ResourceLocation base = new ResourceLocation(Constants.MODID_TFC,
-            tree.getRegistryName().getPath() + "/base");
-    ResourceLocation overlay = new ResourceLocation(Constants.MODID_TFC, tree.getRegistryName()
-            .getPath() + "/overlay");
+    ResourceLocation base = new ResourceLocation(Constants.MODID_TFC, tree.getRegistryName().getPath() + "/base");
+    ResourceLocation overlay = new ResourceLocation(Constants.MODID_TFC, tree.getRegistryName().getPath() + "/overlay");
 
     structureBase = manager.get(world.getMinecraftServer(), base);
     structureOverlay = manager.get(world.getMinecraftServer(), overlay);

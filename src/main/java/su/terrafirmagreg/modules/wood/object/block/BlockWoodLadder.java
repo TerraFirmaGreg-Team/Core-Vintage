@@ -27,7 +27,7 @@ public class BlockWoodLadder extends BlockLadder implements IWoodBlock {
 
     getSettings()
             .registryKey(variant.getRegistryKey(type))
-            .customResource(String.format("wood/%s", variant))
+            .customResource(variant.getCustomResource())
             .sound(SoundType.LADDER)
             .oreDict(variant)
             .oreDict(variant, "wood");

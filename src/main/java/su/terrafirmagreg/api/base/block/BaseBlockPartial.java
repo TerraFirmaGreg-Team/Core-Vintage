@@ -43,8 +43,7 @@ public abstract class BaseBlockPartial extends BaseBlock {
   }
 
   @Override
-  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess,
-          BlockPos pos, EnumFacing side) {
+  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
 
     return true;
   }
@@ -56,8 +55,7 @@ public abstract class BaseBlockPartial extends BaseBlock {
   }
 
   @Override
-  public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos,
-          EnumFacing face) {
+  public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
 
     return false;
   }
@@ -70,8 +68,7 @@ public abstract class BaseBlockPartial extends BaseBlock {
 
   @NotNull
   @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-          EnumFacing face) {
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 
     return BlockFaceShape.UNDEFINED;
   }

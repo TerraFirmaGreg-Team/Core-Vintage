@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.metal.objects.tile;
 
 import su.terrafirmagreg.api.base.tile.BaseTile;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.api.util.StackUtils;
 
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -69,7 +69,7 @@ public class TileMetalSheet
   public void onBreakBlock() {
     var item = OreDictUnifier.get(OrePrefix.plate, Materials.Iron).getItem();
     var output = new ItemStack(item, getFaceCount());
-    InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), output);
+    StackUtils.spawnItemStack(world, pos, output);
   }
 
   /**

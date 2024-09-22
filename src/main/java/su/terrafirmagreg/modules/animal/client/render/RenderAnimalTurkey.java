@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalTurkey;
-import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalTurkey;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalTurkey;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

@@ -1,155 +1,88 @@
 package su.terrafirmagreg.api.base.block;
 
-import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.stats.StatList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IWorldNameable;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+
 @Getter
 @SuppressWarnings("deprecation")
-public abstract class BaseBlockContainer extends BlockContainer implements IBlockSettings {
+public abstract class BaseBlockContainer extends BaseBlock implements IProviderTile {
 
-  protected final Settings settings;
 
   public BaseBlockContainer(Settings settings) {
-    super(settings.getMaterial(), settings.getMapColor());
+    super(settings);
 
-    this.settings = settings;
+  }
+
+  protected boolean hasInvalidNeighbor(World world, BlockPos pos) {
+    return Arrays.stream(EnumFacing.HORIZONTALS).anyMatch(facing -> this.isInvalidNeighbor(world, pos, facing));
+  }
+
+  protected boolean isInvalidNeighbor(World world, BlockPos pos, EnumFacing facing) {
+    return world.getBlockState(pos.offset(facing)).getMaterial() == Material.CACTUS;
   }
 
   @Override
-  public boolean causesSuffocation(IBlockState state) {
-    return this.settings.getIsSuffocating().test(state);
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.INVISIBLE;
   }
 
   @Override
-  public boolean isFullCube(IBlockState state) {
-    return this.settings.isFullCube();
+  public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    super.breakBlock(world, pos, state);
+    world.removeTileEntity(pos);
   }
 
   @Override
-  public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
-    return this.settings.getHardness().apply(blockState, worldIn, pos);
+  public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+    if (te instanceof IWorldNameable nameable && nameable.hasCustomName()) {
+      player.addStat(StatList.getBlockStats(this));
+      player.addExhaustion(0.005F);
+
+      if (world.isRemote) {
+        return;
+      }
+
+      int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
+      Item item = this.getItemDropped(state, world.rand, i);
+
+      if (item == Items.AIR) {
+        return;
+      }
+
+      ItemStack itemstack = new ItemStack(item, this.quantityDropped(world.rand));
+      itemstack.setStackDisplayName(nameable.getName());
+      spawnAsEntity(world, pos, itemstack);
+    } else {
+      super.harvestBlock(world, player, pos, state, null, stack);
+    }
   }
 
   @Override
-  public boolean getTickRandomly() {
-    return this.settings.isTicksRandomly();
-  }
-
-  @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos,
-          EnumFacing face) {
-    return isOpaqueCube(state) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
-  }
-
-  @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-          BlockPos pos) {
-    return this.settings.isCollidable() ? super.getCollisionBoundingBox(blockState, worldIn, pos)
-            : NULL_AABB;
-  }
-
-  @Override
-  public boolean isOpaqueCube(IBlockState state) {
-    return this.settings == null || (state.isFullCube() && this.settings.isOpaque());
-  }
-
-  @Override
-  public boolean isCollidable() {
-    return this.settings.isCollidable();
-  }
-
-  @Override
-  public float getExplosionResistance(Entity exploder) {
-    return this.settings.getResistance() / 5.0F;
-  }
-
-  @Override
-  @SideOnly(Side.CLIENT)
-  public BlockRenderLayer getRenderLayer() {
-    return this.settings.getRenderLayer();
-  }
-
-  @Override
-  public String getTranslationKey() {
-    return this.settings.getTranslationKey() == null ? super.getTranslationKey()
-            : "tile." + this.settings.getTranslationKey();
-  }
-
-  @Override
-  public SoundType getSoundType() {
-    return this.settings.getSoundType();
-  }
-
-  @Override
-  public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos,
-          @Nullable Entity entity) {
-    return this.settings.getSlipperiness().apply(state, world, pos);
-  }
-
-  @Override
-  public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-    return this.settings.getLightValue().apply(state, world, pos);
-  }
-
-  @Override
-  public boolean isAir(IBlockState state, IBlockAccess world, BlockPos pos) {
-    return this.settings.isAir();
-  }
-
-  @Override
-  public String getHarvestTool(IBlockState state) {
-    return this.settings.getHarvestTool();
-  }
-
-  @Override
-  public int getHarvestLevel(IBlockState state) {
-    return this.settings.getHarvestLevel();
-  }
-
-  @Override
-  public Weight getWeight(ItemStack stack) {
-    return this.settings.getWeight();
-  }
-
-  @Override
-  public Size getSize(ItemStack stack) {
-    return this.settings.getSize();
-  }
-
-  @Override
-  public boolean canStack(ItemStack stack) {
-    return this.settings.isCanStack();
-  }
-
-  @Override
-  public boolean getHasItemSubtypes() {
-    return this.settings.isHasItemSubtypes();
-  }
-
-  @Override
-  public Item asItem() {
-    return Item.getItemFromBlock(this);
+  public boolean eventReceived(IBlockState state, World world, BlockPos pos, int id, int param) {
+    super.eventReceived(state, world, pos, id, param);
+    TileEntity tile = world.getTileEntity(pos);
+    return tile != null && tile.receiveClientEvent(id, param);
   }
 }

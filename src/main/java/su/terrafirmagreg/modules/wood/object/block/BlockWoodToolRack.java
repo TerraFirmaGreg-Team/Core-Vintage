@@ -53,7 +53,7 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
 
     getSettings()
             .registryKey(variant.getRegistryKey(type))
-            .customResource(String.format("wood/%s", variant))
+            .customResource(variant.getCustomResource())
             .hardness(0.5f)
             .resistance(3f)
             .size(Size.LARGE)
@@ -176,7 +176,7 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
   }
 
   @Override
-  public Class<? extends TileEntity> getTileEntityClass() {
+  public Class<TileWoodToolRack> getTileClass() {
     return TileWoodToolRack.class;
   }
 

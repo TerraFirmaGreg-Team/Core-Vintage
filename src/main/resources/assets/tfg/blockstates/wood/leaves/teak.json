@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfg:wood/leaves",
     "textures": {
-      "all": "tfg:blocks/wood/log/leaves/teak"
+      "all": "tfg:blocks/wood/leaves/teak"
     }
   },
   "variants": {

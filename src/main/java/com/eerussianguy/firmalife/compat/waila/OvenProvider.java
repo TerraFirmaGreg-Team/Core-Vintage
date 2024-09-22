@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.compat.waila;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TileOven;
+import su.terrafirmagreg.modules.device.object.tile.TileOven;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static su.terrafirmagreg.data.Properties.LIT;
-import static su.terrafirmagreg.modules.device.objects.tiles.TileOven.SLOT_MAIN;
+import static su.terrafirmagreg.modules.device.object.tile.TileOven.SLOT_MAIN;
 
 public class OvenProvider implements IWailaBlock {
 

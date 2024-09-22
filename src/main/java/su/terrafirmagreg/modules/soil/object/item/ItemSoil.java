@@ -24,8 +24,8 @@ public abstract class ItemSoil extends BaseItem implements ISoilItem {
             .registryKey(variant.getRegistryKey(type))
             .weight(Weight.LIGHT)
             .size(Size.SMALL)
-            .addOreDict(variant, type)
-            .addOreDict(variant);
+            .oreDict(variant, type)
+            .oreDict(variant);
   }
 
 }

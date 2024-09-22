@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.plugin.jei.quern;
 
 import su.terrafirmagreg.api.plugin.jei.wrapper.BaseRecipeWrapper;
-import su.terrafirmagreg.modules.device.objects.recipes.quern.IQuernRecipe;
+import su.terrafirmagreg.modules.device.object.recipe.quern.IQuernRecipe;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

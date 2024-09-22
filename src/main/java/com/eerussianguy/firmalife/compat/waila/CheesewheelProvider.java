@@ -9,7 +9,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 
-import com.eerussianguy.firmalife.init.AgingFL;
+import com.eerussianguy.firmalife.init.EnumAging;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.BlockCheesewheel;
 
@@ -27,7 +27,7 @@ public class CheesewheelProvider implements IWailaBlock {
     List<String> currentTooltip = new ArrayList<>();
     IBlockState state = world.getBlockState(pos);
     if (state.getBlock() instanceof BlockCheesewheel) {
-      AgingFL age = state.getValue(Properties.AGE);
+      EnumAging age = state.getValue(Properties.AGE);
       currentTooltip.add(age.getFormat() + new TextComponentTranslation(age.getTranslationKey()).getFormattedText());
     }
 

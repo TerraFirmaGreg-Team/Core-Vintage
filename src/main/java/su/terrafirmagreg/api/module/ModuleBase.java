@@ -68,8 +68,7 @@ public abstract class ModuleBase implements IModule {
   protected void enableAutoRegistry(CreativeTabs tab) {
     this.registryManager = new RegistryManager(tab, modID);
 
-    this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modID,
-            s -> new NetworkEntityIdSupplier());
+    this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modID, s -> new NetworkEntityIdSupplier());
     this.registryManager.setNetworkEntityIdSupplier(this.networkEntityIdSupplier);
     this.registry = registryManager.getRegistry();
   }
@@ -79,20 +78,15 @@ public abstract class ModuleBase implements IModule {
    * <p>
    * This will create a new network wrapper and packet registry for this module's mod id if they don't already exist. If they do already exist, the existing network
    * wrapper and packet registry will be used.
-   *
-   * @return a reference to the module's packet service
    */
-  protected IPacketService enableNetwork() {
+  protected void enableNetwork() {
 
     if (this.threadedNetworkWrapper == null) {
-      this.threadedNetworkWrapper = NETWORK_WRAPPER_MAP.computeIfAbsent(this.modID,
-              ThreadedNetworkWrapper::new);
-      this.packetRegistry = PACKET_REGISTRY_MAP.computeIfAbsent(this.modID,
-              s -> new PacketRegistry(this.threadedNetworkWrapper));
+      this.threadedNetworkWrapper = NETWORK_WRAPPER_MAP.computeIfAbsent(this.modID, ThreadedNetworkWrapper::new);
+      this.packetRegistry = PACKET_REGISTRY_MAP.computeIfAbsent(this.modID, s -> new PacketRegistry(this.threadedNetworkWrapper));
       packetService = new PacketService(this.threadedNetworkWrapper);
     }
 
-    return packetService;
   }
 
   /**

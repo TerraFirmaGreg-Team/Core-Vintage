@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalBoar;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalBoar;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalBoar;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

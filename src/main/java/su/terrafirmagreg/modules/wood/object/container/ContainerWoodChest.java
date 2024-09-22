@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.wood.object.container;
 
+import su.terrafirmagreg.api.base.container.BaseContainerTile;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -10,8 +11,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-
-import net.dries007.tfc.objects.container.ContainerTE;
 
 import lombok.Getter;
 
@@ -49,7 +48,7 @@ public class ContainerWoodChest extends Container {
   }
 
   /**
-   * Copied from {@link ContainerTE}
+   * Copied from {@link BaseContainerTile}
    */
   @Override
   public ItemStack transferStackInSlot(EntityPlayer player, int index) {

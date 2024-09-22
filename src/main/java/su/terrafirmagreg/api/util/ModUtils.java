@@ -18,11 +18,13 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import lombok.experimental.UtilityClass;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static su.terrafirmagreg.data.Constants.MOD_ID;
 import static su.terrafirmagreg.data.Constants.MOD_NAME;
@@ -86,7 +88,7 @@ public final class ModUtils {
    */
   public static String getModName(IForgeRegistryEntry.Impl<?> registerable) {
 
-    final String modID = registerable.getRegistryName().getNamespace();
+    final String modID = Objects.requireNonNull(registerable.getRegistryName()).getNamespace();
 
     final ModContainer mod = getModContainer(modID);
     return mod != null ? mod.getName() : "minecraft".equals(modID) ? "Minecraft" : "Unknown";
@@ -172,7 +174,7 @@ public final class ModUtils {
    * @return CreativeTabs: A CreativeTabs with the same label as the one passed. If this is not found, you will get null.
    */
   @SideOnly(Side.CLIENT)
-  public static CreativeTabs getTabFromLabel(String label) {
+  public static @Nullable CreativeTabs getTabFromLabel(String label) {
 
     for (final CreativeTabs tab : CreativeTabs.CREATIVE_TAB_ARRAY) {
       if (tab.getTabLabel().equalsIgnoreCase(label)) {
@@ -194,11 +196,11 @@ public final class ModUtils {
     final int index = id.lastIndexOf(':');
     final String entryName = index == -1 ? id : id.substring(index + 1);
     final ModContainer mod = Loader.instance().activeModContainer();
-    final String prefix =
-            mod == null || mod instanceof InjectedModContainer
-                    && ((InjectedModContainer) mod).wrappedContainer instanceof FMLContainer ?
-                    "minecraft" : mod.getModId()
-                    .toLowerCase();
+    final String prefix = mod == null
+            || mod instanceof InjectedModContainer injectedModContainer
+            && injectedModContainer.wrappedContainer instanceof FMLContainer
+            ? "minecraft"
+            : mod.getModId().toLowerCase();
 
     return new ResourceLocation(prefix, entryName);
   }
@@ -211,8 +213,7 @@ public final class ModUtils {
    * @return A map of all entries sorted by the owning mod id.
    */
   @SuppressWarnings("unchecked")
-  public static <T extends IForgeRegistryEntry<T>> Multimap<String, T> getSortedEntries(
-          IForgeRegistry<T> registry) {
+  public static <T extends IForgeRegistryEntry<T>> Multimap<String, T> getSortedEntries(IForgeRegistry<T> registry) {
 
     if (REGISTRY_CACHE.containsKey(registry)) {
 

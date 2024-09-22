@@ -32,6 +32,7 @@ public final class ModuleAnimal extends ModuleBase {
   @Override
   public void onInit(FMLInitializationEvent event) {
     MinecraftForge.EVENT_BUS.register(new EasyBreedingEventHandler());
+
   }
 
   @Override

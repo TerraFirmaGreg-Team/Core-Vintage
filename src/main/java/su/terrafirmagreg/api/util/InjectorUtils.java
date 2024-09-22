@@ -5,10 +5,14 @@ import su.terrafirmagreg.TerraFirmaGreg;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 
+import lombok.experimental.UtilityClass;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-public class InjectorUtils {
+@UtilityClass
+@SuppressWarnings("unused")
+public final class InjectorUtils {
 
   public static void setFinalStaticFieldWithReflection(Class<?> apiClass, String srgName,
           Object value) {
@@ -29,7 +33,7 @@ public class InjectorUtils {
     field.set(null, newValue);
   }
 
-  public void inject(Class<?> apiClass, String fieldName, Object value) {
+  public static void inject(Class<?> apiClass, String fieldName, Object value) {
 
     try {
       Field field = apiClass.getDeclaredField(fieldName);

@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfg:wood/leaves",
     "textures": {
-      "all": "tfg:blocks/wood/log/leaves/hemlock"
+      "all": "tfg:blocks/wood/leaves/hemlock"
     }
   },
   "variants": {

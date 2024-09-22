@@ -6,7 +6,6 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import net.minecraft.block.BlockButton;
 import net.minecraft.block.BlockButtonStone;
-import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -26,6 +25,8 @@ import org.jetbrains.annotations.Nullable;
 import lombok.Getter;
 
 import java.util.List;
+
+import static su.terrafirmagreg.data.Properties.DIRECTIONAL;
 
 @Getter
 public class BlockRockButton extends BlockButtonStone implements IRockBlock {
@@ -51,9 +52,9 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
           float hitX, float hitY, float hitZ, int meta,
           EntityLivingBase placer) {
     IBlockState state = getStateFromMeta(meta);
-    return BlockButton.canPlaceBlock(worldIn, pos, facing) ? state.withProperty(
-            BlockDirectional.FACING, facing) :
-            state.withProperty(BlockDirectional.FACING, EnumFacing.DOWN);
+    return BlockButton.canPlaceBlock(worldIn, pos, facing)
+            ? state.withProperty(DIRECTIONAL, facing)
+            : state.withProperty(DIRECTIONAL, EnumFacing.DOWN);
   }
 
   @Override

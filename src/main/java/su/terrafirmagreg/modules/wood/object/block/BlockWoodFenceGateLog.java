@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.ToolClasses;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -10,8 +11,6 @@ import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-
-import gregtech.api.items.toolitem.ToolClasses;
 
 import lombok.Getter;
 

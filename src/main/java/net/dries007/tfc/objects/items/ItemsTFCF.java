@@ -54,10 +54,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_GEMS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_ROCK_BLOCKS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
 import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
@@ -1774,7 +1772,7 @@ public final class ItemsTFCF {
     {
       Builder<ItemGemTFCF> b = new Builder<>();
       for (GemTFCF gem : GemTFCF.values()) {
-        b.add(register(r, "gem/" + gem.name().toLowerCase(), new ItemGemTFCF(gem), CT_GEMS));
+        b.add(register(r, "gem/" + gem.name().toLowerCase(), new ItemGemTFCF(gem), CT_MISC));
       }
       allGemTFCFItems = b.build();
     }
@@ -1785,37 +1783,37 @@ public final class ItemsTFCF {
                     CT_MISC));
 
     simpleItems.add(register(r, "tools/flint/axe/flint",
-            new ItemAxeTFCF(ToolMaterials.FLINT, 2.5f, -3f, 50, "axe", "axe_flint", "axe_stone", "axe_stone_sedimentary"), CT_ROCK_BLOCKS));
+            new ItemAxeTFCF(ToolMaterials.FLINT, 2.5f, -3f, 50, "axe", "axe_flint", "axe_stone", "axe_stone_sedimentary"), CT_MISC));
     simpleItems.add(register(r, "tools/flint/hammer/flint",
             new ItemHammerTFCF(ToolMaterials.FLINT, 2.5f, -3f, 50, "hammer", "hammer_flint", "hammer_stone", "hammer_stone_sedimentary"),
-            CT_ROCK_BLOCKS));
+            CT_MISC));
     simpleItems.add(register(r, "tools/flint/hoe/flint",
-            new ItemHoeTFCF(ToolMaterials.FLINT, 2.25f, -2f, 50, "hoe", "hoe_flint", "hoe_stone", "hoe_stone_sedimentary"), CT_ROCK_BLOCKS));
+            new ItemHoeTFCF(ToolMaterials.FLINT, 2.25f, -2f, 50, "hoe", "hoe_flint", "hoe_stone", "hoe_stone_sedimentary"), CT_MISC));
     simpleItems.add(register(r, "tools/flint/javelin/flint",
             new ItemJavelinTFCF(ToolMaterials.FLINT, 1.95f, -1.8f, 50, "javelin", "javelin_flint", "javelin_stone",
-                    "javelin_stone_sedimentary"), CT_ROCK_BLOCKS));
+                    "javelin_stone_sedimentary"), CT_MISC));
     simpleItems.add(register(r, "tools/flint/knife/flint",
             new ItemKnifeTFCF(ToolMaterials.FLINT, 1.5f, -1.5f, 50, "knife", "knife_flint", "knife_stone", "knife_stone_sedimentary"),
-            CT_ROCK_BLOCKS));
+            CT_MISC));
     simpleItems.add(register(r, "tools/flint/shovel/flint",
             new ItemShovelTFCF(ToolMaterials.FLINT, 1.25f, -3f, 50, "shovel", "shovel_flint", "shovel_stone", "shovel_stone_sedimentary"),
-            CT_ROCK_BLOCKS));
+            CT_MISC));
 
     // Toolheads
     simpleItems.add(
             register(r, "tools/flint/axe_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_axe"),
-                    CT_ROCK_BLOCKS));
+                    CT_MISC));
     simpleItems.add(register(r, "tools/flint/hammer_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_hammer"),
-            CT_ROCK_BLOCKS));
+            CT_MISC));
     simpleItems.add(
             register(r, "tools/flint/hoe_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_hoe"),
-                    CT_ROCK_BLOCKS));
+                    CT_MISC));
     simpleItems.add(register(r, "tools/flint/javelin_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_javelin"),
-            CT_ROCK_BLOCKS));
+            CT_MISC));
     simpleItems.add(register(r, "tools/flint/knife_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_knife"),
-            CT_ROCK_BLOCKS));
+            CT_MISC));
     simpleItems.add(register(r, "tools/flint/shovel_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_shovel"),
-            CT_ROCK_BLOCKS));
+            CT_MISC));
 
     // Bows
     itemBows.add(register(r, "tools/bows/shortbow/shortbow",

@@ -1,13 +1,12 @@
 package net.anodecathode.time4tfc.network;
 
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 
 
-import net.anodecathode.time4tfc.data.SessionData;
 import net.anodecathode.time4tfc.network.packet.PacketServerSettings;
 import net.anodecathode.time4tfc.time4tfc;
 
@@ -17,19 +16,14 @@ import net.anodecathode.time4tfc.time4tfc;
 public class NetworkEventHandler {
 
   public static void register() {
-    FMLCommonHandler.instance().bus().register(new NetworkEventHandler());
+    MinecraftForge.EVENT_BUS.register(new NetworkEventHandler());
   }
 
   @SubscribeEvent
   public void onClientLogin(FMLNetworkEvent.ClientConnectedToServerEvent event) {
     if (!event.isLocal()) {
-      SessionData.modEnabled = false;
+      time4tfc.modEnabled = false;
     }
-  }
-
-  @SubscribeEvent
-  public void onClientLogout(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
-    SessionData.loadFromConfiguration(time4tfc.configuration);
   }
 
   @SubscribeEvent

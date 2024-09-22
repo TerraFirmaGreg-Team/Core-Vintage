@@ -1,20 +1,16 @@
 package se.gory_moon.horsepower.blocks;
 
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockStateContainer;
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.property.ExtendedBlockState;
-import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.common.Optional;
 
@@ -27,7 +23,7 @@ import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.HPEventHandler;
 import se.gory_moon.horsepower.lib.Constants;
-import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
+import se.gory_moon.horsepower.tileentity.TileManualChopper;
 import se.gory_moon.horsepower.util.Localization;
 
 import org.jetbrains.annotations.NotNull;
@@ -39,9 +35,11 @@ public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInf
   private static final AxisAlignedBB COLLISION_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 6D / 16D, 1.0D);
 
   public BlockChoppingBlock() {
-    super();
-    setHardness(2.0F);
-    setResistance(5.0F);
+
+    getSettings()
+            .hardness(2.0F)
+            .resistance(5.0F);
+
     setRegistryName(Constants.HAND_CHOPPING_BLOCK);
     setTranslationKey(Constants.HAND_CHOPPING_BLOCK);
   }
@@ -58,15 +56,13 @@ public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInf
 
   @Override
   @NotNull
-  public Class<?> getTileClass() {
-    return TileEntityManualChopper.class;
+  public Class<TileManualChopper> getTileClass() {
+    return TileManualChopper.class;
   }
 
   @Override
-  public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-    if (Configs.general.enableHandChoppingBlock) {
-      super.getSubBlocks(tab, list);
-    }
+  public @Nullable TileManualChopper createNewTileEntity(World worldIn, int meta) {
+    return new TileManualChopper();
   }
 
   @Override
@@ -78,15 +74,9 @@ public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInf
     return COLLISION_AABB;
   }
 
-  @Nullable
-  @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-    return COLLISION_AABB;
-  }
-
   @Override
   public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World world, BlockPos pos) {
-    var tile = getTileEntity(world, pos);
+    var tile = TileUtils.getTile(world, pos, TileManualChopper.class);
     if (tile != null) {
       ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
       if (isValidChoppingTool(heldItem, player)) {
@@ -114,12 +104,11 @@ public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInf
   }
 
   @Override
-  public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer player) {
+  public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
     if (player instanceof FakePlayer || player == null) {
       return;
     }
-
-    TileEntityManualChopper tile = getTileEntity(worldIn, pos);
+    var tile = TileUtils.getTile(world, pos, TileManualChopper.class);
     if (tile != null) {
       ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
       if (isValidChoppingTool(held, player)) {
@@ -133,18 +122,21 @@ public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInf
     }
   }
 
+
+  @Nullable
   @Override
-  protected BlockStateContainer createBlockState() {
-    return new ExtendedBlockState(this, new IProperty[]{}, new IUnlistedProperty[]{SIDE_TEXTURE, TOP_TEXTURE});
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return COLLISION_AABB;
   }
 
   // The One Probe Integration
   @Optional.Method(modid = "theoneprobe")
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
-    TileEntityManualChopper tileEntity = getTileEntity(world, data.getPos());
-    if (tileEntity != null) {
-      probeInfo.progress((long) ((((double) tileEntity.getField(1)) / ((double) tileEntity.getField(0))) * 100L), 100L,
+
+    var tile = TileUtils.getTile(world, data.getPos(), TileManualChopper.class);
+    if (tile != null) {
+      probeInfo.progress((long) ((((double) tile.getField(1)) / ((double) tile.getField(0))) * 100L), 100L,
               new ProgressStyle().prefix(Localization.TOP.CHOPPING_PROGRESS.translate() + " ")
                       .suffix("%"));
     }

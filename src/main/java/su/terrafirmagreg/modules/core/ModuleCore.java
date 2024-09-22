@@ -31,6 +31,7 @@ import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesChunk;
 import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesEntity;
 import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesItem;
 import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesWorld;
+import su.terrafirmagreg.modules.core.event.EventHandlerConfigChanged;
 import su.terrafirmagreg.modules.core.event.EventHandlerDebugInfo;
 import su.terrafirmagreg.modules.core.event.EventHandlerPuddles;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
@@ -45,6 +46,7 @@ import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -63,10 +65,9 @@ public final class ModuleCore extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleCore.class.getSimpleName());
 
-  public static CreativeTabs CORE_TAB;
+  public static final CreativeTabs CORE_TAB = BaseCreativeTab.of("misc", "core/wand");
 
   public ModuleCore() {
-    CORE_TAB = BaseCreativeTab.of("misc", "core/wand");
 
     this.enableAutoRegistry(CORE_TAB);
     this.enableNetwork();
@@ -75,6 +76,7 @@ public final class ModuleCore extends ModuleBase {
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
 
+    FluidRegistry.enableUniversalBucket();
     NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaGreg.getInstance(), new GuiHandler());
 
     CapabilityChunkData.register();
@@ -96,6 +98,7 @@ public final class ModuleCore extends ModuleBase {
     MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesItem());
     MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesEntity());
     MinecraftForge.EVENT_BUS.register(new EventHandlerPuddles());
+    MinecraftForge.EVENT_BUS.register(new EventHandlerConfigChanged());
 
   }
 
@@ -138,6 +141,7 @@ public final class ModuleCore extends ModuleBase {
 
   public void onClientRegister() {
     EntitiesCore.onClientRegister(registryManager);
+
   }
 
   @Override

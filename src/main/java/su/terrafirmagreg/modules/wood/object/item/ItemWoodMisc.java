@@ -12,7 +12,7 @@ public class ItemWoodMisc extends BaseItem {
             .registryKey("wood/" + name)
             .size(size)
             .weight(weight)
-            .addOreDict(oreNameParts);
+            .oreDict(oreNameParts);
   }
 
 }

@@ -37,13 +37,13 @@ public final class ModelUtils {
   public static StateMapperBase PROPERTY_STRING_MAPPER = new StateMapperBase() {
 
     @Override
-    protected @NotNull ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
+    protected @NotNull ModelResourceLocation getModelResourceLocation(IBlockState state) {
       return new ModelResourceLocation("minecraft:air");
     }
   };
 
   @SideOnly(Side.CLIENT)
-  public static void registerStateMapper(@NotNull Block block, IStateMapper stateMap) {
+  public static void registerStateMapper(Block block, IStateMapper stateMap) {
     if (stateMap != null) {
       ModelLoader.setCustomStateMapper(block, stateMap);
     }
@@ -57,8 +57,7 @@ public final class ModelUtils {
     for (Block block : blocks) {
       ResourceLocation registryName = block.getRegistryName();
       Preconditions.checkNotNull(registryName, "Item %s has null registry name", block);
-      String modelLocation =
-              registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
+      String modelLocation = registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
 
       ModelUtils.registerBlockInventoryModel(block, modelLocation);
     }
@@ -79,8 +78,7 @@ public final class ModelUtils {
     ModelUtils.registerInventoryModel(item, 0, resourceLocation);
   }
 
-  public static void registerInventoryModel(@NotNull Item item, int metadata,
-          @NotNull ModelResourceLocation resourceLocation) {
+  public static void registerInventoryModel(Item item, int metadata, ModelResourceLocation resourceLocation) {
 
     ModelLoader.setCustomModelResourceLocation(item, metadata, resourceLocation);
   }
@@ -175,8 +173,7 @@ public final class ModelUtils {
 
   //region ===== TileEntitySpecialRenderer
 
-  public static <T extends TileEntity> void registerTileEntitySpecialRenderer(
-          Class<T> tileEntityClass, TileEntitySpecialRenderer<? super T> specialRenderer) {
+  public static <T extends TileEntity> void registerTileEntitySpecialRenderer(Class<T> tileEntityClass, TileEntitySpecialRenderer<? super T> specialRenderer) {
 
     if (specialRenderer != null) {
       ClientRegistry.bindTileEntitySpecialRenderer(tileEntityClass, specialRenderer);

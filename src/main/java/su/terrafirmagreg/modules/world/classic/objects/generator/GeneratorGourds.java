@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
-import net.minecraft.block.BlockDirectional;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -18,6 +17,8 @@ import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.TFCFlorae;
 
 import java.util.Random;
+
+import static su.terrafirmagreg.data.Properties.DIRECTIONAL;
 
 public class GeneratorGourds implements IWorldGenerator {
 
@@ -61,16 +62,16 @@ public class GeneratorGourds implements IWorldGenerator {
 
           if (rotationValue == 0) {
             world.setBlockState(pos, BlocksFL.MELON_FRUIT.getDefaultState()
-                    .withProperty(BlockDirectional.FACING, EnumFacing.NORTH), 2);
+                    .withProperty(DIRECTIONAL, EnumFacing.NORTH), 2);
           } else if (rotationValue == 1) {
             world.setBlockState(pos, BlocksFL.MELON_FRUIT.getDefaultState()
-                    .withProperty(BlockDirectional.FACING, EnumFacing.EAST), 2);
+                    .withProperty(DIRECTIONAL, EnumFacing.EAST), 2);
           } else if (rotationValue == 2) {
             world.setBlockState(pos, BlocksFL.MELON_FRUIT.getDefaultState()
-                    .withProperty(BlockDirectional.FACING, EnumFacing.SOUTH), 2);
+                    .withProperty(DIRECTIONAL, EnumFacing.SOUTH), 2);
           } else if (rotationValue == 3) {
             world.setBlockState(pos, BlocksFL.MELON_FRUIT.getDefaultState()
-                    .withProperty(BlockDirectional.FACING, EnumFacing.WEST), 2);
+                    .withProperty(DIRECTIONAL, EnumFacing.WEST), 2);
           }
         }
       }
@@ -103,16 +104,16 @@ public class GeneratorGourds implements IWorldGenerator {
 
           if (rotationValue == 0) {
             world.setBlockState(pos, BlocksFL.PUMPKIN_FRUIT.getDefaultState()
-                    .withProperty(BlockDirectional.FACING, EnumFacing.NORTH), 2);
+                    .withProperty(DIRECTIONAL, EnumFacing.NORTH), 2);
           } else if (rotationValue == 1) {
             world.setBlockState(pos, BlocksFL.PUMPKIN_FRUIT.getDefaultState()
-                    .withProperty(BlockDirectional.FACING, EnumFacing.EAST), 2);
+                    .withProperty(DIRECTIONAL, EnumFacing.EAST), 2);
           } else if (rotationValue == 2) {
             world.setBlockState(pos, BlocksFL.PUMPKIN_FRUIT.getDefaultState()
-                    .withProperty(BlockDirectional.FACING, EnumFacing.SOUTH), 2);
+                    .withProperty(DIRECTIONAL, EnumFacing.SOUTH), 2);
           } else if (rotationValue == 3) {
             world.setBlockState(pos, BlocksFL.PUMPKIN_FRUIT.getDefaultState()
-                    .withProperty(BlockDirectional.FACING, EnumFacing.WEST), 2);
+                    .withProperty(DIRECTIONAL, EnumFacing.WEST), 2);
           }
         }
       }

@@ -66,8 +66,8 @@ public class PacketGuiButton implements IMessage {
       EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
       if (player != null) {
         TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-          if (player.openContainer instanceof IButtonHandler) {
-            ((IButtonHandler) player.openContainer).onButtonPress(message.buttonID, message.extraNBT);
+          if (player.openContainer instanceof IButtonHandler buttonHandler) {
+            buttonHandler.onButtonPress(message.buttonID, message.extraNBT);
           }
         });
       }

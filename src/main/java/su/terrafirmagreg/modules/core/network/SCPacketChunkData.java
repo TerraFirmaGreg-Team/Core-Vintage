@@ -27,8 +27,7 @@ public class SCPacketChunkData implements IMessage, IMessageHandler<SCPacketChun
   public SCPacketChunkData() {
   }
 
-  public SCPacketChunkData(ChunkPos chunkPos, NBTTagCompound nbt, float regionalTemp,
-          float rainfall) {
+  public SCPacketChunkData(ChunkPos chunkPos, NBTTagCompound nbt, float regionalTemp, float rainfall) {
     this.x = chunkPos.x;
     this.z = chunkPos.z;
     this.nbt = nbt;

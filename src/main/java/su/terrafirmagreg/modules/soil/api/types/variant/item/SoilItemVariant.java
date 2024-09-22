@@ -46,7 +46,7 @@ public class SoilItemVariant extends Variant<SoilItemVariant> {
     throw new RuntimeException(String.format("Item soil is null: %s, %s", this, type));
   }
 
-  public SoilItemVariant setFactory(BiFunction<SoilItemVariant, SoilType, ? extends Item> factory) {
+  public SoilItemVariant factory(BiFunction<SoilItemVariant, SoilType, ? extends Item> factory) {
     this.factory = factory;
     return this;
   }

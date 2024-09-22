@@ -3,6 +3,7 @@ package com.eerussianguy.firmalife.registry;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.wood.object.item.ItemWoodBucket;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -41,7 +42,6 @@ import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.ItemTrailMix;
 import net.dries007.tfc.objects.items.ItemWateringCan;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
-import net.dries007.tfc.objects.items.wood.ItemWoodenBucket;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.FruitTree;
 
@@ -86,7 +86,7 @@ public class ItemsFL {
   @GameRegistry.ObjectHolder("frothy_coconut")
   public static final ItemMisc FROTHY_COCONUT = Helpers.getNull();
   @GameRegistry.ObjectHolder("cracked_coconut")
-  public static final ItemWoodenBucket CRACKED_COCONUT = Helpers.getNull();
+  public static final ItemWoodBucket CRACKED_COCONUT = Helpers.getNull();
   @GameRegistry.ObjectHolder("barley_flatbread")
   public static final ItemFoodFL BARLEY_FLATBREAD = Helpers.getNull();
   @GameRegistry.ObjectHolder("corn_flatbread")
@@ -309,7 +309,7 @@ public class ItemsFL {
     }
 
     //uses a separate model loader
-    register(r, "cracked_coconut", new ItemWoodenBucket(), CT_MISC);
+    register(r, "cracked_coconut", new ItemWoodBucket(), CT_MISC);
     register(r, "cheesecloth", new ItemCheesecloth(), CT_MISC);
 
     BlocksFL.getAllIBs().forEach((x) -> registerIB(r, x));

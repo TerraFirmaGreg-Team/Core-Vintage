@@ -35,7 +35,11 @@ import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.calendar.Month;
+
+
+import su.terrafirmagreg.data.lib.MCDate.Month;
+
+
 import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;

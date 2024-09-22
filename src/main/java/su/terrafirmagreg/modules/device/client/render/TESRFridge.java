@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.client.model.ModelFridge;
-import su.terrafirmagreg.modules.device.objects.tiles.TileFridge;
+import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

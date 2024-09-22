@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.client.button;
 
 import su.terrafirmagreg.api.base.gui.component.button.BaseGuiButton;
 import su.terrafirmagreg.api.base.gui.component.button.IButtonTooltip;
-import su.terrafirmagreg.modules.device.objects.tiles.TileCrate;
+import su.terrafirmagreg.modules.device.object.tile.TileCrate;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

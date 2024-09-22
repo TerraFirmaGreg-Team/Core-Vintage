@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalHare;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalHare;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalHare;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

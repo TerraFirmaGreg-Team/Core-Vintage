@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalMongoose;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalMongoose;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalMongoose;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

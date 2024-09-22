@@ -8,7 +8,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.util.calendar.Month;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 
 public final class Climate {
 

@@ -12,10 +12,12 @@ public abstract class BaseTileTickableInventory extends BaseTileInventory implem
 
   protected BaseTileTickableInventory(int inventorySize) {
     super(inventorySize);
+
   }
 
   protected BaseTileTickableInventory(ItemStackHandler inventory) {
     super(inventory);
+
   }
 
   @Override

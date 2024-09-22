@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
@@ -25,7 +26,6 @@ import net.minecraft.world.World;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
@@ -99,6 +99,12 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
 
   @Override
   @NotNull
+  protected BlockStateContainer createPlantBlockState() {
+    return new BlockStateContainer(this, AGE, growthStageProperty, DAYPERIOD, PART);
+  }
+
+  @Override
+  @NotNull
   public Block.EnumOffsetType getOffsetType() {
     return Block.EnumOffsetType.XZ;
   }
@@ -163,6 +169,22 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
             .withProperty(PART, getPlantPart(worldIn, pos));
     worldIn.setBlockState(pos, iblockstate);
     iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
+  }
+
+  private boolean canShrink(World worldIn, BlockPos pos) {
+    return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
+            .getBlock() != this;
+  }
+
+  public void shrink(World worldIn, BlockPos pos) {
+    worldIn.setBlockToAir(pos);
+    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
+  }
+
+  @Override
+  @NotNull
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return getTallBoundingBax(state.getValue(AGE), state, source, pos);
   }  @Override
   public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
     Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
@@ -251,41 +273,6 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
     }
   }
 
-  private boolean canShrink(World worldIn, BlockPos pos) {
-    return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
-            .getBlock() != this;
-  }  @Override
-  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
-    this.onBlockHarvested(world, pos, state, player);
-    return world.setBlockState(pos, net.minecraft.init.Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
-  }
-
-  public void shrink(World worldIn, BlockPos pos) {
-    worldIn.setBlockToAir(pos);
-    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
-  }  @Override
-  public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
-          net.minecraftforge.common.IPlantable plantable) {
-    IBlockState plant = plantable.getPlant(world, pos.offset(direction));
-
-    if (plant.getBlock() == this) {
-      return true;
-    }
-    return super.canSustainPlant(state, world, pos, direction, plantable);
-  }
-
-  @Override
-  @NotNull
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return getTallBoundingBax(state.getValue(AGE), state, source, pos);
-  }
-
-  @Override
-  @NotNull
-  protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, AGE, growthStageProperty, DAYPERIOD, PART);
-  }
-
   @Override
   public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
     return true;
@@ -299,7 +286,22 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
 
 
 
+  @Override
+  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+    this.onBlockHarvested(world, pos, state, player);
+    return world.setBlockState(pos, net.minecraft.init.Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
+  }
 
+  @Override
+  public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
+          net.minecraftforge.common.IPlantable plantable) {
+    IBlockState plant = plantable.getPlant(world, pos.offset(direction));
+
+    if (plant.getBlock() == this) {
+      return true;
+    }
+    return super.canSustainPlant(state, world, pos, direction, plantable);
+  }
 
 
 }

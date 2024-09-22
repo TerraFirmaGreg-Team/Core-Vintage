@@ -48,8 +48,8 @@ public class LargePlanterBakedModel implements IBakedModel {
     }
     Map<String, String> sprites = new HashMap<>();
     sprites.put("soil", MODID_FL + (state.getValue(Properties.WET) ? ":blocks/potting_soil_wet" : ":blocks/potting_soil_dry"));
-    if (state instanceof IExtendedBlockState) {
-      sprites.put("crop1", resolveTexture((IExtendedBlockState) state, BlockLargePlanter.CROP));
+    if (state instanceof IExtendedBlockState extendedBlockState) {
+      sprites.put("crop1", resolveTexture(extendedBlockState, BlockLargePlanter.CROP));
     }
     IModel newModel = dummy.retexture(ImmutableMap.copyOf(sprites));
     return bake(newModel).getQuads(state, side, rand);

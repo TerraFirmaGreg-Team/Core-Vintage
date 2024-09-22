@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalDeer;
-import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalDeer;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalDeer;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

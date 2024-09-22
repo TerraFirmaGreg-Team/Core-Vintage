@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.te;
 
 import su.terrafirmagreg.api.base.tile.BaseTile;
+import su.terrafirmagreg.api.util.StackUtils;
 
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -67,7 +67,7 @@ public class TEMetalSheet extends BaseTile {
   public void onBreakBlock(Metal outMetal) {
     Item item = ItemMetalSheet.get(outMetal, Metal.ItemType.SHEET);
     ItemStack output = new ItemStack(item, getFaceCount());
-    InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), output);
+    StackUtils.spawnItemStack(world, pos, output);
   }
 
   /**

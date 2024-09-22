@@ -121,55 +121,22 @@ public class ItemMetal extends ItemTFC implements ICapabilityMetal {
 
   @Override
   public @NotNull Weight getWeight(@NotNull ItemStack stack) {
-    switch (type) {
-      case DUST:
-      case NUGGET:
-      case SCRAP:
-        return Weight.VERY_LIGHT; // Stacksize = 64
-      case INGOT:
-      case DOUBLE_INGOT:
-      case SHEET:
-      case DOUBLE_SHEET:
-        return Weight.LIGHT; // Stacksize = 32
-      case HELMET:
-      case GREAVES:
-      case CHESTPLATE:
-      case BOOTS:
-      case UNFINISHED_CHESTPLATE:
-      case UNFINISHED_GREAVES:
-      case UNFINISHED_HELMET:
-      case UNFINISHED_BOOTS:
-        return Weight.VERY_HEAVY; // Stacksize = 1
-      default:
-        return Weight.MEDIUM; // Stacksize = 16 for everything else, but tools will still stack only to 1
-    }
+    return switch (type) {
+      case DUST, NUGGET, SCRAP -> Weight.VERY_LIGHT; // Stacksize = 64
+      case INGOT, DOUBLE_INGOT, SHEET, DOUBLE_SHEET -> Weight.LIGHT; // Stacksize = 32
+      case HELMET, GREAVES, CHESTPLATE, BOOTS, UNFINISHED_CHESTPLATE, UNFINISHED_GREAVES, UNFINISHED_HELMET, UNFINISHED_BOOTS -> Weight.VERY_HEAVY; // Stacksize = 1
+      default -> Weight.MEDIUM; // Stacksize = 16 for everything else, but tools will still stack only to 1
+    };
   }
 
   @Override
   public @NotNull Size getSize(@NotNull ItemStack stack) {
-    switch (type) {
-      case NUGGET:
-      case DUST:
-      case SCRAP:
-        return Size.SMALL; // Fits in Small Vessels
-      case PICK_HEAD:
-      case HAMMER_HEAD:
-      case HOE_HEAD:
-      case AXE_HEAD:
-      case CHISEL_HEAD:
-      case JAVELIN_HEAD:
-      case MACE_HEAD:
-      case PROPICK_HEAD:
-      case SHOVEL_HEAD:
-      case KNIFE_BLADE:
-      case SAW_BLADE:
-      case SCYTHE_BLADE:
-      case SWORD_BLADE:
-      case ICE_SAW_HEAD:
-        return Size.NORMAL; // Tool heads fits in large vessels
-      default:
-        return Size.LARGE; // Everything else fits only in chests
-    }
+    return switch (type) {
+      case NUGGET, DUST, SCRAP -> Size.SMALL; // Fits in Small Vessels
+      case PICK_HEAD, HAMMER_HEAD, HOE_HEAD, AXE_HEAD, CHISEL_HEAD, JAVELIN_HEAD, MACE_HEAD, PROPICK_HEAD, SHOVEL_HEAD, KNIFE_BLADE, SAW_BLADE, SCYTHE_BLADE,
+           SWORD_BLADE, ICE_SAW_HEAD -> Size.NORMAL; // Tool heads fits in large vessels
+      default -> Size.LARGE; // Everything else fits only in chests
+    };
   }
 
   @Override

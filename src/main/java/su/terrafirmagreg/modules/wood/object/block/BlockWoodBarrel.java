@@ -225,7 +225,7 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
   }
 
   @Override
-  public Class<? extends TileEntity> getTileEntityClass() {
+  public Class<TileWoodBarrel> getTileClass() {
     return TileWoodBarrel.class;
   }
 

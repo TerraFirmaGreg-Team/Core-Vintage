@@ -5,8 +5,7 @@ import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public interface IProviderBlockColor
-        extends IProviderItemColor {
+public interface IProviderBlockColor extends IProviderItemColor {
 
   @SideOnly(Side.CLIENT)
   IBlockColor getBlockColor();

@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
@@ -26,7 +27,6 @@ import net.minecraftforge.common.IPlantable;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
@@ -99,6 +99,11 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
   }
 
   @NotNull
+  protected BlockStateContainer createPlantBlockState() {
+    return new BlockStateContainer(this, AGE, this.growthStageProperty, DAYPERIOD, PART);
+  }
+
+  @NotNull
   public Block.EnumOffsetType getOffsetType() {
     return EnumOffsetType.XZ;
   }
@@ -157,6 +162,16 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
             .withProperty(PART, this.getPlantPart(worldIn, pos));
     worldIn.setBlockState(pos, iblockstate);
     iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
+  }
+
+  private boolean canShrink(World worldIn, BlockPos pos) {
+    return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
+            .getBlock() != this;
+  }
+
+  public void shrink(World worldIn, BlockPos pos) {
+    worldIn.setBlockToAir(pos);
+    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
   }  public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
     Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int currentStage = state.getValue(this.growthStageProperty);
@@ -183,30 +198,9 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
 
   }
 
-  private boolean canShrink(World worldIn, BlockPos pos) {
-    return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
-            .getBlock() != this;
-  }  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
-    this.onBlockHarvested(world, pos, state, player);
-    return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
-  }
-
-  public void shrink(World worldIn, BlockPos pos) {
-    worldIn.setBlockToAir(pos);
-    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
-  }  public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
-    IBlockState plant = plantable.getPlant(world, pos.offset(direction));
-    return plant.getBlock() == this || super.canSustainPlant(state, world, pos, direction, plantable);
-  }
-
   @NotNull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     return this.getTallBoundingBax(state.getValue(AGE), state, source, pos);
-  }
-
-  @NotNull
-  protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, AGE, this.growthStageProperty, DAYPERIOD, PART);
   }
 
   public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
@@ -218,9 +212,18 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
     return NonNullList.withSize(1, new ItemStack(this, 1));
   }
 
+  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+    this.onBlockHarvested(world, pos, state, player);
+    return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
+  }
 
 
 
+
+  public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
+    IBlockState plant = plantable.getPlant(world, pos.offset(direction));
+    return plant.getBlock() == this || super.canSustainPlant(state, world, pos, direction, plantable);
+  }
 
 
 }

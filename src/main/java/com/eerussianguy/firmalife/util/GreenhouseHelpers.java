@@ -1,9 +1,9 @@
 package com.eerussianguy.firmalife.util;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockGreenhouseDoor;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockGreenhouseRoof;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockGreenhouseWall;
+import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseDoor;
+import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseRoof;
+import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseWall;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

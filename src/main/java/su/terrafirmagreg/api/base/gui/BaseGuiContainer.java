@@ -2,7 +2,6 @@ package su.terrafirmagreg.api.base.gui;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -33,6 +32,7 @@ public abstract class BaseGuiContainer extends GuiContainer {
     this.renderHoveredToolTip(mouseX, mouseY);
   }
 
+  @Override
   protected void drawItemStack(ItemStack stack, int x, int y, @NotNull String altText) {
     this.zLevel = 200.0F;
     this.itemRender.zLevel = 200.0F;
@@ -52,7 +52,8 @@ public abstract class BaseGuiContainer extends GuiContainer {
   }
 
   protected final void drawSimpleBackground() {
-    GlStateManager.color(1, 1, 1, 1);
+//    GlStateManager.color(1, 1, 1, 1);
+    drawDefaultBackground();
     mc.getTextureManager().bindTexture(background);
     drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
   }

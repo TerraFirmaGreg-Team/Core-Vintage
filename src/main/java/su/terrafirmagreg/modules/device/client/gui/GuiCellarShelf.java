@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.client.gui;
 import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.data.Unicode;
-import su.terrafirmagreg.modules.device.objects.tiles.TileCellarShelf;
+import su.terrafirmagreg.modules.device.object.tile.TileCellarShelf;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;

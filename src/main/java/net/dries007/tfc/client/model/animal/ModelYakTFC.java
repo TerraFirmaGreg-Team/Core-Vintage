@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.model.animal;
 
 import su.terrafirmagreg.data.MathConstants;
-import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

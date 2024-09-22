@@ -62,95 +62,79 @@ public final class BlocksSoil {
 
   public static void onRegister(RegistryManager registry) {
 
-    GRASS = SoilBlockVariant
-            .builder("grass")
-            .setFactory(BlockSoilGrass::new)
-            .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+    GRASS = SoilBlockVariant.builder("grass")
+            .factory(BlockSoilGrass::new)
+            .fallingSpecification(VERTICAL_AND_HORIZONTAL)
             .build(registry);
 
-    DRY_GRASS = SoilBlockVariant
-            .builder("dry_grass")
-            .setFactory(BlockSoilGrass::new)
-            .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+    DRY_GRASS = SoilBlockVariant.builder("dry_grass")
+            .factory(BlockSoilGrass::new)
+            .fallingSpecification(VERTICAL_AND_HORIZONTAL)
             .build(registry);
 
-    SPARSE_GRASS = SoilBlockVariant
-            .builder("sparse_grass")
-            .setFactory(BlockSoilGrass::new)
-            .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+    SPARSE_GRASS = SoilBlockVariant.builder("sparse_grass")
+            .factory(BlockSoilGrass::new)
+            .fallingSpecification(VERTICAL_AND_HORIZONTAL)
             .build(registry);
 
-    PODZOL = SoilBlockVariant
-            .builder("podzol")
-            .setFactory(BlockSoilPodzol::new)
-            .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+    PODZOL = SoilBlockVariant.builder("podzol")
+            .factory(BlockSoilPodzol::new)
+            .fallingSpecification(VERTICAL_AND_HORIZONTAL)
             .build(registry);
 
-    MYCELIUM = SoilBlockVariant
-            .builder("mycelium")
-            .setFactory(BlockSoilMycelium::new)
-            .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+    MYCELIUM = SoilBlockVariant.builder("mycelium")
+            .factory(BlockSoilMycelium::new)
+            .fallingSpecification(VERTICAL_AND_HORIZONTAL)
             .build(registry);
 
-    DIRT = SoilBlockVariant
-            .builder("dirt")
-            .setFactory(BlockSoilDirt::new)
-            .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+    DIRT = SoilBlockVariant.builder("dirt")
+            .factory(BlockSoilDirt::new)
+            .fallingSpecification(VERTICAL_AND_HORIZONTAL)
             .build(registry);
 
-    COARSE_DIRT = SoilBlockVariant
-            .builder("coarse_dirt")
-            .setFactory(BlockSoilDirt::new)
-            .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+    COARSE_DIRT = SoilBlockVariant.builder("coarse_dirt")
+            .factory(BlockSoilDirt::new)
+            .fallingSpecification(VERTICAL_AND_HORIZONTAL)
             .build(registry);
 
-    ROOTED_DIRT = SoilBlockVariant
-            .builder("rooted_dirt")
-            .setFactory(BlockSoilRootedDirt::new)
-            .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+    ROOTED_DIRT = SoilBlockVariant.builder("rooted_dirt")
+            .factory(BlockSoilRootedDirt::new)
+            .fallingSpecification(VERTICAL_AND_HORIZONTAL)
             .build(registry);
 
-    FARMLAND = SoilBlockVariant
-            .builder("farmland")
-            .setFactory(BlockSoilFarmland::new)
-            .setFallingSpecification(VERTICAL_ONLY_SOIL)
+    FARMLAND = SoilBlockVariant.builder("farmland")
+            .factory(BlockSoilFarmland::new)
+            .fallingSpecification(VERTICAL_ONLY_SOIL)
             .build(registry);
 
-    GRASS_PATH = SoilBlockVariant
-            .builder("grass_path")
-            .setFactory(BlockSoilGrassPath::new)
-            .setFallingSpecification(VERTICAL_ONLY_SOIL)
+    GRASS_PATH = SoilBlockVariant.builder("grass_path")
+            .factory(BlockSoilGrassPath::new)
+            .fallingSpecification(VERTICAL_ONLY_SOIL)
             .build(registry);
 
-    MUD = SoilBlockVariant
-            .builder("mud")
-            .setFactory(BlockSoilMud::new)
-            .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+    MUD = SoilBlockVariant.builder("mud")
+            .factory(BlockSoilMud::new)
+            .fallingSpecification(VERTICAL_AND_HORIZONTAL)
             .build(registry);
 
-    MUD_BRICKS = SoilBlockVariant
-            .builder("mud_bricks")
-            .setFactory(BlockSoilMudBricks::new)
+    MUD_BRICKS = SoilBlockVariant.builder("mud_bricks")
+            .factory(BlockSoilMudBricks::new)
             .build(registry);
 
-    MUD_BRICKS_STAIRS = SoilBlockVariant
-            .builder("mud_bricks/stairs")
-            .setFactory((v, t) -> new BlockSoilMudStairs(MUD_BRICKS.get(t), v, t))
+    MUD_BRICKS_STAIRS = SoilBlockVariant.builder("mud_bricks/stairs")
+            .factory((v, t) -> new BlockSoilMudStairs(MUD_BRICKS.get(t), v, t))
             .build(registry);
 
-    MUD_BRICKS_SLAB_DOUBLE = SoilBlockVariant
-            .builder("mud_bricks/slab_double")
-            .setFactory((v, t) -> new BlockSoilMudSlab.Double(MUD_BRICKS.get(t), v, t))
+    MUD_BRICKS_SLAB_DOUBLE = SoilBlockVariant.builder("mud_bricks/slab_double")
+            .factory((v, t) -> new BlockSoilMudSlab.Double(MUD_BRICKS.get(t), v, t))
             .build(registry);
 
-    MUD_BRICKS_SLAB = SoilBlockVariant
-            .builder("mud_bricks/slab")
-            .setFactory((v, t) -> new BlockSoilMudSlab.Half(MUD_BRICKS.get(t), MUD_BRICKS_SLAB_DOUBLE.get(t), v, t))
+    MUD_BRICKS_SLAB = SoilBlockVariant.builder("mud_bricks/slab")
+            .factory((v, t) -> new BlockSoilMudSlab.Half(MUD_BRICKS.get(t), MUD_BRICKS_SLAB_DOUBLE.get(t), v, t))
             .build(registry);
 
-    MUD_BRICKS_WALL = SoilBlockVariant
-            .builder("mud_bricks/wall")
-            .setFactory((v, t) -> new BlockSoilMudWall(MUD_BRICKS.get(t), v, t))
+    MUD_BRICKS_WALL = SoilBlockVariant.builder("mud_bricks/wall")
+            .factory((v, t) -> new BlockSoilMudWall(MUD_BRICKS.get(t), v, t))
             .build(registry);
 
     PEAT_GRASS = registry.block(new BlockSoilPeatGrass());

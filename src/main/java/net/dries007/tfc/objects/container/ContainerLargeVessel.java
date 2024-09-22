@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.base.container.BaseContainerTile;
+
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -12,7 +14,7 @@ import net.dries007.tfc.objects.te.TELargeVessel;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ContainerLargeVessel extends ContainerTE<TELargeVessel> implements IButtonHandler {
+public class ContainerLargeVessel extends BaseContainerTile<TELargeVessel> implements IButtonHandler {
 
   public ContainerLargeVessel(InventoryPlayer playerInv, TELargeVessel tile) {
     super(playerInv, tile);

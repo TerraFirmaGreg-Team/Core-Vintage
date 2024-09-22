@@ -85,7 +85,6 @@ import lombok.Getter;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FLORA;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_GEMS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
@@ -689,7 +688,7 @@ public final class BlocksTFCF {
     allDeadCrops = deadCrops.build();
 
     {
-      blockLightstone.add(register(r, "groundcover/lightstone", new BlockLightstone(0.8f), CT_GEMS));
+      blockLightstone.add(register(r, "groundcover/lightstone", new BlockLightstone(0.8f), CT_MISC));
     }
     allLightstoneBlocks = blockLightstone.build();
     for (BlockLightstone lightstone : allLightstoneBlocks) {

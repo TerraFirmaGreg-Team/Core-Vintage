@@ -140,14 +140,12 @@ public class HorsePowerPlugin implements IModPlugin {
       registry.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_HAND_GRINDSTONE), GRINDING);
     }
     if (Configs.general.enableHandChoppingBlock) {
-      ItemStack itemStackManualChopper = BlockHPChoppingBase.createItemStack(ModBlocks.BLOCK_MANUAL_CHOPPER, 1,
-              new ItemStack(Item.getItemFromBlock(Blocks.LOG)));
+      ItemStack itemStackManualChopper = BlockHPChoppingBase.createItemStack(ModBlocks.BLOCK_MANUAL_CHOPPER, 1, new ItemStack(Item.getItemFromBlock(Blocks.LOG)));
       registry.addRecipeCatalyst(itemStackManualChopper, MANUAL_CHOPPING);
     }
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_GRINDSTONE), GRINDING);
 
-    ItemStack itemStackChopper = BlockHPChoppingBase.createItemStack(ModBlocks.BLOCK_CHOPPER, 1,
-            new ItemStack(Item.getItemFromBlock(Blocks.LOG)));
+    ItemStack itemStackChopper = BlockHPChoppingBase.createItemStack(ModBlocks.BLOCK_CHOPPER, 1, new ItemStack(Item.getItemFromBlock(Blocks.LOG)));
     registry.addRecipeCatalyst(itemStackChopper, CHOPPING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_PRESS), PRESS_ITEM);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_PRESS), PRESS_FLUID);

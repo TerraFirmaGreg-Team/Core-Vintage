@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.items.itemblock;
 
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockCrate;
+import su.terrafirmagreg.modules.device.object.block.BlockCrate;
 
 public class ItemBlockCrate extends ItemBlockTFC implements ICapabilitySize {
 

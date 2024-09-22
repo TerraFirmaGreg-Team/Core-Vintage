@@ -18,8 +18,7 @@ public final class CapabilityHeat {
   public static final Capability<ICapabilityHeat> CAPABILITY = ModUtils.getNull();
 
   public static void register() {
-    CapabilityManager.INSTANCE.register(ICapabilityHeat.class, new StorageHeat(),
-            ProviderHeat::new);
+    CapabilityManager.INSTANCE.register(ICapabilityHeat.class, new StorageHeat(), ProviderHeat::new);
 
   }
 

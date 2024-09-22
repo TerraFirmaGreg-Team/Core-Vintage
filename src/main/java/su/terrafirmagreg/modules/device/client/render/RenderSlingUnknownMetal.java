@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.client.model.ModelUnknownProjectile;
-import su.terrafirmagreg.modules.device.objects.entity.EntityUnknownProjectile;
+import su.terrafirmagreg.modules.device.object.entity.EntityUnknownProjectile;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;

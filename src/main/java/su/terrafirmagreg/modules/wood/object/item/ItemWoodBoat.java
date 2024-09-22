@@ -10,7 +10,6 @@ import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodBoat;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,19 +34,21 @@ import java.util.Objects;
 @Getter
 public class ItemWoodBoat extends BaseItem implements IWoodItem {
 
-  private final WoodItemVariant variant;
-  private final WoodType type;
+  protected final WoodItemVariant variant;
+  protected final WoodType type;
 
   public ItemWoodBoat(WoodItemVariant variant, WoodType type) {
     this.type = type;
     this.variant = variant;
 
     getSettings()
+            .registryKey(variant.getRegistryKey(type))
+            .customResource(variant.getCustomResource())
             .weight(Weight.MEDIUM)
             .size(Size.LARGE)
             .notCanStack()
-            .addOreDict(variant)
-            .addOreDict(variant, type);
+            .oreDict(variant)
+            .oreDict(variant, type);
   }
 
   /**
@@ -130,9 +131,5 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
     }
   }
 
-  @Override
-  public IItemColor getItemColor() {
-    return (s, i) -> this.getType().getColor();
-  }
 
 }

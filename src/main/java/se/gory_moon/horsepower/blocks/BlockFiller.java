@@ -1,10 +1,10 @@
 package se.gory_moon.horsepower.blocks;
 
+import su.terrafirmagreg.api.base.block.BaseBlockDirectional;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleManager;
@@ -15,7 +15,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -37,64 +36,31 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoAccessor;
 import mcjty.theoneprobe.api.ProbeMode;
 import mcjty.theoneprobe.apiimpl.ProbeHitData;
-import se.gory_moon.horsepower.tileentity.TileEntityFiller;
+import se.gory_moon.horsepower.tileentity.TileFiller;
 
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.DIRECTIONAL;
+
 @Optional.Interface(iface = "mcjty.theoneprobe.api.IProbeInfoAccessor", modid = "theoneprobe")
-public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor {
+public class BlockFiller extends BaseBlockDirectional implements IProbeInfoAccessor, IProviderTile {
 
-  private final boolean useTileEntity;
-  private final boolean providePower;
 
-  public BlockFiller(Material materialIn, String name, boolean useTileEntity) {
-    this(materialIn, name, useTileEntity, false);
-  }
+  public BlockFiller(Settings settings, String name) {
+    super(settings);
 
-  public BlockFiller(Material materialIn, String name, boolean useTileEntity, boolean providePower) {
-    super(materialIn);
+    getSettings()
+            .nonCube()
+            .isSuffocating()
+            .resistance(5.0F)
+            .hardness(5.0F);
+
     setRegistryName(name + "filler");
-    this.useTileEntity = useTileEntity;
-    this.providePower = providePower;
   }
 
-  public BlockFiller setHarvestLevel1(String tool, int level) {
-    setHarvestLevel(tool, level);
-    return this;
-  }
-
-  @Override
-  public boolean isFullBlock(IBlockState state) {
-    return false;
-  }
-
-  @Override
-  public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
-  }
-
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getIndex();
-  }
-
-  @Override
-  public boolean isBlockNormalCube(IBlockState state) {
-    return false;
-  }
-
-  @Override
-  public boolean causesSuffocation(IBlockState state) {
-    return true;
-  }
-
-  @Override
-  public boolean isFullCube(IBlockState state) {
-    return false;
-  }
 
   @Override
   public EnumBlockRenderType getRenderType(IBlockState state) {
@@ -103,7 +69,7 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
 
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos0) {
-    BlockPos pos = pos0.offset(state.getValue(FACING));
+    BlockPos pos = pos0.offset(state.getValue(DIRECTIONAL));
     IBlockState state1 = world.getBlockState(pos);
     if (world instanceof World && validateFilled((World) world, state1, pos0)) {
       return state1.getBlock().getBoundingBox(state1, world, pos);
@@ -114,35 +80,29 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
 
   @Override
   public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos0, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
-          @Nullable Entity entityIn, boolean p_185477_7_) {
-    BlockPos pos = pos0.offset(state.getValue(FACING));
+          @Nullable Entity entityIn, boolean isActualState) {
+    BlockPos pos = pos0.offset(state.getValue(DIRECTIONAL));
     IBlockState state1 = world.getBlockState(pos);
     if (validateFilled(world, state1, pos0)) {
-      state1.getBlock()
-              .addCollisionBoxToList(state1, world, pos, entityBox, collidingBoxes, entityIn, p_185477_7_);
+      state1.getBlock().addCollisionBoxToList(state1, world, pos, entityBox, collidingBoxes, entityIn, isActualState);
     }
   }
 
   @Override
   @SideOnly(Side.CLIENT)
-  public final AxisAlignedBB getSelectedBoundingBox(IBlockState s, World w, BlockPos p0) {
-    BlockPos p = p0.offset(s.getValue(FACING));
-    IBlockState state1 = w.getBlockState(p);
-    if (validateFilled(w, state1, p0)) {
-      return state1.getBlock().getSelectedBoundingBox(state1, w, p);
+  public final AxisAlignedBB getSelectedBoundingBox(IBlockState state, World world, BlockPos pos) {
+    BlockPos offset = pos.offset(state.getValue(DIRECTIONAL));
+    IBlockState iBlockState = world.getBlockState(offset);
+    if (validateFilled(world, iBlockState, pos)) {
+      return iBlockState.getBlock().getSelectedBoundingBox(iBlockState, world, offset);
     } else {
-      return super.getSelectedBoundingBox(s, w, p0);
+      return super.getSelectedBoundingBox(state, world, pos);
     }
   }
 
   @Override
-  public boolean isOpaqueCube(IBlockState state) {
-    return false;
-  }
-
-  @Override
   public void onPlayerDestroy(World world, BlockPos pos0, IBlockState state) {
-    BlockPos pos = pos0.offset(state.getValue(FACING));
+    BlockPos pos = pos0.offset(state.getValue(DIRECTIONAL));
     IBlockState state1 = world.getBlockState(pos);
     if (validateFilled(world, state1, pos0)) {
       state1.getBlock().onPlayerDestroy(world, pos, world.getBlockState(pos));
@@ -160,36 +120,31 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
   }
 
   @Override
-  public final RayTraceResult collisionRayTrace(IBlockState s, World w, BlockPos p0, Vec3d start, Vec3d end) {
-    BlockPos p = p0.offset(s.getValue(FACING));
-    IBlockState state1 = w.getBlockState(p);
-    if (validateFilled(w, state1, p0)) {
-      RayTraceResult trace = state1.getBlock().collisionRayTrace(state1, w, p, start, end);
-      return trace != null ? new RayTraceResult(trace.typeOfHit, trace.hitVec, trace.sideHit, p0) : trace;
+  public final RayTraceResult collisionRayTrace(IBlockState blockState, World world, BlockPos pos, Vec3d start, Vec3d end) {
+    BlockPos p = pos.offset(blockState.getValue(DIRECTIONAL));
+    IBlockState state = world.getBlockState(p);
+    if (validateFilled(world, state, pos)) {
+      RayTraceResult trace = state.getBlock().collisionRayTrace(state, world, p, start, end);
+      return trace != null ? new RayTraceResult(trace.typeOfHit, trace.hitVec, trace.sideHit, pos) : trace;
     } else {
-      return super.collisionRayTrace(s, w, p0, start, end);
+      return super.collisionRayTrace(blockState, world, pos, start, end);
     }
   }
 
   @Override
-  public BlockRenderLayer getRenderLayer() {
-    return BlockRenderLayer.CUTOUT;
-  }
-
-  @Override
-  public boolean onBlockActivated(World w, BlockPos p0, IBlockState s, EntityPlayer e, EnumHand h, EnumFacing f, float x, float y, float z) {
-    BlockPos p = p0.offset(s.getValue(FACING));
-    IBlockState state1 = w.getBlockState(p);
-    if (validateFilled(w, state1, p0)) {
-      return state1.getBlock().onBlockActivated(w, p, state1, e, h, f, x, y, z);
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float x, float y, float z) {
+    BlockPos p = pos.offset(state.getValue(DIRECTIONAL));
+    IBlockState state1 = world.getBlockState(p);
+    if (validateFilled(world, state1, pos)) {
+      return state1.getBlock().onBlockActivated(world, p, state1, playerIn, hand, facing, x, y, z);
     } else {
-      return super.onBlockActivated(w, p, s, e, h, f, x, y, z);
+      return super.onBlockActivated(world, p, state, playerIn, hand, facing, x, y, z);
     }
   }
 
   @Override
   public void onEntityWalk(World world, BlockPos pos0, Entity entityIn) {
-    BlockPos pos = pos0.offset(world.getBlockState(pos0).getValue(FACING));
+    BlockPos pos = pos0.offset(world.getBlockState(pos0).getValue(DIRECTIONAL));
     IBlockState state1 = world.getBlockState(pos);
     if (validateFilled(world, state1, pos0)) {
       state1.getBlock().onEntityWalk(world, pos, entityIn);
@@ -198,7 +153,7 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
 
   @Override
   public int getWeakPower(IBlockState state, IBlockAccess world, BlockPos pos0, EnumFacing side) {
-    BlockPos pos = pos0.offset(state.getValue(FACING));
+    BlockPos pos = pos0.offset(state.getValue(DIRECTIONAL));
     IBlockState state1 = world.getBlockState(pos);
     if (world instanceof World && validateFilled((World) world, state1, pos0)) {
       return state1.getBlock().getWeakPower(state1, world, pos, side);
@@ -208,13 +163,8 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
   }
 
   @Override
-  public boolean canProvidePower(IBlockState state) {
-    return providePower;
-  }
-
-  @Override
   public int getStrongPower(IBlockState state, IBlockAccess world, BlockPos pos0, EnumFacing side) {
-    BlockPos pos = pos0.offset(state.getValue(FACING));
+    BlockPos pos = pos0.offset(state.getValue(DIRECTIONAL));
     IBlockState state1 = world.getBlockState(pos);
     if (world instanceof World && validateFilled((World) world, state1, pos0)) {
       return state1.getBlock().getStrongPower(state1, world, pos, side);
@@ -224,76 +174,59 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
   }
 
   @Override
-  public ItemStack getItem(World world, BlockPos pos0, IBlockState state) {
-    BlockPos pos = pos0.offset(state.getValue(FACING));
-    IBlockState state1 = world.getBlockState(pos);
-    if (validateFilled(world, state1, pos0)) {
-      return state1.getBlock().getItem(world, pos, state1);
+  public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
+    BlockPos offset = pos.offset(state.getValue(DIRECTIONAL));
+    IBlockState state1 = world.getBlockState(offset);
+    if (validateFilled(world, state1, pos)) {
+      return state1.getBlock().getItem(world, offset, state1);
     } else {
-      return super.getItem(world, pos0, state);
+      return super.getItem(world, pos, state);
     }
   }
 
   @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING);
-  }
-
-  @Override
-  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos0, EntityPlayer player, boolean willHarvest) {
-    BlockPos pos = pos0.offset(state.getValue(FACING));
-    IBlockState state1 = world.getBlockState(pos);
-    if (validateFilled(world, state1, pos0)) {
-      state1.getBlock().removedByPlayer(world.getBlockState(pos), world, pos, player, willHarvest);
+  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+    BlockPos offset = pos.offset(state.getValue(DIRECTIONAL));
+    IBlockState state1 = world.getBlockState(offset);
+    if (validateFilled(world, state1, pos)) {
+      state1.getBlock().removedByPlayer(world.getBlockState(offset), world, offset, player, willHarvest);
     }
-    return super.removedByPlayer(state, world, pos0, player, willHarvest);
+    return super.removedByPlayer(state, world, pos, player, willHarvest);
   }
 
   @Override
-  public boolean hasTileEntity(IBlockState state) {
-    return useTileEntity;
-  }
-
-  @Nullable
-  @Override
-  public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TileEntityFiller();
-  }
-
-  @Override
-  public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos0, @Nullable EnumFacing side) {
-    BlockPos pos = pos0.offset(state.getValue(FACING));
-    IBlockState state1 = world.getBlockState(pos);
-    if (world instanceof World && validateFilled((World) world, state1, pos0)) {
-      return state1.getBlock().canConnectRedstone(state1, world, pos, side);
+  public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EnumFacing side) {
+    BlockPos offset = pos.offset(state.getValue(DIRECTIONAL));
+    IBlockState state1 = world.getBlockState(offset);
+    if (world instanceof World && validateFilled((World) world, state1, pos)) {
+      return state1.getBlock().canConnectRedstone(state1, world, offset, side);
     } else {
-      return super.canConnectRedstone(state, world, pos0, side);
+      return super.canConnectRedstone(state, world, pos, side);
     }
   }
 
   @Override
-  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos0, EntityPlayer player) {
-    BlockPos pos = pos0.offset(state.getValue(FACING));
-    IBlockState state1 = world.getBlockState(pos);
-    if (validateFilled(world, state1, pos0)) {
-      return state1.getBlock().getPickBlock(state1, target, world, pos, player);
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    BlockPos offset = pos.offset(state.getValue(DIRECTIONAL));
+    IBlockState state1 = world.getBlockState(offset);
+    if (validateFilled(world, state1, pos)) {
+      return state1.getBlock().getPickBlock(state1, target, world, offset, player);
     } else {
-      return super.getPickBlock(state, target, world, pos0, player);
+      return super.getPickBlock(state, target, world, pos, player);
     }
   }
 
   @Override
-  public boolean addLandingEffects(IBlockState state, WorldServer world, BlockPos pos0, IBlockState iblockstate, EntityLivingBase entity,
-          int numberOfParticles) {
-    BlockPos pos = pos0.offset(state.getValue(FACING));
-    IBlockState state1 = world.getBlockState(pos);
-    if (!validateFilled(world, state1, pos0)) {
+  public boolean addLandingEffects(IBlockState state, WorldServer world, BlockPos pos0, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles) {
+    BlockPos pos = pos0.offset(state.getValue(DIRECTIONAL));
+    IBlockState iBlockState = world.getBlockState(pos);
+    if (!validateFilled(world, iBlockState, pos0)) {
       return true;
     }
-    boolean flag = state1.getBlock().addLandingEffects(state1, world, pos, iblockstate, entity, numberOfParticles);
+    boolean flag = iBlockState.getBlock().addLandingEffects(iBlockState, world, pos, iblockstate, entity, numberOfParticles);
     if (!flag) {
-      world.spawnParticle(EnumParticleTypes.BLOCK_DUST, pos0.getX() + 0.5, pos0.getY() + 1, pos0.getZ() + 0.5, numberOfParticles, 0.0D, 0.0D,
-              0.0D, 0.15000000596046448D, Block.getStateId(state1));
+      world.spawnParticle(EnumParticleTypes.BLOCK_DUST, pos0.getX() + 0.5, pos0.getY() + 1, pos0.getZ() + 0.5, numberOfParticles,
+              0.0D, 0.0D, 0.0D, 0.15000000596046448D, Block.getStateId(iBlockState));
     }
     return true;
   }
@@ -301,7 +234,7 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
   @Override
   @SideOnly(Side.CLIENT)
   public boolean addHitEffects(IBlockState state, World world, RayTraceResult target, ParticleManager manager) {
-    BlockPos pos = target.getBlockPos().offset(state.getValue(FACING));
+    BlockPos pos = target.getBlockPos().offset(state.getValue(DIRECTIONAL));
     IBlockState state1 = world.getBlockState(pos);
     if (!validateFilled(world, state1, target.getBlockPos())) {
       return true;
@@ -317,7 +250,7 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
   @Override
   @SideOnly(Side.CLIENT)
   public boolean addDestroyEffects(World world, BlockPos pos0, ParticleManager manager) {
-    BlockPos pos = pos0.offset(world.getBlockState(pos0).getValue(FACING));
+    BlockPos pos = pos0.offset(world.getBlockState(pos0).getValue(DIRECTIONAL));
     IBlockState state1 = world.getBlockState(pos);
     if (!validateFilled(world, state1, pos0)) {
       return true;
@@ -332,15 +265,14 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
   @Override
   public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
     IBlockState state = world.getBlockState(pos);
-    if (world instanceof World && !((World) world).isRemote && pos.offset(state.getValue(FACING))
-            .equals(neighbor)) {
+    if (world instanceof World && !((World) world).isRemote && pos.offset(state.getValue(DIRECTIONAL)).equals(neighbor)) {
       validateFilled((World) world, world.getBlockState(neighbor), pos);
     }
   }
 
   @Override
   public boolean shouldCheckWeakPower(IBlockState state, IBlockAccess world, BlockPos pos0, EnumFacing side) {
-    BlockPos pos = pos0.offset(state.getValue(FACING));
+    BlockPos pos = pos0.offset(state.getValue(DIRECTIONAL));
     IBlockState state1 = world.getBlockState(pos);
     if (world instanceof World && validateFilled((World) world, state1, pos0)) {
       return state1.getBlock().shouldCheckWeakPower(state1, world, pos, side);
@@ -351,7 +283,7 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
 
   @Override
   public SoundType getSoundType(IBlockState state, World world, BlockPos pos0, @Nullable Entity entity) {
-    BlockPos pos = pos0.offset(state.getValue(FACING));
+    BlockPos pos = pos0.offset(state.getValue(DIRECTIONAL));
     IBlockState state1 = world.getBlockState(pos);
     if (validateFilled(world, state1, pos0)) {
       return state1.getBlock().getSoundType(state1, world, pos, entity);
@@ -369,11 +301,22 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
     }
   }
 
+
+  @Nullable
+  @Override
+  public TileEntity createNewTileEntity(World worldIn, int meta) {
+    return new TileFiller();
+  }
+
+  public Class<TileFiller> getTileClass() {
+    return TileFiller.class;
+  }
+
   // The One Probe Integration
   @Optional.Method(modid = "theoneprobe")
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
-    BlockPos pos = data.getPos().offset(blockState.getValue(FACING));
+    BlockPos pos = data.getPos().offset(blockState.getValue(DIRECTIONAL));
     IBlockState state = world.getBlockState(pos);
     if (validateFilled(world, state, data.getPos()) && state.getBlock() instanceof IProbeInfoAccessor) {
       ((IProbeInfoAccessor) state.getBlock()).addProbeInfo(mode, probeInfo, player, world, state,

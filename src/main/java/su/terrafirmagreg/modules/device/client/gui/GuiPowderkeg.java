@@ -6,7 +6,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.client.button.GuiButtonPowderkegSeal;
-import su.terrafirmagreg.modules.device.objects.tiles.TilePowderKeg;
+import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiButton;

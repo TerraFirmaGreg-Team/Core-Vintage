@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -15,7 +16,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -28,6 +28,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -36,18 +37,22 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.te.TETickCounter;
+import net.dries007.tfc.util.calendar.Calendar;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -55,6 +60,10 @@ import java.util.Set;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
 import static su.terrafirmagreg.data.Properties.HARVESTABLE;
+import static su.terrafirmagreg.data.Properties.LEAF_STATE;
+import static su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState.AUTUMN;
+import static su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState.FLOWERING;
+import static su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState.FRUIT;
 import static su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState.NORMAL;
 import static su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState.WINTER;
 import static su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState.valueOf;
@@ -63,8 +72,6 @@ import static su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLe
 @SuppressWarnings("deprecation")
 public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProviderTile {
 
-  public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state",
-          EnumLeafState.class);
 
   protected final Settings settings;
   protected final WoodBlockVariant variant;
@@ -78,9 +85,11 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
 
     getSettings()
             .registryKey(variant.getRegistryKey(type))
-            .ignoresProperties(BlockLeaves.DECAYABLE, HARVESTABLE)
+            .ignoresProperties(DECAYABLE, HARVESTABLE)
             .nonOpaque()
-            .randomTicks();
+            .randomTicks()
+            .oreDict(variant)
+            .oreDict(variant, type);
 
     setDefaultState(blockState.getBaseState()
             .withProperty(LEAF_STATE, NORMAL)
@@ -88,9 +97,6 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
             .withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
 
     BlockUtils.setFireInfo(this, 30, 60);
-
-    //OreDictUtils.register(this, variant.toString());
-    //OreDictUtils.register(this, variant.toString(), type.toString());
   }
 
   @Override
@@ -106,10 +112,79 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
     return state.getValue(LEAF_STATE).ordinal() + (state.getValue(HARVESTABLE) ? 4 : 0) + (state.getValue(DECAYABLE) ? 1 : 0);
   }
 
+//  @Override
+//  public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+//    return state.withProperty(FANCY, GameUtils.getGameSettings().fancyGraphics);
+//  }
+
   @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-          BlockPos pos) {
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return Block.NULL_AABB;
+  }
+
+  @Override
+  public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+    if (!world.isAreaLoaded(pos, 1)) {
+      return;
+    }
+    if (this.type.getStages() == null) {
+      return;
+    }
+
+    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
+    int expectedStage = this.type.getStageForMonth(currentMonth);
+
+    float avgTemperature = Climate.getAvgTemp(world, pos);
+    float tempGauss = (int) (12f + (random.nextGaussian() / 4));
+
+    switch (expectedStage) {
+      case 0:
+        if (state.getValue(LEAF_STATE) != WINTER && avgTemperature < tempGauss) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, WINTER));
+
+        } else if (state.getValue(LEAF_STATE) != WINTER && avgTemperature >= tempGauss) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
+        }
+        break;
+      case 1:
+        if (state.getValue(LEAF_STATE) != NORMAL) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
+
+        } else if (state.getValue(LEAF_STATE) == FLOWERING || state.getValue(LEAF_STATE) == AUTUMN || state.getValue(LEAF_STATE) == WINTER) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
+        }
+        break;
+      case 2:
+        if (state.getValue(LEAF_STATE) != FLOWERING) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, FLOWERING));
+
+        }
+        break;
+      case 3:
+        if (state.getValue(LEAF_STATE) != FRUIT) {
+          var tile = TileUtils.getTile(world, pos, TileWoodLeaves.class);
+          if (tile != null) {
+            long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+            if (hours > (type.getMinGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
+              world.setBlockState(pos, state.withProperty(LEAF_STATE, FRUIT));
+              tile.resetCounter();
+            }
+          }
+        }
+        break;
+      case 4:
+        if (state.getValue(LEAF_STATE) != AUTUMN && avgTemperature < tempGauss) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, AUTUMN));
+
+        } else if (state.getValue(LEAF_STATE) != AUTUMN && avgTemperature >= tempGauss) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
+
+        }
+        break;
+      default:
+        world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
+    }
+    doLeafDecay(world, pos, state);
   }
 
   @Override
@@ -120,65 +195,28 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
 
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+    var tile = TileUtils.getTile(worldIn, pos, TileWoodLeaves.class);
     if (tile != null) {
       tile.resetCounter();
     }
   }
 
-  //    @Override
-  //    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-  //        if (!world.isAreaLoaded(pos, 1)) return;
-  //        if (this.getTreeVariant().getStages() == null) return;
-  //
-  //        Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
-  //        int expectedStage = this.getTreeVariant().getStageForMonth(currentMonth);
-  //
-  //        float avgTemperature = ClimateTFC.getAvgTemp(world, pos);
-  //        float tempGauss = (int) (12f + (random.nextGaussian() / 4));
-  //
-  //        switch (expectedStage) {
-  //            case 0:
-  //                if (state.getValue(LEAF_STATE) != WINTER && avgTemperature < tempGauss)
-  //                    world.setBlockState(pos, state.withProperty(LEAF_STATE, WINTER));
-  //                else if (state.getValue(LEAF_STATE) != WINTER && avgTemperature >= tempGauss)
-  //                    world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
-  //                break;
-  //            case 1:
-  //                if (state.getValue(LEAF_STATE) != NORMAL)
-  //                    world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
-  //                else if (state.getValue(LEAF_STATE) == FLOWERING ||
-  //                        state.getValue(LEAF_STATE) == AUTUMN ||
-  //                        state.getValue(LEAF_STATE) == WINTER)
-  //                    world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
-  //                break;
-  //            case 2:
-  //                if (state.getValue(LEAF_STATE) != FLOWERING)
-  //                    world.setBlockState(pos, state.withProperty(LEAF_STATE, FLOWERING));
-  //                break;
-  //            case 3:
-  //                if (state.getValue(LEAF_STATE) != FRUIT) {
-  //                    TETickCounter tile = TileUtil.getTile(world, pos, TETickCounter.class);
-  //                    if (tile != null) {
-  //                        long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-  //                        if (hours > (getTreeVariant().getMinGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
-  //                            world.setBlockState(pos, state.withProperty(LEAF_STATE, FRUIT));
-  //                            tile.resetCounter();
-  //                        }
-  //                    }
-  //                }
-  //                break;
-  //            case 4:
-  //                if (state.getValue(LEAF_STATE) != AUTUMN && avgTemperature < tempGauss)
-  //                    world.setBlockState(pos, state.withProperty(LEAF_STATE, AUTUMN));
-  //                else if (state.getValue(LEAF_STATE) != AUTUMN && avgTemperature >= tempGauss)
-  //                    world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
-  //                break;
-  //            default:
-  //                world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
-  //        }
-  //        doLeafDecay(world, pos, state);
-  //    }
+  @Override
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
+          float hitZ) {
+    if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == FRUIT && this.type.getDrop() != null) {
+      if (!worldIn.isRemote) {
+        ItemHandlerHelper.giveItemToPlayer(playerIn, this.type.getFoodDrop());
+        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, NORMAL));
+        var tile = TileUtils.getTile(worldIn, pos, TileWoodLeaves.class);
+        if (tile != null) {
+          tile.resetCounter();
+        }
+      }
+      return true;
+    }
+    return false;
+  }
 
   @Override
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
@@ -195,27 +233,10 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
     }
   }
 
-  //        @Override
-  //        public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-  //            if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == FRUIT && this.getTreeVariant().getDrop() != null) {
-  //                if (!worldIn.isRemote) {
-  //                    ItemHandlerHelper.giveItemToPlayer(playerIn, this.getTreeVariant().getFoodDrop());
-  //                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, NORMAL));
-  //                    TETickCounter tile = TileUtil.getTile(worldIn, pos, TETickCounter.class);
-  //                    if (tile != null) {
-  //                        tile.resetCounter();
-  //                    }
-  //                }
-  //                return true;
-  //            }
-  //            return false;
-  //        }
-
   @Override
   protected BlockStateContainer createBlockState() {
     return new BlockStateContainer(this, DECAYABLE, LEAF_STATE, HARVESTABLE);
   }
-
 
   private void doLeafDecay(World world, BlockPos pos, IBlockState state) {
     // TFC Leaf Decay
@@ -230,24 +251,27 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
     IBlockState state1;
     paths.add(pos); // Center block
 
-    //        for (int i = 0; i < this.getTreeVariant().getMaxDecayDistance(); i++) {
-    //            pathsToAdd = new ArrayList<>();
-    //            for (BlockPos p1 : paths) {
-    //                for (EnumFacing face : EnumFacing.values()) {
-    //                    pos1.setPos(p1).move(face);
-    //                    if (evaluated.contains(pos1) || !world.isBlockLoaded(pos1))
-    //                        continue;
-    //                    state1 = world.getBlockState(pos1);
-    //                    if (state1.get() == BlocksWood.get(WoodBlockVariants.LOG, type))
-    //                        return;
-    //                    if (state1.get() == this)
-    //                        pathsToAdd.add(pos1.toImmutable());
-    //                }
-    //                evaluated.add(p1); // Evaluated
-    //            }
-    //            paths.addAll(pathsToAdd);
-    //            paths.removeAll(evaluated);
-    //        }
+    for (int i = 0; i < this.type.getMaxDecayDistance(); i++) {
+      pathsToAdd = new ArrayList<>();
+      for (BlockPos p1 : paths) {
+        for (EnumFacing face : EnumFacing.values()) {
+          pos1.setPos(p1).move(face);
+          if (evaluated.contains(pos1) || !world.isBlockLoaded(pos1)) {
+            continue;
+          }
+          state1 = world.getBlockState(pos1);
+          if (state1.getBlock() == BlocksWood.LOG.get(type)) {
+            return;
+          }
+          if (state1.getBlock() == this) {
+            pathsToAdd.add(pos1.toImmutable());
+          }
+        }
+        evaluated.add(p1); // Evaluated
+      }
+      paths.addAll(pathsToAdd);
+      paths.removeAll(evaluated);
+    }
 
     world.setBlockToAir(pos);
     int particleScale = 10;
@@ -303,8 +327,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
   @Override
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
     if (state.getValue(LEAF_STATE) != WINTER) {
-      return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(
-              BlocksWood.SAPLING.get(type)) : Items.AIR;
+      return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(BlocksWood.SAPLING.get(type)) : Items.AIR;
     }
     return null;
   }
@@ -340,8 +363,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
   }
 
   @Override
-  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
-          IBlockState state, int fortune) {
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
     if (state.getValue(LEAF_STATE) != WINTER) {
       int chance = this.getSaplingDropChance(state);
       if (chance > 0) {
@@ -353,8 +375,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
         }
 
         if (RNG.nextInt(chance) == 0) {
-          ItemStack drop = new ItemStack(getItemDropped(state, RNG, fortune), 1,
-                  damageDropped(state));
+          ItemStack drop = new ItemStack(getItemDropped(state, RNG, fortune), 1, damageDropped(state));
           if (!drop.isEmpty()) {
             drops.add(drop);
           }
@@ -387,7 +408,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
   }
 
   @Override
-  public Class<? extends TileEntity> getTileEntityClass() {
+  public Class<TileWoodLeaves> getTileClass() {
     return TileWoodLeaves.class;
   }
 
@@ -401,13 +422,11 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
 
     private static final EnumLeafState[] VALUES = values();
 
-    @NotNull
     public static EnumLeafState valueOf(int index) {
       return index < 0 || index > VALUES.length ? NORMAL : VALUES[index];
     }
 
     @Override
-    @NotNull
     public String getName() {
       return this.name().toLowerCase();
     }

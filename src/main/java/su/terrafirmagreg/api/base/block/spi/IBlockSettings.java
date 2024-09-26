@@ -36,7 +36,6 @@ import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import com.google.common.collect.Lists;
 
 import org.jetbrains.annotations.NotNull;
@@ -111,7 +110,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
   }
 
   default float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos,
-          @Nullable Entity entity) {
+                                @Nullable Entity entity) {
 
     return this.getSettings().getSlipperiness().apply(state, world, pos);
   }
@@ -268,7 +267,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
     boolean hasItemSubtypes = false;
     boolean ticksRandomly = false;
     boolean requiresCorrectTool = false;
-    boolean useNeighborBrightness;
+    boolean useNeighborBrightness = false;
     boolean isReplaceable;
 
     boolean isAir;
@@ -418,7 +417,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
     }
 
     public Settings fallable(IBlockState state, Specification specification,
-            IBlockState resultingState) {
+                             IBlockState resultingState) {
       if (specification != null) {
         var spec = new Specification(specification);
         spec.setResultingState(resultingState);

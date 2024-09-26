@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-
 import BananaFructa.tfcfarming.NutrientValues;
 import BananaFructa.tfcfarming.TFCFarming;
 import BananaFructa.tfcfarming.firmalife.TEHangingPlanterN;
@@ -28,7 +27,7 @@ public class CPacketRequestNutrientDataHandler implements IMessageHandler<CPacke
     Skill skill = cap.getSkill(SkillType.AGRICULTURE);
     // TODO: V config
     if (Math.abs(player.posX - message.x) <= 5 && Math.abs(player.posZ - message.z) <= 5 && (skill.getTier().isAtLeast(SkillTier.ADEPT)
-            || player.capabilities.isCreativeMode)) {
+                                                                                             || player.capabilities.isCreativeMode)) {
       if (message.y == -1) {
         NutrientValues values = TFCFarming.INSTANCE.worldStorage.getNutrientValues(message.x, message.z);
         int[] NPK = values.getNPKSet();
@@ -43,7 +42,7 @@ public class CPacketRequestNutrientDataHandler implements IMessageHandler<CPacke
         NutrientValues nutrientValues = (!isHanging ? tePlanterN.getNutrientValues() : teHangingPlanterN.getNutrientValues());
         int[] NPK = nutrientValues.getNPKSet();
         return new SPacketNutrientDataResponse(true, NPK[0], NPK[1], NPK[2], message.x, message.y, message.z,
-                (!isHanging ? tePlanterN.anyLowNutrients() : teHangingPlanterN.isLow()));
+                                               (!isHanging ? tePlanterN.anyLowNutrients() : teHangingPlanterN.isLow()));
       } else {
         return new SPacketNutrientDataResponse(false, 0, 0, 0, message.x, message.y, message.z, false);
       }

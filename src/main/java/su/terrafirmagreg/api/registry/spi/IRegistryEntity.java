@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 
 public interface IRegistryEntity
-        extends IRegistryBase {
+  extends IRegistryBase {
 
   /**
    * Registers any sort of entity. Will not have a spawn egg.

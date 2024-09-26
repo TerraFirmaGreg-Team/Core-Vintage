@@ -34,7 +34,6 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import com.google.common.base.Joiner;
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.objects.entity.animal.EntityChickenTFC;
@@ -134,15 +133,15 @@ public final class Helpers {
   public static String getTypeName(IForgeRegistryEntry<?> type) {
     //noinspection ConstantConditions
     return JOINER_DOT.join(Constants.MODID_TFC, "types", type.getRegistryType()
-                    .getSimpleName(), type.getRegistryName().getPath())
-            .toLowerCase();
+                                                             .getSimpleName(), type.getRegistryName().getPath())
+                     .toLowerCase();
   }
 
   /**
    *
    */
   public static void handleRightClickBlockPostEventWithCallbacks(PlayerInteractEvent.RightClickBlock event,
-          @Nullable Supplier<EnumActionResult> onItemUseCallback) {
+                                                                 @Nullable Supplier<EnumActionResult> onItemUseCallback) {
     event.setCanceled(true);
     EnumActionResult result = EnumActionResult.PASS;
     // todo: verify stack is correct
@@ -159,17 +158,17 @@ public final class Helpers {
     }
 
     boolean bypass = event.getEntityPlayer()
-            .getHeldItemMainhand()
-            .doesSneakBypassUse(event.getWorld(), event.getPos(), event.getEntityPlayer()) && event.getEntityPlayer()
-            .getHeldItemOffhand()
-            .doesSneakBypassUse(event.getWorld(), event.getPos(), event.getEntityPlayer());
+                          .getHeldItemMainhand()
+                          .doesSneakBypassUse(event.getWorld(), event.getPos(), event.getEntityPlayer()) && event.getEntityPlayer()
+                                                                                                                 .getHeldItemOffhand()
+                                                                                                                 .doesSneakBypassUse(event.getWorld(), event.getPos(), event.getEntityPlayer());
 
     if (!event.getEntityPlayer().isSneaking() || bypass || event.getUseBlock() == Event.Result.ALLOW) {
       IBlockState iblockstate = event.getWorld().getBlockState(event.getPos());
       if (event.getUseBlock() != Event.Result.DENY) {
         if (iblockstate.getBlock()
-                .onBlockActivated(event.getWorld(), event.getPos(), iblockstate, event.getEntityPlayer(), event.getHand(), face, hitX, hitY,
-                        hitZ)) {
+                       .onBlockActivated(event.getWorld(), event.getPos(), iblockstate, event.getEntityPlayer(), event.getHand(), face, hitX, hitY,
+                                         hitZ)) {
           result = EnumActionResult.SUCCESS;
         }
       }
@@ -193,13 +192,13 @@ public final class Helpers {
         int j = stack.getMetadata();
         int i = stack.getCount();
         if (result != EnumActionResult.SUCCESS && event.getUseItem() != Event.Result.DENY
-                || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
+            || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
           EnumActionResult enumactionresult;
           if (onItemUseCallback != null) {
             enumactionresult = onItemUseCallback.get();
           } else {
             enumactionresult = stack.onItemUse(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getHand(), face, hitX,
-                    hitY, hitZ);
+                                               hitY, hitZ);
           }
           stack.setItemDamage(j);
           stack.setCount(i);
@@ -209,10 +208,10 @@ public final class Helpers {
         }
       } else {
         if (result != EnumActionResult.SUCCESS && event.getUseItem() != Event.Result.DENY
-                || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
+            || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
           ItemStack copyBeforeUse = stack.copy();
           result = stack.onItemUse(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getHand(), event.getFace(), hitX, hitY,
-                  hitZ);
+                                   hitZ);
           if (stack.isEmpty()) {
             net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(event.getEntityPlayer(), copyBeforeUse, event.getHand());
           }

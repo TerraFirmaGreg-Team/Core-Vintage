@@ -9,7 +9,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
-
 import net.dries007.tfc.api.types.IArmorMaterialTFC;
 
 import org.jetbrains.annotations.NotNull;

@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-
 import net.dries007.tfc.api.capability.forge.ForgeableHandler;
 
 import org.jetbrains.annotations.Nullable;
@@ -25,12 +24,12 @@ public class ItemGrindstone extends BaseItem {
 
     setNoRepair();
     getSettings()
-            .registryKey("device/grindstone/" + name)
-            .weight(Weight.HEAVY)
-            .size(Size.LARGE)
-            .notCanStack()
-            .maxDamage(durability)
-            .maxCount(1);
+      .registryKey("device/grindstone/" + name)
+      .weight(Weight.HEAVY)
+      .size(Size.LARGE)
+      .notCanStack()
+      .maxDamage(durability)
+      .maxCount(1);
 
   }
 

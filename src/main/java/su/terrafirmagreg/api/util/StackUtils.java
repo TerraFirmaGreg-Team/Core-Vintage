@@ -22,7 +22,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.oredict.OreDictionary;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import lombok.experimental.UtilityClass;
@@ -31,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 import static su.terrafirmagreg.data.MathConstants.RNG;
 
 @UtilityClass
@@ -49,7 +49,7 @@ public final class StackUtils {
       return false;
     }
 
-    if (base.getItemDamage() != OreDictionary.WILDCARD_VALUE) {
+    if (base.getItemDamage() != WILDCARD_VALUE) {
       if (base.getItemDamage() != comparison.getItemDamage()) {
         return false;
       }
@@ -61,6 +61,29 @@ public final class StackUtils {
     } else {
       return ItemStack.areItemStackTagsEqual(base, comparison);
     }
+  }
+
+  public static int getItemStackHashCode(ItemStack stack) {
+    if (stack.isEmpty()) {
+      return 0;
+    }
+
+    NBTTagCompound tag = stack.writeToNBT(new NBTTagCompound());
+    tag.removeTag("Count");
+    tag.removeTag("Damage");
+    tag.removeTag("ForgeCaps");
+    return tag.hashCode();
+  }
+
+  public static int getItemStackCountHashCode(ItemStack stack) {
+    if (stack.isEmpty()) {
+      return 0;
+    }
+
+    NBTTagCompound tag = stack.writeToNBT(new NBTTagCompound());
+    tag.removeTag("Damage");
+    return tag.hashCode();
+
   }
 
   public static boolean playerHasItemMatchingOre(InventoryPlayer playerInv, String ore) {
@@ -262,8 +285,8 @@ public final class StackUtils {
   }
 
   /**
-   * Writes an ItemStack as a String. This method is intended for use in configuration files, and allows for a damage sensitive item to be represented as a String.
-   * The format looks like "itemid#damage". This method is not intended for actually saving an ItemStack.
+   * Writes an ItemStack as a String. This method is intended for use in configuration files, and allows for a damage sensitive item to be represented as a
+   * String. The format looks like "itemid#damage". This method is not intended for actually saving an ItemStack.
    *
    * @param stack The instance of ItemStack to write.
    * @return String A string which can be used to represent a damage sensitive item.
@@ -274,8 +297,8 @@ public final class StackUtils {
   }
 
   /**
-   * Reads an ItemStack from a string This method is intended for use in reading information from a configuration file. The correct format is "itemid#damage". This
-   * method is intended for use with writeStackToString.
+   * Reads an ItemStack from a string This method is intended for use in reading information from a configuration file. The correct format is "itemid#damage".
+   * This method is intended for use with writeStackToString.
    *
    * @param stackString The string used to construct an ItemStack.
    * @return ItemStackAn ItemStack representation of a damage sensitive item.
@@ -286,11 +309,12 @@ public final class StackUtils {
     final Object contents = getThingByName(parts[0]);
     final int damage = parts.length > 1 ? Integer.parseInt(parts[1]) : 0;
     return contents instanceof Item ? new ItemStack((Item) contents, 1, damage)
-            : new ItemStack((Block) contents, 1, damage);
+                                    : new ItemStack((Block) contents, 1, damage);
   }
 
   /**
-   * A blend between the itemRegistry.getObject and bockRegistry.getObject methods. Used for grabbing something from an ID, when you have no clue what it might be.
+   * A blend between the itemRegistry.getObject and bockRegistry.getObject methods. Used for grabbing something from an ID, when you have no clue what it might
+   * be.
    *
    * @param name The ID of the thing you're looking for. Domains are often preferred.
    * @return Hopefully the thing you're looking for.
@@ -353,11 +377,9 @@ public final class StackUtils {
    * @param secondStack The second stack to check.
    * @return Whether or not the stacks are similar.
    */
-  public static boolean areStacksSimilarWithPartialNBT(ItemStack firstStack,
-          ItemStack secondStack) {
+  public static boolean areStacksSimilarWithPartialNBT(ItemStack firstStack, ItemStack secondStack) {
 
-    return areStacksSimilar(firstStack, secondStack) && NBTUtils.containsAllTags(
-            getTagCleanly(firstStack), getTagCleanly(secondStack));
+    return areStacksSimilar(firstStack, secondStack) && NBTUtils.containsAllTags(getTagCleanly(firstStack), getTagCleanly(secondStack));
   }
 
   /**
@@ -367,16 +389,14 @@ public final class StackUtils {
    * @param secondStack The second stack to check.
    * @return booleanTrue if stacks are similar, or if both are null.
    */
-  public static boolean areStacksSimilar(@NotNull ItemStack firstStack,
-          @NotNull ItemStack secondStack) {
+  public static boolean areStacksSimilar(@NotNull ItemStack firstStack, @NotNull ItemStack secondStack) {
 
-    return firstStack.getItem() == secondStack.getItem() && areStacksSameMeta(firstStack,
-            secondStack);
+    return firstStack.getItem() == secondStack.getItem() && areStacksSameMeta(firstStack, secondStack);
   }
 
   /**
-   * Gets an NBTTagCompound from a stack without polluting the original input stack. If the stack does not have a tag, you will get a new one. This new tag will NOT
-   * be set to the stack automatically.
+   * Gets an NBTTagCompound from a stack without polluting the original input stack. If the stack does not have a tag, you will get a new one. This new tag will
+   * NOT be set to the stack automatically.
    *
    * @param stack The stack to check.
    * @return The nbt data for the stack.
@@ -385,6 +405,7 @@ public final class StackUtils {
 
     return stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
   }
+
 
   /**
    * Checks if both stacks have the same metadata, or either has the wildcard meta.
@@ -395,9 +416,7 @@ public final class StackUtils {
    */
   public static boolean areStacksSameMeta(@NotNull ItemStack first, @NotNull ItemStack second) {
 
-    return first.getMetadata() == second.getMetadata()
-            || first.getMetadata() == OreDictionary.WILDCARD_VALUE ||
-            second.getMetadata() == OreDictionary.WILDCARD_VALUE;
+    return first.getMetadata() == second.getMetadata() || first.getMetadata() == WILDCARD_VALUE || second.getMetadata() == WILDCARD_VALUE;
   }
 
   /**
@@ -409,14 +428,14 @@ public final class StackUtils {
    */
   public static boolean areStacksEqualForCrafting(ItemStack stack, Object recipe) {
 
-    if (recipe instanceof ItemStack) {
+    if (recipe instanceof ItemStack itemStack) {
 
-      return areStacksSimilarWithSize(stack, (ItemStack) recipe);
+      return areStacksSimilarWithSize(stack, itemStack);
     }
 
-    if (recipe instanceof String) {
+    if (recipe instanceof String stringRecipe) {
 
-      return hasOreName(stack, (String) recipe);
+      return hasOreName(stack, stringRecipe);
     }
     return false;
   }
@@ -430,8 +449,7 @@ public final class StackUtils {
    */
   public static boolean areStacksSimilarWithSize(ItemStack firstStack, ItemStack secondStack) {
 
-    return areStacksSimilar(firstStack, secondStack)
-            && firstStack.getCount() == secondStack.getCount();
+    return areStacksSimilar(firstStack, secondStack) && firstStack.getCount() == secondStack.getCount();
   }
 
   /**
@@ -506,16 +524,16 @@ public final class StackUtils {
   }
 
   /**
-   * Checks if two given ItemStack are equal. For them to be equal, both must be null, or both must have a null item, or both must share a damage value. If either
-   * stack has a wild card damage value, they will also be considered the same. If the checkNBT parameter is true, they will also need the same item nbt.
+   * Checks if two given ItemStack are equal. For them to be equal, both must be null, or both must have a null item, or both must share a damage value. If
+   * either stack has a wild card damage value, they will also be considered the same. If the checkNBT parameter is true, they will also need the same item
+   * nbt.
    *
    * @param firstStack  The first ItemStack to compare.
    * @param secondStack The second ItemStack to compare.
    * @param checkNBT    Should NBT be checked as well?
    * @return boolean Whether or not the items are close enough to be called the same.
    */
-  public static boolean areStacksEqual(ItemStack firstStack, ItemStack secondStack,
-          boolean checkNBT) {
+  public static boolean areStacksEqual(ItemStack firstStack, ItemStack secondStack, boolean checkNBT) {
 
     if (firstStack == null || secondStack == null) {
       return firstStack == secondStack;
@@ -531,14 +549,14 @@ public final class StackUtils {
     if (firstItem == secondItem) {
 
       if (checkNBT &&
-              NBTUtils.NBT_COMPARATOR.compare(firstStack.getTagCompound(), secondStack.getTagCompound())
-                      != 0) {
+          NBTUtils.NBT_COMPARATOR.compare(firstStack.getTagCompound(), secondStack.getTagCompound())
+          != 0) {
         return false;
       }
 
-      return firstStack.getItemDamage() == OreDictionary.WILDCARD_VALUE
-              || secondStack.getItemDamage() == OreDictionary.WILDCARD_VALUE ||
-              firstStack.getItemDamage() == secondStack.getItemDamage();
+      return firstStack.getItemDamage() == WILDCARD_VALUE
+             || secondStack.getItemDamage() == WILDCARD_VALUE ||
+             firstStack.getItemDamage() == secondStack.getItemDamage();
     }
 
     return false;
@@ -559,8 +577,8 @@ public final class StackUtils {
   }
 
   /**
-   * Safely gets a block instance from an ItemStack. If the ItemStack is not valid, null will be returned. Null can also be returned if the Item does not have a block
-   * form.
+   * Safely gets a block instance from an ItemStack. If the ItemStack is not valid, null will be returned. Null can also be returned if the Item does not have a
+   * block form.
    *
    * @param stack The ItemStack to get a block from.
    * @return The block version of the item contained in the ItemStack.
@@ -608,7 +626,7 @@ public final class StackUtils {
       final double offY = world.rand.nextFloat() * offset + (1.0F - offset) * 0.5D;
       final double offZ = world.rand.nextFloat() * offset + (1.0F - offset) * 0.5D;
       final EntityItem entityitem = new EntityItem(world, pos.getX() + offX, pos.getY() + offY,
-              pos.getZ() + offZ, stack);
+                                                   pos.getZ() + offZ, stack);
       entityitem.setDefaultPickupDelay();
       world.spawnEntity(entityitem);
     }
@@ -683,7 +701,7 @@ public final class StackUtils {
         } catch (final Exception e) {
 
           TerraFirmaGreg.LOGGER.error("Caught the following exception while getting sub items for {}. It should be reported to that mod's author.",
-                  item.getRegistryName().toString());
+                                      item.getRegistryName().toString());
           TerraFirmaGreg.LOGGER.catching(e);
         }
 
@@ -702,8 +720,7 @@ public final class StackUtils {
    */
   public static String getStackIdentifier(ItemStack stack) {
 
-    return stack != null && !stack.isEmpty() ? stack.getItem().getRegistryName().toString()
-            : "minecraft:air";
+    return stack != null && !stack.isEmpty() ? stack.getItem().getRegistryName().toString() : "minecraft:air";
   }
 
   /**
@@ -722,7 +739,7 @@ public final class StackUtils {
       final int meta = stack.getItemDamage();
 
       // If block is wildcard add sub blocks
-      if (meta == OreDictionary.WILDCARD_VALUE) {
+      if (meta == WILDCARD_VALUE) {
 
         block.getSubBlocks(null, subBlocks);
       }

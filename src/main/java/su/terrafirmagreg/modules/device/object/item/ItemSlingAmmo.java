@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.device.object.item;
 
 import su.terrafirmagreg.api.base.item.BaseItem;
 
-
 import lombok.Getter;
 
 @Getter

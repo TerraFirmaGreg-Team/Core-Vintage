@@ -31,7 +31,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
@@ -47,13 +46,13 @@ public class BlockIngotPile extends BaseBlock implements IProviderTile {
     super(Settings.of(Material.IRON));
 
     getSettings()
-            .registryKey("core/ingot_pile")
-            .hardness(3.0F)
-            .resistance(10.0F)
-            .nonFullCube()
-            .nonOpaque()
-            .noItemBlock()
-            .harvestLevel(ToolClasses.PICKAXE, 0);
+      .registryKey("core/ingot_pile")
+      .hardness(3.0F)
+      .resistance(10.0F)
+      .nonFullCube()
+      .nonOpaque()
+      .noItemBlock()
+      .harvestLevel(ToolClasses.PICKAXE, 0);
 
   }
 
@@ -78,7 +77,7 @@ public class BlockIngotPile extends BaseBlock implements IProviderTile {
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     if (!collapseDown(worldIn, pos) && !worldIn.isSideSolid(pos.down(), EnumFacing.UP)) {
       worldIn.setBlockToAir(pos);
     }
@@ -95,8 +94,8 @@ public class BlockIngotPile extends BaseBlock implements IProviderTile {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                  float hitX, float hitY, float hitZ) {
     if (!playerIn.isSneaking()) {
       var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
       if (tile != null) {
@@ -124,7 +123,7 @@ public class BlockIngotPile extends BaseBlock implements IProviderTile {
 
   @Override
   public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos,
-          EnumFacing side) {
+                             EnumFacing side) {
     var tile = TileUtils.getTile(world, pos, TileIngotPile.class);
     if (tile == null) {
       return false;
@@ -134,7 +133,7 @@ public class BlockIngotPile extends BaseBlock implements IProviderTile {
 
   @Override
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-          EntityPlayer player) {
+                                EntityPlayer player) {
     var tile = TileUtils.getTile(world, pos, TileIngotPile.class);
     if (tile != null) {
       return new ItemStack(ItemMetal.get(tile.getMetal(), Metal.ItemType.INGOT));
@@ -149,7 +148,7 @@ public class BlockIngotPile extends BaseBlock implements IProviderTile {
         worldIn.setBlockState(tile.getPos(), Blocks.AIR.getDefaultState());
       }
       ItemHandlerHelper.giveItemToPlayer(playerIn,
-              new ItemStack(ItemMetal.get(tile.getMetal(), Metal.ItemType.INGOT)));
+                                         new ItemStack(ItemMetal.get(tile.getMetal(), Metal.ItemType.INGOT)));
     }
     return true;
   }
@@ -176,7 +175,7 @@ public class BlockIngotPile extends BaseBlock implements IProviderTile {
 
   @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-          EnumFacing face) {
+                                          EnumFacing face) {
     var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
     if (tile != null && tile.getCount() == 64 && face == EnumFacing.UP) {
       return BlockFaceShape.SOLID;
@@ -186,7 +185,7 @@ public class BlockIngotPile extends BaseBlock implements IProviderTile {
 
   @Override
   public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-          BlockPos pos) {
+                                               BlockPos pos) {
     var tile = TileUtils.getTile(worldIn, pos, TileIngotPile.class);
     double y = tile != null ? 0.125 * (tile.getCount() / 8.0) : 1;
     return new AxisAlignedBB(0d, 0d, 0d, 1d, y, 1d);
@@ -211,6 +210,6 @@ public class BlockIngotPile extends BaseBlock implements IProviderTile {
   @SideOnly(Side.CLIENT)
   public IStateMapper getStateMapper() {
     return blockIn -> ImmutableMap.of(this.getDefaultState(),
-            new ModelResourceLocation(ModUtils.resource("empty").toString()));
+                                      new ModelResourceLocation(ModUtils.resource("empty").toString()));
   }
 }

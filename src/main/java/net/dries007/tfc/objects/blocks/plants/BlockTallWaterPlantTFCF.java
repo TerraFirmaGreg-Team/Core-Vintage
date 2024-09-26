@@ -18,7 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fluids.Fluid;
 
-
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 import net.dries007.tfc.util.climate.Climate;
@@ -58,7 +57,7 @@ public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGro
 
   @Override
   public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
-          net.minecraftforge.common.IPlantable plantable) {
+                                 net.minecraftforge.common.IPlantable plantable) {
     IBlockState plant = plantable.getPlant(world, pos.offset(direction));
 
     if (plant.getBlock() == this) {
@@ -71,13 +70,13 @@ public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGro
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
     return new BlockStateContainer.Builder(this)
-            .add(LEVEL)
-            .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
-            .add(growthStageProperty)
-            .add(DAYPERIOD)
-            .add(AGE)
-            .add(PART)
-            .build();
+      .add(LEVEL)
+      .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
+      .add(growthStageProperty)
+      .add(DAYPERIOD)
+      .add(AGE)
+      .add(PART)
+      .build();
   }
 
   @Override
@@ -115,8 +114,8 @@ public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGro
     }
     if (state.getBlock() == this) {
       return (soil.getBlock()
-              .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) || BlockUtils.isGround(soil)) &&
-              plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+                  .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) || BlockUtils.isGround(soil)) &&
+             plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
     return this.canSustainBush(soil);
   }
@@ -128,21 +127,21 @@ public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGro
     }
 
     if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
-            plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+        plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
-              net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
+          net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
         if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
           grow(worldIn, rand, pos, state);
         } else if (j < 3) {
           worldIn.setBlockState(pos, state.withProperty(AGE, j + 1)
-                  .withProperty(PART, getPlantPart(worldIn, pos)));
+                                          .withProperty(PART, getPlantPart(worldIn, pos)));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
-            !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+               !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -150,7 +149,7 @@ public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGro
           shrink(worldIn, pos);
         } else if (j > 0) {
           worldIn.setBlockState(pos, state.withProperty(AGE, j - 1)
-                  .withProperty(PART, getPlantPart(worldIn, pos)));
+                                          .withProperty(PART, getPlantPart(worldIn, pos)));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
@@ -168,10 +167,10 @@ public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGro
       ;
     if (water == SALT_WATER) {
       return i < plant.getMaxHeight() && BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state) &&
-              !worldIn.isAirBlock(pos.up());
+             !worldIn.isAirBlock(pos.up());
     } else {
       return i < plant.getMaxHeight() && BlockUtils.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state) &&
-              !worldIn.isAirBlock(pos.up());
+             !worldIn.isAirBlock(pos.up());
     }
   }
 
@@ -184,15 +183,15 @@ public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGro
   public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
     worldIn.setBlockState(pos.up(), this.getDefaultState());
     IBlockState iblockstate = state.withProperty(AGE, 0)
-            .withProperty(growthStageProperty, plant.getStageForMonth())
-            .withProperty(PART, getPlantPart(worldIn, pos));
+                                   .withProperty(growthStageProperty, plant.getStageForMonth())
+                                   .withProperty(PART, getPlantPart(worldIn, pos));
     worldIn.setBlockState(pos, iblockstate);
     iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
   }
 
   private boolean canShrink(World worldIn, BlockPos pos) {
     return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
-            .getBlock() != this;
+                                                                          .getBlock() != this;
   }
 
   public void shrink(World worldIn, BlockPos pos) {

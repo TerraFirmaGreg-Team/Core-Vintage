@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.base.block;
 
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +18,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldNameable;
 import net.minecraft.world.World;
-
 
 import org.jetbrains.annotations.Nullable;
 
@@ -55,8 +55,8 @@ public abstract class BaseBlockContainer extends BaseBlock implements IProviderT
   }
 
   @Override
-  public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-    if (te instanceof IWorldNameable nameable && nameable.hasCustomName()) {
+  public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack stack) {
+    if (tile instanceof IWorldNameable nameable && nameable.hasCustomName()) {
       player.addStat(StatList.getBlockStats(this));
       player.addExhaustion(0.005F);
 
@@ -64,8 +64,8 @@ public abstract class BaseBlockContainer extends BaseBlock implements IProviderT
         return;
       }
 
-      int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
-      Item item = this.getItemDropped(state, world.rand, i);
+      int enchantmentLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
+      Item item = this.getItemDropped(state, world.rand, enchantmentLevel);
 
       if (item == Items.AIR) {
         return;
@@ -82,7 +82,7 @@ public abstract class BaseBlockContainer extends BaseBlock implements IProviderT
   @Override
   public boolean eventReceived(IBlockState state, World world, BlockPos pos, int id, int param) {
     super.eventReceived(state, world, pos, id, param);
-    TileEntity tile = world.getTileEntity(pos);
+    var tile = TileUtils.getTile(world, pos);
     return tile != null && tile.receiveClientEvent(id, param);
   }
 }

@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
@@ -33,7 +32,7 @@ public class ItemBlockPlant extends ItemBlockTFC {
 
   @Override
   public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                    float hitZ) {
     if (!world.isRemote && world.getBlockState(pos).getBlock() instanceof BlockFlowerPot) {
       var tile = TileUtils.getTile(world, pos, TileEntityFlowerPot.class);
       if (tile == null || tile.getFlowerItemStack().isEmpty()) {
@@ -49,6 +48,6 @@ public class ItemBlockPlant extends ItemBlockTFC {
   @Override
   public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack) {
     return worldIn.getBlockState(pos)
-            .getBlock() instanceof BlockFlowerPot || super.canPlaceBlockOnSide(worldIn, pos, side, player, stack);
+                  .getBlock() instanceof BlockFlowerPot || super.canPlaceBlockOnSide(worldIn, pos, side, player, stack);
   }
 }

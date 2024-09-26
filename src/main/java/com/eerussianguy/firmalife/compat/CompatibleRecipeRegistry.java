@@ -4,7 +4,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-
 import com.eerussianguy.firmalife.recipe.NutRecipe;
 
 import static su.terrafirmagreg.data.Constants.MODID_FL;

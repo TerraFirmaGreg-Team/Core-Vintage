@@ -27,7 +27,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -38,21 +37,21 @@ import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 public class BlockRockSurface extends BlockRock {
 
   private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(
-          2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0,
-          14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0
+    2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0,
+    14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0
   );
 
   public BlockRockSurface(RockBlockVariant variant, RockType type) {
     super(variant, type);
 
     getSettings()
-            .hardness(0.1f)
-            .useNeighborBrightness()
-            .replaceable()
-            .nonCube();
+      .hardness(0.1f)
+      .useNeighborBrightness()
+      .replaceable()
+      .nonCube();
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(HORIZONTAL, EnumFacing.NORTH));
+                              .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 
   @Override
@@ -93,7 +92,7 @@ public class BlockRockSurface extends BlockRock {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                  float hitZ) {
     var itemStack = new ItemStack(ItemsRock.LOOSE.get(type));
 
     if (player.addItemStackToInventory(itemStack)) {

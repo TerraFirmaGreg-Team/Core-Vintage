@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "minecraft:glass"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "dyeBlack"
     }

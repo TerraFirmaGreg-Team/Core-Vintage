@@ -21,7 +21,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
@@ -62,10 +61,10 @@ public interface IHighlightHandler {
   static void drawBox(AxisAlignedBB box, float lineWidth, float red, float green, float blue, float alpha) {
     GlStateManager.enableBlend();
     GlStateManager.tryBlendFuncSeparate(
-            GlStateManager.SourceFactor.SRC_ALPHA,
-            GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-            GlStateManager.SourceFactor.ONE,
-            GlStateManager.DestFactor.ZERO);
+      GlStateManager.SourceFactor.SRC_ALPHA,
+      GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+      GlStateManager.SourceFactor.ONE,
+      GlStateManager.DestFactor.ZERO);
     GlStateManager.glLineWidth(lineWidth);
     GlStateManager.disableTexture2D();
     GlStateManager.depthMask(false);
@@ -114,9 +113,9 @@ public interface IHighlightHandler {
       if (event.getPlayer().getHeldItemMainhand().getItem() instanceof ItemMetalChisel) {
         // Get the state that the chisel would turn the block into if it clicked
         IBlockState newState = ItemMetalChisel.getChiselResultState(player, player.world, pos, traceResult.sideHit,
-                (float) traceResult.hitVec.x - pos.getX(),
-                (float) traceResult.hitVec.y - pos.getY(),
-                (float) traceResult.hitVec.z - pos.getZ());
+                                                                    (float) traceResult.hitVec.x - pos.getX(),
+                                                                    (float) traceResult.hitVec.y - pos.getY(),
+                                                                    (float) traceResult.hitVec.z - pos.getZ());
         if (newState != null) {
           AxisAlignedBB box = IHighlightHandler.getBox(player, pos, event.getPartialTicks()).grow(0.001);
           double offsetX = 0, offsetY = 0, offsetZ = 0;
@@ -147,10 +146,10 @@ public interface IHighlightHandler {
           double d5 = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * (double) event.getPartialTicks();
           GlStateManager.enableBlend();
           GlStateManager.tryBlendFuncSeparate(
-                  GlStateManager.SourceFactor.SRC_ALPHA,
-                  GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-                  GlStateManager.SourceFactor.ONE,
-                  GlStateManager.DestFactor.ZERO);
+            GlStateManager.SourceFactor.SRC_ALPHA,
+            GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+            GlStateManager.SourceFactor.ONE,
+            GlStateManager.DestFactor.ZERO);
           GlStateManager.glLineWidth(2.0F);
           GlStateManager.disableTexture2D();
           GlStateManager.depthMask(false);

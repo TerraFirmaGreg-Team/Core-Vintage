@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.experimental.UtilityClass;
@@ -39,8 +38,8 @@ public final class TileUtils {
   }
 
   /**
-   * Returns the tile at the specified position, returns null if it is the wrong type or does not exist. Avoids creating new tile entities when using a ChunkCache
-   * (off the main thread). see {@link BlockFlowerPot#getActualState(IBlockState, IBlockAccess, BlockPos)}
+   * Returns the tile at the specified position, returns null if it is the wrong type or does not exist. Avoids creating new tile entities when using a
+   * ChunkCache (off the main thread). see {@link BlockFlowerPot#getActualState(IBlockState, IBlockAccess, BlockPos)}
    */
   @Nullable
   public static TileEntity getTile(IBlockAccess world, BlockPos pos) {
@@ -55,12 +54,11 @@ public final class TileUtils {
     BlockPos pos = tile.getPos();
     World world = tile.getWorld();
 
-    return !tile.isInvalid() && getTile(world, pos) == tile
-            && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+    return !tile.isInvalid() && getTile(world, pos) == tile && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
   }
 
-  public static boolean isNotNull(TileEntity tileEntity) {
-    return tileEntity != null;
+  public static boolean isNotNull(TileEntity tile) {
+    return tile != null;
   }
 
   public static void registerTileEntity(Class<? extends TileEntity> tileEntityClass, String name) {

@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
-
 import lyeoj.tfcthings.blocks.BlockRopeBridge;
 import lyeoj.tfcthings.blocks.BlockRopeLadder;
 
@@ -17,7 +16,7 @@ public class TFCThingsBlocks {
 
   public static final Block[] BLOCKLIST = {
 
-          ROPE_BRIDGE_BLOCK,
-          ROPE_LADDER_BLOCK
+    ROPE_BRIDGE_BLOCK,
+    ROPE_LADDER_BLOCK
   };
 }

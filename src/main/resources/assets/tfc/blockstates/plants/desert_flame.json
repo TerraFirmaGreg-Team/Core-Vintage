@@ -9,8 +9,7 @@
           "model": "tfc:plants/desert_flame_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },

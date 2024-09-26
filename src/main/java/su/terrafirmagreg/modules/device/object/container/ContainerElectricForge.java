@@ -8,14 +8,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.objects.container.IButtonHandler;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import org.jetbrains.annotations.Nullable;
 
 public class ContainerElectricForge extends BaseContainerTile<TileElectricForge> implements
-        IButtonHandler {
+                                                                                 IButtonHandler {
 
   public ContainerElectricForge(InventoryPlayer playerInv, TileElectricForge tile) {
     super(playerInv, tile);
@@ -37,7 +36,7 @@ public class ContainerElectricForge extends BaseContainerTile<TileElectricForge>
   @Override
   protected void addContainerSlots() {
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-            null);
+                                                null);
     if (inventory != null) {
       for (int i = 0; i < 9; i++) {
         int row = i / 3;

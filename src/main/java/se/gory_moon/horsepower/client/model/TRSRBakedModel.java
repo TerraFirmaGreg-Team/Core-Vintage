@@ -18,7 +18,6 @@ import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import net.minecraftforge.client.model.pipeline.VertexTransformer;
 import net.minecraftforge.common.model.TRSRTransformation;
 
-
 import com.google.common.collect.ImmutableList;
 
 import org.jetbrains.annotations.NotNull;
@@ -42,11 +41,11 @@ public class TRSRBakedModel implements IBakedModel {
   }
 
   public TRSRBakedModel(IBakedModel original, float x, float y, float z, float rotX, float rotY, float rotZ, float scaleX, float scaleY,
-          float scaleZ) {
+                        float scaleZ) {
     this(original, new TRSRTransformation(new Vector3f(x, y, z),
-            null,
-            new Vector3f(scaleX, scaleY, scaleZ),
-            TRSRTransformation.quatFromXYZ(rotX, rotY, rotZ)));
+                                          null,
+                                          new Vector3f(scaleX, scaleY, scaleZ),
+                                          TRSRTransformation.quatFromXYZ(rotX, rotY, rotZ)));
   }
 
   public TRSRBakedModel(IBakedModel original, TRSRTransformation transform) {
@@ -146,7 +145,7 @@ public class TRSRBakedModel implements IBakedModel {
     @NotNull
     @Override
     public IBakedModel handleItemState(@NotNull IBakedModel originalModel, ItemStack stack, @NotNull World world,
-            @NotNull EntityLivingBase entity) {
+                                       @NotNull EntityLivingBase entity) {
       IBakedModel baked = model.original.getOverrides().handleItemState(originalModel, stack, world, entity);
 
       return new TRSRBakedModel(baked, model.transformation);

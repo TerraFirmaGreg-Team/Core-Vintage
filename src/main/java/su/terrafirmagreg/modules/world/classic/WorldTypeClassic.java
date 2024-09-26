@@ -11,7 +11,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.client.gui.GuiCustomizeWorld;
 
 /**
@@ -61,7 +60,7 @@ public class WorldTypeClassic extends WorldType {
   @SideOnly(Side.CLIENT)
   public void onCustomizeButton(Minecraft mc, GuiCreateWorld guiCreateWorld) {
     mc.displayGuiScreen(
-            new GuiCustomizeWorld(guiCreateWorld, guiCreateWorld.chunkProviderSettingsJson));
+      new GuiCustomizeWorld(guiCreateWorld, guiCreateWorld.chunkProviderSettingsJson));
   }
 
   @Override

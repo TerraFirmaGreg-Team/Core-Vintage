@@ -6,7 +6,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.INBTSerializable;
 
-
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
 
@@ -62,8 +61,8 @@ public interface IForgeable extends INBTSerializable<NBTTagCompound> {
   void addStep(@Nullable ForgeStep step);
 
   /**
-   * Resets the object's {@link IForgeable} components. Used if an item falls out of an anvil without getting worked Purpose is to preserve stackability on items that
-   * haven't been worked yet.
+   * Resets the object's {@link IForgeable} components. Used if an item falls out of an anvil without getting worked Purpose is to preserve stackability on
+   * items that haven't been worked yet.
    */
   void reset();
 

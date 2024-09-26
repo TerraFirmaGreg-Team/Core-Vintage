@@ -3,11 +3,9 @@
   "ingredients": [
     {
       "item": "tfc:brick/dacite"
-    },
-    {
+    }, {
       "item": "tfc:brick/dacite"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

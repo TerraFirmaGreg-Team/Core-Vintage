@@ -15,13 +15,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderAnimalHare extends RenderLiving<EntityAnimalHare> {
 
   private static final ResourceLocation BROWN = ModUtils.resource(
-          "textures/entity/animal/huntable/hare/brown.png");
+    "textures/entity/animal/huntable/hare/brown.png");
   private static final ResourceLocation SPOTTED = ModUtils.resource(
-          "textures/entity/animal/huntable/hare/spotted.png");
+    "textures/entity/animal/huntable/hare/spotted.png");
   private static final ResourceLocation BLACK = ModUtils.resource(
-          "textures/entity/animal/huntable/hare/black.png");
+    "textures/entity/animal/huntable/hare/black.png");
   private static final ResourceLocation CREAM = ModUtils.resource(
-          "textures/entity/animal/huntable/hare/cream.png");
+    "textures/entity/animal/huntable/hare/cream.png");
 
   public RenderAnimalHare(RenderManager renderManager) {
     super(renderManager, new ModelAnimalHare(), 0.3F);
@@ -29,7 +29,7 @@ public class RenderAnimalHare extends RenderLiving<EntityAnimalHare> {
 
   @Override
   public void doRender(EntityAnimalHare hare, double par2, double par4, double par6, float par8,
-          float par9) {
+                       float par9) {
     this.shadowSize = (float) (0.15f + hare.getPercentToAdulthood() * 0.15f);
     super.doRender(hare, par2, par4, par6, par8, par9);
   }

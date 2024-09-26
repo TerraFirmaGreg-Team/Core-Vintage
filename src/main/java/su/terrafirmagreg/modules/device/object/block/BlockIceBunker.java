@@ -18,7 +18,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
@@ -28,14 +27,14 @@ public class BlockIceBunker extends BaseBlockContainer {
     super(Settings.of(Material.WOOD));
 
     getSettings()
-            .registryKey("device/ice_bunker")
-            .hardness(2F);
+      .registryKey("device/ice_bunker")
+      .hardness(2F);
   }
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
-          float hitZ) {
+                                  EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
+                                  float hitZ) {
     if (!worldIn.isRemote) {
       GuiHandler.openGui(worldIn, pos, player);
     }

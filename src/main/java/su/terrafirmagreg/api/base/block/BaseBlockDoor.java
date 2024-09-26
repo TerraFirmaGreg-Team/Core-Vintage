@@ -15,7 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -33,10 +32,10 @@ public abstract class BaseBlockDoor extends BlockDoor implements IBlockSettings 
     this.settings = settings;
 
     getSettings()
-            .ignoresProperties(BlockDoor.POWERED)
-            .weight(Weight.HEAVY)
-            .size(Size.VERY_LARGE)
-            .hardness(3.0F);
+      .ignoresProperties(BlockDoor.POWERED)
+      .weight(Weight.HEAVY)
+      .size(Size.VERY_LARGE)
+      .hardness(3.0F);
   }
 
   @Override

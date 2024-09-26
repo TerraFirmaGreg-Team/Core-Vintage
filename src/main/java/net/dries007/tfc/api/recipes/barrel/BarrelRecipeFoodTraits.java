@@ -10,7 +10,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -29,7 +28,7 @@ public class BarrelRecipeFoodTraits extends BarrelRecipe {
   private final String tooltipName;
 
   private BarrelRecipeFoodTraits(@NotNull IIngredient<FluidStack> inputFluid, @NotNull IIngredient<ItemStack> inputStack, FoodTrait trait,
-          int duration, String tooltipName) {
+                                 int duration, String tooltipName) {
     super(inputFluid, inputStack, null, ItemStack.EMPTY, duration);
     this.trait = trait;
     this.tooltipName = tooltipName;
@@ -37,19 +36,19 @@ public class BarrelRecipeFoodTraits extends BarrelRecipe {
 
   public static BarrelRecipe pickling(@NotNull IIngredient<ItemStack> inputStack) {
     return new BarrelRecipeFoodTraits(IIngredient.of(FluidsTFC.VINEGAR.get(), 125), new IngredientItemFoodTrait(inputStack, FoodTrait.BRINED),
-            FoodTrait.PICKLED, 4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_pickling");
+                                      FoodTrait.PICKLED, 4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_pickling");
   }
 
   public static BarrelRecipe brining(@NotNull IIngredient<ItemStack> inputStack) {
     return new BarrelRecipeFoodTraits(IIngredient.of(FluidsTFC.BRINE.get(), 125), inputStack, FoodTrait.BRINED, 4 * ICalendar.TICKS_IN_HOUR,
-            "barrel_recipe_brining");
+                                      "barrel_recipe_brining");
   }
 
   @Override
   public boolean isValidInput(@Nullable FluidStack inputFluid, ItemStack inputStack) {
     IFood food = inputStack.getCapability(CapabilityFood.CAPABILITY, null);
     return super.isValidInput(inputFluid, inputStack) && food != null && !food.getTraits()
-            .contains(trait); // Don't apply again and again.
+                                                                              .contains(trait); // Don't apply again and again.
   }
 
   @NotNull

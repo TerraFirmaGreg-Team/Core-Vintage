@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 
-
 import net.dries007.tfc.util.config.DecayTooltipMode;
 
 import static su.terrafirmagreg.data.Constants.MOD_ID;
@@ -52,7 +51,7 @@ public class ConfigFood {
       public double modifier = 1.0;
 
       @Config.Comment({"The number of hours to which initial food decay will be synced. " +
-              "When a food item is dropped, it's initial expiration date will be rounded to the closest multiple of this (in hours)."})
+                       "When a food item is dropped, it's initial expiration date will be rounded to the closest multiple of this (in hours)."})
       @Config.RangeInt(min = 1, max = 48)
       public int stackTime = 6;
 

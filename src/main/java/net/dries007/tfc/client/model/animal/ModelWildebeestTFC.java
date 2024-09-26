@@ -12,7 +12,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -81,7 +80,7 @@ public class ModelWildebeestTFC extends ModelBase {
     tailHairA = new ModelRenderer(this, 30, 43);
     tailHairA.setRotationPoint(-0.7F, -0.3F, 1.2F);
     tailHairA.addBox(0.0F, -1.0F, -0.5F, 0, 2, 4, 0.0F);
-    setRotateAngle(tailHairA, 0.0F, 0.0F, -0.6981317007977318F);
+    setRotateAngle(tailHairA, 0.0F, 0.0F, -((float)Math.PI * 2F / 9F));
     noseA = new ModelRenderer(this, 5, 0);
     noseA.setRotationPoint(0.2F, 7.6F, -0.5F);
     noseA.addBox(-2.5F, -2.0F, -2.0F, 3, 2, 2, 0.0F);
@@ -90,7 +89,7 @@ public class ModelWildebeestTFC extends ModelBase {
     hornL3.mirror = true;
     hornL3.setRotationPoint(-0.2F, -3.6F, 0.25F);
     hornL3.addBox(-0.5F, -1.5F, -0.5F, 1, 2, 1, 0.0F);
-    setRotateAngle(hornL3, 0.08726646259971647F, -0.08726646259971647F, -0.6981317007977318F);
+    setRotateAngle(hornL3, 0.08726646259971647F, -0.08726646259971647F, -((float)Math.PI * 2F / 9F));
     neck = new ModelRenderer(this, 23, 22);
     neck.setRotationPoint(0.0F, 0.8F, -10.0F);
     neck.addBox(-2.0F, -4.0F, -2.0F, 4, 7, 5, -0.2F);
@@ -103,7 +102,7 @@ public class ModelWildebeestTFC extends ModelBase {
     hornR2B = new ModelRenderer(this, 30, 6);
     hornR2B.setRotationPoint(-0.26F, 0.55F, 0.37F);
     hornR2B.addBox(-0.5F, -3.5F, -0.5F, 1, 3, 1, 0.0F);
-    setRotateAngle(hornR2B, -0.5235987755982988F, -1.3962634015954636F, -0.6981317007977318F);
+    setRotateAngle(hornR2B, -0.5235987755982988F, -1.3962634015954636F, -((float)Math.PI * 2F / 9F));
     tailTip = new ModelRenderer(this, 29, 53);
     tailTip.setRotationPoint(0.0F, -0.15F, 8.4F);
     tailTip.addBox(-0.5F, -0.5F, -1.5F, 1, 1, 6, 0.0F);
@@ -111,7 +110,7 @@ public class ModelWildebeestTFC extends ModelBase {
     hornL2B = new ModelRenderer(this, 30, 6);
     hornL2B.setRotationPoint(-0.08F, 0.7F, 0.28F);
     hornL2B.addBox(-0.5F, -3.9F, -0.5F, 1, 3, 1, 0.0F);
-    setRotateAngle(hornL2B, -0.5235987755982988F, 1.3962634015954636F, 0.6981317007977318F);
+    setRotateAngle(hornL2B, -0.5235987755982988F, 1.3962634015954636F, ((float)Math.PI * 2F / 9F));
     tailBase = new ModelRenderer(this, 28, 60);
     tailBase.setRotationPoint(0.0F, 3.0F, 11.8F);
     tailBase.addBox(-0.5F, -0.5F, 0.0F, 1, 1, 7, 0.0F);
@@ -119,7 +118,7 @@ public class ModelWildebeestTFC extends ModelBase {
     tailHairE = new ModelRenderer(this, 30, 43);
     tailHairE.setRotationPoint(0.7F, -0.3F, 1.2F);
     tailHairE.addBox(0.0F, -1.0F, -0.5F, 0, 2, 4, 0.0F);
-    setRotateAngle(tailHairE, 0.0F, 0.0F, 0.6981317007977318F);
+    setRotateAngle(tailHairE, 0.0F, 0.0F, ((float)Math.PI * 2F / 9F));
     headBottom = new ModelRenderer(this, 2, 4);
     headBottom.setRotationPoint(0.0F, 2.15F, -0.45F);
     headBottom.addBox(-2.5F, -2.5F, -2.5F, 5, 8, 3, 0.0F);
@@ -134,11 +133,11 @@ public class ModelWildebeestTFC extends ModelBase {
     hornR4 = new ModelRenderer(this, 30, 0);
     hornR4.setRotationPoint(0.85F, -2.3F, -0.1F);
     hornR4.addBox(-0.5F, -0.5F, -0.5F, 1, 2, 1, 0.0F);
-    setRotateAngle(hornR4, 0.08726646259971647F, 0.0F, 0.6981317007977318F);
+    setRotateAngle(hornR4, 0.08726646259971647F, 0.0F, ((float)Math.PI * 2F / 9F));
     hornR2A = new ModelRenderer(this, 30, 6);
     hornR2A.setRotationPoint(-0.1F, 0.1F, 0.3F);
     hornR2A.addBox(-0.5F, -3.5F, -0.5F, 1, 3, 1, 0.0F);
-    setRotateAngle(hornR2A, -0.5235987755982988F, -1.3962634015954636F, -0.6981317007977318F);
+    setRotateAngle(hornR2A, -0.5235987755982988F, -1.3962634015954636F, -((float)Math.PI * 2F / 9F));
     hornRBase = new ModelRenderer(this, 26, 10);
     hornRBase.setRotationPoint(-1.3F, -2.7F, -1.5F);
     hornRBase.addBox(-1.0F, -1.0F, -1.0F, 4, 2, 2, 0.0F);
@@ -147,7 +146,7 @@ public class ModelWildebeestTFC extends ModelBase {
     hornL4.mirror = true;
     hornL4.setRotationPoint(-0.85F, -2.3F, -0.1F);
     hornL4.addBox(-0.5F, -0.5F, -0.5F, 1, 2, 1, 0.0F);
-    setRotateAngle(hornL4, 0.08726646259971647F, 0.0F, -0.6981317007977318F);
+    setRotateAngle(hornL4, 0.08726646259971647F, 0.0F, -((float)Math.PI * 2F / 9F));
     bodyMid = new ModelRenderer(this, 48, 41);
     bodyMid.setRotationPoint(0.0F, 5.8F, 2.3F);
     bodyMid.addBox(-4.0F, -5.0F, -3.0F, 8, 11, 7, -0.1F);
@@ -163,7 +162,7 @@ public class ModelWildebeestTFC extends ModelBase {
     hornL2A.mirror = true;
     hornL2A.setRotationPoint(-0.26F, 0.2F, 0.2F);
     hornL2A.addBox(-0.5F, -3.9F, -0.5F, 1, 3, 1, 0.0F);
-    setRotateAngle(hornL2A, -0.5235987755982988F, 1.3962634015954636F, 0.6981317007977318F);
+    setRotateAngle(hornL2A, -0.5235987755982988F, 1.3962634015954636F, ((float)Math.PI * 2F / 9F));
     tailHairB = new ModelRenderer(this, 30, 44);
     tailHairB.setRotationPoint(-0.4F, -1.0F, 0.8F);
     tailHairB.addBox(0.0F, -1.0F, -0.5F, 0, 2, 5, 0.0F);
@@ -175,7 +174,7 @@ public class ModelWildebeestTFC extends ModelBase {
     hornR3 = new ModelRenderer(this, 30, 3);
     hornR3.setRotationPoint(0.2F, -3.5F, 0.25F);
     hornR3.addBox(-0.5F, -1.5F, -0.5F, 1, 2, 1, 0.0F);
-    setRotateAngle(hornR3, 0.08726646259971647F, 0.08726646259971647F, 0.6981317007977318F);
+    setRotateAngle(hornR3, 0.08726646259971647F, 0.08726646259971647F, ((float)Math.PI * 2F / 9F));
     headBase = new ModelRenderer(this, 0, 26);
     headBase.setRotationPoint(0.0F, -0.5F, -11.4F);
     headBase.addBox(-2.5F, -3.0F, -4.0F, 5, 3, 5, 0.1F);
@@ -344,7 +343,7 @@ public class ModelWildebeestTFC extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
-          float scale) {
+                     float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
     if (((EntityAnimal) entity).isChild()) {
@@ -377,7 +376,7 @@ public class ModelWildebeestTFC extends ModelBase {
 
   @Override
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
-          Entity entityIn) {
+                                Entity entityIn) {
     {
       headBase.rotateAngleX = headPitch / (180F / MathConstants.PI);
       headBase.rotateAngleY = netHeadYaw / (180F / MathConstants.PI);

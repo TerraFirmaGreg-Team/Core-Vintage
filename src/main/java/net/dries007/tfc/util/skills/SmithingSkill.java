@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.capabilities.player.ICapabilityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,14 +30,6 @@ public class SmithingSkill extends Skill {
         nbt.setInteger(SKILL_TYPE, bonusType.ordinal());
       }
     }
-  }
-
-  private int getSkillSum() {
-    int sum = 0;
-    for (int skill : skillLevels) {
-      sum += skill;
-    }
-    return sum;
   }
 
   public static void copySkillBonus(ItemStack to, ItemStack from) {
@@ -68,6 +59,14 @@ public class SmithingSkill extends Skill {
       return type == null || nbt.getInteger(SKILL_TYPE) == type.ordinal() ? nbt.getFloat(SKILL_VALUE) : 0;
     }
     return 0;
+  }
+
+  private int getSkillSum() {
+    int sum = 0;
+    for (int skill : skillLevels) {
+      sum += skill;
+    }
+    return sum;
   }
 
   @Override

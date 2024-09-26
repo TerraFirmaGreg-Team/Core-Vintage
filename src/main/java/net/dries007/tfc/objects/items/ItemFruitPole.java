@@ -3,7 +3,6 @@ package net.dries007.tfc.objects.items;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
-
 import net.dries007.tfc.api.types.IFruitTree;
 
 import java.util.HashMap;

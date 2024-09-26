@@ -37,7 +37,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIStandAttack;
@@ -95,7 +94,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimal, IPre
   @Override
   public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
     return new EntityPolarBearTFC(this.world, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
-            (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
+                                  (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
   }
 
   @Override
@@ -259,15 +258,15 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimal, IPre
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
     return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-            .name()
-            .toLowerCase());
+                                                                                          .name()
+                                                                                          .toLowerCase());
   }
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TUNDRA || biomeType == BiomeHelper.BiomeType.TAIGA)) {
+        (biomeType == BiomeHelper.BiomeType.TUNDRA || biomeType == BiomeHelper.BiomeType.TAIGA)) {
       return ConfigTFC.Animals.POLAR_BEAR.rarity;
     }
     return 0;
@@ -313,9 +312,9 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimal, IPre
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+           && !this.world.containsAnyLiquid(getEntityBoundingBox())
+           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @Override

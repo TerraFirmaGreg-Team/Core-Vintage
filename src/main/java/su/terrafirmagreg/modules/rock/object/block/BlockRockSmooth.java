@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 
-
 import static su.terrafirmagreg.data.Properties.CAN_FALL;
 
 
@@ -18,15 +17,15 @@ public class BlockRockSmooth extends BlockRock {
     super(variant, type);
 
     getSettings()
-            .ignoresProperties(CAN_FALL)
-            .fallable(this.getDefaultState().withProperty(CAN_FALL, true),
-                    variant.getSpecification(),
-                    BlocksRock.COBBLE.get(type).getDefaultState())
-            .oreDict("stoneSmooth")
-            .oreDict("stonePolished");
+      .ignoresProperties(CAN_FALL)
+      .fallable(this.getDefaultState().withProperty(CAN_FALL, true),
+                variant.getSpecification(),
+                BlocksRock.COBBLE.get(type).getDefaultState())
+      .oreDict("stoneSmooth")
+      .oreDict("stonePolished");
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(CAN_FALL, false));
+                              .withProperty(CAN_FALL, false));
   }
 
   @Override

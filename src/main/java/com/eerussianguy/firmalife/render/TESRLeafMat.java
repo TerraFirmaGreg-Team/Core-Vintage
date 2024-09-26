@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.objects.te.TELeafMat;
 
 public class TESRLeafMat extends TileEntitySpecialRenderer<TELeafMat> {

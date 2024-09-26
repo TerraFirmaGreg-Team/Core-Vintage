@@ -22,22 +22,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class BlockNestBox extends BaseBlockContainer {
 
   private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D,
-          0.25D, 0.875D);
+                                                                      0.25D, 0.875D);
 
   public BlockNestBox() {
     super(Settings.of(Material.GRASS));
 
     getSettings()
-            .registryKey("device/nest_box")
-            .nonCube()
-            .hardness(0.5F);
+      .registryKey("device/nest_box")
+      .nonCube()
+      .hardness(0.5F);
 
     BlockUtils.setFireInfo(this, 60, 20);
   }
@@ -50,13 +49,13 @@ public class BlockNestBox extends BaseBlockContainer {
   @SideOnly(Side.CLIENT)
   @Override
   public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos,
-          EnumFacing side) {
+                                      EnumFacing side) {
     return true;
   }
 
   @Override
   public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     if (!canStay(world, pos)) {
       world.destroyBlock(pos, true);
     }
@@ -69,7 +68,7 @@ public class BlockNestBox extends BaseBlockContainer {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-          EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+                                  EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     var tile = TileUtils.getTile(world, pos, TileNestBox.class);
     if (tile != null && !world.isRemote) {
       GuiHandler.openGui(world, pos, player);
@@ -79,7 +78,7 @@ public class BlockNestBox extends BaseBlockContainer {
 
   private boolean canStay(IBlockAccess world, BlockPos pos) {
     return world.getBlockState(pos.down())
-            .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+                .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
   }
 
   @Override
@@ -98,7 +97,7 @@ public class BlockNestBox extends BaseBlockContainer {
 
   @Override
   public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
-          IBlockAccess worldIn, BlockPos pos) {
+                                                         IBlockAccess worldIn, BlockPos pos) {
     return BOUNDING_BOX;
   }
 

@@ -1,19 +1,15 @@
 package com.eerussianguy.firmalife.init;
 
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorBerryBushes;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
 
 import lombok.Getter;
 
@@ -43,7 +39,7 @@ public enum BushFL implements IBerryBush {
   private final boolean hasSpikes;
 
   BushFL(Supplier<Item> fruit, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime, Size size,
-          boolean spiky) {
+         boolean spiky) {
     this.fruit = fruit;
     this.harvestMonthStart = harvestMonthStart;
     this.harvestingMonths = harvestingMonths;

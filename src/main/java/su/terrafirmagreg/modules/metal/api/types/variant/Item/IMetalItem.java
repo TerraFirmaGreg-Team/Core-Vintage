@@ -5,7 +5,6 @@ import su.terrafirmagreg.data.lib.types.type.IType;
 import su.terrafirmagreg.data.lib.types.variant.IVariant;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**

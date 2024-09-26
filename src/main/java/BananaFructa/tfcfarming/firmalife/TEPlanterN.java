@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-
 import BananaFructa.floraefixes.Utils;
 import BananaFructa.tfcfarming.Config;
 import BananaFructa.tfcfarming.CropNutrients;
@@ -72,12 +71,12 @@ public class TEPlanterN extends TEPlanter {
             CropNutrients cropNutrients = CropNutrients.getCropNValues(Utils.readDeclaredField(ItemSeedsTFC.class, cropItem, "crop"));
             if (cropNutrients != null) {
               if (
-                      nutrientValues.getNutrient(cropNutrients.favouriteNutrient) >=
-                              cropNutrients.stepCost * Config.nutrientConsumptionInGreenhouse &&
-                              isBelowMaxTemp(cropNutrients.maximumTemperature)
+                nutrientValues.getNutrient(cropNutrients.favouriteNutrient) >=
+                cropNutrients.stepCost * Config.nutrientConsumptionInGreenhouse &&
+                isBelowMaxTemp(cropNutrients.maximumTemperature)
               ) {
                 nutrientValues.addNutrient(cropNutrients.favouriteNutrient,
-                        (int) (-cropNutrients.stepCost * Config.nutrientConsumptionInGreenhouse));
+                                           (int) (-cropNutrients.stepCost * Config.nutrientConsumptionInGreenhouse));
                 markDirty();
               } else {
                 this.resetCounter();

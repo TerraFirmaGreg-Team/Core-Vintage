@@ -7,7 +7,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.util.OreDictionaryHelper;

@@ -18,15 +18,14 @@ import su.terrafirmagreg.api.registry.spi.IRegistryWorldGenerator;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
 @Getter
 public class RegistryManager
-        implements IRegistryBlock, IRegistryBiome, IRegistryKeyBinding, IRegistryDataSerializer, IRegistryEnchantment, IRegistryEntity, IRegistryItem,
-        IRegistryLootTable, IRegistryPotion, IRegistryPotionType, IRegistrySound, IRegistryWorldGenerator, IRegistryCommand {
+  implements IRegistryBlock, IRegistryBiome, IRegistryKeyBinding, IRegistryDataSerializer, IRegistryEnchantment, IRegistryEntity, IRegistryItem,
+             IRegistryLootTable, IRegistryPotion, IRegistryPotionType, IRegistrySound, IRegistryWorldGenerator, IRegistryCommand {
 
   /**
    * The id of the mod the registry helper instance belongs to.

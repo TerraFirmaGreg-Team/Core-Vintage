@@ -38,7 +38,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.util.block.Multiblock;
 
@@ -57,50 +56,52 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
 
   static {
     BiPredicate<World, BlockPos> skyMatcher = World::canBlockSeeSky;
-    BiPredicate<World, BlockPos> isValidSide = (world, pos) -> BlockCharcoalForge.isValidSide(
-            world.getBlockState(pos));
+    BiPredicate<World, BlockPos> isValidSide = (world, pos) -> BlockCharcoalForge.isValidSide(world.getBlockState(pos));
     CHARCOAL_FORGE_MULTIBLOCK = new Multiblock()
-            // Top block
-            .match(new BlockPos(0, 1, 0),
-                    state -> state.getBlock() == BlocksDevice.CRUCIBLE || state.getBlock() == Blocks.AIR)
-            // Chimney
-            .matchOneOf(new BlockPos(0, 1, 0), new Multiblock()
-                    .match(new BlockPos(0, 0, 0), skyMatcher)
-                    .match(new BlockPos(0, 0, 1), skyMatcher)
-                    .match(new BlockPos(0, 0, 2), skyMatcher)
-                    .match(new BlockPos(0, 0, -1), skyMatcher)
-                    .match(new BlockPos(0, 0, -2), skyMatcher)
-                    .match(new BlockPos(1, 0, 0), skyMatcher)
-                    .match(new BlockPos(2, 0, 0), skyMatcher)
-                    .match(new BlockPos(-1, 0, 0), skyMatcher)
-                    .match(new BlockPos(-2, 0, 0), skyMatcher)
-            )
-            // Underneath
-            .match(new BlockPos(1, 0, 0), isValidSide)
-            .match(new BlockPos(-1, 0, 0), isValidSide)
-            .match(new BlockPos(0, 0, 1), isValidSide)
-            .match(new BlockPos(0, 0, -1), isValidSide)
-            .match(new BlockPos(0, -1, 0), isValidSide);
+      // Top block
+      .match(new BlockPos(0, 1, 0), state -> state.getBlock() == BlocksDevice.CRUCIBLE || state.getBlock() == Blocks.AIR)
+      // Chimney
+      .matchOneOf(new BlockPos(0, 1, 0), new Multiblock()
+        .match(new BlockPos(0, 0, 0), skyMatcher)
+        .match(new BlockPos(0, 0, 1), skyMatcher)
+        .match(new BlockPos(0, 0, 2), skyMatcher)
+        .match(new BlockPos(0, 0, -1), skyMatcher)
+        .match(new BlockPos(0, 0, -2), skyMatcher)
+        .match(new BlockPos(1, 0, 0), skyMatcher)
+        .match(new BlockPos(2, 0, 0), skyMatcher)
+        .match(new BlockPos(-1, 0, 0), skyMatcher)
+        .match(new BlockPos(-2, 0, 0), skyMatcher)
+      )
+      // Underneath
+      .match(new BlockPos(1, 0, 0), isValidSide)
+      .match(new BlockPos(-1, 0, 0), isValidSide)
+      .match(new BlockPos(0, 0, 1), isValidSide)
+      .match(new BlockPos(0, 0, -1), isValidSide)
+      .match(new BlockPos(0, -1, 0), isValidSide);
   }
 
   public BlockCharcoalForge() {
     super(Settings.of(BlockCharcoalPile.CHARCOAL_MATERIAL));
 
     getSettings()
-            .registryKey("device/charcoal_forge")
-            .sound(SoundType.GROUND)
-            .hardness(1.0F)
-            .nonFullCube()
-            .nonOpaque();
+      .registryKey("device/charcoal_forge")
+      .randomTicks()
+      .harvestLevel(ToolClasses.SHOVEL, 0)
+      .sound(SoundType.GROUND)
+      .hardness(1.0F)
+      .nonFullCube()
+      .nonOpaque();
 
-    setTickRandomly(true); // Used for chimney checks -> extinguish
-    setHarvestLevel(ToolClasses.SHOVEL, 0);
     setDefaultState(blockState.getBaseState()
-            .withProperty(LIT, false));
+                              .withProperty(LIT, false));
   }
 
   public static boolean isValidSide(IBlockState state) {
     return state.getMaterial() == Material.ROCK && state.isOpaqueCube() && state.isNormalCube();
+  }
+
+  public static boolean isValid(World world, BlockPos pos) {
+    return CHARCOAL_FORGE_MULTIBLOCK.test(world, pos);
   }
 
   @Override
@@ -125,9 +126,9 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
   @Override
   public void onAirIntake(World world, BlockPos pos, int airAmount) {
     var tile = TileUtils.getTile(world, pos, TileCharcoalForge.class);
-    if (tile != null) {
-      tile.onAirIntake(airAmount);
-    }
+    if (tile == null) {return;}
+
+    tile.onAirIntake(airAmount);
   }
 
   @Override
@@ -148,8 +149,9 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
   @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     var tile = TileUtils.getTile(world, pos, TileCharcoalForge.class);
+    if (tile == null) {return;}
     // Have to check the above block, since minecraft think this block is "roof"
-    if (tile != null && state.getValue(LIT) && world.isRainingAt(pos.up())) {
+    if (state.getValue(LIT) && world.isRainingAt(pos.up())) {
       tile.onRainDrop();
     }
   }
@@ -161,10 +163,6 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
     }
   }
 
-  public static boolean isValid(World world, BlockPos pos) {
-    return CHARCOAL_FORGE_MULTIBLOCK.test(world, pos);
-  }
-
   @SideOnly(Side.CLIENT)
   @Override
   public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rng) {
@@ -173,18 +171,15 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
       double y = pos.getY() + 0.1;
       double z = pos.getZ() + 0.5;
 
-      world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + rng.nextFloat() - 0.5, y,
-              z + rng.nextFloat() - 0.5, 0.0D, 0.2D, 0.0D);
+      world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + rng.nextFloat() - 0.5, y, z + rng.nextFloat() - 0.5, 0.0D, 0.2D, 0.0D);
       if (rng.nextInt(3) == 1) {
-        world.spawnParticle(EnumParticleTypes.LAVA, x + rng.nextFloat() - 0.5, y,
-                z + rng.nextFloat() - 0.5, 0.0D, 0.2D, 0.0D);
+        world.spawnParticle(EnumParticleTypes.LAVA, x + rng.nextFloat() - 0.5, y, z + rng.nextFloat() - 0.5, 0.0D, 0.2D, 0.0D);
       }
     }
   }
 
   @Override
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     if (!worldIn.isRemote) {
       if (state.getValue(LIT) && !isValid(worldIn, pos)) {
         // This is not a valid pit, therefor extinguish it
@@ -209,9 +204,7 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-          EnumHand hand, EnumFacing side, float hitX,
-          float hitY, float hitZ) {
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     if (!world.isRemote) {
       if (!state.getValue(LIT)) {
         ItemStack held = player.getHeldItem(hand);
@@ -231,7 +224,7 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
   public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
     IBlockState state = worldIn.getBlockState(pos);
     if (state.getValue(LIT) && !entityIn.isImmuneToFire() && entityIn instanceof EntityLivingBase
-            && state.getValue(LIT)) {
+        && state.getValue(LIT)) {
       entityIn.attackEntityFrom(DamageSource.IN_FIRE, 2.0F);
     }
     super.onEntityWalk(worldIn, pos, entityIn);
@@ -243,27 +236,23 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
   }
 
   @Override
-  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-          EntityPlayer player) {
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
     return new ItemStack(Items.COAL, 1, 1);
   }
 
   @Override
-  public @Nullable PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world,
-          BlockPos pos, @Nullable EntityLiving entity) {
+  public @Nullable PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EntityLiving entity) {
     return state.getValue(LIT) && (entity == null || !entity.isImmuneToFire())
-            ? net.minecraft.pathfinding.PathNodeType.DAMAGE_FIRE : null;
+           ? net.minecraft.pathfinding.PathNodeType.DAMAGE_FIRE : null;
   }
 
   @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-          EnumFacing face) {
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
     return face.getAxis() == EnumFacing.Axis.Y ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 
   @Override
-  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn,
-          BlockPos pos) {
+  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     return AABB;
   }
 

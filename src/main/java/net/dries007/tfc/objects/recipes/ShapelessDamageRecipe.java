@@ -14,7 +14,6 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-
 import com.google.gson.JsonObject;
 
 import org.jetbrains.annotations.NotNull;

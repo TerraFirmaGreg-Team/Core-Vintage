@@ -10,8 +10,7 @@
           "model": "tfc:plants/peony_single_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "single",
         "stage": "1"
@@ -21,8 +20,7 @@
           "model": "tfc:plants/peony_single_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "0"
@@ -32,8 +30,7 @@
           "model": "tfc:plants/peony_lower_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "1"
@@ -43,8 +40,7 @@
           "model": "tfc:plants/peony_lower_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "0"
@@ -54,8 +50,7 @@
           "model": "tfc:plants/peony_upper_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "1"

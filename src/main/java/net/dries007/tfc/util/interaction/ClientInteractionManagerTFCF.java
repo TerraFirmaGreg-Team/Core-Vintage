@@ -22,7 +22,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -69,13 +68,13 @@ final class ClientInteractionManagerTFCF {
 
       IBlockState iblockstate = worldIn.getBlockState(pos);
       boolean bypass = player.getHeldItemMainhand()
-              .doesSneakBypassUse(worldIn, pos, player) && player.getHeldItemOffhand()
-              .doesSneakBypassUse(worldIn, pos, player);
+                             .doesSneakBypassUse(worldIn, pos, player) && player.getHeldItemOffhand()
+                                                                                .doesSneakBypassUse(worldIn, pos, player);
 
       if ((!player.isSneaking() || bypass || event.getUseBlock() == Event.Result.ALLOW)) {
         if (event.getUseBlock() != Event.Result.DENY) {
           flag = iblockstate.getBlock()
-                  .onBlockActivated(worldIn, pos, iblockstate, player, hand, direction, hitX, hitY, hitZ);
+                            .onBlockActivated(worldIn, pos, iblockstate, player, hand, direction, hitX, hitY, hitZ);
         }
         if (flag) {
           result = EnumActionResult.SUCCESS;
@@ -112,7 +111,7 @@ final class ClientInteractionManagerTFCF {
             // Fire the alternative item use action
             if (itemstack.getItem() instanceof ItemSeedsTFC) {
               enumactionresult = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) itemstack.getItem()), player, worldIn, pos, hand,
-                      direction, hitX, hitY, hitZ);
+                                                                 direction, hitX, hitY, hitZ);
             } else
             // fire the normal one as well
             {
@@ -130,7 +129,7 @@ final class ClientInteractionManagerTFCF {
           if (event.getUseItem() != Event.Result.DENY) {
             if (itemstack.getItem() instanceof ItemSeedsTFC) {
               result = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) itemstack.getItem()), player, worldIn, pos, hand, direction,
-                      hitX, hitY, hitZ);
+                                                       hitX, hitY, hitZ);
             } else
             // fire the normal one as well
             {

@@ -16,14 +16,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Интерфейс, представляющий блок металла.
  */
 public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVariant>, IBlockSettings,
-        IProviderModel, IProviderBlockColor {
+                                     IProviderModel, IProviderBlockColor {
 
   @Override
   @SideOnly(Side.CLIENT)

@@ -11,7 +11,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.experimental.UtilityClass;
@@ -62,7 +61,7 @@ public final class MathsUtils {
   public static double round(double value, int places) {
 
     return value >= 0 && places > 0 ? BigDecimal.valueOf(value)
-            .setScale(places, RoundingMode.HALF_UP).doubleValue() : value;
+                                                .setScale(places, RoundingMode.HALF_UP).doubleValue() : value;
   }
 
   /**
@@ -101,17 +100,17 @@ public final class MathsUtils {
   @Nullable
   public static RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {
     Vec3d playerVec = new Vec3d(playerIn.posX, playerIn.posY + playerIn.getEyeHeight(),
-            playerIn.posZ);
+                                playerIn.posZ);
     float cosYaw = MathHelper.cos(-playerIn.rotationYaw * 0.017453292F - MathConstants.PI);
     float sinYaw = MathHelper.sin(-playerIn.rotationYaw * 0.017453292F - MathConstants.PI);
     float cosPitch = -MathHelper.cos(-playerIn.rotationPitch * 0.017453292F);
     float sinPitch = MathHelper.sin(-playerIn.rotationPitch * 0.017453292F);
     double reachDistance = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE)
-            .getAttributeValue();
+                                   .getAttributeValue();
     Vec3d targetVec = playerVec.add(
-            (sinYaw * cosPitch) * reachDistance,
-            sinPitch * reachDistance,
-            (cosYaw * cosPitch) * reachDistance
+      (sinYaw * cosPitch) * reachDistance,
+      sinPitch * reachDistance,
+      (cosYaw * cosPitch) * reachDistance
     );
     return worldIn.rayTraceBlocks(playerVec, targetVec, useLiquids, !useLiquids, false);
   }
@@ -125,19 +124,20 @@ public final class MathsUtils {
    */
   @Nullable
   public static RayTraceResult rayTrace(Entity entity, double blockReachDistance,
-          float partialTicks) {
+                                        float partialTicks) {
     Vec3d eyePosition = entity.getPositionEyes(partialTicks);
     Vec3d lookVector = entity.getLook(partialTicks);
     Vec3d rayTraceVector = eyePosition.add(
-            lookVector.x * blockReachDistance,
-            lookVector.y * blockReachDistance,
-            lookVector.z * blockReachDistance
+      lookVector.x * blockReachDistance,
+      lookVector.y * blockReachDistance,
+      lookVector.z * blockReachDistance
     );
     return entity.world.rayTraceBlocks(eyePosition, rayTraceVector, false, false, true);
   }
 
   /**
-   * A method which handles the calculating of percentages. While this isn't a particularly difficult piece of code, it has been added for the sake of simplicity.
+   * A method which handles the calculating of percentages. While this isn't a particularly difficult piece of code, it has been added for the sake of
+   * simplicity.
    *
    * @param percent: The percent chance that this method should return true. 1.00 = 100%
    * @return boolean: Returns are randomly true or false, based on the suplied percentage.
@@ -195,11 +195,16 @@ public final class MathsUtils {
    * @param maxZ The max Z pos.
    * @return A bounding box that is made to a pixel specific size.
    */
-  public static AxisAlignedBB getBoundsForPixels(int minX, int minY, int minZ, int maxX, int maxY,
-          int maxZ) {
+  public static AxisAlignedBB getBoundsForPixels(int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
 
-    return new AxisAlignedBB(getPixelDistance(minX), getPixelDistance(minY), getPixelDistance(minZ),
-            getPixelDistance(maxX), getPixelDistance(maxY), getPixelDistance(maxZ));
+    return new AxisAlignedBB(
+      getPixelDistance(minX),
+      getPixelDistance(minY),
+      getPixelDistance(minZ),
+      getPixelDistance(maxX),
+      getPixelDistance(maxY),
+      getPixelDistance(maxZ)
+    );
   }
 
   /**
@@ -214,8 +219,8 @@ public final class MathsUtils {
   }
 
   /**
-   * Takes an integer value and fits it within a range. If the initial value is less than the minimum it will be set to the minimum. If the initial value is greater
-   * than the maximum it will be lowered to the maximum.
+   * Takes an integer value and fits it within a range. If the initial value is less than the minimum it will be set to the minimum. If the initial value is
+   * greater than the maximum it will be lowered to the maximum.
    *
    * @param initial The initial value.
    * @param min     The minimum value.
@@ -224,6 +229,6 @@ public final class MathsUtils {
    */
   public static int adjustToRange(int initial, int min, int max) {
 
-    return initial < min ? min : initial > max ? max : initial;
+    return initial < min ? min : Math.min(initial, max);
   }
 }

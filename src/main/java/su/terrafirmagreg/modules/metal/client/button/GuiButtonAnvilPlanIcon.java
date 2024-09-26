@@ -9,7 +9,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.button.IButtonTooltip;
 
@@ -38,7 +37,7 @@ public class GuiButtonAnvilPlanIcon extends BaseGuiButton implements IButtonTool
       GlStateManager.color(1, 1, 1, 1);
       mc.getTextureManager().bindTexture(PLAN_BACKGROUND);
       hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
-              && mouseY < this.y + this.height;
+                && mouseY < this.y + this.height;
       drawModalRectWithCustomSizedTexture(x, y, 176, 0, 18, 18, 256, 256);
       drawItemStack(displayItem, x + 1, y + 1);
       mouseDragged(mc, mouseX, mouseY);

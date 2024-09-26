@@ -9,7 +9,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 
@@ -40,10 +39,10 @@ public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC imple
       ;
     if (water == ChunkGenClassic.SALT_WATER) {
       return i < plant.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlockUtils.isSaltWater(worldIn.getBlockState(pos.up()))) &&
-              canBlockStay(worldIn, pos.up(), state);
+             canBlockStay(worldIn, pos.up(), state);
     } else {
       return i < plant.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlockUtils.isFreshWater(worldIn.getBlockState(pos.up()))) &&
-              canBlockStay(worldIn, pos.up(), state);
+             canBlockStay(worldIn, pos.up(), state);
     }
   }
 

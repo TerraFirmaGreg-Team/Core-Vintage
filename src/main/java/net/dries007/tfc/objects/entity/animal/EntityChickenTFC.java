@@ -28,7 +28,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIFindNest;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -58,7 +57,7 @@ public class EntityChickenTFC extends EntityAnimalBase implements ILivestock {
 
   public EntityChickenTFC(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-            getRandomGrowth(ConfigTFC.Animals.CHICKEN.adulthood, ConfigTFC.Animals.CHICKEN.elder));
+         getRandomGrowth(ConfigTFC.Animals.CHICKEN.adulthood, ConfigTFC.Animals.CHICKEN.elder));
   }
 
   public EntityChickenTFC(World worldIn, Gender gender, int birthDay) {
@@ -70,7 +69,7 @@ public class EntityChickenTFC extends EntityAnimalBase implements ILivestock {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.PLAINS)) {
+        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
       return ConfigTFC.Animals.CHICKEN.rarity;
     }
     return 0;
@@ -221,7 +220,7 @@ public class EntityChickenTFC extends EntityAnimalBase implements ILivestock {
   public void onLivingUpdate() {
     super.onLivingUpdate();
     if (this.getClass() == EntityChickenTFC.class && this.getGender() == Gender.MALE && !this.world.isRemote && !this.isChild() &&
-            Calendar.CALENDAR_TIME.getHourOfDay() == 6 && rand.nextInt(600) == 0) {
+        Calendar.CALENDAR_TIME.getHourOfDay() == 6 && rand.nextInt(600) == 0) {
       this.world.playSound(null, this.getPosition(), SoundsAnimal.ANIMAL_ROOSTER_CRY, SoundCategory.AMBIENT, 0.8f, 1.0f);
     }
     this.oFlap = this.wingRotation;

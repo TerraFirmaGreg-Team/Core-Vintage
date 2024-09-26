@@ -8,14 +8,12 @@
         {
           "model": "tfc:plants/cattail_0",
           "weight": 5
-        },
-        {
+        }, {
           "model": "tfc:plants/cattail_1",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },
@@ -23,14 +21,12 @@
         {
           "model": "tfc:plants/cattail_1",
           "weight": 5
-        },
-        {
+        }, {
           "model": "tfc:plants/cattail_2",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "2"
       },
@@ -38,14 +34,12 @@
         {
           "model": "tfc:plants/cattail_2",
           "weight": 5
-        },
-        {
+        }, {
           "model": "tfc:plants/cattail_3",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "3"
       },
@@ -53,14 +47,12 @@
         {
           "model": "tfc:plants/cattail_3",
           "weight": 5
-        },
-        {
+        }, {
           "model": "tfc:plants/cattail_0",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "4"
       },

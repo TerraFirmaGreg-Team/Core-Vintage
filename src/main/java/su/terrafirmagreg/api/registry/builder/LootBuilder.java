@@ -5,7 +5,6 @@ import net.minecraft.world.storage.loot.LootEntryItem;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -209,15 +208,15 @@ public class LootBuilder {
   public LootEntryItem build() {
 
     return new LootEntryItem(this.item, this.weight, this.quality,
-            this.functions.toArray(new LootFunction[0]),
-            this.conditions.toArray(new LootCondition[0]), this.name);
+                             this.functions.toArray(new LootFunction[0]),
+                             this.conditions.toArray(new LootCondition[0]), this.name);
   }
 
   @Override
   public String toString() {
 
     return String.format("Name: %s - Pool: %s - Weight: %d - Quality: %d Item: %s", this.name,
-            this.pool, this.weight, this.quality,
-            this.item.getRegistryName());
+                         this.pool, this.weight, this.quality,
+                         this.item.getRegistryName());
   }
 }

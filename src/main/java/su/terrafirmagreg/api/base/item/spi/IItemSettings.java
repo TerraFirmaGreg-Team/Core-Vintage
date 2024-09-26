@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.IRarity;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;

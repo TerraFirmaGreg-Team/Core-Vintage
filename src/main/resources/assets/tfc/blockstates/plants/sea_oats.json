@@ -10,8 +10,7 @@
           "model": "tfc:plants/sea_oats_single_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "single",
         "stage": "1"
@@ -21,8 +20,7 @@
           "model": "tfc:plants/sea_oats_single_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "single",
         "stage": "2|3"
@@ -31,14 +29,12 @@
         {
           "model": "tfc:plants/sea_oats_single_1",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/sea_oats_single_2",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "2|3"
@@ -47,14 +43,12 @@
         {
           "model": "tfc:plants/sea_oats_lower_2",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/sea_oats_lower_3",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "2|3"
@@ -63,8 +57,7 @@
         {
           "model": "tfc:plants/sea_oats_upper_2",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/sea_oats_upper_3",
           "weight": 1
         }

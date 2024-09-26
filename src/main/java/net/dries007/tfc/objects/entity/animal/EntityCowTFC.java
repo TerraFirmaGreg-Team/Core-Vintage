@@ -1,12 +1,13 @@
 package net.dries007.tfc.objects.entity.animal;
 
-import su.terrafirmagreg.api.network.datasync.DataSerializers;
-import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.modules.animal.api.type.ILivestock;
-import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
-import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.network.PacketSimpleMessage;
+import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.util.calendar.Calendar;
+import net.dries007.tfc.util.climate.BiomeHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -33,18 +34,16 @@ import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 
-
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.network.PacketSimpleMessage;
-import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
+import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
 
 import java.util.List;
 import java.util.Random;
@@ -72,7 +71,7 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.PLAINS)) {
+        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
       return ConfigTFC.Animals.COW.rarity;
     }
     return 0;
@@ -109,7 +108,7 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
     int numberOfChildren = ConfigTFC.Animals.COW.babies; //one always
     for (int i = 0; i < numberOfChildren; i++) {
       EntityCowTFC baby = new EntityCowTFC(world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                           (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
       world.spawnEntity(baby);
@@ -145,7 +144,7 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
   public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
     ItemStack itemstack = player.getHeldItem(hand);
     FluidActionResult fillResult = FluidUtil.tryFillContainer(itemstack, FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)),
-            Fluid.BUCKET_VOLUME, player, false);
+                                                              Fluid.BUCKET_VOLUME, player, false);
 
     // First check if it is possible to fill the player's held item with milk
     if (fillResult.isSuccess()) {
@@ -153,13 +152,13 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
         player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
         setProductsCooldown();
         player.setHeldItem(hand, FluidUtil.tryFillContainerAndStow(itemstack, FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)),
-                new PlayerInvWrapper(player.inventory), Fluid.BUCKET_VOLUME, player, true).getResult());
+                                                                   new PlayerInvWrapper(player.inventory), Fluid.BUCKET_VOLUME, player, true).getResult());
       } else if (!world.isRemote) {
         //Return chat message indicating why this entity isn't giving milk
         TextComponentTranslation tooltip = getTooltip();
         if (tooltip != null) {
           TerraFirmaCraft.getNetwork()
-                  .sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+                         .sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
         }
       }
       return true;

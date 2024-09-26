@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
@@ -65,7 +64,8 @@ public class BlockSnowTFC extends BlockSnow implements ITemperatureBlock {
 
     if (block != Blocks.ICE && block != Blocks.PACKED_ICE && block != Blocks.BARRIER && block != BlocksTFC.SEA_ICE) {
       return stateDown.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID || stateDown.getBlock()
-              .isLeaves(stateDown, worldIn, pos.down()) || block == this && stateDown.getValue(LAYERS) == 8;
+                                                                                                                 .isLeaves(stateDown, worldIn, pos.down())
+             || block == this && stateDown.getValue(LAYERS) == 8;
     } else {
       return false;
     }
@@ -76,7 +76,7 @@ public class BlockSnowTFC extends BlockSnow implements ITemperatureBlock {
     if (world.isRaining() && world.getLightFor(EnumSkyBlock.BLOCK, pos.up()) < 11 - getLightOpacity(state, world, pos)) {
       int expectedLayers = -2 - (int) (Climate.getActualTemp(world, pos) * 0.5f);
       if (expectedLayers > state.getValue(LAYERS) &&
-              state.getValue(LAYERS) < 7) // If we prevent this from getting to a full block, it won't infinitely accumulate
+          state.getValue(LAYERS) < 7) // If we prevent this from getting to a full block, it won't infinitely accumulate
       {
         world.setBlockState(pos, state.withProperty(LAYERS, state.getValue(LAYERS) + 1));
       }

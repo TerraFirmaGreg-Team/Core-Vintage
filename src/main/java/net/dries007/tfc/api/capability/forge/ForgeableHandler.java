@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
 
@@ -81,7 +80,9 @@ public class ForgeableHandler implements ICapabilitySerializable<NBTTagCompound>
     }
 
     return nbt;
-  }  @Override
+  }
+
+  @Override
   public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
     return capability == CapabilityForgeable.FORGEABLE_CAPABILITY;
   }
@@ -93,14 +94,14 @@ public class ForgeableHandler implements ICapabilitySerializable<NBTTagCompound>
       recipeName = nbt.hasKey("recipe") ? new ResourceLocation(nbt.getString("recipe")) : null; // stops defaulting to empty string
       steps.deserializeNBT(nbt.getCompoundTag("steps"));
     }
-  }  @SuppressWarnings("unchecked")
+  }
+
+  @SuppressWarnings("unchecked")
   @Nullable
   @Override
   public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
     return hasCapability(capability, facing) ? (T) this : null;
   }
-
-
 
 
 }

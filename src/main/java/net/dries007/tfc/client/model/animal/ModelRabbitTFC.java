@@ -11,7 +11,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.entity.animal.EntityRabbitTFC;
 
 @SideOnly(Side.CLIENT)
@@ -149,7 +148,7 @@ public class ModelRabbitTFC extends ModelBase {
   }
 
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
-          Entity entityIn) {
+                                Entity entityIn) {
     float f = ageInTicks - (float) entityIn.ticksExisted;
     EntityRabbitTFC EntityRabbitTFC = (EntityRabbitTFC) entityIn;
     this.rabbitNose.rotateAngleX = headPitch * 0.017453292F;

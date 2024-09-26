@@ -54,7 +54,7 @@ public class GenLayerAddIsland extends GenLayerBase {
             out[xx + yy * w] = oceanID;
           }
         } else if (us != oceanID && (dl == oceanID || dr == oceanID || ul == oceanID
-                || ur == oceanID)) {
+                                     || ur == oceanID)) {
           if (this.nextInt(5) == 0) {
             out[xx + yy * w] = oceanID;
           } else {

@@ -21,7 +21,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.ConfigTFC;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -57,7 +56,7 @@ public class ItemShovelTFCF extends ItemSpade implements ICapabilitySize {
   @Override
   @NotNull
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                    float hitZ) {
     ItemStack itemstack = player.getHeldItem(hand);
 
     if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
@@ -69,8 +68,8 @@ public class ItemShovelTFCF extends ItemSpade implements ICapabilitySize {
         return EnumActionResult.PASS;
       }
       if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN &&
-              worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR &&
-              BlockUtils.isVariant(soilBlock.getVariant(), GRASS, DRY_GRASS, DIRT)) {
+          worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR &&
+          BlockUtils.isVariant(soilBlock.getVariant(), GRASS, DRY_GRASS, DIRT)) {
         IBlockState iblockstate1 = GRASS_PATH.get(soilBlock.getType()).getDefaultState();
         worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 

@@ -11,7 +11,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
@@ -183,7 +182,7 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    */
   public static boolean isStable(World world, BlockPos pos) {
     return CapabilityChunkData.get(world, pos)
-            .getStabilityLayer(pos.getX() & 15, pos.getZ() & 15).valueInt == 0;
+                              .getStabilityLayer(pos.getX() & 15, pos.getZ() & 15).valueInt == 0;
   }
 
   /**
@@ -195,7 +194,7 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    */
   public static int getDrainage(World world, BlockPos pos) {
     return CapabilityChunkData.get(world, pos)
-            .getDrainageLayer(pos.getX() & 15, pos.getZ() & 15).valueInt;
+                              .getDrainageLayer(pos.getX() & 15, pos.getZ() & 15).valueInt;
   }
 
   /**
@@ -229,7 +228,7 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    */
   public static RockType getRockHeight(World world, BlockPos pos) {
     return CapabilityChunkData.get(world, pos)
-            .getRockLayerHeight(pos.getX() & 15, pos.getY(), pos.getZ() & 15);
+                              .getRockLayerHeight(pos.getX() & 15, pos.getY(), pos.getZ() & 15);
   }
 
   /**
@@ -241,7 +240,7 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    */
   public static SoilType getSoilHeight(World world, BlockPos pos) {
     return CapabilityChunkData.get(world, pos)
-            .getSoilLayerHeight(pos.getX() & 15, pos.getY(), pos.getZ() & 15);
+                              .getSoilLayerHeight(pos.getX() & 15, pos.getY(), pos.getZ() & 15);
   }
 
   /**
@@ -304,7 +303,7 @@ public final class ProviderChunkData implements ICapabilityChunkData {
   @Override
   public boolean canWork(int amount) {
     return ConfigTFC.Devices.SLUICE.maxWorkChunk == 0
-            || chunkWorkage <= ConfigTFC.Devices.SLUICE.maxWorkChunk + amount;
+           || chunkWorkage <= ConfigTFC.Devices.SLUICE.maxWorkChunk + amount;
   }
 
   /**
@@ -361,7 +360,8 @@ public final class ProviderChunkData implements ICapabilityChunkData {
   /**
    * Устанавливает данные генерации для мира.
    * <p>
-   * ТОЛЬКО ВНУТРЕННЕЕ ИСПОЛЬЗОВАНИЕ. Нет необходимости помечать как "dirty", так как это будет вызываться только при генерации мира, перед первым сохранением чанка.
+   * ТОЛЬКО ВНУТРЕННЕЕ ИСПОЛЬЗОВАНИЕ. Нет необходимости помечать как "dirty", так как это будет вызываться только при генерации мира, перед первым сохранением
+   * чанка.
    *
    * @param rockLayer1     Массив данных первого слоя камня.
    * @param rockLayer2     Массив данных второго слоя камня.
@@ -376,8 +376,8 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    * @param floraDiversity Разнообразие растительности.
    */
   public void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, int[] soilLayer1,
-          DataLayerClassic[] stabilityLayer, DataLayerClassic[] drainageLayer, int[] seaLevelOffset,
-          float rainfall, float regionalTemp, float avgTemp, float floraDensity, float floraDiversity) {
+                                DataLayerClassic[] stabilityLayer, DataLayerClassic[] drainageLayer, int[] seaLevelOffset,
+                                float rainfall, float regionalTemp, float avgTemp, float floraDensity, float floraDiversity) {
 
     this.initialized = true;
 
@@ -606,9 +606,9 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    */
   public List<Tree> getValidTrees() {
     return TFCRegistries.TREES.getValuesCollection().stream()
-            .filter(t -> t.isValidLocation(averageTemp, rainfall, floraDensity))
-            .sorted((s, t) -> (int) (t.getDominance() - s.getDominance()))
-            .collect(Collectors.toList());
+                              .filter(t -> t.isValidLocation(averageTemp, rainfall, floraDensity))
+                              .sorted((s, t) -> (int) (t.getDominance() - s.getDominance()))
+                              .collect(Collectors.toList());
   }
 
   /**
@@ -619,9 +619,9 @@ public final class ProviderChunkData implements ICapabilityChunkData {
   @Nullable
   public Tree getSparseGenTree() {
     return TFCRegistries.TREES.getValuesCollection().stream()
-            .filter(t -> t.isValidLocation(0.5f * averageTemp + 10f, 0.5f * rainfall + 120f, 0.5f))
-            .min((s, t) -> (int) (t.getDominance() - s.getDominance()))
-            .orElse(null);
+                              .filter(t -> t.isValidLocation(0.5f * averageTemp + 10f, 0.5f * rainfall + 120f, 0.5f))
+                              .min((s, t) -> (int) (t.getDominance() - s.getDominance()))
+                              .orElse(null);
   }
 
   @Override

@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.device.object.tile.TileCellarShelf;
 
 import net.minecraft.entity.player.InventoryPlayer;
 
-
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 public class ContainerCellarShelf extends BaseContainerTile<TileCellarShelf> {

@@ -19,7 +19,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.te.TETurntable;
 
@@ -68,7 +67,7 @@ public class BlockTurntable extends BlockNonCube {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-          float hitY, float hitZ) {
+                                  float hitY, float hitZ) {
     if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
       ItemStack held = player.getHeldItem(hand);
       if (player.isSneaking()) {

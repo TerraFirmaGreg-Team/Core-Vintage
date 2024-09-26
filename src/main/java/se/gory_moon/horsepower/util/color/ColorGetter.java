@@ -1,5 +1,7 @@
 package se.gory_moon.horsepower.util.color;
 
+import su.terrafirmagreg.data.lib.ColorThief;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -17,7 +19,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 
 import org.jetbrains.annotations.Nullable;
 
@@ -42,9 +43,7 @@ public final class ColorGetter {
   public static List<Color> getColors(ItemStack itemStack, int colorCount) {
     try {
       return unsafeGetColors(itemStack, colorCount);
-    } catch (RuntimeException ignored) {
-      return Collections.emptyList();
-    } catch (LinkageError ignored) {
+    } catch (RuntimeException | LinkageError ignored) {
       return Collections.emptyList();
     }
   }
@@ -102,9 +101,7 @@ public final class ColorGetter {
     IBlockState blockState;
     try {
       blockState = block.getStateFromMeta(meta);
-    } catch (RuntimeException ignored) {
-      blockState = block.getDefaultState();
-    } catch (LinkageError ignored) {
+    } catch (RuntimeException | LinkageError ignored) {
       blockState = block.getDefaultState();
     }
 

@@ -10,7 +10,6 @@ import net.minecraft.block.BlockFence;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-
 import lombok.Getter;
 
 @Getter
@@ -29,13 +28,13 @@ public class BlockWoodFenceLog extends BlockFence implements IWoodBlock {
     this.settings = Settings.of(Material.WOOD);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .sound(SoundType.WOOD)
-            .hardness(2.0F)
-            .resistance(15.0F)
-            .harvestLevel(ToolClasses.AXE, 0)
-            .oreDict("fence", "wood")
-            .oreDict("fence", "wood", type);
+      .registryKey(variant.getRegistryKey(type))
+      .sound(SoundType.WOOD)
+      .hardness(2.0F)
+      .resistance(15.0F)
+      .harvestLevel(ToolClasses.AXE, 0)
+      .oreDict("fence", "wood")
+      .oreDict("fence", "wood", type);
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
 

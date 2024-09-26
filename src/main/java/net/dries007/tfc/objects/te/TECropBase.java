@@ -3,7 +3,6 @@ package net.dries007.tfc.objects.te;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 
-
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
@@ -24,15 +23,15 @@ public class TECropBase extends TETickCounter implements ICalendarTickable, ITic
   }
 
   @Override
-  public void onCalendarUpdate(long playerTickDelta) {
-    BlockCropTFC block = (BlockCropTFC) getBlockType();
-    block.checkGrowth(world, pos, world.getBlockState(pos), world.rand);
-  }
-
-  @Override
   public void setLastUpdateTick(long tick) {
     lastTickCalChecked = tick;
     markDirty();
+  }
+
+  @Override
+  public void onCalendarUpdate(long playerTickDelta) {
+    BlockCropTFC block = (BlockCropTFC) getBlockType();
+    block.checkGrowth(world, pos, world.getBlockState(pos), world.rand);
   }
 
   @Override

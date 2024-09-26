@@ -10,6 +10,7 @@ import su.terrafirmagreg.api.registry.provider.IProviderModel;
 import su.terrafirmagreg.api.registry.provider.IProviderOreDict;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.ModelUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.data.lib.collection.RegistryList;
 import su.terrafirmagreg.data.lib.model.CustomModelLoader;
@@ -41,7 +42,6 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfessio
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.DataSerializerEntry;
-
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -220,9 +220,9 @@ public class Registry {
   public void onRegisterLootTableLoad(LootTableLoadEvent event) {
 
     this.lootTable.get(event.getName())
-            .forEach(builder -> event.getTable()
-                    .getPool(builder.getPool())
-                    .addEntry(builder.build()));
+                  .forEach(builder -> event.getTable()
+                                           .getPool(builder.getPool())
+                                           .addEntry(builder.build()));
   }
 
   public void onRegisterCommand(FMLServerStartingEvent event) {
@@ -243,6 +243,8 @@ public class Registry {
         provider.onRegisterOreDict();
       }
     });
+
+    OreDictUtils.init();
   }
 
   // --------------------------------------------------------------------------

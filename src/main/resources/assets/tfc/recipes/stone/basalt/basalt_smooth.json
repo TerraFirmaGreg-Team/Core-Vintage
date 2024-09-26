@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:raw/basalt"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.base.tile;
 
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +15,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.api.capability.inventory.ItemStackHandlerCallback;
 
@@ -25,8 +25,8 @@ import lombok.Getter;
 import java.util.function.BiFunction;
 
 /**
- * This is a helper class for TE's with a simple inventory that will respect automation To provide side based automation, you must expose a IItemHandler wrapper based
- * on the input side Without overriding the getCapability methods, this will not accept items from external automation
+ * This is a helper class for Tile's with a simple inventory that will respect automation To provide side based automation, you must expose a IItemHandler
+ * wrapper based on the input side Without overriding the getCapability methods, this will not accept items from external automation
  */
 @Getter
 public abstract class BaseTileInventory extends BaseTile implements ISlotCallback {
@@ -73,10 +73,9 @@ public abstract class BaseTileInventory extends BaseTile implements ISlotCallbac
   @Override
   @SuppressWarnings("unchecked")
   public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-    if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == null) {
-      return (T) inventory;
-    }
-    return super.getCapability(capability, facing);
+    return (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == null)
+           ? (T) inventory
+           : super.getCapability(capability, facing);
   }
 
   public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
@@ -89,6 +88,6 @@ public abstract class BaseTileInventory extends BaseTile implements ISlotCallbac
    * Delegated from {@link Container#canInteractWith(EntityPlayer)}
    */
   public boolean canInteractWith(EntityPlayer player) {
-    return this.world.getTileEntity(pos) == this && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+    return TileUtils.getTile(world, pos) == this && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
   }
 }

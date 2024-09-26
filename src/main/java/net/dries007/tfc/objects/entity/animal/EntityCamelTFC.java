@@ -36,7 +36,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -57,7 +56,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
 
   public EntityCamelTFC(World world) {
     this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-            EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.CAMEL.adulthood, ConfigTFC.Animals.CAMEL.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.CAMEL.adulthood, ConfigTFC.Animals.CAMEL.elder));
     this.setSize(0.9F, 2.0F);
   }
 
@@ -192,14 +191,14 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
     this.geneVariant = i;
     EntityCamelTFC father = (EntityCamelTFC) male;
     this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-            .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-            .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+                                      .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+                                                            .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
     this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-            .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-            .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+                                     .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+                                                           .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
     this.geneJump = (float) ((father.getEntityAttribute(JUMP_STRENGTH)
-            .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
-            .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+                                    .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
+                                                          .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
 
     this.geneStrength = this.rand.nextInt(Math.max(this.getStrength(), father.getStrength())) + 1;
     if (this.rand.nextFloat() < 0.03F) {
@@ -221,7 +220,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.DESERT || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
+        (biomeType == BiomeHelper.BiomeType.DESERT || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
       return ConfigTFC.Animals.CAMEL.rarity;
     }
     return 0;
@@ -310,7 +309,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
       // Only called if this animal is interacted with a spawn egg
       // Try to return to vanilla's default method a baby of this animal, as if bred normally
       return new EntityCamelTFC(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                (int) Calendar.PLAYER_TIME.getTotalDays());
     }
     return null;
   }
@@ -320,7 +319,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
     int numberOfChildren = ConfigTFC.Animals.CAMEL.babies; //one always
     for (int i = 0; i < numberOfChildren; i++) {
       EntityCamelTFC baby = new EntityCamelTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                               (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       if (this.geneHealth > 0) {
         baby.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(this.geneHealth);

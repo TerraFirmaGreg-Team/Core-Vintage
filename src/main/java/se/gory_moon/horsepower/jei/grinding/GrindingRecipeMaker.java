@@ -2,7 +2,6 @@ package se.gory_moon.horsepower.jei.grinding;
 
 import net.minecraft.item.ItemStack;
 
-
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.recipe.IStackHelper;
 import se.gory_moon.horsepower.recipes.GrindstoneRecipe;
@@ -20,8 +19,8 @@ public class GrindingRecipeMaker {
   public static List<GrindstoneRecipeWrapper> getGrindstoneRecipes(IJeiHelpers helpers, boolean hand) {
     IStackHelper stackHelper = helpers.getStackHelper();
     Collection<GrindstoneRecipe> grindingRecipes = hand ? HPRecipes.instance()
-            .getHandGrindstoneRecipes() : HPRecipes.instance()
-            .getGrindstoneRecipes();
+                                                                   .getHandGrindstoneRecipes() : HPRecipes.instance()
+                                                                                                          .getGrindstoneRecipes();
 
     List<GrindstoneRecipeWrapper> recipes = new ArrayList<>();
 
@@ -32,7 +31,7 @@ public class GrindingRecipeMaker {
 
       List<ItemStack> inputs = stackHelper.getSubtypes(input);
       GrindstoneRecipeWrapper grindstoneRecipeWrapper = new GrindstoneRecipeWrapper(inputs, output, secondary, recipe.getSecondaryChance(),
-              recipe.getTime());
+                                                                                    recipe.getTime());
       recipes.add(grindstoneRecipeWrapper);
     }
 

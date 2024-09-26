@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import com.buuz135.hotornot.network.PacketServerSettings;
 
 import java.util.ArrayList;
@@ -23,21 +22,21 @@ public final class HotLists {
 
   static {
     Arrays.stream(HotConfig.MANUAL_ENTRIES.itemRemovals)
-            .map(itemRemoval -> Item.REGISTRY.getObject(new ResourceLocation(itemRemoval)))
-            .filter(Objects::nonNull)
-            .forEach(EXEMPTION_LIST::add);
+          .map(itemRemoval -> Item.REGISTRY.getObject(new ResourceLocation(itemRemoval)))
+          .filter(Objects::nonNull)
+          .forEach(EXEMPTION_LIST::add);
     Arrays.stream(HotConfig.MANUAL_ENTRIES.hotItemAdditions)
-            .map(itemRegistryName -> Item.REGISTRY.getObject(new ResourceLocation(itemRegistryName)))
-            .filter(Objects::nonNull)
-            .forEach(HOT_LIST::add);
+          .map(itemRegistryName -> Item.REGISTRY.getObject(new ResourceLocation(itemRegistryName)))
+          .filter(Objects::nonNull)
+          .forEach(HOT_LIST::add);
     Arrays.stream(HotConfig.MANUAL_ENTRIES.coldItemAdditions)
-            .map(itemRegistryName -> Item.REGISTRY.getObject(new ResourceLocation(itemRegistryName)))
-            .filter(Objects::nonNull)
-            .forEach(COLD_LIST::add);
+          .map(itemRegistryName -> Item.REGISTRY.getObject(new ResourceLocation(itemRegistryName)))
+          .filter(Objects::nonNull)
+          .forEach(COLD_LIST::add);
     Arrays.stream(HotConfig.MANUAL_ENTRIES.gaseousItemAdditions)
-            .map(itemRegistryName -> Item.REGISTRY.getObject(new ResourceLocation(itemRegistryName)))
-            .filter(Objects::nonNull)
-            .forEach(GASEOUS_LIST::add);
+          .map(itemRegistryName -> Item.REGISTRY.getObject(new ResourceLocation(itemRegistryName)))
+          .filter(Objects::nonNull)
+          .forEach(GASEOUS_LIST::add);
   }
 
   /**
@@ -86,7 +85,7 @@ public final class HotLists {
    */
   public static PacketServerSettings getServerConfigPacket() {
     return new PacketServerSettings(HOT_LIST, COLD_LIST, GASEOUS_LIST, EXEMPTION_LIST, HotConfig.TEMPERATURE_VALUES.hotItemTemp,
-            HotConfig.TEMPERATURE_VALUES.hotFluidTemp, HotConfig.TEMPERATURE_VALUES.coldFluidTemp);
+                                    HotConfig.TEMPERATURE_VALUES.hotFluidTemp, HotConfig.TEMPERATURE_VALUES.coldFluidTemp);
   }
 
   /**
@@ -94,7 +93,7 @@ public final class HotLists {
    */
   @SideOnly(Side.CLIENT)
   public static void overRideListsTo(final List<Item> exemptionList, final List<Item> hotList, final List<Item> coldList,
-          final List<Item> gaseousList) {
+                                     final List<Item> gaseousList) {
     EXEMPTION_LIST.clear();
     EXEMPTION_LIST.addAll(exemptionList);
     HOT_LIST.clear();

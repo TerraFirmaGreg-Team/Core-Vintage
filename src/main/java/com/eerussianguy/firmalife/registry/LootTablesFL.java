@@ -6,7 +6,6 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
 import com.eerussianguy.firmalife.ConfigFL;
 
 import java.util.Arrays;
@@ -34,7 +33,7 @@ public class LootTablesFL {
   public static void onLootTableLoad(LootTableLoadEvent event) {
     if (Arrays.stream(ConfigFL.General.BALANCE.rennetLootTable).anyMatch(x -> x.equals(event.getName().getPath()))) {
       event.getTable()
-              .addPool(event.getLootTableManager().getLootTableFromLocation(RENNET_DROP).getPool("rennet_drop"));
+           .addPool(event.getLootTableManager().getLootTableFromLocation(RENNET_DROP).getPool("rennet_drop"));
     }
   }
 }

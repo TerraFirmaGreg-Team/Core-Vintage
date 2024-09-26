@@ -4,12 +4,10 @@
     {
       "type": "forge:ore_dict",
       "ore": "dyeRed"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "gemLapis"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "dyePink"
     }

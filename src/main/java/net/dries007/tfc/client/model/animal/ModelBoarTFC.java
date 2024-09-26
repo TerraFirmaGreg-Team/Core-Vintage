@@ -10,7 +10,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.entity.animal.EntityBoarTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -89,7 +88,7 @@ public class ModelBoarTFC extends ModelBase {
     tuskL1 = new ModelRenderer(this, 1, 31);
     tuskL1.setRotationPoint(1.3F, -0.8F, -2.8F);
     tuskL1.addBox(-0.4F, -0.8F, -0.5F, 1, 1, 1, 0.0F);
-    setRotateAngle(tuskL1, 0.24434609527920614F, 0.0F, 0.6981317007977318F);
+    setRotateAngle(tuskL1, 0.24434609527920614F, 0.0F, ((float)Math.PI * 2F / 9F));
     nose = new ModelRenderer(this, 7, 26);
     nose.setRotationPoint(0.0F, -0.4F, -4.3F);
     nose.addBox(-1.5F, -1.5F, -0.8F, 3, 3, 1, 0.0F);
@@ -150,7 +149,7 @@ public class ModelBoarTFC extends ModelBase {
     tuskR1.mirror = true;
     tuskR1.setRotationPoint(-1.3F, -0.8F, -2.8F);
     tuskR1.addBox(-0.5F, -0.8F, -0.5F, 1, 1, 1, 0.0F);
-    setRotateAngle(tuskR1, 0.24434609527920614F, 0.0F, -0.6981317007977318F);
+    setRotateAngle(tuskR1, 0.24434609527920614F, 0.0F, -((float)Math.PI * 2F / 9F));
     tuskL3 = new ModelRenderer(this, 1, 27);
     tuskL3.setRotationPoint(0.5F, 0.18F, -0.02F);
     tuskL3.addBox(-0.6F, -1.7F, -0.5F, 1, 1, 1, 0.0F);
@@ -190,7 +189,7 @@ public class ModelBoarTFC extends ModelBase {
     earR.mirror = true;
     earR.setRotationPoint(-1.2F, -2.7F, -2.0F);
     earR.addBox(-2.2F, -3.0F, -0.5F, 3, 3, 1, 0.0F);
-    setRotateAngle(earR, -0.22689280275926282F, 0.7853981633974483F, -0.7853981633974483F);
+    setRotateAngle(earR, -0.22689280275926282F, ((float)Math.PI / 4F), -((float)Math.PI / 4F));
     legRFrontHoof = new ModelRenderer(this, 24, 33);
     legRFrontHoof.setRotationPoint(0.0F, 4.6F, -0.1F);
     legRFrontHoof.addBox(-1.5F, 0.0F, -1.8F, 3, 2, 3, 0.0F);
@@ -210,7 +209,7 @@ public class ModelBoarTFC extends ModelBase {
     legRBackMiddle = new ModelRenderer(this, 41, 46);
     legRBackMiddle.setRotationPoint(-1.7F, 3.9F, -0.1F);
     legRBackMiddle.addBox(-1.5F, 0.0F, -2.0F, 3, 3, 4, 0.0F);
-    setRotateAngle(legRBackMiddle, 0.3141592653589793F, 0.0F, -0.08726646259971647F);
+    setRotateAngle(legRBackMiddle, ((float)Math.PI / 10F), 0.0F, -0.08726646259971647F);
     tailFluff = new ModelRenderer(this, 35, 20);
     tailFluff.setRotationPoint(0.0F, 3.8F, 0.0F);
     tailFluff.addBox(-1.1F, 0.0F, -1.0F, 2, 4, 2, 0.0F);
@@ -232,7 +231,7 @@ public class ModelBoarTFC extends ModelBase {
     head = new ModelRenderer(this, 1, 43);
     head.setRotationPoint(0.0F, -0.3F, -1.2F);
     head.addBox(-2.5F, -3.5F, -5.0F, 5, 6, 5, 0.0F);
-    setRotateAngle(head, 0.3141592653589793F, 0.0F, 0.0F);
+    setRotateAngle(head, ((float)Math.PI / 10F), 0.0F, 0.0F);
     body = new ModelRenderer(this, 58, 47);
     body.setRotationPoint(0.0F, 12.5F, -1.5F);
     body.addBox(-3.5F, -4.3F, -6.0F, 7, 10, 7, 0.0F);
@@ -249,7 +248,7 @@ public class ModelBoarTFC extends ModelBase {
     legLBackLower.mirror = true;
     legLBackLower.setRotationPoint(1.7F, 3.9F, -0.1F);
     legLBackLower.addBox(-1.5F, 0.0F, -2.0F, 3, 3, 4, 0.0F);
-    setRotateAngle(legLBackLower, 0.3141592653589793F, 0.0F, 0.08726646259971647F);
+    setRotateAngle(legLBackLower, ((float)Math.PI / 10F), 0.0F, 0.08726646259971647F);
     legRFrontBottom = new ModelRenderer(this, 25, 38);
     legRFrontBottom.setRotationPoint(-0.2F, 1.5F, 0.0F);
     legRFrontBottom.addBox(-1.0F, 0.0F, -1.5F, 2, 5, 3, 0.0F);
@@ -264,7 +263,7 @@ public class ModelBoarTFC extends ModelBase {
     earL = new ModelRenderer(this, 17, 29);
     earL.setRotationPoint(1.2F, -2.7F, -2.0F);
     earL.addBox(-0.8F, -3.0F, -0.5F, 3, 3, 1, 0.0F);
-    setRotateAngle(earL, -0.22689280275926282F, -0.7853981633974483F, 0.7853981633974483F);
+    setRotateAngle(earL, -0.22689280275926282F, -((float)Math.PI / 4F), ((float)Math.PI / 4F));
     mouthTop = new ModelRenderer(this, 2, 36);
     mouthTop.setRotationPoint(0.0F, -0.9F, -4.4F);
     mouthTop.addBox(-2.0F, -1.5F, -4.7F, 4, 2, 5, 0.0F);

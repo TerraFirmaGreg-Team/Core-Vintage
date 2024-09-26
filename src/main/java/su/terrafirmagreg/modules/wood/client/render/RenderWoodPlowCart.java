@@ -16,7 +16,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
@@ -31,7 +30,7 @@ public class RenderWoodPlowCart extends Render<EntityWoodPlowCart> {
 
   @Override
   public void doRender(EntityWoodPlowCart entity, double x, double y, double z, float entityYaw,
-          float partialTicks) {
+                       float partialTicks) {
     var woodType = entity.getWood();
     GlStateManager.pushMatrix();
     this.setupTranslation(x, y, z);
@@ -59,22 +58,22 @@ public class RenderWoodPlowCart extends Render<EntityWoodPlowCart> {
       double offsetSides = 0.1D * ((i + 1) & 1);
       if (entity.getPlowing()) {
         GlStateManager.translate(x + (1.45D + offsetSides) * MathHelper.sin(
-                        (-36.0F + entityYaw + i * 36.0F) * 0.017453292F), y + 0.10D,
-                z - (1.45D + offsetSides) * MathHelper.cos(
-                        (-36.0F + entityYaw + i * 36.0F) * 0.017453292F));
+                                   (-36.0F + entityYaw + i * 36.0F) * 0.017453292F), y + 0.10D,
+                                 z - (1.45D + offsetSides) * MathHelper.cos(
+                                   (-36.0F + entityYaw + i * 36.0F) * 0.017453292F));
         GlStateManager.rotate(120.0F - entityYaw - 30.0F * i, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(181.0F, 0.0F, 0.0F, 1.0F);
       } else {
         GlStateManager.translate(x + (1.9D + offsetSides) * MathHelper.sin(
-                        (-34.7F + entityYaw + i * 34.7F) * 0.017453292F), y + 0.90D,
-                z - (1.9D + offsetSides) * MathHelper.cos(
-                        (-34.7F + entityYaw + i * 34.7F) * 0.017453292F));
+                                   (-34.7F + entityYaw + i * 34.7F) * 0.017453292F), y + 0.90D,
+                                 z - (1.9D + offsetSides) * MathHelper.cos(
+                                   (-34.7F + entityYaw + i * 34.7F) * 0.017453292F));
         GlStateManager.rotate(120.0F - entityYaw - 30.0F * i, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(207.0F, 0.0F, 0.0F, 1.0F);
       }
       Minecraft.getMinecraft()
-              .getRenderItem()
-              .renderItem(entity.getTool(i), ItemCameraTransforms.TransformType.FIXED);
+               .getRenderItem()
+               .renderItem(entity.getTool(i), ItemCameraTransforms.TransformType.FIXED);
       GlStateManager.popMatrix();
     }
     super.doRender(entity, x, y, z, entityYaw, partialTicks);

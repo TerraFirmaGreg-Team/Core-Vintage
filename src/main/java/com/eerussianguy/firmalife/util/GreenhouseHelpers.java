@@ -7,11 +7,9 @@ import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseWall;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
 
 import net.dries007.tfc.objects.te.TEClimateStation;
 
@@ -105,10 +103,10 @@ public class GreenhouseHelpers {
       }
     }
     if (!(world.getBlockState(pos.offset(inward.getOpposite()).offset(wallFacing.getOpposite()))
-            .getBlock() instanceof BlockGreenhouseWall)
-            || !(world.getBlockState(pos.offset(inward, length).offset(wallFacing.getOpposite()))
-            .getBlock() instanceof BlockGreenhouseWall)
-            || length < 3) {
+               .getBlock() instanceof BlockGreenhouseWall)
+        || !(world.getBlockState(pos.offset(inward, length).offset(wallFacing.getOpposite()))
+                  .getBlock() instanceof BlockGreenhouseWall)
+        || length < 3) {
       return false;
     }
     checkPos = pos.up();
@@ -159,39 +157,38 @@ public class GreenhouseHelpers {
     }
   }
 
-  public static void setApproval(World world, BlockPos pos, IBlockState state, EnumFacing wallDir, boolean approvalStatus, boolean visual,
-          int tier) {
+  public static void setApproval(World world, BlockPos pos, IBlockState state, EnumFacing wallDir, boolean approvalStatus, boolean visual, int tier) {
     final EnumFacing facing = state.getValue(FACING);
     var tile = TileUtils.getTile(world, pos, TEClimateStation.class);
-    if (tile != null) {
-      for (int i = 0; i <= tile.forward; i++) {
-        for (int j = 0; j <= tile.arcs; j++) {
-          for (int k = 0; k <= tile.height; k++) {
-            BlockPos checkPos = pos.offset(facing, i).offset(wallDir, j).up(k);
-            TileEntity teFound = world.getTileEntity(checkPos);
-            if (teFound instanceof IGreenhouseReceiver) {
-              ((IGreenhouseReceiver) teFound).setValidity(approvalStatus, approvalStatus ? tier : 0);
-            } else {
-              IBlockState checkState = world.getBlockState(checkPos);
-              Block checkBlock = checkState.getBlock();
-              if (checkState.getBlock() instanceof IGreenhouseReceiverBlock) {
-                world.setBlockState(checkPos, ((IGreenhouseReceiverBlock) checkBlock).getStateFor(checkState, approvalStatus, tier));
-              }
+    if (tile == null) {return;}
+    for (int i = 0; i <= tile.forward; i++) {
+      for (int j = 0; j <= tile.arcs; j++) {
+        for (int k = 0; k <= tile.height; k++) {
+          BlockPos checkPos = pos.offset(facing, i).offset(wallDir, j).up(k);
+          var tileFound = TileUtils.getTile(world, checkPos);
+          if (tileFound instanceof IGreenhouseReceiver greenhouseReceiver) {
+            greenhouseReceiver.setValidity(approvalStatus, approvalStatus ? tier : 0);
+          } else {
+            IBlockState checkState = world.getBlockState(checkPos);
+            Block checkBlock = checkState.getBlock();
+            if (checkBlock instanceof IGreenhouseReceiverBlock greenhouseReceiverBlock) {
+              world.setBlockState(checkPos, greenhouseReceiverBlock.getStateFor(checkState, approvalStatus, tier));
             }
           }
         }
       }
-      if (visual && approvalStatus) {
-        if (facing.getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE) {
-          pos = pos.offset(facing.getOpposite());
-        }
-        if (wallDir.getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE) {
-          pos = pos.offset(wallDir.getOpposite());
-        }
-        BlockPos secondPos = pos.offset(facing, tile.forward).offset(wallDir, tile.arcs).up(tile.height);
-        HelpersFL.sendBoundingBoxPacket(world, pos, secondPos, 0.0F, 1.0F, 0.0F, false);
-      }
     }
+    if (visual && approvalStatus) {
+      if (facing.getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE) {
+        pos = pos.offset(facing.getOpposite());
+      }
+      if (wallDir.getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE) {
+        pos = pos.offset(wallDir.getOpposite());
+      }
+      BlockPos secondPos = pos.offset(facing, tile.forward).offset(wallDir, tile.arcs).up(tile.height);
+      HelpersFL.sendBoundingBoxPacket(world, pos, secondPos, 0.0F, 1.0F, 0.0F, false);
+    }
+
   }
 
   private static boolean isGoodArc(World world, BlockPos searchPos, EnumFacing inward, boolean visual) {
@@ -227,7 +224,7 @@ public class GreenhouseHelpers {
         searchState = world.getBlockState(searchPos);
         break;
       } else if (!validRoofBlock(world, searchPos, searchState, outward, false) && i > 1 &&
-              validRoofBlock(world, searchPos.down(), world.getBlockState(searchPos.down()), inward, false)) {
+                 validRoofBlock(world, searchPos.down(), world.getBlockState(searchPos.down()), inward, false)) {
         searchPos = searchPos.down();
         searchState = world.getBlockState(searchPos);
         roofSize = i;
@@ -261,19 +258,19 @@ public class GreenhouseHelpers {
 
   private static boolean validEndWallBlock(World world, BlockPos pos, IBlockState checkState, EnumFacing wallFacing, boolean visual) {
     return packet(world, pos,
-            (checkState.getBlock() instanceof BlockGreenhouseWall &&
-                    checkState.getValue(GLASS) && checkState.getValue(FACING) == wallFacing) ||
-                    checkState.getBlock() instanceof BlockGreenhouseDoor, visual);
+                  (checkState.getBlock() instanceof BlockGreenhouseWall &&
+                   checkState.getValue(GLASS) && checkState.getValue(FACING) == wallFacing) ||
+                  checkState.getBlock() instanceof BlockGreenhouseDoor, visual);
   }
 
   private static boolean validWallBlock(World world, BlockPos pos, IBlockState state, EnumFacing correctFace, boolean visual) {
     return packet(world, pos, state.getBlock() instanceof BlockGreenhouseWall && state.getValue(FACING) == correctFace && state.getValue(GLASS),
-            visual);
+                  visual);
   }
 
   private static boolean validRoofBlock(World world, BlockPos pos, IBlockState state, EnumFacing correctFace, boolean visual) {
     return packet(world, pos, state.getBlock() instanceof BlockGreenhouseRoof && state.getValue(FACING) == correctFace && state.getValue(GLASS) &&
-            !state.getValue(TOP), visual);
+                              !state.getValue(TOP), visual);
   }
 
   private static boolean packet(World world, BlockPos pos, boolean valid, boolean visual) {

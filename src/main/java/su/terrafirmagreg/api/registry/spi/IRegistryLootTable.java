@@ -12,11 +12,10 @@ import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraft.world.storage.loot.functions.SetCount;
 import net.minecraft.world.storage.loot.functions.SetMetadata;
 
-
 import java.util.List;
 
 public interface IRegistryLootTable
-        extends IRegistryBase {
+  extends IRegistryBase {
 
   /**
    * Registers a loot table with the loot table list. This needs to be called before a loot table can be used.
@@ -124,15 +123,15 @@ public interface IRegistryLootTable
    * @param name       The name of the entry being added.
    * @param pool       The name of the pool to add the entry to. This pool must already exist.
    * @param weight     The weight of the entry.
-   * @param quality    The quality of the entry. Quality is an optional value which modifies the weight of an entry based on the player's luck level. totalWeight =
-   *                   weight + (quality * luck)
+   * @param quality    The quality of the entry. Quality is an optional value which modifies the weight of an entry based on the player's luck level.
+   *                   totalWeight = weight + (quality * luck)
    * @param item       The item to add.
    * @param conditions A list of loot conditions.
    * @param functions  A list of loot functions.
    * @return A builder object. It can be used to fine tune the loot entry.
    */
   default LootBuilder loot(ResourceLocation location, String name, String pool, int weight, int quality, Item item, List<LootCondition> conditions,
-          List<LootFunction> functions) {
+                           List<LootFunction> functions) {
 
     return this.loot(location, new LootBuilder(this.getModID() + ":" + name, pool, weight, quality, item, conditions, functions));
   }

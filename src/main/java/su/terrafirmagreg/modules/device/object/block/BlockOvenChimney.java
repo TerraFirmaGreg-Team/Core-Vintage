@@ -16,7 +16,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-
 import static su.terrafirmagreg.data.MathConstants.RNG;
 import static su.terrafirmagreg.data.Properties.CURED;
 
@@ -24,25 +23,25 @@ import static su.terrafirmagreg.data.Properties.CURED;
 public class BlockOvenChimney extends BaseBlock {
 
   public static final AxisAlignedBB CHIMNEY_BB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D,
-          0.25D)
-          .union(new AxisAlignedBB(0.0D, 0.0D, 0.75D, 1.0D, 1.0D, 1.0D)
-                  .union(new AxisAlignedBB(0.0D, 0.0D, 0.25D, 0.25D, 1.0D, 0.75D))
-                  .union(new AxisAlignedBB(0.75D, 0.0D, 0.25D, 1.0D, 1.0D, 0.75D)));
+                                                                   0.25D)
+    .union(new AxisAlignedBB(0.0D, 0.0D, 0.75D, 1.0D, 1.0D, 1.0D)
+             .union(new AxisAlignedBB(0.0D, 0.0D, 0.25D, 0.25D, 1.0D, 0.75D))
+             .union(new AxisAlignedBB(0.75D, 0.0D, 0.25D, 1.0D, 1.0D, 0.75D)));
 
   public BlockOvenChimney() {
     super(Settings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
 
     getSettings()
-            .registryKey("device/oven_chimney")
-            .hardness(2.0f)
-            .resistance(3.0f)
-            .nonOpaque()
-            .size(Size.NORMAL)
-            .weight(Weight.HEAVY)
-            .lightValue(0);
+      .registryKey("device/oven_chimney")
+      .hardness(2.0f)
+      .resistance(3.0f)
+      .nonOpaque()
+      .size(Size.NORMAL)
+      .weight(Weight.HEAVY)
+      .lightValue(0);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(CURED, false));
+                              .withProperty(CURED, false));
   }
 
   @Override
@@ -72,7 +71,7 @@ public class BlockOvenChimney extends BaseBlock {
 
   @Override
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
-          IBlockState state, int fortune) {
+                       IBlockState state, int fortune) {
     if (state.getValue(CURED)) {
       drops.add(new ItemStack(Items.BRICK, 3 + RNG.nextInt(3)));
     } else {

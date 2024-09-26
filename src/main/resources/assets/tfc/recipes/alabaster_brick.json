@@ -4,8 +4,7 @@
     {
       "type": "forge:ore_dict",
       "ore": "gemGypsum"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

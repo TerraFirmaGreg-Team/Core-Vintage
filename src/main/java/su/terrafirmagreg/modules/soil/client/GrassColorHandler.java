@@ -9,7 +9,6 @@ import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
-
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -20,7 +19,7 @@ import java.util.Random;
 public class GrassColorHandler {
 
   public static NoiseGeneratorPerlin noiseGenerator = new NoiseGeneratorPerlin(
-          new Random("NOISE_GRASS".hashCode()), 2);
+    new Random("NOISE_GRASS".hashCode()), 2);
   public static Color[] monthlyColors = new Color[12];
 
   static {
@@ -61,8 +60,7 @@ public class GrassColorHandler {
   }
 
   // Extended grass coloring
-  public static int computeGrassColor(IBlockState state, IBlockAccess worldIn, BlockPos pos,
-          int tintIndex) {
+  public static int computeGrassColor(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
     if (pos != null) {
       Color originalColor = new Color(computeInitialGrassColor(state, worldIn, pos, tintIndex));
       Color seasonalColor = getSeasonalColor();
@@ -78,7 +76,7 @@ public class GrassColorHandler {
         double darkness = ConfigSoil.MISC.noiseDarkness;
         double value = noiseGenerator.getValue(pos.getX() / scale, pos.getZ() / scale);
         value =
-                curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
+          curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
         finalColor = blendByWeight(Color.BLACK, finalColor, value);
       }
 
@@ -90,7 +88,7 @@ public class GrassColorHandler {
 
   // Default TFC grass coloring
   private static int computeInitialGrassColor(IBlockState state, IBlockAccess worldIn, BlockPos pos,
-          int tintIndex) {
+                                              int tintIndex) {
     if (pos != null) {
       double temp = MathHelper.clamp((Climate.getMonthlyTemp(pos) + 30) / 60, 0, 1);
       double rain = MathHelper.clamp((Climate.getRainfall(pos) - 50) / 400, 0, 1);
@@ -113,12 +111,12 @@ public class GrassColorHandler {
     amount = MathHelper.clamp((amount - start) / (end - start), 0, 1);
 
     return MathHelper.clamp(
-            0.5 + 0.5 * MathHelper.sin(MathHelper.cos((float) (Math.PI * Math.tan(90 * amount)))) *
-                    MathHelper.cos(MathHelper.sin((float) Math.tan(amount))), 0, 1);
+      0.5 + 0.5 * MathHelper.sin(MathHelper.cos((float) (Math.PI * Math.tan(90 * amount)))) *
+            MathHelper.cos(MathHelper.sin((float) Math.tan(amount))), 0, 1);
   }
 
   public static double remap(double value, double currentLow, double currentHigh, double newLow,
-          double newHigh) {
+                             double newHigh) {
     return newLow + (value - currentLow) * (newHigh - newLow) / (currentHigh - currentLow);
   }
 

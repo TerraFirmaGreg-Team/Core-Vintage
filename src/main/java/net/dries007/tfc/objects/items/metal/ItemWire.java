@@ -9,7 +9,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.types.Metal;
 
 import org.jetbrains.annotations.NotNull;
@@ -48,8 +47,8 @@ public class ItemWire extends ItemTechMetal {
     if (stack.getMetadata() > 0) {
       //noinspection ConstantConditions
       String metalName = (new TextComponentTranslation("tfc.types.metal." + metal.getRegistryName()
-              .getPath()
-              .toLowerCase())).getFormattedText();
+                                                                                 .getPath()
+                                                                                 .toLowerCase())).getFormattedText();
       return (new TextComponentTranslation("item.tfctech.metalitem.wire.unfinished", metalName)).getFormattedText();
     }
     return super.getItemStackDisplayName(stack);

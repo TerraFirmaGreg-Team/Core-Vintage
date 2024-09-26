@@ -38,7 +38,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import com.google.common.collect.ImmutableMap;
 
 import org.jetbrains.annotations.Nullable;
@@ -53,33 +52,33 @@ import static su.terrafirmagreg.data.Properties.LIT;
 public class BlockPitKiln extends BaseBlock implements IProviderTile {
 
   private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[]{
-          PLACED_ITEM_AABB,
-          new AxisAlignedBB(0, 0, 0, 1, 0.0625, 1),
-          new AxisAlignedBB(0, 0, 0, 1, 0.125, 1),
-          new AxisAlignedBB(0, 0, 0, 1, 0.1875, 1),
-          new AxisAlignedBB(0, 0, 0, 1, 0.25, 1),
-          new AxisAlignedBB(0, 0, 0, 1, 0.3125, 1),
-          new AxisAlignedBB(0, 0, 0, 1, 0.375, 1),
-          new AxisAlignedBB(0, 0, 0, 1, 0.4375, 1),
-          new AxisAlignedBB(0, 0, 0, 1, 0.5, 1),
-          new AxisAlignedBB(0, 0, 0, 1, 0.75, 1),
-          FULL_BLOCK_AABB
+    PLACED_ITEM_AABB,
+    new AxisAlignedBB(0, 0, 0, 1, 0.0625, 1),
+    new AxisAlignedBB(0, 0, 0, 1, 0.125, 1),
+    new AxisAlignedBB(0, 0, 0, 1, 0.1875, 1),
+    new AxisAlignedBB(0, 0, 0, 1, 0.25, 1),
+    new AxisAlignedBB(0, 0, 0, 1, 0.3125, 1),
+    new AxisAlignedBB(0, 0, 0, 1, 0.375, 1),
+    new AxisAlignedBB(0, 0, 0, 1, 0.4375, 1),
+    new AxisAlignedBB(0, 0, 0, 1, 0.5, 1),
+    new AxisAlignedBB(0, 0, 0, 1, 0.75, 1),
+    FULL_BLOCK_AABB
   };
 
   public BlockPitKiln() {
     super(Settings.of(Material.CIRCUITS));
 
     getSettings()
-            .registryKey("device/pit_kiln")
-            .nonFullCube()
-            .noItemBlock()
-            .nonOpaque()
-            .hardness(0.5f);
+      .registryKey("device/pit_kiln")
+      .nonFullCube()
+      .noItemBlock()
+      .nonOpaque()
+      .hardness(0.5f);
 
     setHarvestLevel("axe", 0);
     setDefaultState(blockState.getBaseState()
-            .withProperty(FULL, false)
-            .withProperty(LIT, false));
+                              .withProperty(FULL, false)
+                              .withProperty(LIT, false));
   }
 
   @Override
@@ -119,7 +118,7 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile {
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     var tile = TileUtils.getTile(worldIn, pos, TilePitKiln.class);
     if (tile != null) {
       if (blockIn == Blocks.FIRE) {
@@ -151,7 +150,7 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     var tile = TileUtils.getTile(worldIn, pos, TilePitKiln.class);
     if (tile != null) {
       // Skip interacting if using a fire starter (wait for fire in #neighborChanged)
@@ -186,7 +185,7 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile {
   @Override
   public int getFireSpreadSpeed(IBlockAccess world, BlockPos pos, EnumFacing face) {
     return world.getBlockState(pos).getActualState(world, pos).getValue(LIT) ? 120
-            : 0; // Twice as much as the highest vanilla level (60)
+                                                                             : 0; // Twice as much as the highest vanilla level (60)
   }
 
   @Override
@@ -196,7 +195,7 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile {
 
   @Override
   public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition,
-          IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles) {
+                                   IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles) {
     return true;
   }
 
@@ -208,7 +207,7 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile {
   @SideOnly(Side.CLIENT)
   @Override
   public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target,
-          ParticleManager manager) {
+                               ParticleManager manager) {
     return true;
   }
 
@@ -221,9 +220,9 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile {
   @Nullable
   @Override
   public PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos,
-          @Nullable EntityLiving entity) {
+                                        @Nullable EntityLiving entity) {
     return state.getValue(LIT) && (entity == null || !entity.isImmuneToFire())
-            ? net.minecraft.pathfinding.PathNodeType.DAMAGE_FIRE : null;
+           ? net.minecraft.pathfinding.PathNodeType.DAMAGE_FIRE : null;
   }
 
   @Override
@@ -244,6 +243,6 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile {
   @Override
   public IStateMapper getStateMapper() {
     return blockIn -> ImmutableMap.of(this.getDefaultState(),
-            new ModelResourceLocation(ModUtils.resource("empty").toString()));
+                                      new ModelResourceLocation(ModUtils.resource("empty").toString()));
   }
 }

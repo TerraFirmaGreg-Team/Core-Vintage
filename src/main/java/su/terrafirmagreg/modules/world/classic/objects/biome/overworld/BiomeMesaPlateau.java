@@ -8,11 +8,11 @@ public class BiomeMesaPlateau extends BaseBiomeMesa {
 
   public BiomeMesaPlateau() {
     super(false, false, new Settings("Mesa Plateau")
-            .guiColour(0x470285)
-            .baseHeight(-0.6F)
-            .heightVariation(-2.63F)
-            .spawnBiome()
-            .enableWorldGen());
+      .guiColour(0x470285)
+      .baseHeight(-0.6F)
+      .heightVariation(-2.63F)
+      .spawnBiome()
+      .enableWorldGen());
   }
 
   @Override
@@ -24,11 +24,11 @@ public class BiomeMesaPlateau extends BaseBiomeMesa {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.MESA,
-            BiomeDictionary.Type.HOT,
-            BiomeDictionary.Type.SANDY,
-            BiomeDictionary.Type.DRY,
-            BiomeDictionary.Type.LUSH
+      BiomeDictionary.Type.MESA,
+      BiomeDictionary.Type.HOT,
+      BiomeDictionary.Type.SANDY,
+      BiomeDictionary.Type.DRY,
+      BiomeDictionary.Type.LUSH
     };
   }
 }

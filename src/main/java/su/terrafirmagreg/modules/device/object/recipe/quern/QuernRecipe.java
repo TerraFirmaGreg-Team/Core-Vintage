@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.device.object.recipe.quern;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 

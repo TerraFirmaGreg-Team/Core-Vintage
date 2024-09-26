@@ -9,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class ItemBlockTFC extends ItemBlock implements ICapabilitySize {

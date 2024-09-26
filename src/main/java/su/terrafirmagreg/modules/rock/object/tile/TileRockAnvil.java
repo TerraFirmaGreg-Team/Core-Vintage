@@ -15,6 +15,7 @@ import su.terrafirmagreg.modules.metal.objects.recipe.anvil.AnvilRecipeManager;
 import su.terrafirmagreg.modules.metal.objects.recipe.anvil.IAnvilRecipe;
 import su.terrafirmagreg.modules.rock.client.gui.GuiRockAnvil;
 import su.terrafirmagreg.modules.rock.object.container.ContainerRockAnvil;
+import su.terrafirmagreg.modules.rock.object.inventory.InventoryRockAnvil;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,13 +31,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.capability.inventory.ISlotCallback;
-import net.dries007.tfc.api.capability.inventory.ItemStackHandlerCallback;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
@@ -54,9 +52,8 @@ import java.util.List;
 
 // TODO делать отдельный класс для каменной наковали, без интерфейса
 
-public class TileRockAnvil
-        extends BaseTileInventory
-        implements IProviderContainer<ContainerRockAnvil, GuiRockAnvil> {
+public class TileRockAnvil extends BaseTileInventory
+  implements IProviderContainer<ContainerRockAnvil, GuiRockAnvil> {
 
   public static final int WORK_MAX = 145;
   public static final int SLOT_INPUT_1 = 0;
@@ -71,7 +68,7 @@ public class TileRockAnvil
   private int workingTarget = 0;
 
   public TileRockAnvil() {
-    super(AnvilItemHandler::new, 4);
+    super(InventoryRockAnvil::new, 4);
 
     this.steps = new ForgeSteps();
     this.recipe = null;
@@ -230,7 +227,7 @@ public class TileRockAnvil
         int workMin = workingTarget - ConfigTFC.General.DIFFICULTY.acceptableAnvilRange;
         int workMax = workingTarget + ConfigTFC.General.DIFFICULTY.acceptableAnvilRange;
         if ((workingProgress <= workMax && workingProgress >= workMin) && completedRecipe.matches(
-                steps)) {
+          steps)) {
           //Consume input
           inventory.setStackInSlot(SLOT_INPUT_1, ItemStack.EMPTY);
 
@@ -269,7 +266,7 @@ public class TileRockAnvil
           IAnvilRecipe newRecipe = null;
           if (inventory.getStackInSlot(SLOT_INPUT_2).isEmpty()) {
             List<IAnvilRecipe> recipes = AnvilRecipeManager.getAllFor(
-                    inventory.getStackInSlot(SLOT_INPUT_1));
+              inventory.getStackInSlot(SLOT_INPUT_1));
             if (recipes.size() == 1) {
               newRecipe = recipes.get(0);
             }
@@ -279,7 +276,7 @@ public class TileRockAnvil
           // Consume input, produce no output
           inventory.setStackInSlot(SLOT_INPUT_1, ItemStack.EMPTY);
           world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0f,
-                  1.0f);
+                          1.0f);
         }
       }
       markForSync();
@@ -294,7 +291,7 @@ public class TileRockAnvil
    */
   public boolean attemptWelding(EntityPlayer player) {
     ItemStack input1 = inventory.getStackInSlot(SLOT_INPUT_1), input2 = inventory.getStackInSlot(
-            SLOT_INPUT_2);
+      SLOT_INPUT_2);
     if (input1.isEmpty() || input2.isEmpty()) {
       // No message as this will happen whenever the player clicks the anvil with a hammer
       return false;
@@ -307,10 +304,10 @@ public class TileRockAnvil
       if (fluxStack.isEmpty()) {
         // No flux
         ModuleMetal.getPacketService()
-                .sendTo(
-                        SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
-                                ModUtils.localize("tooltip", "metal.anvil_no_flux")),
-                        (EntityPlayerMP) player);
+                   .sendTo(
+                     SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
+                                                            ModUtils.localize("tooltip", "metal.anvil_no_flux")),
+                     (EntityPlayerMP) player);
         return false;
       }
 
@@ -320,15 +317,15 @@ public class TileRockAnvil
       if (cap1 == null || cap2 == null || !cap1.isWeldable() || !cap2.isWeldable()) {
         if (cap1 instanceof ICapabilityHeat && cap2 instanceof ICapabilityHeat) {
           ModuleMetal.getPacketService()
-                  .sendTo(SCPacketSimpleMessage.translateMessage(
-                                  SCPacketSimpleMessage.MessageCategory.ANVIL,
-                                  ModUtils.localize("tooltip", "metal.anvil_too_cold")),
-                          (EntityPlayerMP) player);
+                     .sendTo(SCPacketSimpleMessage.translateMessage(
+                               SCPacketSimpleMessage.MessageCategory.ANVIL,
+                               ModUtils.localize("tooltip", "metal.anvil_too_cold")),
+                             (EntityPlayerMP) player);
         } else {
           ModuleMetal.getPacketService().sendTo(
-                  SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
-                          ModUtils.localize("tooltip", "metal.anvil_not_weldable")),
-                  (EntityPlayerMP) player);
+            SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
+                                                   ModUtils.localize("tooltip", "metal.anvil_not_weldable")),
+            (EntityPlayerMP) player);
         }
         return false;
       }
@@ -357,8 +354,8 @@ public class TileRockAnvil
 
     // For when there is both inputs but no recipe that matches
     ModuleMetal.getPacketService().sendTo(
-            SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
-                    ModUtils.localize("tooltip", "anvil_not_weldable")), (EntityPlayerMP) player);
+      SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
+                                             ModUtils.localize("tooltip", "anvil_not_weldable")), (EntityPlayerMP) player);
     return false;
   }
 
@@ -372,27 +369,6 @@ public class TileRockAnvil
     //                    .getTier();
     //        }
     return Metal.Tier.TIER_0;
-  }
-
-  private static class AnvilItemHandler extends ItemStackHandlerCallback {
-
-    public AnvilItemHandler(ISlotCallback callback, int slots) {
-      super(callback, slots);
-    }
-
-    @Override
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-      ItemStack result = super.extractItem(slot, amount, simulate);
-      if (slot == SLOT_INPUT_1 || slot == SLOT_INPUT_2) {
-        IForgeable cap = result.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-        if (cap != null && cap.getRecipeName() != null && (!cap.getSteps().hasWork()
-                || cap.getWork() == 0)) {
-          cap.reset();
-        }
-
-      }
-      return result;
-    }
   }
 
   @Override

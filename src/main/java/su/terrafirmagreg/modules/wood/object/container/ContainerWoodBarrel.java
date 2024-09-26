@@ -11,7 +11,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.objects.container.IButtonHandler;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
@@ -21,7 +20,7 @@ public class ContainerWoodBarrel extends BaseContainerTile<TileWoodBarrel> imple
 
   public ContainerWoodBarrel(InventoryPlayer playerInv, TileWoodBarrel teWoodBarrel) {
     super(playerInv, teWoodBarrel);
-    
+
   }
 
   @Nullable
@@ -40,13 +39,13 @@ public class ContainerWoodBarrel extends BaseContainerTile<TileWoodBarrel> imple
   @Override
   protected void addContainerSlots() {
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-            null);
+                                                null);
 
     if (inventory != null) {
       addSlotToContainer(
-              new SlotCallback(inventory, TileWoodBarrel.SLOT_FLUID_CONTAINER_IN, 35, 20, tile));
+        new SlotCallback(inventory, TileWoodBarrel.SLOT_FLUID_CONTAINER_IN, 35, 20, tile));
       addSlotToContainer(
-              new SlotCallback(inventory, TileWoodBarrel.SLOT_FLUID_CONTAINER_OUT, 35, 54, tile));
+        new SlotCallback(inventory, TileWoodBarrel.SLOT_FLUID_CONTAINER_OUT, 35, 54, tile));
       addSlotToContainer(new SlotCallback(inventory, TileWoodBarrel.SLOT_ITEM, 89, 37, tile));
     }
   }

@@ -4,11 +4,10 @@ import su.terrafirmagreg.api.base.item.spi.IItemSettings;
 
 import net.minecraft.item.Item;
 
-
 import java.util.Collection;
 
 public interface IRegistryItem
-        extends IRegistryBase {
+  extends IRegistryBase {
 
   default <T extends Item> void items(Collection<T> collection) {
     for (var item : collection) {
@@ -29,7 +28,7 @@ public interface IRegistryItem
 
     item.setRegistryName(this.getModID(), name);
     item.setTranslationKey(
-            this.getModID() + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
+      this.getModID() + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
     if (this.getTab() != null) {
       item.setCreativeTab(this.getTab());
     }

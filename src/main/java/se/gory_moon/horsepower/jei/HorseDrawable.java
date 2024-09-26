@@ -2,7 +2,6 @@ package se.gory_moon.horsepower.jei;
 
 import net.minecraft.client.Minecraft;
 
-
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import mezz.jei.api.IGuiHelper;
@@ -31,7 +30,7 @@ public class HorseDrawable implements IDrawableAnimated {
   private int y;
 
   public HorseDrawable(IGuiHelper guiHelper, IDrawableStatic horse1, IDrawableStatic horse2, IDrawableStatic horse3, IDrawableStatic horse4,
-          ITickTimer animTimer, ITickTimer pathTimer, boolean grinding, String hovering) {
+                       ITickTimer animTimer, ITickTimer pathTimer, boolean grinding, String hovering) {
     this.horse1 = horse1;
     this.horse2 = horse2;
     this.horse3 = horse3;
@@ -114,7 +113,7 @@ public class HorseDrawable implements IDrawableAnimated {
   public List<String> getTooltipStrings(int mouseX, int mouseY) {
     setXYPos();
     return isHovering(mouseX, mouseY) && hovering != null ? Lists.newArrayList(Splitter.on('\n')
-            .split(hovering)) : Collections.emptyList();
+                                                                                       .split(hovering)) : Collections.emptyList();
   }
 
   private boolean isHovering(int mx, int my) {

@@ -15,7 +15,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.network.PacketCapabilityContainerUpdate;
@@ -27,15 +26,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This is a central synchronization manager for item stack capability data that needs to be synced in containers (inventories) of all kinds Since capability data is
- * not synced by default, but a lot of our applications require it to be client visible, we do two things: - On player tick, we perform a second pass of
- * {@link Container#detectAndSendChanges()}, in order to detect and send updates for cases where ONLY capabilities have changed. These are not detected by vanilla's
- * implementation of this method and as a result no packets are sent - This listener itself is used to sync capability data WITHOUT overwriting the client side item
- * stack. It uses {@link INBTSerializable} capabilities and calls deserialization on the client to accomplish this. This avoids issues with packets arriving out of
- * order resulting in perceived "flickering" on the client.
+ * This is a central synchronization manager for item stack capability data that needs to be synced in containers (inventories) of all kinds Since capability
+ * data is not synced by default, but a lot of our applications require it to be client visible, we do two things: - On player tick, we perform a second pass of
+ * {@link Container#detectAndSendChanges()}, in order to detect and send updates for cases where ONLY capabilities have changed. These are not detected by
+ * vanilla's implementation of this method and as a result no packets are sent - This listener itself is used to sync capability data WITHOUT overwriting the
+ * client side item stack. It uses {@link INBTSerializable} capabilities and calls deserialization on the client to accomplish this. This avoids issues with
+ * packets arriving out of order resulting in perceived "flickering" on the client.
  * <p>
- * To register a capability for synchronization, add it to {@link CapabilityContainerListener#SYNC_CAPS} This will automatically sync any containers it can, as it is
- * added during various spots from {@link net.dries007.tfc.CommonEventHandler}
+ * To register a capability for synchronization, add it to {@link CapabilityContainerListener#SYNC_CAPS} This will automatically sync any containers it can, as
+ * it is added during various spots from {@link net.dries007.tfc.CommonEventHandler}
  */
 
 public class CapabilityContainerListener implements IContainerListener {
@@ -59,6 +58,10 @@ public class CapabilityContainerListener implements IContainerListener {
 
   private final EntityPlayerMP player;
 
+  public CapabilityContainerListener(EntityPlayerMP player) {
+    this.player = player;
+  }
+
   /**
    * Adds the listener for a given player to the current container Executes server side
    */
@@ -71,10 +74,6 @@ public class CapabilityContainerListener implements IContainerListener {
       listener.sendAllContents(container, container.getInventory());
       container.detectAndSendChanges();
     }
-  }
-
-  public CapabilityContainerListener(EntityPlayerMP player) {
-    this.player = player;
   }
 
   /**
@@ -166,6 +165,15 @@ public class CapabilityContainerListener implements IContainerListener {
     });
   }
 
+  public static boolean shouldSyncItem(ItemStack stack) {
+    for (Capability<?> capability : SYNC_CAPS.values()) {
+      if (stack.hasCapability(capability, null)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * This is called to send the entire container. It does not update every tick
    */
@@ -188,18 +196,9 @@ public class CapabilityContainerListener implements IContainerListener {
     }
   }
 
-  public static boolean shouldSyncItem(ItemStack stack) {
-    for (Capability<?> capability : SYNC_CAPS.values()) {
-      if (stack.hasCapability(capability, null)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   /**
-   * This is called to send a single slot contents. It uses a modified packet factory method to accept a capability instance This only gets called when a slot changes
-   * (only non-capability changes count)
+   * This is called to send a single slot contents. It uses a modified packet factory method to accept a capability instance This only gets called when a slot
+   * changes (only non-capability changes count)
    */
   @Override
   public void sendSlotContents(Container container, int slotIndex, ItemStack stack) {

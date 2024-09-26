@@ -8,8 +8,7 @@
       "apply": {
         "model": "tfc:plants/jungle_vine_cross_0"
       }
-    },
-    {
+    }, {
       "when": {
         "down": "false",
         "up": "true"
@@ -17,16 +16,14 @@
       "apply": {
         "model": "tfc:plants/jungle_vine_cross_1"
       }
-    },
-    {
+    }, {
       "when": {
         "down": "true"
       },
       "apply": {
         "model": "tfc:plants/jungle_vine_0"
       }
-    },
-    {
+    }, {
       "when": {
         "bottom": "false",
         "east": "true"
@@ -36,8 +33,7 @@
         "x": 270,
         "y": 90
       }
-    },
-    {
+    }, {
       "when": {
         "bottom": "false",
         "north": "true"
@@ -46,8 +42,7 @@
         "model": "tfc:plants/jungle_vine_0",
         "x": 270
       }
-    },
-    {
+    }, {
       "when": {
         "bottom": "false",
         "south": "true"
@@ -57,8 +52,7 @@
         "x": 270,
         "y": 180
       }
-    },
-    {
+    }, {
       "when": {
         "up": "true"
       },
@@ -66,8 +60,7 @@
         "model": "tfc:plants/jungle_vine_0",
         "x": 180
       }
-    },
-    {
+    }, {
       "when": {
         "bottom": "false",
         "west": "true"
@@ -77,8 +70,7 @@
         "x": 270,
         "y": 270
       }
-    },
-    {
+    }, {
       "when": {
         "bottom": "true",
         "east": "true"
@@ -88,8 +80,7 @@
         "x": 270,
         "y": 90
       }
-    },
-    {
+    }, {
       "when": {
         "bottom": "true",
         "north": "true"
@@ -98,8 +89,7 @@
         "model": "tfc:plants/jungle_vine_1",
         "x": 270
       }
-    },
-    {
+    }, {
       "when": {
         "bottom": "true",
         "south": "true"
@@ -109,8 +99,7 @@
         "x": 270,
         "y": 180
       }
-    },
-    {
+    }, {
       "when": {
         "bottom": "true",
         "west": "true"

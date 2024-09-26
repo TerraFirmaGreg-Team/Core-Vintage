@@ -13,7 +13,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 
-
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -54,7 +53,7 @@ public abstract class GuiContainerKnapping extends BaseGuiContainer {
 
   @Override
   protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton,
-          long timeSinceLastClick) {
+                                long timeSinceLastClick) {
     if (clickedMouseButton == 0) {
       for (GuiButton button : this.buttonList) {
         if (button instanceof GuiButtonKnapping && button.mousePressed(mc, mouseX, mouseY)) {
@@ -70,7 +69,7 @@ public abstract class GuiContainerKnapping extends BaseGuiContainer {
           actionPerformed(event.getButton());
 
           MinecraftForge.EVENT_BUS.post(
-                  new ActionPerformedEvent.Post(this, event.getButton(), buttonList));
+            new ActionPerformedEvent.Post(this, event.getButton(), buttonList));
         }
       }
     }
@@ -103,9 +102,9 @@ public abstract class GuiContainerKnapping extends BaseGuiContainer {
     if (type == KnappingTypes.CLAY || type == KnappingTypes.FIRE_CLAY) {
       GlStateManager.color(1, 1, 1, 1);
       mc.getTextureManager()
-              .bindTexture(type == KnappingTypes.CLAY
-                      ? TFCGuiHandler.CLAY_DISABLED_TEXTURE
-                      : TFCGuiHandler.FIRE_CLAY_DISABLED_TEXTURE);
+        .bindTexture(type == KnappingTypes.CLAY
+                     ? TFCGuiHandler.CLAY_DISABLED_TEXTURE
+                     : TFCGuiHandler.FIRE_CLAY_DISABLED_TEXTURE);
       for (GuiButton button : buttonList) {
         if (!button.visible) {
           Gui.drawModalRectWithCustomSizedTexture(button.x, button.y, 0, 0, 16, 16, 16, 16);

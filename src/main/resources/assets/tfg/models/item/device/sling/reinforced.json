@@ -9,44 +9,37 @@
         "spinning": 1
       },
       "model": "tfg:item/device/sling/sub/1"
-    },
-    {
+    }, {
       "predicate": {
         "spinning": 2
       },
       "model": "tfg:item/device/sling/sub/2"
-    },
-    {
+    }, {
       "predicate": {
         "spinning": 3
       },
       "model": "tfg:item/device/sling/sub/3"
-    },
-    {
+    }, {
       "predicate": {
         "spinning": 4
       },
       "model": "tfg:item/device/sling/sub/4"
-    },
-    {
+    }, {
       "predicate": {
         "spinning": 5
       },
       "model": "tfg:item/device/sling/sub/5"
-    },
-    {
+    }, {
       "predicate": {
         "spinning": 6
       },
       "model": "tfg:item/device/sling/sub/6"
-    },
-    {
+    }, {
       "predicate": {
         "spinning": 7
       },
       "model": "tfg:item/device/sling/sub/7"
-    },
-    {
+    }, {
       "predicate": {
         "spinning": 8
       },

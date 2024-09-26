@@ -5,7 +5,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
@@ -62,10 +61,10 @@ public final class DefaultRocks {
   @SuppressWarnings("ConstantConditions")
   public static void onPreRegisterRockCategory(TFCRegistryEvent.RegisterPreBlock<RockCategory> event) {
     event.getRegistry().registerAll(
-            new RockCategory(IGNEOUS_INTRUSIVE, ToolMaterials.IGNEOUS_INTRUSIVE, true, true, true, -0.4f, 0f, 1.6F, 10F, true),
-            new RockCategory(IGNEOUS_EXTRUSIVE, ToolMaterials.IGNEOUS_EXTRUSIVE, true, true, true, -0.5f, 0f, 1.6F, 10F, true),
-            new RockCategory(SEDIMENTARY, ToolMaterials.SEDIMENTARY, true, false, false, 0.3f, 5f, 1.4F, 10F, false),
-            new RockCategory(METAMORPHIC, ToolMaterials.METAMORPHIC, true, true, false, 0.2f, 0f, 1.5F, 10F, false)
+      new RockCategory(IGNEOUS_INTRUSIVE, ToolMaterials.IGNEOUS_INTRUSIVE, true, true, true, -0.4f, 0f, 1.6F, 10F, true),
+      new RockCategory(IGNEOUS_EXTRUSIVE, ToolMaterials.IGNEOUS_EXTRUSIVE, true, true, true, -0.5f, 0f, 1.6F, 10F, true),
+      new RockCategory(SEDIMENTARY, ToolMaterials.SEDIMENTARY, true, false, false, 0.3f, 5f, 1.4F, 10F, false),
+      new RockCategory(METAMORPHIC, ToolMaterials.METAMORPHIC, true, true, false, 0.2f, 0f, 1.5F, 10F, false)
     );
   }
 
@@ -73,41 +72,41 @@ public final class DefaultRocks {
   public static void onPreRegisterRock(TFCRegistryEvent.RegisterPreBlock<Rock> event) {
     IForgeRegistry<Rock> r = event.getRegistry();
     event.getRegistry().registerAll(
-            new Rock(GRANITE, IGNEOUS_INTRUSIVE, false),
-            new Rock(DIORITE, IGNEOUS_INTRUSIVE, false),
-            new Rock(GABBRO, IGNEOUS_INTRUSIVE, false),
-            new Rock(SHALE, SEDIMENTARY, false),
-            new Rock(CLAYSTONE, SEDIMENTARY, false),
-            new Rock(ROCKSALT, SEDIMENTARY, false),
-            new Rock(LIMESTONE, SEDIMENTARY, true),
-            new Rock(CONGLOMERATE, SEDIMENTARY, false),
-            new Rock(DOLOMITE, SEDIMENTARY, true),
-            new Rock(CHERT, SEDIMENTARY, false),
-            new Rock(CHALK, SEDIMENTARY, true),
-            new Rock(RHYOLITE, IGNEOUS_EXTRUSIVE, false),
-            new Rock(BASALT, IGNEOUS_EXTRUSIVE, false),
-            new Rock(ANDESITE, IGNEOUS_EXTRUSIVE, false),
-            new Rock(DACITE, IGNEOUS_EXTRUSIVE, false),
-            new Rock(QUARTZITE, METAMORPHIC, false),
-            new Rock(SLATE, METAMORPHIC, false),
-            new Rock(PHYLLITE, METAMORPHIC, false),
-            new Rock(SCHIST, METAMORPHIC, false),
-            new Rock(GNEISS, METAMORPHIC, false),
-            new Rock(MARBLE, METAMORPHIC, true),
+      new Rock(GRANITE, IGNEOUS_INTRUSIVE, false),
+      new Rock(DIORITE, IGNEOUS_INTRUSIVE, false),
+      new Rock(GABBRO, IGNEOUS_INTRUSIVE, false),
+      new Rock(SHALE, SEDIMENTARY, false),
+      new Rock(CLAYSTONE, SEDIMENTARY, false),
+      new Rock(ROCKSALT, SEDIMENTARY, false),
+      new Rock(LIMESTONE, SEDIMENTARY, true),
+      new Rock(CONGLOMERATE, SEDIMENTARY, false),
+      new Rock(DOLOMITE, SEDIMENTARY, true),
+      new Rock(CHERT, SEDIMENTARY, false),
+      new Rock(CHALK, SEDIMENTARY, true),
+      new Rock(RHYOLITE, IGNEOUS_EXTRUSIVE, false),
+      new Rock(BASALT, IGNEOUS_EXTRUSIVE, false),
+      new Rock(ANDESITE, IGNEOUS_EXTRUSIVE, false),
+      new Rock(DACITE, IGNEOUS_EXTRUSIVE, false),
+      new Rock(QUARTZITE, METAMORPHIC, false),
+      new Rock(SLATE, METAMORPHIC, false),
+      new Rock(PHYLLITE, METAMORPHIC, false),
+      new Rock(SCHIST, METAMORPHIC, false),
+      new Rock(GNEISS, METAMORPHIC, false),
+      new Rock(MARBLE, METAMORPHIC, true),
 
-            new Rock(BRECCIA, IGNEOUS_INTRUSIVE, false),
-            //new Rock(FOIDOLITE, IGNEOUS_INTRUSIVE, false),
-            new Rock(PORPHYRY, IGNEOUS_INTRUSIVE, false),
-            new Rock(PERIDOTITE, IGNEOUS_EXTRUSIVE, false),
-            new Rock(MUDSTONE, SEDIMENTARY, false),
-            new Rock(SANDSTONE, SEDIMENTARY, false),
-            new Rock(SILTSTONE, SEDIMENTARY, false),
-            //new Rock(BLUESCHIST, METAMORPHIC, false),
-            new Rock(CATLINITE, METAMORPHIC, false),
-            //new Rock(GREENSCHIST, METAMORPHIC, false),
-            new Rock(NOVACULITE, METAMORPHIC, false),
-            new Rock(SOAPSTONE, METAMORPHIC, false),
-            new Rock(KOMATIITE, METAMORPHIC, false)
+      new Rock(BRECCIA, IGNEOUS_INTRUSIVE, false),
+      //new Rock(FOIDOLITE, IGNEOUS_INTRUSIVE, false),
+      new Rock(PORPHYRY, IGNEOUS_INTRUSIVE, false),
+      new Rock(PERIDOTITE, IGNEOUS_EXTRUSIVE, false),
+      new Rock(MUDSTONE, SEDIMENTARY, false),
+      new Rock(SANDSTONE, SEDIMENTARY, false),
+      new Rock(SILTSTONE, SEDIMENTARY, false),
+      //new Rock(BLUESCHIST, METAMORPHIC, false),
+      new Rock(CATLINITE, METAMORPHIC, false),
+      //new Rock(GREENSCHIST, METAMORPHIC, false),
+      new Rock(NOVACULITE, METAMORPHIC, false),
+      new Rock(SOAPSTONE, METAMORPHIC, false),
+      new Rock(KOMATIITE, METAMORPHIC, false)
     );
   }
 }

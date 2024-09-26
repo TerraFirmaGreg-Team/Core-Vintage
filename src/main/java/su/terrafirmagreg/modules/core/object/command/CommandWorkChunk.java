@@ -11,7 +11,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.chunk.Chunk;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class CommandWorkChunk extends BaseCommand {
@@ -28,7 +27,7 @@ public class CommandWorkChunk extends BaseCommand {
 
   @Override
   public void execute(MinecraftServer minecraftServer, ICommandSender iCommandSender,
-          String[] strings) throws CommandException {
+                      String[] strings) throws CommandException {
     if (strings.length != 2) {
       throw new WrongUsageException(ModUtils.localize("command", "workchunk.args"));
     }

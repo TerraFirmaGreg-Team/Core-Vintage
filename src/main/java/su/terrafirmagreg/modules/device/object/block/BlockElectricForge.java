@@ -20,7 +20,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.data.Properties.HORIZONTAL;
@@ -32,24 +31,24 @@ public class BlockElectricForge extends BaseBlockHorizontal implements IProvider
     super(Settings.of(Material.IRON));
 
     getSettings()
-            .registryKey("device/electric_forge")
-            .sound(SoundType.METAL)
-            .hardness(4.0F)
-            .size(Size.LARGE)
-            .weight(Weight.MEDIUM)
-            .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
-            .nonCanStack();
+      .registryKey("device/electric_forge")
+      .sound(SoundType.METAL)
+      .hardness(4.0F)
+      .size(Size.LARGE)
+      .weight(Weight.MEDIUM)
+      .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
+      .nonCanStack();
     setHarvestLevel(ToolClasses.PICKAXE, 0);
     setDefaultState(blockState.getBaseState()
-            .withProperty(LIT, false)
-            .withProperty(HORIZONTAL, EnumFacing.NORTH));
+                              .withProperty(LIT, false)
+                              .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-            .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
-            .withProperty(LIT, meta >= 4);
+               .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
+               .withProperty(LIT, meta >= 4);
   }
 
   @Override
@@ -64,8 +63,8 @@ public class BlockElectricForge extends BaseBlockHorizontal implements IProvider
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-          EnumHand hand, EnumFacing side, float hitX,
-          float hitY, float hitZ) {
+                                  EnumHand hand, EnumFacing side, float hitX,
+                                  float hitY, float hitZ) {
     if (!player.isSneaking()) {
       if (!world.isRemote) {
         GuiHandler.openGui(world, pos, player);

@@ -19,7 +19,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -39,31 +38,31 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
     this.variant = variant;
     this.type = type;
     this.settings = Settings.of(Material.CIRCUITS)
-            .registryKey(variant.getRegistryKey(type))
-            .hardness(variant.getHardness(type))
-            .sound(SoundType.STONE)
-            .hardness(0.5f)
-            .oreDict(variant, "stone")
-            .oreDict(variant, "stone", type);
+                            .registryKey(variant.getRegistryKey(type))
+                            .hardness(variant.getHardness(type))
+                            .sound(SoundType.STONE)
+                            .hardness(0.5f)
+                            .oreDict(variant, "stone")
+                            .oreDict(variant, "stone", type);
   }
 
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-          float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer) {
+                                          float hitX, float hitY, float hitZ, int meta,
+                                          EntityLivingBase placer) {
     IBlockState state = getStateFromMeta(meta);
     return BlockButton.canPlaceBlock(worldIn, pos, facing)
-            ? state.withProperty(DIRECTIONAL, facing)
-            : state.withProperty(DIRECTIONAL, EnumFacing.DOWN);
+           ? state.withProperty(DIRECTIONAL, facing)
+           : state.withProperty(DIRECTIONAL, EnumFacing.DOWN);
   }
 
   @Override
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
-          ITooltipFlag flagIn) {
+                             ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 
     tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": "
-            + getType().getCategory().getLocalizedName());
+                + getType().getCategory().getLocalizedName());
   }
 }

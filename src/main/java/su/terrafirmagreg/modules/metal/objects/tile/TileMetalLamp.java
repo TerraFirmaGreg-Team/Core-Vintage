@@ -20,7 +20,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
-
 import net.dries007.tfc.api.capability.fluid.FluidHandlerSided;
 import net.dries007.tfc.api.capability.fluid.FluidTankCallback;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandlerComplex;
@@ -37,8 +36,8 @@ import lombok.Setter;
 import java.util.Optional;
 
 public class TileMetalLamp
-        extends TETickCounter
-        implements IFluidTankCallback, IFluidHandlerSidedCallback, IAmbientalTileProvider {
+  extends TETickCounter
+  implements IFluidTankCallback, IFluidHandlerSidedCallback, IAmbientalTileProvider {
 
   public static int CAPACITY;
   private final FluidTank tank = new FluidTankCallback(this, 0, CAPACITY);
@@ -88,7 +87,7 @@ public class TileMetalLamp
   public ItemStack getItemStack(TileMetalLamp tile, IBlockState state) {
     ItemStack stack = new ItemStack(state.getBlock());
     IFluidHandlerItem itemCap = stack.getCapability(
-            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+      CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     IFluidHandler teCap = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
     if (itemCap != null && teCap != null) {
       itemCap.fill(teCap.drain(CAPACITY, false), true); //don't drain creative item
@@ -126,7 +125,7 @@ public class TileMetalLamp
    */
   public void loadFromItemStack(ItemStack stack) {
     IFluidHandler lampCap = stack.getCapability(
-            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+      CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (lampCap instanceof FluidWhitelistHandlerComplex) {
       NBTTagCompound contents = stack.getTagCompound();
       if (contents != null) {

@@ -21,7 +21,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.dries007.tfc.util.fuel.Fuel;
@@ -34,8 +33,8 @@ import java.util.Optional;
 import static su.terrafirmagreg.data.Properties.LIT;
 
 public class TileSmelteryFirebox extends BaseTileTickableInventory
-        implements ICalendarTickable, ITileFields, IAmbientalTileProvider,
-        IProviderContainer<ContainerSmelteryFirebox, GuiSmelteryFirebox> {
+  implements ICalendarTickable, ITileFields, IAmbientalTileProvider,
+             IProviderContainer<ContainerSmelteryFirebox, GuiSmelteryFirebox> {
 
   private float temperature;
   private float burnTemperature;
@@ -115,7 +114,7 @@ public class TileSmelteryFirebox extends BaseTileTickableInventory
         if (temperature != targetTemperature) {
           float delta = (float) ConfigCore.MISC.HEAT.heatingModifier;
           temperature = CapabilityHeat.adjustTempTowards(temperature, targetTemperature,
-                  delta * (airTicks > 0 ? 2 : 1));
+                                                         delta * (airTicks > 0 ? 2 : 1));
         }
       }
     }
@@ -166,6 +165,11 @@ public class TileSmelteryFirebox extends BaseTileTickableInventory
   }
 
   @Override
+  public void setLastUpdateTick(long ticks) {
+    lastPlayerTick = ticks;
+  }
+
+  @Override
   public void onCalendarUpdate(long deltaPlayerTicks) {
     IBlockState state = world.getBlockState(pos);
     if (!state.getValue(LIT)) {
@@ -184,11 +188,6 @@ public class TileSmelteryFirebox extends BaseTileTickableInventory
         consumeFuel();
       }
     }
-  }
-
-  @Override
-  public void setLastUpdateTick(long ticks) {
-    lastPlayerTick = ticks;
   }
 
   @Override
@@ -241,15 +240,15 @@ public class TileSmelteryFirebox extends BaseTileTickableInventory
 
   @Override
   public ContainerSmelteryFirebox getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                               IBlockState state, BlockPos pos) {
     return new ContainerSmelteryFirebox(inventoryPlayer, this);
   }
 
   @Override
   public GuiSmelteryFirebox getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                            IBlockState state, BlockPos pos) {
     return new GuiSmelteryFirebox(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-            this);
+                                  this);
   }
 
 

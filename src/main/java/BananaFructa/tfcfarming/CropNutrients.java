@@ -8,7 +8,9 @@ import net.dries007.tfc.util.agriculture.CropTFCF;
 
 import java.util.HashMap;
 
-import static BananaFructa.tfcfarming.NutrientClass.*;
+import static BananaFructa.tfcfarming.NutrientClass.NITROGEN;
+import static BananaFructa.tfcfarming.NutrientClass.PHOSPHORUS;
+import static BananaFructa.tfcfarming.NutrientClass.POTASSIUM;
 
 public enum CropNutrients {
 

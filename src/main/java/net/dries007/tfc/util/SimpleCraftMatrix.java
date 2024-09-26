@@ -42,8 +42,8 @@ public class SimpleCraftMatrix {
   /**
    * Create a patterned matrix based on a string pattern input. See {@link net.dries007.tfc.types.DefaultRecipes} for usage of how to construct recipes
    *
-   * @param outsideSlotRequired If the recipe is smaller than MAX_WIDTH x MAX_HEIGHT, what is the slot outside of the recipe required to be? true = outside slots need
-   *                            to be full false = outside slots need to be empty
+   * @param outsideSlotRequired If the recipe is smaller than MAX_WIDTH x MAX_HEIGHT, what is the slot outside of the recipe required to be? true = outside
+   *                            slots need to be full false = outside slots need to be empty
    * @param pattern             A list of strings. Each string is a row, each character is an element. ' ' represents empty, anything else is full
    */
   public SimpleCraftMatrix(boolean outsideSlotRequired, String... pattern) {

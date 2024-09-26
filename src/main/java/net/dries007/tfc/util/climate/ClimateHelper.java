@@ -1,18 +1,13 @@
 package net.dries007.tfc.util.climate;
 
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.world.ConfigWorld;
 
 import net.minecraft.util.math.MathHelper;
 
-
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
-
 import net.dries007.tfc.util.config.TemperatureMode;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
@@ -54,8 +49,8 @@ public class ClimateHelper {
   }
 
   /**
-   * Internationally accepted average lapse time is 6.49 K / 1000 m, for the first 11 km of the atmosphere. Our temperature is scales the 110 m against 2750 m, so
-   * that gives us a change of 1.6225 / 10 blocks. The amount to reduce temperature by after applying height transformations
+   * Internationally accepted average lapse time is 6.49 K / 1000 m, for the first 11 km of the atmosphere. Our temperature is scales the 110 m against 2750 m,
+   * so that gives us a change of 1.6225 / 10 blocks. The amount to reduce temperature by after applying height transformations
    *
    * @param y the y level
    * @return a value between 0 and 17.822
@@ -83,7 +78,7 @@ public class ClimateHelper {
     final float nextMonthFactor = monthFactor(regionalTemp, monthOfYear.next(), z);
 
     final float delta = (float) ICalendarFormatted.getDayOfMonth(time, Calendar.CALENDAR_TIME.getDaysInMonth()) /
-            Calendar.CALENDAR_TIME.getDaysInMonth();
+                        Calendar.CALENDAR_TIME.getDaysInMonth();
     // Affine combination to smooth temperature transition
     return currentMonthFactor * (1 - delta) + nextMonthFactor * delta;
   }

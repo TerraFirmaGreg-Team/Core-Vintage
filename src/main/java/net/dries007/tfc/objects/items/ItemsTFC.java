@@ -17,7 +17,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.ConfigTFC;
@@ -169,9 +168,9 @@ public final class ItemsTFC {
     Builder<Item> simpleItems = ImmutableList.builder();
 
     register(r, "metal/bucket/blue_steel", new ItemMetalBucket(Metal.BLUE_STEEL, Metal.ItemType.BUCKET),
-            CT_METAL); //not a simple item, use a custom model
+             CT_METAL); //not a simple item, use a custom model
     register(r, "metal/bucket/red_steel", new ItemMetalBucket(Metal.RED_STEEL, Metal.ItemType.BUCKET),
-            CT_METAL); //not a simple item, use a custom model
+             CT_METAL); //not a simple item, use a custom model
 
     {
       Builder<ItemOreTFC> b = new Builder<>();
@@ -179,7 +178,7 @@ public final class ItemsTFC {
         b.add(register(r, "ore/" + ore.getRegistryName().getPath(), new ItemOreTFC(ore), CT_METAL));
         if (ore.isGraded()) {
           simpleItems.add(register(r, "ore/small/" + ore.getRegistryName()
-                  .getPath(), new ItemSmallOre(ore), CT_METAL));
+                                                        .getPath(), new ItemSmallOre(ore), CT_METAL));
         }
       }
       allOreItems = b.build();
@@ -199,8 +198,8 @@ public final class ItemsTFC {
         if (type != Metal.ItemType.BUCKET && type.hasType(metal)) // buckets registered separately
         {
           simpleItems.add(
-                  register(r, "metal/" + type.name().toLowerCase() + "/" + metal.getRegistryName().getPath(),
-                          Metal.ItemType.create(metal, type), CT_METAL));
+            register(r, "metal/" + type.name().toLowerCase() + "/" + metal.getRegistryName().getPath(),
+                     Metal.ItemType.create(metal, type), CT_METAL));
         }
       }
     }
@@ -215,9 +214,9 @@ public final class ItemsTFC {
     for (RockCategory cat : TFCRegistries.ROCK_CATEGORIES.getValuesCollection()) {
       for (Rock.ToolType type : Rock.ToolType.values()) {
         simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "/" + cat.getRegistryName()
-                .getPath(), type.create(cat), CT_MISC));
+                                                                                    .getPath(), type.create(cat), CT_MISC));
         simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "_head/" + cat.getRegistryName()
-                .getPath(), new ItemRockToolHead(cat, type), CT_MISC));
+                                                                                         .getPath(), new ItemRockToolHead(cat, type), CT_MISC));
       }
     }
 
@@ -232,7 +231,7 @@ public final class ItemsTFC {
           ItemPottery item = new ItemMold(type);
           register(r, "ceramics/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY);
           simpleItems.add(register(r, "ceramics/unfired/mold/" + type.name()
-                  .toLowerCase(), new ItemUnfiredMold(type), CT_POTTERY));
+                                                                     .toLowerCase(), new ItemUnfiredMold(type), CT_POTTERY));
         }
       }
 
@@ -240,9 +239,9 @@ public final class ItemsTFC {
       simpleItems.add(register(r, "ceramics/unfired/crucible", new ItemPottery(Size.LARGE, Weight.VERY_HEAVY), CT_POTTERY));
 
       registerPottery(simpleItems, r, "ceramics/unfired/vessel", "ceramics/fired/vessel", new ItemUnfiredSmallVessel(false),
-              new ItemSmallVessel(false));
+                      new ItemSmallVessel(false));
       registerPottery(null, r, "ceramics/unfired/vessel_glazed", "ceramics/fired/vessel_glazed", new ItemUnfiredSmallVessel(true),
-              new ItemSmallVessel(true));
+                      new ItemSmallVessel(true));
 
       ItemPottery firedPot = new ItemPottery(Size.LARGE, Weight.LIGHT);
       registerPottery(simpleItems, r, "ceramics/unfired/pot", "ceramics/fired/pot", new ItemPottery(Size.LARGE, Weight.LIGHT), firedPot);
@@ -250,7 +249,7 @@ public final class ItemsTFC {
 
       ItemPottery firedBowl = new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT);
       registerPottery(simpleItems, r, "ceramics/unfired/bowl", "ceramics/fired/bowl", new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT),
-              firedBowl);
+                      firedBowl);
       OreDictionaryHelper.register(firedBowl, "bowl");
 
       registerPottery(simpleItems, r, "ceramics/unfired/spindle", "ceramics/fired/spindle");
@@ -281,7 +280,7 @@ public final class ItemsTFC {
     }
     // Complex foods that require special classes go here
     for (Food food : new Food[]{Food.BARLEY_BREAD_SANDWICH, Food.CORNBREAD_SANDWICH, Food.OAT_BREAD_SANDWICH, Food.RICE_BREAD_SANDWICH,
-            Food.RYE_BREAD_SANDWICH, Food.WHEAT_BREAD_SANDWICH}) {
+                                Food.RYE_BREAD_SANDWICH, Food.WHEAT_BREAD_SANDWICH}) {
       simpleItems.add(register(r, "food/" + food.name().toLowerCase(), new ItemSandwich(food), CT_FOOD));
     }
     for (Food food : new Food[]{Food.SOUP_GRAIN, Food.SOUP_FRUIT, Food.SOUP_VEGETABLE, Food.SOUP_MEAT, Food.SOUP_DAIRY}) {
@@ -342,7 +341,7 @@ public final class ItemsTFC {
   }
 
   private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired, ItemPottery unfiredItem,
-          ItemPottery firedItem) {
+                                      ItemPottery firedItem) {
     register(r, nameFired, firedItem, CT_POTTERY);
     register(r, nameUnfired, unfiredItem, CT_POTTERY);
 
@@ -361,8 +360,8 @@ public final class ItemsTFC {
     // Vanilla Overrides. Used for small tweaks on vanilla items, rather than replacing them outright
     TerraFirmaCraft.getLog().info("The below warnings about unintended overrides are normal. The override is intended. ;)");
     event.getRegistry().registerAll(
-            new ItemSnow(Blocks.SNOW_LAYER).setRegistryName("minecraft", "snow_layer"),
-            new ItemGlassBottleTFC().setRegistryName(Items.GLASS_BOTTLE.getRegistryName()).setTranslationKey("glassBottle")
+      new ItemSnow(Blocks.SNOW_LAYER).setRegistryName("minecraft", "snow_layer"),
+      new ItemGlassBottleTFC().setRegistryName(Items.GLASS_BOTTLE.getRegistryName()).setTranslationKey("glassBottle")
     );
 
     if (ConfigTFC.General.OVERRIDES.enableTorchOverride) {

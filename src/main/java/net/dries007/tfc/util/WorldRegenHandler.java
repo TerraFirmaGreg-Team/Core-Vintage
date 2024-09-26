@@ -1,6 +1,7 @@
 package net.dries007.tfc.util;
 
 import su.terrafirmagreg.api.util.WorldUtils;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -36,7 +37,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import com.google.common.collect.Lists;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -49,11 +49,6 @@ import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.util.calendar.Calendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
-
 import net.dries007.tfc.util.climate.Climate;
 
 import java.util.ArrayList;
@@ -86,8 +81,8 @@ public class WorldRegenHandler {
     if (event.getWorld().provider.getDimension() == 0 && chunkData.isInitialized() && POSITIONS.size() < 1000) {
       //Only run this in the early months of each year
       if (Calendar.CALENDAR_TIME.getMonthOfYear()
-              .isWithin(Month.APRIL, Month.JULY) && !chunkData.isSpawnProtected() &&
-              Calendar.CALENDAR_TIME.getTotalYears() > chunkData.getLastUpdateYear()) {
+                                .isWithin(Month.APRIL, Month.JULY) && !chunkData.isSpawnProtected() &&
+          Calendar.CALENDAR_TIME.getTotalYears() > chunkData.getLastUpdateYear()) {
         POSITIONS.add(event.getChunk().getPos());
       }
     }
@@ -107,8 +102,8 @@ public class WorldRegenHandler {
           IChunkGenerator chunkGenerator = ((ChunkProviderServer) chunkProvider).chunkGenerator;
 
           if (Calendar.CALENDAR_TIME.getMonthOfYear()
-                  .isWithin(Month.APRIL, Month.JULY) && !chunkData.isSpawnProtected() &&
-                  Calendar.CALENDAR_TIME.getTotalYears() > chunkData.getLastUpdateYear()) {
+                                    .isWithin(Month.APRIL, Month.JULY) && !chunkData.isSpawnProtected() &&
+              Calendar.CALENDAR_TIME.getTotalYears() > chunkData.getLastUpdateYear()) {
             if (ConfigTFC.General.WORLD_REGEN.sticksRocksModifier > 0) {
               //Nuke any rocks and sticks in chunk.
               removeAllPlacedItems(event.world, pos);
@@ -178,7 +173,7 @@ public class WorldRegenHandler {
         IBlockState topState = world.getBlockState(topPos);
         Block topBlock = topState.getBlock();
         if (!topState.getMaterial()
-                .isLiquid() && (topBlock instanceof BlockCropDead || topBlock instanceof BlockMushroomTFC)) {
+                     .isLiquid() && (topBlock instanceof BlockCropDead || topBlock instanceof BlockMushroomTFC)) {
           IBlockState soil = world.getBlockState(topPos.down());
           if (soil.getBlock() instanceof ISoilBlock soilRock) {
             //Stop removing dead crops from farmland please!
@@ -237,19 +232,19 @@ public class WorldRegenHandler {
     final float floraDensity = ProviderChunkData.getFloraDensity(worldIn, chunkBlockPos);
     final float floraDiversity = ProviderChunkData.getFloraDiversity(worldIn, chunkBlockPos);
     ForgeRegistries.ENTITIES.getValuesCollection()
-            .stream()
-            .filter((x) -> {
-              if (ICreature.class.isAssignableFrom(x.getEntityClass())) {
-                Entity ent = x.newInstance(worldIn);
-                if (ent instanceof IPredator || ent instanceof IHuntable) {
-                  int weight = ((ICreature) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
-                  return weight > 0 && randomIn.nextInt(weight) == 0;
-                }
-              }
-              return false;
-            })
-            .findAny()
-            .ifPresent((entityEntry) -> doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX, diameterZ, randomIn));
+                            .stream()
+                            .filter((x) -> {
+                              if (ICreature.class.isAssignableFrom(x.getEntityClass())) {
+                                Entity ent = x.newInstance(worldIn);
+                                if (ent instanceof IPredator || ent instanceof IHuntable) {
+                                  int weight = ((ICreature) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
+                                  return weight > 0 && randomIn.nextInt(weight) == 0;
+                                }
+                              }
+                              return false;
+                            })
+                            .findAny()
+                            .ifPresent((entityEntry) -> doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX, diameterZ, randomIn));
   }
 
   private static void doGroupSpawning(EntityEntry entityEntry, World worldIn, int centerX, int centerZ, int diameterX, int diameterZ, Random rand) {
@@ -258,7 +253,7 @@ public class WorldRegenHandler {
     if (creature instanceof ICreature creatureTFC) {
       int fallback = 5;
       int individuals = Math.max(1, creatureTFC.getMinGroupSize()) +
-              rand.nextInt(creatureTFC.getMaxGroupSize() - Math.max(0, creatureTFC.getMinGroupSize() - 1));
+                        rand.nextInt(creatureTFC.getMaxGroupSize() - Math.max(0, creatureTFC.getMinGroupSize() - 1));
 
       while (individuals > 0) {
         int i = centerX + rand.nextInt(diameterX);
@@ -267,7 +262,7 @@ public class WorldRegenHandler {
         creature.setLocationAndAngles((float) i + 0.5F, blockpos.getY(), (float) k + 0.5F, rand.nextFloat() * 360.0F, 0.0F);
         if (creature.getCanSpawnHere()) {
           if (ForgeEventFactory.canEntitySpawn(creature, worldIn, (float) i + 0.5F, (float) blockpos.getY(), (float) k + 0.5F, null) ==
-                  Event.Result.DENY) {
+              Event.Result.DENY) {
             --fallback;
             if (fallback > 0) {
               continue;

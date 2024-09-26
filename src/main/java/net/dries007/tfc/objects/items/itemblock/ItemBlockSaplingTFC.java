@@ -4,7 +4,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
-
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 
 public class ItemBlockSaplingTFC extends ItemBlockTFC {

@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import tfcflorae.client.GuiHandler;
 
@@ -28,7 +27,7 @@ public final class InteractionManagerTFCF {
   private static final Map<Predicate<ItemStack>, IRightClickBlockAction> USE_ACTIONS = new HashMap<>();
   private static final Map<Predicate<ItemStack>, IRightClickItemAction> RIGHT_CLICK_ACTIONS = new HashMap<>();
   private static final ThreadLocal<Boolean> PROCESSING_INTERACTION = ThreadLocal.withInitial(
-          () -> false); // avoids stack overflows where some mods post interaction events during onBlockActivated (see #1321)
+    () -> false); // avoids stack overflows where some mods post interaction events during onBlockActivated (see #1321)
 
   static {
     // Pineapple Leather knapping
@@ -154,11 +153,11 @@ public final class InteractionManagerTFCF {
   @Nullable
   private static IRightClickBlockAction findItemUseAction(ItemStack stack) {
     return USE_ACTIONS.entrySet()
-            .stream()
-            .filter(e -> e.getKey().test(stack))
-            .findFirst()
-            .map(Map.Entry::getValue)
-            .orElse(null);
+                      .stream()
+                      .filter(e -> e.getKey().test(stack))
+                      .findFirst()
+                      .map(Map.Entry::getValue)
+                      .orElse(null);
   }
 
   @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -180,11 +179,11 @@ public final class InteractionManagerTFCF {
   @Nullable
   private static IRightClickItemAction findItemRightClickAction(ItemStack stack) {
     return RIGHT_CLICK_ACTIONS.entrySet()
-            .stream()
-            .filter(e -> e.getKey().test(stack))
-            .findFirst()
-            .map(Map.Entry::getValue)
-            .orElse(null);
+                              .stream()
+                              .filter(e -> e.getKey().test(stack))
+                              .findFirst()
+                              .map(Map.Entry::getValue)
+                              .orElse(null);
   }
 
   private static void putBoth(Predicate<ItemStack> predicate, IRightClickItemAction minorAction) {

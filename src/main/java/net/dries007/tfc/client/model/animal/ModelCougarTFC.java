@@ -146,7 +146,7 @@ public class ModelCougarTFC extends ModelBase {
     tailBody = new ModelRenderer(this, 11, 28);
     tailBody.setRotationPoint(0.5F, 11.5F, 9.5F);
     tailBody.addBox(-1.5F, -1.5F, -1.5F, 2, 3, 2, -0.2F);
-    setRotateAngle(tailBody, 0.6981317007977318F, 0.0F, 0.0F);
+    setRotateAngle(tailBody, ((float)Math.PI * 2F / 9F), 0.0F, 0.0F);
     frontRightLegBottom = new ModelRenderer(this, 2, 38);
     frontRightLegBottom.setRotationPoint(-1.0F, 5.9F, -0.2F);
     frontRightLegBottom.addBox(-0.99F, -1.0F, -1.0F, 2, 3, 2, 0.0F);

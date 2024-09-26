@@ -10,8 +10,7 @@
           "model": "tfc:plants/ocotillo_single_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "single",
         "stage": "1"
@@ -20,14 +19,12 @@
         {
           "model": "tfc:plants/ocotillo_single_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/ocotillo_single_1",
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "single",
         "stage": "2"
@@ -37,8 +34,7 @@
           "model": "tfc:plants/ocotillo_single_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "0"
@@ -48,8 +44,7 @@
           "model": "tfc:plants/ocotillo_lower_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "1"
@@ -58,14 +53,12 @@
         {
           "model": "tfc:plants/ocotillo_lower_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/ocotillo_lower_1",
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "2"
@@ -75,8 +68,7 @@
           "model": "tfc:plants/ocotillo_lower_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "0"
@@ -86,8 +78,7 @@
           "model": "tfc:plants/ocotillo_upper_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "1"
@@ -96,14 +87,12 @@
         {
           "model": "tfc:plants/ocotillo_upper_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/ocotillo_upper_1",
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "2"

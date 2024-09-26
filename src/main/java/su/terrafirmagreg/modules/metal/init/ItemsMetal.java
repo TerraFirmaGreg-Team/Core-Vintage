@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.metal.api.types.variant.Item.MetalItemVariant;
 
 import net.minecraft.item.Item;
 
-
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 
 import java.util.Map;

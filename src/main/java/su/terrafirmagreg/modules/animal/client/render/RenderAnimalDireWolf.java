@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
@@ -19,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class RenderAnimalDireWolf extends RenderLiving<EntityAnimalDireWolf> {
 
   private static final ResourceLocation TEXTURE = ModUtils.resource(
-          "textures/entity/animal/predators/direwolf.png");
+    "textures/entity/animal/predators/direwolf.png");
 
   public RenderAnimalDireWolf(RenderManager renderManager) {
     super(renderManager, new ModelAnimalDireWolf(), 0.7F);
@@ -27,7 +26,7 @@ public class RenderAnimalDireWolf extends RenderLiving<EntityAnimalDireWolf> {
 
   @Override
   public void doRender(@NotNull EntityAnimalDireWolf direwolf, double par2, double par4,
-          double par6, float par8, float par9) {
+                       double par6, float par8, float par9) {
     this.shadowSize = (float) (0.35f + (direwolf.getPercentToAdulthood() * 0.35f));
     super.doRender(direwolf, par2, par4, par6, par8, par9);
   }

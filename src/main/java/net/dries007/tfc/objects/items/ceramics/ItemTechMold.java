@@ -21,7 +21,6 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -65,10 +64,10 @@ public class ItemTechMold extends ItemPottery {
       if (metal != null) {
         //noinspection ConstantConditions
         String metalName = (new TextComponentTranslation("tfc.types.metal." + metal.getRegistryName()
-                .getPath()
-                .toLowerCase())).getFormattedText();
+                                                                                   .getPath()
+                                                                                   .toLowerCase())).getFormattedText();
         return (new TextComponentTranslation("item.tfctech.ceramics.mold." + type.name()
-                .toLowerCase() + ".filled", metalName)).getFormattedText();
+                                                                                 .toLowerCase() + ".filled", metalName)).getFormattedText();
       }
     }
     return super.getItemStackDisplayName(stack);
@@ -138,7 +137,7 @@ public class ItemTechMold extends ItemPottery {
         Metal metal = FluidsTFC.getMetalFromFluid(resource.getFluid());
         //noinspection ConstantConditions
         if (metal != null && ObfuscationReflectionHelper.getPrivateValue(Metal.class, metal, "usable")
-                .equals(true)) {
+                                                        .equals(true)) {
           int fillAmount = tank.fill(resource, doFill);
           if (fillAmount == tank.getFluidAmount()) {
             updateFluidData();
@@ -174,7 +173,7 @@ public class ItemTechMold extends ItemPottery {
       Metal metal = getMetal();
       if (metal != null) {
         String desc =
-                TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
+          TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
         if (isMolten()) {
           desc += I18n.format("tfc.tooltip.liquid");
         }

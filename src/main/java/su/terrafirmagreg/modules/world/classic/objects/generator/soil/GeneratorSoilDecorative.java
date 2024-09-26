@@ -18,7 +18,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-
 import tfcflorae.ConfigTFCF;
 
 import java.util.Random;
@@ -34,7 +33,7 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+                       IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (!(chunkGenerator instanceof ChunkGenClassic)) {
       return;
     }
@@ -43,28 +42,28 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
     if (ConfigTFCF.General.WORLD.enableAllBlockTypes) {
       if (ConfigTFCF.General.WORLD.enableSandGen) {
         BlockPos pos1 = world.getTopSolidOrLiquidBlock(
-                chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
+          chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
         generateSand(world, random, pos1);
         BlockPos pos2 = world.getTopSolidOrLiquidBlock(
-                chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
+          chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
         generateSand(world, random, pos2);
       }
 
       if (ConfigTFCF.General.WORLD.enableAllPodzol) {
         BlockPos pos1 = world.getTopSolidOrLiquidBlock(
-                chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
+          chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
         generatePodzol(world, random, pos1);
         BlockPos pos2 = world.getTopSolidOrLiquidBlock(
-                chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
+          chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
         generatePodzol(world, random, pos2);
         BlockPos pos3 = world.getTopSolidOrLiquidBlock(
-                chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
+          chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
         generatePodzol(world, random, pos3);
       }
 
       if (ConfigTFCF.General.WORLD.enableMudGen) {
         BlockPos pos = world.getTopSolidOrLiquidBlock(
-                chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
+          chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
         generateMud(world, random, pos);
       }
 
@@ -74,7 +73,7 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
       //            }
 
       BlockPos pos = world.getTopSolidOrLiquidBlock(
-              chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
+        chunkBlockPos.add(8 + random.nextInt(16), 0, 8 + random.nextInt(16)));
       generatePeat(world, random, pos);
     }
   }
@@ -83,11 +82,11 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
     if (ConfigTFCF.General.WORLD.enableAllBlockTypes && ConfigTFCF.General.WORLD.enableSandGen) {
       final Biome b = world.getBiome(start);
       if (b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH
-              || b == BiomesWorld.LAKE) {
+          || b == BiomesWorld.LAKE) {
         var data = CapabilityChunkData.get(world, start);
         if (data.isInitialized() && start.getY() <= WorldTypeClassic.SEALEVEL
-                && data.getFloraDensity() >= 0.2f + (rng.nextGaussian() / 10) &&
-                ProviderChunkData.getRainfall(world, start) >= RAINFALL_SAND + 15) {
+            && data.getFloraDensity() >= 0.2f + (rng.nextGaussian() / 10) &&
+            ProviderChunkData.getRainfall(world, start) >= RAINFALL_SAND + 15) {
           int length = rng.nextInt(4) + 3;
           int depth = rng.nextInt(3) + 1;
           float widthMultiplier = rng.nextInt(1) + 1f;
@@ -111,8 +110,8 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
             }
 
             z = (int) (curveHeight + curveFrequency * x * MathHelper.sin(
-                    (-curveHeight + MathHelper.sin(x))) +
-                    MathHelper.sin((float) (x)));
+              (-curveHeight + MathHelper.sin(x))) +
+                       MathHelper.sin((float) (x)));
             tz = (int) ((float) MathHelper.abs(z) * tWidth);
 
             for (int width = -tz; width <= tz; width++) {
@@ -126,8 +125,8 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
                 final IBlockState current = world.getBlockState(pos);
                 if (BlockUtils.isSoilOrGravel(current) || BlockUtils.isRawStone(current)) {
                   world.setBlockState(pos,
-                          BlocksRock.SAND.get(ProviderChunkData.getRockHeight(world, pos))
-                                  .getDefaultState(), 2);
+                                      BlocksRock.SAND.get(ProviderChunkData.getRockHeight(world, pos))
+                                                     .getDefaultState(), 2);
                 }
               }
             }
@@ -140,10 +139,10 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
   private void generatePodzol(World world, Random rng, BlockPos start) {
     if (ConfigTFCF.General.WORLD.enableAllBlockTypes && ConfigTFCF.General.WORLD.enableAllPodzol) {
       if (rng.nextInt(ConfigTFCF.General.WORLD.podzolRarity) == 0 && start.getY() >= 146
-              && start.getY() <= 175) {
+          && start.getY() <= 175) {
         var data = CapabilityChunkData.get(world, start);
         if (data.isInitialized() && data.getRainfall() >= 90f && data.getFloraDensity() >= 0.5f &&
-                ProviderChunkData.getDrainage(world, start) >= 2) {
+            ProviderChunkData.getDrainage(world, start) >= 2) {
           int length = rng.nextInt(4) + 3;
           int depth = rng.nextInt(3) + 1;
           float widthMultiplier = rng.nextInt(1) + 1f;
@@ -167,8 +166,8 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
             }
 
             z = (int) (curveHeight + curveFrequency * x * MathHelper.sin(
-                    (-curveHeight + MathHelper.sin(x))) +
-                    MathHelper.sin((float) (x)));
+              (-curveHeight + MathHelper.sin(x))) +
+                       MathHelper.sin((float) (x)));
             tz = (int) ((float) MathHelper.abs(z) * tWidth);
 
             for (int width = -tz; width <= tz; width++) {
@@ -182,12 +181,12 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
                 final IBlockState current = world.getBlockState(pos);
                 if (BlockUtils.isGrass(current)) {
                   world.setBlockState(pos,
-                          BlocksSoil.PODZOL.get(ProviderChunkData.getSoilHeight(world, pos))
-                                  .getDefaultState(), 2);
+                                      BlocksSoil.PODZOL.get(ProviderChunkData.getSoilHeight(world, pos))
+                                                       .getDefaultState(), 2);
                 } else if (BlockUtils.isDryGrass(current)) {
                   world.setBlockState(pos,
-                          BlocksSoil.PODZOL.get(ProviderChunkData.getSoilHeight(world, pos))
-                                  .getDefaultState(), 2);
+                                      BlocksSoil.PODZOL.get(ProviderChunkData.getSoilHeight(world, pos))
+                                                       .getDefaultState(), 2);
                 }
               }
             }
@@ -199,11 +198,11 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
 
   private void generateMud(World world, Random rng, BlockPos start) {
     if (rng.nextInt(ConfigTFCF.General.WORLD.mudRarity) == 0
-            && start.getY() >= WorldTypeClassic.SEALEVEL && start.getY() <= 150 &&
-            ProviderChunkData.getDrainage(world, start) <= 2) {
+        && start.getY() >= WorldTypeClassic.SEALEVEL && start.getY() <= 150 &&
+        ProviderChunkData.getDrainage(world, start) <= 2) {
       final Biome b = world.getBiome(start);
       if (b == BiomesWorld.SWAMPLAND || b == BiomesWorld.BAYOU || b == BiomesWorld.MANGROVE
-              || b == BiomesWorld.MARSH) {
+          || b == BiomesWorld.MARSH) {
         var data = CapabilityChunkData.get(world, start);
         if (data.isInitialized() && data.getRainfall() >= RAINFALL_SAND_SANDY_MIX) {
           int length = rng.nextInt(4) + 3;
@@ -230,8 +229,8 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
 
             //tx = x + shiftMultiplier;
             z = (int) (curveHeight + curveFrequency * x * MathHelper.sin(
-                    (-curveHeight + MathHelper.sin(x))) +
-                    MathHelper.sin((float) (x)));
+              (-curveHeight + MathHelper.sin(x))) +
+                       MathHelper.sin((float) (x)));
             //z = (int) (curveSlope * MathHelper.sin(curveFrequency * x) + curveHeight);
             tz = (int) ((float) MathHelper.abs(z) * tWidth);
 
@@ -246,12 +245,12 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
                 final IBlockState current = world.getBlockState(pos);
                 if (BlockUtils.isDirt(current)) {
                   world.setBlockState(pos,
-                          BlocksSoil.MUD.get(ProviderChunkData.getSoilHeight(world, pos))
-                                  .getDefaultState(), 2);
+                                      BlocksSoil.MUD.get(ProviderChunkData.getSoilHeight(world, pos))
+                                                    .getDefaultState(), 2);
                 } else if (BlockUtils.isGrass(current)) {
                   world.setBlockState(pos,
-                          BlocksSoil.MUD.get(ProviderChunkData.getSoilHeight(world, pos))
-                                  .getDefaultState(), 2);
+                                      BlocksSoil.MUD.get(ProviderChunkData.getSoilHeight(world, pos))
+                                                    .getDefaultState(), 2);
                 }
               }
             }
@@ -345,11 +344,11 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
     var data = CapabilityChunkData.get(world, start);
     final Biome b = world.getBiome(start);
     if (b == BiomesWorld.SWAMPLAND || b == BiomesWorld.BAYOU || b == BiomesWorld.MANGROVE
-            || b == BiomesWorld.MARSH) {
+        || b == BiomesWorld.MARSH) {
       if (data.isInitialized() && data.getRainfall() >= 375f && data.getFloraDiversity() >= 0.5f
-              && data.getFloraDensity() >= 0.5f && world
-              .getBiome(start)
-              .getHeightVariation() < 0.15) {
+          && data.getFloraDensity() >= 0.5f && world
+                                                 .getBiome(start)
+                                                 .getHeightVariation() < 0.15) {
         return false;
       }
 

@@ -6,7 +6,6 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.config.HealthDisplayFormat;
 import net.dries007.tfc.util.config.InventoryCraftingMode;
@@ -100,12 +99,12 @@ public final class ConfigTFC {
       public boolean enableTorchOverride = true;
 
       @Config.Comment(
-              "Turn this off to disable TFC's registry replacement of Ice and Snow blocks. This will remove their temperature based behavior.")
+        "Turn this off to disable TFC's registry replacement of Ice and Snow blocks. This will remove their temperature based behavior.")
       @Config.LangKey("config." + MODID_TFC + ".general.overrides.enableFrozenOverrides")
       public boolean enableFrozenOverrides = true;
 
       @Config.Comment(
-              "Number of ticks required for a torch to burn out (72000 = 1 in game hour = 50 seconds), default is 72 hours. Set to -1 to disable torch burnout.")
+        "Number of ticks required for a torch to burn out (72000 = 1 in game hour = 50 seconds), default is 72 hours. Set to -1 to disable torch burnout.")
       @Config.RangeInt(min = -1)
       @Config.LangKey("config." + MODID_TFC + ".general.overrides.torchTime")
       public int torchTime = 72000;
@@ -115,12 +114,12 @@ public final class ConfigTFC {
       public boolean enableLavaWaterPlacesTFCBlocks = true;
 
       @Config.Comment(
-              "If true, TFC will try and force the `level-type` setting to `tfg:classic` during DedicatedServer startup or define it as default world type for clients.")
+        "If true, TFC will try and force the `level-type` setting to `tfg:classic` during DedicatedServer startup or define it as default world type for clients.")
       @Config.LangKey("config." + MODID_TFC + ".general.overrides.forceTFCWorldType")
       public boolean forceTFCWorldType = true;
 
       @Config.Comment(
-              "If true, TFC will override default ore gen file. Pack Makers: Disable this to keep your ore gen file from being reset to default.")
+        "If true, TFC will override default ore gen file. Pack Makers: Disable this to keep your ore gen file from being reset to default.")
       @Config.LangKey("config." + MODID_TFC + ".general.overrides.forceDefaultOreGenFile")
       public boolean forceDefaultOreGenFile = true;
 
@@ -129,18 +128,18 @@ public final class ConfigTFC {
       public boolean removeVanillaRecipes = true;
 
       @Config.Comment(
-              "Enable/Disable the vanilla loot entries that conflict with TFC (ie: potatoes). False = Those loot entries are left in place.")
+        "Enable/Disable the vanilla loot entries that conflict with TFC (ie: potatoes). False = Those loot entries are left in place.")
       @Config.LangKey("config." + MODID_TFC + ".general.overrides.removeVanillaLoots")
       public boolean removeVanillaLoots = true;
 
       @Config.Comment({"If true, this will force the gamerule naturalRegeneration to be false. ",
-              "Note: this DOES NOT AFFECT TFC's natural regeneration.",
-              "If you set naturalRegeneration to true, then you will have both TFC regeneration and normal vanilla regeneration (which is much faster)"})
+                       "Note: this DOES NOT AFFECT TFC's natural regeneration.",
+                       "If you set naturalRegeneration to true, then you will have both TFC regeneration and normal vanilla regeneration (which is much faster)"})
       @Config.LangKey("config." + MODID_TFC + ".general.overrides.forceNoVanillaNaturalRegeneration")
       public boolean forceNoVanillaNaturalRegeneration = true;
 
       @Config.Comment({
-              "If true, this will replace vanilla animals with the TFC counterpart under any spawning circumstances (ie: mob spawner, etc)."})
+        "If true, this will replace vanilla animals with the TFC counterpart under any spawning circumstances (ie: mob spawner, etc)."})
       @Config.LangKey("config." + MODID_TFC + ".general.overrides.forceReplaceVanillaAnimals")
       public boolean forceReplaceVanillaAnimals = true;
     }
@@ -200,13 +199,13 @@ public final class ConfigTFC {
     public static final class DifficultyCFG {
 
       @Config.Comment(
-              "This controls how many animals (any kind) are loaded (spawned) / player. Higher values means more animals near a player, which in turn raises difficulty and meat abundance (caution, a value too high can also negatively impact performance).")
+        "This controls how many animals (any kind) are loaded (spawned) / player. Higher values means more animals near a player, which in turn raises difficulty and meat abundance (caution, a value too high can also negatively impact performance).")
       @Config.RangeInt(min = 0)
       @Config.LangKey("config." + MODID_TFC + ".general.difficulty.animalSpawnCount")
       public int animalSpawnCount = 75;
 
       @Config.Comment(
-              "This controls how many mobs are loaded (spawned) / player. Higher values means more mobs near a player, which in turn raises difficulty (caution, a value too high can also negatively impact performance)")
+        "This controls how many mobs are loaded (spawned) / player. Higher values means more mobs near a player, which in turn raises difficulty (caution, a value too high can also negatively impact performance)")
       @Config.RangeInt(min = 0)
       @Config.LangKey("config." + MODID_TFC + ".general.difficulty.mobSpawnCount")
       public int mobSpawnCount = 140;
@@ -228,7 +227,7 @@ public final class ConfigTFC {
     public static final class TreeCFG {
 
       @Config.Comment({"Enable trees being fully cut by axes.",
-              "Disable it if you want other mods to handle tree felling."})
+                       "Disable it if you want other mods to handle tree felling."})
       @Config.LangKey("config." + MODID_TFC + ".general.tree.enableFelling")
       public boolean enableFelling = true;
 
@@ -237,7 +236,7 @@ public final class ConfigTFC {
       public boolean enableHammerSticks = true;
 
       @Config.Comment(
-              "Should logs require tools (axes and saws, or hammers for sticks) to be cut? If false, breaking logs with an empty hand will not drop logs.")
+        "Should logs require tools (axes and saws, or hammers for sticks) to be cut? If false, breaking logs with an empty hand will not drop logs.")
       @Config.LangKey("config." + MODID_TFC + ".general.tree.requiresAxe")
       public boolean requiresAxe = true;
 
@@ -303,15 +302,15 @@ public final class ConfigTFC {
       public InventoryCraftingMode inventoryCraftingMode = InventoryCraftingMode.ENABLED;
 
       @Config.Comment({"Minimum health modifier player can obtain with low nutrition.",
-              "Example 1(Vanilla): 20 * 0.2(mod) = 4 (or 2 hearts).",
-              "Example 2(TFC): 1000 * 0.2(mod) = 200."})
+                       "Example 1(Vanilla): 20 * 0.2(mod) = 4 (or 2 hearts).",
+                       "Example 2(TFC): 1000 * 0.2(mod) = 200."})
       @Config.RangeDouble(min = 0.1, max = 1)
       @Config.LangKey("config." + MODID_TFC + ".general.player.minHealthModifier")
       public double minHealthModifier = 0.2;
 
       @Config.Comment({"Maximum health modifier player can obtain with high nutrition.",
-              "Example 1(Vanilla): 20 * 3(mod) = 60 (or 30 hearts).",
-              "Example 2(TFC): 1000 * 3(mod) = 3000."})
+                       "Example 1(Vanilla): 20 * 3(mod) = 60 (or 30 hearts).",
+                       "Example 2(TFC): 1000 * 3(mod) = 3000."})
       @Config.RangeDouble(min = 1, max = 5)
       @Config.LangKey("config." + MODID_TFC + ".general.player.maxHealthModifier")
       public double maxHealthModifier = 3;
@@ -322,7 +321,7 @@ public final class ConfigTFC {
       public double thirstModifier = 8.0;
 
       @Config.Comment({"Modifier for how quickly the player will naturally regenerate health.",
-              "When on full hunger and thirst bars, 1.0 = 3HP / 5 secs."})
+                       "When on full hunger and thirst bars, 1.0 = 3HP / 5 secs."})
       @Config.LangKey("config." + MODID_TFC + ".general.player.naturalRegenerationModifier")
       @Config.RangeDouble(min = 0, max = 100)
       public double naturalRegenerationModifier = 1.0;
@@ -332,14 +331,14 @@ public final class ConfigTFC {
       public boolean peacefulDifficultyPassiveRegeneration = false;
 
       @Config.Comment(
-              "Modifier for passive exhaustion (exhaustion that naturally occurs just by living). 1.0 = full hunger bar once 2.5 minecraft days.")
+        "Modifier for passive exhaustion (exhaustion that naturally occurs just by living). 1.0 = full hunger bar once 2.5 minecraft days.")
       @Config.LangKey("config." + MODID_TFC + ".general.player.passiveExhaustionMultiplier")
       @Config.RangeDouble(min = 0, max = 100)
       public double passiveExhaustionMultiplier = 1;
 
       @Config.Comment({
-              "The amount of replenished hunger before the player's nutrition will lose the first food consumed. Most TFC foods have 4 hunger.",
-              "Example: Multiply Vanilla hunger(20) by 4 to get one food bar worth of food before the first food is lost from the cycle."})
+        "The amount of replenished hunger before the player's nutrition will lose the first food consumed. Most TFC foods have 4 hunger.",
+        "Example: Multiply Vanilla hunger(20) by 4 to get one food bar worth of food before the first food is lost from the cycle."})
       @Config.LangKey("config." + MODID_TFC + ".general.player.nutritionRotationHungerWindow")
       @Config.RangeInt(min = 4)
       public int nutritionRotationHungerWindow = 4 * 20;
@@ -362,7 +361,7 @@ public final class ConfigTFC {
     public static final class WorldRegenCFG {
 
       @Config.Comment(
-              "The minimum time for a chunk to be unoccupied for it's resources (berry bushes, debris and crops) to naturally regenerate. (In days). After this amount, regeneration will scale up based on how long since this duration, up to a maximum of 4x.")
+        "The minimum time for a chunk to be unoccupied for it's resources (berry bushes, debris and crops) to naturally regenerate. (In days). After this amount, regeneration will scale up based on how long since this duration, up to a maximum of 4x.")
       @Config.RangeInt(min = 12, max = 1000)
       @Config.LangKey("config." + MODID_TFC + ".general.world_regen.minimumTime")
       public int minimumTime = 24;
@@ -438,13 +437,13 @@ public final class ConfigTFC {
       public double snowMovementModifier = 0.85;
 
       @Config.Comment(
-              "Generic movement modifier. Lower = Slower, Higher = Faster. 1 = No slow down. Note: this is a little different than other densities (leaf / berry bush), because this actually functions as a maximum slow down. Actual value is dependent on the plant and it's age.")
+        "Generic movement modifier. Lower = Slower, Higher = Faster. 1 = No slow down. Note: this is a little different than other densities (leaf / berry bush), because this actually functions as a maximum slow down. Actual value is dependent on the plant and it's age.")
       @Config.RangeDouble(min = 0, max = 1)
       @Config.LangKey("config." + MODID_TFC + ".general.misc.minimumPlantMovementModifier")
       public double minimumPlantMovementModifier = 0;
 
       @Config.Comment({"Chance that mining a raw stone will drop a gem.",
-              "Gem grade is random from: 16/31 Chipped, 8/31 Flawed, 4/31 Normal, 2/31 Flawless and 1/31 Exquisite."})
+                       "Gem grade is random from: 16/31 Chipped, 8/31 Flawed, 4/31 Normal, 2/31 Flawless and 1/31 Exquisite."})
       @Config.RangeDouble(min = 0, max = 1)
       @Config.LangKey("config." + MODID_TFC + ".general.misc.stoneGemDropChance")
       public double stoneGemDropChance = 31.0 / 8000.0; // 0.003875
@@ -493,7 +492,7 @@ public final class ConfigTFC {
       @Config.Comment("Entities that can be plucked for feathers.")
       @Config.LangKey("config." + MODID_TFC + ".general.misc.pluckableEntities")
       public String[] pluckableEntities = new String[]{"tfc:chickentfc", "tfc:pheasanttfc", "tfc:parrottfc", "tfc:ducktfc", "tfc:grousetfc",
-              "tfc:pheasanttfc", "tfc:quailtfc", "tfc:turkeytfc"};
+                                                       "tfc:pheasanttfc", "tfc:quailtfc", "tfc:turkeytfc"};
 
       @Config.Comment("Damage dealt to an entity when a feather is harvested.")
       @Config.RangeDouble(min = 0)
@@ -550,23 +549,38 @@ public final class ConfigTFC {
       @Config.Comment("List of fluids allowed to be inserted into a barrel.")
       @Config.LangKey("config." + MODID_TFC + ".devices.barrel.fluidWhitelist")
       public String[] fluidWhitelist = new String[]{"fresh_water", "hot_water", "salt_water", "water", "limewater", "tannin", "olive_oil",
-              "olive_oil_water", "vinegar", "rum", "beer", "whiskey", "rye_whiskey", "corn_whiskey", "sake", "vodka", "cider", "brine", "milk",
-              "milk_curdled", "milk_vinegar", "white_dye", "orange_dye", "magenta_dye", "light_blue_dye", "yellow_dye", "lime_dye", "pink_dye",
-              "gray_dye", "light_gray_dye", "cyan_dye", "purple_dye", "blue_dye", "brown_dye", "green_dye", "red_dye", "black_dye",
-              "distilled_water", "waste", "base_potash_liquor", "white_tea", "green_tea", "black_tea", "chamomile_tea", "dandelion_tea",
-              "labrador_tea", "coffee", "agave_wine", "barley_wine", "banana_wine", "berry_wine", "cherry_wine", "juniper_wine", "lemon_wine",
-              "orange_wine", "papaya_wine", "peach_wine", "pear_wine", "plum_wine", "mead", "red_wine", "wheat_wine", "white_wine", "calvados",
-              "gin", "tequila", "shochu", "grappa", "banana_brandy", "cherry_brandy", "lemon_brandy", "orange_brandy", "papaya_brandy",
-              "peach_brandy", "pear_brandy", "plum_brandy", "berry_brandy", "brandy", "cognac", "beer_barley", "beer_corn", "beer_rye",
-              "beer_wheat", "beer_amaranth", "beer_buckwheat", "beer_fonio", "beer_millet", "beer_quinoa", "beer_spelt", "sugar_water",
-              "honey_water", "rice_water", "soybean_water", "linseed_water", "rape_seed_water", "sunflower_seed_water",
-              "opium_poppy_seed_water", "sugar_beet_water", "soy_milk", "linseed_oil", "rape_seed_oil", "sunflower_seed_oil",
-              "opium_poppy_seed_oil", "wort", "firma_cola", "juice_blackberry", "juice_blueberry", "juice_bunch_berry", "juice_cloud_berry",
-              "juice_cranberry", "juice_elderberry", "juice_gooseberry", "juice_raspberry", "juice_snow_berry", "juice_strawberry",
-              "juice_wintergreen_berry", "juice_agave", "juice_apple", "juice_banana", "juice_cherry", "juice_lemon", "juice_orange",
-              "juice_papaya", "juice_peach", "juice_pear", "juice_plum", "juice_juniper", "juice_green_grape", "juice_purple_grape",
-              "juice_barrel_cactus", "yeast_starter", "coconut_milk", "yak_milk", "zebu_milk", "goat_milk", "curdled_goat_milk",
-              "curdled_yak_milk", "pina_colada"};
+                                                    "olive_oil_water", "vinegar", "rum", "beer", "whiskey", "rye_whiskey", "corn_whiskey", "sake", "vodka",
+                                                    "cider", "brine", "milk",
+                                                    "milk_curdled", "milk_vinegar", "white_dye", "orange_dye", "magenta_dye", "light_blue_dye", "yellow_dye",
+                                                    "lime_dye", "pink_dye",
+                                                    "gray_dye", "light_gray_dye", "cyan_dye", "purple_dye", "blue_dye", "brown_dye", "green_dye", "red_dye",
+                                                    "black_dye",
+                                                    "distilled_water", "waste", "base_potash_liquor", "white_tea", "green_tea", "black_tea", "chamomile_tea",
+                                                    "dandelion_tea",
+                                                    "labrador_tea", "coffee", "agave_wine", "barley_wine", "banana_wine", "berry_wine", "cherry_wine",
+                                                    "juniper_wine", "lemon_wine",
+                                                    "orange_wine", "papaya_wine", "peach_wine", "pear_wine", "plum_wine", "mead", "red_wine", "wheat_wine",
+                                                    "white_wine", "calvados",
+                                                    "gin", "tequila", "shochu", "grappa", "banana_brandy", "cherry_brandy", "lemon_brandy", "orange_brandy",
+                                                    "papaya_brandy",
+                                                    "peach_brandy", "pear_brandy", "plum_brandy", "berry_brandy", "brandy", "cognac", "beer_barley",
+                                                    "beer_corn", "beer_rye",
+                                                    "beer_wheat", "beer_amaranth", "beer_buckwheat", "beer_fonio", "beer_millet", "beer_quinoa", "beer_spelt",
+                                                    "sugar_water",
+                                                    "honey_water", "rice_water", "soybean_water", "linseed_water", "rape_seed_water", "sunflower_seed_water",
+                                                    "opium_poppy_seed_water", "sugar_beet_water", "soy_milk", "linseed_oil", "rape_seed_oil",
+                                                    "sunflower_seed_oil",
+                                                    "opium_poppy_seed_oil", "wort", "firma_cola", "juice_blackberry", "juice_blueberry", "juice_bunch_berry",
+                                                    "juice_cloud_berry",
+                                                    "juice_cranberry", "juice_elderberry", "juice_gooseberry", "juice_raspberry", "juice_snow_berry",
+                                                    "juice_strawberry",
+                                                    "juice_wintergreen_berry", "juice_agave", "juice_apple", "juice_banana", "juice_cherry", "juice_lemon",
+                                                    "juice_orange",
+                                                    "juice_papaya", "juice_peach", "juice_pear", "juice_plum", "juice_juniper", "juice_green_grape",
+                                                    "juice_purple_grape",
+                                                    "juice_barrel_cactus", "yeast_starter", "coconut_milk", "yak_milk", "zebu_milk", "goat_milk",
+                                                    "curdled_goat_milk",
+                                                    "curdled_yak_milk", "pina_colada"};
     }
 
     public static final class ChiselCFG {
@@ -591,7 +605,7 @@ public final class ConfigTFC {
     public static final class SluiceCFG {
 
       @Config.Comment({"The amount of times a chunk can be worked (300 = default, 0 = disable).",
-              "Note: While sluices increase work by 1, Goldpan increase by 6."})
+                       "Note: While sluices increase work by 1, Goldpan increase by 6."})
       @Config.LangKey("config." + MODID_TFC + ".devices.sluice.maxWorkChunk")
       @Config.RangeInt(min = 0, max = 10_000)
       public int maxWorkChunk = 300;
@@ -625,7 +639,7 @@ public final class ConfigTFC {
     public static final class JugCFG {
 
       @Config.Comment(
-              "Enable Shift-Right clicking of Jars to dump water out. Enabling this will not pour an actual water block onto the ground.")
+        "Enable Shift-Right clicking of Jars to dump water out. Enabling this will not pour an actual water block onto the ground.")
       @Config.LangKey("config." + MODID_TFC + ".devices.jug.dumpWaterOnShiftRightClick")
       public boolean dumpWaterOnShiftRightClick = true;
     }
@@ -1555,8 +1569,8 @@ public final class ConfigTFC {
       public int rarity = 250;
 
       @Config.Comment({"This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+                       "You must specify by 'modid:entity'",
+                       "Invalid entries will be ignored."})
       @Config.LangKey("config." + MODID_TFC + ".animals.huntCreatures")
       public String[] huntCreatures = {"tfc:pheasanttfc", "tfc:chickentfc", "tfc:ducktfc", "tfc:rabbittfc"};
     }
@@ -1594,8 +1608,8 @@ public final class ConfigTFC {
       public int rarity = 250;
 
       @Config.Comment({"This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+                       "You must specify by 'modid:entity'",
+                       "Invalid entries will be ignored."})
       @Config.LangKey("config." + MODID_TFC + ".animals.huntCreatures")
       public String[] huntCreatures = {"tfc:sheeptfc", "tfc:rabbittfc", "tfc:haretfc"};
     }
@@ -1608,8 +1622,8 @@ public final class ConfigTFC {
       public int rarity = 150;
 
       @Config.Comment({"This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+                       "You must specify by 'modid:entity'",
+                       "Invalid entries will be ignored."})
       @Config.LangKey("config." + MODID_TFC + ".animals.huntCreatures")
       public String[] huntCreatures = {"tfc:deertfc", "tfc:haretfc", "tfc:rabbittfc"};
     }
@@ -1622,8 +1636,8 @@ public final class ConfigTFC {
       public int rarity = 150;
 
       @Config.Comment({"This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+                       "You must specify by 'modid:entity'",
+                       "Invalid entries will be ignored."})
       @Config.LangKey("config." + MODID_TFC + ".animals.huntCreatures")
       public String[] huntCreatures = {"tfc:deertfc", "tfc:haretfc", "tfc:rabbittfc"};
     }
@@ -1636,8 +1650,8 @@ public final class ConfigTFC {
       public int rarity = 120;
 
       @Config.Comment({"This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+                       "You must specify by 'modid:entity'",
+                       "Invalid entries will be ignored."})
       @Config.LangKey("config." + MODID_TFC + ".animals.huntCreatures")
       public String[] huntCreatures = {"tfc:deertfc", "tfc:haretfc", "tfc:rabbittfc"};
     }
@@ -1650,8 +1664,8 @@ public final class ConfigTFC {
       public int rarity = 150;
 
       @Config.Comment({"This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+                       "You must specify by 'modid:entity'",
+                       "Invalid entries will be ignored."})
       @Config.LangKey("config." + MODID_TFC + ".animals.huntCreatures")
       public String[] huntCreatures = {"tfc:gazelletfc", "tfc:wildebeesttfc"};
     }
@@ -1664,8 +1678,8 @@ public final class ConfigTFC {
       public int rarity = 150;
 
       @Config.Comment({"This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+                       "You must specify by 'modid:entity'",
+                       "Invalid entries will be ignored."})
       @Config.LangKey("config." + MODID_TFC + ".animals.huntCreatures")
       public String[] huntCreatures = {"tfc:deertfc", "tfc:boartfc"};
     }
@@ -1678,8 +1692,8 @@ public final class ConfigTFC {
       public int rarity = 150;
 
       @Config.Comment({"This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+                       "You must specify by 'modid:entity'",
+                       "Invalid entries will be ignored."})
       @Config.LangKey("config." + MODID_TFC + ".animals.huntCreatures")
       public String[] huntCreatures = {"tfc:horsetfc", "tfc:donkeytfc", "tfc:muletfc", "tfc:turkeytfc"};
     }
@@ -1692,8 +1706,8 @@ public final class ConfigTFC {
       public int rarity = 100;
 
       @Config.Comment({"This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+                       "You must specify by 'modid:entity'",
+                       "Invalid entries will be ignored."})
       @Config.LangKey("config." + MODID_TFC + ".animals.huntCreatures")
       public String[] huntCreatures = {"tfc:boartfc", "tfc:haretfc"};
     }
@@ -1706,8 +1720,8 @@ public final class ConfigTFC {
       public int rarity = 100;
 
       @Config.Comment({"This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+                       "You must specify by 'modid:entity'",
+                       "Invalid entries will be ignored."})
       @Config.LangKey("config." + MODID_TFC + ".animals.huntCreatures")
       public String[] huntCreatures = {"tfc:mongoosetfc", "tfc:haretfc"};
     }
@@ -1720,8 +1734,8 @@ public final class ConfigTFC {
       public int rarity = 100;
 
       @Config.Comment({"This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+                       "You must specify by 'modid:entity'",
+                       "Invalid entries will be ignored."})
       @Config.LangKey("config." + MODID_TFC + ".animals.huntCreatures")
       public String[] huntCreatures = {"tfc:boartfc", "tfc:haretfc"};
     }
@@ -1734,8 +1748,8 @@ public final class ConfigTFC {
       public int rarity = 120;
 
       @Config.Comment({"This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+                       "You must specify by 'modid:entity'",
+                       "Invalid entries will be ignored."})
       @Config.LangKey("config." + MODID_TFC + ".animals.huntCreatures")
       public String[] huntCreatures = {"tfc:pheasanttfc", "tfc:rabbittfc", "tfc:haretfc"};
     }
@@ -1748,8 +1762,8 @@ public final class ConfigTFC {
       public int rarity = 100;
 
       @Config.Comment({"This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+                       "You must specify by 'modid:entity'",
+                       "Invalid entries will be ignored."})
       @Config.LangKey("config." + MODID_TFC + ".animals.huntCreatures")
       public String[] huntCreatures = {"tfc:gazalletfc", "tfc:rabbittfc", "tfc:haretfc"};
     }

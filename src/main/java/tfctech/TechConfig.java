@@ -6,7 +6,6 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
 import static su.terrafirmagreg.data.Constants.MODID_TFCTECH;
 
 @SuppressWarnings("unused")
@@ -76,7 +75,7 @@ public final class TechConfig {
     public boolean acceptFE = true;
 
     @Config.Comment({
-            "Modifier for how quickly electric forge heats items. Smaller number = slower temperature changes. Note: This is affected by TFC global modifier."})
+      "Modifier for how quickly electric forge heats items. Smaller number = slower temperature changes. Note: This is affected by TFC global modifier."})
     @Config.RangeDouble(min = 0.01D, max = 1000.0D)
     @Config.LangKey("config." + MODID_TFCTECH + ".devices.electricForgeSpeed")
     public double electricForgeSpeed = 1.0D;

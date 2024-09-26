@@ -10,7 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import org.jetbrains.annotations.Nullable;
@@ -32,13 +31,13 @@ public class ContainerCrate extends BaseContainerTile<TileCrate> implements IBut
   @Override
   protected void addContainerSlots() {
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-            null);
+                                                null);
 
     if (inventory != null) {
       for (int y = 0; y < 3; y++) {
         for (int x = 0; x < 5; x++) {
           addSlotToContainer(
-                  new SlotCallback(inventory, x * 3 + y, 34 + x * 18, 19 + y * 18, tile));
+            new SlotCallback(inventory, x * 3 + y, 34 + x * 18, 19 + y * 18, tile));
         }
       }
     }

@@ -4,7 +4,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import com.eerussianguy.firmalife.init.PlantsFL;
 import com.eerussianguy.firmalife.world.WorldgenCinnamon;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;

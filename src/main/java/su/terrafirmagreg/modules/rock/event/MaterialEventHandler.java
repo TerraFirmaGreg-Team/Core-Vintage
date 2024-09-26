@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.rock.plugin.gregtech.material.MaterialRockHandl
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
 import gregtech.api.unification.material.event.MaterialEvent;
 
 @SuppressWarnings("unused")

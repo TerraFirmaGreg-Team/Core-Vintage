@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.IRockItem;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
 
-
 import lombok.Getter;
 
 @Getter
@@ -21,11 +20,11 @@ public abstract class ItemRock extends BaseItem implements IRockItem {
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .size(Size.SMALL)
-            .weight(Weight.LIGHT)
-            .oreDict(variant)
-            .oreDict(variant, type)
-            .oreDict(variant, type.getCategory());
+      .registryKey(variant.getRegistryKey(type))
+      .size(Size.SMALL)
+      .weight(Weight.LIGHT)
+      .oreDict(variant)
+      .oreDict(variant, type)
+      .oreDict(variant, type.getCategory());
   }
 }

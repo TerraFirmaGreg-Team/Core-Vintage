@@ -1,5 +1,7 @@
 package se.gory_moon.horsepower.recipes;
 
+import su.terrafirmagreg.api.base.block.BaseBlockHorse;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryCrafting;
@@ -10,15 +12,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-
 import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static se.gory_moon.horsepower.blocks.BlockHPChoppingBase.createItemStack;
+import static su.terrafirmagreg.api.base.block.BaseBlockHorse.createItemStack;
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class ShapelessChoppingRecipe extends ShapelessOreRecipe {
@@ -29,7 +29,7 @@ public class ShapelessChoppingRecipe extends ShapelessOreRecipe {
     super(location, result, recipe);
     this.outputBlocks = variantItems;
     for (ItemStack stack : outputBlocks) {
-      if (Block.getBlockFromItem(stack.getItem()) instanceof BlockHPChoppingBase) {
+      if (Block.getBlockFromItem(stack.getItem()) instanceof BaseBlockHorse) {
         for (int i = 0; i < input.size(); i++) {
           Ingredient ingredient = input.get(i);
           if (ingredient.apply(stack)) {
@@ -47,7 +47,7 @@ public class ShapelessChoppingRecipe extends ShapelessOreRecipe {
   public ItemStack getRecipeOutput() {
     if (!outputBlocks.isEmpty() && !output.isEmpty()) {
       ItemStack stack = outputBlocks.get(0).copy();
-      BlockHPChoppingBase block = (BlockHPChoppingBase) Block.getBlockFromItem(output.getItem());
+      BaseBlockHorse block = (BaseBlockHorse) Block.getBlockFromItem(output.getItem());
       int meta = stack.getMetadata();
       if (meta == OreDictionary.WILDCARD_VALUE) {
         stack.setItemDamage(0);
@@ -71,9 +71,9 @@ public class ShapelessChoppingRecipe extends ShapelessOreRecipe {
       for (ItemStack ore : outputBlocks) {
         ItemStack stack = craftMatrix.getStackInSlot(i);
         if ((OreDictionary.itemMatches(ore, stack, false) ||
-                (/*isTypeChopping && */(Block.getBlockFromItem(stack.getItem())) instanceof BlockHPChoppingBase)) &&
-                Block.getBlockFromItem(stack.getItem()) != Blocks.AIR) {
-          BlockHPChoppingBase block = (BlockHPChoppingBase) Block.getBlockFromItem(getSimpleRecipeOutput().getItem());
+             (/*isTypeChopping && */(Block.getBlockFromItem(stack.getItem())) instanceof BaseBlockHorse)) &&
+            Block.getBlockFromItem(stack.getItem()) != Blocks.AIR) {
+          BaseBlockHorse block = (BaseBlockHorse) Block.getBlockFromItem(getSimpleRecipeOutput().getItem());
           if (!Configs.general.useDynamicCrafting) {
             if (MODID_TFC.equals(ore.getItem().getRegistryName().getNamespace())) {
               return createItemStack(block, getSimpleRecipeOutput().getCount(), stack);

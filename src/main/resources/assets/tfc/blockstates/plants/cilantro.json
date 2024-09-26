@@ -9,8 +9,7 @@
           "model": "tfc:plants/cilantro_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },

@@ -3,8 +3,8 @@ package net.dries007.tfc.util.calendar;
 import net.minecraft.tileentity.TileEntity;
 
 /**
- * This is implemented on TileEntities that need to receive updates whenever the calendar changes drastically Note: the default {@code update()} casts the implementor
- * to {@link TileEntity}
+ * This is implemented on TileEntities that need to receive updates whenever the calendar changes drastically Note: the default {@code update()} casts the
+ * implementor to {@link TileEntity}
  *
  * @see Calendar#runTransaction(long, long, Runnable)
  */
@@ -18,7 +18,7 @@ public interface ICalendarTickable {
    */
   @SuppressWarnings("ConstantConditions")
   default void checkForCalendarUpdate() {
-    TileEntity tile = getTileEntity();
+    var tile = getTileEntity();
     if (tile.getWorld() != null && !tile.getWorld().isRemote) {
       long playerTick = Calendar.PLAYER_TIME.getTicks();
       long tickDelta = playerTick - getLastUpdateTick();
@@ -40,14 +40,14 @@ public interface ICalendarTickable {
   long getLastUpdateTick();
 
   /**
+   * Sets the last update tick This should cache the value locally. No need for serialization
+   */
+  void setLastUpdateTick(long tick);
+
+  /**
    * Called when the calendar updates (either player or calendar time)
    *
    * @param playerTickDelta the difference in player ticks observed between last tick and this tick
    */
   void onCalendarUpdate(long playerTickDelta);
-
-  /**
-   * Sets the last update tick This should cache the value locally. No need for serialization
-   */
-  void setLastUpdateTick(long tick);
 }

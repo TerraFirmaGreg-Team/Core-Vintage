@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.base.tile.BaseTile;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 
 @MethodsReturnNonnullByDefault

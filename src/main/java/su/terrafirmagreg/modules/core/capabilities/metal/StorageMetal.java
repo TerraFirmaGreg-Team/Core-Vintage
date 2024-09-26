@@ -5,7 +5,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 
-
 import org.jetbrains.annotations.Nullable;
 
 public class StorageMetal implements IStorage<ICapabilityMetal> {
@@ -13,12 +12,12 @@ public class StorageMetal implements IStorage<ICapabilityMetal> {
   @Nullable
   @Override
   public NBTBase writeNBT(Capability<ICapabilityMetal> capability, ICapabilityMetal instance,
-          EnumFacing side) {
+                          EnumFacing side) {
     return null;
   }
 
   @Override
   public void readNBT(Capability<ICapabilityMetal> capability, ICapabilityMetal instance,
-          EnumFacing side, NBTBase nbt) {
+                      EnumFacing side, NBTBase nbt) {
   }
 }

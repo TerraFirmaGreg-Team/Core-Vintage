@@ -11,7 +11,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -162,7 +161,7 @@ public class ModelYakTFC extends ModelBase {
     hornR3 = new ModelRenderer(this, 41, 14);
     hornR3.setRotationPoint(-1.7F, -0.9F, 0.0F);
     hornR3.addBox(-1.5F, -0.5F, -0.5F, 3, 1, 1, 0.0F);
-    setRotateAngle(hornR3, 0.0F, 0.0F, 0.7853981633974483F);
+    setRotateAngle(hornR3, 0.0F, 0.0F, ((float)Math.PI / 4F));
     hornL2 = new ModelRenderer(this, 42, 16);
     hornL2.mirror = true;
     hornL2.setRotationPoint(2.0F, -0.4F, 0.0F);
@@ -186,7 +185,7 @@ public class ModelYakTFC extends ModelBase {
     hornL3.mirror = true;
     hornL3.setRotationPoint(1.7F, -0.9F, 0.0F);
     hornL3.addBox(-1.5F, -0.5F, -0.5F, 3, 1, 1, 0.0F);
-    setRotateAngle(hornL3, 0.0F, 0.0F, -0.7853981633974483F);
+    setRotateAngle(hornL3, 0.0F, 0.0F, -((float)Math.PI / 4F));
     teat1 = new ModelRenderer(this, 34, 30);
     teat1.setRotationPoint(1.0F, 1.4F, -2.5F);
     teat1.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);

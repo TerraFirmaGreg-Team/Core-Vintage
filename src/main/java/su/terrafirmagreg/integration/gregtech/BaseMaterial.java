@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.util.ResourceLocation;
 
-
 import gregtech.api.unification.material.Material;
 
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BaseMaterial
-        extends Material {
+  extends Material {
 
   private static final AtomicInteger idCounter = new AtomicInteger(32100);
 

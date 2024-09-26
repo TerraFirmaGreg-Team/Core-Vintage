@@ -3,7 +3,6 @@ package net.dries007.tfc.compat.jei.wrappers;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fluids.FluidStack;
 
-
 import com.google.common.collect.Lists;
 import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.ingredients.IIngredients;

@@ -3,7 +3,6 @@ package com.eerussianguy.firmalife.compat.jei.category;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
-
 import com.eerussianguy.firmalife.compat.jei.wrapper.CastingRecipeWrapperFL;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -42,8 +41,8 @@ public class CastingCategoryFL extends BaseRecipeCategory<CastingRecipeWrapperFL
   public void setRecipe(IRecipeLayout recipeLayout, CastingRecipeWrapperFL recipeWrapper, IIngredients ingredients) {
     IGuiFluidStackGroup fluidStackGroup = recipeLayout.getFluidStacks();
     fluidStackGroup.init(0, false, 21, 17, 16, 16, ingredients.getInputs(VanillaTypes.FLUID)
-            .get(0)
-            .get(0).amount, false, null);
+                                                              .get(0)
+                                                              .get(0).amount, false, null);
     fluidStackGroup.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
     IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
     itemStackGroup.init(0, true, 84, 16);

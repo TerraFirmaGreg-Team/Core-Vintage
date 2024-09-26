@@ -11,7 +11,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
-
 import org.jetbrains.annotations.Nullable;
 
 public final class CapabilitySize {
@@ -23,7 +22,7 @@ public final class CapabilitySize {
 
   public static void register() {
     CapabilityManager.INSTANCE.register(ICapabilitySize.class, new StorageSize(),
-            ProviderSize::new);
+                                        ProviderSize::new);
   }
 
   public static boolean has(ItemStack itemStack) {
@@ -56,7 +55,7 @@ public final class CapabilitySize {
       } else if (stack.getItem() instanceof ICapabilitySize item) {
         return item;
       } else if (stack.getItem() instanceof ItemBlock itemBlock
-              && itemBlock.getBlock() instanceof ICapabilitySize capabilitySize) {
+                 && itemBlock.getBlock() instanceof ICapabilitySize capabilitySize) {
         return capabilitySize;
       }
     }

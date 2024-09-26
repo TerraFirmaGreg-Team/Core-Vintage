@@ -18,7 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -41,8 +40,8 @@ public class EntityAlpacaTFC extends EntitySheepTFC implements ILivestock {
   @SuppressWarnings("unused")
   public EntityAlpacaTFC(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-            getRandomGrowth(ConfigTFC.Animals.ALPACA.adulthood, ConfigTFC.Animals.ALPACA.elder),
-            EntitySheep.getRandomSheepColor(RNG));
+         getRandomGrowth(ConfigTFC.Animals.ALPACA.adulthood, ConfigTFC.Animals.ALPACA.elder),
+         EntitySheep.getRandomSheepColor(RNG));
   }
 
   public EntityAlpacaTFC(World worldIn, Gender gender, int birthDay, EnumDyeColor dye) {
@@ -53,7 +52,7 @@ public class EntityAlpacaTFC extends EntitySheepTFC implements ILivestock {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TAIGA)) {
+        (biomeType == BiomeHelper.BiomeType.TAIGA)) {
       return ConfigTFC.Animals.ALPACA.rarity;
     }
     return 0;
@@ -84,7 +83,7 @@ public class EntityAlpacaTFC extends EntitySheepTFC implements ILivestock {
     int numberOfChildren = ConfigTFC.Animals.ALPACA.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAlpacaTFC baby = new EntityAlpacaTFC(world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
+                                                 (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
       world.spawnEntity(baby);

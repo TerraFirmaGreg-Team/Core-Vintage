@@ -7,7 +7,6 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class IngredientFluidItem implements IIngredient<ItemStack> {

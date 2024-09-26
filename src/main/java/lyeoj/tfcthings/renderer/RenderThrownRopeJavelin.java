@@ -21,7 +21,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
-
 import lyeoj.tfcthings.entity.projectile.EntityThrownRopeJavelin;
 import lyeoj.tfcthings.items.ItemRopeJavelin;
 
@@ -103,7 +102,7 @@ public class RenderThrownRopeJavelin extends Render<EntityThrownRopeJavelin> {
       float f7 = entityplayer.getSwingProgress(partialTicks);
       float f8 = MathHelper.sin(MathHelper.sqrt(f7) * MathConstants.PI);
       float f9 = (entityplayer.prevRenderYawOffset + (entityplayer.renderYawOffset - entityplayer.prevRenderYawOffset) * partialTicks) *
-              0.017453292F;
+                 0.017453292F;
       double d0 = MathHelper.sin(f9);
       double d1 = MathHelper.cos(f9);
       double d2 = (double) k * 0.35D;
@@ -113,15 +112,15 @@ public class RenderThrownRopeJavelin extends Render<EntityThrownRopeJavelin> {
       double d7;
 
       if ((this.renderManager.options == null || this.renderManager.options.thirdPersonView <= 0) &&
-              entityplayer == Minecraft.getMinecraft().player) {
+          entityplayer == Minecraft.getMinecraft().player) {
         float f10 = this.renderManager.options.fovSetting;
         f10 = f10 / 100.0F;
         Vec3d vec3d = new Vec3d((double) k * -0.36D * (double) f10, -0.045D * (double) f10, 0.4D);
         vec3d = vec3d.rotatePitch(
-                -(entityplayer.prevRotationPitch + (entityplayer.rotationPitch - entityplayer.prevRotationPitch) * partialTicks) *
-                        0.017453292F);
+          -(entityplayer.prevRotationPitch + (entityplayer.rotationPitch - entityplayer.prevRotationPitch) * partialTicks) *
+          0.017453292F);
         vec3d = vec3d.rotateYaw(
-                -(entityplayer.prevRotationYaw + (entityplayer.rotationYaw - entityplayer.prevRotationYaw) * partialTicks) * 0.017453292F);
+          -(entityplayer.prevRotationYaw + (entityplayer.rotationYaw - entityplayer.prevRotationYaw) * partialTicks) * 0.017453292F);
         vec3d = vec3d.rotateYaw(f8 * 0.5F);
         vec3d = vec3d.rotatePitch(-f8 * 0.7F);
         d4 = entityplayer.prevPosX + (entityplayer.posX - entityplayer.prevPosX) * (double) partialTicks + vec3d.x;
@@ -131,7 +130,7 @@ public class RenderThrownRopeJavelin extends Render<EntityThrownRopeJavelin> {
       } else {
         d4 = entityplayer.prevPosX + (entityplayer.posX - entityplayer.prevPosX) * (double) partialTicks - d1 * d2 - d0 * 0.8D;
         d5 = entityplayer.prevPosY + (double) entityplayer.getEyeHeight() +
-                (entityplayer.posY - entityplayer.prevPosY) * (double) partialTicks - 0.45D;
+             (entityplayer.posY - entityplayer.prevPosY) * (double) partialTicks - 0.45D;
         d6 = entityplayer.prevPosZ + (entityplayer.posZ - entityplayer.prevPosZ) * (double) partialTicks - d0 * d2 + d1 * 0.8D;
         d7 = entityplayer.isSneaking() ? -0.1875D : 0.0D;
       }
@@ -160,13 +159,13 @@ public class RenderThrownRopeJavelin extends Render<EntityThrownRopeJavelin> {
 
         float f3 = (float) j / 24.0F;
         bufferbuilder.pos(x + d10 * (double) f3 + 0.0D,
-                        y + d11 * (double) (f3 * f3 + f3) * 0.5D + (double) ((24.0F - (float) j) / 18.0F + 0.125F), z + d12 * (double) f3)
-                .color(f, f1, f2, 1.0F)
-                .endVertex();
+                          y + d11 * (double) (f3 * f3 + f3) * 0.5D + (double) ((24.0F - (float) j) / 18.0F + 0.125F), z + d12 * (double) f3)
+                     .color(f, f1, f2, 1.0F)
+                     .endVertex();
         bufferbuilder.pos(x + d10 * (double) f3 + 0.025D,
-                        y + d11 * (double) (f3 * f3 + f3) * 0.5D + (double) ((24.0F - (float) j) / 18.0F + 0.125F) + 0.025D, z + d12 * (double) f3)
-                .color(f, f1, f2, 1.0F)
-                .endVertex();
+                          y + d11 * (double) (f3 * f3 + f3) * 0.5D + (double) ((24.0F - (float) j) / 18.0F + 0.125F) + 0.025D, z + d12 * (double) f3)
+                     .color(f, f1, f2, 1.0F)
+                     .endVertex();
       }
 
       tessellator.draw();
@@ -185,15 +184,15 @@ public class RenderThrownRopeJavelin extends Render<EntityThrownRopeJavelin> {
 
         float f7_1 = (float) l / 24.0F;
         bufferbuilder.pos(x + d10 * (double) f7_1 + 0.0D,
-                        y + d11 * (double) (f7_1 * f7_1 + f7_1) * 0.5D + (double) ((24.0F - (float) l) / 18.0F + 0.125F) + 0.025D,
-                        z + d12 * (double) f7_1)
-                .color(f4, f5, f6, 1.0F)
-                .endVertex();
+                          y + d11 * (double) (f7_1 * f7_1 + f7_1) * 0.5D + (double) ((24.0F - (float) l) / 18.0F + 0.125F) + 0.025D,
+                          z + d12 * (double) f7_1)
+                     .color(f4, f5, f6, 1.0F)
+                     .endVertex();
         bufferbuilder.pos(x + d10 * (double) f7_1 + 0.025D,
-                        y + d11 * (double) (f7_1 * f7_1 + f7_1) * 0.5D + (double) ((24.0F - (float) l) / 18.0F + 0.125F),
-                        z + d12 * (double) f7_1 + 0.025D)
-                .color(f4, f5, f6, 1.0F)
-                .endVertex();
+                          y + d11 * (double) (f7_1 * f7_1 + f7_1) * 0.5D + (double) ((24.0F - (float) l) / 18.0F + 0.125F),
+                          z + d12 * (double) f7_1 + 0.025D)
+                     .color(f4, f5, f6, 1.0F)
+                     .endVertex();
       }
 
       tessellator.draw();

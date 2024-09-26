@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.core.capabilities.size.spi;
 
 import su.terrafirmagreg.modules.core.ConfigCore;
 
-
 import lombok.Getter;
 
 @Getter

@@ -19,7 +19,6 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.data.Properties.HORIZONTAL;
@@ -31,11 +30,11 @@ public class BlockFreezeDryer extends BaseBlockContainer {
     super(Settings.of(Material.WOOD));
 
     getSettings()
-            .registryKey("device/freeze_dryer")
-            .nonCube()
-            .hardness(2F);
+      .registryKey("device/freeze_dryer")
+      .nonCube()
+      .hardness(2F);
     setDefaultState(blockState.getBaseState()
-            .withProperty(HORIZONTAL, EnumFacing.NORTH));
+                              .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 
   public EnumFacing getFacing(IBlockState state) {
@@ -76,16 +75,16 @@ public class BlockFreezeDryer extends BaseBlockContainer {
       EnumFacing enumfacing = state.getValue(HORIZONTAL);
 
       if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock()
-              && !iblockstate1.isFullBlock()) {
+          && !iblockstate1.isFullBlock()) {
         enumfacing = EnumFacing.SOUTH;
       } else if (enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock()
-              && !iblockstate.isFullBlock()) {
+                 && !iblockstate.isFullBlock()) {
         enumfacing = EnumFacing.NORTH;
       } else if (enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock()
-              && !iblockstate3.isFullBlock()) {
+                 && !iblockstate3.isFullBlock()) {
         enumfacing = EnumFacing.EAST;
       } else if (enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock()
-              && !iblockstate2.isFullBlock()) {
+                 && !iblockstate2.isFullBlock()) {
         enumfacing = EnumFacing.WEST;
       }
 
@@ -95,8 +94,8 @@ public class BlockFreezeDryer extends BaseBlockContainer {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
-          float hitZ) {
+                                  EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
+                                  float hitZ) {
     if (!worldIn.isRemote) {
       GuiHandler.openGui(worldIn, pos, player);
     }
@@ -104,14 +103,14 @@ public class BlockFreezeDryer extends BaseBlockContainer {
   }
 
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-          float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+                                          float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     return this.getDefaultState()
-            .withProperty(HORIZONTAL, placer.getHorizontalFacing().getOpposite());
+               .withProperty(HORIZONTAL, placer.getHorizontalFacing().getOpposite());
   }
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-          EntityLivingBase placer, ItemStack stack) {
+                              EntityLivingBase placer, ItemStack stack) {
     if (stack.hasDisplayName()) {
       var tile = TileUtils.getTile(worldIn, pos, TileFreezeDryer.class);
       //tile.setCustomName(stack.getDisplayName());

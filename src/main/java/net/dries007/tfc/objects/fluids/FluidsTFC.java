@@ -15,7 +15,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableMap;
@@ -245,11 +244,11 @@ public final class FluidsTFC {
 
   public static void registerFluids() {
     FRESH_WATER = registerFluid(new Fluid("fresh_water", STILL, FLOW, 0xFF296ACD))
-            .with(DrinkableProperty.DRINKABLE, player -> {
-              if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
-                foodStats.addThirst(40);
-              }
-            });
+      .with(DrinkableProperty.DRINKABLE, player -> {
+        if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
+          foodStats.addThirst(40);
+        }
+      });
     HOT_WATER = registerFluid(new Fluid("hot_water", STILL, FLOW, 0xFF345FDA).setTemperature(350));
     SALT_WATER = registerFluid(new Fluid("salt_water", STILL, FLOW, 0xFF1F5099)).with(DrinkableProperty.DRINKABLE, player -> {
       if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
@@ -273,25 +272,25 @@ public final class FluidsTFC {
     };
 
     allAlcoholsFluids = ImmutableSet.<FluidWrapper>builder()
-            .add(
-                    RUM = registerFluid(new Fluid("rum", STILL, FLOW, 0xFF6E0123).setRarity(EnumRarity.UNCOMMON)).with(
-                            DrinkableProperty.DRINKABLE, alcoholProperty),
-                    BEER = registerFluid(new Fluid("beer", STILL, FLOW, 0xFFC39E37).setRarity(EnumRarity.UNCOMMON)).with(
-                            DrinkableProperty.DRINKABLE, alcoholProperty),
-                    WHISKEY = registerFluid(new Fluid("whiskey", STILL, FLOW, 0xFF583719).setRarity(EnumRarity.UNCOMMON)).with(
-                            DrinkableProperty.DRINKABLE, alcoholProperty),
-                    RYE_WHISKEY = registerFluid(new Fluid("rye_whiskey", STILL, FLOW, 0xFFC77D51).setRarity(EnumRarity.UNCOMMON)).with(
-                            DrinkableProperty.DRINKABLE, alcoholProperty),
-                    CORN_WHISKEY = registerFluid(new Fluid("corn_whiskey", STILL, FLOW, 0xFFD9C7B7).setRarity(EnumRarity.UNCOMMON)).with(
-                            DrinkableProperty.DRINKABLE, alcoholProperty),
-                    SAKE = registerFluid(new Fluid("sake", STILL, FLOW, 0xFFB7D9BC).setRarity(EnumRarity.UNCOMMON)).with(
-                            DrinkableProperty.DRINKABLE, alcoholProperty),
-                    VODKA = registerFluid(new Fluid("vodka", STILL, FLOW, 0xFFDCDCDC).setRarity(EnumRarity.UNCOMMON)).with(
-                            DrinkableProperty.DRINKABLE, alcoholProperty),
-                    CIDER = registerFluid(new Fluid("cider", STILL, FLOW, 0xFFB0AE32).setRarity(EnumRarity.UNCOMMON)).with(
-                            DrinkableProperty.DRINKABLE, alcoholProperty)
-            )
-            .build();
+                                    .add(
+                                      RUM = registerFluid(new Fluid("rum", STILL, FLOW, 0xFF6E0123).setRarity(EnumRarity.UNCOMMON)).with(
+                                        DrinkableProperty.DRINKABLE, alcoholProperty),
+                                      BEER = registerFluid(new Fluid("beer", STILL, FLOW, 0xFFC39E37).setRarity(EnumRarity.UNCOMMON)).with(
+                                        DrinkableProperty.DRINKABLE, alcoholProperty),
+                                      WHISKEY = registerFluid(new Fluid("whiskey", STILL, FLOW, 0xFF583719).setRarity(EnumRarity.UNCOMMON)).with(
+                                        DrinkableProperty.DRINKABLE, alcoholProperty),
+                                      RYE_WHISKEY = registerFluid(new Fluid("rye_whiskey", STILL, FLOW, 0xFFC77D51).setRarity(EnumRarity.UNCOMMON)).with(
+                                        DrinkableProperty.DRINKABLE, alcoholProperty),
+                                      CORN_WHISKEY = registerFluid(new Fluid("corn_whiskey", STILL, FLOW, 0xFFD9C7B7).setRarity(EnumRarity.UNCOMMON)).with(
+                                        DrinkableProperty.DRINKABLE, alcoholProperty),
+                                      SAKE = registerFluid(new Fluid("sake", STILL, FLOW, 0xFFB7D9BC).setRarity(EnumRarity.UNCOMMON)).with(
+                                        DrinkableProperty.DRINKABLE, alcoholProperty),
+                                      VODKA = registerFluid(new Fluid("vodka", STILL, FLOW, 0xFFDCDCDC).setRarity(EnumRarity.UNCOMMON)).with(
+                                        DrinkableProperty.DRINKABLE, alcoholProperty),
+                                      CIDER = registerFluid(new Fluid("cider", STILL, FLOW, 0xFFB0AE32).setRarity(EnumRarity.UNCOMMON)).with(
+                                        DrinkableProperty.DRINKABLE, alcoholProperty)
+                                    )
+                                    .build();
 
     DrinkableProperty milkProperty = player -> {
       if (player.getFoodStats() instanceof IFoodStatsTFC foodStats) {
@@ -301,84 +300,84 @@ public final class FluidsTFC {
     };
 
     allOtherFiniteFluids = ImmutableSet.<FluidWrapper>builder()
-            .add(
-                    VINEGAR = registerFluid(new Fluid("vinegar", STILL, FLOW, 0xFFC7C2AA)),
-                    BRINE = registerFluid(new Fluid("brine", STILL, FLOW, 0xFFDCD3C9)),
-                    MILK = registerFluid(new Fluid("milk", STILL, FLOW, 0xFFFFFFFF)).with(DrinkableProperty.DRINKABLE, milkProperty),
-                    OLIVE_OIL = registerFluid(new Fluid("olive_oil", STILL, FLOW, 0xFF6A7537).setRarity(EnumRarity.RARE)),
-                    OLIVE_OIL_WATER = registerFluid(new Fluid("olive_oil_water", STILL, FLOW, 0xFF4A4702)),
-                    TANNIN = registerFluid(new Fluid("tannin", STILL, FLOW, 0xFF63594E)),
-                    LIMEWATER = registerFluid(new Fluid("limewater", STILL, FLOW, 0xFFB4B4B4)),
-                    CURDLED_MILK = registerFluid(new Fluid("milk_curdled", STILL, FLOW, 0xFFFFFBE8)),
-                    MILK_VINEGAR = registerFluid(new Fluid("milk_vinegar", STILL, FLOW, 0xFFFFFBE8)),
-                    LYE = registerFluid(new Fluid("lye", STILL, FLOW, 0xFFfeffde)),
-                    YEAST_STARTER = registerFluid(new Fluid("yeast_starter", STILL, FLOW, 0xFFa79464)),
-                    COCONUT_MILK = registerFluid(new Fluid("coconut_milk", STILL, FLOW, 0xFFfcfae2)).with(DrinkableProperty.DRINKABLE, milkProperty),
-                    YAK_MILK = registerFluid(new Fluid("yak_milk", STILL, FLOW, 0xFFfcfaec)).with(DrinkableProperty.DRINKABLE, milkProperty),
-                    GOAT_MILK = registerFluid(new Fluid("goat_milk", STILL, FLOW, 0xFFf6f6eb)).with(DrinkableProperty.DRINKABLE, milkProperty),
-                    ZEBU_MILK = registerFluid(new Fluid("zebu_milk", STILL, FLOW, 0xFFefede6)).with(DrinkableProperty.DRINKABLE, milkProperty),
-                    CURDLED_YAK_MILK = registerFluid(new Fluid("curdled_yak_milk", STILL, FLOW, 0xFFf9f4d6)),
-                    CURDLED_GOAT_MILK = registerFluid(new Fluid("curdled_goat_milk", STILL, FLOW, 0xFFeeeed9)),
-                    PINA_COLADA = registerFluid(new Fluid("pina_colada", STILL, FLOW, 0xFFE4C06A)).with(DrinkableProperty.DRINKABLE, player -> {
-                      if (player.getFoodStats() instanceof IFoodStatsTFC foodStats) {
-                        foodStats.addThirst(10);
-                        foodStats.getNutrition().addBuff(FoodData.MILK);
-                        foodStats.getNutrition().addBuff(FoodData.GOLDEN_CARROT);
-                        player.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 100, 0));
-                        player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 0));
-                      }
-                    }),
-                    LATEX = registerFluid(new Fluid("latex", STILL, FLOW, 0xFFF8F8F8)),
-                    GLASS = registerFluid(new Fluid("glass", STILL, FLOW, 0xFFED97B5).setTemperature(1073)),
+                                       .add(
+                                         VINEGAR = registerFluid(new Fluid("vinegar", STILL, FLOW, 0xFFC7C2AA)),
+                                         BRINE = registerFluid(new Fluid("brine", STILL, FLOW, 0xFFDCD3C9)),
+                                         MILK = registerFluid(new Fluid("milk", STILL, FLOW, 0xFFFFFFFF)).with(DrinkableProperty.DRINKABLE, milkProperty),
+                                         OLIVE_OIL = registerFluid(new Fluid("olive_oil", STILL, FLOW, 0xFF6A7537).setRarity(EnumRarity.RARE)),
+                                         OLIVE_OIL_WATER = registerFluid(new Fluid("olive_oil_water", STILL, FLOW, 0xFF4A4702)),
+                                         TANNIN = registerFluid(new Fluid("tannin", STILL, FLOW, 0xFF63594E)),
+                                         LIMEWATER = registerFluid(new Fluid("limewater", STILL, FLOW, 0xFFB4B4B4)),
+                                         CURDLED_MILK = registerFluid(new Fluid("milk_curdled", STILL, FLOW, 0xFFFFFBE8)),
+                                         MILK_VINEGAR = registerFluid(new Fluid("milk_vinegar", STILL, FLOW, 0xFFFFFBE8)),
+                                         LYE = registerFluid(new Fluid("lye", STILL, FLOW, 0xFFfeffde)),
+                                         YEAST_STARTER = registerFluid(new Fluid("yeast_starter", STILL, FLOW, 0xFFa79464)),
+                                         COCONUT_MILK = registerFluid(new Fluid("coconut_milk", STILL, FLOW, 0xFFfcfae2)).with(DrinkableProperty.DRINKABLE, milkProperty),
+                                         YAK_MILK = registerFluid(new Fluid("yak_milk", STILL, FLOW, 0xFFfcfaec)).with(DrinkableProperty.DRINKABLE, milkProperty),
+                                         GOAT_MILK = registerFluid(new Fluid("goat_milk", STILL, FLOW, 0xFFf6f6eb)).with(DrinkableProperty.DRINKABLE, milkProperty),
+                                         ZEBU_MILK = registerFluid(new Fluid("zebu_milk", STILL, FLOW, 0xFFefede6)).with(DrinkableProperty.DRINKABLE, milkProperty),
+                                         CURDLED_YAK_MILK = registerFluid(new Fluid("curdled_yak_milk", STILL, FLOW, 0xFFf9f4d6)),
+                                         CURDLED_GOAT_MILK = registerFluid(new Fluid("curdled_goat_milk", STILL, FLOW, 0xFFeeeed9)),
+                                         PINA_COLADA = registerFluid(new Fluid("pina_colada", STILL, FLOW, 0xFFE4C06A)).with(DrinkableProperty.DRINKABLE, player -> {
+                                           if (player.getFoodStats() instanceof IFoodStatsTFC foodStats) {
+                                             foodStats.addThirst(10);
+                                             foodStats.getNutrition().addBuff(FoodData.MILK);
+                                             foodStats.getNutrition().addBuff(FoodData.GOLDEN_CARROT);
+                                             player.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 100, 0));
+                                             player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 0));
+                                           }
+                                         }),
+                                         LATEX = registerFluid(new Fluid("latex", STILL, FLOW, 0xFFF8F8F8)),
+                                         GLASS = registerFluid(new Fluid("glass", STILL, FLOW, 0xFFED97B5).setTemperature(1073)),
 
-                    TEA = registerFluid(new Fluid("tea", STILL, FLOW, 0xFF1C120B)).with(DrinkableProperty.DRINKABLE, player -> {
-                      if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
-                        foodStats.addThirst(40);
-                        player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 0));
-                      }
-                    }),
-                    SWEET_TEA = registerFluid(new Fluid("sweet_tea", STILL, FLOW, 0xFF1C120B)).with(DrinkableProperty.DRINKABLE, player -> {
-                      if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
-                        foodStats.addThirst(40);
-                        player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 1));
-                      }
-                    }),
-                    COFFEE = registerFluid(new Fluid("coffee", STILL, FLOW, 0xFF210B00)).with(DrinkableProperty.DRINKABLE, player -> {
-                      if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
-                        foodStats.addThirst(40);
-                        player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 2));
-                      }
-                    }),
-                    SWEET_COFFEE = registerFluid(new Fluid("sweet_coffee", STILL, FLOW, 0xFF210B00)).with(DrinkableProperty.DRINKABLE, player -> {
-                      if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
-                        foodStats.addThirst(40);
-                        player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 3));
-                      }
-                    })
-            )
-            .build();
+                                         TEA = registerFluid(new Fluid("tea", STILL, FLOW, 0xFF1C120B)).with(DrinkableProperty.DRINKABLE, player -> {
+                                           if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
+                                             foodStats.addThirst(40);
+                                             player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 0));
+                                           }
+                                         }),
+                                         SWEET_TEA = registerFluid(new Fluid("sweet_tea", STILL, FLOW, 0xFF1C120B)).with(DrinkableProperty.DRINKABLE, player -> {
+                                           if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
+                                             foodStats.addThirst(40);
+                                             player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 1));
+                                           }
+                                         }),
+                                         COFFEE = registerFluid(new Fluid("coffee", STILL, FLOW, 0xFF210B00)).with(DrinkableProperty.DRINKABLE, player -> {
+                                           if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
+                                             foodStats.addThirst(40);
+                                             player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 2));
+                                           }
+                                         }),
+                                         SWEET_COFFEE = registerFluid(new Fluid("sweet_coffee", STILL, FLOW, 0xFF210B00)).with(DrinkableProperty.DRINKABLE, player -> {
+                                           if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
+                                             foodStats.addThirst(40);
+                                             player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 3));
+                                           }
+                                         })
+                                       )
+                                       .build();
 
     //noinspection ConstantConditions
     allMetalFluids = ImmutableMap.<Metal, FluidWrapper>builder()
-            .putAll(
-                    TFCRegistries.METALS.getValuesCollection()
-                            .stream()
-                            .collect(Collectors.toMap(
-                                    metal -> metal,
-                                    metal -> registerFluid(new Fluid(metal.getRegistryName()
-                                            .getPath(), LAVA_STILL, LAVA_FLOW, metal.getColor())).with(MetalProperty.METAL,
-                                            new MetalProperty(metal))
-                            ))
-            )
-            .build();
+                                 .putAll(
+                                   TFCRegistries.METALS.getValuesCollection()
+                                                       .stream()
+                                                       .collect(Collectors.toMap(
+                                                         metal -> metal,
+                                                         metal -> registerFluid(new Fluid(metal.getRegistryName()
+                                                                                               .getPath(), LAVA_STILL, LAVA_FLOW, metal.getColor())).with(MetalProperty.METAL,
+                                                                                                                                                          new MetalProperty(metal))
+                                                       ))
+                                 )
+                                 .build();
 
     DYE_FLUIDS.putAll(Arrays.stream(EnumDyeColor.values()).collect(Collectors.toMap(
-            color -> color,
-            color -> {
-              float[] c = color.getColorComponentValues();
-              String actualName = color == EnumDyeColor.SILVER ? "light_gray" : color.getName();
-              return registerFluid(new Fluid(actualName + "_dye", STILL, FLOW, new Color(c[0], c[1], c[2]).getRGB()));
-            })));
+      color -> color,
+      color -> {
+        float[] c = color.getColorComponentValues();
+        String actualName = color == EnumDyeColor.SILVER ? "light_gray" : color.getName();
+        return registerFluid(new Fluid(actualName + "_dye", STILL, FLOW, new Color(c[0], c[1], c[2]).getRGB()));
+      })));
   }
 
   @NotNull

@@ -21,7 +21,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import gregtech.api.items.toolitem.IGTTool;
 
 import org.jetbrains.annotations.NotNull;
@@ -33,6 +32,25 @@ import lombok.Getter;
 public class TileWoodToolRack extends BaseTile {
 
   private final NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
+
+  /**
+   * @return true if this item can be put on a tool rack, false otherwise
+   */
+  public static boolean isItemEligible(@Nullable ItemStack stack) {
+    if (stack == null || stack.isEmpty()) {
+      return false;
+    }
+    var item = stack.getItem();
+    return !item.getToolClasses(stack).isEmpty() ||
+           item instanceof IGTTool ||
+           item instanceof ItemFireStarter ||
+           item instanceof ItemTool ||
+           item instanceof ItemBow ||
+           item instanceof ItemHoe ||
+           item instanceof ItemSword ||
+           item instanceof ItemFlintAndSteel ||
+           OreDictUtils.contains(stack, "tool");
+  }
 
   public void onBreakBlock() {
     items.forEach(i -> StackUtils.spawnItemStack(world, pos, i));
@@ -50,7 +68,7 @@ public class TileWoodToolRack extends BaseTile {
   public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
     super.writeToNBT(nbt);
     NBTUtils.setGenericNBTValue(nbt, "items",
-            ItemStackHelper.saveAllItems(new NBTTagCompound(), items));
+                                ItemStackHelper.saveAllItems(new NBTTagCompound(), items));
     return nbt;
   }
 
@@ -73,24 +91,5 @@ public class TileWoodToolRack extends BaseTile {
     }
     markForBlockUpdate();
     return true;
-  }
-
-  /**
-   * @return true if this item can be put on a tool rack, false otherwise
-   */
-  public static boolean isItemEligible(@Nullable ItemStack stack) {
-    if (stack == null || stack.isEmpty()) {
-      return false;
-    }
-    var item = stack.getItem();
-    return !item.getToolClasses(stack).isEmpty() ||
-            item instanceof IGTTool ||
-            item instanceof ItemFireStarter ||
-            item instanceof ItemTool ||
-            item instanceof ItemBow ||
-            item instanceof ItemHoe ||
-            item instanceof ItemSword ||
-            item instanceof ItemFlintAndSteel ||
-            OreDictUtils.contains(stack, "tool");
   }
 }

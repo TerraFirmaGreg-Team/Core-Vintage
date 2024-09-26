@@ -27,7 +27,6 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
@@ -69,9 +68,9 @@ public class BlockLogTFCF extends BlockLog implements ICapabilitySize {
       throw new IllegalStateException("There can only be one.");
     }
     setDefaultState(blockState.getBaseState()
-            .withProperty(LOG_AXIS, BlockLog.EnumAxis.Y)
-            .withProperty(PLACED, true)
-            .withProperty(SMALL, false));
+                              .withProperty(LOG_AXIS, BlockLog.EnumAxis.Y)
+                              .withProperty(PLACED, true)
+                              .withProperty(SMALL, false));
     setHarvestLevel("axe", 0);
     setHardness(20.0F);
     setResistance(5.0F);
@@ -209,7 +208,7 @@ public class BlockLogTFCF extends BlockLog implements ICapabilitySize {
       if (!state.getValue(PLACED) && ConfigTFC.General.TREE.enableFelling) {
         player.setHeldItem(EnumHand.MAIN_HAND, stack); // Reset so we can damage however we want before vanilla
         if (!removeTree(world, pos, player, stack,
-                OreDictionaryHelper.doesStackMatchOre(stack, "axeStone") || OreDictionaryHelper.doesStackMatchOre(stack, "hammerStone"))) {
+                        OreDictionaryHelper.doesStackMatchOre(stack, "axeStone") || OreDictionaryHelper.doesStackMatchOre(stack, "hammerStone"))) {
           // Don't remove the block, the rest of the tree broke instead
           return false;
         }
@@ -285,14 +284,14 @@ public class BlockLogTFCF extends BlockLog implements ICapabilitySize {
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(LOG_AXIS, EnumAxis.values()[meta & 0b11])
-            .withProperty(PLACED, (meta & 0b100) == 0b100)
-            .withProperty(SMALL, (meta & 0b1000) == 0b1000);
+                            .withProperty(PLACED, (meta & 0b100) == 0b100)
+                            .withProperty(SMALL, (meta & 0b1000) == 0b1000);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
     return state.getValue(LOG_AXIS)
-            .ordinal() | (state.getValue(PLACED) ? 0b100 : 0) | (state.getValue(SMALL) ? 0b1000 : 0);
+                .ordinal() | (state.getValue(PLACED) ? 0b100 : 0) | (state.getValue(SMALL) ? 0b1000 : 0);
   }
 
   @Override
@@ -311,10 +310,10 @@ public class BlockLogTFCF extends BlockLog implements ICapabilitySize {
 
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer) {
+                                          EntityLivingBase placer) {
     // Small logs are a weird feature, for now they shall be disabled via shift placement since it interferes with log pile placement
     return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer)
-            .withProperty(PLACED, true);
+                .withProperty(PLACED, true);
   }
 
   @Override

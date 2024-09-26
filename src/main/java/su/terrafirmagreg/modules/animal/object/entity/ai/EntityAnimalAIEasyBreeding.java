@@ -11,7 +11,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
-
 import java.util.List;
 
 public class EntityAnimalAIEasyBreeding extends EntityAIBase {
@@ -59,15 +58,15 @@ public class EntityAnimalAIEasyBreeding extends EntityAIBase {
 
   List<EntityItem> getItems() {
     return world.getEntitiesWithinAABB(
-            EntityItem.class,
-            new AxisAlignedBB(
-                    animal.posX - ConfigAnimal.MISC.searchDistance,
-                    animal.posY - ConfigAnimal.MISC.searchDistance,
-                    animal.posZ - ConfigAnimal.MISC.searchDistance,
-                    animal.posX + ConfigAnimal.MISC.searchDistance,
-                    animal.posY + ConfigAnimal.MISC.searchDistance,
-                    animal.posZ + ConfigAnimal.MISC.searchDistance
-            ));
+      EntityItem.class,
+      new AxisAlignedBB(
+        animal.posX - ConfigAnimal.MISC.searchDistance,
+        animal.posY - ConfigAnimal.MISC.searchDistance,
+        animal.posZ - ConfigAnimal.MISC.searchDistance,
+        animal.posX + ConfigAnimal.MISC.searchDistance,
+        animal.posY + ConfigAnimal.MISC.searchDistance,
+        animal.posZ + ConfigAnimal.MISC.searchDistance
+      ));
   }
 
   public void consumeFood(EntityItem item) {
@@ -77,6 +76,6 @@ public class EntityAnimalAIEasyBreeding extends EntityAIBase {
       item.setDead();
     }
     this.world.playSound(null, item.getPosition(), SoundEvents.ENTITY_PLAYER_BURP,
-            SoundCategory.AMBIENT, 1.0F, 1.0F);
+                         SoundCategory.AMBIENT, 1.0F, 1.0F);
   }
 }

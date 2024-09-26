@@ -2,7 +2,6 @@ package net.dries007.tfc.network;
 
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-
 import io.netty.buffer.ByteBuf;
 
 /**

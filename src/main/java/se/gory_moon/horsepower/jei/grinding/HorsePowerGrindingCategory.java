@@ -2,7 +2,6 @@ package se.gory_moon.horsepower.jei.grinding;
 
 import net.minecraft.util.ResourceLocation;
 
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -52,11 +51,11 @@ public class HorsePowerGrindingCategory extends HorsePowerCategory<GrindstoneRec
     guiItemStacks.init(outputSlot, false, 90, 27);
     guiItemStacks.init(secondarySlot, false, 90, 50);
     guiItemStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) ->
-    {
-      if (slotIndex == secondarySlot && !ingredient.isEmpty()) {
-        tooltip.add(tooltip.size() - 1, Localization.GUI.JEI.GRINDING_CHANCE.translate(recipeWrapper.getSecondaryChance()));
-      }
-    });
+                                     {
+                                       if (slotIndex == secondarySlot && !ingredient.isEmpty()) {
+                                         tooltip.add(tooltip.size() - 1, Localization.GUI.JEI.GRINDING_CHANCE.translate(recipeWrapper.getSecondaryChance()));
+                                       }
+                                     });
 
     guiItemStacks.set(ingredients);
     super.openRecipe();

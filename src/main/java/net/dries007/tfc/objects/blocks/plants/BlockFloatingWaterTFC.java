@@ -14,7 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.api.types.Plant;
 
 import org.jetbrains.annotations.NotNull;
@@ -47,7 +46,7 @@ public class BlockFloatingWaterTFC extends BlockPlantTFC {
   @Override
   public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
     world.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod())
-            .withProperty(growthStageProperty, plant.getStageForMonth()));
+                                  .withProperty(growthStageProperty, plant.getStageForMonth()));
     this.checkAndDropBlock(world, pos, state);
   }
 
@@ -69,7 +68,7 @@ public class BlockFloatingWaterTFC extends BlockPlantTFC {
   @Override
   protected boolean canSustainBush(IBlockState state) {
     return (BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) ||
-            (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
+           (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
   }
 
   @Override
@@ -78,7 +77,7 @@ public class BlockFloatingWaterTFC extends BlockPlantTFC {
       IBlockState stateDown = worldIn.getBlockState(pos.down());
       Material material = stateDown.getMaterial();
       return (material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == plant.getWaterType()) ||
-              material == Material.ICE || (material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
+             material == Material.ICE || (material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
     } else {
       return false;
     }

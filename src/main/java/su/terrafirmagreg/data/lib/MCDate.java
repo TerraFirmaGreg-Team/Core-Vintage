@@ -6,7 +6,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
@@ -173,9 +172,9 @@ public class MCDate {
 
     private static final Month[] VALUES = values();
     public static final float AVERAGE_TEMPERATURE_MODIFIER = (float) Arrays.stream(VALUES)
-            .mapToDouble(Month::getTemperatureModifier)
-            .average()
-            .orElse(0);
+                                                                           .mapToDouble(Month::getTemperatureModifier)
+                                                                           .average()
+                                                                           .orElse(0);
 
     private final int monthDays;
     private final int daylightlength;

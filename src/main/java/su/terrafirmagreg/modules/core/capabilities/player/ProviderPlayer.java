@@ -9,7 +9,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-
 import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -24,7 +23,7 @@ import java.util.Map;
 public class ProviderPlayer implements ICapabilityPlayer, ICapabilitySerializable<NBTTagCompound> {
 
   public static final int MAX_INTOXICATED_TICKS =
-          36 * ICalendar.TICKS_IN_HOUR; // A day and a half. Each drink gives you 4 hours of time
+    36 * ICalendar.TICKS_IN_HOUR; // A day and a half. Each drink gives you 4 hours of time
 
   private final Map<String, Skill> skills;
   private final EntityPlayer player;

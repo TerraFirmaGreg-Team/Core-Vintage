@@ -5,7 +5,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 
-
 import org.jetbrains.annotations.Nullable;
 
 public class StorageDamageResistance implements IStorage<ICapabilityDamageResistance> {
@@ -13,12 +12,12 @@ public class StorageDamageResistance implements IStorage<ICapabilityDamageResist
   @Nullable
   @Override
   public NBTBase writeNBT(Capability<ICapabilityDamageResistance> capability,
-          ICapabilityDamageResistance instance, EnumFacing side) {
+                          ICapabilityDamageResistance instance, EnumFacing side) {
     return null;
   }
 
   @Override
   public void readNBT(Capability<ICapabilityDamageResistance> capability,
-          ICapabilityDamageResistance instance, EnumFacing side, NBTBase nbt) {
+                      ICapabilityDamageResistance instance, EnumFacing side, NBTBase nbt) {
   }
 }

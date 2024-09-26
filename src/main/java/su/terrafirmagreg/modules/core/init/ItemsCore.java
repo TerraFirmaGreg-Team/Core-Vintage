@@ -31,9 +31,9 @@ public final class ItemsCore {
     SEA_ICE_SHARD = registry.item(new ItemCoreMisc("sea_ice_shard", Size.TINY, Weight.LIGHT));
     PACKED_ICE_SHARD = registry.item(new ItemCoreMisc("packed_ice_shard", Size.TINY, Weight.LIGHT));
     STRAW = registry.item(
-            new ItemCoreMisc("straw", Size.SMALL, Weight.VERY_LIGHT, "kindling", "straw"));
+      new ItemCoreMisc("straw", Size.SMALL, Weight.VERY_LIGHT, "kindling", "straw"));
     WOOD_ASH = registry.item(
-            new ItemCoreMisc("wood_ash", Size.VERY_SMALL, Weight.VERY_LIGHT, "dustAsh"));
+      new ItemCoreMisc("wood_ash", Size.VERY_SMALL, Weight.VERY_LIGHT, "dustAsh"));
     JAR = registry.item(new ItemCoreMisc("jar", Size.VERY_SMALL, Weight.VERY_LIGHT));
     HALTER = registry.item(new ItemCoreMisc("halter", Size.SMALL, Weight.LIGHT, "halter"));
     MORTAR = registry.item(new ItemCoreMisc("mortar", Size.TINY, Weight.VERY_LIGHT, "mortar"));

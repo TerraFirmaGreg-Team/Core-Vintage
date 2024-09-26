@@ -11,7 +11,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import mcp.MethodsReturnNonnullByDefault;
@@ -51,7 +50,7 @@ public class ItemHoeTFCF extends ItemHoe implements ICapabilitySize {
     Multimap<String, AttributeModifier> multimap = HashMultimap.create();
     if (slot == EntityEquipmentSlot.MAINHAND) {
       multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-              new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", attackDamage, 0));
+                   new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", attackDamage, 0));
       multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -3, 0));
     }
     return multimap;

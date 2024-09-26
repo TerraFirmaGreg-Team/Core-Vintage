@@ -5,7 +5,6 @@ import su.terrafirmagreg.data.Constants;
 
 import net.minecraft.util.ResourceLocation;
 
-
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;

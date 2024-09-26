@@ -27,7 +27,7 @@ import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
-import su.terrafirmagreg.modules.device.object.block.BlockQuern;
+import su.terrafirmagreg.modules.device.object.block.BlockQuernManual;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 import su.terrafirmagreg.modules.metal.objects.block.BlockMetalAnvil;
@@ -114,7 +114,6 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
@@ -258,7 +257,7 @@ public final class CommonEventHandler {
       // Done via event so it applies to all leaves.
       double chance = ConfigTFC.General.TREE.leafStickDropChance;
       if (!heldItem.isEmpty() && Helpers.containsAnyOfCaseInsensitive(heldItem.getItem()
-              .getToolClasses(heldItem), ConfigTFC.General.TREE.leafStickDropChanceBonusClasses)) {
+                                                                              .getToolClasses(heldItem), ConfigTFC.General.TREE.leafStickDropChanceBonusClasses)) {
         chance = ConfigTFC.General.TREE.leafStickDropChanceBonus;
       }
       if (RNG.nextFloat() < chance) {
@@ -322,15 +321,14 @@ public final class CommonEventHandler {
     final EntityPlayer player = event.getEntityPlayer();
 
     // Fire onBlockActivated for in world crafting devices
-    if (block instanceof BlockMetalAnvil || block instanceof BlockRockAnvil || block instanceof BlockQuern ||
-            block instanceof BlockWoodSupport) {
+    if (block instanceof BlockMetalAnvil || block instanceof BlockRockAnvil || block instanceof BlockQuernManual || block instanceof BlockWoodSupport) {
       event.setUseBlock(Event.Result.ALLOW);
     }
 
     // Try to drink water
     // Only possible with main hand - fixes attempting to drink even when it doesn't make sense
     if (!player.isCreative() && stack.isEmpty() && player.getFoodStats() instanceof IFoodStatsTFC foodStats &&
-            event.getHand() == EnumHand.MAIN_HAND) {
+        event.getHand() == EnumHand.MAIN_HAND) {
       RayTraceResult result = MathsUtils.rayTrace(event.getWorld(), player, true);
       if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
         IBlockState waterState = world.getBlockState(result.getBlockPos());
@@ -382,8 +380,8 @@ public final class CommonEventHandler {
       Entity entity = event.getEntity();
       if (entity instanceof EntityPlayerMP entityPlayerMP && entity.isSneaking()) {
         TerraFirmaCraft.getNetwork()
-                .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, plant.getGrowingStatus(state, world, pos)
-                        .toString()), entityPlayerMP);
+                       .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, plant.getGrowingStatus(state, world, pos)
+                                                                                                 .toString()), entityPlayerMP);
       }
 
     }
@@ -459,7 +457,7 @@ public final class CommonEventHandler {
           Metal metal = cap.getMetal(stack);
           if (metal != null) {
             event.addCapability(CapabilityForgeable.KEY,
-                    new ForgeableHeatableHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
+                                new ForgeableHeatableHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
             isHeatable = true;
           }
         }
@@ -620,7 +618,7 @@ public final class CommonEventHandler {
     BlockPos pos = new BlockPos(event.getX(), event.getY(), event.getZ());
     if (world.getWorldType() == ModuleWorld.WORLD_TYPE_CLASSIC && WorldUtils.isDimension(world, DimensionType.OVERWORLD)) {
       if (ConfigTFC.General.SPAWN_PROTECTION.preventMobs && event.getEntity()
-              .isCreatureType(EnumCreatureType.MONSTER, false)) {
+                                                                 .isCreatureType(EnumCreatureType.MONSTER, false)) {
         // Prevent Mobs
         var data = CapabilityChunkData.get(event.getWorld(), pos);
         int minY = ConfigTFC.General.SPAWN_PROTECTION.minYMobs;
@@ -641,7 +639,7 @@ public final class CommonEventHandler {
       }
 
       if (event.getEntity() instanceof EntitySquid && world.getBlockState(pos)
-              .getBlock() instanceof BlockFluidTFC) {
+                                                           .getBlock() instanceof BlockFluidTFC) {
         // Prevents squids spawning outside of salt water (eg: oceans)
         Fluid fluid = ((BlockFluidTFC) world.getBlockState(pos).getBlock()).getFluid();
         if (FluidsTFC.SALT_WATER.get() != fluid) {
@@ -667,7 +665,7 @@ public final class CommonEventHandler {
       if (ConfigTFC.General.DIFFICULTY.preventMobsOnSurface) {
         if (Helpers.shouldPreventOnSurface(event.getEntity())) {
           int maximumY =
-                  (WorldTypeClassic.SEALEVEL - WorldTypeClassic.ROCKLAYER2) / 2 + WorldTypeClassic.ROCKLAYER2; // Half through rock layer 1
+            (WorldTypeClassic.SEALEVEL - WorldTypeClassic.ROCKLAYER2) / 2 + WorldTypeClassic.ROCKLAYER2; // Half through rock layer 1
           if (pos.getY() >= maximumY || world.canSeeSky(pos)) {
             event.setResult(Event.Result.DENY);
           }
@@ -678,8 +676,8 @@ public final class CommonEventHandler {
     // Stop mob spawning in thatch - the list of non-spawnable light-blocking, non-collidable blocks is hardcoded in WorldEntitySpawner#canEntitySpawnBody
     // This is intentionally outside the previous world type check as this is a fix for the thatch block, not a generic spawning check.
     if (event.getWorld().getBlockState(pos).getBlock() == BlocksCore.THATCH || event.getWorld()
-            .getBlockState(pos.up())
-            .getBlock() == BlocksCore.THATCH) {
+                                                                                    .getBlockState(pos.up())
+                                                                                    .getBlock() == BlocksCore.THATCH) {
       event.setResult(Event.Result.DENY);
     }
   }
@@ -691,7 +689,7 @@ public final class CommonEventHandler {
     if (world.getWorldType() == ModuleWorld.WORLD_TYPE_CLASSIC && WorldUtils.isDimension(world, DimensionType.OVERWORLD)) {
       // Fix skeleton rider traps spawning during thunderstorms
       if (entity instanceof EntitySkeletonHorse && ConfigTFC.General.DIFFICULTY.preventMobsOnSurface &&
-              ((EntitySkeletonHorse) entity).isTrap()) {
+          ((EntitySkeletonHorse) entity).isTrap()) {
         entity.setDropItemsWhenDead(false);
         entity.setDead();
         event.setCanceled(true);
@@ -736,7 +734,7 @@ public final class CommonEventHandler {
         if (equipment != null) {
           for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
             equipment.getEquipment(slot, RNG)
-                    .ifPresent(stack -> entity.setItemStackToSlot(slot, stack));
+                     .ifPresent(stack -> entity.setItemStackToSlot(slot, stack));
           }
         }
       }
@@ -756,8 +754,8 @@ public final class CommonEventHandler {
    * This implementation utilizes EntityJoinWorldEvent and ItemExpireEvent, they go hand-in-hand with each other.
    * <p>
    * By manually editing the tag of the EntityItem upon spawning, we can identify what EntityItems should be subjected to the cooling process. We also apply an
-   * extremely short lifespan to mimic the speed of the barrel recipe, albeit slightly longer (half a second, but modifiable via config). Then all the checks are done
-   * in ItemExpireEvent to set a new cooler temperature depending on if the conditions are met.
+   * extremely short lifespan to mimic the speed of the barrel recipe, albeit slightly longer (half a second, but modifiable via config). Then all the checks
+   * are done in ItemExpireEvent to set a new cooler temperature depending on if the conditions are met.
    * <p>
    * First of all, if temperature is 0 or less, then nothing needs to be done and the original lifespan is restored/added on.
    * <p>
@@ -773,7 +771,7 @@ public final class CommonEventHandler {
     ItemStack stack = entityItem.getItem();
     ICapabilityHeat heatCap;
     if (ConfigCore.MISC.HEAT.coolHeatablesInWorld && entityItem.getTags().contains("TFCHeatableItem") &&
-            (heatCap = CapabilityHeat.get(stack)) != null) {
+        (heatCap = CapabilityHeat.get(stack)) != null) {
       int lifespan = stack.getItem().getEntityLifespan(stack, entityItem.world);
       if (entityItem.lifespan >= lifespan) {
         return; // If the ItemEntity has been there for as long or if not longer than the original unmodified lifespan, we return and setDead
@@ -789,10 +787,10 @@ public final class CommonEventHandler {
             heatCap.setTemperature(Math.max(0, Math.min(itemTemp, itemTemp - 350 + fluidTemp)));
             entityItem.world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.5f, 0.8f + rand * 0.4f);
             ((WorldServer) entityItem.world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entityItem.posX, entityItem.posY,
-                    entityItem.posZ, 42, 0.0D, 0.15D, 0.0D, 0.08D);
+                                                           entityItem.posZ, 42, 0.0D, 0.15D, 0.0D, 0.08D);
             if (rand <= 0.001F) {
               entityItem.world.setBlockState(pos, Blocks.AIR.getDefaultState(),
-                      2); // 1/1000 chance of the fluid being used up. Attempts to match the barrel recipe as it takes 1mb of water per operation.
+                                             2); // 1/1000 chance of the fluid being used up. Attempts to match the barrel recipe as it takes 1mb of water per operation.
             }
           }
           event.setExtraLife(ConfigCore.MISC.HEAT.ticksBeforeAttemptToCool); // Set half a second onto the lifespan
@@ -803,7 +801,7 @@ public final class CommonEventHandler {
           heatCap.setTemperature(Math.max(0, itemTemp - 70));
           entityItem.world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.55f, 0.8f + rand * 0.4f);
           ((WorldServer) entityItem.world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entityItem.posX, entityItem.posY, entityItem.posZ,
-                  42, 0.0D, 0.15D, 0.0D, 0.08D);
+                                                         42, 0.0D, 0.15D, 0.0D, 0.08D);
           if (rand <= 0.1F) {
             if (state.getValue(BlockSnow.LAYERS) > 1) {
               entityItem.world.setBlockState(pos, state.withProperty(BlockSnow.LAYERS, state.getValue(BlockSnow.LAYERS) - 1), 2);
@@ -817,7 +815,7 @@ public final class CommonEventHandler {
           heatCap.setTemperature(Math.max(0, itemTemp - 75));
           entityItem.world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.65f, 0.8f + rand * 0.4f);
           ((WorldServer) entityItem.world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entityItem.posX, entityItem.posY, entityItem.posZ,
-                  42, 0.0D, 0.15D, 0.0D, 0.08D);
+                                                         42, 0.0D, 0.15D, 0.0D, 0.08D);
           if (rand <= 0.01F) {
             entityItem.world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2); // 1/100 chance of the snow block evaporating.
           }
@@ -825,21 +823,21 @@ public final class CommonEventHandler {
           heatCap.setTemperature(Math.max(0, itemTemp - 100));
           entityItem.world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.8f + rand * 0.4f);
           ((WorldServer) entityItem.world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entityItem.posX, entityItem.posY, entityItem.posZ,
-                  42, 0.0D, 0.15D, 0.0D, 0.08D);
+                                                         42, 0.0D, 0.15D, 0.0D, 0.08D);
           if (rand <= 0.01F) {
             entityItem.world.setBlockState(pos, FluidsTFC.FRESH_WATER.get()
-                    .getBlock()
-                    .getDefaultState(), 2); // 1/100 chance of the ice turning into water.
+                                                                     .getBlock()
+                                                                     .getDefaultState(), 2); // 1/100 chance of the ice turning into water.
           }
         } else if (state.getMaterial() == Material.PACKED_ICE) {
           heatCap.setTemperature(Math.max(0, itemTemp - 125));
           entityItem.world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 1f, 0.8f + rand * 0.4f);
           ((WorldServer) entityItem.world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entityItem.posX, entityItem.posY, entityItem.posZ,
-                  42, 0.0D, 0.15D, 0.0D, 0.08D);
+                                                         42, 0.0D, 0.15D, 0.0D, 0.08D);
           if (rand <= 0.005F) {
             entityItem.world.setBlockState(pos, FluidsTFC.FRESH_WATER.get()
-                    .getBlock()
-                    .getDefaultState(), 2); // 1/200 chance of the packed ice turning into water.
+                                                                     .getBlock()
+                                                                     .getDefaultState(), 2); // 1/200 chance of the packed ice turning into water.
           }
         }
         event.setExtraLife(itemTemp == 0 ? lifespan : ConfigCore.MISC.HEAT.ticksBeforeAttemptToCool); // Set lifespan accordingly
@@ -905,13 +903,13 @@ public final class CommonEventHandler {
     if (ConfigTFC.General.OVERRIDES.enableLavaWaterPlacesTFCBlocks) {
       if (event.getNewState().getBlock() == Blocks.STONE) {
         event.setNewState(BlocksRock.RAW.get(RockTypes.BASALT)
-                .getDefaultState()
-                .withProperty(CAN_FALL, false));
+                                        .getDefaultState()
+                                        .withProperty(CAN_FALL, false));
       }
       if (event.getNewState().getBlock() == Blocks.COBBLESTONE) {
         event.setNewState(BlocksRock.RAW.get(RockTypes.RHYOLITE)
-                .getDefaultState()
-                .withProperty(CAN_FALL, false));
+                                        .getDefaultState()
+                                        .withProperty(CAN_FALL, false));
       }
     }
   }
@@ -934,7 +932,7 @@ public final class CommonEventHandler {
     }
 
     if (event.phase == TickEvent.Phase.START && !(event.player.isCreative() || event.player.isSpectator()) &&
-            event.player.ticksExisted % 20 == 0) {
+        event.player.ticksExisted % 20 == 0) {
       // Update overburdened state
       int hugeHeavyCount = countPlayerOverburdened(event.player.inventory);
       if (hugeHeavyCount >= 1) {
@@ -1017,7 +1015,8 @@ public final class CommonEventHandler {
     Entity target = event.getTarget();
     EntityPlayer player = event.getEntityPlayer();
 
-    if (entityType != null && target.hurtResistantTime == 0 && !target.getEntityWorld().isRemote && player.getHeldItemMainhand().isEmpty() && player.isSneaking()) {
+    if (entityType != null && target.hurtResistantTime == 0 && !target.getEntityWorld().isRemote && player.getHeldItemMainhand().isEmpty()
+        && player.isSneaking()) {
       String entityTypeName = entityType.toString();
       for (String pluckable : ConfigTFC.General.MISC.pluckableEntities) {
         if (pluckable.equals(entityTypeName)) {
@@ -1059,7 +1058,7 @@ public final class CommonEventHandler {
             char repeat = word.charAt(pos);
             int amount = 1 + RNG.nextInt(3);
             word = word.substring(0, pos) + new String(new char[amount]).replace('\0', repeat) +
-                    (pos + 1 < word.length() ? word.substring(pos + 1) : "");
+                   (pos + 1 < word.length() ? word.substring(pos + 1) : "");
           }
 
           // Add additional letters

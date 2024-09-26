@@ -12,7 +12,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.objects.blocks.BlockString;
 import net.dries007.tfc.objects.te.TEString;
 

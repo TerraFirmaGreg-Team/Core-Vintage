@@ -10,7 +10,6 @@ import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-
 import lombok.Getter;
 
 @Getter
@@ -26,12 +25,12 @@ public class BlockWoodDoor extends BaseBlockDoor implements IWoodBlock {
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .ignoresProperties(BlockDoor.POWERED)
-            .sound(SoundType.WOOD)
-            .oreDict(variant, "wood")
-            .oreDict(variant, "wood", type);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .ignoresProperties(BlockDoor.POWERED)
+      .sound(SoundType.WOOD)
+      .oreDict(variant, "wood")
+      .oreDict(variant, "wood", type);
 
     disableStats();
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());

@@ -19,17 +19,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderAnimalGrouse extends RenderLiving<EntityAnimalGrouse> {
 
   private static final ResourceLocation FEMALE_YOUNG = ModUtils.resource(
-          "textures/entity/animal/livestock/grousef_young.png");
+    "textures/entity/animal/livestock/grousef_young.png");
   private static final ResourceLocation FEMALE_OLD = ModUtils.resource(
-          "textures/entity/animal/livestock/grousef_old.png");
+    "textures/entity/animal/livestock/grousef_old.png");
 
   private static final ResourceLocation MALE_YOUNG = ModUtils.resource(
-          "textures/entity/animal/livestock/grousem_young.png");
+    "textures/entity/animal/livestock/grousem_young.png");
   private static final ResourceLocation MALE_OLD = ModUtils.resource(
-          "textures/entity/animal/livestock/grousem_old.png");
+    "textures/entity/animal/livestock/grousem_old.png");
 
   private static final ResourceLocation CHICK_TEXTURE = ModUtils.resource(
-          "textures/entity/animal/livestock/grouse_chick.png");
+    "textures/entity/animal/livestock/grouse_chick.png");
 
   public RenderAnimalGrouse(RenderManager manager) {
     super(manager, new ModelAnimalGrouse(), 0.3F);
@@ -37,7 +37,7 @@ public class RenderAnimalGrouse extends RenderLiving<EntityAnimalGrouse> {
 
   @Override
   public void doRender(EntityAnimalGrouse grouse, double par2, double par4, double par6, float par8,
-          float par9) {
+                       float par9) {
     this.shadowSize = (float) (0.15f + grouse.getPercentToAdulthood() * 0.15f);
     super.doRender(grouse, par2, par4, par6, par8, par9);
   }

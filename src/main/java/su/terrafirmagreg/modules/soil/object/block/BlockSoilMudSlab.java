@@ -10,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-
 import lombok.Getter;
 
 @Getter
@@ -29,11 +28,11 @@ public abstract class BlockSoilMudSlab extends BaseBlockSlab implements ISoilBlo
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .sound(SoundType.GROUND)
-            .harvestLevel(ToolClasses.PICKAXE, model.getHarvestLevel(model.getDefaultState()))
-            .oreDict("slab")
-            .oreDict("slab", "mud", "bricks");
+      .registryKey(variant.getRegistryKey(type))
+      .sound(SoundType.GROUND)
+      .harvestLevel(ToolClasses.PICKAXE, model.getHarvestLevel(model.getDefaultState()))
+      .oreDict("slab")
+      .oreDict("slab", "mud", "bricks");
   }
 
   public static class Double extends BlockSoilMudSlab {

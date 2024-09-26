@@ -10,7 +10,6 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-
 import lombok.Getter;
 
 @Getter
@@ -26,12 +25,12 @@ public abstract class BlockWood extends BaseBlock implements IWoodBlock {
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .harvestLevel(ToolClasses.AXE, 0)
-            .sound(SoundType.WOOD)
-            .oreDict(variant)
-            .oreDict(variant, type);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .harvestLevel(ToolClasses.AXE, 0)
+      .sound(SoundType.WOOD)
+      .oreDict(variant)
+      .oreDict(variant, type);
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
   }

@@ -7,24 +7,21 @@
       "apply": {
         "model": "tfc:plants/star_grass_0"
       }
-    },
-    {
+    }, {
       "when": {
         "age": "1"
       },
       "apply": {
         "model": "tfc:plants/star_grass_1"
       }
-    },
-    {
+    }, {
       "when": {
         "age": "2"
       },
       "apply": {
         "model": "tfc:plants/star_grass_2"
       }
-    },
-    {
+    }, {
       "when": {
         "age": "3"
       },

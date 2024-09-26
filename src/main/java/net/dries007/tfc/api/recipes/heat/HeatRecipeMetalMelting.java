@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 

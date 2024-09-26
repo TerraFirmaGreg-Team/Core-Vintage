@@ -4,7 +4,6 @@ import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 
 import net.minecraft.client.Minecraft;
 
-
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 
 public class HeatRecipeWrapper extends SimpleRecipeWrapper {

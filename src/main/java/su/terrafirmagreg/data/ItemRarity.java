@@ -3,7 +3,6 @@ package su.terrafirmagreg.data;
 import net.minecraft.item.EnumRarity;
 import net.minecraftforge.common.IRarity;
 
-
 import lombok.Getter;
 
 @Getter

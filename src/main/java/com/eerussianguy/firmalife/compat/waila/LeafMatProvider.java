@@ -1,12 +1,13 @@
 package com.eerussianguy.firmalife.compat.waila;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
-
 
 import com.eerussianguy.firmalife.recipe.DryingRecipe;
 import net.dries007.tfc.ConfigTFC;
@@ -26,10 +27,10 @@ public class LeafMatProvider implements IWailaBlock {
   @Override
   public List<String> getTooltip(World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
     List<String> currentTooltip = new ArrayList<>();
-    var tile = world.getTileEntity(pos);
+    var tile = TileUtils.getTile(world, pos);
     if (tile instanceof TELeafMat leafMat) {
       ItemStack mainSlot = leafMat.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)
-              .getStackInSlot(0);
+                                  .getStackInSlot(0);
       DryingRecipe recipe = DryingRecipe.get(mainSlot);
       if (!mainSlot.isEmpty() && recipe != null) {
         long remainingTicks = leafMat.getTicksRemaining();
@@ -48,7 +49,7 @@ public class LeafMatProvider implements IWailaBlock {
             break;
         }
         currentTooltip.add(new TextComponentTranslation(recipe.getOutputItem(mainSlot)
-                .getTranslationKey() + ".name").getFormattedText());
+                                                              .getTranslationKey() + ".name").getFormattedText());
       }
     }
     return currentTooltip;

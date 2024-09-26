@@ -7,7 +7,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.common.model.IModelState;
 
-
 import com.google.common.collect.Lists;
 
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +29,7 @@ public class BlockModel implements IModel {
 
   @Override
   public @NotNull IBakedModel bake(@NotNull IModelState state, @NotNull VertexFormat format,
-          Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+                                   Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
     //текстурка
     TextureAtlasSprite sprite = bakedTextureGetter.apply(loc);
 

@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.food.api.types.variant.item;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.food.api.types.category.FoodCategory;
 
-
 import lombok.Getter;
 
 import java.util.LinkedHashSet;
@@ -37,7 +36,7 @@ public class FoodItemVariant {
 
     if (name.isEmpty()) {
       throw new RuntimeException(
-              String.format("FoodType name must contain any character: [%s]", name));
+        String.format("FoodType name must contain any character: [%s]", name));
     }
 
     if (!types.add(this)) {
@@ -94,9 +93,9 @@ public class FoodItemVariant {
      * @param decayModifier модификатор распада
      */
     public Builder foodData(int hunger, float saturation, float water, float grain, float veg,
-            float fruit, float meat, float dairy, float decayModifier) {
+                            float fruit, float meat, float dairy, float decayModifier) {
       this.foodData = new FoodData(hunger, water, saturation, grain, fruit, veg, meat, dairy,
-              decayModifier);
+                                   decayModifier);
       return this;
     }
 

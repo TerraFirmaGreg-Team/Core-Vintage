@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-
 import net.dries007.tfc.objects.blocks.BlockLargeVessel;
 
 import org.jetbrains.annotations.Nullable;

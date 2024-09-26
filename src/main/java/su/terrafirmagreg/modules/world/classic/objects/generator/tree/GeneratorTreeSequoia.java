@@ -11,7 +11,6 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
@@ -26,14 +25,14 @@ import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
 public class GeneratorTreeSequoia implements ITreeGenerator {
 
   private static final BlockPos[] OFFSETS = new BlockPos[]{
-          new BlockPos(0, 0, 0), new BlockPos(-1, 0, 0), new BlockPos(0, 0, -1), new BlockPos(-1, 0, -1)
+    new BlockPos(0, 0, 0), new BlockPos(-1, 0, 0), new BlockPos(0, 0, -1), new BlockPos(-1, 0, -1)
   };
   private final PlacementSettings settings = StructureUtils.getDefaultSettings();
   private IBlockState trunk;
 
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-          Random rand, boolean isWorldGen) {
+                           Random rand, boolean isWorldGen) {
     final int baseVariant = 1 + rand.nextInt(3);
     final int topVariant = 1 + rand.nextInt(3);
     final int layers = 4 + rand.nextInt(3);
@@ -66,9 +65,9 @@ public class GeneratorTreeSequoia implements ITreeGenerator {
             continue;
           }
           if (BlockUtils.isSoil(world.getBlockState(pos.add(p1)
-                  .down(2))) && world.getBlockState(pos.add(p1.down(1)))
-                  .getMaterial()
-                  .isReplaceable()) {
+                                                       .down(2))) && world.getBlockState(pos.add(p1.down(1)))
+                                                                          .getMaterial()
+                                                                          .isReplaceable()) {
             continue;
           }
         }
@@ -102,8 +101,8 @@ public class GeneratorTreeSequoia implements ITreeGenerator {
 
   private void checkAndPlace(World world, BlockPos pos) {
     if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos)
-            .getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos)
-            .getBlock() instanceof BlockLeavesTFC) {
+                                                                       .getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos)
+                                                                                                                      .getBlock() instanceof BlockLeavesTFC) {
       world.setBlockState(pos, trunk);
     }
   }

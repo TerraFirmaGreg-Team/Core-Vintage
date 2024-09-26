@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IBlockDisplayOverride;
 import mcjty.theoneprobe.api.IProbeHitData;
@@ -33,13 +32,13 @@ public class ProviderLogPile implements IProbeInfoProvider, IBlockDisplayOverrid
 
   @Override
   public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer,
-          World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+                           World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
 
   }
 
   @Override
   public boolean overrideStandardInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player,
-          World world, IBlockState state, IProbeHitData hitData) {
+                                      World world, IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
 
@@ -70,10 +69,10 @@ public class ProviderLogPile implements IProbeInfoProvider, IBlockDisplayOverrid
       }
 
       info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-              .item(icon)
-              .vertical()
-              .itemLabel(icon)
-              .text(TextStyleClass.MODNAME + Constants.MOD_NAME);
+          .item(icon)
+          .vertical()
+          .itemLabel(icon)
+          .text(TextStyleClass.MODNAME + Constants.MOD_NAME);
 
     }
     return false;

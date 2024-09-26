@@ -11,7 +11,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-
 import lyeoj.tfcthings.items.ItemHookJavelin;
 import lyeoj.tfcthings.main.TFCThings;
 import lyeoj.tfcthings.network.MessageHookJavelinUpdate;

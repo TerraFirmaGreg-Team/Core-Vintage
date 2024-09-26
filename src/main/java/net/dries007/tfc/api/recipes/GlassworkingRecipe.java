@@ -3,7 +3,6 @@ package net.dries007.tfc.api.recipes;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.util.SimpleCraftMatrix;
 
@@ -19,10 +18,10 @@ public class GlassworkingRecipe extends IForgeRegistryEntry.Impl<GlassworkingRec
 
   public static GlassworkingRecipe get(SimpleCraftMatrix input) {
     return TFCRegistries.GLASSWORKING.getValuesCollection()
-            .stream()
-            .filter(x -> x.matches(input))
-            .findFirst()
-            .orElse(null);
+                                     .stream()
+                                     .filter(x -> x.matches(input))
+                                     .findFirst()
+                                     .orElse(null);
   }
 
   private boolean matches(SimpleCraftMatrix other) {

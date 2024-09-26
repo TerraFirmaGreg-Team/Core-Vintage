@@ -8,7 +8,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
@@ -33,13 +32,13 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements 
     this.inProgressTexture = builder.inProgressTexture;
 
     if (inputItem == null || builder.inputStack.getAmount() == 0 || outputItem == null
-            || builder.stepCount == 0) {
+        || builder.stepCount == 0) {
       throw new IllegalArgumentException("Input and output are not allowed to be empty");
     }
 
     if (builder.name.isEmpty()) {
       throw new RuntimeException(
-              String.format("LoomRecipe name must contain any character: [%s]", builder.name));
+        String.format("LoomRecipe name must contain any character: [%s]", builder.name));
     }
 
     RegistryWood.LOOM.register(this.setRegistryName(ModUtils.resource(builder.name)));
@@ -49,10 +48,10 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements 
   @Nullable
   public static LoomRecipe get(ItemStack item) {
     return RegistryWood.LOOM.getValuesCollection()
-            .stream()
-            .filter(x -> x.isValidInput(item))
-            .findFirst()
-            .orElse(null);
+                            .stream()
+                            .filter(x -> x.isValidInput(item))
+                            .findFirst()
+                            .orElse(null);
   }
 
   private boolean isValidInput(ItemStack inputItem) {

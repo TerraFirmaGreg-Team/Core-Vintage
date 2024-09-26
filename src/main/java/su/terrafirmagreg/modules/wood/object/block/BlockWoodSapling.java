@@ -31,7 +31,6 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.util.calendar.ICalendar;
 
@@ -61,15 +60,15 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
     this.settings = Settings.of(Material.PLANTS);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .ignoresProperties(SAPLING_STAGE)
-            .sound(SoundType.PLANT)
-            .hardness(0.0F)
-            .oreDict(variant)
-            .oreDict(variant, type);
+      .registryKey(variant.getRegistryKey(type))
+      .ignoresProperties(SAPLING_STAGE)
+      .sound(SoundType.PLANT)
+      .hardness(0.0F)
+      .oreDict(variant)
+      .oreDict(variant, type);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(SAPLING_STAGE, 0));
+                              .withProperty(SAPLING_STAGE, 0));
 
     BlockUtils.setFireInfo(this, 5, 20);
   }

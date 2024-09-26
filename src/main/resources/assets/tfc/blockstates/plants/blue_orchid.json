@@ -9,8 +9,7 @@
           "model": "tfc:plants/blue_orchid_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },
@@ -19,8 +18,7 @@
           "model": "tfc:plants/blue_orchid_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "2"
       },

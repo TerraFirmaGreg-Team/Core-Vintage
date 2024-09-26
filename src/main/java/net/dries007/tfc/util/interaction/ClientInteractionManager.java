@@ -22,7 +22,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -67,13 +66,13 @@ final class ClientInteractionManager {
 
       IBlockState iblockstate = worldIn.getBlockState(pos);
       boolean bypass = player.getHeldItemMainhand()
-              .doesSneakBypassUse(worldIn, pos, player) && player.getHeldItemOffhand()
-              .doesSneakBypassUse(worldIn, pos, player);
+                             .doesSneakBypassUse(worldIn, pos, player) && player.getHeldItemOffhand()
+                                                                                .doesSneakBypassUse(worldIn, pos, player);
 
       if ((!player.isSneaking() || bypass || event.getUseBlock() == Event.Result.ALLOW)) {
         if (event.getUseBlock() != Event.Result.DENY) {
           flag = iblockstate.getBlock()
-                  .onBlockActivated(worldIn, pos, iblockstate, player, hand, direction, hitX, hitY, hitZ);
+                            .onBlockActivated(worldIn, pos, iblockstate, player, hand, direction, hitX, hitY, hitZ);
         }
         if (flag) {
           result = EnumActionResult.SUCCESS;

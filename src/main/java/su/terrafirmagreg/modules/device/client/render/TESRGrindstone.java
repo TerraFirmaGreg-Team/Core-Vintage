@@ -15,7 +15,6 @@ import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class TESRGrindstone extends TileEntitySpecialRenderer<TileGrindstone> {
@@ -24,7 +23,7 @@ public class TESRGrindstone extends TileEntitySpecialRenderer<TileGrindstone> {
   }
 
   public void render(@NotNull TileGrindstone tile, double x, double y, double z, float partialTicks,
-          int destroyStage, float alpha) {
+                     int destroyStage, float alpha) {
     super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
     IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
     if (cap != null) {
@@ -52,14 +51,14 @@ public class TESRGrindstone extends TileEntitySpecialRenderer<TileGrindstone> {
         if (rotationTicks > 0) {
           int axis = tile.getFlowDirection();
           GlStateManager.rotate(
-                  ((float) rotationTicks - partialTicks) * (axis % 2 == 0 ? 4.0F : -4.0F),
-                  axis <= 2 ? 1.0F : 0.0F, 0.0F,
-                  axis <= 2 ? 0.0F : 1.0F);
+            ((float) rotationTicks - partialTicks) * (axis % 2 == 0 ? 4.0F : -4.0F),
+            axis <= 2 ? 1.0F : 0.0F, 0.0F,
+            axis <= 2 ? 0.0F : 1.0F);
         }
         GlStateManager.rotate(angle, 0.0F, 1.0F, 0.0F);
         outputModel = renderItem.getItemModelWithOverrides(grindstone, tile.getWorld(), null);
         outputModel = ForgeHooksClient.handleCameraTransforms(outputModel,
-                ItemCameraTransforms.TransformType.FIXED, false);
+                                                              ItemCameraTransforms.TransformType.FIXED, false);
         rendererDispatcher.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         renderItem.renderItem(grindstone, outputModel);
         GlStateManager.popMatrix();
@@ -79,14 +78,14 @@ public class TESRGrindstone extends TileEntitySpecialRenderer<TileGrindstone> {
           pos = new Vec3d(1 - pos.x, pos.y, 1 - pos.z);
         }
         GlStateManager.translate(x + (dir % 2 == 0 ? pos.z : pos.x), y + pos.y,
-                z + (dir % 2 == 0 ? pos.x : pos.z));
+                                 z + (dir % 2 == 0 ? pos.x : pos.z));
         GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
         GlStateManager.rotate(270 - angle, 0.0F, 0.0F, 1.0F);
         GlStateManager.scale(0.65D, 0.65D, 0.65);
 
         IBakedModel inputModel = renderItem.getItemModelWithOverrides(input, tile.getWorld(), null);
         inputModel = ForgeHooksClient.handleCameraTransforms(inputModel,
-                ItemCameraTransforms.TransformType.GROUND, false);
+                                                             ItemCameraTransforms.TransformType.GROUND, false);
         rendererDispatcher.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         renderItem.renderItem(input, inputModel);
         GlStateManager.popMatrix();

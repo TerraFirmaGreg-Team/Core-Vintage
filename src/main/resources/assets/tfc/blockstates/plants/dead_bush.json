@@ -9,8 +9,7 @@
         {
           "model": "tfc:plants/dead_bush",
           "weight": 2
-        },
-        {
+        }, {
           "model": "tfc:plants/dead_bush_large",
           "weight": 1
         }

@@ -7,7 +7,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
@@ -46,7 +45,7 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
   protected final SmithingSkill.Type skillBonusType;
 
   public AnvilRecipe(ResourceLocation name, IIngredient<ItemStack> ingredient, ItemStack outputItem, Metal.Tier tier,
-          @Nullable SmithingSkill.Type skillBonusType, ForgeRule... rules) {
+                     @Nullable SmithingSkill.Type skillBonusType, ForgeRule... rules) {
     this.ingredient = ingredient;
     this.outputItem = outputItem;
 
@@ -64,9 +63,9 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
   @NotNull
   public static List<AnvilRecipe> getAllFor(ItemStack stack) {
     return TFCRegistries.ANVIL.getValuesCollection()
-            .stream()
-            .filter(x -> x.matches(stack))
-            .collect(Collectors.toList());
+                              .stream()
+                              .filter(x -> x.matches(stack))
+                              .collect(Collectors.toList());
   }
 
   public boolean matches(ItemStack input) {

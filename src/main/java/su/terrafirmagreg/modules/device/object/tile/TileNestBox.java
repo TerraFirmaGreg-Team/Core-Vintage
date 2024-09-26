@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.core.api.util.SitUtils;
@@ -15,13 +15,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
 
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
@@ -30,34 +28,31 @@ import net.dries007.tfc.util.calendar.Calendar;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class TileNestBox extends BaseTileInventory
-        implements ITickable, IItemHandlerSidedCallback,
-        IProviderContainer<ContainerNestBox, GuiNestBox> {
+public class TileNestBox extends BaseTileTickableInventory
+  implements IItemHandlerSidedCallback, IProviderContainer<ContainerNestBox, GuiNestBox> {
 
-  private static final int NUM_SLOTS = 4;
   private final IItemHandler inventoryWrapperExtract;
 
   public TileNestBox() {
-    super(NUM_SLOTS);
+    super(4);
     this.inventoryWrapperExtract = new ItemHandlerSidedWrapper(this, inventory, EnumFacing.DOWN);
   }
 
   @Override
   public void update() {
+    super.update();
     if (!world.isRemote) {
       for (int i = 0; i < inventory.getSlots(); i++) {
         ItemStack stack = inventory.getStackInSlot(i);
         if (!stack.isEmpty()) {
           var cap = CapabilityEgg.get(stack);
-          if (cap != null && cap.getHatchDay() > 0
-                  && cap.getHatchDay() <= Calendar.PLAYER_TIME.getTotalDays()) {
+          if (cap != null && cap.getHatchDay() > 0 && cap.getHatchDay() <= Calendar.PLAYER_TIME.getTotalDays()) {
             Entity baby = cap.getEntity(this.world);
             if (baby != null) {
-              if (baby instanceof IAnimal) {
-                ((IAnimal) baby).setBirthDay((int) Calendar.PLAYER_TIME.getTotalDays());
+              if (baby instanceof IAnimal animal) {
+                animal.setBirthDay((int) Calendar.PLAYER_TIME.getTotalDays());
               }
-              baby.setLocationAndAngles(this.pos.getX(), this.pos.getY() + 0.5D, this.pos.getZ(),
-                      0.0F, 0.0F);
+              baby.setLocationAndAngles(this.pos.getX(), this.pos.getY() + 0.5D, this.pos.getZ(), 0.0F, 0.0F);
               world.spawnEntity(baby);
               inventory.setStackInSlot(i, ItemStack.EMPTY);
             }
@@ -109,17 +104,15 @@ public class TileNestBox extends BaseTileInventory
 
   @Override
   public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-    return
-            (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.DOWN)
-                    || super.hasCapability(capability, facing);
+    return (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.DOWN) || super.hasCapability(capability, facing);
   }
 
   @Override
   @SuppressWarnings("unchecked")
   public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
-    return
-            (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.DOWN) ?
-                    (T) inventoryWrapperExtract : super.getCapability(capability, facing);
+    return (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.DOWN)
+           ? (T) inventoryWrapperExtract
+           : super.getCapability(capability, facing);
   }
 
   @Override
@@ -133,14 +126,12 @@ public class TileNestBox extends BaseTileInventory
   }
 
   @Override
-  public ContainerNestBox getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+  public ContainerNestBox getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
     return new ContainerNestBox(inventoryPlayer, this);
   }
 
   @Override
-  public GuiNestBox getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state,
-          BlockPos pos) {
+  public GuiNestBox getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
     return new GuiNestBox(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer);
   }
 }

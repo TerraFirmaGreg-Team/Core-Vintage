@@ -8,14 +8,12 @@
         {
           "model": "tfc:plants/burning_bush_single_0",
           "weight": 4
-        },
-        {
+        }, {
           "model": "tfc:plants/burning_bush_0",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },
@@ -23,22 +21,18 @@
         {
           "model": "tfc:plants/burning_bush_single_1",
           "weight": 8
-        },
-        {
+        }, {
           "model": "tfc:plants/burning_bush_single_0",
           "weight": 2
-        },
-        {
+        }, {
           "model": "tfc:plants/burning_bush_1",
           "weight": 4
-        },
-        {
+        }, {
           "model": "tfc:plants/burning_bush_0",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "2"
       },
@@ -46,8 +40,7 @@
         {
           "model": "tfc:plants/burning_bush_single_1",
           "weight": 4
-        },
-        {
+        }, {
           "model": "tfc:plants/burning_bush_1",
           "weight": 1
         }

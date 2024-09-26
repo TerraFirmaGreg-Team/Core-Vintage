@@ -1,5 +1,8 @@
 package se.gory_moon.horsepower.client.renderer;
 
+import su.terrafirmagreg.api.util.RenderUtils;
+import su.terrafirmagreg.modules.device.object.tile.TilePressHorse;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
@@ -14,28 +17,24 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
-
 import org.lwjgl.opengl.GL11;
 import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.blocks.BlockHPBase;
 import se.gory_moon.horsepower.blocks.BlockPress;
 import se.gory_moon.horsepower.client.model.modelvariants.PressModels;
-import se.gory_moon.horsepower.tileentity.TilePress;
-import se.gory_moon.horsepower.util.RenderUtils;
 
-public class TESRPress extends TESRHPBase<TilePress> {
+public class TESRPress extends TESRHPBase<TilePressHorse> {
 
   @Override
-  public void render(TilePress tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+  public void render(TilePressHorse tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     Tessellator tessellator = Tessellator.getInstance();
     BufferBuilder buffer = tessellator.getBuffer();
     BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
     IBlockState blockState = tile.getWorld().getBlockState(tile.getPos());
-    if (!(blockState.getBlock() instanceof BlockHPBase)) {
+    if (!(blockState.getBlock() instanceof BlockPress)) {
       return;
     }
     IBlockState topState = blockState.withProperty(BlockPress.PART, PressModels.TOP);
-    if (!(topState.getBlock() instanceof BlockHPBase)) {
+    if (!(topState.getBlock() instanceof BlockPress)) {
       return;
     }
     IBakedModel pressModel = dispatcher.getBlockModelShapes().getModelForState(topState);
@@ -53,7 +52,7 @@ public class TESRPress extends TESRHPBase<TilePress> {
       renderBlockDamage(topState, tile.getPos(), getDestroyBlockIcon(destroyStage), tile.getWorld());
     } else {
       dispatcher.getBlockModelRenderer()
-              .renderModel(tile.getWorld(), pressModel, blockState, tile.getPos(), buffer, false);
+                .renderModel(tile.getWorld(), pressModel, blockState, tile.getPos(), buffer, false);
     }
 
     buffer.setTranslation(0, 0, 0);
@@ -71,10 +70,6 @@ public class TESRPress extends TESRHPBase<TilePress> {
     GlStateManager.popMatrix();
     postDestroyRender(destroyStage);
     RenderHelper.enableStandardItemLighting();
-
-    if (!(blockState.getBlock() instanceof BlockHPBase)) {
-      return;
-    }
 
     if (tile.hasWorker()) {
       renderLeash(tile.getWorker(), x, y, z, 0D, 0.4D, 0D, partialTicks, tile.getPos());
@@ -98,8 +93,8 @@ public class TESRPress extends TESRHPBase<TilePress> {
     if (stack != null && move <= 0.25) {
       float amount = (0.75F / ((float) tankProperties.getCapacity())) * stack.amount;
       TextureAtlasSprite sprite = Minecraft.getMinecraft()
-              .getTextureMapBlocks()
-              .getAtlasSprite(stack.getFluid().getStill().toString());
+                                           .getTextureMapBlocks()
+                                           .getAtlasSprite(stack.getFluid().getStill().toString());
       int fluidColor = stack.getFluid().getColor(stack);
 
       GlStateManager.disableLighting();

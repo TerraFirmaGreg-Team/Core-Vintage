@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Rock;
@@ -42,7 +41,7 @@ public class ItemRockKnife extends ItemTool implements ICapabilitySize, IRockObj
   public ItemRockKnife(RockCategory category) {
     // Vanilla ItemTool constructor actually treats this as "bonus attack damage", and as a result, adds + getAttackDamage(). So for our purposes, this is 0.54 * attack damage.
     super(-0.46f * category.getToolMaterial()
-            .getAttackDamage(), -1.5f, category.getToolMaterial(), ImmutableSet.of());
+                           .getAttackDamage(), -1.5f, category.getToolMaterial(), ImmutableSet.of());
     this.category = category;
     if (MAP.put(category, this) != null) {
       throw new IllegalStateException("There can only be one.");

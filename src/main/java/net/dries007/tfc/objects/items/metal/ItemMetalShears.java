@@ -11,7 +11,6 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.api.types.Metal;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +23,7 @@ public class ItemMetalShears extends ItemMetalTool {
 
   @Override
   public boolean itemInteractionForEntity(ItemStack itemstack, net.minecraft.entity.player.EntityPlayer player, EntityLivingBase entity,
-          net.minecraft.util.EnumHand hand) {
+                                          net.minecraft.util.EnumHand hand) {
     if (entity.world.isRemote) {
       return false;
     }
@@ -32,7 +31,7 @@ public class ItemMetalShears extends ItemMetalTool {
       BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ);
       if (target.isShearable(itemstack, entity.world, pos)) {
         java.util.List<ItemStack> drops = target.onSheared(itemstack, entity.world, pos,
-                net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel(net.minecraft.init.Enchantments.FORTUNE, itemstack));
+                                                           net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel(net.minecraft.init.Enchantments.FORTUNE, itemstack));
 
         java.util.Random rand = new java.util.Random();
         for (ItemStack stack : drops) {
@@ -59,7 +58,7 @@ public class ItemMetalShears extends ItemMetalTool {
     if (block instanceof net.minecraftforge.common.IShearable target) {
       if (target.isShearable(itemstack, player.world, pos)) {
         java.util.List<ItemStack> drops = target.onSheared(itemstack, player.world, pos,
-                net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel(net.minecraft.init.Enchantments.FORTUNE, itemstack));
+                                                           net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel(net.minecraft.init.Enchantments.FORTUNE, itemstack));
         java.util.Random rand = new java.util.Random();
 
         for (ItemStack stack : drops) {
@@ -68,7 +67,7 @@ public class ItemMetalShears extends ItemMetalTool {
           double d1 = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
           double d2 = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
           net.minecraft.entity.item.EntityItem entityitem = new net.minecraft.entity.item.EntityItem(player.world, (double) pos.getX() + d,
-                  (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
+                                                                                                     (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
           entityitem.setDefaultPickupDelay();
           player.world.spawnEntity(entityitem);
         }
@@ -96,7 +95,7 @@ public class ItemMetalShears extends ItemMetalTool {
 
   @Override
   public boolean onBlockDestroyed(@NotNull ItemStack stack, World worldIn, @NotNull IBlockState state, @NotNull BlockPos pos,
-          @NotNull EntityLivingBase entityLiving) {
+                                  @NotNull EntityLivingBase entityLiving) {
     if (!worldIn.isRemote) {
       stack.damageItem(1, entityLiving);
     }
@@ -106,7 +105,7 @@ public class ItemMetalShears extends ItemMetalTool {
       return true;
     }
     return state.getMaterial() == Material.LEAVES || block == Blocks.WEB || block == Blocks.TALLGRASS || block == Blocks.VINE ||
-            block == Blocks.TRIPWIRE || block == Blocks.WOOL || super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
+           block == Blocks.TRIPWIRE || block == Blocks.WOOL || super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
   }
 
   /**

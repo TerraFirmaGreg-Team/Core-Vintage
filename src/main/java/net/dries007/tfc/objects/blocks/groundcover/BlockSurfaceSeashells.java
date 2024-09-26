@@ -23,7 +23,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -52,7 +51,7 @@ public class BlockSurfaceSeashells extends BlockBush {
     this.index = index;
     if (chance <= currentNumber) {
       Item[] drops = {ItemsTFCF.CLAM, ItemsTFCF.LIVE_CLAM, ItemsTFCF.SCALLOP, ItemsTFCF.LIVE_SCALLOP, ItemsTFCF.LIVE_STARFISH, ItemsTFCF.CONCH,
-              ItemsTFCF.PEARL, ItemsTFCF.BLACK_PEARL};
+                      ItemsTFCF.PEARL, ItemsTFCF.BLACK_PEARL};
       return drops[index];
     } else {
       return getWeightedDrop(chance, index + 1, currentNumber + this.chance[index + 1]);
@@ -109,7 +108,7 @@ public class BlockSurfaceSeashells extends BlockBush {
 
   @Override
   public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate,
-          EntityLivingBase entity, int numberOfParticles) {
+                                   EntityLivingBase entity, int numberOfParticles) {
     return true;
   }
 
@@ -135,7 +134,7 @@ public class BlockSurfaceSeashells extends BlockBush {
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
     if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP) && !(worldIn.getBlockState(pos.down())
-            .getBlock() instanceof BlockSoilFarmland)) {
+                                                                    .getBlock() instanceof BlockSoilFarmland)) {
       worldIn.setBlockToAir(pos);
     }
   }
@@ -146,7 +145,7 @@ public class BlockSurfaceSeashells extends BlockBush {
 
     if (state.getBlock() == this) {
       return (BlockUtils.isGround(soil) || worldIn.getBlockState(pos.down())
-              .isFullBlock()) && !(BlockUtils.isSaltWater(soil) || BlockUtils.isFreshWater(soil));
+                                                  .isFullBlock()) && !(BlockUtils.isSaltWater(soil) || BlockUtils.isFreshWater(soil));
     }
     return this.canSustainBush(soil);
   }

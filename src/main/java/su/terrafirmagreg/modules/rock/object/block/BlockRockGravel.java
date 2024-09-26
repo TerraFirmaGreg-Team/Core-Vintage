@@ -10,7 +10,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
-
 import java.util.Random;
 
 public class BlockRockGravel extends BlockRockFallable {
@@ -19,7 +18,7 @@ public class BlockRockGravel extends BlockRockFallable {
     super(Settings.of(Material.SAND), variant, type);
 
     getSettings()
-            .sound(SoundType.GROUND);
+      .sound(SoundType.GROUND);
     //DirtHelper.registerSoil(this, DirtHelper.GRAVELLIKE);
   }
 

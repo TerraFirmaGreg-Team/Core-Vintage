@@ -9,20 +9,14 @@
   "elements": [
     {
       "from": [
-        0.8,
-        0,
-        8
+        0.8, 0, 8
       ],
       "to": [
-        15.2,
-        24,
-        8
+        15.2, 24, 8
       ],
       "rotation": {
         "origin": [
-          8,
-          8,
-          8
+          8, 8, 8
         ],
         "axis": "y",
         "angle": 45,
@@ -32,42 +26,29 @@
       "faces": {
         "north": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0, 0, 16, 16
           ],
           "texture": "#lowersingle",
           "tintindex": 0
         },
         "south": {
           "uv": [
-            16,
-            0,
-            0,
-            16
+            16, 0, 0, 16
           ],
           "texture": "#lowersingle",
           "tintindex": 0
         }
       }
-    },
-    {
+    }, {
       "from": [
-        8,
-        0,
-        0.8
+        8, 0, 0.8
       ],
       "to": [
-        8,
-        24,
-        15.2
+        8, 24, 15.2
       ],
       "rotation": {
         "origin": [
-          8,
-          8,
-          8
+          8, 8, 8
         ],
         "axis": "y",
         "angle": 45,
@@ -77,42 +58,29 @@
       "faces": {
         "west": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0, 0, 16, 16
           ],
           "texture": "#lowersingle",
           "tintindex": 0
         },
         "east": {
           "uv": [
-            16,
-            0,
-            0,
-            16
+            16, 0, 0, 16
           ],
           "texture": "#lowersingle",
           "tintindex": 0
         }
       }
-    },
-    {
+    }, {
       "from": [
-        0.8,
-        0,
-        8
+        0.8, 0, 8
       ],
       "to": [
-        15.2,
-        16,
-        8
+        15.2, 16, 8
       ],
       "rotation": {
         "origin": [
-          8,
-          0,
-          8
+          8, 0, 8
         ],
         "axis": "x",
         "angle": 45
@@ -121,42 +89,29 @@
       "faces": {
         "north": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0, 0, 16, 16
           ],
           "texture": "#fernlow",
           "tintindex": 0
         },
         "south": {
           "uv": [
-            16,
-            0,
-            0,
-            16
+            16, 0, 0, 16
           ],
           "texture": "#fernlow",
           "tintindex": 0
         }
       }
-    },
-    {
+    }, {
       "from": [
-        0.8,
-        0,
-        8
+        0.8, 0, 8
       ],
       "to": [
-        15.2,
-        16,
-        8
+        15.2, 16, 8
       ],
       "rotation": {
         "origin": [
-          8,
-          0,
-          8
+          8, 0, 8
         ],
         "axis": "x",
         "angle": -45
@@ -165,42 +120,29 @@
       "faces": {
         "north": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0, 0, 16, 16
           ],
           "texture": "#fernlow",
           "tintindex": 0
         },
         "south": {
           "uv": [
-            16,
-            0,
-            0,
-            16
+            16, 0, 0, 16
           ],
           "texture": "#fernlow",
           "tintindex": 0
         }
       }
-    },
-    {
+    }, {
       "from": [
-        8,
-        0,
-        0.8
+        8, 0, 0.8
       ],
       "to": [
-        8,
-        16,
-        15.2
+        8, 16, 15.2
       ],
       "rotation": {
         "origin": [
-          8,
-          0,
-          8
+          8, 0, 8
         ],
         "axis": "z",
         "angle": 45
@@ -209,42 +151,29 @@
       "faces": {
         "east": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0, 0, 16, 16
           ],
           "texture": "#fernlow",
           "tintindex": 0
         },
         "west": {
           "uv": [
-            16,
-            0,
-            0,
-            16
+            16, 0, 0, 16
           ],
           "texture": "#fernlow",
           "tintindex": 0
         }
       }
-    },
-    {
+    }, {
       "from": [
-        8,
-        0,
-        0.8
+        8, 0, 0.8
       ],
       "to": [
-        8,
-        16,
-        15.2
+        8, 16, 15.2
       ],
       "rotation": {
         "origin": [
-          8,
-          0,
-          8
+          8, 0, 8
         ],
         "axis": "z",
         "angle": -45
@@ -253,42 +182,29 @@
       "faces": {
         "east": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0, 0, 16, 16
           ],
           "texture": "#fernlow",
           "tintindex": 0
         },
         "west": {
           "uv": [
-            16,
-            0,
-            0,
-            16
+            16, 0, 0, 16
           ],
           "texture": "#fernlow",
           "tintindex": 0
         }
       }
-    },
-    {
+    }, {
       "from": [
-        -1.2,
-        0,
-        8
+        -1.2, 0, 8
       ],
       "to": [
-        17.2,
-        24,
-        8
+        17.2, 24, 8
       ],
       "rotation": {
         "origin": [
-          8,
-          0,
-          8
+          8, 0, 8
         ],
         "axis": "x",
         "angle": 22.5
@@ -297,42 +213,29 @@
       "faces": {
         "north": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0, 0, 16, 16
           ],
           "texture": "#fernhigh",
           "tintindex": 0
         },
         "south": {
           "uv": [
-            16,
-            0,
-            0,
-            16
+            16, 0, 0, 16
           ],
           "texture": "#fernhigh",
           "tintindex": 0
         }
       }
-    },
-    {
+    }, {
       "from": [
-        -1.2,
-        0,
-        8
+        -1.2, 0, 8
       ],
       "to": [
-        17.2,
-        24,
-        8
+        17.2, 24, 8
       ],
       "rotation": {
         "origin": [
-          8,
-          0,
-          8
+          8, 0, 8
         ],
         "axis": "x",
         "angle": -22.5
@@ -341,42 +244,29 @@
       "faces": {
         "north": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0, 0, 16, 16
           ],
           "texture": "#fernhigh",
           "tintindex": 0
         },
         "south": {
           "uv": [
-            16,
-            0,
-            0,
-            16
+            16, 0, 0, 16
           ],
           "texture": "#fernhigh",
           "tintindex": 0
         }
       }
-    },
-    {
+    }, {
       "from": [
-        8,
-        0,
-        -1.2
+        8, 0, -1.2
       ],
       "to": [
-        8,
-        24,
-        17.2
+        8, 24, 17.2
       ],
       "rotation": {
         "origin": [
-          8,
-          0,
-          8
+          8, 0, 8
         ],
         "axis": "z",
         "angle": 22.5
@@ -385,42 +275,29 @@
       "faces": {
         "east": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0, 0, 16, 16
           ],
           "texture": "#fernhigh",
           "tintindex": 0
         },
         "west": {
           "uv": [
-            16,
-            0,
-            0,
-            16
+            16, 0, 0, 16
           ],
           "texture": "#fernhigh",
           "tintindex": 0
         }
       }
-    },
-    {
+    }, {
       "from": [
-        8,
-        0,
-        -1.2
+        8, 0, -1.2
       ],
       "to": [
-        8,
-        24,
-        17.2
+        8, 24, 17.2
       ],
       "rotation": {
         "origin": [
-          8,
-          0,
-          8
+          8, 0, 8
         ],
         "axis": "z",
         "angle": -22.5
@@ -429,20 +306,14 @@
       "faces": {
         "east": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0, 0, 16, 16
           ],
           "texture": "#fernhigh",
           "tintindex": 0
         },
         "west": {
           "uv": [
-            16,
-            0,
-            0,
-            16
+            16, 0, 0, 16
           ],
           "texture": "#fernhigh",
           "tintindex": 0

@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.client.button.IButtonTooltip;
 
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +36,7 @@ public class GuiButtonAnvilPlan extends BaseGuiButton implements IButtonTooltip 
       GlStateManager.color(1, 1, 1, 1);
       mc.getTextureManager().bindTexture(BACKGROUND);
       hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
-              && mouseY < this.y + this.height;
+                && mouseY < this.y + this.height;
       drawModalRectWithCustomSizedTexture(x, y, 218, 0, 18, 18, 256, 256);
       IAnvilRecipe recipe = tile.getRecipe();
       if (recipe != null) {

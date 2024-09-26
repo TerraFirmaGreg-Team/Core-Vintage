@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:wood/planks/douglas_fir"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "saw"
     }

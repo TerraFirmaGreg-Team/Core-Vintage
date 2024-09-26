@@ -45,7 +45,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -67,19 +66,19 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 
   //Values that has a visual effect on client
   private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(
-          EntityAnimalDonkey.class, DataSerializers.BOOLEAN);
+    EntityAnimalDonkey.class, DataSerializers.BOOLEAN);
   private static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(
-          EntityAnimalDonkey.class, DataSerializers.VARINT);
+    EntityAnimalDonkey.class, DataSerializers.VARINT);
   private static final DataParameter<Float> FAMILIARITY = EntityDataManager.createKey(
-          EntityAnimalDonkey.class, DataSerializers.FLOAT);
+    EntityAnimalDonkey.class, DataSerializers.FLOAT);
   //Is this female fertilized?
   private static final DataParameter<Boolean> FERTILIZED = EntityDataManager.createKey(
-          EntityAnimalDonkey.class, DataSerializers.BOOLEAN);
+    EntityAnimalDonkey.class, DataSerializers.BOOLEAN);
   private static final DataParameter<Boolean> HALTER = EntityDataManager.createKey(
-          EntityAnimalDonkey.class, DataSerializers.BOOLEAN);
+    EntityAnimalDonkey.class, DataSerializers.BOOLEAN);
   // The time(in days) this entity became pregnant
   private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(
-          EntityAnimalDonkey.class, DataSerializers.LONG);
+    EntityAnimalDonkey.class, DataSerializers.LONG);
   private long lastFed; //Last time(in days) this entity was fed
   private long lastFDecay; //Last time(in days) this entity's familiarity had decayed
   private long matingTime; //The last time(in ticks) this male tried fertilizing females
@@ -89,8 +88,8 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 
   public EntityAnimalDonkey(World world) {
     this(world, Gender.valueOf(RNG.nextBoolean()),
-            EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.DONKEY.adulthood,
-                    ConfigAnimal.ENTITIES.DONKEY.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.DONKEY.adulthood,
+                                          ConfigAnimal.ENTITIES.DONKEY.elder));
   }
 
   public EntityAnimalDonkey(World world, Gender gender, int birthDay) {
@@ -121,17 +120,17 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+           && !this.world.containsAnyLiquid(getEntityBoundingBox())
+           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-          float floraDiversity) {
+                            float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.PLAINS)) {
+        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
       return ConfigAnimal.ENTITIES.DONKEY.rarity;
     }
     return 0;
@@ -215,14 +214,14 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
     // Save genes
     EntityAnimal father = (EntityAnimal) male;
     this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-            .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-            .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+                                      .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+                                                            .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
     this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-            .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-            .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+                                     .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+                                                           .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
     this.geneJump = (float) ((father.getEntityAttribute(AbstractHorse.JUMP_STRENGTH)
-            .getBaseValue() + this.getEntityAttribute(AbstractHorse.JUMP_STRENGTH)
-            .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+                                    .getBaseValue() + this.getEntityAttribute(AbstractHorse.JUMP_STRENGTH)
+                                                          .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
   }
 
   @Override
@@ -243,11 +242,11 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
   @Override
   public boolean isReadyToMate() {
     if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized()
-            || this.isHungry()) {
+        || this.isHungry()) {
       return false;
     }
     return this.matingTime + EntityAnimalBase.MATING_COOLDOWN_DEFAULT_TICKS
-            <= Calendar.PLAYER_TIME.getTicks();
+           <= Calendar.PLAYER_TIME.getTicks();
   }
 
   @Override
@@ -295,11 +294,15 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
     return new TextComponentTranslation(
-            ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
+      ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
   }
 
   public long getPregnantTime() {
     return dataManager.get(PREGNANT_TIME);
+  }
+
+  public void setPregnantTime(long pregnantTime) {
+    dataManager.set(PREGNANT_TIME, pregnantTime);
   }
 
   public boolean isHalter() {
@@ -308,10 +311,6 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 
   public void setHalter(boolean value) {
     dataManager.set(HALTER, value);
-  }
-
-  public void setPregnantTime(long pregnantTime) {
-    dataManager.set(PREGNANT_TIME, pregnantTime);
   }
 
   @Override
@@ -375,7 +374,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
               this.setFamiliarity(familiarity);
             }
             world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP,
-                    SoundCategory.AMBIENT, 1.0F, 1.0F);
+                            SoundCategory.AMBIENT, 1.0F, 1.0F);
           }
           return true;
         } else {
@@ -383,7 +382,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
               player.sendMessage(new TextComponentTranslation(
-                      ModUtils.localize("tooltip", "animal.mating.pregnant"), getName()));
+                ModUtils.localize("tooltip", "animal.mating.pregnant"), getName()));
             }
           }
         }
@@ -407,7 +406,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
     EntityAnimalBase.addCommonLivestockAI(this, 1.2D);
     EntityAnimalBase.addCommonPreyAI(this, 1.2);
     tasks.addTask(2,
-            new EntityAIMate(this, 1.0D, EntityAnimalHorse.class)); // Missing horses (for mules)
+                  new EntityAIMate(this, 1.0D, EntityAnimalHorse.class)); // Missing horses (for mules)
     tasks.addTask(1, new EntityAIRunAroundLikeCrazy(this, 1.2D));
     tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
   }
@@ -455,7 +454,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
         }
       }
       if (this.isFertilized()
-              && Calendar.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {
+          && Calendar.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {
         birthChildren();
         this.setFertilized(false);
       }
@@ -481,15 +480,15 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
         this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
-                this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
+          this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
         if (random.nextDouble() < ConfigAnimal.ENTITIES.DONKEY.oldDeathChance) {
           this.setDead();
         }
       }
       // Wild animals disappear after 125% lifespan
       if (this.getDaysToElderly() > 0 && this.getFamiliarity() < 0.10F &&
-              (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F
-                      <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
+          (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F
+          <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
         this.setDead();
       }
     }
@@ -511,7 +510,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
       }
       baby.setBirthDay((int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
-              : this.getFamiliarity() * 0.9F);
+                                                       : this.getFamiliarity() * 0.9F);
       EntityAnimal animal = (EntityAnimal) baby;
       animal.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       if (geneHealth > 0) {
@@ -537,8 +536,8 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
    */
   private boolean findFemaleMate() {
     List<AbstractHorse> list = this.world.getEntitiesWithinAABB(AbstractHorse.class,
-            this.getEntityBoundingBox()
-                    .grow(8.0D));
+                                                                this.getEntityBoundingBox()
+                                                                    .grow(8.0D));
     for (AbstractHorse ent : list) {
       if (ent instanceof EntityAnimalHorse || ent instanceof EntityAnimalDonkey) {
         IAnimal animal = (IAnimal) ent;
@@ -576,8 +575,8 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
     } else if (other == this) {
       // Only called if this animal is interacted with a spawn egg
       EntityAnimalDonkey baby = new EntityAnimalDonkey(this.world,
-              Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                                       Gender.valueOf(RNG.nextBoolean()),
+                                                       (int) Calendar.PLAYER_TIME.getTotalDays());
       this.setOffspringAttributes(this, baby);
       return baby;
     }

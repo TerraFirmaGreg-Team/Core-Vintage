@@ -1,12 +1,7 @@
 package net.dries007.tfc.objects.entity.animal;
 
-import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.data.MathConstants;
-import su.terrafirmagreg.modules.animal.api.type.IHuntable;
-import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
-import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.util.climate.BiomeHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -19,11 +14,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
-
 import org.jetbrains.annotations.Nullable;
+
+import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.modules.animal.api.type.IHuntable;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 
 import java.util.List;
 import java.util.Random;
@@ -52,7 +51,7 @@ public class EntityTurkeyTFC extends su.terrafirmagreg.modules.animal.object.ent
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
+        (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
       return ConfigTFC.Animals.TURKEY.rarity;
     }
     return 0;

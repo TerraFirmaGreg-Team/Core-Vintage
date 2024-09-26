@@ -7,7 +7,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.server.command.CommandTreeBase;
 
-
 import java.util.StringJoiner;
 
 /**
@@ -17,7 +16,7 @@ public abstract class BaseCommandTree extends CommandTreeBase {
 
   @Override
   public void execute(MinecraftServer server, ICommandSender sender, String[] args)
-          throws CommandException {
+    throws CommandException {
 
     if (args.length == 0) {
 

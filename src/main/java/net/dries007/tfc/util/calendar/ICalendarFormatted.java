@@ -1,14 +1,12 @@
 package net.dries007.tfc.util.calendar;
 
-import net.minecraft.world.World;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 
+import net.minecraft.world.World;
 
 import net.dries007.tfc.TerraFirmaCraft;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
 
 public interface ICalendarFormatted extends ICalendar {
   /* Total calculation methods */
@@ -17,15 +15,43 @@ public interface ICalendarFormatted extends ICalendar {
     return time / (daysInMonth * TICKS_IN_DAY);
   }
 
-  default String getTimeAndDate() {
-    return getTimeAndDate(getTicks(), getDaysInMonth());
+  static String getTimeAndDate(long time, long daysInMonth) {
+    return getTimeAndDate(getHourOfDay(time), getMinuteOfHour(time), getMonthOfYear(time, daysInMonth), getDayOfMonth(time, daysInMonth),
+                          getTotalYears(time, daysInMonth));
   }
 
   /* Fraction Calculation Methods */
 
-  static String getTimeAndDate(long time, long daysInMonth) {
-    return getTimeAndDate(getHourOfDay(time), getMinuteOfHour(time), getMonthOfYear(time, daysInMonth), getDayOfMonth(time, daysInMonth),
-            getTotalYears(time, daysInMonth));
+  static String getTimeAndDate(int hour, int minute, Month month, int day, long years) {
+    String monthName = TerraFirmaCraft.getProxy().getMonthName(month, false);
+    return TerraFirmaCraft.getProxy().getDate(hour, minute, monthName, day, years);
+  }
+
+  static int getHourOfDay(long time) {
+    return (int) ((time / TICKS_IN_HOUR) % HOURS_IN_DAY);
+  }
+
+  static int getMinuteOfHour(long time) {
+    return (int) ((time % TICKS_IN_HOUR) / TICKS_IN_MINUTE);
+  }
+
+  /* Format Methods */
+
+  @NotNull
+  static Month getMonthOfYear(long time, long daysInMonth) {
+    return Month.valueOf((int) ((time / (TICKS_IN_DAY * daysInMonth)) % 12));
+  }
+
+  static int getDayOfMonth(long time, long daysInMonth) {
+    return 1 + (int) ((time / TICKS_IN_DAY) % daysInMonth);
+  }
+
+  static long getTotalYears(long time, long daysInMonth) {
+    return 1000 + (time / (12 * daysInMonth * TICKS_IN_DAY));
+  }
+
+  default String getTimeAndDate() {
+    return getTimeAndDate(getTicks(), getDaysInMonth());
   }
 
   /**
@@ -42,34 +68,6 @@ public interface ICalendarFormatted extends ICalendar {
    * @return a number of days in a month
    */
   long getDaysInMonth();
-
-  /* Format Methods */
-
-  static String getTimeAndDate(int hour, int minute, Month month, int day, long years) {
-    String monthName = TerraFirmaCraft.getProxy().getMonthName(month, false);
-    return TerraFirmaCraft.getProxy().getDate(hour, minute, monthName, day, years);
-  }
-
-  static int getHourOfDay(long time) {
-    return (int) ((time / TICKS_IN_HOUR) % HOURS_IN_DAY);
-  }
-
-  static int getMinuteOfHour(long time) {
-    return (int) ((time % TICKS_IN_HOUR) / TICKS_IN_MINUTE);
-  }
-
-  @NotNull
-  static Month getMonthOfYear(long time, long daysInMonth) {
-    return Month.valueOf((int) ((time / (TICKS_IN_DAY * daysInMonth)) % 12));
-  }
-
-  static int getDayOfMonth(long time, long daysInMonth) {
-    return 1 + (int) ((time / TICKS_IN_DAY) % daysInMonth);
-  }
-
-  static long getTotalYears(long time, long daysInMonth) {
-    return 1000 + (time / (12 * daysInMonth * TICKS_IN_DAY));
-  }
 
   default String getSeasonDisplayName() {
     return TerraFirmaCraft.getProxy().getMonthName(getMonthOfYear(), true);

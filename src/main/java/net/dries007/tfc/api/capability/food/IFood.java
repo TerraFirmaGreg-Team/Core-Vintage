@@ -17,7 +17,6 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -42,9 +41,9 @@ public interface IFood extends INBTSerializable<NBTTagCompound> {
   float getDecayDateModifier();
 
   /**
-   * Called from {@link net.dries007.tfc.CommonEventHandler#attachItemCapabilities(AttachCapabilitiesEvent)} If the item is a food capability item, and it was created
-   * before the post configureModules, we assume that it is a technical stack, and will not appear in the world without a copy. As such, we set it to non-decaying.
-   * This is NOT SERIALIZED on the capability - as a result it will not persist across {@link ItemStack#copy()}, See TerraFirmaCraft#458
+   * Called from {@link net.dries007.tfc.CommonEventHandler#attachItemCapabilities(AttachCapabilitiesEvent)} If the item is a food capability item, and it was
+   * created before the post configureModules, we assume that it is a technical stack, and will not appear in the world without a copy. As such, we set it to
+   * non-decaying. This is NOT SERIALIZED on the capability - as a result it will not persist across {@link ItemStack#copy()}, See TerraFirmaCraft#458
    */
   void setNonDecaying();
 
@@ -73,17 +72,17 @@ public interface IFood extends INBTSerializable<NBTTagCompound> {
             break;
           case EXPIRATION_ONLY:
             text.add(TextFormatting.DARK_GREEN + I18n.format("tfc.tooltip.food_expiry_date",
-                    ICalendarFormatted.getTimeAndDate(rottenCalendarTime, Calendar.CALENDAR_TIME.getDaysInMonth())));
+                                                             ICalendarFormatted.getTimeAndDate(rottenCalendarTime, Calendar.CALENDAR_TIME.getDaysInMonth())));
             break;
           case TIME_REMAINING_ONLY:
             text.add(TextFormatting.BLUE +
-                    I18n.format("tfc.tooltip.food_expiry_date.days", String.valueOf(ICalendar.getTotalDays(daysToRotInTicks))));
+                     I18n.format("tfc.tooltip.food_expiry_date.days", String.valueOf(ICalendar.getTotalDays(daysToRotInTicks))));
             break;
           case ALL_INFO:
             text.add(TextFormatting.DARK_GREEN + I18n.format("tfc.tooltip.food_expiry_date",
-                    ICalendarFormatted.getTimeAndDate(rottenCalendarTime, Calendar.CALENDAR_TIME.getDaysInMonth())));
+                                                             ICalendarFormatted.getTimeAndDate(rottenCalendarTime, Calendar.CALENDAR_TIME.getDaysInMonth())));
             text.add(TextFormatting.BLUE +
-                    I18n.format("tfc.tooltip.food_expiry_date.days", String.valueOf(ICalendar.getTotalDays(daysToRotInTicks))));
+                     I18n.format("tfc.tooltip.food_expiry_date.days", String.valueOf(ICalendar.getTotalDays(daysToRotInTicks))));
             break;
         }
       }
@@ -110,7 +109,7 @@ public interface IFood extends INBTSerializable<NBTTagCompound> {
         float value = getData().getNutrients()[nutrient.ordinal()];
         if (value > 0) {
           text.add(nutrient.getColor() +
-                  I18n.format("tfc.tooltip.nutrition_nutrient", I18n.format(Helpers.getEnumName(nutrient)), String.format("%.1f", value)));
+                   I18n.format("tfc.tooltip.nutrition_nutrient", I18n.format(Helpers.getEnumName(nutrient)), String.format("%.1f", value)));
         }
       }
     } else {

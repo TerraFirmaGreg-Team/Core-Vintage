@@ -4,7 +4,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 
-
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.util.calendar.Calendar;
 
@@ -87,7 +86,7 @@ public interface IAnimal extends ICreature {
    */
   default boolean isReadyToMate() {
     return this.getAge() == Age.ADULT && !(this.getFamiliarity() < 0.3f) && !this.isFertilized()
-            && !this.isHungry();
+           && !this.isHungry();
   }
 
   /**
@@ -100,7 +99,7 @@ public interface IAnimal extends ICreature {
     long adulthoodDay = this.getDaysToAdulthood();
     long elderlyDay = this.getDaysToElderly() + this.getDaysToAdulthood();
     if (getCreatureType() == CreatureType.LIVESTOCK && this.getDaysToElderly() > 0
-            && deltaDays > elderlyDay) {
+        && deltaDays > elderlyDay) {
       return Age.OLD; // if enabled, only for familiarizable animals
     } else if (deltaDays > adulthoodDay) {
       return Age.ADULT;
@@ -174,11 +173,11 @@ public interface IAnimal extends ICreature {
   Type getType();
 
   /**
-   * Some animals can give products (eg: Milk, Wool and Eggs) This function returns if said animal is ready to be worked upon (or if it is ready to lay eggs on it's
-   * own)
+   * Some animals can give products (eg: Milk, Wool and Eggs) This function returns if said animal is ready to be worked upon (or if it is ready to lay eggs on
+   * it's own)
    * <p>
-   * ** Check for everything ** this function should return only true if the animal will give it's products upon work (so TOP integration could show this animal is
-   * ready)
+   * ** Check for everything ** this function should return only true if the animal will give it's products upon work (so TOP integration could show this animal
+   * is ready)
    *
    * @return true if it is ready for product production
    */
@@ -190,7 +189,8 @@ public interface IAnimal extends ICreature {
    * Get the products of this animal Can return more than one item itemstack fortune and other behaviour should not be handled here Suggestion:
    * EntityLiving#processInteract() for right clicking handling
    * <p>
-   * (This function should be implemented with TOP integration in mind ie: what would you like for the tooltip to show when #isReadyForAnimalProduct returns true?)
+   * (This function should be implemented with TOP integration in mind ie: what would you like for the tooltip to show when #isReadyForAnimalProduct returns
+   * true?)
    *
    * @return a list of itemstack
    */
@@ -214,8 +214,8 @@ public interface IAnimal extends ICreature {
   }
 
   /**
-   * Get the tooltip for ** Why this animal is not ready? ** Common usages: Cows not having milk, chickens already layed eggs today, sheeps' fleece not grown, not
-   * enough familiarity
+   * Get the tooltip for ** Why this animal is not ready? ** Common usages: Cows not having milk, chickens already layed eggs today, sheeps' fleece not grown,
+   * not enough familiarity
    *
    * @return null if you don't want for a tooltip to be shown, any TextComponentTranslation object if you want it to.
    */

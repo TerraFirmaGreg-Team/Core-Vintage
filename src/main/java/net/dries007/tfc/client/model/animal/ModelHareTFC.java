@@ -11,7 +11,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.entity.animal.EntityHareTFC;
 
 /**
@@ -139,7 +138,7 @@ public class ModelHareTFC extends ModelBase {
   }
 
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
-          Entity entityIn) {
+                                Entity entityIn) {
     float f = ageInTicks - (float) entityIn.ticksExisted;
     EntityHareTFC EntityHareTFC = (EntityHareTFC) entityIn;
     this.hareNose.rotateAngleX = headPitch * 0.017453292F;

@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 
-
 import static su.terrafirmagreg.data.Constants.MOD_ID;
 import static su.terrafirmagreg.data.Constants.MOD_NAME;
 

@@ -9,10 +9,10 @@ public class ItemCoreMisc extends BaseItem {
   public ItemCoreMisc(String name, Size size, Weight weight, Object... oreNameParts) {
 
     getSettings()
-            .registryKey("core/" + name)
-            .size(size)
-            .weight(weight)
-            .oreDict(oreNameParts);
+      .registryKey("core/" + name)
+      .size(size)
+      .weight(weight)
+      .oreDict(oreNameParts);
   }
 
 }

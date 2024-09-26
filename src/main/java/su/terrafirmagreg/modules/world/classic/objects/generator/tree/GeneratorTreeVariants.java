@@ -9,7 +9,6 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
@@ -37,8 +36,8 @@ public class GeneratorTreeVariants implements ITreeGenerator {
    * A tree generator which select a random structure to place. Can choose to use a random rotation as well
    *
    * @param useRotation Should it try and randomly rotate the structures on placement
-   * @param variants    The list of variants for the generator to look for. Structure files should be placed in assets/tfc/[TREE NAME]/ This needs to be the list of
-   *                    file names, (i.e. "tree1.nbt" should pass in "tree1")
+   * @param variants    The list of variants for the generator to look for. Structure files should be placed in assets/tfc/[TREE NAME]/ This needs to be the
+   *                    list of file names, (i.e. "tree1.nbt" should pass in "tree1")
    */
   public GeneratorTreeVariants(boolean useRotation, String... variants) {
     this.variants = variants;

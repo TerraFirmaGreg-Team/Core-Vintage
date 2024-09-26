@@ -32,7 +32,6 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -67,24 +66,24 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     this.settings = Settings.of(Material.WOOD);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .randomTicks()
-            .size(Size.VERY_LARGE)
-            .weight(Weight.MEDIUM)
-            .ignoresProperties(PLACED)
-            .harvestLevel(ToolClasses.AXE, 0)
-            .resistance(5.0F)
-            .hardness(20.0F)//TODO 2.0 в тфк
-            .lightValue(this.getDefaultState().getValue(SMALL) ? 0 : 255)
-            .oreDict(variant)
-            .oreDict(variant, type)
-            .oreDict("logWood")
-            .oreDict(type.isCanMakeTannin() ? "tannin" : null);
+      .registryKey(variant.getRegistryKey(type))
+      .randomTicks()
+      .size(Size.VERY_LARGE)
+      .weight(Weight.MEDIUM)
+      .ignoresProperties(PLACED)
+      .harvestLevel(ToolClasses.AXE, 0)
+      .resistance(5.0F)
+      .hardness(20.0F)//TODO 2.0 в тфк
+      .lightValue(this.getDefaultState().getValue(SMALL) ? 0 : 255)
+      .oreDict(variant)
+      .oreDict(variant, type)
+      .oreDict("logWood")
+      .oreDict(type.isCanMakeTannin() ? "tannin" : null);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(LOG_AXIS, EnumAxis.Y)
-            .withProperty(PLACED, true)
-            .withProperty(SMALL, false));
+                              .withProperty(LOG_AXIS, EnumAxis.Y)
+                              .withProperty(PLACED, true)
+                              .withProperty(SMALL, false));
 
     BlockUtils.setFireInfo(this, 5, 5);
 
@@ -193,9 +192,9 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
       // Axes, not saws, cause tree felling
       if (!state.getValue(PLACED) && ConfigWood.MISC.enableFelling) {
         player.setHeldItem(EnumHand.MAIN_HAND,
-                stack); // Reset so we can damage however we want before vanilla
+                           stack); // Reset so we can damage however we want before vanilla
         if (!removeTree(world, pos, player, stack,
-                OreDictUtils.contains(stack, "axeStone") ||
+                        OreDictUtils.contains(stack, "axeStone") ||
                         OreDictUtils.contains(stack, "hammerStone"))) {
           // Don't remove the block, the rest of the tree broke instead
           return false;
@@ -221,7 +220,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
   private boolean removeTree(World world, BlockPos pos, @Nullable EntityPlayer player, ItemStack stack, boolean stoneTool) {
     final boolean explosion = stack.isEmpty() || player == null;
     final int maxLogs =
-            explosion ? Integer.MAX_VALUE : 1 + stack.getMaxDamage() - stack.getItemDamage();
+      explosion ? Integer.MAX_VALUE : 1 + stack.getMaxDamage() - stack.getItemDamage();
 
     // Find all logs and add them to a list
     List<BlockPos> logs = new ArrayList<>(50);
@@ -255,13 +254,13 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
         if (RNG.nextFloat() < 0.3) {
           if (!world.isRemote) {
             StackUtils.spawnItemStack(world, pos.add(0.5d, 0.5d, 0.5d),
-                    new ItemStack(Item.getItemFromBlock(this)));
+                                      new ItemStack(Item.getItemFromBlock(this)));
           }
         }
       } else {
         // Stone tools are 60% efficient (default config)
         if (!stoneTool
-                || RNG.nextFloat() < ConfigWood.MISC.stoneAxeReturnRate && !world.isRemote) {
+            || RNG.nextFloat() < ConfigWood.MISC.stoneAxeReturnRate && !world.isRemote) {
           harvestBlock(world, player, pos1, world.getBlockState(pos1), null, stack);
         }
         stack.damageItem(1, player);
@@ -276,16 +275,16 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return getDefaultState()
-            .withProperty(LOG_AXIS, EnumAxis.values()[meta & 0b11])
-            .withProperty(PLACED, (meta & 0b100) == 0b100)
-            .withProperty(SMALL, (meta & 0b1000) == 0b1000);
+      .withProperty(LOG_AXIS, EnumAxis.values()[meta & 0b11])
+      .withProperty(PLACED, (meta & 0b100) == 0b100)
+      .withProperty(SMALL, (meta & 0b1000) == 0b1000);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
     return state.getValue(LOG_AXIS).ordinal() |
-            (state.getValue(PLACED) ? 0b100 : 0) |
-            (state.getValue(SMALL) ? 0b1000 : 0);
+           (state.getValue(PLACED) ? 0b100 : 0) |
+           (state.getValue(SMALL) ? 0b1000 : 0);
   }
 
   @Override

@@ -51,15 +51,14 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.modules.ModuleContainer.CORE;
 
 @Module(
-        moduleID = CORE,
-        description = "Core TFG content. Disabling this disables the entire mod and all its module.",
-        coreModule = true
+  moduleID = CORE,
+  description = "Core TFG content. Disabling this disables the entire mod and all its module.",
+  coreModule = true
 )
 public final class ModuleCore extends ModuleBase {
 

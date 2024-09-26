@@ -7,7 +7,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 public class ContainerSmelteryCauldron extends BaseContainerTile<TileSmelteryCauldron> {
@@ -19,7 +18,7 @@ public class ContainerSmelteryCauldron extends BaseContainerTile<TileSmelteryCau
   @Override
   protected void addContainerSlots() {
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-            null);
+                                                null);
     if (inventory != null) {
       for (int i = 0; i < 8; i++) {
         int row = 1 - (i / 4);

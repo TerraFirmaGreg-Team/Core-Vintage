@@ -11,7 +11,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.Calendar;
 
@@ -45,21 +44,23 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
     deserializeNBT(nbt);
   }
 
-  /**
-   * This marks if the food data should be serialized. For normal food items, it isn't, because all values are provided on construction via CapabilityFood. Only mark
-   * this if food data will change per item stack
-   */
-  protected boolean isDynamic() {
-    return false;
-  }
-
   public FoodHandler(@Nullable NBTTagCompound nbt, @NotNull Food food) {
     this(nbt, food.getData());
   }
 
   public static void setNonDecaying(boolean markStacksNonDecaying) {
     FoodHandler.markStacksNonDecaying = markStacksNonDecaying;
-  }  @Override
+  }
+
+  /**
+   * This marks if the food data should be serialized. For normal food items, it isn't, because all values are provided on construction via CapabilityFood. Only
+   * mark this if food data will change per item stack
+   */
+  protected boolean isDynamic() {
+    return false;
+  }
+
+  @Override
   public long getCreationDate() {
     if (isNonDecaying) {
       return UNKNOWN_CREATION_DATE;
@@ -71,11 +72,13 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
   }
 
   @Override
-  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-    return capability == CapabilityFood.CAPABILITY;
-  }  @Override
   public void setCreationDate(long creationDate) {
     this.creationDate = creationDate;
+  }
+
+  @Override
+  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+    return capability == CapabilityFood.CAPABILITY;
   }
 
   @Nullable
@@ -83,7 +86,9 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
   @SuppressWarnings("unchecked")
   public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
     return capability == CapabilityFood.CAPABILITY ? (T) this : null;
-  }  @Override
+  }
+
+  @Override
   public long getRottenDate() {
     if (isNonDecaying) {
       return NEVER_DECAY_DATE;
@@ -112,7 +117,9 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
     }
     nbt.setTag("traits", traitList);
     return nbt;
-  }  @Override
+  }
+
+  @Override
   @NotNull
   public FoodData getData() {
     return data;
@@ -135,7 +142,9 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
       // Stop defaulting to zero, in cases where the item stack is cloned or copied from one that was initialized at load (and thus was before the calendar was initialized)
       creationDate = CapabilityFood.getRoundedCreationDate();
     }
-  }  @Override
+  }
+
+  @Override
   public float getDecayDateModifier() {
     // Decay modifiers are higher = shorter
     float mod = data.getDecayModifier() * (float) ConfigFood.MISC.DECAY.modifier;
@@ -156,15 +165,6 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
   public List<FoodTrait> getTraits() {
     return foodTraits;
   }
-
-
-
-
-
-
-
-
-
 
 
   private long calculateRottenDate(long creationDateIn) {

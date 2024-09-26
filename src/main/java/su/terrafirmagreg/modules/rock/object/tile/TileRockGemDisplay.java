@@ -15,7 +15,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ItemGem;
 
@@ -56,14 +55,13 @@ public class TileRockGemDisplay extends BaseTile {
     super.writeToNBT(nbt);
     NBTUtils.setGenericNBTValue(nbt, "grade", grade);
     NBTUtils.setGenericNBTValue(nbt, "size", size);
-    NBTUtils.setGenericNBTValue(nbt, "items",
-            ItemStackHelper.saveAllItems(new NBTTagCompound(), this.items));
+    NBTUtils.setGenericNBTValue(nbt, "items", ItemStackHelper.saveAllItems(new NBTTagCompound(), this.items));
     return nbt;
   }
 
   public void onDataPacket(@NotNull NetworkManager net, @NotNull SPacketUpdateTileEntity pkt) {
     super.onDataPacket(net, pkt);
-    this.markForBlockUpdate();
+    markForBlockUpdate();
   }
 
   public boolean onRightClick(EntityPlayer player, EnumHand hand) {

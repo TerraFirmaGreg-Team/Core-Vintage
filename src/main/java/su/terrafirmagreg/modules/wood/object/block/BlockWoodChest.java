@@ -31,7 +31,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -55,24 +54,22 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IProviderT
     this.settings = Settings.of(Material.WOOD);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .ignoresProperties(BlockChest.FACING)
-            .sound(SoundType.WOOD)
-            .hardness(2.5f)
-            .size(Size.LARGE)
-            .weight(Weight.MEDIUM)
-            .oreDict("chest")
-            .oreDict("chest", "wood")
-            .oreDict("chest", "wood", type);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .ignoresProperties(BlockChest.FACING)
+      .sound(SoundType.WOOD)
+      .hardness(2.5f)
+      .size(Size.LARGE)
+      .weight(Weight.MEDIUM)
+      .oreDict("chest")
+      .oreDict("chest", "wood")
+      .oreDict("chest", "wood", type);
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       GuiHandler.openGui(worldIn, pos, playerIn);
     }
@@ -80,8 +77,8 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IProviderT
   }
 
   /**
-   * This and the following methods are copied from vanilla to allow us to hook into vanilla's chest stuff Hoppers are hardcoded for vanilla chest insertions, which
-   * means we need to block them (to stop inserting items that aren't the correct size)
+   * This and the following methods are copied from vanilla to allow us to hook into vanilla's chest stuff Hoppers are hardcoded for vanilla chest insertions,
+   * which means we need to block them (to stop inserting items that aren't the correct size)
    */
   @Nullable
   @Override
@@ -91,31 +88,31 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IProviderT
 
     if (!allowBlocking && isBlocked(worldIn, pos)) {
       return null;
-    } else {
-      for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
-        BlockPos blockpos = pos.offset(enumfacing);
-        Block block = worldIn.getBlockState(blockpos).getBlock();
+    }
+    for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
+      BlockPos blockpos = pos.offset(enumfacing);
+      Block block = worldIn.getBlockState(blockpos).getBlock();
 
-        if (block == this) {
-          // Forge: fix MC-99321
-          if (!allowBlocking && isBlocked(worldIn, blockpos)) {
-            return null;
+      if (block == this) {
+        // Forge: fix MC-99321
+        if (!allowBlocking && isBlocked(worldIn, blockpos)) {
+          return null;
+        }
+
+        var tile = TileUtils.getTile(worldIn, pos);
+
+        if (tile instanceof TileEntityChest tileEntityChest) {
+          if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH) {
+            ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", ilockablecontainer, tileEntityChest);
           }
+          ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", tileEntityChest, ilockablecontainer);
 
-          TileEntity tileentity1 = worldIn.getTileEntity(blockpos);
-
-          if (tileentity1 instanceof TileEntityChest tileEntityChest1) {
-            if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH) {
-              ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", ilockablecontainer, tileEntityChest1);
-            } else {
-              ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", tileEntityChest1, ilockablecontainer);
-            }
-          }
         }
       }
-
-      return ilockablecontainer;
     }
+
+    return ilockablecontainer;
+
   }
 
   private boolean isBlocked(World worldIn, BlockPos pos) {
@@ -123,14 +120,12 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IProviderT
   }
 
   private boolean isBelowSolidBlock(World worldIn, BlockPos pos) {
-    return worldIn.getBlockState(pos.up())
-            .doesSideBlockChestOpening(worldIn, pos.up(), EnumFacing.DOWN);
+    return worldIn.getBlockState(pos.up()).doesSideBlockChestOpening(worldIn, pos.up(), EnumFacing.DOWN);
   }
 
   private boolean isOcelotSittingOnChest(World worldIn, BlockPos pos) {
-    for (EntityOcelot entity : worldIn.getEntitiesWithinAABB(EntityOcelot.class,
-            new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2,
-                    pos.getZ() + 1))) {
+    for (EntityOcelot entity : worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(),
+                                                                                                   pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1))) {
       if (entity.isSitting()) {
         return true;
       }

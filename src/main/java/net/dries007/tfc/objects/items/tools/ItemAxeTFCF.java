@@ -10,7 +10,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import tfcflorae.util.OreDictionaryHelper;
 

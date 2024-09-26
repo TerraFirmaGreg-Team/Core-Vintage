@@ -30,35 +30,51 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.data.Properties.SEALED;
 
 /**
- * Crate is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state property, and
- * cached in the TE (for gui purposes)
+ * Crate is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state property,
+ * and cached in the TE (for gui purposes)
  */
 @SuppressWarnings("deprecation")
 public class BlockCrate extends BaseBlockContainer {
 
   private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.05D, 0.0D, 0.05D, 0.95D,
-          0.875D, 0.95D);
+                                                                      0.875D, 0.95D);
   private static final AxisAlignedBB BOUNDING_BOX_SEALED = new AxisAlignedBB(0.05D, 0.0D, 0.05D,
-          0.95D, 0.875D, 0.95D);
+                                                                             0.95D, 0.875D, 0.95D);
 
   public BlockCrate() {
     super(Settings.of(Material.CIRCUITS));
 
     getSettings()
-            .registryKey("device/crate")
-            .sound(SoundType.WOOD)
-            .hardness(2F)
-            .nonCube()
-            .weight(Weight.VERY_HEAVY);
+      .registryKey("device/crate")
+      .sound(SoundType.WOOD)
+      .hardness(2F)
+      .nonCube()
+      .weight(Weight.VERY_HEAVY);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(SEALED, false));
+                              .withProperty(SEALED, false));
+  }
+
+  /**
+   * Used to update the vessel seal state and the TE, in the correct order
+   */
+  public static void toggleCrateSeal(World world, BlockPos pos) {
+    var tile = TileUtils.getTile(world, pos, TileCrate.class);
+    if (tile != null) {
+      IBlockState state = world.getBlockState(pos);
+      boolean previousSealed = state.getValue(SEALED);
+      world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
+      if (previousSealed) {
+        tile.onUnseal();
+      } else {
+        tile.onSealed();
+      }
+    }
   }
 
   @Override
@@ -83,7 +99,7 @@ public class BlockCrate extends BaseBlockContainer {
   @Override
   public Size getSize(ItemStack stack) {
     return stack.getTagCompound() == null ? Size.VERY_LARGE
-            : Size.HUGE; // Causes overburden if sealed
+                                          : Size.HUGE; // Causes overburden if sealed
   }
 
   @Override
@@ -107,7 +123,7 @@ public class BlockCrate extends BaseBlockContainer {
 
   @Override
   public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     if (!canStay(world, pos)) {
       world.destroyBlock(pos, true);
     }
@@ -120,15 +136,15 @@ public class BlockCrate extends BaseBlockContainer {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
-          float hitY, float hitZ) {
+                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
+                                  float hitY, float hitZ) {
     if (!world.isRemote) {
       ItemStack heldItem = playerIn.getHeldItem(hand);
       var tile = TileUtils.getTile(world, pos, TileCrate.class);
       if (tile != null) {
         if (heldItem.isEmpty() && playerIn.isSneaking()) {
           world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
-                  0.85F);
+                          0.85F);
           toggleCrateSeal(world, pos);
         } else {
           GuiHandler.openGui(world, pos, playerIn);
@@ -138,26 +154,9 @@ public class BlockCrate extends BaseBlockContainer {
     return true;
   }
 
-  /**
-   * Used to update the vessel seal state and the TE, in the correct order
-   */
-  public static void toggleCrateSeal(World world, BlockPos pos) {
-    var tile = TileUtils.getTile(world, pos, TileCrate.class);
-    if (tile != null) {
-      IBlockState state = world.getBlockState(pos);
-      boolean previousSealed = state.getValue(SEALED);
-      world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
-      if (previousSealed) {
-        tile.onUnseal();
-      } else {
-        tile.onSealed();
-      }
-    }
-  }
-
   @Override
   public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer,
-          ItemStack stack) {
+                              ItemStack stack) {
     // If the barrel was sealed, then copy the contents from the item
     if (!world.isRemote) {
       NBTTagCompound nbt = stack.getTagCompound();
@@ -178,7 +177,7 @@ public class BlockCrate extends BaseBlockContainer {
 
   @Override
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
-          IBlockState state, int fortune) {
+                       IBlockState state, int fortune) {
     // Only drop the barrel if it's not sealed, since the barrel with contents will be already dropped by the TE
     if (!state.getValue(SEALED)) {
       super.getDrops(drops, world, pos, state, fortune);
@@ -194,7 +193,7 @@ public class BlockCrate extends BaseBlockContainer {
 
   private boolean canStay(IBlockAccess world, BlockPos pos) {
     return world.getBlockState(pos.down())
-            .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+                .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
   }
 
   @Nullable

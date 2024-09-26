@@ -32,7 +32,6 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 
-
 import com.eerussianguy.firmalife.entity.CombatGreenhouseTask;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
@@ -84,7 +83,7 @@ public class CommonEventHandlerFL {
       if (bucket != null) //checking if it can be filled
       {
         FluidActionResult fillResult = FluidUtil.tryFillContainer(item, FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)),
-                Fluid.BUCKET_VOLUME, player, false);
+                                                                  Fluid.BUCKET_VOLUME, player, false);
         if (fillResult.isSuccess() && entity instanceof EntityAnimalCow cow) {
           //we can just cast the entity to a cow to test familiarity etc
           Fluid fluid = FluidsTFC.MILK.get();
@@ -104,9 +103,9 @@ public class CommonEventHandlerFL {
             if (cow.getFamiliarity() > 0.15f && cow.isReadyForAnimalProduct()) {
               FluidTank fluidHandler = new FluidTank(fluid, 1000, 1000);
               player.setHeldItem(player.getActiveHand(), FluidUtil
-                      .tryFillContainerAndStow(item, fluidHandler, new PlayerInvWrapper(player.inventory), Fluid.BUCKET_VOLUME, player,
-                              true)
-                      .getResult());
+                .tryFillContainerAndStow(item, fluidHandler, new PlayerInvWrapper(player.inventory), Fluid.BUCKET_VOLUME, player,
+                                         true)
+                .getResult());
               cow.setProductsCooldown();
               event.setCanceled(true);
             }

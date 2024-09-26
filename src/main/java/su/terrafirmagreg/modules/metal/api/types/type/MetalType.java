@@ -1,12 +1,11 @@
 package su.terrafirmagreg.modules.metal.api.types.type;
 
-import su.terrafirmagreg.data.lib.types.type.Type;
-
-
 import gregtech.api.unification.material.Material;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 
 import lombok.Getter;
+
+import su.terrafirmagreg.data.lib.types.type.Type;
 
 import java.util.Set;
 

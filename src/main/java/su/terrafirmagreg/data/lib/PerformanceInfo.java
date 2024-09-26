@@ -58,6 +58,17 @@ public class PerformanceInfo {
   }
 
   /**
+   * Simple util to convert bytes to megabytes.
+   *
+   * @param bytes The amount of bytes.
+   * @return The amount of megabytes.
+   */
+  public static long bytesToMb(long bytes) {
+
+    return bytes / 1024L / 1024L;
+  }
+
+  /**
    * Gets the FPS at time of construction.
    *
    * @return The FPS.
@@ -98,17 +109,6 @@ public class PerformanceInfo {
   }
 
   /**
-   * Simple util to convert bytes to megabytes.
-   *
-   * @param bytes The amount of bytes.
-   * @return The amount of megabytes.
-   */
-  public static long bytesToMb(long bytes) {
-
-    return bytes / 1024L / 1024L;
-  }
-
-  /**
    * Gets the total amount of unused memory.
    *
    * @return The amount of unused memory.
@@ -136,8 +136,8 @@ public class PerformanceInfo {
   public String getMemoryString() {
 
     return String.format("Mem:% 2d%% %03d/%03dMB",
-            this.getUsedMemory() * 100L / this.getMaxMemory(), this.getUsedMemoryMb(),
-            this.getMaxMemoryMb());
+                         this.getUsedMemory() * 100L / this.getMaxMemory(), this.getUsedMemoryMb(),
+                         this.getMaxMemoryMb());
   }
 
   /**
@@ -188,6 +188,6 @@ public class PerformanceInfo {
   public String getAllocatedString() {
 
     return String.format("Allocated:% 2d%% %03dMB",
-            this.getUsedMemory() * 100L / this.getMaxMemory(), this.getUsedMemoryMb());
+                         this.getUsedMemory() * 100L / this.getMaxMemory(), this.getUsedMemoryMb());
   }
 }

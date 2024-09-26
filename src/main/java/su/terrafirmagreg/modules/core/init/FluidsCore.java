@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.core.init;
 
 import su.terrafirmagreg.api.registry.RegistryManager;
 
-
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 
 public final class FluidsCore {

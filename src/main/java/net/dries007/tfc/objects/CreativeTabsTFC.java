@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 
@@ -46,7 +45,7 @@ public final class CreativeTabsTFC {
         return stack;
       }
       TerraFirmaCraft.getLog()
-              .error("[Please inform developers] No icon stack for creative tab {}", getTabLabel());
+                     .error("[Please inform developers] No icon stack for creative tab {}", getTabLabel());
       return new ItemStack(Items.STICK);
     }
   }

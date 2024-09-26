@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
-
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("WeakerAccess")
@@ -19,7 +18,7 @@ public abstract class RenderAnimalTFC<T extends EntityLiving> extends RenderLivi
   private final ResourceLocation oldTexture;
 
   protected RenderAnimalTFC(RenderManager rendermanagerIn, ModelBase modelbaseIn, float shadowsizeIn, @NotNull ResourceLocation youngTextures,
-          @NotNull ResourceLocation oldTextures) {
+                            @NotNull ResourceLocation oldTextures) {
     super(rendermanagerIn, modelbaseIn, shadowsizeIn);
     this.youngTexture = youngTextures;
     this.oldTexture = oldTextures;

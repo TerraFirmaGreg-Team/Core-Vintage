@@ -5,7 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.DataSerializerEntry;
 
 public interface IRegistryDataSerializer
-        extends IRegistryBase {
+  extends IRegistryBase {
 
   /**
    * Registers a new dataSerializer. Registration will be handled for you.

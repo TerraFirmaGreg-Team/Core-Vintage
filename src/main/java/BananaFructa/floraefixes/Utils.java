@@ -25,7 +25,6 @@ import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.client.config.GuiUtils;
 
-
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.util.agriculture.Crop;
@@ -101,19 +100,19 @@ public class Utils {
           BlockPos blockpos = raytraceresult.getBlockPos().up();
           Material material = worldIn.getBlockState(blockpos.down()).getMaterial();
           if ((!worldIn.isBlockModifiable(playerIn, blockpos) ||
-                  !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) &&
-                  material == Material.WATER) {
+               !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) &&
+              material == Material.WATER) {
             return new ActionResult<>(EnumActionResult.FAIL, itemstack);
           }
 
           BlockPos blockpos1 = blockpos.up();
           IBlockState iblockstate = worldIn.getBlockState(blockpos);
           if (iblockstate.getMaterial() == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0 &&
-                  worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenClassic.FRESH_WATER && material != Material.WATER) {
+              worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenClassic.FRESH_WATER && material != Material.WATER) {
             BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
             worldIn.setBlockState(blockpos1, BlockCropTFC.get(crop).getDefaultState());
             if (ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, EnumFacing.UP, handIn)
-                    .isCanceled()) {
+                                 .isCanceled()) {
               blocksnapshot.restore(true, false);
               return new ActionResult<>(EnumActionResult.FAIL, itemstack);
             }
@@ -156,20 +155,20 @@ public class Utils {
   }
 
   public static void drawTooltipBox(int tooltipX, int tooltipY, int width, int height, int backgroundColor, int borderColorStart,
-          int borderColorEnd) {
+                                    int borderColorEnd) {
     GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY - 4, tooltipX + width + 3, tooltipY - 3, backgroundColor, backgroundColor);
     GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY + height + 3, tooltipX + width + 3, tooltipY + height + 4, backgroundColor,
-            backgroundColor);
+                              backgroundColor);
     GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY - 3, tooltipX + width + 3, tooltipY + height + 3, backgroundColor, backgroundColor);
     GuiUtils.drawGradientRect(0, tooltipX - 4, tooltipY - 3, tooltipX - 3, tooltipY + height + 3, backgroundColor, backgroundColor);
     GuiUtils.drawGradientRect(0, tooltipX + width + 3, tooltipY - 3, tooltipX + width + 4, tooltipY + height + 3, backgroundColor,
-            backgroundColor);
+                              backgroundColor);
     GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY - 3 + 1, tooltipX - 3 + 1, tooltipY + height + 3 - 1, borderColorStart, borderColorEnd);
     GuiUtils.drawGradientRect(0, tooltipX + width + 2, tooltipY - 3 + 1, tooltipX + width + 3, tooltipY + height + 3 - 1, borderColorStart,
-            borderColorEnd);
+                              borderColorEnd);
     GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY - 3, tooltipX + width + 3, tooltipY - 3 + 1, borderColorStart, borderColorStart);
     GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY + height + 2, tooltipX + width + 3, tooltipY + height + 3, borderColorEnd,
-            borderColorEnd);
+                              borderColorEnd);
   }
 
 }

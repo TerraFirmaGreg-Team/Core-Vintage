@@ -1,11 +1,10 @@
 package se.gory_moon.horsepower.recipes;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;
-
-
-import se.gory_moon.horsepower.util.Utils;
 
 public abstract class HPRecipeBase {
 
@@ -63,9 +62,9 @@ public abstract class HPRecipeBase {
 
   @Override
   public int hashCode() {
-    int result = Utils.getItemStackHashCode(input);
-    result = 31 * result + Utils.getItemStackHashCode(output);
-    result = 31 * result + Utils.getItemStackHashCode(secondary);
+    int result = StackUtils.getItemStackHashCode(input);
+    result = 31 * result + StackUtils.getItemStackHashCode(output);
+    result = 31 * result + StackUtils.getItemStackHashCode(secondary);
     result = 31 * result + secondaryChance;
     result = 31 * result + time;
     return result;
@@ -81,13 +80,13 @@ public abstract class HPRecipeBase {
     }
 
     return time == recipe.time && secondaryChance == recipe.secondaryChance && input.isItemEqual(recipe.input) &&
-            output.isItemEqual(recipe.output) && secondary.isItemEqual(recipe.secondary);
+           output.isItemEqual(recipe.output) && secondary.isItemEqual(recipe.secondary);
   }
 
   @Override
   public String toString() {
     return input + " -> " + output +
-            (time > -1 ? " = " + time : "") +
-            (!secondary.isEmpty() ? "{" + secondary + "->" + secondaryChance + "%}" : "");
+           (time > -1 ? " = " + time : "") +
+           (!secondary.isEmpty() ? "{" + secondary + "->" + secondaryChance + "%}" : "");
   }
 }

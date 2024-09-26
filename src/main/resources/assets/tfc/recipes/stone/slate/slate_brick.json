@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:rock/slate"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

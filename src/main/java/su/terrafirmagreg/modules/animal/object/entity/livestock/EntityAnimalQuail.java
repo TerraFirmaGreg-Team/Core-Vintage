@@ -19,7 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
@@ -32,7 +31,7 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
 
   public EntityAnimalQuail(World worldIn) {
     this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-            getRandomGrowth(ConfigAnimal.ENTITIES.QUAIL.adulthood, ConfigAnimal.ENTITIES.QUAIL.elder));
+         getRandomGrowth(ConfigAnimal.ENTITIES.QUAIL.adulthood, ConfigAnimal.ENTITIES.QUAIL.elder));
   }
 
   public EntityAnimalQuail(World worldIn, Gender gender, int birthDay) {
@@ -42,10 +41,10 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-          float floraDiversity) {
+                            float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
+        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
       return ConfigAnimal.ENTITIES.QUAIL.rarity;
     }
     return 0;
@@ -70,9 +69,9 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
       if (cap != null) {
         EntityAnimalQuail chick = new EntityAnimalQuail(this.world);
         chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
-                : this.getFamiliarity() * 0.9F);
+                                                          : this.getFamiliarity() * 0.9F);
         cap.setFertilized(chick,
-                ConfigAnimal.ENTITIES.QUAIL.hatch + Calendar.PLAYER_TIME.getTotalDays());
+                          ConfigAnimal.ENTITIES.QUAIL.hatch + Calendar.PLAYER_TIME.getTotalDays());
       }
     }
     eggs.add(egg);
@@ -82,7 +81,7 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
   @Override
   public long getProductsCooldown() {
     return Math.max(0,
-            ConfigAnimal.ENTITIES.QUAIL.eggTicks + getLaidTicks() - Calendar.PLAYER_TIME.getTicks());
+                    ConfigAnimal.ENTITIES.QUAIL.eggTicks + getLaidTicks() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override

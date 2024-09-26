@@ -15,7 +15,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import com.eerussianguy.firmalife.init.StemCrop;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropSimple;
@@ -92,15 +91,15 @@ public abstract class BlockStemCrop extends BlockCropSimple {
       //if penultimate stage
       PropertyInteger stageProperty = getStageProperty();
       if (cropState.getProperties()
-              .containsKey(stageProperty) && cropState.getValue(stageProperty) == getCrop().getMaxStage() - 1) {
+                   .containsKey(stageProperty) && cropState.getValue(stageProperty) == getCrop().getMaxStage() - 1) {
         var tile = TileUtils.getTile(world, cropPos, TEStemCrop.class);
         EnumFacing fruitDirection = tile.getFruitDirection();
         BlockPos fruitPos = cropPos.offset(fruitDirection);
         StemCrop crop = (StemCrop) getCrop();
         if (crop.getCropBlock().canPlaceBlockAt(world, fruitPos)) {
           IBlockState fruitState = crop.getCropBlock()
-                  .getDefaultState()
-                  .withProperty(BlockStemFruit.FACING, fruitDirection.getOpposite());
+                                       .getDefaultState()
+                                       .withProperty(BlockStemFruit.FACING, fruitDirection.getOpposite());
           world.setBlockState(fruitPos, fruitState);
           super.grow(world, cropPos, cropState, random);
         }
@@ -127,8 +126,8 @@ public abstract class BlockStemCrop extends BlockCropSimple {
       if (crop.getCropBlock().canPlaceBlockAt(worldIn, targetPos)) //spawn fruit
       {
         worldIn.setBlockState(targetPos, crop.getCropBlock()
-                .getDefaultState()
-                .withProperty(BlockStemFruit.FACING, fruitDirection.getOpposite()));
+                                             .getDefaultState()
+                                             .withProperty(BlockStemFruit.FACING, fruitDirection.getOpposite()));
       } else //revert back a stage
       {
         worldIn.setBlockState(pos, state.withProperty(getStageProperty(), getCrop().getMaxStage() - 1));

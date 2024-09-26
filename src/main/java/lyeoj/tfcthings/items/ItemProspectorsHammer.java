@@ -33,7 +33,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.oredict.OreDictionary;
 
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lyeoj.tfcthings.main.ConfigTFCThings;
@@ -113,8 +112,8 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
         }
         int messageType = 0;
         if (FallingBlockManager.getSpecification(worldIn.getBlockState(blockpos)) != null &&
-                FallingBlockManager.getSpecification(worldIn.getBlockState(blockpos))
-                        .isCollapsable()) {
+            FallingBlockManager.getSpecification(worldIn.getBlockState(blockpos))
+                               .isCollapsable()) {
           boolean result = isThisBlockSafe(worldIn, blockpos);
 
           float falsePositiveChance = 0.3F;
@@ -136,27 +135,27 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
         switch (messageType) {
           case 0:
             playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_na"),
-                    ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+                                       ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
             break;
           case 1:
             playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_safe"),
-                    ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+                                       ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
             break;
           case 2:
             playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_unsafe"),
-                    ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+                                       ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
             break;
           case 3:
             playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_na_fall"),
-                    ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+                                       ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
             break;
           case 4:
             playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_safe_fall"),
-                    ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+                                       ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
             break;
           case 5:
             playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_unsafe_fall"),
-                    ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+                                       ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
             break;
         }
         float skillModifier = SmithingSkill.getSkillBonus(itemstack, SmithingSkill.Type.TOOLS) / 2.0F;
@@ -174,9 +173,9 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
     Multimap<String, AttributeModifier> multimap = HashMultimap.create();
     if (slot == EntityEquipmentSlot.MAINHAND) {
       multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-              new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage, 0));
+                   new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage, 0));
       multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
-              new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", this.attackSpeed, 0));
+                   new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", this.attackSpeed, 0));
     }
 
     return multimap;
@@ -206,19 +205,20 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
     }
     if (rocks.isEmpty()) {
       playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_no_rocks"),
-              ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+                                 ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
     } else if (rocks.size() == 1) {
       playerIn.sendStatusMessage(
-              new TextComponentTranslation("tfcthings.tooltip.prohammer_1_rock_found", rocks.get(0).toString()),
-              ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+        new TextComponentTranslation("tfcthings.tooltip.prohammer_1_rock_found", rocks.get(0).toString()),
+        ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
 
     } else if (rocks.size() == 2) {
       playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_2_rocks_found",
-              rocks.get(0).toString(), rocks.get(1).toString()), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+                                                              rocks.get(0).toString(), rocks.get(1)
+                                                                                            .toString()), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
     } else if (rocks.size() >= 3) {
       playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_3_rocks_found",
-                      rocks.get(0).toString(), rocks.get(1).toString(), rocks.get(2).toString()),
-              ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+                                                              rocks.get(0).toString(), rocks.get(1).toString(), rocks.get(2).toString()),
+                                 ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
     }
   }
 
@@ -227,13 +227,13 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
     int radY = 2;
     int radZ = 4;
     Iterator var6 = BlockWoodSupport.getAllUnsupportedBlocksIn(worldIn, pos.add(-radX, -radY, -radZ), pos.add(radX, radY, radZ))
-            .iterator();
+                                    .iterator();
 
     while (var6.hasNext()) {
       BlockPos checking = (BlockPos) var6.next();
       if (FallingBlockManager.getSpecification(worldIn.getBlockState(checking)) != null && FallingBlockManager
-              .getSpecification(worldIn.getBlockState(checking))
-              .isCollapsable()) {
+        .getSpecification(worldIn.getBlockState(checking))
+        .isCollapsable()) {
         if (FallingBlockManager.canCollapse(worldIn, checking)) {
           return false;
         }

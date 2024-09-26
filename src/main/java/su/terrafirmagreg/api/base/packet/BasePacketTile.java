@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.base.packet;
 
 import su.terrafirmagreg.TerraFirmaGreg;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -52,7 +53,7 @@ public abstract class BasePacketTile<T extends TileEntity> extends BasePacketSer
 
     this.context = context;
     final World world = context.getServerHandler().player.getEntityWorld();
-    final TileEntity tileEntity = world.getTileEntity(this.pos);
+    final var tileEntity = TileUtils.getTile(world, pos);
 
     if (tileEntity != null && world.isBlockLoaded(this.pos)) {
       try {

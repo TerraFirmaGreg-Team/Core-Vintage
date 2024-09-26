@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
-import su.terrafirmagreg.modules.core.init.PotionsCore;
+import com.eerussianguy.firmalife.init.FoodFL;
+import com.eerussianguy.firmalife.registry.ItemsFL;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -17,11 +18,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.registry.ItemsFL;
-
 import org.jetbrains.annotations.NotNull;
+
+import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import java.util.Random;
 
@@ -53,9 +52,9 @@ public class BlockBeeNest extends BlockNonCube {
       double z = pos.getZ() + 0.5;
       for (int i = 0; i < 3 + rand.nextInt(4); i++) {
         world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + rand.nextFloat() - rand.nextFloat(), y + rand.nextFloat(),
-                z + rand.nextFloat() - rand.nextFloat(),
-                0.5 * (rand.nextFloat() - rand.nextFloat()), 0.5 * (rand.nextFloat() - rand.nextFloat()),
-                0.5 * (rand.nextFloat() - rand.nextFloat()));
+                            z + rand.nextFloat() - rand.nextFloat(),
+                            0.5 * (rand.nextFloat() - rand.nextFloat()), 0.5 * (rand.nextFloat() - rand.nextFloat()),
+                            0.5 * (rand.nextFloat() - rand.nextFloat()));
       }
     }
   }

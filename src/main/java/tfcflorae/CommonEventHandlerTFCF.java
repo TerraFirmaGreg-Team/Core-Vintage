@@ -1,6 +1,7 @@
 package tfcflorae;
 
 import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -11,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
 
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
@@ -24,10 +24,6 @@ import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.util.calendar.Calendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
 
 import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
@@ -47,7 +43,7 @@ public final class CommonEventHandlerTFCF {
 
     for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
       if (plant == TFCRegistries.PLANTS.getValue(DefaultPlants.BARREL_CACTUS) &&
-              (month == Month.SEPTEMBER || month == Month.OCTOBER || month == Month.NOVEMBER)) {
+          (month == Month.SEPTEMBER || month == Month.OCTOBER || month == Month.NOVEMBER)) {
         int chance = MathConstants.RNG.nextInt(2);
         if (chance == 0) {
           event.getDrops().clear();
@@ -63,7 +59,7 @@ public final class CommonEventHandlerTFCF {
         event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + MathConstants.RNG.nextInt(4)));
       }
       if (block == BlocksFL.MELON_FRUIT && (held.getItem()
-              .getHarvestLevel(held, "knife", playerHarvest, state) != -1)) {
+                                                .getHarvestLevel(held, "knife", playerHarvest, state) != -1)) {
         event.getDrops().clear();
         event.getDrops().add(new ItemStack(ItemsFL.getFood(FoodFL.MELON), 2 + MathConstants.RNG.nextInt(4)));
       }

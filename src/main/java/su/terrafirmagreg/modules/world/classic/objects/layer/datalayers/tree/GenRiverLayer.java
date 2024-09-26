@@ -10,7 +10,6 @@ import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerZoom;
 
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 
 import javax.imageio.ImageIO;
@@ -51,7 +50,7 @@ public abstract class GenRiverLayer extends GenLayerBase {
   }
 
   public static void drawImage(int size, GenLayerBase genlayer, String name,
-          IntFunction<Color> gibColor) {
+                               IntFunction<Color> gibColor) {
     if (ConfigCore.MISC.DEBUG.debugWorldGenSafe) {
       if (!FMLCommonHandler.instance().getEffectiveSide().isClient()) {
         if (shouldDraw) {

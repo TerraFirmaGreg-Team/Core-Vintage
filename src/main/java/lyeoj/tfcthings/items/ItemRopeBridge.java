@@ -15,7 +15,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-
 import lyeoj.tfcthings.entity.projectile.EntityRopeBridgeThrown;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -55,7 +54,7 @@ public class ItemRopeBridge extends ItemTFC implements TFCThingsConfigurableItem
         worldIn.spawnEntity(bridge);
       }
       worldIn.playSound(null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.PLAYERS,
-              0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+                        0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
     }
   }
 

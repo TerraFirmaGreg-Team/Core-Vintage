@@ -24,7 +24,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -45,6 +44,11 @@ public class BlockPlacedHide extends Block {
     setHardness(0.2f);
 
     setDefaultState(blockState.getBaseState().withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM));
+  }
+
+  private static Vec3d calculatePoint(Vec3d rayVector, Vec3d rayPoint) {
+    Vec3d planeNormal = new Vec3d(0.0, 1.0, 0.0);
+    return rayPoint.subtract(rayVector.scale(rayPoint.dotProduct(planeNormal) / rayVector.dotProduct(planeNormal)));
   }
 
   @SuppressWarnings("deprecation")
@@ -132,7 +136,7 @@ public class BlockPlacedHide extends Block {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     ItemStack stack = playerIn.getHeldItem(hand);
     if (OreDictionaryHelper.doesStackMatchOre(stack, "knife")) {
       if (!worldIn.isRemote) {
@@ -147,11 +151,6 @@ public class BlockPlacedHide extends Block {
       return true;
     }
     return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
-  }
-
-  private static Vec3d calculatePoint(Vec3d rayVector, Vec3d rayPoint) {
-    Vec3d planeNormal = new Vec3d(0.0, 1.0, 0.0);
-    return rayPoint.subtract(rayVector.scale(rayPoint.dotProduct(planeNormal) / rayVector.dotProduct(planeNormal)));
   }
 
   @NotNull

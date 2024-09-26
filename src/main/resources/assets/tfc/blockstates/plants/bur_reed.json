@@ -9,8 +9,7 @@
           "model": "tfc:plants/bur_reed_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },

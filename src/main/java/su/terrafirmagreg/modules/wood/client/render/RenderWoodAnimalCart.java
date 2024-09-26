@@ -13,7 +13,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
@@ -28,7 +27,7 @@ public class RenderWoodAnimalCart extends Render<EntityWoodAnimalCart> {
 
   @Override
   public void doRender(EntityWoodAnimalCart entity, double x, double y, double z, float entityYaw,
-          float partialTicks) {
+                       float partialTicks) {
     var woodType = entity.getWood();
     GlStateManager.pushMatrix();
     this.setupTranslation(x, y, z);

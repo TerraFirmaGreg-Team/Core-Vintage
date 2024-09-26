@@ -4,7 +4,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
@@ -36,7 +35,7 @@ public class RockCategory extends IForgeRegistryEntry.Impl<RockCategory> {
    * @param hasAnvil     if this rock should be able to create a stone anvil
    */
   public RockCategory(@NotNull ResourceLocation name, @NotNull Item.ToolMaterial toolMaterial, boolean layer1, boolean layer2, boolean layer3,
-          float caveGenMod, float caveFreqMod, float hardness, float resistance, boolean hasAnvil) {
+                      float caveGenMod, float caveFreqMod, float hardness, float resistance, boolean hasAnvil) {
     setRegistryName(name);
     this.toolMaterial = toolMaterial;
     this.caveGenMod = caveGenMod;

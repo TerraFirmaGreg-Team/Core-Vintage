@@ -19,17 +19,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderAnimalDuck extends RenderLiving<EntityAnimalDuck> {
 
   private static final ResourceLocation DUCK_OLD = ModUtils.resource(
-          "textures/entity/animal/livestock/duck_old.png");
+    "textures/entity/animal/livestock/duck_old.png");
   private static final ResourceLocation DUCK_YOUNG = ModUtils.resource(
-          "textures/entity/animal/livestock/duck_young.png");
+    "textures/entity/animal/livestock/duck_young.png");
 
   private static final ResourceLocation DRAKE_OLD = ModUtils.resource(
-          "textures/entity/animal/livestock/drake_old.png");
+    "textures/entity/animal/livestock/drake_old.png");
   private static final ResourceLocation DRAKE_YOUNG = ModUtils.resource(
-          "textures/entity/animal/livestock/drake_young.png");
+    "textures/entity/animal/livestock/drake_young.png");
 
   private static final ResourceLocation DUCKLING_TEXTURE = ModUtils.resource(
-          "textures/entity/animal/livestock/duckling.png");
+    "textures/entity/animal/livestock/duckling.png");
 
   public RenderAnimalDuck(RenderManager manager) {
     super(manager, new ModelAnimalDuck(), 0.3F);
@@ -37,7 +37,7 @@ public class RenderAnimalDuck extends RenderLiving<EntityAnimalDuck> {
 
   @Override
   public void doRender(EntityAnimalDuck duck, double par2, double par4, double par6, float par8,
-          float par9) {
+                       float par9) {
     this.shadowSize = (float) (0.15f + duck.getPercentToAdulthood() * 0.15f);
     super.doRender(duck, par2, par4, par6, par8, par9);
   }

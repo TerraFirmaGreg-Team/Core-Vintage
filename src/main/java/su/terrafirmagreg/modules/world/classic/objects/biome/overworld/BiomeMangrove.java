@@ -32,11 +32,11 @@ public class BiomeMangrove extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.SWAMP,
-            BiomeDictionary.Type.OCEAN,
-            BiomeDictionary.Type.WET,
-            BiomeDictionary.Type.WATER,
-            BiomeDictionary.Type.LUSH
+      BiomeDictionary.Type.SWAMP,
+      BiomeDictionary.Type.OCEAN,
+      BiomeDictionary.Type.WET,
+      BiomeDictionary.Type.WATER,
+      BiomeDictionary.Type.LUSH
     };
   }
 }

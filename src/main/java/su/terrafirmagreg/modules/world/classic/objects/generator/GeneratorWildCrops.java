@@ -10,7 +10,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
@@ -33,10 +32,10 @@ public class GeneratorWildCrops implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+                       IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0
-            && !CROPS.isEmpty() &&
-            ConfigTFC.General.FOOD.cropRarity > 0) {
+        && !CROPS.isEmpty() &&
+        ConfigTFC.General.FOOD.cropRarity > 0) {
       if (random.nextInt(ConfigTFC.General.FOOD.cropRarity) == 0) {
         // Guarantees crop generation if possible (easier to balance by config file while also making it random)
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
@@ -46,9 +45,9 @@ public class GeneratorWildCrops implements IWorldGenerator {
         float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
 
         ICrop crop = CROPS.stream()
-                .filter(x -> x.isValidConditions(temperature, rainfall))
-                .findFirst()
-                .orElse(null);
+                          .filter(x -> x.isValidConditions(temperature, rainfall))
+                          .findFirst()
+                          .orElse(null);
         if (crop != null) {
           return;
         }
@@ -68,20 +67,20 @@ public class GeneratorWildCrops implements IWorldGenerator {
                 growth = maxStage;
               }
               world.setBlockState(pos, cropBlock.getDefaultState()
-                      .withProperty(cropBlock.getStageProperty(), growth)
-                      .withProperty(BlockCropTFC.WILD, true), 2);
+                                                .withProperty(cropBlock.getStageProperty(), growth)
+                                                .withProperty(BlockCropTFC.WILD, true), 2);
 
             }
           }
         }
         if (crop != Crop.BARLEY || crop != Crop.MAIZE || crop != Crop.OAT || crop != Crop.RICE
-                || crop != Crop.RYE || crop != Crop.WHEAT) {
+            || crop != Crop.RYE || crop != Crop.WHEAT) {
           if ((random.nextInt(ConfigTFC.General.FOOD.cropRarity)) <= 2) {
             BlockCropTFC cropBlock = BlockCropTFC.get(crop);
             int cropsInChunk = 5 + random.nextInt(15);
             for (int i = 0; i < cropsInChunk; i++) {
               BlockPos pos = world.getHeight(
-                      chunkBlockPos.add(random.nextInt(16) + 8, 0, random.nextInt(16) + 8));
+                chunkBlockPos.add(random.nextInt(16) + 8, 0, random.nextInt(16) + 8));
 
               if (isValidPosition(world, pos)) {
                 double yearProgress = Calendar.CALENDAR_TIME.getMonthOfYear().ordinal() / 11.0;
@@ -91,8 +90,8 @@ public class GeneratorWildCrops implements IWorldGenerator {
                   growth = maxStage;
                 }
                 world.setBlockState(pos, cropBlock.getDefaultState()
-                        .withProperty(cropBlock.getStageProperty(), growth)
-                        .withProperty(BlockCropTFC.WILD, true), 2);
+                                                  .withProperty(cropBlock.getStageProperty(), growth)
+                                                  .withProperty(BlockCropTFC.WILD, true), 2);
               }
             }
           }

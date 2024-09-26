@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.util.TranslatorUtil;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
@@ -48,12 +47,12 @@ public class ModifierBase implements Comparable<ModifierBase> {
 
   public float getChange() {
     return change * multiplier * (count == 1 ? 1f
-            : ConfigCore.MISC.TEMPERATURE.diminishedModifierMultiplier);
+                                             : ConfigCore.MISC.TEMPERATURE.diminishedModifierMultiplier);
   }
 
   public float getPotency() {
     return potency * multiplier * (count == 1 ? 1f
-            : ConfigCore.MISC.TEMPERATURE.diminishedModifierMultiplier);
+                                              : ConfigCore.MISC.TEMPERATURE.diminishedModifierMultiplier);
   }
 
   public void addCount() {

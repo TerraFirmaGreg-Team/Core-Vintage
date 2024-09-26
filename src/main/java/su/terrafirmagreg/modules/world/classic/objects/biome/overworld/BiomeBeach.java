@@ -22,7 +22,7 @@ public class BiomeBeach extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.BEACH
+      BiomeDictionary.Type.BEACH
     };
   }
 }

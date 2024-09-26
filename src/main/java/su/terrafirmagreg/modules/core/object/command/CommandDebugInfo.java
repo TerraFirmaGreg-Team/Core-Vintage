@@ -39,7 +39,7 @@ public class CommandDebugInfo extends BaseCommand {
     for (int x = 0; x < 16; x++) {
       for (int z = 0; z < 16; z++) {
         ModuleCore.LOGGER.info("Pos: {} {} - Rock 1: {}, Rock 2: {}, Rock 3: {}",
-                x, z, chunkData.getRock1(x, z), chunkData.getRock2(x, z), chunkData.getRock3(x, z));
+                               x, z, chunkData.getRock1(x, z), chunkData.getRock2(x, z), chunkData.getRock3(x, z));
       }
     }
 
@@ -52,8 +52,8 @@ public class CommandDebugInfo extends BaseCommand {
     for (RockType type : RockType.getTypes()) {
       //noinspection ConstantConditions
       ModuleCore.LOGGER.info("Rock: {} -> Id: {}",
-              type.getName(),
-              RockType.indexOf(type));
+                             type.getName(),
+                             RockType.indexOf(type));
     }
   }
 }

@@ -31,7 +31,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
@@ -112,8 +111,8 @@ public class ItemMetalBucket extends ItemMetal // quite a bit copied out of Item
                 // Vanilla water and lava, and hopefully nothing else
                 try {
                   BlockLiquid flowingBlock = BlockStaticLiquid.getFlowingBlock(fluid.getBlock()
-                          .getDefaultState()
-                          .getMaterial());
+                                                                                    .getDefaultState()
+                                                                                    .getMaterial());
                   worldIn.setBlockState(pos, flowingBlock.getDefaultState());
                 } catch (IllegalArgumentException e) { /* Just skip */ }
               }

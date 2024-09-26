@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import net.minecraft.block.Block;
 import net.minecraft.util.text.TextComponentTranslation;
 
-
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
@@ -67,7 +66,7 @@ public class WoodBlockVariant extends Variant<WoodBlockVariant> {
 
   public String getLocalizedName() {
     return new TextComponentTranslation(
-            String.format("wood.variant.%s.name", this)).getFormattedText();
+      String.format("wood.variant.%s.name", this)).getFormattedText();
   }
 
 

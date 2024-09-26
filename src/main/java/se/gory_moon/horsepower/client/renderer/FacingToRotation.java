@@ -6,7 +6,6 @@ import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
 
@@ -25,9 +24,9 @@ public enum FacingToRotation {
   FacingToRotation(Vector3f rot) {
     this.rot = rot;
     this.mat = TRSRTransformation.toVecmath(
-            new org.lwjgl.util.vector.Matrix4f().rotate((float) Math.toRadians(rot.x), new org.lwjgl.util.vector.Vector3f(1, 0, 0))
-                    .rotate((float) Math.toRadians(rot.y), new org.lwjgl.util.vector.Vector3f(0, 1, 0))
-                    .rotate((float) Math.toRadians(rot.z), new org.lwjgl.util.vector.Vector3f(0, 0, 1)));
+      new org.lwjgl.util.vector.Matrix4f().rotate((float) Math.toRadians(rot.x), new org.lwjgl.util.vector.Vector3f(1, 0, 0))
+                                          .rotate((float) Math.toRadians(rot.y), new org.lwjgl.util.vector.Vector3f(0, 1, 0))
+                                          .rotate((float) Math.toRadians(rot.z), new org.lwjgl.util.vector.Vector3f(0, 0, 1)));
   }
 
   public static FacingToRotation get(EnumFacing forward) {

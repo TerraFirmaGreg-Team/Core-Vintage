@@ -16,7 +16,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Metal;
 
@@ -67,7 +66,7 @@ public class ItemIngot extends ItemMetal {
           if (stateTop.getBlock() == BlocksCore.INGOT_PILE) {
             var tile = TileUtils.getTile(worldIn, posTop, TileIngotPile.class);
             if (tile != null && tile.getCount() < 64 && (tile.getMetal() == item.metal) &&
-                    worldIn.checkNoEntityCollision(new AxisAlignedBB(0, 0, 0, 1, (1 + tile.getCount()) / 64d, 1).offset(posTop))) {
+                worldIn.checkNoEntityCollision(new AxisAlignedBB(0, 0, 0, 1, (1 + tile.getCount()) / 64d, 1).offset(posTop))) {
               tile.setCount(tile.getCount() + 1);
               worldIn.playSound(null, posTop, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 0.3F, 1.5F);
               stack.shrink(1);
@@ -75,9 +74,9 @@ public class ItemIngot extends ItemMetal {
               return EnumActionResult.SUCCESS;
             }
           } else if (stateTop.getBlock()
-                  .isReplaceable(worldIn, posTop) && worldIn.mayPlace(BlocksCore.INGOT_PILE, posTop, false, EnumFacing.UP, null) &&
-                  worldIn.getBlockState(posTop.down())
-                          .isSideSolid(worldIn, posTop.down(), EnumFacing.UP)) {
+                             .isReplaceable(worldIn, posTop) && worldIn.mayPlace(BlocksCore.INGOT_PILE, posTop, false, EnumFacing.UP, null) &&
+                     worldIn.getBlockState(posTop.down())
+                            .isSideSolid(worldIn, posTop.down(), EnumFacing.UP)) {
             worldIn.setBlockState(posTop, BlocksCore.INGOT_PILE.getDefaultState());
             var tile = TileUtils.getTile(worldIn, posTop, TileIngotPile.class);
             if (tile != null) {

@@ -3,6 +3,7 @@ package net.dries007.tfc.objects.blocks.wood;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -30,7 +31,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
@@ -39,11 +39,6 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.agriculture.SeasonalTrees;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
-
 import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -76,9 +71,9 @@ public class BlockLeavesTFCF extends BlockLeaves {
       throw new IllegalStateException("There can only be one.");
     }
     setDefaultState(blockState.getBaseState()
-            .withProperty(DECAYABLE, false)
-            .withProperty(LEAF_STATE, EnumLeafState.NORMAL)
-            .withProperty(HARVESTABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
+                              .withProperty(DECAYABLE, false)
+                              .withProperty(LEAF_STATE, EnumLeafState.NORMAL)
+                              .withProperty(HARVESTABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
     leavesFancy = true; // Fast / Fancy graphics works correctly
     OreDictionaryHelper.register(this, "tree", "leaves");
     OreDictionaryHelper.register(this, "tree", "leaves", wood.getRegistryName().getPath());
@@ -95,15 +90,15 @@ public class BlockLeavesTFCF extends BlockLeaves {
   @NotNull
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-            .withProperty(HARVESTABLE, meta > 3)
-            .withProperty(LEAF_STATE, EnumLeafState.valueOf(meta & 0b11))
-            .withProperty(DECAYABLE, (meta & 0b01) == 0b01);
+               .withProperty(HARVESTABLE, meta > 3)
+               .withProperty(LEAF_STATE, EnumLeafState.valueOf(meta & 0b11))
+               .withProperty(DECAYABLE, (meta & 0b01) == 0b01);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
     return state.getValue(LEAF_STATE)
-            .ordinal() + (state.getValue(HARVESTABLE) ? 4 : 0) + (state.getValue(DECAYABLE) ? 1 : 0);
+                .ordinal() + (state.getValue(HARVESTABLE) ? 4 : 0) + (state.getValue(DECAYABLE) ? 1 : 0);
   }
 
   @SuppressWarnings("deprecation")
@@ -135,7 +130,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
         if (state.getValue(LEAF_STATE) != EnumLeafState.NORMAL) {
           world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumLeafState.NORMAL));
         } else if (state.getValue(LEAF_STATE) == EnumLeafState.FLOWERING || state.getValue(LEAF_STATE) == EnumLeafState.AUTUMN ||
-                state.getValue(LEAF_STATE) == EnumLeafState.WINTER) {
+                   state.getValue(LEAF_STATE) == EnumLeafState.WINTER) {
           world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumLeafState.NORMAL));
         }
         break;
@@ -191,7 +186,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == EnumLeafState.FRUIT && fruitTree.getDrop() != null) {
       if (!worldIn.isRemote) {
         ItemHandlerHelper.giveItemToPlayer(playerIn, fruitTree.getFoodDrop());
@@ -282,18 +277,21 @@ public class BlockLeavesTFCF extends BlockLeaves {
       switch (RNG.nextInt(4)) {
         case 1:
           TFCParticles.LEAF1.sendToAllNear(world, x + RNG.nextFloat() / particleScale, y - RNG.nextFloat() / particleScale,
-                  z + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, -0.15D + RNG.nextFloat() / particleScale,
-                  (RNG.nextFloat() - 0.5) / particleScale, 90);
+                                           z + RNG.nextFloat() / particleScale,
+                                           (RNG.nextFloat() - 0.5) / particleScale, -0.15D + RNG.nextFloat() / particleScale,
+                                           (RNG.nextFloat() - 0.5) / particleScale, 90);
           break;
         case 2:
           TFCParticles.LEAF2.sendToAllNear(world, x + RNG.nextFloat() / particleScale, y - RNG.nextFloat() / particleScale,
-                  z + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, -0.15D + RNG.nextFloat() / particleScale,
-                  (RNG.nextFloat() - 0.5) / particleScale, 70);
+                                           z + RNG.nextFloat() / particleScale,
+                                           (RNG.nextFloat() - 0.5) / particleScale, -0.15D + RNG.nextFloat() / particleScale,
+                                           (RNG.nextFloat() - 0.5) / particleScale, 70);
           break;
         case 3:
           TFCParticles.LEAF3.sendToAllNear(world, x + RNG.nextFloat() / particleScale, y - RNG.nextFloat() / particleScale,
-                  z + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, -0.15D + RNG.nextFloat() / particleScale,
-                  (RNG.nextFloat() - 0.5) / particleScale, 80);
+                                           z + RNG.nextFloat() / particleScale,
+                                           (RNG.nextFloat() - 0.5) / particleScale, -0.15D + RNG.nextFloat() / particleScale,
+                                           (RNG.nextFloat() - 0.5) / particleScale, 80);
           break;
       }
     }

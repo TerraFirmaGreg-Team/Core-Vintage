@@ -9,8 +9,7 @@
           "model": "tfc:plants/oregano_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },

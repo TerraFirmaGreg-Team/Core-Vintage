@@ -8,7 +8,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 
-
 import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +16,7 @@ import lombok.Getter;
 
 @Getter
 public class WorldDataCalendar
-        extends WorldSavedData {
+  extends WorldSavedData {
 
   private static final String DATA_ID = ModUtils.localize("data.calendar");
 

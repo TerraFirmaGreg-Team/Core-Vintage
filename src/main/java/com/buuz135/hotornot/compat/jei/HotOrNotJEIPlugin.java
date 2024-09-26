@@ -23,12 +23,12 @@ public class HotOrNotJEIPlugin implements IModPlugin {
   public void register(final IModRegistry registry) {
 
     final List<Metal> tongMetalsInOrder = TFCRegistries.METALS.getValuesCollection()
-            .stream()
-            .sorted(Comparator.comparingInt(metal -> metal.getTier()
-                    .ordinal()))
-            .filter(metal -> metal.isToolMetal() && metal.getTier()
-                    .isAtMost(Metal.Tier.TIER_II))
-            .collect(Collectors.toList());
+                                                              .stream()
+                                                              .sorted(Comparator.comparingInt(metal -> metal.getTier()
+                                                                                                            .ordinal()))
+                                                              .filter(metal -> metal.isToolMetal() && metal.getTier()
+                                                                                                           .isAtMost(Metal.Tier.TIER_II))
+                                                              .collect(Collectors.toList());
 
     final List<UnMoldJawPieceRecipeWrapper> jawMoldRecipes = new ArrayList<>();
     final List<CastJawMoldRecipeWrapper> castingList = new ArrayList<>();

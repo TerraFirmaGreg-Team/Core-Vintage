@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import lombok.Getter;
 
 @SuppressWarnings({"WeakerAccess", "deprecation"})
@@ -81,7 +80,7 @@ public abstract class BasePotion extends Potion {
     if (texture != null) {
       mc.getTextureManager().bindTexture(texture);
       Gui.drawModalRectWithCustomSizedTexture(x + xOffset + 6, y + yOffset + 7, 0, 0, 18, 18, 18,
-              18);
+                                              18);
     }
   }
 
@@ -96,7 +95,7 @@ public abstract class BasePotion extends Potion {
     if (texture != null) {
       mc.getTextureManager().bindTexture(texture);
       Gui.drawModalRectWithCustomSizedTexture(x + xOffset + 3, y + yOffset + 3, 0, 0, 18, 18, 18,
-              18);
+                                              18);
     }
   }
 

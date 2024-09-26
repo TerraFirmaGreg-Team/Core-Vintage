@@ -11,7 +11,7 @@ public class BlockSoilRootedDirt extends BlockSoil {
     super(variant, type);
 
     getSettings()
-            .renderLayer(BlockRenderLayer.CUTOUT);
+      .renderLayer(BlockRenderLayer.CUTOUT);
 
     //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
   }

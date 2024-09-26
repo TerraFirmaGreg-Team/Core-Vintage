@@ -20,7 +20,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-
 import com.eerussianguy.firmalife.util.IWaterable;
 import mcp.MethodsReturnNonnullByDefault;
 
@@ -39,7 +38,7 @@ public class ItemWateringCan extends ItemMisc {
 
   @Override
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player,
-          EnumHand handIn) {
+                                                  EnumHand handIn) {
     ItemStack itemstack = player.getHeldItem(handIn);
     if (!worldIn.isRemote && player.isWet()) {
       int dmg = itemstack.getItemDamage();
@@ -66,7 +65,7 @@ public class ItemWateringCan extends ItemMisc {
 
   @Override
   public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entity,
-          int countLeft) {
+                                   int countLeft) {
     World world = entity.getEntityWorld();
     BlockPos pos = entity.getPosition();
     if (world.isRemote) {
@@ -109,7 +108,7 @@ public class ItemWateringCan extends ItemMisc {
       double y = pos.getY() + 1.5f;
       double z = pos.getZ() + RNG.nextFloat();
       world.spawnParticle(EnumParticleTypes.WATER_SPLASH, x, y, z, RNG.nextFloat(), -0.2f,
-              RNG.nextFloat());
+                          RNG.nextFloat());
     }
   }
 }

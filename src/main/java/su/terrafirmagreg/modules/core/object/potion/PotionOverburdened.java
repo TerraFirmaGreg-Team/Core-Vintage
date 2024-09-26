@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.core.object.potion;
 
-import net.minecraft.entity.EntityLivingBase;
-
 import su.terrafirmagreg.api.base.effects.BasePotion;
+
+import net.minecraft.entity.EntityLivingBase;
 
 public class PotionOverburdened extends BasePotion {
 

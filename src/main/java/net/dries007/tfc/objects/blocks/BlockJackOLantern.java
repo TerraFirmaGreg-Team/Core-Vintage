@@ -22,7 +22,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -88,7 +87,7 @@ public class BlockJackOLantern extends BlockHorizontal implements ICapabilitySiz
     if (tile != null) {
       //last twice as long as a torch. balance this by being less bright
       if (!worldIn.isRemote && tile.getTicksSinceUpdate() > (2L * ConfigTFC.General.OVERRIDES.torchTime) &&
-              ConfigTFC.General.OVERRIDES.torchTime > 0) {
+          ConfigTFC.General.OVERRIDES.torchTime > 0) {
         worldIn.setBlockState(pos, state.withProperty(LIT, false));
         tile.resetCounter();
       }
@@ -97,12 +96,12 @@ public class BlockJackOLantern extends BlockHorizontal implements ICapabilitySiz
 
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     return worldIn.getBlockState(pos)
-            .getBlock()
-            .isReplaceable(worldIn, pos) && worldIn.isSideSolid(pos.down(), EnumFacing.UP);
+                  .getBlock()
+                  .isReplaceable(worldIn, pos) && worldIn.isSideSolid(pos.down(), EnumFacing.UP);
   }
 
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     //taken from BlockTorchTFC
     if (!worldIn.isRemote) {
       ItemStack stack = playerIn.getHeldItem(hand);
@@ -121,7 +120,7 @@ public class BlockJackOLantern extends BlockHorizontal implements ICapabilitySiz
 
   @SuppressWarnings("deprecation")
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer) {
+                                          EntityLivingBase placer) {
     return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
   }
 

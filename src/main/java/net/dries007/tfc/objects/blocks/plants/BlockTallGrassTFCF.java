@@ -22,7 +22,6 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -70,8 +69,8 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
     }
     if (state.getBlock() == this) {
       return soil.getBlock()
-              .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) &&
-              plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+                 .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) &&
+             plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
     return this.canSustainBush(soil);
   }
@@ -116,21 +115,21 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
     }
 
     if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
-            plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+        plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
-              net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
+          net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
         if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
           grow(worldIn, rand, pos, state);
         } else if (j < 3) {
           worldIn.setBlockState(pos, state.withProperty(AGE, j + 1)
-                  .withProperty(PART, getPlantPart(worldIn, pos)));
+                                          .withProperty(PART, getPlantPart(worldIn, pos)));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
-            !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+               !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -138,7 +137,7 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
           shrink(worldIn, pos);
         } else if (j > 0) {
           worldIn.setBlockState(pos, state.withProperty(AGE, j - 1)
-                  .withProperty(PART, getPlantPart(worldIn, pos)));
+                                          .withProperty(PART, getPlantPart(worldIn, pos)));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
@@ -165,15 +164,15 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
   public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
     worldIn.setBlockState(pos.up(), this.getDefaultState());
     IBlockState iblockstate = state.withProperty(AGE, 0)
-            .withProperty(growthStageProperty, plant.getStageForMonth())
-            .withProperty(PART, getPlantPart(worldIn, pos));
+                                   .withProperty(growthStageProperty, plant.getStageForMonth())
+                                   .withProperty(PART, getPlantPart(worldIn, pos));
     worldIn.setBlockState(pos, iblockstate);
     iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
   }
 
   private boolean canShrink(World worldIn, BlockPos pos) {
     return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
-            .getBlock() != this;
+                                                                          .getBlock() != this;
   }
 
   public void shrink(World worldIn, BlockPos pos) {
@@ -185,7 +184,9 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
   @NotNull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     return getTallBoundingBax(state.getValue(AGE), state, source, pos);
-  }  @Override
+  }
+
+  @Override
   public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
     Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int currentStage = state.getValue(growthStageProperty);
@@ -195,7 +196,7 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
     if (!worldIn.isRemote) {
       ItemStack stack = player.getHeldItemMainhand();
       if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-              .getHarvestLevel(stack, "scythe", player, state) != -1) {
+                                                                                       .getHarvestLevel(stack, "scythe", player, state) != -1) {
         for (int i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
                     /*if (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.WILD_BARLEY))
                     {
@@ -285,7 +286,6 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
   }
 
 
-
   @Override
   public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
     this.onBlockHarvested(world, pos, state, player);
@@ -294,7 +294,7 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
 
   @Override
   public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
-          net.minecraftforge.common.IPlantable plantable) {
+                                 net.minecraftforge.common.IPlantable plantable) {
     IBlockState plant = plantable.getPlant(world, pos.offset(direction));
 
     if (plant.getBlock() == this) {

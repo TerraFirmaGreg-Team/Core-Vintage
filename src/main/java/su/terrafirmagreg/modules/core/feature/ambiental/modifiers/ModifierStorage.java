@@ -77,7 +77,7 @@ public class ModifierStorage implements Iterable<ModifierBase> {
     return new Iterator<>() {
 
       private final Iterator<Map.Entry<String, ModifierBase>> mapIterator = map1.entrySet()
-              .iterator();
+                                                                                .iterator();
 
       @Override
       public boolean hasNext() {

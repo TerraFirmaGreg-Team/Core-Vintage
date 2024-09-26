@@ -9,7 +9,6 @@ import net.minecraft.block.BlockLadder;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-
 import lombok.Getter;
 
 @Getter
@@ -26,11 +25,11 @@ public class BlockWoodLadder extends BlockLadder implements IWoodBlock {
     this.settings = Settings.of(Material.CIRCUITS);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .sound(SoundType.LADDER)
-            .oreDict(variant)
-            .oreDict(variant, "wood");
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .sound(SoundType.LADDER)
+      .oreDict(variant)
+      .oreDict(variant, "wood");
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
   }

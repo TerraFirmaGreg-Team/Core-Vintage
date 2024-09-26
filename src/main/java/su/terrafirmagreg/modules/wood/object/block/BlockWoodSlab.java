@@ -13,7 +13,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 
-
 import lombok.Getter;
 
 @Getter
@@ -32,10 +31,10 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .harvestLevel(ToolClasses.AXE, model.getHarvestLevel(model.getDefaultState()))
-            .sound(SoundType.WOOD);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .harvestLevel(ToolClasses.AXE, model.getHarvestLevel(model.getDefaultState()))
+      .sound(SoundType.WOOD);
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
   }
@@ -73,8 +72,8 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
       this.halfSlab = this;
 
       getSettings()
-              .oreDict("slab", "wood")
-              .oreDict("slab", "wood", type);
+        .oreDict("slab", "wood")
+        .oreDict("slab", "wood", type);
 
     }
 

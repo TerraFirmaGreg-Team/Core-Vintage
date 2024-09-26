@@ -1,6 +1,10 @@
 package net.dries007.tfc.client.gui;
 
-import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.client.button.GuiButtonUrn;
+import net.dries007.tfc.client.button.IButtonTooltip;
+import net.dries007.tfc.network.PacketGuiButton;
+import net.dries007.tfc.objects.te.TEUrn;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
@@ -10,13 +14,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.client.button.GuiButtonUrn;
-import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.network.PacketGuiButton;
-import net.dries007.tfc.objects.te.TEUrn;
 import org.lwjgl.opengl.GL11;
+
+import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 
 import java.io.IOException;
 

@@ -19,7 +19,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.server.FMLServerHandler;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
@@ -54,11 +53,11 @@ import static su.terrafirmagreg.data.Constants.MOD_VERSION;
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber
 @Mod(modid = MODID_TFC,
-        name = TerraFirmaCraft.MOD_NAME,
-        version = MOD_VERSION,
-        useMetadata = true,
-        guiFactory = GUI_FACTORY,
-        dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
+     name = TerraFirmaCraft.MOD_NAME,
+     version = MOD_VERSION,
+     useMetadata = true,
+     guiFactory = GUI_FACTORY,
+     dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
 public final class TerraFirmaCraft {
 
   public static final String MOD_NAME = "TerraFirmaCraft";
@@ -87,6 +86,10 @@ public final class TerraFirmaCraft {
 
   public static TerraFirmaCraft getInstance() {
     return INSTANCE;
+  }
+
+  public static LoggingHelper getLog() {
+    return INSTANCE.log;
   }
 
   @Mod.EventHandler
@@ -147,10 +150,6 @@ public final class TerraFirmaCraft {
     }
 
     FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "net.dries007.tfc.compat.waila.TOPPlugin");
-  }
-
-  public static LoggingHelper getLog() {
-    return INSTANCE.log;
   }
 
   @Mod.EventHandler

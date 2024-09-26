@@ -34,7 +34,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-
 import net.dries007.tfc.api.capability.fluid.FluidHandlerSided;
 import net.dries007.tfc.api.capability.fluid.FluidTankCallback;
 import net.dries007.tfc.api.capability.fluid.IFluidHandlerSidedCallback;
@@ -63,8 +62,8 @@ import java.util.stream.Collectors;
 import static su.terrafirmagreg.data.Properties.SEALED;
 
 public class TileWoodBarrel extends BaseTileTickableInventory
-        implements ICalendarTickable, IItemHandlerSidedCallback, IFluidHandlerSidedCallback,
-        IFluidTankCallback, IProviderContainer<ContainerWoodBarrel, GuiWoodBarrel> {
+  implements ICalendarTickable, IItemHandlerSidedCallback, IFluidHandlerSidedCallback,
+             IFluidTankCallback, IProviderContainer<ContainerWoodBarrel, GuiWoodBarrel> {
 
   public static final int SLOT_FLUID_CONTAINER_IN = 0;
   public static final int SLOT_FLUID_CONTAINER_OUT = 1;
@@ -92,8 +91,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
    * @param stack the barrel's stack to load contents from
    */
   public void loadFromItemStack(ItemStack stack) {
-    IFluidHandler barrelCap = stack.getCapability(
-            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+    IFluidHandler barrelCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (barrelCap instanceof ItemBlockWoodBarrel.ItemBarrelFluidHandler itemBarrelFluidHandler) {
       NBTTagCompound contents = itemBarrelFluidHandler.getBarrelContents();
       if (contents != null) {
@@ -134,7 +132,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
   @NotNull
   public String getSealedDate() {
     return ICalendarFormatted.getTimeAndDate(sealedCalendarTick,
-            Calendar.CALENDAR_TIME.getDaysInMonth());
+                                             Calendar.CALENDAR_TIME.getDaysInMonth());
   }
 
   @Override
@@ -145,7 +143,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
   @Override
   public boolean canInsert(int slot, ItemStack stack, EnumFacing side) {
     return !sealed && (isItemValid(slot, stack)
-            || side == null && slot == SLOT_FLUID_CONTAINER_OUT);
+                       || side == null && slot == SLOT_FLUID_CONTAINER_OUT);
   }
 
   @Override
@@ -175,7 +173,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
   @Override
   public boolean canFill(FluidStack resource, EnumFacing side) {
     return !sealed && (resource.getFluid() == null || resource.getFluid()
-            .getTemperature(resource) < BARREL_MAX_FLUID_TEMPERATURE);
+                                                              .getTemperature(resource) < BARREL_MAX_FLUID_TEMPERATURE);
   }
 
   @Override
@@ -213,13 +211,13 @@ public class TileWoodBarrel extends BaseTileTickableInventory
 
         ItemStack fluidContainerIn = inventory.getStackInSlot(SLOT_FLUID_CONTAINER_IN);
         FluidActionResult result = FluidTransferHelper.emptyContainerIntoTank(fluidContainerIn,
-                tank, inventory, SLOT_FLUID_CONTAINER_OUT,
-                ConfigWood.BLOCK.BARREL.tank, world, pos);
+                                                                              tank, inventory, SLOT_FLUID_CONTAINER_OUT,
+                                                                              ConfigWood.BLOCK.BARREL.tank, world, pos);
 
         if (!result.isSuccess()) {
           result = FluidTransferHelper.fillContainerFromTank(fluidContainerIn, tank, inventory,
-                  SLOT_FLUID_CONTAINER_OUT,
-                  ConfigWood.BLOCK.BARREL.tank, world, pos);
+                                                             SLOT_FLUID_CONTAINER_OUT,
+                                                             ConfigWood.BLOCK.BARREL.tank, world, pos);
         }
 
         if (result.isSuccess()) {
@@ -229,7 +227,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
         Fluid freshWater = FluidRegistry.getFluid("fresh_water");
 
         if (!sealed && world.isRainingAt(pos.up()) && (tank.getFluid() == null || tank.getFluid()
-                .getFluid() == freshWater)) {
+                                                                                      .getFluid() == freshWater)) {
           tank.fill(new FluidStack(freshWater, 10), true);
         }
 
@@ -264,7 +262,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
         FluidStack inputFluid = tank.getFluid();
         BarrelRecipe instantRecipe = BarrelRecipe.getInstant(inputStack, inputFluid);
         if (instantRecipe != null && inputFluid != null && instantRecipe.isValidInputInstant(
-                inputStack, inputFluid)) {
+          inputStack, inputFluid)) {
           tank.setFluid(instantRecipe.getOutputFluid(inputFluid, inputStack));
           List<ItemStack> output = instantRecipe.getOutputItem(inputFluid, inputStack);
           ItemStack first = output.get(0);
@@ -355,7 +353,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
   @Override
   public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
     return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY
-            || capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
+           || capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
   }
 
   @Override
@@ -380,8 +378,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
       saveToItemStack(barrelStack);
       StackUtils.spawnItemStack(world, pos, barrelStack);
     } else {
-      int slotsToDrop = inventory.getSlots();
-      for (int i = 0; i < slotsToDrop; i++) {
+      for (int i = 0; i < inventory.getSlots(); i++) {
         StackUtils.spawnItemStack(world, pos, inventory.getStackInSlot(i));
         inventory.setStackInSlot(i, new ItemStack(Items.AIR, 0));
       }
@@ -401,8 +398,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
    * @param stack the barrel's stack to save contents to
    */
   public void saveToItemStack(ItemStack stack) {
-    IFluidHandler barrelCap = stack.getCapability(
-            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+    IFluidHandler barrelCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (barrelCap instanceof ItemBlockWoodBarrel.ItemBarrelFluidHandler itemBarrelFluidHandler) {
       NBTTagCompound inventoryTag = null;
       // Check if inventory has contents
@@ -423,7 +419,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
       FluidStack storing = tank.getFluid();
       if (storing != null || inventoryTag != null || surplusTag != null) {
         itemBarrelFluidHandler.setBarrelContents(storing, inventoryTag, surplusTag, sealedTick,
-                sealedCalendarTick);
+                                                 sealedCalendarTick);
       }
     }
   }
@@ -431,6 +427,11 @@ public class TileWoodBarrel extends BaseTileTickableInventory
   @Override
   public long getLastUpdateTick() {
     return lastPlayerTick;
+  }
+
+  @Override
+  public void setLastUpdateTick(long tick) {
+    this.lastPlayerTick = tick;
   }
 
   @Override
@@ -466,8 +467,14 @@ public class TileWoodBarrel extends BaseTileTickableInventory
   }
 
   @Override
-  public void setLastUpdateTick(long tick) {
-    this.lastPlayerTick = tick;
+  public ContainerWoodBarrel getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new ContainerWoodBarrel(inventoryPlayer, this);
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public GuiWoodBarrel getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new GuiWoodBarrel(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this, state);
   }
 
   protected static class BarrelFluidTank extends FluidTankCallback {
@@ -477,30 +484,15 @@ public class TileWoodBarrel extends BaseTileTickableInventory
     public BarrelFluidTank(IFluidTankCallback callback, int fluidTankID) {
       super(callback, fluidTankID, ConfigWood.BLOCK.BARREL.tank);
       whitelist = Arrays.stream(ConfigWood.BLOCK.BARREL.fluidWhitelist)
-              .map(FluidRegistry::getFluid)
-              .filter(Objects::nonNull)
-              .collect(Collectors.toSet());
+                        .map(FluidRegistry::getFluid)
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toSet());
     }
 
     @Override
     public boolean canFillFluidType(FluidStack fluid) {
-      return fluid != null && (whitelist.contains(fluid.getFluid()) || BarrelRecipe.isBarrelFluid(
-              fluid));
+      return fluid != null && (whitelist.contains(fluid.getFluid()) || BarrelRecipe.isBarrelFluid(fluid));
     }
-  }
-
-  @Override
-  public ContainerWoodBarrel getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
-    return new ContainerWoodBarrel(inventoryPlayer, this);
-  }
-
-  @Override
-  @SideOnly(Side.CLIENT)
-  public GuiWoodBarrel getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
-    return new GuiWoodBarrel(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-            this, state);
   }
 
 

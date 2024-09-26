@@ -12,7 +12,6 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import lombok.Getter;
 
 import static su.terrafirmagreg.data.Properties.AXIS;

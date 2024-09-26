@@ -20,7 +20,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -42,7 +41,7 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
 
   @Override
   public boolean getUseNeighborBrightness(IBlockState state) {
-    return getSettings().isUseNeighborBrightness();
+    return !this.settings.isUseNeighborBrightness() || super.getUseNeighborBrightness(state);
   }
 
   @Override
@@ -76,10 +75,8 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
   }
 
   @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-          BlockPos pos) {
-    return this.settings.isCollidable() ? super.getCollisionBoundingBox(blockState, worldIn, pos)
-            : NULL_AABB;
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return this.settings.isCollidable() ? super.getCollisionBoundingBox(blockState, worldIn, pos) : NULL_AABB;
   }
 
   @Override
@@ -105,8 +102,7 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
 
   @Override
   public String getTranslationKey() {
-    return this.settings.getTranslationKey() == null ? super.getTranslationKey()
-            : "tile." + this.settings.getTranslationKey();
+    return this.settings.getTranslationKey() == null ? super.getTranslationKey() : "tile." + this.settings.getTranslationKey();
   }
 
   @Override
@@ -115,8 +111,7 @@ public abstract class BaseBlock extends Block implements IBlockSettings {
   }
 
   @Override
-  public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos,
-          @Nullable Entity entity) {
+  public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity) {
     return this.settings.getSlipperiness().apply(state, world, pos);
   }
 

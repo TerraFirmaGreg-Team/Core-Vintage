@@ -8,7 +8,6 @@ import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class ContainerWoodWorkbench extends ContainerWorkbench {
@@ -19,7 +18,7 @@ public class ContainerWoodWorkbench extends ContainerWorkbench {
   private final BlockWoodWorkbench block;
 
   public ContainerWoodWorkbench(InventoryPlayer inv, World world, BlockPos pos,
-          BlockWoodWorkbench block) {
+                                BlockWoodWorkbench block) {
     super(inv, world, pos);
     this.world = world;
     this.pos = pos;
@@ -32,7 +31,7 @@ public class ContainerWoodWorkbench extends ContainerWorkbench {
       return false;
     } else {
       return playerIn.getDistanceSq((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D,
-              (double) pos.getZ() + 0.5D) <= 64.0D;
+                                    (double) pos.getZ() + 0.5D) <= 64.0D;
     }
   }
 }

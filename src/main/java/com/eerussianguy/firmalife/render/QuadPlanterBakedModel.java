@@ -11,7 +11,6 @@ import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
-
 import com.google.common.collect.ImmutableMap;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.blocks.BlockQuadPlanter;

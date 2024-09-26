@@ -13,7 +13,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import static su.terrafirmagreg.data.Properties.LIT;
 
 public class ItemBlockTorch extends ItemBlockTFC {
@@ -50,7 +49,7 @@ public class ItemBlockTorch extends ItemBlockTFC {
       } else {
         if (Math.random() <= 0.1) {
           world.spawnParticle(EnumParticleTypes.LAVA, entityItem.posX, entityItem.posY, entityItem.posZ,
-                  -0.5F + Math.random(), -0.5F + Math.random(), -0.5F + Math.random());
+                              -0.5F + Math.random(), -0.5F + Math.random(), -0.5F + Math.random());
         }
         entityItem.getEntityData().setInteger("torchCount", count + 1);
       }

@@ -22,7 +22,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import lombok.Getter;
 
 import java.util.Random;
@@ -43,12 +42,12 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
     this.settings = Settings.of(Material.GROUND);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .sound(SoundType.PLANT)
-            .hardness(2.0F)
-            .nonCube()
-            .harvestLevel(ToolClasses.SHOVEL, 0)
-            .oreDict(variant);
+      .registryKey(variant.getRegistryKey(type))
+      .sound(SoundType.PLANT)
+      .hardness(2.0F)
+      .nonCube()
+      .harvestLevel(ToolClasses.SHOVEL, 0)
+      .oreDict(variant);
   }
 
   @Override
@@ -79,7 +78,7 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
     BlockPos upPos = pos.up();
     IBlockState up = world.getBlockState(upPos);
     if (up.isSideSolid(world, upPos, EnumFacing.DOWN)
-            && FallingBlockManager.getSpecification(up) == null) {
+        && FallingBlockManager.getSpecification(up) == null) {
       IDirt.turnToDirt(world, pos);
     }
   }
@@ -94,7 +93,7 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
     if (fromPos.getY() == pos.getY() + 1) {
       IBlockState up = world.getBlockState(fromPos);
       if (up.isSideSolid(world, fromPos, EnumFacing.DOWN)
-              && FallingBlockManager.getSpecification(up) == null) {
+          && FallingBlockManager.getSpecification(up) == null) {
         IDirt.turnToDirt(world, pos);
       }
     }

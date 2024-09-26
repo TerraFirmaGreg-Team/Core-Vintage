@@ -9,8 +9,7 @@
           "model": "tfc:plants/pimento_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },

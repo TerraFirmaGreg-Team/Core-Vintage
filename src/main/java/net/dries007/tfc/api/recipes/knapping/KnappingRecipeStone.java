@@ -2,7 +2,6 @@ package net.dries007.tfc.api.recipes.knapping;
 
 import net.minecraft.item.ItemStack;
 
-
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.IRockObject;
 

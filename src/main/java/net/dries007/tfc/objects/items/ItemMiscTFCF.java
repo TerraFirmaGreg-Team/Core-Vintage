@@ -1,17 +1,14 @@
 package net.dries007.tfc.objects.items;
 
-import net.minecraft.item.ItemStack;
-
-
-import org.jetbrains.annotations.NotNull;
-
-
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
+import net.minecraft.item.ItemStack;
 
 import tfcflorae.util.OreDictionaryHelper;
+
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("WeakerAccess")
 //public class ItemMiscTFCF extends ItemMisc

@@ -9,8 +9,7 @@
           "model": "tfc:plants/glow_vine_cross_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper"
       },
@@ -19,8 +18,7 @@
           "model": "tfc:plants/glow_vine_cross_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "middle"
       },
@@ -29,8 +27,7 @@
           "model": "tfc:plants/glow_vine_cross_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower"
       },

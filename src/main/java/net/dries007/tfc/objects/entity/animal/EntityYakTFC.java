@@ -16,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -39,7 +38,7 @@ public class EntityYakTFC extends EntityCowTFC implements ILivestock {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TAIGA)) {
+        (biomeType == BiomeHelper.BiomeType.TAIGA)) {
       return ConfigTFC.Animals.YAK.rarity;
     }
     return 0;
@@ -55,7 +54,7 @@ public class EntityYakTFC extends EntityCowTFC implements ILivestock {
     int numberOfChildren = ConfigTFC.Animals.YAK.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityYakTFC baby = new EntityYakTFC(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                           (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
       this.world.spawnEntity(baby);

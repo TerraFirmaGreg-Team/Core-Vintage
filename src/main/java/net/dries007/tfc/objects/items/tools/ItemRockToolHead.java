@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.item.ItemStack;
 
-
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;

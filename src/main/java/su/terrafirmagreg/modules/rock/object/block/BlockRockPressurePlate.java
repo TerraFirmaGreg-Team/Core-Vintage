@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -34,23 +33,23 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
     this.variant = variant;
     this.type = type;
     this.settings = Settings.of(Material.ROCK)
-            .registryKey(variant.getRegistryKey(type))
-            .hardness(variant.getHardness(type))
-            .sound(SoundType.STONE)
-            .hardness(0.5f)
-            .oreDict(variant)
-            .oreDict(variant, "stone")
-            .oreDict(variant, "stone", type);
+                            .registryKey(variant.getRegistryKey(type))
+                            .hardness(variant.getHardness(type))
+                            .sound(SoundType.STONE)
+                            .hardness(0.5f)
+                            .oreDict(variant)
+                            .oreDict(variant, "stone")
+                            .oreDict(variant, "stone", type);
 
   }
 
   @Override
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
-          ITooltipFlag flagIn) {
+                             ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 
     tooltip.add(new TextComponentTranslation("rockcategory.name")
-            .getFormattedText() + ": " + type.getCategory().getLocalizedName());
+                  .getFormattedText() + ": " + type.getCategory().getLocalizedName());
   }
 }

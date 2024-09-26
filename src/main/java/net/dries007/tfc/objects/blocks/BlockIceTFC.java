@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
 
-
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
@@ -52,8 +51,8 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
    */
   @Override
   public void harvestBlock(@NotNull World worldIn, EntityPlayer player, @NotNull BlockPos pos, @NotNull IBlockState state,
-          @Nullable TileEntity tile,
-          @NotNull ItemStack stack) {
+                           @Nullable TileEntity tile,
+                           @NotNull ItemStack stack) {
     //noinspection ConstantConditions
     player.addStat(StatList.getBlockStats(this));
     player.addExhaustion(0.005F);
@@ -99,7 +98,7 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
   public void onTemperatureUpdateTick(World world, BlockPos pos, IBlockState state) {
     // Either block light (i.e. from torches) or high enough temperature
     if (world.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - getLightOpacity(state, world, pos) ||
-            Climate.getActualTemp(world, pos) > meltThreshold) {
+        Climate.getActualTemp(world, pos) > meltThreshold) {
       turnIntoWater(world, pos);
     }
   }

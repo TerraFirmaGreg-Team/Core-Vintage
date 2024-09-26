@@ -9,7 +9,6 @@ import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
@@ -34,8 +33,8 @@ public class ModelWoodAnimalCart extends ModelBase {
 
     this.boardBottom = new ModelRenderer(this, 0, 0);
     this.boardBottom.addBox(-14.5F, -10.0F, 3.0F, 29, 20, 1);
-    this.boardBottom.rotateAngleX = -1.570796F;
-    this.boardBottom.rotateAngleY = -1.570796F;
+    this.boardBottom.rotateAngleX = -((float)Math.PI / 2F);
+    this.boardBottom.rotateAngleY = -((float)Math.PI / 2F);
 
     this.shaft = new ModelRenderer(this, 0, 25);
     this.shaft.setRotationPoint(0.0F, 0.0F, -14.0F);
@@ -46,13 +45,13 @@ public class ModelWoodAnimalCart extends ModelBase {
 
     this.boardLeft = new ModelRenderer(this, 0, 28);
     this.boardLeft.addBox(-5F, -15.5F, 9F, 8, 31, 2);
-    this.boardLeft.rotateAngleX = -1.570796F;
-    this.boardLeft.rotateAngleZ = 1.570796F;
+    this.boardLeft.rotateAngleX = -((float)Math.PI / 2F);
+    this.boardLeft.rotateAngleZ = ((float)Math.PI / 2F);
 
     this.boardRight = new ModelRenderer(this, 0, 28);
     this.boardRight.addBox(-5F, -15.5F, -11F, 8, 31, 2);
-    this.boardRight.rotateAngleX = -1.570796F;
-    this.boardRight.rotateAngleZ = 1.570796F;
+    this.boardRight.rotateAngleX = -((float)Math.PI / 2F);
+    this.boardRight.rotateAngleZ = ((float)Math.PI / 2F);
 
     this.boardBack = new ModelRenderer(this, 20, 28);
     this.boardBack.addBox(-9F, -5F, 13.5F, 18, 8, 2);
@@ -97,10 +96,10 @@ public class ModelWoodAnimalCart extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount,
-          float ageInTicks, float rotationYaw, float rotationPitch,
-          float scale) {
+                     float ageInTicks, float rotationYaw, float rotationPitch,
+                     float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, rotationYaw, rotationPitch,
-            scale, entity);
+                           scale, entity);
 
     this.leftWheel.rotateAngleX = ((EntityWoodAnimalCart) entity).getWheelRotation();
     this.rightWheel.rotateAngleX = this.leftWheel.rotateAngleX;

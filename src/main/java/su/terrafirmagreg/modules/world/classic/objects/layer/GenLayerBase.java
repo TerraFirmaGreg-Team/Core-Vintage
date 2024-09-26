@@ -22,7 +22,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 
 import javax.imageio.ImageIO;
@@ -37,26 +36,26 @@ public abstract class GenLayerBase extends GenLayer {
 
   // Distinct colors for debug map gen
   private static final Color[] COLORS = new Color[]{
-          new Color(0xFFB300),    // Vivid Yellow
-          new Color(0x803E75),    // Strong Purple
-          new Color(0xFF6800),    // Vivid Orange
-          new Color(0xA6BDD7),    // Very Light Blue
-          new Color(0xC10020),    // Vivid Red
-          new Color(0xCEA262),    // Grayish Yellow
-          new Color(0x817066),    // Medium Gray
-          new Color(0x007D34),    // Vivid Green
-          new Color(0xF6768E),    // Strong Purplish Pink
-          new Color(0x00538A),    // Strong Blue
-          new Color(0xFF7A5C),    // Strong Yellowish Pink
-          new Color(0x53377A),    // Strong Violet
-          new Color(0xFF8E00),    // Vivid Orange Yellow
-          new Color(0xB32851),    // Strong Purplish Red
-          new Color(0xF4C800),    // Vivid Greenish Yellow
-          new Color(0x7F180D),    // Strong Reddish Brown
-          new Color(0x93AA00),    // Vivid Yellowish Green
-          new Color(0x593315),    // Deep Yellowish Brown
-          new Color(0xF13A13),    // Vivid Reddish Orange
-          new Color(0x232C16),    // Dark Olive Green
+    new Color(0xFFB300),    // Vivid Yellow
+    new Color(0x803E75),    // Strong Purple
+    new Color(0xFF6800),    // Vivid Orange
+    new Color(0xA6BDD7),    // Very Light Blue
+    new Color(0xC10020),    // Vivid Red
+    new Color(0xCEA262),    // Grayish Yellow
+    new Color(0x817066),    // Medium Gray
+    new Color(0x007D34),    // Vivid Green
+    new Color(0xF6768E),    // Strong Purplish Pink
+    new Color(0x00538A),    // Strong Blue
+    new Color(0xFF7A5C),    // Strong Yellowish Pink
+    new Color(0x53377A),    // Strong Violet
+    new Color(0xFF8E00),    // Vivid Orange Yellow
+    new Color(0xB32851),    // Strong Purplish Red
+    new Color(0xF4C800),    // Vivid Greenish Yellow
+    new Color(0x7F180D),    // Strong Reddish Brown
+    new Color(0x93AA00),    // Vivid Yellowish Green
+    new Color(0x593315),    // Deep Yellowish Brown
+    new Color(0xF13A13),    // Vivid Reddish Orange
+    new Color(0x232C16),    // Dark Olive Green
   };
   // Doing this lookup only once is quite a bit faster.
   protected final int oceanID;
@@ -170,26 +169,12 @@ public abstract class GenLayerBase extends GenLayer {
 
   public static void drawImageBiomes(int size, GenLayerBase genlayer, String name) {
     Function<Biome, Color> colorize = (x) -> x instanceof BaseBiome baseBiome
-            ? baseBiome.getSettings().getDebugColour() : Color.BLACK;
+                                             ? baseBiome.getSettings().getDebugColour() : Color.BLACK;
     drawImage(size, genlayer, name, (i) -> colorize.apply(Biome.getBiomeForId(i)));
   }
 
-  public void initWorldGenSeed(long par1) {
-    this.worldGenSeed = par1;
-    if (this.parent != null) {
-      this.parent.initWorldGenSeed(par1);
-    }
-
-    this.worldGenSeed *= this.worldGenSeed * 6364136223846793005L + 1442695040888963407L;
-    this.worldGenSeed += this.baseSeed;
-    this.worldGenSeed *= this.worldGenSeed * 6364136223846793005L + 1442695040888963407L;
-    this.worldGenSeed += this.baseSeed;
-    this.worldGenSeed *= this.worldGenSeed * 6364136223846793005L + 1442695040888963407L;
-    this.worldGenSeed += this.baseSeed;
-  }
-
   public static void drawImage(int size, GenLayerBase genlayer, String name,
-          IntFunction<Color> gibColor) {
+                               IntFunction<Color> gibColor) {
     if (!ConfigCore.MISC.DEBUG.debugWorldGenSafe) {
       return;
     }
@@ -221,31 +206,8 @@ public abstract class GenLayerBase extends GenLayer {
     }
   }
 
-  public void initChunkSeed(long par1, long par3) {
-    this.chunkSeed = this.worldGenSeed;
-    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
-    this.chunkSeed += par1;
-    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
-    this.chunkSeed += par3;
-    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
-    this.chunkSeed += par1;
-    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
-    this.chunkSeed += par3;
-  }
-
-  protected int nextInt(int par1) {
-    int var2 = (int) ((this.chunkSeed >> 24) % (long) par1);
-    if (var2 < 0) {
-      var2 += par1;
-    }
-
-    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
-    this.chunkSeed += this.worldGenSeed;
-    return var2;
-  }
-
   public static GenLayerBase initializeRock(long seed, RockCategory.Layer level,
-          int rockLayerSize) {
+                                            int rockLayerSize) {
     GenLayerBase layer = new GenLayerRockInit(1L, level);
     layer = new GenLayerFuzzyZoom(2000L, layer);
     layer = new GenLayerZoom(2001L, layer);
@@ -304,6 +266,43 @@ public abstract class GenLayerBase extends GenLayer {
     continent.initWorldGenSeed(seed);
     drawImage(1024, continent, "stability");
     return continent;
+  }
+
+  public void initWorldGenSeed(long par1) {
+    this.worldGenSeed = par1;
+    if (this.parent != null) {
+      this.parent.initWorldGenSeed(par1);
+    }
+
+    this.worldGenSeed *= this.worldGenSeed * 6364136223846793005L + 1442695040888963407L;
+    this.worldGenSeed += this.baseSeed;
+    this.worldGenSeed *= this.worldGenSeed * 6364136223846793005L + 1442695040888963407L;
+    this.worldGenSeed += this.baseSeed;
+    this.worldGenSeed *= this.worldGenSeed * 6364136223846793005L + 1442695040888963407L;
+    this.worldGenSeed += this.baseSeed;
+  }
+
+  public void initChunkSeed(long par1, long par3) {
+    this.chunkSeed = this.worldGenSeed;
+    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
+    this.chunkSeed += par1;
+    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
+    this.chunkSeed += par3;
+    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
+    this.chunkSeed += par1;
+    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
+    this.chunkSeed += par3;
+  }
+
+  protected int nextInt(int par1) {
+    int var2 = (int) ((this.chunkSeed >> 24) % (long) par1);
+    if (var2 < 0) {
+      var2 += par1;
+    }
+
+    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
+    this.chunkSeed += this.worldGenSeed;
+    return var2;
   }
 
   public boolean isOceanicBiome(int id) {

@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.base.tile.BaseTile;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class TEPlacedHide extends BaseTile {

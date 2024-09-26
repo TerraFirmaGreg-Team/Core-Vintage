@@ -14,7 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.biome.Biome;
 
-
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -57,7 +56,7 @@ public class ModifierEnvironmental extends ModifierBase {
 
   public static Optional<ModifierBase> handleGeneralTemperature(EntityPlayer player) {
     return ModifierBase.defined("environment", getEnvironmentTemperature(player),
-            getEnvironmentHumidity(player));
+                                getEnvironmentHumidity(player));
   }
 
   public static float getEnvironmentTemperature(EntityPlayer player) {
@@ -87,8 +86,8 @@ public class ModifierEnvironmental extends ModifierBase {
       } else if (state.getBlock() == Blocks.LAVA) {
         return ModifierBase.defined("in_lava", 10f, 5f);
       } else if (state.getBlock() == FluidsTFC.SALT_WATER.get().getBlock()
-              && player.world.getBiome(pos)
-              .getTempCategory() == Biome.TempCategory.OCEAN) {
+                 && player.world.getBiome(pos)
+                                .getTempCategory() == Biome.TempCategory.OCEAN) {
         return ModifierBase.defined("in_ocean_water", -8f, 6f);
       } else {
         return ModifierBase.defined("in_water", -5f, 6f);
@@ -184,7 +183,7 @@ public class ModifierEnvironmental extends ModifierBase {
   public static Optional<ModifierBase> handleThirst(EntityPlayer player) {
     if (player.getFoodStats() instanceof IFoodStatsTFC stats) {
       if (getEnvironmentTemperatureWithTimeOfDay(player) > ProviderTemperature.AVERAGE + 3
-              && stats.getThirst() > 80f) {
+          && stats.getThirst() > 80f) {
         return ModifierBase.defined("well_hidrated", -2.5f, 0f);
       }
     }
@@ -193,7 +192,7 @@ public class ModifierEnvironmental extends ModifierBase {
 
   public static Optional<ModifierBase> handleFood(EntityPlayer player) {
     if (getEnvironmentTemperatureWithTimeOfDay(player) < ProviderTemperature.AVERAGE - 3
-            && player.getFoodStats().getFoodLevel() > 14) {
+        && player.getFoodStats().getFoodLevel() > 14) {
       return ModifierBase.defined("well_fed", 2.5f, 0f);
     }
     return ModifierBase.none();

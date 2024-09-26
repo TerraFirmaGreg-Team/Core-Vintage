@@ -12,7 +12,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -107,7 +106,7 @@ public class ModelAnimalMuskOxBody extends ModelBase {
     hornLeft1 = new ModelRenderer(this, 94, 5);
     hornLeft1.setRotationPoint(1.0F, 1.0F, 1.5F);
     hornLeft1.addBox(0.0F, 0.0F, -1.0F, 3, 1, 2, 0.0F);
-    setRotateAngle(hornLeft1, 0.0F, 3.141592653589793F, -2.6179938779914944F);
+    setRotateAngle(hornLeft1, 0.0F, (float) Math.PI, -2.6179938779914944F);
     bodyHair = new ModelRenderer(this, 1, 1);
     bodyHair.setRotationPoint(0.0F, 12.0F, -1.0F);
     bodyHair.addBox(-6.5F, -8.0F, -8.0F, 13, 15, 21, 0.0F);
@@ -135,7 +134,7 @@ public class ModelAnimalMuskOxBody extends ModelBase {
     hornRightF1 = new ModelRenderer(this, 94, 10);
     hornRightF1.setRotationPoint(3.0F, 0.4F, 0.0F);
     hornRightF1.addBox(-0.5F, -0.5F, -0.5F, 2, 1, 1, 0.0F);
-    setRotateAngle(hornRightF1, -0.3141592653589793F, 0.2617993877991494F, -0.3141592653589793F);
+    setRotateAngle(hornRightF1, -((float) Math.PI / 10F), 0.2617993877991494F, -((float) Math.PI / 10F));
     hornRightF2 = new ModelRenderer(this, 94, 14);
     hornRightF2.setRotationPoint(1.0F, 0.0F, 0.0F);
     hornRightF2.addBox(-0.2F, -0.5F, -0.5F, 2, 1, 1, 0.0F);
@@ -143,7 +142,7 @@ public class ModelAnimalMuskOxBody extends ModelBase {
     hornLeftF1 = new ModelRenderer(this, 94, 10);
     hornLeftF1.setRotationPoint(3.0F, 0.4F, 0.0F);
     hornLeftF1.addBox(-0.5F, -0.5F, -0.5F, 2, 1, 1, 0.0F);
-    setRotateAngle(hornLeftF1, -0.3141592653589793F, -0.2617993877991494F, -0.3141592653589793F);
+    setRotateAngle(hornLeftF1, -((float) Math.PI / 10F), -0.2617993877991494F, -((float) Math.PI / 10F));
     hornLeftF2 = new ModelRenderer(this, 94, 14);
     hornLeftF2.setRotationPoint(1.0F, 0.0F, 0.0F);
     hornLeftF2.addBox(-0.2F, -0.5F, -0.5F, 2, 1, 1, 0.0F);
@@ -188,7 +187,7 @@ public class ModelAnimalMuskOxBody extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-          float par6, float par7) {
+                     float par6, float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
     EntityAnimalMuskOx muskox = ((EntityAnimalMuskOx) entity);
 
@@ -279,14 +278,14 @@ public class ModelAnimalMuskOxBody extends ModelBase {
 
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
-          float par6, Entity ent) {
+                                float par6, Entity ent) {
     this.headBase.rotateAngleX = par5 / (180F / MathConstants.PI);
     this.headBase.rotateAngleY = par4 / (180F / MathConstants.PI);
     this.legFrontRight.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
     this.legFrontLeft.rotateAngleX =
-            MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
+      MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
     this.legBackRight.rotateAngleX =
-            MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
+      MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
     this.legBackLeft.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
 
     hornCenter.isHidden = false;

@@ -1,9 +1,5 @@
 package su.terrafirmagreg.modules.animal.client.render;
 
-import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.animal.client.model.ModelAnimalBlackBear;
-import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalBlackBear;
-
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -11,15 +7,18 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
+
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.animal.client.model.ModelAnimalBlackBear;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalBlackBear;
 
 @SideOnly(Side.CLIENT)
 
 public class RenderAnimalBlackBear extends RenderLiving<EntityAnimalBlackBear> {
 
   private static final ResourceLocation BLACKBEAR_TEXTURE = ModUtils.resource(
-          "textures/entity/animal/predators/blackbear.png");
+    "textures/entity/animal/predators/blackbear.png");
 
   public RenderAnimalBlackBear(RenderManager renderManager) {
     super(renderManager, new ModelAnimalBlackBear(), 0.7F);
@@ -27,7 +26,7 @@ public class RenderAnimalBlackBear extends RenderLiving<EntityAnimalBlackBear> {
 
   @Override
   public void doRender(@NotNull EntityAnimalBlackBear blackbear, double par2, double par4,
-          double par6, float par8, float par9) {
+                       double par6, float par8, float par9) {
     this.shadowSize = (float) (0.35f + (blackbear.getPercentToAdulthood() * 0.35f));
     super.doRender(blackbear, par2, par4, par6, par8, par9);
   }

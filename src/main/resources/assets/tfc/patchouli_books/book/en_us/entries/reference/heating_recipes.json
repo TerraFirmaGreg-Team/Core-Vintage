@@ -9,33 +9,26 @@
       "type": "tfc:heat_recipe",
       "recipe": "tfc:unfired_vessel",
       "text": "Same goes for any clay item."
-    },
-    {
+    }, {
       "type": "tfc:heat_recipe",
       "recipe": "tfc:cooked_pheasant",
       "text": "Any meat or dough (including eggs) can be cooked"
-    },
-    {
+    }, {
       "type": "tfc:heat_recipe",
       "recipe": "tfc:unfired_brick"
-    },
-    {
+    }, {
       "type": "tfc:heat_recipe",
       "recipe": "tfc:unfired_fire_brick"
-    },
-    {
+    }, {
       "type": "tfc:heat_recipe",
       "recipe": "tfc:unfired_flower_pot"
-    },
-    {
+    }, {
       "type": "tfc:heat_recipe",
       "recipe": "tfc:terracotta"
-    },
-    {
+    }, {
       "type": "tfc:heat_recipe",
       "recipe": "tfc:lime_glazed_terracotta"
-    },
-    {
+    }, {
       "type": "tfc:heat_recipe",
       "recipe": "tfc:unfired_spindle"
     }

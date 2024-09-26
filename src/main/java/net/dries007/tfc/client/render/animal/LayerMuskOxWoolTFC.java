@@ -6,7 +6,6 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.client.model.animal.ModelMuskOxWoolTFC;
 import net.dries007.tfc.objects.entity.animal.EntityMuskOxTFC;
 
@@ -23,7 +22,7 @@ public class LayerMuskOxWoolTFC implements LayerRenderer<EntityMuskOxTFC> {
 
   @Override
   public void doRenderLayer(EntityMuskOxTFC muskox, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
-          float headPitch, float scale) {
+                            float headPitch, float scale) {
     if (muskox.hasWool() && !muskox.isInvisible()) {
       this.muskoxRenderer.bindTexture(this.muskoxRenderer.getEntityTexture(muskox));
 

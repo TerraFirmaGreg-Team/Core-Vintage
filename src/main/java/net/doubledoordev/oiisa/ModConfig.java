@@ -6,7 +6,6 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
 import static net.doubledoordev.oiisa.OversizedItemInStorageArea.INSTANCE;
 import static su.terrafirmagreg.data.Constants.MODID_OSA;
 
@@ -30,7 +29,7 @@ public class ModConfig {
 
   @Config.LangKey("oiisa.config.blocked.slots")
   @Config.Comment(
-          "DO NOT ENTER InventoryBasic SLOTS HERE! Full Class path names of slots that are excluded from ALL checks. TURN ON DEBUG TO GET THESE NAMES")
+    "DO NOT ENTER InventoryBasic SLOTS HERE! Full Class path names of slots that are excluded from ALL checks. TURN ON DEBUG TO GET THESE NAMES")
   public static String[] slotClassNames = new String[3];
   @Config.LangKey("oiisa.config.blocked.items")
   @Config.Comment("Items that are excluded from ALL checks. F3+H to get names.")
@@ -78,13 +77,13 @@ public class ModConfig {
 
     @Config.LangKey("oiisa.config.size.message.location")
     @Config.Comment({"Where the eject message is sent.",
-            "True = Action bar message. False = Chat Message."
+                     "True = Action bar message. False = Chat Message."
     })
     public Boolean sizeActionBarMessage = true;
 
     @Config.LangKey("oiisa.config.size.message.send")
     @Config.Comment({"If players should be notified about issues.",
-            "True = Send players a message. False = No message."
+                     "True = Send players a message. False = No message."
     })
     public Boolean sizeNotifyPlayer = true;
 
@@ -94,26 +93,26 @@ public class ModConfig {
 
     @Config.LangKey("oiisa.config.size.whitelist")
     @Config.Comment({"Changes the default checks from whitelist to blacklist. ",
-            "True = sizeContainers inventory are checked, False = sizeContainers inventory are NOT checked."
+                     "True = sizeContainers inventory are checked, False = sizeContainers inventory are NOT checked."
     })
     public Boolean sizeWhitelist = false;
 
     @Config.LangKey("oiisa.config.size.max")
     @Config.Comment({"This size and over are oversized and get ejected.",
-            "Use sizeInvntoryMap for fine control per inventory.",
-            "0 = Tiny, 1 = Very Small, 2 = Small, 3 = Normal, 4 = Large 5 = Very Large, 6 = Huge"
+                     "Use sizeInvntoryMap for fine control per inventory.",
+                     "0 = Tiny, 1 = Very Small, 2 = Small, 3 = Normal, 4 = Large 5 = Very Large, 6 = Huge"
     })
     @Config.RangeInt(min = 0, max = 6)
     public int maxSize = 4;
 
     @Config.LangKey("oiisa.config.size.inventories")
     @Config.Comment(
-            "Full Class path names of inventories that are ignored/checked (depends on sizeBlacklist) for oversize items. TURN ON DEBUG TO GET THESE NAMES")
+      "Full Class path names of inventories that are ignored/checked (depends on sizeBlacklist) for oversize items. TURN ON DEBUG TO GET THESE NAMES")
     public String[] sizeContainers = new String[8];
     @Config.LangKey("oiisa.config.size.inventoryarray")
     @Config.Comment({"Full Class path names of inventories that are checked for size limits. TURN ON DEBUG TO GET THE NAMES",
-            "Size to start kicking items out of an inventory at. 0 = Tiny, 1 = Very Small, 2 = Small, 3 = Normal, 4 = Large 5 = Very Large, 6 = Huge",
-            "Ignored inventories WILL NOT get checked! Adding them here DOES NOT MAKE THEM BE CHECKED!"
+                     "Size to start kicking items out of an inventory at. 0 = Tiny, 1 = Very Small, 2 = Small, 3 = Normal, 4 = Large 5 = Very Large, 6 = Huge",
+                     "Ignored inventories WILL NOT get checked! Adding them here DOES NOT MAKE THEM BE CHECKED!"
     })
     public String[] sizeInventoryArray = new String[1];
 
@@ -143,13 +142,13 @@ public class ModConfig {
 
     @Config.LangKey("oiisa.config.weight.message.location")
     @Config.Comment({"Where the eject message is sent.",
-            "True = Action bar message. False = Chat Message."
+                     "True = Action bar message. False = Chat Message."
     })
     public Boolean weightActionBarMessage = true;
 
     @Config.LangKey("oiisa.config.weight.message.send")
     @Config.Comment({"If players should be notified about issues.",
-            "True = Send players a message. False = no message."
+                     "True = Send players a message. False = no message."
     })
     public Boolean weightNotifyPlayer = true;
 
@@ -179,8 +178,8 @@ public class ModConfig {
 
     @Config.LangKey("oiisa.config.weight.inventoryarray")
     @Config.Comment({"Full Class path names of inventories that are checked for weight limits. TURN ON DEBUG TO GET THE NAMES",
-            "Number = Max Weight for Inventory.",
-            "Example: su.terrafirmagreg.modules.device.objects.container.ContainerLogPile, 20"
+                     "Number = Max Weight for Inventory.",
+                     "Example: su.terrafirmagreg.modules.device.objects.container.ContainerLogPile, 20"
     })
 
     public String[] weightInventoryArray = new String[1];
@@ -194,7 +193,7 @@ public class ModConfig {
 
     @Config.LangKey("oiisa.config.heat.makefire")
     @Config.Comment({"Blocks that will burn up from a fire will be consumed by fire if an overheated item is placed inside.",
-            "True = Fire. False = No Fire."
+                     "True = Fire. False = No Fire."
     })
     public Boolean heatStartsFires = true;
 
@@ -204,12 +203,12 @@ public class ModConfig {
 
     @Config.LangKey("oiisa.config.heat.message.location")
     @Config.Comment({"Where the eject message is sent.",
-            "True = Action bar message. False = Chat Message."})
+                     "True = Action bar message. False = Chat Message."})
     public Boolean heatActionBarMessage = true;
 
     @Config.LangKey("oiisa.config.heat.message.send")
     @Config.Comment({"If players should be notified about issues.",
-            "True = Send players a message. False = no message."
+                     "True = Send players a message. False = no message."
     })
     public Boolean heatNotifyPlayer = true;
 
@@ -232,7 +231,7 @@ public class ModConfig {
     public int heatToCombustPlayer = 70;
     @Config.LangKey("oiisa.config.heat.incineratedestroysitems")
     @Config.Comment({"Does a player incinerating there self destroy burnable items they have in there inventory?",
-            "You can add custom options by giving items fuel time via other mods. Anything greater than 0 will combust."})
+                     "You can add custom options by giving items fuel time via other mods. Anything greater than 0 will combust."})
     public boolean incinerateHeldBurnableItems = true;
     @Config.LangKey("oiisa.config.heat.incineratedplayerstartsfire")
     @Config.Comment({"Does a player dying from incinerating there self start a fire where they stand?"})

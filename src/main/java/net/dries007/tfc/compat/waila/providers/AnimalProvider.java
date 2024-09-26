@@ -8,7 +8,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.IShearable;
 
-
 import net.dries007.tfc.compat.waila.interfaces.IWailaEntity;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -30,7 +29,7 @@ public class AnimalProvider implements IWailaEntity {
       boolean familiarized = animal.getFamiliarity() > 0.15f;
       if (animal.getAdultFamiliarityCap() > 0) {
         currentTooltip.add(new TextComponentTranslation(
-                familiarized ? "waila.tfc.animal.familiarized" : "waila.tfc.animal.not_familiarized").getFormattedText());
+          familiarized ? "waila.tfc.animal.familiarized" : "waila.tfc.animal.not_familiarized").getFormattedText());
       }
       switch (animal.getAge()) {
         case CHILD:
@@ -55,9 +54,9 @@ public class AnimalProvider implements IWailaEntity {
                 // For 1.12, addons will need to either extend EntityAnimalMammal or handle the tooltip themselves
                 if (animal instanceof EntityAnimalMammal mother) {
                   long gestationDaysRemaining =
-                          mother.getPregnantTime() + mother.gestationDays() - Calendar.PLAYER_TIME.getTotalDays();
+                    mother.getPregnantTime() + mother.gestationDays() - Calendar.PLAYER_TIME.getTotalDays();
                   currentTooltip.add(
-                          new TextComponentTranslation("waila.tfc.animal.pregnant_end", gestationDaysRemaining).getFormattedText());
+                    new TextComponentTranslation("waila.tfc.animal.pregnant_end", gestationDaysRemaining).getFormattedText());
                 }
               } else {
                 currentTooltip.add(new TextComponentTranslation("tfc.tooltip.fertilized").getFormattedText());

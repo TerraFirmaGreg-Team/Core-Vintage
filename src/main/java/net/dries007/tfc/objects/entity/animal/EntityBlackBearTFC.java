@@ -19,7 +19,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIStandAttack;
@@ -48,7 +47,7 @@ public class EntityBlackBearTFC extends EntityGrizzlyBearTFC implements IPredato
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
+        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
       return ConfigTFC.Animals.BLACK_BEAR.rarity;
     }
     return 0;

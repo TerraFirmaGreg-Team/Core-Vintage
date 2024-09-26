@@ -13,7 +13,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -27,7 +26,7 @@ public class TESRCrucible extends TileEntitySpecialRenderer<TileCrucible> {
 
   @Override
   public void render(TileCrucible tile, double x, double y, double z, float partialTicks,
-          int destroyStage, float alpha) {
+                     int destroyStage, float alpha) {
     int amount = tile.getAlloy().getAmount();
     if (amount < 1) {
       return;
@@ -43,10 +42,10 @@ public class TESRCrucible extends TileEntitySpecialRenderer<TileCrucible> {
     GlStateManager.enableAlpha();
     GlStateManager.enableBlend();
     GlStateManager.tryBlendFuncSeparate(
-            GlStateManager.SourceFactor.SRC_ALPHA,
-            GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-            GlStateManager.SourceFactor.ONE,
-            GlStateManager.DestFactor.ZERO
+      GlStateManager.SourceFactor.SRC_ALPHA,
+      GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+      GlStateManager.SourceFactor.ONE,
+      GlStateManager.DestFactor.ZERO
     );
 
     int color = metalFluid.getColor();
@@ -66,21 +65,21 @@ public class TESRCrucible extends TileEntitySpecialRenderer<TileCrucible> {
     double height = 0.140625D + (0.75D - 0.015625D) * amount / tile.getAlloy().getMaxAmount();
 
     buffer.pos(0.1875D, height, 0.1875D)
-            .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(3))
-            .normal(0, 0, 1)
-            .endVertex();
+          .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(3))
+          .normal(0, 0, 1)
+          .endVertex();
     buffer.pos(0.1875D, height, 0.8125D)
-            .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(13))
-            .normal(0, 0, 1)
-            .endVertex();
+          .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(13))
+          .normal(0, 0, 1)
+          .endVertex();
     buffer.pos(0.8125D, height, 0.8125D)
-            .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(13))
-            .normal(0, 0, 1)
-            .endVertex();
+          .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(13))
+          .normal(0, 0, 1)
+          .endVertex();
     buffer.pos(0.8125D, height, 0.1875D)
-            .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(3))
-            .normal(0, 0, 1)
-            .endVertex();
+          .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(3))
+          .normal(0, 0, 1)
+          .endVertex();
 
     Tessellator.getInstance().draw();
 

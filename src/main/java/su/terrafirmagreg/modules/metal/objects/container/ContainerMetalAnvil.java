@@ -16,7 +16,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
@@ -32,8 +31,8 @@ import static su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil.BUTTON_ID
 import static su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil.BUTTON_ID_STEP_MIN;
 
 public class ContainerMetalAnvil
-        extends BaseContainerTile<TileMetalAnvil>
-        implements IButtonHandler {
+  extends BaseContainerTile<TileMetalAnvil>
+  implements IButtonHandler {
 
   public ContainerMetalAnvil(InventoryPlayer playerInv, TileMetalAnvil tile) {
     super(playerInv, tile, 26);
@@ -52,7 +51,7 @@ public class ContainerMetalAnvil
       if (slotInput != null) {
         ItemStack stack = slotInput.getStack();
         if (!stack.isEmpty() && !AnvilRecipeManager.getAllFor(stack).isEmpty()) {
-          GuiHandler.openGui(player.world, tile.getPos(), player, GuiHandler.Type.ROCK_ANVIL);
+          GuiHandler.openGui(player.world, tile.getPos(), player);
         }
       }
     }
@@ -88,7 +87,7 @@ public class ContainerMetalAnvil
 
     if (!cap.isWorkable()) {
       player.sendMessage(
-              new TextComponentTranslation(ModUtils.localize("tooltip", "anvil_too_cold")));
+        new TextComponentTranslation(ModUtils.localize("tooltip", "anvil_too_cold")));
       return false;
     }
 
@@ -114,7 +113,7 @@ public class ContainerMetalAnvil
         return true;
       } else {
         player.sendMessage(new TextComponentString("" + TextFormatting.RED).appendSibling(
-                new TextComponentTranslation(ModUtils.localize("tooltip", "anvil_no_hammer"))));
+          new TextComponentTranslation(ModUtils.localize("tooltip", "anvil_no_hammer"))));
         return false;
       }
     }
@@ -123,7 +122,7 @@ public class ContainerMetalAnvil
   @Override
   protected void addContainerSlots() {
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-            null);
+                                                null);
     if (inventory != null) {
       addSlotToContainer(new SlotCallback(inventory, TileMetalAnvil.SLOT_INPUT_1, 31, 68, tile));
       addSlotToContainer(new SlotCallback(inventory, TileMetalAnvil.SLOT_INPUT_2, 13, 68, tile));
@@ -135,7 +134,7 @@ public class ContainerMetalAnvil
   @Override
   protected boolean transferStackIntoContainer(ItemStack stack, int containerSlots) {
     return !mergeItemStack(stack, TileMetalAnvil.SLOT_FLUX, TileMetalAnvil.SLOT_FLUX + 1, false) &&
-            !mergeItemStack(stack, TileMetalAnvil.SLOT_HAMMER, TileMetalAnvil.SLOT_HAMMER + 1, false) &&
-            !mergeItemStack(stack, TileMetalAnvil.SLOT_INPUT_1, TileMetalAnvil.SLOT_INPUT_2 + 1, false);
+           !mergeItemStack(stack, TileMetalAnvil.SLOT_HAMMER, TileMetalAnvil.SLOT_HAMMER + 1, false) &&
+           !mergeItemStack(stack, TileMetalAnvil.SLOT_INPUT_1, TileMetalAnvil.SLOT_INPUT_2 + 1, false);
   }
 }

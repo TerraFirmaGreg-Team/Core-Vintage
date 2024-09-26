@@ -13,7 +13,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
@@ -75,7 +74,7 @@ public class ModelParrotTFC extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
-          float scale) {
+                     float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
     if (((EntityAnimal) entity).isChild()) {
@@ -104,7 +103,7 @@ public class ModelParrotTFC extends ModelBase {
 
   @Override
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
-          Entity entityIn) {
+                                Entity entityIn) {
     float f = ageInTicks * 0.3F;
     this.head.rotateAngleX = headPitch * 0.017453292F;
     this.head.rotateAngleY = netHeadYaw * 0.017453292F;
@@ -143,7 +142,7 @@ public class ModelParrotTFC extends ModelBase {
       ModelRenderer var10000 = this.legLeft;
       var10000.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
       var10000 = this.legRight;
-      var10000.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * 1.4F * limbSwingAmount;
+      var10000.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
     }
 
     this.head.rotationPointY = 15.69F + f;
@@ -162,10 +161,10 @@ public class ModelParrotTFC extends ModelBase {
   public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
     this.feather.rotateAngleX = -0.2214F;
     this.body.rotateAngleX = 0.4937F;
-    this.wingLeft.rotateAngleX = -0.69813174F;
-    this.wingLeft.rotateAngleY = -3.1415927F;
-    this.wingRight.rotateAngleX = -0.69813174F;
-    this.wingRight.rotateAngleY = -3.1415927F;
+    this.wingLeft.rotateAngleX = -((float)Math.PI * 2F / 9F);
+    this.wingLeft.rotateAngleY = -(float)Math.PI;
+    this.wingRight.rotateAngleX = -((float)Math.PI * 2F / 9F);
+    this.wingRight.rotateAngleY = -(float)Math.PI;
     this.legLeft.rotateAngleX = -0.0299F;
     this.legRight.rotateAngleX = -0.0299F;
     this.legLeft.rotationPointY = 22.0F;
@@ -194,9 +193,9 @@ public class ModelParrotTFC extends ModelBase {
         this.state = State.SITTING;
       } else if (entityparrot.isFlying()) {
         ModelRenderer var10000 = this.legLeft;
-        var10000.rotateAngleX += 0.69813174F;
+        var10000.rotateAngleX += ((float)Math.PI * 2F / 9F);
         var10000 = this.legRight;
-        var10000.rotateAngleX += 0.69813174F;
+        var10000.rotateAngleX += ((float)Math.PI * 2F / 9F);
         this.state = State.FLYING;
       } else {
         this.state = State.STANDING;

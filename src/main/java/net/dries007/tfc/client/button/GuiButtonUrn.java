@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.base.gui.component.button.BaseGuiButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 
-
 import net.dries007.tfc.objects.te.TEUrn;
 
 import org.jetbrains.annotations.NotNull;

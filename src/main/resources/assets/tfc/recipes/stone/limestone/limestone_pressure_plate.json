@@ -3,11 +3,9 @@
   "ingredients": [
     {
       "item": "tfc:brick/limestone"
-    },
-    {
+    }, {
       "item": "tfc:brick/limestone"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

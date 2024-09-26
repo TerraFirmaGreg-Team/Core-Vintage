@@ -35,7 +35,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -78,7 +77,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 
   public EntityHorseTFC(World world) {
     this(world, Gender.valueOf(RNG.nextBoolean()),
-            EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.HORSE.adulthood, ConfigTFC.Animals.HORSE.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.HORSE.adulthood, ConfigTFC.Animals.HORSE.elder));
   }
 
   public EntityHorseTFC(World world, Gender gender, int birthDay) {
@@ -111,9 +110,9 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+           && !this.world.containsAnyLiquid(getEntityBoundingBox())
+           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @NotNull
@@ -162,14 +161,14 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
     }
     EntityAnimal father = (EntityAnimal) male;
     this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-            .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-            .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+                                      .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+                                                            .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
     this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-            .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-            .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+                                     .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+                                                           .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
     this.geneJump = (float) ((father.getEntityAttribute(JUMP_STRENGTH)
-            .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
-            .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+                                    .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
+                                                          .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
   }
 
   @Override
@@ -240,15 +239,15 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
     return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-            .name()
-            .toLowerCase());
+                                                                                          .name()
+                                                                                          .toLowerCase());
   }
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST || biomeType == BiomeHelper.BiomeType.PLAINS)) {
+        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST || biomeType == BiomeHelper.BiomeType.PLAINS)) {
       return ConfigTFC.Animals.HORSE.rarity;
     }
     return 0;
@@ -304,16 +303,16 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
     return dataManager.get(PREGNANT_TIME);
   }
 
+  public void setPregnantTime(long pregnantTime) {
+    dataManager.set(PREGNANT_TIME, pregnantTime);
+  }
+
   public boolean isHalter() {
     return dataManager.get(HALTER);
   }
 
   public void setHalter(boolean value) {
     dataManager.set(HALTER, value);
-  }
-
-  public void setPregnantTime(long pregnantTime) {
-    dataManager.set(PREGNANT_TIME, pregnantTime);
   }
 
   @Override
@@ -379,8 +378,9 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
               TerraFirmaCraft.getNetwork()
-                      .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL,
-                              MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+                             .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL,
+                                                                          MODID_TFC
+                                                                          + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
             }
           }
         }
@@ -409,7 +409,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
     } else if (other == this) {
       // Only called if this animal is interacted with a spawn egg
       EntityHorseTFC baby = new EntityHorseTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                               (int) Calendar.PLAYER_TIME.getTotalDays());
       this.setOffspringAttributes(this, baby);
       baby.setHorseVariant(this.getHorseVariant());
       return baby;
@@ -476,14 +476,14 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
         this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
-                this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
+          this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
         if (random.nextDouble() < ConfigTFC.Animals.HORSE.oldDeathChance) {
           this.setDead();
         }
       }
       // Wild animals disappear after 125% lifespan
       if (this.getDaysToElderly() > 0 && this.getFamiliarity() < 0.10F &&
-              (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
+          (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
         this.setDead();
       }
     }
@@ -532,7 +532,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
    */
   private boolean findFemaleMate() {
     List<AbstractHorse> list = this.world.getEntitiesWithinAABB(AbstractHorse.class, this.getEntityBoundingBox()
-            .grow(8.0D));
+                                                                                         .grow(8.0D));
     for (AbstractHorse ent : list) {
       if (ent instanceof EntityHorseTFC || ent instanceof EntityDonkeyTFC) {
         IAnimal animal = (IAnimal) ent;

@@ -4,7 +4,6 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-
 import io.netty.buffer.ByteBuf;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.HorsePowerMod;
@@ -74,8 +73,8 @@ public class SyncServerRecipesMessage extends ClientMessageHandler<SyncServerRec
   protected void handle(SyncServerRecipesMessage message, MessageContext ctx) {
     HPRecipes.serverSyncedRecipes = true;
     HPRecipes.instance()
-            .reloadRecipes(message.grindstoneRecipes, message.handGrindstoneRecipes, message.choppingRecipes, message.manualChoppingRecipes,
-                    message.pressRecipes);
+             .reloadRecipes(message.grindstoneRecipes, message.handGrindstoneRecipes, message.choppingRecipes, message.manualChoppingRecipes,
+                            message.pressRecipes);
     HorsePowerMod.logger.info("Synced recipes from server");
   }
 }

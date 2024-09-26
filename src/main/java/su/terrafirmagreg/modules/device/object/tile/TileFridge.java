@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
@@ -20,7 +20,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -30,7 +29,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 
 import gregtech.api.capability.GregtechCapabilities;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -46,7 +44,7 @@ import java.util.Optional;
 import static su.terrafirmagreg.data.Properties.UPPER;
 
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
-public class TileFridge extends BaseTileInventory implements ITickable, IAmbientalTileProvider {
+public class TileFridge extends BaseTileTickableInventory implements IAmbientalTileProvider {
 
   private static final float MAX_DEGREE = 90F;
   private static final float DOOR_SPEED = 6F;
@@ -64,7 +62,7 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
   public TileFridge() {
     super(8);
     energyContainer = new MachineEnergyStorage(TechConfig.DEVICES.fridgeEnergyCapacity,
-            TechConfig.DEVICES.fridgeEnergyCapacity, 0);
+                                               TechConfig.DEVICES.fridgeEnergyCapacity, 0);
   }
 
   /**
@@ -91,7 +89,7 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
   @Override
   public void setAndUpdateSlots(int slot) {
     ModuleDevice.getPacketService()
-            .sendToAllAround(new SCPacketTileEntity(this), world.provider.getDimension(), pos, 64);
+                .sendToAllAround(new SCPacketTileEntity(this), world.provider.getDimension(), pos, 64);
     super.setAndUpdateSlots(slot);
   }
 
@@ -128,7 +126,7 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
       if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
         return true;
       } else if (TechConfig.DEVICES.acceptGTCEEU && GameUtils.isModLoaded("gregtech") &&
-              capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
+                 capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
         return true;
       }
     }
@@ -150,7 +148,7 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
       if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
         return (T) this.energyContainer;
       } else if (TechConfig.DEVICES.acceptGTCEEU && GameUtils.isModLoaded("gregtech") &&
-              capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
+                 capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
         return (T) this.energyContainer.getGTCEHandler();
       }
     }
@@ -342,13 +340,13 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
       }
       if (this.isOpen() || !energyContainer.consumeEnergy(consumption, false)) {
         efficiency -= (100.0F / (6000.0F
-                / TechConfig.DEVICES.fridgeLoseEfficiency)); //5 Minutes to 0 default
+                                 / TechConfig.DEVICES.fridgeLoseEfficiency)); //5 Minutes to 0 default
         if (efficiency <= 0) {
           efficiency = 0;
         }
       } else {
         efficiency += (100.0F / (36000.0F
-                / TechConfig.DEVICES.fridgeEfficiency)); //30 Minutes to 100 default
+                                 / TechConfig.DEVICES.fridgeEfficiency)); //30 Minutes to 100 default
         if (efficiency >= 100) {
           efficiency = 100;
         }
@@ -384,8 +382,8 @@ public class TileFridge extends BaseTileInventory implements ITickable, IAmbient
       if (++serverUpdate % 40 == 0) {
         serverUpdate = 0;
         ModuleDevice.getPacketService()
-                .sendToAllAround(new SCPacketFridge(pos, efficiency), world.provider.getDimension(),
-                        pos, 20);
+                    .sendToAllAround(new SCPacketFridge(pos, efficiency), world.provider.getDimension(),
+                                     pos, 20);
       }
     }
   }

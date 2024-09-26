@@ -4,8 +4,7 @@
     {
       "type": "forge:ore_dict",
       "ore": "rockFlux"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "hammer"
     }

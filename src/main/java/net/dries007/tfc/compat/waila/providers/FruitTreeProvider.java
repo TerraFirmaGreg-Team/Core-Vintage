@@ -1,6 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.block.state.IBlockState;
@@ -8,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-
 
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
@@ -22,11 +22,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
-
 import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +31,21 @@ import java.util.List;
 
 public class FruitTreeProvider implements IWailaBlock {
 
+  private static void addInfo(IFruitTree tree, TETickCounter tile, float temperature, float rainfall, List<String> currentTooltip) {
+    if (tree.isValidForGrowth(temperature, rainfall)) {
+      currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growing").getFormattedText());
+      if (tile != null) {
+        long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+        // Don't show 100% since it still needs to check on randomTick to grow
+        float perc = Math.min(0.99F, hours / (tree.getGrowthTime() * (float) ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) * 100;
+        String growth = String.format("%d%%", Math.round(perc));
+        currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
+      }
+    } else {
+      currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
+    }
+  }
+
   @NotNull
   @Override
   public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
@@ -43,7 +53,7 @@ public class FruitTreeProvider implements IWailaBlock {
     IBlockState state = world.getBlockState(pos);
     if (state.getBlock() instanceof BlockFruitTreeLeaves block) {
       if (state.getValue(BlockFruitTreeLeaves.HARVESTABLE) && block.getTree()
-              .isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
+                                                                   .isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
         if (state.getValue(BlockFruitTreeLeaves.LEAF_STATE) != BlockFruitTreeLeaves.EnumLeafState.FRUIT) {
           var tile = TileUtils.getTile(world, pos, TETickCounter.class);
           addInfo(block.getTree(), tile, Climate.getActualTemp(world, pos), ProviderChunkData.getRainfall(world, pos), currentTooltip);
@@ -75,21 +85,6 @@ public class FruitTreeProvider implements IWailaBlock {
       addInfo(block.getTree(), tile, Climate.getActualTemp(world, pos), ProviderChunkData.getRainfall(world, pos), currentTooltip);
     }
     return currentTooltip;
-  }
-
-  private static void addInfo(IFruitTree tree, TETickCounter tile, float temperature, float rainfall, List<String> currentTooltip) {
-    if (tree.isValidForGrowth(temperature, rainfall)) {
-      currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growing").getFormattedText());
-      if (tile != null) {
-        long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-        // Don't show 100% since it still needs to check on randomTick to grow
-        float perc = Math.min(0.99F, hours / (tree.getGrowthTime() * (float) ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) * 100;
-        String growth = String.format("%d%%", Math.round(perc));
-        currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
-      }
-    } else {
-      currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
-    }
   }
 
   @NotNull

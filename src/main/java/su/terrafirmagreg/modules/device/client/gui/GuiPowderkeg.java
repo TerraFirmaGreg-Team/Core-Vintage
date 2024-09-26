@@ -17,7 +17,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import org.lwjgl.opengl.GL11;
 
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +29,7 @@ public class GuiPowderkeg extends BaseGuiContainerTile<TilePowderKeg> {
   private final String translationKey;
 
   public GuiPowderkeg(Container container, InventoryPlayer playerInv, TilePowderKeg tile,
-          IBlockState state) {
+                      IBlockState state) {
     super(container, playerInv, tile, BACKGROUND);
 
     this.translationKey = state.getBlock().getTranslationKey();
@@ -64,7 +63,7 @@ public class GuiPowderkeg extends BaseGuiContainerTile<TilePowderKeg> {
     if (tile.isSealed()) {
       // Draw over the input items, making them look unavailable
       IItemHandler handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-              null);
+                                                null);
       if (handler != null) {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         for (int slotId = 0; slotId < handler.getSlots(); slotId++) {

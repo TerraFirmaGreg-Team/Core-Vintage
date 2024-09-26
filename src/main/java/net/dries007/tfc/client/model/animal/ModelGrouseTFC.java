@@ -11,7 +11,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.entity.animal.EntityGrouseTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -122,7 +121,7 @@ public class ModelGrouseTFC extends ModelBase {
     tails3 = new ModelRenderer(this, 54, 22);
     tails3.setRotationPoint(-0.2F, 15.0F, 5.9F);
     tails3.addBox(-1.5F, -10.0F, 0.0F, 3, 10, 0, 0.0F);
-    setRotateAngle(tails3, -0.3490658503988659F, -0.06981317007977318F, -0.6981317007977318F);
+    setRotateAngle(tails3, -0.3490658503988659F, -0.06981317007977318F, -((float)Math.PI * 2F / 9F));
     tails1 = new ModelRenderer(this, 54, 22);
     tails1.setRotationPoint(-0.4F, 15.0F, 6.1F);
     tails1.addBox(-1.5F, -10.0F, 0.0F, 3, 10, 0, 0.0F);
@@ -134,7 +133,7 @@ public class ModelGrouseTFC extends ModelBase {
     tails7 = new ModelRenderer(this, 54, 22);
     tails7.setRotationPoint(0.2F, 15.0F, 5.9F);
     tails7.addBox(-1.5F, -10.0F, 0.0F, 3, 10, 0, 0.0F);
-    setRotateAngle(tails7, -0.3490658503988659F, 0.06981317007977318F, 0.6981317007977318F);
+    setRotateAngle(tails7, -0.3490658503988659F, 0.06981317007977318F, ((float)Math.PI * 2F / 9F));
 
     legR1 = new ModelRenderer(this, 5, 29);
     legR1.setRotationPoint(-1.5F, 21.0F, 0.0F);

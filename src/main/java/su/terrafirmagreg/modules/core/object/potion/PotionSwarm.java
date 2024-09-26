@@ -9,7 +9,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import java.util.Random;
 
 public class PotionSwarm extends BasePotion {
@@ -30,11 +29,11 @@ public class PotionSwarm extends BasePotion {
       double z = pos.getZ() + 0.5;
       for (int i = 0; i < 3 + rand.nextInt(4); i++) {
         world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + rand.nextFloat() - rand.nextFloat(),
-                y + rand.nextFloat(),
-                z + rand.nextFloat() - rand.nextFloat(),
-                0.5 * (rand.nextFloat() - rand.nextFloat()),
-                0.5 * (rand.nextFloat() - rand.nextFloat()),
-                0.5 * (rand.nextFloat() - rand.nextFloat()));
+                            y + rand.nextFloat(),
+                            z + rand.nextFloat() - rand.nextFloat(),
+                            0.5 * (rand.nextFloat() - rand.nextFloat()),
+                            0.5 * (rand.nextFloat() - rand.nextFloat()),
+                            0.5 * (rand.nextFloat() - rand.nextFloat()));
       }
     } else {
       if (!entity.isWet()) {

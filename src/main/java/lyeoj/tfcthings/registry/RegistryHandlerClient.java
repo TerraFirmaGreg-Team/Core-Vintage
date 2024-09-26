@@ -14,7 +14,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-
 import lyeoj.tfcthings.init.TFCThingsBlocks;
 import lyeoj.tfcthings.init.TFCThingsItems;
 import lyeoj.tfcthings.items.ItemTFCThingsMold;
@@ -42,12 +41,12 @@ public class RegistryHandlerClient {
     ItemTFCThingsMold item = ItemTFCThingsMold.get("prospectors_hammer_head");
     ModelBakery.registerItemVariants(item, new ModelResourceLocation(item.getRegistryName().toString() + "/empty"));
     ModelBakery.registerItemVariants(item, TFCRegistries.METALS.getValuesCollection()
-            .stream()
-            .filter(Metal.ItemType.PROPICK_HEAD::hasMold)
-            .map(x -> new ModelResourceLocation(item.getRegistryName()
-                    .toString() + "/" + x.getRegistryName()
-                    .getPath()))
-            .toArray(ModelResourceLocation[]::new));
+                                                               .stream()
+                                                               .filter(Metal.ItemType.PROPICK_HEAD::hasMold)
+                                                               .map(x -> new ModelResourceLocation(item.getRegistryName()
+                                                                                                       .toString() + "/" + x.getRegistryName()
+                                                                                                                            .getPath()))
+                                                               .toArray(ModelResourceLocation[]::new));
     ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 
       private final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName().toString() + "/empty");
@@ -60,8 +59,8 @@ public class RegistryHandlerClient {
           Metal metal = ((IMoldHandler) cap).getMetal();
           if (metal != null) {
             return new ModelResourceLocation(stack.getItem()
-                    .getRegistryName() + "/" + metal.getRegistryName()
-                    .getPath());
+                                                  .getRegistryName() + "/" + metal.getRegistryName()
+                                                                                  .getPath());
           }
         }
         return FALLBACK;

@@ -9,7 +9,6 @@ import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-
 import lombok.Getter;
 
 @Getter
@@ -28,13 +27,13 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
     this.settings = Settings.of(Material.WOOD);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .sound(SoundType.WOOD)
-            .hardness(0.5F)
-            .oreDict(variant)
-            .oreDict(variant, "wood")
-            .oreDict(variant, "wood", type);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .sound(SoundType.WOOD)
+      .hardness(0.5F)
+      .oreDict(variant)
+      .oreDict(variant, "wood")
+      .oreDict(variant, "wood", type);
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
   }

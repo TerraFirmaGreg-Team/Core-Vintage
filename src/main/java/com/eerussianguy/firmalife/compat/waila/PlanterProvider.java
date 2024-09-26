@@ -1,12 +1,13 @@
 package com.eerussianguy.firmalife.compat.waila;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-
 
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
@@ -27,7 +28,7 @@ public class PlanterProvider implements IWailaBlock {
   public List<String> getTooltip(World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
     List<String> currentTooltip = new ArrayList<>();
     IBlockState state = world.getBlockState(pos);
-    var tile = world.getTileEntity(pos);
+    var tile = TileUtils.getTile(world, pos);
     if (tile instanceof TEPlanter) {
       Block block = state.getBlock();
       if (block instanceof BlockQuadPlanter) {
@@ -39,12 +40,12 @@ public class PlanterProvider implements IWailaBlock {
             int curStage = info[i].getStage();
             if (maxStage == curStage) {
               currentTooltip.add(new TextComponentTranslation(recipe.getOutputItem()
-                      .getTranslationKey() + ".name").getFormattedText() + ": Mature");
+                                                                    .getTranslationKey() + ".name").getFormattedText() + ": Mature");
             } else {
               float curStagePercent = (float) curStage * 100 / maxStage;
               String growth = String.format("%d%%", Math.round(curStagePercent));
               currentTooltip.add(new TextComponentTranslation(recipe.getOutputItem()
-                      .getTranslationKey() + ".name").getFormattedText() + ": " + growth);
+                                                                    .getTranslationKey() + ".name").getFormattedText() + ": " + growth);
             }
           } else {
             currentTooltip.add("Empty");
@@ -58,12 +59,12 @@ public class PlanterProvider implements IWailaBlock {
           int curStage = info.getStage();
           if (maxStage == curStage) {
             currentTooltip.add(new TextComponentTranslation(recipe.getOutputItem()
-                    .getTranslationKey() + ".name").getFormattedText() + ": Mature");
+                                                                  .getTranslationKey() + ".name").getFormattedText() + ": Mature");
           } else {
             float curStagePercent = (float) curStage * 100 / maxStage;
             String growth = String.format("%d%%", Math.round(curStagePercent));
             currentTooltip.add(new TextComponentTranslation(recipe.getOutputItem()
-                    .getTranslationKey() + ".name").getFormattedText() + ": " + growth);
+                                                                  .getTranslationKey() + ".name").getFormattedText() + ": " + growth);
           }
         } else {
           currentTooltip.add("Empty");

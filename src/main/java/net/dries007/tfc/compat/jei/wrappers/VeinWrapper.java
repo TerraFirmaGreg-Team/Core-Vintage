@@ -10,7 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
-
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -30,18 +29,18 @@ public class VeinWrapper implements IRecipeWrapper {
   public VeinWrapper(VeinType vein) {
     this.vein = vein;
     rockBlocks = RockType.getTypes()
-            .stream()
-            .filter(vein::canSpawnIn)
-            .map(rock -> new ItemStack(BlocksRock.RAW.get(rock)))
-            .collect(Collectors.toList());
+                         .stream()
+                         .filter(vein::canSpawnIn)
+                         .map(rock -> new ItemStack(BlocksRock.RAW.get(rock)))
+                         .collect(Collectors.toList());
 
     if (this.vein.getOre() != null) {
       Ore ore = this.vein.getOre();
       // Add every permutation of BlockOreTFC for better readability (this means that it's gonna work for any ore block clicked for recipes)
       oreItems = RockType.getTypes()
-              .stream()
-              .map(rockType -> new ItemStack(this.vein.getOreState(rockType).getBlock()))
-              .collect(Collectors.toList());
+                         .stream()
+                         .map(rockType -> new ItemStack(this.vein.getOreState(rockType).getBlock()))
+                         .collect(Collectors.toList());
     } else {
       // Add custom ores
       IBlockState state = this.vein.getOreState(RockTypes.GRANITE);
@@ -99,7 +98,7 @@ public class VeinWrapper implements IRecipeWrapper {
     x = 33f;
     y += newLine;
     String rarityValue = String.format("%.1f", 100.0f /
-            vein.getRarity()); // Let's not forget that we can't format using I18n (since MC convert any %d and %f in lang entries to %s)
+                                               vein.getRarity()); // Let's not forget that we can't format using I18n (since MC convert any %d and %f in lang entries to %s)
     text = I18n.format("jei.tooltips.tfc.vein.rarity_value", rarityValue);
     x = x - minecraft.fontRenderer.getStringWidth(text) / 2.0f;
     minecraft.fontRenderer.drawString(text, x, y, 0xFFFFFF, false);

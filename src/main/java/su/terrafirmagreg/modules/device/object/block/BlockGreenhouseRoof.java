@@ -15,7 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
@@ -27,18 +26,18 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
 
   public static final AxisAlignedBB BASE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
   public static final AxisAlignedBB ROOF_SHAPE_EAST = new AxisAlignedBB(0.5D, 0.5D, 0.0D, 1.0D,
-          1.0D, 0.5D).union(BASE);
+                                                                        1.0D, 0.5D).union(BASE);
   public static final AxisAlignedBB ROOF_SHAPE_WEST = new AxisAlignedBB(0.0D, 0.5D, 0.5D, 1.0D,
-          1.0D, 1.0D).union(BASE);
+                                                                        1.0D, 1.0D).union(BASE);
   public static final AxisAlignedBB ROOF_SHAPE_SOUTH = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 0.5D,
-          1.0D, 1.0D).union(BASE);
+                                                                         1.0D, 1.0D).union(BASE);
   public static final AxisAlignedBB ROOF_SHAPE_NORTH = new AxisAlignedBB(0.5D, 0.5D, 0.0D, 1.0D,
-          1.0D, 1.0D).union(BASE);
+                                                                         1.0D, 1.0D).union(BASE);
 
   public BlockGreenhouseRoof() {
 
     getSettings()
-            .registryKey("device/greenhouse/roof");
+      .registryKey("device/greenhouse/roof");
   }
 
   @Override
@@ -56,13 +55,13 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     //do nothing, for now
   }
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-          EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+                                  EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     if (!world.isRemote) {
       ItemStack held = player.getHeldItem(hand);
       if (OreDictionaryHelper.doesStackMatchOre(held, "greenhouse")) {
@@ -90,7 +89,7 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
 
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-          float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+                                          float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
   }
 
@@ -101,14 +100,14 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
 
   @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-          EnumFacing face) {
+                                          EnumFacing face) {
     return (state.getValue(GLASS) && (face == EnumFacing.DOWN || face == state.getValue(FACING)
-            .getOpposite())) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+                                                                              .getOpposite())) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 
   @Override
   public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-          BlockPos pos) {
+                                               BlockPos pos) {
     return blockState.getValue(TOP) ? BASE : FULL_BLOCK_AABB;
   }
 }

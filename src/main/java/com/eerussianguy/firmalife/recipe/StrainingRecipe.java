@@ -4,7 +4,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
@@ -34,10 +33,10 @@ public class StrainingRecipe extends IForgeRegistryEntry.Impl<StrainingRecipe> {
   @Nullable
   public static StrainingRecipe get(FluidStack fluidStack) {
     return TFCRegistries.STRAINING.getValuesCollection()
-            .stream()
-            .filter(x -> x.isValidInput(fluidStack))
-            .findFirst()
-            .orElse(null);
+                                  .stream()
+                                  .filter(x -> x.isValidInput(fluidStack))
+                                  .findFirst()
+                                  .orElse(null);
   }
 
   private boolean isValidInput(FluidStack inputFluid) {

@@ -1,14 +1,13 @@
 package se.gory_moon.horsepower.client.renderer;
 
+import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
+
 import net.minecraft.client.renderer.GlStateManager;
 
-
-import se.gory_moon.horsepower.tileentity.TileManualChopper;
-
-public class TESRChoppingBlock extends TESRHPBase<TileManualChopper> {
+public class TESRChoppingBlock extends TESRHPBase<TileChopperManual> {
 
   @Override
-  public void render(TileManualChopper tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+  public void render(TileChopperManual tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     GlStateManager.pushMatrix();
     GlStateManager.translate(x, y, z);
     if (!tile.getStackInSlot(0).isEmpty()) {

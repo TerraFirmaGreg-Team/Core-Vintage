@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 
-
 import tfctech.client.TechGuiHandler;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,16 +23,16 @@ public class GuiButtonSetter extends GuiButton {
       mc.getTextureManager().bindTexture(TechGuiHandler.GUI_ELEMENTS);
       GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
       this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
-              && mouseY < this.y + this.height;
+                     && mouseY < this.y + this.height;
       int i = this.getHoverState(this.hovered);
       GlStateManager.enableBlend();
       GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
-              GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-              GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                                          GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+                                          GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
       GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
-              GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+                               GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
       this.drawTexturedModalRect(this.x, this.y, isPlus ? 14 : 0, 60 + i * 14, this.width,
-              this.height);
+                                 this.height);
       this.mouseDragged(mc, mouseX, mouseY);
     }
   }

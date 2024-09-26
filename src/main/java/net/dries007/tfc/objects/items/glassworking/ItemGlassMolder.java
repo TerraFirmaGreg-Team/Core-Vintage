@@ -22,7 +22,6 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import com.google.common.collect.Sets;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
@@ -147,7 +146,7 @@ public class ItemGlassMolder extends ItemMisc {
       int value = tank.fill(fluidStack, doFill);
       if (doFill && value > 0) {
         this.setTemperature(fluidStack.getFluid()
-                .getTemperature()); // giving 273 heat so player has time to craft.
+                                      .getTemperature()); // giving 273 heat so player has time to craft.
       }
       return value;
     }

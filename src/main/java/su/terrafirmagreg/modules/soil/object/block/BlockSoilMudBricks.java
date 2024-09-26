@@ -11,7 +11,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 
-
 import java.util.Random;
 
 import static su.terrafirmagreg.data.Properties.MOSSY;
@@ -21,12 +20,12 @@ public class BlockSoilMudBricks extends BlockSoilMud {
   public BlockSoilMudBricks(SoilBlockVariant variant, SoilType type) {
     super(variant, type);
     getSettings()
-            .renderLayer(BlockRenderLayer.CUTOUT)
-            .sound(SoundType.STONE)
-            .harvestLevel(ToolClasses.PICKAXE, 0);
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .sound(SoundType.STONE)
+      .harvestLevel(ToolClasses.PICKAXE, 0);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(MOSSY, false));
+                              .withProperty(MOSSY, false));
   }
 
   @Override

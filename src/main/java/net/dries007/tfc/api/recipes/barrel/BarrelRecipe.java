@@ -10,7 +10,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -36,11 +35,11 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
    * @param inputStack  item ingredients used to check if it is valid on barrel seal
    * @param outputFluid the output fluid, when this recipe is completed
    * @param outputStack the output stack, when this recipe is completed
-   * @param duration    the duration, in ticks, for this recipe to complete. 0 = Instant while negative means this recipe is infinite (for custom recipes that wait
-   *                    for unseal)
+   * @param duration    the duration, in ticks, for this recipe to complete. 0 = Instant while negative means this recipe is infinite (for custom recipes that
+   *                    wait for unseal)
    */
   public BarrelRecipe(@NotNull IIngredient<FluidStack> inputFluid, @NotNull IIngredient<ItemStack> inputStack, @Nullable FluidStack outputFluid,
-          @NotNull ItemStack outputStack, int duration) {
+                      @NotNull ItemStack outputStack, int duration) {
     this.inputStack = inputStack;
     this.inputFluid = inputFluid;
     this.outputFluid = outputFluid;
@@ -51,10 +50,30 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
   @Nullable
   public static BarrelRecipe get(ItemStack stack, FluidStack fluidStack) {
     return TFCRegistries.BARREL.getValuesCollection()
-            .stream()
-            .filter(x -> x.isValidInput(fluidStack, stack) && x.getDuration() != 0)
-            .findFirst()
-            .orElse(null);
+                               .stream()
+                               .filter(x -> x.isValidInput(fluidStack, stack) && x.getDuration() != 0)
+                               .findFirst()
+                               .orElse(null);
+  }
+
+  @Nullable
+  public static BarrelRecipe getInstant(ItemStack stack, FluidStack fluidStack) {
+    return TFCRegistries.BARREL.getValuesCollection()
+                               .stream()
+                               .filter(x -> x.isValidInput(fluidStack, stack) && x.getDuration() == 0)
+                               .findFirst()
+                               .orElse(null);
+  }
+
+  /**
+   * Checks if a fluidstack is an ingredient for any recipe Used as a complement to barrel's whitelist
+   */
+  public static boolean isBarrelFluid(FluidStack fluidStack) {
+    return TFCRegistries.BARREL.getValuesCollection()
+                               .stream()
+                               .filter(x -> x.inputFluid.testIgnoreCount(fluidStack))
+                               .findFirst()
+                               .orElse(null) != null;
   }
 
   public boolean isValidInput(@Nullable FluidStack inputFluid, ItemStack inputStack) {
@@ -63,26 +82,6 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
 
   public int getDuration() {
     return duration;
-  }
-
-  @Nullable
-  public static BarrelRecipe getInstant(ItemStack stack, FluidStack fluidStack) {
-    return TFCRegistries.BARREL.getValuesCollection()
-            .stream()
-            .filter(x -> x.isValidInput(fluidStack, stack) && x.getDuration() == 0)
-            .findFirst()
-            .orElse(null);
-  }
-
-  /**
-   * Checks if a fluidstack is an ingredient for any recipe Used as a complement to barrel's whitelist
-   */
-  public static boolean isBarrelFluid(FluidStack fluidStack) {
-    return TFCRegistries.BARREL.getValuesCollection()
-            .stream()
-            .filter(x -> x.inputFluid.testIgnoreCount(fluidStack))
-            .findFirst()
-            .orElse(null) != null;
   }
 
   public boolean isValidInputInstant(ItemStack inputStack, @Nullable FluidStack inputFluid) {
@@ -178,8 +177,8 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
   }
 
   /**
-   * Called by TEBarrel when the barrel is unsealed mid operation (the recipe didn't finish) Use this if you want to do something to the input (like remove a food
-   * trait, or consume part of it) when the recipe is "broken"
+   * Called by TEBarrel when the barrel is unsealed mid operation (the recipe didn't finish) Use this if you want to do something to the input (like remove a
+   * food trait, or consume part of it) when the recipe is "broken"
    *
    * @param inputFluid the fluid that was in the barrel when the recipe "broke"
    * @param inputStack the stack that was in the barrel when the recipe "broke"
@@ -191,8 +190,8 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
   }
 
   /**
-   * Called by TEBarrel when the barrel is unsealed mid operation (the recipe didn't finish) Use this if you want to do something to the input (like remove a food
-   * trait, or consume part of it) when the recipe is "broken"
+   * Called by TEBarrel when the barrel is unsealed mid operation (the recipe didn't finish) Use this if you want to do something to the input (like remove a
+   * food trait, or consume part of it) when the recipe is "broken"
    *
    * @param inputFluid the fluid that was in the barrel when the recipe "broke"
    * @param inputStack the stack that was in the barrel when the recipe "broke"

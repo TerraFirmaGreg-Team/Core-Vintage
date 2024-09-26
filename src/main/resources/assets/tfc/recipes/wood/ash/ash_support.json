@@ -1,8 +1,7 @@
 {
   "type": "tfc:damage_item_shaped",
   "pattern": [
-    "XB",
-    " B"
+    "XB", " B"
   ],
   "key": {
     "X": {

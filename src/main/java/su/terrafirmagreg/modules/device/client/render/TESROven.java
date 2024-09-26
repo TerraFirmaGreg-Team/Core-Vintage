@@ -14,7 +14,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import static su.terrafirmagreg.data.Properties.CURED;
 import static su.terrafirmagreg.data.Properties.LIT;
 import static su.terrafirmagreg.modules.device.object.tile.TileOven.SLOT_FUEL_1;
@@ -26,7 +25,7 @@ public class TESROven extends TileEntitySpecialRenderer<TileOven> {
 
   @Override
   public void render(TileOven tile, double x, double y, double z, float partialTicks,
-          int destroyStage, float alpha) {
+                     int destroyStage, float alpha) {
     super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
     if (tile.hasWorld()) {

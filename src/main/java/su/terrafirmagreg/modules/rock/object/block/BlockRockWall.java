@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -36,12 +35,12 @@ public class BlockRockWall extends BaseBlockWall implements IRockBlock {
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .hardness(variant.getHardness(type))
-            .sound(SoundType.STONE)
-            .renderLayer(BlockRenderLayer.CUTOUT)
-            .oreDict("wall")
-            .oreDict("wall", "stone");
+      .registryKey(variant.getRegistryKey(type))
+      .hardness(variant.getHardness(type))
+      .sound(SoundType.STONE)
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .oreDict("wall")
+      .oreDict("wall", "stone");
 
     setHarvestLevel(ToolClasses.PICKAXE, 0);
   }
@@ -49,10 +48,10 @@ public class BlockRockWall extends BaseBlockWall implements IRockBlock {
   @Override
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
-          ITooltipFlag flagIn) {
+                             ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 
     tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": "
-            + type.getCategory().getLocalizedName());
+                + type.getCategory().getLocalizedName());
   }
 }

@@ -28,7 +28,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 
 import org.jetbrains.annotations.NotNull;
@@ -140,7 +139,7 @@ public class BlockPlacedItemFlat extends Block {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     var tile = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
     if (tile != null && !worldIn.isRemote) {
       ItemStack stack = tile.getStack();
@@ -181,7 +180,7 @@ public class BlockPlacedItemFlat extends Block {
 
   @Override
   public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate,
-          EntityLivingBase entity, int numberOfParticles) {
+                                   EntityLivingBase entity, int numberOfParticles) {
     return true;
   }
 

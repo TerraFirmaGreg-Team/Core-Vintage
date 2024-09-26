@@ -30,7 +30,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import com.buuz135.hotornot.HotGuiHandler;
 import com.buuz135.hotornot.object.recipe.UnMoldJawPiece;
 import net.dries007.tfc.api.capability.IMoldHandler;
@@ -113,7 +112,7 @@ public class ItemMetalTongsJawMold extends ItemPottery {
     final Metal metal = ((IMoldHandler) capFluidHandler).getMetal();
     //noinspection DataFlowIssue
     return metal != null ? super.getTranslationKey(stack) + "." + metal.getRegistryName()
-            .getPath() : super.getTranslationKey(stack);
+                                                                       .getPath() : super.getTranslationKey(stack);
   }
 
   @Nullable
@@ -198,7 +197,7 @@ public class ItemMetalTongsJawMold extends ItemPottery {
       final Metal metal = getMetal();
       if (metal != null) {
         String desc = TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units",
-                getAmount());
+                                                                                                               getAmount());
         if (isMolten()) {
           desc += I18n.format("tfc.tooltip.liquid");
         } else {

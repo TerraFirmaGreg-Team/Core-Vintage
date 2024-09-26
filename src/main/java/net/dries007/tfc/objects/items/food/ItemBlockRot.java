@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -33,7 +32,7 @@ public class ItemBlockRot extends ItemBlockTFC {
 
   @Override
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                    float hitZ) {
     long foodCreationDate = Long.MIN_VALUE;
     if (!worldIn.isRemote) {
       ItemStack stack = player.getHeldItem(hand);
@@ -42,11 +41,11 @@ public class ItemBlockRot extends ItemBlockTFC {
     }
     EnumActionResult result = super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
     if (!worldIn.isRemote && result == EnumActionResult.SUCCESS) {
-      TETickCounter te = TileUtils.getTile(worldIn, pos.offset(facing), TETickCounter.class);
-      if (te != null) {
+      var tile = TileUtils.getTile(worldIn, pos.offset(facing), TETickCounter.class);
+      if (tile != null) {
         long currentTime = Calendar.PLAYER_TIME.getTicks();
-        te.resetCounter(); //te counter is at currentTime
-        te.reduceCounter(foodCreationDate - currentTime); //teCounter is now at foodCrationDate
+        tile.resetCounter(); //tile counter is at currentTime
+        tile.reduceCounter(foodCreationDate - currentTime); //teCounter is now at foodCrationDate
       }
     }
     return result;

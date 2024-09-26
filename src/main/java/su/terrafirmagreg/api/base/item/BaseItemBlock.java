@@ -10,7 +10,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.IRarity;
 
-
 import lombok.Getter;
 
 @Getter
@@ -56,9 +55,9 @@ public class BaseItemBlock extends ItemBlock implements ICapabilitySize {
   @Override
   public String getTranslationKey(ItemStack stack) {
     if (block instanceof IProviderMultiItemBlock multiItemBlock
-            && multiItemBlock.getTranslationKey(stack.getMetadata()) != null) {
+        && multiItemBlock.getTranslationKey(stack.getMetadata()) != null) {
       return super.getTranslationKey(stack) + "." + multiItemBlock.getTranslationKey(
-              stack.getMetadata());
+        stack.getMetadata());
     } else {
       return super.getTranslationKey(stack);
     }

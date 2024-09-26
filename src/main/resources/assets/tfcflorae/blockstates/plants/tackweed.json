@@ -8,22 +8,18 @@
         {
           "model": "tfc:plants/tackweed_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_1",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_2",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_3",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "east": "true"
       },
@@ -33,28 +29,24 @@
           "weight": 1,
           "x": 270,
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_1",
           "weight": 1,
           "x": 270,
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_2",
           "weight": 1,
           "x": 270,
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_3",
           "weight": 1,
           "x": 270,
           "y": 90
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "north": "true"
       },
@@ -63,25 +55,21 @@
           "model": "tfc:plants/tackweed_0",
           "weight": 1,
           "x": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_1",
           "weight": 1,
           "x": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_2",
           "weight": 1,
           "x": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_3",
           "weight": 1,
           "x": 270
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "south": "true"
       },
@@ -91,28 +79,24 @@
           "weight": 1,
           "x": 270,
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_1",
           "weight": 1,
           "x": 270,
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_2",
           "weight": 1,
           "x": 270,
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_3",
           "weight": 1,
           "x": 270,
           "y": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "up": "true"
       },
@@ -121,25 +105,21 @@
           "model": "tfc:plants/tackweed_0",
           "weight": 1,
           "x": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_1",
           "weight": 1,
           "x": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_2",
           "weight": 1,
           "x": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_3",
           "weight": 1,
           "x": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "west": "true"
       },
@@ -149,20 +129,17 @@
           "weight": 1,
           "x": 270,
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_1",
           "weight": 1,
           "x": 270,
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_2",
           "weight": 1,
           "x": 270,
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/tackweed_3",
           "weight": 1,
           "x": 270,

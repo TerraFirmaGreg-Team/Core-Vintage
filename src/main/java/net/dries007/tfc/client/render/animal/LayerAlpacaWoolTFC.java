@@ -6,7 +6,6 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.client.model.animal.ModelAlpacaWoolTFC;
 import net.dries007.tfc.objects.entity.animal.EntityAlpacaTFC;
 
@@ -23,7 +22,7 @@ public class LayerAlpacaWoolTFC implements LayerRenderer<EntityAlpacaTFC> {
 
   @Override
   public void doRenderLayer(EntityAlpacaTFC alpaca, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
-          float headPitch, float scale) {
+                            float headPitch, float scale) {
     if (alpaca.hasWool() && !alpaca.isInvisible()) {
       this.alpacaRenderer.bindTexture(this.alpacaRenderer.getEntityTexture(alpaca));
 

@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:wood/planks/pine"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "saw"
     }

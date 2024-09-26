@@ -9,98 +9,79 @@
           "model": "tfc:plants/twigs_0",
           "weight": 1,
           "y": 0
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_0",
           "weight": 1,
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_0",
           "weight": 1,
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_0",
           "weight": 1,
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_1",
           "weight": 1,
           "y": 0
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_1",
           "weight": 1,
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_1",
           "weight": 1,
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_1",
           "weight": 1,
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_2",
           "weight": 1,
           "y": 0
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_2",
           "weight": 1,
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_2",
           "weight": 1,
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_2",
           "weight": 1,
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_3",
           "weight": 1,
           "y": 0
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_3",
           "weight": 1,
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_3",
           "weight": 1,
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_3",
           "weight": 1,
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_4",
           "weight": 1,
           "y": 0
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_4",
           "weight": 1,
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_4",
           "weight": 1,
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/twigs_4",
           "weight": 1,
           "y": 270

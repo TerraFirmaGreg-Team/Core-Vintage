@@ -10,7 +10,7 @@ public class BlockDebug extends BaseBlock {
     super(Settings.of(Material.SPONGE));
 
     getSettings()
-            .registryKey("core/debug");
+      .registryKey("core/debug");
   }
 
 }

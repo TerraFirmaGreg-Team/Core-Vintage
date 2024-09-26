@@ -8,7 +8,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 
@@ -41,8 +40,8 @@ public interface ITreeGenerator {
     for (int x = -radius; x <= radius; x++) {
       for (int z = -radius; z <= radius; z++) {
         if ((x == 0 && z == 0) ||
-                world.getBlockState(pos.add(x, 0, z)).getMaterial().isReplaceable() ||
-                ((x > 1 || z > 1) && world.getBlockState(pos.add(x, 1, z)).getMaterial().isReplaceable())) {
+            world.getBlockState(pos.add(x, 0, z)).getMaterial().isReplaceable() ||
+            ((x > 1 || z > 1) && world.getBlockState(pos.add(x, 1, z)).getMaterial().isReplaceable())) {
           continue;
         }
         return false;
@@ -65,6 +64,6 @@ public interface ITreeGenerator {
     // Check the position for liquids, etc.
     IBlockState stateAt = world.getBlockState(pos);
     return !stateAt.getMaterial().isLiquid() && (stateAt.getMaterial()
-            .isReplaceable() || stateAt.getBlock() instanceof BlockSaplingTFC);
+                                                        .isReplaceable() || stateAt.getBlock() instanceof BlockSaplingTFC);
   }
 }

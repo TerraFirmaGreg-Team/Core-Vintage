@@ -11,7 +11,6 @@ import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 
-
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
@@ -33,7 +32,7 @@ public class ApplyRequiredSkill extends LootFunction {
   private final float rarity;
 
   private ApplyRequiredSkill(LootCondition[] conditionsIn,
-          SkillType<? extends SimpleSkill> skillType, SkillTier tier, float rarity) {
+                             SkillType<? extends SimpleSkill> skillType, SkillTier tier, float rarity) {
     super(conditionsIn);
     this.skillType = skillType;
     this.tier = tier;
@@ -68,7 +67,7 @@ public class ApplyRequiredSkill extends LootFunction {
 
     @Override
     public void serialize(JsonObject object, ApplyRequiredSkill functionClazz,
-            JsonSerializationContext serializationContext) {
+                          JsonSerializationContext serializationContext) {
       object.add("skill", serializationContext.serialize(functionClazz.skillType.getName()));
       object.add("tier", serializationContext.serialize(functionClazz.tier));
       object.add("rarity", serializationContext.serialize(functionClazz.rarity));
@@ -76,8 +75,8 @@ public class ApplyRequiredSkill extends LootFunction {
 
     @Override
     public ApplyRequiredSkill deserialize(JsonObject object,
-            JsonDeserializationContext deserializationContext,
-            LootCondition[] conditionsIn) {
+                                          JsonDeserializationContext deserializationContext,
+                                          LootCondition[] conditionsIn) {
       String skillName = JsonUtils.getString(object, "skill");
       SkillType<? extends SimpleSkill> skillType = SkillType.get(skillName, SimpleSkill.class);
       if (skillType == null) {

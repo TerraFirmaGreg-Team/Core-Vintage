@@ -21,7 +21,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.render.UnlistedCropProperty;
 import mcp.MethodsReturnNonnullByDefault;
@@ -40,10 +39,10 @@ public class BlockQuadPlanter extends BlockLargePlanter implements IHighlightHan
   public static final UnlistedCropProperty CROP_3 = new UnlistedCropProperty(3);
   public static final UnlistedCropProperty CROP_4 = new UnlistedCropProperty(4);
   private static final AxisAlignedBB[] HITBOXES = new AxisAlignedBB[]{
-          new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.5D, 0.375D, 0.5D),// < <
-          new AxisAlignedBB(0.5D, 0.0D, 0.5D, 1.0D, 0.375D, 1.0D),// > >
-          new AxisAlignedBB(0.5D, 0.0D, 0.0D, 1.0D, 0.375D, 0.5D),// > <
-          new AxisAlignedBB(0.0D, 0.0D, 0.5D, 0.5D, 0.375D, 1.0D) // < >
+    new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.5D, 0.375D, 0.5D),// < <
+    new AxisAlignedBB(0.5D, 0.0D, 0.5D, 1.0D, 0.375D, 1.0D),// > >
+    new AxisAlignedBB(0.5D, 0.0D, 0.0D, 1.0D, 0.375D, 0.5D),// > <
+    new AxisAlignedBB(0.0D, 0.0D, 0.5D, 0.5D, 0.375D, 1.0D) // < >
   };
 
   public BlockQuadPlanter() {
@@ -64,8 +63,8 @@ public class BlockQuadPlanter extends BlockLargePlanter implements IHighlightHan
     int lookingSlot = getSlotForHit(rayTraceResult.hitVec.x - pos.getX(), rayTraceResult.hitVec.z - pos.getZ());
     for (int i = 0; i < 4; i++) {
       IHighlightHandler.drawBox(HITBOXES[i].offset(pos)
-              .offset(-dx, -dy, -dz)
-              .grow(0.002D), 1.0F, lookingSlot == i ? 1.0F : 0, 0, 0, 0.4F);
+                                           .offset(-dx, -dy, -dz)
+                                           .grow(0.002D), 1.0F, lookingSlot == i ? 1.0F : 0, 0, 0, 0.4F);
     }
     return true;
   }
@@ -94,7 +93,7 @@ public class BlockQuadPlanter extends BlockLargePlanter implements IHighlightHan
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-          float hitY, float hitZ) {
+                                  float hitY, float hitZ) {
     if (!world.isRemote) {
       ItemStack held = player.getHeldItem(hand);
       int slot = getSlotForHit(hitX, hitZ);
@@ -128,9 +127,9 @@ public class BlockQuadPlanter extends BlockLargePlanter implements IHighlightHan
     if (state instanceof IExtendedBlockState extension) {
       PlanterRecipe.PlantInfo[] plants = getCrops(world, pos);
       extension = extension.withProperty(CROP_1, plants[0])
-              .withProperty(CROP_2, plants[1])
-              .withProperty(CROP_3, plants[2])
-              .withProperty(CROP_4, plants[3]);
+                           .withProperty(CROP_2, plants[1])
+                           .withProperty(CROP_3, plants[2])
+                           .withProperty(CROP_4, plants[3]);
       return extension;
     }
     return state;

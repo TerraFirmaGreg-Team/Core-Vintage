@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:wood/log/willow"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "saw"
     }

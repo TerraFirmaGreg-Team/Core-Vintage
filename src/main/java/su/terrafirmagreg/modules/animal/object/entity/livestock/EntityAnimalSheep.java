@@ -39,7 +39,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.IShearable;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -59,15 +58,15 @@ import static su.terrafirmagreg.data.MathConstants.RNG;
 public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable, ILivestock {
 
   private static final DataParameter<Integer> DYE_COLOR = EntityDataManager.createKey(
-          EntityAnimalSheep.class, DataSerializers.VARINT);
+    EntityAnimalSheep.class, DataSerializers.VARINT);
   private static final DataParameter<Long> SHEARED = EntityDataManager.createKey(
-          EntityAnimalSheep.class, DataSerializers.LONG);
+    EntityAnimalSheep.class, DataSerializers.LONG);
 
   @SuppressWarnings("unused")
   public EntityAnimalSheep(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-            getRandomGrowth(ConfigAnimal.ENTITIES.SHEEP.adulthood, ConfigAnimal.ENTITIES.SHEEP.elder),
-            EntitySheep.getRandomSheepColor(RNG));
+         getRandomGrowth(ConfigAnimal.ENTITIES.SHEEP.adulthood, ConfigAnimal.ENTITIES.SHEEP.elder),
+         EntitySheep.getRandomSheepColor(RNG));
   }
 
   public EntityAnimalSheep(World worldIn, Gender gender, int birthDay, EnumDyeColor dye) {
@@ -79,10 +78,10 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-          float floraDiversity) {
+                            float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.PLAINS)) {
+        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
       return ConfigAnimal.ENTITIES.SHEEP.rarity;
     }
     return 0;
@@ -120,10 +119,10 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
     int numberOfChildren = ConfigAnimal.ENTITIES.SHEEP.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalSheep baby = new EntityAnimalSheep(world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
+                                                     (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(
-              getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
+        getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
       world.spawnEntity(baby);
     }
   }
@@ -178,8 +177,8 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
           TextComponentTranslation tooltip = getTooltip();
           if (tooltip != null) {
             ModuleAnimal.getPacketService().sendTo(
-                    new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
-                    (EntityPlayerMP) player);
+              new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
+              (EntityPlayerMP) player);
           }
         }
       }
@@ -190,8 +189,8 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
           TextComponentTranslation tooltip = getTooltip();
           if (tooltip != null) {
             ModuleAnimal.getPacketService().sendTo(
-                    new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
-                    (EntityPlayerMP) player);
+              new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
+              (EntityPlayerMP) player);
           }
         }
       }
@@ -247,20 +246,20 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
   @Override
   public long getProductsCooldown() {
     return Math.max(0,
-            ConfigAnimal.ENTITIES.SHEEP.woolTicks + getShearedTick() - Calendar.PLAYER_TIME.getTicks());
+                    ConfigAnimal.ENTITIES.SHEEP.woolTicks + getShearedTick() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override
   public @Nullable TextComponentTranslation getTooltip() {
     if (getAge() == Age.CHILD) {
       return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.young"),
-              getAnimalName());
+                                          getAnimalName());
     } else if (getFamiliarity() <= 0.15f) {
       return new TextComponentTranslation(
-              ModUtils.localize("tooltip", "animal.product.low_familiarity"), getAnimalName());
+        ModUtils.localize("tooltip", "animal.product.low_familiarity"), getAnimalName());
     } else if (!hasWool()) {
       return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.no_wool"),
-              getAnimalName());
+                                          getAnimalName());
     }
     return null;
   }
@@ -273,7 +272,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
   @NotNull
   @Override
   public List<ItemStack> onSheared(@NotNull ItemStack item, IBlockAccess world, BlockPos pos,
-          int fortune) {
+                                   int fortune) {
     setProductsCooldown();
     List<ItemStack> products = getProducts();
     // Fortune makes this less random and more towards the maximum (3) amount.

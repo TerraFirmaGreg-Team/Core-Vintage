@@ -20,7 +20,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -102,7 +101,7 @@ public abstract class BaseBlockFalling extends BlockFalling implements IBlockSet
   @Override
   public String getTranslationKey() {
     return this.settings.getTranslationKey() == null ? super.getTranslationKey()
-            : "tile." + this.settings.getTranslationKey();
+                                                     : "tile." + this.settings.getTranslationKey();
   }
 
   @Override
@@ -112,7 +111,7 @@ public abstract class BaseBlockFalling extends BlockFalling implements IBlockSet
 
   @Override
   public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos,
-          @Nullable Entity entity) {
+                               @Nullable Entity entity) {
     return this.settings.getSlipperiness().apply(state, world, pos);
   }
 

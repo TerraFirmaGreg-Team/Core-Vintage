@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.device.object.recipe.quern;
 
 import net.minecraft.item.ItemStack;
 
-
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.Nullable;
@@ -19,9 +18,9 @@ public class QuernRecipeManager implements IQuernRecipeManager {
   @Nullable
   public static IQuernRecipe findMatchingRecipe(ItemStack item) {
     return recipes.stream()
-            .filter(x -> x.isValidInput(item))
-            .findFirst()
-            .orElse(null);
+                  .filter(x -> x.isValidInput(item))
+                  .findFirst()
+                  .orElse(null);
   }
 
   @Override

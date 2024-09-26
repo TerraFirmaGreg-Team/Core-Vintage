@@ -14,7 +14,6 @@ import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-
 import tfcflorae.client.GuiHandler;
 import tfcflorae.proxy.CommonProxy;
 
@@ -27,9 +26,9 @@ public class TFCFlorae {
 
   public static final String NAME = "TFC Florae";
   public static final String DEPENDENCIES = "after:tfc;"
-          + "after:firmalife;"
-          + "after:tfcelementia;"
-          + "after:tfc_ph_compat;";
+                                            + "after:firmalife;"
+                                            + "after:tfcelementia;"
+                                            + "after:tfc_ph_compat;";
   public static final LoggingHelper LOGGER = LoggingHelper.of(MODID_TFCF);
   @Mod.Instance(MODID_TFCF)
   public static TFCFlorae instance;

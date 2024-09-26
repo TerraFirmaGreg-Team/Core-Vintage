@@ -12,24 +12,24 @@ public final class PacketsDevice {
 
   public static void onRegister(IPacketRegistry registry) {
     registry.register(
-            CSPacketFreezeDryer.class,
-            CSPacketFreezeDryer.class,
-            Side.SERVER
+      CSPacketFreezeDryer.class,
+      CSPacketFreezeDryer.class,
+      Side.SERVER
     );
     registry.register(
-            SCPacketFridge.class,
-            SCPacketFridge.class,
-            Side.CLIENT
+      SCPacketFridge.class,
+      SCPacketFridge.class,
+      Side.CLIENT
     );
     registry.register(
-            SCPacketLatex.class,
-            SCPacketLatex.class,
-            Side.CLIENT
+      SCPacketLatex.class,
+      SCPacketLatex.class,
+      Side.CLIENT
     );
     registry.register(
-            SCPacketTileEntity.class,
-            SCPacketTileEntity.class,
-            Side.CLIENT
+      SCPacketTileEntity.class,
+      SCPacketTileEntity.class,
+      Side.CLIENT
     );
   }
 }

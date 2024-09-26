@@ -6,7 +6,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public interface ITallPlant {

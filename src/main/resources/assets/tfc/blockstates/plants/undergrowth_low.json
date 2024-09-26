@@ -7,24 +7,21 @@
       "apply": {
         "model": "tfc:plants/undergrowth_low_shortest"
       }
-    },
-    {
+    }, {
       "when": {
         "age": "1"
       },
       "apply": {
         "model": "tfc:plants/undergrowth_low_shorter"
       }
-    },
-    {
+    }, {
       "when": {
         "age": "2"
       },
       "apply": {
         "model": "tfc:plants/undergrowth_low_short"
       }
-    },
-    {
+    }, {
       "when": {
         "age": "3"
       },

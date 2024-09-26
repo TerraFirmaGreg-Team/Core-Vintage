@@ -14,7 +14,6 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -35,8 +34,8 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings 
     this.settings = settings;
 
     getSettings()
-            .ignoresProperties(VARIANT)
-            .useNeighborBrightness();
+      .ignoresProperties(VARIANT)
+      .useNeighborBrightness();
 
     var state = getBlockState().getBaseState();
     if (!isDouble()) {
@@ -73,7 +72,7 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings 
 
     if (!this.isDouble()) {
       iblockstate = iblockstate.withProperty(BlockSlab.HALF,
-              (meta & 8) == 0 ? EnumBlockHalf.BOTTOM : EnumBlockHalf.TOP);
+                                             (meta & 8) == 0 ? EnumBlockHalf.BOTTOM : EnumBlockHalf.TOP);
     }
 
     return iblockstate;

@@ -9,7 +9,6 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
 
-
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketCalendarUpdate;
@@ -26,13 +25,14 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
   public static final Calendar INSTANCE = new Calendar();
 
   /**
-   * Player time. Advances when player sleeps, stops when no players are online NOT synced with the daylight cycle. Used for almost everything that tracks time.
+   * Player time. Advances when player sleeps, stops when no players are online NOT synced with the daylight cycle. Used for almost everything that tracks
+   * time.
    */
   public static final ICalendar PLAYER_TIME = () -> Calendar.INSTANCE.playerTime;
 
   /**
-   * Calendar time. Advances when player sleeps, stops when doDaylightCycle is false Synced with the daylight cycle Players can see this via the calendar GUI tab
-   * Calendar Time 0 = Midnight, January 1, 1000
+   * Calendar time. Advances when player sleeps, stops when doDaylightCycle is false Synced with the daylight cycle Players can see this via the calendar GUI
+   * tab Calendar Time 0 = Midnight, January 1, 1000
    */
   public static final ICalendarFormatted CALENDAR_TIME = new ICalendarFormatted() {
 
@@ -93,8 +93,8 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
   }
 
   /**
-   * This runs a sequence of code, but first will set the calendar and player time by an offset Useful if we need to run code that technically needs to happen at a
-   * different calendar time The offsets are removed once the transaction is complete
+   * This runs a sequence of code, but first will set the calendar and player time by an offset Useful if we need to run code that technically needs to happen
+   * at a different calendar time The offsets are removed once the transaction is complete
    *
    * @param transactionPlayerTimeOffset   the offset to be added to the player time
    * @param transactionCalendarTimeOffset the offset to be added to the calendar time
@@ -214,8 +214,8 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
   }
 
   /**
-   * Called from {@link net.minecraftforge.fml.common.event.FMLServerStartingEvent} Initializes the calendar with the current minecraft server instance, reloading all
-   * values from world saved data
+   * Called from {@link net.minecraftforge.fml.common.event.FMLServerStartingEvent} Initializes the calendar with the current minecraft server instance,
+   * reloading all values from world saved data
    */
   public void init(MinecraftServer server) {
     this.server = server;
@@ -260,9 +260,9 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     if (deltaWorldTime > 1 || deltaWorldTime < -1) {
       TerraFirmaCraft.getLog().info("World time and Calendar Time are out of sync! Trying to fix...");
       TerraFirmaCraft.getLog()
-              .info("Calendar Time = {} ({}), Player Time = {}, World Time = {}, doDaylightCycle = {}, ArePlayersLoggedOn = {}", calendarTime,
-                      CALENDAR_TIME.getWorldTime(), playerTime, world.getWorldTime() % ICalendar.TICKS_IN_DAY, doDaylightCycle,
-                      arePlayersLoggedOn);
+                     .info("Calendar Time = {} ({}), Player Time = {}, World Time = {}, doDaylightCycle = {}, ArePlayersLoggedOn = {}", calendarTime,
+                           CALENDAR_TIME.getWorldTime(), playerTime, world.getWorldTime() % ICalendar.TICKS_IN_DAY, doDaylightCycle,
+                           arePlayersLoggedOn);
 
       // Check if tracking values are wrong
       boolean checkArePlayersLoggedOn = !server.getPlayerList().getPlayers().isEmpty();
@@ -275,12 +275,12 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
         // Calendar is ahead, so jump world time
         world.setWorldTime(world.getWorldTime() - deltaWorldTime);
         TerraFirmaCraft.getLog()
-                .info("Calendar is ahead by {} ticks, jumping world time to catch up", -deltaWorldTime);
+                       .info("Calendar is ahead by {} ticks, jumping world time to catch up", -deltaWorldTime);
       } else {
         // World time is ahead, so jump calendar
         calendarTime += deltaWorldTime;
         TerraFirmaCraft.getLog()
-                .info("Calendar is behind by {} ticks, jumping calendar time to catch up", deltaWorldTime);
+                       .info("Calendar is behind by {} ticks, jumping calendar time to catch up", deltaWorldTime);
       }
       TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
     }
@@ -295,8 +295,8 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     } else {
       rules.setOrCreateGameRule("doDaylightCycle", Boolean.toString(false));
       TerraFirmaCraft.getLog()
-              .info("Forced doDaylightCycle to false as no players are logged in. Will revert to {} as soon as a player logs in.",
-                      doDaylightCycle);
+                     .info("Forced doDaylightCycle to false as no players are logged in. Will revert to {} as soon as a player logs in.",
+                           doDaylightCycle);
     }
 
     TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
@@ -323,8 +323,8 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     if (!arePlayersLoggedOn) {
       rules.setOrCreateGameRule("doDaylightCycle", "false");
       TerraFirmaCraft.getLog()
-              .info("Forced doDaylightCycle to false as no players are logged in. Will revert to {} as soon as a player logs in.",
-                      doDaylightCycle);
+                     .info("Forced doDaylightCycle to false as no players are logged in. Will revert to {} as soon as a player logs in.",
+                           doDaylightCycle);
     }
 
     TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));

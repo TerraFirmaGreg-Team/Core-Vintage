@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "XMX",
-    "MXM",
-    "XMX"
+    "XMX", "MXM", "XMX"
   ],
   "key": {
     "X": {

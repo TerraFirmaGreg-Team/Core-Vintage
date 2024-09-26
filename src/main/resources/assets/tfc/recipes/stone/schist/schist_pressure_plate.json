@@ -3,11 +3,9 @@
   "ingredients": [
     {
       "item": "tfc:brick/schist"
-    },
-    {
+    }, {
       "item": "tfc:brick/schist"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

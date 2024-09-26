@@ -20,7 +20,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
@@ -40,7 +39,7 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
 
   @Override
   public void render(@NotNull TileFirePit tile, double x, double y, double z, float partialTicks,
-          int destroyStage, float alpha) {
+                     int destroyStage, float alpha) {
     super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
     // Rendering liquid in the soup pot
@@ -55,8 +54,8 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
       GlStateManager.enableAlpha();
       GlStateManager.enableBlend();
       GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
-              GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-              GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                                          GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+                                          GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
       int color = water.getColor();
 
@@ -81,21 +80,21 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
       double height = 0.625D;
 
       buffer.pos(0.3125D, height, 0.3125D)
-              .tex(sprite.getInterpolatedU(5), sprite.getInterpolatedV(5))
-              .normal(0, 0, 1)
-              .endVertex();
+            .tex(sprite.getInterpolatedU(5), sprite.getInterpolatedV(5))
+            .normal(0, 0, 1)
+            .endVertex();
       buffer.pos(0.3125D, height, 0.6875D)
-              .tex(sprite.getInterpolatedU(5), sprite.getInterpolatedV(11))
-              .normal(0, 0, 1)
-              .endVertex();
+            .tex(sprite.getInterpolatedU(5), sprite.getInterpolatedV(11))
+            .normal(0, 0, 1)
+            .endVertex();
       buffer.pos(0.6875D, height, 0.6875D)
-              .tex(sprite.getInterpolatedU(11), sprite.getInterpolatedV(11))
-              .normal(0, 0, 1)
-              .endVertex();
+            .tex(sprite.getInterpolatedU(11), sprite.getInterpolatedV(11))
+            .normal(0, 0, 1)
+            .endVertex();
       buffer.pos(0.6875D, height, 0.3125D)
-              .tex(sprite.getInterpolatedU(11), sprite.getInterpolatedV(5))
-              .normal(0, 0, 1)
-              .endVertex();
+            .tex(sprite.getInterpolatedU(11), sprite.getInterpolatedV(5))
+            .normal(0, 0, 1)
+            .endVertex();
 
       Tessellator.getInstance().draw();
 
@@ -105,7 +104,7 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
     if (tile.hasWorld()) {
       IBlockState state = tile.getWorld().getBlockState(tile.getPos());
       if (state.getBlock() instanceof BlockFirePit
-              && state.getValue(BlockFirePit.ATTACHMENT) == BlockFirePit.FirePitAttachment.GRILL) {
+          && state.getValue(BlockFirePit.ATTACHMENT) == BlockFirePit.FirePitAttachment.GRILL) {
         IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null) {
           int rotation = tile.getBlockMetadata();
@@ -125,8 +124,8 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
             ItemStack item = cap.getStackInSlot(i);
             if (!item.isEmpty()) {
               Minecraft.getMinecraft()
-                      .getRenderItem()
-                      .renderItem(item, ItemCameraTransforms.TransformType.FIXED);
+                       .getRenderItem()
+                       .renderItem(item, ItemCameraTransforms.TransformType.FIXED);
             }
 
             GlStateManager.translate(-leftTranslate, 0, 0);

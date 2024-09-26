@@ -16,7 +16,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Metal;
 import tfctech.TFCTech;
@@ -33,7 +32,7 @@ public class ItemGroove extends ItemTechMetal {
 
   @Override
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                    float hitZ) {
     IBlockState state = worldIn.getBlockState(pos);
     if (isValidBlock(state)) {
       //Check if we can place this treetap here
@@ -84,7 +83,7 @@ public class ItemGroove extends ItemTechMetal {
         if (!worldIn.isRemote) {
           worldIn.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_GROOVE_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
           worldIn.setBlockState(pos.offset(facing), BlocksDevice.LATEX_EXTRACTOR.getDefaultState()
-                  .withProperty(FACING, facing));
+                                                                                .withProperty(FACING, facing));
         }
         return EnumActionResult.SUCCESS;
       }

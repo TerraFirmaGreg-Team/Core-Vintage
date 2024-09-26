@@ -30,7 +30,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -220,7 +219,7 @@ public class ItemMold extends ItemPottery {
       Metal metal = getMetal();
       if (metal != null) {
         String desc =
-                TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
+          TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
         if (isMolten()) {
           desc += I18n.format("tfc.tooltip.liquid");
         } else {
@@ -281,7 +280,7 @@ public class ItemMold extends ItemPottery {
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
       return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY
-              || capability == CapabilityHeat.CAPABILITY;
+             || capability == CapabilityHeat.CAPABILITY;
     }
 
     @Nullable

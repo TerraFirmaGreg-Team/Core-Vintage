@@ -4,7 +4,6 @@ import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.LangKey;
 import net.minecraftforge.common.config.Config.RequiresWorldRestart;
 
-
 import static su.terrafirmagreg.data.Constants.MODID_HOTORNOT;
 
 public class ManualEntries {
@@ -30,5 +29,5 @@ public class ManualEntries {
   @Comment("Items that are excluded")
   @LangKey(LANG_KEY + "item_removals")
   public String[] itemRemovals = {"immersiveengineering:drill", "immersiveengineering:chemthrower", "immersivepetroleum:fluid_diesel",
-          "immersivepetroleum:fluid_gasoline"};
+                                  "immersivepetroleum:fluid_gasoline"};
 }

@@ -2,7 +2,6 @@ package net.dries007.tfc.compat.jei.wrappers;
 
 import net.minecraft.item.ItemStack;
 
-
 import com.google.common.collect.Lists;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;

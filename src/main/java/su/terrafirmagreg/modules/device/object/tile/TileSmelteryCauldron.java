@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.base.tile.spi.ITileFields;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.BlockUtils;
@@ -19,14 +19,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-
 
 import net.dries007.tfc.api.capability.fluid.FluidHandlerSided;
 import net.dries007.tfc.api.capability.fluid.FluidTankCallback;
@@ -42,10 +40,9 @@ import java.util.Optional;
 
 import static su.terrafirmagreg.data.Properties.LIT;
 
-public class TileSmelteryCauldron extends BaseTileInventory
-        implements ITickable, IFluidHandlerSidedCallback, IFluidTankCallback, ITileFields,
-        IAmbientalTileProvider,
-        IProviderContainer<ContainerSmelteryCauldron, GuiSmelteryCauldron> {
+public class TileSmelteryCauldron extends BaseTileTickableInventory
+  implements IFluidHandlerSidedCallback, IFluidTankCallback, ITileFields, IAmbientalTileProvider,
+             IProviderContainer<ContainerSmelteryCauldron, GuiSmelteryCauldron> {
 
   public static final int FLUID_CAPACITY = 4000;
   private final FluidTank tank = new FluidTankCallback(this, 0, FLUID_CAPACITY);
@@ -144,7 +141,7 @@ public class TileSmelteryCauldron extends BaseTileInventory
   @Override
   public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
     return (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) || super.hasCapability(
-            capability, facing);
+      capability, facing);
   }
 
   @Override
@@ -194,15 +191,15 @@ public class TileSmelteryCauldron extends BaseTileInventory
 
   @Override
   public ContainerSmelteryCauldron getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                                IBlockState state, BlockPos pos) {
     return new ContainerSmelteryCauldron(inventoryPlayer, this);
   }
 
   @Override
   public GuiSmelteryCauldron getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                             IBlockState state, BlockPos pos) {
     return new GuiSmelteryCauldron(getContainer(inventoryPlayer, world, state, pos),
-            inventoryPlayer, this);
+                                   inventoryPlayer, this);
   }
 
 

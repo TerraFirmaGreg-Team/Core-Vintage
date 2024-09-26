@@ -6,7 +6,6 @@ import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
 
-
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.SMOOTH;
 
 public class BlockAlabasterSmooth extends BlockRockDecorative {
@@ -15,11 +14,11 @@ public class BlockAlabasterSmooth extends BlockRockDecorative {
     this(EnumDyeColor.WHITE);
 
     getSettings()
-            .registryKey("rock/alabaster/smooth/plain");
+      .registryKey("rock/alabaster/smooth/plain");
 
     for (var color : EnumDyeColor.values()) {
       BlocksRock.ALABASTER_COLOR_BLOCKS.put(Pair.of(SMOOTH, color),
-              new BlockAlabasterSmooth(color));
+                                            new BlockAlabasterSmooth(color));
     }
   }
 
@@ -27,9 +26,9 @@ public class BlockAlabasterSmooth extends BlockRockDecorative {
     super(Settings.of(Material.ROCK, color));
 
     getSettings()
-            .registryKey("rock/alabaster/smooth/" + color.getName())
-            .oreDict("alabaster")
-            .oreDict("alabaster", "smooth");
+      .registryKey("rock/alabaster/smooth/" + color.getName())
+      .oreDict("alabaster")
+      .oreDict("alabaster", "smooth");
   }
 
 }

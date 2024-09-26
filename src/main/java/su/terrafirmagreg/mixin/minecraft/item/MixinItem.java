@@ -9,19 +9,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Unique;
 
-import lombok.Getter;
-
-@Getter
 @Mixin(value = Item.class, remap = false)
 public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implements IItemSettings {
 
-  @Unique
-  protected final Settings settings = Settings.of();
+
+  public Settings getSettings() {return Settings.of();}
 
   /**
    * @author Xikaro
@@ -77,4 +72,6 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
   public boolean canStack(ItemStack stack) {
     return getSettings().isCanStack();
   }
+
+
 }

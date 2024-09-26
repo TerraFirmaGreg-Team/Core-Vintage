@@ -26,7 +26,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -48,6 +47,10 @@ public class BlockTorchTFC extends BlockTorch implements ICapabilitySize {
     setSoundType(SoundType.WOOD);
 
     OreDictionaryHelper.register(this, "torch");
+  }
+
+  public static boolean canLight(ItemStack stack) {
+    return stack.getItem() == Item.getItemFromBlock(Blocks.TORCH) || ItemFireStarter.canIgnite(stack);
   }
 
   @Override
@@ -105,7 +108,7 @@ public class BlockTorchTFC extends BlockTorch implements ICapabilitySize {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       ItemStack stack = playerIn.getHeldItem(hand);
       if (state.getValue(LIT)) {
@@ -124,10 +127,6 @@ public class BlockTorchTFC extends BlockTorch implements ICapabilitySize {
       }
     }
     return true;
-  }
-
-  public static boolean canLight(ItemStack stack) {
-    return stack.getItem() == Item.getItemFromBlock(Blocks.TORCH) || ItemFireStarter.canIgnite(stack);
   }
 
   @Override

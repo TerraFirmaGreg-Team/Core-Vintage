@@ -30,7 +30,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
@@ -51,7 +50,7 @@ public class EntityDireWolfTFC extends EntityAnimalMammal implements IPredator {
   @SuppressWarnings("unused")
   public EntityDireWolfTFC(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-            getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+         getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
   public EntityDireWolfTFC(World worldIn, Gender gender, int birthDay) {
@@ -63,7 +62,7 @@ public class EntityDireWolfTFC extends EntityAnimalMammal implements IPredator {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.PLAINS)) {
+        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
       return ConfigTFC.Animals.DIREWOLF.rarity;
     }
     return 0;
@@ -132,7 +131,7 @@ public class EntityDireWolfTFC extends EntityAnimalMammal implements IPredator {
     EntityAIWander wander = new EntityAIWanderHuntArea(this, 1.0D);
     this.tasks.addTask(0, new EntityAISwimming(this));
     this.tasks.addTask(3,
-            new EntityAIAttackMeleeTFC<>(this, 1.2D, 1.25D, EntityAIAttackMeleeTFC.AttackBehavior.NIGHTTIME_ONLY).setWanderAI(wander));
+                       new EntityAIAttackMeleeTFC<>(this, 1.2D, 1.25D, EntityAIAttackMeleeTFC.AttackBehavior.NIGHTTIME_ONLY).setWanderAI(wander));
     this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
     this.tasks.addTask(5, wander); // Move within hunt area
     this.tasks.addTask(7, new EntityAILookIdle(this));

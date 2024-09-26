@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.init.PlantsFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
@@ -20,37 +19,6 @@ import com.eerussianguy.firmalife.registry.BlocksFL;
 import java.util.Random;
 
 public class WorldgenCinnamon extends WorldGenerator {
-
-  @Override
-  public boolean generate(World world, Random rand, BlockPos pos) {
-    int cinnamonRarity = ConfigFL.General.WORLDGEN.cinnamonRarity;
-    if (cinnamonRarity == 0) {
-      return false;
-    }
-
-    if (rand.nextInt(cinnamonRarity) != 1) {
-      return false;
-    }
-
-    var chunkData = CapabilityChunkData.get(world, pos);
-    if (!chunkData.isInitialized()) {
-      return false;
-    }
-
-    final Biome b = world.getBiome(pos);
-    if (!(b instanceof BaseBiome) || b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN) {
-      return false;
-    }
-
-    final float temp = chunkData.getAverageTemp();
-    final float rain = chunkData.getRainfall();
-    final float density = chunkData.getFloraDensity();
-
-    int x = pos.getX() - 7 + rand.nextInt(14);
-    int z = pos.getZ() - 7 + rand.nextInt(14);
-    BlockPos genPos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
-    return PlantsFL.CINNAMON_TREE.isValidLocation(temp, rain, density) && generateCinnamon(world, rand, genPos, true);
-  }
 
   public static boolean generateCinnamon(World world, Random rand, BlockPos pos, boolean worldgen) {
     IBlockState state = world.getBlockState(pos.down());
@@ -87,5 +55,36 @@ public class WorldgenCinnamon extends WorldGenerator {
       return true;
     }
     return false;
+  }
+
+  @Override
+  public boolean generate(World world, Random rand, BlockPos pos) {
+    int cinnamonRarity = ConfigFL.General.WORLDGEN.cinnamonRarity;
+    if (cinnamonRarity == 0) {
+      return false;
+    }
+
+    if (rand.nextInt(cinnamonRarity) != 1) {
+      return false;
+    }
+
+    var chunkData = CapabilityChunkData.get(world, pos);
+    if (!chunkData.isInitialized()) {
+      return false;
+    }
+
+    final Biome b = world.getBiome(pos);
+    if (!(b instanceof BaseBiome) || b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN) {
+      return false;
+    }
+
+    final float temp = chunkData.getAverageTemp();
+    final float rain = chunkData.getRainfall();
+    final float density = chunkData.getFloraDensity();
+
+    int x = pos.getX() - 7 + rand.nextInt(14);
+    int z = pos.getZ() - 7 + rand.nextInt(14);
+    BlockPos genPos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
+    return PlantsFL.CINNAMON_TREE.isValidLocation(temp, rain, density) && generateCinnamon(world, rand, genPos, true);
   }
 }

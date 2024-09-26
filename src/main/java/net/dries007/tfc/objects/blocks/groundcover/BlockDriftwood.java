@@ -22,7 +22,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -84,7 +83,7 @@ public class BlockDriftwood extends BlockBush {
 
   @Override
   public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate,
-          EntityLivingBase entity, int numberOfParticles) {
+                                   EntityLivingBase entity, int numberOfParticles) {
     return true;
   }
 

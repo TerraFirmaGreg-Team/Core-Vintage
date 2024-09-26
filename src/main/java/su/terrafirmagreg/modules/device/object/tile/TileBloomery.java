@@ -28,7 +28,6 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
-
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -109,9 +108,9 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
       }
     }
     oreStacks.forEach(
-            i -> StackUtils.spawnItemStack(world, getExternalBlock(), i));
+      i -> StackUtils.spawnItemStack(world, getExternalBlock(), i));
     fuelStacks.forEach(
-            i -> StackUtils.spawnItemStack(world, getExternalBlock(), i));
+      i -> StackUtils.spawnItemStack(world, getExternalBlock(), i));
   }
 
   /**
@@ -123,8 +122,8 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
     if (internalBlock == null) {
       EnumFacing direction = world.getBlockState(pos).getValue(FACING);
       internalBlock = pos.up(OFFSET_INTERNAL.getY())
-              .offset(direction, OFFSET_INTERNAL.getX())
-              .offset(direction.rotateY(), OFFSET_INTERNAL.getZ());
+                         .offset(direction, OFFSET_INTERNAL.getX())
+                         .offset(direction.rotateY(), OFFSET_INTERNAL.getZ());
     }
     return internalBlock;
   }
@@ -138,8 +137,8 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
     if (externalBlock == null) {
       EnumFacing direction = world.getBlockState(pos).getValue(FACING);
       externalBlock = pos.up(OFFSET_EXTERNAL.getY())
-              .offset(direction, OFFSET_EXTERNAL.getX())
-              .offset(direction.rotateY(), OFFSET_EXTERNAL.getZ());
+                         .offset(direction, OFFSET_EXTERNAL.getX())
+                         .offset(direction.rotateY(), OFFSET_EXTERNAL.getZ());
     }
     return externalBlock;
   }
@@ -246,12 +245,12 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
         if (slagLayers >= 4) {
           slagLayers -= 4;
           world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState()
-                  .withProperty(LIT, cooking)
-                  .withProperty(BlockMolten.LAYERS, 4));
+                                                                           .withProperty(LIT, cooking)
+                                                                           .withProperty(BlockMolten.LAYERS, 4));
         } else {
           world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState()
-                  .withProperty(LIT, cooking)
-                  .withProperty(BlockMolten.LAYERS, slagLayers));
+                                                                           .withProperty(LIT, cooking)
+                                                                           .withProperty(BlockMolten.LAYERS, slagLayers));
           slagLayers = 0;
         }
       } else {
@@ -266,7 +265,7 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
   protected boolean isInternalBlockComplete() {
     IBlockState inside = world.getBlockState(getInternalBlock());
     return inside.getBlock() == BlocksDevice.CHARCOAL_PILE
-            && inside.getValue(BlockCharcoalPile.LAYERS) >= 8;
+           && inside.getValue(BlockCharcoalPile.LAYERS) >= 8;
   }
 
   protected void addItemsFromWorld() {
@@ -277,8 +276,8 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
       }
     }
     for (EntityItem entityItem : world.getEntitiesWithinAABB(EntityItem.class,
-            new AxisAlignedBB(getInternalBlock().up(), getInternalBlock().add(1, 4, 1)),
-            EntitySelectors.IS_ALIVE)) {
+                                                             new AxisAlignedBB(getInternalBlock().up(), getInternalBlock().add(1, 4, 1)),
+                                                             EntitySelectors.IS_ALIVE)) {
       ItemStack stack = entityItem.getItem();
       if (cachedRecipe == null) {
         cachedRecipe = BloomeryRecipe.get(stack);

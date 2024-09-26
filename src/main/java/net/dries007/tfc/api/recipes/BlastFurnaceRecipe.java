@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -42,24 +41,24 @@ public class BlastFurnaceRecipe extends IForgeRegistryEntry.Impl<BlastFurnaceRec
   @Nullable
   public static BlastFurnaceRecipe get(ItemStack inputItem) {
     return TFCRegistries.BLAST_FURNACE.getValuesCollection()
-            .stream()
-            .filter(x -> x.isValidInput(inputItem))
-            .findFirst()
-            .orElse(null);
-  }
-
-  public boolean isValidInput(ItemStack stack) {
-    var metal = CapabilityMetal.getMetalItem(stack);
-    return metal != null && metal.getMetal(stack) == input;
+                                      .stream()
+                                      .filter(x -> x.isValidInput(inputItem))
+                                      .findFirst()
+                                      .orElse(null);
   }
 
   @Nullable
   public static BlastFurnaceRecipe get(Metal inputMetal) {
     return TFCRegistries.BLAST_FURNACE.getValuesCollection()
-            .stream()
-            .filter(x -> x.input == inputMetal)
-            .findFirst()
-            .orElse(null);
+                                      .stream()
+                                      .filter(x -> x.input == inputMetal)
+                                      .findFirst()
+                                      .orElse(null);
+  }
+
+  public boolean isValidInput(ItemStack stack) {
+    var metal = CapabilityMetal.getMetalItem(stack);
+    return metal != null && metal.getMetal(stack) == input;
   }
 
   @Nullable

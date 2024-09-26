@@ -22,8 +22,8 @@ public class LayerAlpacaWool implements LayerRenderer<EntityAnimalAlpaca> {
 
   @Override
   public void doRenderLayer(EntityAnimalAlpaca alpaca, float limbSwing, float limbSwingAmount,
-          float partialTicks, float ageInTicks,
-          float netHeadYaw, float headPitch, float scale) {
+                            float partialTicks, float ageInTicks,
+                            float netHeadYaw, float headPitch, float scale) {
     if (alpaca.hasWool() && !alpaca.isInvisible()) {
       this.alpacaRenderer.bindTexture(this.alpacaRenderer.getEntityTexture(alpaca));
 
@@ -33,7 +33,7 @@ public class LayerAlpacaWool implements LayerRenderer<EntityAnimalAlpaca> {
       this.alpacaModel.setModelAttributes(this.alpacaRenderer.getMainModel());
       this.alpacaModel.setLivingAnimations(alpaca, limbSwing, limbSwingAmount, partialTicks);
       this.alpacaModel.render(alpaca, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
-              scale);
+                              scale);
     }
   }
 

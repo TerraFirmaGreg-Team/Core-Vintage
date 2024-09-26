@@ -19,7 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -36,34 +35,34 @@ import static su.terrafirmagreg.data.Properties.WEST;
 public class BlockWoodSupport extends BlockWood {
 
   private static final AxisAlignedBB VERTICAL_SUPPORT_AABB = new AxisAlignedBB(0.3125D, 0.0D,
-          0.3125D, 0.6875D, 1.0D, 0.6875D);
+                                                                               0.3125D, 0.6875D, 1.0D, 0.6875D);
   private static final AxisAlignedBB HORIZONTAL_SUPPORT_AABB = new AxisAlignedBB(0.375D, 0.625D,
-          0.375D, 0.625D, 1.0D, 0.625D);
+                                                                                 0.375D, 0.625D, 1.0D, 0.625D);
   private static final AxisAlignedBB CONNECTION_N_AABB = new AxisAlignedBB(0.3125D, 0.625D, 0.0D,
-          0.6875D, 1.0D, 0.3125D);
+                                                                           0.6875D, 1.0D, 0.3125D);
   private static final AxisAlignedBB CONNECTION_S_AABB = new AxisAlignedBB(0.3125D, 0.625D, 0.6875D,
-          0.6875D, 1.0D, 1.0);
+                                                                           0.6875D, 1.0D, 1.0);
   private static final AxisAlignedBB CONNECTION_E_AABB = new AxisAlignedBB(0.6875D, 0.625D, 0.3125D,
-          1.0D, 1.0D, 0.6875D);
+                                                                           1.0D, 1.0D, 0.6875D);
   private static final AxisAlignedBB CONNECTION_W_AABB = new AxisAlignedBB(0.0D, 0.625D, 0.3125D,
-          0.3125D, 1.0D, 0.6875D);
+                                                                           0.3125D, 1.0D, 0.6875D);
 
   public BlockWoodSupport(WoodBlockVariant variant, WoodType type) {
     super(variant, type);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .hardness(2.0F)
-            .nonFullCube()
-            .nonOpaque();
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .hardness(2.0F)
+      .nonFullCube()
+      .nonOpaque();
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(AXIS, EnumFacing.Axis.Y)
-            .withProperty(NORTH, Boolean.FALSE)
-            .withProperty(SOUTH, Boolean.FALSE)
-            .withProperty(EAST, Boolean.FALSE)
-            .withProperty(WEST, Boolean.FALSE));
+                              .withProperty(AXIS, EnumFacing.Axis.Y)
+                              .withProperty(NORTH, Boolean.FALSE)
+                              .withProperty(SOUTH, Boolean.FALSE)
+                              .withProperty(EAST, Boolean.FALSE)
+                              .withProperty(WEST, Boolean.FALSE));
   }
 
   /**
@@ -82,8 +81,8 @@ public class BlockWoodSupport extends BlockWood {
       return true; // If world isn't loaded...
     }
     for (BlockPos.MutableBlockPos searchSupport : BlockPos.getAllInBoxMutable(
-            pos.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
-            pos.add(sRangeHor, sRangeVert, sRangeHor))) {
+      pos.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
+      pos.add(sRangeHor, sRangeVert, sRangeHor))) {
       IBlockState st = worldIn.getBlockState(searchSupport);
       if (st.getBlock() instanceof BlockWoodSupport blockWoodSupport) {
         if (blockWoodSupport.canSupportBlocks(worldIn, searchSupport)) {
@@ -92,6 +91,57 @@ public class BlockWoodSupport extends BlockWood {
       }
     }
     return false;
+  }
+
+  /**
+   * This is an optimized way to check for blocks that aren't supported during a cave in, instead of checking every single block individually and calling
+   * BlockSupper#isBeingSupported
+   */
+  public static Set<BlockPos> getAllUnsupportedBlocksIn(World worldIn, BlockPos from, BlockPos to) {
+    Set<BlockPos> listSupported = new HashSet<>();
+    Set<BlockPos> listUnsupported = new HashSet<>();
+    int minX = Math.min(from.getX(), to.getX());
+    int maxX = Math.max(from.getX(), to.getX());
+    int minY = Math.min(from.getY(), to.getY());
+    int maxY = Math.max(from.getY(), to.getY());
+    int minZ = Math.min(from.getZ(), to.getZ());
+    int maxZ = Math.max(from.getZ(), to.getZ());
+    int sRangeHor = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor;
+    int sRangeVert = ConfigWood.BLOCK.SUPPORT.supportBeamRangeUp;
+    int sRangeHorNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor * -1;
+    int sRangeVertNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeDown * -1;
+    BlockPos minPoint = new BlockPos(minX, minY, minZ);
+    BlockPos maxPoint = new BlockPos(maxX, maxY, maxZ);
+    for (BlockPos.MutableBlockPos searchingPoint : BlockPos.getAllInBoxMutable(
+      minPoint.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
+      maxPoint.add(sRangeHor, sRangeVert, sRangeHor))) {
+
+      if (!listSupported.contains(searchingPoint)) {
+        listUnsupported.add(
+          searchingPoint.toImmutable()); //Adding blocks that wasn't found supported
+      }
+      IBlockState st = worldIn.getBlockState(searchingPoint);
+      if (st.getBlock() instanceof BlockWoodSupport) {
+        if (((BlockWoodSupport) st.getBlock()).canSupportBlocks(worldIn, searchingPoint)) {
+          for (BlockPos.MutableBlockPos supported : BlockPos.getAllInBoxMutable(
+            searchingPoint.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
+            searchingPoint.add(sRangeHor, sRangeVert, sRangeHor))) {
+
+            listSupported.add(
+              supported.toImmutable()); //Adding all supported blocks by this support
+            listUnsupported.remove(supported); //Remove if this block was added earlier
+          }
+        }
+      }
+    }
+    //Searching point wasn't from points between from <-> to but
+    //Time to remove the outsides that were added for convenience
+    listUnsupported.removeIf(
+      content -> content.getX() < minX || content.getX() > maxX || content.getY() < minY
+                 || content.getY() > maxY ||
+                 content.getZ() < minZ || content.getZ() > maxZ);
+
+    return listUnsupported;
   }
 
   /**
@@ -120,10 +170,10 @@ public class BlockWoodSupport extends BlockWood {
     EnumFacing.Axis axis = state.getValue(AXIS);
     if (axis == EnumFacing.Axis.Y) {
       return world.getBlockState(pos.down()).isNormalCube() || isConnectable(world, pos,
-              EnumFacing.DOWN);
+                                                                             EnumFacing.DOWN);
     } else {
       return (isConnectable(world, pos, EnumFacing.WEST) && isConnectable(world, pos, EnumFacing.EAST))
-              || (isConnectable(world, pos, EnumFacing.NORTH) && isConnectable(world, pos, EnumFacing.SOUTH));
+             || (isConnectable(world, pos, EnumFacing.NORTH) && isConnectable(world, pos, EnumFacing.SOUTH));
     }
   }
 
@@ -140,57 +190,6 @@ public class BlockWoodSupport extends BlockWood {
     return state.getBlock() instanceof BlockWoodSupport;
   }
 
-  /**
-   * This is an optimized way to check for blocks that aren't supported during a cave in, instead of checking every single block individually and calling
-   * BlockSupper#isBeingSupported
-   */
-  public static Set<BlockPos> getAllUnsupportedBlocksIn(World worldIn, BlockPos from, BlockPos to) {
-    Set<BlockPos> listSupported = new HashSet<>();
-    Set<BlockPos> listUnsupported = new HashSet<>();
-    int minX = Math.min(from.getX(), to.getX());
-    int maxX = Math.max(from.getX(), to.getX());
-    int minY = Math.min(from.getY(), to.getY());
-    int maxY = Math.max(from.getY(), to.getY());
-    int minZ = Math.min(from.getZ(), to.getZ());
-    int maxZ = Math.max(from.getZ(), to.getZ());
-    int sRangeHor = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor;
-    int sRangeVert = ConfigWood.BLOCK.SUPPORT.supportBeamRangeUp;
-    int sRangeHorNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor * -1;
-    int sRangeVertNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeDown * -1;
-    BlockPos minPoint = new BlockPos(minX, minY, minZ);
-    BlockPos maxPoint = new BlockPos(maxX, maxY, maxZ);
-    for (BlockPos.MutableBlockPos searchingPoint : BlockPos.getAllInBoxMutable(
-            minPoint.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
-            maxPoint.add(sRangeHor, sRangeVert, sRangeHor))) {
-
-      if (!listSupported.contains(searchingPoint)) {
-        listUnsupported.add(
-                searchingPoint.toImmutable()); //Adding blocks that wasn't found supported
-      }
-      IBlockState st = worldIn.getBlockState(searchingPoint);
-      if (st.getBlock() instanceof BlockWoodSupport) {
-        if (((BlockWoodSupport) st.getBlock()).canSupportBlocks(worldIn, searchingPoint)) {
-          for (BlockPos.MutableBlockPos supported : BlockPos.getAllInBoxMutable(
-                  searchingPoint.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
-                  searchingPoint.add(sRangeHor, sRangeVert, sRangeHor))) {
-
-            listSupported.add(
-                    supported.toImmutable()); //Adding all supported blocks by this support
-            listUnsupported.remove(supported); //Remove if this block was added earlier
-          }
-        }
-      }
-    }
-    //Searching point wasn't from points between from <-> to but
-    //Time to remove the outsides that were added for convenience
-    listUnsupported.removeIf(
-            content -> content.getX() < minX || content.getX() > maxX || content.getY() < minY
-                    || content.getY() > maxY ||
-                    content.getZ() < minZ || content.getZ() > maxZ);
-
-    return listUnsupported;
-  }
-
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(AXIS, EnumFacing.Axis.values()[meta]);
@@ -204,15 +203,15 @@ public class BlockWoodSupport extends BlockWood {
   @Override
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     return state.withProperty(NORTH, isConnectable(worldIn, pos, EnumFacing.NORTH))
-            .withProperty(SOUTH, isConnectable(worldIn, pos, EnumFacing.SOUTH))
-            .withProperty(EAST, isConnectable(worldIn, pos, EnumFacing.EAST))
-            .withProperty(WEST, isConnectable(worldIn, pos, EnumFacing.WEST));
+                .withProperty(SOUTH, isConnectable(worldIn, pos, EnumFacing.SOUTH))
+                .withProperty(EAST, isConnectable(worldIn, pos, EnumFacing.EAST))
+                .withProperty(WEST, isConnectable(worldIn, pos, EnumFacing.WEST));
   }
 
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     AxisAlignedBB value =
-            state.getValue(AXIS) == EnumFacing.Axis.Y ? VERTICAL_SUPPORT_AABB : HORIZONTAL_SUPPORT_AABB;
+      state.getValue(AXIS) == EnumFacing.Axis.Y ? VERTICAL_SUPPORT_AABB : HORIZONTAL_SUPPORT_AABB;
     if (isConnectable(source, pos, EnumFacing.NORTH)) {
       value = value.union(CONNECTION_N_AABB);
     }
@@ -231,9 +230,9 @@ public class BlockWoodSupport extends BlockWood {
   @SuppressWarnings("deprecation")
   @Override
   public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos,
-          AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
-          @Nullable Entity entityIn,
-          boolean isActualState) {
+                                    AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
+                                    @Nullable Entity entityIn,
+                                    boolean isActualState) {
     EnumFacing.Axis axis = state.getValue(AXIS);
     if (axis == EnumFacing.Axis.Y) {
       addCollisionBoxToList(pos, entityBox, collidingBoxes, VERTICAL_SUPPORT_AABB);
@@ -256,7 +255,7 @@ public class BlockWoodSupport extends BlockWood {
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
     if (!this.canBlockStay(worldIn, pos)) {
       worldIn.destroyBlock(pos, true);
@@ -267,7 +266,7 @@ public class BlockWoodSupport extends BlockWood {
   public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side) {
     if (side.getAxis() == EnumFacing.Axis.Y) {
       return world.getBlockState(pos.down()).isNormalCube() || isConnectable(world, pos,
-              EnumFacing.DOWN);
+                                                                             EnumFacing.DOWN);
     } else {
       if (!isConnectable(world, pos, side.getOpposite())) {
         return false;
@@ -279,18 +278,18 @@ public class BlockWoodSupport extends BlockWood {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-          EnumHand hand, EnumFacing facing, float hitX,
-          float hitY, float hitZ) {
+                                  EnumHand hand, EnumFacing facing, float hitX,
+                                  float hitY, float hitZ) {
     ItemStack heldStack = player.getHeldItem(hand);
     if (player.isSneaking() && heldStack.getItem() instanceof ItemBlock itemBlock) {
       Block block = itemBlock.getBlock();
       if (block instanceof BlockWoodSupport) {
         for (BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos(pos);
-                mutablePos.getY() <= pos.getY() + 5; mutablePos.setY(mutablePos.getY() + 1)) {
+             mutablePos.getY() <= pos.getY() + 5; mutablePos.setY(mutablePos.getY() + 1)) {
           if (world.getBlockState(mutablePos).getMaterial().isReplaceable()) {
             if (!world.isRemote) {
               world.setBlockState(mutablePos, block.getDefaultState()
-                      .withProperty(AXIS, EnumFacing.Axis.Y), 2);
+                                                   .withProperty(AXIS, EnumFacing.Axis.Y), 2);
             }
             if (!player.isCreative()) {
               heldStack.shrink(1);
@@ -305,14 +304,14 @@ public class BlockWoodSupport extends BlockWood {
 
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-          float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer) {
+                                          float hitX, float hitY, float hitZ, int meta,
+                                          EntityLivingBase placer) {
     return this.getDefaultState().withProperty(AXIS, facing.getAxis());
   }
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-          EntityLivingBase placer, ItemStack stack) {
+                              EntityLivingBase placer, ItemStack stack) {
     if (worldIn.isRemote) {
       return;
     }
@@ -320,16 +319,16 @@ public class BlockWoodSupport extends BlockWood {
     if (axis == EnumFacing.Axis.Y) {
       //Try placing a 3 blocks high column in one click
       if (!isConnectable(worldIn, pos, EnumFacing.DOWN)
-              && !placer.isSneaking() && stack.getCount() > 2
-              //Need 3 or more because at this point itemstack didn't shrink for the first block
-              && worldIn.isAirBlock(pos.up()) && worldIn.isAirBlock(pos.up(2))) {
+          && !placer.isSneaking() && stack.getCount() > 2
+          //Need 3 or more because at this point itemstack didn't shrink for the first block
+          && worldIn.isAirBlock(pos.up()) && worldIn.isAirBlock(pos.up(2))) {
         //Place two more support blocks to make a 3 column in one click
         if (worldIn.checkNoEntityCollision(new AxisAlignedBB(pos.up()))) {
           worldIn.setBlockState(pos.up(),
-                  this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.Y), 2);
+                                this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.Y), 2);
           if (worldIn.checkNoEntityCollision(new AxisAlignedBB(pos.up(2)))) {
             worldIn.setBlockState(pos.up(2), this.getDefaultState()
-                    .withProperty(AXIS, EnumFacing.Axis.Y), 2);
+                                                 .withProperty(AXIS, EnumFacing.Axis.Y), 2);
             stack.shrink(2);
           } else {
             stack.shrink(1);
@@ -351,10 +350,10 @@ public class BlockWoodSupport extends BlockWood {
         for (int i = 1; i < distance; i++) {
           if (worldIn.getBlockState(pos.offset(face, i)).getMaterial().isReplaceable()) {
             worldIn.setBlockState(pos.offset(face, i),
-                    this.getDefaultState().withProperty(AXIS, axis), 2);
+                                  this.getDefaultState().withProperty(AXIS, axis), 2);
             worldIn.scheduleBlockUpdate(pos.offset(face, i)
-                    .down(), worldIn.getBlockState(pos.offset(face, i).down())
-                    .getBlock(), 3, 2);
+                                           .down(), worldIn.getBlockState(pos.offset(face, i).down())
+                                                           .getBlock(), 3, 2);
           }
         }
       }
@@ -384,12 +383,12 @@ public class BlockWoodSupport extends BlockWood {
     for (int i = 0; i < 5; i++) {
       BlockPos offsetPos = pos.offset(face, i);
       if (!(worldIn.getBlockState(offsetPos)
-              .getBlock() instanceof BlockWoodSupport) && !worldIn.isAirBlock(offsetPos)) {
+                   .getBlock() instanceof BlockWoodSupport) && !worldIn.isAirBlock(offsetPos)) {
         return 0;
       }
       IBlockState state = worldIn.getBlockState(pos.offset(face, i + 1));
       if (state.getBlock() instanceof BlockWoodSupport
-              && state.getValue(AXIS) == EnumFacing.Axis.Y) {
+          && state.getValue(AXIS) == EnumFacing.Axis.Y) {
         distance = i;
         break;
       }

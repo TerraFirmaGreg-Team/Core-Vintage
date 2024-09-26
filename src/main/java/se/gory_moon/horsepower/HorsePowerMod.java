@@ -12,15 +12,10 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
-
 
 import se.gory_moon.horsepower.blocks.ModBlocks;
-import se.gory_moon.horsepower.items.ModItems;
 import se.gory_moon.horsepower.network.PacketHandler;
 import se.gory_moon.horsepower.proxy.CommonProxy;
-import se.gory_moon.horsepower.recipes.HPRecipes;
-import se.gory_moon.horsepower.util.Utils;
 
 import static se.gory_moon.horsepower.lib.Reference.CLIENT_PROXY;
 import static se.gory_moon.horsepower.lib.Reference.COMMON_PROXY;
@@ -29,9 +24,9 @@ import static se.gory_moon.horsepower.lib.Reference.WAILA_PROVIDER;
 import static su.terrafirmagreg.data.Constants.MODID_HORSEPOWER;
 
 @Mod(modid = MODID_HORSEPOWER,
-        version = Tags.MOD_VERSION,
-        name = NAME,
-        dependencies = "required-after:tfc;after:crafttweaker;after:jei;after:waila;after:theoneprobe;")
+     version = Tags.MOD_VERSION,
+     name = NAME,
+     dependencies = "required-after:tfc;after:crafttweaker;after:jei;after:waila;after:theoneprobe;")
 @EventBusSubscriber
 public class HorsePowerMod {
 
@@ -57,19 +52,12 @@ public class HorsePowerMod {
   @EventHandler
   public void init(FMLInitializationEvent event) {
     proxy.init();
-    ModItems.registerRecipes();
   }
 
   @EventHandler
   public void loadComplete(FMLPostInitializationEvent event) {
 
-    HPEventHandler.reloadConfig();
     proxy.loadComplete();
   }
 
-  @EventHandler
-  public void serverLoad(FMLServerAboutToStartEvent event) {
-    HPRecipes.instance().reloadRecipes();
-    Utils.sendSavedErrors();
-  }
 }

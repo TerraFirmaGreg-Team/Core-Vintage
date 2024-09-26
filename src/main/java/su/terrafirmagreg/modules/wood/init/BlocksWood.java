@@ -65,126 +65,126 @@ public final class BlocksWood {
   public static void onRegister(RegistryManager registry) {
 
     LOG = WoodBlockVariant.builder("log")
-            .factory(BlockWoodLog::new)
-            .build(registry);
+                          .factory(BlockWoodLog::new)
+                          .build(registry);
 
     LEAVES = WoodBlockVariant.builder("leaves")
-            .factory(BlockWoodLeaves::new)
-            .build(registry);
+                             .factory(BlockWoodLeaves::new)
+                             .build(registry);
 
     SAPLING = WoodBlockVariant.builder("sapling")
-            .factory(BlockWoodSapling::new)
-            .build(registry);
+                              .factory(BlockWoodSapling::new)
+                              .build(registry);
 
     PLANKS = WoodBlockVariant.builder("planks")
-            .factory(BlockWoodPlanks::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                             .factory(BlockWoodPlanks::new)
+                             .fireInfo(5, 20)
+                             .build(registry);
 
     STAIRS_PLANKS = WoodBlockVariant.builder("stairs/planks")
-            .factory((v, t) -> new BlockWoodStairs(PLANKS, v, t))
-            .fireInfo(5, 20)
-            .build(registry);
+                                    .factory((v, t) -> new BlockWoodStairs(PLANKS, v, t))
+                                    .fireInfo(5, 20)
+                                    .build(registry);
 
     SLAB_DOUBLE_PLANKS = WoodBlockVariant.builder("slab_double/planks")
-            .factory((v, t) -> new BlockWoodSlab.Double(PLANKS.get(t), v, t))
-            .fireInfo(5, 20)
-            .build(registry);
+                                         .factory((v, t) -> new BlockWoodSlab.Double(PLANKS.get(t), v, t))
+                                         .fireInfo(5, 20)
+                                         .build(registry);
 
     SLAB_PLANKS = WoodBlockVariant.builder("slab/planks")
-            .factory((v, t) -> new BlockWoodSlab.Half(PLANKS.get(t), SLAB_DOUBLE_PLANKS.get(t), v, t))
-            .fireInfo(5, 20)
-            .build(registry);
+                                  .factory((v, t) -> new BlockWoodSlab.Half(PLANKS.get(t), SLAB_DOUBLE_PLANKS.get(t), v, t))
+                                  .fireInfo(5, 20)
+                                  .build(registry);
 
     WALL_PLANKS = WoodBlockVariant.builder("wall/planks")
-            .factory((v, t) -> new BlockWoodWall(PLANKS.get(t), v, t))
-            .fireInfo(5, 20)
-            .build(registry);
+                                  .factory((v, t) -> new BlockWoodWall(PLANKS.get(t), v, t))
+                                  .fireInfo(5, 20)
+                                  .build(registry);
 
     BOOKSHELF = WoodBlockVariant.builder("bookshelf")
-            .factory(BlockWoodBookshelf::new)
-            .fireInfo(30, 20)
-            .build(registry);
+                                .factory(BlockWoodBookshelf::new)
+                                .fireInfo(30, 20)
+                                .build(registry);
 
     DOOR = WoodBlockVariant.builder("door")
-            .factory(BlockWoodDoor::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                           .factory(BlockWoodDoor::new)
+                           .fireInfo(5, 20)
+                           .build(registry);
 
     TRAPDOOR = WoodBlockVariant.builder("trapdoor")
-            .factory(BlockWoodTrapDoor::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                               .factory(BlockWoodTrapDoor::new)
+                               .fireInfo(5, 20)
+                               .build(registry);
 
     FENCE = WoodBlockVariant.builder("fence")
-            .factory(BlockWoodFence::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                            .factory(BlockWoodFence::new)
+                            .fireInfo(5, 20)
+                            .build(registry);
 
     FENCE_LOG = WoodBlockVariant.builder("fence_log")
-            .factory(BlockWoodFenceLog::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                                .factory(BlockWoodFenceLog::new)
+                                .fireInfo(5, 20)
+                                .build(registry);
 
     FENCE_GATE = WoodBlockVariant.builder("fence_gate")
-            .factory(BlockWoodFenceGate::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                                 .factory(BlockWoodFenceGate::new)
+                                 .fireInfo(5, 20)
+                                 .build(registry);
 
     FENCE_GATE_LOG = WoodBlockVariant.builder("fence_gate_log")
-            .factory(BlockWoodFenceGateLog::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                                     .factory(BlockWoodFenceGateLog::new)
+                                     .fireInfo(5, 20)
+                                     .build(registry);
 
     BUTTON = WoodBlockVariant.builder("button")
-            .factory(BlockWoodButton::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                             .factory(BlockWoodButton::new)
+                             .fireInfo(5, 20)
+                             .build(registry);
 
     PRESSURE_PLATE = WoodBlockVariant.builder("pressure_plate")
-            .factory(BlockWoodPressurePlate::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                                     .factory(BlockWoodPressurePlate::new)
+                                     .fireInfo(5, 20)
+                                     .build(registry);
 
     TOOL_RACK = WoodBlockVariant.builder("tool_rack")
-            .factory(BlockWoodToolRack::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                                .factory(BlockWoodToolRack::new)
+                                .fireInfo(5, 20)
+                                .build(registry);
 
     SUPPORT = WoodBlockVariant.builder("support")
-            .factory(BlockWoodSupport::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                              .factory(BlockWoodSupport::new)
+                              .fireInfo(5, 20)
+                              .build(registry);
 
     WORKBENCH = WoodBlockVariant.builder("workbench")
-            .factory(BlockWoodWorkbench::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                                .factory(BlockWoodWorkbench::new)
+                                .fireInfo(5, 20)
+                                .build(registry);
 
     CHEST_TRAPPED = WoodBlockVariant.builder("chest_trapped")
-            .factory(BlockWoodChest::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                                    .factory(BlockWoodChest::new)
+                                    .fireInfo(5, 20)
+                                    .build(registry);
 
     CHEST = WoodBlockVariant.builder("chest")
-            .factory(BlockWoodChest::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                            .factory(BlockWoodChest::new)
+                            .fireInfo(5, 20)
+                            .build(registry);
 
     LOOM = WoodBlockVariant.builder("loom")
-            .factory(BlockWoodLoom::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                           .factory(BlockWoodLoom::new)
+                           .fireInfo(5, 20)
+                           .build(registry);
 
     BARREL = WoodBlockVariant.builder("barrel")
-            .factory(BlockWoodBarrel::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                             .factory(BlockWoodBarrel::new)
+                             .fireInfo(5, 20)
+                             .build(registry);
 
     LADDER = WoodBlockVariant.builder("ladder")
-            .factory(BlockWoodLadder::new)
-            .fireInfo(5, 20)
-            .build(registry);
+                             .factory(BlockWoodLadder::new)
+                             .fireInfo(5, 20)
+                             .build(registry);
 //
 //            CHOPPER = WoodBlockVariant.builder("chopper")
 //                    .setFactory(BlockWoodChopper::new)

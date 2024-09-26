@@ -35,81 +35,81 @@ public class TESRBase<T extends TileEntity> extends TileEntitySpecialRenderer<T>
 
   protected static double[][] getXVertices(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
     return new double[][]{
-            {minX, minY, minZ, 0, 1}, // Main +X Side
-            {minX, minY, maxZ, 1, 1},
-            {minX, maxY, maxZ, 1, 0},
-            {minX, maxY, minZ, 0, 0},
+      {minX, minY, minZ, 0, 1}, // Main +X Side
+      {minX, minY, maxZ, 1, 1},
+      {minX, maxY, maxZ, 1, 0},
+      {minX, maxY, minZ, 0, 0},
 
-            {maxX, minY, maxZ, 1, 0}, // Main -X Side
-            {maxX, minY, minZ, 0, 0},
-            {maxX, maxY, minZ, 0, 1},
-            {maxX, maxY, maxZ, 1, 1}
+      {maxX, minY, maxZ, 1, 0}, // Main -X Side
+      {maxX, minY, minZ, 0, 0},
+      {maxX, maxY, minZ, 0, 1},
+      {maxX, maxY, maxZ, 1, 1}
     };
   }
 
   protected static double[][] getYVertices(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
     return new double[][]{
-            {minX, maxY, minZ, 0, 1}, // Top
-            {minX, maxY, maxZ, 1, 1},
-            {maxX, maxY, maxZ, 1, 0},
-            {maxX, maxY, minZ, 0, 0},
+      {minX, maxY, minZ, 0, 1}, // Top
+      {minX, maxY, maxZ, 1, 1},
+      {maxX, maxY, maxZ, 1, 0},
+      {maxX, maxY, minZ, 0, 0},
 
-            {minX, minY, maxZ, 1, 0}, // Bottom
-            {minX, minY, minZ, 0, 0},
-            {maxX, minY, minZ, 0, 1},
-            {maxX, minY, maxZ, 1, 1}
+      {minX, minY, maxZ, 1, 0}, // Bottom
+      {minX, minY, minZ, 0, 0},
+      {maxX, minY, minZ, 0, 1},
+      {maxX, minY, maxZ, 1, 1}
     };
   }
 
   protected static double[][] getZVertices(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
     return new double[][]{
-            {maxX, minY, minZ, 0, 1}, // Main +Z Side
-            {minX, minY, minZ, 1, 1},
-            {minX, maxY, minZ, 1, 0},
-            {maxX, maxY, minZ, 0, 0},
+      {maxX, minY, minZ, 0, 1}, // Main +Z Side
+      {minX, minY, minZ, 1, 1},
+      {minX, maxY, minZ, 1, 0},
+      {maxX, maxY, minZ, 0, 0},
 
-            {minX, minY, maxZ, 1, 0}, // Main -Z Side
-            {maxX, minY, maxZ, 0, 0},
-            {maxX, maxY, maxZ, 0, 1},
-            {minX, maxY, maxZ, 1, 1}
+      {minX, minY, maxZ, 1, 0}, // Main -Z Side
+      {maxX, minY, maxZ, 0, 0},
+      {maxX, maxY, maxZ, 0, 1},
+      {minX, maxY, maxZ, 1, 1}
     };
   }
 
   protected static double[][] drawBoxByVertex(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
     return new double[][]{
-            {minX, maxY, minZ, 0, 1}, // Top
-            {minX, maxY, maxZ, 1, 1},
-            {maxX, maxY, maxZ, 1, 0},
-            {maxX, maxY, minZ, 0, 0},
+      {minX, maxY, minZ, 0, 1}, // Top
+      {minX, maxY, maxZ, 1, 1},
+      {maxX, maxY, maxZ, 1, 0},
+      {maxX, maxY, minZ, 0, 0},
 
-            {minX, minY, maxZ, 0, 1}, // Bottom
-            {minX, minY, minZ, 1, 1},
-            {maxX, minY, minZ, 1, 0},
-            {maxX, minY, maxZ, 0, 0},
+      {minX, minY, maxZ, 0, 1}, // Bottom
+      {minX, minY, minZ, 1, 1},
+      {maxX, minY, minZ, 1, 0},
+      {maxX, minY, maxZ, 0, 0},
 
-            {minX, minY, minZ, 0, 1}, // Main +X Side
-            {minX, minY, maxZ, 1, 1},
-            {minX, maxY, maxZ, 1, 0},
-            {minX, maxY, minZ, 0, 0},
+      {minX, minY, minZ, 0, 1}, // Main +X Side
+      {minX, minY, maxZ, 1, 1},
+      {minX, maxY, maxZ, 1, 0},
+      {minX, maxY, minZ, 0, 0},
 
-            {maxX, minY, maxZ, 0, 1}, // Main -X Side
-            {maxX, minY, minZ, 1, 1},
-            {maxX, maxY, minZ, 1, 0},
-            {maxX, maxY, maxZ, 0, 0}
+      {maxX, minY, maxZ, 0, 1}, // Main -X Side
+      {maxX, minY, minZ, 1, 1},
+      {maxX, maxY, minZ, 1, 0},
+      {maxX, maxY, maxZ, 0, 0}
     };
   }
 
   protected static double[][] drawCubeByVertex(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
     return new double[][]{
-            {maxX, minY, minZ, 0, 1}, // Main +Z Side
-            {minX, minY, minZ, 1, 1},
-            {minX, maxY, minZ, 1, 0},
-            {maxX, maxY, minZ, 0, 0},
+      {maxX, minY, minZ, 0, 1}, // Main +Z Side
+      {minX, minY, minZ, 1, 1},
+      {minX, maxY, minZ, 1, 0},
+      {maxX, maxY, minZ, 0, 0},
 
-            {minX, minY, maxZ, 0, 1}, // Main -Z Side
-            {maxX, minY, maxZ, 1, 1},
-            {maxX, maxY, maxZ, 1, 0},
-            {minX, maxY, maxZ, 0, 0}
+      {minX, minY, maxZ, 0, 1}, // Main -Z Side
+      {maxX, minY, maxZ, 1, 1},
+      {maxX, maxY, maxZ, 1, 0},
+      {minX, maxY, maxZ, 0, 0}
     };
   }
 }

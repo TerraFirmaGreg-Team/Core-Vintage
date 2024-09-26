@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.TextComponentTranslation;
 
-
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
@@ -67,6 +66,6 @@ public class SoilItemVariant extends Variant<SoilItemVariant> {
 
   public String getLocalizedName() {
     return new TextComponentTranslation(
-            String.format("soil.variant.%s.name", this)).getFormattedText();
+      String.format("soil.variant.%s.name", this)).getFormattedText();
   }
 }

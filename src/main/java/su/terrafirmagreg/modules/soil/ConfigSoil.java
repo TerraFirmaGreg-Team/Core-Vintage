@@ -9,7 +9,6 @@ import net.minecraftforge.common.config.Config;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 
-
 import static su.terrafirmagreg.data.Constants.MOD_ID;
 import static su.terrafirmagreg.data.Constants.MOD_NAME;
 

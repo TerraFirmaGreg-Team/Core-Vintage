@@ -8,7 +8,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,8 +26,7 @@ public final class SitUtils {
    * @param creature the entityLiving that will sit on this block
    * @param yOffset  the y offset of the top facing
    */
-  public static void sitOnBlock(@NotNull World world, @NotNull BlockPos pos,
-          @NotNull EntityLiving creature, double yOffset) {
+  public static void sitOnBlock(@NotNull World world, @NotNull BlockPos pos, @NotNull EntityLiving creature, double yOffset) {
     if (!world.isRemote && !world.getBlockState(pos).getMaterial().isReplaceable()) {
       EntitySeatOn seat = new EntitySeatOn(world, pos, yOffset);
       world.spawnEntity(seat);
@@ -46,8 +44,7 @@ public final class SitUtils {
   @Nullable
   public static Entity getSittingEntity(@NotNull World world, @NotNull BlockPos pos) {
     if (!world.isRemote) {
-      List<EntitySeatOn> seats = world.getEntitiesWithinAABB(EntitySeatOn.class,
-              new AxisAlignedBB(pos).grow(1D));
+      List<EntitySeatOn> seats = world.getEntitiesWithinAABB(EntitySeatOn.class, new AxisAlignedBB(pos).grow(1D));
       for (EntitySeatOn seat : seats) {
         if (pos.equals(seat.getPos())) {
           return seat.getSittingEntity();

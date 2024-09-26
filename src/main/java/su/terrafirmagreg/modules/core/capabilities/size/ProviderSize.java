@@ -8,7 +8,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,7 +16,7 @@ import java.util.EnumMap;
 public class ProviderSize implements ICapabilitySize, ICapabilityProvider {
 
   private static final EnumMap<Size, EnumMap<Weight, ProviderSize[]>> CACHE = new EnumMap<>(
-          Size.class);
+    Size.class);
   private final Size size;
   private final Weight weight;
   private final boolean canStack;
@@ -36,12 +35,12 @@ public class ProviderSize implements ICapabilitySize, ICapabilityProvider {
 
   public static ProviderSize getDefault() {
     return get(Size.SMALL, Weight.LIGHT,
-            true); // Default to fitting in small vessels and stacksize = 32
+               true); // Default to fitting in small vessels and stacksize = 32
   }
 
   public static ProviderSize get(Size size, Weight weight, boolean canStack) {
     EnumMap<Weight, ProviderSize[]> nested = CACHE.computeIfAbsent(size,
-            k -> new EnumMap<>(Weight.class));
+                                                                   k -> new EnumMap<>(Weight.class));
     ProviderSize[] handlers = nested.computeIfAbsent(weight, k -> new ProviderSize[2]);
     if (handlers[canStack ? 1 : 0] == null) {
       handlers[canStack ? 1 : 0] = new ProviderSize(size, weight, canStack);

@@ -8,7 +8,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 

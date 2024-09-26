@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:wood/chest/kapok"
-    },
-    {
+    }, {
       "item": "minecraft:tripwire_hook"
     }
   ],

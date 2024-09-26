@@ -13,9 +13,9 @@ public class BlockAggregate extends BaseBlockFalling implements IBlockSettings {
     super(Settings.of(Material.SAND));
 
     getSettings()
-            .registryKey("core/aggregate")
-            .oreDict("aggregate")
-            .sound(SoundType.SAND)
-            .hardness(0.4f);
+      .registryKey("core/aggregate")
+      .oreDict("aggregate")
+      .sound(SoundType.SAND)
+      .hardness(0.4f);
   }
 }

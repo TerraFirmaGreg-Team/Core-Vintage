@@ -11,7 +11,6 @@ import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 
-
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 
 public class ContainerWoodPlowCart extends Container {
@@ -20,7 +19,7 @@ public class ContainerWoodPlowCart extends Container {
   private final EntityWoodCart drawn;
 
   public ContainerWoodPlowCart(InventoryPlayer playerInventory, IInventory plowInventory,
-          EntityWoodCart drawn, EntityPlayer player) {
+                               EntityWoodCart drawn, EntityPlayer player) {
     this.plowInventory = plowInventory;
     this.drawn = drawn;
     plowInventory.openInventory(player);
@@ -72,7 +71,7 @@ public class ContainerWoodPlowCart extends Container {
 
   public boolean canInteractWith(EntityPlayer playerIn) {
     return this.plowInventory.isUsableByPlayer(playerIn) && this.drawn.isEntityAlive()
-            && this.drawn.getDistance(playerIn) < 8.0F;
+           && this.drawn.getDistance(playerIn) < 8.0F;
   }
 
   static class Tool extends Slot {
@@ -83,7 +82,7 @@ public class ContainerWoodPlowCart extends Container {
 
     public boolean isItemValid(ItemStack stack) {
       return stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemSpade
-              || stack.getItem() instanceof ItemMetalTool;
+             || stack.getItem() instanceof ItemMetalTool;
     }
 
     public int getSlotStackLimit() {

@@ -1,15 +1,26 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.TerraFirmaGreg;
+
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import com.google.common.collect.Lists;
+import se.gory_moon.horsepower.Configs;
+
+import org.jetbrains.annotations.Nullable;
 
 import lombok.experimental.UtilityClass;
+
+import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 @UtilityClass
 @SuppressWarnings("unused")
@@ -19,11 +30,48 @@ public final class EntityUtils {
    * An array of armor equipment slots.
    */
   private static final EntityEquipmentSlot[] EQUIPMENT_SLOTS = new EntityEquipmentSlot[]{
-          EntityEquipmentSlot.HEAD,
-          EntityEquipmentSlot.CHEST,
-          EntityEquipmentSlot.LEGS,
-          EntityEquipmentSlot.FEET
+    EntityEquipmentSlot.HEAD,
+    EntityEquipmentSlot.CHEST,
+    EntityEquipmentSlot.LEGS,
+    EntityEquipmentSlot.FEET
   };
+
+  private static final ConcurrentHashMap<String, Class<? extends EntityCreature>> ENTITY_CLASSES_CACHE = new ConcurrentHashMap<>();
+
+
+  public static ArrayList<Class<? extends EntityCreature>> getCreatureClasses() {
+    ArrayList<Class<? extends EntityCreature>> clazzes = Lists.newArrayList();
+    if (Configs.general.useHorseInterface) {
+      clazzes.add(AbstractHorse.class);
+    }
+
+    for (String string : Configs.general.grindstoneMobList) {
+      Class clazz = EntityUtils.getEntityClass(string);
+
+      if (clazz == null) {
+        continue;
+      }
+
+      if (EntityCreature.class.isAssignableFrom(clazz)) {
+        clazzes.add(clazz);
+      } else {
+        TerraFirmaGreg.LOGGER.error("Error in config, the mob ( {} ) can't be leashed", string);
+      }
+    }
+    return clazzes;
+  }
+
+  public static @Nullable Class<? extends Entity> getEntityClass(String mobName) {
+    return ENTITY_CLASSES_CACHE.computeIfAbsent(mobName, k -> {
+      Class clazz = ClassUtils.getClassFromString(mobName);
+      if (Entity.class.isAssignableFrom(clazz)) {
+        return clazz;
+      } else {
+        TerraFirmaGreg.LOGGER.error("Error in config, the Entity ( {} ) can't be leashed", mobName);
+        return null;
+      }
+    });
+  }
 
   /**
    * Возвращает экземпляр типизированного объекта Entity по его классу.
@@ -35,12 +83,13 @@ public final class EntityUtils {
    * @return экземпляр типизированного объекта Entity
    */
   @SuppressWarnings("unchecked")
+  @Nullable
   public static <T extends Entity> T getEntity(World world, BlockPos pos, Class<T> aClass) {
     Entity entity = world.getEntityByID(pos.getX());
-    if (!aClass.isInstance(entity)) {
-      return null;
+    if (aClass.isInstance(entity)) {
+      return (T) entity;
     }
-    return (T) entity;
+    return null;
   }
 
   /**
@@ -88,7 +137,7 @@ public final class EntityUtils {
   public static double getKnockbackResistance(EntityLivingBase entity) {
 
     return entity.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE)
-            .getAttributeValue();
+                 .getAttributeValue();
   }
 
   /**

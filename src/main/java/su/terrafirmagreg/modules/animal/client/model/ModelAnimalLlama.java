@@ -38,11 +38,11 @@ public class ModelAnimalLlama extends ModelQuadruped {
     this.chest1 = new ModelRenderer(this, 45, 28);
     this.chest1.addBox(-3.0F, 0.0F, 0.0F, 8, 8, 3, scale);
     this.chest1.setRotationPoint(-8.5F, 3.0F, 3.0F);
-    this.chest1.rotateAngleY = 1.5707964F;
+    this.chest1.rotateAngleY = ((float) Math.PI / 2F);
     this.chest2 = new ModelRenderer(this, 45, 41);
     this.chest2.addBox(-3.0F, 0.0F, 0.0F, 8, 8, 3, scale);
     this.chest2.setRotationPoint(5.5F, 3.0F, 3.0F);
-    this.chest2.rotateAngleY = 1.5707964F;
+    this.chest2.rotateAngleY = ((float) Math.PI / 2F);
     this.leg1 = new ModelRenderer(this, 29, 29);
     this.leg1.addBox(-2.0F, 0.0F, -2.0F, 4, 14, 4, scale);
     this.leg1.setRotationPoint(-2.5F, 10.0F, 6.0F);
@@ -70,11 +70,11 @@ public class ModelAnimalLlama extends ModelQuadruped {
 
   @Override
   public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
-          float netHeadYaw, float headPitch, float scale) {
+                     float netHeadYaw, float headPitch, float scale) {
     AbstractChestHorse abstractchesthorse = (AbstractChestHorse) entityIn;
     boolean flag = !abstractchesthorse.isChild() && abstractchesthorse.hasChest();
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-            entityIn);
+                           entityIn);
 
     if (((EntityAnimal) entityIn).isChild()) {
       double ageScale = 1;

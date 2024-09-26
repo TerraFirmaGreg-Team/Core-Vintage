@@ -1,9 +1,7 @@
 {
   "type": "tfc:sandwich",
   "pattern": [
-    " BK",
-    "FGH",
-    " B "
+    " BK", "FGH", " B "
   ],
   "key": {
     "K": [
@@ -18,20 +16,16 @@
     "F": [
       {
         "type": "minecraft:empty"
-      },
-      {
+      }, {
         "type": "forge:ore_dict",
         "ore": "categoryFruit"
-      },
-      {
+      }, {
         "type": "forge:ore_dict",
         "ore": "categoryCookedMeat"
-      },
-      {
+      }, {
         "type": "forge:ore_dict",
         "ore": "categoryVegetable"
-      },
-      {
+      }, {
         "type": "forge:ore_dict",
         "ore": "categoryDairy"
       }
@@ -40,20 +34,16 @@
       {
         "type": "forge:ore_dict",
         "ore": "categoryVegetable"
-      },
-      {
+      }, {
         "type": "forge:ore_dict",
         "ore": "categoryCookedMeat"
-      },
-      {
+      }, {
         "type": "forge:ore_dict",
         "ore": "categoryDairy"
-      },
-      {
+      }, {
         "type": "forge:ore_dict",
         "ore": "categoryFruit"
-      },
-      {
+      }, {
         "type": "minecraft:empty"
       }
     ],
@@ -61,19 +51,15 @@
       {
         "type": "forge:ore_dict",
         "ore": "categoryDairy"
-      },
-      {
+      }, {
         "type": "forge:ore_dict",
         "ore": "categoryFruit"
-      },
-      {
+      }, {
         "type": "forge:ore_dict",
         "ore": "categoryVegetable"
-      },
-      {
+      }, {
         "type": "minecraft:empty"
-      },
-      {
+      }, {
         "type": "forge:ore_dict",
         "ore": "categoryCookedMeat"
       }

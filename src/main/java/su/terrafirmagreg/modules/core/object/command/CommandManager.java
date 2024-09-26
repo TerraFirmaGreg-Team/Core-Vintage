@@ -7,7 +7,6 @@ import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-
 import com.google.common.collect.Lists;
 
 import java.util.List;

@@ -8,7 +8,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
@@ -36,7 +35,7 @@ public class PlacedItemProvider implements IWailaBlock {
         Metal metal = ore.getMetal();
         if (metal != null) {
           currentTooltip.add(new TextComponentTranslation("waila.tfc.ore_drop",
-                  new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
+                                                          new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
         }
       }
     }

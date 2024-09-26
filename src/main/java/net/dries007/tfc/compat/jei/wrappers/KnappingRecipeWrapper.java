@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.ingredients.IIngredients;
@@ -26,7 +25,7 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
 
   private static final ResourceLocation CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button_disabled.png");
   private static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFC,
-          "textures/gui/knapping/clay_button_fire_disabled.png");
+                                                                                          "textures/gui/knapping/clay_button_fire_disabled.png");
   private static final ResourceLocation CLAY_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button.png");
   private static final ResourceLocation FIRE_CLAY_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button_fire.png");
   private static final ResourceLocation LEATHER_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/leather_button.png");
@@ -38,15 +37,15 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
   }
 
   protected KnappingRecipeWrapper(KnappingRecipe recipe, IGuiHelper helper, @Nullable ResourceLocation highTexture,
-          @Nullable ResourceLocation lowTexture) {
+                                  @Nullable ResourceLocation lowTexture) {
     this.recipe = recipe;
 
     this.squareHigh = highTexture == null ? null : helper.drawableBuilder(highTexture, 0, 0, 16, 16)
-            .setTextureSize(16, 16)
-            .build();
+                                                         .setTextureSize(16, 16)
+                                                         .build();
     this.squareLow = lowTexture == null ? null : helper.drawableBuilder(lowTexture, 0, 0, 16, 16)
-            .setTextureSize(16, 16)
-            .build();
+                                                       .setTextureSize(16, 16)
+                                                       .build();
   }
 
   @Nullable
@@ -106,7 +105,7 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
     @Override
     public void getIngredients(IIngredients ingredients) {
       ingredients.setOutputLists(VanillaTypes.ITEM,
-              CollectionUtils.listOf(CollectionUtils.listOf(recipe.getOutput(new ItemStack(ItemsRock.LOOSE.get(rock))))));
+                                 CollectionUtils.listOf(CollectionUtils.listOf(recipe.getOutput(new ItemStack(ItemsRock.LOOSE.get(rock))))));
     }
   }
 }

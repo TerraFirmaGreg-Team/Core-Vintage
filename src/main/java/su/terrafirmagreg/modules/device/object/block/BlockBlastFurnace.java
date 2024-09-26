@@ -23,7 +23,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
@@ -46,51 +45,51 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
     Predicate<IBlockState> sheetMatcher = state -> {
       if (state.getBlock() instanceof BlockMetalSheet block) {
         return block.getMetal().getTier().isAtLeast(Metal.Tier.TIER_III) && block.getMetal()
-                .isToolMetal();
+                                                                                 .isToolMetal();
       }
       return false;
     };
     BLAST_FURNACE_CHIMNEY = new Multiblock()
-            .match(new BlockPos(0, 0, 0),
-                    state -> state.getBlock() == BlocksDevice.MOLTEN || state.getMaterial()
-                            .isReplaceable())
-            .match(new BlockPos(0, 0, 1), stoneMatcher)
-            .match(new BlockPos(0, 0, -1), stoneMatcher)
-            .match(new BlockPos(1, 0, 0), stoneMatcher)
-            .match(new BlockPos(-1, 0, 0), stoneMatcher)
-            .match(new BlockPos(0, 0, -2), sheetMatcher)
-            .match(new BlockPos(0, 0, -2), tile -> tile.getFace(EnumFacing.NORTH), TEMetalSheet.class)
-            .match(new BlockPos(0, 0, 2), sheetMatcher)
-            .match(new BlockPos(0, 0, 2), tile -> tile.getFace(EnumFacing.SOUTH), TEMetalSheet.class)
-            .match(new BlockPos(2, 0, 0), sheetMatcher)
-            .match(new BlockPos(2, 0, 0), tile -> tile.getFace(EnumFacing.EAST), TEMetalSheet.class)
-            .match(new BlockPos(-2, 0, 0), sheetMatcher)
-            .match(new BlockPos(-2, 0, 0), tile -> tile.getFace(EnumFacing.WEST), TEMetalSheet.class)
-            .match(new BlockPos(-1, 0, -1), sheetMatcher)
-            .match(new BlockPos(-1, 0, -1),
-                    tile -> tile.getFace(EnumFacing.NORTH) && tile.getFace(EnumFacing.WEST),
-                    TEMetalSheet.class)
-            .match(new BlockPos(1, 0, -1), sheetMatcher)
-            .match(new BlockPos(1, 0, -1),
-                    tile -> tile.getFace(EnumFacing.NORTH) && tile.getFace(EnumFacing.EAST),
-                    TEMetalSheet.class)
-            .match(new BlockPos(-1, 0, 1), sheetMatcher)
-            .match(new BlockPos(-1, 0, 1),
-                    tile -> tile.getFace(EnumFacing.SOUTH) && tile.getFace(EnumFacing.WEST),
-                    TEMetalSheet.class)
-            .match(new BlockPos(1, 0, 1), sheetMatcher)
-            .match(new BlockPos(1, 0, 1),
-                    tile -> tile.getFace(EnumFacing.SOUTH) && tile.getFace(EnumFacing.EAST),
-                    TEMetalSheet.class);
+      .match(new BlockPos(0, 0, 0),
+             state -> state.getBlock() == BlocksDevice.MOLTEN || state.getMaterial()
+                                                                      .isReplaceable())
+      .match(new BlockPos(0, 0, 1), stoneMatcher)
+      .match(new BlockPos(0, 0, -1), stoneMatcher)
+      .match(new BlockPos(1, 0, 0), stoneMatcher)
+      .match(new BlockPos(-1, 0, 0), stoneMatcher)
+      .match(new BlockPos(0, 0, -2), sheetMatcher)
+      .match(new BlockPos(0, 0, -2), tile -> tile.getFace(EnumFacing.NORTH), TEMetalSheet.class)
+      .match(new BlockPos(0, 0, 2), sheetMatcher)
+      .match(new BlockPos(0, 0, 2), tile -> tile.getFace(EnumFacing.SOUTH), TEMetalSheet.class)
+      .match(new BlockPos(2, 0, 0), sheetMatcher)
+      .match(new BlockPos(2, 0, 0), tile -> tile.getFace(EnumFacing.EAST), TEMetalSheet.class)
+      .match(new BlockPos(-2, 0, 0), sheetMatcher)
+      .match(new BlockPos(-2, 0, 0), tile -> tile.getFace(EnumFacing.WEST), TEMetalSheet.class)
+      .match(new BlockPos(-1, 0, -1), sheetMatcher)
+      .match(new BlockPos(-1, 0, -1),
+             tile -> tile.getFace(EnumFacing.NORTH) && tile.getFace(EnumFacing.WEST),
+             TEMetalSheet.class)
+      .match(new BlockPos(1, 0, -1), sheetMatcher)
+      .match(new BlockPos(1, 0, -1),
+             tile -> tile.getFace(EnumFacing.NORTH) && tile.getFace(EnumFacing.EAST),
+             TEMetalSheet.class)
+      .match(new BlockPos(-1, 0, 1), sheetMatcher)
+      .match(new BlockPos(-1, 0, 1),
+             tile -> tile.getFace(EnumFacing.SOUTH) && tile.getFace(EnumFacing.WEST),
+             TEMetalSheet.class)
+      .match(new BlockPos(1, 0, 1), sheetMatcher)
+      .match(new BlockPos(1, 0, 1),
+             tile -> tile.getFace(EnumFacing.SOUTH) && tile.getFace(EnumFacing.EAST),
+             TEMetalSheet.class);
   }
 
   public BlockBlastFurnace() {
     super(Settings.of(Material.IRON));
 
     getSettings()
-            .registryKey("device/blast_furnace")
-            .hardness(2.0F)
-            .resistance(2.0F);
+      .registryKey("device/blast_furnace")
+      .hardness(2.0F)
+      .resistance(2.0F);
     setHarvestLevel(ToolClasses.PICKAXE, 0);
   }
 
@@ -138,8 +137,8 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                  float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       if (!state.getValue(LIT)) {
         var tile = TileUtils.getTile(worldIn, pos, TileBlastFurnace.class);

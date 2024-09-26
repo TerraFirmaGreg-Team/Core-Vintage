@@ -37,7 +37,6 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -68,41 +67,41 @@ public final class EntitySpawnerWorldData {
   static {
     LIVESTOCK = new HashMap<>();
     LIVESTOCK.put(EntityAnimalAlpaca.class,
-            () -> ConfigTFC.Animals.ALPACA.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.ALPACA.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalCamel.class,
-            () -> ConfigTFC.Animals.CAMEL.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.CAMEL.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalChicken.class,
-            () -> ConfigTFC.Animals.CHICKEN.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.CHICKEN.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalCow.class,
-            () -> ConfigTFC.Animals.COW.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.COW.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalDonkey.class,
-            () -> ConfigTFC.Animals.DONKEY.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.DONKEY.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalDuck.class,
-            () -> ConfigTFC.Animals.DUCK.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.DUCK.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalGoat.class,
-            () -> ConfigTFC.Animals.GOAT.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.GOAT.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalGrouse.class,
-            () -> ConfigTFC.Animals.GROUSE.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.GROUSE.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalHorse.class,
-            () -> ConfigTFC.Animals.HORSE.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.HORSE.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalLlama.class,
-            () -> ConfigTFC.Animals.LLAMA.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.LLAMA.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalMuskOx.class,
-            () -> ConfigTFC.Animals.MUSKOX.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.MUSKOX.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalOcelot.class,
-            () -> ConfigTFC.Animals.OCELOT.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.OCELOT.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalPig.class,
-            () -> ConfigTFC.Animals.PIG.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.PIG.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalQuail.class,
-            () -> ConfigTFC.Animals.QUAIL.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.QUAIL.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalSheep.class,
-            () -> ConfigTFC.Animals.SHEEP.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.SHEEP.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalWolf.class,
-            () -> ConfigTFC.Animals.WOLF.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.WOLF.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalYak.class,
-            () -> ConfigTFC.Animals.YAK.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.YAK.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalZebu.class,
-            () -> ConfigTFC.Animals.ZEBU.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigTFC.Animals.ZEBU.elder * ICalendar.TICKS_IN_DAY);
   }
 
   public static void init() {
@@ -113,8 +112,8 @@ public final class EntitySpawnerWorldData {
   }
 
   /**
-   * Experimental: Handles wild livestock respawning This event runs after CheckSpawn, which means you can safely assume that all other restrictions passed (biome,
-   * temp, rainfall, etc)
+   * Experimental: Handles wild livestock respawning This event runs after CheckSpawn, which means you can safely assume that all other restrictions passed
+   * (biome, temp, rainfall, etc)
    */
   @SubscribeEvent
   public static void onLivestockRespawn(LivingSpawnEvent.SpecialSpawn event) {
@@ -122,8 +121,8 @@ public final class EntitySpawnerWorldData {
     EntityLiving entity = (EntityLiving) event.getEntity();
 
     event.getWorld()
-            .getBiome(new BlockPos(event.getX(), event.getY(), event.getZ()))
-            .getSpawnableList(EnumCreatureType.CREATURE);
+         .getBiome(new BlockPos(event.getX(), event.getY(), event.getZ()))
+         .getSpawnableList(EnumCreatureType.CREATURE);
 
     if (LIVESTOCK.containsKey(entity.getClass())) {
       event.setResult(Event.Result.ALLOW); // Always cancel vanilla's spawning since we take it from here
@@ -140,14 +139,14 @@ public final class EntitySpawnerWorldData {
         int diameterZ = 16;
         //noinspection ConstantConditions
         doGroupSpawning(EntityRegistry.getEntry(entity.getClass()), worldIn, centerX, centerZ,
-                diameterX, diameterZ, worldIn.rand);
+                        diameterX, diameterZ, worldIn.rand);
       }
     }
   }
 
   private static void doGroupSpawning(EntityEntry entityEntry, World worldIn, int centerX,
-          int centerZ, int diameterX, int diameterZ,
-          Random randomIn) {
+                                      int centerZ, int diameterX, int diameterZ,
+                                      Random randomIn) {
     List<EntityLiving> group = new ArrayList<>();
     EntityLiving creature = (EntityLiving) entityEntry.newInstance(worldIn);
     if (!(creature instanceof ICreature creatureTFC)) {
@@ -155,19 +154,19 @@ public final class EntitySpawnerWorldData {
     }
     int fallback = 5; // Fallback measure if some mod completely deny this entity spawn
     int individuals = Math.max(1, creatureTFC.getMinGroupSize()) +
-            randomIn.nextInt(
-                    creatureTFC.getMaxGroupSize() - Math.max(0, creatureTFC.getMinGroupSize() - 1));
+                      randomIn.nextInt(
+                        creatureTFC.getMaxGroupSize() - Math.max(0, creatureTFC.getMinGroupSize() - 1));
     while (individuals > 0) {
       int j = centerX + randomIn.nextInt(diameterX);
       int k = centerZ + randomIn.nextInt(diameterZ);
       BlockPos blockpos = worldIn.getTopSolidOrLiquidBlock(new BlockPos(j, 0, k));
       creature.setLocationAndAngles((float) j + 0.5F, blockpos.getY(), (float) k + 0.5F,
-              randomIn.nextFloat() * 360.0F, 0.0F);
+                                    randomIn.nextFloat() * 360.0F, 0.0F);
       if (creature.getCanSpawnHere()) // fix entities spawning inside walls
       {
         if (net.minecraftforge.event.ForgeEventFactory.canEntitySpawn(creature, worldIn, j + 0.5f,
-                (float) blockpos.getY(), k + 0.5f, null) ==
-                net.minecraftforge.fml.common.eventhandler.Event.Result.DENY) {
+                                                                      (float) blockpos.getY(), k + 0.5f, null) ==
+            net.minecraftforge.fml.common.eventhandler.Event.Result.DENY) {
           if (--fallback > 0) {
             continue;
           } else {
@@ -205,8 +204,8 @@ public final class EntitySpawnerWorldData {
    * @param diameterZ The Z diameter of the rectangle to spawn mobs in
    */
   public static void performWorldGenSpawning(World worldIn, Biome biomeIn, int centerX, int centerZ,
-          int diameterX, int diameterZ,
-          Random randomIn) {
+                                             int diameterX, int diameterZ,
+                                             Random randomIn) {
     final BlockPos chunkBlockPos = new BlockPos(centerX, 0, centerZ);
 
     final float temperature = Climate.getAvgTemp(worldIn, chunkBlockPos);
@@ -216,18 +215,18 @@ public final class EntitySpawnerWorldData {
 
     // Spawns only one group
     ForgeRegistries.ENTITIES.getValuesCollection().stream()
-            .filter(x -> {
-              if (ICreature.class.isAssignableFrom(x.getEntityClass())) {
-                Entity ent = x.newInstance(worldIn);
-                if (ent instanceof ICreature creature) {
-                  int weight = creature.getSpawnWeight(biomeIn, temperature, rainfall, floraDensity,
-                          floraDiversity);
-                  return weight > 0 && randomIn.nextInt(weight) == 0;
-                }
-              }
-              return false;
-            }).findFirst()
-            .ifPresent(entityEntry -> doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX,
-                    diameterZ, randomIn));
+                            .filter(x -> {
+                              if (ICreature.class.isAssignableFrom(x.getEntityClass())) {
+                                Entity ent = x.newInstance(worldIn);
+                                if (ent instanceof ICreature creature) {
+                                  int weight = creature.getSpawnWeight(biomeIn, temperature, rainfall, floraDensity,
+                                                                       floraDiversity);
+                                  return weight > 0 && randomIn.nextInt(weight) == 0;
+                                }
+                              }
+                              return false;
+                            }).findFirst()
+                            .ifPresent(entityEntry -> doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX,
+                                                                      diameterZ, randomIn));
   }
 }

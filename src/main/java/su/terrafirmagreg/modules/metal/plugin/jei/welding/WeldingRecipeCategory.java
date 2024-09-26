@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -17,7 +16,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 
 public class WeldingRecipeCategory
-        extends BaseRecipeCategory<WeldingRecipeWrapper> {
+  extends BaseRecipeCategory<WeldingRecipeWrapper> {
 
   public static final String UID = ModUtils.localize("welding");
 
@@ -31,7 +30,7 @@ public class WeldingRecipeCategory
     this.arrow = helper.createDrawable(ICONS, 0, 14, 22, 16);
     IDrawableStatic arrowAnimated = helper.createDrawable(ICONS, 22, 14, 22, 16);
     this.arrowAnimated = helper.createAnimatedDrawable(arrowAnimated, 80,
-            IDrawableAnimated.StartDirection.LEFT, false);
+                                                       IDrawableAnimated.StartDirection.LEFT, false);
     this.slot = helper.getSlotDrawable();
   }
 
@@ -46,7 +45,7 @@ public class WeldingRecipeCategory
 
   @Override
   public void setRecipe(IRecipeLayout recipeLayout, WeldingRecipeWrapper recipeWrapper,
-          IIngredients ingredients) {
+                        IIngredients ingredients) {
     IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
     itemStackGroup.init(0, true, 0, 16);
     itemStackGroup.init(1, true, 20, 16);
@@ -54,7 +53,7 @@ public class WeldingRecipeCategory
 
     itemStackGroup.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
     itemStackGroup.set(1,
-            new ItemStack(ItemsDevice.HANDSTONE)); // todo: use all ore dict entries with "handstone"
+                       new ItemStack(ItemsDevice.HANDSTONE)); // todo: use all ore dict entries with "handstone"
     itemStackGroup.set(2, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
   }
 

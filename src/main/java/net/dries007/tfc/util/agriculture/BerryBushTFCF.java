@@ -1,19 +1,15 @@
 package net.dries007.tfc.util.agriculture;
 
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorBerryBushes;
 
 import net.minecraft.item.ItemStack;
-
 
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.objects.items.food.ItemFoodTFCF;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
 
 import static net.dries007.tfc.api.types.IBerryBush.Size.LARGE;
 
@@ -41,7 +37,7 @@ public enum BerryBushTFCF implements IBerryBush {
   private final boolean hasSpikes;
 
   BerryBushTFCF(ItemFoodTFCF fruit, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain,
-          float growthTime, Size size, boolean spiky) {
+                float growthTime, Size size, boolean spiky) {
     this.fruit = fruit;
     this.harvestMonthStart = harvestMonthStart;
     this.harvestingMonths = harvestingMonths;

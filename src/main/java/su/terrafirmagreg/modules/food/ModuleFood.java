@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.food.init.ItemsFood;
 
 import net.minecraft.creativetab.CreativeTabs;
 
-
 import org.jetbrains.annotations.NotNull;
 
 //@ModuleTFG(moduleID = "Food", name = "TFG Module Food")

@@ -18,7 +18,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -63,14 +62,14 @@ final class ServerInteractionManager {
     }
 
     boolean bypass = player.getHeldItemMainhand()
-            .doesSneakBypassUse(worldIn, pos, player) && player.getHeldItemOffhand()
-            .doesSneakBypassUse(worldIn, pos, player);
+                           .doesSneakBypassUse(worldIn, pos, player) && player.getHeldItemOffhand()
+                                                                              .doesSneakBypassUse(worldIn, pos, player);
 
     if (!player.isSneaking() || bypass || event.getUseBlock() == Event.Result.ALLOW) {
       IBlockState iblockstate = worldIn.getBlockState(pos);
       if (event.getUseBlock() != Event.Result.DENY) {
         if (iblockstate.getBlock()
-                .onBlockActivated(worldIn, pos, iblockstate, player, hand, facing, hitX, hitY, hitZ)) {
+                       .onBlockActivated(worldIn, pos, iblockstate, player, hand, facing, hitX, hitY, hitZ)) {
           result = EnumActionResult.SUCCESS;
         }
       }
@@ -93,7 +92,7 @@ final class ServerInteractionManager {
         int j = stack.getMetadata();
         int i = stack.getCount();
         if (result != EnumActionResult.SUCCESS && event.getUseItem() != Event.Result.DENY
-                || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
+            || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
           // Fire the alternative item use action
           EnumActionResult enumactionresult = itemUseAction.onRightClickBlock(stack, player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
           if (enumactionresult == EnumActionResult.PASS) {
@@ -107,7 +106,7 @@ final class ServerInteractionManager {
         }
       } else {
         if (result != EnumActionResult.SUCCESS && event.getUseItem() != Event.Result.DENY
-                || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
+            || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
           ItemStack copyBeforeUse = stack.copy();
 
           // Fire the alternative item use action

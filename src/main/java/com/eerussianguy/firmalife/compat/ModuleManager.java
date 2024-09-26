@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-
 import com.eerussianguy.firmalife.compat.dynamictrees.DTModule;
 import com.eerussianguy.firmalife.recipe.NutRecipe;
 

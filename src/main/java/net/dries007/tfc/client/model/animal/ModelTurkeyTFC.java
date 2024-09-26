@@ -11,7 +11,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.entity.animal.EntityTurkeyTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -180,7 +179,7 @@ public class ModelTurkeyTFC extends ModelBase {
     tails3 = new ModelRenderer(this, 0, 0);
     tails3.setRotationPoint(-0.6F, 13.0F, 5.3F);
     tails3.addBox(-1.5F, -13.0F, 0.0F, 3, 13, 0, 0.0F);
-    setRotateAngle(tails3, -0.3490658503988659F, -0.10471975511965977F, -0.7853981633974483F);
+    setRotateAngle(tails3, -0.3490658503988659F, -0.10471975511965977F, -((float)Math.PI / 4F));
     tails4 = new ModelRenderer(this, 0, 0);
     tails4.setRotationPoint(-0.4F, 13.0F, 5.2F);
     tails4.addBox(-1.5F, -13.0F, 0.0F, 3, 13, 0, 0.0F);
@@ -204,7 +203,7 @@ public class ModelTurkeyTFC extends ModelBase {
     tails9 = new ModelRenderer(this, 0, 0);
     tails9.setRotationPoint(0.6F, 13.0F, 5.3F);
     tails9.addBox(-1.5F, -13.0F, 0.0F, 3, 13, 0, 0.0F);
-    setRotateAngle(tails9, -0.3490658503988659F, 0.10471975511965977F, 0.7853981633974483F);
+    setRotateAngle(tails9, -0.3490658503988659F, 0.10471975511965977F, ((float)Math.PI / 4F));
     tails10 = new ModelRenderer(this, 0, 0);
     tails10.setRotationPoint(0.8F, 13.0F, 5.4F);
     tails10.addBox(-1.5F, -13.0F, 0.0F, 3, 13, 0, 0.0F);
@@ -225,7 +224,7 @@ public class ModelTurkeyTFC extends ModelBase {
     tailsf3 = new ModelRenderer(this, 0, 0);
     tailsf3.setRotationPoint(-1.0F, 13.0F, 5.0F);
     tailsf3.addBox(-1.5F, -13.0F, 0.0F, 3, 13, 0, 0.0F);
-    setRotateAngle(tailsf3, -1.8212510744560826F, -0.10471975511965977F, -0.7853981633974483F);
+    setRotateAngle(tailsf3, -1.8212510744560826F, -0.10471975511965977F, -((float)Math.PI / 4F));
     tailsf4 = new ModelRenderer(this, 0, 0);
     tailsf4.setRotationPoint(0.0F, 13.0F, 5.0F);
     tailsf4.addBox(-1.5F, -13.0F, 0.0F, 3, 13, 0, 0.0F);
@@ -249,7 +248,7 @@ public class ModelTurkeyTFC extends ModelBase {
     tailsf9 = new ModelRenderer(this, 0, 0);
     tailsf9.setRotationPoint(1.0F, 15.0F, 5.0F);
     tailsf9.addBox(-1.5F, -13.0F, 0.0F, 3, 13, 0, 0.0F);
-    setRotateAngle(tailsf9, -1.7756979809790308F, 0.10471975511965977F, 0.7853981633974483F);
+    setRotateAngle(tailsf9, -1.7756979809790308F, 0.10471975511965977F, ((float)Math.PI / 4F));
     tailsf10 = new ModelRenderer(this, 0, 0);
     tailsf10.setRotationPoint(2.0F, 13.0F, 5.0F);
     tailsf10.addBox(-1.5F, -13.0F, 0.0F, 3, 13, 0, 0.0F);

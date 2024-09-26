@@ -1,11 +1,12 @@
 package se.gory_moon.horsepower.jei.chopping.manual;
 
+import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-
 
 import com.google.common.collect.Lists;
 import mezz.jei.api.IGuiHelper;
@@ -15,11 +16,10 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.blocks.BlockChoppingBlock;
+import se.gory_moon.horsepower.blocks.BlockChopperManual;
 import se.gory_moon.horsepower.jei.HorsePowerCategory;
 import se.gory_moon.horsepower.jei.HorsePowerPlugin;
 import se.gory_moon.horsepower.recipes.ChoppingBlockRecipe;
-import se.gory_moon.horsepower.tileentity.TileManualChopper;
 import se.gory_moon.horsepower.util.Localization;
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class ManualChoppingRecipeWrapper implements IRecipeWrapper {
   public static void setAxes() {
     axes.clear();
     for (ItemStack stack : HorsePowerPlugin.ingredientRegistry.getAllIngredients(VanillaTypes.ITEM)) {
-      if (!stack.isEmpty() && BlockChoppingBlock.isValidChoppingTool(stack, null)) {
+      if (!stack.isEmpty() && BlockChopperManual.isValidChoppingTool(stack, null)) {
         axes.add(stack);
       }
     }
@@ -67,7 +67,7 @@ public class ManualChoppingRecipeWrapper implements IRecipeWrapper {
     List<ItemStack> outputs = new ArrayList<>(axes.size());
     for (ItemStack stack : axes) {
       ItemStack result = output.copy();
-      double base = TileManualChopper.getBaseAmount(stack, null) / 100D;
+      double base = TileChopperManual.getBaseAmount(stack, null) / 100D;
 
       result.setCount((int) Math.ceil((double) result.getCount() * base));
       outputs.add(result);

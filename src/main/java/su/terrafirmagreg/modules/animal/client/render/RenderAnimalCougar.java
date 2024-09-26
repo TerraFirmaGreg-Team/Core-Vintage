@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
@@ -19,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class RenderAnimalCougar extends RenderLiving<EntityAnimalCougar> {
 
   private static final ResourceLocation TEXTURE = ModUtils.resource(
-          "textures/entity/animal/predators/cougar.png");
+    "textures/entity/animal/predators/cougar.png");
 
   public RenderAnimalCougar(RenderManager renderManager) {
     super(renderManager, new ModelAnimalCougar(), 0.7F);
@@ -27,7 +26,7 @@ public class RenderAnimalCougar extends RenderLiving<EntityAnimalCougar> {
 
   @Override
   public void doRender(@NotNull EntityAnimalCougar cougar, double par2, double par4, double par6,
-          float par8, float par9) {
+                       float par8, float par9) {
     this.shadowSize = (float) (0.35f + (cougar.getPercentToAdulthood() * 0.35f));
     super.doRender(cougar, par2, par4, par6, par8, par9);
   }

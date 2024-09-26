@@ -2,7 +2,6 @@ package net.dries007.tfc.api.registries;
 
 import net.minecraft.util.ResourceLocation;
 
-
 import static su.terrafirmagreg.data.Constants.MODID_FL;
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
 

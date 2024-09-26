@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.types.Metal;
 
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +34,7 @@ public class ItemMetalHoe extends ItemMetalTool {
   @NotNull
   @Override
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                    float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
     if (!player.canPlayerEdit(pos.offset(facing), facing, stack)) {
       return EnumActionResult.FAIL;
@@ -61,7 +60,7 @@ public class ItemMetalHoe extends ItemMetalTool {
               return EnumActionResult.SUCCESS;
             case COARSE_DIRT:
               setBlock(stack, player, worldIn, pos, Blocks.DIRT.getDefaultState()
-                      .withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
+                                                               .withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
               return EnumActionResult.SUCCESS;
           }
         }

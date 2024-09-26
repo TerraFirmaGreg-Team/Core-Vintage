@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;
@@ -11,6 +11,7 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiFreezeDryer;
 import su.terrafirmagreg.modules.device.object.container.ContainerFreezeDryer;
+import su.terrafirmagreg.modules.device.object.inventory.InventoryFreezeDryer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -24,16 +25,10 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemStackHandler;
-
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -49,8 +44,7 @@ import lombok.Getter;
 
 import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 
-public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSidedCallback,
-        ITickable, IProviderContainer<ContainerFreezeDryer, GuiFreezeDryer> {
+public class TileFreezeDryer extends BaseTileTickableInventory implements IItemHandlerSidedCallback, IProviderContainer<ContainerFreezeDryer, GuiFreezeDryer> {
 
   public boolean overheating = false;
   public int overheatTick;
@@ -68,7 +62,7 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
   private int ticksSealed;
 
   public TileFreezeDryer() {
-    super(new TileFreezeDryer.FreezeDryerItemStackHandler(10));
+    super(new InventoryFreezeDryer(10));
     initialized = false;
   }
 
@@ -79,7 +73,7 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
       localTemperature = Climate.getActualTemp(this.getPos());
       temperature = localTemperature;
       localPressure = (ModConfig.seaLevelPressure + ((-(this.getPos()
-              .getY() - ModConfig.seaLevel)) * ModConfig.pressureChange));
+                                                            .getY() - ModConfig.seaLevel)) * ModConfig.pressureChange));
       System.out.println("Local pos: " + this.getPos());
       System.out.println("Local pressure is: " + localPressure);
       pressure = localPressure;
@@ -104,19 +98,19 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
 
     //Dissipate Heat
     if (coolant > ModConfig.coolantConsumptionMultiplier * Math.abs(temperature - localTemperature)
-            && pump) {
+        && pump) {
       temperature =
-              temperature + ModConfig.temperatureDissipation * (localTemperature - temperature);
+        temperature + ModConfig.temperatureDissipation * (localTemperature - temperature);
 
       //Only consume coolant if needed.
       if (temperature >= ModConfig.maxTemp) {
         coolant = coolant - ModConfig.coolantConsumptionMultiplier * Math.abs(
-                temperature - localTemperature);
+          temperature - localTemperature);
         temperature = temperature - (ModConfig.temperatureDissipation * temperature);
       }
     } else {
       temperature =
-              temperature + ModConfig.temperatureDissipation * (localTemperature - temperature);
+        temperature + ModConfig.temperatureDissipation * (localTemperature - temperature);
     }
 
     //Disabled till it cools back down
@@ -133,7 +127,7 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
       //Decrease pressure
       if (sealed) {
         pressure = pressure - (getPowerLevel() * ModConfig.workPerPower * pressure) / Math.pow(
-                localPressure, 2);
+          localPressure, 2);
       }
 
       if (pressure < ModConfig.targetPressure) {
@@ -189,15 +183,15 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
 
   private void overheatTick() {
     world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5,
-            this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+                        this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
     world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5,
-            this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+                        this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
     world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5,
-            this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+                        this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
     world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5,
-            this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+                        this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
     world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5,
-            this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+                        this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
     if (temperature <= localTemperature) {
       if ((++overheatTick) % 100 != 0) {
         return;
@@ -228,16 +222,16 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     if (world.isRemote) {
       if (EnumFacing.NORTH == facing) {
         world.spawnParticle(EnumParticleTypes.WATER_DROP, this.pos.getX() + 0.7,
-                this.pos.getY() + 0.6, this.pos.getZ() + 1, 0, 0.1, 0);
+                            this.pos.getY() + 0.6, this.pos.getZ() + 1, 0, 0.1, 0);
       } else if (EnumFacing.EAST == facing) {
         world.spawnParticle(EnumParticleTypes.WATER_DROP, this.pos.getX(), this.pos.getY() + 0.6,
-                this.pos.getZ() + 0.7, 0, 0.1, 0);
+                            this.pos.getZ() + 0.7, 0, 0.1, 0);
       } else if (EnumFacing.SOUTH == facing) {
         world.spawnParticle(EnumParticleTypes.WATER_DROP, this.pos.getX() + 0.3,
-                this.pos.getY() + 0.6, this.pos.getZ(), 0, 0.1, 0);
+                            this.pos.getY() + 0.6, this.pos.getZ(), 0, 0.1, 0);
       } else if (EnumFacing.WEST == facing) {
         world.spawnParticle(EnumParticleTypes.WATER_DROP, this.pos.getX() + 1,
-                this.pos.getY() + 0.6, this.pos.getZ() + 0.3, 0, 0.1, 0);
+                            this.pos.getY() + 0.6, this.pos.getZ() + 0.3, 0, 0.1, 0);
       }
     }
   }
@@ -467,37 +461,14 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     return ticksSealed;
   }
 
-  private static class FreezeDryerItemStackHandler extends ItemStackHandler
-          implements IItemHandlerModifiable, IItemHandler, INBTSerializable<NBTTagCompound> {
-
-    public FreezeDryerItemStackHandler(int size) {
-      super(size);
-      this.deserializeNBT(new NBTTagCompound());
-    }
-
-    public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-      return super.insertItem(slot, stack, simulate);
-    }
-
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-      ItemStack stack = super.extractItem(slot, amount, simulate);
-      CapabilityFood.removeTrait(stack, FoodTrait.PRESERVING);
-      return stack;
-    }
-
-  }
-
   @Override
-  public ContainerFreezeDryer getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+  public ContainerFreezeDryer getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
     return new ContainerFreezeDryer(inventoryPlayer, this);
   }
 
   @Override
-  public GuiFreezeDryer getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
-    return new GuiFreezeDryer(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-            this, state);
+  public GuiFreezeDryer getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new GuiFreezeDryer(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this, state);
   }
 
 

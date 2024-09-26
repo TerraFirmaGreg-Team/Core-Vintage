@@ -19,7 +19,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IFruitTree;
@@ -136,8 +135,8 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
       world.setBlockState(blockPos, BlockFruitTreeTrunk.get(this.tree).getDefaultState());
       if (world.getBlockState(blockPos.up()).getMaterial().isReplaceable()) {
         world.setBlockState(blockPos.up(), BlockFruitTreeLeaves.get(tree)
-                .getDefaultState()
-                .withProperty(BlockFruitTreeLeaves.HARVESTABLE, false));
+                                                               .getDefaultState()
+                                                               .withProperty(BlockFruitTreeLeaves.HARVESTABLE, false));
       }
     }
   }

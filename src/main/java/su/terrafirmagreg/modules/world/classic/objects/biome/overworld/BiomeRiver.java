@@ -22,9 +22,9 @@ public class BiomeRiver extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.RIVER,
-            BiomeDictionary.Type.WET,
-            BiomeDictionary.Type.WATER
+      BiomeDictionary.Type.RIVER,
+      BiomeDictionary.Type.WET,
+      BiomeDictionary.Type.WATER
     };
   }
 }

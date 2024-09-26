@@ -27,7 +27,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IBerryBush;
@@ -191,7 +190,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     if (worldIn.getBlockState(pos).getValue(FRUITING)) {
       if (!worldIn.isRemote) {
         ItemHandlerHelper.giveItemToPlayer(playerIn, bush.getFoodDrop());
@@ -241,7 +240,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
   private boolean canStay(IBlockAccess world, BlockPos pos) {
     IBlockState below = world.getBlockState(pos.down());
     if (bush.getSize() == IBerryBush.Size.LARGE && below.getBlock() instanceof BlockBerryBush &&
-            ((BlockBerryBush) below.getBlock()).bush == this.bush) {
+        ((BlockBerryBush) below.getBlock()).bush == this.bush) {
       return BlockUtils.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
     }
     return BlockUtils.isGrowableSoil(below);

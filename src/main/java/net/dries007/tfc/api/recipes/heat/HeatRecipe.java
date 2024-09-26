@@ -5,7 +5,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
@@ -15,9 +14,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Generic recipe for items that heat up and transform Used by pit kilns, fire pit, and charcoal forge for item transformations Note! This recipe only supports inputs
- * of stack size = 1, as they get "transformed" independent of their size. As of currently, all inventories that use this recipe also have a stack size limit of 1,
- * which is as intended
+ * Generic recipe for items that heat up and transform Used by pit kilns, fire pit, and charcoal forge for item transformations Note! This recipe only supports
+ * inputs of stack size = 1, as they get "transformed" independent of their size. As of currently, all inventories that use this recipe also have a stack size
+ * limit of 1, which is as intended
  */
 
 public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> implements IJEISimpleRecipe {
@@ -47,22 +46,10 @@ public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> im
   @Nullable
   public static HeatRecipe get(ItemStack stack, Metal.Tier tier) {
     return TFCRegistries.HEAT.getValuesCollection()
-            .stream()
-            .filter(r -> r.isValidInput(stack, tier))
-            .findFirst()
-            .orElse(null);
-  }
-
-  /**
-   * Use this to check if the recipe matches the input. Since querying the recipe is somewhat intensive (i.e. not a do every tick thing), cache the recipe and only
-   * re-check on input change Check if the recipe is hot enough to complete with {@link HeatRecipe#isValidTemperature(float)}
-   *
-   * @param input the input
-   * @param tier  the tier of the device doing the heating
-   * @return true if the recipe matches the input and tier
-   */
-  public boolean isValidInput(ItemStack input, Metal.Tier tier) {
-    return tier.isAtLeast(minTier) && ingredient.test(input);
+                             .stream()
+                             .filter(r -> r.isValidInput(stack, tier))
+                             .findFirst()
+                             .orElse(null);
   }
 
   /**
@@ -75,6 +62,18 @@ public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> im
   }
 
   /**
+   * Use this to check if the recipe matches the input. Since querying the recipe is somewhat intensive (i.e. not a do every tick thing), cache the recipe and
+   * only re-check on input change Check if the recipe is hot enough to complete with {@link HeatRecipe#isValidTemperature(float)}
+   *
+   * @param input the input
+   * @param tier  the tier of the device doing the heating
+   * @return true if the recipe matches the input and tier
+   */
+  public boolean isValidInput(ItemStack input, Metal.Tier tier) {
+    return tier.isAtLeast(minTier) && ingredient.test(input);
+  }
+
+  /**
    * @param temperature a temperature
    * @return true if the recipe should melt / transform at this temperature
    */
@@ -83,8 +82,8 @@ public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> im
   }
 
   /**
-   * Gets the output item. This output will be placed in the same slot if possible (charcoal forge), or an output slot if not (fire pit) If EMPTY is returned, then
-   * this recipe produces no special output
+   * Gets the output item. This output will be placed in the same slot if possible (charcoal forge), or an output slot if not (fire pit) If EMPTY is returned,
+   * then this recipe produces no special output
    *
    * @param input the input stack
    * @return the stack to replace the input with

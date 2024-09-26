@@ -15,7 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +42,7 @@ public class ItemBlockFloatingWaterTFC extends ItemBlockTFC {
         BlockPos blockpos = raytraceresult.getBlockPos();
 
         if (!worldIn.isBlockModifiable(playerIn, blockpos) ||
-                !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) {
+            !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) {
           return new ActionResult<>(EnumActionResult.FAIL, itemstack);
         }
 
@@ -51,15 +50,15 @@ public class ItemBlockFloatingWaterTFC extends ItemBlockTFC {
         IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
         if (iblockstate.getMaterial() == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0 && worldIn.isAirBlock(blockpos1) &&
-                iblockstate == block.getPlant()
-                        .getWaterType()) {
+            iblockstate == block.getPlant()
+                                .getWaterType()) {
           // special case for handling block placement with water lilies
           net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.getBlockSnapshot(
-                  worldIn, blockpos1);
+            worldIn, blockpos1);
           worldIn.setBlockState(blockpos1, block.getDefaultState());
           if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, net.minecraft.util.EnumFacing.UP,
-                          handIn)
-                  .isCanceled()) {
+                                                                            handIn)
+                                                        .isCanceled()) {
             blocksnapshot.restore(true, false);
             return new ActionResult<>(EnumActionResult.FAIL, itemstack);
           }

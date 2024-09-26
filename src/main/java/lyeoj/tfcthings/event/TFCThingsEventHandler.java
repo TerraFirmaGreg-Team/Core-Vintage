@@ -24,7 +24,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import lyeoj.tfcthings.entity.projectile.EntityThrownRopeJavelin;
 import lyeoj.tfcthings.items.ItemRopeJavelin;
 import lyeoj.tfcthings.main.ConfigTFCThings;
@@ -44,8 +43,8 @@ public class TFCThingsEventHandler {
       var capability = CapabilitySharpness.get(event.getItemStack());
       if (capability != null && capability.getCharges() > 0) {
         TextFormatting color =
-                capability.getCharges() > 64 ? capability.getCharges() > 256 ? TextFormatting.DARK_PURPLE : TextFormatting.BLUE :
-                        TextFormatting.DARK_GREEN;
+          capability.getCharges() > 64 ? capability.getCharges() > 256 ? TextFormatting.DARK_PURPLE : TextFormatting.BLUE :
+          TextFormatting.DARK_GREEN;
         event.getToolTip().add(I18n.format("tfcthings.tooltip.sharpness", color, "" + capability.getCharges()));
       }
     }
@@ -118,7 +117,7 @@ public class TFCThingsEventHandler {
       if (capability != null) {
         if (shouldBoostSpeed(event.getEntityPlayer().getHeldItemMainhand(), event.getState())) {
           if (event.getState().getBlock() instanceof BlockLogTFC && !event.getState()
-                  .getValue(BlockLogTFC.PLACED)) {
+                                                                          .getValue(BlockLogTFC.PLACED)) {
             return;
           }
           if (capability.getCharges() > 256) {
@@ -165,8 +164,8 @@ public class TFCThingsEventHandler {
   public static void onPlayerInteractEntity(PlayerInteractEvent.EntityInteract event) {
     if (event.getTarget() instanceof EntityAnimalSheep sheep) {
       if ((OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "shears") ||
-              OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "knife"))
-              && sheep.hasWool() && sheep.getFamiliarity() == 1.0F) {
+           OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "knife"))
+          && sheep.hasWool() && sheep.getFamiliarity() == 1.0F) {
         if (!sheep.world.isRemote) {
           ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL, 1);
           StackUtils.spawnItemStack(sheep.world, new BlockPos(sheep.posX, sheep.posY, sheep.posZ), woolStack);

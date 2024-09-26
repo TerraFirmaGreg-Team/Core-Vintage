@@ -3,6 +3,7 @@ package net.dries007.tfc.objects.blocks.wood;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -34,7 +35,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
@@ -42,11 +42,6 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.agriculture.SeasonalTrees;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
-
 import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -78,9 +73,9 @@ public class BlockJoshuaTreeFlower extends Block {
     }
 
     this.setDefaultState(this.blockState.getBaseState()
-            .withProperty(LEAF_STATE, EnumLeafState.NORMAL)
-            .withProperty(HARVESTABLE, true)
-            .withProperty(AGE, Integer.valueOf(0)));
+                                        .withProperty(LEAF_STATE, EnumLeafState.NORMAL)
+                                        .withProperty(HARVESTABLE, true)
+                                        .withProperty(AGE, Integer.valueOf(0)));
     this.setHardness(0.2F);
     this.setLightOpacity(1);
     this.setSoundType(SoundType.PLANT);
@@ -93,6 +88,16 @@ public class BlockJoshuaTreeFlower extends Block {
 
   public static BlockJoshuaTreeFlower get(Tree wood) {
     return MAP.get(wood);
+  }
+
+  private static boolean areAllNeighborsEmpty(World worldIn, BlockPos pos, EnumFacing excludingSide) {
+    for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
+      if (enumfacing != excludingSide && !worldIn.isAirBlock(pos.offset(enumfacing))) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   public Tree getWood() {
@@ -160,7 +165,7 @@ public class BlockJoshuaTreeFlower extends Block {
         Block block = iblockstate.getBlock();
 
         if (BlockUtils.isSand(iblockstate) || BlockUtils.isSoilOrGravel(iblockstate) || block == Blocks.HARDENED_CLAY ||
-                block == Blocks.STAINED_HARDENED_CLAY) {
+            block == Blocks.STAINED_HARDENED_CLAY) {
           flag = true;
         } else if (block == BlockJoshuaTreeLog.get(wood)) {
           int j = 1;
@@ -170,8 +175,8 @@ public class BlockJoshuaTreeFlower extends Block {
 
             if (block1 != BlockJoshuaTreeLog.get(wood)) {
               if (BlockUtils.isSand(worldIn.getBlockState(currentBlock.down(j + 1))) ||
-                      BlockUtils.isSoilOrGravel(worldIn.getBlockState(currentBlock.down(j + 1))) || block1 == Blocks.HARDENED_CLAY ||
-                      block1 == Blocks.STAINED_HARDENED_CLAY) {
+                  BlockUtils.isSoilOrGravel(worldIn.getBlockState(currentBlock.down(j + 1))) || block1 == Blocks.HARDENED_CLAY ||
+                  block1 == Blocks.STAINED_HARDENED_CLAY) {
                 flag1 = true;
               }
 
@@ -200,8 +205,8 @@ public class BlockJoshuaTreeFlower extends Block {
         if (flag && areAllNeighborsEmpty(worldIn, blockpos, null) && worldIn.isAirBlock(currentBlock.up(2))) {
           worldIn.setBlockState(currentBlock, BlockJoshuaTreeLog.get(wood).getDefaultState(), 2);
           worldIn.setBlockState(blockpos, BlockJoshuaTreeFlower.get(wood)
-                  .getDefaultState()
-                  .withProperty(AGE, Integer.valueOf(5)), 2);
+                                                               .getDefaultState()
+                                                               .withProperty(AGE, Integer.valueOf(5)), 2);
           return 0;
         } else if (age < 4) {
           int l = 0;
@@ -221,13 +226,13 @@ public class BlockJoshuaTreeFlower extends Block {
             BlockPos blockpos1 = currentBlock.offset(enumfacing);
 
             if (worldIn.isAirBlock(blockpos1) && worldIn.isAirBlock(blockpos1.down()) &&
-                    areAllNeighborsEmpty(worldIn, blockpos1, enumfacing.getOpposite())) {
+                areAllNeighborsEmpty(worldIn, blockpos1, enumfacing.getOpposite())) {
               //this.placeGrownFlower(worldIn, blockpos1, age + 1);
               worldIn.setBlockState(currentBlock, BlockJoshuaTreeLog.get(wood).getDefaultState(), 2);
               worldIn.setBlockState(blockpos1, BlockJoshuaTreeLog.get(wood).getDefaultState(), 2);
               worldIn.setBlockState(blockpos1.up(), BlockJoshuaTreeFlower.get(wood)
-                      .getDefaultState()
-                      .withProperty(AGE, Integer.valueOf(5)), 2);
+                                                                         .getDefaultState()
+                                                                         .withProperty(AGE, Integer.valueOf(5)), 2);
               //this.placeGrownFlower(worldIn, blockpos1.up(), age + 1);
               growTreeRecursive(worldIn, blockpos1.up(), rand, MathHelper.clamp(age + rand.nextInt(5 - age) + 1, 0, 4));
               flag2 = true;
@@ -239,31 +244,20 @@ public class BlockJoshuaTreeFlower extends Block {
           } else {
             //worldIn.setBlockState(blockpos, BlockJoshuaTreeLog.get(wood).getDefaultState(), 2);
             worldIn.setBlockState(currentBlock, BlockJoshuaTreeFlower.get(wood)
-                    .getDefaultState()
-                    .withProperty(AGE, Integer.valueOf(5)), 2);
+                                                                     .getDefaultState()
+                                                                     .withProperty(AGE, Integer.valueOf(5)), 2);
             return 2;
           }
         } else if (age == 4) {
           worldIn.setBlockState(currentBlock, BlockJoshuaTreeFlower.get(wood)
-                  .getDefaultState()
-                  .withProperty(AGE, Integer.valueOf(5)), 2);
+                                                                   .getDefaultState()
+                                                                   .withProperty(AGE, Integer.valueOf(5)), 2);
           return 2;
           //this.placeDeadFlower(worldIn, pos);
         }
       }
     }
     return -1;
-  }
-
-  /**
-   * Convert the given metadata into a BlockState for this Block
-   */
-  @Override
-  public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState()
-            .withProperty(HARVESTABLE, meta > 3)
-            .withProperty(LEAF_STATE, EnumLeafState.valueOf(meta & 0b11))
-            .withProperty(AGE, meta);
   }
 
     /*private void growTreeRecursive(World worldIn, BlockPos currentBlock, Random rand, BlockPos baseBlock, int distFromCenter, int age)
@@ -375,6 +369,17 @@ public class BlockJoshuaTreeFlower extends Block {
     }*/
 
   /**
+   * Convert the given metadata into a BlockState for this Block
+   */
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState()
+               .withProperty(HARVESTABLE, meta > 3)
+               .withProperty(LEAF_STATE, EnumLeafState.valueOf(meta & 0b11))
+               .withProperty(AGE, meta);
+  }
+
+  /**
    * Convert the BlockState into the correct metadata value
    */
   @Override
@@ -419,7 +424,7 @@ public class BlockJoshuaTreeFlower extends Block {
       case 2:
         if (state.getValue(LEAF_STATE) != EnumLeafState.FLOWERING) {
           world.setBlockState(pos, world.getBlockState(pos)
-                  .withProperty(LEAF_STATE, EnumLeafState.FLOWERING));
+                                        .withProperty(LEAF_STATE, EnumLeafState.FLOWERING));
         }
         break;
       case 3:
@@ -429,7 +434,7 @@ public class BlockJoshuaTreeFlower extends Block {
             long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
             if (hours > (fruitTree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
               world.setBlockState(pos, world.getBlockState(pos)
-                      .withProperty(LEAF_STATE, EnumLeafState.FRUIT));
+                                            .withProperty(LEAF_STATE, EnumLeafState.FRUIT));
               te.resetCounter();
             }
           }
@@ -459,7 +464,7 @@ public class BlockJoshuaTreeFlower extends Block {
           Block block = iblockstate.getBlock();
 
           if (BlockUtils.isSand(iblockstate) || BlockUtils.isSoilOrGravel(iblockstate) || iblockstate == Blocks.HARDENED_CLAY ||
-                  iblockstate == Blocks.STAINED_HARDENED_CLAY) {
+              iblockstate == Blocks.STAINED_HARDENED_CLAY) {
             flag = true;
           } else if (block == BlockJoshuaTreeLog.get(wood)) {
             int j = 1;
@@ -469,8 +474,8 @@ public class BlockJoshuaTreeFlower extends Block {
 
               if (block1 != BlockJoshuaTreeLog.get(wood)) {
                 if (BlockUtils.isSand(worldIn.getBlockState(pos.down(j + 1))) ||
-                        BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down(j + 1))) || block1 == Blocks.HARDENED_CLAY ||
-                        block1 == Blocks.STAINED_HARDENED_CLAY) {
+                    BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down(j + 1))) || block1 == Blocks.HARDENED_CLAY ||
+                    block1 == Blocks.STAINED_HARDENED_CLAY) {
                   flag1 = true;
                 }
 
@@ -517,7 +522,7 @@ public class BlockJoshuaTreeFlower extends Block {
               BlockPos blockpos1 = pos.offset(enumfacing);
 
               if (worldIn.isAirBlock(blockpos1) && worldIn.isAirBlock(blockpos1.down()) &&
-                      areAllNeighborsEmpty(worldIn, blockpos1, enumfacing.getOpposite())) {
+                  areAllNeighborsEmpty(worldIn, blockpos1, enumfacing.getOpposite())) {
                 this.placeGrownFlower(worldIn, blockpos1, i + 1);
                 flag2 = true;
               }
@@ -538,8 +543,8 @@ public class BlockJoshuaTreeFlower extends Block {
   }
 
   /**
-   * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor change. Cases may include when redstone power
-   * is updated, cactus blocks popping off due to a neighboring solid block, etc.
+   * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor change. Cases may include when redstone
+   * power is updated, cactus blocks popping off due to a neighboring solid block, etc.
    */
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
@@ -575,6 +580,12 @@ public class BlockJoshuaTreeFlower extends Block {
     return BlockRenderLayer.CUTOUT;
   }
 
+    /*@Override
+    protected ItemStack getSilkTouchDrop(IBlockState state)
+    {
+        return ItemStack.EMPTY;
+    }*/
+
   /**
    * Checks if this block can be placed exactly at the given position.
    */
@@ -583,18 +594,12 @@ public class BlockJoshuaTreeFlower extends Block {
     Block block = worldIn.getBlockState(pos.down()).getBlock();
     return ((super.canPlaceBlockAt(worldIn, pos) && this.canSurvive(worldIn, pos)) ||
             (BlockUtils.isSand(worldIn.getBlockState(pos.down())) || BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
-                    block == Blocks.HARDENED_CLAY || block == Blocks.STAINED_HARDENED_CLAY));
+             block == Blocks.HARDENED_CLAY || block == Blocks.STAINED_HARDENED_CLAY));
   }
-
-    /*@Override
-    protected ItemStack getSilkTouchDrop(IBlockState state)
-    {
-        return ItemStack.EMPTY;
-    }*/
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == EnumLeafState.FRUIT && fruitTree.getDrop() != null) {
       if (!worldIn.isRemote) {
         ItemHandlerHelper.giveItemToPlayer(playerIn, fruitTree.getFoodDrop());
@@ -663,10 +668,10 @@ public class BlockJoshuaTreeFlower extends Block {
   @Override
   protected BlockStateContainer createBlockState() {
     return new BlockStateContainer.Builder(this)
-            .add(LEAF_STATE)
-            .add(HARVESTABLE)
-            .add(AGE)
-            .build();
+      .add(LEAF_STATE)
+      .add(HARVESTABLE)
+      .add(AGE)
+      .build();
   }
 
   @Override
@@ -698,8 +703,8 @@ public class BlockJoshuaTreeFlower extends Block {
     Block block = iblockstate.getBlock();
 
     if (block != BlockJoshuaTreeLog.get(wood) &&
-            !(BlockUtils.isSand(iblockstate) || BlockUtils.isSoilOrGravel(iblockstate) || iblockstate == Blocks.HARDENED_CLAY ||
-                    iblockstate == Blocks.STAINED_HARDENED_CLAY)) {
+        !(BlockUtils.isSand(iblockstate) || BlockUtils.isSoilOrGravel(iblockstate) || iblockstate == Blocks.HARDENED_CLAY ||
+          iblockstate == Blocks.STAINED_HARDENED_CLAY)) {
       if (iblockstate.getMaterial() == Material.AIR) {
         int i = 0;
 
@@ -721,16 +726,6 @@ public class BlockJoshuaTreeFlower extends Block {
     } else {
       return true;
     }
-  }
-
-  private static boolean areAllNeighborsEmpty(World worldIn, BlockPos pos, EnumFacing excludingSide) {
-    for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
-      if (enumfacing != excludingSide && !worldIn.isAirBlock(pos.offset(enumfacing))) {
-        return false;
-      }
-    }
-
-    return true;
   }
 
   private void placeGrownFlower(World worldIn, BlockPos pos, int age) {

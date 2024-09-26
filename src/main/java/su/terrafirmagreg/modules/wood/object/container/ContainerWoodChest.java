@@ -11,7 +11,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-
 import lombok.Getter;
 
 @Getter
@@ -20,7 +19,7 @@ public class ContainerWoodChest extends Container {
   private final IInventory lowerChestInventory;
 
   public ContainerWoodChest(IInventory playerInventory, IInventory chestInventory,
-          EntityPlayer player) {
+                            EntityPlayer player) {
     this.lowerChestInventory = chestInventory;
     int numRows = chestInventory.getSizeInventory() / 9;
     chestInventory.openInventory(player);
@@ -30,7 +29,7 @@ public class ContainerWoodChest extends Container {
     for (int j = 0; j < numRows; ++j) {
       for (int k = 0; k < 9; ++k) {
         this.addSlotToContainer(
-                new SlotChestTFC(chestInventory, k + j * 9, 8 + k * 18, 18 + j * 18));
+          new SlotChestTFC(chestInventory, k + j * 9, 8 + k * 18, 18 + j * 18));
       }
     }
 
@@ -38,7 +37,7 @@ public class ContainerWoodChest extends Container {
     for (int l = 0; l < 3; ++l) {
       for (int j = 0; j < 9; ++j) {
         this.addSlotToContainer(
-                new Slot(playerInventory, j + l * 9 + 9, 8 + j * 18, 103 + l * 18 + i));
+          new Slot(playerInventory, j + l * 9 + 9, 8 + j * 18, 103 + l * 18 + i));
       }
     }
 

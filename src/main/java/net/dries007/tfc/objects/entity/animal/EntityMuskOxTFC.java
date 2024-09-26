@@ -17,7 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -29,8 +28,8 @@ public class EntityMuskOxTFC extends EntitySheepTFC implements ILivestock {
   @SuppressWarnings("unused")
   public EntityMuskOxTFC(World worldIn) {
     this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-            getRandomGrowth(ConfigTFC.Animals.MUSKOX.adulthood, ConfigTFC.Animals.MUSKOX.elder),
-            EntitySheep.getRandomSheepColor(MathConstants.RNG));
+         getRandomGrowth(ConfigTFC.Animals.MUSKOX.adulthood, ConfigTFC.Animals.MUSKOX.elder),
+         EntitySheep.getRandomSheepColor(MathConstants.RNG));
   }
 
   public EntityMuskOxTFC(World worldIn, Gender gender, int birthDay, EnumDyeColor dye) {
@@ -42,7 +41,7 @@ public class EntityMuskOxTFC extends EntitySheepTFC implements ILivestock {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TUNDRA)) {
+        (biomeType == BiomeHelper.BiomeType.TUNDRA)) {
       return ConfigTFC.Animals.MUSKOX.rarity;
     }
     return 0;
@@ -68,7 +67,7 @@ public class EntityMuskOxTFC extends EntitySheepTFC implements ILivestock {
     int numberOfChildren = ConfigTFC.Animals.MUSKOX.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityMuskOxTFC baby = new EntityMuskOxTFC(world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
+                                                 (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
       world.spawnEntity(baby);

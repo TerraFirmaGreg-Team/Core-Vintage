@@ -5,7 +5,6 @@ import su.terrafirmagreg.data.Constants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;

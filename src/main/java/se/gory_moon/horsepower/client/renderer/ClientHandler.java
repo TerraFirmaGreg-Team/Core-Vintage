@@ -1,5 +1,10 @@
 package se.gory_moon.horsepower.client.renderer;
 
+import su.terrafirmagreg.api.base.block.BaseBlockHorse;
+import su.terrafirmagreg.api.base.tile.BaseTileHorse;
+import su.terrafirmagreg.api.util.RenderUtils;
+import su.terrafirmagreg.modules.device.object.block.BlockQuernHorse;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -10,12 +15,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
 import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.blocks.BlockGrindstone;
-import se.gory_moon.horsepower.blocks.BlockHPBase;
-import se.gory_moon.horsepower.tileentity.TileHPHorseBase;
-import se.gory_moon.horsepower.util.RenderUtils;
 
 import java.util.stream.StreamSupport;
 
@@ -27,14 +27,14 @@ public class ClientHandler {
     if (Configs.client.showObstructedPlace) {
       Minecraft mc = Minecraft.getMinecraft();
       if (StreamSupport.stream(mc.player.getHeldEquipment().spliterator(), false)
-              .anyMatch(stack -> !stack.isEmpty() && isHPBlock((itemStack[0] = stack).getItem()))) {
+                       .anyMatch(stack -> !stack.isEmpty() && isHPBlock((itemStack[0] = stack).getItem()))) {
 
         if (mc.objectMouseOver == null || mc.objectMouseOver.typeOfHit != RayTraceResult.Type.BLOCK) {
           return;
         }
 
         int offset = 0;
-        if (!itemStack[0].isEmpty() && ((ItemBlock) itemStack[0].getItem()).getBlock() instanceof BlockGrindstone) {
+        if (!itemStack[0].isEmpty() && ((ItemBlock) itemStack[0].getItem()).getBlock() instanceof BlockQuernHorse) {
           offset = -1;
         }
 
@@ -53,8 +53,8 @@ public class ClientHandler {
   }
 
   private static boolean isHPBlock(Item item) {
-    if (item instanceof ItemBlock itemBlock && itemBlock.getBlock() instanceof BlockHPBase blockHPBase) {
-      return TileHPHorseBase.class.isAssignableFrom(blockHPBase.getTileClass());
+    if (item instanceof ItemBlock itemBlock && itemBlock.getBlock() instanceof BaseBlockHorse baseBlockHorse) {
+      return BaseTileHorse.class.isAssignableFrom(baseBlockHorse.getTileClass());
     }
     return false;
   }

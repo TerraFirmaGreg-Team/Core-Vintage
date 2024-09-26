@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.util.OreDictUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
-
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +32,7 @@ public class FoodCategory {
 
     if (name.isEmpty()) {
       throw new RuntimeException(
-              String.format("FoodCategory name must contain any character: [%s]", name));
+        String.format("FoodCategory name must contain any character: [%s]", name));
     }
 
     if (!categories.add(this)) {
@@ -51,7 +50,7 @@ public class FoodCategory {
   public static boolean doesStackMatchCategories(ItemStack stack, FoodCategory... categories) {
     for (FoodCategory category : categories) {
       if (OreDictionaryHelper.doesStackMatchOre(stack,
-              OreDictUtils.toString("category", category.getName()))) {
+                                                OreDictUtils.toString("category", category.getName()))) {
         return true;
       }
     }

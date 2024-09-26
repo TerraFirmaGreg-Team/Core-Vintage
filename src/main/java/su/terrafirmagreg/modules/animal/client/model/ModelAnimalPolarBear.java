@@ -13,7 +13,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -60,11 +59,11 @@ public class ModelAnimalPolarBear extends ModelBase {
     frontbody = new ModelRenderer(this, 28, 40);
     frontbody.setRotationPoint(-2.0F, 8.6F, 12.0F);
     frontbody.addBox(-5.0F, -25.0F, -6.0F, 14, 12, 12, 0.0F);
-    setRotation(frontbody, 1.5707963267948966F, 0.0F, 0.0F);
+    setRotation(frontbody, ((float) Math.PI / 2F), 0.0F, 0.0F);
     rearbody = new ModelRenderer(this, 22, 13);
     rearbody.setRotationPoint(-2.0F, 9.0F, 12.0F);
     rearbody.addBox(-6.0F, -13.0F, -6.0F, 16, 14, 13, 0.0F);
-    setRotation(rearbody, 1.5707963705062866F, 0.0F, 0.0F);
+    setRotation(rearbody, ((float) Math.PI / 2F), 0.0F, 0.0F);
     tail = new ModelRenderer(this, 45, 7);
     tail.setRotationPoint(1.5F, 0.7F, 0.0F);
     tail.addBox(-1.0F, -1.0F, -1.0F, 3, 3, 3, 0.0F);
@@ -124,10 +123,10 @@ public class ModelAnimalPolarBear extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount,
-          float ageInTicks, float netHeadYaw, float headPitch,
-          float scale) {
+                     float ageInTicks, float netHeadYaw, float headPitch,
+                     float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-            entity);
+                           entity);
 
     if (((EntityAnimal) entity).isChild()) {
       double ageScale = 1;
@@ -155,31 +154,31 @@ public class ModelAnimalPolarBear extends ModelBase {
 
   @Override
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks,
-          float netHeadYaw, float headPitch, float scaleFactor,
-          Entity entityIn) {
+                                float netHeadYaw, float headPitch, float scaleFactor,
+                                Entity entityIn) {
     head.rotateAngleX = headPitch / (180F / MathConstants.PI);
     head.rotateAngleY = netHeadYaw / (180F / MathConstants.PI);
 
     leg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
     leg2.rotateAngleX =
-            MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
+      MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
     leg3.rotateAngleX =
-            MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
+      MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
     leg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 
     float f1 = ((EntityAnimalPolarBear) entityIn).getStandingAnimationScale(ageInTicks);
     f1 *= f1;
     float f2 = 1.0F - f1;
-    frontbody.rotateAngleX = 1.5707964F - f1 * 3.1415927F * 0.35F;
+    frontbody.rotateAngleX = ((float) Math.PI / 2F) - f1 * (float) Math.PI * 0.35F;
     frontbody.rotationPointY = 9.0F * f2 + 11.0F * f1;
     leg3.rotationPointY = 14.0F * f2 + -6.0F * f1;
     leg3.rotationPointZ = -8.0F * f2 + -4.0F * f1;
-    leg3.rotateAngleX -= f1 * 3.1415927F * 0.45F;
+    leg3.rotateAngleX -= f1 * (float) Math.PI * 0.45F;
     leg4.rotationPointY = leg3.rotationPointY;
     leg4.rotationPointZ = leg3.rotationPointZ;
-    leg4.rotateAngleX -= f1 * 3.1415927F * 0.45F;
+    leg4.rotateAngleX -= f1 * (float) Math.PI * 0.45F;
     head.rotationPointY = 10.0F * f2 + -12.0F * f1;
     head.rotationPointZ = -16.0F * f2 + -3.0F * f1;
-    head.rotateAngleX += f1 * 3.1415927F * 0.15F;
+    head.rotateAngleX += f1 * (float) Math.PI * 0.15F;
   }
 }

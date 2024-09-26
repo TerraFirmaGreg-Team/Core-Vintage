@@ -2,7 +2,6 @@ package net.dries007.tfc.api.capability.inventory;
 
 import net.minecraft.item.ItemStack;
 
-
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import org.jetbrains.annotations.NotNull;

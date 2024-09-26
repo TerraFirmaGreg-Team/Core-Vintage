@@ -8,20 +8,16 @@
         {
           "model": "tfc:plants/rocks_0",
           "weight": 20
-        },
-        {
+        }, {
           "model": "tfc:plants/rocks_1",
           "weight": 20
-        },
-        {
+        }, {
           "model": "tfc:plants/rocks_2",
           "weight": 20
-        },
-        {
+        }, {
           "model": "tfc:plants/rocks_3",
           "weight": 20
-        },
-        {
+        }, {
           "model": "tfc:plants/rocks_4",
           "weight": 20
         }

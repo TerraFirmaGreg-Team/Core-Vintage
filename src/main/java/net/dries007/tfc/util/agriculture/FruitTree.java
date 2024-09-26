@@ -1,5 +1,6 @@
 package net.dries007.tfc.util.agriculture;
 
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorFruitTrees;
 
 import net.minecraft.client.gui.GuiScreen;
@@ -11,15 +12,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
 
 import org.jetbrains.annotations.Nullable;
 
@@ -58,8 +54,8 @@ public enum FruitTree implements IFruitTree {
   private final float maxRain;
 
   FruitTree(Food fruit, Month flowerMonthStart, int floweringMonths, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain,
-          float maxRain,
-          float growthTime) {
+            float maxRain,
+            float growthTime) {
     this.fruit = fruit;
     this.flowerMonthStart = flowerMonthStart;
     this.floweringMonths = floweringMonths;
@@ -129,7 +125,7 @@ public enum FruitTree implements IFruitTree {
       tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));
       tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) minRain, (int) maxRain));
       tooltip.add(TextFormatting.GOLD +
-              I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", minTemp), String.format("%.1f", maxTemp)));
+                  I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", minTemp), String.format("%.1f", maxTemp)));
     } else {
       tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.hold_shift_for_climate_info"));
     }

@@ -2,7 +2,6 @@ package net.dries007.tfc.objects.container;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-
 import org.jetbrains.annotations.Nullable;
 
 public interface IButtonHandler {

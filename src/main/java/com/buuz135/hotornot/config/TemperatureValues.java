@@ -3,7 +3,6 @@ package com.buuz135.hotornot.config;
 import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.LangKey;
 
-
 import static su.terrafirmagreg.data.Constants.MODID_HOTORNOT;
 
 public final class TemperatureValues {

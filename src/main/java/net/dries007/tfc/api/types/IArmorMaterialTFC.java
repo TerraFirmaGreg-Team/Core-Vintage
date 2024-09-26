@@ -4,7 +4,6 @@ import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 
 import net.minecraft.item.ItemArmor;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**

@@ -4,7 +4,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
@@ -33,10 +32,10 @@ public class SmelteryRecipe extends IForgeRegistryEntry.Impl<SmelteryRecipe> {
   @Nullable
   public static SmelteryRecipe get(ItemStack... ingredients) {
     return TFCRegistries.SMELTERY.getValuesCollection()
-            .stream()
-            .filter(x -> x.isValidInput(ingredients))
-            .findFirst()
-            .orElse(null);
+                                 .stream()
+                                 .filter(x -> x.isValidInput(ingredients))
+                                 .findFirst()
+                                 .orElse(null);
   }
 
   private boolean isValidInput(ItemStack... ingredients) {

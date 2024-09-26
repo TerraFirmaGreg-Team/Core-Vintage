@@ -13,14 +13,12 @@ import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 
 import gregtech.common.blocks.BlockOre;
 import io.netty.buffer.ByteBuf;
@@ -31,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class EntityFallingBlock
-        extends net.minecraft.entity.item.EntityFallingBlock implements IEntityAdditionalSpawnData {
+  extends net.minecraft.entity.item.EntityFallingBlock implements IEntityAdditionalSpawnData {
 
   private FallingBlockManager.Specification currentSpecification; // Server-side only variable
 
@@ -47,13 +45,13 @@ public class EntityFallingBlock
   }
 
   public EntityFallingBlock(World world, double x, double y, double z,
-          IBlockState fallingBlockState) {
+                            IBlockState fallingBlockState) {
     super(world);
     this.currentSpecification = FallingBlockManager.getSpecification(fallingBlockState);
     this.fallTile = fallingBlockState;
     BlockPos pos = new BlockPos(this);
     if (currentSpecification.getResultingState() == null) {
-      TileEntity tile = this.world.getTileEntity(pos);
+      var tile = TileUtils.getTile(world, pos);
       if (tile != null) {
         this.tileEntityData = tile.serializeNBT(); // Original EntityFallingBlock doesn't even save tile entity data... what...
       }
@@ -126,8 +124,8 @@ public class EntityFallingBlock
         Material material = currentSpecification.getResultingState(fallTile).getMaterial();
 
         if (!current.getBlock()
-                .isAir(current, world, pos) && FallingBlockManager.canFallThrough(world, pos, material,
-                current)) {
+                    .isAir(current, world, pos) && FallingBlockManager.canFallThrough(world, pos, material,
+                                                                                      current)) {
           world.destroyBlock(pos, true);
           return;
         }
@@ -136,8 +134,8 @@ public class EntityFallingBlock
         IBlockState downState = world.getBlockState(downPos);
 
         if (!downState.getBlock()
-                .isAir(downState, world, downPos) && FallingBlockManager.canFallThrough(world, downPos,
-                material, downState)) {
+                      .isAir(downState, world, downPos) && FallingBlockManager.canFallThrough(world, downPos,
+                                                                                              material, downState)) {
           world.destroyBlock(downPos, true);
           return;
         } else if (ConfigTFC.General.FALLABLE.destroyOres && downState.getBlock() instanceof BlockOre) {
@@ -185,8 +183,8 @@ public class EntityFallingBlock
 
   private void dropItems(BlockPos pos) {
     currentSpecification.getDrops(world, pos, currentSpecification.getResultingState(fallTile),
-                    tileEntityData, fallTime, fallDistance)
-            .forEach(x -> entityDropItem(x, 0));
+                                  tileEntityData, fallTime, fallDistance)
+                        .forEach(x -> entityDropItem(x, 0));
   }
 
   @Override
@@ -194,7 +192,7 @@ public class EntityFallingBlock
     List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox());
     for (Entity entity : list) {
       if (ConfigTFC.General.FALLABLE.hurtEntities && distance > 1.0F
-              && entity instanceof EntityLivingBase) {
+          && entity instanceof EntityLivingBase) {
         entity.attackEntityFrom(DamageSource.FALLING_BLOCK, distance);
       } else if (ConfigTFC.General.FALLABLE.destroyItems && entity instanceof EntityItem) {
         entity.setDead();
@@ -205,7 +203,7 @@ public class EntityFallingBlock
   @Override
   protected void writeEntityToNBT(NBTTagCompound compound) {
     compound.setInteger("State",
-            Block.getStateId(fallTile == null ? Blocks.AIR.getDefaultState() : fallTile));
+                        Block.getStateId(fallTile == null ? Blocks.AIR.getDefaultState() : fallTile));
     compound.setInteger("Time", this.fallTime);
     if (this.tileEntityData != null) {
       compound.setTag("TileEntityData", this.tileEntityData);

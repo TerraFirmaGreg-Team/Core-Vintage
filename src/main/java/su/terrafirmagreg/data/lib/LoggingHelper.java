@@ -2,7 +2,6 @@ package su.terrafirmagreg.data.lib;
 
 import su.terrafirmagreg.api.util.ModUtils;
 
-
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.apache.logging.log4j.Level;
@@ -52,6 +51,17 @@ public class LoggingHelper {
   public static LoggingHelper of() {
 
     return new LoggingHelper(LogManager.getLogger(MOD_NAME));
+  }
+
+  public static List<String> wrapString(String string, int lnLength, boolean wrapLongWords,
+                                        List<String> list) {
+
+    final String[] lines = WordUtils.wrap(string, lnLength, null, wrapLongWords)
+                                    .split(SystemUtils.LINE_SEPARATOR);
+
+    list.addAll(Arrays.asList(lines));
+
+    return list;
   }
 
   /**
@@ -137,7 +147,8 @@ public class LoggingHelper {
    * Creates a noticeable warning, similar to the ones created by the FMLLog.
    *
    * @param trace If true, a small stack trace will be included in the error message.
-   * @param lines Each entry will be printed as part of the error message. If any entry is longer than 78 chars, it will be an auto wrapped into multiple lines.
+   * @param lines Each entry will be printed as part of the error message. If any entry is longer than 78 chars, it will be an auto wrapped into multiple
+   *              lines.
    */
   public void noticableWarning(boolean trace, List<String> lines) {
 
@@ -172,17 +183,6 @@ public class LoggingHelper {
   public void error(String message, Object... params) {
 
     this.logger.error(message, params);
-  }
-
-  public static List<String> wrapString(String string, int lnLength, boolean wrapLongWords,
-          List<String> list) {
-
-    final String[] lines = WordUtils.wrap(string, lnLength, null, wrapLongWords)
-            .split(SystemUtils.LINE_SEPARATOR);
-
-    list.addAll(Arrays.asList(lines));
-
-    return list;
   }
 
   /**

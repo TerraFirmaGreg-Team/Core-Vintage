@@ -2,7 +2,6 @@ package net.dries007.tfc.objects;
 
 import su.terrafirmagreg.data.lib.collection.WeightedCollection;
 
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,7 +52,7 @@ public enum Gem {
 
     private static final Grade[] VALUES = values();
     private static final WeightedCollection<Grade> GRADE_ODDS = new WeightedCollection<>(Arrays.stream(VALUES)
-            .collect(Collectors.toMap(k -> k, v -> v.dropWeight)));
+                                                                                               .collect(Collectors.toMap(k -> k, v -> v.dropWeight)));
     private final double dropWeight;
 
     Grade(int dropWeight) {

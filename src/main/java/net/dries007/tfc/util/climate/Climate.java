@@ -1,14 +1,12 @@
 package net.dries007.tfc.util.climate;
 
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
 
 public final class Climate {
 
@@ -87,7 +85,7 @@ public final class Climate {
 
   public static float getAvgTemp(BlockPos pos) {
     return ClimateHelper.monthFactor(CACHE.get(pos)
-            .getRegionalTemp(), Month.AVERAGE_TEMPERATURE_MODIFIER, pos.getZ());
+                                          .getRegionalTemp(), Month.AVERAGE_TEMPERATURE_MODIFIER, pos.getZ());
   }
 
   public static float getRainfall(World world, BlockPos pos) {

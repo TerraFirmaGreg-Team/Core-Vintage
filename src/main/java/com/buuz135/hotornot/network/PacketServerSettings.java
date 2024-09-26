@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
-
 import com.buuz135.hotornot.HotOrNot;
 import com.buuz135.hotornot.config.HotConfig;
 import com.buuz135.hotornot.config.HotLists;
@@ -33,7 +32,7 @@ public class PacketServerSettings implements IMessage {
   }
 
   public PacketServerSettings(final List<Item> hotList, final List<Item> coldList, final List<Item> gaseousList, final List<Item> exemptionList,
-          final int hotItemTemp, final int hotFluidTemp, final int coldFluidTemp) {
+                              final int hotItemTemp, final int hotFluidTemp, final int coldFluidTemp) {
     this.hotList = hotList;
     this.coldList = coldList;
     this.gaseousList = gaseousList;

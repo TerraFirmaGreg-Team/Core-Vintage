@@ -20,7 +20,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
@@ -37,18 +36,18 @@ public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor
     super(Settings.of(Material.GRASS));
 
     getSettings()
-            .registryKey("soil/peat_grass")
-            .sound(SoundType.PLANT)
-            .renderLayer(BlockRenderLayer.CUTOUT)
-            .randomTicks()
-            .oreDict("peat")
-            .oreDict("peat", "grass");
+      .registryKey("soil/peat_grass")
+      .sound(SoundType.PLANT)
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .randomTicks()
+      .oreDict("peat")
+      .oreDict("peat", "grass");
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(NORTH, Boolean.FALSE)
-            .withProperty(EAST, Boolean.FALSE)
-            .withProperty(SOUTH, Boolean.FALSE)
-            .withProperty(WEST, Boolean.FALSE));
+                              .withProperty(NORTH, Boolean.FALSE)
+                              .withProperty(EAST, Boolean.FALSE)
+                              .withProperty(SOUTH, Boolean.FALSE)
+                              .withProperty(WEST, Boolean.FALSE));
 
     BlockUtils.setFireInfo(this, 5, 5);
   }
@@ -63,10 +62,10 @@ public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor
   public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
     pos = pos.add(0, -1, 0);
     return state
-            .withProperty(NORTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-            .withProperty(EAST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-            .withProperty(SOUTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-            .withProperty(WEST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+      .withProperty(NORTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+      .withProperty(EAST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+      .withProperty(SOUTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+      .withProperty(WEST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
   }
 
   @Override

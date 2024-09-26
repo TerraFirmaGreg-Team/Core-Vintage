@@ -6,7 +6,6 @@ import su.terrafirmagreg.api.base.biome.BaseBiomeDecorator;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraftforge.common.BiomeDictionary;
 
-
 import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.OCEAN;
 
 public class BiomeLake extends BaseBiome {
@@ -33,9 +32,9 @@ public class BiomeLake extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.RIVER,
-            BiomeDictionary.Type.WET,
-            BiomeDictionary.Type.WATER
+      BiomeDictionary.Type.RIVER,
+      BiomeDictionary.Type.WET,
+      BiomeDictionary.Type.WATER
     };
   }
 }

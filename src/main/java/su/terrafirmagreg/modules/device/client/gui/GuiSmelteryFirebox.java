@@ -13,7 +13,7 @@ public class GuiSmelteryFirebox extends BaseGuiContainerTile<TileSmelteryFirebox
   private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/smeltery_firebox.png");
 
   public GuiSmelteryFirebox(Container container, InventoryPlayer playerInv,
-          TileSmelteryFirebox tile) {
+                            TileSmelteryFirebox tile) {
     super(container, playerInv, tile, BACKGROUND);
   }
 

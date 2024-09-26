@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-
 import org.jetbrains.annotations.Nullable;
 
 public class ItemSoilMudWetBrick extends ItemSoil {
@@ -17,7 +16,7 @@ public class ItemSoilMudWetBrick extends ItemSoil {
     super(variant, type);
 
     getSettings()
-            .maxDamage(0);
+      .maxDamage(0);
   }
 
   @Override

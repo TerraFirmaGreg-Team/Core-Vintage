@@ -14,7 +14,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
@@ -26,7 +25,7 @@ public class GeneratorGlowPlant implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+                       IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (!(chunkGenerator instanceof ChunkGenClassic)) {
       return;
     }
@@ -35,7 +34,7 @@ public class GeneratorGlowPlant implements IWorldGenerator {
   }
 
   private void generateGlowPlant(Random random, int chunkX, int chunkZ, World world,
-          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+                                 IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
     var data = CapabilityChunkData.get(world, chunkBlockPos);
 
@@ -52,13 +51,13 @@ public class GeneratorGlowPlant implements IWorldGenerator {
       final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 
       if ((b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH
-              || b == BiomesWorld.GRAVEL_BEACH) &&
-              world.provider.getDimension() == 0) {
+           || b == BiomesWorld.GRAVEL_BEACH) &&
+          world.provider.getDimension() == 0) {
         if (isValidPosition(world, pos) && pos.getY() < WorldTypeClassic.SEALEVEL - 1
-                && pos.getY() > 115 && floraDensity >= 0.4f &&
-                floraDiversity >= 0.3f && floraDensity <= 0.6f && floraDiversity <= 0.5f
-                && avgTemperature >= 10f && avgTemperature <= 28f &&
-                rainfall >= 150f) {
+            && pos.getY() > 115 && floraDensity >= 0.4f &&
+            floraDiversity >= 0.3f && floraDensity <= 0.6f && floraDiversity <= 0.5f
+            && avgTemperature >= 10f && avgTemperature <= 28f &&
+            rainfall >= 150f) {
           world.setBlockState(pos, BlocksTFCF.GLOWING_SEA_BANANA.getDefaultState());
         }
       }
@@ -74,11 +73,11 @@ public class GeneratorGlowPlant implements IWorldGenerator {
     IBlockState east = world.getBlockState(pos.east());
     IBlockState west = world.getBlockState(pos.west());
     return (
-            (up.getBlock() instanceof BlockCoralBlock || down.getBlock() instanceof BlockCoralBlock ||
-                    north.getBlock() instanceof BlockCoralBlock
-                    || south.getBlock() instanceof BlockCoralBlock ||
-                    east.getBlock() instanceof BlockCoralBlock || west.getBlock() instanceof BlockCoralBlock
-                    ||
-                    current.getBlock() instanceof BlockCoral) && !(world.isAirBlock(pos.up())));
+      (up.getBlock() instanceof BlockCoralBlock || down.getBlock() instanceof BlockCoralBlock ||
+       north.getBlock() instanceof BlockCoralBlock
+       || south.getBlock() instanceof BlockCoralBlock ||
+       east.getBlock() instanceof BlockCoralBlock || west.getBlock() instanceof BlockCoralBlock
+       ||
+       current.getBlock() instanceof BlockCoral) && !(world.isAirBlock(pos.up())));
   }
 }

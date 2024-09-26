@@ -24,7 +24,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
@@ -53,6 +52,54 @@ public class BlockUrnLoot extends Block implements ICapabilitySize {
     super(Material.CIRCUITS);
     setSoundType(SoundType.GLASS);
     setHardness(1.5F);
+  }
+
+  private static Metal getRandomMetal(Random rand) {
+    if (metalList == null) {
+      Builder<Metal> buildMetal = ImmutableList.builder();
+      for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
+        if (metal.getTier().isAtMost(Metal.Tier.TIER_III)) {
+          buildMetal.add(metal);
+        }
+      }
+
+      metalList = buildMetal.build();
+    }
+
+    return metalList.get(rand.nextInt(metalList.size()));
+  }
+
+  private static ImmutableList<Item> getSeeds() {
+    if (seedsList == null) {
+      Builder<Item> buildSeeds = ImmutableList.builder();
+      for (Item item : ItemsTFC.getAllSimpleItems()) {
+        if (item.getRegistryName().getPath().contains("seeds/")) {
+          buildSeeds.add(item);
+        }
+      }
+      for (Item item : ItemsTFCF.getAllSimpleItems()) {
+        if (item.getRegistryName().getPath().contains("seeds/")) {
+          buildSeeds.add(item);
+        }
+      }
+
+      if (TFCFlorae.FirmaLifeAdded) {
+        for (Item item : ItemsFL.getAllEasyItems()) {
+          if (item.getRegistryName().getPath().contains("seeds/")) {
+            buildSeeds.add(item);
+          }
+        }
+      }
+      //            if (TFCFlorae.TFCPHCompatAdded) {
+      //                for (Item item : ItemsTPC.getAllSimpleItems())
+      //                    if (item.getRegistryName().getPath().contains("seeds/"))
+      //                        buildSeeds.add(item);
+      //            }
+
+      seedsList = buildSeeds.build();
+    }
+
+    return seedsList;
   }
 
   @Override
@@ -186,11 +233,11 @@ public class BlockUrnLoot extends Block implements ICapabilitySize {
       count = rand.nextInt(2) + 1;
       for (int i = 0; i < count; i++) {
         Item[] dropList = {ItemsTFCF.MADDER, ItemsTFCF.WELD, ItemsTFCF.WOAD, ItemsTFCF.INDIGO, ItemsTFCF.RAPE, ItemsTFCF.HOPS,
-                ItemsTFCF.FLAX, ItemsTFCF.LINEN_STRING, ItemsTFCF.COTTON_BOLL, ItemsTFCF.COTTON_YARN, ItemsTFCF.AGAVE, ItemsTFCF.SISAL_STRING,
-                ItemsTFCF.PAPYRUS_FIBER, ItemsTFC.JUTE, ItemsTFC.JUTE_FIBER, ItemsTFC.SALT, ItemsCore.MORTAR, ItemsTFC.FIRE_CLAY,
-                Items.CLAY_BALL, ItemsAnimal.WOOL, ItemsAnimal.WOOL_YARN, ItemPowder.get(Powder.KAOLINITE), ItemPowder.get(Powder.GRAPHITE),
-                ItemPowder.get(Powder.FLUX), ItemPowder.get(Powder.SALTPETER), ItemPowder.get(Powder.LAPIS_LAZULI),
-                ItemPowder.get(Powder.SULFUR), ItemPowder.get(Powder.SALT)};
+                           ItemsTFCF.FLAX, ItemsTFCF.LINEN_STRING, ItemsTFCF.COTTON_BOLL, ItemsTFCF.COTTON_YARN, ItemsTFCF.AGAVE, ItemsTFCF.SISAL_STRING,
+                           ItemsTFCF.PAPYRUS_FIBER, ItemsTFC.JUTE, ItemsTFC.JUTE_FIBER, ItemsTFC.SALT, ItemsCore.MORTAR, ItemsTFC.FIRE_CLAY,
+                           Items.CLAY_BALL, ItemsAnimal.WOOL, ItemsAnimal.WOOL_YARN, ItemPowder.get(Powder.KAOLINITE), ItemPowder.get(Powder.GRAPHITE),
+                           ItemPowder.get(Powder.FLUX), ItemPowder.get(Powder.SALTPETER), ItemPowder.get(Powder.LAPIS_LAZULI),
+                           ItemPowder.get(Powder.SULFUR), ItemPowder.get(Powder.SALT)};
         int dropIndex = rand.nextInt(dropList.length);
         int amount = rand.nextInt(5) + 2;
 
@@ -206,56 +253,8 @@ public class BlockUrnLoot extends Block implements ICapabilitySize {
     return ItemsTFC.getAllOreItems().get(drop);
   }
 
-  private static Metal getRandomMetal(Random rand) {
-    if (metalList == null) {
-      Builder<Metal> buildMetal = ImmutableList.builder();
-      for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
-        if (metal.getTier().isAtMost(Metal.Tier.TIER_III)) {
-          buildMetal.add(metal);
-        }
-      }
-
-      metalList = buildMetal.build();
-    }
-
-    return metalList.get(rand.nextInt(metalList.size()));
-  }
-
-  private static ImmutableList<Item> getSeeds() {
-    if (seedsList == null) {
-      Builder<Item> buildSeeds = ImmutableList.builder();
-      for (Item item : ItemsTFC.getAllSimpleItems()) {
-        if (item.getRegistryName().getPath().contains("seeds/")) {
-          buildSeeds.add(item);
-        }
-      }
-      for (Item item : ItemsTFCF.getAllSimpleItems()) {
-        if (item.getRegistryName().getPath().contains("seeds/")) {
-          buildSeeds.add(item);
-        }
-      }
-
-      if (TFCFlorae.FirmaLifeAdded) {
-        for (Item item : ItemsFL.getAllEasyItems()) {
-          if (item.getRegistryName().getPath().contains("seeds/")) {
-            buildSeeds.add(item);
-          }
-        }
-      }
-      //            if (TFCFlorae.TFCPHCompatAdded) {
-      //                for (Item item : ItemsTPC.getAllSimpleItems())
-      //                    if (item.getRegistryName().getPath().contains("seeds/"))
-      //                        buildSeeds.add(item);
-      //            }
-
-      seedsList = buildSeeds.build();
-    }
-
-    return seedsList;
-  }
-
   private boolean canStay(IBlockAccess world, BlockPos pos) {
     return world.getBlockState(pos.down())
-            .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+                .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
   }
 }

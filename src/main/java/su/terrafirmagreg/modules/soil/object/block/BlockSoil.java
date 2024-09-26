@@ -20,7 +20,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import lombok.Getter;
 
 import java.util.Random;
@@ -44,13 +43,13 @@ public abstract class BlockSoil extends BaseBlock implements ISoilBlock {
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .sound(SoundType.GROUND)
-            .harvestLevel(ToolClasses.SHOVEL, 0)
-            .fallable(this, variant.getSpecification())
-            .hardness(2.0F)
-            .oreDict(variant)
-            .oreDict(variant, type);
+      .registryKey(variant.getRegistryKey(type))
+      .sound(SoundType.GROUND)
+      .harvestLevel(ToolClasses.SHOVEL, 0)
+      .fallable(this, variant.getSpecification())
+      .hardness(2.0F)
+      .oreDict(variant)
+      .oreDict(variant, type);
   }
 
   @Override

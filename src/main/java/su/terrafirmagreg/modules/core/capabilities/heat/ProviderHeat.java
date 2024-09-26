@@ -6,15 +6,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 
-
 import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * This is an implementation of ItemHeat that automatically cools down over time Prefer extending or using this than implementing IItemHeat directly Exceptions if you
- * want to extend another capability object (see SmallVessel) but you should still implement this functionality somewhere
+ * This is an implementation of ItemHeat that automatically cools down over time Prefer extending or using this than implementing IItemHeat directly Exceptions
+ * if you want to extend another capability object (see SmallVessel) but you should still implement this functionality somewhere
  */
 public class ProviderHeat implements ICapabilityHeat {
 
@@ -96,7 +95,7 @@ public class ProviderHeat implements ICapabilityHeat {
   @Override
   public float getTemperature() {
     return CapabilityHeat.adjustTemp(temperature, heatCapacity,
-            Calendar.PLAYER_TIME.getTicks() - lastUpdateTick);
+                                     Calendar.PLAYER_TIME.getTicks() - lastUpdateTick);
   }
 
   /**

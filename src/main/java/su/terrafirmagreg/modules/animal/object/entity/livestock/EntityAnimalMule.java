@@ -44,7 +44,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -62,21 +61,21 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 
   //Values that has a visual effect on client
   private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(
-          EntityAnimalMule.class, DataSerializers.BOOLEAN);
+    EntityAnimalMule.class, DataSerializers.BOOLEAN);
   private static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(
-          EntityAnimalMule.class, DataSerializers.VARINT);
+    EntityAnimalMule.class, DataSerializers.VARINT);
   private static final DataParameter<Float> FAMILIARITY = EntityDataManager.createKey(
-          EntityAnimalMule.class, DataSerializers.FLOAT);
+    EntityAnimalMule.class, DataSerializers.FLOAT);
   private static final DataParameter<Boolean> HALTER = EntityDataManager.createKey(
-          EntityAnimalMule.class, DataSerializers.BOOLEAN);
+    EntityAnimalMule.class, DataSerializers.BOOLEAN);
   private long lastFed; //Last time(in days) this entity was fed
   private long lastFDecay; //Last time(in days) this entity's familiarity had decayed
   private long lastDeath; //Last time(in days) this entity checked for dying of old age
 
   public EntityAnimalMule(World world) {
     this(world, Gender.valueOf(RNG.nextBoolean()),
-            EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.MULE.adulthood,
-                    ConfigAnimal.ENTITIES.MULE.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.MULE.adulthood,
+                                          ConfigAnimal.ENTITIES.MULE.elder));
   }
 
   public EntityAnimalMule(World world, Gender gender, int birthDay) {
@@ -102,9 +101,9 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+           && !this.world.containsAnyLiquid(getEntityBoundingBox())
+           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @NotNull
@@ -196,12 +195,12 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
     return new TextComponentTranslation(
-            ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
+      ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
   }
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-          float floraDiversity) {
+                            float floraDiversity) {
     return ConfigAnimal.ENTITIES.MULE.rarity; // Not naturally spawned, must be bred
   }
 
@@ -293,7 +292,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
         this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
-                this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
+          this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
         if (random.nextDouble() < ConfigAnimal.ENTITIES.MULE.oldDeathChance) {
           this.setDead();
         }
@@ -312,7 +311,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
     if (other == this) {
       // Only called if this animal is interacted with a spawn egg
       EntityAnimalMule baby = new EntityAnimalMule(this.world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                                   (int) Calendar.PLAYER_TIME.getTotalDays());
       this.setOffspringAttributes(this, baby);
       return baby;
     }
@@ -407,7 +406,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
               this.setFamiliarity(familiarity);
             }
             world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP,
-                    SoundCategory.AMBIENT, 1.0F, 1.0F);
+                            SoundCategory.AMBIENT, 1.0F, 1.0F);
           }
           return true;
         } else {
@@ -415,9 +414,9 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
               ModuleAnimal.getPacketService().sendTo(SCPacketSimpleMessage.translateMessage(
-                              SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                              ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
-                      (EntityPlayerMP) player);
+                                                       SCPacketSimpleMessage.MessageCategory.ANIMAL,
+                                                       ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
+                                                     (EntityPlayerMP) player);
             }
           }
         }

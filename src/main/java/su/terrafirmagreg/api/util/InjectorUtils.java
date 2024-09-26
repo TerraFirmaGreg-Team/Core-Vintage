@@ -4,7 +4,6 @@ import su.terrafirmagreg.TerraFirmaGreg;
 
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
-
 import lombok.experimental.UtilityClass;
 
 import java.lang.reflect.Field;
@@ -15,7 +14,7 @@ import java.lang.reflect.Modifier;
 public final class InjectorUtils {
 
   public static void setFinalStaticFieldWithReflection(Class<?> apiClass, String srgName,
-          Object value) {
+                                                       Object value) {
     try {
       Field field = ObfuscationReflectionHelper.findField(apiClass, srgName);
       InjectorUtils.setFinalStatic(field, value);
@@ -47,7 +46,7 @@ public final class InjectorUtils {
 
     } catch (Exception e) {
       throw new RuntimeException(
-              String.format("Unable to inject [%s] into [%s]", fieldName, apiClass), e);
+        String.format("Unable to inject [%s] into [%s]", fieldName, apiClass), e);
     }
   }
 

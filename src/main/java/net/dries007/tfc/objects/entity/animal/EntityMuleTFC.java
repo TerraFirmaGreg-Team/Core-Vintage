@@ -40,7 +40,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -73,7 +72,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
 
   public EntityMuleTFC(World world) {
     this(world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-            EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.MULE.adulthood, ConfigTFC.Animals.MULE.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.MULE.adulthood, ConfigTFC.Animals.MULE.elder));
   }
 
   public EntityMuleTFC(World world, Gender gender, int birthDay) {
@@ -99,9 +98,9 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+           && !this.world.containsAnyLiquid(getEntityBoundingBox())
+           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @NotNull
@@ -193,8 +192,8 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
     return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-            .name()
-            .toLowerCase());
+                                                                                          .name()
+                                                                                          .toLowerCase());
   }
 
   @Override
@@ -290,7 +289,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
         this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
-                this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
+          this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
         if (random.nextDouble() < ConfigTFC.Animals.MULE.oldDeathChance) {
           this.setDead();
         }
@@ -309,7 +308,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
     if (other == this) {
       // Only called if this animal is interacted with a spawn egg
       EntityMuleTFC baby = new EntityMuleTFC(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                             (int) Calendar.PLAYER_TIME.getTotalDays());
       this.setOffspringAttributes(this, baby);
       return baby;
     }
@@ -411,8 +410,9 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
               TerraFirmaCraft.getNetwork()
-                      .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL,
-                              MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+                             .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL,
+                                                                          MODID_TFC
+                                                                          + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
             }
           }
         }

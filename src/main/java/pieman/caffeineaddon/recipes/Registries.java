@@ -14,7 +14,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
 
-
 import net.dries007.tfc.objects.blocks.BlockDryingMat;
 
 import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;

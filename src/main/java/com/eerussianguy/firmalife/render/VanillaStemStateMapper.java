@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 
-
 import com.google.common.collect.Maps;
 import net.dries007.tfc.objects.blocks.BlockStemCrop;
 
@@ -19,6 +18,25 @@ import java.util.Map;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 public class VanillaStemStateMapper extends StateMapperBase {
+
+  //tfc data says facing=[dir] and stage=[0..maxStage]
+  //vanilla can render a vertical stalk wih facing=up and age=[0..7]
+  //or a bent stalk with facing=[dir] and no other parameters.
+  //visually, we want stage=maxStage to render a bent stalk
+  //and we want stage=0 to render age=0, and we want stage=maxStage-1 to render age=7
+  //for all other stages we can interpolate
+  //this returns the vanilla age from 0 to 7, or -1 if fully grown
+  public static int getVanillaAge(IBlockState state) {
+    BlockStemCrop block = (BlockStemCrop) state.getBlock();
+    PropertyInteger stage = block.getStageProperty();
+    int growthStage = state.getValue(stage);
+    int maxStage = block.getCrop().getMaxStage();
+    if (growthStage == maxStage) {
+      return -1;
+    }
+    float fractionGrown = ((float) growthStage) / ((float) (maxStage - 1));
+    return (int) (fractionGrown * 7.0f);
+  }
 
   @Override
   public ModelResourceLocation getModelResourceLocation(IBlockState state) {
@@ -48,24 +66,5 @@ public class VanillaStemStateMapper extends StateMapperBase {
     //if vanillaAge is -1, then the crop is fully grown, so it keeps only the FACING property
 
     return new ModelResourceLocation(s, getPropertyString(map));
-  }
-
-  //tfc data says facing=[dir] and stage=[0..maxStage]
-  //vanilla can render a vertical stalk wih facing=up and age=[0..7]
-  //or a bent stalk with facing=[dir] and no other parameters.
-  //visually, we want stage=maxStage to render a bent stalk
-  //and we want stage=0 to render age=0, and we want stage=maxStage-1 to render age=7
-  //for all other stages we can interpolate
-  //this returns the vanilla age from 0 to 7, or -1 if fully grown
-  public static int getVanillaAge(IBlockState state) {
-    BlockStemCrop block = (BlockStemCrop) state.getBlock();
-    PropertyInteger stage = block.getStageProperty();
-    int growthStage = state.getValue(stage);
-    int maxStage = block.getCrop().getMaxStage();
-    if (growthStage == maxStage) {
-      return -1;
-    }
-    float fractionGrown = ((float) growthStage) / ((float) (maxStage - 1));
-    return (int) (fractionGrown * 7.0f);
   }
 }

@@ -9,8 +9,7 @@
           "model": "tfc:plants/cardamom_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },

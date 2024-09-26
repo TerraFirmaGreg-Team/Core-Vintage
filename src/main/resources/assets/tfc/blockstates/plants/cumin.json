@@ -9,8 +9,7 @@
           "model": "tfc:plants/cumin_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },

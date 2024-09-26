@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "WWW",
-    "SXS",
-    "SBS"
+    "WWW", "SXS", "SBS"
   ],
   "key": {
     "X": {

@@ -9,10 +9,10 @@ import net.minecraft.entity.player.EntityPlayer;
 
 //AI to avoid players unless familiarized. Must be applied to EntityAnimal that implements IAnimalTFC
 public class EntityAnimalAITamableAvoidPlayer<T extends EntityCreature & IAnimal> extends
-        EntityAIAvoidEntity<EntityPlayer> {
+                                                                                  EntityAIAvoidEntity<EntityPlayer> {
 
   public EntityAnimalAITamableAvoidPlayer(T entityIn, float avoidDistanceIn, double farSpeedIn,
-          double nearSpeedIn) {
+                                          double nearSpeedIn) {
     super(entityIn, EntityPlayer.class, avoidDistanceIn, farSpeedIn, nearSpeedIn);
   }
 
@@ -20,7 +20,7 @@ public class EntityAnimalAITamableAvoidPlayer<T extends EntityCreature & IAnimal
   public boolean shouldExecute() {
     EntityCreature animal = this.entity;
     if (((IAnimal) animal).getFamiliarity() > 0 || isBegging(
-            animal)) //since AITempt actually changes movement, and begging just turns the head
+      animal)) //since AITempt actually changes movement, and begging just turns the head
     {
       return false;
     }

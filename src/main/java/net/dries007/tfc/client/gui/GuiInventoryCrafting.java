@@ -14,7 +14,6 @@ import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -42,7 +41,7 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
     super.initGui();
     this.widthTooNarrow = this.width < 379;
     this.recipeBookGui.func_194303_a(this.width, this.height, this.mc, this.widthTooNarrow,
-            ((ContainerWorkbench) this.inventorySlots).craftMatrix);
+                                     ((ContainerWorkbench) this.inventorySlots).craftMatrix);
     this.guiLeft = this.recipeBookGui.updateScreenPosition(this.widthTooNarrow, this.width, this.xSize);
     this.recipeButton = new GuiButtonImage(10, this.guiLeft + 5, this.height / 2 - 49, 20, 18, 0, 168, 19, CRAFTING_TABLE_GUI_TEXTURES);
     this.buttonList.add(this.recipeButton);
@@ -99,7 +98,7 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
 
   protected boolean hasClickedOutside(int p_193983_1_, int p_193983_2_, int p_193983_3_, int p_193983_4_) {
     boolean flag = p_193983_1_ < p_193983_3_ || p_193983_2_ < p_193983_4_ || p_193983_1_ >= p_193983_3_ + this.xSize ||
-            p_193983_2_ >= p_193983_4_ + this.ySize;
+                   p_193983_2_ >= p_193983_4_ + this.ySize;
     return this.recipeBookGui.hasClickedOutside(p_193983_1_, p_193983_2_, this.guiLeft, this.guiTop, this.xSize, this.ySize) && flag;
   }
 
@@ -108,7 +107,7 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
    */
   protected boolean isPointInRegion(int rectX, int rectY, int rectWidth, int rectHeight, int pointX, int pointY) {
     return (!this.widthTooNarrow || !this.recipeBookGui.isVisible()) &&
-            super.isPointInRegion(rectX, rectY, rectWidth, rectHeight, pointX, pointY);
+           super.isPointInRegion(rectX, rectY, rectWidth, rectHeight, pointX, pointY);
   }
 
   /**
@@ -120,8 +119,8 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
   }
 
   /**
-   * Fired when a key is typed (except F11 which toggles full screen). This is the equivalent of KeyListener.keyTyped(KeyEvent e). Args : character (character on the
-   * key), keyCode (lwjgl Keyboard key code)
+   * Fired when a key is typed (except F11 which toggles full screen). This is the equivalent of KeyListener.keyTyped(KeyEvent e). Args : character (character
+   * on the key), keyCode (lwjgl Keyboard key code)
    */
   protected void keyTyped(char typedChar, int keyCode) throws IOException {
     if (!this.recipeBookGui.keyPressed(typedChar, keyCode)) {

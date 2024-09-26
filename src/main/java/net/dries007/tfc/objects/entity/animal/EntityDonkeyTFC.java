@@ -42,7 +42,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -79,7 +78,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
 
   public EntityDonkeyTFC(World world) {
     this(world, Gender.valueOf(RNG.nextBoolean()),
-            EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.DONKEY.adulthood, ConfigTFC.Animals.DONKEY.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.DONKEY.adulthood, ConfigTFC.Animals.DONKEY.elder));
   }
 
   public EntityDonkeyTFC(World world, Gender gender, int birthDay) {
@@ -110,16 +109,16 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+           && !this.world.containsAnyLiquid(getEntityBoundingBox())
+           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.PLAINS)) {
+        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
       return ConfigTFC.Animals.DONKEY.rarity;
     }
     return 0;
@@ -203,14 +202,14 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
     // Save genes
     EntityAnimal father = (EntityAnimal) male;
     this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-            .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-            .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+                                      .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+                                                            .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
     this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-            .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-            .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+                                     .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+                                                           .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
     this.geneJump = (float) ((father.getEntityAttribute(JUMP_STRENGTH)
-            .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
-            .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+                                    .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
+                                                          .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
   }
 
   @Override
@@ -281,12 +280,16 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
     return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-            .name()
-            .toLowerCase());
+                                                                                          .name()
+                                                                                          .toLowerCase());
   }
 
   public long getPregnantTime() {
     return dataManager.get(PREGNANT_TIME);
+  }
+
+  public void setPregnantTime(long pregnantTime) {
+    dataManager.set(PREGNANT_TIME, pregnantTime);
   }
 
   public boolean isHalter() {
@@ -295,10 +298,6 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
 
   public void setHalter(boolean value) {
     dataManager.set(HALTER, value);
-  }
-
-  public void setPregnantTime(long pregnantTime) {
-    dataManager.set(PREGNANT_TIME, pregnantTime);
   }
 
   @Override
@@ -464,14 +463,14 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
         this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
-                this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
+          this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
         if (random.nextDouble() < ConfigTFC.Animals.DONKEY.oldDeathChance) {
           this.setDead();
         }
       }
       // Wild animals disappear after 125% lifespan
       if (this.getDaysToElderly() > 0 && this.getFamiliarity() < 0.10F &&
-              (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
+          (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
         this.setDead();
       }
     }
@@ -519,7 +518,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
    */
   private boolean findFemaleMate() {
     List<AbstractHorse> list = this.world.getEntitiesWithinAABB(AbstractHorse.class, this.getEntityBoundingBox()
-            .grow(8.0D));
+                                                                                         .grow(8.0D));
     for (AbstractHorse ent : list) {
       if (ent instanceof EntityHorseTFC || ent instanceof EntityDonkeyTFC) {
         IAnimal animal = (IAnimal) ent;
@@ -557,7 +556,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
     } else if (other == this) {
       // Only called if this animal is interacted with a spawn egg
       EntityDonkeyTFC baby = new EntityDonkeyTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                                 (int) Calendar.PLAYER_TIME.getTotalDays());
       this.setOffspringAttributes(this, baby);
       return baby;
     }

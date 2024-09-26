@@ -7,7 +7,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiPredicate;

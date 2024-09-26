@@ -12,7 +12,6 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import com.buuz135.hotornot.config.HotConfig;
 import com.buuz135.hotornot.config.HotLists;
 
@@ -44,9 +43,9 @@ public enum ItemEffect {
 
     return fluidStack.getFluid().getTemperature(fluidStack) >= HotConfig.TEMPERATURE_VALUES.hotFluidTemp + 273;
   },
-          player -> player.setFire(1),
-          "tooltip.hotornot.toohot",
-          true),
+            player -> player.setFire(1),
+            "tooltip.hotornot.toohot",
+            true),
   HOT_ITEM(stack -> {
     if (!HotConfig.EFFECT_HANDLING.handleHotItems) {
       return false;
@@ -60,8 +59,8 @@ public enum ItemEffect {
 
     return cap.getTemperature() >= HotConfig.TEMPERATURE_VALUES.hotItemTemp;
   }, player -> player.setFire(1),
-          "tooltip.hotornot.item_hot",
-          true),
+           "tooltip.hotornot.item_hot",
+           true),
   FLUID_COLD(stack -> {
     if (!HotConfig.EFFECT_HANDLING.handleColdFluids) {
       return false;
@@ -86,12 +85,12 @@ public enum ItemEffect {
 
     return fluidStack.getFluid().getTemperature(fluidStack) <= HotConfig.TEMPERATURE_VALUES.coldFluidTemp + 273;
   },
-          player -> {
-            player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 21, 1));
-            player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 21, 1));
-          },
-          "tooltip.hotornot.toocold",
-          false),
+             player -> {
+               player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 21, 1));
+               player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 21, 1));
+             },
+             "tooltip.hotornot.toocold",
+             false),
   FLUID_GAS(stack -> {
     if (!HotConfig.EFFECT_HANDLING.handleGaseousFluids) {
       return false;
@@ -116,9 +115,9 @@ public enum ItemEffect {
 
     return fluidStack.getFluid().isGaseous(fluidStack);
   },
-          player -> player.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 21, 1)),
-          "tooltip.hotornot.toolight",
-          false);
+            player -> player.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 21, 1)),
+            "tooltip.hotornot.toolight",
+            false);
 
   public final Predicate<ItemStack> effectPredicate;
   public final Consumer<EntityPlayer> interactPlayer;

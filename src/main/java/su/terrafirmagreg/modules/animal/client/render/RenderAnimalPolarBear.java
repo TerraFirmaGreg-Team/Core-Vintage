@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
@@ -19,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class RenderAnimalPolarBear extends RenderLiving<EntityAnimalPolarBear> {
 
   private static final ResourceLocation POLARBEAR_TEXTURE = ModUtils.resource(
-          "textures/entity/animal/predators/polarbear.png");
+    "textures/entity/animal/predators/polarbear.png");
 
   public RenderAnimalPolarBear(RenderManager renderManager) {
     super(renderManager, new ModelAnimalPolarBear(), 0.7F);
@@ -27,7 +26,7 @@ public class RenderAnimalPolarBear extends RenderLiving<EntityAnimalPolarBear> {
 
   @Override
   public void doRender(@NotNull EntityAnimalPolarBear polarBearTFC, double par2, double par4,
-          double par6, float par8, float par9) {
+                       double par6, float par8, float par9) {
     this.shadowSize = (float) (0.35f + (polarBearTFC.getPercentToAdulthood() * 0.35f));
     super.doRender(polarBearTFC, par2, par4, par6, par8, par9);
   }

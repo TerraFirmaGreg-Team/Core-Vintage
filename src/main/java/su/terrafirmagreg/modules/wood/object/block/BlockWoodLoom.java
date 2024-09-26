@@ -30,7 +30,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -42,13 +41,13 @@ import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock {
 
   protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D,
-          0.5625D, 1.0D, 0.9375D);
+                                                                          0.5625D, 1.0D, 0.9375D);
   protected static final AxisAlignedBB LOOM_WEST_AABB = new AxisAlignedBB(0.4375D, 0.0D, 0.0625D,
-          0.875D, 1.0D, 0.9375D);
+                                                                          0.875D, 1.0D, 0.9375D);
   protected static final AxisAlignedBB LOOM_SOUTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.125D,
-          0.9375D, 1.0D, 0.5625D);
+                                                                           0.9375D, 1.0D, 0.5625D);
   protected static final AxisAlignedBB LOOM_NORTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.4375D,
-          0.9375D, 1.0D, 0.875D);
+                                                                           0.9375D, 1.0D, 0.875D);
 
   protected final WoodBlockVariant variant;
   protected final WoodType type;
@@ -60,21 +59,21 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock {
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .harvestLevel(ToolClasses.AXE, 0)
-            .sound(SoundType.WOOD)
-            .nonOpaque()
-            .nonFullCube()
-            .hardness(0.5f)
-            .resistance(3f)
-            .weight(Weight.VERY_HEAVY)
-            .size(Size.LARGE)
-            .oreDict(variant)
-            .oreDict(variant, type);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .harvestLevel(ToolClasses.AXE, 0)
+      .sound(SoundType.WOOD)
+      .nonOpaque()
+      .nonFullCube()
+      .hardness(0.5f)
+      .resistance(3f)
+      .weight(Weight.VERY_HEAVY)
+      .size(Size.LARGE)
+      .oreDict(variant)
+      .oreDict(variant, type);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(HORIZONTAL, EnumFacing.NORTH));
+                              .withProperty(HORIZONTAL, EnumFacing.NORTH));
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
   }
@@ -101,8 +100,8 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                  float hitX, float hitY, float hitZ) {
     var tile = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
     if (tile != null) {
       return tile.onRightClick(playerIn);
@@ -112,8 +111,8 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock {
 
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-          float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer) {
+                                          float hitX, float hitY, float hitZ, int meta,
+                                          EntityLivingBase placer) {
     if (facing.getAxis() == EnumFacing.Axis.Y) {
       facing = placer.getHorizontalFacing().getOpposite();
     }

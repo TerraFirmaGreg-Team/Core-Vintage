@@ -2,7 +2,6 @@ package su.terrafirmagreg;
 
 import net.minecraftforge.common.config.Config;
 
-
 import static su.terrafirmagreg.data.Constants.MOD_ID;
 import static su.terrafirmagreg.data.Constants.MOD_NAME;
 

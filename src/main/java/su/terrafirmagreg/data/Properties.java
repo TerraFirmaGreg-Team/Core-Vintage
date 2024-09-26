@@ -1,9 +1,9 @@
 package su.terrafirmagreg.data;
 
 
-import su.terrafirmagreg.data.lib.property.PropertyUnlistedDirection;
-import su.terrafirmagreg.data.lib.property.PropertyUnlistedObject;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState;
+import com.eerussianguy.firmalife.init.EnumAging;
+
+import lombok.experimental.UtilityClass;
 
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
@@ -15,10 +15,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-
-import com.eerussianguy.firmalife.init.EnumAging;
-
-import lombok.experimental.UtilityClass;
+import su.terrafirmagreg.data.lib.property.PropertyUnlistedDirection;
+import su.terrafirmagreg.data.lib.property.PropertyUnlistedObject;
+import su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState;
 
 import java.util.Arrays;
 
@@ -41,10 +40,6 @@ public final class Properties {
   public static final PropertyEnum<EnumFacing.Axis> XZ = PropertyEnum.create("axis", EnumFacing.Axis.class, EnumFacing.Axis.X, EnumFacing.Axis.Z);
   public static final PropertyEnum<EnumAging> AGE = PropertyEnum.create("age", EnumAging.class);
   public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", EnumLeafState.class);
-//  public static final PropertyEnum<EnumChopperPart> CHOPPER_PART = PropertyEnum.create("part", EnumChopperPart.class);
-//  public static final PropertyEnum<EnumGrindStonePart> GRINDSTONE_PART = PropertyEnum.create("part", EnumGrindStonePart.class);
-//  public static final PropertyEnum<EnumHandGrindstonePart> HAND_GRINDSTONE_PART = PropertyEnum.create("part", EnumHandGrindstonePart.class);
-//  public static final PropertyEnum<EnumPressPart> PRESS_PART = PropertyEnum.create("part", EnumPressPart.class);
 
 
   public static final PropertyDirection DIRECTIONAL = PropertyDirection.create("facing");

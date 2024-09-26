@@ -32,7 +32,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.te.TEPlacedItem;
@@ -50,11 +49,11 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
   public static final int STRAW_NEEDED = 8;
   public static final int WOOD_NEEDED = 8;
   public static final Vec3i[] DIAGONALS = new Vec3i[]{new Vec3i(1, 0, 1), new Vec3i(-1, 0, 1),
-          new Vec3i(1, 0, -1), new Vec3i(-1, 0, -1)};
+                                                      new Vec3i(1, 0, -1), new Vec3i(-1, 0, -1)};
   private final NonNullList<ItemStack> logItems = NonNullList.withSize(WOOD_NEEDED,
-          ItemStack.EMPTY);
+                                                                       ItemStack.EMPTY);
   private final NonNullList<ItemStack> strawItems = NonNullList.withSize(STRAW_NEEDED,
-          ItemStack.EMPTY);
+                                                                         ItemStack.EMPTY);
   @Getter
   private long litTick;
   private boolean isLit;
@@ -69,7 +68,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
     // Remove inventory items
     // This happens here to stop the block dropping its items in onBreakBlock()
     IItemHandler capOld = tileOld.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-            null);
+                                                null);
     ItemStack[] inventory = new ItemStack[4];
     if (capOld != null) {
       for (int i = 0; i < 4; i++) {
@@ -90,7 +89,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
 
     // Copy inventory
     IItemHandler capNew = tileNew.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-            null);
+                                                null);
     if (capNew != null) {
       for (int i = 0; i < 4; i++) {
         if (inventory[i] != null && !inventory[i].isEmpty()) {
@@ -222,9 +221,9 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
   @Override
   public void onBreakBlock(World worldIn, BlockPos pos, IBlockState state) {
     strawItems.forEach(
-            i -> StackUtils.spawnItemStack(world, pos, i));
+      i -> StackUtils.spawnItemStack(world, pos, i));
     logItems.forEach(
-            i -> StackUtils.spawnItemStack(world, pos, i));
+      i -> StackUtils.spawnItemStack(world, pos, i));
     super.onBreakBlock(worldIn, pos, state);
   }
 
@@ -234,7 +233,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
 
   public boolean hasFuel() {
     return !(logItems.stream().anyMatch(ItemStack::isEmpty) || strawItems.stream()
-            .anyMatch(ItemStack::isEmpty));
+                                                                         .anyMatch(ItemStack::isEmpty));
   }
 
   /**
@@ -249,12 +248,12 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
     if (player.isSneaking()) {
       // This will search through the logItems, then the strawItems
       ItemStack dropStack = logItems.stream()
-              .filter(i -> !i.isEmpty())
-              .findFirst()
-              .orElseGet(() -> strawItems.stream()
-                      .filter(i -> !i.isEmpty())
-                      .findFirst()
-                      .orElse(ItemStack.EMPTY));
+                                    .filter(i -> !i.isEmpty())
+                                    .findFirst()
+                                    .orElseGet(() -> strawItems.stream()
+                                                               .filter(i -> !i.isEmpty())
+                                                               .findFirst()
+                                                               .orElse(ItemStack.EMPTY));
       if (!dropStack.isEmpty()) {
         ItemHandlerHelper.giveItemToPlayer(player, dropStack.splitStack(1));
         updateBlock();
@@ -278,7 +277,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
 
       // Straw via thatch block (special exception)
       if (stack.getItem() == Item.getItemFromBlock(BlocksCore.THATCH)
-              && strawCount <= STRAW_NEEDED - 4) {
+          && strawCount <= STRAW_NEEDED - 4) {
         stack.shrink(1);
         addStrawBlock();
         world.playSound(null, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 0.5f, 1.0f);
@@ -291,7 +290,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
         if (OreDictUtils.contains(stack, "logWood") && logCount < WOOD_NEEDED) {
           addLog(stack.splitStack(1));
           world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 0.5f,
-                  1.0f);
+                          1.0f);
           updateBlock();
           return true;
         }
@@ -309,7 +308,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
   protected void updateBlock() {
     IBlockState state = world.getBlockState(pos);
     world.setBlockState(pos,
-            state.withProperty(FULL, getStrawCount() == STRAW_NEEDED && getLogCount() == WOOD_NEEDED));
+                        state.withProperty(FULL, getStrawCount() == STRAW_NEEDED && getLogCount() == WOOD_NEEDED));
     markForBlockUpdate();
   }
 
@@ -328,9 +327,9 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
     NBTUtils.setGenericNBTValue(nbt, "isLit", isLit);
     NBTUtils.setGenericNBTValue(nbt, "litTick", litTick);
     NBTUtils.setGenericNBTValue(nbt, "strawItems",
-            ItemStackHelper.saveAllItems(new NBTTagCompound(), strawItems));
+                                ItemStackHelper.saveAllItems(new NBTTagCompound(), strawItems));
     NBTUtils.setGenericNBTValue(nbt, "logItems",
-            ItemStackHelper.saveAllItems(new NBTTagCompound(), logItems));
+                                ItemStackHelper.saveAllItems(new NBTTagCompound(), logItems));
     return super.writeToNBT(nbt);
   }
 

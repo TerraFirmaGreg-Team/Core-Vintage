@@ -9,8 +9,7 @@
           "model": "tfc:plants/blue_ginger_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },

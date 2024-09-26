@@ -4,7 +4,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
-
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
@@ -29,7 +28,7 @@ public class AnvilRecipeMeasurable extends AnvilRecipe {
    * @param rules   the forging rules
    */
   public AnvilRecipeMeasurable(ResourceLocation name, IIngredient<ItemStack> input, ItemStack output, Metal.Tier minTier, ForgeRule... rules)
-          throws IllegalArgumentException {
+    throws IllegalArgumentException {
     super(name, input, output, minTier, null, rules);
   }
 

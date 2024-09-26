@@ -12,7 +12,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -262,7 +261,7 @@ public class ModelGazelleTFC extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
-          float scale) {
+                     float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
     if (((EntityAnimal) entity).isChild()) {
@@ -295,7 +294,7 @@ public class ModelGazelleTFC extends ModelBase {
 
   @Override
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
-          Entity entityIn) {
+                                Entity entityIn) {
 
     setRotateAngle(head, headPitch / (180F / MathConstants.PI) + 0.1570796F, netHeadYaw / (180F / MathConstants.PI), 0F);
     setRotateAngle(neck, headPitch / (1.5F * (180F / MathConstants.PI)) + 1.815142F, netHeadYaw / (1.5F * (180F / MathConstants.PI)), 0F);

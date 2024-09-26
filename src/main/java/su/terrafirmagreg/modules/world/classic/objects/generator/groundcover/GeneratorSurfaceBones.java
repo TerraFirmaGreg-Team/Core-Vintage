@@ -11,7 +11,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import tfcflorae.ConfigTFCF;
 
@@ -37,7 +36,7 @@ public class GeneratorSurfaceBones implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+                       IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
     final var baseChunkData = CapabilityChunkData.get(world, chunkBlockPos);
 
@@ -48,11 +47,11 @@ public class GeneratorSurfaceBones implements IWorldGenerator {
 
       //for (int i = 0; i < ConfigTFCF.General.WORLD.groundcoverBonesFrequency * factor; i++)
       for (int i = 0; i < getBoneFrequency(world, chunkBlockPos,
-              ConfigTFCF.General.WORLD.groundcoverBonesFrequency); i++) {
+                                           ConfigTFCF.General.WORLD.groundcoverBonesFrequency); i++) {
         BlockPos pos = new BlockPos(
-                xoff + random.nextInt(16),
-                0,
-                zoff + random.nextInt(16)
+          xoff + random.nextInt(16),
+          0,
+          zoff + random.nextInt(16)
         );
         generateRock(world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()));
       }
@@ -73,8 +72,8 @@ public class GeneratorSurfaceBones implements IWorldGenerator {
     var data = CapabilityChunkData.get(world, pos);
     if (pos.getY() > 146 && pos.getY() < 170 && data.getRainfall() <= 75) {
       if (world.isAirBlock(pos) && world.getBlockState(pos.down())
-              .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(
-              world.getBlockState(pos.down()))) {
+                                        .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(
+        world.getBlockState(pos.down()))) {
         world.setBlockState(pos, BlocksTFCF.BONES.getDefaultState());
       }
     }

@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:rock/dolomite"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

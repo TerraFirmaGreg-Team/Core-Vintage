@@ -27,7 +27,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
@@ -66,7 +65,7 @@ public class ItemJug extends ItemPottery {
             world.playSound(null, player.posX, player.posY + 0.5, player.posZ, TFCSounds.JUG_FILL, SoundCategory.BLOCKS, 1.0F, 0.5F);
             Vec3d look = player.getLookVec();
             ((WorldServer) world).spawnParticle(EnumParticleTypes.WATER_DROP, player.posX + look.x,
-                    player.posY + 0.3 + world.rand.nextDouble(), player.posZ + look.z, 42, 0.1D, 0.4D, 0.2D, 0.0D);
+                                                player.posY + 0.3 + world.rand.nextDouble(), player.posZ + look.z, 42, 0.1D, 0.4D, 0.2D, 0.0D);
           } else {
             player.setActiveHand(hand);
           }
@@ -77,7 +76,7 @@ public class ItemJug extends ItemPottery {
           ItemStack single = stack.copy();
           single.setCount(1);
           FluidActionResult result = FluidTransferHelper.tryPickUpFluidGreedy(single, player, world, rayTrace.getBlockPos(),
-                  rayTrace.sideHit, Fluid.BUCKET_VOLUME, false);
+                                                                              rayTrace.sideHit, Fluid.BUCKET_VOLUME, false);
           if (result.isSuccess()) {
             stack.shrink(1);
             if (stack.isEmpty()) {
@@ -88,7 +87,7 @@ public class ItemJug extends ItemPottery {
           }
         } else {
           player.world.playSound(null, player.getPosition(), TFCSounds.JUG_BLOW, SoundCategory.PLAYERS, 1.0f,
-                  0.8f + (float) (player.getLookVec().y / 2));
+                                 0.8f + (float) (player.getLookVec().y / 2));
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
       }
@@ -104,7 +103,7 @@ public class ItemJug extends ItemPottery {
       FluidStack fluidConsumed = jugCap.drain(CAPACITY, true);
       if (fluidConsumed != null && entityLiving instanceof EntityPlayer) {
         DrinkableProperty drinkable = FluidsTFC.getWrapper(fluidConsumed.getFluid())
-                .get(DrinkableProperty.DRINKABLE);
+                                               .get(DrinkableProperty.DRINKABLE);
         if (drinkable != null) {
           drinkable.onDrink((EntityPlayer) entityLiving);
         }
@@ -168,9 +167,9 @@ public class ItemJug extends ItemPottery {
   @Override
   public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
     return new FluidWhitelistHandler(stack, CAPACITY, FluidsTFC.getAllWrappers()
-            .stream()
-            .filter(x -> x.get(DrinkableProperty.DRINKABLE) != null)
-            .map(FluidWrapper::get)
-            .collect(Collectors.toSet()));
+                                                               .stream()
+                                                               .filter(x -> x.get(DrinkableProperty.DRINKABLE) != null)
+                                                               .map(FluidWrapper::get)
+                                                               .collect(Collectors.toSet()));
   }
 }

@@ -4,7 +4,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
-
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeSapling;
 
 public class ItemBlockJoshuaTreeSapling extends ItemBlockTFC {
@@ -16,7 +15,7 @@ public class ItemBlockJoshuaTreeSapling extends ItemBlockTFC {
   @Override
   public boolean onEntityItemUpdate(EntityItem entityItem) {
     if (!entityItem.world.isRemote && entityItem.getAge() >= entityItem.lifespan && !entityItem.getItem()
-            .isEmpty()) {
+                                                                                               .isEmpty()) {
       final BlockPos pos = entityItem.getPosition();
       if (placeAndDecreaseCount(entityItem, pos)) {
         entityItem.setDead();

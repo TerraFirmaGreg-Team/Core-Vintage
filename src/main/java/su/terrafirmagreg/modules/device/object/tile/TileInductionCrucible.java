@@ -27,7 +27,6 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import gregtech.api.capability.GregtechCapabilities;
 import tfctech.TFCTech;
 import tfctech.TechConfig;
@@ -42,7 +41,7 @@ import static su.terrafirmagreg.data.Properties.LIT;
 
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
 public class TileInductionCrucible extends TileCrucible implements IMachineSoundEffect,
-        IAmbientalTileProvider {
+                                                                   IAmbientalTileProvider {
 
   private final MachineEnergyStorage energyContainer;
   private final boolean addedToIc2Network = false;
@@ -52,7 +51,7 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
   public TileInductionCrucible() {
     super();
     energyContainer = new MachineEnergyStorage(TechConfig.DEVICES.inductionCrucibleEnergyCapacity,
-            TechConfig.DEVICES.inductionCrucibleEnergyCapacity, 0);
+                                               TechConfig.DEVICES.inductionCrucibleEnergyCapacity, 0);
   }
 
   //    @Optional.Method(modid = "ic2")
@@ -156,7 +155,7 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
       if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
         return true;
       } else if (TechConfig.DEVICES.acceptGTCEEU && GameUtils.isModLoaded("gregtech") &&
-              capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
+                 capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
         return true;
       }
     }
@@ -170,7 +169,7 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
       if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
         return (T) this.energyContainer;
       } else if (TechConfig.DEVICES.acceptGTCEEU && GameUtils.isModLoaded("gregtech") &&
-              capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
+                 capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
         return (T) this.energyContainer.getGTCEHandler();
       }
     }
@@ -199,17 +198,15 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
       return super.getField(0);
     } else if (index == 1) {
       return this.energyContainer.getEnergyStored();
-    } else {
-      TFCTech.getLog().warn("Invalid field ID {} in TEElectricForge#setField", index);
-      return 0;
     }
+    return 0;
   }
 
   @Override
   public GuiCrucible getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                     IBlockState state, BlockPos pos) {
     return new GuiInductionCrucible(getContainer(inventoryPlayer, world, state, pos),
-            inventoryPlayer, this);
+                                    inventoryPlayer, this);
   }
 
   @SideOnly(Side.CLIENT)
@@ -231,7 +228,7 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
     }
     IBlockState state = world.getBlockState(pos);
     return state.getBlock() instanceof BlockInductionCrucible && world.getBlockState(pos)
-            .getValue(LIT);
+                                                                      .getValue(LIT);
   }
 
   @Override

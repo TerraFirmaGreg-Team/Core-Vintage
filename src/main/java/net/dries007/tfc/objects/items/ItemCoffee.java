@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.registry.provider.IProviderModel;
 
 import net.minecraft.item.Item;
 
-
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;

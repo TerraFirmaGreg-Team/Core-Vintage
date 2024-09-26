@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.metal.objects.recipe.anvil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.forge.ForgeRule;
@@ -20,44 +19,44 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AnvilRecipeManager
-        implements IAnvilRecipeManager {
+  implements IAnvilRecipeManager {
 
   private static final Set<IAnvilRecipe> recipes = new HashSet<>();
 
   @Nullable
   public static IAnvilRecipe findMatchingRecipe(ItemStack item) {
     return recipes.stream()
-            .filter(x -> x.isValidInput(item))
-            .findFirst()
-            .orElse(null);
+                  .filter(x -> x.isValidInput(item))
+                  .findFirst()
+                  .orElse(null);
   }
 
   @Nullable
   public static IAnvilRecipe findMatchingRecipe(ResourceLocation resourceLocation) {
     return recipes.stream()
-            .filter(x -> x.getRecipeName().equals(resourceLocation))
-            .findFirst()
-            .orElse(null);
+                  .filter(x -> x.getRecipeName().equals(resourceLocation))
+                  .findFirst()
+                  .orElse(null);
   }
 
   @NotNull
   public static List<IAnvilRecipe> getAllFor(ItemStack stack) {
     return recipes.stream()
-            .filter(x -> x.isValidInput(stack))
-            .collect(Collectors.toList());
+                  .filter(x -> x.isValidInput(stack))
+                  .collect(Collectors.toList());
   }
 
   @Override
   public void addRecipe(ResourceLocation recipeName, IIngredient<ItemStack> inputItem,
-          ItemStack outputItem, Metal.Tier tier, ForgeRule... rules) {
+                        ItemStack outputItem, Metal.Tier tier, ForgeRule... rules) {
     addRecipe(recipeName, inputItem, outputItem, tier, null, rules);
 
   }
 
   @Override
   public void addRecipe(ResourceLocation recipeName, IIngredient<ItemStack> inputItem,
-          ItemStack outputItem, Metal.Tier tier, @Nullable SmithingSkill.Type skillBonusType,
-          ForgeRule... rules) {
+                        ItemStack outputItem, Metal.Tier tier, @Nullable SmithingSkill.Type skillBonusType,
+                        ForgeRule... rules) {
     addRecipe(new AnvilRecipe(recipeName, inputItem, outputItem, tier, skillBonusType, rules));
 
   }

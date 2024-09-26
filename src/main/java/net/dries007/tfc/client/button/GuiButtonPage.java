@@ -5,7 +5,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
@@ -35,7 +34,7 @@ public class GuiButtonPage extends GuiButton implements IButtonTooltip {
       int i = this.getHoverState(this.hovered);
       GlStateManager.enableBlend();
       GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-              GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                                          GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
       GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
       this.drawTexturedModalRect(this.x, this.y, type.x, type.y + i * 14, this.width, this.height);
       this.mouseDragged(mc, mouseX, mouseY);

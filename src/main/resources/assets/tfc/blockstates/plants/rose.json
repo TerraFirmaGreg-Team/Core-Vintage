@@ -9,8 +9,7 @@
           "model": "tfc:plants/rose_single"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "0"
@@ -20,8 +19,7 @@
           "model": "tfc:plants/rose_lower_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "1"
@@ -31,8 +29,7 @@
           "model": "tfc:plants/rose_lower_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "0"
@@ -42,8 +39,7 @@
           "model": "tfc:plants/rose_upper_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "1"

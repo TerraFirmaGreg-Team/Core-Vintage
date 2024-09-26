@@ -17,7 +17,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
-
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandlerComplex;
 
 import org.jetbrains.annotations.Nullable;
@@ -26,7 +25,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ItemBlockMetalLamp
-        extends BaseItemBlock {
+  extends BaseItemBlock {
 
   public static int CAPACITY;
 
@@ -34,36 +33,6 @@ public class ItemBlockMetalLamp
     super(block);
     CAPACITY = ConfigMetal.BLOCKS.LAMP.tank;
 
-  }
-
-  @Override
-  public boolean canStack(ItemStack stack) {
-    IFluidHandler lampCap = stack.getCapability(
-            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-    if (lampCap != null) {
-      return lampCap.drain(CAPACITY, false) == null;
-    }
-    return true;
-  }
-
-  @Override
-  public String getItemStackDisplayName(ItemStack stack) {
-    IFluidHandler fluidCap = stack.getCapability(
-            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-    if (fluidCap != null) {
-      FluidStack fluidStack = fluidCap.drain(CAPACITY, false);
-      if (fluidStack != null) {
-        String fluidName = fluidStack.getLocalizedName();
-        return new TextComponentTranslation(getTranslationKey() + ".filled.name",
-                fluidName).getFormattedText();
-      }
-    }
-    return super.getItemStackDisplayName(stack);
-  }
-
-  @Override
-  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-    return new FluidWhitelistHandlerComplex(stack, CAPACITY, getValidFluids());
   }
 
   public static Set<Fluid> getValidFluids() {
@@ -76,13 +45,43 @@ public class ItemBlockMetalLamp
   }
 
   @Override
+  public boolean canStack(ItemStack stack) {
+    IFluidHandler lampCap = stack.getCapability(
+      CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+    if (lampCap != null) {
+      return lampCap.drain(CAPACITY, false) == null;
+    }
+    return true;
+  }
+
+  @Override
+  public String getItemStackDisplayName(ItemStack stack) {
+    IFluidHandler fluidCap = stack.getCapability(
+      CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+    if (fluidCap != null) {
+      FluidStack fluidStack = fluidCap.drain(CAPACITY, false);
+      if (fluidStack != null) {
+        String fluidName = fluidStack.getLocalizedName();
+        return new TextComponentTranslation(getTranslationKey() + ".filled.name",
+                                            fluidName).getFormattedText();
+      }
+    }
+    return super.getItemStackDisplayName(stack);
+  }
+
+  @Override
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    return new FluidWhitelistHandlerComplex(stack, CAPACITY, getValidFluids());
+  }
+
+  @Override
   public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
     if (isInCreativeTab(tab)) {
       items.add(new ItemStack(this));
       for (Fluid fluid : getValidFluids()) {
         ItemStack stack = new ItemStack(this);
         IFluidHandlerItem cap = stack.getCapability(
-                CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+          CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         if (cap != null) {
           cap.fill(new FluidStack(fluid, CAPACITY), true);
         }

@@ -8,11 +8,11 @@ public class BiomeCrag extends BaseBiomeMesa {
 
   public BiomeCrag() {
     super(true, true, new Settings("Crag")
-            .guiColour(0x090697)
-            .baseHeight(-0.8F)
-            .heightVariation(1.0F)
-            .spawnBiome()
-            .enableWorldGen());
+      .guiColour(0x090697)
+      .baseHeight(-0.8F)
+      .heightVariation(1.0F)
+      .spawnBiome()
+      .enableWorldGen());
   }
 
   @Override
@@ -24,7 +24,7 @@ public class BiomeCrag extends BaseBiomeMesa {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.MOUNTAIN
+      BiomeDictionary.Type.MOUNTAIN
     };
   }
 }

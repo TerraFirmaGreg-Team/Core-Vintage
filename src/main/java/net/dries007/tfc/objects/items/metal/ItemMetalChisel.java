@@ -24,7 +24,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.api.recipes.ChiselRecipe.Mode;
@@ -49,66 +48,11 @@ public class ItemMetalChisel extends ItemMetalTool {
   }
 
   /**
-   * attempts to change a block in place using the chisel. If the chiselMode is stair and the block can be crafted into a stair, it will be turned into that stair. If
-   * the chiselMode is slab and the block can be crafted into a slab, it will be crafted into a slab. If the chiselMode is polish and the block is a TFC Raw stone, it
-   * will be crafted into a polished stone.
-   *
-   * @return SUCCESS if the block was chiseled, FAIL if no block was changed
-   */
-  @Override
-  @NotNull
-  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
-    // Find the block to place for this action
-    IBlockState newState = getChiselResultState(player, worldIn, pos, facing, hitX, hitY, hitZ);
-    if (newState != null) {
-      // play a sound matching the new block
-      SoundType soundType = newState.getBlock().getSoundType(newState, worldIn, pos, player);
-      worldIn.playSound(player, pos, soundType.getHitSound(), SoundCategory.BLOCKS, 1.0f, soundType.getPitch());
-
-      // only update the world state on the server side
-      if (!worldIn.isRemote) {
-        // replace the block with a new block
-        if (ConfigTFC.General.FALLABLE.chiselCausesCollapse) {
-          IBlockState oldState = worldIn.getBlockState(pos);
-          FallingBlockManager.Specification oldSpec = FallingBlockManager.getSpecification(oldState);
-          if (oldSpec != null && oldSpec.isCollapsable() && !BlockWoodSupport.isBeingSupported(worldIn, pos)) {
-            worldIn.setBlockToAir(pos); // Set block to air before attempting a collapse mechanic
-            if (FallingBlockManager.checkCollapsingArea(worldIn, pos)) {
-              return EnumActionResult.SUCCESS; // Collapse mechanic triggered, cancel chisel!
-            }
-          }
-        }
-        if (newState.getProperties().containsKey(CAN_FALL)) {
-          newState = newState.withProperty(CAN_FALL, true);
-        }
-        worldIn.setBlockState(pos, newState);
-
-        // spawn a slab if necessary
-        var cap = CapabilityPlayer.get(player);
-        if (cap != null) {
-          if (cap.getChiselMode() == Mode.SLAB) {
-            StackUtils.spawnItemStack(worldIn, pos, new ItemStack(newState.getBlock(), 1));
-          }
-        }
-
-        player.getHeldItem(hand).damageItem(1, player);
-        if (ConfigTFC.Devices.CHISEL.hasDelay) {
-          // if setting is on for chisel cooldown, trigger cooldown
-          player.getCooldownTracker().setCooldown(this, COOLDOWN);
-        }
-      }
-      return EnumActionResult.SUCCESS;
-    }
-    return EnumActionResult.FAIL;
-  }
-
-  /**
-   * Calculates the block that would be set in the specified position if the chisel were used. In most conditions will return null. If not null, then a successful
-   * chisel operation can be completed.
+   * Calculates the block that would be set in the specified position if the chisel were used. In most conditions will return null. If not null, then a
+   * successful chisel operation can be completed.
    * <br><br>
-   * code logic overview for finding result state:<br> state = world.getStateAt(pos)<br> block = state.getBlock()<br> itemStack = block.getPickBlock(state, pos)<br>
-   * resultStack = CraftingInventory.getResult(itemStack)<br> resultBlock = (resultStack.getItem() as ItemBlock).getBlock()<br> resultState =
+   * code logic overview for finding result state:<br> state = world.getStateAt(pos)<br> block = state.getBlock()<br> itemStack = block.getPickBlock(state,
+   * pos)<br> resultStack = CraftingInventory.getResult(itemStack)<br> resultBlock = (resultStack.getItem() as ItemBlock).getBlock()<br> resultState =
    * resultBlock.getPlacementState()<br>
    * <br>
    *
@@ -120,7 +64,7 @@ public class ItemMetalChisel extends ItemMetalTool {
    */
   @Nullable
   public static IBlockState getChiselResultState(EntityPlayer player, World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                                 float hitZ) {
     // no chiseling if no hammer is present
     if (hasHammerForChisel(player)) {
       IBlockState state = worldIn.getBlockState(pos);
@@ -154,7 +98,7 @@ public class ItemMetalChisel extends ItemMetalTool {
   @Nullable
   @SuppressWarnings("deprecation")
   private static IBlockState getRecipeResult(EntityPlayer player, World worldIn, BlockPos pos, EnumFacing facing, Mode chiselMode,
-          IBlockState targetState, float hitX, float hitY, float hitZ) {
+                                             IBlockState targetState, float hitX, float hitY, float hitZ) {
     if (chiselMode == Mode.SMOOTH) {
       ChiselRecipe recipe = ChiselRecipe.get(targetState);
       if (recipe != null) {
@@ -164,7 +108,7 @@ public class ItemMetalChisel extends ItemMetalTool {
       //noinspection ConstantConditions
       ItemStack targetStack = targetState.getBlock().getPickBlock(targetState, null, worldIn, pos, player);
       ItemStack resultItemStack = findCraftingResult(worldIn, targetStack,
-              (chiselMode == Mode.SLAB ? SLAB_PATTERN_INDICES : STAIR_PATTERN_INDICES));
+                                                     (chiselMode == Mode.SLAB ? SLAB_PATTERN_INDICES : STAIR_PATTERN_INDICES));
 
       if (resultItemStack != null) {
         Item resultItem = resultItemStack.getItem();
@@ -210,5 +154,60 @@ public class ItemMetalChisel extends ItemMetalTool {
       }
     }
     return null;
+  }
+
+  /**
+   * attempts to change a block in place using the chisel. If the chiselMode is stair and the block can be crafted into a stair, it will be turned into that
+   * stair. If the chiselMode is slab and the block can be crafted into a slab, it will be crafted into a slab. If the chiselMode is polish and the block is a
+   * TFC Raw stone, it will be crafted into a polished stone.
+   *
+   * @return SUCCESS if the block was chiseled, FAIL if no block was changed
+   */
+  @Override
+  @NotNull
+  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
+                                    float hitZ) {
+    // Find the block to place for this action
+    IBlockState newState = getChiselResultState(player, worldIn, pos, facing, hitX, hitY, hitZ);
+    if (newState != null) {
+      // play a sound matching the new block
+      SoundType soundType = newState.getBlock().getSoundType(newState, worldIn, pos, player);
+      worldIn.playSound(player, pos, soundType.getHitSound(), SoundCategory.BLOCKS, 1.0f, soundType.getPitch());
+
+      // only update the world state on the server side
+      if (!worldIn.isRemote) {
+        // replace the block with a new block
+        if (ConfigTFC.General.FALLABLE.chiselCausesCollapse) {
+          IBlockState oldState = worldIn.getBlockState(pos);
+          FallingBlockManager.Specification oldSpec = FallingBlockManager.getSpecification(oldState);
+          if (oldSpec != null && oldSpec.isCollapsable() && !BlockWoodSupport.isBeingSupported(worldIn, pos)) {
+            worldIn.setBlockToAir(pos); // Set block to air before attempting a collapse mechanic
+            if (FallingBlockManager.checkCollapsingArea(worldIn, pos)) {
+              return EnumActionResult.SUCCESS; // Collapse mechanic triggered, cancel chisel!
+            }
+          }
+        }
+        if (newState.getProperties().containsKey(CAN_FALL)) {
+          newState = newState.withProperty(CAN_FALL, true);
+        }
+        worldIn.setBlockState(pos, newState);
+
+        // spawn a slab if necessary
+        var cap = CapabilityPlayer.get(player);
+        if (cap != null) {
+          if (cap.getChiselMode() == Mode.SLAB) {
+            StackUtils.spawnItemStack(worldIn, pos, new ItemStack(newState.getBlock(), 1));
+          }
+        }
+
+        player.getHeldItem(hand).damageItem(1, player);
+        if (ConfigTFC.Devices.CHISEL.hasDelay) {
+          // if setting is on for chisel cooldown, trigger cooldown
+          player.getCooldownTracker().setCooldown(this, COOLDOWN);
+        }
+      }
+      return EnumActionResult.SUCCESS;
+    }
+    return EnumActionResult.FAIL;
   }
 }

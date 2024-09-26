@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonPage;
@@ -86,7 +85,7 @@ public class GuiSkills extends GuiContainerTFC {
       int startSkill = currentPage * 4;
       if (startSkill >= totalSkills || startSkill < 0) {
         TerraFirmaCraft.getLog()
-                .warn("Invalid skill page! Page: {}, Start at: {}, Skill Order is: {}", currentPage, startSkill, skillOrder);
+                       .warn("Invalid skill page! Page: {}, Start at: {}, Skill Order is: {}", currentPage, startSkill, skillOrder);
         return;
       }
       buttonRight.enabled = startSkill + 4 < totalSkills;

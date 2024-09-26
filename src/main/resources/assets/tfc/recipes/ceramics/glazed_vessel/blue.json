@@ -4,8 +4,7 @@
     {
       "type": "forge:ore_dict",
       "ore": "dyeBlue"
-    },
-    {
+    }, {
       "item": "tfc:ceramics/unfired/vessel"
     }
   ],

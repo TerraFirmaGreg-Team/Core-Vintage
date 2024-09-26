@@ -30,7 +30,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.client.TFCSounds;
 
 import org.jetbrains.annotations.Nullable;
@@ -46,7 +45,7 @@ public class BlockRockAnvil extends BlockRock implements IProviderTile {
     super(variant, type);
 
     getSettings()
-            .nonCube();
+      .nonCube();
   }
 
   @Override
@@ -81,7 +80,7 @@ public class BlockRockAnvil extends BlockRock implements IProviderTile {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
-          float hitY, float hitZ) {
+                                  float hitY, float hitZ) {
 
     //Avoid issues with insertion/extraction
     if (hand == EnumHand.OFF_HAND) {
@@ -145,7 +144,7 @@ public class BlockRockAnvil extends BlockRock implements IProviderTile {
     } else {
       // not sneaking, so try and open GUI
       if (!worldIn.isRemote) {
-        GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.ROCK_ANVIL);
+        GuiHandler.openGui(worldIn, pos, playerIn);
       }
       return true;
     }

@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -42,8 +41,8 @@ public class HPRecipes {
   public void reloadRecipes() {
     if (!serverSyncedRecipes) {
       reloadRecipes(Arrays.asList(Configs.recipes.grindstoneRecipes), Arrays.asList(Configs.recipes.handGrindstoneRecipes),
-              Arrays.asList(Configs.recipes.choppingRecipes), Arrays.asList(Configs.recipes.manualChoppingRecipes),
-              Arrays.asList(Configs.recipes.pressRecipes));
+                    Arrays.asList(Configs.recipes.choppingRecipes), Arrays.asList(Configs.recipes.manualChoppingRecipes),
+                    Arrays.asList(Configs.recipes.pressRecipes));
     }
   }
 
@@ -81,8 +80,8 @@ public class HPRecipes {
             stack = Utils.parseItemStack(item, true, true);
           } catch (Exception e) {
             Utils.errorMessage("Parse error with " + clazz.getSimpleName()
-                    .replaceAll("Recipe", "") + " recipe item '" + item + "' from config" +
-                    (stacks.size() > 0 ? " with item" + stacks.get(0) : "") + ", index: " + index, false);
+                                                          .replaceAll("Recipe", "") + " recipe item '" + item + "' from config" +
+                               (stacks.size() > 0 ? " with item" + stacks.get(0) : "") + ", index: " + index, false);
             break;
           }
           if ((stack instanceof ItemStack && !((ItemStack) stack).isEmpty()) || (!(stack instanceof ItemStack) && stack != null)) {
@@ -93,8 +92,9 @@ public class HPRecipes {
             time = Integer.parseInt(item);
           } catch (NumberFormatException e) {
             Utils.errorMessage("Parse error with " + clazz.getSimpleName()
-                    .replaceAll("Recipe", "") + " recipe time '" + item + "' from config for input " + stacks.get(0) + " and output " +
-                    stacks.get(1) + ", index: " + index, false);
+                                                          .replaceAll("Recipe", "") + " recipe time '" + item + "' from config for input " + stacks.get(0)
+                               + " and output " +
+                               stacks.get(1) + ", index: " + index, false);
             time = -1;
           }
         } else if (stacks.size() == 3) {
@@ -102,8 +102,9 @@ public class HPRecipes {
             secondaryChance = Integer.parseInt(item);
           } catch (NumberFormatException e) {
             Utils.errorMessage("Parse error with " + clazz.getSimpleName()
-                    .replaceAll("Recipe", "") + " recipe secondary chance '" + secondaryChance + "' from config for input " +
-                    stacks.get(0) + ", output " + stacks.get(1) + " and secondary " + stacks.get(2) + ", index: " + index, false);
+                                                          .replaceAll("Recipe", "") + " recipe secondary chance '" + secondaryChance
+                               + "' from config for input " +
+                               stacks.get(0) + ", output " + stacks.get(1) + " and secondary " + stacks.get(2) + ", index: " + index, false);
           }
         }
       }
@@ -120,11 +121,11 @@ public class HPRecipes {
             for (ItemStack stack : items) {
               if (stacks.get(1) instanceof FluidStack fluid) {
                 recipes.add(clazz.getConstructor(ItemStack.class, FluidStack.class)
-                        .newInstance(stack, fluid));
+                                 .newInstance(stack, fluid));
               } else {
                 ItemStack secondary = stacks.size() == 3 ? (ItemStack) stacks.get(2) : ItemStack.EMPTY;
                 recipes.add(clazz.getConstructor(ItemStack.class, ItemStack.class, ItemStack.class, int.class, int.class)
-                        .newInstance(stack, stacks.get(1), secondary, secondaryChance, time));
+                                 .newInstance(stack, stacks.get(1), secondary, secondaryChance, time));
               }
             }
             flag = true;
@@ -137,8 +138,8 @@ public class HPRecipes {
       }
       if (!flag) {
         Utils.errorMessage("Couldn't load " + clazz.getSimpleName()
-                .replaceAll("Recipe", "") + " recipe (" + Joiner.on("-")
-                .join(comp) + "), index: " + index, false);
+                                                   .replaceAll("Recipe", "") + " recipe (" + Joiner.on("-")
+                                                                                                   .join(comp) + "), index: " + index, false);
       }
       index++;
     }
@@ -211,8 +212,8 @@ public class HPRecipes {
     if (stack.isEmpty()) {
       return null;
     }
-    return hand && Configs.recipes.useSeperateGrindstoneRecipes ? handGrindstoneRecipes.get(new ComparableItemStack(stack)) :
-            grindstoneRecipes.get(new ComparableItemStack(stack));
+    return hand && Configs.recipes.useSeperateGrindstoneRecipes ? handGrindstoneRecipes.get(new ComparableItemStack(stack))
+                                                                : grindstoneRecipes.get(new ComparableItemStack(stack));
   }
 
   public void addGrindstoneRecipe(GrindstoneRecipe recipe, boolean hand) {
@@ -263,7 +264,7 @@ public class HPRecipes {
       return null;
     }
     return hand && Configs.recipes.useSeperateChoppingRecipes ? manualChoppingBlockRecipes.get(new ComparableItemStack(stack)) :
-            choppingBlockRecipes.get(new ComparableItemStack(stack));
+           choppingBlockRecipes.get(new ComparableItemStack(stack));
   }
 
   public void addPressRecipe(Block input, ItemStack output) {

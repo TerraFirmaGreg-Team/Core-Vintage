@@ -3,11 +3,9 @@
   "ingredients": [
     {
       "item": "tfc:brick/gneiss"
-    },
-    {
+    }, {
       "item": "tfc:brick/gneiss"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

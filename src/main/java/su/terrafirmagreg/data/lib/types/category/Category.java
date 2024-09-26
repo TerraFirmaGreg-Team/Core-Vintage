@@ -14,7 +14,7 @@ public abstract class Category<T> implements Comparable<Category<T>> {
 
     if (name.isEmpty()) {
       throw new RuntimeException(
-              String.format("Category name must contain any character: [%s]", name));
+        String.format("Category name must contain any character: [%s]", name));
     }
   }
 

@@ -6,12 +6,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.relauncher.Side;
 
-
 import net.dries007.tfc.objects.items.metal.ItemProspectorPick.ProspectResult.Type;
 
 /**
- * Event fired when the Prospector's Pickaxe is used. Carries all the data relative to the result displayed to the player. One of the two subclasses will be used
- * according to the logical side.
+ * Event fired when the Prospector's Pickaxe is used. Carries all the data relative to the result displayed to the player. One of the two subclasses will be
+ * used according to the logical side.
  */
 public abstract class ProspectEvent extends Event {
 

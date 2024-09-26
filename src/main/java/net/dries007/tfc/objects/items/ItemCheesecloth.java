@@ -35,7 +35,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.recipe.StrainingRecipe;
 import mcp.MethodsReturnNonnullByDefault;
@@ -107,10 +106,10 @@ public class ItemCheesecloth extends ItemTFC {
               } else if (fluid.getBlock() instanceof BlockLiquid) {
                 try {
                   BlockLiquid flowingBlock = BlockStaticLiquid.getFlowingBlock(fluid.getBlock()
-                          .getDefaultState()
-                          .getMaterial());
+                                                                                    .getDefaultState()
+                                                                                    .getMaterial());
                   worldIn.setBlockState(pos, flowingBlock.getDefaultState()
-                          .withProperty(BlockLiquid.LEVEL, 1));
+                                                         .withProperty(BlockLiquid.LEVEL, 1));
                 } catch (IllegalArgumentException ignored) {
                 }
               }

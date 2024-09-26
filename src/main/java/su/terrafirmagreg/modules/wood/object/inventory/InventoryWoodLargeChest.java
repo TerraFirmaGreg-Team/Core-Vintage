@@ -4,7 +4,6 @@ import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.ILockableContainer;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class InventoryWoodLargeChest extends InventoryLargeChest {
@@ -12,8 +11,7 @@ public class InventoryWoodLargeChest extends InventoryLargeChest {
   private final ILockableContainer upperChest;
   private final ILockableContainer lowerChest;
 
-  public InventoryWoodLargeChest(String nameIn, ILockableContainer upperChestIn,
-          ILockableContainer lowerChestIn) {
+  public InventoryWoodLargeChest(String nameIn, ILockableContainer upperChestIn, ILockableContainer lowerChestIn) {
     super(nameIn, upperChestIn, lowerChestIn);
     this.upperChest = upperChestIn;
     this.lowerChest = lowerChestIn;

@@ -14,7 +14,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import io.netty.buffer.ByteBuf;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -27,7 +26,7 @@ import java.util.Map;
 
 @SuppressWarnings("rawtypes")
 public abstract class BasePacketSerializable<REQ extends BasePacketSerializable> implements
-        Serializable, IMessage, IMessageHandler<REQ, IMessage> {
+                                                                                 Serializable, IMessage, IMessageHandler<REQ, IMessage> {
 
   /**
    * The serial version for this UID.
@@ -49,66 +48,66 @@ public abstract class BasePacketSerializable<REQ extends BasePacketSerializable>
     // Primitives
     addIOHandler(byte.class, BasePacketSerializable::readByte, BasePacketSerializable::writeByte);
     addIOHandler(short.class, BasePacketSerializable::readShort,
-            BasePacketSerializable::writeShort);
+                 BasePacketSerializable::writeShort);
     addIOHandler(int.class, BasePacketSerializable::readInt, BasePacketSerializable::writeInt);
     addIOHandler(long.class, BasePacketSerializable::readLong, BasePacketSerializable::writeLong);
     addIOHandler(float.class, BasePacketSerializable::readFloat,
-            BasePacketSerializable::writeFloat);
+                 BasePacketSerializable::writeFloat);
     addIOHandler(double.class, BasePacketSerializable::readDouble,
-            BasePacketSerializable::writeDouble);
+                 BasePacketSerializable::writeDouble);
     addIOHandler(boolean.class, BasePacketSerializable::readBoolean,
-            BasePacketSerializable::writeBoolean);
+                 BasePacketSerializable::writeBoolean);
     addIOHandler(char.class, BasePacketSerializable::readChar, BasePacketSerializable::writeChar);
 
     // Primitive Arrays
     addIOHandler(byte[].class, BasePacketSerializable::readByteArray,
-            BasePacketSerializable::writeByteArray);
+                 BasePacketSerializable::writeByteArray);
     addIOHandler(short[].class, BasePacketSerializable::readShortArray,
-            BasePacketSerializable::writeShortArray);
+                 BasePacketSerializable::writeShortArray);
     addIOHandler(int[].class, BasePacketSerializable::readIntArray,
-            BasePacketSerializable::writeIntArray);
+                 BasePacketSerializable::writeIntArray);
     addIOHandler(long[].class, BasePacketSerializable::readLongArray,
-            BasePacketSerializable::writeLongArray);
+                 BasePacketSerializable::writeLongArray);
     addIOHandler(float[].class, BasePacketSerializable::readFloatArray,
-            BasePacketSerializable::writeFloatArray);
+                 BasePacketSerializable::writeFloatArray);
     addIOHandler(double[].class, BasePacketSerializable::readDoubleArray,
-            BasePacketSerializable::writeDoubleArray);
+                 BasePacketSerializable::writeDoubleArray);
     addIOHandler(boolean[].class, BasePacketSerializable::readBooleanArray,
-            BasePacketSerializable::writeBooleanArray);
+                 BasePacketSerializable::writeBooleanArray);
     addIOHandler(char[].class, BasePacketSerializable::readCharArray,
-            BasePacketSerializable::writeCharArray);
+                 BasePacketSerializable::writeCharArray);
 
     // Objects
     addIOHandler(String.class, BasePacketSerializable::readString,
-            BasePacketSerializable::writeString);
+                 BasePacketSerializable::writeString);
     addIOHandler(NBTTagCompound.class, BasePacketSerializable::readNBT,
-            BasePacketSerializable::writeNBT);
+                 BasePacketSerializable::writeNBT);
     addIOHandler(ItemStack.class, BasePacketSerializable::readItemStack,
-            BasePacketSerializable::writeItemStack);
+                 BasePacketSerializable::writeItemStack);
     addIOHandler(BlockPos.class, BasePacketSerializable::readBlockPos,
-            BasePacketSerializable::writeBlockPos);
+                 BasePacketSerializable::writeBlockPos);
     addIOHandler(IBlockState.class, BasePacketSerializable::readState,
-            BasePacketSerializable::writeState);
+                 BasePacketSerializable::writeState);
     addIOHandler(ResourceLocation.class, BasePacketSerializable::readResourceLocation,
-            BasePacketSerializable::writeResourceLocation);
+                 BasePacketSerializable::writeResourceLocation);
     addIOHandler(EnchantmentData.class, BasePacketSerializable::readEnchantmentData,
-            BasePacketSerializable::writeEnchantmentData);
+                 BasePacketSerializable::writeEnchantmentData);
 
     // Object Arrays
     addIOHandler(String[].class, BasePacketSerializable::readStringArray,
-            BasePacketSerializable::writeStringArray);
+                 BasePacketSerializable::writeStringArray);
     addIOHandler(NBTTagCompound[].class, BasePacketSerializable::readNBTArray,
-            BasePacketSerializable::writeNBTArray);
+                 BasePacketSerializable::writeNBTArray);
     addIOHandler(ItemStack[].class, BasePacketSerializable::readItemStackArray,
-            BasePacketSerializable::writeItemStackArray);
+                 BasePacketSerializable::writeItemStackArray);
     addIOHandler(BlockPos[].class, BasePacketSerializable::readBlockPosArray,
-            BasePacketSerializable::writeBlockPosArray);
+                 BasePacketSerializable::writeBlockPosArray);
     addIOHandler(IBlockState[].class, BasePacketSerializable::readStateArray,
-            BasePacketSerializable::writeStateArray);
+                 BasePacketSerializable::writeStateArray);
     addIOHandler(ResourceLocation[].class, BasePacketSerializable::readResourceLocationArray,
-            BasePacketSerializable::writeResourceLocationArray);
+                 BasePacketSerializable::writeResourceLocationArray);
     addIOHandler(EnchantmentData[].class, BasePacketSerializable::readEnchantmentDataArray,
-            BasePacketSerializable::writeEnchantmentDataArray);
+                 BasePacketSerializable::writeEnchantmentDataArray);
   }
 
   /**
@@ -119,7 +118,7 @@ public abstract class BasePacketSerializable<REQ extends BasePacketSerializable>
    * @param writer The writer function.
    */
   public static <T extends Object> void addIOHandler(Class<T> type, Reader<T> reader,
-          Writer<T> writer) {
+                                                     Writer<T> writer) {
 
     handlers.put(type, Pair.of(reader, writer));
   }
@@ -556,7 +555,7 @@ public abstract class BasePacketSerializable<REQ extends BasePacketSerializable>
   private static IBlockState readState(ByteBuf buf) {
 
     final Block block = ForgeRegistries.BLOCKS.getValue(
-            new ResourceLocation(ByteBufUtils.readUTF8String(buf)));
+      new ResourceLocation(ByteBufUtils.readUTF8String(buf)));
     final int meta = buf.readByte();
     return block != null ? block.getStateFromMeta(meta) : Blocks.AIR.getDefaultState();
   }
@@ -609,40 +608,9 @@ public abstract class BasePacketSerializable<REQ extends BasePacketSerializable>
   private static void writeEnchantmentData(EnchantmentData data, ByteBuf buf) {
 
     ByteBufUtils.writeUTF8String(buf,
-            data.enchantment != null && data.enchantment.getRegistryName() != null
-                    ? data.enchantment.getRegistryName().toString() : "invalid");
+                                 data.enchantment != null && data.enchantment.getRegistryName() != null
+                                 ? data.enchantment.getRegistryName().toString() : "invalid");
     buf.writeInt(data.enchantmentLevel);
-  }
-
-  @Override
-  public final IMessage onMessage(REQ message, MessageContext context) {
-
-    return message.handleMessage(context);
-  }
-
-  /**
-   * Called when the message is received and handled. This is where you process the message.
-   *
-   * @param context The context for the message.
-   * @return A message to send as a response.
-   */
-  public abstract IMessage handleMessage(MessageContext context);
-
-  @Override
-  public final void fromBytes(ByteBuf buf) {
-
-    try {
-      final Class<?> clazz = this.getClass();
-      final Field[] clFields = getClassFields(clazz);
-      for (final Field f : clFields) {
-        final Class<?> type = f.getType();
-        if (acceptField(f, type)) {
-          this.readField(f, type, buf);
-        }
-      }
-    } catch (final Exception e) {
-      throw new RuntimeException("Error at reading packet " + this, e);
-    }
   }
 
   /**
@@ -683,20 +651,6 @@ public abstract class BasePacketSerializable<REQ extends BasePacketSerializable>
   }
 
   /**
-   * Reads the value of a field from the packet byte buffer.
-   *
-   * @param field The field to read.
-   * @param type  The type for the field.
-   * @param buf   The buffer to read from.
-   */
-  private final void readField(Field field, Class<?> type, ByteBuf buf)
-          throws IllegalArgumentException, IllegalAccessException {
-
-    final Pair<Reader, Writer> handler = getHandler(type);
-    field.set(this, handler.getLeft().read(buf));
-  }
-
-  /**
    * Gets the read/write handler for a type.
    *
    * @param type The type to get the IO handler for.
@@ -709,6 +663,51 @@ public abstract class BasePacketSerializable<REQ extends BasePacketSerializable>
       throw new RuntimeException("No R/W handler for  " + type);
     }
     return pair;
+  }
+
+  @Override
+  public final IMessage onMessage(REQ message, MessageContext context) {
+
+    return message.handleMessage(context);
+  }
+
+  /**
+   * Called when the message is received and handled. This is where you process the message.
+   *
+   * @param context The context for the message.
+   * @return A message to send as a response.
+   */
+  public abstract IMessage handleMessage(MessageContext context);
+
+  @Override
+  public final void fromBytes(ByteBuf buf) {
+
+    try {
+      final Class<?> clazz = this.getClass();
+      final Field[] clFields = getClassFields(clazz);
+      for (final Field f : clFields) {
+        final Class<?> type = f.getType();
+        if (acceptField(f, type)) {
+          this.readField(f, type, buf);
+        }
+      }
+    } catch (final Exception e) {
+      throw new RuntimeException("Error at reading packet " + this, e);
+    }
+  }
+
+  /**
+   * Reads the value of a field from the packet byte buffer.
+   *
+   * @param field The field to read.
+   * @param type  The type for the field.
+   * @param buf   The buffer to read from.
+   */
+  private final void readField(Field field, Class<?> type, ByteBuf buf)
+    throws IllegalArgumentException, IllegalAccessException {
+
+    final Pair<Reader, Writer> handler = getHandler(type);
+    field.set(this, handler.getLeft().read(buf));
   }
 
   @Override
@@ -736,7 +735,7 @@ public abstract class BasePacketSerializable<REQ extends BasePacketSerializable>
    * @param buf   The buffer to write to.
    */
   private final void writeField(Field field, Class<?> type, ByteBuf buf)
-          throws IllegalArgumentException, IllegalAccessException {
+    throws IllegalArgumentException, IllegalAccessException {
 
     final Pair<Reader, Writer> handler = getHandler(type);
     handler.getRight().write(field.get(this), buf);

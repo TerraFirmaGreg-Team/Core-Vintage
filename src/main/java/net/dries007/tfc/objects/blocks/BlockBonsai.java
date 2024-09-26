@@ -18,7 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfc.objects.te.TETickCounter;
@@ -86,7 +85,7 @@ public class BlockBonsai extends BlockNonCube {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-          float hitY, float hitZ) {
+                                  float hitY, float hitZ) {
     if (!world.isRemote) {
       var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
       if (tile == null) {

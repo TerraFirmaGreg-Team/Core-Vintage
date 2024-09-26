@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-
 import BananaFructa.tfcfarming.firmalife.TEHangingPlanterN;
 import BananaFructa.tfcfarming.firmalife.TEPlanterN;
 import BananaFructa.tfcfarming.firmalife.TEStemCropN;
@@ -24,9 +23,9 @@ import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 import static su.terrafirmagreg.data.Constants.MODID_TFCFARMING;
 
 @Mod(modid = MODID_TFCFARMING,
-        name = TFCFarming.name,
-        version = Tags.MOD_VERSION,
-        dependencies = "required-after:tfc;after:tfcflorae;after:firmalife")
+     name = TFCFarming.name,
+     version = Tags.MOD_VERSION,
+     dependencies = "required-after:tfc;after:tfcflorae;after:firmalife")
 public class TFCFarming {
 
   public static final String name = "TFC Farming";

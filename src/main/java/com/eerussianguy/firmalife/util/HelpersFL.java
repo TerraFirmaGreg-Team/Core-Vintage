@@ -6,7 +6,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-
 import com.eerussianguy.firmalife.FirmaLife;
 import com.eerussianguy.firmalife.network.PacketDrawBoundingBox;
 import com.eerussianguy.firmalife.network.PacketSpawnVanillaParticle;
@@ -23,7 +22,7 @@ public class HelpersFL {
   }
 
   public static void sendVanillaParticleToClient(EnumParticleTypes particle, World worldIn, double x, double y, double z, double speedX,
-          double speedY, double speedZ) {
+                                                 double speedY, double speedZ) {
     final int range = 80;
     PacketSpawnVanillaParticle packet = new PacketSpawnVanillaParticle(particle, x, y, z, speedX, speedY, speedZ);
     NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldIn.provider.getDimension(), x, y, z, range);
@@ -34,7 +33,7 @@ public class HelpersFL {
     final int range = 80;
     PacketDrawBoundingBox packet = new PacketDrawBoundingBox(min, max, red, green, blue, isBlockShape);
     NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldIn.provider.getDimension(), min.getX(), min.getY(), min.getZ(),
-            range);
+                                                                        range);
     FirmaLife.getNetwork().sendToAllAround(packet, point);
   }
 

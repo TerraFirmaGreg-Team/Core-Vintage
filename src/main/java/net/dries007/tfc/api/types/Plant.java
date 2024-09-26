@@ -1,12 +1,13 @@
 package net.dries007.tfc.api.types;
 
+import su.terrafirmagreg.data.lib.MCDate.Month;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
 
 import net.dries007.tfc.objects.blocks.plants.BlockCactusTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockCreepingPlantTFC;
@@ -22,10 +23,6 @@ import net.dries007.tfc.objects.blocks.plants.BlockTallPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockTallWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
 import net.dries007.tfc.util.calendar.Calendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
 
 import org.jetbrains.annotations.NotNull;
 
@@ -62,10 +59,10 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
   private final Optional<String> oreDictName;
 
   public Plant(@NotNull ResourceLocation name, PlantType plantType, int[] stages, boolean isClayMarking, boolean isSwampPlant, float minGrowthTemp,
-          float maxGrowthTemp, float minTemp, float maxTemp, float minRain, float maxRain, int minSun, int maxSun, int maxHeight,
-          double movementMod, String oreDictName) {
+               float maxGrowthTemp, float minTemp, float maxTemp, float minRain, float maxRain, int minSun, int maxSun, int maxHeight,
+               double movementMod, String oreDictName) {
     this(name, plantType, stages, isClayMarking, isSwampPlant, minGrowthTemp, maxGrowthTemp, minTemp, maxTemp, minRain, maxRain, minSun, maxSun,
-            maxHeight, 0, 0, movementMod, oreDictName);
+         maxHeight, 0, 0, movementMod, oreDictName);
   }
 
   /**
@@ -76,8 +73,8 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
    * <p>
    * Valid average biome temperatures are those that fall within the range plus or minus one quarter of the plants full temperature range
    * <p>
-   * Example: Lotus Full temperature range: 10-50 Average temp: 30 ( (10+50)/2 ) Difference between max and min temps: 40 (50-10) One quarter of this range: 10 (40/4)
-   * Worldgen temp range: 20-40 (30 +- 10)
+   * Example: Lotus Full temperature range: 10-50 Average temp: 30 ( (10+50)/2 ) Difference between max and min temps: 40 (50-10) One quarter of this range: 10
+   * (40/4) Worldgen temp range: 20-40 (30 +- 10)
    *
    * @param name          the ResourceLocation registry name of this plant
    * @param plantType     the type of plant
@@ -98,8 +95,8 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
    * @param oreDictName   if not empty, the Ore Dictionary entry for this plant
    */
   public Plant(@NotNull ResourceLocation name, PlantType plantType, int[] stages, boolean isClayMarking, boolean isSwampPlant, float minGrowthTemp,
-          float maxGrowthTemp, float minTemp, float maxTemp, float minRain, float maxRain, int minSun, int maxSun, int maxHeight,
-          int minWaterDepth, int maxWaterDepth, double movementMod, String oreDictName) {
+               float maxGrowthTemp, float minTemp, float maxTemp, float minRain, float maxRain, int minSun, int maxSun, int maxHeight,
+               int minWaterDepth, int maxWaterDepth, double movementMod, String oreDictName) {
     this.stages = stages;
     this.minGrowthTemp = minGrowthTemp;
     this.maxGrowthTemp = maxGrowthTemp;
@@ -191,13 +188,13 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
 
     for (int i = 1; i <= depthCounter; ++i) {
       if (world.getBlockState(pos.down(i)) != water && world.getBlockState(pos.down(i))
-              .getMaterial() != Material.CORAL) {
+                                                            .getMaterial() != Material.CORAL) {
         return false;
       }
     }
 
     while (world.getBlockState(pos.down(depthCounter)) == water || world.getBlockState(pos.down(depthCounter))
-            .getMaterial() == Material.CORAL) {
+                                                                        .getMaterial() == Material.CORAL) {
       depthCounter++;
     }
     return (maxDepth > 0) && depthCounter <= maxDepth + 1;
@@ -278,7 +275,7 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
 
   public IBlockState getWaterType() {
     if (plantType == PlantType.FLOATING_SEA || plantType == PlantType.WATER_SEA || plantType == PlantType.TALL_WATER_SEA ||
-            plantType == PlantType.EMERGENT_TALL_WATER_SEA) {
+        plantType == PlantType.EMERGENT_TALL_WATER_SEA) {
       return SALT_WATER;
     } else {
       return FRESH_WATER;
@@ -291,7 +288,7 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
 
   public boolean canBePotted() {
     return plantType == PlantType.STANDARD || plantType == PlantType.CACTUS || plantType == PlantType.CREEPING ||
-            plantType == PlantType.TALL_PLANT || plantType == PlantType.DRY || plantType == PlantType.DESERT || plantType == PlantType.MUSHROOM;
+           plantType == PlantType.TALL_PLANT || plantType == PlantType.DRY || plantType == PlantType.DESERT || plantType == PlantType.MUSHROOM;
   }
 
   public final EnumPlantTypeTFC getEnumPlantTypeTFC() {

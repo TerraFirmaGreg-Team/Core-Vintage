@@ -4,12 +4,10 @@
     {
       "type": "forge:ore_dict",
       "ore": "barrel"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "dyeRed"
-    },
-    {
+    }, {
       "item": "minecraft:gunpowder"
     }
   ],

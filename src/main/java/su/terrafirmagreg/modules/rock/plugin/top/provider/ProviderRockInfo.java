@@ -10,7 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -30,7 +29,7 @@ public class ProviderRockInfo implements IProbeInfoProvider {
 
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
-          IBlockState state, IProbeHitData hitData) {
+                           IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
 

@@ -4,14 +4,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
 /**
- * Not Axis Aligned Bounding Box Helper class to compute AABBs for different facings **No more AABBs for each direction** (only NSWE) For performance purposes, this
- * class will create AABBs on demand, and supply the same AABB object if asked again
+ * Not Axis Aligned Bounding Box Helper class to compute AABBs for different facings **No more AABBs for each direction** (only NSWE) For performance purposes,
+ * this class will create AABBs on demand, and supply the same AABB object if asked again
  */
 public class BoundingBox {
 

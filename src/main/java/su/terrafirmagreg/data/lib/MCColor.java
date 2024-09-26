@@ -1,12 +1,13 @@
 package su.terrafirmagreg.data.lib;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-
 
 import org.jetbrains.annotations.NotNull;
 
@@ -103,9 +104,12 @@ public class MCColor extends Color {
   /**
    * An array of the vanilla colors.
    */
-  public static final MCColor[] VANILLA_COLORS = {DYE_BLACK, DYE_RED, DYE_GREEN, DYE_BROWN,
-          DYE_BLUE, DYE_PURPLE, DYE_CYAN, DYE_LIGHT_GRAY,
-          DYE_GRAY, DYE_PINK, DYE_LIME, DYE_YELLOW, DYE_LIGHT_BLUE, DYE_MAGENTA, DYE_ORANGE, DYE_WHITE};
+  public static final MCColor[] VANILLA_COLORS = {
+    DYE_BLACK, DYE_RED, DYE_GREEN, DYE_BROWN,
+    DYE_BLUE, DYE_PURPLE, DYE_CYAN, DYE_LIGHT_GRAY,
+    DYE_GRAY, DYE_PINK, DYE_LIME, DYE_YELLOW,
+    DYE_LIGHT_BLUE, DYE_MAGENTA, DYE_ORANGE, DYE_WHITE
+  };
 
   /**
    * Constructs an MCColor from an ItemStack. Expects the stack to have already been checked for validity.
@@ -157,7 +161,7 @@ public class MCColor extends Color {
    */
   public MCColor(IBlockAccess world, BlockPos pos) {
 
-    this(world.getTileEntity(pos));
+    this(TileUtils.getTile(world, pos));
   }
 
   /**
@@ -210,8 +214,8 @@ public class MCColor extends Color {
   }
 
   /**
-   * Checks if an ItemStack is acceptable. For an ItemStack to be acceptable, it must not be null or empty, and must have an NBTTagCompound which is deemed acceptable
-   * by {@link #isAcceptable(NBTTagCompound)}.
+   * Checks if an ItemStack is acceptable. For an ItemStack to be acceptable, it must not be null or empty, and must have an NBTTagCompound which is deemed
+   * acceptable by {@link #isAcceptable(NBTTagCompound)}.
    *
    * @param stack The ItemStack to check.
    * @return Whether or not the ItemStack was acceptable.
@@ -242,7 +246,7 @@ public class MCColor extends Color {
    */
   public static boolean isAcceptable(@NotNull IBlockAccess world, @NotNull BlockPos pos) {
 
-    return isAcceptable(world.getTileEntity(pos));
+    return isAcceptable(TileUtils.getTile(world, pos));
   }
 
   /**

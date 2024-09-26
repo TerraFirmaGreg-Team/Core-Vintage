@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.base.biome.BaseBiome;
 
 import net.minecraftforge.common.BiomeDictionary;
 
-
 import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.MOUNTAINS;
 
 public class BiomeMountainsEdge extends BaseBiome {
@@ -27,7 +26,7 @@ public class BiomeMountainsEdge extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.MOUNTAIN
+      BiomeDictionary.Type.MOUNTAIN
     };
   }
 }

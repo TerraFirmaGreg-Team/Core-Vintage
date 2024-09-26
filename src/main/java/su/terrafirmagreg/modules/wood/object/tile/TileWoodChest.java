@@ -30,24 +30,22 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class TileWoodChest extends TileEntityChest implements ISlotCallback,
-        IProviderContainer<ContainerWoodChest, GuiWoodChest> {
+public class TileWoodChest extends TileEntityChest implements ISlotCallback, IProviderContainer<ContainerWoodChest, GuiWoodChest> {
 
   public static final int SIZE = 18;
-
   private WoodType cachedWoodType;
-  private int shadowTicksSinceSync;
+  private int shadowTicksSinceSync = 0;
 
   {
     chestContents = NonNullList.withSize(SIZE, ItemStack.EMPTY);
-    shadowTicksSinceSync = 0;
   }
+
+  public TileWoodChest() {}
 
   @Override
   public int getSizeInventory() {
@@ -56,13 +54,11 @@ public class TileWoodChest extends TileEntityChest implements ISlotCallback,
 
   @Override
   protected boolean isChestAt(@NotNull BlockPos posIn) {
-    if (world == null) {
-      return false;
-    }
+    if (world == null) {return false;}
 
     Block block = this.world.getBlockState(posIn).getBlock();
     return block instanceof BlockWoodChest blockWoodChest && blockWoodChest.getType() == getWood()
-            && blockWoodChest.chestType == getChestType();
+           && blockWoodChest.chestType == getChestType();
   }
 
   @Nullable
@@ -81,15 +77,15 @@ public class TileWoodChest extends TileEntityChest implements ISlotCallback,
     shadowTicksSinceSync++;
 
     if (!world.isRemote && numPlayersUsing != 0
-            && (shadowTicksSinceSync + pos.getX() + pos.getY() + pos.getZ()) % 200 == 0) {
+        && (shadowTicksSinceSync + pos.getX() + pos.getY() + pos.getZ()) % 200 == 0) {
       numPlayersUsing = 0;
 
       for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class,
-              new AxisAlignedBB(pos.add(-5, -5, -5), pos.add(6, 6, 6)))) {
+                                                             new AxisAlignedBB(pos.add(-5, -5, -5), pos.add(6, 6, 6)))) {
         if (player.openContainer instanceof ContainerWoodChest containerWoodChest) {
           IInventory iinventory = containerWoodChest.getLowerChestInventory();
           if (iinventory == this || iinventory instanceof InventoryLargeChest inventoryLargeChest &&
-                  inventoryLargeChest.isPartOfLargeChest(this)) {
+                                    inventoryLargeChest.isPartOfLargeChest(this)) {
             ++numPlayersUsing;
           }
         }
@@ -99,7 +95,7 @@ public class TileWoodChest extends TileEntityChest implements ISlotCallback,
     prevLidAngle = lidAngle;
 
     if (numPlayersUsing > 0 && lidAngle == 0.0F && adjacentChestZNeg == null
-            && adjacentChestXNeg == null) {
+        && adjacentChestXNeg == null) {
       double centerX = pos.getX() + 0.5D;
       double centerZ = pos.getZ() + 0.5D;
 
@@ -112,8 +108,8 @@ public class TileWoodChest extends TileEntityChest implements ISlotCallback,
       }
 
       world.playSound(null, centerX, pos.getY() + 0.5D, centerZ, SoundEvents.BLOCK_CHEST_OPEN,
-              SoundCategory.BLOCKS, 0.5F,
-              world.rand.nextFloat() * 0.1F + 0.9F);
+                      SoundCategory.BLOCKS, 0.5F,
+                      world.rand.nextFloat() * 0.1F + 0.9F);
     }
 
     if (numPlayersUsing == 0 && lidAngle > 0.0F || numPlayersUsing > 0 && lidAngle < 1.0F) {
@@ -129,7 +125,7 @@ public class TileWoodChest extends TileEntityChest implements ISlotCallback,
       }
 
       if (lidAngle < 0.5F && initialAngle >= 0.5F && adjacentChestZNeg == null
-              && adjacentChestXNeg == null) {
+          && adjacentChestXNeg == null) {
         double centerX = pos.getX() + 0.5D;
         double centerZ = pos.getZ() + 0.5D;
 
@@ -142,8 +138,8 @@ public class TileWoodChest extends TileEntityChest implements ISlotCallback,
         }
 
         world.playSound(null, centerX, pos.getY() + 0.5D, centerZ, SoundEvents.BLOCK_CHEST_CLOSE,
-                SoundCategory.BLOCKS, 0.5F,
-                world.rand.nextFloat() * 0.1F + 0.9F);
+                        SoundCategory.BLOCKS, 0.5F,
+                        world.rand.nextFloat() * 0.1F + 0.9F);
       }
 
       if (lidAngle < 0.0F) {
@@ -161,7 +157,7 @@ public class TileWoodChest extends TileEntityChest implements ISlotCallback,
         doubleChestHandler = WoodDoubleChestItemHandler.get(this);
       }
       if (doubleChestHandler != null
-              && doubleChestHandler != WoodDoubleChestItemHandler.NO_ADJACENT_CHESTS_INSTANCE) {
+          && doubleChestHandler != WoodDoubleChestItemHandler.NO_ADJACENT_CHESTS_INSTANCE) {
         return (T) doubleChestHandler;
       }
     }
@@ -170,7 +166,7 @@ public class TileWoodChest extends TileEntityChest implements ISlotCallback,
 
   @Override
   public boolean shouldRefresh(@NotNull World world, @NotNull BlockPos pos, IBlockState oldState,
-          IBlockState newSate) {
+                               IBlockState newSate) {
     return oldState.getBlock() != newSate.getBlock();
   }
 
@@ -198,9 +194,9 @@ public class TileWoodChest extends TileEntityChest implements ISlotCallback,
 
   @Override
   public ContainerWoodChest getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                         IBlockState state, BlockPos pos) {
     ILockableContainer chestContainer = ((BlockWoodChest) state.getBlock()).getLockableContainer(
-            world, pos);
+      world, pos);
     // This is null if the chest is blocked
     if (chestContainer == null) {
       return null;
@@ -211,7 +207,7 @@ public class TileWoodChest extends TileEntityChest implements ISlotCallback,
   @Override
   @SideOnly(Side.CLIENT)
   public GuiWoodChest getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                      IBlockState state, BlockPos pos) {
     return new GuiWoodChest(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer);
   }
 }

@@ -8,14 +8,12 @@
         {
           "model": "tfc:plants/wheatgrass_shortest_3",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/wheatgrass_shortest_4",
           "weight": 2
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "1"
       },
@@ -23,22 +21,18 @@
         {
           "model": "tfc:plants/wheatgrass_shorter_1",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/wheatgrass_shorter_2",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/wheatgrass_shorter_3",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/wheatgrass_shorter_4",
           "weight": 2
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2"
       },
@@ -46,26 +40,21 @@
         {
           "model": "tfc:plants/wheatgrass_short_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/wheatgrass_short_1",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/wheatgrass_short_2",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/wheatgrass_short_3",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/wheatgrass_short_4",
           "weight": 2
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "3"
       },
@@ -73,20 +62,16 @@
         {
           "model": "tfc:plants/wheatgrass_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/wheatgrass_1",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/wheatgrass_2",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/wheatgrass_3",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/wheatgrass_4",
           "weight": 2
         }

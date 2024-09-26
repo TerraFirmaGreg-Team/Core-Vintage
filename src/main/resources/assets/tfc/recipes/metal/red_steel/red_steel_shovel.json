@@ -1,8 +1,7 @@
 {
   "type": "tfc:shaped_skill",
   "pattern": [
-    "X",
-    "S"
+    "X", "S"
   ],
   "key": {
     "X": {

@@ -16,7 +16,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.TechItems;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -96,7 +95,7 @@ public class TileLatexExtractor extends BaseTile implements ITickable {
   public boolean makeCut() {
     if (flowTicks < 1 && hasPot() && hasBase()) {
       flowTicks =
-              ICalendar.TICKS_IN_DAY / 2 + MathConstants.RNG.nextInt(ICalendar.TICKS_IN_DAY * 2);
+        ICalendar.TICKS_IN_DAY / 2 + MathConstants.RNG.nextInt(ICalendar.TICKS_IN_DAY * 2);
       return true;
     }
     return false;
@@ -125,7 +124,7 @@ public class TileLatexExtractor extends BaseTile implements ITickable {
   public ItemStack removePot() {
     ItemStack stack = new ItemStack(TechItems.FLUID_BOWL);
     IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY,
-            null);
+                                            null);
     if (cap != null && hasFluid()) {
       cap.fill(new FluidStack(FluidsTFC.LATEX.get(), fluid), true);
     }
@@ -148,7 +147,7 @@ public class TileLatexExtractor extends BaseTile implements ITickable {
   public boolean addPot(ItemStack stack) {
     if (!hasPot() && hasBase() && isValidPot(stack)) {
       IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY,
-              null);
+                                              null);
       if (cap != null) {
         FluidStack fluidStack = cap.drain(MAX_FLUID, false);
         if (fluidStack != null) {
@@ -195,8 +194,7 @@ public class TileLatexExtractor extends BaseTile implements ITickable {
       }
       if (++serverUpdate % 40 == 0) {
         serverUpdate = 0;
-        ModuleDevice.getPacketService()
-                .sendToAllAround(new SCPacketLatex(this), world.provider.getDimension(), pos, 64);
+        ModuleDevice.getPacketService().sendToAllAround(new SCPacketLatex(this), world.provider.getDimension(), pos, 64);
       }
     }
   }

@@ -20,7 +20,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import java.util.Random;
 
 /**
@@ -36,21 +35,21 @@ public class BlockRockSpeleothem extends BlockRock {
     super(variant, type);
 
     getSettings()
-            .nonCube();
+      .nonCube();
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(SIZE, EnumSize.MEDIUM));
+                              .withProperty(SIZE, EnumSize.MEDIUM));
   }
 
   @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state,
-          BlockPos blockPos, EnumFacing face) {
+                                          BlockPos blockPos, EnumFacing face) {
     return BlockFaceShape.UNDEFINED;
   }
 
   @Override
   public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-          BlockPos pos) {
+                                               BlockPos pos) {
     return getBoundingBox(blockState, worldIn, pos);
   }
 
@@ -62,12 +61,12 @@ public class BlockRockSpeleothem extends BlockRock {
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(SIZE,
-            EnumSize.values()[Math.min(EnumSize.values().length - 1, meta)]);
+                                          EnumSize.values()[Math.min(EnumSize.values().length - 1, meta)]);
   }
 
   @Override
   public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn,
-          final BlockPos pos) {
+                                    final BlockPos pos) {
     var size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
     if (isCenter(worldIn, pos)) {
       size = EnumSize.MEDIUM;
@@ -87,7 +86,7 @@ public class BlockRockSpeleothem extends BlockRock {
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     int size = state.getValue(SIZE).strength;
     if (getBearing(worldIn, pos) < size + 1) {
       worldIn.playEvent(2001, pos, Block.getStateId(worldIn.getBlockState(pos)));
@@ -108,7 +107,7 @@ public class BlockRockSpeleothem extends BlockRock {
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-          EntityLivingBase placer, ItemStack stack) {
+                              EntityLivingBase placer, ItemStack stack) {
     var size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
     worldIn.setBlockState(pos, state.withProperty(SIZE, size));
   }

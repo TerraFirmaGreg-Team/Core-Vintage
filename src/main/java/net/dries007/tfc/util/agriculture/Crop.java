@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropSimple;
@@ -57,9 +56,9 @@ public enum Crop implements ICrop {
   SUGARCANE(Food.SUGARCANE, 12f, 20f, 38f, 45f, 50f, 160f, 410f, 450f, 8, 0.5f, SIMPLE),
   TOMATO(Food.TOMATO, 0f, 8f, 36f, 40f, 50f, 120f, 390f, 430f, 8, 0.45f, PICKABLE),
   RED_BELL_PEPPER(() -> new ItemStack(ItemFoodTFC.get(Food.RED_BELL_PEPPER)), () -> new ItemStack(ItemFoodTFC.get(Food.GREEN_BELL_PEPPER)), 4f, 12f,
-          32f, 38f, 50f, 100f, 400f, 450f, 7, 0.55f, PICKABLE),
+                  32f, 38f, 50f, 100f, 400f, 450f, 7, 0.55f, PICKABLE),
   YELLOW_BELL_PEPPER(() -> new ItemStack(ItemFoodTFC.get(Food.YELLOW_BELL_PEPPER)), () -> new ItemStack(ItemFoodTFC.get(Food.GREEN_BELL_PEPPER)),
-          4f, 12f, 32f, 38f, 50f, 100f, 400f, 450f, 7, 0.55f, PICKABLE),
+                     4f, 12f, 32f, 38f, 50f, 100f, 400f, 450f, 7, 0.55f, PICKABLE),
   JUTE(() -> new ItemStack(ItemsTFC.JUTE), () -> ItemStack.EMPTY, 5f, 11f, 37f, 42f, 50f, 100f, 410f, 450f, 6, 0.5f, SIMPLE);
 
   static {
@@ -82,14 +81,14 @@ public enum Crop implements ICrop {
   private final CropType type;
 
   Crop(Food foodDrop, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow,
-          float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropType type) {
+       float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropType type) {
     this(() -> new ItemStack(ItemFoodTFC.get(foodDrop)), () -> ItemStack.EMPTY, tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive,
-            rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive, growthStages, growthTime, type);
+         rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive, growthStages, growthTime, type);
   }
 
   Crop(Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly, float tempMinAlive, float tempMinGrow, float tempMaxGrow,
-          float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime,
-          CropType type) {
+       float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime,
+       CropType type) {
     this.foodDrop = foodDrop;
     this.foodDropEarly = foodDropEarly;
 
@@ -173,7 +172,7 @@ public enum Crop implements ICrop {
       tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));
       tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) rainMinGrow, (int) rainMaxGrow));
       tooltip.add(TextFormatting.GOLD +
-              I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", tempMinGrow), String.format("%.1f", tempMaxGrow)));
+                  I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", tempMinGrow), String.format("%.1f", tempMaxGrow)));
     } else {
       tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.hold_shift_for_climate_info"));
     }

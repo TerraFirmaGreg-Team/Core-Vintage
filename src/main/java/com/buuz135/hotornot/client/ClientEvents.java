@@ -10,7 +10,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import com.buuz135.hotornot.config.HotConfig;
 import com.buuz135.hotornot.util.ItemEffect;
 
@@ -34,7 +33,7 @@ public final class ClientEvents {
     }
 
     final boolean checkContents = itemStack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-            null) && HotConfig.EFFECT_HANDLING.checkItemContainerContents;
+                                                          null) && HotConfig.EFFECT_HANDLING.checkItemContainerContents;
 
     for (final ItemEffect effect : ItemEffect.values()) {
 

@@ -15,7 +15,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemStackHandler;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.recipes.GlassworkingRecipe;
 import net.dries007.tfc.objects.container.IButtonHandler;
@@ -61,7 +60,7 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
 
   private void addContainerSlots() {
     this.addSlotToContainer(
-            new SlotKnappingOutput(new ItemStackHandler(1), 0, 128, 44, this::finishCraft));
+      new SlotKnappingOutput(new ItemStackHandler(1), 0, 128, 44, this::finishCraft));
   }
 
   private void addPlayerInventorySlots(InventoryPlayer playerInv) {
@@ -82,7 +81,7 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
     requiresReset = true;
     ItemStack emptyBlowpipe = stack;
     IFluidHandlerItem cap = emptyBlowpipe.getCapability(
-            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+      CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (cap instanceof ItemGlassMolder.GlassMolderCapability) {
       ((ItemGlassMolder.GlassMolderCapability) cap).empty();
     }
@@ -136,12 +135,12 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
   @NotNull
   public ItemStack slotClick(int slotID, int dragType, ClickType clickType, EntityPlayer player) {
     if (slotID == this.itemIndex &&
-            (clickType == ClickType.QUICK_MOVE || clickType == ClickType.PICKUP
-                    || clickType == ClickType.THROW || clickType == ClickType.SWAP)) {
+        (clickType == ClickType.QUICK_MOVE || clickType == ClickType.PICKUP
+         || clickType == ClickType.THROW || clickType == ClickType.SWAP)) {
       return ItemStack.EMPTY;
     } else {
       return dragType == this.itemDragIndex && clickType == ClickType.SWAP ? ItemStack.EMPTY :
-              super.slotClick(slotID, dragType, clickType, player);
+             super.slotClick(slotID, dragType, clickType, player);
     }
   }
 
@@ -175,7 +174,7 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
   public boolean canWork() {
     var cap = CapabilityHeat.get(stack);
     return cap instanceof ItemGlassMolder.GlassMolderCapability
-            && ((ItemGlassMolder.GlassMolderCapability) cap).canWork();
+           && ((ItemGlassMolder.GlassMolderCapability) cap).canWork();
   }
 
   public boolean requiresReset() {
@@ -199,6 +198,6 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
   public boolean isSolidified() {
     var cap = CapabilityHeat.get(stack);
     return cap instanceof ItemGlassMolder.GlassMolderCapability
-            && ((ItemGlassMolder.GlassMolderCapability) cap).isSolidified();
+           && ((ItemGlassMolder.GlassMolderCapability) cap).isSolidified();
   }
 }

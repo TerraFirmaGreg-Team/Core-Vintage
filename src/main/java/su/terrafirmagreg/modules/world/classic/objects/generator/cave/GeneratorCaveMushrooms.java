@@ -9,7 +9,6 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockCaveMushroom;
 
@@ -26,13 +25,13 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
         BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4),
-                rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
+                                    rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
 
         if (worldIn.isAirBlock(blockpos) &&
-                pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
-                worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
-                !worldIn.canSeeSky(blockpos) &&
-                mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
+            pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
+            worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
+            !worldIn.canSeeSky(blockpos) &&
+            mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
           setBlockAndNotifyAdequately(worldIn, blockpos, state);
         }
       }
@@ -42,13 +41,13 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
         BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4),
-                rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
+                                    rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
 
         if (worldIn.isAirBlock(blockpos) &&
-                pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
-                worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
-                !worldIn.canSeeSky(blockpos) &&
-                mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
+            pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
+            worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
+            !worldIn.canSeeSky(blockpos) &&
+            mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
           setBlockAndNotifyAdequately(worldIn, blockpos, state);
         }
       }
@@ -58,13 +57,13 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
         BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4),
-                rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
+                                    rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
 
         if (worldIn.isAirBlock(blockpos) &&
-                pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
-                worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
-                !worldIn.canSeeSky(blockpos) &&
-                mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
+            pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
+            worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
+            !worldIn.canSeeSky(blockpos) &&
+            mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
           setBlockAndNotifyAdequately(worldIn, blockpos, state);
         }
       }
@@ -74,13 +73,13 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
         BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4),
-                rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
+                                    rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
 
         if (worldIn.isAirBlock(blockpos) &&
-                pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
-                worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
-                !worldIn.canSeeSky(blockpos) &&
-                mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
+            pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
+            worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
+            !worldIn.canSeeSky(blockpos) &&
+            mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
           setBlockAndNotifyAdequately(worldIn, blockpos, state);
         }
       }
@@ -90,13 +89,13 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
         BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4),
-                rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
+                                    rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
 
         if (worldIn.isAirBlock(blockpos) &&
-                pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
-                worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
-                !worldIn.canSeeSky(blockpos) &&
-                mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
+            pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
+            worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
+            !worldIn.canSeeSky(blockpos) &&
+            mushroomBlock.canBlockStay(worldIn, blockpos, state)) {
           setBlockAndNotifyAdequately(worldIn, blockpos, state);
         }
       }

@@ -14,7 +14,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lyeoj.tfcthings.entity.projectile.EntityThrownHookJavelin;
@@ -40,9 +39,9 @@ public class ItemHookJavelin extends ItemRopeJavelin implements TFCThingsConfigu
     Multimap<String, AttributeModifier> multimap = HashMultimap.create();
     if (slot == EntityEquipmentSlot.MAINHAND && !isThrown(stack)) {
       multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-              new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage * 0.4, 0));
+                   new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage * 0.4, 0));
       multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
-              new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", this.attackSpeed, 0));
+                   new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", this.attackSpeed, 0));
     }
 
     return multimap;
@@ -88,14 +87,14 @@ public class ItemHookJavelin extends ItemRopeJavelin implements TFCThingsConfigu
     if (enumfacing1 != null) {
       EnumFacing enumfacing = enumfacing1.rotateY();
       int[][] aint1 = new int[][]{{0, 1}, {0, -1}, {-1, 1}, {-1, -1}, {1, 1}, {1, -1}, {-1, 0}, {1, 0},
-              {0, 2}, {0, -2}, {-1, 2}, {-1, -2}, {1, 2}, {1, -2}, {2, 2}, {2, -2}, {-2, 2}, {-2, -2},
-              {2, 0}, {2, 1}, {2, -1}, {-2, 0}, {-2, 1}, {-2, -1}};
+                                  {0, 2}, {0, -2}, {-1, 2}, {-1, -2}, {1, 2}, {1, -2}, {2, 2}, {2, -2}, {-2, 2}, {-2, -2},
+                                  {2, 0}, {2, 1}, {2, -1}, {-2, 0}, {-2, 1}, {-2, -1}};
       double d5 = Math.floor(playerIn.posX) + 0.5D;
       double d6 = Math.floor(playerIn.posZ) + 0.5D;
       double d7 = playerIn.getEntityBoundingBox().maxX - playerIn.getEntityBoundingBox().minX;
       double d8 = playerIn.getEntityBoundingBox().maxZ - playerIn.getEntityBoundingBox().minZ;
       AxisAlignedBB axisalignedbb = new AxisAlignedBB(d5 - d7 / 2.0D, playerIn.getEntityBoundingBox().minY, d6 - d8 / 2.0D, d5 + d7 / 2.0D,
-              Math.floor(playerIn.getEntityBoundingBox().minY) + (double) playerIn.height, d6 + d8 / 2.0D);
+                                                      Math.floor(playerIn.getEntityBoundingBox().minY) + (double) playerIn.height, d6 + d8 / 2.0D);
 
       for (int[] aint : aint1) {
         double d9 = enumfacing1.getXOffset() * aint[0] + enumfacing.getXOffset() * aint[1];
@@ -116,8 +115,8 @@ public class ItemHookJavelin extends ItemRopeJavelin implements TFCThingsConfigu
           blockpos = new BlockPos(d11, playerIn.posY - 1.0D, d12);
 
           if (playerIn.world.getBlockState(blockpos)
-                  .isSideSolid(playerIn.world, blockpos, EnumFacing.UP) || playerIn.world.getBlockState(blockpos)
-                  .getMaterial() == Material.WATER) {
+                            .isSideSolid(playerIn.world, blockpos, EnumFacing.UP) || playerIn.world.getBlockState(blockpos)
+                                                                                                   .getMaterial() == Material.WATER) {
             d1 = d11;
             d13 = playerIn.posY + 1.0D;
             d14 = d12;

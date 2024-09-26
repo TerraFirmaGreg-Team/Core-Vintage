@@ -2,7 +2,6 @@ package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.TerraFirmaGreg;
 
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -41,10 +40,10 @@ public class GsonUtils {
     }
 
     try (AsynchronousFileChannel fileChannel = AsynchronousFileChannel.open(
-            path,
-            StandardOpenOption.WRITE,
-            StandardOpenOption.CREATE,
-            StandardOpenOption.TRUNCATE_EXISTING
+      path,
+      StandardOpenOption.WRITE,
+      StandardOpenOption.CREATE,
+      StandardOpenOption.TRUNCATE_EXISTING
     )) {
       ByteBuffer buffer = ByteBuffer.wrap(data.getBytes(StandardCharsets.UTF_8));
 

@@ -20,7 +20,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
@@ -45,16 +44,16 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
     this.carving = carving;
 
     getSettings()
-            .registryKey("core/jack_o_lantern/" + carving)
-            .hardness(1f)
-            .lightValue(1)
-            .randomTicks()
-            .size(Size.LARGE)
-            .weight(Weight.HEAVY);
+      .registryKey("core/jack_o_lantern/" + carving)
+      .hardness(1f)
+      .lightValue(1)
+      .randomTicks()
+      .size(Size.LARGE)
+      .weight(Weight.HEAVY);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(HORIZONTAL, EnumFacing.NORTH)
-            .withProperty(LIT, Boolean.FALSE));
+                              .withProperty(HORIZONTAL, EnumFacing.NORTH)
+                              .withProperty(LIT, Boolean.FALSE));
 
   }
 
@@ -90,12 +89,11 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
 
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos) && worldIn.isSideSolid(
-            pos.down(), EnumFacing.UP);
+      pos.down(), EnumFacing.UP);
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     //taken from BlockTorchTFC
     if (!worldIn.isRemote) {
       ItemStack stack = playerIn.getHeldItem(hand);
@@ -105,9 +103,8 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
         if (TileUtils.isNotNull(tile)) {
           tile.resetCounter();
         }
-      } else {
-        worldIn.setBlockState(pos, state.withProperty(LIT, false));
       }
+      worldIn.setBlockState(pos, state.withProperty(LIT, false));
     }
     return true;
   }

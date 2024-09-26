@@ -1,8 +1,9 @@
 package se.gory_moon.horsepower.jei.chopping.manual;
 
+import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -14,7 +15,6 @@ import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IStackHelper;
 import se.gory_moon.horsepower.jei.HorsePowerPlugin;
-import se.gory_moon.horsepower.tileentity.TileManualChopper;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
 
@@ -62,15 +62,18 @@ public class HPManualChoppingCategory implements IRecipeCategory<ManualChoppingR
   public void setRecipe(IRecipeLayout recipeLayout, ManualChoppingRecipeWrapper recipeWrapper, IIngredients ingredients) {
     IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
     recipeLayout.getItemStacks().addTooltipCallback((slotIndex, input, ingredient, tooltip) ->
-    {
-      if (slotIndex == axeSlot) {
-        int base = TileManualChopper.getBaseAmount(ingredient, null);
-        int chance = TileManualChopper.getChance(ingredient, null);
-        tooltip.add(Colors.LIGHTGRAY + Localization.GUI.JEI.MANUAL_CHOPPING_DESC_1.translate(Colors.WHITE.toString() + base));
-        tooltip.add(Colors.LIGHTGRAY + Localization.GUI.JEI.MANUAL_CHOPPING_DESC_2.translate(Colors.WHITE.toString() + chance));
-        tooltip.add(Colors.LIGHTGRAY + "\n" + Localization.GUI.JEI.MANUAL_CHOPPING_DESC_3.translate(Colors.WHITE, Colors.LIGHTGRAY));
-      }
-    });
+                                                    {
+                                                      if (slotIndex == axeSlot) {
+                                                        int base = TileChopperManual.getBaseAmount(ingredient, null);
+                                                        int chance = TileChopperManual.getChance(ingredient, null);
+                                                        tooltip.add(Colors.LIGHTGRAY + Localization.GUI.JEI.MANUAL_CHOPPING_DESC_1.translate(
+                                                          Colors.WHITE.toString() + base));
+                                                        tooltip.add(Colors.LIGHTGRAY + Localization.GUI.JEI.MANUAL_CHOPPING_DESC_2.translate(
+                                                          Colors.WHITE.toString() + chance));
+                                                        tooltip.add(Colors.LIGHTGRAY + "\n"
+                                                                    + Localization.GUI.JEI.MANUAL_CHOPPING_DESC_3.translate(Colors.WHITE, Colors.LIGHTGRAY));
+                                                      }
+                                                    });
     guiItemStacks.setOverrideDisplayFocus(null);
     guiItemStacks.init(inputSlot, true, 0, 22);
     guiItemStacks.init(outputSlot, false, 56, 22);

@@ -1,9 +1,8 @@
 package net.dries007.tfc.api.types;
 
-import net.minecraft.item.ItemStack;
-
-
 import su.terrafirmagreg.data.lib.MCDate.Month;
+
+import net.minecraft.item.ItemStack;
 
 public interface IBerryBush {
 

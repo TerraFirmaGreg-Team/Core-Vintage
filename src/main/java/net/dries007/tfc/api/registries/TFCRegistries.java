@@ -3,7 +3,6 @@ package net.dries007.tfc.api.registries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
-
 import com.eerussianguy.firmalife.recipe.CrackingRecipe;
 import com.eerussianguy.firmalife.recipe.DryingRecipe;
 import com.eerussianguy.firmalife.recipe.NutRecipe;
@@ -75,7 +74,7 @@ public class TFCRegistries {
         }
         if ((field.getModifiers() & publicStaticFinal) != publicStaticFinal) {
           TerraFirmaCraft.getLog()
-                  .warn("[Please inform developers] Weird field? (not Public Static Final) {}", field);
+                         .warn("[Please inform developers] Weird field? (not Public Static Final) {}", field);
           continue;
         }
         if (field.get(null) == null) {

@@ -7,7 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.util.BlockRenderLayer;
 
-
 import static su.terrafirmagreg.data.Properties.MOSSY;
 
 public class BlockRockCobble extends BlockRockFallable {
@@ -16,11 +15,11 @@ public class BlockRockCobble extends BlockRockFallable {
     super(Settings.of(Material.ROCK), variant, type);
 
     getSettings()
-            .renderLayer(BlockRenderLayer.CUTOUT)
-            .oreDict("cobblestone");
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .oreDict("cobblestone");
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(MOSSY, false));
+                              .withProperty(MOSSY, false));
   }
 
   @Override

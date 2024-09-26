@@ -37,7 +37,6 @@ import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -55,12 +54,12 @@ import static su.terrafirmagreg.data.MathConstants.RNG;
 public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
   private static final DataParameter<Long> MILKED = EntityDataManager.createKey(
-          EntityAnimalCow.class, DataSerializers.LONG);
+    EntityAnimalCow.class, DataSerializers.LONG);
 
   @SuppressWarnings("unused")
   public EntityAnimalCow(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-            getRandomGrowth(ConfigAnimal.ENTITIES.COW.adulthood, ConfigAnimal.ENTITIES.COW.elder));
+         getRandomGrowth(ConfigAnimal.ENTITIES.COW.adulthood, ConfigAnimal.ENTITIES.COW.elder));
   }
 
   public EntityAnimalCow(World worldIn, Gender gender, int birthDay) {
@@ -71,10 +70,10 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-          float floraDiversity) {
+                            float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.PLAINS)) {
+        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
       return ConfigAnimal.ENTITIES.COW.rarity;
     }
     return 0;
@@ -111,10 +110,10 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
     int numberOfChildren = ConfigAnimal.ENTITIES.COW.babies; //one always
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalCow baby = new EntityAnimalCow(world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                                 (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(
-              getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
+        getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
       world.spawnEntity(baby);
     }
   }
@@ -148,8 +147,8 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
   public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
     ItemStack itemstack = player.getHeldItem(hand);
     FluidActionResult fillResult = FluidUtil.tryFillContainer(itemstack,
-            FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)),
-            Fluid.BUCKET_VOLUME, player, false);
+                                                              FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)),
+                                                              Fluid.BUCKET_VOLUME, player, false);
 
     // First check if it is possible to fill the player's held item with milk
     if (fillResult.isSuccess()) {
@@ -157,14 +156,14 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
         player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
         setProductsCooldown();
         player.setHeldItem(hand, FluidUtil.tryFillContainerAndStow(itemstack,
-                FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)),
-                new PlayerInvWrapper(player.inventory), Fluid.BUCKET_VOLUME, player, true).getResult());
+                                                                   FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)),
+                                                                   new PlayerInvWrapper(player.inventory), Fluid.BUCKET_VOLUME, player, true).getResult());
       } else if (!world.isRemote) {
         //Return chat message indicating why this entity isn't giving milk
         TextComponentTranslation tooltip = getTooltip();
         ModuleAnimal.getPacketService().sendTo(
-                new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
-                (EntityPlayerMP) player);
+          new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
+          (EntityPlayerMP) player);
       }
       return true;
     } else {
@@ -212,7 +211,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
   @Override
   public long getProductsCooldown() {
     return Math.max(0,
-            ConfigAnimal.ENTITIES.COW.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
+                    ConfigAnimal.ENTITIES.COW.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override
@@ -221,16 +220,16 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
       return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.male_milk"));
     } else if (getAge() == Age.OLD) {
       return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.old"),
-              getAnimalName());
+                                          getAnimalName());
     } else if (getAge() == Age.CHILD) {
       return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.young"),
-              getAnimalName());
+                                          getAnimalName());
     } else if (getFamiliarity() <= 0.15f) {
       return new TextComponentTranslation(
-              ModUtils.localize("tooltip", "animal.product.low_familiarity"), getAnimalName());
+        ModUtils.localize("tooltip", "animal.product.low_familiarity"), getAnimalName());
     } else if (!hasMilk()) {
       return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.no_milk"),
-              getAnimalName());
+                                          getAnimalName());
     }
     return null;
   }

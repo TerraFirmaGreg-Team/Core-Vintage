@@ -9,8 +9,7 @@
           "model": "tfc:plants/winged_kelp_upper"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower"
       },
@@ -19,8 +18,7 @@
           "model": "tfc:plants/winged_kelp_lower"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "middle"
       },
@@ -29,8 +27,7 @@
           "model": "tfc:plants/winged_kelp_lower"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper"
       },

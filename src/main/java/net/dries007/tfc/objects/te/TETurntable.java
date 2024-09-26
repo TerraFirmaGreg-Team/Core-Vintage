@@ -15,7 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -30,11 +29,11 @@ import java.util.stream.Collectors;
 public class TETurntable extends BaseTileTickableInventory {
 
   private static final List<Item> POTTERY = TFCRegistries.KNAPPING.getValuesCollection().stream()
-          .filter(recipe -> recipe.getType()
-                  .equals(KnappingTypes.CLAY))
-          .map(recipe -> recipe.getOutput(ItemStack.EMPTY)
-                  .getItem())
-          .collect(Collectors.toList());
+                                                                  .filter(recipe -> recipe.getType()
+                                                                                          .equals(KnappingTypes.CLAY))
+                                                                  .map(recipe -> recipe.getOutput(ItemStack.EMPTY)
+                                                                                       .getItem())
+                                                                  .collect(Collectors.toList());
 
   private int speed;
   private int progress;
@@ -45,6 +44,10 @@ public class TETurntable extends BaseTileTickableInventory {
     speed = 0;
     progress = 0;
     internalProgress = 0;
+  }
+
+  public static boolean isPottery(ItemStack stack) {
+    return POTTERY.contains(stack.getItem());
   }
 
   public int getSpeed() {
@@ -75,8 +78,8 @@ public class TETurntable extends BaseTileTickableInventory {
     if (clay > 0 && speed > 0) {
       if (world.isRemote && speed > 5) {
         world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-                (world.rand.nextDouble() - world.rand.nextDouble()) / 4.0D, world.rand.nextDouble() / 4.0D,
-                (world.rand.nextDouble() - world.rand.nextDouble()) / 4.0D, Item.getIdFromItem(Items.CLAY_BALL));
+                            (world.rand.nextDouble() - world.rand.nextDouble()) / 4.0D, world.rand.nextDouble() / 4.0D,
+                            (world.rand.nextDouble() - world.rand.nextDouble()) / 4.0D, Item.getIdFromItem(Items.CLAY_BALL));
       }
       if (speed > 15 && hasPottery()) {
         progress++;
@@ -85,7 +88,7 @@ public class TETurntable extends BaseTileTickableInventory {
           speed = 15;
           if (!world.isRemote) {
             world.setBlockState(pos, getBlockType().getDefaultState()
-                    .withProperty(Properties.CLAY_LEVEL, clay - 1));
+                                                   .withProperty(Properties.CLAY_LEVEL, clay - 1));
             StackUtils.spawnItemStack(world, pos.up(), item());
             markForSync();
           }
@@ -109,10 +112,6 @@ public class TETurntable extends BaseTileTickableInventory {
 
   private ItemStack item() {
     return inventory.getStackInSlot(0);
-  }
-
-  public static boolean isPottery(ItemStack stack) {
-    return POTTERY.contains(stack.getItem());
   }
 
   @Override

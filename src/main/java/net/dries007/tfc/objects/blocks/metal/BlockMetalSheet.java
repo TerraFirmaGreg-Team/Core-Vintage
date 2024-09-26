@@ -23,7 +23,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemMetalSheet;
 import net.dries007.tfc.objects.te.TEMetalSheet;
@@ -38,21 +37,21 @@ import java.util.Map;
 public class BlockMetalSheet extends Block {
 
   public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{
-          PropertyBool.create("down"),
-          PropertyBool.create("up"),
-          PropertyBool.create("north"),
-          PropertyBool.create("south"),
-          PropertyBool.create("west"),
-          PropertyBool.create("east")
+    PropertyBool.create("down"),
+    PropertyBool.create("up"),
+    PropertyBool.create("north"),
+    PropertyBool.create("south"),
+    PropertyBool.create("west"),
+    PropertyBool.create("east")
   };
   private static final Map<Metal, BlockMetalSheet> MAP = new HashMap<>();
   private static final AxisAlignedBB[] SHEET_AABB = new AxisAlignedBB[]{
-          new AxisAlignedBB(0d, 0.9375d, 0d, 1d, 1d, 1d),
-          new AxisAlignedBB(0d, 0d, 0d, 1d, 0.0625d, 1d),
-          new AxisAlignedBB(0d, 0d, 0.9375d, 1d, 1d, 1d),
-          new AxisAlignedBB(0d, 0d, 0d, 1d, 1d, 0.0625d),
-          new AxisAlignedBB(0.9375d, 0d, 0d, 1d, 1d, 1d),
-          new AxisAlignedBB(0d, 0d, 0d, 0.0625d, 1d, 1d)
+    new AxisAlignedBB(0d, 0.9375d, 0d, 1d, 1d, 1d),
+    new AxisAlignedBB(0d, 0d, 0d, 1d, 0.0625d, 1d),
+    new AxisAlignedBB(0d, 0d, 0.9375d, 1d, 1d, 1d),
+    new AxisAlignedBB(0d, 0d, 0d, 1d, 1d, 0.0625d),
+    new AxisAlignedBB(0.9375d, 0d, 0d, 1d, 1d, 1d),
+    new AxisAlignedBB(0d, 0d, 0d, 0.0625d, 1d, 1d)
   };
   private final Metal metal;
 
@@ -69,12 +68,12 @@ public class BlockMetalSheet extends Block {
     setHarvestLevel("pickaxe", 0);
 
     setDefaultState(this.blockState.getBaseState()
-            .withProperty(FACE_PROPERTIES[0], false)
-            .withProperty(FACE_PROPERTIES[1], false)
-            .withProperty(FACE_PROPERTIES[2], false)
-            .withProperty(FACE_PROPERTIES[3], false)
-            .withProperty(FACE_PROPERTIES[4], false)
-            .withProperty(FACE_PROPERTIES[5], false));
+                                   .withProperty(FACE_PROPERTIES[0], false)
+                                   .withProperty(FACE_PROPERTIES[1], false)
+                                   .withProperty(FACE_PROPERTIES[2], false)
+                                   .withProperty(FACE_PROPERTIES[3], false)
+                                   .withProperty(FACE_PROPERTIES[4], false)
+                                   .withProperty(FACE_PROPERTIES[5], false));
   }
 
   public static BlockMetalSheet get(Metal metal) {
@@ -165,7 +164,7 @@ public class BlockMetalSheet extends Block {
   @SuppressWarnings("deprecation")
   @Override
   public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
-          @Nullable Entity entityIn, boolean isActualState) {
+                                    @Nullable Entity entityIn, boolean isActualState) {
     TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
     if (tile != null) {
       for (EnumFacing face : EnumFacing.values()) {

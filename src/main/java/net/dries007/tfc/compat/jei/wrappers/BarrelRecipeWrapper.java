@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -64,7 +63,7 @@ public class BarrelRecipeWrapper implements IRecipeWrapper {
         highestFluid = outputFluid.amount;
       }
       double maximumMultiplier =
-              (double) ConfigTFC.Devices.BARREL.tank / highestFluid; // Fix the multiplier to the maximum allowed value into a barrel
+        (double) ConfigTFC.Devices.BARREL.tank / highestFluid; // Fix the multiplier to the maximum allowed value into a barrel
       double multiplier = Math.min((double) Fluid.BUCKET_VOLUME / inputFluid.amount, maximumMultiplier);
       inputFluid.amount *= multiplier;
       fluidIngredients.forEach(x -> x.amount *= multiplier);

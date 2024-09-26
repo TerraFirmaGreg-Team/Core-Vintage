@@ -13,7 +13,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -171,7 +170,7 @@ public class ModelAnimalGoat extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-          float par6, float par7) {
+                     float par6, float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
     EntityAnimalGoat goat = ((EntityAnimalGoat) entity);
@@ -255,7 +254,7 @@ public class ModelAnimalGoat extends ModelBase {
 
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
-          float par6, Entity ent) {
+                                float par6, Entity ent) {
     if (!(((EntityAnimalGoat) ent).sheepTimer > 0)) {
       this.head1.rotateAngleX = par5 / (180F / MathConstants.PI);
       this.head2.rotateAngleX = par5 / (180F / MathConstants.PI);
@@ -272,7 +271,7 @@ public class ModelAnimalGoat extends ModelBase {
 
   @Override
   public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAmount,
-          float partialTicks) {
+                                  float partialTicks) {
     super.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
     head2.rotationPointZ = ((EntityAnimalGoat) entity).sheepTimer > 0 ? -7.0F : -5.0F;
     neck.rotationPointY = ((EntityAnimalGoat) entity).sheepTimer > 0 ? 13.0F : 10.0F;

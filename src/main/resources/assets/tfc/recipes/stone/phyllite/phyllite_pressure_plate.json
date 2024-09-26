@@ -3,11 +3,9 @@
   "ingredients": [
     {
       "item": "tfc:brick/phyllite"
-    },
-    {
+    }, {
       "item": "tfc:brick/phyllite"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

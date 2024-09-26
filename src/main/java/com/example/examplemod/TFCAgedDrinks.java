@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 
 import static su.terrafirmagreg.data.Constants.MODID_AGEDDRINKS;

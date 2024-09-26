@@ -9,8 +9,7 @@
           "model": "tfc:plants/basil_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },

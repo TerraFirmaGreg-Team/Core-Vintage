@@ -19,17 +19,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderAnimalQuail extends RenderLiving<EntityAnimalQuail> {
 
   private static final ResourceLocation FEMALE_YOUNG = ModUtils.resource(
-          "textures/entity/animal/livestock/quailf_young.png");
+    "textures/entity/animal/livestock/quailf_young.png");
   private static final ResourceLocation FEMALE_OLD = ModUtils.resource(
-          "textures/entity/animal/livestock/quailf_old.png");
+    "textures/entity/animal/livestock/quailf_old.png");
 
   private static final ResourceLocation MALE_YOUNG = ModUtils.resource(
-          "textures/entity/animal/livestock/quailm_young.png");
+    "textures/entity/animal/livestock/quailm_young.png");
   private static final ResourceLocation MALE_OLD = ModUtils.resource(
-          "textures/entity/animal/livestock/quailm_old.png");
+    "textures/entity/animal/livestock/quailm_old.png");
 
   private static final ResourceLocation CHICK_TEXTURE = ModUtils.resource(
-          "textures/entity/animal/livestock/quail_chick.png");
+    "textures/entity/animal/livestock/quail_chick.png");
 
   public RenderAnimalQuail(RenderManager manager) {
     super(manager, new ModelAnimalQuail(), 0.3F);
@@ -37,7 +37,7 @@ public class RenderAnimalQuail extends RenderLiving<EntityAnimalQuail> {
 
   @Override
   public void doRender(EntityAnimalQuail quail, double par2, double par4, double par6, float par8,
-          float par9) {
+                       float par9) {
     this.shadowSize = (float) (0.15f + quail.getPercentToAdulthood() * 0.15f);
     super.doRender(quail, par2, par4, par6, par8, par9);
   }

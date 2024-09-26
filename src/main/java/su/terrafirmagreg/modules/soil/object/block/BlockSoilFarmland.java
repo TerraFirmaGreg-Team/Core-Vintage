@@ -33,7 +33,6 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import lombok.Getter;
 
 import java.util.Random;
@@ -43,15 +42,15 @@ import java.util.Random;
 public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IProviderBlockColor {
 
   public static final int[] TINT = new int[]{
-          0xffffffff,
-          0xffe7e7e7,
-          0xffd7d7d7,
-          0xffc7c7c7,
-          0xffb7b7b7,
-          0xffa7a7a7,
-          0xff979797,
-          0xff878787,
-  };
+    0xffffffff,
+    0xffe7e7e7,
+    0xffd7d7d7,
+    0xffc7c7c7,
+    0xffb7b7b7,
+    0xffa7a7a7,
+    0xff979797,
+    0xff878787,
+    };
   public static final AxisAlignedBB FLIPPED_AABB = new AxisAlignedBB(0.0D, 0.9375D, 0.0D, 1.0D, 1.0D, 1.0D);
 
   protected final Settings settings;
@@ -65,18 +64,18 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IPro
     this.settings = Settings.of(Material.GROUND);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .ignoresProperties(MOISTURE)
-            .sound(SoundType.GROUND)
-            .useNeighborBrightness()
-            .hardness(2.0F)
-            .harvestLevel(ToolClasses.SHOVEL, 0)
-            .fallable(this, variant.getSpecification())
-            .oreDict(variant)
-            .oreDict(variant, type);
+      .registryKey(variant.getRegistryKey(type))
+      .ignoresProperties(MOISTURE)
+      .sound(SoundType.GROUND)
+      .useNeighborBrightness()
+      .hardness(2.0F)
+      .harvestLevel(ToolClasses.SHOVEL, 0)
+      .fallable(this, variant.getSpecification())
+      .oreDict(variant)
+      .oreDict(variant, type);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
+                              .withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
   }
 
   @Override

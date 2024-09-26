@@ -5,7 +5,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nonnull;

@@ -17,7 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
@@ -36,9 +35,9 @@ public class BlockHangingPlanter extends BlockBonsai {
   public BlockHangingPlanter(Supplier<? extends Item> fruit, Supplier<? extends Item> seed, int period) {
     super(fruit, seed, period, 0, Material.IRON);
     setDefaultState(blockState
-            .getBaseState()
-            .withProperty(AXIS, EnumFacing.Axis.X)
-            .withProperty(STAGE, 0));
+                      .getBaseState()
+                      .withProperty(AXIS, EnumFacing.Axis.X)
+                      .withProperty(STAGE, 0));
   }
 
   @Override
@@ -88,7 +87,7 @@ public class BlockHangingPlanter extends BlockBonsai {
   @SuppressWarnings("deprecation")
   @NotNull
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer) {
+                                          EntityLivingBase placer) {
     if (facing.getAxis() == EnumFacing.Axis.Y) {
       facing = placer.getHorizontalFacing();
     }

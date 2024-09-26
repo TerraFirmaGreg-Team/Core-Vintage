@@ -10,7 +10,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemIngot;
@@ -19,7 +18,7 @@ import lombok.Getter;
 
 @Getter
 public class TileIngotPile
-        extends BaseTile {
+  extends BaseTile {
 
   private Metal metal;
   private int count;
@@ -40,8 +39,8 @@ public class TileIngotPile
   public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     //noinspection ConstantConditions
     tag.setString("metal",
-            (metal == null) ? Metal.UNKNOWN.getRegistryName().toString() : metal.getRegistryName()
-                    .toString());
+                  (metal == null) ? Metal.UNKNOWN.getRegistryName().toString() : metal.getRegistryName()
+                                                                                      .toString());
     tag.setInteger("count", count);
     return super.writeToNBT(tag);
   }

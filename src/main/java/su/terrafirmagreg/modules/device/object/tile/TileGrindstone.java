@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.object.item.ItemGrindstone;
@@ -11,10 +11,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-
 
 import lyeoj.tfcthings.init.TFCThingsSoundEvents;
 import net.dries007.tfc.client.TFCSounds;
@@ -22,7 +20,7 @@ import net.dries007.tfc.objects.blocks.BlockFluidWater;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TileGrindstone extends BaseTileInventory implements ITickable {
+public class TileGrindstone extends BaseTileTickableInventory {
 
   public static final int SLOT_GRINDSTONE = 0;
   public static final int SLOT_INPUT = 1;
@@ -60,11 +58,11 @@ public class TileGrindstone extends BaseTileInventory implements ITickable {
   public ItemStack insertOrSwapItem(int slot, ItemStack playerStack) {
     ItemStack grindstoneStack = this.inventory.getStackInSlot(slot);
     if (!grindstoneStack.isEmpty() &&
-            (!playerStack.isStackable() || !grindstoneStack.isStackable()
-                    || grindstoneStack.getItem() != playerStack.getItem() ||
-                    playerStack.getHasSubtypes()
-                            && playerStack.getMetadata() != grindstoneStack.getMetadata() ||
-                    !ItemStack.areItemStackTagsEqual(playerStack, grindstoneStack))) {
+        (!playerStack.isStackable() || !grindstoneStack.isStackable()
+         || grindstoneStack.getItem() != playerStack.getItem() ||
+         playerStack.getHasSubtypes()
+         && playerStack.getMetadata() != grindstoneStack.getMetadata() ||
+         !ItemStack.areItemStackTagsEqual(playerStack, grindstoneStack))) {
       this.inventory.setStackInSlot(slot, playerStack);
       return grindstoneStack;
     } else {
@@ -83,29 +81,29 @@ public class TileGrindstone extends BaseTileInventory implements ITickable {
       if (this.rotationTimer == 1) {
         sharpenItem(inputStack, grindstoneStack);
         world.playSound(null, pos, TFCThingsSoundEvents.WHETSTONE_SHARPEN, SoundCategory.BLOCKS,
-                0.2F,
-                0.6F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
+                        0.2F,
+                        0.6F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
         if (grindstoneStack.isEmpty()) {
           for (int i = 0; i < 15; ++i) {
             this.world.spawnParticle(EnumParticleTypes.ITEM_CRACK, (double) this.pos.getX() + 0.5D,
-                    (double) this.pos.getY() + 0.875D,
-                    (double) this.pos.getZ() + 0.5D,
-                    (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D,
-                    this.world.rand.nextDouble() / 4.0D,
-                    (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D,
-                    Item.getIdFromItem(ItemsDevice.GRINDSTONE_QUARTZ));
+                                     (double) this.pos.getY() + 0.875D,
+                                     (double) this.pos.getZ() + 0.5D,
+                                     (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D,
+                                     this.world.rand.nextDouble() / 4.0D,
+                                     (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D,
+                                     Item.getIdFromItem(ItemsDevice.GRINDSTONE_QUARTZ));
           }
           this.world.playSound(null, this.pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS,
-                  1.0F, 0.8F);
+                               1.0F, 0.8F);
           this.world.playSound(null, this.pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS,
-                  0.7F, 0.6F);
+                               0.7F, 0.6F);
         }
         this.setAndUpdateSlots(0);
       }
       if (this.rotationTimer == 0) {
         this.rotationTimer = 90;
         world.playSound(null, pos, TFCSounds.QUERN_USE, SoundCategory.BLOCKS, 0.2F,
-                0.8F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
+                        0.8F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
       }
     } else {
       this.rotationTimer = 0;
@@ -121,7 +119,7 @@ public class TileGrindstone extends BaseTileInventory implements ITickable {
       var capability = CapabilitySharpness.get(inputStack);
       ItemGrindstone grindstone = (ItemGrindstone) grindstoneStack.getItem();
       return inputStack.getMaxDamage() - inputStack.getItemDamage() > 1
-              && capability.getCharges() < grindstone.getMaxCharges();
+             && capability.getCharges() < grindstone.getMaxCharges();
     }
     return false;
   }
@@ -145,7 +143,7 @@ public class TileGrindstone extends BaseTileInventory implements ITickable {
     this.markForBlockUpdate();
     if (slot == 0) {
       this.hasGrindstone = this.inventory.getStackInSlot(SLOT_GRINDSTONE)
-              .getItem() instanceof ItemGrindstone;
+                                         .getItem() instanceof ItemGrindstone;
     }
 
     super.setAndUpdateSlots(slot);
@@ -154,7 +152,7 @@ public class TileGrindstone extends BaseTileInventory implements ITickable {
   public void readFromNBT(@NotNull NBTTagCompound nbt) {
     this.rotationTimer = nbt.getInteger("rotationTimer");
     this.hasGrindstone = this.inventory.getStackInSlot(SLOT_GRINDSTONE)
-            .getItem() instanceof ItemGrindstone;
+                                       .getItem() instanceof ItemGrindstone;
     super.readFromNBT(nbt);
   }
 

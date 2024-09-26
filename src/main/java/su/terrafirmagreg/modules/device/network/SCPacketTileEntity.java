@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.network;
 
 import su.terrafirmagreg.TerraFirmaGreg;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,12 +13,11 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-
 import io.netty.buffer.ByteBuf;
 
 public class SCPacketTileEntity implements IMessage, IMessageHandler<SCPacketTileEntity, IMessage> {
 
-  private NBTTagCompound tileEntity;
+  private NBTTagCompound tile;
   private BlockPos pos;
 
   @SuppressWarnings("unused")
@@ -25,20 +25,20 @@ public class SCPacketTileEntity implements IMessage, IMessageHandler<SCPacketTil
   }
 
   public SCPacketTileEntity(TileEntity tile) {
-    pos = tile.getPos();
-    tileEntity = tile.serializeNBT();
+    this.pos = tile.getPos();
+    this.tile = tile.serializeNBT();
   }
 
   @Override
   public void fromBytes(ByteBuf byteBuf) {
-    pos = BlockPos.fromLong(byteBuf.readLong());
-    tileEntity = ByteBufUtils.readTag(byteBuf);
+    this.pos = BlockPos.fromLong(byteBuf.readLong());
+    this.tile = ByteBufUtils.readTag(byteBuf);
   }
 
   @Override
   public void toBytes(ByteBuf byteBuf) {
     byteBuf.writeLong(pos.toLong());
-    ByteBufUtils.writeTag(byteBuf, tileEntity);
+    ByteBufUtils.writeTag(byteBuf, tile);
   }
 
   @Override
@@ -46,9 +46,9 @@ public class SCPacketTileEntity implements IMessage, IMessageHandler<SCPacketTil
     EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
     if (player != null) {
       World world = player.getEntityWorld();
-      TileEntity tile = world.getTileEntity(message.pos);
+      var tile = TileUtils.getTile(world, message.pos);
       if (tile != null) {
-        tile.readFromNBT(message.tileEntity);
+        tile.readFromNBT(message.tile);
       }
     }
     return null;

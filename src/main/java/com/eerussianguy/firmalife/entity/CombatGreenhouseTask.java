@@ -21,11 +21,11 @@ public class CombatGreenhouseTask extends EntityAIBreakDoor {
   @Override
   public boolean shouldExecute() {
     return shouldExecuteSuper()
-            && ForgeEventFactory.getMobGriefingEvent(entity.world, entity)
-            && entity.world.getBlockState(doorPosition)
-            .getBlock()
-            .canEntityDestroy(entity.world.getBlockState(doorPosition), entity.world, doorPosition, entity)
-            && ForgeEventFactory.onEntityDestroyBlock(entity, doorPosition, entity.world.getBlockState(doorPosition));
+           && ForgeEventFactory.getMobGriefingEvent(entity.world, entity)
+           && entity.world.getBlockState(doorPosition)
+                          .getBlock()
+                          .canEntityDestroy(entity.world.getBlockState(doorPosition), entity.world, doorPosition, entity)
+           && ForgeEventFactory.onEntityDestroyBlock(entity, doorPosition, entity.world.getBlockState(doorPosition));
   }
 
   @Override
@@ -58,7 +58,7 @@ public class CombatGreenhouseTask extends EntityAIBreakDoor {
         doorPosition = new BlockPos(pathpoint.x, pathpoint.y + 1, pathpoint.z);
 
         if (entity.getDistanceSq(doorPosition.getX(), entity.posY, doorPosition.getZ()) <= 5.0D &&
-                entity.world.getBlockState(doorPosition).getBlock() instanceof BlockGreenhouseWall) {
+            entity.world.getBlockState(doorPosition).getBlock() instanceof BlockGreenhouseWall) {
           return true;
         }
       }

@@ -36,7 +36,6 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import io.netty.buffer.ByteBuf;
 
 import org.jetbrains.annotations.NotNull;
@@ -48,15 +47,15 @@ import java.util.UUID;
 public abstract class EntityWoodCart extends Entity implements IEntityAdditionalSpawnData {
 
   public static final UUID PULL_SLOWLY_MODIFIER_UUID = UUID.fromString(
-          "49B0E52E-48F2-4D89-BED7-4F5DF26F1263");
+    "49B0E52E-48F2-4D89-BED7-4F5DF26F1263");
   public static final AttributeModifier PULL_SLOWLY_MODIFIER = new AttributeModifier(PULL_SLOWLY_MODIFIER_UUID, "Pull slowly modifier",
-          ConfigWood.ENTITY.PULL_SPEED_MODIFIER, 2).setSaved(false);
+                                                                                     ConfigWood.ENTITY.PULL_SPEED_MODIFIER, 2).setSaved(false);
   private static final DataParameter<String> WOOD_NAME = EntityDataManager.createKey(
-          EntityWoodCart.class, DataSerializers.STRING);
+    EntityWoodCart.class, DataSerializers.STRING);
   private static final DataParameter<Integer> TIME_SINCE_HIT = EntityDataManager.createKey(
-          EntityWoodCart.class, DataSerializers.VARINT);
+    EntityWoodCart.class, DataSerializers.VARINT);
   private static final DataParameter<Float> DAMAGE_TAKEN = EntityDataManager.createKey(
-          EntityWoodCart.class, DataSerializers.FLOAT);
+    EntityWoodCart.class, DataSerializers.FLOAT);
   @Getter
   protected Entity pulling;
   // The distance between the cart and the pulling entity that should be maintained
@@ -143,22 +142,22 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
           if (this.pulling != null) {
             if (this.pulling instanceof EntityLivingBase entityLivingBase) {
               entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-                      .removeModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
+                              .removeModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
             }
             CapabilityPull.get(this.pulling).setDrawn(null);
             this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 0.5F, 0.1F);
           }
           ((WorldServer) this.world).getEntityTracker()
-                  .sendToTracking(this, ModuleWood.getPacketService()
-                          .getPacketFrom(new SCPacketDrawnUpdate(-1, this.getEntityId())));
+                                    .sendToTracking(this, ModuleWood.getPacketService()
+                                                                    .getPacketFrom(new SCPacketDrawnUpdate(-1, this.getEntityId())));
         } else {
           if (entityIn instanceof EntityLiving entityLiving) {
             entityLiving.getNavigator().clearPath();
           }
           CapabilityPull.get(entityIn).setDrawn(this);
           ((WorldServer) this.world).getEntityTracker()
-                  .sendToTracking(this, ModuleWood.getPacketService().getPacketFrom(
-                          new SCPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));
+                                    .sendToTracking(this, ModuleWood.getPacketService().getPacketFrom(
+                                      new SCPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));
           this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 0.5F, 1.0F);
         }
       }
@@ -210,7 +209,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
       double moveZ = targetVec.z - this.posZ + lookZ * this.spacing;
       this.motionX = moveX;
       if (ConfigCore.MISC.DEBUG.enable && this.pulling instanceof EntityPlayer
-              && !this.world.isRemote) {
+          && !this.world.isRemote) {
         System.out.println(this.pulling.fallDistance);
       }
       if (!this.pulling.onGround && this.pulling.fallDistance == 0.0F) {
@@ -224,9 +223,9 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
       this.motionZ = moveZ;
       if (this.world.isRemote) {
         this.factor =
-                Math.sqrt((moveX + lookX) * (moveX + lookX) + (moveZ + lookZ) * (moveZ + lookZ)) > 1 ?
-                        Math.sqrt(moveX * moveX + moveZ * moveZ)
-                        : -Math.sqrt(moveX * moveX + moveZ * moveZ);
+          Math.sqrt((moveX + lookX) * (moveX + lookX) + (moveZ + lookZ) * (moveZ + lookZ)) > 1 ?
+          Math.sqrt(moveX * moveX + moveZ * moveZ)
+                                                                                               : -Math.sqrt(moveX * moveX + moveZ * moveZ);
       }
     } else {
       this.motionX = 0.0D;
@@ -235,13 +234,17 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
     }
     this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
     for (Entity entity : this.world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox(),
-            EntitySelectors.getTeamCollisionPredicate(this))) {
+                                                               EntitySelectors.getTeamCollisionPredicate(this))) {
       this.applyEntityCollision(entity);
     }
   }
 
   public int getTimeSinceHit() {
     return this.dataManager.get(TIME_SINCE_HIT);
+  }
+
+  public void setTimeSinceHit(int timeSinceHit) {
+    this.dataManager.set(TIME_SINCE_HIT, timeSinceHit);
   }
 
   public float getDamageTaken() {
@@ -275,9 +278,9 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
       }
       if (this.collidedHorizontally) {
         RayTraceResult result = this.world.rayTraceBlocks(
-                new Vec3d(this.posX, this.posY + this.height, this.posZ),
-                new Vec3d(this.pulling.posX, this.pulling.posY + (this.height / 2.0F),
-                        this.pulling.posZ), false, true, false);
+          new Vec3d(this.posX, this.posY + this.height, this.posZ),
+          new Vec3d(this.pulling.posX, this.pulling.posY + (this.height / 2.0F),
+                    this.pulling.posZ), false, true, false);
         if (result != null) {
           if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
             return true;
@@ -302,7 +305,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
    */
   public void handleRotation(Vec3d targetVecIn) {
     this.rotationYaw = (float) Math.toDegrees(
-            -Math.atan2(targetVecIn.x - this.posX, targetVecIn.z - this.posZ));
+      -Math.atan2(targetVecIn.x - this.posX, targetVecIn.z - this.posZ));
   }
 
   private void attemptReattach() {
@@ -324,23 +327,19 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
 
   }
 
-  public void setTimeSinceHit(int timeSinceHit) {
-    this.dataManager.set(TIME_SINCE_HIT, timeSinceHit);
-  }
-
   @Override
   public boolean attackEntityFrom(@NotNull DamageSource source, float amount) {
     if (this.isEntityInvulnerable(source)) {
       return false;
     } else if (!this.world.isRemote && !this.isDead) {
       if (source instanceof EntityDamageSourceIndirect && source.getTrueSource() != null
-              && this.isPassenger(source.getTrueSource())) {
+          && this.isPassenger(source.getTrueSource())) {
         return false;
       } else {
         this.setTimeSinceHit(10);
         this.setDamageTaken(this.getDamageTaken() + amount * 10.0F);
         boolean flag = source.getTrueSource() instanceof EntityPlayer
-                && ((EntityPlayer) source.getTrueSource()).capabilities.isCreativeMode;
+                       && ((EntityPlayer) source.getTrueSource()).capabilities.isCreativeMode;
 
         if (flag || this.getDamageTaken() > 40.0F) {
           this.onDestroyed(source, flag);
@@ -406,8 +405,8 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
   public WoodType getWood() {
     //noinspection ConstantConditions
     return WoodType.getTypes().stream()
-            .filter(wood -> wood.toString().equalsIgnoreCase(this.dataManager.get(WOOD_NAME)))
-            .findFirst().orElse(null);
+                   .filter(wood -> wood.toString().equalsIgnoreCase(this.dataManager.get(WOOD_NAME)))
+                   .findFirst().orElse(null);
   }
 
   /**
@@ -439,7 +438,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
   @Override
   @SideOnly(Side.CLIENT)
   public void setPositionAndRotationDirect(double x, double y, double z, float yaw, float pitch,
-          int posRotationIncrements, boolean teleport) {
+                                           int posRotationIncrements, boolean teleport) {
     this.lerpX = x;
     this.lerpY = y;
     this.lerpZ = z;

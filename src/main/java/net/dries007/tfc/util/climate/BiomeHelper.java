@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Helper class Determines which IRL biome you should have in the collection of TFC's rainfall, temperature and flora density Keep in mind that this won't check for
- * oceans and mountains, you should check for this and the biomes provided in BiomesTFC for accuracy
+ * Helper class Determines which IRL biome you should have in the collection of TFC's rainfall, temperature and flora density Keep in mind that this won't check
+ * for oceans and mountains, you should check for this and the biomes provided in BiomesTFC for accuracy
  * <p>
  * in 1.15+ this should be dropped for the proper Biome system MC uses
  */
@@ -85,8 +85,8 @@ public final class BiomeHelper {
 
     public boolean isValid(float temperature, float rainfall, float density) {
       return rainfall >= rainfallMin && rainfall <= rainfallMax &&
-              temperature >= temperatureMin && temperature <= temperatureMax &&
-              density >= densityMin && density <= densityMax;
+             temperature >= temperatureMin && temperature <= temperatureMax &&
+             density >= densityMin && density <= densityMax;
     }
   }
 }

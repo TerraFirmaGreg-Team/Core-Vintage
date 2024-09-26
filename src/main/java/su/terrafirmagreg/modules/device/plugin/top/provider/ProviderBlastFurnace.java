@@ -14,7 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -33,7 +32,7 @@ public class ProviderBlastFurnace implements IProbeInfoProvider {
 
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
-          IBlockState state, IProbeHitData hitData) {
+                           IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
 
@@ -57,22 +56,22 @@ public class ProviderBlastFurnace implements IProbeInfoProvider {
         float temperature = nbt.getFloat("temperature");
         String heatTooltip = Heat.getTooltip(temperature);
         currentTooltip.add(
-                new TextComponentTranslation(ModUtils.localize("top", "device.bloomery.ores"),
-                        oreStacks, maxItems).getFormattedText());
+          new TextComponentTranslation(ModUtils.localize("top", "device.bloomery.ores"),
+                                       oreStacks, maxItems).getFormattedText());
         currentTooltip.add(
-                new TextComponentTranslation(ModUtils.localize("top", "device.bloomery.fuel"),
-                        fuelStacks, maxItems).getFormattedText());
+          new TextComponentTranslation(ModUtils.localize("top", "device.bloomery.fuel"),
+                                       fuelStacks, maxItems).getFormattedText());
         if (heatTooltip != null) {
           currentTooltip.add(heatTooltip);
         }
       } else {
         currentTooltip.add(new TextComponentTranslation(
-                ModUtils.localize("top", "device.blast_furnace.not_formed")).getFormattedText());
+          ModUtils.localize("top", "device.blast_furnace.not_formed")).getFormattedText());
       }
 
       for (String string : currentTooltip) {
         info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                .text(string);
+            .text(string);
       }
     }
   }

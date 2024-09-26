@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -29,12 +28,12 @@ public class BlockPuddle extends BaseBlock {
 
     setTickRandomly(true);
     getSettings()
-            .registryKey("core/puddle")
-            .renderLayer(BlockRenderLayer.TRANSLUCENT)
-            .useNeighborBrightness()
-            .unbreakable()
-            .nonFullCube()
-            .noCollision();
+      .registryKey("core/puddle")
+      .renderLayer(BlockRenderLayer.TRANSLUCENT)
+      .useNeighborBrightness()
+      .unbreakable()
+      .nonFullCube()
+      .noCollision();
   }
 
   @Override
@@ -44,7 +43,7 @@ public class BlockPuddle extends BaseBlock {
 
   @Override
   public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
-          IBlockAccess worldIn, BlockPos pos) {
+                                                         IBlockAccess worldIn, BlockPos pos) {
     return null;
   }
 
@@ -66,7 +65,7 @@ public class BlockPuddle extends BaseBlock {
   @SideOnly(Side.CLIENT)
   @Override
   public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess,
-          BlockPos pos, EnumFacing side) {
+                                      BlockPos pos, EnumFacing side) {
     return blockAccess.getBlockState(pos.offset(side)).getBlock() != this;
   }
 
@@ -82,7 +81,7 @@ public class BlockPuddle extends BaseBlock {
 
   @Override
   public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     if (!world.isSideSolid(pos.down(), EnumFacing.UP)) {
       world.setBlockToAir(pos);
     }
@@ -95,7 +94,7 @@ public class BlockPuddle extends BaseBlock {
 
   @Override
   public @Nullable RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn,
-          BlockPos pos, Vec3d start, Vec3d end) {
+                                                    BlockPos pos, Vec3d start, Vec3d end) {
     return null;
   }
 }

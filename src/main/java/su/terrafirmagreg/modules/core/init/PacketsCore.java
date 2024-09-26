@@ -13,27 +13,27 @@ public final class PacketsCore {
   public static void onRegister(IPacketRegistry registry) {
 
     registry.register(
-            CSPacketGuiButton.class,
-            CSPacketGuiButton.class,
-            Side.SERVER
+      CSPacketGuiButton.class,
+      CSPacketGuiButton.class,
+      Side.SERVER
     );
 
     registry.register(
-            SCPacketSimpleMessage.class,
-            SCPacketSimpleMessage.class,
-            Side.CLIENT
+      SCPacketSimpleMessage.class,
+      SCPacketSimpleMessage.class,
+      Side.CLIENT
     );
 
     registry.register(
-            SCPacketTemperature.class,
-            SCPacketTemperature.class,
-            Side.CLIENT
+      SCPacketTemperature.class,
+      SCPacketTemperature.class,
+      Side.CLIENT
     );
 
     registry.register(
-            SCPacketChunkData.class,
-            SCPacketChunkData.class,
-            Side.CLIENT
+      SCPacketChunkData.class,
+      SCPacketChunkData.class,
+      Side.CLIENT
     );
   }
 }

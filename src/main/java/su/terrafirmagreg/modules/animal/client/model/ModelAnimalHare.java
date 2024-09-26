@@ -97,9 +97,9 @@ public class ModelAnimalHare extends ModelBase {
   }
 
   public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
-          float netHeadYaw, float headPitch, float scale) {
+                     float netHeadYaw, float headPitch, float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-            entityIn);
+                           entityIn);
 
     if (this.isChild) {
       GlStateManager.pushMatrix();
@@ -139,8 +139,8 @@ public class ModelAnimalHare extends ModelBase {
   }
 
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks,
-          float netHeadYaw, float headPitch, float scaleFactor,
-          Entity entityIn) {
+                                float netHeadYaw, float headPitch, float scaleFactor,
+                                Entity entityIn) {
     float f = ageInTicks - (float) entityIn.ticksExisted;
     EntityAnimalHare EntityAnimalHare = (EntityAnimalHare) entityIn;
     this.hareNose.rotateAngleX = headPitch * 0.017453292F;
@@ -157,10 +157,10 @@ public class ModelAnimalHare extends ModelBase {
   }
 
   public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing,
-          float limbSwingAmount, float partialTickTime) {
+                                  float limbSwingAmount, float partialTickTime) {
     super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
     this.jumpRotation = MathHelper.sin(
-            ((EntityAnimalHare) entitylivingbaseIn).getJumpCompletion(partialTickTime)
-                    * MathConstants.PI);
+      ((EntityAnimalHare) entitylivingbaseIn).getJumpCompletion(partialTickTime)
+      * MathConstants.PI);
   }
 }

@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 
 import net.minecraft.block.BlockTrapDoor;
 
-
 import lombok.Getter;
 
 @Getter

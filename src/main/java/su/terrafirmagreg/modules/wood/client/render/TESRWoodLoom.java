@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -20,7 +19,7 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
 
   @Override
   public void render(TileWoodLoom tile, double x, double y, double z, float partialTicks,
-          int destroyStage, float alpha) {
+                     int destroyStage, float alpha) {
     GlStateManager.pushMatrix();
     GlStateManager.translate(x + 0.5D, y + 0.03125D, z + 0.5D);
     GlStateManager.rotate((tile.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
@@ -79,9 +78,9 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
         double Z = tileZ * 2 / 3;
 
         drawMaterial(b, tile.getMaxInputCount(), tile.getCount(), tile.getMaxProgress(),
-                tile.getProgress(),
-                ("u".equals(tile.getAnimElement())) ? Z : 0,
-                ("l".equals(tile.getAnimElement())) ? Z : 0);
+                     tile.getProgress(),
+                     ("u".equals(tile.getAnimElement())) ? Z : 0,
+                     ("l".equals(tile.getAnimElement())) ? Z : 0);
         drawProduct(b, tile.getMaxProgress(), tile.getProgress());
 
         t.draw();
@@ -98,21 +97,21 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
 
   private void drawUpper(BufferBuilder b, double z) {
     double[][] sidesX = BaseTESR.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375,
-            0.625 - z, "x");
+                                                   0.625 - z, "x");
 
     for (double[] v : sidesX) {
       b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.0625).endVertex();
     }
 
     double[][] sidesY = BaseTESR.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375,
-            0.625 - z, "y");
+                                                   0.625 - z, "y");
 
     for (double[] v : sidesY) {
       b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.875).endVertex();
     }
 
     double[][] sidesZ = BaseTESR.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375,
-            0.625 - z, "z");
+                                                   0.625 - z, "z");
 
     for (double[] v : sidesZ) {
       b.pos(v[0], v[1], v[2]).tex(v[3] * 0.875, v[4] * 0.0625).endVertex();
@@ -121,21 +120,21 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
 
   private void drawLower(BufferBuilder b, double z) {
     double[][] sidesX = BaseTESR.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625,
-            0.625 - z, "x");
+                                                   0.625 - z, "x");
 
     for (double[] v : sidesX) {
       b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.0625).endVertex();
     }
 
     double[][] sidesY = BaseTESR.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625,
-            0.625 - z, "y");
+                                                   0.625 - z, "y");
 
     for (double[] v : sidesY) {
       b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.875).endVertex();
     }
 
     double[][] sidesZ = BaseTESR.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625,
-            0.625 - z, "z");
+                                                   0.625 - z, "z");
 
     for (double[] v : sidesZ) {
       b.pos(v[0], v[1], v[2]).tex(v[3] * 0.875, v[4] * 0.0625).endVertex();
@@ -143,7 +142,7 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
   }
 
   private void drawMaterial(BufferBuilder b, int maxPieces, int pieces, int maxProgress,
-          int progress, double Z1, double Z2) {
+                            int progress, double Z1, double Z2) {
     double y1 = 0.9375 - (0.625 / maxProgress) * progress, y2, z1 = 0.75, z2;
     double texX1, texX2, texY1, texY2;
     for (int i = 0; i < pieces; i++) {
@@ -165,8 +164,8 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
       }
 
       double[][] sidesZ = getPlaneVertices(0.1875 + (0.625 / maxPieces) * i, y1, z1 - 0.001,
-              0.1875 + (0.625 / maxPieces) * (i + 1), y2,
-              z2 - 0.001, texX1, texY1, texX2, texY2);
+                                           0.1875 + (0.625 / maxPieces) * (i + 1), y2,
+                                           z2 - 0.001, texX1, texY1, texX2, texY2);
 
       for (double[] v : sidesZ) {
         b.pos(v[0], v[1], v[2]).tex(v[3], v[4]).endVertex();
@@ -185,8 +184,8 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
       }
 
       sidesZ = getPlaneVertices(0.1875 + (0.625 / maxPieces) * i, 0, z1 - 0.001,
-              0.1875 + (0.625 / maxPieces) * (i + 1), y2, z2 - 0.001, texX1,
-              texY1, texX2, texY2);
+                                0.1875 + (0.625 / maxPieces) * (i + 1), y2, z2 - 0.001, texX1,
+                                texY1, texX2, texY2);
 
       for (double[] v : sidesZ) {
         b.pos(v[0], v[1], v[2]).tex(v[3], v[4]).endVertex();
@@ -196,8 +195,8 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
 
   private void drawProduct(BufferBuilder b, int maxProgress, int progress) {
     double[][] sidesZ = getPlaneVertices(0.1875, 0.9375, 0.75 - 0.001, 0.8125,
-            0.9375 - (0.625 / maxProgress) * progress, 0.75 - 0.001, 0, 0, 1,
-            (double) progress / (double) 16);
+                                         0.9375 - (0.625 / maxProgress) * progress, 0.75 - 0.001, 0, 0, 1,
+                                         (double) progress / (double) 16);
 
     for (double[] v : sidesZ) {
       b.pos(v[0], v[1], v[2]).tex(v[3], v[4]).endVertex();
@@ -205,18 +204,18 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
   }
 
   private double[][] getPlaneVertices(double X1, double Y1, double Z1, double X2, double Y2,
-          double Z2, double texX1, double texY1, double texX2,
-          double texY2) {
+                                      double Z2, double texX1, double texY1, double texX2,
+                                      double texY2) {
     return new double[][]{
-            {X1, Y1, Z1, texX1, texY1},
-            {X2, Y1, Z1, texX2, texY1},
-            {X2, Y2, Z2, texX2, texY2},
-            {X1, Y2, Z2, texX1, texY2},
+      {X1, Y1, Z1, texX1, texY1},
+      {X2, Y1, Z1, texX2, texY1},
+      {X2, Y2, Z2, texX2, texY2},
+      {X1, Y2, Z2, texX1, texY2},
 
-            {X2, Y1, Z1, texX2, texY1},
-            {X1, Y1, Z1, texX1, texY1},
-            {X1, Y2, Z2, texX1, texY2},
-            {X2, Y2, Z2, texX2, texY2}
+      {X2, Y1, Z1, texX2, texY1},
+      {X1, Y1, Z1, texX1, texY1},
+      {X1, Y2, Z2, texX1, texY2},
+      {X2, Y2, Z2, texX2, texY2}
     };
   }
 }

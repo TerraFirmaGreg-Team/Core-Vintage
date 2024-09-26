@@ -6,7 +6,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.INBTSerializable;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class CollapseData implements INBTSerializable<NBTTagCompound> {
       for (int i = 0; i < list.tagCount(); i++) {
         NBTTagCompound posTag = list.getCompoundTagAt(i);
         nextPositions.add(
-                new BlockPos(posTag.getInteger("x"), posTag.getInteger("y"), posTag.getInteger("z")));
+          new BlockPos(posTag.getInteger("x"), posTag.getInteger("y"), posTag.getInteger("z")));
       }
       radiusSquared = nbt.getDouble("radiusSquared");
     }

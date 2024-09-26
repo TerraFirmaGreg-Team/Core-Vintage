@@ -8,7 +8,8 @@ package su.terrafirmagreg.data.lib;
  * <p>
  * Usage: XSRandom rand = new XSRandom(); //Instantiation x = rand.nextInt(); //pull a random number
  * <p>
- * To use the class in legacy code, you may also instantiate an XSRandom object and assign it to a java.util.Random object: java.util.Random rand = new XSRandom();
+ * To use the class in legacy code, you may also instantiate an XSRandom object and assign it to a java.util.Random object: java.util.Random rand = new
+ * XSRandom();
  * <p>
  * for an explanation of the algorithm, see http://demesos.blogspot.com/2011/09/pseudo-random-number-generators.html
  *
@@ -111,7 +112,7 @@ public class ThermiteRandom extends Random {
   public void nextBytes(byte[] bytes_arr) {
     for (int iba = 0, lenba = bytes_arr.length; iba < lenba; ) {
       for (int rndba = nextInt(),
-              nba = Math.min(lenba - iba, Integer.SIZE / Byte.SIZE); nba-- > 0; rndba >>= Byte.SIZE) {
+           nba = Math.min(lenba - iba, Integer.SIZE / Byte.SIZE); nba-- > 0; rndba >>= Byte.SIZE) {
         bytes_arr[iba++] = (byte) rndba;
       }
     }

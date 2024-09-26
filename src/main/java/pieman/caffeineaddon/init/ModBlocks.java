@@ -2,7 +2,6 @@ package pieman.caffeineaddon.init;
 
 import net.minecraft.block.Block;
 
-
 import net.dries007.tfc.objects.blocks.BlockDryingMat;
 
 import java.util.ArrayList;

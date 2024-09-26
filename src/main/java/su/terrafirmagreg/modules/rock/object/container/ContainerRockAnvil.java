@@ -10,13 +10,12 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
-
 import net.dries007.tfc.objects.container.IButtonHandler;
 
 import org.jetbrains.annotations.Nullable;
 
 public class ContainerRockAnvil
-        extends BaseContainerTile<TileRockAnvil> implements IButtonHandler {
+  extends BaseContainerTile<TileRockAnvil> implements IButtonHandler {
 
   public ContainerRockAnvil(InventoryPlayer playerInv, TileRockAnvil tile) {
     super(playerInv, tile);
@@ -34,7 +33,7 @@ public class ContainerRockAnvil
       }
 
       // Switch to anvil GUI
-      GuiHandler.openGui(player.world, tile.getPos(), player, GuiHandler.Type.ROCK_ANVIL);
+      GuiHandler.openGui(player.world, tile.getPos(), player);
     }
   }
 

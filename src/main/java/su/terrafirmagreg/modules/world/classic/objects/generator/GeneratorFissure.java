@@ -16,7 +16,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -38,14 +37,14 @@ public class GeneratorFissure implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+                       IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     BlockPos start = new ChunkPos(chunkX, chunkZ).getBlock(random.nextInt(14) + 9, 0,
-            random.nextInt(14) + 9);
+                                                           random.nextInt(14) + 9);
     Biome biome = world.getBiome(start);
 
     if (biome == BiomesWorld.BEACH || biome == BiomesWorld.OCEAN
-            || biome == BiomesWorld.GRAVEL_BEACH || biome == BiomesWorld.LAKE ||
-            biome == BiomesWorld.RIVER || biome == BiomesWorld.DEEP_OCEAN) {
+        || biome == BiomesWorld.GRAVEL_BEACH || biome == BiomesWorld.LAKE ||
+        biome == BiomesWorld.RIVER || biome == BiomesWorld.DEEP_OCEAN) {
       return;
     }
 
@@ -57,7 +56,7 @@ public class GeneratorFissure implements IWorldGenerator {
     }
 
     final IBlockState rock = BlocksRock.RAW.get(ProviderChunkData.getRock3(world, start))
-            .getDefaultState();
+                                           .getDefaultState();
 
     int depth = 2 + random.nextInt(3);
     int radius = 1 + random.nextInt(2);
@@ -205,7 +204,7 @@ public class GeneratorFissure implements IWorldGenerator {
   // A bit smarter fill, try to not fill the "insides" with rock
   // Needs more tweaking
   private void smartFill(World world, BlockPos pos, Set<BlockPos> fillBlockPos, IBlockState rock,
-          IBlockState fillBlock) {
+                         IBlockState fillBlock) {
     world.setBlockState(pos, fillBlock);
     for (EnumFacing facing : EnumFacing.VALUES) {
       if (facing == EnumFacing.UP) {

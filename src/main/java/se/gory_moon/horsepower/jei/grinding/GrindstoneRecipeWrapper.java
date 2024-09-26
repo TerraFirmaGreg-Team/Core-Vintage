@@ -1,11 +1,12 @@
 package se.gory_moon.horsepower.jei.grinding;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-
 
 import com.google.common.collect.Lists;
 import mezz.jei.api.IGuiHelper;
@@ -18,7 +19,6 @@ import se.gory_moon.horsepower.jei.HorsePowerCategory;
 import se.gory_moon.horsepower.jei.HorsePowerPlugin;
 import se.gory_moon.horsepower.recipes.GrindstoneRecipe;
 import se.gory_moon.horsepower.util.Localization;
-import se.gory_moon.horsepower.util.Utils;
 import se.gory_moon.horsepower.util.color.Colors;
 
 import java.util.Collections;
@@ -85,12 +85,12 @@ public class GrindstoneRecipeWrapper implements IRecipeWrapper {
   @Override
   public int hashCode() {
     int result = inputs.stream()
-            .map(itemStacks -> itemStacks.stream()
-                    .map(Utils::getItemStackHashCode)
-                    .collect(Collectors.toList()))
-            .hashCode();
-    result = 31 * result + Utils.getItemStackHashCode(output);
-    result = 31 * result + Utils.getItemStackHashCode(secondary);
+                       .map(itemStacks -> itemStacks.stream()
+                                                    .map(StackUtils::getItemStackHashCode)
+                                                    .collect(Collectors.toList()))
+                       .hashCode();
+    result = 31 * result + StackUtils.getItemStackHashCode(output);
+    result = 31 * result + StackUtils.getItemStackHashCode(secondary);
     result = 31 * result + secondaryChance;
     result = 31 * result + time;
     return result;

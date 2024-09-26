@@ -6,7 +6,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
@@ -23,16 +22,16 @@ public class HandlerFood {
   public static void init() {
     // Add custom vanilla food instances
     CUSTOM_FOODS.put(IIngredient.of(Items.ROTTEN_FLESH),
-            () -> new FoodHandler(null, FoodData.ROTTEN_FLESH));
+                     () -> new FoodHandler(null, FoodData.ROTTEN_FLESH));
 
     CUSTOM_FOODS.put(IIngredient.of(Items.GOLDEN_APPLE),
-            () -> new FoodHandler(null, FoodData.GOLDEN_APPLE));
+                     () -> new FoodHandler(null, FoodData.GOLDEN_APPLE));
 
     CUSTOM_FOODS.put(IIngredient.of(Items.GOLDEN_CARROT),
-            () -> new FoodHandler(null, FoodData.GOLDEN_CARROT));
+                     () -> new FoodHandler(null, FoodData.GOLDEN_CARROT));
 
     CUSTOM_FOODS.put(IIngredient.of(Items.EGG),
-            () -> new FoodHandler(null, FoodData.RAW_EGG));
+                     () -> new FoodHandler(null, FoodData.RAW_EGG));
   }
 
   @Nullable

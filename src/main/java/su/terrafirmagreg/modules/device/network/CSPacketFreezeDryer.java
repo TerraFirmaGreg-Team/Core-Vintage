@@ -1,19 +1,17 @@
 package su.terrafirmagreg.modules.device.network;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
 
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-
 import io.netty.buffer.ByteBuf;
 
-public class CSPacketFreezeDryer implements IMessage,
-        IMessageHandler<CSPacketFreezeDryer, IMessage> {
+public class CSPacketFreezeDryer implements IMessage, IMessageHandler<CSPacketFreezeDryer, IMessage> {
 
   private int xCoord;
   private int yCoord;
@@ -53,22 +51,22 @@ public class CSPacketFreezeDryer implements IMessage,
   @Override
   public IMessage onMessage(CSPacketFreezeDryer msg, MessageContext ctx) {
     if (ctx.side == Side.SERVER) {
-      TileEntity tile = ctx.getServerHandler().player.world.getTileEntity(
-              new BlockPos(msg.xCoord, msg.yCoord, msg.zCoord));
-      TileFreezeDryer freezeDryer = (TileFreezeDryer) tile;
-
-      if (msg.bool == 0) {
-        if (msg.mode) {
-          freezeDryer.seal();
-        } else {
-          freezeDryer.unseal();
+      final var world = ctx.getServerHandler().player.world;
+      var tile = TileUtils.getTile(world, new BlockPos(msg.xCoord, msg.yCoord, msg.zCoord), TileFreezeDryer.class);
+      if (tile != null) {
+        if (msg.bool == 0) {
+          if (msg.mode) {
+            tile.seal();
+          } else {
+            tile.unseal();
+          }
         }
-      }
-      if (msg.bool == 1) {
-        if (msg.mode) {
-          freezeDryer.startPump();
-        } else {
-          freezeDryer.stopPump();
+        if (msg.bool == 1) {
+          if (msg.mode) {
+            tile.startPump();
+          } else {
+            tile.stopPump();
+          }
         }
       }
     }

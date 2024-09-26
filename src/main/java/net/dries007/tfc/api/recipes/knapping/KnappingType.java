@@ -17,8 +17,8 @@ public class KnappingType {
   }
 
   /**
-   * If true, the recipe will only consume it's contents after the player removes the item from the knapping GUI, or closes the GUI (dropping the item into their
-   * inventory) If false, the recipe will consume one ingredient as soon as a single square is removed from the knapping grid
+   * If true, the recipe will only consume it's contents after the player removes the item from the knapping GUI, or closes the GUI (dropping the item into
+   * their inventory) If false, the recipe will consume one ingredient as soon as a single square is removed from the knapping grid
    */
   public boolean consumeAfterComplete() {
     return consumeAfterComplete;

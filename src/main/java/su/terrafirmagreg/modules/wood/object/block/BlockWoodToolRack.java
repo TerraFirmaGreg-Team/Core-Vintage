@@ -27,7 +27,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
@@ -40,29 +39,29 @@ import static net.minecraft.util.EnumFacing.byHorizontalIndex;
 public class BlockWoodToolRack extends BlockWood implements IProviderTile {
 
   protected static final AxisAlignedBB RACK_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D,
-          1.0D, 1.0D);
+                                                                          1.0D, 1.0D);
   protected static final AxisAlignedBB RACK_WEST_AABB = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D,
-          1.0D, 1.0D);
+                                                                          1.0D, 1.0D);
   protected static final AxisAlignedBB RACK_SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D,
-          1.0D, 0.125D);
+                                                                           1.0D, 0.125D);
   protected static final AxisAlignedBB RACK_NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D,
-          1.0D, 1.0D);
+                                                                           1.0D, 1.0D);
 
   public BlockWoodToolRack(WoodBlockVariant variant, WoodType type) {
     super(variant, type);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .hardness(0.5f)
-            .resistance(3f)
-            .size(Size.LARGE)
-            .weight(Weight.VERY_HEAVY)
-            .nonOpaque()
-            .nonFullCube();
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .hardness(0.5f)
+      .resistance(3f)
+      .size(Size.LARGE)
+      .weight(Weight.VERY_HEAVY)
+      .nonOpaque()
+      .nonFullCube();
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(FACING, NORTH));
+                              .withProperty(FACING, NORTH));
   }
 
   @Override
@@ -93,7 +92,7 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
   @Override
   @SuppressWarnings("deprecation")
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
     if (!BlockUtils.canHangAt(worldIn, pos, state.getValue(FACING))) {
       dropBlockAsItem(worldIn, pos, state, 0);
@@ -117,11 +116,11 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
   @Override
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     return super.canPlaceBlockAt(worldIn, pos)
-            && BlockUtils.getASolidFacing(worldIn, pos, null, HORIZONTALS) != null;
+           && BlockUtils.getASolidFacing(worldIn, pos, null, HORIZONTALS) != null;
   }
 
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!world.isRemote) {
       var tile = TileUtils.getTile(world, pos, TileWoodToolRack.class);
       if (tile != null) {
@@ -133,12 +132,12 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
 
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-          float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+                                          float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     if (facing.getAxis() == Axis.Y) {
       facing = placer.getHorizontalFacing().getOpposite();
     }
     return this.getDefaultState()
-            .withProperty(FACING, BlockUtils.getASolidFacing(worldIn, pos, facing, HORIZONTALS));
+               .withProperty(FACING, BlockUtils.getASolidFacing(worldIn, pos, facing, HORIZONTALS));
   }
 
   @Override
@@ -149,13 +148,13 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
   @Override
   @SuppressWarnings("ConstantConditions")
   public ItemStack getPickBlock(IBlockState state, @Nullable RayTraceResult target, World world,
-          BlockPos pos, EntityPlayer player) {
+                                BlockPos pos, EntityPlayer player) {
     if (target != null) {
       var vec = target.hitVec.subtract(pos.getX(), pos.getY(), pos.getZ());
       var tile = TileUtils.getTile(world, pos, TileWoodToolRack.class);
       if (tile != null) {
         ItemStack item = tile.getItems()
-                .get(getSlotFromPos(state, (float) vec.x, (float) vec.y, (float) vec.z));
+                             .get(getSlotFromPos(state, (float) vec.x, (float) vec.y, (float) vec.z));
         if (!item.isEmpty()) {
           return item;
         }

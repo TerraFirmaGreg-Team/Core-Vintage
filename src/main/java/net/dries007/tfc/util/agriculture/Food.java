@@ -4,7 +4,6 @@ import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 
 import net.minecraft.item.ItemStack;
 
-
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -152,12 +151,12 @@ public enum Food {
   private final String[] oreDictNames;
 
   Food(@NotNull Category category, int hunger, float saturation, float water, float grain, float veg, float fruit, float meat, float dairy,
-          float decayModifier, String... oreNames) {
+       float decayModifier, String... oreNames) {
     this(category, hunger, saturation, water, grain, veg, fruit, meat, dairy, decayModifier, 0, -1, oreNames);
   }
 
   Food(@NotNull Category category, int hunger, float saturation, float water, float grain, float veg, float fruit, float meat, float dairy, float decayModifier,
-          float heatCapacity, float cookingTemp, String... oreNames) {
+       float heatCapacity, float cookingTemp, String... oreNames) {
     this.category = category;
     this.foodData = new FoodData(hunger, water, saturation, grain, fruit, veg, meat, dairy, decayModifier);
 

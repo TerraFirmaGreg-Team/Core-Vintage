@@ -6,14 +6,13 @@ import su.terrafirmagreg.data.lib.types.type.Type;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Map;
 
 public interface IRegistryBlock
-        extends IRegistryBase {
+  extends IRegistryBase {
 
   default <T extends Block, A> Map<A, T> blocks(Map<A, T> map) {
     for (var block : map.values()) {

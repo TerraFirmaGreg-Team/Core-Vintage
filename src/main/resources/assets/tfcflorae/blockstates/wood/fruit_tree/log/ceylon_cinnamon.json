@@ -30,7 +30,7 @@
       },
       "false": {}
     },
-    "inventory": [{}],
+    "inventory": [ {} ],
     "normal": [
       {
         "transform": "forge:default-block",

@@ -35,7 +35,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -72,7 +71,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
   @SuppressWarnings("unused")
   public EntityOcelotTFC(World world) {
     this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-            EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.OCELOT.adulthood, ConfigTFC.Animals.OCELOT.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.OCELOT.adulthood, ConfigTFC.Animals.OCELOT.elder));
   }
 
   public EntityOcelotTFC(World world, IAnimal.Gender gender, int birthDay) {
@@ -107,7 +106,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
+        (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
       return ConfigTFC.Animals.OCELOT.rarity;
     }
     return 0;
@@ -158,14 +157,14 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
         this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
-                this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
+          this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
         if (random.nextDouble() < ConfigTFC.Animals.OCELOT.oldDeathChance) {
           this.setDead();
         }
       }
       // Wild animals disappear after 125% lifespan
       if (this.getDaysToElderly() > 0 && this.getFamiliarity() < 0.10F &&
-              (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
+          (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
         this.setDead();
       }
     }
@@ -179,7 +178,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
     int numberOfChildren = ConfigTFC.Animals.OCELOT.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityOcelotTFC baby = new EntityOcelotTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                                 (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       if (this.isTamed()) {
         baby.setOwnerId(this.getOwnerId());
@@ -278,8 +277,8 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
   public TextComponentTranslation getAnimalName() {
     String entityString = isTamed() ? "cattfc" : EntityList.getEntityString(this);
     return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-            .name()
-            .toLowerCase());
+                                                                                          .name()
+                                                                                          .toLowerCase());
   }
 
   @Override
@@ -295,7 +294,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
         if (EntityLivingBase.class.isAssignableFrom(entityClass)) {
           //noinspection unchecked
           this.targetTasks.addTask(priority++,
-                  new EntityAITargetNonTamed<>(this, (Class<EntityLivingBase>) entityClass, false, ent -> true));
+                                   new EntityAITargetNonTamed<>(this, (Class<EntityLivingBase>) entityClass, false, ent -> true));
         }
       }
     }
@@ -398,8 +397,9 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
               TerraFirmaCraft.getNetwork()
-                      .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL,
-                              MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+                             .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL,
+                                                                          MODID_TFC
+                                                                          + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
             }
           }
         }
@@ -420,7 +420,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
       // Only called if this animal is interacted with a spawn egg
       // Try to return to vanilla's default method a baby of this animal, as if bred normally
       EntityOcelotTFC baby = new EntityOcelotTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                                 (int) Calendar.PLAYER_TIME.getTotalDays());
       if (this.isTamed()) {
         baby.setOwnerId(this.getOwnerId());
         baby.setTamed(true);
@@ -443,9 +443,9 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+           && !this.world.containsAnyLiquid(getEntityBoundingBox())
+           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @NotNull

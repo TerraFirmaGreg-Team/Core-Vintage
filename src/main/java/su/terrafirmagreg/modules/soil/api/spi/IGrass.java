@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
@@ -53,7 +52,7 @@ public interface IGrass {
             IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
             if (iblockstate1.getBlock() == BlocksSoil.DIRT.get(soil) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4
-                    && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
+                && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
               worldIn.setBlockState(blockpos, BlocksSoil.GRASS.get(soil).getDefaultState());
             }
           }
@@ -108,7 +107,7 @@ public interface IGrass {
 
         // Пропускаем итерацию, если верхний блок жидкость или имеет высокую прозрачность
         if (world.getLightFromNeighbors(targetUp) < 4 || targetUpState.getMaterial()
-                .isLiquid() || targetUpState.getLightOpacity(world, targetUp) > 3) {
+                                                                      .isLiquid() || targetUpState.getLightOpacity(world, targetUp) > 3) {
           continue;
         }
 
@@ -141,10 +140,10 @@ public interface IGrass {
           BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
 
           if (world.isAirBlock(upPos) &&
-                  plant.isValidLocation(temp, ProviderChunkData.getRainfall(world, upPos),
-                          Math.subtractExact(world.getLightFor(EnumSkyBlock.SKY, upPos), world.getSkylightSubtracted())) &&
-                  plant.isValidGrowthTemp(temp) &&
-                  rand.nextDouble() < plantBlock.getGrowthRate(world, upPos)) {
+              plant.isValidLocation(temp, ProviderChunkData.getRainfall(world, upPos),
+                                    Math.subtractExact(world.getLightFor(EnumSkyBlock.SKY, upPos), world.getSkylightSubtracted())) &&
+              plant.isValidGrowthTemp(temp) &&
+              rand.nextDouble() < plantBlock.getGrowthRate(world, upPos)) {
             world.setBlockState(upPos, plantBlock.getDefaultState());
           }
         }

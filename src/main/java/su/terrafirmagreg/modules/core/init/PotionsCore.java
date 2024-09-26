@@ -40,12 +40,12 @@ public final class PotionsCore {
     HEAT_RESIST = registry.potion("resist_heat", new PotionResistHeat());
 
     COLD_RESIST_TYPE = registry.potionType(COLD_RESIST, "cold_resist_type",
-            1200);           //TODO cfg duration
+                                           1200);           //TODO cfg duration
     LONG_COLD_RESIST_TYPE = registry.potionType(COLD_RESIST, "long_cold_resist_type",
-            2400); //TODO cfg duration
+                                                2400); //TODO cfg duration
     HEAT_RESIST_TYPE = registry.potionType(HEAT_RESIST, "heat_resist_type",
-            1200);           //TODO cfg duration
+                                           1200);           //TODO cfg duration
     LONG_HEAT_RESIST_TYPE = registry.potionType(HEAT_RESIST, "long_heat_resist_type",
-            2400); //TODO cfg duration
+                                                2400); //TODO cfg duration
   }
 }

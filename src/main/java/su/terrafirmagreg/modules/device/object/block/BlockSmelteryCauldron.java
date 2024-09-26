@@ -29,7 +29,6 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.data.Properties.HORIZONTAL;
@@ -42,25 +41,25 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProvi
     super(Settings.of(Material.IRON));
 
     getSettings()
-            .registryKey("device/smeltery_cauldron")
-            .sound(SoundType.STONE)
-            .nonOpaque()
-            .nonFullCube()
-            .size(Size.LARGE)
-            .weight(Weight.MEDIUM)
-            .hardness(3.0F);
+      .registryKey("device/smeltery/cauldron")
+      .sound(SoundType.STONE)
+      .nonOpaque()
+      .nonFullCube()
+      .size(Size.LARGE)
+      .weight(Weight.MEDIUM)
+      .hardness(3.0F);
 
     setHarvestLevel(ToolClasses.PICKAXE, 0);
     setDefaultState(blockState.getBaseState()
-            .withProperty(LIT, false)
-            .withProperty(HORIZONTAL, EnumFacing.NORTH));
+                              .withProperty(LIT, false)
+                              .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-            .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
-            .withProperty(LIT, meta / 4 % 2 != 0);
+               .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
+               .withProperty(LIT, meta / 4 % 2 != 0);
   }
 
   @Override
@@ -75,7 +74,7 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProvi
 
   @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-          EnumFacing face) {
+                                          EnumFacing face) {
     return face == EnumFacing.UP ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 
@@ -95,8 +94,8 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProvi
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-          EnumHand hand, EnumFacing side, float hitX,
-          float hitY, float hitZ) {
+                                  EnumHand hand, EnumFacing side, float hitX,
+                                  float hitY, float hitZ) {
     if (!player.isSneaking()) {
       if (!world.isRemote) {
         if (world.getBlockState(pos.down()).getBlock() instanceof BlockSmelteryFirebox) {
@@ -104,7 +103,7 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProvi
           ItemStack held = player.getHeldItem(hand);
           if (held.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
             IFluidHandler fluidHandler = tile.getCapability(
-                    CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
+              CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
             if (fluidHandler != null) {
               if (FluidUtil.interactWithFluidHandler(player, hand, fluidHandler)) {
                 held = player.getHeldItem(hand); // Forge update item in hand

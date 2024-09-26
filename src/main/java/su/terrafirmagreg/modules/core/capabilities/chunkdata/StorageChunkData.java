@@ -14,7 +14,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.common.util.Constants;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -22,10 +21,21 @@ import java.util.stream.Collectors;
 
 public final class StorageChunkData implements IStorage<ICapabilityChunkData> {
 
+  public static NBTTagByteArray write(DataLayerClassic[] layers) {
+    return new NBTTagByteArray(
+      Arrays.stream(layers).map(x -> (byte) x.layerID).collect(Collectors.toList()));
+  }
+
+  public static void read(DataLayerClassic[] layers, byte[] bytes) {
+    for (int i = bytes.length - 1; i >= 0; i--) {
+      layers[i] = DataLayerClassic.get(bytes[i]);
+    }
+  }
+
   @Nullable
   @Override
   public NBTBase writeNBT(Capability<ICapabilityChunkData> capability,
-          ICapabilityChunkData instance, EnumFacing side) {
+                          ICapabilityChunkData instance, EnumFacing side) {
     if (instance == null || !instance.isInitialized()) {
       return new NBTBuilder().setBoolean("valid", false).build();
     }
@@ -64,14 +74,9 @@ public final class StorageChunkData implements IStorage<ICapabilityChunkData> {
     return root;
   }
 
-  public static NBTTagByteArray write(DataLayerClassic[] layers) {
-    return new NBTTagByteArray(
-            Arrays.stream(layers).map(x -> (byte) x.layerID).collect(Collectors.toList()));
-  }
-
   @Override
   public void readNBT(Capability<ICapabilityChunkData> capability, ICapabilityChunkData instance,
-          EnumFacing side, NBTBase nbt) {
+                      EnumFacing side, NBTBase nbt) {
     NBTTagCompound root = (NBTTagCompound) nbt;
     if (nbt != null && root.getBoolean("valid")) {
       System.arraycopy(root.getIntArray("soilLayer1"), 0, instance.getSoilLayer1(), 0, 256);
@@ -104,12 +109,6 @@ public final class StorageChunkData implements IStorage<ICapabilityChunkData> {
       }
 
       instance.setInitialized(true);
-    }
-  }
-
-  public static void read(DataLayerClassic[] layers, byte[] bytes) {
-    for (int i = bytes.length - 1; i >= 0; i--) {
-      layers[i] = DataLayerClassic.get(bytes[i]);
     }
   }
 }

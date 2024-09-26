@@ -5,7 +5,6 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
-
 import net.dries007.tfc.objects.te.TEDryingMat;
 import pieman.caffeineaddon.client.TESRDryingMat;
 
@@ -22,9 +21,12 @@ public class ClientProxy extends CommonProxy {
   public <E extends Enum<?>> void registerMetaItemRenderer(Item item, Class<E> variants, String id) {
     for (int i = 0; i < variants.getEnumConstants().length; i++) {
       ModelLoader.setCustomModelResourceLocation(item, i,
-              new ModelResourceLocation(MODID_CAFFEINEADDON + ":" + variants.getEnumConstants()[i] + "_" + item.getRegistryName()
-                      .toString()
-                      .substring(MODID_CAFFEINEADDON.length() + 1), "inventory"));
+                                                 new ModelResourceLocation(
+                                                   MODID_CAFFEINEADDON + ":" + variants.getEnumConstants()[i] + "_" + item.getRegistryName()
+                                                                                                                          .toString()
+                                                                                                                          .substring(
+                                                                                                                            MODID_CAFFEINEADDON.length()
+                                                                                                                            + 1), "inventory"));
     }
   }
 

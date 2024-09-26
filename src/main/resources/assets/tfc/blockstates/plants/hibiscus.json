@@ -10,8 +10,7 @@
           "model": "tfc:plants/hibiscus_single_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "single",
         "stage": "1"
@@ -21,8 +20,7 @@
           "model": "tfc:plants/hibiscus_single_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "single",
         "stage": "2"
@@ -32,8 +30,7 @@
           "model": "tfc:plants/hibiscus_single_2"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "0"
@@ -43,8 +40,7 @@
           "model": "tfc:plants/hibiscus_lower_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "1"
@@ -54,8 +50,7 @@
           "model": "tfc:plants/hibiscus_lower_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "2"
@@ -65,8 +60,7 @@
           "model": "tfc:plants/hibiscus_lower_2"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "0"
@@ -76,8 +70,7 @@
           "model": "tfc:plants/hibiscus_upper_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "1"
@@ -87,8 +80,7 @@
           "model": "tfc:plants/hibiscus_upper_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "2"

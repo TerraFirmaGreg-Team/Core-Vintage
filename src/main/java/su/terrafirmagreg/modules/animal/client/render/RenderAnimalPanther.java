@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
@@ -19,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class RenderAnimalPanther extends RenderLiving<EntityAnimalPanther> {
 
   private static final ResourceLocation TEXTURE = ModUtils.resource(
-          "textures/entity/animal/predators/panther.png");
+    "textures/entity/animal/predators/panther.png");
 
   public RenderAnimalPanther(RenderManager renderManager) {
     super(renderManager, new ModelAnimalPanther(), 0.7F);
@@ -27,7 +26,7 @@ public class RenderAnimalPanther extends RenderLiving<EntityAnimalPanther> {
 
   @Override
   public void doRender(@NotNull EntityAnimalPanther panther, double par2, double par4, double par6,
-          float par8, float par9) {
+                       float par8, float par9) {
     this.shadowSize = (float) (0.35f + (panther.getPercentToAdulthood() * 0.35f));
     super.doRender(panther, par2, par4, par6, par8, par9);
   }

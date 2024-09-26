@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.module.IModuleContainer;
 
 import net.minecraft.util.IStringSerializable;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
@@ -15,7 +14,7 @@ import static su.terrafirmagreg.data.Constants.MOD_ID;
 @Getter
 @Container
 public enum ModuleContainer
-        implements IStringSerializable, IModuleContainer {
+  implements IStringSerializable, IModuleContainer {
 
   CORE(true),
   ROCK(true),
@@ -33,7 +32,7 @@ public enum ModuleContainer
   ModuleContainer(boolean enabled) {
     this.enabled = enabled;
   }
-  
+
 
   @Override
   public @NotNull String getName() {

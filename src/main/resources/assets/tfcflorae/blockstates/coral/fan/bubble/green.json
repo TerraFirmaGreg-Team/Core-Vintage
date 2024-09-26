@@ -7,8 +7,7 @@
       "apply": {
         "model": "tfcflorae:coral/fan/bubble/green"
       }
-    },
-    {
+    }, {
       "when": {
         "east": "true"
       },
@@ -16,8 +15,7 @@
         "model": "tfcflorae:coral/fan/bubble/side/green",
         "y": 270
       }
-    },
-    {
+    }, {
       "when": {
         "north": "true"
       },
@@ -25,16 +23,14 @@
         "model": "tfcflorae:coral/fan/bubble/side/green",
         "y": 180
       }
-    },
-    {
+    }, {
       "when": {
         "south": "true"
       },
       "apply": {
         "model": "tfcflorae:coral/fan/bubble/side/green"
       }
-    },
-    {
+    }, {
       "when": {
         "up": "true"
       },
@@ -42,8 +38,7 @@
         "model": "tfcflorae:coral/fan/bubble/green",
         "x": 180
       }
-    },
-    {
+    }, {
       "when": {
         "west": "true"
       },

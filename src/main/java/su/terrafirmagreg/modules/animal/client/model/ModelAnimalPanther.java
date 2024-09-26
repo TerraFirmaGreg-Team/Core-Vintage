@@ -146,7 +146,7 @@ public class ModelAnimalPanther extends ModelBase {
     tailBody = new ModelRenderer(this, 11, 28);
     tailBody.setRotationPoint(0.5F, 11.5F, 9.5F);
     tailBody.addBox(-1.5F, -1.5F, -1.5F, 2, 3, 2, -0.2F);
-    setRotateAngle(tailBody, 0.6981317007977318F, 0.0F, 0.0F);
+    setRotateAngle(tailBody, ((float) Math.PI * 2F / 9F), 0.0F, 0.0F);
     frontRightLegBottom = new ModelRenderer(this, 2, 38);
     frontRightLegBottom.setRotationPoint(-1.0F, 5.9F, -0.2F);
     frontRightLegBottom.addBox(-0.99F, -1.0F, -1.0F, 2, 3, 2, 0.0F);
@@ -233,11 +233,11 @@ public class ModelAnimalPanther extends ModelBase {
 
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,
-          Entity entity) {
+                                Entity entity) {
     //super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
     setRotateAngle(head, f4 / (180F / MathConstants.PI), f3 / (180F / MathConstants.PI), 0F);
     setRotateAngle(neck, f4 / (1.5F * (180F / MathConstants.PI)) + -0.18203784098300857F,
-            f3 / (1.5F * (180F / MathConstants.PI)), 0F);
+                   f3 / (1.5F * (180F / MathConstants.PI)), 0F);
 
     frontRightLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
     frontLeftLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1;

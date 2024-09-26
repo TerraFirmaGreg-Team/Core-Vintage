@@ -14,7 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
@@ -86,7 +85,7 @@ public class BlockFlowerPotTFC extends Block {
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     IBlockState downState = worldIn.getBlockState(pos.down());
     return super.canPlaceBlockAt(worldIn, pos) &&
-            (downState.isTopSolid() || downState.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID);
+           (downState.isTopSolid() || downState.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID);
   }
 
   @Override

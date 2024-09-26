@@ -4,7 +4,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class ItemHandlerSidedWrapper implements IItemHandlerModifiable {

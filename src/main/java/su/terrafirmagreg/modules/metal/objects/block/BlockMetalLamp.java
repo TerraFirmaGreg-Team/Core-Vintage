@@ -40,7 +40,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -61,13 +60,13 @@ import static su.terrafirmagreg.modules.metal.objects.itemblock.ItemBlockMetalLa
 @Getter
 @SuppressWarnings("deprecation")
 public class BlockMetalLamp
-        extends BaseBlock
-        implements IMetalBlock, IProviderTile, ICapabilityMetal {
+  extends BaseBlock
+  implements IMetalBlock, IProviderTile, ICapabilityMetal {
 
   private static final AxisAlignedBB AABB_UP = new AxisAlignedBB(0.3125, 0, 0.3125, 0.6875, 0.5,
-          0.6875);
+                                                                 0.6875);
   private static final AxisAlignedBB AABB_DOWN = new AxisAlignedBB(0.3125, 0, 0.3125, 0.6875, 1,
-          0.6875);
+                                                                   0.6875);
 
   private final MetalBlockVariant variant;
   private final MetalType type;
@@ -79,19 +78,19 @@ public class BlockMetalLamp
     this.type = type;
 
     getSettings()
-            .sound(SoundType.METAL)
-            .nonCube()
-            .hardness(1f)
-            .oreDict("lamp");
+      .sound(SoundType.METAL)
+      .nonCube()
+      .hardness(1f)
+      .oreDict("lamp");
 
     setTickRandomly(true);
     setDefaultState(blockState.getBaseState()
-            .withProperty(VERTICAL, EnumFacing.UP)
-            .withProperty(LIT, false));
+                              .withProperty(VERTICAL, EnumFacing.UP)
+                              .withProperty(LIT, false));
 
     // In the interest of not writing a joint heat / fluid capability that extends ICapabilityProvider, I think this is justified
     HandlerHeat.CUSTOM_ITEMS.put(IIngredient.of(this),
-            () -> new ProviderHeat(null, type.getSpecificHeat(), type.getMeltTemp()));
+                                 () -> new ProviderHeat(null, type.getSpecificHeat(), type.getMeltTemp()));
   }
 
   @Override
@@ -103,8 +102,8 @@ public class BlockMetalLamp
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-            .withProperty(VERTICAL, EnumFacing.byIndex(meta % 2))
-            .withProperty(LIT, meta >= 2);
+               .withProperty(VERTICAL, EnumFacing.byIndex(meta % 2))
+               .withProperty(LIT, meta >= 2);
   }
 
   @Override
@@ -141,7 +140,7 @@ public class BlockMetalLamp
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     var tile = TileUtils.getTile(worldIn, pos, TileMetalLamp.class);
     if (tile != null) {
       if (worldIn.isBlockPowered(pos) && !tile.isPowered()) //power on
@@ -178,8 +177,8 @@ public class BlockMetalLamp
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                  float hitX, float hitY, float hitZ) {
     var tile = TileUtils.getTile(worldIn, pos, TileMetalLamp.class);
     ItemStack stack = playerIn.getHeldItem(hand);
     if (!worldIn.isRemote && tile != null) {
@@ -190,9 +189,9 @@ public class BlockMetalLamp
           tile.resetCounter();
         }
       } else if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY,
-              null)) { //refill only if not lit
+                                     null)) { //refill only if not lit
         IFluidHandler fluidHandler = tile.getCapability(
-                CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+          CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         if (fluidHandler != null) {
           FluidUtil.interactWithFluidHandler(playerIn, hand, fluidHandler);
           tile.markDirty();
@@ -210,14 +209,14 @@ public class BlockMetalLamp
    */
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-          float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer) {
+                                          float hitX, float hitY, float hitZ, int meta,
+                                          EntityLivingBase placer) {
     if (this.canPlaceAt(worldIn, pos, facing)) {
       return this.getDefaultState().withProperty(VERTICAL, facing);
     } else if (this.canPlaceAt(worldIn, pos, EnumFacing.UP)) {
       return this.getDefaultState().withProperty(VERTICAL, EnumFacing.UP);
     } else if (this.canPlaceAt(worldIn, pos,
-            EnumFacing.DOWN)) // last resort, must have matched in canPlaceAt test
+                               EnumFacing.DOWN)) // last resort, must have matched in canPlaceAt test
     {
       return this.getDefaultState().withProperty(VERTICAL, EnumFacing.DOWN);
     }
@@ -226,7 +225,7 @@ public class BlockMetalLamp
 
   @Override
   public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state,
-          @Nullable TileEntity tile, ItemStack tool) {
+                           @Nullable TileEntity tile, ItemStack tool) {
     super.harvestBlock(world, player, pos, state, tile, tool);
     world.setBlockToAir(pos);
   }
@@ -234,7 +233,7 @@ public class BlockMetalLamp
   // after BlockBarrel#onBlockPlacedBy
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-          EntityLivingBase placer, ItemStack stack) {
+                              EntityLivingBase placer, ItemStack stack) {
     if (!worldIn.isRemote && stack.getTagCompound() != null) {
       // Set the initial counter value and fill from item
       TileMetalLamp tile = TileUtils.getTile(worldIn, pos, TileMetalLamp.class);
@@ -252,28 +251,24 @@ public class BlockMetalLamp
   }
 
   @Override
-  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player,
-          boolean willHarvest) {
-    return willHarvest || super.removedByPlayer(state, world, pos, player,
-            willHarvest); //delay deletion of the block until after getDrops
+  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+    return willHarvest || super.removedByPlayer(state, world, pos, player, willHarvest); //delay deletion of the block until after getDrops
   }
 
   @Override
-  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
-          IBlockState state, int fortune) {
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
     var tile = TileUtils.getTile(world, pos, TileMetalLamp.class);
-    if (tile != null) {
-      if (tile.getFuel() == 0) {
-        super.getDrops(drops, world, pos, state, fortune);
-      } else {
-        drops.add(tile.getItemStack(tile, state));
-      }
+    if (tile == null) {return;}
+    if (tile.getFuel() == 0) {
+      super.getDrops(drops, world, pos, state, fortune);
+    } else {
+      drops.add(tile.getItemStack(tile, state));
     }
+
   }
 
   @Override
-  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-          EntityPlayer player) {
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
     var tile = TileUtils.getTile(world, pos, TileMetalLamp.class);
     if (tile != null) {
       return tile.getItemStack(tile, state);
@@ -318,7 +313,7 @@ public class BlockMetalLamp
 
   private boolean checkFuel(World worldIn, BlockPos pos, IBlockState state, TileMetalLamp tel) {
     IFluidHandler fluidHandler = tel.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY,
-            null);
+                                                   null);
     boolean ranOut = false;
     if (!worldIn.isRemote && fluidHandler != null) {
       long ticks = tel.getTicksSinceUpdate();
@@ -338,7 +333,7 @@ public class BlockMetalLamp
 
   @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-          EnumFacing face) {
+                                          EnumFacing face) {
     return BlockFaceShape.UNDEFINED;
   }
 
@@ -360,10 +355,10 @@ public class BlockMetalLamp
   @SideOnly(Side.CLIENT)
   @Override
   public void addMetalInfo(ItemStack stack,
-          List<String> text) // shamelessly co-opted to show liquid too
+                           List<String> text) // shamelessly co-opted to show liquid too
   {
     IFluidHandler fluidCap = stack.getCapability(
-            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+      CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     boolean spacer = false;
     if (fluidCap != null) {
       FluidStack fluidStack = fluidCap.drain(CAPACITY, false);

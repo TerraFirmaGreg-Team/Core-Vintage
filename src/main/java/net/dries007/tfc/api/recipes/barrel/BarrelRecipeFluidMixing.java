@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 
-
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
 
@@ -18,7 +17,7 @@ import java.util.List;
 public class BarrelRecipeFluidMixing extends BarrelRecipe {
 
   public BarrelRecipeFluidMixing(@NotNull IIngredient<FluidStack> inputFluid, @NotNull IngredientFluidItem inputStack,
-          @Nullable FluidStack outputFluid, int duration) {
+                                 @Nullable FluidStack outputFluid, int duration) {
     super(inputFluid, inputStack, outputFluid, ItemStack.EMPTY, duration);
   }
 

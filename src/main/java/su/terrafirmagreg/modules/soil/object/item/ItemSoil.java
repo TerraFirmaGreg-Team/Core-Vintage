@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.ISoilItem;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariant;
 
-
 import lombok.Getter;
 
 @Getter
@@ -21,11 +20,11 @@ public abstract class ItemSoil extends BaseItem implements ISoilItem {
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .weight(Weight.LIGHT)
-            .size(Size.SMALL)
-            .oreDict(variant, type)
-            .oreDict(variant);
+      .registryKey(variant.getRegistryKey(type))
+      .weight(Weight.LIGHT)
+      .size(Size.SMALL)
+      .oreDict(variant, type)
+      .oreDict(variant);
   }
 
 }

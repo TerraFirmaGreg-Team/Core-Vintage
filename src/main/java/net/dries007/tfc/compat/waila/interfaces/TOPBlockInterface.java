@@ -1,5 +1,7 @@
 package net.dries007.tfc.compat.waila.interfaces;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,7 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
 
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IBlockDisplayOverride;
@@ -40,13 +41,13 @@ public class TOPBlockInterface implements IProbeInfoProvider, IBlockDisplayOverr
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
     BlockPos pos = hitData.getPos();
-    TileEntity tileEntity = world.getTileEntity(pos);
-    if (!isLookingAtProvider(state.getBlock(), tileEntity)) {
+    var tile = TileUtils.getTile(world, pos);
+    if (!isLookingAtProvider(state.getBlock(), tile)) {
       return;
     }
     NBTTagCompound nbt = new NBTTagCompound();
-    if (tileEntity != null) {
-      nbt = tileEntity.writeToNBT(nbt);
+    if (tile != null) {
+      nbt = tile.writeToNBT(nbt);
     }
 
     if (internal.appendBody()) {
@@ -69,14 +70,14 @@ public class TOPBlockInterface implements IProbeInfoProvider, IBlockDisplayOverr
   @Override
   public boolean overrideStandardInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
     BlockPos pos = hitData.getPos();
-    TileEntity tileEntity = world.getTileEntity(pos);
-    if (!isLookingAtProvider(state.getBlock(), tileEntity)) {
+    var tile = TileUtils.getTile(world, pos);
+    if (!isLookingAtProvider(state.getBlock(), tile)) {
       return false;
     }
 
     NBTTagCompound nbt = new NBTTagCompound();
-    if (tileEntity != null) {
-      nbt = tileEntity.writeToNBT(nbt);
+    if (tile != null) {
+      nbt = tile.writeToNBT(nbt);
     }
 
     ItemStack stack = internal.overrideIcon() ? internal.getIcon(world, pos, nbt) : ItemStack.EMPTY;
@@ -86,16 +87,16 @@ public class TOPBlockInterface implements IProbeInfoProvider, IBlockDisplayOverr
     String title = internal.overrideTitle() ? internal.getTitle(world, pos, nbt) : "";
     if (title.isEmpty()) {
       info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-              .item(stack)
-              .vertical()
-              .itemLabel(stack)
-              .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
+          .item(stack)
+          .vertical()
+          .itemLabel(stack)
+          .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
     } else {
       info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-              .item(stack)
-              .vertical()
-              .text(TextStyleClass.NAME + title)
-              .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
+          .item(stack)
+          .vertical()
+          .text(TextStyleClass.NAME + title)
+          .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
     }
     return true;
   }

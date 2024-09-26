@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.layer.datalayers.ph;
 
-import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerBase;
-
 import net.minecraft.world.gen.layer.IntCache;
+
+import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerBase;
 
 public class GenLayerPHInit extends GenLayerBase {
 

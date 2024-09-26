@@ -19,7 +19,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import lombok.Getter;
 
 import java.util.Random;
@@ -36,8 +35,8 @@ public abstract class BaseBlockWall extends BlockWall implements IBlockSettings 
     super(modelBlock);
 
     this.settings = Settings
-            .copy(modelBlock)
-            .ignoresProperties(VARIANT);
+      .copy(modelBlock)
+      .ignoresProperties(VARIANT);
 
     this.modelBlock = modelBlock;
     this.modelState = modelBlock.getDefaultState();

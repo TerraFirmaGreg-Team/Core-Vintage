@@ -12,7 +12,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
@@ -28,14 +27,14 @@ public class AgedRegistry {
   private static final ResourceLocation STILL = new ResourceLocation(MODID_TFC, "blocks/fluid_still");
   private static final ResourceLocation FLOW = new ResourceLocation(MODID_TFC, "blocks/fluid_flow");
   public static Fluid
-          RUM,
-          BEER,
-          WHISKEY,
-          CORN_WHISKEY,
-          RYE_WHISKEY,
-          VODKA,
-          CIDER,
-          SAKE;
+    RUM,
+    BEER,
+    WHISKEY,
+    CORN_WHISKEY,
+    RYE_WHISKEY,
+    VODKA,
+    CIDER,
+    SAKE;
 
   public static void registerAgedDrinks(RegistryEvent.Register<BarrelRecipe> event) {
     RUM = createAgedDrink("rum", MobEffects.JUMP_BOOST, AgedDrinksConfig.General.jumpBoostTicks, AgedDrinksConfig.General.jumpBoostLevel);
@@ -86,11 +85,11 @@ public class AgedRegistry {
   public static BarrelRecipe getRecipeFor(String name) {
     int len = 8 * 24000 * 3;
     BarrelRecipe br = new BarrelRecipe(
-            IIngredient.of(FluidRegistry.getFluid(name), 1000),
-            IIngredient.of(Items.AIR),
-            new FluidStack(FluidRegistry.getFluid("aged_" + name), 1000),
-            new ItemStack(Items.AIR),
-            len
+      IIngredient.of(FluidRegistry.getFluid(name), 1000),
+      IIngredient.of(Items.AIR),
+      new FluidStack(FluidRegistry.getFluid("aged_" + name), 1000),
+      new ItemStack(Items.AIR),
+      len
     );
     br.setRegistryName("aged_" + name);
     return br;

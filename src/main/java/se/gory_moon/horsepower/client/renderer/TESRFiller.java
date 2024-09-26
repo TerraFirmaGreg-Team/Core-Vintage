@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 
-
 import se.gory_moon.horsepower.tileentity.TileFiller;
 
 public class TESRFiller extends TileEntitySpecialRenderer<TileFiller> {
@@ -21,7 +20,7 @@ public class TESRFiller extends TileEntitySpecialRenderer<TileFiller> {
     ITextComponent itextcomponent = tile.getDisplayName();
 
     if (itextcomponent != null && this.rendererDispatcher.cameraHitResult != null && tile.getPos()
-            .equals(this.rendererDispatcher.cameraHitResult.getBlockPos())) {
+                                                                                         .equals(this.rendererDispatcher.cameraHitResult.getBlockPos())) {
       this.setLightmapDisabled(true);
       this.drawCustomNameplate(tile, itextcomponent.getFormattedText(), x, y, z, 12, 0);
       this.drawCustomNameplate(tile, TESRHPBase.LEAD_LOOKUP.getFormattedText(), x, y, z, 12, -0.25F);
@@ -37,7 +36,7 @@ public class TESRFiller extends TileEntitySpecialRenderer<TileFiller> {
       float f = this.rendererDispatcher.entityYaw;
       float f1 = this.rendererDispatcher.entityPitch;
       EntityRenderer.drawNameplate(this.getFontRenderer(), str, (float) x + 0.5F, (float) y + 1.5F + offset, (float) z + 0.5F, 0, f, f1, false,
-              false);
+                                   false);
     }
   }
 }

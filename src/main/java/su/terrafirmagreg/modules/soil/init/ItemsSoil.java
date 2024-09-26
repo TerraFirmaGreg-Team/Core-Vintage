@@ -17,23 +17,23 @@ public final class ItemsSoil {
   public static void onRegister(RegistryManager registry) {
 
     PILE = SoilItemVariant
-            .builder("pile")
-            .factory(ItemSoilPile::new)
-            .build(registry);
+      .builder("pile")
+      .factory(ItemSoilPile::new)
+      .build(registry);
 
     MUD_BALL = SoilItemVariant
-            .builder("mud_ball")
-            .factory(ItemSoilMud::new)
-            .build(registry);
+      .builder("mud_ball")
+      .factory(ItemSoilMud::new)
+      .build(registry);
 
     MUD_BRICK = SoilItemVariant
-            .builder("mud_brick")
-            .factory(ItemSoilMudBrick::new)
-            .build(registry);
+      .builder("mud_brick")
+      .factory(ItemSoilMudBrick::new)
+      .build(registry);
 
     MUD_BRICK_WET = SoilItemVariant
-            .builder("mud_brick_wet")
-            .factory(ItemSoilMudWetBrick::new)
-            .build(registry);
+      .builder("mud_brick_wet")
+      .factory(ItemSoilMudWetBrick::new)
+      .build(registry);
   }
 }

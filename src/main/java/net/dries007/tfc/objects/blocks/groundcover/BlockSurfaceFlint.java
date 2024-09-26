@@ -30,7 +30,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import tfcflorae.client.GuiHandler;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -40,7 +39,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 public class BlockSurfaceFlint
-        extends BlockBush {
+  extends BlockBush {
 
   private static final AxisAlignedBB AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.9, 0.4, 0.9);
 
@@ -115,8 +114,8 @@ public class BlockSurfaceFlint
 
   @Override
   public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition,
-          IBlockState iblockstate,
-          EntityLivingBase entity, int numberOfParticles) {
+                                   IBlockState iblockstate,
+                                   EntityLivingBase entity, int numberOfParticles) {
     return true;
   }
 
@@ -128,7 +127,7 @@ public class BlockSurfaceFlint
   @SideOnly(Side.CLIENT)
   @Override
   public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target,
-          ParticleManager manager) {
+                               ParticleManager manager) {
     return true;
   }
 
@@ -141,10 +140,10 @@ public class BlockSurfaceFlint
   @Override
   @SuppressWarnings("deprecation")
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
     if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP) && !(worldIn.getBlockState(pos.down())
-            .getBlock() instanceof BlockSoilFarmland)) {
+                                                                    .getBlock() instanceof BlockSoilFarmland)) {
       worldIn.setBlockToAir(pos);
     }
   }
@@ -155,7 +154,7 @@ public class BlockSurfaceFlint
 
     if (state.getBlock() == this) {
       return (BlockUtils.isGround(soil) || worldIn.getBlockState(pos.down())
-              .isFullBlock()) && !(BlockUtils.isSaltWater(soil) || BlockUtils.isFreshWater(soil));
+                                                  .isFullBlock()) && !(BlockUtils.isSaltWater(soil) || BlockUtils.isFreshWater(soil));
     }
     return this.canSustainBush(soil);
   }
@@ -171,7 +170,7 @@ public class BlockSurfaceFlint
   @Override
   @SuppressWarnings("deprecation")
   public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-          BlockPos pos) {
+                                               BlockPos pos) {
     return NULL_AABB;
   }
 
@@ -191,13 +190,13 @@ public class BlockSurfaceFlint
   @NotNull
   @SuppressWarnings("deprecation")
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-          EnumFacing face) {
+                                          EnumFacing face) {
     return BlockFaceShape.UNDEFINED;
   }
 
   @NotNull
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player,
-          @NotNull EnumHand hand) {
+                                                  @NotNull EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
     if (!world.isRemote && !player.isSneaking() && stack.getCount() > 0) {
       GuiHandler.openGui(world, player.getPosition(), player, GuiHandler.Type.FLINT);
@@ -209,7 +208,7 @@ public class BlockSurfaceFlint
   public void onRightClick(PlayerInteractEvent.RightClickItem event) {
     EnumHand hand = event.getHand();
     if (OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "flint")
-            && hand == EnumHand.MAIN_HAND) {
+        && hand == EnumHand.MAIN_HAND) {
       EntityPlayer player = event.getEntityPlayer();
       World world = event.getWorld();
       if (!world.isRemote && !player.isSneaking()) {

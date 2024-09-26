@@ -19,7 +19,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
 
-
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 
 public class CommandStripWorld extends BaseCommand {
@@ -36,7 +35,7 @@ public class CommandStripWorld extends BaseCommand {
 
   @Override
   public void execute(MinecraftServer server, ICommandSender sender, String[] args)
-          throws CommandException {
+    throws CommandException {
     if (args.length != 1) {
       throw new WrongUsageException(ModUtils.localize("command", "stripworld.failed"));
     }
@@ -58,10 +57,10 @@ public class CommandStripWorld extends BaseCommand {
           final BlockPos pos = center.add(x, y, z);
           final Block current = world.getBlockState(pos).getBlock();
           if (current instanceof BlockFluidBase || current instanceof BlockDynamicLiquid
-                  || current instanceof BlockStaticLiquid) {
+              || current instanceof BlockStaticLiquid) {
             world.setBlockState(pos, fluidReplacement, 2);
           } else if (current instanceof IRockBlock || current instanceof ISoilBlock
-                  || current instanceof BlockPlantTFC) {
+                     || current instanceof BlockPlantTFC) {
             world.setBlockState(pos, terrainReplacement, 2);
           }
         }
@@ -69,7 +68,7 @@ public class CommandStripWorld extends BaseCommand {
     }
 
     sender.sendMessage(
-            new TextComponentTranslation(ModUtils.localize("command", "stripworld.done")));
+      new TextComponentTranslation(ModUtils.localize("command", "stripworld.done")));
   }
 
   @Override

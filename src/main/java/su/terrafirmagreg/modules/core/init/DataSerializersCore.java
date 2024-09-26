@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.registry.RegistryManager;
 
 import net.minecraftforge.registries.DataSerializerEntry;
 
-
 import static su.terrafirmagreg.api.network.datasync.DataSerializers.LONG;
 
 public final class DataSerializersCore {

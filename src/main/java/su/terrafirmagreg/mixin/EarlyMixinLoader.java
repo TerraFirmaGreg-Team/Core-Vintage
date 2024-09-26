@@ -2,7 +2,6 @@ package su.terrafirmagreg.mixin;
 
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
-
 import zone.rong.mixinbooter.IEarlyMixinLoader;
 
 import org.jetbrains.annotations.Nullable;

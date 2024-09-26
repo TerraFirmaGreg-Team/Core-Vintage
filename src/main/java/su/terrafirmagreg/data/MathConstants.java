@@ -2,7 +2,6 @@ package su.terrafirmagreg.data;
 
 import su.terrafirmagreg.data.lib.ThermiteRandom;
 
-
 import java.util.Random;
 
 @SuppressWarnings({"WeakerAccess", "unused"})

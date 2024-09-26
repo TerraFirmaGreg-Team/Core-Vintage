@@ -20,7 +20,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import com.google.gson.JsonObject;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.glassworking.ItemGlassMolder;

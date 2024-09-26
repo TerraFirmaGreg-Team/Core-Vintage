@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:brick/quartzite"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

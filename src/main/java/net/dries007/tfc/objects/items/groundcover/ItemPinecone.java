@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.item.ItemStack;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.blocks.groundcover.BlockPinecone;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;

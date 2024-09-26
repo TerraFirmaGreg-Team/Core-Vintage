@@ -18,7 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -32,7 +31,7 @@ public class EntityQuailTFC extends EntityChickenTFC implements ILivestock {
 
   public EntityQuailTFC(World worldIn) {
     this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-            getRandomGrowth(ConfigTFC.Animals.QUAIL.adulthood, ConfigTFC.Animals.QUAIL.elder));
+         getRandomGrowth(ConfigTFC.Animals.QUAIL.adulthood, ConfigTFC.Animals.QUAIL.elder));
   }
 
   public EntityQuailTFC(World worldIn, Gender gender, int birthDay) {
@@ -44,7 +43,7 @@ public class EntityQuailTFC extends EntityChickenTFC implements ILivestock {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
+        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
       return ConfigTFC.Animals.QUAIL.rarity;
     }
     return 0;

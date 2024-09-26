@@ -14,7 +14,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.network.PacketGuiButton;
@@ -28,7 +27,7 @@ public class GuiCrate extends BaseGuiContainerTile<TileCrate> {
   private final String translationKey;
 
   public GuiCrate(Container container, InventoryPlayer playerInv, TileCrate tile,
-          IBlockState state) {
+                  IBlockState state) {
     super(container, playerInv, tile, BACKGROUND);
 
     this.translationKey = state.getBlock().getTranslationKey();
@@ -62,7 +61,7 @@ public class GuiCrate extends BaseGuiContainerTile<TileCrate> {
     if (tile.isSealed()) {
       // Draw over the input items, making them look unavailable
       IItemHandler handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-              null);
+                                                null);
       if (handler != null) {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         for (int slotId = 0; slotId < handler.getSlots(); slotId++) {
@@ -73,7 +72,7 @@ public class GuiCrate extends BaseGuiContainerTile<TileCrate> {
 
       // Draw the text displaying both the seal date, and the recipe name
       fontRenderer.drawString(tile.getSealedDate(),
-              xSize / 2 - fontRenderer.getStringWidth(tile.getSealedDate()) / 2, 74, 0x404040);
+                              xSize / 2 - fontRenderer.getStringWidth(tile.getSealedDate()) / 2, 74, 0x404040);
     }
   }
 

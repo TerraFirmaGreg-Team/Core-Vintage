@@ -3,7 +3,6 @@ package se.gory_moon.horsepower.jei.press;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.recipe.IStackHelper;
 import se.gory_moon.horsepower.recipes.HPRecipes;

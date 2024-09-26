@@ -21,7 +21,6 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 import net.dries007.tfc.util.climate.Climate;
@@ -53,7 +52,7 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
 
   @Override
   public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
-          net.minecraftforge.common.IPlantable plantable) {
+                                 net.minecraftforge.common.IPlantable plantable) {
     IBlockState plant = plantable.getPlant(world, pos.offset(direction));
 
     if (plant.getBlock() == this) {
@@ -111,17 +110,17 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
     }
 
     if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
-            plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+        plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
-              net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
+          net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
         if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
           grow(worldIn, rand, pos, state);
         } else if (j < 3) {
           worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod())
-                  .withProperty(AGE, j + 1)
-                  .withProperty(PART, getPlantPart(worldIn, pos)));
+                                          .withProperty(AGE, j + 1)
+                                          .withProperty(PART, getPlantPart(worldIn, pos)));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
@@ -148,9 +147,9 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
   public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
     worldIn.setBlockState(pos.up(), this.getDefaultState());
     IBlockState iblockstate = state.withProperty(DAYPERIOD, getDayPeriod())
-            .withProperty(AGE, 0)
-            .withProperty(growthStageProperty, plant.getStageForMonth())
-            .withProperty(PART, getPlantPart(worldIn, pos));
+                                   .withProperty(AGE, 0)
+                                   .withProperty(growthStageProperty, plant.getStageForMonth())
+                                   .withProperty(PART, getPlantPart(worldIn, pos));
     worldIn.setBlockState(pos, iblockstate);
     iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
   }
@@ -174,10 +173,10 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
       }
 
       return flag &&
-              soil.getBlock()
-                      .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) &&
-              plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
-              plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+             soil.getBlock()
+                 .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) &&
+             plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
+             plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
     return this.canSustainBush(soil);
   }

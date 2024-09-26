@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.world.classic.objects.generator.vein;
 
 import net.minecraft.util.math.BlockPos;
 
-
 import net.dries007.tfc.api.types.Ore;
 
 import java.util.Random;

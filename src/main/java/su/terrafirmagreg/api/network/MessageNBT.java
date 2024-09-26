@@ -6,11 +6,10 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-
 import io.netty.buffer.ByteBuf;
 
 public abstract class MessageNBT<REQ extends MessageNBT> implements IMessage,
-        IMessageHandler<REQ, IMessage> {
+                                                                    IMessageHandler<REQ, IMessage> {
 
   @Override
   public final IMessage onMessage(REQ message, MessageContext context) {

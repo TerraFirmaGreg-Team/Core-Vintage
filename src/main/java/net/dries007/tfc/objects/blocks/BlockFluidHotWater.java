@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 
@@ -35,7 +34,7 @@ public class BlockFluidHotWater extends BlockFluidTFC {
   public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (rand.nextInt(4) == 0) {
       worldIn.spawnParticle(EnumParticleTypes.WATER_BUBBLE, pos.getX() + rand.nextFloat(), pos.getY() + 0.50D, pos.getZ() + rand.nextFloat(),
-              0.0D, 0.0D, 0.0D, Block.getStateId(stateIn));
+                            0.0D, 0.0D, 0.0D, Block.getStateId(stateIn));
     }
     if (worldIn.isAirBlock(pos.up())) {
       // Classic made 4 particles spawn at a time

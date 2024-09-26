@@ -9,14 +9,13 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class RenderSlingStone extends Render<EntitySlingStone> {
 
   private static final ResourceLocation SLING_STONE_TEXTURE = ModUtils.resource(
-          "textures/blocks/rock/raw/dacite.png");
+    "textures/blocks/rock/raw/dacite.png");
   private final ModelSlingStone slingStoneModel = new ModelSlingStone();
 
   public RenderSlingStone(RenderManager renderManager) {
@@ -24,16 +23,16 @@ public class RenderSlingStone extends Render<EntitySlingStone> {
   }
 
   public void doRender(EntitySlingStone entity, double x, double y, double z, float entityYaw,
-          float partialTicks) {
+                       float partialTicks) {
     GlStateManager.pushMatrix();
     GlStateManager.disableCull();
     float f = this.getRenderYaw(entity.prevRotationYaw, entity.rotationYaw, partialTicks);
     float f1 =
-            entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
+      entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
     GlStateManager.translate((float) x, (float) y, (float) z);
     GlStateManager.rotate(
-            entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks
-                    - 90.0F, 0.0F, 1.0F, 0.0F);
+      entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks
+      - 90.0F, 0.0F, 1.0F, 0.0F);
     float f2 = 0.0625F;
     GlStateManager.enableRescaleNormal();
     GlStateManager.scale(-1.0F, -1.0F, 1.0F);

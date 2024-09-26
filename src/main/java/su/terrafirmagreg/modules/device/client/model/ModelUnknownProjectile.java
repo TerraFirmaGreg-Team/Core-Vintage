@@ -4,7 +4,6 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class ModelUnknownProjectile extends ModelBase {
@@ -21,7 +20,7 @@ public class ModelUnknownProjectile extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float f, float f1, float f2, float f3, float f4,
-          float f5) {
+                     float f5) {
     this.shape2.render(f5);
   }
 

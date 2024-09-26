@@ -14,7 +14,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.entity.animal.EntityLionTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -80,7 +79,7 @@ public class ModelLionTFC extends ModelBase {
     tailTip2 = new ModelRenderer(this, 42, 50);
     tailTip2.setRotationPoint(0.0F, -0.9F, 6.2F);
     tailTip2.addBox(-1.0F, 0.13F, 3.63F, 2, 0, 2, 0.0F);
-    setRotation(tailTip2, 0.6981317007977318F, 0.0F, 0.0F);
+    setRotation(tailTip2, ((float)Math.PI * 2F / 9F), 0.0F, 0.0F);
     earFR = new ModelRenderer(this, 71, 70);
     earFR.setRotationPoint(-1.5F, -3.0F, -1.0F);
     earFR.addBox(-2.0F, -3.0F, -2.0F, 3, 3, 1, 0.0F);
@@ -94,7 +93,7 @@ public class ModelLionTFC extends ModelBase {
     tailTip1 = new ModelRenderer(this, 44, 50);
     tailTip1.setRotationPoint(0.0F, -0.9F, 6.2F);
     tailTip1.addBox(0.0F, -0.87F, 3.63F, 0, 2, 2, 0.0F);
-    setRotation(tailTip1, 0.6981317007977318F, 0.0F, 0.0F);
+    setRotation(tailTip1, ((float)Math.PI * 2F / 9F), 0.0F, 0.0F);
     tail = new ModelRenderer(this, 38, 60);
     tail.setRotationPoint(0.0F, 8.0F, 10.0F);
     tail.addBox(-0.5F, -1.0F, 0.0F, 1, 1, 6, 0.0F);
@@ -105,7 +104,7 @@ public class ModelLionTFC extends ModelBase {
     tail1 = new ModelRenderer(this, 39, 54);
     tail1.setRotationPoint(0.0F, -0.7F, 5.9F);
     tail1.addBox(-0.5F, -0.37F, -0.37F, 1, 1, 5, 0.0F);
-    setRotation(tail1, 0.6981317007977318F, 0.0F, 0.0F);
+    setRotation(tail1, ((float)Math.PI * 2F / 9F), 0.0F, 0.0F);
     earML = new ModelRenderer(this, 46, 70);
     earML.setRotationPoint(2.0F, -2.0F, -1.0F);
     earML.addBox(-1.0F, -4.0F, -2.0F, 3, 3, 1, 0.0F);

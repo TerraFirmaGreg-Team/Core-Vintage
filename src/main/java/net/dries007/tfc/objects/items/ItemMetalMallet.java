@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
@@ -29,7 +30,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
 
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.init.FoodFL;
@@ -77,11 +77,11 @@ public class ItemMetalMallet extends ItemTFC implements ICapabilityMetal {
   @NotNull
   @SuppressWarnings("deprecation")
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                    float hitZ) {
     if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
       Block block = worldIn.getBlockState(pos).getBlock();
       if (block instanceof BlockPlacedItemFlat) {
-        TEPlacedItemFlat tile = (TEPlacedItemFlat) worldIn.getTileEntity(pos);
+        TEPlacedItemFlat tile = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
         if (tile == null) {
           return EnumActionResult.FAIL;
         }
@@ -176,10 +176,10 @@ public class ItemMetalMallet extends ItemTFC implements ICapabilityMetal {
               int dropCount = Math.min(RNG.nextInt(4) + 1, leafCount);
               BlockPos dropPos = logPos.offset(EnumFacing.random(RNG), RNG.nextInt(3) + 1);
               StackUtils.spawnItemStack(worldIn, dropPos, new ItemStack(entry.getNut()
-                      .getItem(), RNG.nextInt(dropCount)));//should be querying nut
+                                                                             .getItem(), RNG.nextInt(dropCount)));//should be querying nut
               TFCParticles.LEAF1.sendToAllNear(worldIn, dropPos.getX() + RNG.nextFloat() / 10, dropPos.getY() - RNG.nextFloat() / 10,
-                      dropPos.getZ() + RNG.nextFloat() / 10, (RNG.nextFloat() - 0.5) / 10, -0.15D + RNG.nextFloat() / 10,
-                      (RNG.nextFloat() - 0.5) / 10, 90);
+                                               dropPos.getZ() + RNG.nextFloat() / 10, (RNG.nextFloat() - 0.5) / 10, -0.15D + RNG.nextFloat() / 10,
+                                               (RNG.nextFloat() - 0.5) / 10, 90);
               leafCount -= dropCount;
             }
             worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 3.0F, 1.0F);
@@ -206,9 +206,9 @@ public class ItemMetalMallet extends ItemTFC implements ICapabilityMetal {
     Multimap<String, AttributeModifier> multimap = HashMultimap.create();
     if (slot == EntityEquipmentSlot.MAINHAND) {
       multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-              new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage, 0));
+                   new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage, 0));
       multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
-              new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", this.attackSpeed, 0));
+                   new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", this.attackSpeed, 0));
     }
 
     return multimap;

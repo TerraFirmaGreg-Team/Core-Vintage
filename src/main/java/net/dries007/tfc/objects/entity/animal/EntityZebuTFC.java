@@ -16,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -28,7 +27,7 @@ public class EntityZebuTFC extends EntityCowTFC implements ILivestock {
   @SuppressWarnings("unused")
   public EntityZebuTFC(World worldIn) {
     this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-            getRandomGrowth(ConfigTFC.Animals.ZEBU.adulthood, ConfigTFC.Animals.ZEBU.elder));
+         getRandomGrowth(ConfigTFC.Animals.ZEBU.adulthood, ConfigTFC.Animals.ZEBU.elder));
   }
 
   public EntityZebuTFC(World worldIn, Gender gender, int birthDay) {
@@ -40,7 +39,7 @@ public class EntityZebuTFC extends EntityCowTFC implements ILivestock {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
+        (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
       return ConfigTFC.Animals.ZEBU.rarity;
     }
     return 0;
@@ -56,7 +55,7 @@ public class EntityZebuTFC extends EntityCowTFC implements ILivestock {
     int numberOfChildren = ConfigTFC.Animals.ZEBU.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityZebuTFC baby = new EntityZebuTFC(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                             (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
       this.world.spawnEntity(baby);

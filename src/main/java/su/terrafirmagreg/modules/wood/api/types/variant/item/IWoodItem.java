@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.color.IItemColor;
  * Интерфейс ICropItem представляет деревянный предмет.
  */
 public interface IWoodItem extends IType<WoodType>, IVariant<WoodItemVariant>,
-        IItemSettings, IProviderItemColor {
+                                   IItemSettings, IProviderItemColor {
 
   @Override
   default IItemColor getItemColor() {

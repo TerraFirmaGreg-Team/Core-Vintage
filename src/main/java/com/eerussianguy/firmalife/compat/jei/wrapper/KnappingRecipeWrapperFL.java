@@ -2,7 +2,6 @@ package com.eerussianguy.firmalife.compat.jei.wrapper;
 
 import net.minecraft.util.ResourceLocation;
 
-
 import com.google.common.collect.Maps;
 import mezz.jei.api.IGuiHelper;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;

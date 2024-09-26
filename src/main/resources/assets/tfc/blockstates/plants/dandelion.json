@@ -8,14 +8,12 @@
         {
           "model": "tfc:plants/dandelion_0",
           "weight": 5
-        },
-        {
+        }, {
           "model": "tfc:plants/dandelion_1",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },
@@ -23,14 +21,12 @@
         {
           "model": "tfc:plants/dandelion_1",
           "weight": 5
-        },
-        {
+        }, {
           "model": "tfc:plants/dandelion_2",
           "weight": 3
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "2"
       },
@@ -38,14 +34,12 @@
         {
           "model": "tfc:plants/dandelion_2",
           "weight": 5
-        },
-        {
+        }, {
           "model": "tfc:plants/dandelion_3",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "3"
       },
@@ -53,14 +47,12 @@
         {
           "model": "tfc:plants/dandelion_2",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/dandelion_3",
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "4"
       },
@@ -68,14 +60,12 @@
         {
           "model": "tfc:plants/dandelion_1",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/dandelion_3",
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "5"
       },
@@ -83,14 +73,12 @@
         {
           "model": "tfc:plants/dandelion_1",
           "weight": 5
-        },
-        {
+        }, {
           "model": "tfc:plants/dandelion_3",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "6"
       },
@@ -98,14 +86,12 @@
         {
           "model": "tfc:plants/dandelion_1",
           "weight": 5
-        },
-        {
+        }, {
           "model": "tfc:plants/dandelion_2",
           "weight": 3
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "7"
       },
@@ -113,14 +99,12 @@
         {
           "model": "tfc:plants/dandelion_2",
           "weight": 5
-        },
-        {
+        }, {
           "model": "tfc:plants/dandelion_3",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "8"
       },
@@ -128,14 +112,12 @@
         {
           "model": "tfc:plants/dandelion_1",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/dandelion_3",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "9"
       },

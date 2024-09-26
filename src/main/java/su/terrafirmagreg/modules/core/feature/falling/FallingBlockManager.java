@@ -20,7 +20,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -47,11 +46,11 @@ import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS_PATH;
 public class FallingBlockManager {
 
   private static final Set<Material> SOFT_MATERIALS = new ObjectOpenHashSet<>(
-          new Material[]{Material.GROUND, Material.SAND, Material.GRASS, Material.CLAY}
+    new Material[]{Material.GROUND, Material.SAND, Material.GRASS, Material.CLAY}
   );
 
   private static final Set<Material> HARD_MATERIALS = new ObjectOpenHashSet<>(
-          new Material[]{Material.IRON, BlockCharcoalPile.CHARCOAL_MATERIAL}
+    new Material[]{Material.IRON, BlockCharcoalPile.CHARCOAL_MATERIAL}
   );
 
   private static final Map<IBlockState, Specification> FALLABLES = new Object2ObjectOpenHashMap<>();
@@ -125,8 +124,8 @@ public class FallingBlockManager {
       return true;
     }
     if ((SOFT_MATERIALS.contains(fallableMaterial) && HARD_MATERIALS.contains(
-            targetState.getMaterial())) ||
-            targetState.getBlockHardness(world, pos) == -1.0F) {
+      targetState.getMaterial())) ||
+        targetState.getBlockHardness(world, pos) == -1.0F) {
       return false;
     }
     if (!world.isSideSolid(pos, EnumFacing.UP)) {
@@ -140,10 +139,10 @@ public class FallingBlockManager {
   }
 
   public static boolean shouldFall(World world, BlockPos posToFallFrom, BlockPos originalPos, IBlockState originalState,
-          boolean ignoreSupportChecks) {
+                                   boolean ignoreSupportChecks) {
     return ConfigTFC.General.FALLABLE.enable && canFallThrough(world, posToFallFrom.down(),
-            originalState.getMaterial()) &&
-            (ignoreSupportChecks || !BlockWoodSupport.isBeingSupported(world, originalPos));
+                                                               originalState.getMaterial()) &&
+           (ignoreSupportChecks || !BlockWoodSupport.isBeingSupported(world, originalPos));
   }
 
   public static boolean canCollapse(World world, BlockPos pos) {
@@ -160,7 +159,7 @@ public class FallingBlockManager {
 
   @Nullable
   public static BlockPos getFallablePos(World world, BlockPos pos, IBlockState state,
-          boolean ignoreSupportChecks) {
+                                        boolean ignoreSupportChecks) {
     Specification specification = FALLABLES.get(state);
 
     if (specification == null) {
@@ -190,13 +189,13 @@ public class FallingBlockManager {
           hasFoundSideSupport = true;
         }
         if (shouldFall(world, offsetPos, pos, state, ignoreSupportChecks) &&
-                canFallThrough(world, offsetPos, state.getMaterial(), offsetState)) {
+            canFallThrough(world, offsetPos, state.getMaterial(), offsetState)) {
           candidates.add(offsetPos);
         }
       }
 
       return candidates.isEmpty() ? null
-              : checkAreaClear(world, state, candidates.get(RNG.nextInt(candidates.size())));
+                                  : checkAreaClear(world, state, candidates.get(RNG.nextInt(candidates.size())));
     }
 
     return null;
@@ -215,7 +214,7 @@ public class FallingBlockManager {
    * @return true if this block has fallen, false otherwise
    */
   public static boolean checkFalling(World world, BlockPos pos, IBlockState state,
-          boolean ignoreSupportChecks) {
+                                     boolean ignoreSupportChecks) {
     // Check for loaded area to fix stack overflow crash from endless falling / liquid block updates
     if (BlockFalling.fallInstantly) {
       if (!world.isAreaLoaded(pos.add(-2, -2, -2), pos.add(2, 2, 2))) {
@@ -269,22 +268,22 @@ public class FallingBlockManager {
       return false; // First, let's check if this area is loaded and is on server
     }
     if (RNG.nextDouble()
-            < ConfigTFC.General.FALLABLE.collapseChance) // Then, we check rng if a collapse should trigger
+        < ConfigTFC.General.FALLABLE.collapseChance) // Then, we check rng if a collapse should trigger
     {
       //Rng the radius
       int radX = (RNG.nextInt(5) + 4) / 2;
       int radY = (RNG.nextInt(3) + 2) / 2;
       int radZ = (RNG.nextInt(5) + 4) / 2;
       for (BlockPos checking : BlockWoodSupport.getAllUnsupportedBlocksIn(world,
-              pos.add(-radX, -radY, -radZ),
-              pos.add(radX, radY, radZ))) //9x5x9 max
+                                                                          pos.add(-radX, -radY, -radZ),
+                                                                          pos.add(radX, radY, radZ))) //9x5x9 max
       {
         // Check the area for a block collapse!
         IBlockState state = world.getBlockState(checking);
         Specification spec = getSpecification(state);
         if (spec != null && spec.collapsable) {
           if (spec.collapseChecker.canCollapse(world,
-                  checking)) // Still needs this to check if this can collapse without support (ie: no blocks below)
+                                               checking)) // Still needs this to check if this can collapse without support (ie: no blocks below)
           {
             collapseArea(world, checking);
             world.playSound(null, pos, TFCSounds.ROCK_SLIDE_LONG, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -308,18 +307,18 @@ public class FallingBlockManager {
     List<BlockPos> secondaryPositions = new ArrayList<>();
     // Initially only scan on the bottom layer, and advance upwards
     for (BlockPos pos : BlockPos.getAllInBoxMutable(centerPoint.add(-radius, -4, -radius),
-            centerPoint.add(radius, -4, radius))) {
+                                                    centerPoint.add(radius, -4, radius))) {
       boolean foundEmpty = false; // If we've found a space to collapse into
       for (int y = 0; y <= 8; y++) {
         BlockPos posAt = pos.up(y);
         IBlockState stateAt = world.getBlockState(posAt);
         Specification specAt;
         if (foundEmpty && (specAt = getSpecification(stateAt)) != null && specAt.collapsable &&
-                specAt.collapseChecker.canCollapse(world, posAt) && !BlockWoodSupport.isBeingSupported(
-                world, posAt)) {
+            specAt.collapseChecker.canCollapse(world, posAt) && !BlockWoodSupport.isBeingSupported(
+          world, posAt)) {
           // Check for a possible collapse
           if (posAt.distanceSq(centerPoint) < radiusSquared &&
-                  world.rand.nextFloat() < ConfigTFC.General.FALLABLE.propagateCollapseChance) {
+              world.rand.nextFloat() < ConfigTFC.General.FALLABLE.propagateCollapseChance) {
             // This column has started to collapse. Mark the next block above as unstable for the "follow up"
             IBlockState resultState = specAt.getResultingState(stateAt);
             world.setBlockState(posAt, resultState);
@@ -356,14 +355,14 @@ public class FallingBlockManager {
   public static class Specification {
 
     public static final IFallDropsProvider DEFAULT_DROPS_PROVIDER = (world, pos, state, teData, fallTime, fallDistance) -> Collections.singletonList(
-            new ItemStack(state.getBlock(), 1, state
-                    .getBlock()
-                    .damageDropped(state)));
+      new ItemStack(state.getBlock(), 1, state
+        .getBlock()
+        .damageDropped(state)));
 
     public static final ICollapseChecker DEFAULT_COLLAPSE_CHECKER = (world, collapsePos) -> world
-            .getBlockState(collapsePos.down())
-            .getMaterial()
-            .isReplaceable();
+      .getBlockState(collapsePos.down())
+      .getMaterial()
+      .isReplaceable();
 
     public static final Specification VERTICAL_AND_HORIZONTAL = new Specification(true, () -> TFCSounds.DIRT_SLIDE_SHORT);
     public static final Specification VERTICAL_AND_HORIZONTAL_ROCK = new Specification(true, () -> TFCSounds.ROCK_SLIDE_SHORT);
@@ -406,8 +405,8 @@ public class FallingBlockManager {
     }
 
     public Specification(boolean canFallHorizontally, boolean collapsable,
-            Supplier<SoundEvent> soundEventDelegate,
-            IFallDropsProvider fallDropsProvider) {
+                         Supplier<SoundEvent> soundEventDelegate,
+                         IFallDropsProvider fallDropsProvider) {
       this.canFallHorizontally = canFallHorizontally;
       this.collapsable = collapsable;
       if (this.collapsable) {
@@ -418,7 +417,7 @@ public class FallingBlockManager {
     }
 
     public Specification(boolean canFallHorizontally, boolean collapsable,
-            Supplier<SoundEvent> soundEventDelegate) {
+                         Supplier<SoundEvent> soundEventDelegate) {
       this(canFallHorizontally, collapsable, soundEventDelegate, DEFAULT_DROPS_PROVIDER);
 
     }
@@ -447,8 +446,8 @@ public class FallingBlockManager {
     }
 
     public Iterable<ItemStack> getDrops(World world, BlockPos pos, IBlockState state,
-            @Nullable NBTTagCompound teData, int fallTime,
-            float fallDistance) {
+                                        @Nullable NBTTagCompound teData, int fallTime,
+                                        float fallDistance) {
       return fallDropsProvider.getDropsFromFall(world, pos, state, teData, fallTime, fallDistance);
     }
 
@@ -473,8 +472,8 @@ public class FallingBlockManager {
     public interface IFallDropsProvider {
 
       Iterable<ItemStack> getDropsFromFall(World world, BlockPos pos, IBlockState state,
-              @Nullable NBTTagCompound teData, int fallTime,
-              float fallDistance);
+                                           @Nullable NBTTagCompound teData, int fallTime,
+                                           float fallDistance);
     }
 
     @FunctionalInterface

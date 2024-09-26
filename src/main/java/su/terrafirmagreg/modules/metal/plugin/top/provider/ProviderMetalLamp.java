@@ -16,7 +16,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -27,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProviderMetalLamp
-        implements IProbeInfoProvider {
+  implements IProbeInfoProvider {
 
   @Override
   public String getID() {
@@ -36,7 +35,7 @@ public class ProviderMetalLamp
 
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
-          IBlockState state, IProbeHitData hitData) {
+                           IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
 
@@ -52,17 +51,17 @@ public class ProviderMetalLamp
       nbt = tile.writeToNBT(nbt);
 
       IFluidHandler fluidHandler = tile.getCapability(
-              CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
       FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
       if (fluid != null && fluid.amount > 0) {
         currentTooltip.add(
-                new TextComponentTranslation(ModUtils.localize("top", "barrel.contents"), fluid.amount,
-                        fluid.getLocalizedName()).getFormattedText());
+          new TextComponentTranslation(ModUtils.localize("top", "barrel.contents"), fluid.amount,
+                                       fluid.getLocalizedName()).getFormattedText());
       }
 
       for (String string : currentTooltip) {
         info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                .text(string);
+            .text(string);
       }
     }
 

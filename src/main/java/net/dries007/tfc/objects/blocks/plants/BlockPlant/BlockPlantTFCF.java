@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants.BlockPlant;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -29,17 +30,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
-
 import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
@@ -109,7 +104,7 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
   @NotNull
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     return state.withProperty(DAYPERIOD, getDayPeriod())
-            .withProperty(growthStageProperty, plant.getStageForMonth());
+                .withProperty(growthStageProperty, plant.getStageForMonth());
   }
 
   @Override
@@ -130,11 +125,11 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
 
     if (currentTime != expectedTime) {
       worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, expectedTime)
-              .withProperty(growthStageProperty, currentStage));
+                                      .withProperty(growthStageProperty, currentStage));
     }
     if (currentStage != expectedStage && random.nextDouble() < 0.5) {
       worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, expectedTime)
-              .withProperty(growthStageProperty, expectedStage));
+                                      .withProperty(growthStageProperty, expectedStage));
     }
 
     this.updateTick(worldIn, pos, state, random);
@@ -148,7 +143,7 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
   @Override
   public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
     world.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod())
-            .withProperty(growthStageProperty, plant.getStageForMonth()));
+                                  .withProperty(growthStageProperty, plant.getStageForMonth()));
     checkAndDropBlock(world, pos, state);
   }
 
@@ -178,9 +173,11 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
   @Override
   public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
     if (!plant.getOreDictName().isPresent() && !worldIn.isRemote && (stack.getItem()
-            .getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-            .getHarvestLevel(stack, "scythe", player, state) != -1) && plant.getPlantType() != Plant.PlantType.SHORT_GRASS &&
-            plant.getPlantType() != Plant.PlantType.TALL_GRASS) {
+                                                                          .getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
+                                                                                                                                        .getHarvestLevel(stack, "scythe", player, state)
+                                                                                                                                   != -1)
+        && plant.getPlantType() != Plant.PlantType.SHORT_GRASS &&
+        plant.getPlantType() != Plant.PlantType.TALL_GRASS) {
       spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
     }
     super.harvestBlock(worldIn, player, pos, state, te, stack);
@@ -219,7 +216,7 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
             /*case SHORT_GRASS:
             case TALL_GRASS:*/
         return (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-                .getHarvestLevel(stack, "scythe", player, state) != -1);
+                                                                                             .getHarvestLevel(stack, "scythe", player, state) != -1);
       default:
         return true;
     }
@@ -228,16 +225,16 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
   private boolean isValidSoil(IBlockState state) {
     return switch (plant.getPlantType()) {
       case CACTUS, DESERT, DESERT_TALL_PLANT ->
-              BlockUtils.isSand(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+        BlockUtils.isSand(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
       case DRY, DRY_TALL_PLANT -> BlockUtils.isSand(state) || BlockUtils.isDryGrass(state) ||
-              state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+                                  state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
       case REED, REED_SEA, TALL_REED, TALL_REED_SEA -> BlockUtils.isSand(state) || BlockUtils.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY ||
-              state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+                                                       state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
       case WATER, TALL_WATER, EMERGENT_TALL_WATER, WATER_SEA, TALL_WATER_SEA, EMERGENT_TALL_WATER_SEA, CREEPING, HANGING ->
-              BlockUtils.isSand(state) || BlockUtils.isSoilOrGravel(state) || BlockUtils.isSoil(state) || BlockUtils.isGround(state) ||
-                      state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+        BlockUtils.isSand(state) || BlockUtils.isSoilOrGravel(state) || BlockUtils.isSoil(state) || BlockUtils.isGround(state) ||
+        state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
       default -> BlockUtils.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY ||
-              state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+                 state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
     };
   }
 
@@ -272,7 +269,7 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
     IBlockState soil = worldIn.getBlockState(pos.down());
     Block blockAt = worldIn.getBlockState(pos).getBlock();
     return blockAt.isReplaceable(worldIn, pos) && blockAt != this && soil.getBlock()
-            .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
+                                                                         .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
   }
 
   @Override
@@ -291,7 +288,7 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
     }
 
     if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
-            plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+        plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
@@ -301,7 +298,7 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
-            !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+               !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -320,8 +317,8 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
     IBlockState soil = worldIn.getBlockState(pos.down());
     if (state.getBlock() == this) {
       return soil.getBlock()
-              .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) &&
-              plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+                 .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) &&
+             plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
     return this.canSustainBush(soil);
   }

@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.object.container.ContainerBaseKnapping;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 
-
 import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 
 public class ContainerKnappingRock extends ContainerBaseKnapping {

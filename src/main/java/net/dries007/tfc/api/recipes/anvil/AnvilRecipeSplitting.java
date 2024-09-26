@@ -4,7 +4,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
-
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
@@ -15,8 +14,8 @@ import net.dries007.tfc.util.forge.ForgeRule;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * This is an anvil recipe that will split an {@link IForgeableMeasurableMetal} into a specific "chunk" size Used by blooms to split a 560 -> 5x 100 blooms and 1x 60
- * bloom for example
+ * This is an anvil recipe that will split an {@link IForgeableMeasurableMetal} into a specific "chunk" size Used by blooms to split a 560 -> 5x 100 blooms and
+ * 1x 60 bloom for example
  */
 
 public class AnvilRecipeSplitting extends AnvilRecipeMeasurable {
@@ -24,7 +23,7 @@ public class AnvilRecipeSplitting extends AnvilRecipeMeasurable {
   protected int splitAmount;
 
   public AnvilRecipeSplitting(ResourceLocation name, IIngredient<ItemStack> input, ItemStack icon, int splitAmount, Metal.Tier minTier,
-          ForgeRule... rules) throws IllegalArgumentException {
+                              ForgeRule... rules) throws IllegalArgumentException {
     //output only for icon
     super(name, input, icon, minTier, rules);
     this.splitAmount = splitAmount;

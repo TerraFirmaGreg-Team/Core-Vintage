@@ -8,8 +8,8 @@ import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIWander;
 
 /**
- * Extends vanilla AI to add a bit more in-depth to predators Additions: - Day / Night hunting behaviors (Attack on one and only when provoked otherwise) - Attack
- * Reach - Hunting Area via {@link EntityCreature#setHomePosAndDistance}
+ * Extends vanilla AI to add a bit more in-depth to predators Additions: - Day / Night hunting behaviors (Attack on one and only when provoked otherwise) -
+ * Attack Reach - Hunting Area via {@link EntityCreature#setHomePosAndDistance}
  */
 public class EntityAnimalAIAttackMelee<T extends EntityCreature & IAnimal> extends EntityAIAttackMelee {
 
@@ -23,7 +23,7 @@ public class EntityAnimalAIAttackMelee<T extends EntityCreature & IAnimal> exten
   }
 
   public EntityAnimalAIAttackMelee(T creature, double speed, double attackReach,
-          AttackBehavior attackBehavior) {
+                                   AttackBehavior attackBehavior) {
     super(creature, speed, true);
     this.attackBehavior = attackBehavior;
     this.attackReach = attackReach;
@@ -31,8 +31,8 @@ public class EntityAnimalAIAttackMelee<T extends EntityCreature & IAnimal> exten
   }
 
   /**
-   * Sets a wander AI to immediately move this AI to inside it's hunting area after it stops hunting a creature (This is to make it not weird- The creature stopped in
-   * its tracks and is just looking at your face)
+   * Sets a wander AI to immediately move this AI to inside it's hunting area after it stops hunting a creature (This is to make it not weird- The creature
+   * stopped in its tracks and is just looking at your face)
    *
    * @param wander the Wander AI
    * @return this object for convenience, to be used in the initialization process of creatures
@@ -52,12 +52,12 @@ public class EntityAnimalAIAttackMelee<T extends EntityCreature & IAnimal> exten
       if (attackBehavior == AttackBehavior.DAYLIGHT_ONLY && !this.attacker.world.isDaytime()) {
         return false;
       } else if (attackBehavior == AttackBehavior.NIGHTTIME_ONLY
-              && this.attacker.world.isDaytime()) {
+                 && this.attacker.world.isDaytime()) {
         return false;
       }
     }
     if (((IAnimal) this.attacker).getAge() != IAnimal.Age.CHILD
-            || this.attacker.getRevengeTarget() != null) {
+        || this.attacker.getRevengeTarget() != null) {
       if (this.attacker.getRevengeTarget() != null) {
         // Updates hunting area, avoiding exploit (hit & run outside of it's reach (resetting aggro), get back and hit again)
         this.attacker.setHomePosAndDistance(this.attacker.getPosition(), 80);
@@ -69,14 +69,14 @@ public class EntityAnimalAIAttackMelee<T extends EntityCreature & IAnimal> exten
       } else if (!target.isEntityAlive()) {
         return false;
       } else if (this.attacker.isWithinHomeDistanceFromPosition(
-              target.getPosition())) // If target is inside the hunter's area
+        target.getPosition())) // If target is inside the hunter's area
       {
         if (this.attacker.getNavigator().getPathToEntityLiving(target) != null) {
           return true;
         } else {
           return this.getAttackReachSqr(target) >=
-                  this.attacker.getDistanceSq(target.posX, target.getEntityBoundingBox().minY,
-                          target.posZ);
+                 this.attacker.getDistanceSq(target.posX, target.getEntityBoundingBox().minY,
+                                             target.posZ);
         }
       }
     }

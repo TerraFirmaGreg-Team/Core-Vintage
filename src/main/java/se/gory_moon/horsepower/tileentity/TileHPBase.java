@@ -1,20 +1,18 @@
 package se.gory_moon.horsepower.tileentity;
 
-import net.minecraft.block.state.IBlockState;
+import su.terrafirmagreg.api.base.tile.BaseTile;
+import su.terrafirmagreg.api.util.BlockUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -22,17 +20,18 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.items.wrapper.RangedWrapper;
 
-
 import se.gory_moon.horsepower.recipes.HPRecipeBase;
 
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
 import lombok.Setter;
 
-public abstract class TileHPBase extends TileEntity {
+public abstract class TileHPBase extends BaseTile {
 
   private final IItemHandler handlerBottom;
   protected NonNullList<ItemStack> itemStacks = NonNullList.withSize(3, ItemStack.EMPTY);
+  @Getter
   protected IHPInventory inventory;
   @Setter
   private EnumFacing forward = null;
@@ -101,8 +100,7 @@ public abstract class TileHPBase extends TileEntity {
       @Override
       public boolean isUsableByPlayer(EntityPlayer player) {
         return getWorld().getTileEntity(getPos()) == TileHPBase.this &&
-                player.getDistanceSq((double) getPos().getX() + 0.5D, (double) getPos().getY() + 0.5D, (double) getPos().getZ() + 0.5D) <=
-                        64.0D;
+               player.getDistanceSq((double) getPos().getX() + 0.5D, (double) getPos().getY() + 0.5D, (double) getPos().getZ() + 0.5D) <= 64.0D;
       }
 
       @Override
@@ -171,6 +169,11 @@ public abstract class TileHPBase extends TileEntity {
     handlerNull = new InvWrapper(inventory);
   }
 
+  public static boolean canCombine(ItemStack stack1, ItemStack stack2) {
+    return stack1.getItem() == stack2.getItem() && (stack1.getMetadata() == stack2.getMetadata() &&
+                                                    (stack1.getCount() <= stack1.getMaxStackSize() && ItemStack.areItemStackTagsEqual(stack1, stack2)));
+  }
+
   public void setInventorySlotContents(int index, ItemStack stack) {
     inventory.setSlotContent(index, stack);
   }
@@ -198,23 +201,10 @@ public abstract class TileHPBase extends TileEntity {
 
   public abstract int getOutputSlot();
 
-  public static boolean canCombine(ItemStack stack1, ItemStack stack2) {
-    return stack1.getItem() == stack2.getItem() && (stack1.getMetadata() == stack2.getMetadata() &&
-            (stack1.getCount() <= stack1.getMaxStackSize() && ItemStack.areItemStackTagsEqual(stack1, stack2)));
-  }
-
   public abstract ItemStack getRecipeItemStack();
 
   public ItemStack removeStackFromSlot(int index) {
     return inventory.removeStackFromSlot(index);
-  }
-
-  public IHPInventory getInventory() {
-    return inventory;
-  }
-
-  public IExtendedBlockState getExtendedState(IExtendedBlockState state) {
-    return state;
   }
 
   public boolean canWork() {
@@ -282,21 +272,10 @@ public abstract class TileHPBase extends TileEntity {
 
   @Override
   public void markDirty() {
-    final IBlockState state = getWorld().getBlockState(getPos());
-    getWorld().notifyBlockUpdate(getPos(), state, state, 2);
+    BlockUtils.notifyBlockUpdate(world, pos, 2);
     super.markDirty();
   }
 
-  @Nullable
-  @Override
-  public SPacketUpdateTileEntity getUpdatePacket() {
-    return new SPacketUpdateTileEntity(getPos(), -999, getUpdateTag());
-  }
-
-  @Override
-  public NBTTagCompound getUpdateTag() {
-    return writeToNBT(new NBTTagCompound());
-  }
 
   @Override
   @SideOnly(Side.CLIENT)
@@ -308,11 +287,6 @@ public abstract class TileHPBase extends TileEntity {
   public void handleUpdateTag(NBTTagCompound tag) {
     readFromNBT(tag);
     markDirty();
-  }
-
-  @Override
-  public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
-    return oldState.getBlock() != newState.getBlock();
   }
 
   @Override

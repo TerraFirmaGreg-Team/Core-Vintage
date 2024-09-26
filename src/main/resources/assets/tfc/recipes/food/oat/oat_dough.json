@@ -4,8 +4,7 @@
     {
       "type": "tfc:fluid",
       "fluid": "fresh_water"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "flourOat"
     }

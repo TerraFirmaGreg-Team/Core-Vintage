@@ -84,7 +84,7 @@ public final class Triple<L, M, R> implements Serializable {
       return false;
     }
     return Objects.equals(left, other.left) && Objects.equals(middle, other.middle)
-            && Objects.equals(right, other.right);
+           && Objects.equals(right, other.right);
   }
 
   /**

@@ -2,7 +2,6 @@ package net.dries007.tfc.objects;
 
 import su.terrafirmagreg.data.lib.collection.WeightedCollection;
 
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,8 +14,8 @@ public enum GemTFCF {
 
   // list of gems that can drop
   private static final GemTFCF[] RANDOM_DROP_GEMS = Arrays.stream(values())
-          .filter(x -> x.canDrop)
-          .toArray(GemTFCF[]::new);
+                                                          .filter(x -> x.canDrop)
+                                                          .toArray(GemTFCF[]::new);
   // whether this gem can be found as a drop from raw stone
   private final boolean canDrop;
 
@@ -43,7 +42,7 @@ public enum GemTFCF {
 
     private static final Grade[] VALUES = values();
     private static final WeightedCollection<Grade> GRADE_ODDS = new WeightedCollection<>(Arrays.stream(VALUES)
-            .collect(Collectors.toMap(k -> k, v -> v.dropWeight)));
+                                                                                               .collect(Collectors.toMap(k -> k, v -> v.dropWeight)));
     private final double dropWeight;
 
     Grade(int dropWeight) {

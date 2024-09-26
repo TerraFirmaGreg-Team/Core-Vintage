@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.capabilities.player.ICapabilityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;

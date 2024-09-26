@@ -2,7 +2,6 @@ package BananaFructa.tfcfarming.firmalife;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-
 import BananaFructa.tfcfarming.Config;
 import BananaFructa.tfcfarming.CropNutrients;
 import BananaFructa.tfcfarming.NutrientClass;

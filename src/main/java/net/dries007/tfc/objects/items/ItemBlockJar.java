@@ -12,7 +12,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 
@@ -30,7 +29,7 @@ public class ItemBlockJar extends ItemBlockTFC {
   @Override
   @NotNull
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                    float hitZ) {
     IBlockState state = worldIn.getBlockState(pos);
     if (state.getBlock() == block) {
       if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {

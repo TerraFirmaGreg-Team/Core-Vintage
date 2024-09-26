@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -51,7 +50,7 @@ public enum StemCrop implements ICrop {
   private final float growthTime; // Time is measured in % of months, scales with calendar month length
 
   StemCrop(Supplier<Block> cropBlock, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive,
-          float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime) {
+           float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime) {
     this.cropBlock = cropBlock;
 
     this.tempMinAlive = tempMinAlive;
@@ -104,7 +103,7 @@ public enum StemCrop implements ICrop {
       tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));
       tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) rainMinGrow, (int) rainMaxGrow));
       tooltip.add(TextFormatting.GOLD +
-              I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", tempMinGrow), String.format("%.1f", tempMaxGrow)));
+                  I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", tempMinGrow), String.format("%.1f", tempMaxGrow)));
     } else {
       tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.hold_shift_for_climate_info"));
     }

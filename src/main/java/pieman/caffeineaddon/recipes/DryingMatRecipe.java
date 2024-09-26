@@ -4,7 +4,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -31,7 +30,7 @@ public class DryingMatRecipe extends IForgeRegistryEntry.Impl<DryingMatRecipe> i
   @Nullable
   public static DryingMatRecipe get(ItemStack item) {
     return Registries.DRYINGMAT.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst()
-            .orElse(null);
+                               .orElse(null);
   }
 
   private boolean isValidInput(ItemStack inputItem) {

@@ -2,6 +2,7 @@ package net.doubledoordev.oiisa;
 
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.util.MathsUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
@@ -30,7 +31,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -154,7 +154,7 @@ public class OversizedItemInStorageArea {
               //Insult that fool
               NBTTagCompound insultingAshNBT = new NBTTagCompound();
               NBTTagString insultingAshLore = new NBTTagString(
-                      "All that remains of " + playerDisplayName + "\u00A75\u00A7o... So hot they turned to nothing but ash!");
+                "All that remains of " + playerDisplayName + "\u00A75\u00A7o... So hot they turned to nothing but ash!");
               NBTTagList insultingAshList = new NBTTagList();
 
               insultingAshList.appendTag(insultingAshLore);
@@ -249,7 +249,7 @@ public class OversizedItemInStorageArea {
           // tell the player about what it if configured to.
           if (ModConfig.weightLimitOptions.weightNotifyPlayer) {
             player.sendStatusMessage(new TextComponentString(ModConfig.weightLimitOptions.weightEjectMessage),
-                    ModConfig.weightLimitOptions.weightActionBarMessage);
+                                     ModConfig.weightLimitOptions.weightActionBarMessage);
           }
         }
       } else {
@@ -262,7 +262,7 @@ public class OversizedItemInStorageArea {
             // tell the player about what it if configured to.
             if (ModConfig.weightLimitOptions.weightNotifyPlayer) {
               player.sendStatusMessage(new TextComponentString(ModConfig.weightLimitOptions.weightEjectMessage),
-                      ModConfig.weightLimitOptions.weightActionBarMessage);
+                                       ModConfig.weightLimitOptions.weightActionBarMessage);
             }
           }
         }
@@ -271,7 +271,7 @@ public class OversizedItemInStorageArea {
   }
 
   private void doSizeCheck(EntityPlayer player, World world, String containerName, BlockPos tracedPos, ArrayList<String> blockedItemNameList,
-          ArrayList<Slot> slotsToEffect, int maxSize) {
+                           ArrayList<Slot> slotsToEffect, int maxSize) {
     // If the config overrides the default with a special level...
     if (INSTANCE.containerSizeOverideMap.containsKey(containerName)) {
       // change it to match that override.
@@ -282,14 +282,14 @@ public class OversizedItemInStorageArea {
   }
 
   private void checkSize(ArrayList<Slot> slotsToEffect, BlockPos tracedPos, World world, EntityPlayer player, int maxSize,
-          ArrayList<String> blockedItemNameList) {
+                         ArrayList<String> blockedItemNameList) {
     //Loop over each slot that needs to be acted on.
     for (Slot slot : slotsToEffect) {
       // make sure our slot has a stack.
       if (slot.getHasStack() && !blockedItemNameList.contains(slot.getStack()
-              .getItem()
-              .getRegistryName()
-              .toString())) {
+                                                                  .getItem()
+                                                                  .getRegistryName()
+                                                                  .toString())) {
         // get the stack from the slot.
         ItemStack stackToActOn = slot.getStack();
         // get the ItemSize capability that holds the Size & Weight of the item.
@@ -302,7 +302,7 @@ public class OversizedItemInStorageArea {
           // tell the player about what it if configured to.
           if (ModConfig.sizeLimitOptions.sizeNotifyPlayer) {
             player.sendStatusMessage(new TextComponentString(ModConfig.sizeLimitOptions.sizeEjectMessage),
-                    ModConfig.sizeLimitOptions.sizeActionBarMessage);
+                                     ModConfig.sizeLimitOptions.sizeActionBarMessage);
           }
         }
       }
@@ -318,9 +318,9 @@ public class OversizedItemInStorageArea {
     for (Slot slot : slotsToEffect) {
       // Make sure each slot has an item and isn't a blocked one.
       if (slot.getHasStack() && !blockedItemNameList.contains(slot.getStack()
-              .getItem()
-              .getRegistryName()
-              .toString())) {
+                                                                  .getItem()
+                                                                  .getRegistryName()
+                                                                  .toString())) {
         ItemStack itemStack = slot.getStack();
         //Get the weight based off the config and add it to the current weight.
         if (currentWeight < maxWeight) {
@@ -388,7 +388,7 @@ public class OversizedItemInStorageArea {
 
   private void doYeet(BlockPos tracedPos, World world, ArrayList<Slot> slotsToEffect, Slot yeetslot, Boolean selectiveYeet, EntityPlayer player) {
     // Check to see if our pos is valid and then if our block has a TE otherwise the player isn't looking in a block.
-    if (tracedPos != null && world.getTileEntity(tracedPos) != null) {
+    if (tracedPos != null && TileUtils.getTile(world, tracedPos) != null) {
       if (selectiveYeet) {
         yeetItem(world, tracedPos, yeetslot);
       } else {
@@ -415,7 +415,7 @@ public class OversizedItemInStorageArea {
   }
 
   private void checkItemHeat(BlockPos tracedPos, String containerName, World world, ArrayList<Slot> slotsToEffect, EntityPlayer player,
-          ArrayList<String> blockedItemNameList) {
+                             ArrayList<String> blockedItemNameList) {
     ArrayList<String> disabledInvs = new ArrayList<>(Arrays.asList(ModConfig.overheatOptions.disabledInventories));
     if (ModConfig.overheatOptions.heatStartsFires && !disabledInvs.contains(containerName)) {
       //Loop over the slots.
@@ -427,11 +427,11 @@ public class OversizedItemInStorageArea {
           var cap = CapabilityHeat.get(stack);
 
           // if we should do overheat stuff, Needs to be enabled, Traced pos needs to be valid, It needs to be a TE, The item needs a valid heatcap and the temp needs to be high enough.
-          if (tracedPos != null && world.getTileEntity(tracedPos) != null && cap != null &&
-                  cap.getTemperature() >= ModConfig.overheatOptions.heatToStartFire) {
+          if (tracedPos != null && TileUtils.getTile(world, tracedPos) != null && cap != null &&
+              cap.getTemperature() >= ModConfig.overheatOptions.heatToStartFire) {
             if (ModConfig.debugOptions.debug && ModConfig.debugOptions.heatDebug) {
               LOGGER.info("Current Item Temperature: " + cap.getTemperature() + " Maximum Temperature allowed: " +
-                      ModConfig.overheatOptions.heatToStartFire);
+                          ModConfig.overheatOptions.heatToStartFire);
             }
             // get the blockstate at the pos location
             IBlockState target = world.getBlockState(tracedPos);
@@ -442,7 +442,7 @@ public class OversizedItemInStorageArea {
               // notify the smart person that did this if needed.
               if (ModConfig.overheatOptions.heatNotifyPlayer) {
                 player.sendStatusMessage(new TextComponentString(ModConfig.overheatOptions.heatMessage),
-                        ModConfig.overheatOptions.heatActionBarMessage);
+                                         ModConfig.overheatOptions.heatActionBarMessage);
               }
             } else {
               if (ModConfig.debugOptions.debug && ModConfig.debugOptions.heatDebug) {
@@ -476,7 +476,7 @@ public class OversizedItemInStorageArea {
     for (ItemStack stack : stacksToSpawn) {
       // the item to be spawned and thrown
       EntityItem entityitem = new EntityItem(world, pos.getX() + (double) extraX, pos.getY() + (double) extraY, pos.getZ() + (double) extraZ,
-              stack);
+                                             stack);
       //set a delay so the player doesn't instantly collect it if they are in the way
       entityitem.setPickupDelay(30);
       //Set the motion on the item

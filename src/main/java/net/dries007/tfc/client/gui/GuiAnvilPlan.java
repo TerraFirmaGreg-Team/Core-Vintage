@@ -18,7 +18,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonAnvilPlanIcon;
 import net.dries007.tfc.client.button.GuiButtonPage;
@@ -107,8 +106,8 @@ public class GuiAnvilPlan extends BaseGuiContainerTile<TileMetalAnvil> {
       // This fires when you select a plan in the Plan GUI
       ResourceLocation recipeName = ((GuiButtonAnvilPlanIcon) button).getRecipeName();
       TerraFirmaCraft.getNetwork()
-              .sendToServer(new PacketGuiButton(button.id, new NBTBuilder().setString("recipe", recipeName.toString())
-                      .build()));
+                     .sendToServer(new PacketGuiButton(button.id, new NBTBuilder().setString("recipe", recipeName.toString())
+                                                                                  .build()));
     } else if (button == buttonLeft) {
       page--;
       updatePage();

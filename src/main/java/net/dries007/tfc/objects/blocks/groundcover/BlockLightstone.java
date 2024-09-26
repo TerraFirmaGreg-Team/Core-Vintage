@@ -28,7 +28,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -159,7 +158,7 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
       boolean flag = false;
 
       if (axis.isHorizontal() && worldIn.getBlockState(blockpos)
-              .getBlockFaceShape(worldIn, blockpos, facing) != BlockFaceShape.SOLID) {
+                                        .getBlockFaceShape(worldIn, blockpos, facing) != BlockFaceShape.SOLID) {
         flag = true;
       } else if (axis.isVertical() && !this.canPlaceAt(worldIn, pos, state.getValue(FACING))) {
         flag = true;
@@ -189,8 +188,8 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
     BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, blockpos, facing);
 
     return blockfaceshape == BlockFaceShape.SOLID || BlockUtils.isGround(iblockstate) ||
-            worldIn.getBlockState(blockpos)
-                    .isFullBlock();
+           worldIn.getBlockState(blockpos)
+                  .isFullBlock();
   }
 
   public IBlockState getStateForWorldGen(World worldIn, BlockPos pos) {
@@ -273,7 +272,7 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
   @NotNull
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer) {
+                                          EntityLivingBase placer) {
     if (this.canPlaceAt(worldIn, pos, facing)) {
       return this.getDefaultState().withProperty(FACING, facing);
     } else {

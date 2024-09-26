@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -11,6 +11,7 @@ import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.device.client.gui.GuiCellarShelf;
 import su.terrafirmagreg.modules.device.object.container.ContainerCellarShelf;
+import su.terrafirmagreg.modules.device.object.inventory.InventoryCellarShelf;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -19,13 +20,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
@@ -36,9 +34,8 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-public class TileCellarShelf extends BaseTileInventory
-        implements IItemHandlerSidedCallback, ITickable,
-        IProviderContainer<ContainerCellarShelf, GuiCellarShelf> {
+public class TileCellarShelf extends BaseTileTickableInventory
+  implements IItemHandlerSidedCallback, IProviderContainer<ContainerCellarShelf, GuiCellarShelf> {
 
   @Getter
   public float temperature = -1;
@@ -49,7 +46,7 @@ public class TileCellarShelf extends BaseTileInventory
   private int lastUpdate = -1;
 
   public TileCellarShelf() {
-    super(new CellarShelfItemStackHandler(14));
+    super(new InventoryCellarShelf(14));
 
   }
 
@@ -109,17 +106,17 @@ public class TileCellarShelf extends BaseTileInventory
       if (temperature > ModConfig.coolMaxThreshold || temperature <= -1000) {
         removeTrait(stack, nbt);
       } else if ((temperature <= ModConfig.frozenMaxThreshold && temperature > -1000)
-              && string.compareTo("freezing") != 0) {
+                 && string.compareTo("freezing") != 0) {
         removeTrait(stack, nbt);
         applyTrait(stack, nbt, "freezing", FoodTrait.FREEZING);
       } else if (
-              (temperature <= ModConfig.icyMaxThreshold && temperature > ModConfig.frozenMaxThreshold)
-                      && string.compareTo("icy") != 0) {
+        (temperature <= ModConfig.icyMaxThreshold && temperature > ModConfig.frozenMaxThreshold)
+        && string.compareTo("icy") != 0) {
         removeTrait(stack, nbt);
         applyTrait(stack, nbt, "icy", FoodTrait.ICY);
       } else if (
-              (temperature <= ModConfig.coolMaxThreshold && temperature > ModConfig.icyMaxThreshold)
-                      && string.compareTo("cool") != 0) {
+        (temperature <= ModConfig.coolMaxThreshold && temperature > ModConfig.icyMaxThreshold)
+        && string.compareTo("cool") != 0) {
         removeTrait(stack, nbt);
         applyTrait(stack, nbt, "cool", FoodTrait.COOL);
       }
@@ -245,51 +242,14 @@ public class TileCellarShelf extends BaseTileInventory
     return true;
   }
 
-  private static class CellarShelfItemStackHandler extends ItemStackHandler {
-
-    public CellarShelfItemStackHandler(int size) {
-      super(size);
-      this.deserializeNBT(new NBTTagCompound());
-    }
-
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-      ItemStack stack = super.extractItem(slot, amount, simulate);
-
-      NBTTagCompound nbt;
-      if (stack.hasTagCompound()) {
-        nbt = stack.getTagCompound();
-      } else {
-        nbt = new NBTTagCompound();
-      }
-
-      String string = nbt.getString("CellarAddonTemperature");
-      if (string.compareTo("cool") == 0) {
-        CapabilityFood.removeTrait(stack, FoodTrait.COOL);
-      }
-      if (string.compareTo("icy") == 0) {
-        CapabilityFood.removeTrait(stack, FoodTrait.ICY);
-      }
-      if (string.compareTo("freezing") == 0) {
-        CapabilityFood.removeTrait(stack, FoodTrait.FREEZING);
-      }
-      nbt.removeTag("CellarAddonTemperature");
-      stack.setTagCompound(null);
-      return stack;
-    }
-
-  }
-
   @Override
-  public ContainerCellarShelf getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+  public ContainerCellarShelf getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
     return new ContainerCellarShelf(inventoryPlayer, this);
   }
 
   @Override
-  public GuiCellarShelf getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
-    return new GuiCellarShelf(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-            this, state);
+  public GuiCellarShelf getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new GuiCellarShelf(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this, state);
   }
 
 

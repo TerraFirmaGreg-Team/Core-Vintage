@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import pieman.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This is a trait that can be applied to a food to modify it's decay date. To add new traits, simply create new instances of this class, and assign a unique name
+ * This is a trait that can be applied to a food to modify it's decay date. To add new traits, simply create new instances of this class, and assign a unique
+ * name
  */
 @Getter
 public class FoodTrait {
@@ -55,7 +55,7 @@ public class FoodTrait {
     CHARCOAL_GRILLED = new FoodTrait("charcoal_grilled", 1.25f);
     WOOD_GRILLED = new FoodTrait("wood_grilled", 0.8f);
     BURNT_TO_A_CRISP = new FoodTrait("burnt_to_a_crisp",
-            2.5f); // This one is so high as it is meant to be > the existing gain from cooking meat.
+                                     2.5f); // This one is so high as it is meant to be > the existing gain from cooking meat.
     COOL = new FoodTrait("sharkCool", ModConfig.coolMod);
     ICY = new FoodTrait("sharkIcy", ModConfig.icyMod);
     FREEZING = new FoodTrait("sharkIcle", ModConfig.icleMod);

@@ -19,7 +19,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAILawnmower;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -30,8 +29,8 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.data.MathConstants.RNG;
 
 /**
- * A Cow of the colder regions! Actually, goats also reach maturity + finish gestation faster than cows, and even give birth to more than one individual, but produce
- * milk once every 3 days
+ * A Cow of the colder regions! Actually, goats also reach maturity + finish gestation faster than cows, and even give birth to more than one individual, but
+ * produce milk once every 3 days
  */
 
 public class EntityGoatTFC extends EntityCowTFC implements ILivestock {
@@ -42,7 +41,7 @@ public class EntityGoatTFC extends EntityCowTFC implements ILivestock {
   @SuppressWarnings("unused")
   public EntityGoatTFC(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-            getRandomGrowth(ConfigTFC.Animals.GOAT.adulthood, ConfigTFC.Animals.GOAT.elder));
+         getRandomGrowth(ConfigTFC.Animals.GOAT.adulthood, ConfigTFC.Animals.GOAT.elder));
   }
 
   public EntityGoatTFC(World worldIn, Gender gender, int birthDay) {
@@ -77,7 +76,7 @@ public class EntityGoatTFC extends EntityCowTFC implements ILivestock {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
+        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
       return ConfigTFC.Animals.GOAT.rarity;
     }
     return 0;
@@ -93,7 +92,7 @@ public class EntityGoatTFC extends EntityCowTFC implements ILivestock {
     int numberOfChildren = ConfigTFC.Animals.GOAT.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityGoatTFC baby = new EntityGoatTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                             (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
       this.world.spawnEntity(baby);
@@ -169,9 +168,9 @@ public class EntityGoatTFC extends EntityCowTFC implements ILivestock {
   public float getHeadRotationAngleX(float ticks) {
     if (this.sheepTimer > 4 && this.sheepTimer <= 36) {
       float f = ((float) (this.sheepTimer - 4) - ticks) / 32.0F;
-      return 0.62831855F + 0.2199115F * MathHelper.sin(f * 28.7F);
+      return ((float)Math.PI / 5F) + ((float)Math.PI * 7F / 100F) * MathHelper.sin(f * 28.7F);
     } else {
-      return this.sheepTimer > 0 ? 0.62831855F : this.rotationPitch * 0.017453292F;
+      return this.sheepTimer > 0 ? ((float)Math.PI / 5F) : this.rotationPitch * 0.017453292F;
     }
   }
 }

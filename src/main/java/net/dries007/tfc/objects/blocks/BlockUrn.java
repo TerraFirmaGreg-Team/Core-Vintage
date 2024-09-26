@@ -31,7 +31,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.te.TEUrn;
 import tfcflorae.client.GuiHandler;
 
@@ -39,8 +38,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Urn is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state property, and
- * cached in the TE (for gui purposes)
+ * Urn is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state property,
+ * and cached in the TE (for gui purposes)
  */
 
 public class BlockUrn extends Block implements ICapabilitySize {
@@ -55,6 +54,23 @@ public class BlockUrn extends Block implements ICapabilitySize {
     setSoundType(SoundType.GLASS);
     setHardness(2F);
     setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
+  }
+
+  /**
+   * Used to update the vessel seal state and the TE, in the correct order
+   */
+  public static void toggleUrnSeal(World world, BlockPos pos) {
+    TEUrn tile = TileUtils.getTile(world, pos, TEUrn.class);
+    if (tile != null) {
+      IBlockState state = world.getBlockState(pos);
+      boolean previousSealed = state.getValue(SEALED);
+      world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
+      if (previousSealed) {
+        tile.onUnseal();
+      } else {
+        tile.onSealed();
+      }
+    }
   }
 
   @Override
@@ -164,11 +180,11 @@ public class BlockUrn extends Block implements ICapabilitySize {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       ItemStack heldItem = playerIn.getHeldItem(hand);
-      TEUrn te = TileUtils.getTile(worldIn, pos, TEUrn.class);
-      if (te != null) {
+      var tile = TileUtils.getTile(worldIn, pos, TEUrn.class);
+      if (tile != null) {
         if (heldItem.isEmpty() && playerIn.isSneaking()) {
           worldIn.playSound(null, pos, SoundEvents.BLOCK_STONE_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
           toggleUrnSeal(worldIn, pos);
@@ -180,33 +196,16 @@ public class BlockUrn extends Block implements ICapabilitySize {
     return true;
   }
 
-  /**
-   * Used to update the vessel seal state and the TE, in the correct order
-   */
-  public static void toggleUrnSeal(World world, BlockPos pos) {
-    TEUrn tile = TileUtils.getTile(world, pos, TEUrn.class);
-    if (tile != null) {
-      IBlockState state = world.getBlockState(pos);
-      boolean previousSealed = state.getValue(SEALED);
-      world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
-      if (previousSealed) {
-        tile.onUnseal();
-      } else {
-        tile.onSealed();
-      }
-    }
-  }
-
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     // If the barrel was sealed, then copy the contents from the item
     if (!worldIn.isRemote) {
       NBTTagCompound nbt = stack.getTagCompound();
       if (nbt != null) {
-        TEUrn te = TileUtils.getTile(worldIn, pos, TEUrn.class);
-        if (te != null) {
+        var tile = TileUtils.getTile(worldIn, pos, TEUrn.class);
+        if (tile != null) {
           worldIn.setBlockState(pos, state.withProperty(SEALED, true));
-          te.readFromItemTag(nbt);
+          tile.readFromItemTag(nbt);
         }
       }
     }
@@ -257,6 +256,6 @@ public class BlockUrn extends Block implements ICapabilitySize {
 
   private boolean canStay(IBlockAccess world, BlockPos pos) {
     return world.getBlockState(pos.down())
-            .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+                .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
   }
 }

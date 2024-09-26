@@ -9,7 +9,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
@@ -24,8 +23,8 @@ import java.util.Optional;
 import java.util.Random;
 
 /**
- * Just a helper class to store which equipment we should give to some entities If needed, this functionality can be extended via json and if this is done, may as
- * well merge into entity resistance data
+ * Just a helper class to store which equipment we should give to some entities If needed, this functionality can be extended via json and if this is done, may
+ * as well merge into entity resistance data
  */
 public class MonsterEquipment {
 
@@ -75,14 +74,14 @@ public class MonsterEquipment {
   private final Map<EntityEquipmentSlot, WeightedCollection<ItemStack>> equipment;
 
   public MonsterEquipment(WeightedCollection<ItemStack> weapons, WeightedCollection<ItemStack> helmets, WeightedCollection<ItemStack> chestplates,
-          WeightedCollection<ItemStack> leggings, WeightedCollection<ItemStack> boots) {
+                          WeightedCollection<ItemStack> leggings, WeightedCollection<ItemStack> boots) {
     equipment = new ImmutableMap.Builder<EntityEquipmentSlot, WeightedCollection<ItemStack>>()
-            .put(EntityEquipmentSlot.MAINHAND, weapons)
-            .put(EntityEquipmentSlot.HEAD, helmets)
-            .put(EntityEquipmentSlot.CHEST, chestplates)
-            .put(EntityEquipmentSlot.LEGS, leggings)
-            .put(EntityEquipmentSlot.FEET, boots)
-            .build();
+      .put(EntityEquipmentSlot.MAINHAND, weapons)
+      .put(EntityEquipmentSlot.HEAD, helmets)
+      .put(EntityEquipmentSlot.CHEST, chestplates)
+      .put(EntityEquipmentSlot.LEGS, leggings)
+      .put(EntityEquipmentSlot.FEET, boots)
+      .build();
   }
 
   @Nullable

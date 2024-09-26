@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
@@ -54,7 +53,7 @@ public class BaseCreativeTab extends CreativeTabs {
 
     if (stack.isEmpty()) {
       TerraFirmaGreg.LOGGER.error("Icon built from iconSupplied is EMPTY for CreativeTab {}",
-              getTabLabel());
+                                  getTabLabel());
       return new ItemStack(Items.STICK);
     }
 

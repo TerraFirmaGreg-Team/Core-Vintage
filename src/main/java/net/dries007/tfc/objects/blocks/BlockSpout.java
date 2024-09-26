@@ -20,7 +20,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import com.eerussianguy.firmalife.particle.ParticlesFL;
 import com.eerussianguy.firmalife.util.GreenhouseHelpers;
 import com.eerussianguy.firmalife.util.HelpersFL;
@@ -108,7 +107,7 @@ public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreen
         double speed = MathHelper.nextDouble(rand, -0.2D, 0.2D);
         for (int i = 0; i < 5; i++) {
           ParticlesFL.SPRINKLE.spawn(world, pos.getX() + 0.5D, pos.getY() + 0.25D, pos.getZ() + 0.5D, speed * HelpersFL.nextSign(rand),
-                  0.0D, speed * HelpersFL.nextSign(rand), 130);
+                                     0.0D, speed * HelpersFL.nextSign(rand), 130);
         }
       } else {
         ParticlesFL.SPRINKLE.spawn(world, pos.getX() + 0.5D, pos.getY() + 0.25D, pos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D, 130);
@@ -126,7 +125,7 @@ public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreen
     if (!state.getValue(NEEDS_SOURCE)) {
       return true;
     }
-    var tile = world.getTileEntity(pos.up());
+    var tile = TileUtils.getTile(world, pos.up());
     if (tile != null) {
       IFluidHandler cap = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.DOWN);
       if (cap != null) {

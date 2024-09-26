@@ -190,11 +190,11 @@ processResources {
 
   filesMatching(filterList) { fcd ->
     fcd.expand(
-            'mod_id': propertyString('mod_id'),
-            'mod_name': propertyString('mod_name'),
-            'mod_version': propertyString('mod_version'),
-            'mixin_refmap': propertyString('mixin_refmap'),
-            'mixin_package': propertyString('mixin_package')
+      'mod_id': propertyString('mod_id'),
+      'mod_name': propertyString('mod_name'),
+      'mod_version': propertyString('mod_version'),
+      'mixin_refmap': propertyString('mixin_refmap'),
+      'mixin_package': propertyString('mixin_package')
     )
   }
 
@@ -262,7 +262,7 @@ idea {
         afterEvaluate {
           javacAdditionalOptions = "-encoding utf8"
           moduleJavacAdditionalOptions = [
-                  (project.name + ".main"): tasks.compileJava.options.compilerArgs.collect { '"' + it + '"' }.join(' ')
+            (project.name + ".main"): tasks.compileJava.options.compilerArgs.collect { '"' + it + '"' }.join(' ')
           ]
         }
       }

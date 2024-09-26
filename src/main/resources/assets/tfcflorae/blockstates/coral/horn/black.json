@@ -7,8 +7,7 @@
       "apply": {
         "model": "tfcflorae:coral/horn/black"
       }
-    },
-    {
+    }, {
       "when": {
         "east": "true"
       },
@@ -17,8 +16,7 @@
         "x": 270,
         "y": 90
       }
-    },
-    {
+    }, {
       "when": {
         "north": "true"
       },
@@ -26,8 +24,7 @@
         "model": "tfcflorae:coral/horn/black",
         "x": 270
       }
-    },
-    {
+    }, {
       "when": {
         "south": "true"
       },
@@ -36,8 +33,7 @@
         "x": 270,
         "y": 180
       }
-    },
-    {
+    }, {
       "when": {
         "up": "true"
       },
@@ -45,8 +41,7 @@
         "model": "tfcflorae:coral/horn/black",
         "x": 180
       }
-    },
-    {
+    }, {
       "when": {
         "west": "true"
       },

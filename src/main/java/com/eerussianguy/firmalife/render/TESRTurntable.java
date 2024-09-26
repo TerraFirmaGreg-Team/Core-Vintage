@@ -13,7 +13,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.objects.te.TETurntable;
 
@@ -21,11 +20,11 @@ import net.dries007.tfc.objects.te.TETurntable;
 public class TESRTurntable extends TileEntitySpecialRenderer<TETurntable> {
 
   public static final ItemStack[] ITEMS = {
-          new ItemStack(ItemsFL.getUnused(0)),
-          new ItemStack(ItemsFL.getUnused(1)),
-          new ItemStack(ItemsFL.getUnused(2)),
-          new ItemStack(ItemsFL.getUnused(3)),
-          new ItemStack(ItemsFL.getUnused(4))
+    new ItemStack(ItemsFL.getUnused(0)),
+    new ItemStack(ItemsFL.getUnused(1)),
+    new ItemStack(ItemsFL.getUnused(2)),
+    new ItemStack(ItemsFL.getUnused(3)),
+    new ItemStack(ItemsFL.getUnused(4))
   };
 
   @Override

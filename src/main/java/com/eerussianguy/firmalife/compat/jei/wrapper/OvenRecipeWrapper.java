@@ -3,7 +3,6 @@ package com.eerussianguy.firmalife.compat.jei.wrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 
-
 import com.eerussianguy.firmalife.recipe.OvenRecipe;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 import net.dries007.tfc.util.calendar.ICalendar;

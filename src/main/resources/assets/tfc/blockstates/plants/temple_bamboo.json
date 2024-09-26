@@ -9,8 +9,7 @@
           "model": "tfc:plants/medium_temple_bamboo"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "middle"
       },
@@ -19,8 +18,7 @@
           "model": "tfc:plants/medium_temple_bamboo_small_leaves"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper"
       },

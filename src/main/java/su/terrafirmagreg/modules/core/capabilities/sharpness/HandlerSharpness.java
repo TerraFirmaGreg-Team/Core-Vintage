@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.core.capabilities.sharpness;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-
 import lyeoj.tfcthings.items.ItemRopeJavelin;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.metal.ItemMetalSword;

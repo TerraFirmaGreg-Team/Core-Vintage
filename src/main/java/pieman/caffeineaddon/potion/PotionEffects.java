@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-
 import static net.dries007.tfc.util.Helpers.getNull;
 import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;
 
@@ -21,8 +20,8 @@ public final class PotionEffects {
   @SubscribeEvent
   public static void registerPotionEffects(RegistryEvent.Register<Potion> event) {
     event.getRegistry().registerAll(
-            new PotionCaffeine().setRegistryName(MODID_CAFFEINEADDON, "caffeine")
-                    .registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", 0.15D, 2)
+      new PotionCaffeine().setRegistryName(MODID_CAFFEINEADDON, "caffeine")
+                          .registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", 0.15D, 2)
     );
   }
 }

@@ -10,8 +10,7 @@
           "model": "tfc:plants/undergrowth_tropical_single_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "0",
         "part": "lower"
@@ -21,8 +20,7 @@
           "model": "tfc:plants/undergrowth_tropical_lower_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "0",
         "part": "middle"
@@ -31,22 +29,18 @@
         {
           "model": "tfc:plants/undergrowth_tropical_middle_0",
           "weight": 2
-        },
-        {
+        }, {
           "model": "tfc:plants/undergrowth_tropical_middle_0",
           "weight": 2
-        },
-        {
+        }, {
           "model": "tfc:plants/undergrowth_tropical_middle_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/undergrowth_tropical_middle_0",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "0",
         "part": "upper"
@@ -57,8 +51,7 @@
           "y": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1",
         "part": "single"
@@ -68,8 +61,7 @@
           "model": "tfc:plants/undergrowth_tropical_single_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1",
         "part": "lower"
@@ -79,8 +71,7 @@
           "model": "tfc:plants/undergrowth_tropical_lower_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1",
         "part": "middle"
@@ -89,22 +80,18 @@
         {
           "model": "tfc:plants/undergrowth_tropical_middle_0",
           "weight": 2
-        },
-        {
+        }, {
           "model": "tfc:plants/undergrowth_tropical_middle_0",
           "weight": 2
-        },
-        {
+        }, {
           "model": "tfc:plants/undergrowth_tropical_middle_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/undergrowth_tropical_middle_0",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1",
         "part": "upper"
@@ -115,8 +102,7 @@
           "y": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "2",
         "part": "single"
@@ -126,8 +112,7 @@
           "model": "tfc:plants/undergrowth_tropical_single_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "2",
         "part": "lower"
@@ -137,8 +122,7 @@
           "model": "tfc:plants/undergrowth_tropical_lower_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "2",
         "part": "middle"
@@ -147,22 +131,18 @@
         {
           "model": "tfc:plants/undergrowth_tropical_middle_0",
           "weight": 2
-        },
-        {
+        }, {
           "model": "tfc:plants/undergrowth_tropical_middle_0",
           "weight": 2
-        },
-        {
+        }, {
           "model": "tfc:plants/undergrowth_tropical_middle_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/undergrowth_tropical_middle_0",
           "weight": 1
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "2",
         "part": "upper"

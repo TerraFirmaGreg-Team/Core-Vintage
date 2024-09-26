@@ -11,14 +11,13 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class GuiIceBunker extends BaseGuiContainerTile<TileIceBunker> {
 
   private static final ResourceLocation BACKGROUND = ModUtils.resource(
-          "textures/gui/container/ice_bunker.png");
+    "textures/gui/container/ice_bunker.png");
   private final InventoryPlayer playerInventory;
 
   public GuiIceBunker(Container container, InventoryPlayer playerInv, TileIceBunker tile) {
@@ -33,10 +32,10 @@ public class GuiIceBunker extends BaseGuiContainerTile<TileIceBunker> {
     String name = I18n.format(this.playerInventory.getDisplayName().getUnformattedText());
     fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 00000000);
     this.fontRenderer.drawString(this.playerInventory.getDisplayName()
-            .getUnformattedText(), 8, this.ySize - 92, 00000000);
+                                                     .getUnformattedText(), 8, this.ySize - 92, 00000000);
 
     if (mouseX >= guiLeft + 5 && mouseX <= guiLeft + 15 && mouseY >= guiTop + 5
-            && mouseY <= guiTop + 15) {
+        && mouseY <= guiTop + 15) {
       List<String> infoText = new ArrayList<String>();
       float temperature = tile.getTemperature();
       int coolant = tile.getCoolant();

@@ -9,7 +9,6 @@ import net.minecraft.block.BlockButtonWood;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-
 import lombok.Getter;
 
 @Getter
@@ -26,12 +25,12 @@ public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
     this.settings = Settings.of(Material.CIRCUITS);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .hardness(0.5F)
-            .sound(SoundType.WOOD)
-            .oreDict(variant, "wood")
-            .oreDict(variant, "wood", type);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .hardness(0.5F)
+      .sound(SoundType.WOOD)
+      .oreDict(variant, "wood")
+      .oreDict(variant, "wood", type);
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
   }

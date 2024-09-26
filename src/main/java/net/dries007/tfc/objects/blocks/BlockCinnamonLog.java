@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -20,14 +21,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.Calendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
 
 import org.jetbrains.annotations.NotNull;
 
@@ -50,9 +46,9 @@ public class BlockCinnamonLog extends Block {
     BlockUtils.setFireInfo(this, 5, 5);
     setTickRandomly(true);
     this.setDefaultState(this.blockState.getBaseState()
-            .withProperty(GROWN, true)
-            .withProperty(CAN_GROW, false)
-            .withProperty(CONNECTED, false));
+                                        .withProperty(GROWN, true)
+                                        .withProperty(CAN_GROW, false)
+                                        .withProperty(CONNECTED, false));
   }
 
   @Override
@@ -70,9 +66,9 @@ public class BlockCinnamonLog extends Block {
       grown = true;
     }
     return this.getDefaultState()
-            .withProperty(CONNECTED, meta == 1)
-            .withProperty(GROWN, grown)
-            .withProperty(CAN_GROW, can_grow);
+               .withProperty(CONNECTED, meta == 1)
+               .withProperty(GROWN, grown)
+               .withProperty(CAN_GROW, can_grow);
   }
 
   @Override
@@ -196,7 +192,7 @@ public class BlockCinnamonLog extends Block {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-          float hitY, float hitZ) {
+                                  float hitY, float hitZ) {
     if (!world.isRemote) {
       ItemStack held = player.getHeldItem(hand);
       if (OreDictionaryHelper.doesStackMatchOre(held, "knife")) {

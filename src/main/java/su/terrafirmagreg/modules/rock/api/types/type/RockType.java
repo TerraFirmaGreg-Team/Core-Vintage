@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 
-
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -51,10 +50,10 @@ public class RockType extends Type<RockType> {
   @Nullable
   public static RockType getByName(@NotNull String name) {
     return RockType.getTypes()
-            .stream()
-            .filter(s -> s.getName().equals(name))
-            .findFirst()
-            .orElse(null);
+                   .stream()
+                   .filter(s -> s.getName().equals(name))
+                   .findFirst()
+                   .orElse(null);
   }
 
   /**

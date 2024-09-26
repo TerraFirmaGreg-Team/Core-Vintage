@@ -14,7 +14,6 @@ import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
-
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.google.common.collect.ImmutableMap;
 import mcp.MethodsReturnNonnullByDefault;
@@ -73,8 +72,8 @@ public class LargePlanterBakedModel implements IBakedModel {
   @Override
   public TextureAtlasSprite getParticleTexture() {
     return Objects.requireNonNull(Minecraft.getMinecraft()
-            .getTextureMapBlocks()
-            .getTextureExtry("minecraft:blocks/hardened_clay"));
+                                           .getTextureMapBlocks()
+                                           .getTextureExtry("minecraft:blocks/hardened_clay"));
   }
 
   @Override

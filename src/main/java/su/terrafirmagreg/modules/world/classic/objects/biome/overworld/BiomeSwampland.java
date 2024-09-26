@@ -31,7 +31,7 @@ public class BiomeSwampland extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.SWAMP
+      BiomeDictionary.Type.SWAMP
     };
   }
 }

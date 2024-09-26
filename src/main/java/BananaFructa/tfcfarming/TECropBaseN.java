@@ -4,7 +4,6 @@ import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import net.dries007.tfc.api.types.ICrop;

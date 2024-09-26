@@ -11,7 +11,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.util.climate.Climate;
@@ -31,18 +30,18 @@ public class GeneratorFruitTrees implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+                       IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0
-            && !TREES.isEmpty() &&
-            ConfigTFC.General.FOOD.fruitTreeRarity > 0) {
+        && !TREES.isEmpty() &&
+        ConfigTFC.General.FOOD.fruitTreeRarity > 0) {
       if (random.nextInt(ConfigTFC.General.FOOD.fruitTreeRarity) == 0) {
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
         float temperature = Climate.getAvgTemp(world, chunkBlockPos);
         float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
         List<IFruitTree> trees = TREES.stream()
-                .filter(x -> x.isValidConditions(temperature, rainfall))
-                .collect(Collectors.toList());
+                                      .filter(x -> x.isValidConditions(temperature, rainfall))
+                                      .collect(Collectors.toList());
         if (!trees.isEmpty()) {
           IFruitTree tree = trees.get(random.nextInt(trees.size()));
           TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();

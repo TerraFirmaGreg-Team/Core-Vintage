@@ -7,7 +7,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-
 import net.dries007.tfc.api.types.IFruitTree;
 
 import java.util.Random;
@@ -50,8 +49,8 @@ public interface IFruitTreeGenerator {
 
     // Check the position for liquids, etc.
     if (world.getBlockState(pos).getMaterial().isLiquid() || !world.getBlockState(pos)
-            .getMaterial()
-            .isReplaceable()) {
+                                                                   .getMaterial()
+                                                                   .isReplaceable()) {
       return false;
     }
 

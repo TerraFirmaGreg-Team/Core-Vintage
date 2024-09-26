@@ -14,7 +14,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TEPlacedItem;
@@ -35,9 +34,9 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
 
           final World world = player.getEntityWorld();
           final RayTraceResult rayTrace = MathsUtils.rayTrace(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE)
-                  .getAttributeValue(), 1);
+                                                                            .getAttributeValue(), 1);
           final ItemStack stack = player.getHeldItemMainhand()
-                  .isEmpty() ? player.getHeldItemOffhand() : player.getHeldItemMainhand();
+                                        .isEmpty() ? player.getHeldItemOffhand() : player.getHeldItemMainhand();
 
           if (rayTrace != null) {
             BlockPos pos = rayTrace.getBlockPos();
@@ -56,9 +55,9 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
                   tile.onRightClick(player, stack, rayTrace);
                 }
               } else if (!stack.isEmpty() && world.getBlockState(pos.offset(hitFace).down())
-                      .isSideSolid(world, pos.offset(hitFace)
-                              .down(), EnumFacing.UP) && offsetState.getBlock()
-                      .isAir(offsetState, world, pos)) {
+                                                  .isSideSolid(world, pos.offset(hitFace)
+                                                                         .down(), EnumFacing.UP) && offsetState.getBlock()
+                                                                                                               .isAir(offsetState, world, pos)) {
                 if (player.isSneaking()) {
                   // If sneaking, place a flat item
                   world.setBlockState(pos.offset(hitFace), BlocksTFC.PLACED_ITEM_FLAT.getDefaultState());

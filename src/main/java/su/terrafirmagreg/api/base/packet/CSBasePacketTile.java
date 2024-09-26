@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.base.packet;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.tileentity.TileEntity;
@@ -8,8 +10,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public abstract class CSBasePacketTile<REQ extends CSBasePacketTile> extends
-        BasePacketBlockPos<REQ> {
+public abstract class CSBasePacketTile<REQ extends CSBasePacketTile> extends BasePacketBlockPos<REQ> {
 
   public CSBasePacketTile() {
     // serialization
@@ -27,12 +28,12 @@ public abstract class CSBasePacketTile<REQ extends CSBasePacketTile> extends
     World world = player.getEntityWorld();
 
     if (world.isBlockLoaded(message.blockPos)) {
-      TileEntity tileEntity = world.getTileEntity(message.blockPos);
-      return this.onMessage(message, ctx, tileEntity);
+      var tile = TileUtils.getTile(world, message.blockPos);
+      return this.onMessage(message, ctx, tile);
     }
 
     return null;
   }
 
-  protected abstract IMessage onMessage(REQ message, MessageContext ctx, TileEntity tileEntity);
+  protected abstract IMessage onMessage(REQ message, MessageContext ctx, TileEntity tile);
 }

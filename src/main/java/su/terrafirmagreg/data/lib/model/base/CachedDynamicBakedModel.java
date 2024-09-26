@@ -13,7 +13,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.IModel;
 
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.tuple.Pair;
@@ -27,13 +26,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This model class allows for the quads of a model to change based on various in world context information. For example this can allow for certain textures in a
- * model to be changed based on an upgrade or other change. Variants of the model are automatically stored in a cache to allow for less memory use and object
+ * This model class allows for the quads of a model to change based on various in world context information. For example this can allow for certain textures in
+ * a model to be changed based on an upgrade or other change. Variants of the model are automatically stored in a cache to allow for less memory use and object
  * construction when rendering block models.
  * <p>
  * This model works by passing item context to {@link #getCacheKey(ItemStack, World, EntityLivingBase)} and block context to
- * {@link #getCacheKey(IBlockState, EnumFacing)} to get a cache key for the context. This key is then sent to {@link #generateBlockModel(String)} to build the new
- * model instance. Both item and block models share the same cache.
+ * {@link #getCacheKey(IBlockState, EnumFacing)} to get a cache key for the context. This key is then sent to {@link #generateBlockModel(String)} to build the
+ * new model instance. Both item and block models share the same cache.
  */
 public abstract class CachedDynamicBakedModel implements IBakedModel {
 
@@ -163,15 +162,16 @@ public abstract class CachedDynamicBakedModel implements IBakedModel {
 
   @Override
   public @NotNull Pair<? extends IBakedModel, Matrix4f> handlePerspective(
-          ItemCameraTransforms.@NotNull TransformType transformType) {
+    ItemCameraTransforms.@NotNull TransformType transformType) {
 
     final Pair<? extends IBakedModel, Matrix4f> pair = this.bakedOriginal.handlePerspective(
-            transformType);
+      transformType);
     return Pair.of(this, pair.getRight());
   }
 
   /**
-   * This class handles getting an IBakedModel for an item context. It is {@link CachedDynamicBakedModel#getCacheKey(ItemStack, World, EntityLivingBase)} works.
+   * This class handles getting an IBakedModel for an item context. It is {@link CachedDynamicBakedModel#getCacheKey(ItemStack, World, EntityLivingBase)}
+   * works.
    */
   private static class ItemOverrideListRetexturable extends ItemOverrideList {
 
@@ -184,8 +184,8 @@ public abstract class CachedDynamicBakedModel implements IBakedModel {
 
     @Override
     public @NotNull IBakedModel handleItemState(@NotNull IBakedModel originalModel,
-            @NotNull ItemStack stack, World world,
-            EntityLivingBase entity) {
+                                                @NotNull ItemStack stack, World world,
+                                                EntityLivingBase entity) {
 
       if (originalModel instanceof CachedDynamicBakedModel rextexturable) {
 

@@ -36,7 +36,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -76,7 +75,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
   @SuppressWarnings("unused")
   public EntityWolfTFC(World worldIn) {
     this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-            EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.WOLF.adulthood, ConfigTFC.Animals.WOLF.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.WOLF.adulthood, ConfigTFC.Animals.WOLF.elder));
   }
 
   public EntityWolfTFC(World worldIn, Gender gender, int birthDay) {
@@ -114,7 +113,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.TAIGA)) {
+        (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.TAIGA)) {
       return ConfigTFC.Animals.WOLF.rarity;
     }
     return 0;
@@ -138,9 +137,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+           && !this.world.containsAnyLiquid(getEntityBoundingBox())
+           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @NotNull
@@ -242,8 +241,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
     return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-            .name()
-            .toLowerCase());
+                                                                                          .name()
+                                                                                          .toLowerCase());
   }
 
   @Override
@@ -261,7 +260,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
         if (EntityLivingBase.class.isAssignableFrom(entityClass)) {
           //noinspection unchecked
           this.targetTasks.addTask(priority++,
-                  new EntityAITargetNonTamed<>(this, (Class<EntityLivingBase>) entityClass, false, ent -> true));
+                                   new EntityAITargetNonTamed<>(this, (Class<EntityLivingBase>) entityClass, false, ent -> true));
         }
       }
     }
@@ -350,14 +349,14 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
         this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
-                this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
+          this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
         if (random.nextDouble() < ConfigTFC.Animals.WOLF.oldDeathChance) {
           this.setDead();
         }
       }
       // Wild animals disappear after 125% lifespan
       if (this.getDaysToElderly() > 0 && this.getFamiliarity() < 0.10F &&
-              (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
+          (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
         this.setDead();
       }
     }
@@ -371,7 +370,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
     int numberOfChildren = ConfigTFC.Animals.WOLF.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityWolfTFC baby = new EntityWolfTFC(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                             (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
       UUID uuid = this.getOwnerId();
@@ -436,8 +435,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
               //Show tooltips
               if (this.isFertilized() && this.getType() == Type.MAMMAL) {
                 TerraFirmaCraft.getNetwork()
-                        .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL,
-                                MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+                               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL,
+                                                                            MODID_TFC
+                                                                            + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
               }
             }
           }

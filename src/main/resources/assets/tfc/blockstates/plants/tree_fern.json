@@ -9,8 +9,7 @@
           "model": "tfc:plants/tree_fern_lower"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper|single"
       },
@@ -19,8 +18,7 @@
           "model": "tfc:plants/tree_fern_upper"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper|single"
       },

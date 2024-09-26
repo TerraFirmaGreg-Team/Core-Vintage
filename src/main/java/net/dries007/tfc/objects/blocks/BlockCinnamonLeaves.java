@@ -9,7 +9,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import com.eerussianguy.firmalife.init.PlantsFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.google.common.collect.ImmutableList;

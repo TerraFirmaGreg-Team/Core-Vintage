@@ -16,7 +16,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import com.buuz135.hotornot.config.HotConfig;
 import com.buuz135.hotornot.config.HotLists;
 import com.buuz135.hotornot.object.item.ItemHotHolder;
@@ -86,7 +85,7 @@ public class ServerEvents {
           final ItemStack slotStack = playerItemHandler.getStackInSlot(slotIndex);
 
           final boolean checkContents = slotStack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-                  null) && HotConfig.EFFECT_HANDLING.checkItemContainerContents;
+                                                                null) && HotConfig.EFFECT_HANDLING.checkItemContainerContents;
 
           if (slotStack.isEmpty()) {
             continue;
@@ -168,7 +167,7 @@ public class ServerEvents {
           player.setHeldItem(EnumHand.OFF_HAND, extractedHotHolder);
           // Plays a pickup sound to help notify that the item was swapped
           event.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ITEM_PICKUP,
-                  SoundCategory.PLAYERS, 0.8F, 0.8F + player.world.rand.nextFloat() * 0.4F);
+                                SoundCategory.PLAYERS, 0.8F, 0.8F + player.world.rand.nextFloat() * 0.4F);
         }
       }
     }

@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import net.minecraft.block.Block;
 import net.minecraft.util.text.TextComponentTranslation;
 
-
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
@@ -87,7 +86,7 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
 
   public String getLocalizedName() {
     return new TextComponentTranslation(
-            String.format("soil.variant.%s.name", this)).getFormattedText();
+      String.format("soil.variant.%s.name", this)).getFormattedText();
   }
 
   /**
@@ -106,10 +105,10 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
    */
   public SoilBlockVariant getNonGrassVersion() {
     if (this == GRASS ||
-            this == DRY_GRASS ||
-            this == SPARSE_GRASS ||
-            this == PODZOL ||
-            this == MYCELIUM) {
+        this == DRY_GRASS ||
+        this == SPARSE_GRASS ||
+        this == PODZOL ||
+        this == MYCELIUM) {
       return DIRT;
     }
 
@@ -134,7 +133,7 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
     }
 
     throw new IllegalArgumentException(
-            String.format("You cannot get grass from [%s] types.", this));
+      String.format("You cannot get grass from [%s] types.", this));
   }
 
   private SoilBlockVariant transform() {
@@ -143,17 +142,17 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
     } else if (this == COARSE_DIRT) {
       return SPARSE_GRASS;
     } else if (this == GRASS ||
-            this == DRY_GRASS ||
-            this == SPARSE_GRASS ||
-            this == PODZOL ||
-            this == MYCELIUM ||
-            this == FARMLAND ||
-            this == GRASS_PATH ||
-            this == ROOTED_DIRT) {
+               this == DRY_GRASS ||
+               this == SPARSE_GRASS ||
+               this == PODZOL ||
+               this == MYCELIUM ||
+               this == FARMLAND ||
+               this == GRASS_PATH ||
+               this == ROOTED_DIRT) {
       return DIRT;
     } else {
       throw new IllegalArgumentException(
-              String.format("You cannot get grass from [%s] types.", this));
+        String.format("You cannot get grass from [%s] types.", this));
     }
   }
 

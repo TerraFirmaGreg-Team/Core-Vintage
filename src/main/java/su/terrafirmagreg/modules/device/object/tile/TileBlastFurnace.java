@@ -30,7 +30,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 
-
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
@@ -45,7 +44,7 @@ import java.util.List;
 import static su.terrafirmagreg.data.Properties.LIT;
 
 public class TileBlastFurnace extends BaseTileTickableInventory
-        implements ITileFields, IProviderContainer<ContainerBlastFurnace, GuiBlastFurnace> {
+  implements ITileFields, IProviderContainer<ContainerBlastFurnace, GuiBlastFurnace> {
 
   public static final int SLOT_TUYERE = 0;
   public static final int FIELD_TEMPERATURE = 0;
@@ -229,7 +228,7 @@ public class TileBlastFurnace extends BaseTileTickableInventory
             fuelStacks.remove(0);
             Fuel fuel = FuelManager.getFuel(fuelStack);
             burnTicksLeft = (int) (Math.ceil(
-                    fuel.getAmount() / ConfigDevice.BLOCK.BLAST_FURNACE.consumption));
+              fuel.getAmount() / ConfigDevice.BLOCK.BLAST_FURNACE.consumption));
             burnTemperature = fuel.getTemperature();
           } else {
             burnTemperature = 0;
@@ -239,7 +238,7 @@ public class TileBlastFurnace extends BaseTileTickableInventory
 
         if (temperature > 0 || burnTemperature > 0) {
           temperature = CapabilityHeat.adjustToTargetTemperature(temperature, burnTemperature,
-                  airTicks, MAX_AIR_TICKS);
+                                                                 airTicks, MAX_AIR_TICKS);
           // Provide heat to blocks that are one block bellow AKA crucible
           Block blockCrucible = world.getBlockState(pos.down()).getBlock();
           if (blockCrucible instanceof IHeatConsumerBlock heatConsumerBlock) {
@@ -247,25 +246,25 @@ public class TileBlastFurnace extends BaseTileTickableInventory
           }
           if (!world.isRemote) {
             oreStacks.removeIf(stack ->
-            {
-              var cap = CapabilityHeat.get(stack);
-              if (cap != null) {
-                // Update temperature of item
-                float itemTemp = cap.getTemperature();
-                if (temperature > itemTemp) {
-                  CapabilityHeat.addTemp(cap);
-                }
-                if (cap.isMolten()) {
-                  convertToMolten(stack);
-                  ItemStack tuyereStack = inventory.getStackInSlot(0);
-                  if (!tuyereStack.isEmpty()) {
-                    StackUtils.damageItem(tuyereStack);
-                  }
-                  return true;
-                }
-              }
-              return false;
-            });
+                               {
+                                 var cap = CapabilityHeat.get(stack);
+                                 if (cap != null) {
+                                   // Update temperature of item
+                                   float itemTemp = cap.getTemperature();
+                                   if (temperature > itemTemp) {
+                                     CapabilityHeat.addTemp(cap);
+                                   }
+                                   if (cap.isMolten()) {
+                                     convertToMolten(stack);
+                                     ItemStack tuyereStack = inventory.getStackInSlot(0);
+                                     if (!tuyereStack.isEmpty()) {
+                                       StackUtils.damageItem(tuyereStack);
+                                     }
+                                     return true;
+                                   }
+                                 }
+                                 return false;
+                               });
           }
           if (temperature <= 0 && burnTemperature <= 0) {
             temperature = 0;
@@ -349,8 +348,8 @@ public class TileBlastFurnace extends BaseTileTickableInventory
   private void addItemsFromWorld() {
     EntityItem fluxEntity = null, oreEntity = null;
     List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
-            new AxisAlignedBB(pos.up(), pos.up().add(1, 5, 1)),
-            EntitySelectors.IS_ALIVE);
+                                                         new AxisAlignedBB(pos.up(), pos.up().add(1, 5, 1)),
+                                                         EntitySelectors.IS_ALIVE);
     for (EntityItem entityItem : items) {
       ItemStack stack = entityItem.getItem();
       BlastFurnaceRecipe recipe = BlastFurnaceRecipe.get(stack);
@@ -418,12 +417,12 @@ public class TileBlastFurnace extends BaseTileTickableInventory
         if (slagLayers >= 4) {
           slagLayers -= 4;
           world.setBlockState(pos.up(i), BlocksDevice.MOLTEN.getDefaultState()
-                  .withProperty(LIT, cooking)
-                  .withProperty(BlockMolten.LAYERS, 4));
+                                                            .withProperty(LIT, cooking)
+                                                            .withProperty(BlockMolten.LAYERS, 4));
         } else {
           world.setBlockState(pos.up(i), BlocksDevice.MOLTEN.getDefaultState()
-                  .withProperty(LIT, cooking)
-                  .withProperty(BlockMolten.LAYERS, slagLayers));
+                                                            .withProperty(LIT, cooking)
+                                                            .withProperty(BlockMolten.LAYERS, slagLayers));
           slagLayers = 0;
         }
       } else {
@@ -438,8 +437,8 @@ public class TileBlastFurnace extends BaseTileTickableInventory
   public void debug() {
     TerraFirmaCraft.getLog().debug("Debugging Blast Furnace:");
     TerraFirmaCraft.getLog()
-            .debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature,
-                    burnTicksLeft);
+                   .debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature,
+                          burnTicksLeft);
     TerraFirmaCraft.getLog().debug("Burning? {}", world.getBlockState(pos).getValue(LIT));
     int i = 0;
     for (ItemStack item : oreStacks) {
@@ -464,14 +463,14 @@ public class TileBlastFurnace extends BaseTileTickableInventory
 
   @Override
   public ContainerBlastFurnace getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                            IBlockState state, BlockPos pos) {
     return new ContainerBlastFurnace(inventoryPlayer, this);
   }
 
   @Override
   public GuiBlastFurnace getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                         IBlockState state, BlockPos pos) {
     return new GuiBlastFurnace(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-            this);
+                               this);
   }
 }

@@ -6,11 +6,10 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
 import static su.terrafirmagreg.data.Constants.MODID_TFCTHINGS;
 
 @Mod.EventBusSubscriber(
-        modid = MODID_TFCTHINGS
+  modid = MODID_TFCTHINGS
 )
 public class ConfigTFCThings {
 
@@ -26,9 +25,9 @@ public class ConfigTFCThings {
   }
 
   @Config(
-          modid = MODID_TFCTHINGS,
-          category = "items",
-          name = "TerraFirmaThings - Items"
+    modid = MODID_TFCTHINGS,
+    category = "items",
+    name = "TerraFirmaThings - Items"
   )
   @Config.LangKey("config.tfcthings.items")
   public static final class Items {
@@ -53,14 +52,14 @@ public class ConfigTFCThings {
 
       @Config.Comment("The additional mining speed added to a sharpened tool.")
       @Config.RangeInt(
-              min = 0
+        min = 0
       )
       @Config.LangKey("config.tfcthings.items.bonusSpeed")
       public int bonusSpeed = 4;
 
       @Config.Comment("The amount of extra damage a weapon does when sharpened.")
       @Config.RangeInt(
-              min = 0
+        min = 0
       )
       @Config.LangKey("config.tfcthings.items.damageBoost")
       public int damageBoost = 2;
@@ -69,18 +68,18 @@ public class ConfigTFCThings {
     public static final class SnowShoesCFG {
 
       @Config.Comment({"The number of ticks of walking through snow required to apply one damage to the shoes",
-              "0 = snow shoes won't get damaged by walking through snow"})
+                       "0 = snow shoes won't get damaged by walking through snow"})
       @Config.RangeInt(
-              min = 0
+        min = 0
       )
       @Config.LangKey("config.tfcthings.items.damageTicks")
       public int damageTicks = 500;
 
       @Config.Comment({"The percentage of the TFC slowdown effect that the snow shoes will negate",
-              "1 = no slowdown when walking through snow", "0 = the shoes are useless D:"})
+                       "1 = no slowdown when walking through snow", "0 = the shoes are useless D:"})
       @Config.RangeDouble(
-              min = 0,
-              max = 1
+        min = 0,
+        max = 1
       )
       @Config.LangKey("config.tfcthings.items.shoePower")
       public double shoePower = 1;
@@ -90,18 +89,18 @@ public class ConfigTFCThings {
     public static final class HikingBootsCFG {
 
       @Config.Comment({"The number of ticks of walking through plants required to apply one damage to the shoes",
-              "0 = hiking boots won't get damaged by walking through plants"})
+                       "0 = hiking boots won't get damaged by walking through plants"})
       @Config.RangeInt(
-              min = 0
+        min = 0
       )
       @Config.LangKey("config.tfcthings.items.damageTicks")
       public int damageTicks = 500;
 
       @Config.Comment({"The percentage of the TFC slowdown effect that the hiking boots will negate",
-              "1 = no slowdown when walking through plants", "0 = the boots are useless D:"})
+                       "1 = no slowdown when walking through plants", "0 = the boots are useless D:"})
       @Config.RangeDouble(
-              min = 0,
-              max = 1
+        min = 0,
+        max = 1
       )
       @Config.LangKey("config.tfcthings.items.shoePower")
       public double shoePower = 1;
@@ -111,8 +110,8 @@ public class ConfigTFCThings {
     public static final class RopeBridgeCFG {
 
       @Config.RangeInt(
-              min = 1,
-              max = 64
+        min = 1,
+        max = 64
       )
       @Config.Comment({"The max stack size for rope bridge bundles which also determines the maximum length of a thrown bridge"})
       @Config.LangKey("config.tfcthings.items.maxStackSize")
@@ -171,9 +170,9 @@ public class ConfigTFCThings {
   }
 
   @Config(
-          modid = MODID_TFCTHINGS,
-          category = "misc",
-          name = "TerraFirmaThings - Misc"
+    modid = MODID_TFCTHINGS,
+    category = "misc",
+    name = "TerraFirmaThings - Misc"
   )
   @Config.LangKey("config.tfcthings.misc")
   public static final class Misc {
@@ -186,18 +185,18 @@ public class ConfigTFCThings {
 
       @Config.Comment("The percent chance to create a Pigvil when feeding a pig iron carrot to a male pig")
       @Config.RangeDouble(
-              min = 0.0D,
-              max = 1.0D
+        min = 0.0D,
+        max = 1.0D
       )
       @Config.LangKey("config.tfcthings.misc.convertChance")
       public double convertChance = 0.25D;
 
       @Config.Comment({"The level of familiarity required for a male pig to be eligible for conversion into a Pigvil.",
-              "The default value, 0.35 is the adult familiarity cap", "Levels higher than 0.35 require raising a baby pig",
-              "Set to 0 to require no familiarity"})
+                       "The default value, 0.35 is the adult familiarity cap", "Levels higher than 0.35 require raising a baby pig",
+                       "Set to 0 to require no familiarity"})
       @Config.RangeDouble(
-              min = 0.0D,
-              max = 1.0D
+        min = 0.0D,
+        max = 1.0D
       )
       @Config.LangKey("config.tfcthings.misc.familiarityLevel")
       public double familiarityLevel = 0.35D;

@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.modules.rock.api.types.type.RockTypes.CHERT;
@@ -23,8 +22,8 @@ public class BlockRockSand extends BlockRockFallable {
     super(Settings.of(Material.SAND), variant, type);
 
     getSettings()
-            .oreDict(isSilica(type))
-            .sound(SoundType.SAND);
+      .oreDict(isSilica(type))
+      .sound(SoundType.SAND);
 
     //DirtHelper.registerSoil(this.getDefaultState().get(), DirtHelper.SANDLIKE);
   }

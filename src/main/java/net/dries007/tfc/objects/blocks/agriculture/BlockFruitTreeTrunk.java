@@ -22,7 +22,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
@@ -67,10 +66,10 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
     BlockUtils.setFireInfo(this, 5, 20);
     this.tree = tree;
     setDefaultState(blockState.getBaseState()
-            .withProperty(NORTH, false)
-            .withProperty(SOUTH, false)
-            .withProperty(EAST, false)
-            .withProperty(WEST, false));
+                              .withProperty(NORTH, false)
+                              .withProperty(SOUTH, false)
+                              .withProperty(EAST, false)
+                              .withProperty(WEST, false));
   }
 
   public static BlockFruitTreeTrunk get(IFruitTree tree) {
@@ -139,7 +138,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
   @SuppressWarnings("deprecation")
   @Override
   public void addCollisionBoxToList(IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos, @NotNull AxisAlignedBB entityBox,
-          @NotNull List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+                                    @NotNull List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
     addCollisionBoxToList(pos, entityBox, collidingBoxes, TRUNK_AABB);
   }
 
@@ -162,7 +161,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
         if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier) && tree.isValidForGrowth(temp, rainfall)) {
           tile.resetCounter();
           if (worldIn.getBlockState(pos.up())
-                  .getBlock() != this) //If the above block is a trunk, this one don't need to do anything
+                     .getBlock() != this) //If the above block is a trunk, this one don't need to do anything
           {
             if (this.getTrunkHeight(worldIn, pos) < 4) {
               BlockPos missingLeaf = getMissingLeaf(worldIn, pos);
@@ -170,8 +169,8 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                 //Missing leaf, spawn that first
                 if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
                   worldIn.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree)
-                          .getDefaultState()
-                          .withProperty(BlockFruitTreeLeaves.HARVESTABLE, false));
+                                                                         .getDefaultState()
+                                                                         .withProperty(BlockFruitTreeLeaves.HARVESTABLE, false));
                 }
               } else {
                 //Time to grow one trunk
@@ -187,8 +186,8 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                   //There is a missing leaf
                   if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
                     worldIn.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree)
-                            .getDefaultState()
-                            .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                                                           .getDefaultState()
+                                                                           .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
                   }
                   return; //Done what we needed to do on this stage
                 } else {
@@ -202,8 +201,8 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                   //There is a missing leaf
                   if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
                     worldIn.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree)
-                            .getDefaultState()
-                            .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                                                           .getDefaultState()
+                                                                           .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
                   }
                   return; //Done what we needed to do on this stage
                 }
@@ -212,8 +211,8 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                 if (missingLeaf != null) {
                   if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
                     worldIn.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree)
-                            .getDefaultState()
-                            .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                                                           .getDefaultState()
+                                                                           .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
                   }
                   return; //Done what we needed to do on this stage
                 }
@@ -221,21 +220,21 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                 if (missingLeaf != null) {
                   if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
                     worldIn.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree)
-                            .getDefaultState()
-                            .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                                                           .getDefaultState()
+                                                                           .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
                   }
                   return; //Done what we needed to do on this stage
                 }
               }
               List<EnumFacing> shuffledList = Arrays.asList(
-                      EnumFacing.HORIZONTALS.clone()); //if we don't clone, the original array shuffes!
+                EnumFacing.HORIZONTALS.clone()); //if we don't clone, the original array shuffes!
               Collections.shuffle(shuffledList, new Random(pos.toLong()));
               for (EnumFacing branchFacing : shuffledList) {
                 BlockPos branchPos = pos.offset(branchFacing);
                 if (worldIn.getBlockState(branchPos).getBlock() != BlockFruitTreeBranch.get(tree)) {
                   if (worldIn.getBlockState(branchPos).getMaterial().isReplaceable()) {
                     worldIn.setBlockState(branchPos, BlockFruitTreeBranch.get(tree)
-                            .getDefaultState());
+                                                                         .getDefaultState());
                   }
                   return; //Done what we needed to do on this stage
                 }
@@ -243,8 +242,8 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                 if (missingLeaf != null) {
                   if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
                     worldIn.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree)
-                            .getDefaultState()
-                            .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                                                           .getDefaultState()
+                                                                           .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
                     return; //Done what we needed to do on this stage
                   }
                 }
@@ -261,7 +260,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
     if (!(worldIn.getBlockState(pos.down())
-            .getBlock() instanceof BlockFruitTreeTrunk) && !BlockUtils.isGrowableSoil(worldIn.getBlockState(pos.down()))) {
+                 .getBlock() instanceof BlockFruitTreeTrunk) && !BlockUtils.isGrowableSoil(worldIn.getBlockState(pos.down()))) {
       worldIn.destroyBlock(pos, true);
     }
   }
@@ -282,7 +281,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
       //Not needed to destroy leaves, they will decay by itself
       Block branch = BlockFruitTreeBranch.get(tree);
       if (worldIn.getBlockState(pos.up()).getBlock() == this || worldIn.getBlockState(pos.up())
-              .getBlock() == branch) {
+                                                                       .getBlock() == branch) {
         worldIn.destroyBlock(pos.up(), true);
       }
       if (worldIn.getBlockState(pos.north()).getBlock() == branch) {
@@ -364,8 +363,8 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
       missingLeaf = getMissingLeaf(world, oldCenter.up());
       if (missingLeaf != null && world.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
         world.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree)
-                .getDefaultState()
-                .withProperty(BlockFruitTreeLeaves.HARVESTABLE, hasvestable));
+                                                             .getDefaultState()
+                                                             .withProperty(BlockFruitTreeLeaves.HARVESTABLE, hasvestable));
       } else {
         //Found a block(ceiling?) that prevents this tree to grow leafs, aborting
         break;
@@ -383,9 +382,9 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 
     //The rest is shuffled
     List<BlockPos> positions = Arrays.asList(branchPos.offset(branchFacing.rotateY()),
-            branchPos.offset(branchFacing.rotateY().getOpposite()),
-            branchPos.offset(branchFacing).offset(branchFacing.rotateY()),
-            branchPos.offset(branchFacing).offset(branchFacing.rotateY().getOpposite())
+                                             branchPos.offset(branchFacing.rotateY().getOpposite()),
+                                             branchPos.offset(branchFacing).offset(branchFacing.rotateY()),
+                                             branchPos.offset(branchFacing).offset(branchFacing.rotateY().getOpposite())
     );
     Collections.shuffle(positions);
     for (BlockPos pos : positions) {

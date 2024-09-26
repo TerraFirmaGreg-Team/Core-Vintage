@@ -9,7 +9,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-
 import BananaFructa.tfcpassingdays.PassingDayWorldProviderServer;
 
 public class BlockDaylightDetectorFixed extends BlockDaylightDetector {
@@ -29,12 +28,12 @@ public class BlockDaylightDetectorFixed extends BlockDaylightDetector {
     boolean modifiedProvider = worldIn.provider instanceof PassingDayWorldProviderServer;
     IBlockState iblockstate = worldIn.getBlockState(pos);
     int i = worldIn.getLightFor(EnumSkyBlock.SKY, pos) - (modifiedProvider
-            ? ((PassingDayWorldProviderServer) worldIn.provider).getSubtractedSkylight(pos.getZ())
-            : worldIn.getSkylightSubtracted());
+                                                          ? ((PassingDayWorldProviderServer) worldIn.provider).getSubtractedSkylight(pos.getZ())
+                                                          : worldIn.getSkylightSubtracted());
 
     float f = (modifiedProvider
-            ? ((PassingDayWorldProviderServer) worldIn.provider).getCelestialAngleRadians(1, pos.getZ())
-            : worldIn.getCelestialAngleRadians(1.0F));
+               ? ((PassingDayWorldProviderServer) worldIn.provider).getCelestialAngleRadians(1, pos.getZ())
+               : worldIn.getCelestialAngleRadians(1.0F));
 
     if (this.inverted) {
       i = 15 - i;

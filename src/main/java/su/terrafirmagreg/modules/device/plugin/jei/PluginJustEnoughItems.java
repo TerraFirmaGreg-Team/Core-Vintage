@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
@@ -32,7 +31,7 @@ public final class PluginJustEnoughItems implements IModPlugin {
 
     // ==== QUERN ====
     registry.addRecipes(QuernRecipeMaker.getRecipes(), QuernRecipeCategory.UID);
-    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.QUERN), QuernRecipeCategory.UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.QUERN_MANUAL), QuernRecipeCategory.UID);
 
   }
 }

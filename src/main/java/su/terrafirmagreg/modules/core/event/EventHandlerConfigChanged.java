@@ -1,15 +1,14 @@
 package su.terrafirmagreg.modules.core.event;
 
-import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.core.ModuleCore;
-import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
-import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
-
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.core.ModuleCore;
+import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
+import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 
 import static su.terrafirmagreg.data.Constants.MOD_ID;
 

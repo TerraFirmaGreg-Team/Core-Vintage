@@ -24,7 +24,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
 
@@ -37,6 +36,30 @@ public class OverlayTemperature {
   public static final ResourceLocation PLUS = ModUtils.resource("textures/gui/icons/higher.png");
   public static final ResourceLocation MINUSER = ModUtils.resource("textures/gui/icons/lowerer.png");
   public static final ResourceLocation PLUSER = ModUtils.resource("textures/gui/icons/higherer.png");
+
+  private static void drawTexturedModalRect(float x, float y, float width, float height,
+                                            ResourceLocation loc) {
+    Minecraft minecraft = Minecraft.getMinecraft();
+    minecraft.getTextureManager().bindTexture(loc);
+
+    GlStateManager.disableDepth();
+    GlStateManager.depthMask(false);
+    GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0f);
+    GlStateManager.disableAlpha();
+    Tessellator tessellator = Tessellator.getInstance();
+    BufferBuilder buffer = tessellator.getBuffer();
+    buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+    buffer.pos(x, y + height, -90.0D).tex(0.0D, 1.0D).endVertex();
+    buffer.pos(x + width, y + height, -90.0D).tex(1.0D, 1.0D).endVertex();
+    buffer.pos(x + width, y, -90.0D).tex(1.0D, 0.0D).endVertex();
+    buffer.pos(x, y, -90.0D).tex(0.0D, 0.0D).endVertex();
+    tessellator.draw();
+    GlStateManager.depthMask(true);
+    GlStateManager.enableDepth();
+    GlStateManager.enableAlpha();
+    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+  }
 
   @SubscribeEvent
   public void onPostRenderOverlay(RenderGameOverlayEvent.Post event) {
@@ -70,8 +93,8 @@ public class OverlayTemperature {
     IBlockState state = player.world.getBlockState(pos2);
     Block block = state.getBlock();
     if (block == FluidsTFC.HOT_WATER.get().getBlock() || block == FluidsTFC.SALT_WATER.get()
-            .getBlock() ||
-            block == FluidsTFC.FRESH_WATER.get().getBlock()) {
+                                                                                      .getBlock() ||
+        block == FluidsTFC.FRESH_WATER.get().getBlock()) {
       offsetY = -10f;
       offsetX = 0;
     }
@@ -96,7 +119,7 @@ public class OverlayTemperature {
     } else {
       float coolRange = ProviderTemperature.AVERAGE - ProviderTemperature.COOL_THRESHOLD - 2;
       float blue = Math.max(0,
-              Math.min(1, (ProviderTemperature.AVERAGE - temperature) / coolRange));
+                            Math.min(1, (ProviderTemperature.AVERAGE - temperature) / coolRange));
       redCol = 1.0F - blue / 1.6F;
       greenCol = 1.0F - blue / 2.4F;
       blueCol = 1.0F;
@@ -131,12 +154,12 @@ public class OverlayTemperature {
       }
       FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
       String tempStr = String.format("%.1f" + Unicode.DEGREE + " -> %.1f" + Unicode.DEGREE,
-              temperature, targetFormatted);
+                                     temperature, targetFormatted);
       String changeStr = String.format("%.3f" + Unicode.DEGREE + "/s", change);
       fr.drawStringWithShadow(tempStr, mid + 50 - (float) fr.getStringWidth(tempStr) / 2 + offsetX,
-              armorRowHeight + 1 + offsetY, c.getRGB());
+                              armorRowHeight + 1 + offsetY, c.getRGB());
       fr.drawStringWithShadow(changeStr, mid - 50 - (float) fr.getStringWidth(changeStr) / 2,
-              armorRowHeight + 1, c.getRGB());
+                              armorRowHeight + 1, c.getRGB());
 
     }
     GL11.glColor4f(1f, 1f, 1f, 0.9F);
@@ -144,7 +167,7 @@ public class OverlayTemperature {
   }
 
   private void drawTemperatureVignettes(int width, int height, EntityPlayer player,
-          RenderGameOverlayEvent.Pre event) {
+                                        RenderGameOverlayEvent.Pre event) {
     ResourceLocation vignetteLocation = null;
     float temperature = 1f;
     var tempSystem = CapabilityTemperature.get(player);
@@ -184,29 +207,5 @@ public class OverlayTemperature {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
       }
     }
-  }
-
-  private static void drawTexturedModalRect(float x, float y, float width, float height,
-          ResourceLocation loc) {
-    Minecraft minecraft = Minecraft.getMinecraft();
-    minecraft.getTextureManager().bindTexture(loc);
-
-    GlStateManager.disableDepth();
-    GlStateManager.depthMask(false);
-    GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
-    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0f);
-    GlStateManager.disableAlpha();
-    Tessellator tessellator = Tessellator.getInstance();
-    BufferBuilder buffer = tessellator.getBuffer();
-    buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-    buffer.pos(x, y + height, -90.0D).tex(0.0D, 1.0D).endVertex();
-    buffer.pos(x + width, y + height, -90.0D).tex(1.0D, 1.0D).endVertex();
-    buffer.pos(x + width, y, -90.0D).tex(1.0D, 0.0D).endVertex();
-    buffer.pos(x, y, -90.0D).tex(0.0D, 0.0D).endVertex();
-    tessellator.draw();
-    GlStateManager.depthMask(true);
-    GlStateManager.enableDepth();
-    GlStateManager.enableAlpha();
-    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
   }
 }

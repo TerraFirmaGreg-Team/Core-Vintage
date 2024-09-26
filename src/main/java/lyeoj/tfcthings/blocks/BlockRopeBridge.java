@@ -3,7 +3,6 @@ package lyeoj.tfcthings.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
@@ -18,7 +17,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
 
 import lyeoj.tfcthings.init.TFCThingsItems;
 import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
@@ -43,8 +41,8 @@ public class BlockRopeBridge extends Block implements TFCThingsConfigurableItem 
     this.setHardness(0.5f);
     this.setHarvestLevel("axe", 0);
     this.setDefaultState(this.blockState.getBaseState()
-            .withProperty(OFFSET, Integer.valueOf(0))
-            .withProperty(AXIS, Boolean.valueOf(false)));
+                                        .withProperty(OFFSET, Integer.valueOf(0))
+                                        .withProperty(AXIS, Boolean.valueOf(false)));
   }
 
   @NotNull
@@ -78,7 +76,7 @@ public class BlockRopeBridge extends Block implements TFCThingsConfigurableItem 
   }
 
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     if (OreDictionaryHelper.doesStackMatchOre(playerIn.getHeldItem(hand), "stickWood")) {
       state = state.cycleProperty(OFFSET);
       worldIn.setBlockState(pos, state, 2);

@@ -39,7 +39,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.client.particle.TFCParticles;
@@ -84,17 +83,17 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
     this.leavesFancy = true; // Fast / Fancy graphics works correctly
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .ignoresProperties(DECAYABLE, HARVESTABLE)
-            .nonOpaque()
-            .randomTicks()
-            .oreDict(variant)
-            .oreDict(variant, type);
+      .registryKey(variant.getRegistryKey(type))
+      .ignoresProperties(DECAYABLE, HARVESTABLE)
+      .nonOpaque()
+      .randomTicks()
+      .oreDict(variant)
+      .oreDict(variant, type);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(LEAF_STATE, NORMAL)
-            .withProperty(HARVESTABLE, false)
-            .withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
+                              .withProperty(LEAF_STATE, NORMAL)
+                              .withProperty(HARVESTABLE, false)
+                              .withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
 
     BlockUtils.setFireInfo(this, 30, 60);
   }
@@ -102,9 +101,9 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-            .withProperty(HARVESTABLE, meta > 3)
-            .withProperty(LEAF_STATE, valueOf(meta & 0b11))
-            .withProperty(DECAYABLE, (meta & 0b01) == 0b01);
+               .withProperty(HARVESTABLE, meta > 3)
+               .withProperty(LEAF_STATE, valueOf(meta & 0b11))
+               .withProperty(DECAYABLE, (meta & 0b01) == 0b01);
   }
 
   @Override
@@ -203,7 +202,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                  float hitZ) {
     if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == FRUIT && this.type.getDrop() != null) {
       if (!worldIn.isRemote) {
         ItemHandlerHelper.giveItemToPlayer(playerIn, this.type.getFoodDrop());
@@ -282,30 +281,33 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
       switch (RNG.nextInt(4)) {
         case 1:
           TFCParticles.LEAF1.sendToAllNear(world, x + RNG.nextFloat() /
-                  particleScale, y - RNG.nextFloat() /
-                  particleScale, z + RNG.nextFloat() /
-                  particleScale, (RNG.nextFloat() - 0.5) /
-                  particleScale, -0.15D + RNG.nextFloat() /
-                  particleScale, (RNG.nextFloat() - 0.5) /
-                  particleScale, 90);
+                                                      particleScale, y - RNG.nextFloat() /
+                                                                         particleScale, z + RNG.nextFloat() /
+                                                                                            particleScale, (RNG.nextFloat() - 0.5) /
+                                                                                                           particleScale, -0.15D + RNG.nextFloat() /
+                                                                                                                                   particleScale,
+                                           (RNG.nextFloat() - 0.5) /
+                                           particleScale, 90);
           break;
         case 2:
           TFCParticles.LEAF2.sendToAllNear(world, x + RNG.nextFloat() /
-                  particleScale, y - RNG.nextFloat() /
-                  particleScale, z + RNG.nextFloat() /
-                  particleScale, (RNG.nextFloat() - 0.5) /
-                  particleScale, -0.15D + RNG.nextFloat() /
-                  particleScale, (RNG.nextFloat() - 0.5) /
-                  particleScale, 70);
+                                                      particleScale, y - RNG.nextFloat() /
+                                                                         particleScale, z + RNG.nextFloat() /
+                                                                                            particleScale, (RNG.nextFloat() - 0.5) /
+                                                                                                           particleScale, -0.15D + RNG.nextFloat() /
+                                                                                                                                   particleScale,
+                                           (RNG.nextFloat() - 0.5) /
+                                           particleScale, 70);
           break;
         case 3:
           TFCParticles.LEAF3.sendToAllNear(world, x + RNG.nextFloat() /
-                  particleScale, y - RNG.nextFloat() /
-                  particleScale, z + RNG.nextFloat() /
-                  particleScale, (RNG.nextFloat() - 0.5) /
-                  particleScale, -0.15D + RNG.nextFloat() /
-                  particleScale, (RNG.nextFloat() - 0.5) /
-                  particleScale, 80);
+                                                      particleScale, y - RNG.nextFloat() /
+                                                                         particleScale, z + RNG.nextFloat() /
+                                                                                            particleScale, (RNG.nextFloat() - 0.5) /
+                                                                                                           particleScale, -0.15D + RNG.nextFloat() /
+                                                                                                                                   particleScale,
+                                           (RNG.nextFloat() - 0.5) /
+                                           particleScale, 80);
           break;
       }
     }
@@ -388,8 +390,8 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
   @SideOnly(Side.CLIENT)
   @Override
   public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess,
-          BlockPos pos,
-          EnumFacing side) {
+                                      BlockPos pos,
+                                      EnumFacing side) {
     /*
      * See comment on getRenderLayer()
      */
@@ -412,6 +414,16 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
     return TileWoodLeaves.class;
   }
 
+  @Override
+  public IBlockColor getBlockColor() {
+    return GrassColorHandler::computeGrassColor;
+  }
+
+  @Override
+  public IItemColor getItemColor() {
+    return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
+  }
+
 
   public enum EnumLeafState implements IStringSerializable {
     NORMAL,
@@ -430,17 +442,6 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
     public String getName() {
       return this.name().toLowerCase();
     }
-  }
-
-  @Override
-  public IBlockColor getBlockColor() {
-    return GrassColorHandler::computeGrassColor;
-  }
-
-
-  @Override
-  public IItemColor getItemColor() {
-    return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
   }
 
 

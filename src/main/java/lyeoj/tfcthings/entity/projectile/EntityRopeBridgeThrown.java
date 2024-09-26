@@ -16,7 +16,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
-
 import io.netty.buffer.ByteBuf;
 import lyeoj.tfcthings.blocks.BlockRopeBridge;
 import lyeoj.tfcthings.init.TFCThingsBlocks;
@@ -62,7 +61,7 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
         return;
       }
       if (result.getBlockPos() != null && world.getBlockState(result.getBlockPos())
-              .getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB) {
+                                               .getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB) {
         if (getThrower() != null) {
           BlockPos end = result.getBlockPos().up();
           BlockPos start = getThrower().getPosition();
@@ -84,7 +83,7 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
                   BlockPos tempStart = new BlockPos(end.getX(), start.getY(), start.getZ());
                   if (shouldReplaceBlock(tempStart.down(), world)) {
                     getThrower().sendMessage(
-                            new TextComponentTranslation("tfcthings.tooltip.rope_bridge_bad_connection"));
+                      new TextComponentTranslation("tfcthings.tooltip.rope_bridge_bad_connection"));
                     diagonal = true;
                   } else {
                     start = tempStart;
@@ -104,7 +103,7 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
                   BlockPos tempStart = new BlockPos(start.getX(), start.getY(), end.getZ());
                   if (shouldReplaceBlock(tempStart.down(), world)) {
                     getThrower().sendMessage(
-                            new TextComponentTranslation("tfcthings.tooltip.rope_bridge_bad_connection"));
+                      new TextComponentTranslation("tfcthings.tooltip.rope_bridge_bad_connection"));
                     diagonal = true;
                   } else {
                     start = tempStart;
@@ -118,7 +117,7 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
               }
             }
             EnumFacing direction =
-                    axis ? (zDif > 0 ? EnumFacing.SOUTH : EnumFacing.NORTH) : (xDif > 0 ? EnumFacing.EAST : EnumFacing.WEST);
+              axis ? (zDif > 0 ? EnumFacing.SOUTH : EnumFacing.NORTH) : (xDif > 0 ? EnumFacing.EAST : EnumFacing.WEST);
             switch (direction) {
               case SOUTH:
                 start = start.south();
@@ -283,8 +282,8 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
     }
     for (BridgeInfo info : bridgePath) {
       world.setBlockState(info.pos, TFCThingsBlocks.ROPE_BRIDGE_BLOCK.getDefaultState()
-              .withProperty(BlockRopeBridge.AXIS, axis)
-              .withProperty(BlockRopeBridge.OFFSET, info.height));
+                                                                     .withProperty(BlockRopeBridge.AXIS, axis)
+                                                                     .withProperty(BlockRopeBridge.OFFSET, info.height));
     }
     if (getThrower() instanceof EntityPlayer && !(((EntityPlayer) getThrower()).isCreative())) {
       bridges.setCount(bridges.getCount() - (length - 1));

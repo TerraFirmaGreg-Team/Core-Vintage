@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
@@ -19,14 +20,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IShearable;
 
-
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.util.calendar.Calendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
-
 import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
@@ -69,7 +64,7 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
     int age = state.getValue(AGE);
     if (!worldIn.isRemote) {
       if (stack.getItem().getHarvestLevel(stack, "knife", player, state) == -1 && stack.getItem()
-              .getHarvestLevel(stack, "scythe", player, state) == -1) {
+                                                                                       .getHarvestLevel(stack, "scythe", player, state) == -1) {
         if (stack.getItem() == Items.SHEARS) {
           spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
         }
@@ -89,7 +84,7 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
     if (worldIn.isAreaLoaded(pos, 1)) {
       int j;
       if (this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
-              this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+          this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
         j = state.getValue(AGE);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
           if (j < 3) {
@@ -99,7 +94,7 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
           ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
         }
       } else if (!this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
-              !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+                 !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
         j = state.getValue(AGE);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
           if (j > 0) {

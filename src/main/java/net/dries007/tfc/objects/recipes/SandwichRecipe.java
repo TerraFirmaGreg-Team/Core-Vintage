@@ -12,7 +12,6 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 
-
 import com.google.gson.JsonObject;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -49,7 +48,7 @@ public class SandwichRecipe extends ShapedDamageRecipe {
 
       sandwich.initCreationFoods(breads.get(0), breads.get(1), ingredients);
       sandwich.setCreationDate(
-              Calendar.PLAYER_TIME.getTicks()); // Meals get decay reset as they have on average, high decay modifiers. Also it's too much of a pain to re-calculate a remaining decay fraction average
+        Calendar.PLAYER_TIME.getTicks()); // Meals get decay reset as they have on average, high decay modifiers. Also it's too much of a pain to re-calculate a remaining decay fraction average
     }
     return output;
   }

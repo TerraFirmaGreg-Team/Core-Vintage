@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.wood.object.inventory;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodChest;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.VanillaDoubleChestItemHandler;
-
 
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 
@@ -40,13 +39,14 @@ public class WoodDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
     for (int i = horizontals.length - 1; i >= 0; i--)   // Use reverse order so we can return early
     {
       EnumFacing enumfacing = horizontals[i];
-      BlockPos blockpos = pos.offset(enumfacing);
-      Block block = world.getBlockState(blockpos).getBlock();
+      BlockPos blockPos = pos.offset(enumfacing);
+      Block block = world.getBlockState(blockPos).getBlock();
 
       if (block == blockType) {
-        TileEntity otherTE = world.getTileEntity(blockpos);
+        var tile = TileUtils.getTile(world, blockPos);
+        if (tile == null) {continue;}
 
-        if (otherTE instanceof TileEntityChest otherChest) {
+        if (tile instanceof TileEntityChest otherChest) {
           return new WoodDoubleChestItemHandler(chest, otherChest, enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH);
 
         }

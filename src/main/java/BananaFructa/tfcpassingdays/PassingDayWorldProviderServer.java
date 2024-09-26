@@ -4,7 +4,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.WorldProvider;
 import net.minecraftforge.common.MinecraftForge;
 
-
 import net.dries007.tfc.util.calendar.Calendar;
 
 public class PassingDayWorldProviderServer extends PassingDaysWorldProvider {

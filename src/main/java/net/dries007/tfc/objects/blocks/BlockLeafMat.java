@@ -26,7 +26,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import com.eerussianguy.firmalife.recipe.DryingRecipe;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.te.TELeafMat;
@@ -107,7 +106,7 @@ public class BlockLeafMat extends Block implements ICapabilitySize {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-          float hitY, float hitZ) {
+                                  float hitY, float hitZ) {
     if (!world.isRemote) {
       ItemStack held = player.getHeldItem(hand);
       if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {

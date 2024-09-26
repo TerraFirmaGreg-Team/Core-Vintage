@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 
-
 import net.dries007.tfc.objects.te.TEDryingMat;
 
 public class TESRDryingMat extends TileEntitySpecialRenderer<TEDryingMat> {

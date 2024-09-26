@@ -5,7 +5,6 @@ import su.terrafirmagreg.data.lib.types.type.Type;
 
 import net.minecraft.util.ResourceLocation;
 
-
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import org.jetbrains.annotations.NotNull;

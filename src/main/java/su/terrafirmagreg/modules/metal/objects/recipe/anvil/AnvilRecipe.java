@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.forge.ForgeRule;
@@ -21,7 +20,7 @@ import static su.terrafirmagreg.data.MathConstants.RNG;
 
 @Getter
 public class AnvilRecipe
-        implements IAnvilRecipe {
+  implements IAnvilRecipe {
 
   public static final NonNullList<ItemStack> EMPTY = NonNullList.create();
   private static long SEED = 0;
@@ -35,8 +34,8 @@ public class AnvilRecipe
   protected final long workingSeed;
 
   public AnvilRecipe(ResourceLocation recipeName, IIngredient<ItemStack> inputItem,
-          ItemStack outputItem, Metal.Tier tier, @Nullable SmithingSkill.Type skillBonusType,
-          ForgeRule... rules) {
+                     ItemStack outputItem, Metal.Tier tier, @Nullable SmithingSkill.Type skillBonusType,
+                     ForgeRule... rules) {
     this.inputItem = inputItem;
     this.outputItem = outputItem;
     this.tier = tier;

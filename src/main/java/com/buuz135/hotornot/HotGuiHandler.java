@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
-
 import com.buuz135.hotornot.object.item.ItemMetalTongsJawMold;
 import net.dries007.tfc.client.gui.GuiLiquidTransfer;
 import net.dries007.tfc.objects.container.ContainerLiquidTransfer;
@@ -28,7 +27,7 @@ public class HotGuiHandler implements IGuiHandler {
     if (ID == 0) {
       final ItemStack heldStack = player.getHeldItemMainhand();
       return new ContainerLiquidTransfer(player.inventory,
-              heldStack.getItem() instanceof ItemMetalTongsJawMold ? heldStack : player.getHeldItemMainhand());
+                                         heldStack.getItem() instanceof ItemMetalTongsJawMold ? heldStack : player.getHeldItemMainhand());
     }
     return null;
   }
@@ -39,7 +38,7 @@ public class HotGuiHandler implements IGuiHandler {
     final Container container = getServerGuiElement(ID, player, world, x, y, z);
     if (ID == 0) {
       return new GuiLiquidTransfer(container, player, player.getHeldItemMainhand()
-              .getItem() instanceof ItemMetalTongsJawMold);
+                                                            .getItem() instanceof ItemMetalTongsJawMold);
     }
     return null;
   }

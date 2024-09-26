@@ -31,42 +31,35 @@
     "category": "block",
     "subtitle": "tfc.quern.stonedrag",
     "sounds": [
-      "tfc:stonedrag1",
-      "tfc:stonedrag2"
+      "tfc:stonedrag1", "tfc:stonedrag2"
     ]
   },
   "dirt.slide.short": {
     "category": "block",
     "subtitle": "tfc.dirt.slide",
     "sounds": [
-      "tfc:fdirts1",
-      "tfc:fdirts2"
+      "tfc:fdirts1", "tfc:fdirts2"
     ]
   },
   "rock.slide.long": {
     "category": "block",
     "subtitle": "tfc.rock.slide",
     "sounds": [
-      "tfc:frockl1",
-      "tfc:frockl2"
+      "tfc:frockl1", "tfc:frockl2"
     ]
   },
   "rock.slide.short": {
     "category": "block",
     "subtitle": "tfc.rock.slide",
     "sounds": [
-      "tfc:frocks1",
-      "tfc:frocks2"
+      "tfc:frocks1", "tfc:frocks2"
     ]
   },
   "anvil.metalimpact": {
     "category": "block",
     "subtitle": "tfc.anvil.metalimpact",
     "sounds": [
-      "tfc:metalimpact1",
-      "tfc:metalimpact2",
-      "tfc:metalimpact3",
-      "tfc:metalimpact4"
+      "tfc:metalimpact1", "tfc:metalimpact2", "tfc:metalimpact3", "tfc:metalimpact4"
     ]
   },
   "block.charcoal.break": {
@@ -76,12 +69,10 @@
       {
         "name": "tfc:charcoaldig1",
         "pitch": 0.9
-      },
-      {
+      }, {
         "name": "tfc:charcoaldig1",
         "pitch": 1.0
-      },
-      {
+      }, {
         "name": "tfc:charcoaldig1",
         "pitch": 1.1
       }
@@ -93,12 +84,10 @@
       {
         "name": "tfc:charcoaldig1",
         "pitch": 0.9
-      },
-      {
+      }, {
         "name": "tfc:charcoaldig1",
         "pitch": 1.0
-      },
-      {
+      }, {
         "name": "tfc:charcoaldig1",
         "pitch": 1.1
       }
@@ -111,12 +100,10 @@
       {
         "name": "tfc:charcoalstep1",
         "pitch": 0.9
-      },
-      {
+      }, {
         "name": "tfc:charcoalstep1",
         "pitch": 1.0
-      },
-      {
+      }, {
         "name": "tfc:charcoalstep1",
         "pitch": 1.1
       }
@@ -129,12 +116,10 @@
       {
         "name": "tfc:charcoaldig1",
         "pitch": 0.9
-      },
-      {
+      }, {
         "name": "tfc:charcoaldig1",
         "pitch": 1.0
-      },
-      {
+      }, {
         "name": "tfc:charcoaldig1",
         "pitch": 1.1
       }
@@ -147,12 +132,10 @@
       {
         "name": "tfc:charcoalstep1",
         "pitch": 0.9
-      },
-      {
+      }, {
         "name": "tfc:charcoalstep1",
         "pitch": 1.0
-      },
-      {
+      }, {
         "name": "tfc:charcoalstep1",
         "pitch": 1.1
       }
@@ -164,20 +147,16 @@
       {
         "name": "tfc:music/m0",
         "stream": true
-      },
-      {
+      }, {
         "name": "tfc:music/m1",
         "stream": true
-      },
-      {
+      }, {
         "name": "tfc:music/m2",
         "stream": true
-      },
-      {
+      }, {
         "name": "tfc:music/m3",
         "stream": true
-      },
-      {
+      }, {
         "name": "tfc:music/m4",
         "stream": true
       }

@@ -12,7 +12,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
@@ -110,8 +109,8 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
         return false;
       default:
         return stack.hasCapability(CapabilityFood.CAPABILITY, null) &&
-                Food.Category.doesStackMatchCategories(stack, Food.Category.VEGETABLE, Food.Category.FRUIT, Food.Category.COOKED_MEAT,
-                        Food.Category.DAIRY);
+               Food.Category.doesStackMatchCategories(stack, Food.Category.VEGETABLE, Food.Category.FRUIT, Food.Category.COOKED_MEAT,
+                                                      Food.Category.DAIRY);
     }
   }
 
@@ -170,8 +169,8 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
             if (saladCap instanceof ItemDynamicBowlFood.DynamicFoodHandler) {
               saladCap.setCreationDate(CapabilityFood.getRoundedCreationDate());
               ((ItemDynamicBowlFood.DynamicFoodHandler) saladCap).initCreationDataAndBowl(bowlStack.copy()
-                      .splitStack(1), new FoodData(4, water, saturation, nutrition, Food.SALAD_VEGETABLE.getData()
-                      .getDecayModifier()));
+                                                                                                   .splitStack(1), new FoodData(4, water, saturation, nutrition, Food.SALAD_VEGETABLE.getData()
+                                                                                                                                                                                     .getDecayModifier()));
             }
             inventory.setStackInSlot(SLOT_OUTPUT, salad);
             return;

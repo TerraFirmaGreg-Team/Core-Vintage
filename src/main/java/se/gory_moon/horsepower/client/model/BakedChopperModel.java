@@ -1,5 +1,7 @@
 package se.gory_moon.horsepower.client.model;
 
+import su.terrafirmagreg.api.util.RenderUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -20,7 +22,6 @@ import net.minecraftforge.client.model.SimpleModelState;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
 
-
 import com.google.common.base.Function;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -28,7 +29,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.tuple.Pair;
-import se.gory_moon.horsepower.util.RenderUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -50,8 +50,8 @@ public class BakedChopperModel implements IBakedModel {
   private final Function<ResourceLocation, TextureAtlasSprite> textureGetter;
 
   private final Cache<TableCombinationCacheKey, IBakedModel> tableCombinedCache = CacheBuilder.newBuilder()
-          .maximumSize(20)
-          .build();
+                                                                                              .maximumSize(20)
+                                                                                              .build();
 
   public BakedChopperModel(IBakedModel standard, IModel choppingModel, VertexFormat format) {
     this.standard = standard;
@@ -168,7 +168,7 @@ public class BakedChopperModel implements IBakedModel {
       if (originalModel instanceof BakedChopperModel) {
         // read out the data on the itemstack
         ItemStack blockStack = new ItemStack(stack.hasTagCompound() ? stack.getTagCompound()
-                .getCompoundTag("textureBlock") : new NBTTagCompound());
+                                                                           .getCompoundTag("textureBlock") : new NBTTagCompound());
         if (!blockStack.isEmpty()) {
           // get model from data
           Block block = Block.getBlockFromItem(blockStack.getItem());

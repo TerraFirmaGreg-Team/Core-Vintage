@@ -8,7 +8,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.util.forge.ForgeStep;
 
@@ -37,7 +36,7 @@ public class GuiButtonAnvilStep extends BaseGuiButton implements IButtonTooltip 
       GlStateManager.color(1, 1, 1, 1);
       mc.getTextureManager().bindTexture(BACKGROUND);
       hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
-              && mouseY < this.y + this.height;
+                && mouseY < this.y + this.height;
       //drawModalRectWithCustomSizedTexture(x, y, textureU, textureV, 32, 32, 256, 256);
       drawScaledCustomSizeModalRect(x, y, textureU, textureV, 32, 32, 16, 16, 256, 256);
       mouseDragged(mc, mouseX, mouseY);

@@ -13,11 +13,11 @@ public class BlockSoilPeat extends BaseBlock {
     super(Settings.of(Material.GROUND));
 
     getSettings()
-            .registryKey("soil/peat")
-            .harvestLevel(ToolClasses.SHOVEL, 0)
-            .sound(SoundType.GROUND)
-            .oreDict("peat")
-            .hardness(0.6F);
+      .registryKey("soil/peat")
+      .harvestLevel(ToolClasses.SHOVEL, 0)
+      .sound(SoundType.GROUND)
+      .oreDict("peat")
+      .hardness(0.6F);
 
     BlockUtils.setFireInfo(this, 5, 10);
     //DirtHelper.registerSoil(this.getDefaultState().get(), DirtHelper.GRAVELLIKE);

@@ -9,7 +9,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
-
 import com.eerussianguy.firmalife.FirmaLife;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
@@ -23,16 +22,7 @@ public class FLGuiHandler implements IGuiHandler {
     player.openGui(FirmaLife.getInstance(), type.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
   }
 
-  public enum Type {
-    KNAPPING_PUMPKIN;
-
-    private static final Type[] values = values();
-
-    public static Type valueOf(int id) {
-      return values[id % values.length];
-    }
-
-  }  @Override
+  @Override
   public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
     BlockPos pos = new BlockPos(x, y, z);
     ItemStack stack = player.getHeldItemMainhand();
@@ -40,7 +30,7 @@ public class FLGuiHandler implements IGuiHandler {
     switch (type) {
       case KNAPPING_PUMPKIN:
         return new ContainerKnapping(KnappingTypes.PUMPKIN, player.inventory,
-                stack.getItem() == Item.getItemFromBlock(BlocksFL.PUMPKIN_FRUIT) ? stack : player.getHeldItemOffhand());
+                                     stack.getItem() == Item.getItemFromBlock(BlocksFL.PUMPKIN_FRUIT) ? stack : player.getHeldItemOffhand());
       default:
         return null;
     }
@@ -56,6 +46,17 @@ public class FLGuiHandler implements IGuiHandler {
       default:
         return null;
     }
+  }
+
+  public enum Type {
+    KNAPPING_PUMPKIN;
+
+    private static final Type[] values = values();
+
+    public static Type valueOf(int id) {
+      return values[id % values.length];
+    }
+
   }
 
 

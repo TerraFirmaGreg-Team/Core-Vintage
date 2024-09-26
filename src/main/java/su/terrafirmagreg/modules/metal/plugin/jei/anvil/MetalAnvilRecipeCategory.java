@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.plugin.jei.category.BaseRecipeCategory;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil;
 
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -12,7 +11,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 
 public class MetalAnvilRecipeCategory
-        extends BaseRecipeCategory<MetalAnvilRecipeWrapper> {
+  extends BaseRecipeCategory<MetalAnvilRecipeWrapper> {
 
   public static final String UID = ModUtils.localize("metal.anvil");
 
@@ -22,7 +21,7 @@ public class MetalAnvilRecipeCategory
 
   @Override
   public void setRecipe(IRecipeLayout recipeLayout, MetalAnvilRecipeWrapper recipeWrapper,
-          IIngredients ingredients) {
+                        IIngredients ingredients) {
     IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
     itemStackGroup.init(0, true, 19, 60);
     itemStackGroup.init(1, true, 117, 60);

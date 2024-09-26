@@ -21,7 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.events.ProspectEvent;
 import net.dries007.tfc.api.types.Metal;
@@ -51,7 +50,7 @@ public class ItemProspectorPick extends ItemMetalTool {
   @Override
   @NotNull
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, @Nullable EnumFacing facing, float hitX,
-          float hitY, float hitZ) {
+                                    float hitY, float hitZ) {
     IBlockState state = worldIn.getBlockState(pos);
     if (facing != null) {
       SoundType soundType = state.getBlock().getSoundType(state, worldIn, pos, player);
@@ -101,7 +100,7 @@ public class ItemProspectorPick extends ItemMetalTool {
             if (ConfigCore.MISC.DEBUG.enable) {
               for (ProspectResult debugResult : results) {
                 TerraFirmaCraft.getLog()
-                        .debug(debugResult.ore.getDisplayName() + ": " + String.format("%.02f", debugResult.score));
+                               .debug(debugResult.ore.getDisplayName() + ": " + String.format("%.02f", debugResult.score));
               }
             }
           }
@@ -147,7 +146,7 @@ public class ItemProspectorPick extends ItemMetalTool {
   private Collection<ProspectResult> scanSurroundingBlocks(World world, BlockPos center) {
     Map<String, ProspectResult> results = new HashMap<>();
     for (BlockPos.MutableBlockPos pos : BlockPos.MutableBlockPos.getAllInBoxMutable(
-            center.add(-PROSPECT_RADIUS, -PROSPECT_RADIUS, -PROSPECT_RADIUS), center.add(PROSPECT_RADIUS, PROSPECT_RADIUS, PROSPECT_RADIUS))) {
+      center.add(-PROSPECT_RADIUS, -PROSPECT_RADIUS, -PROSPECT_RADIUS), center.add(PROSPECT_RADIUS, PROSPECT_RADIUS, PROSPECT_RADIUS))) {
       ItemStack stack = getOreStack(world, pos, world.getBlockState(pos), true);
       if (!stack.isEmpty()) {
         String oreName = stack.getDisplayName();

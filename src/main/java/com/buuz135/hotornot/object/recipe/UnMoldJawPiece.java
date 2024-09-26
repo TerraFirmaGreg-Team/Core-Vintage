@@ -17,7 +17,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import com.buuz135.hotornot.object.item.ItemMetalTongsHead;
 import com.buuz135.hotornot.object.item.ItemMetalTongsJawMold;
 import com.google.gson.JsonObject;

@@ -14,12 +14,16 @@ public interface ICalendar {
 
   /* Total Calculation Methods */
 
-  default long getTotalHours() {
-    return getTotalHours(getTicks());
-  }
-
   static long getTotalHours(long time) {
     return time / TICKS_IN_HOUR;
+  }
+
+  static long getTotalDays(long time) {
+    return time / TICKS_IN_DAY;
+  }
+
+  default long getTotalHours() {
+    return getTotalHours(getTicks());
   }
 
   /**
@@ -31,9 +35,5 @@ public interface ICalendar {
 
   default long getTotalDays() {
     return getTotalDays(getTicks());
-  }
-
-  static long getTotalDays(long time) {
-    return time / TICKS_IN_DAY;
   }
 }

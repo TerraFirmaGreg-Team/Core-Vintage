@@ -12,7 +12,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -262,10 +261,10 @@ public class ModelAnimalGazelle extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount,
-          float ageInTicks, float netHeadYaw, float headPitch,
-          float scale) {
+                     float ageInTicks, float netHeadYaw, float headPitch,
+                     float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-            entity);
+                           entity);
 
     if (((EntityAnimal) entity).isChild()) {
       double ageScale = 1;
@@ -297,27 +296,27 @@ public class ModelAnimalGazelle extends ModelBase {
 
   @Override
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks,
-          float netHeadYaw, float headPitch, float scaleFactor,
-          Entity entityIn) {
+                                float netHeadYaw, float headPitch, float scaleFactor,
+                                Entity entityIn) {
 
     setRotateAngle(head, headPitch / (180F / MathConstants.PI) + 0.1570796F,
-            netHeadYaw / (180F / MathConstants.PI), 0F);
+                   netHeadYaw / (180F / MathConstants.PI), 0F);
     setRotateAngle(neck, headPitch / (1.5F * (180F / MathConstants.PI)) + 1.815142F,
-            netHeadYaw / (1.5F * (180F / MathConstants.PI)), 0F);
+                   netHeadYaw / (1.5F * (180F / MathConstants.PI)), 0F);
 
     //head.rotateAngleX = headPitch / (180F / MathConstants.PI);
     //head.rotateAngleY = netHeadYaw / (180F / MathConstants.PI);
 
     legRFront.rotateAngleX =
-            MathHelper.cos(limbSwing * 0.4662F) * 0.8F * limbSwingAmount + 0.3490658503988659F;
+      MathHelper.cos(limbSwing * 0.4662F) * 0.8F * limbSwingAmount + 0.3490658503988659F;
     legLFront.rotateAngleX =
-            MathHelper.cos(limbSwing * 0.4662F + MathConstants.PI) * 0.8F * limbSwingAmount
-                    + 0.3490658503988659F;
+      MathHelper.cos(limbSwing * 0.4662F + MathConstants.PI) * 0.8F * limbSwingAmount
+      + 0.3490658503988659F;
     thighRBack.rotateAngleX =
-            MathHelper.cos(limbSwing * 0.4662F + MathConstants.PI) * 0.8F * limbSwingAmount
-                    + -0.17453292519943295F;
+      MathHelper.cos(limbSwing * 0.4662F + MathConstants.PI) * 0.8F * limbSwingAmount
+      + -0.17453292519943295F;
     thighLBack.rotateAngleX =
-            MathHelper.cos(limbSwing * 0.4662F) * 0.8F * limbSwingAmount + -0.17453292519943295F;
+      MathHelper.cos(limbSwing * 0.4662F) * 0.8F * limbSwingAmount + -0.17453292519943295F;
   }
 
 }

@@ -4,7 +4,6 @@ import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 
 import net.minecraft.item.Item;
 
-
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
 

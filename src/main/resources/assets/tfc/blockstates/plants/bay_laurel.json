@@ -9,8 +9,7 @@
           "model": "tfc:plants/bay_laurel_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },

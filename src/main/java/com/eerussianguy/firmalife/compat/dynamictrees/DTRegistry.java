@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistry;
 
-
 import com.eerussianguy.firmalife.compat.CompatibleRecipeRegistry;
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.recipe.NutRecipe;

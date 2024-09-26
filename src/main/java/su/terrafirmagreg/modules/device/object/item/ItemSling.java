@@ -26,7 +26,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemIngot;
 
@@ -39,25 +38,25 @@ public class ItemSling extends BaseItem {
     setNoRepair();
     setFull3D();
     getSettings()
-            .registryKey("device/sling/" + name)
-            .maxDamage(64)
-            .maxCount(1)
-            .size(Size.NORMAL)
-            .weight(Weight.MEDIUM)
-            .oreDict("tool");
+      .registryKey("device/sling/" + name)
+      .maxDamage(64)
+      .maxCount(1)
+      .size(Size.NORMAL)
+      .weight(Weight.MEDIUM)
+      .oreDict("tool");
 
     addPropertyOverride(new ResourceLocation("spinning"), new IItemPropertyGetter() {
 
       @SideOnly(Side.CLIENT)
       public float apply(ItemStack stack, @Nullable World worldIn,
-              @Nullable EntityLivingBase entityIn) {
+                         @Nullable EntityLivingBase entityIn) {
         if (entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack
-                && entityIn.getItemInUseMaxCount() > 0) {
+            && entityIn.getItemInUseMaxCount() > 0) {
           int maxPower = ConfigDevice.ITEM.SLING.maxPower;
           int chargeSpeed = ConfigDevice.ITEM.SLING.chargeSpeed;
           float powerRatio =
-                  Math.min((float) entityIn.getItemInUseMaxCount() / (float) chargeSpeed, maxPower)
-                          / (float) maxPower;
+            Math.min((float) entityIn.getItemInUseMaxCount() / (float) chargeSpeed, maxPower)
+            / (float) maxPower;
           return (float) MathHelper.floor(((entityIn.getItemInUseMaxCount() * powerRatio) % 8) + 1);
         }
         return 0.0F;
@@ -67,14 +66,14 @@ public class ItemSling extends BaseItem {
   }
 
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn,
-          EnumHand handIn) {
+                                                  EnumHand handIn) {
 
     ItemStack itemstack = playerIn.getHeldItem(handIn);
     boolean flag = !this.findAmmo(playerIn).isEmpty();
 
     if (!playerIn.isCreative() && !flag) {
       return flag ? new ActionResult(EnumActionResult.PASS, itemstack)
-              : new ActionResult(EnumActionResult.FAIL, itemstack);
+                  : new ActionResult(EnumActionResult.FAIL, itemstack);
     } else {
       playerIn.setActiveHand(handIn);
       return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
@@ -117,7 +116,7 @@ public class ItemSling extends BaseItem {
   }
 
   public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving,
-          int timeLeft) {
+                                   int timeLeft) {
     if (entityLiving instanceof EntityPlayer entityplayer) {
 
       boolean flag = entityplayer.isCreative();
@@ -136,8 +135,8 @@ public class ItemSling extends BaseItem {
           shoot(worldIn, entityLiving, power, velocity, inaccuracy, itemStack);
         }
         worldIn.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ,
-                SoundEvents.ENTITY_SNOWBALL_THROW,
-                SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+                          SoundEvents.ENTITY_SNOWBALL_THROW,
+                          SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
         itemStack.shrink(1);
         if (itemStack.isEmpty()) {
@@ -150,8 +149,8 @@ public class ItemSling extends BaseItem {
           shoot(worldIn, entityLiving, power, velocity, inaccuracy, itemStack);
         }
         worldIn.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ,
-                SoundEvents.ENTITY_SNOWBALL_THROW,
-                SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+                          SoundEvents.ENTITY_SNOWBALL_THROW,
+                          SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
       }
     }
   }

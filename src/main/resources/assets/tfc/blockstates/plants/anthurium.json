@@ -9,8 +9,7 @@
           "model": "tfc:plants/anthurium_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },

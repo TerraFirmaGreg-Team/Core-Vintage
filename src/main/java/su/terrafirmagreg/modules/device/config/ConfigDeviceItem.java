@@ -33,7 +33,7 @@ public final class ConfigDeviceItem {
     public double predatorMultiplier = 2.0D;
 
     @Config.Comment({"The maximum power a sling can be charged up to.",
-            "A fully charged sling will deal damage equal to maximum power, but projectile speed is fixed to the ratio: current power / max power."})
+                     "A fully charged sling will deal damage equal to maximum power, but projectile speed is fixed to the ratio: current power / max power."})
     @Config.RangeInt(min = 1)
     public int maxPower = 8;
 

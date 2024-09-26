@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-
 import tfctech.client.TechGuiHandler;
 
 import lombok.Getter;

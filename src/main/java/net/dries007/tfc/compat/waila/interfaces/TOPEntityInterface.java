@@ -5,7 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IEntityDisplayOverride;
 import mcjty.theoneprobe.api.IProbeHitEntityData;
@@ -61,7 +60,7 @@ public class TOPEntityInterface implements IProbeInfoEntityProvider, IEntityDisp
 
   @Override
   public boolean overrideStandardInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, Entity entity,
-          IProbeHitEntityData hitData) {
+                                      IProbeHitEntityData hitData) {
     if (entity == null) {
       return false;
     }
@@ -76,9 +75,9 @@ public class TOPEntityInterface implements IProbeInfoEntityProvider, IEntityDisp
       return false;
     } else {
       info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-              .vertical()
-              .text(TextStyleClass.NAME + title)
-              .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
+          .vertical()
+          .text(TextStyleClass.NAME + title)
+          .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
       return true;
     }
   }

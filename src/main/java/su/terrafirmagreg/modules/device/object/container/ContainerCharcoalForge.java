@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import static su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge.SLOT_EXTRA_MAX;
@@ -48,7 +47,7 @@ public class ContainerCharcoalForge extends BaseContainerTile<TileCharcoalForge>
       // Extra slots (for ceramic molds)
       for (int i = SLOT_EXTRA_MIN; i <= SLOT_EXTRA_MAX; i++) {
         addSlotToContainer(
-                new SlotCallback(inventory, i, 152, 8 + 18 * (i - SLOT_EXTRA_MIN), tile));
+          new SlotCallback(inventory, i, 152, 8 + 18 * (i - SLOT_EXTRA_MIN), tile));
       }
     }
   }
@@ -56,6 +55,6 @@ public class ContainerCharcoalForge extends BaseContainerTile<TileCharcoalForge>
   @Override
   protected boolean transferStackIntoContainer(ItemStack stack, int containerSlots) {
     return !mergeItemStack(stack, SLOT_EXTRA_MIN, SLOT_EXTRA_MAX + 1, false) && !mergeItemStack(
-            stack, SLOT_FUEL_MIN, SLOT_INPUT_MAX + 1, false);
+      stack, SLOT_FUEL_MIN, SLOT_INPUT_MAX + 1, false);
   }
 }

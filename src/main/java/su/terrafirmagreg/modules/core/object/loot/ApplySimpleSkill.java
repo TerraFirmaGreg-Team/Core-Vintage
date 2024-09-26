@@ -12,7 +12,6 @@ import net.minecraft.world.storage.loot.RandomValueRange;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 
-
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
@@ -31,8 +30,8 @@ public class ApplySimpleSkill extends LootFunction {
   private final float incrementAmount;
 
   private ApplySimpleSkill(LootCondition[] conditionsIn, RandomValueRange valueRange,
-          SkillType<? extends SimpleSkill> skillType,
-          float incrementAmount) {
+                           SkillType<? extends SimpleSkill> skillType,
+                           float incrementAmount) {
     super(conditionsIn);
     this.valueRange = valueRange;
     this.skillType = skillType;
@@ -49,7 +48,7 @@ public class ApplySimpleSkill extends LootFunction {
         if (skill != null) {
           // Minimum of 1, At 0 skill, returns a bonus of an amount between the difference, At max skill, returns the actual range
           stack.setCount(1 + (int) (valueRange.generateInt(rand) - valueRange.getMin() * (1
-                  - skill.getTotalLevel())));
+                                                                                          - skill.getTotalLevel())));
           skill.add(incrementAmount);
         }
       }
@@ -65,7 +64,7 @@ public class ApplySimpleSkill extends LootFunction {
 
     @Override
     public void serialize(JsonObject object, ApplySimpleSkill functionClazz,
-            JsonSerializationContext serializationContext) {
+                          JsonSerializationContext serializationContext) {
       object.add("skill", serializationContext.serialize(functionClazz.skillType.getName()));
       object.add("add", serializationContext.serialize(functionClazz.incrementAmount));
       object.add("count", serializationContext.serialize(functionClazz.valueRange));
@@ -74,13 +73,13 @@ public class ApplySimpleSkill extends LootFunction {
     @Override
     @NotNull
     public ApplySimpleSkill deserialize(JsonObject object,
-            JsonDeserializationContext deserializationContext,
-            LootCondition[] conditionsIn) {
+                                        JsonDeserializationContext deserializationContext,
+                                        LootCondition[] conditionsIn) {
       String skillName = JsonUtils.getString(object, "skill");
       float amount = JsonUtils.getFloat(object, "add");
       SkillType<? extends SimpleSkill> skillType = SkillType.get(skillName, SimpleSkill.class);
       RandomValueRange valueRange = JsonUtils.deserializeClass(object, "count",
-              deserializationContext, RandomValueRange.class);
+                                                               deserializationContext, RandomValueRange.class);
       if (skillType == null) {
         throw new JsonParseException("Unknown skill type: '" + skillName + "'");
       }

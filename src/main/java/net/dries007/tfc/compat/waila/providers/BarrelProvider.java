@@ -11,7 +11,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 
@@ -43,7 +42,7 @@ public class BarrelProvider implements IWailaBlock {
       }
       if (fluid != null && fluid.amount > 0) {
         currentTooltip.add(
-                new TextComponentTranslation("waila.tfc.barrel.contents", fluid.amount, fluid.getLocalizedName()).getFormattedText());
+          new TextComponentTranslation("waila.tfc.barrel.contents", fluid.amount, fluid.getLocalizedName()).getFormattedText());
       }
     }
     return currentTooltip;

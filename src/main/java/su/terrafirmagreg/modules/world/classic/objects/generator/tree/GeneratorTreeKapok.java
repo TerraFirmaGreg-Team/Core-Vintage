@@ -14,7 +14,6 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
@@ -35,19 +34,19 @@ public class GeneratorTreeKapok implements ITreeGenerator {
 
   private static final PlacementSettings settings = StructureUtils.getDefaultSettings();
   private static final BlockPos[] trunkPos = new BlockPos[]{
-          new BlockPos(0, 0, 0), new BlockPos(-1, 0, 0), new BlockPos(0, 0, -1), new BlockPos(-1, 0, -1)
+    new BlockPos(0, 0, 0), new BlockPos(-1, 0, 0), new BlockPos(0, 0, -1), new BlockPos(-1, 0, -1)
   };
   private IBlockState trunk;
   private IBlockState bark;
 
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-          Random rand, boolean isWorldGen) {
+                           Random rand, boolean isWorldGen) {
     trunk = BlockLogTFC.get(tree).getDefaultState().withProperty(PLACED, false);
     bark = BlockLogTFC.get(tree)
-            .getDefaultState()
-            .withProperty(PLACED, false)
-            .withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
+                      .getDefaultState()
+                      .withProperty(PLACED, false)
+                      .withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
 
     int height = 12 + rand.nextInt(8);
     int branches = 2 + rand.nextInt(3);
@@ -92,9 +91,9 @@ public class GeneratorTreeKapok implements ITreeGenerator {
           continue;
         }
         if (BlockUtils.isSoil(world.getBlockState(pos.add(p1)
-                .down(2))) && world.getBlockState(pos.add(p1.down(1)))
-                .getMaterial()
-                .isReplaceable()) {
+                                                     .down(2))) && world.getBlockState(pos.add(p1.down(1)))
+                                                                        .getMaterial()
+                                                                        .isReplaceable()) {
           continue;
         }
       }
@@ -120,8 +119,8 @@ public class GeneratorTreeKapok implements ITreeGenerator {
 
   private void checkAndPlace(World world, BlockPos pos, boolean useBark) {
     if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos)
-            .getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos)
-            .getBlock() instanceof BlockLeavesTFC) {
+                                                                       .getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos)
+                                                                                                                      .getBlock() instanceof BlockLeavesTFC) {
       world.setBlockState(pos, useBark ? bark : trunk);
     }
   }

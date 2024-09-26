@@ -13,7 +13,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
 import net.dries007.tfc.objects.te.TEMetalSheet;
@@ -29,7 +28,7 @@ public class ItemMetalSheet extends ItemMetal {
   @Override
   @NotNull
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                    float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
     if (worldIn.getBlockState(pos).isNormalCube() && stack.getItem() instanceof ItemMetalSheet sheet) {
       // Placing a sheet erases data, and since I really don't want to rewrite all of this, let's be sufficient with this for now

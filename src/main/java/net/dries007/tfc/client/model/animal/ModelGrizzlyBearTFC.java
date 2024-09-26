@@ -12,7 +12,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.entity.animal.EntityGrizzlyBearTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -62,7 +61,7 @@ public class ModelGrizzlyBearTFC extends ModelBase {
     frontBody = new ModelRenderer(this, 29, 39);
     frontBody.setRotationPoint(-1.0F, 9F, 7.5F);
     frontBody.addBox(-5.0F, -19.0F, -6.5F, 13, 13, 12, 0.0F);
-    setRotation(frontBody, 1.5707963267948966F, 0.0F, 0.0F);
+    setRotation(frontBody, ((float)Math.PI / 2F), 0.0F, 0.0F);
 
     rearBody = new ModelRenderer(this, 32, 20);
     rearBody.setRotationPoint(0.5F, 10.5F, 14.5F);
@@ -128,7 +127,7 @@ public class ModelGrizzlyBearTFC extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
-          float scale) {
+                     float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
     if (((EntityAnimal) entity).isChild()) {
@@ -157,7 +156,7 @@ public class ModelGrizzlyBearTFC extends ModelBase {
 
   @Override
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
-          Entity entityIn) {
+                                Entity entityIn) {
     bearHead.rotateAngleX = headPitch / (180F / MathConstants.PI);
     bearHead.rotateAngleY = netHeadYaw / (180F / MathConstants.PI);
 
@@ -169,16 +168,16 @@ public class ModelGrizzlyBearTFC extends ModelBase {
     float f1 = ((EntityGrizzlyBearTFC) entityIn).getStandingAnimationScale(ageInTicks);
     f1 *= f1;
     float f2 = 1.0F - f1;
-    this.frontBody.rotateAngleX = 1.5707964F - f1 * 3.1415927F * 0.35F;
+    this.frontBody.rotateAngleX = ((float)Math.PI / 2F) - f1 * (float)Math.PI * 0.35F;
     this.frontBody.rotationPointY = 9.0F * f2 + 11.0F * f1;
     this.leg1.rotationPointY = 14.0F * f2 + -6.0F * f1;
     this.leg1.rotationPointZ = -8.0F * f2 + -4.0F * f1;
-    this.leg1.rotateAngleX -= f1 * 3.1415927F * 0.45F;
+    this.leg1.rotateAngleX -= f1 * (float)Math.PI * 0.45F;
     this.leg2.rotationPointY = this.leg1.rotationPointY;
     this.leg2.rotationPointZ = this.leg1.rotationPointZ;
-    this.leg1.rotateAngleX -= f1 * 3.1415927F * 0.45F;
+    this.leg1.rotateAngleX -= f1 * (float)Math.PI * 0.45F;
     this.bearHead.rotationPointY = 8.0F * f2 + -12.0F * f1;
     this.bearHead.rotationPointZ = -14.8F * f2 + -3.0F * f1;
-    this.leg1.rotateAngleX += f1 * 3.1415927F * 0.15F;
+    this.leg1.rotateAngleX += f1 * (float)Math.PI * 0.15F;
   }
 }

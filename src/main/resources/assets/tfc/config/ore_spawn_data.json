@@ -24,8 +24,7 @@
     "maximum_height": 120,
     "density": 70,
     "base_rocks": [
-      "tfc:igneous_extrusive",
-      "tfc:igneous_intrusive"
+      "tfc:igneous_extrusive", "tfc:igneous_intrusive"
     ]
   },
   "native_platinum": {
@@ -53,8 +52,7 @@
     "maximum_height": 128,
     "density": 70,
     "base_rocks": [
-      "tfc:granite",
-      "tfc:gneiss"
+      "tfc:granite", "tfc:gneiss"
     ]
   },
   "hematite": {
@@ -96,8 +94,7 @@
     "maximum_height": 100,
     "density": 70,
     "base_rocks": [
-      "tfc:igneous_extrusive",
-      "tfc:sedimentary"
+      "tfc:igneous_extrusive", "tfc:sedimentary"
     ]
   },
   "garnierite": {
@@ -125,8 +122,7 @@
     "maximum_height": 144,
     "density": 70,
     "base_rocks": [
-      "tfc:limestone",
-      "tfc:marble"
+      "tfc:limestone", "tfc:marble"
     ]
   },
   "magnetite": {
@@ -234,10 +230,7 @@
     "maximum_height": 144,
     "density": 70,
     "base_rocks": [
-      "tfc:marble",
-      "tfc:gneiss",
-      "tfc:quartzite",
-      "tfc:schist"
+      "tfc:marble", "tfc:gneiss", "tfc:quartzite", "tfc:schist"
     ]
   },
   "kimberlite": {
@@ -263,9 +256,7 @@
     "maximum_height": 128,
     "density": 60,
     "base_rocks": [
-      "tfc:igneous_extrusive",
-      "tfc:shale",
-      "tfc:quartzite"
+      "tfc:igneous_extrusive", "tfc:shale", "tfc:quartzite"
     ]
   },
   "cryolite": {
@@ -398,8 +389,7 @@
     "maximum_height": 160,
     "density": 40,
     "base_rocks": [
-      "tfc:igneous_extrusive",
-      "tfc:sedimentary"
+      "tfc:igneous_extrusive", "tfc:sedimentary"
     ]
   },
   "surface_sphalerite": {

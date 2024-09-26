@@ -15,7 +15,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
@@ -113,7 +112,7 @@ public class ItemSmallOre extends ItemTFC implements ICapabilityMetal {
         case TOTAL_ONLY:
           // not like Classic, "Metal: xx total units" Adds the whole stacks worth up.
           String stackTotal = String.format("%s: %s", I18n.format(Helpers.getTypeName(metal)),
-                  I18n.format("tfc.tooltip.units.total", smeltAmount * stack.getCount()));
+                                            I18n.format("tfc.tooltip.units.total", smeltAmount * stack.getCount()));
           tooltip.add(stackTotal);
           break;
         case ALL_INFO:
@@ -121,7 +120,7 @@ public class ItemSmallOre extends ItemTFC implements ICapabilityMetal {
           String infoTotal;
           if (stack.getCount() > 1) {
             infoTotal = String.format("%s: %s", I18n.format(Helpers.getTypeName(metal)),
-                    I18n.format("tfc.tooltip.units.info_total", smeltAmount, smeltAmount * stack.getCount()));
+                                      I18n.format("tfc.tooltip.units.info_total", smeltAmount, smeltAmount * stack.getCount()));
           } else {
             infoTotal = String.format("%s: %s", I18n.format(Helpers.getTypeName(metal)), I18n.format("tfc.tooltip.units", smeltAmount));
           }
@@ -132,11 +131,11 @@ public class ItemSmallOre extends ItemTFC implements ICapabilityMetal {
           String advancedTotal;
           if (stack.getCount() > 1) {
             advancedTotal = String.format("%s: %s: %s", I18n.format(Helpers.getTypeName(metal)),
-                    I18n.format("tfc.tooltip.units.info_total", smeltAmount, smeltAmount * stack.getCount()),
-                    I18n.format("tfc.tooltip.melttemp", (int) metal.getMeltTemp()));
+                                          I18n.format("tfc.tooltip.units.info_total", smeltAmount, smeltAmount * stack.getCount()),
+                                          I18n.format("tfc.tooltip.melttemp", (int) metal.getMeltTemp()));
           } else {
             advancedTotal = String.format("%s: %s", I18n.format(Helpers.getTypeName(metal)),
-                    I18n.format("tfc.tooltip.units", smeltAmount));
+                                          I18n.format("tfc.tooltip.units", smeltAmount));
           }
           tooltip.add(advancedTotal);
       }

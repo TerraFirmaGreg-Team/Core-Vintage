@@ -10,7 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.world.WorldServer;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -69,6 +68,17 @@ public class TileBearTrap extends BaseTile {
     return this.capturedEntity;
   }
 
+  public void setCapturedEntity(@Nullable EntityLivingBase entity) {
+
+    this.capturedEntity = entity;
+    if (entity != null) {
+      this.capturedId = entity.getUniqueID();
+    } else {
+      this.capturedId = UUID.randomUUID();
+    }
+    sendUpdates();
+  }
+
   private void readCapturedEntity() {
     if (this.capturedId != null) {
       if (this.world.getPlayerEntityByUUID(capturedId) != null) {
@@ -82,16 +92,5 @@ public class TileBearTrap extends BaseTile {
         }
       }
     }
-  }
-
-  public void setCapturedEntity(@Nullable EntityLivingBase entity) {
-
-    this.capturedEntity = entity;
-    if (entity != null) {
-      this.capturedId = entity.getUniqueID();
-    } else {
-      this.capturedId = UUID.randomUUID();
-    }
-    sendUpdates();
   }
 }

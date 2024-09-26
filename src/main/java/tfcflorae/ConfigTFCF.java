@@ -6,7 +6,6 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
 import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCF)
@@ -35,145 +34,145 @@ public class ConfigTFCF {
     public static final class WorldCFG {
 
       @Config.Comment(
-              "The rarity for humus pits to occur. On average 1 / N chunks will have a humus deposit, if the chunk in question is valid for humus to spawn.")
+        "The rarity for humus pits to occur. On average 1 / N chunks will have a humus deposit, if the chunk in question is valid for humus to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.humusRarity")
       public int humusRarity = 8;
 
       @Config.Comment(
-              "The rarity for podzol pits to occur. On average 1 / N chunks will have a podzol deposit, if the chunk in question is valid for podzol to spawn.")
+        "The rarity for podzol pits to occur. On average 1 / N chunks will have a podzol deposit, if the chunk in question is valid for podzol to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.podzolRarity")
       public int podzolRarity = 1;
 
       @Config.Comment(
-              "The rarity for mud pits to occur. On average 1 / N chunks will have a mud deposit, if the chunk in question is valid for mud to spawn.")
+        "The rarity for mud pits to occur. On average 1 / N chunks will have a mud deposit, if the chunk in question is valid for mud to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.mudRarity")
       public int mudRarity = 1;
 
       @Config.Comment(
-              "The rarity for sand to occur on the sea bed. On average 1 / N chunks will be populated with sand, if the chunk in question is valid for sand to generate.")
+        "The rarity for sand to occur on the sea bed. On average 1 / N chunks will be populated with sand, if the chunk in question is valid for sand to generate.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.sandRarity")
       public int sandRarity = 4;
 
       @Config.Comment(
-              "The rarity for bog iron pits to occur. On average 1 / N chunks will have a bog iron deposit, if the chunk in question is valid for bog iron to spawn.")
+        "The rarity for bog iron pits to occur. On average 1 / N chunks will have a bog iron deposit, if the chunk in question is valid for bog iron to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.bogIronRarity")
       public int bogIronRarity = 4;
 
       @Config.Comment(
-              "The rarity for sparse grass to occur. On average 1 / N chunks will have sparse grass, if the chunk in question is valid for sparse grass to spawn.")
+        "The rarity for sparse grass to occur. On average 1 / N chunks will have sparse grass, if the chunk in question is valid for sparse grass to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.sparseGrassRarity")
       public int sparseGrassRarity = 1;
 
       @Config.Comment(
-              "The rarity for loamy sand pits to occur. On average 1 / N chunks will have a loamy sand deposit, if the chunk in question is valid for loamy sand to spawn.")
+        "The rarity for loamy sand pits to occur. On average 1 / N chunks will have a loamy sand deposit, if the chunk in question is valid for loamy sand to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.loamySandRarity")
       public int loamySandRarity = 8;
 
       @Config.Comment(
-              "The rarity for sandy loam pits to occur. On average 1 / N chunks will have a sandy loam deposit, if the chunk in question is valid for sandy loam to spawn.")
+        "The rarity for sandy loam pits to occur. On average 1 / N chunks will have a sandy loam deposit, if the chunk in question is valid for sandy loam to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.sandyLoamRarity")
       public int sandyLoamRarity = 8;
 
       @Config.Comment(
-              "The rarity for loam pits to occur. On average 1 / N chunks will have a loam deposit, if the chunk in question is valid for loam to spawn.")
+        "The rarity for loam pits to occur. On average 1 / N chunks will have a loam deposit, if the chunk in question is valid for loam to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.loamRarity")
       public int loamRarity = 8;
 
       @Config.Comment(
-              "The rarity for silt loam pits to occur. On average 1 / N chunks will have a silt loam deposit, if the chunk in question is valid for silt loam to spawn.")
+        "The rarity for silt loam pits to occur. On average 1 / N chunks will have a silt loam deposit, if the chunk in question is valid for silt loam to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.siltLoamRarity")
       public int siltLoamRarity = 8;
 
       @Config.Comment(
-              "The rarity for silt pits to occur. On average 1 / N chunks will have a silt deposit, if the chunk in question is valid for silt to spawn.")
+        "The rarity for silt pits to occur. On average 1 / N chunks will have a silt deposit, if the chunk in question is valid for silt to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.siltRarity")
       public int siltRarity = 8;
 
       @Config.Comment(
-              "The rarity for sandy clay pits to occur. On average 1 / N chunks will have a sandy clay deposit, if the chunk in question is valid for sandy clay to spawn.")
+        "The rarity for sandy clay pits to occur. On average 1 / N chunks will have a sandy clay deposit, if the chunk in question is valid for sandy clay to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.sandyClayRarity")
       public int sandyClayRarity = 40;
 
       @Config.Comment(
-              "The rarity for sandy clay loam pits to occur. On average 1 / N chunks will have a sandy clay loam deposit, if the chunk in question is valid for sandy clay loam to spawn.")
+        "The rarity for sandy clay loam pits to occur. On average 1 / N chunks will have a sandy clay loam deposit, if the chunk in question is valid for sandy clay loam to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.sandyClayLoamRarity")
       public int sandyClayLoamRarity = 40;
 
       @Config.Comment(
-              "The rarity for clay loam pits to occur. On average 1 / N chunks will have a clay loam deposit, if the chunk in question is valid for clay loam to spawn.")
+        "The rarity for clay loam pits to occur. On average 1 / N chunks will have a clay loam deposit, if the chunk in question is valid for clay loam to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.clayLoamRarity")
       public int clayLoamRarity = 40;
 
       @Config.Comment(
-              "The rarity for silty clay loam pits to occur. On average 1 / N chunks will have a silty clay loam deposit, if the chunk in question is valid for silty clay loam to spawn.")
+        "The rarity for silty clay loam pits to occur. On average 1 / N chunks will have a silty clay loam deposit, if the chunk in question is valid for silty clay loam to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.siltyClayLoamRarity")
       public int siltyClayLoamRarity = 40;
 
       @Config.Comment(
-              "The rarity for silty clay pits to occur. On average 1 / N chunks will have a silty clay deposit, if the chunk in question is valid for silty clay to spawn.")
+        "The rarity for silty clay pits to occur. On average 1 / N chunks will have a silty clay deposit, if the chunk in question is valid for silty clay to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.siltyClayRarity")
       public int siltyClayRarity = 40;
 
       @Config.Comment(
-              "The rarity for clay humus pits to occur. On average 1 / N chunks will have a clay humus deposit, if the chunk in question is valid for clay humus to spawn.")
+        "The rarity for clay humus pits to occur. On average 1 / N chunks will have a clay humus deposit, if the chunk in question is valid for clay humus to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.clayHumusRarity")
       public int clayHumusRarity = 40;
 
       @Config.Comment(
-              "The rarity for coarse dirt pits to occur. On average 1 / N chunks will have a coarse dirt deposit, if the chunk in question is valid for coarse dirt to spawn.")
+        "The rarity for coarse dirt pits to occur. On average 1 / N chunks will have a coarse dirt deposit, if the chunk in question is valid for coarse dirt to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.coarseDirtRarity")
       public int coarseDirtRarity = 15;
 
       @Config.Comment(
-              "The rarity for coarse loamy sand pits to occur. On average 1 / N chunks will have a coarse loamy sand deposit, if the chunk in question is valid for coarse loamy sand to spawn.")
+        "The rarity for coarse loamy sand pits to occur. On average 1 / N chunks will have a coarse loamy sand deposit, if the chunk in question is valid for coarse loamy sand to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.coarseLoamySandRarity")
       public int coarseLoamySandRarity = 15;
 
       @Config.Comment(
-              "The rarity for coarse sandy loam pits to occur. On average 1 / N chunks will have a coarse sandy loam deposit, if the chunk in question is valid for coarse sandy loam to spawn.")
+        "The rarity for coarse sandy loam pits to occur. On average 1 / N chunks will have a coarse sandy loam deposit, if the chunk in question is valid for coarse sandy loam to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.coarseSandyLoamRarity")
       public int coarseSandyLoamRarity = 15;
 
       @Config.Comment(
-              "The rarity for coarse loam pits to occur. On average 1 / N chunks will have a coarse loam deposit, if the chunk in question is valid for coarse loam to spawn.")
+        "The rarity for coarse loam pits to occur. On average 1 / N chunks will have a coarse loam deposit, if the chunk in question is valid for coarse loam to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.coarseLoamRarity")
       public int coarseLoamRarity = 15;
 
       @Config.Comment(
-              "The rarity for coarse silt loam pits to occur. On average 1 / N chunks will have a coarse silt loam deposit, if the chunk in question is valid for coarse silt loam to spawn.")
+        "The rarity for coarse silt loam pits to occur. On average 1 / N chunks will have a coarse silt loam deposit, if the chunk in question is valid for coarse silt loam to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.coarseSiltLoamRarity")
       public int coarseSiltLoamRarity = 15;
 
       @Config.Comment(
-              "The rarity for coarse silt pits to occur. On average 1 / N chunks will have a coarse silt deposit, if the chunk in question is valid for coarse silt to spawn.")
+        "The rarity for coarse silt pits to occur. On average 1 / N chunks will have a coarse silt deposit, if the chunk in question is valid for coarse silt to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.coarseSiltRarity")
       public int coarseSiltRarity = 15;
 
       @Config.Comment(
-              "The rarity for coarse humus pits to occur. On average 1 / N chunks will have a coarse humus deposit, if the chunk in question is valid for coarse humus to spawn.")
+        "The rarity for coarse humus pits to occur. On average 1 / N chunks will have a coarse humus deposit, if the chunk in question is valid for coarse humus to spawn.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.coarseHumusRarity")
       public int coarseHumusRarity = 15;
@@ -299,13 +298,13 @@ public class ConfigTFCF {
       public float creepingUndergroundCount = 5f;
 
       @Config.Comment(
-              "The rarity for bamboo trees to generate. On average 1 / N chunks will have a bamboo tree, if the chunk in question is valid for bamboo to generate.")
+        "The rarity for bamboo trees to generate. On average 1 / N chunks will have a bamboo tree, if the chunk in question is valid for bamboo to generate.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.bambooRarity")
       public int bambooRarity = 15;
 
       @Config.Comment(
-              "The rarity for cinnamon trees to generate. On average 1 / N chunks will have a cinnamon tree, if the chunk in question is valid for cinnamon to generate.")
+        "The rarity for cinnamon trees to generate. On average 1 / N chunks will have a cinnamon tree, if the chunk in question is valid for cinnamon to generate.")
       @Config.RangeInt(min = 1)
       @Config.LangKey("config." + MODID_TFCF + ".general.world.cinnamonRarity")
       public int cinnamonRarity = 100;

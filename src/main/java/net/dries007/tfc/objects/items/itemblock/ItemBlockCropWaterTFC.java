@@ -20,7 +20,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.ForgeEventFactory;
 
-
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -44,18 +43,18 @@ public class ItemBlockCropWaterTFC extends ItemBlockTFC {
       if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {
         BlockPos blockpos = raytraceresult.getBlockPos();
         if (!worldIn.isBlockModifiable(playerIn, blockpos) ||
-                !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) {
+            !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) {
           return new ActionResult(EnumActionResult.FAIL, itemstack);
         }
 
         BlockPos blockpos1 = blockpos.up();
         IBlockState iblockstate = worldIn.getBlockState(blockpos);
         if (iblockstate.getMaterial() == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0 &&
-                worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenClassic.FRESH_WATER) {
+            worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenClassic.FRESH_WATER) {
           BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
           worldIn.setBlockState(blockpos1, this.block.getDefaultState());
           if (ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, EnumFacing.UP, handIn)
-                  .isCanceled()) {
+                               .isCanceled()) {
             blocksnapshot.restore(true, false);
             return new ActionResult(EnumActionResult.FAIL, itemstack);
           }

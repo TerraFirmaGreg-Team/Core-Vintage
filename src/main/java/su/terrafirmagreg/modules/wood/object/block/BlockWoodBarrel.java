@@ -36,7 +36,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 
 import org.jetbrains.annotations.NotNull;
@@ -45,8 +44,8 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.data.Properties.SEALED;
 
 /**
- * Barrel block. Can be filled with fluids (10 B), and one item stack. Performs barrel recipes. Sealed state is stored in block state and cached in TE, synced when
- * updated via custom packet
+ * Barrel block. Can be filled with fluids (10 B), and one item stack. Performs barrel recipes. Sealed state is stored in block state and cached in TE, synced
+ * when updated via custom packet
  *
  * @see TileWoodBarrel
  * @see BarrelRecipe
@@ -55,18 +54,35 @@ import static su.terrafirmagreg.data.Properties.SEALED;
 public class BlockWoodBarrel extends BlockWood implements IProviderTile {
 
   private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D,
-          1.0D, 0.875D);
+                                                                      1.0D, 0.875D);
 
   public BlockWoodBarrel(WoodBlockVariant variant, WoodType type) {
     super(variant, type);
 
     getSettings()
-            .hardness(2F)
-            .weight(Weight.VERY_HEAVY)
-            .nonCube();
+      .hardness(2F)
+      .weight(Weight.VERY_HEAVY)
+      .nonCube();
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(SEALED, false));
+                              .withProperty(SEALED, false));
+  }
+
+  /**
+   * Used to toggle the barrel seal state and update the tile entity, in the correct order
+   */
+  public static void toggleBarrelSeal(World world, BlockPos pos) {
+    var tile = TileUtils.getTile(world, pos, TileWoodBarrel.class);
+    if (tile != null) {
+      IBlockState state = world.getBlockState(pos);
+      boolean previousSealed = state.getValue(SEALED);
+      world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
+      if (previousSealed) {
+        tile.onUnseal();
+      } else {
+        tile.onSealed();
+      }
+    }
   }
 
   @Override
@@ -95,7 +111,7 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
 
   @Override
   public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     if (!world.isRemote) {
       if (world.getBlockState(fromPos).getBlock() instanceof BlockRedstoneComparator) {
         return;
@@ -105,23 +121,6 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
         if (powered != state.getValue(SEALED)) {
           toggleBarrelSeal(world, pos);
         }
-      }
-    }
-  }
-
-  /**
-   * Used to toggle the barrel seal state and update the tile entity, in the correct order
-   */
-  public static void toggleBarrelSeal(World world, BlockPos pos) {
-    var tile = TileUtils.getTile(world, pos, TileWoodBarrel.class);
-    if (tile != null) {
-      IBlockState state = world.getBlockState(pos);
-      boolean previousSealed = state.getValue(SEALED);
-      world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
-      if (previousSealed) {
-        tile.onUnseal();
-      } else {
-        tile.onSealed();
       }
     }
   }
@@ -138,19 +137,19 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = playerIn.getHeldItem(hand);
     var tile = TileUtils.getTile(worldIn, pos, TileWoodBarrel.class);
     if (tile != null) {
       if (heldItem.isEmpty() && playerIn.isSneaking()) {
         worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
-                0.85F);
+                          0.85F);
         toggleBarrelSeal(worldIn, pos);
         return true;
       } else if (heldItem.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)
-              && !state.getValue(SEALED)) {
+                 && !state.getValue(SEALED)) {
         IFluidHandler fluidHandler = tile.getCapability(
-                CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+          CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
         if (fluidHandler != null) {
           if (!worldIn.isRemote) {
             FluidUtil.interactWithFluidHandler(playerIn, hand, fluidHandler);
@@ -170,7 +169,7 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-          EntityLivingBase placer, ItemStack stack) {
+                              EntityLivingBase placer, ItemStack stack) {
     if (!worldIn.isRemote && stack.getTagCompound() != null) {
       var tile = TileUtils.getTile(worldIn, pos, TileWoodBarrel.class);
       if (tile != null) {
@@ -202,7 +201,7 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
    */
   @Override
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
-          IBlockState state, int fortune) {
+                       IBlockState state, int fortune) {
   }
 
   @Override
@@ -215,7 +214,7 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
   @Override
   @NotNull
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-          EntityPlayer player) {
+                                EntityPlayer player) {
     ItemStack stack = new ItemStack(state.getBlock());
     var tile = TileUtils.getTile(world, pos, TileWoodBarrel.class);
     if (tile != null && tile.isSealed()) {

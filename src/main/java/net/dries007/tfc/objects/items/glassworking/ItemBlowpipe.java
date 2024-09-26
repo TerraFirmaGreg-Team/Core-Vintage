@@ -11,7 +11,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCGuiHandler;
 
@@ -60,8 +59,8 @@ public class ItemBlowpipe extends ItemGlassMolder implements ICapabilityMetal {
   public String getItemStackDisplayName(@NotNull ItemStack stack) {
     //noinspection ConstantConditions
     String metalName = (new TextComponentTranslation("tfc.types.metal." + metal.getRegistryName()
-            .getPath()
-            .toLowerCase())).getFormattedText();
+                                                                               .getPath()
+                                                                               .toLowerCase())).getFormattedText();
     return (new TextComponentTranslation("item.tfctech.metalitem.blowpipe.name", metalName)).getFormattedText();
   }
 

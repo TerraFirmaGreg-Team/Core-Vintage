@@ -19,7 +19,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -35,7 +34,7 @@ public final class ModuleWood extends ModuleBase {
   public final CreativeTabs WOOD_TAB;
 
   public ModuleWood() {
-    this.WOOD_TAB = BaseCreativeTab.of("wood", "wood/planks/pine");
+    this.WOOD_TAB = BaseCreativeTab.of("wood", "wood/log/aspen");
 
     this.enableAutoRegistry(WOOD_TAB);
     this.enableNetwork();

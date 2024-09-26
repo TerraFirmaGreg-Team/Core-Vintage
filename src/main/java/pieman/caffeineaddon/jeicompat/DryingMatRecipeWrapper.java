@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
-
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -24,7 +23,7 @@ public class DryingMatRecipeWrapper implements IRecipeWrapper {
   @Override
   public void getIngredients(IIngredients ingredients) {
     ingredients.setInputLists(VanillaTypes.ITEM,
-            Collections.singletonList(recipe.getItemIngredient().getValidIngredients()));
+                              Collections.singletonList(recipe.getItemIngredient().getValidIngredients()));
     if (recipe.getOutputStack() != ItemStack.EMPTY) {
       ingredients.setOutput(VanillaTypes.ITEM, recipe.getOutputStack());
     }

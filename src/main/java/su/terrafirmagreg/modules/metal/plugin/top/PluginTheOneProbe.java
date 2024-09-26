@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.metal.plugin.top;
 
 import su.terrafirmagreg.modules.metal.plugin.top.provider.ProviderMetalLamp;
 
-
 import mcjty.theoneprobe.TheOneProbe;
 import mcjty.theoneprobe.api.ITheOneProbe;
 

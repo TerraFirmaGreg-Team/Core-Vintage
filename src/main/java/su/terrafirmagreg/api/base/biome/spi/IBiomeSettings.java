@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.world.biome.Biome;
 
-
 import lombok.Getter;
 
 import java.awt.Color;

@@ -32,7 +32,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
-
 import org.lwjgl.opengl.GL11;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockFiller;
@@ -44,18 +43,26 @@ import java.util.Arrays;
 public abstract class TESRHPBase<T extends TileHPBase> extends TileEntitySpecialRenderer<T> {
 
   public static ITextComponent LEAD_LOOKUP = new TextComponentTranslation(Localization.INFO.ITEM_REVEAL.key()).setStyle(
-          new Style().setColor(TextFormatting.RED));
+    new Style().setColor(TextFormatting.RED));
   private static TextureAtlasSprite[] destroyBlockIcons = new TextureAtlasSprite[10];
 
   public static void clearDestroyStageicons() {
     Arrays.stream(destroyBlockIcons).forEach(textureAtlasSprite -> textureAtlasSprite = null);
   }
 
+  public static TextureAtlasSprite getDestroyBlockIcon(int destroyState) {
+    if (destroyBlockIcons[destroyState] == null) {
+      destroyBlockIcons = ObfuscationReflectionHelper.getPrivateValue(RenderGlobal.class, Minecraft.getMinecraft().renderGlobal, "destroyBlockIcons",
+                                                                      "field_94141_F");
+    }
+    return destroyBlockIcons[destroyState];
+  }
+
   public void drawDisplayText(TileEntity tile, double x, double y, double z) {
     ITextComponent itextcomponent = tile.getDisplayName();
 
     if (itextcomponent != null && this.rendererDispatcher.cameraHitResult != null && tile.getPos()
-            .equals(this.rendererDispatcher.cameraHitResult.getBlockPos())) {
+                                                                                         .equals(this.rendererDispatcher.cameraHitResult.getBlockPos())) {
       this.setLightmapDisabled(true);
       this.drawCustomNameplate(tile, itextcomponent.getFormattedText(), x, y, z, 12, 0);
       this.drawCustomNameplate(tile, LEAD_LOOKUP.getFormattedText(), x, y, z, 12, -0.25F);
@@ -71,7 +78,7 @@ public abstract class TESRHPBase<T extends TileHPBase> extends TileEntitySpecial
       float f = this.rendererDispatcher.entityYaw;
       float f1 = this.rendererDispatcher.entityPitch;
       EntityRenderer.drawNameplate(this.getFontRenderer(), str, (float) x + 0.5F, (float) y + 1.5F + offset, (float) z + 0.5F, 0, f, f1, false,
-              false);
+                                   false);
     }
   }
 
@@ -106,7 +113,7 @@ public abstract class TESRHPBase<T extends TileHPBase> extends TileEntitySpecial
   }
 
   protected void renderItemWithFacing(World world, TileHPBase tile, ItemStack stack, double ox, double oy, double oz, float x, float y,
-          float z, float scale) {
+                                      float z, float scale) {
     if (stack.isEmpty()) {
       return;
     }
@@ -175,13 +182,14 @@ public abstract class TESRHPBase<T extends TileHPBase> extends TileEntitySpecial
 
   public boolean canShowAmount(TileHPBase tile) {
     return Configs.client.renderItemAmount &&
-            (!Configs.client.mustLookAtBlock || this.rendererDispatcher.cameraHitResult != null && (tile.getPos()
-                    .equals(this.rendererDispatcher.cameraHitResult.getBlockPos()) || (tile.getWorld()
-                    .getBlockState(tile.getPos()
-                            .up())
-                    .getBlock() instanceof BlockFiller && tile.getPos()
-                    .up()
-                    .equals(this.rendererDispatcher.cameraHitResult.getBlockPos()))));
+           (!Configs.client.mustLookAtBlock || this.rendererDispatcher.cameraHitResult != null && (tile.getPos()
+                                                                                                       .equals(this.rendererDispatcher.cameraHitResult.getBlockPos())
+                                                                                                   || (tile.getWorld()
+                                                                                                           .getBlockState(tile.getPos()
+                                                                                                                              .up())
+                                                                                                           .getBlock() instanceof BlockFiller && tile.getPos()
+                                                                                                                                                     .up()
+                                                                                                                                                     .equals(this.rendererDispatcher.cameraHitResult.getBlockPos()))));
   }
 
   protected void renderBaseModel(TileHPBase tile, Tessellator tessellator, BufferBuilder buffer, double x, double y, double z) {
@@ -217,7 +225,7 @@ public abstract class TESRHPBase<T extends TileHPBase> extends TileEntitySpecial
   }
 
   protected void renderBaseModelWithFacing(TileHPBase tile, IBlockState blockState, Tessellator tessellator, BufferBuilder buffer, double x,
-          double y, double z, int destroyStage) {
+                                           double y, double z, int destroyStage) {
     // Most of this is blatantly copied from FastTESR
     preDestroyRender(destroyStage);
     setRenderSettings();
@@ -233,7 +241,7 @@ public abstract class TESRHPBase<T extends TileHPBase> extends TileEntitySpecial
       renderBlockDamage(blockState, tile.getPos(), getDestroyBlockIcon(destroyStage), tile.getWorld());
     } else {
       dispatcher.getBlockModelRenderer()
-              .renderModel(tile.getWorld(), model, blockState, tile.getPos(), buffer, false);
+                .renderModel(tile.getWorld(), model, blockState, tile.getPos(), buffer, false);
     }
 
     buffer.setTranslation(0, 0, 0);
@@ -258,14 +266,14 @@ public abstract class TESRHPBase<T extends TileHPBase> extends TileEntitySpecial
     if (destroyStage >= 0) {
       GlStateManager.enableBlend();
       GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE,
-              GlStateManager.DestFactor.ZERO);
+                                          GlStateManager.DestFactor.ZERO);
       Minecraft.getMinecraft()
-              .getTextureManager()
-              .getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE)
-              .setBlurMipmap(false, false);
+               .getTextureManager()
+               .getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE)
+               .setBlurMipmap(false, false);
 
       GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.DST_COLOR, GlStateManager.DestFactor.SRC_COLOR,
-              GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                                          GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
       GlStateManager.enableBlend();
       GlStateManager.color(1.0F, 1.0F, 1.0F, 0.5F);
       GlStateManager.doPolygonOffset(-3.0F, -3.0F);
@@ -279,22 +287,14 @@ public abstract class TESRHPBase<T extends TileHPBase> extends TileEntitySpecial
   public void renderBlockDamage(IBlockState state, BlockPos pos, TextureAtlasSprite texture, IBlockAccess blockAccess) {
     state = state.getActualState(blockAccess, pos);
     IBakedModel ibakedmodel = Minecraft.getMinecraft()
-            .getBlockRendererDispatcher()
-            .getBlockModelShapes()
-            .getModelForState(state);
+                                       .getBlockRendererDispatcher()
+                                       .getBlockModelShapes()
+                                       .getModelForState(state);
     IBakedModel ibakedmodel1 = net.minecraftforge.client.ForgeHooksClient.getDamageModel(ibakedmodel, texture, state, blockAccess, pos);
     Minecraft.getMinecraft()
-            .getBlockRendererDispatcher()
-            .getBlockModelRenderer()
-            .renderModel(blockAccess, ibakedmodel1, state, pos, Tessellator.getInstance().getBuffer(), true);
-  }
-
-  public static TextureAtlasSprite getDestroyBlockIcon(int destroyState) {
-    if (destroyBlockIcons[destroyState] == null) {
-      destroyBlockIcons = ObfuscationReflectionHelper.getPrivateValue(RenderGlobal.class, Minecraft.getMinecraft().renderGlobal,
-              "destroyBlockIcons", "field_94141_F");
-    }
-    return destroyBlockIcons[destroyState];
+             .getBlockRendererDispatcher()
+             .getBlockModelRenderer()
+             .renderModel(blockAccess, ibakedmodel1, state, pos, Tessellator.getInstance().getBuffer(), true);
   }
 
   protected void postDestroyRender(int destroyStage) {
@@ -308,15 +308,15 @@ public abstract class TESRHPBase<T extends TileHPBase> extends TileEntitySpecial
       GlStateManager.popMatrix();
 
       Minecraft.getMinecraft()
-              .getTextureManager()
-              .getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE)
-              .restoreLastBlurMipmap();
+               .getTextureManager()
+               .getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE)
+               .restoreLastBlurMipmap();
       GlStateManager.disableBlend();
     }
   }
 
   protected void renderLeash(EntityCreature entity, double ox, double oy, double oz, double x, double y, double z, float partialTicks,
-          BlockPos pos) {
+                             BlockPos pos) {
     if (entity != null) {
       oy = oy - 0.7D;
       double d2 = 0.0D;
@@ -324,13 +324,13 @@ public abstract class TESRHPBase<T extends TileHPBase> extends TileEntitySpecial
       double d4 = -1.0D;
 
       double d9 =
-              this.interpolateValue(entity.prevRenderYawOffset, entity.renderYawOffset, partialTicks) * 0.01745329238474369D + (Math.PI / 2D);
+        this.interpolateValue(entity.prevRenderYawOffset, entity.renderYawOffset, partialTicks) * 0.01745329238474369D + (Math.PI / 2D);
       d2 = Math.cos(d9) * entity.width * 0.4D;
       d3 = Math.sin(d9) * entity.width * 0.4D;
       double d6 = (this.interpolateValue(entity.prevPosX, entity.posX, partialTicks)) + d2;
       double d7 =
-              this.interpolateValue(entity.prevPosY + entity.getEyeHeight() * 1.1D, entity.posY + entity.getEyeHeight() * 1.1D, partialTicks) -
-                      d4 * 0.5D - 0.25D - y;
+        this.interpolateValue(entity.prevPosY + entity.getEyeHeight() * 1.1D, entity.posY + entity.getEyeHeight() * 1.1D, partialTicks) -
+        d4 * 0.5D - 0.25D - y;
       double d8 = (this.interpolateValue(entity.prevPosZ, entity.posZ, partialTicks)) + d3;
 
       d2 = 0.5D;
@@ -380,13 +380,13 @@ public abstract class TESRHPBase<T extends TileHPBase> extends TileEntitySpecial
 
       float f3 = (float) j / 24.0F;
       vertexbuffer.pos(ox + d13 * (double) f3 + 0.0D,
-                      oy + d14 * (double) (f3 * f3 + f3) * 0.5D + (double) ((24.0F - (float) j) / 18.0F + 0.125F), oz + d15 * (double) f3)
-              .color(f, f1, f2, 1.0F)
-              .endVertex();
+                       oy + d14 * (double) (f3 * f3 + f3) * 0.5D + (double) ((24.0F - (float) j) / 18.0F + 0.125F), oz + d15 * (double) f3)
+                  .color(f, f1, f2, 1.0F)
+                  .endVertex();
       vertexbuffer.pos(ox + d13 * (double) f3 + 0.025D,
-                      oy + d14 * (double) (f3 * f3 + f3) * 0.5D + (double) ((24.0F - (float) j) / 18.0F + 0.125F) + 0.025D, oz + d15 * (double) f3)
-              .color(f, f1, f2, 1.0F)
-              .endVertex();
+                       oy + d14 * (double) (f3 * f3 + f3) * 0.5D + (double) ((24.0F - (float) j) / 18.0F + 0.125F) + 0.025D, oz + d15 * (double) f3)
+                  .color(f, f1, f2, 1.0F)
+                  .endVertex();
     }
 
     tessellator.draw();
@@ -405,13 +405,13 @@ public abstract class TESRHPBase<T extends TileHPBase> extends TileEntitySpecial
 
       float f7 = (float) k / 24.0F;
       vertexbuffer.pos(ox + d13 * (double) f7 + 0.0D,
-                      oy + d14 * (double) (f7 * f7 + f7) * 0.5D + (double) ((24.0F - (float) k) / 18.0F + 0.125F) + 0.025D, oz + d15 * (double) f7)
-              .color(f4, f5, f6, 1.0F)
-              .endVertex();
+                       oy + d14 * (double) (f7 * f7 + f7) * 0.5D + (double) ((24.0F - (float) k) / 18.0F + 0.125F) + 0.025D, oz + d15 * (double) f7)
+                  .color(f4, f5, f6, 1.0F)
+                  .endVertex();
       vertexbuffer.pos(ox + d13 * (double) f7 + 0.025D,
-                      oy + d14 * (double) (f7 * f7 + f7) * 0.5D + (double) ((24.0F - (float) k) / 18.0F + 0.125F), oz + d15 * (double) f7 + 0.025D)
-              .color(f4, f5, f6, 1.0F)
-              .endVertex();
+                       oy + d14 * (double) (f7 * f7 + f7) * 0.5D + (double) ((24.0F - (float) k) / 18.0F + 0.125F), oz + d15 * (double) f7 + 0.025D)
+                  .color(f4, f5, f6, 1.0F)
+                  .endVertex();
     }
 
     tessellator.draw();

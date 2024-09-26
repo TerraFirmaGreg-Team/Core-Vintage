@@ -1,22 +1,21 @@
 package su.terrafirmagreg.modules.world.classic.objects.biome.overworld;
 
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.MESA_PLATEAU;
-
+import su.terrafirmagreg.api.base.biome.BaseBiomeMesa;
 
 import net.minecraftforge.common.BiomeDictionary;
 
-import su.terrafirmagreg.api.base.biome.BaseBiomeMesa;
+import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.MESA_PLATEAU;
 
 public class BiomeMesaPlateauM extends BaseBiomeMesa {
 
   public BiomeMesaPlateauM() {
     super(false, false, new Settings("Mesa Plateau M")
-            .guiColour(0x470285)
-            .baseHeight(-0.1F)
-            .heightVariation(-1.5F)
-            .baseBiome(MESA_PLATEAU)
-            .spawnBiome()
-            .enableWorldGen());
+      .guiColour(0x470285)
+      .baseHeight(-0.1F)
+      .heightVariation(-1.5F)
+      .baseBiome(MESA_PLATEAU)
+      .spawnBiome()
+      .enableWorldGen());
   }
 
   @Override
@@ -28,11 +27,11 @@ public class BiomeMesaPlateauM extends BaseBiomeMesa {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.MESA,
-            BiomeDictionary.Type.HOT,
-            BiomeDictionary.Type.DRY,
-            BiomeDictionary.Type.SPARSE,
-            BiomeDictionary.Type.MOUNTAIN
+      BiomeDictionary.Type.MESA,
+      BiomeDictionary.Type.HOT,
+      BiomeDictionary.Type.DRY,
+      BiomeDictionary.Type.SPARSE,
+      BiomeDictionary.Type.MOUNTAIN
     };
   }
 }

@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.metal.init.BlocksMetal;
 
 import net.minecraft.block.Block;
 
-
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 
 import lombok.Getter;
@@ -47,7 +46,7 @@ public class MetalBlockVariant extends Variant<MetalBlockVariant> {
   }
 
   public MetalBlockVariant setFactory(
-          BiFunction<MetalBlockVariant, MetalType, ? extends Block> factory) {
+    BiFunction<MetalBlockVariant, MetalType, ? extends Block> factory) {
     this.factory = factory;
     return this;
   }
@@ -61,7 +60,7 @@ public class MetalBlockVariant extends Variant<MetalBlockVariant> {
     MetalType.getTypes().forEach(type -> {
       if (BlocksMetal.METAL_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
         throw new RuntimeException(
-                String.format("Duplicate registry detected: %s, %s", this, type));
+          String.format("Duplicate registry detected: %s, %s", this, type));
       }
     });
     return this;

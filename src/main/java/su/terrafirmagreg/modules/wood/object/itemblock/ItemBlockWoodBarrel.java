@@ -42,7 +42,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
-
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -70,14 +69,14 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemM
 
   @Override
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
-          EnumFacing facing, float hitX, float hitY, float hitZ) {
+                                    EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
     if (!stack.isEmpty()) {
       IFluidHandler barrelCap = stack.getCapability(
-              CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+        CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
       if (barrelCap != null && barrelCap.drain(1, false) == null) {
         BlockPos fluidPos = pos.offset(
-                facing); //Since the clicked facing is the block bellow fluids
+          facing); //Since the clicked facing is the block bellow fluids
         IBlockState state = worldIn.getBlockState(fluidPos);
         IFluidHandler handler = FluidUtil.getFluidHandler(worldIn, fluidPos, facing);
         if (handler != null && handler.drain(Fluid.BUCKET_VOLUME, false) != null) {
@@ -87,13 +86,13 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemM
             boolean canCreateSources = false; //default
             if (state.getBlock() instanceof BlockFluidClassic) {
               BlockFluidClassic fluidblock = (BlockFluidClassic) worldIn.getBlockState(fluidPos)
-                      .getBlock();
+                                                                        .getBlock();
               canCreateSources = ObfuscationReflectionHelper.getPrivateValue(
-                      BlockFluidClassic.class, fluidblock, "canCreateSources");
+                BlockFluidClassic.class, fluidblock, "canCreateSources");
             } else if (state.getBlock() instanceof BlockLiquid) {
               //Fire the event so other mods that prevent infinite water disable this
               canCreateSources = ForgeEventFactory.canCreateFluidSource(worldIn, fluidPos, state,
-                      state.getMaterial() == Material.WATER);
+                                                                        state.getMaterial() == Material.WATER);
             }
             FluidStack fluidStack = handler.drain(Fluid.BUCKET_VOLUME, true);
             if (canCreateSources && fluidStack != null) {
@@ -111,51 +110,51 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemM
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, @Nullable World worldIn,
-          @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
+                             @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
     IFluidHandler barrelCap = stack.getCapability(
-            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+      CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (barrelCap instanceof ItemBarrelFluidHandler &&
-            ((ItemBarrelFluidHandler) barrelCap).getBarrelContents()
-                    != null) // Have either fluid or items stored
+        ((ItemBarrelFluidHandler) barrelCap).getBarrelContents()
+        != null) // Have either fluid or items stored
     {
       FluidStack fluidStack = barrelCap.drain(Integer.MAX_VALUE, false);
       ItemStackHandler stackHandler = new ItemStackHandler(3);
       //noinspection ConstantConditions
       stackHandler.deserializeNBT(((ItemBarrelFluidHandler) barrelCap).getBarrelContents()
-              .getCompoundTag("inventory"));
+                                                                      .getCompoundTag("inventory"));
       ItemStack inventory = stackHandler.getStackInSlot(TileWoodBarrel.SLOT_ITEM);
 
       if (fluidStack == null || fluidStack.amount == 0) {
         if (inventory.isEmpty()) {
           tooltip.add(
-                  TextFormatting.BLUE + I18n.format(ModUtils.localize("tooltip", "barrel_empty")));
+            TextFormatting.BLUE + I18n.format(ModUtils.localize("tooltip", "barrel_empty")));
         } else {
           tooltip.add(TextFormatting.BLUE + I18n.format(ModUtils.localize("tooltip", "barrel_item"),
-                  inventory.getCount(), inventory
-                          .getItem()
-                          .getItemStackDisplayName(inventory)));
+                                                        inventory.getCount(), inventory
+                                                          .getItem()
+                                                          .getItemStackDisplayName(inventory)));
         }
       } else {
         tooltip.add(
-                TextFormatting.BLUE +
-                        I18n.format(ModUtils.localize("tooltip", "barrel_fluid"), fluidStack.amount,
-                                fluidStack.getLocalizedName()));
+          TextFormatting.BLUE +
+          I18n.format(ModUtils.localize("tooltip", "barrel_fluid"), fluidStack.amount,
+                      fluidStack.getLocalizedName()));
 
         if (!inventory.isEmpty()) {
           tooltip.add(
-                  TextFormatting.BLUE + I18n.format(
-                          ModUtils.localize("tooltip", "barrel_item_in_fluid"), inventory.getCount(),
-                          inventory
-                                  .getItem()
-                                  .getItemStackDisplayName(inventory)));
+            TextFormatting.BLUE + I18n.format(
+              ModUtils.localize("tooltip", "barrel_item_in_fluid"), inventory.getCount(),
+              inventory
+                .getItem()
+                .getItemStackDisplayName(inventory)));
         }
       }
 
       String formattedDate = ICalendarFormatted.getTimeAndDate(
-              stack.getTagCompound().getLong("sealedCalendarTick"),
-              Calendar.CALENDAR_TIME.getDaysInMonth());
+        stack.getTagCompound().getLong("sealedCalendarTick"),
+        Calendar.CALENDAR_TIME.getDaysInMonth());
       tooltip.add(TextFormatting.DARK_GREEN + new TextComponentTranslation("top.tfc.barrel.sealed",
-              formattedDate).getFormattedText());
+                                                                           formattedDate).getFormattedText());
     }
   }
 
@@ -163,19 +162,19 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemM
   @NotNull
   public String getTranslationKey(@NotNull ItemStack stack) {
     IFluidHandler barrelCap = stack.getCapability(
-            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+      CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     return barrelCap != null && barrelCap.drain(1, false) != null ? super.getTranslationKey()
-            + ".sealed" : super.getTranslationKey();
+                                                                    + ".sealed" : super.getTranslationKey();
   }
 
   @NotNull
   @Override
   public ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, EntityPlayer player,
-          @NotNull EnumHand hand) {
+                                                  @NotNull EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
     if (!stack.isEmpty()) {
       IFluidHandler barrelCap = stack.getCapability(
-              CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+        CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
       if (barrelCap != null && barrelCap.drain(1, false) == null) {
         RayTraceResult rayTrace = rayTrace(worldIn, player, true);
         //noinspection ConstantConditions - ray trace can be null
@@ -188,13 +187,13 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemM
             boolean canCreateSources = false; //default
             if (state.getBlock() instanceof BlockFluidClassic) {
               BlockFluidClassic fluidblock = (BlockFluidClassic) worldIn.getBlockState(pos)
-                      .getBlock();
+                                                                        .getBlock();
               canCreateSources = ObfuscationReflectionHelper.getPrivateValue(
-                      BlockFluidClassic.class, fluidblock, "canCreateSources");
+                BlockFluidClassic.class, fluidblock, "canCreateSources");
             } else if (state.getBlock() instanceof BlockLiquid) {
               //Fire the event so other mods that prevent infinite water disable this
               canCreateSources = ForgeEventFactory.canCreateFluidSource(worldIn, pos, state,
-                      state.getMaterial() == Material.WATER);
+                                                                        state.getMaterial() == Material.WATER);
             }
             FluidStack fluidStack = handler.drain(Fluid.BUCKET_VOLUME, true);
             if (canCreateSources && fluidStack != null) {
@@ -212,7 +211,7 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemM
   @Nullable
   @Override
   public ICapabilityProvider initCapabilities(@NotNull ItemStack stack,
-          @Nullable NBTTagCompound nbt) {
+                                              @Nullable NBTTagCompound nbt) {
     return new ItemBarrelFluidHandler(stack);
   }
 
@@ -222,8 +221,8 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemM
     final var resurceLocation = block.getResourceLocation();
 
     return stack -> stack.getTagCompound() != null ?
-            new ModelResourceLocation(resurceLocation, "sealed=true") :
-            new ModelResourceLocation(resurceLocation, "sealed=false");
+                    new ModelResourceLocation(resurceLocation, "sealed=true") :
+                    new ModelResourceLocation(resurceLocation, "sealed=false");
   }
 
   // This is not an item handler, but still saves items from a sealed barrel
@@ -242,9 +241,8 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemM
     /**
      * Set the contents to be saved in this capability This method assume you have at least one content to save
      */
-    public void setBarrelContents(@Nullable FluidStack fluidStack,
-            @Nullable NBTTagCompound inventoryTag, @Nullable NBTTagList surplusTag,
-            long sealedTick, long sealedCalendarTick) {
+    public void setBarrelContents(@Nullable FluidStack fluidStack, @Nullable NBTTagCompound inventoryTag, @Nullable NBTTagList surplusTag, long sealedTick,
+                                  long sealedCalendarTick) {
       this.fill(fluidStack, true);
       NBTTagCompound nbt = container.getTagCompound();
       if (nbt == null) {
@@ -289,7 +287,7 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemM
         super.setContainerToEmpty();
         // If not holding any items, we can safely clear the item tag
         if (!container.getTagCompound().hasKey("inventory") && !container.getTagCompound()
-                .hasKey("surplus")) {
+                                                                         .hasKey("surplus")) {
           container.setTagCompound(null);
         }
       }

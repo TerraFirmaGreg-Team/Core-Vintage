@@ -1,6 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.block.state.IBlockState;
@@ -9,7 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
@@ -17,11 +17,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
-
 import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +34,7 @@ public class BerryBushProvider implements IWailaBlock {
     IBlockState state = world.getBlockState(pos);
     if (state.getBlock() instanceof BlockBerryBush block) {
       if (block.getBush()
-              .isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(BlockBerryBush.FRUITING)) {
+               .isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(BlockBerryBush.FRUITING)) {
         float temp = Climate.getActualTemp(world, pos);
         float rainfall = ProviderChunkData.getRainfall(world, pos);
         var tile = TileUtils.getTile(world, pos, TETickCounter.class);
@@ -47,7 +42,7 @@ public class BerryBushProvider implements IWailaBlock {
           long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
           // Don't show 100% since it still needs to check on randomTick to grow
           float perc = Math.min(0.99F, hours / (block.getBush()
-                  .getGrowthTime() * (float) ConfigTFC.General.FOOD.berryBushGrowthTimeModifier)) * 100;
+                                                     .getGrowthTime() * (float) ConfigTFC.General.FOOD.berryBushGrowthTimeModifier)) * 100;
           String growth = String.format("%d%%", Math.round(perc));
           currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
         } else {

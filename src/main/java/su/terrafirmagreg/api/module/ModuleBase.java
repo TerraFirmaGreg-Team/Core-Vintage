@@ -12,7 +12,6 @@ import su.terrafirmagreg.data.lib.LoggingHelper;
 
 import net.minecraft.creativetab.CreativeTabs;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
@@ -76,8 +75,8 @@ public abstract class ModuleBase implements IModule {
   /**
    * Call this in the constructor to enable network functionality for this module.
    * <p>
-   * This will create a new network wrapper and packet registry for this module's mod id if they don't already exist. If they do already exist, the existing network
-   * wrapper and packet registry will be used.
+   * This will create a new network wrapper and packet registry for this module's mod id if they don't already exist. If they do already exist, the existing
+   * network wrapper and packet registry will be used.
    */
   protected void enableNetwork() {
 

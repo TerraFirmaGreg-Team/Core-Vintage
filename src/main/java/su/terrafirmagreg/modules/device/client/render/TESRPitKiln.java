@@ -25,7 +25,7 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
 
   private static final ResourceLocation THATCH = ModUtils.resource("textures/blocks/thatch.png");
   private static final ResourceLocation BARK = ModUtils.resource(
-          "textures/blocks/wood/log/oak.png");
+    "textures/blocks/wood/log/oak.png");
   private static final ModelStraw[] STRAW = new ModelStraw[TilePitKiln.STRAW_NEEDED];
   private static final int LOG_ROWS = 2;
   private static final int LOGS_PER_ROW = TilePitKiln.WOOD_NEEDED / LOG_ROWS;
@@ -40,7 +40,7 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
 
   @Override
   public void render(TilePitKiln tile, double x, double y, double z, float partialTicks,
-          int destroyStage, float alpha) {
+                     int destroyStage, float alpha) {
     RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
     World world = tile.getWorld();
     //noinspection ConstantConditions
@@ -147,8 +147,8 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
 
     @Override
     public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
-            float netHeadYaw, float headPitch,
-            float scale) {
+                       float netHeadYaw, float headPitch,
+                       float scale) {
       strawRenderer.render(scale);
     }
   }
@@ -166,8 +166,8 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
 
     @Override
     public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
-            float netHeadYaw, float headPitch,
-            float scale) {
+                       float netHeadYaw, float headPitch,
+                       float scale) {
       logRenderer.render(scale);
     }
   }

@@ -15,7 +15,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class EntityWoodAnimalCart extends EntityWoodCart {
@@ -52,13 +51,13 @@ public class EntityWoodAnimalCart extends EntityWoodCart {
   public void applyEntityCollision(Entity entity) {
     if (!entity.isPassenger(this)) {
       if (!this.world.isRemote && this.pulling != entity &&
-              !(this.getControllingPassenger() instanceof EntityPlayer) &&
-              this.getPassengers().size() < 2 &&
-              !entity.isRiding() &&
-              entity.width < this.width &&
-              entity instanceof EntityLivingBase &&
-              !(entity instanceof EntityWaterMob) &&
-              !(entity instanceof EntityPlayer)) {
+          !(this.getControllingPassenger() instanceof EntityPlayer) &&
+          this.getPassengers().size() < 2 &&
+          !entity.isRiding() &&
+          entity.width < this.width &&
+          entity instanceof EntityLivingBase &&
+          !(entity instanceof EntityWaterMob) &&
+          !(entity instanceof EntityPlayer)) {
         entity.startRiding(this);
       } else {
         super.applyEntityCollision(entity);
@@ -97,9 +96,9 @@ public class EntityWoodAnimalCart extends EntityWoodCart {
       }
 
       Vec3d vec3d = new Vec3d(f, 0.0D, 0.0D).rotateYaw(
-              -this.rotationYaw * 0.017453292F - ((float) Math.PI / 2F));
+        -this.rotationYaw * 0.017453292F - ((float) Math.PI / 2F));
       passenger.setPosition(this.posX + vec3d.x,
-              this.posY + this.getMountedYOffset() + passenger.getYOffset(), this.posZ + vec3d.z);
+                            this.posY + this.getMountedYOffset() + passenger.getYOffset(), this.posZ + vec3d.z);
 
       if (!(passenger instanceof EntityPlayer)) {
         passenger.setRenderYawOffset(this.rotationYaw);

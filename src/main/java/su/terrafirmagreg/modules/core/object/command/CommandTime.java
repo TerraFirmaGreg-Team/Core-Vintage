@@ -10,7 +10,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 
@@ -33,7 +32,7 @@ public class CommandTime extends BaseCommand {
 
   @Override
   public void execute(MinecraftServer server, ICommandSender sender, String[] args)
-          throws CommandException {
+    throws CommandException {
     if (args.length >= 1) {
       if ("set".equals(args[0])) {
         if (args.length < 2) {
@@ -42,7 +41,7 @@ public class CommandTime extends BaseCommand {
           int newMonthLength = parseInt(args[2], 1);
           Calendar.INSTANCE.setMonthLength(newMonthLength);
           notifyCommandListener(sender, this, "tfc.command.timetfc.set_month_length",
-                  newMonthLength);
+                                newMonthLength);
         } else {
           int resultWorldTime;
           if ("day".equals(args[1])) {
@@ -68,12 +67,12 @@ public class CommandTime extends BaseCommand {
             int months = parseInt(args[2], 0);
             timeToAdd = ICalendar.TICKS_IN_DAY * Calendar.CALENDAR_TIME.getDaysInMonth() * months;
             notifyCommandListener(sender, this, "tfc.command.timetfc.add_months", months,
-                    timeToAdd);
+                                  timeToAdd);
             break;
           case "years":
             int years = parseInt(args[2], 0);
             timeToAdd =
-                    ICalendar.TICKS_IN_DAY * Calendar.CALENDAR_TIME.getDaysInMonth() * 12 * years;
+              ICalendar.TICKS_IN_DAY * Calendar.CALENDAR_TIME.getDaysInMonth() * 12 * years;
             notifyCommandListener(sender, this, "tfc.command.timetfc.add_years", years, timeToAdd);
             break;
           case "days":
@@ -139,7 +138,7 @@ public class CommandTime extends BaseCommand {
 
   @Override
   public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender,
-          String[] args, @Nullable BlockPos targetPos) {
+                                        String[] args, @Nullable BlockPos targetPos) {
     if (args.length == 1) {
       return getListOfStringsMatchingLastWord(args, "set", "add", "query");
     } else if (args.length == 2) {
@@ -149,7 +148,7 @@ public class CommandTime extends BaseCommand {
         return getListOfStringsMatchingLastWord(args, "months", "years", "days");
       } else if ("query".equals(args[0])) {
         return getListOfStringsMatchingLastWord(args, "daytime", "day", "gametime", "playerticks",
-                "calendarticks");
+                                                "calendarticks");
       }
     }
     return Collections.emptyList();

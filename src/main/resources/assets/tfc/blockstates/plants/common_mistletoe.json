@@ -10,8 +10,7 @@
           "model": "tfc:plants/common_mistletoe_standing_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2|3",
         "facing": "up",
@@ -21,14 +20,12 @@
         {
           "model": "tfc:plants/common_mistletoe_standing_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/common_mistletoe_standing_1",
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2|3",
         "facing": "up",
@@ -38,14 +35,12 @@
         {
           "model": "tfc:plants/common_mistletoe_standing_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/common_mistletoe_standing_1",
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "0|1",
         "facing": "down"
@@ -56,8 +51,7 @@
           "x": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2|3",
         "facing": "down",
@@ -68,15 +62,13 @@
           "model": "tfc:plants/common_mistletoe_standing_0",
           "x": 180,
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/common_mistletoe_standing_1",
           "x": 180,
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2|3",
         "facing": "down",
@@ -87,15 +79,13 @@
           "model": "tfc:plants/common_mistletoe_standing_0",
           "x": 180,
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/common_mistletoe_standing_1",
           "x": 180,
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "0|1",
         "facing": "east"
@@ -105,8 +95,7 @@
           "model": "tfc:plants/common_mistletoe_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2|3",
         "facing": "east",
@@ -116,14 +105,12 @@
         {
           "model": "tfc:plants/common_mistletoe_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/common_mistletoe_1",
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2|3",
         "facing": "east",
@@ -133,14 +120,12 @@
         {
           "model": "tfc:plants/common_mistletoe_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/common_mistletoe_1",
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "0|1",
         "facing": "south"
@@ -151,8 +136,7 @@
           "y": 90
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2|3",
         "facing": "south",
@@ -163,15 +147,13 @@
           "model": "tfc:plants/common_mistletoe_0",
           "y": 90,
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/common_mistletoe_1",
           "y": 90,
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2|3",
         "facing": "south",
@@ -182,15 +164,13 @@
           "model": "tfc:plants/common_mistletoe_0",
           "y": 90,
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/common_mistletoe_1",
           "y": 90,
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "0|1",
         "facing": "west"
@@ -201,8 +181,7 @@
           "y": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2|3",
         "facing": "west",
@@ -213,15 +192,13 @@
           "model": "tfc:plants/common_mistletoe_0",
           "y": 180,
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/common_mistletoe_1",
           "y": 180,
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2|3",
         "facing": "west",
@@ -232,15 +209,13 @@
           "model": "tfc:plants/common_mistletoe_0",
           "y": 180,
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/common_mistletoe_1",
           "y": 180,
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "0|1",
         "facing": "north"
@@ -251,8 +226,7 @@
           "y": 270
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2|3",
         "facing": "north",
@@ -263,15 +237,13 @@
           "model": "tfc:plants/common_mistletoe_0",
           "y": 270,
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/common_mistletoe_1",
           "y": 270,
           "weight": 5
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2|3",
         "facing": "north",
@@ -282,8 +254,7 @@
           "model": "tfc:plants/common_mistletoe_0",
           "y": 270,
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/common_mistletoe_1",
           "y": 270,
           "weight": 5

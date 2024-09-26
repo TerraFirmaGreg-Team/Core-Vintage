@@ -7,13 +7,11 @@
       "apply": [
         {
           "model": "tfc:plants/magma_shroom_0"
-        },
-        {
+        }, {
           "model": "tfc:plants/magma_shroom_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "up": "true"
       },
@@ -21,14 +19,12 @@
         {
           "model": "tfc:plants/magma_shroom_0",
           "x": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/magma_shroom_1",
           "x": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "east": "true"
       },
@@ -37,15 +33,13 @@
           "model": "tfc:plants/magma_shroom_0",
           "x": 270,
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/magma_shroom_1",
           "x": 270,
           "y": 90
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "south": "true"
       },
@@ -54,15 +48,13 @@
           "model": "tfc:plants/magma_shroom_0",
           "x": 270,
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/magma_shroom_1",
           "x": 270,
           "y": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "west": "true"
       },
@@ -71,15 +63,13 @@
           "model": "tfc:plants/magma_shroom_0",
           "x": 270,
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/magma_shroom_1",
           "x": 270,
           "y": 270
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "north": "true"
       },
@@ -87,8 +77,7 @@
         {
           "model": "tfc:plants/magma_shroom_0",
           "x": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/magma_shroom_1",
           "x": 270
         }

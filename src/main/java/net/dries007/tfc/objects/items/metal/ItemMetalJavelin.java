@@ -14,7 +14,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
@@ -66,12 +65,12 @@ public class ItemMetalJavelin extends ItemMetalTool {
         if (!worldIn.isRemote) {
           EntityThrownJavelin javelin = new EntityThrownJavelin(worldIn, player);
           javelin.setDamage(2.5f *
-                  getAttackDamage());  // When thrown, it does approx 1.8x the tool material (attack damage is already 0.7x of the tool). This makes it slightly more damaging than axes but more difficult to use
+                            getAttackDamage());  // When thrown, it does approx 1.8x the tool material (attack damage is already 0.7x of the tool). This makes it slightly more damaging than axes but more difficult to use
           javelin.setWeapon(stack);
           javelin.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 1.5F, 0.5F);
           worldIn.spawnEntity(javelin);
           worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
-                  1.0F / (MathConstants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                            1.0F / (MathConstants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
         }
         if (!((EntityPlayer) entityLiving).isCreative()) {
           player.inventory.deleteStack(stack);

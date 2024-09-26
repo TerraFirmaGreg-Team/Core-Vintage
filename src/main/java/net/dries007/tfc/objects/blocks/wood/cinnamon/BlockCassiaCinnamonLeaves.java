@@ -1,5 +1,10 @@
 package net.dries007.tfc.objects.blocks.wood.cinnamon;
 
+import com.google.common.collect.ImmutableList;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
+import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
+import net.dries007.tfc.types.TreesTFCF;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -10,15 +15,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
-import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
-import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.types.TreesTFCF;
-import tfcflorae.util.OreDictionaryHelper;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import tfcflorae.util.OreDictionaryHelper;
 
 import java.util.List;
 import java.util.Random;

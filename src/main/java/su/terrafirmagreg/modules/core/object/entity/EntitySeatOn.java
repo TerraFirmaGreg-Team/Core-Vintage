@@ -1,11 +1,12 @@
 package su.terrafirmagreg.modules.core.object.entity;
 
+import su.terrafirmagreg.api.base.entity.BaseEntity;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
 
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +16,7 @@ import lombok.Getter;
  * Generic entity used for sitting on top of blocks
  */
 @Getter
-public class EntitySeatOn extends Entity {
+public class EntitySeatOn extends BaseEntity {
 
   private BlockPos pos;
 

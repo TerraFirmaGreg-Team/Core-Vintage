@@ -7,11 +7,10 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-
 import io.netty.buffer.ByteBuf;
 
 public class CSPacketOpenCartGui implements IMessage,
-        IMessageHandler<CSPacketOpenCartGui, IMessage> {
+                                            IMessageHandler<CSPacketOpenCartGui, IMessage> {
 
   private int invId;
   private int cartId;

@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 public class GuiWoodChest extends BaseGuiContainer {
 
   private static final ResourceLocation CHEST_GUI_TEXTURE = new ResourceLocation(
-          "textures/gui/container/generic_54.png");
+    "textures/gui/container/generic_54.png");
   private final int inventoryRows;
 
   public GuiWoodChest(ContainerWoodChest container, InventoryPlayer playerInv) {

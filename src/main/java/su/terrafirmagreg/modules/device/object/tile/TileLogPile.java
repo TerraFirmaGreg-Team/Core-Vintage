@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -21,13 +21,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -35,18 +32,15 @@ import org.jetbrains.annotations.NotNull;
 import static su.terrafirmagreg.data.Properties.LIT;
 import static su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile.LAYERS;
 
-@MethodsReturnNonnullByDefault
-public class TileLogPile extends BaseTileInventory implements ITickable,
-        IProviderContainer<ContainerLogPile, GuiLogPile> {
 
-  private static final int NUM_SLOTS = 4;
+public class TileLogPile extends BaseTileTickableInventory implements IProviderContainer<ContainerLogPile, GuiLogPile> {
 
   private boolean burning;
   private long startBurningTick;
   private boolean isContainerOpen;
 
   public TileLogPile() {
-    super(NUM_SLOTS);
+    super(4);
 
     startBurningTick = 0;
     burning = false;
@@ -89,7 +83,7 @@ public class TileLogPile extends BaseTileInventory implements ITickable,
 
   @Override
   public boolean canInteractWith(EntityPlayer player) {
-    return !burning && world.getTileEntity(pos) == this;
+    return !burning && TileUtils.getTile(world, pos) == this;
   }
 
   @Override
@@ -97,7 +91,7 @@ public class TileLogPile extends BaseTileInventory implements ITickable,
     if (!world.isRemote) {
       if (burning) {
         if ((int) (Calendar.PLAYER_TIME.getTicks() - startBurningTick)
-                > ConfigDevice.BLOCK.CHARCOAL_PIT.ticks) {
+            > ConfigDevice.BLOCK.CHARCOAL_PIT.ticks) {
           // Attempt to turn this log pile into charcoal
           createCharcoal();
         }
@@ -137,7 +131,7 @@ public class TileLogPile extends BaseTileInventory implements ITickable,
     if (j == 1) {
       // This log pile is at the bottom of the charcoal pit
       world.setBlockState(pos,
-              BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
+                          BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
       return;
     }
     for (int k = j - 1; k >= 0; k--) {
@@ -146,7 +140,7 @@ public class TileLogPile extends BaseTileInventory implements ITickable,
       if (state.getBlock() == Blocks.AIR) {
         // If it hits air, place the remaining pile in that block
         world.setBlockState(pos.down(k), BlocksDevice.CHARCOAL_PILE.getDefaultState()
-                .withProperty(LAYERS, charcoal));
+                                                                   .withProperty(LAYERS, charcoal));
         world.setBlockState(pos, Blocks.AIR.getDefaultState());
         return;
       }
@@ -156,7 +150,7 @@ public class TileLogPile extends BaseTileInventory implements ITickable,
         charcoal += state.getValue(LAYERS);
         int toCreate = Math.min(charcoal, 8);
         world.setBlockState(pos.down(k), BlocksDevice.CHARCOAL_PILE.getDefaultState()
-                .withProperty(LAYERS, toCreate));
+                                                                   .withProperty(LAYERS, toCreate));
         charcoal -= toCreate;
       }
 
@@ -167,7 +161,7 @@ public class TileLogPile extends BaseTileInventory implements ITickable,
     }
     // If you exit the loop, its arrived back at the original position OR needs to rest the original position, and needs to replace that block
     world.setBlockState(pos,
-            BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
+                        BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
   }
 
   public int countLogs() {
@@ -256,13 +250,13 @@ public class TileLogPile extends BaseTileInventory implements ITickable,
 
   @Override
   public ContainerLogPile getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                       IBlockState state, BlockPos pos) {
     return new ContainerLogPile(inventoryPlayer, this);
   }
 
   @Override
   public GuiLogPile getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state,
-          BlockPos pos) {
+                                    BlockPos pos) {
     return new GuiLogPile(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer);
   }
 }

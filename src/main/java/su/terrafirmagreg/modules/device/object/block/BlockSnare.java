@@ -39,7 +39,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 
@@ -55,40 +54,40 @@ import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 public class BlockSnare extends BaseBlock implements IProviderTile {
 
   protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D,
-          1.0D);
+                                                                     1.0D);
 
   public BlockSnare() {
     super(Settings.of(Material.WOOD));
 
     getSettings()
-            .registryKey("device/snare")
-            .sound(SoundType.WOOD)
-            .hardness(1.5f)
-            .nonFullCube()
-            .nonOpaque()
-            .size(Size.LARGE)
-            .weight(Weight.MEDIUM);
+      .registryKey("device/snare")
+      .sound(SoundType.WOOD)
+      .hardness(1.5f)
+      .nonFullCube()
+      .nonOpaque()
+      .size(Size.LARGE)
+      .weight(Weight.MEDIUM);
 
     setTickRandomly(true);
     setHarvestLevel(ToolClasses.AXE, 0);
     setDefaultState(blockState.getBaseState()
-            .withProperty(HORIZONTAL, EnumFacing.NORTH)
-            .withProperty(BAITED, Boolean.FALSE)
-            .withProperty(CLOSED, Boolean.FALSE));
+                              .withProperty(HORIZONTAL, EnumFacing.NORTH)
+                              .withProperty(BAITED, Boolean.FALSE)
+                              .withProperty(CLOSED, Boolean.FALSE));
   }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-            .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
-            .withProperty(BAITED, meta / 4 % 2 != 0)
-            .withProperty(CLOSED, meta / 8 != 0);
+               .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
+               .withProperty(BAITED, meta / 4 % 2 != 0)
+               .withProperty(CLOSED, meta / 8 != 0);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
     return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(BAITED) ? 4 : 0) + (
-            state.getValue(CLOSED) ? 8 : 0);
+      state.getValue(CLOSED) ? 8 : 0);
   }
 
   @Override
@@ -104,15 +103,15 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
   @Override
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     AxisAlignedBB captureBox = new AxisAlignedBB(pos.getX() - 10.0D, pos.getY() - 5.0D,
-            pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D,
-            pos.getZ() + 10.0D);
+                                                 pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D,
+                                                 pos.getZ() + 10.0D);
     var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
     if (tile.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox).isEmpty()
-            && !worldIn.isRemote) {
+        && !worldIn.isRemote) {
       for (EntityAnimalBase animal : worldIn.getEntitiesWithinAABB(EntityAnimalBase.class,
-              captureBox)) {
+                                                                   captureBox)) {
         if ((isCapturable(animal)) && !(worldIn.getBlockState(animal.getPosition())
-                .getBlock() instanceof BlockSnare)) {
+                                               .getBlock() instanceof BlockSnare)) {
           tile.setCapturedEntity(animal);
           tile.setOpen(false);
           state = state.withProperty(CLOSED, Boolean.TRUE);
@@ -162,13 +161,13 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
       var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
       if (!tile.isOpen()) {
         if (Math.random() < ConfigDevice.BLOCK.SNARE.breakChance) {
           worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f,
-                  0.8f);
+                            0.8f);
         } else {
           this.dropBlockAsItem(worldIn, pos, state, 0);
         }
@@ -186,9 +185,9 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
 
     if (block != Blocks.BARRIER) {
       BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(),
-              EnumFacing.UP);
+                                                                    EnumFacing.UP);
       return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock()
-              .isLeaves(iblockstate, worldIn, pos.down());
+                                                                  .isLeaves(iblockstate, worldIn, pos.down());
     } else {
       return false;
     }
@@ -196,8 +195,8 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                  float hitX, float hitY, float hitZ) {
     if (!state.getValue(BAITED)) {
       ItemStack stack = playerIn.getHeldItem(hand);
       if ((stack.getItem() instanceof ItemSeedsTFC || isFood(stack)) && !worldIn.isRemote) {
@@ -216,8 +215,8 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
 
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-          float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer) {
+                                          float hitX, float hitY, float hitZ, int meta,
+                                          EntityLivingBase placer) {
     return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
   }
 
@@ -234,7 +233,7 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
         state = state.withProperty(BAITED, Boolean.FALSE);
         worldIn.setBlockState(pos, state, 2);
       } else if (tile.getCapturedEntity() != null && tile.getCapturedEntity()
-              .equals(entityLiving)) {
+                                                         .equals(entityLiving)) {
         entityLiving.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
       }
     }
@@ -242,11 +241,11 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
 
   @Override
   public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
-          @Nullable TileEntity tile, ItemStack stack) {
+                           @Nullable TileEntity tile, ItemStack stack) {
     if (tile instanceof TileSnare tileSnare && !tileSnare.isOpen()) {
       if (Math.random() < ConfigDevice.BLOCK.SNARE.breakChance) {
         worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f,
-                0.8f);
+                          0.8f);
       } else {
         super.harvestBlock(worldIn, player, pos, state, tile, stack);
       }
@@ -267,17 +266,17 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
 
   private boolean isCapturable(Entity entityIn) {
     return entityIn instanceof EntityAnimalRabbit || entityIn instanceof EntityAnimalPheasant
-            || entityIn instanceof EntityAnimalDuck ||
-            entityIn instanceof EntityAnimalChicken || entityIn instanceof EntityAnimalTurkey;
+           || entityIn instanceof EntityAnimalDuck ||
+           entityIn instanceof EntityAnimalChicken || entityIn instanceof EntityAnimalTurkey;
   }
 
   @Override
   public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
-          IBlockAccess worldIn, BlockPos pos) {
+                                                         IBlockAccess worldIn, BlockPos pos) {
     AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
     return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ,
-            axisalignedbb.maxX, (float) 0 * 0.125F,
-            axisalignedbb.maxZ);
+                             axisalignedbb.maxX, (float) 0 * 0.125F,
+                             axisalignedbb.maxZ);
   }
 
   @Override

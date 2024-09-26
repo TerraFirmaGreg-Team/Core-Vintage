@@ -17,40 +17,39 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 
 public class BlockMetalPigvil
-        extends BlockMetalAnvil {
+  extends BlockMetalAnvil {
 
   public BlockMetalPigvil(MetalBlockVariant variant, MetalType type) {
     super(variant, type);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(HORIZONTAL, EnumFacing.EAST));
+                              .withProperty(HORIZONTAL, EnumFacing.EAST));
   }
 
   public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
-          @Nullable TileEntity tile, ItemStack stack) {
+                           @Nullable TileEntity tile, ItemStack stack) {
     EntityMetalPigvil pigvil = new EntityMetalPigvil(worldIn);
     pigvil.setAnvil(this);
     pigvil.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(),
-            state.getValue(HORIZONTAL).getHorizontalAngle(), 0);
+                                state.getValue(HORIZONTAL).getHorizontalAngle(), 0);
     worldIn.spawnEntity(pigvil);
   }
 
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                  float hitX, float hitY, float hitZ) {
     worldIn.playSound(playerIn, pos, SoundEvents.ENTITY_PIG_AMBIENT, SoundCategory.BLOCKS, 1.0f,
-            1.0f);
+                      1.0f);
     return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
   }
 
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-          EntityPlayer player) {
+                                EntityPlayer player) {
 
     return new ItemStack(BlocksMetal.PIGVIL.get(type));
   }

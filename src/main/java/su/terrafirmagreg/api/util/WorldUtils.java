@@ -8,7 +8,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-
 import lombok.experimental.UtilityClass;
 
 import static com.google.common.math.Stats.meanOf;

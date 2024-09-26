@@ -2,7 +2,6 @@ package BananaFructa.tfcfarming;
 
 import net.minecraftforge.common.config.Configuration;
 
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,16 +32,16 @@ public class Config {
     growthDead = config.getFloat("penalty_dead_crop", "general", 0.8f, 0, 1, "The growth factor when a dead crop is let to exist on the soil.");
     hangingPlanters = config.getBoolean("hanging_planter", "general", false, "True if the hanging planters should also have nutrient values");
     nutrientConsumptionInGreenhouse = config.getFloat("nutrient_in_greenhouse", "general", 1, 0, 10,
-            "The rate at which crops consume nutrients while in Firmalife's greenhouse");
+                                                      "The rate at which crops consume nutrients while in Firmalife's greenhouse");
     nutrientConsumptionHangingPlanter = config.getFloat("nutrient_int_hanging", "general", 1, 0, 10,
-            "The rate at which hanging planters consume nutrients");
+                                                        "The rate at which hanging planters consume nutrients");
     enforceTemperature = config.getBoolean("enforce_temperature", "general", false,
-            "Plants in the greenhouse cannot grow in too hot of a climate");
+                                           "Plants in the greenhouse cannot grow in too hot of a climate");
     String[] fertilizerData = config.getStringList("fertilizers", "general",
-            new String[]{"tfc:powder/saltpeter~N~128", "tfcfarming:fertilizer_p~P~128", "tfc:powder/fertilizer~K~128"},
-            "Fertilizer list: <item name>~<N/P/K>~<fertilizer value between 0~255>");
+                                                   new String[]{"tfc:powder/saltpeter~N~128", "tfcfarming:fertilizer_p~P~128", "tfc:powder/fertilizer~K~128"},
+                                                   "Fertilizer list: <item name>~<N/P/K>~<fertilizer value between 0~255>");
     String[] dimensionData = config.getStringList("allowed_dimensions", "general", new String[]{"0"},
-            "In what dimensions are crops allowed to grow.");
+                                                  "In what dimensions are crops allowed to grow.");
     allowedDimensions = new ArrayList<Integer>();
     for (String s : dimensionData) {
       try {

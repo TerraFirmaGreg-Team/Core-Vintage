@@ -1,5 +1,11 @@
 package se.gory_moon.horsepower.waila;
 
+import su.terrafirmagreg.api.base.block.BaseBlockHorse;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
+import su.terrafirmagreg.modules.device.object.tile.TilePressHorse;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,29 +17,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import mcp.mobius.waila.api.SpecialChars;
 import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.blocks.BlockChopper;
-import se.gory_moon.horsepower.blocks.BlockChoppingBlock;
+import se.gory_moon.horsepower.blocks.BlockChopperHorse;
+import se.gory_moon.horsepower.blocks.BlockChopperManual;
 import se.gory_moon.horsepower.blocks.BlockFiller;
-import se.gory_moon.horsepower.blocks.BlockGrindstone;
-import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
-import se.gory_moon.horsepower.blocks.BlockHandGrindstone;
 import se.gory_moon.horsepower.blocks.BlockPress;
 import se.gory_moon.horsepower.blocks.ModBlocks;
 import se.gory_moon.horsepower.lib.Reference;
-import se.gory_moon.horsepower.tileentity.TileChopper;
-import se.gory_moon.horsepower.tileentity.TileGrindstone;
-import se.gory_moon.horsepower.tileentity.TileHPBase;
-import se.gory_moon.horsepower.tileentity.TileHandGrindstone;
-import se.gory_moon.horsepower.tileentity.TileManualChopper;
-import se.gory_moon.horsepower.tileentity.TilePress;
 import se.gory_moon.horsepower.tileentity.TileFiller;
+import se.gory_moon.horsepower.tileentity.TileHPBase;
 import se.gory_moon.horsepower.util.Localization;
 
 import java.util.List;
@@ -44,15 +41,11 @@ public class Provider implements IWailaDataProvider {
     Provider provider = new Provider();
 
     //registrar.registerStackProvider(provider, BlockFiller.class);
-    registrar.registerBodyProvider(provider, BlockGrindstone.class);
-    registrar.registerBodyProvider(provider, BlockHandGrindstone.class);
-    registrar.registerBodyProvider(provider, BlockHPChoppingBase.class);
+    registrar.registerBodyProvider(provider, BaseBlockHorse.class);
     registrar.registerBodyProvider(provider, BlockPress.class);
     registrar.registerBodyProvider(provider, BlockFiller.class);
-    registrar.registerNBTProvider(provider, BlockGrindstone.class);
-    registrar.registerNBTProvider(provider, BlockHandGrindstone.class);
-    registrar.registerNBTProvider(provider, BlockChopper.class);
-    registrar.registerNBTProvider(provider, BlockChoppingBlock.class);
+    registrar.registerNBTProvider(provider, BlockChopperHorse.class);
+    registrar.registerNBTProvider(provider, BlockChopperManual.class);
     registrar.registerNBTProvider(provider, BlockPress.class);
     registrar.registerNBTProvider(provider, BlockFiller.class);
     registrar.addConfig(Reference.NAME, "horsepower:showItems", Localization.WAILA.SHOW_ITEMS.translate());
@@ -62,7 +55,7 @@ public class Provider implements IWailaDataProvider {
   public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
     if (accessor.getBlock().equals(ModBlocks.BLOCK_CHOPPER_FILLER)) {
       return accessor.getBlock()
-              .getPickBlock(accessor.getBlockState(), accessor.getMOP(), accessor.getWorld(), accessor.getPosition(), accessor.getPlayer());
+                     .getPickBlock(accessor.getBlockState(), accessor.getMOP(), accessor.getWorld(), accessor.getPosition(), accessor.getPlayer());
     }
     return null;
   }
@@ -75,14 +68,7 @@ public class Provider implements IWailaDataProvider {
   @Override
   public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
     NBTTagCompound nbt = accessor.getNBTData();
-    if (nbt.hasKey("horsepower:grindstone", 10)) {
-      nbt = nbt.getCompoundTag("horsepower:grindstone");
-
-      double total = nbt.getInteger("totalMillTime");
-      double current = nbt.getInteger("millTime");
-      double progress = Math.round(((current / total) * 100D) * 100D) / 100D;
-      currenttip.add(Localization.WAILA.GRINDSTONE_PROGRESS.translate(progress));
-    } else if (nbt.hasKey("horsepower:chopper", 10)) {
+    if (nbt.hasKey("horsepower:chopper", 10)) {
       nbt = nbt.getCompoundTag("horsepower:chopper");
 
       double totalWindup = Configs.general.pointsForWindup > 0 ? Configs.general.pointsForWindup : 1;
@@ -92,10 +78,10 @@ public class Provider implements IWailaDataProvider {
       double progressWindup = Math.round(((windup / totalWindup) * 100D) * 100D) / 100D;
       double progressChopping = Math.round(((current / total) * 100D) * 100D) / 100D;
 
-      if (accessor.getTileEntity() instanceof TileChopper || accessor.getTileEntity() instanceof TileFiller) {
+      if (accessor.getTileEntity() instanceof TileChopperHorse || accessor.getTileEntity() instanceof TileFiller) {
         currenttip.add(Localization.WAILA.WINDUP_PROGRESS.translate(progressWindup));
       }
-      if (total > 1 || accessor.getTileEntity() instanceof TileManualChopper) {
+      if (total > 1 || accessor.getTileEntity() instanceof TileChopperManual) {
         currenttip.add(Localization.WAILA.CHOPPING_PROGRESS.translate(progressChopping));
       }
     } else if (nbt.hasKey("horsepower:press")) {
@@ -106,9 +92,11 @@ public class Provider implements IWailaDataProvider {
       currenttip.add(Localization.WAILA.PRESS_PROGRESS.translate(progress));
     }
 
-    if (config.getConfig("horsepower:showItems") &&
-            (accessor.getTileEntity() instanceof TileHPBase || accessor.getTileEntity() instanceof TileFiller) && accessor.getPlayer()
-            .isSneaking()) {
+    if (config.getConfig("horsepower:showItems")
+        && (accessor.getTileEntity() instanceof TileHPBase
+            || accessor.getTileEntity() instanceof TileFiller)
+        && accessor.getPlayer().isSneaking()) {
+
       TileEntity tile = accessor.getTileEntity();
       if (tile.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP)) {
         IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
@@ -118,8 +106,8 @@ public class Provider implements IWailaDataProvider {
             final String name = stack.getItem().getRegistryName().toString();
             if (!stack.isEmpty()) {
               currenttip.add(SpecialChars.getRenderString("waila.stack", "1", name, String.valueOf(stack.getCount()),
-                      String.valueOf(stack.getItemDamage()), stack.serializeNBT()
-                              .toString()) + TextFormatting.WHITE + stack.getDisplayName());
+                                                          String.valueOf(stack.getItemDamage()), stack.serializeNBT().toString()) + TextFormatting.WHITE
+                             + stack.getDisplayName());
             }
           }
           {
@@ -127,8 +115,8 @@ public class Provider implements IWailaDataProvider {
             final String name = stack.getItem().getRegistryName().toString();
             if (!stack.isEmpty()) {
               currenttip.add(SpecialChars.getRenderString("waila.stack", "1", name, String.valueOf(stack.getCount()),
-                      String.valueOf(stack.getItemDamage()), stack.serializeNBT()
-                              .toString()) + TextFormatting.WHITE + stack.getDisplayName());
+                                                          String.valueOf(stack.getItemDamage()), stack.serializeNBT().toString()) + TextFormatting.WHITE
+                             + stack.getDisplayName());
             }
           }
           {
@@ -136,8 +124,8 @@ public class Provider implements IWailaDataProvider {
             final String name = stack.getItem().getRegistryName().toString();
             if (!stack.isEmpty()) {
               currenttip.add(SpecialChars.getRenderString("waila.stack", "1", name, String.valueOf(stack.getCount()),
-                      String.valueOf(stack.getItemDamage()), stack.serializeNBT()
-                              .toString()) + TextFormatting.WHITE + stack.getDisplayName());
+                                                          String.valueOf(stack.getItemDamage()), stack.serializeNBT().toString()) + TextFormatting.WHITE
+                             + stack.getDisplayName());
             }
           }
         }
@@ -154,17 +142,15 @@ public class Provider implements IWailaDataProvider {
   @Override
   public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, BlockPos pos) {
     NBTTagCompound nbt = new NBTTagCompound();
-    if (tile instanceof TileFiller) {
-      tile = ((TileFiller) tile).getFilledTileEntity();
+    if (tile instanceof TileFiller tileFiller) {
+      tile = TileUtils.getTile(world, tileFiller.getFilledPos(), TileHPBase.class);
     }
     if (tile != null) {
       tile.writeToNBT(nbt);
     }
-    if (tile instanceof TileGrindstone || tile instanceof TileHandGrindstone) {
-      tag.setTag("horsepower:grindstone", nbt);
-    } else if (tile instanceof TileChopper || tile instanceof TileManualChopper) {
+    if (tile instanceof TileChopperHorse || tile instanceof TileChopperManual) {
       tag.setTag("horsepower:chopper", nbt);
-    } else if (tile instanceof TilePress) {
+    } else if (tile instanceof TilePressHorse) {
       tag.setTag("horsepower:press", nbt);
     }
     return tag;

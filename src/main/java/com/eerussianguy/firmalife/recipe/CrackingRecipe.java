@@ -3,7 +3,6 @@ package com.eerussianguy.firmalife.recipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -33,10 +32,10 @@ public class CrackingRecipe extends IForgeRegistryEntry.Impl<CrackingRecipe> {
   @Nullable
   public static CrackingRecipe get(ItemStack item) {
     return TFCRegistries.CRACKING.getValuesCollection()
-            .stream()
-            .filter(x -> x.isValidInput(item))
-            .findFirst()
-            .orElse(null);
+                                 .stream()
+                                 .filter(x -> x.isValidInput(item))
+                                 .findFirst()
+                                 .orElse(null);
   }
 
   private boolean isValidInput(ItemStack inputItem) {

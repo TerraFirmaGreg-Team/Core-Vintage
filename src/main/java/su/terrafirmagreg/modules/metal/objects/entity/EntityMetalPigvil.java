@@ -28,7 +28,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-
 import com.google.common.collect.Sets;
 import lyeoj.tfcthings.init.TFCThingsItems;
 import net.dries007.tfc.api.types.Metal;
@@ -39,18 +38,18 @@ import java.util.Set;
 import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 
 public class EntityMetalPigvil
-        extends EntityCreature {
+  extends EntityCreature {
 
   private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(
-          ItemIngot.get(Metal.PIG_IRON, Metal.ItemType.INGOT),
-          TFCThingsItems.ITEM_PIG_IRON_CARROT,
-          TFCThingsItems.ITEM_BLACK_STEEL_CARROT,
-          TFCThingsItems.ITEM_RED_STEEL_CARROT,
-          TFCThingsItems.ITEM_BLUE_STEEL_CARROT
+    ItemIngot.get(Metal.PIG_IRON, Metal.ItemType.INGOT),
+    TFCThingsItems.ITEM_PIG_IRON_CARROT,
+    TFCThingsItems.ITEM_BLACK_STEEL_CARROT,
+    TFCThingsItems.ITEM_RED_STEEL_CARROT,
+    TFCThingsItems.ITEM_BLUE_STEEL_CARROT
   );
 
   private static final DataParameter<String> ANVIL_TYPE = EntityDataManager.createKey(
-          EntityMetalPigvil.class, DataSerializers.STRING);
+    EntityMetalPigvil.class, DataSerializers.STRING);
 
   public EntityMetalPigvil(World worldIn) {
     super(worldIn);
@@ -74,7 +73,7 @@ public class EntityMetalPigvil
   protected void entityInit() {
     super.entityInit();
     this.dataManager.register(ANVIL_TYPE,
-            BlocksMetal.PIGVIL.get(MetalTypes.STEEL).getRegistryName().toString());
+                              BlocksMetal.PIGVIL.get(MetalTypes.STEEL).getRegistryName().toString());
   }
 
   protected SoundEvent getAmbientSound() {
@@ -113,9 +112,9 @@ public class EntityMetalPigvil
     BlockPos blockpos = new BlockPos(i, j, k);
     if (this.world.getBlockState(blockpos).getBlock().isReplaceable(world, blockpos)) {
       this.world.playSound(player, blockpos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS,
-              1.0f, 1.0f);
+                           1.0f, 1.0f);
       this.world.setBlockState(blockpos, getAnvil().getDefaultState()
-              .withProperty(HORIZONTAL, this.getAdjustedHorizontalFacing()));
+                                                   .withProperty(HORIZONTAL, this.getAdjustedHorizontalFacing()));
       this.setDead();
       return true;
     }
@@ -124,8 +123,8 @@ public class EntityMetalPigvil
 
   public boolean attackEntityFrom(DamageSource source, float amount) {
     if (source.equals(DamageSource.OUT_OF_WORLD) || source.equals(DamageSource.LAVA)
-            || source.equals(DamageSource.IN_FIRE) ||
-            source.equals((DamageSource.DROWN))) {
+        || source.equals(DamageSource.IN_FIRE) ||
+        source.equals((DamageSource.DROWN))) {
       return super.attackEntityFrom(source, amount);
     }
     return false;

@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:wood/planks/white_cedar"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "saw"
     }

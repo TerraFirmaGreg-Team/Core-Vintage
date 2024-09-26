@@ -10,7 +10,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 
-
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
@@ -18,7 +17,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import org.jetbrains.annotations.NotNull;
 
 public class TileMetalSheet
-        extends BaseTile {
+  extends BaseTile {
 
   private final boolean[] faces;
 

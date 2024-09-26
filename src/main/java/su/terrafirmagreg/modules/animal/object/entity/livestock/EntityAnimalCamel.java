@@ -38,7 +38,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
@@ -54,14 +53,14 @@ import static su.terrafirmagreg.data.MathConstants.RNG;
 public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILivestock, IRidable {
 
   private static final DataParameter<Integer> DATA_COLOR_ID = EntityDataManager.createKey(
-          EntityAnimalCamel.class, DataSerializers.VARINT);
+    EntityAnimalCamel.class, DataSerializers.VARINT);
   private static final DataParameter<Boolean> HALTER = EntityDataManager.createKey(
-          EntityAnimalCamel.class, DataSerializers.BOOLEAN);
+    EntityAnimalCamel.class, DataSerializers.BOOLEAN);
 
   public EntityAnimalCamel(World world) {
     this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-            EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.CAMEL.adulthood,
-                    ConfigAnimal.ENTITIES.CAMEL.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.CAMEL.adulthood,
+                                          ConfigAnimal.ENTITIES.CAMEL.elder));
     this.setSize(0.9F, 2.0F);
   }
 
@@ -102,14 +101,14 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
           this.playGallopSound(soundtype);
         } else if (this.gallopTime <= 5) {
           this.playSound(SoundEvents.ENTITY_HORSE_STEP_WOOD, soundtype.getVolume() * 0.15F,
-                  soundtype.getPitch());
+                         soundtype.getPitch());
         }
       } else if (soundtype == SoundType.WOOD) {
         this.playSound(SoundEvents.ENTITY_HORSE_STEP_WOOD, soundtype.getVolume() * 0.15F,
-                soundtype.getPitch());
+                       soundtype.getPitch());
       } else {
         this.playSound(SoundEvents.ENTITY_HORSE_STEP, soundtype.getVolume() * 0.15F,
-                soundtype.getPitch());
+                       soundtype.getPitch());
       }
     }
   }
@@ -167,7 +166,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
   protected void playGallopSound(SoundType p_190680_1_) {
     this.playSound(SoundEvents.ENTITY_HORSE_GALLOP, p_190680_1_.getVolume() * 0.15F,
-            p_190680_1_.getPitch());
+                   p_190680_1_.getPitch());
   }
 
   @Nullable
@@ -200,14 +199,14 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
     this.geneVariant = i;
     EntityAnimalCamel father = (EntityAnimalCamel) male;
     this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-            .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-            .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+                                      .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+                                                            .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
     this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-            .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-            .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+                                     .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+                                                           .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
     this.geneJump = (float) ((father.getEntityAttribute(JUMP_STRENGTH)
-            .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
-            .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+                                    .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
+                                                          .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
 
     this.geneStrength = this.rand.nextInt(Math.max(this.getStrength(), father.getStrength())) + 1;
     if (this.rand.nextFloat() < 0.03F) {
@@ -227,10 +226,10 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-          float floraDiversity) {
+                            float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.DESERT || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
+        (biomeType == BiomeHelper.BiomeType.DESERT || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
       return ConfigAnimal.ENTITIES.CAMEL.rarity;
     }
     return 0;
@@ -314,7 +313,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
       // Only called if this animal is interacted with a spawn egg
       // Try to return to vanilla's default method a baby of this animal, as if bred normally
       return new EntityAnimalCamel(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                   (int) Calendar.PLAYER_TIME.getTotalDays());
     }
     return null;
   }
@@ -329,14 +328,14 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
     int numberOfChildren = ConfigAnimal.ENTITIES.CAMEL.babies; //one always
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalCamel baby = new EntityAnimalCamel(this.world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                                     (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       if (this.geneHealth > 0) {
         baby.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(this.geneHealth);
       }
       if (this.geneSpeed > 0) {
         baby.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-                .setBaseValue(this.geneSpeed);
+            .setBaseValue(this.geneSpeed);
       }
       if (this.geneJump > 0) {
         baby.getEntityAttribute(JUMP_STRENGTH).setBaseValue(this.geneJump);

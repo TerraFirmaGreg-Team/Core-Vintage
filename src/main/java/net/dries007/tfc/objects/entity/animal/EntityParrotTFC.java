@@ -28,7 +28,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -177,9 +176,9 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+           && !this.world.containsAnyLiquid(getEntityBoundingBox())
+           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @Override
@@ -193,7 +192,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
   @Override
   public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
     return new EntityParrotTFC(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-            (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
+                               (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
   }
 
   @Override
@@ -318,8 +317,8 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
     return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-            .name()
-            .toLowerCase());
+                                                                                          .name()
+                                                                                          .toLowerCase());
   }
 
   @NotNull
@@ -336,7 +335,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
+        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
       return ConfigTFC.Animals.PARROT.rarity;
     }
     return 0;

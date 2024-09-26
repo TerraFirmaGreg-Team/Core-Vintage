@@ -28,7 +28,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
@@ -67,14 +66,14 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
 
   // model boxes
   private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[]{
-          new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.125D, 0.875D),
-          new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D),
-          new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.375D, 0.875D),
-          new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.5D, 0.875D),
-          new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.625D, 0.875D),
-          new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.75D, 0.875D),
-          new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.875D, 0.875D),
-          new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D)
+    new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.125D, 0.875D),
+    new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D),
+    new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.375D, 0.875D),
+    new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.5D, 0.875D),
+    new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.625D, 0.875D),
+    new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.75D, 0.875D),
+    new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.875D, 0.875D),
+    new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D)
   };
 
   // binary flags for state and metadata conversion
@@ -122,7 +121,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
   @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(WILD, (meta & META_WILD) > 0)
-            .withProperty(getStageProperty(), meta & META_GROWTH);
+                            .withProperty(getStageProperty(), meta & META_GROWTH);
   }
 
   @Override
@@ -209,7 +208,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
         IBlockState stateFarmland = worldIn.getBlockState(pos.down());
         if (!state.getValue(WILD)) {
           if (!worldIn.canSeeSky(pos) ||
-                  (stateFarmland.getBlock() instanceof BlockSoilFarmland && stateFarmland.getValue(MOISTURE) < 3)) {
+              (stateFarmland.getBlock() instanceof BlockSoilFarmland && stateFarmland.getValue(MOISTURE) < 3)) {
             tile.resetCounter();
             return;
           }
@@ -229,7 +228,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
             grow(worldIn, pos, state, random);
             state = worldIn.getBlockState(pos);
             if (state.getBlock() instanceof BlockCropTFC && !state.getValue(WILD) &&
-                    state.getValue(getStageProperty()) == crop.getMaxStage()) {
+                state.getValue(getStageProperty()) == crop.getMaxStage()) {
               fullGrownStages++;
               if (fullGrownStages > 2) {
                 die(worldIn, pos, state, random);
@@ -250,8 +249,8 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
   public void die(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (ConfigTFC.General.FOOD.enableCropDeath) {
       worldIn.setBlockState(pos, BlockCropDead.get(crop)
-              .getDefaultState()
-              .withProperty(BlockCropDead.MATURE, state.getValue(getStageProperty()) == crop.getMaxStage()));
+                                              .getDefaultState()
+                                              .withProperty(BlockCropDead.MATURE, state.getValue(getStageProperty()) == crop.getMaxStage()));
     }
   }
 
@@ -275,7 +274,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
       return super.canSustainBush(state);
     } else {
       return BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenClassic.FRESH_WATER ||
-              state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
+             state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
     }
   }
 
@@ -291,10 +290,10 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
           IBlockState stateDown = worldIn.getBlockState(pos.down());
           Material material = stateDown.getMaterial();
           return soil.getBlock()
-                  .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) ||
-                  material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 &&
-                          stateDown == ChunkGenClassic.FRESH_WATER || material == Material.ICE ||
-                  material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
+                     .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) ||
+                 material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 &&
+                 stateDown == ChunkGenClassic.FRESH_WATER || material == Material.ICE ||
+                 material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
         }
       } else {
         return false;

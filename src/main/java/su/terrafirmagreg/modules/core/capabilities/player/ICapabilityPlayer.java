@@ -7,7 +7,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.network.PacketPlayerDataUpdate;
@@ -86,7 +85,7 @@ public interface ICapabilityPlayer extends ICapabilitySerializable<NBTTagCompoun
     EntityPlayer player = getPlayer();
     if (player instanceof EntityPlayerMP entityPlayerMP) {
       TerraFirmaCraft.getNetwork()
-              .sendTo(new PacketPlayerDataUpdate(serializeNBT()), entityPlayerMP);
+                     .sendTo(new PacketPlayerDataUpdate(serializeNBT()), entityPlayerMP);
     }
   }
 

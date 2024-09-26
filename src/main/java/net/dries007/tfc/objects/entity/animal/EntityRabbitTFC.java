@@ -39,7 +39,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -83,8 +82,8 @@ public class EntityRabbitTFC extends EntityAnimalMammal implements IHuntable {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TAIGA || biomeType == BiomeHelper.BiomeType.PLAINS
-                    || biomeType == BiomeHelper.BiomeType.TUNDRA)) {
+        (biomeType == BiomeHelper.BiomeType.TAIGA || biomeType == BiomeHelper.BiomeType.PLAINS
+         || biomeType == BiomeHelper.BiomeType.TUNDRA)) {
       return ConfigTFC.Animals.RABBIT.rarity;
     }
     return 0;
@@ -220,7 +219,7 @@ public class EntityRabbitTFC extends EntityAnimalMammal implements IHuntable {
     int numberOfChildren = 5 + rand.nextInt(5); // 5-10
     for (int i = 0; i < numberOfChildren; i++) {
       EntityRabbitTFC baby = new EntityRabbitTFC(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                                 (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       this.world.spawnEntity(baby);
     }

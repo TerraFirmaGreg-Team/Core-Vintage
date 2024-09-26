@@ -8,7 +8,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
@@ -93,8 +92,8 @@ public interface IIngredient<T> extends Predicate<T> {
   }
 
   /**
-   * This is used by recipes to test if an input is valid, but necessarily high enough quantity i.e. used to check if an item is valid for a slot, not if the recipe
-   * will complete.
+   * This is used by recipes to test if an input is valid, but necessarily high enough quantity i.e. used to check if an item is valid for a slot, not if the
+   * recipe will complete.
    *
    * @param input the input supplied to the recipe
    * @return true if the ingredient matches the input, ignoring the amount of input

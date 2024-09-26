@@ -1,15 +1,14 @@
 package net.dries007.tfc.client.render.animal;
 
+import net.dries007.tfc.client.model.animal.ModelLionTFC;
+import net.dries007.tfc.objects.entity.animal.EntityLionTFC;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-
-import net.dries007.tfc.client.model.animal.ModelLionTFC;
-import net.dries007.tfc.objects.entity.animal.EntityLionTFC;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
 

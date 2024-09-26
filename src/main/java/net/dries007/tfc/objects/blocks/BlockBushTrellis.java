@@ -17,7 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.IBerryBush;
@@ -81,7 +80,7 @@ public class BlockBushTrellis extends BlockTrellis {
             BlockPos upPos = pos.up();
             Block upBlock = world.getBlockState(upPos).getBlock();
             if (tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * 50) && upBlock instanceof BlockTrellis &&
-                    !(upBlock instanceof BlockBushTrellis)) {
+                !(upBlock instanceof BlockBushTrellis)) {
               world.setBlockState(upPos, getDefaultState());
               TEHangingPlanter teNew = TileUtils.getTile(world, upPos, TEHangingPlanter.class);
               if (teNew != null) {
@@ -97,7 +96,7 @@ public class BlockBushTrellis extends BlockTrellis {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-          float hitY, float hitZ) {
+                                  float hitY, float hitZ) {
     if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
       Item held = player.getHeldItem(hand).getItem();
       if (held instanceof ItemBlock && ((ItemBlock) held).getBlock() instanceof BlockTrellis) {

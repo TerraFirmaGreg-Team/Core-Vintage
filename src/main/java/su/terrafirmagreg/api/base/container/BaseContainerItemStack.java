@@ -6,7 +6,6 @@ import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public abstract class BaseContainerItemStack extends BaseContainer {
@@ -99,8 +98,8 @@ public abstract class BaseContainerItemStack extends BaseContainer {
   public ItemStack slotClick(int slotID, int dragType, ClickType clickType, EntityPlayer player) {
     // Prevent moving of the item stack that is currently open
     if (slotID == itemIndex &&
-            (clickType == ClickType.QUICK_MOVE || clickType == ClickType.PICKUP
-                    || clickType == ClickType.THROW || clickType == ClickType.SWAP)) {
+        (clickType == ClickType.QUICK_MOVE || clickType == ClickType.PICKUP
+         || clickType == ClickType.THROW || clickType == ClickType.SWAP)) {
       return ItemStack.EMPTY;
     } else if ((dragType == itemDragIndex) && clickType == ClickType.SWAP) {
       return ItemStack.EMPTY;

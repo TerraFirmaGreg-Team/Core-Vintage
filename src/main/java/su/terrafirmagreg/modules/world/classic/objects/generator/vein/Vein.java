@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
-
 import net.dries007.tfc.api.types.Ore;
 
 import org.jetbrains.annotations.Nullable;
@@ -60,7 +59,7 @@ public class Vein {
    */
   public boolean inRange(int x, int z, int extraDistance) {
     return pos.distanceSq(x, pos.getY(), z) < (type.getWidth() + extraDistance) * (type.getWidth()
-            + extraDistance);
+                                                                                   + extraDistance);
   }
 
   /**
@@ -96,7 +95,8 @@ public class Vein {
   }
 
   /**
-   * Should mostly always returns a VeinType obj (loaded from ore vein config) Unless this vein generated before config was changed, and this vein registry deleted
+   * Should mostly always returns a VeinType obj (loaded from ore vein config) Unless this vein generated before config was changed, and this vein registry
+   * deleted
    */
   @Nullable
   public VeinType getType() {

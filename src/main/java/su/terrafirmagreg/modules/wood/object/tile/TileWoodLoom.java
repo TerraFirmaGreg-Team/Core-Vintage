@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.object.tile;
 
-import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.wood.api.recipes.LoomRecipe;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -11,11 +11,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
@@ -24,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-public class TileWoodLoom extends BaseTileInventory implements ITickable {
+public class TileWoodLoom extends BaseTileTickableInventory {
 
   private WoodType cachedWoodType;
 
@@ -109,7 +107,7 @@ public class TileWoodLoom extends BaseTileInventory implements ITickable {
       ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
 
       if (inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isEmpty() &&
-              su.terrafirmagreg.modules.wood.api.recipes.LoomRecipe.get(heldItem) != null) {
+          su.terrafirmagreg.modules.wood.api.recipes.LoomRecipe.get(heldItem) != null) {
         inventory.setStackInSlot(0, heldItem.copy());
         inventory.getStackInSlot(0).setCount(1);
         heldItem.shrink(1);
@@ -119,7 +117,7 @@ public class TileWoodLoom extends BaseTileInventory implements ITickable {
         return true;
       } else if (!inventory.getStackInSlot(0).isEmpty()) {
         if (IIngredient.of(inventory.getStackInSlot(0)).testIgnoreCount(heldItem) &&
-                recipe.getInputCount() > inventory.getStackInSlot(0).getCount()) {
+            recipe.getInputCount() > inventory.getStackInSlot(0).getCount()) {
           heldItem.shrink(1);
           inventory.getStackInSlot(0).grow(1);
 
@@ -130,7 +128,7 @@ public class TileWoodLoom extends BaseTileInventory implements ITickable {
 
       if (recipe != null && heldItem.isEmpty()) {
         if (recipe.getInputCount() == inventory.getStackInSlot(0).getCount()
-                && progress < recipe.getStepCount() && !needsUpdate) {
+            && progress < recipe.getStepCount() && !needsUpdate) {
           if (!world.isRemote) {
             long time = world.getTotalWorldTime() - lastPushed;
             if (time < 20) {
@@ -160,21 +158,23 @@ public class TileWoodLoom extends BaseTileInventory implements ITickable {
 
   @Override
   public void update() {
-    if (recipe != null) {
-      LoomRecipe recipe = this.recipe; // Avoids NPE on slot changes
-      if (needsUpdate) {
-        if (world.getTotalWorldTime() - lastPushed >= 20) {
-          needsUpdate = false;
-          progress++;
+    super.update();
+    if (recipe == null) {return;}
 
-          if (progress == recipe.getStepCount()) {
-            inventory.setStackInSlot(0, ItemStack.EMPTY);
-            inventory.setStackInSlot(1, recipe.getOutputItem());
-          }
-          markForBlockUpdate();
+    LoomRecipe recipe = this.recipe; // Avoids NPE on slot changes
+    if (needsUpdate) {
+      if (world.getTotalWorldTime() - lastPushed >= 20) {
+        needsUpdate = false;
+        progress++;
+
+        if (progress == recipe.getStepCount()) {
+          inventory.setStackInSlot(0, ItemStack.EMPTY);
+          inventory.setStackInSlot(1, recipe.getOutputItem());
         }
+        markForBlockUpdate();
       }
     }
+
   }
 
   public int getMaxInputCount() {

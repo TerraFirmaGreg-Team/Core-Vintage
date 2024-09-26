@@ -32,7 +32,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.render.UnlistedCropProperty;
 import mcp.MethodsReturnNonnullByDefault;
@@ -126,7 +125,7 @@ public class BlockLargePlanter extends Block implements ICapabilitySize {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-          float hitY, float hitZ) {
+                                  float hitY, float hitZ) {
     if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
       ItemStack held = player.getHeldItem(hand);
       var tile = TileUtils.getTile(world, pos, TEPlanter.class);
@@ -184,7 +183,7 @@ public class BlockLargePlanter extends Block implements ICapabilitySize {
 
   private boolean canStay(IBlockAccess world, BlockPos pos) {
     return world.getBlockState(pos.down())
-            .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+                .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
   }
 
   @Override

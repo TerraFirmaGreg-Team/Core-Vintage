@@ -27,7 +27,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import lombok.Getter;
 
 import java.util.Random;
@@ -49,20 +48,20 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
     super(Settings.of(Material.GRASS), variant, type);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .sound(SoundType.PLANT)
-            .hardness(2.1F)
-            .randomTicks()
-            .fallable(this, VERTICAL_AND_HORIZONTAL)
-            .renderLayer(BlockRenderLayer.CUTOUT);
+      .registryKey(variant.getRegistryKey(type))
+      .sound(SoundType.PLANT)
+      .hardness(2.1F)
+      .randomTicks()
+      .fallable(this, VERTICAL_AND_HORIZONTAL)
+      .renderLayer(BlockRenderLayer.CUTOUT);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(NORTH, Boolean.FALSE)
-            .withProperty(EAST, Boolean.FALSE)
-            .withProperty(SOUTH, Boolean.FALSE)
-            .withProperty(WEST, Boolean.FALSE)
-            .withProperty(SNOWY, Boolean.FALSE)
-            .withProperty(CLAY, Boolean.FALSE));
+                              .withProperty(NORTH, Boolean.FALSE)
+                              .withProperty(EAST, Boolean.FALSE)
+                              .withProperty(SOUTH, Boolean.FALSE)
+                              .withProperty(WEST, Boolean.FALSE)
+                              .withProperty(SNOWY, Boolean.FALSE)
+                              .withProperty(CLAY, Boolean.FALSE));
 
     //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
   }
@@ -72,11 +71,11 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
     pos = pos.add(0, -1, 0);
     Block blockUp = world.getBlockState(pos.up()).getBlock();
     return state
-            .withProperty(NORTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-            .withProperty(EAST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-            .withProperty(SOUTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-            .withProperty(WEST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))))
-            .withProperty(SNOWY, blockUp == Blocks.SNOW || blockUp == Blocks.SNOW_LAYER);
+      .withProperty(NORTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+      .withProperty(EAST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+      .withProperty(SOUTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+      .withProperty(WEST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))))
+      .withProperty(SNOWY, blockUp == Blocks.SNOW || blockUp == Blocks.SNOW_LAYER);
   }
 
   @Override
@@ -118,7 +117,7 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
             IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
             if (iblockstate1.getBlock() == BlocksSoil.DIRT.get(soil) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4
-                    && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
+                && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
               worldIn.setBlockState(blockpos, BlocksSoil.GRASS.get(soil).getDefaultState());
             }
           }

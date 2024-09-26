@@ -27,7 +27,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -116,13 +115,13 @@ public class BlockPlacedItem extends Block {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     var tile = TileUtils.getTile(worldIn, pos, TEPlacedItem.class);
     if (tile != null) {
       ItemStack stack = playerIn.getHeldItemMainhand();
       // Check for pit kiln conversion
       if (!playerIn.isSneaking() &&
-              (OreDictionaryHelper.doesStackMatchOre(stack, "straw") || OreDictionaryHelper.doesStackMatchOre(stack, "blockStraw"))) {
+          (OreDictionaryHelper.doesStackMatchOre(stack, "straw") || OreDictionaryHelper.doesStackMatchOre(stack, "blockStraw"))) {
         TilePitKiln.convertPlacedItemToPitKiln(worldIn, pos, stack.splitStack(1));
         return true;
       }
@@ -144,7 +143,7 @@ public class BlockPlacedItem extends Block {
 
   @Override
   public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate,
-          EntityLivingBase entity, int numberOfParticles) {
+                                   EntityLivingBase entity, int numberOfParticles) {
     return true;
   }
 

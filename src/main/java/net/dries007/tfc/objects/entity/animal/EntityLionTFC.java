@@ -32,7 +32,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
@@ -68,7 +67,7 @@ public class EntityLionTFC extends EntityAnimalMammal implements IPredator {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.SAVANNA)) {
+        (biomeType == BiomeHelper.BiomeType.SAVANNA)) {
       return ConfigTFC.Animals.LION.rarity;
     }
     return 0;
@@ -115,7 +114,7 @@ public class EntityLionTFC extends EntityAnimalMammal implements IPredator {
     int numberOfChildren = 1; //one always
     for (int i = 0; i < numberOfChildren; i++) {
       EntityLionTFC baby = new EntityLionTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                             (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       this.world.spawnEntity(baby);
     }

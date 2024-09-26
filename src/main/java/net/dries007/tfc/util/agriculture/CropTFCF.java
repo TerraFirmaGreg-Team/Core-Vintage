@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropSimple;
@@ -44,7 +43,7 @@ public enum CropTFCF implements ICrop {
   //WILD_RICE(ItemsTFCF.WILD_RICE, 0f, 4f, 35f, 40f, 50f, 100f, 400f, 450f, 8, 0.5f, SIMPLE),
   BLACK_EYED_PEAS(ItemsTFCF.BLACK_EYED_PEAS, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, PICKABLE),
   CAYENNE_PEPPER(() -> new ItemStack(ItemFoodTFCF.get(ItemsTFCF.RED_CAYENNE_PEPPER)),
-          () -> new ItemStack(ItemFoodTFCF.get(ItemsTFCF.GREEN_CAYENNE_PEPPER)), 4f, 12f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, PICKABLE),
+                 () -> new ItemStack(ItemFoodTFCF.get(ItemsTFCF.GREEN_CAYENNE_PEPPER)), 4f, 12f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, PICKABLE),
   //CELERY(ItemsTFCF.CELERY, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 8, 0.5f, SIMPLE),
   GINGER(ItemsTFCF.GINGER, 0f, 5f, 35f, 40f, 50f, 100f, 400f, 450f, 5, 0.5f, SIMPLE),
   GINSENG(ItemsTFCF.GINSENG, 0f, 5f, 35f, 40f, 50f, 100f, 400f, 450f, 5, 0.5f, SIMPLE),
@@ -64,7 +63,7 @@ public enum CropTFCF implements ICrop {
   COTTON(() -> new ItemStack(ItemsTFCF.COTTON_BOLL), () -> ItemStack.EMPTY, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 6, 0.5f, PICKABLE),
   FLAX(() -> new ItemStack(ItemsTFCF.FLAX), () -> ItemStack.EMPTY, 0f, 18f, 35f, 40f, 50f, 100f, 400f, 450f, 6, 0.5f, SIMPLE),
   HEMP(() -> new ItemStack(ItemsTFCF.HEMP), () -> new ItemStack(ItemsTFCF.CANNABIS_BUD), 0f, 18f, 35f, 40f, 50f, 100f, 400f, 450f, 5, 0.5f,
-          PICKABLE),
+       PICKABLE),
   HOP(() -> new ItemStack(ItemsTFCF.HOPS), () -> ItemStack.EMPTY, 0f, 18f, 35f, 40f, 50f, 100f, 400f, 450f, 6, 0.5f, PICKABLE),
   INDIGO(() -> new ItemStack(ItemsTFCF.INDIGO), () -> ItemStack.EMPTY, 0f, 18f, 35f, 40f, 50f, 100f, 400f, 450f, 5, 0.5f, SIMPLE),
   MADDER(() -> new ItemStack(ItemsTFCF.MADDER), () -> ItemStack.EMPTY, 0f, 18f, 35f, 40f, 50f, 100f, 400f, 450f, 5, 0.5f, SIMPLE),
@@ -94,15 +93,15 @@ public enum CropTFCF implements ICrop {
   private final CropType type;
 
   CropTFCF(ItemFoodTFCF foodDrop, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive,
-          float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages,
-          float growthTime, CropType type) {
+           float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages,
+           float growthTime, CropType type) {
     this(() -> new ItemStack(ItemFoodTFCF.get(foodDrop)), () -> ItemStack.EMPTY, tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive,
-            rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive, growthStages, growthTime, type);
+         rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive, growthStages, growthTime, type);
   }
 
   CropTFCF(Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly, float tempMinAlive, float tempMinGrow, float tempMaxGrow,
-          float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime,
-          CropType type) {
+           float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime,
+           CropType type) {
     this.foodDrop = foodDrop;
     this.foodDropEarly = foodDropEarly;
 
@@ -185,7 +184,7 @@ public enum CropTFCF implements ICrop {
       tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));
       tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) rainMinGrow, (int) rainMaxGrow));
       tooltip.add(TextFormatting.GOLD +
-              I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", tempMinGrow), String.format("%.1f", tempMaxGrow)));
+                  I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", tempMinGrow), String.format("%.1f", tempMaxGrow)));
     } else {
       tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.hold_shift_for_climate_info"));
     }

@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:brick/granite"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

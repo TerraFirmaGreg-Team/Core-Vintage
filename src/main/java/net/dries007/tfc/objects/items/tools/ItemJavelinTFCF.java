@@ -20,7 +20,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.client.TFCSounds;
@@ -97,12 +96,12 @@ public class ItemJavelinTFCF extends ItemTool implements ICapabilitySize {
         if (!worldIn.isRemote) {
           EntityThrownJavelin javelin = new EntityThrownJavelin(worldIn, player);
           javelin.setDamage(2.5f *
-                  attackDamage); // When thrown, it does approx 1.8x the tool material (attack damage is already 0.7x of the tool). This makes it slightly more damaging than axes but more difficult to use
+                            attackDamage); // When thrown, it does approx 1.8x the tool material (attack damage is already 0.7x of the tool). This makes it slightly more damaging than axes but more difficult to use
           javelin.setWeapon(stack);
           javelin.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 1.5F, 0.5F);
           worldIn.spawnEntity(javelin);
           worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
-                  1.0F / (MathConstants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                            1.0F / (MathConstants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
         }
         player.inventory.deleteStack(stack);
         player.addStat(StatList.getObjectUseStats(this));

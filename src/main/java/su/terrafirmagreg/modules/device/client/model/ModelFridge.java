@@ -35,27 +35,27 @@ public class ModelFridge extends ModelBase {
     outside_box = new ModelRenderer(this);
     outside_box.setRotationPoint(-8.0F, 16.0F, 8.0F);
     outside_box.cubeList.add(
-            new ModelBox(outside_box, 0, 27, 14.5F, -19.0F, -13.0F, 1, 24, 12, 0.0F, false));
+      new ModelBox(outside_box, 0, 27, 14.5F, -19.0F, -13.0F, 1, 24, 12, 0.0F, false));
     outside_box.cubeList.add(
-            new ModelBox(outside_box, 58, 38, 0.5F, -19.0F, -1.0F, 15, 24, 1, 0.0F, false));
+      new ModelBox(outside_box, 58, 38, 0.5F, -19.0F, -1.0F, 15, 24, 1, 0.0F, false));
     outside_box.cubeList.add(
-            new ModelBox(outside_box, 0, 27, 0.5F, -19.0F, -13.0F, 1, 24, 12, 0.0F, false));
+      new ModelBox(outside_box, 0, 27, 0.5F, -19.0F, -13.0F, 1, 24, 12, 0.0F, false));
     outside_box.cubeList.add(
-            new ModelBox(outside_box, 12, 49, 0.0F, -20.0F, -14.0F, 16, 1, 14, 0.0F, false));
+      new ModelBox(outside_box, 12, 49, 0.0F, -20.0F, -14.0F, 16, 1, 14, 0.0F, false));
     outside_box.cubeList.add(
-            new ModelBox(outside_box, 12, 49, 0.0F, 5.0F, -14.0F, 16, 1, 14, 0.0F, false));
+      new ModelBox(outside_box, 12, 49, 0.0F, 5.0F, -14.0F, 16, 1, 14, 0.0F, false));
     outside_box.cubeList.add(
-            new ModelBox(outside_box, 26, 45, 0.5F, 6.0F, -2.0F, 2, 2, 2, 0.0F, false));
+      new ModelBox(outside_box, 26, 45, 0.5F, 6.0F, -2.0F, 2, 2, 2, 0.0F, false));
     outside_box.cubeList.add(
-            new ModelBox(outside_box, 26, 45, 0.5F, 6.0F, -13.0F, 2, 2, 2, 0.0F, false));
+      new ModelBox(outside_box, 26, 45, 0.5F, 6.0F, -13.0F, 2, 2, 2, 0.0F, false));
     outside_box.cubeList.add(
-            new ModelBox(outside_box, 26, 45, 13.5F, 6.0F, -13.0F, 2, 2, 2, 0.0F, false));
+      new ModelBox(outside_box, 26, 45, 13.5F, 6.0F, -13.0F, 2, 2, 2, 0.0F, false));
     outside_box.cubeList.add(
-            new ModelBox(outside_box, 26, 45, 13.5F, 6.0F, -2.0F, 2, 2, 2, 0.0F, false));
+      new ModelBox(outside_box, 26, 45, 13.5F, 6.0F, -2.0F, 2, 2, 2, 0.0F, false));
     outside_box.cubeList.add(
-            new ModelBox(outside_box, 122, 40, 15.0F, -15.0F, -13.5F, 1, 2, 1, 0.0F, false));
+      new ModelBox(outside_box, 122, 40, 15.0F, -15.0F, -13.5F, 1, 2, 1, 0.0F, false));
     outside_box.cubeList.add(
-            new ModelBox(outside_box, 122, 40, 15.0F, -1.0F, -13.5F, 1, 2, 1, 0.0F, false));
+      new ModelBox(outside_box, 122, 40, 15.0F, -1.0F, -13.5F, 1, 2, 1, 0.0F, false));
 
     machine = new ModelRenderer(this);
     machine.setRotationPoint(-8.0F, 16.0F, 0.0F);
@@ -83,73 +83,73 @@ public class ModelFridge extends ModelBase {
     coils1part1.setRotationPoint(0.0F, 0.0F, 0.0F);
     coils1.addChild(coils1part1);
     coils1part1.cubeList.add(
-            new ModelBox(coils1part1, 0, 0, 1.4F, -1.5F, -2.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part1, 0, 0, 1.4F, -1.5F, -2.5F, 1, 4, 1, 0.0F, false));
     coils1part1.cubeList.add(
-            new ModelBox(coils1part1, 4, 0, 1.4F, 1.5F, -4.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils1part1, 4, 0, 1.4F, 1.5F, -4.5F, 1, 1, 2, 0.0F, false));
     coils1part1.cubeList.add(
-            new ModelBox(coils1part1, 4, 0, 1.4F, -1.5F, -7.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils1part1, 4, 0, 1.4F, -1.5F, -7.5F, 1, 1, 2, 0.0F, false));
     coils1part1.cubeList.add(
-            new ModelBox(coils1part1, 0, 0, 1.4F, -1.5F, -5.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part1, 0, 0, 1.4F, -1.5F, -5.5F, 1, 4, 1, 0.0F, false));
     coils1part1.cubeList.add(
-            new ModelBox(coils1part1, 0, 0, 1.4F, -1.5F, -8.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part1, 0, 0, 1.4F, -1.5F, -8.5F, 1, 4, 1, 0.0F, false));
     coils1part1.cubeList.add(
-            new ModelBox(coils1part1, 0, 0, 1.4F, -1.5F, -11.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part1, 0, 0, 1.4F, -1.5F, -11.5F, 1, 4, 1, 0.0F, false));
     coils1part1.cubeList.add(
-            new ModelBox(coils1part1, 4, 0, 1.4F, 1.5F, -10.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils1part1, 4, 0, 1.4F, 1.5F, -10.5F, 1, 1, 2, 0.0F, false));
 
     coils1part2 = new ModelRenderer(this);
     coils1part2.setRotationPoint(0.0F, 0.0F, 0.0F);
     coils1.addChild(coils1part2);
     coils1part2.cubeList.add(
-            new ModelBox(coils1part2, 0, 0, 1.4F, -6.5F, -2.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part2, 0, 0, 1.4F, -6.5F, -2.5F, 1, 4, 1, 0.0F, false));
     coils1part2.cubeList.add(
-            new ModelBox(coils1part2, 4, 0, 1.4F, -3.5F, -4.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils1part2, 4, 0, 1.4F, -3.5F, -4.5F, 1, 1, 2, 0.0F, false));
     coils1part2.cubeList.add(
-            new ModelBox(coils1part2, 4, 0, 1.4F, -6.5F, -7.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils1part2, 4, 0, 1.4F, -6.5F, -7.5F, 1, 1, 2, 0.0F, false));
     coils1part2.cubeList.add(
-            new ModelBox(coils1part2, 0, 0, 1.4F, -6.5F, -5.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part2, 0, 0, 1.4F, -6.5F, -5.5F, 1, 4, 1, 0.0F, false));
     coils1part2.cubeList.add(
-            new ModelBox(coils1part2, 0, 0, 1.4F, -6.5F, -8.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part2, 0, 0, 1.4F, -6.5F, -8.5F, 1, 4, 1, 0.0F, false));
     coils1part2.cubeList.add(
-            new ModelBox(coils1part2, 0, 0, 1.4F, -6.5F, -11.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part2, 0, 0, 1.4F, -6.5F, -11.5F, 1, 4, 1, 0.0F, false));
     coils1part2.cubeList.add(
-            new ModelBox(coils1part2, 4, 0, 1.4F, -3.5F, -10.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils1part2, 4, 0, 1.4F, -3.5F, -10.5F, 1, 1, 2, 0.0F, false));
 
     coils1part3 = new ModelRenderer(this);
     coils1part3.setRotationPoint(0.0F, 0.0F, 0.0F);
     coils1.addChild(coils1part3);
     coils1part3.cubeList.add(
-            new ModelBox(coils1part3, 0, 0, 1.4F, -11.5F, -2.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part3, 0, 0, 1.4F, -11.5F, -2.5F, 1, 4, 1, 0.0F, false));
     coils1part3.cubeList.add(
-            new ModelBox(coils1part3, 4, 0, 1.4F, -8.5F, -4.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils1part3, 4, 0, 1.4F, -8.5F, -4.5F, 1, 1, 2, 0.0F, false));
     coils1part3.cubeList.add(
-            new ModelBox(coils1part3, 4, 0, 1.4F, -11.5F, -7.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils1part3, 4, 0, 1.4F, -11.5F, -7.5F, 1, 1, 2, 0.0F, false));
     coils1part3.cubeList.add(
-            new ModelBox(coils1part3, 0, 0, 1.4F, -11.5F, -5.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part3, 0, 0, 1.4F, -11.5F, -5.5F, 1, 4, 1, 0.0F, false));
     coils1part3.cubeList.add(
-            new ModelBox(coils1part3, 0, 0, 1.4F, -11.5F, -8.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part3, 0, 0, 1.4F, -11.5F, -8.5F, 1, 4, 1, 0.0F, false));
     coils1part3.cubeList.add(
-            new ModelBox(coils1part3, 0, 0, 1.4F, -11.5F, -11.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part3, 0, 0, 1.4F, -11.5F, -11.5F, 1, 4, 1, 0.0F, false));
     coils1part3.cubeList.add(
-            new ModelBox(coils1part3, 4, 0, 1.4F, -8.5F, -10.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils1part3, 4, 0, 1.4F, -8.5F, -10.5F, 1, 1, 2, 0.0F, false));
 
     coils1part4 = new ModelRenderer(this);
     coils1part4.setRotationPoint(0.0F, 0.0F, 0.0F);
     coils1.addChild(coils1part4);
     coils1part4.cubeList.add(
-            new ModelBox(coils1part4, 0, 0, 1.4F, -16.5F, -2.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part4, 0, 0, 1.4F, -16.5F, -2.5F, 1, 4, 1, 0.0F, false));
     coils1part4.cubeList.add(
-            new ModelBox(coils1part4, 4, 0, 1.4F, -13.5F, -4.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils1part4, 4, 0, 1.4F, -13.5F, -4.5F, 1, 1, 2, 0.0F, false));
     coils1part4.cubeList.add(
-            new ModelBox(coils1part4, 4, 0, 1.4F, -16.5F, -7.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils1part4, 4, 0, 1.4F, -16.5F, -7.5F, 1, 1, 2, 0.0F, false));
     coils1part4.cubeList.add(
-            new ModelBox(coils1part4, 0, 0, 1.4F, -16.5F, -5.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part4, 0, 0, 1.4F, -16.5F, -5.5F, 1, 4, 1, 0.0F, false));
     coils1part4.cubeList.add(
-            new ModelBox(coils1part4, 0, 0, 1.4F, -16.5F, -8.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part4, 0, 0, 1.4F, -16.5F, -8.5F, 1, 4, 1, 0.0F, false));
     coils1part4.cubeList.add(
-            new ModelBox(coils1part4, 0, 0, 1.4F, -16.5F, -11.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils1part4, 0, 0, 1.4F, -16.5F, -11.5F, 1, 4, 1, 0.0F, false));
     coils1part4.cubeList.add(
-            new ModelBox(coils1part4, 4, 0, 1.4F, -13.5F, -10.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils1part4, 4, 0, 1.4F, -13.5F, -10.5F, 1, 1, 2, 0.0F, false));
 
     coils2 = new ModelRenderer(this);
     coils2.setRotationPoint(-8.0F, 16.0F, 8.0F);
@@ -158,73 +158,73 @@ public class ModelFridge extends ModelBase {
     coils2part1.setRotationPoint(0.0F, 0.0F, 0.0F);
     coils2.addChild(coils2part1);
     coils2part1.cubeList.add(
-            new ModelBox(coils2part1, 0, 0, 14.0F, -1.5F, -2.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part1, 0, 0, 14.0F, -1.5F, -2.5F, 1, 4, 1, 0.0F, false));
     coils2part1.cubeList.add(
-            new ModelBox(coils2part1, 4, 0, 14.0F, 1.5F, -4.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils2part1, 4, 0, 14.0F, 1.5F, -4.5F, 1, 1, 2, 0.0F, false));
     coils2part1.cubeList.add(
-            new ModelBox(coils2part1, 4, 0, 14.0F, -1.5F, -7.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils2part1, 4, 0, 14.0F, -1.5F, -7.5F, 1, 1, 2, 0.0F, false));
     coils2part1.cubeList.add(
-            new ModelBox(coils2part1, 0, 0, 14.0F, -1.5F, -5.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part1, 0, 0, 14.0F, -1.5F, -5.5F, 1, 4, 1, 0.0F, false));
     coils2part1.cubeList.add(
-            new ModelBox(coils2part1, 0, 0, 14.0F, -1.5F, -8.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part1, 0, 0, 14.0F, -1.5F, -8.5F, 1, 4, 1, 0.0F, false));
     coils2part1.cubeList.add(
-            new ModelBox(coils2part1, 0, 0, 14.0F, -1.5F, -11.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part1, 0, 0, 14.0F, -1.5F, -11.5F, 1, 4, 1, 0.0F, false));
     coils2part1.cubeList.add(
-            new ModelBox(coils2part1, 4, 0, 14.0F, 1.5F, -10.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils2part1, 4, 0, 14.0F, 1.5F, -10.5F, 1, 1, 2, 0.0F, false));
 
     coils2part2 = new ModelRenderer(this);
     coils2part2.setRotationPoint(0.0F, 0.0F, 0.0F);
     coils2.addChild(coils2part2);
     coils2part2.cubeList.add(
-            new ModelBox(coils2part2, 0, 0, 14.0F, -6.5F, -2.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part2, 0, 0, 14.0F, -6.5F, -2.5F, 1, 4, 1, 0.0F, false));
     coils2part2.cubeList.add(
-            new ModelBox(coils2part2, 4, 0, 14.0F, -3.5F, -4.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils2part2, 4, 0, 14.0F, -3.5F, -4.5F, 1, 1, 2, 0.0F, false));
     coils2part2.cubeList.add(
-            new ModelBox(coils2part2, 4, 0, 14.0F, -6.5F, -7.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils2part2, 4, 0, 14.0F, -6.5F, -7.5F, 1, 1, 2, 0.0F, false));
     coils2part2.cubeList.add(
-            new ModelBox(coils2part2, 0, 0, 14.0F, -6.5F, -5.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part2, 0, 0, 14.0F, -6.5F, -5.5F, 1, 4, 1, 0.0F, false));
     coils2part2.cubeList.add(
-            new ModelBox(coils2part2, 0, 0, 14.0F, -6.5F, -8.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part2, 0, 0, 14.0F, -6.5F, -8.5F, 1, 4, 1, 0.0F, false));
     coils2part2.cubeList.add(
-            new ModelBox(coils2part2, 0, 0, 14.0F, -6.5F, -11.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part2, 0, 0, 14.0F, -6.5F, -11.5F, 1, 4, 1, 0.0F, false));
     coils2part2.cubeList.add(
-            new ModelBox(coils2part2, 4, 0, 14.0F, -3.5F, -10.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils2part2, 4, 0, 14.0F, -3.5F, -10.5F, 1, 1, 2, 0.0F, false));
 
     coils2part3 = new ModelRenderer(this);
     coils2part3.setRotationPoint(0.0F, 0.0F, 0.0F);
     coils2.addChild(coils2part3);
     coils2part3.cubeList.add(
-            new ModelBox(coils2part3, 0, 0, 14.0F, -11.5F, -2.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part3, 0, 0, 14.0F, -11.5F, -2.5F, 1, 4, 1, 0.0F, false));
     coils2part3.cubeList.add(
-            new ModelBox(coils2part3, 4, 0, 14.0F, -8.5F, -4.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils2part3, 4, 0, 14.0F, -8.5F, -4.5F, 1, 1, 2, 0.0F, false));
     coils2part3.cubeList.add(
-            new ModelBox(coils2part3, 4, 0, 14.0F, -11.5F, -7.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils2part3, 4, 0, 14.0F, -11.5F, -7.5F, 1, 1, 2, 0.0F, false));
     coils2part3.cubeList.add(
-            new ModelBox(coils2part3, 0, 0, 14.0F, -11.5F, -5.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part3, 0, 0, 14.0F, -11.5F, -5.5F, 1, 4, 1, 0.0F, false));
     coils2part3.cubeList.add(
-            new ModelBox(coils2part3, 0, 0, 14.0F, -11.5F, -8.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part3, 0, 0, 14.0F, -11.5F, -8.5F, 1, 4, 1, 0.0F, false));
     coils2part3.cubeList.add(
-            new ModelBox(coils2part3, 0, 0, 14.0F, -11.5F, -11.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part3, 0, 0, 14.0F, -11.5F, -11.5F, 1, 4, 1, 0.0F, false));
     coils2part3.cubeList.add(
-            new ModelBox(coils2part3, 4, 0, 14.0F, -8.5F, -10.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils2part3, 4, 0, 14.0F, -8.5F, -10.5F, 1, 1, 2, 0.0F, false));
 
     coils2part4 = new ModelRenderer(this);
     coils2part4.setRotationPoint(0.0F, 0.0F, 0.0F);
     coils2.addChild(coils2part4);
     coils2part4.cubeList.add(
-            new ModelBox(coils2part4, 0, 0, 14.0F, -16.5F, -2.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part4, 0, 0, 14.0F, -16.5F, -2.5F, 1, 4, 1, 0.0F, false));
     coils2part4.cubeList.add(
-            new ModelBox(coils2part4, 4, 0, 14.0F, -13.5F, -4.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils2part4, 4, 0, 14.0F, -13.5F, -4.5F, 1, 1, 2, 0.0F, false));
     coils2part4.cubeList.add(
-            new ModelBox(coils2part4, 4, 0, 14.0F, -16.5F, -7.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils2part4, 4, 0, 14.0F, -16.5F, -7.5F, 1, 1, 2, 0.0F, false));
     coils2part4.cubeList.add(
-            new ModelBox(coils2part4, 0, 0, 14.0F, -16.5F, -5.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part4, 0, 0, 14.0F, -16.5F, -5.5F, 1, 4, 1, 0.0F, false));
     coils2part4.cubeList.add(
-            new ModelBox(coils2part4, 0, 0, 14.0F, -16.5F, -8.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part4, 0, 0, 14.0F, -16.5F, -8.5F, 1, 4, 1, 0.0F, false));
     coils2part4.cubeList.add(
-            new ModelBox(coils2part4, 0, 0, 14.0F, -16.5F, -11.5F, 1, 4, 1, 0.0F, false));
+      new ModelBox(coils2part4, 0, 0, 14.0F, -16.5F, -11.5F, 1, 4, 1, 0.0F, false));
     coils2part4.cubeList.add(
-            new ModelBox(coils2part4, 4, 0, 14.0F, -13.5F, -10.5F, 1, 1, 2, 0.0F, false));
+      new ModelBox(coils2part4, 4, 0, 14.0F, -13.5F, -10.5F, 1, 1, 2, 0.0F, false));
 
     casing = new ModelRenderer(this);
     casing.setRotationPoint(-8.0F, 16.0F, 8.0F);
@@ -276,7 +276,7 @@ public class ModelFridge extends ModelBase {
     stand4 = new ModelRenderer(this);
     stand4.setRotationPoint(-8.0F, 16.0F, 8.0F);
     stand4.cubeList.add(
-            new ModelBox(stand4, 60, 26, 11.65F, -13.5F, -12.0F, 1, 1, 10, 0.0F, false));
+      new ModelBox(stand4, 60, 26, 11.65F, -13.5F, -12.0F, 1, 1, 10, 0.0F, false));
     stand4.cubeList.add(new ModelBox(stand4, 60, 26, 10.0F, -13.5F, -12.0F, 1, 1, 10, 0.0F, false));
     stand4.cubeList.add(new ModelBox(stand4, 60, 26, 8.35F, -13.5F, -12.0F, 1, 1, 10, 0.0F, false));
     stand4.cubeList.add(new ModelBox(stand4, 60, 26, 6.7F, -13.5F, -12.0F, 1, 1, 10, 0.0F, false));

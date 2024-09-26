@@ -11,7 +11,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -65,7 +64,7 @@ public class PacketProspectResult implements IMessage {
           ITextComponent text = new TextComponentTranslation(message.type.translation);
           if (message.type != Type.NOTHING) {
             text.appendText(" ")
-                    .appendSibling(new TextComponentTranslation(message.vein.getTranslationKey() + ".name"));
+                .appendSibling(new TextComponentTranslation(message.vein.getTranslationKey() + ".name"));
           }
           player.sendStatusMessage(text, ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
         }

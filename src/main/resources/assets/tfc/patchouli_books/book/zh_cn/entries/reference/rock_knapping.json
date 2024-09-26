@@ -9,28 +9,23 @@
       "type": "tfc:rock_knapping_recipe",
       "recipe": "tfc:axe_head",
       "text": "斧头"
-    },
-    {
+    }, {
       "type": "tfc:rock_knapping_recipe",
       "recipe": "tfc:shovel_head",
       "text": "铲头"
-    },
-    {
+    }, {
       "type": "tfc:rock_knapping_recipe",
       "recipe": "tfc:hoe_head_1",
       "text": "锄头"
-    },
-    {
+    }, {
       "type": "tfc:rock_knapping_recipe",
       "recipe": "tfc:knife_head_2",
       "text": "刀刃"
-    },
-    {
+    }, {
       "type": "tfc:rock_knapping_recipe",
       "recipe": "tfc:javelin_head",
       "text": "标枪头"
-    },
-    {
+    }, {
       "type": "tfc:rock_knapping_recipe",
       "recipe": "tfc:hammer_head",
       "text": "锤头"

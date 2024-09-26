@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 
-
 import static su.terrafirmagreg.data.Constants.MOD_ID;
 import static su.terrafirmagreg.data.Constants.MOD_NAME;
 
@@ -678,11 +677,11 @@ public class ConfigAnimal {
       public int rarity = 250;
 
       @Config.Comment({
-              "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+        "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
+        "You must specify by 'modid:entity'",
+        "Invalid entries will be ignored."})
       public String[] huntCreatures = {"tfc:pheasanttfc", "tfc:chickentfc", "tfc:ducktfc",
-              "tfc:rabbittfc"};
+                                       "tfc:rabbittfc"};
     }
 
     public static final class Wolf {
@@ -712,9 +711,9 @@ public class ConfigAnimal {
       public int rarity = 250;
 
       @Config.Comment({
-              "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+        "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
+        "You must specify by 'modid:entity'",
+        "Invalid entries will be ignored."})
       public String[] huntCreatures = {"tfc:sheeptfc", "tfc:rabbittfc", "tfc:haretfc"};
     }
 
@@ -725,9 +724,9 @@ public class ConfigAnimal {
       public int rarity = 150;
 
       @Config.Comment({
-              "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+        "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
+        "You must specify by 'modid:entity'",
+        "Invalid entries will be ignored."})
       public String[] huntCreatures = {"tfc:deertfc", "tfc:haretfc", "tfc:rabbittfc"};
     }
 
@@ -738,9 +737,9 @@ public class ConfigAnimal {
       public int rarity = 150;
 
       @Config.Comment({
-              "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+        "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
+        "You must specify by 'modid:entity'",
+        "Invalid entries will be ignored."})
       public String[] huntCreatures = {"tfc:deertfc", "tfc:haretfc", "tfc:rabbittfc"};
     }
 
@@ -751,9 +750,9 @@ public class ConfigAnimal {
       public int rarity = 120;
 
       @Config.Comment({
-              "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+        "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
+        "You must specify by 'modid:entity'",
+        "Invalid entries will be ignored."})
       public String[] huntCreatures = {"tfc:deertfc", "tfc:haretfc", "tfc:rabbittfc"};
     }
 
@@ -764,9 +763,9 @@ public class ConfigAnimal {
       public int rarity = 150;
 
       @Config.Comment({
-              "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+        "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
+        "You must specify by 'modid:entity'",
+        "Invalid entries will be ignored."})
       public String[] huntCreatures = {"tfc:gazelletfc", "tfc:wildebeesttfc"};
     }
 
@@ -777,9 +776,9 @@ public class ConfigAnimal {
       public int rarity = 150;
 
       @Config.Comment({
-              "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+        "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
+        "You must specify by 'modid:entity'",
+        "Invalid entries will be ignored."})
       public String[] huntCreatures = {"tfc:deertfc", "tfc:boartfc"};
     }
 
@@ -790,11 +789,11 @@ public class ConfigAnimal {
       public int rarity = 150;
 
       @Config.Comment({
-              "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+        "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
+        "You must specify by 'modid:entity'",
+        "Invalid entries will be ignored."})
       public String[] huntCreatures = {"tfc:horsetfc", "tfc:donkeytfc", "tfc:muletfc",
-              "tfc:turkeytfc"};
+                                       "tfc:turkeytfc"};
     }
 
     public static final class Cougar {
@@ -804,9 +803,9 @@ public class ConfigAnimal {
       public int rarity = 100;
 
       @Config.Comment({
-              "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+        "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
+        "You must specify by 'modid:entity'",
+        "Invalid entries will be ignored."})
       public String[] huntCreatures = {"tfc:boartfc", "tfc:haretfc"};
     }
 
@@ -817,9 +816,9 @@ public class ConfigAnimal {
       public int rarity = 100;
 
       @Config.Comment({
-              "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+        "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
+        "You must specify by 'modid:entity'",
+        "Invalid entries will be ignored."})
       public String[] huntCreatures = {"tfc:mongoosetfc", "tfc:haretfc"};
     }
 
@@ -830,9 +829,9 @@ public class ConfigAnimal {
       public int rarity = 100;
 
       @Config.Comment({
-              "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+        "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
+        "You must specify by 'modid:entity'",
+        "Invalid entries will be ignored."})
       public String[] huntCreatures = {"tfc:boartfc", "tfc:haretfc"};
     }
 
@@ -843,9 +842,9 @@ public class ConfigAnimal {
       public int rarity = 120;
 
       @Config.Comment({
-              "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+        "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
+        "You must specify by 'modid:entity'",
+        "Invalid entries will be ignored."})
       public String[] huntCreatures = {"tfc:pheasanttfc", "tfc:rabbittfc", "tfc:haretfc"};
     }
 
@@ -856,9 +855,9 @@ public class ConfigAnimal {
       public int rarity = 100;
 
       @Config.Comment({
-              "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
-              "You must specify by 'modid:entity'",
-              "Invalid entries will be ignored."})
+        "This controls which registered entities will be hunted by this animal (unless tamed), in priority order.",
+        "You must specify by 'modid:entity'",
+        "Invalid entries will be ignored."})
       public String[] huntCreatures = {"tfc:gazalletfc", "tfc:rabbittfc", "tfc:haretfc"};
     }
 

@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -41,13 +40,13 @@ public abstract class BlockRock extends BaseBlock implements IRockBlock {
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .hardness(variant.getHardness(type))
-            .sound(SoundType.STONE)
-            .harvestLevel(ToolClasses.PICKAXE, 0)
-            .fallable(this, variant.getSpecification())
-            .oreDict(variant)
-            .oreDict(variant, type);
+      .registryKey(variant.getRegistryKey(type))
+      .hardness(variant.getHardness(type))
+      .sound(SoundType.STONE)
+      .harvestLevel(ToolClasses.PICKAXE, 0)
+      .fallable(this, variant.getSpecification())
+      .oreDict(variant)
+      .oreDict(variant, type);
   }
 
   @Override

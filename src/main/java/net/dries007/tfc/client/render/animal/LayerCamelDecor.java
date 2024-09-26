@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.client.model.animal.ModelCamelTFC;
 import net.dries007.tfc.objects.entity.animal.EntityCamelTFC;
 
@@ -19,9 +18,11 @@ import static su.terrafirmagreg.data.Constants.MODID_TFC;
 public class LayerCamelDecor implements LayerRenderer<EntityCamelTFC> {
 
   private static final ResourceLocation[] CAMEL_DECOR_TEXTURES = IntStream.range(0, 16)
-          .mapToObj(i -> new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/decor/" + EnumDyeColor.byMetadata(i)
-                  .getName() + ".png"))
-          .toArray(ResourceLocation[]::new);
+                                                                          .mapToObj(i -> new ResourceLocation(MODID_TFC,
+                                                                                                              "textures/entity/animal/livestock/decor/"
+                                                                                                              + EnumDyeColor.byMetadata(i)
+                                                                                                                            .getName() + ".png"))
+                                                                          .toArray(ResourceLocation[]::new);
   private final RenderCamelTFC renderer;
   private final ModelCamelTFC model = new ModelCamelTFC(0.51F);
 
@@ -30,7 +31,7 @@ public class LayerCamelDecor implements LayerRenderer<EntityCamelTFC> {
   }
 
   public void doRenderLayer(EntityCamelTFC entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
-          float netHeadYaw, float headPitch, float scale) {
+                            float netHeadYaw, float headPitch, float scale) {
     if (entitylivingbaseIn.hasColor()) {
       this.renderer.bindTexture(CAMEL_DECOR_TEXTURES[entitylivingbaseIn.getColor().getMetadata()]);
       this.model.setModelAttributes(this.renderer.getMainModel());

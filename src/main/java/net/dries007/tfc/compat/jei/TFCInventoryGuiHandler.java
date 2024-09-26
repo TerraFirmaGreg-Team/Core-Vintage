@@ -2,7 +2,6 @@ package net.dries007.tfc.compat.jei;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 
-
 import mezz.jei.api.gui.IAdvancedGuiHandler;
 
 import org.jetbrains.annotations.NotNull;

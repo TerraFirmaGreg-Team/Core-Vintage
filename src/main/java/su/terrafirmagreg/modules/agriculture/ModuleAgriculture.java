@@ -8,14 +8,13 @@ import su.terrafirmagreg.modules.agriculture.init.ItemsAgriculture;
 
 import net.minecraft.creativetab.CreativeTabs;
 
-
 import org.jetbrains.annotations.NotNull;
 
 //@Module(moduleID = "Agriculture", name = "TFG Module Agriculture")
 public final class ModuleAgriculture extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(
-          ModuleAgriculture.class.getSimpleName());
+    ModuleAgriculture.class.getSimpleName());
 
   public final CreativeTabs AGRICULTURE_TAB;
 

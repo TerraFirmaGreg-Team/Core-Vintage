@@ -12,7 +12,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketGuiButton;
 import tfctech.client.TechGuiHandler;
@@ -22,7 +21,7 @@ import java.io.IOException;
 public class GuiElectricForge extends BaseGuiContainerTile<TileElectricForge> {
 
   private static final ResourceLocation BACKGROUND = ModUtils.resource(
-          "textures/gui/container/electric_forge.png");
+    "textures/gui/container/electric_forge.png");
 
   public GuiElectricForge(Container container, InventoryPlayer playerInv, TileElectricForge tile) {
     super(container, playerInv, tile, BACKGROUND);
@@ -38,11 +37,11 @@ public class GuiElectricForge extends BaseGuiContainerTile<TileElectricForge> {
   @Override
   protected void renderHoveredToolTip(int mouseX, int mouseY) {
     if (mouseX >= guiLeft + 153 && mouseX <= guiLeft + 153 + 18 && mouseY >= guiTop + 6
-            && mouseY <= guiTop + 6 + 59) {
+        && mouseY <= guiTop + 6 + 59) {
       int energy = tile.getField(1);
       drawHoveringText(
-              I18n.format("tooltip.tfctech.gui.energy_format", energy, tile.getEnergyCapacity()),
-              mouseX, mouseY);
+        I18n.format("tooltip.tfctech.gui.energy_format", energy, tile.getEnergyCapacity()),
+        mouseX, mouseY);
     }
     super.renderHoveredToolTip(mouseX, mouseY);
   }
@@ -67,7 +66,7 @@ public class GuiElectricForge extends BaseGuiContainerTile<TileElectricForge> {
     // Draw the temperature indicator
     int targetTemperature = tile.getField(0);
     int temperaturePixels = (int) (51 * Math.min(Heat.maxVisibleTemperature(), targetTemperature) /
-            Heat.maxVisibleTemperature()); //Max temperature is brilliant white in tfc
+                                   Heat.maxVisibleTemperature()); //Max temperature is brilliant white in tfc
     drawTexturedModalRect(guiLeft + 8, guiTop + 66 - temperaturePixels, 36, 54, 15, 5);
 
     // Draw the energy bar
@@ -75,11 +74,11 @@ public class GuiElectricForge extends BaseGuiContainerTile<TileElectricForge> {
     int emptyPixels = 60 - energyPixels;
     drawTexturedModalRect(guiLeft + 153, guiTop + 6, 0, 0, 18, emptyPixels);
     drawTexturedModalRect(guiLeft + 153, guiTop + 6 + emptyPixels, 18, emptyPixels, 18,
-            energyPixels);
+                          energyPixels);
 
     //Draw the temperature value (for higher than brilliant white)
     String temp = I18n.format("tooltip.tfctech.gui.electric_forge.temperature_format",
-            targetTemperature);
+                              targetTemperature);
     int x = guiLeft + 41 - fontRenderer.getStringWidth(temp) / 2;
     int y = guiTop + 15;
     fontRenderer.drawString(temp, x, y, 0x000000);

@@ -11,7 +11,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.Calendar;
 
@@ -47,14 +46,6 @@ public class ProviderFood implements ICapabilityFood, ICapabilitySerializable<NB
     deserializeNBT(nbt);
   }
 
-  /**
-   * This marks if the food data should be serialized. For normal food items, it isn't, because all values are provided on construction via CapabilityFood. Only mark
-   * this if food data will change per item stack
-   */
-  protected boolean isDynamic() {
-    return false;
-  }
-
   public ProviderFood(@Nullable NBTTagCompound nbt, @NotNull Food food) {
 
     this(nbt, food.getData());
@@ -62,6 +53,14 @@ public class ProviderFood implements ICapabilityFood, ICapabilitySerializable<NB
 
   public static void setNonDecaying(boolean markStacksNonDecaying) {
     ProviderFood.markStacksNonDecaying = markStacksNonDecaying;
+  }
+
+  /**
+   * This marks if the food data should be serialized. For normal food items, it isn't, because all values are provided on construction via CapabilityFood. Only
+   * mark this if food data will change per item stack
+   */
+  protected boolean isDynamic() {
+    return false;
   }
 
   @Override
@@ -146,7 +145,9 @@ public class ProviderFood implements ICapabilityFood, ICapabilitySerializable<NB
   @Override
   public List<FoodTrait> getTraits() {
     return foodTraits;
-  }  @Override
+  }
+
+  @Override
   public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
     return capability == CapabilityFood.CAPABILITY;
   }
@@ -169,7 +170,6 @@ public class ProviderFood implements ICapabilityFood, ICapabilitySerializable<NB
       creationDate = CapabilityFood.getRoundedCreationDate();
     }
   }
-
 
 
   @Nullable

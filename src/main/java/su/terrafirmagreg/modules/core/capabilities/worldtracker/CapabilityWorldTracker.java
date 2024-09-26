@@ -17,7 +17,7 @@ public final class CapabilityWorldTracker {
 
   public static void register() {
     CapabilityManager.INSTANCE.register(ICapabilityWorldTracker.class, new StorageWorldTracker(),
-            ProviderWorldTracker::new);
+                                        ProviderWorldTracker::new);
   }
 
   public static ICapabilityWorldTracker get(World world) {

@@ -12,7 +12,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -246,10 +245,10 @@ public class ModelAnimalHyena extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount,
-          float ageInTicks, float netHeadYaw, float headPitch,
-          float scale) {
+                     float ageInTicks, float netHeadYaw, float headPitch,
+                     float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-            entity);
+                           entity);
 
     if (((EntityAnimal) entity).isChild()) {
       double ageScale = 1;
@@ -278,7 +277,7 @@ public class ModelAnimalHyena extends ModelBase {
 
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,
-          Entity entity) {
+                                Entity entity) {
     head.rotateAngleX = f4 / (180F / MathConstants.PI);
     head.rotateAngleY = f3 / (180F / MathConstants.PI);
 

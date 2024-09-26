@@ -15,7 +15,6 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 
@@ -74,8 +73,8 @@ public class CalendarEventHandler {
         long jump = Calendar.INSTANCE.setTimeFromWorldTime(currentWorldTime);
         // Consume food/water on all online players accordingly (EXHAUSTION_MULTIPLIER is here to de-compensate)
         event.getEntity().getEntityWorld().getEntities(EntityPlayer.class, Objects::nonNull)
-                .forEach(player -> player.addExhaustion(FoodStatsTFC.PASSIVE_EXHAUSTION * jump / FoodStatsTFC.EXHAUSTION_MULTIPLIER *
-                        (float) ConfigTFC.General.PLAYER.passiveExhaustionMultiplier));
+             .forEach(player -> player.addExhaustion(FoodStatsTFC.PASSIVE_EXHAUSTION * jump / FoodStatsTFC.EXHAUSTION_MULTIPLIER *
+                                                     (float) ConfigTFC.General.PLAYER.passiveExhaustionMultiplier));
 
       }
     }

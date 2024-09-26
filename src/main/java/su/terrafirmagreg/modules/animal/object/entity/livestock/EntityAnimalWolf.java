@@ -41,7 +41,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -62,17 +61,17 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
 
   //Values that has a visual effect on client
   private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(
-          EntityAnimalWolf.class, DataSerializers.BOOLEAN);
+    EntityAnimalWolf.class, DataSerializers.BOOLEAN);
   private static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(
-          EntityAnimalWolf.class, DataSerializers.VARINT);
+    EntityAnimalWolf.class, DataSerializers.VARINT);
   private static final DataParameter<Float> FAMILIARITY = EntityDataManager.createKey(
-          EntityAnimalWolf.class, DataSerializers.FLOAT);
+    EntityAnimalWolf.class, DataSerializers.FLOAT);
   //Is this female fertilized?
   private static final DataParameter<Boolean> FERTILIZED = EntityDataManager.createKey(
-          EntityAnimalWolf.class, DataSerializers.BOOLEAN);
+    EntityAnimalWolf.class, DataSerializers.BOOLEAN);
   // The time(in days) this entity became pregnant
   private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(
-          EntityAnimalWolf.class, DataSerializers.LONG);
+    EntityAnimalWolf.class, DataSerializers.LONG);
   private long lastFed; //Last time(in days) this entity was fed
   private long lastFDecay; //Last time(in days) this entity's familiarity had decayed
   private long matingTime; //The last time(in ticks) this male tried fertilizing females
@@ -81,8 +80,8 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
   @SuppressWarnings("unused")
   public EntityAnimalWolf(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-            EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.WOLF.adulthood,
-                    ConfigAnimal.ENTITIES.WOLF.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.WOLF.adulthood,
+                                          ConfigAnimal.ENTITIES.WOLF.elder));
   }
 
   public EntityAnimalWolf(World worldIn, Gender gender, int birthDay) {
@@ -118,10 +117,10 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-          float floraDiversity) {
+                            float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.TAIGA)) {
+        (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.TAIGA)) {
       return ConfigAnimal.ENTITIES.WOLF.rarity;
     }
     return 0;
@@ -145,9 +144,9 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
   @Override
   public boolean getCanSpawnHere() {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
-            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
-            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-            && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
+           && !this.world.containsAnyLiquid(getEntityBoundingBox())
+           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @NotNull
@@ -199,11 +198,11 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
   @Override
   public boolean isReadyToMate() {
     if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized()
-            || this.isHungry()) {
+        || this.isHungry()) {
       return false;
     }
     return this.matingTime + EntityAnimalBase.MATING_COOLDOWN_DEFAULT_TICKS
-            <= Calendar.PLAYER_TIME.getTicks();
+           <= Calendar.PLAYER_TIME.getTicks();
   }
 
   @Override
@@ -251,7 +250,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
     return new TextComponentTranslation(
-            ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
+      ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
   }
 
   @Override
@@ -269,8 +268,8 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
         if (EntityLivingBase.class.isAssignableFrom(entityClass)) {
           //noinspection unchecked
           this.targetTasks.addTask(priority++,
-                  new EntityAITargetNonTamed<>(this, (Class<EntityLivingBase>) entityClass, false,
-                          ent -> true));
+                                   new EntityAITargetNonTamed<>(this, (Class<EntityLivingBase>) entityClass, false,
+                                                                ent -> true));
         }
       }
     }
@@ -336,7 +335,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
     }
     if (!this.world.isRemote) {
       if (this.isFertilized()
-              && Calendar.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {
+          && Calendar.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {
         birthChildren();
         this.setFertilized(false);
       }
@@ -360,15 +359,15 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
         this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
-                this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
+          this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
         if (random.nextDouble() < ConfigAnimal.ENTITIES.WOLF.oldDeathChance) {
           this.setDead();
         }
       }
       // Wild animals disappear after 125% lifespan
       if (this.getDaysToElderly() > 0 && this.getFamiliarity() < 0.10F &&
-              (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F
-                      <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
+          (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F
+          <= Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
         this.setDead();
       }
     }
@@ -382,10 +381,10 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
     int numberOfChildren = ConfigAnimal.ENTITIES.WOLF.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalWolf baby = new EntityAnimalWolf(this.world, Gender.valueOf(RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays());
+                                                   (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
-              : this.getFamiliarity() * 0.9F);
+                                                       : this.getFamiliarity() * 0.9F);
       UUID uuid = this.getOwnerId();
       if (uuid != null) {
         baby.setOwnerId(uuid);
@@ -425,7 +424,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
                 this.setFamiliarity(familiarity);
               }
               world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP,
-                      SoundCategory.AMBIENT, 1.0F, 1.0F);
+                              SoundCategory.AMBIENT, 1.0F, 1.0F);
             }
             return true;
           } else if (!this.isTamed() && getFamiliarity() >= 0.3f) {
@@ -449,10 +448,10 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
               //Show tooltips
               if (this.isFertilized() && this.getType() == Type.MAMMAL) {
                 ModuleAnimal.getPacketService().sendTo(
-                        SCPacketSimpleMessage.translateMessage(
-                                SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                                ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
-                        (EntityPlayerMP) player);
+                  SCPacketSimpleMessage.translateMessage(
+                    SCPacketSimpleMessage.MessageCategory.ANIMAL,
+                    ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
+                  (EntityPlayerMP) player);
               }
             }
           }
@@ -479,7 +478,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
         baby.setGender(Gender.valueOf(RNG.nextBoolean()));
         baby.setBirthDay((int) Calendar.PLAYER_TIME.getTotalDays());
         baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
-                : this.getFamiliarity() * 0.9F);
+                                                         : this.getFamiliarity() * 0.9F);
         if (this.isTamed()) {
           baby.setOwnerId(this.getOwnerId());
           baby.setTamed(true);

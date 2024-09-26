@@ -6,14 +6,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 /**
  * This interface is used by blocks to automatically register a TileEntity for a block.
  */
 public interface IProviderTile
-        extends ITileEntityProvider {
+  extends ITileEntityProvider {
 
   /**
    * Gets the class of the tile entity to associate with the block.

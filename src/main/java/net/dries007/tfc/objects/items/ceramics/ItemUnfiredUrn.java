@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.item.ItemStack;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class ItemUnfiredUrn extends ItemPottery {

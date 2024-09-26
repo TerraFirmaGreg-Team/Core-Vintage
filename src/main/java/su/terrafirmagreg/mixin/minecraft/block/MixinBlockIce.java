@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
 
-
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
@@ -42,9 +41,9 @@ public class MixinBlockIce extends BlockBreakable implements ITemperatureBlock {
 
     this.waterFluid = waterFluid;
     this.meltThreshold = waterFluid ==
-        FluidsTFC.SALT_WATER.get() ?
-        IceMeltHandler.SALT_WATER_MELT_THRESHOLD :
-        IceMeltHandler.ICE_MELT_THRESHOLD;
+                         FluidsTFC.SALT_WATER.get() ?
+                         IceMeltHandler.SALT_WATER_MELT_THRESHOLD :
+                         IceMeltHandler.ICE_MELT_THRESHOLD;
 
     this.slipperiness = 0.98F;
 
@@ -55,9 +54,9 @@ public class MixinBlockIce extends BlockBreakable implements ITemperatureBlock {
   }
 
   public void harvestBlock(@NotNull World worldIn, EntityPlayer player, @NotNull BlockPos pos,
-      @NotNull IBlockState state,
-      @Nullable TileEntity tile,
-      @NotNull ItemStack stack) {
+                           @NotNull IBlockState state,
+                           @Nullable TileEntity tile,
+                           @NotNull ItemStack stack) {
     //noinspection ConstantConditions
     player.addStat(StatList.getBlockStats(this));
     player.addExhaustion(0.005F);

@@ -7,22 +7,17 @@
       "apply": [
         {
           "model": "tfc:plants/blueshroom_0"
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_1"
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_2"
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_3"
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_4"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "up": "true"
       },
@@ -30,26 +25,21 @@
         {
           "model": "tfc:plants/blueshroom_0",
           "x": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_1",
           "x": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_2",
           "x": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_3",
           "x": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_4",
           "x": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "east": "true"
       },
@@ -58,30 +48,25 @@
           "model": "tfc:plants/blueshroom_0",
           "x": 270,
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_1",
           "x": 270,
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_2",
           "x": 270,
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_3",
           "x": 270,
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_4",
           "x": 270,
           "y": 90
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "south": "true"
       },
@@ -90,30 +75,25 @@
           "model": "tfc:plants/blueshroom_0",
           "x": 270,
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_1",
           "x": 270,
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_2",
           "x": 270,
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_3",
           "x": 270,
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_4",
           "x": 270,
           "y": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "west": "true"
       },
@@ -122,30 +102,25 @@
           "model": "tfc:plants/blueshroom_0",
           "x": 270,
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_1",
           "x": 270,
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_2",
           "x": 270,
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_3",
           "x": 270,
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_4",
           "x": 270,
           "y": 270
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "north": "true"
       },
@@ -153,20 +128,16 @@
         {
           "model": "tfc:plants/blueshroom_0",
           "x": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_1",
           "x": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_2",
           "x": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_3",
           "x": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/blueshroom_4",
           "x": 270
         }

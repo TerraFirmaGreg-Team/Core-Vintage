@@ -1,14 +1,12 @@
 package net.dries007.tfc.objects.te;
 
-import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
@@ -16,7 +14,7 @@ import pieman.caffeineaddon.recipes.DryingMatRecipe;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TEDryingMat extends BaseTileInventory implements ITickable {
+public class TEDryingMat extends BaseTileTickableInventory {
 
   public static final int SLOT = 0;
   //tickcounter
@@ -31,9 +29,9 @@ public class TEDryingMat extends BaseTileInventory implements ITickable {
     ItemStack quernStack = inventory.getStackInSlot(slot);
 
     if (quernStack.isEmpty() || (playerStack.isStackable() && quernStack.isStackable()
-            && quernStack.getItem() == playerStack.getItem()
-            && (!playerStack.getHasSubtypes() || playerStack.getMetadata() == quernStack.getMetadata())
-            && ItemStack.areItemStackTagsEqual(playerStack, quernStack))) {
+                                 && quernStack.getItem() == playerStack.getItem()
+                                 && (!playerStack.getHasSubtypes() || playerStack.getMetadata() == quernStack.getMetadata())
+                                 && ItemStack.areItemStackTagsEqual(playerStack, quernStack))) {
       return inventory.insertItem(slot, playerStack, false);
     }
     inventory.setStackInSlot(slot, playerStack);
@@ -95,17 +93,14 @@ public class TEDryingMat extends BaseTileInventory implements ITickable {
     markDirty();
   }
 
-  @NotNull
+
   public String getOutputName() {
-    return DryingMatRecipe.get(getStack()) == null ? "" : DryingMatRecipe.get(getStack())
-            .getOutputStack()
-            .getDisplayName();
+    return DryingMatRecipe.get(getStack()) == null ? "" : DryingMatRecipe.get(getStack()).getOutputStack().getDisplayName();
   }
 
-  @NotNull
+
   public float getProgress() {
-    return DryingMatRecipe.get(getStack()) == null ? 0 : ((float) getTicksSinceUpdate()) / ((float) DryingMatRecipe.get(getStack())
-            .getDuration());
+    return DryingMatRecipe.get(getStack()) == null ? 0 : ((float) getTicksSinceUpdate()) / ((float) DryingMatRecipe.get(getStack()).getDuration());
   }
 
   public long getTicksSinceUpdate() {

@@ -8,22 +8,18 @@
         {
           "model": "tfc:plants/goosegrass_shortest_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/goosegrass_shortest_1",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/goosegrass_shortest_2",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/goosegrass_shortest_3",
           "weight": 2
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "1"
       },
@@ -31,22 +27,18 @@
         {
           "model": "tfc:plants/goosegrass_shorter_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/goosegrass_shorter_1",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/goosegrass_shorter_2",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/goosegrass_shorter_3",
           "weight": 2
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2"
       },
@@ -54,22 +46,18 @@
         {
           "model": "tfc:plants/goosegrass_short_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/goosegrass_short_1",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/goosegrass_short_2",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/goosegrass_short_3",
           "weight": 2
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "3"
       },
@@ -77,16 +65,13 @@
         {
           "model": "tfc:plants/goosegrass_0",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/goosegrass_1",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/goosegrass_2",
           "weight": 1
-        },
-        {
+        }, {
           "model": "tfc:plants/goosegrass_3",
           "weight": 2
         }

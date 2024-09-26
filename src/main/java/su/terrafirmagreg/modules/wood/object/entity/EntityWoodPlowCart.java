@@ -34,7 +34,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 import net.dries007.tfc.objects.items.metal.ItemMetalHoe;
@@ -49,16 +48,16 @@ import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS_PATH;
 
 public class EntityWoodPlowCart extends EntityWoodCartInventory
-        implements IInventoryChangedListener, IProviderContainer<ContainerWoodPlowCart, GuiWoodPlow> {
+  implements IInventoryChangedListener, IProviderContainer<ContainerWoodPlowCart, GuiWoodPlow> {
 
   private static final DataParameter<Boolean> PLOWING = EntityDataManager.createKey(
-          EntityWoodPlowCart.class, DataSerializers.BOOLEAN);
+    EntityWoodPlowCart.class, DataSerializers.BOOLEAN);
   private static final double BLADEOFFSET = 1.7D;
   @SuppressWarnings("rawtypes")
   private static final DataParameter[] TOOLS = {
-          EntityDataManager.createKey(EntityWoodPlowCart.class, DataSerializers.ITEM_STACK),
-          EntityDataManager.createKey(EntityWoodPlowCart.class, DataSerializers.ITEM_STACK),
-          EntityDataManager.createKey(EntityWoodPlowCart.class, DataSerializers.ITEM_STACK)
+    EntityDataManager.createKey(EntityWoodPlowCart.class, DataSerializers.ITEM_STACK),
+    EntityDataManager.createKey(EntityWoodPlowCart.class, DataSerializers.ITEM_STACK),
+    EntityDataManager.createKey(EntityWoodPlowCart.class, DataSerializers.ITEM_STACK)
   };
 
   public EntityWoodPlowCart(World worldIn) {
@@ -76,7 +75,7 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
     }
     for (String entry : ConfigWood.ITEM.PLOW_CART.canPull) {
       if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player"
-              : EntityList.getKey(pullingIn).toString())) {
+                                                         : EntityList.getKey(pullingIn).toString())) {
         return true;
       }
     }
@@ -96,26 +95,26 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
   public void onUpdate() {
     super.onUpdate();
     EntityPlayer player =
-            this.pulling != null && this.pulling.getControllingPassenger() instanceof EntityPlayer
-                    ? (EntityPlayer) this.pulling.getControllingPassenger()
-                    : (this.pulling instanceof EntityPlayer ? (EntityPlayer) this.pulling : null);
+      this.pulling != null && this.pulling.getControllingPassenger() instanceof EntityPlayer
+      ? (EntityPlayer) this.pulling.getControllingPassenger()
+      : (this.pulling instanceof EntityPlayer ? (EntityPlayer) this.pulling : null);
     if (!this.world.isRemote && this.dataManager.get(PLOWING) && player != null) {
       if (this.prevPosX != this.posX || this.prevPosZ != this.posZ) {
         for (int i = 0; i < this.inventory.getSizeInventory(); i++) {
           if (inventory.getStackInSlot(i) != ItemStack.EMPTY) {
             float offset = 38.0F + i * -38.0F;
             double blockPosX = this.posX
-                    + MathHelper.sin((this.rotationYaw - offset) * 0.017453292F) * BLADEOFFSET;
+                               + MathHelper.sin((this.rotationYaw - offset) * 0.017453292F) * BLADEOFFSET;
             double blockPosZ = this.posZ
-                    - MathHelper.cos((this.rotationYaw - offset) * 0.017453292F) * BLADEOFFSET;
+                               - MathHelper.cos((this.rotationYaw - offset) * 0.017453292F) * BLADEOFFSET;
             BlockPos blockPos = new BlockPos(blockPosX, this.posY - 0.5D, blockPosZ);
             BlockPos upPos = blockPos.up();
             Material upMaterial = this.world.getBlockState(upPos).getMaterial();
             if (upMaterial == Material.AIR) {
               handleTool(blockPos, i, player);
             } else if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || this.world
-                    .getBlockState(upPos)
-                    .getBlock() instanceof BlockPlacedItemFlat) {
+              .getBlockState(upPos)
+              .getBlock() instanceof BlockPlacedItemFlat) {
               this.world.destroyBlock(upPos, false);
               handleTool(blockPos, i, player);
             }
@@ -146,7 +145,7 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
           if (!world.isRemote) {
             world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
             world.setBlockState(pos, FARMLAND.get(soil.getType())
-                    .getDefaultState());
+                                             .getDefaultState());
             damageAndUpdateOnBreak(pos, slot, itemstack, player);
 
           }
@@ -155,9 +154,9 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
           if (metaltool.getType() == Metal.ItemType.SHOVEL) {
             if (!world.isRemote) {
               world.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS,
-                      1.0F, 1.0F);
+                              1.0F, 1.0F);
               this.world.setBlockState(pos, GRASS_PATH.get(soil.getType())
-                      .getDefaultState());
+                                                      .getDefaultState());
               this.damageAndUpdateOnBreak(pos, slot, itemstack, player);
             }
           }
@@ -165,9 +164,9 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
         {
           if (!world.isRemote) {
             world.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F,
-                    1.0F);
+                            1.0F);
             this.world.setBlockState(pos, GRASS_PATH.get(soil.getType())
-                    .getDefaultState());
+                                                    .getDefaultState());
             this.damageAndUpdateOnBreak(pos, slot, itemstack, player);
           }
         }
@@ -176,7 +175,7 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
   }
 
   private void damageAndUpdateOnBreak(BlockPos pos, int slot, ItemStack itemstack,
-          EntityPlayer player) {
+                                      EntityPlayer player) {
     itemstack.damageItem(1, player);
     if (itemstack.isEmpty()) {
       this.dataManager.set(TOOLS[slot], ItemStack.EMPTY);
@@ -236,15 +235,15 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
 
   @Override
   public ContainerWoodPlowCart getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                            IBlockState state, BlockPos pos) {
     return new ContainerWoodPlowCart(inventoryPlayer, inventory, this, inventoryPlayer.player);
   }
 
   @Override
   @SideOnly(Side.CLIENT)
   public GuiWoodPlow getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                     IBlockState state, BlockPos pos) {
     return new GuiWoodPlow(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-            inventory);
+                           inventory);
   }
 }

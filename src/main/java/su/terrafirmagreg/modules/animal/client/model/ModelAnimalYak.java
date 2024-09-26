@@ -12,7 +12,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -161,7 +160,7 @@ public class ModelAnimalYak extends ModelBase {
     hornR3 = new ModelRenderer(this, 41, 14);
     hornR3.setRotationPoint(-1.7F, -0.9F, 0.0F);
     hornR3.addBox(-1.5F, -0.5F, -0.5F, 3, 1, 1, 0.0F);
-    setRotateAngle(hornR3, 0.0F, 0.0F, 0.7853981633974483F);
+    setRotateAngle(hornR3, 0.0F, 0.0F, ((float) Math.PI / 4F));
     hornL2 = new ModelRenderer(this, 42, 16);
     hornL2.mirror = true;
     hornL2.setRotationPoint(2.0F, -0.4F, 0.0F);
@@ -185,7 +184,7 @@ public class ModelAnimalYak extends ModelBase {
     hornL3.mirror = true;
     hornL3.setRotationPoint(1.7F, -0.9F, 0.0F);
     hornL3.addBox(-1.5F, -0.5F, -0.5F, 3, 1, 1, 0.0F);
-    setRotateAngle(hornL3, 0.0F, 0.0F, -0.7853981633974483F);
+    setRotateAngle(hornL3, 0.0F, 0.0F, -((float) Math.PI / 4F));
     teat1 = new ModelRenderer(this, 34, 30);
     teat1.setRotationPoint(1.0F, 1.4F, -2.5F);
     teat1.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
@@ -288,7 +287,7 @@ public class ModelAnimalYak extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-          float par6, float par7) {
+                     float par6, float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
     EntityAnimalYak yak = ((EntityAnimalYak) entity);
 
@@ -431,15 +430,15 @@ public class ModelAnimalYak extends ModelBase {
 
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
-          float par6, Entity ent) {
+                                float par6, Entity ent) {
     this.head.rotateAngleX = par5 / (180F / MathConstants.PI);
     this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
 
     this.legFrontRight.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
     this.legFrontLeft.rotateAngleX =
-            MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
+      MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
     this.legBackRight.rotateAngleX =
-            MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
+      MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
     this.legBackLeft.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
 
     udder.isHidden = false;

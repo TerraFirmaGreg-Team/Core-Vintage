@@ -20,10 +20,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import se.gory_moon.horsepower.blocks.ModBlocks;
 import se.gory_moon.horsepower.client.model.BakedChopperModel;
-import se.gory_moon.horsepower.items.ModItems;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -61,20 +59,20 @@ public class ModModelManager {
     replaceChoppingModel(new ModelResourceLocation("horsepower:chopping_block"), MODEL_ManualChoppingBlock, event);
 
     event.getModelRegistry()
-            .putObject(getModel("chopper"), event.getModelRegistry()
-                    .getObject(new ModelResourceLocation("horsepower:chopper", "facing=north,part=base")));
+         .putObject(getModel("chopper"), event.getModelRegistry()
+                                              .getObject(new ModelResourceLocation("horsepower:chopper", "facing=north,part=base")));
     event.getModelRegistry()
-            .putObject(getModel("chopper"), event.getModelRegistry()
-                    .getObject(new ModelResourceLocation("horsepower:chopper", "facing=south,part=base")));
+         .putObject(getModel("chopper"), event.getModelRegistry()
+                                              .getObject(new ModelResourceLocation("horsepower:chopper", "facing=south,part=base")));
     event.getModelRegistry()
-            .putObject(getModel("chopper"), event.getModelRegistry()
-                    .getObject(new ModelResourceLocation("horsepower:chopper", "facing=west,part=base")));
+         .putObject(getModel("chopper"), event.getModelRegistry()
+                                              .getObject(new ModelResourceLocation("horsepower:chopper", "facing=west,part=base")));
     event.getModelRegistry()
-            .putObject(getModel("chopper"), event.getModelRegistry()
-                    .getObject(new ModelResourceLocation("horsepower:chopper", "facing=east,part=base")));
+         .putObject(getModel("chopper"), event.getModelRegistry()
+                                              .getObject(new ModelResourceLocation("horsepower:chopper", "facing=east,part=base")));
     event.getModelRegistry()
-            .putObject(getModel("chopping_block"), event.getModelRegistry()
-                    .getObject(new ModelResourceLocation("horsepower:chopping_block")));
+         .putObject(getModel("chopping_block"), event.getModelRegistry()
+                                                     .getObject(new ModelResourceLocation("horsepower:chopping_block")));
   }
 
   public static void replaceChoppingModel(ModelResourceLocation modelVariantLocation, ResourceLocation modelLocation, ModelBakeEvent event) {
@@ -98,24 +96,14 @@ public class ModModelManager {
   @SubscribeEvent
   public static void registerAllModels(ModelRegistryEvent event) {
     INSTANCE.registerBlockModels();
-    INSTANCE.registerItemModels();
   }
 
   private void registerBlockModels() {
     ModBlocks.RegistrationHandler.ITEM_BLOCKS.stream()
-            .filter(item -> !itemsRegistered.contains(item))
-            .forEach(this::registerItemModel);
+                                             .filter(item -> !itemsRegistered.contains(item))
+                                             .forEach(this::registerItemModel);
   }
 
-  /**
-   * Register this mod's {@link Item} models.
-   */
-  private void registerItemModels() {
-    // Then register items with default model names
-    ModItems.RegistrationHandler.ITEMS.stream()
-            .filter(item -> !itemsRegistered.contains(item))
-            .forEach(this::registerItemModel);
-  }
 
   /*
    * Register a model for each metadata value of the {@link Block}'s {@link Item} corresponding to the values of an {@link IProperty}.
@@ -141,20 +129,27 @@ public class ModModelManager {
 */
 
   /**
-   * Register a single model for the {@link Block}'s {@link Item}.
+   * Register a single model for an {@link Item}.
    * <p>
-   * Uses the registry name as the domain/path and the {@link IBlockState} as the variant.
+   * Uses the registry name as the domain/path and {@code "inventory"} as the variant.
    *
-   * @param state The state to use as the variant
+   * @param item The Item
    */
-  private void registerBlockInventoryModel(IBlockState state) {
-    final Block block = state.getBlock();
-    final Item item = Item.getItemFromBlock(block);
+  private void registerItemModel(Item item) {
+    registerItemModel(item, item.getRegistryName().toString());
+  }
 
-    if (item != null) {
-      registerItemModel(item,
-              new ModelResourceLocation(block.getRegistryName(), propertyStringMapper.getPropertyString(state.getProperties())));
-    }
+  /**
+   * Register a single model for an {@link Item}.
+   * <p>
+   * Uses {@code modelLocation} as the domain/path and {@link "inventory"} as the variant.
+   *
+   * @param item          The Item
+   * @param modelLocation The model location
+   */
+  private void registerItemModel(Item item, String modelLocation) {
+    final ModelResourceLocation fullModelLocation = new ModelResourceLocation(modelLocation, "inventory");
+    registerItemModel(item, fullModelLocation);
   }
 
   /**
@@ -167,7 +162,7 @@ public class ModModelManager {
    */
   private void registerItemModel(Item item, ModelResourceLocation fullModelLocation) {
     ModelBakery.registerItemVariants(item,
-            fullModelLocation); // Ensure the custom model is loaded and prevent the default model from being loaded
+                                     fullModelLocation); // Ensure the custom model is loaded and prevent the default model from being loaded
     registerItemModel(item, MeshDefinitionFix.create(stack -> fullModelLocation));
   }
 
@@ -180,6 +175,23 @@ public class ModModelManager {
   private void registerItemModel(Item item, ItemMeshDefinition meshDefinition) {
     itemsRegistered.add(item);
     ModelLoader.setCustomMeshDefinition(item, meshDefinition);
+  }
+
+  /**
+   * Register a single model for the {@link Block}'s {@link Item}.
+   * <p>
+   * Uses the registry name as the domain/path and the {@link IBlockState} as the variant.
+   *
+   * @param state The state to use as the variant
+   */
+  private void registerBlockInventoryModel(IBlockState state) {
+    final Block block = state.getBlock();
+    final Item item = Item.getItemFromBlock(block);
+
+    if (item != null) {
+      registerItemModel(item,
+                        new ModelResourceLocation(block.getRegistryName(), propertyStringMapper.getPropertyString(state.getProperties())));
+    }
   }
 
   /**
@@ -223,29 +235,5 @@ public class ModModelManager {
   private void registerItemModelForMeta(Item item, int metadata, ModelResourceLocation modelResourceLocation) {
     itemsRegistered.add(item);
     ModelLoader.setCustomModelResourceLocation(item, metadata, modelResourceLocation);
-  }
-
-  /**
-   * Register a single model for an {@link Item}.
-   * <p>
-   * Uses the registry name as the domain/path and {@code "inventory"} as the variant.
-   *
-   * @param item The Item
-   */
-  private void registerItemModel(Item item) {
-    registerItemModel(item, item.getRegistryName().toString());
-  }
-
-  /**
-   * Register a single model for an {@link Item}.
-   * <p>
-   * Uses {@code modelLocation} as the domain/path and {@link "inventory"} as the variant.
-   *
-   * @param item          The Item
-   * @param modelLocation The model location
-   */
-  private void registerItemModel(Item item, String modelLocation) {
-    final ModelResourceLocation fullModelLocation = new ModelResourceLocation(modelLocation, "inventory");
-    registerItemModel(item, fullModelLocation);
   }
 }

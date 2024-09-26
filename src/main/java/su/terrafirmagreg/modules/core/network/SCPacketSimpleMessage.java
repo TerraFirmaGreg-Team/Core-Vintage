@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.ConfigTFC;
 
@@ -18,7 +17,7 @@ import java.nio.charset.Charset;
 import java.util.function.BooleanSupplier;
 
 public class SCPacketSimpleMessage implements IMessage,
-        IMessageHandler<SCPacketSimpleMessage, IMessage> {
+                                              IMessageHandler<SCPacketSimpleMessage, IMessage> {
 
   private ITextComponent text;
   private MessageCategory category;
@@ -35,7 +34,7 @@ public class SCPacketSimpleMessage implements IMessage,
    * Utility method for making a message with just a single {@link TextComponentTranslation} element.
    */
   public static SCPacketSimpleMessage translateMessage(MessageCategory category, String unlocalized,
-          Object... args) {
+                                                       Object... args) {
     return new SCPacketSimpleMessage(category, new TextComponentTranslation(unlocalized, args));
   }
 
@@ -50,8 +49,8 @@ public class SCPacketSimpleMessage implements IMessage,
   public void fromBytes(ByteBuf buf) {
     category = MessageCategory.values()[buf.readInt()];
     text = ITextComponent.Serializer.jsonToComponent(
-            buf.readCharSequence(buf.readInt(), Charset.defaultCharset())
-                    .toString());
+      buf.readCharSequence(buf.readInt(), Charset.defaultCharset())
+         .toString());
   }
 
   @Override

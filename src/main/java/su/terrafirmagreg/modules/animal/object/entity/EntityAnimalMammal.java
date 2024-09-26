@@ -9,7 +9,6 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +21,7 @@ public abstract class EntityAnimalMammal extends EntityAnimalBase {
 
   // The time(in days) this entity became pregnant
   private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(
-          EntityAnimalMammal.class, DataSerializers.LONG);
+    EntityAnimalMammal.class, DataSerializers.LONG);
 
   @SuppressWarnings("unused")
   public EntityAnimalMammal(World worldIn) {
@@ -56,7 +55,7 @@ public abstract class EntityAnimalMammal extends EntityAnimalBase {
     super.onLivingUpdate();
     if (!this.world.isRemote) {
       if (this.isFertilized()
-              && Calendar.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {
+          && Calendar.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {
         birthChildren();
         this.setFertilized(false);
       }

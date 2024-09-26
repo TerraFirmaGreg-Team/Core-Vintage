@@ -7,7 +7,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
-
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 
 public class EntityAnimalAILawnmower extends EntityAIBase {
@@ -49,7 +48,7 @@ public class EntityAnimalAILawnmower extends EntityAIBase {
   public void updateTask() {
     timer = Math.max(0, timer - 1);
     if (timer == 4 && isAtShortGrass() && ForgeEventFactory.getMobGriefingEvent(entityWorld,
-            grassEater)) {
+                                                                                grassEater)) {
       entityWorld.destroyBlock(grassEater.getPosition(), false);
     }
   }

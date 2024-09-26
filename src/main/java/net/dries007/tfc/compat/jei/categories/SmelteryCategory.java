@@ -3,7 +3,6 @@ package net.dries007.tfc.compat.jei.categories;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -79,8 +78,8 @@ public class SmelteryCategory extends BaseRecipeCategory<SmelteryRecipeWrapper> 
 
     IGuiFluidStackGroup fluidStackGroup = recipeLayout.getFluidStacks();
     fluidStackGroup.init(0, false, 88, 10, 16, 47, ingredients.getOutputs(VanillaTypes.FLUID)
-            .get(0)
-            .get(0).amount, false, null);
+                                                              .get(0)
+                                                              .get(0).amount, false, null);
     fluidStackGroup.set(0, ingredients.getOutputs(VanillaTypes.FLUID).get(0));
   }
 }

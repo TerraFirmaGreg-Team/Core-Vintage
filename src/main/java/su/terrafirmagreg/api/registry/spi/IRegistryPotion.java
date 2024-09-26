@@ -4,10 +4,10 @@ import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.potion.Potion;
 
 public interface IRegistryPotion
-        extends IRegistryBase {
+  extends IRegistryBase {
 
   default Potion potion(String name, Potion potion, IAttribute attribute, String uniqueId,
-          double ammount, int operation) {
+                        double ammount, int operation) {
 
     potion.registerPotionAttributeModifier(attribute, uniqueId, ammount, operation);
     return this.potion(name, potion);

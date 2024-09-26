@@ -2,7 +2,6 @@ package su.terrafirmagreg.api.util;
 
 import net.minecraftforge.common.UsernameCache;
 
-
 import lombok.experimental.UtilityClass;
 
 import java.util.Map;

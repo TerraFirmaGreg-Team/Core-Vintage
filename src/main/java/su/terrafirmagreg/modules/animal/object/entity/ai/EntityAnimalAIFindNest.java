@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import java.util.HashMap;
@@ -41,7 +40,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
   @Override
   public boolean shouldExecute() {
     if (theCreature instanceof IAnimal animal
-            && animal.getType() == IAnimal.Type.OVIPAROUS) {
+        && animal.getType() == IAnimal.Type.OVIPAROUS) {
       return animal.isReadyForAnimalProduct() && this.getNearbyNest();
     }
     return false;
@@ -63,8 +62,8 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
   @Override
   public void startExecuting() {
     this.theCreature.getNavigator()
-            .tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY() + 1,
-                    this.nestPos.getZ() + 0.5D, this.speed);
+                    .tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY() + 1,
+                                  this.nestPos.getZ() + 0.5D, this.speed);
     this.currentTick = 0;
     this.end = false;
     this.maxSittingTicks = this.theCreature.getRNG().nextInt(200) + 100;
@@ -78,8 +77,8 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
     }
     if (this.theCreature.getDistanceSq(nestPos) > 1.25D) {
       this.theCreature.getNavigator()
-              .tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY(), this.nestPos.getZ() + 0.5D,
-                      this.speed);
+                      .tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY(), this.nestPos.getZ() + 0.5D,
+                                    this.speed);
       if (this.currentTick > 200) {
         //We never reached it in 10 secs, lets give up on this nest box
         failureDepressionMap.put(nestPos, world.getTotalWorldTime() + ICalendar.TICKS_IN_HOUR * 4);
@@ -88,7 +87,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
     } else {
       var tile = TileUtils.getTile(world, nestPos, TileNestBox.class);
       if (tile != null && theCreature instanceof IAnimal animal
-              && animal.getType() == IAnimal.Type.OVIPAROUS) {
+          && animal.getType() == IAnimal.Type.OVIPAROUS) {
         if (!tile.hasBird()) {
           tile.seatOnThis(theCreature);
           this.currentTick = 0;
@@ -104,7 +103,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
         } else if (tile.getBird() != theCreature) {
           //Used by another bird, give up on this one for now
           failureDepressionMap.put(nestPos,
-                  world.getTotalWorldTime() + ICalendar.TICKS_IN_HOUR * 4);
+                                   world.getTotalWorldTime() + ICalendar.TICKS_IN_HOUR * 4);
           this.end = true;
         }
       }
@@ -115,8 +114,8 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
     int i = (int) this.theCreature.posY;
     double d0 = Double.MAX_VALUE;
     for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(theCreature.getPosition()
-            .add(-16, 0, -16), theCreature.getPosition()
-            .add(16, 4, 16))) {
+                                                                               .add(-16, 0, -16), theCreature.getPosition()
+                                                                                                             .add(16, 4, 16))) {
       if (this.isNestBlock(this.world, pos) && this.world.isAirBlock(pos.up())) {
         double d1 = this.theCreature.getDistanceSq(pos);
 
@@ -143,6 +142,6 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
     }
     var tile = TileUtils.getTile(world, pos, TileNestBox.class);
     return tile != null && tile.hasFreeSlot() && (!tile.hasBird()
-            || tile.getBird() == this.theCreature);
+                                                  || tile.getBird() == this.theCreature);
   }
 }

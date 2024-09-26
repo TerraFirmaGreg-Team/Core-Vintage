@@ -9,8 +9,7 @@
           "model": "tfc:plants/kangaroo_paw_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },

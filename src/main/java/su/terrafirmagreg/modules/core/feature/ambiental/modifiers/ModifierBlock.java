@@ -15,7 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-
 import java.util.Optional;
 
 import static su.terrafirmagreg.modules.core.feature.ambiental.AmbientalRegistry.BLOCKS;
@@ -24,29 +23,29 @@ public class ModifierBlock extends ModifierBase {
 
   static {
     BLOCKS.register((player, pos, state) ->
-            Optional.of(new ModifierBase("torch", 3f, 0f))
-                    .filter((mod) -> state.getBlock() == Blocks.TORCH));
+                      Optional.of(new ModifierBase("torch", 3f, 0f))
+                              .filter((mod) -> state.getBlock() == Blocks.TORCH));
 
     BLOCKS.register((player, pos, state) ->
-            Optional.of(new ModifierBase("fire", 3f, 0f))
-                    .filter((mod) -> state.getBlock() == Blocks.FIRE));
+                      Optional.of(new ModifierBase("fire", 3f, 0f))
+                              .filter((mod) -> state.getBlock() == Blocks.FIRE));
 
     BLOCKS.register((player, pos, state) ->
-            Optional.of(new ModifierBase("lava", 3f, 0f))
-                    .filter((mod) -> state.getBlock() == Blocks.LAVA));
+                      Optional.of(new ModifierBase("lava", 3f, 0f))
+                              .filter((mod) -> state.getBlock() == Blocks.LAVA));
 
     BLOCKS.register((player, pos, state) ->
-            Optional.of(new ModifierBase("flowing_lava", 3f, 0f))
-                    .filter((mod) -> state.getBlock() == Blocks.FLOWING_LAVA));
+                      Optional.of(new ModifierBase("flowing_lava", 3f, 0f))
+                              .filter((mod) -> state.getBlock() == Blocks.FLOWING_LAVA));
 
     BLOCKS.register((player, pos, state) ->
-            Optional.of(new ModifierBase("snow", -1.5f, 0.2f))
-                    .filter((mod) -> state.getBlock() == Blocks.SNOW_LAYER));
+                      Optional.of(new ModifierBase("snow", -1.5f, 0.2f))
+                              .filter((mod) -> state.getBlock() == Blocks.SNOW_LAYER));
 
     BLOCKS.register((player, pos, state) ->
-            Optional.of(new ModifierBase("snow", -0.5f, 0.2f)).filter(
-                    (mod) -> state.getBlock() == Blocks.SNOW
-                            && player.world.getLightFor(EnumSkyBlock.SKY, pos) == 15));
+                      Optional.of(new ModifierBase("snow", -0.5f, 0.2f)).filter(
+                        (mod) -> state.getBlock() == Blocks.SNOW
+                                 && player.world.getLightFor(EnumSkyBlock.SKY, pos) == 15));
   }
 
   public boolean affectedByDistance = false;
@@ -93,7 +92,7 @@ public class ModifierBlock extends ModifierBase {
       distanceMultiplier = 1f - distanceMultiplier;
 
       boolean isInside = ModifierEnvironmental.getSkylight(player) < 14
-              && ModifierEnvironmental.getBlockLight(player) > 3;
+                         && ModifierEnvironmental.getBlockLight(player) > 3;
       if (isInside) {
         distanceMultiplier *= 1.3f;
       }

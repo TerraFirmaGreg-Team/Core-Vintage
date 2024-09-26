@@ -6,9 +6,8 @@
   "minVersion": "0.8.5",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "minecraft.world.gen.MixinChunkGeneratorDebug"
   ],
-  "server": [],
-  "client": []
+  "server": [ ],
+  "client": [ ]
 }
 

@@ -6,7 +6,6 @@ import su.terrafirmagreg.modules.device.object.recipe.quern.IQuernRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeldingRecipeWrapper
-        extends BaseRecipeWrapper<IQuernRecipe> {
+  extends BaseRecipeWrapper<IQuernRecipe> {
 
   public WeldingRecipeWrapper(IQuernRecipe recipe) {
     super(recipe);

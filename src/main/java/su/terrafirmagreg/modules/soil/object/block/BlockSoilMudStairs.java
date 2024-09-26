@@ -10,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.util.BlockRenderLayer;
 
-
 import lombok.Getter;
 
 @Getter
@@ -26,12 +25,12 @@ public class BlockSoilMudStairs extends BaseBlockStairs implements ISoilBlock {
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .sound(SoundType.GROUND)
-            .renderLayer(BlockRenderLayer.CUTOUT)
-            .harvestLevel(ToolClasses.PICKAXE, 0)
-            .oreDict("stairs")
-            .oreDict("stairs", "mud", "bricks");
+      .registryKey(variant.getRegistryKey(type))
+      .sound(SoundType.GROUND)
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .harvestLevel(ToolClasses.PICKAXE, 0)
+      .oreDict("stairs")
+      .oreDict("stairs", "mud", "bricks");
   }
 
 }

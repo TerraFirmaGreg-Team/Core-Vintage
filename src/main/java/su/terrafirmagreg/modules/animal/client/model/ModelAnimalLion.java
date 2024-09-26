@@ -12,7 +12,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -76,7 +75,7 @@ public class ModelAnimalLion extends ModelBase {
     tailTip2 = new ModelRenderer(this, 42, 50);
     tailTip2.setRotationPoint(0.0F, -0.9F, 6.2F);
     tailTip2.addBox(-1.0F, 0.13F, 3.63F, 2, 0, 2, 0.0F);
-    setRotation(tailTip2, 0.6981317007977318F, 0.0F, 0.0F);
+    setRotation(tailTip2, ((float) Math.PI * 2F / 9F), 0.0F, 0.0F);
     earFR = new ModelRenderer(this, 71, 70);
     earFR.setRotationPoint(-1.5F, -3.0F, -1.0F);
     earFR.addBox(-2.0F, -3.0F, -2.0F, 3, 3, 1, 0.0F);
@@ -90,7 +89,7 @@ public class ModelAnimalLion extends ModelBase {
     tailTip1 = new ModelRenderer(this, 44, 50);
     tailTip1.setRotationPoint(0.0F, -0.9F, 6.2F);
     tailTip1.addBox(0.0F, -0.87F, 3.63F, 0, 2, 2, 0.0F);
-    setRotation(tailTip1, 0.6981317007977318F, 0.0F, 0.0F);
+    setRotation(tailTip1, ((float) Math.PI * 2F / 9F), 0.0F, 0.0F);
     tail = new ModelRenderer(this, 38, 60);
     tail.setRotationPoint(0.0F, 8.0F, 10.0F);
     tail.addBox(-0.5F, -1.0F, 0.0F, 1, 1, 6, 0.0F);
@@ -101,7 +100,7 @@ public class ModelAnimalLion extends ModelBase {
     tail1 = new ModelRenderer(this, 39, 54);
     tail1.setRotationPoint(0.0F, -0.7F, 5.9F);
     tail1.addBox(-0.5F, -0.37F, -0.37F, 1, 1, 5, 0.0F);
-    setRotation(tail1, 0.6981317007977318F, 0.0F, 0.0F);
+    setRotation(tail1, ((float) Math.PI * 2F / 9F), 0.0F, 0.0F);
     earML = new ModelRenderer(this, 46, 70);
     earML.setRotationPoint(2.0F, -2.0F, -1.0F);
     earML.addBox(-1.0F, -4.0F, -2.0F, 3, 3, 1, 0.0F);
@@ -236,7 +235,7 @@ public class ModelAnimalLion extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-          float par6, float par7) {
+                     float par6, float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
     EntityAnimalLion lion = ((EntityAnimalLion) entity);
@@ -300,7 +299,7 @@ public class ModelAnimalLion extends ModelBase {
 
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
-          float par6, Entity ent) {
+                                float par6, Entity ent) {
     EntityAnimalLion lion = ((EntityAnimalLion) ent);
     int mouthTicks = lion.getMouthTicks();
     float mouthAngle;
@@ -317,9 +316,9 @@ public class ModelAnimalLion extends ModelBase {
     this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
     this.frontRightLegTop.rotateAngleX = MathHelper.cos(par1 * 0.4662F) * 0.8F * par2;
     this.frontLeftLegTop.rotateAngleX =
-            MathHelper.cos(par1 * 0.4662F + MathConstants.PI) * 0.8F * par2;
+      MathHelper.cos(par1 * 0.4662F + MathConstants.PI) * 0.8F * par2;
     this.backRightLegTop.rotateAngleX =
-            MathHelper.cos(par1 * 0.4662F + MathConstants.PI) * 0.8F * par2;
+      MathHelper.cos(par1 * 0.4662F + MathConstants.PI) * 0.8F * par2;
     this.backLeftLegTop.rotateAngleX = MathHelper.cos(par1 * 0.4662F) * 0.8F * par2;
     this.mouthBottom.rotateAngleX = 0.0873F + mouthAngle;
 

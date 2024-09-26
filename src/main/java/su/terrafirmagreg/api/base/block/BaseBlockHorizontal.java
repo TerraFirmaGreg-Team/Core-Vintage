@@ -10,7 +10,6 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import lombok.Getter;
 
 import static su.terrafirmagreg.data.Properties.HORIZONTAL;
@@ -24,7 +23,7 @@ public abstract class BaseBlockHorizontal extends BaseBlock {
     super(settings);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(HORIZONTAL, EnumFacing.NORTH));
+                              .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 
   @Override
@@ -60,7 +59,7 @@ public abstract class BaseBlockHorizontal extends BaseBlock {
 
   @Override
   public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer,
-          EnumHand hand) {
+                                          EnumHand hand) {
     return getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing().getOpposite());
   }
 }

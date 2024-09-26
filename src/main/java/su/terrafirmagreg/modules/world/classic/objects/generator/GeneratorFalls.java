@@ -11,7 +11,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-
 import java.util.Random;
 
 public class GeneratorFalls implements IWorldGenerator {
@@ -26,15 +25,15 @@ public class GeneratorFalls implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+                       IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     for (int k5 = 0; k5 < rarity; ++k5) {
       int x = random.nextInt(16) + 8;
       int z = random.nextInt(16) + 8;
       int y = random.nextInt(WorldTypeClassic.SEALEVEL - 50) + 30;
       BlockPos pos = new BlockPos(chunkX << 4, y, chunkZ << 4).add(x, 0, z);
       if (!BlockUtils.isRawStone(world.getBlockState(pos.down())) && !BlockUtils.isRawStone(
-              world.getBlockState(pos.up())) &&
-              (!BlockUtils.isRawStone(world.getBlockState(pos)) || !world.isAirBlock(pos))) {
+        world.getBlockState(pos.up())) &&
+          (!BlockUtils.isRawStone(world.getBlockState(pos)) || !world.isAirBlock(pos))) {
         continue;
       }
       int rawHorizontal = 0, airHorizontal = 0;

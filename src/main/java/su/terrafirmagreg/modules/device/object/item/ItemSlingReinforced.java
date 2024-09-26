@@ -8,7 +8,7 @@ public class ItemSlingReinforced extends ItemSling {
     super(name);
 
     getSettings()
-            .maxDamage(256);
+      .maxDamage(256);
   }
 
   @Override

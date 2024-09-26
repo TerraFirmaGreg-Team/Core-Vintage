@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-
 import com.eerussianguy.firmalife.render.RenderHandler;
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -65,27 +64,27 @@ public class PacketDrawBoundingBox implements IMessage {
     @Override
     public IMessage onMessage(PacketDrawBoundingBox message, MessageContext ctx) {
       TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(
-              () -> {
-                final List<Runnable> runList = Collections.nCopies(200, () -> {
-                  AxisAlignedBB box;
-                  if (message.isBlockShape) {
-                    World world = TerraFirmaCraft.getProxy().getWorld(ctx);
-                    if (world != null) {
-                      final BlockPos pos = message.min;
-                      box = world.getBlockState(pos)
-                              .getBoundingBox(world, pos)
-                              .offset(pos.getX(), pos.getY(), pos.getZ())
-                              .grow(0.002D);
-                    } else {
-                      return;
-                    }
-                  } else {
-                    box = new AxisAlignedBB(message.min, message.max).shrink(0.1D);
-                  }
-                  RenderGlobal.drawSelectionBoundingBox(box, message.red, message.green, message.blue, 1.0F);
-                });
-                RenderHandler.TO_RUN = new LinkedList<>(runList);
-              });
+        () -> {
+          final List<Runnable> runList = Collections.nCopies(200, () -> {
+            AxisAlignedBB box;
+            if (message.isBlockShape) {
+              World world = TerraFirmaCraft.getProxy().getWorld(ctx);
+              if (world != null) {
+                final BlockPos pos = message.min;
+                box = world.getBlockState(pos)
+                           .getBoundingBox(world, pos)
+                           .offset(pos.getX(), pos.getY(), pos.getZ())
+                           .grow(0.002D);
+              } else {
+                return;
+              }
+            } else {
+              box = new AxisAlignedBB(message.min, message.max).shrink(0.1D);
+            }
+            RenderGlobal.drawSelectionBoundingBox(box, message.red, message.green, message.blue, 1.0F);
+          });
+          RenderHandler.TO_RUN = new LinkedList<>(runList);
+        });
       return null;
     }
   }

@@ -3,7 +3,6 @@ package net.dries007.tfc.compat.jei;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 /**

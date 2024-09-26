@@ -26,7 +26,7 @@ public class CommandHeat extends BaseCommand {
 
   @Override
   public void execute(MinecraftServer server, ICommandSender sender, String[] args)
-          throws CommandException {
+    throws CommandException {
     if (args.length != 1) {
       throw new WrongUsageException(ModUtils.localize("command", "heat.failed"));
     }
@@ -42,7 +42,7 @@ public class CommandHeat extends BaseCommand {
       cap.setTemperature((float) heat);
     } else {
       throw new WrongUsageException(
-              ModUtils.localize("command", "heat.failed.usage.expected.player"));
+        ModUtils.localize("command", "heat.failed.usage.expected.player"));
     }
   }
 

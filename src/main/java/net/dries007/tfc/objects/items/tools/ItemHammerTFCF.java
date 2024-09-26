@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 
-
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
 import tfcflorae.util.OreDictionaryHelper;

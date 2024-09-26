@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 
 import org.jetbrains.annotations.NotNull;
@@ -29,10 +28,10 @@ public class NutRecipe extends IForgeRegistryEntry.Impl<NutRecipe> {
   @Nullable
   public static NutRecipe get(Block block) {
     return TFCRegistries.NUT_TREES.getValuesCollection()
-            .stream()
-            .filter(x -> x.isValidInput(block))
-            .findFirst()
-            .orElse(null);
+                                  .stream()
+                                  .filter(x -> x.isValidInput(block))
+                                  .findFirst()
+                                  .orElse(null);
   }
 
   private boolean isValidInput(Block input) {

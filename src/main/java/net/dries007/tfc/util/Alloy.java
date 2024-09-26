@@ -7,7 +7,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.FluidStack;
 
-
 import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
@@ -31,9 +30,9 @@ import java.util.Map;
 public class Alloy implements INBTSerializable<NBTTagCompound> {
 
   /**
-   * This is the maximum safe value for an alloy. If an alloy is larger than this, due to epsilon based comparisons, the following duplication glitch can be observed:
-   * Add SAFE_MAX_ALLOY amount of metal A Add 1 unit of metal B Then {@code 1 / (1 + SAFE_MAX_ALLOY) < EPSILON}, so you can extract (1 + SAFE_MAX_ALLOY) units of
-   * metal A, effectively transmuting metal B into A.
+   * This is the maximum safe value for an alloy. If an alloy is larger than this, due to epsilon based comparisons, the following duplication glitch can be
+   * observed: Add SAFE_MAX_ALLOY amount of metal A Add 1 unit of metal B Then {@code 1 / (1 + SAFE_MAX_ALLOY) < EPSILON}, so you can extract (1 +
+   * SAFE_MAX_ALLOY) units of metal A, effectively transmuting metal B into A.
    */
   public static final int SAFE_MAX_ALLOY = 100_000;
   /**
@@ -280,7 +279,8 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
   }
 
   /**
-   * Returns a read-only copy of the metals in an alloy The alloy may also contain values with a % content less than epsilon, which are not visible in this view
+   * Returns a read-only copy of the metals in an alloy The alloy may also contain values with a % content less than epsilon, which are not visible in this
+   * view
    *
    * @return a map of metals -> unit values
    */
@@ -340,8 +340,8 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
     double actualTotalAmount = getAmountAccurately();
     for (Metal metal : Sets.union(recipe.getMetals().keySet(), metals.keySet())) {
       if (!metals.containsKey(metal) || !recipe.getMetals().containsKey(metal) || !recipe.getMetals()
-              .get(metal)
-              .test(metals.get(metal) / actualTotalAmount)) {
+                                                                                         .get(metal)
+                                                                                         .test(metals.get(metal) / actualTotalAmount)) {
         return false;
       }
     }

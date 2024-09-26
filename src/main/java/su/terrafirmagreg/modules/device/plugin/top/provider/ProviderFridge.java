@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -37,7 +36,7 @@ public final class ProviderFridge implements IProbeInfoProvider {
 
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
-          IBlockState state, IProbeHitData hitData) {
+                           IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
     if (block instanceof BlockFridge) {
@@ -53,18 +52,19 @@ public final class ProviderFridge implements IProbeInfoProvider {
 
       IProbeInfo horizontalPane = info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
       horizontalPane.text(
-              new TextComponentTranslation(ModUtils.localize("top", "device.fridge.efficiency"),
-                      (int) tile.getEfficiency()).getFormattedText());
+        new TextComponentTranslation(ModUtils.localize("top", "device.fridge.efficiency"),
+                                     (int) tile.getEfficiency()).getFormattedText());
+
       if (tile.isOpen()) {
         int slot = BlockFridge.getPlayerLookingItem(pos.down(), player,
-                state.getValue(HORIZONTAL));
+                                                    state.getValue(HORIZONTAL));
         if (slot > -1) {
           ItemStack stack = tile.getSlot(slot);
           if (!stack.isEmpty()) {
             info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                    .item(stack)
-                    .vertical()
-                    .itemLabel(stack);
+                .item(stack)
+                .vertical()
+                .itemLabel(stack);
             IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
             List<String> list = new ArrayList<>();
             if (cap != null) {

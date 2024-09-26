@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.capabilities.food;
 
-import su.terrafirmagreg.api.util.GameUtils;
+import su.terrafirmagreg.api.util.TranslatorUtil;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
@@ -17,7 +17,6 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -42,9 +41,9 @@ public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
   float getDecayDateModifier();
 
   /**
-   * Called from {@link net.dries007.tfc.CommonEventHandler#attachItemCapabilities(AttachCapabilitiesEvent)} If the item is a food capability item, and it was created
-   * before the post configureModules, we assume that it is a technical stack, and will not appear in the world without a copy. As such, we set it to non-decaying.
-   * This is NOT SERIALIZED on the capability - as a result it will not persist across {@link ItemStack#copy()}, See TerraFirmaCraft#458
+   * Called from {@link net.dries007.tfc.CommonEventHandler#attachItemCapabilities(AttachCapabilitiesEvent)} If the item is a food capability item, and it was
+   * created before the post configureModules, we assume that it is a technical stack, and will not appear in the world without a copy. As such, we set it to
+   * non-decaying. This is NOT SERIALIZED on the capability - as a result it will not persist across {@link ItemStack#copy()}, See TerraFirmaCraft#458
    */
   void setNonDecaying();
 
@@ -56,7 +55,7 @@ public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
    */
   @SideOnly(Side.CLIENT)
   default void addTooltipInfo(@NotNull ItemStack stack, @NotNull List<String> text,
-          @Nullable EntityPlayer player) {
+                              @Nullable EntityPlayer player) {
     // Expiration dates
     if (isRotten()) {
       text.add(TextFormatting.RED + I18n.format("tfc.tooltip.food_rotten"));
@@ -67,7 +66,7 @@ public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
       } else {
         // Date food rots on.
         long rottenCalendarTime =
-                rottenDate - Calendar.PLAYER_TIME.getTicks() + Calendar.CALENDAR_TIME.getTicks();
+          rottenDate - Calendar.PLAYER_TIME.getTicks() + Calendar.CALENDAR_TIME.getTicks();
         // Days till food rots.
         long daysToRotInTicks = rottenCalendarTime - Calendar.CALENDAR_TIME.getTicks();
         switch (ConfigFood.MISC.DECAY.tooltipMode) {
@@ -75,21 +74,21 @@ public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
             break;
           case EXPIRATION_ONLY:
             text.add(TextFormatting.DARK_GREEN + I18n.format("tfc.tooltip.food_expiry_date",
-                    ICalendarFormatted.getTimeAndDate(rottenCalendarTime,
-                            Calendar.CALENDAR_TIME.getDaysInMonth())));
+                                                             ICalendarFormatted.getTimeAndDate(rottenCalendarTime,
+                                                                                               Calendar.CALENDAR_TIME.getDaysInMonth())));
             break;
           case TIME_REMAINING_ONLY:
             text.add(TextFormatting.BLUE +
-                    I18n.format("tfc.tooltip.food_expiry_date.days",
-                            String.valueOf(ICalendar.getTotalDays(daysToRotInTicks))));
+                     I18n.format("tfc.tooltip.food_expiry_date.days",
+                                 String.valueOf(ICalendar.getTotalDays(daysToRotInTicks))));
             break;
           case ALL_INFO:
             text.add(TextFormatting.DARK_GREEN + I18n.format("tfc.tooltip.food_expiry_date",
-                    ICalendarFormatted.getTimeAndDate(rottenCalendarTime,
-                            Calendar.CALENDAR_TIME.getDaysInMonth())));
+                                                             ICalendarFormatted.getTimeAndDate(rottenCalendarTime,
+                                                                                               Calendar.CALENDAR_TIME.getDaysInMonth())));
             text.add(TextFormatting.BLUE +
-                    I18n.format("tfc.tooltip.food_expiry_date.days",
-                            String.valueOf(ICalendar.getTotalDays(daysToRotInTicks))));
+                     I18n.format("tfc.tooltip.food_expiry_date.days",
+                                 String.valueOf(ICalendar.getTotalDays(daysToRotInTicks))));
             break;
         }
       }
@@ -107,19 +106,19 @@ public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
       if (saturation > 0) {
         // This display makes it so 100% saturation means a full hunger bar worth of saturation.
         text.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.nutrition_saturation",
-                String.format("%d", (int) (saturation * 5))));
+                                                   String.format("%d", (int) (saturation * 5))));
       }
       float water = getData().getWater();
       if (water > 0) {
         text.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.nutrition_water",
-                String.format("%d", (int) water)));
+                                                   String.format("%d", (int) water)));
       }
       for (Nutrient nutrient : Nutrient.values()) {
         float value = getData().getNutrients()[nutrient.ordinal()];
         if (value > 0) {
           text.add(nutrient.getColor() +
-                  I18n.format("tfc.tooltip.nutrition_nutrient",
-                          I18n.format(GameUtils.getEnumName(nutrient)), String.format("%.1f", value)));
+                   I18n.format("tfc.tooltip.nutrition_nutrient",
+                               I18n.format(TranslatorUtil.getEnumName(nutrient)), String.format("%.1f", value)));
         }
       }
     } else {

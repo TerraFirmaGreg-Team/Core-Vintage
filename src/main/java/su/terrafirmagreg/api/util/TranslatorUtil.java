@@ -1,18 +1,24 @@
 package su.terrafirmagreg.api.util;
 
+import com.google.common.base.Joiner;
+
+import lombok.experimental.UtilityClass;
+
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
-import lombok.experimental.UtilityClass;
+import su.terrafirmagreg.data.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @UtilityClass
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "deprecation"})
 public final class TranslatorUtil {
+
+  private static final Joiner JOINER_DOT = Joiner.on('.');
 
   public static String translate(String key) {
     if (GameUtils.isClient()) {
@@ -20,6 +26,15 @@ public final class TranslatorUtil {
     } else {
       return key;
     }
+  }
+
+  public static String getEnumName(Enum<?> anEnum) {
+    return JOINER_DOT.join(Constants.MODID_TFC, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
+  }
+
+  public static String getTypeName(IForgeRegistryEntry<?> type) {
+    //noinspection ConstantConditions
+    return JOINER_DOT.join(Constants.MODID_TFC, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
   }
 
   /**
@@ -40,7 +55,7 @@ public final class TranslatorUtil {
    * The same as autoBreak, but it also respects break character ($) for manual line breaking in addition to the automatic ones
    */
   public static List<String> autoBreakWithParagraphs(FontRenderer fontRenderer, String text,
-          int width) {
+                                                     int width) {
 
     String[] paragraphs = text.split("\\$");
     List<String> lines = new ArrayList<>();
@@ -84,6 +99,41 @@ public final class TranslatorUtil {
     }
 
     return lines;
+  }
+
+  public static String translateString(String key, Object... vars) {
+    String result = translateToLocal(key);
+
+    for (int i = 0; i < vars.length; i++) {
+      String optionCheck = "[%" + (i + 1) + "->";
+      int pos = result.indexOf(optionCheck);
+
+      if (pos != -1) {
+        int endPos = result.indexOf("]");
+        if (endPos != -1) {
+          String[] options = result.substring(pos + optionCheck.length(), endPos).split("\\|");
+          int pickedOption = ((boolean) vars[i]) ? 1 : 0;
+          if (options.length > pickedOption) {
+            String opt = options[pickedOption];
+            result = result.substring(0, pos) + opt + result.substring(endPos + 1);
+
+            i--;
+          }
+        }
+      } else {
+        result = result.replace("[%" + (i + 1) + "]", String.valueOf(vars[i]));
+      }
+    }
+
+    return result;
+  }
+
+  public static String translateToLocal(String key) {
+    if (net.minecraft.util.text.translation.I18n.canTranslate(key)) {
+      return net.minecraft.util.text.translation.I18n.translateToLocal(key);
+    } else {
+      return net.minecraft.util.text.translation.I18n.translateToFallback(key);
+    }
   }
 
   public static TextComponentString formatMessage(String unformattedText) {

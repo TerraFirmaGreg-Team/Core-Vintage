@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:raw/rhyolite"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

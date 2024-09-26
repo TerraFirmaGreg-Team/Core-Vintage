@@ -4,7 +4,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.entity.animal.EntityAlpacaTFC;
 import net.dries007.tfc.objects.entity.animal.EntityBlackBearTFC;
@@ -105,6 +104,6 @@ public class EntitiesTFC {
   private static void registerLiving(String name, Class<? extends Entity> cls, int eggPrimaryColor, int eggSecondaryColor) {
     //Register entity and create a spawn egg for creative
     EntityRegistry.registerModEntity(new ResourceLocation(MODID_TFC, name), cls, name, id++, TerraFirmaCraft.getInstance(), 80, 3, true,
-            eggPrimaryColor, eggSecondaryColor);
+                                     eggPrimaryColor, eggSecondaryColor);
   }
 }

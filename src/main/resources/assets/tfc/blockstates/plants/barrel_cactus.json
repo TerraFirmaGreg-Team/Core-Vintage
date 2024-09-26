@@ -10,8 +10,7 @@
           "model": "tfc:plants/barrel_cactus_small"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower"
       },
@@ -20,8 +19,7 @@
           "model": "tfc:plants/barrel_cactus_lower"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "middle"
       },
@@ -30,8 +28,7 @@
           "model": "tfc:plants/barrel_cactus_middle"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "1|2|3",
         "part": "single"
@@ -41,8 +38,7 @@
           "model": "tfc:plants/barrel_cactus_single"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper"
       },
@@ -51,8 +47,7 @@
           "model": "tfc:plants/barrel_cactus_upper"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "1"
@@ -62,8 +57,7 @@
           "model": "tfc:plants/barrel_cactus_flower_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "1",
         "part": "single",
@@ -74,8 +68,7 @@
           "model": "tfc:plants/barrel_cactus_flower_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "0|1",
         "part": "upper",
@@ -86,8 +79,7 @@
           "model": "tfc:plants/barrel_cactus_flower_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2|3",
         "part": "single|upper",
@@ -98,8 +90,7 @@
           "model": "tfc:plants/barrel_cactus_flower_2"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "1|2|3",
         "part": "single",
@@ -110,8 +101,7 @@
           "model": "tfc:plants/barrel_cactus_flower_3"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "3"

@@ -21,7 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import lyeoj.tfcthings.init.TFCThingsBlocks;
 import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
 import lyeoj.tfcthings.main.ConfigTFCThings;
@@ -83,11 +82,11 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
   }
 
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     if (playerIn.isSneaking()) {
       if (worldIn.getBlockState(pos.up())
-              .getBlock() instanceof BlockRopeLadder && worldIn.getBlockState(pos.down())
-              .getBlock() instanceof BlockRopeLadder) {
+                 .getBlock() instanceof BlockRopeLadder && worldIn.getBlockState(pos.down())
+                                                                  .getBlock() instanceof BlockRopeLadder) {
         return false;
       }
       BlockPos next = pos;
@@ -110,7 +109,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
   }
 
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer) {
+                                          EntityLivingBase placer) {
     if (worldIn.getBlockState(pos.down()).getBlock() instanceof BlockRopeLadder) {
       return this.getDefaultState().withProperty(FACING, worldIn.getBlockState(pos.down()).getValue(FACING));
     }
@@ -130,7 +129,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
     IBlockState iblockstate = p_193392_1_.getBlockState(p_193392_2_);
     boolean flag = isExceptBlockForAttachWithPiston(iblockstate.getBlock());
     return !flag && iblockstate.getBlockFaceShape(p_193392_1_, p_193392_2_, p_193392_3_) == BlockFaceShape.SOLID &&
-            !iblockstate.canProvidePower();
+           !iblockstate.canProvidePower();
   }
 
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
@@ -143,7 +142,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
       nextPos = nextPos.down();
       if (worldIn.getBlockState(nextPos).getBlock().isReplaceable(worldIn, nextPos) && nextPos.getY() >= 0) {
         worldIn.setBlockState(nextPos, TFCThingsBlocks.ROPE_LADDER_BLOCK.getDefaultState()
-                .withProperty(FACING, state.getValue(FACING)));
+                                                                        .withProperty(FACING, state.getValue(FACING)));
         if (!((EntityPlayer) placer).isCreative()) {
           stack.shrink(1);
         }
@@ -160,7 +159,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
     while (!ladderStack.isEmpty()) {
       if (worldIn.getBlockState(nextPos).getBlock().isReplaceable(worldIn, nextPos) && nextPos.getY() >= 0) {
         worldIn.setBlockState(nextPos, TFCThingsBlocks.ROPE_LADDER_BLOCK.getDefaultState()
-                .withProperty(FACING, state.getValue(FACING)));
+                                                                        .withProperty(FACING, state.getValue(FACING)));
         if (!((EntityPlayer) placer).isCreative()) {
           ladderStack.shrink(1);
         }
@@ -189,7 +188,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
     for (int i = 0; i < player.inventory.getSizeInventory(); ++i) {
       ItemStack itemstack = player.inventory.getStackInSlot(i);
       if (!itemstack.isEmpty() && itemstack.getItem() instanceof ItemBlock &&
-              ((ItemBlock) itemstack.getItem()).getBlock() instanceof BlockRopeLadder) {
+          ((ItemBlock) itemstack.getItem()).getBlock() instanceof BlockRopeLadder) {
         return itemstack;
       }
     }

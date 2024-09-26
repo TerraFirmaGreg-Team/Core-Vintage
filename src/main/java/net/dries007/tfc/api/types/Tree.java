@@ -15,7 +15,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.Helpers;
@@ -54,14 +53,14 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree> {
   private ITreeGenerator generator;
 
   /**
-   * This is a registry object that will create a number of things: 1. Wood logs, planks, and leaf blocks, and all the respective variants 2. A Tree object to be used
-   * in TFC world gen
+   * This is a registry object that will create a number of things: 1. Wood logs, planks, and leaf blocks, and all the respective variants 2. A Tree object to
+   * be used in TFC world gen
    * <p>
    * Addon mods that want to add trees should subscribe to the registry event for this class They also must put (in their mod) the required resources in
    * /assets/tfc/...
    * <p>
-   * When using this class, use the provided Builder to create your trees. This will require all the default values, as well as provide optional values that you can
-   * change
+   * When using this class, use the provided Builder to create your trees. This will require all the default values, as well as provide optional values that you
+   * can change
    *
    * @param name             the ResourceLocation registry name of this tree
    * @param generator        the generator that should be called to generate this tree, both during world gen and when growing from a sapling
@@ -82,8 +81,8 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree> {
    * @param burnTicks        the number of ticks that this will burn in a fire pit or similar
    */
   public Tree(@NotNull ResourceLocation name, @NotNull ITreeGenerator generator, float minTemp, float maxTemp, float minRain, float maxRain,
-          float minDensity, float maxDensity, float dominance, int maxGrowthRadius, int maxHeight, int maxDecayDistance, boolean isConifer,
-          @Nullable ITreeGenerator bushGenerator, boolean canMakeTannin, float minGrowthTime, float burnTemp, int burnTicks) {
+              float minDensity, float maxDensity, float dominance, int maxGrowthRadius, int maxHeight, int maxDecayDistance, boolean isConifer,
+              @Nullable ITreeGenerator bushGenerator, boolean canMakeTannin, float minGrowthTime, float burnTemp, int burnTicks) {
     this.minTemp = minTemp;
     this.maxTemp = maxTemp;
     this.minRain = minRain;
@@ -180,7 +179,7 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree> {
       tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));
       tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) minRain, (int) maxRain));
       tooltip.add(TextFormatting.GOLD +
-              I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", minTemp), String.format("%.1f", maxTemp)));
+                  I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", minTemp), String.format("%.1f", maxTemp)));
     } else {
       tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.hold_shift_for_climate_info"));
     }
@@ -293,7 +292,7 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree> {
 
     public Tree build() {
       return new Tree(name, gen, minTemp, maxTemp, minRain, maxRain, minDensity, maxDensity, dominance, maxGrowthRadius, maxHeight,
-              maxDecayDistance, isConifer, bushGenerator, canMakeTannin, minGrowthTime, burnTemp, burnTicks);
+                      maxDecayDistance, isConifer, bushGenerator, canMakeTannin, minGrowthTime, burnTemp, burnTicks);
     }
   }
 }

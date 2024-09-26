@@ -27,7 +27,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -66,7 +65,7 @@ public class ItemGoldPan extends ItemTFC {
 
   @Override
   public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                    float hitZ) {
     if (hand != EnumHand.MAIN_HAND) {
       return EnumActionResult.PASS;
     }
@@ -85,7 +84,7 @@ public class ItemGoldPan extends ItemTFC {
     } else if (OreDictionaryHelper.doesStackMatchOre(stackAt, "gravel")) {
       stack.setItemDamage(2);
     } else if (OreDictionaryHelper.doesStackMatchOre(stackAt, "blockClayDirt") ||
-            OreDictionaryHelper.doesStackMatchOre(stackAt, "blockClayGrass")) {
+               OreDictionaryHelper.doesStackMatchOre(stackAt, "blockClayGrass")) {
       stack.setItemDamage(3);
     } else if (OreDictionaryHelper.doesStackMatchOre(stackAt, "dirt") || OreDictionaryHelper.doesStackMatchOre(stackAt, "grass")) {
       stack.setItemDamage(4);
@@ -142,16 +141,16 @@ public class ItemGoldPan extends ItemTFC {
             if (chunkData.canWork(6)) {
               if (damage == 1 || damage == 2) {
                 Random rand = new Random(
-                        world.getSeed() + chunk.getPos().x * 241179128412L + chunk.getPos().z * 327910215471L);
+                  world.getSeed() + chunk.getPos().x * 241179128412L + chunk.getPos().z * 327910215471L);
                 TFCRegistries.ORES.getValuesCollection()
-                        .stream()
-                        .filter(Ore::canPan)
-                        .filter(x -> rand.nextDouble() < x.getChunkChance())
-                        .forEach(x -> {
-                          if (RNG.nextDouble() < x.getPanChance()) {
-                            StackUtils.spawnItemStack(world, position, new ItemStack(ItemSmallOre.get(x)));
-                          }
-                        });
+                                  .stream()
+                                  .filter(Ore::canPan)
+                                  .filter(x -> rand.nextDouble() < x.getChunkChance())
+                                  .forEach(x -> {
+                                    if (RNG.nextDouble() < x.getPanChance()) {
+                                      StackUtils.spawnItemStack(world, position, new ItemStack(ItemSmallOre.get(x)));
+                                    }
+                                  });
                 // player.inventory.setInventorySlotContents(player.inventory.currentItem, stack); //only way to get it to refresh! <- do we really *need* this?
               } else if (damage == 3 || damage == 4) {
                 var rock = chunkData.getRockHeight(position);
@@ -175,7 +174,7 @@ public class ItemGoldPan extends ItemTFC {
             world.playSound(null, entityLiving.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);
           } else {
             player.getCooldownTracker()
-                    .setCooldown(stack.getItem(), ConfigTFC.Devices.GOLD_PAN.cooldownTicks);
+                  .setCooldown(stack.getItem(), ConfigTFC.Devices.GOLD_PAN.cooldownTicks);
           }
         }
       }

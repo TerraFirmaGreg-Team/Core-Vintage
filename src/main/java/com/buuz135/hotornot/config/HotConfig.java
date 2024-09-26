@@ -9,7 +9,6 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEve
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
 import com.buuz135.hotornot.HotOrNot;
 import com.buuz135.hotornot.network.PacketClientSettings;
 
@@ -22,7 +21,7 @@ public class HotConfig {
 
   @LangKey("config." + MODID_HOTORNOT + ".manual_entries")
   @Comment("Configuration for manually added items." +
-          "Items are in the format <mod_id>:<registry_name> same as what you see in F3 + H")
+           "Items are in the format <mod_id>:<registry_name> same as what you see in F3 + H")
   public static final ManualEntries MANUAL_ENTRIES = new ManualEntries();
 
   @LangKey("config." + MODID_HOTORNOT + ".temperature_values")

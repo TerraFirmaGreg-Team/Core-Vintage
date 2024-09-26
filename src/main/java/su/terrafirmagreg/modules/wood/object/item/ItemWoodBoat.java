@@ -25,7 +25,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-
 import lombok.Getter;
 
 import java.util.List;
@@ -42,13 +41,13 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
     this.variant = variant;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .weight(Weight.MEDIUM)
-            .size(Size.LARGE)
-            .notCanStack()
-            .oreDict(variant)
-            .oreDict(variant, type);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .weight(Weight.MEDIUM)
+      .size(Size.LARGE)
+      .notCanStack()
+      .oreDict(variant)
+      .oreDict(variant, type);
   }
 
   /**
@@ -56,14 +55,14 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
    */
   @Override
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn,
-          EnumHand handIn) {
+                                                  EnumHand handIn) {
     ItemStack itemstack = playerIn.getHeldItem(handIn);
     float f = 1.0F;
     float f1 = playerIn.prevRotationPitch + (playerIn.rotationPitch - playerIn.prevRotationPitch);
     float f2 = playerIn.prevRotationYaw + (playerIn.rotationYaw - playerIn.prevRotationYaw);
     double d0 = playerIn.prevPosX + (playerIn.posX - playerIn.prevPosX);
     double d1 =
-            playerIn.prevPosY + (playerIn.posY - playerIn.prevPosY) + (double) playerIn.getEyeHeight();
+      playerIn.prevPosY + (playerIn.posY - playerIn.prevPosY) + (double) playerIn.getEyeHeight();
     double d2 = playerIn.prevPosZ + (playerIn.posZ - playerIn.prevPosZ);
 
     Vec3d vec3d = new Vec3d(d0, d1, d2);
@@ -83,14 +82,14 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
       Vec3d vec3d2 = playerIn.getLook(1.0F);
       boolean flag = false;
       List<Entity> list = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn,
-              playerIn.getEntityBoundingBox()
-                      .expand(vec3d2.x * 5.0D, vec3d2.y * 5.0D, vec3d2.z * 5.0D)
-                      .grow(1.0D));
+                                                                       playerIn.getEntityBoundingBox()
+                                                                               .expand(vec3d2.x * 5.0D, vec3d2.y * 5.0D, vec3d2.z * 5.0D)
+                                                                               .grow(1.0D));
 
       for (Entity entity : list) {
         if (entity.canBeCollidedWith()) {
           AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox()
-                  .grow(entity.getCollisionBorderSize());
+                                              .grow(entity.getCollisionBorderSize());
 
           if (axisalignedbb.contains(vec3d)) {
             flag = true;
@@ -106,14 +105,14 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
         Block block = worldIn.getBlockState(raytraceresult.getBlockPos()).getBlock();
         boolean flag1 = block == Blocks.WATER || block == Blocks.FLOWING_WATER;
         EntityWoodBoat entityboat = new EntityWoodBoat(worldIn, raytraceresult.hitVec.x, flag1
-                ? raytraceresult.hitVec.y - 0.12D
-                : raytraceresult.hitVec.y, raytraceresult.hitVec.z);
+                                                                                         ? raytraceresult.hitVec.y - 0.12D
+                                                                                         : raytraceresult.hitVec.y, raytraceresult.hitVec.z);
         entityboat.setBoatType(EntityBoat.Type.OAK); // not sure if required
         entityboat.setWood(type);
         entityboat.rotationYaw = playerIn.rotationYaw;
 
         if (!worldIn.getCollisionBoxes(entityboat, entityboat.getEntityBoundingBox().grow(-0.1D))
-                .isEmpty()) {
+                    .isEmpty()) {
           return new ActionResult<>(EnumActionResult.FAIL, itemstack);
         } else {
           if (!worldIn.isRemote) {

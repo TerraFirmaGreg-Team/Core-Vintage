@@ -5,16 +5,16 @@ import net.minecraftforge.common.config.Config;
 public final class ConfigWoodMisc {
 
   @Config.Comment({
-          "Enable trees being fully cut by axes.",
-          "Disable it if you want other mods to handle tree felling."})
+    "Enable trees being fully cut by axes.",
+    "Disable it if you want other mods to handle tree felling."})
   public boolean enableFelling = true;
 
   @Config.Comment("Enable smacking logs with a hammer giving sticks.")
   public boolean enableHammerSticks = true;
 
   @Config.Comment({
-          "Should logs require tools (axes and saws, or hammers for sticks) to be cut? ",
-          "If false, breaking logs with an empty hand will not drop logs."})
+    "Should logs require tools (axes and saws, or hammers for sticks) to be cut? ",
+    "If false, breaking logs with an empty hand will not drop logs."})
   public boolean requiresAxe = true;
 
   @Config.Comment("If false, leaves will not drop saplings.")
@@ -34,7 +34,7 @@ public final class ConfigWoodMisc {
 
   @Config.Comment("Tool classes that have the configured bonus to drop more sticks when harvesting leaves.")
   public String[] leafStickDropChanceBonusClasses = {
-          "knife",
-          "scythe"
+    "knife",
+    "scythe"
   };
 }

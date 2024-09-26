@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:wood/log/aspen"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "saw"
     }

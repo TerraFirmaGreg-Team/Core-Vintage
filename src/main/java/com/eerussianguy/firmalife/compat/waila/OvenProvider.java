@@ -1,5 +1,6 @@
 package com.eerussianguy.firmalife.compat.waila;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.object.tile.TileOven;
 
 import net.minecraft.block.state.IBlockState;
@@ -9,7 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
-
 
 import com.eerussianguy.firmalife.recipe.OvenRecipe;
 import net.dries007.tfc.ConfigTFC;
@@ -32,7 +32,7 @@ public class OvenProvider implements IWailaBlock {
   public List<String> getTooltip(World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
     List<String> currentTooltip = new ArrayList<>();
     IBlockState state = world.getBlockState(pos);
-    var tile = world.getTileEntity(pos);
+    var tile = TileUtils.getTile(world, pos);
     if (tile instanceof TileOven oven) {
       ItemStack mainSlot = oven.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(SLOT_MAIN);
       OvenRecipe recipe = OvenRecipe.get(mainSlot);
@@ -53,7 +53,7 @@ public class OvenProvider implements IWailaBlock {
             break;
         }
         currentTooltip.add(new TextComponentTranslation(recipe.getOutputItem(mainSlot)
-                .getDisplayName()).getFormattedText());
+                                                              .getDisplayName()).getFormattedText());
         if (((TileOven) tile).isCuringRecipe()) {
           currentTooltip.add("Curing");
         }

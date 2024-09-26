@@ -9,8 +9,7 @@
           "model": "tfc:plants/small_red_bamboo"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "middle"
       },
@@ -19,8 +18,7 @@
           "model": "tfc:plants/small_red_bamboo_small_leaves"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper"
       },

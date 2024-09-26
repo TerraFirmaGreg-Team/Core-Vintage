@@ -10,7 +10,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-
 import net.dries007.tfc.util.agriculture.Food;
 
 import org.jetbrains.annotations.NotNull;

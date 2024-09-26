@@ -9,8 +9,7 @@
           "model": "tfc:plants/sugar_cane_lower"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "middle"
       },
@@ -19,8 +18,7 @@
           "model": "tfc:plants/sugar_cane_middle"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "single|upper"
       },

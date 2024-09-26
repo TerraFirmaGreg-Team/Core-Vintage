@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
 
-
 import java.util.Random;
 
 import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.AIR;
@@ -37,7 +36,7 @@ public class MapGenCaves extends MapGenBase {
 
   @Override
   protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int originalX,
-          int originalZ, ChunkPrimer primer) {
+                                   int originalZ, ChunkPrimer primer) {
     int runs = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(40) + 1) + 1);
     final int xCoord = chunkX * 16 + this.rand.nextInt(16);
     final int yCoord = this.rand.nextInt(1 + this.rand.nextInt(140)) + 60;
@@ -73,7 +72,7 @@ public class MapGenCaves extends MapGenBase {
       int runs2 = 1;
       if (this.rand.nextInt(4) == 0) {
         this.generateLargeCaveNode(this.rand.nextLong(), originalX, originalZ, primer, xCoord,
-                yCoord, zCoord);
+                                   yCoord, zCoord);
         runs2 += this.rand.nextInt(4);
       }
 
@@ -85,7 +84,7 @@ public class MapGenCaves extends MapGenBase {
           d3 *= this.rand.nextFloat() * this.rand.nextFloat() * 3.0F + 1.0F;
         }
         this.generateCaveNode(this.rand.nextLong(), originalX, originalZ, primer, xCoord, yCoord,
-                zCoord, d3, d1, d2, 0, 1.0D, width);
+                              zCoord, d3, d1, d2, 0, 1.0D, width);
       }
     }
   }
@@ -94,17 +93,17 @@ public class MapGenCaves extends MapGenBase {
    * Generates a larger initial cave node than usual. Called 25% of the time.
    */
   protected void generateLargeCaveNode(long seed, int chunkX, int chunkZ, ChunkPrimer primer,
-          double x, double y, double z) {
+                                       double x, double y, double z) {
     this.generateCaveNode(seed, chunkX, chunkZ, primer, x, y, z,
-            1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, 0.5D, 2.5D);
+                          1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, 0.5D, 2.5D);
   }
 
   /**
    * Generates a node in the current cave system recursion tree.
    */
   protected void generateCaveNode(long seed, int chunkX, int chunkZ, ChunkPrimer primer,
-          double xOffset, double yOffset, double zOffset, float f1,
-          float f2, float f3, int i1, double yRadiusMult, double width) {
+                                  double xOffset, double yOffset, double zOffset, float f1,
+                                  float f2, float f3, int i1, double yRadiusMult, double width) {
     final Random RNG = new Random(seed);
     final int worldX = chunkX * 16 + 8;
     final int worldZ = chunkZ * 16 + 8;
@@ -139,11 +138,11 @@ public class MapGenCaves extends MapGenBase {
 
       if (!onlyOne && i1 == rndRange2 && f1 > 1.0F && rndRange > 0) {
         this.generateCaveNode(RNG.nextLong(), chunkX, chunkZ, primer, xOffset, yOffset, zOffset,
-                RNG.nextFloat() * 0.5F + 0.5F,
-                f2 - ((float) Math.PI / 2F), f3 / 3.0F, i1, 1.0D, width);
+                              RNG.nextFloat() * 0.5F + 0.5F,
+                              f2 - ((float) Math.PI / 2F), f3 / 3.0F, i1, 1.0D, width);
         this.generateCaveNode(RNG.nextLong(), chunkX, chunkZ, primer, xOffset, yOffset, zOffset,
-                RNG.nextFloat() * 0.5F + 0.5F,
-                f2 + ((float) Math.PI / 2F), f3 / 3.0F, i1, 1.0D, width);
+                              RNG.nextFloat() * 0.5F + 0.5F,
+                              f2 + ((float) Math.PI / 2F), f3 / 3.0F, i1, 1.0D, width);
         return;
       }
 
@@ -156,14 +155,14 @@ public class MapGenCaves extends MapGenBase {
         final double var41 = f1 + 2.0F + 16.0F;
 
         if (localXOffset * localXOffset + localZOffset * localZOffset - var39 * var39
-                > var41 * var41) {
+            > var41 * var41) {
           return;
         }
 
         if (!(xOffset >= worldX - 16.0D - radius * 2.0D) || !(zOffset
-                >= worldZ - 16.0D - radius * 2.0D) ||
-                !(xOffset <= worldX + 16.0D + radius * 2.0D) || !(zOffset
-                <= worldZ + 16.0D + radius * 2.0D)) {
+                                                              >= worldZ - 16.0D - radius * 2.0D) ||
+            !(xOffset <= worldX + 16.0D + radius * 2.0D) || !(zOffset
+                                                              <= worldZ + 16.0D + radius * 2.0D)) {
           continue;
         }
 
@@ -198,7 +197,7 @@ public class MapGenCaves extends MapGenBase {
         for (int xCoord = Math.max(initialX - 1, 0); xCoord < Math.min(maxX + 1, 16); ++xCoord) {
           for (int zCoord = Math.max(initialZ - 1, 0); zCoord < Math.min(maxZ + 1, 16); ++zCoord) {
             for (int yCoord = Math.min(initialY + 1, 250); yCoord > Math.max(minY - 1, 0);
-                    --yCoord) {
+                 --yCoord) {
               if (BlockUtils.isWater(primer.getBlockState(xCoord, yCoord, zCoord))) {
                 continue outer;
               }
@@ -221,7 +220,7 @@ public class MapGenCaves extends MapGenBase {
             for (int y = initialY - 1; y >= minY; y--) {
               double yNorm = (y + 0.5D - yOffset) / yRadius;
               if (!(yNorm > -0.7D) || !(
-                      xDistNorm * xDistNorm + yNorm * yNorm + zDistNorm * zDistNorm < 1.0D)) {
+                xDistNorm * xDistNorm + yNorm * yNorm + zDistNorm * zDistNorm < 1.0D)) {
                 continue;
               }
 
@@ -236,18 +235,18 @@ public class MapGenCaves extends MapGenBase {
               }
 
               for (int upCount = 1;
-                      BlockUtils.isSoilOrGravel(primer.getBlockState(xCoord, y + upCount, zCoord));
-                      upCount++) {
+                   BlockUtils.isSoilOrGravel(primer.getBlockState(xCoord, y + upCount, zCoord));
+                   upCount++) {
                 primer.setBlockState(xCoord, y + upCount, zCoord, AIR);
               }
 
               if (y < 20 /* todo make option? was 10*/
-                      && stabilityLayer[(worldZ & 15) << 4 | (worldX & 15)].valueInt == 1) {
+                  && stabilityLayer[(worldZ & 15) << 4 | (worldX & 15)].valueInt == 1) {
                 primer.setBlockState(xCoord, y, zCoord, LAVA);
               } else {
                 primer.setBlockState(xCoord, y, zCoord, AIR);
                 if (grass != null && BlockUtils.isDirt(
-                        primer.getBlockState(xCoord, y - 1, zCoord))) {
+                  primer.getBlockState(xCoord, y - 1, zCoord))) {
                   primer.setBlockState(xCoord, y - 1, zCoord, grass);
                 }
               }

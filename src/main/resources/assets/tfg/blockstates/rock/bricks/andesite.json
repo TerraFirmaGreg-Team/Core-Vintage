@@ -14,13 +14,13 @@
     "inventory": [
       {}
     ],
-    "mossy" : {
-      "true" : {
+    "mossy": {
+      "true": {
         "textures": {
-        "overlay": "tfg:blocks/rock/overlay/mossy/bricks"
+          "overlay": "tfg:blocks/rock/overlay/mossy/bricks"
         }
       },
-      "false" : {}
+      "false": {}
     }
   }
 }

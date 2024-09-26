@@ -40,7 +40,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
-
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 
 import org.jetbrains.annotations.Nullable;
@@ -52,29 +51,42 @@ import static su.terrafirmagreg.data.Properties.LIT;
 import static su.terrafirmagreg.data.Properties.SEALED;
 
 /**
- * Powderkeg is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state property,
- * and cached in the TE (for gui purposes)
+ * Powderkeg is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state
+ * property, and cached in the TE (for gui purposes)
  */
 @SuppressWarnings("deprecation")
 public class BlockPowderKeg extends BaseBlockContainer {
 
   private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D,
-          1.0D, 0.875D);
+                                                                      1.0D, 0.875D);
 
   public BlockPowderKeg() {
     super(Settings.of(Material.WOOD));
 
     getSettings()
-            .registryKey("device/powderkeg")
-            .sound(SoundType.WOOD)
-            .hardness(2F)
-            .nonCube()
-            .randomTicks()
-            .weight(Weight.VERY_HEAVY);
+      .registryKey("device/powderkeg")
+      .sound(SoundType.WOOD)
+      .hardness(2F)
+      .nonCube()
+      .randomTicks()
+      .weight(Weight.VERY_HEAVY);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(LIT, false)
-            .withProperty(SEALED, false));
+                              .withProperty(LIT, false)
+                              .withProperty(SEALED, false));
+  }
+
+  /**
+   * Used to update the keg seal state and the TE, in the correct order
+   */
+  public static void togglePowderKegSeal(World world, BlockPos pos) {
+    var tile = TileUtils.getTile(world, pos, TilePowderKeg.class);
+    if (tile != null) {
+      IBlockState state = world.getBlockState(pos);
+      boolean previousSealed = state.getValue(SEALED);
+      world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
+      tile.setSealed(!previousSealed);
+    }
   }
 
   @Override
@@ -87,8 +99,8 @@ public class BlockPowderKeg extends BaseBlockContainer {
     var tile = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);
     if (tile != null && !tile.isLit()) {
       tile.onBreakBlock(worldIn, pos, state);
-      super.breakBlock(worldIn, pos, state);
     }
+    super.breakBlock(worldIn, pos, state);
   }
 
   @Override
@@ -96,12 +108,12 @@ public class BlockPowderKeg extends BaseBlockContainer {
     return getDefaultState().withProperty(SEALED, meta == 1);
   }
 
+  // Cannot use onExplosionDestroy like TNT because all state has already been lost at that point.
+
   @Override
   public int getMetaFromState(IBlockState state) {
     return state.getValue(SEALED) ? 1 : 0;
   }
-
-  // Cannot use onExplosionDestroy like TNT because all state has already been lost at that point.
 
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -120,11 +132,11 @@ public class BlockPowderKeg extends BaseBlockContainer {
       int fuse = tile.getFuse();
       if (rng.nextInt(6) == 0 && fuse > 20) {
         world.playSound(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
-                SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F,
-                rng.nextFloat() * 1.3F + 0.3F / fuse, false);
+                        SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F,
+                        rng.nextFloat() * 1.3F + 0.3F / fuse, false);
       }
       world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.625, pos.up()
-              .getY() + 0.125, pos.getZ() + 0.375, 0.0D, 1.0D + 1.0D / fuse, 0.0D);
+                                                                                 .getY() + 0.125, pos.getZ() + 0.375, 0.0D, 1.0D + 1.0D / fuse, 0.0D);
     }
   }
 
@@ -136,16 +148,16 @@ public class BlockPowderKeg extends BaseBlockContainer {
   }
 
   /**
-   * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor change. Cases may include when redstone power
-   * is updated, cactus blocks popping off due to a neighboring solid block, etc.
+   * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor change. Cases may include when redstone
+   * power is updated, cactus blocks popping off due to a neighboring solid block, etc.
    */
   @Override
   public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     if (world.isBlockPowered(pos) || world.getBlockState(fromPos).getMaterial() == Material.FIRE) {
       onPlayerDestroy(world, pos, state.withProperty(LIT, true));
     } else if (state.getValue(LIT) && pos.up().equals(fromPos) && world.getBlockState(fromPos)
-            .getMaterial() == Material.WATER) {
+                                                                       .getMaterial() == Material.WATER) {
       var tile = TileUtils.getTile(world, pos, TilePowderKeg.class);
       if (tile != null) {
         world.setBlockState(pos, state.withProperty(LIT, false));
@@ -155,11 +167,11 @@ public class BlockPowderKeg extends BaseBlockContainer {
   }
 
   public void trigger(World worldIn, BlockPos pos, IBlockState state,
-          @Nullable EntityLivingBase igniter) {
+                      @Nullable EntityLivingBase igniter) {
     if (!worldIn.isRemote) {
       var tile = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);
       if (tile != null && state.getValue(SEALED) && state.getValue(LIT)
-              && tile.getStrength() > 0) //lit state set before called
+          && tile.getStrength() > 0) //lit state set before called
       {
         worldIn.setBlockState(pos, state);
         tile.setLit(true);
@@ -181,7 +193,7 @@ public class BlockPowderKeg extends BaseBlockContainer {
 
   @Override
   public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance,
-          int fortune) {
+                                        int fortune) {
     if (state.getBlock() == this && !state.getValue(SEALED)) {
       super.dropBlockAsItemWithChance(world, pos, state, chance, fortune);
     }
@@ -197,8 +209,8 @@ public class BlockPowderKeg extends BaseBlockContainer {
    */
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                  float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       ItemStack heldItem = playerIn.getHeldItem(hand);
       var tile = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);
@@ -208,7 +220,7 @@ public class BlockPowderKeg extends BaseBlockContainer {
           tile.setLit(false);
         } else if (heldItem.isEmpty() && playerIn.isSneaking()) {
           worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
-                  0.85F);
+                            0.85F);
           togglePowderKegSeal(worldIn, pos);
         } else if (state.getValue(SEALED) && BlockTorchTFC.canLight(heldItem)) {
           if (!state.getValue(LIT)) {
@@ -230,19 +242,6 @@ public class BlockPowderKeg extends BaseBlockContainer {
   }
 
   /**
-   * Used to update the keg seal state and the TE, in the correct order
-   */
-  public static void togglePowderKegSeal(World world, BlockPos pos) {
-    var tile = TileUtils.getTile(world, pos, TilePowderKeg.class);
-    if (tile != null) {
-      IBlockState state = world.getBlockState(pos);
-      boolean previousSealed = state.getValue(SEALED);
-      world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
-      tile.setSealed(!previousSealed);
-    }
-  }
-
-  /**
    * Called When an Entity Collided with the Block
    */
   @Override
@@ -252,14 +251,14 @@ public class BlockPowderKeg extends BaseBlockContainer {
       if (entityarrow.isBurning()) {
         trigger(worldIn, pos, worldIn.getBlockState(pos).withProperty(LIT, true),
                 entityarrow.shootingEntity instanceof EntityLivingBase
-                        ? (EntityLivingBase) entityarrow.shootingEntity : null);
+                ? (EntityLivingBase) entityarrow.shootingEntity : null);
       }
     }
   }
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-          EntityLivingBase placer, ItemStack stack) {
+                              EntityLivingBase placer, ItemStack stack) {
     // If the keg was sealed, then copy the contents from the item
     if (!worldIn.isRemote) {
       NBTTagCompound nbt = stack.getTagCompound();
@@ -291,7 +290,7 @@ public class BlockPowderKeg extends BaseBlockContainer {
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
-          ITooltipFlag flagIn) {
+                             ITooltipFlag flagIn) {
     NBTTagCompound nbt = stack.getTagCompound();
     if (nbt != null) {
       ItemStackHandler stackHandler = new ItemStackHandler();
@@ -310,15 +309,15 @@ public class BlockPowderKeg extends BaseBlockContainer {
       } else {
         ItemStack itemStack = stackHandler.getStackInSlot(firstSlot);
         tooltip.add(
-                I18n.format(ModUtils.localize("tooltip", "powderkeg_amount"), count, itemStack.getItem()
-                        .getItemStackDisplayName(itemStack)));
+          I18n.format(ModUtils.localize("tooltip", "powderkeg_amount"), count, itemStack.getItem()
+                                                                                        .getItemStackDisplayName(itemStack)));
       }
     }
   }
 
   @Override
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
-          IBlockState state, int fortune) {
+                       IBlockState state, int fortune) {
     // Only drop the keg if it's not sealed, since the keg with contents will be already dropped by the TE
     if (!state.getValue(SEALED)) {
       super.getDrops(drops, world, pos, state, fortune);
@@ -332,7 +331,7 @@ public class BlockPowderKeg extends BaseBlockContainer {
   public void onBlockExploded(World worldIn, BlockPos pos, Explosion explosionIn) {
     var tile = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);
     if (!worldIn.isRemote && tile != null
-            && tile.getStrength() > 0) // explode even if not sealed cause gunpowder
+        && tile.getStrength() > 0) // explode even if not sealed cause gunpowder
     {
       trigger(worldIn, pos,
               worldIn.getBlockState(pos).withProperty(SEALED, true).withProperty(LIT, true), null);
@@ -343,7 +342,7 @@ public class BlockPowderKeg extends BaseBlockContainer {
 
   @Override
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-          EntityPlayer player) {
+                                EntityPlayer player) {
     var tile = TileUtils.getTile(world, pos, TilePowderKeg.class);
     if (tile != null) {
       return tile.getItemStack(state);
@@ -353,13 +352,13 @@ public class BlockPowderKeg extends BaseBlockContainer {
 
   private boolean canStay(IBlockAccess world, BlockPos pos) {
     boolean solid = world.getBlockState(pos.down())
-            .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+                         .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
     return solid || world.getBlockState(pos.down()).getBlock() instanceof BlockPowderKeg;
   }
 
   @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-          EnumFacing face) {
+                                          EnumFacing face) {
     return BlockFaceShape.UNDEFINED;
   }
 
@@ -371,7 +370,7 @@ public class BlockPowderKeg extends BaseBlockContainer {
   @Override
   public Size getSize(ItemStack stack) {
     return stack.getTagCompound() == null ? Size.VERY_LARGE
-            : Size.HUGE; // Causes overburden if sealed
+                                          : Size.HUGE; // Causes overburden if sealed
   }
 
   @Override

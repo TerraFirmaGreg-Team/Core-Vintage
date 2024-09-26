@@ -21,7 +21,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
-
 import net.dries007.tfc.api.recipes.GlassworkingRecipe;
 import net.dries007.tfc.api.recipes.SmelteryRecipe;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
@@ -73,19 +72,19 @@ public final class TechRecipes {
   @SubscribeEvent
   public static void onRegisterHeatRecipeEvent(RegistryEvent.Register<HeatRecipe> event) {
     event.getRegistry().registerAll(
-            new HeatRecipeSimple(IIngredient.of(new ItemStack(TechItems.RUBBER_MIX)), new ItemStack(TechItems.RUBBER), 600f,
-                    Metal.Tier.TIER_I).setRegistryName("rubber"),
-            new HeatRecipeSimple(IIngredient.of(new ItemStack(TechItems.UNFIRED_RACKWHEEL_PIECE)), new ItemStack(TechItems.MOLD_RACKWHEEL_PIECE),
-                    1599f, Metal.Tier.TIER_I).setRegistryName("fired_mold_rackwheel"),
-            new HeatRecipeSimple(IIngredient.of(new ItemStack(TechItems.UNFIRED_SLEEVE)), new ItemStack(TechItems.MOLD_SLEEVE), 1599f,
-                    Metal.Tier.TIER_I).setRegistryName("fired_mold_sleeve"),
-            new HeatRecipeSimple(IIngredient.of(new ItemStack(TechItems.ASH_POT)), new ItemStack(TechItems.POTASH_POT), 500f,
-                    Metal.Tier.TIER_I).setRegistryName("potash_pot"),
-            new HeatRecipeSimple(IIngredient.of("rockFlux"), new ItemStack(TechItems.LIME, 2), 600f, Metal.Tier.TIER_I).setRegistryName("lime"),
-            new HeatRecipeSimple(IIngredient.of(new ItemStack(TechItems.UNFIRED_MOLD_PANE)), new ItemStack(TechItems.MOLD_PANE), 1599f,
-                    Metal.Tier.TIER_I).setRegistryName("fired_mold_pane"),
-            new HeatRecipeSimple(IIngredient.of(new ItemStack(TechItems.UNFIRED_MOLD_BLOCK)), new ItemStack(TechItems.MOLD_BLOCK), 1599f,
-                    Metal.Tier.TIER_I).setRegistryName("fired_mold_block")
+      new HeatRecipeSimple(IIngredient.of(new ItemStack(TechItems.RUBBER_MIX)), new ItemStack(TechItems.RUBBER), 600f,
+                           Metal.Tier.TIER_I).setRegistryName("rubber"),
+      new HeatRecipeSimple(IIngredient.of(new ItemStack(TechItems.UNFIRED_RACKWHEEL_PIECE)), new ItemStack(TechItems.MOLD_RACKWHEEL_PIECE),
+                           1599f, Metal.Tier.TIER_I).setRegistryName("fired_mold_rackwheel"),
+      new HeatRecipeSimple(IIngredient.of(new ItemStack(TechItems.UNFIRED_SLEEVE)), new ItemStack(TechItems.MOLD_SLEEVE), 1599f,
+                           Metal.Tier.TIER_I).setRegistryName("fired_mold_sleeve"),
+      new HeatRecipeSimple(IIngredient.of(new ItemStack(TechItems.ASH_POT)), new ItemStack(TechItems.POTASH_POT), 500f,
+                           Metal.Tier.TIER_I).setRegistryName("potash_pot"),
+      new HeatRecipeSimple(IIngredient.of("rockFlux"), new ItemStack(TechItems.LIME, 2), 600f, Metal.Tier.TIER_I).setRegistryName("lime"),
+      new HeatRecipeSimple(IIngredient.of(new ItemStack(TechItems.UNFIRED_MOLD_PANE)), new ItemStack(TechItems.MOLD_PANE), 1599f,
+                           Metal.Tier.TIER_I).setRegistryName("fired_mold_pane"),
+      new HeatRecipeSimple(IIngredient.of(new ItemStack(TechItems.UNFIRED_MOLD_BLOCK)), new ItemStack(TechItems.MOLD_BLOCK), 1599f,
+                           Metal.Tier.TIER_I).setRegistryName("fired_mold_block")
     );
 
     IForgeRegistryModifiable<HeatRecipe> modRegistry = (IForgeRegistryModifiable<HeatRecipe>) event.getRegistry();
@@ -100,26 +99,26 @@ public final class TechRecipes {
   public static void onRegisterAnvilRecipeEvent(RegistryEvent.Register<AnvilRecipe> event) {
     IForgeRegistry<AnvilRecipe> r = event.getRegistry();
     r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, "iron_groove"),
-            IIngredient.of(ItemTechMetal.get(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.STRIP)), new ItemStack(TechItems.IRON_GROOVE),
-            Metal.Tier.TIER_III, null, ForgeRule.HIT_LAST, ForgeRule.BEND_SECOND_LAST, ForgeRule.BEND_THIRD_LAST));
+                               IIngredient.of(ItemTechMetal.get(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.STRIP)), new ItemStack(TechItems.IRON_GROOVE),
+                               Metal.Tier.TIER_III, null, ForgeRule.HIT_LAST, ForgeRule.BEND_SECOND_LAST, ForgeRule.BEND_THIRD_LAST));
     r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, "iron_bowl_mount"),
-            IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.INGOT)), new ItemStack(TechItems.IRON_BOWL_MOUNT),
-            Metal.Tier.TIER_III, null, ForgeRule.BEND_LAST, ForgeRule.DRAW_SECOND_LAST, ForgeRule.BEND_NOT_LAST));
+                               IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.INGOT)), new ItemStack(TechItems.IRON_BOWL_MOUNT),
+                               Metal.Tier.TIER_III, null, ForgeRule.BEND_LAST, ForgeRule.DRAW_SECOND_LAST, ForgeRule.BEND_NOT_LAST));
 
     r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, "iron_tongs"),
-            IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.INGOT)), new ItemStack(TechItems.IRON_TONGS), Metal.Tier.TIER_III,
-            null, ForgeRule.HIT_LAST, ForgeRule.DRAW_SECOND_LAST, ForgeRule.BEND_THIRD_LAST));
+                               IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.INGOT)), new ItemStack(TechItems.IRON_TONGS), Metal.Tier.TIER_III,
+                               null, ForgeRule.HIT_LAST, ForgeRule.DRAW_SECOND_LAST, ForgeRule.BEND_THIRD_LAST));
     r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, "iron_draw_plate"),
-            IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.INGOT)), new ItemStack(TechItems.IRON_DRAW_PLATE),
-            Metal.Tier.TIER_III, null, ForgeRule.PUNCH_LAST, ForgeRule.PUNCH_SECOND_LAST, ForgeRule.HIT_ANY));
+                               IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.INGOT)), new ItemStack(TechItems.IRON_DRAW_PLATE),
+                               Metal.Tier.TIER_III, null, ForgeRule.PUNCH_LAST, ForgeRule.PUNCH_SECOND_LAST, ForgeRule.HIT_ANY));
     r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, "steel_draw_plate"), IIngredient.of(
-            ItemMetal.get(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "steel")), Metal.ItemType.INGOT)),
-            new ItemStack(TechItems.STEEL_DRAW_PLATE), Metal.Tier.TIER_IV, null, ForgeRule.PUNCH_LAST, ForgeRule.PUNCH_SECOND_LAST,
-            ForgeRule.HIT_ANY));
+      ItemMetal.get(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "steel")), Metal.ItemType.INGOT)),
+                               new ItemStack(TechItems.STEEL_DRAW_PLATE), Metal.Tier.TIER_IV, null, ForgeRule.PUNCH_LAST, ForgeRule.PUNCH_SECOND_LAST,
+                               ForgeRule.HIT_ANY));
     r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, "black_steel_draw_plate"), IIngredient.of(
-            ItemMetal.get(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "black_steel")), Metal.ItemType.INGOT)),
-            new ItemStack(TechItems.BLACK_STEEL_DRAW_PLATE), Metal.Tier.TIER_V, null, ForgeRule.PUNCH_LAST, ForgeRule.PUNCH_SECOND_LAST,
-            ForgeRule.HIT_ANY));
+      ItemMetal.get(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "black_steel")), Metal.ItemType.INGOT)),
+                               new ItemStack(TechItems.BLACK_STEEL_DRAW_PLATE), Metal.Tier.TIER_V, null, ForgeRule.PUNCH_LAST, ForgeRule.PUNCH_SECOND_LAST,
+                               ForgeRule.HIT_ANY));
 
     for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
       if (ObfuscationReflectionHelper.getPrivateValue(Metal.class, metal, "usable").equals(false)) {
@@ -136,8 +135,9 @@ public final class TechRecipes {
           if (!output.isEmpty()) {
             //noinspection ConstantConditions
             r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, (metal.getRegistryName()
-                    .getPath()).toLowerCase() + "_wire"), ingredient, output, metal.getTier(), null, ForgeRule.DRAW_LAST,
-                    ForgeRule.DRAW_NOT_LAST));
+                                                                                 .getPath()).toLowerCase()
+                                                                           + "_wire"), ingredient, output, metal.getTier(), null, ForgeRule.DRAW_LAST,
+                                       ForgeRule.DRAW_NOT_LAST));
           }
         }
       }
@@ -150,8 +150,9 @@ public final class TechRecipes {
         if (!output.isEmpty()) {
           //noinspection ConstantConditions
           r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, (metal.getRegistryName()
-                  .getPath()).toLowerCase() + "_long_rod"), ingredient, output, metal.getTier(), null, ForgeRule.HIT_LAST,
-                  ForgeRule.HIT_SECOND_LAST, ForgeRule.HIT_THIRD_LAST));
+                                                                               .getPath()).toLowerCase()
+                                                                         + "_long_rod"), ingredient, output, metal.getTier(), null, ForgeRule.HIT_LAST,
+                                     ForgeRule.HIT_SECOND_LAST, ForgeRule.HIT_THIRD_LAST));
         }
       }
 
@@ -163,8 +164,9 @@ public final class TechRecipes {
         if (!output.isEmpty()) {
           //noinspection ConstantConditions
           r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, (metal.getRegistryName()
-                  .getPath()).toLowerCase() + "_blowpipe"), ingredient, output, metal.getTier(), null, ForgeRule.BEND_LAST,
-                  ForgeRule.BEND_SECOND_LAST));
+                                                                               .getPath()).toLowerCase()
+                                                                         + "_blowpipe"), ingredient, output, metal.getTier(), null, ForgeRule.BEND_LAST,
+                                     ForgeRule.BEND_SECOND_LAST));
         }
       }
     }
@@ -175,14 +177,14 @@ public final class TechRecipes {
     IForgeRegistry<KnappingRecipe> r = event.getRegistry();
 
     r.registerAll(
-            new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TechItems.UNFIRED_SLEEVE), "XXXXX", "XX XX", "X X X", "XX XX",
-                    "XXXXX").setRegistryName("clay_sleeve"),
-            new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TechItems.UNFIRED_RACKWHEEL_PIECE), "XXXXX", "X XXX", "X  XX",
-                    "XX  X", "XXXXX").setRegistryName("clay_rackwheel_piece"),
-            new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TechItems.UNFIRED_MOLD_PANE), "XXXXX", "X   X", "X   X", "X   X",
-                    "XXXXX").setRegistryName("clay_mold_pane"),
-            new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TechItems.UNFIRED_MOLD_BLOCK), "X   X", "X   X", "X   X", "X   X",
-                    " XXX ").setRegistryName("clay_mold_block")
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TechItems.UNFIRED_SLEEVE), "XXXXX", "XX XX", "X X X", "XX XX",
+                               "XXXXX").setRegistryName("clay_sleeve"),
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TechItems.UNFIRED_RACKWHEEL_PIECE), "XXXXX", "X XXX", "X  XX",
+                               "XX  X", "XXXXX").setRegistryName("clay_rackwheel_piece"),
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TechItems.UNFIRED_MOLD_PANE), "XXXXX", "X   X", "X   X", "X   X",
+                               "XXXXX").setRegistryName("clay_mold_pane"),
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TechItems.UNFIRED_MOLD_BLOCK), "X   X", "X   X", "X   X", "X   X",
+                               " XXX ").setRegistryName("clay_mold_block")
     );
   }
 
@@ -191,8 +193,8 @@ public final class TechRecipes {
     IForgeRegistry<GlassworkingRecipe> r = event.getRegistry();
 
     r.registerAll(
-            new GlassworkingRecipe(new ItemStack(Items.GLASS_BOTTLE),
-                    " X X ", " X X ", "X   X", "X   X", " XXX ").setRegistryName(MODID_TFCTECH, "glass_bottle")
+      new GlassworkingRecipe(new ItemStack(Items.GLASS_BOTTLE),
+                             " X X ", " X X ", "X   X", "X   X", " XXX ").setRegistryName(MODID_TFCTECH, "glass_bottle")
     );
   }
 
@@ -200,29 +202,29 @@ public final class TechRecipes {
   public static void onRegisterSmelteryRecipeEvent(RegistryEvent.Register<SmelteryRecipe> event) {
     IForgeRegistry<SmelteryRecipe> r = event.getRegistry();
     r.registerAll(
-            new SmelteryRecipe.Builder()
-                    .addInput(IIngredient.of("dustPotash"))
-                    .addInput(IIngredient.of("sandSilica"))
-                    .addInput(IIngredient.of("dustLime"))
-                    .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 1000), 800)
-                    .build()
-                    .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass")),
-            new SmelteryRecipe.Builder()
-                    .addInput(IIngredient.of("blockGlass"))
-                    .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 1000), 800).build()
-                    .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_block")),
-            new SmelteryRecipe.Builder()
-                    .addInput(IIngredient.of("paneGlass"))
-                    .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 375), 800).build()
-                    .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_pane")),
-            new SmelteryRecipe.Builder()
-                    .addInput(IIngredient.of(ItemsCore.GLASS_SHARD))
-                    .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 500), 800).build()
-                    .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_shard")),
-            new SmelteryRecipe.Builder()
-                    .addInput(IIngredient.of(Items.GLASS_BOTTLE))
-                    .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 250), 800).build()
-                    .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_bottle"))
+      new SmelteryRecipe.Builder()
+        .addInput(IIngredient.of("dustPotash"))
+        .addInput(IIngredient.of("sandSilica"))
+        .addInput(IIngredient.of("dustLime"))
+        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 1000), 800)
+        .build()
+        .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass")),
+      new SmelteryRecipe.Builder()
+        .addInput(IIngredient.of("blockGlass"))
+        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 1000), 800).build()
+        .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_block")),
+      new SmelteryRecipe.Builder()
+        .addInput(IIngredient.of("paneGlass"))
+        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 375), 800).build()
+        .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_pane")),
+      new SmelteryRecipe.Builder()
+        .addInput(IIngredient.of(ItemsCore.GLASS_SHARD))
+        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 500), 800).build()
+        .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_shard")),
+      new SmelteryRecipe.Builder()
+        .addInput(IIngredient.of(Items.GLASS_BOTTLE))
+        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 250), 800).build()
+        .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_bottle"))
     );
   }
 
@@ -250,7 +252,8 @@ public final class TechRecipes {
       if (!output.isEmpty()) {
         //noinspection ConstantConditions
         r.register(new WeldingRecipe(new ResourceLocation(MODID_TFCTECH, (metal.getRegistryName()
-                .getPath()).toLowerCase() + "_gear"), ingredient1, ingredient2, output, metal.getTier(), null));
+                                                                               .getPath()).toLowerCase()
+                                                                         + "_gear"), ingredient1, ingredient2, output, metal.getTier(), null));
       }
     }
   }
@@ -288,8 +291,8 @@ public final class TechRecipes {
         list.add(ingredient);
         //noinspection ConstantConditions
         r.register(new ShapelessDamageRecipe(groupStrip, list, output, 1).setRegistryName(MODID_TFCTECH, metal.getRegistryName()
-                .getPath()
-                .toLowerCase() + "_strip"));
+                                                                                                              .getPath()
+                                                                                                              .toLowerCase() + "_strip"));
       }
 
       /*
@@ -303,8 +306,8 @@ public final class TechRecipes {
         list.add(ingredient);
         //noinspection ConstantConditions
         r.register(new ShapelessDamageRecipe(groupRod, list, output, 1).setRegistryName(MODID_TFCTECH, metal.getRegistryName()
-                .getPath()
-                .toLowerCase() + "_rod"));
+                                                                                                            .getPath()
+                                                                                                            .toLowerCase() + "_rod"));
       }
 
       /*
@@ -318,8 +321,8 @@ public final class TechRecipes {
         list.add(ingredient);
         //noinspection ConstantConditions
         r.register(new ShapelessDamageRecipe(groupBolt, list, output, 1).setRegistryName(MODID_TFCTECH, metal.getRegistryName()
-                .getPath()
-                .toLowerCase() + "_bolt"));
+                                                                                                             .getPath()
+                                                                                                             .toLowerCase() + "_bolt"));
       }
 
       /*
@@ -333,8 +336,8 @@ public final class TechRecipes {
         list.add(ingredient);
         //noinspection ConstantConditions
         r.register(new ShapelessDamageRecipe(groupScrew, list, output, 1).setRegistryName(MODID_TFCTECH, metal.getRegistryName()
-                .getPath()
-                .toLowerCase() + "_screw"));
+                                                                                                              .getPath()
+                                                                                                              .toLowerCase() + "_screw"));
       }
 
       /*
@@ -350,8 +353,8 @@ public final class TechRecipes {
         list.add(ingredient);
         //noinspection ConstantConditions
         r.register(new ShapedRecipes("rackwheel", 2, 2, list, output).setRegistryName(MODID_TFCTECH, metal.getRegistryName()
-                .getPath()
-                .toLowerCase() + "_rackwheel"));
+                                                                                                          .getPath()
+                                                                                                          .toLowerCase() + "_rackwheel"));
       }
     }
   }

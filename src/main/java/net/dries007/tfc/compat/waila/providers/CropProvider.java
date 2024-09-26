@@ -10,7 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.ICrop;
@@ -54,10 +53,10 @@ public class CropProvider implements IWailaBlock {
 
       if (curStage == maxStage) {
         currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth",
-                new TextComponentTranslation("waila.tfc.crop.mature").getFormattedText()).getFormattedText());
+                                                        new TextComponentTranslation("waila.tfc.crop.mature").getFormattedText()).getFormattedText());
       } else {
         float remainingTicksToGrow = Math.max(0,
-                (crop.getGrowthTicks() * (float) ConfigTFC.General.FOOD.cropGrowthTimeModifier) - tile.getTicksSinceUpdate());
+                                              (crop.getGrowthTicks() * (float) ConfigTFC.General.FOOD.cropGrowthTimeModifier) - tile.getTicksSinceUpdate());
         float curStagePerc = 1.0F - remainingTicksToGrow / crop.getGrowthTicks();
         // Don't show 100% since it still needs to check on randomTick to grow
         float totalPerc = Math.min(0.99f, curStagePerc / maxStage + (float) curStage / maxStage) * 100;

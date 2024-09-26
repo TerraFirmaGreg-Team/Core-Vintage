@@ -13,7 +13,6 @@ import su.terrafirmagreg.modules.core.ModuleCore;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.modules.ModuleContainer.ANIMAL;

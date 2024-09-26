@@ -6,7 +6,6 @@ import su.terrafirmagreg.modules.device.object.recipe.quern.IQuernRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 

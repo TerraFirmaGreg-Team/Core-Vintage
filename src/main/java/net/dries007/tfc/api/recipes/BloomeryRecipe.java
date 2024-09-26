@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
@@ -36,24 +35,24 @@ public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
   @Nullable
   public static BloomeryRecipe get(@NotNull ItemStack inputItem) {
     return TFCRegistries.BLOOMERY.getValuesCollection()
-            .stream()
-            .filter(x -> x.isValidInput(inputItem))
-            .findFirst()
-            .orElse(null);
-  }
-
-  public boolean isValidInput(ItemStack inputItem) {
-    var metalItem = CapabilityMetal.getMetalItem(inputItem);
-    return metalItem != null && metalItem.getMetal(inputItem) == metal;
+                                 .stream()
+                                 .filter(x -> x.isValidInput(inputItem))
+                                 .findFirst()
+                                 .orElse(null);
   }
 
   @Nullable
   public static BloomeryRecipe get(@NotNull Metal metal) {
     return TFCRegistries.BLOOMERY.getValuesCollection()
-            .stream()
-            .filter(x -> metal == x.metal)
-            .findFirst()
-            .orElse(null);
+                                 .stream()
+                                 .filter(x -> metal == x.metal)
+                                 .findFirst()
+                                 .orElse(null);
+  }
+
+  public boolean isValidInput(ItemStack inputItem) {
+    var metalItem = CapabilityMetal.getMetalItem(inputItem);
+    return metalItem != null && metalItem.getMetal(inputItem) == metal;
   }
 
   public ItemStack getOutput(List<ItemStack> inputs) {

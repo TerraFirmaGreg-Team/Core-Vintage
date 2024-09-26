@@ -13,7 +13,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
-
 import gregtech.api.worldgen.config.OreConfigUtils;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -50,18 +49,19 @@ public class RockLayerWrapper implements IRecipeWrapper {
     for (Ore ore : ores) {
       // Add every permutation of BlockOreTFC for better readability (this means that it's gonna work for any ore block clicked for recipes)
       List<ItemStack> oreItems = RockType.getTypes()
-              .stream()
-              .map(rockType -> new ItemStack(OreConfigUtils.getOreForMaterial(rockType.getMaterial()).get(BlocksRock.RAW.getStoneType()).getBlock()))
-              .collect(Collectors.toList());
+                                         .stream()
+                                         .map(rockType -> new ItemStack(OreConfigUtils.getOreForMaterial(rockType.getMaterial())
+                                                                                      .get(BlocksRock.RAW.getStoneType()).getBlock()))
+                                         .collect(Collectors.toList());
       oreList.add(oreItems);
     }
     if (!customOres.isEmpty()) {
       // Add custom ores
       oreList.addAll(customOres.stream().filter(state -> state.getMaterial() != Material.AIR)
-              .map(state -> new ItemStack(state.getBlock(), 1, state.getBlock()
-                      .getMetaFromState(state)))
-              .map(Collections::singletonList)
-              .collect(Collectors.toList()));
+                               .map(state -> new ItemStack(state.getBlock(), 1, state.getBlock()
+                                                                                     .getMetaFromState(state)))
+                               .map(Collections::singletonList)
+                               .collect(Collectors.toList()));
 
     }
 
@@ -73,7 +73,7 @@ public class RockLayerWrapper implements IRecipeWrapper {
     input.add(new ItemStack(BlocksRock.RAW.get(type)));
     input.add(new ItemStack(ItemsRock.LOOSE.get(type)));
     recipeIngredients.setInputs(VanillaTypes.ITEM,
-            input); // This will only show the raw block, but let use right click stones to open the "recipe"
+                                input); // This will only show the raw block, but let use right click stones to open the "recipe"
 
     recipeIngredients.setOutputLists(VanillaTypes.ITEM, oreList);
   }

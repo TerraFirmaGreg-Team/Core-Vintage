@@ -22,7 +22,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.te.TEDryingMat;
 import pieman.caffeineaddon.CaffeineAddon;
@@ -75,10 +74,10 @@ public class BlockDryingMat extends Block implements IProviderModel {
 
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-    TEDryingMat te = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
-    if (te != null && !worldIn.isRemote) {
+    var tile = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
+    if (tile != null && !worldIn.isRemote) {
       if (worldIn.isRainingAt(pos.up())) {
-        te.resetCounter();
+        tile.resetCounter();
       }
     }
   }
@@ -94,9 +93,9 @@ public class BlockDryingMat extends Block implements IProviderModel {
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    TEDryingMat te = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
-    if (te != null) {
-      te.onBreakBlock(worldIn, pos, state);
+    var tile = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
+    if (tile != null) {
+      tile.onBreakBlock(worldIn, pos, state);
     }
     super.breakBlock(worldIn, pos, state);
   }
@@ -108,23 +107,23 @@ public class BlockDryingMat extends Block implements IProviderModel {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-          EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+                                  EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (hand.equals(EnumHand.MAIN_HAND)) {
-      TEDryingMat te = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
-      if (te != null && !worldIn.isRemote) {
+      var tile = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
+      if (tile != null && !worldIn.isRemote) {
         if (playerIn.isSneaking()) {
-          ItemStack stack = te.getStack();
+          ItemStack stack = tile.getStack();
           if (stack.isEmpty()) {
             ItemStack is = playerIn.getHeldItem(hand);
-            if (te.isItemValid(TEDryingMat.SLOT, is)) {
-              te.setStack(is.copy());
+            if (tile.isItemValid(TEDryingMat.SLOT, is)) {
+              tile.setStack(is.copy());
               is.setCount(0);
             }
           } else {
             ItemHandlerHelper.giveItemToPlayer(playerIn, stack);
-            te.setStack(ItemStack.EMPTY);
+            tile.setStack(ItemStack.EMPTY);
           }
-          te.setAndUpdateSlots(TEDryingMat.SLOT);
+          tile.setAndUpdateSlots(TEDryingMat.SLOT);
         } else {
           playerIn.openGui(CaffeineAddon.instance, GUIHandler.DRYINGMATGUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
@@ -137,7 +136,7 @@ public class BlockDryingMat extends Block implements IProviderModel {
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
-          ItemStack stack) {
+                              ItemStack stack) {
     // Set the initial counter value
     TEDryingMat tile = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
     if (tile != null) {

@@ -8,7 +8,7 @@ public class ItemAnimalMisc extends BaseItem {
     super(settings);
 
     getSettings()
-            .registryKey("animal/" + name);
+      .registryKey("animal/" + name);
   }
 
 }

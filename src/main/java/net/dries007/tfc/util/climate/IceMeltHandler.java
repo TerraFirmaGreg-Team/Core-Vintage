@@ -9,14 +9,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-
 import java.util.Iterator;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
 import static su.terrafirmagreg.data.MathConstants.RNG;
 
 /**
- * Vanilla ice melting is hardcoded to the world. However, we can replicate most of the behavior by watching world ticks, and performing the same simple logic checks
+ * Vanilla ice melting is hardcoded to the world. However, we can replicate most of the behavior by watching world ticks, and performing the same simple logic
+ * checks
  */
 @Mod.EventBusSubscriber(modid = MODID_TFC)
 public class IceMeltHandler {
@@ -37,7 +37,7 @@ public class IceMeltHandler {
       world.profiler.startSection("tfciceandsnow");
       if (world.getWorldInfo().getTerrainType() != WorldType.DEBUG_ALL_BLOCK_STATES) {
         for (Iterator<Chunk> iterator = world.getPersistentChunkIterable(world.getPlayerChunkMap()
-                .getChunkIterator()); iterator.hasNext(); ) {
+                                                                              .getChunkIterator()); iterator.hasNext(); ) {
           Chunk chunk = iterator.next();
           int chunkX = chunk.x * 16;
           int chunkZ = chunk.z * 16;
@@ -46,7 +46,7 @@ public class IceMeltHandler {
             updateLCG = updateLCG * 3 + 1013904223;
             int randomSeed = updateLCG >> 2;
             BlockPos pos = world.getPrecipitationHeight(new BlockPos(chunkX + (randomSeed & 15), 0, chunkZ + (randomSeed >> 8 & 15)))
-                    .down();
+                                .down();
 
             if (world.isAreaLoaded(pos, 1)) {
               IBlockState state = world.getBlockState(pos);

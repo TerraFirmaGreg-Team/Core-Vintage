@@ -34,7 +34,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.food.FoodHeatHandler;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
@@ -106,17 +105,17 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
     }
   }
 
-  @NotNull
-  protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, DOWN, UP, NORTH, EAST, WEST, SOUTH, DAYPERIOD, AGE);
-  }
-
   public static ItemFoodTFCF get(ItemFoodTFCF food) {
     return MAP.get(food);
   }
 
   public static ItemStack get(BlockCaveMushroom food, int amount) {
     return new ItemStack(MAP.get(food), amount);
+  }
+
+  @NotNull
+  protected BlockStateContainer createPlantBlockState() {
+    return new BlockStateContainer(this, DOWN, UP, NORTH, EAST, WEST, SOUTH, DAYPERIOD, AGE);
   }
 
   @Override
@@ -150,13 +149,13 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
   @NotNull
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     return state
-            .withProperty(DAYPERIOD, getDayPeriod())
-            .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
-            .withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
-            .withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
-            .withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
-            .withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
-            .withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
+      .withProperty(DAYPERIOD, getDayPeriod())
+      .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
+      .withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
+      .withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
+      .withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
+      .withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
+      .withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
   }
 
   int getDayPeriod() {
@@ -183,19 +182,19 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
     switch (rot) {
       case CLOCKWISE_180:
         return state.withProperty(NORTH, state.getValue(SOUTH))
-                .withProperty(EAST, state.getValue(WEST))
-                .withProperty(SOUTH, state.getValue(NORTH))
-                .withProperty(WEST, state.getValue(EAST));
+                    .withProperty(EAST, state.getValue(WEST))
+                    .withProperty(SOUTH, state.getValue(NORTH))
+                    .withProperty(WEST, state.getValue(EAST));
       case COUNTERCLOCKWISE_90:
         return state.withProperty(NORTH, state.getValue(EAST))
-                .withProperty(EAST, state.getValue(SOUTH))
-                .withProperty(SOUTH, state.getValue(WEST))
-                .withProperty(WEST, state.getValue(NORTH));
+                    .withProperty(EAST, state.getValue(SOUTH))
+                    .withProperty(SOUTH, state.getValue(WEST))
+                    .withProperty(WEST, state.getValue(NORTH));
       case CLOCKWISE_90:
         return state.withProperty(NORTH, state.getValue(WEST))
-                .withProperty(EAST, state.getValue(NORTH))
-                .withProperty(SOUTH, state.getValue(EAST))
-                .withProperty(WEST, state.getValue(SOUTH));
+                    .withProperty(EAST, state.getValue(NORTH))
+                    .withProperty(SOUTH, state.getValue(EAST))
+                    .withProperty(WEST, state.getValue(SOUTH));
       default:
         return state;
     }
@@ -247,7 +246,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
   @Override
   public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
     return canConnectTo(world, pos.offset(facing), facing.getOpposite()) && !(world.getBlockState(pos.offset(facing))
-            .getBlock() instanceof BlockFence);
+                                                                                   .getBlock() instanceof BlockFence);
   }
 
   @Override
@@ -263,7 +262,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
   @Override
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     return Climate.getAvgTemp(worldIn, pos) >= -13f && Climate.getAvgTemp(worldIn, pos) <= 50f &&
-            ProviderChunkData.getRainfall(worldIn, pos) >= 250f && ProviderChunkData.getRainfall(worldIn, pos) <= 500;
+           ProviderChunkData.getRainfall(worldIn, pos) >= 250f && ProviderChunkData.getRainfall(worldIn, pos) <= 500;
   }
 
   @Override
@@ -287,11 +286,11 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
     }
 
     if (Climate.getActualTemp(worldIn, pos) >= -11f && Climate.getActualTemp(worldIn, pos) <= 48f &&
-            Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) <= 5f) {
+        Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) <= 5f) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
-              net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
+          net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
         if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
           grow(worldIn, rand, pos, state);
         } else if (j < 3) {
@@ -300,7 +299,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!(Climate.getActualTemp(worldIn, pos) >= -11f && Climate.getActualTemp(worldIn, pos) <= 48f) ||
-            (Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) > 5f)) {
+               (Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) > 5f)) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -380,9 +379,9 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
     for (EnumFacing face : EnumFacing.values()) {
       IBlockState blockState = worldIn.getBlockState(pos.offset(face));
       if (!(blockState.getBlock() instanceof BlockLeavesTFC) &&
-              (blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID)) {
+          (blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID)) {
         return Climate.getAvgTemp(worldIn, pos) >= -13f && Climate.getAvgTemp(worldIn, pos) <= 50f &&
-                ProviderChunkData.getRainfall(worldIn, pos) >= 250f && ProviderChunkData.getRainfall(worldIn, pos) <= 500;
+               ProviderChunkData.getRainfall(worldIn, pos) >= 250f && ProviderChunkData.getRainfall(worldIn, pos) <= 500;
       }
     }
     return false;

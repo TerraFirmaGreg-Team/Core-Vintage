@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.base.tile.spi.ITileFields;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.GameUtils;
@@ -24,7 +24,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -35,7 +34,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 
 import gregtech.api.capability.GregtechCapabilities;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
@@ -53,9 +51,8 @@ import static su.terrafirmagreg.data.Properties.LIT;
 
 @SuppressWarnings("WeakerAccess")
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
-public class TileElectricForge extends BaseTileInventory
-        implements ITickable, ITileFields, IMachineSoundEffect, IAmbientalTileProvider,
-        IProviderContainer<ContainerElectricForge, GuiElectricForge> {
+public class TileElectricForge extends BaseTileTickableInventory
+  implements ITileFields, IMachineSoundEffect, IAmbientalTileProvider, IProviderContainer<ContainerElectricForge, GuiElectricForge> {
 
   public static final int SLOT_INPUT_MIN = 0;
   public static final int SLOT_INPUT_MAX = 8;
@@ -72,7 +69,7 @@ public class TileElectricForge extends BaseTileInventory
     super(12);
 
     this.energyContainer = new MachineEnergyStorage(TechConfig.DEVICES.electricForgeEnergyCapacity,
-            TechConfig.DEVICES.electricForgeEnergyCapacity, 0);
+                                                    TechConfig.DEVICES.electricForgeEnergyCapacity, 0);
     Arrays.fill(cachedRecipes, null);
   }
 
@@ -114,7 +111,7 @@ public class TileElectricForge extends BaseTileInventory
     }
     IBlockState state = world.getBlockState(pos);
     int energyUsage = (int) (
-            (float) TechConfig.DEVICES.electricForgeEnergyConsumption * targetTemperature / 100);
+      (float) TechConfig.DEVICES.electricForgeEnergyConsumption * targetTemperature / 100);
     if (energyUsage < 1) {
       energyUsage = 1;
     }
@@ -122,8 +119,8 @@ public class TileElectricForge extends BaseTileInventory
       ItemStack stack = inventory.getStackInSlot(i);
       var cap = CapabilityHeat.get(stack);
       float modifier =
-              stack.getItem() instanceof ICapabilityMetal metal ? metal.getSmeltAmount(stack) / 100.0F
-                      : 1.0F;
+        stack.getItem() instanceof ICapabilityMetal metal ? metal.getSmeltAmount(stack) / 100.0F
+                                                          : 1.0F;
       if (cap != null) {
         // Update temperature of item
         float itemTemp = cap.getTemperature();
@@ -131,7 +128,7 @@ public class TileElectricForge extends BaseTileInventory
         if (targetTemperature > itemTemp && energyContainer.consumeEnergy(energy, false)) {
           float heatSpeed = (float) TechConfig.DEVICES.electricForgeSpeed * 15.0F;
           float temp = (float) (cap.getTemperature()
-                  + heatSpeed * cap.getHeatCapacity() * ConfigCore.MISC.HEAT.globalModifier);
+                                + heatSpeed * cap.getHeatCapacity() * ConfigCore.MISC.HEAT.globalModifier);
           cap.setTemperature(Math.min(temp, targetTemperature));
           litTime = 15;
         }
@@ -167,7 +164,7 @@ public class TileElectricForge extends BaseTileInventory
           ItemStack output = inventory.getStackInSlot(i);
           // Fill the fluid
           IFluidHandler fluidHandler = output.getCapability(
-                  CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+            CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
           if (fluidHandler != null) {
             int amountFilled = fluidHandler.fill(fluidStack.copy(), true);
             if (amountFilled > 0) {
@@ -214,13 +211,13 @@ public class TileElectricForge extends BaseTileInventory
   @Override
   public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
     if (facing == null || facing == EnumFacing.UP || facing == EnumFacing.DOWN
-            || facing == world.getBlockState(pos)
-            .getValue(HORIZONTAL)
-            .getOpposite()) {
+        || facing == world.getBlockState(pos)
+                          .getValue(HORIZONTAL)
+                          .getOpposite()) {
       if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
         return true;
       } else if (TechConfig.DEVICES.acceptGTCEEU && GameUtils.isModLoaded("gregtech") &&
-              capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
+                 capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
         return true;
       }
     }
@@ -231,13 +228,13 @@ public class TileElectricForge extends BaseTileInventory
   @SuppressWarnings("unchecked")
   public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
     if (facing == null || facing == EnumFacing.UP || facing == EnumFacing.DOWN
-            || facing == world.getBlockState(pos)
-            .getValue(HORIZONTAL)
-            .getOpposite()) {
+        || facing == world.getBlockState(pos)
+                          .getValue(HORIZONTAL)
+                          .getOpposite()) {
       if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
         return (T) this.energyContainer;
       } else if (TechConfig.DEVICES.acceptGTCEEU && GameUtils.isModLoaded("gregtech") &&
-              capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
+                 capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
         return (T) this.energyContainer.getGTCEHandler();
       }
     }
@@ -265,7 +262,7 @@ public class TileElectricForge extends BaseTileInventory
       return CapabilityHeat.has(stack);
     } else {
       return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) &&
-              CapabilityHeat.has(stack);
+             CapabilityHeat.has(stack);
     }
   }
 
@@ -373,13 +370,13 @@ public class TileElectricForge extends BaseTileInventory
 
   @Override
   public ContainerElectricForge getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                             IBlockState state, BlockPos pos) {
     return new ContainerElectricForge(inventoryPlayer, this);
   }
 
   @Override
   public GuiElectricForge getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                          IBlockState state, BlockPos pos) {
     return new GuiElectricForge(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
   }
 

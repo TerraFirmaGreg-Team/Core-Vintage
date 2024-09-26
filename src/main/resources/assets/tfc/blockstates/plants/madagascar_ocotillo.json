@@ -9,8 +9,7 @@
           "model": "tfc:plants/madagascar_ocotillo_single"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "0"
@@ -20,8 +19,7 @@
           "model": "tfc:plants/madagascar_ocotillo_lower_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "0"

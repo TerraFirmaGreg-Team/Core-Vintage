@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -25,14 +24,14 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
     ingredients = new ArrayList<>();
     // Although this looks resource-intensive, it's done one time only
     TFCJEIPlugin.getAllIngredients().stream()
-            .filter(stack -> stack.getItem() instanceof ItemBlock)
-            .forEach(stack ->
-            {
-              Block block = ((ItemBlock) stack.getItem()).getBlock();
-              if (recipe.matches(block.getDefaultState())) {
-                ingredients.add(stack);
-              }
-            });
+                .filter(stack -> stack.getItem() instanceof ItemBlock)
+                .forEach(stack ->
+                         {
+                           Block block = ((ItemBlock) stack.getItem()).getBlock();
+                           if (recipe.matches(block.getDefaultState())) {
+                             ingredients.add(stack);
+                           }
+                         });
     // Ideally we should use Block#getPickBlock but we can't have a World and EntityPlayer at this point
     ItemStack recipeOutput = new ItemStack(recipe.getOutputState().getBlock());
     if (recipeOutput.isEmpty()) {

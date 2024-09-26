@@ -18,7 +18,6 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-
 import BananaFructa.floraefixes.Utils;
 import BananaFructa.tfcfarming.network.CPacketRequestNutrientData;
 import BananaFructa.tfcfarming.network.PacketHandler;
@@ -63,7 +62,7 @@ public class ClientProxy extends CommonProxy {
       int val = TFCFarmingContent.getFertilizerValue(event.getItemStack());
       prc = ((int) (val / 255.0f * 100));
       String line =
-              "\u00A79Fertilizer value: " + TFCFarmingContent.getFertilizerClass(event.getItemStack()).name + "  \u00A7b" + prc + "%\u00A7r";
+        "\u00A79Fertilizer value: " + TFCFarmingContent.getFertilizerClass(event.getItemStack()).name + "  \u00A7b" + prc + "%\u00A7r";
       event.getToolTip().add(line);
     }
 
@@ -77,7 +76,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     if (event.getItemStack().getItem() instanceof ItemRockHoe || event.getItemStack()
-            .getItem() instanceof ItemMetalHoe) {
+                                                                      .getItem() instanceof ItemMetalHoe) {
       if (GuiScreen.isShiftKeyDown()) {
         event.getToolTip().add(1, "\u00a73Sneak while looking at a block to see nutrient info");
         // TODO:                                                                     V config
@@ -107,16 +106,16 @@ public class ClientProxy extends CommonProxy {
     Minecraft mc = Minecraft.getMinecraft();
     EntityPlayer player = Minecraft.getMinecraft().player;
     if (
-            player.isSneaking() &&
-                    mc.objectMouseOver != null &&
-                    mc.objectMouseOver.typeOfHit == RayTraceResult.Type.BLOCK &&
-                    mc.objectMouseOver.getBlockPos() != null &&
-                    (
-                            mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemRockHoe ||
-                                    mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemMetalHoe ||
-                                    (TFCFarming.tfcfloraeLoaded && mc.player.getHeldItem(EnumHand.MAIN_HAND)
-                                            .getItem() instanceof ItemHoeTFCF)
-                    )
+      player.isSneaking() &&
+      mc.objectMouseOver != null &&
+      mc.objectMouseOver.typeOfHit == RayTraceResult.Type.BLOCK &&
+      mc.objectMouseOver.getBlockPos() != null &&
+      (
+        mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemRockHoe ||
+        mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemMetalHoe ||
+        (TFCFarming.tfcfloraeLoaded && mc.player.getHeldItem(EnumHand.MAIN_HAND)
+                                                .getItem() instanceof ItemHoeTFCF)
+      )
 
     ) {
 
@@ -127,16 +126,16 @@ public class ClientProxy extends CommonProxy {
       boolean isTFCDeadCrop = block instanceof BlockCropDead;
       boolean isFarmland = block instanceof BlockSoilFarmland;
       boolean isPlanter =
-              TFCFarming.firmalifeLoaded &&
-                      (block instanceof BlockLargePlanter || (Config.hangingPlanters && block instanceof BlockHangingPlanter));
+        TFCFarming.firmalifeLoaded &&
+        (block instanceof BlockLargePlanter || (Config.hangingPlanters && block instanceof BlockHangingPlanter));
 
       if (!(isFarmland || isPlanter || isTFCCrop || isTFCDeadCrop)) {
         return;
       }
 
       boolean invalidResponse =
-              lastResponse == null || lastResponse.x != blockpos.getX() || lastResponse.z != blockpos.getZ() ||
-                      !lastResponse.accepted || (isPlanter && lastResponse.y != blockpos.getY());
+        lastResponse == null || lastResponse.x != blockpos.getX() || lastResponse.z != blockpos.getZ() ||
+        !lastResponse.accepted || (isPlanter && lastResponse.y != blockpos.getY());
 
       if (invalidResponse || ticksSinceLastResponse > 20) {
         Minecraft.getMinecraft().addScheduledTask(new Runnable() {

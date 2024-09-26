@@ -103,9 +103,9 @@ public class ModelAnimalRabbit extends ModelBase {
   }
 
   public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
-          float netHeadYaw, float headPitch, float scale) {
+                     float netHeadYaw, float headPitch, float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-            entityIn);
+                           entityIn);
 
     if (this.isChild) {
       GlStateManager.pushMatrix();
@@ -149,8 +149,8 @@ public class ModelAnimalRabbit extends ModelBase {
   }
 
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks,
-          float netHeadYaw, float headPitch, float scaleFactor,
-          Entity entityIn) {
+                                float netHeadYaw, float headPitch, float scaleFactor,
+                                Entity entityIn) {
     float f = ageInTicks - (float) entityIn.ticksExisted;
     EntityAnimalRabbit EntityAnimalRabbit = (EntityAnimalRabbit) entityIn;
     this.rabbitNose.rotateAngleX = headPitch * 0.017453292F;
@@ -171,10 +171,10 @@ public class ModelAnimalRabbit extends ModelBase {
   }
 
   public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing,
-          float limbSwingAmount, float partialTickTime) {
+                                  float limbSwingAmount, float partialTickTime) {
     super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
     this.jumpRotation = MathHelper.sin(
-            ((EntityAnimalRabbit) entitylivingbaseIn).getJumpCompletion(partialTickTime)
-                    * MathConstants.PI);
+      ((EntityAnimalRabbit) entitylivingbaseIn).getJumpCompletion(partialTickTime)
+      * MathConstants.PI);
   }
 }

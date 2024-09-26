@@ -21,7 +21,6 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.common.registry.IThrowableEntity;
 
-
 import io.netty.buffer.ByteBuf;
 import lyeoj.tfcthings.items.ItemRopeJavelin;
 import net.dries007.tfc.util.skills.SmithingSkill;
@@ -94,6 +93,10 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
     return this.weapon;
   }
 
+  public void setWeapon(ItemStack stack) {
+    this.weapon = stack;
+  }
+
   public Entity getThrower() {
     return this.shootingEntity;
   }
@@ -134,10 +137,6 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
       this.setDead();
     }
     return true;
-  }
-
-  public void setWeapon(ItemStack stack) {
-    this.weapon = stack;
   }
 
   protected void onHit(@NotNull RayTraceResult raytraceResultIn) {
@@ -184,13 +183,13 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
                 float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
                 if (f1 > 0.0F) {
                   entitylivingbase.addVelocity(this.motionX * (double) this.knockbackStrength * 0.6000000238418579D / (double) f1,
-                          0.1D, this.motionZ * (double) this.knockbackStrength * 0.6000000238418579D / (double) f1);
+                                               0.1D, this.motionZ * (double) this.knockbackStrength * 0.6000000238418579D / (double) f1);
                 }
               }
 
               this.arrowHit(entitylivingbase);
               if (this.shootingEntity != null && entitylivingbase != this.shootingEntity && entitylivingbase instanceof EntityPlayer &&
-                      this.shootingEntity instanceof EntityPlayerMP) {
+                  this.shootingEntity instanceof EntityPlayerMP) {
                 ((EntityPlayerMP) this.shootingEntity).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
               }
             }
@@ -203,7 +202,7 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
             this.rotationYaw += 180.0F;
             this.prevRotationYaw += 180.0F;
             if (!this.world.isRemote &&
-                    this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ < 0.0010000000474974513D) {
+                this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ < 0.0010000000474974513D) {
               this.setDead();
             }
           }

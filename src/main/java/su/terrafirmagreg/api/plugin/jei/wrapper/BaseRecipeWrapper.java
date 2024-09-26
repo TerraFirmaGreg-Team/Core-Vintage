@@ -2,7 +2,6 @@ package su.terrafirmagreg.api.plugin.jei.wrapper;
 
 import su.terrafirmagreg.api.base.recipe.IBaseRecipe;
 
-
 import mezz.jei.api.recipe.IRecipeWrapper;
 
 import lombok.Getter;

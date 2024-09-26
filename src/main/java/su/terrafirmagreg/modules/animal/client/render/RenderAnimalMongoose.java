@@ -10,7 +10,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
@@ -18,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class RenderAnimalMongoose extends RenderLiving<EntityAnimalMongoose> {
 
   private static final ResourceLocation TEXTURE = ModUtils.resource(
-          "textures/entity/animal/huntable/mongoose.png");
+    "textures/entity/animal/huntable/mongoose.png");
 
   public RenderAnimalMongoose(RenderManager renderManager) {
     super(renderManager, new ModelAnimalMongoose(), 0.7F);
@@ -26,7 +25,7 @@ public class RenderAnimalMongoose extends RenderLiving<EntityAnimalMongoose> {
 
   @Override
   public void doRender(@NotNull EntityAnimalMongoose mongoose, double par2, double par4,
-          double par6, float par8, float par9) {
+                       double par6, float par8, float par9) {
     this.shadowSize = (float) (0.35f + (mongoose.getPercentToAdulthood() * 0.35f));
     super.doRender(mongoose, par2, par4, par6, par8, par9);
   }

@@ -18,7 +18,6 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import com.google.common.base.Preconditions;
 
 import org.jetbrains.annotations.NotNull;
@@ -125,7 +124,7 @@ public final class ModelUtils {
     ResourceLocation registryName = item.getRegistryName();
     Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
     String modelLocation =
-            registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
+      registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
 
     ModelUtils.registerInventoryModel(item, modelLocation);
   }
@@ -144,13 +143,11 @@ public final class ModelUtils {
     ModelUtils.registerInventoryModel(item, registryName);
   }
 
-  public static void registerInventoryModel(@NotNull Item item, int metadata,
-          @NotNull String variant) {
+  public static void registerInventoryModel(@NotNull Item item, int metadata, @NotNull String variant) {
     ResourceLocation registryName = item.getRegistryName();
     Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
 
-    ModelUtils.registerInventoryModel(item, metadata,
-            new ModelResourceLocation(registryName, variant));
+    ModelUtils.registerInventoryModel(item, metadata, new ModelResourceLocation(registryName, variant));
   }
 
   public static void registerCustomMeshDefinition(Item item, ItemMeshDefinition meshDefinition) {

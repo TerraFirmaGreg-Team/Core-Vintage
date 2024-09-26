@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.oredict.OreDictionary;
 
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -28,7 +27,7 @@ public class HandlerMetal {
 
   public static void init() {
     CUSTOM_ITEMS.put(IIngredient.of(Blocks.IRON_BARS),
-            () -> new ProviderMetal(Metal.WROUGHT_IRON, 25, true));
+                     () -> new ProviderMetal(Metal.WROUGHT_IRON, 25, true));
 
     // Register ore dict prefix values
     ORE_DICT_METAL_ITEMS.put("ingotDouble", Metal.ItemType.DOUBLE_INGOT);
@@ -64,13 +63,13 @@ public class HandlerMetal {
       if (oreDict.startsWith(oreName)) {
         //noinspection ConstantConditions
         return TFCRegistries.METALS.getValuesCollection().stream()
-                .filter(metal -> oreDict.equals(
-                        OreDictUtils.toString(oreName, metal.getRegistryName().getPath())))
-                .findFirst()
-                .map(metal -> {
-                  Metal.ItemType type = ORE_DICT_METAL_ITEMS.get(oreName);
-                  return new ProviderMetal(metal, type.getSmeltAmount(), true);
-                }).orElse(null);
+                                   .filter(metal -> oreDict.equals(
+                                     OreDictUtils.toString(oreName, metal.getRegistryName().getPath())))
+                                   .findFirst()
+                                   .map(metal -> {
+                                     Metal.ItemType type = ORE_DICT_METAL_ITEMS.get(oreName);
+                                     return new ProviderMetal(metal, type.getSmeltAmount(), true);
+                                   }).orElse(null);
       }
     }
     return null;

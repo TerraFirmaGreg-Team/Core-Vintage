@@ -19,13 +19,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ItemSoilMud extends ItemSoil
-        implements IProviderContainer<ContainerKnappingMud, GuiContainerKnappingMud> {
+  implements IProviderContainer<ContainerKnappingMud, GuiContainerKnappingMud> {
 
   public ItemSoilMud(SoilItemVariant variant, SoilType type) {
     super(variant, type);
 
     getSettings()
-            .weight(Weight.VERY_LIGHT);
+      .weight(Weight.VERY_LIGHT);
   }
 
 
@@ -33,7 +33,7 @@ public class ItemSoilMud extends ItemSoil
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
     if (!world.isRemote && !player.isSneaking() && stack.getCount() > 2) {
-      GuiHandler.openGui(world, player.getPosition(), player, GuiHandler.Type.SOIL_MUD);
+      GuiHandler.openGui(world, player.getPosition(), player);
     }
     return new ActionResult<>(EnumActionResult.SUCCESS, stack);
   }

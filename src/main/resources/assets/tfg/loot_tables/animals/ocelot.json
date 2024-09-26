@@ -13,8 +13,7 @@
               "function": "set_count",
               "add": 0.03,
               "count": 1
-            },
-            {
+            }, {
               "function": "looting_enchant",
               "count": {
                 "min": 0,
@@ -24,8 +23,7 @@
           ]
         }
       ]
-    },
-    {
+    }, {
       "name": "roll2",
       "rolls": 1,
       "entries": [
@@ -40,8 +38,7 @@
                 "min": 0,
                 "max": 1
               }
-            },
-            {
+            }, {
               "function": "looting_enchant",
               "count": {
                 "min": 0,

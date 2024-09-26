@@ -4,7 +4,6 @@ import su.terrafirmagreg.modules.core.capabilities.player.ICapabilityPlayer;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class SimpleSkill extends Skill {

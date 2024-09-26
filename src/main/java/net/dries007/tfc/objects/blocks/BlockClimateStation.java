@@ -21,7 +21,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-
 import com.eerussianguy.firmalife.util.GreenhouseHelpers;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
@@ -47,8 +46,8 @@ public class BlockClimateStation extends Block implements ICapabilitySize, IHigh
     setSoundType(SoundType.WOOD);
     setTickRandomly(true);
     this.setDefaultState(this.blockState.getBaseState()
-            .withProperty(FACING, EnumFacing.EAST)
-            .withProperty(STASIS, false));
+                                        .withProperty(FACING, EnumFacing.EAST)
+                                        .withProperty(STASIS, false));
     this.tier = tier;
   }
 
@@ -56,8 +55,8 @@ public class BlockClimateStation extends Block implements ICapabilitySize, IHigh
   @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-            .withProperty(FACING, EnumFacing.byHorizontalIndex(meta))
-            .withProperty(STASIS, meta > 3);
+               .withProperty(FACING, EnumFacing.byHorizontalIndex(meta))
+               .withProperty(STASIS, meta > 3);
   }
 
   @Override
@@ -80,7 +79,7 @@ public class BlockClimateStation extends Block implements ICapabilitySize, IHigh
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-          float hitY, float hitZ) {
+                                  float hitY, float hitZ) {
     if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
       boolean visual = tier > 0;
       boolean valid = GreenhouseHelpers.isMultiblockValid(world, pos, state, visual, tier);
@@ -95,7 +94,7 @@ public class BlockClimateStation extends Block implements ICapabilitySize, IHigh
   @Override
   @SuppressWarnings("deprecation")
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer) {
+                                          EntityLivingBase placer) {
     return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
   }
 
@@ -127,8 +126,8 @@ public class BlockClimateStation extends Block implements ICapabilitySize, IHigh
       stasis = state.getValue(STASIS);
     }
     IHighlightHandler.drawBox(Block.FULL_BLOCK_AABB.offset(pos)
-            .offset(-dx, -dy, -dz)
-            .grow(0.002D), 3.0F, stasis ? 0 : 1.0F, stasis ? 1.0F : 0, 0, 0.4F);
+                                                   .offset(-dx, -dy, -dz)
+                                                   .grow(0.002D), 3.0F, stasis ? 0 : 1.0F, stasis ? 1.0F : 0, 0, 0.4F);
     return true;
   }
 

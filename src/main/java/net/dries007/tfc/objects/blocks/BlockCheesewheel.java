@@ -27,7 +27,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.init.EnumAging;
 import mcp.MethodsReturnNonnullByDefault;
@@ -46,7 +45,7 @@ public class BlockCheesewheel extends BlockNonCube {
   public static final PropertyInteger WEDGES = Properties.WEDGES;
   public static final PropertyEnum<EnumAging> AGE = Properties.AGE;
   protected static final AxisAlignedBB CHEESEWHEEL_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.5D,
-          0.9375D); // This could have a more complex bounding box
+                                                                            0.9375D); // This could have a more complex bounding box
 
   private final Supplier<? extends Item> item;
 
@@ -84,11 +83,11 @@ public class BlockCheesewheel extends BlockNonCube {
         long ticksSinceUpdate = tile.getTicksSinceUpdate();
         // If the cheese isn't cut and ready to age
         if (state.getValue(AGE) == EnumAging.FRESH && state.getValue(WEDGES) == 0 &&
-                ticksSinceUpdate > ConfigFL.General.BALANCE.cheeseTicksToAged) {
+            ticksSinceUpdate > ConfigFL.General.BALANCE.cheeseTicksToAged) {
           worldIn.setBlockState(pos, state.withProperty(AGE, EnumAging.AGED));
           tile.resetCounter();
         } else if (state.getValue(AGE) == EnumAging.AGED && state.getValue(WEDGES) == 0 &&
-                ticksSinceUpdate > ConfigFL.General.BALANCE.cheeseTicksToVintage) {
+                   ticksSinceUpdate > ConfigFL.General.BALANCE.cheeseTicksToVintage) {
           worldIn.setBlockState(pos, state.withProperty(AGE, EnumAging.VINTAGE));
         }
       }
@@ -109,7 +108,7 @@ public class BlockCheesewheel extends BlockNonCube {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand handIn, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     ItemStack stack = playerIn.getHeldItem(handIn);
     if (OreDictionaryHelper.doesStackMatchOre(stack, "knife")) {
       if (!worldIn.isRemote) {

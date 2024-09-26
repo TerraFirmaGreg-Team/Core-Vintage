@@ -16,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.util.climate.Climate;
@@ -62,7 +61,7 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
       boolean flag = false;
 
       if (axis.isHorizontal() && worldIn.getBlockState(blockpos)
-              .getBlockFaceShape(worldIn, blockpos, facing) != BlockFaceShape.SOLID) {
+                                        .getBlockFaceShape(worldIn, blockpos, facing) != BlockFaceShape.SOLID) {
         flag = true;
       } else if (axis.isVertical() && !this.canPlaceOn(worldIn, blockpos)) {
         flag = true;
@@ -118,7 +117,7 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
   @Override
   public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
     world.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod())
-            .withProperty(growthStageProperty, plant.getStageForMonth()));
+                                  .withProperty(growthStageProperty, plant.getStageForMonth()));
     checkAndDropBlock(world, pos, state);
   }
 
@@ -192,7 +191,7 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
   @NotNull
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer) {
+                                          EntityLivingBase placer) {
     if (this.canPlaceAt(worldIn, pos, facing)) {
       return this.getDefaultState().withProperty(FACING, facing);
     } else {

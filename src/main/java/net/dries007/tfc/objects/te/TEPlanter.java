@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.te;
 
-import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.data.Properties;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,9 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraftforge.items.ItemHandlerHelper;
-
 
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.util.GreenhouseHelpers;
@@ -27,7 +25,7 @@ import static su.terrafirmagreg.data.MathConstants.RNG;
 /**
  *
  */
-public class TEPlanter extends BaseTileInventory implements ITickable, ICalendarTickable, IWaterable, GreenhouseHelpers.IGreenhouseReceiver {
+public class TEPlanter extends BaseTileTickableInventory implements ICalendarTickable, IWaterable, GreenhouseHelpers.IGreenhouseReceiver {
 
   public boolean isClimateValid;
   protected int[] stages;
@@ -95,6 +93,12 @@ public class TEPlanter extends BaseTileInventory implements ITickable, ICalendar
   }
 
   @Override
+  public void setLastUpdateTick(long l) {
+    lastTickCalChecked = serializeNBT().getLong("lastTickCalChecked");
+    markDirty();
+  }
+
+  @Override
   public void onCalendarUpdate(long l) {
     double tierModifier = tier >= 2 ? 0.95D : 1.05D;
     long growthTicks = (long) (ICalendar.TICKS_IN_DAY * tierModifier * ConfigTFC.General.FOOD.cropGrowthTimeModifier);
@@ -128,9 +132,9 @@ public class TEPlanter extends BaseTileInventory implements ITickable, ICalendar
   private boolean canGrow(int slot) {
     PlanterRecipe recipe = getRecipe(slot);
     return isClimateValid && recipe != null && getStage(slot) < PlanterRecipe.getMaxStage(recipe) &&
-            tier >= PlanterRecipe.getTier(recipe) &&
-            world.getBlockState(pos).getValue(Properties.WET) &&
-            GreenhouseHelpers.isSkylightValid(world, pos);
+           tier >= PlanterRecipe.getTier(recipe) &&
+           world.getBlockState(pos).getValue(Properties.WET) &&
+           GreenhouseHelpers.isSkylightValid(world, pos);
   }
 
   public void grow(int slot) {
@@ -153,12 +157,6 @@ public class TEPlanter extends BaseTileInventory implements ITickable, ICalendar
 
   public int getStage(int slot) {
     return stages[slot];
-  }
-
-  @Override
-  public void setLastUpdateTick(long l) {
-    lastTickCalChecked = serializeNBT().getLong("lastTickCalChecked");
-    markDirty();
   }
 
   @Override

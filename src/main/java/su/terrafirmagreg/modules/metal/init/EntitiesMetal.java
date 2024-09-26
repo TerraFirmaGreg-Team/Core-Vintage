@@ -17,9 +17,9 @@ public final class EntitiesMetal {
   public static void onRegister(RegistryManager registry) {
 
     PIGVIL = registry.entity("pigvil", EntityEntryBuilder.create()
-            .entity(EntityMetalPigvil.class)
-            .tracker(64, 3, true)
-            .egg(0xF1AAAA, 0x555555)
+                                                         .entity(EntityMetalPigvil.class)
+                                                         .tracker(64, 3, true)
+                                                         .egg(0xF1AAAA, 0x555555)
     );
   }
 
@@ -27,6 +27,6 @@ public final class EntitiesMetal {
   public static void onClientRegister(RegistryManager registry) {
 
     RenderingRegistry.registerEntityRenderingHandler(EntityMetalPigvil.class,
-            RenderMetalPigvil::new);
+                                                     RenderMetalPigvil::new);
   }
 }

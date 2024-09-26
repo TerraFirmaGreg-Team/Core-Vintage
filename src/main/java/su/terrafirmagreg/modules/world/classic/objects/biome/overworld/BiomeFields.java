@@ -24,8 +24,8 @@ public class BiomeFields extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.PLAINS,
-            BiomeDictionary.Type.LUSH
+      BiomeDictionary.Type.PLAINS,
+      BiomeDictionary.Type.LUSH
     };
   }
 }

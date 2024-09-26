@@ -11,7 +11,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.entity.animal.EntityDeerTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -459,24 +458,24 @@ public class ModelDeerTFC extends ModelBase {
 
     } else {
       if (MathHelper.cos(f / 1.5F + 5 * MathConstants.PI / 4F) > -Math.sqrt(0.5) &&
-              MathHelper.cos(f / 1.5F + 5 * MathConstants.PI / 4F) < Math.sqrt(0.5)) {
+          MathHelper.cos(f / 1.5F + 5 * MathConstants.PI / 4F) < Math.sqrt(0.5)) {
         setRotation(upperLeg4, MathHelper.cos(f / 1.5F + 5F * MathConstants.PI / 4F) * 2.8F * f1 + 0.3490659F, 0F, 0.0349066F);
       }
       if (MathHelper.sin(f / 1.5F + 5F * MathConstants.PI / 4F - 3F * MathConstants.PI / 8) > 0) {
         setRotation(lowerleg4, MathHelper.sin(f / 1.5F + 5F * MathConstants.PI / 4F - 3F * MathConstants.PI / 8) * 3.5F * f1, 0F, 0F);
         setRotation(leg4, -MathHelper.sin(f / 1.5F + 5F * MathConstants.PI / 4F - 3F * MathConstants.PI / 8) * 3.5F * f1 - 0.3490659F, 0F,
-                -0.0349066F);
+                    -0.0349066F);
         setRotation(toes4, MathHelper.sin(f / 1.5F + 5F * MathConstants.PI / 4F - 3F * MathConstants.PI / 8) * 2.1F * f1 + 1.134464F, 0, 0);
       }
 
       if (MathHelper.cos(f / 1.5F + MathConstants.PI / 2F) > -Math.sqrt(0.5) &&
-              MathHelper.cos(f / 1.5F + MathConstants.PI / 2F) < Math.sqrt(0.5)) {
+          MathHelper.cos(f / 1.5F + MathConstants.PI / 2F) < Math.sqrt(0.5)) {
         setRotation(upperLeg3, MathHelper.cos(f / 1.5F + MathConstants.PI / 2F) * 2.8F * f1 + 0.3490659F, 0F, -0.0349066F);
       }
       if (MathHelper.sin(f / 1.5F + MathConstants.PI / 2F - 3F * MathConstants.PI / 8) > 0) {
         setRotation(lowerleg3, MathHelper.sin(f / 1.5F + MathConstants.PI / 2F - 3F * MathConstants.PI / 8) * 3.5F * f1, 0F, 0F);
         setRotation(leg3, -MathHelper.sin(f / 1.5F + MathConstants.PI / 2F - 3F * MathConstants.PI / 8) * 3.5F * f1 - 0.3490659F, 0F,
-                0.0349066F);
+                    0.0349066F);
         setRotation(toes3, MathHelper.sin(f / 1.5F + MathConstants.PI / 2F - 3F * MathConstants.PI / 8) * 2.1F * f1 + 1.134464F, 0, 0);
       }
 

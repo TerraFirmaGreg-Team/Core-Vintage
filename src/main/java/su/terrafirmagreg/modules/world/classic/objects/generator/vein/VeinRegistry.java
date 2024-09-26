@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.world.classic.objects.generator.vein;
 
 import su.terrafirmagreg.data.lib.collection.WeightedCollection;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 
 import org.jetbrains.annotations.NotNull;
@@ -46,9 +45,9 @@ public enum VeinRegistry {
     }
     //GeneratorOreVeins.CHUNK_RADIUS = 1 + (maxRadius >> 4);
     TerraFirmaCraft.getLog()
-            .info("Vein Registry Initialized, with {} veins, {} max radius, {} total weight",
-                    veinTypeRegistry.size(), maxRadius,
-                    weightedVeinTypes.getTotalWeight());
+                   .info("Vein Registry Initialized, with {} veins, {} max radius, {} total weight",
+                         veinTypeRegistry.size(), maxRadius,
+                         weightedVeinTypes.getTotalWeight());
   }
 
 }

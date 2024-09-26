@@ -24,7 +24,7 @@ public class BiomePlains extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.PLAINS
+      BiomeDictionary.Type.PLAINS
     };
   }
 }

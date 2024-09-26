@@ -15,7 +15,6 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
@@ -66,8 +65,8 @@ public abstract class BaseBiome extends Biome implements IBiomeSettings {
           if (EntityLiving.class.isAssignableFrom(entityClass)) {
             //noinspection unchecked
             spawnableCreatureList.add(
-                    new Biome.SpawnListEntry((Class<? extends EntityLiving>) entityClass, rarity, min,
-                            max));
+              new Biome.SpawnListEntry((Class<? extends EntityLiving>) entityClass, rarity, min,
+                                       max));
           }
         }
       }

@@ -9,7 +9,6 @@ import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
@@ -121,10 +120,10 @@ public class ModelWoodPlowCart extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount,
-          float ageInTicks, float rotationYaw, float rotationPitch,
-          float scale) {
+                     float ageInTicks, float rotationYaw, float rotationPitch,
+                     float scale) {
     this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, rotationYaw, rotationPitch,
-            scale, entity);
+                           scale, entity);
     this.axis.render(scale);
     this.shaft.renderWithRotation(scale);
     this.shaftConnector.renderWithRotation(scale);
@@ -135,9 +134,9 @@ public class ModelWoodPlowCart extends ModelBase {
 
   @Override
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks,
-          float rotationYaw, float rotationPitch, float scale, @NotNull Entity entity) {
+                                float rotationYaw, float rotationPitch, float scale, @NotNull Entity entity) {
     super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, rotationYaw, rotationPitch,
-            scale, entity);
+                            scale, entity);
     this.leftWheel.rotateAngleX = ((EntityWoodPlowCart) entity).getWheelRotation();
     this.rightWheel.rotateAngleX = this.leftWheel.rotateAngleX;
 

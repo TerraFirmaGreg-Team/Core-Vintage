@@ -10,8 +10,7 @@
           "model": "tfc:plants/bunch_grass_single_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "0"
@@ -21,8 +20,7 @@
           "model": "tfc:plants/bunch_grass_lower_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "0"
@@ -32,8 +30,7 @@
           "model": "tfc:plants/bunch_grass_upper_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "1"
@@ -43,8 +40,7 @@
           "model": "tfc:plants/bunch_grass_lower_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "1"

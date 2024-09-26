@@ -8,7 +8,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
 import static su.terrafirmagreg.data.Constants.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)

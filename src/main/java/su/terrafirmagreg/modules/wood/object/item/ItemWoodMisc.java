@@ -9,10 +9,10 @@ public class ItemWoodMisc extends BaseItem {
   public ItemWoodMisc(String name, Size size, Weight weight, Object... oreNameParts) {
 
     getSettings()
-            .registryKey("wood/" + name)
-            .size(size)
-            .weight(weight)
-            .oreDict(oreNameParts);
+      .registryKey("wood/" + name)
+      .size(size)
+      .weight(weight)
+      .oreDict(oreNameParts);
   }
 
 }

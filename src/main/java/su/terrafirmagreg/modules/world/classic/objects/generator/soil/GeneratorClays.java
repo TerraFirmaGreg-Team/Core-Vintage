@@ -8,7 +8,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-
 import tfcflorae.ConfigTFCF;
 
 import java.util.Random;
@@ -24,7 +23,7 @@ public class GeneratorClays implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+                       IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (!(chunkGenerator instanceof ChunkGenClassic)) {
       return;
     }

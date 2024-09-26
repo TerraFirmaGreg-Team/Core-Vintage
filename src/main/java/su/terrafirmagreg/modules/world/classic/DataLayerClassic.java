@@ -9,7 +9,7 @@ import net.minecraft.block.Block;
 public final class DataLayerClassic {
 
   public static final DataLayerClassic ERROR = new DataLayerClassic(-1, null, "ERROR",
-          Integer.MIN_VALUE, Float.NaN);
+                                                                    Integer.MIN_VALUE, Float.NaN);
   private static final DataLayerClassic[] LAYERS = new DataLayerClassic[256];
 
   public static final DataLayerClassic SEISMIC_STABLE = newIntDataLayer(110, "Stable", 0);
@@ -27,7 +27,7 @@ public final class DataLayerClassic {
   public static final DataLayerClassic PH_NEUTRAL = newIntDataLayer(132, "Neutral", 2);
   public static final DataLayerClassic PH_ALKALINE_LOW = newIntDataLayer(133, "Low Alkalinity", 3);
   public static final DataLayerClassic PH_ALKALINE_HIGH = newIntDataLayer(134, "High Alkalinity",
-          4);
+                                                                          4);
   public static final DataLayerClassic RIVER0 = newIntDataLayer(253, "River0", 1);
   public static final DataLayerClassic RIVER1 = newIntDataLayer(254, "River1", 2);
   public static final DataLayerClassic RIVER2 = newIntDataLayer(255, "River2", 3);

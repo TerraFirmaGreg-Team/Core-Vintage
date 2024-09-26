@@ -35,7 +35,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.IShearable;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -65,8 +64,8 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
   @SuppressWarnings("unused")
   public EntitySheepTFC(World worldIn) {
     this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-            getRandomGrowth(ConfigTFC.Animals.SHEEP.adulthood, ConfigTFC.Animals.SHEEP.elder),
-            EntitySheep.getRandomSheepColor(MathConstants.RNG));
+         getRandomGrowth(ConfigTFC.Animals.SHEEP.adulthood, ConfigTFC.Animals.SHEEP.elder),
+         EntitySheep.getRandomSheepColor(MathConstants.RNG));
   }
 
   public EntitySheepTFC(World worldIn, Gender gender, int birthDay, EnumDyeColor dye) {
@@ -80,7 +79,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.PLAINS)) {
+        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
       return ConfigTFC.Animals.SHEEP.rarity;
     }
     return 0;
@@ -118,8 +117,8 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
     int numberOfChildren = ConfigTFC.Animals.SHEEP.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntitySheepTFC baby = new EntitySheepTFC(world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-              (int) Calendar.PLAYER_TIME.getTotalDays(),
-              getDyeColor());
+                                               (int) Calendar.PLAYER_TIME.getTotalDays(),
+                                               getDyeColor());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
       world.spawnEntity(baby);
@@ -176,7 +175,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
           TextComponentTranslation tooltip = getTooltip();
           if (tooltip != null) {
             TerraFirmaCraft.getNetwork()
-                    .sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+                           .sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
           }
         }
       }
@@ -187,7 +186,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
           TextComponentTranslation tooltip = getTooltip();
           if (tooltip != null) {
             TerraFirmaCraft.getNetwork()
-                    .sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+                           .sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
           }
         }
       }

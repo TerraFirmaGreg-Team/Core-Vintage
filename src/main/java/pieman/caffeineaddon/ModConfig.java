@@ -43,14 +43,14 @@ public class ModConfig {
     config.load();
 
     config.setCategoryComment(Configuration.CATEGORY_GENERAL,
-            "###BEWARE CHANGING TRAIT MODIFIERS CAN SPOIL FOOD STORED IN SHELVES###" +
-                    "\nDebug: Will enable all debug text." +
-                    "\nSpecial Ice Traits: Makes using sea ice and packed ice effect temperature of the cellars." +
-                    "\nMonth Average Temperature: This will cause the temperature calculation, for cellars, to be based on the average temperature of the month. Instead of actual current temperature"
-                    +
-                    "\nTemperatureIceHouse: Is the minimum value the ice house can make it with out negative temperatures outside. Special Ice Traits do not take this into account."
-                    +
-                    "\nDisableShards: Turning this value to true will change Ice Saw drops to ice blocks instead of shards.");
+                              "###BEWARE CHANGING TRAIT MODIFIERS CAN SPOIL FOOD STORED IN SHELVES###" +
+                              "\nDebug: Will enable all debug text." +
+                              "\nSpecial Ice Traits: Makes using sea ice and packed ice effect temperature of the cellars." +
+                              "\nMonth Average Temperature: This will cause the temperature calculation, for cellars, to be based on the average temperature of the month. Instead of actual current temperature"
+                              +
+                              "\nTemperatureIceHouse: Is the minimum value the ice house can make it with out negative temperatures outside. Special Ice Traits do not take this into account."
+                              +
+                              "\nDisableShards: Turning this value to true will change Ice Saw drops to ice blocks instead of shards.");
 
     isDebugging = config.get(Configuration.CATEGORY_GENERAL, "Debug", false).getBoolean(false);
     specialIceTraits = config.get(Configuration.CATEGORY_GENERAL, "SpecialIceTraits", false).getBoolean(false);
@@ -61,7 +61,7 @@ public class ModConfig {
 
     Property coolantConsumptionMultiplierProperty = config.get(Configuration.CATEGORY_GENERAL, "CoolantConsumptionMultiplier", 100);
     coolantConsumptionMultiplierProperty.setComment(
-            "The multiplier 100 is 1.0, 123 is 1.23\t:\tIs used to effect the coolant consumption rate of the cellars");
+      "The multiplier 100 is 1.0, 123 is 1.23\t:\tIs used to effect the coolant consumption rate of the cellars");
     coolantConsumptionMultiplier = (float) (0.01 * coolantConsumptionMultiplierProperty.getInt());
 
     Property coolModProperty = config.get(Configuration.CATEGORY_GENERAL, "coolMod", 800);

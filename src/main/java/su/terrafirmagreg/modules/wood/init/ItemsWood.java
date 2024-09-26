@@ -28,34 +28,34 @@ public final class ItemsWood {
 
   public static void onRegister(RegistryManager registry) {
     BOAT = WoodItemVariant
-            .builder("boat")
-            .factory(ItemWoodBoat::new)
-            .build(registry);
+      .builder("boat")
+      .factory(ItemWoodBoat::new)
+      .build(registry);
 
     LUMBER = WoodItemVariant
-            .builder("lumber")
-            .factory(ItemWoodLumber::new)
-            .build(registry);
+      .builder("lumber")
+      .factory(ItemWoodLumber::new)
+      .build(registry);
 
     WHEEL = WoodItemVariant
-            .builder("wheel")
-            .factory(ItemWoodWheel::new)
-            .build(registry);
+      .builder("wheel")
+      .factory(ItemWoodWheel::new)
+      .build(registry);
 
     SUPPLY_CART = WoodItemVariant
-            .builder("supply_cart")
-            .factory(ItemWoodSupplyCart::new)
-            .build(registry);
+      .builder("supply_cart")
+      .factory(ItemWoodSupplyCart::new)
+      .build(registry);
 
     ANIMAL_CART = WoodItemVariant
-            .builder("animal_cart")
-            .factory(ItemWoodAnimalCart::new)
-            .build(registry);
+      .builder("animal_cart")
+      .factory(ItemWoodAnimalCart::new)
+      .build(registry);
 
     PLOW_CART = WoodItemVariant
-            .builder("plow_cart")
-            .factory(ItemWoodPlowCart::new)
-            .build(registry);
+      .builder("plow_cart")
+      .factory(ItemWoodPlowCart::new)
+      .build(registry);
 
     STICK_BUNDLE = registry.item(new ItemWoodMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"));
     STICK_BUNCH = registry.item(new ItemWoodMisc("stick_bunch", Size.NORMAL, Weight.LIGHT));

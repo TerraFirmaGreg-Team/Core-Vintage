@@ -9,7 +9,6 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IFruitTreeGenerator;
@@ -22,7 +21,7 @@ public class GeneratorTreeFruit implements IFruitTreeGenerator {
 
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, IFruitTree tree,
-          Random rand) {
+                           Random rand) {
     ResourceLocation base = new ResourceLocation("tfc:fruit_trees/" + tree.getName());
     Template structureBase = manager.get(world.getMinecraftServer(), base);
 

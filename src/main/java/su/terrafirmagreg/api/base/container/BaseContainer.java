@@ -7,8 +7,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 /**
- * A very simple container implementation. Used for gui's that have no internal inventory, or no TE they need to access Prefer using {@link BaseContainerTile} instead
- * for tile entities or {@link BaseContainerItemStack} for items
+ * A very simple container implementation. Used for gui's that have no internal inventory, or no TE they need to access Prefer using {@link BaseContainerTile}
+ * instead for tile entities or {@link BaseContainerItemStack} for items
  */
 public abstract class BaseContainer extends Container {
 

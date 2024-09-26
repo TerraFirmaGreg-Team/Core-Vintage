@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 
-
 import BananaFructa.tfcfarming.Config;
 import BananaFructa.tfcfarming.CropNutrients;
 import BananaFructa.tfcfarming.NutrientClass;
@@ -32,7 +31,7 @@ import java.util.List;
 import java.util.Set;
 
 public class WorldDataFarming
-        extends WorldSavedData {
+  extends WorldSavedData {
 
   private static final String DATA_ID = ModUtils.localize("data.farming");
 
@@ -110,12 +109,12 @@ public class WorldDataFarming
         boolean found = false;
 
         for (BlockPos p = new BlockPos(pos.getFirst(), 255, pos.getSecond()); p.getY() > -1;
-                p = p.down()) {
+             p = p.down()) {
           Block block = world.getBlockState(p).getBlock();
           if (block != Blocks.AIR) {
             if (block instanceof BlockSnow || block instanceof BlockSnowBlock
-                    || world.getBlockState(p)
-                    .getMaterial() == Material.WATER) {
+                || world.getBlockState(p)
+                        .getMaterial() == Material.WATER) {
               continue;
             }
             if (block instanceof BlockCropDead) {
@@ -140,7 +139,7 @@ public class WorldDataFarming
           continue;
         }
         fertilizerBlock(l, nutrientClass, (int) (amount * (deadCrop ? Config.growthDead
-                : 1))); // the block is equivalent to default, remove
+                                                                    : 1))); // the block is equivalent to default, remove
 
       }
     }
@@ -213,8 +212,8 @@ public class WorldDataFarming
 
     try {
       nutrientMap = gson.fromJson(nbt.getString("nutrientMap"),
-              new TypeToken<HashMap<Long, Integer>>() {
-              }.getType());
+                                  new TypeToken<HashMap<Long, Integer>>() {
+                                  }.getType());
     } catch (Exception e) {
       e.printStackTrace();
     }

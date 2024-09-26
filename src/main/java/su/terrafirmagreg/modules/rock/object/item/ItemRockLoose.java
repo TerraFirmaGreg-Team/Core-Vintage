@@ -26,35 +26,32 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
 import java.util.List;
 
-import static su.terrafirmagreg.modules.core.client.GuiHandler.Type.ROCK_KNAPPING;
-
 @Getter
 public class ItemRockLoose extends ItemRock
-        implements IProviderContainer<ContainerKnappingRock, GuiContainerKnappingRock> {
+  implements IProviderContainer<ContainerKnappingRock, GuiContainerKnappingRock> {
 
   public ItemRockLoose(RockItemVariant variant, RockType type) {
     super(variant, type);
 
     getSettings()
-            .weight(Weight.VERY_LIGHT)
-            .oreDict("rock")
-            .oreDict("rock", type)
-            .oreDict("rock", type.isFlux() ? "flux" : null)
-            .oreDict("rock", type.getCategory());
+      .weight(Weight.VERY_LIGHT)
+      .oreDict("rock")
+      .oreDict("rock", type)
+      .oreDict("rock", type.isFlux() ? "flux" : null)
+      .oreDict("rock", type.getCategory());
   }
 
   @Override
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
     if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
-      GuiHandler.openGui(world, player.getPosition(), player, ROCK_KNAPPING);
+      GuiHandler.openGui(world, player.getPosition(), player);
     }
     return new ActionResult<>(EnumActionResult.SUCCESS, stack);
   }

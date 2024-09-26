@@ -6,7 +6,6 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
 import static su.terrafirmagreg.data.Constants.MODID_FL;
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
@@ -94,7 +93,7 @@ public class ConfigFL {
       @Config.Comment("List of animals that drop rennet")
       @Config.LangKey("config." + MODID_FL + "general.balance.rennetLootTable")
       public String[] rennetLootTable = new String[]{"animals/sheep", "animals/cow", "animals/deer", "animals/goat", "animals/zebu",
-              "animals/gazelle", "animals/wildebeest", "animals/muskox", "animals/yak"};
+                                                     "animals/gazelle", "animals/wildebeest", "animals/muskox", "animals/yak"};
 
       @Config.Comment("Ticks required for a cheese to become aged")
       @Config.LangKey("config." + MODID_FL + "general.balance.cheeseTimeToAged")

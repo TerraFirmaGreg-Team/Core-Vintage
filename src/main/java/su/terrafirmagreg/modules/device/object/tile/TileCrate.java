@@ -10,6 +10,7 @@ import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrate;
 import su.terrafirmagreg.modules.device.object.container.ContainerCrate;
+import su.terrafirmagreg.modules.device.object.inventory.InventoryLargeVessel;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -20,8 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
@@ -41,15 +40,14 @@ import static net.dries007.tfc.objects.blocks.BlockLargeVessel.SEALED;
  * @see BlockLargeVessel
  */
 
-public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCallback,
-        IProviderContainer<ContainerCrate, GuiCrate> {
+public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCallback, IProviderContainer<ContainerCrate, GuiCrate> {
 
   @Getter
   private boolean sealed;
   private long sealedTick, sealedCalendarTick;
 
   public TileCrate() {
-    super(new LargeVesselItemStackHandler(15));
+    super(new InventoryLargeVessel(15));
   }
 
   /**
@@ -77,8 +75,7 @@ public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCal
 
   @NotNull
   public String getSealedDate() {
-    return ICalendarFormatted.getTimeAndDate(sealedCalendarTick,
-            Calendar.CALENDAR_TIME.getDaysInMonth());
+    return ICalendarFormatted.getTimeAndDate(sealedCalendarTick, Calendar.CALENDAR_TIME.getDaysInMonth());
   }
 
   @Override
@@ -180,32 +177,15 @@ public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCal
     return nbt;
   }
 
-  private static class LargeVesselItemStackHandler extends ItemStackHandler {
-
-    private LargeVesselItemStackHandler(int slots) {
-      super(slots);
-    }
-
-    @Override
-    @NotNull
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-      ItemStack stack = super.extractItem(slot, amount, simulate);
-      CapabilityFood.removeTrait(stack, FoodTrait.PRESERVED);
-      return stack;
-    }
-  }
-
   @Override
   public ContainerCrate getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                     IBlockState state, BlockPos pos) {
     return new ContainerCrate(inventoryPlayer, this);
   }
 
   @Override
-  public GuiCrate getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state,
-          BlockPos pos) {
-    return new GuiCrate(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this,
-            state);
+  public GuiCrate getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new GuiCrate(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this, state);
   }
 
 

@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.text.TextFormatting;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 
 import lombok.Getter;

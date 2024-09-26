@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_EXTRA_INPUT_END;
@@ -33,10 +32,10 @@ public class ContainerFirePit extends BaseContainerTile<TileFirePit> {
   protected void addContainerSlots() {
     // Can't rely on the attachment variable because this is called in the super constructor, which happens before attachment is set
     BlockFirePit.FirePitAttachment attachment = tile.getWorld()
-            .getBlockState(tile.getPos())
-            .getValue(BlockFirePit.ATTACHMENT);
+                                                    .getBlockState(tile.getPos())
+                                                    .getValue(BlockFirePit.ATTACHMENT);
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-            null);
+                                                null);
     if (inventory != null) {
       // fuel slots
       for (int i = 0; i < 4; i++) {
@@ -53,7 +52,7 @@ public class ContainerFirePit extends BaseContainerTile<TileFirePit> {
         // Both fire pit and cooking pot use these extra slots
         for (int i = SLOT_EXTRA_INPUT_START; i <= SLOT_EXTRA_INPUT_END; i++) {
           addSlotToContainer(
-                  new SlotCallback(inventory, i, 62 + (i - SLOT_EXTRA_INPUT_START) * 18, 20, tile));
+            new SlotCallback(inventory, i, 62 + (i - SLOT_EXTRA_INPUT_START) * 18, 20, tile));
         }
       }
     }
@@ -67,8 +66,8 @@ public class ContainerFirePit extends BaseContainerTile<TileFirePit> {
       case COOKING_POT:
       case GRILL:
         return !mergeItemStack(stack, SLOT_FUEL_INPUT, SLOT_FUEL_INPUT + 1, false) &&
-                !mergeItemStack(stack, SLOT_FUEL_INPUT + 1, SLOT_FUEL_INPUT + 6,
-                        false); // this uses index of the slots sequentially, not the slot IDs themselves
+               !mergeItemStack(stack, SLOT_FUEL_INPUT + 1, SLOT_FUEL_INPUT + 6,
+                               false); // this uses index of the slots sequentially, not the slot IDs themselves
     }
     return false;
   }

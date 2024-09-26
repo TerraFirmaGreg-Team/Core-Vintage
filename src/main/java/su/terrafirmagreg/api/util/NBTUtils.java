@@ -8,7 +8,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 
-
 import lombok.experimental.UtilityClass;
 
 import java.util.Collection;
@@ -24,15 +23,15 @@ public final class NBTUtils {
    * A Comparator used to compare NBTTagCompound.
    */
   public static final Comparator<NBTTagCompound> NBT_COMPARATOR = (firstTag, secondTag) ->
-          firstTag != null ? firstTag.equals(secondTag) ? 0 : 1 : secondTag != null ? -1 : 0;
+    firstTag != null ? firstTag.equals(secondTag) ? 0 : 1 : secondTag != null ? -1 : 0;
 
   public static void setGenericNBTValue(String tagName, Object value) {
     setGenericNBTValue(new NBTTagCompound(), tagName, value);
   }
 
   /**
-   * Sets an unknown data type to an NBTTagCompound. If the type of the data can not be identified, and exception will be thrown. Current supported data types include
-   * String, Integer, Float, Boolean, Double, Long, Short, Byte, ItemStack, Entity and Position.
+   * Sets an unknown data type to an NBTTagCompound. If the type of the data can not be identified, and exception will be thrown. Current supported data types
+   * include String, Integer, Float, Boolean, Double, Long, Short, Byte, ItemStack, Entity and Position.
    *
    * @param dataTag: An NBTTagCompound to write this unknown data to.
    * @param tagName: The name to save this unknown data under.
@@ -68,7 +67,7 @@ public final class NBTUtils {
       dataTag.setTag(tagName, newTag);
     } else {
       throw new RuntimeException(
-              "The data type of " + value.getClass().getName() + " is currently not supported." + System.lineSeparator() + "Raw Data: " + value
+        "The data type of " + value.getClass().getName() + " is currently not supported." + System.lineSeparator() + "Raw Data: " + value
       );
     }
   }
@@ -135,8 +134,8 @@ public final class NBTUtils {
   }
 
   /**
-   * Retrieves an array of ItemStack from an NBTTagCompound. This method is intended to be used with the NBT version of an IInventory and can be used when parsing
-   * things like TileEntity NBT data.
+   * Retrieves an array of ItemStack from an NBTTagCompound. This method is intended to be used with the NBT version of an IInventory and can be used when
+   * parsing things like TileEntity NBT data.
    *
    * @param tag:     The tag to retrieve all of the item data from.
    * @param invSize: The projected size of the inventory stored to the tag. It is critical that this never be smaller then the actual amount.
@@ -164,13 +163,13 @@ public final class NBTUtils {
   }
 
   /**
-   * Provides a way to access an NBTTagCompound that is very deep within another NBTTagCompound. This will allow you to use an array of strings which represent the
-   * different steps to get to the deep NBTTagCompound.
+   * Provides a way to access an NBTTagCompound that is very deep within another NBTTagCompound. This will allow you to use an array of strings which represent
+   * the different steps to get to the deep NBTTagCompound.
    *
    * @param tag:  An NBTTagCompound to search through.
    * @param tags: An array containing the various steps to get to the desired deep NBTTagCompound.
-   * @return NBTTagCompound: This method will return the deepest possible NBTTagCompound. In some cases, this may be the tag you provide, or only a few steps deep,
-   * rather than all of the way.
+   * @return NBTTagCompound: This method will return the deepest possible NBTTagCompound. In some cases, this may be the tag you provide, or only a few steps
+   * deep, rather than all of the way.
    */
   public static NBTTagCompound getDeepTagCompound(NBTTagCompound tag, String[] tags) {
 
@@ -260,8 +259,7 @@ public final class NBTUtils {
    * @param func       The function used to deserialize elements.
    * @return A collection containing all deserialized elements.
    */
-  public static <T extends Object> Collection<T> readCollection(Collection<T> collection,
-          NBTTagList list, Function<String, T> func) {
+  public static <T extends Object> Collection<T> readCollection(Collection<T> collection, NBTTagList list, Function<String, T> func) {
 
     for (int index = 0; index < list.tagCount(); index++) {
 
@@ -279,8 +277,7 @@ public final class NBTUtils {
    * @param func       The function used to serialize the elements.
    * @return An NBTTagList containing the serialized string values.
    */
-  public static <T extends Object> NBTTagList writeCollection(Collection<T> collection,
-          Function<T, String> func) {
+  public static <T extends Object> NBTTagList writeCollection(Collection<T> collection, Function<T, String> func) {
 
     final NBTTagList tagList = new NBTTagList();
 

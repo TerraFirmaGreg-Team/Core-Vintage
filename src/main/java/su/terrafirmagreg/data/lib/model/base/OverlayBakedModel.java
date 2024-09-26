@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
 
-
 import org.lwjgl.util.vector.Vector3f;
 
 import org.jetbrains.annotations.NotNull;
@@ -20,28 +19,28 @@ import java.util.List;
 public class OverlayBakedModel implements IBakedModel {
 
   private final ItemTransformVec3f fixed = new ItemTransformVec3f(new Vector3f(0, 0, 0),
-          new Vector3f(0, 0, 0), new Vector3f(0.5f, 0.5f, 0.5f));
+                                                                  new Vector3f(0, 0, 0), new Vector3f(0.5f, 0.5f, 0.5f));
   private final ItemTransformVec3f ground = new ItemTransformVec3f(new Vector3f(0, 0, 0),
-          new Vector3f(0, 0.15f, 0),
-          new Vector3f(0.25f, 0.25f, 0.25f));
+                                                                   new Vector3f(0, 0.15f, 0),
+                                                                   new Vector3f(0.25f, 0.25f, 0.25f));
   private final ItemTransformVec3f gui = new ItemTransformVec3f(new Vector3f(30, 225, 0),
-          new Vector3f(0, 0, 0),
-          new Vector3f(0.625f, 0.625f, 0.625f));
+                                                                new Vector3f(0, 0, 0),
+                                                                new Vector3f(0.625f, 0.625f, 0.625f));
   List<BakedQuad> quads;
   TextureAtlasSprite textureAtlasSprite;
   ItemTransformVec3f firstperson_righthand = new ItemTransformVec3f(new Vector3f(0, 45, 0),
-          new Vector3f(0, 0, 0),
-          new Vector3f(0.40f, 0.40f, 0.40f));
+                                                                    new Vector3f(0, 0, 0),
+                                                                    new Vector3f(0.40f, 0.40f, 0.40f));
   ItemTransformVec3f firstperson_lefthand = new ItemTransformVec3f(new Vector3f(0, 225, 0),
-          new Vector3f(0, 0, 0),
-          new Vector3f(0.40f, 0.40f, 0.40f));
+                                                                   new Vector3f(0, 0, 0),
+                                                                   new Vector3f(0.40f, 0.40f, 0.40f));
   ItemTransformVec3f thirdperson_righthand = new ItemTransformVec3f(new Vector3f(75, 45, 0),
-          new Vector3f(0, 0.15f, 0),
-          new Vector3f(0.375f, 0.375f, 0.375f));
+                                                                    new Vector3f(0, 0.15f, 0),
+                                                                    new Vector3f(0.375f, 0.375f, 0.375f));
   private final ItemCameraTransforms itemCameraTransforms = new ItemCameraTransforms(
-          thirdperson_righthand, thirdperson_righthand,
-          firstperson_lefthand, firstperson_righthand,
-          ItemTransformVec3f.DEFAULT, gui, ground, fixed);
+    thirdperson_righthand, thirdperson_righthand,
+    firstperson_lefthand, firstperson_righthand,
+    ItemTransformVec3f.DEFAULT, gui, ground, fixed);
 
   public OverlayBakedModel(List<BakedQuad> quads, TextureAtlasSprite textureAtlasSprite) {
     this.quads = quads;
@@ -50,7 +49,7 @@ public class OverlayBakedModel implements IBakedModel {
 
   @Override
   public @NotNull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side,
-          long rand) {
+                                           long rand) {
     return quads;
   }
 

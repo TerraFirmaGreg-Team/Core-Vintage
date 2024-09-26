@@ -7,7 +7,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketGuiButton;
 
@@ -37,7 +36,7 @@ public class GuiButtonKnapping extends GuiButton {
       mc.getTextureManager().bindTexture(texture);
 
       hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
-              && mouseY < this.y + this.height;
+                && mouseY < this.y + this.height;
 
       drawModalRectWithCustomSizedTexture(x, y, 0, 0, 16, 16, 16, 16);
       mouseDragged(mc, mouseX, mouseY);

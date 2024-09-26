@@ -22,7 +22,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
@@ -119,7 +118,9 @@ public class ItemBag extends ItemTFCF {
         CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
       }
       super.setStackInSlot(slot, stack);
-    }    @Override
+    }
+
+    @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
       return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
     }
@@ -134,7 +135,9 @@ public class ItemBag extends ItemTFCF {
         }
       }
       return super.insertItem(slot, stack, simulate);
-    }    @Nullable
+    }
+
+    @Nullable
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
@@ -173,10 +176,10 @@ public class ItemBag extends ItemTFCF {
 
     /**
      * This is used for a very unique situation, see #1083 By tracing the call path through
-     * {@link net.minecraft.inventory.Container#slotClick(int, int, ClickType, EntityPlayer)}, the *only* method that can possibly intercept in that massive chain,
-     * for clicking on a slot with a stack is either this one (in which case we handle the previous item stack in the slot which a reference has been obtained to)
-     * Thus, we don't actually care about the stack being put in the slot. We do assume that since this stack is being put in the slot, a different stack is being
-     * taken out.
+     * {@link net.minecraft.inventory.Container#slotClick(int, int, ClickType, EntityPlayer)}, the *only* method that can possibly intercept in that massive
+     * chain, for clicking on a slot with a stack is either this one (in which case we handle the previous item stack in the slot which a reference has been
+     * obtained to) Thus, we don't actually care about the stack being put in the slot. We do assume that since this stack is being put in the slot, a different
+     * stack is being taken out.
      */
     @Override
     public void beforePutStack(SlotCallback slot, @NotNull ItemStack stack) {
@@ -185,8 +188,6 @@ public class ItemBag extends ItemTFCF {
         CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
       }
     }
-
-
 
 
   }

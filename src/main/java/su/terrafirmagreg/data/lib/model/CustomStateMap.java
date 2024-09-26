@@ -9,7 +9,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -72,7 +71,7 @@ public class CustomStateMap extends StateMapperBase {
   }
 
   private <T extends Comparable<T>> String removeName(IProperty<T> property,
-          Map<IProperty<?>, Comparable<?>> values) {
+                                                      Map<IProperty<?>, Comparable<?>> values) {
     return property.getName((T) values.remove(this.name));
   }
 

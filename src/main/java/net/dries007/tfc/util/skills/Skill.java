@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.capabilities.player.ICapabilityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -40,6 +39,13 @@ public abstract class Skill implements INBTSerializable<NBTTagCompound> {
   }
 
   /**
+   * Helper method to set this skill total level. Should match getTotalLevel()
+   *
+   * @param value a value between [0, 1]
+   */
+  public abstract void setTotalLevel(double value);
+
+  /**
    * @return the current tier of the skill
    */
   @NotNull
@@ -51,13 +57,6 @@ public abstract class Skill implements INBTSerializable<NBTTagCompound> {
    * @return the current level of the skill
    */
   public abstract float getLevel();
-
-  /**
-   * Helper method to set this skill total level. Should match getTotalLevel()
-   *
-   * @param value a value between [0, 1]
-   */
-  public abstract void setTotalLevel(double value);
 
   /**
    * Subclasses should call this when the skill updates

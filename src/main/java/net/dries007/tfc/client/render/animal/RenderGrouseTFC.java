@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.render.animal;
 
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
+import net.dries007.tfc.client.model.animal.ModelGrouseTFC;
+import net.dries007.tfc.objects.entity.animal.EntityGrouseTFC;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -11,9 +11,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import net.dries007.tfc.client.model.animal.ModelGrouseTFC;
-import net.dries007.tfc.objects.entity.animal.EntityGrouseTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
 

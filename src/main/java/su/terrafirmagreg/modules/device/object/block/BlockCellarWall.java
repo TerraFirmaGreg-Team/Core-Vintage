@@ -10,7 +10,8 @@ public class BlockCellarWall extends BaseBlock {
     super(Settings.of(Material.WOOD));
 
     getSettings()
-            .registryKey("device/cellar/wall")
-            .hardness(2F);
+      .registryKey("device/cellar/wall")
+      .hardness(3F)
+      .resistance(25F);
   }
 }

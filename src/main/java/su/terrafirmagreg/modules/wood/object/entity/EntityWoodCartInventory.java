@@ -15,7 +15,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +43,7 @@ public abstract class EntityWoodCartInventory extends EntityWoodCart {
     for (int i = 0; i < nbttaglist.tagCount(); ++i) {
       NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
       this.inventory.setInventorySlotContents(nbttagcompound.getByte("Slot") & 255,
-              new ItemStack(nbttagcompound));
+                                              new ItemStack(nbttagcompound));
     }
   }
 
@@ -67,7 +66,7 @@ public abstract class EntityWoodCartInventory extends EntityWoodCart {
   @Override
   public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
     return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(
-            capability, facing);
+      capability, facing);
   }
 
   @SuppressWarnings("unchecked")

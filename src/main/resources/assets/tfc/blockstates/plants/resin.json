@@ -7,13 +7,11 @@
       "apply": [
         {
           "model": "tfc:plants/resin_standing_0"
-        },
-        {
+        }, {
           "model": "tfc:plants/resin_standing_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "facing": "down"
       },
@@ -21,14 +19,12 @@
         {
           "model": "tfc:plants/resin_standing_0",
           "x": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/resin_standing_1",
           "x": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "facing": "east"
       },
@@ -36,14 +32,12 @@
         {
           "model": "tfc:plants/resin_0",
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/resin_1",
           "y": 90
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "facing": "south"
       },
@@ -51,14 +45,12 @@
         {
           "model": "tfc:plants/resin_0",
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/resin_1",
           "y": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "facing": "west"
       },
@@ -66,22 +58,19 @@
         {
           "model": "tfc:plants/resin_0",
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/resin_1",
           "y": 270
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "facing": "north"
       },
       "apply": [
         {
           "model": "tfc:plants/resin_0"
-        },
-        {
+        }, {
           "model": "tfc:plants/resin_1"
         }
       ]

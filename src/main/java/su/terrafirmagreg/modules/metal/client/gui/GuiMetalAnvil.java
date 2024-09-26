@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.base.gui.component.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.TranslatorUtil;
 import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.objects.recipe.anvil.IAnvilRecipe;
@@ -17,7 +18,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 
 import net.dries007.tfc.client.button.GuiButtonAnvilStep;
 import net.dries007.tfc.util.forge.ForgeRule;
@@ -68,7 +68,7 @@ public class GuiMetalAnvil extends BaseGuiContainerTile<TileMetalAnvil> {
         ForgeRule rule = recipe.getRules()[i];
         if (rule != null && mouseX >= x && mouseY >= y && mouseX < x + 18 && mouseY < y + 22) {
           // Hovering over rule area
-          drawHoveringText(I18n.format(GameUtils.getEnumName(rule)), mouseX, mouseY);
+          drawHoveringText(I18n.format(TranslatorUtil.getEnumName(rule)), mouseX, mouseY);
           break;
         }
         x += 19;
@@ -102,7 +102,7 @@ public class GuiMetalAnvil extends BaseGuiContainerTile<TileMetalAnvil> {
           int xOffset = i * 19;
           // The rule icon
           drawScaledCustomSizeModalRect(guiLeft + 64 + xOffset, guiTop + 10, rule.getU(),
-                  rule.getV(), 32, 32, 10, 10, 256, 256);
+                                        rule.getV(), 32, 32, 10, 10, 256, 256);
 
           // The overlay
           if (rule.matches(steps)) {
@@ -125,7 +125,7 @@ public class GuiMetalAnvil extends BaseGuiContainerTile<TileMetalAnvil> {
         // Reverses the placement of the steps to line up better with the rules
         int xOffset = (2 - i) * 19;
         drawScaledCustomSizeModalRect(guiLeft + 64 + xOffset, guiTop + 31, step.getU(), step.getV(),
-                32, 32, 10, 10, 256, 256);
+                                      32, 32, 10, 10, 256, 256);
       }
     }
 

@@ -27,15 +27,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class EntityWoodSupplyCart extends EntityWoodCartInventory
-        implements IInventoryChangedListener,
-        IProviderContainer<ContainerWoodSupplyCart, GuiWoodSupplyCart> {
+  implements IInventoryChangedListener,
+             IProviderContainer<ContainerWoodSupplyCart, GuiWoodSupplyCart> {
 
   private static final DataParameter<Integer> CARGO = EntityDataManager.createKey(
-          EntityWoodSupplyCart.class, DataSerializers.VARINT);
+    EntityWoodSupplyCart.class, DataSerializers.VARINT);
 
   public EntityWoodSupplyCart(World worldIn) {
     super(worldIn);
@@ -52,7 +51,7 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory
     }
     for (String entry : ConfigWood.ITEM.SUPPLY_CART.canPull) {
       if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player"
-              : EntityList.getKey(pullingIn).toString())) {
+                                                         : EntityList.getKey(pullingIn).toString())) {
         return true;
       }
     }
@@ -92,9 +91,9 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory
   public void updatePassenger(@NotNull Entity passenger) {
     if (this.isPassenger(passenger)) {
       Vec3d vec3d = (new Vec3d(-0.68D, 0.0D, 0.0D)).rotateYaw(
-              -this.rotationYaw * 0.017453292F - ((float) Math.PI / 2F));
+        -this.rotationYaw * 0.017453292F - ((float) Math.PI / 2F));
       passenger.setPosition(this.posX + vec3d.x,
-              this.posY + this.getMountedYOffset() + passenger.getYOffset(), this.posZ + vec3d.z);
+                            this.posY + this.getMountedYOffset() + passenger.getYOffset(), this.posZ + vec3d.z);
     }
   }
 
@@ -150,16 +149,16 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory
 
   @Override
   public ContainerWoodSupplyCart getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                              IBlockState state, BlockPos pos) {
     return new ContainerWoodSupplyCart(inventoryPlayer, inventory, this, inventoryPlayer.player);
   }
 
   @Override
   @SideOnly(Side.CLIENT)
   public GuiWoodSupplyCart getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                           IBlockState state, BlockPos pos) {
     return new GuiWoodSupplyCart(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-            inventory);
+                                 inventory);
   }
 
 }

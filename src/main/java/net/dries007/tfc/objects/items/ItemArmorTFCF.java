@@ -10,7 +10,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-
 import net.dries007.tfc.api.types.IArmorMaterialTFC;
 import net.dries007.tfc.objects.ArmorMaterialTFC;
 
@@ -73,19 +72,19 @@ public class ItemArmorTFCF extends ItemArmor implements ICapabilitySize, ICapabi
   @Override
   public boolean hasColor(ItemStack stack) {
     if (this.materialTFC != ArmorMaterialTFC.PINEAPPLE_LEATHER ||
-            this.materialTFC != ArmorMaterialTFC.BURLAP_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.WOOL_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.SILK_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.SISAL_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.COTTON_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.LINEN_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.HEMP_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.YUCCA_CANVAS) {
+        this.materialTFC != ArmorMaterialTFC.BURLAP_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.WOOL_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.SILK_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.SISAL_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.COTTON_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.LINEN_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.HEMP_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.YUCCA_CANVAS) {
       return false;
     } else {
       NBTTagCompound nbttagcompound = stack.getTagCompound();
       return nbttagcompound != null && nbttagcompound.hasKey("display", 10) && nbttagcompound.getCompoundTag("display")
-              .hasKey("color", 3);
+                                                                                             .hasKey("color", 3);
     }
     	/*return !stack.hasTagCompound() ?
             false : (!stack.getTagCompound().hasKey("display", 10) ?
@@ -98,14 +97,14 @@ public class ItemArmorTFCF extends ItemArmor implements ICapabilitySize, ICapabi
   @Override
   public int getColor(ItemStack stack) {
     if (this.materialTFC != ArmorMaterialTFC.PINEAPPLE_LEATHER ||
-            this.materialTFC != ArmorMaterialTFC.BURLAP_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.WOOL_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.SILK_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.SISAL_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.COTTON_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.LINEN_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.HEMP_CLOTH ||
-            this.materialTFC != ArmorMaterialTFC.YUCCA_CANVAS) {
+        this.materialTFC != ArmorMaterialTFC.BURLAP_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.WOOL_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.SILK_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.SISAL_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.COTTON_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.LINEN_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.HEMP_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.YUCCA_CANVAS) {
       return DEFAULT_COLOR;
     } else {
       NBTTagCompound nbttagcompound = stack.getTagCompound();
@@ -152,14 +151,14 @@ public class ItemArmorTFCF extends ItemArmor implements ICapabilitySize, ICapabi
   @Override
   public void removeColor(ItemStack stack) {
     if (this.materialTFC == ArmorMaterialTFC.PINEAPPLE_LEATHER ||
-            this.materialTFC == ArmorMaterialTFC.BURLAP_CLOTH ||
-            this.materialTFC == ArmorMaterialTFC.WOOL_CLOTH ||
-            this.materialTFC == ArmorMaterialTFC.SILK_CLOTH ||
-            this.materialTFC == ArmorMaterialTFC.SISAL_CLOTH ||
-            this.materialTFC == ArmorMaterialTFC.COTTON_CLOTH ||
-            this.materialTFC == ArmorMaterialTFC.LINEN_CLOTH ||
-            this.materialTFC == ArmorMaterialTFC.HEMP_CLOTH ||
-            this.materialTFC == ArmorMaterialTFC.YUCCA_CANVAS) {
+        this.materialTFC == ArmorMaterialTFC.BURLAP_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.WOOL_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.SILK_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.SISAL_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.COTTON_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.LINEN_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.HEMP_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.YUCCA_CANVAS) {
       NBTTagCompound nbttagcompound = stack.getTagCompound();
       if (nbttagcompound != null) {
         NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");
@@ -185,8 +184,8 @@ public class ItemArmorTFCF extends ItemArmor implements ICapabilitySize, ICapabi
   }
 
   /**
-   * Determines if this armor will be rendered with the secondary 'overlay' texture. If this is true, the first texture will be rendered using a tint of the color
-   * specified by getColor(ItemStack)
+   * Determines if this armor will be rendered with the secondary 'overlay' texture. If this is true, the first texture will be rendered using a tint of the
+   * color specified by getColor(ItemStack)
    *
    * @param stack The stack
    * @return true/false

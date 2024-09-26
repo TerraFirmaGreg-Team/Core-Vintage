@@ -17,7 +17,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 public class EntityWoodBoat extends EntityBoat {
 
   private static final DataParameter<String> WOOD_NAME = EntityDataManager.createKey(
-          EntityWoodBoat.class, DataSerializers.STRING);
+    EntityWoodBoat.class, DataSerializers.STRING);
 
   public EntityWoodBoat(World worldIn) {
     super(worldIn);
@@ -56,8 +55,8 @@ public class EntityWoodBoat extends EntityBoat {
   public WoodType getWood() {
     //noinspection ConstantConditions
     return WoodType.getTypes().stream()
-            .filter(wood -> wood.toString().equalsIgnoreCase(this.dataManager.get(WOOD_NAME)))
-            .findFirst().orElse(null);
+                   .filter(wood -> wood.toString().equalsIgnoreCase(this.dataManager.get(WOOD_NAME)))
+                   .findFirst().orElse(null);
   }
 
   public void setWood(@Nullable WoodType woodType) {
@@ -104,7 +103,7 @@ public class EntityWoodBoat extends EntityBoat {
 
     if (this.canPassengerSteer()) {
       if (this.getPassengers().isEmpty() || !(this.getPassengers()
-              .get(0) instanceof EntityPlayer)) {
+                                                  .get(0) instanceof EntityPlayer)) {
         this.setPaddleState(false, false);
       }
 
@@ -113,7 +112,7 @@ public class EntityWoodBoat extends EntityBoat {
       if (this.world.isRemote) {
         this.controlBoat();
         this.world.sendPacketToServer(
-                new CPacketSteerBoat(this.getPaddleState(0), this.getPaddleState(1)));
+          new CPacketSteerBoat(this.getPaddleState(0), this.getPaddleState(1)));
       }
 
       this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
@@ -126,9 +125,9 @@ public class EntityWoodBoat extends EntityBoat {
     for (int i = 0; i <= 1; ++i) {
       if (this.getPaddleState(i)) {
         if (!this.isSilent() && (double) (this.paddlePositions[i] % ((float) Math.PI * 2F)) <= (
-                Math.PI / 4D) &&
-                ((double) this.paddlePositions[i] + 0.39269909262657166D) % (Math.PI * 2D) >= (Math.PI
-                        / 4D)) {
+          Math.PI / 4D) &&
+            ((double) this.paddlePositions[i] + 0.39269909262657166D) % (Math.PI * 2D) >= (Math.PI
+                                                                                           / 4D)) {
           SoundEvent soundevent = this.getPaddleSound();
 
           if (soundevent != null) {
@@ -136,8 +135,8 @@ public class EntityWoodBoat extends EntityBoat {
             double d0 = i == 1 ? -vec3d.z : vec3d.z;
             double d1 = i == 1 ? vec3d.x : -vec3d.x;
             this.world.playSound(null, this.posX + d0, this.posY, this.posZ + d1, soundevent,
-                    this.getSoundCategory(), 1.0F,
-                    0.8F + 0.4F * this.rand.nextFloat());
+                                 this.getSoundCategory(), 1.0F,
+                                 0.8F + 0.4F * this.rand.nextFloat());
           }
         }
 

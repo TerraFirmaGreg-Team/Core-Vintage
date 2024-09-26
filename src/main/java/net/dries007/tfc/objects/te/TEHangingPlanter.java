@@ -1,9 +1,8 @@
 package net.dries007.tfc.objects.te;
 
-import net.minecraft.nbt.NBTTagCompound;
-
-
 import com.eerussianguy.firmalife.util.GreenhouseHelpers;
+
+import net.minecraft.nbt.NBTTagCompound;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -2,7 +2,6 @@ package pieman.caffeineaddon.jeicompat;
 
 import net.minecraft.item.ItemStack;
 
-
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
@@ -34,13 +33,13 @@ public class CAJEIPlugin implements IModPlugin {
     REGISTRY = registry;
     //Wraps all quern recipes
     List<DryingMatRecipeWrapper> quernList = Registries.DRYINGMAT.getValuesCollection()
-            .stream()
-            .map(DryingMatRecipeWrapper::new)
-            .collect(Collectors.toList());
+                                                                 .stream()
+                                                                 .map(DryingMatRecipeWrapper::new)
+                                                                 .collect(Collectors.toList());
 
     registry.addRecipes(quernList, DRYINGMAT_UID); //Register recipes to quern category
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.DRYING_MAT_BLOCK),
-            DRYINGMAT_UID); //Register BlockQuern as the device that do quern recipes
+                               DRYINGMAT_UID); //Register BlockQuern as the device that do quern recipes
 
     registry.addRecipeClickArea(GuiDryingMat.class, 103, 35, 9, 14, DRYINGMAT_UID);
   }

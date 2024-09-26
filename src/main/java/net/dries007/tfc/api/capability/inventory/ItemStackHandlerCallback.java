@@ -3,7 +3,6 @@ package net.dries007.tfc.api.capability.inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class ItemStackHandlerCallback extends ItemStackHandler {

@@ -18,7 +18,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 
-
 import lombok.Getter;
 
 import static net.minecraftforge.fml.common.Mod.EventHandler;

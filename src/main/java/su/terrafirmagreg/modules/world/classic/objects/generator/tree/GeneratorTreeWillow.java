@@ -11,7 +11,6 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
@@ -46,12 +45,12 @@ public class GeneratorTreeWillow implements ITreeGenerator {
 
     if (structureBase == null || structureOverlay == null) {
       TerraFirmaCraft.getLog()
-              .warn("Unable to find a template for " + base + " or " + overlay);
+                     .warn("Unable to find a template for " + base + " or " + overlay);
       return;
     }
 
     int height = 5 + rand.nextInt(3),
-            branches = 2 + rand.nextInt(3), x1, z1, y1;
+      branches = 2 + rand.nextInt(3), x1, z1, y1;
     for (int n = 0; n <= height; n++) {
       if (n > 3) {
         createLeafGroup(world, pos.up(n));
@@ -78,19 +77,19 @@ public class GeneratorTreeWillow implements ITreeGenerator {
 
   private void tryPlaceLog(World world, BlockPos pos, Tree tree, BlockLog.EnumAxis axis) {
     if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos)
-            .getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos)
-            .getBlock() instanceof BlockLeavesTFC) {
+                                                                       .getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos)
+                                                                                                                      .getBlock() instanceof BlockLeavesTFC) {
       world.setBlockState(pos, BlockLogTFC.get(tree)
-              .getDefaultState()
-              .withProperty(LOG_AXIS, axis)
-              .withProperty(PLACED, false));
+                                          .getDefaultState()
+                                          .withProperty(LOG_AXIS, axis)
+                                          .withProperty(PLACED, false));
     }
   }
 
   private void createBranch(World world, BlockPos pos1, int x, int y, int z, Random rand,
-          Tree tree) {
+                            Tree tree) {
     int x1 = x < 0 ? 1 : -1,
-            z1 = z < 0 ? 1 : -1;
+      z1 = z < 0 ? 1 : -1;
     do {
       if (x != 0 && rand.nextBoolean()) {
         x += x1;

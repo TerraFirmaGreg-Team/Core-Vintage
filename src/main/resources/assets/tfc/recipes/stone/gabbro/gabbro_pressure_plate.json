@@ -3,11 +3,9 @@
   "ingredients": [
     {
       "item": "tfc:brick/gabbro"
-    },
-    {
+    }, {
       "item": "tfc:brick/gabbro"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

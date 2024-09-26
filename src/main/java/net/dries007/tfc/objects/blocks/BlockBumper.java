@@ -16,7 +16,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
@@ -48,7 +47,7 @@ public class BlockBumper extends BlockNonCube {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                  float hitZ) {
     if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
       playerIn.sendMessage(new TextComponentTranslation("tooltip.firmalife.bumper"));
     }

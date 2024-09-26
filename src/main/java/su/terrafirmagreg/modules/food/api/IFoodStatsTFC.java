@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.food.api;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -28,9 +27,9 @@ public interface IFoodStatsTFC {
       addStats(foodCap);
     } else {
       TerraFirmaCraft.getLog()
-              .info(
-                      "Player ate a weird food: {} / {} that was missing a food capability! This is likely the error of an addon!",
-                      stack.getItem(), stack);
+                     .info(
+                       "Player ate a weird food: {} / {} that was missing a food capability! This is likely the error of an addon!",
+                       stack.getItem(), stack);
     }
   }
 
@@ -49,8 +48,8 @@ public interface IFoodStatsTFC {
   NutritionStats getNutrition();
 
   /**
-   * Used to drink from a water source. Has an internal cooldown Attention: Simulation updates the cooldown, if you need to update the value after a simulation, use
-   * #addThirst
+   * Used to drink from a water source. Has an internal cooldown Attention: Simulation updates the cooldown, if you need to update the value after a simulation,
+   * use #addThirst
    *
    * @param value    the amount to drink = the value to increase thirst by
    * @param simulate determines if this is a simulated drink (eg: the thirst value is not updated, but still checks if this attempt would happen)

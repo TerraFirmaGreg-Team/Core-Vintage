@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-
 import static net.dries007.tfc.util.Helpers.getNull;
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
@@ -42,27 +41,27 @@ public class TFCSounds {
   private static final SoundEvent CHARCOAL_PILE_STEP = createSoundEvent("block.charcoal.step");
 
   public static final SoundType CHARCOAL_PILE = new SoundType(1.0F, 1.0F, CHARCOAL_PILE_BREAK, CHARCOAL_PILE_STEP, CHARCOAL_PILE_PLACE, CHARCOAL_PILE_HIT,
-          CHARCOAL_PILE_FALL);
+                                                              CHARCOAL_PILE_FALL);
 
   @SubscribeEvent
   public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
     event.getRegistry().registerAll(
-            // Custom block sounds
-            CHARCOAL_PILE_BREAK,
-            CHARCOAL_PILE_FALL,
-            CHARCOAL_PILE_HIT,
-            CHARCOAL_PILE_PLACE,
-            CHARCOAL_PILE_STEP,
-            // Misc
-            createSoundEvent("rock.slide.long"),
-            createSoundEvent("rock.slide.short"),
-            createSoundEvent("dirt.slide.short"),
-            createSoundEvent("quern.stonedrag"),
-            createSoundEvent("item.ceramicbreak"),
-            createSoundEvent("anvil.metalimpact"),
-            createSoundEvent("item.throw"),
-            createSoundEvent("item.jug.blow"),
-            createSoundEvent("item.jug.fill")
+      // Custom block sounds
+      CHARCOAL_PILE_BREAK,
+      CHARCOAL_PILE_FALL,
+      CHARCOAL_PILE_HIT,
+      CHARCOAL_PILE_PLACE,
+      CHARCOAL_PILE_STEP,
+      // Misc
+      createSoundEvent("rock.slide.long"),
+      createSoundEvent("rock.slide.short"),
+      createSoundEvent("dirt.slide.short"),
+      createSoundEvent("quern.stonedrag"),
+      createSoundEvent("item.ceramicbreak"),
+      createSoundEvent("anvil.metalimpact"),
+      createSoundEvent("item.throw"),
+      createSoundEvent("item.jug.blow"),
+      createSoundEvent("item.jug.fill")
     );
   }
 

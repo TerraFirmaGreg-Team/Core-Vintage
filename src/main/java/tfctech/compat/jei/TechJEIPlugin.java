@@ -7,7 +7,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
-
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
@@ -41,16 +40,16 @@ public class TechJEIPlugin implements IModPlugin {
     List<UnmoldRecipeWrapper> unmoldList = new ArrayList<>();
     List<CastingRecipeWrapper> castingList = new ArrayList<>();
     TFCRegistries.METALS.getValuesCollection()
-            .forEach(metal -> {
-              if (ObfuscationReflectionHelper.getPrivateValue(Metal.class, metal, "usable").equals(true)) {
-                for (ItemTechMetal.ItemType type : ItemTechMetal.ItemType.values()) {
-                  if (type.hasMold() && ItemTechMetal.get(metal, type) != null) {
-                    unmoldList.add(new UnmoldRecipeWrapper(metal, type));
-                    castingList.add(new CastingRecipeWrapper(metal, type));
-                  }
-                }
-              }
-            });
+                        .forEach(metal -> {
+                          if (ObfuscationReflectionHelper.getPrivateValue(Metal.class, metal, "usable").equals(true)) {
+                            for (ItemTechMetal.ItemType type : ItemTechMetal.ItemType.values()) {
+                              if (type.hasMold() && ItemTechMetal.get(metal, type) != null) {
+                                unmoldList.add(new UnmoldRecipeWrapper(metal, type));
+                                castingList.add(new CastingRecipeWrapper(metal, type));
+                              }
+                            }
+                          }
+                        });
 
     // Glass unmolding
     ItemStack input = new ItemStack(TechItems.MOLD_BLOCK);

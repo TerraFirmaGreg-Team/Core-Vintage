@@ -2,7 +2,6 @@ package BananaFructa.tfcfarming.network;
 
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-
 import io.netty.buffer.ByteBuf;
 
 public class CPacketRequestNutrientData implements IMessage {

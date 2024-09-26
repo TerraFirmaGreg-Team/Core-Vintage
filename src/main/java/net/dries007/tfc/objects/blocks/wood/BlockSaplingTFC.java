@@ -1,7 +1,10 @@
 package net.dries007.tfc.objects.blocks.wood;
 
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.TileUtils;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.objects.te.TETickCounter;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfc.util.calendar.ICalendar;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -22,15 +25,11 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.ICalendar;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import java.util.HashMap;
 import java.util.List;

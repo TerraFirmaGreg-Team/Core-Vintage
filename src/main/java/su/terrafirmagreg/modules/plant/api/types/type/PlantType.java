@@ -21,7 +21,7 @@ public class PlantType implements Comparable<PlantType> {
 
     if (name.isEmpty()) {
       throw new RuntimeException(
-              String.format("Plant name must contain any character: [%s]", name));
+        String.format("Plant name must contain any character: [%s]", name));
     }
 
     if (!types.add(this)) {

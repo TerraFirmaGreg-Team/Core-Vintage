@@ -23,7 +23,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.util.climate.Climate;
@@ -75,12 +74,12 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
     this.tree = tree;
     BlockUtils.setFireInfo(this, 5, 20);
     setDefaultState(blockState.getBaseState()
-            .withProperty(FACING, EnumFacing.UP)
-            .withProperty(NORTH, 0)
-            .withProperty(EAST, 0)
-            .withProperty(SOUTH, 0)
-            .withProperty(WEST, 0)
-            .withProperty(UP, 0));
+                              .withProperty(FACING, EnumFacing.UP)
+                              .withProperty(NORTH, 0)
+                              .withProperty(EAST, 0)
+                              .withProperty(SOUTH, 0)
+                              .withProperty(WEST, 0)
+                              .withProperty(UP, 0));
   }
 
   public static BlockFruitTreeBranch get(IFruitTree tree) {
@@ -224,8 +223,8 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
   public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
     ItemStack stack = player.getHeldItemMainhand();
     if (stack.getItem().getToolClasses(stack).contains("axe") || stack.getItem()
-            .getToolClasses(stack)
-            .contains("saw")) {
+                                                                      .getToolClasses(stack)
+                                                                      .contains("saw")) {
       if (!worldIn.isRemote && RANDOM.nextBoolean()) {
         ItemStack dropStack = new ItemStack(BlockFruitTreeSapling.get(tree));
         StackUtils.spawnItemStack(worldIn, pos, dropStack);

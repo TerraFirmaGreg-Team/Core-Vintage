@@ -31,7 +31,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.te.TELargeVessel;
 
@@ -39,8 +38,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Large vessel is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state property,
- * and cached in the TE (for gui purposes)
+ * Large vessel is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state
+ * property, and cached in the TE (for gui purposes)
  */
 
 public class BlockLargeVessel extends Block implements ICapabilitySize {
@@ -55,6 +54,23 @@ public class BlockLargeVessel extends Block implements ICapabilitySize {
     setSoundType(SoundType.STONE);
     setHardness(2F);
     setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
+  }
+
+  /**
+   * Used to update the vessel seal state and the TE, in the correct order
+   */
+  public static void toggleLargeVesselSeal(World world, BlockPos pos) {
+    TELargeVessel tile = TileUtils.getTile(world, pos, TELargeVessel.class);
+    if (tile != null) {
+      IBlockState state = world.getBlockState(pos);
+      boolean previousSealed = state.getValue(SEALED);
+      world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
+      if (previousSealed) {
+        tile.onUnseal();
+      } else {
+        tile.onSealed();
+      }
+    }
   }
 
   @Override
@@ -164,7 +180,7 @@ public class BlockLargeVessel extends Block implements ICapabilitySize {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       ItemStack heldItem = playerIn.getHeldItem(hand);
       var tile = TileUtils.getTile(worldIn, pos, TELargeVessel.class);
@@ -178,23 +194,6 @@ public class BlockLargeVessel extends Block implements ICapabilitySize {
       }
     }
     return true;
-  }
-
-  /**
-   * Used to update the vessel seal state and the TE, in the correct order
-   */
-  public static void toggleLargeVesselSeal(World world, BlockPos pos) {
-    TELargeVessel tile = TileUtils.getTile(world, pos, TELargeVessel.class);
-    if (tile != null) {
-      IBlockState state = world.getBlockState(pos);
-      boolean previousSealed = state.getValue(SEALED);
-      world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
-      if (previousSealed) {
-        tile.onUnseal();
-      } else {
-        tile.onSealed();
-      }
-    }
   }
 
   @Override
@@ -257,6 +256,6 @@ public class BlockLargeVessel extends Block implements ICapabilitySize {
 
   private boolean canStay(IBlockAccess world, BlockPos pos) {
     return world.getBlockState(pos.down())
-            .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+                .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
   }
 }

@@ -13,7 +13,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
@@ -34,8 +33,8 @@ import static su.terrafirmagreg.data.Constants.MOD_NAME;
 public final class ModUtils {
 
   /**
-   * This cache is used by {@link #getSortedEntries(IForgeRegistry)} to improve repeat performance of the method. Calling {@link #getSortedEntries(IForgeRegistry)}
-   * before all entries have been registered will lock out new ones from being found.
+   * This cache is used by {@link #getSortedEntries(IForgeRegistry)} to improve repeat performance of the method. Calling
+   * {@link #getSortedEntries(IForgeRegistry)} before all entries have been registered will lock out new ones from being found.
    */
   private static final Map<IForgeRegistry<?>, Multimap<String, ?>> REGISTRY_CACHE = new HashMap<>();
 
@@ -79,11 +78,11 @@ public final class ModUtils {
   }
 
   /**
-   * Gets the name of a mod that registered the passed object. Has support for a wide range of registerable objects such as blocks, items, enchantments, potions,
-   * sounds, villagers, biomes, and so on.
+   * Gets the name of a mod that registered the passed object. Has support for a wide range of registerable objects such as blocks, items, enchantments,
+   * potions, sounds, villagers, biomes, and so on.
    *
-   * @param registerable The registerable object. Accepts anything that extends IForgeRegistryEntry.Impl. Current list includes BiomeGenBase, Block, Enchantment,
-   *                     Item, Potion, PotionType, SoundEvent and VillagerProfession.
+   * @param registerable The registerable object. Accepts anything that extends IForgeRegistryEntry.Impl. Current list includes BiomeGenBase, Block,
+   *                     Enchantment, Item, Potion, PotionType, SoundEvent and VillagerProfession.
    * @return String The name of the mod that registered the object.
    */
   public static String getModName(IForgeRegistryEntry.Impl<?> registerable) {
@@ -197,10 +196,10 @@ public final class ModUtils {
     final String entryName = index == -1 ? id : id.substring(index + 1);
     final ModContainer mod = Loader.instance().activeModContainer();
     final String prefix = mod == null
-            || mod instanceof InjectedModContainer injectedModContainer
-            && injectedModContainer.wrappedContainer instanceof FMLContainer
-            ? "minecraft"
-            : mod.getModId().toLowerCase();
+                          || mod instanceof InjectedModContainer injectedModContainer
+                             && injectedModContainer.wrappedContainer instanceof FMLContainer
+                          ? "minecraft"
+                          : mod.getModId().toLowerCase();
 
     return new ResourceLocation(prefix, entryName);
   }

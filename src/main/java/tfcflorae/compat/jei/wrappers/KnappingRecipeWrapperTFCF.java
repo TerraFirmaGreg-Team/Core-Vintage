@@ -2,7 +2,6 @@ package tfcflorae.compat.jei.wrappers;
 
 import net.minecraft.util.ResourceLocation;
 
-
 import mezz.jei.api.IGuiHelper;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
@@ -16,7 +15,7 @@ import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
 
   private static final ResourceLocation PINEAPPLE_LEATHER_TEXTURE = new ResourceLocation(MODID_TFCF,
-          "textures/gui/knapping/pineapple_leather_button.png");
+                                                                                         "textures/gui/knapping/pineapple_leather_button.png");
   private static final ResourceLocation BURLAP_CLOTH_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/blocks/devices/loom/product/burlap.png");
   private static final ResourceLocation WOOL_CLOTH_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/blocks/devices/loom/product/wool.png");
   private static final ResourceLocation SILK_CLOTH_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/blocks/devices/loom/product/silk.png");
@@ -31,6 +30,11 @@ public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
 
   public KnappingRecipeWrapperTFCF(KnappingRecipe recipe, IGuiHelper helper) {
     super(recipe, helper, getHighTexture(recipe.getType()), getLowTexture(recipe.getType()));
+  }
+
+  public KnappingRecipeWrapperTFCF(KnappingRecipe recipe, IGuiHelper helper, @Nullable ResourceLocation highTexture,
+                                   @Nullable ResourceLocation lowTexture) {
+    super(recipe, helper, highTexture, lowTexture);
   }
 
   private static ResourceLocation getHighTexture(KnappingType type) {
@@ -60,11 +64,6 @@ public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
 
   private static ResourceLocation getLowTexture(KnappingType type) {
     return null;
-  }
-
-  public KnappingRecipeWrapperTFCF(KnappingRecipe recipe, IGuiHelper helper, @Nullable ResourceLocation highTexture,
-          @Nullable ResourceLocation lowTexture) {
-    super(recipe, helper, highTexture, lowTexture);
   }
 
 //  public static class Mud extends KnappingRecipeWrapperTFCF {

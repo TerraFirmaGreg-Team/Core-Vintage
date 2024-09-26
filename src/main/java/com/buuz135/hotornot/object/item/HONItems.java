@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.registries.IForgeRegistry;
 
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -45,12 +44,12 @@ public final class HONItems {
     register(registry, "ceramics/fired/mold/tongs_jaw", new ItemMetalTongsJawMold(), CreativeTabsTFC.CT_POTTERY);
 
     simpleItems.add(register(registry, "wooden_tongs",
-            new ItemHotHolder(Tier.TIER_0)
-                    .setMaxDamage(200)));
+                             new ItemHotHolder(Tier.TIER_0)
+                               .setMaxDamage(200)));
 
     simpleItems.add(register(registry, "mitts",
-            new ItemHotHolder(Tier.TIER_II)
-                    .setMaxDamage(5_000)));
+                             new ItemHotHolder(Tier.TIER_II)
+                               .setMaxDamage(5_000)));
 
     for (final Metal metal : TFCRegistries.METALS.getValuesCollection()) {
       // Only make tongs for metals that make tools

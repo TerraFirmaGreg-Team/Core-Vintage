@@ -4,7 +4,7 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public interface IRegistryKeyBinding
-        extends IRegistryBase {
+  extends IRegistryBase {
 
   default KeyBinding keyBinding(String description, int keyCode) {
 

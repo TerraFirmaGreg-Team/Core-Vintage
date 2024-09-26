@@ -5,14 +5,13 @@ import su.terrafirmagreg.api.base.recipe.IBaseRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeSteps;
 import net.dries007.tfc.util.skills.SmithingSkill;
 
 public interface IAnvilRecipe
-        extends IBaseRecipe {
+  extends IBaseRecipe {
 
   ForgeRule[] getRules();
 

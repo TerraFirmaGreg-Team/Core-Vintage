@@ -44,7 +44,7 @@ public class GenLayerFuzzyZoom extends GenLayerBase {
 
     for (var13 = 0; var13 < par4; ++var13) {
       System.arraycopy(var10, (var13 + (par2 & 1)) * (var7 << 1) + (par1 & 1), var20, var13 * par3,
-              par3); //NOPMD
+                       par3); //NOPMD
     }
 
     return var20;

@@ -9,8 +9,7 @@
           "model": "tfc:plants/primrose_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },
@@ -19,8 +18,7 @@
           "model": "tfc:plants/primrose_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "2"
       },

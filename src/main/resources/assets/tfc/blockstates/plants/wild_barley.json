@@ -10,8 +10,7 @@
           "model": "tfc:plants/wild_barley_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "1",
         "stage": "0"
@@ -21,8 +20,7 @@
           "model": "tfc:plants/wild_barley_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2",
         "stage": "0"
@@ -32,8 +30,7 @@
           "model": "tfc:plants/wild_barley_2"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "3",
         "stage": "0"
@@ -43,8 +40,7 @@
           "model": "tfc:plants/wild_barley_3"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "0",
         "stage": "1"
@@ -54,8 +50,7 @@
           "model": "tfc:plants/wild_barley_0_tuft"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "1",
         "stage": "1"
@@ -65,8 +60,7 @@
           "model": "tfc:plants/wild_barley_1_tuft"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2",
         "stage": "1"
@@ -76,8 +70,7 @@
           "model": "tfc:plants/wild_barley_2_tuft"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "3",
         "stage": "1"

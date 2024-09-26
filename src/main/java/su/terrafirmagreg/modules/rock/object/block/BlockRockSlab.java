@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -39,12 +38,12 @@ public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock 
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .hardness(variant.getHardness(type))
-            .sound(SoundType.STONE)
-            .renderLayer(BlockRenderLayer.CUTOUT)
-            .oreDict("slab")
-            .oreDict("slab", "stone");
+      .registryKey(variant.getRegistryKey(type))
+      .hardness(variant.getHardness(type))
+      .sound(SoundType.STONE)
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .oreDict("slab")
+      .oreDict("slab", "stone");
 
     setHarvestLevel(ToolClasses.PICKAXE, model.getHarvestLevel(model.getDefaultState()));
   }
@@ -52,12 +51,12 @@ public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock 
   @Override
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
-          ITooltipFlag flagIn) {
+                             ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 
     tooltip.add(
-            new TextComponentTranslation("rockcategory.name")
-                    .getFormattedText() + ": " + getType().getCategory().getLocalizedName());
+      new TextComponentTranslation("rockcategory.name")
+        .getFormattedText() + ": " + getType().getCategory().getLocalizedName());
   }
 
   public static class Double extends BlockRockSlab {

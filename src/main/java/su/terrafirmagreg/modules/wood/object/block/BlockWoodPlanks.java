@@ -9,7 +9,7 @@ public class BlockWoodPlanks extends BlockWood {
     super(variant, type);
 
     getSettings()
-            .hardness(2.0F)
-            .resistance(5.0F);
+      .hardness(2.0F)
+      .resistance(5.0F);
   }
 }

@@ -28,7 +28,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import com.google.common.collect.ImmutableList;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
@@ -65,9 +64,9 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
       throw new IllegalStateException("There can only be one.");
     }
     setDefaultState(blockState.getBaseState()
-            .withProperty(DECAYABLE, false)
-            .withProperty(LEAF_STATE, EnumLeafState.NORMAL)
-            .withProperty(HARVESTABLE, false));
+                              .withProperty(DECAYABLE, false)
+                              .withProperty(LEAF_STATE, EnumLeafState.NORMAL)
+                              .withProperty(HARVESTABLE, false));
     leavesFancy = true; // Fast / Fancy graphics works correctly
     OreDictionaryHelper.register(this, "tree", "leaves");
     OreDictionaryHelper.register(this, "tree", "leaves", tree.getName());
@@ -84,7 +83,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
   @NotNull
   public IBlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(HARVESTABLE, meta > 3)
-            .withProperty(LEAF_STATE, EnumLeafState.valueOf(meta & 0b11));
+                            .withProperty(LEAF_STATE, EnumLeafState.valueOf(meta & 0b11));
   }
 
   @Override
@@ -139,7 +138,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
     if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == EnumLeafState.FRUIT) {
       if (!worldIn.isRemote) {
         ItemHandlerHelper.giveItemToPlayer(playerIn, tree.getFoodDrop());

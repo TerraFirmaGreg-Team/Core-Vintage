@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:wood/log/hickory"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "saw"
     }

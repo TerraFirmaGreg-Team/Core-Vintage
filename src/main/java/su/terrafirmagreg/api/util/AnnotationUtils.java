@@ -6,7 +6,6 @@ import net.minecraft.util.Tuple;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.UtilityClass;
@@ -48,7 +47,7 @@ public final class AnnotationUtils {
    * @return A set of ASMData for classes with the passed annotation.
    */
   public static <A extends Annotation> Set<ASMData> getData(ASMDataTable table,
-          Class<A> annotation) {
+                                                            Class<A> annotation) {
 
     return table.getAll(annotation.getCanonicalName());
   }
@@ -60,7 +59,7 @@ public final class AnnotationUtils {
    * @return A list of all classes with the passed annotation.
    */
   public static <A extends Annotation> List<Tuple<Class<?>, A>> getAnnotatedClasses(
-          Class<A> annotation) {
+    Class<A> annotation) {
 
     return getAnnotatedClasses(asmData, annotation);
   }
@@ -73,7 +72,7 @@ public final class AnnotationUtils {
    * @return A list of all classes with the passed annotation.
    */
   public static <A extends Annotation> List<Tuple<Class<?>, A>> getAnnotatedClasses(
-          ASMDataTable table, Class<A> annotation) {
+    ASMDataTable table, Class<A> annotation) {
 
     final List<Tuple<Class<?>, A>> classes = new ArrayList<>();
 
@@ -97,7 +96,7 @@ public final class AnnotationUtils {
    * @return A list of all fields with the passed annotation.
    */
   public static <A extends Annotation> List<Field> getAnnotatedFields(
-          Collection<Class<?>> collection, Class<A> class1) {
+    Collection<Class<?>> collection, Class<A> class1) {
 
     final List<Field> fields = new ArrayList<>();
 
@@ -122,7 +121,7 @@ public final class AnnotationUtils {
    * @return A list of all classes annotated with the annotation, as instances.
    */
   public static <T, A extends Annotation> Map<T, A> getAnnotations(Class<A> annotation,
-          Class<T> instance) {
+                                                                   Class<T> instance) {
 
     return getAnnotations(asmData, annotation, instance);
   }
@@ -135,8 +134,7 @@ public final class AnnotationUtils {
    * @param instance   The class of the thing you're trying to construct. This should be a shared interface, or parent class.
    * @return A list of all classes annotated with the annotation, as instances.
    */
-  public static <T, A extends Annotation> Map<T, A> getAnnotations(ASMDataTable table,
-          Class<A> annotation, Class<T> instance) {
+  public static <T, A extends Annotation> Map<T, A> getAnnotations(ASMDataTable table, Class<A> annotation, Class<T> instance) {
 
     final Map<T, A> map = new HashMap<>();
 

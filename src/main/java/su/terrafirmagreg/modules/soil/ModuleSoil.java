@@ -12,7 +12,6 @@ import su.terrafirmagreg.modules.soil.plugin.top.TheOneProbeSoil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;

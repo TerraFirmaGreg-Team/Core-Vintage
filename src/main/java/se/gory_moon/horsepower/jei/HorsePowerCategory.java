@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.util.GameUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -38,7 +37,7 @@ public abstract class HorsePowerCategory<T extends IRecipeWrapper> implements IR
     horse = getHorseDrawable(guiHelper, 0, 20, 100, grinding, null);
     hedgehog = getHorseDrawable(guiHelper, 40, 5, 35, grinding, Colors.LIGHTBLUE + "Sonic!");
     character = getHorseDrawable(guiHelper, 80, 10, 100, grinding,
-            Colors.PURPLE + "It's mini you, Darkosto!\n" + Colors.LIGHTBLUE + "Happy birthday!");
+                                 Colors.PURPLE + "It's mini you, Darkosto!\n" + Colors.LIGHTBLUE + "Happy birthday!");
   }
 
   private static HorseDrawable getHorseDrawable(IGuiHelper guiHelper, int y, int animCycle, int pathCycle, boolean grinding, String hovering) {
@@ -71,7 +70,7 @@ public abstract class HorsePowerCategory<T extends IRecipeWrapper> implements IR
     Random rand = Minecraft.getMinecraft().world.rand;
 
     if (rand.nextInt(100) <= 10 && UUID.fromString("10755ea6-9721-467a-8b5c-92adf689072c")
-            .equals(Minecraft.getMinecraft().player.getGameProfile().getId())) {
+                                       .equals(Minecraft.getMinecraft().player.getGameProfile().getId())) {
       currentDrawable = character;
     } else if (rand.nextInt(3000) <= 50 && GameUtils.isModLoaded("animania")) {
       currentDrawable = hedgehog;

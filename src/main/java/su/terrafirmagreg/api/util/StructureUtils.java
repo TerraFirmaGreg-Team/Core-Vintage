@@ -13,7 +13,6 @@ import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 
-
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 
 import lombok.experimental.UtilityClass;
@@ -25,9 +24,9 @@ import java.util.Random;
 public final class StructureUtils {
 
   /**
-   * This is a copy of the method included in the Template class, with some key differences. This will ignore TEs / Entities, and does less checks for bad usage,
-   * since it will only be used for tree worldgen It will do an additional check that the block is replaceable; important for tree growth; as to not replace other
-   * blocks
+   * This is a copy of the method included in the Template class, with some key differences. This will ignore TEs / Entities, and does less checks for bad
+   * usage, since it will only be used for tree worldgen It will do an additional check that the block is replaceable; important for tree growth; as to not
+   * replace other blocks
    *
    * @param worldIn     the world
    * @param pos         the position
@@ -46,15 +45,15 @@ public final class StructureUtils {
         Block block1 = template$blockinfo1.blockState.getBlock();
 
         if ((!placementIn.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK) && (structureboundingbox == null || structureboundingbox.isVecInside(
-                blockpos))) {
+          blockpos))) {
           IBlockState stateToPlace = template$blockinfo1.blockState.withMirror(
-                          placementIn.getMirror())
-                  .withRotation(placementIn.getRotation());
+                                                          placementIn.getMirror())
+                                                                   .withRotation(placementIn.getRotation());
           IBlockState stateToReplace = worldIn.getBlockState(blockpos);
 
           if (stateToReplace.getMaterial().isReplaceable()
-                  || stateToReplace.getBlock() instanceof BlockLeaves
-                  || stateToReplace.getBlock() instanceof BlockSaplingTFC) {
+              || stateToReplace.getBlock() instanceof BlockLeaves
+              || stateToReplace.getBlock() instanceof BlockSaplingTFC) {
             worldIn.setBlockState(blockpos, stateToPlace, 2);
           }
         }
@@ -66,7 +65,7 @@ public final class StructureUtils {
 
       if (structureboundingbox == null || structureboundingbox.isVecInside(blockpos1)) {
         worldIn.notifyNeighborsRespectDebug(blockpos1, template$blockinfo2.blockState.getBlock(),
-                false);
+                                            false);
       }
 
     }

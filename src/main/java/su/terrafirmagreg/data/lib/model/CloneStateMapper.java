@@ -5,7 +5,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.IdentityHashMap;
@@ -44,8 +43,8 @@ public class CloneStateMapper extends StateMapperBase {
   protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
 
     return new ModelResourceLocation(
-            Block.REGISTRY.getNameForObject(this.block),
-            this.getPropertyString(state.getProperties())
+      Block.REGISTRY.getNameForObject(this.block),
+      this.getPropertyString(state.getProperties())
     );
   }
 }

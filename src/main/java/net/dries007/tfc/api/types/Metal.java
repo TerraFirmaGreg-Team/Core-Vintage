@@ -7,7 +7,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
 import net.dries007.tfc.objects.items.metal.ItemIngot;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
@@ -84,8 +83,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
    * @param color        color of the metal when in fluid form. Used to auto generate a fluid texture. In future this may be used to color items as well
    * @param toolMetal    The tool material. Null if metal is not able to create tools
    */
-  public Metal(@NotNull ResourceLocation name, Tier tier, boolean usable, float specificHeat, float meltTemp, int color, @Nullable Item.ToolMaterial toolMetal,
-          @Nullable IArmorMaterialTFC armorMetal) {
+  public Metal(@NotNull ResourceLocation name, Tier tier, boolean usable, float specificHeat, float meltTemp, int color, @Nullable Item.ToolMaterial toolMetal, @Nullable IArmorMaterialTFC armorMetal) {
     this.usable = usable;
     this.tier = tier;
     this.specificHeat = specificHeat;
@@ -127,8 +125,8 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
   }
 
   /**
-   * Metals / Anvils: T0 - Stone - Work None, Weld T1 T1 - Copper - Work T1, Weld T2 T2 - Bronze / Bismuth Bronze / Black Bronze - Work T2, Weld T3 T3 - Wrought Iron
-   * - Work T3, Weld T4 T4 - Steel - Work T4, Weld T5 T5 - Black Steel - Work T5, Weld T6 T6 - Red Steel / Blue Steel - Work T6, Weld T6
+   * Metals / Anvils: T0 - Stone - Work None, Weld T1 T1 - Copper - Work T1, Weld T2 T2 - Bronze / Bismuth Bronze / Black Bronze - Work T2, Weld T3 T3 - Wrought
+   * Iron - Work T3, Weld T4 T4 - Steel - Work T4, Weld T5 T5 - Black Steel - Work T5, Weld T6 T6 - Red Steel / Blue Steel - Work T6, Weld T6
    * <p>
    * Devices: T0 - Stone Anvil T1 - Pit Kiln / Fire pit T2 - Forge T3 - Bloomery T4 - Blast Furnace / Crucible
    */

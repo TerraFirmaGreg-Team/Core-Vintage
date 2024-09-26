@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 
-
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
@@ -51,7 +50,7 @@ public class ItemPigIronCarrot extends ItemTFC implements TFCThingsConfigurableI
     if (metal == TFCRegistries.METALS.getValue(DefaultMetals.PIG_IRON) && entity instanceof EntityAnimalPig piggy) {
       float requiredFamiliarity = (float) ConfigTFCThings.Misc.PIGVIL.familiarityLevel;
       if (piggy.getGender()
-              .equals(IAnimal.Gender.MALE) && piggy.getAge() == IAnimal.Age.ADULT && piggy.getFamiliarity() >= requiredFamiliarity) {
+               .equals(IAnimal.Gender.MALE) && piggy.getAge() == IAnimal.Age.ADULT && piggy.getFamiliarity() >= requiredFamiliarity) {
         player.world.playSound(player, piggy.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.NEUTRAL, 1.0f, 1.0f);
         if (!player.world.isRemote) {
           if (!player.isCreative()) {
@@ -79,7 +78,7 @@ public class ItemPigIronCarrot extends ItemTFC implements TFCThingsConfigurableI
           }
         }
       } else if (pigvil.getAnvil() == BlocksMetal.PIGVIL.get(MetalTypes.BLACK_STEEL) && (metal == TFCRegistries.METALS.getValue(DefaultMetals.BLUE_STEEL) ||
-              metal == TFCRegistries.METALS.getValue(DefaultMetals.RED_STEEL))) {
+                                                                                         metal == TFCRegistries.METALS.getValue(DefaultMetals.RED_STEEL))) {
         player.world.playSound(player, pigvil.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.NEUTRAL, 1.0f, 1.0f);
         if (!player.world.isRemote) {
           if (!player.isCreative()) {
@@ -95,7 +94,7 @@ public class ItemPigIronCarrot extends ItemTFC implements TFCThingsConfigurableI
           }
         }
       } else if ((pigvil.getAnvil() == BlocksMetal.PIGVIL.get(MetalTypes.RED_STEEL) && metal == TFCRegistries.METALS.getValue(DefaultMetals.BLUE_STEEL)) ||
-              (pigvil.getAnvil() == BlocksMetal.PIGVIL.get(MetalTypes.BLUE_STEEL) && metal == TFCRegistries.METALS.getValue(DefaultMetals.RED_STEEL))) {
+                 (pigvil.getAnvil() == BlocksMetal.PIGVIL.get(MetalTypes.BLUE_STEEL) && metal == TFCRegistries.METALS.getValue(DefaultMetals.RED_STEEL))) {
         player.world.playSound(player, pigvil.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.NEUTRAL, 1.0f, 1.0f);
         if (!player.world.isRemote) {
           if (!player.isCreative()) {

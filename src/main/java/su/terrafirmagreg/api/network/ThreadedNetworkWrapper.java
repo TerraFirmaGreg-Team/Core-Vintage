@@ -21,7 +21,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
-
 import com.google.common.base.Throwables;
 
 import org.jetbrains.annotations.NotNull;
@@ -48,51 +47,69 @@ public class ThreadedNetworkWrapper {
   public ThreadedNetworkWrapper(String netId) {
     if (netId.length() > 20) {
       throw new RuntimeException("Channel name '" + netId
-              + "' is too long for Forge. Maximum length supported is 20 characters.");
+                                 + "' is too long for Forge. Maximum length supported is 20 characters.");
     }
     this.parent = NetworkRegistry.INSTANCE.newSimpleChannel(netId);
   }
 
-  public <REQ extends IMessage, REPLY extends IMessage> void registerMessage(
-          Class<? extends IMessageHandler<REQ, REPLY>> messageHandler,
-          Class<REQ> requestMessageType,
-          int discriminator,
-          Side side) {
-
-    if (side == Side.CLIENT && FMLLaunchHandler.side() != Side.CLIENT) {
-      parent.registerMessage(new NullHandler<REQ, REPLY>(), requestMessageType, discriminator,
-              side);
-      registerChannelMapping(requestMessageType, parent, side);
-      return;
-    }
-    registerMessage(instantiate(messageHandler), requestMessageType, discriminator, side);
-  }
-
   static synchronized void registerChannelMapping(Class<? extends IMessage> requestMessageType,
-          @NotNull SimpleNetworkWrapper parent, Side side) {
+                                                  @NotNull SimpleNetworkWrapper parent, Side side) {
     (side == Side.CLIENT ? typesClient : typesServer).put(requestMessageType, parent);
   }
 
-  @SuppressWarnings({"unchecked", "rawtypes"})
-  public <REQ extends IMessage, REPLY extends IMessage> void registerMessage(
-          IMessageHandler<? super REQ, ? extends REPLY> messageHandler,
-          Class<REQ> requestMessageType,
-          int discriminator,
-          Side side) {
-
-    parent.registerMessage((Wrapper<REQ, REPLY>) new Wrapper(messageHandler), requestMessageType,
-            discriminator, side);
-    registerChannelMapping(requestMessageType, parent, side);
-  }
-
   private static <REQ extends IMessage, REPLY extends IMessage> IMessageHandler<? super REQ, ? extends REPLY> instantiate(
-          Class<? extends IMessageHandler<? super REQ, ? extends REPLY>> handler) {
+    Class<? extends IMessageHandler<? super REQ, ? extends REPLY>> handler) {
     try {
       return handler.getDeclaredConstructor().newInstance();
     } catch (Throwable e) {
       TerraFirmaGreg.LOGGER.error("Failed to instanciate " + handler);
       throw Throwables.propagate(e);
     }
+  }
+
+  private static synchronized SimpleNetworkWrapper getServerParent(IMessage message) {
+    final SimpleNetworkWrapper parent = typesClient.get(message.getClass());
+    if (parent == null) {
+      throw new RuntimeException(
+        "Trying to send unregistered network packet: " + message.getClass());
+    }
+    return parent;
+  }
+
+  private static synchronized SimpleNetworkWrapper getClientParent(IMessage message) {
+    final SimpleNetworkWrapper parent = typesServer.get(message.getClass());
+    if (parent == null) {
+      throw new RuntimeException(
+        "Trying to send unregistered network packet: " + message.getClass());
+    }
+    return parent;
+  }
+
+  public <REQ extends IMessage, REPLY extends IMessage> void registerMessage(
+    Class<? extends IMessageHandler<REQ, REPLY>> messageHandler,
+    Class<REQ> requestMessageType,
+    int discriminator,
+    Side side) {
+
+    if (side == Side.CLIENT && FMLLaunchHandler.side() != Side.CLIENT) {
+      parent.registerMessage(new NullHandler<REQ, REPLY>(), requestMessageType, discriminator,
+                             side);
+      registerChannelMapping(requestMessageType, parent, side);
+      return;
+    }
+    registerMessage(instantiate(messageHandler), requestMessageType, discriminator, side);
+  }
+
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public <REQ extends IMessage, REPLY extends IMessage> void registerMessage(
+    IMessageHandler<? super REQ, ? extends REPLY> messageHandler,
+    Class<REQ> requestMessageType,
+    int discriminator,
+    Side side) {
+
+    parent.registerMessage((Wrapper<REQ, REPLY>) new Wrapper(messageHandler), requestMessageType,
+                           discriminator, side);
+    registerChannelMapping(requestMessageType, parent, side);
   }
 
   /**
@@ -103,15 +120,6 @@ public class ThreadedNetworkWrapper {
    */
   public Packet<?> getPacketFrom(IMessage message) {
     return getServerParent(message).getPacketFrom(message);
-  }
-
-  private static synchronized SimpleNetworkWrapper getServerParent(IMessage message) {
-    final SimpleNetworkWrapper parent = typesClient.get(message.getClass());
-    if (parent == null) {
-      throw new RuntimeException(
-              "Trying to send unregistered network packet: " + message.getClass());
-    }
-    return parent;
   }
 
   /**
@@ -191,8 +199,8 @@ public class ThreadedNetworkWrapper {
   public void sendToAllAround(IMessage message, World world, BlockPos pos, double range) {
 
     sendToAllAround(message,
-            new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX() + 0.5d,
-                    pos.getY() + 0.5d, pos.getZ() + 0.5d, range));
+                    new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX() + 0.5d,
+                                                    pos.getY() + 0.5d, pos.getZ() + 0.5d, range));
   }
 
   /**
@@ -224,17 +232,8 @@ public class ThreadedNetworkWrapper {
     getClientParent(message).sendToServer(message);
   }
 
-  private static synchronized SimpleNetworkWrapper getClientParent(IMessage message) {
-    final SimpleNetworkWrapper parent = typesServer.get(message.getClass());
-    if (parent == null) {
-      throw new RuntimeException(
-              "Trying to send unregistered network packet: " + message.getClass());
-    }
-    return parent;
-  }
-
   private final class NullHandler<REQ extends IMessage, REPLY extends IMessage> implements
-          IMessageHandler<REQ, REPLY> {
+                                                                                IMessageHandler<REQ, REPLY> {
 
     @Override
     public REPLY onMessage(REQ message, MessageContext ctx) {
@@ -244,7 +243,7 @@ public class ThreadedNetworkWrapper {
   }
 
   private final class Wrapper<REQ extends IMessage, REPLY extends IMessage> implements
-          IMessageHandler<REQ, REPLY> {
+                                                                            IMessageHandler<REQ, REPLY> {
 
     private final IMessageHandler<REQ, REPLY> wrapped;
 
@@ -257,8 +256,8 @@ public class ThreadedNetworkWrapper {
     public REPLY onMessage(final REQ message, final MessageContext ctx) {
 
       final IThreadListener target = ctx.side == Side.CLIENT ?
-              Minecraft.getMinecraft() :
-              FMLCommonHandler.instance().getMinecraftServerInstance();
+                                     Minecraft.getMinecraft() :
+                                     FMLCommonHandler.instance().getMinecraftServerInstance();
 
       if (target != null) {
         target.addScheduledTask(new Runner(message, ctx));

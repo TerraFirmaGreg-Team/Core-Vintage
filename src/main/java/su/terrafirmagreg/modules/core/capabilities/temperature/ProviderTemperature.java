@@ -20,7 +20,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
@@ -64,17 +63,17 @@ public class ProviderTemperature implements ICapabilityTemperature {
     StringBuilder str = new StringBuilder();
     for (ModifierBase modifier : modifiers) {
       str.append(modifier.getName()).append(" -> ").append(modifier.getChange()).append(" @ ")
-              .append(modifier.getPotency()).append("\n");
+         .append(modifier.getPotency()).append("\n");
     }
     return String.format(
-            """
-                    Body: %.1f ( %.4f )
-                    Target: %.1f
-                    Potency: %.4f""",
-            getTemperature(),
-            getTemperatureChange(),
-            getTarget(),
-            modifiers.getTotalPotency()
+      """
+        Body: %.1f ( %.4f )
+        Target: %.1f
+        Potency: %.4f""",
+      getTemperature(),
+      getTemperatureChange(),
+      getTarget(),
+      modifiers.getTotalPotency()
     ) + "\n" + str;
   }
 
@@ -85,7 +84,7 @@ public class ProviderTemperature implements ICapabilityTemperature {
     float newTemp = temperature + change;
     boolean isRising = true;
     if ((temperature < AVERAGE && newTemp > temperature) || (temperature > AVERAGE
-            && newTemp < temperature)) {
+                                                             && newTemp < temperature)) {
       speed *= GOOD_MULTIPLIER * ConfigCore.MISC.TEMPERATURE.positiveModifier;
     } else {
       speed *= BAD_MULTIPLIER * ConfigCore.MISC.TEMPERATURE.negativeModifier;
@@ -115,7 +114,7 @@ public class ProviderTemperature implements ICapabilityTemperature {
     boolean server = !player.world.isRemote;
     if (server) {
       this.setTemperature(this.getTemperature()
-              + this.getTemperatureChange() / ConfigCore.MISC.TEMPERATURE.tickInterval);
+                          + this.getTemperatureChange() / ConfigCore.MISC.TEMPERATURE.tickInterval);
 
       if (tick <= ConfigCore.MISC.TEMPERATURE.tickInterval) {
         tick++;

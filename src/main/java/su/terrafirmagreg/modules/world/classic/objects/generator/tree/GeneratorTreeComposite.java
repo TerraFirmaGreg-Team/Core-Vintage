@@ -4,7 +4,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-
 import com.google.common.collect.LinkedListMultimap;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
@@ -30,7 +29,7 @@ public class GeneratorTreeComposite implements ITreeGenerator {
 
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-          Random rand, boolean isWorldGen) {
+                           Random rand, boolean isWorldGen) {
     if (gens.isEmpty()) {
       return;
     }

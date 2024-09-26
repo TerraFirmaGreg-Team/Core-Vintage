@@ -11,7 +11,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-
 import net.dries007.tfc.objects.te.TEDryingMat;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.client.GUIHandler;

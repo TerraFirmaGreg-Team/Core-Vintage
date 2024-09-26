@@ -7,11 +7,10 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-
 import io.netty.buffer.ByteBuf;
 
 public class SCPacketDrawnUpdate implements IMessage,
-        IMessageHandler<SCPacketDrawnUpdate, IMessage> {
+                                            IMessageHandler<SCPacketDrawnUpdate, IMessage> {
 
   private int pullingId;
   private int cartId;
@@ -40,7 +39,7 @@ public class SCPacketDrawnUpdate implements IMessage,
   public IMessage onMessage(SCPacketDrawnUpdate message, MessageContext ctx) {
     Minecraft.getMinecraft().addScheduledTask(() -> {
       EntityWoodCart cart = (EntityWoodCart) Minecraft.getMinecraft().world.getEntityByID(
-              message.cartId);
+        message.cartId);
       if (message.pullingId < 0) {
         cart.setPulling(null);
       } else {

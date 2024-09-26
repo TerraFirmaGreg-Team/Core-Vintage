@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 
-
 import com.google.common.collect.ImmutableList;
 
 import java.util.Collection;
@@ -32,7 +31,7 @@ public class MultiTextureAtlasSprite extends TextureAtlasSprite {
 
   @Override
   public boolean load(IResourceManager manager, ResourceLocation location,
-          Function<ResourceLocation, TextureAtlasSprite> textureGetter) {
+                      Function<ResourceLocation, TextureAtlasSprite> textureGetter) {
     //получаем текстуры по отдельности
     TextureAtlasSprite sprite = textureGetter.apply(texture1);
     TextureAtlasSprite mappingSprite = textureGetter.apply(texture2);

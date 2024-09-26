@@ -6,7 +6,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
-
 import net.dries007.tfc.ConfigTFC;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;

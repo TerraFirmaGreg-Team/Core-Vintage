@@ -18,7 +18,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -65,14 +64,14 @@ final class ServerInteractionManagerTFCF {
     }
 
     boolean bypass = player.getHeldItemMainhand()
-            .doesSneakBypassUse(worldIn, pos, player) && player.getHeldItemOffhand()
-            .doesSneakBypassUse(worldIn, pos, player);
+                           .doesSneakBypassUse(worldIn, pos, player) && player.getHeldItemOffhand()
+                                                                              .doesSneakBypassUse(worldIn, pos, player);
 
     if (!player.isSneaking() || bypass || event.getUseBlock() == Event.Result.ALLOW) {
       IBlockState iblockstate = worldIn.getBlockState(pos);
       if (event.getUseBlock() != Event.Result.DENY) {
         if (iblockstate.getBlock()
-                .onBlockActivated(worldIn, pos, iblockstate, player, hand, facing, hitX, hitY, hitZ)) {
+                       .onBlockActivated(worldIn, pos, iblockstate, player, hand, facing, hitX, hitY, hitZ)) {
           result = EnumActionResult.SUCCESS;
         }
       }
@@ -95,13 +94,13 @@ final class ServerInteractionManagerTFCF {
         int j = stack.getMetadata();
         int i = stack.getCount();
         if (result != EnumActionResult.SUCCESS && event.getUseItem() != Event.Result.DENY
-                || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
+            || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
           // Fire the alternative item use action
           EnumActionResult enumactionresult;
 
           if (stack.getItem() instanceof ItemSeedsTFC) {
             enumactionresult = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) stack.getItem()), player, worldIn, pos, hand, facing, hitX,
-                    hitY, hitZ);
+                                                               hitY, hitZ);
           } else
           // fire the normal one as well
           {
@@ -116,12 +115,12 @@ final class ServerInteractionManagerTFCF {
         }
       } else {
         if (result != EnumActionResult.SUCCESS && event.getUseItem() != Event.Result.DENY
-                || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
+            || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
           ItemStack copyBeforeUse = stack.copy();
 
           if (copyBeforeUse.getItem() instanceof ItemSeedsTFC) {
             result = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) copyBeforeUse.getItem()), player, worldIn, pos, hand, facing, hitX,
-                    hitY, hitZ);
+                                                     hitY, hitZ);
           } else
           // fire the normal one as well
           {

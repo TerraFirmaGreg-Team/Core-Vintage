@@ -11,7 +11,7 @@ public class BlockWoodFence extends BlockWoodFenceLog {
     super(variant, type);
 
     getSettings()
-            .customResource(variant.getCustomResource());
+      .customResource(variant.getCustomResource());
 
   }
 }

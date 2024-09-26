@@ -13,7 +13,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
-
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -73,10 +72,10 @@ public abstract class ContainerBaseKnapping extends BaseContainerItemStack imple
 
   private KnappingRecipe getMatchingRecipe() {
     return TFCRegistries.KNAPPING.getValuesCollection()
-            .stream()
-            .filter(x -> x.getType() == type && matrix.matches(x.getMatrix()))
-            .findFirst()
-            .orElse(null);
+                                 .stream()
+                                 .filter(x -> x.getType() == type && matrix.matches(x.getMatrix()))
+                                 .findFirst()
+                                 .orElse(null);
   }
 
   @Override
@@ -127,7 +126,7 @@ public abstract class ContainerBaseKnapping extends BaseContainerItemStack imple
   @Override
   protected void addContainerSlots() {
     addSlotToContainer(
-            new SlotKnappingOutput(new ItemStackHandler(1), 0, 128, 44, this::resetMatrix));
+      new SlotKnappingOutput(new ItemStackHandler(1), 0, 128, 44, this::resetMatrix));
   }
 
   @Override

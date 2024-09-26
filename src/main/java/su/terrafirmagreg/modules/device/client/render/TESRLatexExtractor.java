@@ -16,7 +16,6 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.math.Vec3i;
 import net.minecraftforge.fluids.Fluid;
 
-
 import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
@@ -31,7 +30,7 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
 
   @Override
   public void render(TileLatexExtractor tile, double x, double y, double z, float partialTicks,
-          int destroyStage, float alpha) {
+                     int destroyStage, float alpha) {
     if (tile.hasWorld()) {
       IBlockState state = tile.getBlockState();
       Fluid flowing = FluidsTFC.LATEX.get();
@@ -40,8 +39,8 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
 
       //noinspection ConstantConditions
       state = state.withProperty(BASE, tile.hasBase())
-              .withProperty(POT, tile.hasPot())
-              .withProperty(CUT, tile.cutState());
+                   .withProperty(POT, tile.hasPot())
+                   .withProperty(CUT, tile.cutState());
 
       Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
       BlockRendererDispatcher renderer = Minecraft.getMinecraft().getBlockRendererDispatcher();
@@ -62,8 +61,8 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
       GlStateManager.enableAlpha();
       GlStateManager.enableBlend();
       GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
-              GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-              GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                                          GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+                                          GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
       int color = flowing.getColor();
 
@@ -104,21 +103,21 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
           buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
           buffer.pos(0.46625D, 0.57125D, zPos - 0.075D)
-                  .tex(sprite.getMinU(), sprite.getMinV())
-                  .normal(0, 1, 0)
-                  .endVertex();
+                .tex(sprite.getMinU(), sprite.getMinV())
+                .normal(0, 1, 0)
+                .endVertex();
           buffer.pos(0.46625D, 0.57125D, zPos)
-                  .tex(sprite.getMinU(), sprite.getMaxV())
-                  .normal(0, 1, 0)
-                  .endVertex();
+                .tex(sprite.getMinU(), sprite.getMaxV())
+                .normal(0, 1, 0)
+                .endVertex();
           buffer.pos(0.54375D, 0.57125D, zPos)
-                  .tex(sprite.getMaxU(), sprite.getMaxV())
-                  .normal(0, 1, 0)
-                  .endVertex();
+                .tex(sprite.getMaxU(), sprite.getMaxV())
+                .normal(0, 1, 0)
+                .endVertex();
           buffer.pos(0.54375D, 0.57125D, zPos - 0.075D)
-                  .tex(sprite.getMaxU(), sprite.getMinV())
-                  .normal(0, 1, 0)
-                  .endVertex();
+                .tex(sprite.getMaxU(), sprite.getMinV())
+                .normal(0, 1, 0)
+                .endVertex();
 
           Tessellator.getInstance().draw();
         }
@@ -127,21 +126,21 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
         buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
         buffer.pos(0.46625D, 0.57125D, 1.375D)
-                .tex(sprite.getMinU(), sprite.getMinV())
-                .normal(0, 1, 0)
-                .endVertex();
+              .tex(sprite.getMinU(), sprite.getMinV())
+              .normal(0, 1, 0)
+              .endVertex();
         buffer.pos(0.46625D, 0.50125D, 1.4D)
-                .tex(sprite.getMinU(), sprite.getMaxV())
-                .normal(0, 1, 0)
-                .endVertex();
+              .tex(sprite.getMinU(), sprite.getMaxV())
+              .normal(0, 1, 0)
+              .endVertex();
         buffer.pos(0.54375D, 0.50125D, 1.4D)
-                .tex(sprite.getMaxU(), sprite.getMaxV())
-                .normal(0, 1, 0)
-                .endVertex();
+              .tex(sprite.getMaxU(), sprite.getMaxV())
+              .normal(0, 1, 0)
+              .endVertex();
         buffer.pos(0.54375D, 0.57125D, 1.375D)
-                .tex(sprite.getMaxU(), sprite.getMinV())
-                .normal(0, 1, 0)
-                .endVertex();
+              .tex(sprite.getMaxU(), sprite.getMinV())
+              .normal(0, 1, 0)
+              .endVertex();
 
         Tessellator.getInstance().draw();
 
@@ -149,21 +148,21 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
         buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
         buffer.pos(0.46625D, 0.50125D, 1.4D)
-                .tex(sprite.getMinU(), sprite.getMaxV())
-                .normal(0, 1, 0)
-                .endVertex();
+              .tex(sprite.getMinU(), sprite.getMaxV())
+              .normal(0, 1, 0)
+              .endVertex();
         buffer.pos(0.46625D, 0.57125D, 1.375D)
-                .tex(sprite.getMinU(), sprite.getMinV())
-                .normal(0, 1, 0)
-                .endVertex();
+              .tex(sprite.getMinU(), sprite.getMinV())
+              .normal(0, 1, 0)
+              .endVertex();
         buffer.pos(0.54375D, 0.57125D, 1.375D)
-                .tex(sprite.getMaxU(), sprite.getMinV())
-                .normal(0, 1, 0)
-                .endVertex();
+              .tex(sprite.getMaxU(), sprite.getMinV())
+              .normal(0, 1, 0)
+              .endVertex();
         buffer.pos(0.54375D, 0.50125D, 1.4D)
-                .tex(sprite.getMaxU(), sprite.getMaxV())
-                .normal(0, 1, 0)
-                .endVertex();
+              .tex(sprite.getMaxU(), sprite.getMaxV())
+              .normal(0, 1, 0)
+              .endVertex();
 
         Tessellator.getInstance().draw();
 
@@ -173,21 +172,21 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
           buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
           buffer.pos(0.46625D, yyPos + 0.075D, 1.4D)
-                  .tex(sprite.getMinU(), sprite.getMinV())
-                  .normal(0, 1, 0)
-                  .endVertex();
+                .tex(sprite.getMinU(), sprite.getMinV())
+                .normal(0, 1, 0)
+                .endVertex();
           buffer.pos(0.46625D, yyPos, 1.4D)
-                  .tex(sprite.getMinU(), sprite.getMaxV())
-                  .normal(0, 1, 0)
-                  .endVertex();
+                .tex(sprite.getMinU(), sprite.getMaxV())
+                .normal(0, 1, 0)
+                .endVertex();
           buffer.pos(0.54375D, yyPos, 1.4D)
-                  .tex(sprite.getMaxU(), sprite.getMaxV())
-                  .normal(0, 1, 0)
-                  .endVertex();
+                .tex(sprite.getMaxU(), sprite.getMaxV())
+                .normal(0, 1, 0)
+                .endVertex();
           buffer.pos(0.54375D, yyPos + 0.075D, 1.4D)
-                  .tex(sprite.getMaxU(), sprite.getMinV())
-                  .normal(0, 1, 0)
-                  .endVertex();
+                .tex(sprite.getMaxU(), sprite.getMinV())
+                .normal(0, 1, 0)
+                .endVertex();
 
           Tessellator.getInstance().draw();
 
@@ -195,21 +194,21 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
           buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
           buffer.pos(0.46625D, yyPos, 1.4D)
-                  .tex(sprite.getMinU(), sprite.getMaxV())
-                  .normal(0, 1, 0)
-                  .endVertex();
+                .tex(sprite.getMinU(), sprite.getMaxV())
+                .normal(0, 1, 0)
+                .endVertex();
           buffer.pos(0.46625D, yyPos + 0.075D, 1.4D)
-                  .tex(sprite.getMinU(), sprite.getMinV())
-                  .normal(0, 1, 0)
-                  .endVertex();
+                .tex(sprite.getMinU(), sprite.getMinV())
+                .normal(0, 1, 0)
+                .endVertex();
           buffer.pos(0.54375D, yyPos + 0.075D, 1.4D)
-                  .tex(sprite.getMaxU(), sprite.getMinV())
-                  .normal(0, 1, 0)
-                  .endVertex();
+                .tex(sprite.getMaxU(), sprite.getMinV())
+                .normal(0, 1, 0)
+                .endVertex();
           buffer.pos(0.54375D, yyPos, 1.4D)
-                  .tex(sprite.getMaxU(), sprite.getMaxV())
-                  .normal(0, 1, 0)
-                  .endVertex();
+                .tex(sprite.getMaxU(), sprite.getMaxV())
+                .normal(0, 1, 0)
+                .endVertex();
 
           Tessellator.getInstance().draw();
           lastPos = yyPos;
@@ -220,13 +219,13 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
         buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
         buffer.pos(0.46625D, lastPos, 1.4D).tex(sprite.getMinU(), sprite.getMinV()).normal(0, 1, 0)
-                .endVertex();
+              .endVertex();
         buffer.pos(0.46625D, yPos, 1.4D).tex(sprite.getMinU(), sprite.getMaxV()).normal(0, 1, 0)
-                .endVertex();
+              .endVertex();
         buffer.pos(0.54375D, yPos, 1.4D).tex(sprite.getMaxU(), sprite.getMaxV()).normal(0, 1, 0)
-                .endVertex();
+              .endVertex();
         buffer.pos(0.54375D, lastPos, 1.4D).tex(sprite.getMaxU(), sprite.getMinV()).normal(0, 1, 0)
-                .endVertex();
+              .endVertex();
 
         Tessellator.getInstance().draw();
 
@@ -234,13 +233,13 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
         buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
         buffer.pos(0.46625D, yPos, 1.4D).tex(sprite.getMinU(), sprite.getMaxV()).normal(0, 1, 0)
-                .endVertex();
+              .endVertex();
         buffer.pos(0.46625D, lastPos, 1.4D).tex(sprite.getMinU(), sprite.getMinV()).normal(0, 1, 0)
-                .endVertex();
+              .endVertex();
         buffer.pos(0.54375D, lastPos, 1.4D).tex(sprite.getMaxU(), sprite.getMinV()).normal(0, 1, 0)
-                .endVertex();
+              .endVertex();
         buffer.pos(0.54375D, yPos, 1.4D).tex(sprite.getMaxU(), sprite.getMaxV()).normal(0, 1, 0)
-                .endVertex();
+              .endVertex();
 
         Tessellator.getInstance().draw();
 
@@ -253,13 +252,13 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
         buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
         buffer.pos(0.3125D, yPos, 1.1875D).tex(sprite.getMinU(), sprite.getMinV()).normal(0, 1, 0)
-                .endVertex();
+              .endVertex();
         buffer.pos(0.3125D, yPos, 1.5625D).tex(sprite.getMinU(), sprite.getMaxV()).normal(0, 1, 0)
-                .endVertex();
+              .endVertex();
         buffer.pos(0.6875D, yPos, 1.5625D).tex(sprite.getMaxU(), sprite.getMaxV()).normal(0, 1, 0)
-                .endVertex();
+              .endVertex();
         buffer.pos(0.6875D, yPos, 1.1875D).tex(sprite.getMaxU(), sprite.getMinV()).normal(0, 1, 0)
-                .endVertex();
+              .endVertex();
 
         Tessellator.getInstance().draw();
       }

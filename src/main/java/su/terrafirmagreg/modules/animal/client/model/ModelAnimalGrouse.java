@@ -12,7 +12,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -121,7 +120,7 @@ public class ModelAnimalGrouse extends ModelBase {
     tails3 = new ModelRenderer(this, 54, 22);
     tails3.setRotationPoint(-0.2F, 15.0F, 5.9F);
     tails3.addBox(-1.5F, -10.0F, 0.0F, 3, 10, 0, 0.0F);
-    setRotateAngle(tails3, -0.3490658503988659F, -0.06981317007977318F, -0.6981317007977318F);
+    setRotateAngle(tails3, -0.3490658503988659F, -0.06981317007977318F, -((float) Math.PI * 2F / 9F));
     tails1 = new ModelRenderer(this, 54, 22);
     tails1.setRotationPoint(-0.4F, 15.0F, 6.1F);
     tails1.addBox(-1.5F, -10.0F, 0.0F, 3, 10, 0, 0.0F);
@@ -133,7 +132,7 @@ public class ModelAnimalGrouse extends ModelBase {
     tails7 = new ModelRenderer(this, 54, 22);
     tails7.setRotationPoint(0.2F, 15.0F, 5.9F);
     tails7.addBox(-1.5F, -10.0F, 0.0F, 3, 10, 0, 0.0F);
-    setRotateAngle(tails7, -0.3490658503988659F, 0.06981317007977318F, 0.6981317007977318F);
+    setRotateAngle(tails7, -0.3490658503988659F, 0.06981317007977318F, ((float) Math.PI * 2F / 9F));
 
     legR1 = new ModelRenderer(this, 5, 29);
     legR1.setRotationPoint(-1.5F, 21.0F, 0.0F);
@@ -184,7 +183,7 @@ public class ModelAnimalGrouse extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-          float par6, float par7) {
+                     float par6, float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
     EntityAnimalGrouse grouse = ((EntityAnimalGrouse) entity);
@@ -262,7 +261,7 @@ public class ModelAnimalGrouse extends ModelBase {
 
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
-          float par6, Entity ent) {
+                                float par6, Entity ent) {
     this.head.rotateAngleX = -(par5 / (180F / MathConstants.PI));
     this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
 

@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.Nullable;
@@ -27,28 +26,28 @@ public class HandlerDamageResistance {
   public static void init() {
 
     CUSTOM_ENTITY.put(new ResourceLocation("minecraft", "skeleton"),
-            () -> new ProviderDamageResistance(0, 1000000000, 50));
+                      () -> new ProviderDamageResistance(0, 1000000000, 50));
 
     CUSTOM_ENTITY.put(new ResourceLocation("minecraft", "wither_skeleton"),
-            () -> new ProviderDamageResistance(0, 1000000000, 50));
+                      () -> new ProviderDamageResistance(0, 1000000000, 50));
 
     CUSTOM_ENTITY.put(new ResourceLocation("minecraft", "stray"),
-            () -> new ProviderDamageResistance(0, 1000000000, 50));
+                      () -> new ProviderDamageResistance(0, 1000000000, 50));
 
     CUSTOM_ENTITY.put(new ResourceLocation("minecraft", "creeper"),
-            () -> new ProviderDamageResistance(50, 0, 15));
+                      () -> new ProviderDamageResistance(50, 0, 15));
 
     CUSTOM_ENTITY.put(new ResourceLocation("minecraft", "enderman"),
-            () -> new ProviderDamageResistance(10, 10, 10));
+                      () -> new ProviderDamageResistance(10, 10, 10));
 
     CUSTOM_ENTITY.put(new ResourceLocation("minecraft", "zombie"),
-            () -> new ProviderDamageResistance(50, 15, 0));
+                      () -> new ProviderDamageResistance(50, 15, 0));
 
     CUSTOM_ENTITY.put(new ResourceLocation("minecraft", "husk"),
-            () -> new ProviderDamageResistance(50, 15, 0));
+                      () -> new ProviderDamageResistance(50, 15, 0));
 
     CUSTOM_ENTITY.put(new ResourceLocation("minecraft", "zombie_villager"),
-            () -> new ProviderDamageResistance(50, 15, 0));
+                      () -> new ProviderDamageResistance(50, 15, 0));
 
   }
 

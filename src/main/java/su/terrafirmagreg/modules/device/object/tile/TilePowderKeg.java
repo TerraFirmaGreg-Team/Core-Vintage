@@ -33,7 +33,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
@@ -54,7 +53,7 @@ import static su.terrafirmagreg.data.Properties.SEALED;
  */
 
 public class TilePowderKeg extends BaseTileTickableInventory
-        implements IItemHandlerSidedCallback, IProviderContainer<ContainerPowderKeg, GuiPowderkeg> {
+  implements IItemHandlerSidedCallback, IProviderContainer<ContainerPowderKeg, GuiPowderkeg> {
 
   @Getter
   private boolean sealed;
@@ -178,12 +177,12 @@ public class TilePowderKeg extends BaseTileTickableInventory
     isLit = lit;
     if (lit) {
       world.playSound(null, pos.getX(), pos.getY() + 0.5D, pos.getZ(),
-              SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.33F);
+                      SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.33F);
       fuse = 80;
     } else {
       world.playSound(null, pos.getX(), pos.getY() + 0.5D, pos.getZ(),
-              SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f,
-              0.6f + MathConstants.RNG.nextFloat() * 0.4f);
+                      SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f,
+                      0.6f + MathConstants.RNG.nextFloat() * 0.4f);
       fuse = -1;
     }
     markForSync();
@@ -207,7 +206,7 @@ public class TilePowderKeg extends BaseTileTickableInventory
   private void explode() {
     // world.createExplosion(igniter, pos.getX(), pos.getY(), pos.getZ(), getStrength(), true);
     PowderKegExplosion explosion = new PowderKegExplosion(world, igniter, pos.getX(), pos.getY(),
-            pos.getZ(), getStrength());
+                                                          pos.getZ(), getStrength());
     if (ForgeEventFactory.onExplosionStart(world, explosion)) {
       return;
     }
@@ -223,10 +222,23 @@ public class TilePowderKeg extends BaseTileTickableInventory
     return count / 12;
   }
 
+  @Override
+  public ContainerPowderKeg getContainer(InventoryPlayer inventoryPlayer, World world,
+                                         IBlockState state, BlockPos pos) {
+    return new ContainerPowderKeg(inventoryPlayer, this);
+  }
+
+  @Override
+  public GuiPowderkeg getGuiContainer(InventoryPlayer inventoryPlayer, World world,
+                                      IBlockState state, BlockPos pos) {
+    return new GuiPowderkeg(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this,
+                            state);
+  }
+
   public static class PowderKegExplosion extends Explosion {
 
     public PowderKegExplosion(World world, Entity entity, double x, double y, double z,
-            float size) {
+                              float size) {
       super(world, entity, x, y, z, size, false, true);
     }
 
@@ -238,7 +250,7 @@ public class TilePowderKeg extends BaseTileTickableInventory
     @Override
     public void doExplosionB(boolean spawnParticles) {
       world.playSound(null, x, y, z, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0f,
-              (1.0f + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2f) * 0.7f);
+                      (1.0f + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2f) * 0.7f);
 
       if (size >= 2.0F) {
         world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, x, y, z, 1.0d, 0.d, 0.0d);
@@ -267,7 +279,7 @@ public class TilePowderKeg extends BaseTileTickableInventory
           d4 = d4 * d7;
           d5 = d5 * d7;
           world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (d0 + x) / 2.0d, (d1 + y) / 2.0d,
-                  (d2 + z) / 2.0d, d3, d4, d5);
+                              (d2 + z) / 2.0d, d3, d4, d5);
           world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, d3, d4, d5);
         }
 
@@ -278,7 +290,7 @@ public class TilePowderKeg extends BaseTileTickableInventory
             // noinspection deprecation
             List<ItemStack> drops = block.getDrops(world, blockpos, iblockstate, 0);
             float chance = ForgeEventFactory.fireBlockHarvesting(drops, world, blockpos,
-                    iblockstate, 0, 1f, false, null);
+                                                                 iblockstate, 0, 1f, false, null);
             if (world.rand.nextFloat() <= chance) {
               for (ItemStack stack : drops) {
                 //noinspection all
@@ -321,19 +333,6 @@ public class TilePowderKeg extends BaseTileTickableInventory
       }
       return drops;
     }
-  }
-
-  @Override
-  public ContainerPowderKeg getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
-    return new ContainerPowderKeg(inventoryPlayer, this);
-  }
-
-  @Override
-  public GuiPowderkeg getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
-    return new GuiPowderkeg(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this,
-            state);
   }
 
 

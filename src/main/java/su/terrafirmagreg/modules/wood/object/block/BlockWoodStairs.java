@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
-
 import lombok.Getter;
 
 @Getter
@@ -23,11 +22,11 @@ public class BlockWoodStairs extends BaseBlockStairs implements IWoodBlock {
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .harvestLevel(ToolClasses.AXE, 0)
-            .oreDict("stairs")
-            .oreDict("stairs", "wood");
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .harvestLevel(ToolClasses.AXE, 0)
+      .oreDict("stairs")
+      .oreDict("stairs", "wood");
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
   }

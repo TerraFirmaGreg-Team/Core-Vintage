@@ -38,7 +38,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.dries007.tfc.ConfigTFC;
@@ -92,8 +91,8 @@ public class ItemSmallVessel extends ItemPottery {
             break;
           case LIQUID_SOLID:
             TerraFirmaCraft.getNetwork()
-                    .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, MODID_TFC + ".vessel.liquid_solid"),
-                            (EntityPlayerMP) playerIn);
+                           .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, MODID_TFC + ".vessel.liquid_solid"),
+                                   (EntityPlayerMP) playerIn);
             break;
         }
       }
@@ -240,7 +239,7 @@ public class ItemSmallVessel extends ItemPottery {
       Metal metal = getMetal();
       if (metal != null) {
         String desc =
-                TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
+          TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
         if (isMolten()) {
           desc += I18n.format("tfc.tooltip.liquid");
         } else {
@@ -260,8 +259,8 @@ public class ItemSmallVessel extends ItemPottery {
               onlySmeltables = false;
             }
             text.add(1, I18n.format(Constants.MODID_TFC + ".tooltip.small_vessel_item", slot.getCount(), slot
-                    .getItem()
-                    .getItemStackDisplayName(slot)));
+              .getItem()
+              .getItemStackDisplayName(slot)));
             hasContent = true;
           }
         }
@@ -269,20 +268,20 @@ public class ItemSmallVessel extends ItemPottery {
         if (hasContent) {
           if (onlySmeltables) {
             int textPosition = (int) super.stacks.stream()
-                    .filter(itemstack -> !ItemStack.EMPTY.equals(itemstack))
-                    .count() + 1;
+                                                 .filter(itemstack -> !ItemStack.EMPTY.equals(itemstack))
+                                                 .count() + 1;
             int totalAmount = materials.values().stream().reduce(0, Integer::sum);
             for (Entry<Metal, Integer> entry : materials.entrySet()) {
               Metal key = entry.getKey();
               if (key != null) {
                 int metalAmount = entry.getValue();
                 text.add(textPosition,
-                        I18n.format(Constants.MODID_TFC + ".tooltip.small_vessel_unit_total", I18n.format(key.getTranslationKey()),
-                                metalAmount, Math.round((float) metalAmount / totalAmount * 1000) / 10f));
+                         I18n.format(Constants.MODID_TFC + ".tooltip.small_vessel_unit_total", I18n.format(key.getTranslationKey()),
+                                     metalAmount, Math.round((float) metalAmount / totalAmount * 1000) / 10f));
               }
             }
             text.add(textPosition,
-                    ""); // Separator between the contents of the vessel and the above units text, not needed but I feel that it helps visually
+                     ""); // Separator between the contents of the vessel and the above units text, not needed but I feel that it helps visually
           }
         } else {
           text.add(1, I18n.format(Constants.MODID_TFC + ".tooltip.small_vessel_empty"));
@@ -295,7 +294,7 @@ public class ItemSmallVessel extends ItemPottery {
     @Override
     public Metal getMetal() {
       return fluidMode && tank.getFluid() != null ? FluidsTFC.getMetalFromFluid(tank.getFluid()
-              .getFluid()) : null;
+                                                                                    .getFluid()) : null;
     }
 
     @Override
@@ -319,10 +318,12 @@ public class ItemSmallVessel extends ItemPottery {
         return tank.fill(resource, doFill);
       }
       return 0;
-    }    @Override
+    }
+
+    @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
       return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ||
-              capability == CapabilityHeat.CAPABILITY;
+             capability == CapabilityHeat.CAPABILITY;
     }
 
     @Nullable
@@ -332,7 +333,9 @@ public class ItemSmallVessel extends ItemPottery {
         return tank.drain(resource, doDrain);
       }
       return null;
-    }    @Nullable
+    }
+
+    @Nullable
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
@@ -458,10 +461,10 @@ public class ItemSmallVessel extends ItemPottery {
 
     /**
      * This is used for a very unique situation, see #1083 By tracing the call path through
-     * {@link net.minecraft.inventory.Container#slotClick(int, int, ClickType, EntityPlayer)}, the *only* method that can possibly intercept in that massive chain,
-     * for clicking on a slot with a stack is either this one (in which case we handle the previous item stack in the slot which a reference has been obtained to)
-     * Thus, we don't actually care about the stack being put in the slot. We do assume that since this stack is being put in the slot, a different stack is being
-     * taken out.
+     * {@link net.minecraft.inventory.Container#slotClick(int, int, ClickType, EntityPlayer)}, the *only* method that can possibly intercept in that massive
+     * chain, for clicking on a slot with a stack is either this one (in which case we handle the previous item stack in the slot which a reference has been
+     * obtained to) Thus, we don't actually care about the stack being put in the slot. We do assume that since this stack is being put in the slot, a different
+     * stack is being taken out.
      */
     @Override
     public void beforePutStack(SlotCallback slot, @NotNull ItemStack stack) {
@@ -470,8 +473,6 @@ public class ItemSmallVessel extends ItemPottery {
         CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
       }
     }
-
-
 
 
   }

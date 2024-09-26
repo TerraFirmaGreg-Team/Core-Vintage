@@ -9,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-
 import net.dries007.tfc.api.types.Tree;
 
 import java.util.List;
@@ -94,10 +93,10 @@ public interface ICapabilityChunkData extends ICapabilitySerializable<NBTTagComp
   void resetLastUpdateYear();
 
   void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, int[] soilLayer1,
-          DataLayerClassic[] stabilityLayer,
-          DataLayerClassic[] drainageLayer,
-          int[] seaLevelOffset, float rainfall, float regionalTemp, float avgTemp, float floraDensity,
-          float floraDiversity);
+                         DataLayerClassic[] stabilityLayer,
+                         DataLayerClassic[] drainageLayer,
+                         int[] seaLevelOffset, float rainfall, float regionalTemp, float avgTemp, float floraDensity,
+                         float floraDiversity);
 
   Set<Vein> getGeneratedVeins();
 

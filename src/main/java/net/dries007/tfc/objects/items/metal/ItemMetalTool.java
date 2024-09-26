@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
@@ -25,7 +26,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -218,7 +218,7 @@ public class ItemMetalTool extends ItemMetal {
 
   @Override
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                    float hitZ) {
     ItemStack itemstack = player.getHeldItem(hand);
 
     if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
@@ -230,8 +230,8 @@ public class ItemMetalTool extends ItemMetal {
         return EnumActionResult.PASS;
       }
       if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN &&
-              worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR &&
-              BlockUtils.isVariant(soilBlock.getVariant(), GRASS, DRY_GRASS, DIRT)) {
+          worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR &&
+          BlockUtils.isVariant(soilBlock.getVariant(), GRASS, DRY_GRASS, DIRT)) {
         IBlockState iblockstate1 = BlocksSoil.GRASS_PATH.get(soilBlock.getType()).getDefaultState();
         worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
@@ -290,11 +290,11 @@ public class ItemMetalTool extends ItemMetal {
     if (areaOfEffect > 1 && entityLiving instanceof EntityPlayer player && !worldIn.isRemote) {
       int areaPlus = areaOfEffect - 1; //First block already added
       for (BlockPos.MutableBlockPos extraPos : BlockPos.getAllInBoxMutable(pos.add(-areaPlus, -areaPlus, -areaPlus),
-              pos.add(areaPlus, areaPlus, areaPlus))) {
+                                                                           pos.add(areaPlus, areaPlus, areaPlus))) {
         IBlockState st = worldIn.getBlockState(extraPos);
         if (!extraPos.equals(pos) && !worldIn.isAirBlock(extraPos) && canHarvestBlock(st)) {
           st.getBlock().onPlayerDestroy(worldIn, extraPos, st);
-          st.getBlock().harvestBlock(worldIn, player, extraPos, st, worldIn.getTileEntity(extraPos), stack);
+          st.getBlock().harvestBlock(worldIn, player, extraPos, st, TileUtils.getTile(worldIn, extraPos), stack);
           worldIn.setBlockToAir(extraPos);
           stack.damageItem(1, entityLiving);
         }
@@ -333,9 +333,9 @@ public class ItemMetalTool extends ItemMetal {
     Multimap<String, AttributeModifier> multimap = HashMultimap.create();
     if (slot == EntityEquipmentSlot.MAINHAND) {
       multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-              new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", attackDamage, 0));
+                   new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", attackDamage, 0));
       multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
-              new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", attackSpeed, 0));
+                   new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", attackSpeed, 0));
     }
     return multimap;
   }

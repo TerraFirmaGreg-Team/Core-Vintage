@@ -14,7 +14,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.entity.animal.EntityCamelTFC;
 
 /**
@@ -247,11 +246,11 @@ public class ModelCamelTFC extends ModelBase {
     strapBellyLeftAngle = new ModelRenderer(this, 0, 0);
     strapBellyLeftAngle.setRotationPoint(3.25F, 2.8F, 5.5F);
     strapBellyLeftAngle.addBox(0.0F, 0.0F, 0.0F, 0, 4, 1, 0.0F);
-    setRotation(strapBellyLeftAngle, 0.0F, 0.0F, -0.3141592653589793F);
+    setRotation(strapBellyLeftAngle, 0.0F, 0.0F, -((float)Math.PI / 10F));
     strapBellyRightAngle = new ModelRenderer(this, 0, 0);
     strapBellyRightAngle.setRotationPoint(-3.25F, 2.8F, 5.5F);
     strapBellyRightAngle.addBox(0.0F, 0.0F, 0.0F, 0, 4, 1, 0.0F);
-    setRotation(strapBellyRightAngle, 0.0F, 0.0F, 0.3141592653589793F);
+    setRotation(strapBellyRightAngle, 0.0F, 0.0F, ((float)Math.PI / 10F));
 
     bridleFront1 = new ModelRenderer(this, 0, 0);
     bridleFront1.setRotationPoint(0.0F, 0.0F, -3.1F);

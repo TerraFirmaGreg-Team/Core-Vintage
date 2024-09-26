@@ -8,7 +8,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
-
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillType;
 
@@ -23,7 +22,7 @@ public final class CapabilityPlayer {
 
   public static void register() {
     CapabilityManager.INSTANCE.register(ICapabilityPlayer.class, new StoragePlayer(),
-            ProviderPlayer::new);
+                                        ProviderPlayer::new);
   }
 
   public static boolean has(EntityPlayer player) {

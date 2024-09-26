@@ -4,7 +4,6 @@ import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-
 import BananaFructa.tfcfarming.Config;
 import BananaFructa.tfcfarming.CropNutrients;
 import BananaFructa.tfcfarming.NutrientValues;

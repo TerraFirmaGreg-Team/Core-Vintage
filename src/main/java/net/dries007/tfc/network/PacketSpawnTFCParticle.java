@@ -5,7 +5,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.particle.TFCParticles;
@@ -66,7 +65,7 @@ public class PacketSpawnTFCParticle implements IMessage {
         if (player != null) {
           TFCParticles particle = TFCParticles.values()[message.particleID];
           particle.spawn(player.getEntityWorld(), message.x, message.y, message.z, message.speedX, message.speedY, message.speedZ,
-                  message.duration);
+                         message.duration);
         }
       });
       return null;

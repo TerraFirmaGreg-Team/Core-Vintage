@@ -20,7 +20,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import com.google.common.primitives.Ints;
 
 import org.jetbrains.annotations.NotNull;
@@ -52,7 +51,7 @@ public class BlockFluidTFC extends BlockFluidClassic {
   // NOTE: All of the effects are removed from the fluid, seems to be the only way to fix gray particles coming from the fluids.
   @Override
   public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate,
-          EntityLivingBase entity, int numberOfParticles) {
+                                   EntityLivingBase entity, int numberOfParticles) {
     return true;
   }
 
@@ -105,7 +104,7 @@ public class BlockFluidTFC extends BlockFluidClassic {
               minMeta = neighborMeta;
             } else if (neighborMeta == minMeta) {
               if (neighborBlock.getDensity() > blockType.getDensity() ||
-                      (neighborBlock == this && neighborBlock.getDensity() >= blockType.getDensity())) {
+                  (neighborBlock == this && neighborBlock.getDensity() >= blockType.getDensity())) {
                 blockType = neighborBlock;
               }
             }
@@ -202,9 +201,9 @@ public class BlockFluidTFC extends BlockFluidClassic {
             for (EnumFacing side : EnumFacing.HORIZONTALS) {
               IBlockState neighbor = world.getBlockState(pos.offset(side));
               if (neighbor.getBlock() == targetBlock &&
-                      (blockFlowStrength > neighbor.getValue(LEVEL) ||
-                              world.getBlockState(pos.offset(side).down(densityDir))
-                                      .getBlock() == targetBlock)) {
+                  (blockFlowStrength > neighbor.getValue(LEVEL) ||
+                   world.getBlockState(pos.offset(side).down(densityDir))
+                        .getBlock() == targetBlock)) {
                 supported = true;
                 break;
               }
@@ -334,7 +333,7 @@ public class BlockFluidTFC extends BlockFluidClassic {
       EnumFacing side = EnumFacing.byHorizontalIndex(i);
       BlockPos offset = pos.offset(side);
       boolean useOverlay = world.getBlockState(offset)
-              .getBlockFaceShape(world, offset, side.getOpposite()) == BlockFaceShape.SOLID;
+                                .getBlockFaceShape(world, offset, side.getOpposite()) == BlockFaceShape.SOLID;
       state = state.withProperty(SIDE_OVERLAYS[i], useOverlay);
     }
 

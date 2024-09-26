@@ -24,7 +24,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -55,9 +54,7 @@ public class ItemBowTFCF extends ItemBow implements ICapabilitySize {
     this.weight = weight;
   }
 
-  float chargeVelocityMultiplier() {
-    return 1F;
-  }  public static float getArrowVelocity(int charge) {
+  public static float getArrowVelocity(int charge) {
     float f = (float) charge / 25.0F;
     f = (f * f + f * 2.0F) / 3.0F;
 
@@ -68,11 +65,17 @@ public class ItemBowTFCF extends ItemBow implements ICapabilitySize {
     return f;
   }
 
+  float chargeVelocityMultiplier() {
+    return 1F;
+  }
+
   @Override
   @SideOnly(Side.CLIENT)
   public boolean hasCustomProperties() {
     return true;
-  }  @Override
+  }
+
+  @Override
   protected ItemStack findAmmo(EntityPlayer player) {
     if (this.isArrow(player.getHeldItem(EnumHand.OFF_HAND))) {
       return player.getHeldItem(EnumHand.OFF_HAND);
@@ -94,7 +97,9 @@ public class ItemBowTFCF extends ItemBow implements ICapabilitySize {
   @Override
   public @NotNull Weight getWeight(@NotNull ItemStack stack) {
     return weight;
-  }  @Override
+  }
+
+  @Override
   protected boolean isArrow(ItemStack stack) {
     return stack.getItem() instanceof ItemArrow;
   }
@@ -102,7 +107,9 @@ public class ItemBowTFCF extends ItemBow implements ICapabilitySize {
   @Override
   public @NotNull Size getSize(@NotNull ItemStack stack) {
     return size;
-  }  @Override
+  }
+
+  @Override
   public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
     if (entityLiving instanceof EntityPlayer entityplayer) {
       boolean flag = entityplayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
@@ -110,7 +117,7 @@ public class ItemBowTFCF extends ItemBow implements ICapabilitySize {
 
       int i = this.getMaxItemUseDuration(stack) - timeLeft;
       i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, entityplayer, i,
-              itemstack != ItemStack.EMPTY || flag);
+                                                                  itemstack != ItemStack.EMPTY || flag);
       if (i < 0) {
         return;
       }
@@ -123,7 +130,7 @@ public class ItemBowTFCF extends ItemBow implements ICapabilitySize {
         float f = getArrowVelocity(i);
         if ((double) f >= 0.1D) {
           boolean flag1 = entityplayer.capabilities.isCreativeMode ||
-                  (itemstack.getItem() instanceof ItemArrow && ((ItemArrow) itemstack.getItem()).isInfinite(itemstack, stack, entityplayer));
+                          (itemstack.getItem() instanceof ItemArrow && ((ItemArrow) itemstack.getItem()).isInfinite(itemstack, stack, entityplayer));
 
           if (!worldIn.isRemote) {
             ItemArrow itemarrow = (ItemArrow) (itemstack.getItem() instanceof ItemArrow ? itemstack.getItem() : Items.ARROW);
@@ -163,7 +170,7 @@ public class ItemBowTFCF extends ItemBow implements ICapabilitySize {
           }
 
           worldIn.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_ARROW_SHOOT,
-                  SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                            SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
           if (!flag1) {
             itemstack.shrink(1);
@@ -180,7 +187,6 @@ public class ItemBowTFCF extends ItemBow implements ICapabilitySize {
   }
 
 
-
   @Override
   public int getMaxItemUseDuration(ItemStack stack) {
     return 72000;
@@ -190,7 +196,6 @@ public class ItemBowTFCF extends ItemBow implements ICapabilitySize {
   public EnumAction getItemUseAction(ItemStack stack) {
     return EnumAction.BOW;
   }
-
 
 
   @Override
@@ -215,8 +220,6 @@ public class ItemBowTFCF extends ItemBow implements ICapabilitySize {
   public int getItemEnchantability() {
     return 1;
   }
-
-
 
 
 }

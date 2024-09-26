@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -38,29 +37,29 @@ public class BlockRockStairs extends BaseBlockStairs implements IRockBlock {
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .hardness(variant.getHardness(type))
-            .sound(SoundType.STONE)
-            .renderLayer(BlockRenderLayer.CUTOUT)
-            .oreDict("stairs")
-            .oreDict("stairs", model);
+      .registryKey(variant.getRegistryKey(type))
+      .hardness(variant.getHardness(type))
+      .sound(SoundType.STONE)
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .oreDict("stairs")
+      .oreDict("stairs", model);
   }
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     // Prevents cobble stairs from falling
   }
 
   @Override
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
-          ITooltipFlag flagIn) {
+                             ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 
     tooltip.add(
-            new TextComponentTranslation("rockcategory.name")
-                    .getFormattedText() + ": " + this.getType().getCategory().getLocalizedName());
+      new TextComponentTranslation("rockcategory.name")
+        .getFormattedText() + ": " + this.getType().getCategory().getLocalizedName());
   }
 
   @Override

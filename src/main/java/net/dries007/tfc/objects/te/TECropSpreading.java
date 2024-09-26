@@ -3,7 +3,6 @@ package net.dries007.tfc.objects.te;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 
-
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropSpreading;
 
 import org.jetbrains.annotations.NotNull;

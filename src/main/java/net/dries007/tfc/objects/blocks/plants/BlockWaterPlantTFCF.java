@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -33,7 +34,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
@@ -41,11 +41,6 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-
-
-import su.terrafirmagreg.data.lib.MCDate.Month;
-
-
 import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -102,19 +97,19 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
     plant.getOreDictName().ifPresent(name -> OreDictionaryHelper.register(this, name));
   }
 
+  public static BlockWaterPlantTFCF get(Plant plant) {
+    return MAP.get(plant);
+  }
+
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
     return new BlockStateContainer.Builder(this)
-            .add(LEVEL)
-            .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
-            .add(growthStageProperty)
-            .add(DAYPERIOD)
-            .add(AGE)
-            .build();
-  }
-
-  public static BlockWaterPlantTFCF get(Plant plant) {
-    return MAP.get(plant);
+      .add(LEVEL)
+      .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
+      .add(growthStageProperty)
+      .add(DAYPERIOD)
+      .add(AGE)
+      .build();
   }
 
   @SuppressWarnings("deprecation")
@@ -122,7 +117,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
   @NotNull
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     return state.withProperty(DAYPERIOD, getDayPeriod())
-            .withProperty(growthStageProperty, plant.getStageForMonth());
+                .withProperty(growthStageProperty, plant.getStageForMonth());
   }
 
   @Override
@@ -158,10 +153,10 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
     IBlockState soil = worldIn.getBlockState(pos.down());
     if (plant.getWaterType() == SALT_WATER) {
       return BlockUtils.isSaltWater(worldIn.getBlockState(pos)) && (this.canSustainBush(soil) || BlockUtils.isGround(soil)) &&
-              BlockUtils.isSaltWater(worldIn.getBlockState(pos.up()));
+             BlockUtils.isSaltWater(worldIn.getBlockState(pos.up()));
     }
     return BlockUtils.isFreshWater(worldIn.getBlockState(pos)) && (this.canSustainBush(soil) || BlockUtils.isGround(soil)) &&
-            BlockUtils.isFreshWater(worldIn.getBlockState(pos.up()));
+           BlockUtils.isFreshWater(worldIn.getBlockState(pos.up()));
   }
 
   @Override
@@ -181,8 +176,8 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
   @Override
   public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
     if (!worldIn.isRemote && (stack.getItem()
-            .getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-            .getHarvestLevel(stack, "scythe", player, state) != -1)) {
+                                   .getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
+                                                                                                 .getHarvestLevel(stack, "scythe", player, state) != -1)) {
       if (RNG.nextDouble() <= (state.getValue(AGE) + 1) / 3.0D) //+33% change for each age
       {
         spawnAsEntity(worldIn, pos, new ItemStack(ItemFoodTFC.get(Food.SEAWEED), 1));
@@ -238,8 +233,8 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
     }
     if (state.getBlock() == this) {
       return (soil.getBlock()
-              .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) || BlockUtils.isGround(soil)) &&
-              plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+                  .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) || BlockUtils.isGround(soil)) &&
+             plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
     return this.canSustainBush(soil);
   }
@@ -256,9 +251,9 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
   @Override
   protected BlockStateContainer createBlockState() {
     return new BlockStateContainer.Builder(this)
-            .add(LEVEL)
-            .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
-            .build();
+      .add(LEVEL)
+      .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
+      .build();
   }
 
   @Override
@@ -276,7 +271,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
   @Override
   public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
     world.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod())
-            .withProperty(growthStageProperty, plant.getStageForMonth()));
+                                  .withProperty(growthStageProperty, plant.getStageForMonth()));
     checkAndDropBlock(world, pos, state);
   }
 
@@ -361,11 +356,11 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
 
     if (currentTime != expectedTime) {
       worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, expectedTime)
-              .withProperty(growthStageProperty, currentStage));
+                                      .withProperty(growthStageProperty, currentStage));
     }
     if (currentStage != expectedStage && random.nextDouble() < 0.5) {
       worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, expectedTime)
-              .withProperty(growthStageProperty, expectedStage));
+                                      .withProperty(growthStageProperty, expectedStage));
     }
 
     this.updateTick(worldIn, pos, state, random);
@@ -386,7 +381,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
     }
 
     if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
-            plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+        plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
@@ -396,7 +391,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
-            !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+               !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {

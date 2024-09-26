@@ -10,7 +10,6 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
@@ -24,7 +23,7 @@ public class GeneratorTreeRandom implements ITreeGenerator {
 
   private static final PlacementSettings settingsFull = StructureUtils.getDefaultSettings();
   private static final PlacementSettings settingsWeak = StructureUtils.getDefaultSettings()
-          .setIntegrity(0.5f);
+                                                                      .setIntegrity(0.5f);
   private final int heightMin;
   private final int heightRange;
   private final int variant;
@@ -44,7 +43,7 @@ public class GeneratorTreeRandom implements ITreeGenerator {
 
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree,
-          Random rand, boolean isWorldGen) {
+                           Random rand, boolean isWorldGen) {
     int tmp = rand.nextInt(variant) + 1;
 
     ResourceLocation base = new ResourceLocation(tree.getRegistryName() + "/base_" + tmp);

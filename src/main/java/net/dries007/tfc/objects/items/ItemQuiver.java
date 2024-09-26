@@ -23,7 +23,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -183,8 +182,10 @@ public class ItemQuiver extends ItemArmorTFC {
     @Override
     public boolean isItemValid(int slot, @NotNull ItemStack stack) {
       return OreDictionaryHelper.doesStackMatchOre(stack, "javelin") ||
-              stack.getItem() instanceof ItemArrow;
-    }    @Override
+             stack.getItem() instanceof ItemArrow;
+    }
+
+    @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
       return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
     }
@@ -197,7 +198,9 @@ public class ItemQuiver extends ItemArmorTFC {
         }
       }
       return null;
-    }    @Nullable
+    }
+
+    @Nullable
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
@@ -213,8 +216,6 @@ public class ItemQuiver extends ItemArmorTFC {
       }
       return null;
     }
-
-
 
 
   }

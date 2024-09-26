@@ -2,7 +2,6 @@ package se.gory_moon.horsepower.jei.chopping;
 
 import net.minecraft.item.ItemStack;
 
-
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IStackHelper;
@@ -19,8 +18,8 @@ public class ChoppingRecipeMaker {
   public static List<IRecipeWrapper> getChoppingRecipes(IJeiHelpers helpers, boolean hand, boolean separate) {
     IStackHelper stackHelper = helpers.getStackHelper();
     Collection<ChoppingBlockRecipe> choppingRecipes = separate ? HPRecipes.instance()
-            .getManualChoppingRecipes() : HPRecipes.instance()
-            .getChoppingRecipes();
+                                                                          .getManualChoppingRecipes() : HPRecipes.instance()
+                                                                                                                 .getChoppingRecipes();
 
     List<IRecipeWrapper> recipes = new ArrayList<>();
 

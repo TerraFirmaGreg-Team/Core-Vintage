@@ -19,7 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.Gem;
@@ -40,16 +39,16 @@ public class BlockRockRaw extends BlockRock {
     super(variant, type);
 
     getSettings()
-            .ignoresProperties(CAN_FALL)
-            .renderLayer(BlockRenderLayer.CUTOUT)
-            .fallable(this, variant.getSpecification(), BlocksRock.COBBLE.get(type).getDefaultState())
-            .oreDict(variant)
-            .oreDict(variant, type)
-            .oreDict("stone");
+      .ignoresProperties(CAN_FALL)
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .fallable(this, variant.getSpecification(), BlocksRock.COBBLE.get(type).getDefaultState())
+      .oreDict(variant)
+      .oreDict(variant, type)
+      .oreDict("stone");
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(CAN_FALL, true)
-            .withProperty(MOSSY, false));
+                              .withProperty(CAN_FALL, true)
+                              .withProperty(MOSSY, false));
   }
 
 
@@ -75,7 +74,7 @@ public class BlockRockRaw extends BlockRock {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-          float hitZ) {
+                                  float hitZ) {
 
     ItemStack stack = playerIn.getHeldItemMainhand();
     if (ConfigRock.BLOCK.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {

@@ -1,11 +1,13 @@
 package se.gory_moon.horsepower.jei;
 
+import su.terrafirmagreg.api.base.block.BaseBlockHorse;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
-
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
@@ -22,7 +24,6 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
 import se.gory_moon.horsepower.blocks.ModBlocks;
 import se.gory_moon.horsepower.jei.chopping.ChoppingRecipeMaker;
 import se.gory_moon.horsepower.jei.chopping.ChoppingRecipeWrapper;
@@ -134,24 +135,19 @@ public class HorsePowerPlugin implements IModPlugin {
     registry.handleRecipes(ShapedChoppingRecipe.class, ShapedChoppingCraftingWrapper::new, VanillaRecipeCategoryUid.CRAFTING);
     registry.handleRecipes(ShapelessChoppingRecipe.class, ShapelessChoppingCraftingWrapper::new, VanillaRecipeCategoryUid.CRAFTING);
 
-    if (Configs.recipes.useSeperateGrindstoneRecipes) {
-      registry.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_HAND_GRINDSTONE), HAND_GRINDING);
-    } else {
-      registry.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_HAND_GRINDSTONE), GRINDING);
-    }
     if (Configs.general.enableHandChoppingBlock) {
-      ItemStack itemStackManualChopper = BlockHPChoppingBase.createItemStack(ModBlocks.BLOCK_MANUAL_CHOPPER, 1, new ItemStack(Item.getItemFromBlock(Blocks.LOG)));
+      ItemStack itemStackManualChopper = BaseBlockHorse.createItemStack(ModBlocks.BLOCK_MANUAL_CHOPPER, 1, new ItemStack(Item.getItemFromBlock(Blocks.LOG)));
       registry.addRecipeCatalyst(itemStackManualChopper, MANUAL_CHOPPING);
     }
-    registry.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_GRINDSTONE), GRINDING);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.QUERN_HORSE), GRINDING);
 
-    ItemStack itemStackChopper = BlockHPChoppingBase.createItemStack(ModBlocks.BLOCK_CHOPPER, 1, new ItemStack(Item.getItemFromBlock(Blocks.LOG)));
+    ItemStack itemStackChopper = BaseBlockHorse.createItemStack(ModBlocks.BLOCK_CHOPPER, 1, new ItemStack(Item.getItemFromBlock(Blocks.LOG)));
     registry.addRecipeCatalyst(itemStackChopper, CHOPPING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_PRESS), PRESS_ITEM);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_PRESS), PRESS_FLUID);
 
-    registry.addIngredientInfo(new ItemStack(ModBlocks.BLOCK_GRINDSTONE), VanillaTypes.ITEM, "info.horsepower:grindstone.info1",
-            "info.horsepower:grindstone.info2", "info.horsepower:grindstone.info3");
+    registry.addIngredientInfo(new ItemStack(BlocksDevice.QUERN_HORSE), VanillaTypes.ITEM, "info.horsepower:grindstone.info1",
+                               "info.horsepower:grindstone.info2", "info.horsepower:grindstone.info3");
   }
 
   @Override

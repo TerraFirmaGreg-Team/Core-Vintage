@@ -16,7 +16,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.types.Metal;
@@ -124,7 +123,8 @@ public class ItemMetal extends ItemTFC implements ICapabilityMetal {
     return switch (type) {
       case DUST, NUGGET, SCRAP -> Weight.VERY_LIGHT; // Stacksize = 64
       case INGOT, DOUBLE_INGOT, SHEET, DOUBLE_SHEET -> Weight.LIGHT; // Stacksize = 32
-      case HELMET, GREAVES, CHESTPLATE, BOOTS, UNFINISHED_CHESTPLATE, UNFINISHED_GREAVES, UNFINISHED_HELMET, UNFINISHED_BOOTS -> Weight.VERY_HEAVY; // Stacksize = 1
+      case HELMET, GREAVES, CHESTPLATE, BOOTS, UNFINISHED_CHESTPLATE, UNFINISHED_GREAVES, UNFINISHED_HELMET, UNFINISHED_BOOTS ->
+        Weight.VERY_HEAVY; // Stacksize = 1
       default -> Weight.MEDIUM; // Stacksize = 16 for everything else, but tools will still stack only to 1
     };
   }

@@ -3,7 +3,6 @@ package com.eerussianguy.firmalife.recipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -41,14 +40,10 @@ public class PlanterRecipe extends IForgeRegistryEntry.Impl<PlanterRecipe> {
   @Nullable
   public static PlanterRecipe get(ItemStack item) {
     return TFCRegistries.PLANTER_QUAD.getValuesCollection()
-            .stream()
-            .filter(x -> x.isValidInput(item))
-            .findFirst()
-            .orElse(null);
-  }
-
-  private boolean isValidInput(ItemStack inputItem) {
-    return this.inputItem.test(inputItem);
+                                     .stream()
+                                     .filter(x -> x.isValidInput(item))
+                                     .findFirst()
+                                     .orElse(null);
   }
 
   public static int getMaxStage(PlanterRecipe recipe) {
@@ -57,6 +52,10 @@ public class PlanterRecipe extends IForgeRegistryEntry.Impl<PlanterRecipe> {
 
   public static int getTier(PlanterRecipe recipe) {
     return recipe.tier;
+  }
+
+  private boolean isValidInput(ItemStack inputItem) {
+    return this.inputItem.test(inputItem);
   }
 
   public boolean isLarge() {

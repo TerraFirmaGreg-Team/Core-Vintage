@@ -25,7 +25,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -59,6 +58,30 @@ public class BlockString extends BlockNonCube {
     setTickRandomly(true);
     this.item = item;
     setDefaultState(blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
+  }
+
+  private static boolean isFired(World world, BlockPos pos) {
+    pos = pos.down();
+    IBlockState state = world.getBlockState(pos);
+    if (state.getBlock() instanceof BlockFirePit) {
+      if (state.getValue(LIT)) {
+        var tile = TileUtils.getTile(world, pos, TileFirePit.class);
+        if (tile != null) {
+          IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+          if (cap != null) {
+            for (int i = TileFirePit.SLOT_FUEL_CONSUME; i <= TileFirePit.SLOT_FUEL_INPUT; i++) {
+              ItemStack stack = cap.getStackInSlot(i);
+              if (stack.isEmpty() || OreDictionaryHelper.doesStackMatchOre(stack, "logWood")) {
+                continue;
+              }
+              return false;
+            }
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
   @Override
@@ -100,37 +123,13 @@ public class BlockString extends BlockNonCube {
     }
   }
 
-  private static boolean isFired(World world, BlockPos pos) {
-    pos = pos.down();
-    IBlockState state = world.getBlockState(pos);
-    if (state.getBlock() instanceof BlockFirePit) {
-      if (state.getValue(LIT)) {
-        var tile = TileUtils.getTile(world, pos, TileFirePit.class);
-        if (tile != null) {
-          IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-          if (cap != null) {
-            for (int i = TileFirePit.SLOT_FUEL_CONSUME; i <= TileFirePit.SLOT_FUEL_INPUT; i++) {
-              ItemStack stack = cap.getStackInSlot(i);
-              if (stack.isEmpty() || OreDictionaryHelper.doesStackMatchOre(stack, "logWood")) {
-                continue;
-              }
-              return false;
-            }
-            return true;
-          }
-        }
-      }
-    }
-    return false;
-  }
-
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
     return item.get();
   }
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-          float hitY, float hitZ) {
+                                  float hitY, float hitZ) {
     if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
       var tile = TileUtils.getTile(world, pos, TEString.class);
       if (tile == null) {
@@ -150,7 +149,7 @@ public class BlockString extends BlockNonCube {
         if (cap != null) {
           List<FoodTrait> traits = cap.getTraits();
           boolean isFoodValid = (traits.contains(FoodTrait.BRINED) && OreDictionaryHelper.doesStackMatchOre(held, "categoryMeat") &&
-                  HeatRecipe.get(held) != null) || OreDictionaryHelper.doesStackMatchOre(held, "cheese");
+                                 HeatRecipe.get(held) != null) || OreDictionaryHelper.doesStackMatchOre(held, "cheese");
           if (!traits.contains(FoodTrait.SMOKED) && isFoodValid) {
             ItemStack leftover = inv.insertItem(0, held.splitStack(1), false);
             StackUtils.spawnItemStack(world, pos.add(0.5D, 0.5D, 0.5D), leftover);
@@ -171,7 +170,7 @@ public class BlockString extends BlockNonCube {
   @SuppressWarnings("deprecation")
   @NotNull
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-          EntityLivingBase placer) {
+                                          EntityLivingBase placer) {
     return getStateForPlacement(worldIn, placer, facing, pos);
   }
 

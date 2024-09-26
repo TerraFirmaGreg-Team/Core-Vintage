@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "tfc:rock/conglomerate"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

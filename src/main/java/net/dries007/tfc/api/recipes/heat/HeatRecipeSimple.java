@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;

@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-
 import pieman.caffeineaddon.init.RegistryHandler;
 import pieman.caffeineaddon.proxy.CommonProxy;
 

@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "XXX",
-    "SSS",
-    "XXX"
+    "XXX", "SSS", "XXX"
   ],
   "key": {
     "X": [

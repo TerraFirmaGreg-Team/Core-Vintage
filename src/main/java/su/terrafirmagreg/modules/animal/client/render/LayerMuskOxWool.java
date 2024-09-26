@@ -22,8 +22,8 @@ public class LayerMuskOxWool implements LayerRenderer<EntityAnimalMuskOx> {
 
   @Override
   public void doRenderLayer(EntityAnimalMuskOx muskox, float limbSwing, float limbSwingAmount,
-          float partialTicks, float ageInTicks,
-          float netHeadYaw, float headPitch, float scale) {
+                            float partialTicks, float ageInTicks,
+                            float netHeadYaw, float headPitch, float scale) {
     if (muskox.hasWool() && !muskox.isInvisible()) {
       this.muskoxRenderer.bindTexture(this.muskoxRenderer.getEntityTexture(muskox));
 
@@ -33,7 +33,7 @@ public class LayerMuskOxWool implements LayerRenderer<EntityAnimalMuskOx> {
       this.muskoxModel.setModelAttributes(this.muskoxRenderer.getMainModel());
       this.muskoxModel.setLivingAnimations(muskox, limbSwing, limbSwingAmount, partialTicks);
       this.muskoxModel.render(muskox, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
-              scale);
+                              scale);
     }
   }
 

@@ -8,8 +8,7 @@
       "apply": {
         "model": "tfc:plants/marigold_single_0"
       }
-    },
-    {
+    }, {
       "when": {
         "part": "single",
         "stage": "1"
@@ -17,8 +16,7 @@
       "apply": {
         "model": "tfc:plants/marigold_single_1"
       }
-    },
-    {
+    }, {
       "when": {
         "part": "single",
         "stage": "2"
@@ -26,8 +24,7 @@
       "apply": {
         "model": "tfc:plants/marigold_single_2"
       }
-    },
-    {
+    }, {
       "when": {
         "part": "single",
         "stage": "3"
@@ -35,8 +32,7 @@
       "apply": {
         "model": "tfc:plants/marigold_single_3"
       }
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "0"
@@ -44,8 +40,7 @@
       "apply": {
         "model": "tfc:plants/marigold_lower_0"
       }
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "0"
@@ -53,8 +48,7 @@
       "apply": {
         "model": "tfc:plants/marigold_upper_0"
       }
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "1"
@@ -62,8 +56,7 @@
       "apply": {
         "model": "tfc:plants/marigold_lower_1"
       }
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "1"
@@ -71,8 +64,7 @@
       "apply": {
         "model": "tfc:plants/marigold_upper_1"
       }
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "2"
@@ -80,8 +72,7 @@
       "apply": {
         "model": "tfc:plants/marigold_lower_2"
       }
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "2"
@@ -89,8 +80,7 @@
       "apply": {
         "model": "tfc:plants/marigold_upper_2"
       }
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "3"
@@ -98,8 +88,7 @@
       "apply": {
         "model": "tfc:plants/marigold_lower_3"
       }
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "3"

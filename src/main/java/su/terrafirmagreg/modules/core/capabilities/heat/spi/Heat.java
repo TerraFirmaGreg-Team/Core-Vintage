@@ -1,12 +1,11 @@
 package su.terrafirmagreg.modules.core.capabilities.heat.spi;
 
-import su.terrafirmagreg.api.util.GameUtils;
+import su.terrafirmagreg.api.util.TranslatorUtil;
 import su.terrafirmagreg.data.Unicode;
 import su.terrafirmagreg.modules.core.ConfigCore;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
-
 
 import net.dries007.tfc.util.config.OreTooltipMode;
 
@@ -82,7 +81,7 @@ public enum Heat {
     Heat heat = Heat.getHeat(temperature);
     if (heat != null) {
       StringBuilder b = new StringBuilder();
-      b.append(I18n.format(GameUtils.getEnumName(heat)));
+      b.append(I18n.format(TranslatorUtil.getEnumName(heat)));
       if (heat != Heat.BRILLIANT_WHITE) {
         for (int i = 1; i <= 4; i++) {
           if (temperature <= heat.getMin() + ((float) i * 0.2f) * (heat.getMax() - heat.getMin())) {

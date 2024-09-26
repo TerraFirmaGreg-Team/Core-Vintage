@@ -25,7 +25,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.data.Properties.HORIZONTAL;
@@ -38,26 +37,26 @@ public class BlockRockStandGem extends BlockRock implements IProviderTile {
     super(variant, type);
 
     getSettings()
-            .hardness(1.0f)
-            .size(Size.LARGE)
-            .weight(Weight.HEAVY)
-            .nonFullCube()
-            .harvestLevel(ToolClasses.PICKAXE, 0)
-            .nonOpaque();
+      .hardness(1.0f)
+      .size(Size.LARGE)
+      .weight(Weight.HEAVY)
+      .nonFullCube()
+      .harvestLevel(ToolClasses.PICKAXE, 0)
+      .nonOpaque();
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(HORIZONTAL, EnumFacing.EAST)
-            .withProperty(UP, Boolean.TRUE));
+                              .withProperty(HORIZONTAL, EnumFacing.EAST)
+                              .withProperty(UP, Boolean.TRUE));
   }
 
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-            .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta))
-            .withProperty(UP, meta / 4 % 2 != 0);
+               .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta))
+               .withProperty(UP, meta / 4 % 2 != 0);
   }
 
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-          BlockPos fromPos) {
+                              BlockPos fromPos) {
     if (fromPos.equals(pos.up())) {
       if (worldIn.getBlockState(fromPos).getBlock() instanceof BlockAir) {
         state = state.withProperty(UP, Boolean.TRUE);
@@ -77,7 +76,7 @@ public class BlockRockStandGem extends BlockRock implements IProviderTile {
   }
 
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       var tile = TileUtils.getTile(worldIn, pos, TileRockGemDisplay.class);
       if (tile != null) {
@@ -89,7 +88,7 @@ public class BlockRockStandGem extends BlockRock implements IProviderTile {
   }
 
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-          float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+                                          float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
   }
 

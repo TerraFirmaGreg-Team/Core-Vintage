@@ -24,7 +24,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -43,24 +42,24 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
     this.settings = Settings.of(Material.WOOD);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .harvestLevel(ToolClasses.AXE, 0)
-            .sound(SoundType.WOOD)
-            .renderLayer(BlockRenderLayer.CUTOUT)
-            .hardness(2.0F)
-            .resistance(5.0F)
-            .oreDict(variant)
-            .oreDict(variant, type);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .harvestLevel(ToolClasses.AXE, 0)
+      .sound(SoundType.WOOD)
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .hardness(2.0F)
+      .resistance(5.0F)
+      .oreDict(variant)
+      .oreDict(variant, type);
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
   }
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          @Nullable EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-          float hitX, float hitY,
-          float hitZ) {
+                                  @Nullable EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                  float hitX, float hitY,
+                                  float hitZ) {
     if (!worldIn.isRemote && playerIn != null) {
       playerIn.displayGui(new InterfaceCraftingTable(this, worldIn, pos));
       playerIn.addStat(StatList.CRAFTING_TABLE_INTERACTION);

@@ -3,7 +3,6 @@ package net.dries007.tfc.objects.te;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;

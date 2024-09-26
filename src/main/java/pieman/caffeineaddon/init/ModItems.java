@@ -3,7 +3,6 @@ package pieman.caffeineaddon.init;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
-
 import net.dries007.tfc.objects.items.ItemCoffee;
 import net.dries007.tfc.objects.items.ItemCoffeeHeatable;
 import net.dries007.tfc.objects.items.ItemMug;

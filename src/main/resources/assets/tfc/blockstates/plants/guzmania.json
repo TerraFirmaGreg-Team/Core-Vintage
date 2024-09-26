@@ -10,8 +10,7 @@
           "model": "tfc:plants/guzmania_standing_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "1",
         "facing": "up"
@@ -21,8 +20,7 @@
           "model": "tfc:plants/guzmania_standing_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2",
         "facing": "up"
@@ -30,13 +28,11 @@
       "apply": [
         {
           "model": "tfc:plants/guzmania_standing_1"
-        },
-        {
+        }, {
           "model": "tfc:plants/guzmania_standing_2"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "3",
         "facing": "up"
@@ -46,8 +42,7 @@
           "model": "tfc:plants/guzmania_standing_2"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "0",
         "facing": "down"
@@ -58,8 +53,7 @@
           "x": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "1",
         "facing": "down"
@@ -70,8 +64,7 @@
           "x": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2",
         "facing": "down"
@@ -80,14 +73,12 @@
         {
           "model": "tfc:plants/guzmania_standing_1",
           "x": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/guzmania_standing_2",
           "x": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "3",
         "facing": "down"
@@ -98,8 +89,7 @@
           "x": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "0",
         "facing": "east"
@@ -109,8 +99,7 @@
           "model": "tfc:plants/guzmania_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "1",
         "facing": "east"
@@ -120,8 +109,7 @@
           "model": "tfc:plants/guzmania_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2",
         "facing": "east"
@@ -129,13 +117,11 @@
       "apply": [
         {
           "model": "tfc:plants/guzmania_1"
-        },
-        {
+        }, {
           "model": "tfc:plants/guzmania_2"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "3",
         "facing": "east"
@@ -145,8 +131,7 @@
           "model": "tfc:plants/guzmania_2"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "0",
         "facing": "south"
@@ -157,8 +142,7 @@
           "y": 90
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "1",
         "facing": "south"
@@ -169,8 +153,7 @@
           "y": 90
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2",
         "facing": "south"
@@ -179,14 +162,12 @@
         {
           "model": "tfc:plants/guzmania_1",
           "y": 90
-        },
-        {
+        }, {
           "model": "tfc:plants/guzmania_2",
           "y": 90
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "3",
         "facing": "south"
@@ -197,8 +178,7 @@
           "y": 90
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "0",
         "facing": "west"
@@ -209,8 +189,7 @@
           "y": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "1",
         "facing": "west"
@@ -221,8 +200,7 @@
           "y": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2",
         "facing": "west"
@@ -231,14 +209,12 @@
         {
           "model": "tfc:plants/guzmania_1",
           "y": 180
-        },
-        {
+        }, {
           "model": "tfc:plants/guzmania_2",
           "y": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "3",
         "facing": "west"
@@ -249,8 +225,7 @@
           "y": 180
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "0",
         "facing": "north"
@@ -261,8 +236,7 @@
           "y": 270
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "1",
         "facing": "north"
@@ -273,8 +247,7 @@
           "y": 270
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "2",
         "facing": "north"
@@ -283,14 +256,12 @@
         {
           "model": "tfc:plants/guzmania_1",
           "y": 270
-        },
-        {
+        }, {
           "model": "tfc:plants/guzmania_2",
           "y": 270
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "age": "3",
         "facing": "north"

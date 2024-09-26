@@ -3,11 +3,9 @@
   "ingredients": [
     {
       "item": "tfc:brick/chalk"
-    },
-    {
+    }, {
       "item": "tfc:brick/chalk"
-    },
-    {
+    }, {
       "type": "forge:ore_dict",
       "ore": "chisel"
     }

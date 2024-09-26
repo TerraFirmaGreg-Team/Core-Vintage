@@ -2,7 +2,6 @@ package net.dries007.tfc.util.skills;
 
 import su.terrafirmagreg.modules.core.capabilities.player.ICapabilityPlayer;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 
 import org.jetbrains.annotations.NotNull;
@@ -16,8 +15,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * The instance (i.e. Block or Item) of a skill. This holds the name, class, and supplier for the skill capability To create a new skill all you need to do is create
- * a new instance of this class. Registration will be automatically handled for you.
+ * The instance (i.e. Block or Item) of a skill. This holds the name, class, and supplier for the skill capability To create a new skill all you need to do is
+ * create a new instance of this class. Registration will be automatically handled for you.
  *
  * @param <S> the skill class
  */
@@ -63,13 +62,8 @@ public final class SkillType<S extends Skill> {
   @NotNull
   public static Map<String, Skill> createSkillMap(ICapabilityPlayer rootInstance) {
     return SKILL_TYPES.values()
-            .stream()
-            .collect(Collectors.toMap(SkillType::getName, e -> e.skillSupplier.apply(rootInstance)));
-  }
-
-  @NotNull
-  public String getName() {
-    return name;
+                      .stream()
+                      .collect(Collectors.toMap(SkillType::getName, e -> e.skillSupplier.apply(rootInstance)));
   }
 
   @Nullable
@@ -82,5 +76,10 @@ public final class SkillType<S extends Skill> {
       TerraFirmaCraft.getLog().warn("Tried to cast skill '" + skill + "' to an incorrect instance type: " + name + " / " + returnClass);
       return null;
     }
+  }
+
+  @NotNull
+  public String getName() {
+    return name;
   }
 }

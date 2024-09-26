@@ -19,7 +19,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidStack;
 
-
 import net.dries007.tfc.client.FluidSpriteCache;
 import org.lwjgl.opengl.GL11;
 
@@ -35,8 +34,30 @@ public class GuiSmelteryCauldron extends BaseGuiContainerTile<TileSmelteryCauldr
   private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/smeltery_cauldron.png");
 
   public GuiSmelteryCauldron(Container container, InventoryPlayer playerInv,
-          TileSmelteryCauldron tile) {
+                             TileSmelteryCauldron tile) {
     super(container, playerInv, tile, BACKGROUND);
+  }
+
+  /**
+   * Draws tooltip if not null
+   *
+   * @param fluid  the fluid
+   * @param mouseX the mouseX relation to GUI (mouseX - guiLeft)
+   * @param mouseY the mouseY relation to GUI (mouseY - guiTop)
+   * @param posX   the tank's x coords (without guiLeft!)
+   * @param posY   the tank's y coords (without guiTop!)
+   */
+  @Nullable
+  public static List<String> getFluidTooltip(@Nullable FluidStack fluid, int mouseX, int mouseY,
+                                             int posX, int posY) {
+    if (fluid != null && mouseX >= posX && mouseX <= posX + 18 && mouseY >= posY
+        && mouseY <= posY + 49) {
+      List<String> tooltip = new ArrayList<>();
+      tooltip.add(fluid.getLocalizedName());
+      tooltip.add(fluid.amount + " / " + TileSmelteryCauldron.FLUID_CAPACITY);
+      return tooltip;
+    }
+    return null;
   }
 
   @Override
@@ -51,9 +72,9 @@ public class GuiSmelteryCauldron extends BaseGuiContainerTile<TileSmelteryCauldr
 
     // the temperature indicator <->
     int temperaturePixels = (int) (51 * Math.min(Heat.maxVisibleTemperature(), tile.getField(0)) /
-            Heat.maxVisibleTemperature()); //Max temperature is brilliant white in tfc
+                                   Heat.maxVisibleTemperature()); //Max temperature is brilliant white in tfc
     this.drawTexturedModalRect(this.guiLeft + 26 - 3, this.guiTop + 13 + 49 - temperaturePixels, 36,
-            54, 15, 5);
+                               54, 15, 5);
 
     // Draw tank
     mc.getTextureManager().bindTexture(GUI_ELEMENTS);
@@ -72,8 +93,8 @@ public class GuiSmelteryCauldron extends BaseGuiContainerTile<TileSmelteryCauldr
       GlStateManager.enableAlpha();
       GlStateManager.enableBlend();
       GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
-              GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-              GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                                          GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+                                          GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
       int color = tile.getFluid().getFluid().getColor();
 
@@ -131,27 +152,5 @@ public class GuiSmelteryCauldron extends BaseGuiContainerTile<TileSmelteryCauldr
       tooltip.add(formatted);
       this.drawHoveringText(tooltip, mouseX, mouseY, fontRenderer);
     }
-  }
-
-  /**
-   * Draws tooltip if not null
-   *
-   * @param fluid  the fluid
-   * @param mouseX the mouseX relation to GUI (mouseX - guiLeft)
-   * @param mouseY the mouseY relation to GUI (mouseY - guiTop)
-   * @param posX   the tank's x coords (without guiLeft!)
-   * @param posY   the tank's y coords (without guiTop!)
-   */
-  @Nullable
-  public static List<String> getFluidTooltip(@Nullable FluidStack fluid, int mouseX, int mouseY,
-          int posX, int posY) {
-    if (fluid != null && mouseX >= posX && mouseX <= posX + 18 && mouseY >= posY
-            && mouseY <= posY + 49) {
-      List<String> tooltip = new ArrayList<>();
-      tooltip.add(fluid.getLocalizedName());
-      tooltip.add(fluid.amount + " / " + TileSmelteryCauldron.FLUID_CAPACITY);
-      return tooltip;
-    }
-    return null;
   }
 }

@@ -14,7 +14,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import tfcflorae.ConfigTFCF;
 
@@ -40,7 +39,7 @@ public class GeneratorSurfaceDriftwood implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+                       IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0) {
       int xoff = chunkX * 16 + 8;
       int zoff = chunkZ * 16 + 8;
@@ -50,9 +49,9 @@ public class GeneratorSurfaceDriftwood implements IWorldGenerator {
 
       for (int i = 0; i < ConfigTFCF.General.WORLD.groundcoverDriftwoodFrequency * factor; i++) {
         BlockPos pos = new BlockPos(
-                xoff + random.nextInt(16),
-                0,
-                zoff + random.nextInt(16)
+          xoff + random.nextInt(16),
+          0,
+          zoff + random.nextInt(16)
         );
         generateRock(world, random, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()));
       }
@@ -63,10 +62,10 @@ public class GeneratorSurfaceDriftwood implements IWorldGenerator {
     if (pos.getY() >= WorldTypeClassic.SEALEVEL && pos.getY() < WorldTypeClassic.SEALEVEL + 2) {
       final Biome b = world.getBiome(pos);
       if (b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH
-              || b == BiomesWorld.GRAVEL_BEACH) {
+          || b == BiomesWorld.GRAVEL_BEACH) {
         if (world.isAirBlock(pos) && world.getBlockState(pos.down())
-                .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(
-                world.getBlockState(pos.down()))) {
+                                          .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(
+          world.getBlockState(pos.down()))) {
           world.setBlockState(pos, BlocksTFCF.DRIFTWOOD.getDefaultState());
         }
       }

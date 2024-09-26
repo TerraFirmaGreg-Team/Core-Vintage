@@ -14,7 +14,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-
 import java.util.Random;
 
 import static su.terrafirmagreg.data.Properties.MOSSY;
@@ -26,7 +25,7 @@ public class GeneratorMossyRaw implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world,
-          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+                       IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (!(chunkGenerator instanceof ChunkGenClassic)) {
       return;
     }
@@ -44,14 +43,14 @@ public class GeneratorMossyRaw implements IWorldGenerator {
       if (data.isInitialized() && data.getRainfall() >= RAINFALL_SAND_SANDY_MIX) {
         int mossyCount = (random.nextInt(20) + 1);
         for (int i = random.nextInt(Math.round(1 + floraDiversity));
-                i < (mossyCount + floraDensity) * 10; i++) {
+             i < (mossyCount + floraDensity) * 10; i++) {
           BlockPos blockPos = chunkBlockPos.add(random.nextInt(16) + 8, random.nextInt(16),
-                  random.nextInt(16) + 8);
+                                                random.nextInt(16) + 8);
           if (BlockUtils.isRawStone(world.getBlockState(blockPos))
-                  && BlockUtils.isBlockSurroundedByAir(world, blockPos) &&
-                  world.getLightFor(EnumSkyBlock.SKY, blockPos) < 14 && !world.canSeeSky(blockPos)) {
+              && BlockUtils.isBlockSurroundedByAir(world, blockPos) &&
+              world.getLightFor(EnumSkyBlock.SKY, blockPos) < 14 && !world.canSeeSky(blockPos)) {
             world.setBlockState(blockPos,
-                    BlocksRock.RAW.get(ProviderChunkData.getRockHeight(world, blockPos)).getDefaultState().withProperty(MOSSY, Boolean.TRUE), 2);
+                                BlocksRock.RAW.get(ProviderChunkData.getRockHeight(world, blockPos)).getDefaultState().withProperty(MOSSY, Boolean.TRUE), 2);
           }
         }
       }

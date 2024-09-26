@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.model.animal;
 
-import su.terrafirmagreg.data.MathConstants;
+import net.dries007.tfc.objects.entity.animal.EntityQuailTFC;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -10,10 +10,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import net.dries007.tfc.objects.entity.animal.EntityQuailTFC;
-
 import org.jetbrains.annotations.NotNull;
+
+import su.terrafirmagreg.data.MathConstants;
 
 /**
  * ModelQuailTFC Created using Tabula 7.1.0

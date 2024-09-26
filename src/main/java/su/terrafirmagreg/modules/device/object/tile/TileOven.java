@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileProvider;
@@ -19,10 +20,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
 
 import com.eerussianguy.firmalife.recipe.OvenRecipe;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -35,7 +34,7 @@ import java.util.Optional;
 import static su.terrafirmagreg.data.Properties.CURED;
 import static su.terrafirmagreg.data.Properties.LIT;
 
-public class TileOven extends BaseTileInventory implements ITickable, IAmbientalTileProvider {
+public class TileOven extends BaseTileTickableInventory implements IAmbientalTileProvider {
 
   public static final int SLOT_FUEL_1 = 0;
   public static final int SLOT_FUEL_2 = 1;
@@ -58,6 +57,7 @@ public class TileOven extends BaseTileInventory implements ITickable, IAmbiental
 
   @Override
   public void update() {
+    super.update();
     if (!world.isRemote) {
       if (isBurning) {
         if ((int) (Calendar.PLAYER_TIME.getTicks() - startTick) > tickGoal) {
@@ -67,7 +67,7 @@ public class TileOven extends BaseTileInventory implements ITickable, IAmbiental
             return;
           }
           if (BlockOven.isValidHorizontal(world, pos, true) && BlockOven.hasChimney(world, pos,
-                  true)) {
+                                                                                    true)) {
             cook();
           } else {
             turnOff();
@@ -119,7 +119,7 @@ public class TileOven extends BaseTileInventory implements ITickable, IAmbiental
       OvenRecipe recipe = OvenRecipe.get(input);
       if (recipe != null && !world.isRemote) {
         inventory.setStackInSlot(SLOT_MAIN,
-                CapabilityFood.updateFoodFromPrevious(input, recipe.getOutputItem(input)));
+                                 CapabilityFood.updateFoodFromPrevious(input, recipe.getOutputItem(input)));
         inventory.setStackInSlot(SLOT_FUEL_1, ItemStack.EMPTY);
         inventory.setStackInSlot(SLOT_FUEL_2, ItemStack.EMPTY);
         setAndUpdateSlots(SLOT_MAIN);
@@ -160,7 +160,7 @@ public class TileOven extends BaseTileInventory implements ITickable, IAmbiental
 
   private boolean isCuredBlock(IBlockState state) {
     if ((state.getBlock() instanceof BlockOven || state.getBlock() instanceof BlockOvenChimney)
-            || state.getBlock() instanceof BlockOvenWall) {
+        || state.getBlock() instanceof BlockOvenWall) {
       return state.getValue(CURED);
     }
     return false;
@@ -204,7 +204,7 @@ public class TileOven extends BaseTileInventory implements ITickable, IAmbiental
 
   @Override
   public boolean canInteractWith(EntityPlayer player) {
-    return !isBurning && world.getTileEntity(pos) == this;
+    return !isBurning && TileUtils.getTile(world, pos) == this;
   }
 
   public void light() {
@@ -226,8 +226,8 @@ public class TileOven extends BaseTileInventory implements ITickable, IAmbiental
 
   private boolean hasFuel() {
     return isWarmed ||
-            (FuelManager.isItemFuel(inventory.getStackInSlot(SLOT_FUEL_1)) && FuelManager.isItemFuel(
-                    inventory.getStackInSlot(SLOT_FUEL_2)));
+           (FuelManager.isItemFuel(inventory.getStackInSlot(SLOT_FUEL_1)) && FuelManager.isItemFuel(
+             inventory.getStackInSlot(SLOT_FUEL_2)));
   }
 
   private void setDuration() {

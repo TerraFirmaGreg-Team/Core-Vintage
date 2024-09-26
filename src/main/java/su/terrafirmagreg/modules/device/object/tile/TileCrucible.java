@@ -28,7 +28,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;
@@ -47,8 +46,8 @@ import java.util.Arrays;
 
 @SuppressWarnings("WeakerAccess")
 public class TileCrucible extends BaseTileTickableInventory
-        implements ITileFields, IItemHandlerSidedCallback,
-        IProviderContainer<ContainerCrucible, GuiCrucible> {
+  implements ITileFields, IItemHandlerSidedCallback,
+             IProviderContainer<ContainerCrucible, GuiCrucible> {
 
   public static final int SLOT_INPUT_START = 0;
   public static final int SLOT_INPUT_END = 8;
@@ -69,8 +68,7 @@ public class TileCrucible extends BaseTileTickableInventory
   public TileCrucible() {
     super(10);
 
-    this.alloy = new Alloy(
-            ConfigDevice.BLOCK.CRUCIBLE.tank); // Side effect: Maximum amount only matches config if not loading from disk
+    this.alloy = new Alloy(ConfigDevice.BLOCK.CRUCIBLE.tank); // Side effect: Maximum amount only matches config if not loading from disk
     this.inventoryWrapperExtract = new ItemHandlerSidedWrapper(this, inventory, EnumFacing.DOWN);
     this.inventoryWrapperInsert = new ItemHandlerSidedWrapper(this, inventory, EnumFacing.UP);
 
@@ -88,7 +86,7 @@ public class TileCrucible extends BaseTileTickableInventory
 
   public int addMetal(Metal metal, int amount) {
     int overflow = Math.max(0,
-            alloy.getAmount() + amount - alloy.getMaxAmount()); // Amount which cannot be inserted
+                            alloy.getAmount() + amount - alloy.getMaxAmount()); // Amount which cannot be inserted
     alloy.add(metal, amount);
 
     // Update crucible temperature to match
@@ -105,7 +103,7 @@ public class TileCrucible extends BaseTileTickableInventory
     super.update();
     if (!world.isRemote) {
       temperature = CapabilityHeat.adjustTempTowards(temperature, targetTemperature,
-              (float) ConfigCore.MISC.HEAT.heatingModifier);
+                                                     (float) ConfigCore.MISC.HEAT.heatingModifier);
       if (targetTemperature > 0) {
         // Crucible target temperature decays constantly, since it is set by outside providers
         targetTemperature -= (float) ConfigCore.MISC.HEAT.heatingModifier;
@@ -204,7 +202,7 @@ public class TileCrucible extends BaseTileTickableInventory
     }
     if (slot != SLOT_OUTPUT) {
       IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY,
-              null);
+                                              null);
       if (cap instanceof IMoldHandler) {
         if (cap instanceof ISmallVesselHandler) {
           if (((ISmallVesselHandler) cap).getMetal() != null) {
@@ -219,12 +217,12 @@ public class TileCrucible extends BaseTileTickableInventory
           }
         } else {
           return ((IMoldHandler) cap).getAmount() >
-                  0; // This will make empty molds go to the output slot / prevent empty molds go to the input (no sense in heating them here anyway)
+                 0; // This will make empty molds go to the output slot / prevent empty molds go to the input (no sense in heating them here anyway)
         }
       }
     }
     return slot != SLOT_OUTPUT || stack.hasCapability(
-            CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+      CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
   }
 
   @Override
@@ -265,7 +263,7 @@ public class TileCrucible extends BaseTileTickableInventory
   @Override
   public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
     return (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing != null)
-            || super.hasCapability(capability, facing);
+           || super.hasCapability(capability, facing);
   }
 
   @Override
@@ -366,7 +364,7 @@ public class TileCrucible extends BaseTileTickableInventory
     if (side == EnumFacing.DOWN && slot == SLOT_OUTPUT) {
       ItemStack stack = inventory.getStackInSlot(SLOT_OUTPUT);
       IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY,
-              null);
+                                              null);
       if (cap != null) {
         // Only output if cap is full (so, only full molds will output from slot)
         return cap.drain(1, false) != null && cap.fill(cap.drain(1, false), false) <= 0;
@@ -378,13 +376,13 @@ public class TileCrucible extends BaseTileTickableInventory
 
   @Override
   public ContainerCrucible getContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                        IBlockState state, BlockPos pos) {
     return new ContainerCrucible(inventoryPlayer, this);
   }
 
   @Override
   public GuiCrucible getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-          IBlockState state, BlockPos pos) {
+                                     IBlockState state, BlockPos pos) {
     return new GuiCrucible(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
   }
 }

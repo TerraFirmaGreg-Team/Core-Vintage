@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
@@ -28,10 +27,10 @@ public class ChiselRecipe extends IForgeRegistryEntry.Impl<ChiselRecipe> {
   @Nullable
   public static ChiselRecipe get(IBlockState state) {
     return TFCRegistries.CHISEL.getValuesCollection()
-            .stream()
-            .filter(r -> r.matches(state))
-            .findFirst()
-            .orElse(null);
+                               .stream()
+                               .filter(r -> r.matches(state))
+                               .findFirst()
+                               .orElse(null);
   }
 
   public boolean matches(IBlockState stateIn) {

@@ -8,7 +8,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
 
-
 import java.util.Random;
 
 import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.AIR;
@@ -36,7 +35,7 @@ public class MapGenRiverRavine extends MapGenBase {
 
   @Override
   protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int originalX,
-          int originalZ, ChunkPrimer chunkPrimerIn) {
+                                   int originalZ, ChunkPrimer chunkPrimerIn) {
     if (rand.nextInt(riverRavineRarity) != 0) {
       return;
     }
@@ -48,12 +47,12 @@ public class MapGenRiverRavine extends MapGenBase {
     float angleX = (rand.nextFloat() * 2.0F + rand.nextFloat()) * 2.0F;
 
     generateRavine(rand.nextLong(), chunkX, chunkZ, chunkPrimerIn, x, y, z, angleX, angleY, angleZ,
-            y);
+                   y);
   }
 
   protected void generateRavine(long seed, int chunkX, int chunkZ, ChunkPrimer primer,
-          double startX, double startY, double startZ, float angleX,
-          float angleY, float angleZ, double waterHeight) {
+                                double startX, double startY, double startZ, float angleX,
+                                float angleY, float angleZ, double waterHeight) {
     final Random rand = new Random(seed);
     final double worldX = chunkX * 16 + 8;
     final double worldZ = chunkZ * 16 + 8;
@@ -108,8 +107,8 @@ public class MapGenRiverRavine extends MapGenBase {
       }
 
       if (!(startX >= worldX - 16.0D - min * 2.0D) || !(startZ >= worldZ - 16.0D - min * 2.0D) || !(
-              startX <= worldX + 16.0D + min * 2.0D) ||
-              !(startZ <= worldZ + 16.0D + min * 2.0D)) {
+        startX <= worldX + 16.0D + min * 2.0D) ||
+          !(startZ <= worldZ + 16.0D + min * 2.0D)) {
         continue;
       }
 
@@ -160,11 +159,11 @@ public class MapGenRiverRavine extends MapGenBase {
           for (int y = yMax - 1; y >= yMin; y--) {
             final double yNormalized = (y + 0.5D - startY) / max;
             if ((xNormalized * xNormalized + zNormalized * zNormalized) * multipliers[y]
-                    + yNormalized * yNormalized / 6.0D >= 1.0D) {
+                + yNormalized * yNormalized / 6.0D >= 1.0D) {
               continue;
             }
             if (!BlockUtils.isRawStone(primer.getBlockState(x, y, z)) && !BlockUtils.isSoil(
-                    primer.getBlockState(x, y, z))) {
+              primer.getBlockState(x, y, z))) {
               continue;
             }
 

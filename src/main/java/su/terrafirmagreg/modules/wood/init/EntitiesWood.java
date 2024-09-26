@@ -19,27 +19,27 @@ public final class EntitiesWood {
 
   public static void onRegister(RegistryManager registry) {
     registry.entity("boat",
-            EntityEntryBuilder.create()
-                    .entity(EntityWoodBoat.class)
-                    .tracker(160, 20, true)
+                    EntityEntryBuilder.create()
+                                      .entity(EntityWoodBoat.class)
+                                      .tracker(160, 20, true)
     );
 
     registry.entity("supply_cart",
-            EntityEntryBuilder.create()
-                    .entity(EntityWoodSupplyCart.class)
-                    .tracker(80, 3, false)
+                    EntityEntryBuilder.create()
+                                      .entity(EntityWoodSupplyCart.class)
+                                      .tracker(80, 3, false)
     );
 
     registry.entity("animal_cart",
-            EntityEntryBuilder.create()
-                    .entity(EntityWoodAnimalCart.class)
-                    .tracker(80, 3, false)
+                    EntityEntryBuilder.create()
+                                      .entity(EntityWoodAnimalCart.class)
+                                      .tracker(80, 3, false)
     );
 
     registry.entity("plow_cart",
-            EntityEntryBuilder.create()
-                    .entity(EntityWoodPlowCart.class)
-                    .tracker(80, 3, false)
+                    EntityEntryBuilder.create()
+                                      .entity(EntityWoodPlowCart.class)
+                                      .tracker(80, 3, false)
     );
   }
 
@@ -47,11 +47,11 @@ public final class EntitiesWood {
   public static void onClientRegister(RegistryManager registry) {
     RenderingRegistry.registerEntityRenderingHandler(EntityWoodBoat.class, RenderWoodBoat::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityWoodSupplyCart.class,
-            RenderWoodSupplyCart::new);
+                                                     RenderWoodSupplyCart::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityWoodAnimalCart.class,
-            RenderWoodAnimalCart::new);
+                                                     RenderWoodAnimalCart::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityWoodPlowCart.class,
-            RenderWoodPlowCart::new);
+                                                     RenderWoodPlowCart::new);
 
   }
 }

@@ -9,7 +9,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
-
 import net.dries007.tfc.objects.te.TEDryingMat;
 
 public class GUIHandler implements IGuiHandler {
@@ -33,9 +32,9 @@ public class GUIHandler implements IGuiHandler {
     BlockPos pos = new BlockPos(x, y, z);
     if (ID == DRYINGMATGUI) {
       return new GuiDryingMat(container, player.inventory, TileUtils.getTile(world, pos, TEDryingMat.class),
-              world.getBlockState(new BlockPos(x, y, z))
-                      .getBlock()
-                      .getTranslationKey());
+                              world.getBlockState(new BlockPos(x, y, z))
+                                   .getBlock()
+                                   .getTranslationKey());
     }
     return null;
   }

@@ -9,7 +9,6 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-
 import lombok.Getter;
 
 @Getter
@@ -25,12 +24,12 @@ public class BlockWoodTrapDoor extends BaseBlockTrapDoor implements IWoodBlock {
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .sound(SoundType.WOOD)
-            .hardness(0.5F)
-            .oreDict(variant, "wood")
-            .oreDict(variant, "wood", type);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .sound(SoundType.WOOD)
+      .hardness(0.5F)
+      .oreDict(variant, "wood")
+      .oreDict(variant, "wood", type);
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
   }

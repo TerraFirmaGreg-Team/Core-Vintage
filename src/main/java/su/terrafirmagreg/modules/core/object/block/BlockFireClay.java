@@ -9,7 +9,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
-
 import net.dries007.tfc.objects.items.ItemsTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -22,10 +21,10 @@ public class BlockFireClay extends BaseBlock {
     super(Settings.of(Material.CLAY));
 
     getSettings()
-            .registryKey("core/fire_clay")
-            .sound(SoundType.GROUND)
-            .size(Size.VERY_SMALL)
-            .weight(Weight.HEAVY);
+      .registryKey("core/fire_clay")
+      .sound(SoundType.GROUND)
+      .size(Size.VERY_SMALL)
+      .weight(Weight.HEAVY);
   }
 
   @Override

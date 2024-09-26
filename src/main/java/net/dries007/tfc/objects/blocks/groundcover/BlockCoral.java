@@ -34,7 +34,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.climate.Climate;
@@ -101,12 +100,12 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
   @NotNull
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     return super.getActualState(state, worldIn, pos)
-            .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
-            .withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
-            .withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
-            .withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
-            .withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
-            .withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
+                .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
+                .withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
+                .withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
+                .withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
+                .withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
+                .withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
   }
 
   @SuppressWarnings("deprecation")
@@ -115,17 +114,17 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
   public IBlockState withRotation(IBlockState state, Rotation rot) {
     return switch (rot) {
       case CLOCKWISE_180 -> state.withProperty(NORTH, state.getValue(SOUTH))
-              .withProperty(EAST, state.getValue(WEST))
-              .withProperty(SOUTH, state.getValue(NORTH))
-              .withProperty(WEST, state.getValue(EAST));
+                                 .withProperty(EAST, state.getValue(WEST))
+                                 .withProperty(SOUTH, state.getValue(NORTH))
+                                 .withProperty(WEST, state.getValue(EAST));
       case COUNTERCLOCKWISE_90 -> state.withProperty(NORTH, state.getValue(EAST))
-              .withProperty(EAST, state.getValue(SOUTH))
-              .withProperty(SOUTH, state.getValue(WEST))
-              .withProperty(WEST, state.getValue(NORTH));
+                                       .withProperty(EAST, state.getValue(SOUTH))
+                                       .withProperty(SOUTH, state.getValue(WEST))
+                                       .withProperty(WEST, state.getValue(NORTH));
       case CLOCKWISE_90 -> state.withProperty(NORTH, state.getValue(WEST))
-              .withProperty(EAST, state.getValue(NORTH))
-              .withProperty(SOUTH, state.getValue(EAST))
-              .withProperty(WEST, state.getValue(SOUTH));
+                                .withProperty(EAST, state.getValue(NORTH))
+                                .withProperty(SOUTH, state.getValue(EAST))
+                                .withProperty(WEST, state.getValue(SOUTH));
       default -> state;
     };
   }
@@ -214,9 +213,9 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
       IBlockState up = worldIn.getBlockState(pos.up());
       IBlockState blockState = worldIn.getBlockState(pos.offset(face));
       if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
-              BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
-              (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
-                      up.getBlock() instanceof BlockCoral)) {
+           BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
+          (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
+           up.getBlock() instanceof BlockCoral)) {
         return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
       }
     }
@@ -242,8 +241,8 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
   public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
     this.onBlockHarvested(world, pos, state, player);
     return world.setBlockState(pos, FluidsTFC.SALT_WATER.get()
-            .getBlock()
-            .getDefaultState(), world.isRemote ? 11 : 3);
+                                                        .getBlock()
+                                                        .getDefaultState(), world.isRemote ? 11 : 3);
   }
 
   @NotNull
@@ -257,7 +256,7 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
   @Override
   public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
     return canConnectTo(world, pos.offset(facing), facing.getOpposite()) && !(world.getBlockState(pos.offset(facing))
-            .getBlock() instanceof BlockFence);
+                                                                                   .getBlock() instanceof BlockFence);
   }
 
   protected boolean canPlantConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
@@ -282,15 +281,15 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
   protected BlockStateContainer createBlockState() {
     //return new BlockStateContainer(this, LEVEL, DOWN, UP, NORTH, EAST, WEST, SOUTH);
     return new BlockStateContainer.Builder(this)
-            .add(LEVEL)
-            .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
-            .add(DOWN)
-            .add(UP)
-            .add(NORTH)
-            .add(EAST)
-            .add(WEST)
-            .add(SOUTH)
-            .build();
+      .add(LEVEL)
+      .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
+      .add(DOWN)
+      .add(UP)
+      .add(NORTH)
+      .add(EAST)
+      .add(WEST)
+      .add(SOUTH)
+      .build();
   }
 
   @SuppressWarnings("deprecation")
@@ -351,9 +350,9 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
       IBlockState up = worldIn.getBlockState(pos.up());
       IBlockState blockState = worldIn.getBlockState(pos.offset(face));
       if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
-              BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
-              (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
-                      up.getBlock() instanceof BlockCoral)) {
+           BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
+          (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
+           up.getBlock() instanceof BlockCoral)) {
         return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
       }
     }

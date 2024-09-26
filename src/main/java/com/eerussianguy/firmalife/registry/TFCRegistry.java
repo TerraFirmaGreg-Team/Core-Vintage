@@ -15,7 +15,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
-
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.FirmaLife;
 import com.eerussianguy.firmalife.init.FoodFL;
@@ -72,7 +71,7 @@ public class TFCRegistry {
   public static void onPreRegisterOre(TFCRegistryEvent.RegisterPreBlock<Ore> event) {
     IForgeRegistry<Ore> r = event.getRegistry();
     r.registerAll(
-            new Ore(HALITE)
+      new Ore(HALITE)
     );
   }
 
@@ -84,30 +83,30 @@ public class TFCRegistry {
   @SubscribeEvent
   public static void onRegisterKnappingRecipeEvent(RegistryEvent.Register<KnappingRecipe> event) {
     event.getRegistry().registerAll(
-            new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(BlocksDevice.OVEN), "XXXXX", "XX XX", "X   X", "X   X",
-                    "XXXXX").setRegistryName("clay_oven"),
-            new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(BlocksDevice.OVEN_CHIMNEY), "XX XX", "X   X", "X   X", "X   X",
-                    "X   X").setRegistryName("clay_oven_chimney"),
-            new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(BlocksDevice.OVEN_WALL), "    X", "   XX", "   XX", "  XXX",
-                    "  XXX").setRegistryName("clay_oven_wall"),
-            new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(ItemsFL.UNFIRED_MALLET_MOLD), "XXXXX", "     ", "   X ", "XXXXX",
-                    "XXXXX").setRegistryName("unfired_mallet_mold"),
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(BlocksDevice.OVEN), "XXXXX", "XX XX", "X   X", "X   X",
+                               "XXXXX").setRegistryName("clay_oven"),
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(BlocksDevice.OVEN_CHIMNEY), "XX XX", "X   X", "X   X", "X   X",
+                               "X   X").setRegistryName("clay_oven_chimney"),
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(BlocksDevice.OVEN_WALL), "    X", "   XX", "   XX", "  XXX",
+                               "  XXX").setRegistryName("clay_oven_wall"),
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(ItemsFL.UNFIRED_MALLET_MOLD), "XXXXX", "     ", "   X ", "XXXXX",
+                               "XXXXX").setRegistryName("unfired_mallet_mold"),
 
-            new KnappingRecipeFood(KnappingTypes.PUMPKIN, true, new ItemStack(ItemSeedsTFC.get(StemCrop.PUMPKIN)), "XXXXX", "X   X", "X   X",
-                    "X   X", "XXXXX").setRegistryName("pumpkin_scoop"),
-            new KnappingRecipeFood(KnappingTypes.PUMPKIN, true, new ItemStack(ItemsFL.getFood(FoodFL.PUMPKIN_CHUNKS), 4), "XX XX", "XX XX",
-                    "     ",
-                    "XX XX", "XX XX").setRegistryName("pumpkin_chunk")
+      new KnappingRecipeFood(KnappingTypes.PUMPKIN, true, new ItemStack(ItemSeedsTFC.get(StemCrop.PUMPKIN)), "XXXXX", "X   X", "X   X",
+                             "X   X", "XXXXX").setRegistryName("pumpkin_scoop"),
+      new KnappingRecipeFood(KnappingTypes.PUMPKIN, true, new ItemStack(ItemsFL.getFood(FoodFL.PUMPKIN_CHUNKS), 4), "XX XX", "XX XX",
+                             "     ",
+                             "XX XX", "XX XX").setRegistryName("pumpkin_chunk")
     );
 
     event.getRegistry()
-            .registerAll(BlocksFL.getAllJackOLanterns()
-                    .stream()
-                    .map(j -> new KnappingRecipeSimple(
-                            KnappingTypes.PUMPKIN, true,
-                            new ItemStack(Item.getItemFromBlock(j)), j.getCarving().getCraftPattern())
-                            .setRegistryName("pumpkin_carve_" + j.getCarving().getName()))
-                    .toArray(KnappingRecipe[]::new));
+         .registerAll(BlocksFL.getAllJackOLanterns()
+                              .stream()
+                              .map(j -> new KnappingRecipeSimple(
+                                KnappingTypes.PUMPKIN, true,
+                                new ItemStack(Item.getItemFromBlock(j)), j.getCarving().getCraftPattern())
+                                .setRegistryName("pumpkin_carve_" + j.getCarving().getName()))
+                              .toArray(KnappingRecipe[]::new));
   }
 
   @SuppressWarnings("rawtypes")
@@ -128,40 +127,40 @@ public class TFCRegistry {
     }
     int hour = ICalendar.TICKS_IN_HOUR;
     event.getRegistry().registerAll(
-            new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 100), IIngredient.of("fruitDry"),
-                    new FluidStack(FluidsTFC.YEAST_STARTER.get(), 100), ItemStack.EMPTY, hour * 96).setRegistryName("yeast_from_fruit"),
-            new BarrelRecipe(IIngredient.of(FluidsTFC.YEAST_STARTER.get(), 100), IIngredient.of("flour"),
-                    new FluidStack(FluidsTFC.YEAST_STARTER.get(), 600), ItemStack.EMPTY, hour * 12).setRegistryName("yeast_multiplication"),
-            new BarrelRecipe(IIngredient.of(FluidsTFC.RUM.get(), 1000), IIngredient.of(ItemsFL.FROTHY_COCONUT),
-                    new FluidStack(FluidsTFC.PINA_COLADA.get(), 1000), ItemStack.EMPTY, hour).setRegistryName("pina_colada"),
-            new BarrelRecipe(IIngredient.of(FluidsTFC.HOT_WATER.get(), 250),
-                    new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(Food.BEET), 8)), null, new ItemStack(Items.SUGAR),
-                    hour * 8).setRegistryName("beet_sugar"),
-            new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 250),
-                    new IngredientItemFood(IIngredient.of(ItemsFL.getFood(FoodFL.GROUND_SOYBEANS), 1)), null,
-                    new ItemStack(ItemsFL.getFood(FoodFL.TOFU)), hour * 8).setRegistryName("tofu"),
-            new BarrelRecipeFoodPreservation(IIngredient.of(FluidsTFC.LIMEWATER.get(), 125),
-                    IIngredient.of(new ItemStack(ItemsFL.getFood(FoodFL.PICKLED_EGG))), FoodTrait.PRESERVED,
-                    "barrel_recipe_lime").setRegistryName("pickle_egg"),
-            new BarrelRecipe(IIngredient.of(FluidsTFC.MILK.get(), 2000), IIngredient.of(ItemsFL.RENNET),
-                    new FluidStack(FluidsTFC.CURDLED_MILK.get(), 2000), ItemStack.EMPTY, hour * 4).setRegistryName("curdled_milk"),
-            new BarrelRecipe(IIngredient.of(FluidsTFC.YAK_MILK.get(), 2000), IIngredient.of(ItemsFL.RENNET),
-                    new FluidStack(FluidsTFC.CURDLED_YAK_MILK.get(), 2000), ItemStack.EMPTY, hour * 4).setRegistryName("curdled_yak_milk"),
-            new BarrelRecipe(IIngredient.of(FluidsTFC.GOAT_MILK.get(), 2000), IIngredient.of(ItemsFL.RENNET),
-                    new FluidStack(FluidsTFC.CURDLED_GOAT_MILK.get(), 2000), ItemStack.EMPTY, hour * 4).setRegistryName("curdled_goat_milk"),
-            new BarrelRecipe(IIngredient.of(FluidsTFC.ZEBU_MILK.get(), 2000), IIngredient.of(ItemsFL.RENNET),
-                    new FluidStack(FluidsTFC.CURDLED_MILK.get(), 2000), ItemStack.EMPTY, hour * 4).setRegistryName("curdled_zebu_milk"),
-            new BarrelRecipe(IIngredient.of(FluidsTFC.SALT_WATER.get(), 750),
-                    new IngredientItemFood(IIngredient.of(ItemsFL.getFood(FoodFL.YAK_CURD), 3)), null, new ItemStack(BlocksFL.SHOSHA_WHEEL),
-                    hour * 16).setRegistryName("shosha_wheel"),
-            new BarrelRecipe(IIngredient.of(FluidsTFC.SALT_WATER.get(), 750),
-                    new IngredientItemFood(IIngredient.of(ItemsFL.getFood(FoodFL.GOAT_CURD), 3)), null, new ItemStack(BlocksFL.FETA_WHEEL),
-                    hour * 16).setRegistryName("feta_wheel"),
-            new BarrelRecipe(IIngredient.of(FluidsTFC.SALT_WATER.get(), 750),
-                    new IngredientItemFood(IIngredient.of(ItemsFL.getFood(FoodFL.MILK_CURD), 3)), null, new ItemStack(BlocksFL.GOUDA_WHEEL),
-                    hour * 16).setRegistryName("gouda_wheel"),
-            new BarrelRecipe(IIngredient.of(FluidsTFC.OLIVE_OIL.get(), 500), IIngredient.of("lumber"), null,
-                    new ItemStack(ItemsFL.TREATED_LUMBER), hour * 8).setRegistryName("treat_lumber")
+      new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 100), IIngredient.of("fruitDry"),
+                       new FluidStack(FluidsTFC.YEAST_STARTER.get(), 100), ItemStack.EMPTY, hour * 96).setRegistryName("yeast_from_fruit"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.YEAST_STARTER.get(), 100), IIngredient.of("flour"),
+                       new FluidStack(FluidsTFC.YEAST_STARTER.get(), 600), ItemStack.EMPTY, hour * 12).setRegistryName("yeast_multiplication"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.RUM.get(), 1000), IIngredient.of(ItemsFL.FROTHY_COCONUT),
+                       new FluidStack(FluidsTFC.PINA_COLADA.get(), 1000), ItemStack.EMPTY, hour).setRegistryName("pina_colada"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.HOT_WATER.get(), 250),
+                       new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(Food.BEET), 8)), null, new ItemStack(Items.SUGAR),
+                       hour * 8).setRegistryName("beet_sugar"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 250),
+                       new IngredientItemFood(IIngredient.of(ItemsFL.getFood(FoodFL.GROUND_SOYBEANS), 1)), null,
+                       new ItemStack(ItemsFL.getFood(FoodFL.TOFU)), hour * 8).setRegistryName("tofu"),
+      new BarrelRecipeFoodPreservation(IIngredient.of(FluidsTFC.LIMEWATER.get(), 125),
+                                       IIngredient.of(new ItemStack(ItemsFL.getFood(FoodFL.PICKLED_EGG))), FoodTrait.PRESERVED,
+                                       "barrel_recipe_lime").setRegistryName("pickle_egg"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.MILK.get(), 2000), IIngredient.of(ItemsFL.RENNET),
+                       new FluidStack(FluidsTFC.CURDLED_MILK.get(), 2000), ItemStack.EMPTY, hour * 4).setRegistryName("curdled_milk"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.YAK_MILK.get(), 2000), IIngredient.of(ItemsFL.RENNET),
+                       new FluidStack(FluidsTFC.CURDLED_YAK_MILK.get(), 2000), ItemStack.EMPTY, hour * 4).setRegistryName("curdled_yak_milk"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.GOAT_MILK.get(), 2000), IIngredient.of(ItemsFL.RENNET),
+                       new FluidStack(FluidsTFC.CURDLED_GOAT_MILK.get(), 2000), ItemStack.EMPTY, hour * 4).setRegistryName("curdled_goat_milk"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.ZEBU_MILK.get(), 2000), IIngredient.of(ItemsFL.RENNET),
+                       new FluidStack(FluidsTFC.CURDLED_MILK.get(), 2000), ItemStack.EMPTY, hour * 4).setRegistryName("curdled_zebu_milk"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.SALT_WATER.get(), 750),
+                       new IngredientItemFood(IIngredient.of(ItemsFL.getFood(FoodFL.YAK_CURD), 3)), null, new ItemStack(BlocksFL.SHOSHA_WHEEL),
+                       hour * 16).setRegistryName("shosha_wheel"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.SALT_WATER.get(), 750),
+                       new IngredientItemFood(IIngredient.of(ItemsFL.getFood(FoodFL.GOAT_CURD), 3)), null, new ItemStack(BlocksFL.FETA_WHEEL),
+                       hour * 16).setRegistryName("feta_wheel"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.SALT_WATER.get(), 750),
+                       new IngredientItemFood(IIngredient.of(ItemsFL.getFood(FoodFL.MILK_CURD), 3)), null, new ItemStack(BlocksFL.GOUDA_WHEEL),
+                       hour * 16).setRegistryName("gouda_wheel"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.OLIVE_OIL.get(), 500), IIngredient.of("lumber"), null,
+                       new ItemStack(ItemsFL.TREATED_LUMBER), hour * 8).setRegistryName("treat_lumber")
     );
   }
 
@@ -171,10 +170,10 @@ public class TFCRegistry {
     IForgeRegistry<HeatRecipe> r = event.getRegistry();
 
     r.registerAll(
-            new HeatRecipeSimple(IIngredient.of(ItemsFL.UNFIRED_MALLET_MOLD), new ItemStack(ItemsFL.MALLET_MOLD), 1599.0F,
-                    Metal.Tier.TIER_I).setRegistryName("mallet_mold"),
-            new HeatRecipeSimple(IIngredient.of("slice"), new ItemStack(ItemsFL.getFood(FoodFL.TOAST)), 150, 400).setRegistryName("slice"),
-            new HeatRecipeSimple(IIngredient.of(ItemsFL.HONEYCOMB), new ItemStack(ItemsFL.BEESWAX), 150, 400).setRegistryName("honeycomb")
+      new HeatRecipeSimple(IIngredient.of(ItemsFL.UNFIRED_MALLET_MOLD), new ItemStack(ItemsFL.MALLET_MOLD), 1599.0F,
+                           Metal.Tier.TIER_I).setRegistryName("mallet_mold"),
+      new HeatRecipeSimple(IIngredient.of("slice"), new ItemStack(ItemsFL.getFood(FoodFL.TOAST)), 150, 400).setRegistryName("slice"),
+      new HeatRecipeSimple(IIngredient.of(ItemsFL.HONEYCOMB), new ItemStack(ItemsFL.BEESWAX), 150, 400).setRegistryName("honeycomb")
     );
 
     //Remove recipes
@@ -199,9 +198,9 @@ public class TFCRegistry {
     if (ConfigFL.General.COMPAT.removeTFC) {
       IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
       String[] regNames = {"food/barley/barley_dough", "food/cornmeal/cornmeal_dough", "food/oat/oat_dough", "food/rice/rice_dough",
-              "food/rye/rye_dough", "food/wheat/wheat_dough",
-              "food/barley/barley_bread_sandwich", "food/cornmeal/cornbread_sandwich", "food/oat/oat_bread_sandwich",
-              "food/rice/rice_bread_sandwich", "food/rye/rye_bread_sandwich", "food/wheat/wheat_bread_sandwich"};
+                           "food/rye/rye_dough", "food/wheat/wheat_dough",
+                           "food/barley/barley_bread_sandwich", "food/cornmeal/cornbread_sandwich", "food/oat/oat_bread_sandwich",
+                           "food/rice/rice_bread_sandwich", "food/rye/rye_bread_sandwich", "food/wheat/wheat_bread_sandwich"};
       for (String name : regNames) {
         IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFC, name));
         if (recipe != null) {
@@ -221,57 +220,57 @@ public class TFCRegistry {
     for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
       if (metal.isToolMetal()) {
         r.register(new AnvilRecipe(new ResourceLocation(MODID_FL, metal + "_mallet_head"),
-                IIngredient.of(new ItemStack(ItemMetal.get(metal, Metal.ItemType.INGOT))),
-                new ItemStack(ItemsFL.getMetalMalletHead(metal)), metal.getTier(), TOOLS, PUNCH_LAST, PUNCH_SECOND_LAST, SHRINK_THIRD_LAST));
+                                   IIngredient.of(new ItemStack(ItemMetal.get(metal, Metal.ItemType.INGOT))),
+                                   new ItemStack(ItemsFL.getMetalMalletHead(metal)), metal.getTier(), TOOLS, PUNCH_LAST, PUNCH_SECOND_LAST, SHRINK_THIRD_LAST));
       }
     }
     r.registerAll(new AnvilRecipe(new ResourceLocation(MODID_FL, "greenhouse_wall"),
-            IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
-            new ItemStack(BlocksDevice.GREENHOUSE_WALL, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, PUNCH_NOT_LAST, SHRINK_LAST));
+                                  IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
+                                  new ItemStack(BlocksDevice.GREENHOUSE_WALL, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, PUNCH_NOT_LAST, SHRINK_LAST));
     r.registerAll(new AnvilRecipe(new ResourceLocation(MODID_FL, "greenhouse_roof"),
-            IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
-            new ItemStack(BlocksDevice.GREENHOUSE_ROOF, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_THIRD_LAST, PUNCH_SECOND_LAST,
-            PUNCH_LAST));
+                                  IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
+                                  new ItemStack(BlocksDevice.GREENHOUSE_ROOF, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_THIRD_LAST, PUNCH_SECOND_LAST,
+                                  PUNCH_LAST));
     r.registerAll(new AnvilRecipe(new ResourceLocation(MODID_FL, "greenhouse_door"),
-            IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
-            new ItemStack(BlocksDevice.GREENHOUSE_DOOR), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, HIT_NOT_LAST, PUNCH_LAST));
+                                  IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
+                                  new ItemStack(BlocksDevice.GREENHOUSE_DOOR), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, HIT_NOT_LAST, PUNCH_LAST));
     r.registerAll(new AnvilRecipe(new ResourceLocation(MODID_FL, "spout"), IIngredient.of("ingotBlackSteel"),
-            new ItemStack(BlocksFL.SPOUT), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_THIRD_LAST, SHRINK_SECOND_LAST, HIT_LAST));
+                                  new ItemStack(BlocksFL.SPOUT), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_THIRD_LAST, SHRINK_SECOND_LAST, HIT_LAST));
 
     ForgeRule[] iceSawRules = new ForgeRule[]{ForgeRule.HIT_LAST, ForgeRule.UPSET_SECOND_LAST, ForgeRule.DRAW_NOT_LAST};
     event.getRegistry().registerAll(
-            new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "bronze_ice_saw"),
-                    IIngredient.of(new ItemStack(ItemMetal.get(Metal.BRONZE, Metal.ItemType.DOUBLE_INGOT))),
-                    new ItemStack(ItemMetal.get(Metal.BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BRONZE.getTier(), SmithingSkill.Type.TOOLS,
-                    iceSawRules),
-            new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "bismuth_bronze_ice_saw"),
-                    IIngredient.of(new ItemStack(ItemMetal.get(Metal.BISMUTH_BRONZE, Metal.ItemType.DOUBLE_INGOT))),
-                    new ItemStack(ItemMetal.get(Metal.BISMUTH_BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BISMUTH_BRONZE.getTier(),
-                    SmithingSkill.Type.TOOLS, iceSawRules),
-            new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "black_bronze_ice_saw"),
-                    IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLACK_BRONZE, Metal.ItemType.DOUBLE_INGOT))),
-                    new ItemStack(ItemMetal.get(Metal.BLACK_BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLACK_BRONZE.getTier(),
-                    SmithingSkill.Type.TOOLS, iceSawRules),
-            new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "wrought_iron_ice_saw"),
-                    IIngredient.of(new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.DOUBLE_INGOT))),
-                    new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.ICE_SAW_HEAD)), Metal.WROUGHT_IRON.getTier(),
-                    SmithingSkill.Type.TOOLS, iceSawRules),
-            new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "steel_ice_saw"),
-                    IIngredient.of(new ItemStack(ItemMetal.get(Metal.STEEL, Metal.ItemType.DOUBLE_INGOT))),
-                    new ItemStack(ItemMetal.get(Metal.STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.STEEL.getTier(), SmithingSkill.Type.TOOLS,
-                    iceSawRules),
-            new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "black_steel_ice_saw"), IIngredient.of(
-                    new ItemStack(ItemMetal.get(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), Metal.ItemType.DOUBLE_INGOT))),
-                    new ItemStack(ItemMetal.get(Metal.BLACK_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLACK_STEEL.getTier(),
-                    SmithingSkill.Type.TOOLS, iceSawRules),
-            new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "red_steel_ice_saw"),
-                    IIngredient.of(new ItemStack(ItemMetal.get(Metal.RED_STEEL, Metal.ItemType.DOUBLE_INGOT))),
-                    new ItemStack(ItemMetal.get(Metal.RED_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.RED_STEEL.getTier(),
-                    SmithingSkill.Type.TOOLS, iceSawRules),
-            new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "blue_steel_ice_saw"),
-                    IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, Metal.ItemType.DOUBLE_INGOT))),
-                    new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLUE_STEEL.getTier(),
-                    SmithingSkill.Type.TOOLS, iceSawRules)
+      new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "bronze_ice_saw"),
+                      IIngredient.of(new ItemStack(ItemMetal.get(Metal.BRONZE, Metal.ItemType.DOUBLE_INGOT))),
+                      new ItemStack(ItemMetal.get(Metal.BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BRONZE.getTier(), SmithingSkill.Type.TOOLS,
+                      iceSawRules),
+      new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "bismuth_bronze_ice_saw"),
+                      IIngredient.of(new ItemStack(ItemMetal.get(Metal.BISMUTH_BRONZE, Metal.ItemType.DOUBLE_INGOT))),
+                      new ItemStack(ItemMetal.get(Metal.BISMUTH_BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BISMUTH_BRONZE.getTier(),
+                      SmithingSkill.Type.TOOLS, iceSawRules),
+      new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "black_bronze_ice_saw"),
+                      IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLACK_BRONZE, Metal.ItemType.DOUBLE_INGOT))),
+                      new ItemStack(ItemMetal.get(Metal.BLACK_BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLACK_BRONZE.getTier(),
+                      SmithingSkill.Type.TOOLS, iceSawRules),
+      new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "wrought_iron_ice_saw"),
+                      IIngredient.of(new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.DOUBLE_INGOT))),
+                      new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.ICE_SAW_HEAD)), Metal.WROUGHT_IRON.getTier(),
+                      SmithingSkill.Type.TOOLS, iceSawRules),
+      new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "steel_ice_saw"),
+                      IIngredient.of(new ItemStack(ItemMetal.get(Metal.STEEL, Metal.ItemType.DOUBLE_INGOT))),
+                      new ItemStack(ItemMetal.get(Metal.STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.STEEL.getTier(), SmithingSkill.Type.TOOLS,
+                      iceSawRules),
+      new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "black_steel_ice_saw"), IIngredient.of(
+        new ItemStack(ItemMetal.get(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), Metal.ItemType.DOUBLE_INGOT))),
+                      new ItemStack(ItemMetal.get(Metal.BLACK_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLACK_STEEL.getTier(),
+                      SmithingSkill.Type.TOOLS, iceSawRules),
+      new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "red_steel_ice_saw"),
+                      IIngredient.of(new ItemStack(ItemMetal.get(Metal.RED_STEEL, Metal.ItemType.DOUBLE_INGOT))),
+                      new ItemStack(ItemMetal.get(Metal.RED_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.RED_STEEL.getTier(),
+                      SmithingSkill.Type.TOOLS, iceSawRules),
+      new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "blue_steel_ice_saw"),
+                      IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, Metal.ItemType.DOUBLE_INGOT))),
+                      new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLUE_STEEL.getTier(),
+                      SmithingSkill.Type.TOOLS, iceSawRules)
     );
   }
 }

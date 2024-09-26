@@ -10,8 +10,7 @@
           "model": "tfc:plants/arundo"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "lower",
         "stage": "0"
@@ -21,8 +20,7 @@
           "model": "tfc:plants/arundo_plant"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "middle",
         "stage": "0"
@@ -32,8 +30,7 @@
           "model": "tfc:plants/arundo_plant"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "part": "upper",
         "stage": "0"

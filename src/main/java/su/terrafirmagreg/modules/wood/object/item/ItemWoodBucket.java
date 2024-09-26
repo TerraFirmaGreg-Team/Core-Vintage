@@ -34,7 +34,6 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
 
 import org.jetbrains.annotations.Nullable;
@@ -48,9 +47,9 @@ public class ItemWoodBucket extends BaseItem {
   public ItemWoodBucket() {
 
     getSettings()
-            .registryKey("wood/bucket")
-            .size(Size.LARGE)
-            .weight(Weight.MEDIUM);
+      .registryKey("wood/bucket")
+      .size(Size.LARGE)
+      .weight(Weight.MEDIUM);
     setHasSubtypes(true);
     setContainerItem(this);
 
@@ -115,10 +114,10 @@ public class ItemWoodBucket extends BaseItem {
                 // Vanilla water and lava, and hopefully nothing else
                 try {
                   BlockLiquid flowingBlock = BlockStaticLiquid.getFlowingBlock(fluid.getBlock()
-                          .getDefaultState()
-                          .getMaterial());
+                                                                                    .getDefaultState()
+                                                                                    .getMaterial());
                   worldIn.setBlockState(pos, flowingBlock.getDefaultState()
-                          .withProperty(BlockLiquid.LEVEL, 1));
+                                                         .withProperty(BlockLiquid.LEVEL, 1));
                 } catch (IllegalArgumentException e) { /* Just skip */ }
               }
             }

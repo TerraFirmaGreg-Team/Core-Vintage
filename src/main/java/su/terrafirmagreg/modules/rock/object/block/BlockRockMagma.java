@@ -18,7 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -39,26 +38,26 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock {
     this.settings = Settings.of(Material.ROCK);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .hardness(variant.getHardness(type))
-            .sound(SoundType.STONE)
-            .size(Size.SMALL)
-            .weight(Weight.LIGHT)
-            .renderLayer(BlockRenderLayer.CUTOUT)
-            .harvestLevel(ToolClasses.PICKAXE, 0)
-            .fallable(this, variant.getSpecification())
-            .oreDict(variant)
-            .oreDict(variant, type);
+      .registryKey(variant.getRegistryKey(type))
+      .hardness(variant.getHardness(type))
+      .sound(SoundType.STONE)
+      .size(Size.SMALL)
+      .weight(Weight.LIGHT)
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .harvestLevel(ToolClasses.PICKAXE, 0)
+      .fallable(this, variant.getSpecification())
+      .oreDict(variant)
+      .oreDict(variant, type);
   }
 
   @Override
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
-          ITooltipFlag flagIn) {
+                             ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 
     tooltip.add(new TextComponentTranslation(
-            "rockcategory.name").getFormattedText() + ": " + getType().getCategory()
-            .getLocalizedName());
+      "rockcategory.name").getFormattedText() + ": " + getType().getCategory()
+                                                                .getLocalizedName());
   }
 }

@@ -23,9 +23,9 @@ public class BiomeOcean extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.OCEAN,
-            BiomeDictionary.Type.WET,
-            BiomeDictionary.Type.WATER
+      BiomeDictionary.Type.OCEAN,
+      BiomeDictionary.Type.WET,
+      BiomeDictionary.Type.WATER
     };
   }
 }

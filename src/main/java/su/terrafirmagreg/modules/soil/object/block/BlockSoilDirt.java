@@ -8,7 +8,6 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import static su.terrafirmagreg.data.Properties.CLAY;
 
 public class BlockSoilDirt extends BlockSoil {
@@ -26,8 +25,8 @@ public class BlockSoilDirt extends BlockSoil {
   @SideOnly(Side.CLIENT)
   public BlockRenderLayer getRenderLayer() {
     return this.getBlockState().getBaseState().getValue(CLAY)
-            ? BlockRenderLayer.CUTOUT
-            : BlockRenderLayer.SOLID;
+           ? BlockRenderLayer.CUTOUT
+           : BlockRenderLayer.SOLID;
   }
 
   @Override

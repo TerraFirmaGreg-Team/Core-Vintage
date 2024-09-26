@@ -4,7 +4,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
@@ -35,18 +34,18 @@ public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe> implements 
   @Nullable
   public static OvenRecipe get(ItemStack item) {
     return TFCRegistries.OVEN.getValuesCollection()
-            .stream()
-            .filter(x -> x.isValidInput(item))
-            .findFirst()
-            .orElse(null);
-  }
-
-  private boolean isValidInput(ItemStack inputItem) {
-    return this.inputItem.test(inputItem);
+                             .stream()
+                             .filter(x -> x.isValidInput(item))
+                             .findFirst()
+                             .orElse(null);
   }
 
   public static int getDuration(OvenRecipe recipe) {
     return recipe.duration;
+  }
+
+  private boolean isValidInput(ItemStack inputItem) {
+    return this.inputItem.test(inputItem);
   }
 
   @NotNull

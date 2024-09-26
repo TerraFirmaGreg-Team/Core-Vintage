@@ -23,14 +23,14 @@ public class BlockThatch extends BaseBlock {
     super(Settings.of(Material.PLANTS));
 
     getSettings()
-            .registryKey("core/thatch")
-            .sound(SoundType.PLANT)
-            .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
-            .nonOpaque()
-            .nonFullCube()
-            .hardness(0.6F)
-            .oreDict("thatch")
-            .oreDict("block", "straw");
+      .registryKey("core/thatch")
+      .sound(SoundType.PLANT)
+      .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
+      .nonOpaque()
+      .nonFullCube()
+      .hardness(0.6F)
+      .oreDict("thatch")
+      .oreDict("block", "straw");
 
     BlockUtils.setFireInfo(this, 60, 20);
   }
@@ -38,7 +38,7 @@ public class BlockThatch extends BaseBlock {
   @SideOnly(Side.CLIENT)
   @Override
   public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos,
-          EnumFacing side) {
+                                      EnumFacing side) {
     return true;
   }
 
@@ -46,7 +46,7 @@ public class BlockThatch extends BaseBlock {
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
     // Player will take damage when hitting thatch if fall is over 13 blocks, fall damage is then set to 0.
     entityIn.fall((entityIn.fallDistance - 10),
-            1.0F); // TODO: 17/4/18 balance fall damage reduction.
+                  1.0F); // TODO: 17/4/18 balance fall damage reduction.
     entityIn.fallDistance = 0;
 
     entityIn.motionX *= 0.1;
@@ -58,7 +58,7 @@ public class BlockThatch extends BaseBlock {
 
   @Override
   public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-          BlockPos pos) {
+                                               BlockPos pos) {
     return NULL_AABB;
   }
 }

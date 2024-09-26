@@ -11,9 +11,9 @@ public class BlockGreenhouseDoor extends BaseBlockDoor {
     super(Settings.of(Material.WOOD));
 
     getSettings()
-            .registryKey("device/greenhouse/door")
-            .oreDict("greenhouse")
-            .sound(SoundType.METAL)
-            .hardness(3F);
+      .registryKey("device/greenhouse/door")
+      .oreDict("greenhouse")
+      .sound(SoundType.METAL)
+      .hardness(3F);
   }
 }

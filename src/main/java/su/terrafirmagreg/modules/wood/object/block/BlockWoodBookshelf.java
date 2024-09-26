@@ -13,7 +13,6 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import lombok.Getter;
 
 @Getter
@@ -29,15 +28,15 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
     this.settings = Settings.of(Material.WOOD);
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .hardness(2.0F)
-            .resistance(5.0F)
-            .sound(SoundType.WOOD)
-            .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
-            .harvestLevel(ToolClasses.AXE, 0)
-            .oreDict(variant)
-            .oreDict(variant, type);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .hardness(2.0F)
+      .resistance(5.0F)
+      .sound(SoundType.WOOD)
+      .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
+      .harvestLevel(ToolClasses.AXE, 0)
+      .oreDict(variant)
+      .oreDict(variant, type);
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
   }

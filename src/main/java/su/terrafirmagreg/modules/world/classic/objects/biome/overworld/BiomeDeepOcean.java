@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.base.biome.BaseBiome;
 
 import net.minecraftforge.common.BiomeDictionary;
 
-
 import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.OCEAN;
 
 public class BiomeDeepOcean extends BaseBiome {
@@ -26,9 +25,9 @@ public class BiomeDeepOcean extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.OCEAN,
-            BiomeDictionary.Type.WET,
-            BiomeDictionary.Type.WATER
+      BiomeDictionary.Type.OCEAN,
+      BiomeDictionary.Type.WET,
+      BiomeDictionary.Type.WATER
     };
   }
 }

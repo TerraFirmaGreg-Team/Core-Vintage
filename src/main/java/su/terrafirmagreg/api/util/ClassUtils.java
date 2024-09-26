@@ -2,7 +2,6 @@ package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.TerraFirmaGreg;
 
-
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -34,7 +33,8 @@ public final class ClassUtils {
   }
 
   /**
-   * Provides a safe way to get a class by its name. This is essentially the same as Class.forName however it will handle any ClassNotFoundException automatically.
+   * Provides a safe way to get a class by its name. This is essentially the same as Class.forName however it will handle any ClassNotFoundException
+   * automatically.
    *
    * @param name: The name of the class you are trying to get. Example: java.lang.String
    * @return Class: If a class could be found, it will be returned. Otherwise, null.

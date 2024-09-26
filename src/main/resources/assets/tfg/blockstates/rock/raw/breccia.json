@@ -16,7 +16,7 @@
     ],
     "mossy": {
       "true": {
-       "overlay": "tfg:blocks/rock/overlay/mossy/raw"
+        "overlay": "tfg:blocks/rock/overlay/mossy/raw"
       },
       "false": {}
     }

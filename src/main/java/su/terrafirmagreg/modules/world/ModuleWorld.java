@@ -11,7 +11,6 @@ import su.terrafirmagreg.modules.world.debug.WorldTypeDebug;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.modules.ModuleContainer.WORLD;

@@ -21,7 +21,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -36,17 +35,12 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
   @Shadow
   @Final
   public Material material;
-
   @Shadow
-  public boolean fullBlock = getSettings().isOpaque();
-
-
-  @Final
-  public Settings core_Vintage$settings = Settings.of(Material.AIR);
+  protected boolean fullBlock;
 
   @Override
   public Settings getSettings() {
-    return core_Vintage$settings;
+    return Settings.of(Material.AIR);
   }
 
   /**
@@ -76,7 +70,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
   @Override
   @Overwrite
   public boolean isFullCube(IBlockState state) {
-    return getSettings().isFullCube();
+    return fullBlock = getSettings().isFullCube();
   }
 
   /**
@@ -105,8 +99,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
    */
   @Override
   @Overwrite
-  public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos,
-      EnumFacing face) {
+  public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face) {
     return isOpaqueCube(state) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 
@@ -148,7 +141,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
   @Override
   @Overwrite
   public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos,
-      @Nullable Entity entity) {
+                               @Nullable Entity entity) {
     return getSettings().getSlipperiness().apply(state, world, pos);
   }
 

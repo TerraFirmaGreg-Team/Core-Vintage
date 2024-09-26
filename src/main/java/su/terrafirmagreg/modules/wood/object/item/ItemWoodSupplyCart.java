@@ -19,7 +19,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
@@ -35,13 +34,13 @@ public class ItemWoodSupplyCart extends BaseItem implements IWoodItem {
     this.variant = variant;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .size(Size.HUGE)
-            .weight(Weight.VERY_HEAVY)
-            .maxCount(1)
-            .oreDict(variant)
-            .oreDict(variant, type);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .size(Size.HUGE)
+      .weight(Weight.VERY_HEAVY)
+      .maxCount(1)
+      .oreDict(variant)
+      .oreDict(variant, type);
   }
 
   @NotNull

@@ -11,7 +11,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
-
 import net.dries007.tfc.objects.items.glassworking.ItemBlowpipe;
 import tfctech.TFCTech;
 
@@ -26,23 +25,6 @@ public class TechGuiHandler implements IGuiHandler {
 
   public static void openGui(World world, BlockPos pos, EntityPlayer player, Type type) {
     player.openGui(TFCTech.getInstance(), type.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
-  }
-
-  public enum Type {
-    GLASSWORKING;
-
-    private static final Type[] values = values();
-
-    @NotNull
-    public static Type valueOf(int id) {
-      while (id >= values.length) {
-        id -= values.length;
-      }
-      while (id < 0) {
-        id += values.length;
-      }
-      return values[id];
-    }
   }
 
   @Nullable
@@ -68,6 +50,23 @@ public class TechGuiHandler implements IGuiHandler {
       return new GuiGlassworking(container, player);
     }
     return null;
+  }
+
+  public enum Type {
+    GLASSWORKING;
+
+    private static final Type[] values = values();
+
+    @NotNull
+    public static Type valueOf(int id) {
+      while (id >= values.length) {
+        id -= values.length;
+      }
+      while (id < 0) {
+        id += values.length;
+      }
+      return values[id];
+    }
   }
 
 

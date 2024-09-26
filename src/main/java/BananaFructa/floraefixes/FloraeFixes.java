@@ -22,7 +22,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
-
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -48,6 +47,21 @@ public class FloraeFixes {
 
   public FloraeFixes() {
     MinecraftForge.EVENT_BUS.register(this);
+  }
+
+  public static void removeRecipe(Item i) {
+    ItemStack output = new ItemStack(i);
+    ArrayList<PlanterRecipe> removeList = new ArrayList();
+    TFCRegistries.PLANTER_QUAD.getValuesCollection().stream().filter((x) -> {
+      return x.getOutputItem(ItemStack.EMPTY).isItemEqual(output);
+    }).forEach(removeList::add);
+    Iterator var2 = removeList.iterator();
+
+    while (var2.hasNext()) {
+      final PlanterRecipe recipe = (PlanterRecipe) var2.next();
+      IForgeRegistryModifiable<PlanterRecipe> Planter = (IForgeRegistryModifiable) TFCRegistries.PLANTER_QUAD;
+      Planter.remove(recipe.getRegistryName());
+    }
   }
 
   @Mod.EventHandler
@@ -103,10 +117,10 @@ public class FloraeFixes {
       if (block instanceof BlockSoilFarmland) {
         // if it's rice and the top block is not water
         if (ItemSeedsTFC.get(Crop.RICE) == event.getEntityPlayer()
-                .getHeldItem(EnumHand.MAIN_HAND)
-                .getItem() && event.getWorld()
-                .getBlockState(event.getPos().up())
-                .getMaterial() != Material.WATER) {
+                                                .getHeldItem(EnumHand.MAIN_HAND)
+                                                .getItem() && event.getWorld()
+                                                                   .getBlockState(event.getPos().up())
+                                                                   .getMaterial() != Material.WATER) {
           event.setCanceled(true);
         }
       }
@@ -143,13 +157,13 @@ public class FloraeFixes {
       return;
     }
     String[] sandwiches = {
-            "food/sandwich_slice/amaranth",
-            "food/sandwich_slice/buckwheat",
-            "food/sandwich_slice/fonio",
-            "food/sandwich_slice/millet",
-            "food/sandwich_slice/quinoa",
-            "food/sandwich_slice/spelt",
-            "food/sandwich_slice/wild_rice"
+      "food/sandwich_slice/amaranth",
+      "food/sandwich_slice/buckwheat",
+      "food/sandwich_slice/fonio",
+      "food/sandwich_slice/millet",
+      "food/sandwich_slice/quinoa",
+      "food/sandwich_slice/spelt",
+      "food/sandwich_slice/wild_rice"
     };
     IForgeRegistryModifiable registry;
     registry = (IForgeRegistryModifiable) event.getRegistry();
@@ -167,29 +181,29 @@ public class FloraeFixes {
       return;
     }
     Item[] preAdded = new Item[]{
-            ItemsTFCF.BLACK_EYED_PEAS,
-            ItemsTFCF.RED_CAYENNE_PEPPER,
-            ItemsTFCF.GINSENG,
-            ItemsTFCF.RUTABAGA,
-            ItemsTFCF.TURNIP,
-            ItemsTFCF.SUGAR_BEET,
-            ItemsTFCF.PURPLE_GRAPE,
-            ItemsTFCF.GREEN_GRAPE,
-            ItemsTFCF.LIQUORICE_ROOT,
-            ItemsTFCF.COFFEA_CHERRIES,
-            ItemsTFCF.AGAVE,
-            ItemsTFCF.COCA_LEAF,
-            ItemsTFCF.COTTON_BOLL,
-            ItemsTFCF.FLAX,
-            ItemsTFCF.HEMP,
-            ItemsTFCF.HOPS,
-            ItemsTFCF.INDIGO,
-            ItemsTFCF.MADDER,
-            ItemsTFCF.OPIUM_POPPY_BULB,
-            ItemsTFCF.RAPE,
-            ItemsTFCF.WELD,
-            ItemsTFCF.WOAD,
-            ItemsTFCF.TOBACCO_LEAF
+      ItemsTFCF.BLACK_EYED_PEAS,
+      ItemsTFCF.RED_CAYENNE_PEPPER,
+      ItemsTFCF.GINSENG,
+      ItemsTFCF.RUTABAGA,
+      ItemsTFCF.TURNIP,
+      ItemsTFCF.SUGAR_BEET,
+      ItemsTFCF.PURPLE_GRAPE,
+      ItemsTFCF.GREEN_GRAPE,
+      ItemsTFCF.LIQUORICE_ROOT,
+      ItemsTFCF.COFFEA_CHERRIES,
+      ItemsTFCF.AGAVE,
+      ItemsTFCF.COCA_LEAF,
+      ItemsTFCF.COTTON_BOLL,
+      ItemsTFCF.FLAX,
+      ItemsTFCF.HEMP,
+      ItemsTFCF.HOPS,
+      ItemsTFCF.INDIGO,
+      ItemsTFCF.MADDER,
+      ItemsTFCF.OPIUM_POPPY_BULB,
+      ItemsTFCF.RAPE,
+      ItemsTFCF.WELD,
+      ItemsTFCF.WOAD,
+      ItemsTFCF.TOBACCO_LEAF
 
     };
     for (Item s : preAdded) {
@@ -227,24 +241,9 @@ public class FloraeFixes {
     registerPlanterRecipe(r, CropTFCF.WOAD, ItemsTFCF.WOAD, 5, false, "woad");
   }
 
-  public static void removeRecipe(Item i) {
-    ItemStack output = new ItemStack(i);
-    ArrayList<PlanterRecipe> removeList = new ArrayList();
-    TFCRegistries.PLANTER_QUAD.getValuesCollection().stream().filter((x) -> {
-      return x.getOutputItem(ItemStack.EMPTY).isItemEqual(output);
-    }).forEach(removeList::add);
-    Iterator var2 = removeList.iterator();
-
-    while (var2.hasNext()) {
-      final PlanterRecipe recipe = (PlanterRecipe) var2.next();
-      IForgeRegistryModifiable<PlanterRecipe> Planter = (IForgeRegistryModifiable) TFCRegistries.PLANTER_QUAD;
-      Planter.remove(recipe.getRegistryName());
-    }
-  }
-
   private void registerPlanterRecipe(IForgeRegistry<PlanterRecipe> r, CropTFCF crop, Item i, int s, boolean p, String name) {
     r.registerAll(
-            (new PlanterRecipe(IIngredient.of(ItemSeedsTFC.get(crop)), new ItemStack(i), s, p)).setRegistryName(MODID_FL, name));
+      (new PlanterRecipe(IIngredient.of(ItemSeedsTFC.get(crop)), new ItemStack(i), s, p)).setRegistryName(MODID_FL, name));
   }
 
 }

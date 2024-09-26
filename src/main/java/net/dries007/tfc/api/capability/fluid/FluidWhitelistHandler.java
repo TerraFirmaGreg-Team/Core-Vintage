@@ -6,7 +6,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStackSimple;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -20,9 +19,9 @@ public class FluidWhitelistHandler extends FluidHandlerItemStackSimple {
 
   public FluidWhitelistHandler(@NotNull ItemStack container, int capacity, String[] fluidNames) {
     this(container, capacity, Arrays.stream(fluidNames)
-            .map(FluidRegistry::getFluid)
-            .filter(Objects::nonNull)
-            .collect(Collectors.toSet()));
+                                    .map(FluidRegistry::getFluid)
+                                    .filter(Objects::nonNull)
+                                    .collect(Collectors.toSet()));
   }
 
   public FluidWhitelistHandler(@NotNull ItemStack container, int capacity, Set<Fluid> whitelist) {

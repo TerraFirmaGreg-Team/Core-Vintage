@@ -3,7 +3,6 @@ package lyeoj.tfcthings.init;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 
-
 import lyeoj.tfcthings.items.ItemBearTrapHalf;
 import lyeoj.tfcthings.items.ItemCrown;
 import lyeoj.tfcthings.items.ItemDiamondGrit;
@@ -43,67 +42,67 @@ public class TFCThingsItems {
   public static final Item ITEM_METAL_BRACING = new ItemMetalBracing();
   public static final Item ITEM_ROPE_BRIDGE = new ItemRopeBridge();
   public static final Item ITEM_WHETSTONE = new ItemWhetstone(1, 64).setRegistryName("whetstone")
-          .setTranslationKey("whetstone");
+                                                                    .setTranslationKey("whetstone");
   public static final Item ITEM_HONING_STEEL = new ItemWhetstone(2, 4200).setRegistryName("honing_steel")
-          .setTranslationKey("honing_steel");
+                                                                         .setTranslationKey("honing_steel");
   public static final Item ITEM_HONING_STEEL_DIAMOND = new ItemWhetstone(3, 4500)
-          .setRegistryName("honing_steel_diamond")
-          .setTranslationKey("honing_steel_diamond");
+    .setRegistryName("honing_steel_diamond")
+    .setTranslationKey("honing_steel_diamond");
   public static final Item ITEM_HONING_STEEL_HEAD = new ItemTFCThingsToolHead(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), 200,
-          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableWhetstones, "honing_steel_head");
+                                                                              ConfigTFCThings.Items.MASTER_ITEM_LIST.enableWhetstones, "honing_steel_head");
   public static final Item ITEM_HONING_STEEL_HEAD_DIAMOND = new ItemTFCThingsToolHead(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), 200,
-          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableWhetstones, "honing_steel_head_diamond");
+                                                                                      ConfigTFCThings.Items.MASTER_ITEM_LIST.enableWhetstones, "honing_steel_head_diamond");
   public static final Item ITEM_DIAMOND_GRIT = new ItemDiamondGrit();
   public static final Item ITEM_PIG_IRON_CARROT = new ItemPigIronCarrot(TFCRegistries.METALS.getValue(DefaultMetals.PIG_IRON))
-          .setRegistryName("pig_iron_carrot")
-          .setTranslationKey("pig_iron_carrot");
+    .setRegistryName("pig_iron_carrot")
+    .setTranslationKey("pig_iron_carrot");
   public static final Item ITEM_BLACK_STEEL_CARROT = new ItemPigIronCarrot(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL))
-          .setRegistryName("black_steel_carrot")
-          .setTranslationKey("black_steel_carrot");
+    .setRegistryName("black_steel_carrot")
+    .setTranslationKey("black_steel_carrot");
   public static final Item ITEM_BLUE_STEEL_CARROT = new ItemPigIronCarrot(TFCRegistries.METALS.getValue(DefaultMetals.BLUE_STEEL))
-          .setRegistryName("blue_steel_carrot")
-          .setTranslationKey("blue_steel_carrot");
+    .setRegistryName("blue_steel_carrot")
+    .setTranslationKey("blue_steel_carrot");
   public static final Item ITEM_RED_STEEL_CARROT = new ItemPigIronCarrot(TFCRegistries.METALS.getValue(DefaultMetals.RED_STEEL))
-          .setRegistryName("red_steel_carrot")
-          .setTranslationKey("red_steel_carrot");
+    .setRegistryName("red_steel_carrot")
+    .setTranslationKey("red_steel_carrot");
   public static final Item ITEM_PROSPECTORS_HAMMER_MOLD_UNFIRED = new ItemPottery()
-          .setRegistryName("mold/unfired/prospectors_hammer_head")
-          .setTranslationKey("mold.unfired.prospectors_hammer_head");
+    .setRegistryName("mold/unfired/prospectors_hammer_head")
+    .setTranslationKey("mold.unfired.prospectors_hammer_head");
   public static final Item ITEM_PROSPECTORS_HAMMER_MOLD_FIRED = new ItemTFCThingsMold("prospectors_hammer_head");
   public static final Item ITEM_PROSPECTORS_HAMMER_BISMUTH_BRONZE = new ItemProspectorsHammer(Metal.BISMUTH_BRONZE, "bismuth_bronze");
   public static final Item ITEM_PROSPECTORS_HAMMER_BLACK_BRONZE = new ItemProspectorsHammer(Metal.BLACK_BRONZE, "black_bronze");
   public static final Item ITEM_PROSPECTORS_HAMMER_BLACK_STEEL = new ItemProspectorsHammer(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL),
-          "black_steel");
+                                                                                           "black_steel");
   public static final Item ITEM_PROSPECTORS_HAMMER_BLUE_STEEL = new ItemProspectorsHammer(Metal.BLUE_STEEL, "blue_steel");
   public static final Item ITEM_PROSPECTORS_HAMMER_BRONZE = new ItemProspectorsHammer(Metal.BRONZE, "bronze");
   public static final Item ITEM_PROSPECTORS_HAMMER_COPPER = new ItemProspectorsHammer(TFCRegistries.METALS.getValue(DefaultMetals.COPPER),
-          "copper");
+                                                                                      "copper");
   public static final Item ITEM_PROSPECTORS_HAMMER_RED_STEEL = new ItemProspectorsHammer(Metal.RED_STEEL, "red_steel");
   public static final Item ITEM_PROSPECTORS_HAMMER_STEEL = new ItemProspectorsHammer(Metal.STEEL, "steel");
   public static final Item ITEM_PROSPECTORS_HAMMER_WROUGHT_IRON = new ItemProspectorsHammer(Metal.WROUGHT_IRON, "wrought_iron");
   public static final Item ITEM_PROSPECTORS_HAMMER_HEAD_BISMUTH_BRONZE = new ItemTFCThingsToolHead(Metal.BISMUTH_BRONZE, 100,
-          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "bismuth_bronze");
+                                                                                                   ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "bismuth_bronze");
   public static final Item ITEM_PROSPECTORS_HAMMER_HEAD_BLACK_BRONZE = new ItemTFCThingsToolHead(Metal.BLACK_BRONZE, 100,
-          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "black_bronze");
+                                                                                                 ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "black_bronze");
   public static final Item ITEM_PROSPECTORS_HAMMER_HEAD_BLACK_STEEL = new ItemTFCThingsToolHead(
-          TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), 100, ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer,
-          "prospectors_hammer_head", "black_steel");
+    TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), 100, ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer,
+    "prospectors_hammer_head", "black_steel");
   public static final Item ITEM_PROSPECTORS_HAMMER_HEAD_BLUE_STEEL = new ItemTFCThingsToolHead(Metal.BLUE_STEEL, 100,
-          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "blue_steel");
+                                                                                               ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "blue_steel");
   public static final Item ITEM_PROSPECTORS_HAMMER_HEAD_BRONZE = new ItemTFCThingsToolHead(Metal.BRONZE, 100,
-          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "bronze");
+                                                                                           ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "bronze");
   public static final Item ITEM_PROSPECTORS_HAMMER_HEAD_COPPER = new ItemTFCThingsToolHead(TFCRegistries.METALS.getValue(DefaultMetals.COPPER), 100,
-          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "copper");
+                                                                                           ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "copper");
   public static final Item ITEM_PROSPECTORS_HAMMER_HEAD_RED_STEEL = new ItemTFCThingsToolHead(Metal.RED_STEEL, 100,
-          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "red_steel");
+                                                                                              ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "red_steel");
   public static final Item ITEM_PROSPECTORS_HAMMER_HEAD_STEEL = new ItemTFCThingsToolHead(Metal.STEEL, 100,
-          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "steel");
+                                                                                          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "steel");
   public static final Item ITEM_PROSPECTORS_HAMMER_HEAD_WROUGHT_IRON = new ItemTFCThingsToolHead(Metal.WROUGHT_IRON, 100,
-          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "wrought_iron");
+                                                                                                 ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer, "prospectors_hammer_head", "wrought_iron");
   public static final Item ITEM_ROPE_JAVELIN_BISMUTH_BRONZE = new ItemRopeJavelin(Metal.BISMUTH_BRONZE, "bismuth_bronze");
   public static final Item ITEM_ROPE_JAVELIN_BLACK_BRONZE = new ItemRopeJavelin(Metal.BLACK_BRONZE, "black_bronze");
   public static final Item ITEM_ROPE_JAVELIN_BLACK_STEEL = new ItemRopeJavelin(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL),
-          "black_steel");
+                                                                               "black_steel");
   public static final Item ITEM_ROPE_JAVELIN_BLUE_STEEL = new ItemRopeJavelin(Metal.BLUE_STEEL, "blue_steel");
   public static final Item ITEM_ROPE_JAVELIN_BRONZE = new ItemRopeJavelin(Metal.BRONZE, "bronze");
   public static final Item ITEM_ROPE_JAVELIN_COPPER = new ItemRopeJavelin(TFCRegistries.METALS.getValue(DefaultMetals.COPPER), "copper");
@@ -111,15 +110,15 @@ public class TFCThingsItems {
   public static final Item ITEM_ROPE_JAVELIN_STEEL = new ItemRopeJavelin(Metal.STEEL, "steel");
   public static final Item ITEM_ROPE_JAVELIN_WROUGHT_IRON = new ItemRopeJavelin(Metal.WROUGHT_IRON, "wrought_iron");
   public static final Item ITEM_HOOK_JAVELIN_HEAD_BLACK_STEEL = new ItemTFCThingsToolHead(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL),
-          200, ConfigTFCThings.Items.MASTER_ITEM_LIST.enableHookJavelins, "hook_javelin_head", "black_steel");
+                                                                                          200, ConfigTFCThings.Items.MASTER_ITEM_LIST.enableHookJavelins, "hook_javelin_head", "black_steel");
   public static final Item ITEM_HOOK_JAVELIN_HEAD_BLUE_STEEL = new ItemTFCThingsToolHead(Metal.BLUE_STEEL, 200,
-          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableHookJavelins, "hook_javelin_head", "blue_steel");
+                                                                                         ConfigTFCThings.Items.MASTER_ITEM_LIST.enableHookJavelins, "hook_javelin_head", "blue_steel");
   public static final Item ITEM_HOOK_JAVELIN_HEAD_RED_STEEL = new ItemTFCThingsToolHead(Metal.RED_STEEL, 200,
-          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableHookJavelins, "hook_javelin_head", "red_steel");
+                                                                                        ConfigTFCThings.Items.MASTER_ITEM_LIST.enableHookJavelins, "hook_javelin_head", "red_steel");
   public static final Item ITEM_HOOK_JAVELIN_HEAD_STEEL = new ItemTFCThingsToolHead(Metal.STEEL, 200,
-          ConfigTFCThings.Items.MASTER_ITEM_LIST.enableHookJavelins, "hook_javelin_head", "steel");
+                                                                                    ConfigTFCThings.Items.MASTER_ITEM_LIST.enableHookJavelins, "hook_javelin_head", "steel");
   public static final Item ITEM_HOOK_JAVELIN_BLACK_STEEL = new ItemHookJavelin(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL),
-          "black_steel");
+                                                                               "black_steel");
   public static final Item ITEM_HOOK_JAVELIN_BLUE_STEEL = new ItemHookJavelin(Metal.BLUE_STEEL, "blue_steel");
   public static final Item ITEM_HOOK_JAVELIN_RED_STEEL = new ItemHookJavelin(Metal.RED_STEEL, "red_steel");
   public static final Item ITEM_HOOK_JAVELIN_STEEL = new ItemHookJavelin(Metal.STEEL, "steel");
@@ -152,87 +151,87 @@ public class TFCThingsItems {
   public static final Item ITEM_PLATINUM_CROWN_TOPAZ = new ItemCrown(0, EntityEquipmentSlot.HEAD, "platinum", Gem.TOPAZ);
   public static final Item ITEM_PLATINUM_CROWN_TOURMALINE = new ItemCrown(0, EntityEquipmentSlot.HEAD, "platinum", Gem.TOURMALINE);
   public static final Item[] ITEMLIST = {
-          ITEM_WHETSTONE,
-          ITEM_HONING_STEEL,
-          ITEM_HONING_STEEL_DIAMOND,
-          ITEM_HONING_STEEL_HEAD,
-          ITEM_HONING_STEEL_HEAD_DIAMOND,
-          ITEM_DIAMOND_GRIT,
-          ITEM_SNOWSHOES,
-          ITEM_HIKING_BOOTS,
-          ITEM_BEAR_TRAP_HALF,
-          ITEM_PIG_IRON_CARROT,
-          ITEM_BLACK_STEEL_CARROT,
-          ITEM_BLUE_STEEL_CARROT,
-          ITEM_RED_STEEL_CARROT,
-          ITEM_METAL_BRACING,
-          ITEM_ROPE_BRIDGE,
-          ITEM_PROSPECTORS_HAMMER_MOLD_UNFIRED,
-          ITEM_PROSPECTORS_HAMMER_BISMUTH_BRONZE,
-          ITEM_PROSPECTORS_HAMMER_BLACK_BRONZE,
-          ITEM_PROSPECTORS_HAMMER_BLACK_STEEL,
-          ITEM_PROSPECTORS_HAMMER_BLUE_STEEL,
-          ITEM_PROSPECTORS_HAMMER_BRONZE,
-          ITEM_PROSPECTORS_HAMMER_COPPER,
-          ITEM_PROSPECTORS_HAMMER_RED_STEEL,
-          ITEM_PROSPECTORS_HAMMER_STEEL,
-          ITEM_PROSPECTORS_HAMMER_WROUGHT_IRON,
-          ITEM_PROSPECTORS_HAMMER_HEAD_BISMUTH_BRONZE,
-          ITEM_PROSPECTORS_HAMMER_HEAD_BLACK_BRONZE,
-          ITEM_PROSPECTORS_HAMMER_HEAD_BLACK_STEEL,
-          ITEM_PROSPECTORS_HAMMER_HEAD_BLUE_STEEL,
-          ITEM_PROSPECTORS_HAMMER_HEAD_BRONZE,
-          ITEM_PROSPECTORS_HAMMER_HEAD_COPPER,
-          ITEM_PROSPECTORS_HAMMER_HEAD_RED_STEEL,
-          ITEM_PROSPECTORS_HAMMER_HEAD_STEEL,
-          ITEM_PROSPECTORS_HAMMER_HEAD_WROUGHT_IRON,
-          ITEM_ROPE_JAVELIN_BISMUTH_BRONZE,
-          ITEM_ROPE_JAVELIN_BLACK_BRONZE,
-          ITEM_ROPE_JAVELIN_BLACK_STEEL,
-          ITEM_ROPE_JAVELIN_BLUE_STEEL,
-          ITEM_ROPE_JAVELIN_BRONZE,
-          ITEM_ROPE_JAVELIN_COPPER,
-          ITEM_ROPE_JAVELIN_RED_STEEL,
-          ITEM_ROPE_JAVELIN_STEEL,
-          ITEM_ROPE_JAVELIN_WROUGHT_IRON,
-          ITEM_HOOK_JAVELIN_HEAD_BLACK_STEEL,
-          ITEM_HOOK_JAVELIN_HEAD_BLUE_STEEL,
-          ITEM_HOOK_JAVELIN_HEAD_RED_STEEL,
-          ITEM_HOOK_JAVELIN_HEAD_STEEL,
-          ITEM_HOOK_JAVELIN_BLACK_STEEL,
-          ITEM_HOOK_JAVELIN_BLUE_STEEL,
-          ITEM_HOOK_JAVELIN_RED_STEEL,
-          ITEM_HOOK_JAVELIN_STEEL,
-          ITEM_GOLD_CROWN_EMPTY,
-          ITEM_GOLD_CROWN_AGATE,
-          ITEM_GOLD_CROWN_AMETHYST,
-          ITEM_GOLD_CROWN_BERYL,
-          ITEM_GOLD_CROWN_DIAMOND,
-          ITEM_GOLD_CROWN_EMERALD,
-          ITEM_GOLD_CROWN_GARNET,
-          ITEM_GOLD_CROWN_JADE,
-          ITEM_GOLD_CROWN_JASPER,
-          ITEM_GOLD_CROWN_OPAL,
-          ITEM_GOLD_CROWN_RUBY,
-          ITEM_GOLD_CROWN_SAPPHIRE,
-          ITEM_GOLD_CROWN_TOPAZ,
-          ITEM_GOLD_CROWN_TOURMALINE,
-          ITEM_PLATINUM_CROWN_EMPTY,
-          ITEM_PLATINUM_CROWN_AGATE,
-          ITEM_PLATINUM_CROWN_AMETHYST,
-          ITEM_PLATINUM_CROWN_BERYL,
-          ITEM_PLATINUM_CROWN_DIAMOND,
-          ITEM_PLATINUM_CROWN_EMERALD,
-          ITEM_PLATINUM_CROWN_GARNET,
-          ITEM_PLATINUM_CROWN_JADE,
-          ITEM_PLATINUM_CROWN_JASPER,
-          ITEM_PLATINUM_CROWN_OPAL,
-          ITEM_PLATINUM_CROWN_RUBY,
-          ITEM_PLATINUM_CROWN_SAPPHIRE,
-          ITEM_PLATINUM_CROWN_TOPAZ,
-          ITEM_PLATINUM_CROWN_TOURMALINE,
+    ITEM_WHETSTONE,
+    ITEM_HONING_STEEL,
+    ITEM_HONING_STEEL_DIAMOND,
+    ITEM_HONING_STEEL_HEAD,
+    ITEM_HONING_STEEL_HEAD_DIAMOND,
+    ITEM_DIAMOND_GRIT,
+    ITEM_SNOWSHOES,
+    ITEM_HIKING_BOOTS,
+    ITEM_BEAR_TRAP_HALF,
+    ITEM_PIG_IRON_CARROT,
+    ITEM_BLACK_STEEL_CARROT,
+    ITEM_BLUE_STEEL_CARROT,
+    ITEM_RED_STEEL_CARROT,
+    ITEM_METAL_BRACING,
+    ITEM_ROPE_BRIDGE,
+    ITEM_PROSPECTORS_HAMMER_MOLD_UNFIRED,
+    ITEM_PROSPECTORS_HAMMER_BISMUTH_BRONZE,
+    ITEM_PROSPECTORS_HAMMER_BLACK_BRONZE,
+    ITEM_PROSPECTORS_HAMMER_BLACK_STEEL,
+    ITEM_PROSPECTORS_HAMMER_BLUE_STEEL,
+    ITEM_PROSPECTORS_HAMMER_BRONZE,
+    ITEM_PROSPECTORS_HAMMER_COPPER,
+    ITEM_PROSPECTORS_HAMMER_RED_STEEL,
+    ITEM_PROSPECTORS_HAMMER_STEEL,
+    ITEM_PROSPECTORS_HAMMER_WROUGHT_IRON,
+    ITEM_PROSPECTORS_HAMMER_HEAD_BISMUTH_BRONZE,
+    ITEM_PROSPECTORS_HAMMER_HEAD_BLACK_BRONZE,
+    ITEM_PROSPECTORS_HAMMER_HEAD_BLACK_STEEL,
+    ITEM_PROSPECTORS_HAMMER_HEAD_BLUE_STEEL,
+    ITEM_PROSPECTORS_HAMMER_HEAD_BRONZE,
+    ITEM_PROSPECTORS_HAMMER_HEAD_COPPER,
+    ITEM_PROSPECTORS_HAMMER_HEAD_RED_STEEL,
+    ITEM_PROSPECTORS_HAMMER_HEAD_STEEL,
+    ITEM_PROSPECTORS_HAMMER_HEAD_WROUGHT_IRON,
+    ITEM_ROPE_JAVELIN_BISMUTH_BRONZE,
+    ITEM_ROPE_JAVELIN_BLACK_BRONZE,
+    ITEM_ROPE_JAVELIN_BLACK_STEEL,
+    ITEM_ROPE_JAVELIN_BLUE_STEEL,
+    ITEM_ROPE_JAVELIN_BRONZE,
+    ITEM_ROPE_JAVELIN_COPPER,
+    ITEM_ROPE_JAVELIN_RED_STEEL,
+    ITEM_ROPE_JAVELIN_STEEL,
+    ITEM_ROPE_JAVELIN_WROUGHT_IRON,
+    ITEM_HOOK_JAVELIN_HEAD_BLACK_STEEL,
+    ITEM_HOOK_JAVELIN_HEAD_BLUE_STEEL,
+    ITEM_HOOK_JAVELIN_HEAD_RED_STEEL,
+    ITEM_HOOK_JAVELIN_HEAD_STEEL,
+    ITEM_HOOK_JAVELIN_BLACK_STEEL,
+    ITEM_HOOK_JAVELIN_BLUE_STEEL,
+    ITEM_HOOK_JAVELIN_RED_STEEL,
+    ITEM_HOOK_JAVELIN_STEEL,
+    ITEM_GOLD_CROWN_EMPTY,
+    ITEM_GOLD_CROWN_AGATE,
+    ITEM_GOLD_CROWN_AMETHYST,
+    ITEM_GOLD_CROWN_BERYL,
+    ITEM_GOLD_CROWN_DIAMOND,
+    ITEM_GOLD_CROWN_EMERALD,
+    ITEM_GOLD_CROWN_GARNET,
+    ITEM_GOLD_CROWN_JADE,
+    ITEM_GOLD_CROWN_JASPER,
+    ITEM_GOLD_CROWN_OPAL,
+    ITEM_GOLD_CROWN_RUBY,
+    ITEM_GOLD_CROWN_SAPPHIRE,
+    ITEM_GOLD_CROWN_TOPAZ,
+    ITEM_GOLD_CROWN_TOURMALINE,
+    ITEM_PLATINUM_CROWN_EMPTY,
+    ITEM_PLATINUM_CROWN_AGATE,
+    ITEM_PLATINUM_CROWN_AMETHYST,
+    ITEM_PLATINUM_CROWN_BERYL,
+    ITEM_PLATINUM_CROWN_DIAMOND,
+    ITEM_PLATINUM_CROWN_EMERALD,
+    ITEM_PLATINUM_CROWN_GARNET,
+    ITEM_PLATINUM_CROWN_JADE,
+    ITEM_PLATINUM_CROWN_JASPER,
+    ITEM_PLATINUM_CROWN_OPAL,
+    ITEM_PLATINUM_CROWN_RUBY,
+    ITEM_PLATINUM_CROWN_SAPPHIRE,
+    ITEM_PLATINUM_CROWN_TOPAZ,
+    ITEM_PLATINUM_CROWN_TOURMALINE,
 
-          TFCThingsBlocks.ROPE_BRIDGE_ITEM,
-          TFCThingsBlocks.ROPE_LADDER_ITEM
+    TFCThingsBlocks.ROPE_BRIDGE_ITEM,
+    TFCThingsBlocks.ROPE_LADDER_ITEM
   };
 }

@@ -13,10 +13,10 @@ public class BlockFireBricks extends BaseBlock {
     super(Settings.of(Material.ROCK));
 
     getSettings()
-            .registryKey("core/fire_bricks")
-            .sound(SoundType.STONE)
-            .hardness(1.0F)
-            .size(Size.SMALL)
-            .weight(Weight.LIGHT);
+      .registryKey("core/fire_bricks")
+      .sound(SoundType.STONE)
+      .hardness(1.0F)
+      .size(Size.SMALL)
+      .weight(Weight.LIGHT);
   }
 }

@@ -7,7 +7,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-
 import com.google.common.collect.Lists;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -104,6 +103,6 @@ public class PressRecipeWrapper implements IRecipeWrapper {
     }
 
     return flag && (output != null && that.output != null && output.equals(that.output) ||
-            (fluidOutput != null && that.fluidOutput != null && fluidOutput.equals(that.fluidOutput)));
+                    (fluidOutput != null && that.fluidOutput != null && fluidOutput.equals(that.fluidOutput)));
   }
 }

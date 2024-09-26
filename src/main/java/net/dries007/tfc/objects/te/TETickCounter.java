@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.base.tile.BaseTile;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-
 import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;

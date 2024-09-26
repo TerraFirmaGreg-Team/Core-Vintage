@@ -11,7 +11,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -63,7 +62,7 @@ public class ModelAnimalCoyote extends ModelBase {
     neck = new ModelRenderer(this, 39, 24);
     neck.setRotationPoint(0.0F, 10.0F, -6.6F);
     neck.addBox(-2.0F, -2.5F, -3.5F, 4, 5, 5, -0.2F);
-    setRotateAngle(neck, -0.7853981633974483F, 0.0F, 0.0F);
+    setRotateAngle(neck, -((float) Math.PI / 4F), 0.0F, 0.0F);
     rightEar = new ModelRenderer(this, 0, 2);
     rightEar.setRotationPoint(-0.4F, -0.8F, -0.5F);
     rightEar.addBox(-2.0F, -3.0F, -2.0F, 2, 2, 1, 0.0F);
@@ -226,7 +225,7 @@ public class ModelAnimalCoyote extends ModelBase {
 
   @Override
   public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5,
-          float par6, float par7) {
+                     float par6, float par7) {
     this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
     EntityAnimalCoyote coyote = ((EntityAnimalCoyote) entity);
@@ -255,14 +254,14 @@ public class ModelAnimalCoyote extends ModelBase {
 
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,
-          Entity entity) {
+                                Entity entity) {
     setRotateAngle(head, f4 / (180F / MathConstants.PI), f3 / (180F / MathConstants.PI), 0F);
-    setRotateAngle(neck, f4 / (1.5F * (180F / MathConstants.PI)) + -0.7853981633974483F,
-            f3 / (1.5F * (180F / MathConstants.PI)), 0F);
+    setRotateAngle(neck, f4 / (1.5F * (180F / MathConstants.PI)) + -((float) Math.PI / 4F),
+                   f3 / (1.5F * (180F / MathConstants.PI)), 0F);
 
     frontRLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1 + 0.13962634015954636F;
     frontLLegTop.rotateAngleX =
-            MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1 + 0.13962634015954636F;
+      MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1 + 0.13962634015954636F;
     backRLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1;
     backLLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
   }

@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.base.biome.BaseBiome;
 
 import net.minecraftforge.common.BiomeDictionary;
 
-
 import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.HIGH_HILLS;
 
 public class BiomeHighHillsEdge extends BaseBiome {
@@ -26,8 +25,8 @@ public class BiomeHighHillsEdge extends BaseBiome {
   public BiomeDictionary.Type[] getTypes() {
 
     return new BiomeDictionary.Type[]{
-            BiomeDictionary.Type.HILLS,
-            BiomeDictionary.Type.PLAINS
+      BiomeDictionary.Type.HILLS,
+      BiomeDictionary.Type.PLAINS
     };
   }
 }

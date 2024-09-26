@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.container.IButtonHandler;
@@ -18,8 +17,8 @@ import net.dries007.tfc.objects.container.IButtonHandler;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * This is a generic packet that sends a button notification to the players open container, which can delegate to the tile entity if needed See {@link GuiMetalAnvil}
- * for an example of its usage, and {@link ContainerMetalAnvil} for an example of the message handling
+ * This is a generic packet that sends a button notification to the players open container, which can delegate to the tile entity if needed See
+ * {@link GuiMetalAnvil} for an example of its usage, and {@link ContainerMetalAnvil} for an example of the message handling
  *
  * @author AlcatrazEscapee
  */

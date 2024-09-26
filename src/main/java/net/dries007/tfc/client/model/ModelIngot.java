@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import org.jetbrains.annotations.NotNull;
 
 public class ModelIngot extends ModelBox {
@@ -48,17 +47,17 @@ public class ModelIngot extends ModelBox {
     int y5 = textureOffsetY + 28;
 
     this.quadList[0] = new TexturedQuad(new PositionTextureVertex[]{vert5, vert1, vert2, vert6},
-            x3, y1, x4, y2, renderer.textureWidth, renderer.textureHeight); // petit
+                                        x3, y1, x4, y2, renderer.textureWidth, renderer.textureHeight); // petit
     this.quadList[1] = new TexturedQuad(new PositionTextureVertex[]{vert0, vert4, vert7, vert3},
-            x1, y1, x2, y2, renderer.textureWidth, renderer.textureHeight); // petit
+                                        x1, y1, x2, y2, renderer.textureWidth, renderer.textureHeight); // petit
     this.quadList[2] = new TexturedQuad(new PositionTextureVertex[]{vert5, vert4, vert0, vert1},
-            x2, y4, x3, y5, renderer.textureWidth, renderer.textureHeight); // bottom
+                                        x2, y4, x3, y5, renderer.textureWidth, renderer.textureHeight); // bottom
     this.quadList[3] = new TexturedQuad(new PositionTextureVertex[]{vert2, vert3, vert7, vert6},
-            x2, y2, x3, y3, renderer.textureWidth, renderer.textureHeight); // top
+                                        x2, y2, x3, y3, renderer.textureWidth, renderer.textureHeight); // top
     this.quadList[4] = new TexturedQuad(new PositionTextureVertex[]{vert1, vert0, vert3, vert2},
-            x2, y1, x3, y2, renderer.textureWidth, renderer.textureHeight); // long
+                                        x2, y1, x3, y2, renderer.textureWidth, renderer.textureHeight); // long
     this.quadList[5] = new TexturedQuad(new PositionTextureVertex[]{vert4, vert5, vert6, vert7},
-            x3, y4, x2, y3, renderer.textureWidth, renderer.textureHeight); // long
+                                        x3, y4, x2, y3, renderer.textureWidth, renderer.textureHeight); // long
   }
 
   @SideOnly(Side.CLIENT)

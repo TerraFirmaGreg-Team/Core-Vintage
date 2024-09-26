@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.world.classic;
 
 import su.terrafirmagreg.data.Constants;
 
-
 import com.google.common.base.Strings;
 
 @SuppressWarnings("WeakerAccess")
@@ -68,15 +67,15 @@ public class WorldGenSettings {
 
     public boolean isDefault() {
       return spawnFuzz == 250 &&
-              !flatBedrock &&
-              rockLayerSize == 5 &&
-              ravineRarity == 100 &&
-              ravineHeight == 20 &&
-              ravineVariability == 50 &&
-              surfaceRavineRarity == 100 &&
-              surfaceRavineHeight == 125 &&
-              surfaceRavineVariability == 30 &&
-              riverRavineRarity == 400;
+             !flatBedrock &&
+             rockLayerSize == 5 &&
+             ravineRarity == 100 &&
+             ravineHeight == 20 &&
+             ravineVariability == 50 &&
+             surfaceRavineRarity == 100 &&
+             surfaceRavineHeight == 125 &&
+             surfaceRavineVariability == 30 &&
+             riverRavineRarity == 400;
     }
 
     public WorldGenSettings build() {

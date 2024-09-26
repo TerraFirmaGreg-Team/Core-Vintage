@@ -11,7 +11,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.entity.animal.EntityMuskOxTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -108,7 +107,7 @@ public class ModelMuskOxBodyTFC extends ModelBase {
     hornLeft1 = new ModelRenderer(this, 94, 5);
     hornLeft1.setRotationPoint(1.0F, 1.0F, 1.5F);
     hornLeft1.addBox(0.0F, 0.0F, -1.0F, 3, 1, 2, 0.0F);
-    setRotateAngle(hornLeft1, 0.0F, 3.141592653589793F, -2.6179938779914944F);
+    setRotateAngle(hornLeft1, 0.0F, (float)Math.PI, -2.6179938779914944F);
     bodyHair = new ModelRenderer(this, 1, 1);
     bodyHair.setRotationPoint(0.0F, 12.0F, -1.0F);
     bodyHair.addBox(-6.5F, -8.0F, -8.0F, 13, 15, 21, 0.0F);
@@ -136,7 +135,7 @@ public class ModelMuskOxBodyTFC extends ModelBase {
     hornRightF1 = new ModelRenderer(this, 94, 10);
     hornRightF1.setRotationPoint(3.0F, 0.4F, 0.0F);
     hornRightF1.addBox(-0.5F, -0.5F, -0.5F, 2, 1, 1, 0.0F);
-    setRotateAngle(hornRightF1, -0.3141592653589793F, 0.2617993877991494F, -0.3141592653589793F);
+    setRotateAngle(hornRightF1, -((float)Math.PI / 10F), 0.2617993877991494F, -((float)Math.PI / 10F));
     hornRightF2 = new ModelRenderer(this, 94, 14);
     hornRightF2.setRotationPoint(1.0F, 0.0F, 0.0F);
     hornRightF2.addBox(-0.2F, -0.5F, -0.5F, 2, 1, 1, 0.0F);
@@ -144,7 +143,7 @@ public class ModelMuskOxBodyTFC extends ModelBase {
     hornLeftF1 = new ModelRenderer(this, 94, 10);
     hornLeftF1.setRotationPoint(3.0F, 0.4F, 0.0F);
     hornLeftF1.addBox(-0.5F, -0.5F, -0.5F, 2, 1, 1, 0.0F);
-    setRotateAngle(hornLeftF1, -0.3141592653589793F, -0.2617993877991494F, -0.3141592653589793F);
+    setRotateAngle(hornLeftF1, -((float)Math.PI / 10F), -0.2617993877991494F, -((float)Math.PI / 10F));
     hornLeftF2 = new ModelRenderer(this, 94, 14);
     hornLeftF2.setRotationPoint(1.0F, 0.0F, 0.0F);
     hornLeftF2.addBox(-0.2F, -0.5F, -0.5F, 2, 1, 1, 0.0F);

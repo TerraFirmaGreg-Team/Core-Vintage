@@ -9,7 +9,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import org.lwjgl.opengl.GL11;
 
@@ -22,12 +21,12 @@ public class TESRPlacedHide extends TileEntitySpecialRenderer<TEPlacedHide> {
   private static final ResourceLocation SCRAPED_TEXTURE = new ResourceLocation(MODID_TFC, "textures/items/hide/large/scraped.png");
 
   private static final double[][] VERTICES = new double[][]{
-          // x, z, u, v
-          {0, 0, 0, 0}, // Top
-          {0, 0.25, 0, 0.25},
-          {0.25, 0.25, 0.25, 0.25},
-          {0.25, 0, 0.25, 0},
-  };
+    // x, z, u, v
+    {0, 0, 0, 0}, // Top
+    {0, 0.25, 0, 0.25},
+    {0.25, 0.25, 0.25, 0.25},
+    {0.25, 0, 0.25, 0},
+    };
 
   @Override
   public void render(TEPlacedHide tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
@@ -59,8 +58,8 @@ public class TESRPlacedHide extends TileEntitySpecialRenderer<TEPlacedHide> {
         if ((((positions >> (xOffset + 4 * zOffset)) & 1) == condition)) {
           for (double[] vertex : VERTICES) {
             buffer.pos(0.25 * xOffset + vertex[0], 0.01, 0.25 * zOffset + vertex[1])
-                    .tex(0.25 * xOffset + vertex[2], 0.25 * zOffset + vertex[3])
-                    .endVertex();
+                  .tex(0.25 * xOffset + vertex[2], 0.25 * zOffset + vertex[3])
+                  .endVertex();
           }
         }
       }

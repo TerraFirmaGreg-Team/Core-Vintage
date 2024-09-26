@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -23,8 +22,8 @@ public class PacketOpenCraftingGui implements IMessageEmpty {
         EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
         if (player != null) {
           if (ConfigTFC.General.PLAYER.inventoryCraftingMode == InventoryCraftingMode.ALWAYS ||
-                  (ConfigTFC.General.PLAYER.inventoryCraftingMode == InventoryCraftingMode.ENABLED &&
-                          OreDictUtils.playerHasItemMatchingOre(player.inventory, "workbench"))) {
+              (ConfigTFC.General.PLAYER.inventoryCraftingMode == InventoryCraftingMode.ENABLED &&
+               OreDictUtils.playerHasItemMatchingOre(player.inventory, "workbench"))) {
             TFCGuiHandler.openGui(player.world, player, TFCGuiHandler.Type.CRAFTING);
           }
         }

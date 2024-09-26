@@ -10,7 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ItemTFC;
@@ -74,10 +73,10 @@ public class ItemTechMetal extends ItemTFC implements ICapabilityMetal {
   public String getItemStackDisplayName(@NotNull ItemStack stack) {
     //noinspection ConstantConditions
     String metalName = (new TextComponentTranslation("tfc.types.metal." + metal.getRegistryName()
-            .getPath()
-            .toLowerCase())).getFormattedText();
+                                                                               .getPath()
+                                                                               .toLowerCase())).getFormattedText();
     return (new TextComponentTranslation("item.tfctech.metalitem." + type.name()
-            .toLowerCase() + ".name", metalName)).getFormattedText();
+                                                                         .toLowerCase() + ".name", metalName)).getFormattedText();
   }
 
   @Nullable

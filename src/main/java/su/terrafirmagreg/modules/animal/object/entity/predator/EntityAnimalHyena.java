@@ -34,7 +34,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.Nullable;
@@ -50,7 +49,7 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
   @SuppressWarnings("unused")
   public EntityAnimalHyena(World worldIn) {
     this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-            getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+         getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
   public EntityAnimalHyena(World worldIn, Gender gender, int birthDay) {
@@ -72,7 +71,7 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.SAVANNA)) {
+        (biomeType == BiomeHelper.BiomeType.SAVANNA)) {
       return ConfigAnimal.ENTITIES.HYENA.rarity;
     }
     return 0;
@@ -126,12 +125,12 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
   @Override
   public boolean attackEntityAsMob(Entity entityIn) {
     double attackDamage = this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE)
-            .getAttributeValue();
+                              .getAttributeValue();
     if (this.isChild()) {
       attackDamage /= 2;
     }
     boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this),
-            (float) attackDamage);
+                                             (float) attackDamage);
     if (flag) {
       this.applyEnchantments(this, entityIn);
     }
@@ -143,13 +142,13 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
     EntityAIWander wander = new EntityAnimalAIWanderHuntArea(this, 1.0D);
     this.tasks.addTask(0, new EntityAISwimming(this));
     this.tasks.addTask(3,
-            new EntityAnimalAIAttackMelee<>(this, 1.2D, 1.25D,
-                    EntityAnimalAIAttackMelee.AttackBehavior.NIGHTTIME_ONLY).setWanderAI(wander));
+                       new EntityAnimalAIAttackMelee<>(this, 1.2D, 1.25D,
+                                                       EntityAnimalAIAttackMelee.AttackBehavior.NIGHTTIME_ONLY).setWanderAI(wander));
     this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
     this.tasks.addTask(5, wander); // Move within hunt area
     this.tasks.addTask(7, new EntityAILookIdle(this));
     this.targetTasks.addTask(1,
-            new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+                             new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
     // Avoid players at daytime
     this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 16.0F, 1.0D, 1.25D));
 
@@ -162,8 +161,8 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
         if (EntityLivingBase.class.isAssignableFrom(entityClass)) {
           //noinspection unchecked
           this.targetTasks.addTask(priority++,
-                  new EntityAINearestAttackableTarget<>(this, (Class<EntityLivingBase>) entityClass,
-                          false));
+                                   new EntityAINearestAttackableTarget<>(this, (Class<EntityLivingBase>) entityClass,
+                                                                         false));
         }
       }
     }
@@ -182,8 +181,8 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
   @Override
   protected SoundEvent getAmbientSound() {
     return MathConstants.RNG.nextInt(100) < 5
-            ? SoundsAnimal.ANIMAL_HYENA_CRY
-            : SoundsAnimal.ANIMAL_HYENA_SAY;
+           ? SoundsAnimal.ANIMAL_HYENA_CRY
+           : SoundsAnimal.ANIMAL_HYENA_SAY;
   }
 
   @Nullable

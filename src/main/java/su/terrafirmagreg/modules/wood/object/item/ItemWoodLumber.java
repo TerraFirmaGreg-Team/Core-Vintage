@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
 
-
 import lombok.Getter;
 
 @Getter
@@ -21,12 +20,12 @@ public class ItemWoodLumber extends BaseItem implements IWoodItem {
     this.variant = variant;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .size(Size.SMALL)
-            .weight(Weight.VERY_LIGHT)
-            .maxDamage(0)
-            .oreDict(variant)
-            .oreDict(variant, type);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .size(Size.SMALL)
+      .weight(Weight.VERY_LIGHT)
+      .maxDamage(0)
+      .oreDict(variant)
+      .oreDict(variant, type);
   }
 }

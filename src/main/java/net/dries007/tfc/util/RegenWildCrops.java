@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 
 public class RegenWildCrops extends GeneratorWildCrops {

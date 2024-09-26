@@ -30,7 +30,6 @@ import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoAccessor;
@@ -53,10 +52,10 @@ public class BlockFiller extends BaseBlockDirectional implements IProbeInfoAcces
     super(settings);
 
     getSettings()
-            .nonCube()
-            .isSuffocating()
-            .resistance(5.0F)
-            .hardness(5.0F);
+      .nonCube()
+      .isSuffocating()
+      .resistance(5.0F)
+      .hardness(5.0F);
 
     setRegistryName(name + "filler");
   }
@@ -80,7 +79,7 @@ public class BlockFiller extends BaseBlockDirectional implements IProbeInfoAcces
 
   @Override
   public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos0, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
-          @Nullable Entity entityIn, boolean isActualState) {
+                                    @Nullable Entity entityIn, boolean isActualState) {
     BlockPos pos = pos0.offset(state.getValue(DIRECTIONAL));
     IBlockState state1 = world.getBlockState(pos);
     if (validateFilled(world, state1, pos0)) {
@@ -226,7 +225,7 @@ public class BlockFiller extends BaseBlockDirectional implements IProbeInfoAcces
     boolean flag = iBlockState.getBlock().addLandingEffects(iBlockState, world, pos, iblockstate, entity, numberOfParticles);
     if (!flag) {
       world.spawnParticle(EnumParticleTypes.BLOCK_DUST, pos0.getX() + 0.5, pos0.getY() + 1, pos0.getZ() + 0.5, numberOfParticles,
-              0.0D, 0.0D, 0.0D, 0.15000000596046448D, Block.getStateId(iBlockState));
+                          0.0D, 0.0D, 0.0D, 0.15000000596046448D, Block.getStateId(iBlockState));
     }
     return true;
   }
@@ -293,7 +292,7 @@ public class BlockFiller extends BaseBlockDirectional implements IProbeInfoAcces
   }
 
   private boolean validateFilled(World world, IBlockState state, BlockPos pos) {
-    if (state.getBlock() instanceof BlockHPBase) {
+    if (state.getBlock() instanceof BlockChopperHorse || state.getBlock() instanceof BlockPress) {
       return true;
     } else {
       world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
@@ -320,7 +319,7 @@ public class BlockFiller extends BaseBlockDirectional implements IProbeInfoAcces
     IBlockState state = world.getBlockState(pos);
     if (validateFilled(world, state, data.getPos()) && state.getBlock() instanceof IProbeInfoAccessor) {
       ((IProbeInfoAccessor) state.getBlock()).addProbeInfo(mode, probeInfo, player, world, state,
-              new ProbeHitData(pos, data.getHitVec(), data.getSideHit(), data.getPickBlock()));
+                                                           new ProbeHitData(pos, data.getHitVec(), data.getSideHit(), data.getPickBlock()));
     }
   }
 }

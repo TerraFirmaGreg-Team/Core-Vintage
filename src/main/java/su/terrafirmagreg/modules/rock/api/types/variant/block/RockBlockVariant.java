@@ -8,7 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.util.text.TextComponentTranslation;
 
-
 import gregtech.api.unification.ore.StoneType;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -85,7 +84,7 @@ public class RockBlockVariant extends Variant<RockBlockVariant> {
 
   private void createStoneType(int id, RockType type) {
     stoneType = new StoneType(id, type + "_" + this.getName(), SoundType.STONE, type.getOrePrefix(), type.getMaterial(),
-            () -> this.get(type).getDefaultState(), state -> state.getBlock() == this.get(type), false
+                              () -> this.get(type).getDefaultState(), state -> state.getBlock() == this.get(type), false
     );
   }
 
@@ -111,6 +110,6 @@ public class RockBlockVariant extends Variant<RockBlockVariant> {
 
   public String getLocalizedName() {
     return new TextComponentTranslation(
-            String.format("rock.variant.%s.name", this)).getFormattedText();
+      String.format("rock.variant.%s.name", this)).getFormattedText();
   }
 }

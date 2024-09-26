@@ -6,7 +6,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 
-
 import lombok.Getter;
 
 import static su.terrafirmagreg.data.Properties.DIRECTIONAL;
@@ -20,7 +19,7 @@ public abstract class BaseBlockDirectional extends BaseBlock {
     super(settings);
 
     setDefaultState(blockState.getBaseState()
-            .withProperty(DIRECTIONAL, EnumFacing.NORTH));
+                              .withProperty(DIRECTIONAL, EnumFacing.NORTH));
   }
 
   @Override

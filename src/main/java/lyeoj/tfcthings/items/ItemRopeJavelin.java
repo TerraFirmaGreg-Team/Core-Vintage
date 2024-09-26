@@ -26,7 +26,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lyeoj.tfcthings.entity.projectile.EntityThrownRopeJavelin;
@@ -174,7 +173,7 @@ public class ItemRopeJavelin extends ItemTFC implements ICapabilityMetal, ItemOr
           getJavelin(stack, worldIn);
           worldIn.spawnEntity(javelin);
           worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
-                  1.0F / (RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                            1.0F / (RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
         }
       }
     }
@@ -185,9 +184,9 @@ public class ItemRopeJavelin extends ItemTFC implements ICapabilityMetal, ItemOr
     Multimap<String, AttributeModifier> multimap = HashMultimap.create();
     if (slot == EntityEquipmentSlot.MAINHAND && !isThrown(stack)) {
       multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-              new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage, 0));
+                   new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage, 0));
       multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
-              new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", this.attackSpeed, 0));
+                   new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", this.attackSpeed, 0));
     }
 
     return multimap;

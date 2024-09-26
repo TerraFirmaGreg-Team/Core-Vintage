@@ -2,7 +2,6 @@ package su.terrafirmagreg.api.module;
 
 import su.terrafirmagreg.modules.ModuleContainer;
 
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -21,8 +20,8 @@ public @interface Module {
   ModuleContainer moduleID();
 
   /**
-   * Whether this module is the "core" module for its container. Each container must have exactly one core module, which will be loaded before all other modules in
-   * the container.
+   * Whether this module is the "core" module for its container. Each container must have exactly one core module, which will be loaded before all other modules
+   * in the container.
    * <p>
    * Core modules shouldn't have mod dependencies.
    */

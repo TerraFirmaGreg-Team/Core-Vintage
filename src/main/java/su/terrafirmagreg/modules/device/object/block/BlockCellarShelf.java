@@ -17,25 +17,22 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class BlockCellarShelf extends BaseBlockContainer {
 
   public BlockCellarShelf() {
     super(Settings.of(Material.WOOD));
 
     getSettings()
-            .registryKey("device/cellar/shelf")
-            .hardness(2F)
-            .nonOpaque();
+      .registryKey("device/cellar/shelf")
+      .hardness(2F)
+      .nonOpaque();
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-          EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
-          float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
+                                  float hitZ) {
     if (!worldIn.isRemote) {
       GuiHandler.openGui(worldIn, pos, player);
     }
@@ -44,7 +41,7 @@ public class BlockCellarShelf extends BaseBlockContainer {
 
   @Override
   public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer,
-          ItemStack stack) {
+                              ItemStack stack) {
     if (stack.hasDisplayName()) {
       var tile = TileUtils.getTile(world, pos, TileCellarShelf.class);
       //tile.setCustomName(stack.getDisplayName());

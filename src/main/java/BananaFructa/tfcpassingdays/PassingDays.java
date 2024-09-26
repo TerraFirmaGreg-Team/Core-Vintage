@@ -14,7 +14,6 @@ import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import BananaFructa.floraefixes.Utils;
 
 import java.util.List;
@@ -36,7 +35,7 @@ public class PassingDays {
   public void onTick(TickEvent.ClientTickEvent event) {
     if (await && Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null) {
       Utils.writeDeclaredField(World.class, Minecraft.getMinecraft().world, "provider", new PassingDayWorldProviderClient(Minecraft.getMinecraft().world.provider),
-              true);
+                               true);
       await = false;
     }
   }

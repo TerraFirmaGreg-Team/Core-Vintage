@@ -9,8 +9,7 @@
           "model": "tfc:plants/grape_hyacinth_0"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "1"
       },
@@ -19,8 +18,7 @@
           "model": "tfc:plants/grape_hyacinth_1"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "2"
       },
@@ -29,8 +27,7 @@
           "model": "tfc:plants/grape_hyacinth_2"
         }
       ]
-    },
-    {
+    }, {
       "when": {
         "stage": "3"
       },

@@ -11,7 +11,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
 
-
 import lombok.Getter;
 
 @Getter
@@ -27,13 +26,13 @@ public class BlockWoodWall extends BaseBlockWall implements IWoodBlock {
     this.type = type;
 
     getSettings()
-            .registryKey(variant.getRegistryKey(type))
-            .customResource(variant.getCustomResource())
-            .ignoresProperties(BlockWall.VARIANT)
-            .harvestLevel(ToolClasses.AXE, model.getHarvestLevel(model.getDefaultState()))
-            .sound(SoundType.WOOD)
-            .oreDict("wall", "wood")
-            .oreDict("wall", "wood", type);
+      .registryKey(variant.getRegistryKey(type))
+      .customResource(variant.getCustomResource())
+      .ignoresProperties(BlockWall.VARIANT)
+      .harvestLevel(ToolClasses.AXE, model.getHarvestLevel(model.getDefaultState()))
+      .sound(SoundType.WOOD)
+      .oreDict("wall", "wood")
+      .oreDict("wall", "wood", type);
 
     BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
   }

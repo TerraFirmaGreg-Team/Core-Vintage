@@ -1,10 +1,9 @@
 package se.gory_moon.horsepower.recipes;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-
-
-import se.gory_moon.horsepower.util.Utils;
 
 public class ComparableItemStack {
 
@@ -16,7 +15,7 @@ public class ComparableItemStack {
 
   @Override
   public int hashCode() {
-    return Utils.getItemStackHashCode(stack);
+    return StackUtils.getItemStackHashCode(stack);
   }
 
   @Override
@@ -29,7 +28,7 @@ public class ComparableItemStack {
     }
 
     return this.hashCode() == that.hashCode() &&
-            (that.stack.getMetadata() == OreDictionary.WILDCARD_VALUE ? stack.getItem() == that.stack.getItem() : stack.isItemEqual(that.stack));
+           (that.stack.getMetadata() == OreDictionary.WILDCARD_VALUE ? stack.getItem() == that.stack.getItem() : stack.isItemEqual(that.stack));
   }
 
   @Override

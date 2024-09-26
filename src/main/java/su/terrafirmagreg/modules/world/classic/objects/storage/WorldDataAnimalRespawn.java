@@ -13,7 +13,6 @@ import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.util.Constants;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -23,7 +22,7 @@ import java.util.Map;
  * Saves animal respawning data to world save
  */
 public class WorldDataAnimalRespawn
-        extends WorldSavedData {
+  extends WorldSavedData {
 
   private static final String DATA_ID = ModUtils.localize("data.animal_respawn");
 

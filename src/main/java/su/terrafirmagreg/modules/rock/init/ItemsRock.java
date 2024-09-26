@@ -15,19 +15,19 @@ public final class ItemsRock {
   public static void onRegister(RegistryManager registry) {
 
     LOOSE = RockItemVariant
-            .builder("loose")
-            .setFactory(ItemRockLoose::new)
-            .build(registry);
+      .builder("loose")
+      .setFactory(ItemRockLoose::new)
+      .build(registry);
 
     BRICK = RockItemVariant
-            .builder("brick")
-            .setFactory(ItemRockBrick::new)
-            .build(registry);
+      .builder("brick")
+      .setFactory(ItemRockBrick::new)
+      .build(registry);
 
     GRAVEL_LAYER = RockItemVariant
-            .builder("gravel_layer")
-            .setFactory(ItemRockGravel::new)
-            .build(registry);
+      .builder("gravel_layer")
+      .setFactory(ItemRockGravel::new)
+      .build(registry);
 
   }
 }

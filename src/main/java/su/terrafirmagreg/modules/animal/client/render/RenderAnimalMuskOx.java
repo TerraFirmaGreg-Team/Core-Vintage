@@ -16,9 +16,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderAnimalMuskOx extends RenderAnimal<EntityAnimalMuskOx> {
 
   private static final ResourceLocation TEXTURE_YOUNG = ModUtils.resource(
-          "textures/entity/animal/livestock/muskox_young.png");
+    "textures/entity/animal/livestock/muskox_young.png");
   private static final ResourceLocation TEXTURE_OLD = ModUtils.resource(
-          "textures/entity/animal/livestock/muskox_old.png");
+    "textures/entity/animal/livestock/muskox_old.png");
 
   public RenderAnimalMuskOx(RenderManager renderManager) {
     super(renderManager, new ModelAnimalMuskOxBody(), 0.8F, TEXTURE_YOUNG, TEXTURE_OLD);

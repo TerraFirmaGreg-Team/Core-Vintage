@@ -42,7 +42,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -55,14 +54,14 @@ import java.util.function.BiConsumer;
 import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPredator,
-        EntityAnimalAIStandAttack.IEntityStandAttack {
+                                                                           EntityAnimalAIStandAttack.IEntityStandAttack {
 
   private static final int DAYS_TO_ADULTHOOD = 240;
   private static final DataParameter<Boolean> IS_STANDING;
 
   static {
     IS_STANDING = EntityDataManager.createKey(EntityAnimalGrizzlyBear.class,
-            DataSerializers.BOOLEAN);
+                                              DataSerializers.BOOLEAN);
   }
 
   private float clientSideStandAnimation0;
@@ -81,10 +80,10 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-          float floraDiversity) {
+                            float floraDiversity) {
     BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.TAIGA)) {
+        (biomeType == BiomeHelper.BiomeType.TAIGA)) {
       return ConfigAnimal.ENTITIES.GRIZZLY_BEAR.rarity;
     }
     return 0;
@@ -174,12 +173,12 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
   @Override
   public boolean attackEntityAsMob(@NotNull Entity entityIn) {
     double attackDamage = this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE)
-            .getAttributeValue();
+                              .getAttributeValue();
     if (this.isChild()) {
       attackDamage /= 2;
     }
     boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this),
-            (float) attackDamage);
+                                             (float) attackDamage);
     if (flag) {
       this.applyEnchantments(this, entityIn);
     }
@@ -204,14 +203,14 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
     EntityAIWander wander = new EntityAnimalAIWanderHuntArea(this, 1.0D);
     this.tasks.addTask(0, new EntityAISwimming(this));
     this.tasks.addTask(1,
-            new EntityAnimalAIStandAttack<>(this, 1.2D, 2.0D,
-                    EntityAnimalAIAttackMelee.AttackBehavior.DAYLIGHT_ONLY).setWanderAI(wander));
+                       new EntityAnimalAIStandAttack<>(this, 1.2D, 2.0D,
+                                                       EntityAnimalAIAttackMelee.AttackBehavior.DAYLIGHT_ONLY).setWanderAI(wander));
     this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
     this.tasks.addTask(5, wander);
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
     this.tasks.addTask(7, new EntityAILookIdle(this));
     this.targetTasks.addTask(1,
-            new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+                             new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
     // Avoid players at daytime
     this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 16.0F, 1.0D, 1.25D));
 
@@ -224,8 +223,8 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
         if (EntityLivingBase.class.isAssignableFrom(entityClass)) {
           //noinspection unchecked
           this.targetTasks.addTask(priority++,
-                  new EntityAINearestAttackableTarget<>(this, (Class<EntityLivingBase>) entityClass,
-                          false));
+                                   new EntityAINearestAttackableTarget<>(this, (Class<EntityLivingBase>) entityClass,
+                                                                         false));
         }
       }
     }
@@ -248,10 +247,10 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
       this.clientSideStandAnimation0 = this.clientSideStandAnimation;
       if (this.isStanding()) {
         this.clientSideStandAnimation = MathHelper.clamp(this.clientSideStandAnimation + 1.0F, 0.0F,
-                6.0F);
+                                                         6.0F);
       } else {
         this.clientSideStandAnimation = MathHelper.clamp(this.clientSideStandAnimation - 1.0F, 0.0F,
-                6.0F);
+                                                         6.0F);
       }
     }
 

@@ -5,7 +5,6 @@ import su.terrafirmagreg.data.lib.DoubleRange;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;

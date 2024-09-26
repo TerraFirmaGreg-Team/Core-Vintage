@@ -10,7 +10,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonLargeVesselSeal;
 import net.dries007.tfc.client.button.IButtonTooltip;

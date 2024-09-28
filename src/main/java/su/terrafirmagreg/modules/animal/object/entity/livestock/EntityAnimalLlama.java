@@ -43,7 +43,6 @@ import net.minecraft.world.biome.Biome;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -79,8 +78,8 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
   @SuppressWarnings("unused")
   public EntityAnimalLlama(World world) {
     this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.LLAMA.adulthood,
-                                          ConfigAnimal.ENTITIES.LLAMA.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.LLAMA.adulthood,
+                                          ConfigAnimal.ENTITY.LLAMA.elder));
   }
 
   public EntityAnimalLlama(World world, IAnimal.Gender gender, int birthDay) {
@@ -235,7 +234,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 
   @Override
   public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.LLAMA.gestation;
+    return ConfigAnimal.ENTITY.LLAMA.gestation;
   }
 
   @Override
@@ -281,7 +280,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 
   @Override
   public int getDaysToElderly() {
-    return ConfigAnimal.ENTITIES.LLAMA.elder;
+    return ConfigAnimal.ENTITY.LLAMA.elder;
   }
 
   @Override
@@ -317,11 +316,11 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST
-         || biomeType == BiomeHelper.BiomeType.TUNDRA)) {
-      return ConfigAnimal.ENTITIES.LLAMA.rarity;
+        (biomeType == BiomeUtils.BiomeType.TEMPERATE_FOREST
+         || biomeType == BiomeUtils.BiomeType.TUNDRA)) {
+      return ConfigAnimal.ENTITY.LLAMA.rarity;
     }
     return 0;
   }
@@ -484,7 +483,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
           this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
-        if (random.nextDouble() < ConfigAnimal.ENTITIES.LLAMA.oldDeathChance) {
+        if (random.nextDouble() < ConfigAnimal.ENTITY.LLAMA.oldDeathChance) {
           this.setDead();
         }
       }
@@ -498,12 +497,12 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
   }
 
   public long gestationDays() {
-    return ConfigAnimal.ENTITIES.LLAMA.gestation;
+    return ConfigAnimal.ENTITY.LLAMA.gestation;
   }
 
 
   public void birthChildren() {
-    int numberOfChildren = ConfigAnimal.ENTITIES.LLAMA.babies; //one always
+    int numberOfChildren = ConfigAnimal.ENTITY.LLAMA.babies; //one always
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalLlama baby = new EntityAnimalLlama(this.world, Gender.valueOf(RNG.nextBoolean()),
                                                      (int) Calendar.PLAYER_TIME.getTotalDays());

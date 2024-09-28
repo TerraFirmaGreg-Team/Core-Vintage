@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.device.object.tile;
 import su.terrafirmagreg.api.base.tile.BaseTile;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.ConfigDevice;
+import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.object.block.BlockCharcoalForge;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
@@ -17,7 +18,6 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 
 import org.jetbrains.annotations.NotNull;
@@ -87,11 +87,9 @@ public class TileBellows extends BaseTile {
   }
 
   public void debug() {
-    TerraFirmaCraft.getLog().debug("Debugging Bellows");
-    TerraFirmaCraft.getLog()
-                   .debug("Now: {} | Then: {} | Difference: {}", world.getTotalWorldTime(), lastPushed,
-                          world.getTotalWorldTime() - lastPushed);
-    TerraFirmaCraft.getLog().debug("Total Height: {}", getHeight());
+    ModuleDevice.LOGGER.debug("Debugging Bellows");
+    ModuleDevice.LOGGER.debug("Now: {} | Then: {} | Difference: {}", world.getTotalWorldTime(), lastPushed, world.getTotalWorldTime() - lastPushed);
+    ModuleDevice.LOGGER.debug("Total Height: {}", getHeight());
   }
 
   // Min 0.125, Max 0.625

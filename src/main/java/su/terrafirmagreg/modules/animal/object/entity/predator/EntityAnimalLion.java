@@ -36,7 +36,6 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -67,10 +66,10 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-      return ConfigAnimal.ENTITIES.LION.rarity;
+        (biomeType == BiomeUtils.BiomeType.SAVANNA)) {
+      return ConfigAnimal.ENTITY.LION.rarity;
     }
     return 0;
   }
@@ -180,7 +179,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
                              new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
     int priority = 2;
-    for (String input : ConfigAnimal.ENTITIES.LION.huntCreatures) {
+    for (String input : ConfigAnimal.ENTITY.LION.huntCreatures) {
       ResourceLocation key = new ResourceLocation(input);
       EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
       if (entityEntry != null) {

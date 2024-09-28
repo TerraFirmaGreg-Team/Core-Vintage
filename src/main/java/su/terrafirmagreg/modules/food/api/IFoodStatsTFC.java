@@ -1,9 +1,10 @@
 package su.terrafirmagreg.modules.food.api;
 
+import su.terrafirmagreg.modules.food.ModuleFood;
+
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.food.NutritionStats;
@@ -26,10 +27,7 @@ public interface IFoodStatsTFC {
     if (foodCap != null) {
       addStats(foodCap);
     } else {
-      TerraFirmaCraft.getLog()
-                     .info(
-                       "Player ate a weird food: {} / {} that was missing a food capability! This is likely the error of an addon!",
-                       stack.getItem(), stack);
+      ModuleFood.LOGGER.info("Player ate a weird food: {} / {} that was missing a food capability! This is likely the error of an addon!", stack.getItem(), stack);
     }
   }
 

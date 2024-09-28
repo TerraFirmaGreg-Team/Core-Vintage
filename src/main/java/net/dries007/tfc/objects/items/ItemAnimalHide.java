@@ -52,15 +52,14 @@ public class ItemAnimalHide extends ItemTFC {
 
   @NotNull
   @Override
-  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-                                    float hitZ) {
+  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
-    if (ConfigTFC.General.OVERRIDES.enableThatchBed && type == HideType.RAW && size == HideSize.LARGE && facing == EnumFacing.UP && worldIn
-                                                                                                                                      .getBlockState(pos)
-                                                                                                                                      .getBlock()
-                                                                                                                                    == BlocksCore.THATCH
-        && worldIn.getBlockState(pos.offset(player.getHorizontalFacing()))
-                  .getBlock() == BlocksCore.THATCH) {
+    if (ConfigTFC.General.OVERRIDES.enableThatchBed
+        && type == HideType.RAW
+        && size == HideSize.LARGE
+        && facing == EnumFacing.UP && worldIn.getBlockState(pos).getBlock() == BlocksCore.THATCH
+        && worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getBlock() == BlocksCore.THATCH) {
+
       // Try and create a thatch bed
       BlockPos headPos = pos.offset(player.getHorizontalFacing());
       //Creating a thatch bed
@@ -72,8 +71,7 @@ public class ItemAnimalHide extends ItemTFC {
                                                          .withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
           IBlockState headState = BlocksDevice.THATCH_BED.getDefaultState()
                                                          .withProperty(BlockBed.OCCUPIED, false)
-                                                         .withProperty(BlockBed.FACING, player.getHorizontalFacing()
-                                                                                              .getOpposite())
+                                                         .withProperty(BlockBed.FACING, player.getHorizontalFacing().getOpposite())
                                                          .withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD);
           worldIn.setBlockState(pos, footState, 10);
           worldIn.setBlockState(headPos, headState, 10);
@@ -108,15 +106,11 @@ public class ItemAnimalHide extends ItemTFC {
   @Override
   @NotNull
   public ItemStack getContainerItem(ItemStack itemStack) {
-    switch (size) {
-      case SMALL:
-        return new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.SMALL));
-      case MEDIUM:
-        return new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.MEDIUM));
-      case LARGE:
-        return new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.LARGE));
-    }
-    return new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.SMALL));
+    return switch (size) {
+      case SMALL -> new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.SMALL));
+      case MEDIUM -> new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.MEDIUM));
+      case LARGE -> new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.LARGE));
+    };
   }
 
   @Override
@@ -126,15 +120,11 @@ public class ItemAnimalHide extends ItemTFC {
 
   @Override
   public @NotNull Weight getWeight(ItemStack stack) {
-    switch (size) {
-      case LARGE:
-        return Weight.MEDIUM; // Stacksize = 16
-      case MEDIUM:
-        return Weight.LIGHT; // Stacksize = 32
-      case SMALL:
-      default:
-        return Weight.VERY_LIGHT; // Stacksize = 64
-    }
+    return switch (size) {
+      case LARGE -> Weight.MEDIUM; // Stacksize = 16
+      case MEDIUM -> Weight.LIGHT; // Stacksize = 32
+      default -> Weight.VERY_LIGHT; // Stacksize = 64
+    };
   }
 
   @Override

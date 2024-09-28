@@ -1,7 +1,7 @@
 package net.dries007.tfc;
 
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.MathsUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.WorldUtils;
 import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -329,7 +329,7 @@ public final class CommonEventHandler {
     // Only possible with main hand - fixes attempting to drink even when it doesn't make sense
     if (!player.isCreative() && stack.isEmpty() && player.getFoodStats() instanceof IFoodStatsTFC foodStats &&
         event.getHand() == EnumHand.MAIN_HAND) {
-      RayTraceResult result = MathsUtils.rayTrace(event.getWorld(), player, true);
+      RayTraceResult result = MathUtils.rayTrace(event.getWorld(), player, true);
       if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
         IBlockState waterState = world.getBlockState(result.getBlockPos());
         boolean isFreshWater = BlockUtils.isFreshWater(waterState), isSaltWater = BlockUtils.isSaltWater(waterState);
@@ -688,8 +688,7 @@ public final class CommonEventHandler {
     var world = event.getWorld();
     if (world.getWorldType() == ModuleWorld.WORLD_TYPE_CLASSIC && WorldUtils.isDimension(world, DimensionType.OVERWORLD)) {
       // Fix skeleton rider traps spawning during thunderstorms
-      if (entity instanceof EntitySkeletonHorse && ConfigTFC.General.DIFFICULTY.preventMobsOnSurface &&
-          ((EntitySkeletonHorse) entity).isTrap()) {
+      if (entity instanceof EntitySkeletonHorse entitySkeletonHorse && ConfigTFC.General.DIFFICULTY.preventMobsOnSurface && entitySkeletonHorse.isTrap()) {
         entity.setDropItemsWhenDead(false);
         entity.setDead();
         event.setCanceled(true);

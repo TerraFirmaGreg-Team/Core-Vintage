@@ -74,8 +74,8 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 
   public EntityAnimalMule(World world) {
     this(world, Gender.valueOf(RNG.nextBoolean()),
-         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.MULE.adulthood,
-                                          ConfigAnimal.ENTITIES.MULE.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.MULE.adulthood,
+                                          ConfigAnimal.ENTITY.MULE.elder));
   }
 
   public EntityAnimalMule(World world, Gender gender, int birthDay) {
@@ -143,7 +143,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 
   @Override
   public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.MULE.adulthood;
+    return ConfigAnimal.ENTITY.MULE.adulthood;
   }
 
   @Override
@@ -183,7 +183,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 
   @Override
   public int getDaysToElderly() {
-    return ConfigAnimal.ENTITIES.MULE.elder;
+    return ConfigAnimal.ENTITY.MULE.elder;
   }
 
   @Override
@@ -201,7 +201,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    return ConfigAnimal.ENTITIES.MULE.rarity; // Not naturally spawned, must be bred
+    return ConfigAnimal.ENTITY.MULE.rarity; // Not naturally spawned, must be bred
   }
 
   @Override
@@ -293,7 +293,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
           this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
-        if (random.nextDouble() < ConfigAnimal.ENTITIES.MULE.oldDeathChance) {
+        if (random.nextDouble() < ConfigAnimal.ENTITY.MULE.oldDeathChance) {
           this.setDead();
         }
       }

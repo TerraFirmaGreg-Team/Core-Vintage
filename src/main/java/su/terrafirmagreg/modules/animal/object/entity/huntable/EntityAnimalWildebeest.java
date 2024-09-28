@@ -26,8 +26,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.oredict.OreDictionary;
 
-import net.dries007.tfc.util.climate.BiomeHelper;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -63,10 +61,10 @@ public class EntityAnimalWildebeest extends EntityAnimalMammal implements IHunta
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-      return ConfigAnimal.ENTITIES.WILDEBEEST.rarity;
+        (biomeType == BiomeUtils.BiomeType.SAVANNA)) {
+      return ConfigAnimal.ENTITY.WILDEBEEST.rarity;
     }
     return 0;
   }

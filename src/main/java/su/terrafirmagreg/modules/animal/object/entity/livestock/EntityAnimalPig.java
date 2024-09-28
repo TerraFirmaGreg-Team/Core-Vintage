@@ -20,7 +20,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -35,7 +34,7 @@ public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
   @SuppressWarnings("unused")
   public EntityAnimalPig(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-         getRandomGrowth(ConfigAnimal.ENTITIES.PIG.adulthood, ConfigAnimal.ENTITIES.PIG.elder));
+         getRandomGrowth(ConfigAnimal.ENTITY.PIG.adulthood, ConfigAnimal.ENTITY.PIG.elder));
   }
 
   public EntityAnimalPig(World worldIn, Gender gender, int birthDay) {
@@ -45,17 +44,17 @@ public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
 
   @Override
   public double getOldDeathChance() {
-    return ConfigAnimal.ENTITIES.PIG.oldDeathChance;
+    return ConfigAnimal.ENTITY.PIG.oldDeathChance;
   }
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS
-         || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
-      return ConfigAnimal.ENTITIES.PIG.rarity;
+        (biomeType == BiomeUtils.BiomeType.PLAINS
+         || biomeType == BiomeUtils.BiomeType.TROPICAL_FOREST)) {
+      return ConfigAnimal.ENTITY.PIG.rarity;
     }
     return 0;
   }
@@ -77,12 +76,12 @@ public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
 
   @Override
   public long gestationDays() {
-    return ConfigAnimal.ENTITIES.PIG.gestation;
+    return ConfigAnimal.ENTITY.PIG.gestation;
   }
 
   @Override
   public void birthChildren() {
-    int numberOfChildren = ConfigAnimal.ENTITIES.PIG.babies;
+    int numberOfChildren = ConfigAnimal.ENTITY.PIG.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalPig baby = new EntityAnimalPig(world, Gender.valueOf(RNG.nextBoolean()),
                                                  (int) Calendar.PLAYER_TIME.getTotalDays());
@@ -100,12 +99,12 @@ public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
 
   @Override
   public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.PIG.adulthood;
+    return ConfigAnimal.ENTITY.PIG.adulthood;
   }
 
   @Override
   public int getDaysToElderly() {
-    return ConfigAnimal.ENTITIES.PIG.elder;
+    return ConfigAnimal.ENTITY.PIG.elder;
   }
 
   @Override

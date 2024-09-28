@@ -22,7 +22,6 @@ import net.minecraftforge.fml.server.FMLServerHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.client.ClientEvents;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
 import net.dries007.tfc.network.PacketCalendarUpdate;
@@ -123,10 +122,6 @@ public final class TerraFirmaCraft {
 
     CapabilityForgeable.preInit();
     CapabilityFood.preInit();
-
-    if (event.getSide().isClient()) {
-      ClientEvents.preInit();
-    }
   }
 
   @Mod.EventHandler

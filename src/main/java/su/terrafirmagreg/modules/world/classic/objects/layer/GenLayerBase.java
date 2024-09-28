@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.world.classic.objects.layer;
 import su.terrafirmagreg.api.base.biome.BaseBiome;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
+import su.terrafirmagreg.modules.world.ModuleWorld;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 import su.terrafirmagreg.modules.world.classic.objects.layer.biome.GenLayerAddIsland;
 import su.terrafirmagreg.modules.world.classic.objects.layer.biome.GenLayerBiome;
@@ -21,8 +22,6 @@ import su.terrafirmagreg.modules.world.classic.objects.layer.river.GenLayerRiver
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-
-import net.dries007.tfc.TerraFirmaCraft;
 
 import javax.imageio.ImageIO;
 import java.awt.Color;
@@ -199,10 +198,10 @@ public abstract class GenLayerBase extends GenLayer {
         }
       }
       name = "_" + name + ".png";
-      TerraFirmaCraft.getLog().info("Worldgen debug image {}", name);
+      ModuleWorld.LOGGER.info("Worldgen debug image {}", name);
       ImageIO.write(outBitmap, "PNG", new File(name));
     } catch (Exception e) {
-      TerraFirmaCraft.getLog().catching(e);
+      ModuleWorld.LOGGER.catching(e);
     }
   }
 

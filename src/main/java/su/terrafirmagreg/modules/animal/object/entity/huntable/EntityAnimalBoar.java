@@ -20,8 +20,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-import net.dries007.tfc.util.climate.BiomeHelper;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -45,13 +43,12 @@ public class EntityAnimalBoar extends EntityAnimalMammal implements IHuntable {
   }
 
   @Override
-  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-                            float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.SAVANNA
-         || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
-      return ConfigAnimal.ENTITIES.BOAR.rarity;
+        (biomeType == BiomeUtils.BiomeType.PLAINS || biomeType == BiomeUtils.BiomeType.SAVANNA
+         || biomeType == BiomeUtils.BiomeType.TROPICAL_FOREST)) {
+      return ConfigAnimal.ENTITY.BOAR.rarity;
     }
     return 0;
   }

@@ -20,7 +20,7 @@ import java.math.RoundingMode;
 
 @UtilityClass
 @SuppressWarnings("unused")
-public final class MathsUtils {
+public final class MathUtils {
 
   /**
    * Checks if a double is within range of two other doubles.
@@ -123,8 +123,7 @@ public final class MathsUtils {
    * @return the ray trace result
    */
   @Nullable
-  public static RayTraceResult rayTrace(Entity entity, double blockReachDistance,
-                                        float partialTicks) {
+  public static RayTraceResult rayTrace(Entity entity, double blockReachDistance, float partialTicks) {
     Vec3d eyePosition = entity.getPositionEyes(partialTicks);
     Vec3d lookVector = entity.getLook(partialTicks);
     Vec3d rayTraceVector = eyePosition.add(

@@ -42,8 +42,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.climate.BiomeHelper;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -81,10 +79,10 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TAIGA)) {
-      return ConfigAnimal.ENTITIES.GRIZZLY_BEAR.rarity;
+        (biomeType == BiomeUtils.BiomeType.TAIGA)) {
+      return ConfigAnimal.ENTITY.GRIZZLY_BEAR.rarity;
     }
     return 0;
   }
@@ -215,7 +213,7 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
     this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 16.0F, 1.0D, 1.25D));
 
     int priority = 2;
-    for (String input : ConfigAnimal.ENTITIES.GRIZZLY_BEAR.huntCreatures) {
+    for (String input : ConfigAnimal.ENTITY.GRIZZLY_BEAR.huntCreatures) {
       ResourceLocation key = new ResourceLocation(input);
       EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
       if (entityEntry != null) {

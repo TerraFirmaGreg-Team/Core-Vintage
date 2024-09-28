@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.base.block.BaseBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.modules.animal.api.util.AnimalFood;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalHare;
 import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalPheasant;
@@ -39,7 +40,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 
 import org.jetbrains.annotations.Nullable;
@@ -265,14 +265,14 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
   }
 
   private boolean isCapturable(Entity entityIn) {
-    return entityIn instanceof EntityAnimalRabbit || entityIn instanceof EntityAnimalPheasant
-           || entityIn instanceof EntityAnimalDuck ||
-           entityIn instanceof EntityAnimalChicken || entityIn instanceof EntityAnimalTurkey;
+    return entityIn instanceof EntityAnimalRabbit
+           || entityIn instanceof EntityAnimalPheasant
+           || entityIn instanceof EntityAnimalChicken
+           || entityIn instanceof EntityAnimalTurkey;
   }
 
   @Override
-  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
-                                                         IBlockAccess worldIn, BlockPos pos) {
+  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
     return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ,
                              axisalignedbb.maxX, (float) 0 * 0.125F,

@@ -33,8 +33,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import net.dries007.tfc.util.climate.BiomeHelper;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -61,10 +59,10 @@ public class EntityAnimalDireWolf extends EntityAnimalMammal implements IPredato
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
-      return ConfigAnimal.ENTITIES.DIREWOLF.rarity;
+        (biomeType == BiomeUtils.BiomeType.PLAINS)) {
+      return ConfigAnimal.ENTITY.DIREWOLF.rarity;
     }
     return 0;
   }
@@ -145,7 +143,7 @@ public class EntityAnimalDireWolf extends EntityAnimalMammal implements IPredato
     this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 16.0F, 1.0D, 1.25D));
 
     int priority = 2;
-    for (String input : ConfigAnimal.ENTITIES.DIREWOLF.huntCreatures) {
+    for (String input : ConfigAnimal.ENTITY.DIREWOLF.huntCreatures) {
       ResourceLocation key = new ResourceLocation(input);
       EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
       if (entityEntry != null) {

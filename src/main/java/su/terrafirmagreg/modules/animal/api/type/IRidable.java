@@ -13,8 +13,7 @@ import net.minecraft.world.World;
 
 public interface IRidable {
 
-  default <A extends EntityAnimal & IAnimal> boolean attemptApplyHalter(A animal, World world,
-                                                                        EntityPlayer player, ItemStack stack) {
+  default <A extends EntityAnimal & IAnimal> boolean attemptApplyHalter(A animal, World world, EntityPlayer player, ItemStack stack) {
     if (animal.getAge() != IAnimal.Age.CHILD && animal.getFamiliarity() > 0.15f) {
       if (!world.isRemote) {
         // Can't use EntityAnimal#consumeItemFromStack since thats protected

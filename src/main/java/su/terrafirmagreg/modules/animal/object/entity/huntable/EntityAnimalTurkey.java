@@ -1,6 +1,12 @@
 package su.terrafirmagreg.modules.animal.object.entity.huntable;
 
-import net.dries007.tfc.util.climate.BiomeHelper;
+import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
+import su.terrafirmagreg.modules.animal.api.type.IHuntable;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -14,14 +20,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 import org.jetbrains.annotations.Nullable;
-
-import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.modules.animal.ConfigAnimal;
-import su.terrafirmagreg.modules.animal.api.type.IHuntable;
-import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
-import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 
 import java.util.List;
 import java.util.Random;
@@ -51,11 +49,11 @@ public class EntityAnimalTurkey extends EntityAnimalBase implements IHuntable {
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS
-         || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
-      return ConfigAnimal.ENTITIES.TURKEY.rarity;
+        (biomeType == BiomeUtils.BiomeType.PLAINS
+         || biomeType == BiomeUtils.BiomeType.TEMPERATE_FOREST)) {
+      return ConfigAnimal.ENTITY.TURKEY.rarity;
     }
     return 0;
   }

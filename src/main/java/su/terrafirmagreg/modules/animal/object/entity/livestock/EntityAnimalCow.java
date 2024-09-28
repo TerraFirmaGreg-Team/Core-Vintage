@@ -40,7 +40,6 @@ import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,7 +58,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
   @SuppressWarnings("unused")
   public EntityAnimalCow(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-         getRandomGrowth(ConfigAnimal.ENTITIES.COW.adulthood, ConfigAnimal.ENTITIES.COW.elder));
+         getRandomGrowth(ConfigAnimal.ENTITY.COW.adulthood, ConfigAnimal.ENTITY.COW.elder));
   }
 
   public EntityAnimalCow(World worldIn, Gender gender, int birthDay) {
@@ -71,10 +70,10 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
-      return ConfigAnimal.ENTITIES.COW.rarity;
+        (biomeType == BiomeUtils.BiomeType.PLAINS)) {
+      return ConfigAnimal.ENTITY.COW.rarity;
     }
     return 0;
   }
@@ -102,12 +101,12 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
   @Override
   public long gestationDays() {
-    return ConfigAnimal.ENTITIES.COW.gestation;
+    return ConfigAnimal.ENTITY.COW.gestation;
   }
 
   @Override
   public void birthChildren() {
-    int numberOfChildren = ConfigAnimal.ENTITIES.COW.babies; //one always
+    int numberOfChildren = ConfigAnimal.ENTITY.COW.babies; //one always
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalCow baby = new EntityAnimalCow(world, Gender.valueOf(RNG.nextBoolean()),
                                                  (int) Calendar.PLAYER_TIME.getTotalDays());
@@ -140,7 +139,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
   @Override
   public double getOldDeathChance() {
-    return ConfigAnimal.ENTITIES.COW.oldDeathChance;
+    return ConfigAnimal.ENTITY.COW.oldDeathChance;
   }
 
   @Override
@@ -190,12 +189,12 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
   @Override
   public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.COW.adulthood;
+    return ConfigAnimal.ENTITY.COW.adulthood;
   }
 
   @Override
   public int getDaysToElderly() {
-    return ConfigAnimal.ENTITIES.COW.elder;
+    return ConfigAnimal.ENTITY.COW.elder;
   }
 
   @Override
@@ -211,7 +210,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
   @Override
   public long getProductsCooldown() {
     return Math.max(0,
-                    ConfigAnimal.ENTITIES.COW.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
+                    ConfigAnimal.ENTITY.COW.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override

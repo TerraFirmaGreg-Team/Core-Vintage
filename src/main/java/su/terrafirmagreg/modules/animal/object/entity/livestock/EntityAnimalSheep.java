@@ -42,7 +42,6 @@ import net.minecraftforge.common.IShearable;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -57,15 +56,13 @@ import static su.terrafirmagreg.data.MathConstants.RNG;
 
 public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable, ILivestock {
 
-  private static final DataParameter<Integer> DYE_COLOR = EntityDataManager.createKey(
-    EntityAnimalSheep.class, DataSerializers.VARINT);
-  private static final DataParameter<Long> SHEARED = EntityDataManager.createKey(
-    EntityAnimalSheep.class, DataSerializers.LONG);
+  private static final DataParameter<Integer> DYE_COLOR = EntityDataManager.createKey(EntityAnimalSheep.class, DataSerializers.VARINT);
+  private static final DataParameter<Long> SHEARED = EntityDataManager.createKey(EntityAnimalSheep.class, DataSerializers.LONG);
 
   @SuppressWarnings("unused")
   public EntityAnimalSheep(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-         getRandomGrowth(ConfigAnimal.ENTITIES.SHEEP.adulthood, ConfigAnimal.ENTITIES.SHEEP.elder),
+         getRandomGrowth(ConfigAnimal.ENTITY.SHEEP.adulthood, ConfigAnimal.ENTITY.SHEEP.elder),
          EntitySheep.getRandomSheepColor(RNG));
   }
 
@@ -79,10 +76,10 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
-      return ConfigAnimal.ENTITIES.SHEEP.rarity;
+        (biomeType == BiomeUtils.BiomeType.PLAINS)) {
+      return ConfigAnimal.ENTITY.SHEEP.rarity;
     }
     return 0;
   }
@@ -111,12 +108,12 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
   @Override
   public long gestationDays() {
-    return ConfigAnimal.ENTITIES.SHEEP.gestation;
+    return ConfigAnimal.ENTITY.SHEEP.gestation;
   }
 
   @Override
   public void birthChildren() {
-    int numberOfChildren = ConfigAnimal.ENTITIES.SHEEP.babies;
+    int numberOfChildren = ConfigAnimal.ENTITY.SHEEP.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalSheep baby = new EntityAnimalSheep(world, Gender.valueOf(RNG.nextBoolean()),
                                                      (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
@@ -159,7 +156,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
   @Override
   public double getOldDeathChance() {
-    return ConfigAnimal.ENTITIES.SHEEP.oldDeathChance;
+    return ConfigAnimal.ENTITY.SHEEP.oldDeathChance;
   }
 
   @Override
@@ -219,12 +216,12 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
   @Override
   public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.SHEEP.adulthood;
+    return ConfigAnimal.ENTITY.SHEEP.adulthood;
   }
 
   @Override
   public int getDaysToElderly() {
-    return ConfigAnimal.ENTITIES.SHEEP.elder;
+    return ConfigAnimal.ENTITY.SHEEP.elder;
   }
 
   @Override
@@ -246,7 +243,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
   @Override
   public long getProductsCooldown() {
     return Math.max(0,
-                    ConfigAnimal.ENTITIES.SHEEP.woolTicks + getShearedTick() - Calendar.PLAYER_TIME.getTicks());
+                    ConfigAnimal.ENTITY.SHEEP.woolTicks + getShearedTick() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override

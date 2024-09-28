@@ -149,8 +149,7 @@ public final class RenderUtils {
   }
 
   public static IBakedModel getBakedModel(IBlockState blockState) {
-    return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes()
-                    .getModelForState(blockState);
+    return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(blockState);
   }
 
   public static IBakedModel getBakedModel(ItemStack stack) {
@@ -173,20 +172,14 @@ public final class RenderUtils {
   }
 
   public static TextureAtlasSprite getTopTextureFromBlockstate(IBlockState state) {
-    final var mc = Minecraft.getMinecraft();
-    IBakedModel model = mc.getBlockRendererDispatcher()
-                          .getBlockModelShapes()
-                          .getModelForState(state);
-    if (model != mc.getBlockRendererDispatcher()
-                   .getBlockModelShapes()
-                   .getModelManager()
-                   .getMissingModel()) {
+    final var modelShapes = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes();
+    final IBakedModel model = modelShapes.getModelForState(state);
+
+    if (model != modelShapes.getModelManager().getMissingModel()) {
       List<BakedQuad> quads = model.getQuads(state, EnumFacing.UP, 0);
-      return !quads.isEmpty() ? quads.get(0).getSprite() : mc.getBlockRendererDispatcher()
-                                                             .getBlockModelShapes()
-                                                             .getTexture(state);
+      return !quads.isEmpty() ? quads.get(0).getSprite() : modelShapes.getTexture(state);
     }
-    return mc.getBlockRendererDispatcher().getBlockModelShapes().getTexture(state);
+    return modelShapes.getTexture(state);
   }
 
   public static TextureAtlasSprite getTextureFromBlock(Block block, int meta) {

@@ -16,6 +16,7 @@ import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.ConfigDevice;
+import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.object.container.ContainerFirePit;
@@ -41,7 +42,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
@@ -379,7 +379,7 @@ public class TileFirePit extends BaseTileTickableInventory
     inventory.setStackInSlot(
       SLOT_OUTPUT_2,
       CapabilityFood.mergeItemStacksIgnoreCreationDate(inventory.getStackInSlot(SLOT_OUTPUT_2), outputStack));
-    
+
     return outputStack;
   }
 
@@ -672,7 +672,7 @@ public class TileFirePit extends BaseTileTickableInventory
         this.soupServings = value;
         break;
       default:
-        TerraFirmaCraft.getLog().warn("Invalid Field ID {} in TEFirePit#setField", index);
+        ModuleDevice.LOGGER.warn("Invalid Field ID {} in TEFirePit#setField", index);
     }
   }
 
@@ -683,7 +683,7 @@ public class TileFirePit extends BaseTileTickableInventory
       case FIELD_COOKING_POT_STAGE -> cookingPotStage.ordinal();
       case FIELD_COOKING_POT_SERVINGS -> soupServings;
       default -> {
-        TerraFirmaCraft.getLog().warn("Invalid Field ID {} in TEFirePit#getField", index);
+        ModuleDevice.LOGGER.warn("Invalid Field ID {} in TEFirePit#getField", index);
         yield 0;
       }
     };

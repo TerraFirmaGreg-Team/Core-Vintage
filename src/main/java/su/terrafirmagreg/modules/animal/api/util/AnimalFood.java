@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.entity.animal;
+package su.terrafirmagreg.modules.animal.api.util;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;

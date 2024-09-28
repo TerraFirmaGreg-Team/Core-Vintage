@@ -1,5 +1,10 @@
 package su.terrafirmagreg.api.base.biome;
 
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
+
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
@@ -11,11 +16,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
-import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-import su.terrafirmagreg.modules.rock.init.BlocksRock;
-import su.terrafirmagreg.modules.soil.init.BlocksSoil;
-import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
-
 import java.util.Arrays;
 import java.util.Random;
 
@@ -23,10 +23,8 @@ public abstract class BaseBiomeMesa extends BaseBiome {
 
   protected static final IBlockState HARDENED_CLAY = Blocks.HARDENED_CLAY.getDefaultState();
   protected static final IBlockState STAINED_HARDENED_CLAY = Blocks.STAINED_HARDENED_CLAY.getDefaultState();
-  protected static final IBlockState ORANGE_STAINED_HARDENED_CLAY = STAINED_HARDENED_CLAY.withProperty(
-    BlockColored.COLOR, EnumDyeColor.ORANGE);
-  protected static final IBlockState SAND = Blocks.SAND.getDefaultState()
-                                                       .withProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND);
+  protected static final IBlockState ORANGE_STAINED_HARDENED_CLAY = STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.ORANGE);
+  protected static final IBlockState SAND = Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND);
 
   private final boolean brycePillars;
   private final boolean hasForest;
@@ -48,8 +46,7 @@ public abstract class BaseBiomeMesa extends BaseBiome {
   }
 
   @Override
-  public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z,
-                               double noiseVal) {
+  public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal) {
     BlockPos chunkBlockPos = new BlockPos(x << 4, 0, z << 4);
     if (this.clayBands == null || this.worldSeed != worldIn.getSeed()) {
       this.generateBands(worldIn.getSeed());
@@ -99,8 +96,7 @@ public abstract class BaseBiomeMesa extends BaseBiome {
     for (int j1 = 255; j1 >= 0; --j1) {
       if (chunkPrimerIn.getBlockState(l1, j1, k1).getMaterial() == Material.AIR && j1 < (int) d4) {
         chunkPrimerIn.setBlockState(l1, j1, k1,
-                                    BlocksRock.RAW.get(ProviderChunkData.getRockHeight(worldIn, chunkBlockPos))
-                                                  .getDefaultState());
+                                    BlocksRock.RAW.get(ProviderChunkData.getRockHeight(worldIn, chunkBlockPos)).getDefaultState());
       }
 
       if (j1 <= rand.nextInt(5)) {
@@ -110,8 +106,7 @@ public abstract class BaseBiomeMesa extends BaseBiome {
         if (iblockstate1.getMaterial() == Material.AIR) {
           l = -1;
         } else if (iblockstate1.getBlock() == BlocksRock.RAW.get(
-                                                          ProviderChunkData.getRockHeight(worldIn, chunkBlockPos))
-                                                            .getDefaultState()) {
+          ProviderChunkData.getRockHeight(worldIn, chunkBlockPos)).getDefaultState()) {
           if (l == -1) {
             flag1 = false;
             if (k <= 0) {

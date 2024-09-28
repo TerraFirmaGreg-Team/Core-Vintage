@@ -26,8 +26,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.oredict.OreDictionary;
 
-import net.dries007.tfc.util.climate.BiomeHelper;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -63,11 +61,11 @@ public class EntityAnimalDeer extends EntityAnimalMammal implements IHuntable {
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TAIGA
-         || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
-      return ConfigAnimal.ENTITIES.DEER.rarity;
+        (biomeType == BiomeUtils.BiomeType.TAIGA
+         || biomeType == BiomeUtils.BiomeType.TEMPERATE_FOREST)) {
+      return ConfigAnimal.ENTITY.DEER.rarity;
     }
     return 0;
   }

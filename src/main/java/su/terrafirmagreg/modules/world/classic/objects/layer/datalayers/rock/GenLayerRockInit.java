@@ -3,11 +3,10 @@ package su.terrafirmagreg.modules.world.classic.objects.layer.datalayers.rock;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
+import su.terrafirmagreg.modules.world.ModuleWorld;
 import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerBase;
 
 import net.minecraft.world.gen.layer.IntCache;
-
-import net.dries007.tfc.TerraFirmaCraft;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,12 +25,12 @@ public class GenLayerRockInit extends GenLayerBase {
                          .sorted().toArray();
 
     if (ConfigCore.MISC.DEBUG.debugWorldGenSafe) {
-      TerraFirmaCraft.getLog().info("Worldgen rock list (ints): {}", layerRocks);
-      TerraFirmaCraft.getLog().info("Worldgen rock list (names): {}",
-                                    Arrays.stream(layerRocks)
-                                          .mapToObj(RockType::valueOf)
-                                          .map(RockType::getName)
-                                          .collect(Collectors.joining(", ")));
+      ModuleWorld.LOGGER.info("Worldgen rock list (ints): {}", layerRocks);
+      ModuleWorld.LOGGER.info("Worldgen rock list (names): {}",
+                              Arrays.stream(layerRocks)
+                                    .mapToObj(RockType::valueOf)
+                                    .map(RockType::getName)
+                                    .collect(Collectors.joining(", ")));
     }
   }
 

@@ -22,7 +22,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -41,7 +40,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
   @SuppressWarnings("unused")
   public EntityAnimalGoat(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-         getRandomGrowth(ConfigAnimal.ENTITIES.GOAT.adulthood, ConfigAnimal.ENTITIES.GOAT.elder));
+         getRandomGrowth(ConfigAnimal.ENTITY.GOAT.adulthood, ConfigAnimal.ENTITY.GOAT.elder));
   }
 
   public EntityAnimalGoat(World worldIn, Gender gender, int birthDay) {
@@ -75,22 +74,22 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
-      return ConfigAnimal.ENTITIES.GOAT.rarity;
+        (biomeType == BiomeUtils.BiomeType.TEMPERATE_FOREST)) {
+      return ConfigAnimal.ENTITY.GOAT.rarity;
     }
     return 0;
   }
 
   @Override
   public long gestationDays() {
-    return ConfigAnimal.ENTITIES.GOAT.gestation;
+    return ConfigAnimal.ENTITY.GOAT.gestation;
   }
 
   @Override
   public void birthChildren() {
-    int numberOfChildren = ConfigAnimal.ENTITIES.GOAT.babies;
+    int numberOfChildren = ConfigAnimal.ENTITY.GOAT.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalGoat baby = new EntityAnimalGoat(this.world, Gender.valueOf(RNG.nextBoolean()),
                                                    (int) Calendar.PLAYER_TIME.getTotalDays());
@@ -103,7 +102,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
 
   @Override
   public double getOldDeathChance() {
-    return ConfigAnimal.ENTITIES.GOAT.oldDeathChance;
+    return ConfigAnimal.ENTITY.GOAT.oldDeathChance;
   }
 
   @Override
@@ -113,18 +112,18 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
 
   @Override
   public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.GOAT.adulthood;
+    return ConfigAnimal.ENTITY.GOAT.adulthood;
   }
 
   @Override
   public int getDaysToElderly() {
-    return ConfigAnimal.ENTITIES.GOAT.elder;
+    return ConfigAnimal.ENTITY.GOAT.elder;
   }
 
   @Override
   public long getProductsCooldown() {
     return Math.max(0,
-                    ConfigAnimal.ENTITIES.GOAT.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
+                    ConfigAnimal.ENTITY.GOAT.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override
@@ -171,9 +170,9 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
   public float getHeadRotationAngleX(float ticks) {
     if (this.sheepTimer > 4 && this.sheepTimer <= 36) {
       float f = ((float) (this.sheepTimer - 4) - ticks) / 32.0F;
-      return ((float)Math.PI / 5F) + ((float)Math.PI * 7F / 100F) * MathHelper.sin(f * 28.7F);
+      return ((float) Math.PI / 5F) + ((float) Math.PI * 7F / 100F) * MathHelper.sin(f * 28.7F);
     } else {
-      return this.sheepTimer > 0 ? ((float)Math.PI / 5F) : this.rotationPitch * 0.017453292F;
+      return this.sheepTimer > 0 ? ((float) Math.PI / 5F) : this.rotationPitch * 0.017453292F;
     }
   }
 }

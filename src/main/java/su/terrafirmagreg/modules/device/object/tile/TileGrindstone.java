@@ -142,8 +142,7 @@ public class TileGrindstone extends BaseTileTickableInventory {
   public void setAndUpdateSlots(int slot) {
     this.markForBlockUpdate();
     if (slot == 0) {
-      this.hasGrindstone = this.inventory.getStackInSlot(SLOT_GRINDSTONE)
-                                         .getItem() instanceof ItemGrindstone;
+      this.hasGrindstone = this.inventory.getStackInSlot(SLOT_GRINDSTONE).getItem() instanceof ItemGrindstone;
     }
 
     super.setAndUpdateSlots(slot);
@@ -151,8 +150,7 @@ public class TileGrindstone extends BaseTileTickableInventory {
 
   public void readFromNBT(@NotNull NBTTagCompound nbt) {
     this.rotationTimer = nbt.getInteger("rotationTimer");
-    this.hasGrindstone = this.inventory.getStackInSlot(SLOT_GRINDSTONE)
-                                       .getItem() instanceof ItemGrindstone;
+    this.hasGrindstone = this.inventory.getStackInSlot(SLOT_GRINDSTONE).getItem() instanceof ItemGrindstone;
     super.readFromNBT(nbt);
   }
 

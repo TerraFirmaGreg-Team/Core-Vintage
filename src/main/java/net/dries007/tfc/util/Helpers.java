@@ -1,6 +1,19 @@
 package net.dries007.tfc.util;
 
 import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalRabbit;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalChicken;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCow;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDonkey;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalHorse;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalLlama;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalMule;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalOcelot;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalParrot;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalPig;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalWolf;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalPolarBear;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCommandBlock;
@@ -36,19 +49,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.common.base.Joiner;
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.objects.entity.animal.EntityChickenTFC;
-import net.dries007.tfc.objects.entity.animal.EntityCowTFC;
-import net.dries007.tfc.objects.entity.animal.EntityDonkeyTFC;
-import net.dries007.tfc.objects.entity.animal.EntityHorseTFC;
-import net.dries007.tfc.objects.entity.animal.EntityLlamaTFC;
-import net.dries007.tfc.objects.entity.animal.EntityMuleTFC;
-import net.dries007.tfc.objects.entity.animal.EntityOcelotTFC;
-import net.dries007.tfc.objects.entity.animal.EntityParrotTFC;
-import net.dries007.tfc.objects.entity.animal.EntityPigTFC;
-import net.dries007.tfc.objects.entity.animal.EntityPolarBearTFC;
-import net.dries007.tfc.objects.entity.animal.EntityRabbitTFC;
-import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
-import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -80,19 +80,19 @@ public final class Helpers {
     PREVENT_ON_SURFACE.add(EntityZombieHorse.class);
     PREVENT_ON_SURFACE.add(EntitySkeletonHorse.class);
     VANILLA_REPLACEMENTS = new HashMap<>();
-    VANILLA_REPLACEMENTS.put(EntityCow.class, EntityCowTFC.class);
-    VANILLA_REPLACEMENTS.put(EntitySheep.class, EntitySheepTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityPig.class, EntityPigTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityMule.class, EntityMuleTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityHorse.class, EntityHorseTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityDonkey.class, EntityDonkeyTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityChicken.class, EntityChickenTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityRabbit.class, EntityRabbitTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityWolf.class, EntityWolfTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityOcelot.class, EntityOcelotTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityPolarBear.class, EntityPolarBearTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityParrot.class, EntityParrotTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityLlama.class, EntityLlamaTFC.class);
+    VANILLA_REPLACEMENTS.put(EntityCow.class, EntityAnimalCow.class);
+    VANILLA_REPLACEMENTS.put(EntitySheep.class, EntityAnimalSheep.class);
+    VANILLA_REPLACEMENTS.put(EntityPig.class, EntityAnimalPig.class);
+    VANILLA_REPLACEMENTS.put(EntityMule.class, EntityAnimalMule.class);
+    VANILLA_REPLACEMENTS.put(EntityHorse.class, EntityAnimalHorse.class);
+    VANILLA_REPLACEMENTS.put(EntityDonkey.class, EntityAnimalDonkey.class);
+    VANILLA_REPLACEMENTS.put(EntityChicken.class, EntityAnimalChicken.class);
+    VANILLA_REPLACEMENTS.put(EntityRabbit.class, EntityAnimalRabbit.class);
+    VANILLA_REPLACEMENTS.put(EntityWolf.class, EntityAnimalWolf.class);
+    VANILLA_REPLACEMENTS.put(EntityOcelot.class, EntityAnimalOcelot.class);
+    VANILLA_REPLACEMENTS.put(EntityPolarBear.class, EntityAnimalPolarBear.class);
+    VANILLA_REPLACEMENTS.put(EntityParrot.class, EntityAnimalParrot.class);
+    VANILLA_REPLACEMENTS.put(EntityLlama.class, EntityAnimalLlama.class);
   }
 
   /**
@@ -132,9 +132,7 @@ public final class Helpers {
 
   public static String getTypeName(IForgeRegistryEntry<?> type) {
     //noinspection ConstantConditions
-    return JOINER_DOT.join(Constants.MODID_TFC, "types", type.getRegistryType()
-                                                             .getSimpleName(), type.getRegistryName().getPath())
-                     .toLowerCase();
+    return JOINER_DOT.join(Constants.MODID_TFC, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
   }
 
   /**

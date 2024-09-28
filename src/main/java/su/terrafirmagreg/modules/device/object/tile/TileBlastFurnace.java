@@ -10,6 +10,7 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.device.ConfigDevice;
+import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.block.BlockBlastFurnace;
@@ -31,7 +32,6 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.util.Alloy;
@@ -187,7 +187,7 @@ public class TileBlastFurnace extends BaseTileTickableInventory
         chimney = value;
         return;
     }
-    TerraFirmaCraft.getLog().warn("Illegal field id {} in TEBlastFurnace#setField", index);
+    ModuleDevice.LOGGER.warn("Illegal field id {} in TEBlastFurnace#setField", index);
   }
 
   @Override
@@ -206,7 +206,7 @@ public class TileBlastFurnace extends BaseTileTickableInventory
       case CHIMNEY_LEVELS:
         return chimney;
     }
-    TerraFirmaCraft.getLog().warn("Illegal field id {} in TEBlastFurnace#getField", index);
+    ModuleDevice.LOGGER.warn("Illegal field id {} in TEBlastFurnace#getField", index);
     return 0;
   }
 
@@ -435,14 +435,12 @@ public class TileBlastFurnace extends BaseTileTickableInventory
   }
 
   public void debug() {
-    TerraFirmaCraft.getLog().debug("Debugging Blast Furnace:");
-    TerraFirmaCraft.getLog()
-                   .debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature,
-                          burnTicksLeft);
-    TerraFirmaCraft.getLog().debug("Burning? {}", world.getBlockState(pos).getValue(LIT));
+    ModuleDevice.LOGGER.debug("Debugging Blast Furnace:");
+    ModuleDevice.LOGGER.debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature, burnTicksLeft);
+    ModuleDevice.LOGGER.debug("Burning? {}", world.getBlockState(pos).getValue(LIT));
     int i = 0;
     for (ItemStack item : oreStacks) {
-      TerraFirmaCraft.getLog().debug("Slot: {} - NBT: {}", i, item.serializeNBT().toString());
+      ModuleDevice.LOGGER.debug("Slot: {} - NBT: {}", i, item.serializeNBT().toString());
     }
   }
 

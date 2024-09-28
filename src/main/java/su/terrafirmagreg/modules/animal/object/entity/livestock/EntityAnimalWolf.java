@@ -44,7 +44,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -80,8 +79,8 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
   @SuppressWarnings("unused")
   public EntityAnimalWolf(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.WOLF.adulthood,
-                                          ConfigAnimal.ENTITIES.WOLF.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.WOLF.adulthood,
+                                          ConfigAnimal.ENTITY.WOLF.elder));
   }
 
   public EntityAnimalWolf(World worldIn, Gender gender, int birthDay) {
@@ -116,12 +115,11 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
   }
 
   @Override
-  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-                            float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.TAIGA)) {
-      return ConfigAnimal.ENTITIES.WOLF.rarity;
+        (biomeType == BiomeUtils.BiomeType.PLAINS || biomeType == BiomeUtils.BiomeType.TAIGA)) {
+      return ConfigAnimal.ENTITY.WOLF.rarity;
     }
     return 0;
   }
@@ -192,7 +190,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
 
   @Override
   public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.WOLF.adulthood;
+    return ConfigAnimal.ENTITY.WOLF.adulthood;
   }
 
   @Override
@@ -238,7 +236,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
 
   @Override
   public int getDaysToElderly() {
-    return ConfigAnimal.ENTITIES.WOLF.elder;
+    return ConfigAnimal.ENTITY.WOLF.elder;
   }
 
   @Override
@@ -260,7 +258,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
     super.initEntityAI();
 
     int priority = 1;
-    for (String input : ConfigAnimal.ENTITIES.WOLF.huntCreatures) {
+    for (String input : ConfigAnimal.ENTITY.WOLF.huntCreatures) {
       ResourceLocation key = new ResourceLocation(input);
       EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
       if (entityEntry != null) {
@@ -360,7 +358,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
           this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
-        if (random.nextDouble() < ConfigAnimal.ENTITIES.WOLF.oldDeathChance) {
+        if (random.nextDouble() < ConfigAnimal.ENTITY.WOLF.oldDeathChance) {
           this.setDead();
         }
       }
@@ -374,11 +372,11 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
   }
 
   public long gestationDays() {
-    return ConfigAnimal.ENTITIES.WOLF.gestation;
+    return ConfigAnimal.ENTITY.WOLF.gestation;
   }
 
   public void birthChildren() {
-    int numberOfChildren = ConfigAnimal.ENTITIES.WOLF.babies;
+    int numberOfChildren = ConfigAnimal.ENTITY.WOLF.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalWolf baby = new EntityAnimalWolf(this.world, Gender.valueOf(RNG.nextBoolean()),
                                                    (int) Calendar.PLAYER_TIME.getTotalDays());

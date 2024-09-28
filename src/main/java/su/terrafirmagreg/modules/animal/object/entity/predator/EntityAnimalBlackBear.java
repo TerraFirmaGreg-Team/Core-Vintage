@@ -25,8 +25,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import net.dries007.tfc.util.climate.BiomeHelper;
-
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
@@ -50,10 +48,10 @@ public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IP
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
-      return ConfigAnimal.ENTITIES.BLACK_BEAR.rarity;
+        (biomeType == BiomeUtils.BiomeType.TEMPERATE_FOREST)) {
+      return ConfigAnimal.ENTITY.BLACK_BEAR.rarity;
     }
     return 0;
   }
@@ -73,7 +71,7 @@ public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IP
                              new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
     int priority = 2;
-    for (String input : ConfigAnimal.ENTITIES.BLACK_BEAR.huntCreatures) {
+    for (String input : ConfigAnimal.ENTITY.BLACK_BEAR.huntCreatures) {
       ResourceLocation key = new ResourceLocation(input);
       EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
       if (entityEntry != null) {

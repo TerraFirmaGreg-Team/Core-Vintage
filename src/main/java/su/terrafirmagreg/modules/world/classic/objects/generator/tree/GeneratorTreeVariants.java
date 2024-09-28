@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.tree;
 
 import su.terrafirmagreg.api.util.StructureUtils;
+import su.terrafirmagreg.modules.world.ModuleWorld;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -9,7 +10,6 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
 
@@ -51,7 +51,7 @@ public class GeneratorTreeVariants implements ITreeGenerator {
 
     Template structureBase = manager.get(world.getMinecraftServer(), base);
     if (structureBase == null) {
-      TerraFirmaCraft.getLog().warn("Unable to find a template for " + base);
+      ModuleWorld.LOGGER.warn("Unable to find a template for " + base);
       return;
     }
 

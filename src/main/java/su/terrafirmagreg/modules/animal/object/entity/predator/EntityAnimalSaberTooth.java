@@ -32,8 +32,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import net.dries007.tfc.util.climate.BiomeHelper;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -60,10 +58,10 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
-      return ConfigAnimal.ENTITIES.SABER_TOOTH.rarity;
+        (biomeType == BiomeUtils.BiomeType.TROPICAL_FOREST)) {
+      return ConfigAnimal.ENTITY.SABER_TOOTH.rarity;
     }
     return 0;
   }
@@ -152,7 +150,7 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
     this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 16.0F, 1.0D, 1.25D));
 
     int priority = 2;
-    for (String input : ConfigAnimal.ENTITIES.SABER_TOOTH.huntCreatures) {
+    for (String input : ConfigAnimal.ENTITY.SABER_TOOTH.huntCreatures) {
       ResourceLocation key = new ResourceLocation(input);
       EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
       if (entityEntry != null) {

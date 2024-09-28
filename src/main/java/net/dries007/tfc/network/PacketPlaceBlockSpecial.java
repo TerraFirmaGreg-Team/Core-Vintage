@@ -1,6 +1,6 @@
 package net.dries007.tfc.network;
 
-import su.terrafirmagreg.api.util.MathsUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.state.IBlockState;
@@ -33,8 +33,8 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
         TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
 
           final World world = player.getEntityWorld();
-          final RayTraceResult rayTrace = MathsUtils.rayTrace(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE)
-                                                                            .getAttributeValue(), 1);
+          final RayTraceResult rayTrace = MathUtils.rayTrace(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE)
+                                                                           .getAttributeValue(), 1);
           final ItemStack stack = player.getHeldItemMainhand()
                                         .isEmpty() ? player.getHeldItemOffhand() : player.getHeldItemMainhand();
 

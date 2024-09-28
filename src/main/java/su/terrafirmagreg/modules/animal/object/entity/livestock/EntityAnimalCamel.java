@@ -39,7 +39,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,8 +58,8 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
   public EntityAnimalCamel(World world) {
     this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.CAMEL.adulthood,
-                                          ConfigAnimal.ENTITIES.CAMEL.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.CAMEL.adulthood,
+                                          ConfigAnimal.ENTITY.CAMEL.elder));
     this.setSize(0.9F, 2.0F);
   }
 
@@ -216,21 +215,21 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
   @Override
   public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.CAMEL.adulthood;
+    return ConfigAnimal.ENTITY.CAMEL.adulthood;
   }
 
   @Override
   public int getDaysToElderly() {
-    return ConfigAnimal.ENTITIES.CAMEL.elder;
+    return ConfigAnimal.ENTITY.CAMEL.elder;
   }
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.DESERT || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-      return ConfigAnimal.ENTITIES.CAMEL.rarity;
+        (biomeType == BiomeUtils.BiomeType.DESERT || biomeType == BiomeUtils.BiomeType.SAVANNA)) {
+      return ConfigAnimal.ENTITY.CAMEL.rarity;
     }
     return 0;
   }
@@ -320,12 +319,12 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
   @Override
   public long gestationDays() {
-    return ConfigAnimal.ENTITIES.CAMEL.gestation;
+    return ConfigAnimal.ENTITY.CAMEL.gestation;
   }
 
   @Override
   public void birthChildren() {
-    int numberOfChildren = ConfigAnimal.ENTITIES.CAMEL.babies; //one always
+    int numberOfChildren = ConfigAnimal.ENTITY.CAMEL.babies; //one always
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalCamel baby = new EntityAnimalCamel(this.world, Gender.valueOf(RNG.nextBoolean()),
                                                      (int) Calendar.PLAYER_TIME.getTotalDays());

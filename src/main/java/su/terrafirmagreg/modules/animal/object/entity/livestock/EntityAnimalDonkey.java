@@ -49,7 +49,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -88,8 +87,8 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 
   public EntityAnimalDonkey(World world) {
     this(world, Gender.valueOf(RNG.nextBoolean()),
-         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.DONKEY.adulthood,
-                                          ConfigAnimal.ENTITIES.DONKEY.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.DONKEY.adulthood,
+                                          ConfigAnimal.ENTITY.DONKEY.elder));
   }
 
   public EntityAnimalDonkey(World world, Gender gender, int birthDay) {
@@ -128,10 +127,10 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
-      return ConfigAnimal.ENTITIES.DONKEY.rarity;
+        (biomeType == BiomeUtils.BiomeType.PLAINS)) {
+      return ConfigAnimal.ENTITY.DONKEY.rarity;
     }
     return 0;
   }
@@ -236,7 +235,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 
   @Override
   public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.DONKEY.adulthood;
+    return ConfigAnimal.ENTITY.DONKEY.adulthood;
   }
 
   @Override
@@ -282,7 +281,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 
   @Override
   public int getDaysToElderly() {
-    return ConfigAnimal.ENTITIES.DONKEY.elder;
+    return ConfigAnimal.ENTITY.DONKEY.elder;
   }
 
   @Override
@@ -481,7 +480,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
           this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
-        if (random.nextDouble() < ConfigAnimal.ENTITIES.DONKEY.oldDeathChance) {
+        if (random.nextDouble() < ConfigAnimal.ENTITY.DONKEY.oldDeathChance) {
           this.setDead();
         }
       }
@@ -495,11 +494,11 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
   }
 
   public long gestationDays() {
-    return ConfigAnimal.ENTITIES.DONKEY.gestation;
+    return ConfigAnimal.ENTITY.DONKEY.gestation;
   }
 
   private void birthChildren() {
-    int numberOfChildren = ConfigAnimal.ENTITIES.DONKEY.babies;
+    int numberOfChildren = ConfigAnimal.ENTITY.DONKEY.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       // Birth one animal
       IAnimal baby;

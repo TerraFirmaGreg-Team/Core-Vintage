@@ -23,7 +23,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -41,7 +40,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
   @SuppressWarnings("unused")
   public EntityAnimalAlpaca(World worldIn) {
     this(worldIn, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
-         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.ALPACA.adulthood, ConfigAnimal.ENTITIES.ALPACA.elder),
+         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.ALPACA.adulthood, ConfigAnimal.ENTITY.ALPACA.elder),
          EntitySheep.getRandomSheepColor(MathConstants.RNG));
   }
 
@@ -52,10 +51,10 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TAIGA)) {
-      return ConfigAnimal.ENTITIES.ALPACA.rarity;
+        (biomeType == BiomeUtils.BiomeType.TAIGA)) {
+      return ConfigAnimal.ENTITY.ALPACA.rarity;
     }
     return 0;
   }
@@ -77,12 +76,12 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
   @Override
   public long gestationDays() {
-    return ConfigAnimal.ENTITIES.ALPACA.gestation;
+    return ConfigAnimal.ENTITY.ALPACA.gestation;
   }
 
   @Override
   public void birthChildren() {
-    int numberOfChildren = ConfigAnimal.ENTITIES.ALPACA.babies;
+    int numberOfChildren = ConfigAnimal.ENTITY.ALPACA.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalAlpaca baby = new EntityAnimalAlpaca(world,
                                                        Gender.valueOf(MathConstants.RNG.nextBoolean()),
@@ -96,7 +95,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
   @Override
   public double getOldDeathChance() {
-    return ConfigAnimal.ENTITIES.ALPACA.oldDeathChance;
+    return ConfigAnimal.ENTITY.ALPACA.oldDeathChance;
   }
 
   @Override
@@ -106,17 +105,17 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
   @Override
   public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.ALPACA.adulthood;
+    return ConfigAnimal.ENTITY.ALPACA.adulthood;
   }
 
   @Override
   public int getDaysToElderly() {
-    return ConfigAnimal.ENTITIES.ALPACA.elder;
+    return ConfigAnimal.ENTITY.ALPACA.elder;
   }
 
   @Override
   public long getProductsCooldown() {
-    return Math.max(0, ConfigAnimal.ENTITIES.ALPACA.woolTicks + getShearedTick()
+    return Math.max(0, ConfigAnimal.ENTITY.ALPACA.woolTicks + getShearedTick()
                        - Calendar.PLAYER_TIME.getTicks());
   }
 

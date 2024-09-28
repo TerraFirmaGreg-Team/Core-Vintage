@@ -21,8 +21,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-import net.dries007.tfc.util.climate.BiomeHelper;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -54,11 +52,11 @@ public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST
-         || biomeType == BiomeHelper.BiomeType.TAIGA)) {
-      return ConfigAnimal.ENTITIES.PHEASANT.rarity;
+        (biomeType == BiomeUtils.BiomeType.TROPICAL_FOREST
+         || biomeType == BiomeUtils.BiomeType.TAIGA)) {
+      return ConfigAnimal.ENTITY.PHEASANT.rarity;
     }
     return 0;
   }

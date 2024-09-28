@@ -9,6 +9,7 @@ import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.device.ConfigDevice;
+import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.container.ContainerCrucible;
@@ -28,7 +29,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -307,7 +307,7 @@ public class TileCrucible extends BaseTileTickableInventory
       this.temperature = value;
       return;
     }
-    TerraFirmaCraft.getLog().warn("Illegal field id {} in TECrucible#setField", index);
+    ModuleDevice.LOGGER.warn("Illegal field id {} in TECrucible#setField", index);
   }
 
   @Override
@@ -315,7 +315,7 @@ public class TileCrucible extends BaseTileTickableInventory
     if (index == FIELD_TEMPERATURE) {
       return (int) temperature;
     }
-    TerraFirmaCraft.getLog().warn("Illegal field id {} in TECrucible#getField", index);
+    ModuleDevice.LOGGER.warn("Illegal field id {} in TECrucible#getField", index);
     return 0;
   }
 

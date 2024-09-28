@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -28,7 +27,7 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
   @SuppressWarnings("unused")
   public EntityAnimalZebu(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-         getRandomGrowth(ConfigAnimal.ENTITIES.ZEBU.adulthood, ConfigAnimal.ENTITIES.ZEBU.elder));
+         getRandomGrowth(ConfigAnimal.ENTITY.ZEBU.adulthood, ConfigAnimal.ENTITY.ZEBU.elder));
   }
 
   public EntityAnimalZebu(World worldIn, Gender gender, int birthDay) {
@@ -39,22 +38,22 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
-      return ConfigAnimal.ENTITIES.ZEBU.rarity;
+        (biomeType == BiomeUtils.BiomeType.TROPICAL_FOREST)) {
+      return ConfigAnimal.ENTITY.ZEBU.rarity;
     }
     return 0;
   }
 
   @Override
   public long gestationDays() {
-    return ConfigAnimal.ENTITIES.ZEBU.gestation;
+    return ConfigAnimal.ENTITY.ZEBU.gestation;
   }
 
   @Override
   public void birthChildren() {
-    int numberOfChildren = ConfigAnimal.ENTITIES.ZEBU.babies;
+    int numberOfChildren = ConfigAnimal.ENTITY.ZEBU.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalZebu baby = new EntityAnimalZebu(this.world, Gender.valueOf(RNG.nextBoolean()),
                                                    (int) Calendar.PLAYER_TIME.getTotalDays());
@@ -67,7 +66,7 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
 
   @Override
   public double getOldDeathChance() {
-    return ConfigAnimal.ENTITIES.ZEBU.oldDeathChance;
+    return ConfigAnimal.ENTITY.ZEBU.oldDeathChance;
   }
 
   @Override
@@ -77,18 +76,18 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
 
   @Override
   public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.ZEBU.adulthood;
+    return ConfigAnimal.ENTITY.ZEBU.adulthood;
   }
 
   @Override
   public int getDaysToElderly() {
-    return ConfigAnimal.ENTITIES.ZEBU.elder;
+    return ConfigAnimal.ENTITY.ZEBU.elder;
   }
 
   @Override
   public long getProductsCooldown() {
     return Math.max(0,
-                    ConfigAnimal.ENTITIES.ZEBU.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
+                    ConfigAnimal.ENTITY.ZEBU.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override

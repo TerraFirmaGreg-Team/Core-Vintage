@@ -19,8 +19,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-import net.dries007.tfc.util.climate.BiomeHelper;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,13 +45,13 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST
-         || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST ||
-         biomeType == BiomeHelper.BiomeType.SAVANNA ||
-         biomeType == BiomeHelper.BiomeType.DESERT)) {
-      return ConfigAnimal.ENTITIES.HARE.rarity;
+        (biomeType == BiomeUtils.BiomeType.TROPICAL_FOREST
+         || biomeType == BiomeUtils.BiomeType.TEMPERATE_FOREST ||
+         biomeType == BiomeUtils.BiomeType.SAVANNA ||
+         biomeType == BiomeUtils.BiomeType.DESERT)) {
+      return ConfigAnimal.ENTITY.HARE.rarity;
     }
     return 0;
   }
@@ -100,13 +98,13 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
     float temperature = 0;
     float rainfall = 0;
     float floraDensity = 0;
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     int i = this.rand.nextInt(100);
 
-    if (biomeType == BiomeHelper.BiomeType.SAVANNA) {
+    if (biomeType == BiomeUtils.BiomeType.SAVANNA) {
       return i < 50 ? 1 : (i < 90 ? 1 : 3);
     }
-    if (biomeType == BiomeHelper.BiomeType.DESERT) {
+    if (biomeType == BiomeUtils.BiomeType.DESERT) {
       return i < 10 ? 3 : (i < 90 ? 0 : 1);
     } else {
       return i < 50 ? 0 : (i < 90 ? 1 : 2);

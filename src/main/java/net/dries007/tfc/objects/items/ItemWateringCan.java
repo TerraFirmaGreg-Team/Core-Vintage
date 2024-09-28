@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items;
 
-import su.terrafirmagreg.api.util.MathsUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -99,7 +99,7 @@ public class ItemWateringCan extends ItemMisc {
   public void onUsingTick(ItemStack stack, EntityLivingBase entity, int countLeft) {
     World world = entity.getEntityWorld();
     if (world.isRemote && entity instanceof EntityPlayer && countLeft % 2 == 0) {
-      RayTraceResult result = MathsUtils.rayTrace(world, (EntityPlayer) entity, false);
+      RayTraceResult result = MathUtils.rayTrace(world, (EntityPlayer) entity, false);
       if (result == null || result.typeOfHit != RayTraceResult.Type.BLOCK) {
         return;
       }

@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.food.api;
 import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
+import su.terrafirmagreg.modules.food.ModuleFood;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -72,10 +73,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
     if (foodCap != null) {
       addStats(foodCap);
     } else {
-      TerraFirmaCraft.getLog()
-                     .info(
-                       "Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...",
-                       foodItem, stack);
+      ModuleFood.LOGGER.info("Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...", foodItem, stack);
     }
   }
 

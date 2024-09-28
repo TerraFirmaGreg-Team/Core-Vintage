@@ -44,7 +44,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -73,8 +72,8 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
   @SuppressWarnings("unused")
   public EntityAnimalOcelot(World world) {
     this(world, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
-         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.OCELOT.adulthood,
-                                          ConfigAnimal.ENTITIES.OCELOT.elder));
+         EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.OCELOT.adulthood,
+                                          ConfigAnimal.ENTITY.OCELOT.elder));
   }
 
   public EntityAnimalOcelot(World world, IAnimal.Gender gender, int birthDay) {
@@ -108,11 +107,11 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST
-         || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-      return ConfigAnimal.ENTITIES.OCELOT.rarity;
+        (biomeType == BiomeUtils.BiomeType.TROPICAL_FOREST
+         || biomeType == BiomeUtils.BiomeType.SAVANNA)) {
+      return ConfigAnimal.ENTITY.OCELOT.rarity;
     }
     return 0;
   }
@@ -164,7 +163,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
         // Randomly die of old age, tied to entity UUID and calendar time
         final Random random = new Random(
           this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
-        if (random.nextDouble() < ConfigAnimal.ENTITIES.OCELOT.oldDeathChance) {
+        if (random.nextDouble() < ConfigAnimal.ENTITY.OCELOT.oldDeathChance) {
           this.setDead();
         }
       }
@@ -178,11 +177,11 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
   }
 
   public long gestationDays() {
-    return ConfigAnimal.ENTITIES.OCELOT.gestation;
+    return ConfigAnimal.ENTITY.OCELOT.gestation;
   }
 
   public void birthChildren() {
-    int numberOfChildren = ConfigAnimal.ENTITIES.OCELOT.babies;
+    int numberOfChildren = ConfigAnimal.ENTITY.OCELOT.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalOcelot baby = new EntityAnimalOcelot(this.world,
                                                        Gender.valueOf(MathConstants.RNG.nextBoolean()),
@@ -229,7 +228,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 
   @Override
   public int getDaysToAdulthood() {
-    return ConfigAnimal.ENTITIES.OCELOT.adulthood;
+    return ConfigAnimal.ENTITY.OCELOT.adulthood;
   }
 
   @Override
@@ -275,7 +274,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 
   @Override
   public int getDaysToElderly() {
-    return ConfigAnimal.ENTITIES.OCELOT.elder;
+    return ConfigAnimal.ENTITY.OCELOT.elder;
   }
 
   @Override
@@ -295,7 +294,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
     super.initEntityAI();
 
     int priority = 1;
-    for (String input : ConfigAnimal.ENTITIES.OCELOT.huntCreatures) {
+    for (String input : ConfigAnimal.ENTITY.OCELOT.huntCreatures) {
       ResourceLocation key = new ResourceLocation(input);
       EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
       if (entityEntry != null) {

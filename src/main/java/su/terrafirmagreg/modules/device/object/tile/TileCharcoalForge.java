@@ -11,6 +11,7 @@ import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.ConfigDevice;
+import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiCharcoalForge;
 import su.terrafirmagreg.modules.device.object.container.ContainerCharcoalForge;
 
@@ -29,7 +30,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
@@ -383,7 +383,7 @@ public class TileCharcoalForge extends BaseTileTickableInventory
     if (index == FIELD_TEMPERATURE) {
       this.temperature = (float) value;
     } else {
-      TerraFirmaCraft.getLog().warn("Invalid field ID {} in TECharcoalForge#setField", index);
+      ModuleDevice.LOGGER.warn("Invalid field ID {} in TECharcoalForge#setField", index);
     }
   }
 
@@ -392,7 +392,7 @@ public class TileCharcoalForge extends BaseTileTickableInventory
     if (index == FIELD_TEMPERATURE) {
       return (int) temperature;
     }
-    TerraFirmaCraft.getLog().warn("Invalid field ID {} in TECharcoalForge#getField", index);
+    ModuleDevice.LOGGER.warn("Invalid field ID {} in TECharcoalForge#getField", index);
     return 0;
   }
 

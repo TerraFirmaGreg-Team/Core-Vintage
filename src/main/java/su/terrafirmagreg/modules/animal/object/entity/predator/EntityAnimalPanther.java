@@ -32,8 +32,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import net.dries007.tfc.util.climate.BiomeHelper;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -60,10 +58,10 @@ public class EntityAnimalPanther extends EntityAnimalMammal implements IPredator
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
-      return ConfigAnimal.ENTITIES.PANTHER.rarity;
+        (biomeType == BiomeUtils.BiomeType.TROPICAL_FOREST)) {
+      return ConfigAnimal.ENTITY.PANTHER.rarity;
     }
     return 0;
   }
@@ -144,7 +142,7 @@ public class EntityAnimalPanther extends EntityAnimalMammal implements IPredator
     this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 16.0F, 1.0D, 1.25D));
 
     int priority = 2;
-    for (String input : ConfigAnimal.ENTITIES.PANTHER.huntCreatures) {
+    for (String input : ConfigAnimal.ENTITY.PANTHER.huntCreatures) {
       ResourceLocation key = new ResourceLocation(input);
       EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
       if (entityEntry != null) {

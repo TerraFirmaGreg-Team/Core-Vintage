@@ -2,15 +2,23 @@ package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.TerraFirmaGreg;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.passive.AbstractHorse;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.UsernameCache;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.Lists;
 import se.gory_moon.horsepower.Configs;
@@ -20,6 +28,8 @@ import org.jetbrains.annotations.Nullable;
 import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @UtilityClass
@@ -37,6 +47,8 @@ public final class EntityUtils {
   };
 
   private static final ConcurrentHashMap<String, Class<? extends EntityCreature>> ENTITY_CLASSES_CACHE = new ConcurrentHashMap<>();
+
+  private static final Map<String, UUID> USERNAME = CollectionUtils.invertMap(UsernameCache.getMap());
 
 
   public static ArrayList<Class<? extends EntityCreature>> getCreatureClasses() {
@@ -71,6 +83,31 @@ public final class EntityUtils {
         return null;
       }
     });
+  }
+
+  @SideOnly(Side.CLIENT)
+  public static UUID getClientPlayerUUID() {
+    Minecraft minecraft = Minecraft.getMinecraft();
+
+    return minecraft.getSession().getProfile().getId();
+  }
+
+  public static UUID getUUID(String player) {
+    return USERNAME.get(player);
+  }
+
+  public static boolean hasUUID(String player) {
+    return USERNAME.containsKey(player);
+  }
+
+  public static EnumHand getHandForItemAndMeta(EntityPlayer player, Item item, int meta) {
+    for (EnumHand hand : EnumHand.values()) {
+      ItemStack heldStack = player.getHeldItem(hand);
+
+      if (!heldStack.isEmpty() && heldStack.getItem() == item && heldStack.getMetadata() == meta) {return hand;}
+    }
+
+    return EnumHand.MAIN_HAND;
   }
 
   /**

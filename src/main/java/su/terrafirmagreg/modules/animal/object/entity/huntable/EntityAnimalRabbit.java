@@ -41,7 +41,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -84,11 +83,11 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TAIGA || biomeType == BiomeHelper.BiomeType.PLAINS
-         || biomeType == BiomeHelper.BiomeType.TUNDRA)) {
-      return ConfigAnimal.ENTITIES.RABBIT.rarity;
+        (biomeType == BiomeUtils.BiomeType.TAIGA || biomeType == BiomeUtils.BiomeType.PLAINS
+         || biomeType == BiomeUtils.BiomeType.TUNDRA)) {
+      return ConfigAnimal.ENTITY.RABBIT.rarity;
     }
     return 0;
   }

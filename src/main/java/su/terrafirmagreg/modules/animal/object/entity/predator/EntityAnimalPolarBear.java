@@ -43,7 +43,6 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -117,7 +116,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
                              new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
     int priority = 2;
-    for (String input : ConfigAnimal.ENTITIES.POLAR_BEAR.huntCreatures) {
+    for (String input : ConfigAnimal.ENTITY.POLAR_BEAR.huntCreatures) {
       ResourceLocation key = new ResourceLocation(input);
       EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
       if (entityEntry != null) {
@@ -276,10 +275,10 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TUNDRA || biomeType == BiomeHelper.BiomeType.TAIGA)) {
-      return ConfigAnimal.ENTITIES.POLAR_BEAR.rarity;
+        (biomeType == BiomeUtils.BiomeType.TUNDRA || biomeType == BiomeUtils.BiomeType.TAIGA)) {
+      return ConfigAnimal.ENTITY.POLAR_BEAR.rarity;
     }
     return 0;
   }

@@ -13,8 +13,7 @@ import java.lang.reflect.Modifier;
 @SuppressWarnings("unused")
 public final class InjectorUtils {
 
-  public static void setFinalStaticFieldWithReflection(Class<?> apiClass, String srgName,
-                                                       Object value) {
+  public static void setFinalStaticFieldWithReflection(Class<?> apiClass, String srgName, Object value) {
     try {
       Field field = ObfuscationReflectionHelper.findField(apiClass, srgName);
       InjectorUtils.setFinalStatic(field, value);

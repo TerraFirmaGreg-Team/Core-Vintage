@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.spawner;
 
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalAlpaca;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCamel;
@@ -62,46 +63,45 @@ public final class EntitySpawnerWorldData {
   /**
    * Handles livestock cooldown time Supplier so we get the updated config value
    */
-  public static final Map<Class<? extends EntityLiving>, Supplier<Integer>> LIVESTOCK;
+  public static final Map<Class<? extends EntityLiving>, Supplier<Integer>> LIVESTOCK = new HashMap<>();
 
   static {
-    LIVESTOCK = new HashMap<>();
     LIVESTOCK.put(EntityAnimalAlpaca.class,
-                  () -> ConfigTFC.Animals.ALPACA.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.ALPACA.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalCamel.class,
-                  () -> ConfigTFC.Animals.CAMEL.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.CAMEL.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalChicken.class,
-                  () -> ConfigTFC.Animals.CHICKEN.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.CHICKEN.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalCow.class,
-                  () -> ConfigTFC.Animals.COW.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.COW.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalDonkey.class,
-                  () -> ConfigTFC.Animals.DONKEY.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.DONKEY.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalDuck.class,
-                  () -> ConfigTFC.Animals.DUCK.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.DUCK.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalGoat.class,
-                  () -> ConfigTFC.Animals.GOAT.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.GOAT.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalGrouse.class,
-                  () -> ConfigTFC.Animals.GROUSE.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.GROUSE.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalHorse.class,
-                  () -> ConfigTFC.Animals.HORSE.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.HORSE.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalLlama.class,
-                  () -> ConfigTFC.Animals.LLAMA.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.LLAMA.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalMuskOx.class,
-                  () -> ConfigTFC.Animals.MUSKOX.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.MUSKOX.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalOcelot.class,
-                  () -> ConfigTFC.Animals.OCELOT.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.OCELOT.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalPig.class,
-                  () -> ConfigTFC.Animals.PIG.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.PIG.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalQuail.class,
-                  () -> ConfigTFC.Animals.QUAIL.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.QUAIL.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalSheep.class,
-                  () -> ConfigTFC.Animals.SHEEP.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.SHEEP.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalWolf.class,
-                  () -> ConfigTFC.Animals.WOLF.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.WOLF.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalYak.class,
-                  () -> ConfigTFC.Animals.YAK.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.YAK.elder * ICalendar.TICKS_IN_DAY);
     LIVESTOCK.put(EntityAnimalZebu.class,
-                  () -> ConfigTFC.Animals.ZEBU.elder * ICalendar.TICKS_IN_DAY);
+                  () -> ConfigAnimal.ENTITY.ZEBU.elder * ICalendar.TICKS_IN_DAY);
   }
 
   public static void init() {

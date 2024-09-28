@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.layer.datalayers.tree;
 
 import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.world.ModuleWorld;
 import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
 import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerBase;
 import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerFuzzyZoom;
@@ -9,8 +10,6 @@ import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerVoronoiZoom
 import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerZoom;
 
 import net.minecraftforge.fml.common.FMLCommonHandler;
-
-import net.dries007.tfc.TerraFirmaCraft;
 
 import javax.imageio.ImageIO;
 import java.awt.Color;
@@ -70,10 +69,10 @@ public abstract class GenRiverLayer extends GenLayerBase {
             }
 
             name = "_" + name + ".png";
-            TerraFirmaCraft.getLog().info("Worldgen debug image {}", name);
+            ModuleWorld.LOGGER.info("Worldgen debug image {}", name);
             ImageIO.write(outBitmap, "PNG", new File(name));
           } catch (Exception var11) {
-            TerraFirmaCraft.getLog().catching(var11);
+            ModuleWorld.LOGGER.catching(var11);
           }
 
         }

@@ -30,8 +30,8 @@ import net.minecraftforge.common.EnumPlantType;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantEmergentTallWater;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantWater;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
@@ -137,10 +137,8 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
 
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    TECropBase tile = TileUtils.getTile(worldIn, pos, TECropBase.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
+    var tile = TileUtils.getTile(worldIn, pos, TECropBase.class);
+    tile.ifPresent(TECropBase::resetCounter);
   }
 
   @Override
@@ -201,47 +199,44 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
   }
 
   public void checkGrowth(World worldIn, BlockPos pos, IBlockState state, Random random) {
-    if (!worldIn.isRemote) {
-      var tile = TileUtils.getTile(worldIn, pos, TECropBase.class);
-      if (tile != null) {
-        // If can't see sky, or isn't moisturized, reset growth *evil laughter* >:)
-        IBlockState stateFarmland = worldIn.getBlockState(pos.down());
-        if (!state.getValue(WILD)) {
-          if (!worldIn.canSeeSky(pos) ||
-              (stateFarmland.getBlock() instanceof BlockSoilFarmland && stateFarmland.getValue(MOISTURE) < 3)) {
-            tile.resetCounter();
-            return;
-          }
-        }
+    if (worldIn.isRemote) {return;}
+    TileUtils.getTile(worldIn, pos, TECropBase.class).ifPresent(tile -> {
 
-        long growthTicks = (long) (crop.getGrowthTicks() * ConfigTFC.General.FOOD.cropGrowthTimeModifier);
-        int fullGrownStages = 0;
-        while (tile.getTicksSinceUpdate() > growthTicks) {
-          tile.reduceCounter(growthTicks);
-
-          // find stats for the time in which the crop would have grown
-          float temp = Climate.getActualTemp(worldIn, pos, -tile.getTicksSinceUpdate());
-          float rainfall = ProviderChunkData.getRainfall(worldIn, pos);
-
-          // check if the crop could grow, if so, grow
-          if (crop.isValidForGrowth(temp, rainfall)) {
-            grow(worldIn, pos, state, random);
-            state = worldIn.getBlockState(pos);
-            if (state.getBlock() instanceof BlockCropTFC && !state.getValue(WILD) &&
-                state.getValue(getStageProperty()) == crop.getMaxStage()) {
-              fullGrownStages++;
-              if (fullGrownStages > 2) {
-                die(worldIn, pos, state, random);
-                return;
-              }
-            }
-          } else if (!crop.isValidConditions(temp, rainfall)) {
-            die(worldIn, pos, state, random);
-            return;
-          }
+      // If can't see sky, or isn't moisturized, reset growth *evil laughter* >:)
+      IBlockState stateFarmland = worldIn.getBlockState(pos.down());
+      if (!state.getValue(WILD)) {
+        if (!worldIn.canSeeSky(pos) || (stateFarmland.getBlock() instanceof BlockSoilFarmland && stateFarmland.getValue(MOISTURE) < 3)) {
+          tile.resetCounter();
+          return;
         }
       }
-    }
+
+      long growthTicks = (long) (crop.getGrowthTicks() * ConfigTFC.General.FOOD.cropGrowthTimeModifier);
+      int fullGrownStages = 0;
+      while (tile.getTicksSinceUpdate() > growthTicks) {
+        tile.reduceCounter(growthTicks);
+
+        // find stats for the time in which the crop would have grown
+        float temp = Climate.getActualTemp(worldIn, pos, -tile.getTicksSinceUpdate());
+        float rainfall = ProviderChunkData.getRainfall(worldIn, pos);
+
+        // check if the crop could grow, if so, grow
+        if (crop.isValidForGrowth(temp, rainfall)) {
+          grow(worldIn, pos, state, random);
+          if (state.getBlock() instanceof BlockCropTFC && !state.getValue(WILD) && state.getValue(getStageProperty()) == crop.getMaxStage()) {
+            fullGrownStages++;
+            if (fullGrownStages > 2) {
+              die(worldIn, pos, state, random);
+              return;
+            }
+          }
+        } else if (!crop.isValidConditions(temp, rainfall)) {
+          die(worldIn, pos, state, random);
+          return;
+        }
+      }
+    });
+
   }
 
   public abstract void grow(World worldIn, BlockPos pos, IBlockState state, Random random);
@@ -274,7 +269,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
       return super.canSustainBush(state);
     } else {
       return BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenClassic.FRESH_WATER ||
-             state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
+             state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater);
     }
   }
 
@@ -283,7 +278,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
       return super.canBlockStay(worldIn, pos, state);
     } else {
       IBlockState soil = worldIn.getBlockState(pos.down());
-      if (!(soil.getBlock() instanceof BlockWaterPlantTFCF) && !(soil.getBlock() instanceof BlockWaterPlantTFC)) {
+      if (!(soil.getBlock() instanceof BlockWaterPlantTFCF) && !(soil.getBlock() instanceof BlockPlantWater)) {
         if (state.getBlock() != this) {
           return this.canSustainBush(soil);
         } else {
@@ -293,7 +288,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
                      .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) ||
                  material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 &&
                  stateDown == ChunkGenClassic.FRESH_WATER || material == Material.ICE ||
-                 material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
+                 material == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater);
         }
       } else {
         return false;

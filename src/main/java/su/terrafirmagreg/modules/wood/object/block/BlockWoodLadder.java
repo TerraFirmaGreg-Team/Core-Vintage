@@ -25,7 +25,7 @@ public class BlockWoodLadder extends BlockLadder implements IWoodBlock {
     this.settings = Settings.of(Material.CIRCUITS);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .sound(SoundType.LADDER)
       .oreDict(variant)

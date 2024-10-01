@@ -45,24 +45,19 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
             if (player.getDistanceSq(pos) <= placeReach * placeReach && hitFace != null) {
               IBlockState offsetState = world.getBlockState(pos.offset(hitFace));
               if (world.getBlockState(pos).getBlock() == BlocksTFC.PLACED_ITEM) {
-                TEPlacedItem tile = TileUtils.getTile(world, pos, TEPlacedItem.class);
-                if (tile != null) {
+                TileUtils.getTile(world, pos, TEPlacedItem.class).ifPresent(tile -> {
                   tile.onRightClick(player, stack, rayTrace);
-                }
+                });
               } else if (offsetState.getBlock() == BlocksTFC.PLACED_ITEM) {
-                TEPlacedItem tile = TileUtils.getTile(world, pos.offset(hitFace), TEPlacedItem.class);
-                if (tile != null) {
-                  tile.onRightClick(player, stack, rayTrace);
-                }
-              } else if (!stack.isEmpty() && world.getBlockState(pos.offset(hitFace).down())
-                                                  .isSideSolid(world, pos.offset(hitFace)
-                                                                         .down(), EnumFacing.UP) && offsetState.getBlock()
-                                                                                                               .isAir(offsetState, world, pos)) {
+                TileUtils.getTile(world, pos.offset(hitFace), TEPlacedItem.class).ifPresent(tile -> tile.onRightClick(player, stack, rayTrace));
+              } else if (!stack.isEmpty()
+                         && world.getBlockState(pos.offset(hitFace).down()).isSideSolid(world, pos.offset(hitFace).down(), EnumFacing.UP)
+                         && offsetState.getBlock().isAir(offsetState, world, pos)) {
+
                 if (player.isSneaking()) {
                   // If sneaking, place a flat item
                   world.setBlockState(pos.offset(hitFace), BlocksTFC.PLACED_ITEM_FLAT.getDefaultState());
-                  TEPlacedItemFlat tile = TileUtils.getTile(world, pos.offset(hitFace), TEPlacedItemFlat.class);
-                  if (tile != null) {
+                  TileUtils.getTile(world, pos.offset(hitFace), TEPlacedItemFlat.class).ifPresent(tile -> {
                     ItemStack input;
                     if (player.isCreative()) {
                       input = stack.copy();
@@ -71,13 +66,12 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
                       input = stack.splitStack(1);
                     }
                     tile.setStack(input);
-                  }
+                  });
                 } else {
                   world.setBlockState(pos.offset(hitFace), BlocksTFC.PLACED_ITEM.getDefaultState());
-                  TEPlacedItem tile = TileUtils.getTile(world, pos.offset(hitFace), TEPlacedItem.class);
-                  if (tile != null) {
+                  TileUtils.getTile(world, pos.offset(hitFace), TEPlacedItem.class).ifPresent(tile -> {
                     tile.insertItem(player, stack, rayTrace);
-                  }
+                  });
                 }
               }
             }

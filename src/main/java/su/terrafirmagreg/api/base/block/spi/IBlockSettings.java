@@ -6,7 +6,7 @@ import su.terrafirmagreg.api.registry.provider.IProviderBlockState;
 import su.terrafirmagreg.api.registry.provider.IProviderModel;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.data.ItemRarity;
+import su.terrafirmagreg.data.enums.ItemRarity;
 import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -416,8 +416,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
       return this;
     }
 
-    public Settings fallable(IBlockState state, Specification specification,
-                             IBlockState resultingState) {
+    public Settings fallable(IBlockState state, Specification specification, IBlockState resultingState) {
       if (specification != null) {
         var spec = new Specification(specification);
         spec.setResultingState(resultingState);

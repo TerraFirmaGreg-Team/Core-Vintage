@@ -2,6 +2,8 @@ package su.terrafirmagreg.modules.metal;
 
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.network.IPacketService;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.core.event.EventHandlerMaterial;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalTypeHandler;
@@ -25,13 +27,15 @@ public final class ModuleMetal extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleMetal.class.getSimpleName());
 
-  public final CreativeTabs METAL_TAB;
+  public static CreativeTabs TAB;
+  public static RegistryManager REGISTRY;
+  public static IPacketService PACKET_SERVICE;
+
 
   public ModuleMetal() {
-    this.METAL_TAB = BaseCreativeTab.of("metal", "metal/anvil/red_steel");
-
-    this.enableAutoRegistry(METAL_TAB);
-    this.enableNetwork();
+    TAB = BaseCreativeTab.of("metal", "metal/anvil/red_steel");
+    REGISTRY = enableAutoRegistry(TAB);
+    PACKET_SERVICE = enableNetwork();
 
     MinecraftForge.EVENT_BUS.register(new EventHandlerMaterial());
   }

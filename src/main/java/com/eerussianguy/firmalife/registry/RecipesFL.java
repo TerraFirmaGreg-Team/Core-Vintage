@@ -22,7 +22,7 @@ import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.recipe.StrainingRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -159,7 +159,7 @@ public class RecipesFL {
 
     // this makes me laugh for some reason...
     PlantsFL.WRAPPERS.forEach(plant -> {
-      BlockPlantTFC block = BlockPlantTFC.get(plant);
+      BlockPlant block = BlockPlant.get(plant);
       r.register(new PlanterRecipe(IIngredient.of(block), new ItemStack(block), 1, false).setRegistryName(plant.getRegistryName()
                                                                                                                .getPath()));
     });

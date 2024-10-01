@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlockCreepingPlantTFC extends BlockPlantTFC {
+public class BlockPlantCreeping extends BlockPlant {
 
   static final PropertyBool DOWN = PropertyBool.create("down");
   static final PropertyBool UP = PropertyBool.create("up");
@@ -45,17 +45,17 @@ public class BlockCreepingPlantTFC extends BlockPlantTFC {
   private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
   private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.125D);
   private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
-  private static final Map<Plant, BlockCreepingPlantTFC> MAP = new HashMap<>();
+  private static final Map<Plant, BlockPlantCreeping> MAP = new HashMap<>();
 
-  public BlockCreepingPlantTFC(Plant plant) {
+  public BlockPlantCreeping(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockCreepingPlantTFC get(Plant plant) {
-    return BlockCreepingPlantTFC.MAP.get(plant);
+  public static BlockPlantCreeping get(Plant plant) {
+    return BlockPlantCreeping.MAP.get(plant);
   }
 
   @Override

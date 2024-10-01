@@ -28,7 +28,7 @@ public class BlockWoodFenceLog extends BlockFence implements IWoodBlock {
     this.settings = Settings.of(Material.WOOD);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .sound(SoundType.WOOD)
       .hardness(2.0F)
       .resistance(15.0F)

@@ -1,7 +1,9 @@
 package su.terrafirmagreg.modules.wood.api.types.type;
 
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.data.lib.types.type.Type;
+import su.terrafirmagreg.data.lib.types.variant.Variant;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -9,6 +11,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -181,40 +184,69 @@ public class WoodType extends Type<WoodType> {
     }
   }
 
+  public ResourceLocation getTexture(Variant<?, WoodType> variant) {
+    return ModUtils.resource(String.format("textures/blocks/wood/%s/%s.png", variant, this));
+  }
+
+  public String getLocalizedName() {
+    return new TextComponentTranslation(String.format("wood.type.%s.name", this)).getFormattedText();
+  }
+
+  public String getRegistryKey(Variant<?, WoodType> variant) {
+    return String.format("wood/%s/%s", variant, this);
+  }
+
   public static class Builder {
 
     private final String name;
 
     private ITreeGenerator generator;
-    private float[] paramMap;
+    private ITreeGenerator bushGenerator;
+    private ResourceLocation cellKit;
     private String logicMap;
     private Supplier<Item> fruit;
+    private float[] paramMap;
     private int[] stages;
-    private int numStages;
-    private float minGrowthTime = 7;
-    private float minDensity = 0.1f;
-    private float maxDensity = 2f;
-    private int maxHeight = 6;
-    private int maxGrowthRadius = 1; // default values
-    private int maxDecayDistance = 4;
-    private boolean isConifer = false;
-    private ITreeGenerator bushGenerator = null;
-    private boolean thick = false;
-    private int soilLongevity = 8;
-    private int color = 0xff000000;
-    private float burnTemp = 0;
-    private int burnTicks = 0;
-    private boolean canMakeTannin = false;
-    private float minTemp, maxTemp;
-    //  private float maxTemp;
+    private float ripeningTime;
+    private float minTemp;
+    private float maxTemp;
     private float minRain;
     private float maxRain;
-    private float dominance = 0.001f * (maxTemp - minTemp) * (maxRain - minRain);
-    private ResourceLocation cellKit;
-    private float ripeningTime;
+    private float dominance;
+    private float minGrowthTime;
+    private float minDensity;
+    private float maxDensity;
+    private float burnTemp;
+    private int burnTicks;
+    private int numStages;
+    private int maxHeight;
+    private int maxGrowthRadius;
+    private int maxDecayDistance;
+    private int soilLongevity;
+    private int color;
+    private boolean isConifer;
+    private boolean thick;
+    private boolean canMakeTannin;
 
     public Builder(String name) {
       this.name = name;
+
+      this.bushGenerator = null;
+      this.dominance = 0.001f * (maxTemp - minTemp) * (maxRain - minRain);
+      this.minGrowthTime = 7;
+      this.minDensity = 0.1f;
+      this.maxDensity = 2f;
+      this.burnTemp = 0;
+      this.burnTicks = 0;
+      this.maxHeight = 6;
+      this.maxGrowthRadius = 1;
+      this.maxDecayDistance = 4;
+      this.soilLongevity = 8;
+      this.color = 0xff000000;
+      this.isConifer = false;
+      this.thick = false;
+      this.canMakeTannin = false;
+
     }
 
     public Builder color(int color) {

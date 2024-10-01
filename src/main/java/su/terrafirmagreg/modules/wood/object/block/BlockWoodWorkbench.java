@@ -1,11 +1,6 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.ToolClasses;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
-import su.terrafirmagreg.modules.wood.object.container.ContainerWoodWorkbench;
+import lombok.Getter;
 
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.SoundType;
@@ -26,7 +21,12 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
-import lombok.Getter;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
+import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
+import su.terrafirmagreg.modules.wood.object.container.ContainerWoodWorkbench;
 
 @Getter
 public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
@@ -42,7 +42,7 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
     this.settings = Settings.of(Material.WOOD);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)

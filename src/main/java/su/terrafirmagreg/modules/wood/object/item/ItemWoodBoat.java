@@ -41,7 +41,7 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
     this.variant = variant;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .weight(Weight.MEDIUM)
       .size(Size.LARGE)

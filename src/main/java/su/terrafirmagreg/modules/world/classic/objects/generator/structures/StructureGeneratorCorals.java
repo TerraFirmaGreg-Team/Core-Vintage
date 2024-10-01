@@ -205,12 +205,8 @@ public class StructureGeneratorCorals extends WorldGenerator {
 
           world.setBlockState(entry.getKey(), state, 3);
 
-          var tile = TileUtils.getTile(world, entry.getKey());
-          if (tile == null) {continue;}
-
-          if (tile instanceof TileEntityLockableLoot tileEntityLockableLoot) {
-            tileEntityLockableLoot.setLootTable(new ResourceLocation(data[1]), rand.nextLong());
-          }
+          var tile = TileUtils.getTile(world, entry.getKey(), TileEntityLockableLoot.class);
+          tile.ifPresent(tileEntityLockableLoot -> tileEntityLockableLoot.setLootTable(new ResourceLocation(data[1]), rand.nextLong()));
         } catch (Exception e) {
           e.printStackTrace();
         }

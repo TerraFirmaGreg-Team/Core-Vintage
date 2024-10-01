@@ -85,37 +85,36 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
         this.end = true;
       }
     } else {
-      var tile = TileUtils.getTile(world, nestPos, TileNestBox.class);
-      if (tile != null && theCreature instanceof IAnimal animal
-          && animal.getType() == IAnimal.Type.OVIPAROUS) {
-        if (!tile.hasBird()) {
-          tile.seatOnThis(theCreature);
-          this.currentTick = 0;
-        }
-        if (this.currentTick >= this.maxSittingTicks) {
-          List<ItemStack> eggs = animal.getProducts();
-          for (ItemStack egg : eggs) {
-            tile.insertEgg(egg);
+      TileUtils.getTile(world, nestPos, TileNestBox.class).ifPresent(tile -> {
+        if (theCreature instanceof IAnimal animal && animal.getType() == IAnimal.Type.OVIPAROUS) {
+          if (!tile.hasBird()) {
+            tile.seatOnThis(theCreature);
+            this.currentTick = 0;
           }
-          animal.setFertilized(false);
-          animal.setProductsCooldown();
-          this.end = true;
-        } else if (tile.getBird() != theCreature) {
-          //Used by another bird, give up on this one for now
-          failureDepressionMap.put(nestPos,
-                                   world.getTotalWorldTime() + ICalendar.TICKS_IN_HOUR * 4);
-          this.end = true;
+          if (this.currentTick >= this.maxSittingTicks) {
+            List<ItemStack> eggs = animal.getProducts();
+            for (ItemStack egg : eggs) {
+              tile.insertEgg(egg);
+            }
+            animal.setFertilized(false);
+            animal.setProductsCooldown();
+            this.end = true;
+          } else if (tile.getBird() != theCreature) {
+            //Used by another bird, give up on this one for now
+            failureDepressionMap.put(nestPos, world.getTotalWorldTime() + ICalendar.TICKS_IN_HOUR * 4);
+            this.end = true;
+          }
         }
-      }
+      });
+
     }
   }
 
   private boolean getNearbyNest() {
     int i = (int) this.theCreature.posY;
     double d0 = Double.MAX_VALUE;
-    for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(theCreature.getPosition()
-                                                                               .add(-16, 0, -16), theCreature.getPosition()
-                                                                                                             .add(16, 4, 16))) {
+    var allInBoxMutable = BlockPos.getAllInBoxMutable(theCreature.getPosition().add(-16, 0, -16), theCreature.getPosition().add(16, 4, 16));
+    for (BlockPos.MutableBlockPos pos : allInBoxMutable) {
       if (this.isNestBlock(this.world, pos) && this.world.isAirBlock(pos.up())) {
         double d1 = this.theCreature.getDistanceSq(pos);
 
@@ -129,9 +128,6 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
   }
 
   private boolean isNestBlock(World world, BlockPos pos) {
-    if (world == null || pos == null) {
-      return false;
-    }
     if (failureDepressionMap.containsKey(pos)) {
       long time = failureDepressionMap.get(pos);
       if (time > world.getTotalWorldTime()) {
@@ -140,8 +136,9 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
         failureDepressionMap.remove(pos);
       }
     }
-    var tile = TileUtils.getTile(world, pos, TileNestBox.class);
-    return tile != null && tile.hasFreeSlot() && (!tile.hasBird()
-                                                  || tile.getBird() == this.theCreature);
+    return TileUtils.getTile(world, pos, TileNestBox.class)
+                    .map(tile -> tile.hasFreeSlot() && (!tile.hasBird() || tile.getBird() == this.theCreature))
+                    .orElse(false);
+
   }
 }

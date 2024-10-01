@@ -51,7 +51,7 @@ public class BlockWoodSupport extends BlockWood {
     super(variant, type);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .hardness(2.0F)
       .nonFullCube()

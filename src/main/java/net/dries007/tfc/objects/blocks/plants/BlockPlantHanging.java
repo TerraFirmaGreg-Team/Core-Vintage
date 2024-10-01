@@ -23,19 +23,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrowable {
+public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
 
   private static final PropertyBool BOTTOM = PropertyBool.create("bottom");
-  private static final Map<Plant, BlockHangingPlantTFC> MAP = new HashMap();
+  private static final Map<Plant, BlockPlantHanging> MAP = new HashMap();
 
-  public BlockHangingPlantTFC(Plant plant) {
+  public BlockPlantHanging(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockHangingPlantTFC get(Plant plant) {
+  public static BlockPlantHanging get(Plant plant) {
     return MAP.get(plant);
   }
 

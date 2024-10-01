@@ -19,7 +19,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
 
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 
 public class CommandStripWorld extends BaseCommand {
 
@@ -60,7 +60,7 @@ public class CommandStripWorld extends BaseCommand {
               || current instanceof BlockStaticLiquid) {
             world.setBlockState(pos, fluidReplacement, 2);
           } else if (current instanceof IRockBlock || current instanceof ISoilBlock
-                     || current instanceof BlockPlantTFC) {
+                     || current instanceof BlockPlant) {
             world.setBlockState(pos, terrainReplacement, 2);
           }
         }

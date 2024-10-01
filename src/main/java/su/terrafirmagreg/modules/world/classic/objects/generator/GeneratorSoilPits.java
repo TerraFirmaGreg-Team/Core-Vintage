@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.util.climate.Climate;
 
 import java.util.Random;
@@ -92,7 +92,7 @@ public class GeneratorSoilPits implements IWorldGenerator {
 
           for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
             if (plant.getIsClayMarking()) {
-              BlockPlantTFC plantBlock = BlockPlantTFC.get(plant);
+              BlockPlant plantBlock = BlockPlant.get(plant);
               IBlockState state = plantBlock.getDefaultState();
               int plantAge = plant.getAgeForWorldgen(rng, Climate.getActualTemp(world, pos));
 
@@ -102,7 +102,7 @@ public class GeneratorSoilPits implements IWorldGenerator {
                                         world.getLightFor(EnumSkyBlock.SKY, pos)) &&
                   world.isAirBlock(pos) &&
                   plantBlock.canBlockStay(world, pos, state)) {
-                world.setBlockState(pos, state.withProperty(BlockPlantTFC.AGE, plantAge), 2);
+                world.setBlockState(pos, state.withProperty(BlockPlant.AGE, plantAge), 2);
               }
             }
           }

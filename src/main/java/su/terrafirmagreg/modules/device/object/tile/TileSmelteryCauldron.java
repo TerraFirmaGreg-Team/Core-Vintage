@@ -46,7 +46,7 @@ public class TileSmelteryCauldron extends BaseTileTickableInventory
 
   public static final int FLUID_CAPACITY = 4000;
   private final FluidTank tank = new FluidTankCallback(this, 0, FLUID_CAPACITY);
-  private float temp;
+  private float temp = 0;
   private int reload;
 
   public TileSmelteryCauldron() {
@@ -59,38 +59,34 @@ public class TileSmelteryCauldron extends BaseTileTickableInventory
     if (!world.isRemote) {
       if (++reload >= 10) {
         reload = 0;
-        var tile = TileUtils.getTile(world, pos.down(), TileSmelteryFirebox.class);
-        if (tile != null) {
+        TileUtils.getTile(world, pos.down(), TileSmelteryFirebox.class).ifPresent(tile -> {
           temp = tile.getTemperature();
-        } else {
-          temp = 0;
-        }
-        IBlockState state = world.getBlockState(pos);
-        if (temp > 0 && !state.getValue(LIT)) {
-          world.setBlockState(pos, state.withProperty(LIT, true));
-        } else if (temp <= 0 && state.getValue(LIT)) {
-          world.setBlockState(pos, state.withProperty(LIT, false));
-        }
-        List<ItemStack> input = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-          input.add(inventory.extractItem(i, 64, true));
-        }
-        // Do Smeltery Recipes
-        SmelteryRecipe recipe = SmelteryRecipe.get(input.toArray(new ItemStack[0]));
-        if (recipe != null) {
-          FluidStack output = recipe.getOutput();
-          if (recipe.getMeltTemp() <= temp && tank.fill(output, false) >= output.amount) {
-            recipe.consumeInputs(input);
-            for (int i = 0; i < 8; i++) {
-              inventory.setStackInSlot(i, input.get(i));
-            }
-            tank.fillInternal(output, true);
-            temp -= ConfigCore.MISC.HEAT.heatingModifier * 150;
-            if (tile != null) {
+          IBlockState state = world.getBlockState(pos);
+          if (temp > 0 && !state.getValue(LIT)) {
+            world.setBlockState(pos, state.withProperty(LIT, true));
+          } else if (temp <= 0 && state.getValue(LIT)) {
+            world.setBlockState(pos, state.withProperty(LIT, false));
+          }
+          List<ItemStack> input = new ArrayList<>();
+          for (int i = 0; i < 8; i++) {
+            input.add(inventory.extractItem(i, 64, true));
+          }
+          // Do Smeltery Recipes
+          SmelteryRecipe recipe = SmelteryRecipe.get(input.toArray(new ItemStack[0]));
+          if (recipe != null) {
+            FluidStack output = recipe.getOutput();
+            if (recipe.getMeltTemp() <= temp && tank.fill(output, false) >= output.amount) {
+              recipe.consumeInputs(input);
+              for (int i = 0; i < 8; i++) {
+                inventory.setStackInSlot(i, input.get(i));
+              }
+              tank.fillInternal(output, true);
+              temp -= (float) (ConfigCore.MISC.HEAT.heatingModifier * 150);
               tile.setTemperature(temp);
             }
           }
-        }
+        });
+
       }
     }
   }

@@ -74,12 +74,10 @@ public class BlockDryingMat extends Block implements IProviderModel {
 
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-    var tile = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
-    if (tile != null && !worldIn.isRemote) {
-      if (worldIn.isRainingAt(pos.up())) {
-        tile.resetCounter();
-      }
-    }
+    if (worldIn.isRemote) {return;}
+    TileUtils.getTile(worldIn, pos, TEDryingMat.class)
+             .filter(tile -> worldIn.isRainingAt(pos.up()))
+             .ifPresent(TEDryingMat::resetCounter);
   }
 
   @Override
@@ -93,10 +91,7 @@ public class BlockDryingMat extends Block implements IProviderModel {
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    TileUtils.getTile(worldIn, pos, TEDryingMat.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
   }
 
@@ -106,11 +101,10 @@ public class BlockDryingMat extends Block implements IProviderModel {
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-                                  EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    if (hand.equals(EnumHand.MAIN_HAND)) {
-      var tile = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
-      if (tile != null && !worldIn.isRemote) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    if (!hand.equals(EnumHand.MAIN_HAND)) {return false;}
+    TileUtils.getTile(worldIn, pos, TEDryingMat.class).ifPresent(tile -> {
+      if (!worldIn.isRemote) {
         if (playerIn.isSneaking()) {
           ItemStack stack = tile.getStack();
           if (stack.isEmpty()) {
@@ -128,20 +122,17 @@ public class BlockDryingMat extends Block implements IProviderModel {
           playerIn.openGui(CaffeineAddon.instance, GUIHandler.DRYINGMATGUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
       }
-      worldIn.notifyBlockUpdate(pos, state, state, 3);
-      return true;
-    }
-    return false;
+    });
+    worldIn.notifyBlockUpdate(pos, state, state, 3);
+    return true;
+
+
   }
 
   @Override
-  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
-                              ItemStack stack) {
+  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     // Set the initial counter value
-    TEDryingMat tile = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
+    TileUtils.getTile(worldIn, pos, TEDryingMat.class).ifPresent(TEDryingMat::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 

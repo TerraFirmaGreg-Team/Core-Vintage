@@ -7,6 +7,7 @@ import su.terrafirmagreg.data.ToolClasses;
 import su.terrafirmagreg.modules.device.client.render.TESRLatexExtractor;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
+import su.terrafirmagreg.modules.wood.object.block.BlockWoodLog;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -82,13 +83,11 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
 
   @Override
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-    var tile = TileUtils.getTile(worldIn, pos, TileLatexExtractor.class);
-    if (tile != null) {
-      return state.withProperty(BASE, tile.hasBase())
-                  .withProperty(POT, tile.hasPot())
-                  .withProperty(CUT, tile.cutState());
-    }
-    return super.getActualState(state, worldIn, pos);
+    return TileUtils.getTile(worldIn, pos, TileLatexExtractor.class)
+                    .map(tile -> state.withProperty(BASE, tile.hasBase())
+                                      .withProperty(POT, tile.hasPot())
+                                      .withProperty(CUT, tile.cutState()))
+                    .orElse(super.getActualState(state, worldIn, pos));
   }
 
   public EnumBlockRenderType getRenderType(IBlockState state) {
@@ -117,53 +116,45 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TileLatexExtractor.class);
-    if (tile != null) {
-      if (tile.cutState() > 0 && worldIn.getBlockState(
-                                          pos.offset(state.getValue(FACING).getOpposite()))
-                                        .getBlock() instanceof BlockLogTFC) {
+    TileUtils.getTile(worldIn, pos, TileLatexExtractor.class).ifPresent(tile -> {
+      if (tile.cutState() > 0 && worldIn.getBlockState(pos.offset(state.getValue(FACING).getOpposite())).getBlock() instanceof BlockWoodLog) {
         worldIn.destroyBlock(pos.offset(state.getValue(FACING).getOpposite()), true);
       }
       tile.onBreakBlock();
-    }
+    });
 
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-                                  EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    var tile = TileUtils.getTile(world, pos, TileLatexExtractor.class);
-    if (tile != null && hand == EnumHand.MAIN_HAND) {
-      ItemStack stack = player.getHeldItem(hand);
-      if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1) {
-        if (tile.makeCut()) {
-          world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_TRUNK_SCRATH,
-                          SoundCategory.BLOCKS, 1.0F, 1.0F);
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    return TileUtils.getTile(world, pos, TileLatexExtractor.class).map(tile -> {
+      if (hand == EnumHand.MAIN_HAND) {
+        ItemStack stack = player.getHeldItem(hand);
+        if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1) {
+          if (tile.makeCut()) {
+            world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_TRUNK_SCRATH, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            return true;
+          }
+        } else if (!tile.hasPot() && tile.isValidPot(stack) && tile.addPot(stack)) {
+          stack.shrink(1);
+          world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_BOWL_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+          return true;
+        } else if (!tile.hasBase() && tile.isValidBase(stack) && tile.addBase(stack)) {
+          stack.shrink(1);
+          world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_MOUNT_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+          return true;
+        } else if (stack.isEmpty() && tile.hasPot()) {
+          player.setHeldItem(hand, tile.removePot());
+          world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_BOWL_GRAB, SoundCategory.BLOCKS, 1.0F, 1.0F);
+          return true;
+        } else if (stack.isEmpty() && tile.hasBase()) {
+          player.setHeldItem(hand, tile.removeBase());
+          world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_GROOVE_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
           return true;
         }
-      } else if (!tile.hasPot() && tile.isValidPot(stack) && tile.addPot(stack)) {
-        stack.shrink(1);
-        world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_BOWL_FIT, SoundCategory.BLOCKS,
-                        1.0F, 1.0F);
-        return true;
-      } else if (!tile.hasBase() && tile.isValidBase(stack) && tile.addBase(stack)) {
-        stack.shrink(1);
-        world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_MOUNT_FIT, SoundCategory.BLOCKS,
-                        1.0F, 1.0F);
-        return true;
-      } else if (stack.isEmpty() && tile.hasPot()) {
-        player.setHeldItem(hand, tile.removePot());
-        world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_BOWL_GRAB, SoundCategory.BLOCKS,
-                        1.0F, 1.0F);
-        return true;
-      } else if (stack.isEmpty() && tile.hasBase()) {
-        player.setHeldItem(hand, tile.removeBase());
-        world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_GROOVE_FIT, SoundCategory.BLOCKS,
-                        1.0F, 1.0F);
-        return true;
       }
-    }
-    return super.onBlockActivated(world, pos, state, player, hand, facing, hitX, hitY, hitZ);
+      return false;
+    }).orElse(super.onBlockActivated(world, pos, state, player, hand, facing, hitX, hitY, hitZ));
   }
 
   @Override

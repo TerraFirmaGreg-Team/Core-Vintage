@@ -173,7 +173,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
         } else {
           TextComponentTranslation tooltip = getTooltip();
           if (tooltip != null) {
-            ModuleAnimal.getPacketService().sendTo(
+            ModuleAnimal.PACKET_SERVICE.sendTo(
               new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
               (EntityPlayerMP) player);
           }
@@ -185,7 +185,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
         if (!isReadyForAnimalProduct()) {
           TextComponentTranslation tooltip = getTooltip();
           if (tooltip != null) {
-            ModuleAnimal.getPacketService().sendTo(
+            ModuleAnimal.PACKET_SERVICE.sendTo(
               new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
               (EntityPlayerMP) player);
           }

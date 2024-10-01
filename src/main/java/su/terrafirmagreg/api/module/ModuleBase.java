@@ -36,14 +36,10 @@ public abstract class ModuleBase implements IModule {
    * Stores a network entity id supplier for each mod id.
    */
   private static final Map<String, NetworkEntityIdSupplier> NETWORK_ENTITY_ID_SUPPLIER_MAP = new HashMap<>();
-
-  @Getter
-  protected static IPacketService packetService;
-
   private final String name;
-  @NotNull
   private final String modID;
 
+  protected IPacketService packetService;
   protected RegistryManager registryManager;
   protected Registry registry;
   protected IPacketRegistry packetRegistry;
@@ -59,17 +55,18 @@ public abstract class ModuleBase implements IModule {
     this.name = this.getClass().getSimpleName();
   }
 
-  protected void enableAutoRegistry() {
+  protected RegistryManager enableAutoRegistry() {
 
-    enableAutoRegistry(null);
+    return enableAutoRegistry(null);
   }
 
-  protected void enableAutoRegistry(CreativeTabs tab) {
+  protected RegistryManager enableAutoRegistry(CreativeTabs tab) {
     this.registryManager = new RegistryManager(tab, modID);
-
     this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modID, s -> new NetworkEntityIdSupplier());
     this.registryManager.setNetworkEntityIdSupplier(this.networkEntityIdSupplier);
     this.registry = registryManager.getRegistry();
+
+    return registryManager;
   }
 
   /**
@@ -78,14 +75,14 @@ public abstract class ModuleBase implements IModule {
    * This will create a new network wrapper and packet registry for this module's mod id if they don't already exist. If they do already exist, the existing
    * network wrapper and packet registry will be used.
    */
-  protected void enableNetwork() {
+  protected IPacketService enableNetwork() {
 
     if (this.threadedNetworkWrapper == null) {
       this.threadedNetworkWrapper = NETWORK_WRAPPER_MAP.computeIfAbsent(this.modID, ThreadedNetworkWrapper::new);
       this.packetRegistry = PACKET_REGISTRY_MAP.computeIfAbsent(this.modID, s -> new PacketRegistry(this.threadedNetworkWrapper));
-      packetService = new PacketService(this.threadedNetworkWrapper);
+      this.packetService = new PacketService(this.threadedNetworkWrapper);
     }
-
+    return packetService;
   }
 
   /**

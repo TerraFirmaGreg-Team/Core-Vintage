@@ -182,8 +182,7 @@ public class BaseBiomeDecorator extends BiomeDecorator {
       }
     }
 
-    if (TerrainGen.decorate(world, rng, forgeChunkPos,
-                            DecorateBiomeEvent.Decorate.EventType.LILYPAD)) {
+    if (TerrainGen.decorate(world, rng, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.LILYPAD)) {
       for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
         if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
           plantGen.setGeneratedPlant(plant);

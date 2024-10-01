@@ -80,13 +80,12 @@ public class BlockPowderKeg extends BaseBlockContainer {
    * Used to update the keg seal state and the TE, in the correct order
    */
   public static void togglePowderKegSeal(World world, BlockPos pos) {
-    var tile = TileUtils.getTile(world, pos, TilePowderKeg.class);
-    if (tile != null) {
+    TileUtils.getTile(world, pos, TilePowderKeg.class).ifPresent(tile -> {
       IBlockState state = world.getBlockState(pos);
       boolean previousSealed = state.getValue(SEALED);
       world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
       tile.setSealed(!previousSealed);
-    }
+    });
   }
 
   @Override
@@ -96,10 +95,11 @@ public class BlockPowderKeg extends BaseBlockContainer {
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);
-    if (tile != null && !tile.isLit()) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    TileUtils.getTile(worldIn, pos, TilePowderKeg.class).ifPresent(tile -> {
+      if (!tile.isLit()) {
+        tile.onBreakBlock(worldIn, pos, state);
+      }
+    });
     super.breakBlock(worldIn, pos, state);
   }
 
@@ -127,17 +127,17 @@ public class BlockPowderKeg extends BaseBlockContainer {
       return;
     }
 
-    var tile = TileUtils.getTile(world, pos, TilePowderKeg.class);
-    if (tile != null) {
+    TileUtils.getTile(world, pos, TilePowderKeg.class).ifPresent(tile -> {
       int fuse = tile.getFuse();
       if (rng.nextInt(6) == 0 && fuse > 20) {
         world.playSound(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
                         SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F,
                         rng.nextFloat() * 1.3F + 0.3F / fuse, false);
       }
-      world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.625, pos.up()
-                                                                                 .getY() + 0.125, pos.getZ() + 0.375, 0.0D, 1.0D + 1.0D / fuse, 0.0D);
-    }
+      world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
+                          pos.getX() + 0.625, pos.up().getY() + 0.125, pos.getZ() + 0.375,
+                          0.0D, 1.0D + 1.0D / fuse, 0.0D);
+    });
   }
 
   /**
@@ -152,31 +152,29 @@ public class BlockPowderKeg extends BaseBlockContainer {
    * power is updated, cactus blocks popping off due to a neighboring solid block, etc.
    */
   @Override
-  public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn,
-                              BlockPos fromPos) {
+  public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
     if (world.isBlockPowered(pos) || world.getBlockState(fromPos).getMaterial() == Material.FIRE) {
       onPlayerDestroy(world, pos, state.withProperty(LIT, true));
     } else if (state.getValue(LIT) && pos.up().equals(fromPos) && world.getBlockState(fromPos)
                                                                        .getMaterial() == Material.WATER) {
-      var tile = TileUtils.getTile(world, pos, TilePowderKeg.class);
-      if (tile != null) {
+      TileUtils.getTile(world, pos, TilePowderKeg.class).ifPresent(tile -> {
         world.setBlockState(pos, state.withProperty(LIT, false));
         tile.setLit(false);
-      }
+      });
     } // do not care otherwise, as canStay may be violated by an explosion, which we want to trigger off of
   }
 
-  public void trigger(World worldIn, BlockPos pos, IBlockState state,
-                      @Nullable EntityLivingBase igniter) {
+  public void trigger(World worldIn, BlockPos pos, IBlockState state, @Nullable EntityLivingBase igniter) {
     if (!worldIn.isRemote) {
-      var tile = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);
-      if (tile != null && state.getValue(SEALED) && state.getValue(LIT)
-          && tile.getStrength() > 0) //lit state set before called
-      {
-        worldIn.setBlockState(pos, state);
-        tile.setLit(true);
-        tile.setIgniter(igniter);
-      }
+      TileUtils.getTile(worldIn, pos, TilePowderKeg.class).ifPresent(tile -> {
+        //lit state set before called
+        if (state.getValue(SEALED) && state.getValue(LIT) && tile.getStrength() > 0) {
+          worldIn.setBlockState(pos, state);
+          tile.setLit(true);
+          tile.setIgniter(igniter);
+        }
+      });
+
     }
   }
 
@@ -208,13 +206,10 @@ public class BlockPowderKeg extends BaseBlockContainer {
    * Called when the block is right clicked by a player.
    */
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                  float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       ItemStack heldItem = playerIn.getHeldItem(hand);
-      var tile = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);
-      if (tile != null) {
+      TileUtils.getTile(worldIn, pos, TilePowderKeg.class).ifPresent(tile -> {
         if (heldItem.isEmpty() && state.getValue(LIT)) {
           worldIn.setBlockState(pos, state.withProperty(LIT, false));
           tile.setLit(false);
@@ -233,10 +228,9 @@ public class BlockPowderKeg extends BaseBlockContainer {
               heldItem.shrink(1);
             }
           }
-        } else {
-          GuiHandler.openGui(worldIn, pos, playerIn);
         }
-      }
+        GuiHandler.openGui(worldIn, pos, playerIn);
+      });
     }
     return true;
   }
@@ -257,17 +251,15 @@ public class BlockPowderKeg extends BaseBlockContainer {
   }
 
   @Override
-  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-                              EntityLivingBase placer, ItemStack stack) {
+  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     // If the keg was sealed, then copy the contents from the item
     if (!worldIn.isRemote) {
       NBTTagCompound nbt = stack.getTagCompound();
       if (nbt != null) {
-        var tile = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);
-        if (tile != null) {
+        TileUtils.getTile(worldIn, pos, TilePowderKeg.class).ifPresent(tile -> {
           worldIn.setBlockState(pos, state.withProperty(SEALED, true));
           tile.readFromItemTag(nbt);
-        }
+        });
       }
     }
   }
@@ -289,8 +281,7 @@ public class BlockPowderKeg extends BaseBlockContainer {
 
   @SideOnly(Side.CLIENT)
   @Override
-  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
-                             ITooltipFlag flagIn) {
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     NBTTagCompound nbt = stack.getTagCompound();
     if (nbt != null) {
       ItemStackHandler stackHandler = new ItemStackHandler();
@@ -329,25 +320,19 @@ public class BlockPowderKeg extends BaseBlockContainer {
    */
   @Override
   public void onBlockExploded(World worldIn, BlockPos pos, Explosion explosionIn) {
-    var tile = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);
-    if (!worldIn.isRemote && tile != null
-        && tile.getStrength() > 0) // explode even if not sealed cause gunpowder
-    {
-      trigger(worldIn, pos,
-              worldIn.getBlockState(pos).withProperty(SEALED, true).withProperty(LIT, true), null);
-    } else {
-      super.onBlockExploded(worldIn, pos, explosionIn);
-    }
+    TileUtils.getTile(worldIn, pos, TilePowderKeg.class).ifPresent(tile -> {
+      // explode even if not sealed cause gunpowder
+      if (!worldIn.isRemote && tile.getStrength() > 0) {
+        trigger(worldIn, pos, worldIn.getBlockState(pos).withProperty(SEALED, true).withProperty(LIT, true), null);
+      }
+    });
+    super.onBlockExploded(worldIn, pos, explosionIn);
   }
 
   @Override
-  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-                                EntityPlayer player) {
-    var tile = TileUtils.getTile(world, pos, TilePowderKeg.class);
-    if (tile != null) {
-      return tile.getItemStack(state);
-    }
-    return new ItemStack(state.getBlock());
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    return TileUtils.getTile(world, pos, TilePowderKeg.class).map(tile -> tile.getItemStack(state)).orElse(new ItemStack(state.getBlock()));
+
   }
 
   private boolean canStay(IBlockAccess world, BlockPos pos) {

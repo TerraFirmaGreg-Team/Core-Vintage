@@ -66,7 +66,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     this.settings = Settings.of(Material.WOOD);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .randomTicks()
       .size(Size.VERY_LARGE)
       .weight(Weight.MEDIUM)

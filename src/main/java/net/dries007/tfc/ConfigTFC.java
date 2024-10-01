@@ -777,5 +777,5 @@ public final class ConfigTFC {
       public int placedItemFlatDistance = 32;
     }
   }
-  
+
 }

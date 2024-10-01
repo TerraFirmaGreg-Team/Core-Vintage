@@ -83,7 +83,7 @@ public class TileLogPile extends BaseTileTickableInventory implements IProviderC
 
   @Override
   public boolean canInteractWith(EntityPlayer player) {
-    return !burning && TileUtils.getTile(world, pos) == this;
+    return !burning && TileUtils.getTile(world, pos).filter(tile -> tile == this).isPresent();
   }
 
   @Override
@@ -240,10 +240,7 @@ public class TileLogPile extends BaseTileTickableInventory implements IProviderC
           continue;
         }
         world.setBlockState(pos.offset(side), state.withProperty(LIT, true));
-        var tile = TileUtils.getTile(world, pos.offset(side), TileLogPile.class);
-        if (tile != null) {
-          tile.light();
-        }
+        TileUtils.getTile(world, pos.offset(side), TileLogPile.class).ifPresent(TileLogPile::light);
       }
     }
   }

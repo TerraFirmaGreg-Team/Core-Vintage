@@ -66,32 +66,29 @@ public class BlockBushTrellis extends BlockTrellis {
 
   @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-    if (!world.isRemote) {
-      var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
+    if (world.isRemote) {return;}
+
+    TileUtils.getTile(world, pos, TEHangingPlanter.class).ifPresent(tile -> {
       boolean grown = state.getValue(GROWN);
-      if (tile != null) {
-        boolean climateValid = tile.isClimateValid();
-        if (!climateValid) {
-          tile.resetCounter();
-        } else if (tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * 30)) {
-          if (!grown) {
-            world.setBlockState(pos, state.withProperty(GROWN, true));
-          } else {
-            BlockPos upPos = pos.up();
-            Block upBlock = world.getBlockState(upPos).getBlock();
-            if (tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * 50) && upBlock instanceof BlockTrellis &&
-                !(upBlock instanceof BlockBushTrellis)) {
-              world.setBlockState(upPos, getDefaultState());
-              TEHangingPlanter teNew = TileUtils.getTile(world, upPos, TEHangingPlanter.class);
-              if (teNew != null) {
-                teNew.resetCounter();
-              }
-              tile.resetCounter();
-            }
+      boolean climateValid = tile.isClimateValid();
+      if (!climateValid) {
+        tile.resetCounter();
+      } else if (tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * 30)) {
+        if (!grown) {
+          world.setBlockState(pos, state.withProperty(GROWN, true));
+        } else {
+          BlockPos upPos = pos.up();
+          Block upBlock = world.getBlockState(upPos).getBlock();
+          if (tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * 50) && upBlock instanceof BlockTrellis &&
+              !(upBlock instanceof BlockBushTrellis)) {
+            world.setBlockState(upPos, getDefaultState());
+            TileUtils.getTile(world, upPos, TEHangingPlanter.class).ifPresent(TEHangingPlanter::resetCounter);
+            tile.resetCounter();
           }
         }
       }
-    }
+    });
+
   }
 
   @Override
@@ -105,18 +102,12 @@ public class BlockBushTrellis extends BlockTrellis {
       if (state.getValue(GROWN)) {
         ItemHandlerHelper.giveItemToPlayer(player, bush.getFoodDrop());
         world.setBlockState(pos, state.withProperty(GROWN, false));
-        var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
-        if (tile != null) {
-          tile.resetCounter();
-        }
+        TileUtils.getTile(world, pos, TEHangingPlanter.class).ifPresent(TEHangingPlanter::resetCounter);
         return true;
       } else if (player.isSneaking()) {
         ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(BlockBerryBush.get(bush)));
         world.setBlockState(pos, BlocksFL.TRELLIS.getDefaultState());
-        var tile = TileUtils.getTile(world, pos.down(), TEHangingPlanter.class);
-        if (tile != null) {
-          tile.resetCounter();
-        }
+        TileUtils.getTile(world, pos, TEHangingPlanter.class).ifPresent(TEHangingPlanter::resetCounter);
         return true;
       }
     }
@@ -125,10 +116,7 @@ public class BlockBushTrellis extends BlockTrellis {
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-    TEHangingPlanter tile = TileUtils.getTile(worldIn, pos, TEHangingPlanter.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
+    TileUtils.getTile(worldIn, pos, TEHangingPlanter.class).ifPresent(TEHangingPlanter::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 

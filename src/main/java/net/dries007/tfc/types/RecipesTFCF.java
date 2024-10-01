@@ -45,7 +45,7 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
@@ -127,7 +127,7 @@ public final class RecipesTFCF {
                        new FluidStack(FluidsTFCF.WASTE.get(), 150), new ItemStack(ItemsTFCF.CELLULOSE_FIBERS),
                        8 * ICalendar.TICKS_IN_HOUR).setRegistryName("cellulose_fibers_from_papyrus_crop"),
       new BarrelRecipe(IIngredient.of(FluidsTFCF.BASE_POTASH_LIQUOR.get(), 150),
-                       IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(DefaultPlants.YUCCA))),
+                       IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.YUCCA))),
                        new FluidStack(FluidsTFCF.WASTE.get(), 150), new ItemStack(ItemsTFCF.CELLULOSE_FIBERS),
                        8 * ICalendar.TICKS_IN_HOUR).setRegistryName("cellulose_fibers_from_yucca_crop"),
 
@@ -143,7 +143,7 @@ public final class RecipesTFCF {
       new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 200), IIngredient.of("cropHemp"), null,
                        new ItemStack(ItemsTFCF.HEMP_FIBER), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("hemp_fiber"),
       new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 300),
-                       IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(DefaultPlants.YUCCA))), null,
+                       IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.YUCCA))), null,
                        new ItemStack(ItemsTFCF.YUCCA_FIBER), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("yucca_fiber"),
 
       // Fluid Production from paste
@@ -795,9 +795,9 @@ public final class RecipesTFCF {
                 .setRegistryName("burned_turkey_tail"),
 
       // Mushrooms
-      new HeatRecipeSimple(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI))),
+      new HeatRecipeSimple(IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI))),
                            new ItemStack(ItemsTFCF.ROASTED_PORCINI), 200, 480).setRegistryName("roasted_porcini_specific"),
-      new HeatRecipeSimple(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.AMANITA))),
+      new HeatRecipeSimple(IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.AMANITA))),
                            new ItemStack(ItemsTFCF.ROASTED_AMANITA), 200, 480).setRegistryName("roasted_amanita_specific"),
       new HeatRecipeSimple(IIngredient.of("mushroomPorcini"), new ItemStack(ItemsTFCF.ROASTED_PORCINI), 200, 480).setRegistryName(
         "roasted_porcini"),
@@ -1293,9 +1293,9 @@ public final class RecipesTFCF {
           "roasted_sulphur_shelf_oven"),
         new OvenRecipe(IIngredient.of("epiphyteTurkeyTail"), new ItemStack(ItemsTFCF.ROASTED_TURKEY_TAIL), 2 * hour).setRegistryName(
           "roasted_turkey_tail_oven"),
-        new OvenRecipe(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI))),
+        new OvenRecipe(IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI))),
                        new ItemStack(ItemsTFCF.ROASTED_PORCINI), 2 * hour).setRegistryName("roasted_porcini_oven_specific"),
-        new OvenRecipe(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.AMANITA))),
+        new OvenRecipe(IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.AMANITA))),
                        new ItemStack(ItemsTFCF.ROASTED_AMANITA), 2 * hour).setRegistryName("roasted_amanita_oven_specific"),
         new OvenRecipe(IIngredient.of("mushroomPorcini"), new ItemStack(ItemsTFCF.ROASTED_PORCINI), 2 * hour).setRegistryName(
           "roasted_porcini_oven"),

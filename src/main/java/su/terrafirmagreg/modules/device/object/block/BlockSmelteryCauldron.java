@@ -85,37 +85,33 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProvi
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TileSmelteryCauldron.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    TileUtils.getTile(worldIn, pos, TileSmelteryCauldron.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-                                  EnumHand hand, EnumFacing side, float hitX,
-                                  float hitY, float hitZ) {
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     if (!player.isSneaking()) {
       if (!world.isRemote) {
         if (world.getBlockState(pos.down()).getBlock() instanceof BlockSmelteryFirebox) {
-          var tile = TileUtils.getTile(world, pos, TileSmelteryCauldron.class);
-          ItemStack held = player.getHeldItem(hand);
-          if (held.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
-            IFluidHandler fluidHandler = tile.getCapability(
-              CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
-            if (fluidHandler != null) {
-              if (FluidUtil.interactWithFluidHandler(player, hand, fluidHandler)) {
-                held = player.getHeldItem(hand); // Forge update item in hand
-                var cap = CapabilityHeat.get(held);
-                if (cap != null) {
-                  cap.setTemperature(tile.getTemp());
+          TileUtils.getTile(world, pos, TileSmelteryCauldron.class).ifPresent(tile -> {
+            ItemStack held = player.getHeldItem(hand);
+            if (held.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
+              IFluidHandler fluidHandler = tile.getCapability(
+                CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
+              if (fluidHandler != null) {
+                if (FluidUtil.interactWithFluidHandler(player, hand, fluidHandler)) {
+                  held = player.getHeldItem(hand); // Forge update item in hand
+                  var cap = CapabilityHeat.get(held);
+                  if (cap != null) {
+                    cap.setTemperature(tile.getTemp());
+                  }
                 }
               }
             }
-          } else {
             GuiHandler.openGui(world, pos, player);
-          }
+          });
+
         } else {
           player.sendStatusMessage(new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"), true);
         }

@@ -111,10 +111,7 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(world, pos, TileCharcoalForge.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
+    TileUtils.getTile(world, pos, TileCharcoalForge.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
     super.breakBlock(world, pos, state);
   }
 
@@ -125,10 +122,7 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
 
   @Override
   public void onAirIntake(World world, BlockPos pos, int airAmount) {
-    var tile = TileUtils.getTile(world, pos, TileCharcoalForge.class);
-    if (tile == null) {return;}
-
-    tile.onAirIntake(airAmount);
+    TileUtils.getTile(world, pos, TileCharcoalForge.class).ifPresent(tile -> tile.onAirIntake(airAmount));
   }
 
   @Override
@@ -148,12 +142,13 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
 
   @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-    var tile = TileUtils.getTile(world, pos, TileCharcoalForge.class);
-    if (tile == null) {return;}
-    // Have to check the above block, since minecraft think this block is "roof"
-    if (state.getValue(LIT) && world.isRainingAt(pos.up())) {
-      tile.onRainDrop();
-    }
+    TileUtils.getTile(world, pos, TileCharcoalForge.class).ifPresent(tile -> {
+      // Have to check the above block, since minecraft think this block is "roof"
+      if (state.getValue(LIT) && world.isRainingAt(pos.up())) {
+        tile.onRainDrop();
+      }
+    });
+
   }
 
   @Override

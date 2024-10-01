@@ -64,7 +64,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IPro
     this.settings = Settings.of(Material.GROUND);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .ignoresProperties(MOISTURE)
       .sound(SoundType.GROUND)
       .useNeighborBrightness()

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.biome.overworld;
 
-import su.terrafirmagreg.api.base.biome.BaseBiome;
-
 import net.minecraftforge.common.BiomeDictionary;
+
+import su.terrafirmagreg.api.base.biome.BaseBiome;
 
 public class BiomeFields extends BaseBiome {
 

@@ -12,8 +12,7 @@ import com.google.gson.JsonSerializer;
 
 import java.lang.reflect.Type;
 
-public final class ResourceLocationJson implements JsonDeserializer<ResourceLocation>,
-                                                   JsonSerializer<ResourceLocation> {
+public final class ResourceLocationJson implements JsonDeserializer<ResourceLocation>, JsonSerializer<ResourceLocation> {
 
   @Override
   public ResourceLocation deserialize(JsonElement json, Type typeOfT,

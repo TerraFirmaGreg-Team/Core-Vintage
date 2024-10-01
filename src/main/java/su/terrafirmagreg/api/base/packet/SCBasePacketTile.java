@@ -26,9 +26,11 @@ public abstract class SCBasePacketTile<REQ extends SCBasePacketTile> extends Bas
     NetHandlerPlayServer serverHandler = ctx.getServerHandler();
     EntityPlayerMP player = serverHandler.player;
 
-    TileEntity tile = TileUtils.getTile(player.getEntityWorld(), message.blockPos);
+    return TileUtils.getTile(player.getEntityWorld(), message.blockPos)
+                    .map(tile -> this.onMessage(message, ctx, tile))
+                    .orElse(null);
 
-    return this.onMessage(message, ctx, tile);
+
   }
 
   protected abstract IMessage onMessage(REQ message, MessageContext ctx, TileEntity tile);

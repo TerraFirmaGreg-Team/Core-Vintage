@@ -1,13 +1,12 @@
 package su.terrafirmagreg.modules.metal.api.types.variant.block;
 
-import su.terrafirmagreg.data.lib.Pair;
-import su.terrafirmagreg.data.lib.types.variant.Variant;
+import su.terrafirmagreg.data.lib.types.variant.block.VariantBlock;
+import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
-import su.terrafirmagreg.modules.metal.init.BlocksMetal;
 
-import net.minecraft.block.Block;
+import net.minecraft.util.text.TextComponentTranslation;
 
-import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import lombok.Getter;
 
@@ -17,52 +16,70 @@ import java.util.function.BiFunction;
 import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
 
 @Getter
-public class MetalBlockVariant extends Variant<MetalBlockVariant> {
+public class MetalBlockVariant extends VariantBlock<MetalBlockVariant, MetalType> {
 
   @Getter
-  private static final Set<MetalBlockVariant> variants = new ObjectLinkedOpenHashSet<>();
+  private static final Set<MetalBlockVariant> variants = new ObjectOpenHashSet<>();
 
-  private Specification specification;
-  private BiFunction<MetalBlockVariant, MetalType, ? extends Block> factory;
+  private final Specification specification;
 
-  public MetalBlockVariant(String name) {
-    super(name);
+  public MetalBlockVariant(Builder builder) {
+    super(builder.name);
+
+    this.specification = builder.specification;
 
     if (!variants.add(this)) {
-      throw new RuntimeException(String.format("MetalBlockVariant: [%s] already exists!", name));
+      throw new RuntimeException(String.format("Variant: [%s] already exists!", name));
     }
-  }
 
-  public static MetalBlockVariant builder(String name) {
-    return new MetalBlockVariant(name);
-  }
-
-  public Block get(MetalType type) {
-    var block = BlocksMetal.METAL_BLOCKS.get(Pair.of(this, type));
-    if (block != null) {
-      return block;
-    }
-    throw new RuntimeException(String.format("Block metal is null: %s, %s", this, type));
-  }
-
-  public MetalBlockVariant setFactory(
-    BiFunction<MetalBlockVariant, MetalType, ? extends Block> factory) {
-    this.factory = factory;
-    return this;
-  }
-
-  public MetalBlockVariant setFallingSpecification(Specification specification) {
-    this.specification = specification;
-    return this;
-  }
-
-  public MetalBlockVariant build() {
     MetalType.getTypes().forEach(type -> {
-      if (BlocksMetal.METAL_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
-        throw new RuntimeException(
-          String.format("Duplicate registry detected: %s, %s", this, type));
+      var block = builder.factory.apply(this, type);
+      if (map.put(type, block.getBlock()) != null) {
+        throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
       }
+      ModuleMetal.REGISTRY.block(block);
     });
-    return this;
+  }
+
+  public static Builder builder(String name) {
+    return new Builder(name);
+  }
+
+  public String getRegistryKey(MetalType type) {
+    return String.format("metal/%s/%s", this, type);
+  }
+
+  public String getCustomResource() {
+    return String.format("metal/%s", this);
+  }
+
+  public String getLocalizedName() {
+    return new TextComponentTranslation(String.format("metal.variant.%s.name", this)).getFormattedText();
+  }
+
+  public static class Builder {
+
+    private final String name;
+
+    private Specification specification;
+    private BiFunction<MetalBlockVariant, MetalType, IMetalBlock> factory;
+
+    public Builder(String name) {
+      this.name = name;
+    }
+
+    public Builder factory(BiFunction<MetalBlockVariant, MetalType, IMetalBlock> factory) {
+      this.factory = factory;
+      return this;
+    }
+
+    public Builder fallingSpecification(Specification specification) {
+      this.specification = specification;
+      return this;
+    }
+
+    public MetalBlockVariant build() {
+      return new MetalBlockVariant(this);
+    }
   }
 }

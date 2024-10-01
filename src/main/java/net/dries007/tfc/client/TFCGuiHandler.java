@@ -80,7 +80,7 @@ public class TFCGuiHandler implements IGuiHandler {
                                                      OreDictionaryHelper.doesStackMatchOre(stack, "leather") ? stack : player.getHeldItemOffhand());
       case KNAPPING_FIRE_CLAY -> new ContainerKnapping(KnappingTypes.FIRE_CLAY, player.inventory,
                                                        OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") ? stack : player.getHeldItemOffhand());
-      case LARGE_VESSEL -> new ContainerLargeVessel(player.inventory, TileUtils.getTile(world, pos, TELargeVessel.class));
+      case LARGE_VESSEL -> new ContainerLargeVessel(player.inventory, TileUtils.getTile(world, pos, TELargeVessel.class).get());
       case CALENDAR, SKILLS, NUTRITION -> new ContainerSimple(player.inventory);
       case CRAFTING -> new ContainerInventoryCrafting(player.inventory, player.world);
       case QUIVER -> new ContainerQuiver(player.inventory, stack.getItem() instanceof ItemQuiver ? stack : player.getHeldItemOffhand());
@@ -103,7 +103,7 @@ public class TFCGuiHandler implements IGuiHandler {
       case KNAPPING_CLAY -> new GuiKnapping(container, player, KnappingTypes.CLAY, CLAY_TEXTURE);
       case KNAPPING_LEATHER -> new GuiKnapping(container, player, KnappingTypes.LEATHER, LEATHER_TEXTURE);
       case KNAPPING_FIRE_CLAY -> new GuiKnapping(container, player, KnappingTypes.FIRE_CLAY, FIRE_CLAY_TEXTURE);
-      case LARGE_VESSEL -> new GuiLargeVessel(container, player.inventory, TileUtils.getTile(world, pos, TELargeVessel.class), world
+      case LARGE_VESSEL -> new GuiLargeVessel(container, player.inventory, TileUtils.getTile(world, pos, TELargeVessel.class).get(), world
         .getBlockState(new BlockPos(x, y, z))
         .getBlock()
         .getTranslationKey());

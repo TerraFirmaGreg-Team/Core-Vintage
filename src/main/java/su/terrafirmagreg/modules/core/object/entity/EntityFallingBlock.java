@@ -28,8 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class EntityFallingBlock
-  extends net.minecraft.entity.item.EntityFallingBlock implements IEntityAdditionalSpawnData {
+public class EntityFallingBlock extends net.minecraft.entity.item.EntityFallingBlock implements IEntityAdditionalSpawnData {
 
   private FallingBlockManager.Specification currentSpecification; // Server-side only variable
 
@@ -44,17 +43,16 @@ public class EntityFallingBlock
     this(world, pos.getX(), pos.getY(), pos.getZ(), fallingBlockState);
   }
 
-  public EntityFallingBlock(World world, double x, double y, double z,
-                            IBlockState fallingBlockState) {
+  public EntityFallingBlock(World world, double x, double y, double z, IBlockState fallingBlockState) {
     super(world);
     this.currentSpecification = FallingBlockManager.getSpecification(fallingBlockState);
     this.fallTile = fallingBlockState;
     BlockPos pos = new BlockPos(this);
     if (currentSpecification.getResultingState() == null) {
-      var tile = TileUtils.getTile(world, pos);
-      if (tile != null) {
-        this.tileEntityData = tile.serializeNBT(); // Original EntityFallingBlock doesn't even save tile entity data... what...
-      }
+      TileUtils.getTile(world, pos).ifPresent(tile -> {
+        // Original EntityFallingBlock doesn't even save tile entity data... what...
+        this.tileEntityData = tile.serializeNBT();
+      });
     }
     this.preventEntitySpawning = true;
     this.setSize(0.98F, 0.98F);
@@ -156,8 +154,7 @@ public class EntityFallingBlock
             world.setBlockState(pos, currentSpecification.getResultingState(fallTile), 3);
             // Only persist TE data when resulting state is the same as the beginning state
             if (tileEntityData != null && block.hasTileEntity(fallTile)) {
-              var tile = TileUtils.getTile(world, pos);
-              if (tile != null) {
+              TileUtils.getTile(world, pos).ifPresent(tile -> {
                 NBTTagCompound currentTeData = tile.writeToNBT(new NBTTagCompound());
                 for (String s : tileEntityData.getKeySet()) {
                   if (!"x".equals(s) && !"y".equals(s) && !"z".equals(s)) {
@@ -166,7 +163,7 @@ public class EntityFallingBlock
                 }
                 tile.readFromNBT(currentTeData);
                 tile.markDirty();
-              }
+              });
             }
           } else if (world.getGameRules().getBoolean("doEntityDrops")) {
             dropItems(pos);

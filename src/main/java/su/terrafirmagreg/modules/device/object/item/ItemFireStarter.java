@@ -150,10 +150,7 @@ public class ItemFireStarter extends BaseItem {
         // Log pile
         if (itemRand.nextFloat() < chance) {
           world.setBlockState(pos.down(), state.withProperty(LIT, true));
-          var tile = TileUtils.getTile(world, pos.down(), TileLogPile.class);
-          if (tile != null) {
-            tile.light();
-          }
+          TileUtils.getTile(world, pos.down(), TileLogPile.class).ifPresent(TileLogPile::light);
           if (Blocks.FIRE.canPlaceBlockAt(world, pos)) {
             world.setBlockState(pos, Blocks.FIRE.getDefaultState());
           }
@@ -161,10 +158,8 @@ public class ItemFireStarter extends BaseItem {
       } else if (state.getBlock() == BlocksDevice.PIT_KILN) {
         // Pit Kiln
         if (itemRand.nextFloat() < chance) {
-          var tile = TileUtils.getTile(world, pos.down(), TilePitKiln.class);
-          if (tile != null) {
-            tile.tryLight();
-          }
+          TileUtils.getTile(world, pos.down(), TilePitKiln.class).ifPresent(TilePitKiln::tryLight);
+
         }
       } else {
         // Try to make a fire pit
@@ -193,12 +188,9 @@ public class ItemFireStarter extends BaseItem {
         if (sticks >= 3 && log != null) {
           final float kindlingModifier = Math.min(0.1f * (float) kindling, 0.5f);
           if (itemRand.nextFloat() < chance + kindlingModifier) {
-            world.setBlockState(pos,
-                                BlocksDevice.FIRE_PIT.getDefaultState().withProperty(LIT, true));
-            var tile = TileUtils.getTile(world, pos, TileFirePit.class);
-            if (tile != null) {
-              tile.onCreate(log.getItem());
-            }
+            world.setBlockState(pos, BlocksDevice.FIRE_PIT.getDefaultState().withProperty(LIT, true));
+            EntityItem finalLog = log;
+            TileUtils.getTile(world, pos, TileFirePit.class).ifPresent(tile -> tile.onCreate(finalLog.getItem()));
             stuffToUse.forEach(Entity::setDead);
             log.getItem().shrink(1);
             if (log.getItem().getCount() == 0) {

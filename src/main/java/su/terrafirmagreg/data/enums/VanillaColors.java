@@ -1,4 +1,4 @@
-package su.terrafirmagreg.data;
+package su.terrafirmagreg.data.enums;
 
 import su.terrafirmagreg.data.lib.MCColor;
 

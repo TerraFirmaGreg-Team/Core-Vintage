@@ -37,7 +37,7 @@ public class BlockRockStairs extends BaseBlockStairs implements IRockBlock {
     this.type = type;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .hardness(variant.getHardness(type))
       .sound(SoundType.STONE)
       .renderLayer(BlockRenderLayer.CUTOUT)

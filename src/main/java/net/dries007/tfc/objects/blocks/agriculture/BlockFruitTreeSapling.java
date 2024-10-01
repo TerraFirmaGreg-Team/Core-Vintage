@@ -66,26 +66,22 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     super.updateTick(world, pos, state, random);
 
-    if (!world.isRemote) {
-      var tile = TileUtils.getTile(world, pos, TETickCounter.class);
-      if (tile != null) {
-        float temp = Climate.getActualTemp(world, pos);
-        float rainfall = ProviderChunkData.getRainfall(world, pos);
-        long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-        if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier) && tree.isValidForGrowth(temp, rainfall)) {
-          tile.resetCounter();
-          grow(world, random, pos, state);
-        }
+    if (world.isRemote) {return;}
+    TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
+      float temp = Climate.getActualTemp(world, pos);
+      float rainfall = ProviderChunkData.getRainfall(world, pos);
+      long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+      if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier) && tree.isValidForGrowth(temp, rainfall)) {
+        tile.resetCounter();
+        grow(world, random, pos, state);
       }
-    }
+    });
+
   }
 
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
+    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
   }
 
   @Override

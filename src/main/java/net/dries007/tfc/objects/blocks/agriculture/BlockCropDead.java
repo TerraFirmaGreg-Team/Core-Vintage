@@ -24,8 +24,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 
 import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantEmergentTallWater;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantWater;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.agriculture.Crop;
@@ -146,7 +146,7 @@ public class BlockCropDead extends BlockBush { //implements IGrowingPlant
       return super.canSustainBush(state);
     } else {
       return BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenClassic.FRESH_WATER ||
-             state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
+             state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater);
     }
   }
 
@@ -157,7 +157,7 @@ public class BlockCropDead extends BlockBush { //implements IGrowingPlant
       return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
     } else {
       soil = worldIn.getBlockState(pos.down());
-      if (!(soil.getBlock() instanceof BlockWaterPlantTFCF) && !(soil.getBlock() instanceof BlockWaterPlantTFC)) {
+      if (!(soil.getBlock() instanceof BlockWaterPlantTFCF) && !(soil.getBlock() instanceof BlockPlantWater)) {
         if (state.getBlock() != this) {
           return this.canSustainBush(soil);
         } else {
@@ -167,7 +167,7 @@ public class BlockCropDead extends BlockBush { //implements IGrowingPlant
                      .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) ||
                  material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 &&
                  stateDown == ChunkGenClassic.FRESH_WATER || material == Material.ICE ||
-                 material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
+                 material == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater);
         }
       } else {
         return false;

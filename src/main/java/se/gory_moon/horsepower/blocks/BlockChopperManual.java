@@ -75,9 +75,7 @@ public class BlockChopperManual extends BaseBlock implements IProbeInfoAccessor,
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
     var tile = TileUtils.getTile(worldIn, pos, TileChopperManual.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    tile.ifPresent(tileChopperManual -> tileChopperManual.onBreakBlock(worldIn, pos, state));
     worldIn.updateComparatorOutputLevel(pos, this);
     super.breakBlock(worldIn, pos, state);
   }
@@ -87,34 +85,33 @@ public class BlockChopperManual extends BaseBlock implements IProbeInfoAccessor,
     if (playerIn instanceof FakePlayer) {return true;}
 
     ItemStack stack = playerIn.getHeldItem(hand);
-    var tile = TileUtils.getTile(worldIn, pos, TileHPBase.class);
-    if (tile == null) {
-      return false;
-    }
+    return TileUtils.getTile(worldIn, pos, TileChopperManual.class).map(tile -> {
+      if (!stack.isEmpty() && tile.isItemValidForSlot(0, stack)) {
+        ItemStack itemStack = tile.getStackInSlot(0);
+        boolean flag = false;
 
-    if (!stack.isEmpty() && tile.isItemValidForSlot(0, stack)) {
-      ItemStack itemStack = tile.getStackInSlot(0);
-      boolean flag = false;
+        if (itemStack.isEmpty()) {
+          tile.setInventorySlotContents(0, stack.copy());
+          stack.setCount(stack.getCount() - tile.getInventoryStackLimit(stack));
+          flag = true;
+        } else if (TileHPBase.canCombine(itemStack, stack)) {
+          int i = Math.min(tile.getInventoryStackLimit(stack), stack.getMaxStackSize()) - itemStack.getCount();
+          int j = Math.min(stack.getCount(), i);
+          stack.shrink(j);
+          itemStack.grow(j);
+          flag = j > 0;
+        }
 
-      if (itemStack.isEmpty()) {
-        tile.setInventorySlotContents(0, stack.copy());
-        stack.setCount(stack.getCount() - tile.getInventoryStackLimit(stack));
-        flag = true;
-      } else if (TileHPBase.canCombine(itemStack, stack)) {
-        int i = Math.min(tile.getInventoryStackLimit(stack), stack.getMaxStackSize()) - itemStack.getCount();
-        int j = Math.min(stack.getCount(), i);
-        stack.shrink(j);
-        itemStack.grow(j);
-        flag = j > 0;
+        if (flag) {
+          return true;
+        }
       }
 
-      if (flag) {
-        return true;
-      }
-    }
+      tile.markDirty();
+      return true;
+    }).orElse(false);
 
-    tile.markDirty();
-    return true;
+
   }
 
   @Override
@@ -122,11 +119,7 @@ public class BlockChopperManual extends BaseBlock implements IProbeInfoAccessor,
     super.onBlockHarvested(worldIn, pos, state, player);
 
     if (!player.isCreative() && !worldIn.isRemote) {
-      var tile = TileUtils.getTile(worldIn, pos, TileHPBase.class);
-      if (tile == null) {return;}
-
-      InventoryHelper.dropInventoryItems(worldIn, pos, tile.getInventory());
-
+      TileUtils.getTile(worldIn, pos, TileChopperManual.class).ifPresent(tile -> InventoryHelper.dropInventoryItems(worldIn, pos, tile.getInventory()));
     }
   }
 
@@ -137,9 +130,8 @@ public class BlockChopperManual extends BaseBlock implements IProbeInfoAccessor,
     this.onPlayerDestroy(world, pos, state);
     onBlockHarvested(world, pos, state, player);
     if (willHarvest) {
-      this.harvestBlock(world, player, pos, state, TileUtils.getTile(world, pos), player.getHeldItemMainhand());
+      TileUtils.getTile(world, pos).ifPresent(tile -> this.harvestBlock(world, player, pos, state, tile, player.getHeldItemMainhand()));
     }
-
     world.setBlockToAir(pos);
     // return false to prevent the above called functions to be called again
     return false;
@@ -167,17 +159,15 @@ public class BlockChopperManual extends BaseBlock implements IProbeInfoAccessor,
 
   @Override
   public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World world, BlockPos pos) {
-    var tile = TileUtils.getTile(world, pos, TileChopperManual.class);
-    if (tile != null) {
+    return TileUtils.getTile(world, pos, TileChopperManual.class).map(tile -> {
       ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
       if (isValidChoppingTool(heldItem, player)) {
         if (tile.canWork()) {
-          return -1;
+          return -1f;
         }
       }
-    }
-
-    return super.getPlayerRelativeBlockHardness(state, player, world, pos);
+      return null;
+    }).orElseGet(() -> super.getPlayerRelativeBlockHardness(state, player, world, pos));
   }
 
   @Override
@@ -185,8 +175,7 @@ public class BlockChopperManual extends BaseBlock implements IProbeInfoAccessor,
     if (player instanceof FakePlayer || player == null) {
       return;
     }
-    var tile = TileUtils.getTile(world, pos, TileChopperManual.class);
-    if (tile != null) {
+    TileUtils.getTile(world, pos, TileChopperManual.class).ifPresent(tile -> {
       ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
       if (isValidChoppingTool(held, player)) {
         if (tile.chop(player, held)) {
@@ -196,7 +185,7 @@ public class BlockChopperManual extends BaseBlock implements IProbeInfoAccessor,
           }
         }
       }
-    }
+    });
   }
 
 
@@ -211,11 +200,9 @@ public class BlockChopperManual extends BaseBlock implements IProbeInfoAccessor,
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
 
-    var tile = TileUtils.getTile(world, data.getPos(), TileChopperManual.class);
-    if (tile != null) {
+    TileUtils.getTile(world, data.getPos(), TileChopperManual.class).ifPresent(tile -> {
       probeInfo.progress((long) ((((double) tile.getField(1)) / ((double) tile.getField(0))) * 100L), 100L,
-                         new ProgressStyle().prefix(Localization.TOP.CHOPPING_PROGRESS.translate() + " ")
-                                            .suffix("%"));
-    }
+                         new ProgressStyle().prefix(Localization.TOP.CHOPPING_PROGRESS.translate() + " ").suffix("%"));
+    });
   }
 }

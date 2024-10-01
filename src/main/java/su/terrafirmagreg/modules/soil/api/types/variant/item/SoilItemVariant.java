@@ -1,71 +1,77 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.item;
 
-import su.terrafirmagreg.api.registry.RegistryManager;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.data.lib.types.variant.Variant;
+import su.terrafirmagreg.data.lib.types.variant.item.VariantItem;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
+import su.terrafirmagreg.modules.soil.ModuleSoil;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 
-import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import lombok.Getter;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
 
 @Getter
-public class SoilItemVariant extends Variant<SoilItemVariant> {
+public class SoilItemVariant extends VariantItem<SoilItemVariant, SoilType> {
 
   @Getter
   private static final Set<SoilItemVariant> variants = new ObjectOpenHashSet<>();
 
-  private final Map<SoilType, Item> map = new Object2ObjectOpenHashMap<>();
-  private BiFunction<SoilItemVariant, SoilType, ? extends Item> factory;
-
-  private SoilItemVariant(String name) {
-    super(name);
+  private SoilItemVariant(Builder builder) {
+    super(builder.name);
 
     if (!variants.add(this)) {
-      throw new RuntimeException(String.format("SoilItemVariant: [%s] already exists!", name));
+      throw new RuntimeException(String.format("Variant: [%s] already exists!", name));
     }
-  }
 
-  public static SoilItemVariant builder(String name) {
-    return new SoilItemVariant(name);
-  }
-
-  public Item get(SoilType type) {
-    var item = map.get(type);
-    if (item != null) {
-      return item;
-    }
-    throw new RuntimeException(String.format("Item soil is null: %s, %s", this, type));
-  }
-
-  public SoilItemVariant factory(BiFunction<SoilItemVariant, SoilType, ? extends Item> factory) {
-    this.factory = factory;
-    return this;
-  }
-
-  public SoilItemVariant build(RegistryManager registry) {
     SoilType.getTypes().forEach(type -> {
-      if (map.put(type, factory.apply(this, type)) != null) {
+      var item = builder.factory.apply(this, type);
+      if (map.put(type, item.getItem()) != null) {
         throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
       }
+      ModuleSoil.REGISTRY.item(item);
     });
-    registry.items(map.values());
-    return this;
   }
 
-  public String getRegistryKey(SoilType type) {
-    return String.format("soil/%s/%s", this.getName(), type);
+  public static Builder builder(String name) {
+    return new Builder(name);
+  }
+
+  public ResourceLocation getTexture(Variant<?, RockType> variant) {
+    return ModUtils.resource(String.format("textures/blocks/soil/%s/%s.png", variant, this));
   }
 
   public String getLocalizedName() {
-    return new TextComponentTranslation(
-      String.format("soil.variant.%s.name", this)).getFormattedText();
+    return new TextComponentTranslation(String.format("soil.type.%s.name", this)).getFormattedText();
+  }
+
+  public String getRegistryKey(Variant<?, RockType> variant) {
+    return String.format("soil/%s/%s", variant, this);
+  }
+
+  public static class Builder {
+
+    private final String name;
+    private BiFunction<SoilItemVariant, SoilType, ISoilItem> factory;
+
+    public Builder(String name) {
+      this.name = name;
+    }
+
+    public Builder factory(BiFunction<SoilItemVariant, SoilType, ISoilItem> factory) {
+      this.factory = factory;
+      return this;
+    }
+
+
+    public SoilItemVariant build() {
+      return new SoilItemVariant(this);
+    }
   }
 }

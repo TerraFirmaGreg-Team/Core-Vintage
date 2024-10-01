@@ -303,11 +303,11 @@ public class TileRockAnvil extends BaseTileInventory
       ItemStack fluxStack = inventory.getStackInSlot(SLOT_FLUX);
       if (fluxStack.isEmpty()) {
         // No flux
-        ModuleMetal.getPacketService()
-                   .sendTo(
-                     SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
-                                                            ModUtils.localize("tooltip", "metal.anvil_no_flux")),
-                     (EntityPlayerMP) player);
+        ModuleMetal.PACKET_SERVICE
+          .sendTo(
+            SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
+                                                   ModUtils.localize("tooltip", "metal.anvil_no_flux")),
+            (EntityPlayerMP) player);
         return false;
       }
 
@@ -316,13 +316,13 @@ public class TileRockAnvil extends BaseTileInventory
       IForgeable cap2 = input2.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
       if (cap1 == null || cap2 == null || !cap1.isWeldable() || !cap2.isWeldable()) {
         if (cap1 instanceof ICapabilityHeat && cap2 instanceof ICapabilityHeat) {
-          ModuleMetal.getPacketService()
-                     .sendTo(SCPacketSimpleMessage.translateMessage(
-                               SCPacketSimpleMessage.MessageCategory.ANVIL,
-                               ModUtils.localize("tooltip", "metal.anvil_too_cold")),
-                             (EntityPlayerMP) player);
+          ModuleMetal.PACKET_SERVICE
+            .sendTo(SCPacketSimpleMessage.translateMessage(
+                      SCPacketSimpleMessage.MessageCategory.ANVIL,
+                      ModUtils.localize("tooltip", "metal.anvil_too_cold")),
+                    (EntityPlayerMP) player);
         } else {
-          ModuleMetal.getPacketService().sendTo(
+          ModuleMetal.PACKET_SERVICE.sendTo(
             SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
                                                    ModUtils.localize("tooltip", "metal.anvil_not_weldable")),
             (EntityPlayerMP) player);
@@ -353,7 +353,7 @@ public class TileRockAnvil extends BaseTileInventory
     }
 
     // For when there is both inputs but no recipe that matches
-    ModuleMetal.getPacketService().sendTo(
+    ModuleMetal.PACKET_SERVICE.sendTo(
       SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
                                              ModUtils.localize("tooltip", "anvil_not_weldable")), (EntityPlayerMP) player);
     return false;

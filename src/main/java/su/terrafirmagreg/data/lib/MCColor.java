@@ -161,7 +161,7 @@ public class MCColor extends Color {
    */
   public MCColor(IBlockAccess world, BlockPos pos) {
 
-    this(TileUtils.getTile(world, pos));
+    this(TileUtils.getTile(world, pos).get());
   }
 
   /**
@@ -246,7 +246,7 @@ public class MCColor extends Color {
    */
   public static boolean isAcceptable(@NotNull IBlockAccess world, @NotNull BlockPos pos) {
 
-    return isAcceptable(TileUtils.getTile(world, pos));
+    return isAcceptable(TileUtils.getTile(world, pos).get());
   }
 
   /**

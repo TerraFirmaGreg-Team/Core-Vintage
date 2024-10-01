@@ -87,54 +87,48 @@ public class BlockLeafMat extends Block implements ICapabilitySize {
 
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-    if (worldIn.isRainingAt(pos.up())) {
-      var tile = TileUtils.getTile(worldIn, pos, TELeafMat.class);
-      if (tile != null) {
-        tile.rain();
-      }
-    }
+    if (!worldIn.isRainingAt(pos.up())) {return;}
+    TileUtils.getTile(worldIn, pos, TELeafMat.class).ifPresent(TELeafMat::rain);
+
   }
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(world, pos, TELeafMat.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
+    TileUtils.getTile(world, pos, TELeafMat.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
     super.breakBlock(world, pos, state);
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                  float hitY, float hitZ) {
-    if (!world.isRemote) {
-      ItemStack held = player.getHeldItem(hand);
-      if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
-        return false;
-      }
-      var tile = TileUtils.getTile(world, pos, TELeafMat.class);
-      if (tile != null) {
-        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (inventory != null) {
-          ItemStack tryStack = new ItemStack(held.getItem(), 1);
-          if (DryingRecipe.get(tryStack) != null && inventory.getStackInSlot(0).isEmpty()) {
-            ItemStack leftover = inventory.insertItem(0, held.splitStack(1), false);
-            ItemHandlerHelper.giveItemToPlayer(player, leftover);
-            tile.start();
-            tile.markForSync();
-            return true;
-          }
-          if (held.isEmpty() && player.isSneaking()) {
-            ItemStack takeStack = inventory.extractItem(0, 1, false);
-            StackUtils.spawnItemStack(world, pos, takeStack);
-            tile.deleteSlot();
-            tile.clear();
-            tile.markForSync();
-          }
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    if (world.isRemote) {return true;}
+    ItemStack held = player.getHeldItem(hand);
+    if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+      return false;
+    }
+    TileUtils.getTile(world, pos, TELeafMat.class).map(tile -> {
+      IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+      if (inventory != null) {
+        ItemStack tryStack = new ItemStack(held.getItem(), 1);
+        if (DryingRecipe.get(tryStack) != null && inventory.getStackInSlot(0).isEmpty()) {
+          ItemStack leftover = inventory.insertItem(0, held.splitStack(1), false);
+          ItemHandlerHelper.giveItemToPlayer(player, leftover);
+          tile.start();
+          tile.markForSync();
+          return true;
+        }
+        if (held.isEmpty() && player.isSneaking()) {
+          ItemStack takeStack = inventory.extractItem(0, 1, false);
+          StackUtils.spawnItemStack(world, pos, takeStack);
+          tile.deleteSlot();
+          tile.clear();
+          tile.markForSync();
         }
       }
-    }
+      return true;
+    });
     return true;
+
+
   }
 
   @Override

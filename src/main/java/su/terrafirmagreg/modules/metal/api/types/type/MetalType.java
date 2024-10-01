@@ -1,11 +1,16 @@
 package su.terrafirmagreg.modules.metal.api.types.type;
 
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.data.lib.types.type.Type;
+import su.terrafirmagreg.data.lib.types.variant.Variant;
+
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
+
 import gregtech.api.unification.material.Material;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 
 import lombok.Getter;
-
-import su.terrafirmagreg.data.lib.types.type.Type;
 
 import java.util.Set;
 
@@ -15,7 +20,6 @@ public class MetalType extends Type<MetalType> {
   @Getter
   private static final Set<MetalType> types = new ObjectLinkedOpenHashSet<>();
 
-  private final String name;
   private final Material material;
   private final int tier;
   private final float specificHeat;
@@ -25,7 +29,6 @@ public class MetalType extends Type<MetalType> {
   public MetalType(Builder builder) {
     super(builder.name);
 
-    this.name = builder.name;
     this.material = builder.material;
     this.tier = builder.tier;
     this.specificHeat = builder.specificHeat;
@@ -33,13 +36,26 @@ public class MetalType extends Type<MetalType> {
     this.color = builder.color;
 
     if (!types.add(this)) {
-      throw new RuntimeException(String.format("MetalType: [%s] already exists!", name));
+      throw new RuntimeException(String.format("Type: [%s] already exists!", name));
     }
+  }
+
+  public ResourceLocation getTexture(Variant<?, MetalType> variant) {
+    return ModUtils.resource(String.format("textures/blocks/metal/%s/%s.png", variant, this));
+  }
+
+  public String getLocalizedName() {
+    return new TextComponentTranslation(String.format("metal.type.%s.name", this)).getFormattedText();
+  }
+
+  public String getRegistryKey(Variant<?, MetalType> variant) {
+    return String.format("metal/%s/%s", variant, this);
   }
 
   public static class Builder {
 
     private final String name;
+
     private Material material;
     private float meltTemp;
     private float specificHeat;
@@ -48,7 +64,6 @@ public class MetalType extends Type<MetalType> {
 
     public Builder(String name) {
       this.name = name;
-
     }
 
     public Builder material(Material material) {

@@ -217,7 +217,7 @@ public class GuiWoodBarrel extends BaseGuiContainerTile<TileWoodBarrel> {
 
   @Override
   protected void actionPerformed(GuiButton button) throws IOException {
-    ModuleWood.getPacketService().sendToServer(new CSPacketGuiButton(button.id));
+    ModuleWood.PACKET_SERVICE.sendToServer(new CSPacketGuiButton(button.id));
     super.actionPerformed(button);
   }
 }

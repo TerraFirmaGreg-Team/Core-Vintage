@@ -26,19 +26,18 @@ public class PlacedItemProvider implements IWailaBlock {
   @Override
   public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
     List<String> currentTooltip = new ArrayList<>();
-    var tile = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
-    if (tile != null) {
+    TileUtils.getTile(world, pos, TEPlacedItemFlat.class).ifPresent(tile -> {
       ItemStack stack = tile.getStack();
       if (stack.getItem() instanceof ItemSmallOre nugget) {
 
         Ore ore = nugget.getOre();
         Metal metal = ore.getMetal();
         if (metal != null) {
-          currentTooltip.add(new TextComponentTranslation("waila.tfc.ore_drop",
-                                                          new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
+          currentTooltip.add(
+            new TextComponentTranslation("waila.tfc.ore_drop", new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
         }
       }
-    }
+    });
     return currentTooltip;
   }
 

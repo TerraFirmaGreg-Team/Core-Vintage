@@ -37,7 +37,6 @@ import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.client.model.modelvariants.PressModels;
 import se.gory_moon.horsepower.client.renderer.TESRPress;
 import se.gory_moon.horsepower.lib.Constants;
-import se.gory_moon.horsepower.tileentity.TileHPBase;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
 
@@ -95,11 +94,7 @@ public class BlockPress extends BaseBlockHorse implements IProbeInfoAccessor {
   public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     world.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
 
-    var tile = TileUtils.getTile(world, pos, TileHPBase.class);
-    if (tile == null) {
-      return;
-    }
-    tile.setForward(placer.getHorizontalFacing().getOpposite());
+    TileUtils.getTile(world, pos, TilePressHorse.class).ifPresent(tile -> tile.setForward(placer.getHorizontalFacing().getOpposite()));
     super.onBlockPlacedBy(world, pos, state, placer, stack);
   }
 
@@ -117,8 +112,7 @@ public class BlockPress extends BaseBlockHorse implements IProbeInfoAccessor {
 
   @Override
   public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
-    if (!((World) world).isRemote && pos.up().equals(neighbor) && !(world.getBlockState(neighbor)
-                                                                         .getBlock() instanceof BlockFiller)) {
+    if (!((World) world).isRemote && pos.up().equals(neighbor) && !(world.getBlockState(neighbor).getBlock() instanceof BlockFiller)) {
       ((World) world).setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
     }
   }
@@ -139,13 +133,9 @@ public class BlockPress extends BaseBlockHorse implements IProbeInfoAccessor {
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
 
-    var tile = TileUtils.getTile(world, data.getPos(), TilePressHorse.class);
-    if (tile != null) {
-      probeInfo.progress(
-        (long) ((((double) tile.getField(0)) / (float) (Configs.general.pointsForPress > 0 ? Configs.general.pointsForPress : 1)) *
-                100L), 100L, new ProgressStyle().prefix(Localization.TOP.PRESS_PROGRESS.translate() + " ")
-                                                .suffix("%"));
-    }
+    TileUtils.getTile(world, data.getPos(), TilePressHorse.class).ifPresent(tile -> probeInfo.progress(
+      (long) ((((double) tile.getField(0)) / (float) (Configs.general.pointsForPress > 0 ? Configs.general.pointsForPress : 1)) * 100L),
+      100L, new ProgressStyle().prefix(Localization.TOP.PRESS_PROGRESS.translate() + " ").suffix("%")));
   }
 
   @Override
@@ -154,15 +144,14 @@ public class BlockPress extends BaseBlockHorse implements IProbeInfoAccessor {
       return true;
     }
 
-    var tile = TileUtils.getTile(worldIn, pos);
-    if (tile != null) {
+    return TileUtils.getTile(worldIn, pos).map(tile -> {
       final IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
       if (fluidHandler != null && FluidUtil.interactWithFluidHandler(playerIn, hand, fluidHandler)) {
         tile.markDirty();
         return false;
       }
-    }
-    return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+      return null;
+    }).orElseGet(() -> super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ));
   }
 
   @Nullable

@@ -24,13 +24,15 @@ public class GuiHandler implements IGuiHandler {
     var blockPos = new BlockPos(x, y, z);
     var blockState = world.getBlockState(blockPos);
 
-    var tile = TileUtils.getTile(world, blockPos);
     var entity = world.getEntityByID(x);
     var item = player.getHeldItemMainhand().getItem();
 
-    if (tile instanceof IProviderContainer<?, ?> containerProvider) {
-      return containerProvider.getContainer(player.inventory, world, blockState, blockPos);
-    }
+    TileUtils.getTile(world, blockPos)
+             .filter(tile -> tile instanceof IProviderContainer<?, ?>)
+             .map(tile -> {
+               IProviderContainer<?, ?> containerProvider = (IProviderContainer<?, ?>) tile;
+               return containerProvider.getContainer(player.inventory, world, blockState, blockPos);
+             });
 
     if (entity instanceof IProviderContainer<?, ?> containerProvider) {
       return containerProvider.getContainer(player.inventory, world, blockState, blockPos);
@@ -49,13 +51,15 @@ public class GuiHandler implements IGuiHandler {
     var blockPos = new BlockPos(x, y, z);
     var blockState = world.getBlockState(blockPos);
 
-    var tile = TileUtils.getTile(world, blockPos);
     var entity = world.getEntityByID(x);
     var item = player.getHeldItemMainhand().getItem();
 
-    if (tile instanceof IProviderContainer<?, ?> containerProvider) {
-      return containerProvider.getGuiContainer(player.inventory, world, blockState, blockPos);
-    }
+    TileUtils.getTile(world, blockPos)
+             .filter(tile -> tile instanceof IProviderContainer<?, ?>)
+             .map(tile -> {
+               IProviderContainer<?, ?> containerProvider = (IProviderContainer<?, ?>) tile;
+               return containerProvider.getContainer(player.inventory, world, blockState, blockPos);
+             });
 
     if (entity instanceof IProviderContainer<?, ?> containerProvider) {
       return containerProvider.getGuiContainer(player.inventory, world, blockState, blockPos);

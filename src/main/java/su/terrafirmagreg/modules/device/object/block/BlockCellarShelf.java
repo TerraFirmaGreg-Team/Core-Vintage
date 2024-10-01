@@ -31,8 +31,7 @@ public class BlockCellarShelf extends BaseBlockContainer {
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
-                                  float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       GuiHandler.openGui(worldIn, pos, player);
     }
@@ -40,8 +39,7 @@ public class BlockCellarShelf extends BaseBlockContainer {
   }
 
   @Override
-  public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer,
-                              ItemStack stack) {
+  public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     if (stack.hasDisplayName()) {
       var tile = TileUtils.getTile(world, pos, TileCellarShelf.class);
       //tile.setCustomName(stack.getDisplayName());
@@ -56,10 +54,7 @@ public class BlockCellarShelf extends BaseBlockContainer {
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(world, pos, TileCellarShelf.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
+    TileUtils.getTile(world, pos, TileCellarShelf.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
     super.breakBlock(world, pos, state);
   }
 

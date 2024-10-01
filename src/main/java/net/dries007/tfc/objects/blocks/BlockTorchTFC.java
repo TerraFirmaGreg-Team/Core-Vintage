@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -91,13 +92,13 @@ public class BlockTorchTFC extends BlockTorch implements ICapabilitySize {
 
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-    var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    if (tile != null) {
-      if (!worldIn.isRemote && tile.getTicksSinceUpdate() > ConfigTFC.General.OVERRIDES.torchTime && ConfigTFC.General.OVERRIDES.torchTime > 0) {
-        worldIn.setBlockState(pos, state.withProperty(LIT, false));
-        tile.resetCounter();
-      }
-    }
+    if (worldIn.isRemote) {return;}
+    TileUtils.getTile(worldIn, pos, TETickCounter.class)
+             .filter(tile -> tile.getTicksSinceUpdate() > ConfigTFC.General.OVERRIDES.torchTime && ConfigTFC.General.OVERRIDES.torchTime > 0)
+             .ifPresent(tile -> {
+               worldIn.setBlockState(pos, state.withProperty(LIT, false));
+               tile.resetCounter();
+             });
   }
 
   @Override
@@ -107,35 +108,28 @@ public class BlockTorchTFC extends BlockTorch implements ICapabilitySize {
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                  float hitX, float hitY, float hitZ) {
-    if (!worldIn.isRemote) {
-      ItemStack stack = playerIn.getHeldItem(hand);
-      if (state.getValue(LIT)) {
-        if (OreDictionaryHelper.doesStackMatchOre(stack, "stickWood")) {
-          stack.shrink(1);
-          ItemHandlerHelper.giveItemToPlayer(playerIn, new ItemStack(Blocks.TORCH));
-        }
-      } else {
-        if (BlockTorchTFC.canLight(stack)) {
-          worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
-          TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-          if (tile != null) {
-            tile.resetCounter();
-          }
-        }
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    if (worldIn.isRemote) {return true;}
+
+    ItemStack stack = playerIn.getHeldItem(hand);
+    if (state.getValue(LIT)) {
+      if (OreDictUtils.contains(stack, "stickWood")) {
+        stack.shrink(1);
+        ItemHandlerHelper.giveItemToPlayer(playerIn, new ItemStack(Blocks.TORCH));
       }
     }
+    if (BlockTorchTFC.canLight(stack)) {
+      worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
+      TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+    }
+
     return true;
   }
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     // Set the initial counter value
-    var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
+    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 

@@ -37,30 +37,29 @@ public class ProviderQuernManual implements IProbeInfoProvider {
 
     if (block instanceof BlockQuernManual) {
       var tile = TileUtils.getTile(world, pos, TileQuernManual.class);
-      if (tile == null) {
-        return;
-      }
+      tile.ifPresent(tileQuernManual -> {
 
-      IItemHandler handler;
-      ItemStack handstone;
+        IItemHandler handler;
+        ItemStack handstone;
 
-      if (!tile.hasHandstone()) {
-        return;
-      }
+        if (!tileQuernManual.hasHandstone()) {
+          return;
+        }
 
-      handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-      if (handler == null) {
-        return;
-      }
-      handstone = handler.getStackInSlot(SLOT_HANDSTONE);
+        handler = tileQuernManual.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (handler == null) {
+          return;
+        }
+        handstone = handler.getStackInSlot(SLOT_HANDSTONE);
 
-      if (!handstone.isEmpty()) {
-        info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-            .text(new TextComponentTranslation(
-              ModUtils.localize("top", "device.quern.handstone.durability"),
-              handstone.getItemDamage(),
-              handstone.getMaxDamage()).getFormattedText());
-      }
+        if (!handstone.isEmpty()) {
+          info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+              .text(new TextComponentTranslation(
+                ModUtils.localize("top", "device.quern.handstone.durability"),
+                handstone.getItemDamage(),
+                handstone.getMaxDamage()).getFormattedText());
+        }
+      });
     }
   }
 }

@@ -112,7 +112,7 @@ public class GuiHandler
       case FLINT -> new ContainerKnapping(KnappingTypes.FLINT, player.inventory,
                                           OreDictionaryHelper.doesStackMatchOre(stack, "flint") ? stack
                                                                                                 : player.getHeldItemOffhand());
-      case URN -> new ContainerUrn(player.inventory, TileUtils.getTile(world, pos, TEUrn.class));
+      case URN -> TileUtils.getTile(world, pos, TEUrn.class).map(tile -> new ContainerUrn(player.inventory, tile)).orElse(null);
       default -> null;
     };
   }
@@ -155,10 +155,9 @@ public class GuiHandler
       case FLINT:
         return new GuiKnappingTFCF(container, player, KnappingTypes.FLINT, FLINT_TEXTURE);
       case URN:
-        return new GuiUrn(container, player.inventory, TileUtils.getTile(world, pos, TEUrn.class),
-                          world.getBlockState(new BlockPos(x, y, z))
-                               .getBlock()
-                               .getTranslationKey());
+        return TileUtils.getTile(world, pos, TEUrn.class).map(tile -> new GuiUrn(
+          container, player.inventory, tile, world.getBlockState(new BlockPos(x, y, z)).getBlock().getTranslationKey())
+        ).orElse(null);
       default:
         return null;
     }

@@ -33,22 +33,22 @@ import java.util.Random;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
 
-public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
+public class BlockPlantShortGrass extends BlockPlant implements IShearable {
 
   private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 1.0, 0.875);
   private static final AxisAlignedBB SHORTER_GRASS_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 0.5, 0.875);
   private static final AxisAlignedBB SHORT_GRASS_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 0.75, 0.875);
   private static final AxisAlignedBB SHORTEST_GRASS_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 0.25, 0.875);
-  private static final Map<Plant, BlockShortGrassTFC> MAP = new HashMap();
+  private static final Map<Plant, BlockPlantShortGrass> MAP = new HashMap<>();
 
-  public BlockShortGrassTFC(Plant plant) {
+  public BlockPlantShortGrass(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockShortGrassTFC get(Plant plant) {
+  public static BlockPlantShortGrass get(Plant plant) {
     return MAP.get(plant);
   }
 

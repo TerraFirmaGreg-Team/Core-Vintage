@@ -34,7 +34,7 @@ public class ItemWoodSupplyCart extends BaseItem implements IWoodItem {
     this.variant = variant;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .size(Size.HUGE)
       .weight(Weight.VERY_HEAVY)

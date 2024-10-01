@@ -32,12 +32,11 @@ public class OvenProvider implements IWailaBlock {
   public List<String> getTooltip(World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
     List<String> currentTooltip = new ArrayList<>();
     IBlockState state = world.getBlockState(pos);
-    var tile = TileUtils.getTile(world, pos);
-    if (tile instanceof TileOven oven) {
-      ItemStack mainSlot = oven.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(SLOT_MAIN);
+    TileUtils.getTile(world, pos, TileOven.class).ifPresent(tile -> {
+      ItemStack mainSlot = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(SLOT_MAIN);
       OvenRecipe recipe = OvenRecipe.get(mainSlot);
       if (state.getValue(LIT) && recipe != null) {
-        long remainingTicks = oven.getTicksRemaining();
+        long remainingTicks = tile.getTicksRemaining();
         switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {
           case NONE:
             break;
@@ -54,11 +53,11 @@ public class OvenProvider implements IWailaBlock {
         }
         currentTooltip.add(new TextComponentTranslation(recipe.getOutputItem(mainSlot)
                                                               .getDisplayName()).getFormattedText());
-        if (((TileOven) tile).isCuringRecipe()) {
+        if (tile.isCuringRecipe()) {
           currentTooltip.add("Curing");
         }
       }
-    }
+    });
     return currentTooltip;
   }
 

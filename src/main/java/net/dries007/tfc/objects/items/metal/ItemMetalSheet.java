@@ -27,8 +27,7 @@ public class ItemMetalSheet extends ItemMetal {
 
   @Override
   @NotNull
-  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-                                    float hitZ) {
+  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
     if (worldIn.getBlockState(pos).isNormalCube() && stack.getItem() instanceof ItemMetalSheet sheet) {
       // Placing a sheet erases data, and since I really don't want to rewrite all of this, let's be sufficient with this for now
@@ -64,14 +63,14 @@ public class ItemMetalSheet extends ItemMetal {
   }
 
   private EnumActionResult placeSheet(World world, BlockPos pos, EnumFacing facing) {
-    TEMetalSheet tile = TileUtils.getTile(world, pos, TEMetalSheet.class);
-    if (tile != null && !tile.getFace(facing)) {
-      if (!world.isRemote) {
-        tile.setFace(facing, true);
-        world.playSound(null, pos.offset(facing), SoundEvents.BLOCK_METAL_PLACE, SoundCategory.BLOCKS, 1.0f, 1.0f);
-      }
-      return EnumActionResult.SUCCESS;
-    }
-    return EnumActionResult.FAIL;
+    if (world.isRemote) {return EnumActionResult.FAIL;}
+
+    return TileUtils.getTile(world, pos, TEMetalSheet.class)
+                    .filter(tile -> !tile.getFace(facing))
+                    .map(tile -> {
+                      tile.setFace(facing, true);
+                      world.playSound(null, pos.offset(facing), SoundEvents.BLOCK_METAL_PLACE, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                      return EnumActionResult.SUCCESS;
+                    }).orElse(EnumActionResult.FAIL);
   }
 }

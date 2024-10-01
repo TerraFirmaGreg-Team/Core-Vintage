@@ -17,17 +17,17 @@ public final class ItemsRock {
     LOOSE = RockItemVariant
       .builder("loose")
       .setFactory(ItemRockLoose::new)
-      .build(registry);
+      .build();
 
     BRICK = RockItemVariant
       .builder("brick")
       .setFactory(ItemRockBrick::new)
-      .build(registry);
+      .build();
 
     GRAVEL_LAYER = RockItemVariant
       .builder("gravel_layer")
       .setFactory(ItemRockGravel::new)
-      .build(registry);
+      .build();
 
   }
 }

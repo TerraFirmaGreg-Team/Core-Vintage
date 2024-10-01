@@ -46,6 +46,6 @@ public class ItemSoilMud extends ItemSoil
 
   @Override
   public GuiContainerKnappingMud getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-    return new GuiContainerKnappingMud(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, type.getTexture());
+    return new GuiContainerKnappingMud(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, type.getTexture(variant));
   }
 }

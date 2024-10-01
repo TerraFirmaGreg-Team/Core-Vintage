@@ -72,29 +72,22 @@ public class ChunkGenClassic implements IChunkGenerator {
 
   public static final IBlockState STONE = Blocks.STONE.getDefaultState();
   public static final IBlockState AIR = Blocks.AIR.getDefaultState();
-  public static final IBlockState SALT_WATER = FluidsTFC.SALT_WATER.get().getBlock()
-                                                                   .getDefaultState();
-  public static final IBlockState FRESH_WATER = FluidsTFC.FRESH_WATER.get().getBlock()
-                                                                     .getDefaultState();
-  public static final IBlockState HOT_WATER = FluidsTFC.HOT_WATER.get().getBlock()
-                                                                 .getDefaultState();
+  public static final IBlockState SALT_WATER = FluidsTFC.SALT_WATER.get().getBlock().getDefaultState();
+  public static final IBlockState FRESH_WATER = FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState();
+  public static final IBlockState HOT_WATER = FluidsTFC.HOT_WATER.get().getBlock().getDefaultState();
   public static final IBlockState LAVA = Blocks.LAVA.getDefaultState(); // todo: replace
   public static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
   /* Layers must be one here - otherwise snow becomes non-replaceable and wrecks the rest of world gen */
-  public static final IBlockState SNOW = Blocks.SNOW_LAYER.getDefaultState()
-                                                          .withProperty(BlockSnow.LAYERS, 1);
+  public static final IBlockState SNOW = Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 1);
   public static final IBlockState SALT_WATER_ICE = BlocksTFC.SEA_ICE.getDefaultState();
   public static final IBlockState FRESH_WATER_ICE = Blocks.ICE.getDefaultState();
   private static final float[] parabolicField = new float[25];
 
   /* This is done here rather than GameRegistry.registerWorldGenerator since we need to control the ordering of them better */
-  private static final IWorldGenerator LAVA_FISSURE_GEN = new GeneratorRarityBased(
-    x -> x.lavaFissureRarity, new GeneratorFissure(true));
-  private static final IWorldGenerator WATER_FISSURE_GEN = new GeneratorRarityBased(
-    x -> x.waterFissureRarity, new GeneratorFissure(false));
+  private static final IWorldGenerator LAVA_FISSURE_GEN = new GeneratorRarityBased(x -> x.lavaFissureRarity, new GeneratorFissure(true));
+  private static final IWorldGenerator WATER_FISSURE_GEN = new GeneratorRarityBased(x -> x.waterFissureRarity, new GeneratorFissure(false));
   private static final IWorldGenerator SOIL_PITS_GEN = new GeneratorSoilPits();
-  private static final IWorldGenerator LARGE_ROCKS_GEN = new GeneratorRarityBased(
-    x -> x.largeRockRarity, new GeneratorLargeRocks());
+  private static final IWorldGenerator LARGE_ROCKS_GEN = new GeneratorRarityBased(x -> x.largeRockRarity, new GeneratorLargeRocks());
   private static final IWorldGenerator TREE_GEN = new GeneratorTrees();
   private static final IWorldGenerator BERRY_BUSH_GEN = new GeneratorBerryBushes();
   private static final IWorldGenerator FRUIT_TREE_GEN = new GeneratorFruitTrees();
@@ -102,8 +95,7 @@ public class ChunkGenClassic implements IChunkGenerator {
   private static final IWorldGenerator LOOSE_ROCKS_GEN = new GeneratorSurfaceRocks();
   private static final IWorldGenerator SPELEOTHEM_GEN = new GeneratorSpeleothem();
   private static final IWorldGenerator WATERFALL_GEN = new GeneratorFalls(FRESH_WATER, 15);
-  private static final IWorldGenerator LAVAFALL_GEN = new GeneratorFalls(
-    Blocks.FLOWING_LAVA.getDefaultState(), 5);
+  private static final IWorldGenerator LAVAFALL_GEN = new GeneratorFalls(Blocks.FLOWING_LAVA.getDefaultState(), 5);
   private static final IWorldGenerator SNOW_ICE_GEN = new GeneratorSnowIce();
 
   static {
@@ -481,10 +473,11 @@ public class ChunkGenClassic implements IChunkGenerator {
                                                                                                         .getDefaultState();
         IBlockState subSurfaceBlock = BlocksSoil.DIRT.get(soil1).getDefaultState();
 
-        if (BiomeUtils.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomeUtils.isBeachBiome(
-          getBiomeOffset(x + 1, z)) ||
-            BiomeUtils.isBeachBiome(getBiomeOffset(x, z + 1)) || BiomeUtils.isBeachBiome(
-          getBiomeOffset(x, z - 1))) {
+        if (BiomeUtils.isBeachBiome(getBiomeOffset(x - 1, z)) ||
+            BiomeUtils.isBeachBiome(getBiomeOffset(x + 1, z)) ||
+            BiomeUtils.isBeachBiome(getBiomeOffset(x, z + 1)) ||
+            BiomeUtils.isBeachBiome(getBiomeOffset(x, z - 1))) {
+
           if (!BiomeUtils.isBeachBiome(getBiomeOffset(x, z))) {
             cliffMap[colIndex] = true;
           }

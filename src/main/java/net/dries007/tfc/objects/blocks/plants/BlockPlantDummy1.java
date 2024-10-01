@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.blocks.plants.BlockPlant;
+package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types.Plant;
 import tfcflorae.util.OreDictionaryHelper;
@@ -6,11 +6,11 @@ import tfcflorae.util.OreDictionaryHelper;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlockPlantDummy2 extends BlockPlantTFCF {
+public class BlockPlantDummy1 extends BlockPlantTFCF {
 
-  private static final Map<Plant, BlockPlantDummy2> MAP = new HashMap<>();
+  private static final Map<Plant, BlockPlantDummy1> MAP = new HashMap<>();
 
-  public BlockPlantDummy2(Plant plant) {
+  public BlockPlantDummy1(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
@@ -19,8 +19,7 @@ public class BlockPlantDummy2 extends BlockPlantTFCF {
     plant.getOreDictName().ifPresent(name -> OreDictionaryHelper.register(this, name));
   }
 
-  public static BlockPlantDummy2 get(Plant plant) {
+  public static BlockPlantDummy1 get(Plant plant) {
     return MAP.get(plant);
   }
-
 }

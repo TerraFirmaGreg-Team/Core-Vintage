@@ -20,7 +20,7 @@ public class ItemWoodWheel extends BaseItem implements IWoodItem {
     this.type = type;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .weight(Weight.HEAVY)
       .size(Size.NORMAL)

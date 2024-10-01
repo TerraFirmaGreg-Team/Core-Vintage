@@ -46,10 +46,7 @@ public abstract class BlockCropSpreading extends BlockCropTFC {
 
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    TECropSpreading tile = TileUtils.getTile(worldIn, pos, TECropSpreading.class);
-    if (tile != null) {
-      tile.onPlaced();
-    }
+    TileUtils.getTile(worldIn, pos, TECropSpreading.class).ifPresent(TECropSpreading::onPlaced);
     super.onBlockAdded(worldIn, pos, state);
   }
 
@@ -66,44 +63,41 @@ public abstract class BlockCropSpreading extends BlockCropTFC {
     // each crop, once at max, will not grow anymore
     // instead, on growth tick, they will attempt to create a new crop at [age] - 1 in adjacent block
     // additionally, they will increase the growth of a random nearby crop by 1
-    if (!worldIn.isRemote) {
-      TECropSpreading tile = TileUtils.getTile(worldIn, pos, TECropSpreading.class);
-      if (tile != null) {
-        int currentGrowthStage = state.getValue(getStageProperty());
-        // Should the crop grow at all?
-        if (tile.getBaseAge() + currentGrowthStage < MAX_SPREAD_AGE) {
-          if (currentGrowthStage < tile.getMaxGrowthStage()) {
-            // grow normally
-            worldIn.setBlockState(pos, state.withProperty(getStageProperty(), currentGrowthStage + 1));
-          } else {
-            // Pick a random nearby block to spawn another crop on
-            EnumFacing offset = EnumFacing.HORIZONTALS[rand.nextInt(4)];
-            BlockPos newPos = pos.offset(offset);
+    if (worldIn.isRemote) {return;}
+    TileUtils.getTile(worldIn, pos, TECropSpreading.class)
+             .filter(tile -> tile.getBaseAge() + state.getValue(getStageProperty()) < MAX_SPREAD_AGE) // Should the crop grow at all?
+             .ifPresent(tile -> {
+               int currentGrowthStage = state.getValue(getStageProperty());
+               // Should the crop grow at all?
+               if (currentGrowthStage < tile.getMaxGrowthStage()) {
+                 // grow normally
+                 worldIn.setBlockState(pos, state.withProperty(getStageProperty(), currentGrowthStage + 1));
+               } else {
+                 // Pick a random nearby block to spawn another crop on
+                 EnumFacing offset = EnumFacing.HORIZONTALS[rand.nextInt(4)];
+                 BlockPos newPos = pos.offset(offset);
 
-            IBlockState newState = worldIn.getBlockState(newPos);
-            if (newState.getBlock() == this) {
-              // Increase the growth max on the adjacent existing crop
-              TECropSpreading newTile = TileUtils.getTile(worldIn, newPos, TECropSpreading.class);
-              if (newTile != null && newTile.getMaxGrowthStage() < currentGrowthStage) {
-                newTile.setMaxGrowthStage(newTile.getMaxGrowthStage() + 1);
-              }
-            } else if (newState.getBlock().isAir(newState, worldIn, newPos)) {
-              IBlockState stateDown = worldIn.getBlockState(newPos.down());
-              if (stateDown.getBlock()
-                           .canSustainPlant(stateDown, worldIn, newPos.down(), EnumFacing.UP, this)) {
-                // Spawn a crop on the new block
-                worldIn.setBlockState(newPos, getDefaultState().withProperty(getStageProperty(), currentGrowthStage / 2));
-                TECropSpreading newTile = TileUtils.getTile(worldIn, newPos, TECropSpreading.class);
-                if (newTile != null) {
-                  newTile.setMaxGrowthStage(tile.getMaxGrowthStage() + 2);
-                  newTile.setBaseAge(tile.getBaseAge() + currentGrowthStage);
-                  newTile.setSeedPlant(false);
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+                 IBlockState newState = worldIn.getBlockState(newPos);
+                 if (newState.getBlock() == this) {
+                   // Increase the growth max on the adjacent existing crop
+                   TileUtils.getTile(worldIn, newPos, TECropSpreading.class)
+                            .filter(newTile -> newTile.getMaxGrowthStage() < currentGrowthStage)
+                            .ifPresent(newTile -> newTile.setMaxGrowthStage(newTile.getMaxGrowthStage() + 1));
+                   
+                 } else if (newState.getBlock().isAir(newState, worldIn, newPos)) {
+                   IBlockState stateDown = worldIn.getBlockState(newPos.down());
+                   if (stateDown.getBlock().canSustainPlant(stateDown, worldIn, newPos.down(), EnumFacing.UP, this)) {
+                     // Spawn a crop on the new block
+                     worldIn.setBlockState(newPos, getDefaultState().withProperty(getStageProperty(), currentGrowthStage / 2));
+                     TileUtils.getTile(worldIn, newPos, TECropSpreading.class).ifPresent(newTile -> {
+                       newTile.setMaxGrowthStage(tile.getMaxGrowthStage() + 2);
+                       newTile.setBaseAge(tile.getBaseAge() + currentGrowthStage);
+                       newTile.setSeedPlant(false);
+                     });
+                   }
+                 }
+               }
+             });
   }
+
 }

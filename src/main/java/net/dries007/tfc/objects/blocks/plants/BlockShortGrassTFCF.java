@@ -21,7 +21,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.plants.BlockPlant.BlockPlantTFCF;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.Climate;
 

@@ -107,19 +107,20 @@ public class ModifierBlock extends ModifierBase {
       }
 
       if (block.hasTileEntity(state)) {
-        var tile = TileUtils.getTile(world, pos);
-        if (tile instanceof IAmbientalTileProvider provider) {
-          storage.add(provider.getModifier(player, tile));
-        } else {
-          for (IAmbientalTileProvider provider : AmbientalRegistry.TILE_ENTITIES) {
-            provider.getModifier(player, tile).ifPresent(mod -> {
-              mod.setChange(mod.getChange() * finalDistanceMultiplier);
-              mod.setPotency(mod.getPotency() * finalDistanceMultiplier);
-              storage.add(mod);
-            });
+        TileUtils.getTile(world, pos).ifPresent(tile -> {
+          if (tile instanceof IAmbientalTileProvider provider) {
             storage.add(provider.getModifier(player, tile));
+          } else {
+            for (IAmbientalTileProvider provider : AmbientalRegistry.TILE_ENTITIES) {
+              provider.getModifier(player, tile).ifPresent(mod -> {
+                mod.setChange(mod.getChange() * finalDistanceMultiplier);
+                mod.setPotency(mod.getPotency() * finalDistanceMultiplier);
+                storage.add(mod);
+              });
+              storage.add(provider.getModifier(player, tile));
+            }
           }
-        }
+        });
       }
     }
   }

@@ -1,6 +1,5 @@
 package su.terrafirmagreg.api.base.packet;
 
-import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.tileentity.TileEntity;
@@ -53,19 +52,11 @@ public abstract class BasePacketTile<T extends TileEntity> extends BasePacketSer
 
     this.context = context;
     final World world = context.getServerHandler().player.getEntityWorld();
-    final var tileEntity = TileUtils.getTile(world, pos);
-
-    if (tileEntity != null && world.isBlockLoaded(this.pos)) {
-      try {
-
-        final T castTile = (T) tileEntity;
-        this.tile = castTile;
+    TileUtils.getTile(world, pos, this.tile.getClass()).ifPresent(tile -> {
+      if (world.isBlockLoaded(this.pos)) {
         ((WorldServer) world).addScheduledTask(this::getAction);
-      } catch (final ClassCastException e) {
-
-        TerraFirmaGreg.LOGGER.warn(e, "Tile entity could not be cast.");
       }
-    }
+    });
 
     return null;
   }

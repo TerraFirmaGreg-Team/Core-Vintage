@@ -3,6 +3,8 @@ package su.terrafirmagreg.modules.device;
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.network.IPacketService;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.EntitiesDevice;
@@ -27,13 +29,14 @@ public final class ModuleDevice extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleDevice.class.getSimpleName());
 
-  public final CreativeTabs DEVICES_TAB;
+  public static CreativeTabs TAB;
+  public static RegistryManager REGISTRY;
+  public static IPacketService PACKET_SERVICE;
 
   public ModuleDevice() {
-    this.DEVICES_TAB = BaseCreativeTab.of("device", "device/bellows");
-
-    this.enableAutoRegistry(DEVICES_TAB);
-    this.enableNetwork();
+    TAB = BaseCreativeTab.of("device", "device/bellows");
+    REGISTRY = enableAutoRegistry(TAB);
+    PACKET_SERVICE = enableNetwork();
   }
 
   @Override

@@ -1,15 +1,15 @@
 package su.terrafirmagreg.api.util;
 
-import com.google.common.base.Joiner;
-
-import lombok.experimental.UtilityClass;
+import su.terrafirmagreg.data.Constants;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import su.terrafirmagreg.data.Constants;
+import com.google.common.base.Joiner;
+
+import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
 import java.util.List;

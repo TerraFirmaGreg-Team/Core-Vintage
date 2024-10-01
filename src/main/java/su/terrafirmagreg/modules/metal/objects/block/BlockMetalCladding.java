@@ -50,8 +50,7 @@ import static su.terrafirmagreg.data.Properties.WEST;
 @Getter
 public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
 
-  public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{DOWN, UP, NORTH, SOUTH,
-                                                                          WEST, EAST};
+  public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{DOWN, UP, NORTH, SOUTH, WEST, EAST};
   private static final AxisAlignedBB[] SHEET_AABB = new AxisAlignedBB[]{
     new AxisAlignedBB(0d, 0.9375d, 0d, 1d, 1d, 1d),
     new AxisAlignedBB(0d, 0d, 0d, 1d, 0.0625d, 1d),
@@ -71,13 +70,15 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
     this.type = type;
 
     getSettings()
+      .registryKey(type.getRegistryKey(variant))
+      .customResource(variant.getCustomResource())
+      .harvestLevel(ToolClasses.PICKAXE, 0)
       .nonOpaque()
       .nonFullCube()
       .noItemBlock()
       .hardness(40F)
       .resistance(25F);
 
-    setHarvestLevel(ToolClasses.PICKAXE, 0);
     setDefaultState(blockState.getBaseState()
                               .withProperty(FACE_PROPERTIES[0], false)
                               .withProperty(FACE_PROPERTIES[1], false)
@@ -95,9 +96,9 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
   @Override
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     var tile = TileUtils.getTile(worldIn, pos, TileMetalSheet.class);
-    if (tile != null) {
+    if (tile.isPresent()) {
       for (EnumFacing face : EnumFacing.values()) {
-        state = state.withProperty(FACE_PROPERTIES[face.getIndex()], tile.getFace(face));
+        state = state.withProperty(FACE_PROPERTIES[face.getIndex()], tile.get().getFace(face));
       }
     }
     return state;
@@ -108,9 +109,9 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
     var tile = TileUtils.getTile(source, pos, TileMetalSheet.class);
     int sheets = 0;
     AxisAlignedBB boundingBox = FULL_BLOCK_AABB;
-    if (tile != null) {
+    if (tile.isPresent()) {
       for (EnumFacing face : EnumFacing.values()) {
-        if (tile.getFace(face)) {
+        if (tile.get().getFace(face)) {
           if (sheets == 1) {
             return FULL_BLOCK_AABB;
           } else {
@@ -125,18 +126,15 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
   }
 
   @Override
-  public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos,
-                                    AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
-                                    @Nullable Entity entityIn,
-                                    boolean isActualState) {
+  public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
     var tile = TileUtils.getTile(worldIn, pos, TileMetalSheet.class);
-    if (tile != null) {
+    tile.ifPresent(tileMetalSheet -> {
       for (EnumFacing face : EnumFacing.values()) {
-        if (tile.getFace(face)) {
+        if (tileMetalSheet.getFace(face)) {
           addCollisionBoxToList(pos, entityBox, collidingBoxes, SHEET_AABB[face.getIndex()]);
         }
       }
-    }
+    });
   }
 
   @SideOnly(Side.CLIENT)
@@ -146,37 +144,32 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
   }
 
   @Override
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-                              BlockPos fromPos) {
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     var tile = TileUtils.getTile(worldIn, pos, TileMetalSheet.class);
-    if (TileUtils.isNotNull(tile)) {
+    tile.ifPresent(tileMetalSheet -> {
       for (EnumFacing face : EnumFacing.values()) {
-        if (tile.getFace(face) && !worldIn.isSideSolid(pos.offset(face.getOpposite()), face)) {
+        if (tileMetalSheet.getFace(face) && !worldIn.isSideSolid(pos.offset(face.getOpposite()), face)) {
           StackUtils.spawnItemStack(worldIn, pos, new ItemStack(OreDictUnifier.get(OrePrefix.plate, Materials.Iron).getItem()));
-          tile.setFace(face, false);
+          tileMetalSheet.setFace(face, false);
         }
       }
-      if (tile.getFaceCount() == 0) {
+      if (tileMetalSheet.getFaceCount() == 0) {
         // Remove the block
         worldIn.setBlockToAir(pos);
       }
-    }
+    });
   }
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
     var tile = TileUtils.getTile(worldIn, pos, TileMetalSheet.class);
-    if (TileUtils.isNotNull(tile)) {
-      tile.onBreakBlock();
-    }
+    tile.ifPresent(TileMetalSheet::onBreakBlock);
     super.breakBlock(worldIn, pos, state);
   }
 
   @Override
-  public @Nullable RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn,
-                                                    BlockPos pos, Vec3d start, Vec3d end) {
-    var tile = TileUtils.getTile(worldIn, pos, TileMetalSheet.class);
-    if (TileUtils.isNotNull(tile)) {
+  public @Nullable RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
+    return TileUtils.getTile(worldIn, pos, TileMetalSheet.class).map(tile -> {
       for (EnumFacing face : EnumFacing.values()) {
         if (tile.getFace(face)) {
           RayTraceResult result = rayTrace(pos, start, end, SHEET_AABB[face.getIndex()]);
@@ -185,8 +178,8 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
           }
         }
       }
-    }
-    return null;
+      return null;
+    }).orElse(null);
   }
 
   @Override
@@ -200,20 +193,17 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
   }
 
   @Override
-  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-                                EntityPlayer player) {
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
     return new ItemStack(OreDictUnifier.get(OrePrefix.plate, Materials.Iron).getItem());
   }
 
   @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-                                          EnumFacing face) {
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
     return BlockFaceShape.UNDEFINED;
   }
 
   @Override
-  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
-                                                         IBlockAccess worldIn, BlockPos pos) {
+  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return NULL_AABB;
   }
 }

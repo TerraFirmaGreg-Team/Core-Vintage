@@ -22,7 +22,7 @@ public class BlockWoodStairs extends BaseBlockStairs implements IWoodBlock {
     this.type = type;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .harvestLevel(ToolClasses.AXE, 0)
       .oreDict("stairs")

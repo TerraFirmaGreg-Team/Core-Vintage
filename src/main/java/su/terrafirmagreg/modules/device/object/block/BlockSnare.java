@@ -105,75 +105,75 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
     AxisAlignedBB captureBox = new AxisAlignedBB(pos.getX() - 10.0D, pos.getY() - 5.0D,
                                                  pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D,
                                                  pos.getZ() + 10.0D);
-    var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
-    if (tile.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox).isEmpty()
-        && !worldIn.isRemote) {
-      for (EntityAnimalBase animal : worldIn.getEntitiesWithinAABB(EntityAnimalBase.class,
-                                                                   captureBox)) {
-        if ((isCapturable(animal)) && !(worldIn.getBlockState(animal.getPosition())
-                                               .getBlock() instanceof BlockSnare)) {
-          tile.setCapturedEntity(animal);
-          tile.setOpen(false);
-          state = state.withProperty(CLOSED, Boolean.TRUE);
-          state = state.withProperty(BAITED, Boolean.FALSE);
-          worldIn.setBlockState(pos, state, 2);
-          animal.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-          return;
+    TileUtils.getTile(worldIn, pos, TileSnare.class).ifPresent(tile -> {
+      if (tile.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox).isEmpty() && !worldIn.isRemote) {
+
+        var entitiesWithinAABB = worldIn.getEntitiesWithinAABB(EntityAnimalBase.class, captureBox);
+        for (EntityAnimalBase animal : entitiesWithinAABB) {
+          if ((isCapturable(animal)) && !(worldIn.getBlockState(animal.getPosition()).getBlock() instanceof BlockSnare)) {
+            tile.setCapturedEntity(animal);
+            tile.setOpen(false);
+            state.withProperty(CLOSED, Boolean.TRUE);
+            state.withProperty(BAITED, Boolean.FALSE);
+            worldIn.setBlockState(pos, state, 2);
+            animal.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+            return;
+          }
         }
-      }
-      if (state.getValue(BAITED)) {
-        if (rand.nextDouble() < ConfigDevice.BLOCK.SNARE.baitCaptureChance) {
-          double entitySelection = rand.nextDouble();
-          EntityAnimalBase animal;
-          if (entitySelection < 0.1) {
-            if (entitySelection < 0.03) {
-              if (entitySelection < 0.01) {
-                animal = new EntityAnimalGrouse(worldIn);
+        if (state.getValue(BAITED)) {
+          if (rand.nextDouble() < ConfigDevice.BLOCK.SNARE.baitCaptureChance) {
+            double entitySelection = rand.nextDouble();
+            EntityAnimalBase animal;
+            if (entitySelection < 0.1) {
+              if (entitySelection < 0.03) {
+                if (entitySelection < 0.01) {
+                  animal = new EntityAnimalGrouse(worldIn);
+                } else {
+                  animal = new EntityAnimalQuail(worldIn);
+                }
               } else {
-                animal = new EntityAnimalQuail(worldIn);
+                animal = new EntityAnimalDuck(worldIn);
+              }
+            } else if (entitySelection < 0.5) {
+              if (entitySelection < 0.3) {
+                animal = new EntityAnimalHare(worldIn);
+              } else {
+                animal = new EntityAnimalRabbit(worldIn);
               }
             } else {
-              animal = new EntityAnimalDuck(worldIn);
+              animal = new EntityAnimalPheasant(worldIn);
             }
-          } else if (entitySelection < 0.5) {
-            if (entitySelection < 0.3) {
-              animal = new EntityAnimalHare(worldIn);
-            } else {
-              animal = new EntityAnimalRabbit(worldIn);
-            }
-          } else {
-            animal = new EntityAnimalPheasant(worldIn);
+            animal.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
+            worldIn.spawnEntity(animal);
+            tile.setCapturedEntity(animal);
+            tile.setOpen(false);
+            state.withProperty(CLOSED, Boolean.TRUE);
+            state.withProperty(BAITED, Boolean.FALSE);
+            worldIn.setBlockState(pos, state, 2);
+          } else if (rand.nextDouble() < ConfigDevice.BLOCK.SNARE.baitExpireChance) {
+            state.withProperty(BAITED, Boolean.FALSE);
+            worldIn.setBlockState(pos, state, 2);
           }
-          animal.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
-          worldIn.spawnEntity(animal);
-          tile.setCapturedEntity(animal);
-          tile.setOpen(false);
-          state = state.withProperty(CLOSED, Boolean.TRUE);
-          state = state.withProperty(BAITED, Boolean.FALSE);
-          worldIn.setBlockState(pos, state, 2);
-        } else if (rand.nextDouble() < ConfigDevice.BLOCK.SNARE.baitExpireChance) {
-          state = state.withProperty(BAITED, Boolean.FALSE);
-          worldIn.setBlockState(pos, state, 2);
         }
       }
-    }
+    });
+
   }
 
   @Override
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-                              BlockPos fromPos) {
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
-      var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
-      if (!tile.isOpen()) {
-        if (Math.random() < ConfigDevice.BLOCK.SNARE.breakChance) {
-          worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f,
-                            0.8f);
+      TileUtils.getTile(worldIn, pos, TileSnare.class).ifPresent(tile -> {
+        if (!tile.isOpen()) {
+          if (Math.random() < ConfigDevice.BLOCK.SNARE.breakChance) {
+            worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
+          } else {
+            this.dropBlockAsItem(worldIn, pos, state, 0);
+          }
         } else {
           this.dropBlockAsItem(worldIn, pos, state, 0);
         }
-      } else {
-        this.dropBlockAsItem(worldIn, pos, state, 0);
-      }
+      });
       worldIn.setBlockToAir(pos);
     }
   }
@@ -223,29 +223,27 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
   @Override
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
     if (isCapturable(entityIn)) {
-      var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
       EntityLivingBase entityLiving = (EntityLivingBase) entityIn;
-      if (tile.isOpen()) {
-        tile.setCapturedEntity(entityLiving);
-        entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-        tile.setOpen(false);
-        state = state.withProperty(CLOSED, Boolean.TRUE);
-        state = state.withProperty(BAITED, Boolean.FALSE);
-        worldIn.setBlockState(pos, state, 2);
-      } else if (tile.getCapturedEntity() != null && tile.getCapturedEntity()
-                                                         .equals(entityLiving)) {
-        entityLiving.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-      }
+      TileUtils.getTile(worldIn, pos, TileSnare.class).ifPresent(tile -> {
+        if (tile.isOpen()) {
+          tile.setCapturedEntity(entityLiving);
+          entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+          tile.setOpen(false);
+          state.withProperty(CLOSED, Boolean.TRUE);
+          state.withProperty(BAITED, Boolean.FALSE);
+          worldIn.setBlockState(pos, state, 2);
+        } else if (tile.getCapturedEntity() != null && tile.getCapturedEntity().equals(entityLiving)) {
+          entityLiving.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+        }
+      });
     }
   }
 
   @Override
-  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
-                           @Nullable TileEntity tile, ItemStack stack) {
+  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack stack) {
     if (tile instanceof TileSnare tileSnare && !tileSnare.isOpen()) {
       if (Math.random() < ConfigDevice.BLOCK.SNARE.breakChance) {
-        worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f,
-                          0.8f);
+        worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
       } else {
         super.harvestBlock(worldIn, player, pos, state, tile, stack);
       }
@@ -275,8 +273,7 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
   public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
     return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ,
-                             axisalignedbb.maxX, (float) 0 * 0.125F,
-                             axisalignedbb.maxZ);
+                             axisalignedbb.maxX, (float) 0 * 0.125F, axisalignedbb.maxZ);
   }
 
   @Override

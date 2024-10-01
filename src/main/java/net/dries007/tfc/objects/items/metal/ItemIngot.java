@@ -44,11 +44,10 @@ public class ItemIngot extends ItemMetal {
           if (worldIn.mayPlace(BlocksCore.INGOT_PILE, up, false, EnumFacing.UP, null)) {
             if (!worldIn.isRemote) {
               worldIn.setBlockState(up, BlocksCore.INGOT_PILE.getDefaultState());
-              var tile = TileUtils.getTile(worldIn, up, TileIngotPile.class);
-              if (tile != null) {
+              TileUtils.getTile(worldIn, up, TileIngotPile.class).ifPresent(tile -> {
                 tile.setMetal(item.metal);
                 tile.setCount(1);
-              }
+              });
               worldIn.playSound(null, up, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 0.3F, 1.5F);
               stack.shrink(1);
               player.setHeldItem(hand, stack);
@@ -64,25 +63,28 @@ public class ItemIngot extends ItemMetal {
           posTop = posTop.up();
           stateTop = worldIn.getBlockState(posTop);
           if (stateTop.getBlock() == BlocksCore.INGOT_PILE) {
-            var tile = TileUtils.getTile(worldIn, posTop, TileIngotPile.class);
-            if (tile != null && tile.getCount() < 64 && (tile.getMetal() == item.metal) &&
-                worldIn.checkNoEntityCollision(new AxisAlignedBB(0, 0, 0, 1, (1 + tile.getCount()) / 64d, 1).offset(posTop))) {
-              tile.setCount(tile.getCount() + 1);
-              worldIn.playSound(null, posTop, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 0.3F, 1.5F);
-              stack.shrink(1);
-              player.setHeldItem(hand, stack);
-              return EnumActionResult.SUCCESS;
-            }
+            BlockPos finalPosTop = posTop;
+            TileUtils.getTile(worldIn, posTop, TileIngotPile.class)
+                     .filter(tile -> tile.getCount() < 64
+                                     && (tile.getMetal() == item.metal)
+                                     && worldIn.checkNoEntityCollision(new AxisAlignedBB(0, 0, 0, 1, (1 + tile.getCount()) / 64d, 1).offset(finalPosTop)))
+                     .map(tile -> {
+                       tile.setCount(tile.getCount() + 1);
+                       worldIn.playSound(null, finalPosTop, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 0.3F, 1.5F);
+                       stack.shrink(1);
+                       player.setHeldItem(hand, stack);
+                       return EnumActionResult.SUCCESS;
+                     });
+
           } else if (stateTop.getBlock()
                              .isReplaceable(worldIn, posTop) && worldIn.mayPlace(BlocksCore.INGOT_PILE, posTop, false, EnumFacing.UP, null) &&
                      worldIn.getBlockState(posTop.down())
                             .isSideSolid(worldIn, posTop.down(), EnumFacing.UP)) {
             worldIn.setBlockState(posTop, BlocksCore.INGOT_PILE.getDefaultState());
-            var tile = TileUtils.getTile(worldIn, posTop, TileIngotPile.class);
-            if (tile != null) {
+            TileUtils.getTile(worldIn, posTop, TileIngotPile.class).ifPresent(tile -> {
               tile.setMetal(item.metal);
               tile.setCount(1);
-            }
+            });
             worldIn.playSound(null, posTop, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 0.3F, 1.5F);
             stack.shrink(1);
             player.setHeldItem(hand, stack);

@@ -8,6 +8,7 @@ import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseWall;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumFacing.AxisDirection;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -132,8 +133,7 @@ public class GreenhouseHelpers {
   }
 
   private static void seedPositionData(World world, BlockPos pos, IBlockState state, int arcs) {
-    var tile = TileUtils.getTile(world, pos, TEClimateStation.class);
-    if (tile != null) {
+    TileUtils.getTile(world, pos, TEClimateStation.class).ifPresent(tile -> {
       EnumFacing facing = state.getValue(FACING);
       int forwardCount = 1;
       int upCount = 1;
@@ -154,40 +154,43 @@ public class GreenhouseHelpers {
           upCount++;
         }
       }
-    }
+    });
   }
 
   public static void setApproval(World world, BlockPos pos, IBlockState state, EnumFacing wallDir, boolean approvalStatus, boolean visual, int tier) {
     final EnumFacing facing = state.getValue(FACING);
-    var tile = TileUtils.getTile(world, pos, TEClimateStation.class);
-    if (tile == null) {return;}
-    for (int i = 0; i <= tile.forward; i++) {
-      for (int j = 0; j <= tile.arcs; j++) {
-        for (int k = 0; k <= tile.height; k++) {
-          BlockPos checkPos = pos.offset(facing, i).offset(wallDir, j).up(k);
-          var tileFound = TileUtils.getTile(world, checkPos);
-          if (tileFound instanceof IGreenhouseReceiver greenhouseReceiver) {
-            greenhouseReceiver.setValidity(approvalStatus, approvalStatus ? tier : 0);
-          } else {
-            IBlockState checkState = world.getBlockState(checkPos);
-            Block checkBlock = checkState.getBlock();
-            if (checkBlock instanceof IGreenhouseReceiverBlock greenhouseReceiverBlock) {
-              world.setBlockState(checkPos, greenhouseReceiverBlock.getStateFor(checkState, approvalStatus, tier));
-            }
+    TileUtils.getTile(world, pos, TEClimateStation.class).ifPresent(tile -> {
+      for (int i = 0; i <= tile.forward; i++) {
+        for (int j = 0; j <= tile.arcs; j++) {
+          for (int k = 0; k <= tile.height; k++) {
+            BlockPos checkPos = pos.offset(facing, i).offset(wallDir, j).up(k);
+            TileUtils.getTile(world, checkPos).ifPresent(tileFound -> {
+              if (tileFound instanceof IGreenhouseReceiver greenhouseReceiver) {
+                greenhouseReceiver.setValidity(approvalStatus, approvalStatus ? tier : 0);
+              } else {
+                IBlockState checkState = world.getBlockState(checkPos);
+                Block checkBlock = checkState.getBlock();
+                if (checkBlock instanceof IGreenhouseReceiverBlock greenhouseReceiverBlock) {
+                  world.setBlockState(checkPos, greenhouseReceiverBlock.getStateFor(checkState, approvalStatus, tier));
+                }
+              }
+            });
           }
         }
       }
-    }
-    if (visual && approvalStatus) {
-      if (facing.getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE) {
-        pos = pos.offset(facing.getOpposite());
+      if (visual && approvalStatus) {
+        BlockPos firstPos = pos;
+        if (facing.getAxisDirection() == AxisDirection.NEGATIVE) {
+          firstPos = firstPos.offset(facing.getOpposite());
+        }
+        if (wallDir.getAxisDirection() == AxisDirection.NEGATIVE) {
+          firstPos = firstPos.offset(wallDir.getOpposite());
+        }
+        BlockPos secondPos = firstPos.offset(facing, tile.forward).offset(wallDir, tile.arcs).up(tile.height);
+        HelpersFL.sendBoundingBoxPacket(world, pos, secondPos, 0.0F, 1.0F, 0.0F, false);
       }
-      if (wallDir.getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE) {
-        pos = pos.offset(wallDir.getOpposite());
-      }
-      BlockPos secondPos = pos.offset(facing, tile.forward).offset(wallDir, tile.arcs).up(tile.height);
-      HelpersFL.sendBoundingBoxPacket(world, pos, secondPos, 0.0F, 1.0F, 0.0F, false);
-    }
+    });
+
 
   }
 

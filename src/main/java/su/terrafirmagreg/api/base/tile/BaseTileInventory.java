@@ -88,6 +88,7 @@ public abstract class BaseTileInventory extends BaseTile implements ISlotCallbac
    * Delegated from {@link Container#canInteractWith(EntityPlayer)}
    */
   public boolean canInteractWith(EntityPlayer player) {
-    return TileUtils.getTile(world, pos) == this && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+    return TileUtils.getTile(world, pos).filter(tile -> tile == this).isPresent()
+           && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
   }
 }

@@ -46,10 +46,7 @@ public class SCPacketTileEntity implements IMessage, IMessageHandler<SCPacketTil
     EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
     if (player != null) {
       World world = player.getEntityWorld();
-      var tile = TileUtils.getTile(world, message.pos);
-      if (tile != null) {
-        tile.readFromNBT(message.tile);
-      }
+      TileUtils.getTile(world, message.pos).ifPresent(tile -> tile.readFromNBT(message.tile));
     }
     return null;
   }

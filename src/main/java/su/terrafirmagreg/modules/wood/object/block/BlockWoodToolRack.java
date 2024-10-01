@@ -51,7 +51,7 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
     super(variant, type);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .hardness(0.5f)
       .resistance(3f)
@@ -97,9 +97,7 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
     if (!BlockUtils.canHangAt(worldIn, pos, state.getValue(FACING))) {
       dropBlockAsItem(worldIn, pos, state, 0);
       var tile = TileUtils.getTile(worldIn, pos, TileWoodToolRack.class);
-      if (tile != null) {
-        tile.onBreakBlock();
-      }
+      tile.ifPresent(TileWoodToolRack::onBreakBlock);
       worldIn.setBlockToAir(pos);
     }
   }
@@ -107,24 +105,20 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
     var tile = TileUtils.getTile(worldIn, pos, TileWoodToolRack.class);
-    if (tile != null) {
-      tile.onBreakBlock();
-    }
+    tile.ifPresent(TileWoodToolRack::onBreakBlock);
     super.breakBlock(worldIn, pos, state);
   }
 
   @Override
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    return super.canPlaceBlockAt(worldIn, pos)
-           && BlockUtils.getASolidFacing(worldIn, pos, null, HORIZONTALS) != null;
+    return super.canPlaceBlockAt(worldIn, pos) && BlockUtils.getASolidFacing(worldIn, pos, null, HORIZONTALS) != null;
   }
 
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state,
-                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!world.isRemote) {
       var tile = TileUtils.getTile(world, pos, TileWoodToolRack.class);
-      if (tile != null) {
-        return tile.onRightClick(playerIn, hand, getSlotFromPos(state, hitX, hitY, hitZ));
+      if (tile.isPresent()) {
+        return tile.get().onRightClick(playerIn, hand, getSlotFromPos(state, hitX, hitY, hitZ));
       }
     }
     return true;
@@ -147,14 +141,12 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
 
   @Override
   @SuppressWarnings("ConstantConditions")
-  public ItemStack getPickBlock(IBlockState state, @Nullable RayTraceResult target, World world,
-                                BlockPos pos, EntityPlayer player) {
+  public ItemStack getPickBlock(IBlockState state, @Nullable RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
     if (target != null) {
       var vec = target.hitVec.subtract(pos.getX(), pos.getY(), pos.getZ());
       var tile = TileUtils.getTile(world, pos, TileWoodToolRack.class);
-      if (tile != null) {
-        ItemStack item = tile.getItems()
-                             .get(getSlotFromPos(state, (float) vec.x, (float) vec.y, (float) vec.z));
+      if (tile.isPresent()) {
+        ItemStack item = tile.get().getItems().get(getSlotFromPos(state, (float) vec.x, (float) vec.y, (float) vec.z));
         if (!item.isEmpty()) {
           return item;
         }

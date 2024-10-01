@@ -67,18 +67,15 @@ public class BlockNestBox extends BaseBlockContainer {
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-                                  EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-    var tile = TileUtils.getTile(world, pos, TileNestBox.class);
-    if (tile != null && !world.isRemote) {
-      GuiHandler.openGui(world, pos, player);
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    if (!world.isRemote) {
+      TileUtils.getTile(world, pos, TileNestBox.class).ifPresent(tile -> GuiHandler.openGui(world, pos, player));
     }
     return true;
   }
 
   private boolean canStay(IBlockAccess world, BlockPos pos) {
-    return world.getBlockState(pos.down())
-                .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+    return world.getBlockState(pos.down()).getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
   }
 
   @Override
@@ -88,16 +85,12 @@ public class BlockNestBox extends BaseBlockContainer {
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TileNestBox.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    TileUtils.getTile(worldIn, pos, TileNestBox.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
   }
 
   @Override
-  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
-                                                         IBlockAccess worldIn, BlockPos pos) {
+  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return BOUNDING_BOX;
   }
 

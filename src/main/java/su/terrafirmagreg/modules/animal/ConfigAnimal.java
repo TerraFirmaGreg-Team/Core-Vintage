@@ -34,5 +34,5 @@ public class ConfigAnimal {
   static {
     ConfigAnytime.register(ConfigAnimal.class);
   }
-  
+
 }

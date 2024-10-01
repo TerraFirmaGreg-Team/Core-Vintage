@@ -26,7 +26,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodHandler;
+import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TEStemCrop;
 import net.dries007.tfc.objects.te.TETickCounter;
@@ -100,23 +100,23 @@ public class BlockStemFruit extends BlockDirectional implements ICapabilitySize 
         Block block = world.getBlockState(cropPos).getBlock();
         if (block instanceof BlockStemCrop crop) {
           //check the crop is pointing towards us
-          var tile = TileUtils.getTile(world, cropPos, TEStemCrop.class);
-          if (tile != null && tile.getFruitDirection() == neighbor.getOpposite()) {
-            IBlockState cropState = world.getBlockState(cropPos);
-            int cropStage = cropState.getValue(crop.getStageProperty());
-            if (cropStage == crop.getCrop().getMaxStage()) {
-              world.setBlockState(cropPos, cropState.withProperty(crop.getStageProperty(), cropStage - 3));
-              SimpleSkill skill = CapabilityPlayer.getSkill(player, SkillType.AGRICULTURE);
-              ItemStack seedDrop = new ItemStack(ItemSeedsTFC.get(crop.getCrop()), 0);
-              if (skill != null) {
-                seedDrop.setCount(Crop.getSkillSeedBonus(skill, RANDOM));
-              }
-              if (!seedDrop.isEmpty()) {
-                ItemHandlerHelper.giveItemToPlayer(player, seedDrop);
-              }
-            }
-
-          }
+          TileUtils.getTile(world, cropPos, TEStemCrop.class)
+                   .filter(tile -> tile.getFruitDirection() == neighbor.getOpposite())
+                   .ifPresent(tile -> {
+                     IBlockState cropState = world.getBlockState(cropPos);
+                     int cropStage = cropState.getValue(crop.getStageProperty());
+                     if (cropStage == crop.getCrop().getMaxStage()) {
+                       world.setBlockState(cropPos, cropState.withProperty(crop.getStageProperty(), cropStage - 3));
+                       SimpleSkill skill = CapabilityPlayer.getSkill(player, SkillType.AGRICULTURE);
+                       ItemStack seedDrop = new ItemStack(ItemSeedsTFC.get(crop.getCrop()), 0);
+                       if (skill != null) {
+                         seedDrop.setCount(Crop.getSkillSeedBonus(skill, RANDOM));
+                       }
+                       if (!seedDrop.isEmpty()) {
+                         ItemHandlerHelper.giveItemToPlayer(player, seedDrop);
+                       }
+                     }
+                   });
         }
       }
     }
@@ -150,22 +150,19 @@ public class BlockStemFruit extends BlockDirectional implements ICapabilitySize 
   }
 
   @Override
-  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-    super.getDrops(drops, world, pos, state, fortune);
-    if (world instanceof World && !((World) world).isRemote) {
-      var tile = TileUtils.getTile(world, pos, TETickCounter.class);
-      if (tile != null) {
-        long currentTime = Calendar.PLAYER_TIME.getTicks();
-        long foodCreationDate = currentTime - tile.getTicksSinceUpdate();
-        drops.forEach(stack -> {
-          FoodHandler handler = (FoodHandler) stack.getCapability(CapabilityFood.CAPABILITY, null);
-          if (handler != null) {
-            handler.setCreationDate(foodCreationDate);
-          }
-        });
-      }
-    }
-
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess blockAccess, BlockPos pos, IBlockState state, int fortune) {
+    super.getDrops(drops, blockAccess, pos, state, fortune);
+    if (blockAccess instanceof World world && world.isRemote) {return;}
+    TileUtils.getTile(blockAccess, pos, TETickCounter.class).ifPresent(tile -> {
+      long currentTime = Calendar.PLAYER_TIME.getTicks();
+      long foodCreationDate = currentTime - tile.getTicksSinceUpdate();
+      drops.forEach(stack -> {
+        IFood handler = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        if (handler != null) {
+          handler.setCreationDate(foodCreationDate);
+        }
+      });
+    });
   }
 
   @Override

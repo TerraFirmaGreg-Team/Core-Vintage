@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.food;
 
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.food.init.BlocksFood;
 import su.terrafirmagreg.modules.food.init.ItemsFood;
@@ -15,12 +16,12 @@ public final class ModuleFood extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleFood.class.getSimpleName());
 
-  public final CreativeTabs FOOD_TAB;
+  public static CreativeTabs TAB;
+  public static RegistryManager REGISTRY;
 
   public ModuleFood() {
-    this.FOOD_TAB = BaseCreativeTab.of("food", "food/ingredient/wheat_bread_sandwich");
-
-    this.enableAutoRegistry(FOOD_TAB);
+    TAB = BaseCreativeTab.of("food", "food/ingredient/wheat_bread_sandwich");
+    REGISTRY = enableAutoRegistry(TAB);
   }
 
   @Override

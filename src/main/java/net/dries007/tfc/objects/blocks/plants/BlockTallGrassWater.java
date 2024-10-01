@@ -63,7 +63,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
   @Override
   protected boolean canSustainBush(IBlockState state) {
     return (BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) ||
-           (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
+           (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater));
   }
 
   @Override
@@ -73,7 +73,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
     if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).getBlock() == this) {
       return false;
     }
-    if (soil.getBlock() instanceof BlockWaterPlantTFCF || soil.getBlock() instanceof BlockWaterPlantTFC) {
+    if (soil.getBlock() instanceof BlockWaterPlantTFCF || soil.getBlock() instanceof BlockPlantWater) {
       return false;
     }
     if (state.getBlock() == this) {
@@ -83,7 +83,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
                    .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this)) ||
               ((material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == plant.getWaterType()) ||
                material == Material.ICE ||
-               (material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC)))) &&
+               (material == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater)))) &&
              plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     } else {
       return this.canSustainBush(soil);

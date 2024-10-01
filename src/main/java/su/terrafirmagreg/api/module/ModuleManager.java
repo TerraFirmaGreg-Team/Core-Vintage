@@ -8,12 +8,13 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLStateEvent;
 
 import com.google.common.base.Preconditions;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 
 import lombok.Getter;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,8 +26,8 @@ public final class ModuleManager {
   private static final ModuleManager instance = new ModuleManager();
   private static final LoggingHelper LOGGER = LoggingHelper.of(ModuleManager.class.getSimpleName());
 
-  private final Set<IModule> loadedModules = new LinkedHashSet<>();
-  private final Map<ResourceLocation, IModule> sortedModules = new LinkedHashMap<>();
+  private final Set<IModule> loadedModules = new ObjectLinkedOpenHashSet<>();
+  private final Map<ResourceLocation, IModule> sortedModules = new Object2ObjectLinkedOpenHashMap<>();
 
   private final ModuleEventRouter moduleEventRouter;
 
@@ -65,15 +66,18 @@ public final class ModuleManager {
       containerModules.remove(coreModule);
       containerModules.add(0, coreModule);
 
-      modulesToLoad.addAll(containerModules.stream()
-                                           .filter(this::isModuleEnabled)
-                                           .collect(Collectors.toSet()));
+      modulesToLoad.addAll(
+        containerModules.stream()
+                        .filter(this::isModuleEnabled)
+                        .collect(Collectors.toSet())
+      );
 
-      toLoad.addAll(containerModules.stream()
-                                    .filter(this::isModuleEnabled)
-                                    .map(module -> new ResourceLocation(container,
-                                                                        module.getClass().getAnnotation(Module.class).moduleID().getName()))
-                                    .collect(Collectors.toSet()));
+      toLoad.addAll(
+        containerModules.stream()
+                        .filter(this::isModuleEnabled)
+                        .map(module -> new ResourceLocation(container, module.getClass().getAnnotation(Module.class).moduleID().getName()))
+                        .collect(Collectors.toSet())
+      );
     });
 
     modulesToLoad.removeIf(module -> {
@@ -82,9 +86,7 @@ public final class ModuleManager {
         Module annotation = module.getClass().getAnnotation(Module.class);
         String moduleID = annotation.moduleID().getName();
         toLoad.remove(new ResourceLocation(moduleID));
-        ModuleManager.LOGGER.info(
-          "Module {} is missing at least one of module dependencies: {}, skipping loading...",
-          moduleID, dependencies);
+        ModuleManager.LOGGER.info("Module {} is missing at least one of module dependencies: {}, skipping loading...", moduleID, dependencies);
         return true;
       }
       return false;

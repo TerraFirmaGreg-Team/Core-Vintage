@@ -191,7 +191,7 @@ public class ProviderTemperature implements ICapabilityTemperature {
   public void updateAndSync() {
     EntityPlayer player = getPlayer();
     if (player instanceof EntityPlayerMP entityPlayerMP) {
-      ModuleCore.getPacketService().sendTo(new SCPacketTemperature(serializeNBT()), entityPlayerMP);
+      ModuleCore.PACKET_SERVICE.sendTo(new SCPacketTemperature(serializeNBT()), entityPlayerMP);
     }
   }
 

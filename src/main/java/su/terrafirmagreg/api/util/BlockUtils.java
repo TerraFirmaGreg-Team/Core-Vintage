@@ -458,14 +458,14 @@ public final class BlockUtils {
     return worldIn.isSideSolid(pos.offset(facing.getOpposite()), facing);
   }
 
-  public static boolean isVariant(IBlockState blockState, Variant<?>... variants) {
+  public static boolean isVariant(IBlockState blockState, Variant<?, ?>... variants) {
     if (blockState.getBlock() instanceof IVariant<?> variantIn) {
       return isVariant(variantIn.getVariant(), variants);
     }
     return false;
   }
 
-  public static boolean isVariant(Variant<?> variantIn, Variant<?>... variants) {
+  public static boolean isVariant(Variant<?, ?> variantIn, Variant<?, ?>... variants) {
     for (var variant : variants) {
       if (variantIn == variant) {
         return true;

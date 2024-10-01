@@ -25,20 +25,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class BlockTallPlantTFC extends BlockPlantTFC implements IGrowable, ITallPlant {
+public class BlockPlantTall extends BlockPlant implements IGrowable, ITallPlant {
 
   private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
-  private static final Map<Plant, BlockTallPlantTFC> MAP = new HashMap<>();
+  private static final Map<Plant, BlockPlantTall> MAP = new HashMap<>();
 
-  public BlockTallPlantTFC(Plant plant) {
+  public BlockPlantTall(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockTallPlantTFC get(Plant plant) {
-    return BlockTallPlantTFC.MAP.get(plant);
+  public static BlockPlantTall get(Plant plant) {
+    return BlockPlantTall.MAP.get(plant);
   }
 
   @Override

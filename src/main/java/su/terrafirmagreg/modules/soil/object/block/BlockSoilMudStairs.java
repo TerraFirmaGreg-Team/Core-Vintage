@@ -25,7 +25,7 @@ public class BlockSoilMudStairs extends BaseBlockStairs implements ISoilBlock {
     this.type = type;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .sound(SoundType.GROUND)
       .renderLayer(BlockRenderLayer.CUTOUT)
       .harvestLevel(ToolClasses.PICKAXE, 0)

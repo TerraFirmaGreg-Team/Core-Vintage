@@ -2,8 +2,10 @@ package su.terrafirmagreg.modules.soil.api.types.type;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.data.lib.types.type.Type;
+import su.terrafirmagreg.data.lib.types.variant.Variant;
 
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
@@ -20,14 +22,11 @@ public class SoilType extends Type<SoilType> {
   @Getter
   private static final Set<SoilType> types = new ObjectOpenHashSet<>();
 
-  private final String name;
-
   private SoilType(Builder builder) {
     super(builder.name);
-    this.name = builder.name;
 
     if (!types.add(this)) {
-      throw new RuntimeException(String.format("SoilType: [%s] already exists!", name));
+      throw new RuntimeException(String.format("Type: [%s] already exists!", name));
     }
 
   }
@@ -57,18 +56,20 @@ public class SoilType extends Type<SoilType> {
   }
 
   public static Builder builder(String name) {
-
     return new Builder(name);
   }
 
-  /**
-   * Возвращает ресурсное расположение текстуры породы.
-   *
-   * @return Ресурсное расположение текстуры породы.
-   */
-  @NotNull
-  public ResourceLocation getTexture() {
-    return ModUtils.resource("textures/blocks/soil/mud/" + this + ".png");
+
+  public ResourceLocation getTexture(Variant<?, SoilType> variant) {
+    return ModUtils.resource(String.format("textures/blocks/soil/%s/%s.png", variant, this));
+  }
+
+  public String getLocalizedName() {
+    return new TextComponentTranslation(String.format("soil.type.%s.name", this)).getFormattedText();
+  }
+
+  public String getRegistryKey(Variant<?, SoilType> variant) {
+    return String.format("soil/%s/%s", variant, this);
   }
 
   public static class Builder {

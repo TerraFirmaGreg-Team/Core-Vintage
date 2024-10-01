@@ -36,24 +36,25 @@ public class ItemBlockRot extends ItemBlockTFC {
   }
 
   @Override
-  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-                                    float hitZ) {
-    long foodCreationDate = Long.MIN_VALUE;
-    if (!worldIn.isRemote) {
-      ItemStack stack = player.getHeldItem(hand);
-      FoodHandler handler = (FoodHandler) stack.getCapability(CapabilityFood.CAPABILITY, null);
-      if (handler != null) {
-        foodCreationDate = handler.getCreationDate();
-      }
-    }
+  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     EnumActionResult result = super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
-    if (!worldIn.isRemote && result == EnumActionResult.SUCCESS) {
-      var tile = TileUtils.getTile(worldIn, pos.offset(facing), TETickCounter.class);
-      if (tile != null) {
+    long foodCreationDate;
+    if (worldIn.isRemote) {return result;}
+
+    ItemStack stack = player.getHeldItem(hand);
+    FoodHandler handler = (FoodHandler) stack.getCapability(CapabilityFood.CAPABILITY, null);
+    if (handler != null) {
+      foodCreationDate = handler.getCreationDate();
+    } else {
+      foodCreationDate = Long.MIN_VALUE;
+    }
+
+    if (result == EnumActionResult.SUCCESS) {
+      TileUtils.getTile(worldIn, pos.offset(facing), TETickCounter.class).ifPresent(tile -> {
         long currentTime = Calendar.PLAYER_TIME.getTicks();
         tile.resetCounter(); //tile counter is at currentTime
         tile.reduceCounter(foodCreationDate - currentTime); //teCounter is now at foodCreationDate
-      }
+      });
     }
     return result;
   }

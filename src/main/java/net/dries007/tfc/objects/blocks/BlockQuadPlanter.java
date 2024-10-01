@@ -92,28 +92,25 @@ public class BlockQuadPlanter extends BlockLargePlanter implements IHighlightHan
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                  float hitY, float hitZ) {
-    if (!world.isRemote) {
-      ItemStack held = player.getHeldItem(hand);
-      int slot = getSlotForHit(hitX, hitZ);
-      var tile = TileUtils.getTile(world, pos, TEPlanter.class);
-      if (tile != null) {
-        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (inventory != null) {
-          ItemStack slotStack = inventory.getStackInSlot(slot);
-          PlanterRecipe recipe = PlanterRecipe.get(held);
-          if (slotStack.isEmpty() && !held.isEmpty() && recipe != null && !recipe.isLarge()) {
-            ItemStack leftover = inventory.insertItem(slot, held.splitStack(1), false);
-            ItemHandlerHelper.giveItemToPlayer(player, leftover);
-            tile.onInsert(slot);
-          } else if (player.isSneaking() && held.isEmpty() && !slotStack.isEmpty()) {
-            tile.tryHarvest(player, slot);
-          }
-
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    if (world.isRemote) {return true;}
+    ItemStack held = player.getHeldItem(hand);
+    int slot = getSlotForHit(hitX, hitZ);
+    TileUtils.getTile(world, pos, TEPlanter.class).ifPresent(tile -> {
+      IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+      if (inventory != null) {
+        ItemStack slotStack = inventory.getStackInSlot(slot);
+        PlanterRecipe recipe = PlanterRecipe.get(held);
+        if (slotStack.isEmpty() && !held.isEmpty() && recipe != null && !recipe.isLarge()) {
+          ItemStack leftover = inventory.insertItem(slot, held.splitStack(1), false);
+          ItemHandlerHelper.giveItemToPlayer(player, leftover);
+          tile.onInsert(slot);
+        } else if (player.isSneaking() && held.isEmpty() && !slotStack.isEmpty()) {
+          tile.tryHarvest(player, slot);
         }
+
       }
-    }
+    });
     return true;
   }
 
@@ -136,13 +133,12 @@ public class BlockQuadPlanter extends BlockLargePlanter implements IHighlightHan
   }
 
   public PlanterRecipe.PlantInfo[] getCrops(IBlockAccess world, BlockPos pos) {
-    var tile = TileUtils.getTile(world, pos, TEPlanter.class);
     PlanterRecipe.PlantInfo[] plants = new PlanterRecipe.PlantInfo[]{null, null, null, null};
-    if (tile != null) {
+    TileUtils.getTile(world, pos, TEPlanter.class).ifPresent(tile -> {
       for (int i = 0; i < 4; i++) {
         plants[i] = new PlanterRecipe.PlantInfo(tile.getRecipe(i), tile.getStage(i));
       }
-    }
+    });
     return plants;
   }
 }

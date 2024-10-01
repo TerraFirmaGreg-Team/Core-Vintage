@@ -31,7 +31,7 @@ import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.objects.blocks.plants.BlockCreepingPlantTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockHangingCreepingPlantTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockHangingPlantTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlant.BlockPlantDummy1;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantDummy1;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockTallGrassWater;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterGlowPlant;

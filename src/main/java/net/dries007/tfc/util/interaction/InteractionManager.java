@@ -93,9 +93,9 @@ public final class InteractionManager {
                           // Clicked on a log pile, so try to insert into the original
                           // This is called first when player is sneaking, otherwise the call chain is passed to the BlockLogPile#onBlockActivated
                           var tile = TileUtils.getTile(worldIn, pos, TileLogPile.class);
-                          if (tile != null) {
+                          if (tile.isPresent()) {
                             if (!player.isSneaking()) {
-                              if (tile.insertLog(stack)) {
+                              if (tile.get().insertLog(stack)) {
                                 if (!worldIn.isRemote) {
                                   worldIn.playSound(null, pos.offset(direction), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
                                                     1.0F);
@@ -105,7 +105,7 @@ public final class InteractionManager {
                                 return EnumActionResult.SUCCESS;
                               }
                             } else {
-                              int inserted = tile.insertLogs(stack.copy());
+                              int inserted = tile.get().insertLogs(stack.copy());
                               if (inserted > 0) {
                                 if (!worldIn.isRemote) {
                                   worldIn.playSound(null, pos.offset(direction), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
@@ -124,17 +124,13 @@ public final class InteractionManager {
                           if (!stateAt.getBlock().isReplaceable(worldIn, pos)) {
                             posAt = posAt.offset(direction);
                           }
-                          if (worldIn.getBlockState(posAt.down())
-                                     .isNormalCube() && worldIn.mayPlace(BlocksDevice.LOG_PILE, posAt, false, direction, null)) {
+                          if (worldIn.getBlockState(posAt.down()).isNormalCube()
+                              && worldIn.mayPlace(BlocksDevice.LOG_PILE, posAt, false, direction, null)) {
                             // Place log pile
                             if (!worldIn.isRemote) {
-                              worldIn.setBlockState(posAt,
-                                                    BlocksDevice.LOG_PILE.getStateForPlacement(worldIn, posAt, direction, 0, 0, 0, 0, player));
+                              worldIn.setBlockState(posAt, BlocksDevice.LOG_PILE.getStateForPlacement(worldIn, posAt, direction, 0, 0, 0, 0, player));
 
-                              var tile = TileUtils.getTile(worldIn, posAt, TileLogPile.class);
-                              if (tile != null) {
-                                tile.insertLog(stack.copy());
-                              }
+                              TileUtils.getTile(worldIn, posAt, TileLogPile.class).ifPresent(tile -> tile.insertLog(stack.copy()));
 
                               worldIn.playSound(null, posAt, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
 

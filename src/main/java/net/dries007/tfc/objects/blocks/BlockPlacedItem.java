@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 
@@ -28,7 +29,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.objects.te.TEPlacedItem;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -100,10 +100,7 @@ public class BlockPlacedItem extends Block {
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TEPlacedItem.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    TileUtils.getTile(worldIn, pos, TEPlacedItem.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
   }
 
@@ -114,20 +111,17 @@ public class BlockPlacedItem extends Block {
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                  float hitX, float hitY, float hitZ) {
-    var tile = TileUtils.getTile(worldIn, pos, TEPlacedItem.class);
-    if (tile != null) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    return TileUtils.getTile(worldIn, pos, TEPlacedItem.class).map(tile -> {
       ItemStack stack = playerIn.getHeldItemMainhand();
       // Check for pit kiln conversion
       if (!playerIn.isSneaking() &&
-          (OreDictionaryHelper.doesStackMatchOre(stack, "straw") || OreDictionaryHelper.doesStackMatchOre(stack, "blockStraw"))) {
+          (OreDictUtils.contains(stack, "straw") || OreDictUtils.contains(stack, "blockStraw"))) {
         TilePitKiln.convertPlacedItemToPitKiln(worldIn, pos, stack.splitStack(1));
         return true;
       }
       return tile.onRightClick(playerIn, playerIn.getHeldItem(hand), hitX < 0.5, hitZ < 0.5);
-    }
-    return false;
+    }).orElse(false);
   }
 
   @Override

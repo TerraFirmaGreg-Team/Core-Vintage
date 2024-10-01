@@ -36,11 +36,10 @@ public class TEPlacedItem extends BaseTileInventory {
   }
 
   public static void convertPitKilnToPlacedItem(World world, BlockPos pos) {
-    TilePitKiln teOld = TileUtils.getTile(world, pos, TilePitKiln.class);
-    if (teOld != null) {
+    TileUtils.getTile(world, pos, TilePitKiln.class).ifPresent(tileOld -> {
       // Remove inventory items
       // This happens here to stop the block dropping its items in onBreakBlock()
-      IItemHandler capOld = teOld.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+      IItemHandler capOld = tileOld.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
       ItemStack[] inventory = new ItemStack[4];
       if (capOld != null) {
         for (int i = 0; i < 4; i++) {
@@ -51,9 +50,8 @@ public class TEPlacedItem extends BaseTileInventory {
       world.setBlockState(pos, BlocksTFC.PLACED_ITEM.getDefaultState());
 
       // Replace inventory items
-      TEPlacedItem teNew = TileUtils.getTile(world, pos, TEPlacedItem.class);
-      if (teNew != null) {
-        IItemHandler capNew = teNew.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+      TileUtils.getTile(world, pos, TEPlacedItem.class).ifPresent(tileNew -> {
+        IItemHandler capNew = tileNew.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (capNew != null) {
           for (int i = 0; i < 4; i++) {
             if (inventory[i] != null && !inventory[i].isEmpty()) {
@@ -62,9 +60,9 @@ public class TEPlacedItem extends BaseTileInventory {
           }
         }
         // Copy misc data
-        teNew.isHoldingLargeItem = teOld.isHoldingLargeItem;
-      }
-    }
+        tileNew.isHoldingLargeItem = tileOld.isHoldingLargeItem;
+      });
+    });
   }
 
   @Override

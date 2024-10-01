@@ -16,7 +16,6 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.types.DefaultPlants;
-import net.dries007.tfc.types.PlantsTFCF;
 import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.ConfigTFCF;
 
@@ -89,11 +88,11 @@ public class GeneratorUnderground implements IWorldGenerator {
             switch (RNG.nextInt(2)) {
               case 0: {
                 if ((b != BiomesWorld.OCEAN) && (
-                  plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BEARDED_MOSS) ||
-                  plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.GLOW_VINE) ||
-                  plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.HANGING_VINE) ||
-                  plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.JUNGLE_VINE) ||
-                  plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.LIANA))) {
+                  plant == TFCRegistries.PLANTS.getValue(DefaultPlants.BEARDED_MOSS) ||
+                  plant == TFCRegistries.PLANTS.getValue(DefaultPlants.GLOW_VINE) ||
+                  plant == TFCRegistries.PLANTS.getValue(DefaultPlants.HANGING_VINE) ||
+                  plant == TFCRegistries.PLANTS.getValue(DefaultPlants.JUNGLE_VINE) ||
+                  plant == TFCRegistries.PLANTS.getValue(DefaultPlants.LIANA))) {
                   int y1 =
                     rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2)
                     + WorldTypeClassic.ROCKLAYER2;
@@ -115,10 +114,10 @@ public class GeneratorUnderground implements IWorldGenerator {
               }
               case 1: {
                 if ((b != BiomesWorld.OCEAN) && (
-                  plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BEARDED_MOSS) ||
-                  plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.GLOW_VINE) ||
-                  plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.HANGING_VINE) ||
-                  plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.JUNGLE_VINE))) {
+                  plant == TFCRegistries.PLANTS.getValue(DefaultPlants.BEARDED_MOSS) ||
+                  plant == TFCRegistries.PLANTS.getValue(DefaultPlants.GLOW_VINE) ||
+                  plant == TFCRegistries.PLANTS.getValue(DefaultPlants.HANGING_VINE) ||
+                  plant == TFCRegistries.PLANTS.getValue(DefaultPlants.JUNGLE_VINE))) {
                   int y1 =
                     rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2)
                     + WorldTypeClassic.ROCKLAYER2;
@@ -144,9 +143,9 @@ public class GeneratorUnderground implements IWorldGenerator {
           }
           case CREEPING: {
             if ((b != BiomesWorld.OCEAN) && (
-              plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.TACKWEED) ||
-              plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.TAKAKIA) ||
-              plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.IVY) ||
+              plant == TFCRegistries.PLANTS.getValue(DefaultPlants.TACKWEED) ||
+              plant == TFCRegistries.PLANTS.getValue(DefaultPlants.TAKAKIA) ||
+              plant == TFCRegistries.PLANTS.getValue(DefaultPlants.IVY) ||
               plant == TFCRegistries.PLANTS.getValue(DefaultPlants.MORNING_GLORY) ||
               plant == TFCRegistries.PLANTS.getValue(DefaultPlants.MOSS) ||
               plant == TFCRegistries.PLANTS.getValue(DefaultPlants.REINDEER_LICHEN))) {

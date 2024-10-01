@@ -25,7 +25,7 @@ public class BlockSoilMudWall extends BaseBlockWall implements ISoilBlock {
     this.type = type;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .sound(SoundType.STONE)
       .renderLayer(BlockRenderLayer.CUTOUT)
       .harvestLevel(ToolClasses.PICKAXE, 0)

@@ -64,8 +64,7 @@ public class BlockCrate extends BaseBlockContainer {
    * Used to update the vessel seal state and the TE, in the correct order
    */
   public static void toggleCrateSeal(World world, BlockPos pos) {
-    var tile = TileUtils.getTile(world, pos, TileCrate.class);
-    if (tile != null) {
+    TileUtils.getTile(world, pos, TileCrate.class).ifPresent(tile -> {
       IBlockState state = world.getBlockState(pos);
       boolean previousSealed = state.getValue(SEALED);
       world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
@@ -74,7 +73,7 @@ public class BlockCrate extends BaseBlockContainer {
       } else {
         tile.onSealed();
       }
-    }
+    });
   }
 
   @Override
@@ -84,10 +83,7 @@ public class BlockCrate extends BaseBlockContainer {
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(world, pos, TileCrate.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
+    TileUtils.getTile(world, pos, TileCrate.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
     super.breakBlock(world, pos, state);
   }
 
@@ -135,37 +131,31 @@ public class BlockCrate extends BaseBlockContainer {
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state,
-                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
-                                  float hitY, float hitZ) {
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!world.isRemote) {
       ItemStack heldItem = playerIn.getHeldItem(hand);
-      var tile = TileUtils.getTile(world, pos, TileCrate.class);
-      if (tile != null) {
+      TileUtils.getTile(world, pos, TileCrate.class).ifPresent(tile -> {
         if (heldItem.isEmpty() && playerIn.isSneaking()) {
-          world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
-                          0.85F);
+          world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
           toggleCrateSeal(world, pos);
         } else {
           GuiHandler.openGui(world, pos, playerIn);
         }
-      }
+      });
     }
     return true;
   }
 
   @Override
-  public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer,
-                              ItemStack stack) {
+  public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     // If the barrel was sealed, then copy the contents from the item
     if (!world.isRemote) {
       NBTTagCompound nbt = stack.getTagCompound();
       if (nbt != null) {
-        var tile = TileUtils.getTile(world, pos, TileCrate.class);
-        if (tile != null) {
+        TileUtils.getTile(world, pos, TileCrate.class).ifPresent(tile -> {
           world.setBlockState(pos, state.withProperty(SEALED, true));
           tile.readFromItemTag(nbt);
-        }
+        });
       }
     }
   }

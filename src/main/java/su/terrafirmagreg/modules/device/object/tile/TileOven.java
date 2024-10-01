@@ -204,7 +204,7 @@ public class TileOven extends BaseTileTickableInventory implements IAmbientalTil
 
   @Override
   public boolean canInteractWith(EntityPlayer player) {
-    return !isBurning && TileUtils.getTile(world, pos) == this;
+    return !isBurning && TileUtils.getTile(world, pos).filter(tile -> tile == this).isPresent();
   }
 
   public void light() {

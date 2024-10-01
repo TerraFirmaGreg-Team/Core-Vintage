@@ -124,29 +124,26 @@ public class BlockLargePlanter extends Block implements ICapabilitySize {
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                  float hitY, float hitZ) {
-    if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
-      ItemStack held = player.getHeldItem(hand);
-      var tile = TileUtils.getTile(world, pos, TEPlanter.class);
-      if (tile != null) {
-        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (inventory != null) {
-          ItemStack slotStack = inventory.getStackInSlot(0);
-          PlanterRecipe recipe = PlanterRecipe.get(held);
-          if (slotStack.isEmpty() && !held.isEmpty() && recipe != null && recipe.isLarge()) {
-            ItemStack leftover = inventory.insertItem(0, held.splitStack(1), false);
-            ItemHandlerHelper.giveItemToPlayer(player, leftover);
-            tile.onInsert(0);
-            return true;
-          } else if (player.isSneaking() && held.isEmpty() && !slotStack.isEmpty()) {
-            tile.tryHarvest(player, 0);
-            return true;
-          }
-        }
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    if (world.isRemote && hand != EnumHand.MAIN_HAND) {return false;}
+    ItemStack held = player.getHeldItem(hand);
+    return TileUtils.getTile(world, pos, TEPlanter.class).map(tile -> {
+      IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+      if (inventory == null) {return false;}
+      ItemStack slotStack = inventory.getStackInSlot(0);
+      PlanterRecipe recipe = PlanterRecipe.get(held);
+      if (slotStack.isEmpty() && !held.isEmpty() && recipe != null && recipe.isLarge()) {
+        ItemStack leftover = inventory.insertItem(0, held.splitStack(1), false);
+        ItemHandlerHelper.giveItemToPlayer(player, leftover);
+        tile.onInsert(0);
+        return true;
+      } else if (player.isSneaking() && held.isEmpty() && !slotStack.isEmpty()) {
+        tile.tryHarvest(player, 0);
+        return true;
       }
-    }
-    return false;
+      return false;
+    }).orElse(false);
+
   }
 
   @Override
@@ -177,8 +174,9 @@ public class BlockLargePlanter extends Block implements ICapabilitySize {
 
   @Nullable
   public PlanterRecipe.PlantInfo getCrop(IBlockAccess world, BlockPos pos) {
-    var tile = TileUtils.getTile(world, pos, TEPlanter.class);
-    return tile != null ? new PlanterRecipe.PlantInfo(tile.getRecipe(0), tile.getStage(0)) : null;
+    return TileUtils.getTile(world, pos, TEPlanter.class)
+                    .map(tile -> new PlanterRecipe.PlantInfo(tile.getRecipe(0), tile.getStage(0)))
+                    .orElse(null);
   }
 
   private boolean canStay(IBlockAccess world, BlockPos pos) {

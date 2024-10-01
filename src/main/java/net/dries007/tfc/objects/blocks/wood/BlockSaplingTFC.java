@@ -1,10 +1,7 @@
 package net.dries007.tfc.objects.blocks.wood;
 
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -25,11 +22,14 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.objects.te.TETickCounter;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfc.util.calendar.ICalendar;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.TileUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -75,10 +75,7 @@ public class BlockSaplingTFC extends BlockBush implements IGrowable, IGrowingPla
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-    var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
+    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 
@@ -120,15 +117,13 @@ public class BlockSaplingTFC extends BlockBush implements IGrowable, IGrowingPla
   public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
     super.updateTick(world, pos, state, random);
 
-    if (!world.isRemote) {
-      var tile = TileUtils.getTile(world, pos, TETickCounter.class);
-      if (tile != null) {
-        long days = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
-        if (days > wood.getMinGrowthTime()) {
-          grow(world, random, pos, state);
-        }
+    if (world.isRemote) {return;}
+    TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
+      long days = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
+      if (days > wood.getMinGrowthTime()) {
+        grow(world, random, pos, state);
       }
-    }
+    });
   }
 
   @SuppressWarnings("deprecation")

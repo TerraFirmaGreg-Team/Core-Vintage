@@ -16,7 +16,7 @@ public class ConfigMetal {
 
   @Config.Name("Block")
   @Config.Comment("Block settings")
-  public static final BlocksCategory BLOCKS = new BlocksCategory();
+  public static final BlocksCategory BLOCK = new BlocksCategory();
 
   @Config.Name("Item")
   @Config.Comment("Item settings")

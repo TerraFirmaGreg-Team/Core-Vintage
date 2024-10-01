@@ -29,7 +29,7 @@ public class BlockWoodFenceGateLog extends BlockFenceGate implements IWoodBlock 
     this.settings = Settings.of(Material.WOOD);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .ignoresProperties(IN_WALL, POWERED)
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)

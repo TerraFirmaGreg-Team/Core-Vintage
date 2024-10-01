@@ -452,11 +452,8 @@ public class TileIceBunker extends TileEntityLockableLoot
   private void updateContainer(int x, int y, int z) {
     Block block = world.getBlockState(new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z)).getBlock();
     if (block instanceof BlockCellarShelf) {
-      var tile = TileUtils.getTile(world, new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z), TileCellarShelf.class);
-      if (tile != null) {
-        tile.updateShelf(temperature);
-      }
-
+      TileUtils.getTile(world, new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z), TileCellarShelf.class)
+               .ifPresent(tile -> tile.updateShelf(temperature));
     }
   }
 

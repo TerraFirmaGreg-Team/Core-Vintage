@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.data.Properties;
@@ -30,7 +31,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.objects.te.TEString;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -65,20 +65,18 @@ public class BlockString extends BlockNonCube {
     IBlockState state = world.getBlockState(pos);
     if (state.getBlock() instanceof BlockFirePit) {
       if (state.getValue(LIT)) {
-        var tile = TileUtils.getTile(world, pos, TileFirePit.class);
-        if (tile != null) {
+        return TileUtils.getTile(world, pos, TileFirePit.class).map(tile -> {
           IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-          if (cap != null) {
-            for (int i = TileFirePit.SLOT_FUEL_CONSUME; i <= TileFirePit.SLOT_FUEL_INPUT; i++) {
-              ItemStack stack = cap.getStackInSlot(i);
-              if (stack.isEmpty() || OreDictionaryHelper.doesStackMatchOre(stack, "logWood")) {
-                continue;
-              }
-              return false;
+          if (cap == null) {return false;}
+          for (int i = TileFirePit.SLOT_FUEL_CONSUME; i <= TileFirePit.SLOT_FUEL_INPUT; i++) {
+            ItemStack stack = cap.getStackInSlot(i);
+            if (stack.isEmpty() || OreDictUtils.contains(stack, "logWood")) {
+              continue;
             }
-            return true;
+            return false;
           }
-        }
+          return true;
+        }).orElse(false);
       }
     }
     return false;
@@ -108,19 +106,18 @@ public class BlockString extends BlockNonCube {
     if (world.isRemote) {
       return;
     }
-    var tile = TileUtils.getTile(world, pos, TEString.class);
-    if (tile == null) {
-      return;
-    }
-
-    if (world.isRainingAt(pos.up()) || !isFired(world, pos)) {
-      tile.resetCounter();
-    } else if (tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_HOUR * 4)) {
-      IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-      if (cap != null) {
-        tile.tryCook();
+    TileUtils.getTile(world, pos, TEString.class).ifPresent(tile -> {
+      if (world.isRainingAt(pos.up()) || !isFired(world, pos)) {
+        tile.resetCounter();
+      } else if (tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_HOUR * 4)) {
+        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (cap != null) {
+          tile.tryCook();
+        }
       }
-    }
+    });
+
+
   }
 
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
@@ -128,42 +125,35 @@ public class BlockString extends BlockNonCube {
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                  float hitY, float hitZ) {
-    if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
-      var tile = TileUtils.getTile(world, pos, TEString.class);
-      if (tile == null) {
-        return false;
-      }
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    if (world.isRemote && hand != EnumHand.MAIN_HAND) {return false;}
+    return TileUtils.getTile(world, pos, TEString.class).map(tile -> {
       ItemStack held = player.getHeldItem(hand);
-      if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
-        return false;
-      }
+      if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {return false;}
       IItemHandler inv = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-      if (inv == null) {
-        return false;
-      }
+      if (inv == null) {return false;}
+      IFood cap = held.getCapability(CapabilityFood.CAPABILITY, null);
+      if (cap == null) {return false;}
+
       ItemStack current = inv.getStackInSlot(0);
       if (!held.isEmpty() && current.isEmpty()) {
-        IFood cap = held.getCapability(CapabilityFood.CAPABILITY, null);
-        if (cap != null) {
-          List<FoodTrait> traits = cap.getTraits();
-          boolean isFoodValid = (traits.contains(FoodTrait.BRINED) && OreDictionaryHelper.doesStackMatchOre(held, "categoryMeat") &&
-                                 HeatRecipe.get(held) != null) || OreDictionaryHelper.doesStackMatchOre(held, "cheese");
-          if (!traits.contains(FoodTrait.SMOKED) && isFoodValid) {
-            ItemStack leftover = inv.insertItem(0, held.splitStack(1), false);
-            StackUtils.spawnItemStack(world, pos.add(0.5D, 0.5D, 0.5D), leftover);
-            tile.markForSync();
-            return true;
-          }
+        List<FoodTrait> traits = cap.getTraits();
+        boolean isFoodValid = (traits.contains(FoodTrait.BRINED) && OreDictUtils.contains(held, "categoryMeat")
+                               && HeatRecipe.get(held) != null) || OreDictUtils.contains(held, "cheese");
+
+        if (!traits.contains(FoodTrait.SMOKED) && isFoodValid) {
+          ItemStack leftover = inv.insertItem(0, held.splitStack(1), false);
+          StackUtils.spawnItemStack(world, pos.add(0.5D, 0.5D, 0.5D), leftover);
+          tile.markForSync();
+          return true;
         }
       } else if (held.isEmpty() && !current.isEmpty()) {
         StackUtils.spawnItemStack(world, pos, inv.extractItem(0, 1, false));
         tile.markForSync();
         return true;
       }
-    }
-    return false;
+      return false;
+    }).orElse(false);
   }
 
   @Override
@@ -189,10 +179,7 @@ public class BlockString extends BlockNonCube {
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-    TEString tile = TileUtils.getTile(worldIn, pos, TEString.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
+    TileUtils.getTile(worldIn, pos, TEString.class).ifPresent(TEString::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 

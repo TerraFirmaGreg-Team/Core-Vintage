@@ -20,6 +20,7 @@ import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
 
 public class KnappingRecipeWrapper implements IRecipeWrapper {
 
@@ -94,18 +95,18 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
    */
   public static class Stone extends KnappingRecipeWrapper {
 
-    private final RockType rock;
+    private final RockType type;
 
-    public Stone(KnappingRecipe recipe, IGuiHelper helper, RockType rock) {
-      super(recipe, helper, rock.getTexture(), null);
+    public Stone(KnappingRecipe recipe, IGuiHelper helper, RockType type) {
+      super(recipe, helper, type.getTexture(RAW), null);
 
-      this.rock = rock;
+      this.type = type;
     }
 
     @Override
     public void getIngredients(IIngredients ingredients) {
       ingredients.setOutputLists(VanillaTypes.ITEM,
-                                 CollectionUtils.listOf(CollectionUtils.listOf(recipe.getOutput(new ItemStack(ItemsRock.LOOSE.get(rock))))));
+                                 CollectionUtils.listOf(CollectionUtils.listOf(recipe.getOutput(new ItemStack(ItemsRock.LOOSE.get(type))))));
     }
   }
 }

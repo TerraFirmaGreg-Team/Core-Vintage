@@ -1,18 +1,18 @@
 package net.dries007.tfc.objects.items;
 
-import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.types.Metal;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
+import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
+import net.dries007.tfc.api.types.Metal;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 public class ItemMetalMalletHead extends ItemTFC implements ICapabilityMetal {
 

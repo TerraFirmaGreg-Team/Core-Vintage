@@ -8,36 +8,36 @@ public class RockCategoryHandler {
 
     RockCategories.IGNEOUS_INTRUSIVE = RockCategory
       .builder("igneous_intrusive")
-      .setLayer(true, true, true)
-      .setCaveMod(-0.4f, 0f)
-      .setHardnessModifier(0.2f)
-      .setTextFormatting(TextFormatting.RED)
-      .setAnvil()
+      .layer(true, true, true)
+      .caveMod(-0.4f, 0f)
+      .hardnessModifier(0.2f)
+      .textFormatting(TextFormatting.RED)
+      .hasAnvil()
       .build();
 
     RockCategories.IGNEOUS_EXTRUSIVE = RockCategory
       .builder("igneous_extrusive")
-      .setLayer(true, true, true)
-      .setCaveMod(-0.5f, 0f)
-      .setHardnessModifier(0f)
-      .setTextFormatting(TextFormatting.DARK_RED)
-      .setAnvil()
+      .layer(true, true, true)
+      .caveMod(-0.5f, 0f)
+      .hardnessModifier(0f)
+      .textFormatting(TextFormatting.DARK_RED)
+      .hasAnvil()
       .build();
 
     RockCategories.METAMORPHIC = RockCategory
       .builder("metamorphic")
-      .setLayer(true, true, false)
-      .setCaveMod(0.2f, 0f)
-      .setHardnessModifier(-0.2f)
-      .setTextFormatting(TextFormatting.AQUA)
+      .layer(true, true, false)
+      .caveMod(0.2f, 0f)
+      .hardnessModifier(-0.2f)
+      .textFormatting(TextFormatting.AQUA)
       .build();
 
     RockCategories.SEDIMENTARY = RockCategory
       .builder("sedimentary")
-      .setLayer(true, false, false)
-      .setCaveMod(0.3f, 5f)
-      .setHardnessModifier(-0.4f)
-      .setTextFormatting(TextFormatting.GREEN)
+      .layer(true, false, false)
+      .caveMod(0.3f, 5f)
+      .hardnessModifier(-0.4f)
+      .textFormatting(TextFormatting.GREEN)
       .build();
   }
 }

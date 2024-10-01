@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.agriculture;
 
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.agriculture.init.BlocksAgriculture;
 import su.terrafirmagreg.modules.agriculture.init.ItemsAgriculture;
@@ -13,15 +14,15 @@ import org.jetbrains.annotations.NotNull;
 //@Module(moduleID = "Agriculture", name = "TFG Module Agriculture")
 public final class ModuleAgriculture extends ModuleBase {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(
-    ModuleAgriculture.class.getSimpleName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAgriculture.class.getSimpleName());
 
-  public final CreativeTabs AGRICULTURE_TAB;
+  public static CreativeTabs TAB;
+  public static RegistryManager REGISTRY;
 
   public ModuleAgriculture() {
 
-    this.AGRICULTURE_TAB = BaseCreativeTab.of("agriculture", "agriculture/crop/seed/rice");
-    this.enableAutoRegistry(AGRICULTURE_TAB);
+    TAB = BaseCreativeTab.of("agriculture", "agriculture/crop/seed/rice");
+    REGISTRY = enableAutoRegistry(TAB);
 
   }
 

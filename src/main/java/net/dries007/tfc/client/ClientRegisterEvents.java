@@ -45,7 +45,7 @@ import net.dries007.tfc.client.render.TESRPlacedItemFlat;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
@@ -283,12 +283,12 @@ public final class ClientRegisterEvents {
 
     // This is talking about tall grass vs actual grass blocks
     blockColors.registerBlockColorHandler(grassColor,
-                                          BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
+                                          BlocksTFC.getAllGrassBlocks().toArray(new BlockPlant[0]));
 
     blockColors.registerBlockColorHandler(foliageColor,
                                           BlocksTFC.getAllLeafBlocks().toArray(new Block[0]));
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllPlantBlocks()
-                                                                 .toArray(new BlockPlantTFC[0]));
+                                                                 .toArray(new BlockPlant[0]));
 
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllFruitTreeLeavesBlocks()
                                                                  .toArray(new Block[0]));
@@ -324,7 +324,7 @@ public final class ClientRegisterEvents {
                                           event.getBlockColors()
                                                .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
                                                                                              .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-                                        BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
+                                        BlocksTFC.getAllGrassBlocks().toArray(new BlockPlant[0]));
 
     itemColors.registerItemColorHandler((stack, tintIndex) -> {
       IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);

@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.blocks.plants.BlockPlant;
+package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.data.lib.MCDate.Month;

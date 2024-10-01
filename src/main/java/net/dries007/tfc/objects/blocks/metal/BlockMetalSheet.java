@@ -104,12 +104,11 @@ public class BlockMetalSheet extends Block {
   @Override
   @NotNull
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-    TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-    if (tile != null) {
+    TileUtils.getTile(worldIn, pos, TEMetalSheet.class).ifPresent(tile -> {
       for (EnumFacing face : EnumFacing.values()) {
-        state = state.withProperty(FACE_PROPERTIES[face.getIndex()], tile.getFace(face));
+        state.withProperty(FACE_PROPERTIES[face.getIndex()], tile.getFace(face));
       }
-    }
+    });
     return state;
   }
 
@@ -135,23 +134,23 @@ public class BlockMetalSheet extends Block {
   @NotNull
   @SuppressWarnings("deprecation")
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    TEMetalSheet tile = TileUtils.getTile(source, pos, TEMetalSheet.class);
-    int sheets = 0;
-    AxisAlignedBB boundingBox = FULL_BLOCK_AABB;
-    if (tile != null) {
+
+    return TileUtils.getTile(source, pos, TEMetalSheet.class).map(tile -> {
+      int sheets = 0;
+      AxisAlignedBB boundingBox = FULL_BLOCK_AABB;
       for (EnumFacing face : EnumFacing.values()) {
         if (tile.getFace(face)) {
           if (sheets == 1) {
-            return FULL_BLOCK_AABB;
+            return boundingBox;
           } else {
             boundingBox = SHEET_AABB[face.getIndex()];
             sheets++;
           }
         }
       }
-    }
-    // This should't ever return null, since it will return FULL_BLOCK_AABB before that
-    return boundingBox;
+      return boundingBox;
+    }).orElse(FULL_BLOCK_AABB);
+
   }
 
   @Override
@@ -163,16 +162,14 @@ public class BlockMetalSheet extends Block {
 
   @SuppressWarnings("deprecation")
   @Override
-  public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
-                                    @Nullable Entity entityIn, boolean isActualState) {
-    TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-    if (tile != null) {
+  public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+    TileUtils.getTile(worldIn, pos, TEMetalSheet.class).ifPresent(tile -> {
       for (EnumFacing face : EnumFacing.values()) {
         if (tile.getFace(face)) {
           addCollisionBoxToList(pos, entityBox, collidingBoxes, SHEET_AABB[face.getIndex()]);
         }
       }
-    }
+    });
   }
 
   @Nullable
@@ -199,8 +196,7 @@ public class BlockMetalSheet extends Block {
   @Override
   @SuppressWarnings("deprecation")
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-    TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-    if (tile != null) {
+    TileUtils.getTile(worldIn, pos, TEMetalSheet.class).ifPresent(tile -> {
       for (EnumFacing face : EnumFacing.values()) {
         if (tile.getFace(face) && !worldIn.isSideSolid(pos.offset(face.getOpposite()), face)) {
           StackUtils.spawnItemStack(worldIn, pos, new ItemStack(ItemMetalSheet.get(metal, Metal.ItemType.SHEET)));
@@ -211,15 +207,12 @@ public class BlockMetalSheet extends Block {
         // Remove the block
         worldIn.setBlockToAir(pos);
       }
-    }
+    });
   }
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-    if (tile != null) {
-      tile.onBreakBlock(this.metal);
-    }
+    TileUtils.getTile(worldIn, pos, TEMetalSheet.class).ifPresent(tile -> tile.onBreakBlock(this.metal));
     super.breakBlock(worldIn, pos, state);
   }
 
@@ -227,8 +220,7 @@ public class BlockMetalSheet extends Block {
   @Override
   @SuppressWarnings("deprecation")
   public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
-    var tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-    if (tile != null) {
+    return TileUtils.getTile(worldIn, pos, TEMetalSheet.class).map(tile -> {
       for (EnumFacing face : EnumFacing.values()) {
         if (tile.getFace(face)) {
           RayTraceResult result = rayTrace(pos, start, end, SHEET_AABB[face.getIndex()]);
@@ -237,8 +229,8 @@ public class BlockMetalSheet extends Block {
           }
         }
       }
-    }
-    return null;
+      return null;
+    }).orElse(null);
   }
 
   @Override

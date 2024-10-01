@@ -20,7 +20,7 @@ public class ItemWoodLumber extends BaseItem implements IWoodItem {
     this.variant = variant;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .size(Size.SMALL)
       .weight(Weight.VERY_LIGHT)

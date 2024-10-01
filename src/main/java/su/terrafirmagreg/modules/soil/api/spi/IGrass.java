@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrass;
 import net.dries007.tfc.util.climate.Climate;
 
 import javax.annotation.Nonnull;
@@ -137,7 +137,7 @@ public interface IGrass {
       for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
         if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS && rand.nextFloat() < 0.5f) {
           float temp = Climate.getActualTemp(world, upPos);
-          BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
+          BlockPlantShortGrass plantBlock = BlockPlantShortGrass.get(plant);
 
           if (world.isAirBlock(upPos) &&
               plant.isValidLocation(temp, ProviderChunkData.getRainfall(world, upPos),

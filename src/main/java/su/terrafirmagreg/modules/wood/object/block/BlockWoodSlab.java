@@ -31,7 +31,7 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
     this.type = type;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .harvestLevel(ToolClasses.AXE, model.getHarvestLevel(model.getDefaultState()))
       .sound(SoundType.WOOD);

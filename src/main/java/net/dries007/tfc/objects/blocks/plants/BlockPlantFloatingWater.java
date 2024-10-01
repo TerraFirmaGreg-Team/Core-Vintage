@@ -21,20 +21,20 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlockFloatingWaterTFC extends BlockPlantTFC {
+public class BlockPlantFloatingWater extends BlockPlant {
 
   private static final AxisAlignedBB LILY_PAD_AABB = new AxisAlignedBB(0.0D, -0.125D, 0.0D, 1.0D, 0.0625D, 1.0D);
-  private static final Map<Plant, BlockFloatingWaterTFC> MAP = new HashMap<>();
+  private static final Map<Plant, BlockPlantFloatingWater> MAP = new HashMap<>();
 
-  public BlockFloatingWaterTFC(Plant plant) {
+  public BlockPlantFloatingWater(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockFloatingWaterTFC get(Plant plant) {
-    return BlockFloatingWaterTFC.MAP.get(plant);
+  public static BlockPlantFloatingWater get(Plant plant) {
+    return BlockPlantFloatingWater.MAP.get(plant);
   }
 
   @Override
@@ -68,7 +68,7 @@ public class BlockFloatingWaterTFC extends BlockPlantTFC {
   @Override
   protected boolean canSustainBush(IBlockState state) {
     return (BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) ||
-           (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
+           (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater));
   }
 
   @Override
@@ -77,7 +77,7 @@ public class BlockFloatingWaterTFC extends BlockPlantTFC {
       IBlockState stateDown = worldIn.getBlockState(pos.down());
       Material material = stateDown.getMaterial();
       return (material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == plant.getWaterType()) ||
-             material == Material.ICE || (material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
+             material == Material.ICE || (material == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater));
     } else {
       return false;
     }

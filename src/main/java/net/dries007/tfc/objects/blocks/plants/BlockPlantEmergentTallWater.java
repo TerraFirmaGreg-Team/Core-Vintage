@@ -15,18 +15,18 @@ import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC implements ITallPlant {
+public class BlockPlantEmergentTallWater extends BlockPlantTallWater implements ITallPlant {
 
-  private static final Map<Plant, BlockEmergentTallWaterPlantTFC> MAP = new HashMap<>();
+  private static final Map<Plant, BlockPlantEmergentTallWater> MAP = new HashMap<>();
 
-  public BlockEmergentTallWaterPlantTFC(Plant plant) {
+  public BlockPlantEmergentTallWater(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockEmergentTallWaterPlantTFC get(Plant plant) {
+  public static BlockPlantEmergentTallWater get(Plant plant) {
     return MAP.get(plant);
   }
 

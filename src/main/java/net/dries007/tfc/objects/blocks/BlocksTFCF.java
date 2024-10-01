@@ -39,7 +39,7 @@ import net.dries007.tfc.objects.blocks.plants.BlockCaveMushroom;
 import net.dries007.tfc.objects.blocks.plants.BlockCreepingPlantTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockHangingCreepingPlantTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockHangingPlantTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlant.BlockPlantDummy1;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantDummy1;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockTallGrassTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockTallGrassWater;
@@ -71,7 +71,6 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockUrn;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockUrnLoot;
 import net.dries007.tfc.objects.te.TEUrn;
 import net.dries007.tfc.types.DefaultPlants;
-import net.dries007.tfc.types.PlantsTFCF;
 import net.dries007.tfc.types.TreesTFCF;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.BerryBushTFCF;
@@ -582,19 +581,18 @@ public final class BlocksTFCF {
           plantWaterBlock.add(register(r, "plants/" + plant.getRegistryName()
                                                            .getPath(), new BlockTallWaterPlantTFCF(FluidsTFC.SALT_WATER.get(), plant), CT_FLORA));
         } else if (plant.getPlantType() == Plant.PlantType.HANGING && (
-          plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BEARDED_MOSS) ||
-          plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.GLOW_VINE) ||
-          plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.LIANA) ||
-          plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.HANGING_VINE) ||
-          plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.JUNGLE_VINE))) {
-          plantHangingBlock.add(register(r, "plants/" + plant.getRegistryName()
-                                                             .getPath(), new BlockHangingPlantTFCF(plant), CT_FLORA));
-          plantHangingCreepingBlock.add(register(r, "plants/" + plant.getRegistryName()
-                                                                     .getPath() + "_creeping", new BlockHangingCreepingPlantTFCF(plant), CT_FLORA));
+          plant == TFCRegistries.PLANTS.getValue(DefaultPlants.BEARDED_MOSS) ||
+          plant == TFCRegistries.PLANTS.getValue(DefaultPlants.GLOW_VINE) ||
+          plant == TFCRegistries.PLANTS.getValue(DefaultPlants.LIANA) ||
+          plant == TFCRegistries.PLANTS.getValue(DefaultPlants.HANGING_VINE) ||
+          plant == TFCRegistries.PLANTS.getValue(DefaultPlants.JUNGLE_VINE))) {
+          plantHangingBlock.add(register(r, "plants/" + plant.getRegistryName().getPath(), new BlockHangingPlantTFCF(plant), CT_FLORA));
+          plantHangingCreepingBlock.add(register(r, "plants/" + plant.getRegistryName().getPath()
+                                                    + "_creeping", new BlockHangingCreepingPlantTFCF(plant), CT_FLORA));
         } else if (plant.getPlantType() == Plant.PlantType.CREEPING && (
-          plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.TACKWEED) ||
-          plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.TAKAKIA) ||
-          plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.IVY) ||
+          plant == TFCRegistries.PLANTS.getValue(DefaultPlants.TACKWEED) ||
+          plant == TFCRegistries.PLANTS.getValue(DefaultPlants.TAKAKIA) ||
+          plant == TFCRegistries.PLANTS.getValue(DefaultPlants.IVY) ||
           plant == TFCRegistries.PLANTS.getValue(DefaultPlants.MORNING_GLORY) ||
           plant == TFCRegistries.PLANTS.getValue(DefaultPlants.MOSS) ||
           plant == TFCRegistries.PLANTS.getValue(DefaultPlants.REINDEER_LICHEN))) {

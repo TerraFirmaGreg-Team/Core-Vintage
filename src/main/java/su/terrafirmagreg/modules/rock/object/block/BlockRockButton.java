@@ -38,7 +38,7 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
     this.variant = variant;
     this.type = type;
     this.settings = Settings.of(Material.CIRCUITS)
-                            .registryKey(variant.getRegistryKey(type))
+                            .registryKey(type.getRegistryKey(variant))
                             .hardness(variant.getHardness(type))
                             .sound(SoundType.STONE)
                             .hardness(0.5f)

@@ -22,10 +22,10 @@ public class KeyEventHandler {
     if (event.phase == TickEvent.Phase.END) {
       if (Minecraft.getMinecraft().world != null) {
         if (KeybindingsWood.ACTION_CART.isPressed()) {
-          ModuleWood.getPacketService().sendToServer(new CSPacketActionKey());
+          ModuleWood.PACKET_SERVICE.sendToServer(new CSPacketActionKey());
         }
         if (GameUtils.getGameSettings().keyBindSprint.isPressed()) {
-          ModuleWood.getPacketService().sendToServer(new CSPacketToggleSlow());
+          ModuleWood.PACKET_SERVICE.sendToServer(new CSPacketToggleSlow());
         }
       }
     }
@@ -49,7 +49,7 @@ public class KeyEventHandler {
       EntityPlayerSP player = Minecraft.getMinecraft().player;
       if (player.getRidingEntity() instanceof EntityWoodSupplyCart entityWoodSupplyCart) {
         event.setCanceled(true);
-        player.world.sendPacketToServer(ModuleWood.getPacketService().getPacketFrom(new CSPacketOpenCartGui(0, entityWoodSupplyCart.getEntityId())));
+        player.world.sendPacketToServer(ModuleWood.PACKET_SERVICE.getPacketFrom(new CSPacketOpenCartGui(0, entityWoodSupplyCart.getEntityId())));
       }
     }
   }

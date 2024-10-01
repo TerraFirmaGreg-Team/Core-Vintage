@@ -36,36 +36,29 @@ public class BlockBloom extends BaseBlock implements IProviderTile {
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(world, pos, TileBloom.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
+    TileUtils.getTile(world, pos, TileBloom.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
     super.breakBlock(world, pos, state);
   }
 
   @Override
-  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos,
-                                 @Nullable EntityPlayer player, boolean willHarvest) {
+  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, @Nullable EntityPlayer player, boolean willHarvest) {
     if (player != null && player.canHarvestBlock(state) && !player.isCreative()) {
       // Try to give the contents of the TE directly to the player if possible
-      var tile = TileUtils.getTile(world, pos, TileBloom.class);
-      if (tile != null) {
+      TileUtils.getTile(world, pos, TileBloom.class).ifPresent(tile -> {
         IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null) {
           ItemStack contents = cap.extractItem(0, 64, false);
           ItemHandlerHelper.giveItemToPlayer(player, contents);
         }
-      }
+      });
     }
     //noinspection ConstantConditions
     return super.removedByPlayer(state, world, pos, player, willHarvest);
   }
 
   @Override
-  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-                                EntityPlayer player) {
-    var tile = TileUtils.getTile(world, pos, TileBloom.class);
-    if (tile != null) {
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    return TileUtils.getTile(world, pos, TileBloom.class).map(tile -> {
       IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
       if (cap != null) {
         ItemStack stack = cap.extractItem(0, 1, true);
@@ -73,8 +66,8 @@ public class BlockBloom extends BaseBlock implements IProviderTile {
           return stack;
         }
       }
-    }
-    return new ItemStack(ItemsTFC.UNREFINED_BLOOM);
+      return new ItemStack(ItemsTFC.UNREFINED_BLOOM);
+    }).orElse(new ItemStack(ItemsTFC.UNREFINED_BLOOM));
   }
 
   @Override

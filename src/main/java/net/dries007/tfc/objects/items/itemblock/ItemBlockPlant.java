@@ -31,11 +31,10 @@ public class ItemBlockPlant extends ItemBlockTFC {
   }
 
   @Override
-  public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-                                    float hitZ) {
+  public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!world.isRemote && world.getBlockState(pos).getBlock() instanceof BlockFlowerPot) {
       var tile = TileUtils.getTile(world, pos, TileEntityFlowerPot.class);
-      if (tile == null || tile.getFlowerItemStack().isEmpty()) {
+      if (tile.isPresent() && tile.get().getFlowerItemStack().isEmpty()) {
         world.setBlockState(pos, BlockFlowerPotTFC.get(plant).getDefaultState(), 3);
         player.getHeldItem(hand).shrink(1);
         return EnumActionResult.SUCCESS;
@@ -47,7 +46,6 @@ public class ItemBlockPlant extends ItemBlockTFC {
   @SideOnly(Side.CLIENT)
   @Override
   public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack) {
-    return worldIn.getBlockState(pos)
-                  .getBlock() instanceof BlockFlowerPot || super.canPlaceBlockOnSide(worldIn, pos, side, player, stack);
+    return worldIn.getBlockState(pos).getBlock() instanceof BlockFlowerPot || super.canPlaceBlockOnSide(worldIn, pos, side, player, stack);
   }
 }

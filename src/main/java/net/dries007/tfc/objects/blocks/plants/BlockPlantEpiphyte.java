@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlockEpiphyteTFC extends BlockPlantTFC {
+public class BlockPlantEpiphyte extends BlockPlant {
 
   private static final PropertyDirection FACING = PropertyDirection.create("facing");
   private static final AxisAlignedBB PLANT_UP_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.75D, 0.75D);
@@ -35,16 +35,16 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
   private static final AxisAlignedBB PLANT_WEST_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
   private static final AxisAlignedBB PLANT_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.75D, 1.0D, 1.0D);
 
-  private static final Map<Plant, BlockEpiphyteTFC> MAP = new HashMap<>();
+  private static final Map<Plant, BlockPlantEpiphyte> MAP = new HashMap<>();
 
-  public BlockEpiphyteTFC(Plant plant) {
+  public BlockPlantEpiphyte(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockEpiphyteTFC get(Plant plant) {
+  public static BlockPlantEpiphyte get(Plant plant) {
     return MAP.get(plant);
   }
 

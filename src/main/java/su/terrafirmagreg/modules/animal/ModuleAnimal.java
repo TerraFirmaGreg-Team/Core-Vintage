@@ -2,13 +2,14 @@ package su.terrafirmagreg.modules.animal;
 
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.network.IPacketService;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.animal.event.EasyBreedingEventHandler;
 import su.terrafirmagreg.modules.animal.init.BlocksAnimal;
 import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.core.ModuleCore;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -16,15 +17,19 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.modules.ModuleContainer.ANIMAL;
+import static su.terrafirmagreg.modules.core.ModuleCore.TAB;
 
 @Module(moduleID = ANIMAL)
 public final class ModuleAnimal extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAnimal.class.getSimpleName());
 
+  public static RegistryManager REGISTRY;
+  public static IPacketService PACKET_SERVICE;
+
   public ModuleAnimal() {
-    this.enableAutoRegistry(ModuleCore.CORE_TAB);
-    this.enableNetwork();
+    REGISTRY = enableAutoRegistry(TAB);
+    PACKET_SERVICE = enableNetwork();
 
   }
 

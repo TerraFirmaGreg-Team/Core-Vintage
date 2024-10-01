@@ -33,8 +33,8 @@ public class ModelWoodAnimalCart extends ModelBase {
 
     this.boardBottom = new ModelRenderer(this, 0, 0);
     this.boardBottom.addBox(-14.5F, -10.0F, 3.0F, 29, 20, 1);
-    this.boardBottom.rotateAngleX = -((float)Math.PI / 2F);
-    this.boardBottom.rotateAngleY = -((float)Math.PI / 2F);
+    this.boardBottom.rotateAngleX = -((float) Math.PI / 2F);
+    this.boardBottom.rotateAngleY = -((float) Math.PI / 2F);
 
     this.shaft = new ModelRenderer(this, 0, 25);
     this.shaft.setRotationPoint(0.0F, 0.0F, -14.0F);
@@ -45,13 +45,13 @@ public class ModelWoodAnimalCart extends ModelBase {
 
     this.boardLeft = new ModelRenderer(this, 0, 28);
     this.boardLeft.addBox(-5F, -15.5F, 9F, 8, 31, 2);
-    this.boardLeft.rotateAngleX = -((float)Math.PI / 2F);
-    this.boardLeft.rotateAngleZ = ((float)Math.PI / 2F);
+    this.boardLeft.rotateAngleX = -((float) Math.PI / 2F);
+    this.boardLeft.rotateAngleZ = ((float) Math.PI / 2F);
 
     this.boardRight = new ModelRenderer(this, 0, 28);
     this.boardRight.addBox(-5F, -15.5F, -11F, 8, 31, 2);
-    this.boardRight.rotateAngleX = -((float)Math.PI / 2F);
-    this.boardRight.rotateAngleZ = ((float)Math.PI / 2F);
+    this.boardRight.rotateAngleX = -((float) Math.PI / 2F);
+    this.boardRight.rotateAngleZ = ((float) Math.PI / 2F);
 
     this.boardBack = new ModelRenderer(this, 20, 28);
     this.boardBack.addBox(-9F, -5F, 13.5F, 18, 8, 2);

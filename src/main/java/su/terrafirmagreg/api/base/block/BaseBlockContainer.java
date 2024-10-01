@@ -82,7 +82,6 @@ public abstract class BaseBlockContainer extends BaseBlock implements IProviderT
   @Override
   public boolean eventReceived(IBlockState state, World world, BlockPos pos, int id, int param) {
     super.eventReceived(state, world, pos, id, param);
-    var tile = TileUtils.getTile(world, pos);
-    return tile != null && tile.receiveClientEvent(id, param);
+    return TileUtils.getTile(world, pos).map(tile -> tile.receiveClientEvent(id, param)).orElse(false);
   }
 }

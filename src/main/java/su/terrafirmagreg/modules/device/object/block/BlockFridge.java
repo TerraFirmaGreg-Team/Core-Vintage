@@ -16,7 +16,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
@@ -39,11 +38,9 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
-import java.util.Map;
 import java.util.Random;
 
 import static net.minecraft.util.EnumFacing.NORTH;
@@ -177,10 +174,7 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TileFridge.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    TileUtils.getTile(worldIn, pos, TileFridge.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
   }
 
@@ -197,47 +191,47 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-                                  float hitZ) {
-    BlockPos tilePos = pos;
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    BlockPos tilePos;
     if (!state.getValue(UPPER)) {
       tilePos = pos.up();
+    } else {
+      tilePos = pos;
     }
-    var tile = TileUtils.getTile(world, tilePos, TileFridge.class);
-    if (tile != null && !tile.isAnimating() && hand == EnumHand.MAIN_HAND
-        && facing == state.getValue(HORIZONTAL)) {
-      if (tile.isOpen()) {
-        int slot = getPlayerLookingItem(tilePos.down(), player, facing);
-        ItemStack stack = player.getHeldItem(hand);
-        if (!stack.isEmpty()) {
-          if (slot != -1) {
-            if (!world.isRemote) {
-              player.setHeldItem(hand, tile.insertItem(slot, stack));
+    return TileUtils.getTile(world, tilePos, TileFridge.class).map(tile -> {
+      if (!tile.isAnimating() && hand == EnumHand.MAIN_HAND && facing == state.getValue(HORIZONTAL)) {
+        if (tile.isOpen()) {
+          int slot = getPlayerLookingItem(tilePos.down(), player, facing);
+          ItemStack stack = player.getHeldItem(hand);
+          if (!stack.isEmpty()) {
+            if (slot != -1) {
+              if (!world.isRemote) {
+                player.setHeldItem(hand, tile.insertItem(slot, stack));
+              }
+              return true;
             }
-            return true;
+          } else {
+            if (slot != -1 && tile.hasStack(slot)) {
+              if (!world.isRemote) {
+                player.setHeldItem(hand, tile.extractItem(slot));
+              }
+              return true;
+            } else {
+              return tile.setOpening(false);
+            }
           }
         } else {
-          if (slot != -1 && tile.hasStack(slot)) {
-            if (!world.isRemote) {
-              player.setHeldItem(hand, tile.extractItem(slot));
-            }
-            return true;
-          } else {
-            return tile.setOpening(false);
+          if (!player.isSneaking()) {
+            return tile.setOpening(true);
           }
         }
-      } else {
-        if (!player.isSneaking()) {
-          return tile.setOpening(true);
-        }
       }
-    }
-    return false;
+      return false;
+    }).orElse(false);
   }
 
   @Override
-  public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity,
-                                   int numberOfParticles) {
+  public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles) {
     return true;
   }
 
@@ -276,14 +270,7 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {
 
   @Override
   public IStateMapper getStateMapper() {
-    return new IStateMapper() {
-
-      @Override
-      @NotNull
-      public Map<IBlockState, ModelResourceLocation> putStateModelLocations(@NotNull Block blockIn) {
-        return Collections.emptyMap();
-      }
-    };
+    return blockIn -> Collections.emptyMap();
   }
 
   @Override

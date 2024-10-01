@@ -68,27 +68,21 @@ public class BlockRockStandGem extends BlockRock implements IProviderTile {
   }
 
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TileRockGemDisplay.class);
-    if (tile != null) {
-      tile.onBreakBlock();
-    }
+    TileUtils.getTile(worldIn, pos, TileRockGemDisplay.class)
+             .ifPresent(TileRockGemDisplay::onBreakBlock);
     super.breakBlock(worldIn, pos, state);
   }
 
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
-      var tile = TileUtils.getTile(worldIn, pos, TileRockGemDisplay.class);
-      if (tile != null) {
-        return tile.onRightClick(playerIn, hand);
-      }
+      return TileUtils.getTile(worldIn, pos, TileRockGemDisplay.class)
+                      .map(tileRockGemDisplay -> tileRockGemDisplay.onRightClick(playerIn, hand))
+                      .orElse(true);
     }
-
     return true;
   }
 
-  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-                                          float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
   }
 
@@ -99,8 +93,9 @@ public class BlockRockStandGem extends BlockRock implements IProviderTile {
 
   @Override
   public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
-    var tile = TileUtils.getTile(world, pos, TileRockGemDisplay.class);
-    return (int) Math.floor(15 * ((double) tile.getSize() / (double) tile.getMaxStackSize()));
+    return TileUtils.getTile(world, pos, TileRockGemDisplay.class)
+                    .map(tile -> (int) Math.floor(15 * ((double) tile.getSize() / (double) tile.getMaxStackSize())))
+                    .orElse(0);
   }
 
   protected BlockStateContainer createBlockState() {

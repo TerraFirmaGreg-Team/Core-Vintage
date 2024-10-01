@@ -58,50 +58,44 @@ public class BlockTurntable extends BlockNonCube {
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    TETurntable tile = TileUtils.getTile(world, pos, TETurntable.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
+    TileUtils.getTile(world, pos, TETurntable.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
     super.breakBlock(world, pos, state);
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                  float hitY, float hitZ) {
-    if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
-      ItemStack held = player.getHeldItem(hand);
-      if (player.isSneaking()) {
-        var tile = TileUtils.getTile(world, pos, TETurntable.class);
-        if (tile != null && tile.hasPottery()) {
-          tile.rotate();
-        }
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    if (world.isRemote && hand != EnumHand.MAIN_HAND) {return false;}
+    ItemStack held = player.getHeldItem(hand);
+    if (player.isSneaking()) {
+      TileUtils.getTile(world, pos, TETurntable.class)
+               .filter(TETurntable::hasPottery)
+               .ifPresent(TETurntable::rotate);
+      return true;
+    }
+    if (held.getItem() == Items.CLAY_BALL) {
+      int clay = state.getValue(CLAY_LEVEL);
+      if (clay < 4 && held.getCount() > 5) {
+        held.shrink(5);
+        world.setBlockState(pos, state.withProperty(CLAY_LEVEL, clay + 1));
         return true;
       }
-      if (held.getItem() == Items.CLAY_BALL) {
-        int clay = state.getValue(CLAY_LEVEL);
-        if (clay < 4 && held.getCount() > 5) {
-          held.shrink(5);
-          world.setBlockState(pos, state.withProperty(CLAY_LEVEL, clay + 1));
-          return true;
-        }
-      } else {
-        var tile = TileUtils.getTile(world, pos, TETurntable.class);
-        if (tile != null) {
-          IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-          if (cap != null) {
-            ItemStack invStack = cap.getStackInSlot(0);
-            if (invStack.isEmpty() && TETurntable.isPottery(held)) {
-              ItemStack leftover = cap.insertItem(0, held.splitStack(1), false);
-              ItemHandlerHelper.giveItemToPlayer(player, leftover);
-              return true;
-            } else if (!invStack.isEmpty() && held.isEmpty()) {
-              ItemStack leftover = cap.extractItem(0, 1, false);
-              ItemHandlerHelper.giveItemToPlayer(player, leftover);
-              return true;
-            }
+    } else {
+      return TileUtils.getTile(world, pos, TETurntable.class).map(tile -> {
+        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (cap != null) {
+          ItemStack invStack = cap.getStackInSlot(0);
+          if (invStack.isEmpty() && TETurntable.isPottery(held)) {
+            ItemStack leftover = cap.insertItem(0, held.splitStack(1), false);
+            ItemHandlerHelper.giveItemToPlayer(player, leftover);
+            return true;
+          } else if (!invStack.isEmpty() && held.isEmpty()) {
+            ItemStack leftover = cap.extractItem(0, 1, false);
+            ItemHandlerHelper.giveItemToPlayer(player, leftover);
+            return true;
           }
         }
-      }
+        return false;
+      }).orElse(false);
     }
     return false;
   }

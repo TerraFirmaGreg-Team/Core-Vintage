@@ -60,8 +60,7 @@ public class BlockLargeVessel extends Block implements ICapabilitySize {
    * Used to update the vessel seal state and the TE, in the correct order
    */
   public static void toggleLargeVesselSeal(World world, BlockPos pos) {
-    TELargeVessel tile = TileUtils.getTile(world, pos, TELargeVessel.class);
-    if (tile != null) {
+    TileUtils.getTile(world, pos, TELargeVessel.class).ifPresent(tile -> {
       IBlockState state = world.getBlockState(pos);
       boolean previousSealed = state.getValue(SEALED);
       world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
@@ -70,7 +69,7 @@ public class BlockLargeVessel extends Block implements ICapabilitySize {
       } else {
         tile.onSealed();
       }
-    }
+    });
   }
 
   @Override
@@ -159,10 +158,7 @@ public class BlockLargeVessel extends Block implements ICapabilitySize {
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    TELargeVessel tile = TileUtils.getTile(worldIn, pos, TELargeVessel.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    TileUtils.getTile(worldIn, pos, TELargeVessel.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
   }
 
@@ -179,19 +175,17 @@ public class BlockLargeVessel extends Block implements ICapabilitySize {
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                  float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       ItemStack heldItem = playerIn.getHeldItem(hand);
-      var tile = TileUtils.getTile(worldIn, pos, TELargeVessel.class);
-      if (tile != null) {
+      TileUtils.getTile(worldIn, pos, TELargeVessel.class).ifPresent(tile -> {
         if (heldItem.isEmpty() && playerIn.isSneaking()) {
           worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
           toggleLargeVesselSeal(worldIn, pos);
         } else {
           TFCGuiHandler.openGui(worldIn, pos, playerIn, TFCGuiHandler.Type.LARGE_VESSEL);
         }
-      }
+      });
     }
     return true;
   }
@@ -199,16 +193,13 @@ public class BlockLargeVessel extends Block implements ICapabilitySize {
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     // If the barrel was sealed, then copy the contents from the item
-    if (!worldIn.isRemote) {
-      NBTTagCompound nbt = stack.getTagCompound();
-      if (nbt != null) {
-        var tile = TileUtils.getTile(worldIn, pos, TELargeVessel.class);
-        if (tile != null) {
-          worldIn.setBlockState(pos, state.withProperty(SEALED, true));
-          tile.readFromItemTag(nbt);
-        }
-      }
-    }
+    if (worldIn.isRemote) {return;}
+    NBTTagCompound nbt = stack.getTagCompound();
+    if (nbt == null) {return;}
+    TileUtils.getTile(worldIn, pos, TELargeVessel.class).ifPresent(tile -> {
+      worldIn.setBlockState(pos, state.withProperty(SEALED, true));
+      tile.readFromItemTag(nbt);
+    });
   }
 
   @Override

@@ -28,8 +28,7 @@ public class PlanterProvider implements IWailaBlock {
   public List<String> getTooltip(World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
     List<String> currentTooltip = new ArrayList<>();
     IBlockState state = world.getBlockState(pos);
-    var tile = TileUtils.getTile(world, pos);
-    if (tile instanceof TEPlanter) {
+    TileUtils.getTile(world, pos, TEPlanter.class).ifPresent(tile -> {
       Block block = state.getBlock();
       if (block instanceof BlockQuadPlanter) {
         PlanterRecipe.PlantInfo[] info = ((BlockQuadPlanter) block).getCrops(world, pos);
@@ -70,8 +69,8 @@ public class PlanterProvider implements IWailaBlock {
           currentTooltip.add("Empty");
         }
       }
-      currentTooltip.add(((TEPlanter) tile).isClimateValid ? "Climate Valid" : "Climate Invalid");
-    }
+      currentTooltip.add(tile.isClimateValid ? "Climate Valid" : "Climate Invalid");
+    });
     return currentTooltip;
   }
 

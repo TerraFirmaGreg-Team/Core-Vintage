@@ -1,19 +1,14 @@
 package se.gory_moon.horsepower.waila;
 
 import su.terrafirmagreg.api.base.block.BaseBlockHorse;
-import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
 import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
-import su.terrafirmagreg.modules.device.object.tile.TilePressHorse;
 
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -138,21 +133,5 @@ public class Provider implements IWailaDataProvider {
   public List<String> getWailaTail(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
     return null;
   }
-
-  @Override
-  public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, BlockPos pos) {
-    NBTTagCompound nbt = new NBTTagCompound();
-    if (tile instanceof TileFiller tileFiller) {
-      tile = TileUtils.getTile(world, tileFiller.getFilledPos(), TileHPBase.class);
-    }
-    if (tile != null) {
-      tile.writeToNBT(nbt);
-    }
-    if (tile instanceof TileChopperHorse || tile instanceof TileChopperManual) {
-      tag.setTag("horsepower:chopper", nbt);
-    } else if (tile instanceof TilePressHorse) {
-      tag.setTag("horsepower:press", nbt);
-    }
-    return tag;
-  }
+  
 }

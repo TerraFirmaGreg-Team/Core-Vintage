@@ -91,19 +91,18 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
-      TileBearTrap trap = TileUtils.getTile(worldIn, pos, TileBearTrap.class);
-      if (trap == null) {return;}
-
-      if (!trap.isOpen()) {
-        if (Math.random() < ConfigDevice.BLOCK.BEAR_TRAP.breakChance) {
-          worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
+      TileUtils.getTile(worldIn, pos, TileBearTrap.class).ifPresent(tile -> {
+        if (!tile.isOpen()) {
+          if (Math.random() < ConfigDevice.BLOCK.BEAR_TRAP.breakChance) {
+            worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
+          } else {
+            this.dropBlockAsItem(worldIn, pos, state, 0);
+          }
         } else {
           this.dropBlockAsItem(worldIn, pos, state, 0);
         }
-      } else {
-        this.dropBlockAsItem(worldIn, pos, state, 0);
-      }
-      worldIn.setBlockToAir(pos);
+        worldIn.setBlockToAir(pos);
+      });
     }
   }
 
@@ -142,45 +141,46 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
 
   @Override
   public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entityIn) {
-    if (entityIn instanceof EntityLivingBase entityLiving) {
-      var tile = TileUtils.getTile(world, pos, TileBearTrap.class);
-      if (tile == null) {return;}
 
-      if (tile.isOpen()) {
-        int debuffDuration = ConfigDevice.BLOCK.BEAR_TRAP.debuffDuration;
-        double healthCut = ConfigDevice.BLOCK.BEAR_TRAP.healthCut;
-        entityLiving.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, debuffDuration));
-        entityLiving.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, debuffDuration));
-        entityLiving.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, debuffDuration));
-        if (ConfigDevice.BLOCK.BEAR_TRAP.fixedDamage > 0) {
-          entityLiving.attackEntityFrom(DamageSources.BEAR_TRAP,
-                                        (float) ConfigDevice.BLOCK.BEAR_TRAP.fixedDamage);
-        } else if (healthCut > 0) {
-          entityLiving.attackEntityFrom(DamageSources.BEAR_TRAP,
-                                        entityLiving.getHealth() / (float) healthCut);
-        }
-        tile.setCapturedEntity(entityLiving);
-        entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-        tile.setOpen(false);
-        state = state.withProperty(CLOSED, Boolean.TRUE);
-        world.setBlockState(pos, state, 2);
-        entityLiving.playSound(SoundEvents.ENTITY_ITEM_BREAK, 2.0F, 0.4F);
-      } else if (tile.getCapturedEntity() != null && tile.getCapturedEntity()
-                                                         .equals(entityLiving)) {
-        entityLiving.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-        if (entityLiving instanceof IPredator
-            && Math.random() < ConfigDevice.BLOCK.BEAR_TRAP.breakoutChance) {
-          world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f,
-                          0.8f);
-          if (Math.random() > 2 * ConfigDevice.BLOCK.BEAR_TRAP.breakChance) {
-            this.dropBlockAsItem(world, pos, state, 0);
+    if (entityIn instanceof EntityLivingBase entityLiving) {
+
+      TileUtils.getTile(world, pos, TileBearTrap.class).ifPresent(tile -> {
+        IBlockState iBlockState = state;
+        if (tile.isOpen()) {
+          int debuffDuration = ConfigDevice.BLOCK.BEAR_TRAP.debuffDuration;
+          double healthCut = ConfigDevice.BLOCK.BEAR_TRAP.healthCut;
+          entityLiving.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, debuffDuration));
+          entityLiving.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, debuffDuration));
+          entityLiving.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, debuffDuration));
+          if (ConfigDevice.BLOCK.BEAR_TRAP.fixedDamage > 0) {
+            entityLiving.attackEntityFrom(DamageSources.BEAR_TRAP,
+                                          (float) ConfigDevice.BLOCK.BEAR_TRAP.fixedDamage);
+          } else if (healthCut > 0) {
+            entityLiving.attackEntityFrom(DamageSources.BEAR_TRAP,
+                                          entityLiving.getHealth() / (float) healthCut);
           }
-          world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
+          tile.setCapturedEntity(entityLiving);
+          entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+          tile.setOpen(false);
+          iBlockState = iBlockState.withProperty(CLOSED, Boolean.TRUE);
+          world.setBlockState(pos, iBlockState, 2);
+          entityLiving.playSound(SoundEvents.ENTITY_ITEM_BREAK, 2.0F, 0.4F);
+        } else if (tile.getCapturedEntity() != null && tile.getCapturedEntity().equals(entityLiving)) {
+          entityLiving.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+          if (entityLiving instanceof IPredator
+              && Math.random() < ConfigDevice.BLOCK.BEAR_TRAP.breakoutChance) {
+            world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f,
+                            0.8f);
+            if (Math.random() > 2 * ConfigDevice.BLOCK.BEAR_TRAP.breakChance) {
+              this.dropBlockAsItem(world, pos, iBlockState, 0);
+            }
+            world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
+          }
+          if (entityLiving.isDead) {
+            tile.setCapturedEntity(null);
+          }
         }
-        if (entityLiving.isDead) {
-          tile.setCapturedEntity(null);
-        }
-      }
+      });
     }
   }
 

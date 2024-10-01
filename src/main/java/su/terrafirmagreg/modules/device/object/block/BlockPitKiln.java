@@ -104,11 +104,11 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile {
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     var tile = TileUtils.getTile(source, pos, TilePitKiln.class);
-    if (tile != null) {
-      int height = tile.getStrawCount();
-      if (tile.getLogCount() > 4) {
+    if (tile.isPresent()) {
+      int height = tile.get().getStrawCount();
+      if (tile.get().getLogCount() > 4) {
         height = 10; // Full block
-      } else if (tile.getLogCount() > 0) {
+      } else if (tile.get().getLogCount() > 0) {
         height = 9; // 75% of block
       }
       return AABB_LEVELS[height];
@@ -117,10 +117,8 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile {
   }
 
   @Override
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-                              BlockPos fromPos) {
-    var tile = TileUtils.getTile(worldIn, pos, TilePitKiln.class);
-    if (tile != null) {
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    TileUtils.getTile(worldIn, pos, TilePitKiln.class).ifPresent(tile -> {
       if (blockIn == Blocks.FIRE) {
         tile.tryLight();
       }
@@ -130,16 +128,13 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile {
         }
         worldIn.destroyBlock(pos, true);
       }
-    }
+    });
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
   }
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TilePitKiln.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    TileUtils.getTile(worldIn, pos, TilePitKiln.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
   }
 
@@ -149,17 +144,14 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile {
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    var tile = TileUtils.getTile(worldIn, pos, TilePitKiln.class);
-    if (tile != null) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    return TileUtils.getTile(worldIn, pos, TilePitKiln.class).map(tile -> {
       // Skip interacting if using a fire starter (wait for fire in #neighborChanged)
       if (ItemFireStarter.canIgnite(playerIn.getHeldItem(hand))) {
         return false;
       }
       return tile.onRightClick(playerIn, playerIn.getHeldItem(hand), hitX < 0.5, hitZ < 0.5);
-    }
-    return false;
+    }).orElse(false);
   }
 
   @Override

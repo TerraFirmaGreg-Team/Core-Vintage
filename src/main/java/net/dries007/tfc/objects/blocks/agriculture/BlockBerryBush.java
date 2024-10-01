@@ -141,18 +141,18 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     if (!world.isRemote) {
       var tile = TileUtils.getTile(world, pos, TETickCounter.class);
-      if (TileUtils.isNotNull(tile)) {
+      tile.ifPresent(tileTickCounter -> {
         float temp = Climate.getActualTemp(world, pos);
         float rainfall = ProviderChunkData.getRainfall(world, pos);
-        long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+        long hours = tileTickCounter.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
         if (hours > (bush.getGrowthTime() * ConfigTFC.General.FOOD.berryBushGrowthTimeModifier) && bush.isValidForGrowth(temp, rainfall)) {
           if (bush.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
             //Fruiting
             world.setBlockState(pos, world.getBlockState(pos).withProperty(FRUITING, true));
           }
-          tile.resetCounter();
+          tileTickCounter.resetCounter();
         }
-      }
+      });
     }
   }
 
@@ -167,10 +167,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
+    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
   }
 
   @SideOnly(Side.CLIENT)
@@ -189,18 +186,12 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                  float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    if (worldIn.isRemote) {return true;}
     if (worldIn.getBlockState(pos).getValue(FRUITING)) {
-      if (!worldIn.isRemote) {
-        ItemHandlerHelper.giveItemToPlayer(playerIn, bush.getFoodDrop());
-        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(FRUITING, false));
-        var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-        if (tile != null) {
-          tile.resetCounter();
-        }
-      }
-      return true;
+      ItemHandlerHelper.giveItemToPlayer(playerIn, bush.getFoodDrop());
+      worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(FRUITING, false));
+      TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
     }
     return false;
   }

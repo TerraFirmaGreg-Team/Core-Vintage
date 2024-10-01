@@ -1,9 +1,5 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.client.model.ModelFridge;
-import su.terrafirmagreg.modules.device.object.tile.TileFridge;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -11,6 +7,10 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
+
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.device.client.model.ModelFridge;
+import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 
 public class TESRFridge extends TileEntitySpecialRenderer<TileFridge> {
 

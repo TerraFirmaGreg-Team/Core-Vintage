@@ -75,20 +75,21 @@ public class ItemWateringCan extends ItemMisc {
       for (int y = -2; y <= 2; y++) {
         for (int z = -2; z <= 2; z++) {
           BlockPos addPos = pos.add(x, y, z);
-          var tile = TileUtils.getTile(world, addPos, TileEntity.class);
-          if (tile instanceof IWaterable) {
-            ((IWaterable) tile).setWater(2);
-            IBlockState state = world.getBlockState(addPos);
-            world.setBlockState(addPos, state.withProperty(WET, true));
-          } else {
-            IBlockState farmland = world.getBlockState(addPos);
-            if (farmland.getBlock() instanceof BlockSoilFarmland) {
-              int current = farmland.getValue(MOISTURE);
-              if (current < MOISTURE.getAllowedValues().size()) {
-                world.setBlockState(addPos, farmland.withProperty(MOISTURE, current + 1));
+          TileUtils.getTile(world, addPos, TileEntity.class).ifPresent(tile -> {
+            if (tile instanceof IWaterable waterable) {
+              waterable.setWater(2);
+              IBlockState state = world.getBlockState(addPos);
+              world.setBlockState(addPos, state.withProperty(WET, true));
+            } else {
+              IBlockState farmland = world.getBlockState(addPos);
+              if (farmland.getBlock() instanceof BlockSoilFarmland) {
+                int current = farmland.getValue(MOISTURE);
+                if (current < MOISTURE.getAllowedValues().size()) {
+                  world.setBlockState(addPos, farmland.withProperty(MOISTURE, current + 1));
+                }
               }
             }
-          }
+          });
         }
       }
     }

@@ -148,15 +148,15 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
             this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 0.5F, 0.1F);
           }
           ((WorldServer) this.world).getEntityTracker()
-                                    .sendToTracking(this, ModuleWood.getPacketService()
-                                                                    .getPacketFrom(new SCPacketDrawnUpdate(-1, this.getEntityId())));
+                                    .sendToTracking(this, ModuleWood.PACKET_SERVICE
+                                      .getPacketFrom(new SCPacketDrawnUpdate(-1, this.getEntityId())));
         } else {
           if (entityIn instanceof EntityLiving entityLiving) {
             entityLiving.getNavigator().clearPath();
           }
           CapabilityPull.get(entityIn).setDrawn(this);
           ((WorldServer) this.world).getEntityTracker()
-                                    .sendToTracking(this, ModuleWood.getPacketService().getPacketFrom(
+                                    .sendToTracking(this, ModuleWood.PACKET_SERVICE.getPacketFrom(
                                       new SCPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));
           this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 0.5F, 1.0F);
         }

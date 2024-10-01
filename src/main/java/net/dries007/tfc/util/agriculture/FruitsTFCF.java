@@ -1,11 +1,11 @@
 package net.dries007.tfc.util.agriculture;
 
-import net.dries007.tfc.objects.items.ItemsTFCF;
-import net.dries007.tfc.objects.items.food.ItemFoodTFCF;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 
 import net.minecraft.item.Item;
 
-import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import net.dries007.tfc.objects.items.ItemsTFCF;
+import net.dries007.tfc.objects.items.food.ItemFoodTFCF;
 
 import static net.dries007.tfc.util.agriculture.FoodDataTFCF.DRIED_FRUIT_DECAY;
 

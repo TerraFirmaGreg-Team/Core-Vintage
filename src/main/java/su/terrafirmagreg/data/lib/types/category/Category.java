@@ -7,14 +7,13 @@ import lombok.Getter;
 @Getter
 public abstract class Category<T> implements Comparable<Category<T>> {
 
-  private final String name;
+  protected final String name;
 
   protected Category(String name) {
     this.name = name;
 
     if (name.isEmpty()) {
-      throw new RuntimeException(
-        String.format("Category name must contain any character: [%s]", name));
+      throw new RuntimeException(String.format("Category name must contain any character: [%s]", name));
     }
   }
 

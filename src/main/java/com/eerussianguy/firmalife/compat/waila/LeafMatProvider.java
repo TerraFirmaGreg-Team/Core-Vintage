@@ -27,13 +27,11 @@ public class LeafMatProvider implements IWailaBlock {
   @Override
   public List<String> getTooltip(World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
     List<String> currentTooltip = new ArrayList<>();
-    var tile = TileUtils.getTile(world, pos);
-    if (tile instanceof TELeafMat leafMat) {
-      ItemStack mainSlot = leafMat.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)
-                                  .getStackInSlot(0);
+    TileUtils.getTile(world, pos, TELeafMat.class).ifPresent(tile -> {
+      ItemStack mainSlot = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(0);
       DryingRecipe recipe = DryingRecipe.get(mainSlot);
       if (!mainSlot.isEmpty() && recipe != null) {
-        long remainingTicks = leafMat.getTicksRemaining();
+        long remainingTicks = tile.getTicksRemaining();
         switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {
           case NONE:
             break;
@@ -51,7 +49,7 @@ public class LeafMatProvider implements IWailaBlock {
         currentTooltip.add(new TextComponentTranslation(recipe.getOutputItem(mainSlot)
                                                               .getTranslationKey() + ".name").getFormattedText());
       }
-    }
+    });
     return currentTooltip;
   }
 

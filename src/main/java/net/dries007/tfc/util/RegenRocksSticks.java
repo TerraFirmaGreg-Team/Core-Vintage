@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 
-import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrass;
 
 import java.util.Random;
 
@@ -21,7 +21,7 @@ public class RegenRocksSticks extends GeneratorSurfaceRocks {
   private static Boolean isReplaceable(World world, BlockPos pos) {
     //Modified to allow replacement of grass during spring regen
     Block test = world.getBlockState(pos).getBlock();
-    return test instanceof BlockShortGrassTFC || test.isAir(world.getBlockState(pos), world, pos);
+    return test instanceof BlockPlantShortGrass || test.isAir(world.getBlockState(pos), world, pos);
   }
 
   @Override

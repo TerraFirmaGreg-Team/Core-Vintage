@@ -160,7 +160,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
       } else if (!world.isRemote) {
         //Return chat message indicating why this entity isn't giving milk
         TextComponentTranslation tooltip = getTooltip();
-        ModuleAnimal.getPacketService().sendTo(
+        ModuleAnimal.PACKET_SERVICE.sendTo(
           new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
           (EntityPlayerMP) player);
       }

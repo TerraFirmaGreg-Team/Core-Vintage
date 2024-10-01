@@ -1,19 +1,16 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.block;
 
-import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.data.lib.types.variant.Variant;
+import su.terrafirmagreg.data.lib.types.variant.block.VariantBlock;
+import su.terrafirmagreg.modules.soil.ModuleSoil;
 import su.terrafirmagreg.modules.soil.api.spi.IGrass;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 
-import net.minecraft.block.Block;
 import net.minecraft.util.text.TextComponentTranslation;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import lombok.Getter;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -30,63 +27,37 @@ import static su.terrafirmagreg.modules.soil.init.BlocksSoil.ROOTED_DIRT;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.SPARSE_GRASS;
 
 @Getter
-public class SoilBlockVariant extends Variant<SoilBlockVariant> {
+public class SoilBlockVariant extends VariantBlock<SoilBlockVariant, SoilType> {
 
   @Getter
   private static final Set<SoilBlockVariant> variants = new ObjectOpenHashSet<>();
 
-  private final Map<SoilType, Block> map = new Object2ObjectOpenHashMap<>();
+  private final Specification specification;
 
-  private Specification specification = null;
-  private BiFunction<SoilBlockVariant, SoilType, ? extends Block> factory;
+  private SoilBlockVariant(Builder builder) {
+    super(builder.name);
 
-  private SoilBlockVariant(String name) {
-    super(name);
+    this.specification = builder.specification;
 
     if (!variants.add(this)) {
       throw new RuntimeException(String.format("Variant: [%s] already exists!", getName()));
     }
-  }
 
-  public static SoilBlockVariant builder(String name) {
-    return new SoilBlockVariant(name);
-  }
-
-  public SoilBlockVariant factory(BiFunction<SoilBlockVariant, SoilType, ? extends Block> factory) {
-    this.factory = factory;
-    return this;
-  }
-
-  public SoilBlockVariant fallingSpecification(Specification specification) {
-    this.specification = specification;
-    return this;
-  }
-
-  public SoilBlockVariant build(RegistryManager registry) {
     SoilType.getTypes().forEach(type -> {
-      if (map.put(type, factory.apply(this, type)) != null) {
+      var block = builder.factory.apply(this, type);
+      if (map.put(type, block.getBlock()) != null) {
         throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
       }
+      ModuleSoil.REGISTRY.block(block);
     });
-    registry.blocks(map.values());
-    return this;
   }
 
-  public Block get(SoilType type) {
-    var block = this.map.get(type);
-    if (block != null) {
-      return block;
-    }
-    throw new RuntimeException(String.format("Block soil is null: %s, %s", this, type));
-  }
-
-  public String getRegistryKey(SoilType type) {
-    return String.format("soil/%s/%s", this.getName(), type);
+  public static Builder builder(String name) {
+    return new Builder(name);
   }
 
   public String getLocalizedName() {
-    return new TextComponentTranslation(
-      String.format("soil.variant.%s.name", this)).getFormattedText();
+    return new TextComponentTranslation(String.format("soil.variant.%s.name", this)).getFormattedText();
   }
 
   /**
@@ -133,7 +104,8 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
     }
 
     throw new IllegalArgumentException(
-      String.format("You cannot get grass from [%s] types.", this));
+      String.format("You cannot get grass from [%s] types.", this)
+    );
   }
 
   private SoilBlockVariant transform() {
@@ -152,7 +124,35 @@ public class SoilBlockVariant extends Variant<SoilBlockVariant> {
       return DIRT;
     } else {
       throw new IllegalArgumentException(
-        String.format("You cannot get grass from [%s] types.", this));
+        String.format("You cannot get grass from [%s] types.", this)
+      );
+    }
+  }
+
+  public static class Builder {
+
+    private final String name;
+
+    private BiFunction<SoilBlockVariant, SoilType, ISoilBlock> factory;
+    private Specification specification;
+
+    public Builder(String name) {
+      this.name = name;
+    }
+
+    public Builder factory(BiFunction<SoilBlockVariant, SoilType, ISoilBlock> factory) {
+      this.factory = factory;
+      return this;
+    }
+
+    public Builder fallingSpecification(Specification specification) {
+      this.specification = specification;
+      return this;
+    }
+
+
+    public SoilBlockVariant build() {
+      return new SoilBlockVariant(this);
     }
   }
 

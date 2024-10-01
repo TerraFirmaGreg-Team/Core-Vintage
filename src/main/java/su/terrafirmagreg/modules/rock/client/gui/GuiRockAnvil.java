@@ -111,9 +111,9 @@ public class GuiRockAnvil
     if (button instanceof GuiButtonAnvilPlanIcon) {
       // This fires when you select a plan in the Plan GUI
       ResourceLocation recipeName = ((GuiButtonAnvilPlanIcon) button).getRecipeName();
-      ModuleMetal.getPacketService().sendToServer(new CSPacketGuiButton(button.id,
-                                                                        new NBTBuilder().setString("recipe", recipeName.toString())
-                                                                                        .build()));
+      ModuleMetal.PACKET_SERVICE.sendToServer(new CSPacketGuiButton(button.id,
+                                                                    new NBTBuilder().setString("recipe", recipeName.toString())
+                                                                                    .build()));
     } else if (button == buttonLeft) {
       page--;
       updatePage();

@@ -54,7 +54,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IProviderT
     this.settings = Settings.of(Material.WOOD);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .ignoresProperties(BlockChest.FACING)
       .sound(SoundType.WOOD)
@@ -84,7 +84,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IProviderT
   @Override
   public ILockableContainer getContainer(World worldIn, BlockPos pos, boolean allowBlocking) {
 
-    ILockableContainer ilockablecontainer = TileUtils.getTile(worldIn, pos, TileEntityChest.class);
+    ILockableContainer ilockablecontainer = TileUtils.getTile(worldIn, pos, TileEntityChest.class).get();
 
     if (!allowBlocking && isBlocked(worldIn, pos)) {
       return null;
@@ -99,13 +99,13 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IProviderT
           return null;
         }
 
-        var tile = TileUtils.getTile(worldIn, pos);
+        var tile = TileUtils.getTile(worldIn, pos, TileEntityChest.class);
 
-        if (tile instanceof TileEntityChest tileEntityChest) {
+        if (tile.isPresent()) {
           if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH) {
-            ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", ilockablecontainer, tileEntityChest);
+            ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", ilockablecontainer, tile.get());
           }
-          ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", tileEntityChest, ilockablecontainer);
+          ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", tile.get(), ilockablecontainer);
 
         }
       }

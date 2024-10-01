@@ -35,10 +35,9 @@ public class HangingPlanterProvider implements IWailaBlock {
         String growth = String.format("%d%%", Math.round(curStagePercent));
         currentTooltip.add(growth);
       }
-      var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
-      if (tile != null) {
+      TileUtils.getTile(world, pos, TEHangingPlanter.class).ifPresent(tile -> {
         currentTooltip.add(tile.isClimateValid() ? "Climate Valid" : "Climate Invalid");
-      }
+      });
     }
     return currentTooltip;
   }

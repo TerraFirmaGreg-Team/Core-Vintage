@@ -1,5 +1,12 @@
 package net.dries007.tfc.util;
 
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Converter;
 import com.google.common.base.Joiner;
@@ -7,14 +14,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-
 import org.jetbrains.annotations.NotNull;
-
-import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 
 /**
  * This is not the best example of good coding practice, but I do think it works rather well. The reason for the delayed registration it because now the

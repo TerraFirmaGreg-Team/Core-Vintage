@@ -25,7 +25,7 @@ public abstract class BlockWood extends BaseBlock implements IWoodBlock {
     this.type = type;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)

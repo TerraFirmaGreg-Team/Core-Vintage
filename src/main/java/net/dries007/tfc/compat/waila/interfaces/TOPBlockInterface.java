@@ -42,13 +42,12 @@ public class TOPBlockInterface implements IProbeInfoProvider, IBlockDisplayOverr
   public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
     BlockPos pos = hitData.getPos();
     var tile = TileUtils.getTile(world, pos);
-    if (!isLookingAtProvider(state.getBlock(), tile)) {
+    if (!tile.isPresent()) {return;}
+    if (!isLookingAtProvider(state.getBlock(), tile.get())) {
       return;
     }
     NBTTagCompound nbt = new NBTTagCompound();
-    if (tile != null) {
-      nbt = tile.writeToNBT(nbt);
-    }
+    nbt = tile.get().writeToNBT(nbt);
 
     if (internal.appendBody()) {
       List<String> tooltip = internal.getTooltip(world, hitData.getPos(), nbt);
@@ -70,14 +69,14 @@ public class TOPBlockInterface implements IProbeInfoProvider, IBlockDisplayOverr
   @Override
   public boolean overrideStandardInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
     BlockPos pos = hitData.getPos();
-    var tile = TileUtils.getTile(world, pos);
-    if (!isLookingAtProvider(state.getBlock(), tile)) {
-      return false;
-    }
-
     NBTTagCompound nbt = new NBTTagCompound();
-    if (tile != null) {
-      nbt = tile.writeToNBT(nbt);
+    var tile = TileUtils.getTile(world, pos);
+    if (tile.isPresent()) {
+      if (!isLookingAtProvider(state.getBlock(), tile.get())) {
+        return false;
+      }
+
+      nbt = tile.get().writeToNBT(nbt);
     }
 
     ItemStack stack = internal.overrideIcon() ? internal.getIcon(world, pos, nbt) : ItemStack.EMPTY;

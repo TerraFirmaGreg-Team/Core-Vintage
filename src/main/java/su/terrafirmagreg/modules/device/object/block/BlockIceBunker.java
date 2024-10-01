@@ -62,10 +62,7 @@ public class BlockIceBunker extends BaseBlockContainer {
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TileIceBunker.class);
-    if (tile != null) {
-      InventoryHelper.dropInventoryItems(worldIn, pos, tile);
-    }
+    TileUtils.getTile(worldIn, pos, TileIceBunker.class).ifPresent(tile -> InventoryHelper.dropInventoryItems(worldIn, pos, tile));
     super.breakBlock(worldIn, pos, state);
   }
 

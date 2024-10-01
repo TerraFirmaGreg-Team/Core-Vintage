@@ -32,37 +32,39 @@ public class CropProvider implements IWailaBlock {
   public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
     List<String> currentTooltip = new ArrayList<>();
     IBlockState state = world.getBlockState(pos);
-    TECropBase tile = TileUtils.getTile(world, pos, TECropBase.class);
-    if (state.getBlock() instanceof BlockCropTFC bs && tile != null) {
-      ICrop crop = bs.getCrop();
+    if (state.getBlock() instanceof BlockCropTFC blockCropTFC) {
+      TileUtils.getTile(world, pos, TECropBase.class).ifPresent(tile -> {
+        ICrop crop = blockCropTFC.getCrop();
 
-      boolean isWild = state.getValue(BlockCropTFC.WILD);
-      float temp = Climate.getActualTemp(world, pos, -tile.getLastUpdateTick());
-      float rainfall = ProviderChunkData.getRainfall(world, pos);
+        boolean isWild = state.getValue(BlockCropTFC.WILD);
+        float temp = Climate.getActualTemp(world, pos, -tile.getLastUpdateTick());
+        float rainfall = ProviderChunkData.getRainfall(world, pos);
 
-      if (isWild) {
-        currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.wild").getFormattedText());
-      } else if (crop.isValidForGrowth(temp, rainfall)) {
-        currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growing").getFormattedText());
-      } else {
-        currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
-      }
+        if (isWild) {
+          currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.wild").getFormattedText());
+        } else if (crop.isValidForGrowth(temp, rainfall)) {
+          currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growing").getFormattedText());
+        } else {
+          currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
+        }
 
-      int curStage = state.getValue(bs.getStageProperty());
-      int maxStage = crop.getMaxStage();
+        int curStage = state.getValue(blockCropTFC.getStageProperty());
+        int maxStage = crop.getMaxStage();
 
-      if (curStage == maxStage) {
-        currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth",
-                                                        new TextComponentTranslation("waila.tfc.crop.mature").getFormattedText()).getFormattedText());
-      } else {
-        float remainingTicksToGrow = Math.max(0,
-                                              (crop.getGrowthTicks() * (float) ConfigTFC.General.FOOD.cropGrowthTimeModifier) - tile.getTicksSinceUpdate());
-        float curStagePerc = 1.0F - remainingTicksToGrow / crop.getGrowthTicks();
-        // Don't show 100% since it still needs to check on randomTick to grow
-        float totalPerc = Math.min(0.99f, curStagePerc / maxStage + (float) curStage / maxStage) * 100;
-        String growth = String.format("%d%%", Math.round(totalPerc));
-        currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
-      }
+        if (curStage == maxStage) {
+          currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth",
+                                                          new TextComponentTranslation("waila.tfc.crop.mature").getFormattedText()).getFormattedText());
+        } else {
+          float remainingTicksToGrow = Math.max(0,
+                                                (crop.getGrowthTicks() * (float) ConfigTFC.General.FOOD.cropGrowthTimeModifier)
+                                                - tile.getTicksSinceUpdate());
+          float curStagePerc = 1.0F - remainingTicksToGrow / crop.getGrowthTicks();
+          // Don't show 100% since it still needs to check on randomTick to grow
+          float totalPerc = Math.min(0.99f, curStagePerc / maxStage + (float) curStage / maxStage) * 100;
+          String growth = String.format("%d%%", Math.round(totalPerc));
+          currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
+        }
+      });
     } else if (state.getBlock() instanceof BlockCropDead) {
       currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.dead_crop").getFormattedText());
     }

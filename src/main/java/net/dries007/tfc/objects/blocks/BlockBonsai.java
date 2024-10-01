@@ -72,46 +72,38 @@ public class BlockBonsai extends BlockNonCube {
 
   @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-    if (!world.isRemote) {
-      var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
-      int stage = state.getValue(STAGE);
-      if (tile != null && tile.isClimateValid(tier) && tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * period) && stage < 2) {
-        world.setBlockState(pos, state.withProperty(STAGE, stage + 1));
-        tile.reduceCounter(ICalendar.TICKS_IN_DAY * period);
-        tile.markForSync();
-      }
-    }
+    if (world.isRemote) {return;}
+    TileUtils.getTile(world, pos, TEHangingPlanter.class)
+             .filter(tile -> tile.isClimateValid(tier) && tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * period) && state.getValue(STAGE) < 2)
+             .ifPresent(tile -> {
+               world.setBlockState(pos, state.withProperty(STAGE, state.getValue(STAGE) + 1));
+               tile.reduceCounter(ICalendar.TICKS_IN_DAY * period);
+               tile.markForSync();
+             });
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                  float hitY, float hitZ) {
-    if (!world.isRemote) {
-      var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
-      if (tile == null) {
-        return false;
-      }
-      ItemStack held = player.getHeldItem(hand);
-      if (held.isEmpty() && state.getValue(STAGE) == 2) {
-        BlockPos spawnPos = tier == 4 ? pos.up() : pos.down(); // who let me learn to code???
-        StackUtils.spawnItemStack(world, spawnPos, new ItemStack(fruit.get(), tier == 4 ? 3 : 1));
-        if (RNG.nextInt(7) == 0) {
-          StackUtils.spawnItemStack(world, spawnPos, new ItemStack(seed.get()));
-        }
-        world.setBlockState(pos, state.withProperty(STAGE, 0));
-        tile.resetCounter();
-        return true;
-      }
-    }
-    return false;
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    if (world.isRemote) {return false;}
+    return TileUtils.getTile(world, pos, TEHangingPlanter.class)
+                    .filter(tile -> player.getHeldItem(hand).isEmpty() && state.getValue(STAGE) == 2)
+                    .map(tile -> {
+                      BlockPos spawnPos = tier == 4 ? pos.up() : pos.down();
+                      StackUtils.spawnItemStack(world, spawnPos, new ItemStack(fruit.get(), tier == 4 ? 3 : 1));
+                      if (RNG.nextInt(7) == 0) {
+                        StackUtils.spawnItemStack(world, spawnPos, new ItemStack(seed.get()));
+                      }
+                      world.setBlockState(pos, state.withProperty(STAGE, 0));
+                      tile.resetCounter();
+                      return true;
+                    })
+                    .orElse(false);
+
   }
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-    TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
+    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 

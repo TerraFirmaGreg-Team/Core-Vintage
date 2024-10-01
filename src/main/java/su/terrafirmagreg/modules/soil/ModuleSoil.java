@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.soil;
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilTypeHandler;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
@@ -24,12 +25,12 @@ public final class ModuleSoil extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleSoil.class.getSimpleName());
 
-  public final CreativeTabs SOIL_TAB;
+  public static CreativeTabs TAB;
+  public static RegistryManager REGISTRY;
 
   public ModuleSoil() {
-    this.SOIL_TAB = BaseCreativeTab.of("soil", "soil/grass/humus");
-
-    this.enableAutoRegistry(SOIL_TAB);
+    TAB = BaseCreativeTab.of("soil", "soil/grass/humus");
+    REGISTRY = enableAutoRegistry(TAB);
   }
 
   @Override

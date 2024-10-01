@@ -1,10 +1,10 @@
 package net.dries007.tfc.api.recipes.heat;
 
+import net.minecraft.item.ItemStack;
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ceramics.ItemSmallVessel;
-
-import net.minecraft.item.ItemStack;
 
 import org.jetbrains.annotations.NotNull;
 

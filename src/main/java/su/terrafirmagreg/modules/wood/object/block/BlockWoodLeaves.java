@@ -42,6 +42,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.client.particle.TFCParticles;
+import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.Climate;
@@ -83,7 +84,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
     this.leavesFancy = true; // Fast / Fancy graphics works correctly
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .ignoresProperties(DECAYABLE, HARVESTABLE)
       .nonOpaque()
       .randomTicks()
@@ -162,13 +163,13 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
       case 3:
         if (state.getValue(LEAF_STATE) != FRUIT) {
           var tile = TileUtils.getTile(world, pos, TileWoodLeaves.class);
-          if (tile != null) {
-            long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+          tile.ifPresent(tileWoodLeaves -> {
+            long hours = tileWoodLeaves.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
             if (hours > (type.getMinGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
               world.setBlockState(pos, state.withProperty(LEAF_STATE, FRUIT));
-              tile.resetCounter();
+              tileWoodLeaves.resetCounter();
             }
-          }
+          });
         }
         break;
       case 4:
@@ -195,9 +196,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
     var tile = TileUtils.getTile(worldIn, pos, TileWoodLeaves.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
+    tile.ifPresent(TETickCounter::resetCounter);
   }
 
   @Override
@@ -208,9 +207,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
         ItemHandlerHelper.giveItemToPlayer(playerIn, this.type.getFoodDrop());
         worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, NORMAL));
         var tile = TileUtils.getTile(worldIn, pos, TileWoodLeaves.class);
-        if (tile != null) {
-          tile.resetCounter();
-        }
+        tile.ifPresent(TETickCounter::resetCounter);
       }
       return true;
     }

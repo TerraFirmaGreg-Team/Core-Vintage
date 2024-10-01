@@ -73,10 +73,7 @@ public class BlockGrindstoneManual extends BaseBlock implements IProviderTile {
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(world, pos, TileGrindstone.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
+    TileUtils.getTile(world, pos, TileGrindstone.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
     super.breakBlock(world, pos, state);
   }
 
@@ -93,46 +90,39 @@ public class BlockGrindstoneManual extends BaseBlock implements IProviderTile {
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-                                  float hitZ) {
-    if (hand.equals(EnumHand.MAIN_HAND)) {
-      var tile = TileUtils.getTile(world, pos, TileGrindstone.class);
-      if (tile != null) {
-        ItemStack heldStack = playerIn.getHeldItem(hand);
-        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-                                                    null);
-        if (inventory != null) {
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    if (hand != EnumHand.MAIN_HAND) {return false;}
+    return TileUtils.getTile(world, pos, TileGrindstone.class).map(tile -> {
+      ItemStack heldStack = playerIn.getHeldItem(hand);
+      IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+      if (inventory == null) {return false;}
 
-          int slot = inventory.getStackInSlot(TileGrindstone.SLOT_GRINDSTONE)
-                              .isEmpty() && inventory.getStackInSlot(TileGrindstone.SLOT_INPUT)
-                                                     .isEmpty() ? TileGrindstone.SLOT_GRINDSTONE : TileGrindstone.SLOT_INPUT;
+      int slot = inventory.getStackInSlot(TileGrindstone.SLOT_GRINDSTONE).isEmpty() && inventory.getStackInSlot(TileGrindstone.SLOT_INPUT).isEmpty()
+                 ? TileGrindstone.SLOT_GRINDSTONE
+                 : TileGrindstone.SLOT_INPUT;
 
-          if (slot == TileGrindstone.SLOT_INPUT) {
-            if (inventory.isItemValid(slot, heldStack)) {
-              playerIn.setHeldItem(EnumHand.MAIN_HAND, tile.insertOrSwapItem(slot, heldStack));
-              tile.setAndUpdateSlots(slot);
-              return true;
-            } else {
-              if (!inventory.getStackInSlot(slot).isEmpty()) {
-                ItemHandlerHelper.giveItemToPlayer(playerIn,
-                                                   inventory.extractItem(slot, inventory.getStackInSlot(slot)
-                                                                                        .getCount(), false));
-                return true;
-              }
-            }
-          }
-
-          if (slot == TileGrindstone.SLOT_GRINDSTONE && inventory.getStackInSlot(slot)
-                                                                 .isEmpty() && inventory.isItemValid(slot, heldStack)) {
-            playerIn.setHeldItem(EnumHand.MAIN_HAND, tile.insertOrSwapItem(slot, heldStack));
-            tile.setAndUpdateSlots(slot);
+      if (slot == TileGrindstone.SLOT_INPUT) {
+        if (inventory.isItemValid(slot, heldStack)) {
+          playerIn.setHeldItem(EnumHand.MAIN_HAND, tile.insertOrSwapItem(slot, heldStack));
+          tile.setAndUpdateSlots(slot);
+          return true;
+        } else {
+          if (!inventory.getStackInSlot(slot).isEmpty()) {
+            ItemHandlerHelper.giveItemToPlayer(playerIn, inventory.extractItem(slot, inventory.getStackInSlot(slot).getCount(), false));
             return true;
           }
         }
       }
-    }
 
-    return false;
+      if (slot == TileGrindstone.SLOT_GRINDSTONE && inventory.getStackInSlot(slot).isEmpty() && inventory.isItemValid(slot, heldStack)) {
+        playerIn.setHeldItem(EnumHand.MAIN_HAND, tile.insertOrSwapItem(slot, heldStack));
+        tile.setAndUpdateSlots(slot);
+        return true;
+      }
+
+      return false;
+    }).orElse(false);
+
   }
 
   @Override

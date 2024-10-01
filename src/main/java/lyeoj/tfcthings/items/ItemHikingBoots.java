@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IArmorMaterialTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -90,8 +90,8 @@ public class ItemHikingBoots extends ItemArmor implements ICapabilitySize, ICapa
             for (int k = blockpos$pooledmutableblockpos.getZ(); k <= blockpos$pooledmutableblockpos1.getZ(); ++k) {
               blockpos$pooledmutableblockpos2.setPos(i, j, k);
               IBlockState iblockstate = world.getBlockState(blockpos$pooledmutableblockpos2);
-              if (iblockstate.getBlock() instanceof BlockPlantTFC plant) {
-                double modifier = 0.25D * (double) (4 - iblockstate.getValue(BlockPlantTFC.AGE));
+              if (iblockstate.getBlock() instanceof BlockPlant plant) {
+                double modifier = 0.25D * (double) (4 - iblockstate.getValue(BlockPlant.AGE));
                 modifier += (1.0D - modifier) * plant.getPlant().getMovementMod();
                 if (modifier < ConfigTFC.General.MISC.minimumPlantMovementModifier) {
                   modifier = ConfigTFC.General.MISC.minimumPlantMovementModifier;

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.data.lib.types.variant;
 
 @FunctionalInterface
-public interface IVariant<T extends Variant<T>> {
+public interface IVariant<V extends Variant<V, ?>> {
 
-  T getVariant();
+  V getVariant();
 }

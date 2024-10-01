@@ -52,13 +52,11 @@ public abstract class BlockStemCrop extends BlockCropSimple {
   @Override
   @SuppressWarnings("deprecation")
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-    var tile = TileUtils.getTile(worldIn, pos, TEStemCrop.class);
-    if (tile != null) {
-      return state.withProperty(FACING, tile.getFruitDirection());
-    }
     //even though the existing stemcrops only show direction when fully grown, this is made available
     //so that subclasses can have directionality while growing if they want
-    return state;
+    return TileUtils.getTile(worldIn, pos, TEStemCrop.class)
+                    .map(tile -> state.withProperty(FACING, tile.getFruitDirection()))
+                    .orElse(state);
   }
 
   @Override
@@ -87,12 +85,11 @@ public abstract class BlockStemCrop extends BlockCropSimple {
 
   @Override
   public void grow(World world, BlockPos cropPos, IBlockState cropState, Random random) {
-    if (!world.isRemote) {
-      //if penultimate stage
-      PropertyInteger stageProperty = getStageProperty();
-      if (cropState.getProperties()
-                   .containsKey(stageProperty) && cropState.getValue(stageProperty) == getCrop().getMaxStage() - 1) {
-        var tile = TileUtils.getTile(world, cropPos, TEStemCrop.class);
+    if (world.isRemote) {return;}
+    //if penultimate stage
+    PropertyInteger stageProperty = getStageProperty();
+    if (cropState.getProperties().containsKey(stageProperty) && cropState.getValue(stageProperty) == getCrop().getMaxStage() - 1) {
+      TileUtils.getTile(world, cropPos, TEStemCrop.class).ifPresent(tile -> {
         EnumFacing fruitDirection = tile.getFruitDirection();
         BlockPos fruitPos = cropPos.offset(fruitDirection);
         StemCrop crop = (StemCrop) getCrop();
@@ -101,17 +98,12 @@ public abstract class BlockStemCrop extends BlockCropSimple {
                                        .getDefaultState()
                                        .withProperty(BlockStemFruit.FACING, fruitDirection.getOpposite());
           world.setBlockState(fruitPos, fruitState);
-          super.grow(world, cropPos, cropState, random);
         }
-      } else {
-        super.grow(world, cropPos, cropState, random);
-      }
-    }
-  }
+      });
 
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return super.getMetaFromState(state);
+    }
+    super.grow(world, cropPos, cropState, random);
+
   }
 
   @Override
@@ -119,19 +111,20 @@ public abstract class BlockStemCrop extends BlockCropSimple {
     super.onBlockAdded(worldIn, pos, state);
     //if adding a fully grown and wild crop
     if (state.getValue(getStageProperty()) == getCrop().getMaxStage() && state.getValue(WILD)) {
-      var tile = TileUtils.getTile(worldIn, pos, TEStemCrop.class);
-      EnumFacing fruitDirection = tile.getFruitDirection();
-      BlockPos targetPos = pos.offset(fruitDirection);
-      StemCrop crop = (StemCrop) getCrop();
-      if (crop.getCropBlock().canPlaceBlockAt(worldIn, targetPos)) //spawn fruit
-      {
-        worldIn.setBlockState(targetPos, crop.getCropBlock()
-                                             .getDefaultState()
-                                             .withProperty(BlockStemFruit.FACING, fruitDirection.getOpposite()));
-      } else //revert back a stage
-      {
-        worldIn.setBlockState(pos, state.withProperty(getStageProperty(), getCrop().getMaxStage() - 1));
-      }
+      TileUtils.getTile(worldIn, pos, TEStemCrop.class).ifPresent(tile -> {
+        EnumFacing fruitDirection = tile.getFruitDirection();
+        BlockPos targetPos = pos.offset(fruitDirection);
+        StemCrop crop = (StemCrop) getCrop();
+
+        //spawn fruit
+        if (crop.getCropBlock().canPlaceBlockAt(worldIn, targetPos)) {
+          worldIn.setBlockState(targetPos, crop.getCropBlock().getDefaultState().withProperty(BlockStemFruit.FACING, fruitDirection.getOpposite()));
+
+          //revert back a stage
+        } else {
+          worldIn.setBlockState(pos, state.withProperty(getStageProperty(), getCrop().getMaxStage() - 1));
+        }
+      });
     }
   }
 

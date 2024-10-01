@@ -9,19 +9,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.objects.blocks.plants.BlockCactusTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockCreepingPlantTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockEpiphyteTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockHangingPlantTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockMushroomTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockTallGrassTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockTallPlantTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockTallWaterPlantTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlant;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantCactus;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantCreeping;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantEmergentTallWater;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantEpiphyte;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantFloatingWater;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantHanging;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantMushroom;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrass;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantTall;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantTallGrass;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantTallWater;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantWater;
 import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -340,40 +340,40 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
 
   // todo: switch usages to interface from enum, it will make custom plants by addons easier down the line. It's also a better design
   public enum PlantType implements IPlantType {
-    STANDARD(BlockPlantTFC::new),
-    TALL_PLANT(BlockTallPlantTFC::new),
-    CREEPING(BlockCreepingPlantTFC::new),
-    HANGING(BlockHangingPlantTFC::new),
-    FLOATING(BlockFloatingWaterTFC::new),
-    FLOATING_SEA(BlockFloatingWaterTFC::new),
-    DESERT(BlockPlantTFC::new),
-    DESERT_TALL_PLANT(BlockTallPlantTFC::new),
-    DRY(BlockPlantTFC::new),
-    DRY_TALL_PLANT(BlockTallPlantTFC::new),
-    CACTUS(BlockCactusTFC::new),
-    SHORT_GRASS(BlockShortGrassTFC::new),
-    TALL_GRASS(BlockTallGrassTFC::new),
-    EPIPHYTE(BlockEpiphyteTFC::new),
-    REED(BlockPlantTFC::new),
-    REED_SEA(BlockPlantTFC::new),
-    TALL_REED(BlockTallPlantTFC::new),
-    TALL_REED_SEA(BlockTallPlantTFC::new),
-    WATER(BlockWaterPlantTFC::new),
-    WATER_SEA(BlockWaterPlantTFC::new),
-    TALL_WATER(BlockTallWaterPlantTFC::new),
-    TALL_WATER_SEA(BlockTallWaterPlantTFC::new),
-    EMERGENT_TALL_WATER(BlockEmergentTallWaterPlantTFC::new),
-    EMERGENT_TALL_WATER_SEA(BlockEmergentTallWaterPlantTFC::new),
-    MUSHROOM(BlockMushroomTFC::new);
+    STANDARD(BlockPlant::new),
+    TALL_PLANT(BlockPlantTall::new),
+    CREEPING(BlockPlantCreeping::new),
+    HANGING(BlockPlantHanging::new),
+    FLOATING(BlockPlantFloatingWater::new),
+    FLOATING_SEA(BlockPlantFloatingWater::new),
+    DESERT(BlockPlant::new),
+    DESERT_TALL_PLANT(BlockPlantTall::new),
+    DRY(BlockPlant::new),
+    DRY_TALL_PLANT(BlockPlantTall::new),
+    CACTUS(BlockPlantCactus::new),
+    SHORT_GRASS(BlockPlantShortGrass::new),
+    TALL_GRASS(BlockPlantTallGrass::new),
+    EPIPHYTE(BlockPlantEpiphyte::new),
+    REED(BlockPlant::new),
+    REED_SEA(BlockPlant::new),
+    TALL_REED(BlockPlantTall::new),
+    TALL_REED_SEA(BlockPlantTall::new),
+    WATER(BlockPlantWater::new),
+    WATER_SEA(BlockPlantWater::new),
+    TALL_WATER(BlockPlantTallWater::new),
+    TALL_WATER_SEA(BlockPlantTallWater::new),
+    EMERGENT_TALL_WATER(BlockPlantEmergentTallWater::new),
+    EMERGENT_TALL_WATER_SEA(BlockPlantEmergentTallWater::new),
+    MUSHROOM(BlockPlantMushroom::new);
 
-    private final Function<Plant, BlockPlantTFC> supplier;
+    private final Function<Plant, BlockPlant> supplier;
 
-    PlantType(@NotNull Function<Plant, BlockPlantTFC> supplier) {
+    PlantType(@NotNull Function<Plant, BlockPlant> supplier) {
       this.supplier = supplier;
     }
 
     @Override
-    public BlockPlantTFC create(Plant plant) {
+    public BlockPlant create(Plant plant) {
       return supplier.apply(plant);
     }
 

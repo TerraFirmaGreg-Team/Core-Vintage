@@ -59,9 +59,7 @@ import static su.terrafirmagreg.modules.metal.objects.itemblock.ItemBlockMetalLa
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockMetalLamp
-  extends BaseBlock
-  implements IMetalBlock, IProviderTile, ICapabilityMetal {
+public class BlockMetalLamp extends BaseBlock implements IMetalBlock, IProviderTile, ICapabilityMetal {
 
   private static final AxisAlignedBB AABB_UP = new AxisAlignedBB(0.3125, 0, 0.3125, 0.6875, 0.5,
                                                                  0.6875);
@@ -78,19 +76,20 @@ public class BlockMetalLamp
     this.type = type;
 
     getSettings()
+      .registryKey(type.getRegistryKey(variant))
+      .customResource(variant.getCustomResource())
       .sound(SoundType.METAL)
+      .randomTicks()
       .nonCube()
       .hardness(1f)
       .oreDict("lamp");
 
-    setTickRandomly(true);
     setDefaultState(blockState.getBaseState()
                               .withProperty(VERTICAL, EnumFacing.UP)
                               .withProperty(LIT, false));
 
     // In the interest of not writing a joint heat / fluid capability that extends ICapabilityProvider, I think this is justified
-    HandlerHeat.CUSTOM_ITEMS.put(IIngredient.of(this),
-                                 () -> new ProviderHeat(null, type.getSpecificHeat(), type.getMeltTemp()));
+    HandlerHeat.CUSTOM_ITEMS.put(IIngredient.of(this), () -> new ProviderHeat(null, type.getSpecificHeat(), type.getMeltTemp()));
   }
 
   @Override
@@ -130,19 +129,15 @@ public class BlockMetalLamp
 
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-    if (state.getValue(LIT) && ConfigMetal.BLOCKS.LAMP.burnRate > 0) {
-      var tile = TileUtils.getTile(worldIn, pos, TileMetalLamp.class);
-      if (tile != null) {
-        checkFuel(worldIn, pos, state, tile);
-      }
+    if (state.getValue(LIT) && ConfigMetal.BLOCK.LAMP.burnRate > 0) {
+      TileUtils.getTile(worldIn, pos, TileMetalLamp.class).ifPresent(tile -> checkFuel(worldIn, pos, state, tile));
     }
   }
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
                               BlockPos fromPos) {
-    var tile = TileUtils.getTile(worldIn, pos, TileMetalLamp.class);
-    if (tile != null) {
+    TileUtils.getTile(worldIn, pos, TileMetalLamp.class).ifPresent(tile -> {
       if (worldIn.isBlockPowered(pos) && !tile.isPowered()) //power on
       {
         lightWithFuel(worldIn, pos, state, tile);
@@ -156,7 +151,7 @@ public class BlockMetalLamp
           tile.resetCounter();
         }
       }
-    }
+    });
     if (!canPlaceAt(worldIn, pos, state.getValue(VERTICAL))) {
       worldIn.destroyBlock(pos, true);
     }
@@ -176,33 +171,32 @@ public class BlockMetalLamp
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                  float hitX, float hitY, float hitZ) {
-    var tile = TileUtils.getTile(worldIn, pos, TileMetalLamp.class);
-    ItemStack stack = playerIn.getHeldItem(hand);
-    if (!worldIn.isRemote && tile != null) {
-      if (state.getValue(LIT)) {
-        if (!checkFuel(worldIn, pos, state, tile)) //if it didn't run out turn it off
-        {
-          worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, false));
-          tile.resetCounter();
-        }
-      } else if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY,
-                                     null)) { //refill only if not lit
-        IFluidHandler fluidHandler = tile.getCapability(
-          CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (fluidHandler != null) {
-          FluidUtil.interactWithFluidHandler(playerIn, hand, fluidHandler);
-          tile.markDirty();
-        }
-      } else if (BlockTorchTFC.canLight(stack)) {
-        if (lightWithFuel(worldIn, pos, state, tile)) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    TileUtils.getTile(worldIn, pos, TileMetalLamp.class).ifPresent(tile -> {
+      ItemStack stack = playerIn.getHeldItem(hand);
+      if (!worldIn.isRemote) {
+        if (state.getValue(LIT)) {
+          //if it didn't run out turn it off
+          if (!checkFuel(worldIn, pos, state, tile)) {
+            worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, false));
+            tile.resetCounter();
+          }
+
+          //refill only if not lit
+        } else if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
+          IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+          if (fluidHandler != null) {
+            FluidUtil.interactWithFluidHandler(playerIn, hand, fluidHandler);
+            tile.markDirty();
+          }
+        } else if (BlockTorchTFC.canLight(stack)) {
+          lightWithFuel(worldIn, pos, state, tile);
         }
       }
-    }
+    });
     return true;
   }
+
 
   /**
    * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the IBlockstate
@@ -232,15 +226,14 @@ public class BlockMetalLamp
 
   // after BlockBarrel#onBlockPlacedBy
   @Override
-  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-                              EntityLivingBase placer, ItemStack stack) {
+  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     if (!worldIn.isRemote && stack.getTagCompound() != null) {
       // Set the initial counter value and fill from item
-      TileMetalLamp tile = TileUtils.getTile(worldIn, pos, TileMetalLamp.class);
-      if (tile != null) {
-        tile.resetCounter();
-        tile.loadFromItemStack(stack);
-      }
+      TileUtils.getTile(worldIn, pos, TileMetalLamp.class)
+               .ifPresent(tile -> {
+                 tile.resetCounter();
+                 tile.loadFromItemStack(stack);
+               });
       worldIn.setBlockState(pos, state.withProperty(LIT, false));
     }
   }
@@ -257,23 +250,20 @@ public class BlockMetalLamp
 
   @Override
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-    var tile = TileUtils.getTile(world, pos, TileMetalLamp.class);
-    if (tile == null) {return;}
-    if (tile.getFuel() == 0) {
-      super.getDrops(drops, world, pos, state, fortune);
-    } else {
-      drops.add(tile.getItemStack(tile, state));
-    }
-
+    TileUtils.getTile(world, pos, TileMetalLamp.class).ifPresent(tile -> {
+      if (tile.getFuel() == 0) {
+        super.getDrops(drops, world, pos, state, fortune);
+      } else {
+        drops.add(tile.getItemStack(tile, state));
+      }
+    });
   }
 
   @Override
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-    var tile = TileUtils.getTile(world, pos, TileMetalLamp.class);
-    if (tile != null) {
-      return tile.getItemStack(tile, state);
-    }
-    return new ItemStack(state.getBlock());
+    return TileUtils.getTile(world, pos, TileMetalLamp.class)
+                    .map(tile -> tile.getItemStack(tile, state))
+                    .orElse(new ItemStack(state.getBlock()));
   }
 
   private boolean lightWithFuel(World worldIn, BlockPos pos, IBlockState state, TileMetalLamp tel) {
@@ -317,7 +307,7 @@ public class BlockMetalLamp
     boolean ranOut = false;
     if (!worldIn.isRemote && fluidHandler != null) {
       long ticks = tel.getTicksSinceUpdate();
-      double usage = ConfigMetal.BLOCKS.LAMP.burnRate * ticks / ICalendar.TICKS_IN_HOUR;
+      double usage = ConfigMetal.BLOCK.LAMP.burnRate * ticks / ICalendar.TICKS_IN_HOUR;
       if (usage >= 1) // minimize rounding issues
       {
         FluidStack used = fluidHandler.drain((int) usage, true); // use fuel

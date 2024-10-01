@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.rock;
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypeHandler;
 import su.terrafirmagreg.modules.rock.event.MaterialEventHandler;
@@ -26,15 +27,14 @@ public final class ModuleRock extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleRock.class.getSimpleName());
 
-  public final CreativeTabs ROCK_TAB;
+  public static CreativeTabs TAB;
+  public static RegistryManager REGISTRY;
 
   public ModuleRock() {
-    this.ROCK_TAB = BaseCreativeTab.of("rock", "rock/raw/basalt");
-
-    this.enableAutoRegistry(ROCK_TAB);
+    TAB = BaseCreativeTab.of("rock", "rock/raw/basalt");
+    REGISTRY = enableAutoRegistry(TAB);
 
     MinecraftForge.EVENT_BUS.register(new MaterialEventHandler());
-
   }
 
 

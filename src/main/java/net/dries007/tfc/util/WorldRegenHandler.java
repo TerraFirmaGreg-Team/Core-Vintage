@@ -43,7 +43,7 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
-import net.dries007.tfc.objects.blocks.plants.BlockMushroomTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantMushroom;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
@@ -173,7 +173,7 @@ public class WorldRegenHandler {
         IBlockState topState = world.getBlockState(topPos);
         Block topBlock = topState.getBlock();
         if (!topState.getMaterial()
-                     .isLiquid() && (topBlock instanceof BlockCropDead || topBlock instanceof BlockMushroomTFC)) {
+                     .isLiquid() && (topBlock instanceof BlockCropDead || topBlock instanceof BlockPlantMushroom)) {
           IBlockState soil = world.getBlockState(topPos.down());
           if (soil.getBlock() instanceof ISoilBlock soilRock) {
             //Stop removing dead crops from farmland please!

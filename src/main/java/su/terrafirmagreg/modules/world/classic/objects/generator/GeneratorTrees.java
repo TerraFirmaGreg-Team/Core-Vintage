@@ -63,10 +63,8 @@ public class GeneratorTrees implements IWorldGenerator {
         if (world.isAirBlock(pos) && stateDown.isSideSolid(world, pos.down(), EnumFacing.UP)
             && BlockUtils.isGround(stateDown)) {
           world.setBlockState(pos, BlocksTFC.PLACED_ITEM_FLAT.getDefaultState());
-          TEPlacedItemFlat tile = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
-          if (tile != null) {
-            tile.setStack(new ItemStack(Items.STICK));
-          }
+          var tile = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
+          tile.ifPresent(tilePlacedItemFlat -> tilePlacedItemFlat.setStack(new ItemStack(Items.STICK)));
         }
       }
     }

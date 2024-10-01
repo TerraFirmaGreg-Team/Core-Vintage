@@ -59,7 +59,7 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock {
     this.type = type;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)
@@ -103,16 +103,11 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock {
                                   EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
                                   float hitX, float hitY, float hitZ) {
     var tile = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
-    if (tile != null) {
-      return tile.onRightClick(playerIn);
-    }
-    return true;
+    return tile.map(tileWoodLoom -> tileWoodLoom.onRightClick(playerIn)).orElse(true);
   }
 
   @Override
-  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-                                          float hitX, float hitY, float hitZ, int meta,
-                                          EntityLivingBase placer) {
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     if (facing.getAxis() == EnumFacing.Axis.Y) {
       facing = placer.getHorizontalFacing().getOpposite();
     }
@@ -132,9 +127,7 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock {
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
     var tile = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    tile.ifPresent(tileWoodLoom -> tileWoodLoom.onBreakBlock(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
   }
 

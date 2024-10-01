@@ -124,10 +124,7 @@ public class BlockPlacedItemFlat extends Block {
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
-    if (tile != null) {
-      tile.onBreakBlock(pos);
-    }
+    TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class).ifPresent(tile -> tile.onBreakBlock(pos));
     super.breakBlock(worldIn, pos, state);
   }
 
@@ -138,17 +135,17 @@ public class BlockPlacedItemFlat extends Block {
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                  float hitX, float hitY, float hitZ) {
-    var tile = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
-    if (tile != null && !worldIn.isRemote) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    if (worldIn.isRemote) {return true;}
+    TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class).ifPresent(tile -> {
       ItemStack stack = tile.getStack();
       if (!stack.isEmpty()) {
         ItemHandlerHelper.giveItemToPlayer(playerIn, stack);
       }
       tile.setStack(ItemStack.EMPTY);
       worldIn.setBlockToAir(pos);
-    }
+    });
+
     return true;
   }
 
@@ -171,16 +168,11 @@ public class BlockPlacedItemFlat extends Block {
   @NotNull
   @Override
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-    var tile = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
-    if (tile != null) {
-      return tile.getStack().copy();
-    }
-    return ItemStack.EMPTY;
+    return TileUtils.getTile(world, pos, TEPlacedItemFlat.class).map(tile -> tile.getStack().copy()).orElse(ItemStack.EMPTY);
   }
 
   @Override
-  public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate,
-                                   EntityLivingBase entity, int numberOfParticles) {
+  public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles) {
     return true;
   }
 

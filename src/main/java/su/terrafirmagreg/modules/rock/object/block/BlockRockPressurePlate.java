@@ -33,7 +33,7 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
     this.variant = variant;
     this.type = type;
     this.settings = Settings.of(Material.ROCK)
-                            .registryKey(variant.getRegistryKey(type))
+                            .registryKey(type.getRegistryKey(variant))
                             .hardness(variant.getHardness(type))
                             .sound(SoundType.STONE)
                             .hardness(0.5f)

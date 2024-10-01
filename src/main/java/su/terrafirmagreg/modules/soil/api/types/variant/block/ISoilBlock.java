@@ -13,7 +13,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IPlantable;
 
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.GRAVEL;
@@ -35,19 +35,16 @@ public interface ISoilBlock extends IType<SoilType>, IVariant<SoilBlockVariant>,
 
     IBlockState blockState = this.getBlock().getDefaultState();
 
-    if (plantable instanceof BlockPlantTFC plant) {
+    if (plantable instanceof BlockPlant plant) {
       switch (plant.getPlantTypeTFC()) {
         case CLAY -> {
-          return BlockUtils.isVariant(getVariant(), DIRT, GRASS, DRY_GRASS, COARSE_DIRT, MUD, PODZOL, SPARSE_GRASS)
-                 && BlockUtils.isClay(blockState);
+          return BlockUtils.isVariant(getVariant(), DIRT, GRASS, DRY_GRASS, COARSE_DIRT, MUD, PODZOL, SPARSE_GRASS) && BlockUtils.isClay(blockState);
         }
         case DESERT_CLAY -> {
-          return BlockUtils.isVariant(getVariant(), MUD, SAND)
-                 || BlockUtils.isClay(blockState);
+          return BlockUtils.isVariant(getVariant(), MUD, SAND) || BlockUtils.isClay(blockState);
         }
         case DRY_CLAY -> {
-          return BlockUtils.isVariant(getVariant(), DIRT, DRY_GRASS, COARSE_DIRT, MUD, PODZOL, SAND, SPARSE_GRASS)
-                 || BlockUtils.isClay(blockState);
+          return BlockUtils.isVariant(getVariant(), DIRT, DRY_GRASS, COARSE_DIRT, MUD, PODZOL, SAND, SPARSE_GRASS) || BlockUtils.isClay(blockState);
         }
         case DRY -> {
           return BlockUtils.isVariant(getVariant(), DIRT, COARSE_DIRT, DRY_GRASS, MUD, SAND, SPARSE_GRASS);
@@ -87,8 +84,7 @@ public interface ISoilBlock extends IType<SoilType>, IVariant<SoilBlockVariant>,
       if (cropState.getBlock() instanceof BlockCropTFC) {
         boolean isWild = cropState.getValue(WILD);
         if (isWild) {
-          if (BlockUtils.isVariant(getVariant(), DIRT, GRASS, DRY_GRASS, PODZOL, SPARSE_GRASS, COARSE_DIRT)
-              || BlockUtils.isClay(blockState)) {
+          if (BlockUtils.isVariant(getVariant(), DIRT, GRASS, DRY_GRASS, PODZOL, SPARSE_GRASS, COARSE_DIRT) || BlockUtils.isClay(blockState)) {
             return true;
           }
         }
@@ -98,8 +94,7 @@ public interface ISoilBlock extends IType<SoilType>, IVariant<SoilBlockVariant>,
 
     switch (plantable.getPlantType(world, pos.offset(direction))) {
       case Plains -> {
-        return BlockUtils.isVariant(getVariant(), DIRT, GRASS, FARMLAND, DRY_GRASS, COARSE_DIRT, MUD, PODZOL, SPARSE_GRASS)
-               || BlockUtils.isClay(blockState);
+        return BlockUtils.isVariant(getVariant(), DIRT, GRASS, FARMLAND, DRY_GRASS, COARSE_DIRT, MUD, PODZOL, SPARSE_GRASS) || BlockUtils.isClay(blockState);
       }
       case Crop -> {
         return BlockUtils.isVariant(getVariant(), FARMLAND);

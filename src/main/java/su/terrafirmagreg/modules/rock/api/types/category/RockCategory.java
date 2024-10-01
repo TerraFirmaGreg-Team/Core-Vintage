@@ -23,7 +23,6 @@ public class RockCategory extends Category<RockCategory> {
   @Getter
   private static final Set<RockCategory> categories = new ObjectOpenHashSet<>();
 
-  private final String name;
   private final boolean layer1;
   private final boolean layer2;
   private final boolean layer3;
@@ -36,7 +35,6 @@ public class RockCategory extends Category<RockCategory> {
   private RockCategory(Builder builder) {
     super(builder.name);
 
-    this.name = builder.name;
     this.layer1 = builder.layer1;
     this.layer2 = builder.layer2;
     this.layer3 = builder.layer3;
@@ -52,17 +50,16 @@ public class RockCategory extends Category<RockCategory> {
   }
 
   public static Builder builder(String name) {
-
     return new Builder(name);
   }
 
   @Nullable
   public static RockCategory getByName(@NotNull String name) {
-    return RockCategory.getCategories()
-                       .stream()
-                       .filter(s -> s.getName().equals(name))
-                       .findFirst()
-                       .orElse(null);
+    return categories
+      .stream()
+      .filter(s -> s.getName().equals(name))
+      .findFirst()
+      .orElse(null);
   }
 
   /**
@@ -135,21 +132,29 @@ public class RockCategory extends Category<RockCategory> {
   public static class Builder {
 
     private final String name;
-    private boolean layer1 = false;
-    private boolean layer2 = false;
-    private boolean layer3 = false;
-    private float caveGenMod = 0f;
-    private float caveFreqMod = 0f;
-    private float hardnessModifier = 0f;
-    private TextFormatting textFormatting = TextFormatting.RESET;
-    private boolean hasAnvil = false;
 
-    /**
-     * @param name Название категории.
-     */
+    private boolean layer1;
+    private boolean layer2;
+    private boolean layer3;
+    private boolean hasAnvil;
+    private float caveGenMod;
+    private float caveFreqMod;
+    private float hardnessModifier;
+    private TextFormatting textFormatting;
+
     public Builder(@NotNull String name) {
 
       this.name = name;
+
+      this.layer1 = false;
+      this.layer2 = false;
+      this.layer3 = false;
+
+      this.caveGenMod = 0f;
+      this.caveFreqMod = 0f;
+      this.hardnessModifier = 0f;
+      this.textFormatting = TextFormatting.RESET;
+      this.hasAnvil = false;
     }
 
     /**
@@ -160,7 +165,7 @@ public class RockCategory extends Category<RockCategory> {
      * @param layer3 Флаг, указывающий, присутствует ли категория в третьем слое пород.
      * @return Возвращает объект Builder для цепочки вызовов.
      */
-    public Builder setLayer(boolean layer1, boolean layer2, boolean layer3) {
+    public Builder layer(boolean layer1, boolean layer2, boolean layer3) {
       this.layer1 = layer1;
       this.layer2 = layer2;
       this.layer3 = layer3;
@@ -174,7 +179,7 @@ public class RockCategory extends Category<RockCategory> {
      * @param caveFreqMod Модификатор частоты генерации породы в пещерах.
      * @return Возвращает объект Builder для цепочки вызовов.
      */
-    public Builder setCaveMod(float caveGenMod, float caveFreqMod) {
+    public Builder caveMod(float caveGenMod, float caveFreqMod) {
       this.caveGenMod = caveGenMod;
       this.caveFreqMod = caveFreqMod;
       return this;
@@ -186,7 +191,7 @@ public class RockCategory extends Category<RockCategory> {
      * @param hardnessModifier Модификатор прочности породы.
      * @return Возвращает объект Builder для цепочки вызовов.
      */
-    public Builder setHardnessModifier(float hardnessModifier) {
+    public Builder hardnessModifier(float hardnessModifier) {
       this.hardnessModifier = hardnessModifier;
       return this;
     }
@@ -197,7 +202,7 @@ public class RockCategory extends Category<RockCategory> {
      * @param textFormatting Форматирование текста для отображения категории.
      * @return Возвращает объект Builder для цепочки вызовов.
      */
-    public Builder setTextFormatting(@NotNull TextFormatting textFormatting) {
+    public Builder textFormatting(@NotNull TextFormatting textFormatting) {
       this.textFormatting = textFormatting;
       return this;
     }
@@ -207,7 +212,7 @@ public class RockCategory extends Category<RockCategory> {
      *
      * @return Возвращает объект Builder для цепочки вызовов.
      */
-    public Builder setAnvil() {
+    public Builder hasAnvil() {
       this.hasAnvil = true;
       return this;
     }

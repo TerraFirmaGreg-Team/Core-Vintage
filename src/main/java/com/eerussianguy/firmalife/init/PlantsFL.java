@@ -40,8 +40,7 @@ public class PlantsFL {
   private static class PlantWrapper extends Plant {
 
     public PlantWrapper(@NotNull String name, int[] stages, float minTemp, float maxTemp, float minRain, float maxRain) {
-      super(new ResourceLocation(Constants.MODID_TFC, name), PlantType.STANDARD, stages, false, false, minTemp, maxTemp, minTemp, maxTemp,
-            minRain, maxRain, 9, 15, 1, 0, 0, 0.8F, null);
+      super(new ResourceLocation(Constants.MODID_TFC, name), PlantType.STANDARD, stages, false, false, minTemp, maxTemp, minTemp, maxTemp, minRain, maxRain, 9, 15, 1, 0, 0, 0.8F, null);
     }
   }
 }

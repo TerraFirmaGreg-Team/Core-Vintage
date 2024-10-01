@@ -27,12 +27,12 @@ public interface IRidable {
       // Show tooltips
       if (!world.isRemote) {
         if (animal.getAge() == IAnimal.Age.CHILD) {
-          ModuleAnimal.getPacketService().sendTo(
+          ModuleAnimal.PACKET_SERVICE.sendTo(
             SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
                                                    ModUtils.localize("tooltip", "animal.product.young"), animal.getAnimalName()),
             (EntityPlayerMP) player);
         } else {
-          ModuleAnimal.getPacketService().sendTo(
+          ModuleAnimal.PACKET_SERVICE.sendTo(
             SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
                                                    ModUtils.localize("tooltip", "animal.product.low_familiarity"),
                                                    animal.getAnimalName()), (EntityPlayerMP) player);

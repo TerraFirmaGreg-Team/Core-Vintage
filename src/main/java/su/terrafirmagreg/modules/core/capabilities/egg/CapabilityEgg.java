@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.core.capabilities.egg;
 
+import su.terrafirmagreg.api.util.ModUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-
-import su.terrafirmagreg.api.util.ModUtils;
 
 public final class CapabilityEgg {
 

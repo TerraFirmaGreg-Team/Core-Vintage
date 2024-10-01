@@ -86,8 +86,8 @@ public class ThermiteRandom extends Random {
   }
 
   /**
-   * Sets the seed for this pseudo random number generator. As described above, two instances of the same random class, starting with the same seed, produce the same
-   * results, if the same methods are called.
+   * Sets the seed for this pseudo random number generator. As described above, two instances of the same random class, starting with the same seed, produce the
+   * same results, if the same methods are called.
    *
    * @param seed the new seed
    */
@@ -124,9 +124,9 @@ public class ThermiteRandom extends Random {
 
   /**
    * Returns a pseudorandom, uniformly distributed {@code int} value between 0 (inclusive) and the specified value (exclusive), drawn from this random number
-   * generator's sequence. The general contract of {@code nextInt} is that one {@code int} value in the specified range is pseudorandomly generated and returned. All
-   * {@code bound} possible {@code int} values are produced with (approximately) equal probability. The method {@code nextInt(int bound)} is implemented by class
-   * {@code Random} as if by:
+   * generator's sequence. The general contract of {@code nextInt} is that one {@code int} value in the specified range is pseudorandomly generated and
+   * returned. All {@code bound} possible {@code int} values are produced with (approximately) equal probability. The method {@code nextInt(int bound)} is
+   * implemented by class {@code Random} as if by:
    *
    * <pre>
    *  {@code
@@ -147,22 +147,22 @@ public class ThermiteRandom extends Random {
    * </pre>
    *
    * <p>
-   * The hedge "approx imately" is used in the foregoing description only because the next method is only approximately an unbiased source of independently chosen
-   * bits. If it were a perfect source of randomly chosen bits, then the algorithm shown would choose {@code int} values from the stated range with perfect
-   * uniformity.
+   * The hedge "approx imately" is used in the foregoing description only because the next method is only approximately an unbiased source of independently
+   * chosen bits. If it were a perfect source of randomly chosen bits, then the algorithm shown would choose {@code int} values from the stated range with
+   * perfect uniformity.
    * <p>
    * The algorithm is slightly tricky. It rejects values that would result in an uneven distribution (due to the fact that 2^31 is not divisible by n). The
    * probability of a value being rejected depends on n. The worst case is n=2^30+1, for which the probability of a reject is 1/2, and the expected number of
    * iterations before the loop terminates is 2.
    * <p>
-   * The algorithm treats the case where n is a power of two specially: it returns the correct number of high-order bits from the underlying pseudo-random number
-   * generator. In the absence of special treatment, the correct number of <i>low-order</i> bits would be returned. Linear congruential pseudo-random number
-   * generators such as the one implemented by this class are known to have short periods in the sequence of values of their low-order bits. Thus, this special case
-   * greatly increases the length of the sequence of values returned by successive calls to this method if n is a small power of two.
+   * The algorithm treats the case where n is a power of two specially: it returns the correct number of high-order bits from the underlying pseudo-random
+   * number generator. In the absence of special treatment, the correct number of <i>low-order</i> bits would be returned. Linear congruential pseudo-random
+   * number generators such as the one implemented by this class are known to have short periods in the sequence of values of their low-order bits. Thus, this
+   * special case greatly increases the length of the sequence of values returned by successive calls to this method if n is a small power of two.
    *
    * @param bound the upper bound (exclusive). Must be positive.
-   * @return the next pseudorandom, uniformly distributed {@code int} value between zero (inclusive) and {@code bound} (exclusive) from this random number generator's
-   * sequence
+   * @return the next pseudorandom, uniformly distributed {@code int} value between zero (inclusive) and {@code bound} (exclusive) from this random number
+   * generator's sequence
    * @throws IllegalArgumentException if bound is not positive
    * @since 1.2
    */

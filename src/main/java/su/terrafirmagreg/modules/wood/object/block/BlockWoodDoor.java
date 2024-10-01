@@ -25,7 +25,7 @@ public class BlockWoodDoor extends BaseBlockDoor implements IWoodBlock {
     this.type = type;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .ignoresProperties(BlockDoor.POWERED)
       .sound(SoundType.WOOD)

@@ -45,61 +45,56 @@ public class ProviderBloomery implements IProbeInfoProvider {
 
     if (block instanceof BlockBloomery) {
 
-      var tile = TileUtils.getTile(world, pos, TileBloomery.class);
-      if (tile == null) {
-        return;
-      }
+      TileUtils.getTile(world, pos, TileBloomery.class).ifPresent(tile -> {
 
-      List<String> currentTooltip = new ArrayList<>();
+        List<String> currentTooltip = new ArrayList<>();
 
-      if (state.getValue(LIT)) {
-        List<ItemStack> oreStacks = tile.getOreStacks();
-        BloomeryRecipe recipe = !oreStacks.isEmpty() ? BloomeryRecipe.get(oreStacks.get(0)) : null;
-        long remainingTicks = tile.getRemainingTicks();
-        switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {
-          case NONE:
-            break;
-          case TICKS:
-            currentTooltip.add(
-              new TextComponentTranslation(ModUtils.localize("top", "devices.ticks.remaining"), remainingTicks).getFormattedText());
-            break;
-          case MINECRAFT_HOURS:
-            long remainingHours = Math.round(remainingTicks / (float) ICalendar.TICKS_IN_HOUR);
-            currentTooltip.add(
-              new TextComponentTranslation(ModUtils.localize("top", "devices.hours.remaining"), remainingHours).getFormattedText());
-            break;
-          case REAL_MINUTES:
-            long remainingMinutes = Math.round(remainingTicks / 1200.0f);
-            currentTooltip.add(
-              new TextComponentTranslation(ModUtils.localize("top", "devices.minutes.remaining"), remainingMinutes).getFormattedText());
-            break;
-        }
-        if (recipe != null) {
-          ItemStack output = recipe.getOutput(oreStacks);
-          IForgeable cap = output.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-          if (cap instanceof IForgeableMeasurableMetal forgeCap) {
-            currentTooltip.add(
-              new TextComponentTranslation(ModUtils.localize("top", "devices.bloomery.output"),
-                                           forgeCap.getMetalAmount(),
-                                           new TextComponentTranslation(forgeCap.getMetal()
-                                                                                .getTranslationKey()).getFormattedText()).getFormattedText());
+        if (state.getValue(LIT)) {
+          List<ItemStack> oreStacks = tile.getOreStacks();
+          BloomeryRecipe recipe = !oreStacks.isEmpty() ? BloomeryRecipe.get(oreStacks.get(0)) : null;
+          long remainingTicks = tile.getRemainingTicks();
+          switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {
+            case NONE:
+              break;
+            case TICKS:
+              currentTooltip.add(
+                new TextComponentTranslation(ModUtils.localize("top", "devices.ticks.remaining"), remainingTicks).getFormattedText());
+              break;
+            case MINECRAFT_HOURS:
+              long remainingHours = Math.round(remainingTicks / (float) ICalendar.TICKS_IN_HOUR);
+              currentTooltip.add(
+                new TextComponentTranslation(ModUtils.localize("top", "devices.hours.remaining"), remainingHours).getFormattedText());
+              break;
+            case REAL_MINUTES:
+              long remainingMinutes = Math.round(remainingTicks / 1200.0f);
+              currentTooltip.add(
+                new TextComponentTranslation(ModUtils.localize("top", "devices.minutes.remaining"), remainingMinutes).getFormattedText());
+              break;
           }
+          if (recipe != null) {
+            ItemStack output = recipe.getOutput(oreStacks);
+            IForgeable cap = output.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+            if (cap instanceof IForgeableMeasurableMetal forgeCap) {
+              currentTooltip.add(
+                new TextComponentTranslation(ModUtils.localize("top", "devices.bloomery.output"), forgeCap.getMetalAmount(),
+                                             new TextComponentTranslation(forgeCap.getMetal().getTranslationKey()).getFormattedText()).getFormattedText());
+            }
+          }
+        } else {
+          int ores = tile.getOreStacks().size();
+          int fuel = tile.getFuelStacks().size();
+          int max = BlockBloomery.getChimneyLevels(world, tile.getInternalBlock()) * 8;
+          currentTooltip.add(
+            new TextComponentTranslation(ModUtils.localize("top", "devices.bloomery.ores"), ores, max).getFormattedText());
+          currentTooltip.add(
+            new TextComponentTranslation(ModUtils.localize("top", "devices.bloomery.fuel"), fuel, max).getFormattedText());
         }
-      } else {
-        int ores = tile.getOreStacks().size();
-        int fuel = tile.getFuelStacks().size();
-        int max = BlockBloomery.getChimneyLevels(world, tile.getInternalBlock()) * 8;
-        currentTooltip.add(
-          new TextComponentTranslation(ModUtils.localize("top", "devices.bloomery.ores"), ores,
-                                       max).getFormattedText());
-        currentTooltip.add(
-          new TextComponentTranslation(ModUtils.localize("top", "devices.bloomery.fuel"), fuel,
-                                       max).getFormattedText());
-      }
 
-      for (String string : currentTooltip) {
-        info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).text(string);
-      }
+        for (String string : currentTooltip) {
+          info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).text(string);
+        }
+      });
+
     }
   }
 }

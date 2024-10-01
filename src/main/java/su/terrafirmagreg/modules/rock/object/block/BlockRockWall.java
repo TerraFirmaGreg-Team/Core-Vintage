@@ -35,7 +35,7 @@ public class BlockRockWall extends BaseBlockWall implements IRockBlock {
     this.type = type;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .hardness(variant.getHardness(type))
       .sound(SoundType.STONE)
       .renderLayer(BlockRenderLayer.CUTOUT)

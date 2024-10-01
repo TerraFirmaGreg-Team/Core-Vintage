@@ -45,10 +45,7 @@ public class SCPacketFridge implements IMessage, IMessageHandler<SCPacketFridge,
     EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
     if (player != null) {
       World world = player.getEntityWorld();
-      var tile = TileUtils.getTile(world, message.pos, TileFridge.class);
-      if (tile != null) {
-        tile.updateClient(message.efficiency);
-      }
+      TileUtils.getTile(world, message.pos, TileFridge.class).ifPresent(tile -> tile.updateClient(message.efficiency));
     }
     return null;
   }

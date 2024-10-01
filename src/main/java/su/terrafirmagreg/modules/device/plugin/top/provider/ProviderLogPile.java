@@ -31,48 +31,44 @@ public class ProviderLogPile implements IProbeInfoProvider, IBlockDisplayOverrid
   }
 
   @Override
-  public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer,
-                           World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+  public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
 
   }
 
   @Override
-  public boolean overrideStandardInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player,
-                                      World world, IBlockState state, IProbeHitData hitData) {
+  public boolean overrideStandardInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
 
     if (block instanceof BlockLogPile) {
-      var tile = TileUtils.getTile(world, pos, TileLogPile.class);
-      if (tile == null) {
-        return false;
-      }
+      TileUtils.getTile(world, pos, TileLogPile.class).ifPresent(tile -> {
+        ItemStack icon = ItemStack.EMPTY;
 
-      ItemStack icon = ItemStack.EMPTY;
-
-      IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-      if (cap != null) {
-        for (int i = 0; i < cap.getSlots(); i++) {
-          ItemStack slotStack = cap.getStackInSlot(i);
-          if (!slotStack.isEmpty()) {
-            if (icon.isEmpty()) {
-              icon = slotStack.copy();
-            } else if (slotStack.isItemEqual(icon)) {
-              icon.grow(slotStack.getCount());
+        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (cap != null) {
+          for (int i = 0; i < cap.getSlots(); i++) {
+            ItemStack slotStack = cap.getStackInSlot(i);
+            if (!slotStack.isEmpty()) {
+              if (icon.isEmpty()) {
+                icon = slotStack.copy();
+              } else if (slotStack.isItemEqual(icon)) {
+                icon.grow(slotStack.getCount());
+              }
             }
           }
         }
-      }
 
-      if (icon.isEmpty()) {
-        icon = hitData.getPickBlock();
-      }
+        if (icon.isEmpty()) {
+          icon = hitData.getPickBlock();
+        }
 
-      info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-          .item(icon)
-          .vertical()
-          .itemLabel(icon)
-          .text(TextStyleClass.MODNAME + Constants.MOD_NAME);
+        info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+            .item(icon)
+            .vertical()
+            .itemLabel(icon)
+            .text(TextStyleClass.MODNAME + Constants.MOD_NAME);
+      });
+
 
     }
     return false;

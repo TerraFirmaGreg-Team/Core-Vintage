@@ -141,43 +141,37 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TileSmelteryFirebox.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    TileUtils.getTile(worldIn, pos, TileSmelteryFirebox.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-                                  EnumHand hand, EnumFacing side, float hitX,
-                                  float hitY, float hitZ) {
-    if (!player.isSneaking()) {
-      if (!world.isRemote) {
-        ItemStack held = player.getHeldItem(hand);
-        if (world.getBlockState(pos.up()).getBlock() instanceof BlockSmelteryCauldron) {
-          var tile = TileUtils.getTile(world, pos, TileSmelteryFirebox.class);
-          if (ItemFireStarter.canIgnite(held) && tile.onIgnite()) {
-            ItemFireStarter.onIgnition(held);
-          } else {
-            GuiHandler.openGui(world, pos, player);
-          }
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    if (player.isSneaking()) {return false;}
+    if (world.isRemote) {return true;}
+
+    ItemStack held = player.getHeldItem(hand);
+    if (world.getBlockState(pos.up()).getBlock() instanceof BlockSmelteryCauldron) {
+      TileUtils.getTile(world, pos, TileSmelteryFirebox.class).ifPresent(tile -> {
+        if (ItemFireStarter.canIgnite(held) && tile.onIgnite()) {
+          ItemFireStarter.onIgnition(held);
         } else {
-          if (held.getItem() instanceof ItemBlock
-              && ((ItemBlock) held.getItem()).getBlock() instanceof BlockSmelteryCauldron && world
-                .getBlockState(pos.up())
-                .getMaterial()
-                .isReplaceable()) {
-            held.getItem().onItemUse(player, world, pos.up(), hand, side, hitX, hitY, hitZ);
-          } else {
-            player.sendStatusMessage(
-              new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"), true);
-          }
+          GuiHandler.openGui(world, pos, player);
         }
+      });
+
+    } else {
+      if (held.getItem() instanceof ItemBlock itemBlock && itemBlock.getBlock() instanceof BlockSmelteryCauldron && world
+        .getBlockState(pos.up())
+        .getMaterial()
+        .isReplaceable()) {
+        held.getItem().onItemUse(player, world, pos.up(), hand, side, hitX, hitY, hitZ);
+      } else {
+        player.sendStatusMessage(
+          new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"), true);
       }
-      return true;
     }
-    return false;
+    return true;
   }
 
   @Override
@@ -187,10 +181,7 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
 
   @Override
   public void onAirIntake(@NotNull World world, @NotNull BlockPos pos, int airAmount) {
-    var tile = TileUtils.getTile(world, pos, TileSmelteryFirebox.class);
-    if (tile != null) {
-      tile.onAirIntake(airAmount);
-    }
+    TileUtils.getTile(world, pos, TileSmelteryFirebox.class).ifPresent(tile -> tile.onAirIntake(airAmount));
   }
 
   @Nullable

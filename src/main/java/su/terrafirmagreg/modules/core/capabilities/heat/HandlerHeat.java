@@ -12,12 +12,11 @@ import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.types.DefaultPlants;
-import net.dries007.tfc.types.PlantsTFCF;
 import net.dries007.tfc.types.TreesTFCF;
 
 import org.jetbrains.annotations.Nullable;
@@ -59,59 +58,59 @@ public class HandlerHeat {
                                             Metal.WROUGHT_IRON.getMeltTemp()));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.ARTISTS_CONK))),
+      IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.ARTISTS_CONK))),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.SULPHUR_SHELF))),
+      IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.SULPHUR_SHELF))),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.TURKEY_TAIL))),
+      IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.TURKEY_TAIL))),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI))),
+      IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI))),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.AMANITA))),
-      () -> new ProviderHeat(1, 480));
-
-    CUSTOM_ITEMS.put(IIngredient.of(
-                       BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.BLACK_POWDERPUFF))),
-                     () -> new ProviderHeat(1, 480));
-
-    CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.CHANTERELLE))),
-      () -> new ProviderHeat(1, 480));
-
-    CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.DEATH_CAP))),
-      () -> new ProviderHeat(1, 480));
-
-    CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.GIANT_CLUB))),
+      IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.AMANITA))),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(IIngredient.of(
-                       BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.PARASOL_MUSHROOM))),
+                       BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.BLACK_POWDERPUFF))),
                      () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.STINKHORN))),
+      IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.CHANTERELLE))),
+      () -> new ProviderHeat(1, 480));
+
+    CUSTOM_ITEMS.put(
+      IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.DEATH_CAP))),
+      () -> new ProviderHeat(1, 480));
+
+    CUSTOM_ITEMS.put(
+      IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.GIANT_CLUB))),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(IIngredient.of(
-                       BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.WEEPING_MILK_CAP))),
+                       BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.PARASOL_MUSHROOM))),
                      () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.WOOD_BLEWIT))),
+      IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.STINKHORN))),
+      () -> new ProviderHeat(1, 480));
+
+    CUSTOM_ITEMS.put(IIngredient.of(
+                       BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.WEEPING_MILK_CAP))),
+                     () -> new ProviderHeat(1, 480));
+
+    CUSTOM_ITEMS.put(
+      IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.WOOD_BLEWIT))),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.WOOLLY_GOMPHUS))),
+      IIngredient.of(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.WOOLLY_GOMPHUS))),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(

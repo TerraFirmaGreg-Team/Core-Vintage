@@ -93,10 +93,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(world, pos, TileFirePit.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
+    TileUtils.getTile(world, pos, TileFirePit.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
     super.breakBlock(world, pos, state);
   }
 
@@ -130,11 +127,13 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
 
   @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-    var tile = TileUtils.getTile(world, pos, TileFirePit.class);
-    // Have to check the above block, since minecraft think this block is "roof"
-    if (tile != null && state.getValue(LIT) && world.isRainingAt(pos.up())) {
-      tile.onRainDrop();
-    }
+    TileUtils.getTile(world, pos, TileFirePit.class).ifPresent(tile -> {
+      // Have to check the above block, since minecraft think this block is "roof"
+      if (state.getValue(LIT) && world.isRainingAt(pos.up())) {
+        tile.onRainDrop();
+      }
+    });
+
   }
 
   @SideOnly(Side.CLIENT)
@@ -145,8 +144,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     }
 
     if (rng.nextInt(24) == 0) {
-      world.playSound(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
-                      SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS,
+      world.playSound(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS,
                       1.0F + rng.nextFloat(), rng.nextFloat() * 0.7F + 0.3F, false);
     }
 
@@ -166,41 +164,32 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     }
 
     if (state.getValue(ATTACHMENT) == FirePitAttachment.COOKING_POT) {
-      var tile = TileUtils.getTile(world, pos, TileFirePit.class);
-      if (tile != null && tile.getCookingPotStage() == TileFirePit.CookingPotStage.BOILING) {
-        for (int i = 0; i < rng.nextInt(5) + 4; i++) {
-          TFCParticles.BUBBLE.spawn(world, x + rng.nextFloat() * 0.375 - 0.1875, y + 0.525,
-                                    z + rng.nextFloat() * 0.375 - 0.1875, 0, 0.05D,
-                                    0, 3);
+      TileUtils.getTile(world, pos, TileFirePit.class).ifPresent(tile -> {
+        if (tile.getCookingPotStage() == TileFirePit.CookingPotStage.BOILING) {
+          for (int i = 0; i < rng.nextInt(5) + 4; i++) {
+            TFCParticles.BUBBLE.spawn(world, x + rng.nextFloat() * 0.375 - 0.1875, y + 0.525, z + rng.nextFloat() * 0.375 - 0.1875, 0, 0.05D, 0, 3);
+          }
+          TFCParticles.STEAM.spawn(world, x, y + 0.425F, z, 0, 0, 0, (int) (12.0F / (rng.nextFloat() * 0.9F + 0.1F)));
+          world.playSound(x, y + 0.425F, z, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, 1.0F, rng.nextFloat() * 0.7F + 0.4F, false);
         }
-        TFCParticles.STEAM.spawn(world, x, y + 0.425F, z, 0, 0, 0,
-                                 (int) (12.0F / (rng.nextFloat() * 0.9F + 0.1F)));
-        world.playSound(x, y + 0.425F, z, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS,
-                        1.0F, rng.nextFloat() * 0.7F + 0.4F, false);
-      }
+      });
     }
     if ((state.getValue(ATTACHMENT) == FirePitAttachment.GRILL)) {
-      var tile = TileUtils.getTile(world, pos, TileFirePit.class);
-      if (tile == null) {return;}
-
-      IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-      if (cap == null) {return;}
-      boolean anythingInInv = false;
-      for (int i = TileFirePit.SLOT_EXTRA_INPUT_START; i <= TileFirePit.SLOT_EXTRA_INPUT_END;
-           i++) {
-        if (!cap.getStackInSlot(i).isEmpty()) {
-          anythingInInv = true;
-          break;
+      TileUtils.getTile(world, pos, TileFirePit.class).ifPresent(tile -> {
+        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (cap == null) {return;}
+        boolean anythingInInv = false;
+        for (int i = TileFirePit.SLOT_EXTRA_INPUT_START; i <= TileFirePit.SLOT_EXTRA_INPUT_END; i++) {
+          if (!cap.getStackInSlot(i).isEmpty()) {
+            anythingInInv = true;
+            break;
+          }
         }
-      }
-      if (state.getValue(LIT) && anythingInInv) {
-        world.playSound(x, y + 0.425F, z, SoundEvents.BLOCK_LAVA_EXTINGUISH,
-                        SoundCategory.BLOCKS, 0.25F, rng.nextFloat() * 0.7F + 0.4F, false);
-        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + rng.nextFloat() / 2 - 0.25,
-                            y + 0.6, z + rng.nextFloat() / 2 - 0.25, 0.0D, 0.1D, 0.0D);
-      }
-
-
+        if (state.getValue(LIT) && anythingInInv) {
+          world.playSound(x, y + 0.425F, z, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.25F, rng.nextFloat() * 0.7F + 0.4F, false);
+          world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + rng.nextFloat() / 2 - 0.25, y + 0.6, z + rng.nextFloat() / 2 - 0.25, 0.0D, 0.1D, 0.0D);
+        }
+      });
     }
   }
 
@@ -236,8 +225,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
 
       // Try to attach an item
       FirePitAttachment attachment = state.getValue(ATTACHMENT);
-      var tile = TileUtils.getTile(world, pos, TileFirePit.class);
-      if (tile != null) {
+      return TileUtils.getTile(world, pos, TileFirePit.class).map(tile -> {
         if (attachment == FirePitAttachment.NONE) {
           if (OreDictUtils.contains(held, "cookingPot")) {
             world.setBlockState(pos, state.withProperty(ATTACHMENT, FirePitAttachment.COOKING_POT));
@@ -271,13 +259,11 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
             }
           }
         }
-      }
 
-      if (!player.isSneaking()) {
-        GuiHandler.openGui(world, pos, player);
-      } else if ((held == ItemStack.EMPTY) && (attachment != FirePitAttachment.NONE)) {
-        boolean anythingInTheInv = false;
-        if (tile != null) {
+        if (!player.isSneaking()) {
+          GuiHandler.openGui(world, pos, player);
+        } else if ((held == ItemStack.EMPTY) && (attachment != FirePitAttachment.NONE)) {
+          boolean anythingInTheInv = false;
           IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
                                                 null);
           if (cap != null) {
@@ -305,9 +291,10 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
             }
           }
         }
-      }
+        return false;
+      }).orElse(true);
     }
-    return true;
+    return false;
   }
 
   @Override
@@ -361,10 +348,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
 
   @Override
   public void onAirIntake(World world, BlockPos pos, int airAmount) {
-    var tile = TileUtils.getTile(world, pos, TileFirePit.class);
-    if (tile != null) {
-      tile.onAirIntake(airAmount);
-    }
+    TileUtils.getTile(world, pos, TileFirePit.class).ifPresent(tile -> tile.onAirIntake(airAmount));
   }
 
   @Override

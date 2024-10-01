@@ -34,20 +34,20 @@ import net.minecraftforge.registries.DataSerializerEntry;
 
 import com.google.common.base.Preconditions;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
 public class ModuleEventRouter {
 
-  private final Set<IModule> loadedModules;
+  private final Collection<IModule> loadedModules;
 
   @SuppressWarnings("rawtypes")
   private final Map<Class<? extends FMLStateEvent>, IFMLStateEventRoute> routes;
 
-  public ModuleEventRouter(Set<IModule> loadedModules) {
+  public ModuleEventRouter(Collection<IModule> loadedModules) {
 
     this.loadedModules = loadedModules;
     this.routes = new HashMap<>();
@@ -176,7 +176,7 @@ public class ModuleEventRouter {
   protected <E extends FMLStateEvent> void routeFMLStateEvent(E event) {
     //noinspection unchecked
     IFMLStateEventRoute<E> route = this.routes.get(event.getClass());
-    Preconditions.checkNotNull(route, "No route found for event: " + event.getClass());
+    Preconditions.checkNotNull(route, "No route found for event: %s", event.getClass());
 
     route.routeEvent(event);
   }

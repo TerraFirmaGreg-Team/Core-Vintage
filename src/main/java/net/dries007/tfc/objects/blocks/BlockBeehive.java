@@ -33,7 +33,7 @@ import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -91,8 +91,8 @@ public class BlockBeehive extends Block implements ICapabilitySize {
           }
           searchPos = pos.add(x, y, z);
           Block block = world.getBlockState(searchPos).getBlock();
-          if (block instanceof BlockPlantTFC) {
-            if (((BlockPlantTFC) block).getPlant().getPlantType() == Plant.PlantType.STANDARD) {
+          if (block instanceof BlockPlant) {
+            if (((BlockPlant) block).getPlant().getPlantType() == Plant.PlantType.STANDARD) {
               flowers++;
             }
           } else if (block instanceof BlockFlowerPotTFC || block instanceof BlockBushTrellis || block instanceof BlockLargePlanter ||
@@ -128,25 +128,25 @@ public class BlockBeehive extends Block implements ICapabilitySize {
     if (world.isRemote) {
       return;
     }
-    var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
-    if (tile == null) {
-      return;
-    }
-    if (!isValid(world, pos, tile)) {
-      tile.resetCounter();
-      return;
-    }
-    int stage = state.getValue(STAGE);
-    if (stage < 2 && tile.getTicksSinceUpdate() >= ICalendar.TICKS_IN_DAY * 3) {
-      int flowers = countFlowers(world, pos);
-      float chance = flowers / 10f;
-      if (random.nextFloat() < chance) {
-        world.setBlockState(pos, state.withProperty(STAGE, stage + 1));
-      } else if (flowers == 0) {
-        world.setBlockState(pos, state.withProperty(STAGE, 0));
+    TileUtils.getTile(world, pos, TEHangingPlanter.class).ifPresent(tile -> {
+      if (!isValid(world, pos, tile)) {
+        tile.resetCounter();
+        return;
       }
-      tile.resetCounter();
-    }
+      int stage = state.getValue(STAGE);
+      if (stage < 2 && tile.getTicksSinceUpdate() >= ICalendar.TICKS_IN_DAY * 3) {
+        int flowers = countFlowers(world, pos);
+        float chance = flowers / 10f;
+        if (random.nextFloat() < chance) {
+          world.setBlockState(pos, state.withProperty(STAGE, stage + 1));
+        } else if (flowers == 0) {
+          world.setBlockState(pos, state.withProperty(STAGE, 0));
+        }
+        tile.resetCounter();
+      }
+    });
+
+
   }
 
   @SideOnly(Side.CLIENT)
@@ -179,10 +179,7 @@ public class BlockBeehive extends Block implements ICapabilitySize {
       if (isNotCalm(world, pos, state)) {
         player.addPotionEffect(new PotionEffect(PotionsCore.SWARM, 30 * 20));
       }
-      var tile = TileUtils.getTile(world, pos, TEHangingPlanter.class);
-      if (tile != null) {
-        tile.resetCounter();
-      }
+      TileUtils.getTile(world, pos, TEHangingPlanter.class).ifPresent(TEHangingPlanter::resetCounter);
       return true;
     }
     return false;

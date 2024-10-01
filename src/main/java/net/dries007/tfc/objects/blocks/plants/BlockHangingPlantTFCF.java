@@ -25,7 +25,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.plants.BlockPlant.BlockPlantDummy1;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.util.OreDictionaryHelper;

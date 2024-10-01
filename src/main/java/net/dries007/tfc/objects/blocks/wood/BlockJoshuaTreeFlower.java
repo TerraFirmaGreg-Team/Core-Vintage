@@ -429,15 +429,13 @@ public class BlockJoshuaTreeFlower extends Block {
         break;
       case 3:
         if (state.getValue(LEAF_STATE) != EnumLeafState.FRUIT) {
-          TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-          if (te != null) {
-            long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+          TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
+            long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
             if (hours > (fruitTree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
-              world.setBlockState(pos, world.getBlockState(pos)
-                                            .withProperty(LEAF_STATE, EnumLeafState.FRUIT));
-              te.resetCounter();
+              world.setBlockState(pos, world.getBlockState(pos).withProperty(LEAF_STATE, EnumLeafState.FRUIT));
+              tile.resetCounter();
             }
-          }
+          });
         }
         break;
       default:
@@ -560,10 +558,7 @@ public class BlockJoshuaTreeFlower extends Block {
 
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
+    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
   }
 
   /**
@@ -598,16 +593,12 @@ public class BlockJoshuaTreeFlower extends Block {
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                  float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == EnumLeafState.FRUIT && fruitTree.getDrop() != null) {
       if (!worldIn.isRemote) {
         ItemHandlerHelper.giveItemToPlayer(playerIn, fruitTree.getFoodDrop());
         worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, EnumLeafState.NORMAL));
-        TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-        if (te != null) {
-          te.resetCounter();
-        }
+        TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
       }
       return true;
     }

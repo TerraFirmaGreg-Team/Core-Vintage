@@ -19,21 +19,21 @@ public final class ItemsSoil {
     PILE = SoilItemVariant
       .builder("pile")
       .factory(ItemSoilPile::new)
-      .build(registry);
+      .build();
 
     MUD_BALL = SoilItemVariant
       .builder("mud_ball")
       .factory(ItemSoilMud::new)
-      .build(registry);
+      .build();
 
     MUD_BRICK = SoilItemVariant
       .builder("mud_brick")
       .factory(ItemSoilMudBrick::new)
-      .build(registry);
+      .build();
 
     MUD_BRICK_WET = SoilItemVariant
       .builder("mud_brick_wet")
       .factory(ItemSoilMudWetBrick::new)
-      .build(registry);
+      .build();
   }
 }

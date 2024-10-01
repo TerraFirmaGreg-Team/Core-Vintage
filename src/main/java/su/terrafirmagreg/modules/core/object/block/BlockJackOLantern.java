@@ -76,15 +76,18 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
 
   @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+    if (world.isRemote) {
+      return;
+    }
     //taken from BlockTorchTFC
     var tile = TileUtils.getTile(world, pos, TETickCounter.class);
-    if (TileUtils.isNotNull(tile)) {
+    tile.ifPresent(tileTickCounter -> {
       //last twice as long as a torch. balance this by being less bright
-      if (!world.isRemote && tile.getTicksSinceUpdate() > (2L * ConfigTFC.General.OVERRIDES.torchTime) && ConfigTFC.General.OVERRIDES.torchTime > 0) {
+      if (tileTickCounter.getTicksSinceUpdate() > 2L * ConfigTFC.General.OVERRIDES.torchTime && ConfigTFC.General.OVERRIDES.torchTime > 0) {
         world.setBlockState(pos, state.withProperty(LIT, false));
-        tile.resetCounter();
+        tileTickCounter.resetCounter();
       }
-    }
+    });
   }
 
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
@@ -97,12 +100,10 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
     //taken from BlockTorchTFC
     if (!worldIn.isRemote) {
       ItemStack stack = playerIn.getHeldItem(hand);
-      var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
       if (BlockTorchTFC.canLight(stack)) {
         worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
-        if (TileUtils.isNotNull(tile)) {
-          tile.resetCounter();
-        }
+        var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+        tile.ifPresent(TETickCounter::resetCounter);
       }
       worldIn.setBlockState(pos, state.withProperty(LIT, false));
     }
@@ -114,9 +115,7 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
     //taken from BlockTorchTFC
     // Set the initial counter value
     var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    if (TileUtils.isNotNull(tile)) {
-      tile.resetCounter();
-    }
+    tile.ifPresent(TETickCounter::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 

@@ -60,7 +60,6 @@ public class RegistryManager
   }
 
   public void setNetworkEntityIdSupplier(NetworkEntityIdSupplier supplier) {
-
     if (this.networkEntityIdSupplier != null) {
       throw new IllegalStateException("Network entity id supplier has already been set");
     }

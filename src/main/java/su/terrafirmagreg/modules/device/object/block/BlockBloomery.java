@@ -228,10 +228,7 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(world, pos, TileBloomery.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
+    TileUtils.getTile(world, pos, TileBloomery.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
     super.breakBlock(world, pos, state);
   }
 
@@ -272,26 +269,21 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-                                  EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX,
-                                  float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       if (!state.getValue(LIT)) {
         worldIn.setBlockState(pos, state.cycleProperty(OPEN));
-        worldIn.playSound(null, pos, SoundEvents.BLOCK_FENCE_GATE_CLOSE, SoundCategory.BLOCKS, 1.0f,
-                          1.0f);
+        worldIn.playSound(null, pos, SoundEvents.BLOCK_FENCE_GATE_CLOSE, SoundCategory.BLOCKS, 1.0f, 1.0f);
       }
-      var tile = TileUtils.getTile(worldIn, pos, TileBloomery.class);
-      if (tile != null) {
+      TileUtils.getTile(worldIn, pos, TileBloomery.class).ifPresent(tile -> {
         if (!state.getValue(LIT) && tile.canIgnite()) {
           ItemStack held = player.getHeldItem(hand);
           if (ItemFireStarter.onIgnition(held)) {
             worldIn.setBlockState(pos, state.withProperty(LIT, true).withProperty(OPEN, false));
             tile.onIgnite();
-            return true;
           }
         }
-      }
+      });
     }
     return true;
   }

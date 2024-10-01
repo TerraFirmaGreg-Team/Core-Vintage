@@ -133,7 +133,7 @@ public class GuiMetalAnvil extends BaseGuiContainerTile<TileMetalAnvil> {
 
   @Override
   protected void actionPerformed(GuiButton button) throws IOException {
-    ModuleMetal.getPacketService().sendToServer(new CSPacketGuiButton(button.id));
+    ModuleMetal.PACKET_SERVICE.sendToServer(new CSPacketGuiButton(button.id));
     super.actionPerformed(button);
   }
 }

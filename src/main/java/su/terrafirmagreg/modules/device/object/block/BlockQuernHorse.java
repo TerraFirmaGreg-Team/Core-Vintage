@@ -58,22 +58,20 @@ public class BlockQuernHorse extends BaseBlockHorse implements IProviderTile, IP
 
   public static void setState(boolean filled, World world, BlockPos pos) {
     var iBlockState = world.getBlockState(pos);
-    var tile = TileUtils.getTile(world, pos, TileQuernHorse.class);
-    world.setBlockState(pos, iBlockState.withProperty(FILLED, filled), 3);
 
-    if (tile != null) {
-      tile.validate();
-      world.setTileEntity(pos, tile);
-      tile.validate();
-    }
+    world.setBlockState(pos, iBlockState.withProperty(FILLED, filled), 3);
+    var tile = TileUtils.getTile(world, pos, TileQuernHorse.class);
+    tile.ifPresent(tileQuernHorse -> {
+      tileQuernHorse.validate();
+      world.setTileEntity(pos, tileQuernHorse);
+      tileQuernHorse.validate();
+    });
   }
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
     var tile = TileUtils.getTile(worldIn, pos, TileQuernHorse.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    tile.ifPresent(tileQuernHorse -> tileQuernHorse.onBreakBlock(worldIn, pos, state));
     worldIn.updateComparatorOutputLevel(pos, this);
     super.breakBlock(worldIn, pos, state);
   }
@@ -135,29 +133,28 @@ public class BlockQuernHorse extends BaseBlockHorse implements IProviderTile, IP
   @Override
   public IBlockColor getBlockColor() {
     return (state, worldIn, pos, tintIndex) -> {
-      var tile = TileUtils.getTile(worldIn, pos, getTileClass());
-      if (tile != null) {
-
-        ItemStack outputStack = tile.getStackInSlot(1);
-        ItemStack secondaryStack = tile.getStackInSlot(2);
+      var tile = TileUtils.getTile(worldIn, pos, TileQuernHorse.class);
+      return tile.map(tileQuernHorse -> {
+        ItemStack outputStack = tileQuernHorse.getStackInSlot(1);
+        ItemStack secondaryStack = tileQuernHorse.getStackInSlot(2);
         if (outputStack.getCount() < secondaryStack.getCount()) {
           outputStack = secondaryStack;
         }
-        if (!OreDictionary.itemMatches(tile.renderStack, outputStack, true)) {
-          tile.renderStack = outputStack;
+        if (!OreDictionary.itemMatches(tileQuernHorse.renderStack, outputStack, true)) {
+          tileQuernHorse.renderStack = outputStack;
           if (!outputStack.isEmpty()) {
-            tile.grindColor = ColorGetter.getColors(outputStack, 2).get(0);
+            tileQuernHorse.grindColor = ColorGetter.getColors(outputStack, 2).get(0);
           } else {
-            tile.grindColor = null;
+            tileQuernHorse.grindColor = null;
           }
-          tile.renderStack = outputStack;
+          tileQuernHorse.renderStack = outputStack;
         }
 
-        if (tile.grindColor != null) {
-          return tile.grindColor.getRGB();
+        if (tileQuernHorse.grindColor != null) {
+          return tileQuernHorse.grindColor.getRGB();
         }
-      }
-      return -1;
+        return -1;
+      }).orElse(-1);
     };
   }
 }

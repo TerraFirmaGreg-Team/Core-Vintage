@@ -445,7 +445,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
             if (!this.world.isRemote) {
               //Show tooltips
               if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-                ModuleAnimal.getPacketService().sendTo(
+                ModuleAnimal.PACKET_SERVICE.sendTo(
                   SCPacketSimpleMessage.translateMessage(
                     SCPacketSimpleMessage.MessageCategory.ANIMAL,
                     ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),

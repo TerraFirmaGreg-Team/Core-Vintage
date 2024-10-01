@@ -40,7 +40,7 @@ public abstract class BlockRock extends BaseBlock implements IRockBlock {
     this.type = type;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .hardness(variant.getHardness(type))
       .sound(SoundType.STONE)
       .harvestLevel(ToolClasses.PICKAXE, 0)

@@ -61,10 +61,8 @@ public class SCPacketLatex implements IMessage, IMessageHandler<SCPacketLatex, I
     EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
     if (player != null) {
       World world = player.getEntityWorld();
-      var tile = TileUtils.getTile(world, message.pos, TileLatexExtractor.class);
-      if (tile != null) {
-        tile.updateClient(message.cutState, message.fluid, message.pot, message.base);
-      }
+      TileUtils.getTile(world, message.pos, TileLatexExtractor.class)
+               .ifPresent(tile -> tile.updateClient(message.cutState, message.fluid, message.pot, message.base));
     }
     return null;
   }

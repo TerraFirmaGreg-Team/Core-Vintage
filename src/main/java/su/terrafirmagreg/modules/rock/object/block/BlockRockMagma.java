@@ -38,7 +38,7 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock {
     this.settings = Settings.of(Material.ROCK);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .hardness(variant.getHardness(type))
       .sound(SoundType.STONE)
       .size(Size.SMALL)

@@ -32,6 +32,8 @@ import lombok.Getter;
 
 import java.util.List;
 
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
+
 @Getter
 public class ItemRockLoose extends ItemRock
   implements IProviderContainer<ContainerKnappingRock, GuiContainerKnappingRock> {
@@ -82,6 +84,6 @@ public class ItemRockLoose extends ItemRock
 
   @Override
   public GuiContainerKnappingRock getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-    return new GuiContainerKnappingRock(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, getType().getTexture());
+    return new GuiContainerKnappingRock(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, type.getTexture(RAW));
   }
 }

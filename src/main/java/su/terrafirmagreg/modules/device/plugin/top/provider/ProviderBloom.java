@@ -41,30 +41,25 @@ public class ProviderBloom implements IProbeInfoProvider {
 
     if (block instanceof BlockBloom) {
 
-      var tile = TileUtils.getTile(world, pos, TileBloom.class);
-      if (tile == null) {
-        return;
-      }
+      TileUtils.getTile(world, pos, TileBloom.class).ifPresent(tile -> {
+        List<String> currentTooltip = new ArrayList<>();
 
-      List<String> currentTooltip = new ArrayList<>();
-
-      IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-      if (cap != null) {
-        ItemStack bloomStack = cap.getStackInSlot(0);
-        IForgeable forgeCap = bloomStack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY,
-                                                       null);
-        if (forgeCap instanceof IForgeableMeasurableMetal bloomCap) {
-          currentTooltip.add(new TextComponentTranslation(ModUtils.localize("top", "metal.output"),
-                                                          bloomCap.getMetalAmount(),
-                                                          new TextComponentTranslation(bloomCap.getMetal()
-                                                                                               .getTranslationKey()).getFormattedText()).getFormattedText());
+        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (cap != null) {
+          ItemStack bloomStack = cap.getStackInSlot(0);
+          IForgeable forgeCap = bloomStack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY,
+                                                         null);
+          if (forgeCap instanceof IForgeableMeasurableMetal bloomCap) {
+            currentTooltip.add(
+              new TextComponentTranslation(ModUtils.localize("top", "metal.output"), bloomCap.getMetalAmount(),
+                                           new TextComponentTranslation(bloomCap.getMetal().getTranslationKey()).getFormattedText()).getFormattedText());
+          }
         }
-      }
 
-      for (String string : currentTooltip) {
-        info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-            .text(string);
-      }
+        for (String string : currentTooltip) {
+          info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).text(string);
+        }
+      });
     }
   }
 }

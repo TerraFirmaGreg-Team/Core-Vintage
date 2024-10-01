@@ -127,12 +127,8 @@ public class BlockCharcoalPile extends BaseBlock {
     ItemStack stack = player.getHeldItem(hand);
     if (state.getValue(LAYERS) >= 7 && BlockCharcoalForge.isValid(world, pos) && ItemFireStarter.onIgnition(stack)) {
       if (!world.isRemote) {
-        world.setBlockState(pos,
-                            BlocksDevice.CHARCOAL_FORGE.getDefaultState().withProperty(LIT, true));
-        var tile = TileUtils.getTile(world, pos, TileCharcoalForge.class);
-        if (tile != null) {
-          tile.onCreate();
-        }
+        world.setBlockState(pos, BlocksDevice.CHARCOAL_FORGE.getDefaultState().withProperty(LIT, true));
+        TileUtils.getTile(world, pos, TileCharcoalForge.class).ifPresent(TileCharcoalForge::onCreate);
       }
       return true;
     }

@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.plant;
 
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.plant.init.BlocksPlant;
 import su.terrafirmagreg.modules.plant.init.ItemsPlant;
@@ -15,12 +16,12 @@ public final class ModulePlant extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModulePlant.class.getSimpleName());
 
-  public final CreativeTabs AGRICULTURE_TAB;
+  public static CreativeTabs TAB;
+  public static RegistryManager REGISTRY;
 
   public ModulePlant() {
-    this.AGRICULTURE_TAB = BaseCreativeTab.of("flora", "flora/crop/seed/rice");
-
-    this.enableAutoRegistry(AGRICULTURE_TAB);
+    TAB = BaseCreativeTab.of("flora", "flora/crop/seed/rice");
+    REGISTRY = enableAutoRegistry(TAB);
   }
 
   @Override

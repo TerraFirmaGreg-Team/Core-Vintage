@@ -59,7 +59,6 @@ public interface IRegistryBlock
   }
 
   default <B extends Block & IBlockSettings> B block(B block) {
-
     return this.block(block, block.getItemBlock(), block.getRegistryKey());
   }
 

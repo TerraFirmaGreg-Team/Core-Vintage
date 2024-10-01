@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.soil.plugin.top;
 
 
+import su.terrafirmagreg.modules.soil.plugin.top.provider.ProviderSoilInfo;
+
 import mcjty.theoneprobe.TheOneProbe;
 import mcjty.theoneprobe.api.ITheOneProbe;
-
-import su.terrafirmagreg.modules.soil.plugin.top.provider.ProviderSoilInfo;
 
 public final class TheOneProbeSoil {
 

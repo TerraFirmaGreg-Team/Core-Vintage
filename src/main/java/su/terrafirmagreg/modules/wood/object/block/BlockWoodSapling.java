@@ -60,7 +60,7 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
     this.settings = Settings.of(Material.PLANTS);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .ignoresProperties(SAPLING_STAGE)
       .sound(SoundType.PLANT)
       .hardness(0.0F)
@@ -87,9 +87,7 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     var tile = TileUtils.getTile(worldIn, pos, TileWoodSapling.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
+    tile.ifPresent(TileWoodSapling::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 
@@ -116,12 +114,12 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 
     if (!world.isRemote) {
       var tile = TileUtils.getTile(world, pos, TileWoodSapling.class);
-      if (tile != null) {
-        long days = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
+      tile.ifPresent(tileWoodSapling -> {
+        long days = tileWoodSapling.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
         if (days > this.type.getMinGrowthTime()) {
           grow(world, random, pos, state);
         }
-      }
+      });
     }
   }
 

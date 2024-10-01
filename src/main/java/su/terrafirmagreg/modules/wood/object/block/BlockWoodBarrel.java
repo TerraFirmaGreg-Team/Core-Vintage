@@ -72,8 +72,7 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
    * Used to toggle the barrel seal state and update the tile entity, in the correct order
    */
   public static void toggleBarrelSeal(World world, BlockPos pos) {
-    var tile = TileUtils.getTile(world, pos, TileWoodBarrel.class);
-    if (tile != null) {
+    TileUtils.getTile(world, pos, TileWoodBarrel.class).ifPresent(tile -> {
       IBlockState state = world.getBlockState(pos);
       boolean previousSealed = state.getValue(SEALED);
       world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
@@ -82,7 +81,8 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
       } else {
         tile.onSealed();
       }
-    }
+    });
+
   }
 
   @Override
@@ -128,54 +128,47 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
     var tile = TileUtils.getTile(worldIn, pos, TileWoodBarrel.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    tile.ifPresent(tileWoodBarrel -> tileWoodBarrel.onBreakBlock(worldIn, pos, state));
     worldIn.updateComparatorOutputLevel(pos, this);
     super.breakBlock(worldIn, pos, state);
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = playerIn.getHeldItem(hand);
     var tile = TileUtils.getTile(worldIn, pos, TileWoodBarrel.class);
-    if (tile != null) {
+    return tile.map(tileWoodBarrel -> {
       if (heldItem.isEmpty() && playerIn.isSneaking()) {
-        worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
-                          0.85F);
+        worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
         toggleBarrelSeal(worldIn, pos);
         return true;
-      } else if (heldItem.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)
-                 && !state.getValue(SEALED)) {
-        IFluidHandler fluidHandler = tile.getCapability(
+      } else if (heldItem.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null) && !state.getValue(SEALED)) {
+        IFluidHandler fluidHandler = tile.get().getCapability(
           CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
         if (fluidHandler != null) {
           if (!worldIn.isRemote) {
             FluidUtil.interactWithFluidHandler(playerIn, hand, fluidHandler);
-            tile.markDirty();
+            tile.get().markDirty();
           }
           return true;
         }
-      } else {
-        if (!worldIn.isRemote) {
-          GuiHandler.openGui(worldIn, pos, playerIn);
-        }
-        return true;
       }
-    }
-    return false;
+      if (!worldIn.isRemote) {
+        GuiHandler.openGui(worldIn, pos, playerIn);
+      }
+      return true;
+    }).orElse(false);
+
   }
 
   @Override
-  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-                              EntityLivingBase placer, ItemStack stack) {
+  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     if (!worldIn.isRemote && stack.getTagCompound() != null) {
       var tile = TileUtils.getTile(worldIn, pos, TileWoodBarrel.class);
-      if (tile != null) {
+      tile.ifPresent(tileWoodBarrel -> {
         worldIn.setBlockState(pos, state.withProperty(SEALED, true));
-        tile.loadFromItemStack(stack);
-      }
+        tileWoodBarrel.loadFromItemStack(stack);
+      });
     }
   }
 
@@ -213,14 +206,15 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
 
   @Override
   @NotNull
-  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-                                EntityPlayer player) {
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
     ItemStack stack = new ItemStack(state.getBlock());
     var tile = TileUtils.getTile(world, pos, TileWoodBarrel.class);
-    if (tile != null && tile.isSealed()) {
-      tile.saveToItemStack(stack);
-    }
-    return stack;
+    return tile.map(tileWoodBarrel -> {
+      if (tileWoodBarrel.isSealed()) {
+        tileWoodBarrel.saveToItemStack(stack);
+      }
+      return stack;
+    }).orElse(stack);
   }
 
   @Override

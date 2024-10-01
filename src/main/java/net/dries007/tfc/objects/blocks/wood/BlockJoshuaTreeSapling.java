@@ -77,10 +77,7 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-    TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    if (te != null) {
-      te.resetCounter();
-    }
+    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 
@@ -126,15 +123,13 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
   public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
     super.updateTick(world, pos, state, random);
 
-    if (!world.isRemote) {
-      TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-      if (te != null) {
-        long days = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
-        if (days > wood.getMinGrowthTime()) {
-          grow(world, random, pos, state);
-        }
+    if (world.isRemote) {return;}
+    TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
+      long days = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
+      if (days > wood.getMinGrowthTime()) {
+        grow(world, random, pos, state);
       }
-    }
+    });
   }
 
   @SuppressWarnings("deprecation")

@@ -3,6 +3,8 @@ package su.terrafirmagreg.modules.wood;
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.network.IPacketService;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodTypeHandler;
 import su.terrafirmagreg.modules.wood.event.EntityJoinWorldEventHandler;
@@ -31,13 +33,14 @@ public final class ModuleWood extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWood.class.getSimpleName());
 
-  public final CreativeTabs WOOD_TAB;
+  public static CreativeTabs TAB;
+  public static RegistryManager REGISTRY;
+  public static IPacketService PACKET_SERVICE;
 
   public ModuleWood() {
-    this.WOOD_TAB = BaseCreativeTab.of("wood", "wood/log/aspen");
-
-    this.enableAutoRegistry(WOOD_TAB);
-    this.enableNetwork();
+    TAB = BaseCreativeTab.of("wood", "wood/log/aspen");
+    REGISTRY = enableAutoRegistry(TAB);
+    PACKET_SERVICE = enableNetwork();
   }
 
   @Override

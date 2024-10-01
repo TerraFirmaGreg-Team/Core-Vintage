@@ -78,19 +78,13 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(world, pos, TileCrucible.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
+    TileUtils.getTile(world, pos, TileCrucible.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
     super.breakBlock(world, pos, state);
   }
 
   @Override
   public void acceptHeat(World world, BlockPos pos, float temperature) {
-    var tile = TileUtils.getTile(world, pos, TileCrucible.class);
-    if (tile != null) {
-      tile.acceptHeat(temperature);
-    }
+    TileUtils.getTile(world, pos, TileCrucible.class).ifPresent(tile -> tile.acceptHeat(temperature));
   }
 
   @Override
@@ -117,9 +111,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state,
-                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
-                                  float hitY, float hitZ) {
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!world.isRemote && !playerIn.isSneaking()) {
       GuiHandler.openGui(world, pos, playerIn);
     }
@@ -127,15 +119,11 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
   }
 
   @Override
-  public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer,
-                              ItemStack stack) {
+  public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     if (!world.isRemote) {
       NBTTagCompound nbt = stack.getTagCompound();
       if (nbt != null) {
-        var tile = TileUtils.getTile(world, pos, TileCrucible.class);
-        if (tile != null) {
-          tile.readFromItemTag(nbt);
-        }
+        TileUtils.getTile(world, pos, TileCrucible.class).ifPresent(tile -> tile.readFromItemTag(nbt));
       }
     }
   }

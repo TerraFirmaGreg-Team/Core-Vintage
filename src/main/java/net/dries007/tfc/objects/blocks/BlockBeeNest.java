@@ -1,7 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
-import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.registry.ItemsFL;
+import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -18,9 +17,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import org.jetbrains.annotations.NotNull;
+import com.eerussianguy.firmalife.init.FoodFL;
+import com.eerussianguy.firmalife.registry.ItemsFL;
 
-import su.terrafirmagreg.modules.core.init.PotionsCore;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 

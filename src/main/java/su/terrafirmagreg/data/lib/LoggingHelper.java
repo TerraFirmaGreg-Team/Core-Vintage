@@ -53,11 +53,9 @@ public class LoggingHelper {
     return new LoggingHelper(LogManager.getLogger(MOD_NAME));
   }
 
-  public static List<String> wrapString(String string, int lnLength, boolean wrapLongWords,
-                                        List<String> list) {
+  public static List<String> wrapString(String string, int lnLength, boolean wrapLongWords, List<String> list) {
 
-    final String[] lines = WordUtils.wrap(string, lnLength, null, wrapLongWords)
-                                    .split(SystemUtils.LINE_SEPARATOR);
+    final String[] lines = WordUtils.wrap(string, lnLength, null, wrapLongWords).split(SystemUtils.LINE_SEPARATOR);
 
     list.addAll(Arrays.asList(lines));
 

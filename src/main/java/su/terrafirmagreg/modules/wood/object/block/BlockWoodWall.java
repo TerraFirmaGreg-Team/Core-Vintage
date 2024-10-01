@@ -26,7 +26,7 @@ public class BlockWoodWall extends BaseBlockWall implements IWoodBlock {
     this.type = type;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .ignoresProperties(BlockWall.VARIANT)
       .harvestLevel(ToolClasses.AXE, model.getHarvestLevel(model.getDefaultState()))

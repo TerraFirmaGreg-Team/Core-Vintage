@@ -125,24 +125,24 @@ public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreen
     if (!state.getValue(NEEDS_SOURCE)) {
       return true;
     }
-    var tile = TileUtils.getTile(world, pos.up());
-    if (tile != null) {
+    return TileUtils.getTile(world, pos.up()).map(tile -> {
       IFluidHandler cap = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.DOWN);
       if (cap != null) {
         return cap.drain(new FluidStack(FluidsTFC.FRESH_WATER.get(), 1), true) != null;
       }
-    }
-    return false;
+      return null;
+    }).orElse(false);
   }
 
   private boolean waterPosition(World world, BlockPos checkPos) {
-    var tile = TileUtils.getTile(world, checkPos, TileEntity.class);
-    if (tile instanceof IWaterable) {
-      ((IWaterable) tile).setWater(2);
-      IBlockState stateAt = world.getBlockState(checkPos);
-      world.setBlockState(checkPos, stateAt.withProperty(Properties.WET, true));
-      return true;
-    }
-    return false;
+    return TileUtils.getTile(world, checkPos, TileEntity.class)
+                    .filter(tile -> tile instanceof IWaterable)
+                    .map(tile -> {
+                      IWaterable waterable = (IWaterable) tile;
+                      waterable.setWater(2);
+                      IBlockState stateAt = world.getBlockState(checkPos);
+                      world.setBlockState(checkPos, stateAt.withProperty(Properties.WET, true));
+                      return true;
+                    }).orElse(false);
   }
 }

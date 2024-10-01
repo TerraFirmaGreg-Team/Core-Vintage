@@ -35,7 +35,6 @@ import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.client.model.modelvariants.ChopperModels;
 import se.gory_moon.horsepower.client.renderer.TESRChopperHorse;
 import se.gory_moon.horsepower.lib.Constants;
-import se.gory_moon.horsepower.tileentity.TileHPBase;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
 
@@ -67,9 +66,7 @@ public class BlockChopperHorse extends BaseBlockHorse implements IProbeInfoAcces
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
     var tile = TileUtils.getTile(worldIn, pos, TileChopperHorse.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    tile.ifPresent(tileChopperHorse -> tileChopperHorse.onBreakBlock(worldIn, pos, state));
     worldIn.updateComparatorOutputLevel(pos, this);
     super.breakBlock(worldIn, pos, state);
   }
@@ -117,11 +114,8 @@ public class BlockChopperHorse extends BaseBlockHorse implements IProbeInfoAcces
   public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     world.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
 
-    var tile = TileUtils.getTile(world, pos, TileHPBase.class);
-    if (tile == null) {
-      return;
-    }
-    tile.setForward(placer.getHorizontalFacing().getOpposite());
+    var tile = TileUtils.getTile(world, pos, TileChopperHorse.class);
+    tile.ifPresent(tileChopperHorse -> tileChopperHorse.setForward(placer.getHorizontalFacing().getOpposite()));
     super.onBlockPlacedBy(world, pos, state, placer, stack);
   }
 
@@ -168,18 +162,17 @@ public class BlockChopperHorse extends BaseBlockHorse implements IProbeInfoAcces
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
     var tile = TileUtils.getTile(world, data.getPos(), TileChopperHorse.class);
-
-    if (tile != null) {
+    tile.ifPresent(tileChopperHorse -> {
       double totalWindup = Configs.general.pointsForWindup > 0 ? Configs.general.pointsForWindup : 1;
-      probeInfo.progress((long) ((((double) tile.getField(2)) / totalWindup) * 100L), 100L,
-                         new ProgressStyle().prefix(Localization.TOP.WINDUP_PROGRESS.translate() + " ")
-                                            .suffix("%"));
-      if (tile.getField(0) > 1) {
-        probeInfo.progress((long) ((((double) tile.getField(1)) / ((double) tile.getField(0))) * 100L), 100L,
-                           new ProgressStyle().prefix(Localization.TOP.CHOPPING_PROGRESS.translate() + " ")
-                                              .suffix("%"));
+      probeInfo.progress((long) ((((double) tileChopperHorse.getField(2)) / totalWindup) * 100L), 100L,
+                         new ProgressStyle().prefix(Localization.TOP.WINDUP_PROGRESS.translate() + " ").suffix("%"));
+      
+      if (tileChopperHorse.getField(0) > 1) {
+        probeInfo.progress((long) ((((double) tileChopperHorse.getField(1)) / ((double) tileChopperHorse.getField(0))) * 100L), 100L,
+                           new ProgressStyle().prefix(Localization.TOP.CHOPPING_PROGRESS.translate() + " ").suffix("%"));
       }
-    }
+    });
+
   }
 
   @Override

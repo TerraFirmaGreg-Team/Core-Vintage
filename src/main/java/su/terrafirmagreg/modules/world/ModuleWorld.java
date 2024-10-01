@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.world;
 
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.api.util.InjectorUtils;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
@@ -21,9 +22,10 @@ public final class ModuleWorld extends ModuleBase {
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWorld.class.getSimpleName());
 
   public static WorldTypeClassic WORLD_TYPE_CLASSIC;
+  public static RegistryManager REGISTRY;
 
   public ModuleWorld() {
-    this.enableAutoRegistry();
+    REGISTRY = enableAutoRegistry();
 
     WORLD_TYPE_CLASSIC = new WorldTypeClassic();
 

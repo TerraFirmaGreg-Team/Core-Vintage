@@ -37,11 +37,7 @@ public class Multiblock implements BiPredicate<World, BlockPos> {
 
   public <T extends TileEntity> Multiblock match(BlockPos posOffset, Predicate<T> tileEntityPredicate, Class<T> teClass) {
     conditions.add((world, pos) -> {
-      T tile = TileUtils.getTile(world, pos.add(posOffset), teClass);
-      if (tile != null) {
-        return tileEntityPredicate.test(tile);
-      }
-      return false;
+      return TileUtils.getTile(world, pos.add(posOffset), teClass).map(tileEntityPredicate::test).orElse(false);
     });
     return this;
   }

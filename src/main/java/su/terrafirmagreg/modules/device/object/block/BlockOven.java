@@ -207,10 +207,7 @@ public class BlockOven extends BaseBlock implements IProviderTile {
   public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
     if (state.getValue(LIT)) {
       if (!isValidHorizontal(world, pos, false)) {
-        var tile = TileUtils.getTile(world, pos, TileOven.class);
-        if (tile != null) {
-          tile.turnOff();
-        }
+        TileUtils.getTile(world, pos, TileOven.class).ifPresent(TileOven::turnOff);
       } else {
         EnumFacing facing = state.getValue(FACING);
         EnumFacing left = facing.rotateYCCW();
@@ -253,91 +250,78 @@ public class BlockOven extends BaseBlock implements IProviderTile {
   }
 
   @Override
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-                              BlockPos fromPos) {
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     if (!worldIn.isRemote) {
       if (state.getValue(LIT) && !isValidHorizontal(worldIn, pos, false)) {
-        var tile = TileUtils.getTile(worldIn, pos, TileOven.class);
-        if (tile != null) {
-          tile.turnOff();
-        }
+        TileUtils.getTile(worldIn, pos, TileOven.class).ifPresent(TileOven::turnOff);
       }
     }
   }
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(world, pos, TileOven.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
+    TileUtils.getTile(world, pos, TileOven.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
     super.breakBlock(world, pos, state);
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-                                  EnumHand hand, EnumFacing side, float hitX,
-                                  float hitY, float hitZ) {
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     if (!world.isRemote) {
       if (!state.getValue(LIT)) {
         ItemStack held = player.getHeldItem(hand);
         if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
           return false;
         }
-        var tile = TileUtils.getTile(world, pos, TileOven.class);
-        if (tile == null) {
-          return false;
-        }
-        if (isValidHorizontal(world, pos, false) && hasChimney(world, pos, false)
-            && ItemFireStarter.onIgnition(held)) {
-          world.setBlockState(pos, state.withProperty(LIT, true));
-          tile.light();
-          return true;
-        }
-        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-                                                    null);
-        if (inventory == null) {
-          return false;
-        }
-        boolean handEmpty = held.isEmpty();
-        if (!handEmpty && !player.isSneaking() && !OreDictionaryHelper.doesStackMatchOre(held,
-                                                                                         "peel")) {
-          for (int i = 2; i >= 0; i--) {
-            if (inventory.getStackInSlot(i).isEmpty()) {
-              ItemStack leftover = inventory.insertItem(i, held.splitStack(1), false);
-              ItemHandlerHelper.giveItemToPlayer(player, leftover);
-              tile.markForSync();
-              return true;
-            }
+        return TileUtils.getTile(world, pos, TileOven.class).map(tile -> {
+          if (isValidHorizontal(world, pos, false) && hasChimney(world, pos, false) && ItemFireStarter.onIgnition(held)) {
+            world.setBlockState(pos, state.withProperty(LIT, true));
+            tile.light();
+            return true;
           }
-        } else if (handEmpty || OreDictionaryHelper.doesStackMatchOre(held, "peel")) {
-          for (int i = 2; i >= 0;
-               i--) // take stuff out. starts with the main slot and cycles backwards
-          {
-            ItemStack slotStack = inventory.getStackInSlot(i);
-            if (!slotStack.isEmpty()) {
-              ItemStack takeStack = inventory.extractItem(i, 1, false);
-              ItemHandlerHelper.giveItemToPlayer(player, takeStack);
-              tile.markForSync();
-              if (ConfigFL.General.BALANCE.peelNeeded && tile.willDamage()
-                  && !OreDictionaryHelper.doesStackMatchOre(held, "peel") &&
-                  state.getValue(CURED)) {
-                player.attackEntityFrom(DamageSources.GRILL,
-                                        2.0F); // damage player if they don't use peel
+          IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+          if (inventory == null) {
+            return false;
+          }
+          boolean handEmpty = held.isEmpty();
+          if (!handEmpty && !player.isSneaking() && !OreDictionaryHelper.doesStackMatchOre(held, "peel")) {
+            for (int i = 2; i >= 0; i--) {
+              if (inventory.getStackInSlot(i).isEmpty()) {
+                ItemStack leftover = inventory.insertItem(i, held.splitStack(1), false);
+                ItemHandlerHelper.giveItemToPlayer(player, leftover);
+                tile.markForSync();
+                return true;
               }
-              return true;
+            }
+          } else if (handEmpty || OreDictionaryHelper.doesStackMatchOre(held, "peel")) {
+
+            // take stuff out. starts with the main slot and cycles backwards
+            for (int i = 2; i >= 0; i--) {
+              ItemStack slotStack = inventory.getStackInSlot(i);
+              if (!slotStack.isEmpty()) {
+                ItemStack takeStack = inventory.extractItem(i, 1, false);
+                ItemHandlerHelper.giveItemToPlayer(player, takeStack);
+                tile.markForSync();
+                if (ConfigFL.General.BALANCE.peelNeeded && tile.willDamage()
+                    && !OreDictionaryHelper.doesStackMatchOre(held, "peel") &&
+                    state.getValue(CURED)) {
+                  player.attackEntityFrom(DamageSources.GRILL,
+                                          2.0F); // damage player if they don't use peel
+                }
+                return true;
+              }
             }
           }
-        }
+          return false;
+        }).orElse(false);
+
+
       }
     }
     return true;
   }
 
   @Override
-  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-                                          float hitX, float hitY, float hitZ, int meta,
-                                          EntityLivingBase placer) {
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     if (facing.getAxis() == EnumFacing.Axis.Y) {
       facing = placer.getHorizontalFacing().getOpposite();
     }
@@ -350,8 +334,7 @@ public class BlockOven extends BaseBlock implements IProviderTile {
   }
 
   @Override
-  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
-                       IBlockState state, int fortune) {
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
     if (state.getValue(CURED)) {
       drops.add(new ItemStack(Items.BRICK, 3 + RNG.nextInt(3)));
     } else {
@@ -361,15 +344,14 @@ public class BlockOven extends BaseBlock implements IProviderTile {
 
   private void cascadeLight(World world, BlockPos checkPos) {
     IBlockState checkState = world.getBlockState(checkPos);
-    if (checkState.getBlock() instanceof BlockOven && !checkState.getValue(LIT)
-        && isValidHorizontal(world, checkPos, false) &&
-        hasChimney(world, checkPos, false)) {
-      var tile = TileUtils.getTile(world, checkPos, TileOven.class);
-      if (tile != null) {
+    if (checkState.getBlock() instanceof BlockOven && !checkState.getValue(LIT) &&
+        isValidHorizontal(world, checkPos, false) && hasChimney(world, checkPos, false)) {
+      
+      TileUtils.getTile(world, checkPos, TileOven.class).ifPresent(tile -> {
         world.setBlockState(checkPos, checkState.withProperty(LIT, true));
         tile.setWarmed();
         tile.light();
-      }
+      });
     }
   }
 

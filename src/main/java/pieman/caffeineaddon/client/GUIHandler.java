@@ -20,8 +20,9 @@ public class GUIHandler implements IGuiHandler {
     BlockPos pos = new BlockPos(x, y, z);
     ItemStack stack = player.getHeldItemMainhand();
     if (ID == DRYINGMATGUI) {
-      TEDryingMat te = TileUtils.getTile(world, pos, TEDryingMat.class);
-      return te == null ? null : new ContainerDryingMat(player.inventory, te);
+      return TileUtils.getTile(world, pos, TEDryingMat.class)
+                      .map(tile -> new ContainerDryingMat(player.inventory, tile))
+                      .orElse(null);
     }
     return null;
   }
@@ -31,10 +32,12 @@ public class GUIHandler implements IGuiHandler {
     Container container = getServerGuiElement(ID, player, world, x, y, z);
     BlockPos pos = new BlockPos(x, y, z);
     if (ID == DRYINGMATGUI) {
-      return new GuiDryingMat(container, player.inventory, TileUtils.getTile(world, pos, TEDryingMat.class),
-                              world.getBlockState(new BlockPos(x, y, z))
-                                   .getBlock()
-                                   .getTranslationKey());
+      return TileUtils.getTile(world, pos, TEDryingMat.class)
+                      .map(tile -> new GuiDryingMat(container, player.inventory, tile,
+                                                    world.getBlockState(new BlockPos(x, y, z))
+                                                         .getBlock()
+                                                         .getTranslationKey())).orElse(null);
+
     }
     return null;
   }

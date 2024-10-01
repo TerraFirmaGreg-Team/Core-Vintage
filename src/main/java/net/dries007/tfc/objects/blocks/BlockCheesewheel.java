@@ -77,21 +77,19 @@ public class BlockCheesewheel extends BlockNonCube {
   }
 
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-    var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    if (tile != null) {
-      if (!worldIn.isRemote) {
-        long ticksSinceUpdate = tile.getTicksSinceUpdate();
-        // If the cheese isn't cut and ready to age
-        if (state.getValue(AGE) == EnumAging.FRESH && state.getValue(WEDGES) == 0 &&
-            ticksSinceUpdate > ConfigFL.General.BALANCE.cheeseTicksToAged) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, EnumAging.AGED));
-          tile.resetCounter();
-        } else if (state.getValue(AGE) == EnumAging.AGED && state.getValue(WEDGES) == 0 &&
-                   ticksSinceUpdate > ConfigFL.General.BALANCE.cheeseTicksToVintage) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, EnumAging.VINTAGE));
-        }
+    if (worldIn.isRemote) {return;}
+    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(tile -> {
+      long ticksSinceUpdate = tile.getTicksSinceUpdate();
+      // If the cheese isn't cut and ready to age
+      if (state.getValue(AGE) == EnumAging.FRESH && state.getValue(WEDGES) == 0 &&
+          ticksSinceUpdate > ConfigFL.General.BALANCE.cheeseTicksToAged) {
+        worldIn.setBlockState(pos, state.withProperty(AGE, EnumAging.AGED));
+        tile.resetCounter();
+      } else if (state.getValue(AGE) == EnumAging.AGED && state.getValue(WEDGES) == 0 &&
+                 ticksSinceUpdate > ConfigFL.General.BALANCE.cheeseTicksToVintage) {
+        worldIn.setBlockState(pos, state.withProperty(AGE, EnumAging.VINTAGE));
       }
-    }
+    });
   }
 
   @SuppressWarnings("deprecation")
@@ -139,11 +137,7 @@ public class BlockCheesewheel extends BlockNonCube {
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     //taken from BlockJackOLantern which in turn was taken from BlockTorchTFC
     // Set the initial counter value
-    TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
-
+    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 

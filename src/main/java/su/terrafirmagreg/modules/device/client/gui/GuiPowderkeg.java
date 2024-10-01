@@ -82,7 +82,7 @@ public class GuiPowderkeg extends BaseGuiContainerTile<TilePowderKeg> {
   @Override
   protected void actionPerformed(@NotNull GuiButton button) throws IOException {
     if (button instanceof GuiButtonPowderkegSeal) {
-      ModuleDevice.getPacketService().sendToServer(new CSPacketGuiButton(button.id));
+      ModuleDevice.PACKET_SERVICE.sendToServer(new CSPacketGuiButton(button.id));
     }
     super.actionPerformed(button);
   }

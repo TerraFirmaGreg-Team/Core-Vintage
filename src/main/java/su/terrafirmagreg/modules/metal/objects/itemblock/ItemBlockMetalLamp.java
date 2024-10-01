@@ -31,12 +31,12 @@ public class ItemBlockMetalLamp
 
   public ItemBlockMetalLamp(Block block) {
     super(block);
-    CAPACITY = ConfigMetal.BLOCKS.LAMP.tank;
+    CAPACITY = ConfigMetal.BLOCK.LAMP.tank;
 
   }
 
   public static Set<Fluid> getValidFluids() {
-    String[] fluidNames = ConfigMetal.BLOCKS.LAMP.fuels;
+    String[] fluidNames = ConfigMetal.BLOCK.LAMP.fuels;
     Set<Fluid> validFluids = new HashSet<>();
     for (String fluidName : fluidNames) {
       validFluids.add(FluidRegistry.getFluid(fluidName));

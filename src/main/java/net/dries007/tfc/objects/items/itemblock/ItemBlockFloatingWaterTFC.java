@@ -15,15 +15,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantFloatingWater;
 
 import org.jetbrains.annotations.NotNull;
 
 public class ItemBlockFloatingWaterTFC extends ItemBlockTFC {
 
-  protected final BlockFloatingWaterTFC block;
+  protected final BlockPlantFloatingWater block;
 
-  public ItemBlockFloatingWaterTFC(BlockFloatingWaterTFC block) {
+  public ItemBlockFloatingWaterTFC(BlockPlantFloatingWater block) {
     super(block);
     this.block = block;
   }

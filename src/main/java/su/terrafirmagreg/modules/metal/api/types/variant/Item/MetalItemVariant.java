@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.metal.api.types.variant.Item;
 
-import su.terrafirmagreg.data.lib.Pair;
-import su.terrafirmagreg.data.lib.types.variant.Variant;
+import su.terrafirmagreg.data.lib.types.variant.item.VariantItem;
+import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
-import su.terrafirmagreg.modules.metal.init.ItemsMetal;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 
-import net.minecraft.item.Item;
+import net.minecraft.util.text.TextComponentTranslation;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 
@@ -15,47 +15,57 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 @Getter
-public class MetalItemVariant extends Variant<MetalItemVariant> {
+public class MetalItemVariant extends VariantItem<MetalItemVariant, MetalType> {
 
   @Getter
   private static final Set<MetalItemVariant> variants = new ObjectLinkedOpenHashSet<>();
 
-  private BiFunction<MetalItemVariant, MetalType, ? extends Item> factory;
-
-  private MetalItemVariant(String name) {
-    super(name);
+  private MetalItemVariant(Builder builder) {
+    super(builder.name);
 
     if (!variants.add(this)) {
-      throw new RuntimeException(String.format("MetalItemVariant: [%s] already exists!", name));
+      throw new RuntimeException(String.format("Variant: [%s] already exists!", name));
     }
-  }
 
-  public static MetalItemVariant builder(String name) {
-
-    return new MetalItemVariant(name);
-  }
-
-  public Item get(MetalType type) {
-    var item = ItemsMetal.METAL_ITEMS.get(Pair.of(this, type));
-    if (item != null) {
-      return item;
-    }
-    throw new RuntimeException(String.format("Item metal is null: %s, %s", this, type));
-  }
-
-  public MetalItemVariant setFactory(
-    BiFunction<MetalItemVariant, MetalType, ? extends Item> factory) {
-    this.factory = factory;
-    return this;
-  }
-
-  public MetalItemVariant build() {
-    for (var type : MetalType.getTypes()) {
-      if (ItemsMetal.METAL_ITEMS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
-        throw new RuntimeException(
-          String.format("Duplicate registry detected: %s, %s", this, type));
+    MetalType.getTypes().forEach(type -> {
+      var item = builder.factory.apply(this, type);
+      if (map.put(type, item.getItem()) != null) {
+        throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
       }
+      ModuleMetal.REGISTRY.item(item);
+    });
+  }
+
+  public static Builder builder(String name) {
+    return new Builder(name);
+  }
+
+  public String getRegistryKey(SoilType type) {
+    return String.format("metal/%s/%s", this.getName(), type);
+  }
+
+  public String getLocalizedName() {
+    return new TextComponentTranslation(String.format("metal.variant.%s.name", this)).getFormattedText();
+  }
+
+
+  public static class Builder {
+
+    private final String name;
+
+    private BiFunction<MetalItemVariant, MetalType, IMetalItem> factory;
+
+    public Builder(String name) {
+      this.name = name;
     }
-    return this;
+
+    public Builder factory(BiFunction<MetalItemVariant, MetalType, IMetalItem> factory) {
+      this.factory = factory;
+      return this;
+    }
+
+    public MetalItemVariant build() {
+      return new MetalItemVariant(this);
+    }
   }
 }

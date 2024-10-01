@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.base.tile.BaseTile;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -22,9 +23,7 @@ public class TileFiller extends BaseTile {
   @Override
   public void markDirty() {
     var tile = TileUtils.getTile(world, getFilledPos(), TileHPBase.class);
-    if (tile != null) {
-      tile.markDirty();
-    }
+    tile.ifPresent(TileHPBase::markDirty);
     super.markDirty();
   }
 
@@ -49,28 +48,19 @@ public class TileFiller extends BaseTile {
   @Override
   public ITextComponent getDisplayName() {
     var tile = TileUtils.getTile(world, getFilledPos(), TileHPBase.class);
-    if (tile != null) {
-      return tile.getDisplayName();
-    }
-    return null;
+    return tile.map(TileEntity::getDisplayName).orElse(super.getDisplayName());
   }
 
   @Override
   public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
     var tile = TileUtils.getTile(world, getFilledPos(), TileHPBase.class);
-    if (tile != null) {
-      return tile.hasCapability(capability, facing);
-    }
-    return super.hasCapability(capability, facing);
+    return tile.map(tileHPBase -> tileHPBase.hasCapability(capability, facing)).orElse(super.hasCapability(capability, facing));
   }
 
-  @SuppressWarnings("unchecked")
   @Override
-  public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable net.minecraft.util.EnumFacing facing) {
-    var tile = TileUtils.getTile(world, getFilledPos(), TileHPBase.class);
-    if (tile != null) {
-      return tile.getCapability(capability, facing);
-    }
-    return super.getCapability(capability, facing);
+  public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+    return TileUtils.getTile(world, getFilledPos(), TileHPBase.class)
+                    .map(tile -> tile.getCapability(capability, facing))
+                    .orElse(super.getCapability(capability, facing));
   }
 }

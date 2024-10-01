@@ -81,23 +81,23 @@ public class ItemMetalMallet extends ItemTFC implements ICapabilityMetal {
     if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
       Block block = worldIn.getBlockState(pos).getBlock();
       if (block instanceof BlockPlacedItemFlat) {
-        TEPlacedItemFlat tile = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
-        if (tile == null) {
+        var tile = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
+        if (tile.isPresent()) {
           return EnumActionResult.FAIL;
         }
-        CrackingRecipe entry = CrackingRecipe.get(tile.getStack());
+        CrackingRecipe entry = CrackingRecipe.get(tile.get().getStack());
         if (entry == null) {
           return EnumActionResult.FAIL;
         }
 
         if (RNG.nextInt(100) < entry.getChance()) {
-          StackUtils.spawnItemStack(worldIn, pos, entry.getOutputItem(tile.getStack()));
+          StackUtils.spawnItemStack(worldIn, pos, entry.getOutputItem(tile.get().getStack()));
           worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 2.0F, 1.0F);
         } else {
           worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_FALL, SoundCategory.BLOCKS, 2.0F, 1.0F);
         }
 
-        tile.setStack(ItemStack.EMPTY);
+        tile.get().setStack(ItemStack.EMPTY);
         worldIn.setBlockToAir(pos);
         player.getHeldItem(hand).damageItem(1, player);
         return EnumActionResult.SUCCESS;

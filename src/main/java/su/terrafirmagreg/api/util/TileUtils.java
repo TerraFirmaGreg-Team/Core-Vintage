@@ -11,9 +11,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import org.jetbrains.annotations.Nullable;
-
 import lombok.experimental.UtilityClass;
+
+import java.util.Optional;
+
 
 @UtilityClass
 @SuppressWarnings("unused")
@@ -28,41 +29,32 @@ public final class TileUtils {
    * @param <T>    тип типизированного объекта TileEntity
    * @return экземпляр типизированного объекта TileEntity
    */
-  @SuppressWarnings("unchecked")
-  public static @Nullable <T extends TileEntity> T getTile(IBlockAccess world, BlockPos pos, Class<T> aClass) {
-    var tile = TileUtils.getTile(world, pos);
-    if (!aClass.isInstance(tile)) {
-      return null;
-    }
-    return (T) tile;
+  public static <T extends TileEntity> Optional<T> getTile(IBlockAccess world, BlockPos pos, Class<T> aClass) {
+    return getTile(world, pos).filter(aClass::isInstance).map(aClass::cast);
   }
 
   /**
    * Returns the tile at the specified position, returns null if it is the wrong type or does not exist. Avoids creating new tile entities when using a
    * ChunkCache (off the main thread). see {@link BlockFlowerPot#getActualState(IBlockState, IBlockAccess, BlockPos)}
    */
-  @Nullable
-  public static TileEntity getTile(IBlockAccess world, BlockPos pos) {
-    if (world instanceof ChunkCache chunkCache) {
-      return chunkCache.getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK);
-    } else {
-      return world.getTileEntity(pos);
-    }
+  public static Optional<TileEntity> getTile(IBlockAccess world, BlockPos pos) {
+    return world instanceof ChunkCache chunkCache
+           ? Optional.ofNullable(chunkCache.getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK))
+           : Optional.ofNullable(world.getTileEntity(pos));
   }
 
   public static boolean isUsableByPlayer(EntityPlayer player, TileEntity tile) {
     BlockPos pos = tile.getPos();
     World world = tile.getWorld();
 
-    return !tile.isInvalid() && getTile(world, pos) == tile && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+    return !tile.isInvalid()
+           && getTile(world, pos).map(t -> t == tile).orElse(false)
+           && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
   }
 
-  public static boolean isNotNull(TileEntity tile) {
-    return tile != null;
-  }
 
-  public static void registerTileEntity(Class<? extends TileEntity> tileEntityClass, String name) {
-    GameRegistry.registerTileEntity(tileEntityClass, ModUtils.resource("tile." + name));
+  public static void registerTileEntity(Class<? extends TileEntity> tileClass, String name) {
+    GameRegistry.registerTileEntity(tileClass, ModUtils.resource("tile." + name));
   }
 
 }

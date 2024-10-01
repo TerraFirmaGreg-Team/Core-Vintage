@@ -60,52 +60,45 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
 
   public static void convertPlacedItemToPitKiln(World world, BlockPos pos, ItemStack strawStack) {
 
-    var tileOld = TileUtils.getTile(world, pos, TEPlacedItem.class);
-    if (tileOld != null) {
-      return;
-    }
-
-    // Remove inventory items
-    // This happens here to stop the block dropping its items in onBreakBlock()
-    IItemHandler capOld = tileOld.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-                                                null);
-    ItemStack[] inventory = new ItemStack[4];
-    if (capOld != null) {
-      for (int i = 0; i < 4; i++) {
-        inventory[i] = capOld.extractItem(i, 64, false);
-      }
-    }
-
-    // Replace the block
-    world.setBlockState(pos, BlocksDevice.PIT_KILN.getDefaultState());
-    // Play placement sound
-    world.playSound(null, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 0.5f, 1.0f);
-
-    // Copy TE data
-    var tileNew = TileUtils.getTile(world, pos, TilePitKiln.class);
-    if (tileNew != null) {
-      return;
-    }
-
-    // Copy inventory
-    IItemHandler capNew = tileNew.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-                                                null);
-    if (capNew != null) {
-      for (int i = 0; i < 4; i++) {
-        if (inventory[i] != null && !inventory[i].isEmpty()) {
-          capNew.insertItem(i, inventory[i], false);
+    TileUtils.getTile(world, pos, TEPlacedItem.class).ifPresent(tileOld -> {
+      // Remove inventory items
+      // This happens here to stop the block dropping its items in onBreakBlock()
+      IItemHandler capOld = tileOld.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
+                                                  null);
+      ItemStack[] inventory = new ItemStack[4];
+      if (capOld != null) {
+        for (int i = 0; i < 4; i++) {
+          inventory[i] = capOld.extractItem(i, 64, false);
         }
       }
-    }
+      // Replace the block
+      world.setBlockState(pos, BlocksDevice.PIT_KILN.getDefaultState());
+      // Play placement sound
+      world.playSound(null, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 0.5f, 1.0f);
 
-    // Copy misc data
-    tileNew.isHoldingLargeItem = tileOld.isHoldingLargeItem;
-    if (OreDictUtils.contains(strawStack, "blockStraw")) {
-      tileNew.addStrawBlock();
-    } else {
-      tileNew.addStraw(strawStack.splitStack(1));
-    }
+      // Copy TE data
+      TileUtils.getTile(world, pos, TilePitKiln.class).ifPresent(tileNew -> {
 
+        // Copy inventory
+        IItemHandler capNew = tileNew.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
+                                                    null);
+        if (capNew != null) {
+          for (int i = 0; i < 4; i++) {
+            if (inventory[i] != null && !inventory[i].isEmpty()) {
+              capNew.insertItem(i, inventory[i], false);
+            }
+          }
+        }
+
+        // Copy misc data
+        tileNew.isHoldingLargeItem = tileOld.isHoldingLargeItem;
+        if (OreDictUtils.contains(strawStack, "blockStraw")) {
+          tileNew.addStrawBlock();
+        } else {
+          tileNew.addStraw(strawStack.splitStack(1));
+        }
+      });
+    });
   }
 
   private void addStrawBlock() {
@@ -350,10 +343,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
         //Light other adjacent pit kilns
         for (Vec3i diagonal : DIAGONALS) {
           BlockPos pitPos = pos.add(diagonal);
-          var tile = TileUtils.getTile(world, pitPos, TilePitKiln.class);
-          if (tile != null) {
-            tile.tryLight();
-          }
+          TileUtils.getTile(world, pitPos, TilePitKiln.class).ifPresent(TilePitKiln::tryLight);
         }
         return true;
       }

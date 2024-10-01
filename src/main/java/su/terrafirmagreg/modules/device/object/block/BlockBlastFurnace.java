@@ -118,10 +118,7 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(world, pos, TileBlastFurnace.class);
-    if (tile != null) {
-      tile.onBreakBlock(world, pos, state);
-    }
+    TileUtils.getTile(world, pos, TileBlastFurnace.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
     super.breakBlock(world, pos, state);
   }
 
@@ -136,21 +133,16 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                  float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       if (!state.getValue(LIT)) {
-        var tile = TileUtils.getTile(worldIn, pos, TileBlastFurnace.class);
-        if (tile == null) {
-          return true;
-        }
-        ItemStack held = playerIn.getHeldItem(hand);
-        if (tile.canIgnite() && ItemFireStarter.onIgnition(held)) {
-          worldIn.setBlockState(pos, state.withProperty(LIT, true));
-          //tile.onIgnite();
-          return true;
-        }
+        TileUtils.getTile(worldIn, pos, TileBlastFurnace.class).ifPresent(tile -> {
+          ItemStack held = playerIn.getHeldItem(hand);
+          if (tile.canIgnite() && ItemFireStarter.onIgnition(held)) {
+            worldIn.setBlockState(pos, state.withProperty(LIT, true));
+            //tile.onIgnite();
+          }
+        });
       }
       if (!playerIn.isSneaking()) {
         GuiHandler.openGui(worldIn, pos, playerIn);
@@ -171,10 +163,7 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
 
   @Override
   public void onAirIntake(World world, BlockPos pos, int airAmount) {
-    var tile = TileUtils.getTile(world, pos, TileBlastFurnace.class);
-    if (tile != null) {
-      tile.onAirIntake(airAmount);
-    }
+    TileUtils.getTile(world, pos, TileBlastFurnace.class).ifPresent(tile -> tile.onAirIntake(airAmount));
   }
 
   @Override

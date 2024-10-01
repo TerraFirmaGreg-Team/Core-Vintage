@@ -166,10 +166,7 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
           }
           if (cachedRecipe != null) {
             world.setBlockState(getInternalBlock(), BlocksDevice.BLOOM.getDefaultState());
-            var tile = TileUtils.getTile(world, getInternalBlock(), TileBloom.class);
-            if (tile != null) {
-              tile.setBloom(cachedRecipe.getOutput(oreStacks));
-            }
+            TileUtils.getTile(world, getInternalBlock(), TileBloom.class).ifPresent(tile -> tile.setBloom(cachedRecipe.getOutput(oreStacks)));
           }
 
           oreStacks.clear();

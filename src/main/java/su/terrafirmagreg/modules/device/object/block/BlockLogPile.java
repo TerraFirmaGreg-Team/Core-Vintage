@@ -137,38 +137,30 @@ public class BlockLogPile extends BaseBlockContainer {
   }
 
   @Override
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-                              BlockPos fromPos) {
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.FIRE) {
       worldIn.setBlockState(pos, state.withProperty(LIT, true));
-      var tile = TileUtils.getTile(worldIn, pos, TileLogPile.class);
-      if (tile != null) {
-        tile.light();
-      }
+      TileUtils.getTile(worldIn, pos, TileLogPile.class).ifPresent(TileLogPile::light);
     }
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-                                  EnumHand hand, EnumFacing side, float hitX,
-                                  float hitY, float hitZ) {
-    var tile = TileUtils.getTile(world, pos, TileLogPile.class);
-    if (tile != null) {
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    return TileUtils.getTile(world, pos, TileLogPile.class).map(tile -> {
       // Special Interactions
       // 1. Try and put a log inside (happens on right click event when sneaking)
       // 2. Try and light the TE
       // 3. Open the GUI
       ItemStack stack = player.getHeldItem(hand);
-      if (!state.getValue(LIT) && side == EnumFacing.UP && world.getBlockState(pos.up())
-                                                                .getBlock()
-                                                                .isReplaceable(world, pos) && ItemFireStarter.onIgnition(stack)) {
+      if (!state.getValue(LIT) && side == EnumFacing.UP && world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos)
+          && ItemFireStarter.onIgnition(stack)) {
+
         // Light the Pile
         if (!world.isRemote) {
           world.setBlockState(pos, state.withProperty(LIT, true));
           tile.light();
           world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
-          world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.PLAYERS,
-                          1.0F, 1.0F);
+          world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.PLAYERS, 1.0F, 1.0F);
         }
         return true;
       }
@@ -177,8 +169,7 @@ public class BlockLogPile extends BaseBlockContainer {
         if (!player.isSneaking()) {
           if (tile.insertLog(stack.copy())) {
             if (!world.isRemote) {
-              world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
-                              1.0F);
+              world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
               stack.shrink(1);
               player.setHeldItem(hand, stack);
             }
@@ -188,8 +179,7 @@ public class BlockLogPile extends BaseBlockContainer {
           int inserted = tile.insertLogs(stack.copy());
           if (inserted > 0) {
             if (!world.isRemote) {
-              world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F,
-                              1.0F);
+              world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
               stack.shrink(inserted);
               player.setHeldItem(hand, stack);
             }
@@ -204,14 +194,12 @@ public class BlockLogPile extends BaseBlockContainer {
         }
         return true;
       }
-    }
-    return false;
+      return false;
+    }).orElse(false);
   }
 
   @Override
-  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-                                          float hitX, float hitY, float hitZ, int meta,
-                                          EntityLivingBase placer) {
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     if (placer.getHorizontalFacing().getAxis().isHorizontal()) {
       return getDefaultState().withProperty(XZ, placer.getHorizontalFacing().getAxis());
     }
@@ -240,13 +228,10 @@ public class BlockLogPile extends BaseBlockContainer {
   }
 
   @Override
-  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-                                EntityPlayer player) {
-    var tile = TileUtils.getTile(world, pos, TileLogPile.class);
-    if (tile != null) {
-      return tile.getLog().copy();
-    }
-    return ItemStack.EMPTY;
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    return TileUtils.getTile(world, pos, TileLogPile.class)
+                    .map(tile -> tile.getLog().copy())
+                    .orElse(ItemStack.EMPTY);
   }
 
   @Override

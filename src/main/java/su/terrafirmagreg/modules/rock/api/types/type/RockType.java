@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.rock.api.types.type;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.data.lib.types.type.Type;
+import su.terrafirmagreg.data.lib.types.variant.Variant;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 
 import net.minecraft.util.ResourceLocation;
@@ -19,16 +20,13 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.Set;
 
-/**
- * Основной класс для типов камней.
- */
+
 @Getter
 public class RockType extends Type<RockType> {
 
   @Getter
   private static final Set<RockType> types = new ObjectOpenHashSet<>();
 
-  private final String name;
   private final RockCategory category;
   private final OrePrefix orePrefix;
   private final Material material;
@@ -36,24 +34,24 @@ public class RockType extends Type<RockType> {
 
   private RockType(Builder builder) {
     super(builder.name);
-    this.name = builder.name;
+
     this.category = builder.category;
     this.orePrefix = builder.orePrefix;
     this.material = builder.material;
     this.isFlux = builder.isFlux;
 
     if (!types.add(this)) {
-      throw new RuntimeException(String.format("RockType: [%s] already exists!", name));
+      throw new RuntimeException(String.format("Type: [%s] already exists!", name));
     }
   }
 
   @Nullable
   public static RockType getByName(@NotNull String name) {
-    return RockType.getTypes()
-                   .stream()
-                   .filter(s -> s.getName().equals(name))
-                   .findFirst()
-                   .orElse(null);
+    return types
+      .stream()
+      .filter(s -> s.getName().equals(name))
+      .findFirst()
+      .orElse(null);
   }
 
   /**
@@ -80,22 +78,19 @@ public class RockType extends Type<RockType> {
   }
 
   public static Builder builder(String name) {
-
     return new Builder(name);
   }
 
-  /**
-   * Возвращает ресурсное расположение текстуры породы.
-   *
-   * @return Ресурсное расположение текстуры породы.
-   */
-  @NotNull
-  public ResourceLocation getTexture() {
-    return ModUtils.resource("textures/blocks/rock/raw/" + this + ".png");
+  public ResourceLocation getTexture(Variant<?, RockType> variant) {
+    return ModUtils.resource(String.format("textures/blocks/rock/%s/%s.png", variant, this));
   }
 
   public String getLocalizedName() {
     return new TextComponentTranslation(String.format("rock.type.%s.name", this)).getFormattedText();
+  }
+
+  public String getRegistryKey(Variant<?, RockType> variant) {
+    return String.format("rock/%s/%s", variant, this);
   }
 
   public static class Builder {
@@ -104,7 +99,7 @@ public class RockType extends Type<RockType> {
     private RockCategory category;
     private OrePrefix orePrefix;
     private Material material;
-    private boolean isFlux = false;
+    private boolean isFlux;
 
     /**
      * Создает экземпляр Builder с указанным именем.
@@ -113,6 +108,8 @@ public class RockType extends Type<RockType> {
      */
     public Builder(@NotNull String name) {
       this.name = name;
+
+      this.isFlux = false;
     }
 
     /**

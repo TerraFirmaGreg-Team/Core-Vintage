@@ -42,7 +42,7 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
     this.settings = Settings.of(Material.GROUND);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .sound(SoundType.PLANT)
       .hardness(2.0F)
       .nonCube()

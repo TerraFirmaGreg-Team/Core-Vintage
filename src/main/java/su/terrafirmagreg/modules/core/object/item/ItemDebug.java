@@ -96,13 +96,11 @@ public class ItemDebug extends BaseItem {
         break;
       }
       case 1: {
-        var tile = TileUtils.getTile(world, pos);
-        if (tile == null) {
-          break;
-        }
-        var nbtTag = tile.writeToNBT(new NBTTagCompound());
-        NBTUtils.setGenericNBTValue(nbt, "nbtTag", nbtTag.toString());
-        player.sendMessage(new TextComponentString("NBTTagCompound: " + nbtTag));
+        TileUtils.getTile(world, pos).ifPresent(tile -> {
+          var nbtTag = tile.writeToNBT(new NBTTagCompound());
+          NBTUtils.setGenericNBTValue(nbt, "nbtTag", nbtTag.toString());
+          player.sendMessage(new TextComponentString("NBTTagCompound: " + nbtTag));
+        });
         break;
       }
       case 2: {

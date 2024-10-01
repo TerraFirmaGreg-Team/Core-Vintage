@@ -43,7 +43,7 @@ public abstract class BlockSoil extends BaseBlock implements ISoilBlock {
     this.type = type;
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .sound(SoundType.GROUND)
       .harvestLevel(ToolClasses.SHOVEL, 0)
       .fallable(this, variant.getSpecification())

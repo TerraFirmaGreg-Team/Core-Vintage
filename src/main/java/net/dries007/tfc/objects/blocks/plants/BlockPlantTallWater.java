@@ -1,19 +1,14 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -31,23 +26,27 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPlant {
+import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER;
+
+public class BlockPlantTallWater extends BlockPlantWater implements IGrowable, ITallPlant {
 
   private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
-  private static final Map<Plant, BlockCactusTFC> MAP = new HashMap<>();
+  private static final Map<Plant, BlockPlantTallWater> MAP = new HashMap<>();
 
-  public BlockCactusTFC(Plant plant) {
+  public BlockPlantTallWater(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
-
-    setSoundType(SoundType.GROUND);
-    setHardness(0.25F);
   }
 
-  public static BlockCactusTFC get(Plant plant) {
-    return MAP.get(plant);
+  public static BlockPlantTallWater get(Plant plant) {
+    return BlockPlantTallWater.MAP.get(plant);
+  }
+
+  @Override
+  public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
+    super.onBlockHarvested(worldIn, pos, state, player);
   }
 
   @Override
@@ -74,36 +73,12 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
   }
 
   @Override
-  public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return false;
-  }
-
-  @Override
-  public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-    entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
-  }
-
-  @Override
   @NotNull
   public Block.EnumOffsetType getOffsetType() {
     return EnumOffsetType.XYZ;
   }
 
   @Override
-  public @NotNull Weight getWeight(ItemStack stack) {
-    return Weight.MEDIUM; // stacksize = 16
-  }
-
-  @Override
-  public @NotNull Size getSize(ItemStack stack) {
-    return Size.SMALL; // Can store everywhere
-  }
-
-  @Override
-  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
-  }
-
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     if (!worldIn.isAreaLoaded(pos, 1)) {
       return;
@@ -118,8 +93,20 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
         if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
           grow(worldIn, rand, pos, state);
         } else if (j < 3) {
-          worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod())
-                                          .withProperty(AGE, j + 1)
+          worldIn.setBlockState(pos, state.withProperty(AGE, j + 1)
+                                          .withProperty(PART, getPlantPart(worldIn, pos)));
+        }
+        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+      }
+    } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
+               !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+      int j = state.getValue(AGE);
+
+      if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+        if (j == 0 && canShrink(worldIn, pos)) {
+          shrink(worldIn, pos);
+        } else if (j > 0) {
+          worldIn.setBlockState(pos, state.withProperty(AGE, j - 1)
                                           .withProperty(PART, getPlantPart(worldIn, pos)));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
@@ -131,11 +118,16 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
 
   @Override
   public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+    IBlockState water = plant.getWaterType();
     int i;
     //noinspection StatementWithEmptyBody
     for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i)
       ;
-    return i < plant.getMaxHeight() && worldIn.isAirBlock(pos.up()) && canBlockStay(worldIn, pos.up(), state);
+    if (water == SALT_WATER) {
+      return i < plant.getMaxHeight() && BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
+    } else {
+      return i < plant.getMaxHeight() && BlockUtils.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
+    }
   }
 
   @Override
@@ -146,12 +138,21 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
   @Override
   public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
     worldIn.setBlockState(pos.up(), this.getDefaultState());
-    IBlockState iblockstate = state.withProperty(DAYPERIOD, getDayPeriod())
-                                   .withProperty(AGE, 0)
+    IBlockState iblockstate = state.withProperty(AGE, 0)
                                    .withProperty(growthStageProperty, plant.getStageForMonth())
                                    .withProperty(PART, getPlantPart(worldIn, pos));
     worldIn.setBlockState(pos, iblockstate);
     iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
+  }
+
+  private boolean canShrink(World worldIn, BlockPos pos) {
+    return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
+                                                                          .getBlock() != this;
+  }
+
+  public void shrink(World worldIn, BlockPos pos) {
+    worldIn.setBlockState(pos, plant.getWaterType());
+    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
   }
 
   @Override
@@ -162,21 +163,9 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
       return false;
     }
     if (state.getBlock() == this) {
-      boolean flag = true;
-      for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
-        IBlockState blockState = worldIn.getBlockState(pos.offset(enumfacing));
-        Material material = blockState.getMaterial();
-
-        if (material.isSolid() || material == Material.LAVA) {
-          flag = blockState.getBlock() == this;
-        }
-      }
-
-      return flag &&
-             soil.getBlock()
+      return soil.getBlock()
                  .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) &&
-             plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
-             plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+             plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
     return this.canSustainBush(soil);
   }
@@ -184,13 +173,11 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
   @Override
   @NotNull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return FULL_BLOCK_AABB.offset(state.getOffset(source, pos));
+    return getTallBoundingBax(state.getValue(AGE), state, source, pos);
   }
 
   @Override
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-    if (!this.canBlockStay(worldIn, pos, state)) {
-      worldIn.destroyBlock(pos, true);
-    }
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
   }
 }

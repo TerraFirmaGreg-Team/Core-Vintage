@@ -4,7 +4,10 @@ import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.network.IPacketService;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
+import su.terrafirmagreg.modules.ModuleContainer;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.damage.HandlerDamageResistance;
@@ -53,10 +56,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.ModuleContainer.CORE;
-
 @Module(
-  moduleID = CORE,
+  moduleID = ModuleContainer.CORE,
   description = "Core TFG content. Disabling this disables the entire mod and all its module.",
   coreModule = true
 )
@@ -64,12 +65,14 @@ public final class ModuleCore extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleCore.class.getSimpleName());
 
-  public static final CreativeTabs CORE_TAB = BaseCreativeTab.of("misc", "core/wand");
+  public static CreativeTabs TAB;
+  public static RegistryManager REGISTRY;
+  public static IPacketService PACKET_SERVICE;
 
   public ModuleCore() {
-
-    this.enableAutoRegistry(CORE_TAB);
-    this.enableNetwork();
+    TAB = BaseCreativeTab.of("misc", "core/wand");
+    REGISTRY = enableAutoRegistry(TAB);
+    PACKET_SERVICE = enableNetwork();
   }
 
   @Override

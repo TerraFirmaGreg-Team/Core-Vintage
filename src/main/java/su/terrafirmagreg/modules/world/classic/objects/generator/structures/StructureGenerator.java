@@ -34,7 +34,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import tfcflorae.TFCFlorae;
 
 import java.util.Map;
@@ -230,12 +230,8 @@ public class StructureGenerator extends WorldGenerator {
 
           world.setBlockState(entry.getKey(), state, 3);
 
-          var tile = TileUtils.getTile(world, entry.getKey());
-          if (tile == null) {continue;}
-
-          if (tile instanceof TileEntityLockableLoot tileEntityLockableLoot) {
-            tileEntityLockableLoot.setLootTable(new ResourceLocation(data[1]), rand.nextLong());
-          }
+          var tile = TileUtils.getTile(world, entry.getKey(), TileEntityLockableLoot.class);
+          tile.ifPresent(tileEntityLockableLoot -> tileEntityLockableLoot.setLootTable(new ResourceLocation(data[1]), rand.nextLong()));
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -255,7 +251,7 @@ public class StructureGenerator extends WorldGenerator {
               for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
                 if (world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock() == Blocks.AIR ||
                     world.getBlockState(new BlockPos(posX, posY, posZ))
-                         .getBlock() == BlockPlantTFC.get(plant)) {
+                         .getBlock() == BlockPlant.get(plant)) {
                   final IBlockState current = world.getBlockState(position);
 
                   if (BlockUtils.isSand(current)) {

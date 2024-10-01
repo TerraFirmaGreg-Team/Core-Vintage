@@ -88,8 +88,8 @@ public class TileFridge extends BaseTileTickableInventory implements IAmbientalT
 
   @Override
   public void setAndUpdateSlots(int slot) {
-    ModuleDevice.getPacketService()
-                .sendToAllAround(new SCPacketTileEntity(this), world.provider.getDimension(), pos, 64);
+    ModuleDevice.PACKET_SERVICE
+      .sendToAllAround(new SCPacketTileEntity(this), world.provider.getDimension(), pos, 64);
     super.setAndUpdateSlots(slot);
   }
 
@@ -115,18 +115,12 @@ public class TileFridge extends BaseTileTickableInventory implements IAmbientalT
   @Override
   public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
     if (!isMainBlock()) {
-      var tile = TileUtils.getTile(world, pos.up(), TileFridge.class);
-      if (tile != null) {
-        return tile.hasCapability(capability, facing);
-      } else {
-        return false;
-      }
+      return TileUtils.getTile(world, pos.up(), TileFridge.class).map(tile -> tile.hasCapability(capability, facing)).orElse(false);
     }
     if (facing == null || facing == this.getRotation().getOpposite()) {
       if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
         return true;
-      } else if (TechConfig.DEVICES.acceptGTCEEU && GameUtils.isModLoaded("gregtech") &&
-                 capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
+      } else if (TechConfig.DEVICES.acceptGTCEEU && GameUtils.isModLoaded("gregtech") && capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
         return true;
       }
     }
@@ -137,12 +131,7 @@ public class TileFridge extends BaseTileTickableInventory implements IAmbientalT
   @SuppressWarnings("unchecked")
   public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
     if (!isMainBlock()) {
-      var tile = TileUtils.getTile(world, pos.up(), TileFridge.class);
-      if (tile != null) {
-        return tile.getCapability(capability, facing);
-      } else {
-        return null;
-      }
+      return TileUtils.getTile(world, pos.up(), TileFridge.class).map(tile -> tile.getCapability(capability, facing)).orElse(null);
     }
     if (facing == null || facing == this.getRotation().getOpposite()) {
       if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
@@ -207,7 +196,7 @@ public class TileFridge extends BaseTileTickableInventory implements IAmbientalT
   //    public double getDemandedEnergy() {
   //        if (!isMainBlock()) {
   //            TileFridge tile = TileUtils.getTile(world, pos.up(), TileFridge.class);
-  //            if (tile != null && tile.addedToIc2Network) {
+  //            if (tile.isPresent() && tile.addedToIc2Network) {
   //                return Math.ceil(tile.energyContainer.receiveEnergy(Integer.MAX_VALUE, true) / (double) TechConfig.DEVICES.ratioIc2);
   //            }
   //            return 0;
@@ -224,7 +213,7 @@ public class TileFridge extends BaseTileTickableInventory implements IAmbientalT
   //    public double injectEnergy(EnumFacing facing, double amount, double voltage) {
   //        if (!isMainBlock()) {
   //            TileFridge tile = TileUtils.getTile(world, pos.up(), TileFridge.class);
-  //            if (tile != null && tile.addedToIc2Network) {
+  //            if (tile.isPresent() && tile.addedToIc2Network) {
   //                tile.energyContainer.receiveEnergy((int) Math.ceil(amount) * TechConfig.DEVICES.ratioIc2, false);
   //            }
   //            return 0;
@@ -254,7 +243,7 @@ public class TileFridge extends BaseTileTickableInventory implements IAmbientalT
   //    public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing facing) {
   //        if (!isMainBlock()) {
   //            TileFridge tile = TileUtils.getTile(world, pos.up(), TileFridge.class);
-  //            if (tile == null || !tile.addedToIc2Network) {
+  //            if (tile.isPresent() || !tile.addedToIc2Network) {
   //                return false;
   //            }
   //        }
@@ -381,9 +370,9 @@ public class TileFridge extends BaseTileTickableInventory implements IAmbientalT
       }
       if (++serverUpdate % 40 == 0) {
         serverUpdate = 0;
-        ModuleDevice.getPacketService()
-                    .sendToAllAround(new SCPacketFridge(pos, efficiency), world.provider.getDimension(),
-                                     pos, 20);
+        ModuleDevice.PACKET_SERVICE
+          .sendToAllAround(new SCPacketFridge(pos, efficiency), world.provider.getDimension(),
+                           pos, 20);
       }
     }
   }

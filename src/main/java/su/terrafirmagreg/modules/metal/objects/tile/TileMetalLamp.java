@@ -47,7 +47,7 @@ public class TileMetalLamp
   private boolean powered = false;
 
   public TileMetalLamp() {
-    CAPACITY = ConfigMetal.BLOCKS.LAMP.tank;
+    CAPACITY = ConfigMetal.BLOCK.LAMP.tank;
     this.tank.setCapacity(CAPACITY);
     this.tank.setTileEntity(this);
   }

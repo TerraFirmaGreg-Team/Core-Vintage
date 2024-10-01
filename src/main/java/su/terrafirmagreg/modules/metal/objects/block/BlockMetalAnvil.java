@@ -68,6 +68,8 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
     this.type = type;
 
     getSettings()
+      .registryKey(type.getRegistryKey(variant))
+      .customResource(variant.getCustomResource())
       .sound(SoundType.ANVIL)
       .nonFullCube()
       .nonOpaque()
@@ -94,9 +96,7 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
   //		return 2016; //1400
   //	}
 
-  protected EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World worldIn,
-                                       BlockPos pos, EnumHand hand, EnumFacing facing,
-                                       float hitX, float hitY, float hitZ) {
+  protected EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (facing != null) {
       BlockPos placedPos = pos.offset(facing);
       BlockPos supportPos = placedPos.down();
@@ -142,10 +142,7 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TileMetalAnvil.class);
-    if (tile != null) {
-      tile.onBreakBlock(worldIn, pos, state);
-    }
+    TileUtils.getTile(worldIn, pos, TileMetalAnvil.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
   }
 
@@ -155,78 +152,75 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock, IProvider
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-                                  EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                  float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (hand == EnumHand.OFF_HAND) {
       return false;
     }
-    var tile = TileUtils.getTile(worldIn, pos, TileMetalAnvil.class);
-    if (tile == null) {
-      return false;
-    }
-    IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-    if (cap == null) {
-      return false;
-    }
-    if (playerIn.isSneaking()) {
-      ItemStack heldItem = playerIn.getHeldItem(hand);
-      // Extract requires main hand empty
-      if (heldItem.isEmpty()) {
-        // Only check the input slots
-        for (int i = 0; i < 2; i++) {
-          ItemStack stack = cap.getStackInSlot(i);
-          if (!stack.isEmpty()) {
-            // Give the item to player in the main hand
-            ItemStack result = cap.extractItem(i, 1, false);
-            playerIn.setHeldItem(hand, result);
+    return TileUtils.getTile(worldIn, pos, TileMetalAnvil.class).map(tile -> {
+      IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+      if (cap == null) {
+        return false;
+      }
+      if (playerIn.isSneaking()) {
+        ItemStack heldItem = playerIn.getHeldItem(hand);
+        // Extract requires main hand empty
+        if (heldItem.isEmpty()) {
+          // Only check the input slots
+          for (int i = 0; i < 2; i++) {
+            ItemStack stack = cap.getStackInSlot(i);
+            if (!stack.isEmpty()) {
+              // Give the item to player in the main hand
+              ItemStack result = cap.extractItem(i, 1, false);
+              playerIn.setHeldItem(hand, result);
+              return true;
+            }
+          }
+        }
+        // Welding requires a hammer in main hand
+        else if (tile.isItemValid(TileMetalAnvil.SLOT_HAMMER, heldItem)) {
+          if (!worldIn.isRemote && tile.attemptWelding(playerIn)) {
+            // Valid welding occurred.
+            worldIn.playSound(null, pos, TFCSounds.ANVIL_IMPACT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+            double x = pos.getX() + 0.5;
+            double y = pos.getY() + 0.69;
+            double z = pos.getZ() + 0.5;
+            for (int i = 0; i < RNG.nextInt(5) + 3; i++) {
+              TFCParticles.SPARK.sendToAllNear(worldIn, x + (RNG.nextFloat() - 0.5) / 7, y,
+                                               z + (RNG.nextFloat() - 0.5) / 7, 6 * (RNG.nextFloat() - 0.5), 2D,
+                                               6 * (RNG.nextFloat() - 0.5), 22);
+            }
             return true;
           }
         }
-      }
-      // Welding requires a hammer in main hand
-      else if (tile.isItemValid(TileMetalAnvil.SLOT_HAMMER, heldItem)) {
-        if (!worldIn.isRemote && tile.attemptWelding(playerIn)) {
-          // Valid welding occurred.
-          worldIn.playSound(null, pos, TFCSounds.ANVIL_IMPACT, SoundCategory.PLAYERS, 1.0f, 1.0f);
-          double x = pos.getX() + 0.5;
-          double y = pos.getY() + 0.69;
-          double z = pos.getZ() + 0.5;
-          for (int i = 0; i < RNG.nextInt(5) + 3; i++) {
-            TFCParticles.SPARK.sendToAllNear(worldIn, x + (RNG.nextFloat() - 0.5) / 7, y,
-                                             z + (RNG.nextFloat() - 0.5) / 7, 6 * (RNG.nextFloat() - 0.5), 2D,
-                                             6 * (RNG.nextFloat() - 0.5), 22);
-          }
-          return true;
-        }
-      }
-      //If main hand isn't empty and is not a hammer
-      else {
-        //Try inserting items
-        for (int i = 0; i < 4; i++) {
-          // Check the input slots and flux. Do NOT check the hammer slot
-          if (i == TileMetalAnvil.SLOT_HAMMER) {
-            continue;
-          }
-          // Try to insert an item
-          // Hammers will not be inserted since we already checked if heldItem is a hammer for attemptWelding
-          if (tile.isItemValid(i, heldItem) && tile.getSlotLimit(i) > cap.getStackInSlot(i)
-                                                                         .getCount()) {
-            ItemStack result = cap.insertItem(i, heldItem, false);
-            playerIn.setHeldItem(hand, result);
-            ModuleMetal.LOGGER.info("Inserted {} into slot {}", heldItem.getDisplayName(), i);
-            return true;
+        //If main hand isn't empty and is not a hammer
+        else {
+          //Try inserting items
+          for (int i = 0; i < 4; i++) {
+            // Check the input slots and flux. Do NOT check the hammer slot
+            if (i == TileMetalAnvil.SLOT_HAMMER) {
+              continue;
+            }
+            // Try to insert an item
+            // Hammers will not be inserted since we already checked if heldItem is a hammer for attemptWelding
+            if (tile.isItemValid(i, heldItem) && tile.getSlotLimit(i) > cap.getStackInSlot(i)
+                                                                           .getCount()) {
+              ItemStack result = cap.insertItem(i, heldItem, false);
+              playerIn.setHeldItem(hand, result);
+              ModuleMetal.LOGGER.info("Inserted {} into slot {}", heldItem.getDisplayName(), i);
+              return true;
+            }
           }
         }
+      } else {
+        // not sneaking, so try and open GUI
+        if (!worldIn.isRemote) {
+          GuiHandler.openGui(worldIn, pos, playerIn);
+        }
+        return true;
       }
-    } else {
-      // not sneaking, so try and open GUI
-      if (!worldIn.isRemote) {
-        GuiHandler.openGui(worldIn, pos, playerIn);
-      }
-      return true;
-    }
-    return false;
+      return false;
+    }).orElse(false);
+
   }
 
   @Override

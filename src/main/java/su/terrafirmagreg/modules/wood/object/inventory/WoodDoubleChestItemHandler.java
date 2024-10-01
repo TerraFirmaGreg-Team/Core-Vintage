@@ -43,13 +43,8 @@ public class WoodDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
       Block block = world.getBlockState(blockPos).getBlock();
 
       if (block == blockType) {
-        var tile = TileUtils.getTile(world, blockPos);
-        if (tile == null) {continue;}
-
-        if (tile instanceof TileEntityChest otherChest) {
-          return new WoodDoubleChestItemHandler(chest, otherChest, enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH);
-
-        }
+        var tile = TileUtils.getTile(world, blockPos, TileEntityChest.class);
+        tile.map(tileEntityChest -> new WoodDoubleChestItemHandler(chest, tileEntityChest, enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH));
       }
     }
     return VanillaDoubleChestItemHandler.NO_ADJACENT_CHESTS_INSTANCE; //All alone

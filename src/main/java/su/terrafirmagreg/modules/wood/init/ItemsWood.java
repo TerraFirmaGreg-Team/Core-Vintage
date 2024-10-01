@@ -30,32 +30,32 @@ public final class ItemsWood {
     BOAT = WoodItemVariant
       .builder("boat")
       .factory(ItemWoodBoat::new)
-      .build(registry);
+      .build();
 
     LUMBER = WoodItemVariant
       .builder("lumber")
       .factory(ItemWoodLumber::new)
-      .build(registry);
+      .build();
 
     WHEEL = WoodItemVariant
       .builder("wheel")
       .factory(ItemWoodWheel::new)
-      .build(registry);
+      .build();
 
     SUPPLY_CART = WoodItemVariant
       .builder("supply_cart")
       .factory(ItemWoodSupplyCart::new)
-      .build(registry);
+      .build();
 
     ANIMAL_CART = WoodItemVariant
       .builder("animal_cart")
       .factory(ItemWoodAnimalCart::new)
-      .build(registry);
+      .build();
 
     PLOW_CART = WoodItemVariant
       .builder("plow_cart")
       .factory(ItemWoodPlowCart::new)
-      .build(registry);
+      .build();
 
     STICK_BUNDLE = registry.item(new ItemWoodMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"));
     STICK_BUNCH = registry.item(new ItemWoodMisc("stick_bunch", Size.NORMAL, Weight.LIGHT));

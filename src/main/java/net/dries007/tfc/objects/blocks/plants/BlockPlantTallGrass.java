@@ -36,19 +36,19 @@ import java.util.Random;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
 
-public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, ITallPlant {
+public class BlockPlantTallGrass extends BlockPlantShortGrass implements IGrowable, ITallPlant {
 
   private static final PropertyEnum<ITallPlant.EnumBlockPart> PART = PropertyEnum.create("part", ITallPlant.EnumBlockPart.class);
-  private static final Map<Plant, BlockTallGrassTFC> MAP = new HashMap<>();
+  private static final Map<Plant, BlockPlantTallGrass> MAP = new HashMap<>();
 
-  public BlockTallGrassTFC(Plant plant) {
+  public BlockPlantTallGrass(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockTallGrassTFC get(Plant plant) {
+  public static BlockPlantTallGrass get(Plant plant) {
     return MAP.get(plant);
   }
 

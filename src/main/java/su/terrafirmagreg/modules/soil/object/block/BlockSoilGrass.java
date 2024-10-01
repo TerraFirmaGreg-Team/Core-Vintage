@@ -48,7 +48,7 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
     super(Settings.of(Material.GRASS), variant, type);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .sound(SoundType.PLANT)
       .hardness(2.1F)
       .randomTicks()

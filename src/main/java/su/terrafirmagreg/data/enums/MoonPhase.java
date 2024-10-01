@@ -1,4 +1,4 @@
-package su.terrafirmagreg.data;
+package su.terrafirmagreg.data.enums;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;

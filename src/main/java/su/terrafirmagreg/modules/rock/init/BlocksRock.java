@@ -88,31 +88,31 @@ public final class BlocksRock {
       .baseHardness(6f)
       .factory(BlockRockCobble::new)
       .fallingSpecification(VERTICAL_AND_HORIZONTAL_ROCK)
-      .build(registry);
+      .build();
 
     COBBLE_STAIRS = RockBlockVariant
       .builder("cobble/stairs")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockStairs(COBBLE.get(t), v, t))
-      .build(registry);
+      .build();
 
     COBBLE_SLAB_DOUBLE = RockBlockVariant
       .builder("cobble/slab_double")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockSlab.Double(COBBLE.get(t), v, t))
-      .build(registry);
+      .build();
 
     COBBLE_SLAB = RockBlockVariant
       .builder("cobble/slab")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockSlab.Half(COBBLE.get(t), COBBLE_SLAB_DOUBLE.get(t), v, t))
-      .build(registry);
+      .build();
 
     COBBLE_WALL = RockBlockVariant
       .builder("cobble/wall")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockWall(COBBLE.get(t), v, t))
-      .build(registry);
+      .build();
 
     RAW = RockBlockVariant
       .builder("raw")
@@ -120,163 +120,163 @@ public final class BlocksRock {
       .factory(BlockRockRaw::new)
       .isStoneType()
       .fallingSpecification(COLLAPSABLE_ROCK)
-      .build(registry);
+      .build();
 
     RAW_STAIRS = RockBlockVariant
       .builder("raw/stairs")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockStairs(RAW.get(t), v, t))
-      .build(registry);
+      .build();
 
     RAW_SLAB_DOUBLE = RockBlockVariant
       .builder("raw/slab_double")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockSlab.Double(RAW.get(t), v, t))
-      .build(registry);
+      .build();
 
     RAW_SLAB = RockBlockVariant
       .builder("raw/slab")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockSlab.Half(RAW.get(t), RAW_SLAB_DOUBLE.get(t), v, t))
-      .build(registry);
+      .build();
 
     RAW_WALL = RockBlockVariant
       .builder("raw/wall")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockWall(RAW.get(t), v, t))
-      .build(registry);
+      .build();
 
     BRICKS = RockBlockVariant
       .builder("bricks")
       .baseHardness(6f)
       .factory(BlockRockBricks::new)
-      .build(registry);
+      .build();
 
     BRICKS_STAIRS = RockBlockVariant
       .builder("bricks/stairs")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockStairs(BRICKS.get(t), v, t))
-      .build(registry);
+      .build();
 
     BRICKS_SLAB_DOUBLE = RockBlockVariant
       .builder("bricks/slab_double")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockSlab.Double(BRICKS.get(t), v, t))
-      .build(registry);
+      .build();
 
     BRICKS_SLAB = RockBlockVariant
       .builder("bricks/slab")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockSlab.Half(BRICKS.get(t), BRICKS_SLAB_DOUBLE.get(t), v, t))
-      .build(registry);
+      .build();
 
     BRICKS_WALL = RockBlockVariant
       .builder("bricks/wall")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockWall(BRICKS.get(t), v, t))
-      .build(registry);
+      .build();
 
     SMOOTH = RockBlockVariant
       .builder("smooth")
       .baseHardness(6f)
       .factory(BlockRockSmooth::new)
       .fallingSpecification(COLLAPSABLE_ROCK)
-      .build(registry);
+      .build();
 
     SMOOTH_STAIRS = RockBlockVariant
       .builder("smooth/stairs")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockStairs(SMOOTH.get(t), v, t))
-      .build(registry);
+      .build();
 
     SMOOTH_SLAB_DOUBLE = RockBlockVariant
       .builder("smooth/slab_double")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockSlab.Double(SMOOTH.get(t), v, t))
-      .build(registry);
+      .build();
 
     SMOOTH_SLAB = RockBlockVariant
       .builder("smooth/slab")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockSlab.Half(SMOOTH.get(t), SMOOTH_SLAB_DOUBLE.get(t), v, t))
-      .build(registry);
+      .build();
 
     SMOOTH_WALL = RockBlockVariant
       .builder("smooth/wall")
       .baseHardness(6f)
       .factory((v, t) -> new BlockRockWall(SMOOTH.get(t), v, t))
-      .build(registry);
+      .build();
 
     BRICKS_CRACKED = RockBlockVariant
       .builder("bricks_cracked")
       .baseHardness(6f)
       .factory(BlockRockBricks::new)
-      .build(registry);
+      .build();
 
     CHISELED = RockBlockVariant
       .builder("chiseled")
       .baseHardness(6f)
       .factory(BlockRockBricks::new)
-      .build(registry);
+      .build();
 
     GRAVEL = RockBlockVariant
       .builder("gravel")
       .baseHardness(6f)
       .factory(BlockRockGravel::new)
       .fallingSpecification(VERTICAL_AND_HORIZONTAL)
-      .build(registry);
+      .build();
 
     SAND = RockBlockVariant
       .builder("sand")
       .baseHardness(6f)
       .factory(BlockRockSand::new)
       .fallingSpecification(VERTICAL_AND_HORIZONTAL)
-      .build(registry);
+      .build();
 
     SURFACE = RockBlockVariant
       .builder("surface")
       .baseHardness(6f)
       .factory(BlockRockSurface::new)
       .fallingSpecification(VERTICAL_ONLY)
-      .build(registry);
+      .build();
 
     SPELEOTHEM = RockBlockVariant
       .builder("speleothem")
       .baseHardness(6f)
       .factory(BlockRockSpeleothem::new)
-      .build(registry);
+      .build();
 
     BUTTON = RockBlockVariant
       .builder("button")
       .baseHardness(6f)
       .factory(BlockRockButton::new)
-      .build(registry);
+      .build();
 
     PRESSURE_PLATE = RockBlockVariant
       .builder("pressure_plate")
       .baseHardness(6f)
       .factory(BlockRockPressurePlate::new)
-      .build(registry);
+      .build();
 
     ANVIL = RockBlockVariant
       .builder("anvil")
       .baseHardness(6f)
       .factory(BlockRockAnvil::new)
       .fallingSpecification(COLLAPSABLE_ROCK)
-      .build(registry);
+      .build();
 
     MAGMA = RockBlockVariant
       .builder("magma")
       .baseHardness(6f)
       .factory(BlockRockMagma::new)
       .fallingSpecification(COLLAPSABLE_ROCK)
-      .build(registry);
+      .build();
 
     STAND_GEM = RockBlockVariant
       .builder("stand_gem")
       .baseHardness(1f)
       .factory(BlockRockStandGem::new)
-      .build(registry);
+      .build();
 
     ALABASTER_BRICKS = registry.block(new BlockAlabasterBricks());
     ALABASTER_SMOOTH = registry.block(new BlockAlabasterSmooth());

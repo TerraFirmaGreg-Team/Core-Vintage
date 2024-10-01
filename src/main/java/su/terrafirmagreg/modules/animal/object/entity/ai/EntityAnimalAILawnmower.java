@@ -7,7 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
-import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrass;
 
 public class EntityAnimalAILawnmower extends EntityAIBase {
 
@@ -56,7 +56,7 @@ public class EntityAnimalAILawnmower extends EntityAIBase {
   private boolean isAtShortGrass() {
     BlockPos pos = grassEater.getPosition();
     IBlockState state = entityWorld.getBlockState(pos);
-    return state.getBlock() instanceof BlockShortGrassTFC;
+    return state.getBlock() instanceof BlockPlantShortGrass;
   }
 
   public int getTimer() {

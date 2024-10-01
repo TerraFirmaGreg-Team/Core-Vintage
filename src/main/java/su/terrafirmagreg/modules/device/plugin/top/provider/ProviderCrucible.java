@@ -32,43 +32,34 @@ public class ProviderCrucible implements IProbeInfoProvider {
   }
 
   @Override
-  public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
-                           IBlockState state, IProbeHitData hitData) {
+  public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
 
     if (block instanceof BlockCrucible) {
-      var tile = TileUtils.getTile(world, pos, TileCrucible.class);
-      if (tile == null) {
-        return;
-      }
+      TileUtils.getTile(world, pos, TileCrucible.class).ifPresent(tile -> {
+        List<String> currentTooltip = new ArrayList<>();
 
-      List<String> currentTooltip = new ArrayList<>();
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt = tile.writeToNBT(nbt);
 
-      NBTTagCompound nbt = new NBTTagCompound();
-      nbt = tile.writeToNBT(nbt);
+        var amount = tile.getAlloy().getAmount();
+        if (amount > 0) {
+          Metal metal = tile.getAlloyResult();
+          currentTooltip.add(
+            new TextComponentTranslation(
+              ModUtils.localize("top", "metal.output"), amount, new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
+        }
+        float temperature = nbt.getFloat("temp");
+        String heatTooltip = Heat.getTooltip(temperature);
+        if (heatTooltip != null) {
+          currentTooltip.add(heatTooltip);
+        }
 
-      var amount = tile.getAlloy().getAmount();
-      if (amount > 0) {
-        Metal metal = tile.getAlloyResult();
-        currentTooltip.add(
-          new TextComponentTranslation(ModUtils.localize("top", "metal.output"), amount,
-                                       new TextComponentTranslation(
-                                         metal.getTranslationKey()).getFormattedText()).getFormattedText());
-      }
-      float temperature = nbt.getFloat("temp");
-      String heatTooltip = Heat.getTooltip(temperature);
-      if (heatTooltip != null) {
-        currentTooltip.add(heatTooltip);
-      }
-
-      for (String string : currentTooltip) {
-        info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-            .text(string);
-      }
-
+        for (String string : currentTooltip) {
+          info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).text(string);
+        }
+      });
     }
-
   }
-
 }

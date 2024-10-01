@@ -82,16 +82,15 @@ public class BlockJackOLantern extends BlockHorizontal implements ICapabilitySiz
   }
 
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
+    if (worldIn.isRemote) {return;}
     //taken from BlockTorchTFC
-    var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    if (tile != null) {
-      //last twice as long as a torch. balance this by being less bright
-      if (!worldIn.isRemote && tile.getTicksSinceUpdate() > (2L * ConfigTFC.General.OVERRIDES.torchTime) &&
-          ConfigTFC.General.OVERRIDES.torchTime > 0) {
-        worldIn.setBlockState(pos, state.withProperty(LIT, false));
-        tile.resetCounter();
-      }
-    }
+    //last twice as long as a torch. balance this by being less bright
+    TileUtils.getTile(worldIn, pos, TETickCounter.class)
+             .filter(tile -> tile.getTicksSinceUpdate() > (2L * ConfigTFC.General.OVERRIDES.torchTime) && ConfigTFC.General.OVERRIDES.torchTime > 0)
+             .ifPresent(tile -> {
+               worldIn.setBlockState(pos, state.withProperty(LIT, false));
+               tile.resetCounter();
+             });
   }
 
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
@@ -100,37 +99,31 @@ public class BlockJackOLantern extends BlockHorizontal implements ICapabilitySiz
                   .isReplaceable(worldIn, pos) && worldIn.isSideSolid(pos.down(), EnumFacing.UP);
   }
 
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                  float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     //taken from BlockTorchTFC
     if (!worldIn.isRemote) {
       ItemStack stack = playerIn.getHeldItem(hand);
-      TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-      if (BlockTorchTFC.canLight(stack)) {
-        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
-        if (tile != null) {
+      TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(tile -> {
+        if (BlockTorchTFC.canLight(stack)) {
+          worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
           tile.resetCounter();
+        } else {
+          worldIn.setBlockState(pos, state.withProperty(LIT, false));
         }
-      } else {
-        worldIn.setBlockState(pos, state.withProperty(LIT, false));
-      }
+      });
     }
     return true;
   }
 
   @SuppressWarnings("deprecation")
-  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-                                          EntityLivingBase placer) {
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
   }
 
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     //taken from BlockTorchTFC
     // Set the initial counter value
-    var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    if (tile != null) {
-      tile.resetCounter();
-    }
+    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 

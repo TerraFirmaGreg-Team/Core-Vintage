@@ -25,7 +25,7 @@ public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
     this.settings = Settings.of(Material.CIRCUITS);
 
     getSettings()
-      .registryKey(variant.getRegistryKey(type))
+      .registryKey(type.getRegistryKey(variant))
       .customResource(variant.getCustomResource())
       .hardness(0.5F)
       .sound(SoundType.WOOD)

@@ -52,8 +52,7 @@ public class CSPacketFreezeDryer implements IMessage, IMessageHandler<CSPacketFr
   public IMessage onMessage(CSPacketFreezeDryer msg, MessageContext ctx) {
     if (ctx.side == Side.SERVER) {
       final var world = ctx.getServerHandler().player.world;
-      var tile = TileUtils.getTile(world, new BlockPos(msg.xCoord, msg.yCoord, msg.zCoord), TileFreezeDryer.class);
-      if (tile != null) {
+      TileUtils.getTile(world, new BlockPos(msg.xCoord, msg.yCoord, msg.zCoord), TileFreezeDryer.class).ifPresent(tile -> {
         if (msg.bool == 0) {
           if (msg.mode) {
             tile.seal();
@@ -68,7 +67,7 @@ public class CSPacketFreezeDryer implements IMessage, IMessageHandler<CSPacketFr
             tile.stopPump();
           }
         }
-      }
+      });
     }
     return null;
   }

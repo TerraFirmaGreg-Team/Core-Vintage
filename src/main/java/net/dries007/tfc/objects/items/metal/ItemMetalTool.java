@@ -282,19 +282,18 @@ public class ItemMetalTool extends ItemMetal {
 
   @Override
   public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
+    if (worldIn.isRemote) {return true;}
     if (state.getBlockHardness(worldIn, pos) > 0 || type == Metal.ItemType.KNIFE || type == Metal.ItemType.SCYTHE) {
-      if (!worldIn.isRemote) {
-        stack.damageItem(1, entityLiving);
-      }
+      stack.damageItem(1, entityLiving);
     }
-    if (areaOfEffect > 1 && entityLiving instanceof EntityPlayer player && !worldIn.isRemote) {
+    if (areaOfEffect > 1 && entityLiving instanceof EntityPlayer player) {
       int areaPlus = areaOfEffect - 1; //First block already added
       for (BlockPos.MutableBlockPos extraPos : BlockPos.getAllInBoxMutable(pos.add(-areaPlus, -areaPlus, -areaPlus),
                                                                            pos.add(areaPlus, areaPlus, areaPlus))) {
         IBlockState st = worldIn.getBlockState(extraPos);
         if (!extraPos.equals(pos) && !worldIn.isAirBlock(extraPos) && canHarvestBlock(st)) {
           st.getBlock().onPlayerDestroy(worldIn, extraPos, st);
-          st.getBlock().harvestBlock(worldIn, player, extraPos, st, TileUtils.getTile(worldIn, extraPos), stack);
+          st.getBlock().harvestBlock(worldIn, player, extraPos, st, TileUtils.getTile(worldIn, extraPos).get(), stack);
           worldIn.setBlockToAir(extraPos);
           stack.damageItem(1, entityLiving);
         }

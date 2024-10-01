@@ -36,7 +36,7 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.ItemsTFCF;
-import net.dries007.tfc.types.PlantsTFCF;
+import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.CropTFCF;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -49,17 +49,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
+public class BlockPlant extends BlockBush implements ICapabilitySize {
 
   public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
   public static final PropertyInteger DAYPERIOD = PropertyInteger.create("dayperiod", 0, 3);
   private static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 1.0, 0.875);
-  private static final Map<Plant, BlockPlantTFC> MAP = new HashMap<>();
+  private static final Map<Plant, BlockPlant> MAP = new HashMap<>();
   public final PropertyInteger growthStageProperty;
   protected final Plant plant;
   protected final BlockStateContainer blockState;
 
-  public BlockPlantTFC(Plant plant) {
+  public BlockPlant(Plant plant) {
     super(plant.getMaterial());
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
@@ -78,7 +78,7 @@ public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
     }
   }
 
-  public static BlockPlantTFC get(Plant plant) {
+  public static BlockPlant get(Plant plant) {
     return MAP.get(plant);
   }
 
@@ -160,13 +160,14 @@ public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
     Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int currentStage = state.getValue(this.growthStageProperty);
     int expectedStage = this.plant.getStageForMonth(currentMonth);
-    if (!this.plant.getOreDictName().isPresent() && !worldIn.isRemote && (stack.getItem()
-                                                                               .getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-                                                                                                                                             .getHarvestLevel(stack, "scythe", player, state)
-                                                                                                                                        != -1)
-        && this.plant.getPlantType() != Plant.PlantType.SHORT_GRASS &&
+    if (!this.plant.getOreDictName().isPresent() &&
+        !worldIn.isRemote &&
+        (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 ||
+         stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1) &&
+        this.plant.getPlantType() != Plant.PlantType.SHORT_GRASS &&
         this.plant.getPlantType() != Plant.PlantType.TALL_GRASS) {
-      if (this.plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BLUE_GINGER)) {
+
+      if (this.plant == TFCRegistries.PLANTS.getValue(DefaultPlants.BLUE_GINGER)) {
         int chance;
         if (currentStage != 0 && expectedStage != 0) {
           chance = MathConstants.RNG.nextInt(2);
@@ -192,8 +193,7 @@ public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
 
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     if (!this.canBlockStay(worldIn, pos, state) && placer instanceof EntityPlayer && !((EntityPlayer) placer).isCreative() &&
-        !this.plant.getOreDictName()
-                   .isPresent()) {
+        !this.plant.getOreDictName().isPresent()) {
       spawnAsEntity(worldIn, pos, new ItemStack(this));
     }
 
@@ -330,19 +330,12 @@ public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
 
   @NotNull
   public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-    switch (this.plant.getPlantType()) {
-      case CACTUS:
-      case DESERT:
-      case DESERT_TALL_PLANT:
-        return EnumPlantType.Desert;
-      case FLOATING:
-      case FLOATING_SEA:
-        return EnumPlantType.Water;
-      case MUSHROOM:
-        return EnumPlantType.Cave;
-      default:
-        return EnumPlantType.Plains;
-    }
+    return switch (this.plant.getPlantType()) {
+      case CACTUS, DESERT, DESERT_TALL_PLANT -> EnumPlantType.Desert;
+      case FLOATING, FLOATING_SEA -> EnumPlantType.Water;
+      case MUSHROOM -> EnumPlantType.Cave;
+      default -> EnumPlantType.Plains;
+    };
   }
 
   @NotNull

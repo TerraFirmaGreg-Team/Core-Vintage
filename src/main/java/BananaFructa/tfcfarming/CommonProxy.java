@@ -78,8 +78,8 @@ public class CommonProxy {
     if (!event.getWorld().isRemote) {
       setTileEntity(event.getWorld(), event.getPos());
       if (TFCFarming.firmalifeLoaded) {
-        TEPlanter pte = TileUtils.getTile(event.getWorld(), event.getPos(), TEPlanter.class);
-        if (pte != null) {
+        var tile = TileUtils.getTile(event.getWorld(), event.getPos(), TEPlanter.class);
+        if (tile.isPresent()) {
           event.getWorld().setTileEntity(event.getPos(), TEPlanterN.class.newInstance());
           return;
         }
@@ -91,8 +91,8 @@ public class CommonProxy {
           Item i = supplier.get();
 
           if (i instanceof ItemSeedsTFC seeds) {
-            TEHangingPlanter hpte = TileUtils.getTile(event.getWorld(), event.getPos(), TEHangingPlanter.class);
-            if (hpte != null) {
+            var hpte = TileUtils.getTile(event.getWorld(), event.getPos(), TEHangingPlanter.class);
+            if (hpte.isPresent()) {
               ICrop crop = Utils.readDeclaredField(ItemSeedsTFC.class, seeds, "crop");
               if (crop != null) {
                 TETickCounter teHangingPlanter = TEHangingPlanterN.class.getConstructor(ICrop.class)
@@ -109,29 +109,30 @@ public class CommonProxy {
     }
   }
 
-  private void setTileEntity(World w, BlockPos pos)
-    throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-    var tile = TileUtils.getTile(w, pos, TECropBase.class);
-    if (tile == null) {
-      return;
-    }
-    if (TFCFarming.firmalifeLoaded && tile instanceof TEStemCrop && !(tile instanceof TEStemCropN)) {
-      TETickCounter teStemCropN = TEStemCropN.class.getConstructor(TECropBase.class).newInstance(tile);
-      teStemCropN.resetCounter();
-      w.setTileEntity(pos, teStemCropN);
-    } else if (!(tile instanceof TECropBaseN)) {
-      TECropBaseN teCropBaseN = new TECropBaseN(tile);
-      teCropBaseN.resetCounter();
-      w.setTileEntity(pos, teCropBaseN);
-    }
+  private void setTileEntity(World w, BlockPos pos) {
+    TileUtils.getTile(w, pos, TECropBase.class).ifPresent(tile -> {
+      if (TFCFarming.firmalifeLoaded && tile instanceof TEStemCrop && !(tile instanceof TEStemCropN)) {
+        TETickCounter teStemCropN;
+        try {
+          teStemCropN = TEStemCropN.class.getConstructor(TECropBase.class).newInstance(tile);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+          throw new RuntimeException(e);
+        }
+        teStemCropN.resetCounter();
+        w.setTileEntity(pos, teStemCropN);
+      } else if (!(tile instanceof TECropBaseN)) {
+        TECropBaseN teCropBaseN = new TECropBaseN(tile);
+        teCropBaseN.resetCounter();
+        w.setTileEntity(pos, teCropBaseN);
+      }
+    });
   }
 
   /**
    * sets tile entity to awaited blocks, nutrient map cleanup, passive nutrient growth
    */
   @SubscribeEvent
-  public void tickEvent(TickEvent.ServerTickEvent event)
-    throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+  public void tickEvent(TickEvent.ServerTickEvent event) {
     if (!awaiting.isEmpty()) {
       synchronized (awaiting) {
         for (Tuple<BlockPos, World> t : awaiting) {
@@ -184,16 +185,14 @@ public class CommonProxy {
               event.getItemStack().setCount(event.getItemStack().getCount() - 1);
 
             } else if (planter) {
-              var tile = TileUtils.getTile(event.getWorld(), event.getPos(), TEPlanterN.class);
-              if (tile != null && tile.fertilize(nutrientClass, value)) {
-                event.getItemStack().setCount(event.getItemStack().getCount() - 1);
-              }
+              TileUtils.getTile(event.getWorld(), event.getPos(), TEPlanterN.class)
+                       .filter(tile -> tile.fertilize(nutrientClass, value))
+                       .ifPresent(tile -> event.getItemStack().setCount(event.getItemStack().getCount() - 1));
 
             } else if (hangingPlanter) {
-              TEHangingPlanterN teHangingPlanterN = TileUtils.getTile(event.getWorld(), event.getPos(), TEHangingPlanterN.class);
-              if (teHangingPlanterN != null && teHangingPlanterN.fertilize(nutrientClass, value)) {
-                event.getItemStack().setCount(event.getItemStack().getCount() - 1);
-              }
+              TileUtils.getTile(event.getWorld(), event.getPos(), TEHangingPlanterN.class)
+                       .filter(tile -> tile.fertilize(nutrientClass, value))
+                       .ifPresent(tile -> event.getItemStack().setCount(event.getItemStack().getCount() - 1));
 
             }
           }

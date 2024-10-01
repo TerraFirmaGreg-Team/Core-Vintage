@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.animal.api.type;
 
+import su.terrafirmagreg.modules.world.classic.objects.spawner.EntitySpawnerWorldData;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.biome.Biome;
-
-import su.terrafirmagreg.modules.world.classic.objects.spawner.EntitySpawnerWorldData;
 
 import java.util.List;
 import java.util.Random;

@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 
@@ -26,7 +27,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.te.TEPlacedHide;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -135,20 +135,15 @@ public class BlockPlacedHide extends Block {
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                  float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    if (worldIn.isRemote) {return true;}
     ItemStack stack = playerIn.getHeldItem(hand);
-    if (OreDictionaryHelper.doesStackMatchOre(stack, "knife")) {
-      if (!worldIn.isRemote) {
-        // Account for the distance between the hitbox and where the hide is rendered
-        Vec3d point = calculatePoint(playerIn.getLookVec(), new Vec3d(hitX, hitY, hitZ));
-        stack.damageItem(1, playerIn);
-        TEPlacedHide tile = TileUtils.getTile(worldIn, pos, TEPlacedHide.class);
-        if (tile != null) {
-          tile.onClicked((float) point.x, (float) point.z);
-        }
-      }
-      return true;
+    if (OreDictUtils.contains(stack, "knife")) {
+
+      // Account for the distance between the hitbox and where the hide is rendered
+      Vec3d point = calculatePoint(playerIn.getLookVec(), new Vec3d(hitX, hitY, hitZ));
+      stack.damageItem(1, playerIn);
+      TileUtils.getTile(worldIn, pos, TEPlacedHide.class).ifPresent(tile -> tile.onClicked((float) point.x, (float) point.z));
     }
     return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
   }
@@ -193,10 +188,9 @@ public class BlockPlacedHide extends Block {
   }
 
   private ItemStack getItemStackDropped(IBlockAccess world, BlockPos pos, IBlockState state) {
-    TEPlacedHide tile = TileUtils.getTile(world, pos, TEPlacedHide.class);
-    if (tile != null && tile.isComplete()) {
-      return new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.SCRAPED, state.getValue(SIZE)));
-    }
-    return new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.SOAKED, state.getValue(SIZE)));
+    return TileUtils.getTile(world, pos, TEPlacedHide.class)
+                    .filter(TEPlacedHide::isComplete)
+                    .map(tile -> new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.SCRAPED, state.getValue(SIZE))))
+                    .orElseGet(() -> new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.SOAKED, state.getValue(SIZE))));
   }
 }

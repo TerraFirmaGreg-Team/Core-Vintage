@@ -1,14 +1,14 @@
 package net.dries007.tfc.objects.items;
 
-import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.item.ItemStack;
 
-import org.jetbrains.annotations.NotNull;
+import net.dries007.tfc.objects.Powder;
+import net.dries007.tfc.util.OreDictionaryHelper;
 
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
 

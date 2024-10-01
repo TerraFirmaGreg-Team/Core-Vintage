@@ -28,8 +28,9 @@ public abstract class CSBasePacketTile<REQ extends CSBasePacketTile> extends Bas
     World world = player.getEntityWorld();
 
     if (world.isBlockLoaded(message.blockPos)) {
-      var tile = TileUtils.getTile(world, message.blockPos);
-      return this.onMessage(message, ctx, tile);
+      return TileUtils.getTile(world, message.blockPos)
+                      .map(tile -> this.onMessage(message, ctx, tile))
+                      .orElse(null);
     }
 
     return null;

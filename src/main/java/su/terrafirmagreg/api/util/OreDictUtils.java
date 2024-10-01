@@ -17,9 +17,9 @@ import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.objects.items.ItemPowder;
-import net.dries007.tfc.types.PlantsTFCF;
+import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -185,8 +185,8 @@ public final class OreDictUtils {
     OreDictionary.registerOre("baleSisalFiber", new ItemStack(BlocksTFCF.SISAL_FIBER_BALE));
     OreDictionary.registerOre("baleYucca", new ItemStack(BlocksTFCF.YUCCA_BALE));
     OreDictionary.registerOre("baleYuccaFiber", new ItemStack(BlocksTFCF.YUCCA_FIBER_BALE));
-    OreDictionary.registerOre("glue", new ItemStack(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.RESIN))));
-    OreDictionary.registerOre("slimeball", new ItemStack(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.RESIN))));
+    OreDictionary.registerOre("glue", new ItemStack(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.RESIN))));
+    OreDictionary.registerOre("slimeball", new ItemStack(BlockPlant.get(TFCRegistries.PLANTS.getValue(DefaultPlants.RESIN))));
 
     // Flint
     OreDictionary.registerOre("flint", new ItemStack(Items.FLINT));

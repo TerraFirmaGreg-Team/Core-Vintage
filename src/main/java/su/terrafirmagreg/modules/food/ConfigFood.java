@@ -1,14 +1,14 @@
 package su.terrafirmagreg.modules.food;
 
-import com.cleanroommc.configanytime.ConfigAnytime;
-
-import net.dries007.tfc.util.config.DecayTooltipMode;
-
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import com.cleanroommc.configanytime.ConfigAnytime;
+
+import net.dries007.tfc.util.config.DecayTooltipMode;
 
 import static su.terrafirmagreg.data.Constants.MOD_ID;
 import static su.terrafirmagreg.data.Constants.MOD_NAME;

@@ -36,6 +36,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
+
 @MethodsReturnNonnullByDefault
 
 public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrowingPlant {
@@ -132,7 +134,7 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
       if (world.getBlockState(blockPos.up()).getMaterial().isReplaceable()) {
         world.setBlockState(blockPos.up(), BlockFruitTreeLeaves.get(tree)
                                                                .getDefaultState()
-                                                               .withProperty(BlockFruitTreeLeaves.HARVESTABLE, false));
+                                                               .withProperty(HARVESTABLE, false));
       }
     }
   }

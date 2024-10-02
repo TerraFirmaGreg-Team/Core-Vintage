@@ -21,6 +21,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+
 public class BlockPlantFloatingWater extends BlockPlant {
 
   private static final AxisAlignedBB LILY_PAD_AABB = new AxisAlignedBB(0.0D, -0.125D, 0.0D, 1.0D, 0.0625D, 1.0D);
@@ -40,7 +43,7 @@ public class BlockPlantFloatingWater extends BlockPlant {
   @Override
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, growthStageProperty, DAYPERIOD, AGE);
+    return new BlockStateContainer(this, growthStageProperty, DAYPERIOD, AGE_4);
   }
 
   @Override

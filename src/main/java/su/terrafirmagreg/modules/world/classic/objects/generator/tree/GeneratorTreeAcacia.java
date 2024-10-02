@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
+import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
 
 public class GeneratorTreeAcacia implements ITreeGenerator {
 

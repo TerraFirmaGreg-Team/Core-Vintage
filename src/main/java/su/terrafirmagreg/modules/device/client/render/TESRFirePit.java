@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
+import su.terrafirmagreg.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 
@@ -26,7 +27,8 @@ import org.lwjgl.opengl.GL11;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.EnumProp.FIRE_PIT_ATTACHMENT;
 import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_EXTRA_INPUT_END;
 import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_EXTRA_INPUT_START;
 
@@ -104,7 +106,7 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
     if (tile.hasWorld()) {
       IBlockState state = tile.getWorld().getBlockState(tile.getPos());
       if (state.getBlock() instanceof BlockFirePit
-          && state.getValue(BlockFirePit.ATTACHMENT) == BlockFirePit.FirePitAttachment.GRILL) {
+          && state.getValue(FIRE_PIT_ATTACHMENT) == EnumFirePitAttachment.GRILL) {
         IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null) {
           int rotation = tile.getBlockMetadata();

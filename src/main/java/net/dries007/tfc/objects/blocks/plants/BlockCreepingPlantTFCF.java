@@ -29,16 +29,17 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.ALL_FACES;
+import static su.terrafirmagreg.data.Properties.BoolProp.DOWN;
+import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.UP;
+import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+
 public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
-
-  static final PropertyBool DOWN = PropertyBool.create("down");
-  static final PropertyBool UP = PropertyBool.create("up");
-  static final PropertyBool NORTH = PropertyBool.create("north");
-  static final PropertyBool EAST = PropertyBool.create("east");
-  static final PropertyBool SOUTH = PropertyBool.create("south");
-  static final PropertyBool WEST = PropertyBool.create("west");
-
-  private static final PropertyBool[] ALL_FACES = new PropertyBool[]{DOWN, UP, NORTH, SOUTH, WEST, EAST};
 
   private static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
   private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.0D, 0.875D, 0.0D, 1.0D, 1.0D, 1.0D);
@@ -64,7 +65,7 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
   @Override
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, DOWN, UP, NORTH, EAST, WEST, SOUTH, growthStageProperty, DAYPERIOD, AGE);
+    return new BlockStateContainer(this, DOWN, UP, NORTH, EAST, WEST, SOUTH, growthStageProperty, DAYPERIOD, AGE_4);
   }
 
   @Override

@@ -1,11 +1,8 @@
 package com.eerussianguy.firmalife;
 
-import su.terrafirmagreg.data.Properties;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockStem;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -49,7 +46,6 @@ import net.dries007.tfc.objects.blocks.BlockBonsai;
 import net.dries007.tfc.objects.blocks.BlockStemCrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.items.ItemMetalMalletMold;
 import net.dries007.tfc.objects.te.TELeafMat;
 import net.dries007.tfc.objects.te.TEString;
@@ -58,6 +54,14 @@ import net.dries007.tfc.objects.te.TETurntable;
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.data.Constants.MODID_FL;
+import static su.terrafirmagreg.data.Properties.BoolProp.CAN_GROW;
+import static su.terrafirmagreg.data.Properties.BoolProp.DECAYABLE;
+import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.data.Properties.BoolProp.NEEDS_SOURCE;
+import static su.terrafirmagreg.data.Properties.BoolProp.WATERED;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_8;
+import static su.terrafirmagreg.data.Properties.IntProp.CLAY_LEVEL;
+import static su.terrafirmagreg.data.Properties.IntProp.STAGE_5;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = MODID_FL)
@@ -77,17 +81,13 @@ public class ClientRegisterEventsFL {
                                                                                     .toString(), "normal"));
     }
     for (BlockFruitTreeLeaves leaves : BlocksFL.getAllFruitLeaves()) {
-      ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE)
-                                                                     .ignore(BlockFruitTreeLeaves.HARVESTABLE)
+      ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(DECAYABLE)
+                                                                     .ignore(HARVESTABLE)
                                                                      .build());
     }
-    ModelLoader.setCustomStateMapper(BlocksFL.SPOUT, new StateMap.Builder().ignore(Properties.WATERED)
-                                                                           .ignore(Properties.NEEDS_SOURCE)
-                                                                           .build());
-    ModelLoader.setCustomStateMapper(BlocksFL.SPRINKLER, new StateMap.Builder().ignore(Properties.WATERED)
-                                                                               .ignore(Properties.NEEDS_SOURCE)
-                                                                               .build());
-    ModelLoader.setCustomStateMapper(BlocksFL.TURNTABLE, new StateMap.Builder().ignore(Properties.CLAY_LEVEL)
+    ModelLoader.setCustomStateMapper(BlocksFL.SPOUT, new StateMap.Builder().ignore(WATERED).ignore(NEEDS_SOURCE).build());
+    ModelLoader.setCustomStateMapper(BlocksFL.SPRINKLER, new StateMap.Builder().ignore(WATERED).ignore(NEEDS_SOURCE).build());
+    ModelLoader.setCustomStateMapper(BlocksFL.TURNTABLE, new StateMap.Builder().ignore(CLAY_LEVEL)
                                                                                .build());
 
     ModelLoader.setCustomModelResourceLocation(ItemsFL.CHEESECLOTH, 0,
@@ -140,18 +140,15 @@ public class ClientRegisterEventsFL {
       ModelLoader.setCustomStateMapper(block, new VanillaStemStateMapper());
     }
 
-    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(Properties.CAN_GROW)
-                                                                                  .build());
-    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)
-                                                                                     .build());
-    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE)
+    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(CAN_GROW).build());
+    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LEAVES, new StateMap.Builder().ignore(DECAYABLE).build());
+    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_SAPLING, new StateMap.Builder().ignore(STAGE_5)
                                                                                       .build());
 
-    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(Properties.CAN_GROW)
-                                                                                  .build());
-    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)
+    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(CAN_GROW).build());
+    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LEAVES, new StateMap.Builder().ignore(DECAYABLE)
                                                                                      .build());
-    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE)
+    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_SAPLING, new StateMap.Builder().ignore(STAGE_5)
                                                                                       .build());
 
     ModelLoader.setCustomStateMapper(BlocksFL.QUAD_PLANTER, new QuadPlanterStateMapper());
@@ -206,7 +203,7 @@ public class ClientRegisterEventsFL {
                                                 vanillaAge = 7; //for fully grown, we color it like stage 7
                                               }
                                               return blockColors.colorMultiplier(Blocks.MELON_STEM.getDefaultState()
-                                                                                                  .withProperty(BlockStem.AGE, vanillaAge), world, pos, tintIndex);
+                                                                                                  .withProperty(AGE_8, vanillaAge), world, pos, tintIndex);
                                             }, block);
     }
 

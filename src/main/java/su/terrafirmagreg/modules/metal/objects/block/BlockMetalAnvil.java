@@ -47,7 +47,7 @@ import lombok.Getter;
 import java.util.Random;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 import static su.terrafirmagreg.modules.core.capabilities.size.spi.Size.HUGE;
 import static su.terrafirmagreg.modules.core.capabilities.size.spi.Weight.VERY_HEAVY;
 

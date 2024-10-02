@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.vein;
 
-import net.minecraft.util.math.BlockPos;
+import su.terrafirmagreg.data.enums.EnumGradeOre;
 
-import net.dries007.tfc.api.types.Ore;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
 
@@ -10,7 +10,7 @@ public class VeinSphere extends Vein {
 
   private final double radiusSq;
 
-  VeinSphere(BlockPos pos, VeinType type, Ore.Grade grade, Random rand) {
+  VeinSphere(BlockPos pos, VeinType type, EnumGradeOre grade, Random rand) {
     super(pos, type, grade);
     double innerRadius = (0.5 + 0.3 * rand.nextDouble()) * type.getWidth();
     this.radiusSq = innerRadius * innerRadius;

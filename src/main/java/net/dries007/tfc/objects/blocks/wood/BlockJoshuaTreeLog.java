@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.util.BlockUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -34,16 +33,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.DOWN;
+import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.UP;
+import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+
 @MethodsReturnNonnullByDefault
 
 public class BlockJoshuaTreeLog extends Block {
 
-  public static final PropertyBool NORTH = PropertyBool.create("north");
-  public static final PropertyBool EAST = PropertyBool.create("east");
-  public static final PropertyBool SOUTH = PropertyBool.create("south");
-  public static final PropertyBool WEST = PropertyBool.create("west");
-  public static final PropertyBool UP = PropertyBool.create("up");
-  public static final PropertyBool DOWN = PropertyBool.create("down");
   private static final Map<Tree, BlockJoshuaTreeLog> MAP = new HashMap<>();
   private final Tree wood;
 

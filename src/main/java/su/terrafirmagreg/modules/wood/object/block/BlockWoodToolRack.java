@@ -29,11 +29,11 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
 import static net.minecraft.util.EnumFacing.Axis;
 import static net.minecraft.util.EnumFacing.HORIZONTALS;
 import static net.minecraft.util.EnumFacing.NORTH;
 import static net.minecraft.util.EnumFacing.byHorizontalIndex;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockWoodToolRack extends BlockWood implements IProviderTile {
@@ -61,17 +61,17 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
       .nonFullCube();
 
     setDefaultState(blockState.getBaseState()
-                              .withProperty(FACING, NORTH));
+                              .withProperty(HORIZONTAL, NORTH));
   }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(FACING, byHorizontalIndex(meta));
+    return this.getDefaultState().withProperty(HORIZONTAL, byHorizontalIndex(meta));
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getHorizontalIndex();
+    return state.getValue(HORIZONTAL).getHorizontalIndex();
   }
 
   @Override
@@ -81,7 +81,7 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
 
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return switch (state.getValue(FACING)) {
+    return switch (state.getValue(HORIZONTAL)) {
       case SOUTH -> RACK_SOUTH_AABB;
       case WEST -> RACK_WEST_AABB;
       case EAST -> RACK_EAST_AABB;
@@ -94,7 +94,7 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
                               BlockPos fromPos) {
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-    if (!BlockUtils.canHangAt(worldIn, pos, state.getValue(FACING))) {
+    if (!BlockUtils.canHangAt(worldIn, pos, state.getValue(HORIZONTAL))) {
       dropBlockAsItem(worldIn, pos, state, 0);
       var tile = TileUtils.getTile(worldIn, pos, TileWoodToolRack.class);
       tile.ifPresent(TileWoodToolRack::onBreakBlock);
@@ -131,12 +131,12 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
       facing = placer.getHorizontalFacing().getOpposite();
     }
     return this.getDefaultState()
-               .withProperty(FACING, BlockUtils.getASolidFacing(worldIn, pos, facing, HORIZONTALS));
+               .withProperty(HORIZONTAL, BlockUtils.getASolidFacing(worldIn, pos, facing, HORIZONTALS));
   }
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING);
+    return new BlockStateContainer(this, HORIZONTAL);
   }
 
   @Override
@@ -157,7 +157,7 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
 
   public int getSlotFromPos(IBlockState state, float x, float y, float z) {
     int slot = 0;
-    if ((state.getValue(FACING).getAxis().equals(Axis.Z) ? x : z) > .5f) {
+    if ((state.getValue(HORIZONTAL).getAxis().equals(Axis.Z) ? x : z) > .5f) {
       slot += 1;
     }
     if (y < 0.5f) {

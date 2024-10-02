@@ -34,7 +34,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.CAN_FALL;
+import static su.terrafirmagreg.data.Properties.BoolProp.CAN_FALL;
 
 public class ItemMetalChisel extends ItemMetalTool {
 

@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 public class TileBellows extends BaseTile {
 
@@ -66,7 +66,7 @@ public class TileBellows extends BaseTile {
       markForBlockUpdate();
     }
     EnumFacing direction = world.getBlockState(pos)
-                                .getValue(FACING); // It is a better idea to inherit the direction directly from the block.
+                                .getValue(HORIZONTAL); // It is a better idea to inherit the direction directly from the block.
     for (Vec3i offset : OFFSETS) {
       BlockPos posx = pos.up(offset.getY())
                          .offset(direction, offset.getX())

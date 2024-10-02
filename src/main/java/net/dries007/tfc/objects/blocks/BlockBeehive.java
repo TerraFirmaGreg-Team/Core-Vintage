@@ -1,7 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.Properties;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -10,7 +9,6 @@ import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,12 +42,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.IntProp.STAGE_3;
 
 @MethodsReturnNonnullByDefault
 public class BlockBeehive extends Block implements ICapabilitySize {
 
-  public static final PropertyInteger STAGE = Properties.STAGE;
   private static final Vec3i[] VECTORS = {
     new Vec3i(0, -1, 0),
     new Vec3i(-1, -1, 0),
@@ -63,11 +61,11 @@ public class BlockBeehive extends Block implements ICapabilitySize {
     setHardness(2.0f);
     setResistance(2.0f);
     setTickRandomly(true);
-    setDefaultState(blockState.getBaseState().withProperty(STAGE, 0));
+    setDefaultState(blockState.getBaseState().withProperty(STAGE_3, 0));
   }
 
   private static boolean isNotCalm(World world, BlockPos pos, IBlockState state) {
-    if (state.getValue(STAGE) == 0 || !world.isDaytime()) {
+    if (state.getValue(STAGE_3) == 0 || !world.isDaytime()) {
       return false;
     }
     for (Vec3i v : VECTORS) {
@@ -108,12 +106,12 @@ public class BlockBeehive extends Block implements ICapabilitySize {
   @Override
   @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(STAGE, meta);
+    return getDefaultState().withProperty(STAGE_3, meta);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(STAGE);
+    return state.getValue(STAGE_3);
   }
 
   @Override
@@ -133,14 +131,14 @@ public class BlockBeehive extends Block implements ICapabilitySize {
         tile.resetCounter();
         return;
       }
-      int stage = state.getValue(STAGE);
+      int stage = state.getValue(STAGE_3);
       if (stage < 2 && tile.getTicksSinceUpdate() >= ICalendar.TICKS_IN_DAY * 3) {
         int flowers = countFlowers(world, pos);
         float chance = flowers / 10f;
         if (random.nextFloat() < chance) {
-          world.setBlockState(pos, state.withProperty(STAGE, stage + 1));
+          world.setBlockState(pos, state.withProperty(STAGE_3, stage + 1));
         } else if (flowers == 0) {
-          world.setBlockState(pos, state.withProperty(STAGE, 0));
+          world.setBlockState(pos, state.withProperty(STAGE_3, 0));
         }
         tile.resetCounter();
       }
@@ -152,7 +150,7 @@ public class BlockBeehive extends Block implements ICapabilitySize {
   @SideOnly(Side.CLIENT)
   @Override
   public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-    if (state.getValue(STAGE) > 0 && world.isDaytime()) {
+    if (state.getValue(STAGE_3) > 0 && world.isDaytime()) {
       double x = pos.getX() + 0.5;
       double y = pos.getY() + 0.5;
       double z = pos.getZ() + 0.5;
@@ -171,8 +169,8 @@ public class BlockBeehive extends Block implements ICapabilitySize {
     if (world.isRemote || hand == EnumHand.OFF_HAND) {
       return false;
     }
-    if (state.getValue(STAGE) == 2) {
-      world.setBlockState(pos, state.withProperty(STAGE, 1));
+    if (state.getValue(STAGE_3) == 2) {
+      world.setBlockState(pos, state.withProperty(STAGE_3, 1));
       Item giveItem =
         !OreDictionaryHelper.doesStackMatchOre(player.getHeldItem(hand), "knife") ? ItemsFL.getFood(FoodFL.RAW_HONEY) : ItemsFL.HONEYCOMB;
       ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(giveItem));
@@ -187,7 +185,7 @@ public class BlockBeehive extends Block implements ICapabilitySize {
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, STAGE);
+    return new BlockStateContainer(this, STAGE_3);
   }
 
   @Override

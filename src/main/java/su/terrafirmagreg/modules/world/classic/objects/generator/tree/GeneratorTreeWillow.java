@@ -20,8 +20,8 @@ import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 
 import java.util.Random;
 
-import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
+import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
 
 /**
  * This is a tree generator only used for the willow tree shapes. Requires two structure blocks: both found in /assets/tfc/[TREE NAME]/, named base.nbt and

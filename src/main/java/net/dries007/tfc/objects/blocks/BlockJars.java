@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.data.Properties.JARS;
+import static su.terrafirmagreg.data.Properties.IntProp.JARS;
 
 @MethodsReturnNonnullByDefault
 public class BlockJars extends BlockNonCube {

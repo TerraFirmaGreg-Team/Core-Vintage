@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+
 public class BlockPlantMushroom extends BlockPlant implements IGrowable {
 
   private static final Map<Plant, BlockPlantMushroom> MAP = new HashMap<>();
@@ -46,26 +48,26 @@ public class BlockPlantMushroom extends BlockPlant implements IGrowable {
 
     if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
           net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
         if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
           grow(worldIn, rand, pos, state);
         } else if (j < 3) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j + 1));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j + 1));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
         if (j == 0 && canShrink(worldIn, pos)) {
           shrink(worldIn, pos);
         } else if (j > 0) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j - 1));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j - 1));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }

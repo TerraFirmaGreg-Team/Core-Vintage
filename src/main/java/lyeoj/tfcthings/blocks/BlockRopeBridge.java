@@ -3,8 +3,6 @@ package lyeoj.tfcthings.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -28,10 +26,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.AXIS;
+import static su.terrafirmagreg.data.Properties.IntProp.OFFSET;
+
 public class BlockRopeBridge extends Block implements TFCThingsConfigurableItem {
 
-  public static final PropertyInteger OFFSET = PropertyInteger.create("offset", 0, 7);
-  public static final PropertyBool AXIS = PropertyBool.create("axis");
 
   public BlockRopeBridge() {
     super(Material.WOOD);
@@ -41,8 +40,8 @@ public class BlockRopeBridge extends Block implements TFCThingsConfigurableItem 
     this.setHardness(0.5f);
     this.setHarvestLevel("axe", 0);
     this.setDefaultState(this.blockState.getBaseState()
-                                        .withProperty(OFFSET, Integer.valueOf(0))
-                                        .withProperty(AXIS, Boolean.valueOf(false)));
+                                        .withProperty(OFFSET, 0)
+                                        .withProperty(AXIS, Boolean.FALSE));
   }
 
   @NotNull

@@ -52,19 +52,12 @@ import java.util.Map;
 import java.util.Random;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER;
 
 public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySize, IPlantable {
 
-  public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
-  /*
-   * Time of day, used for rendering plants that bloom at different times
-   * 0 = midnight-dawn
-   * 1 = dawn-noon
-   * 2 = noon-dusk
-   * 3 = dusk-midnight
-   */
-  public static final PropertyInteger DAYPERIOD = PropertyInteger.create("dayperiod", 0, 3);
   private static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
   private static final Map<Plant, BlockWaterPlantTFCF> MAP = new HashMap<>();
   /* Growth Stage of the plant, tied to the month of year */
@@ -108,7 +101,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
       .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
       .add(growthStageProperty)
       .add(DAYPERIOD)
-      .add(AGE)
+      .add(AGE_4)
       .build();
   }
 
@@ -163,7 +156,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
     // Entity X/Z motion is reduced by plants. Affine combination of age modifier and actual modifier
     if (!(entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative())) {
-      double modifier = 0.25 * (4 - state.getValue(AGE));
+      double modifier = 0.25 * (4 - state.getValue(AGE_4));
       modifier = (1 - modifier) * plant.getMovementMod() + modifier;
       if (modifier < ConfigTFC.General.MISC.minimumPlantMovementModifier) {
         modifier = ConfigTFC.General.MISC.minimumPlantMovementModifier;
@@ -178,7 +171,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
     if (!worldIn.isRemote && (stack.getItem()
                                    .getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
                                                                                                  .getHarvestLevel(stack, "scythe", player, state) != -1)) {
-      if (RNG.nextDouble() <= (state.getValue(AGE) + 1) / 3.0D) //+33% change for each age
+      if (RNG.nextDouble() <= (state.getValue(AGE_4) + 1) / 3.0D) //+33% change for each age
       {
         spawnAsEntity(worldIn, pos, new ItemStack(ItemFoodTFC.get(Food.SEAWEED), 1));
       }
@@ -258,14 +251,14 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(AGE);
+    return state.getValue(AGE_4);
   }
 
   @SuppressWarnings("deprecation")
   @Override
   @NotNull
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(AGE, meta);
+    return this.getDefaultState().withProperty(AGE_4, meta);
   }
 
   @Override
@@ -382,21 +375,21 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
 
     if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
         if (j < 3) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j + 1));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j + 1));
         }
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
         if (j > 0) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j - 1));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j - 1));
         }
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }

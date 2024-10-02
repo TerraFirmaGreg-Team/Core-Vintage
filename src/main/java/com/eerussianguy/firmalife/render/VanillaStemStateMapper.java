@@ -1,7 +1,6 @@
 package com.eerussianguy.firmalife.render;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockStem;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
@@ -15,7 +14,10 @@ import net.dries007.tfc.objects.blocks.BlockStemCrop;
 
 import java.util.Map;
 
-import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
+import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.data.Properties.EnumProp.FACING;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_8;
+
 
 public class VanillaStemStateMapper extends StateMapperBase {
 
@@ -54,14 +56,14 @@ public class VanillaStemStateMapper extends StateMapperBase {
 
     //spoof a vanilla melon's blockstate
     if (vanillaAge >= 0) {
-      map.put(BlockStem.AGE, vanillaAge);
-      map.remove(BlockStemCrop.FACING); //needed to get correct insertion order
-      map.put(BlockStemCrop.FACING, EnumFacing.UP);
-    } else if (map.get(BlockStemCrop.FACING) == EnumFacing.UP) {
+      map.put(AGE_8, vanillaAge);
+      map.remove(FACING); //needed to get correct insertion order
+      map.put(FACING, EnumFacing.UP);
+    } else if (map.get(FACING) == EnumFacing.UP) {
       //this should never happen in reality but it is a possible blockstate
       //so we have to include something here so that we don't get
       //missing variant errors
-      map.put(BlockStemCrop.FACING, EnumFacing.NORTH);
+      map.put(FACING, EnumFacing.NORTH);
     }
     //if vanillaAge is -1, then the crop is fully grown, so it keeps only the FACING property
 

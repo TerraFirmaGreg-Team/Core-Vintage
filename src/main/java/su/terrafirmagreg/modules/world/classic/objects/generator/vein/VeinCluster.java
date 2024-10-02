@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.vein;
 
-import net.minecraft.util.math.BlockPos;
+import su.terrafirmagreg.data.enums.EnumGradeOre;
 
-import net.dries007.tfc.api.types.Ore;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
 
@@ -10,7 +10,7 @@ public class VeinCluster extends Vein {
 
   private final Cluster[] spawnPoints;
 
-  public VeinCluster(BlockPos pos, VeinType veinType, Ore.Grade grade, Random rand) {
+  public VeinCluster(BlockPos pos, VeinType veinType, EnumGradeOre grade, Random rand) {
     super(pos, veinType, grade);
 
     // Individual vein width is 60% - 100% of type width (it must fit exactly inside the circle described by width)

@@ -19,9 +19,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
 import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.CURED;
+import static su.terrafirmagreg.data.Properties.BoolProp.CURED;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockOvenWall extends BaseBlock {
@@ -50,19 +50,19 @@ public class BlockOvenWall extends BaseBlock {
 
     setDefaultState(blockState.getBaseState()
                               .withProperty(CURED, Boolean.FALSE)
-                              .withProperty(FACING, EnumFacing.NORTH));
+                              .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-               .withProperty(FACING, EnumFacing.byHorizontalIndex(meta))
+               .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta))
                .withProperty(CURED, meta > 3);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getHorizontalIndex() + (state.getValue(CURED) ? 4 : 0);
+    return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(CURED) ? 4 : 0);
   }
 
   @Override
@@ -72,7 +72,7 @@ public class BlockOvenWall extends BaseBlock {
 
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return switch (state.getValue(FACING)) {
+    return switch (state.getValue(HORIZONTAL)) {
       case SOUTH -> OVEN_WALL_SOUTH;
       case WEST -> OVEN_WALL_WEST;
       case EAST -> OVEN_WALL_EAST;
@@ -86,12 +86,12 @@ public class BlockOvenWall extends BaseBlock {
     if (facing.getAxis() == EnumFacing.Axis.Y) {
       facing = placer.getHorizontalFacing().getOpposite();
     }
-    return getDefaultState().withProperty(FACING, facing);
+    return getDefaultState().withProperty(HORIZONTAL, facing);
   }
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, CURED);
+    return new BlockStateContainer(this, HORIZONTAL, CURED);
   }
 
   @Override

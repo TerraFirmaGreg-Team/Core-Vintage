@@ -44,8 +44,8 @@ import java.util.Random;
 import java.util.Set;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.PLACED;
-import static su.terrafirmagreg.data.Properties.SMALL;
+import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
+import static su.terrafirmagreg.data.Properties.BoolProp.SMALL;
 
 
 @Getter

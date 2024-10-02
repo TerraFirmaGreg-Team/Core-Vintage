@@ -23,9 +23,9 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.util.OreDictionaryHelper;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.data.Properties.GLASS;
-import static su.terrafirmagreg.data.Properties.TOP;
+import static su.terrafirmagreg.data.Properties.BoolProp.GLASS;
+import static su.terrafirmagreg.data.Properties.BoolProp.TOP;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockGreenhouseWall extends BaseBlock {
@@ -55,7 +55,7 @@ public class BlockGreenhouseWall extends BaseBlock {
 
     setDefaultState(blockState.getBaseState()
                               .withProperty(GLASS, Boolean.FALSE)
-                              .withProperty(FACING, EnumFacing.EAST)
+                              .withProperty(HORIZONTAL, EnumFacing.EAST)
                               .withProperty(TOP, Boolean.FALSE));
   }
 
@@ -73,12 +73,12 @@ public class BlockGreenhouseWall extends BaseBlock {
     return this.getDefaultState()
                .withProperty(GLASS, glass)
                .withProperty(TOP, top)
-               .withProperty(FACING, EnumFacing.byHorizontalIndex(facing));
+               .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(facing));
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    int facing = state.getValue(FACING).getHorizontalIndex(); //0, 1, 2, 3
+    int facing = state.getValue(HORIZONTAL).getHorizontalIndex(); //0, 1, 2, 3
     int glass = state.getValue(GLASS) ? 8 : 0; // true = 8, false = 0
     int top = state.getValue(TOP) ? 4 : 0; // true = 0, false = 4
 
@@ -87,7 +87,7 @@ public class BlockGreenhouseWall extends BaseBlock {
 
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return switch (state.getValue(FACING)) {
+    return switch (state.getValue(HORIZONTAL)) {
       case SOUTH -> GREEN_WALL_SOUTH;
       case WEST -> GREEN_WALL_WEST;
       case EAST -> GREEN_WALL_EAST;
@@ -169,9 +169,9 @@ public class BlockGreenhouseWall extends BaseBlock {
     boolean isTop = !(worldIn.getBlockState(pos.up()).getBlock() instanceof BlockGreenhouseWall);
     Block downBlock = worldIn.getBlockState(pos.down()).getBlock();
     if (downBlock instanceof BlockGreenhouseWall || downBlock instanceof BlockGreenhouseDoor) {
-      facing = worldIn.getBlockState(pos.down()).getValue(FACING);
+      facing = worldIn.getBlockState(pos.down()).getValue(HORIZONTAL);
     }
-    return getDefaultState().withProperty(FACING, facing).withProperty(TOP, isTop);
+    return getDefaultState().withProperty(HORIZONTAL, facing).withProperty(TOP, isTop);
   }
 
   @Override
@@ -180,14 +180,14 @@ public class BlockGreenhouseWall extends BaseBlock {
     if (worldIn.isRemote) {
       return;
     }
-    EnumFacing facing = state.getValue(FACING);
+    EnumFacing facing = state.getValue(HORIZONTAL);
     Block downBlock = worldIn.getBlockState(pos.down()).getBlock();
     if (stack.getCount() > 2 && !(downBlock instanceof BlockGreenhouseWall
                                   || downBlock instanceof BlockGreenhouseDoor) && !placer.isSneaking()) {
       if (worldIn.checkNoEntityCollision(new AxisAlignedBB(pos.up()))) {
-        worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(FACING, facing), 3);
+        worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(HORIZONTAL, facing), 3);
         if (worldIn.checkNoEntityCollision(new AxisAlignedBB(pos.up(2)))) {
-          worldIn.setBlockState(pos.up(2), this.getDefaultState().withProperty(FACING, facing), 3);
+          worldIn.setBlockState(pos.up(2), this.getDefaultState().withProperty(HORIZONTAL, facing), 3);
           stack.shrink(2);
         } else {
           stack.shrink(1);
@@ -198,12 +198,12 @@ public class BlockGreenhouseWall extends BaseBlock {
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, GLASS, TOP);
+    return new BlockStateContainer(this, HORIZONTAL, GLASS, TOP);
   }
 
   @Override
   public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
-    return state.getValue(FACING).getOpposite() == side;
+    return state.getValue(HORIZONTAL).getOpposite() == side;
   }
 
   private boolean canStay(World world, BlockPos pos) {
@@ -216,7 +216,7 @@ public class BlockGreenhouseWall extends BaseBlock {
   @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
                                           EnumFacing face) {
-    return (face == state.getValue(FACING).getOpposite() && state.getValue(GLASS))
+    return (face == state.getValue(HORIZONTAL).getOpposite() && state.getValue(GLASS))
            ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 }

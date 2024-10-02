@@ -17,7 +17,7 @@
     "mossy": {
       "true": {
         "textures": {
-          "overlay": "tfg:blocks/soil/overlay/mossy/cobble"
+          "overlay": "tfg:blocks/rock/overlay/mossy/cobble"
         }
       },
       "false": {}

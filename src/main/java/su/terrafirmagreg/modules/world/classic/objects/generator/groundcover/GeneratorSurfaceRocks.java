@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 public class GeneratorSurfaceRocks
   implements IWorldGenerator {

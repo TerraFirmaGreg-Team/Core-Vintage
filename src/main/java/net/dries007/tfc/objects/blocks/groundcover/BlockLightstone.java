@@ -9,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -33,9 +32,10 @@ import tfcflorae.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.data.Properties.DirectionProp.DIRECTIONAL;
+
 public class BlockLightstone extends BlockBush implements ICapabilitySize {
 
-  private static final PropertyDirection FACING = PropertyDirection.create("facing");
   private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
   private static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.1D, 0.2D, 0.1D, 0.9D, 1.0D, 0.9D);
   private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.1D, 0.1D, 0.2D, 0.9D, 0.9D, 1.0D);
@@ -58,7 +58,7 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
 
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, FACING);
+    return new BlockStateContainer(this, DIRECTIONAL);
   }
 
   @Override
@@ -73,7 +73,7 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
 
   @Override
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    for (EnumFacing enumfacing : FACING.getAllowedValues()) {
+    for (EnumFacing enumfacing : DIRECTIONAL.getAllowedValues()) {
       if (this.canPlaceAt(worldIn, pos, enumfacing)) {
         return worldIn.getBlockState(pos).getBlock() != this;
       }
@@ -89,7 +89,7 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
 
   @Override
   public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-    for (EnumFacing enumfacing : FACING.getAllowedValues()) {
+    for (EnumFacing enumfacing : DIRECTIONAL.getAllowedValues()) {
       if (this.canPlaceAt(worldIn, pos, enumfacing)) {
         return true;
       }
@@ -101,7 +101,7 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
   @Override
   @NotNull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    switch (state.getValue(FACING)) {
+    switch (state.getValue(DIRECTIONAL)) {
       case EAST:
         return EAST_AABB;
       case WEST:
@@ -152,7 +152,7 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
 
   private void onNeighborChangeInternal(World worldIn, BlockPos pos, IBlockState state) {
     if (this.checkForDrop(worldIn, pos, state)) {
-      EnumFacing facing = state.getValue(FACING);
+      EnumFacing facing = state.getValue(DIRECTIONAL);
       EnumFacing.Axis axis = facing.getAxis();
       BlockPos blockpos = pos.offset(facing.getOpposite());
       boolean flag = false;
@@ -160,7 +160,7 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
       if (axis.isHorizontal() && worldIn.getBlockState(blockpos)
                                         .getBlockFaceShape(worldIn, blockpos, facing) != BlockFaceShape.SOLID) {
         flag = true;
-      } else if (axis.isVertical() && !this.canPlaceAt(worldIn, pos, state.getValue(FACING))) {
+      } else if (axis.isVertical() && !this.canPlaceAt(worldIn, pos, state.getValue(DIRECTIONAL))) {
         flag = true;
       }
 
@@ -171,7 +171,7 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
   }
 
   private boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state) {
-    if (state.getBlock() == this && this.canPlaceAt(worldIn, pos, state.getValue(FACING))) {
+    if (state.getBlock() == this && this.canPlaceAt(worldIn, pos, state.getValue(DIRECTIONAL))) {
       return true;
     } else {
       if (worldIn.getBlockState(pos).getBlock() == this) {
@@ -195,12 +195,12 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
   public IBlockState getStateForWorldGen(World worldIn, BlockPos pos) {
     for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
       if (this.canPlaceAt(worldIn, pos, enumfacing)) {
-        return this.getDefaultState().withProperty(FACING, enumfacing);
+        return this.getDefaultState().withProperty(DIRECTIONAL, enumfacing);
       }
     }
     for (EnumFacing enumfacing : EnumFacing.Plane.VERTICAL) {
       if (this.canPlaceAt(worldIn, pos, enumfacing)) {
-        return this.getDefaultState().withProperty(FACING, enumfacing);
+        return this.getDefaultState().withProperty(DIRECTIONAL, enumfacing);
       }
     }
 
@@ -229,26 +229,26 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
   @NotNull
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
+    return this.getDefaultState().withProperty(DIRECTIONAL, EnumFacing.byIndex(meta));
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getIndex();
+    return state.getValue(DIRECTIONAL).getIndex();
   }
 
   @SuppressWarnings("deprecation")
   @NotNull
   @Override
   public IBlockState withRotation(IBlockState state, Rotation rot) {
-    return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
+    return state.withProperty(DIRECTIONAL, rot.rotate(state.getValue(DIRECTIONAL)));
   }
 
   @SuppressWarnings("deprecation")
   @NotNull
   @Override
   public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
-    return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
+    return state.withRotation(mirrorIn.toRotation(state.getValue(DIRECTIONAL)));
   }
 
   @Override
@@ -274,11 +274,11 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
                                           EntityLivingBase placer) {
     if (this.canPlaceAt(worldIn, pos, facing)) {
-      return this.getDefaultState().withProperty(FACING, facing);
+      return this.getDefaultState().withProperty(DIRECTIONAL, facing);
     } else {
       for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
         if (this.canPlaceAt(worldIn, pos, enumfacing)) {
-          return this.getDefaultState().withProperty(FACING, enumfacing);
+          return this.getDefaultState().withProperty(DIRECTIONAL, enumfacing);
         }
       }
 

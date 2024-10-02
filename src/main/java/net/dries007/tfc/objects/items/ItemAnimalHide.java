@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.data.enums.EnumHideSize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
@@ -13,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -27,15 +27,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
+import static su.terrafirmagreg.data.Properties.EnumProp.HIDE_SIZE;
 
 public class ItemAnimalHide extends ItemTFC {
 
-  private static final Map<HideType, Map<HideSize, ItemAnimalHide>> TABLE = new HashMap<>();
-  protected final HideSize size;
+  private static final Map<HideType, Map<EnumHideSize, ItemAnimalHide>> TABLE = new HashMap<>();
+  protected final EnumHideSize size;
   private final HideType type;
 
-  public ItemAnimalHide(HideType type, HideSize size) {
+  public ItemAnimalHide(HideType type, EnumHideSize size) {
     this.type = type;
     this.size = size;
 
@@ -46,7 +46,7 @@ public class ItemAnimalHide extends ItemTFC {
   }
 
   @NotNull
-  public static ItemAnimalHide get(HideType type, HideSize size) {
+  public static ItemAnimalHide get(HideType type, EnumHideSize size) {
     return TABLE.get(type).get(size);
   }
 
@@ -56,7 +56,7 @@ public class ItemAnimalHide extends ItemTFC {
     ItemStack stack = player.getHeldItem(hand);
     if (ConfigTFC.General.OVERRIDES.enableThatchBed
         && type == HideType.RAW
-        && size == HideSize.LARGE
+        && size == EnumHideSize.LARGE
         && facing == EnumFacing.UP && worldIn.getBlockState(pos).getBlock() == BlocksCore.THATCH
         && worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getBlock() == BlocksCore.THATCH) {
 
@@ -92,7 +92,7 @@ public class ItemAnimalHide extends ItemTFC {
       if (facing == EnumFacing.UP && OreDictionaryHelper.doesStackMatchOre(stackAt, "logWood") && stateAbove.getBlock()
                                                                                                             .isAir(stateAbove, worldIn, posAbove)) {
         if (!worldIn.isRemote) {
-          worldIn.setBlockState(posAbove, BlocksTFC.PLACED_HIDE.getDefaultState().withProperty(SIZE, size));
+          worldIn.setBlockState(posAbove, BlocksTFC.PLACED_HIDE.getDefaultState().withProperty(HIDE_SIZE, size));
         }
         stack.shrink(1);
         player.setHeldItem(hand, stack);
@@ -107,9 +107,9 @@ public class ItemAnimalHide extends ItemTFC {
   @NotNull
   public ItemStack getContainerItem(ItemStack itemStack) {
     return switch (size) {
-      case SMALL -> new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.SMALL));
-      case MEDIUM -> new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.MEDIUM));
-      case LARGE -> new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.LARGE));
+      case SMALL -> new ItemStack(ItemAnimalHide.get(HideType.RAW, EnumHideSize.SMALL));
+      case MEDIUM -> new ItemStack(ItemAnimalHide.get(HideType.RAW, EnumHideSize.MEDIUM));
+      case LARGE -> new ItemStack(ItemAnimalHide.get(HideType.RAW, EnumHideSize.LARGE));
     };
   }
 
@@ -130,24 +130,6 @@ public class ItemAnimalHide extends ItemTFC {
   @Override
   public @NotNull Size getSize(ItemStack stack) {
     return Size.NORMAL; // Stored in chests and Large Vessels
-  }
-
-  public enum HideSize implements IStringSerializable {
-    SMALL,
-    MEDIUM,
-    LARGE;
-
-    private static final HideSize[] VALUES = values();
-
-    @NotNull
-    public static HideSize valueOf(int index) {
-      return index < 0 || index > VALUES.length ? MEDIUM : VALUES[index];
-    }
-
-    @Override
-    public String getName() {
-      return this.name().toLowerCase();
-    }
   }
 
   public enum HideType {

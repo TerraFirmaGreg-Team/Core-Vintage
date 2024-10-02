@@ -15,6 +15,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.dries007.tfc.objects.blocks.BlockString;
 import net.dries007.tfc.objects.te.TEString;
 
+import static su.terrafirmagreg.data.Properties.EnumProp.XZ;
+
 @SideOnly(Side.CLIENT)
 public class TESRString extends TileEntitySpecialRenderer<TEString> {
 
@@ -32,7 +34,7 @@ public class TESRString extends TileEntitySpecialRenderer<TEString> {
         GlStateManager.pushMatrix();
         GlStateManager.translate(x + 0.5D, y + 0.38D, z + 0.5D);
         GlStateManager.scale(0.5f, 0.5f, 0.5f);
-        if (state.getValue(BlockString.AXIS) == EnumFacing.Axis.Z) {
+        if (state.getValue(XZ) == EnumFacing.Axis.Z) {
           GlStateManager.rotate(90f, 0f, 1f, 0f);
         }
         ItemStack item = cap.getStackInSlot(0);

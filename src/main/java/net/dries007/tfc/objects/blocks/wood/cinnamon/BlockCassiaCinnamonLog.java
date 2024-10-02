@@ -30,9 +30,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.CAN_GROW;
-import static su.terrafirmagreg.data.Properties.CONNECTED;
-import static su.terrafirmagreg.data.Properties.GROWN;
+import static su.terrafirmagreg.data.Properties.BoolProp.CAN_GROW;
+import static su.terrafirmagreg.data.Properties.BoolProp.CONNECTED;
+import static su.terrafirmagreg.data.Properties.BoolProp.GROWN;
 
 public class BlockCassiaCinnamonLog extends Block {
 

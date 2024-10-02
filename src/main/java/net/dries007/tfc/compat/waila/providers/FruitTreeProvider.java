@@ -1,6 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.enums.EnumFruitLeafState;
 import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
@@ -29,6 +30,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.data.Properties.EnumProp.FRUIT_LEAF_STATE;
+
 public class FruitTreeProvider implements IWailaBlock {
 
   private static void addInfo(IFruitTree tree, TETickCounter tile, float temperature, float rainfall, List<String> currentTooltip) {
@@ -53,8 +57,8 @@ public class FruitTreeProvider implements IWailaBlock {
     IBlockState state = world.getBlockState(pos);
     BlockPos finalPos = pos;
     if (state.getBlock() instanceof BlockFruitTreeLeaves block) {
-      if (state.getValue(BlockFruitTreeLeaves.HARVESTABLE) && block.getTree().isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
-        if (state.getValue(BlockFruitTreeLeaves.LEAF_STATE) != BlockFruitTreeLeaves.EnumLeafState.FRUIT) {
+      if (state.getValue(HARVESTABLE) && block.getTree().isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
+        if (state.getValue(FRUIT_LEAF_STATE) != EnumFruitLeafState.FRUIT) {
 
           TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
             addInfo(block.getTree(), tile, Climate.getActualTemp(world, finalPos), ProviderChunkData.getRainfall(world, finalPos), currentTooltip);

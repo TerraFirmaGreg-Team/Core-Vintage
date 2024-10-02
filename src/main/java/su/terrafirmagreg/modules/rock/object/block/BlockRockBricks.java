@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.util.BlockRenderLayer;
 
-import static su.terrafirmagreg.data.Properties.MOSSY;
+import static su.terrafirmagreg.data.Properties.BoolProp.MOSSY;
 
 public class BlockRockBricks extends BlockRock {
 

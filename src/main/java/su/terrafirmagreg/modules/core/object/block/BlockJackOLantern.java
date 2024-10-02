@@ -30,8 +30,8 @@ import lombok.Getter;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @Getter
 public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderTile {

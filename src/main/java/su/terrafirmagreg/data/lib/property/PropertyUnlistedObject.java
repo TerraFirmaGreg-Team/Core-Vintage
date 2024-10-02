@@ -22,11 +22,16 @@ public class PropertyUnlistedObject<T> implements IUnlistedProperty<T> {
    * @param name: The name to use for this property.
    * @param type: The class type of this property.
    */
-  public PropertyUnlistedObject(String name, Class<T> type) {
+  protected PropertyUnlistedObject(String name, Class<T> type) {
 
     this.name = name;
     this.type = type;
   }
+
+  public static <T> PropertyUnlistedObject<T> create(String name, Class<T> type) {
+    return new PropertyUnlistedObject<>(name, type);
+  }
+
 
   @Override
   public String getName() {

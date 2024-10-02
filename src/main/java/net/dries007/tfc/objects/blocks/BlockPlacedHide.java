@@ -3,10 +3,10 @@ package net.dries007.tfc.objects.blocks;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.enums.EnumHideSize;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -31,19 +31,20 @@ import net.dries007.tfc.objects.te.TEPlacedHide;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.data.Properties.EnumProp.HIDE_SIZE;
+
 /**
  * Due to implementation, this will only ever be a soaked hide -> scraped hide Placement is restricted to the TFC item.
  */
 
 public class BlockPlacedHide extends Block {
 
-  public static final PropertyEnum<ItemAnimalHide.HideSize> SIZE = PropertyEnum.create("size", ItemAnimalHide.HideSize.class);
 
   public BlockPlacedHide() {
     super(Material.CIRCUITS);
     setHardness(0.2f);
 
-    setDefaultState(blockState.getBaseState().withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM));
+    setDefaultState(blockState.getBaseState().withProperty(HIDE_SIZE, EnumHideSize.MEDIUM));
   }
 
   private static Vec3d calculatePoint(Vec3d rayVector, Vec3d rayPoint) {
@@ -67,12 +68,12 @@ public class BlockPlacedHide extends Block {
   @Override
   @NotNull
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(SIZE, ItemAnimalHide.HideSize.valueOf(meta));
+    return getDefaultState().withProperty(HIDE_SIZE, EnumHideSize.valueOf(meta));
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(SIZE).ordinal();
+    return state.getValue(HIDE_SIZE).ordinal();
   }
 
   @SuppressWarnings("deprecation")
@@ -151,7 +152,7 @@ public class BlockPlacedHide extends Block {
   @NotNull
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, SIZE);
+    return new BlockStateContainer(this, HIDE_SIZE);
   }
 
   @Override
@@ -190,7 +191,7 @@ public class BlockPlacedHide extends Block {
   private ItemStack getItemStackDropped(IBlockAccess world, BlockPos pos, IBlockState state) {
     return TileUtils.getTile(world, pos, TEPlacedHide.class)
                     .filter(TEPlacedHide::isComplete)
-                    .map(tile -> new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.SCRAPED, state.getValue(SIZE))))
-                    .orElseGet(() -> new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.SOAKED, state.getValue(SIZE))));
+                    .map(tile -> new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.SCRAPED, state.getValue(HIDE_SIZE))))
+                    .orElseGet(() -> new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.SOAKED, state.getValue(HIDE_SIZE))));
   }
 }

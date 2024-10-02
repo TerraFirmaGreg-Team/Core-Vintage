@@ -24,8 +24,8 @@ import net.dries007.tfc.api.capability.food.IFood;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
-import static su.terrafirmagreg.data.Properties.UPPER;
+import static su.terrafirmagreg.data.Properties.BoolProp.UPPER;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 public final class ProviderFridge implements IProbeInfoProvider {
 

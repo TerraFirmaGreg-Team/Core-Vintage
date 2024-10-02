@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -37,6 +36,8 @@ import tfcflorae.client.GuiHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.SEALED;
+
 /**
  * Urn is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state property,
  * and cached in the TE (for gui purposes)
@@ -44,7 +45,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class BlockUrn extends Block implements ICapabilitySize {
 
-  public static final PropertyBool SEALED = PropertyBool.create("sealed");
   private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1D, 0.875D);
   private static final AxisAlignedBB BOUNDING_BOX_SEALED = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1D, 0.875D);
 
@@ -177,7 +177,7 @@ public class BlockUrn extends Block implements ICapabilitySize {
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (worldIn.isRemote) {return true;}
-    
+
     ItemStack heldItem = playerIn.getHeldItem(hand);
     TileUtils.getTile(worldIn, pos, TEUrn.class).ifPresent(tile -> {
       if (heldItem.isEmpty() && playerIn.isSneaking()) {

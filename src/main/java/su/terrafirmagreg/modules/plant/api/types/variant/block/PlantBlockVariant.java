@@ -20,7 +20,6 @@ public class PlantBlockVariant extends VariantBlock<PlantBlockVariant, PlantType
   @Getter
   private static final Set<PlantBlockVariant> variants = new ObjectOpenHashSet<>();
 
-
   protected PlantBlockVariant(Builder builder) {
     super(builder.name);
 

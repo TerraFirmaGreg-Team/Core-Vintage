@@ -1,6 +1,7 @@
 package net.dries007.tfc.compat.jei;
 
 import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.data.enums.EnumHideSize;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
@@ -418,7 +419,7 @@ public final class TFCJEIPlugin implements IModPlugin {
     registry.addIngredientInfo(new ItemStack(BlocksDevice.ELECTRIC_FORGE), VanillaTypes.ITEM, "jei.information.tfctech.forge");
 
     List<ScrapingWrapper> scrapingList = new ArrayList<>();
-    for (ItemAnimalHide.HideSize size : ItemAnimalHide.HideSize.values()) {
+    for (EnumHideSize size : EnumHideSize.values()) {
       scrapingList.add(new ScrapingWrapper(ItemAnimalHide.get(HideType.SOAKED, size), ItemAnimalHide.get(HideType.SCRAPED, size)));
     }
     registry.addRecipes(scrapingList, SCRAPING_UID);

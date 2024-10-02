@@ -14,7 +14,6 @@ import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.block.BlockBlastFurnace;
-import su.terrafirmagreg.modules.device.object.block.BlockMolten;
 import su.terrafirmagreg.modules.device.object.container.ContainerBlastFurnace;
 
 import net.minecraft.block.Block;
@@ -41,7 +40,8 @@ import net.dries007.tfc.util.fuel.FuelManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.IntProp.LAYERS;
 
 public class TileBlastFurnace extends BaseTileTickableInventory
   implements ITileFields, IProviderContainer<ContainerBlastFurnace, GuiBlastFurnace> {
@@ -419,11 +419,11 @@ public class TileBlastFurnace extends BaseTileTickableInventory
           slagLayers -= 4;
           world.setBlockState(pos.up(i), BlocksDevice.MOLTEN.getDefaultState()
                                                             .withProperty(LIT, cooking)
-                                                            .withProperty(BlockMolten.LAYERS, 4));
+                                                            .withProperty(LAYERS, 4));
         } else {
           world.setBlockState(pos.up(i), BlocksDevice.MOLTEN.getDefaultState()
                                                             .withProperty(LIT, cooking)
-                                                            .withProperty(BlockMolten.LAYERS, slagLayers));
+                                                            .withProperty(LAYERS, slagLayers));
           slagLayers = 0;
         }
       } else {

@@ -25,6 +25,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
+
 public class CropProvider implements IWailaBlock {
 
   @NotNull
@@ -36,7 +38,7 @@ public class CropProvider implements IWailaBlock {
       TileUtils.getTile(world, pos, TECropBase.class).ifPresent(tile -> {
         ICrop crop = blockCropTFC.getCrop();
 
-        boolean isWild = state.getValue(BlockCropTFC.WILD);
+        boolean isWild = state.getValue(WILD);
         float temp = Climate.getActualTemp(world, pos, -tile.getLastUpdateTick());
         float rainfall = ProviderChunkData.getRainfall(world, pos);
 

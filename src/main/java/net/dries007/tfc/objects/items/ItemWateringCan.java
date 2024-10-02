@@ -25,7 +25,7 @@ import mcp.MethodsReturnNonnullByDefault;
 
 import static net.minecraft.block.BlockFarmland.MOISTURE;
 import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.WET;
+import static su.terrafirmagreg.data.Properties.BoolProp.WET;
 
 @MethodsReturnNonnullByDefault
 

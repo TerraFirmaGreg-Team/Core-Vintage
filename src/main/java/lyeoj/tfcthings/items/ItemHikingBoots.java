@@ -22,6 +22,8 @@ import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 
 import org.jetbrains.annotations.NotNull;
 
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+
 public class ItemHikingBoots extends ItemArmor implements ICapabilitySize, ICapabilityDamageResistance, TFCThingsConfigurableItem {
 
   private static final String STEPS_NBT_KEY = "Steps";
@@ -91,7 +93,7 @@ public class ItemHikingBoots extends ItemArmor implements ICapabilitySize, ICapa
               blockpos$pooledmutableblockpos2.setPos(i, j, k);
               IBlockState iblockstate = world.getBlockState(blockpos$pooledmutableblockpos2);
               if (iblockstate.getBlock() instanceof BlockPlant plant) {
-                double modifier = 0.25D * (double) (4 - iblockstate.getValue(BlockPlant.AGE));
+                double modifier = 0.25D * (double) (4 - iblockstate.getValue(AGE_4));
                 modifier += (1.0D - modifier) * plant.getPlant().getMovementMod();
                 if (modifier < ConfigTFC.General.MISC.minimumPlantMovementModifier) {
                   modifier = ConfigTFC.General.MISC.minimumPlantMovementModifier;

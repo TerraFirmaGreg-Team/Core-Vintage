@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import static su.terrafirmagreg.data.Properties.CURED;
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.CURED;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
 import static su.terrafirmagreg.modules.device.object.tile.TileOven.SLOT_FUEL_1;
 import static su.terrafirmagreg.modules.device.object.tile.TileOven.SLOT_FUEL_2;
 import static su.terrafirmagreg.modules.device.object.tile.TileOven.SLOT_MAIN;

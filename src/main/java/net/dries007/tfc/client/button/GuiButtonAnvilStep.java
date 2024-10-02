@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.util.forge.ForgeStep;
+import su.terrafirmagreg.api.base.gui.component.button.BaseGuiButton;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -8,9 +8,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import org.jetbrains.annotations.NotNull;
+import net.dries007.tfc.util.forge.ForgeStep;
 
-import su.terrafirmagreg.api.base.gui.component.button.BaseGuiButton;
+import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil.BACKGROUND;
 

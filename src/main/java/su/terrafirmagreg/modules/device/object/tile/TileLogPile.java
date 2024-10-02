@@ -29,8 +29,8 @@ import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.Properties.LIT;
-import static su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile.LAYERS;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.IntProp.TYPE;
 
 
 public class TileLogPile extends BaseTileTickableInventory implements IProviderContainer<ContainerLogPile, GuiLogPile> {
@@ -131,7 +131,7 @@ public class TileLogPile extends BaseTileTickableInventory implements IProviderC
     if (j == 1) {
       // This log pile is at the bottom of the charcoal pit
       world.setBlockState(pos,
-                          BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
+                          BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(TYPE, charcoal));
       return;
     }
     for (int k = j - 1; k >= 0; k--) {
@@ -140,17 +140,17 @@ public class TileLogPile extends BaseTileTickableInventory implements IProviderC
       if (state.getBlock() == Blocks.AIR) {
         // If it hits air, place the remaining pile in that block
         world.setBlockState(pos.down(k), BlocksDevice.CHARCOAL_PILE.getDefaultState()
-                                                                   .withProperty(LAYERS, charcoal));
+                                                                   .withProperty(TYPE, charcoal));
         world.setBlockState(pos, Blocks.AIR.getDefaultState());
         return;
       }
 
       if (state.getBlock() instanceof BlockCharcoalPile) {
         // Place what it can in the existing charcoal pit, then continue climbing
-        charcoal += state.getValue(LAYERS);
+        charcoal += state.getValue(TYPE);
         int toCreate = Math.min(charcoal, 8);
         world.setBlockState(pos.down(k), BlocksDevice.CHARCOAL_PILE.getDefaultState()
-                                                                   .withProperty(LAYERS, toCreate));
+                                                                   .withProperty(TYPE, toCreate));
         charcoal -= toCreate;
       }
 
@@ -161,7 +161,7 @@ public class TileLogPile extends BaseTileTickableInventory implements IProviderC
     }
     // If you exit the loop, its arrived back at the original position OR needs to rest the original position, and needs to replace that block
     world.setBlockState(pos,
-                        BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
+                        BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(TYPE, charcoal));
   }
 
   public int countLogs() {

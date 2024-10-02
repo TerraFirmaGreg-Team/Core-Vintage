@@ -13,7 +13,6 @@ import su.terrafirmagreg.modules.device.network.SCPacketTileEntity;
 import su.terrafirmagreg.modules.device.object.block.BlockFridge;
 import su.terrafirmagreg.modules.device.object.storage.MachineEnergyStorage;
 
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -41,7 +40,8 @@ import lombok.Getter;
 
 import java.util.Optional;
 
-import static su.terrafirmagreg.data.Properties.UPPER;
+import static su.terrafirmagreg.data.Properties.BoolProp.UPPER;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
 public class TileFridge extends BaseTileTickableInventory implements IAmbientalTileProvider {
@@ -275,7 +275,7 @@ public class TileFridge extends BaseTileTickableInventory implements IAmbientalT
   }
 
   public EnumFacing getRotation() {
-    return world.getBlockState(pos).getValue(BlockHorizontal.FACING);
+    return world.getBlockState(pos).getValue(HORIZONTAL);
   }
 
   public boolean setOpening(boolean value) {

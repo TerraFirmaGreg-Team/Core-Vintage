@@ -8,7 +8,7 @@ import net.minecraft.util.Rotation;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.data.Properties.DIRECTIONAL;
+import static su.terrafirmagreg.data.Properties.DirectionProp.DIRECTIONAL;
 
 @Getter
 @SuppressWarnings("deprecation")

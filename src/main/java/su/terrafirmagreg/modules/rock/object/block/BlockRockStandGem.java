@@ -27,8 +27,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
-import static su.terrafirmagreg.data.Properties.UP;
+import static su.terrafirmagreg.data.Properties.BoolProp.UP;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockRockStandGem extends BlockRock implements IProviderTile {

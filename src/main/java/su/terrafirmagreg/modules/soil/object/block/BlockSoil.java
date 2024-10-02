@@ -24,7 +24,7 @@ import lombok.Getter;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.CLAY;
+import static su.terrafirmagreg.data.Properties.BoolProp.CLAY;
 
 @Getter
 public abstract class BlockSoil extends BaseBlock implements ISoilBlock {

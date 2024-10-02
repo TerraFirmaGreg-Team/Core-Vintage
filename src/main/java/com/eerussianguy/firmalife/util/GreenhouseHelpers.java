@@ -14,9 +14,9 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.objects.te.TEClimateStation;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.data.Properties.GLASS;
-import static su.terrafirmagreg.data.Properties.TOP;
+import static su.terrafirmagreg.data.Properties.BoolProp.GLASS;
+import static su.terrafirmagreg.data.Properties.BoolProp.TOP;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 public class GreenhouseHelpers {
 
@@ -39,7 +39,7 @@ public class GreenhouseHelpers {
 
   public static boolean isMultiblockValid(World world, BlockPos pos, IBlockState state, boolean visual, int tier) {
     int arcs = getGoodArcs(world, pos, state, visual);
-    EnumFacing facing = state.getValue(FACING);
+    EnumFacing facing = state.getValue(HORIZONTAL);
     EnumFacing wallFace;
     BlockPos startPos;
     if (world.getBlockState(pos.offset(facing.rotateY())).getBlock() instanceof BlockGreenhouseWall) {
@@ -65,7 +65,7 @@ public class GreenhouseHelpers {
   }
 
   private static int getGoodArcs(World world, BlockPos pos, IBlockState state, boolean visual) {
-    EnumFacing inward = state.getValue(FACING);
+    EnumFacing inward = state.getValue(HORIZONTAL);
     EnumFacing outward = inward.getOpposite();
     EnumFacing correctDir = null;
     int returnValue = 0;
@@ -134,7 +134,7 @@ public class GreenhouseHelpers {
 
   private static void seedPositionData(World world, BlockPos pos, IBlockState state, int arcs) {
     TileUtils.getTile(world, pos, TEClimateStation.class).ifPresent(tile -> {
-      EnumFacing facing = state.getValue(FACING);
+      EnumFacing facing = state.getValue(HORIZONTAL);
       int forwardCount = 1;
       int upCount = 1;
       boolean foundWall = false;
@@ -158,7 +158,7 @@ public class GreenhouseHelpers {
   }
 
   public static void setApproval(World world, BlockPos pos, IBlockState state, EnumFacing wallDir, boolean approvalStatus, boolean visual, int tier) {
-    final EnumFacing facing = state.getValue(FACING);
+    final EnumFacing facing = state.getValue(HORIZONTAL);
     TileUtils.getTile(world, pos, TEClimateStation.class).ifPresent(tile -> {
       for (int i = 0; i <= tile.forward; i++) {
         for (int j = 0; j <= tile.arcs; j++) {
@@ -262,17 +262,17 @@ public class GreenhouseHelpers {
   private static boolean validEndWallBlock(World world, BlockPos pos, IBlockState checkState, EnumFacing wallFacing, boolean visual) {
     return packet(world, pos,
                   (checkState.getBlock() instanceof BlockGreenhouseWall &&
-                   checkState.getValue(GLASS) && checkState.getValue(FACING) == wallFacing) ||
+                   checkState.getValue(GLASS) && checkState.getValue(HORIZONTAL) == wallFacing) ||
                   checkState.getBlock() instanceof BlockGreenhouseDoor, visual);
   }
 
   private static boolean validWallBlock(World world, BlockPos pos, IBlockState state, EnumFacing correctFace, boolean visual) {
-    return packet(world, pos, state.getBlock() instanceof BlockGreenhouseWall && state.getValue(FACING) == correctFace && state.getValue(GLASS),
+    return packet(world, pos, state.getBlock() instanceof BlockGreenhouseWall && state.getValue(HORIZONTAL) == correctFace && state.getValue(GLASS),
                   visual);
   }
 
   private static boolean validRoofBlock(World world, BlockPos pos, IBlockState state, EnumFacing correctFace, boolean visual) {
-    return packet(world, pos, state.getBlock() instanceof BlockGreenhouseRoof && state.getValue(FACING) == correctFace && state.getValue(GLASS) &&
+    return packet(world, pos, state.getBlock() instanceof BlockGreenhouseRoof && state.getValue(HORIZONTAL) == correctFace && state.getValue(GLASS) &&
                               !state.getValue(TOP), visual);
   }
 

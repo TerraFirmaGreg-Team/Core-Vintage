@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.data.Properties.AXIS;
+import static su.terrafirmagreg.data.Properties.EnumProp.AXIS;
 
 @Getter
 @SuppressWarnings("deprecation")

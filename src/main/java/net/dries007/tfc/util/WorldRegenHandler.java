@@ -57,9 +57,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
 import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
 
 /**
  * Seasonally regenerates rocks, sticks, snow, plants, crops and bushes.

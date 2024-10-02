@@ -1,13 +1,13 @@
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.Plant;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import net.dries007.tfc.api.types.Plant;
 
 import java.util.HashMap;
 import java.util.Map;

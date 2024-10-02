@@ -3,7 +3,6 @@ package net.dries007.tfc.objects.blocks.plants;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -25,9 +24,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import static su.terrafirmagreg.data.Properties.DirectionProp.DIRECTIONAL;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+
 public class BlockPlantEpiphyte extends BlockPlant {
 
-  private static final PropertyDirection FACING = PropertyDirection.create("facing");
   private static final AxisAlignedBB PLANT_UP_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.75D, 0.75D);
   private static final AxisAlignedBB PLANT_DOWN_AABB = new AxisAlignedBB(0.25D, 0.25D, 0.25D, 0.75D, 1.0D, 0.75D);
   private static final AxisAlignedBB PLANT_NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.25D, 1.0D, 1.0D, 1.0D);
@@ -55,7 +57,7 @@ public class BlockPlantEpiphyte extends BlockPlant {
 
   private void onNeighborChangeInternal(World worldIn, BlockPos pos, IBlockState state) {
     if (this.checkForDrop(worldIn, pos, state)) {
-      EnumFacing facing = state.getValue(FACING);
+      EnumFacing facing = state.getValue(DIRECTIONAL);
       EnumFacing.Axis axis = facing.getAxis();
       BlockPos blockpos = pos.offset(facing.getOpposite());
       boolean flag = false;
@@ -74,7 +76,7 @@ public class BlockPlantEpiphyte extends BlockPlant {
   }
 
   private boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state) {
-    if (state.getBlock() == this && this.canPlaceAt(worldIn, pos, state.getValue(FACING))) {
+    if (state.getBlock() == this && this.canPlaceAt(worldIn, pos, state.getValue(DIRECTIONAL))) {
       return true;
     } else {
       if (worldIn.getBlockState(pos).getBlock() == this) {
@@ -100,18 +102,18 @@ public class BlockPlantEpiphyte extends BlockPlant {
 
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, FACING, growthStageProperty, DAYPERIOD, AGE);
+    return new BlockStateContainer(this, DIRECTIONAL, growthStageProperty, DAYPERIOD, AGE_4);
   }
 
   @NotNull
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
+    return this.getDefaultState().withProperty(DIRECTIONAL, EnumFacing.byIndex(meta));
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getIndex();
+    return state.getValue(DIRECTIONAL).getIndex();
   }
 
   @Override
@@ -129,7 +131,7 @@ public class BlockPlantEpiphyte extends BlockPlant {
 
   @Override
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    for (EnumFacing enumfacing : FACING.getAllowedValues()) {
+    for (EnumFacing enumfacing : DIRECTIONAL.getAllowedValues()) {
       if (this.canPlaceAt(worldIn, pos, enumfacing)) {
         return worldIn.getBlockState(pos).getBlock() != this;
       }
@@ -145,7 +147,7 @@ public class BlockPlantEpiphyte extends BlockPlant {
 
   @Override
   public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-    for (EnumFacing enumfacing : FACING.getAllowedValues()) {
+    for (EnumFacing enumfacing : DIRECTIONAL.getAllowedValues()) {
       if (this.canPlaceAt(worldIn, pos, enumfacing)) {
         return plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
       }
@@ -157,7 +159,7 @@ public class BlockPlantEpiphyte extends BlockPlant {
   @Override
   @NotNull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    switch (state.getValue(FACING)) {
+    switch (state.getValue(DIRECTIONAL)) {
       case EAST:
         return PLANT_EAST_AABB;
       case WEST:
@@ -177,14 +179,14 @@ public class BlockPlantEpiphyte extends BlockPlant {
   @NotNull
   @Override
   public IBlockState withRotation(IBlockState state, Rotation rot) {
-    return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
+    return state.withProperty(DIRECTIONAL, rot.rotate(state.getValue(DIRECTIONAL)));
   }
 
   @SuppressWarnings("deprecation")
   @NotNull
   @Override
   public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
-    return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
+    return state.withRotation(mirrorIn.toRotation(state.getValue(DIRECTIONAL)));
   }
 
   @SuppressWarnings("deprecation")
@@ -193,11 +195,11 @@ public class BlockPlantEpiphyte extends BlockPlant {
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
                                           EntityLivingBase placer) {
     if (this.canPlaceAt(worldIn, pos, facing)) {
-      return this.getDefaultState().withProperty(FACING, facing);
+      return this.getDefaultState().withProperty(DIRECTIONAL, facing);
     } else {
       for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
         if (this.canPlaceAt(worldIn, pos, enumfacing)) {
-          return this.getDefaultState().withProperty(FACING, enumfacing);
+          return this.getDefaultState().withProperty(DIRECTIONAL, enumfacing);
         }
       }
 
@@ -208,12 +210,12 @@ public class BlockPlantEpiphyte extends BlockPlant {
   public IBlockState getStateForWorldGen(World worldIn, BlockPos pos) {
     for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
       if (this.canPlaceAt(worldIn, pos, enumfacing)) {
-        return this.getDefaultState().withProperty(FACING, enumfacing);
+        return this.getDefaultState().withProperty(DIRECTIONAL, enumfacing);
       }
     }
     for (EnumFacing enumfacing : EnumFacing.Plane.VERTICAL) {
       if (this.canPlaceAt(worldIn, pos, enumfacing)) {
-        return this.getDefaultState().withProperty(FACING, enumfacing);
+        return this.getDefaultState().withProperty(DIRECTIONAL, enumfacing);
       }
     }
 

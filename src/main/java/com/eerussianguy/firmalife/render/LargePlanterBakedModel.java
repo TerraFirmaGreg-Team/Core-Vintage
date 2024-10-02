@@ -1,7 +1,5 @@
 package com.eerussianguy.firmalife.render;
 
-import su.terrafirmagreg.data.Properties;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -28,6 +26,7 @@ import java.util.Objects;
 
 import static com.eerussianguy.firmalife.util.ClientHelpers.bake;
 import static su.terrafirmagreg.data.Constants.MODID_FL;
+import static su.terrafirmagreg.data.Properties.BoolProp.WET;
 
 @MethodsReturnNonnullByDefault
 public class LargePlanterBakedModel implements IBakedModel {
@@ -46,7 +45,7 @@ public class LargePlanterBakedModel implements IBakedModel {
       return bake(dummy).getQuads(state, side, rand);
     }
     Map<String, String> sprites = new HashMap<>();
-    sprites.put("soil", MODID_FL + (state.getValue(Properties.WET) ? ":blocks/potting_soil_wet" : ":blocks/potting_soil_dry"));
+    sprites.put("soil", MODID_FL + (state.getValue(WET) ? ":blocks/potting_soil_wet" : ":blocks/potting_soil_dry"));
     if (state instanceof IExtendedBlockState extendedBlockState) {
       sprites.put("crop1", resolveTexture(extendedBlockState, BlockLargePlanter.CROP));
     }

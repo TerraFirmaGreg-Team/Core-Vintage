@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @Getter
 @SuppressWarnings("deprecation")

@@ -1,10 +1,8 @@
 package tfcflorae.client;
 
-import su.terrafirmagreg.data.Properties;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.BlockColors;
@@ -16,7 +14,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -38,14 +35,19 @@ import net.dries007.tfc.objects.blocks.plants.BlockWaterGlowPlant;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.items.ItemArmorTFCF;
 import net.dries007.tfc.objects.items.ItemGemTFCF;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import tfcflorae.ConfigTFCF;
 
-import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 import static su.terrafirmagreg.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.data.Properties.BoolProp.CAN_GROW;
+import static su.terrafirmagreg.data.Properties.BoolProp.DECAYABLE;
+import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
+import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.data.Properties.IntProp.LEVEL;
+import static su.terrafirmagreg.data.Properties.IntProp.STAGE_5;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = MODID_TFCF)
@@ -137,19 +139,19 @@ public class ClientRegisterEventsTFCF {
     //            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockJoshuaTreeSapling.STAGE).build());
 
     for (BlockFruitTreeLeaves leaves : BlocksTFCF.getAllFruitLeaves()) {
-      ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE)
-                                                                     .ignore(BlockFruitTreeLeaves.HARVESTABLE)
+      ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(DECAYABLE)
+                                                                     .ignore(HARVESTABLE)
                                                                      .build());
     }
 
     for (BlockLeavesTFCF leaves : BlocksTFCF.getAllNormalTreeLeaves()) {
-      ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockLeavesTFCF.DECAYABLE)
-                                                                     .ignore(BlockLeavesTFCF.HARVESTABLE)
+      ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(DECAYABLE)
+                                                                     .ignore(HARVESTABLE)
                                                                      .build());
     }
 
     for (BlockLogTFCF Logs : BlocksTFCF.getAllNormalTreeLog()) {
-      ModelLoader.setCustomStateMapper(Logs, new StateMap.Builder().ignore(BlockLogTFCF.PLACED).build());
+      ModelLoader.setCustomStateMapper(Logs, new StateMap.Builder().ignore(PLACED).build());
     }
 
     for (Block block : BlocksTFCF.getAllCropBlocks()) {
@@ -157,34 +159,34 @@ public class ClientRegisterEventsTFCF {
     }
 
     for (Block block : BlocksTFCF.getAllFluidBlocks()) {
-      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
+      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(LEVEL).build());
     }
 
     for (Block block : BlocksTFCF.getAllBambooLog()) {
-      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(Properties.CAN_GROW)
+      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(CAN_GROW)
                                                                     .build());
     }
 
     for (Block block : BlocksTFCF.getAllBambooLeaves()) {
-      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
+      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(DECAYABLE).build());
     }
 
     for (Block block : BlocksTFCF.getAllBambooSapling()) {
-      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
+      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(STAGE_5).build());
     }
 
-    ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LOG, new StateMap.Builder().ignore(Properties.CAN_GROW)
+    ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LOG, new StateMap.Builder().ignore(CAN_GROW)
                                                                                            .build());
-    ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)
+    ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LEAVES, new StateMap.Builder().ignore(DECAYABLE)
                                                                                               .build());
-    ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE)
+    ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_SAPLING, new StateMap.Builder().ignore(STAGE_5)
                                                                                                .build());
 
-    ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LOG, new StateMap.Builder().ignore(Properties.CAN_GROW)
+    ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LOG, new StateMap.Builder().ignore(CAN_GROW)
                                                                                            .build());
-    ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)
+    ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LEAVES, new StateMap.Builder().ignore(DECAYABLE)
                                                                                               .build());
-    ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE)
+    ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_SAPLING, new StateMap.Builder().ignore(STAGE_5)
                                                                                                .build());
   }
 

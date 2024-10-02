@@ -1,6 +1,11 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
-import lombok.Getter;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
+import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
+import su.terrafirmagreg.modules.wood.object.container.ContainerWoodWorkbench;
 
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.SoundType;
@@ -21,12 +26,7 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.ToolClasses;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
-import su.terrafirmagreg.modules.wood.object.container.ContainerWoodWorkbench;
+import lombok.Getter;
 
 @Getter
 public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {

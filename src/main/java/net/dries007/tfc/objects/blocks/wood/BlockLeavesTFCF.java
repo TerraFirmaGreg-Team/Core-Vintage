@@ -3,13 +3,12 @@ package net.dries007.tfc.objects.blocks.wood;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.data.enums.EnumLeafState;
 import su.terrafirmagreg.data.lib.MCDate.Month;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -21,7 +20,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -54,11 +52,11 @@ import java.util.Random;
 import java.util.Set;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.data.Properties.EnumProp.LEAF_STATE;
 
 public class BlockLeavesTFCF extends BlockLeaves {
 
-  public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", BlockLeavesTFCF.EnumLeafState.class);
-  public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
   private static final Map<SeasonalTrees, BlockLeavesTFCF> MAP = new HashMap<>();
   public final Tree wood;
   public final SeasonalTrees fruitTree;
@@ -391,23 +389,4 @@ public class BlockLeavesTFCF extends BlockLeaves {
     return ImmutableList.of(new ItemStack(this));
   }
 
-  public enum EnumLeafState implements IStringSerializable {
-    NORMAL,
-    FLOWERING,
-    FRUIT,
-    AUTUMN,
-    WINTER;
-
-    private static final EnumLeafState[] VALUES = values();
-
-    @NotNull
-    public static EnumLeafState valueOf(int index) {
-      return index < 0 || index > VALUES.length ? NORMAL : VALUES[index];
-    }
-
-    @Override
-    public String getName() {
-      return this.name().toLowerCase();
-    }
-  }
 }

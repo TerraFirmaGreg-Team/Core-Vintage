@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.base.block.BaseBlockDirectional;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
@@ -7,7 +8,6 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -38,12 +38,14 @@ import net.dries007.tfc.util.skills.SkillType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.data.Properties.EnumProp.FACING;
+
 @MethodsReturnNonnullByDefault
 
-public class BlockStemFruit extends BlockDirectional implements ICapabilitySize {
+public class BlockStemFruit extends BaseBlockDirectional implements ICapabilitySize {
 
   public BlockStemFruit() {
-    super(Material.GOURD);
+    super(Settings.of(Material.GOURD));
     this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     this.setHardness(1.0f);
   }

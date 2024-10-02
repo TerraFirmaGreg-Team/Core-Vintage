@@ -45,10 +45,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
 import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.CURED;
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.CURED;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockOven extends BaseBlock implements IProviderTile {
@@ -67,7 +67,7 @@ public class BlockOven extends BaseBlock implements IProviderTile {
     setTickRandomly(true);
     setDefaultState(blockState.getBaseState()
                               .withProperty(CURED, Boolean.FALSE)
-                              .withProperty(FACING, EnumFacing.NORTH)
+                              .withProperty(HORIZONTAL, EnumFacing.NORTH)
                               .withProperty(LIT, Boolean.FALSE));
   }
 
@@ -82,7 +82,7 @@ public class BlockOven extends BaseBlock implements IProviderTile {
    */
   public static boolean isValidHorizontal(World world, BlockPos ovenPos, boolean needsCure) {
     IBlockState ovenState = world.getBlockState(ovenPos);
-    EnumFacing facing = ovenState.getValue(FACING);
+    EnumFacing facing = ovenState.getValue(HORIZONTAL);
     EnumFacing left = facing.rotateYCCW();
     EnumFacing right = facing.rotateY();
     IBlockState leftState = world.getBlockState(ovenPos.offset(left));
@@ -102,18 +102,18 @@ public class BlockOven extends BaseBlock implements IProviderTile {
         return false; // return false if it's not an oven or oven wall
       }
       if (b instanceof BlockOven) {
-        if (state.getValue(FACING) != ovenState.getValue(FACING)) {
+        if (state.getValue(HORIZONTAL) != ovenState.getValue(HORIZONTAL)) {
           return false; // if it's an oven, it should face the same way
         }
       }
       if (b instanceof BlockOvenWall) {
         if (state == leftState) {
-          if (leftState.getValue(FACING) != facing.getOpposite()) {
+          if (leftState.getValue(HORIZONTAL) != facing.getOpposite()) {
             return false; // if it's a wall, it should be rotated to touch the oven properly
           }
         }
         if (state == rightState) {
-          if (rightState.getValue(FACING) != facing) {
+          if (rightState.getValue(HORIZONTAL) != facing) {
             return false; // see above
           }
         }
@@ -146,7 +146,7 @@ public class BlockOven extends BaseBlock implements IProviderTile {
    */
   public static boolean hasChimney(World world, BlockPos ovenPos, boolean needsCure) {
     IBlockState ovenState = world.getBlockState(ovenPos);
-    EnumFacing facing = ovenState.getValue(FACING);
+    EnumFacing facing = ovenState.getValue(HORIZONTAL);
     EnumFacing left = facing.rotateYCCW();
     EnumFacing right = facing.rotateY();
 
@@ -186,12 +186,12 @@ public class BlockOven extends BaseBlock implements IProviderTile {
     return this.getDefaultState()
                .withProperty(CURED, cured)
                .withProperty(LIT, lit)
-               .withProperty(FACING, EnumFacing.byHorizontalIndex(facing));
+               .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(facing));
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    int facing = state.getValue(FACING).getHorizontalIndex(); //0, 1, 2, 3
+    int facing = state.getValue(HORIZONTAL).getHorizontalIndex(); //0, 1, 2, 3
     int cured = state.getValue(CURED) ? 8 : 0; // true = 8, false = 0
     int lit = state.getValue(LIT) ? 4 : 0; // true = 0, false = 4
 
@@ -209,7 +209,7 @@ public class BlockOven extends BaseBlock implements IProviderTile {
       if (!isValidHorizontal(world, pos, false)) {
         TileUtils.getTile(world, pos, TileOven.class).ifPresent(TileOven::turnOff);
       } else {
-        EnumFacing facing = state.getValue(FACING);
+        EnumFacing facing = state.getValue(HORIZONTAL);
         EnumFacing left = facing.rotateYCCW();
         EnumFacing right = facing.rotateY();
         cascadeLight(world, pos.offset(left));
@@ -325,12 +325,12 @@ public class BlockOven extends BaseBlock implements IProviderTile {
     if (facing.getAxis() == EnumFacing.Axis.Y) {
       facing = placer.getHorizontalFacing().getOpposite();
     }
-    return getDefaultState().withProperty(FACING, facing);
+    return getDefaultState().withProperty(HORIZONTAL, facing);
   }
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, LIT, CURED);
+    return new BlockStateContainer(this, HORIZONTAL, LIT, CURED);
   }
 
   @Override
@@ -346,7 +346,7 @@ public class BlockOven extends BaseBlock implements IProviderTile {
     IBlockState checkState = world.getBlockState(checkPos);
     if (checkState.getBlock() instanceof BlockOven && !checkState.getValue(LIT) &&
         isValidHorizontal(world, checkPos, false) && hasChimney(world, checkPos, false)) {
-      
+
       TileUtils.getTile(world, checkPos, TileOven.class).ifPresent(tile -> {
         world.setBlockState(checkPos, checkState.withProperty(LIT, true));
         tile.setWarmed();

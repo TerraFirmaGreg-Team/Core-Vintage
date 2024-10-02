@@ -44,8 +44,8 @@ import java.util.Collections;
 import java.util.Random;
 
 import static net.minecraft.util.EnumFacing.NORTH;
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
-import static su.terrafirmagreg.data.Properties.UPPER;
+import static su.terrafirmagreg.data.Properties.BoolProp.UPPER;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {

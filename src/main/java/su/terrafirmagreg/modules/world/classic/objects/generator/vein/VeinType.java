@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.vein;
 
+import su.terrafirmagreg.data.enums.EnumGradeOre;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypes;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
@@ -72,13 +73,13 @@ public class VeinType {
   public Vein createVein(Random rand, int chunkX, int chunkZ) {
     BlockPos startPos = new BlockPos(chunkX * 16 + 8 + rand.nextInt(16),
                                      minY + rand.nextInt(maxY - minY), chunkZ * 16 + 8 + rand.nextInt(16));
-    Ore.Grade grade = Ore.Grade.NORMAL;
+    EnumGradeOre grade = EnumGradeOre.NORMAL;
     if (ore != null && ore.isGraded()) {
       float randomGrade = rand.nextFloat();
       if (randomGrade < 0.2) {
-        grade = Ore.Grade.RICH;
+        grade = EnumGradeOre.RICH;
       } else if (randomGrade < 0.5) {
-        grade = Ore.Grade.POOR;
+        grade = EnumGradeOre.POOR;
       }
     }
     return switch (shape) {

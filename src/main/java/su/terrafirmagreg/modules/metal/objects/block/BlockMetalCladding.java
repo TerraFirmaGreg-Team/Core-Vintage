@@ -11,7 +11,6 @@ import su.terrafirmagreg.modules.metal.objects.tile.TileMetalSheet;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -39,18 +38,12 @@ import lombok.Getter;
 
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.DOWN;
-import static su.terrafirmagreg.data.Properties.EAST;
-import static su.terrafirmagreg.data.Properties.NORTH;
-import static su.terrafirmagreg.data.Properties.SOUTH;
-import static su.terrafirmagreg.data.Properties.UP;
-import static su.terrafirmagreg.data.Properties.WEST;
+import static su.terrafirmagreg.data.Properties.BoolProp.ALL_FACES;
 
 @SuppressWarnings("deprecation")
 @Getter
 public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
 
-  public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{DOWN, UP, NORTH, SOUTH, WEST, EAST};
   private static final AxisAlignedBB[] SHEET_AABB = new AxisAlignedBB[]{
     new AxisAlignedBB(0d, 0.9375d, 0d, 1d, 1d, 1d),
     new AxisAlignedBB(0d, 0d, 0d, 1d, 0.0625d, 1d),
@@ -80,12 +73,12 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
       .resistance(25F);
 
     setDefaultState(blockState.getBaseState()
-                              .withProperty(FACE_PROPERTIES[0], false)
-                              .withProperty(FACE_PROPERTIES[1], false)
-                              .withProperty(FACE_PROPERTIES[2], false)
-                              .withProperty(FACE_PROPERTIES[3], false)
-                              .withProperty(FACE_PROPERTIES[4], false)
-                              .withProperty(FACE_PROPERTIES[5], false));
+                              .withProperty(ALL_FACES[0], false)
+                              .withProperty(ALL_FACES[1], false)
+                              .withProperty(ALL_FACES[2], false)
+                              .withProperty(ALL_FACES[3], false)
+                              .withProperty(ALL_FACES[4], false)
+                              .withProperty(ALL_FACES[5], false));
   }
 
   @Override
@@ -98,7 +91,7 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
     var tile = TileUtils.getTile(worldIn, pos, TileMetalSheet.class);
     if (tile.isPresent()) {
       for (EnumFacing face : EnumFacing.values()) {
-        state = state.withProperty(FACE_PROPERTIES[face.getIndex()], tile.get().getFace(face));
+        state = state.withProperty(ALL_FACES[face.getIndex()], tile.get().getFace(face));
       }
     }
     return state;
@@ -184,7 +177,7 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACE_PROPERTIES);
+    return new BlockStateContainer(this, ALL_FACES);
   }
 
   @Override

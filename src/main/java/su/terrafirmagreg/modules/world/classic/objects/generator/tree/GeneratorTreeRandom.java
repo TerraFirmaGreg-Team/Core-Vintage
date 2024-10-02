@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.tree;
 
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.ITreeGenerator;
-import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
+import su.terrafirmagreg.api.util.StructureUtils;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
@@ -12,13 +10,14 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-import su.terrafirmagreg.api.util.StructureUtils;
-
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.util.ITreeGenerator;
+import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import tfcflorae.TFCFlorae;
 
 import java.util.Random;
 
-import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
+import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
 
 public class GeneratorTreeRandom implements ITreeGenerator {
 

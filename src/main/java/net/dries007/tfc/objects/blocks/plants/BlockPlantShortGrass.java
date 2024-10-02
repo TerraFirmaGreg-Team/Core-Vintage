@@ -32,6 +32,8 @@ import java.util.Map;
 import java.util.Random;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 
 public class BlockPlantShortGrass extends BlockPlant implements IShearable {
 
@@ -54,14 +56,14 @@ public class BlockPlantShortGrass extends BlockPlant implements IShearable {
 
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, AGE, this.growthStageProperty, DAYPERIOD);
+    return new BlockStateContainer(this, AGE_4, this.growthStageProperty, DAYPERIOD);
   }
 
   public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack stack) {
     Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int currentStage = state.getValue(this.growthStageProperty);
     this.plant.getStageForMonth(currentMonth);
-    int age = state.getValue(AGE);
+    int age = state.getValue(AGE_4);
     if (!worldIn.isRemote) {
       if (stack.getItem().getHarvestLevel(stack, "knife", player, state) == -1 && stack.getItem()
                                                                                        .getHarvestLevel(stack, "scythe", player, state) == -1) {
@@ -85,20 +87,20 @@ public class BlockPlantShortGrass extends BlockPlant implements IShearable {
       int j;
       if (this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
           this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-        j = state.getValue(AGE);
+        j = state.getValue(AGE_4);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
           if (j < 3) {
-            worldIn.setBlockState(pos, state.withProperty(AGE, j + 1));
+            worldIn.setBlockState(pos, state.withProperty(AGE_4, j + 1));
           }
 
           ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
         }
       } else if (!this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                  !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-        j = state.getValue(AGE);
+        j = state.getValue(AGE_4);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
           if (j > 0) {
-            worldIn.setBlockState(pos, state.withProperty(AGE, j - 1));
+            worldIn.setBlockState(pos, state.withProperty(AGE_4, j - 1));
           } else {
             worldIn.setBlockToAir(pos);
           }
@@ -113,7 +115,7 @@ public class BlockPlantShortGrass extends BlockPlant implements IShearable {
 
   @NotNull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    switch (state.getValue(AGE)) {
+    switch (state.getValue(AGE_4)) {
       case 0:
         return SHORTEST_GRASS_AABB.offset(state.getOffset(source, pos));
       case 1:

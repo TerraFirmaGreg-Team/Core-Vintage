@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.data.enums.EnumGradeOre;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.heat.ProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
@@ -46,7 +47,7 @@ public class ItemOreTFC extends ItemTFC implements ICapabilityMetal {
     if (ore.getMetal() != null) {
       setHasSubtypes(true);
 
-      for (Ore.Grade grade : Ore.Grade.values()) {
+      for (EnumGradeOre grade : EnumGradeOre.values()) {
         //noinspection ConstantConditions
         String name = ore.getMetal().getRegistryName().getPath();
         OreDictionaryHelper.registerMeta(this, grade.getMeta(), "ore", name, grade);
@@ -80,7 +81,7 @@ public class ItemOreTFC extends ItemTFC implements ICapabilityMetal {
     return MAP.get(ore);
   }
 
-  public static ItemStack get(Ore ore, Ore.Grade grade, int amount) {
+  public static ItemStack get(Ore ore, EnumGradeOre grade, int amount) {
     return new ItemStack(MAP.get(ore), amount, ore.isGraded() ? grade.getMeta() : 0);
   }
 
@@ -91,16 +92,16 @@ public class ItemOreTFC extends ItemTFC implements ICapabilityMetal {
   @Override
   @NotNull
   public String getTranslationKey(@NotNull ItemStack stack) {
-    Ore.Grade grade = getGradeFromStack(stack);
-    if (grade == Ore.Grade.NORMAL) {
+    EnumGradeOre grade = getGradeFromStack(stack);
+    if (grade == EnumGradeOre.NORMAL) {
       return super.getTranslationKey(stack);
     }
     return super.getTranslationKey(stack) + "." + grade.getName();
   }
 
   @NotNull
-  public Ore.Grade getGradeFromStack(ItemStack stack) {
-    return Ore.Grade.valueOf(stack.getItemDamage());
+  public EnumGradeOre getGradeFromStack(ItemStack stack) {
+    return EnumGradeOre.valueOf(stack.getItemDamage());
   }
 
   @SideOnly(Side.CLIENT)
@@ -157,7 +158,7 @@ public class ItemOreTFC extends ItemTFC implements ICapabilityMetal {
   public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> items) {
     if (isInCreativeTab(tab)) {
       if (ore.isGraded()) {
-        for (Ore.Grade grade : Ore.Grade.values()) {
+        for (EnumGradeOre grade : EnumGradeOre.values()) {
           items.add(new ItemStack(this, 1, grade.getMeta()));
         }
       } else {

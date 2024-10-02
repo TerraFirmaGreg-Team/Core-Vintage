@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.init;
 
+import su.terrafirmagreg.data.enums.EnumGradeOre;
 import su.terrafirmagreg.modules.device.object.recipe.quern.IQuernRecipeManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypes;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
@@ -68,31 +69,31 @@ public final class RecipesDevice {
     //Hematite
     manager.addRecipe(IIngredient.of(ItemSmallOre.get(Ore.HEMATITE, 1)),
                       new ItemStack(ItemPowder.get(Powder.HEMATITE), 2));
-    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.HEMATITE, Ore.Grade.POOR, 1)),
+    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.HEMATITE, EnumGradeOre.POOR, 1)),
                       new ItemStack(ItemPowder.get(Powder.HEMATITE), 3));
-    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.HEMATITE, Ore.Grade.NORMAL, 1)),
+    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.HEMATITE, EnumGradeOre.NORMAL, 1)),
                       new ItemStack(ItemPowder.get(Powder.HEMATITE), 5));
-    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.HEMATITE, Ore.Grade.RICH, 1)),
+    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.HEMATITE, EnumGradeOre.RICH, 1)),
                       new ItemStack(ItemPowder.get(Powder.HEMATITE), 7));
 
     //Limonite
     manager.addRecipe(IIngredient.of(ItemSmallOre.get(Ore.LIMONITE, 1)),
                       new ItemStack(ItemPowder.get(Powder.LIMONITE), 2));
-    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.LIMONITE, Ore.Grade.POOR, 1)),
+    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.LIMONITE, EnumGradeOre.POOR, 1)),
                       new ItemStack(ItemPowder.get(Powder.LIMONITE), 3));
-    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.LIMONITE, Ore.Grade.NORMAL, 1)),
+    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.LIMONITE, EnumGradeOre.NORMAL, 1)),
                       new ItemStack(ItemPowder.get(Powder.LIMONITE), 5));
-    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.LIMONITE, Ore.Grade.RICH, 1)),
+    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.LIMONITE, EnumGradeOre.RICH, 1)),
                       new ItemStack(ItemPowder.get(Powder.LIMONITE), 7));
 
     //Malachite
     manager.addRecipe(IIngredient.of(ItemSmallOre.get(Ore.MALACHITE, 1)),
                       new ItemStack(ItemPowder.get(Powder.MALACHITE), 2));
-    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.MALACHITE, Ore.Grade.POOR, 1)),
+    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.MALACHITE, EnumGradeOre.POOR, 1)),
                       new ItemStack(ItemPowder.get(Powder.MALACHITE), 3));
-    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.MALACHITE, Ore.Grade.NORMAL, 1)),
+    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.MALACHITE, EnumGradeOre.NORMAL, 1)),
                       new ItemStack(ItemPowder.get(Powder.MALACHITE), 5));
-    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.MALACHITE, Ore.Grade.RICH, 1)),
+    manager.addRecipe(IIngredient.of(ItemOreTFC.get(Ore.MALACHITE, EnumGradeOre.RICH, 1)),
                       new ItemStack(ItemPowder.get(Powder.MALACHITE), 7));
 
     //Bone meal

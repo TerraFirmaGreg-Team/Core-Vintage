@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.device.object.block;
 import su.terrafirmagreg.api.base.block.BaseBlock;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -22,12 +21,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.IntProp.LAYERS;
 
 @SuppressWarnings("deprecation")
 public class BlockMolten extends BaseBlock {
 
-  public static final PropertyInteger LAYERS = PropertyInteger.create("layers", 1, 4);
 
   private static final AxisAlignedBB[] MOLTEN_AABB = new AxisAlignedBB[]{
     new AxisAlignedBB(0, 0, 0, 1, 0.25, 1),

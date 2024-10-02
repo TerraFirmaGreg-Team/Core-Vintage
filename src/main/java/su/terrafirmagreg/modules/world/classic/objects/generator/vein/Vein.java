@@ -1,11 +1,10 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.vein;
 
+import su.terrafirmagreg.data.enums.EnumGradeOre;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-
-import net.dries007.tfc.api.types.Ore;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -13,9 +12,9 @@ public class Vein {
 
   protected final BlockPos pos;
   protected final VeinType type;
-  protected final Ore.Grade grade;
+  protected final EnumGradeOre grade;
 
-  Vein(BlockPos pos, VeinType type, Ore.Grade grade) {
+  Vein(BlockPos pos, VeinType type, EnumGradeOre grade) {
     this.pos = pos;
     this.type = type;
     this.grade = grade;
@@ -45,7 +44,7 @@ public class Vein {
    */
   public static Vein deserialize(NBTTagCompound nbt) {
     BlockPos pos = BlockPos.fromLong(nbt.getLong("pos"));
-    Ore.Grade grade = Ore.Grade.valueOf(nbt.getByte("grade"));
+    EnumGradeOre grade = EnumGradeOre.valueOf(nbt.getByte("grade"));
     VeinType type = VeinRegistry.INSTANCE.getVein(nbt.getString("type"));
     return new Vein(pos, type, grade);
   }
@@ -103,7 +102,7 @@ public class Vein {
     return type;
   }
 
-  public Ore.Grade getGrade() {
+  public EnumGradeOre getGrade() {
     return grade;
   }
 

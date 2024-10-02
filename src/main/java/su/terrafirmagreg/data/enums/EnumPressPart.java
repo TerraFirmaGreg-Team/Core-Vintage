@@ -1,8 +1,8 @@
-package se.gory_moon.horsepower.client.model.modelvariants;
+package su.terrafirmagreg.data.enums;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum PressModels implements IStringSerializable {
+public enum EnumPressPart implements IStringSerializable {
   BASE,
   TOP;
 

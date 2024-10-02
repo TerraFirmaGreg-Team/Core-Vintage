@@ -42,7 +42,7 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 public class TileFreezeDryer extends BaseTileTickableInventory implements IItemHandlerSidedCallback, IProviderContainer<ContainerFreezeDryer, GuiFreezeDryer> {
 

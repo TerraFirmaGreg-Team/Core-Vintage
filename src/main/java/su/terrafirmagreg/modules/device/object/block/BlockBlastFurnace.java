@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
 
 @SuppressWarnings("deprecation")
 public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsConsumerBlock {

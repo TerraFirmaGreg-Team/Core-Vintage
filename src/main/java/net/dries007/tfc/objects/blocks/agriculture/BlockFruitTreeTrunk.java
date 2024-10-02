@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -39,13 +38,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+
 public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 
-  /* Connection sides (used if there's a branch on facing) */
-  public static final PropertyBool NORTH = PropertyBool.create("north");
-  public static final PropertyBool SOUTH = PropertyBool.create("south");
-  public static final PropertyBool EAST = PropertyBool.create("east");
-  public static final PropertyBool WEST = PropertyBool.create("west");
   private static final Map<IFruitTree, BlockFruitTreeTrunk> MAP = new HashMap<>();
   private static final AxisAlignedBB TRUNK_AABB = new AxisAlignedBB(0.3125D, 0.0D, 0.3125D, 0.6875D, 1.0D, 0.6875D);
   private static final AxisAlignedBB CONNECTION_N_AABB = new AxisAlignedBB(0.3125D, 0.375D, 0.0D, 0.0D, 0.625D, 0.3125D);
@@ -171,7 +171,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                    //Missing leaf, spawn that first
                    if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
                      worldIn.setBlockState(missingLeaf, fruitTreeBranch.getDefaultState()
-                                                                       .withProperty(BlockFruitTreeLeaves.HARVESTABLE, false));
+                                                                       .withProperty(HARVESTABLE, false));
                    }
                  } else {
                    //Time to grow one trunk
@@ -187,7 +187,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                      //There is a missing leaf
                      if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
                        worldIn.setBlockState(missingLeaf, fruitTreeBranch.getDefaultState()
-                                                                         .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                                                         .withProperty(HARVESTABLE, true));
                      }
                      return; //Done what we needed to do on this stage
                    } else {
@@ -201,7 +201,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                      //There is a missing leaf
                      if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
                        worldIn.setBlockState(missingLeaf, fruitTreeBranch.getDefaultState()
-                                                                         .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                                                         .withProperty(HARVESTABLE, true));
                      }
                      return; //Done what we needed to do on this stage
                    }
@@ -210,7 +210,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                    if (missingLeaf != null) {
                      if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
                        worldIn.setBlockState(missingLeaf, fruitTreeBranch.getDefaultState()
-                                                                         .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                                                         .withProperty(HARVESTABLE, true));
                      }
                      return; //Done what we needed to do on this stage
                    }
@@ -218,7 +218,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                    if (missingLeaf != null) {
                      if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
                        worldIn.setBlockState(missingLeaf, fruitTreeBranch.getDefaultState()
-                                                                         .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                                                         .withProperty(HARVESTABLE, true));
                      }
                      return; //Done what we needed to do on this stage
                    }
@@ -238,7 +238,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                    if (missingLeaf != null) {
                      if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
                        worldIn.setBlockState(missingLeaf, fruitTreeBranch.getDefaultState()
-                                                                         .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                                                         .withProperty(HARVESTABLE, true));
                        return; //Done what we needed to do on this stage
                      }
                    }
@@ -353,7 +353,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
       if (missingLeaf != null && world.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
         world.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree)
                                                              .getDefaultState()
-                                                             .withProperty(BlockFruitTreeLeaves.HARVESTABLE, hasvestable));
+                                                             .withProperty(HARVESTABLE, hasvestable));
       } else {
         //Found a block(ceiling?) that prevents this tree to grow leafs, aborting
         break;

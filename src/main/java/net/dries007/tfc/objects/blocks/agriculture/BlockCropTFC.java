@@ -12,7 +12,6 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -48,21 +47,19 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import static net.minecraft.block.BlockFarmland.MOISTURE;
+import static su.terrafirmagreg.data.Properties.BoolProp.MATURE;
+import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.data.Properties.IntProp.MOISTURE;
+import static su.terrafirmagreg.data.Properties.IntProp.STAGE_5;
+import static su.terrafirmagreg.data.Properties.IntProp.STAGE_6;
+import static su.terrafirmagreg.data.Properties.IntProp.STAGE_7;
+import static su.terrafirmagreg.data.Properties.IntProp.STAGE_8;
 
 public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlant
 
-  // stage properties
-  public static final PropertyInteger STAGE_8 = PropertyInteger.create("stage", 0, 7);
-  public static final PropertyInteger STAGE_7 = PropertyInteger.create("stage", 0, 6);
-  public static final PropertyInteger STAGE_6 = PropertyInteger.create("stage", 0, 5);
-  public static final PropertyInteger STAGE_5 = PropertyInteger.create("stage", 0, 4);
 
   // static map for conversion from maxValue to Stage Property
   public static final HashMap<Integer, PropertyInteger> STAGE_MAP = new HashMap<>();
-
-  /* true if the crop spawned in the wild, means it ignores growth conditions i.e. farmland */
-  public static final PropertyBool WILD = PropertyBool.create("wild");
 
   // model boxes
   private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[]{
@@ -245,7 +242,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
     if (ConfigTFC.General.FOOD.enableCropDeath) {
       worldIn.setBlockState(pos, BlockCropDead.get(crop)
                                               .getDefaultState()
-                                              .withProperty(BlockCropDead.MATURE, state.getValue(getStageProperty()) == crop.getMaxStage()));
+                                              .withProperty(MATURE, state.getValue(getStageProperty()) == crop.getMaxStage()));
     }
   }
 

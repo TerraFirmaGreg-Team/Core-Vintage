@@ -42,17 +42,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+
 public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
 
-  public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
-  /*
-   * Time of day, used for rendering plants that bloom at different times
-   * 0 = midnight-dawn
-   * 1 = dawn-noon
-   * 2 = noon-dusk
-   * 3 = dusk-midnight
-   */
-  public final static PropertyInteger DAYPERIOD = PropertyInteger.create("dayperiod", 0, 3);
   private static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
   //private static final Map<Plant, BlockPlantTFCF> MAP = new HashMap<>();
 
@@ -84,19 +78,19 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
 
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, growthStageProperty, DAYPERIOD, AGE);
+    return new BlockStateContainer(this, growthStageProperty, DAYPERIOD, AGE_4);
   }
 
   @SuppressWarnings("deprecation")
   @Override
   @NotNull
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(AGE, meta);
+    return this.getDefaultState().withProperty(AGE_4, meta);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(AGE);
+    return state.getValue(AGE_4);
   }
 
   @SuppressWarnings("deprecation")
@@ -160,7 +154,7 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
     // Entity X/Z motion is reduced by plants. Affine combination of age modifier and actual modifier
     if (!(entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative())) {
-      double modifier = 0.25 * (4 - state.getValue(AGE));
+      double modifier = 0.25 * (4 - state.getValue(AGE_4));
       modifier = (1 - modifier) * plant.getMovementMod() + modifier;
       if (modifier < ConfigTFC.General.MISC.minimumPlantMovementModifier) {
         modifier = ConfigTFC.General.MISC.minimumPlantMovementModifier;
@@ -289,21 +283,21 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
 
     if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
         if (j < 3) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j + 1));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j + 1));
         }
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
         if (j > 0) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j - 1));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j - 1));
         }
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }

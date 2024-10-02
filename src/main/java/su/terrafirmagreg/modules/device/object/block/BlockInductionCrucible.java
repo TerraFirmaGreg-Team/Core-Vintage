@@ -31,8 +31,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockInductionCrucible extends BaseBlock implements IProviderTile {
@@ -67,20 +67,20 @@ public class BlockInductionCrucible extends BaseBlock implements IProviderTile {
     setHarvestLevel(ToolClasses.PICKAXE, 0);
     setDefaultState(blockState.getBaseState()
                               .withProperty(LIT, false)
-                              .withProperty(FACING, EnumFacing.NORTH));
+                              .withProperty(HORIZONTAL, EnumFacing.NORTH));
 
   }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-               .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+               .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
                .withProperty(LIT, meta >= 4);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
+    return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
   }
 
   @Override
@@ -121,20 +121,20 @@ public class BlockInductionCrucible extends BaseBlock implements IProviderTile {
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, LIT);
+    return new BlockStateContainer(this, HORIZONTAL, LIT);
   }
 
   @Override
   public boolean isSideSolid(IBlockState baseState, IBlockAccess world, BlockPos pos,
                              EnumFacing side) {
-    return side == baseState.getValue(FACING);
+    return side == baseState.getValue(HORIZONTAL);
   }
 
   @Override
   public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX,
                                           float hitY, float hitZ, int meta,
                                           EntityLivingBase placer, EnumHand hand) {
-    return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+    return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing().getOpposite());
   }
 
   @Override

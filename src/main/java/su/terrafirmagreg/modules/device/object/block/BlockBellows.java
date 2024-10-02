@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockBellows extends BaseBlock implements IProviderTile {
@@ -41,17 +41,17 @@ public class BlockBellows extends BaseBlock implements IProviderTile {
       .hardness(2.0F)
       .resistance(2.0F);
     setHarvestLevel(ToolClasses.AXE, 0);
-    setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+    setDefaultState(blockState.getBaseState().withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
+    return this.getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta));
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getHorizontalIndex();
+    return state.getValue(HORIZONTAL).getHorizontalIndex();
   }
 
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -67,18 +67,18 @@ public class BlockBellows extends BaseBlock implements IProviderTile {
         facing = placer.getHorizontalFacing();
       }
     }
-    return getDefaultState().withProperty(FACING, facing);
+    return getDefaultState().withProperty(HORIZONTAL, facing);
   }
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING);
+    return new BlockStateContainer(this, HORIZONTAL);
   }
 
   @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
                                           EnumFacing face) {
-    return face == state.getValue(FACING) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+    return face == state.getValue(HORIZONTAL) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 
   @Override

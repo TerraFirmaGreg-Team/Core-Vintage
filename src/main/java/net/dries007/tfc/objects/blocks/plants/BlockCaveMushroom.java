@@ -15,7 +15,6 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -53,24 +52,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.ALL_FACES;
+import static su.terrafirmagreg.data.Properties.BoolProp.DOWN;
+import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.UP;
+import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+
 public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabilitySize, IItemFoodTFC {
 
-  public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
-  /*
-   * Time of day, used for rendering plants that bloom at different times
-   * 0 = midnight-dawn
-   * 1 = dawn-noon
-   * 2 = noon-dusk
-   * 3 = dusk-midnight
-   */
-  public static final PropertyInteger DAYPERIOD = PropertyInteger.create("dayperiod", 0, 3);
-  static final PropertyBool DOWN = PropertyBool.create("down");
-  static final PropertyBool UP = PropertyBool.create("up");
-  static final PropertyBool NORTH = PropertyBool.create("north");
-  static final PropertyBool EAST = PropertyBool.create("east");
-  static final PropertyBool SOUTH = PropertyBool.create("south");
-  static final PropertyBool WEST = PropertyBool.create("west");
-  private static final PropertyBool[] ALL_FACES = new PropertyBool[]{DOWN, UP, NORTH, SOUTH, WEST, EAST};
   private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.1D, 0.2D, 0.1D, 0.9D, 1.0D, 0.9D);
   private static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
   private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.1D, 0.1D, 0.0D, 0.9D, 0.9D, 0.8D);
@@ -115,7 +108,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
 
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, DOWN, UP, NORTH, EAST, WEST, SOUTH, DAYPERIOD, AGE);
+    return new BlockStateContainer(this, DOWN, UP, NORTH, EAST, WEST, SOUTH, DAYPERIOD, AGE_4);
   }
 
   @Override
@@ -137,12 +130,12 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
   @Override
   @NotNull
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(AGE, meta);
+    return this.getDefaultState().withProperty(AGE_4, meta);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(AGE);
+    return state.getValue(AGE_4);
   }
 
   @Override
@@ -287,26 +280,26 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
 
     if (Climate.getActualTemp(worldIn, pos) >= -11f && Climate.getActualTemp(worldIn, pos) <= 48f &&
         Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) <= 5f) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
           net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
         if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
           grow(worldIn, rand, pos, state);
         } else if (j < 3) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j + 1));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j + 1));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!(Climate.getActualTemp(worldIn, pos) >= -11f && Climate.getActualTemp(worldIn, pos) <= 48f) ||
                (Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) > 5f)) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
         if (j == 0 && canShrink(worldIn, pos)) {
           shrink(worldIn, pos);
         } else if (j > 0) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j - 1));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j - 1));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }

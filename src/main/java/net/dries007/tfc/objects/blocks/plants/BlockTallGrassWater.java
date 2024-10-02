@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.data.enums.EnumPlantPart;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
@@ -9,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,9 +33,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.EnumProp.PLANT_PART;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+
 public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowable, ITallPlant {
 
-  private static final PropertyEnum<BlockTallGrassWater.EnumBlockPart> PART = PropertyEnum.create("part", BlockTallGrassWater.EnumBlockPart.class);
   private static final Map<Plant, BlockTallGrassWater> MAP = new HashMap<>();
 
   public BlockTallGrassWater(Plant plant) {
@@ -52,7 +55,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
   @Override
   @NotNull
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-    return super.getActualState(state, worldIn, pos).withProperty(PART, getPlantPart(worldIn, pos));
+    return super.getActualState(state, worldIn, pos).withProperty(PLANT_PART, getPlantPart(worldIn, pos));
   }
 
   @Override
@@ -135,8 +138,8 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-    if (getPlantPart(worldIn, pos) == EnumBlockPart.LOWER) {
-      worldIn.setBlockState(pos, state.withProperty(AGE, worldIn.getBlockState(pos.up()).getValue(AGE)));
+    if (getPlantPart(worldIn, pos) == EnumPlantPart.LOWER) {
+      worldIn.setBlockState(pos, state.withProperty(AGE_4, worldIn.getBlockState(pos.up()).getValue(AGE_4)));
     }
 
     if (!this.canBlockStay(worldIn, pos, state)) {
@@ -147,7 +150,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
   @Override
   protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
     if (!this.canBlockStay(worldIn, pos, state)) {
-      if (getPlantPart(worldIn, pos) != EnumBlockPart.UPPER) {
+      if (getPlantPart(worldIn, pos) != EnumPlantPart.UPPER) {
         this.dropBlockAsItem(worldIn, pos, state, 0);
       }
       worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
@@ -171,9 +174,9 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
   @Override
   public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
     worldIn.setBlockState(pos.up(), this.getDefaultState());
-    IBlockState iblockstate = state.withProperty(AGE, 0)
+    IBlockState iblockstate = state.withProperty(AGE_4, 0)
                                    .withProperty(growthStageProperty, plant.getStageForMonth())
-                                   .withProperty(PART, getPlantPart(worldIn, pos));
+                                   .withProperty(PLANT_PART, getPlantPart(worldIn, pos));
     worldIn.setBlockState(pos, iblockstate);
     iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
   }
@@ -186,7 +189,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
   @Override
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, AGE, growthStageProperty, DAYPERIOD, PART);
+    return new BlockStateContainer(this, AGE_4, growthStageProperty, DAYPERIOD, PLANT_PART);
   }
 
   @Override
@@ -197,7 +200,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
                                                                                        .getHarvestLevel(stack, "scythe", player, state) != -1) {
         for (int i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
           if (MathConstants.RNG.nextDouble() <= (worldIn.getBlockState(pos.up(i))
-                                                        .getValue(AGE) + 1) / 4.0D) //+25% change for each age
+                                                        .getValue(AGE_4) + 1) / 4.0D) //+25% change for each age
           {
             spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
           }
@@ -226,28 +229,28 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 
     if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
           net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
         if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
           grow(worldIn, rand, pos, state);
         } else if (j < 3) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j + 1)
-                                          .withProperty(PART, getPlantPart(worldIn, pos)));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j + 1)
+                                          .withProperty(PLANT_PART, getPlantPart(worldIn, pos)));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
         if (j == 0 && canShrink(worldIn, pos)) {
           shrink(worldIn, pos);
         } else if (j > 0) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j - 1)
-                                          .withProperty(PART, getPlantPart(worldIn, pos)));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j - 1)
+                                          .withProperty(PLANT_PART, getPlantPart(worldIn, pos)));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
@@ -270,7 +273,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
   @Override
   @NotNull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return getTallBoundingBax(state.getValue(AGE), state, source, pos);
+    return getTallBoundingBax(state.getValue(AGE_4), state, source, pos);
   }
 
   @Override

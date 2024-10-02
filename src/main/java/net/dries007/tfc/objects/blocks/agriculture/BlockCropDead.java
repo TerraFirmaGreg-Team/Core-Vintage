@@ -9,7 +9,6 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,10 +38,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.MATURE;
+
 public class BlockCropDead extends BlockBush { //implements IGrowingPlant
 
-  /* true if the crop spawned in the wild, means it ignores growth conditions i.e. farmland */
-  public static final PropertyBool MATURE = PropertyBool.create("mature");
 
   // binary flags for state and metadata conversion
   private static final int META_MATURE = 1;

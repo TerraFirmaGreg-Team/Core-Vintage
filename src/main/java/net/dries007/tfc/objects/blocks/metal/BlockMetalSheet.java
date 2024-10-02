@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -34,16 +33,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.ALL_FACES;
+
 public class BlockMetalSheet extends Block {
 
-  public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{
-    PropertyBool.create("down"),
-    PropertyBool.create("up"),
-    PropertyBool.create("north"),
-    PropertyBool.create("south"),
-    PropertyBool.create("west"),
-    PropertyBool.create("east")
-  };
   private static final Map<Metal, BlockMetalSheet> MAP = new HashMap<>();
   private static final AxisAlignedBB[] SHEET_AABB = new AxisAlignedBB[]{
     new AxisAlignedBB(0d, 0.9375d, 0d, 1d, 1d, 1d),
@@ -68,12 +61,12 @@ public class BlockMetalSheet extends Block {
     setHarvestLevel("pickaxe", 0);
 
     setDefaultState(this.blockState.getBaseState()
-                                   .withProperty(FACE_PROPERTIES[0], false)
-                                   .withProperty(FACE_PROPERTIES[1], false)
-                                   .withProperty(FACE_PROPERTIES[2], false)
-                                   .withProperty(FACE_PROPERTIES[3], false)
-                                   .withProperty(FACE_PROPERTIES[4], false)
-                                   .withProperty(FACE_PROPERTIES[5], false));
+                                   .withProperty(ALL_FACES[0], false)
+                                   .withProperty(ALL_FACES[1], false)
+                                   .withProperty(ALL_FACES[2], false)
+                                   .withProperty(ALL_FACES[3], false)
+                                   .withProperty(ALL_FACES[4], false)
+                                   .withProperty(ALL_FACES[5], false));
   }
 
   public static BlockMetalSheet get(Metal metal) {
@@ -106,7 +99,7 @@ public class BlockMetalSheet extends Block {
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     TileUtils.getTile(worldIn, pos, TEMetalSheet.class).ifPresent(tile -> {
       for (EnumFacing face : EnumFacing.values()) {
-        state.withProperty(FACE_PROPERTIES[face.getIndex()], tile.getFace(face));
+        state.withProperty(ALL_FACES[face.getIndex()], tile.getFace(face));
       }
     });
     return state;
@@ -236,7 +229,7 @@ public class BlockMetalSheet extends Block {
   @Override
   @NotNull
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACE_PROPERTIES);
+    return new BlockStateContainer(this, ALL_FACES);
   }
 
   @Override

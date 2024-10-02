@@ -28,7 +28,7 @@ import net.dries007.tfc.util.calendar.ICalendar;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
 
 public class ProviderBloomery implements IProbeInfoProvider {
 

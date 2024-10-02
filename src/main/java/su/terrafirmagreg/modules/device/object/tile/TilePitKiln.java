@@ -41,8 +41,8 @@ import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.data.Properties.FULL;
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.FULL;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
 
 public class TilePitKiln extends TEPlacedItem implements ITickable {
 

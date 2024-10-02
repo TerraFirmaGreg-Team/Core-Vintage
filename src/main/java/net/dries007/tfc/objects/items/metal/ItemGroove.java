@@ -21,7 +21,7 @@ import net.dries007.tfc.api.types.Metal;
 import tfctech.TFCTech;
 import tfctech.TechConfig;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @MethodsReturnNonnullByDefault
 public class ItemGroove extends ItemTechMetal {
@@ -83,7 +83,7 @@ public class ItemGroove extends ItemTechMetal {
         if (!worldIn.isRemote) {
           worldIn.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_GROOVE_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
           worldIn.setBlockState(pos.offset(facing), BlocksDevice.LATEX_EXTRACTOR.getDefaultState()
-                                                                                .withProperty(FACING, facing));
+                                                                                .withProperty(HORIZONTAL, facing));
         }
         return EnumActionResult.SUCCESS;
       }

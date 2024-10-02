@@ -12,7 +12,6 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodLoom;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodLoom;
 
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -34,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @Getter
 @SuppressWarnings("deprecation")
@@ -80,17 +79,17 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock {
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.byHorizontalIndex(meta));
+    return this.getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta));
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(BlockHorizontal.FACING).getHorizontalIndex();
+    return state.getValue(HORIZONTAL).getHorizontalIndex();
   }
 
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return switch (state.getValue(BlockHorizontal.FACING)) {
+    return switch (state.getValue(HORIZONTAL)) {
       case SOUTH -> LOOM_SOUTH_AABB;
       case WEST -> LOOM_WEST_AABB;
       case EAST -> LOOM_EAST_AABB;

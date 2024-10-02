@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.object.container;
 
 import su.terrafirmagreg.api.base.container.BaseContainerTile;
-import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
+import su.terrafirmagreg.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 
 import net.minecraft.entity.player.InventoryPlayer;
@@ -11,6 +11,7 @@ import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
+import static su.terrafirmagreg.data.Properties.EnumProp.FIRE_PIT_ATTACHMENT;
 import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_EXTRA_INPUT_END;
 import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_EXTRA_INPUT_START;
 import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_FUEL_INPUT;
@@ -20,20 +21,20 @@ import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_OUTP
 
 public class ContainerFirePit extends BaseContainerTile<TileFirePit> {
 
-  private final BlockFirePit.FirePitAttachment attachment;
+  private final EnumFirePitAttachment attachment;
 
   public ContainerFirePit(InventoryPlayer playerInv, TileFirePit tile) {
     super(playerInv, tile);
 
-    attachment = tile.getWorld().getBlockState(tile.getPos()).getValue(BlockFirePit.ATTACHMENT);
+    attachment = tile.getWorld().getBlockState(tile.getPos()).getValue(FIRE_PIT_ATTACHMENT);
   }
 
   @Override
   protected void addContainerSlots() {
     // Can't rely on the attachment variable because this is called in the super constructor, which happens before attachment is set
-    BlockFirePit.FirePitAttachment attachment = tile.getWorld()
-                                                    .getBlockState(tile.getPos())
-                                                    .getValue(BlockFirePit.ATTACHMENT);
+    EnumFirePitAttachment attachment = tile.getWorld()
+                                           .getBlockState(tile.getPos())
+                                           .getValue(FIRE_PIT_ATTACHMENT);
     IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
                                                 null);
     if (inventory != null) {
@@ -42,7 +43,7 @@ public class ContainerFirePit extends BaseContainerTile<TileFirePit> {
         addSlotToContainer(new SlotCallback(inventory, i, 8, 62 - 18 * i, tile));
       }
 
-      if (attachment == BlockFirePit.FirePitAttachment.NONE) {
+      if (attachment == EnumFirePitAttachment.NONE) {
         // input slot
         addSlotToContainer(new SlotCallback(inventory, SLOT_ITEM_INPUT, 80, 20, tile));
         // output slots

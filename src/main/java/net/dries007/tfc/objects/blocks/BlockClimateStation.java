@@ -31,8 +31,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.data.Properties.STASIS;
+import static su.terrafirmagreg.data.Properties.BoolProp.STASIS;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @MethodsReturnNonnullByDefault
 public class BlockClimateStation extends Block implements ICapabilitySize, IHighlightHandler {
@@ -46,7 +46,7 @@ public class BlockClimateStation extends Block implements ICapabilitySize, IHigh
     setSoundType(SoundType.WOOD);
     setTickRandomly(true);
     this.setDefaultState(this.blockState.getBaseState()
-                                        .withProperty(FACING, EnumFacing.EAST)
+                                        .withProperty(HORIZONTAL, EnumFacing.EAST)
                                         .withProperty(STASIS, false));
     this.tier = tier;
   }
@@ -55,13 +55,13 @@ public class BlockClimateStation extends Block implements ICapabilitySize, IHigh
   @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-               .withProperty(FACING, EnumFacing.byHorizontalIndex(meta))
+               .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta))
                .withProperty(STASIS, meta > 3);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getHorizontalIndex() + (state.getValue(STASIS) ? 4 : 0);
+    return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(STASIS) ? 4 : 0);
   }
 
   @Override
@@ -95,12 +95,12 @@ public class BlockClimateStation extends Block implements ICapabilitySize, IHigh
   @SuppressWarnings("deprecation")
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
                                           EntityLivingBase placer) {
-    return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+    return getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing().getOpposite());
   }
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, STASIS);
+    return new BlockStateContainer(this, HORIZONTAL, STASIS);
   }
 
   @Override

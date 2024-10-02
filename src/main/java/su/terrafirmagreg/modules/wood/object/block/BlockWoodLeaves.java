@@ -29,7 +29,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -59,14 +58,14 @@ import java.util.Random;
 import java.util.Set;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.HARVESTABLE;
-import static su.terrafirmagreg.data.Properties.LEAF_STATE;
-import static su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState.AUTUMN;
-import static su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState.FLOWERING;
-import static su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState.FRUIT;
-import static su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState.NORMAL;
-import static su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState.WINTER;
-import static su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves.EnumLeafState.valueOf;
+import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.data.Properties.EnumProp.LEAF_STATE;
+import static su.terrafirmagreg.data.enums.EnumLeafState.AUTUMN;
+import static su.terrafirmagreg.data.enums.EnumLeafState.FLOWERING;
+import static su.terrafirmagreg.data.enums.EnumLeafState.FRUIT;
+import static su.terrafirmagreg.data.enums.EnumLeafState.NORMAL;
+import static su.terrafirmagreg.data.enums.EnumLeafState.WINTER;
+import static su.terrafirmagreg.data.enums.EnumLeafState.valueOf;
 
 @Getter
 @SuppressWarnings("deprecation")
@@ -419,26 +418,6 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
   @Override
   public IItemColor getItemColor() {
     return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
-  }
-
-
-  public enum EnumLeafState implements IStringSerializable {
-    NORMAL,
-    FLOWERING,
-    FRUIT,
-    AUTUMN,
-    WINTER;
-
-    private static final EnumLeafState[] VALUES = values();
-
-    public static EnumLeafState valueOf(int index) {
-      return index < 0 || index > VALUES.length ? NORMAL : VALUES[index];
-    }
-
-    @Override
-    public String getName() {
-      return this.name().toLowerCase();
-    }
   }
 
 

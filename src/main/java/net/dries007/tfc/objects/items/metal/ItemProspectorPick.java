@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.data.enums.EnumGradeOre;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.world.classic.objects.generator.vein.VeinRegistry;
@@ -24,7 +25,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.events.ProspectEvent;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.network.PacketProspectResult;
 import net.dries007.tfc.util.skills.ProspectingSkill;
 import net.dries007.tfc.util.skills.SkillType;
@@ -125,7 +125,7 @@ public class ItemProspectorPick extends ItemMetalTool {
         Block block = state.getBlock();
         if (vein.getOre() != null && vein.getOre().isGraded() && !ignoreGrade) {
           ItemStack result = block.getPickBlock(state, null, world, pos, null);
-          result.setItemDamage(Ore.Grade.NORMAL.getMeta()); // ignore grade
+          result.setItemDamage(EnumGradeOre.NORMAL.getMeta()); // ignore grade
           return result;
         } else {
           return block.getPickBlock(state, null, world, pos, null);

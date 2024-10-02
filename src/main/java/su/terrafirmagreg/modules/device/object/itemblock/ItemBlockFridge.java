@@ -13,8 +13,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
-import static su.terrafirmagreg.data.Properties.UPPER;
+import static su.terrafirmagreg.data.Properties.BoolProp.UPPER;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 public class ItemBlockFridge extends BaseItemBlock {
 

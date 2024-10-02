@@ -3,10 +3,8 @@ package lyeoj.tfcthings.blocks;
 import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -27,9 +25,10 @@ import lyeoj.tfcthings.main.ConfigTFCThings;
 
 import org.jetbrains.annotations.NotNull;
 
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+
 public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem {
 
-  public static final PropertyDirection FACING = BlockHorizontal.FACING;
   protected static final AxisAlignedBB LADDER_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.25D, 1.0D, 1.0D);
   protected static final AxisAlignedBB LADDER_WEST_AABB = new AxisAlignedBB(0.75D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
   protected static final AxisAlignedBB LADDER_SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.25D);
@@ -42,17 +41,17 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
     this.setSoundType(SoundType.WOOD);
     this.setHardness(0.5f);
     this.setHarvestLevel("axe", 0);
-    this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+    this.setDefaultState(this.blockState.getBaseState().withProperty(HORIZONTAL, EnumFacing.NORTH));
 
   }
 
   @NotNull
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4));
+    return this.getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4));
   }
 
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getHorizontalIndex();
+    return state.getValue(HORIZONTAL).getHorizontalIndex();
   }
 
   public boolean isFullCube(IBlockState state) {
@@ -60,7 +59,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
   }
 
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    switch (state.getValue(FACING)) {
+    switch (state.getValue(HORIZONTAL)) {
       case NORTH:
         return LADDER_NORTH_AABB;
       case SOUTH:
@@ -111,17 +110,17 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
                                           EntityLivingBase placer) {
     if (worldIn.getBlockState(pos.down()).getBlock() instanceof BlockRopeLadder) {
-      return this.getDefaultState().withProperty(FACING, worldIn.getBlockState(pos.down()).getValue(FACING));
+      return this.getDefaultState().withProperty(HORIZONTAL, worldIn.getBlockState(pos.down()).getValue(HORIZONTAL));
     }
     if (facing.getAxis().isHorizontal() && this.canAttachTo(worldIn, pos.offset(facing.getOpposite()), facing)) {
-      return this.getDefaultState().withProperty(FACING, facing);
+      return this.getDefaultState().withProperty(HORIZONTAL, facing);
     } else {
       for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
         if (this.canAttachTo(worldIn, pos.offset(enumfacing.getOpposite()), enumfacing)) {
-          return this.getDefaultState().withProperty(FACING, enumfacing);
+          return this.getDefaultState().withProperty(HORIZONTAL, enumfacing);
         }
       }
-      return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+      return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing().getOpposite());
     }
   }
 
@@ -142,7 +141,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
       nextPos = nextPos.down();
       if (worldIn.getBlockState(nextPos).getBlock().isReplaceable(worldIn, nextPos) && nextPos.getY() >= 0) {
         worldIn.setBlockState(nextPos, TFCThingsBlocks.ROPE_LADDER_BLOCK.getDefaultState()
-                                                                        .withProperty(FACING, state.getValue(FACING)));
+                                                                        .withProperty(HORIZONTAL, state.getValue(HORIZONTAL)));
         if (!((EntityPlayer) placer).isCreative()) {
           stack.shrink(1);
         }
@@ -159,7 +158,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
     while (!ladderStack.isEmpty()) {
       if (worldIn.getBlockState(nextPos).getBlock().isReplaceable(worldIn, nextPos) && nextPos.getY() >= 0) {
         worldIn.setBlockState(nextPos, TFCThingsBlocks.ROPE_LADDER_BLOCK.getDefaultState()
-                                                                        .withProperty(FACING, state.getValue(FACING)));
+                                                                        .withProperty(HORIZONTAL, state.getValue(HORIZONTAL)));
         if (!((EntityPlayer) placer).isCreative()) {
           ladderStack.shrink(1);
         }
@@ -176,7 +175,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING);
+    return new BlockStateContainer(this, HORIZONTAL);
   }
 
   @Override

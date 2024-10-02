@@ -1,13 +1,13 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.enums.EnumPlantPart;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -36,10 +36,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.EnumProp.PLANT_PART;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+
 public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable, ITallPlant {
 
   public static final AxisAlignedBB AABB = new AxisAlignedBB(0.25F, 0, 0.25F, 0.75F, 1, 0.75F);
-  private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
   private static final Map<Plant, BlockHangingPlantTFCF> MAP = new HashMap<>();
 
   public BlockHangingPlantTFCF(Plant plant) {
@@ -76,9 +79,9 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
   @Override
   public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
     worldIn.setBlockState(pos.down(), this.getDefaultState());
-    IBlockState iblockstate = state.withProperty(AGE, 0)
+    IBlockState iblockstate = state.withProperty(AGE_4, 0)
                                    .withProperty(growthStageProperty, plant.getStageForMonth())
-                                   .withProperty(PART, getPlantPart(worldIn, pos));
+                                   .withProperty(PLANT_PART, getPlantPart(worldIn, pos));
     worldIn.setBlockState(pos, iblockstate);
     iblockstate.neighborChanged(worldIn, pos.down(), this, pos);
   }
@@ -91,23 +94,23 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
   @Override
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, growthStageProperty, DAYPERIOD, AGE, PART);
+    return new BlockStateContainer(this, growthStageProperty, DAYPERIOD, AGE_4, PLANT_PART);
   }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(AGE, meta);
+    return this.getDefaultState().withProperty(AGE_4, meta);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(AGE);
+    return state.getValue(AGE_4);
   }
 
   @Override
   @NotNull
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-    return super.getActualState(state, worldIn, pos).withProperty(PART, getPlantPart(worldIn, pos));
+    return super.getActualState(state, worldIn, pos).withProperty(PLANT_PART, getPlantPart(worldIn, pos));
   }
 
   @Override
@@ -149,28 +152,28 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
 
     if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
           net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.down(), state, true)) {
         if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
           grow(worldIn, rand, pos, state);
         } else if (j < 3) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j + 1)
-                                          .withProperty(PART, getPlantPart(worldIn, pos)));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j + 1)
+                                          .withProperty(PLANT_PART, getPlantPart(worldIn, pos)));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
         if (j == 0 && canShrink(worldIn, pos)) {
           shrink(worldIn, pos);
         } else if (j > 0) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j - 1)
-                                          .withProperty(PART, getPlantPart(worldIn, pos)));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j - 1)
+                                          .withProperty(PLANT_PART, getPlantPart(worldIn, pos)));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
@@ -242,7 +245,7 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, PART);
+    return new BlockStateContainer(this, PLANT_PART);
   }
 
   @Override
@@ -264,7 +267,7 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
   @Override
   public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
                                           EntityLivingBase placer, EnumHand hand) {
-    return this.getDefaultState().withProperty(PART, EnumBlockPart.LOWER);
+    return this.getDefaultState().withProperty(PLANT_PART, EnumPlantPart.LOWER);
   }
 
   private boolean canShrink(World worldIn, BlockPos pos) {

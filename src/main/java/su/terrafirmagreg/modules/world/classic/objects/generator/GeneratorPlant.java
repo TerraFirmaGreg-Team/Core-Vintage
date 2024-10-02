@@ -29,6 +29,8 @@ import net.dries007.tfc.util.climate.Climate;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+
 public class GeneratorPlant extends WorldGenerator {
 
   private Plant plant;
@@ -63,7 +65,7 @@ public class GeneratorPlant extends WorldGenerator {
               plantBlock.canPlaceBlockAt(worldIn, blockpos)) {
             int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos,
-                                        state.withProperty(BlockPlant.AGE, plantAge));
+                                        state.withProperty(AGE_4, plantAge));
           }
         }
         break;
@@ -83,7 +85,7 @@ public class GeneratorPlant extends WorldGenerator {
               plantBlock.canBlockStay(worldIn, blockpos, state)) {
             int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos,
-                                        state.withProperty(BlockPlantShortGrass.AGE, plantAge));
+                                        state.withProperty(AGE_4, plantAge));
           }
         }
         break;
@@ -107,7 +109,7 @@ public class GeneratorPlant extends WorldGenerator {
               int plantAge = plant.getAgeForWorldgen(rand,
                                                      Climate.getActualTemp(worldIn, blockpos));
               setBlockAndNotifyAdequately(worldIn, blockpos.up(k),
-                                          state.withProperty(BlockPlantShortGrass.AGE, plantAge));
+                                          state.withProperty(AGE_4, plantAge));
             }
           }
         }
@@ -129,7 +131,7 @@ public class GeneratorPlant extends WorldGenerator {
               !BlockUtils.isSand(worldIn.getBlockState(blockpos.down()))) {
             int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos,
-                                        state.withProperty(BlockPlantCreeping.AGE, plantAge));
+                                        state.withProperty(AGE_4, plantAge));
           }
         }
         break;
@@ -148,7 +150,7 @@ public class GeneratorPlant extends WorldGenerator {
               plantBlock.canBlockStay(worldIn, blockpos, state)) {
             int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos,
-                                        state.withProperty(BlockPlantHanging.AGE, plantAge));
+                                        state.withProperty(AGE_4, plantAge));
           }
         }
         break;
@@ -171,7 +173,7 @@ public class GeneratorPlant extends WorldGenerator {
                      .canSustainPlant(state, worldIn, blockpos.down(), EnumFacing.UP, plantBlock)) {
             int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos,
-                                        state.withProperty(BlockPlant.AGE, plantAge));
+                                        state.withProperty(AGE_4, plantAge));
           }
         }
         break;
@@ -196,7 +198,7 @@ public class GeneratorPlant extends WorldGenerator {
               int plantAge = plant.getAgeForWorldgen(rand,
                                                      Climate.getActualTemp(worldIn, blockpos));
               setBlockAndNotifyAdequately(worldIn, blockpos.up(k),
-                                          state.withProperty(BlockPlantTall.AGE, plantAge));
+                                          state.withProperty(AGE_4, plantAge));
             }
           }
         }
@@ -218,7 +220,7 @@ public class GeneratorPlant extends WorldGenerator {
               plantBlock.canBlockStay(worldIn, blockpos, state)) {
             int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos,
-                                        state.withProperty(BlockPlant.AGE, plantAge));
+                                        state.withProperty(AGE_4, plantAge));
           }
         }
         break;
@@ -242,7 +244,7 @@ public class GeneratorPlant extends WorldGenerator {
               int plantAge = plant.getAgeForWorldgen(rand,
                                                      Climate.getActualTemp(worldIn, blockpos));
               setBlockAndNotifyAdequately(worldIn, blockpos.up(k),
-                                          state.withProperty(BlockPlantTall.AGE, plantAge));
+                                          state.withProperty(AGE_4, plantAge));
             }
           }
         }
@@ -264,7 +266,7 @@ public class GeneratorPlant extends WorldGenerator {
               plantBlock.canBlockStay(worldIn, blockpos, state)) {
             int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos,
-                                        state.withProperty(BlockPlant.AGE, plantAge));
+                                        state.withProperty(AGE_4, plantAge));
           }
         }
         break;
@@ -288,7 +290,7 @@ public class GeneratorPlant extends WorldGenerator {
               int plantAge = plant.getAgeForWorldgen(rand,
                                                      Climate.getActualTemp(worldIn, blockpos));
               setBlockAndNotifyAdequately(worldIn, blockpos.up(k),
-                                          state.withProperty(BlockPlantTall.AGE, plantAge));
+                                          state.withProperty(AGE_4, plantAge));
             }
           }
         }
@@ -313,7 +315,7 @@ public class GeneratorPlant extends WorldGenerator {
               int plantAge = plant.getAgeForWorldgen(rand,
                                                      Climate.getActualTemp(worldIn, blockpos));
               setBlockAndNotifyAdequately(worldIn, blockpos.up(k),
-                                          state.withProperty(BlockPlantTall.AGE, plantAge));
+                                          state.withProperty(AGE_4, plantAge));
             }
           }
         }
@@ -337,7 +339,7 @@ public class GeneratorPlant extends WorldGenerator {
             plantBlock.canPlaceBlockAt(worldIn, blockpos)) {
           int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
-                                      state.withProperty(BlockPlantWater.AGE, plantAge));
+                                      state.withProperty(AGE_4, plantAge));
         }
         break;
       }
@@ -358,7 +360,7 @@ public class GeneratorPlant extends WorldGenerator {
             plantBlock.canPlaceBlockAt(worldIn, blockpos)) {
           int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
-                                      state.withProperty(BlockPlantEmergentTallWater.AGE, plantAge));
+                                      state.withProperty(AGE_4, plantAge));
           if (rand.nextInt(3) < plantAge && plantBlock.canGrow(worldIn, blockpos, state,
                                                                worldIn.isRemote)) {
             setBlockAndNotifyAdequately(worldIn, blockpos.up(), state);
@@ -383,7 +385,7 @@ public class GeneratorPlant extends WorldGenerator {
             plantBlock.canPlaceBlockAt(worldIn, blockpos)) {
           int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
-                                      state.withProperty(BlockPlantTall.AGE, plantAge));
+                                      state.withProperty(AGE_4, plantAge));
           if (rand.nextInt(4) < plantAge && plantBlock.canGrow(worldIn, blockpos, state,
                                                                worldIn.isRemote)) {
             setBlockAndNotifyAdequately(worldIn, blockpos.up(), state);
@@ -407,7 +409,7 @@ public class GeneratorPlant extends WorldGenerator {
               plant.isValidFloatingWaterDepth(worldIn, blockpos, water)) {
             int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos,
-                                        state.withProperty(BlockPlantFloatingWater.AGE, plantAge));
+                                        state.withProperty(AGE_4, plantAge));
           }
         }
         break;
@@ -428,7 +430,7 @@ public class GeneratorPlant extends WorldGenerator {
               plant.isValidFloatingWaterDepth(worldIn, blockpos, water)) {
             int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos,
-                                        state.withProperty(BlockPlantFloatingWater.AGE, plantAge));
+                                        state.withProperty(AGE_4, plantAge));
           }
         }
         break;
@@ -452,7 +454,7 @@ public class GeneratorPlant extends WorldGenerator {
               int plantAge = plant.getAgeForWorldgen(rand,
                                                      Climate.getActualTemp(worldIn, blockpos));
               setBlockAndNotifyAdequately(worldIn, blockpos.up(k),
-                                          state.withProperty(BlockPlantCactus.AGE, plantAge));
+                                          state.withProperty(AGE_4, plantAge));
             }
           }
         }
@@ -472,7 +474,7 @@ public class GeneratorPlant extends WorldGenerator {
             int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos,
                                         plantBlock.getStateForWorldGen(worldIn, blockpos)
-                                                  .withProperty(BlockPlantEpiphyte.AGE, plantAge));
+                                                  .withProperty(AGE_4, plantAge));
           }
         }
         break;
@@ -493,7 +495,7 @@ public class GeneratorPlant extends WorldGenerator {
               plantBlock.canBlockStay(worldIn, blockpos, state)) {
             int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos,
-                                        state.withProperty(BlockPlant.AGE, plantAge));
+                                        state.withProperty(AGE_4, plantAge));
           }
         }
       }

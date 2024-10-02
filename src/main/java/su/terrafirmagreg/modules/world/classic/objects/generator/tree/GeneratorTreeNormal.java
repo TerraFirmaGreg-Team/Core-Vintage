@@ -17,7 +17,7 @@ import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 
 import java.util.Random;
 
-import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
+import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
 
 public class GeneratorTreeNormal implements ITreeGenerator {
 

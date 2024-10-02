@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -43,10 +42,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.FRUITING;
+
 @MethodsReturnNonnullByDefault
 public class BlockBerryBush extends Block implements IGrowingPlant {
 
-  public static final PropertyBool FRUITING = PropertyBool.create("fruiting");
 
   private static final AxisAlignedBB SMALL_SIZE_AABB = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.25D, 1D);
   private static final AxisAlignedBB MEDIUM_SIZE_AABB = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.5D, 1D);

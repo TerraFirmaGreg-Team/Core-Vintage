@@ -1,12 +1,11 @@
 package net.dries007.tfc.objects.blocks.plants.property;
 
+import su.terrafirmagreg.data.enums.EnumPlantPart;
+
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-
-import org.jetbrains.annotations.NotNull;
 
 public interface ITallPlant {
 
@@ -14,7 +13,7 @@ public interface ITallPlant {
   AxisAlignedBB SHORTER_PLANT_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.5D, 0.875D);
 
   default AxisAlignedBB getTallBoundingBax(int age, IBlockState state, IBlockAccess source, BlockPos pos) {
-    if (getPlantPart(source, pos) == EnumBlockPart.LOWER || getPlantPart(source, pos) == EnumBlockPart.MIDDLE) {
+    if (getPlantPart(source, pos) == EnumPlantPart.LOWER || getPlantPart(source, pos) == EnumPlantPart.MIDDLE) {
       return PLANT_AABB.offset(state.getOffset(source, pos));
     }
     return switch (age) {
@@ -24,31 +23,17 @@ public interface ITallPlant {
 
   }
 
-  default EnumBlockPart getPlantPart(IBlockAccess world, BlockPos pos) {
+  default EnumPlantPart getPlantPart(IBlockAccess world, BlockPos pos) {
     if (world.getBlockState(pos.down()).getBlock() != this && world.getBlockState(pos.up()).getBlock() == this) {
-      return EnumBlockPart.LOWER;
+      return EnumPlantPart.LOWER;
     }
     if (world.getBlockState(pos.down()).getBlock() == this && world.getBlockState(pos.up()).getBlock() == this) {
-      return EnumBlockPart.MIDDLE;
+      return EnumPlantPart.MIDDLE;
     }
     if (world.getBlockState(pos.down()).getBlock() == this && world.getBlockState(pos.up()).getBlock() != this) {
-      return EnumBlockPart.UPPER;
+      return EnumPlantPart.UPPER;
     }
-    return EnumBlockPart.SINGLE;
+    return EnumPlantPart.SINGLE;
   }
 
-  enum EnumBlockPart implements IStringSerializable {
-    UPPER,
-    MIDDLE,
-    LOWER,
-    SINGLE;
-
-    public String toString() {
-      return this.getName();
-    }
-
-    public @NotNull String getName() {
-      return name().toLowerCase();
-    }
-  }
 }

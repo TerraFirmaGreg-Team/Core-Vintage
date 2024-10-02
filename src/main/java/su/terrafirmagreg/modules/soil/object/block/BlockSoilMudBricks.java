@@ -13,7 +13,7 @@ import net.minecraft.util.BlockRenderLayer;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.MOSSY;
+import static su.terrafirmagreg.data.Properties.BoolProp.MOSSY;
 
 public class BlockSoilMudBricks extends BlockSoilMud {
 

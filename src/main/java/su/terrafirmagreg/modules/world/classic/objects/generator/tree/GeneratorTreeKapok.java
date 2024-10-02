@@ -23,12 +23,12 @@ import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 
 import java.util.Random;
 
-import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 import static net.minecraft.block.BlockVine.EAST;
 import static net.minecraft.block.BlockVine.NORTH;
 import static net.minecraft.block.BlockVine.SOUTH;
 import static net.minecraft.block.BlockVine.WEST;
+import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
 
 public class GeneratorTreeKapok implements ITreeGenerator {
 

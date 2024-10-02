@@ -1,9 +1,10 @@
 package net.dries007.tfc.client;
 
+import su.terrafirmagreg.data.enums.EnumGradeOre;
+import su.terrafirmagreg.data.enums.EnumHideSize;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -38,7 +39,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.client.render.TESRPlacedHide;
 import net.dries007.tfc.client.render.TESRPlacedItem;
 import net.dries007.tfc.client.render.TESRPlacedItemFlat;
@@ -47,9 +47,6 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.objects.items.ItemGoldPan;
 import net.dries007.tfc.objects.items.ItemsTFC;
@@ -63,9 +60,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
-import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
-import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Properties.BoolProp.DECAYABLE;
+import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
+import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.data.Properties.EnumProp.HIDE_SIZE;
+import static su.terrafirmagreg.data.Properties.IntProp.STAGE_5;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_TFC)
@@ -114,11 +115,11 @@ public final class ClientRegisterEvents {
     // Ore Items
     for (ItemOreTFC item : ItemsTFC.getAllOreItems()) {
       if (item.ore.isGraded()) {
-        for (Ore.Grade grade : Ore.Grade.values()) {
+        for (EnumGradeOre grade : EnumGradeOre.values()) {
           registerEnumBasedMetaItems("ore", grade, item);
         }
       } else {
-        registerEnumBasedMetaItems("ore", Ore.Grade.NORMAL, item);
+        registerEnumBasedMetaItems("ore", EnumGradeOre.NORMAL, item);
       }
     }
 
@@ -198,17 +199,17 @@ public final class ClientRegisterEvents {
 
     for (Block block : BlocksTFC.getAllLeafBlocks()) {
       ModelLoader.setCustomStateMapper(block,
-                                       new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
+                                       new StateMap.Builder().ignore(DECAYABLE).build());
     }
 
     for (Block block : BlocksTFC.getAllLogBlocks()) {
       ModelLoader.setCustomStateMapper(block,
-                                       new StateMap.Builder().ignore(BlockLogTFC.PLACED).build());
+                                       new StateMap.Builder().ignore(PLACED).build());
     }
 
     for (Block block : BlocksTFC.getAllSaplingBlocks()) {
       ModelLoader.setCustomStateMapper(block,
-                                       new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
+                                       new StateMap.Builder().ignore(STAGE_5).build());
     }
 
     for (Block block : BlocksTFC.getAllCropBlocks()) {
@@ -217,8 +218,8 @@ public final class ClientRegisterEvents {
 
     for (Block block : BlocksTFC.getAllFruitTreeLeavesBlocks()) {
       ModelLoader.setCustomStateMapper(block,
-                                       new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE)
-                                                             .ignore(BlockFruitTreeLeaves.HARVESTABLE)
+                                       new StateMap.Builder().ignore(DECAYABLE)
+                                                             .ignore(HARVESTABLE)
                                                              .build());
     }
 
@@ -233,11 +234,11 @@ public final class ClientRegisterEvents {
                                      blockIn -> ImmutableMap.of(BlocksTFC.PLACED_ITEM.getDefaultState(), empty));
     ModelLoader.setCustomStateMapper(BlocksTFC.PLACED_HIDE,
                                      blockIn -> ImmutableMap.of(BlocksTFC.PLACED_HIDE.getDefaultState()
-                                                                                     .withProperty(SIZE, ItemAnimalHide.HideSize.SMALL), empty,
+                                                                                     .withProperty(HIDE_SIZE, EnumHideSize.SMALL), empty,
                                                                 BlocksTFC.PLACED_HIDE.getDefaultState()
-                                                                                     .withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM), empty,
+                                                                                     .withProperty(HIDE_SIZE, EnumHideSize.MEDIUM), empty,
                                                                 BlocksTFC.PLACED_HIDE.getDefaultState()
-                                                                                     .withProperty(SIZE, ItemAnimalHide.HideSize.LARGE), empty));
+                                                                                     .withProperty(HIDE_SIZE, EnumHideSize.LARGE), empty));
 
     // TESRs //
 

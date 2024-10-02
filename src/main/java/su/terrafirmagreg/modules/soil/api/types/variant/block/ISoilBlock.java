@@ -15,7 +15,7 @@ import net.minecraftforge.common.IPlantable;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 
-import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
+import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.GRAVEL;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.COARSE_DIRT;

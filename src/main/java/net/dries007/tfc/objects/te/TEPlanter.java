@@ -1,7 +1,6 @@
 package net.dries007.tfc.objects.te;
 
 import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
-import su.terrafirmagreg.data.Properties;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,6 +20,7 @@ import net.dries007.tfc.util.calendar.ICalendarTickable;
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.BoolProp.WET;
 
 /**
  *
@@ -49,7 +49,7 @@ public class TEPlanter extends BaseTileTickableInventory implements ICalendarTic
     ICalendarTickable.super.checkForCalendarUpdate();
     if (waterUses < 0) {
       waterUses = 0;
-      world.setBlockState(pos, world.getBlockState(pos).withProperty(Properties.WET, false));
+      world.setBlockState(pos, world.getBlockState(pos).withProperty(WET, false));
     }
   }
 
@@ -133,7 +133,7 @@ public class TEPlanter extends BaseTileTickableInventory implements ICalendarTic
     PlanterRecipe recipe = getRecipe(slot);
     return isClimateValid && recipe != null && getStage(slot) < PlanterRecipe.getMaxStage(recipe) &&
            tier >= PlanterRecipe.getTier(recipe) &&
-           world.getBlockState(pos).getValue(Properties.WET) &&
+           world.getBlockState(pos).getValue(WET) &&
            GreenhouseHelpers.isSkylightValid(world, pos);
   }
 

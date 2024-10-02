@@ -36,9 +36,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
-import static su.terrafirmagreg.data.Properties.LIT;
-import static su.terrafirmagreg.data.Properties.OPEN;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.OPEN;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockBloomery extends BaseBlock implements IProviderTile {

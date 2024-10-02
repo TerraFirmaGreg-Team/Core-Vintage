@@ -1,7 +1,6 @@
 package com.eerussianguy.firmalife.compat.waila;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.Properties;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static su.terrafirmagreg.data.Properties.IntProp.STAGE_3;
+
 public class HangingPlanterProvider implements IWailaBlock {
 
   @NotNull
@@ -26,8 +27,8 @@ public class HangingPlanterProvider implements IWailaBlock {
     List<String> currentTooltip = new ArrayList<>();
     IBlockState state = world.getBlockState(pos);
     if (state.getBlock() instanceof BlockHangingPlanter) {
-      int maxStage = Collections.max(Properties.STAGE.getAllowedValues());
-      int curStage = state.getValue(Properties.STAGE);
+      int maxStage = Collections.max(STAGE_3.getAllowedValues());
+      int curStage = state.getValue(STAGE_3);
       if (maxStage == curStage) {
         currentTooltip.add("Mature");
       } else {

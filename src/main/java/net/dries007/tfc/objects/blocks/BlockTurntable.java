@@ -25,7 +25,7 @@ import net.dries007.tfc.objects.te.TETurntable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.CLAY_LEVEL;
+import static su.terrafirmagreg.data.Properties.IntProp.CLAY_LEVEL;
 
 @MethodsReturnNonnullByDefault
 public class BlockTurntable extends BlockNonCube {

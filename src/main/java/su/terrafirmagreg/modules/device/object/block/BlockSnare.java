@@ -46,9 +46,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BAITED;
-import static su.terrafirmagreg.data.Properties.CLOSED;
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.BoolProp.BAITED;
+import static su.terrafirmagreg.data.Properties.BoolProp.CLOSED;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockSnare extends BaseBlock implements IProviderTile {

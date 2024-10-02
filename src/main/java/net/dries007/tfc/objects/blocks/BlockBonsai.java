@@ -29,7 +29,7 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.STAGE;
+import static su.terrafirmagreg.data.Properties.IntProp.STAGE_3;
 
 @MethodsReturnNonnullByDefault
 
@@ -50,18 +50,18 @@ public class BlockBonsai extends BlockNonCube {
     this.fruit = fruit;
     this.period = period;
     this.tier = tier;
-    setDefaultState(blockState.getBaseState().withProperty(STAGE, 0));
+    setDefaultState(blockState.getBaseState().withProperty(STAGE_3, 0));
   }
 
   @Override
   @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(STAGE, meta);
+    return getDefaultState().withProperty(STAGE_3, meta);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(STAGE);
+    return state.getValue(STAGE_3);
   }
 
   @Override
@@ -74,9 +74,9 @@ public class BlockBonsai extends BlockNonCube {
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     if (world.isRemote) {return;}
     TileUtils.getTile(world, pos, TEHangingPlanter.class)
-             .filter(tile -> tile.isClimateValid(tier) && tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * period) && state.getValue(STAGE) < 2)
+             .filter(tile -> tile.isClimateValid(tier) && tile.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * period) && state.getValue(STAGE_3) < 2)
              .ifPresent(tile -> {
-               world.setBlockState(pos, state.withProperty(STAGE, state.getValue(STAGE) + 1));
+               world.setBlockState(pos, state.withProperty(STAGE_3, state.getValue(STAGE_3) + 1));
                tile.reduceCounter(ICalendar.TICKS_IN_DAY * period);
                tile.markForSync();
              });
@@ -86,14 +86,14 @@ public class BlockBonsai extends BlockNonCube {
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     if (world.isRemote) {return false;}
     return TileUtils.getTile(world, pos, TEHangingPlanter.class)
-                    .filter(tile -> player.getHeldItem(hand).isEmpty() && state.getValue(STAGE) == 2)
+                    .filter(tile -> player.getHeldItem(hand).isEmpty() && state.getValue(STAGE_3) == 2)
                     .map(tile -> {
                       BlockPos spawnPos = tier == 4 ? pos.up() : pos.down();
                       StackUtils.spawnItemStack(world, spawnPos, new ItemStack(fruit.get(), tier == 4 ? 3 : 1));
                       if (RNG.nextInt(7) == 0) {
                         StackUtils.spawnItemStack(world, spawnPos, new ItemStack(seed.get()));
                       }
-                      world.setBlockState(pos, state.withProperty(STAGE, 0));
+                      world.setBlockState(pos, state.withProperty(STAGE_3, 0));
                       tile.resetCounter();
                       return true;
                     })
@@ -109,7 +109,7 @@ public class BlockBonsai extends BlockNonCube {
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, STAGE);
+    return new BlockStateContainer(this, STAGE_3);
   }
 
   @Override

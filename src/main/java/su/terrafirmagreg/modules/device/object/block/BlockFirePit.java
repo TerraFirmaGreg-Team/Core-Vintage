@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.base.block.BaseBlockContainer;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.data.DamageSources;
+import su.terrafirmagreg.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.render.TESRFirePit;
@@ -13,7 +14,6 @@ import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -31,7 +31,6 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -51,19 +50,18 @@ import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Random;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.EnumProp.FIRE_PIT_ATTACHMENT;
 
 @SuppressWarnings("deprecation")
 public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumerBlock {
 
-  public static final PropertyEnum<FirePitAttachment> ATTACHMENT = PropertyEnum.create("attachment", FirePitAttachment.class);
 
   private static final AxisAlignedBB FIREPIT_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.125, 1);
   private static final AxisAlignedBB FIREPIT_ATTACHMENT_SELECTION_AABB = new AxisAlignedBB(0, 0, 0,
@@ -83,7 +81,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     setTickRandomly(true);
     setDefaultState(blockState.getBaseState()
                               .withProperty(LIT, false)
-                              .withProperty(ATTACHMENT, FirePitAttachment.NONE));
+                              .withProperty(FIRE_PIT_ATTACHMENT, EnumFirePitAttachment.NONE));
   }
 
   @Override
@@ -101,17 +99,17 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
                .withProperty(LIT, (meta & 1) > 0)
-               .withProperty(ATTACHMENT, FirePitAttachment.valueOf(meta >> 1));
+               .withProperty(FIRE_PIT_ATTACHMENT, EnumFirePitAttachment.valueOf(meta >> 1));
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return (state.getValue(LIT) ? 1 : 0) + (state.getValue(ATTACHMENT).ordinal() << 1);
+    return (state.getValue(LIT) ? 1 : 0) + (state.getValue(FIRE_PIT_ATTACHMENT).ordinal() << 1);
   }
 
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    if (state.getValue(ATTACHMENT) != FirePitAttachment.NONE) {
+    if (state.getValue(FIRE_PIT_ATTACHMENT) != EnumFirePitAttachment.NONE) {
       return FIREPIT_ATTACHMENT_SELECTION_AABB;
     }
     return FIREPIT_AABB;
@@ -120,7 +118,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
   @Override
   public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
     addCollisionBoxToList(pos, entityBox, collidingBoxes, FIREPIT_AABB);
-    if (state.getValue(ATTACHMENT) != FirePitAttachment.NONE) {
+    if (state.getValue(FIRE_PIT_ATTACHMENT) != EnumFirePitAttachment.NONE) {
       addCollisionBoxToList(pos, entityBox, collidingBoxes, ATTACHMENT_COLLISION_ADDITION_AABB);
     }
   }
@@ -163,7 +161,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
         break;
     }
 
-    if (state.getValue(ATTACHMENT) == FirePitAttachment.COOKING_POT) {
+    if (state.getValue(FIRE_PIT_ATTACHMENT) == EnumFirePitAttachment.COOKING_POT) {
       TileUtils.getTile(world, pos, TileFirePit.class).ifPresent(tile -> {
         if (tile.getCookingPotStage() == TileFirePit.CookingPotStage.BOILING) {
           for (int i = 0; i < rng.nextInt(5) + 4; i++) {
@@ -174,7 +172,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
         }
       });
     }
-    if ((state.getValue(ATTACHMENT) == FirePitAttachment.GRILL)) {
+    if ((state.getValue(FIRE_PIT_ATTACHMENT) == EnumFirePitAttachment.GRILL)) {
       TileUtils.getTile(world, pos, TileFirePit.class).ifPresent(tile -> {
         IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap == null) {return;}
@@ -224,19 +222,19 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
       }
 
       // Try to attach an item
-      FirePitAttachment attachment = state.getValue(ATTACHMENT);
+      EnumFirePitAttachment attachment = state.getValue(FIRE_PIT_ATTACHMENT);
       return TileUtils.getTile(world, pos, TileFirePit.class).map(tile -> {
-        if (attachment == FirePitAttachment.NONE) {
+        if (attachment == EnumFirePitAttachment.NONE) {
           if (OreDictUtils.contains(held, "cookingPot")) {
-            world.setBlockState(pos, state.withProperty(ATTACHMENT, FirePitAttachment.COOKING_POT));
+            world.setBlockState(pos, state.withProperty(FIRE_PIT_ATTACHMENT, EnumFirePitAttachment.COOKING_POT));
             tile.onConvertToCookingPot(player, held);
             return true;
           } else if (OreDictUtils.contains(held, "grill")) {
-            world.setBlockState(pos, state.withProperty(ATTACHMENT, FirePitAttachment.GRILL));
+            world.setBlockState(pos, state.withProperty(FIRE_PIT_ATTACHMENT, EnumFirePitAttachment.GRILL));
             tile.onConvertToGrill(player, held);
             return true;
           }
-        } else if (attachment == FirePitAttachment.COOKING_POT) {
+        } else if (attachment == EnumFirePitAttachment.COOKING_POT) {
           // Interact with the cooking pot
           if (tile.getCookingPotStage() == TileFirePit.CookingPotStage.EMPTY) {
             FluidStack fluidStack = FluidUtil.getFluidContained(held);
@@ -262,7 +260,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
 
         if (!player.isSneaking()) {
           GuiHandler.openGui(world, pos, player);
-        } else if ((held == ItemStack.EMPTY) && (attachment != FirePitAttachment.NONE)) {
+        } else if ((held == ItemStack.EMPTY) && (attachment != EnumFirePitAttachment.NONE)) {
           boolean anythingInTheInv = false;
           IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
                                                 null);
@@ -276,7 +274,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
             }
             if (!anythingInTheInv) {
               if (state.getValue(LIT)) {
-                if (attachment == FirePitAttachment.COOKING_POT) {
+                if (attachment == EnumFirePitAttachment.COOKING_POT) {
                   player.attackEntityFrom(DamageSources.SOUP, 1);
                 } else {
                   player.attackEntityFrom(DamageSources.GRILL, 1);
@@ -284,7 +282,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
 
               } else {
                 tile.onRemoveAttachment(player, held);
-                world.setBlockState(pos, state.withProperty(ATTACHMENT, FirePitAttachment.NONE));
+                world.setBlockState(pos, state.withProperty(FIRE_PIT_ATTACHMENT, EnumFirePitAttachment.NONE));
                 return true;
               }
 
@@ -317,7 +315,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, LIT, ATTACHMENT);
+    return new BlockStateContainer(this, LIT, FIRE_PIT_ATTACHMENT);
   }
 
   @Override
@@ -366,21 +364,4 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     return new TileFirePit();
   }
 
-  public enum FirePitAttachment implements IStringSerializable {
-    NONE,
-    GRILL,
-    COOKING_POT;
-
-    private static final FirePitAttachment[] VALUES = values();
-
-    public static FirePitAttachment valueOf(int i) {
-      return i < 0 || i >= VALUES.length ? NONE : VALUES[i];
-    }
-
-    @NotNull
-    @Override
-    public String getName() {
-      return name().toLowerCase();
-    }
-  }
 }

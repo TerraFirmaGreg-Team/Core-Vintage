@@ -22,8 +22,8 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 public class BlockElectricForge extends BaseBlockHorizontal implements IProviderTile {
 

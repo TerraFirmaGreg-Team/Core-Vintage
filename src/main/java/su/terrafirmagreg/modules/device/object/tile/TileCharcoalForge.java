@@ -43,7 +43,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
 
 public class TileCharcoalForge extends BaseTileTickableInventory
   implements ICalendarTickable, ITileFields, IAmbientalTileProvider,

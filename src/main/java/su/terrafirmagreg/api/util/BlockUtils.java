@@ -41,7 +41,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.CLAY;
+import static su.terrafirmagreg.data.Properties.BoolProp.CLAY;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.GRAVEL;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;

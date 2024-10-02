@@ -1,15 +1,14 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.api.base.block.BaseBlockBush;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -37,7 +36,6 @@ import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.types.DefaultPlants;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.CropTFCF;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.Climate;
@@ -45,37 +43,51 @@ import net.dries007.tfc.util.climate.Climate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class BlockPlant extends BlockBush implements ICapabilitySize {
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 
-  public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
-  public static final PropertyInteger DAYPERIOD = PropertyInteger.create("dayperiod", 0, 3);
+public class BlockPlant extends BaseBlockBush {
+
+
   private static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 1.0, 0.875);
+
   private static final Map<Plant, BlockPlant> MAP = new HashMap<>();
+
   public final PropertyInteger growthStageProperty;
+  @Getter
   protected final Plant plant;
   protected final BlockStateContainer blockState;
 
   public BlockPlant(Plant plant) {
-    super(plant.getMaterial());
+    super(Settings.of(plant.getMaterial()));
+
+    this.plant = plant;
+
+    getSettings()
+      .weight(Weight.VERY_LIGHT)
+      .sound(SoundType.PLANT)
+      .size(Size.TINY)
+      .hardness(0.0F)
+      .oreDict(plant.getOreDictName())
+      .randomTicks()
+      .replaceable();
+
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
-    } else {
-      plant.getOreDictName().ifPresent((name) -> {
-        OreDictionaryHelper.register(this, name);
-      });
-      this.plant = plant;
-      this.growthStageProperty = PropertyInteger.create("stage", 0, plant.getNumStages());
-      this.setTickRandomly(true);
-      this.setSoundType(SoundType.PLANT);
-      this.setHardness(0.0F);
-      BlockUtils.setFireInfo(this, 5, 20);
-      this.blockState = this.createPlantBlockState();
-      this.setDefaultState(this.blockState.getBaseState());
     }
+
+    this.growthStageProperty = PropertyInteger.create("stage", 0, plant.getNumStages());
+
+    this.blockState = this.createPlantBlockState();
+    this.setDefaultState(this.blockState.getBaseState());
+
+    BlockUtils.setFireInfo(this, 5, 20);
   }
 
   public static BlockPlant get(Plant plant) {
@@ -84,16 +96,16 @@ public class BlockPlant extends BlockBush implements ICapabilitySize {
 
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, this.growthStageProperty, DAYPERIOD, AGE);
+    return new BlockStateContainer(this, this.growthStageProperty, DAYPERIOD, AGE_4);
   }
 
   @NotNull
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(AGE, meta);
+    return this.getDefaultState().withProperty(AGE_4, meta);
   }
 
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(AGE);
+    return state.getValue(AGE_4);
   }
 
   @NotNull
@@ -102,29 +114,27 @@ public class BlockPlant extends BlockBush implements ICapabilitySize {
                 .withProperty(this.growthStageProperty, this.plant.getStageForMonth());
   }
 
-  public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return true;
-  }
-
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-    if (worldIn.isAreaLoaded(pos, 1)) {
-      Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
-      int currentStage = state.getValue(this.growthStageProperty);
-      int expectedStage = this.plant.getStageForMonth(currentMonth);
-      int currentTime = state.getValue(DAYPERIOD);
-      int expectedTime = this.getDayPeriod();
-      if (currentTime != expectedTime) {
-        worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, expectedTime)
-                                        .withProperty(this.growthStageProperty, currentStage));
-      }
-
-      if (currentStage != expectedStage && random.nextDouble() < 0.5) {
-        worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, expectedTime)
-                                        .withProperty(this.growthStageProperty, expectedStage));
-      }
-
-      this.updateTick(worldIn, pos, state, random);
+    if (!worldIn.isAreaLoaded(pos, 1)) {
+      return;
     }
+    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
+    int currentStage = state.getValue(this.growthStageProperty);
+    int expectedStage = this.plant.getStageForMonth(currentMonth);
+    int currentTime = state.getValue(DAYPERIOD);
+    int expectedTime = this.getDayPeriod();
+    if (currentTime != expectedTime) {
+      worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, expectedTime)
+                                      .withProperty(this.growthStageProperty, currentStage));
+    }
+
+    if (currentStage != expectedStage && random.nextDouble() < 0.5) {
+      worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, expectedTime)
+                                      .withProperty(this.growthStageProperty, expectedStage));
+    }
+
+    this.updateTick(worldIn, pos, state, random);
+
   }
 
   public int tickRate(World worldIn) {
@@ -144,7 +154,7 @@ public class BlockPlant extends BlockBush implements ICapabilitySize {
 
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
     if (!(entityIn instanceof EntityPlayer) || !((EntityPlayer) entityIn).isCreative()) {
-      double modifier = 0.25 * (double) (4 - state.getValue(AGE));
+      double modifier = 0.25 * (double) (4 - state.getValue(AGE_4));
       modifier += (1.0 - modifier) * this.plant.getMovementMod();
       if (modifier < ConfigTFC.General.MISC.minimumPlantMovementModifier) {
         modifier = ConfigTFC.General.MISC.minimumPlantMovementModifier;
@@ -212,18 +222,11 @@ public class BlockPlant extends BlockBush implements ICapabilitySize {
   public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player) {
     ItemStack stack = player.getHeldItemMainhand();
     IBlockState state = world.getBlockState(pos);
-    switch (this.plant.getPlantType()) {
-      case REED:
-      case REED_SEA:
-      case TALL_REED:
-      case TALL_REED_SEA:
-      case SHORT_GRASS:
-      case TALL_GRASS:
-        return stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-                                                                                            .getHarvestLevel(stack, "scythe", player, state) != -1;
-      default:
-        return true;
-    }
+    return switch (this.plant.getPlantType()) {
+      case REED, REED_SEA, TALL_REED, TALL_REED_SEA, SHORT_GRASS, TALL_GRASS -> stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1
+                                                                                || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1;
+      default -> true;
+    };
   }
 
   private boolean isValidSoil(IBlockState state) {
@@ -250,18 +253,6 @@ public class BlockPlant extends BlockBush implements ICapabilitySize {
     return Calendar.CALENDAR_TIME.getHourOfDay() / 6;
   }
 
-  public Plant getPlant() {
-    return this.plant;
-  }
-
-  public @NotNull Weight getWeight(ItemStack stack) {
-    return Weight.VERY_LIGHT;
-  }
-
-  public @NotNull Size getSize(ItemStack stack) {
-    return Size.TINY;
-  }
-
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     IBlockState soil = worldIn.getBlockState(pos.down());
     Block blockAt = worldIn.getBlockState(pos).getBlock();
@@ -282,20 +273,20 @@ public class BlockPlant extends BlockBush implements ICapabilitySize {
       int j;
       if (this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
           this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-        j = state.getValue(AGE);
+        j = state.getValue(AGE_4);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
           if (j < 3) {
-            worldIn.setBlockState(pos, state.withProperty(AGE, j + 1));
+            worldIn.setBlockState(pos, state.withProperty(AGE_4, j + 1));
           }
 
           ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
         }
       } else if (!this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                  !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-        j = state.getValue(AGE);
+        j = state.getValue(AGE_4);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
           if (j > 0) {
-            worldIn.setBlockState(pos, state.withProperty(AGE, j - 1));
+            worldIn.setBlockState(pos, state.withProperty(AGE_4, j - 1));
           }
 
           ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));

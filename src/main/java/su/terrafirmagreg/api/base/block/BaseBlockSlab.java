@@ -2,15 +2,14 @@ package su.terrafirmagreg.api.base.block;
 
 import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 import su.terrafirmagreg.api.base.item.BaseItemSlab;
+import su.terrafirmagreg.data.enums.EnumDefault;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -20,11 +19,11 @@ import lombok.Getter;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.EnumProp.DEFAULT;
+
 @Getter
 @SuppressWarnings("deprecation")
 public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings {
-
-  public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 
   protected final Settings settings;
 
@@ -34,14 +33,14 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings 
     this.settings = settings;
 
     getSettings()
-      .ignoresProperties(VARIANT)
+      .ignoresProperties(DEFAULT)
       .useNeighborBrightness();
 
     var state = getBlockState().getBaseState();
     if (!isDouble()) {
       state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
     }
-    setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
+    setDefaultState(state.withProperty(DEFAULT, EnumDefault.DEFAULT));
   }
 
   @Override
@@ -53,12 +52,12 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings 
 
   @Override
   public IProperty<?> getVariantProperty() {
-    return VARIANT; // why is this not null-tolerable ...
+    return DEFAULT; // why is this not null-tolerable ...
   }
 
   @Override
   public Comparable<?> getTypeForItem(ItemStack stack) {
-    return Variant.DEFAULT;
+    return EnumDefault.DEFAULT;
   }
 
   @Override
@@ -68,7 +67,7 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings 
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
+    IBlockState iblockstate = this.getDefaultState().withProperty(DEFAULT, EnumDefault.DEFAULT);
 
     if (!this.isDouble()) {
       iblockstate = iblockstate.withProperty(BlockSlab.HALF,
@@ -101,7 +100,7 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings 
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, HALF, VARIANT);
+    return this.isDouble() ? new BlockStateContainer(this, DEFAULT) : new BlockStateContainer(this, HALF, DEFAULT);
   }
 
   public abstract BaseBlockSlab getHalfSlab();
@@ -112,14 +111,5 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings 
   }
 
   public abstract BaseBlockSlab getDoubleSlab();
-
-  public enum Variant implements IStringSerializable {
-    DEFAULT;
-
-    @Override
-    public String getName() {
-      return "default";
-    }
-  }
 
 }

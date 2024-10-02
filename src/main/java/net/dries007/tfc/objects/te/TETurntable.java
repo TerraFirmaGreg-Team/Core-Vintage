@@ -2,7 +2,6 @@ package net.dries007.tfc.objects.te;
 
 import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.data.Properties;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -24,6 +23,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static su.terrafirmagreg.data.Properties.IntProp.CLAY_LEVEL;
 
 @MethodsReturnNonnullByDefault
 public class TETurntable extends BaseTileTickableInventory {
@@ -88,7 +89,7 @@ public class TETurntable extends BaseTileTickableInventory {
           speed = 15;
           if (!world.isRemote) {
             world.setBlockState(pos, getBlockType().getDefaultState()
-                                                   .withProperty(Properties.CLAY_LEVEL, clay - 1));
+                                                   .withProperty(CLAY_LEVEL, clay - 1));
             StackUtils.spawnItemStack(world, pos.up(), item());
             markForSync();
           }
@@ -103,7 +104,7 @@ public class TETurntable extends BaseTileTickableInventory {
   }
 
   public int getClayAmount() {
-    return world.getBlockState(pos).getValue(Properties.CLAY_LEVEL);
+    return world.getBlockState(pos).getValue(CLAY_LEVEL);
   }
 
   public boolean hasPottery() {
@@ -149,7 +150,7 @@ public class TETurntable extends BaseTileTickableInventory {
 
   public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
     StackUtils.spawnItemStack(world, pos, inventory.getStackInSlot(0));
-    int clay = state.getValue(Properties.CLAY_LEVEL);
+    int clay = state.getValue(CLAY_LEVEL);
     if (clay > 0) {
       StackUtils.spawnItemStack(world, pos, new ItemStack(Items.CLAY_BALL, 5 * clay));
     }

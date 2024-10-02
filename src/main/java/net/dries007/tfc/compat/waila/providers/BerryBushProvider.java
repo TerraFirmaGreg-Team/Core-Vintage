@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.FRUITING;
+
 public class BerryBushProvider implements IWailaBlock {
 
   @NotNull
@@ -33,7 +35,7 @@ public class BerryBushProvider implements IWailaBlock {
     List<String> currentTooltip = new ArrayList<>();
     IBlockState state = world.getBlockState(pos);
     if (state.getBlock() instanceof BlockBerryBush block) {
-      if (block.getBush().isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(BlockBerryBush.FRUITING)) {
+      if (block.getBush().isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(FRUITING)) {
         float temp = Climate.getActualTemp(world, pos);
         float rainfall = ProviderChunkData.getRainfall(world, pos);
         var tile = TileUtils.getTile(world, pos, TETickCounter.class).filter(t -> block.getBush().isValidForGrowth(temp, rainfall));

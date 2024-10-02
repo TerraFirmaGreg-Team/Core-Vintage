@@ -458,6 +458,11 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
       return this;
     }
 
+    public Settings noReplaceable() {
+      this.isReplaceable = false;
+      return this;
+    }
+
     public Settings lightValue(ContextFunction<Integer> lightValue) {
       this.lightValue = lightValue;
       return this;

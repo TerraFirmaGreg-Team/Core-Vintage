@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
@@ -18,7 +19,6 @@ import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileP
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
-import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.object.container.ContainerFirePit;
 
 import net.minecraft.block.state.IBlockState;
@@ -65,8 +65,8 @@ import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
 
-import static su.terrafirmagreg.data.Properties.LIT;
-import static su.terrafirmagreg.modules.device.object.block.BlockFirePit.ATTACHMENT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.EnumProp.FIRE_PIT_ATTACHMENT;
 
 public class TileFirePit extends BaseTileTickableInventory
   implements ICalendarTickable, ITileFields, IItemHandlerSidedCallback, IAmbientalTileProvider,
@@ -188,8 +188,8 @@ public class TileFirePit extends BaseTileTickableInventory
                                                                airTicks, MAX_AIR_TICKS);
       }
 
-      BlockFirePit.FirePitAttachment attachment = state.getValue(ATTACHMENT);
-      if (attachment == BlockFirePit.FirePitAttachment.NONE) {
+      EnumFirePitAttachment attachment = state.getValue(FIRE_PIT_ATTACHMENT);
+      if (attachment == EnumFirePitAttachment.NONE) {
         markForSync();
         if (temperature > 0) {
           // The fire pit is nice: it will automatically move input to output for you, saving the trouble of losing the input due to melting / burning
@@ -215,7 +215,7 @@ public class TileFirePit extends BaseTileTickableInventory
             leftover.poll();
           }
         }
-      } else if (attachment == BlockFirePit.FirePitAttachment.COOKING_POT) {
+      } else if (attachment == EnumFirePitAttachment.COOKING_POT) {
         if (cookingPotStage == CookingPotStage.WAITING) {
           markForSync();
           if (temperature > COOKING_POT_BOILING_TEMPERATURE) {
@@ -284,7 +284,7 @@ public class TileFirePit extends BaseTileTickableInventory
             }
           }
         }
-      } else if (attachment == BlockFirePit.FirePitAttachment.GRILL) {
+      } else if (attachment == EnumFirePitAttachment.GRILL) {
         // Only difference is we do the same heating recipe manipulations, just with five extra slots instead.
         for (int i = SLOT_EXTRA_INPUT_START; i <= SLOT_EXTRA_INPUT_END; i++) {
           ItemStack stack = inventory.getStackInSlot(i);
@@ -471,7 +471,7 @@ public class TileFirePit extends BaseTileTickableInventory
     cachedRecipe = HeatRecipe.get(inventory.getStackInSlot(SLOT_ITEM_INPUT));
 
     // If grill, update other heat recipes
-    if (world.getBlockState(pos).getValue(ATTACHMENT) == BlockFirePit.FirePitAttachment.GRILL) {
+    if (world.getBlockState(pos).getValue(FIRE_PIT_ATTACHMENT) == EnumFirePitAttachment.GRILL) {
       updateCachedGrillRecipes();
     }
   }
@@ -492,9 +492,9 @@ public class TileFirePit extends BaseTileTickableInventory
 
     attachedItemStack = new ItemStack(nbt.getCompoundTag("attachedItemStack"));
 
-    BlockFirePit.FirePitAttachment attachment = BlockFirePit.FirePitAttachment.valueOf(
+    EnumFirePitAttachment attachment = EnumFirePitAttachment.valueOf(
       nbt.getInteger("attachment"));
-    if (attachment == BlockFirePit.FirePitAttachment.COOKING_POT) {
+    if (attachment == EnumFirePitAttachment.COOKING_POT) {
       cookingPotStage = CookingPotStage.valueOf(nbt.getInteger("cookingPotStage"));
       if (cookingPotStage == CookingPotStage.FINISHED) {
         soupServings = nbt.getInteger("soupServings");
@@ -511,7 +511,7 @@ public class TileFirePit extends BaseTileTickableInventory
 
     // Update recipe cache
     cachedRecipe = HeatRecipe.get(inventory.getStackInSlot(SLOT_ITEM_INPUT));
-    if (attachment == BlockFirePit.FirePitAttachment.GRILL) {
+    if (attachment == EnumFirePitAttachment.GRILL) {
       updateCachedGrillRecipes();
     }
   }
@@ -532,10 +532,10 @@ public class TileFirePit extends BaseTileTickableInventory
     }
     NBTUtils.setGenericNBTValue(nbt, "attachedItemStack", attachedItemStack.serializeNBT());
 
-    BlockFirePit.FirePitAttachment attachment = world.getBlockState(pos).getValue(ATTACHMENT);
+    EnumFirePitAttachment attachment = world.getBlockState(pos).getValue(FIRE_PIT_ATTACHMENT);
     NBTUtils.setGenericNBTValue(nbt, "attachment",
                                 attachment.ordinal()); // to de-serialize the correct stuff
-    if (attachment == BlockFirePit.FirePitAttachment.COOKING_POT) {
+    if (attachment == EnumFirePitAttachment.COOKING_POT) {
       NBTUtils.setGenericNBTValue(nbt, "cookingPotStage", cookingPotStage.ordinal());
       if (cookingPotStage == CookingPotStage.BOILING) {
         NBTUtils.setGenericNBTValue(nbt, "boilingTicks", boilingTicks);
@@ -594,14 +594,14 @@ public class TileFirePit extends BaseTileTickableInventory
       case SLOT_EXTRA_INPUT_START + 2:
       case SLOT_EXTRA_INPUT_START + 3:
       case SLOT_EXTRA_INPUT_START + 4:
-        BlockFirePit.FirePitAttachment attachment = world.getBlockState(pos).getValue(ATTACHMENT);
-        if (attachment == BlockFirePit.FirePitAttachment.COOKING_POT) {
+        EnumFirePitAttachment attachment = world.getBlockState(pos).getValue(FIRE_PIT_ATTACHMENT);
+        if (attachment == EnumFirePitAttachment.COOKING_POT) {
           // Cooking pot inputs must be food & category of veg, cooked or uncooked meat
           return stack.hasCapability(CapabilityFood.CAPABILITY, null) &&
                  Food.Category.doesStackMatchCategories(stack, Food.Category.FRUIT,
                                                         Food.Category.VEGETABLE, Food.Category.COOKED_MEAT,
                                                         Food.Category.MEAT);
-        } else if (attachment == BlockFirePit.FirePitAttachment.GRILL) {
+        } else if (attachment == EnumFirePitAttachment.GRILL) {
           // Grill can only do food + heatable
           return stack.hasCapability(CapabilityFood.CAPABILITY, null) && CapabilityHeat.has(stack);
         }

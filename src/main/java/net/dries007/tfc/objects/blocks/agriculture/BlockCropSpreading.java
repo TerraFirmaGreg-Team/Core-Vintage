@@ -16,6 +16,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
+
 @Deprecated // For now, unused, needs design work
 
 public abstract class BlockCropSpreading extends BlockCropTFC {
@@ -83,7 +85,7 @@ public abstract class BlockCropSpreading extends BlockCropTFC {
                    TileUtils.getTile(worldIn, newPos, TECropSpreading.class)
                             .filter(newTile -> newTile.getMaxGrowthStage() < currentGrowthStage)
                             .ifPresent(newTile -> newTile.setMaxGrowthStage(newTile.getMaxGrowthStage() + 1));
-                   
+
                  } else if (newState.getBlock().isAir(newState, worldIn, newPos)) {
                    IBlockState stateDown = worldIn.getBlockState(newPos.down());
                    if (stateDown.getBlock().canSustainPlant(stateDown, worldIn, newPos.down(), EnumFacing.UP, this)) {

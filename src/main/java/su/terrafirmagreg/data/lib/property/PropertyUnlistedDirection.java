@@ -7,8 +7,12 @@ public class PropertyUnlistedDirection implements IUnlistedProperty<EnumFacing> 
 
   private final String name;
 
-  public PropertyUnlistedDirection(String name) {
+  protected PropertyUnlistedDirection(String name) {
     this.name = name;
+  }
+
+  public static PropertyUnlistedDirection create(String name) {
+    return new PropertyUnlistedDirection(name);
   }
 
   @Override

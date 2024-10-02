@@ -26,6 +26,8 @@ import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Random;
@@ -56,6 +58,7 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
   private final Material material;
   private final boolean isClayMarking;
   private final boolean isSwampPlant;
+  @Getter
   private final Optional<String> oreDictName;
 
   public Plant(@NotNull ResourceLocation name, PlantType plantType, int[] stages, boolean isClayMarking, boolean isSwampPlant, float minGrowthTemp,
@@ -251,10 +254,6 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
 
   public int getMaxHeight() {
     return maxHeight;
-  }
-
-  public Optional<String> getOreDictName() {
-    return oreDictName;
   }
 
   @SuppressWarnings("ConstantConditions")

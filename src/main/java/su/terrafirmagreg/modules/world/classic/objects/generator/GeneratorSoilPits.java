@@ -23,7 +23,8 @@ import net.dries007.tfc.util.climate.Climate;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.CLAY;
+import static su.terrafirmagreg.data.Properties.BoolProp.CLAY;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
 
 /**
  * todo: make these bigger without causing cascading lag.
@@ -102,7 +103,7 @@ public class GeneratorSoilPits implements IWorldGenerator {
                                         world.getLightFor(EnumSkyBlock.SKY, pos)) &&
                   world.isAirBlock(pos) &&
                   plantBlock.canBlockStay(world, pos, state)) {
-                world.setBlockState(pos, state.withProperty(BlockPlant.AGE, plantAge), 2);
+                world.setBlockState(pos, state.withProperty(AGE_4, plantAge), 2);
               }
             }
           }

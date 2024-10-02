@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.compat.waila;
 
-import su.terrafirmagreg.data.Properties;
+import su.terrafirmagreg.data.enums.EnumAging;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,7 +8,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import com.eerussianguy.firmalife.init.EnumAging;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.BlockCheesewheel;
 
@@ -18,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static su.terrafirmagreg.data.Properties.EnumProp.AGING;
+
 public class CheesewheelProvider implements IWailaBlock {
 
   @NotNull
@@ -26,7 +27,7 @@ public class CheesewheelProvider implements IWailaBlock {
     List<String> currentTooltip = new ArrayList<>();
     IBlockState state = world.getBlockState(pos);
     if (state.getBlock() instanceof BlockCheesewheel) {
-      EnumAging age = state.getValue(Properties.AGE);
+      EnumAging age = state.getValue(AGING);
       currentTooltip.add(age.getFormat() + new TextComponentTranslation(age.getTranslationKey()).getFormattedText());
     }
 

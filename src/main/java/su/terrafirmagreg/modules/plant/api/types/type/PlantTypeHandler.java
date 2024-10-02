@@ -1,10 +1,13 @@
 package su.terrafirmagreg.modules.plant.api.types.type;
 
 import su.terrafirmagreg.modules.plant.api.types.category.PlantCategories;
+import su.terrafirmagreg.modules.plant.api.types.category.PlantCategoryHandler;
 
 public class PlantTypeHandler {
 
   public static void init() {
+    PlantCategoryHandler.init();
+
     PlantTypes.ALLIUM = PlantType
       .builder("allium")
       .category(PlantCategories.STANDARD)

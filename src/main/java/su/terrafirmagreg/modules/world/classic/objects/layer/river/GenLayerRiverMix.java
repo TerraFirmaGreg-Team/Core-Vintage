@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.world.classic.objects.layer.river;
 
+import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerBase;
+
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
-
-import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerBase;
 
 public class GenLayerRiverMix extends GenLayerBase {
 

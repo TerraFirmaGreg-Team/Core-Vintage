@@ -6,7 +6,6 @@ import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,9 +29,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.BOTTOM;
+import static su.terrafirmagreg.data.Properties.BoolProp.DOWN;
+import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.UP;
+import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+
 public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implements IGrowable {
 
-  private static final PropertyBool BOTTOM = PropertyBool.create("bottom");
   private static final Map<Plant, BlockHangingCreepingPlantTFCF> MAP = new HashMap<>();
 
   public BlockHangingCreepingPlantTFCF(Plant plant) {
@@ -51,7 +59,7 @@ public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implem
   @Override
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, DOWN, UP, NORTH, EAST, WEST, SOUTH, growthStageProperty, DAYPERIOD, AGE, BOTTOM);
+    return new BlockStateContainer(this, DOWN, UP, NORTH, EAST, WEST, SOUTH, growthStageProperty, DAYPERIOD, AGE_4, BOTTOM);
   }
 
   @Override
@@ -154,7 +162,7 @@ public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implem
 
     if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
           net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.down(), state, true)) {
@@ -167,14 +175,14 @@ public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implem
             growDiagonally(worldIn, rand, pos, state);
           }
         } else if (j < 3) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j + 1)
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j + 1)
                                           .withProperty(BOTTOM, getIsBottom(worldIn, pos)));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
         if (j == 0) {
@@ -184,7 +192,7 @@ public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implem
             shrinkHorizontally(worldIn, pos);
           }
         } else if (j > 0) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j - 1)
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j - 1)
                                           .withProperty(BOTTOM, getIsBottom(worldIn, pos)));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
@@ -215,7 +223,7 @@ public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implem
   @Override
   public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
     worldIn.setBlockState(pos.down(), this.getDefaultState());
-    IBlockState iblockstate = state.withProperty(AGE, 0)
+    IBlockState iblockstate = state.withProperty(AGE_4, 0)
                                    .withProperty(growthStageProperty, plant.getStageForMonth())
                                    .withProperty(BOTTOM, false);
     worldIn.setBlockState(pos, iblockstate);
@@ -244,7 +252,7 @@ public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implem
 
       if (rand.nextDouble() < 0.01D && worldIn.isAirBlock(sidePos)) {
         worldIn.setBlockState(sidePos, this.getDefaultState());
-        IBlockState iblockstate = state.withProperty(AGE, 0)
+        IBlockState iblockstate = state.withProperty(AGE_4, 0)
                                        .withProperty(growthStageProperty, plant.getStageForMonth());
         worldIn.setBlockState(pos, iblockstate);
         iblockstate.neighborChanged(worldIn, sidePos, this, pos);
@@ -279,7 +287,7 @@ public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implem
 
         if (rand.nextDouble() < 0.5D && worldIn.isAirBlock(sidePos) && worldIn.isAirBlock(sidePos.down())) {
           worldIn.setBlockState(sidePos.down(), this.getDefaultState());
-          IBlockState iblockstate = state.withProperty(AGE, 0)
+          IBlockState iblockstate = state.withProperty(AGE_4, 0)
                                          .withProperty(growthStageProperty, plant.getStageForMonth());
           worldIn.setBlockState(pos, iblockstate);
           iblockstate.neighborChanged(worldIn, sidePos.down(), this, pos);

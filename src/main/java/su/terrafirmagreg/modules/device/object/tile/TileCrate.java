@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-import static net.dries007.tfc.objects.blocks.BlockLargeVessel.SEALED;
+import static su.terrafirmagreg.data.Properties.BoolProp.SEALED;
 
 /**
  * @see BlockLargeVessel

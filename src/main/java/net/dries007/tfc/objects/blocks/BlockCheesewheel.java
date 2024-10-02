@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.Properties;
+import su.terrafirmagreg.data.enums.EnumAging;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -9,8 +9,6 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,7 +26,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import com.eerussianguy.firmalife.ConfigFL;
-import com.eerussianguy.firmalife.init.EnumAging;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.objects.te.TETickCounter;
@@ -39,11 +36,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import static su.terrafirmagreg.data.Properties.EnumProp.AGING;
+import static su.terrafirmagreg.data.Properties.IntProp.WEDGES;
+
 @MethodsReturnNonnullByDefault
 public class BlockCheesewheel extends BlockNonCube {
 
-  public static final PropertyInteger WEDGES = Properties.WEDGES;
-  public static final PropertyEnum<EnumAging> AGE = Properties.AGE;
   protected static final AxisAlignedBB CHEESEWHEEL_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.5D,
                                                                             0.9375D); // This could have a more complex bounding box
 
@@ -51,7 +49,7 @@ public class BlockCheesewheel extends BlockNonCube {
 
   public BlockCheesewheel(Supplier<? extends Item> item) {
     super(Material.CAKE);
-    this.setDefaultState(this.blockState.getBaseState().withProperty(WEDGES, 0).withProperty(AGE, EnumAging.FRESH));
+    this.setDefaultState(this.blockState.getBaseState().withProperty(WEDGES, 0).withProperty(AGING, EnumAging.FRESH));
     this.setTickRandomly(true);
     this.setHardness(1.0F);
     this.setSoundType(SoundType.CLOTH);
@@ -61,12 +59,12 @@ public class BlockCheesewheel extends BlockNonCube {
   @SuppressWarnings("deprecation")
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(WEDGES, meta % 4).withProperty(AGE, EnumAging.values()[meta / 4]);
+    return this.getDefaultState().withProperty(WEDGES, meta % 4).withProperty(AGING, EnumAging.values()[meta / 4]);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    EnumAging age = state.getValue(AGE);
+    EnumAging age = state.getValue(AGING);
     return state.getValue(WEDGES) + age.getID();
   }
 
@@ -81,13 +79,13 @@ public class BlockCheesewheel extends BlockNonCube {
     TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(tile -> {
       long ticksSinceUpdate = tile.getTicksSinceUpdate();
       // If the cheese isn't cut and ready to age
-      if (state.getValue(AGE) == EnumAging.FRESH && state.getValue(WEDGES) == 0 &&
+      if (state.getValue(AGING) == EnumAging.FRESH && state.getValue(WEDGES) == 0 &&
           ticksSinceUpdate > ConfigFL.General.BALANCE.cheeseTicksToAged) {
-        worldIn.setBlockState(pos, state.withProperty(AGE, EnumAging.AGED));
+        worldIn.setBlockState(pos, state.withProperty(AGING, EnumAging.AGED));
         tile.resetCounter();
-      } else if (state.getValue(AGE) == EnumAging.AGED && state.getValue(WEDGES) == 0 &&
+      } else if (state.getValue(AGING) == EnumAging.AGED && state.getValue(WEDGES) == 0 &&
                  ticksSinceUpdate > ConfigFL.General.BALANCE.cheeseTicksToVintage) {
-        worldIn.setBlockState(pos, state.withProperty(AGE, EnumAging.VINTAGE));
+        worldIn.setBlockState(pos, state.withProperty(AGING, EnumAging.VINTAGE));
       }
     });
   }
@@ -119,7 +117,7 @@ public class BlockCheesewheel extends BlockNonCube {
 
   private boolean cutCheese(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn) {
     int stateWedges = state.getValue(WEDGES);
-    FoodTrait ageTrait = state.getValue(AGE).getTrait();
+    FoodTrait ageTrait = state.getValue(AGING).getTrait();
 
     if (stateWedges < 3) {
       worldIn.setBlockState(pos, state.withProperty(WEDGES, stateWedges + 1), 3);
@@ -143,7 +141,7 @@ public class BlockCheesewheel extends BlockNonCube {
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, WEDGES, AGE);
+    return new BlockStateContainer(this, WEDGES, AGING);
   }
 
   @Override
@@ -159,7 +157,7 @@ public class BlockCheesewheel extends BlockNonCube {
   @Override
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
     ItemStack cheese = new ItemStack(item.get(), 4 - state.getValue(WEDGES));
-    CapabilityFood.applyTrait(cheese, state.getValue(AGE).getTrait());
+    CapabilityFood.applyTrait(cheese, state.getValue(AGING).getTrait());
 
     drops.add(cheese);
   }

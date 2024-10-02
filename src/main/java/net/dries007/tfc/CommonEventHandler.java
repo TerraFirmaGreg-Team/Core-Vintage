@@ -141,7 +141,7 @@ import net.dries007.tfc.util.skills.SmithingSkill;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
 import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.CAN_FALL;
+import static su.terrafirmagreg.data.Properties.BoolProp.CAN_FALL;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.COARSE_DIRT;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DIRT;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.FARMLAND;

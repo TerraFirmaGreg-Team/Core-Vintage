@@ -3,12 +3,11 @@ package se.gory_moon.horsepower.blocks;
 import su.terrafirmagreg.api.base.block.BaseBlockHorse;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.data.enums.EnumPressPart;
 import su.terrafirmagreg.modules.device.object.tile.TilePressHorse;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -34,7 +33,6 @@ import mcjty.theoneprobe.api.IProbeInfoAccessor;
 import mcjty.theoneprobe.api.ProbeMode;
 import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
 import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.client.model.modelvariants.PressModels;
 import se.gory_moon.horsepower.client.renderer.TESRPress;
 import se.gory_moon.horsepower.lib.Constants;
 import se.gory_moon.horsepower.util.Localization;
@@ -42,14 +40,13 @@ import se.gory_moon.horsepower.util.color.Colors;
 
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.List;
+
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTALS;
+import static su.terrafirmagreg.data.Properties.EnumProp.PRESS_PART;
 
 @Optional.Interface(iface = "mcjty.theoneprobe.api.IProbeInfoAccessor", modid = "theoneprobe")
 public class BlockPress extends BaseBlockHorse implements IProbeInfoAccessor {
-
-  public static final PropertyDirection FACING = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
-  public static final PropertyEnum<PressModels> PART = PropertyEnum.create("part", PressModels.class);
 
   private static final AxisAlignedBB BOUND_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D + 12D / 16D, 1.0D);
   private static final AxisAlignedBB COLLISION_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D + 3D / 16D, 1.0D);
@@ -69,13 +66,13 @@ public class BlockPress extends BaseBlockHorse implements IProbeInfoAccessor {
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta))
-                            .withProperty(PART, PressModels.BASE);
+    return getDefaultState().withProperty(HORIZONTALS, EnumFacing.byHorizontalIndex(meta))
+                            .withProperty(PRESS_PART, EnumPressPart.BASE);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getHorizontalIndex();
+    return state.getValue(HORIZONTALS).getHorizontalIndex();
   }
 
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -85,14 +82,14 @@ public class BlockPress extends BaseBlockHorse implements IProbeInfoAccessor {
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
     if (!worldIn.isRemote) {
-      EnumFacing filled = state.getValue(FACING);
-      worldIn.setBlockState(pos, state.withProperty(FACING, filled).withProperty(PART, PressModels.BASE), 2);
+      EnumFacing filled = state.getValue(HORIZONTALS);
+      worldIn.setBlockState(pos, state.withProperty(HORIZONTALS, filled).withProperty(PRESS_PART, EnumPressPart.BASE), 2);
     }
   }
 
   @Override
   public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-    world.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
+    world.setBlockState(pos, state.withProperty(HORIZONTALS, placer.getHorizontalFacing().getOpposite()), 2);
 
     TileUtils.getTile(world, pos, TilePressHorse.class).ifPresent(tile -> tile.setForward(placer.getHorizontalFacing().getOpposite()));
     super.onBlockPlacedBy(world, pos, state, placer, stack);
@@ -100,7 +97,7 @@ public class BlockPress extends BaseBlockHorse implements IProbeInfoAccessor {
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, PART);
+    return new BlockStateContainer(this, HORIZONTALS, PRESS_PART);
   }
 
   @Override
@@ -119,7 +116,7 @@ public class BlockPress extends BaseBlockHorse implements IProbeInfoAccessor {
 
   @Override
   public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-    return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(PART, PressModels.BASE);
+    return getDefaultState().withProperty(HORIZONTALS, placer.getHorizontalFacing().getOpposite()).withProperty(PRESS_PART, EnumPressPart.BASE);
   }
 
   @Nullable

@@ -1,11 +1,11 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.base.block.BaseBlockHorizontal;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -33,17 +33,18 @@ import lombok.Getter;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @MethodsReturnNonnullByDefault
 
-public class BlockJackOLantern extends BlockHorizontal implements ICapabilitySize {
+public class BlockJackOLantern extends BaseBlockHorizontal implements ICapabilitySize {
 
   private final Carving carving;
 
   public BlockJackOLantern(Carving carving) {
-    super(Material.GOURD);
-    setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(LIT, false));
+    super(Settings.of(Material.GOURD));
+    setDefaultState(blockState.getBaseState().withProperty(HORIZONTAL, EnumFacing.NORTH).withProperty(LIT, false));
     setTickRandomly(true);
     setCreativeTab(CreativeTabsTFC.CT_MISC);
     setHardness(1f);
@@ -64,25 +65,27 @@ public class BlockJackOLantern extends BlockHorizontal implements ICapabilitySiz
 
   @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta)).withProperty(LIT, meta >= 4);
+    return getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta)).withProperty(LIT, meta >= 4);
   }
 
   public int getMetaFromState(IBlockState state) {
-    return (state.getValue(LIT) ? 4 : 0) + state.getValue(FACING).getHorizontalIndex();
+    return (state.getValue(LIT) ? 4 : 0) + state.getValue(HORIZONTAL).getHorizontalIndex();
   }
 
   @SuppressWarnings("deprecation")
   public IBlockState withRotation(IBlockState state, Rotation rot) {
-    return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
+    return state.withProperty(HORIZONTAL, rot.rotate(state.getValue(HORIZONTAL)));
   }
 
   @SuppressWarnings("deprecation")
   public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
-    return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
+    return state.withRotation(mirrorIn.toRotation(state.getValue(HORIZONTAL)));
   }
 
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-    if (worldIn.isRemote) {return;}
+    if (worldIn.isRemote) {
+      return;
+    }
     //taken from BlockTorchTFC
     //last twice as long as a torch. balance this by being less bright
     TileUtils.getTile(worldIn, pos, TETickCounter.class)
@@ -117,7 +120,7 @@ public class BlockJackOLantern extends BlockHorizontal implements ICapabilitySiz
 
   @SuppressWarnings("deprecation")
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-    return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+    return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing().getOpposite());
   }
 
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
@@ -128,7 +131,7 @@ public class BlockJackOLantern extends BlockHorizontal implements ICapabilitySiz
   }
 
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, LIT);
+    return new BlockStateContainer(this, HORIZONTAL, LIT);
   }
 
   public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {

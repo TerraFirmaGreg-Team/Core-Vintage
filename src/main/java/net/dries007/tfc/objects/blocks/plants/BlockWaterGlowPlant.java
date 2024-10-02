@@ -40,16 +40,16 @@ import net.dries007.tfc.util.climate.Climate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.ALL_FACES;
+import static su.terrafirmagreg.data.Properties.BoolProp.DOWN;
+import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.UP;
+import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+
 public class BlockWaterGlowPlant extends BlockFluidTFC implements ICapabilitySize, IPlantable {
 
-  static final PropertyBool DOWN = PropertyBool.create("down");
-  static final PropertyBool UP = PropertyBool.create("up");
-  static final PropertyBool NORTH = PropertyBool.create("north");
-  static final PropertyBool EAST = PropertyBool.create("east");
-  static final PropertyBool SOUTH = PropertyBool.create("south");
-  static final PropertyBool WEST = PropertyBool.create("west");
-
-  private static final PropertyBool[] ALL_FACES = new PropertyBool[]{DOWN, UP, NORTH, SOUTH, WEST, EAST};
 
   private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.1D, 0.2D, 0.1D, 0.9D, 1.0D, 0.9D);
   private static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);

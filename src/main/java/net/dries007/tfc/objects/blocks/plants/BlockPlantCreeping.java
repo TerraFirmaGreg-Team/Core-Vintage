@@ -28,16 +28,18 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.ALL_FACES;
+import static su.terrafirmagreg.data.Properties.BoolProp.DOWN;
+import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.UP;
+import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+
 public class BlockPlantCreeping extends BlockPlant {
 
-  static final PropertyBool DOWN = PropertyBool.create("down");
-  static final PropertyBool UP = PropertyBool.create("up");
-  static final PropertyBool NORTH = PropertyBool.create("north");
-  static final PropertyBool EAST = PropertyBool.create("east");
-  static final PropertyBool SOUTH = PropertyBool.create("south");
-  static final PropertyBool WEST = PropertyBool.create("west");
-
-  private static final PropertyBool[] ALL_FACES = new PropertyBool[]{DOWN, UP, NORTH, SOUTH, WEST, EAST};
 
   private static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
   private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.0D, 0.875D, 0.0D, 1.0D, 1.0D, 1.0D);
@@ -45,6 +47,7 @@ public class BlockPlantCreeping extends BlockPlant {
   private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
   private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.125D);
   private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
+
   private static final Map<Plant, BlockPlantCreeping> MAP = new HashMap<>();
 
   public BlockPlantCreeping(Plant plant) {
@@ -61,7 +64,7 @@ public class BlockPlantCreeping extends BlockPlant {
   @Override
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, DOWN, UP, NORTH, EAST, WEST, SOUTH, growthStageProperty, DAYPERIOD, AGE);
+    return new BlockStateContainer(this, DOWN, UP, NORTH, EAST, WEST, SOUTH, growthStageProperty, DAYPERIOD, AGE_4);
   }
 
   @Override
@@ -214,7 +217,6 @@ public class BlockPlantCreeping extends BlockPlant {
     return true;
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   @SideOnly(Side.CLIENT)
   public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
@@ -236,19 +238,7 @@ public class BlockPlantCreeping extends BlockPlant {
     }
   }
 
-  @SuppressWarnings("deprecation")
-  @Override
-  public boolean isOpaqueCube(IBlockState state) {
-    return false;
-  }
 
-  @SuppressWarnings("deprecation")
-  @Override
-  public boolean isFullCube(IBlockState state) {
-    return false;
-  }
-
-  @SuppressWarnings("deprecation")
   @Override
   @NotNull
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {

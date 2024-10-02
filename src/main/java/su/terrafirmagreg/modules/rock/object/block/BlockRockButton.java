@@ -25,7 +25,7 @@ import lombok.Getter;
 
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.DIRECTIONAL;
+import static su.terrafirmagreg.data.Properties.DirectionProp.DIRECTIONAL;
 
 @Getter
 public class BlockRockButton extends BlockButtonStone implements IRockBlock {

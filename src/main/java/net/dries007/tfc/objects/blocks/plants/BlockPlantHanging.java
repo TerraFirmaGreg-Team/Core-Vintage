@@ -4,7 +4,6 @@ import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -23,9 +22,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.BOTTOM;
+import static su.terrafirmagreg.data.Properties.BoolProp.DOWN;
+import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.UP;
+import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+
 public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
 
-  private static final PropertyBool BOTTOM = PropertyBool.create("bottom");
   private static final Map<Plant, BlockPlantHanging> MAP = new HashMap();
 
   public BlockPlantHanging(Plant plant) {
@@ -87,7 +95,7 @@ public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
     return new BlockStateContainer(this,
-                                   DOWN, UP, NORTH, EAST, WEST, SOUTH, this.growthStageProperty, DAYPERIOD, AGE, BOTTOM);
+                                   DOWN, UP, NORTH, EAST, WEST, SOUTH, this.growthStageProperty, DAYPERIOD, AGE_4, BOTTOM);
   }
 
   protected boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
@@ -114,7 +122,7 @@ public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
       int j;
       if (this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
           this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-        j = state.getValue(AGE);
+        j = state.getValue(AGE_4);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.down(), state, true)) {
           if (j == 3) {
             if (this.canGrow(worldIn, pos, state, worldIn.isRemote)) {
@@ -125,7 +133,7 @@ public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
               this.growDiagonally(worldIn, rand, pos, state);
             }
           } else if (j < 3) {
-            worldIn.setBlockState(pos, state.withProperty(AGE, j + 1)
+            worldIn.setBlockState(pos, state.withProperty(AGE_4, j + 1)
                                             .withProperty(BOTTOM, this.getIsBottom(worldIn, pos)));
           }
 
@@ -133,7 +141,7 @@ public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
         }
       } else if (!this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                  !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-        j = state.getValue(AGE);
+        j = state.getValue(AGE_4);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
           if (j == 0) {
             if (this.canShrink(worldIn, pos)) {
@@ -142,7 +150,7 @@ public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
               this.shrinkHorizontally(worldIn, pos);
             }
           } else if (j > 0) {
-            worldIn.setBlockState(pos, state.withProperty(AGE, j - 1)
+            worldIn.setBlockState(pos, state.withProperty(AGE_4, j - 1)
                                             .withProperty(BOTTOM, this.getIsBottom(worldIn, pos)));
           }
 
@@ -172,7 +180,7 @@ public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
 
   public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
     worldIn.setBlockState(pos.down(), this.getDefaultState());
-    IBlockState iblockstate = state.withProperty(AGE, 0)
+    IBlockState iblockstate = state.withProperty(AGE_4, 0)
                                    .withProperty(this.growthStageProperty, this.plant.getStageForMonth())
                                    .withProperty(BOTTOM, false);
     worldIn.setBlockState(pos, iblockstate);
@@ -207,7 +215,7 @@ public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
       BlockPos sidePos = pos.offset(face);
       if (rand.nextDouble() < 0.01 && worldIn.isAirBlock(sidePos)) {
         worldIn.setBlockState(sidePos, this.getDefaultState());
-        IBlockState iblockstate = state.withProperty(AGE, 0)
+        IBlockState iblockstate = state.withProperty(AGE_4, 0)
                                        .withProperty(this.growthStageProperty, this.plant.getStageForMonth());
         worldIn.setBlockState(pos, iblockstate);
         iblockstate.neighborChanged(worldIn, sidePos, this, pos);
@@ -248,7 +256,7 @@ public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
         BlockPos sidePos = pos.offset(face);
         if (rand.nextDouble() < 0.5 && worldIn.isAirBlock(sidePos) && worldIn.isAirBlock(sidePos.down())) {
           worldIn.setBlockState(sidePos.down(), this.getDefaultState());
-          IBlockState iblockstate = state.withProperty(AGE, 0)
+          IBlockState iblockstate = state.withProperty(AGE_4, 0)
                                          .withProperty(this.growthStageProperty, this.plant.getStageForMonth());
           worldIn.setBlockState(pos, iblockstate);
           iblockstate.neighborChanged(worldIn, sidePos.down(), this, pos);

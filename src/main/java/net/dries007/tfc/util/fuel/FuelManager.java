@@ -1,5 +1,9 @@
 package net.dries007.tfc.util.fuel;
 
+import su.terrafirmagreg.modules.wood.init.ItemsWood;
+
+import net.minecraft.item.ItemStack;
+
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
@@ -7,11 +11,7 @@ import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.agriculture.SeasonalTrees;
 
-import net.minecraft.item.ItemStack;
-
 import org.jetbrains.annotations.NotNull;
-
-import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 import java.util.ArrayList;
 import java.util.List;

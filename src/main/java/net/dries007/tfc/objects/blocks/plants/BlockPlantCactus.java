@@ -8,11 +8,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -20,6 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
 
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
@@ -31,9 +30,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.EnumProp.PLANT_PART;
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+
 public class BlockPlantCactus extends BlockPlant implements IGrowable, ITallPlant {
 
-  private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
   private static final Map<Plant, BlockPlantCactus> MAP = new HashMap<>();
 
   public BlockPlantCactus(Plant plant) {
@@ -42,8 +44,12 @@ public class BlockPlantCactus extends BlockPlant implements IGrowable, ITallPlan
       throw new IllegalStateException("There can only be one.");
     }
 
-    setSoundType(SoundType.GROUND);
-    setHardness(0.25F);
+    getSettings()
+      .noReplaceable()
+      .sound(SoundType.GROUND)
+      .weight(Weight.MEDIUM)
+      .size(Size.SMALL)
+      .hardness(0.25F);
   }
 
   public static BlockPlantCactus get(Plant plant) {
@@ -51,8 +57,7 @@ public class BlockPlantCactus extends BlockPlant implements IGrowable, ITallPlan
   }
 
   @Override
-  public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
-                                 net.minecraftforge.common.IPlantable plantable) {
+  public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
     IBlockState plant = plantable.getPlant(world, pos.offset(direction));
 
     if (plant.getBlock() == this) {
@@ -64,18 +69,13 @@ public class BlockPlantCactus extends BlockPlant implements IGrowable, ITallPlan
   @Override
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, AGE, growthStageProperty, PART, DAYPERIOD);
+    return new BlockStateContainer(this, AGE_4, growthStageProperty, PLANT_PART, DAYPERIOD);
   }
 
   @Override
   @NotNull
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-    return super.getActualState(state, worldIn, pos).withProperty(PART, getPlantPart(worldIn, pos));
-  }
-
-  @Override
-  public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return false;
+    return super.getActualState(state, worldIn, pos).withProperty(PLANT_PART, getPlantPart(worldIn, pos));
   }
 
   @Override
@@ -89,15 +89,6 @@ public class BlockPlantCactus extends BlockPlant implements IGrowable, ITallPlan
     return EnumOffsetType.XYZ;
   }
 
-  @Override
-  public @NotNull Weight getWeight(ItemStack stack) {
-    return Weight.MEDIUM; // stacksize = 16
-  }
-
-  @Override
-  public @NotNull Size getSize(ItemStack stack) {
-    return Size.SMALL; // Can store everywhere
-  }
 
   @Override
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
@@ -111,7 +102,7 @@ public class BlockPlantCactus extends BlockPlant implements IGrowable, ITallPlan
 
     if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
           net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
@@ -119,8 +110,8 @@ public class BlockPlantCactus extends BlockPlant implements IGrowable, ITallPlan
           grow(worldIn, rand, pos, state);
         } else if (j < 3) {
           worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod())
-                                          .withProperty(AGE, j + 1)
-                                          .withProperty(PART, getPlantPart(worldIn, pos)));
+                                          .withProperty(AGE_4, j + 1)
+                                          .withProperty(PLANT_PART, getPlantPart(worldIn, pos)));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
@@ -147,9 +138,9 @@ public class BlockPlantCactus extends BlockPlant implements IGrowable, ITallPlan
   public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
     worldIn.setBlockState(pos.up(), this.getDefaultState());
     IBlockState iblockstate = state.withProperty(DAYPERIOD, getDayPeriod())
-                                   .withProperty(AGE, 0)
+                                   .withProperty(AGE_4, 0)
                                    .withProperty(growthStageProperty, plant.getStageForMonth())
-                                   .withProperty(PART, getPlantPart(worldIn, pos));
+                                   .withProperty(PLANT_PART, getPlantPart(worldIn, pos));
     worldIn.setBlockState(pos, iblockstate);
     iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
   }

@@ -8,7 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -38,9 +37,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.IntProp.STAGE_5;
+
 public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
 
-  public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
   protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
   private static final Map<Tree, BlockJoshuaTreeSapling> MAP = new HashMap<>();
   private final Tree wood;
@@ -50,7 +50,7 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
       throw new IllegalStateException("There can only be one.");
     }
     this.wood = wood;
-    setDefaultState(blockState.getBaseState().withProperty(STAGE, 0));
+    setDefaultState(blockState.getBaseState().withProperty(STAGE_5, 0));
     setSoundType(SoundType.PLANT);
     setHardness(0.0F);
     OreDictionaryHelper.register(this, "tree", "sapling");
@@ -67,12 +67,12 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
   @Override
   @NotNull
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(STAGE, meta);
+    return this.getDefaultState().withProperty(STAGE_5, meta);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(STAGE);
+    return state.getValue(STAGE_5);
   }
 
   @Override
@@ -84,7 +84,7 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
   @Override
   @NotNull
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, STAGE);
+    return new BlockStateContainer(this, STAGE_5);
   }
 
   @Override

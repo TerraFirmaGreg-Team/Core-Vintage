@@ -25,11 +25,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static su.terrafirmagreg.data.Properties.AXIS;
-import static su.terrafirmagreg.data.Properties.EAST;
-import static su.terrafirmagreg.data.Properties.NORTH;
-import static su.terrafirmagreg.data.Properties.SOUTH;
-import static su.terrafirmagreg.data.Properties.WEST;
+import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.data.Properties.EnumProp.AXIS;
 
 @SuppressWarnings("deprecation")
 public class BlockWoodSupport extends BlockWood {

@@ -11,8 +11,6 @@ import su.terrafirmagreg.modules.wood.object.block.BlockWoodLog;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -33,15 +31,15 @@ import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 
 import org.jetbrains.annotations.Nullable;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
 import static net.minecraft.util.EnumFacing.NORTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.BASE;
+import static su.terrafirmagreg.data.Properties.BoolProp.POT;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.IntProp.CUT;
 
 @SuppressWarnings("deprecation")
 public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
 
-  public static final PropertyBool BASE = PropertyBool.create("base"); //from TE
-  public static final PropertyBool POT = PropertyBool.create("pot"); //from TE
-  public static final PropertyInteger CUT = PropertyInteger.create("cut", 0, 2); //from TE
 
   private static final AxisAlignedBB AABB_N = new AxisAlignedBB(0.1875D, 0.125D, 0.3125D, 0.8125D,
                                                                 0.875D, 1.0D);
@@ -65,7 +63,7 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
 
     setHarvestLevel(ToolClasses.PICKAXE, 0);
     setDefaultState(blockState.getBaseState()
-                              .withProperty(FACING, NORTH)
+                              .withProperty(HORIZONTAL, NORTH)
                               .withProperty(BASE, false)
                               .withProperty(POT, false)
                               .withProperty(CUT, 0));
@@ -73,12 +71,12 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
+    return getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta));
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getHorizontalIndex();
+    return state.getValue(HORIZONTAL).getHorizontalIndex();
   }
 
   @Override
@@ -96,7 +94,7 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
 
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return switch (state.getValue(FACING)) {
+    return switch (state.getValue(HORIZONTAL)) {
       case NORTH -> AABB_N;
       case SOUTH -> AABB_S;
       case EAST -> AABB_E;
@@ -108,7 +106,7 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
                               BlockPos fromPos) {
-    if (!(worldIn.getBlockState(pos.offset(state.getValue(FACING).getOpposite()))
+    if (!(worldIn.getBlockState(pos.offset(state.getValue(HORIZONTAL).getOpposite()))
                  .getBlock() instanceof BlockLogTFC)) {
       worldIn.destroyBlock(pos, false);
     }
@@ -117,8 +115,8 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
     TileUtils.getTile(worldIn, pos, TileLatexExtractor.class).ifPresent(tile -> {
-      if (tile.cutState() > 0 && worldIn.getBlockState(pos.offset(state.getValue(FACING).getOpposite())).getBlock() instanceof BlockWoodLog) {
-        worldIn.destroyBlock(pos.offset(state.getValue(FACING).getOpposite()), true);
+      if (tile.cutState() > 0 && worldIn.getBlockState(pos.offset(state.getValue(HORIZONTAL).getOpposite())).getBlock() instanceof BlockWoodLog) {
+        worldIn.destroyBlock(pos.offset(state.getValue(HORIZONTAL).getOpposite()), true);
       }
       tile.onBreakBlock();
     });
@@ -159,7 +157,7 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, BASE, POT, CUT);
+    return new BlockStateContainer(this, HORIZONTAL, BASE, POT, CUT);
   }
 
   @Nullable

@@ -13,15 +13,14 @@ import static su.terrafirmagreg.data.Constants.MOD_ID;
 
 @Getter
 @Container
-public enum ModuleContainer
-  implements IStringSerializable, IModuleContainer {
-
+public enum ModuleContainer implements IStringSerializable, IModuleContainer {
   CORE(true),
   ROCK(true),
   SOIL(true),
   WOOD(true),
   METAL(true),
   ANIMAL(true),
+  PLANT(true),
   DEVICE(true),
   WORLD(true);
 

@@ -80,7 +80,7 @@ public class CommonProxy {
       if (TFCFarming.firmalifeLoaded) {
         var tile = TileUtils.getTile(event.getWorld(), event.getPos(), TEPlanter.class);
         if (tile.isPresent()) {
-          event.getWorld().setTileEntity(event.getPos(), TEPlanterN.class.newInstance());
+          event.getWorld().setTileEntity(event.getPos(), TEPlanterN.class.getDeclaredConstructor().newInstance());
           return;
         }
 
@@ -95,8 +95,7 @@ public class CommonProxy {
             if (hpte.isPresent()) {
               ICrop crop = Utils.readDeclaredField(ItemSeedsTFC.class, seeds, "crop");
               if (crop != null) {
-                TETickCounter teHangingPlanter = TEHangingPlanterN.class.getConstructor(ICrop.class)
-                                                                        .newInstance(crop);
+                TETickCounter teHangingPlanter = TEHangingPlanterN.class.getConstructor(ICrop.class).newInstance(crop);
                 teHangingPlanter.resetCounter();
                 event.getWorld().setTileEntity(event.getPos(), teHangingPlanter);
               }

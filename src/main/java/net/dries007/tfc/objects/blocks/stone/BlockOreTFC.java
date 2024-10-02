@@ -1,11 +1,11 @@
 package net.dries007.tfc.objects.blocks.stone;
 
+import su.terrafirmagreg.data.enums.EnumGradeOre;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,9 +28,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.EnumProp.GRADE_ORE;
+
 public class BlockOreTFC extends Block {
 
-  public static final PropertyEnum<Ore.Grade> GRADE = PropertyEnum.create("grade", Ore.Grade.class);
   private static final Map<Ore, Map<RockType, BlockOreTFC>> TABLE = new HashMap<>();
   public final Ore ore;
   public final RockType type;
@@ -45,7 +46,7 @@ public class BlockOreTFC extends Block {
 
     this.ore = ore;
     this.type = type;
-    setDefaultState(blockState.getBaseState().withProperty(GRADE, Ore.Grade.NORMAL));
+    setDefaultState(blockState.getBaseState().withProperty(GRADE_ORE, EnumGradeOre.NORMAL));
     setSoundType(SoundType.STONE);
     setHardness(10.0F).setResistance(10.0F);
     setHarvestLevel("pickaxe", 0);
@@ -55,24 +56,24 @@ public class BlockOreTFC extends Block {
     return TABLE.get(ore).get(rock);
   }
 
-  public static IBlockState get(Ore ore, RockType rock, Ore.Grade grade) {
+  public static IBlockState get(Ore ore, RockType rock, EnumGradeOre grade) {
     IBlockState state = TABLE.get(ore).get(rock).getDefaultState();
     if (!ore.isGraded()) {
       return state;
     }
-    return state.withProperty(GRADE, grade);
+    return state.withProperty(GRADE_ORE, grade);
   }
 
   @SuppressWarnings("deprecation")
   @Override
   @NotNull
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(GRADE, Ore.Grade.valueOf(meta));
+    return getDefaultState().withProperty(GRADE_ORE, EnumGradeOre.valueOf(meta));
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(GRADE).getMeta();
+    return state.getValue(GRADE_ORE).getMeta();
   }
 
   @Override
@@ -104,7 +105,7 @@ public class BlockOreTFC extends Block {
   @Override
   @NotNull
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, GRADE);
+    return new BlockStateContainer(this, GRADE_ORE);
   }
 
   /**

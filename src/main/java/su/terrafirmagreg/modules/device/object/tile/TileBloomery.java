@@ -10,8 +10,6 @@ import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileP
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.block.BlockBloomery;
-import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
-import su.terrafirmagreg.modules.device.object.block.BlockMolten;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -38,8 +36,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.IntProp.LAYERS;
+import static su.terrafirmagreg.data.Properties.IntProp.TYPE;
 
 @SuppressWarnings("WeakerAccess")
 public class TileBloomery extends BaseTileTickableInventory implements IAmbientalTileProvider {
@@ -120,7 +120,7 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
    */
   public BlockPos getInternalBlock() {
     if (internalBlock == null) {
-      EnumFacing direction = world.getBlockState(pos).getValue(FACING);
+      EnumFacing direction = world.getBlockState(pos).getValue(HORIZONTAL);
       internalBlock = pos.up(OFFSET_INTERNAL.getY())
                          .offset(direction, OFFSET_INTERNAL.getX())
                          .offset(direction.rotateY(), OFFSET_INTERNAL.getZ());
@@ -135,7 +135,7 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
    */
   public BlockPos getExternalBlock() {
     if (externalBlock == null) {
-      EnumFacing direction = world.getBlockState(pos).getValue(FACING);
+      EnumFacing direction = world.getBlockState(pos).getValue(HORIZONTAL);
       externalBlock = pos.up(OFFSET_EXTERNAL.getY())
                          .offset(direction, OFFSET_EXTERNAL.getX())
                          .offset(direction.rotateY(), OFFSET_EXTERNAL.getZ());
@@ -182,7 +182,7 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
 
       // Update multiblock status
       int newMaxItems = BlockBloomery.getChimneyLevels(world, getInternalBlock()) * 8;
-      EnumFacing direction = world.getBlockState(pos).getValue(FACING);
+      EnumFacing direction = world.getBlockState(pos).getValue(HORIZONTAL);
       if (!BlocksDevice.BLOOMERY.isFormed(world, getInternalBlock(), direction)) {
         newMaxItems = 0;
       }
@@ -243,11 +243,11 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
           slagLayers -= 4;
           world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState()
                                                                            .withProperty(LIT, cooking)
-                                                                           .withProperty(BlockMolten.LAYERS, 4));
+                                                                           .withProperty(LAYERS, 4));
         } else {
           world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState()
                                                                            .withProperty(LIT, cooking)
-                                                                           .withProperty(BlockMolten.LAYERS, slagLayers));
+                                                                           .withProperty(LAYERS, slagLayers));
           slagLayers = 0;
         }
       } else {
@@ -262,7 +262,7 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
   protected boolean isInternalBlockComplete() {
     IBlockState inside = world.getBlockState(getInternalBlock());
     return inside.getBlock() == BlocksDevice.CHARCOAL_PILE
-           && inside.getValue(BlockCharcoalPile.LAYERS) >= 8;
+           && inside.getValue(TYPE) >= 8;
   }
 
   protected void addItemsFromWorld() {

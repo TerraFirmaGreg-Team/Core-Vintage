@@ -3,13 +3,11 @@ package net.dries007.tfc.objects.blocks;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.Properties;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -40,12 +38,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.EnumProp.XZ;
 
 @MethodsReturnNonnullByDefault
 public class BlockString extends BlockNonCube {
 
-  public static final PropertyEnum<EnumFacing.Axis> AXIS = Properties.XZ;
   private static final AxisAlignedBB SHAPE = new AxisAlignedBB(0.0D, 8.0D / 16, 7.0D / 16, 1.0D, 10.0D / 16, 9.0D / 16);
   private static final AxisAlignedBB SHAPE_90 = new AxisAlignedBB(7.0D / 16, 8.0D / 16, 0.0D, 9.0D / 16, 10.0D / 16, 1.0D);
   private final Supplier<? extends Item> item;
@@ -57,7 +55,7 @@ public class BlockString extends BlockNonCube {
     setLightLevel(0);
     setTickRandomly(true);
     this.item = item;
-    setDefaultState(blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
+    setDefaultState(blockState.getBaseState().withProperty(XZ, EnumFacing.Axis.X));
   }
 
   private static boolean isFired(World world, BlockPos pos) {
@@ -86,19 +84,19 @@ public class BlockString extends BlockNonCube {
   @SuppressWarnings("deprecation")
   @NotNull
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(AXIS, meta == 1 ? EnumFacing.Axis.X : EnumFacing.Axis.Z);
+    return getDefaultState().withProperty(XZ, meta == 1 ? EnumFacing.Axis.X : EnumFacing.Axis.Z);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(AXIS) == EnumFacing.Axis.X ? 1 : 0;
+    return state.getValue(XZ) == EnumFacing.Axis.X ? 1 : 0;
   }
 
   @Override
   @SuppressWarnings("deprecation")
   @NotNull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return state.getValue(AXIS) == EnumFacing.Axis.X ? SHAPE : SHAPE_90;
+    return state.getValue(XZ) == EnumFacing.Axis.X ? SHAPE : SHAPE_90;
   }
 
   @Override
@@ -170,11 +168,11 @@ public class BlockString extends BlockNonCube {
     }
     IBlockState offState = world.getBlockState(pos.offset(facing));
     if (offState.getBlock() instanceof BlockString) {
-      if (facing.getAxis() != offState.getValue(AXIS)) {
+      if (facing.getAxis() != offState.getValue(XZ)) {
         facing = facing.rotateYCCW();
       }
     }
-    return getDefaultState().withProperty(AXIS, facing.getAxis());
+    return getDefaultState().withProperty(XZ, facing.getAxis());
   }
 
   @Override
@@ -186,7 +184,7 @@ public class BlockString extends BlockNonCube {
   @Override
   @NotNull
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, AXIS);
+    return new BlockStateContainer(this, XZ);
   }
 
   @Override

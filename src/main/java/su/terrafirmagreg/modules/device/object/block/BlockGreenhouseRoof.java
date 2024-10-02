@@ -17,9 +17,9 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.util.OreDictionaryHelper;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.data.Properties.GLASS;
-import static su.terrafirmagreg.data.Properties.TOP;
+import static su.terrafirmagreg.data.Properties.BoolProp.GLASS;
+import static su.terrafirmagreg.data.Properties.BoolProp.TOP;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockGreenhouseRoof extends BlockGreenhouseWall {
@@ -45,7 +45,7 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
     if (state.getValue(TOP)) {
       return BASE;
     }
-    return switch (state.getValue(FACING)) {
+    return switch (state.getValue(HORIZONTAL)) {
       case SOUTH -> ROOF_SHAPE_SOUTH;
       case WEST -> ROOF_SHAPE_WEST;
       case EAST -> ROOF_SHAPE_EAST;
@@ -80,7 +80,7 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
         if (!player.isSneaking()) {
           world.setBlockState(pos, state.withProperty(TOP, !state.getValue(TOP)));
         } else if (!state.getValue(TOP)) {
-          world.setBlockState(pos, state.withProperty(FACING, state.getValue(FACING).rotateY()));
+          world.setBlockState(pos, state.withProperty(HORIZONTAL, state.getValue(HORIZONTAL).rotateY()));
         }
       }
     }
@@ -90,18 +90,18 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
                                           float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-    return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+    return getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing().getOpposite());
   }
 
   @Override
   public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
-    return state.getValue(FACING).getOpposite() == side || side == EnumFacing.DOWN;
+    return state.getValue(HORIZONTAL).getOpposite() == side || side == EnumFacing.DOWN;
   }
 
   @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
                                           EnumFacing face) {
-    return (state.getValue(GLASS) && (face == EnumFacing.DOWN || face == state.getValue(FACING)
+    return (state.getValue(GLASS) && (face == EnumFacing.DOWN || face == state.getValue(HORIZONTAL)
                                                                               .getOpposite())) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 

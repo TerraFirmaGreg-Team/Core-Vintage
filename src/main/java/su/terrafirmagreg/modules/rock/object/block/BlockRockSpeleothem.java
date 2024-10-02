@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.rock.object.block;
 
+import su.terrafirmagreg.data.enums.EnumSpeleothemSize;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -14,13 +14,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
+
+import static su.terrafirmagreg.data.Properties.EnumProp.SPELEOTHEM_SIZE;
 
 /**
  * Stalactites and stalagmites in one block!
@@ -29,7 +30,6 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class BlockRockSpeleothem extends BlockRock {
 
-  public static final PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
   public BlockRockSpeleothem(RockBlockVariant variant, RockType type) {
     super(variant, type);
@@ -38,7 +38,7 @@ public class BlockRockSpeleothem extends BlockRock {
       .nonCube();
 
     setDefaultState(blockState.getBaseState()
-                              .withProperty(SIZE, EnumSize.MEDIUM));
+                              .withProperty(SPELEOTHEM_SIZE, EnumSpeleothemSize.MEDIUM));
   }
 
   @Override
@@ -55,23 +55,23 @@ public class BlockRockSpeleothem extends BlockRock {
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(SIZE).ordinal();
+    return state.getValue(SPELEOTHEM_SIZE).ordinal();
   }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(SIZE,
-                                          EnumSize.values()[Math.min(EnumSize.values().length - 1, meta)]);
+    return getDefaultState().withProperty(SPELEOTHEM_SIZE,
+                                          EnumSpeleothemSize.values()[Math.min(EnumSpeleothemSize.values().length - 1, meta)]);
   }
 
   @Override
   public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn,
                                     final BlockPos pos) {
-    var size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
+    var size = EnumSpeleothemSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
     if (isCenter(worldIn, pos)) {
-      size = EnumSize.MEDIUM;
+      size = EnumSpeleothemSize.MEDIUM;
     }
-    return state.withProperty(SIZE, size);
+    return state.withProperty(SPELEOTHEM_SIZE, size);
   }
 
   @Override
@@ -81,13 +81,13 @@ public class BlockRockSpeleothem extends BlockRock {
 
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return state.getValue(SIZE).aabb;
+    return state.getValue(SPELEOTHEM_SIZE).aabb;
   }
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
                               BlockPos fromPos) {
-    int size = state.getValue(SIZE).strength;
+    int size = state.getValue(SPELEOTHEM_SIZE).strength;
     if (getBearing(worldIn, pos) < size + 1) {
       worldIn.playEvent(2001, pos, Block.getStateId(worldIn.getBlockState(pos)));
       dropBlockAsItem(worldIn, pos, state, 0);
@@ -108,13 +108,13 @@ public class BlockRockSpeleothem extends BlockRock {
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
                               EntityLivingBase placer, ItemStack stack) {
-    var size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
-    worldIn.setBlockState(pos, state.withProperty(SIZE, size));
+    var size = EnumSpeleothemSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
+    worldIn.setBlockState(pos, state.withProperty(SPELEOTHEM_SIZE, size));
   }
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, SIZE);
+    return new BlockStateContainer(this, SPELEOTHEM_SIZE);
   }
 
   @Override
@@ -146,8 +146,8 @@ public class BlockRockSpeleothem extends BlockRock {
       return 3;
     }
 
-    if (state.getPropertyKeys().contains(SIZE)) {
-      return state.getValue(SIZE).strength;
+    if (state.getPropertyKeys().contains(SPELEOTHEM_SIZE)) {
+      return state.getValue(SPELEOTHEM_SIZE).strength;
     }
 
     return 0;
@@ -157,25 +157,4 @@ public class BlockRockSpeleothem extends BlockRock {
     return world.getBlockState(pos).getBlock() instanceof BlockRockSpeleothem;
   }
 
-  public enum EnumSize implements IStringSerializable {
-
-    SMALL(0, 2),
-    MEDIUM(1, 4),
-    BIG(2, 8);
-
-    public final int strength;
-    public final AxisAlignedBB aabb;
-
-    EnumSize(int strength, int width) {
-      this.strength = strength;
-
-      float pad = (((16 - width) / 2f) / 16F);
-      aabb = new AxisAlignedBB(pad, 0F, pad, 1F - pad, 1F, 1F - pad);
-    }
-
-    @Override
-    public String getName() {
-      return name().toLowerCase();
-    }
-  }
 }

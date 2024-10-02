@@ -41,7 +41,7 @@ import lombok.Getter;
 import java.util.List;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.SAPLING_STAGE;
+import static su.terrafirmagreg.data.Properties.IntProp.STAGE_5;
 
 @Getter
 @SuppressWarnings("deprecation")
@@ -61,14 +61,14 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 
     getSettings()
       .registryKey(type.getRegistryKey(variant))
-      .ignoresProperties(SAPLING_STAGE)
+      .ignoresProperties(STAGE_5)
       .sound(SoundType.PLANT)
       .hardness(0.0F)
       .oreDict(variant)
       .oreDict(variant, type);
 
     setDefaultState(blockState.getBaseState()
-                              .withProperty(SAPLING_STAGE, 0));
+                              .withProperty(STAGE_5, 0));
 
     BlockUtils.setFireInfo(this, 5, 20);
   }
@@ -76,12 +76,12 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(SAPLING_STAGE, meta);
+    return this.getDefaultState().withProperty(STAGE_5, meta);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(SAPLING_STAGE);
+    return state.getValue(STAGE_5);
   }
 
   @Override
@@ -93,7 +93,7 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, SAPLING_STAGE);
+    return new BlockStateContainer(this, STAGE_5);
   }
 
   @Override

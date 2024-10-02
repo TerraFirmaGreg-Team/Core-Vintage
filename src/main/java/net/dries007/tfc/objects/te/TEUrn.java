@@ -26,7 +26,7 @@ import net.dries007.tfc.util.calendar.ICalendarFormatted;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static net.dries007.tfc.objects.blocks.BlockUrn.SEALED;
+import static su.terrafirmagreg.data.Properties.BoolProp.SEALED;
 
 public class TEUrn extends BaseTileInventory implements IItemHandlerSidedCallback {
 

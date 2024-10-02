@@ -40,7 +40,7 @@ import net.dries007.tfc.objects.te.TEPlanter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.WET;
+import static su.terrafirmagreg.data.Properties.BoolProp.WET;
 
 @MethodsReturnNonnullByDefault
 public class BlockLargePlanter extends Block implements ICapabilitySize {

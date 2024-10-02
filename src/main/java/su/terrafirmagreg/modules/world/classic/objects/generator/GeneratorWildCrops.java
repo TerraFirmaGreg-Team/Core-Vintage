@@ -22,6 +22,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
+
 public class GeneratorWildCrops implements IWorldGenerator {
 
   private static final List<ICrop> CROPS = new ArrayList<>();
@@ -68,7 +70,7 @@ public class GeneratorWildCrops implements IWorldGenerator {
               }
               world.setBlockState(pos, cropBlock.getDefaultState()
                                                 .withProperty(cropBlock.getStageProperty(), growth)
-                                                .withProperty(BlockCropTFC.WILD, true), 2);
+                                                .withProperty(WILD, true), 2);
 
             }
           }
@@ -91,7 +93,7 @@ public class GeneratorWildCrops implements IWorldGenerator {
                 }
                 world.setBlockState(pos, cropBlock.getDefaultState()
                                                   .withProperty(cropBlock.getStageProperty(), growth)
-                                                  .withProperty(BlockCropTFC.WILD, true), 2);
+                                                  .withProperty(WILD, true), 2);
               }
             }
           }

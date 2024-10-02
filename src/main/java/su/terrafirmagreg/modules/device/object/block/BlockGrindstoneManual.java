@@ -31,7 +31,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockGrindstoneManual extends BaseBlock implements IProviderTile {

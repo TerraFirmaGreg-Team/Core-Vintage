@@ -3,8 +3,6 @@ package net.dries007.tfc.objects.blocks;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockStem;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -24,10 +22,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.data.Properties.EnumProp.FACING;
+
 @MethodsReturnNonnullByDefault
 public abstract class BlockStemCrop extends BlockCropSimple {
 
-  public static PropertyDirection FACING = BlockStem.FACING;
 
   public BlockStemCrop(StemCrop crop) {
     super(crop, false);
@@ -96,7 +96,7 @@ public abstract class BlockStemCrop extends BlockCropSimple {
         if (crop.getCropBlock().canPlaceBlockAt(world, fruitPos)) {
           IBlockState fruitState = crop.getCropBlock()
                                        .getDefaultState()
-                                       .withProperty(BlockStemFruit.FACING, fruitDirection.getOpposite());
+                                       .withProperty(FACING, fruitDirection.getOpposite());
           world.setBlockState(fruitPos, fruitState);
         }
       });
@@ -118,7 +118,7 @@ public abstract class BlockStemCrop extends BlockCropSimple {
 
         //spawn fruit
         if (crop.getCropBlock().canPlaceBlockAt(worldIn, targetPos)) {
-          worldIn.setBlockState(targetPos, crop.getCropBlock().getDefaultState().withProperty(BlockStemFruit.FACING, fruitDirection.getOpposite()));
+          worldIn.setBlockState(targetPos, crop.getCropBlock().getDefaultState().withProperty(FACING, fruitDirection.getOpposite()));
 
           //revert back a stage
         } else {

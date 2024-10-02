@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -46,13 +45,13 @@ import java.util.Random;
 import java.util.Set;
 
 import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
+import static su.terrafirmagreg.data.Properties.BoolProp.SMALL;
 
 @MethodsReturnNonnullByDefault
 
 public class BlockLogTFCF extends BlockLog implements ICapabilitySize {
 
-  public static final PropertyBool PLACED = PropertyBool.create("placed");
-  public static final PropertyBool SMALL = PropertyBool.create("small");
   public static final AxisAlignedBB SMALL_AABB_Y = new AxisAlignedBB(0.25, 0, 0.25, 0.75, 1, 0.75);
   public static final AxisAlignedBB SMALL_AABB_X = new AxisAlignedBB(0, 0.25, 0.25, 1, 0.75, 0.75);
   public static final AxisAlignedBB SMALL_AABB_Z = new AxisAlignedBB(0.25, 0.25, 0, 0.75, 0.75, 1);

@@ -1,12 +1,9 @@
 package net.dries007.tfc.objects.blocks;
 
-import su.terrafirmagreg.data.Properties;
 import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseWall;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,21 +20,22 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.data.Properties.STAGE;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.EnumProp.XZ;
+import static su.terrafirmagreg.data.Properties.IntProp.STAGE_3;
 
 @MethodsReturnNonnullByDefault
 
 public class BlockHangingPlanter extends BlockBonsai {
 
-  public static final PropertyEnum<EnumFacing.Axis> AXIS = Properties.XZ;
   private static final AxisAlignedBB SHAPE = new AxisAlignedBB(0.0D, 0.75D, 0.0D, 1.0D, 1.0D, 1.0D);
 
   public BlockHangingPlanter(Supplier<? extends Item> fruit, Supplier<? extends Item> seed, int period) {
     super(fruit, seed, period, 0, Material.IRON);
     setDefaultState(blockState
                       .getBaseState()
-                      .withProperty(AXIS, EnumFacing.Axis.X)
-                      .withProperty(STAGE, 0));
+                      .withProperty(XZ, EnumFacing.Axis.X)
+                      .withProperty(STAGE_3, 0));
   }
 
   @Override
@@ -48,13 +46,13 @@ public class BlockHangingPlanter extends BlockBonsai {
       axis = EnumFacing.Axis.X;
       meta -= 3;
     }
-    return getDefaultState().withProperty(AXIS, axis).withProperty(STAGE, meta);
+    return getDefaultState().withProperty(XZ, axis).withProperty(STAGE_3, meta);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    EnumFacing.Axis axis = state.getValue(AXIS); // 0, 3
-    int stage = state.getValue(STAGE); // 0, 1, 2
+    EnumFacing.Axis axis = state.getValue(XZ); // 0, 3
+    int stage = state.getValue(STAGE_3); // 0, 1, 2
     return stage + (axis == EnumFacing.Axis.X ? 3 : 0);
   }
 
@@ -66,7 +64,7 @@ public class BlockHangingPlanter extends BlockBonsai {
   @Override
   @NotNull
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, AXIS, STAGE);
+    return new BlockStateContainer(this, XZ, STAGE_3);
   }
 
   @Override
@@ -94,10 +92,10 @@ public class BlockHangingPlanter extends BlockBonsai {
     IBlockState state = worldIn.getBlockState(pos.offset(facing));
     final Block block = state.getBlock();
     if (block instanceof BlockGreenhouseWall) {
-      facing = state.getValue(BlockHorizontal.FACING);
+      facing = state.getValue(HORIZONTAL);
     } else if (block instanceof BlockHangingPlanter) {
-      return getDefaultState().withProperty(AXIS, state.getValue(AXIS));
+      return getDefaultState().withProperty(XZ, state.getValue(XZ));
     }
-    return getDefaultState().withProperty(AXIS, facing.getAxis());
+    return getDefaultState().withProperty(XZ, facing.getAxis());
   }
 }

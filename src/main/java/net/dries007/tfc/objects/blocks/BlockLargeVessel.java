@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -37,6 +36,8 @@ import net.dries007.tfc.objects.te.TELargeVessel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.data.Properties.BoolProp.SEALED;
+
 /**
  * Large vessel is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state
  * property, and cached in the TE (for gui purposes)
@@ -44,7 +45,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class BlockLargeVessel extends Block implements ICapabilitySize {
 
-  public static final PropertyBool SEALED = PropertyBool.create("sealed");
   private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.625D, 0.8125D);
   private static final AxisAlignedBB BOUNDING_BOX_SEALED = new AxisAlignedBB(0.15625D, 0.0D, 0.15625D, 0.84375D, 0.6875D, 0.84375D);
 

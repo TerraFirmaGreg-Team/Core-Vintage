@@ -1,6 +1,7 @@
 package se.gory_moon.horsepower.client.renderer;
 
 import su.terrafirmagreg.api.util.RenderUtils;
+import su.terrafirmagreg.data.enums.EnumPressPart;
 import su.terrafirmagreg.modules.device.object.tile.TilePressHorse;
 
 import net.minecraft.block.state.IBlockState;
@@ -20,7 +21,8 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import org.lwjgl.opengl.GL11;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockPress;
-import se.gory_moon.horsepower.client.model.modelvariants.PressModels;
+
+import static su.terrafirmagreg.data.Properties.EnumProp.PRESS_PART;
 
 public class TESRPress extends TESRHPBase<TilePressHorse> {
 
@@ -33,7 +35,7 @@ public class TESRPress extends TESRHPBase<TilePressHorse> {
     if (!(blockState.getBlock() instanceof BlockPress)) {
       return;
     }
-    IBlockState topState = blockState.withProperty(BlockPress.PART, PressModels.TOP);
+    IBlockState topState = blockState.withProperty(PRESS_PART, EnumPressPart.TOP);
     if (!(topState.getBlock() instanceof BlockPress)) {
       return;
     }

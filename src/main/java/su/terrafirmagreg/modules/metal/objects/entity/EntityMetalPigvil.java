@@ -35,7 +35,7 @@ import net.dries007.tfc.objects.items.metal.ItemIngot;
 
 import java.util.Set;
 
-import static su.terrafirmagreg.data.Properties.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
 
 public class EntityMetalPigvil
   extends EntityCreature {

@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import su.terrafirmagreg.data.enums.EnumSpeleothemSize;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockSpeleothem;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.block.Block;
@@ -17,6 +17,8 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import javax.annotation.Nullable;
 import java.util.Random;
+
+import static su.terrafirmagreg.data.Properties.EnumProp.SPELEOTHEM_SIZE;
 
 public class GeneratorSpeleothem
   implements IWorldGenerator {
@@ -131,11 +133,11 @@ public class GeneratorSpeleothem
         return;
       }
       if (block instanceof IRockBlock rockTypeBlock) {
-        BlockRockSpeleothem.EnumSize sizeType = BlockRockSpeleothem.EnumSize.values()[size - i - 1];
+        EnumSpeleothemSize sizeType = EnumSpeleothemSize.values()[size - i - 1];
         // Создаем блок сталактита с указанным размером и типом породы
         IBlockState targetBlock = BlocksRock.SPELEOTHEM.get(rockTypeBlock.getType())
                                                        .getDefaultState()
-                                                       .withProperty(BlockRockSpeleothem.SIZE, sizeType);
+                                                       .withProperty(SPELEOTHEM_SIZE, sizeType);
         // Устанавливаем блок сталактита в мир
         world.setBlockState(pos, targetBlock);
       }

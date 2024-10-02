@@ -24,10 +24,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.EAST;
-import static su.terrafirmagreg.data.Properties.NORTH;
-import static su.terrafirmagreg.data.Properties.SOUTH;
-import static su.terrafirmagreg.data.Properties.WEST;
+import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
 
 @SuppressWarnings("deprecation")
 public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor, IGrass {

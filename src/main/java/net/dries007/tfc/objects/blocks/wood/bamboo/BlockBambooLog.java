@@ -23,8 +23,8 @@ import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.Properties.CONNECTED;
-import static su.terrafirmagreg.data.Properties.GROWN;
+import static su.terrafirmagreg.data.Properties.BoolProp.CONNECTED;
+import static su.terrafirmagreg.data.Properties.BoolProp.GROWN;
 
 public class BlockBambooLog extends Block {
 

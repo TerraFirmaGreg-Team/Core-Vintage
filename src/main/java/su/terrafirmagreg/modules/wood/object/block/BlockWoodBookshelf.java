@@ -1,6 +1,10 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
-import lombok.Getter;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
+import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 import net.minecraft.block.BlockBookshelf;
 import net.minecraft.block.SoundType;
@@ -9,11 +13,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.ToolClasses;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
+import lombok.Getter;
 
 @Getter
 public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {

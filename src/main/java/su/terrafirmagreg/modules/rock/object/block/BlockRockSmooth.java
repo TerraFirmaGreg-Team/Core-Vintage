@@ -7,7 +7,7 @@ import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 
-import static su.terrafirmagreg.data.Properties.CAN_FALL;
+import static su.terrafirmagreg.data.Properties.BoolProp.CAN_FALL;
 
 
 @SuppressWarnings("deprecation")

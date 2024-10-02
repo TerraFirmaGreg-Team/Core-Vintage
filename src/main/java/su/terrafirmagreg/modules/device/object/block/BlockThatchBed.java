@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.device.object.block;
 import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.data.enums.EnumHideSize;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 
 import net.minecraft.block.Block;
@@ -93,7 +94,7 @@ public class BlockThatchBed extends BlockBed implements IBlockSettings {
                                         float chance, int fortune) {
     if (state.getValue(PART) == EnumPartType.HEAD) {
       spawnAsEntity(worldIn, pos, new ItemStack(
-        ItemAnimalHide.get(ItemAnimalHide.HideType.RAW, ItemAnimalHide.HideSize.LARGE)));
+        ItemAnimalHide.get(ItemAnimalHide.HideType.RAW, EnumHideSize.LARGE)));
       spawnAsEntity(worldIn, pos, new ItemStack(BlocksCore.THATCH, 2));
     }
   }

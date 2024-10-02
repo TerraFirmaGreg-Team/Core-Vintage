@@ -17,7 +17,7 @@ import tfcflorae.TFCFlorae;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.DIRECTIONAL;
+import static su.terrafirmagreg.data.Properties.DirectionProp.DIRECTIONAL;
 
 public class GeneratorGourds implements IWorldGenerator {
 

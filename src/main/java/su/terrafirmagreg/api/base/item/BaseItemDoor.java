@@ -15,6 +15,12 @@ import net.minecraft.world.World;
 
 import lombok.Getter;
 
+import static net.minecraft.block.BlockDoor.HALF;
+import static net.minecraft.block.BlockDoor.HINGE;
+import static su.terrafirmagreg.data.Properties.BoolProp.OPEN;
+import static su.terrafirmagreg.data.Properties.BoolProp.POWERED;
+import static su.terrafirmagreg.data.Properties.EnumProp.FACING;
+
 @Getter
 public class BaseItemDoor extends BaseItemBlock {
 
@@ -54,16 +60,16 @@ public class BaseItemDoor extends BaseItemBlock {
     boolean flag2 = worldIn.isBlockPowered(pos) || worldIn.isBlockPowered(topDoorPos);
 
     IBlockState doorState = door.getDefaultState()
-                                .withProperty(BlockDoor.FACING, facing)
-                                .withProperty(BlockDoor.HINGE,
+                                .withProperty(FACING, facing)
+                                .withProperty(HINGE,
                                               isRightHinge ? BlockDoor.EnumHingePosition.RIGHT : BlockDoor.EnumHingePosition.LEFT)
-                                .withProperty(BlockDoor.POWERED, flag2)
-                                .withProperty(BlockDoor.OPEN, flag2);
+                                .withProperty(POWERED, flag2)
+                                .withProperty(OPEN, flag2);
 
-    worldIn.setBlockState(pos, doorState.withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.LOWER),
+    worldIn.setBlockState(pos, doorState.withProperty(HALF, BlockDoor.EnumDoorHalf.LOWER),
                           2);
     worldIn.setBlockState(topDoorPos,
-                          doorState.withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER), 2);
+                          doorState.withProperty(HALF, BlockDoor.EnumDoorHalf.UPPER), 2);
     worldIn.notifyNeighborsOfStateChange(pos, door, false);
     worldIn.notifyNeighborsOfStateChange(topDoorPos, door, false);
   }

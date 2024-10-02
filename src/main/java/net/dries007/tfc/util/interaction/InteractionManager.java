@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile.LAYERS;
+import static su.terrafirmagreg.data.Properties.IntProp.TYPE;
 
 @Mod.EventBusSubscriber(modid = MODID_TFC)
 public final class InteractionManager {
@@ -151,12 +151,12 @@ public final class InteractionManager {
                     (stack, player, worldIn, pos, hand, direction, hitX, hitY, hitZ) -> {
                       if (direction != null) {
                         IBlockState state = worldIn.getBlockState(pos);
-                        if (state.getBlock() == BlocksDevice.CHARCOAL_PILE && state.getValue(LAYERS) < 8) {
+                        if (state.getBlock() == BlocksDevice.CHARCOAL_PILE && state.getValue(TYPE) < 8) {
                           // Check the player isn't standing inside the placement area for the next layer
-                          IBlockState stateToPlace = state.withProperty(LAYERS, state.getValue(LAYERS) + 1);
+                          IBlockState stateToPlace = state.withProperty(TYPE, state.getValue(TYPE) + 1);
                           if (worldIn.checkNoEntityCollision(stateToPlace.getBoundingBox(worldIn, pos).offset(pos))) {
                             if (!worldIn.isRemote) {
-                              worldIn.setBlockState(pos, state.withProperty(LAYERS, state.getValue(LAYERS) + 1));
+                              worldIn.setBlockState(pos, state.withProperty(TYPE, state.getValue(TYPE) + 1));
                               worldIn.playSound(null, pos, TFCSounds.CHARCOAL_PILE.getPlaceSound(), SoundCategory.BLOCKS, 1.0f, 1.0f);
                               stack.shrink(1);
                               player.setHeldItem(hand, stack);
@@ -172,7 +172,7 @@ public final class InteractionManager {
                                    .isSideSolid(worldIn, posAt.down(), EnumFacing.UP) && worldIn.getBlockState(posAt)
                                                                                                 .getBlock()
                                                                                                 .isReplaceable(worldIn, pos)) {
-                          IBlockState stateToPlace = BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, 1);
+                          IBlockState stateToPlace = BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(TYPE, 1);
                           if (worldIn.checkNoEntityCollision(stateToPlace.getBoundingBox(worldIn, posAt).offset(posAt))) {
                             // Create a new charcoal pile
                             if (!worldIn.isRemote) {

@@ -20,10 +20,10 @@ import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor.BASE;
-import static su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor.CUT;
-import static su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor.POT;
+import static su.terrafirmagreg.data.Properties.BoolProp.BASE;
+import static su.terrafirmagreg.data.Properties.BoolProp.POT;
+import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.IntProp.CUT;
 import static su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor.MAX_FLUID;
 
 public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtractor> {
@@ -45,7 +45,7 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
       Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
       BlockRendererDispatcher renderer = Minecraft.getMinecraft().getBlockRendererDispatcher();
 
-      Vec3i vec = state.getValue(FACING).getOpposite().getDirectionVec();
+      Vec3i vec = state.getValue(HORIZONTAL).getOpposite().getDirectionVec();
 
       GlStateManager.pushMatrix();
       GlStateManager.translate(x + vec.getX(), y, z + vec.getZ());
@@ -81,7 +81,7 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
       double yMax = 0.36D;
       double yPos = (tile.getFluidAmount() / (double) MAX_FLUID) * (yMax - yMin) + yMin;
 
-      switch (state.getValue(FACING)) {
+      switch (state.getValue(HORIZONTAL)) {
         case NORTH:
           GlStateManager.rotate(180, 0, 1, 0);
           GlStateManager.translate(-1, 0, -1);

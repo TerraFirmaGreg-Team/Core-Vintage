@@ -47,8 +47,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.LIT;
-import static su.terrafirmagreg.data.Properties.SEALED;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.BoolProp.SEALED;
 
 /**
  * Powderkeg is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state

@@ -17,9 +17,9 @@ import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 
 import java.util.Random;
 
-import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
 import static net.minecraft.block.BlockLeaves.DECAYABLE;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
+import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
 
 public class GeneratorTreeBushes implements ITreeGenerator {
 

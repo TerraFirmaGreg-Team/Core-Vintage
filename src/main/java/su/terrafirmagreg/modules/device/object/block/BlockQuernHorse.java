@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.FILLED;
+import static su.terrafirmagreg.data.Properties.BoolProp.FILLED;
 
 @SuppressWarnings("deprecation")
 public class BlockQuernHorse extends BaseBlockHorse implements IProviderTile, IProviderBlockColor {

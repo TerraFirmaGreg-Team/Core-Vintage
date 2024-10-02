@@ -17,10 +17,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 import io.netty.buffer.ByteBuf;
-import lyeoj.tfcthings.blocks.BlockRopeBridge;
 import lyeoj.tfcthings.init.TFCThingsBlocks;
 
 import java.util.ArrayList;
+
+import static su.terrafirmagreg.data.Properties.BoolProp.AXIS;
+import static su.terrafirmagreg.data.Properties.IntProp.OFFSET;
 
 public class EntityRopeBridgeThrown extends EntityThrowable {
 
@@ -282,8 +284,8 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
     }
     for (BridgeInfo info : bridgePath) {
       world.setBlockState(info.pos, TFCThingsBlocks.ROPE_BRIDGE_BLOCK.getDefaultState()
-                                                                     .withProperty(BlockRopeBridge.AXIS, axis)
-                                                                     .withProperty(BlockRopeBridge.OFFSET, info.height));
+                                                                     .withProperty(AXIS, axis)
+                                                                     .withProperty(OFFSET, info.height));
     }
     if (getThrower() instanceof EntityPlayer && !(((EntityPlayer) getThrower()).isCreative())) {
       bridges.setCount(bridges.getCount() - (length - 1));

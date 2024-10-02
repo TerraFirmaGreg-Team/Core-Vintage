@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
-import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,6 +14,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import static su.terrafirmagreg.data.Properties.EnumProp.FIRE_PIT_ATTACHMENT;
+
 public class GuiFirePit extends BaseGuiContainerTile<TileFirePit> {
 
   private static final ResourceLocation FIRE_PIT_BACKGROUND = ModUtils.resource(
@@ -23,12 +25,12 @@ public class GuiFirePit extends BaseGuiContainerTile<TileFirePit> {
   private static final ResourceLocation FIRE_PIT_GRILL_BACKGROUND = ModUtils.resource(
     "textures/gui/container/fire_pit_grill.png");
 
-  private final BlockFirePit.FirePitAttachment attachment;
+  private final EnumFirePitAttachment attachment;
 
   public GuiFirePit(Container container, InventoryPlayer playerInv, TileFirePit tile) {
     super(container, playerInv, tile, FIRE_PIT_BACKGROUND);
 
-    attachment = tile.getWorld().getBlockState(tile.getPos()).getValue(BlockFirePit.ATTACHMENT);
+    attachment = tile.getWorld().getBlockState(tile.getPos()).getValue(FIRE_PIT_ATTACHMENT);
   }
 
   @Override
@@ -45,7 +47,7 @@ public class GuiFirePit extends BaseGuiContainerTile<TileFirePit> {
       drawTexturedModalRect(guiLeft + 30, guiTop + 66 - temperature, 176, 0, 15, 5);
     }
 
-    if (attachment == BlockFirePit.FirePitAttachment.COOKING_POT) {
+    if (attachment == EnumFirePitAttachment.COOKING_POT) {
       // Draw soup overlays + text
       TileFirePit.CookingPotStage stage = tile.getCookingPotStage();
       String caption;
@@ -90,7 +92,7 @@ public class GuiFirePit extends BaseGuiContainerTile<TileFirePit> {
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
     super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
-    if (attachment == BlockFirePit.FirePitAttachment.COOKING_POT) {
+    if (attachment == EnumFirePitAttachment.COOKING_POT) {
       TileFirePit.CookingPotStage stage = tile.getCookingPotStage();
       if (stage == TileFirePit.CookingPotStage.BOILING
           || stage == TileFirePit.CookingPotStage.FINISHED) {

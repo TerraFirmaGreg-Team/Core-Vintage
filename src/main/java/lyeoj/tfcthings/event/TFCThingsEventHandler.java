@@ -32,6 +32,7 @@ import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCTHINGS)
 public class TFCThingsEventHandler {
@@ -117,7 +118,7 @@ public class TFCThingsEventHandler {
       if (capability != null) {
         if (shouldBoostSpeed(event.getEntityPlayer().getHeldItemMainhand(), event.getState())) {
           if (event.getState().getBlock() instanceof BlockLogTFC && !event.getState()
-                                                                          .getValue(BlockLogTFC.PLACED)) {
+                                                                          .getValue(PLACED)) {
             return;
           }
           if (capability.getCharges() > 256) {

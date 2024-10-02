@@ -46,19 +46,22 @@ import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS_PATH;
 public class FallingBlockManager {
 
   private static final Set<Material> SOFT_MATERIALS = new ObjectOpenHashSet<>(
-    new Material[]{Material.GROUND, Material.SAND, Material.GRASS, Material.CLAY}
+    new Material[]{
+      Material.GROUND, Material.SAND, Material.GRASS, Material.CLAY
+    }
   );
 
   private static final Set<Material> HARD_MATERIALS = new ObjectOpenHashSet<>(
-    new Material[]{Material.IRON, BlockCharcoalPile.CHARCOAL_MATERIAL}
+    new Material[]{
+      Material.IRON, BlockCharcoalPile.CHARCOAL_MATERIAL
+    }
   );
 
   private static final Map<IBlockState, Specification> FALLABLES = new Object2ObjectOpenHashMap<>();
 
   private static final Set<IBlockState> SIDE_SUPPORTS = new ObjectOpenHashSet<>(0);
 
-  private FallingBlockManager() {
-  }
+  private FallingBlockManager() {}
 
   public static void registerSoftMaterial(Material material) {
     SOFT_MATERIALS.add(material);
@@ -138,10 +141,8 @@ public class FallingBlockManager {
     return state.isNormalCube() || SIDE_SUPPORTS.contains(state) || BlockUtils.isVariant(state, FARMLAND, GRASS_PATH);
   }
 
-  public static boolean shouldFall(World world, BlockPos posToFallFrom, BlockPos originalPos, IBlockState originalState,
-                                   boolean ignoreSupportChecks) {
-    return ConfigTFC.General.FALLABLE.enable && canFallThrough(world, posToFallFrom.down(),
-                                                               originalState.getMaterial()) &&
+  public static boolean shouldFall(World world, BlockPos posToFallFrom, BlockPos originalPos, IBlockState originalState, boolean ignoreSupportChecks) {
+    return ConfigTFC.General.FALLABLE.enable && canFallThrough(world, posToFallFrom.down(), originalState.getMaterial()) &&
            (ignoreSupportChecks || !BlockWoodSupport.isBeingSupported(world, originalPos));
   }
 
@@ -158,8 +159,7 @@ public class FallingBlockManager {
   }
 
   @Nullable
-  public static BlockPos getFallablePos(World world, BlockPos pos, IBlockState state,
-                                        boolean ignoreSupportChecks) {
+  public static BlockPos getFallablePos(World world, BlockPos pos, IBlockState state, boolean ignoreSupportChecks) {
     Specification specification = FALLABLES.get(state);
 
     if (specification == null) {
@@ -194,8 +194,9 @@ public class FallingBlockManager {
         }
       }
 
-      return candidates.isEmpty() ? null
-                                  : checkAreaClear(world, state, candidates.get(RNG.nextInt(candidates.size())));
+      return candidates.isEmpty()
+             ? null
+             : checkAreaClear(world, state, candidates.get(RNG.nextInt(candidates.size())));
     }
 
     return null;

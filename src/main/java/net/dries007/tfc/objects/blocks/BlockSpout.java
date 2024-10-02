@@ -1,7 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.Properties;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -30,8 +29,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.NEEDS_SOURCE;
-import static su.terrafirmagreg.data.Properties.WATERED;
+import static su.terrafirmagreg.data.Properties.BoolProp.NEEDS_SOURCE;
+import static su.terrafirmagreg.data.Properties.BoolProp.WATERED;
+import static su.terrafirmagreg.data.Properties.BoolProp.WET;
 
 public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreenhouseReceiverBlock {
 
@@ -141,7 +141,7 @@ public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreen
                       IWaterable waterable = (IWaterable) tile;
                       waterable.setWater(2);
                       IBlockState stateAt = world.getBlockState(checkPos);
-                      world.setBlockState(checkPos, stateAt.withProperty(Properties.WET, true));
+                      world.setBlockState(checkPos, stateAt.withProperty(WET, true));
                       return true;
                     }).orElse(false);
   }

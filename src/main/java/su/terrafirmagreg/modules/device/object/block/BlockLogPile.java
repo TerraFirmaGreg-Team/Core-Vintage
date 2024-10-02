@@ -40,8 +40,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.LIT;
-import static su.terrafirmagreg.data.Properties.XZ;
+import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.data.Properties.EnumProp.XZ;
 
 @SuppressWarnings("deprecation")
 public class BlockLogPile extends BaseBlockContainer {

@@ -15,6 +15,8 @@ import net.dries007.tfc.util.climate.Climate;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+
 public class GeneratorCaveVines extends WorldGenerator {
 
   private Plant plant;
@@ -44,7 +46,7 @@ public class GeneratorCaveVines extends WorldGenerator {
             plantBlock.canPlaceBlockAt(worldIn, blockpos.down(k))) {
           int plantAge = plant.getAgeForWorldgen(rng, Climate.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos.down(k),
-                                      state.withProperty(BlockHangingPlantTFCF.AGE, plantAge));
+                                      state.withProperty(AGE_4, plantAge));
         }
       }
     }

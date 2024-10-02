@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.data.enums.EnumHideSize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
@@ -303,7 +304,7 @@ public final class ItemsTFC {
     simpleItems.add(register(r, "bloom/refined", new ItemBloom(true), CT_MISC));
 
     // Animal Hides
-    for (ItemAnimalHide.HideSize size : ItemAnimalHide.HideSize.values()) {
+    for (EnumHideSize size : EnumHideSize.values()) {
       for (ItemAnimalHide.HideType type : ItemAnimalHide.HideType.values()) {
         simpleItems.add(register(r, ("hide/" + type.name() + "/" + size.name()).toLowerCase(), new ItemAnimalHide(type, size), CT_MISC));
       }

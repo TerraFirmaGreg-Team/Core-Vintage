@@ -31,6 +31,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+
 public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
 
   private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
@@ -53,7 +56,7 @@ public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
   @Override
   @NotNull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, AGE, growthStageProperty, DAYPERIOD);
+    return new BlockStateContainer(this, AGE_4, growthStageProperty, DAYPERIOD);
   }
 
   @Override
@@ -61,7 +64,7 @@ public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
     Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int currentStage = state.getValue(growthStageProperty);
     int expectedStage = plant.getStageForMonth(currentMonth);
-    int age = state.getValue(AGE);
+    int age = state.getValue(AGE_4);
 
     if (!worldIn.isRemote) {
       if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
@@ -154,22 +157,22 @@ public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
 
     if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
           net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
         if (j < 3) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j + 1));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j + 1));
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-      int j = state.getValue(AGE);
+      int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
         if (j > 0) {
-          worldIn.setBlockState(pos, state.withProperty(AGE, j - 1));
+          worldIn.setBlockState(pos, state.withProperty(AGE_4, j - 1));
         } else {
           worldIn.setBlockToAir(pos);
         }
@@ -183,7 +186,7 @@ public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
   @Override
   @NotNull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    switch (state.getValue(AGE)) {
+    switch (state.getValue(AGE_4)) {
       case 0:
         return SHORTEST_GRASS_AABB.offset(state.getOffset(source, pos));
       case 1:

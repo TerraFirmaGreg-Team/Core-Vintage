@@ -7,8 +7,6 @@ import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -33,20 +31,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
+import static su.terrafirmagreg.data.Properties.EnumProp.FACING;
+import static su.terrafirmagreg.data.Properties.IntProp.EAST_INT;
+import static su.terrafirmagreg.data.Properties.IntProp.NORTH_INT;
+import static su.terrafirmagreg.data.Properties.IntProp.SOUTH_INT;
+import static su.terrafirmagreg.data.Properties.IntProp.UP_INT;
+import static su.terrafirmagreg.data.Properties.IntProp.WEST_INT;
 
-  /* Facing of this branch */
-  public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
+public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
 
   /* Connection sides
    * 0 = no connection
    * 1 = connected, use vertical model
    * 2 = connected=, use horizontal model */
-  public static final PropertyInteger NORTH = PropertyInteger.create("north", 0, 2);
-  public static final PropertyInteger EAST = PropertyInteger.create("east", 0, 2);
-  public static final PropertyInteger SOUTH = PropertyInteger.create("south", 0, 2);
-  public static final PropertyInteger WEST = PropertyInteger.create("west", 0, 2);
-  public static final PropertyInteger UP = PropertyInteger.create("up", 0, 2);
 
   private static final AxisAlignedBB TRUNK_N_AABB = new AxisAlignedBB(0.375D, 0.375D, 0.375D, 0.625D, 0.625D, 1.0D);
   private static final AxisAlignedBB TRUNK_E_AABB = new AxisAlignedBB(0.0D, 0.375D, 0.375D, 0.625D, 0.625D, 0.625D);
@@ -75,11 +72,11 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
     BlockUtils.setFireInfo(this, 5, 20);
     setDefaultState(blockState.getBaseState()
                               .withProperty(FACING, EnumFacing.UP)
-                              .withProperty(NORTH, 0)
-                              .withProperty(EAST, 0)
-                              .withProperty(SOUTH, 0)
-                              .withProperty(WEST, 0)
-                              .withProperty(UP, 0));
+                              .withProperty(NORTH_INT, 0)
+                              .withProperty(EAST_INT, 0)
+                              .withProperty(SOUTH_INT, 0)
+                              .withProperty(WEST_INT, 0)
+                              .withProperty(UP_INT, 0));
   }
 
   public static BlockFruitTreeBranch get(IFruitTree tree) {
@@ -121,15 +118,15 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
     for (EnumFacing facing : EnumFacing.VALUES) {
       if (worldIn.getBlockState(pos.offset(facing)).getBlock() instanceof BlockFruitTreeLeaves) {
         if (facing == EnumFacing.NORTH) {
-          state = state.withProperty(NORTH, connectedValue);
+          state = state.withProperty(NORTH_INT, connectedValue);
         } else if (facing == EnumFacing.SOUTH) {
-          state = state.withProperty(SOUTH, connectedValue);
+          state = state.withProperty(SOUTH_INT, connectedValue);
         } else if (facing == EnumFacing.EAST) {
-          state = state.withProperty(EAST, connectedValue);
+          state = state.withProperty(EAST_INT, connectedValue);
         } else if (facing == EnumFacing.WEST) {
-          state = state.withProperty(WEST, connectedValue);
+          state = state.withProperty(WEST_INT, connectedValue);
         } else if (facing == EnumFacing.UP) {
-          state = state.withProperty(UP, connectedValue);
+          state = state.withProperty(UP_INT, connectedValue);
         }
       }
     }
@@ -176,16 +173,16 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
       default:
         finalAABB = TRUNK_U_AABB;
     }
-    if (state.getValue(NORTH) > 0) {
+    if (state.getValue(NORTH_INT) > 0) {
       finalAABB = finalAABB.union(CONNECTION_N_AABB);
     }
-    if (state.getValue(EAST) > 0) {
+    if (state.getValue(EAST_INT) > 0) {
       finalAABB = finalAABB.union(CONNECTION_E_AABB);
     }
-    if (state.getValue(SOUTH) > 0) {
+    if (state.getValue(SOUTH_INT) > 0) {
       finalAABB = finalAABB.union(CONNECTION_S_AABB);
     }
-    if (state.getValue(WEST) > 0) {
+    if (state.getValue(WEST_INT) > 0) {
       finalAABB = finalAABB.union(CONNECTION_W_AABB);
     }
     return finalAABB;
@@ -236,7 +233,7 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
   @Override
   @NotNull
   public BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, NORTH, EAST, SOUTH, WEST, UP);
+    return new BlockStateContainer(this, FACING, NORTH_INT, EAST_INT, SOUTH_INT, WEST_INT, UP_INT);
   }
 
   @Override

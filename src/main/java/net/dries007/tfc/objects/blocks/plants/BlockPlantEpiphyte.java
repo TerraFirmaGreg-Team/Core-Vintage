@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
@@ -15,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -37,16 +37,16 @@ public class BlockPlantEpiphyte extends BlockPlant {
   private static final AxisAlignedBB PLANT_WEST_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
   private static final AxisAlignedBB PLANT_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.75D, 1.0D, 1.0D);
 
-  private static final Map<Plant, BlockPlantEpiphyte> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantEpiphyte> MAP = new HashMap<>();
 
-  public BlockPlantEpiphyte(Plant plant) {
+  public BlockPlantEpiphyte(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockPlantEpiphyte get(Plant plant) {
+  public static BlockPlantEpiphyte get(PlantType plant) {
     return MAP.get(plant);
   }
 

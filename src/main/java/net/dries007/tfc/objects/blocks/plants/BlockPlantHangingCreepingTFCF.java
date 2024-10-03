@@ -1,7 +1,9 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -18,9 +20,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.util.climate.Climate;
-import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,21 +39,21 @@ import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
 import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
 import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 
-public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implements IGrowable {
+public class BlockPlantHangingCreepingTFCF extends BlockPlantCreepingTFCF implements IGrowable {
 
-  private static final Map<Plant, BlockHangingCreepingPlantTFCF> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantHangingCreepingTFCF> MAP = new HashMap<>();
 
-  public BlockHangingCreepingPlantTFCF(Plant plant) {
+  public BlockPlantHangingCreepingTFCF(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
 
-    plant.getOreDictName().ifPresent(name -> OreDictionaryHelper.register(this, name));
+    plant.getOreDictName().ifPresent(name -> OreDictUtils.register(this, name));
   }
 
-  public static BlockHangingCreepingPlantTFCF get(Plant plant) {
-    return BlockHangingCreepingPlantTFCF.MAP.get(plant);
+  public static BlockPlantHangingCreepingTFCF get(PlantType plant) {
+    return BlockPlantHangingCreepingTFCF.MAP.get(plant);
   }
 
   @Override

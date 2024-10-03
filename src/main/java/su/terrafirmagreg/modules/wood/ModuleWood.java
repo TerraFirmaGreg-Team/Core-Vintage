@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood;
 
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
-import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
@@ -28,7 +28,7 @@ import java.util.List;
 
 import static su.terrafirmagreg.modules.ModuleContainer.WOOD;
 
-@Module(moduleID = WOOD)
+@ModuleInfo(moduleID = WOOD)
 public final class ModuleWood extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWood.class.getSimpleName());

@@ -31,8 +31,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.types.Tree;
 
 import java.util.LinkedHashMap;
@@ -53,9 +51,7 @@ import static net.dries007.tfc.api.registries.TFCRegistryNames.METAL;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.NUT_TREES_REGISTRY;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.ORE;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.OVEN_RECIPE;
-import static net.dries007.tfc.api.registries.TFCRegistryNames.PLANT;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.PLANTER_QUAD_REGISTRY;
-import static net.dries007.tfc.api.registries.TFCRegistryNames.ROCK_TYPE;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.SMELTERY;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.STRAINING_RECIPE;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.TREE;
@@ -71,11 +67,9 @@ public final class Registries {
   public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
     // Pre Block registries (dirty hack)
 
-    newRegistry(ROCK_TYPE, RockCategory.class, true); // Required before: ROCK
     newRegistry(METAL, Metal.class, true);// Required before: ORE, ALLOY_RECIPE, WELDING_RECIPE
     newRegistry(ORE, Ore.class, true);
     newRegistry(TREE, Tree.class, true);
-    newRegistry(PLANT, Plant.class, true);
 
     // Normal registries
     newRegistry(ALLOY_RECIPE, AlloyRecipe.class, false);

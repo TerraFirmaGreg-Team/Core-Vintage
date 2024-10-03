@@ -3,6 +3,7 @@ package net.dries007.tfc.objects.items;
 import su.terrafirmagreg.data.enums.EnumHideSize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -25,8 +26,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
+import net.dries007.tfc.api.types.ToolType;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -212,12 +212,10 @@ public final class ItemsTFC {
       simpleItems.add(register(r, log.getRegistryName().getPath(), new ItemBlockTFC(log), CT_WOOD));
     }
 
-    for (RockCategory cat : TFCRegistries.ROCK_CATEGORIES.getValuesCollection()) {
-      for (Rock.ToolType type : Rock.ToolType.values()) {
-        simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "/" + cat.getRegistryName()
-                                                                                    .getPath(), type.create(cat), CT_MISC));
-        simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "_head/" + cat.getRegistryName()
-                                                                                         .getPath(), new ItemRockToolHead(cat, type), CT_MISC));
+    for (RockCategory cat : RockCategory.getCategories()) {
+      for (ToolType type : ToolType.values()) {
+        simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "/" + cat.getName(), type.create(cat), CT_MISC));
+        simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "_head/" + cat.getName(), new ItemRockToolHead(cat, type), CT_MISC));
       }
     }
 

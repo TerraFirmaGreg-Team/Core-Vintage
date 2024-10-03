@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.device.init;
 
 import su.terrafirmagreg.data.enums.EnumGradeOre;
 import su.terrafirmagreg.modules.device.object.recipe.quern.IQuernRecipeManager;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantTypes;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypes;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
@@ -25,11 +26,9 @@ import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
-import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.util.agriculture.Food;
 import pieman.caffeineaddon.init.ModItems;
 
-import static net.dries007.tfc.api.registries.TFCRegistries.PLANTS;
 import static su.terrafirmagreg.modules.rock.api.types.type.RockTypes.QUARTZITE;
 
 public final class RecipesDevice {
@@ -103,130 +102,130 @@ public final class RecipesDevice {
                       new ItemStack(Items.DYE, 9, EnumDyeColor.WHITE.getDyeDamage()));
 
     //Dye from plants
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.HOUSTONIA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.HOUSTONIA)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.OXEYE_DAISY))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.OXEYE_DAISY)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 1));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.PRIMROSE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.PRIMROSE)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SNAPDRAGON_WHITE))),
+      IIngredient.of(BlockPlant.get(PlantTypes.SNAPDRAGON_WHITE)),
       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.TRILLIUM))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.TRILLIUM)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 1));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SPANISH_MOSS))),
+      IIngredient.of(BlockPlant.get(PlantTypes.SPANISH_MOSS)),
       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.TULIP_WHITE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.TULIP_WHITE)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 1));
 
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BUTTERFLY_MILKWEED))),
+      IIngredient.of(BlockPlant.get(PlantTypes.BUTTERFLY_MILKWEED)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.CANNA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.CANNA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.NASTURTIUM))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.NASTURTIUM)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.STRELITZIA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.STRELITZIA)),
                       new ItemStack(Items.DYE, 1, EnumDyeColor.ORANGE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.TULIP_ORANGE))),
+      IIngredient.of(BlockPlant.get(PlantTypes.TULIP_ORANGE)),
       new ItemStack(Items.DYE, 1, EnumDyeColor.ORANGE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.WATER_CANNA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.WATER_CANNA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
 
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.ATHYRIUM_FERN))),
+      IIngredient.of(BlockPlant.get(PlantTypes.ATHYRIUM_FERN)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.MAGENTA.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MORNING_GLORY))),
+      IIngredient.of(BlockPlant.get(PlantTypes.MORNING_GLORY)),
       new ItemStack(Items.DYE, 1, EnumDyeColor.MAGENTA.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.PULSATILLA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.PULSATILLA)),
                       new ItemStack(Items.DYE, 1, EnumDyeColor.MAGENTA.getDyeDamage()));
 
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.LABRADOR_TEA))),
+      IIngredient.of(BlockPlant.get(PlantTypes.LABRADOR_TEA)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.LIGHT_BLUE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SAPPHIRE_TOWER))),
+      IIngredient.of(BlockPlant.get(PlantTypes.SAPPHIRE_TOWER)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.LIGHT_BLUE.getDyeDamage()));
 
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.CALENDULA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.CALENDULA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.DANDELION))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.DANDELION)),
                       new ItemStack(Items.DYE, 1, EnumDyeColor.YELLOW.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MEADS_MILKWEED))),
+      IIngredient.of(BlockPlant.get(PlantTypes.MEADS_MILKWEED)),
       new ItemStack(Items.DYE, 1, EnumDyeColor.YELLOW.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.GOLDENROD))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.GOLDENROD)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SNAPDRAGON_YELLOW))),
+      IIngredient.of(BlockPlant.get(PlantTypes.SNAPDRAGON_YELLOW)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
 
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MOSS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.MOSS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.LIME.getDyeDamage()));
 
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.FOXGLOVE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.FOXGLOVE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SACRED_DATURA))),
+      IIngredient.of(BlockPlant.get(PlantTypes.SACRED_DATURA)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.TULIP_PINK))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.TULIP_PINK)),
                       new ItemStack(Items.DYE, 1, EnumDyeColor.PINK.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SNAPDRAGON_PINK))),
+      IIngredient.of(BlockPlant.get(PlantTypes.SNAPDRAGON_PINK)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
 
     //No gray :c
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.YUCCA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.YUCCA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.SILVER.getDyeDamage()));
 
     //No Cyan :c
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.ALLIUM))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.ALLIUM)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PURPLE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BLACK_ORCHID))),
+      IIngredient.of(BlockPlant.get(PlantTypes.BLACK_ORCHID)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PURPLE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.PEROVSKIA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.PEROVSKIA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PURPLE.getDyeDamage()));
 
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BLUE_ORCHID))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.BLUE_ORCHID)),
                       new ItemStack(ItemsTFC.DYE_BLUE, 2));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.GRAPE_HYACINTH))),
+      IIngredient.of(BlockPlant.get(PlantTypes.GRAPE_HYACINTH)),
       new ItemStack(ItemsTFC.DYE_BLUE, 2));
 
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.ROUGH_HORSETAIL))),
+      IIngredient.of(BlockPlant.get(PlantTypes.ROUGH_HORSETAIL)),
       new ItemStack(ItemsTFC.DYE_BROWN, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SARGASSUM))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.SARGASSUM)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
 
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BARREL_CACTUS))),
+      IIngredient.of(BlockPlant.get(PlantTypes.BARREL_CACTUS)),
       new ItemStack(Items.DYE, 4, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.REINDEER_LICHEN))),
+      IIngredient.of(BlockPlant.get(PlantTypes.REINDEER_LICHEN)),
       new ItemStack(Items.DYE, 4, EnumDyeColor.GREEN.getDyeDamage()));
 
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.GUZMANIA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.GUZMANIA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.POPPY))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.POPPY)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.PORCINI))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.PORCINI)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.ROSE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.ROSE)),
                       new ItemStack(Items.DYE, 4, EnumDyeColor.RED.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SNAPDRAGON_RED))),
+      IIngredient.of(BlockPlant.get(PlantTypes.SNAPDRAGON_RED)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.TROPICAL_MILKWEED))),
+      IIngredient.of(BlockPlant.get(PlantTypes.TROPICAL_MILKWEED)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.TULIP_RED))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.TULIP_RED)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.VRIESEA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.VRIESEA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
 
     //Misc
@@ -270,313 +269,313 @@ public final class RecipesDevice {
     manager.addRecipe(IIngredient.of("pearl"), new ItemStack(ItemPowder.get(Powder.PEARL)));
     manager.addRecipe(IIngredient.of("pearlBlack"),
                       new ItemStack(ItemPowder.get(Powder.BLACK_PEARL)));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.PAPYRUS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.PAPYRUS)),
                       new ItemStack(ItemsTFCF.PAPYRUS_PULP, 3));
 
     // Dye from plants
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.CHAMOMILE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.CHAMOMILE)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.HYDRANGEA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.HYDRANGEA)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.LILY_OF_THE_VALLEY))),
+      IIngredient.of(BlockPlant.get(PlantTypes.LILY_OF_THE_VALLEY)),
       new ItemStack(ItemsTFC.DYE_WHITE, 2));
     manager.addRecipe(IIngredient.of("cropMadder"),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
     manager.addRecipe(IIngredient.of("cropWoad"), new ItemStack(ItemsTFC.DYE_BLUE, 2));
     manager.addRecipe(IIngredient.of("cropIndigo"), new ItemStack(ItemsTFC.DYE_BLUE, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SUNFLOWER))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.SUNFLOWER)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
     manager.addRecipe(IIngredient.of("cropWeld"),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
     manager.addRecipe(IIngredient.of("cropRape"), new ItemStack(ItemsTFC.DYE_BLUE, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.LILAC))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.LILAC)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.PEONY))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.PEONY)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.LAVANDULA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.LAVANDULA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PURPLE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.CATTAIL))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.CATTAIL)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
     manager.addRecipe(IIngredient.of("cropAgave"),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SUGAR_CANE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.SUGAR_CANE)),
                       new ItemStack(Items.DYE, 4, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BADDERLOCKS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.BADDERLOCKS)),
                       new ItemStack(Items.DYE, 4, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.GUTWEED))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.GUTWEED)),
                       new ItemStack(Items.DYE, 4, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SAGO))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.SAGO)),
                       new ItemStack(Items.DYE, 4, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(IIngredient.of("resin"),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
     manager.addRecipe(IIngredient.of("treeLeavesTeak"),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SUGAR_CANE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.SUGAR_CANE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.TACKWEED))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.TACKWEED)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.TAKAKIA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.TAKAKIA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.VOODOO_LILY))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.VOODOO_LILY)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.DEVILS_TONGUE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.DEVILS_TONGUE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BROMELIA_HEMISPHERICA))),
+      IIngredient.of(BlockPlant.get(PlantTypes.BROMELIA_HEMISPHERICA)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.MAGENTA.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BROMELIA_LACINIOSA))),
+      IIngredient.of(BlockPlant.get(PlantTypes.BROMELIA_LACINIOSA)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.KAIETEUR_FALLS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.KAIETEUR_FALLS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MATTEUCCIA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.MATTEUCCIA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.CORD_GRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.CORD_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.REED_MANNAGRASS))),
+      IIngredient.of(BlockPlant.get(PlantTypes.REED_MANNAGRASS)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.PRAIRIE_JUNEGRASS))),
+      IIngredient.of(BlockPlant.get(PlantTypes.PRAIRIE_JUNEGRASS)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.WOOLLY_BUSH))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.WOOLLY_BUSH)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.CINNAMON_FERN))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.CINNAMON_FERN)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.JAPANESE_PIERIS))),
+      IIngredient.of(BlockPlant.get(PlantTypes.JAPANESE_PIERIS)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BURNING_BUSH))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.BURNING_BUSH)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.UNDERGROWTH_SHRUB))),
+      IIngredient.of(BlockPlant.get(PlantTypes.UNDERGROWTH_SHRUB)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.UNDERGROWTH_SHRUB_SMALL))),
+      IIngredient.of(BlockPlant.get(PlantTypes.UNDERGROWTH_SHRUB_SMALL)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SEA_OATS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.SEA_OATS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BUNCH_GRASS_FLOATING))),
+      IIngredient.of(BlockPlant.get(PlantTypes.BUNCH_GRASS_FLOATING)),
       new ItemStack(ItemsTFC.DYE_BROWN, 2));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BUNCH_GRASS_REED))),
+      IIngredient.of(BlockPlant.get(PlantTypes.BUNCH_GRASS_REED)),
       new ItemStack(ItemsTFC.DYE_BROWN, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.CROWNGRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.CROWNGRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.CAT_GRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.CAT_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.GOOSEGRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.GOOSEGRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.WHEATGRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.WHEATGRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.HALFA_GRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.HALFA_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.LEYMUS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.LEYMUS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MARRAM_GRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.MARRAM_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    //manager.addRecipe(IIngredient.of(BlockPlantTFC.get(PLANTS.getValue(DefaultPlants.WILD_BARLEY))), new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    //manager.addRecipe(IIngredient.of(BlockPlantTFC.get(PLANTS.getValue(DefaultPlants.WILD_RICE))), new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    //manager.addRecipe(IIngredient.of(BlockPlantTFC.get(PLANTS.getValue(DefaultPlants.WILD_WHEAT))), new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.RATTAN))),
+    //manager.addRecipe(IIngredient.of(BlockPlantTFC.get(PlantTypes.WILD_BARLEY)), new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
+    //manager.addRecipe(IIngredient.of(BlockPlantTFC.get(PlantTypes.WILD_RICE)), new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
+    //manager.addRecipe(IIngredient.of(BlockPlantTFC.get(PlantTypes.WILD_WHEAT)), new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.RATTAN)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.GLOW_VINE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.GLOW_VINE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BLUE_SKYFLOWER))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.BLUE_SKYFLOWER)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.LIGHT_BLUE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.JADE_VINE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.JADE_VINE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.LIGHT_BLUE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.JAPANESE_IVY))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.JAPANESE_IVY)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MADEIRA_VINE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.MADEIRA_VINE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MYSORE_TRUMPETVINE))),
+      IIngredient.of(BlockPlant.get(PlantTypes.MYSORE_TRUMPETVINE)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SILVERVEIN_CREEPER))),
+      IIngredient.of(BlockPlant.get(PlantTypes.SILVERVEIN_CREEPER)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SWEDISH_IVY))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.SWEDISH_IVY)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.VARIEGATED_PERSIAN_IVY))),
+      IIngredient.of(BlockPlant.get(PlantTypes.VARIEGATED_PERSIAN_IVY)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.APACHE_DWARF))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.APACHE_DWARF)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.ARTISTS_CONK))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.ARTISTS_CONK)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.CLIMBING_CACTUS))),
+      IIngredient.of(BlockPlant.get(PlantTypes.CLIMBING_CACTUS)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.CRIMSON_CATTLEYA))),
+      IIngredient.of(BlockPlant.get(PlantTypes.CRIMSON_CATTLEYA)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PURPLE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.CREEPING_MISTLETOE))),
+      IIngredient.of(BlockPlant.get(PlantTypes.CREEPING_MISTLETOE)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.CUTHBERTS_DENDROBIUM))),
+      IIngredient.of(BlockPlant.get(PlantTypes.CUTHBERTS_DENDROBIUM)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.FISH_BONE_CACTUS))),
+      IIngredient.of(BlockPlant.get(PlantTypes.FISH_BONE_CACTUS)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.MAGENTA.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.FRAGRANT_FERN))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.FRAGRANT_FERN)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.HARLEQUIN_MISTLETOE))),
+      IIngredient.of(BlockPlant.get(PlantTypes.HARLEQUIN_MISTLETOE)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.KING_ORCHID))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.KING_ORCHID)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.LANTERN_OF_THE_FOREST))),
+      IIngredient.of(BlockPlant.get(PlantTypes.LANTERN_OF_THE_FOREST)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.LARGE_FOOT_DENDROBIUM))),
+      IIngredient.of(BlockPlant.get(PlantTypes.LARGE_FOOT_DENDROBIUM)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.COMMON_MISTLETOE))),
+      IIngredient.of(BlockPlant.get(PlantTypes.COMMON_MISTLETOE)),
       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SKY_PLANT))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.SKY_PLANT)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SULPHUR_SHELF))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.SULPHUR_SHELF)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.TAMPA_BUTTERFLY_ORCHID))),
+      IIngredient.of(BlockPlant.get(PlantTypes.TAMPA_BUTTERFLY_ORCHID)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.TURKEY_TAIL))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.TURKEY_TAIL)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.WILDFIRE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.WILDFIRE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BELL_TREE_DAHLIA))),
+      IIngredient.of(BlockPlant.get(PlantTypes.BELL_TREE_DAHLIA)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BIG_LEAF_PALM))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.BIG_LEAF_PALM)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.DRAKENSBERG_CYCAD))),
+      IIngredient.of(BlockPlant.get(PlantTypes.DRAKENSBERG_CYCAD)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.DWARF_SUGAR_PALM))),
+      IIngredient.of(BlockPlant.get(PlantTypes.DWARF_SUGAR_PALM)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.GIANT_CANE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.GIANT_CANE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.GIANT_ELEPHANT_EAR))),
+      IIngredient.of(BlockPlant.get(PlantTypes.GIANT_ELEPHANT_EAR)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.GIANT_FEATHER_GRASS))),
+      IIngredient.of(BlockPlant.get(PlantTypes.GIANT_FEATHER_GRASS)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MADAGASCAR_OCOTILLO))),
+      IIngredient.of(BlockPlant.get(PlantTypes.MADAGASCAR_OCOTILLO)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MALAGASY_TREE_ALOE))),
+      IIngredient.of(BlockPlant.get(PlantTypes.MALAGASY_TREE_ALOE)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MOUNTAIN_CABBAGE_TREE))),
+      IIngredient.of(BlockPlant.get(PlantTypes.MOUNTAIN_CABBAGE_TREE)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.PYGMY_DATE_PALM))),
+      IIngredient.of(BlockPlant.get(PlantTypes.PYGMY_DATE_PALM)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.QUEEN_SAGO))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.QUEEN_SAGO)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.RED_SEALING_WAX_PALM))),
+      IIngredient.of(BlockPlant.get(PlantTypes.RED_SEALING_WAX_PALM)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SUMMER_ASPHODEL))),
+      IIngredient.of(BlockPlant.get(PlantTypes.SUMMER_ASPHODEL)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.ZIMBABWE_ALOE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.ZIMBABWE_ALOE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.ANTHURIUM))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.ANTHURIUM)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.ARROWHEAD))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.ARROWHEAD)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.ARUNDO))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.ARUNDO)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BLUEGRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.BLUEGRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BLUE_GINGER))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.BLUE_GINGER)),
                       new ItemStack(ItemsTFC.DYE_BLUE, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BROMEGRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.BROMEGRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BUR_REED))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.BUR_REED)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.DESERT_FLAME))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.DESERT_FLAME)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.HELICONIA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.HELICONIA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.HIBISCUS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.HIBISCUS)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.KANGAROO_PAW))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.KANGAROO_PAW)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.KING_FERN))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.KING_FERN)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.LIPSTICK_PALM))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.LIPSTICK_PALM)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.MAGENTA.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MARIGOLD))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.MARIGOLD)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MONSTERA_EPIPHYTE))),
+      IIngredient.of(BlockPlant.get(PlantTypes.MONSTERA_EPIPHYTE)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    //manager.addRecipe(IIngredient.of(BlockPlantTFC.get(PLANTS.getValue(DefaultPlants.MONSTERA_GROUND))), new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.PHRAGMITE))),
+    //manager.addRecipe(IIngredient.of(BlockPlantTFC.get(PlantTypes.MONSTERA_GROUND)), new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.PHRAGMITE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.PICKERELWEED))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.PICKERELWEED)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PURPLE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BADDERLOCKS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.BADDERLOCKS)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.COONTAIL))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.COONTAIL)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.EEL_GRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.EEL_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.GIANT_KELP))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.GIANT_KELP)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.GUTWEED))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.GUTWEED)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.HORNWORT))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.HORNWORT)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.LAMINARIA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.LAMINARIA)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.LEAFY_KELP))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.LEAFY_KELP)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MANATEE_GRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.MANATEE_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.MILFOIL))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.MILFOIL)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.PONDWEED))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.PONDWEED)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SAGO))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.SAGO)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SEAGRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.SEAGRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SEAWEED))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.SEAWEED)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.STAR_GRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.STAR_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.TURTLE_GRASS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.TURTLE_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.WINGED_KELP))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.WINGED_KELP)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.RED_ALGAE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.RED_ALGAE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.RED_SEA_WHIP))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.RED_SEA_WHIP)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.SEA_ANEMONE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.SEA_ANEMONE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.BEARDED_MOSS))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.BEARDED_MOSS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.GLOW_VINE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.GLOW_VINE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.HANGING_VINE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.HANGING_VINE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.JUNGLE_VINE))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.JUNGLE_VINE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.LIANA))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.LIANA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlockPlant.get(PLANTS.getValue(DefaultPlants.IVY))),
+    manager.addRecipe(IIngredient.of(BlockPlant.get(PlantTypes.IVY)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(IIngredient.of(BlocksTFCF.BLUESHROOM),
                       new ItemStack(Items.DYE, 1, EnumDyeColor.CYAN.getDyeDamage()));

@@ -1,9 +1,7 @@
 package su.terrafirmagreg.modules.rock.api.types.type;
 
-/**
- * В это классе хранятся типы камня, которые используются при создании блоков и предметов
- */
-public class RockTypes {
+
+public final class RockTypes {
 
   // Igneous Intrusive
   public static RockType GRANITE;

@@ -1,11 +1,11 @@
 package net.dries007.tfc.api.util;
 
+import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,9 +23,9 @@ public interface IRockObject {
   @SideOnly(Side.CLIENT)
   default void addRockInfo(ItemStack stack, List<String> text) {
     text.add("");
-    Rock rock = getRock(stack);
+    RockType rock = getRock(stack);
     if (rock != null) {
-      text.add("Rock: " + rock.getRegistryName().getPath());
+      text.add("Rock: " + rock.getName());
     }
     text.add("Category: " + getRockCategory(stack));
   }
@@ -37,7 +37,7 @@ public interface IRockObject {
    * @return The rock, or null if it isn't relavant / doesn't exist
    */
   @Nullable
-  Rock getRock(ItemStack stack);
+  RockType getRock(ItemStack stack);
 
   @NotNull
   RockCategory getRockCategory(ItemStack stack);

@@ -1,12 +1,11 @@
 package su.terrafirmagreg.modules.plant;
 
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
-import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
-import su.terrafirmagreg.modules.plant.init.BlocksPlant;
-import su.terrafirmagreg.modules.plant.init.ItemsPlant;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantTypeHandler;
 
 import net.minecraft.creativetab.CreativeTabs;
 
@@ -14,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.modules.ModuleContainer.PLANT;
 
-@Module(moduleID = PLANT)
+@ModuleInfo(moduleID = PLANT)
 public final class ModulePlant extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModulePlant.class.getSimpleName());
@@ -29,10 +28,10 @@ public final class ModulePlant extends ModuleBase {
 
   @Override
   public void onRegister() {
-    //PlantTypeHandler.init();
+    PlantTypeHandler.init();
 
-    BlocksPlant.onRegister(registryManager);
-    ItemsPlant.onRegister(registryManager);
+//    BlocksPlant.onRegister(registryManager);
+//    ItemsPlant.onRegister(registryManager);
   }
 
   @Override

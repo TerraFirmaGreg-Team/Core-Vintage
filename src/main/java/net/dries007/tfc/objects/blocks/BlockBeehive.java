@@ -6,6 +6,7 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
+import su.terrafirmagreg.modules.plant.api.types.category.PlantCategories;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -30,7 +31,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -89,8 +89,8 @@ public class BlockBeehive extends Block implements ICapabilitySize {
           }
           searchPos = pos.add(x, y, z);
           Block block = world.getBlockState(searchPos).getBlock();
-          if (block instanceof BlockPlant) {
-            if (((BlockPlant) block).getPlant().getPlantType() == Plant.PlantType.STANDARD) {
+          if (block instanceof BlockPlant blockPlant) {
+            if (blockPlant.getPlant().getCategory() == PlantCategories.STANDARD) {
               flowers++;
             }
           } else if (block instanceof BlockFlowerPotTFC || block instanceof BlockBushTrellis || block instanceof BlockLargePlanter ||

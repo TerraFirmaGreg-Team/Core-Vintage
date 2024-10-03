@@ -6,6 +6,7 @@ package su.terrafirmagreg.modules.world.classic.objects.generator.structures;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
@@ -31,8 +32,6 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import tfcflorae.TFCFlorae;
@@ -248,7 +247,7 @@ public class StructureGenerator extends WorldGenerator {
         for (int x = 0; x < template.getSize().getX(); x++) {
           for (int z = 0; z < template.getSize().getZ(); z++) {
             for (int y = 0; y < searchRange; y++) {
-              for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
+              for (PlantType plant : PlantType.getTypes()) {
                 if (world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock() == Blocks.AIR ||
                     world.getBlockState(new BlockPos(posX, posY, posZ))
                          .getBlock() == BlockPlant.get(plant)) {

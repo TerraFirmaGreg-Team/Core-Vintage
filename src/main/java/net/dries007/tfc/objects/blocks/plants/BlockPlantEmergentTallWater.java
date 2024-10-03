@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.block.state.IBlockState;
@@ -9,7 +10,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 
 import java.util.HashMap;
@@ -17,16 +17,16 @@ import java.util.Map;
 
 public class BlockPlantEmergentTallWater extends BlockPlantTallWater implements ITallPlant {
 
-  private static final Map<Plant, BlockPlantEmergentTallWater> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantEmergentTallWater> MAP = new HashMap<>();
 
-  public BlockPlantEmergentTallWater(Plant plant) {
+  public BlockPlantEmergentTallWater(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockPlantEmergentTallWater get(Plant plant) {
+  public static BlockPlantEmergentTallWater get(PlantType plant) {
     return MAP.get(plant);
   }
 

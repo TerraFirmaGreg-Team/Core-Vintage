@@ -54,6 +54,11 @@ public class WoodBlockVariant extends VariantBlock<WoodBlockVariant, WoodType> {
     return String.format("wood/%s", this.getName());
   }
 
+  @Override
+  public String getRegistryKey(WoodType type) {
+    return String.format("wood/%s/%s", this.getName(), type);
+  }
+
   public String getLocalizedName() {
     return new TextComponentTranslation(String.format("wood.variant.%s.name", this)).getFormattedText();
   }

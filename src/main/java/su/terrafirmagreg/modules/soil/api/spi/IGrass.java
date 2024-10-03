@@ -2,6 +2,8 @@ package su.terrafirmagreg.modules.soil.api.spi;
 
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.plant.api.types.category.PlantCategories;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
@@ -13,8 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrass;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -134,8 +134,8 @@ public interface IGrass {
         }
       }
       // Генерируем короткую траву на верхнем блоке с определенной вероятностью
-      for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-        if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS && rand.nextFloat() < 0.5f) {
+      for (PlantType plant : PlantType.getTypes()) {
+        if (plant.getCategory() == PlantCategories.SHORT_GRASS && rand.nextFloat() < 0.5f) {
           float temp = Climate.getActualTemp(world, upPos);
           BlockPlantShortGrass plantBlock = BlockPlantShortGrass.get(plant);
 

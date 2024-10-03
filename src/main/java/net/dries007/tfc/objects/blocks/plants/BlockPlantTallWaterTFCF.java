@@ -1,7 +1,9 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -17,10 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fluids.Fluid;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 import net.dries007.tfc.util.climate.Climate;
-import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,22 +33,22 @@ import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
 import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER;
 
-public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGrowable, ITallPlant {
+public class BlockPlantTallWaterTFCF extends BlockPlantWaterTFCF implements IGrowable, ITallPlant {
 
-  private static final Map<Plant, BlockTallWaterPlantTFCF> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantTallWaterTFCF> MAP = new HashMap<>();
 
-  public BlockTallWaterPlantTFCF(Fluid fluid, Plant plant) {
+  public BlockPlantTallWaterTFCF(Fluid fluid, PlantType plant) {
     super(fluid, plant);
     this.setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, 0));
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
 
-    plant.getOreDictName().ifPresent(name -> OreDictionaryHelper.register(this, name));
+    plant.getOreDictName().ifPresent(name -> OreDictUtils.register(this, name));
   }
 
-  public static BlockTallWaterPlantTFCF get(Plant plant) {
-    return BlockTallWaterPlantTFCF.MAP.get(plant);
+  public static BlockPlantTallWaterTFCF get(PlantType plant) {
+    return BlockPlantTallWaterTFCF.MAP.get(plant);
   }
 
   @Override

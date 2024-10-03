@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.plant.api.types.variant.item;
 import su.terrafirmagreg.data.lib.types.variant.item.VariantItem;
 import su.terrafirmagreg.modules.plant.ModulePlant;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 
 import net.minecraft.util.text.TextComponentTranslation;
 
@@ -36,7 +35,7 @@ public class PlantItemVariant extends VariantItem<PlantItemVariant, PlantType> {
     });
   }
 
-  public String getRegistryKey(SoilType type) {
+  public String getRegistryKey(PlantType type) {
     return String.format("plant/%s/%s", this.getName(), type);
   }
 

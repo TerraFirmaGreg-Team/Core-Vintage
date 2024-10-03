@@ -5,6 +5,7 @@ import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.data.enums.EnumPlantPart;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -23,7 +24,6 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -37,19 +37,19 @@ import static su.terrafirmagreg.data.Properties.EnumProp.PLANT_PART;
 import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
 import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 
-public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowable, ITallPlant {
+public class BlockPlantTallGrassWater extends BlockPlantShortGrassTFCF implements IGrowable, ITallPlant {
 
-  private static final Map<Plant, BlockTallGrassWater> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantTallGrassWater> MAP = new HashMap<>();
 
-  public BlockTallGrassWater(Plant plant) {
+  public BlockPlantTallGrassWater(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockTallGrassWater get(Plant plant) {
-    return BlockTallGrassWater.MAP.get(plant);
+  public static BlockPlantTallGrassWater get(PlantType plant) {
+    return BlockPlantTallGrassWater.MAP.get(plant);
   }
 
   @Override
@@ -76,7 +76,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
     if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).getBlock() == this) {
       return false;
     }
-    if (soil.getBlock() instanceof BlockWaterPlantTFCF || soil.getBlock() instanceof BlockPlantWater) {
+    if (soil.getBlock() instanceof BlockPlantWaterTFCF || soil.getBlock() instanceof BlockPlantWater) {
       return false;
     }
     if (state.getBlock() == this) {

@@ -3,6 +3,7 @@ package net.dries007.tfc.objects.blocks.plants;
 import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
@@ -20,7 +21,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -34,23 +34,23 @@ import java.util.Random;
 import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
 import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 
-public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
+public class BlockPlantShortGrassTFCF extends BlockPlantTFCF implements IShearable {
 
   private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
   private static final AxisAlignedBB SHORTER_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.5D, 0.875D);
   private static final AxisAlignedBB SHORT_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.75D, 0.875D);
   private static final AxisAlignedBB SHORTEST_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D);
-  private static final Map<Plant, BlockShortGrassTFCF> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantShortGrassTFCF> MAP = new HashMap<>();
 
-  public BlockShortGrassTFCF(Plant plant) {
+  public BlockPlantShortGrassTFCF(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockShortGrassTFCF get(Plant plant) {
-    return BlockShortGrassTFCF.MAP.get(plant);
+  public static BlockPlantShortGrassTFCF get(PlantType plant) {
+    return BlockPlantShortGrassTFCF.MAP.get(plant);
   }
 
   @Override

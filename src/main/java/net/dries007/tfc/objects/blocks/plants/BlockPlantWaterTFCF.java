@@ -1,11 +1,13 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -35,17 +37,17 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.Climate;
-import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,20 +58,21 @@ import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
 import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER;
 
-public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySize, IPlantable {
+public class BlockPlantWaterTFCF extends BlockFluidTFC implements ICapabilitySize, IPlantable {
 
   private static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
-  private static final Map<Plant, BlockWaterPlantTFCF> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantWaterTFCF> MAP = new HashMap<>();
   /* Growth Stage of the plant, tied to the month of year */
   public final PropertyInteger growthStageProperty;
-  protected final Plant plant;
+  @Getter
+  protected final PlantType plant;
   protected final BlockStateContainer blockState;
 
-  public BlockWaterPlantTFCF(Fluid fluid, Plant plant) {
+  public BlockPlantWaterTFCF(Fluid fluid, PlantType plant) {
     this(fluid, Material.WATER, plant);
   }
 
-  public BlockWaterPlantTFCF(Fluid fluid, Material materialIn, Plant plant) {
+  public BlockPlantWaterTFCF(Fluid fluid, Material materialIn, PlantType plant) {
     super(fluid, Material.WATER, false);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
@@ -87,10 +90,10 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
     this.setLightOpacity(3);
     this.setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, 0));
 
-    plant.getOreDictName().ifPresent(name -> OreDictionaryHelper.register(this, name));
+    plant.getOreDictName().ifPresent(name -> OreDictUtils.register(this, name));
   }
 
-  public static BlockWaterPlantTFCF get(Plant plant) {
+  public static BlockPlantWaterTFCF get(PlantType plant) {
     return MAP.get(plant);
   }
 
@@ -135,7 +138,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
   @Override
   @SideOnly(Side.CLIENT)
   public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
-    if (state.getBlock() instanceof BlockWaterPlantTFCF) {
+    if (state.getBlock() instanceof BlockPlantWaterTFCF) {
       return state.getBoundingBox(worldIn, pos).offset(pos);
     }
     return null;
@@ -221,7 +224,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
     if (worldIn.isAirBlock(pos.up())) {
       return false;
     }
-    if (up.getBlock() instanceof BlockTallGrassWater) {
+    if (up.getBlock() instanceof BlockPlantTallGrassWater) {
       return false;
     }
     if (state.getBlock() == this) {
@@ -398,10 +401,6 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
     checkAndDropBlock(worldIn, pos, state);
   }
 
-  public Plant getPlant() {
-    return plant;
-  }
-
   @Override
   public @NotNull Weight getWeight(ItemStack stack) {
     return Weight.VERY_LIGHT; // Stacksize = 64
@@ -421,12 +420,12 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
   }
 
   @NotNull
-  public Plant.EnumPlantTypeTFC getPlantTypeTFC() {
-    return plant.getEnumPlantTypeTFC();
+  public PlantType.EnumType getPlantTypeTFC() {
+    return plant.getEnumPlantType();
   }
 
   @Override
   public boolean canCollideCheck(IBlockState state, boolean fullHit) {
-    return state.getBlock() instanceof BlockWaterPlantTFCF && super.canCollideCheck(state, fullHit);
+    return state.getBlock() instanceof BlockPlantWaterTFCF && super.canCollideCheck(state, fullHit);
   }
 }

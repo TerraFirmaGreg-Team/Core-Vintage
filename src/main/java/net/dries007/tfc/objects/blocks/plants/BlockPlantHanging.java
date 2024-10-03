@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -13,7 +14,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,16 +34,16 @@ import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 
 public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
 
-  private static final Map<Plant, BlockPlantHanging> MAP = new HashMap();
+  private static final Map<PlantType, BlockPlantHanging> MAP = new HashMap();
 
-  public BlockPlantHanging(Plant plant) {
+  public BlockPlantHanging(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockPlantHanging get(Plant plant) {
+  public static BlockPlantHanging get(PlantType plant) {
     return MAP.get(plant);
   }
 

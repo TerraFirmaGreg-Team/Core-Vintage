@@ -3,10 +3,12 @@ package su.terrafirmagreg.modules.rock.api.types.category;
 import su.terrafirmagreg.data.lib.types.category.Category;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import net.dries007.tfc.objects.ToolMaterials;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,6 +33,7 @@ public class RockCategory extends Category<RockCategory> {
   private final float caveFreqMod;
   private final float hardnessModifier;
   private final TextFormatting textFormatting;
+  private final ToolMaterial toolMaterial;
 
   private RockCategory(Builder builder) {
     super(builder.name);
@@ -43,6 +46,7 @@ public class RockCategory extends Category<RockCategory> {
     this.caveFreqMod = builder.caveFreqMod;
     this.hardnessModifier = builder.hardnessModifier;
     this.textFormatting = builder.textFormatting;
+    this.toolMaterial = builder.toolMaterial;
 
     if (!categories.add(this)) {
       throw new RuntimeException(String.format("RockCategory: [%s] already exists!", name));
@@ -141,6 +145,7 @@ public class RockCategory extends Category<RockCategory> {
     private float caveFreqMod;
     private float hardnessModifier;
     private TextFormatting textFormatting;
+    private ToolMaterial toolMaterial;
 
     public Builder(@NotNull String name) {
 
@@ -155,6 +160,7 @@ public class RockCategory extends Category<RockCategory> {
       this.hardnessModifier = 0f;
       this.textFormatting = TextFormatting.RESET;
       this.hasAnvil = false;
+      this.toolMaterial = ToolMaterials.IGNEOUS_INTRUSIVE;
     }
 
     /**
@@ -204,6 +210,11 @@ public class RockCategory extends Category<RockCategory> {
      */
     public Builder textFormatting(@NotNull TextFormatting textFormatting) {
       this.textFormatting = textFormatting;
+      return this;
+    }
+
+    public Builder toolMaterial(ToolMaterial toolMaterial) {
+      this.toolMaterial = toolMaterial;
       return this;
     }
 

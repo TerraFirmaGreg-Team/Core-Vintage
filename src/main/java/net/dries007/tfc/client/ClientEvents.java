@@ -3,8 +3,8 @@ package net.dries007.tfc.client;
 import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 
 import net.minecraft.block.Block;
@@ -31,7 +31,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
@@ -110,15 +109,21 @@ public class ClientEvents {
     List<String> tt = event.getToolTip();
     if (!stack.isEmpty()) {
       // Stuff that should always be shown as part of the tooltip
-      ICapabilitySize size = CapabilitySize.getIItemSize(stack);
+      var size = CapabilitySize.getIItemSize(stack);
       if (size != null) {
         size.addSizeInfo(stack, tt);
       }
-      var cap = CapabilityHeat.get(stack);
-      if (cap != null) {
-        cap.addHeatInfo(stack, tt);
+
+      var sharpness = CapabilitySharpness.get(event.getItemStack());
+      if (sharpness != null) {
+        sharpness.addSharpnessInfo(stack, tt);
       }
-      IForgeable forging = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+
+      var heat = CapabilityHeat.get(stack);
+      if (heat != null) {
+        heat.addHeatInfo(stack, tt);
+      }
+      var forging = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
       if (forging != null && forging.getWork() > 0) {
         tt.add(I18n.format("tfc.tooltip.forging_in_progress"));
       }
@@ -136,8 +141,8 @@ public class ClientEvents {
         tt.add(I18n.format("tfc.tooltip.smithing_skill", skillValue));
       }
 
-      if (event.getFlags().isAdvanced()) // Only added with advanced tooltip mode
-      {
+      // Only added with advanced tooltip mode
+      if (event.getFlags().isAdvanced()) {
         var metalObject = CapabilityMetal.getMetalItem(stack);
         if (metalObject != null) {
           metalObject.addMetalInfo(stack, tt);

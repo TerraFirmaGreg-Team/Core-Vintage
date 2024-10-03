@@ -13,8 +13,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.eerussianguy.firmalife.ConfigFL;
-import com.eerussianguy.firmalife.init.PlantsFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
+import net.dries007.tfc.types.TreesTFCF;
 
 import java.util.Random;
 
@@ -85,6 +85,6 @@ public class WorldgenCinnamon extends WorldGenerator {
     int x = pos.getX() - 7 + rand.nextInt(14);
     int z = pos.getZ() - 7 + rand.nextInt(14);
     BlockPos genPos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
-    return PlantsFL.CINNAMON_TREE.isValidLocation(temp, rain, density) && generateCinnamon(world, rand, genPos, true);
+    return TreesTFCF.CINNAMON_TREE.isValidLocation(temp, rain, density) && generateCinnamon(world, rand, genPos, true);
   }
 }

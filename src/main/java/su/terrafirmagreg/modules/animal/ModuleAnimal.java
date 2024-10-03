@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal;
 
-import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import static su.terrafirmagreg.modules.ModuleContainer.ANIMAL;
 import static su.terrafirmagreg.modules.core.ModuleCore.TAB;
 
-@Module(moduleID = ANIMAL)
+@ModuleInfo(moduleID = ANIMAL)
 public final class ModuleAnimal extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAnimal.class.getSimpleName());

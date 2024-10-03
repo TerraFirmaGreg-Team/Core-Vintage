@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.world.classic.objects.generator;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
@@ -16,8 +17,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -91,8 +90,8 @@ public class GeneratorSoilPits implements IWorldGenerator {
         if (flag && rng.nextInt(15) == 0) {
           final BlockPos pos = world.getTopSolidOrLiquidBlock(posHorizontal);
 
-          for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-            if (plant.getIsClayMarking()) {
+          for (PlantType plant : PlantType.getTypes()) {
+            if (plant.isClayMarking()) {
               BlockPlant plantBlock = BlockPlant.get(plant);
               IBlockState state = plantBlock.getDefaultState();
               int plantAge = plant.getAgeForWorldgen(rng, Climate.getActualTemp(world, pos));

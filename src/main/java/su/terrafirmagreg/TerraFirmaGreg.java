@@ -28,6 +28,7 @@ import static su.terrafirmagreg.data.Constants.MOD_NAME;
 import static su.terrafirmagreg.data.Constants.MOD_VERSION;
 import static su.terrafirmagreg.data.Constants.SERVER_PROXY;
 
+@SuppressWarnings("unused")
 @Mod(modid = MOD_ID, version = MOD_VERSION, name = MOD_NAME, dependencies = DEPENDENCIES)
 public class TerraFirmaGreg {
 
@@ -39,7 +40,6 @@ public class TerraFirmaGreg {
 
   @Getter
   @Mod.Instance(MOD_ID)
-  @SuppressWarnings("unused")
   private static TerraFirmaGreg instance;
 
   private final ModuleManager moduleManager;
@@ -49,7 +49,6 @@ public class TerraFirmaGreg {
   }
 
   @EventHandler
-  @SuppressWarnings("unused")
   public void onConstruction(FMLConstructionEvent event) {
     AnnotationUtils.setAsmData(event.getASMHarvestedData());
 
@@ -58,55 +57,46 @@ public class TerraFirmaGreg {
   }
 
   @EventHandler
-  @SuppressWarnings("unused")
   public void preInit(FMLPreInitializationEvent event) {
     this.moduleManager.routeFMLStateEvent(event);
   }
 
   @EventHandler
-  @SuppressWarnings("unused")
   public void init(FMLInitializationEvent event) {
     this.moduleManager.routeFMLStateEvent(event);
   }
 
   @EventHandler
-  @SuppressWarnings("unused")
   public void postInit(FMLPostInitializationEvent event) {
     this.moduleManager.routeFMLStateEvent(event);
   }
 
   @EventHandler
-  @SuppressWarnings("unused")
   public void loadComplete(FMLLoadCompleteEvent event) {
     this.moduleManager.routeFMLStateEvent(event);
   }
 
   @EventHandler
-  @SuppressWarnings("unused")
   public void serverAboutToStart(FMLServerAboutToStartEvent event) {
     this.moduleManager.routeFMLStateEvent(event);
   }
 
   @EventHandler
-  @SuppressWarnings("unused")
   public void serverStarting(FMLServerStartingEvent event) {
     this.moduleManager.routeFMLStateEvent(event);
   }
 
   @EventHandler
-  @SuppressWarnings("unused")
   public void serverStarted(FMLServerStartedEvent event) {
     this.moduleManager.routeFMLStateEvent(event);
   }
 
   @EventHandler
-  @SuppressWarnings("unused")
   public void serverStopping(FMLServerStoppingEvent event) {
     this.moduleManager.routeFMLStateEvent(event);
   }
 
   @EventHandler
-  @SuppressWarnings("unused")
   public void serverStopped(FMLServerStoppedEvent event) {
     this.moduleManager.routeFMLStateEvent(event);
   }

@@ -31,7 +31,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantEmergentTallWater;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantWater;
-import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantWaterTFCF;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.util.agriculture.Crop;
@@ -275,7 +275,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
       return super.canBlockStay(worldIn, pos, state);
     } else {
       IBlockState soil = worldIn.getBlockState(pos.down());
-      if (!(soil.getBlock() instanceof BlockWaterPlantTFCF) && !(soil.getBlock() instanceof BlockPlantWater)) {
+      if (!(soil.getBlock() instanceof BlockPlantWaterTFCF) && !(soil.getBlock() instanceof BlockPlantWater)) {
         if (state.getBlock() != this) {
           return this.canSustainBush(soil);
         } else {

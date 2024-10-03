@@ -1,6 +1,8 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
@@ -18,10 +20,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.util.climate.Climate;
-import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +39,7 @@ import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
 import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
 import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 
-public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
+public class BlockPlantCreepingTFCF extends BlockPlantDummy2 {
 
   private static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
   private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.0D, 0.875D, 0.0D, 1.0D, 1.0D, 1.0D);
@@ -47,19 +47,19 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
   private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
   private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.125D);
   private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
-  private static final Map<Plant, BlockCreepingPlantTFCF> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantCreepingTFCF> MAP = new HashMap<>();
 
-  public BlockCreepingPlantTFCF(Plant plant) {
+  public BlockPlantCreepingTFCF(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
 
-    plant.getOreDictName().ifPresent(name -> OreDictionaryHelper.register(this, name));
+    plant.getOreDictName().ifPresent(name -> OreDictUtils.register(this, name));
   }
 
-  public static BlockCreepingPlantTFCF get(Plant plant) {
-    return BlockCreepingPlantTFCF.MAP.get(plant);
+  public static BlockPlantCreepingTFCF get(PlantType plant) {
+    return BlockPlantCreepingTFCF.MAP.get(plant);
   }
 
   @Override

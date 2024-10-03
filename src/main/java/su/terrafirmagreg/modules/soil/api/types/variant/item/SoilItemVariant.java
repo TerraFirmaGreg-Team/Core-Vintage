@@ -48,11 +48,11 @@ public class SoilItemVariant extends VariantItem<SoilItemVariant, SoilType> {
   }
 
   public String getLocalizedName() {
-    return new TextComponentTranslation(String.format("soil.type.%s.name", this)).getFormattedText();
+    return new TextComponentTranslation(String.format("soil.variant.%s.name", this)).getFormattedText();
   }
 
-  public String getRegistryKey(Variant<?, RockType> variant) {
-    return String.format("soil/%s/%s", variant, this);
+  public String getRegistryKey(SoilType type) {
+    return String.format("soil/%s/%s", this.getName(), type);
   }
 
   public static class Builder {

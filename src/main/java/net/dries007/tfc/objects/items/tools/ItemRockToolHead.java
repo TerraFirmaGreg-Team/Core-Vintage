@@ -2,11 +2,12 @@ package net.dries007.tfc.objects.items.tools;
 
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
+import net.dries007.tfc.api.types.ToolType;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -20,11 +21,11 @@ import java.util.Map;
 
 public class ItemRockToolHead extends ItemTFC implements IRockObject {
 
-  private static final EnumMap<Rock.ToolType, Map<RockCategory, ItemRockToolHead>> TABLE = new EnumMap<>(Rock.ToolType.class);
+  private static final EnumMap<ToolType, Map<RockCategory, ItemRockToolHead>> TABLE = new EnumMap<>(ToolType.class);
   private final RockCategory category;
-  private final Rock.ToolType type;
+  private final ToolType type;
 
-  public ItemRockToolHead(RockCategory category, Rock.ToolType type) {
+  public ItemRockToolHead(RockCategory category, ToolType type) {
     this.type = type;
     this.category = category;
     if (!TABLE.containsKey(type)) {
@@ -36,7 +37,7 @@ public class ItemRockToolHead extends ItemTFC implements IRockObject {
     OreDictionaryHelper.register(this, type, "head", category);
   }
 
-  public static ItemRockToolHead get(RockCategory cat, Rock.ToolType type) {
+  public static ItemRockToolHead get(RockCategory cat, ToolType type) {
     return TABLE.get(type).get(cat);
   }
 
@@ -52,7 +53,7 @@ public class ItemRockToolHead extends ItemTFC implements IRockObject {
 
   @Nullable
   @Override
-  public Rock getRock(ItemStack stack) {
+  public RockType getRock(ItemStack stack) {
     return null;
   }
 

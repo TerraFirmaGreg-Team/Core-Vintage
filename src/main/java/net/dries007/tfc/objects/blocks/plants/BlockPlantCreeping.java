@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
@@ -18,7 +19,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -48,16 +48,16 @@ public class BlockPlantCreeping extends BlockPlant {
   private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.125D);
   private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
 
-  private static final Map<Plant, BlockPlantCreeping> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantCreeping> MAP = new HashMap<>();
 
-  public BlockPlantCreeping(Plant plant) {
+  public BlockPlantCreeping(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockPlantCreeping get(Plant plant) {
+  public static BlockPlantCreeping get(PlantType plant) {
     return BlockPlantCreeping.MAP.get(plant);
   }
 

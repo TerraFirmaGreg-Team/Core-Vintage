@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.rock;
 
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
-import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypeHandler;
@@ -22,7 +22,7 @@ import java.util.List;
 
 import static su.terrafirmagreg.modules.ModuleContainer.ROCK;
 
-@Module(moduleID = ROCK)
+@ModuleInfo(moduleID = ROCK)
 public final class ModuleRock extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleRock.class.getSimpleName());

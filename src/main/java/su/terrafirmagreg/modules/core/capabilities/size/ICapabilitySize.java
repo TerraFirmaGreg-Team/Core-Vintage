@@ -1,11 +1,14 @@
 package su.terrafirmagreg.modules.core.capabilities.size;
 
+import su.terrafirmagreg.api.base.item.BaseItem;
+import su.terrafirmagreg.api.base.item.BaseItemBlock;
 import su.terrafirmagreg.api.util.TranslatorUtil;
 import su.terrafirmagreg.data.Unicode;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -18,16 +21,15 @@ import java.util.List;
  * {@link ICapabilitySize#getStackSize} If you implement the capability, TFC will try and auto-adjust the max stacksize of the item for you Otherwise, your item
  * will be assigned a default capability on creation
  *
- * @see net.dries007.tfc.objects.items.ItemTFC
- * @see net.dries007.tfc.objects.items.itemblock.ItemBlockTFC
+ * @see BaseItem
+ * @see BaseItemBlock
  */
 public interface ICapabilitySize {
 
   @SideOnly(Side.CLIENT)
   default void addSizeInfo(ItemStack stack, List<String> text) {
-    text.add(Unicode.WEIGHT + " " + I18n.format(TranslatorUtil.getEnumName(getWeight(stack))) + " "
-             + Unicode.SIZE + " " +
-             I18n.format(TranslatorUtil.getEnumName(getSize(stack))));
+    text.add(Unicode.WEIGHT + " " + I18n.format(TranslatorUtil.getEnumName(getWeight(stack))) + " " + Unicode.SIZE + " "
+             + I18n.format(TranslatorUtil.getEnumName(getSize(stack))));
   }
 
   default Weight getWeight(ItemStack stack) {
@@ -39,7 +41,7 @@ public interface ICapabilitySize {
   }
 
   /**
-   * Should be called from {@link net.minecraft.item.Item#getItemStackLimit(ItemStack)}
+   * Should be called from {@link Item#getItemStackLimit(ItemStack)}
    */
   default int getStackSize(ItemStack stack) {
     return canStack(stack) ? getWeight(stack).getStackSize() : 1;

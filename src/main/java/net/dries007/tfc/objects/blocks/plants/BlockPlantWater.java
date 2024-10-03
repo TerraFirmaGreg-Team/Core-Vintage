@@ -1,13 +1,12 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import net.dries007.tfc.api.types.Plant;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,16 +17,16 @@ import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER
 
 public class BlockPlantWater extends BlockPlant {
 
-  private static final Map<Plant, BlockPlantWater> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantWater> MAP = new HashMap<>();
 
-  public BlockPlantWater(Plant plant) {
+  public BlockPlantWater(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockPlantWater get(Plant plant) {
+  public static BlockPlantWater get(PlantType plant) {
     return MAP.get(plant);
   }
 

@@ -62,7 +62,7 @@ import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
 import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
 import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 
-public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabilitySize, IItemFoodTFC {
+public class BlockPlantCaveMushroom extends BlockBush implements IGrowable, ICapabilitySize, IItemFoodTFC {
 
   private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.1D, 0.2D, 0.1D, 0.9D, 1.0D, 0.9D);
   private static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
@@ -70,12 +70,12 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
   private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.1D, 0.1D, 0.2D, 0.9D, 0.9D, 1.0D);
   private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.2D, 0.1D, 0.1D, 1.0D, 0.9D, 0.9D);
   private static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0.1D, 0.1D, 0.8D, 0.9D, 0.9D);
-  private static final Map<BlockCaveMushroom, ItemFoodTFCF> MAP = new HashMap<>();
+  private static final Map<BlockPlantCaveMushroom, ItemFoodTFCF> MAP = new HashMap<>();
   protected final BlockStateContainer blockState;
   public FoodData data;
   ArrayList<PotionEffectToHave> PotionEffects = new ArrayList<PotionEffectToHave>();
 
-  public BlockCaveMushroom(float lightLevel, FoodData data, Object... oreNameParts) {
+  public BlockPlantCaveMushroom(float lightLevel, FoodData data, Object... oreNameParts) {
     super(Material.PLANTS);
 
     this.setTickRandomly(true);
@@ -102,7 +102,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
     return MAP.get(food);
   }
 
-  public static ItemStack get(BlockCaveMushroom food, int amount) {
+  public static ItemStack get(BlockPlantCaveMushroom food, int amount) {
     return new ItemStack(MAP.get(food), amount);
   }
 

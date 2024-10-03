@@ -36,7 +36,7 @@ public interface ISoilBlock extends IType<SoilType>, IVariant<SoilBlockVariant>,
     IBlockState blockState = this.getBlock().getDefaultState();
 
     if (plantable instanceof BlockPlant plant) {
-      switch (plant.getPlantTypeTFC()) {
+      switch (plant.getEnumPlantType()) {
         case CLAY -> {
           return BlockUtils.isVariant(getVariant(), DIRT, GRASS, DRY_GRASS, COARSE_DIRT, MUD, PODZOL, SPARSE_GRASS) && BlockUtils.isClay(blockState);
         }

@@ -15,15 +15,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.objects.blocks.plants.BlockTallGrassWater;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantTallGrassWater;
 
 import org.jetbrains.annotations.NotNull;
 
 public class ItemBlockTallGrassWater extends ItemBlockTFC {
 
-  protected final BlockTallGrassWater block;
+  protected final BlockPlantTallGrassWater block;
 
-  public ItemBlockTallGrassWater(BlockTallGrassWater block) {
+  public ItemBlockTallGrassWater(BlockPlantTallGrassWater block) {
     super(block);
     this.block = block;
   }

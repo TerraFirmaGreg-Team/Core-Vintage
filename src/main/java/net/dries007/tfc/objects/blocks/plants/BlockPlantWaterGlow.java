@@ -48,7 +48,7 @@ import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
 import static su.terrafirmagreg.data.Properties.BoolProp.UP;
 import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
 
-public class BlockWaterGlowPlant extends BlockFluidTFC implements ICapabilitySize, IPlantable {
+public class BlockPlantWaterGlow extends BlockFluidTFC implements ICapabilitySize, IPlantable {
 
 
   private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.1D, 0.2D, 0.1D, 0.9D, 1.0D, 0.9D);
@@ -58,11 +58,11 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements ICapabilitySiz
   private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.2D, 0.1D, 0.1D, 1.0D, 0.9D, 0.9D);
   private static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0.1D, 0.1D, 0.8D, 0.9D, 0.9D);
 
-  public BlockWaterGlowPlant(Fluid fluid) {
+  public BlockPlantWaterGlow(Fluid fluid) {
     this(fluid, Material.WATER);
   }
 
-  public BlockWaterGlowPlant(Fluid fluid, Material materialIn) {
+  public BlockPlantWaterGlow(Fluid fluid, Material materialIn) {
     super(fluid, Material.WATER, false);
     this.setSoundType(SoundType.PLANT);
     this.setHardness(0.0F);
@@ -195,7 +195,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements ICapabilitySiz
   @Override
   @SideOnly(Side.CLIENT)
   public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
-    if (state.getBlock() instanceof BlockWaterGlowPlant) {
+    if (state.getBlock() instanceof BlockPlantWaterGlow) {
       return state.getBoundingBox(worldIn, pos).offset(pos);
     }
     return null;
@@ -209,7 +209,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements ICapabilitySiz
       if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
            BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
           (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
-           up.getBlock() instanceof BlockWaterGlowPlant)) {
+           up.getBlock() instanceof BlockPlantWaterGlow)) {
         return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
       }
     }
@@ -346,7 +346,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements ICapabilitySiz
       if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
            BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
           (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
-           up.getBlock() instanceof BlockWaterGlowPlant)) {
+           up.getBlock() instanceof BlockPlantWaterGlow)) {
         return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
       }
     }
@@ -370,6 +370,6 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements ICapabilitySiz
 
   @Override
   public boolean canCollideCheck(IBlockState state, boolean fullHit) {
-    return state.getBlock() instanceof BlockWaterGlowPlant && super.canCollideCheck(state, fullHit);
+    return state.getBlock() instanceof BlockPlantWaterGlow && super.canCollideCheck(state, fullHit);
   }
 }

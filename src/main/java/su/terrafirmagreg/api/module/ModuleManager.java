@@ -39,7 +39,7 @@ public final class ModuleManager {
 
   private static IModule getCoreModule(List<IModule> modules) {
     return modules.stream()
-                  .filter(module -> module.getClass().getAnnotation(Module.class).coreModule())
+                  .filter(module -> module.getClass().getAnnotation(ModuleInfo.class).coreModule())
                   .findFirst()
                   .orElse(null);
   }
@@ -60,8 +60,7 @@ public final class ModuleManager {
 
     modules.forEach((container, containerModules) -> {
       IModule coreModule = getCoreModule(containerModules);
-      Preconditions.checkNotNull(coreModule,
-                                 "Could not find core module for module container " + container);
+      Preconditions.checkNotNull(coreModule, "Could not find core module for module container " + container);
 
       containerModules.remove(coreModule);
       containerModules.add(0, coreModule);
@@ -75,7 +74,7 @@ public final class ModuleManager {
       toLoad.addAll(
         containerModules.stream()
                         .filter(this::isModuleEnabled)
-                        .map(module -> new ResourceLocation(container, module.getClass().getAnnotation(Module.class).moduleID().getName()))
+                        .map(module -> new ResourceLocation(container, module.getClass().getAnnotation(ModuleInfo.class).moduleID().getName()))
                         .collect(Collectors.toSet())
       );
     });
@@ -83,7 +82,7 @@ public final class ModuleManager {
     modulesToLoad.removeIf(module -> {
       Set<ResourceLocation> dependencies = module.getDependencyUids();
       if (!toLoad.containsAll(dependencies)) {
-        Module annotation = module.getClass().getAnnotation(Module.class);
+        ModuleInfo annotation = module.getClass().getAnnotation(ModuleInfo.class);
         String moduleID = annotation.moduleID().getName();
         toLoad.remove(new ResourceLocation(moduleID));
         ModuleManager.LOGGER.info("Module {} is missing at least one of module dependencies: {}, skipping loading...", moduleID, dependencies);
@@ -97,7 +96,7 @@ public final class ModuleManager {
                                                    .collect(Collectors.toList());
 
     sortedModulesList.forEach(module -> {
-      var annotation = module.getClass().getAnnotation(Module.class).moduleID();
+      var annotation = module.getClass().getAnnotation(ModuleInfo.class).moduleID();
       sortedModules.put(new ResourceLocation(annotation.getID(), annotation.getName()), module);
     });
 
@@ -105,16 +104,16 @@ public final class ModuleManager {
   }
 
   private Map<String, List<IModule>> getModules() {
-    return AnnotationUtils.getAnnotations(Module.class, IModule.class).keySet().stream()
+    return AnnotationUtils.getAnnotations(ModuleInfo.class, IModule.class).keySet().stream()
                           .collect(Collectors.groupingBy(
-                            module -> module.getClass().getAnnotation(Module.class).moduleID().getID(),
+                            module -> module.getClass().getAnnotation(ModuleInfo.class).moduleID().getID(),
                             LinkedHashMap::new,
                             Collectors.toList()
                           ));
   }
 
   public boolean isModuleEnabled(IModule module) {
-    var annotation = module.getClass().getAnnotation(Module.class);
+    var annotation = module.getClass().getAnnotation(ModuleInfo.class);
     return annotation.moduleID().isEnabled();
   }
 

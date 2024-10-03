@@ -11,13 +11,11 @@ public class StorageSize implements IStorage<ICapabilitySize> {
 
   @Nullable
   @Override
-  public NBTBase writeNBT(Capability<ICapabilitySize> capability, ICapabilitySize instance,
-                          EnumFacing side) {
+  public NBTBase writeNBT(Capability<ICapabilitySize> capability, ICapabilitySize instance, EnumFacing side) {
     return null;
   }
 
   @Override
-  public void readNBT(Capability<ICapabilitySize> capability, ICapabilitySize instance,
-                      EnumFacing side, NBTBase nbt) {
+  public void readNBT(Capability<ICapabilitySize> capability, ICapabilitySize instance, EnumFacing side, NBTBase nbt) {
   }
 }

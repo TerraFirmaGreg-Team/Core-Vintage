@@ -1,5 +1,6 @@
 package su.terrafirmagreg.data.lib.types.variant.item;
 
+import su.terrafirmagreg.data.lib.types.type.Type;
 import su.terrafirmagreg.data.lib.types.variant.Variant;
 
 import net.minecraft.item.Item;
@@ -11,7 +12,7 @@ import lombok.Getter;
 import java.util.Map;
 
 @Getter
-public abstract class VariantItem<V, T> extends Variant<V, T> {
+public abstract class VariantItem<V, T extends Type<T>> extends Variant<V, T> {
 
   protected final Map<T, Item> map;
 
@@ -30,4 +31,7 @@ public abstract class VariantItem<V, T> extends Variant<V, T> {
     return item;
   }
 
+  public abstract String getRegistryKey(T type);
+
+  public abstract String getLocalizedName();
 }

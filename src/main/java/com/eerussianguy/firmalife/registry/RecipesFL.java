@@ -13,7 +13,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.init.Fruit;
-import com.eerussianguy.firmalife.init.PlantsFL;
 import com.eerussianguy.firmalife.recipe.CrackingRecipe;
 import com.eerussianguy.firmalife.recipe.DryingRecipe;
 import com.eerussianguy.firmalife.recipe.NutRecipe;
@@ -22,7 +21,6 @@ import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.recipe.StrainingRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -158,11 +156,14 @@ public class RecipesFL {
     );
 
     // this makes me laugh for some reason...
-    PlantsFL.WRAPPERS.forEach(plant -> {
-      BlockPlant block = BlockPlant.get(plant);
-      r.register(new PlanterRecipe(IIngredient.of(block), new ItemStack(block), 1, false).setRegistryName(plant.getRegistryName()
-                                                                                                               .getPath()));
-    });
+//    r.register(new PlanterRecipe(IIngredient.of(BlockPlant.get(PlantTypes.BASIL)), new ItemStack(BlockPlant.get(PlantTypes.BASIL)), 1, false).setRegistryName(PlantTypes.BASIL.getName()));
+//    r.register(new PlanterRecipe(IIngredient.of(BlockPlant.get(PlantTypes.BAY_LAUREL)), new ItemStack(BlockPlant.get(PlantTypes.BAY_LAUREL)), 1, false).setRegistryName(PlantTypes.BAY_LAUREL.getName()));
+//    r.register(new PlanterRecipe(IIngredient.of(BlockPlant.get(PlantTypes.CARDAMOM)), new ItemStack(BlockPlant.get(PlantTypes.CARDAMOM)), 1, false).setRegistryName(PlantTypes.CARDAMOM.getName()));
+//    r.register(new PlanterRecipe(IIngredient.of(BlockPlant.get(PlantTypes.CILANTRO)), new ItemStack(BlockPlant.get(PlantTypes.CILANTRO)), 1, false).setRegistryName(PlantTypes.CILANTRO.getName()));
+//    r.register(new PlanterRecipe(IIngredient.of(BlockPlant.get(PlantTypes.CUMIN)), new ItemStack(BlockPlant.get(PlantTypes.CUMIN)), 1, false).setRegistryName(PlantTypes.CUMIN.getName()));
+//    r.register(new PlanterRecipe(IIngredient.of(BlockPlant.get(PlantTypes.OREGANO)), new ItemStack(BlockPlant.get(PlantTypes.OREGANO)), 1, false).setRegistryName(PlantTypes.OREGANO.getName()));
+//    r.register(new PlanterRecipe(IIngredient.of(BlockPlant.get(PlantTypes.PIMENTO)), new ItemStack(BlockPlant.get(PlantTypes.PIMENTO)), 1, false).setRegistryName(PlantTypes.PIMENTO.getName()));
+//    r.register(new PlanterRecipe(IIngredient.of(BlockPlant.get(PlantTypes.VANILLA)), new ItemStack(BlockPlant.get(PlantTypes.VANILLA)), 1, false).setRegistryName(PlantTypes.VANILLA.getName()));
   }
 
   @SubscribeEvent

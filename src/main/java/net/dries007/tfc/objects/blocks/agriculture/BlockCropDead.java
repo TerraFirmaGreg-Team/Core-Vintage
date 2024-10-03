@@ -25,7 +25,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantEmergentTallWater;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantWater;
-import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantWaterTFCF;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.skills.SimpleSkill;
@@ -156,7 +156,7 @@ public class BlockCropDead extends BlockBush { //implements IGrowingPlant
       return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
     } else {
       soil = worldIn.getBlockState(pos.down());
-      if (!(soil.getBlock() instanceof BlockWaterPlantTFCF) && !(soil.getBlock() instanceof BlockPlantWater)) {
+      if (!(soil.getBlock() instanceof BlockPlantWaterTFCF) && !(soil.getBlock() instanceof BlockPlantWater)) {
         if (state.getBlock() != this) {
           return this.canSustainBush(soil);
         } else {

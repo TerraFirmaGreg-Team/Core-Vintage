@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.cave;
 
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import net.minecraft.block.state.IBlockState;
@@ -9,8 +10,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.plants.BlockHangingPlantTFCF;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantHangingTFCF;
 import net.dries007.tfc.util.climate.Climate;
 
 import java.util.Random;
@@ -19,15 +19,15 @@ import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
 
 public class GeneratorCaveVines extends WorldGenerator {
 
-  private Plant plant;
+  private PlantType plant;
 
-  public void setGeneratedPlant(Plant plantIn) {
+  public void setGeneratedPlant(PlantType plantIn) {
     this.plant = plantIn;
   }
 
   @Override
   public boolean generate(World worldIn, Random rng, BlockPos pos) {
-    BlockHangingPlantTFCF plantBlock = BlockHangingPlantTFCF.get(plant);
+    BlockPlantHangingTFCF plantBlock = BlockPlantHangingTFCF.get(plant);
     IBlockState state = plantBlock.getDefaultState();
 
     for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 4; ++i) {

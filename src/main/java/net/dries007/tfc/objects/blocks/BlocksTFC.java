@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.modules.plant.api.types.category.PlantCategories;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -20,7 +23,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
@@ -271,12 +273,12 @@ public final class BlocksTFC {
 
       Builder<BlockPlant> b = ImmutableList.builder();
       Builder<BlockFlowerPotTFC> pots = ImmutableList.builder();
-      for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-        if (plant.getPlantType() != Plant.PlantType.SHORT_GRASS && plant.getPlantType() != Plant.PlantType.TALL_GRASS) {
-          b.add(register(r, "plants/" + plant.getRegistryName().getPath(), plant.getPlantType().create(plant), CT_FLORA));
+      for (PlantType plant : PlantType.getTypes()) {
+        if (plant.getCategory() != PlantCategories.SHORT_GRASS && plant.getCategory() != PlantCategories.TALL_GRASS) {
+          b.add(register(r, "plants/" + plant.getName(), plant.getCategory().create(plant), CT_FLORA));
         }
         if (plant.canBePotted()) {
-          pots.add(register(r, "flowerpot/" + plant.getRegistryName().getPath(), new BlockFlowerPotTFC(plant)));
+          pots.add(register(r, "flowerpot/" + plant.getName(), new BlockFlowerPotTFC(plant)));
         }
       }
       allPlantBlocks = b.build();
@@ -295,9 +297,9 @@ public final class BlocksTFC {
 
     {
       Builder<BlockPlant> b = ImmutableList.builder();
-      for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-        if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS || plant.getPlantType() == Plant.PlantType.TALL_GRASS) {
-          b.add(register(r, "plants/" + plant.getRegistryName().getPath(), plant.getPlantType().create(plant), CT_FLORA));
+      for (PlantType plant : PlantType.getTypes()) {
+        if (plant.getCategory() == PlantCategories.SHORT_GRASS || plant.getCategory() == PlantCategories.TALL_GRASS) {
+          b.add(register(r, "plants/" + plant.getName(), plant.getCategory().create(plant), CT_FLORA));
         }
       }
       allGrassBlocks = b.build();

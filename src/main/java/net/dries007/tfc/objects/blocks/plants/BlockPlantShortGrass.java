@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
@@ -20,7 +21,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IShearable;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -41,16 +41,16 @@ public class BlockPlantShortGrass extends BlockPlant implements IShearable {
   private static final AxisAlignedBB SHORTER_GRASS_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 0.5, 0.875);
   private static final AxisAlignedBB SHORT_GRASS_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 0.75, 0.875);
   private static final AxisAlignedBB SHORTEST_GRASS_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 0.25, 0.875);
-  private static final Map<Plant, BlockPlantShortGrass> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantShortGrass> MAP = new HashMap<>();
 
-  public BlockPlantShortGrass(Plant plant) {
+  public BlockPlantShortGrass(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockPlantShortGrass get(Plant plant) {
+  public static BlockPlantShortGrass get(PlantType plant) {
     return MAP.get(plant);
   }
 

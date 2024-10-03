@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.core;
 
 import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
-import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
@@ -32,7 +32,7 @@ import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayTemperature;
 import su.terrafirmagreg.modules.core.event.EventHandlerAmbiental;
 import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesChunk;
 import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesEntity;
-import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesItem;
+import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesItemStack;
 import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesWorld;
 import su.terrafirmagreg.modules.core.event.EventHandlerConfigChanged;
 import su.terrafirmagreg.modules.core.event.EventHandlerDebugInfo;
@@ -54,11 +54,16 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectList;
+
 import org.jetbrains.annotations.NotNull;
 
-@Module(
+import java.util.List;
+
+@ModuleInfo(
   moduleID = ModuleContainer.CORE,
-  description = "Core TFG content. Disabling this disables the entire mod and all its module.",
+  desc = "Core TFG content. Disabling this disables the entire mod and all its module.",
   coreModule = true
 )
 public final class ModuleCore extends ModuleBase {
@@ -93,14 +98,6 @@ public final class ModuleCore extends ModuleBase {
     CapabilityPlayer.register();
     CapabilityTemperature.register();
     CapabilityDamageResistance.register();
-
-    MinecraftForge.EVENT_BUS.register(new EventHandlerAmbiental());
-    MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesChunk());
-    MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesWorld());
-    MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesItem());
-    MinecraftForge.EVENT_BUS.register(new EventHandlerCapabilitiesEntity());
-    MinecraftForge.EVENT_BUS.register(new EventHandlerPuddles());
-    MinecraftForge.EVENT_BUS.register(new EventHandlerConfigChanged());
 
   }
 
@@ -144,6 +141,21 @@ public final class ModuleCore extends ModuleBase {
   public void onClientRegister() {
     EntitiesCore.onClientRegister(registryManager);
 
+  }
+
+  @Override
+  public @NotNull List<Class<?>> getEventBusSubscribers() {
+    ObjectList<Class<?>> list = new ObjectArrayList<>();
+
+    list.add(EventHandlerAmbiental.class);
+    list.add(EventHandlerCapabilitiesChunk.class);
+    list.add(EventHandlerCapabilitiesWorld.class);
+    list.add(EventHandlerCapabilitiesItemStack.class);
+    list.add(EventHandlerCapabilitiesEntity.class);
+    list.add(EventHandlerPuddles.class);
+    list.add(EventHandlerConfigChanged.class);
+
+    return list;
   }
 
   @Override

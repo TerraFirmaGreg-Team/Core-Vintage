@@ -17,9 +17,11 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectList;
+
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 //@Module(moduleID = METAL)
@@ -69,7 +71,12 @@ public final class ModuleMetal extends ModuleBase {
 
   @Override
   public @NotNull List<Class<?>> getEventBusSubscribers() {
-    return Collections.singletonList(ModuleMetal.class);
+    ObjectList<Class<?>> list = new ObjectArrayList<>();
+    
+    list.add(ModuleMetal.class);
+    list.add(EventHandlerMaterial.class);
+
+    return list;
   }
 
   @Override

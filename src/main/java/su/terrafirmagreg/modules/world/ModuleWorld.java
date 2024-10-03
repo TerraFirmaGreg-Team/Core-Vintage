@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.world;
 
-import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.api.util.InjectorUtils;
 import su.terrafirmagreg.data.lib.LoggingHelper;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.modules.ModuleContainer.WORLD;
 
-@Module(moduleID = WORLD)
+@ModuleInfo(moduleID = WORLD)
 public final class ModuleWorld extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWorld.class.getSimpleName());

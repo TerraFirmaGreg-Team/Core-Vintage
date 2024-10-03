@@ -18,11 +18,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
-public class EventHandlerCapabilitiesItem {
+public class EventHandlerCapabilitiesItemStack {
 
   @SubscribeEvent
   public void attachItemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
-
     ItemStack stack = event.getObject();
     if (stack.isEmpty()) {
       return;

@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -14,8 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.Plant;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -27,16 +26,16 @@ import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 public class BlockPlantFloatingWater extends BlockPlant {
 
   private static final AxisAlignedBB LILY_PAD_AABB = new AxisAlignedBB(0.0D, -0.125D, 0.0D, 1.0D, 0.0625D, 1.0D);
-  private static final Map<Plant, BlockPlantFloatingWater> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantFloatingWater> MAP = new HashMap<>();
 
-  public BlockPlantFloatingWater(Plant plant) {
+  public BlockPlantFloatingWater(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockPlantFloatingWater get(Plant plant) {
+  public static BlockPlantFloatingWater get(PlantType plant) {
     return BlockPlantFloatingWater.MAP.get(plant);
   }
 

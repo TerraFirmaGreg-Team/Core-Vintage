@@ -28,10 +28,8 @@ public class GeneratorBerryBushes implements IWorldGenerator {
   }
 
   @Override
-  public void generate(Random random, int chunkX, int chunkZ, World world,
-                       IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-    if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0
-        && !BUSHES.isEmpty() &&
+  public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+    if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0 && !BUSHES.isEmpty() &&
         ConfigTFC.General.FOOD.berryBushRarity > 0) {
       if (random.nextInt(ConfigTFC.General.FOOD.berryBushRarity) == 0) {
         // Guarantees bush generation if possible (easier to balance by config file while also making it random)

@@ -4,6 +4,8 @@ import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -18,8 +20,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -90,7 +90,7 @@ public class ItemRockHoe extends ItemHoe implements ICapabilitySize, IRockObject
 
   @Nullable
   @Override
-  public Rock getRock(ItemStack stack) {
+  public RockType getRock(ItemStack stack) {
     return null;
   }
 

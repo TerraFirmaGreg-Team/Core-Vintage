@@ -1,11 +1,14 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.plant.api.types.category.PlantCategories;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -31,8 +34,6 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.Climate;
@@ -40,10 +41,31 @@ import net.dries007.tfc.util.climate.Climate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import java.util.Random;
 
 import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
 import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.CACTUS;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.CREEPING;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.DESERT;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.DESERT_TALL_PLANT;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.DRY;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.DRY_TALL_PLANT;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.EMERGENT_TALL_WATER;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.EMERGENT_TALL_WATER_SEA;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.HANGING;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.REED;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.REED_SEA;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.SHORT_GRASS;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_GRASS;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_REED;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_REED_SEA;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_WATER;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_WATER_SEA;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.WATER;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.WATER_SEA;
 
 public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
 
@@ -57,14 +79,15 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
 
   /* Growth Stage of the plant, tied to the month of year */
   public final PropertyInteger growthStageProperty;
-  protected final Plant plant;
+  @Getter
+  protected final PlantType plant;
   protected final BlockStateContainer blockState;
 
-  public BlockPlantTFCF(Plant plant) {
+  public BlockPlantTFCF(PlantType plant) {
     super(plant.getMaterial());
     //if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
 
-    plant.getOreDictName().ifPresent(name -> OreDictionaryHelper.register(this, name));
+    plant.getOreDictName().ifPresent(name -> OreDictUtils.register(this, name));
 
     this.plant = plant;
     this.growthStageProperty = PropertyInteger.create("stage", 0, plant.getNumStages());
@@ -170,8 +193,8 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
                                                                           .getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
                                                                                                                                         .getHarvestLevel(stack, "scythe", player, state)
                                                                                                                                    != -1)
-        && plant.getPlantType() != Plant.PlantType.SHORT_GRASS &&
-        plant.getPlantType() != Plant.PlantType.TALL_GRASS) {
+        && plant.getCategory() != PlantCategories.SHORT_GRASS &&
+        plant.getCategory() != TALL_GRASS) {
       spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
     }
     super.harvestBlock(worldIn, player, pos, state, te, stack);
@@ -202,34 +225,31 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
   public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player) {
     ItemStack stack = player.getHeldItemMainhand();
     IBlockState state = world.getBlockState(pos);
-    switch (plant.getPlantType()) {
-      case REED:
-      case REED_SEA:
-      case TALL_REED:
-      case TALL_REED_SEA:
-            /*case SHORT_GRASS:
-            case TALL_GRASS:*/
-        return (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-                                                                                             .getHarvestLevel(stack, "scythe", player, state) != -1);
-      default:
-        return true;
+    if (plant.getCategory() == REED || plant.getCategory() == REED_SEA || plant.getCategory() == TALL_REED || plant.getCategory() == TALL_REED_SEA
+        || plant.getCategory() == SHORT_GRASS || plant.getCategory() == TALL_GRASS) {
+      return (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1);
+
     }
+    return true;
   }
 
   private boolean isValidSoil(IBlockState state) {
-    return switch (plant.getPlantType()) {
-      case CACTUS, DESERT, DESERT_TALL_PLANT ->
-        BlockUtils.isSand(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-      case DRY, DRY_TALL_PLANT -> BlockUtils.isSand(state) || BlockUtils.isDryGrass(state) ||
-                                  state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-      case REED, REED_SEA, TALL_REED, TALL_REED_SEA -> BlockUtils.isSand(state) || BlockUtils.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY ||
-                                                       state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-      case WATER, TALL_WATER, EMERGENT_TALL_WATER, WATER_SEA, TALL_WATER_SEA, EMERGENT_TALL_WATER_SEA, CREEPING, HANGING ->
-        BlockUtils.isSand(state) || BlockUtils.isSoilOrGravel(state) || BlockUtils.isSoil(state) || BlockUtils.isGround(state) ||
-        state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-      default -> BlockUtils.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY ||
-                 state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-    };
+    if (plant.getCategory() == CACTUS || plant.getCategory() == DESERT || plant.getCategory() == DESERT_TALL_PLANT) {
+      return BlockUtils.isSand(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+    } else if (plant.getCategory() == DRY || plant.getCategory() == DRY_TALL_PLANT) {
+      return BlockUtils.isSand(state) || BlockUtils.isDryGrass(state) || state.getBlock() == Blocks.HARDENED_CLAY
+             || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+    } else if (plant.getCategory() == REED || plant.getCategory() == REED_SEA || plant.getCategory() == TALL_REED || plant.getCategory() == TALL_REED_SEA) {
+      return BlockUtils.isSand(state) || BlockUtils.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY
+             || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+    } else if (plant.getCategory() == WATER || plant.getCategory() == TALL_WATER || plant.getCategory() == EMERGENT_TALL_WATER
+               || plant.getCategory() == WATER_SEA || plant.getCategory() == TALL_WATER_SEA || plant.getCategory() == EMERGENT_TALL_WATER_SEA
+               || plant.getCategory() == CREEPING || plant.getCategory() == HANGING) {
+      return BlockUtils.isSand(state) || BlockUtils.isSoilOrGravel(state) || BlockUtils.isSoil(state) || BlockUtils.isGround(state)
+             || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+    }
+
+    return BlockUtils.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
   }
 
   public double getGrowthRate(World world, BlockPos pos) {
@@ -242,10 +262,6 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
 
   int getDayPeriod() {
     return Calendar.CALENDAR_TIME.getHourOfDay() / (ICalendar.HOURS_IN_DAY / 4);
-  }
-
-  public Plant getPlant() {
-    return plant;
   }
 
   @Override
@@ -268,7 +284,7 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
 
   @Override
   protected boolean canSustainBush(IBlockState state) {
-    if (plant.getIsClayMarking()) {
+    if (plant.isClayMarking()) {
       return BlockUtils.isClay(state) || isValidSoil(state);
     } else {
       return isValidSoil(state);
@@ -338,23 +354,11 @@ public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
   @Override
   @NotNull
   public EnumPlantType getPlantType(net.minecraft.world.IBlockAccess world, BlockPos pos) {
-    switch (plant.getPlantType()) {
-      case CACTUS:
-      case DESERT:
-      case DESERT_TALL_PLANT:
-        return EnumPlantType.Desert;
-      case FLOATING:
-      case FLOATING_SEA:
-        return EnumPlantType.Water;
-      case MUSHROOM:
-        return EnumPlantType.Cave;
-      default:
-        return EnumPlantType.Plains;
-    }
+    return plant.getCategory().getEnumPlantType();
   }
 
   @NotNull
-  public Plant.EnumPlantTypeTFC getPlantTypeTFC() {
-    return plant.getEnumPlantTypeTFC();
+  public PlantType.EnumType getEnumPlantType() {
+    return plant.getEnumPlantType();
   }
 }

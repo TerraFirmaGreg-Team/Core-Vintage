@@ -56,6 +56,11 @@ public class SoilBlockVariant extends VariantBlock<SoilBlockVariant, SoilType> {
     return new Builder(name);
   }
 
+  @Override
+  public String getRegistryKey(SoilType type) {
+    return String.format("soil/%s/%s", this.getName(), type);
+  }
+
   public String getLocalizedName() {
     return new TextComponentTranslation(String.format("soil.variant.%s.name", this)).getFormattedText();
   }

@@ -19,7 +19,7 @@ import net.dries007.tfc.util.calendar.Calendar;
 import lombok.Getter;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
@@ -30,6 +30,7 @@ import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.DRY_TALL_PLANT;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.EMERGENT_TALL_WATER;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.EMERGENT_TALL_WATER_SEA;
+import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.FLOATING_SEA;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.REED;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.REED_SEA;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_REED;
@@ -38,6 +39,8 @@ import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_WATER_SEA;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.WATER;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.WATER_SEA;
+import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.FRESH_WATER;
+import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER;
 
 @Getter
 public class PlantType extends Type<PlantType> {
@@ -79,7 +82,7 @@ public class PlantType extends Type<PlantType> {
   private final double movementMod;
 
   // Вариант блока растения
-  private final PlantCategory plantCategory;
+  private final PlantCategory category;
 
   // Материал, связанный с растением
   private final Material material;
@@ -112,10 +115,10 @@ public class PlantType extends Type<PlantType> {
     this.maxWaterDepth = builder.maxWaterDepth;
     this.movementMod = builder.movementMod;
 
-    this.plantCategory = builder.plantCategory;
+    this.category = builder.plantCategory;
     this.isClayMarking = builder.isClayMarking;
     this.isSwampPlant = builder.isSwampPlant;
-    this.material = plantCategory.getMaterial();
+    this.material = category.getMaterial();
     this.oreDictName = Optional.ofNullable(builder.oreDictName);
 
     if (!types.add(this)) {
@@ -125,24 +128,6 @@ public class PlantType extends Type<PlantType> {
 
   public static Builder builder(String name) {
     return new Builder(name);
-  }
-
-  /**
-   * Проверить, помечает ли это растение землю с глиной.
-   *
-   * @return true, если растение помечает землю с глиной, в противном случае - false
-   */
-  public boolean isClayMarking() {
-    return isClayMarking;
-  }
-
-  /**
-   * Проверить, может ли это растение появиться только в болотах.
-   *
-   * @return true, если растение может появиться только в болотах, в противном случае - false
-   */
-  public boolean isSwampPlant() {
-    return isSwampPlant;
   }
 
   /**
@@ -281,7 +266,11 @@ public class PlantType extends Type<PlantType> {
    * @return тип воды для растения
    */
   public IBlockState getWaterType() {
-    return plantCategory.getWaterType();
+    if (category == FLOATING_SEA || category == WATER_SEA || category == TALL_WATER_SEA || category == EMERGENT_TALL_WATER_SEA) {
+      return SALT_WATER;
+    } else {
+      return FRESH_WATER;
+    }
   }
 
   /**
@@ -301,7 +290,7 @@ public class PlantType extends Type<PlantType> {
    * @return true, если растение может быть посажено в горшок, иначе false
    */
   public boolean canBePotted() {
-    return plantCategory.isCanBePotted();
+    return category.isCanBePotted();
   }
 
   /**
@@ -310,22 +299,22 @@ public class PlantType extends Type<PlantType> {
    * @return тип растения
    */
   public final EnumType getEnumPlantType() {
-    if (plantCategory == DESERT || plantCategory == DESERT_TALL_PLANT) {
+    if (category == DESERT || category == DESERT_TALL_PLANT) {
       if (isClayMarking) {return EnumType.DESERT_CLAY;} else {return EnumType.NONE;}
 
-    } else if (plantCategory == DRY || plantCategory == DRY_TALL_PLANT) {
+    } else if (category == DRY || category == DRY_TALL_PLANT) {
       if (isClayMarking) {return EnumType.DRY_CLAY;} else {return EnumType.DRY;}
 
-    } else if (plantCategory == REED || plantCategory == TALL_REED) {
+    } else if (category == REED || category == TALL_REED) {
       return EnumType.FRESH_BEACH;
 
-    } else if (plantCategory == REED_SEA || plantCategory == TALL_REED_SEA) {
+    } else if (category == REED_SEA || category == TALL_REED_SEA) {
       return EnumType.SALT_BEACH;
 
-    } else if (plantCategory == WATER || plantCategory == TALL_WATER || plantCategory == EMERGENT_TALL_WATER) {
+    } else if (category == WATER || category == TALL_WATER || category == EMERGENT_TALL_WATER) {
       return EnumType.FRESH_WATER;
 
-    } else if (plantCategory == WATER_SEA || plantCategory == TALL_WATER_SEA || plantCategory == EMERGENT_TALL_WATER_SEA) {
+    } else if (category == WATER_SEA || category == TALL_WATER_SEA || category == EMERGENT_TALL_WATER_SEA) {
       return EnumType.SALT_WATER;
     }
     if (isClayMarking) {return EnumType.CLAY;} else {return EnumType.NONE;}
@@ -462,7 +451,11 @@ public class PlantType extends Type<PlantType> {
     // Установка стадий роста растения
     public Builder stages(int[] stages) {
       this.stages = stages;
-      this.numStages = (int) (Arrays.stream(stages).distinct().count() - 1);
+      HashSet<Integer> hashSet = new HashSet<>();
+      for (int stage : stages) {
+        hashSet.add(stage);
+      }
+      this.numStages = hashSet.size() <= 1 ? 1 : hashSet.size() - 1;
       return this;
     }
 

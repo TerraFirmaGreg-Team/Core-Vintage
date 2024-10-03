@@ -29,7 +29,7 @@ public class ContainerWoodChest extends Container {
     for (int j = 0; j < numRows; ++j) {
       for (int k = 0; k < 9; ++k) {
         this.addSlotToContainer(
-          new SlotChestTFC(chestInventory, k + j * 9, 8 + k * 18, 18 + j * 18));
+          new SlotWoodChest(chestInventory, k + j * 9, 8 + k * 18, 18 + j * 18));
       }
     }
 
@@ -97,9 +97,9 @@ public class ContainerWoodChest extends Container {
     return this.lowerChestInventory.isUsableByPlayer(playerIn);
   }
 
-  private static class SlotChestTFC extends Slot {
+  private static class SlotWoodChest extends Slot {
 
-    SlotChestTFC(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+    SlotWoodChest(IInventory inventoryIn, int index, int xPosition, int yPosition) {
       super(inventoryIn, index, xPosition, yPosition);
     }
 

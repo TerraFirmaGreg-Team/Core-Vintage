@@ -8,6 +8,7 @@ import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.metal.client.gui.GuiGlassworking;
 import su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil;
+import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -423,7 +424,7 @@ public final class TFCJEIPlugin implements IModPlugin {
       scrapingList.add(new ScrapingWrapper(ItemAnimalHide.get(HideType.SOAKED, size), ItemAnimalHide.get(HideType.SCRAPED, size)));
     }
     registry.addRecipes(scrapingList, SCRAPING_UID);
-    TFCRegistries.ROCK_CATEGORIES.forEach(category -> registry.addRecipeCatalyst(new ItemStack(ItemRockKnife.get(category)), SCRAPING_UID));
+    RockCategory.getCategories().forEach(category -> registry.addRecipeCatalyst(new ItemStack(ItemRockKnife.get(category)), SCRAPING_UID));
 
     //Custom handlers
     registry.handleRecipes(SaltingRecipe.class, SaltingRecipeWrapper::new, VanillaRecipeCategoryUid.CRAFTING);

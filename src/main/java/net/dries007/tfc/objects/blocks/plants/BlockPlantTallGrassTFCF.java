@@ -5,6 +5,7 @@ import su.terrafirmagreg.data.enums.EnumPlantPart;
 import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -22,7 +23,6 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.Climate;
@@ -37,19 +37,19 @@ import static su.terrafirmagreg.data.Properties.EnumProp.PLANT_PART;
 import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
 import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 
-public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable, ITallPlant {
+public class BlockPlantTallGrassTFCF extends BlockPlantShortGrassTFCF implements IGrowable, ITallPlant {
 
-  private static final Map<Plant, BlockTallGrassTFCF> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantTallGrassTFCF> MAP = new HashMap<>();
 
-  public BlockTallGrassTFCF(Plant plant) {
+  public BlockPlantTallGrassTFCF(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockTallGrassTFCF get(Plant plant) {
-    return BlockTallGrassTFCF.MAP.get(plant);
+  public static BlockPlantTallGrassTFCF get(PlantType plant) {
+    return BlockPlantTallGrassTFCF.MAP.get(plant);
   }
 
   @Override

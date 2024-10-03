@@ -4,6 +4,7 @@ import su.terrafirmagreg.data.enums.EnumPlantPart;
 import su.terrafirmagreg.data.lib.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -23,7 +24,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.Climate;
@@ -41,16 +41,16 @@ import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 
 public class BlockPlantTallGrass extends BlockPlantShortGrass implements IGrowable, ITallPlant {
 
-  private static final Map<Plant, BlockPlantTallGrass> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantTallGrass> MAP = new HashMap<>();
 
-  public BlockPlantTallGrass(Plant plant) {
+  public BlockPlantTallGrass(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockPlantTallGrass get(Plant plant) {
+  public static BlockPlantTallGrass get(PlantType plant) {
     return MAP.get(plant);
   }
 

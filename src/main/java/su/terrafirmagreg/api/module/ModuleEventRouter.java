@@ -45,7 +45,7 @@ public class ModuleEventRouter {
   private final Collection<IModule> loadedModules;
 
   @SuppressWarnings("rawtypes")
-  private final Map<Class<? extends FMLStateEvent>, IFMLStateEventRoute> routes;
+  private final Map<Class<? extends FMLStateEvent>, IModuleStateEventRoute> routes;
 
   public ModuleEventRouter(Collection<IModule> loadedModules) {
 
@@ -53,7 +53,7 @@ public class ModuleEventRouter {
     this.routes = new HashMap<>();
 
     this.routes.put(FMLConstructionEvent.class,
-                    (IFMLStateEventRoute<FMLConstructionEvent>) (event) ->
+                    (IModuleStateEventRoute<FMLConstructionEvent>) (event) ->
                       this.fireEvent(module -> {
                         module.getLogger().debug("Registering packets");
                         module.onNetworkRegister();
@@ -65,7 +65,7 @@ public class ModuleEventRouter {
                       })
     );
     this.routes.put(FMLPreInitializationEvent.class,
-                    (IFMLStateEventRoute<FMLPreInitializationEvent>) (event) ->
+                    (IModuleStateEventRoute<FMLPreInitializationEvent>) (event) ->
                       this.fireEvent(module -> {
                         module.getLogger().debug("Pre-Init start");
                         module.onPreInit(event);
@@ -87,7 +87,7 @@ public class ModuleEventRouter {
                       })
     );
     this.routes.put(FMLInitializationEvent.class,
-                    (IFMLStateEventRoute<FMLInitializationEvent>) (event) ->
+                    (IModuleStateEventRoute<FMLInitializationEvent>) (event) ->
                       this.fireEvent(module -> {
                         module.getLogger().debug("Init start");
                         module.onInit(event);
@@ -101,7 +101,7 @@ public class ModuleEventRouter {
                       })
     );
     this.routes.put(FMLPostInitializationEvent.class,
-                    (IFMLStateEventRoute<FMLPostInitializationEvent>) (event) ->
+                    (IModuleStateEventRoute<FMLPostInitializationEvent>) (event) ->
                       this.fireEvent(module -> {
                         module.getLogger().debug("Post-Init start");
                         module.onPostInit(event);
@@ -115,7 +115,7 @@ public class ModuleEventRouter {
                       })
     );
     this.routes.put(FMLLoadCompleteEvent.class,
-                    (IFMLStateEventRoute<FMLLoadCompleteEvent>) (event) ->
+                    (IModuleStateEventRoute<FMLLoadCompleteEvent>) (event) ->
                       this.fireEvent(module -> {
                         module.getLogger().debug("Load-complete start");
                         module.onLoadComplete(event);
@@ -123,7 +123,7 @@ public class ModuleEventRouter {
                       })
     );
     this.routes.put(FMLServerAboutToStartEvent.class,
-                    (IFMLStateEventRoute<FMLServerAboutToStartEvent>) (event) ->
+                    (IModuleStateEventRoute<FMLServerAboutToStartEvent>) (event) ->
                       this.fireEvent(module -> {
                         module.getLogger().debug("Server-about-to-start start");
                         module.onServerAboutToStart(event);
@@ -131,7 +131,7 @@ public class ModuleEventRouter {
                       })
     );
     this.routes.put(FMLServerStartingEvent.class,
-                    (IFMLStateEventRoute<FMLServerStartingEvent>) (event) ->
+                    (IModuleStateEventRoute<FMLServerStartingEvent>) (event) ->
                       this.fireEvent(module -> {
                         module.getLogger().debug("Server-starting start");
                         module.onServerStarting(event);
@@ -140,7 +140,7 @@ public class ModuleEventRouter {
                       })
     );
     this.routes.put(FMLServerStartedEvent.class,
-                    (IFMLStateEventRoute<FMLServerStartedEvent>) (event) ->
+                    (IModuleStateEventRoute<FMLServerStartedEvent>) (event) ->
                       this.fireEvent(module -> {
                         module.getLogger().debug("Server-started start");
                         module.onServerStarted(event);
@@ -148,7 +148,7 @@ public class ModuleEventRouter {
                       })
     );
     this.routes.put(FMLServerStoppingEvent.class,
-                    (IFMLStateEventRoute<FMLServerStoppingEvent>) (event) ->
+                    (IModuleStateEventRoute<FMLServerStoppingEvent>) (event) ->
                       this.fireEvent(module -> {
                         module.getLogger().debug("Server-stopping start");
                         module.onServerStopping(event);
@@ -156,7 +156,7 @@ public class ModuleEventRouter {
                       })
     );
     this.routes.put(FMLServerStoppedEvent.class,
-                    (IFMLStateEventRoute<FMLServerStoppedEvent>) (event) ->
+                    (IModuleStateEventRoute<FMLServerStoppedEvent>) (event) ->
                       this.fireEvent(module -> {
                         module.getLogger().debug("Server-stopped start");
                         module.onServerStopped(event);
@@ -175,7 +175,7 @@ public class ModuleEventRouter {
 
   protected <E extends FMLStateEvent> void routeFMLStateEvent(E event) {
     //noinspection unchecked
-    IFMLStateEventRoute<E> route = this.routes.get(event.getClass());
+    IModuleStateEventRoute<E> route = this.routes.get(event.getClass());
     Preconditions.checkNotNull(route, "No route found for event: %s", event.getClass());
 
     route.routeEvent(event);

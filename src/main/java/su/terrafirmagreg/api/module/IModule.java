@@ -33,69 +33,51 @@ public interface IModule {
 
   // ===== FML Lifecycle
 
-  default void onConstruction(FMLConstructionEvent event) {
-  }
+  default void onConstruction(FMLConstructionEvent event) {}
 
-  default void onPreInit(FMLPreInitializationEvent event) {
-  }
+  default void onPreInit(FMLPreInitializationEvent event) {}
 
-  default void onInit(FMLInitializationEvent event) {
-  }
+  default void onInit(FMLInitializationEvent event) {}
 
-  default void onPostInit(FMLPostInitializationEvent event) {
-  }
+  default void onPostInit(FMLPostInitializationEvent event) {}
 
-  default void onLoadComplete(FMLLoadCompleteEvent event) {
-  }
+  default void onLoadComplete(FMLLoadCompleteEvent event) {}
 
   // ===== FML Lifecycle: Client
 
   @SideOnly(Side.CLIENT)
-  default void onClientPreInit(FMLPreInitializationEvent event) {
-  }
+  default void onClientPreInit(FMLPreInitializationEvent event) {}
 
   @SideOnly(Side.CLIENT)
-  default void onClientInit(FMLInitializationEvent event) {
-  }
+  default void onClientInit(FMLInitializationEvent event) {}
 
   @SideOnly(Side.CLIENT)
-  default void onClientPostInit(FMLPostInitializationEvent event) {
-  }
+  default void onClientPostInit(FMLPostInitializationEvent event) {}
 
   // ===== FML Lifecycle: Server
 
-  default void onServerAboutToStart(FMLServerAboutToStartEvent event) {
-  }
+  default void onServerAboutToStart(FMLServerAboutToStartEvent event) {}
 
-  default void onServerStarting(FMLServerStartingEvent event) {
-  }
+  default void onServerStarting(FMLServerStartingEvent event) {}
 
-  default void onServerStarted(FMLServerStartedEvent event) {
-  }
+  default void onServerStarted(FMLServerStartedEvent event) {}
 
-  default void onServerStopping(FMLServerStoppingEvent event) {
-  }
+  default void onServerStopping(FMLServerStoppingEvent event) {}
 
-  default void onServerStopped(FMLServerStoppedEvent event) {
-  }
+  default void onServerStopped(FMLServerStoppedEvent event) {}
 
   // ===== Registration
 
-  default void onNetworkRegister() {
-  }
+  default void onNetworkRegister() {}
 
-  default void onNewRegister() {
-  }
+  default void onNewRegister() {}
 
-  default void onRegister() {
-  }
+  default void onRegister() {}
 
   @SideOnly(Side.CLIENT)
-  default void onClientRegister() {
-  }
+  default void onClientRegister() {}
 
-  default void onRecipesRegister() {
-  }
+  default void onRecipesRegister() {}
 
   // ===== Other
 

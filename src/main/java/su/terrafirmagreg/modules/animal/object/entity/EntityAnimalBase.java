@@ -119,8 +119,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     double farSpeed = .8D * speedMult;
     double nearSpeed = 1.1D * speedMult;
 
-    entity.tasks.addTask(4,
-                         new EntityAIAvoidEntity<>(entity, EntityPlayer.class, 12.0F, farSpeed, nearSpeed));
+    entity.tasks.addTask(4, new EntityAIAvoidEntity<>(entity, EntityPlayer.class, 12.0F, farSpeed, nearSpeed));
   }
 
   public static void addCommonPreyAI(EntityAnimal entity, double speedMult) {
@@ -130,14 +129,11 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     entity.tasks.addTask(0, new EntityAISwimming(entity));
     entity.tasks.addTask(1, new EntityAnimalAIPanic(entity, 1.4D * speedMult));
     //space for livestock AIMate and AITempt
-    entity.tasks.addTask(4,
-                         new EntityAIAvoidEntity<>(entity, EntityAnimalWolf.class, 8.0F, farSpeed, nearSpeed));
-    entity.tasks.addTask(4,
-                         new EntityAIAvoidEntity<>(entity, EntityAnimalMammal.class,
-                                                   Predicates.instanceOf(IPredator.class), 12.0F, farSpeed, nearSpeed));
-    entity.tasks.addTask(4,
-                         new EntityAIAvoidEntity<>(entity, EntityMob.class, 8.0F, farSpeed * 0.7D,
-                                                   nearSpeed * 0.7D));
+    entity.tasks.addTask(4, new EntityAIAvoidEntity<>(entity, EntityAnimalWolf.class, 8.0F, farSpeed, nearSpeed));
+    entity.tasks.addTask(4, new EntityAIAvoidEntity<>(entity, EntityAnimalMammal.class,
+                                                      Predicates.instanceOf(IPredator.class), 12.0F, farSpeed, nearSpeed));
+    entity.tasks.addTask(4, new EntityAIAvoidEntity<>(entity, EntityMob.class, 8.0F, farSpeed * 0.7D,
+                                                      nearSpeed * 0.7D));
     // space for follow parent for mammals, find nest for oviparous, and eat grass for livestock
     entity.tasks.addTask(7, new EntityAIWanderAvoidWater(entity, 1.0D));
     entity.tasks.addTask(8, new EntityAIWatchClosest(entity, EntityPlayer.class, 6.0F));
@@ -148,13 +144,10 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
    * Find and charms a near female animal of this animal Used by males to try mating with females
    */
   public static <T extends EntityAnimal & IAnimal> void findFemaleMate(T maleAnimal) {
-    List<EntityAnimal> list = maleAnimal.world.getEntitiesWithinAABB(maleAnimal.getClass(),
-                                                                     maleAnimal.getEntityBoundingBox()
-                                                                               .grow(8.0D));
+    List<EntityAnimal> list = maleAnimal.world.getEntitiesWithinAABB(maleAnimal.getClass(), maleAnimal.getEntityBoundingBox().grow(8.0D));
     for (EntityAnimal femaleAnimal : list) {
       IAnimal female = (IAnimal) femaleAnimal;
-      if (female.getGender() == Gender.FEMALE && !femaleAnimal.isInLove()
-          && female.isReadyToMate()) {
+      if (female.getGender() == Gender.FEMALE && !femaleAnimal.isInLove() && female.isReadyToMate()) {
         femaleAnimal.setInLove(null);
         maleAnimal.setInLove(null);
         break;
@@ -166,10 +159,10 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
   @Override
   public EntityAgeable createChild(@NotNull EntityAgeable other) {
     // Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
-    if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
+    if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal animal) {
       this.setFertilized(true);
       this.resetInLove();
-      this.onFertilized((IAnimal) other);
+      this.onFertilized(animal);
     } else if (other == this) {
       // Only called if this animal is interacted with a spawn egg
       // Try to return to vanilla's default method a baby of this animal, as if bred normally

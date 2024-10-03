@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Module {
+public @interface ModuleInfo {
 
   /**
    * The ID of this module. Must be unique within its container.
@@ -27,6 +27,8 @@ public @interface Module {
    */
   boolean coreModule() default false;
 
+  boolean enabled() default false;
+
   String author() default "";
 
   String version() default "";
@@ -34,5 +36,5 @@ public @interface Module {
   /**
    * A description of this module in the module configuration file.
    */
-  String description() default "";
+  String desc() default "";
 }

@@ -6,23 +6,18 @@ import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalShee
 import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import lyeoj.tfcthings.entity.projectile.EntityThrownRopeJavelin;
 import lyeoj.tfcthings.items.ItemRopeJavelin;
@@ -36,20 +31,6 @@ import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCTHINGS)
 public class TFCThingsEventHandler {
-
-  @SubscribeEvent
-  @SideOnly(Side.CLIENT)
-  public static void applyTooltip(ItemTooltipEvent event) {
-    if (CapabilitySharpness.has(event.getItemStack())) {
-      var capability = CapabilitySharpness.get(event.getItemStack());
-      if (capability != null && capability.getCharges() > 0) {
-        TextFormatting color =
-          capability.getCharges() > 64 ? capability.getCharges() > 256 ? TextFormatting.DARK_PURPLE : TextFormatting.BLUE :
-          TextFormatting.DARK_GREEN;
-        event.getToolTip().add(I18n.format("tfcthings.tooltip.sharpness", color, "" + capability.getCharges()));
-      }
-    }
-  }
 
   @SubscribeEvent
   public static void onBlockBreak(BlockEvent.BreakEvent event) {

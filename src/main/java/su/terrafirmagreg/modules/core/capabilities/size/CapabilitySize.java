@@ -21,8 +21,11 @@ public final class CapabilitySize {
   public static final Capability<ICapabilitySize> CAPABILITY = ModUtils.getNull();
 
   public static void register() {
-    CapabilityManager.INSTANCE.register(ICapabilitySize.class, new StorageSize(),
-                                        ProviderSize::new);
+    CapabilityManager.INSTANCE.register(ICapabilitySize.class, new StorageSize(), ProviderSize::new);
+  }
+
+  public static ICapabilitySize get(ItemStack itemStack) {
+    return itemStack.getCapability(CAPABILITY, null);
   }
 
   public static boolean has(ItemStack itemStack) {
@@ -52,18 +55,13 @@ public final class CapabilitySize {
       ICapabilitySize size = CapabilitySize.get(stack);
       if (size != null) {
         return size;
-      } else if (stack.getItem() instanceof ICapabilitySize item) {
-        return item;
-      } else if (stack.getItem() instanceof ItemBlock itemBlock
-                 && itemBlock.getBlock() instanceof ICapabilitySize capabilitySize) {
+      } else if (stack.getItem() instanceof ICapabilitySize capabilitySize) {
+        return capabilitySize;
+      } else if (stack.getItem() instanceof ItemBlock itemBlock && itemBlock.getBlock() instanceof ICapabilitySize capabilitySize) {
         return capabilitySize;
       }
     }
     return null;
-  }
-
-  public static ICapabilitySize get(ItemStack itemStack) {
-    return itemStack.getCapability(CAPABILITY, null);
   }
 
 }

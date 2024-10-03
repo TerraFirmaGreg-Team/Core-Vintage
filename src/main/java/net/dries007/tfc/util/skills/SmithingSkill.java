@@ -8,6 +8,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 public class SmithingSkill extends Skill {
 
   private static final String SKILL_VALUE = "tfc_smithing_value";
@@ -123,6 +125,7 @@ public class SmithingSkill extends Skill {
     updateAndSync();
   }
 
+  @Getter
   public enum Type {
     GENERAL(80),
     TOOLS(40),
@@ -135,8 +138,5 @@ public class SmithingSkill extends Skill {
       this.max = max;
     }
 
-    public int getMax() {
-      return max;
-    }
   }
 }

@@ -227,7 +227,7 @@ public class StructureGeneratorCorals extends WorldGenerator {
           for (int z = 0; z < template.getSize().getZ(); z++) {
 						/*for (int y = 0; y < searchRange; y++)
                         {
-                            for (Plant plant : TFCRegistries.PLANTS.getValuesCollection())
+                            for (PlantType plant : PlantType.getTypes())
                             {
                                 if (world.getBlockState(new BlockPos(posX, posY, posZ)).get() == Blocks.AIR ||
                                     world.getBlockState(new BlockPos(posX, posY, posZ)).get() == BlockPlantTFC.get(plant))

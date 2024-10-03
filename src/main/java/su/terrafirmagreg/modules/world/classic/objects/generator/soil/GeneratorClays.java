@@ -215,7 +215,7 @@ public class GeneratorClays implements IWorldGenerator {
   //                        if (rng.nextInt(10) == 0) {
   //                            final BlockPos posTop = world.getTopSolidOrLiquidBlock(posHorizontal);
   //
-  //                            for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
+  //                            for (PlantType plant : PlantType.getTypes()) {
   //                                if (plant.getIsClayMarking()) {
   //                                    BlockPlantTFC plantBlock = BlockPlantTFC.get(plant);
   //                                    IBlockState state = plantBlock.getDefaultState();

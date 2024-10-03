@@ -38,7 +38,7 @@ import net.dries007.tfc.util.skills.SkillType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.FACING;
+import static su.terrafirmagreg.data.Properties.DirectionProp.DIRECTIONAL;
 
 @MethodsReturnNonnullByDefault
 
@@ -46,33 +46,33 @@ public class BlockStemFruit extends BaseBlockDirectional implements ICapabilityS
 
   public BlockStemFruit() {
     super(Settings.of(Material.GOURD));
-    this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+    this.setDefaultState(this.blockState.getBaseState().withProperty(DIRECTIONAL, EnumFacing.NORTH));
     this.setHardness(1.0f);
   }
 
   @SuppressWarnings("deprecation")
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
+    return this.getDefaultState().withProperty(DIRECTIONAL, EnumFacing.byIndex(meta));
   }
 
   /**
    * Convert the BlockState into the correct metadata value
    */
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getIndex();
+    return state.getValue(DIRECTIONAL).getIndex();
   }
 
   @SuppressWarnings("deprecation")
   @Override
   public IBlockState withRotation(IBlockState state, Rotation rot) {
-    return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
+    return state.withProperty(DIRECTIONAL, rot.rotate(state.getValue(DIRECTIONAL)));
   }
 
   @SuppressWarnings("deprecation")
   @Override
   public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
-    return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
+    return state.withRotation(mirrorIn.toRotation(state.getValue(DIRECTIONAL)));
   }
 
   /**
@@ -89,7 +89,7 @@ public class BlockStemFruit extends BaseBlockDirectional implements ICapabilityS
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
                                           EntityLivingBase placer) {
-    return this.getDefaultState().withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer));
+    return this.getDefaultState().withProperty(DIRECTIONAL, EnumFacing.getDirectionFromEntityLiving(pos, placer));
   }
 
   @Override
@@ -131,7 +131,7 @@ public class BlockStemFruit extends BaseBlockDirectional implements ICapabilityS
   }
 
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING);
+    return new BlockStateContainer(this, DIRECTIONAL);
   }
 
   @Override

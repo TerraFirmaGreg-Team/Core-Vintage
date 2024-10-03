@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.plant.api.types.variant.block;
 import su.terrafirmagreg.data.lib.types.variant.block.VariantBlock;
 import su.terrafirmagreg.modules.plant.ModulePlant;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 
 import net.minecraft.util.text.TextComponentTranslation;
 
@@ -40,7 +39,7 @@ public class PlantBlockVariant extends VariantBlock<PlantBlockVariant, PlantType
     return new Builder(name);
   }
 
-  public String getRegistryKey(SoilType type) {
+  public String getRegistryKey(PlantType type) {
     return String.format("plant/%s/%s", this.getName(), type);
   }
 

@@ -2,6 +2,8 @@ package tfcflorae;
 
 import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantTypes;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -16,13 +18,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.wood.bamboo.BlockBambooLeaves;
 import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCassiaCinnamonLeaves;
 import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
 import net.dries007.tfc.objects.items.ItemsTFCF;
-import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.util.calendar.Calendar;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFCF;
@@ -41,8 +40,8 @@ public final class CommonEventHandlerTFCF {
     Block block = state.getBlock();
     Month month = Calendar.CALENDAR_TIME.getMonthOfYear();
 
-    for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-      if (plant == TFCRegistries.PLANTS.getValue(DefaultPlants.BARREL_CACTUS) &&
+    for (PlantType plant : PlantType.getTypes()) {
+      if (plant == PlantTypes.BARREL_CACTUS &&
           (month == Month.SEPTEMBER || month == Month.OCTOBER || month == Month.NOVEMBER)) {
         int chance = MathConstants.RNG.nextInt(2);
         if (chance == 0) {

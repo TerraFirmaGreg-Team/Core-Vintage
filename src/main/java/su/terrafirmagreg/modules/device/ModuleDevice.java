@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device;
 
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
-import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.modules.ModuleContainer.DEVICE;
 
-@Module(moduleID = DEVICE)
+@ModuleInfo(moduleID = DEVICE)
 public final class ModuleDevice extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleDevice.class.getSimpleName());

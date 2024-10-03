@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockCaveMushroom;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantCaveMushroom;
 
 import java.util.Random;
 
@@ -20,7 +20,7 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
   public boolean generate(World worldIn, Random rng, BlockPos pos) {
     int chance = rng.nextInt(5);
     if (chance == 0) {
-      BlockCaveMushroom mushroomBlock = BlocksTFCF.BLUESHROOM;
+      BlockPlantCaveMushroom mushroomBlock = BlocksTFCF.BLUESHROOM;
       IBlockState state = mushroomBlock.getDefaultState();
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
@@ -36,7 +36,7 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
         }
       }
     } else if (chance == 1) {
-      BlockCaveMushroom mushroomBlock = BlocksTFCF.GLOWSHROOM;
+      BlockPlantCaveMushroom mushroomBlock = BlocksTFCF.GLOWSHROOM;
       IBlockState state = mushroomBlock.getDefaultState();
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
@@ -52,7 +52,7 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
         }
       }
     } else if (chance == 2) {
-      BlockCaveMushroom mushroomBlock = BlocksTFCF.MAGMA_SHROOM;
+      BlockPlantCaveMushroom mushroomBlock = BlocksTFCF.MAGMA_SHROOM;
       IBlockState state = mushroomBlock.getDefaultState();
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
@@ -68,7 +68,7 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
         }
       }
     } else if (chance == 3) {
-      BlockCaveMushroom mushroomBlock = BlocksTFCF.POISON_SHROOM;
+      BlockPlantCaveMushroom mushroomBlock = BlocksTFCF.POISON_SHROOM;
       IBlockState state = mushroomBlock.getDefaultState();
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
@@ -84,7 +84,7 @@ public class GeneratorCaveMushrooms extends WorldGenerator {
         }
       }
     } else if (chance == 4) {
-      BlockCaveMushroom mushroomBlock = BlocksTFCF.SULPHUR_SHROOM;
+      BlockPlantCaveMushroom mushroomBlock = BlocksTFCF.SULPHUR_SHROOM;
       IBlockState state = mushroomBlock.getDefaultState();
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {

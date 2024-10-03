@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules;
 
-import su.terrafirmagreg.api.module.Container;
 import su.terrafirmagreg.api.module.IModuleContainer;
+import su.terrafirmagreg.api.module.IModuleContainer.Info;
 
 import net.minecraft.util.IStringSerializable;
 
@@ -12,7 +12,7 @@ import lombok.Getter;
 import static su.terrafirmagreg.data.Constants.MOD_ID;
 
 @Getter
-@Container
+@Info
 public enum ModuleContainer implements IStringSerializable, IModuleContainer {
   CORE(true),
   ROCK(true),

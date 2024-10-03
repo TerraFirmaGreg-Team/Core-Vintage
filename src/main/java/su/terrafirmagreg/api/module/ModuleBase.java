@@ -36,6 +36,7 @@ public abstract class ModuleBase implements IModule {
    * Stores a network entity id supplier for each mod id.
    */
   private static final Map<String, NetworkEntityIdSupplier> NETWORK_ENTITY_ID_SUPPLIER_MAP = new HashMap<>();
+
   private final String name;
   private final String modID;
 
@@ -51,7 +52,7 @@ public abstract class ModuleBase implements IModule {
   private File configurationDirectory;
 
   protected ModuleBase() {
-    this.modID = this.getClass().getAnnotation(Module.class).moduleID().getID();
+    this.modID = this.getClass().getAnnotation(ModuleInfo.class).moduleID().getID();
     this.name = this.getClass().getSimpleName();
   }
 
@@ -88,7 +89,6 @@ public abstract class ModuleBase implements IModule {
   /**
    * @return A logger to use for this module.
    */
-  public @NotNull LoggingHelper getLogger() {
-    return LoggingHelper.of();
-  }
+  public abstract @NotNull LoggingHelper getLogger();
+
 }

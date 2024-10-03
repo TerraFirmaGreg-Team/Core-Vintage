@@ -18,7 +18,6 @@ import net.minecraftforge.registries.IForgeRegistryModifiable;
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.FirmaLife;
 import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.init.PlantsFL;
 import com.eerussianguy.firmalife.init.StemCrop;
 import com.eerussianguy.firmalife.recipe.KnappingRecipeFood;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
@@ -33,7 +32,6 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFood;
@@ -73,11 +71,6 @@ public class TFCRegistry {
     r.registerAll(
       new Ore(HALITE)
     );
-  }
-
-  @SubscribeEvent
-  public static void onPreRegisterPlant(TFCRegistryEvent.RegisterPreBlock<Plant> event) {
-    event.getRegistry().registerAll(PlantsFL.WRAPPERS.toArray(new Plant[0]));
   }
 
   @SubscribeEvent

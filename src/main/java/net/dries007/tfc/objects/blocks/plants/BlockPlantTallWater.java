@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -15,7 +16,6 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -32,16 +32,16 @@ import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER
 
 public class BlockPlantTallWater extends BlockPlantWater implements IGrowable, ITallPlant {
 
-  private static final Map<Plant, BlockPlantTallWater> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantTallWater> MAP = new HashMap<>();
 
-  public BlockPlantTallWater(Plant plant) {
+  public BlockPlantTallWater(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockPlantTallWater get(Plant plant) {
+  public static BlockPlantTallWater get(PlantType plant) {
     return BlockPlantTallWater.MAP.get(plant);
   }
 

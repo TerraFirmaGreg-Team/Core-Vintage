@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.data.lib.types.category.Category;
+import su.terrafirmagreg.data.lib.types.category.ICategory;
 import su.terrafirmagreg.data.lib.types.type.IType;
 import su.terrafirmagreg.data.lib.types.type.Type;
 import su.terrafirmagreg.data.lib.types.variant.IVariant;
@@ -310,8 +312,7 @@ public final class BlockUtils {
       }
     }
 
-    return checkName && stack.getItem().getItemStackDisplayName(stack)
-                             .matches(".*(^|\\s)([oO]re)($|\\s).");
+    return checkName && stack.getItem().getItemStackDisplayName(stack).matches(".*(^|\\s)([oO]re)($|\\s).");
   }
 
   /**
@@ -422,17 +423,13 @@ public final class BlockUtils {
    * @return Обнаружено столкновение или значение null означает, что ничего не найдено. Это направление, в котором должен быть указан блок, и сторона, К которой
    * он прилипает, а не сторона, С которой он прилипает.
    */
-  public static EnumFacing getASolidFacing(World worldIn, BlockPos pos,
-                                           @Nullable EnumFacing preferredFacing, EnumFacing... possibleSides) {
+  public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing, EnumFacing... possibleSides) {
 
     return getASolidFacing(worldIn, pos, preferredFacing, Arrays.asList(possibleSides));
   }
 
-  public static EnumFacing getASolidFacing(World worldIn, BlockPos pos,
-                                           @Nullable EnumFacing preferredFacing,
-                                           Collection<EnumFacing> possibleSides) {
-    if (preferredFacing != null && possibleSides.contains(preferredFacing) && canHangAt(worldIn,
-                                                                                        pos, preferredFacing)) {
+  public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing, Collection<EnumFacing> possibleSides) {
+    if (preferredFacing != null && possibleSides.contains(preferredFacing) && canHangAt(worldIn, pos, preferredFacing)) {
       return preferredFacing;
     }
     for (EnumFacing side : possibleSides) {
@@ -484,6 +481,22 @@ public final class BlockUtils {
   public static boolean isType(Type<?> typeIn, Type<?>... types) {
     for (var type : types) {
       if (typeIn == type) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public static boolean isCategory(IBlockState blockState, Category<?>... categories) {
+    if (blockState.getBlock() instanceof ICategory<?> variantIn) {
+      return isCategory(variantIn.getCategory(), categories);
+    }
+    return false;
+  }
+
+  public static boolean isCategory(Category<?> categoryIn, Category<?>... categories) {
+    for (var category : categories) {
+      if (categoryIn == category) {
         return true;
       }
     }

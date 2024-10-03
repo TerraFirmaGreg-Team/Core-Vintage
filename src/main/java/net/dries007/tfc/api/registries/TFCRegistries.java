@@ -23,8 +23,6 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.types.Tree;
 
 import java.lang.reflect.Field;
@@ -35,11 +33,9 @@ import java.lang.reflect.Modifier;
  */
 public class TFCRegistries {
 
-  public static final IForgeRegistry<RockCategory> ROCK_CATEGORIES = GameRegistry.findRegistry(RockCategory.class);
   public static final IForgeRegistry<Ore> ORES = GameRegistry.findRegistry(Ore.class);
   public static final IForgeRegistry<Tree> TREES = GameRegistry.findRegistry(Tree.class);
   public static final IForgeRegistry<Metal> METALS = GameRegistry.findRegistry(Metal.class);
-  public static final IForgeRegistry<Plant> PLANTS = GameRegistry.findRegistry(Plant.class);
 
   public static final IForgeRegistry<AlloyRecipe> ALLOYS = GameRegistry.findRegistry(AlloyRecipe.class);
   public static final IForgeRegistry<KnappingRecipe> KNAPPING = GameRegistry.findRegistry(KnappingRecipe.class);

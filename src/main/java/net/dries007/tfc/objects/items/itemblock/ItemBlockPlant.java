@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.items.itemblock;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlowerPot;
@@ -16,16 +17,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
 
 @MethodsReturnNonnullByDefault
 
 public class ItemBlockPlant extends ItemBlockTFC {
 
-  private final Plant plant;
+  private final PlantType plant;
 
-  public ItemBlockPlant(Block block, Plant plant) {
+  public ItemBlockPlant(Block block, PlantType plant) {
     super(block);
     this.plant = plant;
   }

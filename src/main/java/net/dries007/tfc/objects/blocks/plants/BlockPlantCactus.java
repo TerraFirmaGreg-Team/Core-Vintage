@@ -3,6 +3,7 @@ package net.dries007.tfc.objects.blocks.plants;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -20,7 +21,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -36,9 +36,9 @@ import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
 
 public class BlockPlantCactus extends BlockPlant implements IGrowable, ITallPlant {
 
-  private static final Map<Plant, BlockPlantCactus> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantCactus> MAP = new HashMap<>();
 
-  public BlockPlantCactus(Plant plant) {
+  public BlockPlantCactus(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
@@ -52,7 +52,7 @@ public class BlockPlantCactus extends BlockPlant implements IGrowable, ITallPlan
       .hardness(0.25F);
   }
 
-  public static BlockPlantCactus get(Plant plant) {
+  public static BlockPlantCactus get(PlantType plant) {
     return MAP.get(plant);
   }
 

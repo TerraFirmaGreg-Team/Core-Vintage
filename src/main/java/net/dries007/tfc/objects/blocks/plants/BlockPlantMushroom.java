@@ -1,12 +1,13 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
+
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.util.climate.Climate;
 
 import java.util.HashMap;
@@ -17,16 +18,16 @@ import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
 
 public class BlockPlantMushroom extends BlockPlant implements IGrowable {
 
-  private static final Map<Plant, BlockPlantMushroom> MAP = new HashMap<>();
+  private static final Map<PlantType, BlockPlantMushroom> MAP = new HashMap<>();
 
-  public BlockPlantMushroom(Plant plant) {
+  public BlockPlantMushroom(PlantType plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
   }
 
-  public static BlockPlantMushroom get(Plant plant) {
+  public static BlockPlantMushroom get(PlantType plant) {
     return MAP.get(plant);
   }
 

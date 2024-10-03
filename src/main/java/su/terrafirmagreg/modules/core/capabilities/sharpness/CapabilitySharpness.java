@@ -16,8 +16,7 @@ public final class CapabilitySharpness {
   public static final Capability<ICapabilitySharpness> CAPABILITY = ModUtils.getNull();
 
   public static void register() {
-    CapabilityManager.INSTANCE.register(ICapabilitySharpness.class, new StorageSharpness(),
-                                        ProviderSharpness::new);
+    CapabilityManager.INSTANCE.register(ICapabilitySharpness.class, new StorageSharpness(), ProviderSharpness::new);
 
   }
 

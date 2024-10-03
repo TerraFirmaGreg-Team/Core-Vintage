@@ -51,8 +51,8 @@ public class RenderHandler {
   public static void onItemTooltip(ItemTooltipEvent event) {
     final ItemStack stack = event.getItemStack();
     final Item item = stack.getItem();
-    if (item instanceof ItemBlock) {
-      Block block = ((ItemBlock) item).getBlock();
+    if (item instanceof ItemBlock itemBlock) {
+      Block block = itemBlock.getBlock();
       if (block instanceof BlockClimateStation station) {
         switch (station.tier) {
           case 1:

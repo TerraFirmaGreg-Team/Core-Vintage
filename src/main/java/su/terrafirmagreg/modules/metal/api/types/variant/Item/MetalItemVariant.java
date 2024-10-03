@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.metal.api.types.variant.Item;
 import su.terrafirmagreg.data.lib.types.variant.item.VariantItem;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 
 import net.minecraft.util.text.TextComponentTranslation;
 
@@ -40,9 +39,10 @@ public class MetalItemVariant extends VariantItem<MetalItemVariant, MetalType> {
     return new Builder(name);
   }
 
-  public String getRegistryKey(SoilType type) {
-    return String.format("metal/%s/%s", this.getName(), type);
+  public String getRegistryKey(MetalType type) {
+    return String.format("metal/%s/%s", name, type);
   }
+
 
   public String getLocalizedName() {
     return new TextComponentTranslation(String.format("metal.variant.%s.name", this)).getFormattedText();

@@ -1,0 +1,56 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:plants/badderlocks_upper"
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "multipart": [
+      {
+        "when": {
+          "part": "single"
+        },
+        "apply": [
+          {
+            "model": "tfc:plants/badderlocks_upper"
+          }
+        ]
+      },
+      {
+        "when": {
+          "part": "lower"
+        },
+        "apply": [
+          {
+            "model": "tfc:plants/badderlocks_lower"
+          }
+        ]
+      },
+      {
+        "when": {
+          "part": "middle"
+        },
+        "apply": [
+          {
+            "model": "tfc:plants/badderlocks_lower"
+          }
+        ]
+      },
+      {
+        "when": {
+          "part": "upper"
+        },
+        "apply": [
+          {
+            "model": "tfc:plants/badderlocks_upper"
+          }
+        ]
+      }
+    ]
+  }
+}

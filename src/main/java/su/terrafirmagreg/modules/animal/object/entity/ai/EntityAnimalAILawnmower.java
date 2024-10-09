@@ -1,13 +1,13 @@
 package su.terrafirmagreg.modules.animal.object.entity.ai;
 
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
-
-import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrass;
 
 public class EntityAnimalAILawnmower extends EntityAIBase {
 

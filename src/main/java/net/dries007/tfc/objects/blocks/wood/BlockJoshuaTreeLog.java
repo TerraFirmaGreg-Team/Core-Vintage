@@ -39,6 +39,7 @@ import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
 import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
 import static su.terrafirmagreg.data.Properties.BoolProp.UP;
 import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
 
 @MethodsReturnNonnullByDefault
 
@@ -103,15 +104,14 @@ public class BlockJoshuaTreeLog extends Block {
     Block block3 = worldIn.getBlockState(pos.east()).getBlock();
     Block block4 = worldIn.getBlockState(pos.south()).getBlock();
     Block block5 = worldIn.getBlockState(pos.west()).getBlock();
-    return state.withProperty(DOWN, Boolean.valueOf(
-                  block == this || block == BlockJoshuaTreeFlower.get(wood) || BlockUtils.isSand(worldIn.getBlockState(pos.down())) ||
-                  BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down())) || block == Blocks.HARDENED_CLAY ||
-                  block == Blocks.STAINED_HARDENED_CLAY))
-                .withProperty(UP, Boolean.valueOf(block1 == this || block1 == BlockJoshuaTreeFlower.get(wood)))
-                .withProperty(NORTH, Boolean.valueOf(block2 == this || block2 == BlockJoshuaTreeFlower.get(wood)))
-                .withProperty(EAST, Boolean.valueOf(block3 == this || block3 == BlockJoshuaTreeFlower.get(wood)))
-                .withProperty(SOUTH, Boolean.valueOf(block4 == this || block4 == BlockJoshuaTreeFlower.get(wood)))
-                .withProperty(WEST, Boolean.valueOf(block5 == this || block5 == BlockJoshuaTreeFlower.get(wood)));
+    return state.withProperty(DOWN,
+                              BlockUtils.isVariant(worldIn.getBlockState(pos.down()), SAND) || BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down()))
+                              || BlockUtils.isBlock(block, this, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY, BlockJoshuaTreeFlower.get(wood)))
+                .withProperty(UP, BlockUtils.isBlock(block1, this, BlockJoshuaTreeFlower.get(wood)))
+                .withProperty(NORTH, BlockUtils.isBlock(block2, this, BlockJoshuaTreeFlower.get(wood)))
+                .withProperty(EAST, BlockUtils.isBlock(block3, this, BlockJoshuaTreeFlower.get(wood)))
+                .withProperty(SOUTH, BlockUtils.isBlock(block4, this, BlockJoshuaTreeFlower.get(wood)))
+                .withProperty(WEST, BlockUtils.isBlock(block5, this, BlockJoshuaTreeFlower.get(wood)));
   }
 
   /**
@@ -136,12 +136,12 @@ public class BlockJoshuaTreeLog extends Block {
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     state = state.getActualState(source, pos);
     float f = 0.1875F;
-    float f1 = state.getValue(WEST).booleanValue() ? 0.0F : 0.1875F;
-    float f2 = state.getValue(DOWN).booleanValue() ? 0.0F : 0.1875F;
-    float f3 = state.getValue(NORTH).booleanValue() ? 0.0F : 0.1875F;
-    float f4 = state.getValue(EAST).booleanValue() ? 1.0F : 0.8125F;
-    float f5 = state.getValue(UP).booleanValue() ? 1.0F : 0.8125F;
-    float f6 = state.getValue(SOUTH).booleanValue() ? 1.0F : 0.8125F;
+    float f1 = state.getValue(WEST) ? 0.0F : 0.1875F;
+    float f2 = state.getValue(DOWN) ? 0.0F : 0.1875F;
+    float f3 = state.getValue(NORTH) ? 0.0F : 0.1875F;
+    float f4 = state.getValue(EAST) ? 1.0F : 0.8125F;
+    float f5 = state.getValue(UP) ? 1.0F : 0.8125F;
+    float f6 = state.getValue(SOUTH) ? 1.0F : 0.8125F;
     return new AxisAlignedBB(f1, f2, f3, f4, f5, f6);
   }
 
@@ -150,9 +150,9 @@ public class BlockJoshuaTreeLog extends Block {
   public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
     Block block = blockAccess.getBlockState(pos.offset(side)).getBlock();
     return block != this && block != BlockJoshuaTreeFlower.get(wood) &&
-           (side != EnumFacing.DOWN || !BlockUtils.isSand(blockAccess.getBlockState(pos.offset(side))) ||
-            !BlockUtils.isSoilOrGravel(blockAccess.getBlockState(pos.offset(side))) || block == Blocks.HARDENED_CLAY ||
-            block == Blocks.STAINED_HARDENED_CLAY);
+           (side != EnumFacing.DOWN || !BlockUtils.isVariant(blockAccess.getBlockState(pos.offset(side)), SAND) ||
+            !BlockUtils.isSoilOrGravel(blockAccess.getBlockState(pos.offset(side))) ||
+            BlockUtils.isBlock(block, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY));
   }
 
   @Override
@@ -162,8 +162,7 @@ public class BlockJoshuaTreeLog extends Block {
 
   @SuppressWarnings("deprecation")
   @Override
-  public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
-                                    @Nullable Entity entityIn, boolean isActualState) {
+  public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
     if (!isActualState) {
       state = state.getActualState(worldIn, pos);
     }
@@ -172,27 +171,27 @@ public class BlockJoshuaTreeLog extends Block {
     float f1 = 0.8125F;
     addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.1875D, 0.1875D, 0.1875D, 0.8125D, 0.8125D, 0.8125D));
 
-    if (state.getValue(WEST).booleanValue()) {
+    if (state.getValue(WEST)) {
       addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0D, 0.1875D, 0.1875D, 0.1875D, 0.8125D, 0.8125D));
     }
 
-    if (state.getValue(EAST).booleanValue()) {
+    if (state.getValue(EAST)) {
       addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.8125D, 0.1875D, 0.1875D, 1.0D, 0.8125D, 0.8125D));
     }
 
-    if (state.getValue(UP).booleanValue()) {
+    if (state.getValue(UP)) {
       addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.1875D, 0.8125D, 0.1875D, 0.8125D, 1.0D, 0.8125D));
     }
 
-    if (state.getValue(DOWN).booleanValue()) {
+    if (state.getValue(DOWN)) {
       addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.1875D, 0.8125D));
     }
 
-    if (state.getValue(NORTH).booleanValue()) {
+    if (state.getValue(NORTH)) {
       addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.1875D, 0.1875D, 0.0D, 0.8125D, 0.8125D, 0.1875D));
     }
 
-    if (state.getValue(SOUTH).booleanValue()) {
+    if (state.getValue(SOUTH)) {
       addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.1875D, 0.1875D, 0.8125D, 0.8125D, 0.8125D, 1.0D));
     }
   }
@@ -269,17 +268,17 @@ public class BlockJoshuaTreeLog extends Block {
 
         Block block1 = worldIn.getBlockState(blockpos.down()).getBlock();
 
-        if (block1 == this || BlockUtils.isSand(worldIn.getBlockState(blockpos.down())) ||
-            BlockUtils.isSoilOrGravel(worldIn.getBlockState(blockpos.down())) || block1 == Blocks.HARDENED_CLAY ||
-            block1 == Blocks.STAINED_HARDENED_CLAY) {
+        if (BlockUtils.isVariant(worldIn.getBlockState(blockpos.down()), SAND) ||
+            BlockUtils.isSoilOrGravel(worldIn.getBlockState(blockpos.down())) ||
+            BlockUtils.isBlock(block1, this, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY)) {
           return true;
         }
       }
     }
 
     Block block2 = worldIn.getBlockState(pos.down()).getBlock();
-    return block2 == this || BlockUtils.isSand(worldIn.getBlockState(pos.down())) ||
+    return BlockUtils.isVariant(worldIn.getBlockState(pos.down()), SAND) ||
            BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
-           block2 == Blocks.HARDENED_CLAY || block2 == Blocks.STAINED_HARDENED_CLAY;
+           BlockUtils.isBlock(block2, this, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY);
   }
 }

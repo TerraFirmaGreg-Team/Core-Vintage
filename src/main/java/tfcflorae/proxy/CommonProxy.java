@@ -1,7 +1,6 @@
 package tfcflorae.proxy;
 
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorCorals;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorGlowPlant;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorGourds;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorMesaStrata;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorPlants;
@@ -60,9 +59,6 @@ public class CommonProxy {
       }
       if (ConfigTFCF.General.WORLD.enableLightstoneWorldGen) {
         GameRegistry.registerWorldGenerator(new GeneratorLightstones(), 0);
-      }
-      if (ConfigTFCF.General.WORLD.enableOceanGlowPlantWorldGen) {
-        GameRegistry.registerWorldGenerator(new GeneratorGlowPlant(), 0);
       }
       if (ConfigTFCF.General.WORLD.enableSoilPits) {
         //GameRegistry.registerWorldGenerator(new WorldGenSoil(), 0);

@@ -28,6 +28,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -53,6 +54,7 @@ import java.util.Set;
 import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
 import static su.terrafirmagreg.data.Properties.EnumProp.FRUIT_LEAF_STATE;
 import static su.terrafirmagreg.data.Properties.IntProp.AGE_6;
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
 
 @MethodsReturnNonnullByDefault
 
@@ -159,11 +161,11 @@ public class BlockJoshuaTreeFlower extends Block {
       if (age < 5) {
         boolean flag = false;
         boolean flag1 = false;
-        IBlockState iblockstate = worldIn.getBlockState(currentBlock.down());
-        Block block = iblockstate.getBlock();
+        IBlockState state = worldIn.getBlockState(currentBlock.down());
+        Block block = state.getBlock();
 
-        if (BlockUtils.isSand(iblockstate) || BlockUtils.isSoilOrGravel(iblockstate) || block == Blocks.HARDENED_CLAY ||
-            block == Blocks.STAINED_HARDENED_CLAY) {
+        if (BlockUtils.isVariant(state, SAND) || BlockUtils.isSoilOrGravel(state)
+            || BlockUtils.isBlock(block, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY)) {
           flag = true;
         } else if (block == BlockJoshuaTreeLog.get(wood)) {
           int j = 1;
@@ -172,9 +174,9 @@ public class BlockJoshuaTreeFlower extends Block {
             Block block1 = worldIn.getBlockState(currentBlock.down(j + 1)).getBlock();
 
             if (block1 != BlockJoshuaTreeLog.get(wood)) {
-              if (BlockUtils.isSand(worldIn.getBlockState(currentBlock.down(j + 1))) ||
-                  BlockUtils.isSoilOrGravel(worldIn.getBlockState(currentBlock.down(j + 1))) || block1 == Blocks.HARDENED_CLAY ||
-                  block1 == Blocks.STAINED_HARDENED_CLAY) {
+              if (BlockUtils.isVariant(worldIn.getBlockState(currentBlock.down(j + 1)), SAND) ||
+                  BlockUtils.isSoilOrGravel(worldIn.getBlockState(currentBlock.down(j + 1)))
+                  || BlockUtils.isBlock(block1, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY)) {
                 flag1 = true;
               }
 
@@ -196,7 +198,7 @@ public class BlockJoshuaTreeFlower extends Block {
               flag = true;
             }
           }
-        } else if (iblockstate.getMaterial() == Material.AIR) {
+        } else if (state.getMaterial() == Material.AIR) {
           flag = true;
         }
 
@@ -453,14 +455,14 @@ public class BlockJoshuaTreeFlower extends Block {
       if (worldIn.isAirBlock(blockpos) && blockpos.getY() < 256) {
         int i = state.getValue(AGE_6).intValue();
 
-        if (i < 5 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, blockpos, state, rand.nextInt(1) == 0)) {
+        if (i < 5 && ForgeHooks.onCropsGrowPre(worldIn, blockpos, state, rand.nextInt(1) == 0)) {
           boolean flag = false;
           boolean flag1 = false;
           IBlockState iblockstate = worldIn.getBlockState(pos.down());
           Block block = iblockstate.getBlock();
 
-          if (BlockUtils.isSand(iblockstate) || BlockUtils.isSoilOrGravel(iblockstate) || iblockstate == Blocks.HARDENED_CLAY ||
-              iblockstate == Blocks.STAINED_HARDENED_CLAY) {
+          if (BlockUtils.isVariant(iblockstate, SAND) || BlockUtils.isSoilOrGravel(iblockstate)
+              || BlockUtils.isBlock(block, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY)) {
             flag = true;
           } else if (block == BlockJoshuaTreeLog.get(wood)) {
             int j = 1;
@@ -469,7 +471,7 @@ public class BlockJoshuaTreeFlower extends Block {
               Block block1 = worldIn.getBlockState(pos.down(j + 1)).getBlock();
 
               if (block1 != BlockJoshuaTreeLog.get(wood)) {
-                if (BlockUtils.isSand(worldIn.getBlockState(pos.down(j + 1))) ||
+                if (BlockUtils.isVariant(worldIn.getBlockState(pos.down(j + 1)), SAND) ||
                     BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down(j + 1))) || block1 == Blocks.HARDENED_CLAY ||
                     block1 == Blocks.STAINED_HARDENED_CLAY) {
                   flag1 = true;
@@ -532,7 +534,7 @@ public class BlockJoshuaTreeFlower extends Block {
           } else if (i == 4) {
             this.placeDeadFlower(worldIn, pos);
           }
-          net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+          ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
         }
       }
     }
@@ -586,8 +588,8 @@ public class BlockJoshuaTreeFlower extends Block {
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     Block block = worldIn.getBlockState(pos.down()).getBlock();
     return ((super.canPlaceBlockAt(worldIn, pos) && this.canSurvive(worldIn, pos)) ||
-            (BlockUtils.isSand(worldIn.getBlockState(pos.down())) || BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
-             block == Blocks.HARDENED_CLAY || block == Blocks.STAINED_HARDENED_CLAY));
+            (BlockUtils.isVariant(worldIn.getBlockState(pos.down()), SAND) || BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
+             BlockUtils.isBlock(block, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY)));
   }
 
   @Override
@@ -692,8 +694,8 @@ public class BlockJoshuaTreeFlower extends Block {
     Block block = iblockstate.getBlock();
 
     if (block != BlockJoshuaTreeLog.get(wood) &&
-        !(BlockUtils.isSand(iblockstate) || BlockUtils.isSoilOrGravel(iblockstate) || iblockstate == Blocks.HARDENED_CLAY ||
-          iblockstate == Blocks.STAINED_HARDENED_CLAY)) {
+        !(BlockUtils.isVariant(iblockstate, SAND) || BlockUtils.isSoilOrGravel(iblockstate)
+          || BlockUtils.isBlock(block, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY))) {
       if (iblockstate.getMaterial() == Material.AIR) {
         int i = 0;
 

@@ -4,6 +4,7 @@ import su.terrafirmagreg.modules.core.capabilities.damage.ICapabilityDamageResis
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +19,6 @@ import net.minecraft.world.World;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IArmorMaterialTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -94,7 +94,7 @@ public class ItemHikingBoots extends ItemArmor implements ICapabilitySize, ICapa
               IBlockState iblockstate = world.getBlockState(blockpos$pooledmutableblockpos2);
               if (iblockstate.getBlock() instanceof BlockPlant plant) {
                 double modifier = 0.25D * (double) (4 - iblockstate.getValue(AGE_4));
-                modifier += (1.0D - modifier) * plant.getPlant().getMovementMod();
+                modifier += (1.0D - modifier) * plant.getType().getMovementMod();
                 if (modifier < ConfigTFC.General.MISC.minimumPlantMovementModifier) {
                   modifier = ConfigTFC.General.MISC.minimumPlantMovementModifier;
                 }

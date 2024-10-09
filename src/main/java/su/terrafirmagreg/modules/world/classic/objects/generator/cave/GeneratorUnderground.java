@@ -74,175 +74,144 @@ public class GeneratorUnderground implements IWorldGenerator {
     final float floraDiversity = data.getFloraDiversity();
 
     for (PlantType plant : PlantType.getTypes()) {
-      if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
-        undergroundVines.setGeneratedPlant(plant);
-        undergroundCreepingVines.setGeneratedPlant(plant);
-        undergroundMoss.setGeneratedPlant(plant);
+      if (!plant.isValidTempForWorldGen(avgTemperature) && !plant.isValidRain(rainfall)) {return;}
+      undergroundVines.setGeneratedPlant(plant);
+      undergroundCreepingVines.setGeneratedPlant(plant);
+      undergroundMoss.setGeneratedPlant(plant);
 
-        if (plant.getCategory().equals(MUSHROOM)) {
-          if (avgTemperature >= -13f && avgTemperature <= 50f && rainfall >= 250f
-              && rainfall <= 500) {
-            int plantCount = (RNG.nextInt(3) + 1);
-            for (int i = rng.nextInt(Math.round(plantCount / floraDiversity));
-                 i < (floraDensity + floraDiversity) * fungiUndergroundCount; i++) {
-              BlockPos blockPos = chunkPos.add(rng.nextInt(16) + 8, rng.nextInt(16) + 8, rng.nextInt(16) + 8);
-              if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 15 && blockPos.getY() > 20) {
-                undergroundMushrooms.generate(world, rng, blockPos);
-              }
+      if (BlockUtils.isCategory(plant.getCategory(), MUSHROOM)) {
+        if (avgTemperature >= -13f && avgTemperature <= 50f && rainfall >= 250f && rainfall <= 500) {
+          int plantCount = (RNG.nextInt(3) + 1);
+          for (int i = rng.nextInt(Math.round(plantCount / floraDiversity)); i < (floraDensity + floraDiversity) * fungiUndergroundCount; i++) {
+            BlockPos blockPos = chunkPos.add(rng.nextInt(16) + 8, rng.nextInt(16) + 8, rng.nextInt(16) + 8);
+            if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 15 && blockPos.getY() > 20) {
+              undergroundMushrooms.generate(world, rng, blockPos);
             }
-            continue;
           }
-          switch (RNG.nextInt(2)) {
-            case 0: {
-              if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE, LIANA))) {
-                int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2) + WorldTypeClassic.ROCKLAYER2;
-                BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
+          continue;
+        }
+        switch (RNG.nextInt(2)) {
+          case 0: {
+            if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE, LIANA))) {
+              int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2) + WorldTypeClassic.ROCKLAYER2;
+              BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
 
-                int plantCount = (RNG.nextInt(3) + 1);
-                for (int i = rng.nextInt(Math.round(plantCount / floraDiversity));
-                     i < (floraDensity + floraDiversity) * hangingVinesUndergroundCount; i++) {
-                  BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0,
-                                                        rng.nextInt(16) + 8);
-                  if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5
-                      && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
-                    undergroundVines.generate(world, rng, blockPos);
-                  }
+              int plantCount = (RNG.nextInt(3) + 1);
+              for (int i = rng.nextInt(Math.round(plantCount / floraDiversity));
+                   i < (floraDensity + floraDiversity) * hangingVinesUndergroundCount; i++) {
+                BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8);
+                if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5
+                    && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
+                  undergroundVines.generate(world, rng, blockPos);
                 }
-                break;
               }
-            }
-            case 1: {
-              if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE))) {
-                int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2) + WorldTypeClassic.ROCKLAYER2;
-                BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
-
-                int plantCount = (RNG.nextInt(3) + 1);
-                for (int i = rng.nextInt(Math.round(plantCount / floraDiversity));
-                     i < (floraDensity + floraDiversity) * creepingVinesUndergroundCount; i++) {
-                  BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0,
-                                                        rng.nextInt(16) + 8);
-                  if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5
-                      && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
-                    undergroundCreepingVines.generate(world, rng, blockPos);
-                  }
-                }
-                break;
-              }
-            }
-            default:
               break;
+            }
           }
-          if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, TACKWEED, TAKAKIA, IVY, MORNING_GLORY, MOSS, REINDEER_LICHEN))) {
-            int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER3) + WorldTypeClassic.ROCKLAYER3;
-            BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
+          case 1: {
+            if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE))) {
+              int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2) + WorldTypeClassic.ROCKLAYER2;
+              BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
 
-            int plantCount = (RNG.nextInt(3) + 1);
-            for (int i = rng.nextInt(Math.round(plantCount / floraDiversity));
-                 i < (floraDensity + floraDiversity) * creepingUndergroundCount; i++) {
-              BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8);
-              if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5
-                  && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
-                undergroundMoss.generate(world, rng, blockPos);
-              }
-            }
-            continue;
-          }
-        } else if (plant.getCategory().equals(HANGING)) {
-          switch (RNG.nextInt(2)) {
-            case 0: {
-              if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE, LIANA))) {
-                int y1 =
-                  rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2)
-                  + WorldTypeClassic.ROCKLAYER2;
-                BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
-
-                int plantCount = (RNG.nextInt(3) + 1);
-                for (int i = rng.nextInt(Math.round(plantCount / floraDiversity));
-                     i < (floraDensity + floraDiversity) * hangingVinesUndergroundCount; i++) {
-                  BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0,
-                                                        rng.nextInt(16) + 8);
-                  //TFCFlorae.getLog().warn("TFCFlorae: Vines " + plant + " attempted to generate at " + "X: " + blockPos.getX() + ", Y: " + blockPos.getY() + ", Z: " + blockPos.getZ());
-                  if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5
-                      && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
-                    undergroundVines.generate(world, rng, blockPos);
-                  }
+              int plantCount = (RNG.nextInt(3) + 1);
+              for (int i = rng.nextInt(Math.round(plantCount / floraDiversity));
+                   i < (floraDensity + floraDiversity) * creepingVinesUndergroundCount; i++) {
+                BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0,
+                                                      rng.nextInt(16) + 8);
+                if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5
+                    && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
+                  undergroundCreepingVines.generate(world, rng, blockPos);
                 }
-                break;
               }
-            }
-            case 1: {
-              if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE))) {
-                int y1 =
-                  rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2)
-                  + WorldTypeClassic.ROCKLAYER2;
-                BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
-
-                int plantCount = (RNG.nextInt(3) + 1);
-                for (int i = rng.nextInt(Math.round(plantCount / floraDiversity));
-                     i < (floraDensity + floraDiversity) * creepingVinesUndergroundCount; i++) {
-                  BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0,
-                                                        rng.nextInt(16) + 8);
-                  //TFCFlorae.getLog().warn("TFCFlorae: CreepingVines " + plant + " attempted to generate at " + "X: " + blockPos.getX() + ", Y: " + blockPos.getY() + ", Z: " + blockPos.getZ());
-                  if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5
-                      && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
-                    undergroundCreepingVines.generate(world, rng, blockPos);
-                  }
-                }
-                break;
-              }
-            }
-            default:
               break;
-          }
-          if ((biome != BiomesWorld.OCEAN) && (
-            plant == TACKWEED ||
-            plant == TAKAKIA ||
-            plant == IVY ||
-            plant == MORNING_GLORY ||
-            plant == MOSS ||
-            plant == REINDEER_LICHEN)) {
-            int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER3)
-                     + WorldTypeClassic.ROCKLAYER3;
-            BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
-
-            int plantCount = (RNG.nextInt(3) + 1);
-            for (int i = rng.nextInt(Math.round(plantCount / floraDiversity));
-                 i < (floraDensity + floraDiversity) * creepingUndergroundCount; i++) {
-              BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8);
-              //TFCFlorae.getLog().warn("TFCFlorae: Moss " + plant + " attempted to generate at " + "X: " + blockPos.getX() + ", Y: " + blockPos.getY() + ", Z: " + blockPos.getZ());
-              if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5
-                  && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
-                undergroundMoss.generate(world, rng, blockPos);
-              }
             }
-            continue;
           }
-        } else if (plant.getCategory().equals(CREEPING)) {
-          if ((biome != BiomesWorld.OCEAN) && (
-            plant == TACKWEED ||
-            plant == TAKAKIA ||
-            plant == IVY ||
-            plant == MORNING_GLORY ||
-            plant == MOSS ||
-            plant == REINDEER_LICHEN)) {
-            int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER3)
-                     + WorldTypeClassic.ROCKLAYER3;
-            BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
+          default:
+            break;
+        }
+        if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, TACKWEED, TAKAKIA, IVY, MORNING_GLORY, MOSS, REINDEER_LICHEN))) {
+          int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER3) + WorldTypeClassic.ROCKLAYER3;
+          BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
 
-            int plantCount = (RNG.nextInt(3) + 1);
-            for (int i = rng.nextInt(Math.round(plantCount / floraDiversity));
-                 i < (floraDensity + floraDiversity) * creepingUndergroundCount; i++) {
-              BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8);
-              //TFCFlorae.getLog().warn("TFCFlorae: Moss " + plant + " attempted to generate at " + "X: " + blockPos.getX() + ", Y: " + blockPos.getY() + ", Z: " + blockPos.getZ());
-              if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5
-                  && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
-                undergroundMoss.generate(world, rng, blockPos);
-              }
+          int plantCount = (RNG.nextInt(3) + 1);
+          for (int i = rng.nextInt(Math.round(plantCount / floraDiversity));
+               i < (floraDensity + floraDiversity) * creepingUndergroundCount; i++) {
+            BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8);
+            if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5
+                && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
+              undergroundMoss.generate(world, rng, blockPos);
             }
-            continue;
+          }
+        }
+      } else if (BlockUtils.isCategory(plant.getCategory(), HANGING)) {
+        switch (RNG.nextInt(2)) {
+          case 0: {
+            if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE, LIANA))) {
+              int y1 =
+                rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2) + WorldTypeClassic.ROCKLAYER2;
+              BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
+
+              int plantCount = (RNG.nextInt(3) + 1);
+              for (int i = rng.nextInt(Math.round(plantCount / floraDiversity));
+                   i < (floraDensity + floraDiversity) * hangingVinesUndergroundCount; i++) {
+                BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8);
+                if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5
+                    && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
+                  undergroundVines.generate(world, rng, blockPos);
+                }
+              }
+              break;
+            }
+          }
+          case 1: {
+            if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE))) {
+              int y1 =
+                rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2)
+                + WorldTypeClassic.ROCKLAYER2;
+              BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
+
+              int plantCount = (RNG.nextInt(3) + 1);
+              for (int i = rng.nextInt(Math.round(plantCount / floraDiversity));
+                   i < (floraDensity + floraDiversity) * creepingVinesUndergroundCount; i++) {
+                BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8);
+                if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5
+                    && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
+                  undergroundCreepingVines.generate(world, rng, blockPos);
+                }
+              }
+              break;
+            }
+          }
+          default:
+            break;
+        }
+        if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(TACKWEED, TAKAKIA, IVY, MORNING_GLORY, MOSS, REINDEER_LICHEN))) {
+          int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER3) + WorldTypeClassic.ROCKLAYER3;
+          BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
+
+          int plantCount = (RNG.nextInt(3) + 1);
+          for (int i = rng.nextInt(Math.round(plantCount / floraDiversity)); i < (floraDensity + floraDiversity) * creepingUndergroundCount; i++) {
+            BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8);
+            if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5 && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
+              undergroundMoss.generate(world, rng, blockPos);
+            }
+          }
+        }
+      } else if (BlockUtils.isCategory(plant.getCategory(), CREEPING)) {
+        if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, TACKWEED, TAKAKIA, IVY, MORNING_GLORY, MOSS, REINDEER_LICHEN))) {
+          int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER3) + WorldTypeClassic.ROCKLAYER3;
+          BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
+
+          int plantCount = (RNG.nextInt(3) + 1);
+          for (int i = rng.nextInt(Math.round(plantCount / floraDiversity)); i < (floraDensity + floraDiversity) * creepingUndergroundCount; i++) {
+            BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8);
+            if (blockPos.getY() < WorldTypeClassic.SEALEVEL - 5 && blockPos.getY() > WorldTypeClassic.ROCKLAYER2) {
+              undergroundMoss.generate(world, rng, blockPos);
+            }
           }
         }
       }
     }
+
   }
 }

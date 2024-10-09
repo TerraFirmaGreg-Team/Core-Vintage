@@ -15,11 +15,13 @@ public final class BlocksPlant {
 
     PLANT = PlantBlockVariant
       .builder("plant")
+      .factory((variant, type) -> type.getCategory().create(variant, type))
       .build();
 
-    FLOWER_POT = PlantBlockVariant
-      .builder("flower_pot")
-      .build();
+//    FLOWER_POT = PlantBlockVariant
+//      .builder("flower_pot")
+//      .factory(BlockPlantFlowerPot::new)
+//      .build();
   }
 
   @SideOnly(Side.CLIENT)

@@ -18,14 +18,16 @@ public final class EntitiesCore {
 
   public static void onRegister(RegistryManager registry) {
 
-    SIT_BLOCK = registry.entity("sitblock", EntityEntryBuilder.create()
-                                                              .entity(EntitySeatOn.class)
-                                                              .tracker(160, 20, true)
+    SIT_BLOCK = registry.entity("sitblock",
+                                EntityEntryBuilder.create()
+                                                  .entity(EntitySeatOn.class)
+                                                  .tracker(160, 20, true)
     );
 
-    FALLING_BLOCK = registry.entity("falling_block", EntityEntryBuilder.create()
-                                                                       .entity(EntityFallingBlock.class)
-                                                                       .tracker(160, 20, true)
+    FALLING_BLOCK = registry.entity("falling_block",
+                                    EntityEntryBuilder.create()
+                                                      .entity(EntityFallingBlock.class)
+                                                      .tracker(160, 20, true)
     );
   }
 

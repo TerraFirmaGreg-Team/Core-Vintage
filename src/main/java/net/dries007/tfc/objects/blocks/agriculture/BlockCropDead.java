@@ -2,6 +2,8 @@ package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantEmergentTallWater;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantWater;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.block.Block;
@@ -23,9 +25,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 
 import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantEmergentTallWater;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantWater;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantWaterTFCF;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.skills.SimpleSkill;
@@ -156,7 +155,7 @@ public class BlockCropDead extends BlockBush { //implements IGrowingPlant
       return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
     } else {
       soil = worldIn.getBlockState(pos.down());
-      if (!(soil.getBlock() instanceof BlockPlantWaterTFCF) && !(soil.getBlock() instanceof BlockPlantWater)) {
+      if (!(soil.getBlock() instanceof BlockPlantWater)) {
         if (state.getBlock() != this) {
           return this.canSustainBush(soil);
         } else {

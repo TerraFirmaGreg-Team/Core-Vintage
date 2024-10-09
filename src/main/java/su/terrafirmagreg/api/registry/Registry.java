@@ -151,7 +151,7 @@ public class Registry {
 
   public void onRegisterTileEntities() {
 
-    blocks.forEach(block -> {
+    this.blocks.forEach(block -> {
       if (block instanceof IProviderTile provider) {
         TileUtils.registerTileEntity(provider.getTileClass(), provider.getTileClass().getSimpleName());
       }
@@ -219,10 +219,11 @@ public class Registry {
 
   public void onRegisterLootTableLoad(LootTableLoadEvent event) {
 
-    this.lootTable.get(event.getName())
-                  .forEach(builder -> event.getTable()
-                                           .getPool(builder.getPool())
-                                           .addEntry(builder.build()));
+    this.lootTable.get(event.getName()).forEach(builder -> {
+      event.getTable()
+           .getPool(builder.getPool())
+           .addEntry(builder.build());
+    });
   }
 
   public void onRegisterCommand(FMLServerStartingEvent event) {
@@ -263,6 +264,10 @@ public class Registry {
   public void onRegisterModelsBlock() {
 
     this.blocks.forEach(block -> {
+      if (block instanceof IProviderBlockState provider) {
+        ModelUtils.registerStateMapper(block, provider.getStateMapper());
+      }
+
       if (block instanceof IProviderModel provider) {
         if (provider.getResourceLocation() != null) {
           ModelUtils.registerBlockInventoryModel(block, provider.getResourceLocation());
@@ -272,9 +277,6 @@ public class Registry {
       //                ModelUtils.registerBlockInventoryModel(block);
       //            }
 
-      if (block instanceof IProviderBlockState provider) {
-        ModelUtils.registerStateMapper(block, provider.getStateMapper());
-      }
     });
   }
 

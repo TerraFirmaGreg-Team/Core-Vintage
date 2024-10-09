@@ -1,13 +1,12 @@
 package net.dries007.tfc.util;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorWildCrops;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrass;
 
 public class RegenWildCrops extends GeneratorWildCrops {
 

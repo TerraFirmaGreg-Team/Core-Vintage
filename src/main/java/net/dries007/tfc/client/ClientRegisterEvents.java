@@ -2,6 +2,7 @@ package net.dries007.tfc.client;
 
 import su.terrafirmagreg.data.enums.EnumGradeOre;
 import su.terrafirmagreg.data.enums.EnumHideSize;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 
 import net.minecraft.block.Block;
@@ -45,7 +46,6 @@ import net.dries007.tfc.client.render.TESRPlacedItemFlat;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
-import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.objects.items.ItemGoldPan;
@@ -288,8 +288,7 @@ public final class ClientRegisterEvents {
 
     blockColors.registerBlockColorHandler(foliageColor,
                                           BlocksTFC.getAllLeafBlocks().toArray(new Block[0]));
-    blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllPlantBlocks()
-                                                                 .toArray(new BlockPlant[0]));
+    blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllPlantBlocks().toArray(new BlockPlant[0]));
 
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllFruitTreeLeavesBlocks()
                                                                  .toArray(new Block[0]));

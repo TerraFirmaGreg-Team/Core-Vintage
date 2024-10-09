@@ -7,8 +7,8 @@ import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
+import su.terrafirmagreg.modules.plant.init.BlocksPlant;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
-import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 
@@ -33,7 +33,6 @@ import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import tfcflorae.TFCFlorae;
 
 import java.util.Map;
@@ -42,6 +41,11 @@ import java.util.Random;
 
 import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DIRT;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DRY_GRASS;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.SPARSE_GRASS;
 
 public class StructureGenerator extends WorldGenerator {
 
@@ -249,33 +253,28 @@ public class StructureGenerator extends WorldGenerator {
             for (int y = 0; y < searchRange; y++) {
               for (PlantType plant : PlantType.getTypes()) {
                 if (world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock() == Blocks.AIR ||
-                    world.getBlockState(new BlockPos(posX, posY, posZ))
-                         .getBlock() == BlockPlant.get(plant)) {
+                    world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock() == BlocksPlant.PLANT.get(plant)) {
                   final IBlockState current = world.getBlockState(position);
 
-                  if (BlockUtils.isSand(current)) {
+                  if (BlockUtils.isVariant(current, SAND)) {
                     world.setBlockState(new BlockPos(posX, posY, posZ),
                                         BlocksRock.SAND.get(ProviderChunkData.getRockHeight(world, position)).getDefaultState(), 2);
 
                   } else if (BlockUtils.isDirt(current)) {
-                    world.setBlockState(new BlockPos(posX, posY, posZ),
-                                        BlocksSoil.DIRT.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
+                    world.setBlockState(new BlockPos(posX, posY, posZ), DIRT.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
 
-                  } else if (BlockUtils.isDryGrass(current)) {
-                    world.setBlockState(new BlockPos(posX, posY, posZ),
-                                        BlocksSoil.DRY_GRASS.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
+                  } else if (BlockUtils.isVariant(current, DRY_GRASS)) {
+                    world.setBlockState(new BlockPos(posX, posY, posZ), DRY_GRASS.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
 
                   } else if (BlockUtils.isGrass(current)) {
-                    world.setBlockState(new BlockPos(posX, posY, posZ),
-                                        BlocksSoil.GRASS.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
+                    world.setBlockState(new BlockPos(posX, posY, posZ), GRASS.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
 
-                  } else if (BlockUtils.isSparseGrass(current)) {
-                    world.setBlockState(new BlockPos(posX, posY, posZ),
-                                        BlocksSoil.SPARSE_GRASS.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
+                  } else if (BlockUtils.isVariant(current, SPARSE_GRASS)) {
+                    world.setBlockState(new BlockPos(posX, posY, posZ), SPARSE_GRASS.get(ProviderChunkData.getSoilHeight(world, position))
+                                                                                    .getDefaultState(), 2);
 
                   } else {
-                    world.setBlockState(new BlockPos(posX, posY, posZ),
-                                        BlocksSoil.DIRT.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
+                    world.setBlockState(new BlockPos(posX, posY, posZ), DIRT.get(ProviderChunkData.getSoilHeight(world, position)).getDefaultState(), 2);
                   }
                   posY = posY - 1;
                 }

@@ -50,14 +50,14 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
     setSoundType(SoundType.GLASS);
     setHardness(0.5f).setResistance(5.0F);
     this.setLightLevel(lightLevel);
-    blockState = this.createPlantBlockState();
+    blockState = this.createBlockState();
     this.setDefaultState(this.blockState.getBaseState());
     OreDictionaryHelper.register(this, "ore", "yooperlite");
     OreDictionaryHelper.register(this, "gem", "yooperlite");
   }
 
   @NotNull
-  protected BlockStateContainer createPlantBlockState() {
+  protected BlockStateContainer createBlockState() {
     return new BlockStateContainer(this, DIRECTIONAL);
   }
 

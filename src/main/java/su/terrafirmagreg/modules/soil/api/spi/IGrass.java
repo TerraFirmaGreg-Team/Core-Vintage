@@ -4,9 +4,10 @@ import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.plant.api.types.category.PlantCategories;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
+import su.terrafirmagreg.modules.plant.init.BlocksPlant;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
-import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeat;
 
 import net.minecraft.block.Block;
@@ -15,11 +16,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrass;
 import net.dries007.tfc.util.climate.Climate;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
+
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DIRT;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DRY_GRASS;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.PEAT;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.PEAT_GRASS;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.SPARSE_GRASS;
 
 public interface IGrass {
 
@@ -37,7 +44,7 @@ public interface IGrass {
       var soil = soilBlock.getType();
 
       if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {
-        worldIn.setBlockState(pos, BlocksSoil.DIRT.get(soil).getDefaultState());
+        worldIn.setBlockState(pos, DIRT.get(soil).getDefaultState());
 
       } else {
         if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
@@ -51,9 +58,9 @@ public interface IGrass {
             IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
             IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-            if (iblockstate1.getBlock() == BlocksSoil.DIRT.get(soil) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4
+            if (iblockstate1.getBlock() == DIRT.get(soil) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4
                 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
-              worldIn.setBlockState(blockpos, BlocksSoil.GRASS.get(soil).getDefaultState());
+              worldIn.setBlockState(blockpos, GRASS.get(soil).getDefaultState());
             }
           }
         }
@@ -77,7 +84,7 @@ public interface IGrass {
 
       // Генерируем торф в зависимости от типа блока
       if (usBlock instanceof BlockSoilPeat) {
-        world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
+        world.setBlockState(pos, PEAT.getDefaultState());
 
       } else if (usBlock instanceof ISoilBlock soil) {
         world.setBlockState(pos, soil.getVariant().getNonGrassVersion().get(soil.getType()).getDefaultState());
@@ -116,16 +123,16 @@ public interface IGrass {
 
         // Генерируем траву в зависимости от типа текущего блока
         if (currentBlock instanceof BlockSoilPeat) {
-          world.setBlockState(target, BlocksSoil.PEAT_GRASS.getDefaultState());
+          world.setBlockState(target, PEAT_GRASS.getDefaultState());
         } else if (currentBlock instanceof ISoilBlock soilBlock) {
-          SoilBlockVariant spreader = BlocksSoil.GRASS;
+          SoilBlockVariant spreader = GRASS;
 
           // Проверяем тип блока, с которого распространяется трава
           if (usBlock instanceof ISoilBlock) {
-            if (BlockUtils.isDryGrass(usBlock.getDefaultState())) {
-              spreader = BlocksSoil.DRY_GRASS;
-            } else if (BlockUtils.isSparseGrass(usBlock.getDefaultState())) {
-              spreader = BlocksSoil.SPARSE_GRASS;
+            if (BlockUtils.isVariant(usBlock.getDefaultState(), DRY_GRASS)) {
+              spreader = DRY_GRASS;
+            } else if (BlockUtils.isVariant(usBlock.getDefaultState(), SPARSE_GRASS)) {
+              spreader = SPARSE_GRASS;
             }
           }
 
@@ -137,7 +144,7 @@ public interface IGrass {
       for (PlantType plant : PlantType.getTypes()) {
         if (plant.getCategory() == PlantCategories.SHORT_GRASS && rand.nextFloat() < 0.5f) {
           float temp = Climate.getActualTemp(world, upPos);
-          BlockPlantShortGrass plantBlock = BlockPlantShortGrass.get(plant);
+          var plantBlock = (BlockPlantShortGrass) BlocksPlant.PLANT.get(plant);
 
           if (world.isAirBlock(upPos) &&
               plant.isValidLocation(temp, ProviderChunkData.getRainfall(world, upPos),
@@ -148,21 +155,6 @@ public interface IGrass {
           }
         }
       }
-//      for (PlantType plant : PlantType.getTypes()) {
-//        if (plant.getPlantVariant() == PlantEnumVariant.SHORT_GRASS && rand.nextFloat() < 0.5f) {
-//          float temp = ClimateTFC.getActualTemp(world, upPos);
-//          var plantBlock = (BlockPlantShortGrass) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
-//
-//          // Проверяем условия для генерации короткой травы
-//          if (world.isAirBlock(upPos) &&
-//              plant.isValidLocation(temp, ChunkDataTFC.getRainfall(world, upPos),
-//                  Math.subtractExact(world.getLightFor(EnumSkyBlock.SKY, upPos), world.getSkylightSubtracted())) &&
-//              plant.isValidGrowthTemp(temp) &&
-//              rand.nextDouble() < plantBlock.getGrowthRate(world, upPos)) {
-//            world.setBlockState(upPos, plantBlock.getDefaultState());
-//          }
-//        }
-//      }
     }
   }
 }

@@ -5,6 +5,8 @@ public class PlantCategories {
   public static PlantCategory STANDARD;
   public static PlantCategory CREEPING;
   public static PlantCategory HANGING;
+  public static PlantCategory HANGING_TALL;
+  public static PlantCategory HANGING_CREEPING;
   public static PlantCategory FLOATING;
   public static PlantCategory FLOATING_SEA;
   public static PlantCategory DESERT;

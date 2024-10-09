@@ -4,6 +4,8 @@ import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantEmergentTallWater;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantWater;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
@@ -29,9 +31,6 @@ import net.minecraftforge.common.EnumPlantType;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantEmergentTallWater;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantWater;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantWaterTFCF;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.util.agriculture.Crop;
@@ -275,7 +274,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
       return super.canBlockStay(worldIn, pos, state);
     } else {
       IBlockState soil = worldIn.getBlockState(pos.down());
-      if (!(soil.getBlock() instanceof BlockPlantWaterTFCF) && !(soil.getBlock() instanceof BlockPlantWater)) {
+      if (!(soil.getBlock() instanceof BlockPlantWater)) {
         if (state.getBlock() != this) {
           return this.canSustainBush(soil);
         } else {

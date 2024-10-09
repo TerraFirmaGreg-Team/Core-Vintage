@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core.object.command;
 
 import su.terrafirmagreg.api.base.command.BaseCommand;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 
@@ -18,8 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
-
-import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 
 public class CommandStripWorld extends BaseCommand {
 

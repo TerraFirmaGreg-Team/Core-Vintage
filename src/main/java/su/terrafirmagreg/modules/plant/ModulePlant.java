@@ -6,6 +6,8 @@ import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantTypeHandler;
+import su.terrafirmagreg.modules.plant.init.BlocksPlant;
+import su.terrafirmagreg.modules.plant.init.ItemsPlant;
 
 import net.minecraft.creativetab.CreativeTabs;
 
@@ -22,7 +24,7 @@ public final class ModulePlant extends ModuleBase {
   public static RegistryManager REGISTRY;
 
   public ModulePlant() {
-    TAB = BaseCreativeTab.of("plant", "plant/crop/seed/rice");
+    TAB = BaseCreativeTab.of("flora", "plant/crop/seed/rice");
     REGISTRY = enableAutoRegistry(TAB);
   }
 
@@ -30,8 +32,8 @@ public final class ModulePlant extends ModuleBase {
   public void onRegister() {
     PlantTypeHandler.init();
 
-//    BlocksPlant.onRegister(registryManager);
-//    ItemsPlant.onRegister(registryManager);
+    BlocksPlant.onRegister(registryManager);
+    ItemsPlant.onRegister(registryManager);
   }
 
   @Override

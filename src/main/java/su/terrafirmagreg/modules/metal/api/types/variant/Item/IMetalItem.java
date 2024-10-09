@@ -1,8 +1,7 @@
 package su.terrafirmagreg.modules.metal.api.types.variant.Item;
 
 import su.terrafirmagreg.api.base.item.spi.IItemSettings;
-import su.terrafirmagreg.data.lib.types.type.IType;
-import su.terrafirmagreg.data.lib.types.variant.IVariant;
+import su.terrafirmagreg.data.lib.types.variant.item.IVariantItem;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс, представляющий предмет породы.
  */
-public interface IMetalItem extends IType<MetalType>, IVariant<MetalItemVariant>, IItemSettings {
+public interface IMetalItem extends IVariantItem<MetalItemVariant, MetalType>, IItemSettings {
 
   /**
    * Возвращает расположение в реестре для данного подтипа предмета.

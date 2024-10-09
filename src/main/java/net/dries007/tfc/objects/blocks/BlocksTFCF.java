@@ -1,8 +1,12 @@
 package net.dries007.tfc.objects.blocks;
 
-import su.terrafirmagreg.modules.plant.api.types.category.PlantCategories;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantTypes;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantCreeping;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantHangingCreeping;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantHangingTall;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantTallGrass;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantTallGrassWater;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -28,6 +32,7 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
+import net.dries007.tfc.objects.blocks.groundcover.BlockCaveMushroom;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
 import net.dries007.tfc.objects.blocks.groundcover.BlockDriftwood;
@@ -37,17 +42,6 @@ import net.dries007.tfc.objects.blocks.groundcover.BlockSurfaceBones;
 import net.dries007.tfc.objects.blocks.groundcover.BlockSurfaceFlint;
 import net.dries007.tfc.objects.blocks.groundcover.BlockSurfaceSeashells;
 import net.dries007.tfc.objects.blocks.groundcover.BlockTwig;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantCaveMushroom;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantCreepingTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantDummy1;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantHangingCreepingTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantHangingTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrassTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTallGrassTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTallGrassWater;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTallWaterTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantWaterGlow;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantWaterTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeFlower;
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeLog;
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeSapling;
@@ -241,23 +235,21 @@ public final class BlocksTFCF {
   @GameRegistry.ObjectHolder("coral/block/tube/dead")
   public static final BlockCoralBlock TUBE_CORAL_BLOCK_DEAD = getNull();
 
-  @GameRegistry.ObjectHolder("plants/glowing_sea_banana")
-  public static final BlockPlantWaterGlow GLOWING_SEA_BANANA = getNull();
   @GameRegistry.ObjectHolder("plants/blueshroom")
-  public static final BlockPlantCaveMushroom BLUESHROOM = getNull();
+  public static final BlockCaveMushroom BLUESHROOM = getNull();
   @GameRegistry.ObjectHolder("plants/glowshroom")
-  public static final BlockPlantCaveMushroom GLOWSHROOM = getNull();
+  public static final BlockCaveMushroom GLOWSHROOM = getNull();
   @GameRegistry.ObjectHolder("plants/magma_shroom")
-  public static final BlockPlantCaveMushroom MAGMA_SHROOM = getNull();
+  public static final BlockCaveMushroom MAGMA_SHROOM = getNull();
   @GameRegistry.ObjectHolder("plants/poison_shroom")
-  public static final BlockPlantCaveMushroom POISON_SHROOM = getNull();
+  public static final BlockCaveMushroom POISON_SHROOM = getNull();
   @GameRegistry.ObjectHolder("plants/sulphur_shroom")
-  public static final BlockPlantCaveMushroom SULPHUR_SHROOM = getNull();
+  public static final BlockCaveMushroom SULPHUR_SHROOM = getNull();
 
   @GameRegistry.ObjectHolder("groundcover/lightstone")
   public static final BlockLightstone LIGHTSTONE = getNull();
   @Getter
-  private static final ImmutableList<BlockPlantCaveMushroom> allMushroomPlantBlocks = Helpers.getNull();
+  private static final ImmutableList<BlockCaveMushroom> allMushroomPlantBlocks = Helpers.getNull();
   @Getter
   private static final ImmutableList<BlockJoshuaTreeFlower> allJoshuaTreeFlowerBlocks = Helpers.getNull();
   //private static ImmutableList<MultiBlockBase> allMultiBlocks = Helpers.getNull();
@@ -319,23 +311,19 @@ public final class BlocksTFCF {
   @Getter
   private static ImmutableList<BlockCoral> allCoralPlants = Helpers.getNull();
   @Getter
-  private static ImmutableList<BlockPlantWaterGlow> allGlowWaterPlants = Helpers.getNull();
+  private static ImmutableList<BlockPlantHangingTall> allHangingPlantBlocks = Helpers.getNull();
   @Getter
-  private static ImmutableList<BlockPlantWaterTFCF> allWaterPlantBlocks = Helpers.getNull();
+  private static ImmutableList<BlockPlantHangingCreeping> allHangingCreepingPlantBlocks = Helpers.getNull();
   @Getter
-  private static ImmutableList<BlockPlantHangingTFCF> allHangingPlantBlocks = Helpers.getNull();
-  @Getter
-  private static ImmutableList<BlockPlantHangingCreepingTFCF> allHangingCreepingPlantBlocks = Helpers.getNull();
-  @Getter
-  private static ImmutableList<BlockPlantCreepingTFCF> allCreepingPlantBlocks = Helpers.getNull();
+  private static ImmutableList<BlockPlantCreeping> allCreepingPlantBlocks = Helpers.getNull();
   @Getter
   private static ImmutableList<BlockPlantTallGrassWater> allTallGrassWaterBlocks = Helpers.getNull();
   @Getter
-  private static ImmutableList<BlockPlantShortGrassTFCF> allShortGrassBlocks = Helpers.getNull();
+  private static ImmutableList<BlockPlantShortGrass> allShortGrassBlocks = Helpers.getNull();
   @Getter
-  private static ImmutableList<BlockPlantTallGrassTFCF> allTallGrassBlocks = Helpers.getNull();
+  private static ImmutableList<BlockPlantTallGrass> allTallGrassBlocks = Helpers.getNull();
   @Getter
-  private static ImmutableList<BlockPlantDummy1> allStandardBlocks = Helpers.getNull();
+  private static ImmutableList<BlockPlant> allStandardBlocks = Helpers.getNull();
   @Getter
   private static ImmutableList<BlockLightstone> allLightstoneBlocks = Helpers.getNull();
 
@@ -372,7 +360,6 @@ public final class BlocksTFCF {
     ImmutableList.Builder<BlockTwig> surfaceTwig = ImmutableList.builder();
     ImmutableList.Builder<BlockPinecone> surfacePinecone = ImmutableList.builder();
     ImmutableList.Builder<BlockCoral> plantCoral = ImmutableList.builder();
-    ImmutableList.Builder<BlockPlantWaterGlow> plantGlowWater = ImmutableList.builder();
     ImmutableList.Builder<BlockLightstone> blockLightstone = ImmutableList.builder();
     //ImmutableList.Builder<MultiBlockBase> multiBlock = ImmutableList.builder();
 
@@ -534,100 +521,46 @@ public final class BlocksTFCF {
       BlockCoralBlock.TUBE_CORAL_BLOCK.put(dyeColor, tube);
     }
 
-    {
-      plantGlowWater.add(register(r, "plants/glowing_sea_banana", new BlockPlantWaterGlow(FluidsTFC.SALT_WATER.get()), CT_FLORA));
-    }
-    allGlowWaterPlants = plantGlowWater.build();
-    for (BlockPlantWaterGlow plantGlowWaterBlock : allGlowWaterPlants) {
-      normalItemBlocks.add(new ItemBlockTFC(plantGlowWaterBlock));
-    }
-
     normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/blueshroom",
-                                                   new BlockPlantCaveMushroom(0.3F, FoodDataTFCF.RAW_BLUESHROOM, new PotionEffectToHave(MobEffects.HUNGER, 610, 1, 4),
-                                                                              new PotionEffectToHave(MobEffects.HASTE, 610, 1, 4), "blueshroom", "mushroom", "category_vegetable"), CT_FLORA)));
+                                                   new BlockCaveMushroom(0.3F, FoodDataTFCF.RAW_BLUESHROOM, new PotionEffectToHave(MobEffects.HUNGER, 610, 1, 4),
+                                                                         new PotionEffectToHave(MobEffects.HASTE, 610, 1, 4), "blueshroom", "mushroom", "category_vegetable"), CT_FLORA)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/glowshroom",
-                                                   new BlockPlantCaveMushroom(0.5F, FoodDataTFCF.RAW_GLOWSHROOM, new PotionEffectToHave(MobEffects.HUNGER, 610, 1, 4),
-                                                                              new PotionEffectToHave(MobEffects.GLOWING, 610, 1, 4), "glowshroom", "mushroom", "category_vegetable"), CT_FLORA)));
+                                                   new BlockCaveMushroom(0.5F, FoodDataTFCF.RAW_GLOWSHROOM, new PotionEffectToHave(MobEffects.HUNGER, 610, 1, 4),
+                                                                         new PotionEffectToHave(MobEffects.GLOWING, 610, 1, 4), "glowshroom", "mushroom", "category_vegetable"), CT_FLORA)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/magma_shroom",
-                                                   new BlockPlantCaveMushroom(0.2F, FoodDataTFCF.RAW_MAGMA_SHROOM, new PotionEffectToHave(MobEffects.HUNGER, 610, 1, 4),
-                                                                              new PotionEffectToHave(MobEffects.FIRE_RESISTANCE, 610, 1, 4), "magma_shroom", "mushroom", "category_vegetable"), CT_FLORA)));
+                                                   new BlockCaveMushroom(0.2F, FoodDataTFCF.RAW_MAGMA_SHROOM, new PotionEffectToHave(MobEffects.HUNGER, 610, 1, 4),
+                                                                         new PotionEffectToHave(MobEffects.FIRE_RESISTANCE, 610, 1, 4), "magma_shroom", "mushroom", "category_vegetable"), CT_FLORA)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/poison_shroom",
-                                                   new BlockPlantCaveMushroom(0.1F, FoodDataTFCF.RAW_POISON_SHROOM, new PotionEffectToHave(MobEffects.POISON, 610, 1, 4),
-                                                                              new PotionEffectToHave(MobEffects.ABSORPTION, 610, 1, 4), "poison_shroom", "mushroom", "category_vegetable"), CT_FLORA)));
+                                                   new BlockCaveMushroom(0.1F, FoodDataTFCF.RAW_POISON_SHROOM, new PotionEffectToHave(MobEffects.POISON, 610, 1, 4),
+                                                                         new PotionEffectToHave(MobEffects.ABSORPTION, 610, 1, 4), "poison_shroom", "mushroom", "category_vegetable"), CT_FLORA)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/sulphur_shroom",
-                                                   new BlockPlantCaveMushroom(0.1F, FoodDataTFCF.RAW_SULPHUR_SHROOM, new PotionEffectToHave(MobEffects.MINING_FATIGUE, 610, 1, 4),
-                                                                              new PotionEffectToHave(MobEffects.LUCK, 610, 1, 4), "sulphur_shroom", "mushroom", "category_vegetable"), CT_FLORA)));
+                                                   new BlockCaveMushroom(0.1F, FoodDataTFCF.RAW_SULPHUR_SHROOM, new PotionEffectToHave(MobEffects.MINING_FATIGUE, 610, 1, 4),
+                                                                         new PotionEffectToHave(MobEffects.LUCK, 610, 1, 4), "sulphur_shroom", "mushroom", "category_vegetable"), CT_FLORA)));
 
     {
-      Builder<BlockPlantWaterTFCF> plantWaterBlock = ImmutableList.builder();
-      Builder<BlockPlantHangingTFCF> plantHangingBlock = ImmutableList.builder();
-      Builder<BlockPlantHangingCreepingTFCF> plantHangingCreepingBlock = ImmutableList.builder();
-      Builder<BlockPlantCreepingTFCF> plantCreepingBlock = ImmutableList.builder();
+      Builder<BlockPlantHangingTall> plantHangingBlock = ImmutableList.builder();
+      Builder<BlockPlantHangingCreeping> plantHangingCreepingBlock = ImmutableList.builder();
+      Builder<BlockPlantCreeping> plantCreepingBlock = ImmutableList.builder();
       Builder<BlockPlantTallGrassWater> plantTallGrassWaterBlock = ImmutableList.builder();
-      Builder<BlockPlantShortGrassTFCF> plantShortGrassBlock = ImmutableList.builder();
-      Builder<BlockPlantTallGrassTFCF> plantTallGrassBlock = ImmutableList.builder();
-      Builder<BlockPlantDummy1> plantStandardBlock = ImmutableList.builder();
+      Builder<BlockPlantShortGrass> plantShortGrassBlock = ImmutableList.builder();
+      Builder<BlockPlantTallGrass> plantTallGrassBlock = ImmutableList.builder();
+      Builder<BlockPlant> plantStandardBlock = ImmutableList.builder();
 
-      for (PlantType plant : PlantType.getTypes()) {
-        if (plant.getCategory() == PlantCategories.WATER) {
-          plantWaterBlock.add(register(r, "plants/" + plant.getName(), new BlockPlantWaterTFCF(FluidsTFC.FRESH_WATER.get(), plant), CT_FLORA));
-        } else if (plant.getCategory() == PlantCategories.WATER_SEA) {
-          plantWaterBlock.add(register(r, "plants/" + plant.getName(), new BlockPlantWaterTFCF(FluidsTFC.SALT_WATER.get(), plant), CT_FLORA));
-        } else if (plant.getCategory() == PlantCategories.TALL_WATER) {
-          plantWaterBlock.add(register(r, "plants/" + plant.getName(), new BlockPlantTallWaterTFCF(FluidsTFC.FRESH_WATER.get(), plant), CT_FLORA));
-        } else if (plant.getCategory() == PlantCategories.TALL_WATER_SEA) {
-          plantWaterBlock.add(register(r, "plants/" + plant.getName(), new BlockPlantTallWaterTFCF(FluidsTFC.SALT_WATER.get(), plant), CT_FLORA));
-        } else if (plant.getCategory() == PlantCategories.HANGING && (plant == PlantTypes.BEARDED_MOSS ||
-                                                                      plant == PlantTypes.GLOW_VINE ||
-                                                                      plant == PlantTypes.LIANA ||
-                                                                      plant == PlantTypes.HANGING_VINE ||
-                                                                      plant == PlantTypes.JUNGLE_VINE)) {
-          plantHangingBlock.add(register(r, "plants/" + plant.getName(), new BlockPlantHangingTFCF(plant), CT_FLORA));
-          plantHangingCreepingBlock.add(register(r, "plants/" + plant.getName() + "_creeping", new BlockPlantHangingCreepingTFCF(plant), CT_FLORA));
-        } else if (plant.getCategory() == PlantCategories.CREEPING && (
-          plant == PlantTypes.TACKWEED ||
-          plant == PlantTypes.TAKAKIA ||
-          plant == PlantTypes.IVY ||
-          plant == PlantTypes.MORNING_GLORY ||
-          plant == PlantTypes.MOSS ||
-          plant == PlantTypes.REINDEER_LICHEN)) {
-          plantCreepingBlock.add(register(r, "plants/" + plant.getName(), new BlockPlantCreepingTFCF(plant), CT_FLORA));
-        } else if (plant.getCategory() == PlantCategories.TALL_GRASS/* && (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.SAWGRASS))*/) {
-          plantTallGrassWaterBlock.add(register(r, "plants/" + plant.getName(), new BlockPlantTallGrassWater(plant), CT_FLORA));
-        }
-                /*else if (plant.getCategory() == PlantCategories.SHORT_GRASS && (
-                    plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.WILD_BARLEY) || 
-                    plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.WILD_RICE) || 
-                    plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.WILD_WHEAT)))
-                {
-                    plantShortGrassBlock.add(register(r, "plants/" + plant.getRegistryName().getPath(), new BlockShortGrassTFCF(plant), CT_FLORA));
-                }
-                else if (plant.getCategory() == PlantCategories.TALL_GRASS && (
-                    plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.WILD_BARLEY) || 
-                    plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.WILD_WHEAT)))
-                {
-                    plantTallGrassBlock.add(register(r, "plants/" + plant.getRegistryName().getPath(), new BlockTallGrassTFCF(plant), CT_FLORA));
-                }
-                else if (plant.getCategory() == PlantCategories.STANDARD && (
-                    plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BLUE_GINGER)))
-                {
-                    plantStandardBlock.add(register(r, "plants/" + plant.getRegistryName().getPath(), new BlockPlantDummy1(plant), CT_FLORA));
-                }*/
-      }
-      allWaterPlantBlocks = plantWaterBlock.build();
-      for (BlockPlantWaterTFCF blockWaterPlant : allWaterPlantBlocks) {
-        normalItemBlocks.add(new ItemBlockTFC(blockWaterPlant));
-      }
+//      for (PlantType plant : PlantType.getTypes()) {
+//        if (plant.getCategory() == PlantCategories.TALL_GRASS/* && (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.SAWGRASS))*/) {
+//          plantTallGrassWaterBlock.add(register(r, "plants/" + plant.getName(), new BlockPlantTallGrassWater(plant), CT_FLORA));
+//        }
+//      }
       allHangingPlantBlocks = plantHangingBlock.build();
-      for (BlockPlantHangingTFCF blockHangingPlant : allHangingPlantBlocks) {
+      for (BlockPlantHangingTall blockHangingPlant : allHangingPlantBlocks) {
         normalItemBlocks.add(new ItemBlockTFC(blockHangingPlant));
       }
       allHangingCreepingPlantBlocks = plantHangingCreepingBlock.build();
-      for (BlockPlantHangingCreepingTFCF blockHangingCreepingPlant : allHangingCreepingPlantBlocks) {
+      for (BlockPlantHangingCreeping blockHangingCreepingPlant : allHangingCreepingPlantBlocks) {
         normalItemBlocks.add(new ItemBlockTFC(blockHangingCreepingPlant));
       }
       allCreepingPlantBlocks = plantCreepingBlock.build();
-      for (BlockPlantCreepingTFCF blockCreepingPlant : allCreepingPlantBlocks) {
+      for (BlockPlantCreeping blockCreepingPlant : allCreepingPlantBlocks) {
         normalItemBlocks.add(new ItemBlockTFC(blockCreepingPlant));
       }
       allTallGrassWaterBlocks = plantTallGrassWaterBlock.build();
@@ -635,15 +568,15 @@ public final class BlocksTFCF {
         normalItemBlocks.add(new ItemBlockTallGrassWater(blockTallGrassWaterPlant));
       }
       allShortGrassBlocks = plantShortGrassBlock.build();
-      for (BlockPlantShortGrassTFCF blockShortGrassPlant : allShortGrassBlocks) {
+      for (BlockPlantShortGrass blockShortGrassPlant : allShortGrassBlocks) {
         normalItemBlocks.add(new ItemBlockTFC(blockShortGrassPlant));
       }
       allTallGrassBlocks = plantTallGrassBlock.build();
-      for (BlockPlantTallGrassTFCF blockTallGrassPlant : allTallGrassBlocks) {
+      for (BlockPlantTallGrass blockTallGrassPlant : allTallGrassBlocks) {
         normalItemBlocks.add(new ItemBlockTFC(blockTallGrassPlant));
       }
       allStandardBlocks = plantStandardBlock.build();
-      for (BlockPlantDummy1 blockStandardPlant : allStandardBlocks) {
+      for (BlockPlant blockStandardPlant : allStandardBlocks) {
         normalItemBlocks.add(new ItemBlockTFC(blockStandardPlant));
       }
     }

@@ -1,11 +1,13 @@
 package su.terrafirmagreg.data.lib.types.variant;
 
+import su.terrafirmagreg.data.lib.types.type.Type;
+
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
 
 @Getter
-public abstract class Variant<V, T> implements Comparable<Variant<V, T>> {
+public abstract class Variant<V, T extends Type<T>> implements Comparable<Variant<V, T>> {
 
   protected final String name;
 
@@ -21,11 +23,14 @@ public abstract class Variant<V, T> implements Comparable<Variant<V, T>> {
   public String toString() {
     return name;
   }
-  
+
 
   @Override
   public int compareTo(@NotNull Variant<V, T> type) {
     return this.name.compareTo(type.getName());
   }
 
+  public abstract String getRegistryKey(T type);
+
+  public abstract String getLocalizedName();
 }

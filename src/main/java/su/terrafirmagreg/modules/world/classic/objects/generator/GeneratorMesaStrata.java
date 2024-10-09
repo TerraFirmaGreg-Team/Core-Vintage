@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
@@ -22,6 +21,14 @@ import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.ConfigTFCF;
 
 import java.util.Random;
+
+import static su.terrafirmagreg.api.util.BlockUtils.isClay;
+import static su.terrafirmagreg.api.util.BlockUtils.isGrass;
+import static su.terrafirmagreg.api.util.BlockUtils.isGround;
+import static su.terrafirmagreg.api.util.BlockUtils.isSoil;
+import static su.terrafirmagreg.api.util.BlockUtils.isVariant;
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
 
 public class GeneratorMesaStrata implements IWorldGenerator {
 
@@ -47,7 +54,6 @@ public class GeneratorMesaStrata implements IWorldGenerator {
         final float rainfall = ProviderChunkData.getRainfall(world, strataLayer);
 
         if (rainfall < +1.3 * random.nextGaussian() + RAINFALL_DRY_GRASS && avgTemperature >= 15f) {
-          //TFCFlorae.getLog().warn("Biome at X: " + strataLayer.getX() + " Z: " + strataLayer.getZ() + " is " + b);
           //if (b == BiomesTFC.MESA || b == BiomesTFC.MESA_PLATEAU || b == BiomesTFC.MESA_BRYCE || b == BiomesTFC.MESA_PLATEAU_M || BiomeUtils.isMesaBiome(b))
           if (BiomeUtils.isMesaBiome(b)) {
             for (int y = WorldTypeClassic.SEALEVEL;
@@ -55,24 +61,17 @@ public class GeneratorMesaStrata implements IWorldGenerator {
               BlockPos currentBlock = chunkBlockPos.add(x, y, z);
               IBlockState currentBlockState = world.getBlockState(currentBlock);
               IBlockState currentBlockStateTop = world.getBlockState(currentBlock.up());
-              //TFCFlorae.getLog().warn("TFCFlorae: Current 'currentBlock' is " + "X: " + currentBlock.getX() + ", Y: " + currentBlock.getY() + ", Z: " + currentBlock.getZ());
               //if (currentBlockState instanceof BlockRockVariant && ((BlockRockVariant)(currentBlockState.get())).getRock().getRockCategory() == TFCRegistries.ROCK_CATEGORIES.getValue(DefaultRocks.SEDIMENTARY))
               if ((y <= WorldTypeClassic.SEALEVEL + 5 &&
-                   (BlockUtils.isRawStone(currentBlockState) || BlockUtils.isGround(
-                     currentBlockState) ||
-                    BlockUtils.isSoil(currentBlockState)) &&
-                   !(BlockUtils.isGrass(currentBlockState) || BlockUtils.isSand(currentBlockState) ||
-                     BlockUtils.isClay(currentBlockState))) ||
-                  (y > WorldTypeClassic.SEALEVEL + 5 &&
-                   (BlockUtils.isRawStone(currentBlockState) || BlockUtils.isGround(
-                     currentBlockState) ||
-                    BlockUtils.isSoil(currentBlockState)))) {
+                   (isVariant(currentBlockState, RAW) || isGround(currentBlockState) || isSoil(currentBlockState))
+                   && !(isGrass(currentBlockState) || isVariant(currentBlockState, SAND) || isClay(currentBlockState))) ||
+                  (y > WorldTypeClassic.SEALEVEL + 5 && (isVariant(currentBlockState, RAW) || isGround(currentBlockState) || isSoil(currentBlockState)))) {
+
                 if (y >= strataLayer.getY() && y <= strataLayer.getY() + 2) {
                   world.setBlockState(currentBlock, HARDENED_CLAY, 2);
                 }
                 if (y >= strataLayer.getY() + 3 && y <= strataLayer.getY() + 5) {
-                  world.setBlockState(currentBlock,
-                                      STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.BLUE), 2);
+                  world.setBlockState(currentBlock, STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.BLUE), 2);
                 }
                 if (y >= strataLayer.getY() + 6 && y <= strataLayer.getY() + 9) {
                   world.setBlockState(currentBlock,

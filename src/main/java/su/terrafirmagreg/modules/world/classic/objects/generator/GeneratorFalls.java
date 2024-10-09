@@ -13,6 +13,8 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
+
 public class GeneratorFalls implements IWorldGenerator {
 
   private final IBlockState block;
@@ -31,16 +33,15 @@ public class GeneratorFalls implements IWorldGenerator {
       int z = random.nextInt(16) + 8;
       int y = random.nextInt(WorldTypeClassic.SEALEVEL - 50) + 30;
       BlockPos pos = new BlockPos(chunkX << 4, y, chunkZ << 4).add(x, 0, z);
-      if (!BlockUtils.isRawStone(world.getBlockState(pos.down())) && !BlockUtils.isRawStone(
-        world.getBlockState(pos.up())) &&
-          (!BlockUtils.isRawStone(world.getBlockState(pos)) || !world.isAirBlock(pos))) {
+      if (!BlockUtils.isVariant(world.getBlockState(pos.down()), RAW) && !BlockUtils.isVariant(world.getBlockState(pos.up()), RAW) && (
+        !BlockUtils.isVariant(world.getBlockState(pos)) || !world.isAirBlock(pos))) {
         continue;
       }
       int rawHorizontal = 0, airHorizontal = 0;
       for (EnumFacing facing : EnumFacing.HORIZONTALS) {
         if (world.isAirBlock(pos.offset(facing))) {
           airHorizontal++;
-        } else if (BlockUtils.isRawStone(world.getBlockState(pos.offset(facing)))) {
+        } else if (BlockUtils.isVariant(world.getBlockState(pos.offset(facing)), RAW)) {
           rawHorizontal++;
         }
         if (airHorizontal > 1) {

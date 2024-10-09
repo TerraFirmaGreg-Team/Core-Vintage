@@ -7,4 +7,5 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(value = ChunkGeneratorDebug.class, remap = false)
 public abstract class MixinChunkGeneratorDebug {
 
+
 }

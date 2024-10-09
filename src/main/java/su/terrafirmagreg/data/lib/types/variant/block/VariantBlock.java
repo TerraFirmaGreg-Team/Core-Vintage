@@ -1,5 +1,6 @@
 package su.terrafirmagreg.data.lib.types.variant.block;
 
+import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 import su.terrafirmagreg.data.lib.types.type.Type;
 import su.terrafirmagreg.data.lib.types.variant.Variant;
 
@@ -12,9 +13,13 @@ import lombok.Getter;
 import java.util.Map;
 
 @Getter
-public abstract class VariantBlock<V, T extends Type<T>> extends Variant<V, T> {
+public abstract class VariantBlock<B extends IBlockSettings, V, T extends Type<T>> extends Variant<V, T> {
 
-  protected final Map<T, Block> map;
+  // public abstract class VariantBlock<T extends IBlockType<?, ?>> extends Variant<T, T.getType()> {
+
+  // VariantBlock<V, T extends Type<T>> extends Variant<V, T> {
+
+  protected final Map<T, B> map;
 
   protected VariantBlock(String name) {
     super(name);
@@ -28,11 +33,6 @@ public abstract class VariantBlock<V, T extends Type<T>> extends Variant<V, T> {
     if (block == null) {
       throw new RuntimeException(String.format("Block is null: %s, %s", this, type));
     }
-    return block;
+    return block.getBlock();
   }
-
-  public abstract String getRegistryKey(T type);
-
-  public abstract String getLocalizedName();
-
 }

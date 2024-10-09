@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 @Getter
-public class PlantBlockVariant extends VariantBlock<PlantBlockVariant, PlantType> {
+public class PlantBlockVariant extends VariantBlock<IPlantBlock, PlantBlockVariant, PlantType> {
 
   @Getter
   private static final Set<PlantBlockVariant> variants = new ObjectOpenHashSet<>();
@@ -28,7 +28,7 @@ public class PlantBlockVariant extends VariantBlock<PlantBlockVariant, PlantType
 
     PlantType.getTypes().forEach(type -> {
       var block = builder.factory.apply(this, type);
-      if (map.put(type, block.getBlock()) != null) {
+      if (map.put(type, block) != null) {
         throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
       }
       ModulePlant.REGISTRY.block(block);
@@ -40,7 +40,7 @@ public class PlantBlockVariant extends VariantBlock<PlantBlockVariant, PlantType
   }
 
   public String getRegistryKey(PlantType type) {
-    return String.format("plant/%s/%s", this.getName(), type);
+    return String.format("flora/%s/%s", this, type);
   }
 
   public String getLocalizedName() {

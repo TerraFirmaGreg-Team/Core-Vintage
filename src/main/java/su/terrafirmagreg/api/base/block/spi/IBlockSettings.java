@@ -109,8 +109,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
     return true; //this.getSettings() == null || this.getSettings().isOpaque();
   }
 
-  default float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos,
-                                @Nullable Entity entity) {
+  default float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity) {
 
     return this.getSettings().getSlipperiness().apply(state, world, pos);
   }
@@ -155,18 +154,23 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
   @Override
   @SideOnly(Side.CLIENT)
   default IStateMapper getStateMapper() {
-    var stateMapper = new CustomStateMap.Builder();
-
     var ignored = this.getSettings().getIgnoredProperties();
-    if (ignored != null && ignored.length > 0) {
-      stateMapper.ignore(ignored);
-    }
+    var resource = this.getSettings().getResource();
 
-    if (this.getSettings().getResource() != null) {
-      stateMapper.customResource(this.getSettings().getResource());
-    }
+    if (ignored != null || resource != null) {
+      var stateMapper = new CustomStateMap.Builder();
 
-    return stateMapper.build();
+      if (ignored != null && ignored.length > 0) {
+        stateMapper.ignore(ignored);
+      }
+
+      if (resource != null) {
+        stateMapper.customResource(resource);
+      }
+
+      return stateMapper.build();
+    }
+    return null;
   }
 
   // Override IProviderModel methods

@@ -2378,7 +2378,20 @@ public final class PlantTypeHandler {
 
     PlantTypes.BEARDED_MOSS = PlantType
       .builder("bearded_moss")
-      .category(PlantCategories.HANGING)
+      .category(PlantCategories.HANGING_TALL)
+      .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
+      .growthTemp(-10f, 22f)
+      .temp(-25f, 37f)
+      .rain(180f, 500f)
+      .sun(0, 15)
+      .maxHeight(10)
+      .movementMod(0.7D)
+      .addOreDict("vine")
+      .build();
+
+    PlantTypes.BEARDED_MOSS_CREEPING = PlantType
+      .builder("bearded_moss_creeping")
+      .category(PlantCategories.HANGING_CREEPING)
       .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
       .growthTemp(-10f, 22f)
       .temp(-25f, 37f)
@@ -2404,7 +2417,20 @@ public final class PlantTypeHandler {
 
     PlantTypes.GLOW_VINE = PlantType
       .builder("glow_vine")
-      .category(PlantCategories.HANGING)
+      .category(PlantCategories.HANGING_TALL)
+      .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
+      .growthTemp(18f, 50f)
+      .temp(10f, 50f)
+      .rain(210f, 500f)
+      .sun(0, 15)
+      .maxHeight(15)
+      .movementMod(0.7D)
+      .addOreDict("vine")
+      .build();
+
+    PlantTypes.GLOW_VINE_CREEPING = PlantType
+      .builder("glow_vine_creeping")
+      .category(PlantCategories.HANGING_CREEPING)
       .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
       .growthTemp(18f, 50f)
       .temp(10f, 50f)
@@ -2417,7 +2443,20 @@ public final class PlantTypeHandler {
 
     PlantTypes.HANGING_VINE = PlantType
       .builder("hanging_vine")
-      .category(PlantCategories.HANGING)
+      .category(PlantCategories.HANGING_TALL)
+      .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
+      .growthTemp(20f, 50f)
+      .temp(13f, 50f)
+      .rain(150f, 470f)
+      .sun(0, 15)
+      .maxHeight(22)
+      .movementMod(0.5D)
+      .addOreDict("vine")
+      .build();
+
+    PlantTypes.HANGING_VINE_CREEPING = PlantType
+      .builder("hanging_vine_creeping")
+      .category(PlantCategories.HANGING_CREEPING)
       .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
       .growthTemp(20f, 50f)
       .temp(13f, 50f)
@@ -2456,7 +2495,20 @@ public final class PlantTypeHandler {
 
     PlantTypes.JUNGLE_VINE = PlantType
       .builder("jungle_vine")
-      .category(PlantCategories.HANGING)
+      .category(PlantCategories.HANGING_TALL)
+      .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
+      .growthTemp(20f, 50f)
+      .temp(15f, 50f)
+      .rain(150f, 470f)
+      .sun(0, 15)
+      .maxHeight(22)
+      .movementMod(0.5D)
+      .addOreDict("vine")
+      .build();
+
+    PlantTypes.JUNGLE_VINE_CREEPING = PlantType
+      .builder("jungle_vine_creeping")
+      .category(PlantCategories.HANGING_CREEPING)
       .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
       .growthTemp(20f, 50f)
       .temp(15f, 50f)
@@ -2469,7 +2521,20 @@ public final class PlantTypeHandler {
 
     PlantTypes.LIANA = PlantType
       .builder("liana")
-      .category(PlantCategories.HANGING)
+      .category(PlantCategories.HANGING_TALL)
+      .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
+      .growthTemp(20f, 50f)
+      .temp(15f, 50f)
+      .rain(150f, 470f)
+      .sun(0, 15)
+      .maxHeight(16)
+      .movementMod(0.5D)
+      .addOreDict("vine")
+      .build();
+
+    PlantTypes.LIANA_CREEPING = PlantType
+      .builder("liana_creeping")
+      .category(PlantCategories.HANGING_CREEPING)
       .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
       .growthTemp(20f, 50f)
       .temp(15f, 50f)

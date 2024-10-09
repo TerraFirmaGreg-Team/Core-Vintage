@@ -27,7 +27,7 @@ import static su.terrafirmagreg.modules.soil.init.BlocksSoil.ROOTED_DIRT;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.SPARSE_GRASS;
 
 @Getter
-public class SoilBlockVariant extends VariantBlock<SoilBlockVariant, SoilType> {
+public class SoilBlockVariant extends VariantBlock<ISoilBlock, SoilBlockVariant, SoilType> {
 
   @Getter
   private static final Set<SoilBlockVariant> variants = new ObjectOpenHashSet<>();
@@ -45,7 +45,7 @@ public class SoilBlockVariant extends VariantBlock<SoilBlockVariant, SoilType> {
 
     SoilType.getTypes().forEach(type -> {
       var block = builder.factory.apply(this, type);
-      if (map.put(type, block.getBlock()) != null) {
+      if (map.put(type, block) != null) {
         throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
       }
       ModuleSoil.REGISTRY.block(block);

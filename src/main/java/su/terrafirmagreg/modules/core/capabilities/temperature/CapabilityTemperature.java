@@ -16,8 +16,7 @@ public final class CapabilityTemperature {
   public static final Capability<ICapabilityTemperature> CAPABILITY = ModUtils.getNull();
 
   public static void register() {
-    CapabilityManager.INSTANCE.register(ICapabilityTemperature.class, new StorageTemperature(),
-                                        ProviderTemperature::new);
+    CapabilityManager.INSTANCE.register(ICapabilityTemperature.class, new StorageTemperature(), ProviderTemperature::new);
   }
 
   public static ICapabilityTemperature get(Entity entity) {

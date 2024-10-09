@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items.itemblock;
 
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantFloatingWater;
+
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -14,8 +16,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-
-import net.dries007.tfc.objects.blocks.plants.BlockPlantFloatingWater;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -50,8 +50,7 @@ public class ItemBlockFloatingWaterTFC extends ItemBlockTFC {
         IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
         if (iblockstate.getMaterial() == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0 && worldIn.isAirBlock(blockpos1) &&
-            iblockstate == block.getPlant()
-                                .getWaterType()) {
+            iblockstate == block.getType().getWaterType()) {
           // special case for handling block placement with water lilies
           net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.getBlockSnapshot(
             worldIn, blockpos1);

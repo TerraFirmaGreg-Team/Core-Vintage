@@ -142,8 +142,7 @@ public final class BlockUtils {
    * @param range  радиус действия
    * @param action действие, которое выполняется для каждого блока
    */
-  public static void forBlocksInRangeShuffled(World world, BlockPos pos, int range,
-                                              IBlockAction action) {
+  public static void forBlocksInRangeShuffled(World world, BlockPos pos, int range, IBlockAction action) {
 
     ArrayList<BlockPos> blockList = new ArrayList<>();
     BlockUtils.findBlocksInCube(world, pos, range, range, range, IBlockFilter.TRUE, blockList);
@@ -177,9 +176,7 @@ public final class BlockUtils {
    * @param result список, в который добавляются найденные блоки
    * @return список найденных блоков
    */
-  public static List<BlockPos> findBlocksInCube(World world, BlockPos pos, int rangeX, int rangeY,
-                                                int rangeZ, IBlockFilter filter,
-                                                List<BlockPos> result) {
+  public static List<BlockPos> findBlocksInCube(World world, BlockPos pos, int rangeX, int rangeY, int rangeZ, IBlockFilter filter, List<BlockPos> result) {
 
     for (int x = pos.getX() - rangeX; x <= pos.getX() + rangeX; x++) {
       for (int y = pos.getY() - rangeY; y <= pos.getY() + rangeY; y++) {
@@ -208,8 +205,7 @@ public final class BlockUtils {
    * @param rangeZ радиус действия по оси Z
    * @param action действие, которое выполняется для каждого блока
    */
-  public static void forBlocksInCube(World world, BlockPos pos, int rangeX, int rangeY, int rangeZ,
-                                     IBlockAction action) {
+  public static void forBlocksInCube(World world, BlockPos pos, int rangeX, int rangeY, int rangeZ, IBlockAction action) {
 
     complete:
     for (int x = pos.getX() - rangeX; x <= pos.getX() + rangeX; x++) {
@@ -237,8 +233,7 @@ public final class BlockUtils {
    * @param rangeZ радиус действия по оси Z
    * @param action действие, которое выполняется для каждого блока
    */
-  public static void forBlocksInCubeShuffled(World world, BlockPos pos, int rangeX, int rangeY,
-                                             int rangeZ, IBlockAction action) {
+  public static void forBlocksInCubeShuffled(World world, BlockPos pos, int rangeX, int rangeY, int rangeZ, IBlockAction action) {
 
     ArrayList<BlockPos> blockList = new ArrayList<>();
     BlockUtils.findBlocksInCube(world, pos, rangeX, rangeY, rangeZ, IBlockFilter.TRUE, blockList);
@@ -263,8 +258,7 @@ public final class BlockUtils {
    * @param result список, в который добавляются найденные блоки
    * @return список найденных блоков
    */
-  public static List<BlockPos> findBlocksInRange(World world, BlockPos pos, int range,
-                                                 IBlockFilter filter, List<BlockPos> result) {
+  public static List<BlockPos> findBlocksInRange(World world, BlockPos pos, int range, IBlockFilter filter, List<BlockPos> result) {
 
     int rangeSq = range * range;
 
@@ -503,6 +497,40 @@ public final class BlockUtils {
     return false;
   }
 
+  public static boolean isBlockState(IBlockState stateIn, IBlockState... states) {
+    for (var state : states) {
+      if (stateIn == state) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public static boolean isBlock(Block blockIn, Block... blocks) {
+    for (var block : blocks) {
+      if (blockIn == block) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public static boolean isClay(IBlockState current) {
+    return hasProperty(current, CLAY);
+  }
+
+  /**
+   * Проверяет наличие определенного свойства у блока.
+   *
+   * @param blockState Состояние блока для проверки.
+   * @param property   Свойство для проверки.
+   * @return true, если свойство присутствует у блока, иначе false.
+   */
+  public static boolean hasProperty(IBlockState blockState, IProperty<?> property) {
+
+    return blockState.getPropertyKeys().contains(property);
+  }
+
   public static boolean isGrass(IBlockState current) {
     return current.getBlock() instanceof IGrass;
   }
@@ -529,36 +557,18 @@ public final class BlockUtils {
     return false;
   }
 
-  public static boolean isDryGrass(IBlockState current) {
+  public static boolean isSoilOrGravel(IBlockState current) {
     var block = current.getBlock();
+    if (block instanceof IRockBlock rock) {
+      return isVariant(rock.getVariant(), GRAVEL);
+    }
     if (block instanceof ISoilBlock soil) {
-      return isVariant(soil.getVariant(), DRY_GRASS);
+      return isVariant(soil.getVariant(),
+                       GRASS, DRY_GRASS, COARSE_DIRT,
+                       SPARSE_GRASS, ROOTED_DIRT, DIRT,
+                       MUD, PODZOL, MYCELIUM);
     }
     return false;
-  }
-
-  public static boolean isSparseGrass(IBlockState current) {
-    var block = current.getBlock();
-    if (block instanceof ISoilBlock soil) {
-      return isVariant(soil.getVariant(), SPARSE_GRASS);
-    }
-    return false;
-  }
-
-  public static boolean isClay(IBlockState current) {
-    return hasProperty(current, CLAY);
-  }
-
-  /**
-   * Проверяет наличие определенного свойства у блока.
-   *
-   * @param blockState Состояние блока для проверки.
-   * @param property   Свойство для проверки.
-   * @return true, если свойство присутствует у блока, иначе false.
-   */
-  public static boolean hasProperty(IBlockState blockState, IProperty<?> property) {
-
-    return blockState.getPropertyKeys().contains(property);
   }
 
   public static boolean isGround(IBlockState current) {
@@ -585,51 +595,20 @@ public final class BlockUtils {
     return false;
   }
 
-  public static boolean isSoilOrGravel(IBlockState current) {
-    var block = current.getBlock();
-    if (block instanceof IRockBlock rock) {
-      return isVariant(rock.getVariant(), GRAVEL);
-    }
-    if (block instanceof ISoilBlock soil) {
-      return isVariant(soil.getVariant(),
-                       GRASS, DRY_GRASS, COARSE_DIRT,
-                       SPARSE_GRASS, ROOTED_DIRT, DIRT,
-                       MUD, PODZOL, MYCELIUM);
-    }
-    return false;
-  }
-
-  public static boolean isRawStone(IBlockState current) {
-    var block = current.getBlock();
-    if (block instanceof IRockBlock rock) {
-      return isVariant(rock.getVariant(), RAW);
-    }
-    return false;
-  }
-
-
-  public static boolean isSand(IBlockState current) {
-    var block = current.getBlock();
-    if (block instanceof IRockBlock rock) {
-      return isVariant(rock.getVariant(), SAND);
-    }
-    return false;
-  }
-
   public static boolean isWater(IBlockState current) {
     return current.getMaterial() == Material.WATER;
   }
 
   public static boolean isSaltWater(IBlockState current) {
-    return current == FluidsTFC.SALT_WATER.get().getBlock().getDefaultState();
+    return isBlock(current.getBlock(), FluidsTFC.SALT_WATER.get().getBlock());
   }
 
   public static boolean isFreshWaterOrIce(IBlockState current) {
-    return current.getBlock() == Blocks.ICE || BlockUtils.isFreshWater(current);
+    return isBlock(current.getBlock(), Blocks.ICE, FluidsTFC.FRESH_WATER.get().getBlock());
   }
 
   public static boolean isFreshWater(IBlockState current) {
-    return current == FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState();
+    return isBlock(current.getBlock(), FluidsTFC.FRESH_WATER.get().getBlock());
   }
 
   public interface IBlockAction {

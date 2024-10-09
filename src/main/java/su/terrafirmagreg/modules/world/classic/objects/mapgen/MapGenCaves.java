@@ -13,6 +13,7 @@ import net.minecraft.world.gen.MapGenBase;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
 import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.AIR;
 import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.LAVA;
 
@@ -226,7 +227,7 @@ public class MapGenCaves extends MapGenBase {
 
               final IBlockState current = primer.getBlockState(xCoord, y, zCoord);
 
-              if (!BlockUtils.isSoil(current) && !BlockUtils.isRawStone(current)) {
+              if (!BlockUtils.isSoil(current) && !BlockUtils.isVariant(current, RAW)) {
                 continue;
               }
 

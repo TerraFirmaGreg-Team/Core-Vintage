@@ -19,7 +19,7 @@ import java.util.function.BiFunction;
 import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
 
 @Getter
-public class RockBlockVariant extends VariantBlock<RockBlockVariant, RockType> {
+public class RockBlockVariant extends VariantBlock<IRockBlock, RockBlockVariant, RockType> {
 
   @Getter
   private static final Set<RockBlockVariant> blockVariants = new ObjectOpenHashSet<>();
@@ -43,7 +43,7 @@ public class RockBlockVariant extends VariantBlock<RockBlockVariant, RockType> {
 
     RockType.getTypes().forEach(type -> {
       var block = builder.factory.apply(this, type);
-      if (map.put(type, block.getBlock()) != null) {
+      if (map.put(type, block) != null) {
         throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
       }
       if (hasStoneType) {

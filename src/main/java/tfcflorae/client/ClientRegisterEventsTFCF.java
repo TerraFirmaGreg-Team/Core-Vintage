@@ -1,5 +1,11 @@
 package tfcflorae.client;
 
+import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantCreeping;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantHangingCreeping;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantHangingTall;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantTallGrassWater;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 
 import net.minecraft.block.Block;
@@ -25,14 +31,6 @@ import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantCreepingTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantDummy1;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantHangingCreepingTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantHangingTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrassTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTallGrassWater;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantWaterGlow;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantWaterTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.items.ItemArmorTFCF;
@@ -93,10 +91,6 @@ public class ClientRegisterEventsTFCF {
 
     for (Block block : BlocksTFCF.getAllCoralPlants()) {
       ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockCoral.LEVEL).build());
-    }
-
-    for (Block block : BlocksTFCF.getAllGlowWaterPlants()) {
-      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockPlantWaterGlow.LEVEL).build());
     }
 
     if (ConfigTFCF.General.WORLD.enableGroundcoverBones) {
@@ -296,7 +290,7 @@ public class ClientRegisterEventsTFCF {
     IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
 
     blockColors.registerBlockColorHandler(grassColor, BlocksTFCF.getAllShortGrassBlocks()
-                                                                .toArray(new BlockPlantShortGrassTFCF[0]));
+                                                                .toArray(new BlockPlantShortGrass[0]));
     //blockColors.registerBlockColorHandler(grassColor, BlocksTFCF.getAllTallGrassBlocks().toArray(new BlockTallGrassTFCF[0]));
 
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllFruitLeaves().toArray(new Block[0]));
@@ -312,19 +306,17 @@ public class ClientRegisterEventsTFCF {
 
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.CASSIA_CINNAMON_LEAVES);
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.CEYLON_CINNAMON_LEAVES);
-    blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllWaterPlantBlocks()
-                                                                  .toArray(new BlockPlantWaterTFCF[0]));
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllHangingPlantBlocks()
-                                                                  .toArray(new BlockPlantHangingTFCF[0]));
+                                                                  .toArray(new BlockPlantHangingTall[0]));
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllHangingCreepingPlantBlocks()
-                                                                  .toArray(new BlockPlantHangingCreepingTFCF[0]));
+                                                                  .toArray(new BlockPlantHangingCreeping[0]));
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllCreepingPlantBlocks()
-                                                                  .toArray(new BlockPlantCreepingTFCF[0]));
+                                                                  .toArray(new BlockPlantCreeping[0]));
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllTallGrassWaterBlocks()
                                                                   .toArray(new BlockPlantTallGrassWater[0]));
     //blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllStandardBlocks().toArray(new BlockPlantTFCF[0]));
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllStandardBlocks()
-                                                                  .toArray(new BlockPlantDummy1[0]));
+                                                                  .toArray(new BlockPlant[0]));
     //blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllStandardBlocks().toArray(new BlockPlantDummy2[0]));
 
   }

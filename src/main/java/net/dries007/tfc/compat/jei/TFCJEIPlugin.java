@@ -291,7 +291,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 
     registry.addRecipes(barrelRecipes, BARREL_UID);
     for (var barrelItem : BlocksWood.BARREL.getMap().values()) {
-      registry.addRecipeCatalyst(new ItemStack(barrelItem), BARREL_UID);
+      registry.addRecipeCatalyst(new ItemStack(barrelItem.getBlock()), BARREL_UID);
     }
 
     //Wraps all bloomery recipes

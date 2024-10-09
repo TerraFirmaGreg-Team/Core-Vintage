@@ -41,14 +41,17 @@ public class WorldTypeDebug extends WorldType {
   public IChunkGenerator getChunkGenerator(World world, String generatorOptions) {
 
     // Try to get the modid from the world name.
-    final String modid = WorldUtils.getWorldName(world).toLowerCase();
+    final String worldName = WorldUtils.getWorldName(world).toLowerCase();
+    final String[] split = worldName.split("_", 2);
+    final String modid = split[0];
+    final String blockName = split.length > 1 ? split[1] : null;
 
     // If the mod actually exists, use that generator.
     if (GameUtils.isModLoaded(modid)) {
-      return new ChunkGenDebug(world, modid);
+      return new ChunkGenDebug(world, modid, blockName);
     }
 
-    ModuleWorld.LOGGER.error("No mod found for ID {}, falling back to default worldgen.", modid);
+    ModuleWorld.LOGGER.error("No mod found for ID {}.", modid);
     // Use the fallback generator.
     return new ChunkGeneratorDebug(world);
   }

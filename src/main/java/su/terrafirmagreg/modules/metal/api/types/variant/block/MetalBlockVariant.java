@@ -16,7 +16,7 @@ import java.util.function.BiFunction;
 import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
 
 @Getter
-public class MetalBlockVariant extends VariantBlock<MetalBlockVariant, MetalType> {
+public class MetalBlockVariant extends VariantBlock<IMetalBlock, MetalBlockVariant, MetalType> {
 
   @Getter
   private static final Set<MetalBlockVariant> variants = new ObjectOpenHashSet<>();
@@ -34,7 +34,7 @@ public class MetalBlockVariant extends VariantBlock<MetalBlockVariant, MetalType
 
     MetalType.getTypes().forEach(type -> {
       var block = builder.factory.apply(this, type);
-      if (map.put(type, block.getBlock()) != null) {
+      if (map.put(type, block) != null) {
         throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
       }
       ModuleMetal.REGISTRY.block(block);

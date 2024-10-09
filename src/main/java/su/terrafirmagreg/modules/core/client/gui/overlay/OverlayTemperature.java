@@ -37,8 +37,7 @@ public class OverlayTemperature {
   public static final ResourceLocation MINUSER = ModUtils.resource("textures/gui/icons/lowerer.png");
   public static final ResourceLocation PLUSER = ModUtils.resource("textures/gui/icons/higherer.png");
 
-  private static void drawTexturedModalRect(float x, float y, float width, float height,
-                                            ResourceLocation loc) {
+  private static void drawTexturedModalRect(float x, float y, float width, float height, ResourceLocation loc) {
     Minecraft minecraft = Minecraft.getMinecraft();
     minecraft.getTextureManager().bindTexture(loc);
 
@@ -166,12 +165,13 @@ public class OverlayTemperature {
     GL11.glDisable(GL11.GL_BLEND);
   }
 
-  private void drawTemperatureVignettes(int width, int height, EntityPlayer player,
-                                        RenderGameOverlayEvent.Pre event) {
+  private void drawTemperatureVignettes(int width, int height, EntityPlayer player, RenderGameOverlayEvent.Pre event) {
     ResourceLocation vignetteLocation = null;
     float temperature = 1f;
     var tempSystem = CapabilityTemperature.get(player);
-    temperature = tempSystem.getTemperature();
+    if (tempSystem != null) {
+      temperature = tempSystem.getTemperature();
+    }
 
     float opacity = 1f;
     if (temperature > ProviderTemperature.HOT_THRESHOLD) {

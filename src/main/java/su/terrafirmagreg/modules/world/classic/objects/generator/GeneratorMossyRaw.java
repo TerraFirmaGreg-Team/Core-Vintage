@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import java.util.Random;
 
 import static su.terrafirmagreg.data.Properties.BoolProp.MOSSY;
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
 
 public class GeneratorMossyRaw implements IWorldGenerator {
 
@@ -46,11 +47,10 @@ public class GeneratorMossyRaw implements IWorldGenerator {
              i < (mossyCount + floraDensity) * 10; i++) {
           BlockPos blockPos = chunkBlockPos.add(random.nextInt(16) + 8, random.nextInt(16),
                                                 random.nextInt(16) + 8);
-          if (BlockUtils.isRawStone(world.getBlockState(blockPos))
-              && BlockUtils.isBlockSurroundedByAir(world, blockPos) &&
+          if (BlockUtils.isVariant(world.getBlockState(blockPos), RAW) && BlockUtils.isBlockSurroundedByAir(world, blockPos) &&
               world.getLightFor(EnumSkyBlock.SKY, blockPos) < 14 && !world.canSeeSky(blockPos)) {
-            world.setBlockState(blockPos,
-                                BlocksRock.RAW.get(ProviderChunkData.getRockHeight(world, blockPos)).getDefaultState().withProperty(MOSSY, Boolean.TRUE), 2);
+            world.setBlockState(blockPos, BlocksRock.RAW.get(ProviderChunkData.getRockHeight(world, blockPos)).getDefaultState()
+                                                        .withProperty(MOSSY, Boolean.TRUE), 2);
           }
         }
       }

@@ -1,21 +1,23 @@
 package su.terrafirmagreg.modules.plant.api.types.category;
 
+import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantCactus;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantCreeping;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantEmergentTallWater;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantEpiphyte;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantFloatingWater;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantHanging;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantHangingCreeping;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantHangingTall;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantMushroom;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantTall;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantTallGrass;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantTallWater;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantWater;
+
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.EnumPlantType;
-
-import net.dries007.tfc.objects.blocks.plants.BlockPlant;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantCactus;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantCreeping;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantEmergentTallWater;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantEpiphyte;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantFloatingWater;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantHanging;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantMushroom;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrass;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTall;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTallGrass;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTallWater;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantWater;
 
 public class PlantCategoryHandler {
 
@@ -39,6 +41,18 @@ public class PlantCategoryHandler {
       .builder("hanging")
       .material(Material.VINE)
       .factory(BlockPlantHanging::new)
+      .build();
+
+    PlantCategories.HANGING_TALL = PlantCategory
+      .builder("hanging_tall")
+      .material(Material.VINE)
+      .factory(BlockPlantHangingTall::new)
+      .build();
+
+    PlantCategories.HANGING_CREEPING = PlantCategory
+      .builder("hanging_creeping")
+      .material(Material.VINE)
+      .factory(BlockPlantHangingCreeping::new)
       .build();
 
     PlantCategories.FLOATING = PlantCategory

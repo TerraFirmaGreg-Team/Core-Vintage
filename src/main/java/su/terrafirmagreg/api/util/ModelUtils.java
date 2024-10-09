@@ -33,10 +33,10 @@ public final class ModelUtils {
   /**
    * A {@link StateMapperBase} used to create property strings.
    */
-  public static StateMapperBase PROPERTY_STRING_MAPPER = new StateMapperBase() {
+  public static final StateMapperBase PROPERTY_STRING_MAPPER = new StateMapperBase() {
 
     @Override
-    protected @NotNull ModelResourceLocation getModelResourceLocation(IBlockState state) {
+    protected @NotNull ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
       return new ModelResourceLocation("minecraft:air");
     }
   };
@@ -67,6 +67,45 @@ public final class ModelUtils {
     ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
   }
 
+  public static void registerBlockInventoryModes(Block... blocks) {
+    for (Block block : blocks) {
+      ModelUtils.registerBlockInventoryModel(block);
+    }
+  }
+
+  public static void registerBlockInventoryModel(Block block, ResourceLocation modelLocation) {
+
+    ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
+  }
+
+  public static void registerCustomMeshDefinition(Block block, ItemMeshDefinition meshDefinition) {
+
+    ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(block), meshDefinition);
+  }
+
+  public static void registerBlockInventoryModel(Block block) {
+    ResourceLocation registryName = block.getRegistryName();
+    Preconditions.checkNotNull(registryName, "block %s has null registry name", block);
+
+    ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), registryName);
+  }
+
+  public static void registerBlockItemModel(IBlockState blockState) {
+
+    Block block = blockState.getBlock();
+    Item item = Item.getItemFromBlock(block);
+
+    ModelUtils.registerInventoryModel(item, new ModelResourceLocation(
+                                        Preconditions.checkNotNull(block.getRegistryName(), "Block %s has null registry name", block),
+                                        PROPERTY_STRING_MAPPER.getPropertyString(blockState.getProperties())
+                                      )
+    );
+  }
+
+  //endregion
+
+  //region ===== Item
+
   public static void registerInventoryModel(Item item, String modelLocation) {
 
     ModelUtils.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
@@ -82,36 +121,9 @@ public final class ModelUtils {
     ModelLoader.setCustomModelResourceLocation(item, metadata, resourceLocation);
   }
 
-  public static void registerBlockInventoryModes(Block... blocks) {
-    for (Block block : blocks) {
-      ModelUtils.registerBlockInventoryModel(block);
-    }
-  }
-
-  //endregion
-
-  //region ===== Item
-
-  public static void registerBlockInventoryModel(Block block) {
-    ResourceLocation registryName = block.getRegistryName();
-    Preconditions.checkNotNull(registryName, "block %s has null registry name", block);
-
-    ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), registryName);
-  }
-
   public static void registerInventoryModel(Item item, ResourceLocation modelLocation) {
 
     ModelUtils.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
-  }
-
-  public static void registerBlockInventoryModel(Block block, ResourceLocation modelLocation) {
-
-    ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
-  }
-
-  public static void registerCustomMeshDefinition(Block block, ItemMeshDefinition meshDefinition) {
-
-    ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(block), meshDefinition);
   }
 
   public static void registerInventoryModel(String subfolder, Item... items) {
@@ -123,8 +135,7 @@ public final class ModelUtils {
   public static void registerInventoryModel(String subfolder, Item item) {
     ResourceLocation registryName = item.getRegistryName();
     Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
-    String modelLocation =
-      registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
+    String modelLocation = registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
 
     ModelUtils.registerInventoryModel(item, modelLocation);
   }

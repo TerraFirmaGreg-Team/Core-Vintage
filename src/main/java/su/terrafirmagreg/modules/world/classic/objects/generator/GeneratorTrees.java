@@ -43,6 +43,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
+
 public class GeneratorTrees implements IWorldGenerator {
 
   private final GeneratorCinnamon cinnamon_trees = new GeneratorCinnamon();
@@ -266,7 +268,7 @@ public class GeneratorTrees implements IWorldGenerator {
             && !BiomeUtils.isLakeBiome(b1) &&
             !BiomeUtils.isBeachBiome(b1) &&
             !BiomeUtils.isMesaBiome(b1)) {
-          if ((BlockUtils.isSand(down) || BlockUtils.isSoilOrGravel(down)) &&
+          if ((BlockUtils.isVariant(down, SAND) || BlockUtils.isSoilOrGravel(down)) &&
               (down != Blocks.HARDENED_CLAY && down != Blocks.STAINED_HARDENED_CLAY)) {
             if (15f <= avgTemperature && 40f >= avgTemperature && 65f <= rainfall
                 && 150f >= rainfall &&

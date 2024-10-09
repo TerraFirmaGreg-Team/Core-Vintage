@@ -205,13 +205,18 @@ public final class PlantTypes {
   public static PlantType WATER_TARO;
   public static PlantType RATTAN;
   public static PlantType BEARDED_MOSS;
+  public static PlantType BEARDED_MOSS_CREEPING;
   public static PlantType BLUE_SKYFLOWER;
   public static PlantType GLOW_VINE;
+  public static PlantType GLOW_VINE_CREEPING;
   public static PlantType HANGING_VINE;
+  public static PlantType HANGING_VINE_CREEPING;
   public static PlantType JADE_VINE;
   public static PlantType JAPANESE_IVY;
   public static PlantType JUNGLE_VINE;
+  public static PlantType JUNGLE_VINE_CREEPING;
   public static PlantType LIANA;
+  public static PlantType LIANA_CREEPING;
   public static PlantType MADEIRA_VINE;
   public static PlantType MYSORE_TRUMPETVINE;
   public static PlantType SILVERVEIN_CREEPER;
@@ -238,6 +243,7 @@ public final class PlantTypes {
   public static PlantType STAR_GRASS;
   public static PlantType TURTLE_GRASS;
   public static PlantType WINGED_KELP;
+  public static PlantType GLOWING_SEA_BANANA;
 
 
 }

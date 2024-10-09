@@ -16,7 +16,7 @@ import java.util.function.BiFunction;
 import static su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
 
 @Getter
-public class WoodBlockVariant extends VariantBlock<WoodBlockVariant, WoodType> {
+public class WoodBlockVariant extends VariantBlock<IWoodBlock, WoodBlockVariant, WoodType> {
 
   @Getter
   private static final Set<WoodBlockVariant> variants = new ObjectOpenHashSet<>();
@@ -38,7 +38,7 @@ public class WoodBlockVariant extends VariantBlock<WoodBlockVariant, WoodType> {
 
     WoodType.getTypes().forEach(type -> {
       var block = builder.factory.apply(this, type);
-      if (map.put(type, block.getBlock()) != null) {
+      if (map.put(type, block) != null) {
         throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
       }
       ModuleWood.REGISTRY.block(block);

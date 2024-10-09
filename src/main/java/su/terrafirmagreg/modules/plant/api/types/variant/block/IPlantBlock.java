@@ -1,9 +1,16 @@
 package su.terrafirmagreg.modules.plant.api.types.variant.block;
 
 import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
-import su.terrafirmagreg.data.lib.types.type.IType;
-import su.terrafirmagreg.data.lib.types.variant.IVariant;
+import su.terrafirmagreg.data.lib.types.variant.block.IVariantBlock;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
-public interface IPlantBlock extends IType<PlantType>, IVariant<PlantBlockVariant>, IBlockSettings {
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+public interface IPlantBlock extends IVariantBlock<PlantBlockVariant, PlantType>, IBlockSettings {
+
+  default boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+    return false;
+  }
 }

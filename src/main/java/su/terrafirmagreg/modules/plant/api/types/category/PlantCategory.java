@@ -2,12 +2,13 @@ package su.terrafirmagreg.modules.plant.api.types.category;
 
 import su.terrafirmagreg.data.lib.types.category.Category;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
+import su.terrafirmagreg.modules.plant.api.types.variant.block.IPlantBlock;
+import su.terrafirmagreg.modules.plant.api.types.variant.block.PlantBlockVariant;
 
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.EnumPlantType;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,7 +16,7 @@ import lombok.Getter;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 @Getter
 public class PlantCategory extends Category<PlantCategory> {
@@ -27,7 +28,7 @@ public class PlantCategory extends Category<PlantCategory> {
   private final EnumPlantType enumPlantType;
   private final Optional<String> waterType;
   private final boolean canBePotted;
-  private final Function<PlantType, BlockPlant> factory;
+  private final BiFunction<PlantBlockVariant, PlantType, IPlantBlock> factory;
 
   protected PlantCategory(Builder builder) {
     super(builder.name);
@@ -47,8 +48,8 @@ public class PlantCategory extends Category<PlantCategory> {
     return new Builder(name);
   }
 
-  public BlockPlant create(PlantType plant) {
-    return factory.apply(plant);
+  public IPlantBlock create(PlantBlockVariant variant, PlantType plant) {
+    return factory.apply(variant, plant);
   }
 
   public static class Builder {
@@ -59,7 +60,7 @@ public class PlantCategory extends Category<PlantCategory> {
     private Material material;
     private EnumPlantType enumPlantType;
     private Optional<String> waterType;
-    private Function<PlantType, BlockPlant> factory;
+    private BiFunction<PlantBlockVariant, PlantType, IPlantBlock> factory;
 
     public Builder(@NotNull String name) {
       this.name = name;
@@ -95,7 +96,7 @@ public class PlantCategory extends Category<PlantCategory> {
 //      return this;
 //    }
 
-    public Builder factory(Function<PlantType, BlockPlant> factory) {
+    public Builder factory(BiFunction<PlantBlockVariant, PlantType, IPlantBlock> factory) {
       this.factory = factory;
       return this;
     }

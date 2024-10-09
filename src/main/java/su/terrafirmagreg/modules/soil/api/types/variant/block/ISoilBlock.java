@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.soil.api.types.variant.block;
 
 import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.lib.types.type.IType;
-import su.terrafirmagreg.data.lib.types.variant.IVariant;
+import su.terrafirmagreg.data.lib.types.variant.block.IVariantBlock;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 
 import net.minecraft.block.state.IBlockState;
@@ -13,7 +13,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IPlantable;
 
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 
 import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.GRAVEL;
@@ -27,7 +26,7 @@ import static su.terrafirmagreg.modules.soil.init.BlocksSoil.MUD;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.PODZOL;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.SPARSE_GRASS;
 
-public interface ISoilBlock extends IType<SoilType>, IVariant<SoilBlockVariant>, IBlockSettings {
+public interface ISoilBlock extends IVariantBlock<SoilBlockVariant, SoilType>, IBlockSettings {
 
 
   default boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {

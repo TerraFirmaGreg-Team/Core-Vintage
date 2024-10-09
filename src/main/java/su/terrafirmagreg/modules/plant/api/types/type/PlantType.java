@@ -115,7 +115,7 @@ public class PlantType extends Type<PlantType> {
     this.maxWaterDepth = builder.maxWaterDepth;
     this.movementMod = builder.movementMod;
 
-    this.category = builder.plantCategory;
+    this.category = builder.category;
     this.isClayMarking = builder.isClayMarking;
     this.isSwampPlant = builder.isSwampPlant;
     this.material = category.getMaterial();
@@ -399,7 +399,7 @@ public class PlantType extends Type<PlantType> {
 
     private final String name;
 
-    private PlantCategory plantCategory;
+    private PlantCategory category;
 
     private int[] stages;
     private int numStages;
@@ -443,7 +443,7 @@ public class PlantType extends Type<PlantType> {
 
     // Установка варианта растения
     public Builder category(PlantCategory plantCategory) {
-      this.plantCategory = plantCategory;
+      this.category = plantCategory;
       return this;
     }
 

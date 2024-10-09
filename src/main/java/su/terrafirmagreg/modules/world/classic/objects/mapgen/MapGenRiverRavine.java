@@ -10,6 +10,7 @@ import net.minecraft.world.gen.MapGenBase;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
 import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.AIR;
 import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.FRESH_WATER;
 import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.LAVA;
@@ -162,8 +163,7 @@ public class MapGenRiverRavine extends MapGenBase {
                 + yNormalized * yNormalized / 6.0D >= 1.0D) {
               continue;
             }
-            if (!BlockUtils.isRawStone(primer.getBlockState(x, y, z)) && !BlockUtils.isSoil(
-              primer.getBlockState(x, y, z))) {
+            if (!BlockUtils.isVariant(primer.getBlockState(x, y, z), RAW) && !BlockUtils.isSoil(primer.getBlockState(x, y, z))) {
               continue;
             }
 

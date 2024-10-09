@@ -19,6 +19,10 @@ public class BaseMaterial
     super(resourceLocation);
   }
 
+  public static Builder builder(String name) {
+    return new Builder(name);
+  }
+
   public static class Builder extends Material.Builder {
 
     public Builder(@NotNull String name) {

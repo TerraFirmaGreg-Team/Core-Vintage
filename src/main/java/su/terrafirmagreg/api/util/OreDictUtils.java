@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantTypes;
+import su.terrafirmagreg.modules.plant.init.BlocksPlant;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -17,7 +18,6 @@ import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
-import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -184,8 +184,8 @@ public final class OreDictUtils {
     OreDictionary.registerOre("baleSisalFiber", new ItemStack(BlocksTFCF.SISAL_FIBER_BALE));
     OreDictionary.registerOre("baleYucca", new ItemStack(BlocksTFCF.YUCCA_BALE));
     OreDictionary.registerOre("baleYuccaFiber", new ItemStack(BlocksTFCF.YUCCA_FIBER_BALE));
-    OreDictionary.registerOre("glue", new ItemStack(BlockPlant.get(PlantTypes.RESIN)));
-    OreDictionary.registerOre("slimeball", new ItemStack(BlockPlant.get(PlantTypes.RESIN)));
+    OreDictionary.registerOre("glue", new ItemStack(BlocksPlant.PLANT.get(PlantTypes.RESIN)));
+    OreDictionary.registerOre("slimeball", new ItemStack(BlocksPlant.PLANT.get(PlantTypes.RESIN)));
 
     // Flint
     OreDictionary.registerOre("flint", new ItemStack(Items.FLINT));

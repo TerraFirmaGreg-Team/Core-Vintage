@@ -30,8 +30,4 @@ public abstract class VariantItem<V, T extends Type<T>> extends Variant<V, T> {
     }
     return item;
   }
-
-  public abstract String getRegistryKey(T type);
-
-  public abstract String getLocalizedName();
 }

@@ -206,8 +206,7 @@ public class BaseBiomeDecorator extends BiomeDecorator {
       }
     }
 
-    if (TerrainGen.decorate(world, rng, forgeChunkPos,
-                            DecorateBiomeEvent.Decorate.EventType.REED)) {
+    if (TerrainGen.decorate(world, rng, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.REED)) {
       for (PlantType plant : PlantType.getTypes()) {
         if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
           plantGen.setGeneratedPlant(plant);

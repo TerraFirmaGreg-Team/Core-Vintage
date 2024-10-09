@@ -26,7 +26,7 @@ public final class WorldUtils {
 
     String result = "Unknown";
     if (world instanceof WorldServer) {
-      result = world.getSaveHandler().getWorldDirectory().getName();
+      result = world.getWorldInfo().getWorldName();
     }
 
     return result;

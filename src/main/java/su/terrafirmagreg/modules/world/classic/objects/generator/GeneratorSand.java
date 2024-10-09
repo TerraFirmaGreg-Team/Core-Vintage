@@ -11,6 +11,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
+
 public class GeneratorSand extends WorldGenerator {
 
   private final int radius;
@@ -34,8 +36,8 @@ public class GeneratorSand extends WorldGenerator {
           continue;
         }
         for (int y = -2; y <= 2; y++) {
-          final IBlockState s = world.getBlockState(pos.add(x, y, z));
-          if (BlockUtils.isSoil(s) || BlockUtils.isSand(s)) {
+          final IBlockState state = world.getBlockState(pos.add(x, y, z));
+          if (BlockUtils.isSoil(state) || BlockUtils.isVariant(state, SAND)) {
             world.setBlockState(pos.add(x, y, z), sand.getDefaultState(), 2);
           }
         }

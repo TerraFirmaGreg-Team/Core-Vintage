@@ -12,7 +12,6 @@ public final class MaterialEventHandler {
 
   @SubscribeEvent(priority = EventPriority.HIGH)
   public void registerMaterials(MaterialEvent event) {
-
     MaterialRockHandler.init();
   }
 }

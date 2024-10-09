@@ -22,6 +22,9 @@ import tfcflorae.ConfigTFCF;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DRY_GRASS;
+
 public class GeneratorSoilDecorative implements IWorldGenerator {
 
   public static final float RAINFALL_SAND = 75;
@@ -123,7 +126,7 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
               for (int y = -depth; y <= +depth; y++) {
                 final BlockPos pos = posHorizontal.add(0, y, 0);
                 final IBlockState current = world.getBlockState(pos);
-                if (BlockUtils.isSoilOrGravel(current) || BlockUtils.isRawStone(current)) {
+                if (BlockUtils.isSoilOrGravel(current) || BlockUtils.isVariant(current, RAW)) {
                   world.setBlockState(pos,
                                       BlocksRock.SAND.get(ProviderChunkData.getRockHeight(world, pos))
                                                      .getDefaultState(), 2);
@@ -180,13 +183,9 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
                 final BlockPos pos = posHorizontal.add(0, y, 0);
                 final IBlockState current = world.getBlockState(pos);
                 if (BlockUtils.isGrass(current)) {
-                  world.setBlockState(pos,
-                                      BlocksSoil.PODZOL.get(ProviderChunkData.getSoilHeight(world, pos))
-                                                       .getDefaultState(), 2);
-                } else if (BlockUtils.isDryGrass(current)) {
-                  world.setBlockState(pos,
-                                      BlocksSoil.PODZOL.get(ProviderChunkData.getSoilHeight(world, pos))
-                                                       .getDefaultState(), 2);
+                  world.setBlockState(pos, BlocksSoil.PODZOL.get(ProviderChunkData.getSoilHeight(world, pos)).getDefaultState(), 2);
+                } else if (BlockUtils.isVariant(current, DRY_GRASS)) {
+                  world.setBlockState(pos, BlocksSoil.PODZOL.get(ProviderChunkData.getSoilHeight(world, pos)).getDefaultState(), 2);
                 }
               }
             }

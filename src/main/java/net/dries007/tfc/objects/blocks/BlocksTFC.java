@@ -1,7 +1,8 @@
 package net.dries007.tfc.objects.blocks;
 
-import su.terrafirmagreg.modules.plant.api.types.category.PlantCategories;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantFloatingWater;
+import su.terrafirmagreg.modules.plant.object.block.BlockPlantFlowerPot;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -33,8 +34,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
 import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlant;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantFloatingWater;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
@@ -59,7 +58,6 @@ import net.dries007.tfc.util.agriculture.FruitTree;
 
 import lombok.Getter;
 
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FLORA;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
@@ -108,7 +106,7 @@ public final class BlocksTFC {
   @Getter
   private static ImmutableList<BlockPlant> allGrassBlocks;
   @Getter
-  private static ImmutableList<BlockFlowerPotTFC> allFlowerPots;
+  private static ImmutableList<BlockPlantFlowerPot> allFlowerPots;
 
   @Getter
   private static ImmutableList<BlockFruitTreeSapling> allFruitTreeSaplingBlocks;
@@ -272,23 +270,23 @@ public final class BlocksTFC {
     {
 
       Builder<BlockPlant> b = ImmutableList.builder();
-      Builder<BlockFlowerPotTFC> pots = ImmutableList.builder();
-      for (PlantType plant : PlantType.getTypes()) {
-        if (plant.getCategory() != PlantCategories.SHORT_GRASS && plant.getCategory() != PlantCategories.TALL_GRASS) {
-          b.add(register(r, "plants/" + plant.getName(), plant.getCategory().create(plant), CT_FLORA));
-        }
-        if (plant.canBePotted()) {
-          pots.add(register(r, "flowerpot/" + plant.getName(), new BlockFlowerPotTFC(plant)));
-        }
-      }
+      Builder<BlockPlantFlowerPot> pots = ImmutableList.builder();
+//      for (PlantType plant : PlantType.getTypes()) {
+//        if (plant.getCategory() != PlantCategories.SHORT_GRASS && plant.getCategory() != PlantCategories.TALL_GRASS) {
+//          b.add(register(r, "plants/" + plant.getName(), plant.getCategory().create(plant), CT_FLORA));
+//        }
+//        if (plant.canBePotted()) {
+//          pots.add(register(r, "flowerpot/" + plant.getName(), new BlockPlantFlowerPot(plant)));
+//        }
+//      }
       allPlantBlocks = b.build();
       allFlowerPots = pots.build();
 
       for (BlockPlant blockPlant : allPlantBlocks) {
         if (blockPlant instanceof BlockPlantFloatingWater blockPlantFloatingWater) {
           inventoryItemBlocks.add(new ItemBlockFloatingWaterTFC(blockPlantFloatingWater));
-        } else if (blockPlant.getPlant().canBePotted()) {
-          normalItemBlocks.add(new ItemBlockPlant(blockPlant, blockPlant.getPlant()));
+        } else if (blockPlant.getType().canBePotted()) {
+          normalItemBlocks.add(new ItemBlockPlant(blockPlant, blockPlant.getType()));
         } else {
           normalItemBlocks.add(new ItemBlockTFC(blockPlant));
         }
@@ -297,11 +295,11 @@ public final class BlocksTFC {
 
     {
       Builder<BlockPlant> b = ImmutableList.builder();
-      for (PlantType plant : PlantType.getTypes()) {
-        if (plant.getCategory() == PlantCategories.SHORT_GRASS || plant.getCategory() == PlantCategories.TALL_GRASS) {
-          b.add(register(r, "plants/" + plant.getName(), plant.getCategory().create(plant), CT_FLORA));
-        }
-      }
+//      for (PlantType plant : PlantType.getTypes()) {
+//        if (plant.getCategory() == PlantCategories.SHORT_GRASS || plant.getCategory() == PlantCategories.TALL_GRASS) {
+//          b.add(register(r, "plants/" + plant.getName(), plant.getCategory().create(plant), CT_FLORA));
+//        }
+//      }
       allGrassBlocks = b.build();
       for (BlockPlant blockPlant : allGrassBlocks) {
         normalItemBlocks.add(new ItemBlockTFC(blockPlant));

@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core.capabilities.heat;
 
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantTypes;
+import su.terrafirmagreg.modules.plant.init.BlocksPlant;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 import net.minecraft.init.Blocks;
@@ -13,7 +14,6 @@ import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
-import net.dries007.tfc.objects.blocks.plants.BlockPlant;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemsTFCF;
@@ -58,59 +58,59 @@ public class HandlerHeat {
                                             Metal.WROUGHT_IRON.getMeltTemp()));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlant.get(PlantTypes.ARTISTS_CONK)),
+      IIngredient.of(BlocksPlant.PLANT.get(PlantTypes.ARTISTS_CONK)),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlant.get(PlantTypes.SULPHUR_SHELF)),
+      IIngredient.of(BlocksPlant.PLANT.get(PlantTypes.SULPHUR_SHELF)),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlant.get(PlantTypes.TURKEY_TAIL)),
+      IIngredient.of(BlocksPlant.PLANT.get(PlantTypes.TURKEY_TAIL)),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlant.get(PlantTypes.PORCINI)),
+      IIngredient.of(BlocksPlant.PLANT.get(PlantTypes.PORCINI)),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlant.get(PlantTypes.AMANITA)),
-      () -> new ProviderHeat(1, 480));
-
-    CUSTOM_ITEMS.put(IIngredient.of(
-                       BlockPlant.get(PlantTypes.BLACK_POWDERPUFF)),
-                     () -> new ProviderHeat(1, 480));
-
-    CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlant.get(PlantTypes.CHANTERELLE)),
-      () -> new ProviderHeat(1, 480));
-
-    CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlant.get(PlantTypes.DEATH_CAP)),
-      () -> new ProviderHeat(1, 480));
-
-    CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlant.get(PlantTypes.GIANT_CLUB)),
+      IIngredient.of(BlocksPlant.PLANT.get(PlantTypes.AMANITA)),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(IIngredient.of(
-                       BlockPlant.get(PlantTypes.PARASOL_MUSHROOM)),
+                       BlocksPlant.PLANT.get(PlantTypes.BLACK_POWDERPUFF)),
                      () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlant.get(PlantTypes.STINKHORN)),
+      IIngredient.of(BlocksPlant.PLANT.get(PlantTypes.CHANTERELLE)),
+      () -> new ProviderHeat(1, 480));
+
+    CUSTOM_ITEMS.put(
+      IIngredient.of(BlocksPlant.PLANT.get(PlantTypes.DEATH_CAP)),
+      () -> new ProviderHeat(1, 480));
+
+    CUSTOM_ITEMS.put(
+      IIngredient.of(BlocksPlant.PLANT.get(PlantTypes.GIANT_CLUB)),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(IIngredient.of(
-                       BlockPlant.get(PlantTypes.WEEPING_MILK_CAP)),
+                       BlocksPlant.PLANT.get(PlantTypes.PARASOL_MUSHROOM)),
                      () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlant.get(PlantTypes.WOOD_BLEWIT)),
+      IIngredient.of(BlocksPlant.PLANT.get(PlantTypes.STINKHORN)),
+      () -> new ProviderHeat(1, 480));
+
+    CUSTOM_ITEMS.put(IIngredient.of(
+                       BlocksPlant.PLANT.get(PlantTypes.WEEPING_MILK_CAP)),
+                     () -> new ProviderHeat(1, 480));
+
+    CUSTOM_ITEMS.put(
+      IIngredient.of(BlocksPlant.PLANT.get(PlantTypes.WOOD_BLEWIT)),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockPlant.get(PlantTypes.WOOLLY_GOMPHUS)),
+      IIngredient.of(BlocksPlant.PLANT.get(PlantTypes.WOOLLY_GOMPHUS)),
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(

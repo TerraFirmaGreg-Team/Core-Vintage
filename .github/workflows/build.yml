@@ -24,12 +24,12 @@ jobs:
           sed -i -e "s/0.0.0/${DEV}/g" gradle.properties
 
       - name: Set up JDK 8 and 17
-        uses: actions/setup-java@v4.0.0
+        uses: actions/setup-java@v4.4.0
         with:
+          distribution: 'zulu'
           java-version: |
             8
             17
-          distribution: 'adopt'
           cache: 'gradle'
 
       - name: Setup Gradle

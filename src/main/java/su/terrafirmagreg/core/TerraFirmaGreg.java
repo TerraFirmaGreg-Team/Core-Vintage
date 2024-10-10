@@ -32,8 +32,8 @@ public class TerraFirmaGreg {
   public static final String DEPENDENCIES =
     "required:forge@[14.23.5.2847,);" +
     "required:mixinbooter;" +
-    "required:tfc;" +
-    "required:gregtech;" +
+    "after:tfc;" +
+    "after:gregtech;" +
     "required:firmalife;" +
     "required:cellars;" +
     "required:tfctech;";
@@ -61,7 +61,7 @@ public class TerraFirmaGreg {
     // Capability Registry
     CapabilityManager.INSTANCE.register(TemperatureCapability.class, new DumbStorage<>(), () -> null);
 
-    TerraFirmaCraft.getNetwork().registerMessage(new TemperaturePacket.Handler(), TemperaturePacket.class, 0, Side.CLIENT);
+    TerraFirmaCraft.getNetwork().registerMessage(new TemperaturePacket.Handler(), TemperaturePacket.class, 100, Side.CLIENT);
   }
 
   @EventHandler

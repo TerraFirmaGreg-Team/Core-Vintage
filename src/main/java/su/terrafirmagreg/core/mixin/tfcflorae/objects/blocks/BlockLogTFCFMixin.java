@@ -16,8 +16,8 @@ import tfcflorae.objects.blocks.wood.BlockLogTFCF;
 @Mixin(value = BlockLogTFCF.class, remap = false)
 public abstract class BlockLogTFCFMixin extends BlockLog implements IItemSize {
 
-    @Inject(method = "removedByPlayer", at = @At(value = "HEAD"), remap = false, cancellable = true)
-    public void removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(super.removedByPlayer(state, world, pos, player, willHarvest));
-    }
+  @Inject(method = "removedByPlayer", at = @At(value = "HEAD"), remap = false, cancellable = true)
+  public void removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest, CallbackInfoReturnable<Boolean> cir) {
+    cir.setReturnValue(super.removedByPlayer(state, world, pos, player, willHarvest));
+  }
 }

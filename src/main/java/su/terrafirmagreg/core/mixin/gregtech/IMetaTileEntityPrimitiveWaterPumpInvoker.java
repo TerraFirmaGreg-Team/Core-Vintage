@@ -7,6 +7,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(value = MetaTileEntityPrimitiveWaterPump.class, remap = false)
 public interface IMetaTileEntityPrimitiveWaterPumpInvoker {
 
-    @Invoker
-    int invokeGetAmount();
+  @Invoker
+  int invokeGetAmount();
 }

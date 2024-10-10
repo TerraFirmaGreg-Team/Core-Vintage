@@ -10,6 +10,6 @@ import tfcflorae.objects.recipes.UnmoldRecipeStonewareTFCF;
 @Mixin(value = UnmoldRecipeStonewareTFCF.class, remap = false)
 public interface IUnmoldRecipeStonewareInvoker {
 
-    @Invoker
-    ItemStack invokeGetOutputItem(IMoldHandler moldHandler);
+  @Invoker
+  ItemStack invokeGetOutputItem(IMoldHandler moldHandler);
 }

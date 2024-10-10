@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(targets = "tfcflorae.objects.items.ceramics.ItemStonewareMold$FilledMoldCapability", remap = false)
 public class ItemStonewareMoldMixin {
 
-    @Shadow
-    @Final
-    private final FluidTank tank = new FluidTank(144);
+  @Shadow
+  @Final
+  private final FluidTank tank = new FluidTank(144);
 }

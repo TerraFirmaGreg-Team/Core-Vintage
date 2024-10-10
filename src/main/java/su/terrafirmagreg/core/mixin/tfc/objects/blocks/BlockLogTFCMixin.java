@@ -16,13 +16,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = BlockLogTFC.class, remap = false)
 public abstract class BlockLogTFCMixin extends BlockLog implements IItemSize {
 
-    /**
-     * @author SpeeeDCraft
-     * @reason Disable tree cap from TFC
-     */
-    @Inject(method = "removedByPlayer", at = @At(value = "HEAD"), remap = false, cancellable = true)
-    public void removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(super.removedByPlayer(state, world, pos, player, willHarvest));
-    }
+  /**
+   * @author SpeeeDCraft
+   * @reason Disable tree cap from TFC
+   */
+  @Inject(method = "removedByPlayer", at = @At(value = "HEAD"), remap = false, cancellable = true)
+  public void removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest, CallbackInfoReturnable<Boolean> cir) {
+    cir.setReturnValue(super.removedByPlayer(state, world, pos, player, willHarvest));
+  }
 
 }

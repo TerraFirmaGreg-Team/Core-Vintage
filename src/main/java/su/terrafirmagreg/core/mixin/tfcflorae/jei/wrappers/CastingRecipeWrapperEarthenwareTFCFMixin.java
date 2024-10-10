@@ -22,22 +22,22 @@ import tfcflorae.objects.items.ceramics.ItemEarthenwareMold;
 @Mixin(value = CastingRecipeWrapperEarthenwareTFCF.class, remap = false)
 public abstract class CastingRecipeWrapperEarthenwareTFCFMixin implements IRecipeWrapper {
 
-    @Shadow
-    @Final
-    @Mutable
-    private ItemStack mold;
-    @Shadow
-    @Final
-    @Mutable
-    private FluidStack input;
+  @Shadow
+  @Final
+  @Mutable
+  private ItemStack mold;
+  @Shadow
+  @Final
+  @Mutable
+  private FluidStack input;
 
-    @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
-    public void CastingRecipeWrapper(Metal metal, Metal.ItemType type, CallbackInfo ci) {
-        this.input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144);
-        this.mold = new ItemStack(ItemEarthenwareMold.get(type));
-        IFluidHandler cap = this.mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler) {
-            cap.fill(this.input, true);
-        }
+  @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
+  public void CastingRecipeWrapper(Metal metal, Metal.ItemType type, CallbackInfo ci) {
+    this.input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144);
+    this.mold = new ItemStack(ItemEarthenwareMold.get(type));
+    IFluidHandler cap = this.mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+    if (cap instanceof IMoldHandler) {
+      cap.fill(this.input, true);
     }
+  }
 }

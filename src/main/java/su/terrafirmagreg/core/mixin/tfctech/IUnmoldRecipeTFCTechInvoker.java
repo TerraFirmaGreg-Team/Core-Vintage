@@ -10,6 +10,6 @@ import tfctech.objects.recipes.UnmoldRecipe;
 @Mixin(value = UnmoldRecipe.class, remap = false)
 public interface IUnmoldRecipeTFCTechInvoker {
 
-    @Invoker
-    ItemStack invokeGetOutputItem(final IMoldHandler moldHandler);
+  @Invoker
+  ItemStack invokeGetOutputItem(final IMoldHandler moldHandler);
 }

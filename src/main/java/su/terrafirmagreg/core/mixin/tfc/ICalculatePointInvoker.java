@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(value = BlockPlacedHide.class, remap = false)
 public interface ICalculatePointInvoker {
 
-    @Invoker
-    static Vec3d invokeCalculatePoint(Vec3d rayVector, Vec3d rayPoint) {
-        throw new AssertionError();
-    }
+  @Invoker
+  static Vec3d invokeCalculatePoint(Vec3d rayVector, Vec3d rayPoint) {
+    throw new AssertionError();
+  }
 }

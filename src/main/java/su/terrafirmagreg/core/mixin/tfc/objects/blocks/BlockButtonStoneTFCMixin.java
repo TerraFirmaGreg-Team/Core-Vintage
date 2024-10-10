@@ -13,13 +13,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = BlockButtonStoneTFC.class, remap = false)
 public class BlockButtonStoneTFCMixin extends BlockButtonStone {
 
-    /**
-     * @author SpeeeDCraft
-     * @reason Add buttonStone oredict and buttonStone{rockType} oredict for stoneButtons
-     */
-    @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
-    public void onConstructor(Rock rock, CallbackInfo ci) {
-        OreDictionaryHelper.register(BlockButtonStoneTFC.get(rock), "button", "stone");
-        OreDictionaryHelper.register(BlockButtonStoneTFC.get(rock), "button", "stone", rock.toString());
-    }
+  /**
+   * @author SpeeeDCraft
+   * @reason Add buttonStone oredict and buttonStone{rockType} oredict for stoneButtons
+   */
+  @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
+  public void onConstructor(Rock rock, CallbackInfo ci) {
+    OreDictionaryHelper.register(BlockButtonStoneTFC.get(rock), "button", "stone");
+    OreDictionaryHelper.register(BlockButtonStoneTFC.get(rock), "button", "stone", rock.toString());
+  }
 }

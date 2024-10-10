@@ -8,7 +8,7 @@ import tfctech.objects.tileentities.TESmelteryCauldron;
 @Mixin(value = TESmelteryCauldron.class, remap = false)
 public class TESmelteryCauldronMixin {
 
-    @Shadow
-    @Final
-    public static final int FLUID_CAPACITY = 4608;
+  @Shadow
+  @Final
+  public static final int FLUID_CAPACITY = 4608;
 }

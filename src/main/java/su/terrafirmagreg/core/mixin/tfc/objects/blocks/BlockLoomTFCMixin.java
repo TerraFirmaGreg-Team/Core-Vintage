@@ -11,13 +11,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = BlockLoom.class, remap = false)
 public class BlockLoomTFCMixin {
 
-    /**
-     * @author SpeeeDCraft
-     * @reason Add loom oredict and loom{woodType} oredict for looms
-     */
-    @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
-    public void onConstructor(Tree wood, CallbackInfo ci) {
-        OreDictionaryHelper.register(BlockLoom.get(wood), "loom");
-        OreDictionaryHelper.register(BlockLoom.get(wood), "loom", wood);
-    }
+  /**
+   * @author SpeeeDCraft
+   * @reason Add loom oredict and loom{woodType} oredict for looms
+   */
+  @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
+  public void onConstructor(Tree wood, CallbackInfo ci) {
+    OreDictionaryHelper.register(BlockLoom.get(wood), "loom");
+    OreDictionaryHelper.register(BlockLoom.get(wood), "loom", wood);
+  }
 }

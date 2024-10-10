@@ -22,24 +22,24 @@ import javax.annotation.Nonnull;
 @Mixin(value = BloomeryRecipe.class, remap = false)
 public class BloomeryRecipeMixin extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
 
-    @Shadow
-    @Final
-    @Mutable
-    private final Metal metal;
+  @Shadow
+  @Final
+  @Mutable
+  private final Metal metal;
 
-    public BloomeryRecipeMixin(@Nonnull Metal metal) {
-        this.metal = metal;
-    }
+  public BloomeryRecipeMixin(@Nonnull Metal metal) {
+    this.metal = metal;
+  }
 
-    @Inject(method = "getOutput()Lnet/minecraft/item/ItemStack;", at = @At(value = "HEAD"), cancellable = true)
-    public void getOutput(CallbackInfoReturnable<ItemStack> cir) {
-        ItemStack bloom = new ItemStack(ItemsTFC.UNREFINED_BLOOM);
-        IForgeable cap = bloom.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-        if (cap instanceof IForgeableMeasurableMetal capBloom) {
-            capBloom.setMetalAmount(144);
-            capBloom.setMetal(metal);
-            capBloom.setTemperature(capBloom.getMeltTemp() - 1);
-        }
-        cir.setReturnValue(bloom);
+  @Inject(method = "getOutput()Lnet/minecraft/item/ItemStack;", at = @At(value = "HEAD"), cancellable = true)
+  public void getOutput(CallbackInfoReturnable<ItemStack> cir) {
+    ItemStack bloom = new ItemStack(ItemsTFC.UNREFINED_BLOOM);
+    IForgeable cap = bloom.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    if (cap instanceof IForgeableMeasurableMetal capBloom) {
+      capBloom.setMetalAmount(144);
+      capBloom.setMetal(metal);
+      capBloom.setTemperature(capBloom.getMeltTemp() - 1);
     }
+    cir.setReturnValue(bloom);
+  }
 }

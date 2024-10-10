@@ -7,12 +7,12 @@ import java.util.List;
 
 public class LateMixinLoader implements ILateMixinLoader {
 
-    @Override
-    public List<String> getMixinConfigs() {
-        final List<String> mixinList = new ArrayList<>();
+  @Override
+  public List<String> getMixinConfigs() {
+    final List<String> mixinList = new ArrayList<>();
 
-        mixinList.add("mixins.tfg.json");
+    mixinList.add("mixins.tfg.json");
 
-        return mixinList;
-    }
+    return mixinList;
+  }
 }

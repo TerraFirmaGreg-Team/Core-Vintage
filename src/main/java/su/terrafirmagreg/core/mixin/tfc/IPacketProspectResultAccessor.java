@@ -11,12 +11,12 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(value = PacketProspectResult.class, remap = false)
 public interface IPacketProspectResultAccessor {
 
-    @Accessor
-    BlockPos getPos();
+  @Accessor
+  BlockPos getPos();
 
-    @Accessor
-    ItemProspectorPick.ProspectResult.Type getType();
+  @Accessor
+  ItemProspectorPick.ProspectResult.Type getType();
 
-    @Accessor
-    ItemStack getVein();
+  @Accessor
+  ItemStack getVein();
 }

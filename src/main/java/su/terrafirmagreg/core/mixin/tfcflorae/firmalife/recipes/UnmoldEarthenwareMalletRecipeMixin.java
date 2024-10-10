@@ -1,5 +1,7 @@
 package su.terrafirmagreg.core.mixin.tfcflorae.firmalife.recipes;
 
+import su.terrafirmagreg.core.mixin.tfcflorae.firmalife.IUnmoldEarthenwareMalletRecipeMixin;
+
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -10,8 +12,11 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import net.dries007.tfc.api.capability.IMoldHandler;
-import org.spongepowered.asm.mixin.*;
-import su.terrafirmagreg.core.mixin.tfcflorae.firmalife.IUnmoldEarthenwareMalletRecipeMixin;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
 import tfcflorae.compat.firmalife.ceramics.ItemEarthenwareMalletMoldFL;
 import tfcflorae.compat.firmalife.recipes.UnmoldEarthenwareMalletRecipe;
 
@@ -23,60 +28,60 @@ import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_
 @Mixin(value = UnmoldEarthenwareMalletRecipe.class, remap = false)
 public abstract class UnmoldEarthenwareMalletRecipeMixin extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
-    @Shadow
-    @Final
-    @Mutable
-    private final NonNullList<Ingredient> input;
-    @Shadow
-    @Final
-    @Mutable
-    private final ResourceLocation group;
-    @Shadow
-    @Final
-    @Mutable
-    private final String type;
-    @Shadow
-    @Final
-    @Mutable
-    private final float chance;
+  @Shadow
+  @Final
+  @Mutable
+  private final NonNullList<Ingredient> input;
+  @Shadow
+  @Final
+  @Mutable
+  private final ResourceLocation group;
+  @Shadow
+  @Final
+  @Mutable
+  private final String type;
+  @Shadow
+  @Final
+  @Mutable
+  private final float chance;
 
-    private UnmoldEarthenwareMalletRecipeMixin(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @Nonnull String type, float chance) {
-        this.group = group;
-        this.input = input;
-        this.type = type;
-        this.chance = chance;
-    }
+  private UnmoldEarthenwareMalletRecipeMixin(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @Nonnull String type, float chance) {
+    this.group = group;
+    this.input = input;
+    this.type = type;
+    this.chance = chance;
+  }
 
-    /**
-     * @author SpeeeDCraft
-     * @reason 100mb in mold -> 144mb = Recipe working!
-     */
-    @Overwrite
-    @Nonnull
-    public ItemStack getCraftingResult(InventoryCrafting inv) {
-        ItemStack moldStack = null;
-        for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
-            ItemStack stack = inv.getStackInSlot(slot);
-            if (!stack.isEmpty()) {
-                if (stack.getItem() instanceof ItemEarthenwareMalletMoldFL tmp) {
-                    if (tmp.getToolName().equals(this.type) && moldStack == null) {
-                        moldStack = stack;
-                    } else {
-                        return ItemStack.EMPTY;
-                    }
-                } else {
-                    return ItemStack.EMPTY;
-                }
-            }
+  /**
+   * @author SpeeeDCraft
+   * @reason 100mb in mold -> 144mb = Recipe working!
+   */
+  @Overwrite
+  @Nonnull
+  public ItemStack getCraftingResult(InventoryCrafting inv) {
+    ItemStack moldStack = null;
+    for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
+      ItemStack stack = inv.getStackInSlot(slot);
+      if (!stack.isEmpty()) {
+        if (stack.getItem() instanceof ItemEarthenwareMalletMoldFL tmp) {
+          if (tmp.getToolName().equals(this.type) && moldStack == null) {
+            moldStack = stack;
+          } else {
+            return ItemStack.EMPTY;
+          }
+        } else {
+          return ItemStack.EMPTY;
         }
-        if (moldStack != null) {
-            IFluidHandler moldCap = moldStack.getCapability(FLUID_HANDLER_CAPABILITY, null);
-            if (moldCap instanceof IMoldHandler moldHandler) {
-                if (!moldHandler.isMolten() && moldHandler.getAmount() == 144) {
-                    return ((IUnmoldEarthenwareMalletRecipeMixin) this).invokeGetOutputItem(moldHandler);
-                }
-            }
-        }
-        return ItemStack.EMPTY;
+      }
     }
+    if (moldStack != null) {
+      IFluidHandler moldCap = moldStack.getCapability(FLUID_HANDLER_CAPABILITY, null);
+      if (moldCap instanceof IMoldHandler moldHandler) {
+        if (!moldHandler.isMolten() && moldHandler.getAmount() == 144) {
+          return ((IUnmoldEarthenwareMalletRecipeMixin) this).invokeGetOutputItem(moldHandler);
+        }
+      }
+    }
+    return ItemStack.EMPTY;
+  }
 }

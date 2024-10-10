@@ -10,7 +10,7 @@ import tfctech.objects.items.ceramics.ItemTechMold;
 @Mixin(value = ItemTechMold.FilledMoldCapability.class, remap = false)
 public class ItemTechMoldMixin {
 
-    @Shadow
-    @Final
-    private final FluidTank tank = new FluidTank(144);
+  @Shadow
+  @Final
+  private final FluidTank tank = new FluidTank(144);
 }

@@ -24,28 +24,28 @@ import tfcflorae.objects.items.ItemsTFCF;
 @Mixin(value = UnmoldRecipeWrapperStonewareFL.class, remap = false)
 public class UnmoldRecipeWrapperStonewareFLMixin {
 
-    @Shadow
-    @Final
-    @Mutable
-    private ItemStack mold;
-    @Shadow
-    @Final
-    @Mutable
-    private ItemStack output;
+  @Shadow
+  @Final
+  @Mutable
+  private ItemStack mold;
+  @Shadow
+  @Final
+  @Mutable
+  private ItemStack output;
 
-    @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
-    public void UnmoldRecipeWrapperEarthenwareFL(Metal metal, String type, CallbackInfo ci) {
-        this.mold = new ItemStack(ItemsTFCF.malletMoldStoneware);
-        IFluidHandler cap = this.mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler) {
-            cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144), true);
-        }
-
-        this.output = new ItemStack(ItemsFL.getMetalMalletHead(metal));
+  @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
+  public void UnmoldRecipeWrapperEarthenwareFL(Metal metal, String type, CallbackInfo ci) {
+    this.mold = new ItemStack(ItemsTFCF.malletMoldStoneware);
+    IFluidHandler cap = this.mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+    if (cap instanceof IMoldHandler) {
+      cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144), true);
     }
 
-    public void getIngredients(IIngredients ingredients) {
-        ingredients.setInput(VanillaTypes.ITEM, this.mold);
-        ingredients.setOutput(VanillaTypes.ITEM, this.output);
-    }
+    this.output = new ItemStack(ItemsFL.getMetalMalletHead(metal));
+  }
+
+  public void getIngredients(IIngredients ingredients) {
+    ingredients.setInput(VanillaTypes.ITEM, this.mold);
+    ingredients.setOutput(VanillaTypes.ITEM, this.output);
+  }
 }

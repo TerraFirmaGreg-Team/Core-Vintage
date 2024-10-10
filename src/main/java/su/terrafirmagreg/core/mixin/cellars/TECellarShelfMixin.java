@@ -17,12 +17,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = TECellarShelf.class, remap = false)
 public abstract class TECellarShelfMixin extends TEInventory implements IItemHandlerSidedCallback, ITickable {
 
-    protected TECellarShelfMixin(int inventorySize) {
-        super(inventorySize);
-    }
+  protected TECellarShelfMixin(int inventorySize) {
+    super(inventorySize);
+  }
 
-    @Inject(method = "canInsert", at = @At(value = "HEAD"), remap = false, cancellable = true)
-    public void onCanInsert(int i, ItemStack itemStack, EnumFacing enumFacing, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue((itemStack.getItem() instanceof ItemFood) || (itemStack.getItem() instanceof ItemSmallVessel));
-    }
+  @Inject(method = "canInsert", at = @At(value = "HEAD"), remap = false, cancellable = true)
+  public void onCanInsert(int i, ItemStack itemStack, EnumFacing enumFacing, CallbackInfoReturnable<Boolean> cir) {
+    cir.setReturnValue((itemStack.getItem() instanceof ItemFood) || (itemStack.getItem() instanceof ItemSmallVessel));
+  }
 }

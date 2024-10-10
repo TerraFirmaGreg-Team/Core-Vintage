@@ -31,47 +31,47 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public abstract class EntitySheepTFCMixin extends EntityAnimalMammal implements IShearable, ILivestock {
 
-    public EntitySheepTFCMixin(World worldIn) {
-        super(worldIn);
-    }
+  public EntitySheepTFCMixin(World worldIn) {
+    super(worldIn);
+  }
 
-    /**
-     * @author SpeeeDCraft
-     * @reason Allow to use GT knife on TFC Sheep
-     */
-    @Inject(method = "processInteract", at = @At(value = "HEAD"), remap = false, cancellable = true)
-    public void processInteract(EntityPlayer player, EnumHand hand, CallbackInfoReturnable<Boolean> cir) {
-        ItemStack stack = player.getHeldItem(hand);
-        if (stack.getItem() == ToolItems.KNIFE) {
-            if (!world.isRemote) {
-                if (isReadyForAnimalProduct()) {
-                    ToolHelper.damageItem(stack, player);
-                    ItemStack woolStack = new ItemStack(ItemsTFC.WOOL, 1);
-                    Helpers.spawnItemStack(player.world, new BlockPos(posX, posY, posZ), woolStack);
-                    playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
-                    setProductsCooldown();
-                } else {
-                    TextComponentTranslation tooltip = getTooltip();
-                    if (tooltip != null) {
-                        TerraFirmaCraft.getNetwork()
-                                .sendTo(new PacketSimpleMessage(PacketSimpleMessage.MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
-                    }
-                }
-            }
-            cir.setReturnValue(true);
-        } else if (OreDictionaryHelper.doesStackMatchOre(stack, "shears")) {
-            if (!world.isRemote) {
-                if (!isReadyForAnimalProduct()) {
-                    TextComponentTranslation tooltip = getTooltip();
-                    if (tooltip != null) {
-                        TerraFirmaCraft.getNetwork()
-                                .sendTo(new PacketSimpleMessage(PacketSimpleMessage.MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
-                    }
-                }
-            }
-            cir.setReturnValue(false);
+  /**
+   * @author SpeeeDCraft
+   * @reason Allow to use GT knife on TFC Sheep
+   */
+  @Inject(method = "processInteract", at = @At(value = "HEAD"), remap = false, cancellable = true)
+  public void processInteract(EntityPlayer player, EnumHand hand, CallbackInfoReturnable<Boolean> cir) {
+    ItemStack stack = player.getHeldItem(hand);
+    if (stack.getItem() == ToolItems.KNIFE) {
+      if (!world.isRemote) {
+        if (isReadyForAnimalProduct()) {
+          ToolHelper.damageItem(stack, player);
+          ItemStack woolStack = new ItemStack(ItemsTFC.WOOL, 1);
+          Helpers.spawnItemStack(player.world, new BlockPos(posX, posY, posZ), woolStack);
+          playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
+          setProductsCooldown();
         } else {
-            cir.setReturnValue(super.processInteract(player, hand));
+          TextComponentTranslation tooltip = getTooltip();
+          if (tooltip != null) {
+            TerraFirmaCraft.getNetwork()
+                           .sendTo(new PacketSimpleMessage(PacketSimpleMessage.MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+          }
         }
+      }
+      cir.setReturnValue(true);
+    } else if (OreDictionaryHelper.doesStackMatchOre(stack, "shears")) {
+      if (!world.isRemote) {
+        if (!isReadyForAnimalProduct()) {
+          TextComponentTranslation tooltip = getTooltip();
+          if (tooltip != null) {
+            TerraFirmaCraft.getNetwork()
+                           .sendTo(new PacketSimpleMessage(PacketSimpleMessage.MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+          }
+        }
+      }
+      cir.setReturnValue(false);
+    } else {
+      cir.setReturnValue(super.processInteract(player, hand));
     }
+  }
 }

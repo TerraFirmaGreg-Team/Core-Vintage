@@ -22,22 +22,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = CastingRecipeWrapper.class, remap = false)
 public abstract class CastingRecipeWrapperMixin implements IRecipeWrapper {
 
-    @Shadow
-    @Final
-    @Mutable
-    private ItemStack mold;
-    @Shadow
-    @Final
-    @Mutable
-    private FluidStack input;
+  @Shadow
+  @Final
+  @Mutable
+  private ItemStack mold;
+  @Shadow
+  @Final
+  @Mutable
+  private FluidStack input;
 
-    @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
-    public void CastingRecipeWrapper(Metal metal, Metal.ItemType type, CallbackInfo ci) {
-        input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144);
-        mold = new ItemStack(ItemMold.get(type));
-        IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler) {
-            cap.fill(input, true);
-        }
+  @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
+  public void CastingRecipeWrapper(Metal metal, Metal.ItemType type, CallbackInfo ci) {
+    input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144);
+    mold = new ItemStack(ItemMold.get(type));
+    IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+    if (cap instanceof IMoldHandler) {
+      cap.fill(input, true);
     }
+  }
 }

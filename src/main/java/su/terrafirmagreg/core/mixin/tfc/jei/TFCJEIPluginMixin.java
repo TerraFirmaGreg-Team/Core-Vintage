@@ -30,38 +30,40 @@ import java.util.stream.Collectors;
 @Mixin(value = TFCJEIPlugin.class, remap = false)
 public class TFCJEIPluginMixin implements IModPlugin {
 
-    @Shadow
-    @Final
-    public static final String KNAP_CLAY_UID = TerraFirmaCraft.MOD_ID + ".knap.clay";
-    @Shadow
-    @Final
-    public static final String SCRAPING_UID = TerraFirmaCraft.MOD_ID + ".scraping";
+  @Shadow
+  @Final
+  public static final String KNAP_CLAY_UID = TerraFirmaCraft.MOD_ID + ".knap.clay";
+  @Shadow
+  @Final
+  public static final String SCRAPING_UID = TerraFirmaCraft.MOD_ID + ".scraping";
 
-    private static final String GT_ORE_SPAWN_UID = GTValues.MODID + ":ore_spawn_location";
+  private static final String GT_ORE_SPAWN_UID = GTValues.MODID + ":ore_spawn_location";
 
-    @Inject(method = "register", at = @At(value = "TAIL"), remap = false)
-    private void onRegister(IModRegistry registry, CallbackInfo ci) {
+  @Inject(method = "register", at = @At(value = "TAIL"), remap = false)
+  private void onRegister(IModRegistry registry, CallbackInfo ci) {
 
-        // Hide TFC Ores in HEI
-        IIngredientBlacklist blacklist = registry.getJeiHelpers().getIngredientBlacklist();
-        for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-            for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
-                blacklist.addIngredientToBlacklist(new ItemStack(BlockOreTFC.get(ore, rock)));
-            }
-        }
-
-        // Add TFC Propicks to HEI GT ore spawn Tab
-        List<Metal> tierOrdered = TFCRegistries.METALS.getValuesCollection()
-                .stream()
-                .sorted(Comparator.comparingInt(metal -> metal.getTier()
-                        .ordinal()))
-                .collect(Collectors.toList());
-
-        for (Metal metal : tierOrdered)
-            if (Metal.ItemType.PROPICK.hasType(metal))
-                registry.addRecipeCatalyst(new ItemStack(ItemMetalTool.get(metal, Metal.ItemType.PROPICK)), GT_ORE_SPAWN_UID);
-
-        // Add GT Knife to Knapping Tab
-        registry.addRecipeCatalyst(ToolItems.KNIFE.get(Materials.Iron), SCRAPING_UID);
+    // Hide TFC Ores in HEI
+    IIngredientBlacklist blacklist = registry.getJeiHelpers().getIngredientBlacklist();
+    for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
+      for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
+        blacklist.addIngredientToBlacklist(new ItemStack(BlockOreTFC.get(ore, rock)));
+      }
     }
+
+    // Add TFC Propicks to HEI GT ore spawn Tab
+    List<Metal> tierOrdered = TFCRegistries.METALS.getValuesCollection()
+                                                  .stream()
+                                                  .sorted(Comparator.comparingInt(metal -> metal.getTier()
+                                                                                                .ordinal()))
+                                                  .collect(Collectors.toList());
+
+    for (Metal metal : tierOrdered) {
+      if (Metal.ItemType.PROPICK.hasType(metal)) {
+        registry.addRecipeCatalyst(new ItemStack(ItemMetalTool.get(metal, Metal.ItemType.PROPICK)), GT_ORE_SPAWN_UID);
+      }
+    }
+
+    // Add GT Knife to Knapping Tab
+    registry.addRecipeCatalyst(ToolItems.KNIFE.get(Materials.Iron), SCRAPING_UID);
+  }
 }

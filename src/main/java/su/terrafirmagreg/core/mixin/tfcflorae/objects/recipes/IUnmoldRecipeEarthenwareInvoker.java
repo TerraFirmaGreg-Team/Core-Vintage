@@ -10,6 +10,6 @@ import tfcflorae.objects.recipes.UnmoldRecipeEarthenwareTFCF;
 @Mixin(value = UnmoldRecipeEarthenwareTFCF.class, remap = false)
 public interface IUnmoldRecipeEarthenwareInvoker {
 
-    @Invoker
-    ItemStack invokeGetOutputItem(IMoldHandler moldHandler);
+  @Invoker
+  ItemStack invokeGetOutputItem(IMoldHandler moldHandler);
 }

@@ -22,26 +22,26 @@ import tfctech.objects.items.metal.ItemTechMetal;
 @Mixin(value = CastingRecipeWrapper.class, remap = false)
 public abstract class CastingRecipeWrapperMixin extends net.dries007.tfc.compat.jei.wrappers.CastingRecipeWrapper {
 
-    @Shadow
-    @Final
-    @Mutable
-    private ItemStack mold;
-    @Shadow
-    @Final
-    @Mutable
-    private FluidStack input;
+  @Shadow
+  @Final
+  @Mutable
+  private ItemStack mold;
+  @Shadow
+  @Final
+  @Mutable
+  private FluidStack input;
 
-    public CastingRecipeWrapperMixin(Metal metal, Metal.ItemType type) {
-        super(metal, type);
-    }
+  public CastingRecipeWrapperMixin(Metal metal, Metal.ItemType type) {
+    super(metal, type);
+  }
 
-    @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
-    public void CastingRecipeWrapper(Metal metal, ItemTechMetal.ItemType type, CallbackInfo ci) {
-        this.input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144);
-        this.mold = new ItemStack(ItemTechMold.get(type));
-        IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler) {
-            cap.fill(this.input, true);
-        }
+  @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
+  public void CastingRecipeWrapper(Metal metal, ItemTechMetal.ItemType type, CallbackInfo ci) {
+    this.input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144);
+    this.mold = new ItemStack(ItemTechMold.get(type));
+    IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+    if (cap instanceof IMoldHandler) {
+      cap.fill(this.input, true);
     }
+  }
 }

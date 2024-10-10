@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = TerraFirmaCraft.class, remap = false)
 public class TerraFirmaCraftMixin {
 
-    @Inject(method = "onServerStarting", at = @At(value = "HEAD"))
-    public void onServerStarting(FMLServerStartingEvent event, CallbackInfo ci) {
-        event.registerServerCommand(new CommandGenTree());
-    }
+  @Inject(method = "onServerStarting", at = @At(value = "HEAD"))
+  public void onServerStarting(FMLServerStartingEvent event, CallbackInfo ci) {
+    event.registerServerCommand(new CommandGenTree());
+  }
 }

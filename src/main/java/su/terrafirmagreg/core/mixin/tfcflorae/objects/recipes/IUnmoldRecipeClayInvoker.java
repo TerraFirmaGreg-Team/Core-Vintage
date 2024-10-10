@@ -10,6 +10,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(value = UnmoldRecipe.class, remap = false)
 public interface IUnmoldRecipeClayInvoker {
 
-    @Invoker
-    ItemStack invokeGetOutputItem(IMoldHandler moldHandler);
+  @Invoker
+  ItemStack invokeGetOutputItem(IMoldHandler moldHandler);
 }

@@ -1,5 +1,7 @@
 package su.terrafirmagreg.core.mixin.gregtech;
 
+import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -13,16 +15,15 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
 
 @Mixin(value = MinerLogic.class, remap = false)
 public class MinerLogicMixin {
 
-    @Inject(method = "getRegularBlockDrops", at = @At(value = "HEAD"), remap = false, cancellable = true)
-    protected void onGetRegularBlockDrops(NonNullList<ItemStack> blockDrops, WorldServer world, BlockPos blockToMine, IBlockState blockState, CallbackInfo ci) {
-        if (blockState.getBlock() instanceof BlockOre blockOre) {
-            blockDrops.add(OreDictUnifier.get(TFGOrePrefix.oreChunk, blockOre.material));
-            ci.cancel();
-        }
+  @Inject(method = "getRegularBlockDrops", at = @At(value = "HEAD"), remap = false, cancellable = true)
+  protected void onGetRegularBlockDrops(NonNullList<ItemStack> blockDrops, WorldServer world, BlockPos blockToMine, IBlockState blockState, CallbackInfo ci) {
+    if (blockState.getBlock() instanceof BlockOre blockOre) {
+      blockDrops.add(OreDictUnifier.get(TFGOrePrefix.oreChunk, blockOre.material));
+      ci.cancel();
     }
+  }
 }

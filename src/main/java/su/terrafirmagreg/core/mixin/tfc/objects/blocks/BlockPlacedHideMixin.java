@@ -1,5 +1,7 @@
 package su.terrafirmagreg.core.mixin.tfc.objects.blocks;
 
+import su.terrafirmagreg.core.mixin.tfc.ICalculatePointInvoker;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -17,37 +19,37 @@ import gregtech.common.items.ToolItems;
 import net.dries007.tfc.objects.blocks.BlockPlacedHide;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import net.dries007.tfc.util.Helpers;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import su.terrafirmagreg.core.mixin.tfc.ICalculatePointInvoker;
+
+import org.jetbrains.annotations.NotNull;
 
 @Mixin(value = BlockPlacedHide.class, remap = false)
 public class BlockPlacedHideMixin extends Block {
 
-    public BlockPlacedHideMixin(Material blockMaterialIn, MapColor blockMapColorIn) {
-        super(blockMaterialIn, blockMapColorIn);
-    }
+  public BlockPlacedHideMixin(Material blockMaterialIn, MapColor blockMapColorIn) {
+    super(blockMaterialIn, blockMapColorIn);
+  }
 
-    /**
-     * @author SpeeeDCraft
-     * @reason Allow to use GT knife on TFC skins
-     */
-    @Overwrite
-    public boolean func_180639_a(@NotNull World worldIn, @NotNull BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        ItemStack stack = playerIn.getHeldItem(hand);
-        if (stack.getItem() == ToolItems.KNIFE) {
-            if (!worldIn.isRemote) {
-                // Account for the distance between the hitbox and where the hide is rendered
-                Vec3d point = ICalculatePointInvoker.invokeCalculatePoint(playerIn.getLookVec(), new Vec3d(hitX, hitY, hitZ));
-                ToolHelper.damageItem(stack, playerIn);
-                TEPlacedHide tile = Helpers.getTE(worldIn, pos, TEPlacedHide.class);
-                if (tile != null) {
-                    tile.onClicked((float) point.x, (float) point.z);
-                }
-            }
-            return true;
+  /**
+   * @author SpeeeDCraft
+   * @reason Allow to use GT knife on TFC skins
+   */
+  @Overwrite
+  public boolean func_180639_a(@NotNull World worldIn, @NotNull BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    ItemStack stack = playerIn.getHeldItem(hand);
+    if (stack.getItem() == ToolItems.KNIFE) {
+      if (!worldIn.isRemote) {
+        // Account for the distance between the hitbox and where the hide is rendered
+        Vec3d point = ICalculatePointInvoker.invokeCalculatePoint(playerIn.getLookVec(), new Vec3d(hitX, hitY, hitZ));
+        ToolHelper.damageItem(stack, playerIn);
+        TEPlacedHide tile = Helpers.getTE(worldIn, pos, TEPlacedHide.class);
+        if (tile != null) {
+          tile.onClicked((float) point.x, (float) point.z);
         }
-        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+      }
+      return true;
     }
+    return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+  }
 }

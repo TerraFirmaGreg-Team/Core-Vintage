@@ -10,6 +10,6 @@ import tfcflorae.objects.recipes.UnmoldRecipeKaoliniteTFCF;
 @Mixin(value = UnmoldRecipeKaoliniteTFCF.class, remap = false)
 public interface IUnmoldRecipeKaoliniteInvoker {
 
-    @Invoker
-    ItemStack invokeGetOutputItem(IMoldHandler moldHandler);
+  @Invoker
+  ItemStack invokeGetOutputItem(IMoldHandler moldHandler);
 }

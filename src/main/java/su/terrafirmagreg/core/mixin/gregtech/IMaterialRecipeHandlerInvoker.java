@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(value = MaterialRecipeHandler.class, remap = false)
 public interface IMaterialRecipeHandlerInvoker {
 
-    @Invoker
-    static int invokeGetVoltageMultiplier(Material material) {
-        throw new AssertionError();
-    }
+  @Invoker
+  static int invokeGetVoltageMultiplier(Material material) {
+    throw new AssertionError();
+  }
 }

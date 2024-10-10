@@ -10,6 +10,6 @@ import tfcflorae.compat.firmalife.recipes.UnmoldKaoliniteMalletRecipe;
 @Mixin(value = UnmoldKaoliniteMalletRecipe.class, remap = false)
 public interface IUnmoldKaoliniteMalletRecipeMixin {
 
-    @Invoker
-    ItemStack invokeGetOutputItem(IMoldHandler moldHandler);
+  @Invoker
+  ItemStack invokeGetOutputItem(IMoldHandler moldHandler);
 }

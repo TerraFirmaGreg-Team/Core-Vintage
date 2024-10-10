@@ -10,6 +10,6 @@ import tfcflorae.compat.firmalife.recipes.UnmoldStonewareMalletRecipe;
 @Mixin(value = UnmoldStonewareMalletRecipe.class, remap = false)
 public interface IUnmoldStonewareMalletRecipeMixin {
 
-    @Invoker
-    ItemStack invokeGetOutputItem(IMoldHandler moldHandler);
+  @Invoker
+  ItemStack invokeGetOutputItem(IMoldHandler moldHandler);
 }

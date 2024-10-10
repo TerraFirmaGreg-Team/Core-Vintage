@@ -1,5 +1,7 @@
 package su.terrafirmagreg.core.mixin.tfc.jei.wrappers;
 
+import su.terrafirmagreg.core.util.TFGModUtils;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -23,41 +25,40 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import su.terrafirmagreg.core.util.TFGModUtils;
 
 @Mixin(value = UnmoldRecipeWrapper.class, remap = false)
 public class UnmoldRecipeWrapperMixin implements IRecipeWrapper {
 
-    @Shadow
-    @Final
-    @Mutable
-    private ItemStack mold;
-    @Shadow
-    @Final
-    @Mutable
-    private ItemStack output;
+  @Shadow
+  @Final
+  @Mutable
+  private ItemStack mold;
+  @Shadow
+  @Final
+  @Mutable
+  private ItemStack output;
 
-    @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
-    public void UnmoldRecipeWrapper(Metal metal, Metal.ItemType type, CallbackInfo ci) {
-        this.mold = new ItemStack(ItemMold.get(type));
-        IFluidHandler cap = this.mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler) {
-            cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144), true);
-        }
-
-        String oreDict = TFGModUtils.constructOredictFromTFCToGT(metal, type);
-        ItemStack outputTest = OreDictUnifier.get(oreDict);
-
-        if (!outputTest.getItem().equals(Items.AIR)) {
-            this.output = OreDictUnifier.get(oreDict);
-        } else {
-            this.output = new ItemStack(ItemMetal.get(metal, type));
-        }
+  @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
+  public void UnmoldRecipeWrapper(Metal metal, Metal.ItemType type, CallbackInfo ci) {
+    this.mold = new ItemStack(ItemMold.get(type));
+    IFluidHandler cap = this.mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+    if (cap instanceof IMoldHandler) {
+      cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144), true);
     }
 
-    public void getIngredients(IIngredients ingredients) {
-        ingredients.setInput(VanillaTypes.ITEM, this.mold);
-        ingredients.setOutput(VanillaTypes.ITEM, this.output);
+    String oreDict = TFGModUtils.constructOredictFromTFCToGT(metal, type);
+    ItemStack outputTest = OreDictUnifier.get(oreDict);
+
+    if (!outputTest.getItem().equals(Items.AIR)) {
+      this.output = OreDictUnifier.get(oreDict);
+    } else {
+      this.output = new ItemStack(ItemMetal.get(metal, type));
     }
+  }
+
+  public void getIngredients(IIngredients ingredients) {
+    ingredients.setInput(VanillaTypes.ITEM, this.mold);
+    ingredients.setOutput(VanillaTypes.ITEM, this.output);
+  }
 
 }

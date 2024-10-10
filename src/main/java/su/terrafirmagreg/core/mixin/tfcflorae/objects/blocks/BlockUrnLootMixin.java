@@ -15,9 +15,9 @@ import tfcflorae.objects.blocks.BlockUrnLoot;
 @Mixin(value = BlockUrnLoot.class, remap = false)
 public class BlockUrnLootMixin {
 
-    // TODO: make custom drop from loot, some seeds maybe?
-    @Inject(method = "getDrops", at = @At(value = "HEAD"), remap = false, cancellable = true)
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune, CallbackInfo ci) {
-        ci.cancel();
-    }
+  // TODO: make custom drop from loot, some seeds maybe?
+  @Inject(method = "getDrops", at = @At(value = "HEAD"), remap = false, cancellable = true)
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune, CallbackInfo ci) {
+    ci.cancel();
+  }
 }

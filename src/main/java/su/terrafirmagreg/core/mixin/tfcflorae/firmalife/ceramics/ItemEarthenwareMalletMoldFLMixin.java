@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(targets = "tfcflorae.compat.firmalife.ceramics.ItemEarthenwareMalletMoldFL$FilledMoldCapability", remap = false)
 public class ItemEarthenwareMalletMoldFLMixin {
 
-    @Shadow
-    @Final
-    private final FluidTank tank = new FluidTank(144);
+  @Shadow
+  @Final
+  private final FluidTank tank = new FluidTank(144);
 }

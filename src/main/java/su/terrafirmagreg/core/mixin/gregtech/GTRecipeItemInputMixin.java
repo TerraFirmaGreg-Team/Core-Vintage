@@ -1,6 +1,9 @@
 package su.terrafirmagreg.core.mixin.gregtech;
 
 import gregtech.api.recipes.ingredients.GTRecipeItemInput;
+
+import net.minecraft.item.ItemStack;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;

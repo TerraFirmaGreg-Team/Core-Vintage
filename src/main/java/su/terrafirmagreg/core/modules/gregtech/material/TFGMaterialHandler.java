@@ -522,8 +522,6 @@ public class TFGMaterialHandler {
         BismuthBronze.addFlags("generate_gear", "generate_double_plate");
         CertusQuartz.addFlags("generate_rod", "generate_bolt_screw");
         NetherQuartz.addFlags("generate_rod", "generate_bolt_screw");
-        CertusQuartz.setProperty(PropertyKey.FLUID, new FluidProperty());
-        NetherQuartz.setProperty(PropertyKey.FLUID, new FluidProperty());
         Steel.addFlags("generate_dense");
         Iron.addFlags("generate_dense", "generate_double_plate");
         Tin.addFlags("generate_dense", "generate_gear");
@@ -557,6 +555,8 @@ public class TFGMaterialHandler {
         HSSE.addFlags("generate_double_plate");
         Tritanium.addFlags("generate_double_plate");
 
+       CertusQuartz.setProperty(PropertyKey.FLUID, new FluidProperty());
+       NetherQuartz.setProperty(PropertyKey.FLUID, new FluidProperty());
         Bismuth.setProperty(PropertyKey.ORE, new OreProperty());
         Perlite.setProperty(PropertyKey.ORE, new OreProperty());
         Uvarovite.setProperty(PropertyKey.ORE, new OreProperty());

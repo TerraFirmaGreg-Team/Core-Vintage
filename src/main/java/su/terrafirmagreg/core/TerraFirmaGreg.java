@@ -23,7 +23,7 @@ import su.terrafirmagreg.core.modules.gregtech.items.tools.TFGToolItems;
 
 import static su.terrafirmagreg.Tags.*;
 
-@Mod(modid = MOD_ID, name = MOD_NAME, version = VERSION, dependencies = TerraFirmaGreg.DEPENDENCIES)
+@Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, dependencies = TerraFirmaGreg.DEPENDENCIES)
 public class TerraFirmaGreg {
 
     public static final String DEPENDENCIES =
@@ -56,10 +56,9 @@ public class TerraFirmaGreg {
         }
 
         // Capability Registry
-        CapabilityManager.INSTANCE.register(TemperatureCapability.class, new DumbStorage(), () -> null);
+        CapabilityManager.INSTANCE.register(TemperatureCapability.class, new DumbStorage<>(), () -> null);
 
-        TerraFirmaCraft.getNetwork()
-                .registerMessage(new TemperaturePacket.Handler(), TemperaturePacket.class, 0, Side.CLIENT);
+        TerraFirmaCraft.getNetwork().registerMessage(new TemperaturePacket.Handler(), TemperaturePacket.class, 0, Side.CLIENT);
     }
 
     @EventHandler

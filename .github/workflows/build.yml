@@ -57,7 +57,7 @@ jobs:
       - name: Upload jar
         uses: actions/upload-artifact@v4.0.0
         with:
-          path: build/libs/TerraFirmaGreg-Core-1.12.x-${{ steps.get_version.outputs.version }}.jar
+          path: build/libs/TerraFirmaGreg-Core-Vintage-${{ steps.get_version.outputs.version }}.jar
           retention-days: 5
 
       - name: Release
@@ -75,7 +75,7 @@ jobs:
             gregtech-ce-unofficial(required)
             terrafirmacraft(required)
 
-          files: build/libs/TerraFirmaGreg-Core-1.12.x-${{ steps.get_version.outputs.version }}.jar
+          files: build/libs/TerraFirmaGreg-Core-Vintage-${{ steps.get_version.outputs.version }}.jar
 
           name: TerraFirmaGreg-Core-1.12.x-${{ steps.get_version.outputs.version }}
           version: ${{ steps.get_version.outputs.version }}

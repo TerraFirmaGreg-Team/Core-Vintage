@@ -6,6 +6,7 @@ import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability
 import su.terrafirmagreg.core.modules.ambiental.capability.TemperaturePacket;
 import su.terrafirmagreg.core.modules.gregtech.items.TFGModMetaItem;
 import su.terrafirmagreg.core.modules.gregtech.items.tools.TFGToolItems;
+import su.terrafirmagreg.core.modules.gregtech.machines.TFGTileEntities;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -40,6 +41,7 @@ public class TerraFirmaGreg {
 
   public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
+
   @EventHandler
   public void onConstruct(FMLConstructionEvent event) {
     LOGGER.info("TerraFirmaGreg Core by Exception and Xikaro is working :)");
@@ -49,6 +51,7 @@ public class TerraFirmaGreg {
   public void onPreInit(FMLPreInitializationEvent event) {
     TFGToolItems.init();
     TFGModMetaItem.init();
+    TFGTileEntities.init();
 
     // Common Events
     MinecraftForge.EVENT_BUS.register(new TFCAmbientalEventHandler());

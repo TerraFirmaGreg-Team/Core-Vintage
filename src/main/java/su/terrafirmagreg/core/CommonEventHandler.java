@@ -1,11 +1,13 @@
 package su.terrafirmagreg.core;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.core.modules.gregtech.machines.multiblock.MetaTileEntityGreenhouse;
 import su.terrafirmagreg.core.modules.gregtech.material.TFGMaterialHandler;
 import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefixHandler;
 import su.terrafirmagreg.core.modules.gregtech.recipes.TFGRecipeHandlerList;
 import su.terrafirmagreg.core.modules.gregtech.stonetypes.StoneTypeHandler;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -48,5 +50,11 @@ public final class CommonEventHandler {
   @SubscribeEvent
   public static void onNetherPortalActivating(BlockEvent.PortalSpawnEvent event) {
     event.setCanceled(true);
+  }
+
+  @SubscribeEvent
+  public static void registerBlocks(RegistryEvent.Register<Block> event) {
+
+    MetaTileEntityGreenhouse.addGrasses();
   }
 }

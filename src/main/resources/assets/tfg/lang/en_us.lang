@@ -70,3 +70,12 @@ effect.tfg.warm.name=Warming Up
 tooltip.tfg.toohot=Too hot to handle! Wear protection.
 tooltip.tfg.toocold=Too cold to handle! Wear protection.
 tooltip.tfg.toolight=Too light to handle! Wear protection.
+
+tfg.machine.greenhouse.tooltip.1=Simulates the growth of Trees inside.
+tfg.machine.greenhouse.tooltip.2=Takes twice as long to run a Recipe if Any Part of the Roof is blocked, or it is Night.
+tfg.machine.greenhouse.tooltip.3=This is weather-resistant!
+
+
+
+tfg.machine.greenhouse.name=Greenhouse
+recipemap.greenhouse.name=Greenhouse

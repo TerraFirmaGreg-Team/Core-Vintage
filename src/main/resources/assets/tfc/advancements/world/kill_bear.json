@@ -1,0 +1,51 @@
+{
+  "display": {
+    "icon": {
+      "item": "tfc:food/bear"
+    },
+    "frame": "goal",
+    "title": {
+      "translate": "advancements.tfc.world.kill_bear.title"
+    },
+    "description": {
+      "translate": "advancements.tfc.world.kill_bear.description"
+    }
+  },
+  "parent": "tfc:world/hunter",
+  "criteria": {
+    "kill_bear": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "tfc:grizzlybeartfc"
+        }
+      }
+    },
+    "kill_black_bear": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "tfc:blackbeartfc"
+        }
+      }
+    },
+    "kill_polar_bear": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "tfc:polarbeartfc"
+        }
+      }
+    }
+  },
+  "rewards": {
+    "experience": 25
+  },
+  "requirements": [
+    [
+      "kill_bear",
+      "kill_black_bear",
+      "kill_polar_bear"
+    ]
+  ]
+}

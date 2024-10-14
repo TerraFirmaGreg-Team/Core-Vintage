@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/seagrass/seagrass",
-    "texture": "tfc:blocks/plants/seagrass/seagrass"
+    "particle": "tfg:blocks/flora/plant/seagrass/seagrass",
+    "texture": "tfg:blocks/flora/plant/seagrass/seagrass"
   },
   "elements": [
     {

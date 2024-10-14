@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/tinwa_bamboo/tinwa_bamboo_trunk",
-    "side": "tfc:blocks/plants/tinwa_bamboo/tinwa_bamboo_trunk"
+    "particle": "tfg:blocks/flora/plant/tinwa_bamboo/tinwa_bamboo_trunk",
+    "side": "tfg:blocks/flora/plant/tinwa_bamboo/tinwa_bamboo_trunk"
   },
   "elements": [
     {

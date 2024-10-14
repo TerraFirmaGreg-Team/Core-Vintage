@@ -1,6 +1,6 @@
 {
   "parent": "tfc:block/tinted_cross",
   "textures": {
-    "cross": "tfc:blocks/plants/bluegrass/bluegrass"
+    "cross": "tfg:blocks/flora/plant/bluegrass/bluegrass"
   }
 }

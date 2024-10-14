@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/blueshroom/blueshroom_3"
+    "cross": "tfg:blocks/flora/plant/blueshroom/blueshroom_3"
   }
 }

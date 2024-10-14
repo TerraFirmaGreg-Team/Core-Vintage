@@ -6,15 +6,15 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/pickerelweed_0"
+          "model": "tfg:flora/plant/pickerelweed_0"
         }, {
-          "model": "tfc:plants/pickerelweed_0",
+          "model": "tfg:flora/plant/pickerelweed_0",
           "y": 90
         }, {
-          "model": "tfc:plants/pickerelweed_0",
+          "model": "tfg:flora/plant/pickerelweed_0",
           "y": 180
         }, {
-          "model": "tfc:plants/pickerelweed_0",
+          "model": "tfg:flora/plant/pickerelweed_0",
           "y": 270
         }
       ]
@@ -24,15 +24,15 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/pickerelweed_1"
+          "model": "tfg:flora/plant/pickerelweed_1"
         }, {
-          "model": "tfc:plants/pickerelweed_1",
+          "model": "tfg:flora/plant/pickerelweed_1",
           "y": 90
         }, {
-          "model": "tfc:plants/pickerelweed_1",
+          "model": "tfg:flora/plant/pickerelweed_1",
           "y": 180
         }, {
-          "model": "tfc:plants/pickerelweed_1",
+          "model": "tfg:flora/plant/pickerelweed_1",
           "y": 270
         }
       ]
@@ -42,15 +42,15 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/pickerelweed_2"
+          "model": "tfg:flora/plant/pickerelweed_2"
         }, {
-          "model": "tfc:plants/pickerelweed_2",
+          "model": "tfg:flora/plant/pickerelweed_2",
           "y": 90
         }, {
-          "model": "tfc:plants/pickerelweed_2",
+          "model": "tfg:flora/plant/pickerelweed_2",
           "y": 180
         }, {
-          "model": "tfc:plants/pickerelweed_2",
+          "model": "tfg:flora/plant/pickerelweed_2",
           "y": 270
         }
       ]

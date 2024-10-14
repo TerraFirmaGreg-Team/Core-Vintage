@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
   "textures": {
-    "0": "tfc:blocks/plants/bur_reed/bur_reed",
-    "1": "tfc:blocks/plants/bur_reed/bur_reed_overlay_blooming",
-    "particle": "tfc:blocks/plants/bur_reed/bur_reed"
+    "0": "tfg:blocks/flora/plant/bur_reed/bur_reed",
+    "1": "tfg:blocks/flora/plant/bur_reed/bur_reed_overlay_blooming",
+    "particle": "tfg:blocks/flora/plant/bur_reed/bur_reed"
   },
   "elements": [
     {

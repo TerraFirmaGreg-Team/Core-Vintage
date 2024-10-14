@@ -2,7 +2,7 @@
   "__comment__": "This file was automatically created by mcresources",
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/vanilla/flower",
-    "particle": "tfc:blocks/plants/vanilla/flower"
+    "cross": "tfg:blocks/flora/plant/vanilla/flower",
+    "particle": "tfg:blocks/flora/plant/vanilla/flower"
   }
 }

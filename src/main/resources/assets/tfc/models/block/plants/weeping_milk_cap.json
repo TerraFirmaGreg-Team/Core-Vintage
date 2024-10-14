@@ -1,7 +1,7 @@
 {
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/weeping_milk_cap/weeping_milk_cap",
-    "particle": "tfc:blocks/plants/weeping_milk_cap/weeping_milk_cap"
+    "cross": "tfg:blocks/flora/plant/weeping_milk_cap/weeping_milk_cap",
+    "particle": "tfg:blocks/flora/plant/weeping_milk_cap/weeping_milk_cap"
   }
 }

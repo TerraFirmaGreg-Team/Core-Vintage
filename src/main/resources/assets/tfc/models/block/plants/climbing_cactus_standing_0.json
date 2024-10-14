@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/climbing_cactus/climbing_cactus_0",
-    "cross": "tfc:blocks/plants/climbing_cactus/climbing_cactus_0"
+    "particle": "tfg:blocks/flora/plant/climbing_cactus/climbing_cactus_0",
+    "cross": "tfg:blocks/flora/plant/climbing_cactus/climbing_cactus_0"
   },
   "elements": [
     {

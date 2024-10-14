@@ -2,7 +2,7 @@
   "__comment__": "This file was automatically created by mcresources",
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/cumin/regular",
-    "particle": "tfc:blocks/plants/cumin/regular"
+    "cross": "tfg:blocks/flora/plant/cumin/regular",
+    "particle": "tfg:blocks/flora/plant/cumin/regular"
   }
 }

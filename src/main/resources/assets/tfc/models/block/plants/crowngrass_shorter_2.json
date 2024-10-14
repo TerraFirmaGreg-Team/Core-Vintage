@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfc:blocks/plants/crowngrass/crowngrass_2",
-    "particle": "tfc:blocks/plants/crowngrass/crowngrass_2"
+    "cross": "tfg:blocks/flora/plant/crowngrass/crowngrass_2",
+    "particle": "tfg:blocks/flora/plant/crowngrass/crowngrass_2"
   },
   "elements": [
     {

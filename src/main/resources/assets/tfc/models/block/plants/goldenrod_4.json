@@ -1,7 +1,7 @@
 {
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/goldenrod/goldenrod_4",
-    "particle": "tfc:blocks/plants/goldenrod/goldenrod_4"
+    "cross": "tfg:blocks/flora/plant/goldenrod/goldenrod_4",
+    "particle": "tfg:blocks/flora/plant/goldenrod/goldenrod_4"
   }
 }

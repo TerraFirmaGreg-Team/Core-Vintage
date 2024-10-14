@@ -1,10 +1,10 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "tfc:blocks/plants/pickerelweed/pickerelweed_stem_2",
-    "1": "tfc:blocks/plants/pickerelweed/pickerelweed_flower",
-    "2": "tfc:blocks/plants/pickerelweed/pickerelweed_leaf",
-    "particle": "tfc:blocks/plants/pickerelweed/pickerelweed_leaf"
+    "0": "tfg:blocks/flora/plant/pickerelweed/pickerelweed_stem_2",
+    "1": "tfg:blocks/flora/plant/pickerelweed/pickerelweed_flower",
+    "2": "tfg:blocks/flora/plant/pickerelweed/pickerelweed_leaf",
+    "particle": "tfg:blocks/flora/plant/pickerelweed/pickerelweed_leaf"
   },
   "elements": [
     {

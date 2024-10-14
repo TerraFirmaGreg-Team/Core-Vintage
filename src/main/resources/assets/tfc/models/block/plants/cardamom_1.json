@@ -2,7 +2,7 @@
   "__comment__": "This file was automatically created by mcresources",
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/cardamom/flower",
-    "particle": "tfc:blocks/plants/cardamom/flower"
+    "cross": "tfg:blocks/flora/plant/cardamom/flower",
+    "particle": "tfg:blocks/flora/plant/cardamom/flower"
   }
 }

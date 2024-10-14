@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/nasturtium_0"
+          "model": "tfg:flora/plant/nasturtium_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/nasturtium_1"
+          "model": "tfg:flora/plant/nasturtium_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/nasturtium_2"
+          "model": "tfg:flora/plant/nasturtium_2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/nasturtium_3"
+          "model": "tfg:flora/plant/nasturtium_3"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/nasturtium_4"
+          "model": "tfg:flora/plant/nasturtium_4"
         }
       ]
     }

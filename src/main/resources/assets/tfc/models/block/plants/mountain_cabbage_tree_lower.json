@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "stem": "tfc:blocks/plants/mountain_cabbage_tree/mountain_cabbage_tree_lower_0b",
-    "particle": "tfc:blocks/plants/mountain_cabbage_tree/mountain_cabbage_tree_lower_0"
+    "stem": "tfg:blocks/flora/plant/mountain_cabbage_tree/mountain_cabbage_tree_lower_0b",
+    "particle": "tfg:blocks/flora/plant/mountain_cabbage_tree/mountain_cabbage_tree_lower_0"
   },
   "elements": [
     {

@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/blue_ginger_0"
+          "model": "tfg:flora/plant/blue_ginger_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/blue_ginger_1"
+          "model": "tfg:flora/plant/blue_ginger_1"
         }
       ]
     }

@@ -1,8 +1,8 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "tfc:blocks/plants/winged_kelp/body",
-    "particle": "tfc:blocks/plants/winged_kelp/body"
+    "0": "tfg:blocks/flora/plant/winged_kelp/body",
+    "particle": "tfg:blocks/flora/plant/winged_kelp/body"
   },
   "elements": [
     {

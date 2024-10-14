@@ -1,9 +1,9 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "tintedcross": "tfc:blocks/plants/bluegrass/bluegrass_shortest",
-    "cross": "tfc:blocks/plants/bluegrass/bluegrass_shortest_tuft",
-    "particle": "tfc:blocks/plants/bluegrass/bluegrass"
+    "tintedcross": "tfg:blocks/flora/plant/bluegrass/bluegrass_shortest",
+    "cross": "tfg:blocks/flora/plant/bluegrass/bluegrass_shortest_tuft",
+    "particle": "tfg:blocks/flora/plant/bluegrass/bluegrass"
   },
   "elements": [
     {

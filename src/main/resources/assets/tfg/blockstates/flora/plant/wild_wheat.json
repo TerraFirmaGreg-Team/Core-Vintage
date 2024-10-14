@@ -6,7 +6,7 @@
         "stage": "0"
       },
       "apply": {
-        "model": "tfc:plants/wild_wheat_shortest"
+        "model": "tfg:flora/plant/wild_wheat_shortest"
       }
     }, {
       "when": {
@@ -14,7 +14,7 @@
         "stage": "0"
       },
       "apply": {
-        "model": "tfc:plants/wild_wheat_shorter"
+        "model": "tfg:flora/plant/wild_wheat_shorter"
       }
     }, {
       "when": {
@@ -22,7 +22,7 @@
         "stage": "0"
       },
       "apply": {
-        "model": "tfc:plants/wild_wheat_short"
+        "model": "tfg:flora/plant/wild_wheat_short"
       }
     }, {
       "when": {
@@ -30,7 +30,7 @@
         "stage": "0"
       },
       "apply": {
-        "model": "tfc:plants/wild_wheat"
+        "model": "tfg:flora/plant/wild_wheat"
       }
     }, {
       "when": {
@@ -38,7 +38,7 @@
         "stage": "1"
       },
       "apply": {
-        "model": "tfc:plants/wild_wheat_shortest"
+        "model": "tfg:flora/plant/wild_wheat_shortest"
       }
     }, {
       "when": {
@@ -46,7 +46,7 @@
         "stage": "1"
       },
       "apply": {
-        "model": "tfc:plants/wild_wheat_shorter"
+        "model": "tfg:flora/plant/wild_wheat_shorter"
       }
     }, {
       "when": {
@@ -54,7 +54,7 @@
         "stage": "1"
       },
       "apply": {
-        "model": "tfc:plants/wild_wheat_short"
+        "model": "tfg:flora/plant/wild_wheat_short"
       }
     }, {
       "when": {
@@ -62,7 +62,7 @@
         "stage": "1"
       },
       "apply": {
-        "model": "tfc:plants/wild_wheat_tuft"
+        "model": "tfg:flora/plant/wild_wheat_tuft"
       }
     }
   ]

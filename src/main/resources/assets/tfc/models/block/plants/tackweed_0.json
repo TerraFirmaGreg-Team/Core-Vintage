@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "layer0": "tfc:blocks/plants/tackweed/tackweed_0",
-    "particle": "tfc:blocks/plants/tackweed/tackweed_0"
+    "layer0": "tfg:blocks/flora/plant/tackweed/tackweed_0",
+    "particle": "tfg:blocks/flora/plant/tackweed/tackweed_0"
   },
   "elements": [
     {

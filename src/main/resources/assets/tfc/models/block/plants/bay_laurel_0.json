@@ -2,7 +2,7 @@
   "__comment__": "This file was automatically created by mcresources",
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/bay_laurel/regular",
-    "particle": "tfc:blocks/plants/bay_laurel/regular"
+    "cross": "tfg:blocks/flora/plant/bay_laurel/regular",
+    "particle": "tfg:blocks/flora/plant/bay_laurel/regular"
   }
 }

@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/weavers_bamboo/weavers_bamboo_stalk",
-    "side": "tfc:blocks/plants/weavers_bamboo/weavers_bamboo_stalk"
+    "particle": "tfg:blocks/flora/plant/weavers_bamboo/weavers_bamboo_stalk",
+    "side": "tfg:blocks/flora/plant/weavers_bamboo/weavers_bamboo_stalk"
   },
   "elements": [
     {

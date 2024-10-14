@@ -6,15 +6,15 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/seagrass_single"
+          "model": "tfg:flora/plant/seagrass_single"
         }, {
-          "model": "tfc:plants/seagrass_single",
+          "model": "tfg:flora/plant/seagrass_single",
           "y": 90
         }, {
-          "model": "tfc:plants/seagrass_single",
+          "model": "tfg:flora/plant/seagrass_single",
           "y": 180
         }, {
-          "model": "tfc:plants/seagrass_single",
+          "model": "tfg:flora/plant/seagrass_single",
           "y": 270
         }
       ]
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/seagrass_lower"
+          "model": "tfg:flora/plant/seagrass_lower"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/seagrass_lower"
+          "model": "tfg:flora/plant/seagrass_lower"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/seagrass_upper"
+          "model": "tfg:flora/plant/seagrass_upper"
         }
       ]
     }

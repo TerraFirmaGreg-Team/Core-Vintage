@@ -2,9 +2,9 @@
   "cgoldenit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "trunk": "tfc:blocks/plants/golden_bamboo/golden_bamboo_trunk",
-    "particle": "tfc:blocks/plants/golden_bamboo/golden_bamboo_leaves_0",
-    "frond": "tfc:blocks/plants/golden_bamboo/golden_bamboo_leaves_0"
+    "trunk": "tfg:blocks/flora/plant/golden_bamboo/golden_bamboo_trunk",
+    "particle": "tfg:blocks/flora/plant/golden_bamboo/golden_bamboo_leaves_0",
+    "frond": "tfg:blocks/flora/plant/golden_bamboo/golden_bamboo_leaves_0"
   },
   "elements": [
     {

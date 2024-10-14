@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/perovskia_0"
+          "model": "tfg:flora/plant/perovskia_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/perovskia_1"
+          "model": "tfg:flora/plant/perovskia_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/perovskia_2"
+          "model": "tfg:flora/plant/perovskia_2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/perovskia_3"
+          "model": "tfg:flora/plant/perovskia_3"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/perovskia_4"
+          "model": "tfg:flora/plant/perovskia_4"
         }
       ]
     }, {
@@ -51,7 +51,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/perovskia_5"
+          "model": "tfg:flora/plant/perovskia_5"
         }
       ]
     }

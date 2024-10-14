@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfc:blocks/plants/wild_wheat/wild_wheat_0",
-    "particle": "tfc:blocks/plants/wild_wheat/wild_wheat_0"
+    "cross": "tfg:blocks/flora/plant/wild_wheat/wild_wheat_0",
+    "particle": "tfg:blocks/flora/plant/wild_wheat/wild_wheat_0"
   },
   "elements": [
     {

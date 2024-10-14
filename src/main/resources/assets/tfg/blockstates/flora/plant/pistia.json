@@ -3,15 +3,15 @@
     {
       "apply": [
         {
-          "model": "tfc:plants/pistia"
+          "model": "tfg:flora/plant/pistia"
         }, {
-          "model": "tfc:plants/pistia",
+          "model": "tfg:flora/plant/pistia",
           "y": 90
         }, {
-          "model": "tfc:plants/pistia",
+          "model": "tfg:flora/plant/pistia",
           "y": 180
         }, {
-          "model": "tfc:plants/pistia",
+          "model": "tfg:flora/plant/pistia",
           "y": 270
         }
       ]

@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/yucca_0"
+          "model": "tfg:flora/plant/yucca_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/yucca_1"
+          "model": "tfg:flora/plant/yucca_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/yucca_2"
+          "model": "tfg:flora/plant/yucca_2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/yucca_3"
+          "model": "tfg:flora/plant/yucca_3"
         }
       ]
     }

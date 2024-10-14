@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
   "textures": {
-    "0": "tfc:blocks/plants/licorice_fern/licorice_fern_1",
-    "1": "tfc:blocks/plants/licorice_fern/licorice_fern_2",
-    "particle": "tfc:blocks/plants/licorice_fern/licorice_fern_1"
+    "0": "tfg:blocks/flora/plant/licorice_fern/licorice_fern_1",
+    "1": "tfg:blocks/flora/plant/licorice_fern/licorice_fern_2",
+    "particle": "tfg:blocks/flora/plant/licorice_fern/licorice_fern_1"
   },
   "elements": [
     {

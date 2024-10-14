@@ -1,7 +1,7 @@
 {
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/death_cap/death_cap",
-    "particle": "tfc:blocks/plants/death_cap/death_cap"
+    "cross": "tfg:blocks/flora/plant/death_cap/death_cap",
+    "particle": "tfg:blocks/flora/plant/death_cap/death_cap"
   }
 }

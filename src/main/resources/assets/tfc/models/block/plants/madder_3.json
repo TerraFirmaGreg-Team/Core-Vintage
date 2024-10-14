@@ -3,8 +3,8 @@
   "parent": "block/crop",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/madder/madder_3",
-    "crop": "tfc:blocks/plants/madder/madder_3"
+    "particle": "tfg:blocks/flora/plant/madder/madder_3",
+    "crop": "tfg:blocks/flora/plant/madder/madder_3"
   },
   "elements": [
     {

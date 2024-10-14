@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/marram_grass/marram_grass_0",
-    "cross": "tfc:blocks/plants/marram_grass/marram_grass_0"
+    "particle": "tfg:blocks/flora/plant/marram_grass/marram_grass_0",
+    "cross": "tfg:blocks/flora/plant/marram_grass/marram_grass_0"
   },
   "elements": [
     {

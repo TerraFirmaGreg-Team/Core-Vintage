@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfc:plants/parasol_mushroom"
+          "model": "tfg:flora/plant/parasol_mushroom"
         }
       ]
     }

@@ -1,9 +1,9 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "tintedcross": "tfc:blocks/plants/fountain_grass/fountain_grass_0",
-    "cross": "tfc:blocks/plants/fountain_grass/fountain_grass_0b",
-    "particle": "tfc:blocks/plants/fountain_grass/fountain_grass_0"
+    "tintedcross": "tfg:blocks/flora/plant/fountain_grass/fountain_grass_0",
+    "cross": "tfg:blocks/flora/plant/fountain_grass/fountain_grass_0b",
+    "particle": "tfg:blocks/flora/plant/fountain_grass/fountain_grass_0"
   },
   "elements": [
     {

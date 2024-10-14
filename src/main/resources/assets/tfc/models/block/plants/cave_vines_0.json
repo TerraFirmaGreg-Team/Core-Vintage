@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/cave_vines/cave_vines_0",
-    "layer0": "tfc:blocks/plants/cave_vines/cave_vines_0"
+    "particle": "tfg:blocks/flora/plant/cave_vines/cave_vines_0",
+    "layer0": "tfg:blocks/flora/plant/cave_vines/cave_vines_0"
   },
   "elements": [
     {

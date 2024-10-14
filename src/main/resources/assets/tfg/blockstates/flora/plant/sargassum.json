@@ -3,15 +3,15 @@
     {
       "apply": [
         {
-          "model": "tfc:plants/sargassum"
+          "model": "tfg:flora/plant/sargassum"
         }, {
-          "model": "tfc:plants/sargassum",
+          "model": "tfg:flora/plant/sargassum",
           "y": 90
         }, {
-          "model": "tfc:plants/sargassum",
+          "model": "tfg:flora/plant/sargassum",
           "y": 180
         }, {
-          "model": "tfc:plants/sargassum",
+          "model": "tfg:flora/plant/sargassum",
           "y": 270
         }
       ]

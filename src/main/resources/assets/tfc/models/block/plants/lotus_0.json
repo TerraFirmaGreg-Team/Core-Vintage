@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/lotus/lotus",
-    "stem": "tfc:blocks/plants/lotus/lotus_0"
+    "particle": "tfg:blocks/flora/plant/lotus/lotus",
+    "stem": "tfg:blocks/flora/plant/lotus/lotus_0"
   },
   "elements": [
     {

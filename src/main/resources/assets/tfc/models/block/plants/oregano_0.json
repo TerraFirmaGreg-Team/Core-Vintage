@@ -2,7 +2,7 @@
   "__comment__": "This file was automatically created by mcresources",
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/oregano/regular",
-    "particle": "tfc:blocks/plants/oregano/regular"
+    "cross": "tfg:blocks/flora/plant/oregano/regular",
+    "particle": "tfg:blocks/flora/plant/oregano/regular"
   }
 }

@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfc:blocks/plants/rose/placeholder",
-    "particle": "tfc:blocks/plants/rose/placeholder"
+    "cross": "tfg:blocks/flora/plant/rose/placeholder",
+    "particle": "tfg:blocks/flora/plant/rose/placeholder"
   },
   "elements": [
     {

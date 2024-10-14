@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "tfc:blocks/plants/turkey_tail/turkey_tail_0",
-    "1": "tfc:blocks/plants/turkey_tail/turkey_tail_0",
-    "particle": "tfc:blocks/plants/turkey_tail/turkey_tail_0"
+    "0": "tfg:blocks/flora/plant/turkey_tail/turkey_tail_0",
+    "1": "tfg:blocks/flora/plant/turkey_tail/turkey_tail_0",
+    "particle": "tfg:blocks/flora/plant/turkey_tail/turkey_tail_0"
   },
   "elements": [
     {

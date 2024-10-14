@@ -2,9 +2,9 @@
   "ctempleit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "top": "tfc:blocks/plants/temple_bamboo/temple_bamboo_top",
-    "particle": "tfc:blocks/plants/temple_bamboo/temple_bamboo",
-    "side": "tfc:blocks/plants/temple_bamboo/temple_bamboo"
+    "top": "tfg:blocks/flora/plant/temple_bamboo/temple_bamboo_top",
+    "particle": "tfg:blocks/flora/plant/temple_bamboo/temple_bamboo",
+    "side": "tfg:blocks/flora/plant/temple_bamboo/temple_bamboo"
   },
   "elements": [
     {

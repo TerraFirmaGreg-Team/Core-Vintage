@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "leaves": "tfc:blocks/plants/timber_bamboo/timber_bamboo_large_leaves",
-    "particle": "tfc:blocks/plants/timber_bamboo/timber_bamboo_trunk",
-    "side": "tfc:blocks/plants/timber_bamboo/timber_bamboo_trunk"
+    "leaves": "tfg:blocks/flora/plant/timber_bamboo/timber_bamboo_large_leaves",
+    "particle": "tfg:blocks/flora/plant/timber_bamboo/timber_bamboo_trunk",
+    "side": "tfg:blocks/flora/plant/timber_bamboo/timber_bamboo_trunk"
   },
   "elements": [
     {

@@ -3,15 +3,15 @@
     {
       "apply": [
         {
-          "model": "tfc:plants/duckweed"
+          "model": "tfg:flora/plant/duckweed"
         }, {
-          "model": "tfc:plants/duckweed",
+          "model": "tfg:flora/plant/duckweed",
           "y": 90
         }, {
-          "model": "tfc:plants/duckweed",
+          "model": "tfg:flora/plant/duckweed",
           "y": 180
         }, {
-          "model": "tfc:plants/duckweed",
+          "model": "tfg:flora/plant/duckweed",
           "y": 270
         }
       ]

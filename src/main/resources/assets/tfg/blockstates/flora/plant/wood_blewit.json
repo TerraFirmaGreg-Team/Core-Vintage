@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfc:plants/wood_blewit"
+          "model": "tfg:flora/plant/wood_blewit"
         }
       ]
     }

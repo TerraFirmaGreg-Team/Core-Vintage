@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/blue_orchid_0"
+          "model": "tfg:flora/plant/blue_orchid_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/blue_orchid_1"
+          "model": "tfg:flora/plant/blue_orchid_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/blue_orchid_2"
+          "model": "tfg:flora/plant/blue_orchid_2"
         }
       ]
     }

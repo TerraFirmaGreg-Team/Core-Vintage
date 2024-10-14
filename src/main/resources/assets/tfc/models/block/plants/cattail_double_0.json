@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cattail": "tfc:blocks/plants/cattail/cattail_0",
-    "particle": "tfc:blocks/plants/cattail/cattail_0"
+    "cattail": "tfg:blocks/flora/plant/cattail/cattail_0",
+    "particle": "tfg:blocks/flora/plant/cattail/cattail_0"
   },
   "elements": [
     {

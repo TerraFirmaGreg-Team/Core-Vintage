@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/wild_barley_0"
+          "model": "tfg:flora/plant/wild_barley_0"
         }
       ]
     }, {
@@ -17,7 +17,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/wild_barley_1"
+          "model": "tfg:flora/plant/wild_barley_1"
         }
       ]
     }, {
@@ -27,7 +27,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/wild_barley_2"
+          "model": "tfg:flora/plant/wild_barley_2"
         }
       ]
     }, {
@@ -37,7 +37,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/wild_barley_3"
+          "model": "tfg:flora/plant/wild_barley_3"
         }
       ]
     }, {
@@ -47,7 +47,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/wild_barley_0_tuft"
+          "model": "tfg:flora/plant/wild_barley_0_tuft"
         }
       ]
     }, {
@@ -57,7 +57,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/wild_barley_1_tuft"
+          "model": "tfg:flora/plant/wild_barley_1_tuft"
         }
       ]
     }, {
@@ -67,7 +67,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/wild_barley_2_tuft"
+          "model": "tfg:flora/plant/wild_barley_2_tuft"
         }
       ]
     }, {
@@ -77,7 +77,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/wild_barley_3_tuft"
+          "model": "tfg:flora/plant/wild_barley_3_tuft"
         }
       ]
     }

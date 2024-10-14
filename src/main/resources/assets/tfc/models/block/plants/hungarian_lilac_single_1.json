@@ -1,7 +1,7 @@
 {
   "parent": "block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/hungarian_lilac/item",
-    "particle": "tfc:blocks/plants/hungarian_lilac/item"
+    "cross": "tfg:blocks/flora/plant/hungarian_lilac/item",
+    "particle": "tfg:blocks/flora/plant/hungarian_lilac/item"
   }
 }

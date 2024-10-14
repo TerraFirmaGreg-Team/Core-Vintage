@@ -1,13 +1,13 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "lower": "tfc:blocks/empty",
-    "lowersingle": "tfc:blocks/empty",
-    "lowernotint": "tfc:blocks/empty",
-    "fernlow": "tfc:blocks/empty",
-    "fernhigh": "tfc:blocks/empty",
-    "fernlownotint": "tfc:blocks/empty",
-    "fernhighnotint": "tfc:blocks/empty"
+    "lower": "tfg:blocks/empty",
+    "lowersingle": "tfg:blocks/empty",
+    "lowernotint": "tfg:blocks/empty",
+    "fernlow": "tfg:blocks/empty",
+    "fernhigh": "tfg:blocks/empty",
+    "fernlownotint": "tfg:blocks/empty",
+    "fernhighnotint": "tfg:blocks/empty"
   },
   "elements": [
     {

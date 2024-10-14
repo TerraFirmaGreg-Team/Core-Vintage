@@ -7,81 +7,81 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/monstera_lower_0",
+          "model": "tfg:flora/plant/monstera_lower_0",
           "weight": 3
         }, {
-          "model": "tfc:plants/monstera_lower_0",
+          "model": "tfg:flora/plant/monstera_lower_0",
           "y": 90,
           "weight": 3
         }, {
-          "model": "tfc:plants/monstera_lower_0",
+          "model": "tfg:flora/plant/monstera_lower_0",
           "y": 180,
           "weight": 3
         }, {
-          "model": "tfc:plants/monstera_lower_0",
+          "model": "tfg:flora/plant/monstera_lower_0",
           "y": 270,
           "weight": 3
         }, {
-          "model": "tfc:plants/monstera_upper_0a",
+          "model": "tfg:flora/plant/monstera_upper_0a",
           "weight": 16
         }, {
-          "model": "tfc:plants/monstera_upper_0b",
+          "model": "tfg:flora/plant/monstera_upper_0b",
           "weight": 3
         }, {
-          "model": "tfc:plants/monstera_upper_0b",
+          "model": "tfg:flora/plant/monstera_upper_0b",
           "y": 90,
           "weight": 3
         }, {
-          "model": "tfc:plants/monstera_upper_0b",
+          "model": "tfg:flora/plant/monstera_upper_0b",
           "y": 180,
           "weight": 3
         }, {
-          "model": "tfc:plants/monstera_upper_0b",
+          "model": "tfg:flora/plant/monstera_upper_0b",
           "y": 270,
           "weight": 3
         }, {
-          "model": "tfc:plants/monstera_upper_0c",
+          "model": "tfg:flora/plant/monstera_upper_0c",
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0c",
+          "model": "tfg:flora/plant/monstera_upper_0c",
           "y": 90,
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0c",
+          "model": "tfg:flora/plant/monstera_upper_0c",
           "y": 180,
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0c",
+          "model": "tfg:flora/plant/monstera_upper_0c",
           "y": 270,
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0d",
+          "model": "tfg:flora/plant/monstera_upper_0d",
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0d",
+          "model": "tfg:flora/plant/monstera_upper_0d",
           "y": 90,
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0d",
+          "model": "tfg:flora/plant/monstera_upper_0d",
           "y": 180,
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0d",
+          "model": "tfg:flora/plant/monstera_upper_0d",
           "y": 270,
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0e",
+          "model": "tfg:flora/plant/monstera_upper_0e",
           "weight": 1
         }, {
-          "model": "tfc:plants/monstera_upper_0e",
+          "model": "tfg:flora/plant/monstera_upper_0e",
           "y": 90,
           "weight": 1
         }, {
-          "model": "tfc:plants/monstera_upper_0e",
+          "model": "tfg:flora/plant/monstera_upper_0e",
           "y": 180,
           "weight": 1
         }, {
-          "model": "tfc:plants/monstera_upper_0e",
+          "model": "tfg:flora/plant/monstera_upper_0e",
           "y": 270,
           "weight": 1
         }
@@ -93,7 +93,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/monstera_lower_0"
+          "model": "tfg:flora/plant/monstera_lower_0"
         }
       ]
     }, {
@@ -103,66 +103,66 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/monstera_upper_0a",
+          "model": "tfg:flora/plant/monstera_upper_0a",
           "weight": 16
         }, {
-          "model": "tfc:plants/monstera_upper_0b",
+          "model": "tfg:flora/plant/monstera_upper_0b",
           "weight": 3
         }, {
-          "model": "tfc:plants/monstera_upper_0b",
+          "model": "tfg:flora/plant/monstera_upper_0b",
           "y": 90,
           "weight": 3
         }, {
-          "model": "tfc:plants/monstera_upper_0b",
+          "model": "tfg:flora/plant/monstera_upper_0b",
           "y": 180,
           "weight": 3
         }, {
-          "model": "tfc:plants/monstera_upper_0b",
+          "model": "tfg:flora/plant/monstera_upper_0b",
           "y": 270,
           "weight": 3
         }, {
-          "model": "tfc:plants/monstera_upper_0c",
+          "model": "tfg:flora/plant/monstera_upper_0c",
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0c",
+          "model": "tfg:flora/plant/monstera_upper_0c",
           "y": 90,
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0c",
+          "model": "tfg:flora/plant/monstera_upper_0c",
           "y": 180,
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0c",
+          "model": "tfg:flora/plant/monstera_upper_0c",
           "y": 270,
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0d",
+          "model": "tfg:flora/plant/monstera_upper_0d",
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0d",
+          "model": "tfg:flora/plant/monstera_upper_0d",
           "y": 90,
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0d",
+          "model": "tfg:flora/plant/monstera_upper_0d",
           "y": 180,
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0d",
+          "model": "tfg:flora/plant/monstera_upper_0d",
           "y": 270,
           "weight": 2
         }, {
-          "model": "tfc:plants/monstera_upper_0e",
+          "model": "tfg:flora/plant/monstera_upper_0e",
           "weight": 1
         }, {
-          "model": "tfc:plants/monstera_upper_0e",
+          "model": "tfg:flora/plant/monstera_upper_0e",
           "y": 90,
           "weight": 1
         }, {
-          "model": "tfc:plants/monstera_upper_0e",
+          "model": "tfg:flora/plant/monstera_upper_0e",
           "y": 180,
           "weight": 1
         }, {
-          "model": "tfc:plants/monstera_upper_0e",
+          "model": "tfg:flora/plant/monstera_upper_0e",
           "y": 270,
           "weight": 1
         }

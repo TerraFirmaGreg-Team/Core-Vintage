@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/lavandula_0"
+          "model": "tfg:flora/plant/lavandula_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/lavandula_1"
+          "model": "tfg:flora/plant/lavandula_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/lavandula_2"
+          "model": "tfg:flora/plant/lavandula_2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/lavandula_3"
+          "model": "tfg:flora/plant/lavandula_3"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/lavandula_4"
+          "model": "tfg:flora/plant/lavandula_4"
         }
       ]
     }, {
@@ -51,7 +51,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/lavandula_5"
+          "model": "tfg:flora/plant/lavandula_5"
         }
       ]
     }

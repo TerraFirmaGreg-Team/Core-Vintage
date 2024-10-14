@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfc:plants/amanita"
+          "model": "tfg:flora/plant/amanita/0"
         }
       ]
     }

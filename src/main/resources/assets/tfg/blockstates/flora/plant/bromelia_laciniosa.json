@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/bromelia_laciniosa_0",
+          "model": "tfg:flora/plant/bromelia_laciniosa_0",
           "weight": 1
         }
       ]

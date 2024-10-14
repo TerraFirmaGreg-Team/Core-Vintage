@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/japanese_pieris/japanese_pieris_0",
-    "cross": "tfc:blocks/plants/japanese_pieris/japanese_pieris_0"
+    "particle": "tfg:blocks/flora/plant/japanese_pieris/japanese_pieris_0",
+    "cross": "tfg:blocks/flora/plant/japanese_pieris/japanese_pieris_0"
   },
   "elements": [
     {

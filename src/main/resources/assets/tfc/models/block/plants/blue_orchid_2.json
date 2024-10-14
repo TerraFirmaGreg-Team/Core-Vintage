@@ -1,7 +1,7 @@
 {
   "parent": "block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/blue_orchid/blue_orchid_2",
-    "particle": "tfc:blocks/plants/blue_orchid/blue_orchid_2"
+    "cross": "tfg:blocks/flora/plant/blue_orchid/blue_orchid_2",
+    "particle": "tfg:blocks/flora/plant/blue_orchid/blue_orchid_2"
   }
 }

@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/tree_fern_lower"
+          "model": "tfg:flora/plant/tree_fern_lower"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/tree_fern_upper"
+          "model": "tfg:flora/plant/tree_fern_upper"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/tree_fern_upper",
+          "model": "tfg:flora/plant/tree_fern_upper",
           "y": 180
         }
       ]

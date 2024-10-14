@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/papyrus/papyrus_0",
-    "cross1": "tfc:blocks/plants/papyrus/papyrus_0",
-    "cross2": "tfc:blocks/plants/papyrus/papyrus_0"
+    "particle": "tfg:blocks/flora/plant/papyrus/papyrus_0",
+    "cross1": "tfg:blocks/flora/plant/papyrus/papyrus_0",
+    "cross2": "tfg:blocks/flora/plant/papyrus/papyrus_0"
   },
   "elements": [
     {

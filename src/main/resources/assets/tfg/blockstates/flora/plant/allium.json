@@ -6,70 +6,77 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/allium_0"
+          "model": "tfg:flora/plant/allium/0"
         }
       ]
-    }, {
+    },
+    {
       "when": {
         "stage": "1"
       },
       "apply": [
         {
-          "model": "tfc:plants/allium_1"
+          "model": "tfg:flora/plant/allium/1"
         }
       ]
-    }, {
+    },
+    {
       "when": {
         "stage": "2"
       },
       "apply": [
         {
-          "model": "tfc:plants/allium_2"
+          "model": "tfg:flora/plant/allium/2"
         }
       ]
-    }, {
+    },
+    {
       "when": {
         "stage": "3"
       },
       "apply": [
         {
-          "model": "tfc:plants/allium_3"
+          "model": "tfg:flora/plant/allium/3"
         }
       ]
-    }, {
+    },
+    {
       "when": {
         "stage": "4"
       },
       "apply": [
         {
-          "model": "tfc:plants/allium_4"
+          "model": "tfg:flora/plant/allium/4"
         }
       ]
-    }, {
+    },
+    {
       "when": {
         "stage": "5"
       },
       "apply": [
         {
-          "model": "tfc:plants/allium_5"
+          "model": "tfg:flora/plant/allium/5"
         }
       ]
-    }, {
+    },
+    {
       "when": {
         "stage": "6"
       },
       "apply": [
         {
-          "model": "tfc:plants/allium_6"
+          "model": "tfg:flora/plant/allium/6"
         }
       ]
-    }, {
+    },
+    {
       "when": {
         "stage": "7"
       },
       "apply": [
         {
-          "model": "tfc:plants/allium_7"
+          "model": "tfg:flora/plant/allium/7"
         }
       ]
     }

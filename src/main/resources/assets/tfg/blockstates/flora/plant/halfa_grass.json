@@ -5,14 +5,14 @@
         "age": "0"
       },
       "apply": {
-        "model": "tfc:plants/halfa_grass_shortest_1"
+        "model": "tfg:flora/plant/halfa_grass_shortest_1"
       }
     }, {
       "when": {
         "age": "1"
       },
       "apply": {
-        "model": "tfc:plants/halfa_grass_shorter_1"
+        "model": "tfg:flora/plant/halfa_grass_shorter_1"
       }
     }, {
       "when": {
@@ -20,10 +20,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/halfa_grass_short_0",
+          "model": "tfg:flora/plant/halfa_grass_short_0",
           "weight": 1
         }, {
-          "model": "tfc:plants/halfa_grass_short_1",
+          "model": "tfg:flora/plant/halfa_grass_short_1",
           "weight": 3
         }
       ]
@@ -33,10 +33,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/halfa_grass_0",
+          "model": "tfg:flora/plant/halfa_grass_0",
           "weight": 1
         }, {
-          "model": "tfc:plants/halfa_grass_1",
+          "model": "tfg:flora/plant/halfa_grass_1",
           "weight": 3
         }
       ]

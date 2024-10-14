@@ -2,7 +2,7 @@
   "__comment__": "This file was automatically created by mcresources",
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/basil/flower",
-    "particle": "tfc:blocks/plants/basil/flower"
+    "cross": "tfg:blocks/flora/plant/basil/flower",
+    "particle": "tfg:blocks/flora/plant/basil/flower"
   }
 }

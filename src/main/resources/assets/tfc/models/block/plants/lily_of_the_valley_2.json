@@ -1,7 +1,7 @@
 {
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/lily_of_the_valley/lily_of_the_valley_2",
-    "particle": "tfc:blocks/plants/lily_of_the_valley/lily_of_the_valley_2"
+    "cross": "tfg:blocks/flora/plant/lily_of_the_valley/lily_of_the_valley_2",
+    "particle": "tfg:blocks/flora/plant/lily_of_the_valley/lily_of_the_valley_2"
   }
 }

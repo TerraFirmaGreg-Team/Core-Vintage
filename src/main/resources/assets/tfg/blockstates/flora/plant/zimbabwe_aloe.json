@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/zimbabwe_aloe_single"
+          "model": "tfg:flora/plant/zimbabwe_aloe_single"
         }
       ]
     }, {
@@ -16,7 +16,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/zimbabwe_aloe_lower_0"
+          "model": "tfg:flora/plant/zimbabwe_aloe_lower_0"
         }
       ]
     }, {
@@ -26,7 +26,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/zimbabwe_aloe_upper_0"
+          "model": "tfg:flora/plant/zimbabwe_aloe_upper_0"
         }
       ]
     }

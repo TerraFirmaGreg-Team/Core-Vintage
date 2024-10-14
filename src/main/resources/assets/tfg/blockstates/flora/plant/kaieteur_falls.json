@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/kaieteur_falls_single"
+          "model": "tfg:flora/plant/kaieteur_falls_single"
         }
       ]
     }, {
@@ -16,7 +16,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/kaieteur_falls_lower_0"
+          "model": "tfg:flora/plant/kaieteur_falls_lower_0"
         }
       ]
     }, {
@@ -26,7 +26,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/kaieteur_falls_lower_1"
+          "model": "tfg:flora/plant/kaieteur_falls_lower_1"
         }
       ]
     }, {
@@ -36,7 +36,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/kaieteur_falls_upper_0"
+          "model": "tfg:flora/plant/kaieteur_falls_upper_0"
         }
       ]
     }, {
@@ -46,7 +46,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/kaieteur_falls_upper_1"
+          "model": "tfg:flora/plant/kaieteur_falls_upper_1"
         }
       ]
     }

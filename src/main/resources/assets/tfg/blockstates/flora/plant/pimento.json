@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/pimento_0"
+          "model": "tfg:flora/plant/pimento_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/pimento_1"
+          "model": "tfg:flora/plant/pimento_1"
         }
       ]
     }

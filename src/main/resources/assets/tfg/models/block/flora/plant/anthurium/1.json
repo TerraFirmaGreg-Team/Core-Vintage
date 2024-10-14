@@ -1,0 +1,6 @@
+{
+  "parent": "tfg:block/cross",
+  "textures": {
+    "all": "tfg:blocks/flora/plant/anthurium/1"
+  }
+}

@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/liana_cross_1"
+          "model": "tfg:flora/plant/liana_cross_1"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/liana_cross_0"
+          "model": "tfg:flora/plant/liana_cross_0"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/liana_cross_0"
+          "model": "tfg:flora/plant/liana_cross_0"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/liana_cross_1"
+          "model": "tfg:flora/plant/liana_cross_1"
         }
       ]
     }

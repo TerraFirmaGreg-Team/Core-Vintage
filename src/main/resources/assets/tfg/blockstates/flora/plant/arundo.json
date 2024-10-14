@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/arundo"
+          "model": "tfg:flora/plant/arundo/0"
         }
       ]
     }, {
@@ -17,7 +17,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/arundo_plant"
+          "model": "tfg:flora/plant/arundo/plant"
         }
       ]
     }, {
@@ -27,7 +27,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/arundo_plant"
+          "model": "tfg:flora/plant/arundo/plant"
         }
       ]
     }, {
@@ -37,7 +37,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/arundo"
+          "model": "tfg:flora/plant/arundo/0"
         }
       ]
     }

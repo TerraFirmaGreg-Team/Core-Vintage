@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "leaves": "tfc:blocks/plants/dragon_bamboo/dragon_bamboo_small_leaves",
-    "particle": "tfc:blocks/plants/dragon_bamboo/dragon_bamboo_trunk",
-    "side": "tfc:blocks/plants/dragon_bamboo/dragon_bamboo_trunk"
+    "leaves": "tfg:blocks/flora/plant/dragon_bamboo/dragon_bamboo_small_leaves",
+    "particle": "tfg:blocks/flora/plant/dragon_bamboo/dragon_bamboo_trunk",
+    "side": "tfg:blocks/flora/plant/dragon_bamboo/dragon_bamboo_trunk"
   },
   "elements": [
     {

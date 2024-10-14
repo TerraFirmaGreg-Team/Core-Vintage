@@ -3,8 +3,8 @@
   "parent": "block/crop",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/indigo/indigo_6",
-    "crop": "tfc:blocks/plants/indigo/indigo_6"
+    "particle": "tfg:blocks/flora/plant/indigo/indigo_6",
+    "crop": "tfg:blocks/flora/plant/indigo/indigo_6"
   },
   "elements": [
     {

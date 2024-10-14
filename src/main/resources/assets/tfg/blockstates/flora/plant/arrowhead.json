@@ -5,7 +5,7 @@
         "stage": "0"
       },
       "apply": {
-        "model": "tfc:plants/arrowhead_0"
+        "model": "tfg:flora/plant/arrowhead/0"
       }
     }
   ]

@@ -1,9 +1,9 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "tintedcross": "tfc:blocks/plants/kangaroo_paw/kangaroo_paw_0",
-    "cross": "tfc:blocks/plants/kangaroo_paw/kangaroo_paw_0b",
-    "particle": "tfc:blocks/plants/kangaroo_paw/kangaroo_paw_0"
+    "tintedcross": "tfg:blocks/flora/plant/kangaroo_paw/kangaroo_paw_0",
+    "cross": "tfg:blocks/flora/plant/kangaroo_paw/kangaroo_paw_0b",
+    "particle": "tfg:blocks/flora/plant/kangaroo_paw/kangaroo_paw_0"
   },
   "elements": [
     {

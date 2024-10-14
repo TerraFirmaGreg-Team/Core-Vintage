@@ -1,7 +1,7 @@
 {
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/dandelion/dandelion_0",
-    "particle": "tfc:blocks/plants/dandelion/dandelion_0"
+    "cross": "tfg:blocks/flora/plant/dandelion/dandelion_0",
+    "particle": "tfg:blocks/flora/plant/dandelion/dandelion_0"
   }
 }

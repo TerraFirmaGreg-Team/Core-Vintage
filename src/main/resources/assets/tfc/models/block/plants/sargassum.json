@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "layer0": "tfc:blocks/plants/sargassum/sargassum",
-    "particle": "tfc:blocks/plants/sargassum/sargassum"
+    "layer0": "tfg:blocks/flora/plant/sargassum/sargassum",
+    "particle": "tfg:blocks/flora/plant/sargassum/sargassum"
   },
   "elements": [
     {

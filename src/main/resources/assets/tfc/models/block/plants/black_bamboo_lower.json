@@ -2,9 +2,9 @@
   "cblackit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "top": "tfc:blocks/plants/black_bamboo/black_bamboo_top",
-    "particle": "tfc:blocks/plants/black_bamboo/black_bamboo",
-    "side": "tfc:blocks/plants/black_bamboo/black_bamboo"
+    "top": "tfg:blocks/flora/plant/black_bamboo/black_bamboo_top",
+    "particle": "tfg:blocks/flora/plant/black_bamboo/black_bamboo",
+    "side": "tfg:blocks/flora/plant/black_bamboo/black_bamboo"
   },
   "elements": [
     {

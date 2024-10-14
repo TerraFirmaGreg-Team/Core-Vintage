@@ -6,13 +6,13 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/crowngrass_shortest_2",
+          "model": "tfg:flora/plant/crowngrass_shortest_2",
           "weight": 1
         }, {
-          "model": "tfc:plants/crowngrass_shortest_3",
+          "model": "tfg:flora/plant/crowngrass_shortest_3",
           "weight": 1
         }, {
-          "model": "tfc:plants/crowngrass_shortest_4",
+          "model": "tfg:flora/plant/crowngrass_shortest_4",
           "weight": 3
         }
       ]
@@ -22,13 +22,13 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/crowngrass_shorter_2",
+          "model": "tfg:flora/plant/crowngrass_shorter_2",
           "weight": 1
         }, {
-          "model": "tfc:plants/crowngrass_shorter_3",
+          "model": "tfg:flora/plant/crowngrass_shorter_3",
           "weight": 1
         }, {
-          "model": "tfc:plants/crowngrass_shorter_4",
+          "model": "tfg:flora/plant/crowngrass_shorter_4",
           "weight": 4
         }
       ]
@@ -38,13 +38,13 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/crowngrass_short_2",
+          "model": "tfg:flora/plant/crowngrass_short_2",
           "weight": 1
         }, {
-          "model": "tfc:plants/crowngrass_short_3",
+          "model": "tfg:flora/plant/crowngrass_short_3",
           "weight": 1
         }, {
-          "model": "tfc:plants/crowngrass_short_4",
+          "model": "tfg:flora/plant/crowngrass_short_4",
           "weight": 4
         }
       ]
@@ -54,19 +54,19 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/crowngrass_0",
+          "model": "tfg:flora/plant/crowngrass_0",
           "weight": 1
         }, {
-          "model": "tfc:plants/crowngrass_1",
+          "model": "tfg:flora/plant/crowngrass_1",
           "weight": 1
         }, {
-          "model": "tfc:plants/crowngrass_2",
+          "model": "tfg:flora/plant/crowngrass_2",
           "weight": 1
         }, {
-          "model": "tfc:plants/crowngrass_3",
+          "model": "tfg:flora/plant/crowngrass_3",
           "weight": 1
         }, {
-          "model": "tfc:plants/crowngrass_4",
+          "model": "tfg:flora/plant/crowngrass_4",
           "weight": 5
         }
       ]

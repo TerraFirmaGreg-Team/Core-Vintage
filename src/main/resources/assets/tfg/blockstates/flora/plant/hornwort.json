@@ -3,15 +3,15 @@
     {
       "apply": [
         {
-          "model": "tfc:plants/hornwort"
+          "model": "tfg:flora/plant/hornwort"
         }, {
-          "model": "tfc:plants/hornwort",
+          "model": "tfg:flora/plant/hornwort",
           "y": 90
         }, {
-          "model": "tfc:plants/hornwort",
+          "model": "tfg:flora/plant/hornwort",
           "y": 180
         }, {
-          "model": "tfc:plants/hornwort",
+          "model": "tfg:flora/plant/hornwort",
           "y": 270
         }
       ]

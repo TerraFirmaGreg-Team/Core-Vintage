@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/wild_barley/wild_barley_upper_tuft",
-    "upper": "tfc:blocks/plants/wild_barley/wild_barley_upper_tuft",
-    "lower": "tfc:blocks/plants/wild_barley/wild_barley_lower_tuft"
+    "particle": "tfg:blocks/flora/plant/wild_barley/wild_barley_upper_tuft",
+    "upper": "tfg:blocks/flora/plant/wild_barley/wild_barley_upper_tuft",
+    "lower": "tfg:blocks/flora/plant/wild_barley/wild_barley_lower_tuft"
   },
   "elements": [
     {

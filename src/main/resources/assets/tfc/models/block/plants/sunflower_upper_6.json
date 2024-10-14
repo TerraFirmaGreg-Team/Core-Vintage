@@ -2,11 +2,11 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "neck": "tfc:blocks/plants/sunflower/sunflower_upper_6_neck",
-    "cross": "tfc:blocks/plants/sunflower/sunflower_upper_6",
-    "back": "tfc:blocks/plants/sunflower/sunflower_back_6",
-    "particle": "tfc:blocks/plants/sunflower/sunflower_front_6",
-    "front": "tfc:blocks/plants/sunflower/sunflower_front_6"
+    "neck": "tfg:blocks/flora/plant/sunflower/sunflower_upper_6_neck",
+    "cross": "tfg:blocks/flora/plant/sunflower/sunflower_upper_6",
+    "back": "tfg:blocks/flora/plant/sunflower/sunflower_back_6",
+    "particle": "tfg:blocks/flora/plant/sunflower/sunflower_front_6",
+    "front": "tfg:blocks/flora/plant/sunflower/sunflower_front_6"
   },
   "elements": [
     {

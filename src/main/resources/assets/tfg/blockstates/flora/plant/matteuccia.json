@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/matteuccia_single"
+          "model": "tfg:flora/plant/matteuccia_single"
         }
       ]
     }, {
@@ -17,7 +17,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/matteuccia_lower_0"
+          "model": "tfg:flora/plant/matteuccia_lower_0"
         }
       ]
     }, {
@@ -27,7 +27,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/matteuccia_lower_1"
+          "model": "tfg:flora/plant/matteuccia_lower_1"
         }
       ]
     }, {
@@ -37,7 +37,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/matteuccia_upper_0"
+          "model": "tfg:flora/plant/matteuccia_upper_0"
         }
       ]
     }, {
@@ -47,7 +47,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/matteuccia_upper_1"
+          "model": "tfg:flora/plant/matteuccia_upper_1"
         }
       ]
     }

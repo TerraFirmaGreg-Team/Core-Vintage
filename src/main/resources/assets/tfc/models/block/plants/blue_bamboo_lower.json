@@ -2,9 +2,9 @@
   "cblueit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "top": "tfc:blocks/plants/blue_bamboo/blue_bamboo_top",
-    "particle": "tfc:blocks/plants/blue_bamboo/blue_bamboo",
-    "side": "tfc:blocks/plants/blue_bamboo/blue_bamboo"
+    "top": "tfg:blocks/flora/plant/blue_bamboo/blue_bamboo_top",
+    "particle": "tfg:blocks/flora/plant/blue_bamboo/blue_bamboo",
+    "side": "tfg:blocks/flora/plant/blue_bamboo/blue_bamboo"
   },
   "elements": [
     {

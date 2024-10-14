@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/reed_mannagrass_0"
+          "model": "tfg:flora/plant/reed_mannagrass_0"
         }
       ]
     }

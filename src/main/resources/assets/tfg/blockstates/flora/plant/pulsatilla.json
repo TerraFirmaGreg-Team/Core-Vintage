@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/pulsatilla_0"
+          "model": "tfg:flora/plant/pulsatilla_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/pulsatilla_1"
+          "model": "tfg:flora/plant/pulsatilla_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/pulsatilla_2"
+          "model": "tfg:flora/plant/pulsatilla_2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/pulsatilla_3"
+          "model": "tfg:flora/plant/pulsatilla_3"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/pulsatilla_4"
+          "model": "tfg:flora/plant/pulsatilla_4"
         }
       ]
     }, {
@@ -51,7 +51,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/pulsatilla_5"
+          "model": "tfg:flora/plant/pulsatilla_5"
         }
       ]
     }

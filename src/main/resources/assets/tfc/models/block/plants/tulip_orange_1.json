@@ -1,7 +1,7 @@
 {
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/tulip/tulip_orange_1",
-    "particle": "tfc:blocks/plants/tulip/tulip_orange_1"
+    "cross": "tfg:blocks/flora/plant/tulip/tulip_orange_1",
+    "particle": "tfg:blocks/flora/plant/tulip/tulip_orange_1"
   }
 }

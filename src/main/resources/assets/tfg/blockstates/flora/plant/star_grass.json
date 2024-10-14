@@ -5,28 +5,28 @@
         "age": "0"
       },
       "apply": {
-        "model": "tfc:plants/star_grass_0"
+        "model": "tfg:flora/plant/star_grass_0"
       }
     }, {
       "when": {
         "age": "1"
       },
       "apply": {
-        "model": "tfc:plants/star_grass_1"
+        "model": "tfg:flora/plant/star_grass_1"
       }
     }, {
       "when": {
         "age": "2"
       },
       "apply": {
-        "model": "tfc:plants/star_grass_2"
+        "model": "tfg:flora/plant/star_grass_2"
       }
     }, {
       "when": {
         "age": "3"
       },
       "apply": {
-        "model": "tfc:plants/star_grass_3"
+        "model": "tfg:flora/plant/star_grass_3"
       }
     }
   ]

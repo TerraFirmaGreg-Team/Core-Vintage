@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/heliconia_0"
+          "model": "tfg:flora/plant/heliconia_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/heliconia_1"
+          "model": "tfg:flora/plant/heliconia_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/heliconia_2"
+          "model": "tfg:flora/plant/heliconia_2"
         }
       ]
     }

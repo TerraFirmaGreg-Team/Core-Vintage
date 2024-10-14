@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/grape_hyacinth_0"
+          "model": "tfg:flora/plant/grape_hyacinth_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/grape_hyacinth_1"
+          "model": "tfg:flora/plant/grape_hyacinth_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/grape_hyacinth_2"
+          "model": "tfg:flora/plant/grape_hyacinth_2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/grape_hyacinth_3"
+          "model": "tfg:flora/plant/grape_hyacinth_3"
         }
       ]
     }

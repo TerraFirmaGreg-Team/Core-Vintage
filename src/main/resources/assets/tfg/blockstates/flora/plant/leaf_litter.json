@@ -6,10 +6,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/deciduous_leaf_litter_0",
+          "model": "tfg:flora/plant/deciduous_leaf_litter_0",
           "weight": 3
         }, {
-          "model": "tfc:plants/deciduous_leaf_litter_1",
+          "model": "tfg:flora/plant/deciduous_leaf_litter_1",
           "weight": 1
         }
       ]
@@ -19,10 +19,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/deciduous_leaf_litter_1",
+          "model": "tfg:flora/plant/deciduous_leaf_litter_1",
           "weight": 3
         }, {
-          "model": "tfc:plants/deciduous_leaf_litter_2",
+          "model": "tfg:flora/plant/deciduous_leaf_litter_2",
           "weight": 1
         }
       ]
@@ -32,13 +32,13 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/deciduous_leaf_litter_2",
+          "model": "tfg:flora/plant/deciduous_leaf_litter_2",
           "weight": 2
         }, {
-          "model": "tfc:plants/deciduous_leaf_litter_3",
+          "model": "tfg:flora/plant/deciduous_leaf_litter_3",
           "weight": 1
         }, {
-          "model": "tfc:plants/deciduous_leaf_litter_4",
+          "model": "tfg:flora/plant/deciduous_leaf_litter_4",
           "weight": 1
         }
       ]
@@ -48,13 +48,13 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/deciduous_leaf_litter_5",
+          "model": "tfg:flora/plant/deciduous_leaf_litter_5",
           "weight": 5
         }, {
-          "model": "tfc:plants/deciduous_leaf_litter_4",
+          "model": "tfg:flora/plant/deciduous_leaf_litter_4",
           "weight": 1
         }, {
-          "model": "tfc:plants/deciduous_leaf_litter_3",
+          "model": "tfg:flora/plant/deciduous_leaf_litter_3",
           "weight": 1
         }
       ]

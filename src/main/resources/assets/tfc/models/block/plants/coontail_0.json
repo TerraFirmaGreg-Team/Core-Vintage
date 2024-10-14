@@ -1,6 +1,6 @@
 {
   "parent": "tfc:block/plants/template_seagrass",
   "textures": {
-    "texture": "tfc:blocks/plants/coontail/0"
+    "texture": "tfg:blocks/flora/plant/coontail/0"
   }
 }

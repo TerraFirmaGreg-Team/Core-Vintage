@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "leaves": "tfc:blocks/plants/drakensberg_cycad/drakensberg_cycad_single_0",
-    "particle": "tfc:blocks/plants/drakensberg_cycad/drakensberg_cycad_item"
+    "leaves": "tfg:blocks/flora/plant/drakensberg_cycad/drakensberg_cycad_single_0",
+    "particle": "tfg:blocks/flora/plant/drakensberg_cycad/drakensberg_cycad_item"
   },
   "elements": [
     {

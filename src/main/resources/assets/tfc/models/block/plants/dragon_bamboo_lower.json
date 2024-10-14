@@ -2,9 +2,9 @@
   "cdragonit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "top": "tfc:blocks/plants/dragon_bamboo/dragon_bamboo_top",
-    "particle": "tfc:blocks/plants/dragon_bamboo/dragon_bamboo",
-    "side": "tfc:blocks/plants/dragon_bamboo/dragon_bamboo"
+    "top": "tfg:blocks/flora/plant/dragon_bamboo/dragon_bamboo_top",
+    "particle": "tfg:blocks/flora/plant/dragon_bamboo/dragon_bamboo",
+    "side": "tfg:blocks/flora/plant/dragon_bamboo/dragon_bamboo"
   },
   "elements": [
     {

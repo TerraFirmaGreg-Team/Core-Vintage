@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "0": "tfc:blocks/plants/leaf_litter/deciduous_leaf_litter_4",
-    "1": "tfc:blocks/plants/leaf_litter/leafpile_deciduous",
-    "particle": "tfc:blocks/plants/leaf_litter/leafpile_deciduous"
+    "0": "tfg:blocks/flora/plant/leaf_litter/deciduous_leaf_litter_4",
+    "1": "tfg:blocks/flora/plant/leaf_litter/leafpile_deciduous",
+    "particle": "tfg:blocks/flora/plant/leaf_litter/leafpile_deciduous"
   },
   "elements": [
     {

@@ -1,9 +1,9 @@
 {
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/ryegrass/ryegrass_lower_1b",
-    "cross1": "tfc:blocks/plants/ryegrass/ryegrass_upper_1b",
-    "particle": "tfc:blocks/plants/ryegrass/ryegrass_1"
+    "cross": "tfg:blocks/flora/plant/ryegrass/ryegrass_lower_1b",
+    "cross1": "tfg:blocks/flora/plant/ryegrass/ryegrass_upper_1b",
+    "particle": "tfg:blocks/flora/plant/ryegrass/ryegrass_1"
   },
   "elements": [
     {

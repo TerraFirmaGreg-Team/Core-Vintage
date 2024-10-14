@@ -1,7 +1,7 @@
 {
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/oxeye_daisy/oxeye_daisy_2",
-    "particle": "tfc:blocks/plants/oxeye_daisy/oxeye_daisy_2"
+    "cross": "tfg:blocks/flora/plant/oxeye_daisy/oxeye_daisy_2",
+    "particle": "tfg:blocks/flora/plant/oxeye_daisy/oxeye_daisy_2"
   }
 }

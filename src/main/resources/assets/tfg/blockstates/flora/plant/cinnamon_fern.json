@@ -5,14 +5,14 @@
         "age": "0"
       },
       "apply": {
-        "model": "tfc:plants/cinnamon_fern_shortest"
+        "model": "tfg:flora/plant/cinnamon_fern_shortest"
       }
     }, {
       "when": {
         "age": "1"
       },
       "apply": {
-        "model": "tfc:plants/cinnamon_fern_shorter"
+        "model": "tfg:flora/plant/cinnamon_fern_shorter"
       }
     }, {
       "when": {
@@ -20,10 +20,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/cinnamon_fern_short",
+          "model": "tfg:flora/plant/cinnamon_fern_short",
           "weight": 1
         }, {
-          "model": "tfc:plants/cinnamon_fern_big_short",
+          "model": "tfg:flora/plant/cinnamon_fern_big_short",
           "weight": 2
         }
       ]
@@ -33,10 +33,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/cinnamon_fern",
+          "model": "tfg:flora/plant/cinnamon_fern",
           "weight": 1
         }, {
-          "model": "tfc:plants/cinnamon_fern_big",
+          "model": "tfg:flora/plant/cinnamon_fern_big",
           "weight": 3
         }
       ]

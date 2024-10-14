@@ -3,8 +3,8 @@
   "parent": "block/crop",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/weld/weld_3",
-    "crop": "tfc:blocks/plants/weld/weld_3"
+    "particle": "tfg:blocks/flora/plant/weld/weld_3",
+    "crop": "tfg:blocks/flora/plant/weld/weld_3"
   },
   "elements": [
     {

@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfc:blocks/plants/guzmania/guzmania_0",
-    "particle": "tfc:blocks/plants/guzmania/guzmania_0"
+    "cross": "tfg:blocks/flora/plant/guzmania/guzmania_0",
+    "particle": "tfg:blocks/flora/plant/guzmania/guzmania_0"
   },
   "elements": [
     {

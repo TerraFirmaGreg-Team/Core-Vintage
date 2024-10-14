@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfc:plants/death_cap"
+          "model": "tfg:flora/plant/death_cap"
         }
       ]
     }

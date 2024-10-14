@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_single_0"
+          "model": "tfg:flora/plant/ostrich_fern_single_0"
         }
       ]
     }, {
@@ -17,7 +17,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_lower_0"
+          "model": "tfg:flora/plant/ostrich_fern_lower_0"
         }
       ]
     }, {
@@ -27,7 +27,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_upper_0"
+          "model": "tfg:flora/plant/ostrich_fern_upper_0"
         }
       ]
     }, {
@@ -37,7 +37,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_single_1"
+          "model": "tfg:flora/plant/ostrich_fern_single_1"
         }
       ]
     }, {
@@ -47,7 +47,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_lower_1"
+          "model": "tfg:flora/plant/ostrich_fern_lower_1"
         }
       ]
     }, {
@@ -57,7 +57,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_upper_1"
+          "model": "tfg:flora/plant/ostrich_fern_upper_1"
         }
       ]
     }, {
@@ -67,7 +67,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_single_2"
+          "model": "tfg:flora/plant/ostrich_fern_single_2"
         }
       ]
     }, {
@@ -77,7 +77,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_lower_2"
+          "model": "tfg:flora/plant/ostrich_fern_lower_2"
         }
       ]
     }, {
@@ -87,7 +87,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_upper_2"
+          "model": "tfg:flora/plant/ostrich_fern_upper_2"
         }
       ]
     }, {
@@ -97,7 +97,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_single_3"
+          "model": "tfg:flora/plant/ostrich_fern_single_3"
         }
       ]
     }, {
@@ -107,7 +107,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_lower_3"
+          "model": "tfg:flora/plant/ostrich_fern_lower_3"
         }
       ]
     }, {
@@ -117,7 +117,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_upper_2"
+          "model": "tfg:flora/plant/ostrich_fern_upper_2"
         }
       ]
     }, {
@@ -127,7 +127,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_single_4"
+          "model": "tfg:flora/plant/ostrich_fern_single_4"
         }
       ]
     }, {
@@ -137,7 +137,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_lower_4"
+          "model": "tfg:flora/plant/ostrich_fern_lower_4"
         }
       ]
     }, {
@@ -147,7 +147,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/ostrich_fern_upper_4"
+          "model": "tfg:flora/plant/ostrich_fern_upper_4"
         }
       ]
     }

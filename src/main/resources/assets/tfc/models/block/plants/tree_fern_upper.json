@@ -1,9 +1,9 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "trunk": "tfc:blocks/plants/tree_fern/tree_fern_trunk",
-    "frond": "tfc:blocks/plants/tree_fern/tree_fern_0",
-    "particle": "tfc:blocks/plants/tree_fern/tree_fern_0"
+    "trunk": "tfg:blocks/flora/plant/tree_fern/tree_fern_trunk",
+    "frond": "tfg:blocks/flora/plant/tree_fern/tree_fern_0",
+    "particle": "tfg:blocks/flora/plant/tree_fern/tree_fern_0"
   },
   "elements": [
     {

@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfc:blocks/plants/ocotillo/ocotillo_single_0",
-    "particle": "tfc:blocks/plants/ocotillo/ocotillo_single_0"
+    "cross": "tfg:blocks/flora/plant/ocotillo/ocotillo_single_0",
+    "particle": "tfg:blocks/flora/plant/ocotillo/ocotillo_single_0"
   },
   "elements": [
     {

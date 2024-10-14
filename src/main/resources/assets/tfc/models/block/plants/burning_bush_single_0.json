@@ -1,9 +1,9 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "tintedcross": "tfc:blocks/plants/burning_bush/burning_bush_single_0",
-    "cross": "tfc:blocks/plants/burning_bush/burning_bush_single_0b",
-    "particle": "tfc:blocks/plants/burning_bush/burning_bush_single_0"
+    "tintedcross": "tfg:blocks/flora/plant/burning_bush/burning_bush_single_0",
+    "cross": "tfg:blocks/flora/plant/burning_bush/burning_bush_single_0b",
+    "particle": "tfg:blocks/flora/plant/burning_bush/burning_bush_single_0"
   },
   "elements": [
     {

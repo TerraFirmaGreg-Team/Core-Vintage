@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/anthurium_0"
+          "model": "tfg:flora/plant/anthurium/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/anthurium_1"
+          "model": "tfg:flora/plant/anthurium/1"
         }
       ]
     }

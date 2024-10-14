@@ -6,11 +6,11 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/artists_conk_standing_0"
+          "model": "tfg:flora/plant/artists_conk/standing/0"
         }, {
-          "model": "tfc:plants/artists_conk_standing_1"
+          "model": "tfg:flora/plant/artists_conk/standing/1"
         }, {
-          "model": "tfc:plants/artists_conk_standing_2"
+          "model": "tfg:flora/plant/artists_conk/standing/2"
         }
       ]
     }, {
@@ -19,13 +19,13 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/artists_conk_standing_0",
+          "model": "tfg:flora/plant/artists_conk/standing/0",
           "x": 180
         }, {
-          "model": "tfc:plants/artists_conk_standing_1",
+          "model": "tfg:flora/plant/artists_conk/standing/1",
           "x": 180
         }, {
-          "model": "tfc:plants/artists_conk_standing_2",
+          "model": "tfg:flora/plant/artists_conk/standing/2",
           "x": 180
         }
       ]
@@ -35,28 +35,28 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/artists_conk_0",
+          "model": "tfg:flora/plant/artists_conk/0",
           "y": 90
         }, {
-          "model": "tfc:plants/artists_conk_1",
+          "model": "tfg:flora/plant/artists_conk/1",
           "y": 90
         }, {
-          "model": "tfc:plants/artists_conk_2",
+          "model": "tfg:flora/plant/artists_conk/2",
           "y": 90
         }, {
-          "model": "tfc:plants/artists_conk_3",
+          "model": "tfg:flora/plant/artists_conk/3",
           "y": 90
         }, {
-          "model": "tfc:plants/artists_conk_4",
+          "model": "tfg:flora/plant/artists_conk/4",
           "y": 90
         }, {
-          "model": "tfc:plants/artists_conk_5",
+          "model": "tfg:flora/plant/artists_conk/5",
           "y": 90
         }, {
-          "model": "tfc:plants/artists_conk_6",
+          "model": "tfg:flora/plant/artists_conk/6",
           "y": 90
         }, {
-          "model": "tfc:plants/artists_conk_7",
+          "model": "tfg:flora/plant/artists_conk/7",
           "y": 90
         }
       ]
@@ -66,28 +66,28 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/artists_conk_0",
+          "model": "tfg:flora/plant/artists_conk/0",
           "y": 180
         }, {
-          "model": "tfc:plants/artists_conk_1",
+          "model": "tfg:flora/plant/artists_conk/1",
           "y": 180
         }, {
-          "model": "tfc:plants/artists_conk_2",
+          "model": "tfg:flora/plant/artists_conk/2",
           "y": 180
         }, {
-          "model": "tfc:plants/artists_conk_3",
+          "model": "tfg:flora/plant/artists_conk/3",
           "y": 180
         }, {
-          "model": "tfc:plants/artists_conk_4",
+          "model": "tfg:flora/plant/artists_conk/4",
           "y": 180
         }, {
-          "model": "tfc:plants/artists_conk_5",
+          "model": "tfg:flora/plant/artists_conk/5",
           "y": 180
         }, {
-          "model": "tfc:plants/artists_conk_6",
+          "model": "tfg:flora/plant/artists_conk/6",
           "y": 180
         }, {
-          "model": "tfc:plants/artists_conk_7",
+          "model": "tfg:flora/plant/artists_conk/7",
           "y": 180
         }
       ]
@@ -97,28 +97,28 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/artists_conk_0",
+          "model": "tfg:flora/plant/artists_conk/0",
           "y": 270
         }, {
-          "model": "tfc:plants/artists_conk_1",
+          "model": "tfg:flora/plant/artists_conk/1",
           "y": 270
         }, {
-          "model": "tfc:plants/artists_conk_2",
+          "model": "tfg:flora/plant/artists_conk/2",
           "y": 270
         }, {
-          "model": "tfc:plants/artists_conk_3",
+          "model": "tfg:flora/plant/artists_conk/3",
           "y": 270
         }, {
-          "model": "tfc:plants/artists_conk_4",
+          "model": "tfg:flora/plant/artists_conk/4",
           "y": 270
         }, {
-          "model": "tfc:plants/artists_conk_5",
+          "model": "tfg:flora/plant/artists_conk/5",
           "y": 270
         }, {
-          "model": "tfc:plants/artists_conk_6",
+          "model": "tfg:flora/plant/artists_conk/6",
           "y": 270
         }, {
-          "model": "tfc:plants/artists_conk_7",
+          "model": "tfg:flora/plant/artists_conk/7",
           "y": 270
         }
       ]
@@ -128,21 +128,21 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/artists_conk_0"
+          "model": "tfg:flora/plant/artists_conk/0"
         }, {
-          "model": "tfc:plants/artists_conk_1"
+          "model": "tfg:flora/plant/artists_conk/1"
         }, {
-          "model": "tfc:plants/artists_conk_2"
+          "model": "tfg:flora/plant/artists_conk/2"
         }, {
-          "model": "tfc:plants/artists_conk_3"
+          "model": "tfg:flora/plant/artists_conk/3"
         }, {
-          "model": "tfc:plants/artists_conk_4"
+          "model": "tfg:flora/plant/artists_conk/4"
         }, {
-          "model": "tfc:plants/artists_conk_5"
+          "model": "tfg:flora/plant/artists_conk/5"
         }, {
-          "model": "tfc:plants/artists_conk_6"
+          "model": "tfg:flora/plant/artists_conk/6"
         }, {
-          "model": "tfc:plants/artists_conk_7"
+          "model": "tfg:flora/plant/artists_conk/7"
         }
       ]
     }

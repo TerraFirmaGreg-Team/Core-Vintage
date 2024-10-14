@@ -5,28 +5,28 @@
         "age": "0"
       },
       "apply": {
-        "model": "tfc:plants/scutch_grass_shortest"
+        "model": "tfg:flora/plant/scutch_grass_shortest"
       }
     }, {
       "when": {
         "age": "1"
       },
       "apply": {
-        "model": "tfc:plants/scutch_grass_shorter"
+        "model": "tfg:flora/plant/scutch_grass_shorter"
       }
     }, {
       "when": {
         "age": "2"
       },
       "apply": {
-        "model": "tfc:plants/scutch_grass_short"
+        "model": "tfg:flora/plant/scutch_grass_short"
       }
     }, {
       "when": {
         "age": "3"
       },
       "apply": {
-        "model": "tfc:plants/scutch_grass"
+        "model": "tfg:flora/plant/scutch_grass"
       }
     }
   ]

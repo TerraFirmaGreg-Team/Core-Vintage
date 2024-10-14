@@ -3,15 +3,15 @@
     {
       "apply": [
         {
-          "model": "tfc:plants/gutweed"
+          "model": "tfg:flora/plant/gutweed"
         }, {
-          "model": "tfc:plants/gutweed",
+          "model": "tfg:flora/plant/gutweed",
           "y": 90
         }, {
-          "model": "tfc:plants/gutweed",
+          "model": "tfg:flora/plant/gutweed",
           "y": 180
         }, {
-          "model": "tfc:plants/gutweed",
+          "model": "tfg:flora/plant/gutweed",
           "y": 270
         }
       ]

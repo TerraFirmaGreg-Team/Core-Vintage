@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/poppy_0"
+          "model": "tfg:flora/plant/poppy_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/poppy_1"
+          "model": "tfg:flora/plant/poppy_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/poppy_2"
+          "model": "tfg:flora/plant/poppy_2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/poppy_3"
+          "model": "tfg:flora/plant/poppy_3"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/poppy_4"
+          "model": "tfg:flora/plant/poppy_4"
         }
       ]
     }

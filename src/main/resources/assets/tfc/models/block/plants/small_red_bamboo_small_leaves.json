@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "leaves": "tfc:blocks/plants/red_bamboo/red_bamboo_small_leaves",
-    "particle": "tfc:blocks/plants/red_bamboo/red_bamboo_stalk",
-    "side": "tfc:blocks/plants/red_bamboo/red_bamboo_stalk"
+    "leaves": "tfg:blocks/flora/plant/red_bamboo/red_bamboo_small_leaves",
+    "particle": "tfg:blocks/flora/plant/red_bamboo/red_bamboo_stalk",
+    "side": "tfg:blocks/flora/plant/red_bamboo/red_bamboo_stalk"
   },
   "elements": [
     {

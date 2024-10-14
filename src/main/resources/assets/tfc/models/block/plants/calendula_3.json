@@ -1,7 +1,7 @@
 {
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/calendula/calendula_3",
-    "particle": "tfc:blocks/plants/calendula/calendula_3"
+    "cross": "tfg:blocks/flora/plant/calendula/calendula_3",
+    "particle": "tfg:blocks/flora/plant/calendula/calendula_3"
   }
 }

@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/canna_0"
+          "model": "tfg:flora/plant/canna_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/canna_1"
+          "model": "tfg:flora/plant/canna_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/canna_2"
+          "model": "tfg:flora/plant/canna_2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/canna_3"
+          "model": "tfg:flora/plant/canna_3"
         }
       ]
     }

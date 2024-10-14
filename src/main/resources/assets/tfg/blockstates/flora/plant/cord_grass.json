@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/cord_grass_single"
+          "model": "tfg:flora/plant/cord_grass_single"
         }
       ]
     }, {
@@ -17,7 +17,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/cord_grass_lower_0"
+          "model": "tfg:flora/plant/cord_grass_lower_0"
         }
       ]
     }, {
@@ -27,7 +27,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/cord_grass_lower_1"
+          "model": "tfg:flora/plant/cord_grass_lower_1"
         }
       ]
     }, {
@@ -37,7 +37,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/cord_grass_upper_0"
+          "model": "tfg:flora/plant/cord_grass_upper_0"
         }
       ]
     }, {
@@ -47,7 +47,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/cord_grass_upper_1"
+          "model": "tfg:flora/plant/cord_grass_upper_1"
         }
       ]
     }

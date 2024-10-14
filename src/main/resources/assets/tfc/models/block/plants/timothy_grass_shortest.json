@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfc:blocks/plants/timothy_grass/placeholder",
-    "particle": "tfc:blocks/plants/timothy_grass/placeholder"
+    "cross": "tfg:blocks/flora/plant/timothy_grass/placeholder",
+    "particle": "tfg:blocks/flora/plant/timothy_grass/placeholder"
   },
   "elements": [
     {

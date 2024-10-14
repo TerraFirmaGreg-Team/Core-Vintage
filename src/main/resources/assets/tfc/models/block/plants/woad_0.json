@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/woad/woad_0",
-    "crop": "tfc:blocks/plants/woad/woad_0"
+    "particle": "tfg:blocks/flora/plant/woad/woad_0",
+    "crop": "tfg:blocks/flora/plant/woad/woad_0"
   },
   "elements": [
     {

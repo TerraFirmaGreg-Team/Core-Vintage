@@ -3,15 +3,15 @@
     {
       "apply": [
         {
-          "model": "tfc:plants/rough_horsetail"
+          "model": "tfg:flora/plant/rough_horsetail"
         }, {
-          "model": "tfc:plants/rough_horsetail",
+          "model": "tfg:flora/plant/rough_horsetail",
           "y": 90
         }, {
-          "model": "tfc:plants/rough_horsetail",
+          "model": "tfg:flora/plant/rough_horsetail",
           "y": 180
         }, {
-          "model": "tfc:plants/rough_horsetail",
+          "model": "tfg:flora/plant/rough_horsetail",
           "y": 270
         }
       ]

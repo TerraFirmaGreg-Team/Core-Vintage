@@ -6,9 +6,9 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/resin_standing_0"
+          "model": "tfg:flora/plant/resin_standing_0"
         }, {
-          "model": "tfc:plants/resin_standing_1"
+          "model": "tfg:flora/plant/resin_standing_1"
         }
       ]
     }, {
@@ -17,10 +17,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/resin_standing_0",
+          "model": "tfg:flora/plant/resin_standing_0",
           "x": 180
         }, {
-          "model": "tfc:plants/resin_standing_1",
+          "model": "tfg:flora/plant/resin_standing_1",
           "x": 180
         }
       ]
@@ -30,10 +30,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/resin_0",
+          "model": "tfg:flora/plant/resin_0",
           "y": 90
         }, {
-          "model": "tfc:plants/resin_1",
+          "model": "tfg:flora/plant/resin_1",
           "y": 90
         }
       ]
@@ -43,10 +43,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/resin_0",
+          "model": "tfg:flora/plant/resin_0",
           "y": 180
         }, {
-          "model": "tfc:plants/resin_1",
+          "model": "tfg:flora/plant/resin_1",
           "y": 180
         }
       ]
@@ -56,10 +56,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/resin_0",
+          "model": "tfg:flora/plant/resin_0",
           "y": 270
         }, {
-          "model": "tfc:plants/resin_1",
+          "model": "tfg:flora/plant/resin_1",
           "y": 270
         }
       ]
@@ -69,9 +69,9 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/resin_0"
+          "model": "tfg:flora/plant/resin_0"
         }, {
-          "model": "tfc:plants/resin_1"
+          "model": "tfg:flora/plant/resin_1"
         }
       ]
     }

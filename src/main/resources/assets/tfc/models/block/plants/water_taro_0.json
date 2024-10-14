@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "3": "tfc:blocks/plants/water_taro/water_taro_leaf_0",
-    "2": "tfc:blocks/plants/water_taro/water_taro_stem",
-    "particle": "tfc:blocks/plants/water_taro/water_taro_stem"
+    "3": "tfg:blocks/flora/plant/water_taro/water_taro_leaf_0",
+    "2": "tfg:blocks/flora/plant/water_taro/water_taro_stem",
+    "particle": "tfg:blocks/flora/plant/water_taro/water_taro_stem"
   },
   "elements": [
     {

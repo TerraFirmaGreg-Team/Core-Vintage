@@ -1,7 +1,7 @@
 {
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/canna/canna_0",
-    "particle": "tfc:blocks/plants/canna/canna_0"
+    "cross": "tfg:blocks/flora/plant/canna/canna_0",
+    "particle": "tfg:blocks/flora/plant/canna/canna_0"
   }
 }

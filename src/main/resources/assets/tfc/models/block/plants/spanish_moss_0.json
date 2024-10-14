@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/spanish_moss/spanish_moss_0",
-    "layer0": "tfc:blocks/plants/spanish_moss/spanish_moss_0"
+    "particle": "tfg:blocks/flora/plant/spanish_moss/spanish_moss_0",
+    "layer0": "tfg:blocks/flora/plant/spanish_moss/spanish_moss_0"
   },
   "elements": [
     {

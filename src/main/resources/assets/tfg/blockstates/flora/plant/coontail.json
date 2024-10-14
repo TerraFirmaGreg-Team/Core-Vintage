@@ -5,28 +5,28 @@
         "age": "0"
       },
       "apply": {
-        "model": "tfc:plants/coontail_0"
+        "model": "tfg:flora/plant/coontail_0"
       }
     }, {
       "when": {
         "age": "1"
       },
       "apply": {
-        "model": "tfc:plants/coontail_1"
+        "model": "tfg:flora/plant/coontail_1"
       }
     }, {
       "when": {
         "age": "2"
       },
       "apply": {
-        "model": "tfc:plants/coontail_2"
+        "model": "tfg:flora/plant/coontail_2"
       }
     }, {
       "when": {
         "age": "3"
       },
       "apply": {
-        "model": "tfc:plants/coontail_3"
+        "model": "tfg:flora/plant/coontail_3"
       }
     }
   ]

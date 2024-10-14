@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "": "tfc:blocks/plants/rough_horsetail/rough_horsetail",
-    "particle": "tfc:blocks/plants/rough_horsetail/rough_horsetail"
+    "": "tfg:blocks/flora/plant/rough_horsetail/rough_horsetail",
+    "particle": "tfg:blocks/flora/plant/rough_horsetail/rough_horsetail"
   },
   "elements": [
     {

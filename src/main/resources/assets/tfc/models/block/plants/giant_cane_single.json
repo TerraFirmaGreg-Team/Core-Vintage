@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "leaves": "tfc:blocks/plants/giant_cane/giant_cane_single_0",
-    "stem": "tfc:blocks/plants/giant_cane/giant_cane_single_0b",
-    "particle": "tfc:blocks/plants/giant_cane/giant_cane_item"
+    "leaves": "tfg:blocks/flora/plant/giant_cane/giant_cane_single_0",
+    "stem": "tfg:blocks/flora/plant/giant_cane/giant_cane_single_0b",
+    "particle": "tfg:blocks/flora/plant/giant_cane/giant_cane_item"
   },
   "elements": [
     {

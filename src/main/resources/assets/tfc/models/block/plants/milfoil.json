@@ -1,7 +1,7 @@
 {
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/milfoil/milfoil",
-    "particle": "tfc:blocks/plants/milfoil/milfoil"
+    "cross": "tfg:blocks/flora/plant/milfoil/milfoil",
+    "particle": "tfg:blocks/flora/plant/milfoil/milfoil"
   }
 }

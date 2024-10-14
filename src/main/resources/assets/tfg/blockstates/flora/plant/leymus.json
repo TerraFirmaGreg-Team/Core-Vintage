@@ -6,19 +6,19 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/leymus_0",
+          "model": "tfg:flora/plant/leymus_0",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfc:plants/leymus_0",
+          "model": "tfg:flora/plant/leymus_0",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfc:plants/leymus_0",
+          "model": "tfg:flora/plant/leymus_0",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfc:plants/leymus_0",
+          "model": "tfg:flora/plant/leymus_0",
           "weight": 1,
           "y": 270
         }
@@ -29,35 +29,35 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/leymus_0",
+          "model": "tfg:flora/plant/leymus_0",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfc:plants/leymus_0",
+          "model": "tfg:flora/plant/leymus_0",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfc:plants/leymus_0",
+          "model": "tfg:flora/plant/leymus_0",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfc:plants/leymus_0",
+          "model": "tfg:flora/plant/leymus_0",
           "weight": 1,
           "y": 270
         }, {
-          "model": "tfc:plants/leymus_1",
+          "model": "tfg:flora/plant/leymus_1",
           "weight": 3,
           "y": 0
         }, {
-          "model": "tfc:plants/leymus_1",
+          "model": "tfg:flora/plant/leymus_1",
           "weight": 3,
           "y": 90
         }, {
-          "model": "tfc:plants/leymus_1",
+          "model": "tfg:flora/plant/leymus_1",
           "weight": 3,
           "y": 180
         }, {
-          "model": "tfc:plants/leymus_1",
+          "model": "tfg:flora/plant/leymus_1",
           "weight": 3,
           "y": 270
         }
@@ -68,35 +68,35 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/leymus_1",
+          "model": "tfg:flora/plant/leymus_1",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfc:plants/leymus_1",
+          "model": "tfg:flora/plant/leymus_1",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfc:plants/leymus_1",
+          "model": "tfg:flora/plant/leymus_1",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfc:plants/leymus_1",
+          "model": "tfg:flora/plant/leymus_1",
           "weight": 1,
           "y": 270
         }, {
-          "model": "tfc:plants/leymus_2",
+          "model": "tfg:flora/plant/leymus_2",
           "weight": 3,
           "y": 0
         }, {
-          "model": "tfc:plants/leymus_2",
+          "model": "tfg:flora/plant/leymus_2",
           "weight": 3,
           "y": 90
         }, {
-          "model": "tfc:plants/leymus_2",
+          "model": "tfg:flora/plant/leymus_2",
           "weight": 3,
           "y": 180
         }, {
-          "model": "tfc:plants/leymus_2",
+          "model": "tfg:flora/plant/leymus_2",
           "weight": 3,
           "y": 270
         }
@@ -107,51 +107,51 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/leymus_2",
+          "model": "tfg:flora/plant/leymus_2",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfc:plants/leymus_2",
+          "model": "tfg:flora/plant/leymus_2",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfc:plants/leymus_2",
+          "model": "tfg:flora/plant/leymus_2",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfc:plants/leymus_2",
+          "model": "tfg:flora/plant/leymus_2",
           "weight": 1,
           "y": 270
         }, {
-          "model": "tfc:plants/leymus_3",
+          "model": "tfg:flora/plant/leymus_3",
           "weight": 3,
           "y": 0
         }, {
-          "model": "tfc:plants/leymus_3",
+          "model": "tfg:flora/plant/leymus_3",
           "weight": 3,
           "y": 90
         }, {
-          "model": "tfc:plants/leymus_3",
+          "model": "tfg:flora/plant/leymus_3",
           "weight": 3,
           "y": 180
         }, {
-          "model": "tfc:plants/leymus_3",
+          "model": "tfg:flora/plant/leymus_3",
           "weight": 3,
           "y": 270
         }, {
-          "model": "tfc:plants/leymus_4",
+          "model": "tfg:flora/plant/leymus_4",
           "weight": 3,
           "y": 0
         }, {
-          "model": "tfc:plants/leymus_4",
+          "model": "tfg:flora/plant/leymus_4",
           "weight": 3,
           "y": 90
         }, {
-          "model": "tfc:plants/leymus_4",
+          "model": "tfg:flora/plant/leymus_4",
           "weight": 3,
           "y": 180
         }, {
-          "model": "tfc:plants/leymus_4",
+          "model": "tfg:flora/plant/leymus_4",
           "weight": 3,
           "y": 270
         }

@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/creeping_mistletoe/creeping_mistletoe_0",
-    "cross": "tfc:blocks/plants/creeping_mistletoe/creeping_mistletoe_0"
+    "particle": "tfg:blocks/flora/plant/creeping_mistletoe/creeping_mistletoe_0",
+    "cross": "tfg:blocks/flora/plant/creeping_mistletoe/creeping_mistletoe_0"
   },
   "elements": [
     {

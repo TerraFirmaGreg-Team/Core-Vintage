@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/cinnamon_fern/cinnamon_fern_big",
-    "cross": "tfc:blocks/plants/cinnamon_fern/cinnamon_fern_big"
+    "particle": "tfg:blocks/flora/plant/cinnamon_fern/cinnamon_fern_big",
+    "cross": "tfg:blocks/flora/plant/cinnamon_fern/cinnamon_fern_big"
   },
   "elements": [
     {

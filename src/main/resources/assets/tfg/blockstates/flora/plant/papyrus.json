@@ -6,10 +6,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/papyrus_0",
+          "model": "tfg:flora/plant/papyrus_0",
           "weight": 50
         }, {
-          "model": "tfc:plants/papyrus_1",
+          "model": "tfg:flora/plant/papyrus_1",
           "weight": 50
         }
       ]

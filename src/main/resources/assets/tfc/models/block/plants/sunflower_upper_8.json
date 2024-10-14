@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "neck": "tfc:blocks/plants/sunflower/sunflower_upper_8_neck",
-    "cross": "tfc:blocks/plants/sunflower/sunflower_upper_8"
+    "neck": "tfg:blocks/flora/plant/sunflower/sunflower_upper_8_neck",
+    "cross": "tfg:blocks/flora/plant/sunflower/sunflower_upper_8"
   },
   "elements": [
     {

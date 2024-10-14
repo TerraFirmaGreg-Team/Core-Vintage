@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/oxeye_daisy_0"
+          "model": "tfg:flora/plant/oxeye_daisy_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/oxeye_daisy_1"
+          "model": "tfg:flora/plant/oxeye_daisy_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/oxeye_daisy_2"
+          "model": "tfg:flora/plant/oxeye_daisy_2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/oxeye_daisy_3"
+          "model": "tfg:flora/plant/oxeye_daisy_3"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/oxeye_daisy_4"
+          "model": "tfg:flora/plant/oxeye_daisy_4"
         }
       ]
     }, {
@@ -51,7 +51,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/oxeye_daisy_5"
+          "model": "tfg:flora/plant/oxeye_daisy_5"
         }
       ]
     }

@@ -1,8 +1,8 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "tfc:blocks/plants/king_fern/frond_large_0a",
-    "particle": "tfc:blocks/plants/king_fern/frond_large_0a"
+    "0": "tfg:blocks/flora/plant/king_fern/frond_large_0a",
+    "particle": "tfg:blocks/flora/plant/king_fern/frond_large_0a"
   },
   "elements": [
     {

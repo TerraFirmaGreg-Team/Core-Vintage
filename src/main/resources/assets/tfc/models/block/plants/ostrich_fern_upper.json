@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "upper": "tfc:blocks/empty",
-    "uppernotint": "tfc:blocks/empty"
+    "upper": "tfg:blocks/empty",
+    "uppernotint": "tfg:blocks/empty"
   },
   "elements": [
     {

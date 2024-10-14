@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "stem": "tfc:blocks/plants/pygmy_date_palm/pygmy_date_palm_lower_0b",
-    "leaves": "tfc:blocks/plants/pygmy_date_palm/pygmy_date_palm_lower_0",
-    "particle": "tfc:blocks/plants/pygmy_date_palm/pygmy_date_palm_lower_0"
+    "stem": "tfg:blocks/flora/plant/pygmy_date_palm/pygmy_date_palm_lower_0b",
+    "leaves": "tfg:blocks/flora/plant/pygmy_date_palm/pygmy_date_palm_lower_0",
+    "particle": "tfg:blocks/flora/plant/pygmy_date_palm/pygmy_date_palm_lower_0"
   },
   "elements": [
     {

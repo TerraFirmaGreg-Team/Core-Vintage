@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/snapdragon_0"
+          "model": "tfg:flora/plant/snapdragon_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/snapdragon_white_1"
+          "model": "tfg:flora/plant/snapdragon_white_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/snapdragon_2"
+          "model": "tfg:flora/plant/snapdragon_2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/snapdragon_3"
+          "model": "tfg:flora/plant/snapdragon_3"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/snapdragon_4"
+          "model": "tfg:flora/plant/snapdragon_4"
         }
       ]
     }, {
@@ -51,7 +51,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/snapdragon_5"
+          "model": "tfg:flora/plant/snapdragon_5"
         }
       ]
     }, {
@@ -60,7 +60,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/snapdragon_6"
+          "model": "tfg:flora/plant/snapdragon_6"
         }
       ]
     }

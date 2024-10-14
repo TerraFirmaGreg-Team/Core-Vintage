@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/lilac/lilac_lower_1",
-    "tintedcross": "tfc:blocks/plants/lilac/lilac_lower_1",
-    "cross": "tfc:blocks/plants/lilac/lilac_lower_1b"
+    "particle": "tfg:blocks/flora/plant/lilac/lilac_lower_1",
+    "tintedcross": "tfg:blocks/flora/plant/lilac/lilac_lower_1",
+    "cross": "tfg:blocks/flora/plant/lilac/lilac_lower_1b"
   },
   "elements": [
     {

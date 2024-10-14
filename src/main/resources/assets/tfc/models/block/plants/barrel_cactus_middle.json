@@ -1,9 +1,9 @@
 {
   "textures": {
-    "particle": "tfc:blocks/plants/barrel_cactus/side",
-    "side": "tfc:blocks/plants/barrel_cactus/side",
-    "top": "tfc:blocks/plants/barrel_cactus/top",
-    "spike": "tfc:blocks/plants/barrel_cactus/spikes_middle"
+    "particle": "tfg:blocks/flora/plant/barrel_cactus/side",
+    "side": "tfg:blocks/flora/plant/barrel_cactus/side",
+    "top": "tfg:blocks/flora/plant/barrel_cactus/top",
+    "spike": "tfg:blocks/flora/plant/barrel_cactus/spikes_middle"
   },
   "elements": [
     {

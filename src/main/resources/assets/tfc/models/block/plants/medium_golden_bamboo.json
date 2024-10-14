@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/golden_bamboo/golden_bamboo_stalk",
-    "side": "tfc:blocks/plants/golden_bamboo/golden_bamboo_stalk"
+    "particle": "tfg:blocks/flora/plant/golden_bamboo/golden_bamboo_stalk",
+    "side": "tfg:blocks/flora/plant/golden_bamboo/golden_bamboo_stalk"
   },
   "elements": [
     {

@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/hanging_vine/body",
-    "overlay": "tfc:blocks/plants/hanging_vine/body"
+    "particle": "tfg:blocks/flora/plant/hanging_vine/body",
+    "overlay": "tfg:blocks/flora/plant/hanging_vine/body"
   },
   "elements": [
     {

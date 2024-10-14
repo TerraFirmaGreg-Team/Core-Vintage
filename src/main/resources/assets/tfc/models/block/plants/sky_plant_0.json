@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfc:blocks/plants/sky_plant/sky_plant_0",
-    "particle": "tfc:blocks/plants/sky_plant/sky_plant_0"
+    "cross": "tfg:blocks/flora/plant/sky_plant/sky_plant_0",
+    "particle": "tfg:blocks/flora/plant/sky_plant/sky_plant_0"
   },
   "elements": [
     {

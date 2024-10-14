@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/phragmite_0"
+          "model": "tfg:flora/plant/phragmite_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/phragmite_1"
+          "model": "tfg:flora/plant/phragmite_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/phragmite_2"
+          "model": "tfg:flora/plant/phragmite_2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/phragmite_3"
+          "model": "tfg:flora/plant/phragmite_3"
         }
       ]
     }

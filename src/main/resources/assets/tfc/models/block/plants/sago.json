@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfc:blocks/plants/sago/sago",
-    "particle": "tfc:blocks/plants/sago/sago"
+    "cross": "tfg:blocks/flora/plant/sago/sago",
+    "particle": "tfg:blocks/flora/plant/sago/sago"
   },
   "elements": [
     {

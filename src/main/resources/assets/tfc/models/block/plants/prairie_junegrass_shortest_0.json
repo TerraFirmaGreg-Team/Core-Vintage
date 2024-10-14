@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfc:blocks/plants/prairie_junegrass/prairie_junegrass_0",
-    "particle": "tfc:blocks/plants/prairie_junegrass/prairie_junegrass_0"
+    "cross": "tfg:blocks/flora/plant/prairie_junegrass/prairie_junegrass_0",
+    "particle": "tfg:blocks/flora/plant/prairie_junegrass/prairie_junegrass_0"
   },
   "elements": [
     {

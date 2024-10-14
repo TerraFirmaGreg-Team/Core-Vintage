@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "tfg:items/flora/plant/pygmy_date_palm/pygmy_date_palm_item"
+    "layer0": "tfg:items/flora/plant/pygmy_date_palm"
   }
 }

@@ -2,9 +2,9 @@
   "cnarrow_leaf_bambooit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "top": "tfc:blocks/plants/narrow_leaf_bamboo_bamboo/narrow_leaf_bamboo_bamboo_top",
-    "particle": "tfc:blocks/plants/narrow_leaf_bamboo_bamboo/narrow_leaf_bamboo_bamboo",
-    "side": "tfc:blocks/plants/narrow_leaf_bamboo_bamboo/narrow_leaf_bamboo_bamboo"
+    "top": "tfg:blocks/flora/plant/narrow_leaf_bamboo_bamboo/narrow_leaf_bamboo_bamboo_top",
+    "particle": "tfg:blocks/flora/plant/narrow_leaf_bamboo_bamboo/narrow_leaf_bamboo_bamboo",
+    "side": "tfg:blocks/flora/plant/narrow_leaf_bamboo_bamboo/narrow_leaf_bamboo_bamboo"
   },
   "elements": [
     {

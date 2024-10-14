@@ -1,56 +1,44 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "tfc:plants/badderlocks_upper"
-  },
-  "variants": {
-    "normal": [
-      {}
-    ],
-    "inventory": [
-      {}
-    ],
-    "multipart": [
-      {
-        "when": {
-          "part": "single"
-        },
-        "apply": [
-          {
-            "model": "tfc:plants/badderlocks_upper"
-          }
-        ]
+  "multipart": [
+    {
+      "when": {
+        "part": "single"
       },
-      {
-        "when": {
-          "part": "lower"
-        },
-        "apply": [
-          {
-            "model": "tfc:plants/badderlocks_lower"
-          }
-        ]
+      "apply": [
+        {
+          "model": "tfg:flora/plant/badderlocks/upper"
+        }
+      ]
+    },
+    {
+      "when": {
+        "part": "lower"
       },
-      {
-        "when": {
-          "part": "middle"
-        },
-        "apply": [
-          {
-            "model": "tfc:plants/badderlocks_lower"
-          }
-        ]
+      "apply": [
+        {
+          "model": "tfg:flora/plant/badderlocks/lower"
+        }
+      ]
+    },
+    {
+      "when": {
+        "part": "middle"
       },
-      {
-        "when": {
-          "part": "upper"
-        },
-        "apply": [
-          {
-            "model": "tfc:plants/badderlocks_upper"
-          }
-        ]
-      }
-    ]
-  }
+      "apply": [
+        {
+          "model": "tfg:flora/plant/badderlocks/lower"
+        }
+      ]
+    },
+    {
+      "when": {
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/badderlocks/upper"
+        }
+      ]
+    }
+  ]
 }

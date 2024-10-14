@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfc:blocks/plants/seaweed/seaweed",
-    "particle": "tfc:blocks/plants/seaweed/seaweed"
+    "cross": "tfg:blocks/flora/plant/seaweed/seaweed",
+    "particle": "tfg:blocks/flora/plant/seaweed/seaweed"
   },
   "elements": [
     {

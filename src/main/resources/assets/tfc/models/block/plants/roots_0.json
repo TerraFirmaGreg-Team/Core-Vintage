@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/roots/roots_0",
-    "layer0": "tfc:blocks/plants/roots/roots_0"
+    "particle": "tfg:blocks/flora/plant/roots/roots_0",
+    "layer0": "tfg:blocks/flora/plant/roots/roots_0"
   },
   "elements": [
     {

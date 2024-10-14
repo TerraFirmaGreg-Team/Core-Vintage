@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/primrose_0"
+          "model": "tfg:flora/plant/primrose_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/primrose_1"
+          "model": "tfg:flora/plant/primrose_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/primrose_2"
+          "model": "tfg:flora/plant/primrose_2"
         }
       ]
     }

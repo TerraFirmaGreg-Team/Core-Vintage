@@ -2,9 +2,9 @@
   "cweaversit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "trunk": "tfc:blocks/plants/weavers_bamboo/weavers_bamboo_trunk",
-    "particle": "tfc:blocks/plants/weavers_bamboo/weavers_bamboo_leaves_0",
-    "frond": "tfc:blocks/plants/weavers_bamboo/weavers_bamboo_leaves_0"
+    "trunk": "tfg:blocks/flora/plant/weavers_bamboo/weavers_bamboo_trunk",
+    "particle": "tfg:blocks/flora/plant/weavers_bamboo/weavers_bamboo_leaves_0",
+    "frond": "tfg:blocks/flora/plant/weavers_bamboo/weavers_bamboo_leaves_0"
   },
   "elements": [
     {

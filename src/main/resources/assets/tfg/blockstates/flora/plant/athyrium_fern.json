@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfc:plants/athyrium_fern"
+          "model": "tfg:flora/plant/athyrium_fern/0"
         }
       ]
     }

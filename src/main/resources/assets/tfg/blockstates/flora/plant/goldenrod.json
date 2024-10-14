@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/goldenrod_0"
+          "model": "tfg:flora/plant/goldenrod_0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/goldenrod_1"
+          "model": "tfg:flora/plant/goldenrod_1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/goldenrod_2"
+          "model": "tfg:flora/plant/goldenrod_2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/goldenrod_3"
+          "model": "tfg:flora/plant/goldenrod_3"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/goldenrod_4"
+          "model": "tfg:flora/plant/goldenrod_4"
         }
       ]
     }

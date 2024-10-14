@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfc:blocks/plants/japanese_ivy/japanese_ivy_0",
-    "particle": "tfc:blocks/plants/japanese_ivy/japanese_ivy_0",
-    "overlay": "tfc:blocks/plants/japanese_ivy/japanese_ivy_0b"
+    "cross": "tfg:blocks/flora/plant/japanese_ivy/japanese_ivy_0",
+    "particle": "tfg:blocks/flora/plant/japanese_ivy/japanese_ivy_0",
+    "overlay": "tfg:blocks/flora/plant/japanese_ivy/japanese_ivy_0b"
   },
   "elements": [
     {

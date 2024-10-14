@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/tropical_undergrowth/tropical_undergrowth_upper_0",
-    "cross": "tfc:blocks/plants/tropical_undergrowth/tropical_undergrowth_upper_0"
+    "particle": "tfg:blocks/flora/plant/tropical_undergrowth/tropical_undergrowth_upper_0",
+    "cross": "tfg:blocks/flora/plant/tropical_undergrowth/tropical_undergrowth_upper_0"
   },
   "elements": [
     {

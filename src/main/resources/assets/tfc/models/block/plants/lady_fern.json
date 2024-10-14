@@ -1,8 +1,8 @@
 {
   "textures": {
-    "0": "tfc:blocks/plants/lady_fern/fern_single",
-    "1": "tfc:blocks/plants/lady_fern/fern_single",
-    "particle": "tfc:blocks/plants/lady_fern/fern_single"
+    "0": "tfg:blocks/flora/plant/lady_fern/fern_single",
+    "1": "tfg:blocks/flora/plant/lady_fern/fern_single",
+    "particle": "tfg:blocks/flora/plant/lady_fern/fern_single"
   },
   "elements": [
     {

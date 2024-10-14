@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/plants/liana/body",
-    "overlay": "tfc:blocks/plants/liana/body"
+    "particle": "tfg:blocks/flora/plant/liana/body",
+    "overlay": "tfg:blocks/flora/plant/liana/body"
   },
   "elements": [
     {

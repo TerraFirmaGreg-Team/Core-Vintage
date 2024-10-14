@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "tfg:items/flora/plant/swedish_ivy/swedish_ivy_item"
+    "layer0": "tfg:items/flora/plant/swedish_ivy"
   }
 }

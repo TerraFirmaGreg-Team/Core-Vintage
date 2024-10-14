@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
   "textures": {
-    "0": "tfc:blocks/plants/sulphur_shelf/sulphur_shelf_1",
-    "1": "tfc:blocks/plants/sulphur_shelf/sulphur_shelf_0",
-    "particle": "tfc:blocks/plants/sulphur_shelf/sulphur_shelf_1"
+    "0": "tfg:blocks/flora/plant/sulphur_shelf/sulphur_shelf_1",
+    "1": "tfg:blocks/flora/plant/sulphur_shelf/sulphur_shelf_0",
+    "particle": "tfg:blocks/flora/plant/sulphur_shelf/sulphur_shelf_1"
   },
   "elements": [
     {

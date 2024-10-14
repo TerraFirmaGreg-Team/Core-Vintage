@@ -6,7 +6,7 @@
         "stage": "0|1"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory"
+        "model": "tfg:flora/plant/morning_glory"
       }
     }, {
       "when": {
@@ -14,7 +14,7 @@
         "stage": "0|1"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory",
+        "model": "tfg:flora/plant/morning_glory",
         "x": 270,
         "y": 90
       }
@@ -24,7 +24,7 @@
         "stage": "0|1"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory",
+        "model": "tfg:flora/plant/morning_glory",
         "x": 270
       }
     }, {
@@ -33,7 +33,7 @@
         "stage": "0|1"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory",
+        "model": "tfg:flora/plant/morning_glory",
         "x": 270,
         "y": 180
       }
@@ -43,7 +43,7 @@
         "stage": "0|1"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory",
+        "model": "tfg:flora/plant/morning_glory",
         "x": 180
       }
     }, {
@@ -52,7 +52,7 @@
         "stage": "0|1"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory",
+        "model": "tfg:flora/plant/morning_glory",
         "x": 270,
         "y": 270
       }
@@ -63,7 +63,7 @@
         "dayperiod": "1"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_1"
+        "model": "tfg:flora/plant/morning_glory_1"
       }
     }, {
       "when": {
@@ -72,7 +72,7 @@
         "dayperiod": "1"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_1",
+        "model": "tfg:flora/plant/morning_glory_1",
         "x": 270,
         "y": 90
       }
@@ -83,7 +83,7 @@
         "dayperiod": "1"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_1",
+        "model": "tfg:flora/plant/morning_glory_1",
         "x": 270
       }
     }, {
@@ -93,7 +93,7 @@
         "dayperiod": "1"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_1",
+        "model": "tfg:flora/plant/morning_glory_1",
         "x": 270,
         "y": 180
       }
@@ -104,7 +104,7 @@
         "dayperiod": "1"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_1",
+        "model": "tfg:flora/plant/morning_glory_1",
         "x": 180
       }
     }, {
@@ -114,7 +114,7 @@
         "dayperiod": "1"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_1",
+        "model": "tfg:flora/plant/morning_glory_1",
         "x": 270,
         "y": 270
       }
@@ -125,7 +125,7 @@
         "dayperiod": "2|3|0"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_0"
+        "model": "tfg:flora/plant/morning_glory_0"
       }
     }, {
       "when": {
@@ -134,7 +134,7 @@
         "dayperiod": "2|3|0"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_0",
+        "model": "tfg:flora/plant/morning_glory_0",
         "x": 270,
         "y": 90
       }
@@ -145,7 +145,7 @@
         "dayperiod": "2|3|0"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_0",
+        "model": "tfg:flora/plant/morning_glory_0",
         "x": 270
       }
     }, {
@@ -155,7 +155,7 @@
         "dayperiod": "2|3|0"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_0",
+        "model": "tfg:flora/plant/morning_glory_0",
         "x": 270,
         "y": 180
       }
@@ -166,7 +166,7 @@
         "dayperiod": "2|3|0"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_0",
+        "model": "tfg:flora/plant/morning_glory_0",
         "x": 180
       }
     }, {
@@ -176,7 +176,7 @@
         "dayperiod": "2|3|0"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_0",
+        "model": "tfg:flora/plant/morning_glory_0",
         "x": 270,
         "y": 270
       }
@@ -186,7 +186,7 @@
         "stage": "2"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_2"
+        "model": "tfg:flora/plant/morning_glory_2"
       }
     }, {
       "when": {
@@ -194,7 +194,7 @@
         "stage": "2"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_2",
+        "model": "tfg:flora/plant/morning_glory_2",
         "x": 270,
         "y": 90
       }
@@ -204,7 +204,7 @@
         "stage": "2"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_2",
+        "model": "tfg:flora/plant/morning_glory_2",
         "x": 270
       }
     }, {
@@ -213,7 +213,7 @@
         "stage": "2"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_2",
+        "model": "tfg:flora/plant/morning_glory_2",
         "x": 270,
         "y": 180
       }
@@ -223,7 +223,7 @@
         "stage": "2"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_2",
+        "model": "tfg:flora/plant/morning_glory_2",
         "x": 180
       }
     }, {
@@ -232,7 +232,7 @@
         "stage": "2"
       },
       "apply": {
-        "model": "tfc:plants/morning_glory_2",
+        "model": "tfg:flora/plant/morning_glory_2",
         "x": 270,
         "y": 270
       }

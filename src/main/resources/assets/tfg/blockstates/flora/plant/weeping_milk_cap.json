@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfc:plants/weeping_milk_cap"
+          "model": "tfg:flora/plant/weeping_milk_cap"
         }
       ]
     }

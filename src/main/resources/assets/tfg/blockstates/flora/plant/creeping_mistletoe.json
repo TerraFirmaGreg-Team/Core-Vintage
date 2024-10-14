@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_standing_0"
+          "model": "tfg:flora/plant/creeping_mistletoe_standing_0"
         }
       ]
     }, {
@@ -18,10 +18,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_standing_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_standing_0",
           "weight": 1
         }, {
-          "model": "tfc:plants/creeping_mistletoe_standing_1",
+          "model": "tfg:flora/plant/creeping_mistletoe_standing_1",
           "weight": 5
         }
       ]
@@ -33,10 +33,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_standing_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_standing_0",
           "weight": 1
         }, {
-          "model": "tfc:plants/creeping_mistletoe_standing_1",
+          "model": "tfg:flora/plant/creeping_mistletoe_standing_1",
           "weight": 5
         }
       ]
@@ -47,7 +47,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_standing_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_standing_0",
           "x": 180
         }
       ]
@@ -59,11 +59,11 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_standing_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_standing_0",
           "x": 180,
           "weight": 1
         }, {
-          "model": "tfc:plants/creeping_mistletoe_standing_1",
+          "model": "tfg:flora/plant/creeping_mistletoe_standing_1",
           "x": 180,
           "weight": 5
         }
@@ -76,11 +76,11 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_standing_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_standing_0",
           "x": 180,
           "weight": 1
         }, {
-          "model": "tfc:plants/creeping_mistletoe_standing_1",
+          "model": "tfg:flora/plant/creeping_mistletoe_standing_1",
           "x": 180,
           "weight": 5
         }
@@ -92,7 +92,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_0"
+          "model": "tfg:flora/plant/creeping_mistletoe_0"
         }
       ]
     }, {
@@ -103,10 +103,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_0",
           "weight": 1
         }, {
-          "model": "tfc:plants/creeping_mistletoe_1",
+          "model": "tfg:flora/plant/creeping_mistletoe_1",
           "weight": 5
         }
       ]
@@ -118,10 +118,10 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_0",
           "weight": 1
         }, {
-          "model": "tfc:plants/creeping_mistletoe_1",
+          "model": "tfg:flora/plant/creeping_mistletoe_1",
           "weight": 5
         }
       ]
@@ -132,7 +132,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_0",
           "y": 90
         }
       ]
@@ -144,11 +144,11 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_0",
           "y": 90,
           "weight": 1
         }, {
-          "model": "tfc:plants/creeping_mistletoe_1",
+          "model": "tfg:flora/plant/creeping_mistletoe_1",
           "y": 90,
           "weight": 5
         }
@@ -161,11 +161,11 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_0",
           "y": 90,
           "weight": 1
         }, {
-          "model": "tfc:plants/creeping_mistletoe_1",
+          "model": "tfg:flora/plant/creeping_mistletoe_1",
           "y": 90,
           "weight": 5
         }
@@ -177,7 +177,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_0",
           "y": 180
         }
       ]
@@ -189,11 +189,11 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_0",
           "y": 180,
           "weight": 1
         }, {
-          "model": "tfc:plants/creeping_mistletoe_1",
+          "model": "tfg:flora/plant/creeping_mistletoe_1",
           "y": 180,
           "weight": 5
         }
@@ -206,11 +206,11 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_0",
           "y": 180,
           "weight": 1
         }, {
-          "model": "tfc:plants/creeping_mistletoe_1",
+          "model": "tfg:flora/plant/creeping_mistletoe_1",
           "y": 180,
           "weight": 5
         }
@@ -222,7 +222,7 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_0",
           "y": 270
         }
       ]
@@ -234,11 +234,11 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_0",
           "y": 270,
           "weight": 1
         }, {
-          "model": "tfc:plants/creeping_mistletoe_1",
+          "model": "tfg:flora/plant/creeping_mistletoe_1",
           "y": 270,
           "weight": 5
         }
@@ -251,11 +251,11 @@
       },
       "apply": [
         {
-          "model": "tfc:plants/creeping_mistletoe_0",
+          "model": "tfg:flora/plant/creeping_mistletoe_0",
           "y": 270,
           "weight": 1
         }, {
-          "model": "tfc:plants/creeping_mistletoe_1",
+          "model": "tfg:flora/plant/creeping_mistletoe_1",
           "y": 270,
           "weight": 5
         }

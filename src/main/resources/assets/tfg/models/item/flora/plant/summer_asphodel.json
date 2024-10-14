@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "tfg:items/flora/plant/summer_asphodel/summer_asphodel_item"
+    "layer0": "tfg:items/flora/plant/summer_asphodel"
   }
 }

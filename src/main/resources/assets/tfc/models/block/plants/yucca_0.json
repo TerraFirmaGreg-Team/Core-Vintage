@@ -1,7 +1,7 @@
 {
   "parent": "tfc:block/cross",
   "textures": {
-    "cross": "tfc:blocks/plants/yucca/yucca_0",
-    "particle": "tfc:blocks/plants/yucca/yucca_0"
+    "cross": "tfg:blocks/flora/plant/yucca/yucca_0",
+    "particle": "tfg:blocks/flora/plant/yucca/yucca_0"
   }
 }

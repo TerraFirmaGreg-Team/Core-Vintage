@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/devils_tongue_single_0"
+          "model": "tfg:flora/plant/devils_tongue/single"
         }
       ]
     }, {
@@ -17,7 +17,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/devils_tongue_lower_0"
+          "model": "tfg:flora/plant/devils_tongue/lower"
         }
       ]
     }, {
@@ -27,7 +27,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/devils_tongue_upper_0"
+          "model": "tfg:flora/plant/devils_tongue/upper"
         }
       ]
     }

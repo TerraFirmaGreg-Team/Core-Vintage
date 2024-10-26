@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/bur_reed_0"
+          "model": "tfg:flora/plant/bur_reed/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/bur_reed_1"
+          "model": "tfg:flora/plant/bur_reed/1"
         }
       ]
     }

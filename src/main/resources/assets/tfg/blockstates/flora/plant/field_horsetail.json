@@ -6,15 +6,15 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/field_horsetail_0"
+          "model": "tfg:flora/plant/field_horsetail/0"
         }, {
-          "model": "tfg:flora/plant/field_horsetail_0",
+          "model": "tfg:flora/plant/field_horsetail/0",
           "y": 90
         }, {
-          "model": "tfg:flora/plant/field_horsetail_0",
+          "model": "tfg:flora/plant/field_horsetail/0",
           "y": 180
         }, {
-          "model": "tfg:flora/plant/field_horsetail_0",
+          "model": "tfg:flora/plant/field_horsetail/0",
           "y": 270
         }
       ]
@@ -24,15 +24,15 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/field_horsetail_1"
+          "model": "tfg:flora/plant/field_horsetail/1"
         }, {
-          "model": "tfg:flora/plant/field_horsetail_1",
+          "model": "tfg:flora/plant/field_horsetail/1",
           "y": 90
         }, {
-          "model": "tfg:flora/plant/field_horsetail_1",
+          "model": "tfg:flora/plant/field_horsetail/1",
           "y": 180
         }, {
-          "model": "tfg:flora/plant/field_horsetail_1",
+          "model": "tfg:flora/plant/field_horsetail/1",
           "y": 270
         }
       ]

@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/barrel_cactus_small"
+          "model": "tfg:flora/plant/barrel_cactus/small"
         }
       ]
     }, {
@@ -16,7 +16,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/barrel_cactus_lower"
+          "model": "tfg:flora/plant/barrel_cactus/lower"
         }
       ]
     }, {
@@ -25,7 +25,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/barrel_cactus_middle"
+          "model": "tfg:flora/plant/barrel_cactus/middle"
         }
       ]
     }, {
@@ -35,7 +35,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/barrel_cactus_single"
+          "model": "tfg:flora/plant/barrel_cactus/single"
         }
       ]
     }, {
@@ -44,7 +44,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/barrel_cactus_upper"
+          "model": "tfg:flora/plant/barrel_cactus/upper"
         }
       ]
     }, {
@@ -54,7 +54,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/barrel_cactus_flower_0"
+          "model": "tfg:flora/plant/barrel_cactus/flower/0"
         }
       ]
     }, {
@@ -65,7 +65,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/barrel_cactus_flower_1"
+          "model": "tfg:flora/plant/barrel_cactus/flower/1"
         }
       ]
     }, {
@@ -76,7 +76,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/barrel_cactus_flower_1"
+          "model": "tfg:flora/plant/barrel_cactus/flower/1"
         }
       ]
     }, {
@@ -87,7 +87,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/barrel_cactus_flower_2"
+          "model": "tfg:flora/plant/barrel_cactus/flower/2"
         }
       ]
     }, {
@@ -98,7 +98,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/barrel_cactus_flower_3"
+          "model": "tfg:flora/plant/barrel_cactus/flower/3"
         }
       ]
     }, {
@@ -108,7 +108,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/barrel_cactus_flower_3"
+          "model": "tfg:flora/plant/barrel_cactus/flower/3"
         }
       ]
     }

@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/calendula_0"
+          "model": "tfg:flora/plant/calendula/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/calendula_1"
+          "model": "tfg:flora/plant/calendula/1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/calendula_2"
+          "model": "tfg:flora/plant/calendula/2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/calendula_3"
+          "model": "tfg:flora/plant/calendula/3"
         }
       ]
     }, {
@@ -42,9 +42,9 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/calendula_2"
+          "model": "tfg:flora/plant/calendula/2"
         }, {
-          "model": "tfg:flora/plant/calendula_3"
+          "model": "tfg:flora/plant/calendula/3"
         }
       ]
     }, {
@@ -53,7 +53,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/calendula_4"
+          "model": "tfg:flora/plant/calendula/4"
         }
       ]
     }, {
@@ -62,7 +62,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/calendula_5"
+          "model": "tfg:flora/plant/calendula/5"
         }
       ]
     }

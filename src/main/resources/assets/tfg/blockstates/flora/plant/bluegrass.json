@@ -6,7 +6,7 @@
         "age": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/bluegrass_shortest"
+        "model": "tfg:flora/plant/bluegrass/shortest"
       }
     }, {
       "when": {
@@ -14,7 +14,7 @@
         "age": "1"
       },
       "apply": {
-        "model": "tfg:flora/plant/bluegrass_shorter"
+        "model": "tfg:flora/plant/bluegrass/shorter"
       }
     }, {
       "when": {
@@ -22,7 +22,7 @@
         "age": "2"
       },
       "apply": {
-        "model": "tfg:flora/plant/bluegrass_short"
+        "model": "tfg:flora/plant/bluegrass/short"
       }
     }, {
       "when": {
@@ -30,7 +30,7 @@
         "age": "3"
       },
       "apply": {
-        "model": "tfg:flora/plant/bluegrass"
+        "model": "tfg:flora/plant/bluegrass/base"
       }
     }, {
       "when": {
@@ -38,7 +38,7 @@
         "age": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/bluegrass_shortest_tuft"
+        "model": "tfg:flora/plant/bluegrass/shortest_tuft"
       }
     }, {
       "when": {
@@ -46,7 +46,7 @@
         "age": "1"
       },
       "apply": {
-        "model": "tfg:flora/plant/bluegrass_shorter_tuft"
+        "model": "tfg:flora/plant/bluegrass/shorter_tuft"
       }
     }, {
       "when": {
@@ -54,7 +54,7 @@
         "age": "2"
       },
       "apply": {
-        "model": "tfg:flora/plant/bluegrass_short_tuft"
+        "model": "tfg:flora/plant/bluegrass/short_tuft"
       }
     }, {
       "when": {
@@ -62,7 +62,7 @@
         "age": "3"
       },
       "apply": {
-        "model": "tfg:flora/plant/bluegrass_tuft"
+        "model": "tfg:flora/plant/bluegrass/tuft"
       }
     }
   ]

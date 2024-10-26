@@ -4,26 +4,40 @@
       "when": {
         "age": "0"
       },
-      "apply": {
-        "model": "tfg:flora/plant/halfa_grass_shortest_1"
-      }
+      "apply": [
+        {
+          "model": "tfg:flora/plant/halfa_grass/shortest/0",
+          "weight": 1
+        },
+        {
+          "model": "tfg:flora/plant/halfa_grass/shortest/1",
+          "weight": 3
+        }
+      ]
     }, {
       "when": {
         "age": "1"
       },
-      "apply": {
-        "model": "tfg:flora/plant/halfa_grass_shorter_1"
-      }
+      "apply": [
+        {
+          "model": "tfg:flora/plant/halfa_grass/shorter/0",
+          "weight": 1
+        },
+        {
+          "model": "tfg:flora/plant/halfa_grass/shorter/1",
+          "weight": 3
+        }
+      ]
     }, {
       "when": {
         "age": "2"
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/halfa_grass_short_0",
+          "model": "tfg:flora/plant/halfa_grass/short/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/halfa_grass_short_1",
+          "model": "tfg:flora/plant/halfa_grass/short/1",
           "weight": 3
         }
       ]
@@ -33,10 +47,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/halfa_grass_0",
+          "model": "tfg:flora/plant/halfa_grass/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/halfa_grass_1",
+          "model": "tfg:flora/plant/halfa_grass/1",
           "weight": 3
         }
       ]

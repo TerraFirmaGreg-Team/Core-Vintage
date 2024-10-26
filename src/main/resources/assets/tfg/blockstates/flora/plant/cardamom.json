@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/cardamom_0"
+          "model": "tfg:flora/plant/cardamom/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/cardamom_1"
+          "model": "tfg:flora/plant/cardamom/1"
         }
       ]
     }

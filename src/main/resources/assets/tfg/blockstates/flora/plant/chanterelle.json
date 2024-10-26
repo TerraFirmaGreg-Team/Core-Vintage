@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfg:flora/plant/chanterelle"
+          "model": "tfg:flora/plant/chanterelle/0"
         }
       ]
     }

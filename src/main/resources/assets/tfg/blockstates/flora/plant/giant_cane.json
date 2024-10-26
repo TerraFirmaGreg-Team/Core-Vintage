@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/giant_cane_single"
+          "model": "tfg:flora/plant/giant_cane/single"
         }
       ]
     }, {
@@ -16,7 +16,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/giant_cane_lower_0"
+          "model": "tfg:flora/plant/giant_cane/lower"
         }
       ]
     }, {
@@ -26,7 +26,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/giant_cane_upper_0"
+          "model": "tfg:flora/plant/giant_cane/upper"
         }
       ]
     }

@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/desert_flame_0"
+          "model": "tfg:flora/plant/desert_flame/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/desert_flame_1"
+          "model": "tfg:flora/plant/desert_flame/1"
         }
       ]
     }

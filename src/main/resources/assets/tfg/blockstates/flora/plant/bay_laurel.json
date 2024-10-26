@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/bay_laurel_0"
+          "model": "tfg:flora/plant/bay_laurel/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/bay_laurel_1"
+          "model": "tfg:flora/plant/bay_laurel/1"
         }
       ]
     }

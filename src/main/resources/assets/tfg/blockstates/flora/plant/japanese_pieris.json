@@ -6,10 +6,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/japanese_pieris_single_0",
+          "model": "tfg:flora/plant/japanese_pieris/single/0",
           "weight": 3
         }, {
-          "model": "tfg:flora/plant/japanese_pieris_0",
+          "model": "tfg:flora/plant/japanese_pieris/0",
           "weight": 1
         }
       ]
@@ -19,16 +19,16 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/japanese_pieris_single_0",
+          "model": "tfg:flora/plant/japanese_pieris/single/0",
           "weight": 3
         }, {
-          "model": "tfg:flora/plant/japanese_pieris_0",
+          "model": "tfg:flora/plant/japanese_pieris/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/japanese_pieris_single_1",
+          "model": "tfg:flora/plant/japanese_pieris/single/1",
           "weight": 3
         }, {
-          "model": "tfg:flora/plant/japanese_pieris_1",
+          "model": "tfg:flora/plant/japanese_pieris/1",
           "weight": 1
         }
       ]
@@ -38,10 +38,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/japanese_pieris_single_1",
+          "model": "tfg:flora/plant/japanese_pieris/single/1",
           "weight": 3
         }, {
-          "model": "tfg:flora/plant/japanese_pieris_1",
+          "model": "tfg:flora/plant/japanese_pieris/1",
           "weight": 1
         }
       ]

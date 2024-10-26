@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfg:flora/plant/giant_club"
+          "model": "tfg:flora/plant/giant_club/0"
         }
       ]
     }

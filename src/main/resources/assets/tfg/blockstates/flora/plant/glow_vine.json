@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/glow_vine_cross_1"
+          "model": "tfg:flora/plant/glow_vine/cross/1"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/glow_vine_cross_0"
+          "model": "tfg:flora/plant/glow_vine/cross/0"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/glow_vine_cross_0"
+          "model": "tfg:flora/plant/glow_vine/cross/0"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/glow_vine_cross_1"
+          "model": "tfg:flora/plant/glow_vine/cross/1"
         }
       ]
     }

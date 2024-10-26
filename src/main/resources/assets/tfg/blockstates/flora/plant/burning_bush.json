@@ -6,10 +6,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/burning_bush_single_0",
+          "model": "tfg:flora/plant/burning_bush/single/0",
           "weight": 4
         }, {
-          "model": "tfg:flora/plant/burning_bush_0",
+          "model": "tfg:flora/plant/burning_bush/0",
           "weight": 1
         }
       ]
@@ -19,16 +19,16 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/burning_bush_single_1",
+          "model": "tfg:flora/plant/burning_bush/single/1",
           "weight": 8
         }, {
-          "model": "tfg:flora/plant/burning_bush_single_0",
+          "model": "tfg:flora/plant/burning_bush/single/0",
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/burning_bush_1",
+          "model": "tfg:flora/plant/burning_bush/1",
           "weight": 4
         }, {
-          "model": "tfg:flora/plant/burning_bush_0",
+          "model": "tfg:flora/plant/burning_bush/0",
           "weight": 1
         }
       ]
@@ -38,10 +38,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/burning_bush_single_1",
+          "model": "tfg:flora/plant/burning_bush/single/1",
           "weight": 4
         }, {
-          "model": "tfg:flora/plant/burning_bush_1",
+          "model": "tfg:flora/plant/burning_bush/1",
           "weight": 1
         }
       ]

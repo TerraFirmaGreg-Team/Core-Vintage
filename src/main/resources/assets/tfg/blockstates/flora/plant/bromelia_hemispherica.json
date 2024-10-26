@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/bromelia_hemispherica_0",
+          "model": "tfg:flora/plant/bromelia_hemispherica/0",
           "weight": 1
         }
       ]

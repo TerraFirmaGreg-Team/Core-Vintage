@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/bunch_grass_single_0"
+          "model": "tfg:flora/plant/bunch_grass_reed/single/0"
         }
       ]
     }, {
@@ -17,7 +17,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/bunch_grass_lower_0"
+          "model": "tfg:flora/plant/bunch_grass_reed/lower/0"
         }
       ]
     }, {
@@ -27,7 +27,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/bunch_grass_upper_0"
+          "model": "tfg:flora/plant/bunch_grass_reed/upper/0"
         }
       ]
     }, {
@@ -37,7 +37,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/bunch_grass_lower_1"
+          "model": "tfg:flora/plant/bunch_grass_reed/lower/1"
         }
       ]
     }, {
@@ -47,7 +47,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/bunch_grass_upper_1"
+          "model": "tfg:flora/plant/bunch_grass_reed/upper/1"
         }
       ]
     }

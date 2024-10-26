@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_standing_0"
+          "model": "tfg:flora/plant/guzmania/standing/0"
         }
       ]
     }, {
@@ -17,7 +17,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_standing_1"
+          "model": "tfg:flora/plant/guzmania/standing/1"
         }
       ]
     }, {
@@ -27,9 +27,9 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_standing_1"
+          "model": "tfg:flora/plant/guzmania/standing/1"
         }, {
-          "model": "tfg:flora/plant/guzmania_standing_2"
+          "model": "tfg:flora/plant/guzmania/standing/2"
         }
       ]
     }, {
@@ -39,7 +39,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_standing_2"
+          "model": "tfg:flora/plant/guzmania/standing/2"
         }
       ]
     }, {
@@ -49,7 +49,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_standing_0",
+          "model": "tfg:flora/plant/guzmania/standing/0",
           "x": 180
         }
       ]
@@ -60,7 +60,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_standing_1",
+          "model": "tfg:flora/plant/guzmania/standing/1",
           "x": 180
         }
       ]
@@ -71,10 +71,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_standing_1",
+          "model": "tfg:flora/plant/guzmania/standing/1",
           "x": 180
         }, {
-          "model": "tfg:flora/plant/guzmania_standing_2",
+          "model": "tfg:flora/plant/guzmania/standing/2",
           "x": 180
         }
       ]
@@ -85,7 +85,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_standing_2",
+          "model": "tfg:flora/plant/guzmania/standing/2",
           "x": 180
         }
       ]
@@ -96,7 +96,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_0"
+          "model": "tfg:flora/plant/guzmania/0"
         }
       ]
     }, {
@@ -106,7 +106,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_1"
+          "model": "tfg:flora/plant/guzmania/1"
         }
       ]
     }, {
@@ -116,9 +116,9 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_1"
+          "model": "tfg:flora/plant/guzmania/1"
         }, {
-          "model": "tfg:flora/plant/guzmania_2"
+          "model": "tfg:flora/plant/guzmania/2"
         }
       ]
     }, {
@@ -128,7 +128,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_2"
+          "model": "tfg:flora/plant/guzmania/2"
         }
       ]
     }, {
@@ -138,7 +138,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_0",
+          "model": "tfg:flora/plant/guzmania/0",
           "y": 90
         }
       ]
@@ -149,7 +149,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_1",
+          "model": "tfg:flora/plant/guzmania/1",
           "y": 90
         }
       ]
@@ -160,10 +160,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_1",
+          "model": "tfg:flora/plant/guzmania/1",
           "y": 90
         }, {
-          "model": "tfg:flora/plant/guzmania_2",
+          "model": "tfg:flora/plant/guzmania/2",
           "y": 90
         }
       ]
@@ -174,7 +174,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_2",
+          "model": "tfg:flora/plant/guzmania/2",
           "y": 90
         }
       ]
@@ -185,7 +185,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_0",
+          "model": "tfg:flora/plant/guzmania/0",
           "y": 180
         }
       ]
@@ -196,7 +196,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_1",
+          "model": "tfg:flora/plant/guzmania/1",
           "y": 180
         }
       ]
@@ -207,10 +207,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_1",
+          "model": "tfg:flora/plant/guzmania/1",
           "y": 180
         }, {
-          "model": "tfg:flora/plant/guzmania_2",
+          "model": "tfg:flora/plant/guzmania/2",
           "y": 180
         }
       ]
@@ -221,7 +221,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_2",
+          "model": "tfg:flora/plant/guzmania/2",
           "y": 180
         }
       ]
@@ -232,7 +232,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_0",
+          "model": "tfg:flora/plant/guzmania/0",
           "y": 270
         }
       ]
@@ -243,7 +243,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_1",
+          "model": "tfg:flora/plant/guzmania/1",
           "y": 270
         }
       ]
@@ -254,10 +254,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_1",
+          "model": "tfg:flora/plant/guzmania/1",
           "y": 270
         }, {
-          "model": "tfg:flora/plant/guzmania_2",
+          "model": "tfg:flora/plant/guzmania/2",
           "y": 270
         }
       ]
@@ -268,7 +268,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/guzmania_2",
+          "model": "tfg:flora/plant/guzmania/2",
           "y": 270
         }
       ]

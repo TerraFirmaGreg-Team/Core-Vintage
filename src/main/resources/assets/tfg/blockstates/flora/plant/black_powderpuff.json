@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfg:flora/plant/black_powderpuff"
+          "model": "tfg:flora/plant/black_powderpuff/0"
         }
       ]
     }

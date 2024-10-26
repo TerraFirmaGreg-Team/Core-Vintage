@@ -7,10 +7,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/dead_bush",
+          "model": "tfg:flora/plant/dead_bush/base",
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/dead_bush_large",
+          "model": "tfg:flora/plant/dead_bush/large",
           "weight": 1
         }
       ]

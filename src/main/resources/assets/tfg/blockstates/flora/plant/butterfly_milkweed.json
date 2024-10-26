@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/butterfly_milkweed_0"
+          "model": "tfg:flora/plant/butterfly_milkweed/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/butterfly_milkweed_1"
+          "model": "tfg:flora/plant/butterfly_milkweed/1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/butterfly_milkweed_2"
+          "model": "tfg:flora/plant/butterfly_milkweed/2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/butterfly_milkweed_3"
+          "model": "tfg:flora/plant/butterfly_milkweed/3"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/butterfly_milkweed_4"
+          "model": "tfg:flora/plant/butterfly_milkweed/4"
         }
       ]
     }, {
@@ -51,7 +51,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/butterfly_milkweed_5"
+          "model": "tfg:flora/plant/butterfly_milkweed/5"
         }
       ]
     }, {
@@ -60,7 +60,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/butterfly_milkweed_6"
+          "model": "tfg:flora/plant/butterfly_milkweed/6"
         }
       ]
     }

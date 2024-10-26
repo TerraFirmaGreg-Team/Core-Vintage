@@ -6,17 +6,17 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/glowshroom_0"
+          "model": "tfg:flora/plant/glowshroom/0"
         }, {
-          "model": "tfg:flora/plant/glowshroom_1"
+          "model": "tfg:flora/plant/glowshroom/1"
         }, {
-          "model": "tfg:flora/plant/glowshroom_2"
+          "model": "tfg:flora/plant/glowshroom/2"
         }, {
-          "model": "tfg:flora/plant/glowshroom_3"
+          "model": "tfg:flora/plant/glowshroom/3"
         }, {
-          "model": "tfg:flora/plant/glowshroom_4"
+          "model": "tfg:flora/plant/glowshroom/4"
         }, {
-          "model": "tfg:flora/plant/glowshroom_5"
+          "model": "tfg:flora/plant/glowshroom/5"
         }
       ]
     }, {
@@ -25,22 +25,22 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/glowshroom_0",
+          "model": "tfg:flora/plant/glowshroom/0",
           "x": 180
         }, {
-          "model": "tfg:flora/plant/glowshroom_1",
+          "model": "tfg:flora/plant/glowshroom/1",
           "x": 180
         }, {
-          "model": "tfg:flora/plant/glowshroom_2",
+          "model": "tfg:flora/plant/glowshroom/2",
           "x": 180
         }, {
-          "model": "tfg:flora/plant/glowshroom_3",
+          "model": "tfg:flora/plant/glowshroom/3",
           "x": 180
         }, {
-          "model": "tfg:flora/plant/glowshroom_4",
+          "model": "tfg:flora/plant/glowshroom/4",
           "x": 180
         }, {
-          "model": "tfg:flora/plant/glowshroom_5",
+          "model": "tfg:flora/plant/glowshroom/5",
           "x": 180
         }
       ]
@@ -50,27 +50,27 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/glowshroom_0",
+          "model": "tfg:flora/plant/glowshroom/0",
           "x": 270,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/glowshroom_1",
+          "model": "tfg:flora/plant/glowshroom/1",
           "x": 270,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/glowshroom_2",
+          "model": "tfg:flora/plant/glowshroom/2",
           "x": 270,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/glowshroom_3",
+          "model": "tfg:flora/plant/glowshroom/3",
           "x": 270,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/glowshroom_4",
+          "model": "tfg:flora/plant/glowshroom/4",
           "x": 270,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/glowshroom_5",
+          "model": "tfg:flora/plant/glowshroom/5",
           "x": 270,
           "y": 90
         }
@@ -81,27 +81,27 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/glowshroom_0",
+          "model": "tfg:flora/plant/glowshroom/0",
           "x": 270,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/glowshroom_1",
+          "model": "tfg:flora/plant/glowshroom/1",
           "x": 270,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/glowshroom_2",
+          "model": "tfg:flora/plant/glowshroom/2",
           "x": 270,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/glowshroom_3",
+          "model": "tfg:flora/plant/glowshroom/3",
           "x": 270,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/glowshroom_4",
+          "model": "tfg:flora/plant/glowshroom/4",
           "x": 270,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/glowshroom_5",
+          "model": "tfg:flora/plant/glowshroom/5",
           "x": 270,
           "y": 180
         }
@@ -112,27 +112,27 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/glowshroom_0",
+          "model": "tfg:flora/plant/glowshroom/0",
           "x": 270,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/glowshroom_1",
+          "model": "tfg:flora/plant/glowshroom/1",
           "x": 270,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/glowshroom_2",
+          "model": "tfg:flora/plant/glowshroom/2",
           "x": 270,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/glowshroom_3",
+          "model": "tfg:flora/plant/glowshroom/3",
           "x": 270,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/glowshroom_4",
+          "model": "tfg:flora/plant/glowshroom/4",
           "x": 270,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/glowshroom_5",
+          "model": "tfg:flora/plant/glowshroom/5",
           "x": 270,
           "y": 270
         }
@@ -143,22 +143,22 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/glowshroom_0",
+          "model": "tfg:flora/plant/glowshroom/0",
           "x": 270
         }, {
-          "model": "tfg:flora/plant/glowshroom_1",
+          "model": "tfg:flora/plant/glowshroom/1",
           "x": 270
         }, {
-          "model": "tfg:flora/plant/glowshroom_2",
+          "model": "tfg:flora/plant/glowshroom/2",
           "x": 270
         }, {
-          "model": "tfg:flora/plant/glowshroom_3",
+          "model": "tfg:flora/plant/glowshroom/3",
           "x": 270
         }, {
-          "model": "tfg:flora/plant/glowshroom_4",
+          "model": "tfg:flora/plant/glowshroom/4",
           "x": 270
         }, {
-          "model": "tfg:flora/plant/glowshroom_5",
+          "model": "tfg:flora/plant/glowshroom/5",
           "x": 270
         }
       ]

@@ -5,7 +5,7 @@
         "stage": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/shrub_dead"
+        "model": "tfg:flora/plant/chaparral_shrub/dead"
       }
     }, {
       "when": {
@@ -13,115 +13,115 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/shrub_dead",
+          "model": "tfg:flora/plant/chaparral_shrub/dead",
           "weight": 10
         }, {
-          "model": "tfg:flora/plant/shrub_a_0",
+          "model": "tfg:flora/plant/chaparral_shrub/a/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_a_1",
+          "model": "tfg:flora/plant/chaparral_shrub/a/1",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_a_2",
+          "model": "tfg:flora/plant/chaparral_shrub/a/2",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_a_3",
+          "model": "tfg:flora/plant/chaparral_shrub/a/3",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_a_4",
+          "model": "tfg:flora/plant/chaparral_shrub/a/4",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_a_5",
+          "model": "tfg:flora/plant/chaparral_shrub/a/5",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_a_6",
+          "model": "tfg:flora/plant/chaparral_shrub/a/6",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_a_7",
+          "model": "tfg:flora/plant/chaparral_shrub/a/7",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_a_8",
+          "model": "tfg:flora/plant/chaparral_shrub/a/8",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_a_9",
+          "model": "tfg:flora/plant/chaparral_shrub/a/9",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_a_10",
+          "model": "tfg:flora/plant/chaparral_shrub/a/10",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_a_11",
+          "model": "tfg:flora/plant/chaparral_shrub/a/11",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_b_0",
+          "model": "tfg:flora/plant/chaparral_shrub/b/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_b_1",
+          "model": "tfg:flora/plant/chaparral_shrub/b/1",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_b_2",
+          "model": "tfg:flora/plant/chaparral_shrub/b/2",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_b_3",
+          "model": "tfg:flora/plant/chaparral_shrub/b/3",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_b_4",
+          "model": "tfg:flora/plant/chaparral_shrub/b/4",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_b_5",
+          "model": "tfg:flora/plant/chaparral_shrub/b/5",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_b_6",
+          "model": "tfg:flora/plant/chaparral_shrub/b/6",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_b_7",
+          "model": "tfg:flora/plant/chaparral_shrub/b/7",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_b_8",
+          "model": "tfg:flora/plant/chaparral_shrub/b/8",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_b_9",
+          "model": "tfg:flora/plant/chaparral_shrub/b/9",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_b_10",
+          "model": "tfg:flora/plant/chaparral_shrub/b/10",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_b_11",
+          "model": "tfg:flora/plant/chaparral_shrub/b/11",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_c_0",
+          "model": "tfg:flora/plant/chaparral_shrub/c/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_c_1",
+          "model": "tfg:flora/plant/chaparral_shrub/c/1",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_c_2",
+          "model": "tfg:flora/plant/chaparral_shrub/c/2",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_c_3",
+          "model": "tfg:flora/plant/chaparral_shrub/c/3",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_c_4",
+          "model": "tfg:flora/plant/chaparral_shrub/c/4",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_c_5",
+          "model": "tfg:flora/plant/chaparral_shrub/c/5",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_c_6",
+          "model": "tfg:flora/plant/chaparral_shrub/c/6",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_c_7",
+          "model": "tfg:flora/plant/chaparral_shrub/c/7",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_c_8",
+          "model": "tfg:flora/plant/chaparral_shrub/c/8",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_c_9",
+          "model": "tfg:flora/plant/chaparral_shrub/c/9",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_c_10",
+          "model": "tfg:flora/plant/chaparral_shrub/c/10",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/shrub_c_11",
+          "model": "tfg:flora/plant/chaparral_shrub/c/11",
           "weight": 1
         }
       ]

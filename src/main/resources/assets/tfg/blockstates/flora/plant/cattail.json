@@ -6,10 +6,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/cattail_0",
+          "model": "tfg:flora/plant/cattail/0",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/cattail_1",
+          "model": "tfg:flora/plant/cattail/1",
           "weight": 1
         }
       ]
@@ -19,10 +19,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/cattail_1",
+          "model": "tfg:flora/plant/cattail/1",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/cattail_2",
+          "model": "tfg:flora/plant/cattail/2",
           "weight": 1
         }
       ]
@@ -32,10 +32,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/cattail_2",
+          "model": "tfg:flora/plant/cattail/2",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/cattail_3",
+          "model": "tfg:flora/plant/cattail/3",
           "weight": 1
         }
       ]
@@ -45,10 +45,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/cattail_3",
+          "model": "tfg:flora/plant/cattail/3",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/cattail_0",
+          "model": "tfg:flora/plant/cattail/0",
           "weight": 1
         }
       ]
@@ -58,7 +58,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/cattail_0"
+          "model": "tfg:flora/plant/cattail/0"
         }
       ]
     }

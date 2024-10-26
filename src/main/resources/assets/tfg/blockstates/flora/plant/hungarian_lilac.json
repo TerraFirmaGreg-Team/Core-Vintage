@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/hungarian_lilac_single_0"
+          "model": "tfg:flora/plant/hungarian_lilac/single/0"
         }
       ]
     }, {
@@ -17,7 +17,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/hungarian_lilac_single_1"
+          "model": "tfg:flora/plant/hungarian_lilac/single/1"
         }
       ]
     }, {
@@ -27,7 +27,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/hungarian_lilac_lower_0"
+          "model": "tfg:flora/plant/hungarian_lilac/lower/0"
         }
       ]
     }, {
@@ -37,7 +37,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/hungarian_lilac_lower_1"
+          "model": "tfg:flora/plant/hungarian_lilac/lower/1"
         }
       ]
     }, {
@@ -47,7 +47,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/hungarian_lilac_upper_0"
+          "model": "tfg:flora/plant/hungarian_lilac/upper/0"
         }
       ]
     }, {
@@ -57,7 +57,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/hungarian_lilac_upper_1"
+          "model": "tfg:flora/plant/hungarian_lilac/upper/1"
         }
       ]
     }

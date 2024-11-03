@@ -1,0 +1,48 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/arundo"
+        }
+      ]
+    },
+    {
+      "when": {
+        "part": "lower",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/arundo_plant"
+        }
+      ]
+    },
+    {
+      "when": {
+        "part": "middle",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/arundo_plant"
+        }
+      ]
+    },
+    {
+      "when": {
+        "part": "upper",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/arundo"
+        }
+      ]
+    }
+  ]
+}

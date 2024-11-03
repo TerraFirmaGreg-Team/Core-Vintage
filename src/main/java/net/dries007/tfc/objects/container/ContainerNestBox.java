@@ -5,13 +5,13 @@
 
 package net.dries007.tfc.objects.container;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.objects.te.TENestBox;
+
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

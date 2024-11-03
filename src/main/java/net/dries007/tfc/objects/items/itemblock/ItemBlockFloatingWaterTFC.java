@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.items.itemblock;
 
+import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
+
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -21,8 +23,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-
-import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

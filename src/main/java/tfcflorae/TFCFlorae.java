@@ -18,7 +18,6 @@ import tfcflorae.client.GuiHandler;
 import tfcflorae.objects.blocks.entity.EntitiesTFCF;
 import tfcflorae.proxy.CommonProxy;
 import tfcflorae.util.CapabilityHeatHandler;
-import tfcflorae.util.ClassAdder;
 import tfcflorae.util.HelpersTFCF;
 import tfcflorae.util.fuel.FuelsTFCF;
 
@@ -30,7 +29,7 @@ public class TFCFlorae {
   public static final String NAME = "TFC Florae";
   public static final String VERSION = "@VERSION@";
   public static final String SIGNING_KEY = "@FINGERPRINT@";
-  public static final String DEPENDENCIES = "required-after:tfc@[1.7,);"
+  public static final String DEPENDENCIES = "required-after:tfc;"
                                             + "after:firmalife;"
                                             + "after:tfcelementia;"
                                             + "after:tfc_ph_compat;"
@@ -66,7 +65,6 @@ public class TFCFlorae {
 
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
-    ClassAdder.addClasses(event.getModConfigurationDirectory());
     logger = event.getModLog();
     if (!signedBuild) {
       logger.error("INVALID FINGERPRINT DETECTED!");

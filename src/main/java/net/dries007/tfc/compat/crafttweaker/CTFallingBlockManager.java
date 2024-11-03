@@ -110,6 +110,28 @@ public class CTFallingBlockManager {
   @ZenClass("mods.terrafirmacraft.fallingblock.Specification")
   public static class CTSpecification {
 
+    final Specification internalSpec;
+
+    CTSpecification(Specification internalSpec) {
+      this.internalSpec = internalSpec;
+    }
+
+    CTSpecification(boolean canFallHorizontally, boolean canCaveIn, ResourceLocation soundEventId) {
+      this(canFallHorizontally, canCaveIn, () -> SoundEvent.REGISTRY.getObject(soundEventId));
+    }
+
+    CTSpecification(boolean canFallHorizontally, boolean canCaveIn, Supplier<SoundEvent> soundEvent) {
+      this.internalSpec = new Specification(canFallHorizontally, canCaveIn, soundEvent, Specification.DEFAULT_DROPS_PROVIDER);
+    }
+
+    CTSpecification(boolean canFallHorizontally, boolean canCaveIn, ResourceLocation soundEventId, ICTFallDropsProvider dropsProvider) {
+      this(canFallHorizontally, canCaveIn, () -> SoundEvent.REGISTRY.getObject(soundEventId), dropsProvider);
+    }
+
+    CTSpecification(boolean canFallHorizontally, boolean canCaveIn, Supplier<SoundEvent> soundEvent, ICTFallDropsProvider drops) {
+      this.internalSpec = new Specification(canFallHorizontally, canCaveIn, soundEvent, transform(drops));
+    }
+
     @ZenMethod
     public static CTSpecification create(boolean canFallHorizontally, boolean canCaveIn) {
       return new CTSpecification(canFallHorizontally, canCaveIn, () -> TFCSounds.ROCK_SLIDE_SHORT);
@@ -135,28 +157,6 @@ public class CTFallingBlockManager {
         }
         return iterableDrops;
       };
-    }
-
-    final Specification internalSpec;
-
-    CTSpecification(Specification internalSpec) {
-      this.internalSpec = internalSpec;
-    }
-
-    CTSpecification(boolean canFallHorizontally, boolean canCaveIn, ResourceLocation soundEventId) {
-      this(canFallHorizontally, canCaveIn, () -> SoundEvent.REGISTRY.getObject(soundEventId));
-    }
-
-    CTSpecification(boolean canFallHorizontally, boolean canCaveIn, Supplier<SoundEvent> soundEvent) {
-      this.internalSpec = new Specification(canFallHorizontally, canCaveIn, soundEvent, Specification.DEFAULT_DROPS_PROVIDER);
-    }
-
-    CTSpecification(boolean canFallHorizontally, boolean canCaveIn, ResourceLocation soundEventId, ICTFallDropsProvider dropsProvider) {
-      this(canFallHorizontally, canCaveIn, () -> SoundEvent.REGISTRY.getObject(soundEventId), dropsProvider);
-    }
-
-    CTSpecification(boolean canFallHorizontally, boolean canCaveIn, Supplier<SoundEvent> soundEvent, ICTFallDropsProvider drops) {
-      this.internalSpec = new Specification(canFallHorizontally, canCaveIn, soundEvent, transform(drops));
     }
 
     @ZenMethod

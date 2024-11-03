@@ -39,13 +39,7 @@ import java.util.Map;
 public class ItemRockHoe extends ItemHoe implements IItemSize, IRockObject {
 
   private static final Map<RockCategory, ItemRockHoe> MAP = new HashMap<>();
-
-  public static ItemRockHoe get(RockCategory category) {
-    return MAP.get(category);
-  }
-
   public final RockCategory category;
-
   private final float attackDamage;
 
   public ItemRockHoe(RockCategory category) {
@@ -58,6 +52,10 @@ public class ItemRockHoe extends ItemHoe implements IItemSize, IRockObject {
     OreDictionaryHelper.register(this, "hoe", "stone", category);
     attackDamage = category.getToolMaterial().getAttackDamage() * 0.875f;
     OreDictionaryHelper.registerDamageType(this, DamageType.PIERCING);
+  }
+
+  public static ItemRockHoe get(RockCategory category) {
+    return MAP.get(category);
   }
 
   @Override

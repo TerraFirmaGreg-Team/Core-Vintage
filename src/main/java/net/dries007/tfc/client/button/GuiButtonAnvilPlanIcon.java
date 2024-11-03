@@ -5,14 +5,14 @@
 
 package net.dries007.tfc.client.button;
 
+import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 
 import javax.annotation.Nonnull;
 

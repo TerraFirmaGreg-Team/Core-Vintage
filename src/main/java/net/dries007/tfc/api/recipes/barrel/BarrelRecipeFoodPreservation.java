@@ -24,10 +24,6 @@ import java.util.List;
 
 public class BarrelRecipeFoodPreservation extends BarrelRecipe {
 
-  public static BarrelRecipe vinegar(@Nonnull IIngredient<ItemStack> inputStack) {
-    return new BarrelRecipeFoodPreservation(IIngredient.of(FluidsTFC.VINEGAR.get(), 125), new IngredientItemFoodTrait(inputStack, FoodTrait.PICKLED), FoodTrait.VINEGAR, "barrel_recipe_vinegar");
-  }
-
   private final FoodTrait trait;
   private final String tooltipName;
 
@@ -35,6 +31,10 @@ public class BarrelRecipeFoodPreservation extends BarrelRecipe {
     super(inputFluid, inputStack, null, ItemStack.EMPTY, -1);
     this.trait = trait;
     this.tooltipName = tooltipName;
+  }
+
+  public static BarrelRecipe vinegar(@Nonnull IIngredient<ItemStack> inputStack) {
+    return new BarrelRecipeFoodPreservation(IIngredient.of(FluidsTFC.VINEGAR.get(), 125), new IngredientItemFoodTrait(inputStack, FoodTrait.PICKLED), FoodTrait.VINEGAR, "barrel_recipe_vinegar");
   }
 
   @Override

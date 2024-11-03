@@ -38,13 +38,13 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
   private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
   private static final Map<Plant, BlockTallWaterPlantTFC> MAP = new HashMap<>();
 
-  public static BlockTallWaterPlantTFC get(Plant plant) {
-    return BlockTallWaterPlantTFC.MAP.get(plant);
-  }
-
   public BlockTallWaterPlantTFC(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {throw new IllegalStateException("There can only be one.");}
+  }
+
+  public static BlockTallWaterPlantTFC get(Plant plant) {
+    return BlockTallWaterPlantTFC.MAP.get(plant);
   }
 
   @Override

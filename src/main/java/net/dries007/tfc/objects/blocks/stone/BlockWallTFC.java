@@ -23,11 +23,6 @@ import java.util.Map;
 public class BlockWallTFC extends BlockWall {
 
   private static final Map<Rock, EnumMap<Rock.Type, BlockWallTFC>> TABLE = new HashMap<>();
-
-  public static BlockWallTFC get(Rock rock, Rock.Type type) {
-    return TABLE.get(rock).get(type);
-  }
-
   public final BlockRockVariant parent;
 
   public BlockWallTFC(BlockRockVariant modelBlock) {
@@ -39,6 +34,10 @@ public class BlockWallTFC extends BlockWall {
     parent = modelBlock;
     OreDictionaryHelper.register(this, "wall");
     OreDictionaryHelper.registerRockType(this, modelBlock.type, "wall");
+  }
+
+  public static BlockWallTFC get(Rock rock, Rock.Type type) {
+    return TABLE.get(rock).get(type);
   }
 
   @Override

@@ -49,11 +49,6 @@ import java.util.Map;
 public class ItemRockJavelin extends ItemTool implements IItemSize, IRockObject {
 
   private static final Map<RockCategory, ItemRockJavelin> MAP = new HashMap<>();
-
-  public static ItemRockJavelin get(RockCategory category) {
-    return MAP.get(category);
-  }
-
   public final RockCategory category;
 
   public ItemRockJavelin(RockCategory category) {
@@ -70,6 +65,10 @@ public class ItemRockJavelin extends ItemTool implements IItemSize, IRockObject 
     OreDictionaryHelper.register(this, "javelin");
     OreDictionaryHelper.register(this, "javelin", "stone");
     OreDictionaryHelper.register(this, "javelin", "stone", category);
+  }
+
+  public static ItemRockJavelin get(RockCategory category) {
+    return MAP.get(category);
   }
 
   @Nonnull

@@ -39,21 +39,6 @@ import java.util.Map;
 public class ItemMetal extends ItemTFC implements IMetalItem {
 
   private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetal>> TABLE = new HashMap<>();
-
-  public static Item get(Metal metal, Metal.ItemType type) {
-    if (type == Metal.ItemType.SWORD) {
-      // Make sure to not crash (in 1.15+, don't forget to rewrite all metal items to extend the proper vanilla classes)
-      return ItemMetalSword.get(metal);
-    }
-    if (type == Metal.ItemType.LAMP) {
-      return ItemBlockMetalLamp.get(metal);
-    }
-    if (type == Metal.ItemType.TRAPDOOR) {
-      return ItemBlock.getItemFromBlock(BlockTrapDoorMetalTFC.get(metal));
-    }
-    return TABLE.get(metal).get(type);
-  }
-
   protected final Metal metal;
   protected final Metal.ItemType type;
 
@@ -105,6 +90,20 @@ public class ItemMetal extends ItemTFC implements IMetalItem {
     if (type == Metal.ItemType.TUYERE) {
       setMaxDamage(metal.getToolMetal() != null ? (int) (metal.getToolMetal().getMaxUses() * 0.2) : 100);
     }
+  }
+
+  public static Item get(Metal metal, Metal.ItemType type) {
+    if (type == Metal.ItemType.SWORD) {
+      // Make sure to not crash (in 1.15+, don't forget to rewrite all metal items to extend the proper vanilla classes)
+      return ItemMetalSword.get(metal);
+    }
+    if (type == Metal.ItemType.LAMP) {
+      return ItemBlockMetalLamp.get(metal);
+    }
+    if (type == Metal.ItemType.TRAPDOOR) {
+      return ItemBlock.getItemFromBlock(BlockTrapDoorMetalTFC.get(metal));
+    }
+    return TABLE.get(metal).get(type);
   }
 
   @Override

@@ -42,6 +42,21 @@ public final class SkillType<S extends Skill> {
     BUTCHERING = new SkillType<>("butchering", SimpleSkill::new);
   }
 
+  private final String name;
+  private final Function<IPlayerData, S> skillSupplier;
+
+  public SkillType(String name, Function<IPlayerData, S> skillSupplier) {
+    this.name = name;
+    this.skillSupplier = skillSupplier;
+
+    if (SKILL_TYPES.containsKey(name)) {
+      throw new IllegalArgumentException("Can't register multiple skills with the same name!");
+    }
+
+    SKILL_TYPES.put(name, this);
+    SKILL_ORDER.add(this);
+  }
+
   @Nonnull
   public static List<SkillType<? extends Skill>> getSkills() {
     return SKILL_ORDER;
@@ -62,21 +77,6 @@ public final class SkillType<S extends Skill> {
       TerraFirmaCraft.getLog().warn("Tried to cast skill '" + skill + "' to an incorrect instance type: " + name + " / " + returnClass);
       return null;
     }
-  }
-
-  private final String name;
-  private final Function<IPlayerData, S> skillSupplier;
-
-  public SkillType(String name, Function<IPlayerData, S> skillSupplier) {
-    this.name = name;
-    this.skillSupplier = skillSupplier;
-
-    if (SKILL_TYPES.containsKey(name)) {
-      throw new IllegalArgumentException("Can't register multiple skills with the same name!");
-    }
-
-    SKILL_TYPES.put(name, this);
-    SKILL_ORDER.add(this);
   }
 
   @Nonnull

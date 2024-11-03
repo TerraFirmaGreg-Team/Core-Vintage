@@ -46,6 +46,16 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem {
   private static final Map<Metal, ItemBlockMetalLamp> TABLE = new HashMap<>();
   public static int CAPACITY;
 
+  public ItemBlockMetalLamp(Metal metal) {
+    super(BlockMetalLamp.get(metal));
+    CAPACITY = ConfigTFC.Devices.LAMP.tank;
+    if (!TABLE.containsKey(metal)) {TABLE.put(metal, this);}
+
+    // In the interest of not writing a joint heat / fluid capability that extends ICapabilityProvider, I think this is justified
+    CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(this), () -> new ItemHeatHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
+    OreDictionaryHelper.register(this, "lamp");
+  }
+
   public static Set<Fluid> getValidFluids() {
     String[] fluidNames = ConfigTFC.Devices.LAMP.fuels;
     Set<Fluid> validFluids = new HashSet<>();
@@ -57,16 +67,6 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem {
 
   public static Item get(Metal metal) {
     return TABLE.get(metal);
-  }
-
-  public ItemBlockMetalLamp(Metal metal) {
-    super(BlockMetalLamp.get(metal));
-    CAPACITY = ConfigTFC.Devices.LAMP.tank;
-    if (!TABLE.containsKey(metal)) {TABLE.put(metal, this);}
-
-    // In the interest of not writing a joint heat / fluid capability that extends ICapabilityProvider, I think this is justified
-    CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(this), () -> new ItemHeatHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
-    OreDictionaryHelper.register(this, "lamp");
   }
 
   @Override

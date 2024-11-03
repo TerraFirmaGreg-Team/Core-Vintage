@@ -39,11 +39,6 @@ public class BlockBushTrellis extends BlockTrellis {
   public static final PropertyBool GROWN = StatePropertiesFL.GROWN;
 
   private static final Map<IBerryBush, BlockBushTrellis> MAP = new HashMap<>();
-
-  public static BlockBushTrellis get(IBerryBush bush) {
-    return MAP.get(bush);
-  }
-
   private final IBerryBush bush;
 
   public BlockBushTrellis(IBerryBush bush) {
@@ -54,6 +49,10 @@ public class BlockBushTrellis extends BlockTrellis {
     }
     setTickRandomly(true);
     setDefaultState(getBlockState().getBaseState().withProperty(GROWN, false));
+  }
+
+  public static BlockBushTrellis get(IBerryBush bush) {
+    return MAP.get(bush);
   }
 
   @Override

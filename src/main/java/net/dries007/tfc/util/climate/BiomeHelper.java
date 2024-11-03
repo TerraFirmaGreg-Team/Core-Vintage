@@ -18,6 +18,8 @@ import java.util.List;
  */
 public final class BiomeHelper {
 
+  private BiomeHelper() {}
+
   /**
    * Return the first valid biome type in this region, if any Almost certainly will return a value, but be sure to check for null
    *
@@ -55,8 +57,6 @@ public final class BiomeHelper {
     }
     return biomeTypes;
   }
-
-  private BiomeHelper() {}
 
   public enum BiomeType {
     // Ordered by priority.

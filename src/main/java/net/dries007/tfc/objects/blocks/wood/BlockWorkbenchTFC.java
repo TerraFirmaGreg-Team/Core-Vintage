@@ -38,11 +38,6 @@ import java.util.Map;
 public class BlockWorkbenchTFC extends BlockWorkbench {
 
   private static final Map<Tree, BlockWorkbenchTFC> MAP = new HashMap<>();
-
-  public static BlockWorkbenchTFC get(Tree wood) {
-    return MAP.get(wood);
-  }
-
   public final Tree wood;
 
   public BlockWorkbenchTFC(Tree wood) {
@@ -57,6 +52,10 @@ public class BlockWorkbenchTFC extends BlockWorkbench {
     OreDictionaryHelper.register(this, "workbench");
     OreDictionaryHelper.register(this, "crafting", "table", "wood");
     Blocks.FIRE.setFireInfo(this, 5, 20);
+  }
+
+  public static BlockWorkbenchTFC get(Tree wood) {
+    return MAP.get(wood);
   }
 
   @SideOnly(Side.CLIENT)

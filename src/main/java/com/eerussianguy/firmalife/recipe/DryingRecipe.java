@@ -14,18 +14,9 @@ import javax.annotation.Nullable;
 
 public class DryingRecipe extends IForgeRegistryEntry.Impl<DryingRecipe> implements IJEISimpleRecipe {
 
+  private final int duration;
   protected IIngredient<ItemStack> inputItem;
   protected ItemStack outputItem;
-  private final int duration;
-
-  @Nullable
-  public static DryingRecipe get(ItemStack item) {
-    return RegistriesFL.DRYING.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
-  }
-
-  public static int getDuration(DryingRecipe recipe) {
-    return recipe.duration;
-  }
 
   public DryingRecipe(IIngredient<ItemStack> input, ItemStack output, int duration) {
     this.inputItem = input;
@@ -38,6 +29,15 @@ public class DryingRecipe extends IForgeRegistryEntry.Impl<DryingRecipe> impleme
     if (duration < 1) {
       throw new IllegalArgumentException("Sorry, but drying recipes have to have a duration.");
     }
+  }
+
+  @Nullable
+  public static DryingRecipe get(ItemStack item) {
+    return RegistriesFL.DRYING.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
+  }
+
+  public static int getDuration(DryingRecipe recipe) {
+    return recipe.duration;
   }
 
   @Nonnull

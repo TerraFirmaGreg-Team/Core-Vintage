@@ -44,11 +44,6 @@ import java.util.Map;
 public class ItemMetalSword extends ItemSword implements IMetalItem, IItemSize {
 
   private static final Map<Metal, ItemMetalSword> TABLE = new HashMap<>();
-
-  public static ItemMetalSword get(Metal metal) {
-    return TABLE.get(metal);
-  }
-
   public final ToolMaterial material;
   private final Metal metal;
   private final float attackDamage;
@@ -72,6 +67,10 @@ public class ItemMetalSword extends ItemSword implements IMetalItem, IItemSize {
 
     OreDictionaryHelper.register(this, Metal.ItemType.SWORD);
     OreDictionaryHelper.registerDamageType(this, DamageType.SLASHING);
+  }
+
+  public static ItemMetalSword get(Metal metal) {
+    return TABLE.get(metal);
   }
 
   @Override

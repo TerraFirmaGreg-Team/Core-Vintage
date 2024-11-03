@@ -16,6 +16,8 @@ public final class ClimateTFC {
 
   private static final ClimateCache CACHE = new ClimateCache();
 
+  private ClimateTFC() {}
+
   public static float getActualTemp(World world, BlockPos pos) {
     return getActualTemp(world, pos, 0);
   }
@@ -99,6 +101,4 @@ public final class ClimateTFC {
   public static void update(ChunkPos pos, float temperature, float rainfall) {
     CACHE.update(pos, temperature, rainfall);
   }
-
-  private ClimateTFC() {}
 }

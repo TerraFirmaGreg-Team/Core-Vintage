@@ -15,14 +15,11 @@ import java.util.List;
 public class PlantsFL {
 
   public static final List<Plant> WRAPPERS = new ArrayList<>(8);
-
+  public static final Tree CINNAMON_TREE = new Tree(new ResourceLocation(TerraFirmaCraft.MOD_ID, "cinnamon"), new TreeGenSequoia(), 28, 35, 280, 400, 0f, 1f, 0, 4, 15, 4, false, null, false, 15, 0, 0);
   private static final int[] MAY = new int[]{0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0};
   private static final int[] JUNE = new int[]{0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0};
   private static final int[] JULY = new int[]{0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0};
   private static final int[] AUGUST = new int[]{0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0};
-
-  public static final Tree CINNAMON_TREE = new Tree(new ResourceLocation(TerraFirmaCraft.MOD_ID, "cinnamon"), new TreeGenSequoia(), 28, 35, 280, 400, 0f, 1f, 0, 4, 15, 4, false, null, false, 15, 0, 0);
-
   private static final Plant BASIL = reg(new PlantWrapper("basil", JULY, 13.0F, 25.0F, 200.0F, 500.0F));
   private static final Plant BAY_LAUREL = reg(new PlantWrapper("bay_laurel", MAY, 5.0F, 18.0F, 200.0F, 500.0F));
   private static final Plant CARDAMOM = reg(new PlantWrapper("cardamom", JUNE, 16.0F, 30.0F, 100.0F, 400.0F));

@@ -27,6 +27,20 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> implements IJEISimpleRecipe {
 
+  protected final IIngredient<ItemStack> ingredient;
+  private final float transformTemp;
+  private final Metal.Tier minTier;
+
+  protected HeatRecipe(IIngredient<ItemStack> ingredient, float transformTemp) {
+    this(ingredient, transformTemp, Metal.Tier.TIER_0);
+  }
+
+  protected HeatRecipe(IIngredient<ItemStack> ingredient, float transformTemp, Metal.Tier minTier) {
+    this.ingredient = ingredient;
+    this.transformTemp = transformTemp;
+    this.minTier = minTier;
+  }
+
   /**
    * Overload that ignores the tier requirement by passing in the maximum tier
    */
@@ -47,20 +61,6 @@ public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> im
    */
   public static HeatRecipeSimple destroy(IIngredient<ItemStack> ingredient, float destroyTemperature) {
     return new HeatRecipeSimple(ingredient, ItemStack.EMPTY, destroyTemperature, 0f, Metal.Tier.TIER_0);
-  }
-
-  protected final IIngredient<ItemStack> ingredient;
-  private final float transformTemp;
-  private final Metal.Tier minTier;
-
-  protected HeatRecipe(IIngredient<ItemStack> ingredient, float transformTemp) {
-    this(ingredient, transformTemp, Metal.Tier.TIER_0);
-  }
-
-  protected HeatRecipe(IIngredient<ItemStack> ingredient, float transformTemp, Metal.Tier minTier) {
-    this.ingredient = ingredient;
-    this.transformTemp = transformTemp;
-    this.minTier = minTier;
   }
 
   /**

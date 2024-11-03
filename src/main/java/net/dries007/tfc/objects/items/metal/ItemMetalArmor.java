@@ -27,11 +27,6 @@ import java.util.Map;
 public class ItemMetalArmor extends ItemArmorTFC implements IMetalItem, IItemSize {
 
   private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetalArmor>> TABLE = new HashMap<>();
-
-  public static ItemMetalArmor get(Metal metal, Metal.ItemType type) {
-    return TABLE.get(metal).get(type);
-  }
-
   private final Metal metal;
   private final Metal.ItemType type;
 
@@ -42,6 +37,10 @@ public class ItemMetalArmor extends ItemArmorTFC implements IMetalItem, IItemSiz
     this.type = type;
     if (!TABLE.containsKey(metal)) {TABLE.put(metal, new EnumMap<>(Metal.ItemType.class));}
     TABLE.get(metal).put(type, this);
+  }
+
+  public static ItemMetalArmor get(Metal metal, Metal.ItemType type) {
+    return TABLE.get(metal).get(type);
   }
 
   @Nullable

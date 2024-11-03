@@ -15,11 +15,6 @@ public class NutRecipe extends IForgeRegistryEntry.Impl<NutRecipe> {
   protected Block inputLeaves;
   protected ItemStack outputItem;
 
-  @Nullable
-  public static NutRecipe get(Block block) {
-    return RegistriesFL.NUT_TREES.getValuesCollection().stream().filter(x -> x.isValidInput(block)).findFirst().orElse(null);
-  }
-
   public NutRecipe(Block inputLog, Block inputLeaves, ItemStack outputItem) {
     this.inputLog = inputLog;
     this.inputLeaves = inputLeaves;
@@ -28,6 +23,11 @@ public class NutRecipe extends IForgeRegistryEntry.Impl<NutRecipe> {
     if (inputLog == null || inputLeaves == null || outputItem == null) {
       throw new IllegalArgumentException("Sorry, something was null in your nut tree registry.");
     }
+  }
+
+  @Nullable
+  public static NutRecipe get(Block block) {
+    return RegistriesFL.NUT_TREES.getValuesCollection().stream().filter(x -> x.isValidInput(block)).findFirst().orElse(null);
   }
 
   @Nonnull

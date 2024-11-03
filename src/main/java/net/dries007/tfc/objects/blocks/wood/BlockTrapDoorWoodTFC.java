@@ -19,11 +19,6 @@ import java.util.Map;
 public class BlockTrapDoorWoodTFC extends BlockTrapDoor {
 
   private static final Map<Tree, BlockTrapDoorWoodTFC> MAP = new HashMap<>();
-
-  public static BlockTrapDoorWoodTFC get(Tree wood) {
-    return MAP.get(wood);
-  }
-
   public final Tree wood;
 
   public BlockTrapDoorWoodTFC(Tree wood) {
@@ -36,5 +31,9 @@ public class BlockTrapDoorWoodTFC extends BlockTrapDoor {
     //noinspection ConstantConditions
     OreDictionaryHelper.register(this, "trapdoor", "wood", wood.getRegistryName().getPath());
     Blocks.FIRE.setFireInfo(this, 5, 20);
+  }
+
+  public static BlockTrapDoorWoodTFC get(Tree wood) {
+    return MAP.get(wood);
   }
 }

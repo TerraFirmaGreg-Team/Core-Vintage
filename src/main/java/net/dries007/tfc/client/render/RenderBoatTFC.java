@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.client.render;
 
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.entity.EntityBoatTFC;
-
 import net.minecraft.client.model.IMultipassModel;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
@@ -19,6 +16,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.entity.EntityBoatTFC;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

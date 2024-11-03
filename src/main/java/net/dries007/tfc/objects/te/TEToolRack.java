@@ -33,6 +33,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class TEToolRack extends TEBase {
 
+  private final NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
+
   /**
    * @return true if this item can be put on a tool rack, false otherwise
    */
@@ -45,8 +47,6 @@ public class TEToolRack extends TEBase {
            || item instanceof ItemFireStarter || item instanceof ItemFlintAndSteel || !item.getToolClasses(stack).isEmpty()
            || OreDictionaryHelper.doesStackMatchOre(stack, "tool");
   }
-
-  private final NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
 
   public NonNullList<ItemStack> getItems() {
     return items;

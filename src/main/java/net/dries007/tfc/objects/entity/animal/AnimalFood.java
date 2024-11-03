@@ -30,6 +30,13 @@ import static net.dries007.tfc.Constants.GSON;
 public class AnimalFood {
 
   private static final HashMap<Class<? extends Entity>, AnimalFood> ANIMAL_FOOD_MAP = new HashMap<>();
+  private final List<Ingredient> acceptedFoods;
+  private final boolean eatRotten;
+
+  public AnimalFood(boolean eatRotten) {
+    this.eatRotten = eatRotten;
+    acceptedFoods = new ArrayList<>();
+  }
 
   @Nullable
   public static AnimalFood get(Class<? extends Entity> animalClass) {
@@ -64,14 +71,6 @@ public class AnimalFood {
         TerraFirmaCraft.getLog().error("Error: ", e);
       }
     }
-  }
-
-  private final List<Ingredient> acceptedFoods;
-  private final boolean eatRotten;
-
-  public AnimalFood(boolean eatRotten) {
-    this.eatRotten = eatRotten;
-    acceptedFoods = new ArrayList<>();
   }
 
   public void addFood(Ingredient ingredient) {

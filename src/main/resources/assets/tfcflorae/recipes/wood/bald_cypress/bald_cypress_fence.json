@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XBX",
+    "XBX"
+  ],
+  "key": {
+    "X": {
+      "item": "tfc:wood/planks/bald_cypress"
+    },
+    "B": {
+      "item": "tfc:wood/lumber/bald_cypress"
+    }
+  },
+  "result": {
+    "item": "tfc:wood/fence/bald_cypress",
+    "count": 8
+  }
+}

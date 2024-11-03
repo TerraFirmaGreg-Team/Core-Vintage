@@ -1,15 +1,14 @@
 package com.eerussianguy.firmalife.compat.dynamictrees;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.registries.IForgeRegistry;
+
 import com.eerussianguy.firmalife.compat.CompatibleRecipeRegistry;
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.recipe.NutRecipe;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.registries.IForgeRegistry;
-
 import org.labellum.mc.dynamictreestfc.ModBlocks;
 import org.labellum.mc.dynamictreestfc.ModTrees;
 

@@ -41,16 +41,16 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
   private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
   private static final Map<Plant, BlockCactusTFC> MAP = new HashMap<>();
 
-  public static BlockCactusTFC get(Plant plant) {
-    return MAP.get(plant);
-  }
-
   public BlockCactusTFC(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {throw new IllegalStateException("There can only be one.");}
 
     setSoundType(SoundType.GROUND);
     setHardness(0.25F);
+  }
+
+  public static BlockCactusTFC get(Plant plant) {
+    return MAP.get(plant);
   }
 
   @Override

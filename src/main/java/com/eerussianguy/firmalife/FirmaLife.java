@@ -25,20 +25,18 @@ import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = FirmaLife.MOD_ID, name = FirmaLife.MODNAME, version = FirmaLife.MODVERSION, dependencies = "required-after:tfc@[1.7.17.175,);after:dynamictreestfc")
+@Mod(modid = FirmaLife.MOD_ID, name = FirmaLife.MODNAME, version = FirmaLife.MODVERSION, dependencies = "required-after:tfc;after:dynamictreestfc")
 public class FirmaLife {
 
   public static final String MOD_ID = "firmalife";
   public static final String MODNAME = "FirmaLife";
   public static final String MODVERSION = "0.5.1";
-
-  @Mod.Instance
-  private static FirmaLife INSTANCE = null;
-
   @SidedProxy(clientSide = "com.eerussianguy.firmalife.proxy.ClientProxy", serverSide = "com.eerussianguy.firmalife.proxy.ServerProxy")
   public static CommonProxy proxy;
-
   public static Logger logger;
+  @Mod.Instance
+  private static FirmaLife INSTANCE = null;
+  private SimpleNetworkWrapper network;
 
   public static FirmaLife getInstance() {
     return INSTANCE;
@@ -47,8 +45,6 @@ public class FirmaLife {
   public static SimpleNetworkWrapper getNetwork() {
     return INSTANCE.network;
   }
-
-  private SimpleNetworkWrapper network;
 
   @Mod.EventHandler
   public void preInit(FMLPreInitializationEvent event) {

@@ -6,9 +6,10 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import com.eerussianguy.firmalife.FirmaLife;
 import com.eerussianguy.firmalife.world.WorldGeneratorFL;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = FirmaLife.MOD_ID)
 public class CommonProxy {
 
   public void preInit(FMLPreInitializationEvent e) {

@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.render;
 
+import com.eerussianguy.firmalife.te.TEOven;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -12,14 +14,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import com.eerussianguy.firmalife.te.TEOven;
-
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
-import static com.eerussianguy.firmalife.te.TEOven.SLOT_FUEL_1;
-import static com.eerussianguy.firmalife.te.TEOven.SLOT_FUEL_2;
-import static com.eerussianguy.firmalife.te.TEOven.SLOT_MAIN;
+import static com.eerussianguy.firmalife.te.TEOven.*;
 import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
 
 @ParametersAreNonnullByDefault

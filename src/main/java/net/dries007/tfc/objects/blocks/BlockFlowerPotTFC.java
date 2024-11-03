@@ -1,5 +1,9 @@
 package net.dries007.tfc.objects.blocks;
 
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -13,10 +17,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
@@ -32,14 +32,14 @@ public class BlockFlowerPotTFC extends Block {
 
   public final Plant plant;
 
-  public static BlockFlowerPotTFC get(Plant plant) {
-    return MAP.get(plant);
-  }
-
   public BlockFlowerPotTFC(Plant plant) {
     super(Material.CIRCUITS);
     this.plant = plant;
     if (MAP.put(plant, this) != null) {throw new IllegalStateException("There can only be one.");}
+  }
+
+  public static BlockFlowerPotTFC get(Plant plant) {
+    return MAP.get(plant);
   }
 
   @Override

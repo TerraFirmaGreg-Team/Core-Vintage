@@ -6,7 +6,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+import com.eerussianguy.firmalife.FirmaLife;
+
+@Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = FirmaLife.MOD_ID)
 @SuppressWarnings("unused")
 public class ClientProxy extends CommonProxy {
 

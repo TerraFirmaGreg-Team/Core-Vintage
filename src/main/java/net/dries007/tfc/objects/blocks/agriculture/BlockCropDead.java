@@ -7,6 +7,7 @@ package net.dries007.tfc.objects.blocks.agriculture;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -25,11 +26,15 @@ import net.minecraftforge.common.EnumPlantType;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
+import net.dries007.tfc.world.classic.ChunkGenTFC;
+import tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -39,7 +44,7 @@ import java.util.Random;
 import java.util.Set;
 
 @ParametersAreNonnullByDefault
-public class BlockCropDead extends BlockBush implements IGrowingPlant {
+public class BlockCropDead extends BlockBush { //implements IGrowingPlant
 
   /* true if the crop spawned in the wild, means it ignores growth conditions i.e. farmland */
   public static final PropertyBool MATURE = PropertyBool.create("mature");
@@ -49,15 +54,6 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
 
   // static field and methods for conversion from crop to Block
   private static final Map<ICrop, BlockCropDead> MAP = new HashMap<>();
-
-  public static BlockCropDead get(ICrop crop) {
-    return MAP.get(crop);
-  }
-
-  public static Set<ICrop> getCrops() {
-    return MAP.keySet();
-  }
-
   protected final ICrop crop;
 
   public BlockCropDead(ICrop crop) {
@@ -70,6 +66,14 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
 
     setSoundType(SoundType.PLANT);
     setHardness(0.6f);
+  }
+
+  public static BlockCropDead get(ICrop crop) {
+    return MAP.get(crop);
+  }
+
+  public static Set<ICrop> getCrops() {
+    return MAP.keySet();
   }
 
   @Nonnull
@@ -134,27 +138,53 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
     return new ItemStack(ItemSeedsTFC.get(crop));
   }
 
-  @Override
-  public boolean canBlockStay(World world, BlockPos pos, IBlockState state) {
-    IBlockState soil = world.getBlockState(pos.down());
-    return soil.getBlock().canSustainPlant(soil, world, pos.down(), EnumFacing.UP, this);
+  public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+    IBlockState soil;
+    if (this.crop != Crop.RICE) {
+      soil = worldIn.getBlockState(pos.down());
+      return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
+    } else {
+      soil = worldIn.getBlockState(pos.down());
+      if (!(soil.getBlock() instanceof BlockWaterPlantTFCF) && !(soil.getBlock() instanceof BlockWaterPlantTFC)) {
+        if (state.getBlock() != this) {
+          return this.canSustainBush(soil);
+        } else {
+          IBlockState stateDown = worldIn.getBlockState(pos.down());
+          Material material = stateDown.getMaterial();
+          return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this)
+                 || material == Material.WATER && (Integer) stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == ChunkGenTFC.FRESH_WATER
+                 || material == Material.ICE || material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
+        }
+      } else {
+        return false;
+      }
+    }
   }
 
-  @Override
   @Nonnull
-  @SuppressWarnings("deprecation")
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
+    return new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 1.0, 0.875);
   }
 
   @Nonnull
-  @Override
   public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
     return EnumPlantType.Crop;
   }
 
-  @Override
-  public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-    return GrowthStatus.DEAD;
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    if (this.crop != Crop.RICE) {
+      return super.canPlaceBlockAt(worldIn, pos);
+    } else {
+      return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
+    }
+  }
+
+  protected boolean canSustainBush(IBlockState state) {
+    if (this.crop != Crop.RICE) {
+      return super.canSustainBush(state);
+    } else {
+      return BlocksTFC.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenTFC.FRESH_WATER
+             || state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
+    }
   }
 }

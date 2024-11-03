@@ -5,11 +5,11 @@
 
 package net.dries007.tfc.objects.inventory.ingredient;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 
 /**
  * Accepts only valid, not rotten foods on recipes

@@ -29,6 +29,11 @@ public abstract class BlockStemCrop extends BlockCropSimple {
 
   public static PropertyDirection FACING = BlockStem.FACING;
 
+  public BlockStemCrop(StemCrop crop) {
+    super(crop, false);
+    setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.UP));
+  }
+
   //static factory method is required because
   //superconstructor requires getStageProperty to work
   //but we can't set the property until after the superconstructor
@@ -41,12 +46,6 @@ public abstract class BlockStemCrop extends BlockCropSimple {
         return property;
       }
     };
-  }
-
-
-  public BlockStemCrop(StemCrop crop) {
-    super(crop, false);
-    setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.UP));
   }
 
   @Override

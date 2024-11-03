@@ -1,8 +1,5 @@
 package tfcflorae.objects.blocks.blocktype.farmland;
 
-import java.util.Random;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -23,14 +20,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
 import mcp.MethodsReturnNonnullByDefault;
-
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.util.Helpers;
-
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -110,15 +108,9 @@ public class BlockLoamFarmland extends FarmlandTFCF {
     int target = world.isRainingAt(pos.up()) ? MAX_MOISTURE : getWaterScore(world, pos);
 
     if (current < target) {
-      if (current < MAX_MOISTURE) {
-        world.setBlockState(pos, state.withProperty(MOISTURE, current + 1), 2);
-      }
+      if (current < MAX_MOISTURE) {world.setBlockState(pos, state.withProperty(MOISTURE, current + 1), 2);}
     } else if (current > target || target == 0) {
-      if (current > 0) {
-        world.setBlockState(pos, state.withProperty(MOISTURE, current - 1), 2);
-      } else if (!hasCrops(world, pos)) {
-        turnToDirt(world, pos);
-      }
+      if (current > 0) {world.setBlockState(pos, state.withProperty(MOISTURE, current - 1), 2);} else if (!hasCrops(world, pos)) {turnToDirt(world, pos);}
     }
 
     super.updateTick(world, pos, state, rand);
@@ -169,12 +161,8 @@ public class BlockLoamFarmland extends FarmlandTFCF {
     for (BlockPos.MutableBlockPos i : BlockPos.getAllInBoxMutable(pos.add(-hRange, -1, -hRange), pos.add(hRange, 2, hRange))) {
       BlockPos diff = i.subtract(pos);
       float hDist = MathHelper.sqrt(diff.getX() * diff.getX() + diff.getZ() * diff.getZ());
-      if (hDist > hRange) {
-        continue;
-      }
-      if (world.getBlockState(i).getMaterial() != Material.WATER) {
-        continue;
-      }
+      if (hDist > hRange) {continue;}
+      if (world.getBlockState(i).getMaterial() != Material.WATER) {continue;}
       score += ((hRange - hDist) / (float) hRange);
     }
     return score > 1 ? MAX_MOISTURE : Math.round(score * MAX_MOISTURE);

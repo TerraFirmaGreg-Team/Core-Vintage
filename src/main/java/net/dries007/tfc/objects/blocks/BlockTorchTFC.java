@@ -45,10 +45,6 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBlock {
 
-  public static boolean canLight(ItemStack stack) {
-    return stack.getItem() == Item.getItemFromBlock(Blocks.TORCH) || ItemFireStarter.canIgnite(stack);
-  }
-
   public BlockTorchTFC() {
     setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, true));
     setHardness(0f);
@@ -57,6 +53,10 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBl
     setSoundType(SoundType.WOOD);
 
     OreDictionaryHelper.register(this, "torch");
+  }
+
+  public static boolean canLight(ItemStack stack) {
+    return stack.getItem() == Item.getItemFromBlock(Blocks.TORCH) || ItemFireStarter.canIgnite(stack);
   }
 
   @Nonnull

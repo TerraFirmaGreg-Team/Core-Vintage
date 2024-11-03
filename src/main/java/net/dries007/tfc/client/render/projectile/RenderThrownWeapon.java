@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.client.render.projectile;
 
+import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
@@ -16,8 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
 
 import javax.annotation.Nonnull;
 

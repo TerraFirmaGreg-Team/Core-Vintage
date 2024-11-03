@@ -38,12 +38,6 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
   public static final NonNullList<ItemStack> EMPTY = NonNullList.create();
   private static final Random RNG = new Random();
   private static long SEED = 0;
-
-  @Nonnull
-  public static List<AnvilRecipe> getAllFor(ItemStack stack) {
-    return TFCRegistries.ANVIL.getValuesCollection().stream().filter(x -> x.matches(stack)).collect(Collectors.toList());
-  }
-
   protected final ForgeRule[] rules;
   protected final ItemStack output;
   protected final IIngredient<ItemStack> ingredient;
@@ -61,6 +55,11 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
 
     setRegistryName(name);
     workingSeed = ++SEED;
+  }
+
+  @Nonnull
+  public static List<AnvilRecipe> getAllFor(ItemStack stack) {
+    return TFCRegistries.ANVIL.getValuesCollection().stream().filter(x -> x.matches(stack)).collect(Collectors.toList());
   }
 
   public boolean matches(ItemStack input) {

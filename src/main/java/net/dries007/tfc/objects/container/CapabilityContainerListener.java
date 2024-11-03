@@ -61,6 +61,12 @@ public class CapabilityContainerListener implements IContainerListener {
     SYNC_CAPS.put(CapabilityEgg.KEY.toString(), CapabilityEgg.CAPABILITY);
   }
 
+  private final EntityPlayerMP player;
+
+  public CapabilityContainerListener(EntityPlayerMP player) {
+    this.player = player;
+  }
+
   /**
    * Adds the listener for a given player to the current container Executes server side
    */
@@ -171,12 +177,6 @@ public class CapabilityContainerListener implements IContainerListener {
       }
     }
     return false;
-  }
-
-  private final EntityPlayerMP player;
-
-  public CapabilityContainerListener(EntityPlayerMP player) {
-    this.player = player;
   }
 
   /**

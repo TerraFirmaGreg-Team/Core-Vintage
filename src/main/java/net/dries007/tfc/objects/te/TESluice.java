@@ -49,13 +49,12 @@ import java.util.stream.Collectors;
 public class TESluice extends TEBase implements ITickable {
 
   public static final int MAX_SOIL = 50;
+  private int soil;
+  private int ticksRemaining, delayTimer;
 
   public static boolean isValidFluid(Fluid fluid) {
     return fluid == FluidsTFC.FRESH_WATER.get() || fluid == FluidsTFC.SALT_WATER.get();
   }
-
-  private int soil;
-  private int ticksRemaining, delayTimer;
 
   @Override
   public void update() {

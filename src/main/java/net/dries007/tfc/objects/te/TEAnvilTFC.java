@@ -52,33 +52,11 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @ParametersAreNonnullByDefault
 public class TEAnvilTFC extends TEInventory {
 
-  private static class AnvilItemHandler extends ItemStackHandlerCallback {
-
-    public AnvilItemHandler(ISlotCallback callback, int slots) {
-      super(callback, slots);
-    }
-
-    @Override
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-      ItemStack result = super.extractItem(slot, amount, simulate);
-      if (slot == SLOT_INPUT_1 || slot == SLOT_INPUT_2) {
-        IForgeable cap = result.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-        if (cap != null && cap.getRecipeName() != null && (!cap.getSteps().hasWork() || cap.getWork() == 0)) {
-          cap.reset();
-        }
-
-      }
-      return result;
-    }
-  }
-
   public static final int WORK_MAX = 145;
-
   public static final int SLOT_INPUT_1 = 0;
   public static final int SLOT_INPUT_2 = 1;
   public static final int SLOT_HAMMER = 2;
   public static final int SLOT_FLUX = 3;
-
   private AnvilRecipe recipe;
   private ForgeSteps steps;
   private int workingProgress = 0;
@@ -388,6 +366,26 @@ public class TEAnvilTFC extends TEInventory {
     workingProgress = 0;
     workingTarget = 0;
     steps.reset();
+  }
+
+  private static class AnvilItemHandler extends ItemStackHandlerCallback {
+
+    public AnvilItemHandler(ISlotCallback callback, int slots) {
+      super(callback, slots);
+    }
+
+    @Override
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+      ItemStack result = super.extractItem(slot, amount, simulate);
+      if (slot == SLOT_INPUT_1 || slot == SLOT_INPUT_2) {
+        IForgeable cap = result.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+        if (cap != null && cap.getRecipeName() != null && (!cap.getSteps().hasWork() || cap.getWork() == 0)) {
+          cap.reset();
+        }
+
+      }
+      return result;
+    }
   }
 
 }

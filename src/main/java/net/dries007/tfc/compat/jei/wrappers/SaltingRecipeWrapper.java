@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -12,9 +15,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;

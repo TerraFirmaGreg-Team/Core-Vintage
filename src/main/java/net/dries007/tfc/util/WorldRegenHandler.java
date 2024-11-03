@@ -5,6 +5,25 @@
 
 package net.dries007.tfc.util;
 
+import com.google.common.collect.Lists;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.*;
+import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
+import net.dries007.tfc.objects.blocks.plants.BlockMushroomTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.objects.te.TECropBase;
+import net.dries007.tfc.objects.te.TEPlacedItemFlat;
+import net.dries007.tfc.types.DefaultPlants;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Month;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
+import net.dries007.tfc.world.classic.worldgen.WorldGenPlantTFC;
+import net.dries007.tfc.world.classic.worldgen.WorldGenTrees;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -29,35 +48,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import com.google.common.collect.Lists;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.ICreatureTFC;
-import net.dries007.tfc.api.types.IHuntable;
-import net.dries007.tfc.api.types.IPredator;
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
-import net.dries007.tfc.objects.blocks.plants.BlockMushroomTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.objects.te.TECropBase;
-import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.types.DefaultPlants;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
-import net.dries007.tfc.world.classic.worldgen.WorldGenPlantTFC;
-import net.dries007.tfc.world.classic.worldgen.WorldGenTrees;
+import tfcflorae.util.RegenWildCropsTFCF;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
@@ -70,10 +63,11 @@ import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class WorldRegenHandler {
 
+  public static final WorldGenPlantTFC PLANT_GEN = new WorldGenPlantTFC();
   private static final RegenRocksSticks ROCKS_GEN = new RegenRocksSticks(true);
   private static final RegenWildCrops CROPS_GEN = new RegenWildCrops();
+  private static final RegenWildCropsTFCF CROPSTFCF_GEN = new RegenWildCropsTFCF();
   private static final WorldGenBerryBushes BUSH_GEN = new WorldGenBerryBushes();
-  public static final WorldGenPlantTFC PLANT_GEN = new WorldGenPlantTFC();
   private static final Random RANDOM = new Random();
   private static final List<ChunkPos> POSITIONS = new LinkedList<>();
 
@@ -133,6 +127,8 @@ public class WorldRegenHandler {
               PLANT_GEN.generate(event.world, RANDOM, blockMushroomPos);
             }
             CROPS_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
+            CROPSTFCF_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
+            BUSH_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
             int worldX = pos.x << 4;
             int worldZ = pos.z << 4;
             BlockPos blockpos = new BlockPos(worldX, 0, worldZ);
@@ -170,8 +166,7 @@ public class WorldRegenHandler {
         Block topBlock = topState.getBlock();
         if (!topState.getMaterial().isLiquid() && (topBlock instanceof BlockCropDead || topBlock instanceof BlockMushroomTFC)) {
           IBlockState soil = world.getBlockState(topPos.down());
-          if (soil.getBlock() instanceof BlockRockVariant) {
-            BlockRockVariant soilRock = (BlockRockVariant) soil.getBlock();
+          if (soil.getBlock() instanceof BlockRockVariant soilRock) {
             //Stop removing dead crops from farmland please!
             if (soilRock.getType() != Rock.Type.FARMLAND) {
               world.removeTileEntity(topPos);
@@ -245,8 +240,7 @@ public class WorldRegenHandler {
   private static void doGroupSpawning(EntityEntry entityEntry, World worldIn, int centerX, int centerZ, int diameterX, int diameterZ, Random rand) {
     List<EntityLiving> group = Lists.newArrayList();
     EntityLiving creature = (EntityLiving) entityEntry.newInstance(worldIn);
-    if (creature instanceof ICreatureTFC) {
-      ICreatureTFC creatureTFC = (ICreatureTFC) creature;
+    if (creature instanceof ICreatureTFC creatureTFC) {
       int fallback = 5;
       int individuals =
         Math.max(1, creatureTFC.getMinGroupSize()) + rand.nextInt(creatureTFC.getMaxGroupSize() - Math.max(0, creatureTFC.getMinGroupSize() - 1));

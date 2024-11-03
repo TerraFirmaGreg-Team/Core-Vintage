@@ -24,13 +24,13 @@ public class BlockMushroomTFC extends BlockPlantTFC implements IGrowable {
 
   private static final Map<Plant, BlockMushroomTFC> MAP = new HashMap<>();
 
-  public static BlockMushroomTFC get(Plant plant) {
-    return MAP.get(plant);
-  }
-
   public BlockMushroomTFC(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {throw new IllegalStateException("There can only be one.");}
+  }
+
+  public static BlockMushroomTFC get(Plant plant) {
+    return MAP.get(plant);
   }
 
   @Override

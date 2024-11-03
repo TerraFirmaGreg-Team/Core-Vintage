@@ -26,11 +26,6 @@ import java.util.Map;
 public class ItemDoorTFC extends ItemDoor implements IItemSize {
 
   private static final Map<Tree, ItemDoorTFC> MAP = new HashMap<>();
-
-  public static ItemDoorTFC get(Tree wood) {
-    return MAP.get(wood);
-  }
-
   public final Tree wood;
 
   public ItemDoorTFC(BlockDoorTFC block) {
@@ -40,6 +35,10 @@ public class ItemDoorTFC extends ItemDoor implements IItemSize {
     OreDictionaryHelper.register(this, "door", "wood");
     //noinspection ConstantConditions
     OreDictionaryHelper.register(this, "door", "wood", wood.getRegistryName().getPath());
+  }
+
+  public static ItemDoorTFC get(Tree wood) {
+    return MAP.get(wood);
   }
 
   @Nonnull

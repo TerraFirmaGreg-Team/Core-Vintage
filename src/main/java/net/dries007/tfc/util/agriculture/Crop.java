@@ -68,28 +68,6 @@ public enum Crop implements ICrop {
     }
   }
 
-  /**
-   * the count to add to the amount of food dropped when applying the skill bonus
-   *
-   * @param skill  agriculture skill of the harvester
-   * @param random random instance to use, generally Block.RANDOM
-   * @return amount to add to item stack count
-   */
-  public static int getSkillFoodBonus(Skill skill, Random random) {
-    return random.nextInt(2 + (int) (6 * skill.getTotalLevel()));
-  }
-
-  /**
-   * the count to add to the amount of seeds dropped when applying the skill bonus
-   *
-   * @param skill  agriculture skill of the harvester
-   * @param random random instance to use, generally Block.RANDOM
-   * @return amount to add to item stack count
-   */
-  public static int getSkillSeedBonus(Skill skill, Random random) {
-    if (skill.getTier().isAtLeast(SkillTier.ADEPT) && random.nextInt(10 - 2 * skill.getTier().ordinal()) == 0) {return 1;} else {return 0;}
-  }
-
   // how this crop generates food items
   private final Supplier<ItemStack> foodDrop;
   private final Supplier<ItemStack> foodDropEarly;
@@ -125,6 +103,28 @@ public enum Crop implements ICrop {
     this.growthTime = growthTime; // This is measured in % of months
 
     this.type = type;
+  }
+
+  /**
+   * the count to add to the amount of food dropped when applying the skill bonus
+   *
+   * @param skill  agriculture skill of the harvester
+   * @param random random instance to use, generally Block.RANDOM
+   * @return amount to add to item stack count
+   */
+  public static int getSkillFoodBonus(Skill skill, Random random) {
+    return random.nextInt(2 + (int) (6 * skill.getTotalLevel()));
+  }
+
+  /**
+   * the count to add to the amount of seeds dropped when applying the skill bonus
+   *
+   * @param skill  agriculture skill of the harvester
+   * @param random random instance to use, generally Block.RANDOM
+   * @return amount to add to item stack count
+   */
+  public static int getSkillSeedBonus(Skill skill, Random random) {
+    if (skill.getTier().isAtLeast(SkillTier.ADEPT) && random.nextInt(10 - 2 * skill.getTier().ordinal()) == 0) {return 1;} else {return 0;}
   }
 
   @Override

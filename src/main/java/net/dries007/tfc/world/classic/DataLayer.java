@@ -31,17 +31,9 @@ public final class DataLayer {
   public static final DataLayer PH_NEUTRAL = newIntDataLayer(132, "Neutral", 2);
   public static final DataLayer PH_ALKALINE_LOW = newIntDataLayer(133, "Low Alkalinity", 3);
   public static final DataLayer PH_ALKALINE_HIGH = newIntDataLayer(134, "High Alkalinity", 4);
-
-  public static DataLayer get(int i) {
-    if (LAYERS[i] == null) {throw new IllegalArgumentException("Layer " + i + " not used.");}
-    return LAYERS[i];
-  }
-
-  private static DataLayer newIntDataLayer(int i, String name, int value) {
-    if (LAYERS[i] != null) {throw new IllegalArgumentException("Layer " + i + " already in use.");}
-    return LAYERS[i] = new DataLayer(i, null, name, value, Float.NaN);
-  }
-
+  public static final DataLayer RIVER0 = newIntDataLayer(253, "River0", 1);
+  public static final DataLayer RIVER1 = newIntDataLayer(254, "River1", 2);
+  public static final DataLayer RIVER2 = newIntDataLayer(255, "River2", 3);
   public final int layerID;
   public final BlockRockVariant block;
   public final String name;
@@ -54,5 +46,15 @@ public final class DataLayer {
     this.name = name;
     this.valueInt = valueInt;
     this.valueFloat = valueFloat;
+  }
+
+  public static DataLayer get(int i) {
+    if (LAYERS[i] == null) {throw new IllegalArgumentException("Layer " + i + " not used.");}
+    return LAYERS[i];
+  }
+
+  private static DataLayer newIntDataLayer(int i, String name, int value) {
+    if (LAYERS[i] != null) {throw new IllegalArgumentException("Layer " + i + " already in use.");}
+    return LAYERS[i] = new DataLayer(i, null, name, value, Float.NaN);
   }
 }

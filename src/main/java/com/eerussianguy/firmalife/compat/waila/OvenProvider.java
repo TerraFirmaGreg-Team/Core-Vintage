@@ -1,5 +1,12 @@
 package com.eerussianguy.firmalife.compat.waila;
 
+import com.eerussianguy.firmalife.recipe.OvenRecipe;
+import com.eerussianguy.firmalife.te.TEOven;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
+import net.dries007.tfc.objects.blocks.property.ILightableBlock;
+import net.dries007.tfc.util.calendar.ICalendar;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,13 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
-
-import com.eerussianguy.firmalife.recipe.OvenRecipe;
-import com.eerussianguy.firmalife.te.TEOven;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.util.calendar.ICalendar;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

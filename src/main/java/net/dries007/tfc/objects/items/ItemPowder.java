@@ -21,15 +21,6 @@ import java.util.EnumMap;
 public class ItemPowder extends ItemTFC {
 
   private static final EnumMap<Powder, ItemPowder> MAP = new EnumMap<>(Powder.class);
-
-  public static ItemPowder get(Powder powder) {
-    return MAP.get(powder);
-  }
-
-  public static ItemStack get(Powder powder, int amount) {
-    return new ItemStack(MAP.get(powder), amount);
-  }
-
   private final Powder powder;
 
   public ItemPowder(Powder powder) {
@@ -40,6 +31,14 @@ public class ItemPowder extends ItemTFC {
     if (powder == Powder.LAPIS_LAZULI) {
       OreDictionaryHelper.register(this, "dust", "lapis");
     }
+  }
+
+  public static ItemPowder get(Powder powder) {
+    return MAP.get(powder);
+  }
+
+  public static ItemStack get(Powder powder, int amount) {
+    return new ItemStack(MAP.get(powder), amount);
   }
 
   @Nonnull

@@ -5,12 +5,6 @@
 
 package net.dries007.tfc.api.recipes.barrel;
 
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -20,11 +14,26 @@ import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFoodTrait;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class BarrelRecipeFoodTraits extends BarrelRecipe {
+
+  private final FoodTrait trait;
+  private final String tooltipName;
+
+  private BarrelRecipeFoodTraits(@Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IIngredient<ItemStack> inputStack, FoodTrait trait, int duration, String tooltipName) {
+    super(inputFluid, inputStack, null, ItemStack.EMPTY, duration);
+    this.trait = trait;
+    this.tooltipName = tooltipName;
+  }
 
   public static BarrelRecipe pickling(@Nonnull IIngredient<ItemStack> inputStack) {
     return new BarrelRecipeFoodTraits(IIngredient.of(FluidsTFC.VINEGAR.get(), 125), new IngredientItemFoodTrait(inputStack, FoodTrait.BRINED), FoodTrait.PICKLED,
@@ -34,15 +43,6 @@ public class BarrelRecipeFoodTraits extends BarrelRecipe {
   public static BarrelRecipe brining(@Nonnull IIngredient<ItemStack> inputStack) {
     return new BarrelRecipeFoodTraits(IIngredient.of(FluidsTFC.BRINE.get(), 125), inputStack, FoodTrait.BRINED,
                                       4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_brining");
-  }
-
-  private final FoodTrait trait;
-  private final String tooltipName;
-
-  private BarrelRecipeFoodTraits(@Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IIngredient<ItemStack> inputStack, FoodTrait trait, int duration, String tooltipName) {
-    super(inputFluid, inputStack, null, ItemStack.EMPTY, duration);
-    this.trait = trait;
-    this.tooltipName = tooltipName;
   }
 
   @Override

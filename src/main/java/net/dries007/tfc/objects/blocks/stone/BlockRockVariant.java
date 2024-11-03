@@ -47,44 +47,6 @@ import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 public class BlockRockVariant extends Block implements IItemSize {
 
   private static final Map<Rock, EnumMap<Rock.Type, BlockRockVariant>> TABLE = new HashMap<>();
-
-  public static BlockRockVariant get(Rock rock, Rock.Type type) {
-    //noinspection ConstantConditions
-    if (rock == null) {
-      return TABLE.get(Rock.GRANITE).get(type);
-    }
-    return TABLE.get(rock).get(type);
-  }
-
-  public static BlockRockVariant create(Rock rock, Rock.Type type) {
-    switch (type) {
-      case RAW:
-        return new BlockRockRaw(type, rock);
-      case SMOOTH:
-        return new BlockRockSmooth(type, rock);
-      case ANVIL:
-        return new BlockStoneAnvil(type, rock);
-      case SPIKE:
-        return new BlockRockSpike(type, rock);
-      case FARMLAND:
-        return new BlockFarmlandTFC(type, rock);
-      case PATH:
-        return new BlockPathTFC(type, rock);
-      case GRASS:
-      case DRY_GRASS:
-      case CLAY_GRASS:
-        return new BlockRockVariantConnected(type, rock);
-      case SAND:
-      case DIRT:
-      case CLAY:
-      case GRAVEL:
-      case COBBLE:
-        return new BlockRockVariantFallable(type, rock);
-      default:
-        return new BlockRockVariant(type, rock);
-    }
-  }
-
   protected final Rock.Type type;
   protected final Rock rock;
 
@@ -143,6 +105,43 @@ public class BlockRockVariant extends Block implements IItemSize {
     if (type != Rock.Type.SPIKE && type != Rock.Type.ANVIL) //since spikes and anvils don't generate ItemBlocks
     {
       OreDictionaryHelper.registerRockType(this, type);
+    }
+  }
+
+  public static BlockRockVariant get(Rock rock, Rock.Type type) {
+    //noinspection ConstantConditions
+    if (rock == null) {
+      return TABLE.get(Rock.GRANITE).get(type);
+    }
+    return TABLE.get(rock).get(type);
+  }
+
+  public static BlockRockVariant create(Rock rock, Rock.Type type) {
+    switch (type) {
+      case RAW:
+        return new BlockRockRaw(type, rock);
+      case SMOOTH:
+        return new BlockRockSmooth(type, rock);
+      case ANVIL:
+        return new BlockStoneAnvil(type, rock);
+      case SPIKE:
+        return new BlockRockSpike(type, rock);
+      case FARMLAND:
+        return new BlockFarmlandTFC(type, rock);
+      case PATH:
+        return new BlockPathTFC(type, rock);
+      case GRASS:
+      case DRY_GRASS:
+      case CLAY_GRASS:
+        return new BlockRockVariantConnected(type, rock);
+      case SAND:
+      case DIRT:
+      case CLAY:
+      case GRAVEL:
+      case COBBLE:
+        return new BlockRockVariantFallable(type, rock);
+      default:
+        return new BlockRockVariant(type, rock);
     }
   }
 

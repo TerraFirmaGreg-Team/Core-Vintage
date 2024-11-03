@@ -28,14 +28,8 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
   private static final long UNKNOWN_CREATION_DATE = 0;
 
   private static boolean markStacksNonDecaying = true;
-
-  public static void setNonDecaying(boolean markStacksNonDecaying) {
-    FoodHandler.markStacksNonDecaying = markStacksNonDecaying;
-  }
-
   protected final List<FoodTrait> foodTraits;
   protected FoodData data;
-
   protected long creationDate;
   protected boolean isNonDecaying; // This is intentionally not serialized, as we don't want it to preserve over `ItemStack.copy()` operations
 
@@ -53,6 +47,10 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
     this.isNonDecaying = FoodHandler.markStacksNonDecaying;
 
     deserializeNBT(nbt);
+  }
+
+  public static void setNonDecaying(boolean markStacksNonDecaying) {
+    FoodHandler.markStacksNonDecaying = markStacksNonDecaying;
   }
 
   @Override

@@ -14,20 +14,6 @@ import net.dries007.tfc.objects.items.metal.ItemProspectorPick.ProspectResult.Ty
  */
 public abstract class ProspectEvent extends Event {
 
-  public static class Server extends ProspectEvent {
-
-    public Server(EntityPlayer player, BlockPos pos, Type type, ItemStack vein) {
-      super(Side.SERVER, player, pos, type, vein);
-    }
-  }
-
-  public static class Client extends ProspectEvent {
-
-    public Client(EntityPlayer player, BlockPos pos, Type type, ItemStack vein) {
-      super(Side.CLIENT, player, pos, type, vein);
-    }
-  }
-
   private Side side;
   private EntityPlayer player;
   private BlockPos pos;
@@ -60,5 +46,19 @@ public abstract class ProspectEvent extends Event {
 
   public ItemStack getVein() {
     return vein;
+  }
+
+  public static class Server extends ProspectEvent {
+
+    public Server(EntityPlayer player, BlockPos pos, Type type, ItemStack vein) {
+      super(Side.SERVER, player, pos, type, vein);
+    }
+  }
+
+  public static class Client extends ProspectEvent {
+
+    public Client(EntityPlayer player, BlockPos pos, Type type, ItemStack vein) {
+      super(Side.CLIENT, player, pos, type, vein);
+    }
   }
 }

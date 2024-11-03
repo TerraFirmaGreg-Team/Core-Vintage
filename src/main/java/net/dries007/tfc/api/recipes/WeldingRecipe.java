@@ -31,10 +31,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class WeldingRecipe extends IForgeRegistryEntry.Impl<WeldingRecipe> implements IJEISimpleRecipe {
 
-  public static WeldingRecipe get(ItemStack stack1, ItemStack stack2, Metal.Tier tier) {
-    return TFCRegistries.WELDING.getValuesCollection().stream().filter(x -> x.matches(stack1, stack2, tier)).findFirst().orElse(null);
-  }
-
   private final Metal.Tier minTier;
   private final IIngredient<ItemStack> input1;
   private final IIngredient<ItemStack> input2;
@@ -53,6 +49,10 @@ public class WeldingRecipe extends IForgeRegistryEntry.Impl<WeldingRecipe> imple
     this.skillType = skillType;
 
     setRegistryName(name);
+  }
+
+  public static WeldingRecipe get(ItemStack stack1, ItemStack stack2, Metal.Tier tier) {
+    return TFCRegistries.WELDING.getValuesCollection().stream().filter(x -> x.matches(stack1, stack2, tier)).findFirst().orElse(null);
   }
 
   @Nonnull

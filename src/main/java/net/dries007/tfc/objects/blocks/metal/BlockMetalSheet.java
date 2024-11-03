@@ -58,15 +58,6 @@ public class BlockMetalSheet extends Block {
     new AxisAlignedBB(0.9375d, 0d, 0d, 1d, 1d, 1d),
     new AxisAlignedBB(0d, 0d, 0d, 0.0625d, 1d, 1d)
   };
-
-  public static BlockMetalSheet get(Metal metal) {
-    return MAP.get(metal);
-  }
-
-  public static ItemStack get(Metal metal, int amount) {
-    return new ItemStack(MAP.get(metal), amount);
-  }
-
   private final Metal metal;
 
   public BlockMetalSheet(Metal metal) {
@@ -82,6 +73,14 @@ public class BlockMetalSheet extends Block {
     setDefaultState(this.blockState.getBaseState().withProperty(FACE_PROPERTIES[0], false).withProperty(FACE_PROPERTIES[1], false)
                                    .withProperty(FACE_PROPERTIES[2], false).withProperty(FACE_PROPERTIES[3], false).withProperty(FACE_PROPERTIES[4], false)
                                    .withProperty(FACE_PROPERTIES[5], false));
+  }
+
+  public static BlockMetalSheet get(Metal metal) {
+    return MAP.get(metal);
+  }
+
+  public static ItemStack get(Metal metal, int amount) {
+    return new ItemStack(MAP.get(metal), amount);
   }
 
   @Nonnull

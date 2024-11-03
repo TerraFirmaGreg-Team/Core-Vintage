@@ -47,9 +47,7 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
 
-import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
-
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = FirmaLife.MOD_ID)
 public class CommonEventHandlerFL {
 
   @SubscribeEvent

@@ -33,6 +33,19 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
   private static final ResourceLocation CLAY_TEXTURE = new ResourceLocation(MOD_ID, "textures/gui/knapping/clay_button.png");
   private static final ResourceLocation FIRE_CLAY_TEXTURE = new ResourceLocation(MOD_ID, "textures/gui/knapping/clay_button_fire.png");
   private static final ResourceLocation LEATHER_TEXTURE = new ResourceLocation(MOD_ID, "textures/gui/knapping/leather_button.png");
+  protected final KnappingRecipe recipe;
+  private final IDrawable squareHigh, squareLow;
+
+  public KnappingRecipeWrapper(KnappingRecipe recipe, IGuiHelper guiHelper) {
+    this(recipe, guiHelper, getHighTexture(recipe.getType()), getLowTexture(recipe.getType()));
+  }
+
+  protected KnappingRecipeWrapper(KnappingRecipe recipe, IGuiHelper helper, @Nullable ResourceLocation highTexture, @Nullable ResourceLocation lowTexture) {
+    this.recipe = recipe;
+
+    this.squareHigh = highTexture == null ? null : helper.drawableBuilder(highTexture, 0, 0, 16, 16).setTextureSize(16, 16).build();
+    this.squareLow = lowTexture == null ? null : helper.drawableBuilder(lowTexture, 0, 0, 16, 16).setTextureSize(16, 16).build();
+  }
 
   @Nullable
   private static ResourceLocation getHighTexture(KnappingType type) {
@@ -54,20 +67,6 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
       return FIRE_CLAY_DISABLED_TEXTURE;
     }
     return null;
-  }
-
-  protected final KnappingRecipe recipe;
-  private final IDrawable squareHigh, squareLow;
-
-  public KnappingRecipeWrapper(KnappingRecipe recipe, IGuiHelper guiHelper) {
-    this(recipe, guiHelper, getHighTexture(recipe.getType()), getLowTexture(recipe.getType()));
-  }
-
-  protected KnappingRecipeWrapper(KnappingRecipe recipe, IGuiHelper helper, @Nullable ResourceLocation highTexture, @Nullable ResourceLocation lowTexture) {
-    this.recipe = recipe;
-
-    this.squareHigh = highTexture == null ? null : helper.drawableBuilder(highTexture, 0, 0, 16, 16).setTextureSize(16, 16).build();
-    this.squareLow = lowTexture == null ? null : helper.drawableBuilder(lowTexture, 0, 0, 16, 16).setTextureSize(16, 16).build();
   }
 
   @Override

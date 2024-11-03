@@ -45,10 +45,6 @@ public class FoodTrait {
     BURNT_TO_A_CRISP = new FoodTrait("burnt_to_a_crisp", 2.5f); // This one is so high as it is meant to be > the existing gain from cooking meat.
   }
 
-  public static Map<String, FoodTrait> getTraits() {
-    return TRAITS;
-  }
-
   private final String name;
   private final float decayModifier;
   private final boolean hasTooltip;
@@ -67,6 +63,10 @@ public class FoodTrait {
       throw new IllegalStateException("There is already a trait with the name '" + name + "'");
     }
     TRAITS.put(name, this);
+  }
+
+  public static Map<String, FoodTrait> getTraits() {
+    return TRAITS;
   }
 
   public float getDecayModifier() {

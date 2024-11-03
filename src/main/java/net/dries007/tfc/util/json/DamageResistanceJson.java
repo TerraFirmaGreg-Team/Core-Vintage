@@ -5,14 +5,10 @@
 
 package net.dries007.tfc.util.json;
 
-import net.minecraft.util.JsonUtils;
-
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 import net.dries007.tfc.api.capability.damage.DamageResistance;
+
+import net.minecraft.util.JsonUtils;
 
 import java.lang.reflect.Type;
 

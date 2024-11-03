@@ -16,6 +16,16 @@ import javax.annotation.Nullable;
 
 public class Vein {
 
+  protected final BlockPos pos;
+  protected final VeinType type;
+  protected final Ore.Grade grade;
+
+  Vein(BlockPos pos, VeinType type, Ore.Grade grade) {
+    this.pos = pos;
+    this.type = type;
+    this.grade = grade;
+  }
+
   /**
    * Serializes a vein to be saved to chunk data
    *
@@ -43,16 +53,6 @@ public class Vein {
     Ore.Grade grade = Ore.Grade.valueOf(nbt.getByte("grade"));
     VeinType type = VeinRegistry.INSTANCE.getVein(nbt.getString("type"));
     return new Vein(pos, type, grade);
-  }
-
-  protected final BlockPos pos;
-  protected final VeinType type;
-  protected final Ore.Grade grade;
-
-  Vein(BlockPos pos, VeinType type, Ore.Grade grade) {
-    this.pos = pos;
-    this.type = type;
-    this.grade = grade;
   }
 
   /**

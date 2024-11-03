@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.util;
 
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.items.ItemsTFC;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -17,19 +20,12 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.fluids.BlockFluidClassic;
-import net.minecraftforge.fluids.FluidActionResult;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.IFluidBlock;
+import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
-
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.items.ItemsTFC;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

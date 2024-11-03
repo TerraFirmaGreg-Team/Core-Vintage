@@ -60,6 +60,13 @@ public class BlockBarrel extends Block implements IItemSize {
   public static final PropertyBool SEALED = PropertyBool.create("sealed");
   private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
+  public BlockBarrel() {
+    super(Material.WOOD);
+    setSoundType(SoundType.WOOD);
+    setHardness(2F);
+    setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
+  }
+
   /**
    * Used to toggle the barrel seal state and update the tile entity, in the correct order
    */
@@ -75,13 +82,6 @@ public class BlockBarrel extends Block implements IItemSize {
         tile.onSealed();
       }
     }
-  }
-
-  public BlockBarrel() {
-    super(Material.WOOD);
-    setSoundType(SoundType.WOOD);
-    setHardness(2F);
-    setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
   }
 
   @Nonnull

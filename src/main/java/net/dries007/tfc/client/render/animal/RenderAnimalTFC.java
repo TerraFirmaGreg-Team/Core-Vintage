@@ -5,13 +5,13 @@
 
 package net.dries007.tfc.client.render.animal;
 
+import net.dries007.tfc.api.types.IAnimalTFC;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
-
-import net.dries007.tfc.api.types.IAnimalTFC;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

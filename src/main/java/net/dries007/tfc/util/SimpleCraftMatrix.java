@@ -19,13 +19,6 @@ public class SimpleCraftMatrix {
   private static final int MAX_WIDTH = 5;
   private static final int MAX_HEIGHT = 5;
   private static final int MAX_AREA = MAX_WIDTH * MAX_HEIGHT;
-
-  private static void logMatrix(boolean[] matrix) {
-    StringBuilder b = new StringBuilder();
-    for (boolean m : matrix) {b.append(m ? "X" : " ");}
-    TerraFirmaCraft.getLog().debug("Matrix: {" + b.toString() + "}");
-  }
-
   /**
    * This is the actual craft matrix true = full false = empty
    */
@@ -69,6 +62,12 @@ public class SimpleCraftMatrix {
       if (line.length() != width) {throw new IllegalArgumentException("Line " + i + " in the pattern has the incorrect length");}
       for (int c = 0; c < width; c++) {this.matrix[i * width + c] = (line.charAt(c) != ' ');}
     }
+  }
+
+  private static void logMatrix(boolean[] matrix) {
+    StringBuilder b = new StringBuilder();
+    for (boolean m : matrix) {b.append(m ? "X" : " ");}
+    TerraFirmaCraft.getLog().debug("Matrix: {" + b.toString() + "}");
   }
 
   public void setAll(boolean value) {

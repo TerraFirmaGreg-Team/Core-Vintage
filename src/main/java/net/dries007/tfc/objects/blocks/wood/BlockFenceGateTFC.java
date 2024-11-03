@@ -18,11 +18,6 @@ import java.util.Map;
 public class BlockFenceGateTFC extends BlockFenceGate {
 
   private static final Map<Tree, BlockFenceGateTFC> MAP = new HashMap<>();
-
-  public static BlockFenceGateTFC get(Tree wood) {
-    return MAP.get(wood);
-  }
-
   public final Tree wood;
 
   public BlockFenceGateTFC(Tree wood) {
@@ -36,5 +31,9 @@ public class BlockFenceGateTFC extends BlockFenceGate {
     //noinspection ConstantConditions
     OreDictionaryHelper.register(this, "fence", "gate", "wood", wood.getRegistryName().getPath());
     Blocks.FIRE.setFireInfo(this, 5, 20);
+  }
+
+  public static BlockFenceGateTFC get(Tree wood) {
+    return MAP.get(wood);
   }
 }

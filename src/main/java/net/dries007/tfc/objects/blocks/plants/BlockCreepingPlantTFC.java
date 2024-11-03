@@ -52,13 +52,13 @@ public class BlockCreepingPlantTFC extends BlockPlantTFC {
   private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
   private static final Map<Plant, BlockCreepingPlantTFC> MAP = new HashMap<>();
 
-  public static BlockCreepingPlantTFC get(Plant plant) {
-    return BlockCreepingPlantTFC.MAP.get(plant);
-  }
-
   public BlockCreepingPlantTFC(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {throw new IllegalStateException("There can only be one.");}
+  }
+
+  public static BlockCreepingPlantTFC get(Plant plant) {
+    return BlockCreepingPlantTFC.MAP.get(plant);
   }
 
   @Override

@@ -56,15 +56,6 @@ public class BlockAnvilTFC extends Block {
   private static final Map<Metal, BlockAnvilTFC> MAP = new HashMap<>();
   private static final AxisAlignedBB AABB_Z = new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.6875, 1);
   private static final AxisAlignedBB AABB_X = new AxisAlignedBB(0, 0, 0.1875, 1, 0.6875, 0.8125);
-
-  public static BlockAnvilTFC get(Metal metal) {
-    return MAP.get(metal);
-  }
-
-  public static ItemStack get(Metal metal, int amount) {
-    return new ItemStack(MAP.get(metal), amount);
-  }
-
   private final Metal metal;
 
   public BlockAnvilTFC(Metal metal) {
@@ -78,6 +69,14 @@ public class BlockAnvilTFC extends Block {
     setHarvestLevel("pickaxe", 0);
 
     setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.NORTH));
+  }
+
+  public static BlockAnvilTFC get(Metal metal) {
+    return MAP.get(metal);
+  }
+
+  public static ItemStack get(Metal metal, int amount) {
+    return new ItemStack(MAP.get(metal), amount);
   }
 
   @SuppressWarnings("deprecation")

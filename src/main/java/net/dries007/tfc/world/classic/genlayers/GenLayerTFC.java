@@ -60,6 +60,63 @@ public abstract class GenLayerTFC extends GenLayer {
     new Color(0xF13A13),    // Vivid Reddish Orange
     new Color(0x232C16),    // Dark Olive Green
   };
+  // Doing this lookup only once is quite a bit faster.
+  protected final int oceanID;
+  protected final int plainsID;
+  protected final int highPlainsID;
+  protected final int deepOceanID;
+  protected final int lakeID;
+  protected final int riverID;
+  protected final int swamplandID;
+  protected final int highHillsID;
+  protected final int highHillsEdgeID;
+  protected final int rollingHillsID;
+  protected final int beachID;
+  protected final int gravelBeachID;
+  protected final int mountainsID;
+  protected final int mountainsEdgeID;
+  protected final int flatlandsID;
+  protected final int fieldsID;
+  protected final int meadowsID;
+  protected final int bayouID;
+  protected final int mangroveID;
+  protected final int marshID;
+  protected final int cragID;
+  protected final int mesaID;
+  protected final int mesaPlateauID;
+  protected final int mesaBryceID;
+  protected final int mesaPlateauMID;
+  protected long worldGenSeed;
+  protected long chunkSeed;
+
+  public GenLayerTFC(long seed) {
+    super(seed);
+    this.oceanID = Biome.getIdForBiome(BiomesTFC.OCEAN);
+    this.plainsID = Biome.getIdForBiome(BiomesTFC.PLAINS);
+    this.highPlainsID = Biome.getIdForBiome(BiomesTFC.HIGH_PLAINS);
+    this.deepOceanID = Biome.getIdForBiome(BiomesTFC.DEEP_OCEAN);
+    this.lakeID = Biome.getIdForBiome(BiomesTFC.LAKE);
+    this.riverID = Biome.getIdForBiome(BiomesTFC.RIVER);
+    this.swamplandID = Biome.getIdForBiome(BiomesTFC.SWAMPLAND);
+    this.highHillsID = Biome.getIdForBiome(BiomesTFC.HIGH_HILLS);
+    this.highHillsEdgeID = Biome.getIdForBiome(BiomesTFC.HIGH_HILLS_EDGE);
+    this.rollingHillsID = Biome.getIdForBiome(BiomesTFC.ROLLING_HILLS);
+    this.beachID = Biome.getIdForBiome(BiomesTFC.BEACH);
+    this.gravelBeachID = Biome.getIdForBiome(BiomesTFC.GRAVEL_BEACH);
+    this.mountainsID = Biome.getIdForBiome(BiomesTFC.MOUNTAINS);
+    this.mountainsEdgeID = Biome.getIdForBiome(BiomesTFC.MOUNTAINS_EDGE);
+    this.flatlandsID = Biome.getIdForBiome(BiomesTFC.FLATLANDS);
+    this.fieldsID = Biome.getIdForBiome(BiomesTFC.FIELDS);
+    this.meadowsID = Biome.getIdForBiome(BiomesTFC.MEADOWS);
+    this.bayouID = Biome.getIdForBiome(BiomesTFC.BAYOU);
+    this.mangroveID = Biome.getIdForBiome(BiomesTFC.MANGROVE);
+    this.marshID = Biome.getIdForBiome(BiomesTFC.MARSH);
+    this.cragID = Biome.getIdForBiome(BiomesTFC.CRAG);
+    this.mesaID = Biome.getIdForBiome(BiomesTFC.MESA);
+    this.mesaPlateauID = Biome.getIdForBiome(BiomesTFC.MESA_PLATEAU);
+    this.mesaBryceID = Biome.getIdForBiome(BiomesTFC.MESA_BRYCE);
+    this.mesaPlateauMID = Biome.getIdForBiome(BiomesTFC.MESA_PLATEAU_M);
+  }
 
   public static GenLayerTFC[] initializeBiomes(long seed) {
     // Continent generator
@@ -81,12 +138,12 @@ public abstract class GenLayerTFC extends GenLayer {
     biomes = new GenLayerLakes(200L, biomes);
     biomes = GenLayerZoomTFC.magnify(1000L, biomes, 2);
     biomes = new GenLayerBiomeEdge(1000L, biomes);
-    biomes = new GenLayerZoomTFC(1000, biomes);
+    biomes = new GenLayerZoomTFC(1000L, biomes);
     biomes = new GenLayerAddIslandTFC(3L, biomes);
-    biomes = new GenLayerZoomTFC(1001, biomes);
+    biomes = new GenLayerZoomTFC(1001L, biomes);
     biomes = new GenLayerShoreTFC(1000L, biomes);
-    biomes = new GenLayerZoomTFC(1002, biomes);
-    biomes = new GenLayerZoomTFC(1003, biomes);
+    biomes = new GenLayerZoomTFC(1002L, biomes);
+    biomes = new GenLayerZoomTFC(1003L, biomes);
     biomes = new GenLayerSmoothTFC(1000L, biomes);
     // Now we have a full on biome map
     drawImageBiomes(1024, biomes, "biomes");
@@ -122,8 +179,9 @@ public abstract class GenLayerTFC extends GenLayer {
     layer = new GenLayerSmoothTFC(1000L, layer);
 
     for (int zoomLevel = 0; zoomLevel < rockLayerSize; ++zoomLevel) {
-      layer = new GenLayerZoomTFC(1000 + zoomLevel, layer);
+      layer = new GenLayerZoomTFC((long) (1000 + zoomLevel), layer);
     }
+
     layer = new GenLayerSmoothTFC(1000L, layer);
     layer = new GenLayerVoronoiZoomTFC(10L, layer);
     layer.initWorldGenSeed(seed);
@@ -139,10 +197,10 @@ public abstract class GenLayerTFC extends GenLayer {
     continent = new GenLayerZoomTFC(2003L, continent);
     continent = GenLayerZoomTFC.magnify(1000L, continent, 2);
     continent = new GenLayerSmoothTFC(1000L, continent);
-    continent = new GenLayerZoomTFC(1000, continent);
-    continent = new GenLayerZoomTFC(1001, continent);
-    continent = new GenLayerZoomTFC(1002, continent);
-    continent = new GenLayerZoomTFC(1003, continent);
+    continent = new GenLayerZoomTFC(1000L, continent);
+    continent = new GenLayerZoomTFC(1001L, continent);
+    continent = new GenLayerZoomTFC(1002L, continent);
+    continent = new GenLayerZoomTFC(1003L, continent);
     continent = new GenLayerSmoothTFC(1000L, continent);
     continent = new GenLayerVoronoiZoomTFC(10L, continent);
     continent.initWorldGenSeed(seed);
@@ -187,34 +245,52 @@ public abstract class GenLayerTFC extends GenLayer {
     }
   }
 
-  // Doing this lookup only once is quite a bit faster.
-  protected final int oceanID = Biome.getIdForBiome(BiomesTFC.OCEAN);
-  protected final int plainsID = Biome.getIdForBiome(BiomesTFC.PLAINS);
-  protected final int highPlainsID = Biome.getIdForBiome(BiomesTFC.HIGH_PLAINS);
-  protected final int deepOceanID = Biome.getIdForBiome(BiomesTFC.DEEP_OCEAN);
-  protected final int lakeID = Biome.getIdForBiome(BiomesTFC.LAKE);
-  protected final int riverID = Biome.getIdForBiome(BiomesTFC.RIVER);
-  protected final int swamplandID = Biome.getIdForBiome(BiomesTFC.SWAMPLAND);
-  protected final int highHillsID = Biome.getIdForBiome(BiomesTFC.HIGH_HILLS);
-  protected final int highHillsEdgeID = Biome.getIdForBiome(BiomesTFC.HIGH_HILLS_EDGE);
-  protected final int beachID = Biome.getIdForBiome(BiomesTFC.BEACH);
-  protected final int gravelBeachID = Biome.getIdForBiome(BiomesTFC.GRAVEL_BEACH);
-  protected final int mountainsID = Biome.getIdForBiome(BiomesTFC.MOUNTAINS);
-  protected final int mountainsEdgeID = Biome.getIdForBiome(BiomesTFC.MOUNTAINS_EDGE);
+  public void initWorldGenSeed(long par1) {
+    this.worldGenSeed = par1;
+    if (this.parent != null) {
+      this.parent.initWorldGenSeed(par1);
+    }
 
-  public GenLayerTFC(long seed) {
-    super(seed);
+    this.worldGenSeed *= this.worldGenSeed * 6364136223846793005L + 1442695040888963407L;
+    this.worldGenSeed += this.baseSeed;
+    this.worldGenSeed *= this.worldGenSeed * 6364136223846793005L + 1442695040888963407L;
+    this.worldGenSeed += this.baseSeed;
+    this.worldGenSeed *= this.worldGenSeed * 6364136223846793005L + 1442695040888963407L;
+    this.worldGenSeed += this.baseSeed;
+  }
+
+  public void initChunkSeed(long par1, long par3) {
+    this.chunkSeed = this.worldGenSeed;
+    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
+    this.chunkSeed += par1;
+    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
+    this.chunkSeed += par3;
+    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
+    this.chunkSeed += par1;
+    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
+    this.chunkSeed += par3;
+  }
+
+  protected int nextInt(int par1) {
+    int var2 = (int) ((this.chunkSeed >> 24) % (long) par1);
+    if (var2 < 0) {
+      var2 += par1;
+    }
+
+    this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
+    this.chunkSeed += this.worldGenSeed;
+    return var2;
   }
 
   public boolean isOceanicBiome(int id) {
-    return oceanID == id || deepOceanID == id;
+    return this.oceanID == id || this.deepOceanID == id || this.mangroveID == id;
   }
 
   public boolean isMountainBiome(int id) {
-    return mountainsID == id || mountainsEdgeID == id;
+    return this.mountainsID == id || this.mountainsEdgeID == id || this.cragID == id;
   }
 
   public boolean isBeachBiome(int id) {
-    return beachID == id || gravelBeachID == id;
+    return this.beachID == id || this.gravelBeachID == id;
   }
 }

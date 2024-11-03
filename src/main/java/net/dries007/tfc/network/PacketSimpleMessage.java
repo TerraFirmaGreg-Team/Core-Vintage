@@ -22,16 +22,15 @@ import java.util.function.BooleanSupplier;
 
 public class PacketSimpleMessage implements IMessage {
 
-  public enum MessageCategory {
-    ANVIL(() -> ConfigTFC.Client.TOOLTIP.anvilWeldOutputToActionBar),
-    VESSEL(() -> ConfigTFC.Client.TOOLTIP.vesselOutputToActionBar),
-    ANIMAL(() -> ConfigTFC.Client.TOOLTIP.animalsOutputToActionBar);
+  private ITextComponent text;
+  private MessageCategory category;
 
-    private final BooleanSupplier displayToToolbar;
+  public PacketSimpleMessage() {
+  }
 
-    MessageCategory(BooleanSupplier displayToToolbar) {
-      this.displayToToolbar = displayToToolbar;
-    }
+  public PacketSimpleMessage(MessageCategory category, ITextComponent text) {
+    this.text = text;
+    this.category = category;
   }
 
   /**
@@ -48,17 +47,6 @@ public class PacketSimpleMessage implements IMessage {
     return new PacketSimpleMessage(category, new TextComponentString(localized));
   }
 
-  private ITextComponent text;
-  private MessageCategory category;
-
-  public PacketSimpleMessage() {
-  }
-
-  public PacketSimpleMessage(MessageCategory category, ITextComponent text) {
-    this.text = text;
-    this.category = category;
-  }
-
   @Override
   public void fromBytes(ByteBuf buf) {
     category = MessageCategory.values()[buf.readInt()];
@@ -71,6 +59,18 @@ public class PacketSimpleMessage implements IMessage {
     String json = ITextComponent.Serializer.componentToJson(text);
     buf.writeInt(json.length());
     buf.writeCharSequence(json, Charset.defaultCharset());
+  }
+
+  public enum MessageCategory {
+    ANVIL(() -> ConfigTFC.Client.TOOLTIP.anvilWeldOutputToActionBar),
+    VESSEL(() -> ConfigTFC.Client.TOOLTIP.vesselOutputToActionBar),
+    ANIMAL(() -> ConfigTFC.Client.TOOLTIP.animalsOutputToActionBar);
+
+    private final BooleanSupplier displayToToolbar;
+
+    MessageCategory(BooleanSupplier displayToToolbar) {
+      this.displayToToolbar = displayToToolbar;
+    }
   }
 
   public static final class Handler implements IMessageHandler<PacketSimpleMessage, IMessage> {

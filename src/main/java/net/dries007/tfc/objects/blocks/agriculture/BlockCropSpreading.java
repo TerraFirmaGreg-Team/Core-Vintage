@@ -26,6 +26,12 @@ public abstract class BlockCropSpreading extends BlockCropTFC {
 
   private static final int MAX_SPREAD_AGE = 16;
 
+  BlockCropSpreading(ICrop crop) {
+    super(crop);
+
+    setDefaultState(getBlockState().getBaseState().withProperty(WILD, false).withProperty(getStageProperty(), 0));
+  }
+
   public static BlockCropSpreading create(ICrop crop) {
     PropertyInteger property = getStagePropertyForCrop(crop);
 
@@ -37,12 +43,6 @@ public abstract class BlockCropSpreading extends BlockCropTFC {
         return property;
       }
     };
-  }
-
-  BlockCropSpreading(ICrop crop) {
-    super(crop);
-
-    setDefaultState(getBlockState().getBaseState().withProperty(WILD, false).withProperty(getStageProperty(), 0));
   }
 
   @Override

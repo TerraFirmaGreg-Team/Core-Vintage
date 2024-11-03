@@ -35,13 +35,13 @@ public class BlockTallPlantTFC extends BlockPlantTFC implements IGrowable, ITall
   private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
   private static final Map<Plant, BlockTallPlantTFC> MAP = new HashMap<>();
 
-  public static BlockTallPlantTFC get(Plant plant) {
-    return BlockTallPlantTFC.MAP.get(plant);
-  }
-
   public BlockTallPlantTFC(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {throw new IllegalStateException("There can only be one.");}
+  }
+
+  public static BlockTallPlantTFC get(Plant plant) {
+    return BlockTallPlantTFC.MAP.get(plant);
   }
 
   @Override

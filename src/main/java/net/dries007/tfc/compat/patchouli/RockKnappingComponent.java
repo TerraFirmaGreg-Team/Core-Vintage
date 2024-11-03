@@ -5,13 +5,14 @@
 
 package net.dries007.tfc.compat.patchouli;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
 import com.google.gson.annotations.SerializedName;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.items.rock.ItemRock;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
 import vazkii.patchouli.api.VariableHolder;
 
 import javax.annotation.Nonnull;

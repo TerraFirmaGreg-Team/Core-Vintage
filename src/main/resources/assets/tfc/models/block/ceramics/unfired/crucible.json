@@ -1,6 +1,6 @@
 {
 	"credit":"Made with Blockbench",
-	"parent":"tfc:block/ceramics/unfired/vessel_base",
+	"parent":"tfc:block/crucible",
 	"textures":{
 		"side":"tfc:blocks/ceramics/unfired/crucible/side",
 		"top":"tfc:blocks/ceramics/unfired/crucible/top"

@@ -24,16 +24,6 @@ import java.util.List;
 
 public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
 
-  @Nullable
-  public static BloomeryRecipe get(@Nonnull ItemStack inputItem) {
-    return TFCRegistries.BLOOMERY.getValuesCollection().stream().filter(x -> x.isValidInput(inputItem)).findFirst().orElse(null);
-  }
-
-  @Nullable
-  public static BloomeryRecipe get(@Nonnull Metal metal) {
-    return TFCRegistries.BLOOMERY.getValuesCollection().stream().filter(x -> metal == x.metal).findFirst().orElse(null);
-  }
-
   private final Metal metal; // Melting metal (which will be stored in a bloom)
   private final IIngredient<ItemStack> additive; // The additive used in the process (charcoal is the default for iron)
 
@@ -44,6 +34,16 @@ public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
     //Ensure one bloomery recipe per metal
     //noinspection ConstantConditions
     setRegistryName(metal.getRegistryName());
+  }
+
+  @Nullable
+  public static BloomeryRecipe get(@Nonnull ItemStack inputItem) {
+    return TFCRegistries.BLOOMERY.getValuesCollection().stream().filter(x -> x.isValidInput(inputItem)).findFirst().orElse(null);
+  }
+
+  @Nullable
+  public static BloomeryRecipe get(@Nonnull Metal metal) {
+    return TFCRegistries.BLOOMERY.getValuesCollection().stream().filter(x -> metal == x.metal).findFirst().orElse(null);
   }
 
   public ItemStack getOutput(List<ItemStack> inputs) {

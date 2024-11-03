@@ -62,8 +62,8 @@ import static net.dries007.tfc.Constants.RNG;
 @MethodsReturnNonnullByDefault
 public class ItemMetalMallet extends ItemTFC implements IMetalItem {
 
-  private final Metal metal;
   public final ToolMaterial material;
+  private final Metal metal;
   private final double attackDamage;
   private final float attackSpeed;
 

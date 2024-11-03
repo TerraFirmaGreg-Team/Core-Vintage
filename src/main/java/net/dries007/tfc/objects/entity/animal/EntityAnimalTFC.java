@@ -65,6 +65,27 @@ public abstract class EntityAnimalTFC extends EntityAnimal implements IAnimalTFC
   private static final DataParameter<Float> FAMILIARITY = EntityDataManager.createKey(EntityAnimalTFC.class, DataSerializers.FLOAT);
   //Is this female fertilized? (in oviparous, the egg laying is fertilized, for mammals this is pregnancy)
   private static final DataParameter<Boolean> FERTILIZED = EntityDataManager.createKey(EntityAnimalTFC.class, DataSerializers.BOOLEAN);
+  private long lastFed; //Last time(in days) this entity was fed
+  private long lastFDecay; //Last time(in days) this entity's familiarity had decayed
+  private long matingTime; //The last time(in ticks) this male tried fertilizing females
+  private long lastDeath; //Last time(in days) this entity checked for dying of old age
+
+  @SuppressWarnings("unused")
+  public EntityAnimalTFC(World worldIn) {
+    super(worldIn);
+  }
+
+  public EntityAnimalTFC(World worldIn, Gender gender, int birthDay) {
+    super(worldIn);
+    this.setGender(gender);
+    this.setBirthDay(birthDay);
+    this.setFamiliarity(0);
+    this.setGrowingAge(0); //We don't use this
+    this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
+    this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
+    this.lastFDecay = CalendarTFC.PLAYER_TIME.getTotalDays();
+    this.setFertilized(false);
+  }
 
   /**
    * Gets a random growth for this animal ** Static ** So it can be used by class constructor
@@ -130,28 +151,6 @@ public abstract class EntityAnimalTFC extends EntityAnimal implements IAnimalTFC
     entity.tasks.addTask(7, new EntityAIWanderAvoidWater(entity, 1.0D));
     entity.tasks.addTask(8, new EntityAIWatchClosest(entity, EntityPlayer.class, 6.0F));
     entity.tasks.addTask(9, new EntityAILookIdle(entity));
-  }
-
-  private long lastFed; //Last time(in days) this entity was fed
-  private long lastFDecay; //Last time(in days) this entity's familiarity had decayed
-  private long matingTime; //The last time(in ticks) this male tried fertilizing females
-  private long lastDeath; //Last time(in days) this entity checked for dying of old age
-
-  @SuppressWarnings("unused")
-  public EntityAnimalTFC(World worldIn) {
-    super(worldIn);
-  }
-
-  public EntityAnimalTFC(World worldIn, Gender gender, int birthDay) {
-    super(worldIn);
-    this.setGender(gender);
-    this.setBirthDay(birthDay);
-    this.setFamiliarity(0);
-    this.setGrowingAge(0); //We don't use this
-    this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
-    this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
-    this.lastFDecay = CalendarTFC.PLAYER_TIME.getTotalDays();
-    this.setFertilized(false);
   }
 
   @Override

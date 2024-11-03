@@ -53,6 +53,13 @@ public enum ForgeRule {
   SHRINK_THIRD_LAST(Order.THIRD_LAST, SHRINK);
 
   private static final ForgeRule[] VALUES = values();
+  private final Order order;
+  private final ForgeStep type;
+
+  ForgeRule(@Nonnull Order order, @Nonnull ForgeStep type) {
+    this.order = order;
+    if (type == HIT_MEDIUM || type == HIT_HARD) {this.type = HIT_LIGHT;} else {this.type = type;}
+  }
 
   public static int getID(@Nullable ForgeRule rule) {
     return rule == null ? -1 : rule.ordinal();
@@ -61,14 +68,6 @@ public enum ForgeRule {
   @Nullable
   public static ForgeRule valueOf(int id) {
     return id >= 0 && id < VALUES.length ? VALUES[id] : null;
-  }
-
-  private final Order order;
-  private final ForgeStep type;
-
-  ForgeRule(@Nonnull Order order, @Nonnull ForgeStep type) {
-    this.order = order;
-    if (type == HIT_MEDIUM || type == HIT_HARD) {this.type = HIT_LIGHT;} else {this.type = type;}
   }
 
   @SideOnly(Side.CLIENT)

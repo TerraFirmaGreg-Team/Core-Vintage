@@ -2,6 +2,16 @@
   "multipart": [
     {
       "when": {
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/badderlocks_upper"
+        }
+      ]
+    },
+    {
+      "when": {
         "part": "lower"
       },
       "apply": [
@@ -12,7 +22,17 @@
     },
     {
       "when": {
-        "part": "single|upper"
+        "part": "middle"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/badderlocks_lower"
+        }
+      ]
+    },
+    {
+      "when": {
+        "part": "upper"
       },
       "apply": [
         {

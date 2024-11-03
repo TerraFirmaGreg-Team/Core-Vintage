@@ -170,6 +170,17 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
       .match(new BlockPos(0, -1, 0), stoneMatcher);
   }
 
+  public BlockBloomery() {
+    super(Material.IRON);
+    setSoundType(SoundType.METAL);
+    setHarvestLevel("pickaxe", 0);
+    setHardness(20.0F);
+    setDefaultState(this.blockState.getBaseState()
+                                   .withProperty(FACING, EnumFacing.NORTH)
+                                   .withProperty(LIT, false)
+                                   .withProperty(OPEN, false));
+  }
+
   public static boolean isValidSideBlock(IBlockState state) {
     return state.getMaterial() == Material.ROCK && state.isNormalCube();
   }
@@ -183,17 +194,6 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
     }
     // Maximum levels
     return 3;
-  }
-
-  public BlockBloomery() {
-    super(Material.IRON);
-    setSoundType(SoundType.METAL);
-    setHarvestLevel("pickaxe", 0);
-    setHardness(20.0F);
-    setDefaultState(this.blockState.getBaseState()
-                                   .withProperty(FACING, EnumFacing.NORTH)
-                                   .withProperty(LIT, false)
-                                   .withProperty(OPEN, false));
   }
 
   public boolean canGateStayInPlace(World world, BlockPos pos, EnumFacing.Axis axis) {

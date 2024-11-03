@@ -25,6 +25,13 @@ public class CalendarWorldData extends WorldSavedData {
   private static final String NAME_PRE_V1_5_0_X = MOD_ID + ":calendar";
 
   private static final Logger LOGGER = LogManager.getLogger();
+  private final CalendarTFC calendar;
+
+  @SuppressWarnings("unused")
+  public CalendarWorldData(String name) {
+    super(name);
+    this.calendar = new CalendarTFC();
+  }
 
   @Nonnull
   public static CalendarWorldData get(@Nonnull World world) {
@@ -50,14 +57,6 @@ public class CalendarWorldData extends WorldSavedData {
       return data;
     }
     throw new IllegalStateException("Unable to access calendar data - everything is wrong now");
-  }
-
-  private final CalendarTFC calendar;
-
-  @SuppressWarnings("unused")
-  public CalendarWorldData(String name) {
-    super(name);
-    this.calendar = new CalendarTFC();
   }
 
   @Override

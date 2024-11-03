@@ -57,11 +57,6 @@ import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_
 public class ItemMold extends ItemPottery {
 
   private static final EnumMap<Metal.ItemType, ItemMold> MAP = new EnumMap<>(Metal.ItemType.class);
-
-  public static ItemMold get(Metal.ItemType category) {
-    return MAP.get(category);
-  }
-
   private final Metal.ItemType type;
 
   public ItemMold(Metal.ItemType type) {
@@ -69,6 +64,10 @@ public class ItemMold extends ItemPottery {
     if (MAP.put(type, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
+  }
+
+  public static ItemMold get(Metal.ItemType category) {
+    return MAP.get(category);
   }
 
   @Override

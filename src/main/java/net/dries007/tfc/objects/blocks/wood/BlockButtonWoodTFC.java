@@ -17,11 +17,6 @@ import java.util.Map;
 public class BlockButtonWoodTFC extends BlockButtonWood {
 
   private static final Map<Tree, BlockButtonWoodTFC> MAP = new HashMap<>();
-
-  public static BlockButtonWoodTFC get(Tree wood) {
-    return MAP.get(wood);
-  }
-
   public final Tree wood;
 
   public BlockButtonWoodTFC(Tree wood) {
@@ -30,5 +25,9 @@ public class BlockButtonWoodTFC extends BlockButtonWood {
     setHardness(0.5F);
     setSoundType(SoundType.WOOD);
     Blocks.FIRE.setFireInfo(this, 5, 20);
+  }
+
+  public static BlockButtonWoodTFC get(Tree wood) {
+    return MAP.get(wood);
   }
 }

@@ -78,7 +78,7 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber
-@Mod(modid = MOD_ID, name = TerraFirmaCraft.MOD_NAME, useMetadata = true, guiFactory = Constants.GUI_FACTORY, dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
+@Mod(modid = MOD_ID, version = "2.0.0", name = TerraFirmaCraft.MOD_NAME, useMetadata = true, guiFactory = Constants.GUI_FACTORY, dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
 public final class TerraFirmaCraft {
 
   public static final String MOD_ID = "tfc";
@@ -93,6 +93,11 @@ public final class TerraFirmaCraft {
   static {
     FluidRegistry.enableUniversalBucket();
   }
+
+  private final Logger log = LogManager.getLogger(MOD_ID);
+  private final boolean isSignedBuild = true;
+  private WorldTypeTFC worldTypeTFC;
+  private SimpleNetworkWrapper network;
 
   public static Logger getLog() {
     return INSTANCE.log;
@@ -113,11 +118,6 @@ public final class TerraFirmaCraft {
   public static TerraFirmaCraft getInstance() {
     return INSTANCE;
   }
-
-  private final Logger log = LogManager.getLogger(MOD_ID);
-  private final boolean isSignedBuild = true;
-  private WorldTypeTFC worldTypeTFC;
-  private SimpleNetworkWrapper network;
 
   @Mod.EventHandler
   public void preInit(FMLPreInitializationEvent event) {

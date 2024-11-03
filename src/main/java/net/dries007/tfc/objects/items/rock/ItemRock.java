@@ -32,15 +32,6 @@ import java.util.Map;
 public class ItemRock extends ItemTFC implements IRockObject {
 
   private static final Map<Rock, ItemRock> MAP = new HashMap<>();
-
-  public static ItemRock get(Rock rock) {
-    return MAP.get(rock);
-  }
-
-  public static ItemStack get(Rock rock, int amount) {
-    return new ItemStack(MAP.get(rock), amount);
-  }
-
   private final Rock rock;
 
   public ItemRock(Rock rock) {
@@ -54,6 +45,14 @@ public class ItemRock extends ItemTFC implements IRockObject {
     if (rock.isFluxStone()) {
       OreDictionaryHelper.register(this, "rock", "flux");
     }
+  }
+
+  public static ItemRock get(Rock rock) {
+    return MAP.get(rock);
+  }
+
+  public static ItemStack get(Rock rock, int amount) {
+    return new ItemStack(MAP.get(rock), amount);
   }
 
   @Override

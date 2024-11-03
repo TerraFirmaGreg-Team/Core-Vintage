@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:wood/planks/bald_cypress"
+    }
+  ],
+  "result": {
+    "item": "tfc:wood/button/bald_cypress",
+    "count": 1
+  }
+}

@@ -25,15 +25,6 @@ import java.util.EnumMap;
 public class ItemGem extends ItemTFC {
 
   private static final EnumMap<Gem, ItemGem> MAP = new EnumMap<>(Gem.class);
-
-  public static ItemGem get(Gem gem) {
-    return MAP.get(gem);
-  }
-
-  public static ItemStack get(Gem ore, Gem.Grade grade, int amount) {
-    return new ItemStack(MAP.get(ore), amount, grade.ordinal());
-  }
-
   public final Gem gem;
 
   public ItemGem(Gem gem) {
@@ -49,6 +40,14 @@ public class ItemGem extends ItemTFC {
       }
       OreDictionaryHelper.registerMeta(this, grade.ordinal(), "gem", grade);
     }
+  }
+
+  public static ItemGem get(Gem gem) {
+    return MAP.get(gem);
+  }
+
+  public static ItemStack get(Gem ore, Gem.Grade grade, int amount) {
+    return new ItemStack(MAP.get(ore), amount, grade.ordinal());
   }
 
   @Override

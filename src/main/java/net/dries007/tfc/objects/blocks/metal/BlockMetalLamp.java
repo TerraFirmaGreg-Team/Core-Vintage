@@ -56,15 +56,6 @@ public class BlockMetalLamp extends Block implements ILightableBlock {
   private static final Map<Metal, BlockMetalLamp> MAP = new HashMap<>();
   private static final AxisAlignedBB AABB_UP = new AxisAlignedBB(0.3125, 0, 0.3125, 0.6875, 0.5, 0.6875);
   private static final AxisAlignedBB AABB_DOWN = new AxisAlignedBB(0.3125, 0, 0.3125, 0.6875, 1, 0.6875);
-
-  public static BlockMetalLamp get(Metal metal) {
-    return MAP.get(metal);
-  }
-
-  public static ItemStack get(Metal metal, int amount) {
-    return new ItemStack(MAP.get(metal), amount);
-  }
-
   private final Metal metal;
 
   public BlockMetalLamp(Metal metal) {
@@ -76,6 +67,14 @@ public class BlockMetalLamp extends Block implements ILightableBlock {
     setHardness(1f);
     setTickRandomly(true);
     setSoundType(SoundType.METAL);
+  }
+
+  public static BlockMetalLamp get(Metal metal) {
+    return MAP.get(metal);
+  }
+
+  public static ItemStack get(Metal metal, int amount) {
+    return new ItemStack(MAP.get(metal), amount);
   }
 
   public Metal getMetal() {

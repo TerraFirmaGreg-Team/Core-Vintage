@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "tfc:wood/lumber/bald_cypress"
+    }
+  },
+  "result": {
+    "item": "tfc:wood/pressure_plate/bald_cypress",
+    "count": 1
+  }
+}

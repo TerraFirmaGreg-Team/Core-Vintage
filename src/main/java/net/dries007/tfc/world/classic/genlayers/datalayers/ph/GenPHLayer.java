@@ -16,6 +16,10 @@ public abstract class GenPHLayer extends GenLayerTFC {
   public static final int MIN = DataLayer.PH_ACID_HIGH.layerID;
   public static final int MAX = DataLayer.PH_ALKALINE_HIGH.layerID;
 
+  public GenPHLayer(long par1) {
+    super(par1);
+  }
+
   public static GenLayerTFC initializePH(long seed) {
     GenLayerTFC continent = new GenLayerPHInit(1L);
     continent = new GenLayerAddPH(1L, continent);
@@ -36,9 +40,5 @@ public abstract class GenPHLayer extends GenLayerTFC {
     continent = new GenLayerSmoothTFC(1000L, continent);
     continent.initWorldGenSeed(seed);
     return continent;
-  }
-
-  public GenPHLayer(long par1) {
-    super(par1);
   }
 }

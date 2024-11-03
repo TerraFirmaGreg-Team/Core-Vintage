@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
+import net.dries007.tfc.api.types.IAnimalTFC;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,8 +15,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.util.math.MathHelper;
-
-import net.dries007.tfc.api.types.IAnimalTFC;
 
 import javax.annotation.Nonnull;
 

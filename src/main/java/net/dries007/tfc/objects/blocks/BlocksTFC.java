@@ -126,6 +126,7 @@ import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.FruitTree;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types.Rock.Type.ANVIL;
 import static net.dries007.tfc.api.types.Rock.Type.BRICKS;
 import static net.dries007.tfc.api.types.Rock.Type.CLAY;
 import static net.dries007.tfc.api.types.Rock.Type.CLAY_GRASS;
@@ -137,6 +138,8 @@ import static net.dries007.tfc.api.types.Rock.Type.GRAVEL;
 import static net.dries007.tfc.api.types.Rock.Type.RAW;
 import static net.dries007.tfc.api.types.Rock.Type.SAND;
 import static net.dries007.tfc.api.types.Rock.Type.SMOOTH;
+import static net.dries007.tfc.api.types.Rock.Type.SPIKE;
+import static net.dries007.tfc.api.types.Rock.Type.values;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_DECORATIONS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FLORA;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
@@ -438,9 +441,9 @@ public final class BlocksTFC {
 
     {
       Builder<BlockRockVariant> b = ImmutableList.builder();
-      for (Rock.Type type : Rock.Type.values()) {
+      for (Rock.Type type : values()) {
         for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-          if (type != Rock.Type.ANVIL) {
+          if (type != ANVIL) {
             b.add(register(r, type.name().toLowerCase() + "/" + rock.getRegistryName().getPath(), BlockRockVariant.create(rock, type), CT_ROCK_BLOCKS));
           } else if (rock.getRockCategory().hasAnvil()) {
             // Anvil registration is special, is has it's own folder
@@ -451,9 +454,9 @@ public final class BlocksTFC {
       allBlockRockVariants = b.build();
       allBlockRockVariants.forEach(x ->
                                    {
-                                     if (x.getType() == Rock.Type.SAND) {
+                                     if (x.getType() == SAND) {
                                        normalItemBlocks.add(new ItemBlockHeat(x, 1, 600));
-                                     } else if (x.getType() != Rock.Type.SPIKE && x.getType() != Rock.Type.ANVIL) {
+                                     } else if (x.getType() != SPIKE && x.getType() != ANVIL) {
                                        normalItemBlocks.add(new ItemBlockTFC(x));
                                      }
                                    });
@@ -462,7 +465,7 @@ public final class BlocksTFC {
     {
       // Add resultingState to the registered collapsable blocks.
       for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-        for (Rock.Type type : Rock.Type.values()) {
+        for (Rock.Type type : values()) {
           FallingBlockManager.Specification spec = type.getFallingSpecification();
           switch (type) {
             case ANVIL:
@@ -891,7 +894,7 @@ public final class BlocksTFC {
     if (current.getBlock() instanceof BlockPeat) {return true;}
     if (!(current.getBlock() instanceof BlockRockVariant)) {return false;}
     Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-    return type == GRASS || type == DRY_GRASS || type == DIRT || type == GRAVEL;
+    return type == GRASS || type == DRY_GRASS || type == DIRT || type == GRAVEL || type == CLAY;
   }
 
   public static boolean isGrass(IBlockState current) {

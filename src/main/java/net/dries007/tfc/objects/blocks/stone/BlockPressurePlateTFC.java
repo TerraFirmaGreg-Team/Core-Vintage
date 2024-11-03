@@ -19,10 +19,6 @@ public class BlockPressurePlateTFC extends BlockPressurePlate {
 
   private static final Map<Rock, BlockPressurePlateTFC> MAP = new HashMap<>();
 
-  public static BlockPressurePlateTFC get(Rock rock) {
-    return MAP.get(rock);
-  }
-
   public BlockPressurePlateTFC(Rock rock) {
     super(Material.ROCK, Sensitivity.MOBS);
     if (MAP.put(rock, this) != null) {throw new IllegalStateException("There can only be one.");}
@@ -30,5 +26,9 @@ public class BlockPressurePlateTFC extends BlockPressurePlate {
     setSoundType(SoundType.STONE);
 
     OreDictionaryHelper.register(this, "pressure_plate_stone");
+  }
+
+  public static BlockPressurePlateTFC get(Rock rock) {
+    return MAP.get(rock);
   }
 }

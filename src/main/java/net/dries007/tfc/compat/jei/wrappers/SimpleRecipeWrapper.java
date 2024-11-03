@@ -5,14 +5,14 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;

@@ -41,13 +41,6 @@ public enum TFCParticles {
   SPARK(new ResourceLocation(MOD_ID, "particle/spark"), () -> ParticleSpark::new),
   BUBBLE(new ResourceLocation(MOD_ID, "particle/bubble"), () -> ParticleBubbleTFC::new);
 
-  @SubscribeEvent
-  public static void onTextureStitchEvent(TextureStitchEvent.Pre event) {
-    for (TFCParticles particle : TFCParticles.values()) {
-      particle.registerSprite(event.getMap());
-    }
-  }
-
   private final ResourceLocation location;
   private final Supplier<IParticleFactoryTFC> factorySupplier;
   private TextureAtlasSprite sprite;
@@ -61,6 +54,13 @@ public enum TFCParticles {
   TFCParticles(ResourceLocation location, Supplier<IParticleFactoryTFC> factorySupplier) {
     this.location = location;
     this.factorySupplier = factorySupplier;
+  }
+
+  @SubscribeEvent
+  public static void onTextureStitchEvent(TextureStitchEvent.Pre event) {
+    for (TFCParticles particle : TFCParticles.values()) {
+      particle.registerSprite(event.getMap());
+    }
   }
 
   /**

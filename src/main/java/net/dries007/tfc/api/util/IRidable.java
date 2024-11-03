@@ -54,7 +54,7 @@ public interface IRidable {
     return !isHalter() && OreDictionaryHelper.doesStackMatchOre(stack, "halter");
   }
 
-  void setHalter(boolean state);
-
   boolean isHalter();
+
+  void setHalter(boolean state);
 }

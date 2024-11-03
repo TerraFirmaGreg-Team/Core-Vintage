@@ -16,11 +16,6 @@ public class CrackingRecipe extends IForgeRegistryEntry.Impl<CrackingRecipe> {
   protected ItemStack outputItem;
   protected float chance;
 
-  @Nullable
-  public static CrackingRecipe get(ItemStack item) {
-    return RegistriesFL.CRACKING.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
-  }
-
   public CrackingRecipe(IIngredient<ItemStack> inputItem, ItemStack outputItem, float chance) {
     this.inputItem = inputItem;
     this.outputItem = outputItem;
@@ -30,6 +25,11 @@ public class CrackingRecipe extends IForgeRegistryEntry.Impl<CrackingRecipe> {
       throw new IllegalArgumentException("Sorry, but you can't have cracking recipes that don't have an input and output");
     }
     if (chance < 0 || chance > 1) {throw new IllegalArgumentException("Sorry, the chance to drop must be between 0 and 1");}
+  }
+
+  @Nullable
+  public static CrackingRecipe get(ItemStack item) {
+    return RegistriesFL.CRACKING.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
   }
 
   @Nonnull

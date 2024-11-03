@@ -661,18 +661,14 @@ public class ChunkGenTFC implements IChunkGenerator {
               }
             }
 
-            if (y > seaLevel - 2 && y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER ||
-                y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER) {
-              if (biome != BiomesTFC.SWAMPLAND) // Most areas have gravel and sand bottoms
-              {
-                if (outp.getBlockState(x, y + yOffset, z) != BlockRockVariant.get(rock1, Rock.Type.SAND).getDefaultState() && rand.nextInt(5) != 0) {
-                  outp.setBlockState(x, y + yOffset, z, BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState());
-                }
-              } else // Swamp biomes have bottoms that are mostly dirt
-              {
+            if (y > seaLevel - 2 && y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER
+                || y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER) {
+              if (biome == BiomesTFC.SWAMPLAND && biome == BiomesTFC.BAYOU && biome == BiomesTFC.MANGROVE && biome == BiomesTFC.MARSH) {
                 if (outp.getBlockState(x, y + yOffset, z) != BlockRockVariant.get(rock1, Rock.Type.SAND).getDefaultState()) {
                   outp.setBlockState(x, y + yOffset, z, BlockRockVariant.get(rock1, Rock.Type.DIRT).getDefaultState());
                 }
+              } else if (outp.getBlockState(x, y + yOffset, z) != BlockRockVariant.get(rock1, Rock.Type.SAND).getDefaultState() && this.rand.nextInt(5) != 0) {
+                outp.setBlockState(x, y + yOffset, z, BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState());
               }
             }
           }

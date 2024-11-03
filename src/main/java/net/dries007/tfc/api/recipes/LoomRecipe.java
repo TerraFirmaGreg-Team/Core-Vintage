@@ -18,11 +18,6 @@ import javax.annotation.Nullable;
 
 public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements IJEISimpleRecipe {
 
-  @Nullable
-  public static LoomRecipe get(ItemStack item) {
-    return TFCRegistries.LOOM.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
-  }
-
   private final IIngredient<ItemStack> inputItem;
   private final ItemStack outputItem;
   private final int stepCount;
@@ -38,6 +33,11 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements 
       throw new IllegalArgumentException("Input and output are not allowed to be empty");
     }
     setRegistryName(name);
+  }
+
+  @Nullable
+  public static LoomRecipe get(ItemStack item) {
+    return TFCRegistries.LOOM.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
   }
 
   public int getInputCount() {

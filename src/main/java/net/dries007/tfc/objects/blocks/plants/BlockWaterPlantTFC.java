@@ -25,13 +25,13 @@ public class BlockWaterPlantTFC extends BlockPlantTFC {
 
   private static final Map<Plant, BlockWaterPlantTFC> MAP = new HashMap<>();
 
-  public static BlockWaterPlantTFC get(Plant plant) {
-    return MAP.get(plant);
-  }
-
   public BlockWaterPlantTFC(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {throw new IllegalStateException("There can only be one.");}
+  }
+
+  public static BlockWaterPlantTFC get(Plant plant) {
+    return MAP.get(plant);
   }
 
   @Override

@@ -5,6 +5,11 @@
 
 package net.dries007.tfc.client.render.animal;
 
+import com.google.common.collect.Maps;
+import net.dries007.tfc.client.model.animal.ModelHorseTFC;
+import net.dries007.tfc.objects.entity.animal.EntityDonkeyTFC;
+import net.dries007.tfc.objects.entity.animal.EntityMuleTFC;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -12,11 +17,6 @@ import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.google.common.collect.Maps;
-import net.dries007.tfc.client.model.animal.ModelHorseTFC;
-import net.dries007.tfc.objects.entity.animal.EntityDonkeyTFC;
-import net.dries007.tfc.objects.entity.animal.EntityMuleTFC;
 
 import javax.annotation.Nonnull;
 import java.util.Map;

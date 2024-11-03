@@ -38,6 +38,10 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
   public static final PropertyBool SOUTH = PropertyBool.create("south");
   public static final PropertyBool WEST = PropertyBool.create("west");
 
+  public BlockRockVariantConnected(Rock.Type type, Rock rock) {
+    super(type, rock);
+  }
+
   public static void spreadGrass(World world, BlockPos pos, IBlockState us, Random rand) {
     BlockPos upPos = pos.up();
     IBlockState up = world.getBlockState(upPos);
@@ -95,10 +99,6 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
         }
       }
     }
-  }
-
-  public BlockRockVariantConnected(Rock.Type type, Rock rock) {
-    super(type, rock);
   }
 
   @Override

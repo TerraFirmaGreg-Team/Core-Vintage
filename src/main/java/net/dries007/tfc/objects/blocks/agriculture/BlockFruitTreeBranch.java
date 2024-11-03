@@ -68,11 +68,6 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
 
 
   private static final Map<IFruitTree, BlockFruitTreeBranch> MAP = new HashMap<>();
-
-  public static BlockFruitTreeBranch get(IFruitTree tree) {
-    return MAP.get(tree);
-  }
-
   private final IFruitTree tree;
 
   public BlockFruitTreeBranch(IFruitTree tree) {
@@ -85,6 +80,10 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
     Blocks.FIRE.setFireInfo(this, 5, 20);
     setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(NORTH, 0).withProperty(EAST, 0).withProperty(SOUTH, 0)
                               .withProperty(WEST, 0).withProperty(UP, 0));
+  }
+
+  public static BlockFruitTreeBranch get(IFruitTree tree) {
+    return MAP.get(tree);
   }
 
   @SuppressWarnings("deprecation")

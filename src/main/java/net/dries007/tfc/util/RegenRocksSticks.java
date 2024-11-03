@@ -1,12 +1,6 @@
 package net.dries007.tfc.util;
 
 
-import net.minecraft.block.Block;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.IChunkGenerator;
-
 import com.google.common.collect.Sets;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Rock;
@@ -15,6 +9,12 @@ import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.WorldGenLooseRocks;
 import net.dries007.tfc.world.classic.worldgen.vein.Vein;
+
+import net.minecraft.block.Block;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -25,6 +25,12 @@ public class RegenRocksSticks extends WorldGenLooseRocks {
 
   public RegenRocksSticks(boolean generateOres) {
     super(generateOres);
+  }
+
+  private static Boolean isReplaceable(World world, BlockPos pos) {
+    //Modified to allow replacement of grass during spring regen
+    Block test = world.getBlockState(pos).getBlock();
+    return test instanceof BlockShortGrassTFC || test.isAir(world.getBlockState(pos), world, pos);
   }
 
   @Override
@@ -68,13 +74,6 @@ public class RegenRocksSticks extends WorldGenLooseRocks {
     }
   }
 
-  @Override
-  protected void generateRock(World world, BlockPos pos, @Nullable Vein vein, Rock rock) {
-    if (isReplaceable(world, pos)) {
-      super.generateRock(world, pos, vein, rock);
-    }
-  }
-
     /*@Nullable
     private Vein getRandomVein(Set<Vein> veins, BlockPos pos, Random rand)
     {
@@ -93,9 +92,10 @@ public class RegenRocksSticks extends WorldGenLooseRocks {
         return null;
     }*/
 
-  private static Boolean isReplaceable(World world, BlockPos pos) {
-    //Modified to allow replacement of grass during spring regen
-    Block test = world.getBlockState(pos).getBlock();
-    return test instanceof BlockShortGrassTFC || test.isAir(world.getBlockState(pos), world, pos);
+  @Override
+  protected void generateRock(World world, BlockPos pos, @Nullable Vein vein, Rock rock) {
+    if (isReplaceable(world, pos)) {
+      super.generateRock(world, pos, vein, rock);
+    }
   }
 }

@@ -50,11 +50,6 @@ import static net.dries007.tfc.Constants.RNG;
 public class BlockLeavesTFC extends BlockLeaves {
 
   private static final Map<Tree, BlockLeavesTFC> MAP = new HashMap<>();
-
-  public static BlockLeavesTFC get(Tree wood) {
-    return MAP.get(wood);
-  }
-
   public final Tree wood;
 
   public BlockLeavesTFC(Tree wood) {
@@ -67,6 +62,10 @@ public class BlockLeavesTFC extends BlockLeaves {
     OreDictionaryHelper.register(this, "tree", "leaves", wood.getRegistryName().getPath());
     Blocks.FIRE.setFireInfo(this, 30, 60);
     setTickRandomly(true);
+  }
+
+  public static BlockLeavesTFC get(Tree wood) {
+    return MAP.get(wood);
   }
 
   @SuppressWarnings("deprecation")

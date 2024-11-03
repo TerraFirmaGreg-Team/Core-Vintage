@@ -1,11 +1,5 @@
 package com.eerussianguy.firmalife.render;
 
-import com.eerussianguy.firmalife.blocks.BlockLargePlanter;
-import com.eerussianguy.firmalife.init.StatePropertiesFL;
-import com.eerussianguy.firmalife.recipe.PlanterRecipe;
-import com.google.common.collect.ImmutableMap;
-import mcp.MethodsReturnNonnullByDefault;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -17,6 +11,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.property.IExtendedBlockState;
+
+import com.eerussianguy.firmalife.blocks.BlockLargePlanter;
+import com.eerussianguy.firmalife.init.StatePropertiesFL;
+import com.eerussianguy.firmalife.recipe.PlanterRecipe;
+import com.google.common.collect.ImmutableMap;
+import mcp.MethodsReturnNonnullByDefault;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

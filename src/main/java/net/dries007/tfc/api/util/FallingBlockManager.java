@@ -52,6 +52,8 @@ public class FallingBlockManager {
 
   private static final Set<IBlockState> SIDE_SUPPORTS = new ObjectOpenHashSet<>(0);
 
+  private FallingBlockManager() {}
+
   public static void registerSoftMaterial(Material material) {
     SOFT_MATERIALS.add(material);
   }
@@ -385,10 +387,6 @@ public class FallingBlockManager {
       this.fallDropsProvider = fallDropsProvider;
     }
 
-    public void setResultingState(IBlockState state) {
-      this.resultingState = state;
-    }
-
     public void setBeginFallCallback(IBeginFallCallback callback) {
       this.beginFallCallback = callback;
     }
@@ -416,6 +414,10 @@ public class FallingBlockManager {
     @Nullable
     public IBlockState getResultingState() {
       return resultingState;
+    }
+
+    public void setResultingState(IBlockState state) {
+      this.resultingState = state;
     }
 
     @Nonnull
@@ -467,7 +469,5 @@ public class FallingBlockManager {
       boolean canCollapse(World world, BlockPos collapsePos);
     }
   }
-
-  private FallingBlockManager() {}
 
 }

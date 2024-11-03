@@ -5,11 +5,12 @@
 
 package net.dries007.tfc.compat.patchouli;
 
-import net.minecraft.util.ResourceLocation;
-
 import com.google.gson.annotations.SerializedName;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
+
+import net.minecraft.util.ResourceLocation;
+
 import vazkii.patchouli.api.VariableHolder;
 
 import java.util.Objects;

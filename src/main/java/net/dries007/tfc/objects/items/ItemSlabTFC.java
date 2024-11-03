@@ -5,14 +5,14 @@
 
 package net.dries007.tfc.objects.items;
 
-import net.minecraft.item.ItemSlab;
-import net.minecraft.item.ItemStack;
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.blocks.BlockSlabTFC;
+
+import net.minecraft.item.ItemSlab;
+import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

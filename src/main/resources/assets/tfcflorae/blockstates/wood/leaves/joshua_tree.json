@@ -1,0 +1,262 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0",
+		"state": "normal"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_leaves"
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "0",
+		"state": "flowering"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_flowering_small",
+		  "weight": 1
+		},
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_flowering_big",
+          "weight": 3
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "0",
+		"state": "fruit"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_fruiting_small",
+		  "weight": 1
+		},
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_fruiting_big",
+          "weight": 3
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "1",
+		"state": "normal"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_leaves"
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "1",
+		"state": "flowering"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_flowering_small",
+		  "weight": 1
+		},
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_flowering_big",
+          "weight": 3
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "1",
+		"state": "fruit"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_fruiting_small",
+		  "weight": 1
+		},
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_fruiting_big",
+          "weight": 3
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "2",
+		"state": "normal"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_leaves"
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "2",
+		"state": "flowering"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_flowering_small",
+		  "weight": 1
+		},
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_flowering_big",
+          "weight": 3
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "2",
+		"state": "fruit"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_fruiting_small",
+		  "weight": 1
+		},
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_fruiting_big",
+          "weight": 3
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "3",
+		"state": "normal"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_leaves"
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "3",
+		"state": "flowering"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_flowering_small",
+		  "weight": 1
+		},
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_flowering_big",
+          "weight": 3
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "3",
+		"state": "fruit"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_fruiting_small",
+		  "weight": 1
+		},
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_fruiting_big",
+          "weight": 3
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "4",
+		"state": "normal"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_leaves"
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "4",
+		"state": "flowering"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_flowering_small",
+		  "weight": 1
+		},
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_flowering_big",
+          "weight": 3
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "4",
+		"state": "fruit"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_fruiting_small",
+		  "weight": 1
+		},
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_fruiting_big",
+          "weight": 3
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "5",
+		"state": "normal"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_leaves"
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "5",
+		"state": "flowering"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_flowering_small",
+		  "weight": 1
+		},
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_flowering_big",
+          "weight": 3
+		}
+      ]
+    },
+    {
+      "when": {
+        "age": "5",
+		"state": "fruit"
+      },
+      "apply": [
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_fruiting_small",
+		  "weight": 1
+		},
+		{
+		  "model": "tfcflorae:wood/branch/joshua_tree/joshua_tree_fruiting_big",
+          "weight": 3
+		}
+      ]
+    }
+  ]
+}

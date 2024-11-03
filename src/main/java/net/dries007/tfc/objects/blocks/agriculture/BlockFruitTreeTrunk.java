@@ -58,12 +58,6 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
   private static final AxisAlignedBB CONNECTION_S_AABB = new AxisAlignedBB(0.3125D, 0.375D, 0.6875D, 0.0D, 0.625D, 1.0D);
   private static final AxisAlignedBB CONNECTION_W_AABB = new AxisAlignedBB(0.0D, 0.375D, 0.3125D, 0.3125D, 0.625D, 0.6875D);
   private static final AxisAlignedBB CONNECTION_E_AABB = new AxisAlignedBB(0.6875D, 0.375D, 0.3125D, 1.0D, 0.625D, 0.6875D);
-
-
-  public static BlockFruitTreeTrunk get(IFruitTree tree) {
-    return MAP.get(tree);
-  }
-
   private final IFruitTree tree;
 
   public BlockFruitTreeTrunk(IFruitTree tree) {
@@ -76,6 +70,10 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
     Blocks.FIRE.setFireInfo(this, 5, 20);
     this.tree = tree;
     setDefaultState(blockState.getBaseState().withProperty(NORTH, false).withProperty(SOUTH, false).withProperty(EAST, false).withProperty(WEST, false));
+  }
+
+  public static BlockFruitTreeTrunk get(IFruitTree tree) {
+    return MAP.get(tree);
   }
 
   @Override

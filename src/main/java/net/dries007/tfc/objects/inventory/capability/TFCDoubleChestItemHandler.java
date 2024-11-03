@@ -24,6 +24,10 @@ import javax.annotation.Nullable;
 @SuppressWarnings("WeakerAccess")
 public class TFCDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
 
+  public TFCDoubleChestItemHandler(@Nullable TileEntityChest mainChest, @Nullable TileEntityChest other, boolean mainChestIsUpper) {
+    super(mainChest, other, mainChestIsUpper);
+  }
+
   @Nullable
   public static VanillaDoubleChestItemHandler get(TileEntityChest chest) {
     World world = chest.getWorld();
@@ -54,10 +58,6 @@ public class TFCDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
       }
     }
     return NO_ADJACENT_CHESTS_INSTANCE; //All alone
-  }
-
-  public TFCDoubleChestItemHandler(@Nullable TileEntityChest mainChest, @Nullable TileEntityChest other, boolean mainChestIsUpper) {
-    super(mainChest, other, mainChestIsUpper);
   }
 
   @Override

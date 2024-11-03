@@ -66,6 +66,20 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
     BIRTHDAYS.put("MARCH10", "Disastermoo's Birthday");
   }
 
+  private long playerTime, calendarTime;
+  private int daysInMonth;
+  private boolean doDaylightCycle, arePlayersLoggedOn;
+  private MinecraftServer server;
+
+  public CalendarTFC() {
+    // Initialize to default values
+    daysInMonth = ConfigTFC.General.MISC.defaultMonthLength;
+    playerTime = 0;
+    calendarTime = (5 * daysInMonth * ICalendar.TICKS_IN_DAY) + (6 * ICalendar.TICKS_IN_HOUR);
+    doDaylightCycle = true;
+    arePlayersLoggedOn = false;
+  }
+
   /**
    * This runs a sequence of code, but first will set the calendar and player time by an offset Useful if we need to run code that technically needs to happen
    * at a different calendar time The offsets are removed once the transaction is complete
@@ -84,20 +98,6 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
       INSTANCE.playerTime -= transactionPlayerTimeOffset;
       INSTANCE.calendarTime -= transactionCalendarTimeOffset;
     }
-  }
-
-  private long playerTime, calendarTime;
-  private int daysInMonth;
-  private boolean doDaylightCycle, arePlayersLoggedOn;
-  private MinecraftServer server;
-
-  public CalendarTFC() {
-    // Initialize to default values
-    daysInMonth = ConfigTFC.General.MISC.defaultMonthLength;
-    playerTime = 0;
-    calendarTime = (5 * daysInMonth * ICalendar.TICKS_IN_DAY) + (6 * ICalendar.TICKS_IN_HOUR);
-    doDaylightCycle = true;
-    arePlayersLoggedOn = false;
   }
 
   public void setTimeFromCalendarTime(long calendarTimeToSetTo) {

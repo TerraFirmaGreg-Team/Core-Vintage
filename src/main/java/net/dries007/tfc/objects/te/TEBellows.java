@@ -43,6 +43,8 @@ public class TEBellows extends TEBase {
     addBellowsOffset(OFFSET_INSET);
   }
 
+  private long lastPushed = 0L;
+
   /**
    * Notify the bellows that it should check a certain offset when blowing air X: front of the bellows, positive values go forward Y: vertical,
    * self-explanatory, negative is below. Z: X but rotated 90 degrees clockwise, positive values go right. in most cases you want this to be 0 For example: a
@@ -54,8 +56,6 @@ public class TEBellows extends TEBase {
   public static void addBellowsOffset(Vec3i offset) {
     OFFSETS.add(offset);
   }
-
-  private long lastPushed = 0L;
 
   // Min 0.125, Max 0.625
   @SideOnly(Side.CLIENT)

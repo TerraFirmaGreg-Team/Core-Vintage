@@ -1,13 +1,12 @@
 package tfcflorae.objects.blocks.wood.cinnamon;
 
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.types.TreesTFCF;
 

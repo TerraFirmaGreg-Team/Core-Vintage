@@ -17,11 +17,6 @@ import javax.annotation.Nullable;
 
 public class ChiselRecipe extends IForgeRegistryEntry.Impl<ChiselRecipe> {
 
-  @Nullable
-  public static ChiselRecipe get(IBlockState state) {
-    return TFCRegistries.CHISEL.getValuesCollection().stream().filter(r -> r.matches(state)).findFirst().orElse(null);
-  }
-
   private final IIngredient<IBlockState> ingredient;
   private final IBlockState stateOut;
 
@@ -32,6 +27,11 @@ public class ChiselRecipe extends IForgeRegistryEntry.Impl<ChiselRecipe> {
   public ChiselRecipe(IIngredient<IBlockState> ingredient, IBlockState stateOut) {
     this.ingredient = ingredient;
     this.stateOut = stateOut;
+  }
+
+  @Nullable
+  public static ChiselRecipe get(IBlockState state) {
+    return TFCRegistries.CHISEL.getValuesCollection().stream().filter(r -> r.matches(state)).findFirst().orElse(null);
   }
 
   public IBlockState getOutputState() {

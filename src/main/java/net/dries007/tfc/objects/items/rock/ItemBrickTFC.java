@@ -24,15 +24,6 @@ import java.util.Map;
 public class ItemBrickTFC extends ItemTFC implements IRockObject {
 
   private static final Map<Rock, ItemBrickTFC> MAP = new HashMap<>();
-
-  public static ItemBrickTFC get(Rock ore) {
-    return MAP.get(ore);
-  }
-
-  public static ItemStack get(Rock ore, int amount) {
-    return new ItemStack(MAP.get(ore), amount);
-  }
-
   private final Rock rock;
 
   public ItemBrickTFC(Rock rock) {
@@ -41,6 +32,14 @@ public class ItemBrickTFC extends ItemTFC implements IRockObject {
     setMaxDamage(0);
     OreDictionaryHelper.register(this, "brick");
     OreDictionaryHelper.register(this, "brick", rock.getRockCategory());
+  }
+
+  public static ItemBrickTFC get(Rock ore) {
+    return MAP.get(ore);
+  }
+
+  public static ItemStack get(Rock ore, int amount) {
+    return new ItemStack(MAP.get(ore), amount);
   }
 
   @Nonnull

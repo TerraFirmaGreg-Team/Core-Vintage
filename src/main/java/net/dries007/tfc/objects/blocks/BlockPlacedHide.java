@@ -51,6 +51,11 @@ public class BlockPlacedHide extends Block {
     setDefaultState(getBlockState().getBaseState().withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM));
   }
 
+  private static Vec3d calculatePoint(Vec3d rayVector, Vec3d rayPoint) {
+    Vec3d planeNormal = new Vec3d(0.0, 1.0, 0.0);
+    return rayPoint.subtract(rayVector.scale(rayPoint.dotProduct(planeNormal) / rayVector.dotProduct(planeNormal)));
+  }
+
   @SuppressWarnings("deprecation")
   @Override
   public boolean isTopSolid(IBlockState state) {
@@ -150,11 +155,6 @@ public class BlockPlacedHide extends Block {
       return true;
     }
     return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
-  }
-
-  private static Vec3d calculatePoint(Vec3d rayVector, Vec3d rayPoint) {
-    Vec3d planeNormal = new Vec3d(0.0, 1.0, 0.0);
-    return rayPoint.subtract(rayVector.scale(rayPoint.dotProduct(planeNormal) / rayVector.dotProduct(planeNormal)));
   }
 
   @Nonnull

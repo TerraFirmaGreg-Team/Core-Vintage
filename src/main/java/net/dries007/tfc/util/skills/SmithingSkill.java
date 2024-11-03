@@ -17,6 +17,11 @@ public class SmithingSkill extends Skill {
 
   private static final String SKILL_VALUE = "tfc_smithing_value";
   private static final String SKILL_TYPE = "tfc_smithing_type";
+  private final int[] skillLevels = new int[4];
+
+  public SmithingSkill(IPlayerData rootSkills) {
+    super(rootSkills);
+  }
 
   public static void applySkillBonus(SmithingSkill skill, ItemStack stack, Type bonusType) {
     // General types don't receive skill bonuses
@@ -59,12 +64,6 @@ public class SmithingSkill extends Skill {
       return type == null || nbt.getInteger(SKILL_TYPE) == type.ordinal() ? nbt.getFloat(SKILL_VALUE) : 0;
     }
     return 0;
-  }
-
-  private final int[] skillLevels = new int[4];
-
-  public SmithingSkill(IPlayerData rootSkills) {
-    super(rootSkills);
   }
 
   @Override

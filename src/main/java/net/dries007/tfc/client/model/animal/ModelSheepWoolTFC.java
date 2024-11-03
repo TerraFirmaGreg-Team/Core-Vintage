@@ -5,14 +5,14 @@
 
 package net.dries007.tfc.client.model.animal;
 
+import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
+
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

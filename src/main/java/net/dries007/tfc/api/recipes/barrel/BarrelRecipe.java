@@ -25,23 +25,6 @@ import java.util.List;
 
 public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
 
-  @Nullable
-  public static BarrelRecipe get(ItemStack stack, FluidStack fluidStack) {
-    return TFCRegistries.BARREL.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack, stack) && x.getDuration() != 0).findFirst().orElse(null);
-  }
-
-  @Nullable
-  public static BarrelRecipe getInstant(ItemStack stack, FluidStack fluidStack) {
-    return TFCRegistries.BARREL.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack, stack) && x.getDuration() == 0).findFirst().orElse(null);
-  }
-
-  /**
-   * Checks if a fluidstack is an ingredient for any recipe Used as a complement to barrel's whitelist
-   */
-  public static boolean isBarrelFluid(FluidStack fluidStack) {
-    return TFCRegistries.BARREL.getValuesCollection().stream().filter(x -> x.inputFluid.testIgnoreCount(fluidStack)).findFirst().orElse(null) != null;
-  }
-
   protected final IIngredient<ItemStack> inputStack;
   protected final IIngredient<FluidStack> inputFluid;
   private final FluidStack outputFluid;
@@ -64,6 +47,23 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
     this.outputFluid = outputFluid;
     this.outputStack = outputStack;
     this.duration = duration;
+  }
+
+  @Nullable
+  public static BarrelRecipe get(ItemStack stack, FluidStack fluidStack) {
+    return TFCRegistries.BARREL.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack, stack) && x.getDuration() != 0).findFirst().orElse(null);
+  }
+
+  @Nullable
+  public static BarrelRecipe getInstant(ItemStack stack, FluidStack fluidStack) {
+    return TFCRegistries.BARREL.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack, stack) && x.getDuration() == 0).findFirst().orElse(null);
+  }
+
+  /**
+   * Checks if a fluidstack is an ingredient for any recipe Used as a complement to barrel's whitelist
+   */
+  public static boolean isBarrelFluid(FluidStack fluidStack) {
+    return TFCRegistries.BARREL.getValuesCollection().stream().filter(x -> x.inputFluid.testIgnoreCount(fluidStack)).findFirst().orElse(null) != null;
   }
 
   public boolean isValidInput(@Nullable FluidStack inputFluid, ItemStack inputStack) {

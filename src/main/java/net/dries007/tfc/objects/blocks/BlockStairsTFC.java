@@ -30,14 +30,6 @@ public class BlockStairsTFC extends BlockStairs {
   private static final Map<Rock, EnumMap<Rock.Type, BlockStairsTFC>> ROCK_TABLE = new HashMap<>();
   private static final Map<Tree, BlockStairsTFC> WOOD_MAP = new HashMap<>();
 
-  public static BlockStairsTFC get(Rock rock, Rock.Type type) {
-    return ROCK_TABLE.get(rock).get(type);
-  }
-
-  public static BlockStairsTFC get(Tree wood) {
-    return WOOD_MAP.get(wood);
-  }
-
   public BlockStairsTFC(Rock rock, Rock.Type type) {
     super(BlockRockVariant.get(rock, type).getDefaultState());
 
@@ -68,6 +60,14 @@ public class BlockStairsTFC extends BlockStairs {
     OreDictionaryHelper.register(this, "stair", "wood", wood);
 
     Blocks.FIRE.setFireInfo(this, 5, 20);
+  }
+
+  public static BlockStairsTFC get(Rock rock, Rock.Type type) {
+    return ROCK_TABLE.get(rock).get(type);
+  }
+
+  public static BlockStairsTFC get(Tree wood) {
+    return WOOD_MAP.get(wood);
   }
 
   @SuppressWarnings("deprecation")

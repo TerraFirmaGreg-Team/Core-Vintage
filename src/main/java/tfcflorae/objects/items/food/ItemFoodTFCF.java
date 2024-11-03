@@ -1,5 +1,10 @@
 package tfcflorae.objects.items.food;
 
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.capability.food.FoodData;
+import net.dries007.tfc.api.capability.food.FoodHeatHandler;
+import net.dries007.tfc.api.capability.food.IItemFoodTFC;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -7,10 +12,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodHeatHandler;
-import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 import tfcflorae.objects.items.ItemTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 

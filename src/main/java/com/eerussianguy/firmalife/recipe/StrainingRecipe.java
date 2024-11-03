@@ -18,11 +18,6 @@ public class StrainingRecipe extends IForgeRegistryEntry.Impl<StrainingRecipe> {
   protected ItemStack outputItem;
   protected FluidStack outputFluid;
 
-  @Nullable
-  public static StrainingRecipe get(FluidStack fluidStack) {
-    return RegistriesFL.STRAINING.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack)).findFirst().orElse(null);
-  }
-
   public StrainingRecipe(IIngredient<FluidStack> inputFluid, ItemStack outputItem, FluidStack outputFluid) {
     this.inputFluid = inputFluid;
     this.outputItem = outputItem;
@@ -32,6 +27,11 @@ public class StrainingRecipe extends IForgeRegistryEntry.Impl<StrainingRecipe> {
       throw new IllegalArgumentException("Sorry, but you can't have straining recipes that don't have an input and output");
     }
 
+  }
+
+  @Nullable
+  public static StrainingRecipe get(FluidStack fluidStack) {
+    return RegistriesFL.STRAINING.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack)).findFirst().orElse(null);
   }
 
   public int getDropAmount() {

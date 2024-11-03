@@ -153,14 +153,6 @@ public abstract class BlockSlabTFC extends BlockSlab {
     private static final Map<Rock, EnumMap<Rock.Type, Double>> ROCK_TABLE = new HashMap<>();
     private static final Map<Tree, Double> WOOD_MAP = new HashMap<>();
 
-    public static Double get(Rock rock, Rock.Type type) {
-      return ROCK_TABLE.get(rock).get(type);
-    }
-
-    public static Double get(Tree wood) {
-      return WOOD_MAP.get(wood);
-    }
-
     public Double(Rock rock, Rock.Type type) {
       super(rock, type);
 
@@ -176,6 +168,14 @@ public abstract class BlockSlabTFC extends BlockSlab {
       // No oredict, because no item.
     }
 
+    public static Double get(Rock rock, Rock.Type type) {
+      return ROCK_TABLE.get(rock).get(type);
+    }
+
+    public static Double get(Tree wood) {
+      return WOOD_MAP.get(wood);
+    }
+
     @Override
     public boolean isDouble() {
       return true;
@@ -186,15 +186,6 @@ public abstract class BlockSlabTFC extends BlockSlab {
 
     private static final Map<Rock, EnumMap<Rock.Type, Half>> ROCK_TABLE = new HashMap<>();
     private static final Map<Tree, Half> WOOD_MAP = new HashMap<>();
-
-    public static Half get(Rock rock, Rock.Type type) {
-      return ROCK_TABLE.get(rock).get(type);
-    }
-
-    public static Half get(Tree wood) {
-      return WOOD_MAP.get(wood);
-    }
-
     public final Double doubleSlab;
 
     public Half(Rock rock, Rock.Type type) {
@@ -219,6 +210,14 @@ public abstract class BlockSlabTFC extends BlockSlab {
       OreDictionaryHelper.register(this, "slab");
       OreDictionaryHelper.register(this, "slab", "wood");
       OreDictionaryHelper.register(this, "slab", "wood", wood);
+    }
+
+    public static Half get(Rock rock, Rock.Type type) {
+      return ROCK_TABLE.get(rock).get(type);
+    }
+
+    public static Half get(Tree wood) {
+      return WOOD_MAP.get(wood);
     }
 
     @Override

@@ -52,6 +52,24 @@ public final class ChunkDataTFC {
     Arrays.fill(EMPTY.seaLevelOffset, -1);
   }
 
+  private final int[] rockLayer1 = new int[256];
+  private final int[] rockLayer2 = new int[256];
+  private final int[] rockLayer3 = new int[256];
+  private final DataLayer[] drainageLayer = new DataLayer[256]; // To be removed / replaced?
+  private final DataLayer[] stabilityLayer = new DataLayer[256]; // To be removed / replaced?
+  private final int[] seaLevelOffset = new int[256];
+  private boolean initialized = false;
+  private int fishPopulation = FISH_POP_MAX; // todo: Set this based on biome? temp? rng?
+  private float rainfall;
+  private float regionalTemp;
+  private float avgTemp;
+  private float floraDensity;
+  private float floraDiversity;
+  private Set<Vein> generatedVeins = new HashSet<>();
+  private int chunkWorkage;
+  private long protectedTicks; // Used for hostile spawn protection. Starts negative, increases by players in the area
+  private long lastUpdateTick, lastUpdateYear; // The last time this chunk was updated by world regen
+
   @Nonnull
   public static ChunkDataTFC get(World world, BlockPos pos) {
     return get(world.getChunk(pos));
@@ -106,24 +124,6 @@ public final class ChunkDataTFC {
   public static Rock getRockHeight(World world, BlockPos pos) {
     return get(world, pos).getRockLayerHeight(pos.getX() & 15, pos.getY(), pos.getZ() & 15);
   }
-
-  private final int[] rockLayer1 = new int[256];
-  private final int[] rockLayer2 = new int[256];
-  private final int[] rockLayer3 = new int[256];
-  private final DataLayer[] drainageLayer = new DataLayer[256]; // To be removed / replaced?
-  private final DataLayer[] stabilityLayer = new DataLayer[256]; // To be removed / replaced?
-  private final int[] seaLevelOffset = new int[256];
-  private boolean initialized = false;
-  private int fishPopulation = FISH_POP_MAX; // todo: Set this based on biome? temp? rng?
-  private float rainfall;
-  private float regionalTemp;
-  private float avgTemp;
-  private float floraDensity;
-  private float floraDiversity;
-  private Set<Vein> generatedVeins = new HashSet<>();
-  private int chunkWorkage;
-  private long protectedTicks; // Used for hostile spawn protection. Starts negative, increases by players in the area
-  private long lastUpdateTick, lastUpdateYear; // The last time this chunk was updated by world regen
 
   /**
    * INTERNAL USE ONLY. No need to mark as dirty, since this will only ever be called on worldgen, before the first chunk save.
@@ -262,7 +262,7 @@ public final class ChunkDataTFC {
     if (protectedTicks < CalendarTFC.PLAYER_TIME.getTicks()) {
       protectedTicks = CalendarTFC.PLAYER_TIME.getTicks();
     }
-    protectedTicks += multiplier * 600;
+    protectedTicks += multiplier * 600L;
   }
 
   public long getSpawnProtection() {
@@ -270,7 +270,7 @@ public final class ChunkDataTFC {
   }
 
   public boolean isSpawnProtected() {
-    return getSpawnProtection() > 0;
+    return getSpawnProtection() > 0L;
   }
 
   public long getLastUpdateTick() {

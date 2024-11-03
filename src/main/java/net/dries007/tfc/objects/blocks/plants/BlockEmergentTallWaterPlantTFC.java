@@ -26,13 +26,13 @@ public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC imple
 
   private static final Map<Plant, BlockEmergentTallWaterPlantTFC> MAP = new HashMap<>();
 
-  public static BlockEmergentTallWaterPlantTFC get(Plant plant) {
-    return BlockEmergentTallWaterPlantTFC.MAP.get(plant);
-  }
-
   public BlockEmergentTallWaterPlantTFC(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {throw new IllegalStateException("There can only be one.");}
+  }
+
+  public static BlockEmergentTallWaterPlantTFC get(Plant plant) {
+    return BlockEmergentTallWaterPlantTFC.MAP.get(plant);
   }
 
   @Override

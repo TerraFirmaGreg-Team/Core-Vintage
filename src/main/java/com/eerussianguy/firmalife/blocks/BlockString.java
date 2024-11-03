@@ -58,6 +58,28 @@ public class BlockString extends BlockNonCube {
     this.setDefaultState(getBlockState().getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
   }
 
+  private static boolean isFired(World world, BlockPos pos) {
+    pos = pos.down();
+    IBlockState state = world.getBlockState(pos);
+    if (state.getBlock() instanceof BlockFirePit) {
+      if (state.getValue(BlockFirePit.LIT)) {
+        TEFirePit te = Helpers.getTE(world, pos, TEFirePit.class);
+        if (te != null) {
+          IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+          if (cap != null) {
+            for (int i = TEFirePit.SLOT_FUEL_CONSUME; i <= TEFirePit.SLOT_FUEL_INPUT; i++) {
+              ItemStack stack = cap.getStackInSlot(i);
+              if (stack.isEmpty() || OreDictionaryHelper.doesStackMatchOre(stack, "logWood")) {continue;}
+              return false;
+            }
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   @Override
   @SuppressWarnings("deprecation")
   @Nonnull
@@ -126,28 +148,6 @@ public class BlockString extends BlockNonCube {
       IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
       if (cap != null) {te.tryCook();}
     }
-  }
-
-  private static boolean isFired(World world, BlockPos pos) {
-    pos = pos.down();
-    IBlockState state = world.getBlockState(pos);
-    if (state.getBlock() instanceof BlockFirePit) {
-      if (state.getValue(BlockFirePit.LIT)) {
-        TEFirePit te = Helpers.getTE(world, pos, TEFirePit.class);
-        if (te != null) {
-          IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-          if (cap != null) {
-            for (int i = TEFirePit.SLOT_FUEL_CONSUME; i <= TEFirePit.SLOT_FUEL_INPUT; i++) {
-              ItemStack stack = cap.getStackInSlot(i);
-              if (stack.isEmpty() || OreDictionaryHelper.doesStackMatchOre(stack, "logWood")) {continue;}
-              return false;
-            }
-            return true;
-          }
-        }
-      }
-    }
-    return false;
   }
 
   @Override

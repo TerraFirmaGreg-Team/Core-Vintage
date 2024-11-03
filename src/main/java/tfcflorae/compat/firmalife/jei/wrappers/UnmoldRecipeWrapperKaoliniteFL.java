@@ -1,10 +1,5 @@
 package tfcflorae.compat.firmalife.jei.wrappers;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -12,6 +7,12 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
+
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+
 import tfcflorae.objects.items.ItemsTFCF;
 
 public class UnmoldRecipeWrapperKaoliniteFL implements IRecipeWrapper {

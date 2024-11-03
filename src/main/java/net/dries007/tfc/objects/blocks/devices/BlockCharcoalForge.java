@@ -85,14 +85,6 @@ public class BlockCharcoalForge extends Block implements IBellowsConsumerBlock, 
       .match(new BlockPos(0, -1, 0), isValidSide);
   }
 
-  public static boolean isValid(World world, BlockPos pos) {
-    return CHARCOAL_FORGE_MULTIBLOCK.test(world, pos);
-  }
-
-  public static boolean isValidSide(IBlockState state) {
-    return state.getMaterial() == Material.ROCK && state.isOpaqueCube() && state.isNormalCube();
-  }
-
   public BlockCharcoalForge() {
     super(BlockCharcoalPile.CHARCOAL_MATERIAL);
 
@@ -101,6 +93,14 @@ public class BlockCharcoalForge extends Block implements IBellowsConsumerBlock, 
     setHardness(1.0F);
     setTickRandomly(true); // Used for chimney checks -> extinguish
     this.setDefaultState(this.blockState.getBaseState().withProperty(LIT, false));
+  }
+
+  public static boolean isValid(World world, BlockPos pos) {
+    return CHARCOAL_FORGE_MULTIBLOCK.test(world, pos);
+  }
+
+  public static boolean isValidSide(IBlockState state) {
+    return state.getMaterial() == Material.ROCK && state.isOpaqueCube() && state.isNormalCube();
   }
 
   @Override

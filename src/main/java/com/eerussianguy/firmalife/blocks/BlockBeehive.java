@@ -65,6 +65,39 @@ public class BlockBeehive extends Block implements IItemSize {
     setDefaultState(getBlockState().getBaseState().withProperty(STAGE, 0));
   }
 
+  private static int countFlowers(World world, BlockPos pos) {
+    int flowers = 0;
+    BlockPos searchPos;
+    for (int x = -4; x <= 4; x++) {
+      for (int y = -1; y <= 1; y++) {
+        for (int z = -4; z <= 4; z++) {
+          if (flowers == 10) {return flowers;}
+          searchPos = pos.add(x, y, z);
+          Block block = world.getBlockState(searchPos).getBlock();
+          if (block instanceof BlockPlantTFC) {
+            if (((BlockPlantTFC) block).getPlant().getPlantType() == Plant.PlantType.STANDARD) {flowers++;}
+          } else if (block instanceof BlockFlowerPotTFC || block instanceof BlockBushTrellis || block instanceof BlockLargePlanter
+                     || block instanceof BlockHangingPlanter) {
+            flowers++;
+          }
+        }
+      }
+    }
+    return flowers;
+  }
+
+  private static boolean isNotCalm(World world, BlockPos pos, IBlockState state) {
+    if (state.getValue(STAGE) == 0 || !world.isDaytime()) {return false;}
+    for (Vec3i v : VECTORS) {
+      BlockPos searchPos = pos.add(v);
+      IBlockState searchState = world.getBlockState(searchPos);
+      if (searchState.getBlock() instanceof BlockFirePit && searchState.getValue(BlockFirePit.LIT)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   @SideOnly(Side.CLIENT)
   @Override
   public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
@@ -107,27 +140,6 @@ public class BlockBeehive extends Block implements IItemSize {
     return te.isClimateValid() || ClimateTFC.getDailyTemp(world, pos) > 10;
   }
 
-  private static int countFlowers(World world, BlockPos pos) {
-    int flowers = 0;
-    BlockPos searchPos;
-    for (int x = -4; x <= 4; x++) {
-      for (int y = -1; y <= 1; y++) {
-        for (int z = -4; z <= 4; z++) {
-          if (flowers == 10) {return flowers;}
-          searchPos = pos.add(x, y, z);
-          Block block = world.getBlockState(searchPos).getBlock();
-          if (block instanceof BlockPlantTFC) {
-            if (((BlockPlantTFC) block).getPlant().getPlantType() == Plant.PlantType.STANDARD) {flowers++;}
-          } else if (block instanceof BlockFlowerPotTFC || block instanceof BlockBushTrellis || block instanceof BlockLargePlanter
-                     || block instanceof BlockHangingPlanter) {
-            flowers++;
-          }
-        }
-      }
-    }
-    return flowers;
-  }
-
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     if (world.isRemote || hand == EnumHand.OFF_HAND) {return false;}
@@ -151,18 +163,6 @@ public class BlockBeehive extends Block implements IItemSize {
       player.addPotionEffect(new PotionEffect(EffectsFL.SWARM, 30 * 20));
     }
     return super.removedByPlayer(state, world, pos, player, willHarvest);
-  }
-
-  private static boolean isNotCalm(World world, BlockPos pos, IBlockState state) {
-    if (state.getValue(STAGE) == 0 || !world.isDaytime()) {return false;}
-    for (Vec3i v : VECTORS) {
-      BlockPos searchPos = pos.add(v);
-      IBlockState searchState = world.getBlockState(searchPos);
-      if (searchState.getBlock() instanceof BlockFirePit && searchState.getValue(BlockFirePit.LIT)) {
-        return false;
-      }
-    }
-    return true;
   }
 
   @Override

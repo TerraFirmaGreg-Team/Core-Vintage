@@ -44,6 +44,10 @@ public class TETurntable extends TETickableInventory {
     internalProgress = 0;
   }
 
+  public static boolean isPottery(ItemStack stack) {
+    return POTTERY.contains(stack.getItem());
+  }
+
   public int getSpeed() {
     return speed;
   }
@@ -104,10 +108,6 @@ public class TETurntable extends TETickableInventory {
 
   public boolean hasPottery() {
     return isPottery(item());
-  }
-
-  public static boolean isPottery(ItemStack stack) {
-    return POTTERY.contains(stack.getItem());
   }
 
   public int getClayAmount() {

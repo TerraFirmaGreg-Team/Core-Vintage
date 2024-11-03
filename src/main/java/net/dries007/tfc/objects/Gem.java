@@ -30,6 +30,12 @@ public enum Gem {
 
   // list of gems that can drop
   private static final Gem[] RANDOM_DROP_GEMS = Arrays.stream(values()).filter(x -> x.canDrop).toArray(Gem[]::new);
+  // whether this gem can be found as a drop from raw stone
+  private final boolean canDrop;
+
+  Gem(boolean canDrop) {
+    this.canDrop = canDrop;
+  }
 
   /**
    * Returns a random gem type according to gem type availabilities
@@ -39,13 +45,6 @@ public enum Gem {
    */
   public static Gem getRandomDropGem(Random random) {
     return RANDOM_DROP_GEMS[random.nextInt(RANDOM_DROP_GEMS.length)];
-  }
-
-  // whether this gem can be found as a drop from raw stone
-  private final boolean canDrop;
-
-  Gem(boolean canDrop) {
-    this.canDrop = canDrop;
   }
 
   public enum Grade {
@@ -58,6 +57,11 @@ public enum Gem {
     private static final Grade[] VALUES = values();
     private static final WeightedCollection<Grade> GRADE_ODDS = new WeightedCollection<>(Arrays.stream(VALUES)
                                                                                                .collect(Collectors.toMap(k -> k, v -> v.dropWeight)));
+    private final double dropWeight;
+
+    Grade(int dropWeight) {
+      this.dropWeight = dropWeight;
+    }
 
     /**
      * Returns a random gem grade according to gem grade weights
@@ -73,12 +77,6 @@ public enum Gem {
     @Nullable
     public static Grade valueOf(int index) {
       return index >= 0 && index < VALUES.length ? VALUES[index] : null;
-    }
-
-    private final double dropWeight;
-
-    Grade(int dropWeight) {
-      this.dropWeight = dropWeight;
     }
   }
 }

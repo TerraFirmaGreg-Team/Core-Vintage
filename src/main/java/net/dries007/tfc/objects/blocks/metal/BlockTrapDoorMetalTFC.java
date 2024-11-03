@@ -18,11 +18,6 @@ import java.util.Map;
 public class BlockTrapDoorMetalTFC extends BlockTrapDoor {
 
   private static final Map<Metal, BlockTrapDoorMetalTFC> MAP = new HashMap<>();
-
-  public static BlockTrapDoorMetalTFC get(Metal metal) {
-    return MAP.get(metal);
-  }
-
   public final Metal metal;
 
   public BlockTrapDoorMetalTFC(Metal metal) {
@@ -32,5 +27,9 @@ public class BlockTrapDoorMetalTFC extends BlockTrapDoor {
     setHardness(1F);
     setSoundType(SoundType.METAL);
     OreDictionaryHelper.register(this, "trapdoorMetal");
+  }
+
+  public static BlockTrapDoorMetalTFC get(Metal metal) {
+    return MAP.get(metal);
   }
 }

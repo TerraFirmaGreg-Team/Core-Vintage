@@ -1,0 +1,58 @@
+{
+    "parent": "block/block",
+	"textures": {
+        "leaves": "tfc:blocks/wood/leaves/joshua_tree",
+		"log": "tfc:blocks/wood/log/joshua_tree",
+		"particle": "tfc:blocks/wood/log/joshua_tree"
+	},
+	"elements": [
+		{
+			"from": [6, 0, 6],
+			"to": [10, 4, 10],
+			"faces": {
+				"north": {"uv": [6, 12, 10, 16], "rotation": 180, "texture": "#log"},
+				"east": {"uv": [12, 6, 16, 10], "rotation": 270, "texture": "#log"},
+				"south": {"uv": [6, 0, 10, 4], "texture": "#log"},
+				"west": {"uv": [0, 6, 4, 10], "rotation": 90, "texture": "#log"},
+				"up": {"uv": [4, 4, 8, 8], "rotation": 180, "texture": "#log", "cullface": "north"},
+				"down": {"uv": [8, 8, 12, 12], "texture": "#log"}
+			}
+		},
+		{
+			"from": [0, 0, 8],
+			"to": [16, 16, 8],
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 16, 16, 0], "rotation": 180, "texture": "#leaves"},
+				"south": {"uv": [16, 16, 0, 0], "rotation": 180, "texture": "#leaves"}
+			}
+		},
+		{
+			"from": [8, 0, 0],
+			"to": [8, 16, 16],
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"east": {"uv": [16, 16, 0, 0], "rotation": 180, "texture": "#leaves"},
+				"west": {"uv": [0, 16, 16, 0], "rotation": 180, "texture": "#leaves"}
+			}
+		},
+		{
+			"from": [8, 0, 1],
+			"to": [8, 14, 15],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"east": {"uv": [16, 16, 0, 2], "rotation": 180, "texture": "#leaves"},
+				"west": {"uv": [0, 16, 16, 2], "rotation": 180, "texture": "#leaves"}
+			}
+		},
+		{
+			"from": [1, 0, 8],
+			"to": [15, 14, 8],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [16, 16, 0, 2], "rotation": 180, "texture": "#leaves"},
+				"south": {"uv": [0, 16, 16, 2], "rotation": 180, "texture": "#leaves"}
+			}
+		}
+	]
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "tfcflorae:wood/branch/template_joshua_tree_flowering",
+  "textures": {
+    "leaves": "tfc:blocks/wood/leaves/joshua_tree",
+    "log": "tfc:blocks/wood/log/joshua_tree",
+    "fruits": "tfcflorae:blocks/wood/fruit/joshua_tree_big"
+  }
+}

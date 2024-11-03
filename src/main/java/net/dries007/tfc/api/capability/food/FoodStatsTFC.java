@@ -36,18 +36,6 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
   public static final float EXHAUSTION_MULTIPLIER = 0.4f; // Multiplier for vanilla sources of exhaustion (we use passive exhaustion to keep hunger decaying even when not sprinting everywhere. That said, vanilla exhaustion should be reduced to compensate
   public static final float PASSIVE_EXHAUSTION = 20f * 4f / (2.5f
                                                              * ICalendar.TICKS_IN_DAY); // Passive exhaustion will deplete your food bar once every 2.5 days. Food bar holds ~5 "meals", this requires two per day
-
-  public static void replaceFoodStats(EntityPlayer player) {
-    // Only replace the server player's stats if they aren't already
-    if (!(player.getFoodStats() instanceof IFoodStatsTFC)) {
-      player.foodStats = new FoodStatsTFC(player, player.getFoodStats());
-    }
-    // Send the update regardless so the client can perform the same logic
-    if (player instanceof EntityPlayerMP) {
-      TerraFirmaCraft.getNetwork().sendTo(new PacketFoodStatsReplace(), (EntityPlayerMP) player);
-    }
-  }
-
   private final EntityPlayer sourcePlayer;
   private final FoodStats originalStats; // We keep this here to do normal vanilla tracking (rather than using super). This is also friendlier to other mods if they replace this
   private final NutritionStats nutritionStats; // Separate handler for nutrition, because it's a bit complex
@@ -60,6 +48,17 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
     this.originalStats = originalStats;
     this.nutritionStats = new NutritionStats(0.5f, 0.0f);
     this.thirst = MAX_PLAYER_THIRST;
+  }
+
+  public static void replaceFoodStats(EntityPlayer player) {
+    // Only replace the server player's stats if they aren't already
+    if (!(player.getFoodStats() instanceof IFoodStatsTFC)) {
+      player.foodStats = new FoodStatsTFC(player, player.getFoodStats());
+    }
+    // Send the update regardless so the client can perform the same logic
+    if (player instanceof EntityPlayerMP) {
+      TerraFirmaCraft.getNetwork().sendTo(new PacketFoodStatsReplace(), (EntityPlayerMP) player);
+    }
   }
 
   @Override
@@ -214,6 +213,11 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
   }
 
   @Override
+  public void setFoodLevel(int foodLevelIn) {
+    originalStats.setFoodLevel(foodLevelIn);
+  }
+
+  @Override
   public boolean needFood() {
     return originalStats.needFood();
   }
@@ -221,11 +225,6 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
   @Override
   public void addExhaustion(float exhaustion) {
     originalStats.addExhaustion(EXHAUSTION_MULTIPLIER * exhaustion);
-  }
-
-  @Override
-  public void setFoodLevel(int foodLevelIn) {
-    originalStats.setFoodLevel(foodLevelIn);
   }
 
   @SideOnly(Side.CLIENT)

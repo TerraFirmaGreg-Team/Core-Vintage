@@ -47,11 +47,6 @@ public class BlockJoshuaTreeLog extends Block {
   public static final PropertyBool UP = PropertyBool.create("up");
   public static final PropertyBool DOWN = PropertyBool.create("down");
   private static final Map<Tree, BlockJoshuaTreeLog> MAP = new HashMap<>();
-
-  public static BlockJoshuaTreeLog get(Tree wood) {
-    return MAP.get(wood);
-  }
-
   private final Tree wood;
 
   public BlockJoshuaTreeLog(Tree wood) {
@@ -75,6 +70,10 @@ public class BlockJoshuaTreeLog extends Block {
 
     Blocks.FIRE.setFireInfo(this, 5, 5);
     this.setTickRandomly(true);
+  }
+
+  public static BlockJoshuaTreeLog get(Tree wood) {
+    return MAP.get(wood);
   }
 
   public Tree getWood() {

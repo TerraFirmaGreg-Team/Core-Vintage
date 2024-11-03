@@ -1,5 +1,8 @@
 package com.eerussianguy.firmalife.render;
 
+import com.eerussianguy.firmalife.blocks.BlockString;
+import com.eerussianguy.firmalife.te.TEString;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,9 +14,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import com.eerussianguy.firmalife.blocks.BlockString;
-import com.eerussianguy.firmalife.te.TEString;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

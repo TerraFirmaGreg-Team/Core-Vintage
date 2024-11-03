@@ -1,12 +1,12 @@
 package com.eerussianguy.firmalife.player;
 
+import net.dries007.tfc.Constants;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import net.dries007.tfc.Constants;
 
 import javax.annotation.Nonnull;
 import java.util.Random;

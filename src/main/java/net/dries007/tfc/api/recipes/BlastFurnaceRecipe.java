@@ -22,16 +22,6 @@ import javax.annotation.Nullable;
 @SuppressWarnings("WeakerAccess")
 public class BlastFurnaceRecipe extends IForgeRegistryEntry.Impl<BlastFurnaceRecipe> {
 
-  @Nullable
-  public static BlastFurnaceRecipe get(ItemStack inputItem) {
-    return TFCRegistries.BLAST_FURNACE.getValuesCollection().stream().filter(x -> x.isValidInput(inputItem)).findFirst().orElse(null);
-  }
-
-  @Nullable
-  public static BlastFurnaceRecipe get(Metal inputMetal) {
-    return TFCRegistries.BLAST_FURNACE.getValuesCollection().stream().filter(x -> x.input == inputMetal).findFirst().orElse(null);
-  }
-
   protected Metal output;
   protected Metal input;
   protected IIngredient<ItemStack> additive;
@@ -51,6 +41,16 @@ public class BlastFurnaceRecipe extends IForgeRegistryEntry.Impl<BlastFurnaceRec
     //Ensure one blast furnace recipe per input metal
     //noinspection ConstantConditions
     setRegistryName(input.getRegistryName());
+  }
+
+  @Nullable
+  public static BlastFurnaceRecipe get(ItemStack inputItem) {
+    return TFCRegistries.BLAST_FURNACE.getValuesCollection().stream().filter(x -> x.isValidInput(inputItem)).findFirst().orElse(null);
+  }
+
+  @Nullable
+  public static BlastFurnaceRecipe get(Metal inputMetal) {
+    return TFCRegistries.BLAST_FURNACE.getValuesCollection().stream().filter(x -> x.input == inputMetal).findFirst().orElse(null);
   }
 
   @Nullable

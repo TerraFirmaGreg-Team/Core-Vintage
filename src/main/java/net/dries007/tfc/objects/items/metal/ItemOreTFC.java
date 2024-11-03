@@ -37,19 +37,6 @@ import java.util.Map;
 public class ItemOreTFC extends ItemTFC implements IMetalItem {
 
   private static final Map<Ore, ItemOreTFC> MAP = new HashMap<>();
-
-  public static ItemOreTFC get(Ore ore) {
-    return MAP.get(ore);
-  }
-
-  public static ItemStack get(Ore ore, Ore.Grade grade, int amount) {
-    return new ItemStack(MAP.get(ore), amount, ore.isGraded() ? grade.getMeta() : 0);
-  }
-
-  public static ItemStack get(Ore ore, int amount) {
-    return new ItemStack(MAP.get(ore), amount);
-  }
-
   public final Ore ore;
 
   public ItemOreTFC(Ore ore) {
@@ -87,6 +74,18 @@ public class ItemOreTFC extends ItemTFC implements IMetalItem {
           OreDictionaryHelper.register(this, "gem", ore);
       }
     }
+  }
+
+  public static ItemOreTFC get(Ore ore) {
+    return MAP.get(ore);
+  }
+
+  public static ItemStack get(Ore ore, Ore.Grade grade, int amount) {
+    return new ItemStack(MAP.get(ore), amount, ore.isGraded() ? grade.getMeta() : 0);
+  }
+
+  public static ItemStack get(Ore ore, int amount) {
+    return new ItemStack(MAP.get(ore), amount);
   }
 
   @Nonnull

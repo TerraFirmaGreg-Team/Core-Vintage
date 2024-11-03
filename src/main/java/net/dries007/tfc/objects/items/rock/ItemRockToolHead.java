@@ -24,11 +24,6 @@ import java.util.Map;
 public class ItemRockToolHead extends ItemTFC implements IRockObject {
 
   private static final EnumMap<Rock.ToolType, Map<RockCategory, ItemRockToolHead>> TABLE = new EnumMap<>(Rock.ToolType.class);
-
-  public static ItemRockToolHead get(RockCategory cat, Rock.ToolType type) {
-    return TABLE.get(type).get(cat);
-  }
-
   private final RockCategory category;
   private final Rock.ToolType type;
 
@@ -40,6 +35,10 @@ public class ItemRockToolHead extends ItemTFC implements IRockObject {
 
     OreDictionaryHelper.register(this, type, "head");
     OreDictionaryHelper.register(this, type, "head", category);
+  }
+
+  public static ItemRockToolHead get(RockCategory cat, Rock.ToolType type) {
+    return TABLE.get(type).get(cat);
   }
 
   @Nonnull

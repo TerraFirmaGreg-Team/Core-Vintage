@@ -19,11 +19,6 @@ import java.util.Map;
 public class BlockWoodPressurePlateTFC extends BlockPressurePlate {
 
   private static final Map<Tree, BlockWoodPressurePlateTFC> MAP = new HashMap<>();
-
-  public static BlockWoodPressurePlateTFC get(Tree wood) {
-    return MAP.get(wood);
-  }
-
   public final Tree wood;
 
   public BlockWoodPressurePlateTFC(Tree wood) {
@@ -35,5 +30,9 @@ public class BlockWoodPressurePlateTFC extends BlockPressurePlate {
     Blocks.FIRE.setFireInfo(this, 5, 20);
 
     OreDictionaryHelper.register(this, "pressure_plate_wood");
+  }
+
+  public static BlockWoodPressurePlateTFC get(Tree wood) {
+    return MAP.get(wood);
   }
 }

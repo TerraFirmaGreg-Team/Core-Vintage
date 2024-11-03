@@ -364,8 +364,7 @@ public final class CommonEventHandler {
         }
       }
     }
-    if (block instanceof IGrowingPlant && !world.isRemote) {
-      IGrowingPlant plant = (IGrowingPlant) block;
+    if (block instanceof IGrowingPlant plant && !world.isRemote) {
       Entity entity = event.getEntity();
       if (entity instanceof EntityPlayerMP && entity.isSneaking()) {
         TerraFirmaCraft.getNetwork().sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, plant.getGrowingStatus(state, world, pos)
@@ -380,8 +379,7 @@ public final class CommonEventHandler {
     float actualDamage = event.getAmount();
     // Add damage bonus for weapons
     Entity entity = event.getSource().getTrueSource();
-    if (entity instanceof EntityLivingBase) {
-      EntityLivingBase damager = (EntityLivingBase) entity;
+    if (entity instanceof EntityLivingBase damager) {
       ItemStack stack = damager.getHeldItemMainhand();
       float skillModifier = SmithingSkill.getSkillBonus(stack, SmithingSkill.Type.WEAPONS);
       if (skillModifier > 0) {
@@ -391,8 +389,7 @@ public final class CommonEventHandler {
     }
     // Modifier for damage type + damage resistance
     actualDamage *= DamageType.getModifier(event.getSource(), event.getEntityLiving());
-    if (event.getEntityLiving() instanceof EntityPlayer) {
-      EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+    if (event.getEntityLiving() instanceof EntityPlayer player) {
       if (player.getFoodStats() instanceof IFoodStatsTFC) {
         float healthModifier = ((IFoodStatsTFC) player.getFoodStats()).getHealthModifier();
         if (healthModifier < ConfigTFC.General.PLAYER.minHealthModifier) {
@@ -489,9 +486,8 @@ public final class CommonEventHandler {
 
   @SubscribeEvent
   public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-    if (event.getObject() instanceof EntityPlayer) {
+    if (event.getObject() instanceof EntityPlayer player) {
       // Player skills
-      EntityPlayer player = (EntityPlayer) event.getObject();
       if (!player.hasCapability(CapabilityPlayerData.CAPABILITY, null)) {
         event.addCapability(CapabilityPlayerData.KEY, new PlayerDataHandler(player));
       }
@@ -505,9 +501,8 @@ public final class CommonEventHandler {
    */
   @SubscribeEvent
   public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-    if (event.player instanceof EntityPlayerMP) {
+    if (event.player instanceof EntityPlayerMP player) {
       // Capability Sync Handler
-      final EntityPlayerMP player = (EntityPlayerMP) event.player;
       CapabilityContainerListener.addTo(player.inventoryContainer, player);
 
       // Food Stats
@@ -560,9 +555,8 @@ public final class CommonEventHandler {
    */
   @SubscribeEvent
   public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
-    if (event.player instanceof EntityPlayerMP) {
+    if (event.player instanceof EntityPlayerMP player) {
       // Capability Sync Handler
-      final EntityPlayerMP player = (EntityPlayerMP) event.player;
       CapabilityContainerListener.addTo(player.inventoryContainer, player);
 
       // Food Stats
@@ -590,8 +584,7 @@ public final class CommonEventHandler {
    */
   @SubscribeEvent
   public static void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event) {
-    if (event.getEntityPlayer() instanceof EntityPlayerMP) {
-      EntityPlayerMP player = (EntityPlayerMP) event.getEntityPlayer();
+    if (event.getEntityPlayer() instanceof EntityPlayerMP player) {
 
       // Skills
       IPlayerData newSkills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
@@ -608,9 +601,8 @@ public final class CommonEventHandler {
    */
   @SubscribeEvent
   public static void onChangeDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
-    if (event.player instanceof EntityPlayerMP) {
+    if (event.player instanceof EntityPlayerMP player) {
       // Capability Sync Handler
-      final EntityPlayerMP player = (EntityPlayerMP) event.player;
       CapabilityContainerListener.addTo(player.inventoryContainer, player);
 
       // Food Stats
@@ -669,8 +661,7 @@ public final class CommonEventHandler {
       }
 
       // Check creature spawning - Prevents vanilla's respawning mechanic to spawn creatures outside their allowed conditions
-      if (event.getEntity() instanceof ICreatureTFC) {
-        ICreatureTFC creature = (ICreatureTFC) event.getEntity();
+      if (event.getEntity() instanceof ICreatureTFC creature) {
         float rainfall = ChunkDataTFC.getRainfall(world, pos);
         float temperature = ClimateTFC.getAvgTemp(world, pos);
         float floraDensity = ChunkDataTFC.getFloraDensity(world, pos);
@@ -755,8 +746,7 @@ public final class CommonEventHandler {
         }
       }
     }
-    if (ConfigTFC.Devices.TEMPERATURE.coolHeatablesInWorld && entity instanceof EntityItem) {
-      EntityItem entityItem = (EntityItem) entity;
+    if (ConfigTFC.Devices.TEMPERATURE.coolHeatablesInWorld && entity instanceof EntityItem entityItem) {
       ItemStack stack = entityItem.getItem();
       IItemHeat heatCap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
       if (heatCap != null) {
@@ -995,8 +985,7 @@ public final class CommonEventHandler {
         if (pluckable.equals(entityTypeName)) {
           target.dropItem(Items.FEATHER, 1);
           target.attackEntityFrom(DamageSourcesTFC.PLUCKING, (float) ConfigTFC.General.MISC.damagePerFeather);
-          if (target instanceof IAnimalTFC) {
-            IAnimalTFC animalTarget = (IAnimalTFC) target;
+          if (target instanceof IAnimalTFC animalTarget) {
             animalTarget.setFamiliarity(animalTarget.getFamiliarity() - 0.04f);
           }
           return;
@@ -1031,7 +1020,7 @@ public final class CommonEventHandler {
         String[] words = originalMessage.split(" ");
         for (int i = 0; i < words.length; i++) {
           String word = words[i];
-          if (word.length() == 0) {
+          if (word.isEmpty()) {
             continue;
           }
 

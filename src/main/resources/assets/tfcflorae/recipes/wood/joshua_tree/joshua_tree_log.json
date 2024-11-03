@@ -1,0 +1,16 @@
+{
+  "type": "tfc:damage_item_food_recipe",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "knife"
+    },
+    {
+      "item": "tfcflorae:wood/log/joshua_tree"
+    }
+  ],
+  "result": {
+    "item": "tfc:wood/log/joshua_tree",
+    "count": 1
+  }
+}

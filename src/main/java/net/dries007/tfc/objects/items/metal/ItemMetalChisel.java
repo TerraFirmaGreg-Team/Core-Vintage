@@ -49,6 +49,10 @@ public class ItemMetalChisel extends ItemMetalTool {
 
   private static final int COOLDOWN = 10;
 
+  public ItemMetalChisel(Metal metal, Metal.ItemType type) {
+    super(metal, type);
+  }
+
   /**
    * Calculates the block that would be set in the specified position if the chisel were used. In most conditions will return null. If not null, then a
    * successful chisel operation can be completed.
@@ -149,10 +153,6 @@ public class ItemMetalChisel extends ItemMetalTool {
       }
     }
     return null;
-  }
-
-  public ItemMetalChisel(Metal metal, Metal.ItemType type) {
-    super(metal, type);
   }
 
   /**

@@ -28,6 +28,20 @@ public enum Heat {
   BRILLIANT_WHITE(1500f, 1601f, TextFormatting.WHITE);
 
   private static final Heat[] VALUES = values();
+  final TextFormatting format, alternate;
+  private final float min;
+  private final float max;
+
+  Heat(float min, float max, TextFormatting format, TextFormatting alternate) {
+    this.min = min;
+    this.max = max;
+    this.format = format;
+    this.alternate = alternate;
+  }
+
+  Heat(float min, float max, TextFormatting format) {
+    this(min, max, format, format);
+  }
 
   public static float maxVisibleTemperature() {
     return BRILLIANT_WHITE.getMax();
@@ -89,21 +103,6 @@ public enum Heat {
       }
     }
     return tooltip;
-  }
-
-  final TextFormatting format, alternate;
-  private final float min;
-  private final float max;
-
-  Heat(float min, float max, TextFormatting format, TextFormatting alternate) {
-    this.min = min;
-    this.max = max;
-    this.format = format;
-    this.alternate = alternate;
-  }
-
-  Heat(float min, float max, TextFormatting format) {
-    this(min, max, format, format);
   }
 
   public float getMin() {

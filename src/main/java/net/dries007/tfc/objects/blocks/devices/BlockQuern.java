@@ -53,6 +53,12 @@ public class BlockQuern extends Block implements IItemSize, IHighlightHandler {
 
   private static final AxisAlignedBB INPUT_SLOT_AABB = new AxisAlignedBB(0.375D, 0.86D, 0.375D, 0.625D, 1.015D, 0.625D);
 
+  public BlockQuern() {
+    super(Material.ROCK);
+    setHardness(3.0f);
+    setSoundType(SoundType.STONE);
+  }
+
   /**
    * Gets the selection place player is looking at Used for interaction / selection box drawing
    */
@@ -81,12 +87,6 @@ public class BlockQuern extends Block implements IItemSize, IHighlightHandler {
       }
     }
     return SelectionPlace.BASE;
-  }
-
-  public BlockQuern() {
-    super(Material.ROCK);
-    setHardness(3.0f);
-    setSoundType(SoundType.STONE);
   }
 
   @Override

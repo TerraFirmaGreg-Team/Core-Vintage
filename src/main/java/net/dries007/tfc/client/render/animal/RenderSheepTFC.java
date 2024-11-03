@@ -5,13 +5,13 @@
 
 package net.dries007.tfc.client.render.animal;
 
+import net.dries007.tfc.client.model.animal.ModelSheepBodyTFC;
+import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
+
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.client.model.animal.ModelSheepBodyTFC;
-import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

@@ -21,12 +21,6 @@ public enum ForgeStep {
   SHRINK(16, 107, 68, 224, 224);
 
   private static final ForgeStep[] VALUES = values();
-
-  @Nullable
-  public static ForgeStep valueOf(int id) {
-    return id >= 0 && id < VALUES.length ? VALUES[id] : null;
-  }
-
   private final int stepAmount;
   private final int x, y, u, v;
 
@@ -36,6 +30,11 @@ public enum ForgeStep {
     this.y = y;
     this.u = u;
     this.v = v;
+  }
+
+  @Nullable
+  public static ForgeStep valueOf(int id) {
+    return id >= 0 && id < VALUES.length ? VALUES[id] : null;
   }
 
   public int getStepAmount() {

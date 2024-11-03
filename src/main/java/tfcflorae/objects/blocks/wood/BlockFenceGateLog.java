@@ -13,11 +13,6 @@ import java.util.Map;
 public class BlockFenceGateLog extends BlockFenceGate {
 
   private static final Map<Tree, BlockFenceGateLog> MAP = new HashMap<>();
-
-  public static BlockFenceGateLog get(Tree wood) {
-    return MAP.get(wood);
-  }
-
   public final Tree wood;
 
   public BlockFenceGateLog(Tree wood) {
@@ -32,5 +27,9 @@ public class BlockFenceGateLog extends BlockFenceGate {
     OreDictionaryHelper.register(this, "fence", "gate", "log", "wood");
     OreDictionaryHelper.register(this, "fence", "gate", "log", "wood", wood.getRegistryName().getPath());
     Blocks.FIRE.setFireInfo(this, 5, 20);
+  }
+
+  public static BlockFenceGateLog get(Tree wood) {
+    return MAP.get(wood);
   }
 }

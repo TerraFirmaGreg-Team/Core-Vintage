@@ -36,17 +36,6 @@ public class BlockOreTFC extends Block {
 
   public static final PropertyEnum<Ore.Grade> GRADE = PropertyEnum.create("grade", Ore.Grade.class);
   private static final Map<Ore, Map<Rock, BlockOreTFC>> TABLE = new HashMap<>();
-
-  public static BlockOreTFC get(Ore ore, Rock rock) {
-    return TABLE.get(ore).get(rock);
-  }
-
-  public static IBlockState get(Ore ore, Rock rock, Ore.Grade grade) {
-    IBlockState state = TABLE.get(ore).get(rock).getDefaultState();
-    if (!ore.isGraded()) {return state;}
-    return state.withProperty(GRADE, grade);
-  }
-
   public final Ore ore;
   public final Rock rock;
 
@@ -62,6 +51,16 @@ public class BlockOreTFC extends Block {
     setSoundType(SoundType.STONE);
     setHardness(10.0F).setResistance(10.0F);
     setHarvestLevel("pickaxe", 0);
+  }
+
+  public static BlockOreTFC get(Ore ore, Rock rock) {
+    return TABLE.get(ore).get(rock);
+  }
+
+  public static IBlockState get(Ore ore, Rock rock, Ore.Grade grade) {
+    IBlockState state = TABLE.get(ore).get(rock).getDefaultState();
+    if (!ore.isGraded()) {return state;}
+    return state.withProperty(GRADE, grade);
   }
 
   @SuppressWarnings("deprecation")

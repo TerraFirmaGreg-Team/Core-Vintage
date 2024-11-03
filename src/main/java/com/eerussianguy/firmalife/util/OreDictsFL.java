@@ -1,12 +1,12 @@
 package com.eerussianguy.firmalife.util;
 
-import net.minecraft.init.Items;
-import net.minecraftforge.oredict.OreDictionary;
-
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
+
+import net.minecraft.init.Items;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class OreDictsFL {
 

@@ -1,5 +1,8 @@
 package com.eerussianguy.firmalife.render;
 
+import com.eerussianguy.firmalife.blocks.BlockClimateStation;
+import com.eerussianguy.firmalife.util.ClientHelpers;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -16,9 +19,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.eerussianguy.firmalife.blocks.BlockClimateStation;
-import com.eerussianguy.firmalife.util.ClientHelpers;
 
 import java.util.LinkedList;
 import java.util.Queue;

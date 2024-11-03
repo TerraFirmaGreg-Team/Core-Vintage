@@ -35,12 +35,6 @@ import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 public class ItemAnimalHide extends ItemTFC {
 
   private static final Map<HideType, Map<HideSize, ItemAnimalHide>> TABLE = new HashMap<>();
-
-  @Nonnull
-  public static ItemAnimalHide get(HideType type, HideSize size) {
-    return TABLE.get(type).get(size);
-  }
-
   protected final HideSize size;
   private final HideType type;
 
@@ -52,6 +46,11 @@ public class ItemAnimalHide extends ItemTFC {
       TABLE.put(type, new HashMap<>());
     }
     TABLE.get(type).put(size, this);
+  }
+
+  @Nonnull
+  public static ItemAnimalHide get(HideType type, HideSize size) {
+    return TABLE.get(type).get(size);
   }
 
   @Nonnull

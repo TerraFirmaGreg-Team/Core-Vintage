@@ -12,24 +12,11 @@ import javax.annotation.Nullable;
 
 public class PlanterRecipe extends IForgeRegistryEntry.Impl<PlanterRecipe> {
 
-  protected IIngredient<ItemStack> inputItem;
-  protected ItemStack outputItem;
   private final int stages;
   private final boolean large;
   private final int tier;
-
-  @Nullable
-  public static PlanterRecipe get(ItemStack item) {
-    return RegistriesFL.PLANTER_QUAD.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
-  }
-
-  public static int getMaxStage(PlanterRecipe recipe) {
-    return recipe.stages;
-  }
-
-  public static int getTier(PlanterRecipe recipe) {
-    return recipe.tier;
-  }
+  protected IIngredient<ItemStack> inputItem;
+  protected ItemStack outputItem;
 
   public PlanterRecipe(IIngredient<ItemStack> input, ItemStack output, int stages, boolean large) {
     this(input, output, stages, large, 0);
@@ -48,6 +35,19 @@ public class PlanterRecipe extends IForgeRegistryEntry.Impl<PlanterRecipe> {
     if (stages < 1) {
       throw new IllegalArgumentException("Sorry, but crops need have to have stages.");
     }
+  }
+
+  @Nullable
+  public static PlanterRecipe get(ItemStack item) {
+    return RegistriesFL.PLANTER_QUAD.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
+  }
+
+  public static int getMaxStage(PlanterRecipe recipe) {
+    return recipe.stages;
+  }
+
+  public static int getTier(PlanterRecipe recipe) {
+    return recipe.tier;
   }
 
   public boolean isLarge() {

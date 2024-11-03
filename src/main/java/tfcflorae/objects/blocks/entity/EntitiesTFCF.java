@@ -1,5 +1,7 @@
 package tfcflorae.objects.blocks.entity;
 
+import net.dries007.tfc.util.Helpers;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
@@ -12,7 +14,6 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DataSerializerEntry;
 
-import net.dries007.tfc.util.Helpers;
 import tfcflorae.TFCFlorae;
 
 import javax.annotation.Nonnull;

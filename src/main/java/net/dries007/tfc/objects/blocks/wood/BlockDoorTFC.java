@@ -32,11 +32,6 @@ import java.util.Random;
 public class BlockDoorTFC extends BlockDoor {
 
   private static final Map<Tree, BlockDoorTFC> MAP = new HashMap<>();
-
-  public static BlockDoorTFC get(Tree wood) {
-    return MAP.get(wood);
-  }
-
   public final Tree wood;
 
   public BlockDoorTFC(Tree wood) {
@@ -48,6 +43,10 @@ public class BlockDoorTFC extends BlockDoor {
     disableStats();
     // No direct item, so no oredict.
     Blocks.FIRE.setFireInfo(this, 5, 20);
+  }
+
+  public static BlockDoorTFC get(Tree wood) {
+    return MAP.get(wood);
   }
 
   // todo: Is private, but it might be worth it making protected/public

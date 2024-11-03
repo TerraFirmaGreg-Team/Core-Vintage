@@ -5,6 +5,11 @@
 
 package net.dries007.tfc.objects.blocks;
 
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.capability.food.FoodStatsTFC;
+import net.dries007.tfc.client.particle.TFCParticles;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -15,11 +20,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
-import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;

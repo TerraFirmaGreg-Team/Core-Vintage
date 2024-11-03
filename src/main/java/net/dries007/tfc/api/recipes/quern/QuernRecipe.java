@@ -19,11 +19,6 @@ import javax.annotation.Nullable;
 
 public class QuernRecipe extends IForgeRegistryEntry.Impl<QuernRecipe> implements IJEISimpleRecipe {
 
-  @Nullable
-  public static QuernRecipe get(ItemStack item) {
-    return TFCRegistries.QUERN.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
-  }
-
   protected IIngredient<ItemStack> inputItem;
   protected ItemStack outputItem;
 
@@ -34,6 +29,11 @@ public class QuernRecipe extends IForgeRegistryEntry.Impl<QuernRecipe> implement
     if (inputItem == null || outputItem == null) {
       throw new IllegalArgumentException("Input and output are not allowed to be empty");
     }
+  }
+
+  @Nullable
+  public static QuernRecipe get(ItemStack item) {
+    return TFCRegistries.QUERN.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
   }
 
   @Nonnull

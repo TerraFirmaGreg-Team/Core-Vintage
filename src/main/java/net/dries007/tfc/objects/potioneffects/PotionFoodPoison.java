@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.objects.potioneffects;
 
-import net.minecraft.entity.EntityLivingBase;
-
 import net.dries007.tfc.util.DamageSourcesTFC;
+
+import net.minecraft.entity.EntityLivingBase;
 
 import javax.annotation.Nonnull;
 

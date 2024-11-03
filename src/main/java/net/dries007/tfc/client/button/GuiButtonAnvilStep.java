@@ -5,13 +5,13 @@
 
 package net.dries007.tfc.client.button;
 
+import net.dries007.tfc.util.forge.ForgeStep;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.util.forge.ForgeStep;
 
 import javax.annotation.Nonnull;
 

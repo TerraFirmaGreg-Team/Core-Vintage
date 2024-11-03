@@ -5,10 +5,10 @@
 
 package net.dries007.tfc.client.button;
 
+import net.dries007.tfc.objects.te.TELargeVessel;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-
-import net.dries007.tfc.objects.te.TELargeVessel;
 
 import javax.annotation.Nonnull;
 

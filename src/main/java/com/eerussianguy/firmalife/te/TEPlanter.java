@@ -26,11 +26,11 @@ import javax.annotation.Nonnull;
  */
 public class TEPlanter extends TEInventory implements ITickable, ICalendarTickable, IWaterable, GreenhouseHelpers.IGreenhouseReceiver {
 
+  public boolean isClimateValid;
   protected int[] stages;
   private long lastUpdateTick;
   private long lastTickCalChecked;
   private int waterUses;
-  public boolean isClimateValid;
   private int tier;
 
   public TEPlanter() {

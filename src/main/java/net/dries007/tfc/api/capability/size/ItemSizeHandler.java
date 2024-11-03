@@ -17,6 +17,15 @@ import java.util.EnumMap;
 public class ItemSizeHandler implements ICapabilityProvider, IItemSize {
 
   private static final EnumMap<Size, EnumMap<Weight, ItemSizeHandler[]>> CACHE = new EnumMap<>(Size.class);
+  private final Size size;
+  private final Weight weight;
+  private final boolean canStack;
+
+  public ItemSizeHandler(Size size, Weight weight, boolean canStack) {
+    this.size = size;
+    this.weight = weight;
+    this.canStack = canStack;
+  }
 
   public static ItemSizeHandler get(Size size, Weight weight, boolean canStack) {
     EnumMap<Weight, ItemSizeHandler[]> nested = CACHE.get(size);
@@ -35,16 +44,6 @@ public class ItemSizeHandler implements ICapabilityProvider, IItemSize {
 
   public static ItemSizeHandler getDefault() {
     return get(Size.SMALL, Weight.LIGHT, true); // Default to fitting in small vessels and stacksize = 32
-  }
-
-  private final Size size;
-  private final Weight weight;
-  private final boolean canStack;
-
-  public ItemSizeHandler(Size size, Weight weight, boolean canStack) {
-    this.size = size;
-    this.weight = weight;
-    this.canStack = canStack;
   }
 
   @Override

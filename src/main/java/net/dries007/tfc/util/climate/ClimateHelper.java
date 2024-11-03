@@ -22,6 +22,8 @@ public class ClimateHelper {
 
   private static final Random RANDOM = new Random();
 
+  private ClimateHelper() {}
+
   /**
    * @return The month adjusted temperature. This gets the base temperature, before daily / hourly changes
    */
@@ -114,6 +116,4 @@ public class ClimateHelper {
     }
     return 0.5f + 0.5f * ConfigTFC.General.WORLD.hemisphereType.getValue() * (float) Math.sin(Math.PI * chunkZ / tempRange);
   }
-
-  private ClimateHelper() {}
 }

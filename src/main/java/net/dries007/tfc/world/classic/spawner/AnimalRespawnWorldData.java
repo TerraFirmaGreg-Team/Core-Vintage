@@ -24,6 +24,13 @@ public class AnimalRespawnWorldData extends WorldSavedData {
 
   private static final String NAME = MOD_ID + "_respawn";
   private static final int REGION_SIZE = 16; // Number of chunks (sqr) per grid, ie: 16x16
+  private final Map<ResourceLocation, Map<ChunkPos, Long>> respawnMap;
+
+  @SuppressWarnings("unused")
+  public AnimalRespawnWorldData(String name) {
+    super(name);
+    respawnMap = new HashMap<>();
+  }
 
   @Nonnull
   public static AnimalRespawnWorldData get(@Nonnull World world) {
@@ -38,14 +45,6 @@ public class AnimalRespawnWorldData extends WorldSavedData {
       return data;
     }
     throw new IllegalStateException("Unable to access animal respawning data!");
-  }
-
-  private final Map<ResourceLocation, Map<ChunkPos, Long>> respawnMap;
-
-  @SuppressWarnings("unused")
-  public AnimalRespawnWorldData(String name) {
-    super(name);
-    respawnMap = new HashMap<>();
   }
 
   @Override

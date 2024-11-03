@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.compat.patchouli;
 
-import net.minecraft.util.ResourceLocation;
-
 import net.dries007.tfc.client.TFCGuiHandler;
+
+import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 

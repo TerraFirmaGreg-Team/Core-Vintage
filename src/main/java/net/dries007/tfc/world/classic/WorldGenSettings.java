@@ -11,11 +11,6 @@ import net.dries007.tfc.Constants;
 @SuppressWarnings("WeakerAccess")
 public class WorldGenSettings {
 
-  public static WorldGenSettingsBuilder fromString(String options) {
-    if (Strings.isNullOrEmpty(options)) {return new WorldGenSettingsBuilder();}
-    return Constants.GSON.fromJson(options, WorldGenSettingsBuilder.class);
-  }
-
   public final int spawnFuzz; //todo: remove, vanilla does it with a gamerule
   public final boolean flatBedrock;
   public final int rockLayerSize;
@@ -43,6 +38,11 @@ public class WorldGenSettings {
     surfaceRavineHeight = b.surfaceRavineHeight;
     surfaceRavineVariability = b.surfaceRavineVariability;
     riverRavineRarity = b.riverRavineRarity;
+  }
+
+  public static WorldGenSettingsBuilder fromString(String options) {
+    if (Strings.isNullOrEmpty(options)) {return new WorldGenSettingsBuilder();}
+    return Constants.GSON.fromJson(options, WorldGenSettingsBuilder.class);
   }
 
   @Override

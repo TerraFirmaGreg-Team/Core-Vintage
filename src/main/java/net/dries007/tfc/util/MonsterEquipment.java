@@ -74,6 +74,18 @@ public class MonsterEquipment {
     ENTRIES.put("minecraft:zombie_villager", equipment);
   }
 
+  private final Map<EntityEquipmentSlot, WeightedCollection<ItemStack>> equipment;
+
+  public MonsterEquipment(WeightedCollection<ItemStack> weapons, WeightedCollection<ItemStack> helmets, WeightedCollection<ItemStack> chestplates, WeightedCollection<ItemStack> leggings, WeightedCollection<ItemStack> boots) {
+    equipment = new ImmutableMap.Builder<EntityEquipmentSlot, WeightedCollection<ItemStack>>()
+      .put(EntityEquipmentSlot.MAINHAND, weapons)
+      .put(EntityEquipmentSlot.HEAD, helmets)
+      .put(EntityEquipmentSlot.CHEST, chestplates)
+      .put(EntityEquipmentSlot.LEGS, leggings)
+      .put(EntityEquipmentSlot.FEET, boots)
+      .build();
+  }
+
   @Nullable
   public static MonsterEquipment get(Entity entity) {
     ResourceLocation entityType = EntityList.getKey(entity);
@@ -91,18 +103,6 @@ public class MonsterEquipment {
 
   public static void put(String entityId, MonsterEquipment equipment) {
     ENTRIES.put(entityId, equipment);
-  }
-
-  private final Map<EntityEquipmentSlot, WeightedCollection<ItemStack>> equipment;
-
-  public MonsterEquipment(WeightedCollection<ItemStack> weapons, WeightedCollection<ItemStack> helmets, WeightedCollection<ItemStack> chestplates, WeightedCollection<ItemStack> leggings, WeightedCollection<ItemStack> boots) {
-    equipment = new ImmutableMap.Builder<EntityEquipmentSlot, WeightedCollection<ItemStack>>()
-      .put(EntityEquipmentSlot.MAINHAND, weapons)
-      .put(EntityEquipmentSlot.HEAD, helmets)
-      .put(EntityEquipmentSlot.CHEST, chestplates)
-      .put(EntityEquipmentSlot.LEGS, leggings)
-      .put(EntityEquipmentSlot.FEET, boots)
-      .build();
   }
 
   public Optional<ItemStack> getEquipment(EntityEquipmentSlot slot, Random random) {

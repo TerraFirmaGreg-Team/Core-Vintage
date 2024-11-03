@@ -34,15 +34,6 @@ import java.util.Map;
 public class ItemSmallOre extends ItemTFC implements IMetalItem {
 
   private static final Map<Ore, ItemSmallOre> MAP = new HashMap<>();
-
-  public static ItemSmallOre get(Ore ore) {
-    return MAP.get(ore);
-  }
-
-  public static ItemStack get(Ore ore, int amount) {
-    return new ItemStack(MAP.get(ore), amount);
-  }
-
   private final Ore ore;
 
   public ItemSmallOre(Ore ore) {
@@ -66,6 +57,14 @@ public class ItemSmallOre extends ItemTFC implements IMetalItem {
       OreDictionaryHelper.register(this, "ore", name, "small");
       OreDictionaryHelper.register(this, "ore", "small", name);
     }
+  }
+
+  public static ItemSmallOre get(Ore ore) {
+    return MAP.get(ore);
+  }
+
+  public static ItemStack get(Ore ore, int amount) {
+    return new ItemStack(MAP.get(ore), amount);
   }
 
   @Override

@@ -14,18 +14,9 @@ import javax.annotation.Nullable;
 
 public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe> implements IJEISimpleRecipe {
 
+  private final int duration;
   protected IIngredient<ItemStack> inputItem;
   protected ItemStack outputItem;
-  private final int duration;
-
-  @Nullable
-  public static OvenRecipe get(ItemStack item) {
-    return RegistriesFL.OVEN.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
-  }
-
-  public static int getDuration(OvenRecipe recipe) {
-    return recipe.duration;
-  }
 
   public OvenRecipe(IIngredient<ItemStack> input, ItemStack output, int duration) {
     this.inputItem = input;
@@ -38,6 +29,15 @@ public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe> implements 
     if (duration < 1) {
       throw new IllegalArgumentException("Sorry, but oven recipes have to have a duration.");
     }
+  }
+
+  @Nullable
+  public static OvenRecipe get(ItemStack item) {
+    return RegistriesFL.OVEN.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
+  }
+
+  public static int getDuration(OvenRecipe recipe) {
+    return recipe.duration;
   }
 
   @Nonnull

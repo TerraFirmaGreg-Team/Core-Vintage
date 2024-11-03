@@ -4,6 +4,18 @@
       "apply": [
         {
           "model": "tfc:plants/sago"
+        },
+        {
+          "model": "tfc:plants/sago",
+          "y": 90
+        },
+        {
+          "model": "tfc:plants/sago",
+          "y": 180
+        },
+        {
+          "model": "tfc:plants/sago",
+          "y": 270
         }
       ]
     }

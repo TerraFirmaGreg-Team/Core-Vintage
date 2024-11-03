@@ -13,6 +13,8 @@ import net.dries007.tfc.TerraFirmaCraft;
 
 public interface IGrowingPlant {
 
+  public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos);
+
   public enum GrowthStatus {
     /**
      * The plant is dead.
@@ -40,7 +42,5 @@ public interface IGrowingPlant {
       return TerraFirmaCraft.MOD_ID + ".enum.growstatus." + name().toLowerCase();
     }
   }
-
-  public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos);
 
 }

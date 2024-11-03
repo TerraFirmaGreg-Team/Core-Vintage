@@ -40,11 +40,6 @@ import java.util.Map;
 public class ItemRockKnife extends ItemTool implements IItemSize, IRockObject {
 
   private static final Map<RockCategory, ItemRockKnife> MAP = new HashMap<>();
-
-  public static ItemRockKnife get(RockCategory category) {
-    return MAP.get(category);
-  }
-
   public final RockCategory category;
 
   public ItemRockKnife(RockCategory category) {
@@ -58,6 +53,10 @@ public class ItemRockKnife extends ItemTool implements IItemSize, IRockObject {
     OreDictionaryHelper.register(this, "knife");
     OreDictionaryHelper.register(this, "knife", "stone");
     OreDictionaryHelper.register(this, "knife", "stone", category);
+  }
+
+  public static ItemRockKnife get(RockCategory category) {
+    return MAP.get(category);
   }
 
   @Override

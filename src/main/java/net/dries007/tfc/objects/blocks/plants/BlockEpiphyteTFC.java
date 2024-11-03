@@ -42,13 +42,13 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
 
   private static final Map<Plant, BlockEpiphyteTFC> MAP = new HashMap<>();
 
-  public static BlockEpiphyteTFC get(Plant plant) {
-    return MAP.get(plant);
-  }
-
   public BlockEpiphyteTFC(Plant plant) {
     super(plant);
     if (MAP.put(plant, this) != null) {throw new IllegalStateException("There can only be one.");}
+  }
+
+  public static BlockEpiphyteTFC get(Plant plant) {
+    return MAP.get(plant);
   }
 
   @Override

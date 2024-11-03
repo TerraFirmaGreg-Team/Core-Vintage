@@ -5,12 +5,6 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.PropertyEnum;
@@ -30,169 +24,149 @@ import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
 @ParametersAreNonnullByDefault
-public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowable, ITallPlant
-{
-    private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
-    private static final Map<Plant, BlockTallWaterPlantTFC> MAP = new HashMap<>();
+public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowable, ITallPlant {
 
-    public static BlockTallWaterPlantTFC get(Plant plant)
-    {
-        return BlockTallWaterPlantTFC.MAP.get(plant);
+  private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
+  private static final Map<Plant, BlockTallWaterPlantTFC> MAP = new HashMap<>();
+
+  public static BlockTallWaterPlantTFC get(Plant plant) {
+    return BlockTallWaterPlantTFC.MAP.get(plant);
+  }
+
+  public BlockTallWaterPlantTFC(Plant plant) {
+    super(plant);
+    if (MAP.put(plant, this) != null) {throw new IllegalStateException("There can only be one.");}
+  }
+
+  @Override
+  public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+    IBlockState water = plant.getWaterType();
+    int i;
+    //noinspection StatementWithEmptyBody
+    for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i)
+      ;
+    if (water == SALT_WATER) {
+      return i < plant.getMaxHeight() && BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
+    } else {return i < plant.getMaxHeight() && BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);}
+  }
+
+  @Override
+  public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+    return false;
+  }
+
+  @Override
+  public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+    worldIn.setBlockState(pos.up(), this.getDefaultState());
+    IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(growthStageProperty, plant.getStageForMonth())
+                                   .withProperty(PART, getPlantPart(worldIn, pos));
+    worldIn.setBlockState(pos, iblockstate);
+    iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
+  }
+
+  public void shrink(World worldIn, BlockPos pos) {
+    worldIn.setBlockState(pos, plant.getWaterType());
+    worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
+  }
+
+  @Override
+  public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
+    super.onBlockHarvested(worldIn, pos, state, player);
+  }
+
+  @Override
+  public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable) {
+    IBlockState plant = plantable.getPlant(world, pos.offset(direction));
+
+    if (plant.getBlock() == this) {
+      return true;
     }
+    return super.canSustainPlant(state, world, pos, direction, plantable);
+  }
 
-    public BlockTallWaterPlantTFC(Plant plant)
-    {
-        super(plant);
-        if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
-    }
+  @Override
+  @Nonnull
+  public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+    return super.getActualState(state, worldIn, pos).withProperty(PART, getPlantPart(worldIn, pos));
+  }
 
-    @Override
-    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
-    {
-        IBlockState water = plant.getWaterType();
-        int i;
-        //noinspection StatementWithEmptyBody
-        for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i) ;
-        if (water == SALT_WATER)
-            return i < plant.getMaxHeight() && BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
-        else
-            return i < plant.getMaxHeight() && BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
-    }
+  @Override
+  @Nonnull
+  public Block.EnumOffsetType getOffsetType() {
+    return EnumOffsetType.XYZ;
+  }
 
-    @Override
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
-    {
-        return false;
-    }
+  @Override
+  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    if (!worldIn.isAreaLoaded(pos, 1)) {return;}
 
-    @Override
-    public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
-    {
-        worldIn.setBlockState(pos.up(), this.getDefaultState());
-        IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(PART, getPlantPart(worldIn, pos));
-        worldIn.setBlockState(pos, iblockstate);
-        iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
-    }
+    if (plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos))
+        && plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+      int j = state.getValue(AGE);
 
-    public void shrink(World worldIn, BlockPos pos)
-    {
-        worldIn.setBlockState(pos, plant.getWaterType());
-        worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
-    }
-
-    @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
-    {
-        super.onBlockHarvested(worldIn, pos, state, player);
-    }
-
-    @Override
-    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable)
-    {
-        IBlockState plant = plantable.getPlant(world, pos.offset(direction));
-
-        if (plant.getBlock() == this)
-        {
-            return true;
+      if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
+        if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
+          grow(worldIn, rand, pos, state);
+        } else if (j < 3) {
+          worldIn.setBlockState(pos, state.withProperty(AGE, j + 1).withProperty(PART, getPlantPart(worldIn, pos)));
         }
-        return super.canSustainPlant(state, world, pos, direction, plantable);
-    }
+        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+      }
+    } else if (!plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+      int j = state.getValue(AGE);
 
-    @Override
-    @Nonnull
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-    {
-        return super.getActualState(state, worldIn, pos).withProperty(PART, getPlantPart(worldIn, pos));
-    }
-
-    @Override
-    @Nonnull
-    public Block.EnumOffsetType getOffsetType()
-    {
-        return EnumOffsetType.XYZ;
-    }
-
-    @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
-        if (!worldIn.isAreaLoaded(pos, 1)) return;
-
-        if (plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted())))
-        {
-            int j = state.getValue(AGE);
-
-            if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true))
-            {
-                if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote))
-                {
-                    grow(worldIn, rand, pos, state);
-                }
-                else if (j < 3)
-                {
-                    worldIn.setBlockState(pos, state.withProperty(AGE, j + 1).withProperty(PART, getPlantPart(worldIn, pos)));
-                }
-                net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-            }
+      if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+        if (j == 0 && canShrink(worldIn, pos)) {
+          shrink(worldIn, pos);
+        } else if (j > 0) {
+          worldIn.setBlockState(pos, state.withProperty(AGE, j - 1).withProperty(PART, getPlantPart(worldIn, pos)));
         }
-        else if (!plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos)))
-        {
-            int j = state.getValue(AGE);
-
-            if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true))
-            {
-                if (j == 0 && canShrink(worldIn, pos))
-                {
-                    shrink(worldIn, pos);
-                }
-                else if (j > 0)
-                {
-                    worldIn.setBlockState(pos, state.withProperty(AGE, j - 1).withProperty(PART, getPlantPart(worldIn, pos)));
-                }
-                net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-            }
-        }
-
-        checkAndDropBlock(worldIn, pos, state);
+        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+      }
     }
 
-    @Override
-    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
-    {
-        IBlockState soil = worldIn.getBlockState(pos.down());
+    checkAndDropBlock(worldIn, pos, state);
+  }
 
-        if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).getBlock() == this) return false;
-        if (state.getBlock() == this)
-        {
-            return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
-        }
-        return this.canSustainBush(soil);
-    }
+  @Override
+  public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+    IBlockState soil = worldIn.getBlockState(pos.down());
 
-    @Override
-    @Nonnull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        return getTallBoundingBax(state.getValue(AGE), state, source, pos);
+    if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).getBlock() == this) {return false;}
+    if (state.getBlock() == this) {
+      return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this)
+             && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
     }
+    return this.canSustainBush(soil);
+  }
 
-    @Override
-    @Nonnull
-    protected BlockStateContainer createPlantBlockState()
-    {
-        return new BlockStateContainer(this, AGE, growthStageProperty, PART, DAYPERIOD);
-    }
+  @Override
+  @Nonnull
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return getTallBoundingBax(state.getValue(AGE), state, source, pos);
+  }
 
-    @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-    {
-        return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
-    }
+  @Override
+  @Nonnull
+  protected BlockStateContainer createPlantBlockState() {
+    return new BlockStateContainer(this, AGE, growthStageProperty, PART, DAYPERIOD);
+  }
 
-    private boolean canShrink(World worldIn, BlockPos pos)
-    {
-        return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up()).getBlock() != this;
-    }
+  @Override
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
+  }
+
+  private boolean canShrink(World worldIn, BlockPos pos) {
+    return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up()).getBlock() != this;
+  }
 }

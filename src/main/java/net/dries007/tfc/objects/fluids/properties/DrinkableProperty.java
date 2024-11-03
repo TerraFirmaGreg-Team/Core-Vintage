@@ -5,14 +5,14 @@
 
 package net.dries007.tfc.objects.fluids.properties;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.player.EntityPlayer;
 
-@FunctionalInterface
-public interface DrinkableProperty
-{
-    FluidProperty<DrinkableProperty> DRINKABLE = new FluidProperty<>("drinkable");
+import javax.annotation.Nonnull;
 
-    void onDrink(@Nonnull EntityPlayer player);
+@FunctionalInterface
+public interface DrinkableProperty {
+
+  FluidProperty<DrinkableProperty> DRINKABLE = new FluidProperty<>("drinkable");
+
+  void onDrink(@Nonnull EntityPlayer player);
 }

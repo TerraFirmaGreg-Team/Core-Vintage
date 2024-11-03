@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.world.classic.chunkdata;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -16,35 +13,34 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import net.dries007.tfc.util.Helpers;
 
-public final class ChunkDataProvider implements ICapabilitySerializable<NBTTagCompound>
-{
-    @CapabilityInject(ChunkDataTFC.class)
-    public static final Capability<ChunkDataTFC> CHUNK_DATA_CAPABILITY = Helpers.getNull();
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-    private final ChunkDataTFC instance = CHUNK_DATA_CAPABILITY.getDefaultInstance();
+public final class ChunkDataProvider implements ICapabilitySerializable<NBTTagCompound> {
 
-    @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
-    {
-        return capability == CHUNK_DATA_CAPABILITY;
-    }
+  @CapabilityInject(ChunkDataTFC.class)
+  public static final Capability<ChunkDataTFC> CHUNK_DATA_CAPABILITY = Helpers.getNull();
 
-    @Nullable
-    @Override
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
-    {
-        return capability == CHUNK_DATA_CAPABILITY ? CHUNK_DATA_CAPABILITY.cast(instance) : null;
-    }
+  private final ChunkDataTFC instance = CHUNK_DATA_CAPABILITY.getDefaultInstance();
 
-    @Override
-    public NBTTagCompound serializeNBT()
-    {
-        return (NBTTagCompound) CHUNK_DATA_CAPABILITY.writeNBT(instance, null);
-    }
+  @Override
+  public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+    return capability == CHUNK_DATA_CAPABILITY;
+  }
 
-    @Override
-    public void deserializeNBT(NBTTagCompound nbt)
-    {
-        CHUNK_DATA_CAPABILITY.readNBT(instance, null, nbt);
-    }
+  @Nullable
+  @Override
+  public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+    return capability == CHUNK_DATA_CAPABILITY ? CHUNK_DATA_CAPABILITY.cast(instance) : null;
+  }
+
+  @Override
+  public NBTTagCompound serializeNBT() {
+    return (NBTTagCompound) CHUNK_DATA_CAPABILITY.writeNBT(instance, null);
+  }
+
+  @Override
+  public void deserializeNBT(NBTTagCompound nbt) {
+    CHUNK_DATA_CAPABILITY.readNBT(instance, null, nbt);
+  }
 }

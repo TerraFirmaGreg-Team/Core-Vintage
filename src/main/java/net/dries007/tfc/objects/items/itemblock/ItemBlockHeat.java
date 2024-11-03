@@ -5,8 +5,6 @@
 
 package net.dries007.tfc.objects.items.itemblock;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,23 +12,23 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 
-public class ItemBlockHeat extends ItemBlockTFC
-{
-    private final float heatCapacity;
-    private final float meltingPoint;
+import javax.annotation.Nullable;
 
-    public ItemBlockHeat(Block block, float heatCapacity, float meltingPoint)
-    {
-        super(block);
+public class ItemBlockHeat extends ItemBlockTFC {
 
-        this.heatCapacity = heatCapacity;
-        this.meltingPoint = meltingPoint;
-    }
+  private final float heatCapacity;
+  private final float meltingPoint;
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt)
-    {
-        return new ItemHeatHandler(nbt, heatCapacity, meltingPoint);
-    }
+  public ItemBlockHeat(Block block, float heatCapacity, float meltingPoint) {
+    super(block);
+
+    this.heatCapacity = heatCapacity;
+    this.meltingPoint = meltingPoint;
+  }
+
+  @Nullable
+  @Override
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    return new ItemHeatHandler(nbt, heatCapacity, meltingPoint);
+  }
 }

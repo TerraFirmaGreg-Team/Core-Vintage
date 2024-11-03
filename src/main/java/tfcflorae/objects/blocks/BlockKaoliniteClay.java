@@ -1,9 +1,5 @@
 package tfcflorae.objects.blocks;
 
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -14,45 +10,43 @@ import net.minecraft.item.ItemStack;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
+
 @ParametersAreNonnullByDefault
-public class BlockKaoliniteClay extends Block implements IItemSize
-{
-    public BlockKaoliniteClay()
-    {
-        super(Material.CLAY);
-        setSoundType(SoundType.GROUND);
-        setHardness(1.0F);
-        OreDictionaryHelper.register(this, "block", "Clay");
-    }
+public class BlockKaoliniteClay extends Block implements IItemSize {
 
-    @Override
-    public int quantityDropped(Random random)
-    {
-        return 4;
-    }
+  public BlockKaoliniteClay() {
+    super(Material.CLAY);
+    setSoundType(SoundType.GROUND);
+    setHardness(1.0F);
+    OreDictionaryHelper.register(this, "block", "Clay");
+  }
 
-    @Nonnull
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-        return ItemsTFCF.KAOLINITE_CLAY;
-    }
+  @Override
+  public int quantityDropped(Random random) {
+    return 4;
+  }
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack)
-    {
-        return Size.SMALL;
-    }
+  @Nonnull
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return ItemsTFCF.KAOLINITE_CLAY;
+  }
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack)
-    {
-        return Weight.LIGHT;
-    }
+  @Nonnull
+  @Override
+  public Size getSize(ItemStack stack) {
+    return Size.SMALL;
+  }
+
+  @Nonnull
+  @Override
+  public Weight getWeight(ItemStack stack) {
+    return Weight.LIGHT;
+  }
 }

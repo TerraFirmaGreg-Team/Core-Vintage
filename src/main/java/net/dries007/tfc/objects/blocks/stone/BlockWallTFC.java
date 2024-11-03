@@ -5,11 +5,6 @@
 
 package net.dries007.tfc.objects.blocks.stone;
 
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,53 +14,51 @@ import net.minecraft.util.NonNullList;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
+import javax.annotation.Nonnull;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
+
 //todo: actually by-pass the variant? or would it be worth adding a mossy texture for nice looking walls
-public class BlockWallTFC extends BlockWall
-{
-    private static final Map<Rock, EnumMap<Rock.Type, BlockWallTFC>> TABLE = new HashMap<>();
+public class BlockWallTFC extends BlockWall {
 
-    public static BlockWallTFC get(Rock rock, Rock.Type type)
-    {
-        return TABLE.get(rock).get(type);
-    }
+  private static final Map<Rock, EnumMap<Rock.Type, BlockWallTFC>> TABLE = new HashMap<>();
 
-    public final BlockRockVariant parent;
+  public static BlockWallTFC get(Rock rock, Rock.Type type) {
+    return TABLE.get(rock).get(type);
+  }
 
-    public BlockWallTFC(BlockRockVariant modelBlock)
-    {
-        super(modelBlock);
+  public final BlockRockVariant parent;
 
-        if (!TABLE.containsKey(modelBlock.rock))
-            TABLE.put(modelBlock.rock, new EnumMap<>(Rock.Type.class));
-        TABLE.get(modelBlock.rock).put(modelBlock.type, this);
+  public BlockWallTFC(BlockRockVariant modelBlock) {
+    super(modelBlock);
 
-        parent = modelBlock;
-        OreDictionaryHelper.register(this, "wall");
-        OreDictionaryHelper.registerRockType(this, modelBlock.type, "wall");
-    }
+    if (!TABLE.containsKey(modelBlock.rock)) {TABLE.put(modelBlock.rock, new EnumMap<>(Rock.Type.class));}
+    TABLE.get(modelBlock.rock).put(modelBlock.type, this);
 
-    @Override
-    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
-    {
-        items.add(new ItemStack(this));
-    }
+    parent = modelBlock;
+    OreDictionaryHelper.register(this, "wall");
+    OreDictionaryHelper.registerRockType(this, modelBlock.type, "wall");
+  }
 
-    @Override
-    public int damageDropped(IBlockState state)
-    {
-        return 0;
-    }
+  @Override
+  public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+    items.add(new ItemStack(this));
+  }
 
-    @Override
-    @Nonnull
-    public IBlockState getStateFromMeta(int meta)
-    {
-        return this.getDefaultState();
-    }
+  @Override
+  public int damageDropped(IBlockState state) {
+    return 0;
+  }
 
-    @Override
-    public int getMetaFromState(IBlockState state)
-    {
-        return 0;
-    }
+  @Override
+  @Nonnull
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState();
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return 0;
+  }
 }

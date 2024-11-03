@@ -1,8 +1,5 @@
 package com.eerussianguy.firmalife.items;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemStack;
 
@@ -12,24 +9,26 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemFruitDoor extends ItemDoor implements IItemSize
-{
-    public ItemFruitDoor(BlockFruitDoor block)
-    {
-        super(block);
-    }
+public class ItemFruitDoor extends ItemDoor implements IItemSize {
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack) { return Size.VERY_LARGE; }
+  public ItemFruitDoor(BlockFruitDoor block) {
+    super(block);
+  }
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack) { return Weight.HEAVY; }
+  @Nonnull
+  @Override
+  public Size getSize(ItemStack stack) {return Size.VERY_LARGE;}
 
-    @Override
-    public int getItemStackLimit(ItemStack stack) { return getStackSize(stack); }
+  @Nonnull
+  @Override
+  public Weight getWeight(ItemStack stack) {return Weight.HEAVY;}
+
+  @Override
+  public int getItemStackLimit(ItemStack stack) {return getStackSize(stack);}
 }

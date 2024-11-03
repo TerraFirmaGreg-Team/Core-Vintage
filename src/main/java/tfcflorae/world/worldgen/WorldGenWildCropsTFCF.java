@@ -1,14 +1,5 @@
 package tfcflorae.world.worldgen;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -16,82 +7,73 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import tfcflorae.TFCFlorae;
-import tfcflorae.objects.blocks.BlocksTFCF;
-
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import tfcflorae.TFCFlorae;
+import tfcflorae.objects.blocks.BlocksTFCF;
 
-import static net.dries007.tfc.world.classic.ChunkGenTFC.FRESH_WATER;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
-public class WorldGenWildCropsTFCF implements IWorldGenerator
-{
-    private static final List<ICrop> CROPS = new ArrayList<>();
+public class WorldGenWildCropsTFCF implements IWorldGenerator {
 
-    public static void register(ICrop bush)
-    {
-        CROPS.add(bush);
-    }
+  private static final List<ICrop> CROPS = new ArrayList<>();
 
-    @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
-    {
-        if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0 && CROPS.size() > 0 && ConfigTFC.General.FOOD.cropRarity > 0)
-        {
-            // Guarantees crop generation if possible (easier to balance by config file while also making it random)
-            BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
+  public static void register(ICrop bush) {
+    CROPS.add(bush);
+  }
 
-            Collections.shuffle(CROPS);
-            ChunkDataTFC data = ChunkDataTFC.get(world, chunkBlockPos);
-            float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
-            float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
-            float floraDensity = data.getFloraDensity();
-            float floraDiversity = data.getFloraDiversity();
-            Biome b = world.getBiome(chunkBlockPos);
+  @Override
+  public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+    if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0 && CROPS.size() > 0 && ConfigTFC.General.FOOD.cropRarity > 0) {
+      // Guarantees crop generation if possible (easier to balance by config file while also making it random)
+      BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-            ICrop crop = CROPS.stream().filter(x -> x.isValidConditions(temperature, rainfall)).findFirst().orElse(null);
-            if (crop != null)
-            {
-                if (crop != Crop.BARLEY || 
-                    crop != Crop.MAIZE || 
-                    crop != Crop.OAT || 
-                    crop != Crop.RICE || 
-                    crop != Crop.RYE || 
-                    crop != Crop.WHEAT)
-                {
-                    if ((random.nextInt(ConfigTFC.General.FOOD.cropRarity)) <= 2)
-                    {
-                        BlockCropTFC cropBlock = BlockCropTFC.get(crop);
-                        int cropsInChunk = 5 + random.nextInt(15);
-                        for (int i = 0; i < cropsInChunk; i++)
-                        {
-                            BlockPos pos = world.getHeight(chunkBlockPos.add(random.nextInt(16) + 8, 0, random.nextInt(16) + 8));
+      Collections.shuffle(CROPS);
+      ChunkDataTFC data = ChunkDataTFC.get(world, chunkBlockPos);
+      float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
+      float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
+      float floraDensity = data.getFloraDensity();
+      float floraDiversity = data.getFloraDiversity();
+      Biome b = world.getBiome(chunkBlockPos);
 
-                            if (isValidPosition(world, pos))
-                            {
-                                double yearProgress = CalendarTFC.CALENDAR_TIME.getMonthOfYear().ordinal() / 11.0;
-                                int maxStage = crop.getMaxStage();
-                                int growth = (int) (yearProgress * maxStage) + 3 - random.nextInt(2);
-                                if (growth > maxStage)
-                                    growth = maxStage;
-                                TFCFlorae.getLog().warn(crop + " tried to generate at X: " + pos.getX() + " Y: " + pos.getY() + " Z: " + pos.getZ() + " is " + b);
-                                world.setBlockState(pos, cropBlock.getDefaultState().withProperty(cropBlock.getStageProperty(), growth).withProperty(BlockCropTFC.WILD, true), 2);
-                            }
-                        }
-                    }
-                }
+      ICrop crop = CROPS.stream().filter(x -> x.isValidConditions(temperature, rainfall)).findFirst().orElse(null);
+      if (crop != null) {
+        if (crop != Crop.BARLEY ||
+            crop != Crop.MAIZE ||
+            crop != Crop.OAT ||
+            crop != Crop.RICE ||
+            crop != Crop.RYE ||
+            crop != Crop.WHEAT) {
+          if ((random.nextInt(ConfigTFC.General.FOOD.cropRarity)) <= 2) {
+            BlockCropTFC cropBlock = BlockCropTFC.get(crop);
+            int cropsInChunk = 5 + random.nextInt(15);
+            for (int i = 0; i < cropsInChunk; i++) {
+              BlockPos pos = world.getHeight(chunkBlockPos.add(random.nextInt(16) + 8, 0, random.nextInt(16) + 8));
+
+              if (isValidPosition(world, pos)) {
+                double yearProgress = CalendarTFC.CALENDAR_TIME.getMonthOfYear().ordinal() / 11.0;
+                int maxStage = crop.getMaxStage();
+                int growth = (int) (yearProgress * maxStage) + 3 - random.nextInt(2);
+                if (growth > maxStage) {growth = maxStage;}
+                TFCFlorae.getLog().warn(crop + " tried to generate at X: " + pos.getX() + " Y: " + pos.getY() + " Z: " + pos.getZ() + " is " + b);
+                world.setBlockState(pos, cropBlock.getDefaultState().withProperty(cropBlock.getStageProperty(), growth)
+                                                  .withProperty(BlockCropTFC.WILD, true), 2);
+              }
+            }
+          }
+        }
                 /*if (crop == Crop.BARLEY || 
                     crop == Crop.MAIZE || 
                     crop == Crop.OAT || 
@@ -145,12 +127,11 @@ public class WorldGenWildCropsTFCF implements IWorldGenerator
                         }
                     }
                 }*/
-            }
-        }
+      }
     }
+  }
 
-    protected boolean isValidPosition(World world, BlockPos pos)
-    {
-        return world.isAirBlock(pos) && (BlocksTFC.isSoil(world.getBlockState(pos.down())) || BlocksTFCF.isSoil(world.getBlockState(pos.down())));
-    }
+  protected boolean isValidPosition(World world, BlockPos pos) {
+    return world.isAirBlock(pos) && (BlocksTFC.isSoil(world.getBlockState(pos.down())) || BlocksTFCF.isSoil(world.getBlockState(pos.down())));
+  }
 }

@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.objects.items.metal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -23,46 +20,42 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.types.Metal;
 
-public class ItemMetalShield extends ItemMetalTool
-{
-    public ItemMetalShield(Metal metal, Metal.ItemType type)
-    {
-        super(metal, type);
-        this.addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter()
-        {
-            @SideOnly(Side.CLIENT)
-            public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
-            {
-                return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
-            }
-        });
-    }
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-    @Override
-    @Nonnull
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn)
-    {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        playerIn.setActiveHand(handIn);
-        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
-    }
+public class ItemMetalShield extends ItemMetalTool {
 
-    @Nonnull
-    public EnumAction getItemUseAction(ItemStack stack)
-    {
-        return EnumAction.BLOCK;
-    }
+  public ItemMetalShield(Metal metal, Metal.ItemType type) {
+    super(metal, type);
+    this.addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter() {
+      @SideOnly(Side.CLIENT)
+      public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+        return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
+      }
+    });
+  }
 
-    @Override
-    public int getMaxItemUseDuration(ItemStack stack)
-    {
-        return 72000;
-    }
+  @Override
+  @Nonnull
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
+    ItemStack itemstack = playerIn.getHeldItem(handIn);
+    playerIn.setActiveHand(handIn);
+    return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+  }
 
-    @Override
-    public boolean isShield(ItemStack stack, @Nullable EntityLivingBase entity)
-    {
-        return true;
-    }
+  @Nonnull
+  public EnumAction getItemUseAction(ItemStack stack) {
+    return EnumAction.BLOCK;
+  }
+
+  @Override
+  public int getMaxItemUseDuration(ItemStack stack) {
+    return 72000;
+  }
+
+  @Override
+  public boolean isShield(ItemStack stack, @Nullable EntityLivingBase entity) {
+    return true;
+  }
 
 }

@@ -18,26 +18,23 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 
-public class CastingRecipeWrapper implements IRecipeWrapper
-{
-    private final ItemStack mold;
-    private final FluidStack input;
+public class CastingRecipeWrapper implements IRecipeWrapper {
 
-    public CastingRecipeWrapper(Metal metal, Metal.ItemType type)
-    {
-        input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100);
-        mold = new ItemStack(ItemMold.get(type));
-        IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler)
-        {
-            cap.fill(input, true);
-        }
-    }
+  private final ItemStack mold;
+  private final FluidStack input;
 
-    @Override
-    public void getIngredients(IIngredients ingredients)
-    {
-        ingredients.setInput(VanillaTypes.FLUID, input);
-        ingredients.setOutput(VanillaTypes.ITEM, mold);
+  public CastingRecipeWrapper(Metal metal, Metal.ItemType type) {
+    input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100);
+    mold = new ItemStack(ItemMold.get(type));
+    IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+    if (cap instanceof IMoldHandler) {
+      cap.fill(input, true);
     }
+  }
+
+  @Override
+  public void getIngredients(IIngredients ingredients) {
+    ingredients.setInput(VanillaTypes.FLUID, input);
+    ingredients.setOutput(VanillaTypes.ITEM, mold);
+  }
 }

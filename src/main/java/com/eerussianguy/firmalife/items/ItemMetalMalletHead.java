@@ -1,8 +1,5 @@
 package com.eerussianguy.firmalife.items;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -14,51 +11,47 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ItemTFC;
 
-public class ItemMetalMalletHead extends ItemTFC implements IMetalItem
-{
-    private final Metal metal;
-    private final int smeltAmount;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-    public ItemMetalMalletHead(Metal metal)
-    {
-        this.metal = metal;
-        this.smeltAmount = 100;
-    }
+public class ItemMetalMalletHead extends ItemTFC implements IMetalItem {
 
-    @Nonnull
-    public Size getSize(@Nonnull ItemStack itemStack)
-    {
-        return Size.LARGE;
-    }
+  private final Metal metal;
+  private final int smeltAmount;
 
-    @Nonnull
-    public Weight getWeight(@Nonnull ItemStack itemStack)
-    {
-        return Weight.HEAVY;
-    }
+  public ItemMetalMalletHead(Metal metal) {
+    this.metal = metal;
+    this.smeltAmount = 100;
+  }
 
-    @Nullable
-    @Override
-    public Metal getMetal(ItemStack itemStack)
-    {
-        return metal;
-    }
+  @Nonnull
+  public Size getSize(@Nonnull ItemStack itemStack) {
+    return Size.LARGE;
+  }
 
-    @Override
-    public int getSmeltAmount(ItemStack itemStack)
-    {
-        return smeltAmount;
-    }
+  @Nonnull
+  public Weight getWeight(@Nonnull ItemStack itemStack) {
+    return Weight.HEAVY;
+  }
 
-    @Override
-    public boolean canMelt(ItemStack itemStack)
-    {
-        return true;
-    }
+  @Nullable
+  @Override
+  public Metal getMetal(ItemStack itemStack) {
+    return metal;
+  }
 
-    @Nullable
-    public ICapabilityProvider initCapabilities(ItemStack itemStack, @Nullable NBTTagCompound nbt)
-    {
-        return new ForgeableHeatableHandler(nbt, metal.getSpecificHeat(), metal.getMeltTemp());
-    }
+  @Override
+  public int getSmeltAmount(ItemStack itemStack) {
+    return smeltAmount;
+  }
+
+  @Override
+  public boolean canMelt(ItemStack itemStack) {
+    return true;
+  }
+
+  @Nullable
+  public ICapabilityProvider initCapabilities(ItemStack itemStack, @Nullable NBTTagCompound nbt) {
+    return new ForgeableHeatableHandler(nbt, metal.getSpecificHeat(), metal.getMeltTemp());
+  }
 }

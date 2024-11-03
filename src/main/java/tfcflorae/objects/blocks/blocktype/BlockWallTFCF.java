@@ -16,52 +16,44 @@ import net.dries007.tfc.api.types.Rock;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-public class BlockWallTFCF  extends BlockWall
-{
-    private static final Map<Rock, EnumMap<RockTFCF, BlockWallTFCF>> TABLE = new HashMap<>();
+public class BlockWallTFCF extends BlockWall {
 
-    public static BlockWallTFCF get(Rock rock, RockTFCF rockTFCF)
-    {
-        return TABLE.get(rock).get(rockTFCF);
-    }
+  private static final Map<Rock, EnumMap<RockTFCF, BlockWallTFCF>> TABLE = new HashMap<>();
+  public final BlockRockVariantTFCF parent;
 
-    public final BlockRockVariantTFCF parent;
+  public BlockWallTFCF(BlockRockVariantTFCF modelBlock) {
+    super(modelBlock);
 
-    public BlockWallTFCF(BlockRockVariantTFCF modelBlock)
-    {
-        super(modelBlock);
+    if (!TABLE.containsKey(modelBlock.rock)) {TABLE.put(modelBlock.rock, new EnumMap<>(RockTFCF.class));}
+    TABLE.get(modelBlock.rock).put(modelBlock.rockTFCF, this);
 
-        if (!TABLE.containsKey(modelBlock.rock))
-            TABLE.put(modelBlock.rock, new EnumMap<>(RockTFCF.class));
-        TABLE.get(modelBlock.rock).put(modelBlock.rockTFCF, this);
+    parent = modelBlock;
+    OreDictionaryHelper.register(this, "wall");
+    OreDictionaryHelper.registerRockType(this, modelBlock.rockTFCF, "wall");
+  }
 
-        parent = modelBlock;
-        OreDictionaryHelper.register(this, "wall");
-        OreDictionaryHelper.registerRockType(this, modelBlock.rockTFCF, "wall");
-    }
+  public static BlockWallTFCF get(Rock rock, RockTFCF rockTFCF) {
+    return TABLE.get(rock).get(rockTFCF);
+  }
 
-    @Override
-    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
-    {
-        items.add(new ItemStack(this));
-    }
+  @Override
+  public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+    items.add(new ItemStack(this));
+  }
 
-    @Override
-    public int damageDropped(IBlockState state)
-    {
-        return 0;
-    }
+  @Override
+  public int damageDropped(IBlockState state) {
+    return 0;
+  }
 
-    @Override
-    @Nonnull
-    public IBlockState getStateFromMeta(int meta)
-    {
-        return this.getDefaultState();
-    }
+  @Override
+  @Nonnull
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState();
+  }
 
-    @Override
-    public int getMetaFromState(IBlockState state)
-    {
-        return 0;
-    }
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return 0;
+  }
 }

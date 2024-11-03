@@ -5,36 +5,32 @@
 
 package net.dries007.tfc.objects.inventory.capability;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class ItemStackHandlerCallback extends ItemStackHandler
-{
-    private final ISlotCallback callback;
+import javax.annotation.Nonnull;
 
-    public ItemStackHandlerCallback(ISlotCallback callback, int slots)
-    {
-        super(slots);
-        this.callback = callback;
-    }
+public class ItemStackHandlerCallback extends ItemStackHandler {
 
-    @Override
-    public int getSlotLimit(int slot)
-    {
-        return callback.getSlotLimit(slot);
-    }
+  private final ISlotCallback callback;
 
-    @Override
-    public boolean isItemValid(int slot, @Nonnull ItemStack stack)
-    {
-        return callback.isItemValid(slot, stack);
-    }
+  public ItemStackHandlerCallback(ISlotCallback callback, int slots) {
+    super(slots);
+    this.callback = callback;
+  }
 
-    @Override
-    protected void onContentsChanged(int slot)
-    {
-        callback.setAndUpdateSlots(slot);
-    }
+  @Override
+  public int getSlotLimit(int slot) {
+    return callback.getSlotLimit(slot);
+  }
+
+  @Override
+  public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+    return callback.isItemValid(slot, stack);
+  }
+
+  @Override
+  protected void onContentsChanged(int slot) {
+    callback.setAndUpdateSlots(slot);
+  }
 }

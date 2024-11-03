@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.proxy;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
@@ -15,33 +12,35 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import net.dries007.tfc.util.calendar.Month;
 
-public interface IProxy
-{
-    @Nonnull
-    IThreadListener getThreadListener(MessageContext context);
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-    @Nullable
-    EntityPlayer getPlayer(MessageContext context);
+public interface IProxy {
 
-    @Nullable
-    World getWorld(MessageContext context);
+  @Nonnull
+  IThreadListener getThreadListener(MessageContext context);
 
-    // Calendar Translation / Localization Methods
+  @Nullable
+  EntityPlayer getPlayer(MessageContext context);
 
-    @Nonnull
-    String getMonthName(Month month, boolean useSeasons);
+  @Nullable
+  World getWorld(MessageContext context);
 
-    @Nonnull
-    String getDayName(int dayOfMonth, long totalDays);
+  // Calendar Translation / Localization Methods
 
-    @Nonnull
-    String getDate(int hour, int minute, String monthName, int day, long years);
+  @Nonnull
+  String getMonthName(Month month, boolean useSeasons);
 
-    class WrongSideException extends RuntimeException
-    {
-        WrongSideException(String message)
-        {
-            super(message);
-        }
+  @Nonnull
+  String getDayName(int dayOfMonth, long totalDays);
+
+  @Nonnull
+  String getDate(int hour, int minute, String monthName, int day, long years);
+
+  class WrongSideException extends RuntimeException {
+
+    WrongSideException(String message) {
+      super(message);
     }
+  }
 }

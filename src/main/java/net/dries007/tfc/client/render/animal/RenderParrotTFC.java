@@ -13,11 +13,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.client.model.animal.ModelParrotTFC;
 
 @SideOnly(Side.CLIENT)
-public class RenderParrotTFC extends RenderParrot
-{
-    public RenderParrotTFC(RenderManager renderManager)
-    {
-        super(renderManager);
-        this.mainModel = new ModelParrotTFC();
-    }
+public class RenderParrotTFC extends RenderParrot {
+
+  public RenderParrotTFC(RenderManager renderManager) {
+    super(renderManager);
+    this.mainModel = new ModelParrotTFC();
+  }
 }

@@ -7,32 +7,28 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import com.eerussianguy.firmalife.compat.ModuleCore;
 
-public class DTModule extends ModuleCore
-{
-    public DTModule()
-    {
-        super("dynamictreestfc");
-    }
+public class DTModule extends ModuleCore {
 
-    @Override
-    public boolean isLoaded() {
-        return Loader.isModLoaded(this.getDep());
-    }
+  public DTModule() {
+    super("dynamictreestfc");
+  }
 
-    @Override
-    public void preInit(FMLPreInitializationEvent event)
-    {
-        addRegistry(new DTRegistry());
-    }
+  @Override
+  public boolean isLoaded() {
+    return Loader.isModLoaded(this.getDep());
+  }
 
-    @Override
-    public void init(FMLInitializationEvent event)
-    {
-    }
+  @Override
+  public void preInit(FMLPreInitializationEvent event) {
+    addRegistry(new DTRegistry());
+  }
 
-    @Override
-    public void postInit(FMLPostInitializationEvent event)
-    {
+  @Override
+  public void init(FMLInitializationEvent event) {
+  }
 
-    }
+  @Override
+  public void postInit(FMLPostInitializationEvent event) {
+
+  }
 }

@@ -5,11 +5,6 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -32,104 +27,93 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @ParametersAreNonnullByDefault
-public class EntityGrouseTFC extends EntityChickenTFC implements ILivestock
-{
-    public EntityGrouseTFC(World worldIn)
-    {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.GROUSE.adulthood, ConfigTFC.Animals.GROUSE.elder));
-    }
+public class EntityGrouseTFC extends EntityChickenTFC implements ILivestock {
 
-    public EntityGrouseTFC(World worldIn, Gender gender, int birthDay)
-    {
-        super(worldIn, gender, birthDay);
-        this.setSize(0.8F, 0.8F);
-    }
+  public EntityGrouseTFC(World worldIn) {
+    this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.GROUSE.adulthood, ConfigTFC.Animals.GROUSE.elder));
+  }
 
-    @Override
-    public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity)
-    {
-        BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
-        if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.SAVANNA))
-        {
-            return ConfigTFC.Animals.GROUSE.rarity;
-        }
-        return 0;
-    }
+  public EntityGrouseTFC(World worldIn, Gender gender, int birthDay) {
+    super(worldIn, gender, birthDay);
+    this.setSize(0.8F, 0.8F);
+  }
 
-    @Override
-    public int getDaysToAdulthood()
-    {
-        return ConfigTFC.Animals.GROUSE.adulthood;
+  @Override
+  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
+    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
+        (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
+      return ConfigTFC.Animals.GROUSE.rarity;
     }
+    return 0;
+  }
 
-    @Override
-    public int getDaysToElderly()
-    {
-        return ConfigTFC.Animals.GROUSE.elder;
-    }
+  @Override
+  public int getDaysToAdulthood() {
+    return ConfigTFC.Animals.GROUSE.adulthood;
+  }
 
-    @Override
-    public List<ItemStack> getProducts()
-    {
-        List<ItemStack> eggs = new ArrayList<>();
-        ItemStack egg = new ItemStack(Items.EGG);
-        if (this.isFertilized())
-        {
-            IEgg cap = egg.getCapability(CapabilityEgg.CAPABILITY, null);
-            if (cap != null)
-            {
-                EntityGrouseTFC chick = new EntityGrouseTFC(this.world);
-                chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-                cap.setFertilized(chick, ConfigTFC.Animals.GROUSE.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
-            }
-        }
-        eggs.add(egg);
-        return eggs;
-    }
+  @Override
+  public int getDaysToElderly() {
+    return ConfigTFC.Animals.GROUSE.elder;
+  }
 
-    @Override
-    public long getProductsCooldown()
-    {
-        return Math.max(0, ConfigTFC.Animals.GROUSE.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+  @Override
+  public List<ItemStack> getProducts() {
+    List<ItemStack> eggs = new ArrayList<>();
+    ItemStack egg = new ItemStack(Items.EGG);
+    if (this.isFertilized()) {
+      IEgg cap = egg.getCapability(CapabilityEgg.CAPABILITY, null);
+      if (cap != null) {
+        EntityGrouseTFC chick = new EntityGrouseTFC(this.world);
+        chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
+        cap.setFertilized(chick, ConfigTFC.Animals.GROUSE.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
+      }
     }
+    eggs.add(egg);
+    return eggs;
+  }
 
-    @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn)
-    {
-        return TFCSounds.ANIMAL_GROUSE_HURT;
-    }
+  @Override
+  public long getProductsCooldown() {
+    return Math.max(0, ConfigTFC.Animals.GROUSE.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+  }
 
-    @Override
-    protected SoundEvent getDeathSound()
-    {
-        return TFCSounds.ANIMAL_GROUSE_DEATH;
-    }
+  @Override
+  protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    return TFCSounds.ANIMAL_GROUSE_HURT;
+  }
 
-    @Override
-    protected SoundEvent getAmbientSound()
-    {
-        return TFCSounds.ANIMAL_GROUSE_SAY;
-    }
+  @Override
+  protected SoundEvent getDeathSound() {
+    return TFCSounds.ANIMAL_GROUSE_DEATH;
+  }
 
-    @Nullable
-    protected ResourceLocation getLootTable()
-    {
-        return LootTablesTFC.ANIMALS_GROUSE;
-    }
+  @Override
+  protected SoundEvent getAmbientSound() {
+    return TFCSounds.ANIMAL_GROUSE_SAY;
+  }
 
-    @Override
-    protected void playStepSound(BlockPos pos, Block blockIn)
-    {
-        // Same sound, no need to create another
-        this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
-    }
+  @Nullable
+  protected ResourceLocation getLootTable() {
+    return LootTablesTFC.ANIMALS_GROUSE;
+  }
 
-    @Override
-    public double getOldDeathChance()
-    {
-        return ConfigTFC.Animals.GROUSE.oldDeathChance;
-    }
+  @Override
+  protected void playStepSound(BlockPos pos, Block blockIn) {
+    // Same sound, no need to create another
+    this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
+  }
+
+  @Override
+  public double getOldDeathChance() {
+    return ConfigTFC.Animals.GROUSE.oldDeathChance;
+  }
 }

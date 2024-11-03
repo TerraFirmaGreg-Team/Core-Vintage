@@ -5,24 +5,22 @@
 
 package net.dries007.tfc.objects.fluids.properties;
 
-import javax.annotation.Nonnull;
-
 import net.dries007.tfc.api.types.Metal;
 
-public class MetalProperty
-{
-    public static final FluidProperty<MetalProperty> METAL = new FluidProperty<>("metal");
+import javax.annotation.Nonnull;
 
-    private final Metal metal;
+public class MetalProperty {
 
-    public MetalProperty(@Nonnull Metal metal)
-    {
-        this.metal = metal;
-    }
+  public static final FluidProperty<MetalProperty> METAL = new FluidProperty<>("metal");
 
-    @Nonnull
-    public Metal getMetal()
-    {
-        return metal;
-    }
+  private final Metal metal;
+
+  public MetalProperty(@Nonnull Metal metal) {
+    this.metal = metal;
+  }
+
+  @Nonnull
+  public Metal getMetal() {
+    return metal;
+  }
 }

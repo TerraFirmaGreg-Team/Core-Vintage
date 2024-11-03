@@ -18,34 +18,29 @@ import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.dries007.tfc.util.climate.IceMeltHandler;
 
-public class BlockFluidWater extends BlockFluidTFC implements ITemperatureBlock
-{
-    private final boolean isSalt;
-    private final float freezeThreshold;
+public class BlockFluidWater extends BlockFluidTFC implements ITemperatureBlock {
 
-    public BlockFluidWater(Fluid fluid, Material material, boolean isSalt)
-    {
-        super(fluid, material, true);
-        this.isSalt = isSalt;
-        this.freezeThreshold = isSalt ? IceMeltHandler.SALT_WATER_FREEZE_THRESHOLD : IceMeltHandler.WATER_FREEZE_THRESHOLD;
+  private final boolean isSalt;
+  private final float freezeThreshold;
 
-        setLightOpacity(3);
-        disableStats();
-    }
+  public BlockFluidWater(Fluid fluid, Material material, boolean isSalt) {
+    super(fluid, material, true);
+    this.isSalt = isSalt;
+    this.freezeThreshold = isSalt ? IceMeltHandler.SALT_WATER_FREEZE_THRESHOLD : IceMeltHandler.WATER_FREEZE_THRESHOLD;
 
-    @Override
-    public void onTemperatureUpdateTick(World world, BlockPos pos, IBlockState state)
-    {
-        if (world.getLightFor(EnumSkyBlock.BLOCK, pos) < 10 && ClimateTFC.getActualTemp(world, pos) < freezeThreshold && state.getValue(LEVEL) == 0)
-        {
-            for (EnumFacing face : EnumFacing.HORIZONTALS)
-            {
-                if (world.getBlockState(pos.offset(face)).getBlock() != this)
-                {
-                    world.setBlockState(pos, isSalt ? BlocksTFC.SEA_ICE.getDefaultState() : Blocks.ICE.getDefaultState());
-                    break;
-                }
-            }
+    setLightOpacity(3);
+    disableStats();
+  }
+
+  @Override
+  public void onTemperatureUpdateTick(World world, BlockPos pos, IBlockState state) {
+    if (world.getLightFor(EnumSkyBlock.BLOCK, pos) < 10 && ClimateTFC.getActualTemp(world, pos) < freezeThreshold && state.getValue(LEVEL) == 0) {
+      for (EnumFacing face : EnumFacing.HORIZONTALS) {
+        if (world.getBlockState(pos.offset(face)).getBlock() != this) {
+          world.setBlockState(pos, isSalt ? BlocksTFC.SEA_ICE.getDefaultState() : Blocks.ICE.getDefaultState());
+          break;
         }
+      }
     }
+  }
 }

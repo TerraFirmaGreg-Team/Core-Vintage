@@ -5,10 +5,6 @@
 
 package net.dries007.tfc.objects.blocks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -36,200 +32,175 @@ import net.dries007.tfc.objects.te.TEPlacedHide;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 /**
- * Due to implementation, this will only ever be a soaked hide -> scraped hide
- * Placement is restricted to the TFC item.
+ * Due to implementation, this will only ever be a soaked hide -> scraped hide Placement is restricted to the TFC item.
  */
 @ParametersAreNonnullByDefault
-public class BlockPlacedHide extends Block
-{
-    public static final PropertyEnum<ItemAnimalHide.HideSize> SIZE = PropertyEnum.create("size", ItemAnimalHide.HideSize.class);
+public class BlockPlacedHide extends Block {
 
-    public BlockPlacedHide()
-    {
-        super(Material.CIRCUITS);
-        setHardness(0.2f);
+  public static final PropertyEnum<ItemAnimalHide.HideSize> SIZE = PropertyEnum.create("size", ItemAnimalHide.HideSize.class);
 
-        setDefaultState(getBlockState().getBaseState().withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM));
-    }
+  public BlockPlacedHide() {
+    super(Material.CIRCUITS);
+    setHardness(0.2f);
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isTopSolid(IBlockState state)
-    {
-        return false;
-    }
+    setDefaultState(getBlockState().getBaseState().withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM));
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isFullBlock(IBlockState state)
-    {
-        return false;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  public boolean isTopSolid(IBlockState state) {
+    return false;
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    @Nonnull
-    public IBlockState getStateFromMeta(int meta)
-    {
-        return getDefaultState().withProperty(SIZE, ItemAnimalHide.HideSize.valueOf(meta));
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  public boolean isFullBlock(IBlockState state) {
+    return false;
+  }
 
-    @Override
-    public int getMetaFromState(IBlockState state)
-    {
-        return state.getValue(SIZE).ordinal();
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  @Nonnull
+  public IBlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(SIZE, ItemAnimalHide.HideSize.valueOf(meta));
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isBlockNormalCube(IBlockState state)
-    {
-        return false;
-    }
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(SIZE).ordinal();
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isNormalCube(IBlockState state)
-    {
-        return false;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  public boolean isBlockNormalCube(IBlockState state) {
+    return false;
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isFullCube(IBlockState state)
-    {
-        return false;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  public boolean isNormalCube(IBlockState state) {
+    return false;
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    @Nonnull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        return BlockPlacedItem.PLACED_ITEM_AABB;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  public boolean isFullCube(IBlockState state) {
+    return false;
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    @Nonnull
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
-        return BlockFaceShape.UNDEFINED;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  @Nonnull
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return BlockPlacedItem.PLACED_ITEM_AABB;
+  }
 
-    @SuppressWarnings("deprecation")
-    @Nullable
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
-    {
-        return BlockPlacedItem.PLACED_ITEM_AABB;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  @Nonnull
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    return BlockFaceShape.UNDEFINED;
+  }
 
-    @SuppressWarnings("deprecation")
-    @SideOnly(Side.CLIENT)
-    @Override
-    @Nonnull
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
-    {
-        return BlockPlacedItem.PLACED_ITEM_AABB;
-    }
+  @SuppressWarnings("deprecation")
+  @Nullable
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return BlockPlacedItem.PLACED_ITEM_AABB;
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
-        return false;
-    }
+  @SuppressWarnings("deprecation")
+  @SideOnly(Side.CLIENT)
+  @Override
+  @Nonnull
+  public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+    return BlockPlacedItem.PLACED_ITEM_AABB;
+  }
 
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
-        InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), getItemStackDropped(worldIn, pos, state));
-        super.breakBlock(worldIn, pos, state);
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  public boolean isOpaqueCube(IBlockState state) {
+    return false;
+  }
 
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-        ItemStack stack = playerIn.getHeldItem(hand);
-        if (OreDictionaryHelper.doesStackMatchOre(stack, "knife"))
-        {
-            if (!worldIn.isRemote)
-            {
-                // Account for the distance between the hitbox and where the hide is rendered
-                Vec3d point = calculatePoint(playerIn.getLookVec(), new Vec3d(hitX, hitY, hitZ));
-                stack.damageItem(1, playerIn);
-                TEPlacedHide tile = Helpers.getTE(worldIn, pos, TEPlacedHide.class);
-                if (tile != null)
-                {
-                    tile.onClicked((float) point.x, (float) point.z);
-                }
-            }
-            return true;
+  @Override
+  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), getItemStackDropped(worldIn, pos, state));
+    super.breakBlock(worldIn, pos, state);
+  }
+
+  @Override
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    ItemStack stack = playerIn.getHeldItem(hand);
+    if (OreDictionaryHelper.doesStackMatchOre(stack, "knife")) {
+      if (!worldIn.isRemote) {
+        // Account for the distance between the hitbox and where the hide is rendered
+        Vec3d point = calculatePoint(playerIn.getLookVec(), new Vec3d(hitX, hitY, hitZ));
+        stack.damageItem(1, playerIn);
+        TEPlacedHide tile = Helpers.getTE(worldIn, pos, TEPlacedHide.class);
+        if (tile != null) {
+          tile.onClicked((float) point.x, (float) point.z);
         }
-        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+      }
+      return true;
     }
+    return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+  }
 
-    private static Vec3d calculatePoint(Vec3d rayVector, Vec3d rayPoint)
-    {
-        Vec3d planeNormal = new Vec3d(0.0, 1.0, 0.0);
-        return rayPoint.subtract(rayVector.scale(rayPoint.dotProduct(planeNormal) / rayVector.dotProduct(planeNormal)));
-    }
+  private static Vec3d calculatePoint(Vec3d rayVector, Vec3d rayPoint) {
+    Vec3d planeNormal = new Vec3d(0.0, 1.0, 0.0);
+    return rayPoint.subtract(rayVector.scale(rayPoint.dotProduct(planeNormal) / rayVector.dotProduct(planeNormal)));
+  }
 
-    @Nonnull
-    @Override
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, SIZE);
-    }
+  @Nonnull
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, SIZE);
+  }
 
-    @Override
-    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos)
-    {
-        return false;
-    }
+  @Override
+  public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+    return false;
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
-    {
-        return false;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+    return false;
+  }
 
-    @Override
-    public boolean hasTileEntity(IBlockState state)
-    {
-        return true;
-    }
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
+  }
 
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state)
-    {
-        return new TEPlacedHide();
-    }
+  @Nullable
+  @Override
+  public TileEntity createTileEntity(World world, IBlockState state) {
+    return new TEPlacedHide();
+  }
 
-    @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-    {
-        // No drops here because they are done in breakBlock due to needing the TE
-    }
+  @Override
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    // No drops here because they are done in breakBlock due to needing the TE
+  }
 
-    @Override
-    @Nonnull
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-    {
-        return getItemStackDropped(world, pos, state);
-    }
+  @Override
+  @Nonnull
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    return getItemStackDropped(world, pos, state);
+  }
 
-    private ItemStack getItemStackDropped(IBlockAccess world, BlockPos pos, IBlockState state)
-    {
-        TEPlacedHide tile = Helpers.getTE(world, pos, TEPlacedHide.class);
-        if (tile != null && tile.isComplete())
-        {
-            return new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.SCRAPED, state.getValue(SIZE)));
-        }
-        return new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.SOAKED, state.getValue(SIZE)));
+  private ItemStack getItemStackDropped(IBlockAccess world, BlockPos pos, IBlockState state) {
+    TEPlacedHide tile = Helpers.getTE(world, pos, TEPlacedHide.class);
+    if (tile != null && tile.isComplete()) {
+      return new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.SCRAPED, state.getValue(SIZE)));
     }
+    return new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.SOAKED, state.getValue(SIZE)));
+  }
 }

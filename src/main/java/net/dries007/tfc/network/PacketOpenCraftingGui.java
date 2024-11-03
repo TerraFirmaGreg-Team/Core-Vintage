@@ -16,24 +16,23 @@ import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.config.InventoryCraftingMode;
 
-public class PacketOpenCraftingGui implements IMessageEmpty
-{
-    public static final class Handler implements IMessageHandler<PacketOpenCraftingGui, IMessage>
-    {
-        @Override
-        public IMessage onMessage(PacketOpenCraftingGui message, MessageContext ctx)
-        {
-            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-                if (player != null)
-                {
-                    if (ConfigTFC.General.PLAYER.inventoryCraftingMode == InventoryCraftingMode.ALWAYS || (ConfigTFC.General.PLAYER.inventoryCraftingMode == InventoryCraftingMode.ENABLED && Helpers.playerHasItemMatchingOre(player.inventory, "workbench")))
-                    {
-                        TFCGuiHandler.openGui(player.world, player, TFCGuiHandler.Type.CRAFTING);
-                    }
-                }
-            });
-            return null;
+public class PacketOpenCraftingGui implements IMessageEmpty {
+
+  public static final class Handler implements IMessageHandler<PacketOpenCraftingGui, IMessage> {
+
+    @Override
+    public IMessage onMessage(PacketOpenCraftingGui message, MessageContext ctx) {
+      TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+        EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+        if (player != null) {
+          if (ConfigTFC.General.PLAYER.inventoryCraftingMode == InventoryCraftingMode.ALWAYS || (
+            ConfigTFC.General.PLAYER.inventoryCraftingMode == InventoryCraftingMode.ENABLED
+            && Helpers.playerHasItemMatchingOre(player.inventory, "workbench"))) {
+            TFCGuiHandler.openGui(player.world, player, TFCGuiHandler.Type.CRAFTING);
+          }
         }
+      });
+      return null;
     }
+  }
 }

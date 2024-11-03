@@ -5,11 +5,6 @@
 
 package net.dries007.tfc.compat.waila.providers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nonnull;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -21,35 +16,36 @@ import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.te.TECrucible;
 import net.dries007.tfc.util.Helpers;
 
-public class CrucibleProvider implements IWailaBlock
-{
-    @Nonnull
-    @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
-        List<String> currentTooltip = new ArrayList<>();
-        TECrucible crucible = Helpers.getTE(world, pos, TECrucible.class);
-        if (crucible != null)
-        {
-            if (crucible.getAlloy().getAmount() > 0)
-            {
-                Metal metal = crucible.getAlloyResult();
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.metal.output", crucible.getAlloy().getAmount(), new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
-            }
-            float temperature = nbt.getFloat("temp");
-            String heatTooltip = Heat.getTooltip(temperature);
-            if (heatTooltip != null)
-            {
-                currentTooltip.add(heatTooltip);
-            }
-        }
-        return currentTooltip;
-    }
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass()
-    {
-        return Collections.singletonList(TECrucible.class);
+public class CrucibleProvider implements IWailaBlock {
+
+  @Nonnull
+  @Override
+  public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+    List<String> currentTooltip = new ArrayList<>();
+    TECrucible crucible = Helpers.getTE(world, pos, TECrucible.class);
+    if (crucible != null) {
+      if (crucible.getAlloy().getAmount() > 0) {
+        Metal metal = crucible.getAlloyResult();
+        currentTooltip.add(new TextComponentTranslation("waila.tfc.metal.output", crucible.getAlloy()
+                                                                                          .getAmount(), new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
+      }
+      float temperature = nbt.getFloat("temp");
+      String heatTooltip = Heat.getTooltip(temperature);
+      if (heatTooltip != null) {
+        currentTooltip.add(heatTooltip);
+      }
     }
+    return currentTooltip;
+  }
+
+  @Nonnull
+  @Override
+  public List<Class<?>> getLookupClass() {
+    return Collections.singletonList(TECrucible.class);
+  }
 }

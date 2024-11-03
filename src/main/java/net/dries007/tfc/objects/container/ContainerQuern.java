@@ -12,24 +12,23 @@ import net.minecraftforge.items.IItemHandler;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.objects.te.TEQuern;
 
-import static net.dries007.tfc.objects.te.TEQuern.*;
+import static net.dries007.tfc.objects.te.TEQuern.SLOT_HANDSTONE;
+import static net.dries007.tfc.objects.te.TEQuern.SLOT_INPUT;
+import static net.dries007.tfc.objects.te.TEQuern.SLOT_OUTPUT;
 
-public class ContainerQuern extends ContainerTE<TEQuern>
-{
-    public ContainerQuern(InventoryPlayer playerInv, TEQuern te)
-    {
-        super(playerInv, te);
-    }
+public class ContainerQuern extends ContainerTE<TEQuern> {
 
-    @Override
-    protected void addContainerSlots()
-    {
-        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (inventory != null)
-        {
-            addSlotToContainer(new SlotCallback(inventory, SLOT_HANDSTONE, 93, 20, tile));
-            addSlotToContainer(new SlotCallback(inventory, SLOT_INPUT, 66, 47, tile));
-            addSlotToContainer(new SlotCallback(inventory, SLOT_OUTPUT, 93, 47, tile));
-        }
+  public ContainerQuern(InventoryPlayer playerInv, TEQuern te) {
+    super(playerInv, te);
+  }
+
+  @Override
+  protected void addContainerSlots() {
+    IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+    if (inventory != null) {
+      addSlotToContainer(new SlotCallback(inventory, SLOT_HANDSTONE, 93, 20, tile));
+      addSlotToContainer(new SlotCallback(inventory, SLOT_INPUT, 66, 47, tile));
+      addSlotToContainer(new SlotCallback(inventory, SLOT_OUTPUT, 93, 47, tile));
     }
+  }
 }

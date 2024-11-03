@@ -5,8 +5,6 @@
 
 package net.dries007.tfc.objects.items;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -29,101 +27,84 @@ import net.minecraftforge.items.IItemHandler;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.TerraFirmaCraft;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemDebug extends Item
-{
-    public ItemDebug()
-    {
-        setNoRepair();
-        setMaxStackSize(1);
-        setFull3D();
-    }
+public class ItemDebug extends Item {
 
-    @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-        // Block
-        try
-        {
-            Block block = worldIn.getBlockState(pos).getBlock();
-            try
-            {
-                block.getClass().getMethod("debug").invoke(block);
-            }
-            catch (Exception t) { /* Nothing Burger */ }
+  public ItemDebug() {
+    setNoRepair();
+    setMaxStackSize(1);
+    setFull3D();
+  }
 
-            // Tile Entity
-            TileEntity tile = worldIn.getTileEntity(pos);
-            if (tile != null)
-            {
-                try
-                {
-                    tile.getClass().getMethod("debug").invoke(tile);
-                }
-                catch (Exception t)
-                {
-                    TerraFirmaCraft.getLog().info("No debug method found to invoke on {}", tile);
-                }
+  @Override
+  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    // Block
+    try {
+      Block block = worldIn.getBlockState(pos).getBlock();
+      try {
+        block.getClass().getMethod("debug").invoke(block);
+      } catch (Exception t) { /* Nothing Burger */ }
 
-                TerraFirmaCraft.getLog().info("Tile Data: {}", tile.serializeNBT());
-
-                IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                if (inventory != null)
-                {
-                    TerraFirmaCraft.getLog().info("Found item handler: {}", inventory);
-                }
-
-                IFluidHandler fluids = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-                if (fluids != null)
-                {
-                    TerraFirmaCraft.getLog().info("Found fluid handler: {}", fluids);
-                }
-            }
+      // Tile Entity
+      TileEntity tile = worldIn.getTileEntity(pos);
+      if (tile != null) {
+        try {
+          tile.getClass().getMethod("debug").invoke(tile);
+        } catch (Exception t) {
+          TerraFirmaCraft.getLog().info("No debug method found to invoke on {}", tile);
         }
-        catch (Exception t) { /* Nothing Burger */ }
-        return EnumActionResult.SUCCESS;
-    }
 
-    @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
-    {
-        return false;
-    }
+        TerraFirmaCraft.getLog().info("Tile Data: {}", tile.serializeNBT());
 
-    @Override
-    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
-    {
-        return false;
-    }
+        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (inventory != null) {
+          TerraFirmaCraft.getLog().info("Found item handler: {}", inventory);
+        }
 
-    @Override
-    public boolean canHarvestBlock(IBlockState blockIn)
-    {
-        return false;
-    }
+        IFluidHandler fluids = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        if (fluids != null) {
+          TerraFirmaCraft.getLog().info("Found fluid handler: {}", fluids);
+        }
+      }
+    } catch (Exception t) { /* Nothing Burger */ }
+    return EnumActionResult.SUCCESS;
+  }
 
-    @Override
-    public boolean hasEffect(ItemStack stack)
-    {
-        return true;
-    }
+  @Override
+  public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+    return false;
+  }
 
-    @Override
-    public int getEntityLifespan(ItemStack itemStack, World world)
-    {
-        return 60;
-    }
+  @Override
+  public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
+    return false;
+  }
 
-    @Override
-    public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player)
-    {
-        return false;
-    }
+  @Override
+  public boolean canHarvestBlock(IBlockState blockIn) {
+    return false;
+  }
 
-    @Override
-    public IRarity getForgeRarity(ItemStack stack)
-    {
-        return EnumRarity.EPIC;
-    }
+  @Override
+  public boolean hasEffect(ItemStack stack) {
+    return true;
+  }
+
+  @Override
+  public int getEntityLifespan(ItemStack itemStack, World world) {
+    return 60;
+  }
+
+  @Override
+  public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player) {
+    return false;
+  }
+
+  @Override
+  public IRarity getForgeRarity(ItemStack stack) {
+    return EnumRarity.EPIC;
+  }
 }

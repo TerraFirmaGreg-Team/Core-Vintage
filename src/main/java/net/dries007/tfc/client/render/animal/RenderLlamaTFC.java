@@ -13,11 +13,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.client.model.animal.ModelLlamaTFC;
 
 @SideOnly(Side.CLIENT)
-public class RenderLlamaTFC extends RenderLlama
-{
-    public RenderLlamaTFC(RenderManager renderManager)
-    {
-        super(renderManager);
-        this.mainModel = new ModelLlamaTFC(0);
-    }
+public class RenderLlamaTFC extends RenderLlama {
+
+  public RenderLlamaTFC(RenderManager renderManager) {
+    super(renderManager);
+    this.mainModel = new ModelLlamaTFC(0);
+  }
 }

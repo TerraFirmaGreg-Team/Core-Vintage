@@ -5,24 +5,21 @@
 
 package net.dries007.tfc.objects.fluids.properties;
 
-public final class FluidProperty<T>
-{
-    private final String name;
+public final class FluidProperty<T> {
 
-    public FluidProperty(String name)
-    {
-        this.name = name;
-    }
+  private final String name;
 
-    @Override
-    public int hashCode()
-    {
-        return name.hashCode();
-    }
+  public FluidProperty(String name) {
+    this.name = name;
+  }
 
-    @Override
-    public boolean equals(Object obj)
-    {
-        return obj instanceof FluidProperty && ((FluidProperty) obj).name.equals(this.name);
-    }
+  @Override
+  public int hashCode() {
+    return name.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof FluidProperty && ((FluidProperty) obj).name.equals(this.name);
+  }
 }

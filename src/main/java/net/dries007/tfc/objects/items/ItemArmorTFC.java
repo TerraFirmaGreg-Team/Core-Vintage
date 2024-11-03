@@ -5,8 +5,6 @@
 
 package net.dries007.tfc.objects.items;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -17,52 +15,47 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.IArmorMaterialTFC;
 
-public class ItemArmorTFC extends ItemArmor implements IItemSize, IDamageResistance
-{
-    private final IArmorMaterialTFC materialTFC;
+import javax.annotation.Nonnull;
 
-    public ItemArmorTFC(IArmorMaterialTFC materialTFC, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn)
-    {
-        super(materialTFC.getMaterial(), renderIndexIn, equipmentSlotIn);
-        this.materialTFC = materialTFC;
-        setNoRepair();
-    }
+public class ItemArmorTFC extends ItemArmor implements IItemSize, IDamageResistance {
 
-    @Override
-    public float getCrushingModifier()
-    {
-        return materialTFC.getCrushingModifier();
-    }
+  private final IArmorMaterialTFC materialTFC;
 
-    @Override
-    public float getPiercingModifier()
-    {
-        return materialTFC.getPiercingModifier();
-    }
+  public ItemArmorTFC(IArmorMaterialTFC materialTFC, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
+    super(materialTFC.getMaterial(), renderIndexIn, equipmentSlotIn);
+    this.materialTFC = materialTFC;
+    setNoRepair();
+  }
 
-    @Override
-    public float getSlashingModifier()
-    {
-        return materialTFC.getSlashingModifier();
-    }
+  @Override
+  public float getCrushingModifier() {
+    return materialTFC.getCrushingModifier();
+  }
 
-    @Nonnull
-    @Override
-    public Size getSize(@Nonnull ItemStack stack)
-    {
-        return Size.LARGE; // Stored in chests
-    }
+  @Override
+  public float getPiercingModifier() {
+    return materialTFC.getPiercingModifier();
+  }
 
-    @Nonnull
-    @Override
-    public Weight getWeight(@Nonnull ItemStack stack)
-    {
-        return Weight.HEAVY; // Stacksize is already restricted to 1
-    }
+  @Override
+  public float getSlashingModifier() {
+    return materialTFC.getSlashingModifier();
+  }
 
-    @Override
-    public boolean canStack(@Nonnull ItemStack stack)
-    {
-        return false;
-    }
+  @Nonnull
+  @Override
+  public Size getSize(@Nonnull ItemStack stack) {
+    return Size.LARGE; // Stored in chests
+  }
+
+  @Nonnull
+  @Override
+  public Weight getWeight(@Nonnull ItemStack stack) {
+    return Weight.HEAVY; // Stacksize is already restricted to 1
+  }
+
+  @Override
+  public boolean canStack(@Nonnull ItemStack stack) {
+    return false;
+  }
 }

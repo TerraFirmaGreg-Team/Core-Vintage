@@ -1,9 +1,5 @@
 package com.eerussianguy.firmalife.blocks;
 
-import java.util.Random;
-
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,33 +16,32 @@ import net.minecraft.world.World;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import mcp.MethodsReturnNonnullByDefault;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
+
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockGreenhouseDoor extends BlockDoor
-{
-    public BlockGreenhouseDoor()
-    {
-        super(Material.WOOD);
-        this.setSoundType(SoundType.METAL);
-        this.setHardness(3.0F);
-        this.disableStats();
-        Blocks.FIRE.setFireInfo(this, 5, 20);
-    }
+public class BlockGreenhouseDoor extends BlockDoor {
 
-    public Item getItem()
-    {
-        return ItemsFL.ITEM_GREENHOUSE_DOOR;
-    }
+  public BlockGreenhouseDoor() {
+    super(Material.WOOD);
+    this.setSoundType(SoundType.METAL);
+    this.setHardness(3.0F);
+    this.disableStats();
+    Blocks.FIRE.setFireInfo(this, 5, 20);
+  }
 
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-        return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : this.getItem();
-    }
+  public Item getItem() {
+    return ItemsFL.ITEM_GREENHOUSE_DOOR;
+  }
 
-    @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-    {
-        return new ItemStack(this.getItem());
-    }
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : this.getItem();
+  }
+
+  @Override
+  public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    return new ItemStack(this.getItem());
+  }
 }

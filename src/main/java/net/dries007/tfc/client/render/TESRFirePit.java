@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.client.render;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import org.lwjgl.opengl.GL11;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -29,6 +26,9 @@ import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.te.TEFirePit;
+import org.lwjgl.opengl.GL11;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.objects.te.TEFirePit.SLOT_EXTRA_INPUT_END;
 import static net.dries007.tfc.objects.te.TEFirePit.SLOT_EXTRA_INPUT_START;
@@ -38,96 +38,86 @@ import static net.dries007.tfc.objects.te.TEFirePit.SLOT_EXTRA_INPUT_START;
  */
 @ParametersAreNonnullByDefault
 @SideOnly(Side.CLIENT)
-public class TESRFirePit extends TileEntitySpecialRenderer<TEFirePit>
-{
-    @Override
-    public void render(TEFirePit te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
-        super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+public class TESRFirePit extends TileEntitySpecialRenderer<TEFirePit> {
 
-        // Rendering liquid in the soup pot
-        if (te.getCookingPotStage() != TEFirePit.CookingPotStage.EMPTY)
-        {
-            Fluid water = FluidsTFC.FRESH_WATER.get();
+  @Override
+  public void render(TEFirePit te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
-            GlStateManager.pushMatrix();
-            GlStateManager.translate(x, y, z);
+    // Rendering liquid in the soup pot
+    if (te.getCookingPotStage() != TEFirePit.CookingPotStage.EMPTY) {
+      Fluid water = FluidsTFC.FRESH_WATER.get();
 
-            TextureAtlasSprite sprite = FluidSpriteCache.getStillSprite(water);
+      GlStateManager.pushMatrix();
+      GlStateManager.translate(x, y, z);
 
-            GlStateManager.enableAlpha();
-            GlStateManager.enableBlend();
-            GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+      TextureAtlasSprite sprite = FluidSpriteCache.getStillSprite(water);
 
-            int color = water.getColor();
+      GlStateManager.enableAlpha();
+      GlStateManager.enableBlend();
+      GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
-            float r = ((color >> 16) & 0xFF) / 255F;
-            float g = ((color >> 8) & 0xFF) / 255F;
-            float b = (color & 0xFF) / 255F;
-            float a = ((color >> 24) & 0xFF) / 255F;
+      int color = water.getColor();
 
-            if (te.getCookingPotStage() == TEFirePit.CookingPotStage.FINISHED)
-            {
-                b = 0;
-                g /= 4;
-                r *= 3;
-            }
+      float r = ((color >> 16) & 0xFF) / 255F;
+      float g = ((color >> 8) & 0xFF) / 255F;
+      float b = (color & 0xFF) / 255F;
+      float a = ((color >> 24) & 0xFF) / 255F;
 
-            GlStateManager.color(r, g, b, a);
+      if (te.getCookingPotStage() == TEFirePit.CookingPotStage.FINISHED) {
+        b = 0;
+        g /= 4;
+        r *= 3;
+      }
 
-            rendererDispatcher.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+      GlStateManager.color(r, g, b, a);
 
-            BufferBuilder buffer = Tessellator.getInstance().getBuffer();
-            buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_NORMAL);
+      rendererDispatcher.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
-            double height = 0.625D;
+      BufferBuilder buffer = Tessellator.getInstance().getBuffer();
+      buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
-            buffer.pos(0.3125D, height, 0.3125D).tex(sprite.getInterpolatedU(5), sprite.getInterpolatedV(5)).normal(0, 0, 1).endVertex();
-            buffer.pos(0.3125D, height, 0.6875D).tex(sprite.getInterpolatedU(5), sprite.getInterpolatedV(11)).normal(0, 0, 1).endVertex();
-            buffer.pos(0.6875D, height, 0.6875D).tex(sprite.getInterpolatedU(11), sprite.getInterpolatedV(11)).normal(0, 0, 1).endVertex();
-            buffer.pos(0.6875D, height, 0.3125D).tex(sprite.getInterpolatedU(11), sprite.getInterpolatedV(5)).normal(0, 0, 1).endVertex();
+      double height = 0.625D;
 
-            Tessellator.getInstance().draw();
+      buffer.pos(0.3125D, height, 0.3125D).tex(sprite.getInterpolatedU(5), sprite.getInterpolatedV(5)).normal(0, 0, 1).endVertex();
+      buffer.pos(0.3125D, height, 0.6875D).tex(sprite.getInterpolatedU(5), sprite.getInterpolatedV(11)).normal(0, 0, 1).endVertex();
+      buffer.pos(0.6875D, height, 0.6875D).tex(sprite.getInterpolatedU(11), sprite.getInterpolatedV(11)).normal(0, 0, 1).endVertex();
+      buffer.pos(0.6875D, height, 0.3125D).tex(sprite.getInterpolatedU(11), sprite.getInterpolatedV(5)).normal(0, 0, 1).endVertex();
 
-            GlStateManager.popMatrix();
-        }
-        // Render food on the grill
-        if (te.hasWorld())
-        {
-            IBlockState state = te.getWorld().getBlockState(te.getPos());
-            if (state.getBlock() instanceof BlockFirePit && state.getValue(BlockFirePit.ATTACHMENT) == BlockFirePit.FirePitAttachment.GRILL)
-            {
-                IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                if (cap != null)
-                {
-                    int rotation = te.getBlockMetadata();
-                    if (state.getValue(BlockFirePit.LIT))
-                        rotation -= 1;
-                    float yOffset = 0.625f;
+      Tessellator.getInstance().draw();
 
-                    GlStateManager.pushMatrix();
-                    GlStateManager.translate(x + 0.3, y + 0.003125D + yOffset, z + 0.28);
-                    GlStateManager.scale(0.3f, 0.3f, 0.3f);
-                    GlStateManager.rotate(90f, 1f, 0f, 0f);
-                    GlStateManager.rotate(90f * rotation, 0f, 0f, 1f);
-                    float leftTranslate = 1.1F;
-
-                    for (int i = SLOT_EXTRA_INPUT_START; i <= SLOT_EXTRA_INPUT_END; i++)
-                    {
-                        ItemStack item = cap.getStackInSlot(i);
-                        if (!item.isEmpty())
-                        {
-                            Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
-                        }
-
-                        GlStateManager.translate(-leftTranslate, 0, 0);
-                        if ((i == SLOT_EXTRA_INPUT_START + 1) || (i == SLOT_EXTRA_INPUT_START + 3))
-                            GlStateManager.translate(2 * leftTranslate, -0.7f, 0);
-                    }
-
-                    GlStateManager.popMatrix();
-                }
-            }
-        }
+      GlStateManager.popMatrix();
     }
+    // Render food on the grill
+    if (te.hasWorld()) {
+      IBlockState state = te.getWorld().getBlockState(te.getPos());
+      if (state.getBlock() instanceof BlockFirePit && state.getValue(BlockFirePit.ATTACHMENT) == BlockFirePit.FirePitAttachment.GRILL) {
+        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (cap != null) {
+          int rotation = te.getBlockMetadata();
+          if (state.getValue(BlockFirePit.LIT)) {rotation -= 1;}
+          float yOffset = 0.625f;
+
+          GlStateManager.pushMatrix();
+          GlStateManager.translate(x + 0.3, y + 0.003125D + yOffset, z + 0.28);
+          GlStateManager.scale(0.3f, 0.3f, 0.3f);
+          GlStateManager.rotate(90f, 1f, 0f, 0f);
+          GlStateManager.rotate(90f * rotation, 0f, 0f, 1f);
+          float leftTranslate = 1.1F;
+
+          for (int i = SLOT_EXTRA_INPUT_START; i <= SLOT_EXTRA_INPUT_END; i++) {
+            ItemStack item = cap.getStackInSlot(i);
+            if (!item.isEmpty()) {
+              Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
+            }
+
+            GlStateManager.translate(-leftTranslate, 0, 0);
+            if ((i == SLOT_EXTRA_INPUT_START + 1) || (i == SLOT_EXTRA_INPUT_START + 3)) {GlStateManager.translate(2 * leftTranslate, -0.7f, 0);}
+          }
+
+          GlStateManager.popMatrix();
+        }
+      }
+    }
+  }
 }

@@ -1,8 +1,5 @@
 package tfcflorae.objects.blocks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -19,49 +16,46 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-
 import tfcflorae.util.OreDictionaryHelper;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 @ParametersAreNonnullByDefault
-public class BlockBale extends BlockRotatedPillar implements IItemSize
-{
-    public BlockBale()
-    {
-        super(new Material(MapColor.FOLIAGE));
-        this.setSoundType(SoundType.PLANT);
-        setHardness(0.6F);
-        OreDictionaryHelper.register(this, "thatch");
-        OreDictionaryHelper.register(this, "bale");
-        Blocks.FIRE.setFireInfo(this, 60, 20);
-    }
+public class BlockBale extends BlockRotatedPillar implements IItemSize {
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack)
-    {
-        return Size.VERY_SMALL;
-    }
+  public BlockBale() {
+    super(new Material(MapColor.FOLIAGE));
+    this.setSoundType(SoundType.PLANT);
+    setHardness(0.6F);
+    OreDictionaryHelper.register(this, "thatch");
+    OreDictionaryHelper.register(this, "bale");
+    Blocks.FIRE.setFireInfo(this, 60, 20);
+  }
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack)
-    {
-        return Weight.HEAVY;
-    }
+  @Nonnull
+  @Override
+  public Size getSize(ItemStack stack) {
+    return Size.VERY_SMALL;
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    @Nonnull
-    public BlockRenderLayer getRenderLayer()
-    {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
+  @Nonnull
+  @Override
+  public Weight getWeight(ItemStack stack) {
+    return Weight.HEAVY;
+  }
 
-    /**
-     * Block's chance to react to a living entity falling on it.
-     */
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
-    {
-        entityIn.fall(fallDistance, 0.2F);
-    }
+  @SideOnly(Side.CLIENT)
+  @Override
+  @Nonnull
+  public BlockRenderLayer getRenderLayer() {
+    return BlockRenderLayer.CUTOUT_MIPPED;
+  }
+
+  /**
+   * Block's chance to react to a living entity falling on it.
+   */
+  public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+    entityIn.fall(fallDistance, 0.2F);
+  }
 }

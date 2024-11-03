@@ -13,40 +13,35 @@ import mezz.jei.util.Translator;
 import net.dries007.tfc.TerraFirmaCraft;
 
 @MethodsReturnNonnullByDefault
-public abstract class BaseRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T>
-{
-    private final IDrawable background;
-    private final String localizedName;
-    private final String Uid;
+public abstract class BaseRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
 
-    public BaseRecipeCategory(IDrawable background, String Uid)
-    {
-        this.background = background;
-        this.localizedName = Translator.translateToLocal("jei.category." + Uid);
-        this.Uid = Uid;
-    }
+  private final IDrawable background;
+  private final String localizedName;
+  private final String Uid;
 
-    @Override
-    public String getUid()
-    {
-        return Uid;
-    }
+  public BaseRecipeCategory(IDrawable background, String Uid) {
+    this.background = background;
+    this.localizedName = Translator.translateToLocal("jei.category." + Uid);
+    this.Uid = Uid;
+  }
 
-    @Override
-    public String getTitle()
-    {
-        return localizedName;
-    }
+  @Override
+  public String getUid() {
+    return Uid;
+  }
 
-    @Override
-    public String getModName()
-    {
-        return TerraFirmaCraft.MOD_NAME;
-    }
+  @Override
+  public String getTitle() {
+    return localizedName;
+  }
 
-    @Override
-    public IDrawable getBackground()
-    {
-        return background;
-    }
+  @Override
+  public String getModName() {
+    return TerraFirmaCraft.MOD_NAME;
+  }
+
+  @Override
+  public IDrawable getBackground() {
+    return background;
+  }
 }

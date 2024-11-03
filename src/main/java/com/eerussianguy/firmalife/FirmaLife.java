@@ -1,6 +1,5 @@
 package com.eerussianguy.firmalife;
 
-import org.apache.logging.log4j.Logger;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -24,71 +23,67 @@ import com.eerussianguy.firmalife.util.OreDictsFL;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = FirmaLife.MOD_ID, name = FirmaLife.MODNAME, version = FirmaLife.MODVERSION, dependencies = "required-after:tfc@[1.7.17.175,);after:dynamictreestfc")
-public class FirmaLife
-{
-    public static final String MOD_ID = "firmalife";
-    public static final String MODNAME = "FirmaLife";
-    public static final String MODVERSION = "0.5.1";
+public class FirmaLife {
 
-    @Mod.Instance
-    private static FirmaLife INSTANCE = null;
+  public static final String MOD_ID = "firmalife";
+  public static final String MODNAME = "FirmaLife";
+  public static final String MODVERSION = "0.5.1";
 
-    @SidedProxy(clientSide = "com.eerussianguy.firmalife.proxy.ClientProxy", serverSide = "com.eerussianguy.firmalife.proxy.ServerProxy")
-    public static CommonProxy proxy;
+  @Mod.Instance
+  private static FirmaLife INSTANCE = null;
 
-    public static Logger logger;
+  @SidedProxy(clientSide = "com.eerussianguy.firmalife.proxy.ClientProxy", serverSide = "com.eerussianguy.firmalife.proxy.ServerProxy")
+  public static CommonProxy proxy;
 
-    public static FirmaLife getInstance()
-    {
-        return INSTANCE;
-    }
+  public static Logger logger;
 
-    public static SimpleNetworkWrapper getNetwork()
-    {
-        return INSTANCE.network;
-    }
+  public static FirmaLife getInstance() {
+    return INSTANCE;
+  }
 
-    private SimpleNetworkWrapper network;
+  public static SimpleNetworkWrapper getNetwork() {
+    return INSTANCE.network;
+  }
 
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
-        logger = event.getModLog();
-        proxy.preInit(event);
+  private SimpleNetworkWrapper network;
 
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new FLGuiHandler());
-        network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
-        int id = 0;
-        // received client side
-        network.registerMessage(new PacketSpawnVanillaParticle.Handler(), PacketSpawnVanillaParticle.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketDrawBoundingBox.Handler(), PacketDrawBoundingBox.class, ++id, Side.CLIENT);
+  @Mod.EventHandler
+  public void preInit(FMLPreInitializationEvent event) {
+    logger = event.getModLog();
+    proxy.preInit(event);
 
-        VeinAdder.ADDER.addVeins(event.getModConfigurationDirectory());
+    NetworkRegistry.INSTANCE.registerGuiHandler(this, new FLGuiHandler());
+    network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
+    int id = 0;
+    // received client side
+    network.registerMessage(new PacketSpawnVanillaParticle.Handler(), PacketSpawnVanillaParticle.class, ++id, Side.CLIENT);
+    network.registerMessage(new PacketDrawBoundingBox.Handler(), PacketDrawBoundingBox.class, ++id, Side.CLIENT);
 
-        CapPlayerDataFL.preInit();
-        HelpersFL.insertWhitelist();
+    VeinAdder.ADDER.addVeins(event.getModConfigurationDirectory());
 
-        ModuleManager.initModules();
-        ModuleManager.getModules().forEach(mod -> mod.preInit(event));
-    }
+    CapPlayerDataFL.preInit();
+    HelpersFL.insertWhitelist();
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event)
-    {
-        proxy.init(event);
-        LootTablesFL.init();
-        ModuleManager.getModules().forEach(mod -> mod.init(event));
+    ModuleManager.initModules();
+    ModuleManager.getModules().forEach(mod -> mod.preInit(event));
+  }
 
-        CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(ItemsFL.HONEYCOMB), () -> new ItemHeatHandler(null, 1, 600));
-    }
+  @Mod.EventHandler
+  public void init(FMLInitializationEvent event) {
+    proxy.init(event);
+    LootTablesFL.init();
+    ModuleManager.getModules().forEach(mod -> mod.init(event));
 
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
-        proxy.postInit(event);
-        OreDictsFL.addStaticOres();
-        ModuleManager.getModules().forEach(mod -> mod.postInit(event));
-    }
+    CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(ItemsFL.HONEYCOMB), () -> new ItemHeatHandler(null, 1, 600));
+  }
+
+  @Mod.EventHandler
+  public void postInit(FMLPostInitializationEvent event) {
+    proxy.postInit(event);
+    OreDictsFL.addStaticOres();
+    ModuleManager.getModules().forEach(mod -> mod.postInit(event));
+  }
 }

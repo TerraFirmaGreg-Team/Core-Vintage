@@ -18,47 +18,41 @@ import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
 @ParametersAreNonnullByDefault
-public class BlockStairsTFCF extends BlockStairs
-{
-    private static final Map<Rock, EnumMap<RockTFCF, BlockStairsTFCF>> ROCK_TABLE = new HashMap<>();
+public class BlockStairsTFCF extends BlockStairs {
 
-    public static BlockStairsTFCF get(Rock rock, RockTFCF rockTFCF)
-    {
-        return ROCK_TABLE.get(rock).get(rockTFCF);
-    }
+  private static final Map<Rock, EnumMap<RockTFCF, BlockStairsTFCF>> ROCK_TABLE = new HashMap<>();
 
-    public BlockStairsTFCF(Rock rock, RockTFCF rockTFCF)
-    {
-        super(BlockRockVariantTFCF.get(rock, rockTFCF).getDefaultState());
+  public BlockStairsTFCF(Rock rock, RockTFCF rockTFCF) {
+    super(BlockRockVariantTFCF.get(rock, rockTFCF).getDefaultState());
 
-        if (!ROCK_TABLE.containsKey(rock))
-            ROCK_TABLE.put(rock, new EnumMap<>(RockTFCF.class));
-        ROCK_TABLE.get(rock).put(rockTFCF, this);
+    if (!ROCK_TABLE.containsKey(rock)) {ROCK_TABLE.put(rock, new EnumMap<>(RockTFCF.class));}
+    ROCK_TABLE.get(rock).put(rockTFCF, this);
 
-        Block baseBlock = BlockRockVariantTFCF.get(rock, rockTFCF);
-        //noinspection ConstantConditions
-        setHarvestLevel(baseBlock.getHarvestTool(baseBlock.getDefaultState()), baseBlock.getHarvestLevel(baseBlock.getDefaultState()));
-        useNeighborBrightness = true;
-        OreDictionaryHelper.register(this, "stair");
-        OreDictionaryHelper.registerRockType(this, rockTFCF, "stair");
-    }
+    Block baseBlock = BlockRockVariantTFCF.get(rock, rockTFCF);
+    //noinspection ConstantConditions
+    setHarvestLevel(baseBlock.getHarvestTool(baseBlock.getDefaultState()), baseBlock.getHarvestLevel(baseBlock.getDefaultState()));
+    useNeighborBrightness = true;
+    OreDictionaryHelper.register(this, "stair");
+    OreDictionaryHelper.registerRockType(this, rockTFCF, "stair");
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
-        // Prevents cobble stairs from falling
-    }
+  public static BlockStairsTFCF get(Rock rock, RockTFCF rockTFCF) {
+    return ROCK_TABLE.get(rock).get(rockTFCF);
+  }
 
-    @Override
-    public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state)
-    {
-        // Prevents chiseled smooth stone stairs from collapsing
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    // Prevents cobble stairs from falling
+  }
 
-    @Override
-    public void onBlockAdded(@Nonnull World worldIn, @Nonnull BlockPos pos, IBlockState state)
-    {
-        // Prevents cobble stairs from falling
-    }
+  @Override
+  public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state) {
+    // Prevents chiseled smooth stone stairs from collapsing
+  }
+
+  @Override
+  public void onBlockAdded(@Nonnull World worldIn, @Nonnull BlockPos pos, IBlockState state) {
+    // Prevents cobble stairs from falling
+  }
 }

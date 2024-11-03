@@ -5,13 +5,6 @@
 
 package net.dries007.tfc.objects.items.rock;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
@@ -29,69 +22,68 @@ import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemRockAxe extends ItemAxe implements IItemSize, IRockObject
-{
-    private static final Map<RockCategory, ItemRockAxe> MAP = new HashMap<>();
+public class ItemRockAxe extends ItemAxe implements IItemSize, IRockObject {
 
-    public static ItemRockAxe get(RockCategory category)
-    {
-        return MAP.get(category);
-    }
+  private static final Map<RockCategory, ItemRockAxe> MAP = new HashMap<>();
 
-    public final RockCategory category;
+  public static ItemRockAxe get(RockCategory category) {
+    return MAP.get(category);
+  }
 
-    public ItemRockAxe(RockCategory category)
-    {
-        super(category.getToolMaterial(), category.getToolMaterial().getAttackDamage(), -3);
-        this.category = category;
-        if (MAP.put(category, this) != null) throw new IllegalStateException("There can only be one.");
-        setHarvestLevel("axe", category.getToolMaterial().getHarvestLevel());
-        OreDictionaryHelper.register(this, "axe");
-        OreDictionaryHelper.register(this, "axe", "stone");
-        OreDictionaryHelper.register(this, "axe", "stone", category);
-        OreDictionaryHelper.registerDamageType(this, DamageType.SLASHING);
-    }
+  public final RockCategory category;
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-    {
-        tooltip.add("Rock type: " + category);
-    }
+  public ItemRockAxe(RockCategory category) {
+    super(category.getToolMaterial(), category.getToolMaterial().getAttackDamage(), -3);
+    this.category = category;
+    if (MAP.put(category, this) != null) {throw new IllegalStateException("There can only be one.");}
+    setHarvestLevel("axe", category.getToolMaterial().getHarvestLevel());
+    OreDictionaryHelper.register(this, "axe");
+    OreDictionaryHelper.register(this, "axe", "stone");
+    OreDictionaryHelper.register(this, "axe", "stone", category);
+    OreDictionaryHelper.registerDamageType(this, DamageType.SLASHING);
+  }
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack)
-    {
-        return Size.LARGE; // Stored only in chests
-    }
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    tooltip.add("Rock type: " + category);
+  }
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack)
-    {
-        return Weight.MEDIUM;
-    }
+  @Nonnull
+  @Override
+  public Size getSize(ItemStack stack) {
+    return Size.LARGE; // Stored only in chests
+  }
 
-    @Override
-    public boolean canStack(ItemStack stack)
-    {
-        return false;
-    }
+  @Nonnull
+  @Override
+  public Weight getWeight(ItemStack stack) {
+    return Weight.MEDIUM;
+  }
 
-    @Nullable
-    @Override
-    public Rock getRock(ItemStack stack)
-    {
-        return null;
-    }
+  @Override
+  public boolean canStack(ItemStack stack) {
+    return false;
+  }
 
-    @Nonnull
-    @Override
-    public RockCategory getRockCategory(ItemStack stack)
-    {
-        return category;
-    }
+  @Nullable
+  @Override
+  public Rock getRock(ItemStack stack) {
+    return null;
+  }
+
+  @Nonnull
+  @Override
+  public RockCategory getRockCategory(ItemStack stack) {
+    return category;
+  }
 }

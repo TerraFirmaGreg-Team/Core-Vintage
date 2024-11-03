@@ -13,11 +13,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.client.model.animal.ModelHorseTFC;
 
 @SideOnly(Side.CLIENT)
-public class RenderHorseTFC extends RenderHorse
-{
-    public RenderHorseTFC(RenderManager renderManager)
-    {
-        super(renderManager);
-        this.mainModel = new ModelHorseTFC();
-    }
+public class RenderHorseTFC extends RenderHorse {
+
+  public RenderHorseTFC(RenderManager renderManager) {
+    super(renderManager);
+    this.mainModel = new ModelHorseTFC();
+  }
 }

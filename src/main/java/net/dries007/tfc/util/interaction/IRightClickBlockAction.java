@@ -19,7 +19,7 @@ import net.minecraft.world.World;
  * @see InteractionManager
  */
 @FunctionalInterface
-public interface IRightClickBlockAction
-{
-    EnumActionResult onRightClickBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing direction, float hitX, float hitY, float hitZ);
+public interface IRightClickBlockAction {
+
+  EnumActionResult onRightClickBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing direction, float hitX, float hitY, float hitZ);
 }

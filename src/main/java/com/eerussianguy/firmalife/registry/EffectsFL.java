@@ -13,15 +13,14 @@ import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 @GameRegistry.ObjectHolder(MOD_ID)
-public class EffectsFL
-{
-    public static final Potion SWARM = Helpers.getNull();
+public class EffectsFL {
 
-    @SubscribeEvent
-    public static void registerPotionEffects(RegistryEvent.Register<Potion> event)
-    {
-        event.getRegistry().registerAll(
-            new PotionSwarm().setRegistryName(MOD_ID, "swarm")
-        );
-    }
+  public static final Potion SWARM = Helpers.getNull();
+
+  @SubscribeEvent
+  public static void registerPotionEffects(RegistryEvent.Register<Potion> event) {
+    event.getRegistry().registerAll(
+      new PotionSwarm().setRegistryName(MOD_ID, "swarm")
+    );
+  }
 }

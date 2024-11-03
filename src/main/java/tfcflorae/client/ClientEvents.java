@@ -11,10 +11,9 @@ import tfcflorae.objects.blocks.entity.EntityBoatTFCF;
 import static tfcflorae.TFCFlorae.MODID;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID)
-public class ClientEvents 
-{
-    public static void preInit()
-    {
-        RenderingRegistry.registerEntityRenderingHandler(EntityBoatTFCF.class, RenderBoatTFCF::new);
-    }
+public class ClientEvents {
+
+  public static void preInit() {
+    RenderingRegistry.registerEntityRenderingHandler(EntityBoatTFCF.class, RenderBoatTFCF::new);
+  }
 }

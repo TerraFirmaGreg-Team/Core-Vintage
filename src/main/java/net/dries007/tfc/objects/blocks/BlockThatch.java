@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.objects.blocks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -26,76 +23,70 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.util.OreDictionaryHelper;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 @ParametersAreNonnullByDefault
-public class BlockThatch extends Block
-{
-    public BlockThatch()
-    {
-        super(new Material(MapColor.FOLIAGE)
-        {
-            @Override
-            public boolean isOpaque()
-            {
-                return false;
-            }
-        });
-        setSoundType(SoundType.PLANT);
-        setHardness(0.6F);
-        setLightOpacity(255); //Blocks light
-        OreDictionaryHelper.register(this, "thatch");
-        OreDictionaryHelper.register(this, "block", "straw");
-        Blocks.FIRE.setFireInfo(this, 60, 20);
-    }
+public class BlockThatch extends Block {
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isFullCube(IBlockState state)
-    {
+  public BlockThatch() {
+    super(new Material(MapColor.FOLIAGE) {
+      @Override
+      public boolean isOpaque() {
         return false;
-    }
+      }
+    });
+    setSoundType(SoundType.PLANT);
+    setHardness(0.6F);
+    setLightOpacity(255); //Blocks light
+    OreDictionaryHelper.register(this, "thatch");
+    OreDictionaryHelper.register(this, "block", "straw");
+    Blocks.FIRE.setFireInfo(this, 60, 20);
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side)
-    {
-        return true;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  public boolean isFullCube(IBlockState state) {
+    return false;
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
-    {
-        return NULL_AABB;
-    }
+  @SideOnly(Side.CLIENT)
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
+    return true;
+  }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
-        // Return false in order to stop xray through blocks
-        return false;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return NULL_AABB;
+  }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    @Nonnull
-    public BlockRenderLayer getRenderLayer()
-    {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
+  @SuppressWarnings("deprecation")
+  @Override
+  public boolean isOpaqueCube(IBlockState state) {
+    // Return false in order to stop xray through blocks
+    return false;
+  }
 
-    @Override
-    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
-    {
-        // Player will take damage when hitting thatch if fall is over 13 blocks, fall damage is then set to 0.
-        entityIn.fall((entityIn.fallDistance - 10), 1.0F); // TODO: 17/4/18 balance fall damage reduction.
-        entityIn.fallDistance = 0;
+  @SideOnly(Side.CLIENT)
+  @Override
+  @Nonnull
+  public BlockRenderLayer getRenderLayer() {
+    return BlockRenderLayer.CUTOUT_MIPPED;
+  }
 
-        entityIn.motionX *= 0.1;
-        entityIn.motionZ *= 0.1;
+  @Override
+  public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+    // Player will take damage when hitting thatch if fall is over 13 blocks, fall damage is then set to 0.
+    entityIn.fall((entityIn.fallDistance - 10), 1.0F); // TODO: 17/4/18 balance fall damage reduction.
+    entityIn.fallDistance = 0;
 
-        // This makes the player way too slow
-        //entityIn.setInWeb();
-    }
+    entityIn.motionX *= 0.1;
+    entityIn.motionZ *= 0.1;
+
+    // This makes the player way too slow
+    //entityIn.setInWeb();
+  }
 }

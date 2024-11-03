@@ -5,53 +5,47 @@
 
 package net.dries007.tfc.objects.te;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.nbt.NBTTagCompound;
-
 
 @ParametersAreNonnullByDefault
-public class TEPlacedHide extends TEBase
-{
-    private short positions; // essentially a boolean[16]
+public class TEPlacedHide extends TEBase {
 
-    public TEPlacedHide()
-    {
-        positions = 0;
-    }
+  private short positions; // essentially a boolean[16]
 
-    public boolean isComplete()
-    {
-        return positions == -1;
-    }
+  public TEPlacedHide() {
+    positions = 0;
+  }
 
-    public short getScrapedPositions()
-    {
-        return positions;
-    }
+  public boolean isComplete() {
+    return positions == -1;
+  }
 
-    public void onClicked(float hitX, float hitZ)
-    {
-        // This needs to change on both client and server
-        int xPos = (int) (hitX * 4);
-        int zPos = (int) (hitZ * 4);
-        positions |= 1 << (xPos + zPos * 4);
-        markForBlockUpdate();
-    }
+  public short getScrapedPositions() {
+    return positions;
+  }
 
-    @Override
-    public void readFromNBT(NBTTagCompound nbt)
-    {
-        positions = nbt.getShort("positions");
-        super.readFromNBT(nbt);
-    }
+  public void onClicked(float hitX, float hitZ) {
+    // This needs to change on both client and server
+    int xPos = (int) (hitX * 4);
+    int zPos = (int) (hitZ * 4);
+    positions |= 1 << (xPos + zPos * 4);
+    markForBlockUpdate();
+  }
 
-    @Override
-    @Nonnull
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt)
-    {
-        nbt.setShort("positions", positions);
-        return super.writeToNBT(nbt);
-    }
+  @Override
+  public void readFromNBT(NBTTagCompound nbt) {
+    positions = nbt.getShort("positions");
+    super.readFromNBT(nbt);
+  }
+
+  @Override
+  @Nonnull
+  public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+    nbt.setShort("positions", positions);
+    return super.writeToNBT(nbt);
+  }
 }

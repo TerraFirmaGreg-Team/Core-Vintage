@@ -18,30 +18,26 @@ import net.dries007.tfc.objects.te.TEIngotPile;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @SideOnly(Side.CLIENT)
-public class TESRIngotPile extends TileEntitySpecialRenderer<TEIngotPile>
-{
-    private final ModelIngotPile model = new ModelIngotPile();
+public class TESRIngotPile extends TileEntitySpecialRenderer<TEIngotPile> {
 
-    @Override
-    public void render(TEIngotPile te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
-        try
-        {
-            GlStateManager.color(1, 1, 1, 1);
+  private final ModelIngotPile model = new ModelIngotPile();
 
-            Metal metal = te.getMetal();
-            int count = te.getCount();
-            //noinspection ConstantConditions
-            bindTexture(new ResourceLocation(MOD_ID, "textures/blocks/metal/" + metal.getRegistryName().getPath() + ".png"));
-            GlStateManager.pushMatrix();
-            GlStateManager.translate(x, y, z);
+  @Override
+  public void render(TEIngotPile te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    try {
+      GlStateManager.color(1, 1, 1, 1);
 
-            // Render Ingot Pile here
-            model.renderIngots(count);
-        }
-        finally
-        {
-            GlStateManager.popMatrix();
-        }
+      Metal metal = te.getMetal();
+      int count = te.getCount();
+      //noinspection ConstantConditions
+      bindTexture(new ResourceLocation(MOD_ID, "textures/blocks/metal/" + metal.getRegistryName().getPath() + ".png"));
+      GlStateManager.pushMatrix();
+      GlStateManager.translate(x, y, z);
+
+      // Render Ingot Pile here
+      model.renderIngots(count);
+    } finally {
+      GlStateManager.popMatrix();
     }
+  }
 }

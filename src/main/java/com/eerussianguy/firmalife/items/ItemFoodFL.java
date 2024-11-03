@@ -7,20 +7,18 @@ import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 
-public class ItemFoodFL extends ItemFood implements IItemFoodTFC
-{
-    public FoodData data;
+public class ItemFoodFL extends ItemFood implements IItemFoodTFC {
 
-    public ItemFoodFL(FoodData data)
-    {
-        super(0, 0.0F, false);
-        this.setMaxDamage(0);
-        this.data = data;
-    }
+  public FoodData data;
 
-    @Override
-    public ICapabilityProvider getCustomFoodHandler()
-    {
-        return new FoodHandler(null, data);
-    }
+  public ItemFoodFL(FoodData data) {
+    super(0, 0.0F, false);
+    this.setMaxDamage(0);
+    this.data = data;
+  }
+
+  @Override
+  public ICapabilityProvider getCustomFoodHandler() {
+    return new FoodHandler(null, data);
+  }
 }

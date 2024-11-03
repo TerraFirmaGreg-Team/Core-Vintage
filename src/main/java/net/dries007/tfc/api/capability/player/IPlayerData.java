@@ -6,9 +6,6 @@
 package net.dries007.tfc.api.capability.player;
 
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -21,71 +18,71 @@ import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillType;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
- * Interface for the capability attached to a player
- * Holds an internal list of skill implementations
+ * Interface for the capability attached to a player Holds an internal list of skill implementations
  *
  * @see SkillType
  */
-public interface IPlayerData extends INBTSerializable<NBTTagCompound>
-{
-    @Nullable
-    <S extends Skill> S getSkill(SkillType<S> skillType);
+public interface IPlayerData extends INBTSerializable<NBTTagCompound> {
 
-    @Nonnull
-    EntityPlayer getPlayer();
+  @Nullable
+  <S extends Skill> S getSkill(SkillType<S> skillType);
 
-    /*
-     * Gets the tool that was used in the last {@link net.minecraftforge.event.world.BlockEvent.BreakEvent} event
-     */
-    @Nonnull
-    ItemStack getHarvestingTool();
+  @Nonnull
+  EntityPlayer getPlayer();
 
-    void setHarvestingTool(@Nonnull ItemStack stack);
+  /*
+   * Gets the tool that was used in the last {@link net.minecraftforge.event.world.BlockEvent.BreakEvent} event
+   */
+  @Nonnull
+  ItemStack getHarvestingTool();
 
-    /**
-     * Gets the current chiseling mode.
-     *
-     * @return enum value of the chiseling mode
-     */
-    @Nonnull
-    ChiselRecipe.Mode getChiselMode();
+  void setHarvestingTool(@Nonnull ItemStack stack);
 
-    /**
-     * Sets the current chiseling mode.
-     *
-     * @param chiselMode enum value for the new chiseling mode
-     */
-    void setChiselMode(@Nonnull ChiselRecipe.Mode chiselMode);
+  /**
+   * Gets the current chiseling mode.
+   *
+   * @return enum value of the chiseling mode
+   */
+  @Nonnull
+  ChiselRecipe.Mode getChiselMode();
 
-    /**
-     * Makes the player intoxicated
-     *
-     * @param ticks Ticks for the player to be intoxicated
-     */
-    void addIntoxicatedTime(long ticks);
+  /**
+   * Sets the current chiseling mode.
+   *
+   * @param chiselMode enum value for the new chiseling mode
+   */
+  void setChiselMode(@Nonnull ChiselRecipe.Mode chiselMode);
 
-    /**
-     * Gets the number of ticks the player is intoxicated for
-     */
-    long getIntoxicatedTime();
+  /**
+   * Makes the player intoxicated
+   *
+   * @param ticks Ticks for the player to be intoxicated
+   */
+  void addIntoxicatedTime(long ticks);
 
-    /**
-     * If the player has been given the guide book
-     */
-    boolean hasBook();
+  /**
+   * Gets the number of ticks the player is intoxicated for
+   */
+  long getIntoxicatedTime();
 
-    /**
-     * Sets if the player has been given the guide book
-     */
-    void setHasBook(boolean value);
+  /**
+   * If the player has been given the guide book
+   */
+  boolean hasBook();
 
-    default void updateAndSync()
-    {
-        EntityPlayer player = getPlayer();
-        if (player instanceof EntityPlayerMP)
-        {
-            TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(serializeNBT()), (EntityPlayerMP) player);
-        }
+  /**
+   * Sets if the player has been given the guide book
+   */
+  void setHasBook(boolean value);
+
+  default void updateAndSync() {
+    EntityPlayer player = getPlayer();
+    if (player instanceof EntityPlayerMP) {
+      TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(serializeNBT()), (EntityPlayerMP) player);
     }
+  }
 }

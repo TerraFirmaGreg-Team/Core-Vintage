@@ -13,39 +13,35 @@ import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 
-public class PacketCalendarUpdate implements IMessage
-{
-    private CalendarTFC instance;
+public class PacketCalendarUpdate implements IMessage {
 
-    @SuppressWarnings("unused")
-    @Deprecated
-    public PacketCalendarUpdate() {}
+  private CalendarTFC instance;
 
-    public PacketCalendarUpdate(CalendarTFC instance)
-    {
-        this.instance = instance;
-    }
+  @SuppressWarnings("unused")
+  @Deprecated
+  public PacketCalendarUpdate() {}
+
+  public PacketCalendarUpdate(CalendarTFC instance) {
+    this.instance = instance;
+  }
+
+  @Override
+  public void fromBytes(ByteBuf buf) {
+    instance = new CalendarTFC();
+    instance.read(buf);
+  }
+
+  @Override
+  public void toBytes(ByteBuf buf) {
+    instance.write(buf);
+  }
+
+  public static class Handler implements IMessageHandler<PacketCalendarUpdate, IMessage> {
 
     @Override
-    public void fromBytes(ByteBuf buf)
-    {
-        instance = new CalendarTFC();
-        instance.read(buf);
+    public IMessage onMessage(PacketCalendarUpdate message, MessageContext ctx) {
+      TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> CalendarTFC.INSTANCE.resetTo(message.instance));
+      return null;
     }
-
-    @Override
-    public void toBytes(ByteBuf buf)
-    {
-        instance.write(buf);
-    }
-
-    public static class Handler implements IMessageHandler<PacketCalendarUpdate, IMessage>
-    {
-        @Override
-        public IMessage onMessage(PacketCalendarUpdate message, MessageContext ctx)
-        {
-            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> CalendarTFC.INSTANCE.resetTo(message.instance));
-            return null;
-        }
-    }
+  }
 }

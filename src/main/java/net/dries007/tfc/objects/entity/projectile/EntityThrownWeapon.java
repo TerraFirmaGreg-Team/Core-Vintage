@@ -5,8 +5,6 @@
 
 package net.dries007.tfc.objects.entity.projectile;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -29,165 +27,143 @@ import net.minecraftforge.fml.common.registry.IThrowableEntity;
 
 import io.netty.buffer.ByteBuf;
 
-public class EntityThrownWeapon extends EntityArrow implements IThrowableEntity, IEntityAdditionalSpawnData
-{
-    private ItemStack weapon = ItemStack.EMPTY;
-    private int knockbackStrength = 0;
+import javax.annotation.Nonnull;
 
-    protected EntityThrownWeapon(World world) { super(world); }
+public class EntityThrownWeapon extends EntityArrow implements IThrowableEntity, IEntityAdditionalSpawnData {
 
-    protected EntityThrownWeapon(World world, double x, double y, double z) { super(world, x, y, z); }
+  private ItemStack weapon = ItemStack.EMPTY;
+  private int knockbackStrength = 0;
 
-    protected EntityThrownWeapon(World world, EntityLivingBase shooter) { super(world, shooter); }
+  protected EntityThrownWeapon(World world) {super(world);}
 
-    @Override
-    public Entity getThrower()
-    {
-        return this.shootingEntity;
+  protected EntityThrownWeapon(World world, double x, double y, double z) {super(world, x, y, z);}
+
+  protected EntityThrownWeapon(World world, EntityLivingBase shooter) {super(world, shooter);}
+
+  @Override
+  public Entity getThrower() {
+    return this.shootingEntity;
+  }
+
+  @Override
+  public void setThrower(Entity entity) {
+    this.shootingEntity = entity;
+  }
+
+  @Override
+  public void writeSpawnData(ByteBuf buffer) {
+    ByteBufUtils.writeItemStack(buffer, this.weapon);
+  }
+
+  @Override
+  public void readSpawnData(ByteBuf additionalData) {
+    setWeapon(ByteBufUtils.readItemStack(additionalData));
+  }
+
+  public ItemStack getWeapon() {
+    return this.weapon;
+  }
+
+  public void setWeapon(ItemStack stack) {this.weapon = stack.copy();}
+
+  @Override
+  protected void onHit(@Nonnull RayTraceResult raytraceResultIn) {
+    Entity entity = raytraceResultIn.entityHit;
+
+    // Damage item
+    if (getThrower() instanceof EntityLivingBase) {
+      EntityLivingBase thrower = (EntityLivingBase) getThrower();
+      weapon.damageItem(1, thrower);
     }
 
-    @Override
-    public void setThrower(Entity entity)
-    {
-        this.shootingEntity = entity;
-    }
+    if (entity != null) {
+      ItemStack weapon = this.getWeapon();
+      float f = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+      float finalDamage = f * (float) this.getDamage();
 
-    @Override
-    public void writeSpawnData(ByteBuf buffer)
-    {
-        ByteBufUtils.writeItemStack(buffer, this.weapon);
-    }
+      if (this.getIsCritical()) {
+        finalDamage *= 2.0f;
+      }
 
-    @Override
-    public void readSpawnData(ByteBuf additionalData)
-    {
-        setWeapon(ByteBufUtils.readItemStack(additionalData));
-    }
+      DamageSource damagesource;
 
-    public ItemStack getWeapon()
-    {
-        return this.weapon;
-    }
+      if (this.shootingEntity == null) {
+        //TODO custom damage sources?
+        damagesource = DamageSource.causeArrowDamage(this, this);
+      } else {
+        damagesource = DamageSource.causeArrowDamage(this, this.shootingEntity);
+      }
 
-    public void setWeapon(ItemStack stack) { this.weapon = stack.copy(); }
+      if (this.isBurning() && !(entity instanceof EntityEnderman)) {
+        entity.setFire(5);
+      }
 
-    @Override
-    protected void onHit(@Nonnull RayTraceResult raytraceResultIn)
-    {
-        Entity entity = raytraceResultIn.entityHit;
+      if (entity.attackEntityFrom(damagesource, finalDamage)) {
+        if (entity instanceof EntityLivingBase) {
+          EntityLivingBase entitylivingbase = (EntityLivingBase) entity;
 
-        // Damage item
-        if (getThrower() instanceof EntityLivingBase)
-        {
-            EntityLivingBase thrower = (EntityLivingBase) getThrower();
-            weapon.damageItem(1, thrower);
+          if (this.knockbackStrength > 0) {
+            float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+
+            if (f1 > 0.0F) {
+              entitylivingbase.addVelocity(
+                this.motionX * (double) this.knockbackStrength * 0.6000000238418579D / (double) f1, 0.1D,
+                this.motionZ * (double) this.knockbackStrength * 0.6000000238418579D / (double) f1);
+            }
+          }
+
+          this.arrowHit(entitylivingbase);
+
+          if (this.shootingEntity != null && entitylivingbase != this.shootingEntity && entitylivingbase instanceof EntityPlayer
+              && this.shootingEntity instanceof EntityPlayerMP) {
+            ((EntityPlayerMP) this.shootingEntity).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
+          }
         }
 
-        if (entity != null)
-        {
-            ItemStack weapon = this.getWeapon();
-            float f = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-            float finalDamage = f * (float) this.getDamage();
+        //TODO custom sound for thrown weapon hit?
+        this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+        this.entityDropItem(weapon, 0.1F);
+        this.setDead();
+      } else {
+        this.motionX *= -0.10000000149011612D;
+        this.motionY *= -0.10000000149011612D;
+        this.motionZ *= -0.10000000149011612D;
+        this.rotationYaw += 180.0F;
+        this.prevRotationYaw += 180.0F;
 
-            if (this.getIsCritical())
-            {
-                finalDamage *= 2.0f;
-            }
-
-            DamageSource damagesource;
-
-            if (this.shootingEntity == null)
-            {
-                //TODO custom damage sources?
-                damagesource = DamageSource.causeArrowDamage(this, this);
-            }
-            else
-            {
-                damagesource = DamageSource.causeArrowDamage(this, this.shootingEntity);
-            }
-
-            if (this.isBurning() && !(entity instanceof EntityEnderman))
-            {
-                entity.setFire(5);
-            }
-
-            if (entity.attackEntityFrom(damagesource, finalDamage))
-            {
-                if (entity instanceof EntityLivingBase)
-                {
-                    EntityLivingBase entitylivingbase = (EntityLivingBase) entity;
-
-                    if (this.knockbackStrength > 0)
-                    {
-                        float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-
-                        if (f1 > 0.0F)
-                        {
-                            entitylivingbase.addVelocity(this.motionX * (double) this.knockbackStrength * 0.6000000238418579D / (double) f1, 0.1D, this.motionZ * (double) this.knockbackStrength * 0.6000000238418579D / (double) f1);
-                        }
-                    }
-
-                    this.arrowHit(entitylivingbase);
-
-                    if (this.shootingEntity != null && entitylivingbase != this.shootingEntity && entitylivingbase instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)
-                    {
-                        ((EntityPlayerMP) this.shootingEntity).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
-                    }
-                }
-
-                //TODO custom sound for thrown weapon hit?
-                this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-                this.entityDropItem(weapon, 0.1F);
-                this.setDead();
-            }
-            else
-            {
-                this.motionX *= -0.10000000149011612D;
-                this.motionY *= -0.10000000149011612D;
-                this.motionZ *= -0.10000000149011612D;
-                this.rotationYaw += 180.0F;
-                this.prevRotationYaw += 180.0F;
-
-                if (!this.world.isRemote && this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ < 0.0010000000474974513D)
-                {
-                    this.entityDropItem(weapon, 0.1F);
-                    this.setDead();
-                }
-            }
+        if (!this.world.isRemote && this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ < 0.0010000000474974513D) {
+          this.entityDropItem(weapon, 0.1F);
+          this.setDead();
         }
-        else
-        {
-            super.onHit(raytraceResultIn);
-        }
+      }
+    } else {
+      super.onHit(raytraceResultIn);
     }
+  }
 
-    @Override
-    public void writeEntityToNBT(NBTTagCompound compound)
-    {
-        NBTTagList tag = new NBTTagList();
-        tag.appendTag(weapon.serializeNBT());
-        compound.setTag("weapon", tag);
+  @Override
+  public void writeEntityToNBT(NBTTagCompound compound) {
+    NBTTagList tag = new NBTTagList();
+    tag.appendTag(weapon.serializeNBT());
+    compound.setTag("weapon", tag);
 
-        super.writeEntityToNBT(compound);
-    }
+    super.writeEntityToNBT(compound);
+  }
 
-    @Override
-    public void readEntityFromNBT(NBTTagCompound compound)
-    {
-        NBTTagList tag = compound.getTagList("weapon", Constants.NBT.TAG_COMPOUND);
-        weapon = tag.tagCount() > 0 ? new ItemStack(tag.getCompoundTagAt(0)) : ItemStack.EMPTY;
-        super.readEntityFromNBT(compound);
-    }
+  @Override
+  public void readEntityFromNBT(NBTTagCompound compound) {
+    NBTTagList tag = compound.getTagList("weapon", Constants.NBT.TAG_COMPOUND);
+    weapon = tag.tagCount() > 0 ? new ItemStack(tag.getCompoundTagAt(0)) : ItemStack.EMPTY;
+    super.readEntityFromNBT(compound);
+  }
 
-    @Override
-    @Nonnull
-    protected ItemStack getArrowStack()
-    {
-        return this.weapon;
-    }
+  @Override
+  @Nonnull
+  protected ItemStack getArrowStack() {
+    return this.weapon;
+  }
 
-    public void setKnockbackStrength(int knockbackStrength)
-    {
-        this.knockbackStrength = knockbackStrength;
-    }
+  public void setKnockbackStrength(int knockbackStrength) {
+    this.knockbackStrength = knockbackStrength;
+  }
 }

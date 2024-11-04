@@ -122,9 +122,6 @@ public final class TerraFirmaCraft {
   @Mod.EventHandler
   public void preInit(FMLPreInitializationEvent event) {
     log.debug("If you can see this, debug logging is working :)");
-    if (!isSignedBuild) {
-      log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-    }
 
     // No need to sync config here, forge magic
 
@@ -171,9 +168,6 @@ public final class TerraFirmaCraft {
 
   @Mod.EventHandler
   public void init(FMLInitializationEvent event) {
-    if (!isSignedBuild) {
-      log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-    }
 
     ItemsTFC.init();
     LootTablesTFC.init();
@@ -212,9 +206,6 @@ public final class TerraFirmaCraft {
 
   @Mod.EventHandler
   public void postInit(FMLPostInitializationEvent event) {
-    if (!isSignedBuild) {
-      log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-    }
     FuelManager.postInit();
     JsonConfigRegistry.INSTANCE.postInit();
   }
@@ -228,9 +219,6 @@ public final class TerraFirmaCraft {
 
   @Mod.EventHandler
   public void onServerStarting(FMLServerStartingEvent event) {
-    if (!isSignedBuild) {
-      log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-    }
 
     event.registerServerCommand(new CommandStripWorld());
     event.registerServerCommand(new CommandHeat());

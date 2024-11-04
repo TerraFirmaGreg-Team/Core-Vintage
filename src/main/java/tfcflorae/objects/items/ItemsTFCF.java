@@ -46,7 +46,6 @@ import tfcflorae.objects.PowderTFCF;
 import tfcflorae.objects.ToolMaterialsTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.blocktype.BlockSlabTFCF;
-import tfcflorae.objects.blocks.groundcover.BlockSurfaceOreDeposit;
 import tfcflorae.objects.blocks.wood.BlockLogTFCF;
 import tfcflorae.objects.blocks.wood.bamboo.BlockBambooLog;
 import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitDoor;
@@ -1298,7 +1297,6 @@ public final class ItemsTFCF {
   private static ImmutableList<ItemBowTFCF> allItemBows;
   private static ImmutableList<Item> allFoodItems;
   private static ImmutableList<ItemGemTFCF> allGemTFCFItems;
-  private static ImmutableList<BlockSurfaceOreDeposit> allSurfaceOreBlocks;
   private static ImmutableList<ItemFruitDoor> allFruitDoors;
   private static ImmutableList<Item> allCeramicMoldItems;
   private static ImmutableList<ItemArmorTFCF> allArmorItems;
@@ -1318,10 +1316,6 @@ public final class ItemsTFCF {
 
   public static ImmutableList<ItemGemTFCF> getAllGemTFCFItems() {
     return allGemTFCFItems;
-  }
-
-  public static ImmutableList<BlockSurfaceOreDeposit> getAllSurfaceOreBlocks() {
-    return allSurfaceOreBlocks;
   }
 
   public static ImmutableList<ItemFruitDoor> getAllFruitDoors() {
@@ -1347,7 +1341,6 @@ public final class ItemsTFCF {
 
     ImmutableList.Builder<Item> simpleItems = ImmutableList.builder();
     ImmutableList.Builder<ItemBowTFCF> itemBows = ImmutableList.builder();
-    ImmutableList.Builder<BlockSurfaceOreDeposit> surfaceOreBlocks = new Builder<>();
     ImmutableList.Builder<ItemFruitDoor> fruitDoors = ImmutableList.builder();
     ImmutableList.Builder<Item> ceramicItems = ImmutableList.builder();
     ImmutableList.Builder<ItemArmorTFCF> armorItems = ImmutableList.builder();

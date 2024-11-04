@@ -5,14 +5,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
@@ -54,9 +51,6 @@ import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.objects.items.metal.ItemMetal;
-import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.objects.recipes.ShapelessDamageRecipe;
 import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.agriculture.FruitTree;
@@ -67,7 +61,6 @@ import tfcflorae.api.knapping.KnappingTypes;
 import tfcflorae.objects.PowderTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
-import tfcflorae.objects.blocks.groundcover.BlockSurfaceRock;
 import tfcflorae.objects.blocks.wood.BlockLeavesTFCF;
 import tfcflorae.objects.fluids.FluidsTFCF;
 import tfcflorae.objects.items.ItemPowderTFCF;
@@ -82,9 +75,6 @@ import tfcflorae.objects.items.rock.ItemFiredMudBrick;
 import tfcflorae.objects.items.rock.ItemUnfiredMudBrick;
 import tfcflorae.util.agriculture.CropTFCF;
 import tfcflorae.util.agriculture.SeasonalTrees;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static net.dries007.tfc.api.types.Metal.ItemType.INGOT;
 import static tfcflorae.TFCFlorae.MODID;
@@ -1428,36 +1418,6 @@ public final class RecipesTFCF {
       new QuernRecipe(IIngredient.of(BlocksTFCF.GLOWING_SEA_BANANA), new ItemStack(Items.GLOWSTONE_DUST, 2)).setRegistryName("glowing_sea_banana_glowstone_dust"),
       new QuernRecipe(IIngredient.of(BlocksTFCF.LIGHTSTONE), new ItemStack(Items.GLOWSTONE_DUST, 2)).setRegistryName("glowstone_dust_lightstone")
     );
-  }
-
-  @SubscribeEvent
-  public static void onRegisterCraftingRecipeEvent(RegistryEvent.Register<IRecipe> event) {
-    IForgeRegistry<IRecipe> r = event.getRegistry();
-    //Register all strips
-    List<ItemStack> allHammers = new ArrayList<>();
-    for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
-      if (!metal.isToolMetal()) {continue;}
-      allHammers.add(new ItemStack(ItemMetal.get(metal, Metal.ItemType.HAMMER), 1, OreDictionary.WILDCARD_VALUE));
-    }
-    Ingredient hammer = Ingredient.fromStacks(allHammers.toArray(new ItemStack[0]));
-
-    ResourceLocation groupSurfaceRock = new ResourceLocation(MODID, "surface_rock");
-
-    for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-      /*
-       * Surface rocks to TFC rocks
-       */
-      Ingredient ingredient = Ingredient.fromStacks(new ItemStack(BlockSurfaceRock.get(rock)));
-      ItemStack output = new ItemStack(ItemRock.get(rock), 1);
-      if (!output.isEmpty()) {
-        NonNullList<Ingredient> list = NonNullList.create();
-        list.add(hammer);
-        list.add(ingredient);
-        //noinspection ConstantConditions
-        r.register(new ShapelessDamageRecipe(groupSurfaceRock, list, output, 1).setRegistryName(MODID, rock.getRegistryName().getPath().toLowerCase()
-                                                                                                       + "_rock_hammer"));
-      }
-    }
   }
 
   @SubscribeEvent

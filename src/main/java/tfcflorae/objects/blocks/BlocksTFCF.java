@@ -22,7 +22,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
@@ -60,8 +59,6 @@ import tfcflorae.objects.blocks.groundcover.BlockPebbleWater;
 import tfcflorae.objects.blocks.groundcover.BlockPinecone;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceBones;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceFlint;
-import tfcflorae.objects.blocks.groundcover.BlockSurfaceOreDeposit;
-import tfcflorae.objects.blocks.groundcover.BlockSurfaceRock;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceSeashells;
 import tfcflorae.objects.blocks.groundcover.BlockTwig;
 import tfcflorae.objects.blocks.plants.BlockCaveMushroom;
@@ -361,7 +358,6 @@ public final class BlocksTFCF {
   private static ImmutableList<BlockSlabTFC.Half> allSlabBlocksTFC = Helpers.getNull();
   private static ImmutableList<BlockStairsTFC> allStairBlocksTFC = Helpers.getNull();
   private static ImmutableList<BlockPlanksTFC> allPlanksTFC = Helpers.getNull();
-  private static ImmutableList<BlockSurfaceRock> allSurfaceRocks = Helpers.getNull();
   private static ImmutableList<BlockSurfaceSeashells> allSurfaceSeashells = Helpers.getNull();
   private static ImmutableList<BlockSurfaceFlint> allSurfaceFlint = Helpers.getNull();
   private static ImmutableList<BlockSurfaceBones> allSurfaceBones = Helpers.getNull();
@@ -373,7 +369,6 @@ public final class BlocksTFCF {
   private static ImmutableList<Block> allBambooSapling = Helpers.getNull();
   private static ImmutableList<BlockLeavesTFCF> allNormalTreeLeaves = Helpers.getNull();
   private static ImmutableList<BlockLogTFCF> allNormalTreeLog = Helpers.getNull();
-  private static ImmutableList<BlockSurfaceOreDeposit> allSurfaceOreBlocks = Helpers.getNull();
   private static ImmutableList<BlockCoral> allCoralPlants = Helpers.getNull();
   private static ImmutableList<BlockWaterGlowPlant> allGlowWaterPlants = Helpers.getNull();
   private static ImmutableList<BlockWaterPlantTFCF> allWaterPlantBlocks = Helpers.getNull();
@@ -533,10 +528,6 @@ public final class BlocksTFCF {
     return allStairBlocksTFC;
   }
 
-  public static ImmutableList<BlockSurfaceRock> getAllSurfaceRocks() {
-    return allSurfaceRocks;
-  }
-
   public static ImmutableList<BlockSurfaceSeashells> getAllSurfaceSeashells() {
     return allSurfaceSeashells;
   }
@@ -579,10 +570,6 @@ public final class BlocksTFCF {
 
   public static ImmutableList<BlockLogTFCF> getAllNormalTreeLog() {
     return allNormalTreeLog;
-  }
-
-  public static ImmutableList<BlockSurfaceOreDeposit> getAllSurfaceOreBlocks() {
-    return allSurfaceOreBlocks;
   }
 
   public static ImmutableList<BlockCoral> getAllCoralPlants() {
@@ -698,7 +685,6 @@ public final class BlocksTFCF {
     ImmutableList.Builder<BlockWallTFCF> blockWallTFCF = ImmutableList.builder();
     ImmutableList.Builder<BlockStairsTFCF> blockStairsTFC = new Builder<>();
     ImmutableList.Builder<BlockSlabTFCF.Half> blockSlabTFCF = new Builder<>();
-    ImmutableList.Builder<BlockSurfaceRock> surfaceRock = ImmutableList.builder();
     ImmutableList.Builder<BlockSurfaceSeashells> surfaceSeashell = ImmutableList.builder();
     ImmutableList.Builder<BlockSurfaceFlint> surfaceFlint = ImmutableList.builder();
     ImmutableList.Builder<BlockSurfaceBones> surfaceBone = ImmutableList.builder();
@@ -708,7 +694,6 @@ public final class BlocksTFCF {
     ImmutableList.Builder<BlockSlabTFC.Half> blockSlabTFC = new Builder<>();
     ImmutableList.Builder<BlockStairsTFC> blockStairTFC = new Builder<>();
     ImmutableList.Builder<BlockPlanksTFC> planksTFC = ImmutableList.builder();
-    ImmutableList.Builder<BlockSurfaceOreDeposit> surfaceOreBlocks = ImmutableList.builder();
     ImmutableList.Builder<BlockPebbleWater> pebbleWater = ImmutableList.builder();
     ImmutableList.Builder<BlockCoral> plantCoral = ImmutableList.builder();
     ImmutableList.Builder<BlockWaterGlowPlant> plantGlowWater = ImmutableList.builder();
@@ -1069,26 +1054,6 @@ public final class BlocksTFCF {
     allBlockRockVariantsTFCF.forEach((x) -> {
       normalItemBlocks.add(new ItemBlockTFC(x));
     });
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverOreDeposit) {
-      for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
-        for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-          surfaceOreBlocks.add(register(r, ("groundcover/ore/" + ore.getRegistryName().getPath().toLowerCase() + "/" + rock.getRegistryName()
-                                                                                                                           .getPath()).toLowerCase(), new BlockSurfaceOreDeposit(ore, rock), CT_ROCK_BLOCKS));
-        }
-      }
-
-      allSurfaceOreBlocks = surfaceOreBlocks.build();
-      allSurfaceOreBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-    }
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverRock) {
-      for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-        surfaceRock.add(register(r, "groundcover/rock/" + rock.getRegistryName().getPath().toLowerCase(), new BlockSurfaceRock(rock), CT_ROCK_BLOCKS));
-      }
-      allSurfaceRocks = surfaceRock.build();
-      allSurfaceRocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-    }
 
     if (ConfigTFCF.General.WORLD.enableGroundcoverBones) {
       surfaceBone.add(register(r, "groundcover/bone", new BlockSurfaceBones(), CT_FLORA));

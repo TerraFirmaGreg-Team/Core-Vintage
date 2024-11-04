@@ -444,17 +444,9 @@ public class ConfigTFCF {
       @Config.LangKey("config." + MODID + ".general.world.enableGroundcoverFlint")
       public boolean enableGroundcoverFlint = true;
 
-      @Config.Comment("Enable ore deposit groundcover? Disabling ore deposits can improve loading times and lower ram usage significantly.")
-      @Config.LangKey("config." + MODID + ".general.world.enableGroundcoverOreDeposit")
-      public boolean enableGroundcoverOreDeposit = true;
-
       @Config.Comment("Enable pinecone groundcover?")
       @Config.LangKey("config." + MODID + ".general.world.enableGroundcoverPinecone")
       public boolean enableGroundcoverPinecone = true;
-
-      @Config.Comment("Enable rock groundcover? Disabling rocks can improve loading times and lower ram usage significantly.")
-      @Config.LangKey("config." + MODID + ".general.world.enableGroundcoverRock")
-      public boolean enableGroundcoverRock = true;
 
       @Config.Comment("Enable seashell groundcover?")
       @Config.LangKey("config." + MODID + ".general.world.enableGroundcoverSeashell")

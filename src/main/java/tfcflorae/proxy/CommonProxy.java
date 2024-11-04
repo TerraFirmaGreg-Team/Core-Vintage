@@ -23,9 +23,7 @@ import tfcflorae.world.worldgen.cave.WorldGeneratorUnderground;
 import tfcflorae.world.worldgen.groundcover.WorldGenSurfaceBones;
 import tfcflorae.world.worldgen.groundcover.WorldGenSurfaceDriftwood;
 import tfcflorae.world.worldgen.groundcover.WorldGenSurfaceFlint;
-import tfcflorae.world.worldgen.groundcover.WorldGenSurfaceOreDeposits;
 import tfcflorae.world.worldgen.groundcover.WorldGenSurfacePinecone;
-import tfcflorae.world.worldgen.groundcover.WorldGenSurfaceRocks;
 import tfcflorae.world.worldgen.groundcover.WorldGenSurfaceSeashells;
 import tfcflorae.world.worldgen.groundcover.WorldGenSurfaceTwig;
 import tfcflorae.world.worldgen.soil.WorldGenClays;
@@ -36,6 +34,10 @@ import tfcflorae.world.worldgen.structures.WorldGenStructuresCorals;
 
 @Mod.EventBusSubscriber
 public class CommonProxy {
+
+  @SubscribeEvent
+  public static void registerItems(RegistryEvent.Register<Item> event) {
+  }
 
   public void preInit(FMLPreInitializationEvent event) {
     if (ConfigTFCF.General.STRUCTURES.activateStructureGeneration) {
@@ -76,9 +78,6 @@ public class CommonProxy {
         GameRegistry.registerWorldGenerator(new WorldGenSoilDecorative(), 0);
         GameRegistry.registerWorldGenerator(new WorldGenClays(), 0);
       }
-      if (ConfigTFCF.General.WORLD.enableGroundcoverRock) {
-        GameRegistry.registerWorldGenerator(new WorldGenSurfaceRocks(), 0);
-      }
       if (ConfigTFCF.General.WORLD.enableGroundcoverSeashell) {
         GameRegistry.registerWorldGenerator(new WorldGenSurfaceSeashells(), 0);
       }
@@ -87,9 +86,6 @@ public class CommonProxy {
       }
       if (ConfigTFCF.General.WORLD.enableGroundcoverBones) {
         GameRegistry.registerWorldGenerator(new WorldGenSurfaceBones(), 0);
-      }
-      if (ConfigTFCF.General.WORLD.enableGroundcoverOreDeposit) {
-        GameRegistry.registerWorldGenerator(new WorldGenSurfaceOreDeposits(true), 0);
       }
       if (ConfigTFCF.General.WORLD.enableGroundcoverPinecone) {
         GameRegistry.registerWorldGenerator(new WorldGenSurfacePinecone(), 0);
@@ -110,9 +106,5 @@ public class CommonProxy {
   }
 
   public void postInit(FMLPostInitializationEvent event) {
-  }
-
-  @SubscribeEvent
-  public static void registerItems(RegistryEvent.Register<Item> event) {
   }
 }

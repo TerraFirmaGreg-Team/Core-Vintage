@@ -36,18 +36,11 @@ import net.dries007.tfc.objects.items.ceramics.ItemUnfiredSmallVessel;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.FruitTree;
-import tfcelementia.objects.items.metal.ItemMetalTFCE;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.TFCFlorae;
 import tfcflorae.compat.firmalife.ceramics.ItemEarthenwareMalletMoldFL;
 import tfcflorae.compat.firmalife.ceramics.ItemKaoliniteMalletMoldFL;
 import tfcflorae.compat.firmalife.ceramics.ItemStonewareMalletMoldFL;
-import tfcflorae.compat.tfcelementia.ceramics.ItemEarthenwareMoldTFCE;
-import tfcflorae.compat.tfcelementia.ceramics.ItemKaoliniteMoldTFCE;
-import tfcflorae.compat.tfcelementia.ceramics.ItemStonewareMoldTFCE;
-import tfcflorae.compat.tfcelementia.ceramics.ItemUnfiredEarthenwareMoldTFCE;
-import tfcflorae.compat.tfcelementia.ceramics.ItemUnfiredKaoliniteMoldTFCE;
-import tfcflorae.compat.tfcelementia.ceramics.ItemUnfiredStonewareMoldTFCE;
 import tfcflorae.objects.GemTFCF;
 import tfcflorae.objects.PowderTFCF;
 import tfcflorae.objects.ToolMaterialsTFCF;
@@ -1298,7 +1291,9 @@ public final class ItemsTFCF {
   public static final ItemArmorTFCF YUCCA_CANVAS_LEGGINGS = Helpers.getNull();
   @GameRegistry.ObjectHolder("armor/boots/yucca_canvas")
   public static final ItemArmorTFCF YUCCA_CANVAS_BOOTS = Helpers.getNull();
-
+  public static ItemEarthenwareMalletMoldFL malletMoldEarthenware;
+  public static ItemKaoliniteMalletMoldFL malletMoldKaolinite;
+  public static ItemStonewareMalletMoldFL malletMoldStoneware;
   private static ImmutableList<Item> allSimpleItems;
   private static ImmutableList<ItemBowTFCF> allItemBows;
   private static ImmutableList<Item> allFoodItems;
@@ -1307,6 +1302,7 @@ public final class ItemsTFCF {
   private static ImmutableList<ItemFruitDoor> allFruitDoors;
   private static ImmutableList<Item> allCeramicMoldItems;
   private static ImmutableList<ItemArmorTFCF> allArmorItems;
+  private static Map<FruitsTFCF, Item> driedFruits = new HashMap<>();
 
   public static ImmutableList<Item> getAllSimpleItems() {
     return allSimpleItems;
@@ -1332,8 +1328,6 @@ public final class ItemsTFCF {
     return allFruitDoors;
   }
 
-  private static Map<FruitsTFCF, Item> driedFruits = new HashMap<>();
-
   public static Item getDriedFruit(FruitsTFCF fruit) {
     return driedFruits.get(fruit);
   }
@@ -1345,10 +1339,6 @@ public final class ItemsTFCF {
   public static ImmutableList<ItemArmorTFCF> getAllArmorItems() {
     return allArmorItems;
   }
-
-  public static ItemEarthenwareMalletMoldFL malletMoldEarthenware;
-  public static ItemKaoliniteMalletMoldFL malletMoldKaolinite;
-  public static ItemStonewareMalletMoldFL malletMoldStoneware;
 
   @SuppressWarnings("ConstantConditions")
   @SubscribeEvent
@@ -1787,27 +1777,6 @@ public final class ItemsTFCF {
           }
         }
 
-        if (TFCFlorae.TFCElementiaAdded) {
-          for (ItemMetalTFCE.ItemType type : ItemMetalTFCE.ItemType.values()) {
-            if (type.hasMold(null)) {
-              ItemPottery item = new ItemEarthenwareMoldTFCE(type, type.getSmeltAmount());
-              if (ItemMetalTFCE.ItemType.NAIL.isTypeActive() && type == ItemMetalTFCE.ItemType.NAIL) {
-                ceramicItems.add(register(r, "ceramics/earthenware/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY));
-                simpleItems.add(register(r, "ceramics/earthenware/unfired/mold/" + type.name()
-                                                                                       .toLowerCase(), new ItemUnfiredEarthenwareMoldTFCE(type), CT_POTTERY));
-              } else if (ItemMetalTFCE.ItemType.RING.isTypeActive() && type == ItemMetalTFCE.ItemType.RING) {
-                ceramicItems.add(register(r, "ceramics/earthenware/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY));
-                simpleItems.add(register(r, "ceramics/earthenware/unfired/mold/" + type.name()
-                                                                                       .toLowerCase(), new ItemUnfiredEarthenwareMoldTFCE(type), CT_POTTERY));
-              } else if (type == ItemMetalTFCE.ItemType.HALBERD_BLADE) {
-                ceramicItems.add(register(r, "ceramics/earthenware/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY));
-                simpleItems.add(register(r, "ceramics/earthenware/unfired/mold/" + type.name()
-                                                                                       .toLowerCase(), new ItemUnfiredEarthenwareMoldTFCE(type), CT_POTTERY));
-              }
-            }
-          }
-        }
-
         if (TFCFlorae.FirmaLifeAdded) {
           simpleItems.add(register(r, "ceramics/earthenware/unfired/mold/mallet_head", new ItemPottery(), CT_POTTERY));
           malletMoldEarthenware = register(r, "ceramics/earthenware/fired/mold/mallet_head", new ItemEarthenwareMalletMoldFL("mallet"), CT_POTTERY);
@@ -1845,27 +1814,6 @@ public final class ItemsTFCF {
           }
         }
 
-        if (TFCFlorae.TFCElementiaAdded) {
-          for (ItemMetalTFCE.ItemType type : ItemMetalTFCE.ItemType.values()) {
-            if (type.hasMold(null)) {
-              ItemPottery item = new ItemKaoliniteMoldTFCE(type, type.getSmeltAmount());
-              if (ItemMetalTFCE.ItemType.NAIL.isTypeActive() && type == ItemMetalTFCE.ItemType.NAIL) {
-                ceramicItems.add(register(r, "ceramics/kaolinite/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY));
-                simpleItems.add(register(r,
-                                         "ceramics/kaolinite/unfired/mold/" + type.name().toLowerCase(), new ItemUnfiredKaoliniteMoldTFCE(type), CT_POTTERY));
-              } else if (ItemMetalTFCE.ItemType.RING.isTypeActive() && type == ItemMetalTFCE.ItemType.RING) {
-                ceramicItems.add(register(r, "ceramics/kaolinite/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY));
-                simpleItems.add(register(r,
-                                         "ceramics/kaolinite/unfired/mold/" + type.name().toLowerCase(), new ItemUnfiredKaoliniteMoldTFCE(type), CT_POTTERY));
-              } else if (type == ItemMetalTFCE.ItemType.HALBERD_BLADE) {
-                ceramicItems.add(register(r, "ceramics/kaolinite/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY));
-                simpleItems.add(register(r,
-                                         "ceramics/kaolinite/unfired/mold/" + type.name().toLowerCase(), new ItemUnfiredKaoliniteMoldTFCE(type), CT_POTTERY));
-              }
-            }
-          }
-        }
-
         if (TFCFlorae.FirmaLifeAdded) {
           simpleItems.add(register(r, "ceramics/kaolinite/unfired/mold/mallet_head", new ItemPottery(), CT_POTTERY));
           malletMoldKaolinite = register(r, "ceramics/kaolinite/fired/mold/mallet_head", new ItemKaoliniteMalletMoldFL("mallet"), CT_POTTERY);
@@ -1900,27 +1848,6 @@ public final class ItemsTFCF {
             ItemPottery item = new ItemStonewareMold(type);
             ceramicItems.add(register(r, "ceramics/stoneware/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY));
             simpleItems.add(register(r, "ceramics/stoneware/unfired/mold/" + type.name().toLowerCase(), new ItemUnfiredStonewareMold(type), CT_POTTERY));
-          }
-        }
-
-        if (TFCFlorae.TFCElementiaAdded) {
-          for (ItemMetalTFCE.ItemType type : ItemMetalTFCE.ItemType.values()) {
-            if (type.hasMold(null)) {
-              ItemPottery item = new ItemStonewareMoldTFCE(type, type.getSmeltAmount());
-              if (ItemMetalTFCE.ItemType.NAIL.isTypeActive() && type == ItemMetalTFCE.ItemType.NAIL) {
-                ceramicItems.add(register(r, "ceramics/stoneware/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY));
-                simpleItems.add(register(r,
-                                         "ceramics/stoneware/unfired/mold/" + type.name().toLowerCase(), new ItemUnfiredStonewareMoldTFCE(type), CT_POTTERY));
-              } else if (ItemMetalTFCE.ItemType.RING.isTypeActive() && type == ItemMetalTFCE.ItemType.RING) {
-                ceramicItems.add(register(r, "ceramics/stoneware/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY));
-                simpleItems.add(register(r,
-                                         "ceramics/stoneware/unfired/mold/" + type.name().toLowerCase(), new ItemUnfiredStonewareMoldTFCE(type), CT_POTTERY));
-              } else if (type == ItemMetalTFCE.ItemType.HALBERD_BLADE) {
-                ceramicItems.add(register(r, "ceramics/stoneware/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY));
-                simpleItems.add(register(r,
-                                         "ceramics/stoneware/unfired/mold/" + type.name().toLowerCase(), new ItemUnfiredStonewareMoldTFCE(type), CT_POTTERY));
-              }
-            }
           }
         }
 

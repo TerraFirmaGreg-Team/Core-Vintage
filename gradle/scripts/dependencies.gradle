@@ -36,7 +36,6 @@ dependencies {
   implementation rfg.deobf("curse.maven:lolasm-460609:4800875")
   compileOnly("curse.maven:crafttweaker-239197:5013567")
   compileOnly("curse.maven:mtlib-253211:3308160")
-  compileOnly("curse.maven:tfc-elementia-389225:3574322")
   compileOnly("curse.maven:tfc-pams-harvestcraft-compatibility-mod-452032:3257786")
   compileOnly("curse.maven:patchouli-306770:3162874")
   compileOnly("curse.maven:hwyla-253449:2568751")

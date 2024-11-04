@@ -22,16 +22,14 @@ import tfcflorae.util.HelpersTFCF;
 import tfcflorae.util.fuel.FuelsTFCF;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-@Mod(modid = TFCFlorae.MODID, name = TFCFlorae.NAME, version = TFCFlorae.VERSION, dependencies = TFCFlorae.DEPENDENCIES, certificateFingerprint = TFCFlorae.SIGNING_KEY)
+@Mod(modid = TFCFlorae.MODID, name = TFCFlorae.NAME, version = TFCFlorae.VERSION, dependencies = TFCFlorae.DEPENDENCIES)
 public class TFCFlorae {
 
   public static final String MODID = "tfcflorae";
   public static final String NAME = "TFC Florae";
   public static final String VERSION = "@VERSION@";
-  public static final String SIGNING_KEY = "@FINGERPRINT@";
   public static final String DEPENDENCIES = "required-after:tfc;"
                                             + "after:firmalife;"
-                                            + "after:tfcelementia;"
                                             + "after:tfc_ph_compat;"
                                             + "required-after:loliasm;";
 
@@ -41,7 +39,6 @@ public class TFCFlorae {
   public static boolean signedBuild = true;
 
   public static boolean FirmaLifeAdded = false;
-  public static boolean TFCElementiaAdded = false;
   public static boolean TFCPHCompatAdded = false;
 
   @SidedProxy(serverSide = "tfcflorae.proxy.CommonProxy", clientSide = "tfcflorae.proxy.ClientProxy")
@@ -66,13 +63,9 @@ public class TFCFlorae {
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
     logger = event.getModLog();
-    if (!signedBuild) {
-      logger.error("INVALID FINGERPRINT DETECTED!");
-    }
 
     for (ModContainer Mod : Loader.instance().getActiveModList()) {
       if (Mod.getModId().equals("firmalife")) {FirmaLifeAdded = true;}
-      if (Mod.getModId().equals("tfcelementia")) {TFCElementiaAdded = true;}
       if (Mod.getModId().equals("tfc_ph_compat")) {TFCPHCompatAdded = true;}
     }
         /*
@@ -83,15 +76,6 @@ public class TFCFlorae {
             MinecraftForge.EVENT_BUS.register(CastingRecipeWrapperKaoliniteFL.class);
             MinecraftForge.EVENT_BUS.register(UnmoldRecipeWrapperKaoliniteFL.class);
             MinecraftForge.EVENT_BUS.register(UnmoldMalletRecipe.class);
-        }
-        if (TFCFlorae.TFCElementiaAdded)
-        {
-            MinecraftForge.EVENT_BUS.register(ItemKaoliniteMoldTFCE.class);
-            MinecraftForge.EVENT_BUS.register(ItemUnfiredKaoliniteMoldTFCE.class);
-            MinecraftForge.EVENT_BUS.register(JEIPluginTFCECompat.class);
-            MinecraftForge.EVENT_BUS.register(CastingRecipeKaoliniteTFCEWrapper.class);
-            MinecraftForge.EVENT_BUS.register(UnmoldRecipeKaoliniteTFCEWrapper.class);
-            MinecraftForge.EVENT_BUS.register(UnmoldRecipeKaolinite.class);
         }
         */
 

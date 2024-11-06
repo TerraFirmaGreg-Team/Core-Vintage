@@ -33,7 +33,28 @@ def use_util = true
 
 dependencies {
 
-  implementation rfg.deobf("curse.maven:lolasm-460609:4800875")
+  //tfg
+  implementation rfg.deobf("curse.maven:tfctech-unofficial-340660:3209033")
+  implementation rfg.deobf("curse.maven:tfc-cellars-add-on-431185:3640604")
+  implementation rfg.deobf("curse.maven:tfc-things-386285:3378687")
+
+  implementation rfg.deobf("curse.maven:ftb-utilities-forge-237102:3157548")
+  implementation rfg.deobf("curse.maven:ftb-quests-forge-289412:3156637")
+  implementation rfg.deobf("curse.maven:ftb-library-legacy-forge-237167:2985811")
+  implementation rfg.deobf("curse.maven:item-filters-309674:3003364")
+
+  implementation rfg.deobf("curse.maven:puddles-312039:2668151")
+
+//  implementation rfg.deobf("curse.maven:galacticraft-legacy-564236:4671122")
+//  implementation rfg.deobf("curse.maven:extra-planets-241291:4756976")
+
+  compileOnly("curse.maven:ic2_classic-242942:3014827")
+
+//  implementation rfg.deobf("curse.maven:mjrlegendslib-284331:3344068")
+
+  implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5519022-sources-5519024")
+  implementation rfg.deobf("curse.maven:gregicality-multiblocks-564858:5619513-sources-5619515")
+
   compileOnly("curse.maven:crafttweaker-239197:5013567")
   compileOnly("curse.maven:mtlib-253211:3308160")
   compileOnly("curse.maven:tfc-pams-harvestcraft-compatibility-mod-452032:3257786")
@@ -51,6 +72,7 @@ dependencies {
     implementation rfg.deobf("curse.maven:configanytime-870276:5212709")
     implementation rfg.deobf("curse.maven:codechicken-lib-1-8-242818:2779848")
     implementation rfg.deobf("curse.maven:ctm-267602:2915363")
+    implementation rfg.deobf("curse.maven:groovyscript-687577:5789690-sources-5789692")
 
 
 //    implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")

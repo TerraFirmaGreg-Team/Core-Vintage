@@ -30,8 +30,7 @@ public class TFCFlorae {
   public static final String VERSION = "@VERSION@";
   public static final String DEPENDENCIES = "required-after:tfc;"
                                             + "after:firmalife;"
-                                            + "after:tfc_ph_compat;"
-                                            + "required-after:loliasm;";
+                                            + "after:tfc_ph_compat;";
 
   @Mod.Instance
   public static TFCFlorae instance;

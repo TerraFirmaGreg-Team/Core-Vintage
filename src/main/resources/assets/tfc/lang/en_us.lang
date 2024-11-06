@@ -1357,6 +1357,7 @@ tile.tfc.sea_ice.name=Sea Ice
 tile.tfc.nest_box.name=Nest Box
 tile.tfc.powderkeg.name=Powderkeg
 tile.tfc.flower_pot.name=Flower Pot
+tile.tfc.alloy_calculator.name=Alloy Calculator
 
 ## Decoration blocks
 tile.tfc.alabaster.bricks.cyan.name=Cyan Alabaster Bricks

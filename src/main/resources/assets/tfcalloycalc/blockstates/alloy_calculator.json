@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "tfcalloycalc:alloy_calculator" },
+        "facing=south": { "model": "tfcalloycalc:alloy_calculator", "y": 180 },
+        "facing=west":  { "model": "tfcalloycalc:alloy_calculator", "y": 270 },
+        "facing=east":  { "model": "tfcalloycalc:alloy_calculator", "y": 90 }
+    }
+}

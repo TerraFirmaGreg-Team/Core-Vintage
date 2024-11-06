@@ -5,3 +5,4 @@
 - [TFC-Florae](https://github.com/Verph/TFC-Florae/tree/1.12.2)
 - [TFC-Florae-Fixes](https://github.com/BananaFructa/TFC-Florae-Fixes) +
 - [TFC-TowerHeat](https://github.com/BananaFructa/TFC-TowerHeat) +
+- [TFCAlloyCalc](https://github.com/Quarris/TFCAlloyCalc)

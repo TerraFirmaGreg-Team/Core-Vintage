@@ -81,44 +81,40 @@ public class ItemSeedsTFC extends Item implements IPlantable {
       return EnumActionResult.SUCCESS;
     } else if (this.crop == Crop.RICE && cropBlock.canPlaceBlockAt(worldIn, pos)) {
       RayTraceResult raytraceresult = this.rayTrace(worldIn, player, true);
-      if (raytraceresult == null) {
-        return EnumActionResult.PASS;
-      } else {
-        if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {
-          BlockPos blockpos = raytraceresult.getBlockPos();
-          if (!worldIn.isBlockModifiable(player, blockpos)
-              || !player.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) {
+      if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {
+        BlockPos blockpos = raytraceresult.getBlockPos();
+        if (!worldIn.isBlockModifiable(player, blockpos)
+            || !player.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) {
+          return EnumActionResult.FAIL;
+        }
+
+        BlockPos blockpos1 = blockpos.up();
+        IBlockState iblockstate = worldIn.getBlockState(blockpos);
+        if (iblockstate.getMaterial() == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0 && worldIn.isAirBlock(blockpos1)
+            && iblockstate == ChunkGenTFC.FRESH_WATER) {
+          BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
+          worldIn.setBlockState(blockpos1, BlockCropTFC.get(this.crop).getDefaultState());
+          if (ForgeEventFactory.onPlayerBlockPlace(player, blocksnapshot, EnumFacing.UP, hand).isCanceled()) {
+            blocksnapshot.restore(true, false);
             return EnumActionResult.FAIL;
           }
 
-          BlockPos blockpos1 = blockpos.up();
-          IBlockState iblockstate = worldIn.getBlockState(blockpos);
-          if (iblockstate.getMaterial() == Material.WATER && (Integer) iblockstate.getValue(BlockLiquid.LEVEL) == 0 && worldIn.isAirBlock(blockpos1)
-              && iblockstate == ChunkGenTFC.FRESH_WATER) {
-            BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
-            worldIn.setBlockState(blockpos1, BlockCropTFC.get(this.crop).getDefaultState());
-            if (ForgeEventFactory.onPlayerBlockPlace(player, blocksnapshot, EnumFacing.UP, hand).isCanceled()) {
-              blocksnapshot.restore(true, false);
-              return EnumActionResult.FAIL;
-            }
-
-            worldIn.setBlockState(blockpos1, BlockCropTFC.get(this.crop).getDefaultState(), 11);
-            if (player instanceof EntityPlayerMP) {
-              CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, blockpos1, itemstack);
-            }
-
-            if (!player.capabilities.isCreativeMode) {
-              itemstack.shrink(1);
-            }
-
-            player.addStat(StatList.getObjectUseStats(this));
-            worldIn.playSound(player, blockpos, SoundEvents.BLOCK_WATERLILY_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            return EnumActionResult.SUCCESS;
+          worldIn.setBlockState(blockpos1, BlockCropTFC.get(this.crop).getDefaultState(), 11);
+          if (player instanceof EntityPlayerMP) {
+            CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, blockpos1, itemstack);
           }
-        }
 
-        return EnumActionResult.FAIL;
+          if (!player.capabilities.isCreativeMode) {
+            itemstack.shrink(1);
+          }
+
+          player.addStat(StatList.getObjectUseStats(this));
+          worldIn.playSound(player, blockpos, SoundEvents.BLOCK_WATERLILY_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+          return EnumActionResult.SUCCESS;
+        }
       }
+
+      return EnumActionResult.FAIL;
     } else {
       return EnumActionResult.FAIL;
     }
@@ -127,49 +123,43 @@ public class ItemSeedsTFC extends Item implements IPlantable {
   @Nonnull
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
     ItemStack itemstack = playerIn.getHeldItem(handIn);
-    RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, true);
-    if (this.crop == Crop.RICE) {
-      if (raytraceresult == null) {
-        return new ActionResult(EnumActionResult.PASS, itemstack);
-      } else {
-        if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {
-          BlockPos blockpos = raytraceresult.getBlockPos();
-          if (!worldIn.isBlockModifiable(playerIn, blockpos)
-              || !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) {
-            return new ActionResult(EnumActionResult.FAIL, itemstack);
-          }
-
-          BlockPos blockpos1 = blockpos.up();
-          IBlockState iblockstate = worldIn.getBlockState(blockpos);
-          if (iblockstate.getMaterial() == Material.WATER && (Integer) iblockstate.getValue(BlockLiquid.LEVEL) == 0 && worldIn.isAirBlock(blockpos1)
-              && iblockstate == ChunkGenTFC.FRESH_WATER) {
-            BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
-            worldIn.setBlockState(blockpos1, BlockCropTFC.get(this.crop).getDefaultState());
-            if (ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, EnumFacing.UP, handIn).isCanceled()) {
-              blocksnapshot.restore(true, false);
-              return new ActionResult(EnumActionResult.FAIL, itemstack);
-            }
-
-            worldIn.setBlockState(blockpos1, BlockCropTFC.get(this.crop).getDefaultState(), 11);
-            if (playerIn instanceof EntityPlayerMP) {
-              CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) playerIn, blockpos1, itemstack);
-            }
-
-            if (!playerIn.capabilities.isCreativeMode) {
-              itemstack.shrink(1);
-            }
-
-            playerIn.addStat(StatList.getObjectUseStats(this));
-            worldIn.playSound(playerIn, blockpos, SoundEvents.BLOCK_WATERLILY_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            return new ActionResult(EnumActionResult.SUCCESS, itemstack);
-          }
+    RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, false);
+    if (crop == Crop.RICE) {
+      if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {
+        BlockPos blockpos = raytraceresult.getBlockPos().up();
+        Material material = worldIn.getBlockState(blockpos.down()).getMaterial();
+        if ((!worldIn.isBlockModifiable(playerIn, blockpos)
+             || !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) && material == Material.WATER) {
+          return new ActionResult<>(EnumActionResult.FAIL, itemstack);
         }
 
-        return new ActionResult(EnumActionResult.FAIL, itemstack);
+        BlockPos blockpos1 = blockpos.up();
+        IBlockState iblockstate = worldIn.getBlockState(blockpos);
+        if (iblockstate.getMaterial() == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0 && worldIn.isAirBlock(blockpos1)
+            && iblockstate == ChunkGenTFC.FRESH_WATER && material != Material.WATER) {
+          BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
+          worldIn.setBlockState(blockpos1, BlockCropTFC.get(crop).getDefaultState());
+          if (ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, EnumFacing.UP, handIn).isCanceled()) {
+            blocksnapshot.restore(true, false);
+            return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+          }
+
+          worldIn.setBlockState(blockpos1, BlockCropTFC.get(crop).getDefaultState(), 11);
+          if (playerIn instanceof EntityPlayerMP) {
+            CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) playerIn, blockpos1, itemstack);
+          }
+
+          if (!playerIn.capabilities.isCreativeMode) {
+            itemstack.shrink(1);
+          }
+
+          playerIn.addStat(StatList.getObjectUseStats(this));
+          worldIn.playSound(playerIn, blockpos, SoundEvents.BLOCK_WATERLILY_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+          return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+        }
       }
-    } else {
-      return new ActionResult(EnumActionResult.FAIL, itemstack);
     }
+    return new ActionResult<>(EnumActionResult.FAIL, itemstack);
   }
 
   @Override

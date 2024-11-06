@@ -79,8 +79,7 @@ final class ClientInteractionManagerTFCF {
         if (flag) {result = EnumActionResult.SUCCESS;}
       }
 
-      if (!flag && itemstack.getItem() instanceof ItemBlock) {
-        ItemBlock itemblock = (ItemBlock) itemstack.getItem();
+      if (!flag && itemstack.getItem() instanceof ItemBlock itemblock) {
 
         if (!itemblock.canPlaceBlockOnSide(worldIn, pos, direction, player, itemstack)) {
           return EnumActionResult.FAIL;
@@ -108,8 +107,8 @@ final class ClientInteractionManagerTFCF {
           if (event.getUseItem() != Event.Result.DENY) {
             EnumActionResult enumactionresult;
             // Fire the alternative item use action
-            if (itemstack.getItem() instanceof ItemSeedsTFC) {
-              enumactionresult = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) itemstack.getItem()), player, worldIn, pos, hand, direction, hitX, hitY, hitZ);
+            if (itemstack.getItem() instanceof ItemSeedsTFC itemSeedsTFC) {
+              enumactionresult = InteractionInjectTFCF.onItemUse(itemSeedsTFC, player, worldIn, pos, hand, direction, hitX, hitY, hitZ);
             } else
             // fire the normal one as well
             {enumactionresult = itemstack.onItemUse(player, worldIn, pos, hand, direction, hitX, hitY, hitZ);}
@@ -123,8 +122,8 @@ final class ClientInteractionManagerTFCF {
         } else {
           ItemStack copyForUse = itemstack.copy();
           if (event.getUseItem() != Event.Result.DENY) {
-            if (itemstack.getItem() instanceof ItemSeedsTFC) {
-              result = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) itemstack.getItem()), player, worldIn, pos, hand, direction, hitX, hitY, hitZ);
+            if (itemstack.getItem() instanceof ItemSeedsTFC itemSeedsTFC) {
+              result = InteractionInjectTFCF.onItemUse(itemSeedsTFC, player, worldIn, pos, hand, direction, hitX, hitY, hitZ);
             } else
             // fire the normal one as well
             {result = itemstack.onItemUse(player, worldIn, pos, hand, direction, hitX, hitY, hitZ);}

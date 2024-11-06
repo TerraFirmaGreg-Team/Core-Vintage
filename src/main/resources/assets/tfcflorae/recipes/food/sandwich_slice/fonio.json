@@ -14,8 +14,7 @@
     ],
     "B": [
       {
-        "type": "forge:ore_dict",
-        "ore": "sliceFonio"
+        "item": "tfcflorae:food/fonio_slice"
       }
     ],
     "F": [

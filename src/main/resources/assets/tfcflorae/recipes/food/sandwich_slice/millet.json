@@ -14,8 +14,7 @@
     ],
     "B": [
       {
-        "type": "forge:ore_dict",
-        "ore": "sliceMillet"
+        "item": "tfcflorae:food/millet_slice"
       }
     ],
     "F": [

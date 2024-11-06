@@ -135,16 +135,18 @@ public final class InteractionManagerTFCF {
     if (!PROCESSING_INTERACTION.get()) {
       PROCESSING_INTERACTION.set(true);
       IRightClickBlockAction action = InteractionManagerTFCF.findItemUseAction(event.getItemStack());
-      if (event.getItemStack().getItem() instanceof ItemSeedsTFC) {
-        // Use alternative handling
-        EnumActionResult result;
-        if (event.getSide() == Side.CLIENT) {
-          result = ClientInteractionManagerTFCF.processRightClickBlock(event);
-        } else {
-          result = ServerInteractionManagerTFCF.processRightClickBlock(event);
+      if (action != null) {
+        if (event.getItemStack().getItem() instanceof ItemSeedsTFC) {
+          // Use alternative handling
+          EnumActionResult result;
+          if (event.getSide() == Side.CLIENT) {
+            result = ClientInteractionManagerTFCF.processRightClickBlock(event);
+          } else {
+            result = ServerInteractionManagerTFCF.processRightClickBlock(event);
+          }
+          event.setCancellationResult(result);
+          event.setCanceled(true);
         }
-        event.setCancellationResult(result);
-        event.setCanceled(true);
       }
       PROCESSING_INTERACTION.set(false);
     }
@@ -159,7 +161,7 @@ public final class InteractionManagerTFCF {
       if (event.getSide() == Side.CLIENT) {
         result = ClientInteractionManagerTFCF.processRightClickItem(event, action);
       } else {
-        result = ClientInteractionManagerTFCF.processRightClickItem(event, action);
+        result = ServerInteractionManagerTFCF.processRightClickItem(event, action);
       }
       event.setCancellationResult(result);
       event.setCanceled(true);

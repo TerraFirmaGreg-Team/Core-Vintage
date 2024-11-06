@@ -14,8 +14,7 @@
     ],
     "B": [
       {
-        "type": "forge:ore_dict",
-        "ore": "sliceQuinoa"
+        "item": "tfcflorae:food/quinoa_slice"
       }
     ],
     "F": [

@@ -20,7 +20,6 @@ import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillTier;
 import net.dries007.tfc.world.classic.worldgen.WorldGenWildCrops;
 import tfcflorae.objects.items.ItemsTFCF;
-import tfcflorae.objects.items.food.ItemFoodTFCF;
 import tfcflorae.world.worldgen.WorldGenWildCropsTFCF;
 
 import javax.annotation.Nonnull;
@@ -33,28 +32,28 @@ import static tfcflorae.util.agriculture.CropTFCF.CropType.PICKABLE;
 import static tfcflorae.util.agriculture.CropTFCF.CropType.SIMPLE;
 
 public enum CropTFCF implements ICrop {
-  AMARANTH(ItemsTFCF.AMARANTH, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 6, 0.5f, SIMPLE),
-  BUCKWHEAT(ItemsTFCF.BUCKWHEAT, -5f, 0f, 30f, 35f, 50f, 100f, 400f, 450f, 6, 0.5f, SIMPLE),
-  FONIO(ItemsTFCF.MILLET, 7f, 15f, 40f, 50f, 50f, 70f, 200f, 250f, 6, 0.5f, SIMPLE),
-  MILLET(ItemsTFCF.MILLET, 0f, 4f, 35f, 40f, 70f, 90f, 400f, 450f, 6, 0.5f, SIMPLE),
-  QUINOA(ItemsTFCF.QUINOA, -10f, -5f, 35f, 40f, 50f, 100f, 400f, 450f, 6, 0.5f, SIMPLE),
-  SPELT(ItemsTFCF.SPELT, 0f, 4f, 35f, 40f, 70f, 90f, 400f, 450f, 6, 0.5f, SIMPLE),
+  AMARANTH(() -> new ItemStack(ItemsTFCF.AMARANTH), () -> ItemStack.EMPTY, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 6, 0.5f, SIMPLE),
+  BUCKWHEAT(() -> new ItemStack(ItemsTFCF.BUCKWHEAT), () -> ItemStack.EMPTY, -5f, 0f, 30f, 35f, 50f, 100f, 400f, 450f, 6, 0.5f, SIMPLE),
+  FONIO(() -> new ItemStack(ItemsTFCF.MILLET), () -> ItemStack.EMPTY, 7f, 15f, 40f, 50f, 50f, 70f, 200f, 250f, 6, 0.5f, SIMPLE),
+  MILLET(() -> new ItemStack(ItemsTFCF.MILLET), () -> ItemStack.EMPTY, 0f, 4f, 35f, 40f, 70f, 90f, 400f, 450f, 6, 0.5f, SIMPLE),
+  QUINOA(() -> new ItemStack(ItemsTFCF.QUINOA), () -> ItemStack.EMPTY, -10f, -5f, 35f, 40f, 50f, 100f, 400f, 450f, 6, 0.5f, SIMPLE),
+  SPELT(() -> new ItemStack(ItemsTFCF.SPELT), () -> ItemStack.EMPTY, 0f, 4f, 35f, 40f, 70f, 90f, 400f, 450f, 6, 0.5f, SIMPLE),
   //WILD_RICE(ItemsTFCF.WILD_RICE, 0f, 4f, 35f, 40f, 50f, 100f, 400f, 450f, 8, 0.5f, SIMPLE),
-  BLACK_EYED_PEAS(ItemsTFCF.BLACK_EYED_PEAS, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, PICKABLE),
-  CAYENNE_PEPPER(() -> new ItemStack(ItemFoodTFCF.get(ItemsTFCF.RED_CAYENNE_PEPPER)), () -> new ItemStack(ItemFoodTFCF.get(ItemsTFCF.GREEN_CAYENNE_PEPPER)), 4f, 12f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, PICKABLE),
+  BLACK_EYED_PEAS(() -> new ItemStack(ItemsTFCF.BLACK_EYED_PEAS), () -> ItemStack.EMPTY, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, PICKABLE),
+  CAYENNE_PEPPER(() -> new ItemStack(ItemsTFCF.RED_CAYENNE_PEPPER), () -> new ItemStack(ItemsTFCF.GREEN_CAYENNE_PEPPER), 4f, 12f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, PICKABLE),
   //CELERY(ItemsTFCF.CELERY, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 8, 0.5f, SIMPLE),
-  GINGER(ItemsTFCF.GINGER, 0f, 5f, 35f, 40f, 50f, 100f, 400f, 450f, 5, 0.5f, SIMPLE),
-  GINSENG(ItemsTFCF.GINSENG, 0f, 5f, 35f, 40f, 50f, 100f, 400f, 450f, 5, 0.5f, SIMPLE),
+  GINGER(() -> new ItemStack(ItemsTFCF.GINGER), () -> ItemStack.EMPTY, 0f, 5f, 35f, 40f, 50f, 100f, 400f, 450f, 5, 0.5f, SIMPLE),
+  GINSENG(() -> new ItemStack(ItemsTFCF.GINSENG), () -> ItemStack.EMPTY, 0f, 5f, 35f, 40f, 50f, 100f, 400f, 450f, 5, 0.5f, SIMPLE),
   //LETTUCE(ItemsTFCF.LETTUCE, 0f, 10f, 35f, 40f, 50f, 100f, 400f, 450f, 8, 0.5f, SIMPLE),
   //PEANUT(ItemsTFCF.PEANUT, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 6, 0.5f, SIMPLE),
-  RUTABAGA(ItemsTFCF.RUTABAGA, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, SIMPLE),
-  TURNIP(ItemsTFCF.TURNIP, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, SIMPLE),
+  RUTABAGA(() -> new ItemStack(ItemsTFCF.RUTABAGA), () -> ItemStack.EMPTY, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, SIMPLE),
+  TURNIP(() -> new ItemStack(ItemsTFCF.TURNIP), () -> ItemStack.EMPTY, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, SIMPLE),
   //MUSTARD(ItemsTFCF.MUSTARD, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, SIMPLE),
   //SWEET_POTATO(ItemsTFCF.SWEET_POTATO, 0f, 4f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, SIMPLE),
-  SUGAR_BEET(ItemsTFCF.SUGAR_BEET, 0f, 5f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, SIMPLE),
-  PURPLE_GRAPE(ItemsTFCF.PURPLE_GRAPE, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 8, 0.5f, PICKABLE),
-  GREEN_GRAPE(ItemsTFCF.GREEN_GRAPE, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 8, 0.5f, PICKABLE),
-  LIQUORICE_ROOT(ItemsTFCF.LIQUORICE_ROOT, -20f, -1f, 18f, 26f, 50f, 60f, 310f, 340f, 8, 0.5f, SIMPLE),
+  SUGAR_BEET(() -> new ItemStack(ItemsTFCF.SUGAR_BEET), () -> ItemStack.EMPTY, 0f, 5f, 35f, 40f, 50f, 100f, 400f, 450f, 7, 0.5f, SIMPLE),
+  PURPLE_GRAPE(() -> new ItemStack(ItemsTFCF.PURPLE_GRAPE), () -> ItemStack.EMPTY, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 8, 0.5f, PICKABLE),
+  GREEN_GRAPE(() -> new ItemStack(ItemsTFCF.GREEN_GRAPE), () -> ItemStack.EMPTY, 0f, 8f, 35f, 40f, 50f, 100f, 400f, 450f, 8, 0.5f, PICKABLE),
+  LIQUORICE_ROOT(() -> new ItemStack(ItemsTFCF.LIQUORICE_ROOT), () -> ItemStack.EMPTY, -20f, -1f, 18f, 26f, 50f, 60f, 310f, 340f, 8, 0.5f, SIMPLE),
   COFFEA(() -> new ItemStack(ItemsTFCF.COFFEA_CHERRIES), () -> ItemStack.EMPTY, 7f, 15f, 40f, 50f, 50f, 70f, 200f, 250f, 8, 0.5f, PICKABLE),
   AGAVE(() -> new ItemStack(ItemsTFCF.AGAVE), () -> ItemStack.EMPTY, 12f, 18f, 35f, 40f, 50f, 100f, 400f, 450f, 6, 0.5f, SIMPLE),
   COCA(() -> new ItemStack(ItemsTFCF.COCA_LEAF), () -> ItemStack.EMPTY, 0f, 18f, 35f, 40f, 50f, 100f, 400f, 450f, 6, 0.5f, PICKABLE),
@@ -77,6 +76,39 @@ public enum CropTFCF implements ICrop {
     }
   }
 
+  // how this crop generates food items
+  private final Supplier<ItemStack> foodDrop;
+  private final Supplier<ItemStack> foodDropEarly;
+  // temperature compatibility range
+  private final float tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive;
+  // rainfall compatibility range
+  private final float rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive;
+  // growth
+  private final int growthStages; // the number of blockstates the crop has for growing, ignoring wild state
+  private final float growthTime; // Time is measured in % of months, scales with calendar month length
+  // which crop block behavior implementation is used
+  private final CropType type;
+
+  CropTFCF(Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropType type) {
+    this.foodDrop = foodDrop;
+    this.foodDropEarly = foodDropEarly;
+
+    this.tempMinAlive = tempMinAlive;
+    this.tempMinGrow = tempMinGrow;
+    this.tempMaxGrow = tempMaxGrow;
+    this.tempMaxAlive = tempMaxAlive;
+
+    this.rainMinAlive = rainMinAlive;
+    this.rainMinGrow = rainMinGrow;
+    this.rainMaxGrow = rainMaxGrow;
+    this.rainMaxAlive = rainMaxAlive;
+
+    this.growthStages = growthStages;
+    this.growthTime = growthTime; // This is measured in % of months
+
+    this.type = type;
+  }
+
   /**
    * the count to add to the amount of food dropped when applying the skill bonus
    *
@@ -97,45 +129,6 @@ public enum CropTFCF implements ICrop {
    */
   public static int getSkillSeedBonus(Skill skill, Random random) {
     if (skill.getTier().isAtLeast(SkillTier.ADEPT) && random.nextInt(10 - 2 * skill.getTier().ordinal()) == 0) {return 1;} else {return 0;}
-  }
-
-  // how this crop generates food items
-  private final Supplier<ItemStack> foodDrop;
-  private final Supplier<ItemStack> foodDropEarly;
-  // temperature compatibility range
-  private final float tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive;
-  // rainfall compatibility range
-  private final float rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive;
-  // growth
-  private final int growthStages; // the number of blockstates the crop has for growing, ignoring wild state
-  private final float growthTime; // Time is measured in % of months, scales with calendar month length
-  // which crop block behavior implementation is used
-  private final CropType type;
-
-  CropTFCF(ItemFoodTFCF foodDrop, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive,
-           float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages,
-           float growthTime, CropType type) {
-    this(() -> new ItemStack(ItemFoodTFCF.get(foodDrop)), () -> ItemStack.EMPTY, tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive, rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive, growthStages, growthTime, type);
-  }
-
-  CropTFCF(Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropType type) {
-    this.foodDrop = foodDrop;
-    this.foodDropEarly = foodDropEarly;
-
-    this.tempMinAlive = tempMinAlive;
-    this.tempMinGrow = tempMinGrow;
-    this.tempMaxGrow = tempMaxGrow;
-    this.tempMaxAlive = tempMaxAlive;
-
-    this.rainMinAlive = rainMinAlive;
-    this.rainMinGrow = rainMinGrow;
-    this.rainMaxGrow = rainMaxGrow;
-    this.rainMaxAlive = rainMaxAlive;
-
-    this.growthStages = growthStages;
-    this.growthTime = growthTime; // This is measured in % of months
-
-    this.type = type;
   }
 
   @Override

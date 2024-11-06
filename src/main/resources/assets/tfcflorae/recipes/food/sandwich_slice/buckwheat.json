@@ -14,8 +14,7 @@
     ],
     "B": [
       {
-        "type": "forge:ore_dict",
-        "ore": "sliceBuckwheat"
+        "item": "tfcflorae:food/buckwheat_slice"
       }
     ],
     "F": [

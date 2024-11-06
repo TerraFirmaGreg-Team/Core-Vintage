@@ -14,8 +14,7 @@
     ],
     "B": [
       {
-        "type": "forge:ore_dict",
-        "ore": "sliceAmaranth"
+        "item": "tfcflorae:food/amaranth_slice"
       }
     ],
     "F": [

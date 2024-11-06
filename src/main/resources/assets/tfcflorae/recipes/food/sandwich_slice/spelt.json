@@ -14,8 +14,7 @@
     ],
     "B": [
       {
-        "type": "forge:ore_dict",
-        "ore": "sliceSpelt"
+        "item": "tfcflorae:food/spelt_slice"
       }
     ],
     "F": [

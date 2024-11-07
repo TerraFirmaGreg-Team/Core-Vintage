@@ -7,3 +7,4 @@
 - [TFC-TowerHeat](https://github.com/BananaFructa/TFC-TowerHeat) +
 - [TFCAlloyCalc](https://github.com/Quarris/TFCAlloyCalc) +
 - [Puddles](https://github.com/OrderedChaos-Dev/Puddles) +
+- [TFC-TNG-Cellars-Addon](https://github.com/russellShyvers/TFC-TNG-Cellars-Addon)

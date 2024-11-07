@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:wood/planks/joshua_tree"
+    }
+  ],
+  "result": {
+    "item": "tfc:wood/button/joshua_tree",
+    "count": 1
+  }
+}

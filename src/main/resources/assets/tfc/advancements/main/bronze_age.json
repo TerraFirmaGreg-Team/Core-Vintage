@@ -1,0 +1,53 @@
+{
+  "display": {
+    "icon": {
+      "item": "tfc:metal/anvil/bronze"
+    },
+    "frame": "goal",
+    "title": {
+      "translate": "advancements.tfc.main.bronze_age.title"
+    },
+    "description": {
+      "translate": "advancements.tfc.main.bronze_age.description"
+    }
+  },
+  "parent": "tfc:main/metal_anvil",
+  "criteria": {
+    "bronze": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "tfc:metal/anvil/bronze"
+          }
+        ]
+      }
+    },
+    "bismuth": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "tfc:metal/anvil/bismuth_bronze"
+          }
+        ]
+      }
+    },
+    "black": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "tfc:metal/anvil/black_bronze"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["bronze", "bismuth", "black"]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

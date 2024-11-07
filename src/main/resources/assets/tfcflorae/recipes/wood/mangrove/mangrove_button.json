@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:wood/planks/mangrove"
+    }
+  ],
+  "result": {
+    "item": "tfc:wood/button/mangrove",
+    "count": 1
+  }
+}

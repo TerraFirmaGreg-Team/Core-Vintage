@@ -322,7 +322,7 @@ ij_java_wrap_long_lines = false
 ij_java_wrap_semicolon_after_call_chain = false
 
 [{*.har,*.jsb2,*.jsb3,*.json,*.jsonc,*.png.mcmeta,*.postman_collection,*.postman_environment,.babelrc,.eslintrc,.prettierrc,.stylelintrc,.ws-context,jest.config,mcmod.info,pack.mcmeta}]
-ij_json_array_wrapping = off
+# ij_json_array_wrapping = off
 ij_json_keep_blank_lines_in_code = 0
 ij_json_keep_indents_on_empty_lines = false
 ij_json_keep_line_breaks = false

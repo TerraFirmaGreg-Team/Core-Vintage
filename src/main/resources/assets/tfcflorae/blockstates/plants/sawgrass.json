@@ -1,0 +1,172 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0",
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/sawgrass_tall_0",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "when": {
+        "age": "1",
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/sawgrass_tall_1",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "when": {
+        "age": "2",
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/sawgrass_tall_2",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "when": {
+        "age": "3",
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/sawgrass_tall_3",
+          "weight": 1
+        },
+        {
+          "model": "tfc:plants/sawgrass_tall_4",
+          "weight": 1
+        },
+        {
+          "model": "tfc:plants/sawgrass_tall_5",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "when": {
+        "age": "0",
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/sawgrass_lower_water_0",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "when": {
+        "age": "1",
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/sawgrass_lower_water_1",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "when": {
+        "age": "2",
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/sawgrass_lower_water_2",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "when": {
+        "age": "3",
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/sawgrass_lower_water_3",
+          "weight": 1
+        },
+        {
+          "model": "tfc:plants/sawgrass_lower_water_4",
+          "weight": 1
+        },
+        {
+          "model": "tfc:plants/sawgrass_lower_water_5",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "when": {
+        "age": "0",
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/sawgrass_upper_water_0",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "when": {
+        "age": "1",
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/sawgrass_upper_water_1",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "when": {
+        "age": "2",
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/sawgrass_upper_water_2",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "when": {
+        "age": "3",
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfc:plants/sawgrass_upper_water_3",
+          "weight": 1
+        },
+        {
+          "model": "tfc:plants/sawgrass_upper_water_4",
+          "weight": 1
+        },
+        {
+          "model": "tfc:plants/sawgrass_upper_water_5",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

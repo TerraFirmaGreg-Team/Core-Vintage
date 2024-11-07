@@ -1,0 +1,20 @@
+{
+  "type": "tfc:damage_item_shaped",
+  "pattern": [
+    "XB",
+    " B"
+  ],
+  "key": {
+    "X": {
+      "type": "forge:ore_dict",
+      "ore": "saw"
+    },
+    "B": {
+      "item": "firmalife:orange_pole"
+    }
+  },
+  "result": {
+    "item": "tfcflorae:wood/fruit_tree/support/orange",
+    "count": 8
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XBX",
+    "XBX"
+  ],
+  "key": {
+    "X": {
+      "item": "tfc:wood/planks/joshua_tree"
+    },
+    "B": {
+      "item": "tfc:wood/lumber/joshua_tree"
+    }
+  },
+  "result": {
+    "item": "tfc:wood/fence/joshua_tree",
+    "count": 8
+  }
+}

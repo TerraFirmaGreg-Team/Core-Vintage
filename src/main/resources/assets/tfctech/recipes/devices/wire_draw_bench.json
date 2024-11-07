@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WLT",
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "T": {
+      "item": "tfctech:metal/iron_tongs"
+    },
+    "L": {
+      "item": "tfctech:wiredraw/leather_belt"
+    },
+    "W": {
+      "item": "tfctech:wiredraw/winch"
+    },
+    "X": {
+      "type": "forge:ore_dict",
+      "ore": "sheetWroughtIron"
+    }
+  },
+  "result": {
+    "item": "tfctech:wire_draw_bench",
+    "count": 1
+  }
+}

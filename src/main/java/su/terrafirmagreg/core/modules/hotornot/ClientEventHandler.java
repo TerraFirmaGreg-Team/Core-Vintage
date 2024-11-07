@@ -26,6 +26,7 @@ public class ClientEventHandler {
     if (TFGConfig.General.TOOLTIP && !stack.isEmpty() && !HotLists.isRemoved(stack)) {
       if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
         IFluidHandlerItem fluidHandlerItem = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+        if (fluidHandlerItem == null) {return;}
         FluidStack fluidStack = fluidHandlerItem.drain(1000, false);
         if (fluidStack != null) {
           for (FluidEffect effect : FluidEffect.values()) {
@@ -47,6 +48,7 @@ public class ClientEventHandler {
       } else if (Loader.isModLoaded("tfc")) {
         if (stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null)) {
           IItemHeat heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+          if (heat == null) {return;}
           if (heat.getTemperature() >= TFGConfig.General.HOT_ITEM) {
             event.getToolTip()
                  .add(FluidEffect.HOT.color + new TextComponentTranslation(FluidEffect.HOT.tooltip).getUnformattedText());

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "XX",
+    "XX"
+  ],
+  "key": {
+    "X": {
+      "type": "forge:ore_dict",
+      "ore": "lumberMangrove"
+    }
+  },
+  "result": {
+    "item": "tfc:wood/door/mangrove",
+    "count": 2
+  }
+}

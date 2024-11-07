@@ -1,0 +1,50 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+		"back": "tfctech:blocks/devices/smeltery_firebox/back",
+		"top": "tfctech:blocks/devices/smeltery_firebox/top",
+		"side2": "tfctech:blocks/devices/smeltery_firebox/side2",
+		"bottom": "tfctech:blocks/devices/smeltery_firebox/bottom",
+		"chute": "tfctech:blocks/devices/smeltery_firebox/chute",
+		"gate_bricks": "tfctech:blocks/devices/smeltery_firebox/gate_bricks",
+		"side1": "tfctech:blocks/devices/smeltery_firebox/side1",
+		"particle": "tfctech:blocks/devices/smeltery_firebox/top"
+    },
+    "model": "tfctech:smeltery_firebox"
+  },
+  "variants": {
+    "lit": {
+      "true": {
+        "textures": {
+          "gate_bricks": "tfctech:blocks/devices/smeltery_firebox/gate_bricks_lit"
+        }
+      },
+      "false": {
+        "textures": {
+          "gate_bricks": "tfctech:blocks/devices/smeltery_firebox/gate_bricks"
+        }
+      }
+    },
+    "facing": {
+      "south": {
+        "y": 180
+      },
+      "east": {
+        "y": 90
+      },
+      "north": {},
+      "west": {
+        "y": 270
+      }
+    },
+    "inventory": [
+      {
+        "transform": "forge:default-block"
+      }
+    ],
+    "normal": [
+      {}
+    ]
+  }
+}

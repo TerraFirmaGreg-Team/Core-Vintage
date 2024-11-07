@@ -1,0 +1,9 @@
+{
+  "type": "tfctech:unmold_recipe",
+  "ingredients": [
+    {
+      "item": "tfctech:ceramics/mold/rackwheel_piece"
+    }
+  ],
+  "result": "rackwheel_piece"
+}

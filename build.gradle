@@ -164,8 +164,6 @@ dependencies {
   annotationProcessor 'org.projectlombok:lombok:1.18.+'
   testCompileOnly 'org.projectlombok:lombok:1.18.+'
   testAnnotationProcessor 'org.projectlombok:lombok:1.18.+'
-
-  implementation 'it.unimi.dsi:fastutil:8.5.+'
 }
 
 apply from: 'gradle/scripts/dependencies.gradle'
@@ -241,6 +239,11 @@ runClient {
 }
 runServer {
   workingDir = file('run/server')
+}
+
+wrapper {
+  gradleVersion = '8.10.2'
+  distributionUrl = distributionUrl.replace("bin", "all")
 }
 
 idea {
@@ -330,6 +333,7 @@ tasks.register('prioritizeCoremods') {
     }
   }
 }
+
 
 idea.project.settings {
   taskTriggers {

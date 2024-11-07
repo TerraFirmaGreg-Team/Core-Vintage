@@ -1,0 +1,16 @@
+{
+  "type": "tfc:damage_item_shapeless",
+  "ingredients": [
+    {
+      "item": "firmalife:cinnamon_pole"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "saw"
+    }
+  ],
+  "result": {
+    "item": "tfcflorae:wood/fruit_tree/lumber/cinnamon",
+    "count": 4
+  }
+}

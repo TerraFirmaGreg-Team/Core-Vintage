@@ -109,6 +109,7 @@ import static net.dries007.tfc.objects.fluids.FluidsTFC.MILK;
 import static net.dries007.tfc.objects.fluids.FluidsTFC.MILK_VINEGAR;
 import static net.dries007.tfc.objects.fluids.FluidsTFC.OLIVE_OIL;
 import static net.dries007.tfc.objects.fluids.FluidsTFC.OLIVE_OIL_WATER;
+import static net.dries007.tfc.objects.fluids.FluidsTFC.RUM;
 import static net.dries007.tfc.objects.fluids.FluidsTFC.SALT_WATER;
 import static net.dries007.tfc.objects.fluids.FluidsTFC.TANNIN;
 import static net.dries007.tfc.objects.fluids.FluidsTFC.VINEGAR;
@@ -188,7 +189,7 @@ public final class DefaultRecipes {
                        72 * ICalendar.TICKS_IN_HOUR).setRegistryName("beer"),
       new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 500), new IngredientItemFood(IIngredient.of("apple")), new FluidStack(FluidsTFC.CIDER.get(), 500), ItemStack.EMPTY,
                        72 * ICalendar.TICKS_IN_HOUR).setRegistryName("cider"),
-      new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 500), IIngredient.of(Items.SUGAR), new FluidStack(FluidsTFC.RUM.get(), 500), ItemStack.EMPTY,
+      new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 500), IIngredient.of(Items.SUGAR), new FluidStack(RUM.get(), 500), ItemStack.EMPTY,
                        72 * ICalendar.TICKS_IN_HOUR).setRegistryName("rum"),
       new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 500), new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(Food.RICE_FLOUR))), new FluidStack(FluidsTFC.SAKE.get(), 500), ItemStack.EMPTY,
                        72 * ICalendar.TICKS_IN_HOUR).setRegistryName("sake"),
@@ -200,8 +201,26 @@ public final class DefaultRecipes {
                        72 * ICalendar.TICKS_IN_HOUR).setRegistryName("corn_whiskey"),
       new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 500), new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(Food.RYE_FLOUR))), new FluidStack(FluidsTFC.RYE_WHISKEY.get(), 500), ItemStack.EMPTY,
                        72 * ICalendar.TICKS_IN_HOUR).setRegistryName("rye_whiskey"),
+
+      new BarrelRecipe(IIngredient.of(FluidsTFC.RUM.get(), 1000), IIngredient.of(Items.AIR), new FluidStack(FluidsTFC.AGED_RUM.get(), 1000), new ItemStack(Items.AIR),
+                       8 * ICalendar.TICKS_IN_DAY * 3).setRegistryName("aged_rum"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.BEER.get(), 1000), IIngredient.of(Items.AIR), new FluidStack(FluidsTFC.AGED_BEER.get(), 1000), new ItemStack(Items.AIR),
+                       8 * ICalendar.TICKS_IN_DAY * 3).setRegistryName("aged_beer"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.WHISKEY.get(), 1000), IIngredient.of(Items.AIR), new FluidStack(FluidsTFC.AGED_WHISKEY.get(), 1000), new ItemStack(Items.AIR),
+                       8 * ICalendar.TICKS_IN_DAY * 3).setRegistryName("aged_whiskey"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.RYE_WHISKEY.get(), 1000), IIngredient.of(Items.AIR), new FluidStack(FluidsTFC.AGED_RYE_WHISKEY.get(), 1000), new ItemStack(Items.AIR),
+                       8 * ICalendar.TICKS_IN_DAY * 3).setRegistryName("aged_rye_whiskey"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.CORN_WHISKEY.get(), 1000), IIngredient.of(Items.AIR), new FluidStack(FluidsTFC.AGED_CORN_WHISKEY.get(), 1000), new ItemStack(Items.AIR),
+                       8 * ICalendar.TICKS_IN_DAY * 3).setRegistryName("aged_corn_whiskey"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.SAKE.get(), 1000), IIngredient.of(Items.AIR), new FluidStack(FluidsTFC.AGED_SAKE.get(), 1000), new ItemStack(Items.AIR),
+                       8 * ICalendar.TICKS_IN_DAY * 3).setRegistryName("aged_sake"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.VODKA.get(), 1000), IIngredient.of(Items.AIR), new FluidStack(FluidsTFC.AGED_VODKA.get(), 1000), new ItemStack(Items.AIR),
+                       8 * ICalendar.TICKS_IN_DAY * 3).setRegistryName("aged_vodka"),
+      new BarrelRecipe(IIngredient.of(FluidsTFC.CIDER.get(), 1000), IIngredient.of(Items.AIR), new FluidStack(FluidsTFC.AGED_CIDER.get(), 1000), new ItemStack(Items.AIR),
+                       8 * ICalendar.TICKS_IN_DAY * 3).setRegistryName("aged_cider"),
+
       // Vinegar - Classic created 1000mb with 10 oz, which would be 20 items per full barrel at 5 oz/item. Instead we now require 40 items, so conversion is 2.5 oz/item.
-      new BarrelRecipe(IIngredient.of(250, FluidsTFC.BEER.get(), FluidsTFC.CIDER.get(), FluidsTFC.RUM.get(), FluidsTFC.SAKE.get(), FluidsTFC.VODKA.get(), FluidsTFC.WHISKEY.get(), FluidsTFC.CORN_WHISKEY.get(), FluidsTFC.RYE_WHISKEY.get()), new IngredientItemFood(IIngredient.of("categoryFruit")), new FluidStack(FluidsTFC.VINEGAR.get(), 250), ItemStack.EMPTY,
+      new BarrelRecipe(IIngredient.of(250, FluidsTFC.BEER.get(), FluidsTFC.CIDER.get(), RUM.get(), FluidsTFC.SAKE.get(), FluidsTFC.VODKA.get(), FluidsTFC.WHISKEY.get(), FluidsTFC.CORN_WHISKEY.get(), FluidsTFC.RYE_WHISKEY.get()), new IngredientItemFood(IIngredient.of("categoryFruit")), new FluidStack(FluidsTFC.VINEGAR.get(), 250), ItemStack.EMPTY,
                        8 * ICalendar.TICKS_IN_HOUR).setRegistryName("vinegar"),
       // Food preservation
       BarrelRecipeFoodTraits.pickling(new IngredientItemFood(IIngredient.of("categoryFruit"))).setRegistryName("pickling_fruit"),

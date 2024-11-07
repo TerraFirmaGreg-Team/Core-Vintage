@@ -415,6 +415,65 @@ public final class ConfigTFC {
       @Config.Comment("Which inventory slots will ammo refill/pickup search for quivers?")
       @Config.LangKey("config." + MOD_ID + ".general.player.quiverSearch")
       public QuiverSearch quiverSearch = QuiverSearch.HOTBAR;
+
+      @Config.RequiresMcRestart
+      @Config.Comment("If enabled, you can get drunk from drinking aged alcohol. Try TFC Medicinal for a nice way to combat this.")
+      @Config.LangKey("config." + MOD_ID + ".general.enableDrunkness")
+      public boolean enableDrunkness = true;
+
+      @Config.RequiresMcRestart
+      @Config.Comment("How many ticks does the haste effect last?")
+      @Config.LangKey("config." + MOD_ID + ".general.hasteTicks")
+      public int hasteTicks = 9600;
+
+      @Config.RequiresMcRestart
+      @Config.Comment("What level should the haste effect be? 0 = I, 1 = II, 2 = III ...")
+      @Config.LangKey("config." + MOD_ID + ".general.hasteLevel")
+      public int hasteLevel = 1;
+
+
+      @Config.RequiresMcRestart
+      @Config.Comment("How many ticks does the speed effect last?")
+      @Config.LangKey("config." + MOD_ID + ".general.speedTicks")
+      public int speedTicks = 9600;
+
+      @Config.RequiresMcRestart
+      @Config.Comment("What level should the speed effect be? 0 = I, 1 = II, 2 = III ...")
+      @Config.LangKey("config." + MOD_ID + ".general.speedLevel")
+      public int speedLevel = 1;
+
+
+      @Config.RequiresMcRestart
+      @Config.Comment("How many ticks does the jump boost effect last?")
+      @Config.LangKey("config." + MOD_ID + ".general.jumpBoostTicks")
+      public int jumpBoostTicks = 9600;
+
+      @Config.RequiresMcRestart
+      @Config.Comment("What level should the jump boost effect be? 0 = I, 1 = II, 2 = III ...")
+      @Config.LangKey("config." + MOD_ID + ".general.jumpBoostLevel")
+      public int jumpBoostLevel = 1;
+
+
+      @Config.RequiresMcRestart
+      @Config.Comment("How many ticks does the night vision effect last?")
+      @Config.LangKey("config." + MOD_ID + ".general.strengthTicks")
+      public int strengthTicks = 9600;
+
+      @Config.RequiresMcRestart
+      @Config.Comment("What level should the strength effect be? 0 = I, 1 = II, 2 = III ...")
+      @Config.LangKey("config." + MOD_ID + ".general.strengthLevel")
+      public int strengthLevel = 0;
+
+
+      @Config.RequiresMcRestart
+      @Config.Comment("How many ticks does the resistance effect last?")
+      @Config.LangKey("config." + MOD_ID + ".general.resistanceTicks")
+      public int resistanceTicks = 9600;
+
+      @Config.RequiresMcRestart
+      @Config.Comment("What level should the resistance effect be? 0 = I, 1 = II, 2 = III ...")
+      @Config.LangKey("config." + MOD_ID + ".general.resistanceLevel")
+      public int resistanceLevel = 0;
     }
 
     public static final class WorldCFG {

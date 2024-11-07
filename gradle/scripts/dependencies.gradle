@@ -43,8 +43,6 @@ dependencies {
   implementation rfg.deobf("curse.maven:ftb-library-legacy-forge-237167:2985811")
   implementation rfg.deobf("curse.maven:item-filters-309674:3003364")
 
-  implementation rfg.deobf("curse.maven:puddles-312039:2668151")
-
 //  implementation rfg.deobf("curse.maven:galacticraft-legacy-564236:4671122")
 //  implementation rfg.deobf("curse.maven:extra-planets-241291:4756976")
 

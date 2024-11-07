@@ -127,6 +127,8 @@ import net.dries007.tfc.util.agriculture.BerryBush;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.FruitTree;
 
+import lombok.Getter;
+
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.Rock.Type.ANVIL;
 import static net.dries007.tfc.api.types.Rock.Type.BRICKS;
@@ -193,177 +195,79 @@ public final class BlocksTFC {
   public static final BlockGravel AGGREGATE = getNull();
   public static final Block FIRE_BRICKS = getNull();
   public static final BlockAlloyCalculator ALLOY_CALCULATOR = getNull();
+  public static final BlockPuddle PUDDLE = getNull();
 
   // All these are for use in model registration. Do not use for block lookups.
   // Use the static get methods in the classes instead.
+  @Getter
   private static ImmutableList<ItemBlock> allNormalItemBlocks;
+  @Getter
   private static ImmutableList<ItemBlock> allInventoryItemBlocks;
+  @Getter
   private static ImmutableList<ItemBlockBarrel> allBarrelItemBlocks;
 
+  @Getter
   private static ImmutableList<BlockFluidBase> allFluidBlocks;
+  @Getter
   private static ImmutableList<BlockRockVariant> allBlockRockVariants;
+  @Getter
   private static ImmutableList<BlockOreTFC> allOreBlocks;
+  @Getter
   private static ImmutableList<BlockWallTFC> allWallBlocks;
+  @Getter
   private static ImmutableList<BlockLogTFC> allLogBlocks;
+  @Getter
   private static ImmutableList<BlockLeavesTFC> allLeafBlocks;
+  @Getter
   private static ImmutableList<BlockFenceGateTFC> allFenceGateBlocks;
+  @Getter
   private static ImmutableList<BlockSaplingTFC> allSaplingBlocks;
+  @Getter
   private static ImmutableList<BlockDoorTFC> allDoorBlocks;
+  @Getter
   private static ImmutableList<BlockTrapDoorWoodTFC> allTrapDoorWoodBlocks;
+  @Getter
   private static ImmutableList<BlockTrapDoorMetalTFC> allTrapDoorMetalBlocks;
+  @Getter
   private static ImmutableList<BlockStairsTFC> allStairsBlocks;
+  @Getter
   private static ImmutableList<BlockSlabTFC.Half> allSlabBlocks;
+  @Getter
   private static ImmutableList<BlockChestTFC> allChestBlocks;
+  @Getter
   private static ImmutableList<BlockAnvilTFC> allAnvils;
+  @Getter
   private static ImmutableList<BlockMetalSheet> allSheets;
+  @Getter
   private static ImmutableList<BlockMetalLamp> allLamps;
+  @Getter
   private static ImmutableList<BlockToolRack> allToolRackBlocks;
+  @Getter
   private static ImmutableList<BlockCropTFC> allCropBlocks;
+  @Getter
   private static ImmutableList<BlockCropDead> allDeadCropBlocks;
+  @Getter
   private static ImmutableList<BlockPlantTFC> allPlantBlocks;
+  @Getter
   private static ImmutableList<BlockPlantTFC> allGrassBlocks;
+  @Getter
   private static ImmutableList<BlockLoom> allLoomBlocks;
+  @Getter
   private static ImmutableList<BlockSupport> allSupportBlocks;
+  @Getter
   private static ImmutableList<BlockFlowerPotTFC> allFlowerPots;
 
+  @Getter
   private static ImmutableList<BlockFruitTreeSapling> allFruitTreeSaplingBlocks;
+  @Getter
   private static ImmutableList<BlockFruitTreeTrunk> allFruitTreeTrunkBlocks;
+  @Getter
   private static ImmutableList<BlockFruitTreeBranch> allFruitTreeBranchBlocks;
+  @Getter
   private static ImmutableList<BlockFruitTreeLeaves> allFruitTreeLeavesBlocks;
 
+  @Getter
   private static ImmutableList<BlockBerryBush> allBerryBushBlocks;
-
-  public static ImmutableList<ItemBlock> getAllNormalItemBlocks() {
-    return allNormalItemBlocks;
-  }
-
-  public static ImmutableList<ItemBlock> getAllInventoryItemBlocks() {
-    return allInventoryItemBlocks;
-  }
-
-  public static ImmutableList<ItemBlockBarrel> getAllBarrelItemBlocks() {
-    return allBarrelItemBlocks;
-  }
-
-  public static ImmutableList<BlockFluidBase> getAllFluidBlocks() {
-    return allFluidBlocks;
-  }
-
-  public static ImmutableList<BlockRockVariant> getAllBlockRockVariants() {
-    return allBlockRockVariants;
-  }
-
-  public static ImmutableList<BlockLogTFC> getAllLogBlocks() {
-    return allLogBlocks;
-  }
-
-  public static ImmutableList<BlockLeavesTFC> getAllLeafBlocks() {
-    return allLeafBlocks;
-  }
-
-  public static ImmutableList<BlockOreTFC> getAllOreBlocks() {
-    return allOreBlocks;
-  }
-
-  public static ImmutableList<BlockFenceGateTFC> getAllFenceGateBlocks() {
-    return allFenceGateBlocks;
-  }
-
-  public static ImmutableList<BlockWallTFC> getAllWallBlocks() {
-    return allWallBlocks;
-  }
-
-  public static ImmutableList<BlockSaplingTFC> getAllSaplingBlocks() {
-    return allSaplingBlocks;
-  }
-
-  public static ImmutableList<BlockDoorTFC> getAllDoorBlocks() {
-    return allDoorBlocks;
-  }
-
-  public static ImmutableList<BlockTrapDoorWoodTFC> getAllTrapDoorWoodBlocks() {
-    return allTrapDoorWoodBlocks;
-  }
-
-  public static ImmutableList<BlockTrapDoorMetalTFC> getAllTrapDoorMetalBlocks() {
-    return allTrapDoorMetalBlocks;
-  }
-
-  public static ImmutableList<BlockStairsTFC> getAllStairsBlocks() {
-    return allStairsBlocks;
-  }
-
-  public static ImmutableList<BlockSlabTFC.Half> getAllSlabBlocks() {
-    return allSlabBlocks;
-  }
-
-  public static ImmutableList<BlockChestTFC> getAllChestBlocks() {
-    return allChestBlocks;
-  }
-
-  public static ImmutableList<BlockAnvilTFC> getAllAnvils() {
-    return allAnvils;
-  }
-
-  public static ImmutableList<BlockMetalSheet> getAllSheets() {
-    return allSheets;
-  }
-
-  public static ImmutableList<BlockMetalLamp> getAllLamps() {
-    return allLamps;
-  }
-
-  public static ImmutableList<BlockToolRack> getAllToolRackBlocks() {
-    return allToolRackBlocks;
-  }
-
-  public static ImmutableList<BlockCropTFC> getAllCropBlocks() {
-    return allCropBlocks;
-  }
-
-  public static ImmutableList<BlockCropDead> getAllDeadCropBlocks() {
-    return allDeadCropBlocks;
-  }
-
-  public static ImmutableList<BlockPlantTFC> getAllPlantBlocks() {
-    return allPlantBlocks;
-  }
-
-  public static ImmutableList<BlockPlantTFC> getAllGrassBlocks() {
-    return allGrassBlocks;
-  }
-
-  public static ImmutableList<BlockLoom> getAllLoomBlocks() {
-    return allLoomBlocks;
-  }
-
-  public static ImmutableList<BlockSupport> getAllSupportBlocks() {
-    return allSupportBlocks;
-  }
-
-  public static ImmutableList<BlockFlowerPotTFC> getAllFlowerPots() {
-    return allFlowerPots;
-  }
-
-  public static ImmutableList<BlockFruitTreeSapling> getAllFruitTreeSaplingBlocks() {
-    return allFruitTreeSaplingBlocks;
-  }
-
-  public static ImmutableList<BlockFruitTreeTrunk> getAllFruitTreeTrunkBlocks() {
-    return allFruitTreeTrunkBlocks;
-  }
-
-  public static ImmutableList<BlockFruitTreeBranch> getAllFruitTreeBranchBlocks() {
-    return allFruitTreeBranchBlocks;
-  }
-
-  public static ImmutableList<BlockFruitTreeLeaves> getAllFruitTreeLeavesBlocks() {
-    return allFruitTreeLeavesBlocks;
-  }
-
-  public static ImmutableList<BlockBerryBush> getAllBerryBushBlocks() {
-    return allBerryBushBlocks;
-  }
 
   @SubscribeEvent
   @SuppressWarnings("ConstantConditions")
@@ -390,11 +294,13 @@ public final class BlocksTFC {
     normalItemBlocks.add(new ItemBlockTFC(register(r, "quern", new BlockQuern(), CT_MISC)));
     normalItemBlocks.add(new ItemBlockCrucible(register(r, "crucible", new BlockCrucible(), CT_MISC)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "blast_furnace", new BlockBlastFurnace(), CT_MISC)));
-    inventoryItemBlocks.add(new ItemBlockTFC(register(r, "alloy_calculator", new BlockAlloyCalculator(), CT_MISC)));
+
     inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bellows", new BlockBellows(), CT_MISC)));
     inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bloomery", new BlockBloomery(), CT_MISC)));
     inventoryItemBlocks.add(new ItemBlockTFC(register(r, "nest_box", new BlockNestBox(), CT_MISC)));
     inventoryItemBlocks.add(new ItemBlockSluice(register(r, "sluice", new BlockSluice(), CT_MISC)));
+    inventoryItemBlocks.add(new ItemBlockTFC(register(r, "alloy_calculator", new BlockAlloyCalculator(), CT_MISC)));
+    inventoryItemBlocks.add(new ItemBlockTFC(register(r, "puddle", new BlockPuddle(), CT_MISC)));
 
     normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockIceTFC(FluidsTFC.SALT_WATER.get()), CT_MISC)));
 

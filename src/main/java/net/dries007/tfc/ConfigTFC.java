@@ -759,6 +759,10 @@ public final class ConfigTFC {
     @Config.LangKey("config." + MOD_ID + ".devices.bellows")
     public static final BellowsCFG BELLOWS = new BellowsCFG();
 
+    @Config.Comment("Puddle")
+    @Config.LangKey("config." + MOD_ID + ".devices.puddle")
+    public static final PuddleCFG PUDDLE = new PuddleCFG();
+
     public static final class TemperatureCFG {
 
       @Config.Comment("Modifier for how quickly items will gain or lose heat. Smaller number = slower temperature changes.")
@@ -948,6 +952,24 @@ public final class ConfigTFC {
       @Config.Comment("Enable Shift-Right clicking of Jars to dump water out. Enabling this will not pour an actual water block onto the ground.")
       @Config.LangKey("config." + MOD_ID + ".devices.jug.dumpWaterOnShiftRightClick")
       public boolean dumpWaterOnShiftRightClick = true;
+    }
+
+    public static final class PuddleCFG {
+
+      @Config.Comment({
+        "The game will pick a random block every tick for every active chunk",
+        "Then it will check if a puddle can be placed there",
+        "Then it generates a random number between 0-99",
+        "And if that number is less than this puddle rate number, it puts a puddle",
+        "That means any value over 99 will flood your world with puddles"
+      })
+      @Config.RangeInt(min = 0, max = 99)
+      public int puddleRate = 15;
+
+      @Config.Comment({
+        "Toggles filling glass bottles with puddle water"
+      })
+      public boolean canUseGlassBottle = true;
     }
 
     public static final class GoldPanCFG {

@@ -31,6 +31,8 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
@@ -44,6 +46,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -52,6 +55,8 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.GameRuleChangeEvent;
@@ -60,6 +65,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
@@ -81,6 +87,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import net.dries007.tfc.ConfigTFC.Devices;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
@@ -143,7 +150,9 @@ import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import puddles.Puddles;
+
+import java.util.Iterator;
+import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
@@ -312,11 +321,33 @@ public final class CommonEventHandler {
     final EntityPlayer player = event.getEntityPlayer();
 
     // Fire onBlockActivated for in world crafting devices
-    if (state.getBlock() instanceof BlockAnvilTFC
-        || state.getBlock() instanceof BlockStoneAnvil
-        || state.getBlock() instanceof BlockQuern
-        || state.getBlock() instanceof BlockSupport) {
+    if (state.getBlock() instanceof BlockAnvilTFC || state.getBlock() instanceof BlockStoneAnvil
+        || state.getBlock() instanceof BlockQuern || state.getBlock() instanceof BlockSupport) {
       event.setUseBlock(Event.Result.ALLOW);
+    }
+
+    if (state.getBlock() == BlocksTFC.PUDDLE) {
+      if (stack.getItem() == Items.GLASS_BOTTLE && Devices.PUDDLE.canUseGlassBottle) {
+        if (event.getFace() == EnumFacing.UP) {
+          if (!world.isRemote) {
+            stack.shrink(1);
+            if (!player.inventory.addItemStackToInventory(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER))) {
+              player.dropItem(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), false);
+            }
+            world.setBlockToAir(pos);
+          } else {
+            world.playSound(player, player.posX, player.posY, player.posZ, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+          }
+        }
+      }
+      if (stack.getItem() instanceof ItemHoe hoe) {
+        world.setBlockToAir(pos);
+        hoe.onItemUse(player, world, pos.down(), event.getHand(), event.getFace(), 0, 0, 0);
+      }
+      if (stack.getItem() instanceof ItemSpade shovel) {
+        world.setBlockToAir(pos);
+        shovel.onItemUse(player, world, pos.down(), event.getHand(), event.getFace(), 0, 0, 0);
+      }
     }
 
     // Try to drink water
@@ -329,7 +360,7 @@ public final class CommonEventHandler {
 
         boolean isFreshWater = BlocksTFC.isFreshWater(waterState);
         boolean isSaltWater = BlocksTFC.isSaltWater(waterState);
-        boolean isPuddle = puddleState == Puddles.puddle.getDefaultState();
+        boolean isPuddle = puddleState == BlocksTFC.PUDDLE.getDefaultState();
 
         if (isFreshWater && foodStats.attemptDrink(10.0F, true) ||
             isSaltWater && foodStats.attemptDrink(-1.0F, true) ||
@@ -1097,5 +1128,84 @@ public final class CommonEventHandler {
       }
     }
     return hugeHeavyCount;
+  }
+
+  @SubscribeEvent
+  public void makeBigSplash(LivingFallEvent event) {
+    EntityLivingBase entity = event.getEntityLiving();
+    BlockPos pos = entity.getPosition();
+    World world = entity.getEntityWorld();
+
+    if (!world.isRemote) {
+      if (world.getBlockState(pos).getBlock() == BlocksTFC.PUDDLE) {
+        float distance = event.getDistance();
+        if (distance < 3.0F) {
+          ((WorldServer) world).spawnParticle(EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, 15, 0.0D, 0.0D, 0.0D, 0.13D, Block.getStateId(BlocksTFC.PUDDLE.getDefaultState()));
+          ((WorldServer) world).spawnParticle(EnumParticleTypes.WATER_SPLASH, entity.posX, entity.posY, entity.posZ, 15, 0.0D, 0.0D, 0.0D, 0.13D, Block.getStateId(BlocksTFC.PUDDLE.getDefaultState()));
+        } else {
+          float f = (float) MathHelper.ceil(distance - 3.0F);
+
+          double d0 = Math.min((double) (0.2F + f / 15.0F), 2.5D);
+          int i = (int) (200.0D * d0);
+
+          for (int a = 0; a < 20; a++) {
+            double x = 0.8 * (world.rand.nextDouble() - world.rand.nextDouble());
+            double z = 0.8 * (world.rand.nextDouble() - world.rand.nextDouble());
+            ((WorldServer) world).spawnParticle(EnumParticleTypes.WATER_SPLASH, entity.posX + x, entity.posY, entity.posZ + z, i / 2, 0.0D, 0.0D, 0.0D, 0.25D);
+          }
+          ((WorldServer) world).spawnParticle(EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, i, 0.0D, 0.0D, 0.0D, 0.4D, Block.getStateId(BlocksTFC.PUDDLE.getDefaultState()));
+          world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+        }
+      }
+    }
+  }
+
+  @SubscribeEvent
+  public void placePuddles(TickEvent.ServerTickEvent event) {
+    if (event.phase == TickEvent.Phase.END) {
+      WorldServer world = DimensionManager.getWorld(0);
+      try {
+        if (world.getTotalWorldTime() % 10 == 0) {
+          Iterator<Chunk> iterator = world.getPlayerChunkMap().getChunkIterator();
+
+          while (iterator.hasNext()) {
+            Random random = world.rand;
+            ChunkPos chunkPos = iterator.next().getPos();
+
+            int x = random.nextInt(8) - random.nextInt(8);
+            int z = random.nextInt(8) - random.nextInt(8);
+            BlockPos pos = chunkPos.getBlock(8 + x, 0, 8 + z);
+
+            int y = world.getHeight(pos).getY() + random.nextInt(4) - random.nextInt(4);
+            BlockPos puddlePos = pos.add(0, y, 0);
+
+            if (this.canSpawnPuddle(world, puddlePos)) {
+              if (random.nextInt(100) < Devices.PUDDLE.puddleRate) {
+                world.setBlockState(puddlePos.up(), BlocksTFC.PUDDLE.getDefaultState(), 2);
+              }
+            }
+          }
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  private boolean canSpawnPuddle(World world, BlockPos pos) {
+    if (!world.isSideSolid(pos, EnumFacing.UP)) {return false;}
+    if (!world.isAirBlock(pos.up())) {return false;}
+    if (!world.isRaining()) {return false;}
+
+    Biome biome = world.getBiomeForCoordsBody(pos);
+    if (biome.canRain() && !biome.getEnableSnow() && (ClimateTFC.getActualTemp(pos) > 0)) {
+      for (int y = pos.getY() + 1; y < world.getHeight(); y++) {
+        BlockPos up = new BlockPos(pos.getX(), y, pos.getZ());
+        if (!world.isAirBlock(up)) {return false;}
+      }
+      return true;
+    }
+
+    return false;
   }
 }

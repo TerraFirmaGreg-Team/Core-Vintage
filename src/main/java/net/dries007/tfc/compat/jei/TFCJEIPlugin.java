@@ -365,7 +365,6 @@ public final class TFCJEIPlugin implements IModPlugin {
       if (Metal.ItemType.PROPICK.hasType(metal)) {
         registry.addRecipeCatalyst(new ItemStack(ItemMetalTool.get(metal, Metal.ItemType.PROPICK)), ROCK_LAYER_UID);
         registry.addRecipeCatalyst(new ItemStack(ItemMetalTool.get(metal, Metal.ItemType.PROPICK)), VEIN_UID);
-        registry.addRecipeCatalyst(new ItemStack(ItemMetalTool.get(metal, Metal.ItemType.PROPICK)), GT_ORE_SPAWN_UID);
       }
       if (Metal.ItemType.KNIFE.hasType(metal)) {
         registry.addRecipeCatalyst(new ItemStack(ItemMetalTool.get(metal, Metal.ItemType.KNIFE)), SCRAPING_UID);

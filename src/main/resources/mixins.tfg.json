@@ -19,7 +19,6 @@
     "gregtech.PartsRecipeHandlerMixin",
     "gregtech.ToolRecipeHandlerMixin",
     "gregtech.integration.jei.MixinJustEnoughItemsModule",
-    "puddles.PuddlesMixin",
     "tfctech.BlockLatexExtractorMixin",
     "tfctech.ItemTechMoldMixin",
     "tfctech.IUnmoldRecipeTFCTechInvoker",

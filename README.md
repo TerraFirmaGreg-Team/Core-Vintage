@@ -13,3 +13,4 @@
 - [WaterFlasks](https://github.com/Gaelmare/WaterFlasks)
 - [TerraFirmaThings](https://github.com/Lyeoj/TerraFirmaThings)
 - [astikor-carts-tfc](https://github.com/ACGaming/astikor-carts-tfc)
+- [HorsePowerTFC](https://github.com/ACGaming/HorsePowerTFC)

@@ -19,7 +19,7 @@ public class CastingRecipeWrapperEarthenwareTFCF implements IRecipeWrapper {
   private final FluidStack input;
 
   public CastingRecipeWrapperEarthenwareTFCF(Metal metal, Metal.ItemType type) {
-    input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100);
+    input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144);
     mold = new ItemStack(ItemEarthenwareMold.get(type));
     IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
     if (cap instanceof IMoldHandler) {

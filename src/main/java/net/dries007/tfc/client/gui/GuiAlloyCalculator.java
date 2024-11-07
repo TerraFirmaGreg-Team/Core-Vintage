@@ -1,14 +1,15 @@
 package net.dries007.tfc.client.gui;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.container.ContainerAlloyCalculator;
+import net.dries007.tfc.objects.te.TEAlloyCalculator;
 import net.dries007.tfc.util.Alloy;
 
 import java.util.Map;
@@ -16,15 +17,13 @@ import java.util.Map;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @SideOnly(Side.CLIENT)
-public class GuiAlloyCalculator extends GuiContainer {
+public class GuiAlloyCalculator extends GuiContainerTE<TEAlloyCalculator> {
 
   public static final ResourceLocation BG_TEX = new ResourceLocation(MOD_ID, "textures/gui/alloy_calc_gui.png");
 
-  private final ContainerAlloyCalculator container;
 
-  public GuiAlloyCalculator(ContainerAlloyCalculator container) {
-    super(container);
-    this.container = container;
+  public GuiAlloyCalculator(Container container, InventoryPlayer playerInv, TEAlloyCalculator tile) {
+    super(container, playerInv, tile, BG_TEX);
     this.ySize = 186;
   }
 
@@ -39,7 +38,7 @@ public class GuiAlloyCalculator extends GuiContainer {
   @Override
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
     this.fontRenderer.drawString("Alloy Calculator", 8, 6, 0x404040);
-    Alloy alloy = this.container.tile.getAlloy();
+    Alloy alloy = tile.getAlloy();
     if (alloy != null) {
       Metal result = alloy.getResult();
       float scale = 0.85f;

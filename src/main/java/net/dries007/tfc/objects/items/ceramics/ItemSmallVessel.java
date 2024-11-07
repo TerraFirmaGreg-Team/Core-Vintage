@@ -35,6 +35,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import com.eerussianguy.firmalife.items.ItemFoodFL;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.dries007.tfc.ConfigTFC;
@@ -58,9 +59,11 @@ import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
+import tfcflorae.objects.items.food.ItemFoodTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -69,6 +72,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 
 @ParametersAreNonnullByDefault
 public class ItemSmallVessel extends ItemPottery {
@@ -306,7 +310,7 @@ public class ItemSmallVessel extends ItemPottery {
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
       return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY
-             || capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
+             || capability == ITEM_HEAT_CAPABILITY;
     }
 
     @Nullable
@@ -388,7 +392,17 @@ public class ItemSmallVessel extends ItemPottery {
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
       IItemSize size = CapabilityItemSize.getIItemSize(stack);
       if (size != null) {
-        return size.getSize(stack).isSmallerThan(Size.NORMAL);
+        if (size.getSize(stack).isSmallerThan(Size.NORMAL)) {
+          if (stack.hasCapability(ITEM_HEAT_CAPABILITY, null) && !(stack.getItem() instanceof ItemPottery)) {
+            return true;
+          } else if (stack.getItem() instanceof ItemFoodTFC) {
+            return true;
+          } else if (stack.getItem() instanceof ItemFoodTFCF) {
+            return true;
+          } else {
+            return stack.getItem() instanceof ItemFoodFL;
+          }
+        }
       }
       return false;
     }

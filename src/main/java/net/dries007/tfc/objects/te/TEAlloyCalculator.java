@@ -1,22 +1,23 @@
 package net.dries007.tfc.objects.te;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.util.Alloy;
 
 import javax.annotation.Nullable;
 
-public class TEAlloyCalculator extends TileEntity {
+public class TEAlloyCalculator extends TEInventory {
 
-  public final ItemStackHandler stacks = new ItemStackHandler(9);
   private Alloy alloy;
 
   public TEAlloyCalculator() {
+    super(9);
 
   }
 
@@ -26,30 +27,41 @@ public class TEAlloyCalculator extends TileEntity {
 
   public void calculateAlloy() {
     Alloy computedAlloy = new Alloy();
-    for (int slot = 0; slot < this.stacks.getSlots(); slot++) {
-      computedAlloy.add(this.stacks.getStackInSlot(slot));
+    for (int slot = 0; slot < this.inventory.getSlots(); slot++) {
+      computedAlloy.add(this.inventory.getStackInSlot(slot));
     }
-    if (computedAlloy.getAmount() == 0) {this.alloy = null;} else {this.alloy = computedAlloy;}
+    if (computedAlloy.getAmount() == 0) {
+      this.alloy = null;
+    } else {
+      this.alloy = computedAlloy;
+    }
   }
 
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-    compound = super.writeToNBT(compound);
-    compound.setTag("Stacks", this.stacks.serializeNBT());
-    return compound;
+  public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+    nbt.setTag("Stacks", this.inventory.serializeNBT());
+    return super.writeToNBT(nbt);
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound compound) {
-    super.readFromNBT(compound);
-    this.stacks.deserializeNBT(compound.getCompoundTag("Stacks"));
+  public void readFromNBT(NBTTagCompound nbt) {
+    super.readFromNBT(nbt);
+    this.inventory.deserializeNBT(nbt.getCompoundTag("Stacks"));
+  }
+
+  @Override
+  public boolean isItemValid(int slot, ItemStack stack) {
+    if (!stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null)) {
+      return false;
+    }
+    return CapabilityMetalItem.getMetalItem(stack) != null;
   }
 
   @Nullable
   @Override
   public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
     if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-      return (T) this.stacks;
+      return (T) this.inventory;
     }
 
     return null;

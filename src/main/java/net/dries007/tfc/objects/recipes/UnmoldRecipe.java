@@ -5,7 +5,10 @@
 
 package net.dries007.tfc.objects.recipes;
 
+import su.terrafirmagreg.core.util.TFGModUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -23,6 +26,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.gson.JsonObject;
+import gregtech.api.unification.OreDictUnifier;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
@@ -60,12 +64,10 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
     for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
       ItemStack stack = inv.getStackInSlot(slot);
       if (!stack.isEmpty()) {
-        if (stack.getItem() instanceof ItemMold) {
-          ItemMold moldItem = ((ItemMold) stack.getItem());
+        if (stack.getItem() instanceof ItemMold moldItem) {
           IFluidHandler cap = stack.getCapability(FLUID_HANDLER_CAPABILITY, null);
 
-          if (cap instanceof IMoldHandler) {
-            IMoldHandler moldHandler = (IMoldHandler) cap;
+          if (cap instanceof IMoldHandler moldHandler) {
             if (!moldHandler.isMolten()) {
               Metal metal = moldHandler.getMetal();
               if (metal != null && moldItem.getType().equals(this.type) && !foundMold) {
@@ -94,8 +96,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
     for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
       ItemStack stack = inv.getStackInSlot(slot);
       if (!stack.isEmpty()) {
-        if (stack.getItem() instanceof ItemMold) {
-          ItemMold tmp = ((ItemMold) stack.getItem());
+        if (stack.getItem() instanceof ItemMold tmp) {
           if (tmp.getType().equals(this.type) && moldStack == null) {
             moldStack = stack;
           } else {
@@ -108,9 +109,8 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
     }
     if (moldStack != null) {
       IFluidHandler moldCap = moldStack.getCapability(FLUID_HANDLER_CAPABILITY, null);
-      if (moldCap instanceof IMoldHandler) {
-        IMoldHandler moldHandler = (IMoldHandler) moldCap;
-        if (!moldHandler.isMolten() && moldHandler.getAmount() == 100) {
+      if (moldCap instanceof IMoldHandler moldHandler) {
+        if (!moldHandler.isMolten() && moldHandler.getAmount() == 144) {
           return getOutputItem(moldHandler);
         }
       }
@@ -197,12 +197,25 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
   public ItemStack getOutputItem(final IMoldHandler moldHandler) {
     Metal m = moldHandler.getMetal();
     if (m != null) {
-      ItemStack output = new ItemStack(ItemMetal.get(m, type));
-      IItemHeat heat = output.getCapability(ITEM_HEAT_CAPABILITY, null);
-      if (heat != null) {
-        heat.setTemperature(moldHandler.getTemperature());
+      String oreDict = TFGModUtils.constructOredictFromTFCToGT(m, type);
+      ItemStack outputTest = OreDictUnifier.get(oreDict);
+
+      if (!outputTest.getItem().equals(Items.AIR)) {
+
+        IItemHeat heat = outputTest.getCapability(ITEM_HEAT_CAPABILITY, null);
+        if (heat != null) {
+          heat.setTemperature(moldHandler.getTemperature());
+        }
+        return outputTest;
+      } else {
+        ItemStack output = new ItemStack(ItemMetal.get(m, type));
+
+        IItemHeat heat = output.getCapability(ITEM_HEAT_CAPABILITY, null);
+        if (heat != null) {
+          heat.setTemperature(moldHandler.getTemperature());
+        }
+        return output;
       }
-      return output;
     }
     return ItemStack.EMPTY;
   }

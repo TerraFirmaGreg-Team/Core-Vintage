@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.stone;
 
+import su.terrafirmagreg.core.util.GemsFromRawRocks;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -22,8 +24,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.objects.Gem;
-import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -38,6 +38,9 @@ public class BlockRockRaw extends BlockRockVariant {
 
   public BlockRockRaw(Rock.Type type, Rock rock) {
     super(type, rock);
+
+    OreDictionaryHelper.register(this, "raw", rock);
+    OreDictionaryHelper.register(this, "raw", rock.getRockCategory());
 
     FallingBlockManager.Specification spec = new FallingBlockManager.Specification(type.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
     FallingBlockManager.registerFallable(this, spec);
@@ -83,7 +86,8 @@ public class BlockRockRaw extends BlockRockVariant {
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = playerIn.getHeldItemMainhand();
-    if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && OreDictionaryHelper.doesStackMatchOre(stack, "hammer") && !worldIn.isBlockNormalCube(pos.up(), true)) {
+    if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && OreDictionaryHelper.doesStackMatchOre(stack, "toolHammer")
+        && !worldIn.isBlockNormalCube(pos.up(), true)) {
       if (!worldIn.isRemote) {
         // Create a stone anvil
         BlockRockVariant anvil = BlockRockVariant.get(this.rock, Rock.Type.ANVIL);
@@ -106,7 +110,8 @@ public class BlockRockRaw extends BlockRockVariant {
     super.getDrops(drops, world, pos, state, fortune);
     // Raw rocks drop random gems
     if (RANDOM.nextDouble() < ConfigTFC.General.MISC.stoneGemDropChance) {
-      drops.add(ItemGem.get(Gem.getRandomDropGem(RANDOM), Gem.Grade.randomGrade(RANDOM), 1));
+      drops.add(GemsFromRawRocks.getRandomGem());
+      //drops.add(ItemGem.get(Gem.getRandomDropGem(RANDOM), Gem.Grade.randomGrade(RANDOM), 1));
     }
   }
 

@@ -65,7 +65,7 @@ public class ItemStonewareMalletMoldFL extends ItemPottery {
     private IFluidTankProperties[] fluidTankProperties;
 
     public FilledMoldCapability(@Nullable NBTTagCompound nbt) {
-      tank = new FluidTank(100);
+      tank = new FluidTank(144);
 
       if (nbt != null) {deserializeNBT(nbt);}
     }

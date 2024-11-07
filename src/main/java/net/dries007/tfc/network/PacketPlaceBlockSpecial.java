@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
+import com.feed_the_beast.ftbutilities.data.ClaimedChunks;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TEPlacedItem;
@@ -32,6 +33,7 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
     @Override
     public IMessage onMessage(PacketPlaceBlockSpecial message, MessageContext ctx) {
       final EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+
       if (player != null) {
         TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
 
@@ -55,27 +57,31 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
                 if (tile != null) {
                   tile.onRightClick(player, stack, rayTrace);
                 }
-              } else if (!stack.isEmpty() && world.getBlockState(pos.offset(hitFace).down()).isSideSolid(world, pos.offset(hitFace).down(), EnumFacing.UP)
-                         && offsetState.getBlock().isAir(offsetState, world, pos)) {
-                if (player.isSneaking()) {
-                  // If sneaking, place a flat item
-                  world.setBlockState(pos.offset(hitFace), BlocksTFC.PLACED_ITEM_FLAT.getDefaultState());
-                  TEPlacedItemFlat tile = Helpers.getTE(world, pos.offset(hitFace), TEPlacedItemFlat.class);
-                  if (tile != null) {
-                    ItemStack input;
-                    if (player.isCreative()) {
-                      input = stack.copy();
-                      input.setCount(1);
-                    } else {
-                      input = stack.splitStack(1);
+              } else if (!stack.isEmpty() && world.getBlockState(pos.offset(hitFace).down()).isSideSolid(world, pos.offset(hitFace).down(), EnumFacing.UP) &&
+                         offsetState.getBlock().isAir(offsetState, world, pos)) {
+                // FTB-Utils Fix
+                if (!ClaimedChunks.blockBlockEditing(player, pos, offsetState)) {
+                  // Можно взять и поднять
+                  if (player.isSneaking()) {
+                    // If sneaking, place a flat item
+                    world.setBlockState(pos.offset(hitFace), BlocksTFC.PLACED_ITEM_FLAT.getDefaultState());
+                    TEPlacedItemFlat tile = Helpers.getTE(world, pos.offset(hitFace), TEPlacedItemFlat.class);
+                    if (tile != null) {
+                      ItemStack input;
+                      if (player.isCreative()) {
+                        input = stack.copy();
+                        input.setCount(1);
+                      } else {
+                        input = stack.splitStack(1);
+                      }
+                      tile.setStack(input);
                     }
-                    tile.setStack(input);
-                  }
-                } else {
-                  world.setBlockState(pos.offset(hitFace), BlocksTFC.PLACED_ITEM.getDefaultState());
-                  TEPlacedItem tile = Helpers.getTE(world, pos.offset(hitFace), TEPlacedItem.class);
-                  if (tile != null) {
-                    tile.insertItem(player, stack, rayTrace);
+                  } else {
+                    world.setBlockState(pos.offset(hitFace), BlocksTFC.PLACED_ITEM.getDefaultState());
+                    TEPlacedItem tile = Helpers.getTE(world, pos.offset(hitFace), TEPlacedItem.class);
+                    if (tile != null) {
+                      tile.insertItem(player, stack, rayTrace);
+                    }
                   }
                 }
               }

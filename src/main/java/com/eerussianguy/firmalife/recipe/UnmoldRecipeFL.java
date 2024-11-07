@@ -52,17 +52,15 @@ public class UnmoldRecipeFL extends IForgeRegistryEntry.Impl<IRecipe> implements
     for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
       ItemStack stack = inv.getStackInSlot(slot);
       if (!stack.isEmpty()) {
-        if (!(stack.getItem() instanceof ItemMetalMalletMold)) {
+        if (!(stack.getItem() instanceof ItemMetalMalletMold moldItem)) {
           return false;
         }
 
-        ItemMetalMalletMold moldItem = (ItemMetalMalletMold) stack.getItem();
         IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (!(cap instanceof IMoldHandler)) {
+        if (!(cap instanceof IMoldHandler moldHandler)) {
           return false;
         }
 
-        IMoldHandler moldHandler = (IMoldHandler) cap;
         if (moldHandler.isMolten()) {
           return false;
         }
@@ -86,11 +84,10 @@ public class UnmoldRecipeFL extends IForgeRegistryEntry.Impl<IRecipe> implements
     for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
       ItemStack stack = inv.getStackInSlot(slot);
       if (!stack.isEmpty()) {
-        if (!(stack.getItem() instanceof ItemMetalMalletMold)) {
+        if (!(stack.getItem() instanceof ItemMetalMalletMold tmp)) {
           return ItemStack.EMPTY;
         }
 
-        ItemMetalMalletMold tmp = (ItemMetalMalletMold) stack.getItem();
         if (!tmp.getToolName().equals(this.type) || moldStack != null) {
           return ItemStack.EMPTY;
         }
@@ -101,9 +98,8 @@ public class UnmoldRecipeFL extends IForgeRegistryEntry.Impl<IRecipe> implements
 
     if (moldStack != null) {
       IFluidHandler moldCap = moldStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-      if (moldCap instanceof IMoldHandler) {
-        IMoldHandler moldHandler = (IMoldHandler) moldCap;
-        if (!moldHandler.isMolten() && moldHandler.getAmount() == 100) {
+      if (moldCap instanceof IMoldHandler moldHandler) {
+        if (!moldHandler.isMolten() && moldHandler.getAmount() == 144) {
           return this.getOutputItem(moldHandler);
         }
       }

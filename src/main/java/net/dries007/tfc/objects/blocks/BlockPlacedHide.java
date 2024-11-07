@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import gregtech.api.items.toolitem.ToolHelper;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import net.dries007.tfc.util.Helpers;
@@ -142,11 +143,12 @@ public class BlockPlacedHide extends Block {
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = playerIn.getHeldItem(hand);
-    if (OreDictionaryHelper.doesStackMatchOre(stack, "knife")) {
+    if (OreDictionaryHelper.doesStackMatchOre(stack, "toolKnife")) {
       if (!worldIn.isRemote) {
         // Account for the distance between the hitbox and where the hide is rendered
         Vec3d point = calculatePoint(playerIn.getLookVec(), new Vec3d(hitX, hitY, hitZ));
-        stack.damageItem(1, playerIn);
+        //stack.damageItem(1, playerIn);
+        ToolHelper.damageItem(stack, playerIn);
         TEPlacedHide tile = Helpers.getTE(worldIn, pos, TEPlacedHide.class);
         if (tile != null) {
           tile.onClicked((float) point.x, (float) point.z);

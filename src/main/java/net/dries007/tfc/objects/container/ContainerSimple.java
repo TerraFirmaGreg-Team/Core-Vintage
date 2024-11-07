@@ -77,14 +77,14 @@ public class ContainerSimple extends Container {
 
   protected void addPlayerInventorySlots(InventoryPlayer playerInv, int yOffset) {
     // Add Player Inventory Slots
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 9; j++) {
-        addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18 + yOffset));
+    for (int slotY = 0; slotY < 3; slotY++) {
+      for (int slotX = 0; slotX < 9; slotX++) {
+        addSlotToContainer(new Slot(playerInv, slotX + slotY * 9 + 9, 8 + slotX * 18, 84 + slotY * 18 + yOffset));
       }
     }
 
-    for (int k = 0; k < 9; k++) {
-      addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142 + yOffset));
+    for (int hotbar = 0; hotbar < 9; hotbar++) {
+      addSlotToContainer(new Slot(playerInv, hotbar, 8 + hotbar * 18, 142 + yOffset));
     }
   }
 }

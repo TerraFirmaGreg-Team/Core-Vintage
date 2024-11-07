@@ -1,10 +1,14 @@
 package tfcflorae.compat.jei.wrappers;
 
+import su.terrafirmagreg.core.util.TFGModUtils;
+
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
+import gregtech.api.unification.OreDictUnifier;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -25,9 +29,16 @@ public class UnmoldRecipeWrapperKaoliniteTFCF implements IRecipeWrapper {
     mold = new ItemStack(ItemKaoliniteMold.get(type));
     IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
     if (cap instanceof IMoldHandler) {
-      cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100), true);
+      cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144), true);
     }
-    output = new ItemStack(ItemMetal.get(metal, type));
+    String oreDict = TFGModUtils.constructOredictFromTFCToGT(metal, type);
+    ItemStack itemStack = OreDictUnifier.get(oreDict);
+
+    if (!itemStack.getItem().equals(Items.AIR)) {
+      this.output = itemStack;
+    } else {
+      this.output = new ItemStack(ItemMetal.get(metal, type));
+    }
   }
 
   @Override

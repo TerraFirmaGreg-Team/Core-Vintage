@@ -185,7 +185,7 @@ public class TEAnvilTFC extends TEInventory {
       case SLOT_FLUX:
         return OreDictionaryHelper.doesStackMatchOre(stack, "dustFlux");
       case SLOT_HAMMER:
-        return OreDictionaryHelper.doesStackMatchOre(stack, "hammer");
+        return OreDictionaryHelper.doesStackMatchOre(stack, "toolHammer");
       default:
         return false;
     }

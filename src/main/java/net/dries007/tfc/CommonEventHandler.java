@@ -143,6 +143,7 @@ import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import puddles.Puddles;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
@@ -320,20 +321,30 @@ public final class CommonEventHandler {
 
     // Try to drink water
     // Only possible with main hand - fixes attempting to drink even when it doesn't make sense
-    if (!player.isCreative() && stack.isEmpty() && player.getFoodStats() instanceof IFoodStatsTFC && event.getHand() == EnumHand.MAIN_HAND) {
-      IFoodStatsTFC foodStats = (IFoodStatsTFC) player.getFoodStats();
+    if (!player.isCreative() && stack.isEmpty() && player.getFoodStats() instanceof IFoodStatsTFC foodStats && event.getHand() == EnumHand.MAIN_HAND) {
       RayTraceResult result = Helpers.rayTrace(event.getWorld(), player, true);
       if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
         IBlockState waterState = world.getBlockState(result.getBlockPos());
-        boolean isFreshWater = BlocksTFC.isFreshWater(waterState), isSaltWater = BlocksTFC.isSaltWater(waterState);
-        if ((isFreshWater && foodStats.attemptDrink(10, true)) || (isSaltWater && foodStats.attemptDrink(-1, true))) {
+        IBlockState puddleState = world.getBlockState(result.getBlockPos().add(0, 1, 0));
+
+        boolean isFreshWater = BlocksTFC.isFreshWater(waterState);
+        boolean isSaltWater = BlocksTFC.isSaltWater(waterState);
+        boolean isPuddle = puddleState == Puddles.puddle.getDefaultState();
+
+        if (isFreshWater && foodStats.attemptDrink(10.0F, true) ||
+            isSaltWater && foodStats.attemptDrink(-1.0F, true) ||
+            isPuddle && foodStats.attemptDrink(5.0F, true)) {
+
           //Simulated so client will check if he would drink before updating stats
           if (!world.isRemote) {
             player.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_GENERIC_DRINK, SoundCategory.PLAYERS, 1.0f, 1.0f);
             if (isFreshWater) {
-              foodStats.attemptDrink(10, false);
+              foodStats.attemptDrink(10.0F, false);
+            } else if (isSaltWater) {
+              foodStats.attemptDrink(-1.0F, false);
             } else {
-              foodStats.attemptDrink(-1, false);
+              foodStats.attemptDrink(5.0F, false);
+              world.setBlockToAir(result.getBlockPos().add(0, 1, 0));
             }
           } else {
             foodStats.resetCooldown();
@@ -353,8 +364,7 @@ public final class CommonEventHandler {
     Block block = state.getBlock();
 
     if (ConfigTFC.General.OVERRIDES.enableHoeing) {
-      if (block instanceof BlockRockVariant) {
-        BlockRockVariant blockRock = (BlockRockVariant) block;
+      if (block instanceof BlockRockVariant blockRock) {
         if (blockRock.getType() == Rock.Type.GRASS || blockRock.getType() == Rock.Type.DIRT) {
           if (!world.isRemote) {
             world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -561,6 +571,10 @@ public final class CommonEventHandler {
 
       // Food Stats
       FoodStatsTFC.replaceFoodStats(player);
+      FoodStatsTFC foodStatsTFC = (FoodStatsTFC) player.getFoodStats();
+      foodStatsTFC.setFoodLevel(4);
+      foodStatsTFC.setThirst(25F);
+      player.setHealth(5);
 
       // Skills / Player data
       IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);

@@ -54,8 +54,8 @@ public class ItemBloom extends ItemTFC implements IMetalItem {
   @Override
   public Metal getMetal(ItemStack stack) {
     IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-    if (cap instanceof IForgeableMeasurableMetal) {
-      return ((IForgeableMeasurableMetal) cap).getMetal();
+    if (cap instanceof IForgeableMeasurableMetal handler) {
+      return handler.getMetal();
     }
     return Metal.UNKNOWN;
   }
@@ -63,9 +63,11 @@ public class ItemBloom extends ItemTFC implements IMetalItem {
   @Override
   public int getSmeltAmount(ItemStack stack) {
     IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-    if (cap instanceof IForgeableMeasurableMetal) {
-      int amount = ((IForgeableMeasurableMetal) cap).getMetalAmount();
-      if (amount > 100) {amount = 100;}
+    if (cap instanceof IForgeableMeasurableMetal handler) {
+      int amount = handler.getMetalAmount();
+      if (amount > 144) {
+        amount = 144;
+      }
       return amount;
     }
     return 0;
@@ -99,11 +101,10 @@ public class ItemBloom extends ItemTFC implements IMetalItem {
   @Override
   public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
     if (isInCreativeTab(tab)) {
-      for (int i = 100; i <= 400; i += 100) {
+      for (int i = 144; i <= 576; i += 144) {
         ItemStack stack = new ItemStack(this);
         IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-        if (cap instanceof IForgeableMeasurableMetal) {
-          IForgeableMeasurableMetal handler = (IForgeableMeasurableMetal) cap;
+        if (cap instanceof IForgeableMeasurableMetal handler) {
           handler.setMetal(Metal.WROUGHT_IRON);
           handler.setMetalAmount(i);
           items.add(stack);
@@ -116,7 +117,7 @@ public class ItemBloom extends ItemTFC implements IMetalItem {
   @Override
   public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
     if (nbt == null) {
-      return new ForgeableMeasurableMetalHandler(Metal.WROUGHT_IRON, 100);
+      return new ForgeableMeasurableMetalHandler(Metal.WROUGHT_IRON, 144);
     } else {
       return new ForgeableMeasurableMetalHandler(nbt);
     }

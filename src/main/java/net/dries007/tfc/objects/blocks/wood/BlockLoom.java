@@ -30,6 +30,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.te.TELoom;
 import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -60,6 +61,9 @@ public class BlockLoom extends BlockContainer implements IItemSize {
     setHardness(0.5f);
     setResistance(3f);
     this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+
+    OreDictionaryHelper.register(this, "loom");
+    OreDictionaryHelper.register(this, "loom", wood);
   }
 
   public static BlockLoom get(Tree wood) {

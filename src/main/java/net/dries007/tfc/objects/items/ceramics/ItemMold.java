@@ -152,7 +152,7 @@ public class ItemMold extends ItemPottery {
     private IFluidTankProperties[] fluidTankProperties;
 
     FilledMoldCapability(@Nullable NBTTagCompound nbt) {
-      tank = new FluidTank(100);
+      tank = new FluidTank(144);
 
       if (nbt != null) {
         deserializeNBT(nbt);

@@ -1,5 +1,7 @@
 package tfcflorae.objects.blocks.blocktype;
 
+import su.terrafirmagreg.core.util.GemsFromRawRocks;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -17,10 +19,8 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
-import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.util.Helpers;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
@@ -82,7 +82,8 @@ public class BlockRockRawTFCF extends BlockRockVariantTFCF {
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = playerIn.getHeldItemMainhand();
-    if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && OreDictionaryHelper.doesStackMatchOre(stack, "hammer") && !worldIn.isBlockNormalCube(pos.up(), true)) {
+    if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && OreDictionaryHelper.doesStackMatchOre(stack, "toolHammer")
+        && !worldIn.isBlockNormalCube(pos.up(), true)) {
       if (!worldIn.isRemote) {
         // Create a stone anvil
         BlockRockVariant anvil = BlockRockVariant.get(this.rock, Rock.Type.ANVIL);
@@ -105,7 +106,8 @@ public class BlockRockRawTFCF extends BlockRockVariantTFCF {
     super.getDrops(drops, world, pos, state, fortune);
     // Raw rocks drop random gems
     if (RANDOM.nextDouble() < ConfigTFC.General.MISC.stoneGemDropChance) {
-      drops.add(ItemGem.get(Gem.getRandomDropGem(RANDOM), Gem.Grade.randomGrade(RANDOM), 1));
+      drops.add(GemsFromRawRocks.getRandomGem());
+      //drops.add(ItemGem.get(Gem.getRandomDropGem(RANDOM), Gem.Grade.randomGrade(RANDOM), 1));
     }
   }
 

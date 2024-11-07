@@ -27,11 +27,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Metal.ItemType;
-import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.objects.items.metal.ItemMetal;
 import tfcflorae.TFCFlorae;
 import tfcflorae.objects.items.ItemsTFCF;
 
@@ -95,46 +91,51 @@ public class BlockUrnLoot extends Block implements IItemSize {
     Random rand = world instanceof World ? ((World) world).rand : RANDOM;
 
     int chance = rand.nextInt(2);
+// TODO заменить на gt
+    
+//    if (chance == 0) {
+//      int count = rand.nextInt(2) + 2;
+//      for (int i = 0; i < count; i++) {
+//        Item item = dropOre(rand);
+//        int amount = rand.nextInt(5) + 2;
+//
+//        drops.add(new ItemStack(item, amount, this.damageDropped(state)));
+//      }
+//
+//      if (rand.nextInt(4) == 0) {
+//        count = rand.nextInt(2) + 1;
+//        for (int i = 0; i < count; i++) {
+//          int amount = rand.nextInt(2) + 1;
+//          drops.add(new ItemStack(ItemMetal.get(getRandomMetal(rand), ItemType.INGOT), amount, this.damageDropped(state)));
+//        }
+//      }
+//    } else {
+    int count = rand.nextInt(2) + 1;
+    for (int i = 0; i < count; i++) {
+      ImmutableList<Item> seeds = getSeeds();
+      int seedIndex = rand.nextInt(seeds.size());
+      int amount = rand.nextInt(5) + 2;
 
-    if (chance == 0) {
-      int count = rand.nextInt(2) + 2;
-      for (int i = 0; i < count; i++) {
-        Item item = dropOre(rand);
-        int amount = rand.nextInt(5) + 2;
-
-        drops.add(new ItemStack(item, amount, this.damageDropped(state)));
-      }
-
-      if (rand.nextInt(4) == 0) {
-        count = rand.nextInt(2) + 1;
-        for (int i = 0; i < count; i++) {
-          int amount = rand.nextInt(2) + 1;
-          drops.add(new ItemStack(ItemMetal.get(getRandomMetal(rand), ItemType.INGOT), amount, this.damageDropped(state)));
-        }
-      }
-    } else {
-      int count = rand.nextInt(2) + 1;
-      for (int i = 0; i < count; i++) {
-        ImmutableList<Item> seeds = getSeeds();
-        int seedIndex = rand.nextInt(seeds.size());
-        int amount = rand.nextInt(5) + 2;
-
-        drops.add(new ItemStack(seeds.get(seedIndex), amount, this.damageDropped(state)));
-      }
-
-      count = rand.nextInt(2) + 1;
-      for (int i = 0; i < count; i++) {
-        Item[] dropList = {ItemsTFCF.MADDER, ItemsTFCF.WELD, ItemsTFCF.WOAD, ItemsTFCF.INDIGO, ItemsTFCF.RAPE, ItemsTFCF.HOPS, ItemsTFCF.FLAX,
-                           ItemsTFCF.LINEN_STRING, ItemsTFCF.COTTON_BOLL, ItemsTFCF.COTTON_YARN, ItemsTFCF.AGAVE, ItemsTFCF.SISAL_STRING,
-                           ItemsTFCF.PAPYRUS_FIBER, ItemsTFC.JUTE, ItemsTFC.JUTE_FIBER, ItemsTFC.SALT, ItemsTFC.MORTAR, ItemsTFC.FIRE_CLAY, Items.CLAY_BALL,
-                           ItemsTFC.WOOL, ItemsTFC.WOOL_YARN, ItemPowder.get(Powder.KAOLINITE), ItemPowder.get(Powder.GRAPHITE), ItemPowder.get(Powder.FLUX),
-                           ItemPowder.get(Powder.SALTPETER), ItemPowder.get(Powder.LAPIS_LAZULI), ItemPowder.get(Powder.SULFUR), ItemPowder.get(Powder.SALT)};
-        int dropIndex = rand.nextInt(dropList.length);
-        int amount = rand.nextInt(5) + 2;
-
-        drops.add(new ItemStack(dropList[dropIndex], amount, this.damageDropped(state)));
-      }
+      drops.add(new ItemStack(seeds.get(seedIndex), amount, this.damageDropped(state)));
     }
+
+    count = rand.nextInt(2) + 1;
+    for (int i = 0; i < count; i++) {
+      Item[] dropList = {ItemsTFCF.MADDER, ItemsTFCF.WELD, ItemsTFCF.WOAD, ItemsTFCF.INDIGO, ItemsTFCF.RAPE, ItemsTFCF.HOPS, ItemsTFCF.FLAX,
+                         ItemsTFCF.LINEN_STRING, ItemsTFCF.COTTON_BOLL, ItemsTFCF.COTTON_YARN, ItemsTFCF.AGAVE, ItemsTFCF.SISAL_STRING,
+                         ItemsTFCF.PAPYRUS_FIBER, ItemsTFC.JUTE, ItemsTFC.JUTE_FIBER, ItemsTFC.SALT, ItemsTFC.MORTAR, ItemsTFC.FIRE_CLAY, Items.CLAY_BALL,
+                         ItemsTFC.WOOL, ItemsTFC.WOOL_YARN,
+
+                         // TODO заменить на gt
+//                           ItemPowder.get(Powder.KAOLINITE), ItemPowder.get(Powder.GRAPHITE), ItemPowder.get(Powder.FLUX),
+//                           ItemPowder.get(Powder.SALTPETER), ItemPowder.get(Powder.LAPIS_LAZULI), ItemPowder.get(Powder.SULFUR), ItemPowder.get(Powder.SALT)
+      };
+      int dropIndex = rand.nextInt(dropList.length);
+      int amount = rand.nextInt(5) + 2;
+
+      drops.add(new ItemStack(dropList[dropIndex], amount, this.damageDropped(state)));
+    }
+//    }
   }
 
   @Override

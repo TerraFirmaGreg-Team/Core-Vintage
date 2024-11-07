@@ -53,11 +53,6 @@ import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_
 public class ItemKaoliniteMold extends ItemPottery {
 
   private static final EnumMap<Metal.ItemType, ItemKaoliniteMold> MAP = new EnumMap<>(Metal.ItemType.class);
-
-  public static ItemKaoliniteMold get(Metal.ItemType category) {
-    return MAP.get(category);
-  }
-
   private final Metal.ItemType type;
 
   public ItemKaoliniteMold(Metal.ItemType type) {
@@ -65,6 +60,10 @@ public class ItemKaoliniteMold extends ItemPottery {
     if (MAP.put(type, this) != null) {
       throw new IllegalStateException("There can only be one.");
     }
+  }
+
+  public static ItemKaoliniteMold get(Metal.ItemType category) {
+    return MAP.get(category);
   }
 
   @Override
@@ -149,7 +148,7 @@ public class ItemKaoliniteMold extends ItemPottery {
     private IFluidTankProperties[] fluidTankProperties;
 
     FilledMoldCapability(@Nullable NBTTagCompound nbt) {
-      tank = new FluidTank(100);
+      tank = new FluidTank(144);
 
       if (nbt != null) {
         deserializeNBT(nbt);

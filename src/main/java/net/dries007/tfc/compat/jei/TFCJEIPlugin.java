@@ -13,9 +13,12 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import gregtech.api.unification.material.Materials;
+import gregtech.common.items.ToolItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.ingredients.IIngredientBlacklist;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
@@ -27,6 +30,7 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.client.gui.GuiAnvilTFC;
@@ -71,6 +75,7 @@ import net.dries007.tfc.compat.jei.wrappers.UnmoldRecipeWrapper;
 import net.dries007.tfc.compat.jei.wrappers.VeinWrapper;
 import net.dries007.tfc.compat.jei.wrappers.WeldingRecipeWrapper;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockOreTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLoom;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -248,7 +253,8 @@ public final class TFCJEIPlugin implements IModPlugin {
     // Leather Knapping Recipes
     List<KnappingRecipeWrapper> stoneknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
                                                                          .filter(recipe -> recipe.getType() == KnappingType.STONE)
-                                                                         .flatMap(recipe -> TFCRegistries.ROCKS.getValuesCollection().stream()
+                                                                         .flatMap(recipe -> TFCRegistries.ROCKS.getValuesCollection()
+                                                                                                               .stream()
                                                                                                                .map(rock -> new KnappingRecipeWrapper.Stone(recipe, registry.getJeiHelpers()
                                                                                                                                                                             .getGuiHelper(), rock)))
                                                                          .collect(Collectors.toList());
@@ -326,6 +332,14 @@ public final class TFCJEIPlugin implements IModPlugin {
 
     registry.addRecipes(rockLayerList, ROCK_LAYER_UID);
 
+    // TODO Hide TFC Ores in HEI
+    IIngredientBlacklist blacklist = registry.getJeiHelpers().getIngredientBlacklist();
+    for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
+      for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
+        blacklist.addIngredientToBlacklist(new ItemStack(BlockOreTFC.get(ore, rock)));
+      }
+    }
+
     //Wraps all veins
     List<VeinWrapper> veinList = VeinRegistry.INSTANCE.getVeins().values()
                                                       .stream().map(VeinWrapper::new)
@@ -351,6 +365,7 @@ public final class TFCJEIPlugin implements IModPlugin {
       if (Metal.ItemType.PROPICK.hasType(metal)) {
         registry.addRecipeCatalyst(new ItemStack(ItemMetalTool.get(metal, Metal.ItemType.PROPICK)), ROCK_LAYER_UID);
         registry.addRecipeCatalyst(new ItemStack(ItemMetalTool.get(metal, Metal.ItemType.PROPICK)), VEIN_UID);
+        registry.addRecipeCatalyst(new ItemStack(ItemMetalTool.get(metal, Metal.ItemType.PROPICK)), GT_ORE_SPAWN_UID);
       }
       if (Metal.ItemType.KNIFE.hasType(metal)) {
         registry.addRecipeCatalyst(new ItemStack(ItemMetalTool.get(metal, Metal.ItemType.KNIFE)), SCRAPING_UID);
@@ -393,6 +408,8 @@ public final class TFCJEIPlugin implements IModPlugin {
     }
     registry.addRecipes(scrapingList, SCRAPING_UID);
     TFCRegistries.ROCK_CATEGORIES.forEach(category -> registry.addRecipeCatalyst(new ItemStack(ItemRockKnife.get(category)), SCRAPING_UID));
+    // Add GT Knife to Knapping Tab
+    registry.addRecipeCatalyst(ToolItems.KNIFE.get(Materials.Iron), SCRAPING_UID);
 
     //Custom handlers
     registry.handleRecipes(SaltingRecipe.class, SaltingRecipeWrapper::new, VanillaRecipeCategoryUid.CRAFTING);

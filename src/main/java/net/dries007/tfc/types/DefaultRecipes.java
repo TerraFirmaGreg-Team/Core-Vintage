@@ -79,35 +79,20 @@ import net.dries007.tfc.util.fuel.FuelManager;
 import net.dries007.tfc.util.skills.SmithingSkill;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.Metal.ItemType.AXE_HEAD;
 import static net.dries007.tfc.api.types.Metal.ItemType.BOOTS;
-import static net.dries007.tfc.api.types.Metal.ItemType.BUCKET;
 import static net.dries007.tfc.api.types.Metal.ItemType.CHESTPLATE;
-import static net.dries007.tfc.api.types.Metal.ItemType.CHISEL_HEAD;
 import static net.dries007.tfc.api.types.Metal.ItemType.DOUBLE_INGOT;
 import static net.dries007.tfc.api.types.Metal.ItemType.DOUBLE_SHEET;
 import static net.dries007.tfc.api.types.Metal.ItemType.GREAVES;
-import static net.dries007.tfc.api.types.Metal.ItemType.HAMMER_HEAD;
 import static net.dries007.tfc.api.types.Metal.ItemType.HELMET;
-import static net.dries007.tfc.api.types.Metal.ItemType.HOE_HEAD;
 import static net.dries007.tfc.api.types.Metal.ItemType.INGOT;
 import static net.dries007.tfc.api.types.Metal.ItemType.JAVELIN_HEAD;
-import static net.dries007.tfc.api.types.Metal.ItemType.KNIFE_BLADE;
 import static net.dries007.tfc.api.types.Metal.ItemType.LAMP;
 import static net.dries007.tfc.api.types.Metal.ItemType.MACE_HEAD;
-import static net.dries007.tfc.api.types.Metal.ItemType.PICK_HEAD;
-import static net.dries007.tfc.api.types.Metal.ItemType.PROPICK_HEAD;
-import static net.dries007.tfc.api.types.Metal.ItemType.ROD;
-import static net.dries007.tfc.api.types.Metal.ItemType.SAW_BLADE;
-import static net.dries007.tfc.api.types.Metal.ItemType.SCYTHE_BLADE;
-import static net.dries007.tfc.api.types.Metal.ItemType.SHEARS;
 import static net.dries007.tfc.api.types.Metal.ItemType.SHEET;
 import static net.dries007.tfc.api.types.Metal.ItemType.SHIELD;
-import static net.dries007.tfc.api.types.Metal.ItemType.SHOVEL_HEAD;
-import static net.dries007.tfc.api.types.Metal.ItemType.SWORD_BLADE;
 import static net.dries007.tfc.api.types.Metal.ItemType.TRAPDOOR;
 import static net.dries007.tfc.api.types.Metal.ItemType.TUYERE;
 import static net.dries007.tfc.api.types.Metal.ItemType.UNFINISHED_BOOTS;
@@ -129,8 +114,6 @@ import static net.dries007.tfc.objects.fluids.FluidsTFC.TANNIN;
 import static net.dries007.tfc.objects.fluids.FluidsTFC.VINEGAR;
 import static net.dries007.tfc.types.DefaultMetals.BLACK_STEEL;
 import static net.dries007.tfc.types.DefaultMetals.BLUE_STEEL;
-import static net.dries007.tfc.types.DefaultMetals.BRASS;
-import static net.dries007.tfc.types.DefaultMetals.GOLD;
 import static net.dries007.tfc.types.DefaultMetals.HIGH_CARBON_BLACK_STEEL;
 import static net.dries007.tfc.types.DefaultMetals.HIGH_CARBON_BLUE_STEEL;
 import static net.dries007.tfc.types.DefaultMetals.HIGH_CARBON_RED_STEEL;
@@ -141,33 +124,25 @@ import static net.dries007.tfc.types.DefaultMetals.STEEL;
 import static net.dries007.tfc.types.DefaultMetals.WEAK_BLUE_STEEL;
 import static net.dries007.tfc.types.DefaultMetals.WEAK_RED_STEEL;
 import static net.dries007.tfc.types.DefaultMetals.WEAK_STEEL;
-import static net.dries007.tfc.types.DefaultMetals.WROUGHT_IRON;
 import static net.dries007.tfc.util.forge.ForgeRule.BEND_ANY;
 import static net.dries007.tfc.util.forge.ForgeRule.BEND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.BEND_NOT_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.BEND_SECOND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.BEND_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.DRAW_ANY;
-import static net.dries007.tfc.util.forge.ForgeRule.DRAW_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.DRAW_NOT_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.DRAW_SECOND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.DRAW_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.HIT_ANY;
 import static net.dries007.tfc.util.forge.ForgeRule.HIT_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.HIT_NOT_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.HIT_SECOND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.HIT_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.PUNCH_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.PUNCH_NOT_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.PUNCH_SECOND_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.PUNCH_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_NOT_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_THIRD_LAST;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.ARMOR;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.WEAPONS;
 
 /**
@@ -699,26 +674,27 @@ public final class DefaultRecipes {
   public static void onRegisterAnvilRecipeEvent(RegistryEvent.Register<AnvilRecipe> event) {
     IForgeRegistry<AnvilRecipe> r = event.getRegistry();
 
+    // TODO перемещено из миксинов
     // Misc
-    addAnvil(r, DOUBLE_INGOT, SHEET, false, GENERAL, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST);
+    //addAnvil(r, DOUBLE_INGOT, SHEET, false, GENERAL, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST);
     addAnvil(r, DOUBLE_SHEET, TUYERE, true, GENERAL, BEND_LAST, BEND_SECOND_LAST);
     addAnvil(r, INGOT, LAMP, false, GENERAL, BEND_LAST, BEND_SECOND_LAST, DRAW_THIRD_LAST);
     addAnvil(r, SHEET, TRAPDOOR, false, GENERAL, BEND_LAST, DRAW_SECOND_LAST, DRAW_THIRD_LAST);
 
     // Tools
-    addAnvil(r, INGOT, PICK_HEAD, true, TOOLS, PUNCH_LAST, BEND_NOT_LAST, DRAW_NOT_LAST);
-    addAnvil(r, INGOT, SHOVEL_HEAD, true, TOOLS, PUNCH_LAST, HIT_NOT_LAST);
-    addAnvil(r, INGOT, AXE_HEAD, true, TOOLS, PUNCH_LAST, HIT_SECOND_LAST, UPSET_THIRD_LAST);
-    addAnvil(r, INGOT, HOE_HEAD, true, TOOLS, PUNCH_LAST, HIT_NOT_LAST, BEND_NOT_LAST);
-    addAnvil(r, INGOT, HAMMER_HEAD, true, TOOLS, PUNCH_LAST, SHRINK_NOT_LAST);
-    addAnvil(r, INGOT, PROPICK_HEAD, true, TOOLS, PUNCH_LAST, DRAW_NOT_LAST, BEND_NOT_LAST);
-    addAnvil(r, INGOT, SAW_BLADE, true, TOOLS, HIT_LAST, HIT_SECOND_LAST);
-    addAnvil(r, DOUBLE_INGOT, SWORD_BLADE, true, WEAPONS, HIT_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
+//    addAnvil(r, INGOT, PICK_HEAD, true, TOOLS, PUNCH_LAST, BEND_NOT_LAST, DRAW_NOT_LAST);
+//    addAnvil(r, INGOT, SHOVEL_HEAD, true, TOOLS, PUNCH_LAST, HIT_NOT_LAST);
+//    addAnvil(r, INGOT, AXE_HEAD, true, TOOLS, PUNCH_LAST, HIT_SECOND_LAST, UPSET_THIRD_LAST);
+//    addAnvil(r, INGOT, HOE_HEAD, true, TOOLS, PUNCH_LAST, HIT_NOT_LAST, BEND_NOT_LAST);
+//    addAnvil(r, INGOT, HAMMER_HEAD, true, TOOLS, PUNCH_LAST, SHRINK_NOT_LAST);
+//    addAnvil(r, INGOT, PROPICK_HEAD, true, TOOLS, PUNCH_LAST, DRAW_NOT_LAST, BEND_NOT_LAST);
+//    addAnvil(r, INGOT, SAW_BLADE, true, TOOLS, HIT_LAST, HIT_SECOND_LAST);
+//    addAnvil(r, DOUBLE_INGOT, SWORD_BLADE, true, WEAPONS, HIT_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
     addAnvil(r, DOUBLE_INGOT, MACE_HEAD, true, WEAPONS, HIT_LAST, SHRINK_NOT_LAST, BEND_NOT_LAST);
-    addAnvil(r, INGOT, SCYTHE_BLADE, true, WEAPONS, HIT_LAST, DRAW_SECOND_LAST, BEND_THIRD_LAST);
-    addAnvil(r, INGOT, KNIFE_BLADE, true, WEAPONS, HIT_LAST, DRAW_SECOND_LAST, DRAW_THIRD_LAST);
+//    addAnvil(r, INGOT, SCYTHE_BLADE, true, WEAPONS, HIT_LAST, DRAW_SECOND_LAST, BEND_THIRD_LAST);
+//    addAnvil(r, INGOT, KNIFE_BLADE, true, WEAPONS, HIT_LAST, DRAW_SECOND_LAST, DRAW_THIRD_LAST);
     addAnvil(r, INGOT, JAVELIN_HEAD, true, WEAPONS, HIT_LAST, HIT_SECOND_LAST, DRAW_THIRD_LAST);
-    addAnvil(r, INGOT, CHISEL_HEAD, true, TOOLS, HIT_LAST, HIT_NOT_LAST, DRAW_NOT_LAST);
+//    addAnvil(r, INGOT, CHISEL_HEAD, true, TOOLS, HIT_LAST, HIT_NOT_LAST, DRAW_NOT_LAST);
 
     // Armor
     addAnvil(r, DOUBLE_SHEET, UNFINISHED_HELMET, true, ARMOR, HIT_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
@@ -750,30 +726,31 @@ public final class DefaultRecipes {
     addAnvil(r, HIGH_CARBON_RED_STEEL, RED_STEEL, null);
 
     // Misc
-    addAnvil(r, "iron_bars", SHEET, WROUGHT_IRON, new ItemStack(Blocks.IRON_BARS, 8), Metal.Tier.TIER_III, GENERAL, UPSET_LAST, PUNCH_SECOND_LAST, PUNCH_THIRD_LAST);
-    addAnvil(r, "iron_bars_double", DOUBLE_SHEET, WROUGHT_IRON, new ItemStack(Blocks.IRON_BARS, 16), Metal.Tier.TIER_III, GENERAL, UPSET_LAST, PUNCH_SECOND_LAST, PUNCH_THIRD_LAST);
-    addAnvil(r, "iron_door", SHEET, WROUGHT_IRON, new ItemStack(Items.IRON_DOOR), Metal.Tier.TIER_III, GENERAL, HIT_LAST, DRAW_NOT_LAST, PUNCH_NOT_LAST);
-    addAnvil(r, "red_steel_bucket", SHEET, RED_STEEL, new ItemStack(ItemMetal.get(Metal.RED_STEEL, BUCKET)), Metal.Tier.TIER_VI, GENERAL, BEND_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
-    addAnvil(r, "blue_steel_bucket", SHEET, BLUE_STEEL, new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, BUCKET)), Metal.Tier.TIER_VI, GENERAL, BEND_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
-    addAnvil(r, "wrought_iron_grill", DOUBLE_SHEET, WROUGHT_IRON, new ItemStack(ItemsTFC.WROUGHT_IRON_GRILL), Metal.Tier.TIER_III, GENERAL, DRAW_ANY, PUNCH_LAST, PUNCH_NOT_LAST);
-    addAnvil(r, "brass_mechanisms", INGOT, BRASS, new ItemStack(ItemsTFC.BRASS_MECHANISMS, 2), Metal.Tier.TIER_II, GENERAL, PUNCH_LAST, HIT_SECOND_LAST, PUNCH_THIRD_LAST);
+//    addAnvil(r, "iron_bars", SHEET, WROUGHT_IRON, new ItemStack(Blocks.IRON_BARS, 8), Metal.Tier.TIER_III, GENERAL, UPSET_LAST, PUNCH_SECOND_LAST, PUNCH_THIRD_LAST);
+//    addAnvil(r, "iron_bars_double", DOUBLE_SHEET, WROUGHT_IRON, new ItemStack(Blocks.IRON_BARS, 16), Metal.Tier.TIER_III, GENERAL, UPSET_LAST, PUNCH_SECOND_LAST, PUNCH_THIRD_LAST);
+//    addAnvil(r, "iron_door", SHEET, WROUGHT_IRON, new ItemStack(Items.IRON_DOOR), Metal.Tier.TIER_III, GENERAL, HIT_LAST, DRAW_NOT_LAST, PUNCH_NOT_LAST);
+//    addAnvil(r, "red_steel_bucket", SHEET, RED_STEEL, new ItemStack(ItemMetal.get(Metal.RED_STEEL, BUCKET)), Metal.Tier.TIER_VI, GENERAL, BEND_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
+//    addAnvil(r, "blue_steel_bucket", SHEET, BLUE_STEEL, new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, BUCKET)), Metal.Tier.TIER_VI, GENERAL, BEND_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
+//    addAnvil(r, "wrought_iron_grill", DOUBLE_SHEET, WROUGHT_IRON, new ItemStack(ItemsTFC.WROUGHT_IRON_GRILL), Metal.Tier.TIER_III, GENERAL, DRAW_ANY, PUNCH_LAST, PUNCH_NOT_LAST);
+    //addAnvil(r, "brass_mechanisms", INGOT, BRASS, new ItemStack(ItemsTFC.BRASS_MECHANISMS, 2), Metal.Tier.TIER_II, GENERAL, PUNCH_LAST, HIT_SECOND_LAST, PUNCH_THIRD_LAST);
 
     // Rods, because they produce 2
-    Arrays.asList(WROUGHT_IRON, STEEL, GOLD).forEach(metal -> {
-      Metal metalObj = TFCRegistries.METALS.getValue(metal);
-      //noinspection ConstantConditions
-      addAnvil(r, metal.getPath() + "_rod", INGOT, metal, new ItemStack(ItemMetal.get(metalObj, ROD), 2), metalObj.getTier()
-                                                                                                                  .previous(), GENERAL, DRAW_LAST, DRAW_NOT_LAST, PUNCH_NOT_LAST);
-    });
+//    Arrays.asList(WROUGHT_IRON, STEEL, GOLD).forEach(metal -> {
+//      Metal metalObj = TFCRegistries.METALS.getValue(metal);
+//      //noinspection ConstantConditions
+//      addAnvil(r, metal.getPath() + "_rod", INGOT, metal, new ItemStack(ItemMetal.get(metalObj, ROD), 2), metalObj.getTier()
+//                                                                                                                  .previous(), GENERAL, DRAW_LAST, DRAW_NOT_LAST, PUNCH_NOT_LAST);
+//    });
   }
 
   @SubscribeEvent
   public static void onRegisterWeldingRecipeEvent(RegistryEvent.Register<WeldingRecipe> event) {
     IForgeRegistry<WeldingRecipe> r = event.getRegistry();
 
+    // TODO перемещено из миксинов
     // Basic Parts
     addWelding(r, INGOT, DOUBLE_INGOT, null);
-    addWelding(r, SHEET, DOUBLE_SHEET, null);
+    //addWelding(r, SHEET, DOUBLE_SHEET, null);
 
     // Armor
     addWelding(r, UNFINISHED_HELMET, SHEET, HELMET, true, ARMOR);
@@ -787,7 +764,7 @@ public final class DefaultRecipes {
     addWelding(r, WEAK_RED_STEEL, BLACK_STEEL, HIGH_CARBON_RED_STEEL);
 
     // Special Recipes
-    addWelding(r, KNIFE_BLADE, KNIFE_BLADE, SHEARS, true, TOOLS);
+    //addWelding(r, KNIFE_BLADE, KNIFE_BLADE, SHEARS, true, TOOLS);
   }
 
   @SubscribeEvent

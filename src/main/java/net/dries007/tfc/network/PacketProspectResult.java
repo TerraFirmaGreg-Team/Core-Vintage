@@ -1,11 +1,5 @@
 package net.dries007.tfc.network;
 
-import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.events.ProspectEvent;
-import net.dries007.tfc.objects.items.metal.ItemProspectorPick.ProspectResult.Type;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -16,6 +10,12 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
+import io.netty.buffer.ByteBuf;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.events.ProspectEvent;
+import net.dries007.tfc.objects.items.metal.ItemProspectorPick.ProspectResult.Type;
 
 public class PacketProspectResult implements IMessage {
 
@@ -57,17 +57,21 @@ public class PacketProspectResult implements IMessage {
 
     @Override
     public IMessage onMessage(PacketProspectResult message, MessageContext ctx) {
+      BlockPos pos = message.pos;
+      Type type = message.type;
+      ItemStack vein = message.vein;
+
       TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
         EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
         if (player != null) {
-          ITextComponent text = new TextComponentTranslation(message.type.translation);
-          if (message.type != Type.NOTHING) {
-            text.appendText(" ").appendSibling(new TextComponentTranslation(message.vein.getTranslationKey() + ".name"));
+          ITextComponent text = new TextComponentTranslation(type.translation);
+          if (type != Type.NOTHING) {
+            text.appendText(" ").appendSibling(new TextComponentTranslation(vein.getDisplayName()));
           }
           player.sendStatusMessage(text, ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
         }
 
-        ProspectEvent event = new ProspectEvent.Client(player, message.pos, message.type, message.vein);
+        ProspectEvent event = new ProspectEvent.Client(player, pos, type, vein);
         MinecraftForge.EVENT_BUS.post(event);
       });
       return null;

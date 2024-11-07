@@ -22,7 +22,7 @@ public class UnmoldRecipeWrapperFL implements IRecipeWrapper {
     this.mold = new ItemStack(ItemsFL.malletMold);
     IFluidHandler cap = this.mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
     if (cap instanceof IMoldHandler) {
-      cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100), true);
+      cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144), true);
     }
 
     this.output = new ItemStack(ItemsFL.getMetalMalletHead(metal));

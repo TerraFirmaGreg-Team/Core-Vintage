@@ -37,6 +37,7 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.fuel.Fuel;
 import net.dries007.tfc.util.fuel.FuelManager;
+import tfctech.objects.tileentities.TEInductionCrucible;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -240,26 +241,25 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
             ((IHeatConsumerBlock) blockCrucible).acceptHeat(world, pos.down(), temperature);
           }
           if (!world.isRemote) {
-            oreStacks.removeIf(stack ->
-                               {
-                                 IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-                                 if (cap != null) {
-                                   // Update temperature of item
-                                   float itemTemp = cap.getTemperature();
-                                   if (temperature > itemTemp) {
-                                     CapabilityItemHeat.addTemp(cap);
-                                   }
-                                   if (cap.isMolten()) {
-                                     convertToMolten(stack);
-                                     ItemStack tuyereStack = inventory.getStackInSlot(0);
-                                     if (!tuyereStack.isEmpty()) {
-                                       Helpers.damageItem(tuyereStack);
-                                     }
-                                     return true;
-                                   }
-                                 }
-                                 return false;
-                               });
+            oreStacks.removeIf(stack -> {
+              IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+              if (cap != null) {
+                // Update temperature of item
+                float itemTemp = cap.getTemperature();
+                if (temperature > itemTemp) {
+                  CapabilityItemHeat.addTemp(cap);
+                }
+                if (cap.isMolten()) {
+                  convertToMolten(stack);
+                  ItemStack tuyereStack = inventory.getStackInSlot(0);
+                  if (!tuyereStack.isEmpty()) {
+                    Helpers.damageItem(tuyereStack);
+                  }
+                  return true;
+                }
+              }
+              return false;
+            });
           }
           if (temperature <= 0 && burnTemperature <= 0) {
             temperature = 0;
@@ -319,6 +319,11 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
         // Move already molten liquid metal to the crucible.
         // This makes the effect of slowly filling up the crucible.
         // Take into account full or non-existent (removed) crucibles
+        TEInductionCrucible teI = Helpers.getTE(world, pos.down(), TEInductionCrucible.class);
+        if (teI != null && teI.addMetal(alloy.getResult(), 1) <= 0) {
+          alloy.removeAlloy(1, false);
+        }
+
         TECrucible te = Helpers.getTE(world, pos.down(), TECrucible.class);
         if (te != null && te.addMetal(alloy.getResult(), 1) <= 0) {
           alloy.removeAlloy(1, false);

@@ -141,7 +141,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
   @Override
   public boolean processInteract(EntityPlayer player, EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
-    if (OreDictionaryHelper.doesStackMatchOre(stack, "knife")) {
+    if (OreDictionaryHelper.doesStackMatchOre(stack, "toolKnife")) {
       if (!world.isRemote) {
         if (isReadyForAnimalProduct()) {
           stack.damageItem(1, player);

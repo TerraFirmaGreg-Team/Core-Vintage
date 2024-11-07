@@ -19,7 +19,7 @@ public class CastingRecipeWrapperKaoliniteFL implements IRecipeWrapper {
   private final FluidStack input;
 
   public CastingRecipeWrapperKaoliniteFL(Metal metal, String type) {
-    this.input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100);
+    this.input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144);
     this.mold = new ItemStack(ItemsTFCF.malletMoldKaolinite);
     IFluidHandler cap = this.mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
     if (cap instanceof IMoldHandler) {

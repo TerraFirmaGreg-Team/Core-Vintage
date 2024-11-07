@@ -129,8 +129,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
           }
         }
         // Try and drain fluid
-        if (cap instanceof IMoldHandler) {
-          IMoldHandler mold = (IMoldHandler) cap;
+        if (cap instanceof IMoldHandler mold) {
           if (canFill) {
             if (mold.isMolten()) {
               // Use mold.getMetal() to avoid off by one errors during draining
@@ -155,8 +154,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
       // Output filling
       ItemStack outputStack = inventory.getStackInSlot(SLOT_OUTPUT);
       IItemHeat capOut = outputStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-      if (capOut instanceof IMoldHandler) {
-        IMoldHandler mold = (IMoldHandler) capOut;
+      if (capOut instanceof IMoldHandler mold) {
 
         // Check that the crucible metal is molten
         Metal alloyMetal = alloy.getResult();
@@ -200,8 +198,8 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
     if (slot != SLOT_OUTPUT) {
       IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
       if (cap instanceof IMoldHandler) {
-        if (cap instanceof ISmallVesselHandler) {
-          if (((ISmallVesselHandler) cap).getMetal() != null) {
+        if (cap instanceof ISmallVesselHandler smallVesselHandler) {
+          if (smallVesselHandler.getMetal() != null) {
             return true;
           } else {
             for (int i = 0; i < ((ISmallVesselHandler) cap).getSlots(); i++) {
@@ -209,11 +207,12 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
                 return true;
               }
             }
-            return false; // This will make empty small vessels go to the output slot (same as below)
+            // This will make empty small vessels go to the output slot (same as below)
+            return false;
           }
         } else {
-          return ((IMoldHandler) cap).getAmount()
-                 > 0; // This will make empty molds go to the output slot / prevent empty molds go to the input (no sense in heating them here anyway)
+          // This will make empty molds go to the output slot / prevent empty molds go to the input (no sense in heating them here anyway)
+          return ((IMoldHandler) cap).getAmount() > 0;
         }
       }
     }

@@ -56,8 +56,8 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
       player.foodStats = new FoodStatsTFC(player, player.getFoodStats());
     }
     // Send the update regardless so the client can perform the same logic
-    if (player instanceof EntityPlayerMP) {
-      TerraFirmaCraft.getNetwork().sendTo(new PacketFoodStatsReplace(), (EntityPlayerMP) player);
+    if (player instanceof EntityPlayerMP entityPlayerMP) {
+      TerraFirmaCraft.getNetwork().sendTo(new PacketFoodStatsReplace(), entityPlayerMP);
     }
   }
 

@@ -245,7 +245,7 @@ public class TFCGuiHandler implements IGuiHandler {
       case SALAD:
         return new GuiSalad(container, player.inventory);
       case ALLOY_CALCULATOR:
-        return new GuiAlloyCalculator((ContainerAlloyCalculator) container);
+        return new GuiAlloyCalculator((ContainerAlloyCalculator) container, player.inventory, Helpers.getTE(world, pos, TEAlloyCalculator.class));
       default:
         return null;
     }

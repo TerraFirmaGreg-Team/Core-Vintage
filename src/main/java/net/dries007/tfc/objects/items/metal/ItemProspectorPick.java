@@ -21,17 +21,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
+import gregtech.common.blocks.BlockOre;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.events.ProspectEvent;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.network.PacketProspectResult;
 import net.dries007.tfc.util.skills.ProspectingSkill;
 import net.dries007.tfc.util.skills.SkillType;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -44,7 +42,7 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 public class ItemProspectorPick extends ItemMetalTool {
 
-  private static final int PROSPECT_RADIUS = 12;
+  private static final int PROSPECT_RADIUS = 35;
   private static final int COOLDOWN = 10;
   private static final Random RANDOM = new Random();
 
@@ -145,19 +143,25 @@ public class ItemProspectorPick extends ItemMetalTool {
     return results.values();
   }
 
+  // TODO замена на поиск GT руд
   @Nonnull
   private ItemStack getOreStack(World world, BlockPos pos, IBlockState state, boolean ignoreGrade) {
-    for (VeinType vein : VeinRegistry.INSTANCE.getVeins().values()) {
-      if (vein.isOreBlock(state)) {
-        Block block = state.getBlock();
-        if (vein.getOre() != null && vein.getOre().isGraded() && !ignoreGrade) {
-          ItemStack result = block.getPickBlock(state, null, world, pos, null);
-          result.setItemDamage(Ore.Grade.NORMAL.getMeta()); // ignore grade
-          return result;
-        } else {
-          return block.getPickBlock(state, null, world, pos, null);
-        }
-      }
+//    for (VeinType vein : VeinRegistry.INSTANCE.getVeins().values()) {
+//      if (vein.isOreBlock(state)) {
+//        Block block = state.getBlock();
+//        if (vein.getOre() != null && vein.getOre().isGraded() && !ignoreGrade) {
+//          ItemStack result = block.getPickBlock(state, null, world, pos, null);
+//          result.setItemDamage(Ore.Grade.NORMAL.getMeta()); // ignore grade
+//          return result;
+//        } else {
+//          return block.getPickBlock(state, null, world, pos, null);
+//        }
+//      }
+//    }
+    if (state.getBlock() instanceof BlockOre) {
+      Block block = state.getBlock();
+
+      return block.getPickBlock(state, null, world, pos, null);
     }
     return ItemStack.EMPTY;
   }

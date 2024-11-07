@@ -10,3 +10,4 @@
 - [TFC-TNG-Cellars-Addon](https://github.com/russellShyvers/TFC-TNG-Cellars-Addon)
 - [TFC-Alcohols](https://github.com/Lumintorious/TFC-Alcohols) +
 - [TFCTech](https://github.com/TFC-Metallum/TFCTech)
+- [WaterFlasks](https://github.com/Gaelmare/WaterFlasks)

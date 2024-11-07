@@ -241,6 +241,11 @@ runServer {
   workingDir = file('run/server')
 }
 
+wrapper {
+  gradleVersion = '8.10.2'
+  distributionUrl = distributionUrl.replace("bin", "all")
+}
+
 idea {
   module {
     inheritOutputDirs = true
@@ -328,6 +333,7 @@ tasks.register('prioritizeCoremods') {
     }
   }
 }
+
 
 idea.project.settings {
   taskTriggers {

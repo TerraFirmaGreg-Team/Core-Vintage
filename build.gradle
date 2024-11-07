@@ -39,7 +39,7 @@ version = propertyString('mod_version')
 group = propertyString('mod_package')
 
 base {
-  archivesName.set(propertyString('mod_name') + '-Vintage')
+  archivesName.set(propertyString('mod_name'))
 }
 
 tasks.decompressDecompiledSources.enabled !propertyBool('change_minecraft_sources')

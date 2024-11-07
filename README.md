@@ -9,3 +9,4 @@
 - [Puddles](https://github.com/OrderedChaos-Dev/Puddles) +
 - [TFC-TNG-Cellars-Addon](https://github.com/russellShyvers/TFC-TNG-Cellars-Addon)
 - [TFC-Alcohols](https://github.com/Lumintorious/TFC-Alcohols) +
+- [TFCTech](https://github.com/TFC-Metallum/TFCTech)

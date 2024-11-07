@@ -1,4 +1,4 @@
-package su.terrafirmagreg.core.mixin.gregtech;
+package su.terrafirmagreg.core.mixin.gregtech.common.blocks;
 
 import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
 

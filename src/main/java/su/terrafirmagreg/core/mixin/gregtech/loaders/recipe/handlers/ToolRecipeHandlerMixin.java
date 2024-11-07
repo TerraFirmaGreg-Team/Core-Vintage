@@ -1,4 +1,4 @@
-package su.terrafirmagreg.core.mixin.gregtech;
+package su.terrafirmagreg.core.mixin.gregtech.loaders.recipe.handlers;
 
 import su.terrafirmagreg.core.modules.gregtech.items.tools.TFGToolItems;
 import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;

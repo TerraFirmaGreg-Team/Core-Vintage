@@ -1,4 +1,4 @@
-package su.terrafirmagreg.core.mixin.gregtech;
+package su.terrafirmagreg.core.mixin.gregtech.api.recipes.ingredients;
 
 import net.minecraft.item.ItemStack;
 

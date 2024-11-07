@@ -1,6 +1,6 @@
 package su.terrafirmagreg.core.modules.gregtech.recipes;
 
-import su.terrafirmagreg.core.mixin.gregtech.IMaterialRecipeHandlerInvoker;
+import su.terrafirmagreg.core.mixin.gregtech.loaders.recipe.handlers.IMaterialRecipeHandlerInvoker;
 import su.terrafirmagreg.core.modules.gregtech.items.TFGMetaItems;
 import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
 

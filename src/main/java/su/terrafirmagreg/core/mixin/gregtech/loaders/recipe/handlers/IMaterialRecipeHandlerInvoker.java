@@ -1,4 +1,4 @@
-package su.terrafirmagreg.core.mixin.gregtech;
+package su.terrafirmagreg.core.mixin.gregtech.loaders.recipe.handlers;
 
 import gregtech.api.unification.material.Material;
 import gregtech.loaders.recipe.handlers.MaterialRecipeHandler;

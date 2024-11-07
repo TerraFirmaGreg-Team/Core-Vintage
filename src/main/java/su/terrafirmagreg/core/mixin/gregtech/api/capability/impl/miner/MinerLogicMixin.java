@@ -1,4 +1,4 @@
-package su.terrafirmagreg.core.mixin.gregtech;
+package su.terrafirmagreg.core.mixin.gregtech.api.capability.impl.miner;
 
 import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
 

@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = JustEnoughItemsModule.class, remap = false)
-public class MixinJustEnoughItemsModule extends IntegrationSubmodule implements IModPlugin {
+public class JustEnoughItemsModuleMixin extends IntegrationSubmodule implements IModPlugin {
 
   @Unique
   private static final String GT_ORE_SPAWN_UID = GTValues.MODID + ":ore_spawn_location";

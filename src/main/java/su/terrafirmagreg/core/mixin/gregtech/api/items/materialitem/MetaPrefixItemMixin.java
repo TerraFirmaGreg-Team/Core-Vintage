@@ -1,4 +1,4 @@
-package su.terrafirmagreg.core.mixin.gregtech;
+package su.terrafirmagreg.core.mixin.gregtech.api.items.materialitem;
 
 import net.minecraft.entity.item.EntityItem;
 

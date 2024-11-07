@@ -1,4 +1,4 @@
-package su.terrafirmagreg.core.mixin.gregtech;
+package su.terrafirmagreg.core.mixin.gregtech.common.metatileentities.multi;
 
 import gregtech.common.metatileentities.multi.MetaTileEntityPrimitiveWaterPump;
 import org.spongepowered.asm.mixin.Mixin;

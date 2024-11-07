@@ -1,4 +1,4 @@
-package su.terrafirmagreg.core.mixin.gregtech;
+package su.terrafirmagreg.core.mixin.gregtech.loaders.recipe.handlers;
 
 import net.minecraft.item.ItemStack;
 

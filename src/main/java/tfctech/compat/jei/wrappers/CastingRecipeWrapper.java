@@ -13,27 +13,24 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import tfctech.objects.items.ceramics.ItemTechMold;
 import tfctech.objects.items.metal.ItemTechMetal;
 
-public class CastingRecipeWrapper extends net.dries007.tfc.compat.jei.wrappers.CastingRecipeWrapper
-{
-    private final ItemStack mold;
-    private final FluidStack input;
+public class CastingRecipeWrapper extends net.dries007.tfc.compat.jei.wrappers.CastingRecipeWrapper {
 
-    public CastingRecipeWrapper(Metal metal, ItemTechMetal.ItemType type)
-    {
-        super(metal, Metal.ItemType.INGOT); // Just so i can override
-        input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100);
-        mold = new ItemStack(ItemTechMold.get(type));
-        IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler)
-        {
-            cap.fill(input, true);
-        }
-    }
+  private final ItemStack mold;
+  private final FluidStack input;
 
-    @Override
-    public void getIngredients(IIngredients ingredients)
-    {
-        ingredients.setInput(VanillaTypes.FLUID, input);
-        ingredients.setOutput(VanillaTypes.ITEM, mold);
+  public CastingRecipeWrapper(Metal metal, ItemTechMetal.ItemType type) {
+    super(metal, Metal.ItemType.INGOT); // Just so i can override
+    input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 144);
+    mold = new ItemStack(ItemTechMold.get(type));
+    IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+    if (cap instanceof IMoldHandler) {
+      cap.fill(input, true);
     }
+  }
+
+  @Override
+  public void getIngredients(IIngredients ingredients) {
+    ingredients.setInput(VanillaTypes.FLUID, input);
+    ingredients.setOutput(VanillaTypes.ITEM, mold);
+  }
 }

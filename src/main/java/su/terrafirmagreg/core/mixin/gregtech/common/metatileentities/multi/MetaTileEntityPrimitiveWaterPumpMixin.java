@@ -1,4 +1,4 @@
-package su.terrafirmagreg.core.mixin.gregtech;
+package su.terrafirmagreg.core.mixin.gregtech.common.metatileentities.multi;
 
 import su.terrafirmagreg.core.config.TFGConfig;
 

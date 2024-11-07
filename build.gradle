@@ -19,6 +19,9 @@ assertProperty 'mod_version'
 assertProperty 'mod_package'
 assertProperty 'mod_id'
 assertProperty 'mod_name'
+assertProperty 'mod_dependencies'
+assertProperty 'mod_server_proxy'
+assertProperty 'mod_client_proxy'
 
 assertSubProperties 'use_tags', 'tag_class_name'
 assertSubProperties 'use_access_transformer', 'access_transformer_locations'
@@ -75,6 +78,9 @@ minecraft {
     injectedTags.put('MOD_ID', mod_id)
     injectedTags.put('MOD_NAME', mod_name)
     injectedTags.put('MOD_VERSION', mod_version)
+    injectedTags.put('DEPENDENCIES', mod_dependencies)
+    injectedTags.put('SERVER_PROXY', propertyString('mod_server_proxy'))
+    injectedTags.put('CLIENT_PROXY', propertyString('mod_client_proxy'))
   }
 
   if (propertyBool('use_modern_java_syntax')) {
@@ -333,7 +339,6 @@ tasks.register('prioritizeCoremods') {
     }
   }
 }
-
 
 idea.project.settings {
   taskTriggers {

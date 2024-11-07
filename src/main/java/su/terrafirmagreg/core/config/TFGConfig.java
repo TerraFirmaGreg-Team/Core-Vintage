@@ -1,10 +1,10 @@
 package su.terrafirmagreg.core.config;
 
+import su.terrafirmagreg.Tags;
+
 import net.minecraftforge.common.config.Config;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
-
-@Config(modid = MOD_ID)
+@Config(modid = Tags.MOD_ID)
 public class TFGConfig {
 
 

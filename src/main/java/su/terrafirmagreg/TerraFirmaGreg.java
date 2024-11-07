@@ -1,5 +1,7 @@
-package su.terrafirmagreg.core;
+package su.terrafirmagreg;
 
+import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.core.Recipes;
 import su.terrafirmagreg.core.modules.ambiental.TFCAmbientalEventHandler;
 import su.terrafirmagreg.core.modules.ambiental.TFCAmbientalGuiRenderer;
 import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability;
@@ -7,11 +9,13 @@ import su.terrafirmagreg.core.modules.ambiental.capability.TemperaturePacket;
 import su.terrafirmagreg.core.modules.gregtech.items.TFGModMetaItem;
 import su.terrafirmagreg.core.modules.gregtech.items.tools.TFGToolItems;
 import su.terrafirmagreg.core.modules.gregtech.machines.TFGTileEntities;
+import su.terrafirmagreg.proxy.IProxy;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -20,31 +24,35 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
+import lombok.Getter;
+
+import static su.terrafirmagreg.Tags.CLIENT_PROXY;
+import static su.terrafirmagreg.Tags.DEPENDENCIES;
 import static su.terrafirmagreg.Tags.MOD_ID;
 import static su.terrafirmagreg.Tags.MOD_NAME;
 import static su.terrafirmagreg.Tags.MOD_VERSION;
+import static su.terrafirmagreg.Tags.SERVER_PROXY;
 
-@Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, dependencies = TerraFirmaGreg.DEPENDENCIES)
+@SuppressWarnings("unused")
+@Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, dependencies = DEPENDENCIES)
 public class TerraFirmaGreg {
 
-  public static final String DEPENDENCIES =
-    "required:forge@[14.23.5.2847,);" +
-    "required:mixinbooter;" +
-    "after:tfc;" +
-    "after:gregtech;" +
-    "required:firmalife;" +
-    "required:cellars;" +
-    "required:tfctech;";
+  public static final LoggingHelper LOGGER = LoggingHelper.of();
 
-  public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+
+  @Getter
+  @Mod.Instance(MOD_ID)
+  private static TerraFirmaGreg instance;
+
+  @Getter
+  @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
+  public static IProxy proxy;
 
 
   @EventHandler
   public void onConstruct(FMLConstructionEvent event) {
-    LOGGER.info("TerraFirmaGreg Core by Exception and Xikaro is working :)");
+
   }
 
   @EventHandler

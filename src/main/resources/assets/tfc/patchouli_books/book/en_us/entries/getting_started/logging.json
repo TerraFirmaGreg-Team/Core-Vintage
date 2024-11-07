@@ -44,11 +44,6 @@
     },
     {
       "type": "tfc:heat_recipe",
-      "recipe": "tfc:glass",
-      "text": "You can make glass at a higher temperature, but it's easier to do that in a forge."
-    },
-    {
-      "type": "tfc:heat_recipe",
       "recipe": "tfc:terracotta",
       "text": "Firing terracotta works just like vanilla!"
     },

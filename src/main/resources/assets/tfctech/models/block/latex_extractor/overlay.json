@@ -1,0 +1,43 @@
+{
+  "credit": "Made with Blockbench",
+  "ambientocclusion": false,
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        -0.15
+      ],
+      "to": [
+        16,
+        16,
+        -0.15
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#overlay"
+        }
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "overlay",
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "children": [
+        0
+      ]
+    }
+  ]
+}

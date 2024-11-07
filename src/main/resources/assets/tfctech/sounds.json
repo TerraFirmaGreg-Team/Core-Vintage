@@ -1,0 +1,66 @@
+{
+  "rubbertapping.groove.fit": {
+    "category": "block",
+    "sounds": [
+      "tfctech:fit_groove"
+    ]
+  },
+  "rubbertapping.mount.fit": {
+    "category": "block",
+    "sounds": [
+      "tfctech:fit_mount"
+    ]
+  },
+  "rubbertapping.bowl.fit": {
+    "category": "block",
+    "sounds": [
+      "tfctech:fit_bowl"
+    ]
+  },
+  "rubbertapping.bowl.grab": {
+    "category": "block",
+    "sounds": [
+      "tfctech:grab_bowl"
+    ]
+  },
+  "rubbertapping.trunk.scratch": {
+    "category": "block",
+    "sounds": [
+      "tfctech:trunk_scratch"
+    ]
+  },
+  "wiredrawbench.tongs_fall": {
+    "category": "block",
+    "sounds": [
+      "tfctech:tongs_fall"
+    ]
+  },
+  "wiredrawbench.drawing": {
+    "category": "block",
+    "sounds": [
+      "tfctech:drawing1",
+      "tfctech:drawing2",
+      "tfctech:drawing3",
+      "tfctech:drawing4",
+      "tfctech:drawing5"
+    ]
+  },
+  "fridge.open": {
+    "category": "block",
+    "sounds": [
+      "tfctech:fridge_open"
+    ]
+  },
+  "fridge.close": {
+    "category": "block",
+    "sounds": [
+      "tfctech:fridge_close"
+    ]
+  },
+  "induction_smelter.work": {
+    "category": "block",
+    "sounds": [
+      "tfctech:induction_smelter_work"
+    ]
+  }
+}

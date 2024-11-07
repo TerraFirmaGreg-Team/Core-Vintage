@@ -1,0 +1,66 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfctech:latex_extractor/tap",
+    "textures": {
+      "metal": "tfc:blocks/metal/wrought_iron",
+      "particle": "tfc:blocks/metal/wrought_iron",
+      "pot": "tfc:blocks/ceramics/large_vessel_side",
+      "overlay": "tfctech:blocks/devices/latex_extractor/flowing"
+    }
+  },
+  "variants": {
+    "facing": {
+      "south": {
+        "y": 180
+      },
+      "east": {
+        "y": 90
+      },
+      "north": {},
+      "west": {
+        "y": 270
+      }
+    },
+    "base": {
+      "false": {},
+      "true": {
+        "submodel": {
+          "base": {
+            "model": "tfctech:latex_extractor/base"
+          }
+        }
+      }
+    },
+    "pot": {
+      "false": {},
+      "true": {
+        "submodel": {
+          "pot": {
+            "model": "tfctech:latex_extractor/pot"
+          }
+        }
+      }
+    },
+    "cut": {
+      "0": {},
+      "1": {
+        "textures": {
+          "overlay": "tfctech:blocks/devices/latex_extractor/cut"
+        },
+        "submodel": "tfctech:latex_extractor/overlay"
+      },
+      "2": {
+        "submodel": "tfctech:latex_extractor/overlay"
+      }
+    },
+    "inventory": [
+      {
+        "transform": "forge:default-block"
+      }
+    ],
+    "normal": [
+      {}
+    ]
+  }
+}

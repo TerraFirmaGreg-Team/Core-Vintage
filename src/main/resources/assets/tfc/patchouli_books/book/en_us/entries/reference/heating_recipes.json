@@ -12,11 +12,6 @@
     },
     {
       "type": "tfc:heat_recipe",
-      "recipe": "tfc:glass",
-      "text": "Any sand makes glass."
-    },
-    {
-      "type": "tfc:heat_recipe",
       "recipe": "tfc:cooked_pheasant",
       "text": "Any meat or dough (including eggs) can be cooked"
     },

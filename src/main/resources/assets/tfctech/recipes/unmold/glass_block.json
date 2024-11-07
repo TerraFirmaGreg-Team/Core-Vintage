@@ -1,0 +1,13 @@
+{
+  "type": "tfctech:unmoldglass_recipe",
+  "ingredients": [
+    {
+      "item": "tfctech:ceramics/mold/glass_block"
+    }
+  ],
+  "result": {
+    "item": "minecraft:glass",
+    "count": 1
+  },
+  "chance": 0.95
+}

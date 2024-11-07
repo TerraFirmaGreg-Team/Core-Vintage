@@ -34,8 +34,6 @@ def use_util = true
 dependencies {
 
   //tfg
-  implementation rfg.deobf("curse.maven:tfc-things-386285:3378687")
-
   implementation rfg.deobf("curse.maven:ftb-utilities-forge-237102:3157548")
   implementation rfg.deobf("curse.maven:ftb-quests-forge-289412:3156637")
   implementation rfg.deobf("curse.maven:ftb-library-legacy-forge-237167:2985811")

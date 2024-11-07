@@ -11,3 +11,4 @@
 - [TFC-Alcohols](https://github.com/Lumintorious/TFC-Alcohols) +
 - [TFCTech](https://github.com/TFC-Metallum/TFCTech)
 - [WaterFlasks](https://github.com/Gaelmare/WaterFlasks)
+- [TerraFirmaThings](https://github.com/Lyeoj/TerraFirmaThings)

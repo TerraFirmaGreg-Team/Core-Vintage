@@ -34,17 +34,17 @@ def use_util = true
 dependencies {
 
   //tfg
-  implementation rfg.deobf("curse.maven:ftb-utilities-forge-237102:3157548")
-  implementation rfg.deobf("curse.maven:ftb-quests-forge-289412:3156637")
-  implementation rfg.deobf("curse.maven:ftb-library-legacy-forge-237167:2985811")
+  implementation rfg.deobf("curse.maven:ftb-utilities-forge-237102:3157548-sources-3157549")
+  implementation rfg.deobf("curse.maven:ftb-quests-forge-289412:3156637-sources-3156638")
+  implementation rfg.deobf("curse.maven:ftb-library-legacy-forge-237167:2985811-sources-2985812")
   implementation rfg.deobf("curse.maven:item-filters-309674:3003364")
 
-//  implementation rfg.deobf("curse.maven:galacticraft-legacy-564236:4671122")
-//  implementation rfg.deobf("curse.maven:extra-planets-241291:4756976")
+  compileOnly rfg.deobf("curse.maven:galacticraft-legacy-564236:4671122")
+  compileOnly rfg.deobf("curse.maven:extra-planets-241291:5339029-sources-5339031")
+  compileOnly rfg.deobf("curse.maven:mjrlegendslib-284331:3344068-sources-3344069")
 
   compileOnly("curse.maven:ic2_classic-242942:3014827")
 
-//  implementation rfg.deobf("curse.maven:mjrlegendslib-284331:3344068")
 
   implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5519022-sources-5519024")
   implementation rfg.deobf("curse.maven:gregicality-multiblocks-564858:5619513-sources-5619515")

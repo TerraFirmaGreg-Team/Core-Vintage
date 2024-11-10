@@ -19,36 +19,38 @@ public class ColorHandlers {
   /**
    * A reusable color handler which uses the hash of {@link ItemStack#getDisplayName()}.
    */
-  public static IItemColor ITEM_DISPLAY_NAME = (stack, index) -> stack.getDisplayName().hashCode();
+  public static IItemColor ITEM_DISPLAY_NAME = (stack, index) ->
+    stack.getDisplayName().hashCode();
 
   /**
    * A reusable color handler which uses the hash of {@link ItemStack#getTranslationKey()}.
    */
-  public static IItemColor ITEM_UNLOCALIZED_NAME = (stack, index) -> stack.getTranslationKey()
-                                                                          .hashCode();
+  public static IItemColor ITEM_UNLOCALIZED_NAME = (stack, index) ->
+    stack.getTranslationKey().hashCode();
 
   /**
    * A reusable color handler which uses the hash of the {@link ItemStack#toString()}.
    */
-  public static IItemColor ITEM_TO_STRING = (stack, index) -> stack.toString().hashCode();
+  public static IItemColor ITEM_TO_STRING = (stack, index) ->
+    stack.toString().hashCode();
 
   /**
    * A reusable color handler which uses the hash of the {@link net.minecraft.item.Item#getRegistryName()}.
    */
-  public static IItemColor ITEM_IDENTIFIER = (stack, index) -> stack.getItem().getRegistryName()
-                                                                    .toString().hashCode();
+  public static IItemColor ITEM_IDENTIFIER = (stack, index) ->
+    stack.getItem().getRegistryName().toString().hashCode();
 
   /**
    * A reusable color handler which uses the hash of the {@link net.minecraft.nbt.NBTTagCompound#toString()}.
    */
-  public static IItemColor ITEM_NBT = (stack, index) -> stack.getTagCompound().toString()
-                                                             .hashCode();
+  public static IItemColor ITEM_NBT = (stack, index) ->
+    stack.getTagCompound().toString().hashCode();
 
   /**
    * A reusable color handler which uses a MCColor which is read from {@link ItemStack#getTagCompound()};
    */
-  public static IItemColor ITEM_MCCOLOR = (stack, index) -> MCColor.isAcceptable(stack)
-                                                            ? new MCColor(stack).getRGB() : MCColor.WHITE.getRGB();
+  public static IItemColor ITEM_MCCOLOR = (stack, index) ->
+    MCColor.isAcceptable(stack) ? new MCColor(stack).getRGB() : MCColor.WHITE.getRGB();
 
   // Blocks
 
@@ -61,18 +63,18 @@ public class ColorHandlers {
   /**
    * A reusable color handler which applies the foliage color for the biome.
    */
-  public static IBlockColor BLOCK_FOLIAGE = (state, world, pos, index) -> BiomeColorHelper.getFoliageColorAtPos(
-    world, pos);
+  public static IBlockColor BLOCK_FOLIAGE = (state, world, pos, index) ->
+    BiomeColorHelper.getFoliageColorAtPos(world, pos);
 
   /**
    * A reusable color handler which applies the grass color for the biome.
    */
-  public static IBlockColor BLOCK_GRASS = (state, world, pos, index) -> BiomeColorHelper.getGrassColorAtPos(
-    world, pos);
+  public static IBlockColor BLOCK_GRASS = (state, world, pos, index) ->
+    BiomeColorHelper.getGrassColorAtPos(world, pos);
 
   /**
    * A reusable color handler which applies the water color for the biome.
    */
-  public static IBlockColor BLOCK_WATER = (state, world, pos, index) -> BiomeColorHelper.getWaterColorAtPos(
-    world, pos);
+  public static IBlockColor BLOCK_WATER = (state, world, pos, index) ->
+    BiomeColorHelper.getWaterColorAtPos(world, pos);
 }

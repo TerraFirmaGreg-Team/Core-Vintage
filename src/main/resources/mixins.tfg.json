@@ -6,6 +6,7 @@
   "minVersion": "0.8.5",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "extraplanets.ExtraPlanetsRecipesMixin",
     "gregtech.api.capability.impl.miner.MinerLogicMixin",
     "gregtech.api.items.armor.ArmorUtilsMixin",
     "gregtech.api.items.materialitem.MetaPrefixItemMixin",

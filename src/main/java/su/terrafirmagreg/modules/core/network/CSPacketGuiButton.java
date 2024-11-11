@@ -2,17 +2,14 @@ package su.terrafirmagreg.modules.core.network;
 
 import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.base.gui.component.button.IButtonHandler;
+import su.terrafirmagreg.api.base.packet.BasePacket;
 import su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil;
 import su.terrafirmagreg.modules.metal.objects.container.ContainerMetalAnvil;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
-import io.netty.buffer.ByteBuf;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author AlcatrazEscapee
  */
-public class CSPacketGuiButton implements IMessage, IMessageHandler<CSPacketGuiButton, IMessage> {
+public class CSPacketGuiButton extends BasePacket<CSPacketGuiButton> {
 
   private int buttonID;
   private NBTTagCompound extraNBT;
@@ -40,29 +37,12 @@ public class CSPacketGuiButton implements IMessage, IMessageHandler<CSPacketGuiB
   }
 
   @Override
-  public void fromBytes(ByteBuf buf) {
-    buttonID = buf.readInt();
-    if (buf.readBoolean()) {
-      extraNBT = ByteBufUtils.readTag(buf);
-    }
-  }
-
-  @Override
-  public void toBytes(ByteBuf buf) {
-    buf.writeInt(buttonID);
-    buf.writeBoolean(extraNBT != null);
-    if (extraNBT != null) {
-      ByteBufUtils.writeTag(buf, extraNBT);
-    }
-  }
-
-  @Override
-  public IMessage onMessage(CSPacketGuiButton message, MessageContext ctx) {
-    EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
+  public IMessage handleMessage(MessageContext context) {
+    EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(context);
     if (player != null) {
-      TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+      TerraFirmaGreg.getProxy().getThreadListener(context).addScheduledTask(() -> {
         if (player.openContainer instanceof IButtonHandler buttonHandler) {
-          buttonHandler.onButtonPress(message.buttonID, message.extraNBT);
+          buttonHandler.onButtonPress(buttonID, extraNBT);
         }
       });
     }

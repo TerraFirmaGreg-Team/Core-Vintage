@@ -28,10 +28,10 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
 
   public boolean isClimateValid;
   protected int[] stages;
-  private long lastUpdateTick;
-  private long lastTickCalChecked;
-  private int waterUses;
-  private int tier;
+  protected long lastUpdateTick;
+  protected long lastTickCalChecked;
+  protected int waterUses;
+  protected int tier;
 
   public TEPlanter() {
     super(4);
@@ -144,7 +144,7 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
     markForSync();
   }
 
-  private boolean canGrow(int slot) {
+  protected boolean canGrow(int slot) {
     PlanterRecipe recipe = getRecipe(slot);
     return isClimateValid && recipe != null && getStage(slot) < PlanterRecipe.getMaxStage(recipe) &&
            tier >= PlanterRecipe.getTier(recipe) && world.getBlockState(pos).getValue(StatePropertiesFL.WET) && GreenhouseHelpers.isSkylightValid(world, pos);

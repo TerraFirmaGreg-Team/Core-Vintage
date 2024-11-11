@@ -22,6 +22,8 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 
+import lombok.Getter;
+
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
@@ -34,6 +36,7 @@ import static com.eerussianguy.firmalife.init.StatePropertiesFL.STAGE;
 public class BlockBonsai extends BlockNonCube {
 
   protected final Supplier<? extends Item> fruit;
+  @Getter
   protected final Supplier<? extends Item> seed;
   protected final long period;
   protected final int tier;

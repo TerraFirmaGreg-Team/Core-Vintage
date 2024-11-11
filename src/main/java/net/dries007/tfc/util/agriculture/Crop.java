@@ -138,6 +138,11 @@ public enum Crop implements ICrop {
   }
 
   @Override
+  public float getTempMaxGrow() {
+    return tempMaxGrow;
+  }
+
+  @Override
   public boolean isValidConditions(float temperature, float rainfall) {
     return tempMinAlive < temperature && temperature < tempMaxAlive && rainMinAlive < rainfall && rainfall < rainMaxAlive;
   }

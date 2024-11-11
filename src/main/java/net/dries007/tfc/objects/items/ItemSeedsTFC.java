@@ -38,12 +38,15 @@ import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 
+import lombok.Getter;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Getter
 public class ItemSeedsTFC extends Item implements IPlantable {
 
   private static final Map<ICrop, ItemSeedsTFC> MAP = new HashMap<>();

@@ -29,6 +29,8 @@ public interface ICrop {
    */
   int getMaxStage();
 
+  float getTempMaxGrow();
+
   /**
    * Checks if the conditions are valid for world gen spawning / living
    *

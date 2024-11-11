@@ -111,7 +111,7 @@ public class ClientProxy extends CommonProxy {
       (
         mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemRockHoe ||
         mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemMetalHoe ||
-        (TFCFarming.tfcfloraeLoaded && mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemHoeTFCF)
+        mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemHoeTFCF
       )
 
     ) {
@@ -121,9 +121,9 @@ public class ClientProxy extends CommonProxy {
 
       boolean isTFCCrop = b instanceof BlockCropTFC;
       boolean isTFCDeadCrop = b instanceof BlockCropDead;
-      boolean isFarmlandTFCF = TFCFarming.tfcfloraeLoaded && b instanceof FarmlandTFCF;
+      boolean isFarmlandTFCF = b instanceof FarmlandTFCF;
       boolean isFarmlandTFC = b instanceof BlockFarmlandTFC;
-      boolean isPlanter = TFCFarming.firmalifeLoaded && (b instanceof BlockLargePlanter || (Config.hangingPlanters && b instanceof BlockHangingPlanter));
+      boolean isPlanter = b instanceof BlockLargePlanter || (Config.hangingPlanters && b instanceof BlockHangingPlanter);
 
       if (!(isFarmlandTFC || isFarmlandTFCF || isPlanter || isTFCCrop || isTFCDeadCrop)) {return;}
 

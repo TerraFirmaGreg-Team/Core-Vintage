@@ -71,31 +71,29 @@ public class CommonProxy {
   public void blockPlaced(BlockEvent.PlaceEvent event) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
     if (!event.getWorld().isRemote) {
       setTileEntity(event.getWorld(), event.getPos());
-      if (TFCFarming.firmalifeLoaded) {
-        TEPlanter pte = Helpers.getTE(event.getWorld(), event.getPos(), TEPlanter.class);
-        if (pte != null) {
-          event.getWorld().setTileEntity(event.getPos(), TEPlanterN.class.newInstance());
-          return;
-        }
 
-        Block b = event.getWorld().getBlockState(event.getPos()).getBlock();
-        if (Config.hangingPlanters && b instanceof BlockHangingPlanter hangingPlanter) {
+      TEPlanter pte = Helpers.getTE(event.getWorld(), event.getPos(), TEPlanter.class);
+      if (pte != null) {
+        event.getWorld().setTileEntity(event.getPos(), TEPlanterN.class.newInstance());
+        return;
+      }
 
-          Supplier<? extends Item> supplier = hangingPlanter.getSeed();
-          Item i = supplier.get();
+      Block b = event.getWorld().getBlockState(event.getPos()).getBlock();
+      if (Config.hangingPlanters && b instanceof BlockHangingPlanter hangingPlanter) {
 
-          if (i instanceof ItemSeedsTFC seeds) {
-            TEHangingPlanter hpte = Helpers.getTE(event.getWorld(), event.getPos(), TEHangingPlanter.class);
-            if (hpte != null) {
-              ICrop crop = seeds.getCrop();
-              if (crop != null) {
-                TETickCounter teHangingPlanter = TEHangingPlanterN.class.getConstructor(ICrop.class).newInstance(crop);
-                teHangingPlanter.resetCounter();
-                event.getWorld().setTileEntity(event.getPos(), teHangingPlanter);
-              }
+        Supplier<? extends Item> supplier = hangingPlanter.getSeed();
+        Item i = supplier.get();
+
+        if (i instanceof ItemSeedsTFC seeds) {
+          TEHangingPlanter hpte = Helpers.getTE(event.getWorld(), event.getPos(), TEHangingPlanter.class);
+          if (hpte != null) {
+            ICrop crop = seeds.getCrop();
+            if (crop != null) {
+              TETickCounter teHangingPlanter = TEHangingPlanterN.class.getConstructor(ICrop.class).newInstance(crop);
+              teHangingPlanter.resetCounter();
+              event.getWorld().setTileEntity(event.getPos(), teHangingPlanter);
             }
           }
-
         }
 
       }
@@ -138,7 +136,7 @@ public class CommonProxy {
   private void setTileEntity(World w, BlockPos pos) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
     TECropBase te = Helpers.getTE(w, pos, TECropBase.class);
     if (te == null) {return;}
-    if (TFCFarming.firmalifeLoaded && te instanceof TEStemCrop && !(te instanceof TEStemCropN)) {
+    if (te instanceof TEStemCrop && !(te instanceof TEStemCropN)) {
       TETickCounter teStemCropN = TEStemCropN.class.getConstructor(TECropBase.class).newInstance(te);
       teStemCropN.resetCounter();
       w.setTileEntity(pos, teStemCropN);
@@ -164,26 +162,30 @@ public class CommonProxy {
     Block b = event.getWorld().getBlockState(event.getPos()).getBlock();
     if (!event.getWorld().isRemote) {
       boolean farmlandTFC = b instanceof BlockFarmlandTFC;
-      boolean farmlandTFCF = TFCFarming.tfcfloraeLoaded && b instanceof FarmlandTFCF;
-      boolean planter = TFCFarming.firmalifeLoaded && b instanceof BlockLargePlanter;
-      boolean hangingPlanter = Config.hangingPlanters && TFCFarming.firmalifeLoaded && b instanceof BlockHangingPlanter;
+      boolean farmlandTFCF = b instanceof FarmlandTFCF;
+      boolean planter = b instanceof BlockLargePlanter;
+      boolean hangingPlanter = Config.hangingPlanters && b instanceof BlockHangingPlanter;
       if (farmlandTFC || farmlandTFCF || planter || hangingPlanter) {
 
         // fertilizer logic
         if (hangingPlanter || planter || canSeeSky(event.getPos(), event.getWorld())) {
           if (TFCFarmingContent.isFertilizer(event.getItemStack())) {
-            int meta = event.getItemStack().getItem().getHasSubtypes() ? event.getItemStack().getMetadata() : 0;
             NutrientClass nutrientClass = TFCFarmingContent.getFertilizerClass(event.getItemStack());
             int value = TFCFarmingContent.getFertilizerValue(event.getItemStack());
+
             if (!planter && TFCFarming.INSTANCE.worldStorage.fertilizerBlock(event.getPos().getX(), event.getPos().getZ(), nutrientClass, value)) {
               event.getItemStack().setCount(event.getItemStack().getCount() - 1);
+
             } else if (planter) {
               TEPlanterN tePlanterN = Helpers.getTE(event.getWorld(), event.getPos(), TEPlanterN.class);
+
               if (tePlanterN != null && tePlanterN.fertilize(nutrientClass, value)) {
                 event.getItemStack().setCount(event.getItemStack().getCount() - 1);
               }
+
             } else if (hangingPlanter) {
               TEHangingPlanterN teHangingPlanterN = Helpers.getTE(event.getWorld(), event.getPos(), TEHangingPlanterN.class);
+
               if (teHangingPlanterN != null && teHangingPlanterN.fertilize(nutrientClass, value)) {
                 event.getItemStack().setCount(event.getItemStack().getCount() - 1);
               }
@@ -192,7 +194,7 @@ public class CommonProxy {
         }
       }
       // put block in await list, if it's tile entity isn't already set and should be set, then set it
-      if (TFCFarming.tfcfloraeLoaded && b instanceof FarmlandTFCF) {
+      if (b instanceof FarmlandTFCF) {
         synchronized (awaiting) {
           awaiting.add(new Tuple<>(event.getPos().add(0, 1, 0), event.getWorld()));
         }

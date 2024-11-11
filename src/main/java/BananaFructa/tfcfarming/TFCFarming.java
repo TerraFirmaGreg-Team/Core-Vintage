@@ -2,7 +2,6 @@ package BananaFructa.tfcfarming;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -26,15 +25,10 @@ public class TFCFarming {
 
   public FarmingWorldStorage worldStorage;
 
-  public static boolean tfcfloraeLoaded = false;
-  public static boolean firmalifeLoaded = false;
-
   @SidedProxy(modId = TFCFarming.modId, clientSide = "BananaFructa.tfcfarming.ClientProxy", serverSide = "BananaFructa.tfcfarming.CommonProxy")
   public static CommonProxy proxy;
 
   public TFCFarming() {
-    tfcfloraeLoaded = Loader.isModLoaded("tfcflorae");
-    firmalifeLoaded = Loader.isModLoaded("firmalife");
     INSTANCE = this;
   }
 
@@ -48,11 +42,9 @@ public class TFCFarming {
     MinecraftForge.EVENT_BUS.register(proxy);
     PacketHandler.registerPackets();
     GameRegistry.registerTileEntity(TECropBaseN.class, new ResourceLocation(modId, TECropBaseN.class.getSimpleName()));
-    if (firmalifeLoaded) {
-      GameRegistry.registerTileEntity(TEPlanterN.class, new ResourceLocation(modId, TEPlanterN.class.getSimpleName()));
-      GameRegistry.registerTileEntity(TEHangingPlanterN.class, new ResourceLocation(modId, TEHangingPlanterN.class.getSimpleName()));
-      GameRegistry.registerTileEntity(TEStemCropN.class, new ResourceLocation(modId, TEStemCropN.class.getSimpleName()));
-    }
+    GameRegistry.registerTileEntity(TEPlanterN.class, new ResourceLocation(modId, TEPlanterN.class.getSimpleName()));
+    GameRegistry.registerTileEntity(TEHangingPlanterN.class, new ResourceLocation(modId, TEHangingPlanterN.class.getSimpleName()));
+    GameRegistry.registerTileEntity(TEStemCropN.class, new ResourceLocation(modId, TEStemCropN.class.getSimpleName()));
     proxy.init();
   }
 

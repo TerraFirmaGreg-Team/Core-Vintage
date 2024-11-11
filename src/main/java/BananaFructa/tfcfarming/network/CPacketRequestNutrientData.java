@@ -69,7 +69,7 @@ public class CPacketRequestNutrientData implements IMessage {
           NutrientValues values = TFCFarming.INSTANCE.worldStorage.getNutrientValues(message.x, message.z);
           int[] NPK = values.getNPKSet();
           return new SPacketNutrientDataResponse(true, NPK[0], NPK[1], NPK[2], message.x, message.z);
-        } else if (Math.abs(player.posY - message.y) <= 5 && TFCFarming.firmalifeLoaded) {
+        } else if (Math.abs(player.posY - message.y) <= 5) {
           TEPlanterN tePlanterN = Helpers.getTE(player.getEntityWorld(), new BlockPos(message.x, message.y, message.z), TEPlanterN.class);
           TEHangingPlanterN teHangingPlanterN = Helpers.getTE(player.getEntityWorld(), new BlockPos(message.x, message.y, message.z), TEHangingPlanterN.class);
           if (tePlanterN == null && teHangingPlanterN == null) {return new SPacketNutrientDataResponse(false, 0, 0, 0, message.x, message.y, message.z, false);}

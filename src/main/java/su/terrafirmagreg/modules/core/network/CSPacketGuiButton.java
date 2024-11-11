@@ -28,8 +28,7 @@ public class CSPacketGuiButton implements IMessage, IMessageHandler<CSPacketGuiB
   private NBTTagCompound extraNBT;
 
   @SuppressWarnings("unused")
-  public CSPacketGuiButton() {
-  }
+  public CSPacketGuiButton() {}
 
   public CSPacketGuiButton(int buttonID) {
     this(buttonID, null);

@@ -16,7 +16,7 @@ apply from: 'gradle/scripts/helpers.gradle'
 
 // Early Assertions
 assertProperty 'mod_version'
-assertProperty 'root_package'
+assertProperty 'mod_package'
 assertProperty 'mod_id'
 assertProperty 'mod_name'
 
@@ -36,10 +36,10 @@ setDefaultProperty 'extra_tweak_classes', false, ''
 setDefaultProperty 'change_minecraft_sources', false, false
 
 version = propertyString('mod_version')
-group = propertyString('root_package')
+group = propertyString('mod_package')
 
 base {
-  archivesName.set(propertyString('mod_name') + '-1.12.x')
+  archivesName.set(propertyString('mod_name'))
 }
 
 tasks.decompressDecompiledSources.enabled !propertyBool('change_minecraft_sources')
@@ -75,6 +75,9 @@ minecraft {
     injectedTags.put('MOD_ID', mod_id)
     injectedTags.put('MOD_NAME', mod_name)
     injectedTags.put('MOD_VERSION', mod_version)
+    injectedTags.put('DEPENDENCIES', mod_dependencies)
+    injectedTags.put('SERVER_PROXY', propertyString('mod_server_proxy'))
+    injectedTags.put('CLIENT_PROXY', propertyString('mod_client_proxy'))
   }
 
   if (propertyBool('use_modern_java_syntax')) {

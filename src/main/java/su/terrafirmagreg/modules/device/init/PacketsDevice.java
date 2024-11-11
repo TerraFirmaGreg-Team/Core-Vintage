@@ -11,25 +11,9 @@ import net.minecraftforge.fml.relauncher.Side;
 public final class PacketsDevice {
 
   public static void onRegister(IPacketRegistry registry) {
-    registry.register(
-      CSPacketFreezeDryer.class,
-      CSPacketFreezeDryer.class,
-      Side.SERVER
-    );
-    registry.register(
-      SCPacketFridge.class,
-      SCPacketFridge.class,
-      Side.CLIENT
-    );
-    registry.register(
-      SCPacketLatex.class,
-      SCPacketLatex.class,
-      Side.CLIENT
-    );
-    registry.register(
-      SCPacketTileEntity.class,
-      SCPacketTileEntity.class,
-      Side.CLIENT
-    );
+    registry.register(Side.SERVER, CSPacketFreezeDryer.class);
+    registry.register(Side.CLIENT, SCPacketFridge.class);
+    registry.register(Side.CLIENT, SCPacketLatex.class);
+    registry.register(Side.CLIENT, SCPacketTileEntity.class);
   }
 }

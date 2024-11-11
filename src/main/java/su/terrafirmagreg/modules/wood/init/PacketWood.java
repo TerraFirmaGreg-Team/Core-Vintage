@@ -12,28 +12,12 @@ public final class PacketWood {
 
   public static void onRegister(IPacketRegistry registry) {
 
-    registry.register(
-      CSPacketActionKey.class,
-      CSPacketActionKey.class,
-      Side.SERVER
-    );
+    registry.register(Side.SERVER, CSPacketActionKey.class);
 
-    registry.register(
-      CSPacketOpenCartGui.class,
-      CSPacketOpenCartGui.class,
-      Side.SERVER
-    );
+    registry.register(Side.SERVER, CSPacketOpenCartGui.class);
 
-    registry.register(
-      CSPacketToggleSlow.class,
-      CSPacketToggleSlow.class,
-      Side.SERVER
-    );
+    registry.register(Side.SERVER, CSPacketToggleSlow.class);
 
-    registry.register(
-      SCPacketDrawnUpdate.class,
-      SCPacketDrawnUpdate.class,
-      Side.CLIENT
-    );
+    registry.register(Side.CLIENT, SCPacketDrawnUpdate.class);
   }
 }

@@ -109,13 +109,13 @@ jobs:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           modrinth-dependencies: |
             gregtech-ce-unofficial(required)
-            terrafirmacraft(required)
+            terrafirmacraft(include)
 
           curseforge-id: ${{ vars.CURSEFORGE_ID }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
           curseforge-dependencies: |
             gregtech-ce-unofficial(required)
-            terrafirmacraft(required)
+            terrafirmacraft(include)
 
           github-tag: ${{ needs.info.outputs.mod_version }}
           github-generate-changelog: true

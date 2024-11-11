@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.metal.api.types.type;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.data.lib.types.type.Type;
-import su.terrafirmagreg.data.lib.types.variant.Variant;
+import su.terrafirmagreg.api.library.types.type.Type;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;

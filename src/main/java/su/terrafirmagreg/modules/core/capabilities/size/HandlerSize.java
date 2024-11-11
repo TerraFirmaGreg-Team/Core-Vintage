@@ -33,32 +33,25 @@ public class HandlerSize {
                      () -> ProviderSize.get(Size.SMALL, Weight.LIGHT, true)); // Store anywhere stacksize = 32
 
     CUSTOM_ITEMS.put(IIngredient.of(Items.STICK),
-                     () -> ProviderSize.get(Size.SMALL, Weight.VERY_LIGHT,
-                                            true)); // Store anywhere stacksize = 64
+                     () -> ProviderSize.get(Size.SMALL, Weight.VERY_LIGHT, true)); // Store anywhere stacksize = 64
 
     CUSTOM_ITEMS.put(IIngredient.of(Items.CLAY_BALL),
-                     () -> ProviderSize.get(Size.SMALL, Weight.VERY_LIGHT,
-                                            true)); // Store anywhere stacksize = 64
+                     () -> ProviderSize.get(Size.SMALL, Weight.VERY_LIGHT, true)); // Store anywhere stacksize = 64
 
     CUSTOM_ITEMS.put(IIngredient.of(Items.BED),
-                     () -> ProviderSize.get(Size.LARGE, Weight.VERY_HEAVY,
-                                            false)); // Store only in chests stacksize = 1
+                     () -> ProviderSize.get(Size.LARGE, Weight.VERY_HEAVY, false)); // Store only in chests stacksize = 1
 
     CUSTOM_ITEMS.put(IIngredient.of(Items.MINECART),
-                     () -> ProviderSize.get(Size.LARGE, Weight.VERY_HEAVY,
-                                            false)); // Store only in chests stacksize = 1
+                     () -> ProviderSize.get(Size.LARGE, Weight.VERY_HEAVY, false)); // Store only in chests stacksize = 1
 
     CUSTOM_ITEMS.put(IIngredient.of(Items.ARMOR_STAND),
-                     () -> ProviderSize.get(Size.LARGE, Weight.HEAVY,
-                                            true)); // Store only in chests stacksize = 4
+                     () -> ProviderSize.get(Size.LARGE, Weight.HEAVY, true)); // Store only in chests stacksize = 4
 
     CUSTOM_ITEMS.put(IIngredient.of(Items.CAULDRON),
-                     () -> ProviderSize.get(Size.LARGE, Weight.LIGHT,
-                                            true)); // Store only in chests stacksize = 32
+                     () -> ProviderSize.get(Size.LARGE, Weight.LIGHT, true)); // Store only in chests stacksize = 32
 
     CUSTOM_ITEMS.put(IIngredient.of(Blocks.TRIPWIRE_HOOK),
-                     () -> ProviderSize.get(Size.SMALL, Weight.VERY_LIGHT,
-                                            true)); // Store anywhere stacksize = 64
+                     () -> ProviderSize.get(Size.SMALL, Weight.VERY_LIGHT, true)); // Store anywhere stacksize = 64
   }
 
   @NotNull

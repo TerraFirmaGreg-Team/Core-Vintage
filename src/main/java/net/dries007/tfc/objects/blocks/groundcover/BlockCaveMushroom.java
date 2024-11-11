@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.groundcover;
 
 import su.terrafirmagreg.api.base.block.BaseBlockBush;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
@@ -40,7 +40,7 @@ import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.items.food.PotionEffectToHave;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -49,15 +49,15 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.ALL_FACES;
-import static su.terrafirmagreg.data.Properties.BoolProp.DOWN;
-import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
-import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
-import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
-import static su.terrafirmagreg.data.Properties.BoolProp.UP;
-import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
-import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.ALL_FACES;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.DOWN;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.UP;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.api.data.Properties.IntProp.DAYPERIOD;
 
 public class BlockCaveMushroom extends BaseBlockBush implements IGrowable, ICapabilitySize, IItemFoodTFC {
 
@@ -107,7 +107,7 @@ public class BlockCaveMushroom extends BaseBlockBush implements IGrowable, ICapa
   protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
     if (!PotionEffects.isEmpty()) {
       for (PotionEffectToHave Effect : PotionEffects) {
-        if (MathConstants.RNG.nextInt(Effect.chance) == 0) {
+        if (MathUtils.RNG.nextInt(Effect.chance) == 0) {
           player.addPotionEffect(new PotionEffect(Effect.PotionEffect, Effect.Duration, Effect.Power));
         }
       }
@@ -242,7 +242,7 @@ public class BlockCaveMushroom extends BaseBlockBush implements IGrowable, ICapa
 
   @Override
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    return Climate.getAvgTemp(worldIn, pos) >= -13f && Climate.getAvgTemp(worldIn, pos) <= 50f &&
+    return ClimateTFC.getAvgTemp(worldIn, pos) >= -13f && ClimateTFC.getAvgTemp(worldIn, pos) <= 50f &&
            ProviderChunkData.getRainfall(worldIn, pos) >= 250f && ProviderChunkData.getRainfall(worldIn, pos) <= 500;
   }
 
@@ -266,7 +266,7 @@ public class BlockCaveMushroom extends BaseBlockBush implements IGrowable, ICapa
       return;
     }
 
-    if (Climate.getActualTemp(worldIn, pos) >= -11f && Climate.getActualTemp(worldIn, pos) <= 48f &&
+    if (ClimateTFC.getActualTemp(worldIn, pos) >= -11f && ClimateTFC.getActualTemp(worldIn, pos) <= 48f &&
         Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) <= 5f) {
       int j = state.getValue(AGE_4);
 
@@ -279,7 +279,7 @@ public class BlockCaveMushroom extends BaseBlockBush implements IGrowable, ICapa
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!(Climate.getActualTemp(worldIn, pos) >= -11f && Climate.getActualTemp(worldIn, pos) <= 48f) ||
+    } else if (!(ClimateTFC.getActualTemp(worldIn, pos) >= -11f && ClimateTFC.getActualTemp(worldIn, pos) <= 48f) ||
                (Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) > 5f)) {
       int j = state.getValue(AGE_4);
 
@@ -361,7 +361,7 @@ public class BlockCaveMushroom extends BaseBlockBush implements IGrowable, ICapa
       IBlockState blockState = worldIn.getBlockState(pos.offset(face));
       if (!(blockState.getBlock() instanceof BlockLeavesTFC) &&
           (blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID)) {
-        return Climate.getAvgTemp(worldIn, pos) >= -13f && Climate.getAvgTemp(worldIn, pos) <= 50f &&
+        return ClimateTFC.getAvgTemp(worldIn, pos) >= -13f && ClimateTFC.getAvgTemp(worldIn, pos) <= 50f &&
                ProviderChunkData.getRainfall(worldIn, pos) >= 250f && ProviderChunkData.getRainfall(worldIn, pos) <= 500;
       }
     }

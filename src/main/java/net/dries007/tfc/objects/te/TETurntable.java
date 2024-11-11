@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.data.Properties.IntProp.CLAY_LEVEL;
+import static su.terrafirmagreg.api.data.Properties.IntProp.CLAY_LEVEL;
 
 @MethodsReturnNonnullByDefault
 public class TETurntable extends BaseTileTickableInventory {

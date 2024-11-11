@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalPig;
 
@@ -29,12 +29,12 @@ public class ModelAnimalPig extends ModelQuadruped {
     tusk1 = new ModelRenderer(this, 32, 0);
     tusk1.addBox(0F, 0F, 0F, 1, 2, 1, 0F);
     tusk1.setRotationPoint(-3f, 0.5f, -9f);
-    tusk1.rotateAngleX = MathConstants.PI / 12;
+    tusk1.rotateAngleX = MathUtils.PI / 12;
 
     tusk2 = new ModelRenderer(this, 32, 0);
     tusk2.addBox(0F, 0F, 0F, 1, 2, 1, 0F);
     tusk2.setRotationPoint(2f, 0.5f, -9f);
-    tusk2.rotateAngleX = MathConstants.PI / 12;
+    tusk2.rotateAngleX = MathUtils.PI / 12;
 
     snout = new ModelRenderer(this, 0, 26);
     snout.addBox(-2.0F, 0.0F, -10.0F, 4, 3, 3, 0);
@@ -77,12 +77,12 @@ public class ModelAnimalPig extends ModelQuadruped {
                                 float par6, Entity par7Entity) {
     tusk1.isHidden = true;
     tusk2.isHidden = true;
-    this.head.rotateAngleX = par5 / (180F / MathConstants.PI);
-    this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
-    this.body.rotateAngleX = MathConstants.PI / 2F;
+    this.head.rotateAngleX = par5 / (180F / MathUtils.PI);
+    this.head.rotateAngleY = par4 / (180F / MathUtils.PI);
+    this.body.rotateAngleX = MathUtils.PI / 2F;
     this.leg1.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-    this.leg2.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
-    this.leg3.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
+    this.leg2.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathUtils.PI) * 1.4F * par2;
+    this.leg3.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathUtils.PI) * 1.4F * par2;
     this.leg4.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
   }
 }

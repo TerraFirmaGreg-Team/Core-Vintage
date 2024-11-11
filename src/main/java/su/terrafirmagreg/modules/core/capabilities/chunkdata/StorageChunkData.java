@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.capabilities.chunkdata;
 
-import su.terrafirmagreg.data.lib.NBTBuilder;
+import su.terrafirmagreg.api.library.NBTBuilder;
 import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
 import su.terrafirmagreg.modules.world.classic.objects.generator.vein.Vein;
 
@@ -34,8 +34,7 @@ public final class StorageChunkData implements IStorage<ICapabilityChunkData> {
 
   @Nullable
   @Override
-  public NBTBase writeNBT(Capability<ICapabilityChunkData> capability,
-                          ICapabilityChunkData instance, EnumFacing side) {
+  public NBTBase writeNBT(Capability<ICapabilityChunkData> capability, ICapabilityChunkData instance, EnumFacing side) {
     if (instance == null || !instance.isInitialized()) {
       return new NBTBuilder().setBoolean("valid", false).build();
     }

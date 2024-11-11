@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 public class PacketChunkData implements IMessage {
 
@@ -67,7 +67,7 @@ public class PacketChunkData implements IMessage {
           }
 
           // Update climate cache
-          Climate.update(chunk.getPos(), message.regionalTemp, message.rainfall);
+          ClimateTFC.update(chunk.getPos(), message.regionalTemp, message.rainfall);
         });
       }
       return null;

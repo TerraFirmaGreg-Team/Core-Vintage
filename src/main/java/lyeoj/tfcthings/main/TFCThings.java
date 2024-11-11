@@ -1,8 +1,8 @@
 package lyeoj.tfcthings.main;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.data.Constants;
-import su.terrafirmagreg.data.lib.LoggingHelper;
+import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import lyeoj.tfcthings.network.MessageHookJavelinUpdate;
 import lyeoj.tfcthings.proxy.CommonProxy;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCTHINGS;
 
 @Mod(modid = MODID_TFCTHINGS, name = TFCThings.NAME, version = Tags.MOD_VERSION, dependencies = TFCThings.DEPENDENCIES)
 public class TFCThings {
@@ -22,7 +22,7 @@ public class TFCThings {
   public static final String NAME = "TerraFirmaThings";
   public static final String CLIENT_PROXY = "lyeoj.tfcthings.proxy.ClientProxy";
   public static final String COMMON_PROXY = "lyeoj.tfcthings.proxy.CommonProxy";
-  public static final String DEPENDENCIES = "required-after:" + Constants.MODID_TFC;
+  public static final String DEPENDENCIES = "required-after:" + Reference.MODID_TFC;
   public static final LoggingHelper LOGGER = LoggingHelper.of(MODID_TFCTHINGS);
   @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
   public static CommonProxy proxy;

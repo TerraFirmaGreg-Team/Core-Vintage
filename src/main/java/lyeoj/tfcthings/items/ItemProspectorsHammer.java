@@ -1,6 +1,6 @@
 package lyeoj.tfcthings.items;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -102,7 +102,7 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
           checkRockLayers(playerIn, worldIn, blockpos, skill);
           playerIn.getCooldownTracker().setCooldown(this, 10);
           float skillModifier = SmithingSkill.getSkillBonus(itemstack, SmithingSkill.Type.TOOLS) / 2.0F;
-          boolean flag = !(skillModifier > 0.0F) || !(MathConstants.RNG.nextFloat() < skillModifier);
+          boolean flag = !(skillModifier > 0.0F) || !(MathUtils.RNG.nextFloat() < skillModifier);
           if (flag) {
             playerIn.getHeldItem(handIn).damageItem(20, playerIn);
           } else {
@@ -159,7 +159,7 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
             break;
         }
         float skillModifier = SmithingSkill.getSkillBonus(itemstack, SmithingSkill.Type.TOOLS) / 2.0F;
-        boolean flag = !(skillModifier > 0.0F) || !(MathConstants.RNG.nextFloat() < skillModifier);
+        boolean flag = !(skillModifier > 0.0F) || !(MathUtils.RNG.nextFloat() < skillModifier);
         if (flag) {
           playerIn.getHeldItem(handIn).damageItem(1, playerIn);
         }

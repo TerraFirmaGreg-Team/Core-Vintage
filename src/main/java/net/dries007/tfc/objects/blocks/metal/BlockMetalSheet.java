@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.ALL_FACES;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.ALL_FACES;
 
 public class BlockMetalSheet extends Block {
 

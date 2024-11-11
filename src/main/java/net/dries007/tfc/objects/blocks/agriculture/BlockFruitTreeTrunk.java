@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
@@ -26,7 +27,7 @@ import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,11 +39,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
-import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
-import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
-import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
-import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WEST;
 
 public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 
@@ -153,7 +154,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
     super.updateTick(worldIn, pos, state, random);
     if (worldIn.isRemote) {return;}
     // Attempt to grow
-    float temp = Climate.getActualTemp(worldIn, pos);
+    float temp = ClimateTFC.getActualTemp(worldIn, pos);
     float rainfall = ProviderChunkData.getRainfall(worldIn, pos);
     var fruitTreeBranch = BlockFruitTreeBranch.get(tree);
     TileUtils.getTile(worldIn, pos, TETickCounter.class)
@@ -252,7 +253,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
     if (!(worldIn.getBlockState(pos.down())
-                 .getBlock() instanceof BlockFruitTreeTrunk) && !BlockUtils.isGrowableSoil(worldIn.getBlockState(pos.down()))) {
+                 .getBlock() instanceof BlockFruitTreeTrunk) && !BlockHelper.isGrowableSoil(worldIn.getBlockState(pos.down()))) {
       worldIn.destroyBlock(pos, true);
     }
   }
@@ -391,7 +392,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 
   @Override
   public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-    float temp = Climate.getActualTemp(world, pos);
+    float temp = ClimateTFC.getActualTemp(world, pos);
     float rainfall = ProviderChunkData.getRainfall(world, pos);
     boolean canGrow = tree.isValidForGrowth(temp, rainfall);
     if (canGrow) {

@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_TFC)
 public class ClientEvents {

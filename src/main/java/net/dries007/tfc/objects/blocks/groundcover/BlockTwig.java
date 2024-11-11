@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.groundcover;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
 
 import net.minecraft.block.Block;
@@ -121,7 +121,7 @@ public class BlockTwig extends BlockBush {
     IBlockState soil = worldIn.getBlockState(pos.down());
 
     if (state.getBlock() == this) {
-      return BlockUtils.isGround(soil) && !(BlockUtils.isSaltWater(soil) || BlockUtils.isFreshWater(soil));
+      return BlockHelper.isGround(soil) && !(BlockHelper.isSaltWater(soil) || BlockHelper.isFreshWater(soil));
     }
     return this.canSustainBush(soil);
   }

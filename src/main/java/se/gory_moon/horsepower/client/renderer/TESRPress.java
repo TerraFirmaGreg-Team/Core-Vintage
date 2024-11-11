@@ -1,7 +1,7 @@
 package se.gory_moon.horsepower.client.renderer;
 
 import su.terrafirmagreg.api.util.RenderUtils;
-import su.terrafirmagreg.data.enums.EnumPressPart;
+import su.terrafirmagreg.api.data.enums.EnumPressPart;
 import su.terrafirmagreg.modules.device.object.tile.TilePressHorse;
 
 import net.minecraft.block.state.IBlockState;
@@ -22,7 +22,7 @@ import org.lwjgl.opengl.GL11;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockPress;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.PRESS_PART;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.PRESS_PART;
 
 public class TESRPress extends TESRHPBase<TilePressHorse> {
 

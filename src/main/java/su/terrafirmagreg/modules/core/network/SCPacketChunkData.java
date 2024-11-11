@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 public class SCPacketChunkData implements IMessage, IMessageHandler<SCPacketChunkData, IMessage> {
 
@@ -65,7 +65,7 @@ public class SCPacketChunkData implements IMessage, IMessageHandler<SCPacketChun
         }
 
         // Update climate cache
-        Climate.update(chunk.getPos(), message.regionalTemp, message.rainfall);
+        ClimateTFC.update(chunk.getPos(), message.regionalTemp, message.rainfall);
       });
     }
     return null;

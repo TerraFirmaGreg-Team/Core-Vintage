@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 
-import static su.terrafirmagreg.data.Constants.MODID_AGEDDRINKS;
+import static su.terrafirmagreg.api.data.Reference.MODID_AGEDDRINKS;
 
 @Mod(modid = MODID_AGEDDRINKS, name = TFCAgedDrinks.NAME, version = Tags.MOD_VERSION)
 public class TFCAgedDrinks {

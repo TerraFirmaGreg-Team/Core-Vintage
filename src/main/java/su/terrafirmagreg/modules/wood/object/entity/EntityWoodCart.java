@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.object.entity;
 
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.modules.wood.ConfigWood;
@@ -203,8 +203,8 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
       } else if (dRotation >= 180.0D) {
         this.prevRotationYaw -= 360.0F;
       }
-      double lookX = MathHelper.sin(-this.rotationYaw * 0.017453292F - MathConstants.PI);
-      double lookZ = MathHelper.cos(-this.rotationYaw * 0.017453292F - MathConstants.PI);
+      double lookX = MathHelper.sin(-this.rotationYaw * 0.017453292F - MathUtils.PI);
+      double lookZ = MathHelper.cos(-this.rotationYaw * 0.017453292F - MathUtils.PI);
       double moveX = targetVec.x - this.posX + lookX * this.spacing;
       double moveZ = targetVec.z - this.posZ + lookZ * this.spacing;
       this.motionX = moveX;

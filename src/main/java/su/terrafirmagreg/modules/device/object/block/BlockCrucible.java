@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlockContainer;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.Constants;
-import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
@@ -138,7 +138,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
       alloy.deserializeNBT(nbt.getCompoundTag("alloy"));
       String metalName = new TextComponentTranslation(
         alloy.getResult().getTranslationKey()).getFormattedText();
-      tooltip.add(I18n.format(Constants.MODID_TFC + ".tooltip.crucible_alloy", alloy.getAmount(),
+      tooltip.add(I18n.format(Reference.MODID_TFC + ".tooltip.crucible_alloy", alloy.getAmount(),
                               metalName));
     }
   }

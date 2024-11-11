@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.plant.object.block;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 import su.terrafirmagreg.modules.plant.api.types.variant.block.PlantBlockVariant;
@@ -18,15 +18,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.PLANT_PART;
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
-import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.PLANT_PART;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.api.data.Properties.IntProp.DAYPERIOD;
 import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER;
 
 public class BlockPlantTallWater extends BlockPlantWater implements IGrowable, ITallPlant {
@@ -69,7 +69,7 @@ public class BlockPlantTallWater extends BlockPlantWater implements IGrowable, I
       return;
     }
 
-    if (type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
+    if (type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
         type.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE_4);
 
@@ -83,7 +83,7 @@ public class BlockPlantTallWater extends BlockPlantWater implements IGrowable, I
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
+    } else if (!type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) ||
                !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE_4);
 
@@ -109,9 +109,9 @@ public class BlockPlantTallWater extends BlockPlantWater implements IGrowable, I
     for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i)
       ;
     if (water == SALT_WATER) {
-      return i < type.getMaxHeight() && BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
+      return i < type.getMaxHeight() && BlockHelper.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
     } else {
-      return i < type.getMaxHeight() && BlockUtils.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
+      return i < type.getMaxHeight() && BlockHelper.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
     }
   }
 
@@ -150,7 +150,7 @@ public class BlockPlantTallWater extends BlockPlantWater implements IGrowable, I
     if (state.getBlock() == this) {
       return soil.getBlock()
                  .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) &&
-             type.isValidTemp(Climate.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+             type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
     return this.canSustainBush(soil);
   }

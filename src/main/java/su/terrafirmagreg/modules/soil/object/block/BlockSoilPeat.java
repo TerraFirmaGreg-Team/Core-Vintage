@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.soil.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.api.data.ToolClasses;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

@@ -21,8 +21,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
-import static su.terrafirmagreg.data.Properties.IntProp.LAYERS;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.IntProp.LAYERS;
 
 @SuppressWarnings("deprecation")
 public class BlockMolten extends BaseBlock {

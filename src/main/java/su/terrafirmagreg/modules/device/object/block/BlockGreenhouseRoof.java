@@ -17,9 +17,9 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.util.OreDictionaryHelper;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.GLASS;
-import static su.terrafirmagreg.data.Properties.BoolProp.TOP;
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.GLASS;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.TOP;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockGreenhouseRoof extends BlockGreenhouseWall {

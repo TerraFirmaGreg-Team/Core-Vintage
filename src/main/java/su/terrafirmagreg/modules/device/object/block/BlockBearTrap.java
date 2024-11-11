@@ -3,8 +3,8 @@ package su.terrafirmagreg.modules.device.object.block;
 import su.terrafirmagreg.api.base.block.BaseBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.DamageSources;
-import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -39,9 +39,9 @@ import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.BURIED;
-import static su.terrafirmagreg.data.Properties.BoolProp.CLOSED;
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.BURIED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CLOSED;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockBearTrap extends BaseBlock implements IProviderTile {

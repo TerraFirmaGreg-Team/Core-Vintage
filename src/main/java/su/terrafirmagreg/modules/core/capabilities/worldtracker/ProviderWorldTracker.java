@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.capabilities.worldtracker;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.spi.CollapseData;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 
@@ -40,7 +40,7 @@ public class ProviderWorldTracker
 
   public void tick(World world) {
     if (!world.isRemote) {
-      if (!collapsesInProgress.isEmpty() && MathConstants.RNG.nextInt(20) == 0) {
+      if (!collapsesInProgress.isEmpty() && MathUtils.RNG.nextInt(20) == 0) {
         for (CollapseData collapse : collapsesInProgress) {
           Set<BlockPos> updatedPositions = new ObjectOpenHashSet<>();
           for (BlockPos posAt : collapse.nextPositions) {
@@ -52,7 +52,7 @@ public class ProviderWorldTracker
               world, posAt.down(), Material.ROCK) &&
                 specAt.canCollapse(world, posAt)
                 && posAt.distanceSq(collapse.centerPos) < collapse.radiusSquared &&
-                MathConstants.RNG.nextFloat()
+                MathUtils.RNG.nextFloat()
                 < ConfigTFC.General.FALLABLE.propagateCollapseChance) {
               IBlockState fallState = specAt.getResultingState(stateAt);
               world.setBlockState(posAt, fallState);

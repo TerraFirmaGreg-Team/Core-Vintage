@@ -19,8 +19,8 @@ import net.dries007.tfc.util.calendar.ICalendarTickable;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.BoolProp.WET;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WET;
 
 /**
  *

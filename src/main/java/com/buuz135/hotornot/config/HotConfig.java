@@ -13,7 +13,7 @@ import com.buuz135.hotornot.HotOrNot;
 import com.buuz135.hotornot.network.PacketClientSettings;
 
 import static com.buuz135.hotornot.HotOrNot.MOD_NAME;
-import static su.terrafirmagreg.data.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.api.data.Reference.MODID_HOTORNOT;
 
 @EventBusSubscriber(modid = MODID_HOTORNOT)
 @Config(modid = MODID_HOTORNOT, type = Type.INSTANCE, name = MOD_NAME)

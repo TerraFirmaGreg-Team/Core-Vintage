@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
 public class ItemFireStarter extends BaseItem {
 

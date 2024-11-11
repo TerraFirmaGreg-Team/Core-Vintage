@@ -36,9 +36,9 @@ import java.util.Iterator;
 import java.util.function.Supplier;
 
 import static net.minecraftforge.fml.common.eventhandler.EventPriority.LOW;
-import static su.terrafirmagreg.data.Constants.MODID_FF;
-import static su.terrafirmagreg.data.Constants.MODID_FL;
-import static su.terrafirmagreg.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Reference.MODID_FF;
+import static su.terrafirmagreg.api.data.Reference.MODID_FL;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
 
 @Mod(modid = MODID_FF, name = FloraeFixes.name, version = Tags.MOD_VERSION, dependencies = "after:firmalife;after:tfcflorae")
 public class FloraeFixes {

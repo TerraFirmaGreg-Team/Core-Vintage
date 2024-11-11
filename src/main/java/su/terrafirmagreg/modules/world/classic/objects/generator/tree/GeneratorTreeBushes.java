@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.tree;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
@@ -19,7 +19,7 @@ import java.util.Random;
 
 import static net.minecraft.block.BlockLeaves.DECAYABLE;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
-import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.PLACED;
 
 public class GeneratorTreeBushes implements ITreeGenerator {
 
@@ -54,7 +54,7 @@ public class GeneratorTreeBushes implements ITreeGenerator {
   @Override
   public boolean canGenerateTree(World world, BlockPos pos, Tree treeType) {
     // Check if there is soil beneath
-    if (!BlockUtils.isSoil(world.getBlockState(pos.down()))) {
+    if (!BlockHelper.isSoil(world.getBlockState(pos.down()))) {
       return false;
     }
 

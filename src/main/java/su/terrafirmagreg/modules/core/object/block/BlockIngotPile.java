@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.base.block.BaseBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.object.tile.TileIngotPile;
 import su.terrafirmagreg.modules.device.client.render.TESRIngotPile;

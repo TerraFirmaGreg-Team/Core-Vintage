@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.soil;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
@@ -126,7 +127,7 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
               for (int y = -depth; y <= +depth; y++) {
                 final BlockPos pos = posHorizontal.add(0, y, 0);
                 final IBlockState current = world.getBlockState(pos);
-                if (BlockUtils.isSoilOrGravel(current) || BlockUtils.isVariant(current, RAW)) {
+                if (BlockHelper.isSoilOrGravel(current) || Variant.isVariant(current, RAW)) {
                   world.setBlockState(pos,
                                       BlocksRock.SAND.get(ProviderChunkData.getRockHeight(world, pos))
                                                      .getDefaultState(), 2);
@@ -182,9 +183,9 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
               for (int y = -depth; y <= +depth; y++) {
                 final BlockPos pos = posHorizontal.add(0, y, 0);
                 final IBlockState current = world.getBlockState(pos);
-                if (BlockUtils.isGrass(current)) {
+                if (BlockHelper.isGrass(current)) {
                   world.setBlockState(pos, BlocksSoil.PODZOL.get(ProviderChunkData.getSoilHeight(world, pos)).getDefaultState(), 2);
-                } else if (BlockUtils.isVariant(current, DRY_GRASS)) {
+                } else if (Variant.isVariant(current, DRY_GRASS)) {
                   world.setBlockState(pos, BlocksSoil.PODZOL.get(ProviderChunkData.getSoilHeight(world, pos)).getDefaultState(), 2);
                 }
               }
@@ -242,11 +243,11 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
               for (int y = -depth; y <= +depth; y++) {
                 final BlockPos pos = posHorizontal.add(0, y, 0);
                 final IBlockState current = world.getBlockState(pos);
-                if (BlockUtils.isDirt(current)) {
+                if (BlockHelper.isDirt(current)) {
                   world.setBlockState(pos,
                                       BlocksSoil.MUD.get(ProviderChunkData.getSoilHeight(world, pos))
                                                     .getDefaultState(), 2);
-                } else if (BlockUtils.isGrass(current)) {
+                } else if (BlockHelper.isGrass(current)) {
                   world.setBlockState(pos,
                                       BlocksSoil.MUD.get(ProviderChunkData.getSoilHeight(world, pos))
                                                     .getDefaultState(), 2);
@@ -361,9 +362,9 @@ public class GeneratorSoilDecorative implements IWorldGenerator {
             final BlockPos pos = start.add(x, y, z);
             final IBlockState current = world.getBlockState(pos);
 
-            if (BlockUtils.isGrass(current)) {
+            if (BlockHelper.isGrass(current)) {
               world.setBlockState(pos, BlocksSoil.PEAT_GRASS.getDefaultState(), 2);
-            } else if (BlockUtils.isDirt(current) || BlockUtils.isClay(current)) {
+            } else if (BlockHelper.isDirt(current) || BlockHelper.isClay(current)) {
               world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState(), 2);
             }
           }

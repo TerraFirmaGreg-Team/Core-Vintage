@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 import net.minecraft.client.model.ModelBase;
@@ -278,12 +278,12 @@ public class ModelAnimalHyena extends ModelBase {
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,
                                 Entity entity) {
-    head.rotateAngleX = f4 / (180F / MathConstants.PI);
-    head.rotateAngleY = f3 / (180F / MathConstants.PI);
+    head.rotateAngleX = f4 / (180F / MathUtils.PI);
+    head.rotateAngleY = f3 / (180F / MathUtils.PI);
 
     frontRightLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
-    frontLeftLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1;
-    backRightLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1;
+    frontLeftLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathUtils.PI) * 0.8F * f1;
+    backRightLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathUtils.PI) * 0.8F * f1;
     backLeftLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
   }
 }

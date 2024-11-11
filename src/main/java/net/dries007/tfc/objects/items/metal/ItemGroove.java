@@ -21,7 +21,7 @@ import net.dries007.tfc.api.types.Metal;
 import tfctech.TFCTech;
 import tfctech.TechConfig;
 
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 @MethodsReturnNonnullByDefault
 public class ItemGroove extends ItemTechMetal {

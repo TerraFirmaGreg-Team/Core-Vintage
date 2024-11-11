@@ -17,9 +17,9 @@ import lombok.Getter;
 
 import static net.minecraft.block.BlockDoor.HALF;
 import static net.minecraft.block.BlockDoor.HINGE;
-import static su.terrafirmagreg.data.Properties.BoolProp.OPEN;
-import static su.terrafirmagreg.data.Properties.BoolProp.POWERED;
-import static su.terrafirmagreg.data.Properties.EnumProp.FACING;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.OPEN;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.POWERED;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.FACING;
 
 @Getter
 public class BaseItemDoor extends BaseItemBlock {

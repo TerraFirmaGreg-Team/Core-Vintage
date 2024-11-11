@@ -35,14 +35,14 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import pieman.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 public class TileFreezeDryer extends BaseTileTickableInventory implements IItemHandlerSidedCallback, IProviderContainer<ContainerFreezeDryer, GuiFreezeDryer> {
 
@@ -70,7 +70,7 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
   public void update() {
     if (!initialized) {
       initialized = true;
-      localTemperature = Climate.getActualTemp(this.getPos());
+      localTemperature = ClimateTFC.getActualTemp(this.getPos());
       temperature = localTemperature;
       localPressure = (ModConfig.seaLevelPressure + ((-(this.getPos()
                                                             .getY() - ModConfig.seaLevel)) * ModConfig.pressureChange));
@@ -91,7 +91,7 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
     tick = 0;
 
     //Get current local temperature at block pos
-    localTemperature = Climate.getActualTemp(this.getPos());
+    localTemperature = ClimateTFC.getActualTemp(this.getPos());
 
     //Consume a piece of coolant
     handleCoolant();

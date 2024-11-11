@@ -2,10 +2,10 @@ package su.terrafirmagreg.modules.device.object.tile;
 
 import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiLogPile;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
@@ -29,8 +29,8 @@ import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
-import static su.terrafirmagreg.data.Properties.IntProp.TYPE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.IntProp.TYPE;
 
 
 public class TileLogPile extends BaseTileTickableInventory implements IProviderContainer<ContainerLogPile, GuiLogPile> {
@@ -122,7 +122,7 @@ public class TileLogPile extends BaseTileTickableInventory implements IProviderC
       }
     } while (block == Blocks.AIR || block instanceof BlockCharcoalPile);
 
-    double logs = countLogs() * (0.25 + 0.25 * MathConstants.RNG.nextFloat());
+    double logs = countLogs() * (0.25 + 0.25 * MathUtils.RNG.nextFloat());
     int charcoal = (int) MathHelper.clamp(logs, 0, 8);
     if (charcoal == 0) {
       world.setBlockState(pos, Blocks.AIR.getDefaultState());

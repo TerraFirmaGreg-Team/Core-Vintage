@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.object.container;
 
 import su.terrafirmagreg.api.base.container.BaseContainerTile;
-import su.terrafirmagreg.data.enums.EnumFirePitAttachment;
+import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 
 import net.minecraft.entity.player.InventoryPlayer;
@@ -11,7 +11,7 @@ import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.FIRE_PIT_ATTACHMENT;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.FIRE_PIT_ATTACHMENT;
 import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_EXTRA_INPUT_END;
 import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_EXTRA_INPUT_START;
 import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_FUEL_INPUT;

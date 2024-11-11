@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class BlockBeeNest extends BlockNonCube {
 

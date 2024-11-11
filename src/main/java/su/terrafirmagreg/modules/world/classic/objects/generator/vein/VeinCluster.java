@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.vein;
 
-import su.terrafirmagreg.data.enums.EnumGradeOre;
+import su.terrafirmagreg.api.data.enums.EnumGradeOre;
 
 import net.minecraft.util.math.BlockPos;
 

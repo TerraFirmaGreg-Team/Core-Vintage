@@ -33,7 +33,7 @@ import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.ICalendar;
 
-import static su.terrafirmagreg.data.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Reference.MODID_FL;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 public class RecipesFL {

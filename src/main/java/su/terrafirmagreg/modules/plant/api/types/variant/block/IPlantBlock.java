@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.plant.api.types.variant.block;
 
 import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
-import su.terrafirmagreg.data.lib.types.variant.block.IVariantBlock;
+import su.terrafirmagreg.api.library.types.variant.block.IVariantBlock;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 
 import net.minecraft.block.state.IBlockState;

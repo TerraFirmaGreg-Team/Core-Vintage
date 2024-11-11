@@ -12,11 +12,11 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
 
 public class GeneratorCaveVines extends WorldGenerator {
 
@@ -37,14 +37,14 @@ public class GeneratorCaveVines extends WorldGenerator {
       int j = 1 + rng.nextInt(plant.getMaxHeight());
 
       for (int k = 0; k < j; ++k) {
-        if (plant.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+        if (plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
             plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos.down(k))) &&
             worldIn.isAirBlock(blockpos.down(k)) &&
             pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
             worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
             plantBlock.canBlockStay(worldIn, blockpos.down(k), state) &&
             plantBlock.canPlaceBlockAt(worldIn, blockpos.down(k))) {
-          int plantAge = plant.getAgeForWorldgen(rng, Climate.getActualTemp(worldIn, blockpos));
+          int plantAge = plant.getAgeForWorldgen(rng, ClimateTFC.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos.down(k), state.withProperty(AGE_4, plantAge));
         }
       }

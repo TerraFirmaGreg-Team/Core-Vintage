@@ -1,7 +1,7 @@
 package com.eerussianguy.firmalife;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.data.lib.LoggingHelper;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -20,7 +20,7 @@ import com.eerussianguy.firmalife.registry.LootTablesFL;
 import com.eerussianguy.firmalife.util.OreDictsFL;
 import net.dries007.tfc.client.gui.FLGuiHandler;
 
-import static su.terrafirmagreg.data.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Reference.MODID_FL;
 
 @Mod(modid = MODID_FL, name = FirmaLife.MODNAME, version = Tags.MOD_VERSION, dependencies = "required-after:tfc;after:dynamictreestfc")
 public class FirmaLife {

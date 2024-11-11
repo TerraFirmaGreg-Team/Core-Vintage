@@ -10,7 +10,7 @@ import com.eerussianguy.firmalife.ConfigFL;
 
 import java.util.Arrays;
 
-import static su.terrafirmagreg.data.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Reference.MODID_FL;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 

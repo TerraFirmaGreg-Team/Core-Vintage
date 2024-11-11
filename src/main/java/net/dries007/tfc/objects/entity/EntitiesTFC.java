@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 public class EntitiesTFC {
 

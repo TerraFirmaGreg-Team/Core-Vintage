@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items;
 
-import su.terrafirmagreg.data.enums.EnumHideSize;
+import su.terrafirmagreg.api.data.enums.EnumHideSize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
@@ -60,7 +60,7 @@ import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 @Mod.EventBusSubscriber(modid = MODID_TFC)
 @GameRegistry.ObjectHolder(MODID_TFC)

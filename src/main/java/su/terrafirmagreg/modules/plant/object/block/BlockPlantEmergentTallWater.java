@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.plant.object.block;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 import su.terrafirmagreg.modules.plant.api.types.variant.block.PlantBlockVariant;
 
@@ -26,10 +26,10 @@ public class BlockPlantEmergentTallWater extends BlockPlantTallWater {
     for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i) {}
 
     if (water == SALT_WATER) {
-      return i < type.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlockUtils.isSaltWater(worldIn.getBlockState(pos.up()))) &&
+      return i < type.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlockHelper.isSaltWater(worldIn.getBlockState(pos.up()))) &&
              canBlockStay(worldIn, pos.up(), state);
     } else {
-      return i < type.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlockUtils.isFreshWater(worldIn.getBlockState(pos.up()))) &&
+      return i < type.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlockHelper.isFreshWater(worldIn.getBlockState(pos.up()))) &&
              canBlockStay(worldIn, pos.up(), state);
     }
   }
@@ -37,7 +37,7 @@ public class BlockPlantEmergentTallWater extends BlockPlantTallWater {
   public void shrink(World worldIn, BlockPos pos) {
     boolean flag = false;
     for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
-      if (BlockUtils.isWater(worldIn.getBlockState(pos.offset(enumfacing)))) {
+      if (BlockHelper.isWater(worldIn.getBlockState(pos.offset(enumfacing)))) {
         flag = true;
       }
     }
@@ -54,9 +54,9 @@ public class BlockPlantEmergentTallWater extends BlockPlantTallWater {
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     IBlockState soil = worldIn.getBlockState(pos.down());
     if (type.getWaterType() == SALT_WATER) {
-      return (soil.getBlock() == this || BlockUtils.isSaltWater(worldIn.getBlockState(pos))) && this.canSustainBush(soil);
+      return (soil.getBlock() == this || BlockHelper.isSaltWater(worldIn.getBlockState(pos))) && this.canSustainBush(soil);
     }
-    return (soil.getBlock() == this || BlockUtils.isFreshWater(worldIn.getBlockState(pos))) && this.canSustainBush(soil);
+    return (soil.getBlock() == this || BlockHelper.isFreshWater(worldIn.getBlockState(pos))) && this.canSustainBush(soil);
   }
 
   @Override
@@ -65,7 +65,7 @@ public class BlockPlantEmergentTallWater extends BlockPlantTallWater {
 
     boolean flag = false;
     for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
-      if (BlockUtils.isWater(world.getBlockState(pos.offset(enumfacing)))) {
+      if (BlockHelper.isWater(world.getBlockState(pos.offset(enumfacing)))) {
         flag = true;
       }
     }
@@ -82,7 +82,7 @@ public class BlockPlantEmergentTallWater extends BlockPlantTallWater {
     if (!this.canBlockStay(worldIn, pos, state)) {
       boolean flag = false;
       for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
-        if (BlockUtils.isWater(worldIn.getBlockState(pos.offset(enumfacing)))) {
+        if (BlockHelper.isWater(worldIn.getBlockState(pos.offset(enumfacing)))) {
           flag = true;
         }
       }

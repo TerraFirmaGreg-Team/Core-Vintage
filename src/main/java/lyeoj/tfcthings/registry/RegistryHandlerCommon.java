@@ -54,7 +54,7 @@ import static net.dries007.tfc.util.forge.ForgeRule.UPSET_NOT_LAST;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.WEAPONS;
-import static su.terrafirmagreg.data.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCTHINGS;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCTHINGS)
 public class RegistryHandlerCommon {

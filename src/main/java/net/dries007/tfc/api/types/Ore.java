@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 @GameRegistry.ObjectHolder(MODID_TFC)
 public class Ore extends IForgeRegistryEntry.Impl<Ore> {

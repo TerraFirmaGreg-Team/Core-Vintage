@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
@@ -12,12 +12,12 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import com.eerussianguy.firmalife.registry.BlocksFL;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import tfcflorae.TFCFlorae;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.DirectionProp.DIRECTIONAL;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.DIRECTIONAL;
 
 public class GeneratorGourds implements IWorldGenerator {
 
@@ -40,7 +40,7 @@ public class GeneratorGourds implements IWorldGenerator {
     // Guarantees crop generation if possible (easier to balance by config file while also making it random)
     BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-    float temperature = Climate.getAvgTemp(world, chunkBlockPos);
+    float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
     float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
     float floraDensity = ProviderChunkData.getFloraDensity(world, chunkBlockPos);
 
@@ -55,7 +55,7 @@ public class GeneratorGourds implements IWorldGenerator {
         final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 
         if (world.isAirBlock(pos) &&
-            (BlockUtils.isSoil(world.getBlockState(pos.down())) || BlockUtils.isGround(
+            (BlockHelper.isSoil(world.getBlockState(pos.down())) || BlockHelper.isGround(
               world.getBlockState(pos.down())))) {
           final int rotationValue = random.nextInt(4);
 
@@ -82,7 +82,7 @@ public class GeneratorGourds implements IWorldGenerator {
     // Guarantees crop generation if possible (easier to balance by config file while also making it random)
     BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-    float temperature = Climate.getAvgTemp(world, chunkBlockPos);
+    float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
     float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
     float floraDensity = ProviderChunkData.getFloraDensity(world, chunkBlockPos);
 
@@ -97,7 +97,7 @@ public class GeneratorGourds implements IWorldGenerator {
         final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 
         if (world.isAirBlock(pos) &&
-            (BlockUtils.isSoil(world.getBlockState(pos.down())) || BlockUtils.isGround(
+            (BlockHelper.isSoil(world.getBlockState(pos.down())) || BlockHelper.isGround(
               world.getBlockState(pos.down())))) {
           final int rotationValue = random.nextInt(4);
 

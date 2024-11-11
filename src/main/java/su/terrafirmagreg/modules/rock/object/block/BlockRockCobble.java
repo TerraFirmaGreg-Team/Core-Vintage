@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.util.BlockRenderLayer;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.MOSSY;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.MOSSY;
 
 public class BlockRockCobble extends BlockRockFallable {
 

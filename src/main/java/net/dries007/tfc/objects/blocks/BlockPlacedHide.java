@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.blocks;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.enums.EnumHideSize;
+import su.terrafirmagreg.api.data.enums.EnumHideSize;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -31,7 +31,7 @@ import net.dries007.tfc.objects.te.TEPlacedHide;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.HIDE_SIZE;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.HIDE_SIZE;
 
 /**
  * Due to implementation, this will only ever be a soaked hide -> scraped hide Placement is restricted to the TFC item.

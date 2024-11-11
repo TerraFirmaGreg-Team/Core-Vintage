@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.tree;
 
 import su.terrafirmagreg.api.util.StructureUtils;
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 
 import net.minecraft.block.BlockLog;
@@ -21,7 +21,7 @@ import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import java.util.Random;
 
 import static net.minecraft.block.BlockLog.LOG_AXIS;
-import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.PLACED;
 
 /**
  * This is a tree generator only used for the willow tree shapes. Requires two structure blocks: both found in /assets/tfc/[TREE NAME]/, named base.nbt and
@@ -37,8 +37,8 @@ public class GeneratorTreeWillow implements ITreeGenerator {
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree, Random rand, boolean isWorldGen) {
     //noinspection ConstantConditions
-    ResourceLocation base = new ResourceLocation(Constants.MODID_TFC, tree.getRegistryName().getPath() + "/base");
-    ResourceLocation overlay = new ResourceLocation(Constants.MODID_TFC, tree.getRegistryName().getPath() + "/overlay");
+    ResourceLocation base = new ResourceLocation(Reference.MODID_TFC, tree.getRegistryName().getPath() + "/base");
+    ResourceLocation overlay = new ResourceLocation(Reference.MODID_TFC, tree.getRegistryName().getPath() + "/overlay");
 
     structureBase = manager.get(world.getMinecraftServer(), base);
     structureOverlay = manager.get(world.getMinecraftServer(), overlay);

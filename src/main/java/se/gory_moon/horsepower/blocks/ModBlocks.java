@@ -1,8 +1,8 @@
 package se.gory_moon.horsepower.blocks;
 
 import su.terrafirmagreg.api.base.block.spi.IBlockSettings.Settings;
-import su.terrafirmagreg.data.Constants;
-import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
 import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
 import su.terrafirmagreg.modules.device.object.tile.TilePressHorse;
@@ -45,7 +45,7 @@ public class ModBlocks {
     GameRegistry.registerTileEntity(tileEntityClass, RESOURCE_PREFIX + tileEntityClass.getSimpleName());
   }
 
-  @Mod.EventBusSubscriber(modid = Constants.MODID_HORSEPOWER)
+  @Mod.EventBusSubscriber(modid = Reference.MODID_HORSEPOWER)
   public static class RegistrationHandler {
 
     public static final Set<ItemBlock> ITEM_BLOCKS = new HashSet<>();

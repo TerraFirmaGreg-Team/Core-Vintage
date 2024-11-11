@@ -1,7 +1,7 @@
 package com.eerussianguy.firmalife.world;
 
 import su.terrafirmagreg.api.base.biome.BaseBiome;
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 
@@ -25,7 +25,7 @@ public class WorldgenCinnamon extends WorldGenerator {
     if (worldgen && !world.isAirBlock(pos)) {
       return false;
     }
-    if (state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGrowableSoil(state)) {
+    if (state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlockHelper.isGrowableSoil(state)) {
       for (int air = 1; air < 15; air++) {
         if (!world.isAirBlock(pos.offset(EnumFacing.UP, air))) {
           return false;

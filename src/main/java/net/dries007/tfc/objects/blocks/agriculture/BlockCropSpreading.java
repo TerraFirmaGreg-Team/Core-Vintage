@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WILD;
 
 @Deprecated // For now, unused, needs design work
 

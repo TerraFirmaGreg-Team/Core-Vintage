@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
 public class TileSmelteryCauldron extends BaseTileTickableInventory
   implements IFluidHandlerSidedCallback, IFluidTankCallback, ITileFields, IAmbientalTileProvider,

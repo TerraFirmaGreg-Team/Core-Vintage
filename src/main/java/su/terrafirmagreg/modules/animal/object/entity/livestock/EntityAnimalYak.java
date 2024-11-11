@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
+import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -20,7 +21,7 @@ import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 
@@ -39,7 +40,7 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
     BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+    if (!BiomeHelper.isOceanicBiome(biome) && !BiomeHelper.isBeachBiome(biome) &&
         (biomeType == BiomeUtils.BiomeType.TAIGA)) {
       return ConfigAnimal.ENTITY.YAK.rarity;
     }

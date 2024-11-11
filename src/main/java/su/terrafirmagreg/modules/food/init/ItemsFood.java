@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.food.init;
 
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.data.lib.Pair;
+import su.terrafirmagreg.api.library.Pair;
 import su.terrafirmagreg.modules.food.api.types.category.FoodCategories;
 import su.terrafirmagreg.modules.food.api.types.variant.item.FoodItemVariant;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;

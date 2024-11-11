@@ -17,7 +17,7 @@ import tfcflorae.TFCFlorae;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.PLACED;
 
 public class GeneratorTreeRandom implements ITreeGenerator {
 

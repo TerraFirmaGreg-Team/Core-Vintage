@@ -413,18 +413,6 @@ public final class ColourUtils {
     return argb(r / colorHolders.length, g / colorHolders.length, b / colorHolders.length, a / colorHolders.length);
   }
 
-  public static int interpolate(int color1, int color2, float value) {
-    return interpolate(Interpolation.LINEAR, color1, color2, value);
-  }
-
-  public static int interpolate(IInterpolation curve, int color1, int color2, float value) {
-    value = MathHelper.clamp(value, 0.0F, 1.0F);
-    int r = (int) curve.interpolate((float) getRed(color1), (float) getRed(color2), value);
-    int g = (int) curve.interpolate((float) getGreen(color1), (float) getGreen(color2), value);
-    int b = (int) curve.interpolate((float) getBlue(color1), (float) getBlue(color2), value);
-    int a = (int) curve.interpolate((float) getAlpha(color1), (float) getAlpha(color2), value);
-    return argb(r, g, b, a);
-  }
 
   @SideOnly(Side.CLIENT)
   public static void setGlColor(int color) {

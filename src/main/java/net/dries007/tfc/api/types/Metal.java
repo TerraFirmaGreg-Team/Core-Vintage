@@ -31,7 +31,7 @@ import lombok.Getter;
 
 import java.util.function.BiFunction;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 public class Metal extends IForgeRegistryEntry.Impl<Metal> {
 

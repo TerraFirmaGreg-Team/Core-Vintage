@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items;
 
-import su.terrafirmagreg.data.enums.EnumHideSize;
+import su.terrafirmagreg.api.data.enums.EnumHideSize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.HIDE_SIZE;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.HIDE_SIZE;
 
 public class ItemAnimalHide extends ItemTFC {
 

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.structures;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
@@ -41,7 +41,7 @@ public class WorldGenStructuresCorals implements IWorldGenerator {
               (b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH
                || b == BiomesWorld.GRAVEL_BEACH)) {
             if ((up.getBlock() instanceof BlockCoral || world.getBlockState(pos)
-                                                             .getBlock() instanceof BlockCoral || BlockUtils.isGround(down)
+                                                             .getBlock() instanceof BlockCoral || BlockHelper.isGround(down)
                  || world.getBlockState(pos)
                          .getBlock() == ChunkGenClassic.SALT_WATER.getBlock()) &&
                 (pos.getY() < WorldTypeClassic.SEALEVEL - 7 && pos.getY() > 119

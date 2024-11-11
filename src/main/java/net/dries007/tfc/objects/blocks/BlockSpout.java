@@ -29,9 +29,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.NEEDS_SOURCE;
-import static su.terrafirmagreg.data.Properties.BoolProp.WATERED;
-import static su.terrafirmagreg.data.Properties.BoolProp.WET;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.NEEDS_SOURCE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WATERED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WET;
 
 public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreenhouseReceiverBlock {
 

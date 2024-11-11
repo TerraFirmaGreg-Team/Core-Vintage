@@ -21,8 +21,8 @@ import lyeoj.tfcthings.init.TFCThingsBlocks;
 
 import java.util.ArrayList;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.AXIS;
-import static su.terrafirmagreg.data.Properties.IntProp.OFFSET;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.AXIS;
+import static su.terrafirmagreg.api.data.Properties.IntProp.OFFSET;
 
 public class EntityRopeBridgeThrown extends EntityThrowable {
 

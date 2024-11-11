@@ -1,7 +1,7 @@
 package tfctech;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.data.lib.LoggingHelper;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -14,7 +14,7 @@ import tfctech.client.TechGuiHandler;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCTECH;
 
 @SuppressWarnings("WeakerAccess")
 @Mod(modid = MODID_TFCTECH, name = TFCTech.NAME, version = Tags.MOD_VERSION, dependencies = TFCTech.DEPENDENCIES)

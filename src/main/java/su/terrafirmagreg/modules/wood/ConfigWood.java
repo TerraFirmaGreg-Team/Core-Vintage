@@ -9,8 +9,8 @@ import net.minecraftforge.common.config.Config;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 
-import static su.terrafirmagreg.data.Constants.MOD_ID;
-import static su.terrafirmagreg.data.Constants.MOD_NAME;
+import static su.terrafirmagreg.Tags.MOD_ID;
+import static su.terrafirmagreg.Tags.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/module/Wood")
 public class ConfigWood {

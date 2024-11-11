@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.api.util.InjectorUtils;
-import su.terrafirmagreg.data.lib.LoggingHelper;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 import su.terrafirmagreg.modules.world.debug.WorldTypeDebug;

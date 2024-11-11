@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlockContainer;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
@@ -46,7 +46,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 import java.util.function.BiPredicate;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
 @SuppressWarnings("deprecation")
 public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsConsumerBlock {

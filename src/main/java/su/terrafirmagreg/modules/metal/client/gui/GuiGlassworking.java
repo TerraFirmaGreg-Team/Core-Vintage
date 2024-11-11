@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.metal.client.gui;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 import su.terrafirmagreg.modules.metal.objects.container.ContainerGlassworking;
 
 import net.minecraft.client.gui.Gui;
@@ -17,11 +17,11 @@ import net.minecraftforge.common.MinecraftForge;
 import net.dries007.tfc.client.button.GuiButtonKnapping;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCTECH;
 
 public class GuiGlassworking extends GuiContainerTFC {
 
-  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Constants.MODID_TFC,
+  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Reference.MODID_TFC,
                                                                           "textures/gui/knapping.png");
   private static final ResourceLocation GLASS_TEXTURE = new ResourceLocation(MODID_TFCTECH,
                                                                              "textures/gui/glassworking/button.png");

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.capabilities.heat.spi;
 
 import su.terrafirmagreg.api.util.TranslatorUtil;
-import su.terrafirmagreg.data.Unicode;
+import su.terrafirmagreg.api.data.Unicode;
 import su.terrafirmagreg.modules.core.ConfigCore;
 
 import net.minecraft.client.resources.I18n;

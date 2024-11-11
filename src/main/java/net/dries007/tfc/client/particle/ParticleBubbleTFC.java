@@ -5,7 +5,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 @SideOnly(Side.CLIENT)
 public class ParticleBubbleTFC extends Particle {

@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.mapgen;
 
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.types.variant.Variant;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
 
@@ -78,7 +79,7 @@ public class MapGenCaves extends MapGenBase {
       }
 
       for (int j = 0; j < runs2; j++) {
-        float d1 = this.rand.nextFloat() * MathConstants.PI * 2.0F;
+        float d1 = this.rand.nextFloat() * MathUtils.PI * 2.0F;
         float d2 = (this.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
         float d3 = this.rand.nextFloat() * 2.0F + this.rand.nextFloat();
         if (this.rand.nextInt(10) == 0) {
@@ -147,7 +148,7 @@ public class MapGenCaves extends MapGenBase {
         return;
       }
 
-      double radius = width + MathHelper.sin(i1 * MathConstants.PI / rndRange) * f1 * 1.0F;
+      double radius = width + MathHelper.sin(i1 * MathUtils.PI / rndRange) * f1 * 1.0F;
       double yRadius = radius * yRadiusMult;
       if (onlyOne || RNG.nextInt(4) != 0) {
         final double localXOffset = xOffset - worldX;
@@ -199,7 +200,7 @@ public class MapGenCaves extends MapGenBase {
           for (int zCoord = Math.max(initialZ - 1, 0); zCoord < Math.min(maxZ + 1, 16); ++zCoord) {
             for (int yCoord = Math.min(initialY + 1, 250); yCoord > Math.max(minY - 1, 0);
                  --yCoord) {
-              if (BlockUtils.isWater(primer.getBlockState(xCoord, yCoord, zCoord))) {
+              if (BlockHelper.isWater(primer.getBlockState(xCoord, yCoord, zCoord))) {
                 continue outer;
               }
             }
@@ -227,16 +228,16 @@ public class MapGenCaves extends MapGenBase {
 
               final IBlockState current = primer.getBlockState(xCoord, y, zCoord);
 
-              if (!BlockUtils.isSoil(current) && !BlockUtils.isVariant(current, RAW)) {
+              if (!BlockHelper.isSoil(current) && !Variant.isVariant(current, RAW)) {
                 continue;
               }
 
-              if (BlockUtils.isGrass(current)) {
+              if (BlockHelper.isGrass(current)) {
                 grass = primer.getBlockState(xCoord, y, zCoord);
               }
 
               for (int upCount = 1;
-                   BlockUtils.isSoilOrGravel(primer.getBlockState(xCoord, y + upCount, zCoord));
+                   BlockHelper.isSoilOrGravel(primer.getBlockState(xCoord, y + upCount, zCoord));
                    upCount++) {
                 primer.setBlockState(xCoord, y + upCount, zCoord, AIR);
               }
@@ -246,7 +247,7 @@ public class MapGenCaves extends MapGenBase {
                 primer.setBlockState(xCoord, y, zCoord, LAVA);
               } else {
                 primer.setBlockState(xCoord, y, zCoord, AIR);
-                if (grass != null && BlockUtils.isDirt(
+                if (grass != null && BlockHelper.isDirt(
                   primer.getBlockState(xCoord, y - 1, zCoord))) {
                   primer.setBlockState(xCoord, y - 1, zCoord, grass);
                 }

@@ -20,7 +20,7 @@ import net.dries007.tfc.util.skills.SkillType;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WILD;
 
 public abstract class BlockCropSimple extends BlockCropTFC {
 

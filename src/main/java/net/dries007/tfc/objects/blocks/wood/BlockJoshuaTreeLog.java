@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.BlockUtils;
 
 import net.minecraft.block.Block;
@@ -33,12 +35,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.DOWN;
-import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
-import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
-import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
-import static su.terrafirmagreg.data.Properties.BoolProp.UP;
-import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.DOWN;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.UP;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WEST;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
 
 @MethodsReturnNonnullByDefault
@@ -105,7 +107,7 @@ public class BlockJoshuaTreeLog extends Block {
     Block block4 = worldIn.getBlockState(pos.south()).getBlock();
     Block block5 = worldIn.getBlockState(pos.west()).getBlock();
     return state.withProperty(DOWN,
-                              BlockUtils.isVariant(worldIn.getBlockState(pos.down()), SAND) || BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down()))
+                              Variant.isVariant(worldIn.getBlockState(pos.down()), SAND) || BlockHelper.isSoilOrGravel(worldIn.getBlockState(pos.down()))
                               || BlockUtils.isBlock(block, this, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY, BlockJoshuaTreeFlower.get(wood)))
                 .withProperty(UP, BlockUtils.isBlock(block1, this, BlockJoshuaTreeFlower.get(wood)))
                 .withProperty(NORTH, BlockUtils.isBlock(block2, this, BlockJoshuaTreeFlower.get(wood)))
@@ -150,8 +152,8 @@ public class BlockJoshuaTreeLog extends Block {
   public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
     Block block = blockAccess.getBlockState(pos.offset(side)).getBlock();
     return block != this && block != BlockJoshuaTreeFlower.get(wood) &&
-           (side != EnumFacing.DOWN || !BlockUtils.isVariant(blockAccess.getBlockState(pos.offset(side)), SAND) ||
-            !BlockUtils.isSoilOrGravel(blockAccess.getBlockState(pos.offset(side))) ||
+           (side != EnumFacing.DOWN || !Variant.isVariant(blockAccess.getBlockState(pos.offset(side)), SAND) ||
+            !BlockHelper.isSoilOrGravel(blockAccess.getBlockState(pos.offset(side))) ||
             BlockUtils.isBlock(block, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY));
   }
 
@@ -268,8 +270,8 @@ public class BlockJoshuaTreeLog extends Block {
 
         Block block1 = worldIn.getBlockState(blockpos.down()).getBlock();
 
-        if (BlockUtils.isVariant(worldIn.getBlockState(blockpos.down()), SAND) ||
-            BlockUtils.isSoilOrGravel(worldIn.getBlockState(blockpos.down())) ||
+        if (Variant.isVariant(worldIn.getBlockState(blockpos.down()), SAND) ||
+                BlockHelper.isSoilOrGravel(worldIn.getBlockState(blockpos.down())) ||
             BlockUtils.isBlock(block1, this, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY)) {
           return true;
         }
@@ -277,8 +279,8 @@ public class BlockJoshuaTreeLog extends Block {
     }
 
     Block block2 = worldIn.getBlockState(pos.down()).getBlock();
-    return BlockUtils.isVariant(worldIn.getBlockState(pos.down()), SAND) ||
-           BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
+    return Variant.isVariant(worldIn.getBlockState(pos.down()), SAND) ||
+            BlockHelper.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
            BlockUtils.isBlock(block2, this, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY);
   }
 }

@@ -18,7 +18,7 @@ import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
-import static su.terrafirmagreg.data.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.api.data.Reference.MODID_HOTORNOT;
 
 @ObjectHolder(value = MODID_HOTORNOT)
 @EventBusSubscriber(modid = MODID_HOTORNOT)

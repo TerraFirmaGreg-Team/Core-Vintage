@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.init;
 
-import su.terrafirmagreg.data.enums.EnumGradeOre;
+import su.terrafirmagreg.api.data.enums.EnumGradeOre;
 import su.terrafirmagreg.modules.device.object.recipe.quern.IQuernRecipeManager;
 import su.terrafirmagreg.modules.plant.init.BlocksPlant;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypes;

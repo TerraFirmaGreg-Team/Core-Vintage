@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
@@ -66,7 +66,7 @@ public class GeneratorFissure implements IWorldGenerator {
     for (int y = 1; y < 4; y++) {
       for (BlockPos pos : clearing) {
         IBlockState block = world.getBlockState(pos.up(y));
-        if (BlockUtils.isWater(block) && !BlockUtils.isGround(block)) {
+        if (BlockHelper.isWater(block) && !BlockHelper.isGround(block)) {
           return;
         }
       }

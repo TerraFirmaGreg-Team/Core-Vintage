@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.animal.object.entity.predator;
 
+import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -46,7 +47,7 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
 
   @SuppressWarnings("unused")
   public EntityAnimalHyena(World worldIn) {
-    this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()),
          getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
@@ -68,7 +69,7 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+    if (!BiomeHelper.isOceanicBiome(biome) && !BiomeHelper.isBeachBiome(biome) &&
         (biomeType == BiomeUtils.BiomeType.SAVANNA)) {
       return ConfigAnimal.ENTITY.HYENA.rarity;
     }
@@ -178,7 +179,7 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return MathConstants.RNG.nextInt(100) < 5
+    return MathUtils.RNG.nextInt(100) < 5
            ? SoundsAnimal.ANIMAL_HYENA_CRY
            : SoundsAnimal.ANIMAL_HYENA_SAY;
   }

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.rock.client.gui;
 
 import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.data.lib.NBTBuilder;
+import su.terrafirmagreg.api.library.NBTBuilder;
 import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.objects.recipe.anvil.AnvilRecipeManager;

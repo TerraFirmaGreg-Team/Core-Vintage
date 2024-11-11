@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.data.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Reference.MODID_FL;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_FL)
 public enum ParticlesFL {

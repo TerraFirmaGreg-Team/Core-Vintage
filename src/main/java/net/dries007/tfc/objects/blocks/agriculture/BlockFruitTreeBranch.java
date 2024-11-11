@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,12 +31,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.FACING;
-import static su.terrafirmagreg.data.Properties.IntProp.EAST_INT;
-import static su.terrafirmagreg.data.Properties.IntProp.NORTH_INT;
-import static su.terrafirmagreg.data.Properties.IntProp.SOUTH_INT;
-import static su.terrafirmagreg.data.Properties.IntProp.UP_INT;
-import static su.terrafirmagreg.data.Properties.IntProp.WEST_INT;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.FACING;
+import static su.terrafirmagreg.api.data.Properties.IntProp.EAST_INT;
+import static su.terrafirmagreg.api.data.Properties.IntProp.NORTH_INT;
+import static su.terrafirmagreg.api.data.Properties.IntProp.SOUTH_INT;
+import static su.terrafirmagreg.api.data.Properties.IntProp.UP_INT;
+import static su.terrafirmagreg.api.data.Properties.IntProp.WEST_INT;
 
 public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
 
@@ -269,7 +269,7 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
 
   @Override
   public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-    float temp = Climate.getActualTemp(world, pos);
+    float temp = ClimateTFC.getActualTemp(world, pos);
     float rainfall = ProviderChunkData.getRainfall(world, pos);
     boolean canGrow = tree.isValidForGrowth(temp, rainfall);
     if (canGrow) {

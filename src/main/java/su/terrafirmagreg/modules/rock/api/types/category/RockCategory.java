@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.api.types.category;
 
-import su.terrafirmagreg.data.lib.types.category.Category;
+import su.terrafirmagreg.api.library.types.category.Category;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 
 import net.minecraft.item.Item.ToolMaterial;

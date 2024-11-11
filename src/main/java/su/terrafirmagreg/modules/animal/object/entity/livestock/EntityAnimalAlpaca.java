@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
+import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -39,9 +40,9 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
   @SuppressWarnings("unused")
   public EntityAnimalAlpaca(World worldIn) {
-    this(worldIn, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
+    this(worldIn, IAnimal.Gender.valueOf(MathUtils.RNG.nextBoolean()),
          EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.ALPACA.adulthood, ConfigAnimal.ENTITY.ALPACA.elder),
-         EntitySheep.getRandomSheepColor(MathConstants.RNG));
+         EntitySheep.getRandomSheepColor(MathUtils.RNG));
   }
 
   public EntityAnimalAlpaca(World worldIn, IAnimal.Gender gender, int birthDay, EnumDyeColor dye) {
@@ -52,7 +53,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
     BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+    if (!BiomeHelper.isOceanicBiome(biome) && !BiomeHelper.isBeachBiome(biome) &&
         (biomeType == BiomeUtils.BiomeType.TAIGA)) {
       return ConfigAnimal.ENTITY.ALPACA.rarity;
     }
@@ -84,7 +85,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
     int numberOfChildren = ConfigAnimal.ENTITY.ALPACA.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalAlpaca baby = new EntityAnimalAlpaca(world,
-                                                       Gender.valueOf(MathConstants.RNG.nextBoolean()),
+                                                       Gender.valueOf(MathUtils.RNG.nextBoolean()),
                                                        (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(
@@ -131,7 +132,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return MathConstants.RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_ALPACA_CRY
+    return MathUtils.RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_ALPACA_CRY
                                               : SoundsAnimal.ANIMAL_ALPACA_SAY;
   }
 

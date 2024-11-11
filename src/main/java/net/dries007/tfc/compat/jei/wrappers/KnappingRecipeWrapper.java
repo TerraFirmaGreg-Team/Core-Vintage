@@ -19,7 +19,7 @@ import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
 
 public class KnappingRecipeWrapper implements IRecipeWrapper {

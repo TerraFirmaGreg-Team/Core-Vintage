@@ -1,20 +1,18 @@
 package su.terrafirmagreg.api.network;
 
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class PacketRegistry implements IPacketRegistry {
 
-  private final ThreadedNetworkWrapper threadedNetworkWrapper;
+  private final ThreadedNetworkWrapper wrapper;
 
   /**
    * The current discriminator value. This is ticked up automatically as messages are registered.
    */
   private int id = 0;
 
-  public PacketRegistry(ThreadedNetworkWrapper threadedNetworkWrapper) {
-    this.threadedNetworkWrapper = threadedNetworkWrapper;
+  public PacketRegistry(ThreadedNetworkWrapper wrapper) {
+    this.wrapper = wrapper;
   }
 
   /**
@@ -24,32 +22,9 @@ public class PacketRegistry implements IPacketRegistry {
    * @param side  The side that receives this packet.
    */
   @Override
-  @SuppressWarnings({"unchecked", "rawtypes"})
-  public IPacketRegistry register(Class clazz, Side side) {
+  public <P extends IPacket<P>> IPacketRegistry register(Side side, Class<P> clazz) {
 
-    this.threadedNetworkWrapper.registerMessage(clazz, clazz, this.nextId(), side);
-    return this;
-  }
-
-  @Override
-  public <REQ extends IMessage, REPLY extends IMessage> IPacketRegistry register(
-    Class<? extends IMessageHandler<REQ, REPLY>> messageHandler,
-    Class<REQ> requestMessageType,
-    Side side) {
-
-    this.threadedNetworkWrapper.registerMessage(messageHandler, requestMessageType, this.nextId(),
-                                                side);
-    return this;
-  }
-
-  @Override
-  public <REQ extends IMessage, REPLY extends IMessage> IPacketRegistry register(
-    IMessageHandler<REQ, REPLY> messageHandler,
-    Class<REQ> requestMessageType,
-    Side side) {
-
-    this.threadedNetworkWrapper.registerMessage(messageHandler, requestMessageType, this.nextId(),
-                                                side);
+    this.wrapper.registerMessage(clazz, clazz, nextId(), side);
     return this;
   }
 

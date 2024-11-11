@@ -1,7 +1,7 @@
 package net.dries007.tfc.types;
 
-import su.terrafirmagreg.data.enums.EnumHideSize;
-import su.terrafirmagreg.data.lib.Pair;
+import su.terrafirmagreg.api.data.enums.EnumHideSize;
+import su.terrafirmagreg.api.library.Pair;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
@@ -161,7 +161,7 @@ import static net.dries007.tfc.util.skills.SmithingSkill.Type.ARMOR;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.WEAPONS;
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.BRICKS;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.SMOOTH;

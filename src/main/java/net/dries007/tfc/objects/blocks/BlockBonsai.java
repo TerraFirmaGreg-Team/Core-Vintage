@@ -28,8 +28,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.IntProp.STAGE_3;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_3;
 
 @MethodsReturnNonnullByDefault
 

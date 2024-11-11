@@ -17,7 +17,7 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.Properties.IntProp.JARS;
+import static su.terrafirmagreg.api.data.Properties.IntProp.JARS;
 
 @MethodsReturnNonnullByDefault
 public class ItemBlockJar extends ItemBlockTFC {

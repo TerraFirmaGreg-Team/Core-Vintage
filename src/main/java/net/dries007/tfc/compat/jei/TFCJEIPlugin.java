@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.jei;
 
-import su.terrafirmagreg.data.Constants;
-import su.terrafirmagreg.data.enums.EnumHideSize;
+import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.EnumHideSize;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
@@ -98,26 +98,26 @@ import java.util.stream.Collectors;
 @JEIPlugin
 public final class TFCJEIPlugin implements IModPlugin {
 
-  public static final String ALLOY_UID = Constants.MODID_TFC + ".alloy";
-  public static final String ANVIL_UID = Constants.MODID_TFC + ".anvil";
-  public static final String BARREL_UID = Constants.MODID_TFC + ".barrel";
-  public static final String BLAST_FURNACE_UID = Constants.MODID_TFC + ".blast_furnace";
-  public static final String BLOOMERY_UID = Constants.MODID_TFC + ".bloomery";
-  public static final String CASTING_UID = Constants.MODID_TFC + ".casting";
-  public static final String CHISEL_UID = Constants.MODID_TFC + ".chisel";
-  public static final String HEAT_UID = Constants.MODID_TFC + ".heat";
-  public static final String KNAP_CLAY_UID = Constants.MODID_TFC + ".knap.clay";
-  public static final String KNAP_FIRECLAY_UID = Constants.MODID_TFC + ".knap.fireclay";
-  public static final String KNAP_LEATHER_UID = Constants.MODID_TFC + ".knap.leather";
-  public static final String KNAP_STONE_UID = Constants.MODID_TFC + ".knap.stone";
-  public static final String METAL_HEAT_UID = Constants.MODID_TFC + ".metal_heat";
-  public static final String LOOM_UID = Constants.MODID_TFC + ".loom";
-  public static final String ROCK_LAYER_UID = Constants.MODID_TFC + ".rock_layer";
-  public static final String VEIN_UID = Constants.MODID_TFC + ".vein";
-  public static final String WELDING_UID = Constants.MODID_TFC + ".welding";
-  public static final String SCRAPING_UID = Constants.MODID_TFC + ".scraping";
-  public static final String SMELTERY_UID = Constants.MODID_TFC + ".smeltery";
-  public static final String GLASSWORKING_UID = Constants.MODID_TFC + ".glassworking";
+  public static final String ALLOY_UID = Reference.MODID_TFC + ".alloy";
+  public static final String ANVIL_UID = Reference.MODID_TFC + ".anvil";
+  public static final String BARREL_UID = Reference.MODID_TFC + ".barrel";
+  public static final String BLAST_FURNACE_UID = Reference.MODID_TFC + ".blast_furnace";
+  public static final String BLOOMERY_UID = Reference.MODID_TFC + ".bloomery";
+  public static final String CASTING_UID = Reference.MODID_TFC + ".casting";
+  public static final String CHISEL_UID = Reference.MODID_TFC + ".chisel";
+  public static final String HEAT_UID = Reference.MODID_TFC + ".heat";
+  public static final String KNAP_CLAY_UID = Reference.MODID_TFC + ".knap.clay";
+  public static final String KNAP_FIRECLAY_UID = Reference.MODID_TFC + ".knap.fireclay";
+  public static final String KNAP_LEATHER_UID = Reference.MODID_TFC + ".knap.leather";
+  public static final String KNAP_STONE_UID = Reference.MODID_TFC + ".knap.stone";
+  public static final String METAL_HEAT_UID = Reference.MODID_TFC + ".metal_heat";
+  public static final String LOOM_UID = Reference.MODID_TFC + ".loom";
+  public static final String ROCK_LAYER_UID = Reference.MODID_TFC + ".rock_layer";
+  public static final String VEIN_UID = Reference.MODID_TFC + ".vein";
+  public static final String WELDING_UID = Reference.MODID_TFC + ".welding";
+  public static final String SCRAPING_UID = Reference.MODID_TFC + ".scraping";
+  public static final String SMELTERY_UID = Reference.MODID_TFC + ".smeltery";
+  public static final String GLASSWORKING_UID = Reference.MODID_TFC + ".glassworking";
 
   private static IModRegistry REGISTRY;
 

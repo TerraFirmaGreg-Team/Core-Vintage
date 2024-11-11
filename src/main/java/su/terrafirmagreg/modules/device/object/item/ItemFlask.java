@@ -47,7 +47,7 @@ import lombok.Getter;
 
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.data.Constants.MOD_ID;
+import static su.terrafirmagreg.Tags.MOD_ID;
 import static su.terrafirmagreg.modules.food.api.IFoodStatsTFC.MAX_PLAYER_THIRST;
 
 @Getter

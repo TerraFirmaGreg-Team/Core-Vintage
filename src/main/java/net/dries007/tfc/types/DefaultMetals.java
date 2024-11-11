@@ -18,7 +18,7 @@ import static net.dries007.tfc.api.types.Metal.Tier.TIER_III;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_IV;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_V;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_VI;
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 @SuppressWarnings("WeakerAccess")
 @Mod.EventBusSubscriber(modid = MODID_TFC)

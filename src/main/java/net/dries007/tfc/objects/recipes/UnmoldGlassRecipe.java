@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.recipes;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
@@ -126,7 +126,7 @@ public class UnmoldGlassRecipe extends IForgeRegistryEntry.Impl<IRecipe> impleme
       if (!stack.isEmpty()) {
         EntityPlayer player = ForgeHooks.getCraftingPlayer();
         if (!player.world.isRemote) {
-          if (MathConstants.RNG.nextFloat() <= chance) {
+          if (MathUtils.RNG.nextFloat() <= chance) {
             ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(stack.getItem()));
           } else {
             player.world.playSound(null, player.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);

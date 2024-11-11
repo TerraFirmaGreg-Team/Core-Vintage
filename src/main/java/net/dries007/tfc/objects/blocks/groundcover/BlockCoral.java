@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.groundcover;
 
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
@@ -36,7 +37,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,13 +45,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.ALL_FACES;
-import static su.terrafirmagreg.data.Properties.BoolProp.DOWN;
-import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
-import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
-import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
-import static su.terrafirmagreg.data.Properties.BoolProp.UP;
-import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.ALL_FACES;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.DOWN;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.UP;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WEST;
 
 public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlantable {
 
@@ -215,10 +216,10 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
       IBlockState up = worldIn.getBlockState(pos.up());
       IBlockState blockState = worldIn.getBlockState(pos.offset(face));
       if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
-           BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
-          (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
+              BlockHelper.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
+          (BlockHelper.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
            up.getBlock() instanceof BlockCoral)) {
-        return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
+        return ClimateTFC.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
       }
     }
     return false;
@@ -352,10 +353,10 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
       IBlockState up = worldIn.getBlockState(pos.up());
       IBlockState blockState = worldIn.getBlockState(pos.offset(face));
       if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
-           BlockUtils.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
-          (BlockUtils.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
+              BlockHelper.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
+          (BlockHelper.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
            up.getBlock() instanceof BlockCoral)) {
-        return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
+        return ClimateTFC.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
       }
     }
     return false;

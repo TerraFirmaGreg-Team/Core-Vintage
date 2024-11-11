@@ -1,6 +1,6 @@
 package tfctech.objects.recipes;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -173,7 +173,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
    * @return ItemStack.EMPTY on break, the mold (empty) if pass
    */
   public ItemStack getMoldResult(ItemStack moldIn) {
-    if (MathConstants.RNG.nextFloat() <= chance) {
+    if (MathUtils.RNG.nextFloat() <= chance) {
       return new ItemStack(moldIn.getItem());
     } else {
       return ItemStack.EMPTY;

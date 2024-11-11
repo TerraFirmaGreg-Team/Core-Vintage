@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.metal.api.types.variant.Item;
 
 import su.terrafirmagreg.api.base.item.spi.IItemSettings;
-import su.terrafirmagreg.data.lib.types.variant.item.IVariantItem;
+import su.terrafirmagreg.api.library.types.variant.item.IVariantItem;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 
 import org.jetbrains.annotations.NotNull;

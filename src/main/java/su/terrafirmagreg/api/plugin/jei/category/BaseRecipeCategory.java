@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.plugin.jei.category;
 
+import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.data.Constants;
 
 import net.minecraft.util.ResourceLocation;
 
@@ -36,7 +36,7 @@ public abstract class BaseRecipeCategory<T extends IRecipeWrapper> implements IR
 
   @Override
   public String getModName() {
-    return Constants.MOD_NAME;
+    return Tags.MOD_NAME;
   }
 
   @Override

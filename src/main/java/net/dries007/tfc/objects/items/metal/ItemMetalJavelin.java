@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.metal;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -70,7 +70,7 @@ public class ItemMetalJavelin extends ItemMetalTool {
           javelin.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 1.5F, 0.5F);
           worldIn.spawnEntity(javelin);
           worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
-                            1.0F / (MathConstants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                            1.0F / (MathUtils.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
         }
         if (!((EntityPlayer) entityLiving).isCreative()) {
           player.inventory.deleteStack(stack);

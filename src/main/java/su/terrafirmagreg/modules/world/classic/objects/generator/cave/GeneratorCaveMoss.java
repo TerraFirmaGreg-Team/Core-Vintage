@@ -12,11 +12,11 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
 
 public class GeneratorCaveMoss extends WorldGenerator {
 
@@ -34,12 +34,12 @@ public class GeneratorCaveMoss extends WorldGenerator {
     for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, pos) / 16; ++i) {
       BlockPos blockpos = pos.add(rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4), rng.nextInt(4) - rng.nextInt(4));
 
-      if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+      if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
           worldIn.isAirBlock(blockpos) &&
           pos.getY() < WorldTypeClassic.SEALEVEL - 3 &&
           worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
           plantBlock.canBlockStay(worldIn, blockpos, state)) {
-        int plantAge = type.getAgeForWorldgen(rng, Climate.getActualTemp(worldIn, blockpos));
+        int plantAge = type.getAgeForWorldgen(rng, ClimateTFC.getActualTemp(worldIn, blockpos));
         setBlockAndNotifyAdequately(worldIn, blockpos, state.withProperty(AGE_4, plantAge));
       }
     }

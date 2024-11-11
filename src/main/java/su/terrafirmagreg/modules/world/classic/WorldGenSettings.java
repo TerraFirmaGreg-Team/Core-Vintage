@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 
 import com.google.common.base.Strings;
 
@@ -40,12 +40,12 @@ public class WorldGenSettings {
     if (Strings.isNullOrEmpty(options)) {
       return new WorldGenSettingsBuilder();
     }
-    return Constants.GSON.fromJson(options, WorldGenSettingsBuilder.class);
+    return Reference.GSON.fromJson(options, WorldGenSettingsBuilder.class);
   }
 
   @Override
   public String toString() {
-    return Constants.GSON.toJson(this);
+    return Reference.GSON.toJson(this);
   }
 
   public static class WorldGenSettingsBuilder {
@@ -84,7 +84,7 @@ public class WorldGenSettings {
 
     @Override
     public String toString() {
-      return Constants.GSON.toJson(this);
+      return Reference.GSON.toJson(this);
     }
   }
 }

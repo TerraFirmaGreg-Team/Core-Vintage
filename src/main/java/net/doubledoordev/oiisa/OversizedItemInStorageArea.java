@@ -3,7 +3,7 @@ package net.doubledoordev.oiisa;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.lib.LoggingHelper;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -40,7 +40,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static net.doubledoordev.oiisa.OversizedItemInStorageArea.MOD_NAME;
-import static su.terrafirmagreg.data.Constants.MODID_OSA;
+import static su.terrafirmagreg.api.data.Reference.MODID_OSA;
 
 @Mod(modid = MODID_OSA, name = MOD_NAME, version = Tags.MOD_VERSION)
 public class OversizedItemInStorageArea {

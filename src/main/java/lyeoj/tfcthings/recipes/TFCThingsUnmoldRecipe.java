@@ -1,6 +1,6 @@
 package lyeoj.tfcthings.recipes;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -152,7 +152,7 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
   }
 
   public ItemStack getMoldResult(ItemStack moldIn) {
-    return MathConstants.RNG.nextFloat() <= this.chance ? new ItemStack(moldIn.getItem()) : ItemStack.EMPTY;
+    return MathUtils.RNG.nextFloat() <= this.chance ? new ItemStack(moldIn.getItem()) : ItemStack.EMPTY;
   }
 
   public ItemStack getOutputItem(IMoldHandler moldHandler) {

@@ -1,7 +1,7 @@
 package se.gory_moon.horsepower.client.renderer;
 
 import su.terrafirmagreg.api.util.RenderUtils;
-import su.terrafirmagreg.data.enums.EnumChopperPart;
+import su.terrafirmagreg.api.data.enums.EnumChopperPart;
 import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
 
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +17,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.lwjgl.opengl.GL11;
 import se.gory_moon.horsepower.blocks.BlockChopperHorse;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.CHOPPER_PART;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.CHOPPER_PART;
 
 public class TESRChopperHorse extends TESRHPBase<TileChopperHorse> {
 

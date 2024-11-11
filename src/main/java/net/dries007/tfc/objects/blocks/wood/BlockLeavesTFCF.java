@@ -3,8 +3,8 @@ package net.dries007.tfc.objects.blocks.wood;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.enums.EnumLeafState;
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.data.enums.EnumLeafState;
+import su.terrafirmagreg.api.library.MCDate.Month;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -37,7 +37,7 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.agriculture.SeasonalTrees;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -51,9 +51,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
-import static su.terrafirmagreg.data.Properties.EnumProp.LEAF_STATE;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.LEAF_STATE;
 
 public class BlockLeavesTFCF extends BlockLeaves {
 
@@ -113,7 +113,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
 
     Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int expectedStage = fruitTree.getStageForMonth(currentMonth);
-    float avgTemperature = Climate.getAvgTemp(world, pos);
+    float avgTemperature = ClimateTFC.getAvgTemp(world, pos);
     float tempGauss = (int) (12f + (random.nextGaussian() / 4));
 
     switch (expectedStage) {

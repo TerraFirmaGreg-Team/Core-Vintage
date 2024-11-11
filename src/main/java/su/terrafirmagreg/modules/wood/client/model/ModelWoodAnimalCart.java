@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodAnimalCart;
 
 import net.minecraft.client.model.ModelBase;
@@ -38,7 +38,7 @@ public class ModelWoodAnimalCart extends ModelBase {
 
     this.shaft = new ModelRenderer(this, 0, 25);
     this.shaft.setRotationPoint(0.0F, 0.0F, -14.0F);
-    this.shaft.rotateAngleY = MathConstants.PI / 2.0F;
+    this.shaft.rotateAngleY = MathUtils.PI / 2.0F;
     this.shaft.rotateAngleZ = -0.07F;
     this.shaft.addBox(0.0F, 0.0F, -8.0F, 20, 2, 1);
     this.shaft.addBox(0.0F, 0.0F, 7.0F, 20, 2, 1);
@@ -66,12 +66,12 @@ public class ModelWoodAnimalCart extends ModelBase {
     for (int i = 0; i < 8; i++) {
       ModelRenderer rim = new ModelRenderer(this, 0, 11);
       rim.addBox(-1.5F, -4.5F, 9.86F, 2, 9, 1);
-      rim.rotateAngleX = i * MathConstants.PI / 4.0F;
+      rim.rotateAngleX = i * MathUtils.PI / 4.0F;
       this.leftWheel.addChild(rim);
 
       ModelRenderer spoke = new ModelRenderer(this, 4, 11);
       spoke.addBox(-1.5F, 1.0F, -0.5F, 2, 9, 1);
-      spoke.rotateAngleX = i * MathConstants.PI / 4.0F;
+      spoke.rotateAngleX = i * MathUtils.PI / 4.0F;
       this.leftWheel.addChild(spoke);
     }
 
@@ -83,12 +83,12 @@ public class ModelWoodAnimalCart extends ModelBase {
     for (int i = 0; i < 8; i++) {
       ModelRenderer rim = new ModelRenderer(this, 0, 11);
       rim.addBox(0.5F, -4.5F, 9.86F, 2, 9, 1);
-      rim.rotateAngleX = i * MathConstants.PI / 4.0F;
+      rim.rotateAngleX = i * MathUtils.PI / 4.0F;
       this.rightWheel.addChild(rim);
 
       ModelRenderer spoke = new ModelRenderer(this, 4, 11);
       spoke.addBox(0.5F, 1.0F, -0.5F, 2, 9, 1);
-      spoke.rotateAngleX = i * MathConstants.PI / 4.0F;
+      spoke.rotateAngleX = i * MathUtils.PI / 4.0F;
       this.rightWheel.addChild(spoke);
     }
 

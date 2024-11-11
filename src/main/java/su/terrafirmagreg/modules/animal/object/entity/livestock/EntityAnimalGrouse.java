@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
+import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -29,7 +30,7 @@ import java.util.List;
 public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestock {
 
   public EntityAnimalGrouse(World worldIn) {
-    this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()),
          getRandomGrowth(ConfigAnimal.ENTITY.GROUSE.adulthood,
                          ConfigAnimal.ENTITY.GROUSE.elder));
   }
@@ -43,7 +44,7 @@ public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestoc
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
     BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+    if (!BiomeHelper.isOceanicBiome(biome) && !BiomeHelper.isBeachBiome(biome) &&
         (biomeType == BiomeUtils.BiomeType.PLAINS || biomeType == BiomeUtils.BiomeType.SAVANNA)) {
       return ConfigAnimal.ENTITY.GROUSE.rarity;
     }

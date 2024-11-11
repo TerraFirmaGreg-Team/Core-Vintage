@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
@@ -34,7 +34,7 @@ import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
 
@@ -46,13 +46,13 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.MATURE;
-import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
-import static su.terrafirmagreg.data.Properties.IntProp.MOISTURE;
-import static su.terrafirmagreg.data.Properties.IntProp.STAGE_5;
-import static su.terrafirmagreg.data.Properties.IntProp.STAGE_6;
-import static su.terrafirmagreg.data.Properties.IntProp.STAGE_7;
-import static su.terrafirmagreg.data.Properties.IntProp.STAGE_8;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.MATURE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.api.data.Properties.IntProp.MOISTURE;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_5;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_6;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_7;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_8;
 
 public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlant
 
@@ -213,7 +213,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
         tile.reduceCounter(growthTicks);
 
         // find stats for the time in which the crop would have grown
-        float temp = Climate.getActualTemp(worldIn, pos, -tile.getTicksSinceUpdate());
+        float temp = ClimateTFC.getActualTemp(worldIn, pos, -tile.getTicksSinceUpdate());
         float rainfall = ProviderChunkData.getRainfall(worldIn, pos);
 
         // check if the crop could grow, if so, grow
@@ -264,7 +264,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
     if (this.crop != Crop.RICE) {
       return super.canSustainBush(state);
     } else {
-      return BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenClassic.FRESH_WATER ||
+      return BlockHelper.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenClassic.FRESH_WATER ||
              state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater);
     }
   }

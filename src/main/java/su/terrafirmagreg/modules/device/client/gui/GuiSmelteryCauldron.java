@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.modules.device.object.tile.TileSmelteryCauldron;
 
@@ -145,9 +145,9 @@ public class GuiSmelteryCauldron extends BaseGuiContainerTile<TileSmelteryCauldr
       String formatted = Heat.getTooltip(tile.getTemp());
       formatted += TextFormatting.WHITE;
       if (tile.isSolidified()) {
-        formatted += I18n.format(Constants.MODID_TFC + ".tooltip.solid");
+        formatted += I18n.format(Reference.MODID_TFC + ".tooltip.solid");
       } else {
-        formatted += I18n.format(Constants.MODID_TFC + ".tooltip.liquid");
+        formatted += I18n.format(Reference.MODID_TFC + ".tooltip.liquid");
       }
       tooltip.add(formatted);
       this.drawHoveringText(tooltip, mouseX, mouseY, fontRenderer);

@@ -5,7 +5,7 @@ import net.minecraft.util.EnumFacing;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class TEStemCrop extends TECropBase {
 

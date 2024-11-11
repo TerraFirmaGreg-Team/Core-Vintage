@@ -10,7 +10,7 @@ import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
 
 public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
 

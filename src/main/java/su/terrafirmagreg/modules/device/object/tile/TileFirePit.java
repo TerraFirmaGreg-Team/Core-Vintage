@@ -3,10 +3,10 @@ package su.terrafirmagreg.modules.device.object.tile;
 import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.base.tile.spi.ITileFields;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.data.MathConstants;
-import su.terrafirmagreg.data.enums.EnumFirePitAttachment;
+import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
@@ -65,8 +65,8 @@ import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
-import static su.terrafirmagreg.data.Properties.EnumProp.FIRE_PIT_ATTACHMENT;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.FIRE_PIT_ATTACHMENT;
 
 public class TileFirePit extends BaseTileTickableInventory
   implements ICalendarTickable, ITileFields, IItemHandlerSidedCallback, IAmbientalTileProvider,
@@ -143,7 +143,7 @@ public class TileFirePit extends BaseTileTickableInventory
     burnTicks -= ConfigDevice.BLOCK.FIRE_PIT.rainTicks;
     // Play the "tsssss" sound
     world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f,
-                    0.8f + MathConstants.RNG.nextFloat() * 0.4f);
+                    0.8f + MathUtils.RNG.nextFloat() * 0.4f);
   }
 
   @Override

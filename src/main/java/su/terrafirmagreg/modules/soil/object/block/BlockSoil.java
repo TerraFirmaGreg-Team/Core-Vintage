@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
-import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
@@ -24,7 +24,7 @@ import lombok.Getter;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.CLAY;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CLAY;
 
 @Getter
 public abstract class BlockSoil extends BaseBlock implements ISoilBlock {

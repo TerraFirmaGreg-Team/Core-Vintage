@@ -1,7 +1,7 @@
 package se.gory_moon.horsepower;
 
 import su.terrafirmagreg.api.util.GameUtils;
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ import se.gory_moon.horsepower.recipes.HPRecipes;
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = Constants.MODID_HORSEPOWER)
+@Mod.EventBusSubscriber(modid = Reference.MODID_HORSEPOWER)
 public class HPEventHandler {
 
   public static Map<ItemStack, Pair<Integer, Integer>> choppingAxes = new HashMap<>();
@@ -31,8 +31,8 @@ public class HPEventHandler {
 
   @SubscribeEvent
   public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-    if (event.getModID().equals(Constants.MODID_HORSEPOWER)) {
-      ConfigManager.sync(Constants.MODID_HORSEPOWER, Config.Type.INSTANCE);
+    if (event.getModID().equals(Reference.MODID_HORSEPOWER)) {
+      ConfigManager.sync(Reference.MODID_HORSEPOWER, Config.Type.INSTANCE);
     }
   }
 

@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.metal.objects.block;
 import su.terrafirmagreg.api.base.block.BaseBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
@@ -46,8 +46,8 @@ import lombok.Getter;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 import static su.terrafirmagreg.modules.core.capabilities.size.spi.Size.HUGE;
 import static su.terrafirmagreg.modules.core.capabilities.size.spi.Weight.VERY_HEAVY;
 

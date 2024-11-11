@@ -53,15 +53,15 @@ import net.dries007.tfc.objects.te.TETurntable;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.Constants.MODID_FL;
-import static su.terrafirmagreg.data.Properties.BoolProp.CAN_GROW;
-import static su.terrafirmagreg.data.Properties.BoolProp.DECAYABLE;
-import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
-import static su.terrafirmagreg.data.Properties.BoolProp.NEEDS_SOURCE;
-import static su.terrafirmagreg.data.Properties.BoolProp.WATERED;
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_8;
-import static su.terrafirmagreg.data.Properties.IntProp.CLAY_LEVEL;
-import static su.terrafirmagreg.data.Properties.IntProp.STAGE_5;
+import static su.terrafirmagreg.api.data.Reference.MODID_FL;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CAN_GROW;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.DECAYABLE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.NEEDS_SOURCE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WATERED;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_8;
+import static su.terrafirmagreg.api.data.Properties.IntProp.CLAY_LEVEL;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_5;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = MODID_FL)

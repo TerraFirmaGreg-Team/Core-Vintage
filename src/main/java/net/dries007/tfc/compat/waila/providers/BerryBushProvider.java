@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +17,7 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.FRUITING;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.FRUITING;
 
 public class BerryBushProvider implements IWailaBlock {
 
@@ -36,7 +36,7 @@ public class BerryBushProvider implements IWailaBlock {
     IBlockState state = world.getBlockState(pos);
     if (state.getBlock() instanceof BlockBerryBush block) {
       if (block.getBush().isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(FRUITING)) {
-        float temp = Climate.getActualTemp(world, pos);
+        float temp = ClimateTFC.getActualTemp(world, pos);
         float rainfall = ProviderChunkData.getRainfall(world, pos);
         var tile = TileUtils.getTile(world, pos, TETickCounter.class).filter(t -> block.getBush().isValidForGrowth(temp, rainfall));
         if (tile.isPresent()) {

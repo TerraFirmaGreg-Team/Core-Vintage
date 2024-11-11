@@ -13,7 +13,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
 public class ItemBlockTorch extends ItemBlockTFC {
 

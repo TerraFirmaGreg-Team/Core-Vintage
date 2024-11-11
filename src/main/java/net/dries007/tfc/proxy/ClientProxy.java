@@ -1,7 +1,7 @@
 package net.dries007.tfc.proxy;
 
-import su.terrafirmagreg.data.lib.MCDate;
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.library.MCDate;
+import su.terrafirmagreg.api.library.MCDate.Month;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -13,7 +13,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -61,8 +60,8 @@ public class ClientProxy implements IProxy {
   @NotNull
   @Override
   public String getDayName(int dayOfMonth, long totalDays) {
-    String date = Calendar.CALENDAR_TIME.getMonthOfYear().name() + dayOfMonth;
-    String birthday = Calendar.BIRTHDAYS.get(date);
+    String date = net.dries007.tfc.util.calendar.Calendar.CALENDAR_TIME.getMonthOfYear().name() + dayOfMonth;
+    String birthday = net.dries007.tfc.util.calendar.Calendar.BIRTHDAYS.get(date);
     if (birthday != null) {
       return birthday;
     }

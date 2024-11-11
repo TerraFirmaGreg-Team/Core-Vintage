@@ -19,7 +19,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
 
 public class GuiUrn extends BaseGuiContainerTile<TEUrn> {
 

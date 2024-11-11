@@ -1,9 +1,10 @@
 package net.dries007.tfc;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.WorldUtils;
-import su.terrafirmagreg.data.DamageSources;
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -136,12 +137,12 @@ import net.dries007.tfc.util.MonsterEquipment;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SmithingSkill;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.BoolProp.CAN_FALL;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CAN_FALL;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.COARSE_DIRT;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DIRT;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.FARMLAND;
@@ -332,7 +333,7 @@ public final class CommonEventHandler {
       RayTraceResult result = MathUtils.rayTrace(event.getWorld(), player, true);
       if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
         IBlockState waterState = world.getBlockState(result.getBlockPos());
-        boolean isFreshWater = BlockUtils.isFreshWater(waterState), isSaltWater = BlockUtils.isSaltWater(waterState);
+        boolean isFreshWater = BlockHelper.isFreshWater(waterState), isSaltWater = BlockHelper.isSaltWater(waterState);
         if ((isFreshWater && foodStats.attemptDrink(10, true)) || (isSaltWater && foodStats.attemptDrink(-1, true))) {
           //Simulated so client will check if he would drink before updating stats
           if (!world.isRemote) {
@@ -361,7 +362,7 @@ public final class CommonEventHandler {
 
     if (ConfigTFC.General.OVERRIDES.enableHoeing) {
       if (block instanceof ISoilBlock soilBlock) {
-        if (BlockUtils.isVariant(soilBlock.getVariant(), GRASS, DIRT, PODZOL, SPARSE_GRASS)) {
+        if (Variant.isVariant(soilBlock.getVariant(), GRASS, DIRT, PODZOL, SPARSE_GRASS)) {
           if (!world.isRemote) {
             world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
             world.setBlockState(pos, FARMLAND.get(soilBlock.getType()).getDefaultState());
@@ -650,7 +651,7 @@ public final class CommonEventHandler {
       // Check creature spawning - Prevents vanilla's respawning mechanic to spawn creatures outside their allowed conditions
       if (event.getEntity() instanceof ICreature creature) {
         float rainfall = ProviderChunkData.getRainfall(world, pos);
-        float temperature = Climate.getAvgTemp(world, pos);
+        float temperature = ClimateTFC.getAvgTemp(world, pos);
         float floraDensity = ProviderChunkData.getFloraDensity(world, pos);
         float floraDiversity = ProviderChunkData.getFloraDiversity(world, pos);
         Biome biome = world.getBiome(pos);

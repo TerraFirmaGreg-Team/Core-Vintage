@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlantEmergentTallWater;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlantWater;
@@ -37,7 +37,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.MATURE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.MATURE;
 
 public class BlockCropDead extends BlockBush { //implements IGrowingPlant
 
@@ -143,7 +143,7 @@ public class BlockCropDead extends BlockBush { //implements IGrowingPlant
     if (this.crop != Crop.RICE) {
       return super.canSustainBush(state);
     } else {
-      return BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenClassic.FRESH_WATER ||
+      return BlockHelper.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenClassic.FRESH_WATER ||
              state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater);
     }
   }

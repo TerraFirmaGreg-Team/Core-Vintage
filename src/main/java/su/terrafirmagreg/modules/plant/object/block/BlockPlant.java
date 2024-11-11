@@ -1,9 +1,13 @@
 package su.terrafirmagreg.modules.plant.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlockBush;
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.types.category.Category;
+import su.terrafirmagreg.api.library.types.type.Type;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.MathConstants;
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -39,7 +43,7 @@ import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.util.agriculture.CropTFCF;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -48,8 +52,8 @@ import lombok.Getter;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
-import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.api.data.Properties.IntProp.DAYPERIOD;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.CACTUS;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.CREEPING;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.DESERT;
@@ -184,22 +188,22 @@ public class BlockPlant extends BaseBlockBush implements IPlantBlock {
 
     if (!type.getOreDictName().isPresent() && !worldIn.isRemote && (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1
                                                                     || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1)
-        && !BlockUtils.isCategory(type.getCategory(), SHORT_GRASS, TALL_GRASS)) {
+        && !Category.isCategory(type.getCategory(), SHORT_GRASS, TALL_GRASS)) {
 
-      if (BlockUtils.isType(type, BLUE_GINGER)) {
+      if (Type.isType(type, BLUE_GINGER)) {
         int chance;
         if (currentStage != 0 && expectedStage != 0) {
-          chance = MathConstants.RNG.nextInt(2);
+          chance = MathUtils.RNG.nextInt(2);
           if (chance == 0) {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), MathConstants.RNG.nextInt(2)));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), MathUtils.RNG.nextInt(2)));
           }
         } else {
-          chance = MathConstants.RNG.nextInt(2);
+          chance = MathUtils.RNG.nextInt(2);
           if (chance == 0) {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.GINGER, 1 + MathConstants.RNG.nextInt(2)));
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), MathConstants.RNG.nextInt(2)));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.GINGER, 1 + MathUtils.RNG.nextInt(2)));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), MathUtils.RNG.nextInt(2)));
           } else {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), 1 + MathConstants.RNG.nextInt(2)));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), 1 + MathUtils.RNG.nextInt(2)));
           }
         }
       } else {
@@ -229,7 +233,7 @@ public class BlockPlant extends BaseBlockBush implements IPlantBlock {
   public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player) {
     ItemStack stack = player.getHeldItemMainhand();
     IBlockState state = world.getBlockState(pos);
-    if (BlockUtils.isCategory(type.getCategory(), REED, REED_SEA, TALL_REED, TALL_REED_SEA, SHORT_GRASS, TALL_GRASS)) {
+    if (Category.isCategory(type.getCategory(), REED, REED_SEA, TALL_REED, TALL_REED_SEA, SHORT_GRASS, TALL_GRASS)) {
       return (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1);
 
     }
@@ -237,22 +241,22 @@ public class BlockPlant extends BaseBlockBush implements IPlantBlock {
   }
 
   private boolean isValidSoil(IBlockState state) {
-    if (BlockUtils.isCategory(type.getCategory(), CACTUS, DESERT, DESERT_TALL_PLANT)) {
-      return BlockUtils.isVariant(state, SAND) || BlockUtils.isBlock(state.getBlock(), Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY);
+    if (Category.isCategory(type.getCategory(), CACTUS, DESERT, DESERT_TALL_PLANT)) {
+      return Variant.isVariant(state, SAND) || BlockUtils.isBlock(state.getBlock(), Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY);
 
-    } else if (BlockUtils.isCategory(type.getCategory(), DRY, DRY_TALL_PLANT)) {
-      return BlockUtils.isVariant(state, SAND, DRY_GRASS) || BlockUtils.isBlock(state.getBlock(), Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY);
+    } else if (Category.isCategory(type.getCategory(), DRY, DRY_TALL_PLANT)) {
+      return Variant.isVariant(state, SAND, DRY_GRASS) || BlockUtils.isBlock(state.getBlock(), Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY);
 
-    } else if (BlockUtils.isCategory(type.getCategory(), REED, REED_SEA, TALL_REED, TALL_REED_SEA)) {
-      return BlockUtils.isVariant(state, SAND) || BlockUtils.isSoil(state)
+    } else if (Category.isCategory(type.getCategory(), REED, REED_SEA, TALL_REED, TALL_REED_SEA)) {
+      return Variant.isVariant(state, SAND) || BlockHelper.isSoil(state)
              || BlockUtils.isBlock(state.getBlock(), Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY);
 
-    } else if (BlockUtils.isCategory(type.getCategory(), WATER, TALL_WATER, EMERGENT_TALL_WATER, WATER_SEA, TALL_WATER_SEA, EMERGENT_TALL_WATER_SEA, CREEPING, HANGING)) {
-      return BlockUtils.isVariant(state, SAND) || BlockUtils.isSoilOrGravel(state) || BlockUtils.isSoil(state) || BlockUtils.isGround(state)
+    } else if (Category.isCategory(type.getCategory(), WATER, TALL_WATER, EMERGENT_TALL_WATER, WATER_SEA, TALL_WATER_SEA, EMERGENT_TALL_WATER_SEA, CREEPING, HANGING)) {
+      return Variant.isVariant(state, SAND) || BlockHelper.isSoilOrGravel(state) || BlockHelper.isSoil(state) || BlockHelper.isGround(state)
              || BlockUtils.isBlock(state.getBlock(), Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY);
     }
 
-    return BlockUtils.isSoil(state) || BlockUtils.isBlock(state.getBlock(), Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY);
+    return BlockHelper.isSoil(state) || BlockUtils.isBlock(state.getBlock(), Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY);
   }
 
   public double getGrowthRate(World world, BlockPos pos) {
@@ -269,14 +273,14 @@ public class BlockPlant extends BaseBlockBush implements IPlantBlock {
 
   @Override
   protected boolean canSustainBush(IBlockState state) {
-    return type.isClayMarking() ? BlockUtils.isClay(state) || isValidSoil(state) : isValidSoil(state);
+    return type.isClayMarking() ? BlockHelper.isClay(state) || isValidSoil(state) : isValidSoil(state);
   }
 
   @Override
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     if (!worldIn.isAreaLoaded(pos, 1)) {return;}
     int age;
-    if (type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
+    if (type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
         type.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
 
       age = state.getValue(AGE_4);
@@ -288,7 +292,7 @@ public class BlockPlant extends BaseBlockBush implements IPlantBlock {
 
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) || !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+    } else if (!type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       age = state.getValue(AGE_4);
       if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
         if (age > 0) {
@@ -307,7 +311,7 @@ public class BlockPlant extends BaseBlockBush implements IPlantBlock {
     IBlockState soil = worldIn.getBlockState(pos.down());
     if (state.getBlock() == this) {
       return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) &&
-             type.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
+             type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
              type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
 

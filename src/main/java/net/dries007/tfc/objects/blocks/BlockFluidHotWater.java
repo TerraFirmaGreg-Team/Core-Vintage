@@ -18,7 +18,7 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class BlockFluidHotWater extends BlockFluidTFC {
 

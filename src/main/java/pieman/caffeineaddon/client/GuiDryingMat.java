@@ -13,7 +13,7 @@ import net.dries007.tfc.objects.te.TEDryingMat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.api.data.Reference.MODID_CAFFEINEADDON;
 
 public class GuiDryingMat extends BaseGuiContainerTile<TEDryingMat> {
 

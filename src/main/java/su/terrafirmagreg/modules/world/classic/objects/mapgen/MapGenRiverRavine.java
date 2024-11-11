@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.mapgen;
 
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.types.variant.Variant;
+import su.terrafirmagreg.api.util.MathUtils;
 
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -43,7 +44,7 @@ public class MapGenRiverRavine extends MapGenBase {
     double x = chunkX * 16 + rand.nextInt(16);
     double y = 80;
     double z = chunkZ * 16 + rand.nextInt(16);
-    float angleY = rand.nextFloat() * MathConstants.PI * 2.0F;
+    float angleY = rand.nextFloat() * MathUtils.PI * 2.0F;
     float angleZ = (rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
     float angleX = (rand.nextFloat() * 2.0F + rand.nextFloat()) * 2.0F;
 
@@ -75,7 +76,7 @@ public class MapGenRiverRavine extends MapGenBase {
 
     outer:
     for (int round = 0; round < rounds; round++) {
-      double min = 3.5D + MathHelper.sin(round * MathConstants.PI / rounds) * angleX * 1.0F;
+      double min = 3.5D + MathHelper.sin(round * MathUtils.PI / rounds) * angleX * 1.0F;
       double max = min * 0.8;
       min *= rand.nextFloat() * 0.25D + 0.75D;
       max *= rand.nextFloat() * 0.25D + 0.75D;
@@ -142,7 +143,7 @@ public class MapGenRiverRavine extends MapGenBase {
       for (int x = Math.max(xMin - 1, 0); x < Math.min(xMax + 1, 16); ++x) {
         for (int z = Math.max(zMin - 1, 0); z < Math.min(zMax + 1, 16); ++z) {
           for (int y = Math.min(yMax + 1, 250); y >= Math.max(yMin - 2, 1); --y) {
-            if (BlockUtils.isWater(primer.getBlockState(x, y, z))) {
+            if (BlockHelper.isWater(primer.getBlockState(x, y, z))) {
               continue outer;
             }
           }
@@ -163,7 +164,7 @@ public class MapGenRiverRavine extends MapGenBase {
                 + yNormalized * yNormalized / 6.0D >= 1.0D) {
               continue;
             }
-            if (!BlockUtils.isVariant(primer.getBlockState(x, y, z), RAW) && !BlockUtils.isSoil(primer.getBlockState(x, y, z))) {
+            if (!Variant.isVariant(primer.getBlockState(x, y, z), RAW) && !BlockHelper.isSoil(primer.getBlockState(x, y, z))) {
               continue;
             }
 

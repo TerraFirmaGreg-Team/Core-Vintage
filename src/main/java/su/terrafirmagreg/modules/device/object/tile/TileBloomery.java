@@ -36,10 +36,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
-import static su.terrafirmagreg.data.Properties.IntProp.LAYERS;
-import static su.terrafirmagreg.data.Properties.IntProp.TYPE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Properties.IntProp.LAYERS;
+import static su.terrafirmagreg.api.data.Properties.IntProp.TYPE;
 
 @SuppressWarnings("WeakerAccess")
 public class TileBloomery extends BaseTileTickableInventory implements IAmbientalTileProvider {

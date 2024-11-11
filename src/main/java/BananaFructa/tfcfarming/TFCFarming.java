@@ -18,9 +18,9 @@ import BananaFructa.tfcfarming.firmalife.TEPlanterN;
 import BananaFructa.tfcfarming.firmalife.TEStemCropN;
 import BananaFructa.tfcfarming.network.PacketHandler;
 
-import static su.terrafirmagreg.data.Constants.MODID_FL;
-import static su.terrafirmagreg.data.Constants.MODID_TFCF;
-import static su.terrafirmagreg.data.Constants.MODID_TFCFARMING;
+import static su.terrafirmagreg.api.data.Reference.MODID_FL;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCFARMING;
 
 @Mod(modid = MODID_TFCFARMING,
      name = TFCFarming.name,

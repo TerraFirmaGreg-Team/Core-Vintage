@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.animal.object.entity;
 
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -97,7 +97,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
    */
   public static int getRandomGrowth(int daysToAdult, int daysToElder) {
     int randomFactor = daysToElder > 0 ? (int) (daysToElder * 1.25f) : daysToAdult * 4;
-    int lifeTimeDays = daysToAdult + MathConstants.RNG.nextInt(randomFactor);
+    int lifeTimeDays = daysToAdult + MathUtils.RNG.nextInt(randomFactor);
     return (int) (Calendar.PLAYER_TIME.getTotalDays() - lifeTimeDays);
   }
 
@@ -168,7 +168,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
       // Try to return to vanilla's default method a baby of this animal, as if bred normally
       try {
         EntityAnimalBase baby = this.getClass().getConstructor(World.class).newInstance(this.world);
-        baby.setGender(Gender.valueOf(MathConstants.RNG.nextBoolean()));
+        baby.setGender(Gender.valueOf(MathUtils.RNG.nextBoolean()));
         baby.setBirthDay((int) Calendar.PLAYER_TIME.getTotalDays());
         baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
                                                          : this.getFamiliarity() * 0.9F);
@@ -369,7 +369,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
            //&& this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && BlockHelper.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @Override

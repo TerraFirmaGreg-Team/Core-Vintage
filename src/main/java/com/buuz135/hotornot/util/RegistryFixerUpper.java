@@ -10,7 +10,7 @@ import com.buuz135.hotornot.object.item.ItemMetalTongs;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 
-import static su.terrafirmagreg.data.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.api.data.Reference.MODID_HOTORNOT;
 
 // TODO remove at some point? Only needed to transition to the new names
 @EventBusSubscriber(modid = MODID_HOTORNOT)

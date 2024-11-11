@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.gui;
 
 import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
-import su.terrafirmagreg.data.lib.NBTBuilder;
+import su.terrafirmagreg.api.library.NBTBuilder;
 import su.terrafirmagreg.modules.metal.objects.recipe.anvil.AnvilRecipeManager;
 import su.terrafirmagreg.modules.metal.objects.recipe.anvil.IAnvilRecipe;
 import su.terrafirmagreg.modules.metal.objects.tile.TileMetalAnvil;
@@ -27,7 +27,7 @@ import net.dries007.tfc.network.PacketGuiButton;
 import java.io.IOException;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 import static su.terrafirmagreg.modules.rock.object.tile.TileRockAnvil.SLOT_INPUT_1;
 
 @SideOnly(Side.CLIENT)

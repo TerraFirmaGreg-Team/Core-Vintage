@@ -27,7 +27,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.TFCFlorae;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCF)
 public class CommonProxy {

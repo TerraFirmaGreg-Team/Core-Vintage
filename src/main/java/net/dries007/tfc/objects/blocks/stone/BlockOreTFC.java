@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.stone;
 
-import su.terrafirmagreg.data.enums.EnumGradeOre;
+import su.terrafirmagreg.api.data.enums.EnumGradeOre;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 
 import net.minecraft.block.Block;
@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.GRADE_ORE;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.GRADE_ORE;
 
 public class BlockOreTFC extends Block {
 

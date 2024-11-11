@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
 public class TileSmelteryFirebox extends BaseTileTickableInventory
   implements ICalendarTickable, ITileFields, IAmbientalTileProvider,

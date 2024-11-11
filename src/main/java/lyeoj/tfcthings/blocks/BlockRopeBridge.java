@@ -26,8 +26,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.AXIS;
-import static su.terrafirmagreg.data.Properties.IntProp.OFFSET;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.AXIS;
+import static su.terrafirmagreg.api.data.Properties.IntProp.OFFSET;
 
 public class BlockRopeBridge extends Block implements TFCThingsConfigurableItem {
 

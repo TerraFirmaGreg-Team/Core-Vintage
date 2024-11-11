@@ -11,8 +11,8 @@ import com.cleanroommc.configanytime.ConfigAnytime;
 import net.dries007.tfc.util.config.HemisphereType;
 import net.dries007.tfc.util.config.TemperatureMode;
 
-import static su.terrafirmagreg.data.Constants.MOD_ID;
-import static su.terrafirmagreg.data.Constants.MOD_NAME;
+import static su.terrafirmagreg.Tags.MOD_ID;
+import static su.terrafirmagreg.Tags.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/module/World")
 public class ConfigWorld {

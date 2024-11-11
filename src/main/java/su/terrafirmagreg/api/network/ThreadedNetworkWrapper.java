@@ -21,19 +21,16 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
-import com.google.common.base.Throwables;
-
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Data;
 
 import java.util.IdentityHashMap;
 import java.util.Map;
 
-// * https://github.com/SleepyTrousers/EnderCore/blob/1.12/src/main/java/com/enderio/core/common/network/ThreadedNetworkWrapper.java
-
 public class ThreadedNetworkWrapper {
 
-  private static final @NotNull Map<Class<? extends IMessage>, SimpleNetworkWrapper> typesClient = new IdentityHashMap<>();
-  private static final @NotNull Map<Class<? extends IMessage>, SimpleNetworkWrapper> typesServer = new IdentityHashMap<>();
+  private static final @NotNull Map<Class<? extends IMessage>, NetworkWrapper> types = new IdentityHashMap<>();
   /**
    * The network wrapper instance, created when a new handler is constructed.
    */
@@ -46,15 +43,13 @@ public class ThreadedNetworkWrapper {
    */
   public ThreadedNetworkWrapper(String netId) {
     if (netId.length() > 20) {
-      throw new RuntimeException("Channel name '" + netId
-                                 + "' is too long for Forge. Maximum length supported is 20 characters.");
+      throw new RuntimeException("Channel name '" + netId + "' is too long for Forge. Maximum length supported is 20 characters.");
     }
     this.parent = NetworkRegistry.INSTANCE.newSimpleChannel(netId);
   }
 
-  static synchronized void registerChannelMapping(Class<? extends IMessage> requestMessageType,
-                                                  @NotNull SimpleNetworkWrapper parent, Side side) {
-    (side == Side.CLIENT ? typesClient : typesServer).put(requestMessageType, parent);
+  static synchronized void registerChannelMapping(Class<? extends IMessage> requestMessageType, @NotNull SimpleNetworkWrapper parent, Side side) {
+    types.put(requestMessageType, NetworkWrapper.of(parent, side));
   }
 
   private static <REQ extends IMessage, REPLY extends IMessage> IMessageHandler<? super REQ, ? extends REPLY> instantiate(
@@ -63,26 +58,19 @@ public class ThreadedNetworkWrapper {
       return handler.getDeclaredConstructor().newInstance();
     } catch (Throwable e) {
       TerraFirmaGreg.LOGGER.error("Failed to instanciate " + handler);
-      throw Throwables.propagate(e);
+      throw new RuntimeException(e);
     }
   }
 
-  private static synchronized SimpleNetworkWrapper getServerParent(IMessage message) {
-    final SimpleNetworkWrapper parent = typesClient.get(message.getClass());
-    if (parent == null) {
-      throw new RuntimeException(
-        "Trying to send unregistered network packet: " + message.getClass());
+  private static synchronized SimpleNetworkWrapper getParent(IMessage message, Side side) {
+    final NetworkWrapper wrapper = types.get(message.getClass());
+    if (wrapper == null) {
+      throw new RuntimeException("Trying to send unregistered network packet: " + message.getClass());
     }
-    return parent;
-  }
-
-  private static synchronized SimpleNetworkWrapper getClientParent(IMessage message) {
-    final SimpleNetworkWrapper parent = typesServer.get(message.getClass());
-    if (parent == null) {
-      throw new RuntimeException(
-        "Trying to send unregistered network packet: " + message.getClass());
+    if (wrapper.getSide() != side) {
+      throw new RuntimeException("Trying to send packet from wrong side: " + message.getClass());
     }
-    return parent;
+    return wrapper.getParent();
   }
 
   public <REQ extends IMessage, REPLY extends IMessage> void registerMessage(
@@ -119,8 +107,10 @@ public class ThreadedNetworkWrapper {
    * @return The packet corresponding to the message.
    */
   public Packet<?> getPacketFrom(IMessage message) {
-    return getServerParent(message).getPacketFrom(message);
+    return getParent(message, Side.SERVER).getPacketFrom(message);
   }
+
+  // region ====== Send Messages ======
 
   /**
    * Sends the specified message to all entities tracking the given entity.
@@ -129,7 +119,7 @@ public class ThreadedNetworkWrapper {
    * @param entity  The entity whose tracking entities should receive the message.
    */
   public void sendToAllTracking(IMessage message, Entity entity) {
-    getServerParent(message).sendToAllTracking(message, entity);
+    getParent(message, Side.SERVER).sendToAllTracking(message, entity);
   }
 
   /**
@@ -138,7 +128,7 @@ public class ThreadedNetworkWrapper {
    * @param message The message to send.
    */
   public void sendToAll(IMessage message) {
-    getServerParent(message).sendToAll(message);
+    getParent(message, Side.SERVER).sendToAll(message);
   }
 
   /**
@@ -185,7 +175,7 @@ public class ThreadedNetworkWrapper {
    * @param player  The player to receive the message.
    */
   public void sendTo(IMessage message, EntityPlayerMP player) {
-    getServerParent(message).sendTo(message, player);
+    getParent(message, Side.SERVER).sendTo(message, player);
   }
 
   /**
@@ -198,9 +188,7 @@ public class ThreadedNetworkWrapper {
    */
   public void sendToAllAround(IMessage message, World world, BlockPos pos, double range) {
 
-    sendToAllAround(message,
-                    new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX() + 0.5d,
-                                                    pos.getY() + 0.5d, pos.getZ() + 0.5d, range));
+    sendToAllAround(message, new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d, range));
   }
 
   /**
@@ -210,7 +198,7 @@ public class ThreadedNetworkWrapper {
    * @param point   The point to send the message to.
    */
   public void sendToAllAround(IMessage message, NetworkRegistry.TargetPoint point) {
-    getServerParent(message).sendToAllAround(message, point);
+    getParent(message, Side.SERVER).sendToAllAround(message, point);
   }
 
   /**
@@ -220,7 +208,7 @@ public class ThreadedNetworkWrapper {
    * @param dimensionId The id of the dimension to send the message to.
    */
   public void sendToDimension(IMessage message, int dimensionId) {
-    getServerParent(message).sendToDimension(message, dimensionId);
+    getParent(message, Side.SERVER).sendToDimension(message, dimensionId);
   }
 
   /**
@@ -229,11 +217,12 @@ public class ThreadedNetworkWrapper {
    * @param message The message to send.
    */
   public void sendToServer(IMessage message) {
-    getClientParent(message).sendToServer(message);
+    getParent(message, Side.CLIENT).sendToServer(message);
   }
 
-  private final class NullHandler<REQ extends IMessage, REPLY extends IMessage> implements
-                                                                                IMessageHandler<REQ, REPLY> {
+  // endregion
+
+  private final class NullHandler<REQ extends IMessage, REPLY extends IMessage> implements IMessageHandler<REQ, REPLY> {
 
     @Override
     public REPLY onMessage(REQ message, MessageContext ctx) {
@@ -242,8 +231,7 @@ public class ThreadedNetworkWrapper {
 
   }
 
-  private final class Wrapper<REQ extends IMessage, REPLY extends IMessage> implements
-                                                                            IMessageHandler<REQ, REPLY> {
+  private final class Wrapper<REQ extends IMessage, REPLY extends IMessage> implements IMessageHandler<REQ, REPLY> {
 
     private final IMessageHandler<REQ, REPLY> wrapped;
 
@@ -255,9 +243,9 @@ public class ThreadedNetworkWrapper {
     @Override
     public REPLY onMessage(final REQ message, final MessageContext ctx) {
 
-      final IThreadListener target = ctx.side == Side.CLIENT ?
-                                     Minecraft.getMinecraft() :
-                                     FMLCommonHandler.instance().getMinecraftServerInstance();
+      final IThreadListener target = ctx.side == Side.CLIENT
+                                     ? Minecraft.getMinecraft()
+                                     : FMLCommonHandler.instance().getMinecraftServerInstance();
 
       if (target != null) {
         target.addScheduledTask(new Runner(message, ctx));
@@ -272,8 +260,8 @@ public class ThreadedNetworkWrapper {
 
     @Override
     public boolean equals(Object obj) {
-      if (obj instanceof Wrapper) {
-        return this.wrapped.equals(((Wrapper<?, ?>) obj).wrapped);
+      if (obj instanceof Wrapper<?, ?> wrapper) {
+        return this.wrapped.equals(wrapper.wrapped);
 
       } else {
         return this.wrapped.equals(obj);
@@ -315,5 +303,12 @@ public class ThreadedNetworkWrapper {
 
     }
 
+  }
+
+  @Data(staticConstructor = "of")
+  private static class NetworkWrapper {
+
+    private final SimpleNetworkWrapper parent;
+    private final Side side;
   }
 }

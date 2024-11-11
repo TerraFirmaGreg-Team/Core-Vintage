@@ -9,17 +9,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public abstract class BasePacketTile<T extends TileEntity> extends BasePacketSerializable {
-
-  /**
-   * The serial version UID.
-   */
-  private static final long serialVersionUID = -8474561253790105901L;
-
-  /**
-   * The position of the TileEntity.
-   */
-  public BlockPos pos;
+public abstract class BasePacketTile<T extends TileEntity> extends BasePacketBlockPos<BasePacketTile<T>> {
 
   /**
    * The TileEntity.
@@ -34,17 +24,15 @@ public abstract class BasePacketTile<T extends TileEntity> extends BasePacketSer
   /**
    * Blank constructor required for all messages.
    */
-  public BasePacketTile() {
-  }
+  public BasePacketTile() {}
 
   /**
    * Basic constructor for a tile entity update message.
    *
-   * @param pos The position of the tile entity.
+   * @param blockPos The position of the tile entity.
    */
-  public BasePacketTile(BlockPos pos) {
-
-    this.pos = pos;
+  public BasePacketTile(BlockPos blockPos) {
+    super(blockPos);
   }
 
   @Override
@@ -52,8 +40,8 @@ public abstract class BasePacketTile<T extends TileEntity> extends BasePacketSer
 
     this.context = context;
     final World world = context.getServerHandler().player.getEntityWorld();
-    TileUtils.getTile(world, pos, this.tile.getClass()).ifPresent(tile -> {
-      if (world.isBlockLoaded(this.pos)) {
+    TileUtils.getTile(world, blockPos, this.tile.getClass()).ifPresent(tile -> {
+      if (world.isBlockLoaded(this.blockPos)) {
         ((WorldServer) world).addScheduledTask(this::getAction);
       }
     });
@@ -61,5 +49,5 @@ public abstract class BasePacketTile<T extends TileEntity> extends BasePacketSer
     return null;
   }
 
-  public abstract void getAction();
+  public abstract Runnable getAction();
 }

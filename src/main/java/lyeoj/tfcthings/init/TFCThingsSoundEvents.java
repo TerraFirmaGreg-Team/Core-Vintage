@@ -3,7 +3,7 @@ package lyeoj.tfcthings.init;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCTHINGS;
 
 public class TFCThingsSoundEvents {
 

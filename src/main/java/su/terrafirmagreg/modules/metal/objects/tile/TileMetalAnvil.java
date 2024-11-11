@@ -1,12 +1,13 @@
 package su.terrafirmagreg.modules.metal.objects.tile;
 
+import org.apache.commons.lang3.StringUtils;
+
 import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.api.util.StringUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
@@ -103,7 +104,7 @@ public class TileMetalAnvil extends BaseTileInventory
   @Override
   public void readFromNBT(@NotNull NBTTagCompound nbt) {
     String recipe = nbt.getString("recipe");
-    if (StringUtils.isNullOrEmpty(recipe)) {
+    if (StringUtils.isEmpty(recipe)) {
       this.recipe = null;
     } else {
       this.recipe = AnvilRecipeManager.findMatchingRecipe(new ResourceLocation(recipe));

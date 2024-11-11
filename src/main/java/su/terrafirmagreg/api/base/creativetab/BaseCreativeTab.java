@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class BaseCreativeTab extends CreativeTabs {
@@ -21,7 +22,7 @@ public class BaseCreativeTab extends CreativeTabs {
   public BaseCreativeTab(String TabName, ResourceLocation iconSupplier, boolean hasSearchBar) {
     super(ModUtils.localize(TabName));
 
-    this.iconSupplier = () -> new ItemStack(ForgeRegistries.ITEMS.getValue(iconSupplier));
+    this.iconSupplier = () -> new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(iconSupplier)));
     this.hasSearchBar = hasSearchBar;
 
     if (hasSearchBar) {

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.metal.api.types.variant.Item;
 
-import su.terrafirmagreg.data.lib.types.variant.item.VariantItem;
+import su.terrafirmagreg.api.library.types.variant.item.VariantItem;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 

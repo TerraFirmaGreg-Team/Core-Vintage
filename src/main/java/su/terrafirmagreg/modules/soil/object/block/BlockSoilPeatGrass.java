@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.soil.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.soil.api.spi.IGrass;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
@@ -24,10 +25,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
-import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
-import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
-import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WEST;
 
 @SuppressWarnings("deprecation")
 public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor, IGrass {
@@ -62,10 +63,10 @@ public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor
   public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
     pos = pos.add(0, -1, 0);
     return state
-      .withProperty(NORTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-      .withProperty(EAST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-      .withProperty(SOUTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-      .withProperty(WEST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+      .withProperty(NORTH, BlockHelper.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+      .withProperty(EAST, BlockHelper.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+      .withProperty(SOUTH, BlockHelper.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+      .withProperty(WEST, BlockHelper.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
   }
 
   @Override

@@ -27,7 +27,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 import net.dries007.tfc.objects.te.TEPlanter;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.WET;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WET;
 
 @MethodsReturnNonnullByDefault
 

@@ -1,6 +1,6 @@
 package net.dries007.tfc.compat.jei.categories;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class VeinCategory extends BaseRecipeCategory<VeinWrapper> {
 
-  private static final ResourceLocation BACKGROUND = new ResourceLocation(Constants.MODID_TFC, "textures/gui/jei_vein.png");
+  private static final ResourceLocation BACKGROUND = new ResourceLocation(Reference.MODID_TFC, "textures/gui/jei_vein.png");
 
   public VeinCategory(IGuiHelper helper, String Uid) {
     super(new BackgroundDrawable(BACKGROUND, 164, 110), Uid);

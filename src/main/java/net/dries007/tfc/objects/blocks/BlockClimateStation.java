@@ -31,8 +31,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.STASIS;
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.STASIS;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 @MethodsReturnNonnullByDefault
 public class BlockClimateStation extends Block implements ICapabilitySize, IHighlightHandler {

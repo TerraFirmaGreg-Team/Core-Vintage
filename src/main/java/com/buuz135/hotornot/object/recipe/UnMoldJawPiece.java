@@ -26,7 +26,7 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.recipes.RecipeUtils;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 @SuppressWarnings("unused")
 public class UnMoldJawPiece extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {

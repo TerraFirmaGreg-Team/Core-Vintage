@@ -1,8 +1,9 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
 import su.terrafirmagreg.api.base.biome.BaseBiome;
-import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BiomeHelper;
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ICapabilityChunkData;
@@ -35,7 +36,7 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeFlower;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.types.TreesTFCF;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -63,7 +64,7 @@ public class GeneratorTrees implements IWorldGenerator {
         // Also, only add on soil, since this is called by the world regen handler later
         IBlockState stateDown = world.getBlockState(pos.down());
         if (world.isAirBlock(pos) && stateDown.isSideSolid(world, pos.down(), EnumFacing.UP)
-            && BlockUtils.isGround(stateDown)) {
+            && BlockHelper.isGround(stateDown)) {
           world.setBlockState(pos, BlocksTFC.PLACED_ITEM_FLAT.getDefaultState());
           var tile = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
           tile.ifPresent(tilePlacedItemFlat -> tilePlacedItemFlat.setStack(new ItemStack(Items.STICK)));
@@ -96,7 +97,7 @@ public class GeneratorTrees implements IWorldGenerator {
 
     final float diversity = chunkData.getFloraDiversity();
     final float density = chunkData.getFloraDensity();
-    final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
+    final float avgTemperature = ClimateTFC.getAvgTemp(world, chunkPos);
     final float rainfall = ProviderChunkData.getRainfall(world, chunkPos);
 
     float gauss = 2f * (float) random.nextGaussian();
@@ -214,8 +215,8 @@ public class GeneratorTrees implements IWorldGenerator {
       Biome b1 = world.getBiome(blockPos);
       //BlockPos blockPos = world.getHeight(chunkPos.add(random.nextInt(16) + 8, (random.nextInt(7) - random.nextInt(7)) * -1, random.nextInt(16) + 8));
 
-      if ((BlockUtils.isGround(down) || world.getBlockState(blockPos)
-                                             .getBlock() == ChunkGenClassic.FRESH_WATER.getBlock()) && b1 == BiomesWorld.BAYOU) {
+      if ((BlockHelper.isGround(down) || world.getBlockState(blockPos)
+                                              .getBlock() == ChunkGenClassic.FRESH_WATER.getBlock()) && b1 == BiomesWorld.BAYOU) {
         //if (TFCRegistries.TREES.getValue(TreesTFCF.BALD_CYPRESS).isValidLocation(avgTemperature, rainfall, density))
         if (10f <= avgTemperature && 38f >= avgTemperature && 180f <= rainfall && 500f >= rainfall
             &&
@@ -240,8 +241,8 @@ public class GeneratorTrees implements IWorldGenerator {
       final Biome b1 = world.getBiome(blockPos);
       //BlockPos blockPos = world.getHeight(chunkPos.add(random.nextInt(16) + 8, (random.nextInt(7) - random.nextInt(7)) * -1, random.nextInt(16) + 8));
 
-      if ((BlockUtils.isGround(down) || world.getBlockState(blockPos)
-                                             .getBlock() == ChunkGenClassic.SALT_WATER.getBlock()) && b1 == BiomesWorld.MANGROVE) {
+      if ((BlockHelper.isGround(down) || world.getBlockState(blockPos)
+                                              .getBlock() == ChunkGenClassic.SALT_WATER.getBlock()) && b1 == BiomesWorld.MANGROVE) {
         //if (TFCRegistries.TREES.getValue(TreesTFCF.MANGROVE).isValidLocation(avgTemperature, rainfall, density))
         if (15f <= avgTemperature && 40f >= avgTemperature && 200f <= rainfall && 500f >= rainfall
             &&
@@ -264,11 +265,11 @@ public class GeneratorTrees implements IWorldGenerator {
         IBlockState down = world.getBlockState(blockPos.down());
         final Biome b1 = world.getBiome(blockPos);
 
-        if (b1 != BiomesWorld.BAYOU && b1 != BiomesWorld.MARSH && !BiomeUtils.isOceanicBiome(b1)
-            && !BiomeUtils.isLakeBiome(b1) &&
-            !BiomeUtils.isBeachBiome(b1) &&
-            !BiomeUtils.isMesaBiome(b1)) {
-          if ((BlockUtils.isVariant(down, SAND) || BlockUtils.isSoilOrGravel(down)) &&
+        if (b1 != BiomesWorld.BAYOU && b1 != BiomesWorld.MARSH && !BiomeHelper.isOceanicBiome(b1)
+            && !BiomeHelper.isLakeBiome(b1) &&
+            !BiomeHelper.isBeachBiome(b1) &&
+            !BiomeHelper.isMesaBiome(b1)) {
+          if ((Variant.isVariant(down, SAND) || BlockHelper.isSoilOrGravel(down)) &&
               (down != Blocks.HARDENED_CLAY && down != Blocks.STAINED_HARDENED_CLAY)) {
             if (15f <= avgTemperature && 40f >= avgTemperature && 65f <= rainfall
                 && 150f >= rainfall &&

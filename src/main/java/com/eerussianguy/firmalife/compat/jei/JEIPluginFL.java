@@ -33,7 +33,7 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.data.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Reference.MODID_FL;
 
 @JEIPlugin
 public class JEIPluginFL implements IModPlugin {

@@ -18,14 +18,14 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WILD;
 
 public class CropProvider implements IWailaBlock {
 
@@ -39,7 +39,7 @@ public class CropProvider implements IWailaBlock {
         ICrop crop = blockCropTFC.getCrop();
 
         boolean isWild = state.getValue(WILD);
-        float temp = Climate.getActualTemp(world, pos, -tile.getLastUpdateTick());
+        float temp = ClimateTFC.getActualTemp(world, pos, -tile.getLastUpdateTick());
         float rainfall = ProviderChunkData.getRainfall(world, pos);
 
         if (isWild) {

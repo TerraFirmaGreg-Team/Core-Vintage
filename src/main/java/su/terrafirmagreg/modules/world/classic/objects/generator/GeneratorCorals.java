@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.util.Random;
 
@@ -40,7 +40,7 @@ public class GeneratorCorals implements IWorldGenerator {
     var data = CapabilityChunkData.get(world, chunkBlockPos);
 
     Biome b = world.getBiome(chunkBlockPos);
-    float avgTemperature = Climate.getAvgTemp(world, chunkBlockPos);
+    float avgTemperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
     float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
     float floraDensity = data.getFloraDensity();
     float floraDiversity = data.getFloraDiversity();
@@ -1145,7 +1145,7 @@ public class GeneratorCorals implements IWorldGenerator {
     IBlockState south = world.getBlockState(pos.south());
     IBlockState east = world.getBlockState(pos.east());
     IBlockState west = world.getBlockState(pos.west());
-    return ((BlockUtils.isGround(down) || up.getBlock() instanceof BlockCoralBlock
+    return ((BlockHelper.isGround(down) || up.getBlock() instanceof BlockCoralBlock
              || down.getBlock() instanceof BlockCoralBlock ||
              north.getBlock() instanceof BlockCoralBlock || south.getBlock() instanceof BlockCoralBlock
              ||

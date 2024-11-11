@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalZebu;
 
@@ -570,13 +570,13 @@ public class ModelAnimalZebu extends ModelBase {
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,
                                 Entity entity) {
-    setRotateAngle(headNode, f4 / (180F / MathConstants.PI), f3 / (180F / MathConstants.PI), 0F);
-    setRotateAngle(neck, f4 / (1.5F * (180F / MathConstants.PI)) + -0.7475245186291712F,
-                   f3 / (1.5F * (180F / MathConstants.PI)), 0F);
+    setRotateAngle(headNode, f4 / (180F / MathUtils.PI), f3 / (180F / MathUtils.PI), 0F);
+    setRotateAngle(neck, f4 / (1.5F * (180F / MathUtils.PI)) + -0.7475245186291712F,
+                   f3 / (1.5F * (180F / MathUtils.PI)), 0F);
 
     this.legRFrontTop.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
-    this.legLFrontTop.rotateAngleX = MathHelper.cos(f * 0.6662F + MathConstants.PI) * 1.4F * f1;
-    this.legRBackTop.rotateAngleX = MathHelper.cos(f * 0.6662F + MathConstants.PI) * 1.4F * f1;
+    this.legLFrontTop.rotateAngleX = MathHelper.cos(f * 0.6662F + MathUtils.PI) * 1.4F * f1;
+    this.legRBackTop.rotateAngleX = MathHelper.cos(f * 0.6662F + MathUtils.PI) * 1.4F * f1;
     this.legLBackTop.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
 
     hornML1.isHidden = false;

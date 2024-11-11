@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.vein;
 
-import su.terrafirmagreg.data.lib.collection.WeightedCollection;
+import su.terrafirmagreg.api.library.collection.WeightedCollection;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 
 import org.jetbrains.annotations.NotNull;

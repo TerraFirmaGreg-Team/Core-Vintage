@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.plant.object.block;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 import su.terrafirmagreg.modules.plant.api.types.variant.block.PlantBlockVariant;
 
@@ -23,9 +23,9 @@ public class BlockPlantWater extends BlockPlant {
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     IBlockState soil = worldIn.getBlockState(pos.down());
     if (type.getWaterType() == SALT_WATER) {
-      return BlockUtils.isSaltWater(worldIn.getBlockState(pos)) && this.canSustainBush(soil);
+      return BlockHelper.isSaltWater(worldIn.getBlockState(pos)) && this.canSustainBush(soil);
     }
-    return BlockUtils.isFreshWater(worldIn.getBlockState(pos)) && this.canSustainBush(soil);
+    return BlockHelper.isFreshWater(worldIn.getBlockState(pos)) && this.canSustainBush(soil);
   }
 
   @Override

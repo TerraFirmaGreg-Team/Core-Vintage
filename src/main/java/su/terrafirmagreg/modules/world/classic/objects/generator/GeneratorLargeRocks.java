@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
@@ -20,7 +20,7 @@ public class GeneratorLargeRocks implements IWorldGenerator {
     final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
     BlockPos start = world.getTopSolidOrLiquidBlock(
       chunkBlockPos.add(8 + rng.nextInt(16), 0, 8 + rng.nextInt(16))).add(0, -1, 0);
-    if (start.getY() > 155 && !BlockUtils.isSoil(world.getBlockState(start))) {
+    if (start.getY() > 155 && !BlockHelper.isSoil(world.getBlockState(start))) {
       return;
     }
 

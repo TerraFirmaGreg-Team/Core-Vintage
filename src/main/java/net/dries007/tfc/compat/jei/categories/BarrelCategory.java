@@ -1,6 +1,6 @@
 package net.dries007.tfc.compat.jei.categories;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
@@ -21,8 +21,8 @@ import java.util.List;
 
 public class BarrelCategory extends BaseRecipeCategory<BarrelRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(Constants.MODID_TFC, "textures/gui/icons/jei.png");
-  private static final ResourceLocation BARREL_TEXTURES = new ResourceLocation(Constants.MODID_TFC, "textures/gui/barrel.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(Reference.MODID_TFC, "textures/gui/icons/jei.png");
+  private static final ResourceLocation BARREL_TEXTURES = new ResourceLocation(Reference.MODID_TFC, "textures/gui/barrel.png");
 
   private final IDrawableStatic fluidSlotBackgroound, fluidSlot;
   private final IDrawableStatic slot;

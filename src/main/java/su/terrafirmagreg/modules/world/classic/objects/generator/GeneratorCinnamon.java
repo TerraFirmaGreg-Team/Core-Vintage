@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
 import su.terrafirmagreg.api.base.biome.BaseBiome;
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.StructureUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
@@ -63,7 +63,7 @@ public class GeneratorCinnamon extends WorldGenerator {
 
     if (gen == 0 && rain > 250 && temp > 20 && density > 0.3f && world.isAirBlock(pos)
         && world.getBlockState(pos.down())
-                .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(
+                .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockHelper.isGround(
       world.getBlockState(pos.down()))) {
       //return generateCinnamon(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, BlocksTFCF.CASSIA_CINNAMON_LOG.getDefaultState());
       return generateCinnamonVariant(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE,
@@ -71,7 +71,7 @@ public class GeneratorCinnamon extends WorldGenerator {
     }
     if (gen == 1 && rain > 250 && temp > 20 && density > 0.3f && world.isAirBlock(pos)
         && world.getBlockState(pos.down())
-                .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(
+                .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockHelper.isGround(
       world.getBlockState(pos.down()))) {
       //return generateCinnamon(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, BlocksTFCF.CEYLON_CINNAMON_LOG.getDefaultState());
       return generateCinnamonVariant(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE,
@@ -84,7 +84,7 @@ public class GeneratorCinnamon extends WorldGenerator {
                                           ITreeGenerator CinnamonToGen) {
     IBlockState state = world.getBlockState(pos.down());
     if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP)
-        && (BlockUtils.isGrowableSoil(state))) {
+        && (BlockHelper.isGrowableSoil(state))) {
       TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
             /*String variant = variants[variants.length == 1 ? 0 : rand.nextInt(variants.length)];
             ResourceLocation base = new ResourceLocation(tree.getRegistryName() + "/" + variant);

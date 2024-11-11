@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
-import su.terrafirmagreg.data.enums.EnumSpeleothemSize;
+import su.terrafirmagreg.api.data.enums.EnumSpeleothemSize;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.SPELEOTHEM_SIZE;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.SPELEOTHEM_SIZE;
 
 public class GeneratorSpeleothem
   implements IWorldGenerator {

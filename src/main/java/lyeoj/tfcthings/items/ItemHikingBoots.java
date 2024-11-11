@@ -22,7 +22,7 @@ import net.dries007.tfc.api.types.IArmorMaterialTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
 
 public class ItemHikingBoots extends ItemArmor implements ICapabilitySize, ICapabilityDamageResistance, TFCThingsConfigurableItem {
 

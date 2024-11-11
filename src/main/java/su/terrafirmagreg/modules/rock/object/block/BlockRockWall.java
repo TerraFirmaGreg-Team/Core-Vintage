@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.rock.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlockWall;
-import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;

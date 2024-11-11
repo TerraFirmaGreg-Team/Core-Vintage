@@ -20,10 +20,10 @@ import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.BASE;
-import static su.terrafirmagreg.data.Properties.BoolProp.POT;
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
-import static su.terrafirmagreg.data.Properties.IntProp.CUT;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.BASE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.POT;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Properties.IntProp.CUT;
 import static su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor.MAX_FLUID;
 
 public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtractor> {

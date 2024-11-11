@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.world.classic;
 
-import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.helper.BiomeHelper;
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
@@ -473,12 +473,12 @@ public class ChunkGenClassic implements IChunkGenerator {
                                                                                                         .getDefaultState();
         IBlockState subSurfaceBlock = BlocksSoil.DIRT.get(soil1).getDefaultState();
 
-        if (BiomeUtils.isBeachBiome(getBiomeOffset(x - 1, z)) ||
-            BiomeUtils.isBeachBiome(getBiomeOffset(x + 1, z)) ||
-            BiomeUtils.isBeachBiome(getBiomeOffset(x, z + 1)) ||
-            BiomeUtils.isBeachBiome(getBiomeOffset(x, z - 1))) {
+        if (BiomeHelper.isBeachBiome(getBiomeOffset(x - 1, z)) ||
+            BiomeHelper.isBeachBiome(getBiomeOffset(x + 1, z)) ||
+            BiomeHelper.isBeachBiome(getBiomeOffset(x, z + 1)) ||
+            BiomeHelper.isBeachBiome(getBiomeOffset(x, z - 1))) {
 
-          if (!BiomeUtils.isBeachBiome(getBiomeOffset(x, z))) {
+          if (!BiomeHelper.isBeachBiome(getBiomeOffset(x, z))) {
             cliffMap[colIndex] = true;
           }
         }
@@ -489,10 +489,10 @@ public class ChunkGenClassic implements IChunkGenerator {
         for (int a = x - 1; a <= x + 1; a++) {
           for (int b = z - 1; b <= z + 1; b++) {
             Biome BiomeAtOffset = getBiomeOffset(a, b);
-            if (!BiomeUtils.isRiverBiome(BiomeAtOffset)) {
+            if (!BiomeHelper.isRiverBiome(BiomeAtOffset)) {
               nonRiverTiles++;
             }
-            if (!BiomeUtils.isBeachBiome(BiomeAtOffset) && !BiomeUtils.isOceanicBiome(BiomeAtOffset)
+            if (!BiomeHelper.isBeachBiome(BiomeAtOffset) && !BiomeHelper.isOceanicBiome(BiomeAtOffset)
                 &&
                 BiomeAtOffset != BiomesWorld.DEEP_OCEAN && BiomeAtOffset != BiomesWorld.OCEAN) {
               nonBeachTiles++;
@@ -512,7 +512,7 @@ public class ChunkGenClassic implements IChunkGenerator {
             if (y + 1 < yOffset && outp.getBlockState(x, y + yOffset, z) ==
                                    AIR/* нет необходимости проверять снова && BlockUtils.isSoilOrGravel(outp.getBlockState(x, y + yOffset + 1, z))*/) {
               for (int upCount = 1;
-                   BlockUtils.isSoilOrGravel(outp.getBlockState(x, y + yOffset + upCount, z));
+                   BlockHelper.isSoilOrGravel(outp.getBlockState(x, y + yOffset + upCount, z));
                    upCount++) {
                 outp.setBlockState(x, y + yOffset + upCount, z, AIR);
               }
@@ -531,13 +531,13 @@ public class ChunkGenClassic implements IChunkGenerator {
             highestBeachTheoretical;
 
           // Перестраиваем утесы на пляже
-          if (BiomeUtils.isBeachBiome(biome) && y > seaLevel
+          if (BiomeHelper.isBeachBiome(biome) && y > seaLevel
               && outp.getBlockState(x, y + yOffset, z) != AIR && y >= beachCliffHeight) {
             inp.setBlockState(x, y, z, AIR);
             outp.setBlockState(x, y + yOffset, z, AIR);
           }
           // Гарантируем, что реки не будут заблокированы
-          if (BiomeUtils.isRiverBiome(biome) && y >= seaLevel - 2
+          if (BiomeHelper.isRiverBiome(biome) && y >= seaLevel - 2
               && outp.getBlockState(x, y + yOffset, z) != AIR) {
 
             if (nonRiverTiles > 0) {
@@ -551,7 +551,7 @@ public class ChunkGenClassic implements IChunkGenerator {
             }
 
             //outp.setBlockState(x, y + yOffset, z, y >= seaLevel ? AIR : SALT_WATER);
-          } else if (!BiomeUtils.isRiverBiome(biome) && nonRiverTiles < 9
+          } else if (!BiomeHelper.isRiverBiome(biome) && nonRiverTiles < 9
                      && outp.getBlockState(x, y + yOffset, z) == STONE &&
                      ((y >= ((highestStone - seaLevel) / (10 - nonRiverTiles) + seaLevel)) || (
                        nonRiverTiles <= 5 && y >= seaLevel))) {
@@ -620,7 +620,7 @@ public class ChunkGenClassic implements IChunkGenerator {
                 }
 
                 IBlockState current = outp.getBlockState(x, yOffset + y + c, z);
-                if (current != surfaceBlock && current != subSurfaceBlock && !BlockUtils.isWater(
+                if (current != surfaceBlock && current != subSurfaceBlock && !BlockHelper.isWater(
                   current)) {
                   outp.setBlockState(x, yOffset + y + c, z, AIR);
                   if (yOffset + y + c + 1 > 256) {
@@ -638,11 +638,11 @@ public class ChunkGenClassic implements IChunkGenerator {
               if (smooth > 0) {
                 if (y >= seaLevel - 1 && y + 1 < yOffset
                     && inp.getBlockState(x, y + 1, z) != SALT_WATER && dirtH > 0 &&
-                    !(BiomeUtils.isBeachBiome(biome) && y > highestBeachTheoretical + 2)) {
+                    !(BiomeHelper.isBeachBiome(biome) && y > highestBeachTheoretical + 2)) {
                   outp.setBlockState(x, y + yOffset, z, surfaceBlock);
 
                   boolean mountains =
-                    BiomeUtils.isMountainBiome(biome) || biome == BiomesWorld.HIGH_HILLS ||
+                    BiomeHelper.isMountainBiome(biome) || biome == BiomesWorld.HIGH_HILLS ||
                     biome == BiomesWorld.HIGH_HILLS_EDGE ||
                     biome == BiomesWorld.MOUNTAINS || biome == BiomesWorld.MOUNTAINS_EDGE;
                   for (int c = 1; c < dirtH && !mountains && !cliffMap[colIndex]; c++) {
@@ -675,8 +675,8 @@ public class ChunkGenClassic implements IChunkGenerator {
             }
           }
           //  && biome != BiomesWorld.OCEAN && biome != BiomesWorld.DEEP_OCEAN && biome != BiomesWorld.BEACH && biome != BiomesWorld.GRAVEL_BEACH
-          else if (inp.getBlockState(x, y, z) == SALT_WATER && !(BiomeUtils.isOceanicBiome(biome)
-                                                                 || BiomeUtils.isBeachBiome(biome))) {
+          else if (inp.getBlockState(x, y, z) == SALT_WATER && !(BiomeHelper.isOceanicBiome(biome)
+                                                                 || BiomeHelper.isBeachBiome(biome))) {
             outp.setBlockState(x, y + yOffset, z, FRESH_WATER);
           }
         }
@@ -701,7 +701,7 @@ public class ChunkGenClassic implements IChunkGenerator {
               outp.setBlockState(x, y, z, BlocksRock.RAW.get(rock1).getDefaultState());
             }
 
-            if (BiomeUtils.isBeachBiome(biome) || BiomeUtils.isOceanicBiome(biome)) {
+            if (BiomeHelper.isBeachBiome(biome) || BiomeHelper.isOceanicBiome(biome)) {
               if (outp.getBlockState(x, y + 1, z) == SALT_WATER) {
                 outp.setBlockState(x, y, z, BlocksRock.SAND.get(rock1).getDefaultState());
                 outp.setBlockState(x, y - 1, z, BlocksRock.SAND.get(rock1).getDefaultState());

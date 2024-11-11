@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.soil.api.spi;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.plant.api.types.category.PlantCategories;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
@@ -16,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -103,7 +104,7 @@ public interface IGrass {
         IBlockState current = world.getBlockState(target);
 
         // Пропускаем итерацию, если текущий блок не является почвой или уже имеет траву
-        if (!BlockUtils.isSoil(current) || BlockUtils.isGrass(current)) {
+        if (!BlockHelper.isSoil(current) || BlockHelper.isGrass(current)) {
           continue;
         }
 
@@ -129,9 +130,9 @@ public interface IGrass {
 
           // Проверяем тип блока, с которого распространяется трава
           if (usBlock instanceof ISoilBlock) {
-            if (BlockUtils.isVariant(usBlock.getDefaultState(), DRY_GRASS)) {
+            if (Variant.isVariant(usBlock.getDefaultState(), DRY_GRASS)) {
               spreader = DRY_GRASS;
-            } else if (BlockUtils.isVariant(usBlock.getDefaultState(), SPARSE_GRASS)) {
+            } else if (Variant.isVariant(usBlock.getDefaultState(), SPARSE_GRASS)) {
               spreader = SPARSE_GRASS;
             }
           }
@@ -143,7 +144,7 @@ public interface IGrass {
       // Генерируем короткую траву на верхнем блоке с определенной вероятностью
       for (PlantType plant : PlantType.getTypes()) {
         if (plant.getCategory() == PlantCategories.SHORT_GRASS && rand.nextFloat() < 0.5f) {
-          float temp = Climate.getActualTemp(world, upPos);
+          float temp = ClimateTFC.getActualTemp(world, upPos);
           var plantBlock = (BlockPlantShortGrass) BlocksPlant.PLANT.get(plant);
 
           if (world.isAirBlock(upPos) &&

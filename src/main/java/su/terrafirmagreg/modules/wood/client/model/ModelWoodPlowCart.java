@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodPlowCart;
 
 import net.minecraft.client.model.ModelBase;
@@ -46,14 +46,14 @@ public class ModelWoodPlowCart extends ModelBase {
     // --Horse shafts--------------------------------------
     this.shaft = new ModelRenderer(this, 0, 8);
     this.shaft.setRotationPoint(0.0F, 0.0F, -14.0F);
-    this.shaft.rotateAngleY = MathConstants.PI / 2.0F;
+    this.shaft.rotateAngleY = MathUtils.PI / 2.0F;
     this.shaft.rotateAngleZ = -0.07F;
     this.shaft.addBox(0.0F, 0.0F, -8.0F, 20, 2, 1);
     this.shaft.addBox(0.0F, 0.0F, 7.0F, 20, 2, 1);
 
     this.shaftConnector = new ModelRenderer(this, 0, 27);
     this.shaftConnector.setRotationPoint(0.0F, 0.0F, -14.0F);
-    this.shaftConnector.rotateAngleY = MathConstants.PI / 2.0F;
+    this.shaftConnector.rotateAngleY = MathUtils.PI / 2.0F;
     this.shaftConnector.rotateAngleZ = -0.26F;
     this.shaftConnector.addBox(-16.0F, 0.0F, -8.0F, 16, 2, 1);
     this.shaftConnector.addBox(-16.0F, 0.0F, 7.0F, 16, 2, 1);
@@ -63,25 +63,25 @@ public class ModelWoodPlowCart extends ModelBase {
       this.plowShaftUpper[i] = new ModelRenderer(this, 56, 0);
       this.plowShaftUpper[i].addBox(-1.0F, -2.0F, -2.0F, 2, 30, 2);
       this.plowShaftUpper[i].setRotationPoint(-3.0F + 3 * i, -7.0F, 0.0F);
-      this.plowShaftUpper[i].rotateAngleY = -0.523599F + MathConstants.PI / 6.0F * i;
+      this.plowShaftUpper[i].rotateAngleY = -0.523599F + MathUtils.PI / 6.0F * i;
 
       this.plowShaftLower[i] = new ModelRenderer(this, 42, 4);
       this.plowShaftLower[i].addBox(-1.0F, -0.7F, -0.7F, 2, 10, 2);
       this.plowShaftLower[i].setRotationPoint(0.0F, 28.0F, -1.0F);
-      this.plowShaftLower[i].rotateAngleX = MathConstants.PI / 4.0F;
+      this.plowShaftLower[i].rotateAngleX = MathUtils.PI / 4.0F;
       this.plowShaftUpper[i].addChild(plowShaftLower[i]);
     }
 
     this.plowHandle = new ModelRenderer(this, 50, 4);
     this.plowHandle.addBox(-0.5F, 0.0F, -0.5F, 1, 18, 1);
     this.plowHandle.setRotationPoint(0.0F, 33.0F, 5.0F);
-    this.plowHandle.rotateAngleX = MathConstants.PI / 2.0F;
+    this.plowHandle.rotateAngleX = MathUtils.PI / 2.0F;
     this.plowShaftUpper[1].addChild(plowHandle);
 
     this.plowHandleGrip = new ModelRenderer(this, 50, 23);
     this.plowHandleGrip.addBox(-0.5F, 0.0F, -1.0F, 1, 5, 1);
     this.plowHandleGrip.setRotationPoint(0.0F, 32.8F, 21.0F);
-    this.plowHandleGrip.rotateAngleX = MathConstants.PI / 4.0F;
+    this.plowHandleGrip.rotateAngleX = MathUtils.PI / 4.0F;
     this.plowShaftUpper[1].addChild(plowHandleGrip);
 
     // --LEFT-WHEEL----------------------------------
@@ -91,12 +91,12 @@ public class ModelWoodPlowCart extends ModelBase {
     for (int i = 0; i < 8; i++) {
       ModelRenderer rim = new ModelRenderer(this, 0, 11);
       rim.addBox(-1.5F, -4.5F, 9.86F, 2, 9, 1);
-      rim.rotateAngleX = i * MathConstants.PI / 4.0F;
+      rim.rotateAngleX = i * MathUtils.PI / 4.0F;
       this.leftWheel.addChild(rim);
 
       ModelRenderer spoke = new ModelRenderer(this, 4, 11);
       spoke.addBox(-1.5F, 1.0F, -0.5F, 2, 9, 1);
-      spoke.rotateAngleX = i * MathConstants.PI / 4.0F;
+      spoke.rotateAngleX = i * MathUtils.PI / 4.0F;
       this.leftWheel.addChild(spoke);
     }
 
@@ -108,12 +108,12 @@ public class ModelWoodPlowCart extends ModelBase {
     for (int i = 0; i < 8; i++) {
       ModelRenderer rim = new ModelRenderer(this, 0, 11);
       rim.addBox(0.5F, -4.5F, 9.86F, 2, 9, 1);
-      rim.rotateAngleX = i * MathConstants.PI / 4.0F;
+      rim.rotateAngleX = i * MathUtils.PI / 4.0F;
       this.rightWheel.addChild(rim);
 
       ModelRenderer spoke = new ModelRenderer(this, 4, 11);
       spoke.addBox(0.5F, 1.0F, -0.5F, 2, 9, 1);
-      spoke.rotateAngleX = i * MathConstants.PI / 4.0F;
+      spoke.rotateAngleX = i * MathUtils.PI / 4.0F;
       this.rightWheel.addChild(spoke);
     }
   }
@@ -145,11 +145,11 @@ public class ModelWoodPlowCart extends ModelBase {
 
     if (((EntityWoodPlowCart) entity).getPlowing()) {
       for (ModelRenderer renderer : this.plowShaftUpper) {
-        renderer.rotateAngleX = MathConstants.PI / 4.0F;
+        renderer.rotateAngleX = MathUtils.PI / 4.0F;
       }
     } else {
       for (ModelRenderer renderer : this.plowShaftUpper) {
-        renderer.rotateAngleX = MathConstants.PI / 2.5F;
+        renderer.rotateAngleX = MathUtils.PI / 2.5F;
       }
     }
     for (ModelRenderer renderer : this.plowShaftUpper) {

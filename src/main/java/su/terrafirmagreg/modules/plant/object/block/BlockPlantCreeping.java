@@ -21,20 +21,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.ALL_FACES;
-import static su.terrafirmagreg.data.Properties.BoolProp.DOWN;
-import static su.terrafirmagreg.data.Properties.BoolProp.EAST;
-import static su.terrafirmagreg.data.Properties.BoolProp.NORTH;
-import static su.terrafirmagreg.data.Properties.BoolProp.SOUTH;
-import static su.terrafirmagreg.data.Properties.BoolProp.UP;
-import static su.terrafirmagreg.data.Properties.BoolProp.WEST;
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
-import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.ALL_FACES;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.DOWN;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.UP;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.api.data.Properties.IntProp.DAYPERIOD;
 
 public class BlockPlantCreeping extends BlockPlant {
 
@@ -87,7 +87,7 @@ public class BlockPlantCreeping extends BlockPlant {
       if (!(blockState.getBlock() instanceof BlockLeaves) &&
           (blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
            blockState.getBlock() instanceof BlockFence)) {
-        return type.isValidTemp(Climate.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+        return type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
       }
     }
     return false;

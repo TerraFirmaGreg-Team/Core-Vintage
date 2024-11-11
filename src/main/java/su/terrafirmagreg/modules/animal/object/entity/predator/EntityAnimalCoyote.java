@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.animal.object.entity.predator;
 
+import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -46,7 +47,7 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
 
   @SuppressWarnings("unused")
   public EntityAnimalCoyote(World worldIn) {
-    this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()),
          getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
@@ -59,7 +60,7 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
     BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+    if (!BiomeHelper.isOceanicBiome(biome) && !BiomeHelper.isBeachBiome(biome) &&
         (biomeType == BiomeUtils.BiomeType.PLAINS)) {
       return ConfigAnimal.ENTITY.COYOTE.rarity;
     }
@@ -179,7 +180,7 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return MathConstants.RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_COYOTE_CRY
+    return MathUtils.RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_COYOTE_CRY
                                               : SoundsAnimal.ANIMAL_COYOTE_SAY;
   }
 

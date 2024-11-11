@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import org.jetbrains.annotations.NotNull;
 
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
-import static su.terrafirmagreg.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
 
 public class GuiButtonCrate extends BaseGuiButton implements IButtonTooltip {
 

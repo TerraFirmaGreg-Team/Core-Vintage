@@ -18,13 +18,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.Properties.DirectionProp.DIRECTIONAL;
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
-import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.DIRECTIONAL;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.api.data.Properties.IntProp.DAYPERIOD;
 
 public class BlockPlantEpiphyte extends BlockPlant {
 
@@ -131,7 +131,7 @@ public class BlockPlantEpiphyte extends BlockPlant {
   public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
     for (EnumFacing enumfacing : DIRECTIONAL.getAllowedValues()) {
       if (this.canPlaceAt(worldIn, pos, enumfacing)) {
-        return type.isValidTemp(Climate.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+        return type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
       }
     }
 

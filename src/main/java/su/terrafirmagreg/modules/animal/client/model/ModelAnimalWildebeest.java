@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 import net.minecraft.client.model.ModelBase;
@@ -381,16 +381,16 @@ public class ModelAnimalWildebeest extends ModelBase {
                                 float netHeadYaw, float headPitch, float scaleFactor,
                                 Entity entityIn) {
     {
-      headBase.rotateAngleX = headPitch / (180F / MathConstants.PI);
-      headBase.rotateAngleY = netHeadYaw / (180F / MathConstants.PI);
+      headBase.rotateAngleX = headPitch / (180F / MathUtils.PI);
+      headBase.rotateAngleY = netHeadYaw / (180F / MathUtils.PI);
 
       legRFront.rotateAngleX =
         MathHelper.cos(limbSwing * 0.4662F) * 0.8F * limbSwingAmount + 0.3490658503988659F;
       legLFront.rotateAngleX =
-        MathHelper.cos(limbSwing * 0.4662F + MathConstants.PI) * 0.8F * limbSwingAmount
+        MathHelper.cos(limbSwing * 0.4662F + MathUtils.PI) * 0.8F * limbSwingAmount
         + 0.3490658503988659F;
       thighRBack.rotateAngleX =
-        MathHelper.cos(limbSwing * 0.4662F + MathConstants.PI) * 0.8F * limbSwingAmount
+        MathHelper.cos(limbSwing * 0.4662F + MathUtils.PI) * 0.8F * limbSwingAmount
         + -0.17453292519943295F;
       thighLBack.rotateAngleX =
         MathHelper.cos(limbSwing * 0.4662F) * 0.8F * limbSwingAmount + -0.17453292519943295F;

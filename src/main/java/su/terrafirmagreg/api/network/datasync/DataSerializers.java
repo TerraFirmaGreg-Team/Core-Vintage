@@ -24,4 +24,8 @@ public class DataSerializers extends net.minecraft.network.datasync.DataSerializ
       return value;
     }
   };
+
+  static {
+    registerSerializer(LONG);
+  }
 }

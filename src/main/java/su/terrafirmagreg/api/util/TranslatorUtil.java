@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
@@ -29,12 +29,12 @@ public final class TranslatorUtil {
   }
 
   public static String getEnumName(Enum<?> anEnum) {
-    return JOINER_DOT.join(Constants.MODID_TFC, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
+    return JOINER_DOT.join(Reference.MODID_TFC, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
   }
 
   public static String getTypeName(IForgeRegistryEntry<?> type) {
     //noinspection ConstantConditions
-    return JOINER_DOT.join(Constants.MODID_TFC, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
+    return JOINER_DOT.join(Reference.MODID_TFC, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
   }
 
   /**

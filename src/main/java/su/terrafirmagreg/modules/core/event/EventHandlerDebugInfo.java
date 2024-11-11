@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.event;
 
 import su.terrafirmagreg.api.util.GameUtils;
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ICapabilityChunkData;
 
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ClimateHelper;
 
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.List;
 import static net.minecraft.util.text.TextFormatting.AQUA;
 import static net.minecraft.util.text.TextFormatting.RED;
 import static net.minecraft.util.text.TextFormatting.YELLOW;
-import static su.terrafirmagreg.data.Unicode.DEGREE;
+import static su.terrafirmagreg.api.data.Unicode.DEGREE;
 
 @SuppressWarnings("unused")
 public class EventHandlerDebugInfo {
@@ -83,8 +83,8 @@ public class EventHandlerDebugInfo {
     var maxTemp = String.format("%s%.1f" + DEGREE + "C", AQUA,
                                 ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JULY.getTemperatureModifier(), blockPos.getZ()));
 
-    var monthlyTemp = String.format("%s%.1f", AQUA, Climate.getMonthlyTemp(blockPos));
-    var actualTemp = String.format("%s%.1f", AQUA, Climate.getActualTemp(blockPos));
+    var monthlyTemp = String.format("%s%.1f", AQUA, ClimateTFC.getMonthlyTemp(blockPos));
+    var actualTemp = String.format("%s%.1f", AQUA, ClimateTFC.getActualTemp(blockPos));
 
     list.add(String.format("%sRegion: %s %sAvg: %s %sMin: %s %sMax: %s", YELLOW, regionTemp, YELLOW, averageTemp, YELLOW, minTemp, YELLOW, maxTemp));
     list.add(String.format("%sTemperature: %s" + DEGREE + "C %sDaily: %s" + DEGREE + "C", YELLOW, monthlyTemp, YELLOW, actualTemp));

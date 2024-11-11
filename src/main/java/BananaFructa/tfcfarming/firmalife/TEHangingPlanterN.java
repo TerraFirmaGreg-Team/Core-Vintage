@@ -8,7 +8,7 @@ import BananaFructa.tfcfarming.NutrientClass;
 import BananaFructa.tfcfarming.NutrientValues;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -55,7 +55,7 @@ public class TEHangingPlanterN extends TEHangingPlanter {
   }
 
   public boolean isTempBelowMax() {
-    return !Config.enforceTemperature || maxTemp > Climate.getActualTemp(world, pos, 0);
+    return !Config.enforceTemperature || maxTemp > ClimateTFC.getActualTemp(world, pos, 0);
   }
 
   @Override

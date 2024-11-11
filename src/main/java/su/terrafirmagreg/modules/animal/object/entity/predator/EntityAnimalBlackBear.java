@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.object.entity.predator;
 
+import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -27,7 +28,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IPredator,
                                                                               EntityAnimalAIStandAttack.IEntityStandAttack {
@@ -49,7 +50,7 @@ public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IP
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
     BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+    if (!BiomeHelper.isOceanicBiome(biome) && !BiomeHelper.isBeachBiome(biome) &&
         (biomeType == BiomeUtils.BiomeType.TEMPERATE_FOREST)) {
       return ConfigAnimal.ENTITY.BLACK_BEAR.rarity;
     }

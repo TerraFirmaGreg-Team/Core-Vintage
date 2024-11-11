@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.base.block.BaseBlockHorse;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.device.client.render.TESRQuernHorse;
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.FILLED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.FILLED;
 
 @SuppressWarnings("deprecation")
 public class BlockQuernHorse extends BaseBlockHorse implements IProviderTile, IProviderBlockColor {

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.plant.object.block;
 
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.enums.EnumPlantPart;
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.data.enums.EnumPlantPart;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 import su.terrafirmagreg.modules.plant.api.types.variant.block.PlantBlockVariant;
@@ -29,16 +29,16 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.PLANT_PART;
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
-import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.PLANT_PART;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.api.data.Properties.IntProp.DAYPERIOD;
 
 public class BlockPlantHangingTall extends BlockPlant implements IGrowable, ITallPlant {
 
@@ -120,7 +120,7 @@ public class BlockPlantHangingTall extends BlockPlant implements IGrowable, ITal
               .canSustainPlant(up, worldIn, pos.up(), net.minecraft.util.EnumFacing.DOWN, this) ||
             isValidBlock(worldIn, pos.up(), worldIn.getBlockState(pos.up())) || worldIn.getBlockState(pos.up())
                                                                                        .getBlock() == this)
-           && type.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
+           && type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
            type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     //return this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
     //return true;
@@ -132,7 +132,7 @@ public class BlockPlantHangingTall extends BlockPlant implements IGrowable, ITal
       return;
     }
 
-    if (type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
+    if (type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
         type.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE_4);
 
@@ -146,7 +146,7 @@ public class BlockPlantHangingTall extends BlockPlant implements IGrowable, ITal
         }
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
+    } else if (!type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) ||
                !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE_4);
 
@@ -176,7 +176,7 @@ public class BlockPlantHangingTall extends BlockPlant implements IGrowable, ITal
                 .canSustainPlant(up, worldIn, pos.up(), net.minecraft.util.EnumFacing.DOWN, this) ||
               isValidBlock(worldIn, pos.up(), worldIn.getBlockState(pos.up())) || worldIn.getBlockState(pos.up())
                                                                                          .getBlock() == this)
-             && type.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
+             && type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
              type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
     return this.canSustainBush(up);
@@ -192,7 +192,7 @@ public class BlockPlantHangingTall extends BlockPlant implements IGrowable, ITal
     Material material = iblockstate.getMaterial();
 
     return blockState.isSideSolid(world, pos, EnumFacing.DOWN) || material == Material.LEAVES || material == Material.GROUND ||
-           material == Material.ROCK || material == Material.WOOD || BlockUtils.isGround(iblockstate) || blockState.getBlock() == this;
+           material == Material.ROCK || material == Material.WOOD || BlockHelper.isGround(iblockstate) || blockState.getBlock() == this;
   }
 
   @Override

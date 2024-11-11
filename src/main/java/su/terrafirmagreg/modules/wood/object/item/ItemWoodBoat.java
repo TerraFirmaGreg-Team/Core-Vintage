@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.object.item;
 
 import su.terrafirmagreg.api.base.item.BaseItem;
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -66,8 +66,8 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
     double d2 = playerIn.prevPosZ + (playerIn.posZ - playerIn.prevPosZ);
 
     Vec3d vec3d = new Vec3d(d0, d1, d2);
-    float f3 = MathHelper.cos(-f2 * 0.017453292F - MathConstants.PI);
-    float f4 = MathHelper.sin(-f2 * 0.017453292F - MathConstants.PI);
+    float f3 = MathHelper.cos(-f2 * 0.017453292F - MathUtils.PI);
+    float f4 = MathHelper.sin(-f2 * 0.017453292F - MathUtils.PI);
     float f5 = -MathHelper.cos(-f1 * 0.017453292F);
     float f6 = MathHelper.sin(-f1 * 0.017453292F);
     float f7 = f4 * f5;

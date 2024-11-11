@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.data.Constants.MOD_ID;
+import static su.terrafirmagreg.Tags.MOD_ID;
 
 @Getter
 @Info

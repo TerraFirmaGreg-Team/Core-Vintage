@@ -16,7 +16,7 @@ import se.gory_moon.horsepower.blocks.BlockPress;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.DirectionProp.DIRECTIONAL;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.DIRECTIONAL;
 
 public class TileFiller extends BaseTile {
 

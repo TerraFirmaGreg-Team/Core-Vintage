@@ -2,7 +2,7 @@ package su.terrafirmagreg;
 
 import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.api.util.AnnotationUtils;
-import su.terrafirmagreg.data.lib.LoggingHelper;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.proxy.IProxy;
 
 import net.minecraftforge.fml.common.Mod;
@@ -21,12 +21,12 @@ import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import lombok.Getter;
 
 import static net.minecraftforge.fml.common.Mod.EventHandler;
-import static su.terrafirmagreg.data.Constants.CLIENT_PROXY;
-import static su.terrafirmagreg.data.Constants.DEPENDENCIES;
-import static su.terrafirmagreg.data.Constants.MOD_ID;
-import static su.terrafirmagreg.data.Constants.MOD_NAME;
-import static su.terrafirmagreg.data.Constants.MOD_VERSION;
-import static su.terrafirmagreg.data.Constants.SERVER_PROXY;
+import static su.terrafirmagreg.Tags.CLIENT_PROXY;
+import static su.terrafirmagreg.Tags.DEPENDENCIES;
+import static su.terrafirmagreg.Tags.MOD_ID;
+import static su.terrafirmagreg.Tags.MOD_NAME;
+import static su.terrafirmagreg.Tags.MOD_VERSION;
+import static su.terrafirmagreg.Tags.SERVER_PROXY;
 
 @SuppressWarnings("unused")
 @Mod(modid = MOD_ID, version = MOD_VERSION, name = MOD_NAME, dependencies = DEPENDENCIES)

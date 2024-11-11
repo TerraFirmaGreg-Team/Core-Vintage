@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Set;
 
 import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 @UtilityClass
 @SuppressWarnings("unused")

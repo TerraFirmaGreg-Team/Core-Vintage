@@ -1,7 +1,7 @@
 package net.dries007.tfc.client;
 
-import su.terrafirmagreg.data.enums.EnumGradeOre;
-import su.terrafirmagreg.data.enums.EnumHideSize;
+import su.terrafirmagreg.api.data.enums.EnumGradeOre;
+import su.terrafirmagreg.api.data.enums.EnumHideSize;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 
@@ -60,13 +60,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.data.Properties.BoolProp.DECAYABLE;
-import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
-import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
-import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
-import static su.terrafirmagreg.data.Properties.EnumProp.HIDE_SIZE;
-import static su.terrafirmagreg.data.Properties.IntProp.STAGE_5;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.DECAYABLE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.PLACED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.HIDE_SIZE;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_5;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_TFC)

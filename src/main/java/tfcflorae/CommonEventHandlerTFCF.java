@@ -1,7 +1,7 @@
 package tfcflorae;
 
-import su.terrafirmagreg.data.MathConstants;
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantTypes;
 
@@ -24,7 +24,7 @@ import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.util.calendar.Calendar;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFCF)
@@ -43,10 +43,10 @@ public final class CommonEventHandlerTFCF {
     for (PlantType plant : PlantType.getTypes()) {
       if (plant == PlantTypes.BARREL_CACTUS &&
           (month == Month.SEPTEMBER || month == Month.OCTOBER || month == Month.NOVEMBER)) {
-        int chance = MathConstants.RNG.nextInt(2);
+        int chance = MathUtils.RNG.nextInt(2);
         if (chance == 0) {
           event.getDrops().clear();
-          event.getDrops().add(new ItemStack(ItemsTFCF.BARREL_CACTUS_FRUIT, 1 + MathConstants.RNG.nextInt(3)));
+          event.getDrops().add(new ItemStack(ItemsTFCF.BARREL_CACTUS_FRUIT, 1 + MathUtils.RNG.nextInt(3)));
         }
       }
     }
@@ -55,12 +55,12 @@ public final class CommonEventHandlerTFCF {
       ItemStack held = playerHarvest == null ? ItemStack.EMPTY : playerHarvest.getHeldItemMainhand();
 
       if (block instanceof BlockCassiaCinnamonLeaves || block instanceof BlockCeylonCinnamonLeaves || block instanceof BlockBambooLeaves) {
-        event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + MathConstants.RNG.nextInt(4)));
+        event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + MathUtils.RNG.nextInt(4)));
       }
       if (block == BlocksFL.MELON_FRUIT && (held.getItem()
                                                 .getHarvestLevel(held, "knife", playerHarvest, state) != -1)) {
         event.getDrops().clear();
-        event.getDrops().add(new ItemStack(ItemsFL.getFood(FoodFL.MELON), 2 + MathConstants.RNG.nextInt(4)));
+        event.getDrops().add(new ItemStack(ItemsFL.getFood(FoodFL.MELON), 2 + MathUtils.RNG.nextInt(4)));
       }
     }
   }

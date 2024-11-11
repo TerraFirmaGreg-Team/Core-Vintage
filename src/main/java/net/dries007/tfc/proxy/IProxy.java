@@ -1,6 +1,6 @@
 package net.dries007.tfc.proxy;
 
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.library.MCDate.Month;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;

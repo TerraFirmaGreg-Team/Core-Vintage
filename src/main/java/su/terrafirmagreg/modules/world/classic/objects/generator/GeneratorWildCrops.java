@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
@@ -15,14 +15,14 @@ import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WILD;
 
 public class GeneratorWildCrops implements IWorldGenerator {
 
@@ -43,7 +43,7 @@ public class GeneratorWildCrops implements IWorldGenerator {
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
         Collections.shuffle(CROPS);
-        float temperature = Climate.getAvgTemp(world, chunkBlockPos);
+        float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
         float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
 
         ICrop crop = CROPS.stream()
@@ -155,6 +155,6 @@ public class GeneratorWildCrops implements IWorldGenerator {
   }
 
   protected boolean isValidPosition(World world, BlockPos pos) {
-    return world.isAirBlock(pos) && BlockUtils.isSoil(world.getBlockState(pos.down()));
+    return world.isAirBlock(pos) && BlockHelper.isSoil(world.getBlockState(pos.down()));
   }
 }

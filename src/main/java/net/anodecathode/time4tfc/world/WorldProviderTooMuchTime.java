@@ -1,13 +1,12 @@
 package net.anodecathode.time4tfc.world;
 
-import su.terrafirmagreg.data.lib.MCDate;
+import su.terrafirmagreg.api.library.MCDate;
 
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraftforge.common.DimensionManager;
 
 import net.anodecathode.time4tfc.time4tfc;
-import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +33,7 @@ public class WorldProviderTooMuchTime extends WorldProvider {
       return super.calculateCelestialAngle(time, partial);
     }
 
-    dayDuration = Calendar.CALENDAR_TIME.getMonthOfYear().getDaylightlength();
+    dayDuration = net.dries007.tfc.util.calendar.Calendar.CALENDAR_TIME.getMonthOfYear().getDaylightlength();
     nightDuration = (int) (MCDate.TICKS_IN_DAY - dayDuration);
 
     int absoluteTime = (int) (Math.max(1, time) % (dayDuration + nightDuration));

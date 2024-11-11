@@ -68,8 +68,8 @@ import tfcflorae.TFCFlorae;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFCF)

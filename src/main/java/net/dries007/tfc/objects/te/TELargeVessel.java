@@ -27,7 +27,7 @@ import net.dries007.tfc.util.calendar.ICalendarFormatted;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.SEALED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.SEALED;
 
 /**
  * @see BlockLargeVessel

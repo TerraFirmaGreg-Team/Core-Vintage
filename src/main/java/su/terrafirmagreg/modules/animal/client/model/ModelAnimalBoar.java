@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalBoar;
 
 import net.minecraft.client.model.ModelBase;
@@ -350,12 +350,12 @@ public class ModelAnimalBoar extends ModelBase {
     tuskR1.isHidden = true;
     tuskL1.isHidden = true;
 
-    this.head.rotateAngleX = par5 / (180F / MathConstants.PI);
-    this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
+    this.head.rotateAngleX = par5 / (180F / MathUtils.PI);
+    this.head.rotateAngleY = par4 / (180F / MathUtils.PI);
     this.legRFrontTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
     this.legLFrontTop.rotateAngleX =
-      MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
-    this.legRBackTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
+      MathHelper.cos(par1 * 0.6662F + MathUtils.PI) * 1.4F * par2;
+    this.legRBackTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathUtils.PI) * 1.4F * par2;
     this.legLBackTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
   }
 }

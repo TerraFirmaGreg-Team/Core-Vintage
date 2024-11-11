@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.fluids;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
@@ -21,12 +21,12 @@ import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public final class FluidsTFCF {
 
-  private static final ResourceLocation STILL = new ResourceLocation(Constants.MODID_TFC, "blocks/fluid_still");
-  private static final ResourceLocation FLOW = new ResourceLocation(Constants.MODID_TFC, "blocks/fluid_flow");
+  private static final ResourceLocation STILL = new ResourceLocation(Reference.MODID_TFC, "blocks/fluid_still");
+  private static final ResourceLocation FLOW = new ResourceLocation(Reference.MODID_TFC, "blocks/fluid_flow");
 
   private static final HashBiMap<Fluid, FluidWrapper> WRAPPERS = HashBiMap.create();
 

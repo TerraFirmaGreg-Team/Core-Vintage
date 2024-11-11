@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.groundcover;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
@@ -65,7 +65,7 @@ public class GeneratorSurfaceSeashells implements IWorldGenerator {
       if (b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH
           || b == BiomesWorld.GRAVEL_BEACH) {
         if (world.isAirBlock(pos) && world.getBlockState(pos.down())
-                                          .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(
+                                          .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockHelper.isGround(
           world.getBlockState(pos.down()))) {
           world.setBlockState(pos, BlocksTFCF.SEASHELLS.getDefaultState());
         }

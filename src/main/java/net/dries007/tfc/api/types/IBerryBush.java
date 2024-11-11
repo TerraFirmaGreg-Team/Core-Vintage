@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types;
 
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.library.MCDate.Month;
 
 import net.minecraft.item.ItemStack;
 

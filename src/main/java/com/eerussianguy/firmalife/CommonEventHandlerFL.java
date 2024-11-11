@@ -42,8 +42,8 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemFruitPole;
 
-import static su.terrafirmagreg.data.Constants.MODID_FL;
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.data.Reference.MODID_FL;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 public class CommonEventHandlerFL {

@@ -1,6 +1,6 @@
 package BananaFructa.floraefixes;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.block.BlockLiquid;
@@ -143,8 +143,8 @@ public class Utils {
     double d1 = playerIn.posY + (double) playerIn.getEyeHeight();
     double d2 = playerIn.posZ;
     Vec3d vec3d = new Vec3d(d0, d1, d2);
-    float f2 = MathHelper.cos(-f1 * 0.017453292F - MathConstants.PI);
-    float f3 = MathHelper.sin(-f1 * 0.017453292F - MathConstants.PI);
+    float f2 = MathHelper.cos(-f1 * 0.017453292F - MathUtils.PI);
+    float f3 = MathHelper.sin(-f1 * 0.017453292F - MathUtils.PI);
     float f4 = -MathHelper.cos(-f * 0.017453292F);
     float f5 = MathHelper.sin(-f * 0.017453292F);
     float f6 = f3 * f4;

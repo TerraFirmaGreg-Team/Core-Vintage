@@ -20,9 +20,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
-import static su.terrafirmagreg.data.Properties.EnumProp.XZ;
-import static su.terrafirmagreg.data.Properties.IntProp.STAGE_3;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.XZ;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_3;
 
 @MethodsReturnNonnullByDefault
 

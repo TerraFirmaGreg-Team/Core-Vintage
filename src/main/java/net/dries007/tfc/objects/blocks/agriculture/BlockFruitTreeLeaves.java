@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.blocks.agriculture;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.enums.EnumFruitLeafState;
+import su.terrafirmagreg.api.data.enums.EnumFruitLeafState;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -47,8 +47,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
-import static su.terrafirmagreg.data.Properties.EnumProp.FRUIT_LEAF_STATE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.FRUIT_LEAF_STATE;
 
 @MethodsReturnNonnullByDefault
 

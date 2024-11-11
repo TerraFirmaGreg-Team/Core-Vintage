@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
@@ -26,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.IntProp.STAGE_5;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_5;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
 
 public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
@@ -116,8 +118,8 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     Block block = worldIn.getBlockState(pos.down()).getBlock();
     return (super.canPlaceBlockAt(worldIn, pos) ||
-            BlockUtils.isVariant(worldIn.getBlockState(pos.down()), SAND) ||
-            BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
+            Variant.isVariant(worldIn.getBlockState(pos.down()), SAND) ||
+            BlockHelper.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
             BlockUtils.isBlock(block, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY));
   }
 
@@ -190,7 +192,7 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
         }
         world.setBlockState(pos.offset(EnumFacing.UP, height), flower);*/
 
-    float avgTemperature = Climate.getAvgTemp(world, pos);
+    float avgTemperature = ClimateTFC.getAvgTemp(world, pos);
     float rainfall = ProviderChunkData.getRainfall(world, pos);
 
     int j = rand.nextInt(5);
@@ -202,8 +204,8 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
         int k1 = j1 - 1;
         Block block = world.getBlockState(pos.down()).getBlock();
         if (world.isAirBlock(pos.add(l, k1 + 1, i1)) && (
-          BlockUtils.isVariant(world.getBlockState(pos.add(l, k1, i1)), SAND) ||
-          BlockUtils.isSoilOrGravel(world.getBlockState(pos.add(l, k1, i1))) ||
+          Variant.isVariant(world.getBlockState(pos.add(l, k1, i1)), SAND) ||
+          BlockHelper.isSoilOrGravel(world.getBlockState(pos.add(l, k1, i1))) ||
           BlockUtils.isBlock(block, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY))) {
           BlockJoshuaTreeFlower.get(wood).generatePlant(world, pos.add(l, k1 + 1, i1), rand, 8);
         }

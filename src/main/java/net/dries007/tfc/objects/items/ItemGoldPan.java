@@ -39,8 +39,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 /**
  * todo: this whole thing needs to be rewritten, possibly sometime after 1.14

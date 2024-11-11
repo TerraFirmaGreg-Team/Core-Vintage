@@ -1,10 +1,8 @@
 package su.terrafirmagreg.modules.animal.object.entity.predator;
 
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
-import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.api.util.*;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -46,11 +44,13 @@ import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
+import su.terrafirmagreg.api.helper.BiomeHelper;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, IPredator,
                                                                       EntityAnimalAIStandAttack.IEntityStandAttack {
@@ -276,7 +276,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
     BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+    if (!BiomeHelper.isOceanicBiome(biome) && !BiomeHelper.isBeachBiome(biome) &&
         (biomeType == BiomeUtils.BiomeType.TUNDRA || biomeType == BiomeUtils.BiomeType.TAIGA)) {
       return ConfigAnimal.ENTITY.POLAR_BEAR.rarity;
     }
@@ -325,7 +325,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && BlockHelper.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @Override

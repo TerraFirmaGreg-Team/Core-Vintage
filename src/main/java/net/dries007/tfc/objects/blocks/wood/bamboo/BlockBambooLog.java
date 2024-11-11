@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.wood.bamboo;
 
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BlockUtils;
 
 import net.minecraft.block.Block;
@@ -23,8 +24,8 @@ import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.CONNECTED;
-import static su.terrafirmagreg.data.Properties.BoolProp.GROWN;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CONNECTED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.GROWN;
 
 public class BlockBambooLog extends Block {
 
@@ -118,7 +119,7 @@ public class BlockBambooLog extends Block {
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
     IBlockState downState = worldIn.getBlockState(pos.down());
     boolean shouldDestroy =
-      !(downState.getBlock() instanceof BlockBambooLog) && !BlockUtils.isGrowableSoil(downState);
+      !(downState.getBlock() instanceof BlockBambooLog) && !BlockHelper.isGrowableSoil(downState);
     if (shouldDestroy) {
       worldIn.destroyBlock(pos, true);
       return;

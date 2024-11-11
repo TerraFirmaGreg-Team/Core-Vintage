@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
@@ -55,7 +55,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock, IRidable {
 
@@ -103,7 +103,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && BlockHelper.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @NotNull

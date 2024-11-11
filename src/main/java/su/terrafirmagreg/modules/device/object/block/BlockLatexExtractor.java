@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.object.block;
 import su.terrafirmagreg.api.base.block.BaseBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.device.client.render.TESRLatexExtractor;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
@@ -32,10 +32,10 @@ import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.util.EnumFacing.NORTH;
-import static su.terrafirmagreg.data.Properties.BoolProp.BASE;
-import static su.terrafirmagreg.data.Properties.BoolProp.POT;
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
-import static su.terrafirmagreg.data.Properties.IntProp.CUT;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.BASE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.POT;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Properties.IntProp.CUT;
 
 @SuppressWarnings("deprecation")
 public class BlockLatexExtractor extends BaseBlock implements IProviderTile {

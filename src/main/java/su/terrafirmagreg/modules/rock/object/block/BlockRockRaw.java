@@ -26,8 +26,8 @@ import net.dries007.tfc.objects.items.ItemGem;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.CAN_FALL;
-import static su.terrafirmagreg.data.Properties.BoolProp.MOSSY;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CAN_FALL;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.MOSSY;
 
 @SuppressWarnings("deprecation")
 public class BlockRockRaw extends BlockRock {

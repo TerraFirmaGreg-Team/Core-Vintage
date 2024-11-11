@@ -22,8 +22,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
-import static su.terrafirmagreg.data.Properties.EnumProp.FACING;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.FACING;
 
 @MethodsReturnNonnullByDefault
 public abstract class BlockStemCrop extends BlockCropSimple {

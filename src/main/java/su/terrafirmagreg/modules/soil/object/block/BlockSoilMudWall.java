@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlockWall;
-import su.terrafirmagreg.data.ToolClasses;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;

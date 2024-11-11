@@ -1,10 +1,11 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
+import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -56,7 +57,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
   public float wingRotDelta = 1.0F;
 
   public EntityAnimalChicken(World worldIn) {
-    this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()),
          getRandomGrowth(ConfigAnimal.ENTITY.CHICKEN.adulthood,
                          ConfigAnimal.ENTITY.CHICKEN.elder));
   }
@@ -70,7 +71,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
     BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+    if (!BiomeHelper.isOceanicBiome(biome) && !BiomeHelper.isBeachBiome(biome) &&
         (biomeType == BiomeUtils.BiomeType.PLAINS)) {
       return ConfigAnimal.ENTITY.CHICKEN.rarity;
     }

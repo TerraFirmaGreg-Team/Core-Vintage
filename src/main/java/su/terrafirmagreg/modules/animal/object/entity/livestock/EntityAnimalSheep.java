@@ -1,11 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
-import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.api.util.*;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -46,13 +42,15 @@ import net.dries007.tfc.util.calendar.Calendar;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import su.terrafirmagreg.api.helper.BiomeHelper;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable, ILivestock {
 
@@ -77,7 +75,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
     BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+    if (!BiomeHelper.isOceanicBiome(biome) && !BiomeHelper.isBeachBiome(biome) &&
         (biomeType == BiomeUtils.BiomeType.PLAINS)) {
       return ConfigAnimal.ENTITY.SHEEP.rarity;
     }

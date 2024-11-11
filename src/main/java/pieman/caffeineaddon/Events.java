@@ -4,7 +4,7 @@ import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.api.data.Reference.MODID_CAFFEINEADDON;
 
 @Mod.EventBusSubscriber(modid = MODID_CAFFEINEADDON)
 public class Events {

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.container;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -85,7 +85,7 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
     if (cap instanceof ItemGlassMolder.GlassMolderCapability) {
       ((ItemGlassMolder.GlassMolderCapability) cap).empty();
     }
-    emptyBlowpipe.attemptDamageItem(1, MathConstants.RNG, null);
+    emptyBlowpipe.attemptDamageItem(1, MathUtils.RNG, null);
     if (emptyBlowpipe.getItemDamage() >= emptyBlowpipe.getMaxDamage()) {
       emptyBlowpipe = ItemStack.EMPTY;
     }

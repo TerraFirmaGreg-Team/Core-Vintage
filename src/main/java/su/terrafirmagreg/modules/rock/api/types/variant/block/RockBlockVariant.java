@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.api.types.variant.block;
 
-import su.terrafirmagreg.data.lib.types.variant.block.VariantBlock;
+import su.terrafirmagreg.api.library.types.variant.block.VariantBlock;
 import su.terrafirmagreg.modules.rock.ModuleRock;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 

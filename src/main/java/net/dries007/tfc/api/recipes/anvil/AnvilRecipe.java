@@ -23,7 +23,7 @@ import lombok.Getter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 /**
  * Anvil Recipe

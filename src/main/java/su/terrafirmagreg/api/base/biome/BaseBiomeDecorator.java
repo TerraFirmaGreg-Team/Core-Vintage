@@ -17,7 +17,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.util.Random;
 
@@ -140,7 +140,7 @@ public class BaseBiomeDecorator extends BiomeDecorator {
       return;
     }
 
-    final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
+    final float avgTemperature = ClimateTFC.getAvgTemp(world, chunkPos);
     final float rainfall = ProviderChunkData.getRainfall(world, chunkPos);
     final float floraDensity = data.getFloraDensity(); // Use for various plant based decoration (tall grass, those vanilla jungle shrub things, etc.)
     final float floraDiversity = data.getFloraDiversity();

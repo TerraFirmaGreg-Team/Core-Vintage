@@ -15,7 +15,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.dries007.tfc.objects.blocks.BlockString;
 import net.dries007.tfc.objects.te.TEString;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.XZ;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.XZ;
 
 @SideOnly(Side.CLIENT)
 public class TESRString extends TileEntitySpecialRenderer<TEString> {

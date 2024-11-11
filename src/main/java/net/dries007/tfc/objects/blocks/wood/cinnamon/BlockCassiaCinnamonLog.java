@@ -1,7 +1,8 @@
 package net.dries007.tfc.objects.blocks.wood.cinnamon;
 
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.library.MCDate.Month;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -30,9 +31,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.CAN_GROW;
-import static su.terrafirmagreg.data.Properties.BoolProp.CONNECTED;
-import static su.terrafirmagreg.data.Properties.BoolProp.GROWN;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CAN_GROW;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CONNECTED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.GROWN;
 
 public class BlockCassiaCinnamonLog extends Block {
 
@@ -179,7 +180,7 @@ public class BlockCassiaCinnamonLog extends Block {
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
     IBlockState downState = worldIn.getBlockState(pos.down());
-    boolean shouldDestroy = !(downState.getBlock() instanceof BlockCassiaCinnamonLog) && !BlockUtils.isGrowableSoil(downState);
+    boolean shouldDestroy = !(downState.getBlock() instanceof BlockCassiaCinnamonLog) && !BlockHelper.isGrowableSoil(downState);
     if (shouldDestroy) {
       worldIn.destroyBlock(pos, true);
       return;

@@ -2,8 +2,8 @@ package se.gory_moon.horsepower.blocks;
 
 import su.terrafirmagreg.api.base.block.BaseBlockHorse;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.ToolClasses;
-import su.terrafirmagreg.data.enums.EnumChopperPart;
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.data.enums.EnumChopperPart;
 import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
 
 import net.minecraft.block.SoundType;
@@ -41,8 +41,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTALS;
-import static su.terrafirmagreg.data.Properties.EnumProp.CHOPPER_PART;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTALS;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.CHOPPER_PART;
 
 @Optional.Interface(iface = "mcjty.theoneprobe.api.IProbeInfoAccessor", modid = "theoneprobe")
 public class BlockChopperHorse extends BaseBlockHorse implements IProbeInfoAccessor {

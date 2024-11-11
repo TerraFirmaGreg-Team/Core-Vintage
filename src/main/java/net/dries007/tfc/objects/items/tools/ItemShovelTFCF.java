@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.tools;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -69,7 +69,7 @@ public class ItemShovelTFCF extends ItemSpade implements ICapabilitySize {
       }
       if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN &&
           worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR &&
-          BlockUtils.isVariant(soilBlock.getVariant(), GRASS, DRY_GRASS, DIRT)) {
+          Variant.isVariant(soilBlock.getVariant(), GRASS, DRY_GRASS, DIRT)) {
         IBlockState iblockstate1 = GRASS_PATH.get(soilBlock.getType()).getDefaultState();
         worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 

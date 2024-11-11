@@ -8,7 +8,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.CLAY;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CLAY;
 
 public class BlockSoilDirt extends BlockSoil {
 

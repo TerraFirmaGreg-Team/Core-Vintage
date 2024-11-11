@@ -1,6 +1,6 @@
 package net.dries007.tfc.types;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.init.Items;
@@ -46,7 +46,7 @@ import tfctech.TechConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCTECH;
 
 @SuppressWarnings({"ConstantConditions", "unused"})
 @Mod.EventBusSubscriber(modid = MODID_TFCTECH)
@@ -89,8 +89,8 @@ public final class TechRecipes {
 
     IForgeRegistryModifiable<HeatRecipe> modRegistry = (IForgeRegistryModifiable<HeatRecipe>) event.getRegistry();
     if (TechConfig.TWEAKS.removeGlassRecipes) {
-      modRegistry.remove(new ResourceLocation(Constants.MODID_TFC, "glass"));
-      modRegistry.remove(new ResourceLocation(Constants.MODID_TFC, "glass_shard"));
+      modRegistry.remove(new ResourceLocation(Reference.MODID_TFC, "glass"));
+      modRegistry.remove(new ResourceLocation(Reference.MODID_TFC, "glass_shard"));
     }
 
   }
@@ -112,11 +112,11 @@ public final class TechRecipes {
                                IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.INGOT)), new ItemStack(TechItems.IRON_DRAW_PLATE),
                                Metal.Tier.TIER_III, null, ForgeRule.PUNCH_LAST, ForgeRule.PUNCH_SECOND_LAST, ForgeRule.HIT_ANY));
     r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, "steel_draw_plate"), IIngredient.of(
-      ItemMetal.get(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "steel")), Metal.ItemType.INGOT)),
+      ItemMetal.get(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.MODID_TFC, "steel")), Metal.ItemType.INGOT)),
                                new ItemStack(TechItems.STEEL_DRAW_PLATE), Metal.Tier.TIER_IV, null, ForgeRule.PUNCH_LAST, ForgeRule.PUNCH_SECOND_LAST,
                                ForgeRule.HIT_ANY));
     r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, "black_steel_draw_plate"), IIngredient.of(
-      ItemMetal.get(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "black_steel")), Metal.ItemType.INGOT)),
+      ItemMetal.get(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.MODID_TFC, "black_steel")), Metal.ItemType.INGOT)),
                                new ItemStack(TechItems.BLACK_STEEL_DRAW_PLATE), Metal.Tier.TIER_V, null, ForgeRule.PUNCH_LAST, ForgeRule.PUNCH_SECOND_LAST,
                                ForgeRule.HIT_ANY));
 

@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import se.gory_moon.horsepower.client.renderer.TESRHPBase;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.FILLED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.FILLED;
 
 public class TESRQuernHorse extends TESRHPBase<TileQuernHorse> {
 

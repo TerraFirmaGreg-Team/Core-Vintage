@@ -20,7 +20,7 @@ import net.dries007.tfc.network.PacketStackFood;
 import org.lwjgl.input.Keyboard;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_TFC)
 @SideOnly(Side.CLIENT)

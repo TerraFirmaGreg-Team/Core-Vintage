@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.rock.object.block;
 
 import su.terrafirmagreg.api.base.item.BaseItemHeat;
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
@@ -29,7 +29,7 @@ public class BlockRockSand extends BlockRockFallable {
   }
 
   private static String isSilica(RockType type) {
-    return BlockUtils.isType(type, CHERT, GRANITE, QUARTZITE, RHYOLITE, PHYLLITE) ? "silica" : null;
+    return Type.isType(type, CHERT, GRANITE, QUARTZITE, RHYOLITE, PHYLLITE) ? "silica" : null;
   }
 
   @Override

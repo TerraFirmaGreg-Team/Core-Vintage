@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.enums.EnumAging;
+import su.terrafirmagreg.api.data.enums.EnumAging;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -36,8 +36,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.AGING;
-import static su.terrafirmagreg.data.Properties.IntProp.WEDGES;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.AGING;
+import static su.terrafirmagreg.api.data.Properties.IntProp.WEDGES;
 
 @MethodsReturnNonnullByDefault
 public class BlockCheesewheel extends BlockNonCube {

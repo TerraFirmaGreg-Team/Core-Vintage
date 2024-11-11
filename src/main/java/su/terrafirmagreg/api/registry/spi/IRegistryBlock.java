@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.registry.spi;
 
 import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
-import su.terrafirmagreg.data.lib.types.type.Type;
+import su.terrafirmagreg.api.library.types.type.Type;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

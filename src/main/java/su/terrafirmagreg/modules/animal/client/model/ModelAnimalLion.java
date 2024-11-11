@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalLion;
 
@@ -312,13 +312,13 @@ public class ModelAnimalLion extends ModelBase {
       mouthAngle = 0;
     }
 
-    this.head.rotateAngleX = par5 / (180F / MathConstants.PI);
-    this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
+    this.head.rotateAngleX = par5 / (180F / MathUtils.PI);
+    this.head.rotateAngleY = par4 / (180F / MathUtils.PI);
     this.frontRightLegTop.rotateAngleX = MathHelper.cos(par1 * 0.4662F) * 0.8F * par2;
     this.frontLeftLegTop.rotateAngleX =
-      MathHelper.cos(par1 * 0.4662F + MathConstants.PI) * 0.8F * par2;
+      MathHelper.cos(par1 * 0.4662F + MathUtils.PI) * 0.8F * par2;
     this.backRightLegTop.rotateAngleX =
-      MathHelper.cos(par1 * 0.4662F + MathConstants.PI) * 0.8F * par2;
+      MathHelper.cos(par1 * 0.4662F + MathUtils.PI) * 0.8F * par2;
     this.backLeftLegTop.rotateAngleX = MathHelper.cos(par1 * 0.4662F) * 0.8F * par2;
     this.mouthBottom.rotateAngleX = 0.0873F + mouthAngle;
 

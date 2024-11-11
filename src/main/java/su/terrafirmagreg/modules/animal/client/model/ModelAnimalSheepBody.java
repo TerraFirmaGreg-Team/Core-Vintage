@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep;
 
@@ -45,9 +45,9 @@ public class ModelAnimalSheepBody extends ModelQuadruped {
     horn2 = new ModelRenderer(this, 28, 2);
     horn2.addBox(0F, 0F, 0F, 2, 4, 2, 0F);
     horn2.setRotationPoint(0F, -10F, 0F);
-    horn2.rotateAngleZ = MathConstants.PI / 6;
+    horn2.rotateAngleZ = MathUtils.PI / 6;
     horn2.rotateAngleX = (float) -Math.PI / 6;
-    horn2.rotateAngleY = MathConstants.PI / 3;
+    horn2.rotateAngleY = MathUtils.PI / 3;
     horn2.setRotationPoint(4F, -6.5F, 0.75F);
 
     horn2b = new ModelRenderer(this, 38, 4);

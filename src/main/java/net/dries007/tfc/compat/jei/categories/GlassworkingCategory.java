@@ -12,7 +12,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.GlassworkingRecipeWrapper;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCTECH;
 
 public class GlassworkingCategory extends BaseRecipeCategory<GlassworkingRecipeWrapper> {
 

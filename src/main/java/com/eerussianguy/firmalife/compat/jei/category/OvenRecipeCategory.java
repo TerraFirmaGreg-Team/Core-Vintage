@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.compat.jei.category;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +18,7 @@ import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 //this is just TFC's HeatCategory, copied over in case i need to change it
 public class OvenRecipeCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(Constants.MODID_TFC, "textures/gui/icons/jei.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(Reference.MODID_TFC, "textures/gui/icons/jei.png");
 
   private final IDrawableStatic slot;
   private final IDrawableStatic fire;

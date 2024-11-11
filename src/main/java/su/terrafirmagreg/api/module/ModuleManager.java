@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.module;
 
 import su.terrafirmagreg.api.util.AnnotationUtils;
-import su.terrafirmagreg.data.lib.LoggingHelper;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;

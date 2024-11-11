@@ -41,7 +41,7 @@ import lombok.Getter;
 import java.util.List;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.IntProp.STAGE_5;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_5;
 
 @Getter
 @SuppressWarnings("deprecation")

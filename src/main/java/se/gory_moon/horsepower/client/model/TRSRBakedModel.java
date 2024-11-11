@@ -1,6 +1,6 @@
 package se.gory_moon.horsepower.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -68,7 +68,7 @@ public class TRSRBakedModel implements IBakedModel {
 
     this.faceOffset = 4 + EnumFacing.NORTH.getHorizontalIndex() - facing.getHorizontalIndex();
 
-    double r = MathConstants.PI * (360 - facing.getOpposite().getHorizontalIndex() * 90) / 180d;
+    double r = MathUtils.PI * (360 - facing.getOpposite().getHorizontalIndex() * 90) / 180d;
     TRSRTransformation t = new TRSRTransformation(null, null, null, TRSRTransformation.quatFromXYZ(0, (float) r, 0));
     this.transformation = TRSRTransformation.blockCenterToCorner(t);
   }

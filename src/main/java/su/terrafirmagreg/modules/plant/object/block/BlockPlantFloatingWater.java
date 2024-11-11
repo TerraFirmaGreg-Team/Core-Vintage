@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.plant.object.block;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 import su.terrafirmagreg.modules.plant.api.types.variant.block.PlantBlockVariant;
 
@@ -42,7 +42,7 @@ public class BlockPlantFloatingWater extends BlockPlant {
 
   @Override
   protected boolean canSustainBush(IBlockState state) {
-    return (BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == type.getWaterType()) ||
+    return (BlockHelper.isWater(state) || state.getMaterial() == Material.ICE && state == type.getWaterType()) ||
            (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater));
   }
 

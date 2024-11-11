@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.groundcover;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
@@ -61,8 +61,8 @@ public class GeneratorSurfaceTwig implements IWorldGenerator {
     if (pos.getY() > 146 && pos.getY() < 170 && data.getRainfall() >= 75) {
       if (world.isAirBlock(pos) && world.getBlockState(pos.down())
                                         .isSideSolid(world, pos.down(), EnumFacing.UP)) {
-        if (BlockUtils.isSoil(world.getBlockState(pos.down())) ||
-            BlockUtils.isGround(world.getBlockState(pos.down()))) {
+        if (BlockHelper.isSoil(world.getBlockState(pos.down())) ||
+                BlockHelper.isGround(world.getBlockState(pos.down()))) {
           world.setBlockState(pos, BlocksTFCF.TWIG.getDefaultState());
         }
       }

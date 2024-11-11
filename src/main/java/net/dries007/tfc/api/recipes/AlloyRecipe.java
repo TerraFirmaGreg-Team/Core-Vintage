@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.recipes;
 
-import su.terrafirmagreg.data.lib.DoubleRange;
+import net.dries007.tfc.util.Alloy;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -18,11 +18,11 @@ import lombok.Getter;
  */
 public class AlloyRecipe extends IForgeRegistryEntry.Impl<AlloyRecipe> {
 
-  private final ImmutableMap<Metal, DoubleRange> metalMap;
+  private final ImmutableMap<Metal, AlloyRange> metalMap;
   @Getter
   private final Metal result;
 
-  private AlloyRecipe(@NotNull Metal result, ImmutableMap<Metal, DoubleRange> alloyMap) {
+  private AlloyRecipe(@NotNull Metal result, ImmutableMap<Metal, AlloyRange> alloyMap) {
     this.metalMap = alloyMap;
     this.result = result;
 
@@ -38,14 +38,14 @@ public class AlloyRecipe extends IForgeRegistryEntry.Impl<AlloyRecipe> {
     return getRegistryName().getPath();
   }
 
-  public ImmutableMap<Metal, DoubleRange> getMetals() {
+  public ImmutableMap<Metal, AlloyRange> getMetals() {
     return metalMap;
   }
 
   public static class Builder {
 
     private final Metal result;
-    private final ImmutableMap.Builder<Metal, DoubleRange> builder;
+    private final ImmutableMap.Builder<Metal, AlloyRange> builder;
 
     public Builder(@NotNull Metal result) {
       this.result = result;
@@ -61,10 +61,10 @@ public class AlloyRecipe extends IForgeRegistryEntry.Impl<AlloyRecipe> {
     }
 
     public Builder add(@NotNull ResourceLocation loc, double min, double max) {
-      return add(loc, new DoubleRange(min, max));
+      return add(loc, new AlloyRange(min, max));
     }
 
-    public Builder add(@NotNull ResourceLocation loc, @NotNull DoubleRange condition) {
+    public Builder add(@NotNull ResourceLocation loc, @NotNull AlloyRange condition) {
       Metal metal = TFCRegistries.METALS.getValue(loc);
       if (metal == null) {
         throw new IllegalArgumentException("Result metal is not allowed to be null. Missing metal for key: " + loc);
@@ -72,13 +72,13 @@ public class AlloyRecipe extends IForgeRegistryEntry.Impl<AlloyRecipe> {
       return add(metal, condition);
     }
 
-    public Builder add(@NotNull Metal metal, @NotNull DoubleRange condition) {
+    public Builder add(@NotNull Metal metal, @NotNull AlloyRange condition) {
       builder.put(metal, condition);
       return this;
     }
 
     public Builder add(@NotNull Metal metal, double min, double max) {
-      return add(metal, new DoubleRange(min, max));
+      return add(metal, new AlloyRange(min, max));
     }
 
     public AlloyRecipe build() {
@@ -86,4 +86,19 @@ public class AlloyRecipe extends IForgeRegistryEntry.Impl<AlloyRecipe> {
     }
   }
 
+  @Getter
+  public static class AlloyRange {
+
+    private final double min;
+    private final double max;
+
+    public AlloyRange(double min, double max) {
+      this.min = min;
+      this.max = max;
+    }
+
+    public boolean test(double value) {
+      return value >= min - Alloy.EPSILON && value <= max + Alloy.EPSILON;
+    }
+  }
 }

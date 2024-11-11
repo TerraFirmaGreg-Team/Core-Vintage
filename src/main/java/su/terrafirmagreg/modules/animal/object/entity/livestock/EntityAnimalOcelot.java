@@ -1,11 +1,8 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
-import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.*;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -48,6 +45,8 @@ import net.dries007.tfc.util.calendar.Calendar;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import su.terrafirmagreg.api.helper.BiomeHelper;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
@@ -71,7 +70,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 
   @SuppressWarnings("unused")
   public EntityAnimalOcelot(World world) {
-    this(world, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
+    this(world, IAnimal.Gender.valueOf(MathUtils.RNG.nextBoolean()),
          EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.OCELOT.adulthood,
                                           ConfigAnimal.ENTITY.OCELOT.elder));
   }
@@ -108,7 +107,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
     BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+    if (!BiomeHelper.isOceanicBiome(biome) && !BiomeHelper.isBeachBiome(biome) &&
         (biomeType == BiomeUtils.BiomeType.TROPICAL_FOREST
          || biomeType == BiomeUtils.BiomeType.SAVANNA)) {
       return ConfigAnimal.ENTITY.OCELOT.rarity;
@@ -184,7 +183,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
     int numberOfChildren = ConfigAnimal.ENTITY.OCELOT.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalOcelot baby = new EntityAnimalOcelot(this.world,
-                                                       Gender.valueOf(MathConstants.RNG.nextBoolean()),
+                                                       Gender.valueOf(MathUtils.RNG.nextBoolean()),
                                                        (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       if (this.isTamed()) {
@@ -430,7 +429,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
       // Only called if this animal is interacted with a spawn egg
       // Try to return to vanilla's default method a baby of this animal, as if bred normally
       EntityAnimalOcelot baby = new EntityAnimalOcelot(this.world,
-                                                       Gender.valueOf(MathConstants.RNG.nextBoolean()),
+                                                       Gender.valueOf(MathUtils.RNG.nextBoolean()),
                                                        (int) Calendar.PLAYER_TIME.getTotalDays());
       if (this.isTamed()) {
         baby.setOwnerId(this.getOwnerId());
@@ -456,7 +455,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
     return this.world.checkNoEntityCollision(getEntityBoundingBox())
            && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
            && !this.world.containsAnyLiquid(getEntityBoundingBox())
-           && BlockUtils.isGround(this.world.getBlockState(this.getPosition().down()));
+           && BlockHelper.isGround(this.world.getBlockState(this.getPosition().down()));
   }
 
   @NotNull

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.data.lib.model.CustomModelLoader;
+import su.terrafirmagreg.api.library.model.CustomModelLoader;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -165,17 +165,6 @@ public final class ModelUtils {
 
     ModelLoader.setCustomMeshDefinition(item, meshDefinition);
   }
-
-  //endregion
-
-  //region ===== Backed
-
-  public static void registerBackedModel(ResourceLocation resourceLocation, @NotNull IModel model) {
-
-    CustomModelLoader.registerModel(resourceLocation, model);
-  }
-
-  //endregion
 
   //endregion
 

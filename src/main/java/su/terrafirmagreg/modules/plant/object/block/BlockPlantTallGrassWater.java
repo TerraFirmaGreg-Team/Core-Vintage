@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.plant.object.block;
 
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.MathConstants;
-import su.terrafirmagreg.data.enums.EnumPlantPart;
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.api.data.enums.EnumPlantPart;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
@@ -26,15 +26,15 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.PLANT_PART;
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
-import static su.terrafirmagreg.data.Properties.IntProp.DAYPERIOD;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.PLANT_PART;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.api.data.Properties.IntProp.DAYPERIOD;
 
 public class BlockPlantTallGrassWater extends BlockPlantShortGrass implements IGrowable, ITallPlant {
   
@@ -57,7 +57,7 @@ public class BlockPlantTallGrassWater extends BlockPlantShortGrass implements IG
 
   @Override
   protected boolean canSustainBush(IBlockState state) {
-    return (BlockUtils.isWater(state) || state.getMaterial() == Material.ICE && state == type.getWaterType()) ||
+    return (BlockHelper.isWater(state) || state.getMaterial() == Material.ICE && state == type.getWaterType()) ||
            (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater));
   }
 
@@ -78,7 +78,7 @@ public class BlockPlantTallGrassWater extends BlockPlantShortGrass implements IG
               ((material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == type.getWaterType()) ||
                material == Material.ICE ||
                (material == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater)))) &&
-             type.isValidTemp(Climate.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+             type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     } else {
       return this.canSustainBush(soil);
     }
@@ -147,7 +147,7 @@ public class BlockPlantTallGrassWater extends BlockPlantShortGrass implements IG
       if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
                                                                                        .getHarvestLevel(stack, "scythe", player, state) != -1) {
         for (int i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
-          if (MathConstants.RNG.nextDouble() <= (worldIn.getBlockState(pos.up(i))
+          if (MathUtils.RNG.nextDouble() <= (worldIn.getBlockState(pos.up(i))
                                                         .getValue(AGE_4) + 1) / 4.0D) //+25% change for each age
           {
             spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
@@ -175,7 +175,7 @@ public class BlockPlantTallGrassWater extends BlockPlantShortGrass implements IG
       return;
     }
 
-    if (type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
+    if (type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
         type.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE_4);
 
@@ -189,7 +189,7 @@ public class BlockPlantTallGrassWater extends BlockPlantShortGrass implements IG
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
+    } else if (!type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) ||
                !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE_4);
 

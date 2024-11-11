@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalAlpaca;
 
@@ -173,12 +173,12 @@ public class ModelAnimalAlpacaBody extends ModelBase {
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
                                 float par6, Entity ent) {
-    this.head.rotateAngleX = par5 / (180F / MathConstants.PI);
-    this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
-    this.body.rotateAngleX = MathConstants.PI / 2F;
+    this.head.rotateAngleX = par5 / (180F / MathUtils.PI);
+    this.head.rotateAngleY = par4 / (180F / MathUtils.PI);
+    this.body.rotateAngleX = MathUtils.PI / 2F;
     this.leg1.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.2F * par2;
-    this.leg2.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.2F * par2;
-    this.leg3.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.2F * par2;
+    this.leg2.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathUtils.PI) * 1.2F * par2;
+    this.leg3.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathUtils.PI) * 1.2F * par2;
     this.leg4.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.2F * par2;
     udders.isHidden = false;
   }

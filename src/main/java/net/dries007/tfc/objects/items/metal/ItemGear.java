@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.metal;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.util.ResourceLocation;
 
@@ -16,9 +16,9 @@ public class ItemGear extends ItemTechMetal {
 
   public Metal getSleeveMetal() {
     return switch (this.metal.getTier()) {
-      case TIER_III, TIER_IV -> TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "brass"));
-      case TIER_V, TIER_VI -> TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "steel"));
-      default -> TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "tin"));
+      case TIER_III, TIER_IV -> TFCRegistries.METALS.getValue(new ResourceLocation(Reference.MODID_TFC, "brass"));
+      case TIER_V, TIER_VI -> TFCRegistries.METALS.getValue(new ResourceLocation(Reference.MODID_TFC, "steel"));
+      default -> TFCRegistries.METALS.getValue(new ResourceLocation(Reference.MODID_TFC, "tin"));
     };
   }
 }

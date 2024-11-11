@@ -25,7 +25,7 @@ import lyeoj.tfcthings.main.ConfigTFCThings;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem {
 

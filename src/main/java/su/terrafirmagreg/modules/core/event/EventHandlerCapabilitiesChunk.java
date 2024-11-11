@@ -13,7 +13,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.world.ChunkWatchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,7 +28,7 @@ public class EventHandlerCapabilitiesChunk {
       var data = CapabilityChunkData.get(chunk);
       if (data != null && data.isInitialized()) {
         // Update server side climate
-        Climate.update(chunk.getPos(), data.getRegionalTemp(), data.getRainfall());
+        ClimateTFC.update(chunk.getPos(), data.getRegionalTemp(), data.getRainfall());
 
         // Update client side data
         NBTTagCompound nbt = (NBTTagCompound) CapabilityChunkData.CAPABILITY.writeNBT(data, null);

@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
@@ -23,7 +24,7 @@ public class GeneratorSand extends WorldGenerator {
 
   @Override
   public boolean generate(World world, Random rng, BlockPos pos) {
-    if (BlockUtils.isWater(world.getBlockState(pos))) {
+    if (BlockHelper.isWater(world.getBlockState(pos))) {
       return false;
     }
 
@@ -37,7 +38,7 @@ public class GeneratorSand extends WorldGenerator {
         }
         for (int y = -2; y <= 2; y++) {
           final IBlockState state = world.getBlockState(pos.add(x, y, z));
-          if (BlockUtils.isSoil(state) || BlockUtils.isVariant(state, SAND)) {
+          if (BlockHelper.isSoil(state) || Variant.isVariant(state, SAND)) {
             world.setBlockState(pos.add(x, y, z), sand.getDefaultState(), 2);
           }
         }

@@ -15,22 +15,20 @@ public class PacketService implements IPacketService {
 
   private static final int DEFAULT_RANGE = 64;
 
-  private final ThreadedNetworkWrapper threadedNetworkWrapper;
+  private final ThreadedNetworkWrapper wrapper;
 
-  public PacketService(ThreadedNetworkWrapper threadedNetworkWrapper) {
-    this.threadedNetworkWrapper = threadedNetworkWrapper;
+  public PacketService(ThreadedNetworkWrapper wrapper) {
+    this.wrapper = wrapper;
   }
 
   @Override
   public Packet<?> getPacketFrom(IMessage message) {
-    return this.threadedNetworkWrapper.getPacketFrom(message);
+    return this.wrapper.getPacketFrom(message);
   }
 
   @Override
-  public void sendToAllAround(IMessage message, int dimension, double x, double y, double z,
-                              double range) {
-    this.threadedNetworkWrapper.sendToAllAround(message,
-                                                new TargetPoint(dimension, x, y, z, range));
+  public void sendToAllAround(IMessage message, int dimension, double x, double y, double z, double range) {
+    this.wrapper.sendToAllAround(message, new TargetPoint(dimension, x, y, z, range));
   }
 
   @Override
@@ -40,8 +38,7 @@ public class PacketService implements IPacketService {
 
   @Override
   public void sendToAllAround(IMessage message, int dimension, BlockPos blockPos, double range) {
-    this.sendToAllAround(message, dimension, blockPos.getX(), blockPos.getY(), blockPos.getZ(),
-                         range);
+    this.sendToAllAround(message, dimension, blockPos.getX(), blockPos.getY(), blockPos.getZ(), range);
   }
 
   @Override
@@ -75,26 +72,26 @@ public class PacketService implements IPacketService {
 
   @Override
   public void sendToDimension(IMessage message, int dimension) {
-    this.threadedNetworkWrapper.sendToDimension(message, dimension);
+    this.wrapper.sendToDimension(message, dimension);
   }
 
   @Override
   public void sendToAllTracking(IMessage message, Entity entity) {
-    this.threadedNetworkWrapper.sendToAllTracking(message, entity);
+    this.wrapper.sendToAllTracking(message, entity);
   }
 
   @Override
   public void sendToAll(IMessage message) {
-    this.threadedNetworkWrapper.sendToAll(message);
+    this.wrapper.sendToAll(message);
   }
 
   @Override
   public void sendTo(IMessage message, EntityPlayerMP player) {
-    this.threadedNetworkWrapper.sendTo(message, player);
+    this.wrapper.sendTo(message, player);
   }
 
   @Override
   public void sendToServer(IMessage message) {
-    this.threadedNetworkWrapper.sendToServer(message);
+    this.wrapper.sendToServer(message);
   }
 }

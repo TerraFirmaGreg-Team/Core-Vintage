@@ -36,15 +36,15 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
-import static su.terrafirmagreg.data.Properties.IntProp.STAGE_3;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_3;
 
 @MethodsReturnNonnullByDefault
 public class BlockBeehive extends Block implements ICapabilitySize {
@@ -209,7 +209,7 @@ public class BlockBeehive extends Block implements ICapabilitySize {
   }
 
   private boolean isValid(World world, BlockPos pos, TEHangingPlanter tile) {
-    return tile.isClimateValid() || Climate.getDailyTemp(world, pos) > 10;
+    return tile.isClimateValid() || ClimateTFC.getDailyTemp(world, pos) > 10;
   }
 
   @Override

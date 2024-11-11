@@ -15,7 +15,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.biome.Biome;
 
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.util.Optional;
 
@@ -60,8 +60,8 @@ public class ModifierEnvironmental extends ModifierBase {
   }
 
   public static float getEnvironmentTemperature(EntityPlayer player) {
-    float avg = Climate.getAvgTemp(player.world, player.getPosition());
-    float actual = Climate.getActualTemp(player.world, player.getPosition());
+    float avg = ClimateTFC.getAvgTemp(player.world, player.getPosition());
+    float actual = ClimateTFC.getActualTemp(player.world, player.getPosition());
     if (ConfigCore.MISC.TEMPERATURE.harsherTemperateAreas) {
       float diff = actual - ProviderTemperature.AVERAGE;
       float sign = Math.signum(diff);
@@ -74,7 +74,7 @@ public class ModifierEnvironmental extends ModifierBase {
   }
 
   public static float getEnvironmentHumidity(EntityPlayer player) {
-    return Climate.getRainfall(player.world, player.getPosition()) / 3000;
+    return ClimateTFC.getRainfall(player.world, player.getPosition()) / 3000;
   }
 
   public static Optional<ModifierBase> handleWater(EntityPlayer player) {

@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.util;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +34,7 @@ public interface IGrowingPlant {
 
     @Override
     public String toString() {
-      return Constants.MODID_TFC + ".enum.growstatus." + name().toLowerCase();
+      return Reference.MODID_TFC + ".enum.growstatus." + name().toLowerCase();
     }
   }
 

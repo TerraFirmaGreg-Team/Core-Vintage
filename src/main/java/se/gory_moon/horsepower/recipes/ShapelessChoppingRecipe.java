@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import static su.terrafirmagreg.api.base.block.BaseBlockHorse.createItemStack;
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 public class ShapelessChoppingRecipe extends ShapelessOreRecipe {
 

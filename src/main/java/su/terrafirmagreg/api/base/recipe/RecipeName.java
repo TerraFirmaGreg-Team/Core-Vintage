@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.base.recipe;
 
+import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.data.Constants;
 
 import net.minecraft.util.ResourceLocation;
 
@@ -12,7 +12,7 @@ public class RecipeName {
 
   public static String generate() {
     if (prefix.isEmpty()) {
-      prefix = Constants.MOD_ID + "_";
+      prefix = Tags.MOD_ID + "_";
     }
 
     return generate(prefix);

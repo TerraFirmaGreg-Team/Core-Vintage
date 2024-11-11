@@ -9,7 +9,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.IceMeltHandler;
 
 import java.util.Random;
@@ -30,7 +30,7 @@ public class GeneratorSnowIce implements IWorldGenerator {
           // Can't use world#canBlockFreeze because it's specific to vanilla water
           BlockPos posDown = pos.down();
           IBlockState stateAt = world.getBlockState(posDown);
-          float actualTemp = Climate.getActualTemp(world, posDown);
+          float actualTemp = ClimateTFC.getActualTemp(world, posDown);
           if (actualTemp < IceMeltHandler.ICE_MELT_THRESHOLD - 4 + 4 * (rand.nextFloat()
                                                                         - rand.nextFloat()) &&
               stateAt.getBlock() == ChunkGenClassic.FRESH_WATER.getBlock()) {

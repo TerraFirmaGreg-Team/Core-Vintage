@@ -1,13 +1,13 @@
 package se.gory_moon.horsepower;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.Name;
 import net.minecraftforge.fluids.Fluid;
 
-@Config(modid = Constants.MODID_HORSEPOWER, category = "all")
+@Config(modid = Reference.MODID_HORSEPOWER, category = "all")
 public class Configs {
 
   @Comment("Client only configs")

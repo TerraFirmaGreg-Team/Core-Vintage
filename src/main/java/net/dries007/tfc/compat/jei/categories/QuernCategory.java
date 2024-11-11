@@ -1,6 +1,6 @@
 package net.dries007.tfc.compat.jei.categories;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 
 import net.minecraft.client.Minecraft;
@@ -19,7 +19,7 @@ import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 
 public class QuernCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(Constants.MODID_TFC, "textures/gui/icons/jei.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(Reference.MODID_TFC, "textures/gui/icons/jei.png");
 
   private final IDrawableStatic slot;
   private final IDrawableStatic arrow;

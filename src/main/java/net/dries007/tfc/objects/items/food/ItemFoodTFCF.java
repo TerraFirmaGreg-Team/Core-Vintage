@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.food;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -58,7 +58,7 @@ public class ItemFoodTFCF extends ItemFood implements IItemFoodTFC {
   protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
     if (!PotionEffects.isEmpty()) {
       for (PotionEffectToHave Effect : PotionEffects) {
-        if (MathConstants.RNG.nextInt(Effect.chance) == 0) {
+        if (MathUtils.RNG.nextInt(Effect.chance) == 0) {
           player.addPotionEffect(new PotionEffect(Effect.PotionEffect, Effect.Duration, Effect.Power));
         }
       }

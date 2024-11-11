@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalChicken;
 
@@ -85,10 +85,10 @@ public class ModelAnimalChicken extends ModelBase {
 
     if (percent >= 0.75 && chicken.getGender() == EntityAnimalBase.Gender.MALE) {
       crown.isHidden = false;
-      this.body.rotateAngleX = MathConstants.PI / 4F;
-      this.rightWing.rotateAngleX = MathConstants.PI / 4F;
+      this.body.rotateAngleX = MathUtils.PI / 4F;
+      this.rightWing.rotateAngleX = MathUtils.PI / 4F;
       rightWing.setRotationPoint(-4.0F, 13.5f, -2.5F);
-      this.leftWing.rotateAngleX = MathConstants.PI / 4F;
+      this.leftWing.rotateAngleX = MathUtils.PI / 4F;
       leftWing.setRotationPoint(4.0F, 13.5f, -2.5F);
       this.head.setRotationPoint(0.0F, 13, -1.0F);
       this.bill.setRotationPoint(0.0F, 13, -1.0F);
@@ -124,24 +124,24 @@ public class ModelAnimalChicken extends ModelBase {
   @Override
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5,
                                 float par6, Entity ent) {
-    this.head.rotateAngleX = -(par5 / (180F / MathConstants.PI));
-    this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
-    this.crown.rotateAngleX = -(par5 / (180F / MathConstants.PI));
-    this.crown.rotateAngleY = par4 / (180F / MathConstants.PI);
+    this.head.rotateAngleX = -(par5 / (180F / MathUtils.PI));
+    this.head.rotateAngleY = par4 / (180F / MathUtils.PI);
+    this.crown.rotateAngleX = -(par5 / (180F / MathUtils.PI));
+    this.crown.rotateAngleY = par4 / (180F / MathUtils.PI);
     this.bill.rotateAngleX = this.head.rotateAngleX;
     this.bill.rotateAngleY = this.head.rotateAngleY;
     this.chin.rotateAngleX = this.head.rotateAngleX;
     this.chin.rotateAngleY = this.head.rotateAngleY;
-    this.body.rotateAngleX = MathConstants.PI / 2F;
+    this.body.rotateAngleX = MathUtils.PI / 2F;
     crown.isHidden = true;
 
     for (int i = 0; i < 32; i++) {
       tails[i].rotateAngleX =
-        MathConstants.PI * 3 / 5F + (float) ((i % 3) * Math.PI / 32) * (i % 2 != 0 ? 1 : -1);
-      tails[i].rotateAngleZ = MathConstants.PI / -2 + MathConstants.PI * i / 31;
+        MathUtils.PI * 3 / 5F + (float) ((i % 3) * Math.PI / 32) * (i % 2 != 0 ? 1 : -1);
+      tails[i].rotateAngleZ = MathUtils.PI / -2 + MathUtils.PI * i / 31;
     }
     this.rightLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-    this.leftLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
+    this.leftLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathUtils.PI) * 1.4F * par2;
     this.rightWing.rotateAngleZ = par3;
     this.leftWing.rotateAngleZ = -par3;
     this.rightWing.rotateAngleX = 0;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.ceramics;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
@@ -63,7 +63,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Map.Entry;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 public class ItemSmallVessel extends ItemPottery {
 
@@ -258,7 +258,7 @@ public class ItemSmallVessel extends ItemPottery {
             } else {
               onlySmeltables = false;
             }
-            text.add(1, I18n.format(Constants.MODID_TFC + ".tooltip.small_vessel_item", slot.getCount(), slot
+            text.add(1, I18n.format(Reference.MODID_TFC + ".tooltip.small_vessel_item", slot.getCount(), slot
               .getItem()
               .getItemStackDisplayName(slot)));
             hasContent = true;
@@ -276,7 +276,7 @@ public class ItemSmallVessel extends ItemPottery {
               if (key != null) {
                 int metalAmount = entry.getValue();
                 text.add(textPosition,
-                         I18n.format(Constants.MODID_TFC + ".tooltip.small_vessel_unit_total", I18n.format(key.getTranslationKey()),
+                         I18n.format(Reference.MODID_TFC + ".tooltip.small_vessel_unit_total", I18n.format(key.getTranslationKey()),
                                      metalAmount, Math.round((float) metalAmount / totalAmount * 1000) / 10f));
               }
             }
@@ -284,7 +284,7 @@ public class ItemSmallVessel extends ItemPottery {
                      ""); // Separator between the contents of the vessel and the above units text, not needed but I feel that it helps visually
           }
         } else {
-          text.add(1, I18n.format(Constants.MODID_TFC + ".tooltip.small_vessel_empty"));
+          text.add(1, I18n.format(Reference.MODID_TFC + ".tooltip.small_vessel_empty"));
         }
       }
       ISmallVesselHandler.super.addHeatInfo(stack, text);

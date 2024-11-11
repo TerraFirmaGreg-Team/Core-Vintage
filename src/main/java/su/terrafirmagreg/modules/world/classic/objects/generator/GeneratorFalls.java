@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import net.minecraft.block.state.IBlockState;
@@ -33,15 +33,15 @@ public class GeneratorFalls implements IWorldGenerator {
       int z = random.nextInt(16) + 8;
       int y = random.nextInt(WorldTypeClassic.SEALEVEL - 50) + 30;
       BlockPos pos = new BlockPos(chunkX << 4, y, chunkZ << 4).add(x, 0, z);
-      if (!BlockUtils.isVariant(world.getBlockState(pos.down()), RAW) && !BlockUtils.isVariant(world.getBlockState(pos.up()), RAW) && (
-        !BlockUtils.isVariant(world.getBlockState(pos)) || !world.isAirBlock(pos))) {
+      if (!Variant.isVariant(world.getBlockState(pos.down()), RAW) && !Variant.isVariant(world.getBlockState(pos.up()), RAW) && (
+        !Variant.isVariant(world.getBlockState(pos)) || !world.isAirBlock(pos))) {
         continue;
       }
       int rawHorizontal = 0, airHorizontal = 0;
       for (EnumFacing facing : EnumFacing.HORIZONTALS) {
         if (world.isAirBlock(pos.offset(facing))) {
           airHorizontal++;
-        } else if (BlockUtils.isVariant(world.getBlockState(pos.offset(facing)), RAW)) {
+        } else if (Variant.isVariant(world.getBlockState(pos.offset(facing)), RAW)) {
           rawHorizontal++;
         }
         if (airHorizontal > 1) {

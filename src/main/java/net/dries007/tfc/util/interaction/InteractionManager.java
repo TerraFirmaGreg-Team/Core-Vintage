@@ -31,8 +31,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.data.Properties.IntProp.TYPE;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
+import static su.terrafirmagreg.api.data.Properties.IntProp.TYPE;
 
 @Mod.EventBusSubscriber(modid = MODID_TFC)
 public final class InteractionManager {

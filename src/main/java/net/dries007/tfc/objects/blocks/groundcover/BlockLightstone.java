@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.groundcover;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -32,7 +32,7 @@ import tfcflorae.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.DirectionProp.DIRECTIONAL;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.DIRECTIONAL;
 
 public class BlockLightstone extends BlockBush implements ICapabilitySize {
 
@@ -187,7 +187,7 @@ public class BlockLightstone extends BlockBush implements ICapabilitySize {
     IBlockState iblockstate = worldIn.getBlockState(blockpos);
     BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, blockpos, facing);
 
-    return blockfaceshape == BlockFaceShape.SOLID || BlockUtils.isGround(iblockstate) ||
+    return blockfaceshape == BlockFaceShape.SOLID || BlockHelper.isGround(iblockstate) ||
            worldIn.getBlockState(blockpos)
                   .isFullBlock();
   }

@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.plants.property;
 
-import su.terrafirmagreg.data.enums.EnumPlantPart;
+import su.terrafirmagreg.api.data.enums.EnumPlantPart;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.AxisAlignedBB;

@@ -1,8 +1,8 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.enums.EnumFruitLeafState;
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.data.enums.EnumFruitLeafState;
+import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.block.state.IBlockState;
@@ -23,15 +23,15 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
-import static su.terrafirmagreg.data.Properties.EnumProp.FRUIT_LEAF_STATE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.FRUIT_LEAF_STATE;
 
 public class FruitTreeProvider implements IWailaBlock {
 
@@ -61,7 +61,7 @@ public class FruitTreeProvider implements IWailaBlock {
         if (state.getValue(FRUIT_LEAF_STATE) != EnumFruitLeafState.FRUIT) {
 
           TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
-            addInfo(block.getTree(), tile, Climate.getActualTemp(world, finalPos), ProviderChunkData.getRainfall(world, finalPos), currentTooltip);
+            addInfo(block.getTree(), tile, ClimateTFC.getActualTemp(world, finalPos), ProviderChunkData.getRainfall(world, finalPos), currentTooltip);
           });
         }
       } else {
@@ -74,7 +74,7 @@ public class FruitTreeProvider implements IWailaBlock {
       }
     } else if (state.getBlock() instanceof BlockFruitTreeSapling block) {
       TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
-        addInfo(block.getTree(), tile, Climate.getActualTemp(world, finalPos), ProviderChunkData.getRainfall(world, finalPos), currentTooltip);
+        addInfo(block.getTree(), tile, ClimateTFC.getActualTemp(world, finalPos), ProviderChunkData.getRainfall(world, finalPos), currentTooltip);
       });
 
     } else if (state.getBlock() instanceof BlockFruitTreeTrunk) {
@@ -90,7 +90,7 @@ public class FruitTreeProvider implements IWailaBlock {
       }
       BlockFruitTreeTrunk block = (BlockFruitTreeTrunk) topMost.getBlock();
       TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
-        addInfo(block.getTree(), tile, Climate.getActualTemp(world, finalPos), ProviderChunkData.getRainfall(world, finalPos), currentTooltip);
+        addInfo(block.getTree(), tile, ClimateTFC.getActualTemp(world, finalPos), ProviderChunkData.getRainfall(world, finalPos), currentTooltip);
       });
 
 

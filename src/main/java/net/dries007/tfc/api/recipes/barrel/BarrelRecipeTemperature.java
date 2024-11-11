@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.recipes.barrel;
 
 import su.terrafirmagreg.api.util.CollectionUtils;
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 
 import net.minecraft.client.resources.I18n;
@@ -68,7 +68,7 @@ public class BarrelRecipeTemperature extends BarrelRecipe {
   @Override
   public void onRecipeComplete(World world, BlockPos pos) {
     if (world.getTotalWorldTime() % 4 == 0) {
-      world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.8f + MathConstants.RNG.nextFloat() * 0.4f);
+      world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.8f + MathUtils.RNG.nextFloat() * 0.4f);
     }
   }
 

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.vein;
 
-import su.terrafirmagreg.data.enums.EnumGradeOre;
+import su.terrafirmagreg.api.data.enums.EnumGradeOre;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 
 import net.minecraft.nbt.NBTTagCompound;

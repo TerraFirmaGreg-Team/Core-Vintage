@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.IntProp.STAGE_3;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_3;
 
 public class HangingPlanterProvider implements IWailaBlock {
 

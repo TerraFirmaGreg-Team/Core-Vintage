@@ -29,7 +29,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.util.Iterator;
 import java.util.Random;
@@ -82,7 +82,7 @@ public class EventHandlerPuddles {
     }
 
     Biome biome = world.getBiomeForCoordsBody(pos);
-    if (biome.canRain() && !biome.getEnableSnow() && (Climate.getActualTemp(pos) > 0)) {
+    if (biome.canRain() && !biome.getEnableSnow() && (ClimateTFC.getActualTemp(pos) > 0)) {
       for (int y = pos.getY() + 1; y < world.getHeight(); y++) {
         BlockPos up = new BlockPos(pos.getX(), y, pos.getZ());
         if (!world.isAirBlock(up)) {

@@ -12,8 +12,8 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 
-import static su.terrafirmagreg.data.Constants.MODID_FL;
-import static su.terrafirmagreg.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Reference.MODID_FL;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
 
 public final class LoomRecipes {
 

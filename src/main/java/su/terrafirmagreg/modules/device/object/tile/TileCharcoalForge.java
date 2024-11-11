@@ -3,8 +3,8 @@ package su.terrafirmagreg.modules.device.object.tile;
 import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.base.tile.spi.ITileFields;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
@@ -43,7 +43,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
 public class TileCharcoalForge extends BaseTileTickableInventory
   implements ICalendarTickable, ITileFields, IAmbientalTileProvider,
@@ -97,7 +97,7 @@ public class TileCharcoalForge extends BaseTileTickableInventory
     burnTicks -= ConfigDevice.BLOCK.CHARCOAL_FORGE.rainTicks;
     // Play the "tsssss" sound
     world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f,
-                    0.8f + MathConstants.RNG.nextFloat() * 0.4f);
+                    0.8f + MathUtils.RNG.nextFloat() * 0.4f);
   }
 
   @Override

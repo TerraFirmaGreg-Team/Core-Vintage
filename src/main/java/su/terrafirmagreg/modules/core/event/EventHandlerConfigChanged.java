@@ -10,7 +10,7 @@ import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static su.terrafirmagreg.data.Constants.MOD_ID;
+import static su.terrafirmagreg.Tags.MOD_ID;
 
 @SuppressWarnings("unused")
 public class EventHandlerConfigChanged {

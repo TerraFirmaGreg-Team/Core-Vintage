@@ -1,6 +1,6 @@
 package net.dries007.tfc.util;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorWildCrops;
 
@@ -15,6 +15,6 @@ public class RegenWildCrops extends GeneratorWildCrops {
     //Modified to allow replacement of grass during spring regen
     Block block = world.getBlockState(pos).getBlock();
     return (block instanceof BlockPlantShortGrass ||
-            block.isAir(world.getBlockState(pos), world, pos) && BlockUtils.isSoil(world.getBlockState(pos.down())));
+            block.isAir(world.getBlockState(pos), world, pos) && BlockHelper.isSoil(world.getBlockState(pos.down())));
   }
 }

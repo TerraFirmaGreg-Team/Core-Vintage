@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.feature.falling;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.CapabilityWorldTracker;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.spi.CollapseData;
 import su.terrafirmagreg.modules.core.object.entity.EntityFallingBlock;
@@ -39,7 +39,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.FARMLAND;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS_PATH;
 
@@ -138,7 +138,7 @@ public class FallingBlockManager {
   }
 
   public static boolean hasSupportingSideBlock(IBlockState state) {
-    return state.isNormalCube() || SIDE_SUPPORTS.contains(state) || BlockUtils.isVariant(state, FARMLAND, GRASS_PATH);
+    return state.isNormalCube() || SIDE_SUPPORTS.contains(state) || Variant.isVariant(state, FARMLAND, GRASS_PATH);
   }
 
   public static boolean shouldFall(World world, BlockPos posToFallFrom, BlockPos originalPos, IBlockState originalState, boolean ignoreSupportChecks) {

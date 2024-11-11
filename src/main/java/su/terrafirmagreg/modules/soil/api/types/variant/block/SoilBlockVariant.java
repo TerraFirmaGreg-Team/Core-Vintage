@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.block;
 
-import su.terrafirmagreg.data.lib.types.variant.block.VariantBlock;
+import su.terrafirmagreg.api.library.types.variant.block.VariantBlock;
 import su.terrafirmagreg.modules.soil.ModuleSoil;
 import su.terrafirmagreg.modules.soil.api.spi.IGrass;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;

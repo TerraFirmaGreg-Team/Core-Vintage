@@ -22,7 +22,7 @@ import net.dries007.tfc.util.skills.SkillType;
 
 import java.util.List;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiSkills extends GuiContainerTFC {

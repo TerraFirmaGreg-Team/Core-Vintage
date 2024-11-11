@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.data.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Reference.MODID_FL;
 
 public class QuadPlanterStateMapper extends StateMapperBase {
 

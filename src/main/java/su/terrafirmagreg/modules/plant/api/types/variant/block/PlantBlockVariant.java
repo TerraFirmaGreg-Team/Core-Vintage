@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.plant.api.types.variant.block;
 
-import su.terrafirmagreg.data.lib.types.variant.block.VariantBlock;
+import su.terrafirmagreg.api.library.types.variant.block.VariantBlock;
 import su.terrafirmagreg.modules.plant.ModulePlant;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 

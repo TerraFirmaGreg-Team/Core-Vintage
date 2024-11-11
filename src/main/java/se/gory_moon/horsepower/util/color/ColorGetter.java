@@ -1,6 +1,6 @@
 package se.gory_moon.horsepower.util.color;
 
-import su.terrafirmagreg.data.lib.ColorThief;
+import su.terrafirmagreg.api.library.ColorThief;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

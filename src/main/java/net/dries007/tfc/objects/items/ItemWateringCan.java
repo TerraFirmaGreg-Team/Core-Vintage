@@ -24,8 +24,8 @@ import com.eerussianguy.firmalife.util.IWaterable;
 import mcp.MethodsReturnNonnullByDefault;
 
 import static net.minecraft.block.BlockFarmland.MOISTURE;
-import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.BoolProp.WET;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WET;
 
 @MethodsReturnNonnullByDefault
 

@@ -10,7 +10,7 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 // For now this is unnecessary, but it sets the groundwork for harvesting Whey + other straining recipes
 public class StrainingRecipe extends IForgeRegistryEntry.Impl<StrainingRecipe> {

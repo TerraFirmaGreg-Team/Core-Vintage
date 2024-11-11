@@ -38,8 +38,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
-import static su.terrafirmagreg.data.Properties.EnumProp.XZ;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.XZ;
 
 @MethodsReturnNonnullByDefault
 public class BlockString extends BlockNonCube {

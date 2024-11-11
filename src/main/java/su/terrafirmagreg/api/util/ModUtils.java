@@ -25,8 +25,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static su.terrafirmagreg.data.Constants.MOD_ID;
-import static su.terrafirmagreg.data.Constants.MOD_NAME;
+import static su.terrafirmagreg.Tags.MOD_ID;
+import static su.terrafirmagreg.Tags.MOD_NAME;
 
 @UtilityClass
 @SuppressWarnings("unused")

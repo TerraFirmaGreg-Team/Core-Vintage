@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.compat.waila;
 
-import su.terrafirmagreg.data.enums.EnumAging;
+import su.terrafirmagreg.api.data.enums.EnumAging;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.AGING;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.AGING;
 
 public class CheesewheelProvider implements IWailaBlock {
 

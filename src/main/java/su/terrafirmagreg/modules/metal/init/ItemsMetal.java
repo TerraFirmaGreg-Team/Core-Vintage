@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.metal.init;
 
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.data.lib.Pair;
+import su.terrafirmagreg.api.library.Pair;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 import su.terrafirmagreg.modules.metal.api.types.variant.Item.MetalItemVariant;
 

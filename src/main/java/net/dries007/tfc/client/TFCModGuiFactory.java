@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Set;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @SuppressWarnings("unused")

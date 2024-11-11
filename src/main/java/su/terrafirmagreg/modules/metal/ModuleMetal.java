@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.data.lib.LoggingHelper;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.modules.core.event.EventHandlerMaterial;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalTypeHandler;
 import su.terrafirmagreg.modules.metal.init.BlocksMetal;

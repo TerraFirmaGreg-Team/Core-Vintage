@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
+import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -22,7 +23,7 @@ import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock {
 
@@ -42,7 +43,7 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
     BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+    if (!BiomeHelper.isOceanicBiome(biome) && !BiomeHelper.isBeachBiome(biome) &&
         (biomeType == BiomeUtils.BiomeType.TUNDRA)) {
       return ConfigAnimal.ENTITY.MUSKOX.rarity;
     }

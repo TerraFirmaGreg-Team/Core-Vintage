@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.eerussianguy.firmalife.world.WorldGeneratorFL;
 import lyeoj.tfcthings.init.TFCThingsEntities;
 
-import static su.terrafirmagreg.data.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Reference.MODID_FL;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 public class CommonProxy {

@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.GROWN;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.GROWN;
 
 @MethodsReturnNonnullByDefault
 

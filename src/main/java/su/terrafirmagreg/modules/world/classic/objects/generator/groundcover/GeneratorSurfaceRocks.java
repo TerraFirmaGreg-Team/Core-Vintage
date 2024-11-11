@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.groundcover;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 public class GeneratorSurfaceRocks
   implements IWorldGenerator {
@@ -58,7 +58,7 @@ public class GeneratorSurfaceRocks
 
     if (world.isAirBlock(pos) && world.getBlockState(pos.down())
                                       .isSideSolid(world, pos.down(), EnumFacing.UP) &&
-        BlockUtils.isSoil(world.getBlockState(pos.down()))) {
+            BlockHelper.isSoil(world.getBlockState(pos.down()))) {
       world.setBlockState(pos,
                           BlocksRock.SURFACE.get(type).getDefaultState()
                                             .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(random.nextInt(4))), 2);

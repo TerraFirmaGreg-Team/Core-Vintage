@@ -20,7 +20,7 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import java.util.ArrayList;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 public class AgedRegistry {
 

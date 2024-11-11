@@ -38,14 +38,14 @@ import net.dries007.tfc.objects.items.ItemGemTFCF;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import tfcflorae.ConfigTFCF;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFCF;
-import static su.terrafirmagreg.data.Properties.BoolProp.CAN_GROW;
-import static su.terrafirmagreg.data.Properties.BoolProp.DECAYABLE;
-import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
-import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
-import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
-import static su.terrafirmagreg.data.Properties.IntProp.LEVEL;
-import static su.terrafirmagreg.data.Properties.IntProp.STAGE_5;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CAN_GROW;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.DECAYABLE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.PLACED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.api.data.Properties.IntProp.LEVEL;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_5;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = MODID_TFCF)

@@ -56,7 +56,7 @@ import static net.dries007.tfc.api.registries.TFCRegistryNames.SMELTERY;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.STRAINING_RECIPE;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.TREE;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.WELDING_RECIPE;
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 @Mod.EventBusSubscriber(modid = MODID_TFC)
 public final class Registries {

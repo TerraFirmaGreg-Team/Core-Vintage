@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.glassworking;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
@@ -107,9 +107,9 @@ public class ItemGlassMolder extends ItemMisc {
       if (fluid != null) {
         String fluidDesc = TextFormatting.DARK_GREEN + fluid.getLocalizedName() + TextFormatting.WHITE;
         if (isSolidified()) {
-          fluidDesc += I18n.format(Constants.MODID_TFC + ".tooltip.solid");
+          fluidDesc += I18n.format(Reference.MODID_TFC + ".tooltip.solid");
         } else if (canWork()) {
-          fluidDesc += I18n.format(Constants.MODID_TFC + ".tooltip.liquid");
+          fluidDesc += I18n.format(Reference.MODID_TFC + ".tooltip.liquid");
         }
         tooltip.add(fluidDesc);
       }

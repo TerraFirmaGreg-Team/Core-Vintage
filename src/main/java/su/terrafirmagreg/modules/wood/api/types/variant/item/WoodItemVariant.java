@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.api.types.variant.item;
 
-import su.terrafirmagreg.data.lib.types.variant.item.VariantItem;
+import su.terrafirmagreg.api.library.types.variant.item.VariantItem;
 import su.terrafirmagreg.modules.wood.ModuleWood;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 

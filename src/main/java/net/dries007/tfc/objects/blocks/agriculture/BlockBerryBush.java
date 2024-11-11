@@ -1,8 +1,9 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.DamageSources;
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.block.Block;
@@ -33,7 +34,7 @@ import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,7 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.FRUITING;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.FRUITING;
 
 @MethodsReturnNonnullByDefault
 public class BlockBerryBush extends Block implements IGrowingPlant {
@@ -142,7 +143,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     if (!world.isRemote) {
       var tile = TileUtils.getTile(world, pos, TETickCounter.class);
       tile.ifPresent(tileTickCounter -> {
-        float temp = Climate.getActualTemp(world, pos);
+        float temp = ClimateTFC.getActualTemp(world, pos);
         float rainfall = ProviderChunkData.getRainfall(world, pos);
         long hours = tileTickCounter.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
         if (hours > (bush.getGrowthTime() * ConfigTFC.General.FOOD.berryBushGrowthTimeModifier) && bush.isValidForGrowth(temp, rainfall)) {
@@ -232,9 +233,9 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     IBlockState below = world.getBlockState(pos.down());
     if (bush.getSize() == IBerryBush.Size.LARGE && below.getBlock() instanceof BlockBerryBush &&
         ((BlockBerryBush) below.getBlock()).bush == this.bush) {
-      return BlockUtils.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
+      return BlockHelper.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
     }
-    return BlockUtils.isGrowableSoil(below);
+    return BlockHelper.isGrowableSoil(below);
   }
 
   @NotNull
@@ -244,7 +245,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 
   @Override
   public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-    float temp = Climate.getActualTemp(world, pos);
+    float temp = ClimateTFC.getActualTemp(world, pos);
     float rainfall = ProviderChunkData.getRainfall(world, pos);
     boolean canGrow = bush.isValidForGrowth(temp, rainfall);
     if (state.getValue(FRUITING)) {

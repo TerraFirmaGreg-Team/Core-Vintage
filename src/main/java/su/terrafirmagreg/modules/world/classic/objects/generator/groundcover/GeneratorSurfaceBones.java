@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.groundcover;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
@@ -72,7 +72,7 @@ public class GeneratorSurfaceBones implements IWorldGenerator {
     var data = CapabilityChunkData.get(world, pos);
     if (pos.getY() > 146 && pos.getY() < 170 && data.getRainfall() <= 75) {
       if (world.isAirBlock(pos) && world.getBlockState(pos.down())
-                                        .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockUtils.isGround(
+                                        .isSideSolid(world, pos.down(), EnumFacing.UP) && BlockHelper.isGround(
         world.getBlockState(pos.down()))) {
         world.setBlockState(pos, BlocksTFCF.BONES.getDefaultState());
       }

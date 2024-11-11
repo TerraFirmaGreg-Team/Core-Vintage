@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
-import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.helper.BiomeHelper;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
@@ -17,16 +18,13 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import tfcflorae.ConfigTFCF;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.util.BlockUtils.isClay;
-import static su.terrafirmagreg.api.util.BlockUtils.isGrass;
-import static su.terrafirmagreg.api.util.BlockUtils.isGround;
-import static su.terrafirmagreg.api.util.BlockUtils.isSoil;
-import static su.terrafirmagreg.api.util.BlockUtils.isVariant;
+import static su.terrafirmagreg.api.helper.BlockHelper.isClay;
+import static su.terrafirmagreg.api.library.types.variant.Variant.isVariant;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
 
@@ -50,12 +48,12 @@ public class GeneratorMesaStrata implements IWorldGenerator {
         BlockPos strataLayer = chunkBlockPos.add(x, WorldTypeClassic.SEALEVEL, z);
         //TFCFlorae.getLog().warn("TFCFlorae: Current 'strataLayer' is " + "X: " + strataLayer.getX() + ", Y: " + strataLayer.getY() + ", Z: " + strataLayer.getZ());
         final Biome b = world.getBiome(strataLayer);
-        final float avgTemperature = Climate.getAvgTemp(world, strataLayer);
+        final float avgTemperature = ClimateTFC.getAvgTemp(world, strataLayer);
         final float rainfall = ProviderChunkData.getRainfall(world, strataLayer);
 
         if (rainfall < +1.3 * random.nextGaussian() + RAINFALL_DRY_GRASS && avgTemperature >= 15f) {
           //if (b == BiomesTFC.MESA || b == BiomesTFC.MESA_PLATEAU || b == BiomesTFC.MESA_BRYCE || b == BiomesTFC.MESA_PLATEAU_M || BiomeUtils.isMesaBiome(b))
-          if (BiomeUtils.isMesaBiome(b)) {
+          if (BiomeHelper.isMesaBiome(b)) {
             for (int y = WorldTypeClassic.SEALEVEL;
                  y < world.getTopSolidOrLiquidBlock(strataLayer).getY(); ++y) {
               BlockPos currentBlock = chunkBlockPos.add(x, y, z);
@@ -63,9 +61,9 @@ public class GeneratorMesaStrata implements IWorldGenerator {
               IBlockState currentBlockStateTop = world.getBlockState(currentBlock.up());
               //if (currentBlockState instanceof BlockRockVariant && ((BlockRockVariant)(currentBlockState.get())).getRock().getRockCategory() == TFCRegistries.ROCK_CATEGORIES.getValue(DefaultRocks.SEDIMENTARY))
               if ((y <= WorldTypeClassic.SEALEVEL + 5 &&
-                   (isVariant(currentBlockState, RAW) || isGround(currentBlockState) || isSoil(currentBlockState))
-                   && !(isGrass(currentBlockState) || isVariant(currentBlockState, SAND) || isClay(currentBlockState))) ||
-                  (y > WorldTypeClassic.SEALEVEL + 5 && (isVariant(currentBlockState, RAW) || isGround(currentBlockState) || isSoil(currentBlockState)))) {
+                   (isVariant(currentBlockState, RAW) || BlockHelper.isGround(currentBlockState) || BlockHelper.isSoil(currentBlockState))
+                   && !(BlockHelper.isGrass(currentBlockState) || isVariant(currentBlockState, SAND) || isClay(currentBlockState))) ||
+                  (y > WorldTypeClassic.SEALEVEL + 5 && (isVariant(currentBlockState, RAW) || BlockHelper.isGround(currentBlockState) || BlockHelper.isSoil(currentBlockState)))) {
 
                 if (y >= strataLayer.getY() && y <= strataLayer.getY() + 2) {
                   world.setBlockState(currentBlock, HARDENED_CLAY, 2);

@@ -10,7 +10,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.awt.Color;
 import java.time.Month;
@@ -90,8 +90,8 @@ public class GrassColorHandler {
   private static int computeInitialGrassColor(IBlockState state, IBlockAccess worldIn, BlockPos pos,
                                               int tintIndex) {
     if (pos != null) {
-      double temp = MathHelper.clamp((Climate.getMonthlyTemp(pos) + 30) / 60, 0, 1);
-      double rain = MathHelper.clamp((Climate.getRainfall(pos) - 50) / 400, 0, 1);
+      double temp = MathHelper.clamp((ClimateTFC.getMonthlyTemp(pos) + 30) / 60, 0, 1);
+      double rain = MathHelper.clamp((ClimateTFC.getRainfall(pos) - 50) / 400, 0, 1);
       return ColorizerGrass.getGrassColor(temp, rain);
     }
 

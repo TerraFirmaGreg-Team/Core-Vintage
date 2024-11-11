@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
+import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.Constants;
 import su.terrafirmagreg.modules.device.object.block.BlockLogPile;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
 
@@ -66,7 +66,7 @@ public class ProviderLogPile implements IProbeInfoProvider, IBlockDisplayOverrid
             .item(icon)
             .vertical()
             .itemLabel(icon)
-            .text(TextStyleClass.MODNAME + Constants.MOD_NAME);
+            .text(TextStyleClass.MODNAME + Tags.MOD_NAME);
       });
 
 

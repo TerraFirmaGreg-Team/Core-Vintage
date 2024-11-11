@@ -38,7 +38,7 @@ import net.dries007.tfc.util.skills.SkillType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.data.Properties.DirectionProp.DIRECTIONAL;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.DIRECTIONAL;
 
 @MethodsReturnNonnullByDefault
 

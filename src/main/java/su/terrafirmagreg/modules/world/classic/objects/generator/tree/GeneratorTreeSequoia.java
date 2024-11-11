@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.tree;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.StructureUtils;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 
@@ -20,7 +20,7 @@ import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.PLACED;
 
 public class GeneratorTreeSequoia implements ITreeGenerator {
 
@@ -59,12 +59,12 @@ public class GeneratorTreeSequoia implements ITreeGenerator {
   @Override
   public boolean canGenerateTree(World world, BlockPos pos, Tree treeType) {
     for (BlockPos p1 : OFFSETS) {
-      if (!BlockUtils.isSoil(world.getBlockState(pos.add(p1).down()))) {
+      if (!BlockHelper.isSoil(world.getBlockState(pos.add(p1).down()))) {
         if (world.getBlockState(pos.add(p1)).getMaterial().isReplaceable()) {
-          if (BlockUtils.isSoil(world.getBlockState(pos.add(p1).down(1)))) {
+          if (BlockHelper.isSoil(world.getBlockState(pos.add(p1).down(1)))) {
             continue;
           }
-          if (BlockUtils.isSoil(world.getBlockState(pos.add(p1)
+          if (BlockHelper.isSoil(world.getBlockState(pos.add(p1)
                                                        .down(2))) && world.getBlockState(pos.add(p1.down(1)))
                                                                           .getMaterial()
                                                                           .isReplaceable()) {

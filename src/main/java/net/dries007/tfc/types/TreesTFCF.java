@@ -1,6 +1,6 @@
 package net.dries007.tfc.types;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeNormal;
 import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeRandom;
 import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeSequoia;
@@ -14,8 +14,8 @@ import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @Mod.EventBusSubscriber(modid = MODID_TFCF)
@@ -416,7 +416,7 @@ public final class TreesTFCF {
   public static final ITreeGenerator GEN_TIMBER_BAMBOO = new GeneratorTreeVariants(true, 4); // Phyllostachys vivax
   public static final ITreeGenerator GEN_TINWA_BAMBOO = new GeneratorTreeVariants(true, 4); // Cephalostachyum pergracile
   public static final ITreeGenerator GEN_WEAVERS_BAMBOO = new GeneratorTreeVariants(true, 4); // Bambusa textilis
-  public static final Tree CINNAMON_TREE = new Tree(new ResourceLocation(Constants.MODID_TFC, "cinnamon"), new GeneratorTreeSequoia(), 28, 35, 280, 400,
+  public static final Tree CINNAMON_TREE = new Tree(new ResourceLocation(Reference.MODID_TFC, "cinnamon"), new GeneratorTreeSequoia(), 28, 35, 280, 400,
                                                     0f, 1f, 0, 4, 15, 4, false, null, false, 15, 0, 0);
   public static final Tree ARROW_BAMBOO = new Tree(new ResourceLocation(MODID_TFC, "arrow_bamboo"), GEN_ARROW_BAMBOO, 24, 35, 240, 420, 1, 2, 1, 4,
                                                    15, 6, false, null, false, 10, 400f, 800);

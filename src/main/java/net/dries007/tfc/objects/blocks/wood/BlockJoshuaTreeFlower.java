@@ -1,10 +1,12 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.data.enums.EnumFruitLeafState;
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.data.enums.EnumFruitLeafState;
+import su.terrafirmagreg.api.library.MCDate.Month;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -40,7 +42,7 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.agriculture.SeasonalTrees;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -51,9 +53,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.HARVESTABLE;
-import static su.terrafirmagreg.data.Properties.EnumProp.FRUIT_LEAF_STATE;
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_6;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.HARVESTABLE;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.FRUIT_LEAF_STATE;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_6;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
 
 @MethodsReturnNonnullByDefault
@@ -164,7 +166,7 @@ public class BlockJoshuaTreeFlower extends Block {
         IBlockState state = worldIn.getBlockState(currentBlock.down());
         Block block = state.getBlock();
 
-        if (BlockUtils.isVariant(state, SAND) || BlockUtils.isSoilOrGravel(state)
+        if (Variant.isVariant(state, SAND) || BlockHelper.isSoilOrGravel(state)
             || BlockUtils.isBlock(block, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY)) {
           flag = true;
         } else if (block == BlockJoshuaTreeLog.get(wood)) {
@@ -174,8 +176,8 @@ public class BlockJoshuaTreeFlower extends Block {
             Block block1 = worldIn.getBlockState(currentBlock.down(j + 1)).getBlock();
 
             if (block1 != BlockJoshuaTreeLog.get(wood)) {
-              if (BlockUtils.isVariant(worldIn.getBlockState(currentBlock.down(j + 1)), SAND) ||
-                  BlockUtils.isSoilOrGravel(worldIn.getBlockState(currentBlock.down(j + 1)))
+              if (Variant.isVariant(worldIn.getBlockState(currentBlock.down(j + 1)), SAND) ||
+                  BlockHelper.isSoilOrGravel(worldIn.getBlockState(currentBlock.down(j + 1)))
                   || BlockUtils.isBlock(block1, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY)) {
                 flag1 = true;
               }
@@ -411,7 +413,7 @@ public class BlockJoshuaTreeFlower extends Block {
 
     Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int expectedStage = fruitTree.getStageForMonth(currentMonth);
-    float avgTemperature = Climate.getAvgTemp(world, pos);
+    float avgTemperature = ClimateTFC.getAvgTemp(world, pos);
 
     switch (expectedStage) {
       case 1:
@@ -461,7 +463,7 @@ public class BlockJoshuaTreeFlower extends Block {
           IBlockState iblockstate = worldIn.getBlockState(pos.down());
           Block block = iblockstate.getBlock();
 
-          if (BlockUtils.isVariant(iblockstate, SAND) || BlockUtils.isSoilOrGravel(iblockstate)
+          if (Variant.isVariant(iblockstate, SAND) || BlockHelper.isSoilOrGravel(iblockstate)
               || BlockUtils.isBlock(block, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY)) {
             flag = true;
           } else if (block == BlockJoshuaTreeLog.get(wood)) {
@@ -471,8 +473,8 @@ public class BlockJoshuaTreeFlower extends Block {
               Block block1 = worldIn.getBlockState(pos.down(j + 1)).getBlock();
 
               if (block1 != BlockJoshuaTreeLog.get(wood)) {
-                if (BlockUtils.isVariant(worldIn.getBlockState(pos.down(j + 1)), SAND) ||
-                    BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down(j + 1))) || block1 == Blocks.HARDENED_CLAY ||
+                if (Variant.isVariant(worldIn.getBlockState(pos.down(j + 1)), SAND) ||
+                    BlockHelper.isSoilOrGravel(worldIn.getBlockState(pos.down(j + 1))) || block1 == Blocks.HARDENED_CLAY ||
                     block1 == Blocks.STAINED_HARDENED_CLAY) {
                   flag1 = true;
                 }
@@ -588,7 +590,7 @@ public class BlockJoshuaTreeFlower extends Block {
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     Block block = worldIn.getBlockState(pos.down()).getBlock();
     return ((super.canPlaceBlockAt(worldIn, pos) && this.canSurvive(worldIn, pos)) ||
-            (BlockUtils.isVariant(worldIn.getBlockState(pos.down()), SAND) || BlockUtils.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
+            (Variant.isVariant(worldIn.getBlockState(pos.down()), SAND) || BlockHelper.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
              BlockUtils.isBlock(block, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY)));
   }
 
@@ -694,7 +696,7 @@ public class BlockJoshuaTreeFlower extends Block {
     Block block = iblockstate.getBlock();
 
     if (block != BlockJoshuaTreeLog.get(wood) &&
-        !(BlockUtils.isVariant(iblockstate, SAND) || BlockUtils.isSoilOrGravel(iblockstate)
+        !(Variant.isVariant(iblockstate, SAND) || BlockHelper.isSoilOrGravel(iblockstate)
           || BlockUtils.isBlock(block, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY))) {
       if (iblockstate.getMaterial() == Material.AIR) {
         int i = 0;

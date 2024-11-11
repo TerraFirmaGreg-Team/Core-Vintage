@@ -1,7 +1,7 @@
 package net.dries007.tfc.util;
 
 import su.terrafirmagreg.api.util.WorldUtils;
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -48,7 +48,7 @@ import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -56,9 +56,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.data.MathConstants.RNG;
-import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WILD;
 
 /**
  * Seasonally regenerates rocks, sticks, snow, plants, crops and bushes.
@@ -226,7 +226,7 @@ public class WorldRegenHandler {
 
   public static void regenPredators(World worldIn, Biome biomeIn, int centerX, int centerZ, int diameterX, int diameterZ, Random randomIn) {
     final BlockPos chunkBlockPos = new BlockPos(centerX, 0, centerZ);
-    final float temperature = Climate.getAvgTemp(worldIn, chunkBlockPos);
+    final float temperature = ClimateTFC.getAvgTemp(worldIn, chunkBlockPos);
     final float rainfall = ProviderChunkData.getRainfall(worldIn, chunkBlockPos);
     final float floraDensity = ProviderChunkData.getFloraDensity(worldIn, chunkBlockPos);
     final float floraDiversity = ProviderChunkData.getFloraDiversity(worldIn, chunkBlockPos);

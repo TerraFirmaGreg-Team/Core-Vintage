@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -47,7 +47,7 @@ import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.data.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCTECH;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFCTECH)
@@ -212,28 +212,28 @@ public final class TechItems {
                                                                               .setMaxDamage(ToolMaterials.WROUGHT_IRON.getMaxUses())
                                                                               .setMaxStackSize(1), CT_METAL));
     metalItems.add(register(r, "metal/steel_draw_plate", ItemTechMetal.ItemType
-      .create(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "steel")), ItemTechMetal.ItemType.DRAW_PLATE)
+      .create(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.MODID_TFC, "steel")), ItemTechMetal.ItemType.DRAW_PLATE)
       .setMaxDamage(ToolMaterials.STEEL.getMaxUses())
       .setMaxStackSize(1), CT_METAL));
     metalItems.add(register(r, "metal/black_steel_draw_plate", ItemTechMetal.ItemType
-      .create(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "black_steel")), ItemTechMetal.ItemType.DRAW_PLATE)
+      .create(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.MODID_TFC, "black_steel")), ItemTechMetal.ItemType.DRAW_PLATE)
       .setMaxDamage(ToolMaterials.BLACK_STEEL.getMaxUses())
       .setMaxStackSize(1), CT_METAL));
     metalItems.add(register(r, "metal/iron_tongs", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.TONGS)
                                                                          .setMaxStackSize(1), CT_MISC));
 
     metalItems.add(register(r, "metal/copper_inductor",
-                            ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "copper")),
+                            ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.MODID_TFC, "copper")),
                                                           ItemTechMetal.ItemType.INDUCTOR), CT_METAL));
 
     metalItems.add(register(r, "metal/tin_sleeve",
-                            ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "tin")),
+                            ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.MODID_TFC, "tin")),
                                                           ItemTechMetal.ItemType.SLEEVE), CT_METAL));
     metalItems.add(register(r, "metal/brass_sleeve",
-                            ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "brass")),
+                            ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.MODID_TFC, "brass")),
                                                           ItemTechMetal.ItemType.SLEEVE), CT_METAL));
     metalItems.add(register(r, "metal/steel_sleeve",
-                            ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "steel")),
+                            ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.MODID_TFC, "steel")),
                                                           ItemTechMetal.ItemType.SLEEVE), CT_METAL));
 
     for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {

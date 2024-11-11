@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.capabilities.damage.spi;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.damage.ICapabilityDamageResistance;
@@ -47,7 +47,7 @@ public enum DamageType {
         }
       }
     }
-    return (float) Math.pow(MathConstants.E, -0.01 * resistance);
+    return (float) Math.pow(MathUtils.E, -0.01 * resistance);
   }
 
   @NotNull

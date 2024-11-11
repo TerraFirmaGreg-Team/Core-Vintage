@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalHare;
 
 import net.minecraft.client.model.ModelBase;
@@ -147,7 +147,7 @@ public class ModelAnimalHare extends ModelBase {
     this.hareHead.rotateAngleX = headPitch * 0.017453292F;
     this.hareNose.rotateAngleY = netHeadYaw * 0.017453292F;
     this.hareHead.rotateAngleY = netHeadYaw * 0.017453292F;
-    this.jumpRotation = MathHelper.sin(EntityAnimalHare.getJumpCompletion(f) * MathConstants.PI);
+    this.jumpRotation = MathHelper.sin(EntityAnimalHare.getJumpCompletion(f) * MathUtils.PI);
     this.hareLeftThigh.rotateAngleX = (this.jumpRotation * 50.0F - 21.0F) * 0.017453292F;
     this.hareRightThigh.rotateAngleX = (this.jumpRotation * 50.0F - 21.0F) * 0.017453292F;
     this.hareLeftFoot.rotateAngleX = this.jumpRotation * 50.0F * 0.017453292F;
@@ -161,6 +161,6 @@ public class ModelAnimalHare extends ModelBase {
     super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
     this.jumpRotation = MathHelper.sin(
       ((EntityAnimalHare) entitylivingbaseIn).getJumpCompletion(partialTickTime)
-      * MathConstants.PI);
+      * MathUtils.PI);
   }
 }

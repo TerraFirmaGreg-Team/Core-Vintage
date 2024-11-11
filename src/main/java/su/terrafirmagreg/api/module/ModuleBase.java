@@ -8,7 +8,7 @@ import su.terrafirmagreg.api.network.PacketService;
 import su.terrafirmagreg.api.network.ThreadedNetworkWrapper;
 import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.data.lib.LoggingHelper;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 
 import net.minecraft.creativetab.CreativeTabs;
 

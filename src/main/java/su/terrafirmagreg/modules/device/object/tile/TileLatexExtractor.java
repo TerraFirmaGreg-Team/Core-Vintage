@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
 import su.terrafirmagreg.api.base.tile.BaseTile;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.network.SCPacketLatex;
 
@@ -95,7 +95,7 @@ public class TileLatexExtractor extends BaseTile implements ITickable {
   public boolean makeCut() {
     if (flowTicks < 1 && hasPot() && hasBase()) {
       flowTicks =
-        ICalendar.TICKS_IN_DAY / 2 + MathConstants.RNG.nextInt(ICalendar.TICKS_IN_DAY * 2);
+        ICalendar.TICKS_IN_DAY / 2 + MathUtils.RNG.nextInt(ICalendar.TICKS_IN_DAY * 2);
       return true;
     }
     return false;

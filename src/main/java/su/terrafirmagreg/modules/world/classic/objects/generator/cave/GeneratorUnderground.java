@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.cave;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.library.types.category.Category;
+import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
@@ -15,12 +16,12 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import tfcflorae.ConfigTFCF;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.CREEPING;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.HANGING;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.MUSHROOM;
@@ -68,7 +69,7 @@ public class GeneratorUnderground implements IWorldGenerator {
 
     var data = CapabilityChunkData.get(world, chunkPos);
     Biome biome = world.getBiome(chunkPos);
-    final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
+    final float avgTemperature = ClimateTFC.getAvgTemp(world, chunkPos);
     final float rainfall = ProviderChunkData.getRainfall(world, chunkPos);
     final float floraDensity = data.getFloraDensity();
     final float floraDiversity = data.getFloraDiversity();
@@ -79,7 +80,7 @@ public class GeneratorUnderground implements IWorldGenerator {
       undergroundCreepingVines.setGeneratedPlant(plant);
       undergroundMoss.setGeneratedPlant(plant);
 
-      if (BlockUtils.isCategory(plant.getCategory(), MUSHROOM)) {
+      if (Category.isCategory(plant.getCategory(), MUSHROOM)) {
         if (avgTemperature >= -13f && avgTemperature <= 50f && rainfall >= 250f && rainfall <= 500) {
           int plantCount = (RNG.nextInt(3) + 1);
           for (int i = rng.nextInt(Math.round(plantCount / floraDiversity)); i < (floraDensity + floraDiversity) * fungiUndergroundCount; i++) {
@@ -92,7 +93,7 @@ public class GeneratorUnderground implements IWorldGenerator {
         }
         switch (RNG.nextInt(2)) {
           case 0: {
-            if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE, LIANA))) {
+            if ((biome != BiomesWorld.OCEAN) && (Type.isType(plant, BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE, LIANA))) {
               int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2) + WorldTypeClassic.ROCKLAYER2;
               BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
 
@@ -109,7 +110,7 @@ public class GeneratorUnderground implements IWorldGenerator {
             }
           }
           case 1: {
-            if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE))) {
+            if ((biome != BiomesWorld.OCEAN) && (Type.isType(plant, BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE))) {
               int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2) + WorldTypeClassic.ROCKLAYER2;
               BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
 
@@ -129,7 +130,7 @@ public class GeneratorUnderground implements IWorldGenerator {
           default:
             break;
         }
-        if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, TACKWEED, TAKAKIA, IVY, MORNING_GLORY, MOSS, REINDEER_LICHEN))) {
+        if ((biome != BiomesWorld.OCEAN) && (Type.isType(plant, TACKWEED, TAKAKIA, IVY, MORNING_GLORY, MOSS, REINDEER_LICHEN))) {
           int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER3) + WorldTypeClassic.ROCKLAYER3;
           BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
 
@@ -143,10 +144,10 @@ public class GeneratorUnderground implements IWorldGenerator {
             }
           }
         }
-      } else if (BlockUtils.isCategory(plant.getCategory(), HANGING)) {
+      } else if (Category.isCategory(plant.getCategory(), HANGING)) {
         switch (RNG.nextInt(2)) {
           case 0: {
-            if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE, LIANA))) {
+            if ((biome != BiomesWorld.OCEAN) && (Type.isType(plant, BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE, LIANA))) {
               int y1 =
                 rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2) + WorldTypeClassic.ROCKLAYER2;
               BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
@@ -164,7 +165,7 @@ public class GeneratorUnderground implements IWorldGenerator {
             }
           }
           case 1: {
-            if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE))) {
+            if ((biome != BiomesWorld.OCEAN) && (Type.isType(BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE))) {
               int y1 =
                 rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER2)
                 + WorldTypeClassic.ROCKLAYER2;
@@ -185,7 +186,7 @@ public class GeneratorUnderground implements IWorldGenerator {
           default:
             break;
         }
-        if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(TACKWEED, TAKAKIA, IVY, MORNING_GLORY, MOSS, REINDEER_LICHEN))) {
+        if ((biome != BiomesWorld.OCEAN) && (Type.isType(TACKWEED, TAKAKIA, IVY, MORNING_GLORY, MOSS, REINDEER_LICHEN))) {
           int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER3) + WorldTypeClassic.ROCKLAYER3;
           BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
 
@@ -197,8 +198,8 @@ public class GeneratorUnderground implements IWorldGenerator {
             }
           }
         }
-      } else if (BlockUtils.isCategory(plant.getCategory(), CREEPING)) {
-        if ((biome != BiomesWorld.OCEAN) && (BlockUtils.isType(plant, TACKWEED, TAKAKIA, IVY, MORNING_GLORY, MOSS, REINDEER_LICHEN))) {
+      } else if (Category.isCategory(plant.getCategory(), CREEPING)) {
+        if ((biome != BiomesWorld.OCEAN) && (Type.isType(plant, TACKWEED, TAKAKIA, IVY, MORNING_GLORY, MOSS, REINDEER_LICHEN))) {
           int y1 = rng.nextInt((WorldTypeClassic.SEALEVEL - 5) - WorldTypeClassic.ROCKLAYER3) + WorldTypeClassic.ROCKLAYER3;
           BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
 

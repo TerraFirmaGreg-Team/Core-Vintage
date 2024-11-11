@@ -24,7 +24,7 @@ import net.dries007.tfc.util.calendar.ICalendar;
 import pieman.caffeineaddon.init.ModItems;
 
 import static net.dries007.tfc.objects.fluids.FluidsTFC.FRESH_WATER;
-import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.api.data.Reference.MODID_CAFFEINEADDON;
 
 @Mod.EventBusSubscriber(modid = MODID_CAFFEINEADDON)
 public class Recipes {

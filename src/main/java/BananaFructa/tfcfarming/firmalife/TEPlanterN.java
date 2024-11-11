@@ -1,6 +1,6 @@
 package BananaFructa.tfcfarming.firmalife;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,7 +16,7 @@ import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TEPlanter;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -58,7 +58,7 @@ public class TEPlanterN extends TEPlanter {
 
     while (this.getTicksSinceUpdate() > growthTicks) {
       this.reduceCounter(growthTicks);
-      int slot = MathConstants.RNG.nextInt(4);
+      int slot = MathUtils.RNG.nextInt(4);
       if (waterUses < 0) {
         this.resetCounter();
         return;
@@ -93,7 +93,7 @@ public class TEPlanterN extends TEPlanter {
   }
 
   public boolean isBelowMaxTemp(float maxTemp) {
-    return !Config.enforceTemperature || maxTemp > Climate.getActualTemp(world, pos, 0);
+    return !Config.enforceTemperature || maxTemp > ClimateTFC.getActualTemp(world, pos, 0);
   }
 
   public boolean fertilize(NutrientClass nutrientClass, int value) {

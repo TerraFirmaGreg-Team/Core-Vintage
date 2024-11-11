@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.mapgen;
 
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.util.MathUtils;
 
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -36,7 +36,7 @@ public class MapGenRavine extends MapGenBase {
       double startX = chunkX * 16 + rand.nextInt(16);
       double startY = rand.nextInt(variability) + height;
       double startZ = chunkZ * 16 + rand.nextInt(16);
-      float angleY = rand.nextFloat() * MathConstants.PI * 2.0F;
+      float angleY = rand.nextFloat() * MathUtils.PI * 2.0F;
       float angleZ = (rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
       float angleX = (rand.nextFloat() * 2.0F + rand.nextFloat()) * 2.0F;
       double scaleY = 1.2 + rand.nextFloat() + rand.nextFloat();
@@ -69,7 +69,7 @@ public class MapGenRavine extends MapGenBase {
 
     outer:
     for (int round = 0; round < rounds; ++round) {
-      final double min = (1.5D + MathHelper.sin(round * MathConstants.PI / rounds) * angleX * 1.0F)
+      final double min = (1.5D + MathHelper.sin(round * MathUtils.PI / rounds) * angleX * 1.0F)
                          * RNG.nextFloat() * 0.25D + 0.75D;
       final double max = (min * yScale) * RNG.nextFloat() * 0.25D + 0.75D;
       final float cosZ = MathHelper.cos(angleZ);
@@ -136,7 +136,7 @@ public class MapGenRavine extends MapGenBase {
       for (int x = Math.max(xMin - 1, 0); x < Math.min(xMax + 1, 16); ++x) {
         for (int z = Math.max(zMin - 1, 0); z < Math.min(zMax + 1, 16); ++z) {
           for (int y = Math.min(yMax + 1, 250); y >= Math.max(yMin - 2, 1); --y) {
-            if (BlockUtils.isWater(primer.getBlockState(x, y, z))) {
+            if (BlockHelper.isWater(primer.getBlockState(x, y, z))) {
               continue outer;
             }
           }
@@ -160,12 +160,12 @@ public class MapGenRavine extends MapGenBase {
                   + yNormalized * yNormalized / 6.0D < 1.0D)) {
               continue;
             }
-            if (!BlockUtils.isGround(primer.getBlockState(x, y, z))) {
+            if (!BlockHelper.isGround(primer.getBlockState(x, y, z))) {
               continue;
             }
 
             for (int upCount = 1;
-                 BlockUtils.isSoilOrGravel(primer.getBlockState(x, y + upCount, z)); upCount++) {
+                 BlockHelper.isSoilOrGravel(primer.getBlockState(x, y + upCount, z)); upCount++) {
               primer.setBlockState(x, y + upCount, z, AIR);
             }
 

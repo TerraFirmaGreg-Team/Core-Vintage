@@ -18,21 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.BEACH;
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.CRAG;
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.DEEP_OCEAN;
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.GRAVEL_BEACH;
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.LAKE;
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.MANGROVE;
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.MESA;
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.MESA_BRYCE;
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.MESA_PLATEAU;
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.MESA_PLATEAU_M;
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.MOUNTAINS;
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.MOUNTAINS_EDGE;
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.OCEAN;
-import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.RIVER;
-
 @UtilityClass
 @SuppressWarnings("unused")
 public final class BiomeUtils {
@@ -138,36 +123,6 @@ public final class BiomeUtils {
       }
     }
     return biomeTypes;
-  }
-
-  public static boolean isMesaBiome(Biome biome) {
-    return MESA == biome || MESA_PLATEAU == biome || MESA_BRYCE == biome || MESA_PLATEAU_M == biome;
-
-  }
-
-  public static boolean isOceanicBiome(Biome biome) {
-    return OCEAN == biome || DEEP_OCEAN == biome || MANGROVE == biome;
-
-  }
-
-  public static boolean isRiverBiome(Biome biome) {
-    return RIVER == biome;
-
-  }
-
-  public static boolean isLakeBiome(Biome biome) {
-    return LAKE == biome;
-
-  }
-
-  public static boolean isMountainBiome(Biome biome) {
-    return MOUNTAINS == biome || MOUNTAINS_EDGE == biome || CRAG == biome;
-
-  }
-
-  public static boolean isBeachBiome(Biome biome) {
-    return BEACH == biome || GRAVEL_BEACH == biome;
-
   }
 
   public enum BiomeType {

@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.climate;
 
-import su.terrafirmagreg.data.lib.MCDate.Month;
+import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.modules.world.ConfigWorld;
 
 import net.minecraft.util.math.MathHelper;
@@ -10,7 +10,7 @@ import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
 import net.dries007.tfc.util.config.TemperatureMode;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 import static su.terrafirmagreg.modules.world.classic.WorldTypeClassic.SEALEVEL;
 
 public class ClimateHelper {

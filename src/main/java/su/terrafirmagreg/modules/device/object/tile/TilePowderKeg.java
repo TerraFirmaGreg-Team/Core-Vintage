@@ -2,9 +2,9 @@ package su.terrafirmagreg.modules.device.object.tile;
 
 import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.device.client.gui.GuiPowderkeg;
 import su.terrafirmagreg.modules.device.object.block.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.object.container.ContainerPowderKeg;
@@ -46,7 +46,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.SEALED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.SEALED;
 
 /**
  * @see BlockPowderKeg
@@ -182,7 +182,7 @@ public class TilePowderKeg extends BaseTileTickableInventory
     } else {
       world.playSound(null, pos.getX(), pos.getY() + 0.5D, pos.getZ(),
                       SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f,
-                      0.6f + MathConstants.RNG.nextFloat() * 0.4f);
+                      0.6f + MathUtils.RNG.nextFloat() * 0.4f);
       fuse = -1;
     }
     markForSync();

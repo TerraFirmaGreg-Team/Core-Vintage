@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalRabbit;
 
 import net.minecraft.client.model.ModelBase;
@@ -161,7 +161,7 @@ public class ModelAnimalRabbit extends ModelBase {
     this.rabbitHead.rotateAngleY = netHeadYaw * 0.017453292F;
     this.rabbitRightEar.rotateAngleY = this.rabbitNose.rotateAngleY - 0.2617994F;
     this.rabbitLeftEar.rotateAngleY = this.rabbitNose.rotateAngleY + 0.2617994F;
-    this.jumpRotation = MathHelper.sin(EntityAnimalRabbit.getJumpCompletion(f) * MathConstants.PI);
+    this.jumpRotation = MathHelper.sin(EntityAnimalRabbit.getJumpCompletion(f) * MathUtils.PI);
     this.rabbitLeftThigh.rotateAngleX = (this.jumpRotation * 50.0F - 21.0F) * 0.017453292F;
     this.rabbitRightThigh.rotateAngleX = (this.jumpRotation * 50.0F - 21.0F) * 0.017453292F;
     this.rabbitLeftFoot.rotateAngleX = this.jumpRotation * 50.0F * 0.017453292F;
@@ -175,6 +175,6 @@ public class ModelAnimalRabbit extends ModelBase {
     super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
     this.jumpRotation = MathHelper.sin(
       ((EntityAnimalRabbit) entitylivingbaseIn).getJumpCompletion(partialTickTime)
-      * MathConstants.PI);
+      * MathUtils.PI);
   }
 }

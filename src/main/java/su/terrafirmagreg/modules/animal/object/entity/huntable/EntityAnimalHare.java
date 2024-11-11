@@ -1,9 +1,10 @@
 package su.terrafirmagreg.modules.animal.object.entity.huntable;
 
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
+import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.data.MathConstants;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
@@ -30,7 +31,7 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
 
   @SuppressWarnings("unused")
   public EntityAnimalHare(World worldIn) {
-    this(worldIn, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
+    this(worldIn, IAnimal.Gender.valueOf(MathUtils.RNG.nextBoolean()),
          EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
@@ -46,7 +47,7 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
                             float floraDiversity) {
     BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
+    if (!BiomeHelper.isOceanicBiome(biome) && !BiomeHelper.isBeachBiome(biome) &&
         (biomeType == BiomeUtils.BiomeType.TROPICAL_FOREST
          || biomeType == BiomeUtils.BiomeType.TEMPERATE_FOREST ||
          biomeType == BiomeUtils.BiomeType.SAVANNA ||

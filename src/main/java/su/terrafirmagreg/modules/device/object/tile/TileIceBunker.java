@@ -47,7 +47,7 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import pieman.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.NotNull;
@@ -57,8 +57,8 @@ import lombok.Getter;
 
 import java.util.Optional;
 
-import static su.terrafirmagreg.data.Constants.MODID_CELLARS;
-import static su.terrafirmagreg.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Reference.MODID_CELLARS;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
 public class TileIceBunker extends TileEntityLockableLoot
   implements ITickable, IAmbientalTileProvider, IProviderContainer<ContainerIceBunker, GuiIceBunker> {
@@ -139,9 +139,9 @@ public class TileIceBunker extends TileEntityLockableLoot
 
   private void updateCellar(boolean checkCompliance) {
     if (ModConfig.tempMonthAvg) {
-      temperature = Climate.getMonthlyTemp(this.getPos());
+      temperature = ClimateTFC.getMonthlyTemp(this.getPos());
     } else {
-      temperature = Climate.getActualTemp(this.getPos());
+      temperature = ClimateTFC.getActualTemp(this.getPos());
     }
 
     if (checkCompliance) {
@@ -149,7 +149,7 @@ public class TileIceBunker extends TileEntityLockableLoot
     }
 
     if (isComplete) {
-      float outsideTemp = Climate.getActualTemp(this.getPos());
+      float outsideTemp = ClimateTFC.getActualTemp(this.getPos());
 
       if (coolantAmount <= 0) {
         for (int slot = 3; slot >= 0; slot--) {

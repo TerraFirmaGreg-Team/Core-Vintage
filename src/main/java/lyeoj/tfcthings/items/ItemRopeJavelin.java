@@ -40,7 +40,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-import static su.terrafirmagreg.data.MathConstants.RNG;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class ItemRopeJavelin extends ItemTFC implements ICapabilityMetal, ItemOreDict, TFCThingsConfigurableItem {
 

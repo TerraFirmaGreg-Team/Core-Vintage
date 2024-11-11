@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.tree;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.StructureUtils;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 
@@ -28,7 +28,7 @@ import static net.minecraft.block.BlockVine.EAST;
 import static net.minecraft.block.BlockVine.NORTH;
 import static net.minecraft.block.BlockVine.SOUTH;
 import static net.minecraft.block.BlockVine.WEST;
-import static su.terrafirmagreg.data.Properties.BoolProp.PLACED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.PLACED;
 
 public class GeneratorTreeKapok implements ITreeGenerator {
 
@@ -83,14 +83,14 @@ public class GeneratorTreeKapok implements ITreeGenerator {
   @Override
   public boolean canGenerateTree(World world, BlockPos pos, Tree treeType) {
     for (BlockPos p1 : trunkPos) {
-      if (BlockUtils.isSoil(world.getBlockState(pos.add(p1)))) {
+      if (BlockHelper.isSoil(world.getBlockState(pos.add(p1)))) {
         continue;
       }
       if (world.getBlockState(pos.add(p1)).getMaterial().isReplaceable()) {
-        if (BlockUtils.isSoil(world.getBlockState(pos.add(p1).down(1)))) {
+        if (BlockHelper.isSoil(world.getBlockState(pos.add(p1).down(1)))) {
           continue;
         }
-        if (BlockUtils.isSoil(world.getBlockState(pos.add(p1)
+        if (BlockHelper.isSoil(world.getBlockState(pos.add(p1)
                                                      .down(2))) && world.getBlockState(pos.add(p1.down(1)))
                                                                         .getMaterial()
                                                                         .isReplaceable()) {

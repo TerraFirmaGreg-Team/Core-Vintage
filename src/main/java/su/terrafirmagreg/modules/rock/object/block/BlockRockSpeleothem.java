@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.object.block;
 
-import su.terrafirmagreg.data.enums.EnumSpeleothemSize;
+import su.terrafirmagreg.api.data.enums.EnumSpeleothemSize;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.EnumProp.SPELEOTHEM_SIZE;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.SPELEOTHEM_SIZE;
 
 /**
  * Stalactites and stalagmites in one block!

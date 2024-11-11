@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.ceramics;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -108,7 +108,7 @@ public class ItemJug extends ItemPottery {
           drinkable.onDrink((EntityPlayer) entityLiving);
         }
       }
-      if (MathConstants.RNG.nextFloat() < 0.02) // 1/50 chance, same as 1.7.10
+      if (MathUtils.RNG.nextFloat() < 0.02) // 1/50 chance, same as 1.7.10
       {
         stack.shrink(1);
         worldIn.playSound(null, entityLiving.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);

@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.library.types.category.Category;
+import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 import su.terrafirmagreg.modules.plant.init.BlocksPlant;
@@ -27,11 +28,11 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.CACTUS;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.CREEPING;
 import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.DESERT;
@@ -75,7 +76,7 @@ public class GeneratorPlant extends WorldGenerator {
       return false;
     }
 
-    if (BlockUtils.isCategory(type.getCategory(), MUSHROOM)) {
+    if (Category.isCategory(type.getCategory(), MUSHROOM)) {
       var plantBlock = (BlockPlantMushroom) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
@@ -84,16 +85,16 @@ public class GeneratorPlant extends WorldGenerator {
                                          rand.nextInt(4) - rand.nextInt(4),
                                          rand.nextInt(4) - rand.nextInt(4));
 
-        if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+        if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
             type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
             worldIn.isAirBlock(blockpos) &&
             plantBlock.canPlaceBlockAt(worldIn, blockpos)) {
-          int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+          int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
                                       state.withProperty(AGE_4, plantAge));
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), SHORT_GRASS)) {
+    } else if (Category.isCategory(type.getCategory(), SHORT_GRASS)) {
       var plantBlock = (BlockPlantShortGrass) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
@@ -102,16 +103,16 @@ public class GeneratorPlant extends WorldGenerator {
                                          rand.nextInt(4) - rand.nextInt(4),
                                          rand.nextInt(7) - rand.nextInt(7));
 
-        if (type.isValidGrowthTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+        if (type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
             type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
             worldIn.isAirBlock(blockpos) &&
             plantBlock.canBlockStay(worldIn, blockpos, state)) {
-          int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+          int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
                                       state.withProperty(AGE_4, plantAge));
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), TALL_GRASS)) {
+    } else if (Category.isCategory(type.getCategory(), TALL_GRASS)) {
       var plantBlock = (BlockPlantTallGrass) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
@@ -123,18 +124,18 @@ public class GeneratorPlant extends WorldGenerator {
         int j = 1 + rand.nextInt(type.getMaxHeight());
 
         for (int k = 0; k < j; ++k) {
-          if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+          if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
               type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos.up(k))) &&
               worldIn.isAirBlock(blockpos.up(k)) &&
               plantBlock.canBlockStay(worldIn, blockpos.up(k), state)) {
             int plantAge = type.getAgeForWorldgen(rand,
-                                                  Climate.getActualTemp(worldIn, blockpos));
+                                                  ClimateTFC.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos.up(k),
                                         state.withProperty(AGE_4, plantAge));
           }
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), CREEPING)) {
+    } else if (Category.isCategory(type.getCategory(), CREEPING)) {
       var plantBlock = (BlockPlantCreeping) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
@@ -143,17 +144,17 @@ public class GeneratorPlant extends WorldGenerator {
                                          rand.nextInt(4) - rand.nextInt(4),
                                          rand.nextInt(4) - rand.nextInt(4));
 
-        if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+        if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
             type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
             worldIn.isAirBlock(blockpos) &&
             plantBlock.canBlockStay(worldIn, blockpos, state) &&
-            !BlockUtils.isVariant(worldIn.getBlockState(blockpos.down()), SAND)) {
-          int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+            !Variant.isVariant(worldIn.getBlockState(blockpos.down()), SAND)) {
+          int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
                                       state.withProperty(AGE_4, plantAge));
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), HANGING)) {
+    } else if (Category.isCategory(type.getCategory(), HANGING)) {
       var plantBlock = (BlockPlantHanging) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
@@ -161,16 +162,16 @@ public class GeneratorPlant extends WorldGenerator {
         BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(16),
                                          rand.nextInt(7) - rand.nextInt(7));
 
-        if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+        if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
             type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
             worldIn.isAirBlock(blockpos) &&
             plantBlock.canBlockStay(worldIn, blockpos, state)) {
-          int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+          int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
                                       state.withProperty(AGE_4, plantAge));
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), REED, REED_SEA)) {
+    } else if (Category.isCategory(type.getCategory(), REED, REED_SEA)) {
       BlockPlant plantBlock = (BlockPlant) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
@@ -179,18 +180,18 @@ public class GeneratorPlant extends WorldGenerator {
                                          rand.nextInt(4) - rand.nextInt(4),
                                          rand.nextInt(7) - rand.nextInt(7));
 
-        if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+        if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
             type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
             worldIn.isAirBlock(blockpos) &&
             worldIn.getBlockState(blockpos.down())
                    .getBlock()
                    .canSustainPlant(state, worldIn, blockpos.down(), EnumFacing.UP, plantBlock)) {
-          int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+          int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
                                       state.withProperty(AGE_4, plantAge));
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), TALL_REED, TALL_REED_SEA)) {
+    } else if (Category.isCategory(type.getCategory(), TALL_REED, TALL_REED_SEA)) {
       var plantBlock = (BlockPlantTall) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
@@ -202,18 +203,18 @@ public class GeneratorPlant extends WorldGenerator {
         int j = 1 + rand.nextInt(type.getMaxHeight());
 
         for (int k = 0; k < j; ++k) {
-          if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+          if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
               type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos.up(k))) &&
               worldIn.isAirBlock(blockpos.up(k)) &&
               plantBlock.canBlockStay(worldIn, blockpos.up(k), state)) {
             int plantAge = type.getAgeForWorldgen(rand,
-                                                  Climate.getActualTemp(worldIn, blockpos));
+                                                  ClimateTFC.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos.up(k),
                                         state.withProperty(AGE_4, plantAge));
           }
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), DESERT)) {
+    } else if (Category.isCategory(type.getCategory(), DESERT)) {
       var plantBlock = (BlockPlant) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
@@ -222,17 +223,17 @@ public class GeneratorPlant extends WorldGenerator {
                                          rand.nextInt(4) - rand.nextInt(4),
                                          rand.nextInt(7) - rand.nextInt(7));
 
-        if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+        if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
             type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
             worldIn.isAirBlock(blockpos) &&
             !BiomeDictionary.hasType(worldIn.getBiome(blockpos), Type.BEACH) &&
             plantBlock.canBlockStay(worldIn, blockpos, state)) {
-          int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+          int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
                                       state.withProperty(AGE_4, plantAge));
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), DESERT_TALL_PLANT)) {
+    } else if (Category.isCategory(type.getCategory(), DESERT_TALL_PLANT)) {
       var plantBlock = (BlockPlantTall) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
@@ -244,18 +245,18 @@ public class GeneratorPlant extends WorldGenerator {
         int j = 1 + rand.nextInt(type.getMaxHeight());
 
         for (int k = 0; k < j; ++k) {
-          if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+          if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
               type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos.up(k))) &&
               worldIn.isAirBlock(blockpos.up(k)) &&
               plantBlock.canBlockStay(worldIn, blockpos.up(k), state)) {
             int plantAge = type.getAgeForWorldgen(rand,
-                                                  Climate.getActualTemp(worldIn, blockpos));
+                                                  ClimateTFC.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos.up(k),
                                         state.withProperty(AGE_4, plantAge));
           }
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), DRY)) {
+    } else if (Category.isCategory(type.getCategory(), DRY)) {
       var plantBlock = (BlockPlant) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
@@ -264,17 +265,17 @@ public class GeneratorPlant extends WorldGenerator {
                                          rand.nextInt(4) - rand.nextInt(4),
                                          rand.nextInt(7) - rand.nextInt(7));
 
-        if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+        if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
             type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
             worldIn.isAirBlock(blockpos) &&
             !BiomeDictionary.hasType(worldIn.getBiome(blockpos), Type.BEACH) &&
             plantBlock.canBlockStay(worldIn, blockpos, state)) {
-          int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+          int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
                                       state.withProperty(AGE_4, plantAge));
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), DRY_TALL_PLANT)) {
+    } else if (Category.isCategory(type.getCategory(), DRY_TALL_PLANT)) {
       var plantBlock = (BlockPlantTall) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
@@ -286,18 +287,18 @@ public class GeneratorPlant extends WorldGenerator {
         int j = 1 + rand.nextInt(type.getMaxHeight());
 
         for (int k = 0; k < j; ++k) {
-          if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+          if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
               type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos.up(k))) &&
               worldIn.isAirBlock(blockpos.up(k)) &&
               plantBlock.canBlockStay(worldIn, blockpos.up(k), state)) {
             int plantAge = type.getAgeForWorldgen(rand,
-                                                  Climate.getActualTemp(worldIn, blockpos));
+                                                  ClimateTFC.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos.up(k),
                                         state.withProperty(AGE_4, plantAge));
           }
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), TALL_PLANT)) {
+    } else if (Category.isCategory(type.getCategory(), TALL_PLANT)) {
       var plantBlock = (BlockPlantTall) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
@@ -309,18 +310,18 @@ public class GeneratorPlant extends WorldGenerator {
         int j = 1 + rand.nextInt(type.getMaxHeight());
 
         for (int k = 0; k < j; ++k) {
-          if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+          if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
               type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos.up(k))) &&
               worldIn.isAirBlock(blockpos.up(k)) &&
               plantBlock.canBlockStay(worldIn, blockpos.up(k), state)) {
             int plantAge = type.getAgeForWorldgen(rand,
-                                                  Climate.getActualTemp(worldIn, blockpos));
+                                                  ClimateTFC.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos.up(k),
                                         state.withProperty(AGE_4, plantAge));
           }
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), WATER, WATER_SEA)) {
+    } else if (Category.isCategory(type.getCategory(), WATER, WATER_SEA)) {
       var plantBlock = (BlockPlantWater) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
       IBlockState water = type.getWaterType();
@@ -332,14 +333,14 @@ public class GeneratorPlant extends WorldGenerator {
 
       BlockPos blockpos = position.add(0, -depth + 1, 0);
 
-      if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+      if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
           type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
           plantBlock.canPlaceBlockAt(worldIn, blockpos)) {
-        int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+        int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
         setBlockAndNotifyAdequately(worldIn, blockpos,
                                     state.withProperty(AGE_4, plantAge));
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), EMERGENT_TALL_WATER, EMERGENT_TALL_WATER_SEA)) {
+    } else if (Category.isCategory(type.getCategory(), EMERGENT_TALL_WATER, EMERGENT_TALL_WATER_SEA)) {
       var plantBlock = (BlockPlantEmergentTallWater) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
       IBlockState water = type.getWaterType();
@@ -350,10 +351,10 @@ public class GeneratorPlant extends WorldGenerator {
       }
       BlockPos blockpos = position.add(0, -depth + 1, 0);
 
-      if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+      if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
           type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
           plantBlock.canPlaceBlockAt(worldIn, blockpos)) {
-        int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+        int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
         setBlockAndNotifyAdequately(worldIn, blockpos,
                                     state.withProperty(AGE_4, plantAge));
         if (rand.nextInt(3) < plantAge && plantBlock.canGrow(worldIn, blockpos, state,
@@ -361,7 +362,7 @@ public class GeneratorPlant extends WorldGenerator {
           setBlockAndNotifyAdequately(worldIn, blockpos.up(), state);
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), TALL_WATER, TALL_WATER_SEA)) {
+    } else if (Category.isCategory(type.getCategory(), TALL_WATER, TALL_WATER_SEA)) {
       var plantBlock = (BlockPlantTallWater) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
       IBlockState water = type.getWaterType();
@@ -372,10 +373,10 @@ public class GeneratorPlant extends WorldGenerator {
       }
       BlockPos blockpos = position.add(0, -depth + 1, 0);
 
-      if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+      if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
           type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
           plantBlock.canPlaceBlockAt(worldIn, blockpos)) {
-        int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+        int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
         setBlockAndNotifyAdequately(worldIn, blockpos,
                                     state.withProperty(AGE_4, plantAge));
         if (rand.nextInt(4) < plantAge && plantBlock.canGrow(worldIn, blockpos, state,
@@ -383,7 +384,7 @@ public class GeneratorPlant extends WorldGenerator {
           setBlockAndNotifyAdequately(worldIn, blockpos.up(), state);
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), FLOATING)) {
+    } else if (Category.isCategory(type.getCategory(), FLOATING)) {
       var plantBlock = (BlockPlantFloatingWater) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
       IBlockState water = type.getWaterType();
@@ -392,17 +393,17 @@ public class GeneratorPlant extends WorldGenerator {
         final BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), 0,
                                                rand.nextInt(7) - rand.nextInt(7));
 
-        if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+        if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
             type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
             worldIn.isAirBlock(blockpos) &&
             plantBlock.canPlaceBlockAt(worldIn, blockpos) &&
             type.isValidFloatingWaterDepth(worldIn, blockpos, water)) {
-          int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+          int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
                                       state.withProperty(AGE_4, plantAge));
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), FLOATING_SEA)) {
+    } else if (Category.isCategory(type.getCategory(), FLOATING_SEA)) {
       var plantBlock = (BlockPlantFloatingWater) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
       IBlockState water = type.getWaterType();
@@ -411,17 +412,17 @@ public class GeneratorPlant extends WorldGenerator {
         final BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), 0,
                                                rand.nextInt(7) - rand.nextInt(7));
 
-        if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+        if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
             type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
             worldIn.isAirBlock(blockpos) &&
             plantBlock.canPlaceBlockAt(worldIn, blockpos) &&
             type.isValidFloatingWaterDepth(worldIn, blockpos, water)) {
-          int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+          int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
                                       state.withProperty(AGE_4, plantAge));
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), CACTUS)) {
+    } else if (Category.isCategory(type.getCategory(), CACTUS)) {
       var plantBlock = (BlockPlantCactus) BlocksPlant.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
@@ -433,29 +434,29 @@ public class GeneratorPlant extends WorldGenerator {
         int j = 1 + rand.nextInt(type.getMaxHeight());
 
         for (int k = 0; k < j; ++k) {
-          if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+          if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
               type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos.up(k))) &&
               worldIn.isAirBlock(blockpos.up(k)) &&
               plantBlock.canBlockStay(worldIn, blockpos.up(k), state)) {
             int plantAge = type.getAgeForWorldgen(rand,
-                                                  Climate.getActualTemp(worldIn, blockpos));
+                                                  ClimateTFC.getActualTemp(worldIn, blockpos));
             setBlockAndNotifyAdequately(worldIn, blockpos.up(k),
                                         state.withProperty(AGE_4, plantAge));
           }
         }
       }
-    } else if (BlockUtils.isCategory(type.getCategory(), EPIPHYTE)) {
+    } else if (Category.isCategory(type.getCategory(), EPIPHYTE)) {
       BlockPlantEpiphyte plantBlock = (BlockPlantEpiphyte) BlocksPlant.PLANT.get(type);
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 4; ++i) {
         BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(16),
                                          rand.nextInt(7) - rand.nextInt(7));
 
-        if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+        if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
             type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
             worldIn.getBlockState(blockpos).getBlock().isReplaceable(worldIn, blockpos) &&
             plantBlock.canPlaceBlockAt(worldIn, blockpos)) {
-          int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+          int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
                                       plantBlock.getStateForWorldGen(worldIn, blockpos)
                                                 .withProperty(AGE_4, plantAge));
@@ -471,11 +472,11 @@ public class GeneratorPlant extends WorldGenerator {
           rand.nextInt(4) - rand.nextInt(4),
           rand.nextInt(7) - rand.nextInt(7));
 
-        if (type.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
+        if (type.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
             type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
             worldIn.isAirBlock(blockpos) &&
             plantBlock.canBlockStay(worldIn, blockpos, state)) {
-          int plantAge = type.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
+          int plantAge = type.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
           setBlockAndNotifyAdequately(worldIn, blockpos,
                                       state.withProperty(AGE_4, plantAge));
         }

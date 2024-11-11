@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.gui;
 
-import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +19,7 @@ import net.dries007.tfc.util.Helpers;
 @SideOnly(Side.CLIENT)
 public class GuiLiquidTransfer extends GuiContainerTFC {
 
-  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Constants.MODID_TFC, "textures/gui/single_inventory.png");
+  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Reference.MODID_TFC, "textures/gui/single_inventory.png");
   private final int slotIdx;
 
   public GuiLiquidTransfer(Container container, EntityPlayer player, boolean mainhand) {

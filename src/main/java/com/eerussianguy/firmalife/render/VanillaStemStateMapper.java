@@ -14,9 +14,9 @@ import net.dries007.tfc.objects.blocks.BlockStemCrop;
 
 import java.util.Map;
 
-import static su.terrafirmagreg.data.Properties.BoolProp.WILD;
-import static su.terrafirmagreg.data.Properties.EnumProp.FACING;
-import static su.terrafirmagreg.data.Properties.IntProp.AGE_8;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WILD;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.FACING;
+import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_8;
 
 
 public class VanillaStemStateMapper extends StateMapperBase {

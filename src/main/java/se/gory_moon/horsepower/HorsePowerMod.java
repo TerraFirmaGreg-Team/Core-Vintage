@@ -1,7 +1,7 @@
 package se.gory_moon.horsepower;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.data.lib.LoggingHelper;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -21,7 +21,7 @@ import static se.gory_moon.horsepower.lib.Reference.CLIENT_PROXY;
 import static se.gory_moon.horsepower.lib.Reference.COMMON_PROXY;
 import static se.gory_moon.horsepower.lib.Reference.NAME;
 import static se.gory_moon.horsepower.lib.Reference.WAILA_PROVIDER;
-import static su.terrafirmagreg.data.Constants.MODID_HORSEPOWER;
+import static su.terrafirmagreg.api.data.Reference.MODID_HORSEPOWER;
 
 @Mod(modid = MODID_HORSEPOWER,
      version = Tags.MOD_VERSION,

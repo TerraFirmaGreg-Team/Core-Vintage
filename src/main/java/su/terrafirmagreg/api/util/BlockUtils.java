@@ -1,21 +1,9 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.data.lib.types.category.Category;
-import su.terrafirmagreg.data.lib.types.category.ICategory;
-import su.terrafirmagreg.data.lib.types.type.IType;
-import su.terrafirmagreg.data.lib.types.type.Type;
-import su.terrafirmagreg.data.lib.types.variant.IVariant;
-import su.terrafirmagreg.data.lib.types.variant.Variant;
-import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
-import su.terrafirmagreg.modules.soil.api.spi.IGrass;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeat;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockOre;
 import net.minecraft.block.BlockStaticLiquid;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -30,8 +18,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.oredict.OreDictionary;
 
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,20 +28,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import static su.terrafirmagreg.data.Properties.BoolProp.CLAY;
-import static su.terrafirmagreg.modules.rock.init.BlocksRock.GRAVEL;
-import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
-import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.COARSE_DIRT;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DIRT;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DRY_GRASS;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.MUD;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.MYCELIUM;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.PODZOL;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.ROOTED_DIRT;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.SPARSE_GRASS;
 
 @UtilityClass
 @SuppressWarnings("unused")
@@ -449,54 +421,6 @@ public final class BlockUtils {
     return worldIn.isSideSolid(pos.offset(facing.getOpposite()), facing);
   }
 
-  public static boolean isVariant(IBlockState blockState, Variant<?, ?>... variants) {
-    if (blockState.getBlock() instanceof IVariant<?> variantIn) {
-      return isVariant(variantIn.getVariant(), variants);
-    }
-    return false;
-  }
-
-  public static boolean isVariant(Variant<?, ?> variantIn, Variant<?, ?>... variants) {
-    for (var variant : variants) {
-      if (variantIn == variant) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  public static boolean isType(IBlockState blockState, Type<?>... types) {
-    if (blockState.getBlock() instanceof IType<?> variantIn) {
-      return isType(variantIn.getType(), types);
-    }
-    return false;
-  }
-
-  public static boolean isType(Type<?> typeIn, Type<?>... types) {
-    for (var type : types) {
-      if (typeIn == type) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  public static boolean isCategory(IBlockState blockState, Category<?>... categories) {
-    if (blockState.getBlock() instanceof ICategory<?> variantIn) {
-      return isCategory(variantIn.getCategory(), categories);
-    }
-    return false;
-  }
-
-  public static boolean isCategory(Category<?> categoryIn, Category<?>... categories) {
-    for (var category : categories) {
-      if (categoryIn == category) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   public static boolean isBlockState(IBlockState stateIn, IBlockState... states) {
     for (var state : states) {
       if (stateIn == state) {
@@ -515,10 +439,6 @@ public final class BlockUtils {
     return false;
   }
 
-  public static boolean isClay(IBlockState current) {
-    return hasProperty(current, CLAY);
-  }
-
   /**
    * Проверяет наличие определенного свойства у блока.
    *
@@ -529,86 +449,6 @@ public final class BlockUtils {
   public static boolean hasProperty(IBlockState blockState, IProperty<?> property) {
 
     return blockState.getPropertyKeys().contains(property);
-  }
-
-  public static boolean isGrass(IBlockState current) {
-    return current.getBlock() instanceof IGrass;
-  }
-
-  public static boolean isDirt(IBlockState current) {
-    var block = current.getBlock();
-    if (block instanceof ISoilBlock soil) {
-      return isVariant(soil.getVariant(), DIRT, COARSE_DIRT, ROOTED_DIRT);
-    }
-    return false;
-  }
-
-  public static boolean isSoil(IBlockState current) {
-    var block = current.getBlock();
-    if (block instanceof BlockSoilPeat) {
-      return true;
-    }
-    if (block instanceof ISoilBlock soil) {
-      return isVariant(soil.getVariant(),
-                       GRASS, DRY_GRASS, PODZOL,
-                       MYCELIUM, DIRT, COARSE_DIRT,
-                       SPARSE_GRASS, ROOTED_DIRT);
-    }
-    return false;
-  }
-
-  public static boolean isSoilOrGravel(IBlockState current) {
-    var block = current.getBlock();
-    if (block instanceof IRockBlock rock) {
-      return isVariant(rock.getVariant(), GRAVEL);
-    }
-    if (block instanceof ISoilBlock soil) {
-      return isVariant(soil.getVariant(),
-                       GRASS, DRY_GRASS, COARSE_DIRT,
-                       SPARSE_GRASS, ROOTED_DIRT, DIRT,
-                       MUD, PODZOL, MYCELIUM);
-    }
-    return false;
-  }
-
-  public static boolean isGround(IBlockState current) {
-    var block = current.getBlock();
-    if (block instanceof IRockBlock rock) {
-      return isVariant(rock.getVariant(), GRAVEL, SAND, RAW);
-    }
-    if (block instanceof ISoilBlock soil) {
-      return isVariant(soil.getVariant(),
-                       GRASS, DRY_GRASS, COARSE_DIRT,
-                       SPARSE_GRASS, ROOTED_DIRT, DIRT,
-                       MUD, PODZOL, MYCELIUM);
-    }
-    return false;
-  }
-
-  public static boolean isGrowableSoil(IBlockState current) {
-    var block = current.getBlock();
-    if (block instanceof ISoilBlock soil) {
-      return isVariant(soil.getVariant(),
-                       GRASS, DRY_GRASS, SPARSE_GRASS,
-                       DIRT, PODZOL, MYCELIUM);
-    }
-    return false;
-  }
-
-  public static boolean isWater(IBlockState current) {
-    return current.getMaterial() == Material.WATER;
-  }
-
-  public static boolean isSaltWater(IBlockState current) {
-    return isBlock(current.getBlock(), FluidsTFC.SALT_WATER.get().getBlock());
-  }
-
-  public static boolean isFreshWaterOrIce(IBlockState current) {
-    return isBlock(current.getBlock(), Blocks.ICE, FluidsTFC.FRESH_WATER.get().getBlock());
-  }
-
-  public static boolean isFreshWater(IBlockState current) {
-    return isBlock(current.getBlock(), FluidsTFC.FRESH_WATER.get().getBlock());
   }
 
   public interface IBlockAction {

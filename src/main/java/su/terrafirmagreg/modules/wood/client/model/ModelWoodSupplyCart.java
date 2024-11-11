@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.client.model;
 
-import su.terrafirmagreg.data.MathConstants;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodSupplyCart;
 
 import net.minecraft.client.model.ModelBase;
@@ -31,8 +31,8 @@ public class ModelWoodSupplyCart extends ModelBase {
     // --BOTTOM-BOARD--------------------------------------
     this.boardBottom = new ModelRenderer(this, 0, 0);
     this.boardBottom.addBox(-14.5F, -11.0F, 3.0F, 29, 22, 1);
-    this.boardBottom.rotateAngleY = MathConstants.PI / -2F;
-    this.boardBottom.rotateAngleX = MathConstants.PI / -2F;
+    this.boardBottom.rotateAngleY = MathUtils.PI / -2F;
+    this.boardBottom.rotateAngleX = MathUtils.PI / -2F;
 
     // --AXIS--------------------------------------
     this.axis = new ModelRenderer(this, 0, 23);
@@ -41,7 +41,7 @@ public class ModelWoodSupplyCart extends ModelBase {
     // --SHAFTS--------------------------------------
     this.shaft = new ModelRenderer(this, 0, 35);
     this.shaft.setRotationPoint(0.0F, 0.0F, -14.0F);
-    this.shaft.rotateAngleY = MathConstants.PI / 2.0F;
+    this.shaft.rotateAngleY = MathUtils.PI / 2.0F;
     this.shaft.rotateAngleZ = -0.07F;
     this.shaft.addBox(0.0F, 0.0F, -8.0F, 20, 2, 1);
     this.shaft.addBox(0.0F, 0.0F, 7.0F, 20, 2, 1);
@@ -54,24 +54,24 @@ public class ModelWoodSupplyCart extends ModelBase {
     this.boardsSide[0] = new ModelRenderer(this, 0, 27);
     this.boardsSide[0].addBox(-13.5F, -7.0F, 0.0F, 28, 3, 1);
     this.boardsSide[0].setRotationPoint(-11.0F, 0.0F, 0.0F);
-    this.boardsSide[0].rotateAngleY = MathConstants.PI / -2.0F;
+    this.boardsSide[0].rotateAngleY = MathUtils.PI / -2.0F;
     this.boardsSide[0].mirror = true;
 
     this.boardsSide[1] = new ModelRenderer(this, 0, 27);
     this.boardsSide[1].addBox(-14.5F, -7.0F, 0.0F, 28, 3, 1);
     this.boardsSide[1].setRotationPoint(11.0F, 0.0F, 0.0F);
-    this.boardsSide[1].rotateAngleY = MathConstants.PI / 2.0F;
+    this.boardsSide[1].rotateAngleY = MathUtils.PI / 2.0F;
 
     this.boardsSide[2] = new ModelRenderer(this, 0, 31);
     this.boardsSide[2].addBox(-13.5F, -2.0F, 0.0F, 28, 3, 1);
     this.boardsSide[2].setRotationPoint(-11.0F, 0.0F, 0.0F);
-    this.boardsSide[2].rotateAngleY = MathConstants.PI / -2.0F;
+    this.boardsSide[2].rotateAngleY = MathUtils.PI / -2.0F;
     this.boardsSide[2].mirror = true;
 
     this.boardsSide[3] = new ModelRenderer(this, 0, 31);
     this.boardsSide[3].addBox(-14.5F, -2.0F, 0.0F, 28, 3, 1);
     this.boardsSide[3].setRotationPoint(11.0F, 0.0F, 0.0F);
-    this.boardsSide[3].rotateAngleY = MathConstants.PI / 2.0F;
+    this.boardsSide[3].rotateAngleY = MathUtils.PI / 2.0F;
 
     // --REAR-BOARDS---------------------------------
     this.boardsRear[0] = new ModelRenderer(this, 50, 35);
@@ -91,7 +91,7 @@ public class ModelWoodSupplyCart extends ModelBase {
 
     this.cargo[2] = new ModelRenderer(this, 64, 0);
     this.cargo[2].addBox(-10.5F, -5.0F, -8.5F, 20, 8, 10);
-    this.cargo[2].rotateAngleY = MathConstants.PI;
+    this.cargo[2].rotateAngleY = MathUtils.PI;
 
     this.cargo[3] = new ModelRenderer(this, 64, 54);
     this.cargo[3].addBox(-12.0F, -7.0F, 1.0F, 20, 2, 3);
@@ -104,12 +104,12 @@ public class ModelWoodSupplyCart extends ModelBase {
     for (int i = 0; i < 8; i++) {
       ModelRenderer rim = new ModelRenderer(this, 0, 11);
       rim.addBox(-1.5F, -4.5F, 9.86F, 2, 9, 1);
-      rim.rotateAngleX = i * MathConstants.PI / 4.0F;
+      rim.rotateAngleX = i * MathUtils.PI / 4.0F;
       this.leftWheel.addChild(rim);
 
       ModelRenderer spoke = new ModelRenderer(this, 4, 11);
       spoke.addBox(-1.5F, 1.0F, -0.5F, 2, 9, 1);
-      spoke.rotateAngleX = i * MathConstants.PI / 4.0F;
+      spoke.rotateAngleX = i * MathUtils.PI / 4.0F;
       this.leftWheel.addChild(spoke);
     }
 
@@ -121,12 +121,12 @@ public class ModelWoodSupplyCart extends ModelBase {
     for (int i = 0; i < 8; i++) {
       ModelRenderer rim = new ModelRenderer(this, 0, 11);
       rim.addBox(0.5F, -4.5F, 9.86F, 2, 9, 1);
-      rim.rotateAngleX = i * MathConstants.PI / 4.0F;
+      rim.rotateAngleX = i * MathUtils.PI / 4.0F;
       this.rightWheel.addChild(rim);
 
       ModelRenderer spoke = new ModelRenderer(this, 4, 11);
       spoke.addBox(0.5F, 1.0F, -0.5F, 2, 9, 1);
-      spoke.rotateAngleX = i * MathConstants.PI / 4.0F;
+      spoke.rotateAngleX = i * MathUtils.PI / 4.0F;
       this.rightWheel.addChild(spoke);
     }
   }

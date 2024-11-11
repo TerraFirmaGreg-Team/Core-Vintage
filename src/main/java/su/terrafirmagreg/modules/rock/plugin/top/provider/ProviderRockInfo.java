@@ -15,7 +15,7 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.dries007.tfc.util.climate.Climate;
+import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +37,8 @@ public class ProviderRockInfo implements IProbeInfoProvider {
 
       List<String> currentTooltip = new ArrayList<>();
 
-      int temperature = Math.round(Climate.getActualTemp(world, pos, 0));
-      int rainfall = Math.round(Climate.getRainfall(world, pos));
+      int temperature = Math.round(ClimateTFC.getActualTemp(world, pos, 0));
+      int rainfall = Math.round(ClimateTFC.getRainfall(world, pos));
       currentTooltip.add(new TextComponentTranslation(ModUtils.localize("top", "temperature"), temperature).getFormattedText());
       currentTooltip.add(new TextComponentTranslation(ModUtils.localize("top", "rainfall"), rainfall).getFormattedText());
 

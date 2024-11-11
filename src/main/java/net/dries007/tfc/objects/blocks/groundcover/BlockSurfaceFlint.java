@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.groundcover;
 
-import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
 
 import net.minecraft.block.Block;
@@ -153,8 +153,8 @@ public class BlockSurfaceFlint
     IBlockState soil = worldIn.getBlockState(pos.down());
 
     if (state.getBlock() == this) {
-      return (BlockUtils.isGround(soil) || worldIn.getBlockState(pos.down())
-                                                  .isFullBlock()) && !(BlockUtils.isSaltWater(soil) || BlockUtils.isFreshWater(soil));
+      return (BlockHelper.isGround(soil) || worldIn.getBlockState(pos.down())
+                                                  .isFullBlock()) && !(BlockHelper.isSaltWater(soil) || BlockHelper.isFreshWater(soil));
     }
     return this.canSustainBush(soil);
   }

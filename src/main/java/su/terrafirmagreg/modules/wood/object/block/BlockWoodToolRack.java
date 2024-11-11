@@ -33,7 +33,7 @@ import static net.minecraft.util.EnumFacing.Axis;
 import static net.minecraft.util.EnumFacing.HORIZONTALS;
 import static net.minecraft.util.EnumFacing.NORTH;
 import static net.minecraft.util.EnumFacing.byHorizontalIndex;
-import static su.terrafirmagreg.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockWoodToolRack extends BlockWood implements IProviderTile {

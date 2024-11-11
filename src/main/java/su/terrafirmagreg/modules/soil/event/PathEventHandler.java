@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 
-import static su.terrafirmagreg.data.Constants.MOD_ID;
+import static su.terrafirmagreg.Tags.MOD_ID;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.COARSE_DIRT;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DIRT;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DRY_GRASS;

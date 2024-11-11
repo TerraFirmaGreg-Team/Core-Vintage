@@ -65,6 +65,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
@@ -135,6 +136,8 @@ import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
+import net.dries007.tfc.objects.entity.ai.EBEntityAI;
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.objects.items.ItemsTFC;
@@ -181,6 +184,13 @@ public final class CommonEventHandler {
           }
         }
       }
+    }
+  }
+
+  @SubscribeEvent
+  public void addAI(LivingEvent.LivingUpdateEvent event) {
+    if (event.getEntityLiving() instanceof EntityAnimalTFC animal && event.getEntityLiving().ticksExisted < 5 && !event.getEntityLiving().isChild()) {
+      animal.tasks.addTask(2, new EBEntityAI(animal));
     }
   }
 

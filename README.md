@@ -15,4 +15,4 @@
 - [astikor-carts-tfc](https://github.com/ACGaming/astikor-carts-tfc)
 - [HorsePowerTFC](https://github.com/ACGaming/HorsePowerTFC)
 - [TFC-Farming](https://github.com/BananaFructa/TFC-Farming)
-- [EasyBreedingTFC](https://github.com/ACGaming/EasyBreedingTFC)
+- [EasyBreedingTFC](https://github.com/ACGaming/EasyBreedingTFC) +

@@ -1190,6 +1190,10 @@ public final class ConfigTFC {
   @Config.LangKey("config." + MOD_ID + ".animals")
   public static final class Animals {
 
+    @Config.Name("Search distance")
+    @Config.Comment("The distance for animals to search for food")
+    public static double searchDistance = 10;
+
     @Config.Comment("Alpaca")
     @Config.LangKey("config." + MOD_ID + ".animals.alpaca")
     public static final AlpacaCFG ALPACA = new AlpacaCFG();

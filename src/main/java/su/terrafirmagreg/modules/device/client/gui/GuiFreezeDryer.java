@@ -18,7 +18,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import org.lwjgl.opengl.GL11;
-import pieman.caffeineaddon.ModConfig;
+import net.dries007.caffeineaddon.ModConfig;
 
 import java.io.IOException;
 import java.util.ArrayList;

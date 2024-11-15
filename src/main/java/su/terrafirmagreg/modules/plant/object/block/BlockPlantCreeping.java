@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -87,7 +87,7 @@ public class BlockPlantCreeping extends BlockPlant {
       if (!(blockState.getBlock() instanceof BlockLeaves) &&
           (blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
            blockState.getBlock() instanceof BlockFence)) {
-        return type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+        return type.isValidTemp(Climate.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
       }
     }
     return false;

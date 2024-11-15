@@ -34,7 +34,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-import net.dries007.tfc.util.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

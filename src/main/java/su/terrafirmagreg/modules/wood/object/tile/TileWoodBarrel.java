@@ -42,9 +42,9 @@ import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.util.FluidTransferHelper;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendarFormatted;
-import net.dries007.tfc.util.calendar.ICalendarTickable;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

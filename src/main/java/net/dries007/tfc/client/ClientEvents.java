@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.feature.skills.SmithingSkill;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 
 import net.minecraft.block.Block;
@@ -34,7 +35,6 @@ import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
-import net.dries007.tfc.util.skills.SmithingSkill;
 
 import java.util.ArrayList;
 import java.util.List;

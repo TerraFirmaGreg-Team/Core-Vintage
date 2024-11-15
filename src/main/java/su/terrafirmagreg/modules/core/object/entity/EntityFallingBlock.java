@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core.object.entity;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 
 import net.minecraft.block.Block;
@@ -22,7 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import gregtech.common.blocks.BlockOre;
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.ConfigTFC;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -136,7 +136,7 @@ public class EntityFallingBlock extends net.minecraft.entity.item.EntityFallingB
                                                                                               material, downState)) {
           world.destroyBlock(downPos, true);
           return;
-        } else if (ConfigTFC.General.FALLABLE.destroyOres && downState.getBlock() instanceof BlockOre) {
+        } else if (ConfigCore.MISC.FALLABLE.destroyOres && downState.getBlock() instanceof BlockOre) {
           world.destroyBlock(downPos, false);
           return;
         }
@@ -188,10 +188,10 @@ public class EntityFallingBlock extends net.minecraft.entity.item.EntityFallingB
   public void fall(float distance, float damageMultiplier) {
     List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox());
     for (Entity entity : list) {
-      if (ConfigTFC.General.FALLABLE.hurtEntities && distance > 1.0F
+      if (ConfigCore.MISC.FALLABLE.hurtEntities && distance > 1.0F
           && entity instanceof EntityLivingBase) {
         entity.attackEntityFrom(DamageSource.FALLING_BLOCK, distance);
-      } else if (ConfigTFC.General.FALLABLE.destroyItems && entity instanceof EntityItem) {
+      } else if (ConfigCore.MISC.FALLABLE.destroyItems && entity instanceof EntityItem) {
         entity.setDead();
       }
     }

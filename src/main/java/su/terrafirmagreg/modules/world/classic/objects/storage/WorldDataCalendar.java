@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 
-import net.dries007.tfc.util.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 

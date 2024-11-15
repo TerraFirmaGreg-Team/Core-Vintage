@@ -9,8 +9,8 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemJug;
-import pieman.caffeineaddon.CaffeineAddon;
-import pieman.caffeineaddon.init.ModItems;
+import net.dries007.caffeineaddon.CaffeineAddon;
+import net.dries007.caffeineaddon.init.ModItems;
 
 import org.jetbrains.annotations.NotNull;
 

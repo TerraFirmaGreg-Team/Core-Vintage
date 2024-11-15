@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.core.object.command.CommandHorsePower;
 import su.terrafirmagreg.modules.core.object.command.CommandPlayer;
 import su.terrafirmagreg.modules.core.object.command.CommandStripWorld;
 import su.terrafirmagreg.modules.core.object.command.CommandTime;
-import su.terrafirmagreg.modules.core.object.command.CommandWorkChunk;
 
 public final class CommandsCore {
 
@@ -18,7 +17,6 @@ public final class CommandsCore {
   public static CommandHeat HEAT;
   public static CommandPlayer PLAYER;
   public static CommandTime TIME;
-  public static CommandWorkChunk WORK_CHUNK;
   public static CommandHorsePower HORSE_POWER;
 
   public static void onRegister(RegistryManager registryManager) {
@@ -29,7 +27,6 @@ public final class CommandsCore {
     HEAT = registryManager.command(new CommandHeat());
     PLAYER = registryManager.command(new CommandPlayer());
     TIME = registryManager.command(new CommandTime());
-    WORK_CHUNK = registryManager.command(new CommandWorkChunk());
     HORSE_POWER = registryManager.command(new CommandHorsePower());
 
   }

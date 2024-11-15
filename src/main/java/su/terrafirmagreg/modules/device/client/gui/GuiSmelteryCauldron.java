@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static tfctech.client.TechGuiHandler.GUI_ELEMENTS;
+import static net.dries007.tfctech.client.TechGuiHandler.GUI_ELEMENTS;
 
 public class GuiSmelteryCauldron extends BaseGuiContainerTile<TileSmelteryCauldron> {
 

@@ -9,8 +9,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
-import com.eerussianguy.firmalife.FirmaLife;
-import com.eerussianguy.firmalife.registry.BlocksFL;
+import net.dries007.eerussianguy.firmalife.FirmaLife;
+import net.dries007.eerussianguy.firmalife.registry.BlocksFL;
 import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.objects.container.ContainerKnapping;
 

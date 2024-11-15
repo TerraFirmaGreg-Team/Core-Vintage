@@ -13,7 +13,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.dries007.tfc.api.capability.food.FoodHeatHandler;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 import net.dries007.tfc.objects.items.ItemTFCF;
-import tfcflorae.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;

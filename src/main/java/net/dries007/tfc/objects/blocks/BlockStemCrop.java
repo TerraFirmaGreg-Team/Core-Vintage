@@ -13,7 +13,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.eerussianguy.firmalife.init.StemCrop;
+import net.dries007.eerussianguy.firmalife.init.StemCrop;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropSimple;
 import net.dries007.tfc.objects.te.TEStemCrop;

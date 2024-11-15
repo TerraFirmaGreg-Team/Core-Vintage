@@ -35,8 +35,10 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import pieman.caffeineaddon.ModConfig;
+
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
+import net.dries007.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -70,7 +72,7 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
   public void update() {
     if (!initialized) {
       initialized = true;
-      localTemperature = ClimateTFC.getActualTemp(this.getPos());
+      localTemperature = Climate.getActualTemp(this.getPos());
       temperature = localTemperature;
       localPressure = (ModConfig.seaLevelPressure + ((-(this.getPos()
                                                             .getY() - ModConfig.seaLevel)) * ModConfig.pressureChange));
@@ -91,7 +93,7 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
     tick = 0;
 
     //Get current local temperature at block pos
-    localTemperature = ClimateTFC.getActualTemp(this.getPos());
+    localTemperature = Climate.getActualTemp(this.getPos());
 
     //Consume a piece of coolant
     handleCoolant();

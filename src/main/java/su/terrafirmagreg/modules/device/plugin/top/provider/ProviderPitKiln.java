@@ -19,8 +19,8 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import java.util.ArrayList;
 import java.util.List;

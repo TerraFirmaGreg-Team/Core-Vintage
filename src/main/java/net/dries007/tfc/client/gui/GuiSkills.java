@@ -1,6 +1,8 @@
 package net.dries007.tfc.client.gui;
 
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.feature.skills.Skill;
+import su.terrafirmagreg.modules.core.feature.skills.SkillType;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -17,8 +19,6 @@ import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.skills.Skill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import java.util.List;
 

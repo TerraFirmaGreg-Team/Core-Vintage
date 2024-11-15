@@ -6,6 +6,9 @@ import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.skills.SimpleSkill;
+import su.terrafirmagreg.modules.core.feature.skills.SkillType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -31,9 +34,6 @@ import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TEStemCrop;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.skills.SimpleSkill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -55,7 +55,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.climate.ClimateHelper;
+import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
 
 import org.jetbrains.annotations.Nullable;
 

@@ -19,7 +19,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import java.util.Random;
 
@@ -95,10 +95,10 @@ public class GeneratorSoilPits implements IWorldGenerator {
             if (plant.isClayMarking()) {
               var plantBlock = (BlockPlant) BlocksPlant.PLANT.get(plant);
               IBlockState state = plantBlock.getDefaultState();
-              int plantAge = plant.getAgeForWorldgen(rng, ClimateTFC.getActualTemp(world, pos));
+              int plantAge = plant.getAgeForWorldgen(rng, Climate.getActualTemp(world, pos));
 
               if (!world.provider.isNether() && !world.isOutsideBuildHeight(pos) &&
-                  plant.isValidLocation(ClimateTFC.getActualTemp(world, pos),
+                  plant.isValidLocation(Climate.getActualTemp(world, pos),
                                         ProviderChunkData.getRainfall(world, pos),
                                         world.getLightFor(EnumSkyBlock.SKY, pos)) &&
                   world.isAirBlock(pos) &&

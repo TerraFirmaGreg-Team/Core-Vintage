@@ -28,7 +28,7 @@ import net.minecraftforge.common.util.Constants;
 
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
-import net.dries007.tfc.util.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 

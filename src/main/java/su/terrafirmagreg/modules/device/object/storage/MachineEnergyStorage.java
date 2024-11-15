@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import gregtech.api.capability.IEnergyContainer;
-import tfctech.TechConfig;
+import net.dries007.tfctech.TechConfig;
 
 import org.jetbrains.annotations.Nullable;
 

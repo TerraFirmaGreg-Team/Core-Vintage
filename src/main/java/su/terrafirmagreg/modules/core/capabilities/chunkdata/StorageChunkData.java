@@ -59,7 +59,6 @@ public final class StorageChunkData implements IStorage<ICapabilityChunkData> {
     root.setFloat("floraDensity", instance.getFloraDensity());
     root.setFloat("floraDiversity", instance.getFloraDiversity());
 
-    root.setInteger("chunkWorkage", instance.getChunkWorkage());
     root.setLong("protectedTicks", instance.getProtectedTicks());
     root.setLong("lastUpdateTick", instance.getLastUpdateTick());
     root.setLong("lastUpdateYear", instance.getLastUpdateYear());
@@ -95,7 +94,6 @@ public final class StorageChunkData implements IStorage<ICapabilityChunkData> {
       instance.setFloraDensity(root.getFloat("floraDensity"));
       instance.setFloraDiversity(root.getFloat("floraDiversity"));
 
-      instance.setChunkWorkage(root.getInteger("chunkWorkage"));
       instance.setProtectedTicks(root.getLong("protectedTicks"));
       instance.setLastUpdateTick(root.getLong("lastUpdateTick"));
       instance.setLastUpdateYear(root.getLong("lastUpdateYear"));

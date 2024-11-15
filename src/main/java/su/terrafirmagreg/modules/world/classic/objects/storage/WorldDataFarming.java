@@ -15,10 +15,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 
-import BananaFructa.tfcfarming.Config;
-import BananaFructa.tfcfarming.CropNutrients;
-import BananaFructa.tfcfarming.NutrientClass;
-import BananaFructa.tfcfarming.NutrientValues;
+import net.dries007.tfcfarming.Config;
+import net.dries007.tfcfarming.CropNutrients;
+import net.dries007.tfcfarming.NutrientClass;
+import net.dries007.tfcfarming.NutrientValues;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;

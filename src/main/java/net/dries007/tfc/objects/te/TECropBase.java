@@ -4,8 +4,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendarTickable;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 
 import org.jetbrains.annotations.NotNull;
 

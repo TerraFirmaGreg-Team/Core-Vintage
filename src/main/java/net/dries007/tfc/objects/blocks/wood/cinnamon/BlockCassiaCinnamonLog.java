@@ -24,8 +24,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.tfc.objects.items.ItemsTFCF;
-import net.dries007.tfc.util.calendar.Calendar;
-import tfcflorae.util.OreDictionaryHelper;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -5,8 +5,8 @@ import su.terrafirmagreg.api.registry.provider.IProviderModel;
 import net.minecraft.item.Item;
 
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import pieman.caffeineaddon.CaffeineAddon;
-import pieman.caffeineaddon.init.ModItems;
+import net.dries007.caffeineaddon.CaffeineAddon;
+import net.dries007.caffeineaddon.init.ModItems;
 
 public class ItemCoffee extends Item implements IProviderModel {
 

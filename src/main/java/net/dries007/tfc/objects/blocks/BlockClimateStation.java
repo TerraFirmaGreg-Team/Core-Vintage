@@ -21,7 +21,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import com.eerussianguy.firmalife.util.GreenhouseHelpers;
+import net.dries007.eerussianguy.firmalife.util.GreenhouseHelpers;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 import net.dries007.tfc.objects.te.TEClimateStation;

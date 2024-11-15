@@ -9,7 +9,6 @@ import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -25,7 +24,7 @@ public class RegistryList<E extends IForgeRegistryEntry<E>> extends LinkedList<E
 
 
   protected RegistryList() {
-    this(new ArrayList<>(), null);
+    this(new LinkedList<>(), null);
   }
 
   protected RegistryList(List<E> delegateIn, @Nullable E listType) {

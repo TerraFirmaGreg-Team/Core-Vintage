@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import tfcflorae.client.GuiHandler;
+import net.dries007.tfcflorae.client.GuiHandler;
 
 import org.jetbrains.annotations.Nullable;
 

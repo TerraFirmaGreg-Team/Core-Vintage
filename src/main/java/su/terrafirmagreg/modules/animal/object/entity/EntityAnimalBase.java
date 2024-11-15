@@ -42,8 +42,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.base.Predicates;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

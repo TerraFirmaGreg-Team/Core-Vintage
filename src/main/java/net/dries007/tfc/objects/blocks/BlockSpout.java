@@ -19,10 +19,10 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.eerussianguy.firmalife.particle.ParticlesFL;
-import com.eerussianguy.firmalife.util.GreenhouseHelpers;
-import com.eerussianguy.firmalife.util.HelpersFL;
-import com.eerussianguy.firmalife.util.IWaterable;
+import net.dries007.eerussianguy.firmalife.particle.ParticlesFL;
+import net.dries007.eerussianguy.firmalife.util.GreenhouseHelpers;
+import net.dries007.eerussianguy.firmalife.util.HelpersFL;
+import net.dries007.eerussianguy.firmalife.util.IWaterable;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 
 import org.jetbrains.annotations.NotNull;

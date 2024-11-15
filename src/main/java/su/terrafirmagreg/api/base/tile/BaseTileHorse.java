@@ -16,7 +16,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
-import se.gory_moon.horsepower.tileentity.TileHPBase;
+import net.dries007.horsepower.tileentity.TileHPBase;
 
 import lombok.Getter;
 

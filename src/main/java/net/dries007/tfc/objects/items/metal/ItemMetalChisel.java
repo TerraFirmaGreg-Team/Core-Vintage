@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodSupport;
@@ -177,7 +178,7 @@ public class ItemMetalChisel extends ItemMetalTool {
       // only update the world state on the server side
       if (!worldIn.isRemote) {
         // replace the block with a new block
-        if (ConfigTFC.General.FALLABLE.chiselCausesCollapse) {
+        if (ConfigCore.MISC.FALLABLE.chiselCausesCollapse) {
           IBlockState oldState = worldIn.getBlockState(pos);
           FallingBlockManager.Specification oldSpec = FallingBlockManager.getSpecification(oldState);
           if (oldSpec != null && oldSpec.isCollapsable() && !BlockWoodSupport.isBeingSupported(worldIn, pos)) {

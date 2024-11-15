@@ -19,7 +19,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.types.TreesTFCF;
-import tfcflorae.ConfigTFCF;
+import net.dries007.tfcflorae.ConfigTFCF;
 
 import java.util.Random;
 import java.util.stream.IntStream;

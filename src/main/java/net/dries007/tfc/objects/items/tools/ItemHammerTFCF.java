@@ -10,7 +10,7 @@ import net.minecraft.item.ItemTool;
 
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
-import tfcflorae.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 

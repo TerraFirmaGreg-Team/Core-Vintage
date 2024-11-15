@@ -1,14 +1,14 @@
 package su.terrafirmagreg.modules.metal.objects.recipe.anvil;
 
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.util.forge.ForgeRule;
-import net.dries007.tfc.util.forge.ForgeSteps;
-import net.dries007.tfc.util.skills.SmithingSkill;
+import su.terrafirmagreg.api.base.recipe.IBaseRecipe;
+import su.terrafirmagreg.modules.core.feature.skills.SmithingSkill;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-import su.terrafirmagreg.api.base.recipe.IBaseRecipe;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.util.forge.ForgeRule;
+import net.dries007.tfc.util.forge.ForgeSteps;
 
 public interface IAnvilRecipe
   extends IBaseRecipe {

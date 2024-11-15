@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.ModuleContainer.ANIMAL;
+import static su.terrafirmagreg.modules.Modules.ANIMAL;
 import static su.terrafirmagreg.modules.core.ModuleCore.TAB;
 
 @ModuleInfo(moduleID = ANIMAL)

@@ -20,8 +20,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.types.DefaultTrees;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import lombok.Getter;
 

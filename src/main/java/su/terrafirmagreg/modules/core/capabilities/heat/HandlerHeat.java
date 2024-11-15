@@ -10,7 +10,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import com.eerussianguy.firmalife.registry.ItemsFL;
+import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;

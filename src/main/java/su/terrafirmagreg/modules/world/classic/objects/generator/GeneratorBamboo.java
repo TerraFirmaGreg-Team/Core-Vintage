@@ -14,7 +14,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
-import tfcflorae.ConfigTFCF;
+import net.dries007.tfcflorae.ConfigTFCF;
 
 import java.util.Random;
 

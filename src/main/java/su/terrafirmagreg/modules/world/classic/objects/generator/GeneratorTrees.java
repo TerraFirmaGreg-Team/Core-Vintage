@@ -36,7 +36,7 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeFlower;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.types.TreesTFCF;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -97,7 +97,7 @@ public class GeneratorTrees implements IWorldGenerator {
 
     final float diversity = chunkData.getFloraDiversity();
     final float density = chunkData.getFloraDensity();
-    final float avgTemperature = ClimateTFC.getAvgTemp(world, chunkPos);
+    final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
     final float rainfall = ProviderChunkData.getRainfall(world, chunkPos);
 
     float gauss = 2f * (float) random.nextGaussian();

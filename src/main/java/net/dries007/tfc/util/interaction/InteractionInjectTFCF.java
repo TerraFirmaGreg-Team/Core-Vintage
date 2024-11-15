@@ -16,7 +16,7 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.CropTFCF;
-import tfcflorae.TFCFlorae;
+import net.dries007.tfcflorae.TFCFlorae;
 
 import org.jetbrains.annotations.NotNull;
 

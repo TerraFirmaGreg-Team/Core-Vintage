@@ -20,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import com.eerussianguy.firmalife.util.IWaterable;
+import net.dries007.eerussianguy.firmalife.util.IWaterable;
 import mcp.MethodsReturnNonnullByDefault;
 
 import static net.minecraft.block.BlockFarmland.MOISTURE;

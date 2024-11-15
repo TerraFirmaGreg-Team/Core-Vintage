@@ -14,7 +14,7 @@ import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.types.TreesTFCF;
-import tfcflorae.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

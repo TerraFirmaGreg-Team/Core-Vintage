@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketGuiButton;
-import tfctech.client.TechGuiHandler;
+import net.dries007.tfctech.client.TechGuiHandler;
 
 import java.io.IOException;
 

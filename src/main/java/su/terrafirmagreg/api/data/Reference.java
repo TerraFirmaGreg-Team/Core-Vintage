@@ -17,8 +17,8 @@ public final class Reference {
     .create();
 
   public static final String MODID_TFC = "tfc";
-  public static final String MODID_TFCF = "tfcflorae";
-  public static final String MODID_TFCTECH = "tfctech";
+  public static final String MODID_TFCF = "net/dries007/tfcflorae";
+  public static final String MODID_TFCTECH = "net/dries007/tfctech";
   public static final String MODID_HORSEPOWER = "horsepower";
   public static final String MODID_CAFFEINEADDON = "ca";
   public static final String MODID_TIME4TFC = "time4tfc";

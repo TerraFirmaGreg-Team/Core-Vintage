@@ -1,10 +1,9 @@
 package su.terrafirmagreg.modules.world.classic.objects.biome.overworld;
 
-import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraftforge.common.BiomeDictionary;
-
 import su.terrafirmagreg.api.base.biome.BaseBiome;
-import su.terrafirmagreg.api.base.biome.BaseBiomeDecorator;
+import su.terrafirmagreg.modules.world.classic.objects.biome.overworld.decorator.BiomeDecorator;
+
+import net.minecraftforge.common.BiomeDictionary;
 
 public class BiomeBayou extends BaseBiome {
 
@@ -19,8 +18,8 @@ public class BiomeBayou extends BaseBiome {
   }
 
   @Override
-  public BiomeDecorator createBiomeDecorator() {
-    return new BaseBiomeDecorator(16, 45);
+  public net.minecraft.world.biome.BiomeDecorator createBiomeDecorator() {
+    return new BiomeDecorator(16, 45);
   }
 
   @Override

@@ -9,7 +9,10 @@ import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.feature.skills.SkillType;
+import su.terrafirmagreg.modules.core.feature.skills.SmithingSkill;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil;
 import su.terrafirmagreg.modules.metal.objects.container.ContainerMetalAnvil;
@@ -31,7 +34,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import gregtech.common.items.ToolItems;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
@@ -39,8 +41,6 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
-import net.dries007.tfc.util.skills.SkillType;
-import net.dries007.tfc.util.skills.SmithingSkill;
 import org.apache.commons.lang3.StringUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -224,8 +224,8 @@ public class TileMetalAnvil extends BaseTileInventory
       // Handle possible recipe completion
       if (recipe != null) {
         IAnvilRecipe completedRecipe = recipe; // Hold the current recipe, as setting the input slot to empty will clear it
-        int workMin = workingTarget - ConfigTFC.General.DIFFICULTY.acceptableAnvilRange;
-        int workMax = workingTarget + ConfigTFC.General.DIFFICULTY.acceptableAnvilRange;
+        int workMin = workingTarget - ConfigDevice.BLOCK.ANVIL.acceptableAnvilRange;
+        int workMax = workingTarget + ConfigDevice.BLOCK.ANVIL.acceptableAnvilRange;
         if ((workingProgress <= workMax && workingProgress >= workMin) && completedRecipe.matches(
           steps)) {
           //Consume input

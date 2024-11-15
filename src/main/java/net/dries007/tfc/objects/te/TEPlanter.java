@@ -9,13 +9,14 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import com.eerussianguy.firmalife.recipe.PlanterRecipe;
-import com.eerussianguy.firmalife.util.GreenhouseHelpers;
-import com.eerussianguy.firmalife.util.IWaterable;
+import net.dries007.eerussianguy.firmalife.recipe.PlanterRecipe;
+import net.dries007.eerussianguy.firmalife.util.GreenhouseHelpers;
+import net.dries007.eerussianguy.firmalife.util.IWaterable;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.calendar.ICalendarTickable;
+
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 
 import org.jetbrains.annotations.NotNull;
 

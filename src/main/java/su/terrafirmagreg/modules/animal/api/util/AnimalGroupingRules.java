@@ -4,7 +4,7 @@ import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 import net.minecraft.entity.EntityLiving;
 
-import net.dries007.tfc.util.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import java.util.List;
 import java.util.Random;

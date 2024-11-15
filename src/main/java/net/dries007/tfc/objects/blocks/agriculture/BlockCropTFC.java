@@ -4,6 +4,9 @@ import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.skills.SimpleSkill;
+import su.terrafirmagreg.modules.core.feature.skills.SkillType;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlantEmergentTallWater;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlantWater;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
@@ -34,9 +37,6 @@ import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.util.skills.SimpleSkill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -213,7 +213,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
         tile.reduceCounter(growthTicks);
 
         // find stats for the time in which the crop would have grown
-        float temp = ClimateTFC.getActualTemp(worldIn, pos, -tile.getTicksSinceUpdate());
+        float temp = Climate.getActualTemp(worldIn, pos, -tile.getTicksSinceUpdate());
         float rainfall = ProviderChunkData.getRainfall(worldIn, pos);
 
         // check if the crop could grow, if so, grow

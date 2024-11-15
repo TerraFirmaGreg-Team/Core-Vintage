@@ -42,7 +42,7 @@ import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.proxy.IProxy;
-import net.dries007.tfc.util.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import net.dries007.tfc.util.fuel.FuelManager;
 
 import static net.dries007.tfc.TerraFirmaCraft.GUI_FACTORY;

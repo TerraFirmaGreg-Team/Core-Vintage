@@ -18,7 +18,7 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -74,7 +74,7 @@ public class BlockPlantTall extends BlockPlant implements IGrowable, ITallPlant 
       return;
     }
     int age;
-    if (type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+    if (type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         type.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       age = state.getValue(AGE_4);
 
@@ -87,7 +87,7 @@ public class BlockPlantTall extends BlockPlant implements IGrowable, ITallPlant 
         }
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+    } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) || !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       age = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -147,7 +147,7 @@ public class BlockPlantTall extends BlockPlant implements IGrowable, ITallPlant 
     }
     if (state.getBlock() == this) {
       return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) &&
-             type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+             type.isValidTemp(Climate.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
     return this.canSustainBush(soil);
   }

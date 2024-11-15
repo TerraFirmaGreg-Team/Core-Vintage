@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import lombok.Getter;
 

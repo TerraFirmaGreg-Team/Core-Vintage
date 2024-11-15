@@ -2,6 +2,8 @@ package su.terrafirmagreg.modules.core.object.loot;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.feature.skills.SimpleSkill;
+import su.terrafirmagreg.modules.core.feature.skills.SkillType;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,8 +18,6 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
-import net.dries007.tfc.util.skills.SimpleSkill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import org.jetbrains.annotations.NotNull;
 

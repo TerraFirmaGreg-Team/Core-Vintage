@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -144,7 +144,7 @@ public interface IGrass {
       // Генерируем короткую траву на верхнем блоке с определенной вероятностью
       for (PlantType plant : PlantType.getTypes()) {
         if (plant.getCategory() == PlantCategories.SHORT_GRASS && rand.nextFloat() < 0.5f) {
-          float temp = ClimateTFC.getActualTemp(world, upPos);
+          float temp = Climate.getActualTemp(world, upPos);
           var plantBlock = (BlockPlantShortGrass) BlocksPlant.PLANT.get(plant);
 
           if (world.isAirBlock(upPos) &&

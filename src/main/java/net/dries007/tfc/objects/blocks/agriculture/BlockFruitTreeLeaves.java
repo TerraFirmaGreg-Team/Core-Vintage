@@ -33,8 +33,8 @@ import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

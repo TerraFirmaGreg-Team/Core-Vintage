@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.eerussianguy.firmalife.registry.ItemsFL;
+import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -35,7 +35,7 @@ import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
-import tfcflorae.TFCFlorae;
+import net.dries007.tfcflorae.TFCFlorae;
 
 import org.jetbrains.annotations.NotNull;
 

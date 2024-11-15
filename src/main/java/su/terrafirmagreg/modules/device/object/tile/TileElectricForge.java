@@ -37,8 +37,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import gregtech.api.capability.GregtechCapabilities;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import tfctech.TFCTech;
-import tfctech.TechConfig;
+import net.dries007.tfctech.TFCTech;
+import net.dries007.tfctech.TechConfig;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

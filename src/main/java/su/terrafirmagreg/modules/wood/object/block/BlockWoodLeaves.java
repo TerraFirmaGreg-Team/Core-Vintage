@@ -42,9 +42,9 @@ import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -133,7 +133,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
     Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int expectedStage = this.type.getStageForMonth(currentMonth);
 
-    float avgTemperature = ClimateTFC.getAvgTemp(world, pos);
+    float avgTemperature = Climate.getAvgTemp(world, pos);
     float tempGauss = (int) (12f + (random.nextGaussian() / 4));
 
     switch (expectedStage) {

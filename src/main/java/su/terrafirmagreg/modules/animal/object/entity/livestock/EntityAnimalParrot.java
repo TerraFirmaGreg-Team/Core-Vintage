@@ -34,7 +34,7 @@ import net.minecraft.world.biome.Biome;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.util.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 

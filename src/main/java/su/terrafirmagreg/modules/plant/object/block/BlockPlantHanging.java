@@ -15,7 +15,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -72,7 +72,7 @@ public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
       IBlockState blockState = worldIn.getBlockState(pos.offset(face));
       Material material = blockState.getMaterial();
       if (material == Material.LEAVES || worldIn.getBlockState(pos.up()).getBlock() == this) {
-        return type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+        return type.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
                type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
       }
     }
@@ -107,7 +107,7 @@ public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     if (worldIn.isAreaLoaded(pos, 1)) {
       int j;
-      if (type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+      if (type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
           type.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
         j = state.getValue(AGE_4);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.down(), state, true)) {
@@ -126,7 +126,7 @@ public class BlockPlantHanging extends BlockPlantCreeping implements IGrowable {
 
           ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
         }
-      } else if (!type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) ||
+      } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                  !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
         j = state.getValue(AGE_4);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {

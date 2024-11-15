@@ -17,8 +17,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.registry.ItemsFL;
+import net.dries007.eerussianguy.firmalife.init.FoodFL;
+import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
 
 import org.jetbrains.annotations.NotNull;
 

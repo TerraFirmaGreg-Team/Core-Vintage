@@ -7,7 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import com.eerussianguy.firmalife.registry.ItemsFL;
+import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ItemsTFCF;

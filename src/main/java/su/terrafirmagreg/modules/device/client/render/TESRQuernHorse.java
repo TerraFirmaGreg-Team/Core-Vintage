@@ -16,7 +16,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
-import se.gory_moon.horsepower.client.renderer.TESRHPBase;
+import net.dries007.horsepower.client.renderer.TESRHPBase;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.FILLED;
 

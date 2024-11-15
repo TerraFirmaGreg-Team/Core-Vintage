@@ -1,10 +1,10 @@
 package net.dries007.tfc;
 
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.WorldUtils;
-import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -24,7 +24,11 @@ import su.terrafirmagreg.modules.core.capabilities.player.ProviderPlayer;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.skills.SmithingSkill;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
@@ -135,14 +139,10 @@ import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.util.skills.SmithingSkill;
 
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CAN_FALL;
 import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 import static su.terrafirmagreg.api.util.MathUtils.RNG;
-import static su.terrafirmagreg.api.data.Properties.BoolProp.CAN_FALL;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.COARSE_DIRT;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DIRT;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.FARMLAND;
@@ -201,7 +201,7 @@ public final class CommonEventHandler {
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onExplosionDetonate(ExplosionEvent.Detonate event) {
-    if (ConfigTFC.General.FALLABLE.explosionCausesCollapse) {
+    if (ConfigCore.MISC.FALLABLE.explosionCausesCollapse) {
       for (BlockPos pos : event.getAffectedBlocks()) {
         if (FallingBlockManager.checkCollapsingArea(event.getWorld(), pos)) {
           break;
@@ -651,7 +651,7 @@ public final class CommonEventHandler {
       // Check creature spawning - Prevents vanilla's respawning mechanic to spawn creatures outside their allowed conditions
       if (event.getEntity() instanceof ICreature creature) {
         float rainfall = ProviderChunkData.getRainfall(world, pos);
-        float temperature = ClimateTFC.getAvgTemp(world, pos);
+        float temperature = Climate.getAvgTemp(world, pos);
         float floraDensity = ProviderChunkData.getFloraDensity(world, pos);
         float floraDiversity = ProviderChunkData.getFloraDiversity(world, pos);
         Biome biome = world.getBiome(pos);

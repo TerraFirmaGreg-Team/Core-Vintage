@@ -28,7 +28,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
-import pieman.caffeineaddon.ModConfig;
+import net.dries007.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.Nullable;
 

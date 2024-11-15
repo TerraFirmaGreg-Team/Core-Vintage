@@ -24,9 +24,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
-import se.gory_moon.horsepower.util.Localization;
-import se.gory_moon.horsepower.util.color.ColorGetter;
-import se.gory_moon.horsepower.util.color.Colors;
+import net.dries007.horsepower.util.Localization;
+import net.dries007.horsepower.util.color.ColorGetter;
+import net.dries007.horsepower.util.color.Colors;
 
 import org.jetbrains.annotations.Nullable;
 

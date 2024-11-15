@@ -31,12 +31,12 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import com.eerussianguy.firmalife.ConfigFL;
-import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.recipe.CrackingRecipe;
-import com.eerussianguy.firmalife.recipe.NutRecipe;
-import com.eerussianguy.firmalife.registry.BlocksFL;
-import com.eerussianguy.firmalife.registry.ItemsFL;
+import net.dries007.eerussianguy.firmalife.ConfigFL;
+import net.dries007.eerussianguy.firmalife.init.FoodFL;
+import net.dries007.eerussianguy.firmalife.recipe.CrackingRecipe;
+import net.dries007.eerussianguy.firmalife.recipe.NutRecipe;
+import net.dries007.eerussianguy.firmalife.registry.BlocksFL;
+import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import mcp.MethodsReturnNonnullByDefault;
@@ -47,7 +47,8 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.util.calendar.Calendar;
+
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

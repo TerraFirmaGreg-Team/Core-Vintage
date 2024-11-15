@@ -34,7 +34,7 @@ import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import tfcflorae.TFCFlorae;
+import net.dries007.tfcflorae.TFCFlorae;
 
 import java.util.Map;
 import java.util.Map.Entry;

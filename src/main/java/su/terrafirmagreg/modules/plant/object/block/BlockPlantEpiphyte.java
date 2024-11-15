@@ -18,7 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -131,7 +131,7 @@ public class BlockPlantEpiphyte extends BlockPlant {
   public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
     for (EnumFacing enumfacing : DIRECTIONAL.getAllowedValues()) {
       if (this.canPlaceAt(worldIn, pos, enumfacing)) {
-        return type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+        return type.isValidTemp(Climate.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
       }
     }
 

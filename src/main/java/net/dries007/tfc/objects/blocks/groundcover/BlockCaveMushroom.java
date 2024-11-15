@@ -38,10 +38,10 @@ import net.dries007.tfc.api.capability.food.FoodHeatHandler;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.items.food.PotionEffectToHave;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import tfcflorae.util.OreDictionaryHelper;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -242,7 +242,7 @@ public class BlockCaveMushroom extends BaseBlockBush implements IGrowable, ICapa
 
   @Override
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    return ClimateTFC.getAvgTemp(worldIn, pos) >= -13f && ClimateTFC.getAvgTemp(worldIn, pos) <= 50f &&
+    return Climate.getAvgTemp(worldIn, pos) >= -13f && Climate.getAvgTemp(worldIn, pos) <= 50f &&
            ProviderChunkData.getRainfall(worldIn, pos) >= 250f && ProviderChunkData.getRainfall(worldIn, pos) <= 500;
   }
 
@@ -266,7 +266,7 @@ public class BlockCaveMushroom extends BaseBlockBush implements IGrowable, ICapa
       return;
     }
 
-    if (ClimateTFC.getActualTemp(worldIn, pos) >= -11f && ClimateTFC.getActualTemp(worldIn, pos) <= 48f &&
+    if (Climate.getActualTemp(worldIn, pos) >= -11f && Climate.getActualTemp(worldIn, pos) <= 48f &&
         Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) <= 5f) {
       int j = state.getValue(AGE_4);
 
@@ -279,7 +279,7 @@ public class BlockCaveMushroom extends BaseBlockBush implements IGrowable, ICapa
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!(ClimateTFC.getActualTemp(worldIn, pos) >= -11f && ClimateTFC.getActualTemp(worldIn, pos) <= 48f) ||
+    } else if (!(Climate.getActualTemp(worldIn, pos) >= -11f && Climate.getActualTemp(worldIn, pos) <= 48f) ||
                (Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) > 5f)) {
       int j = state.getValue(AGE_4);
 
@@ -361,7 +361,7 @@ public class BlockCaveMushroom extends BaseBlockBush implements IGrowable, ICapa
       IBlockState blockState = worldIn.getBlockState(pos.offset(face));
       if (!(blockState.getBlock() instanceof BlockLeavesTFC) &&
           (blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID)) {
-        return ClimateTFC.getAvgTemp(worldIn, pos) >= -13f && ClimateTFC.getAvgTemp(worldIn, pos) <= 50f &&
+        return Climate.getAvgTemp(worldIn, pos) >= -13f && Climate.getAvgTemp(worldIn, pos) <= 50f &&
                ProviderChunkData.getRainfall(worldIn, pos) >= 250f && ProviderChunkData.getRainfall(worldIn, pos) <= 500;
       }
     }

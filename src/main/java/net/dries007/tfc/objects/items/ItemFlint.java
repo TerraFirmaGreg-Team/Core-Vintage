@@ -12,8 +12,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
-import tfcflorae.client.GuiHandler;
-import tfcflorae.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.client.GuiHandler;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 

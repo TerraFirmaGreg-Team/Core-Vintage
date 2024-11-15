@@ -11,10 +11,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 
-import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.init.Fruit;
-import com.eerussianguy.firmalife.registry.ItemsFL;
-import lyeoj.tfcthings.init.TFCThingsItems;
+import net.dries007.eerussianguy.firmalife.init.FoodFL;
+import net.dries007.eerussianguy.firmalife.init.Fruit;
+import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
+import net.dries007.tfcthings.init.TFCThingsItems;
 import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
@@ -26,7 +26,7 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.util.agriculture.Food;
-import pieman.caffeineaddon.init.ModItems;
+import net.dries007.caffeineaddon.init.ModItems;
 
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.ALLIUM;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.ANTHURIUM;

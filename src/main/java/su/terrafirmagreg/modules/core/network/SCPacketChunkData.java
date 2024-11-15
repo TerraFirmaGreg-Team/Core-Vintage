@@ -11,7 +11,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 public class SCPacketChunkData extends BasePacket<SCPacketChunkData> {
 
@@ -63,7 +63,7 @@ public class SCPacketChunkData extends BasePacket<SCPacketChunkData> {
         }
 
         // Update climate cache
-        ClimateTFC.update(chunk.getPos(), regionalTemp, rainfall);
+        Climate.update(chunk.getPos(), regionalTemp, rainfall);
       });
     }
     return null;

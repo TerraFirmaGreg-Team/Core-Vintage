@@ -25,15 +25,15 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
-import com.eerussianguy.firmalife.ConfigFL;
-import com.eerussianguy.firmalife.FirmaLife;
-import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.recipe.CrackingRecipe;
-import com.eerussianguy.firmalife.recipe.DryingRecipe;
-import com.eerussianguy.firmalife.recipe.NutRecipe;
-import com.eerussianguy.firmalife.recipe.OvenRecipe;
-import com.eerussianguy.firmalife.recipe.PlanterRecipe;
-import com.eerussianguy.firmalife.registry.ItemsFL;
+import net.dries007.eerussianguy.firmalife.ConfigFL;
+import net.dries007.eerussianguy.firmalife.FirmaLife;
+import net.dries007.eerussianguy.firmalife.init.FoodFL;
+import net.dries007.eerussianguy.firmalife.recipe.CrackingRecipe;
+import net.dries007.eerussianguy.firmalife.recipe.DryingRecipe;
+import net.dries007.eerussianguy.firmalife.recipe.NutRecipe;
+import net.dries007.eerussianguy.firmalife.recipe.OvenRecipe;
+import net.dries007.eerussianguy.firmalife.recipe.PlanterRecipe;
+import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFluidMixing;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeTemperature;
@@ -62,8 +62,10 @@ import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.recipes.ShapelessDamageRecipe;
 import net.dries007.tfc.util.agriculture.CropTFCF;
 import net.dries007.tfc.util.agriculture.SeasonalTrees;
-import net.dries007.tfc.util.calendar.ICalendar;
-import tfcflorae.TFCFlorae;
+
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+
+import net.dries007.tfcflorae.TFCFlorae;
 
 import java.util.ArrayList;
 import java.util.List;

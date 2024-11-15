@@ -1,5 +1,10 @@
 package net.dries007.tfc;
 
+import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
+import su.terrafirmagreg.api.data.enums.InventoryCraftingMode;
+import su.terrafirmagreg.api.data.enums.QuiverSearch;
+import su.terrafirmagreg.api.data.enums.TimeTooltipMode;
+
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -7,10 +12,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.util.config.HealthDisplayFormat;
-import net.dries007.tfc.util.config.InventoryCraftingMode;
-import net.dries007.tfc.util.config.QuiverSearch;
-import net.dries007.tfc.util.config.TimeTooltipMode;
 
 import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
@@ -35,10 +36,6 @@ public final class ConfigTFC {
     @Config.Comment("Override settings")
     @Config.LangKey("config." + MODID_TFC + ".general.overrides")
     public static final OverridesCFG OVERRIDES = new OverridesCFG();
-
-    @Config.Comment("Fallable settings")
-    @Config.LangKey("config." + MODID_TFC + ".general.fallable")
-    public static final FallableCFG FALLABLE = new FallableCFG();
 
     @Config.Comment("Difficulty settings")
     @Config.LangKey("config." + MODID_TFC + ".general.difficulty")
@@ -144,58 +141,6 @@ public final class ConfigTFC {
       public boolean forceReplaceVanillaAnimals = true;
     }
 
-    public static final class FallableCFG {
-
-      @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never fall.")
-      @Config.LangKey("config." + MODID_TFC + ".general.fallable.enable")
-      public boolean enable = true;
-
-      @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never destroy ore blocks.")
-      @Config.LangKey("config." + MODID_TFC + ".general.fallable.destroyOres")
-      public boolean destroyOres = true;
-
-      @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never destroy loose items.")
-      @Config.LangKey("config." + MODID_TFC + ".general.fallable.destroyItems")
-      public boolean destroyItems = true;
-
-      @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never hurt entities.")
-      @Config.LangKey("config." + MODID_TFC + ".general.fallable.hurtEntities")
-      public boolean hurtEntities = true;
-
-      @Config.Comment("Chance that mining raw rocks triggers a collapse.")
-      @Config.RangeDouble(min = 0, max = 1)
-      @Config.LangKey("config." + MODID_TFC + ".general.fallable.collapseChance")
-      public double collapseChance = 0.1;
-
-      @Config.Comment("Chance that collapsing blocks propagate the collapse. Influenced by distance from epicenter of collapse.")
-      @Config.RangeDouble(min = 0, max = 1)
-      @Config.LangKey("config." + MODID_TFC + ".general.fallable.propagateCollapseChance")
-      public double propagateCollapseChance = 0.55;
-
-      @Config.Comment("Horizontal radius of the support range of support beams.")
-      @Config.RangeInt(min = 0, max = 8)
-      @Config.LangKey("config." + MODID_TFC + ".general.fallable.supportBeamRangeHor")
-      public int supportBeamRangeHor = 4;
-
-      @Config.Comment("Upwards support range of support beams.")
-      @Config.RangeInt(min = 0, max = 3)
-      @Config.LangKey("config." + MODID_TFC + ".general.fallable.supportBeamRangeUp")
-      public int supportBeamRangeUp = 1;
-
-      @Config.Comment("Downwards support range of support beams.")
-      @Config.RangeInt(min = 0, max = 3)
-      @Config.LangKey("config." + MODID_TFC + ".general.fallable.supportBeamRangeDown")
-      public int supportBeamRangeDown = 1;
-
-      @Config.Comment("Should chiseling raw stone blocks cause collapses?")
-      @Config.LangKey("config." + MODID_TFC + ".general.fallable.chiselCausesCollapse")
-      public boolean chiselCausesCollapse = true;
-
-      @Config.Comment("Should exploding raw stone blocks cause collapses?")
-      @Config.LangKey("config." + MODID_TFC + ".general.fallable.explosionCausesCollapse")
-      public boolean explosionCausesCollapse = true;
-    }
-
     public static final class DifficultyCFG {
 
       @Config.Comment(
@@ -217,11 +162,6 @@ public final class ConfigTFC {
       @Config.Comment("Give wrought iron weapons to vanilla mobs?")
       @Config.LangKey("config." + MODID_TFC + ".general.difficulty.giveVanillaMobsEquipment")
       public boolean giveVanillaMobsEquipment = true;
-
-      @Config.Comment("Range of pixels on either side of the working target that can be accepted to complete a smithing recipe")
-      @Config.RangeInt(min = 0)
-      @Config.LangKey("config." + MODID_TFC + ".general.difficulty.acceptableAnvilRange")
-      public int acceptableAnvilRange = 0;
     }
 
     public static final class TreeCFG {
@@ -452,26 +392,6 @@ public final class ConfigTFC {
       @Config.RangeDouble(min = 0d, max = 1d)
       @Config.LangKey("config." + MODID_TFC + ".general.misc.fireStarterChance")
       public double fireStarterChance = 0.5;
-
-      @Config.Comment("The amount of metal contained in a small ore / nugget.")
-      @Config.LangKey("config." + MODID_TFC + ".general.misc.smallOreMetalAmount")
-      @Config.RangeInt(min = 1, max = 10_000)
-      public int smallOreMetalAmount = 10;
-
-      @Config.Comment("The amount of metal contained in a poor ore.")
-      @Config.LangKey("config." + MODID_TFC + ".general.misc.poorOreMetalAmount")
-      @Config.RangeInt(min = 1, max = 10_000)
-      public int poorOreMetalAmount = 15;
-
-      @Config.Comment("The amount of metal contained in a normal ore.")
-      @Config.LangKey("config." + MODID_TFC + ".general.misc.normalOreMetalAmount")
-      @Config.RangeInt(min = 1, max = 10_000)
-      public int normalOreMetalAmount = 25;
-
-      @Config.Comment("The amount of metal contained in a rich ore.")
-      @Config.LangKey("config." + MODID_TFC + ".general.misc.richOreMetalAmount")
-      @Config.RangeInt(min = 1, max = 10_000)
-      public int richOreMetalAmount = 35;
 
       @Config.Comment("Add iron ore dictionary (ie: ingotIron, oreIron) to wrought iron items?")
       @Config.LangKey("config." + MODID_TFC + ".general.misc.dictionaryIron")

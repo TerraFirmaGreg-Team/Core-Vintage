@@ -26,7 +26,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.types.TreesTFCF;
-import tfcflorae.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.Nullable;
 

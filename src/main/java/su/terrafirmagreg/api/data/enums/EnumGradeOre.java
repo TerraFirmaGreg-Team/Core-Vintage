@@ -1,8 +1,8 @@
 package su.terrafirmagreg.api.data.enums;
 
-import net.minecraft.util.IStringSerializable;
+import su.terrafirmagreg.modules.rock.ConfigRock;
 
-import net.dries007.tfc.ConfigTFC;
+import net.minecraft.util.IStringSerializable;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -20,14 +20,14 @@ public enum EnumGradeOre implements IStringSerializable {
 
   public int getSmeltAmount() {
     return switch (this) {
-      case POOR -> ConfigTFC.General.MISC.poorOreMetalAmount;
-      case RICH -> ConfigTFC.General.MISC.richOreMetalAmount;
-      default -> ConfigTFC.General.MISC.normalOreMetalAmount;
+      case POOR -> ConfigRock.MISC.ORE.poorOreMetalAmount;
+      case RICH -> ConfigRock.MISC.ORE.richOreMetalAmount;
+      default -> ConfigRock.MISC.ORE.normalOreMetalAmount;
     };
   }
 
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return this.name().toLowerCase();
   }
 

@@ -13,7 +13,7 @@ import net.minecraft.creativetab.CreativeTabs;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.ModuleContainer.PLANT;
+import static su.terrafirmagreg.modules.Modules.PLANT;
 
 @ModuleInfo(moduleID = PLANT)
 public final class ModulePlant extends ModuleBase {

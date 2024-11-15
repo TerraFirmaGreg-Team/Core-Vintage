@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
-import lyeoj.tfcthings.model.ModelPigvil;
+import net.dries007.tfcthings.model.ModelPigvil;
 
 import org.jetbrains.annotations.Nullable;
 

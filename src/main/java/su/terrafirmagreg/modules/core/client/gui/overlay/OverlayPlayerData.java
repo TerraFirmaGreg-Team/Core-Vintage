@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.client.gui.overlay;
 
+import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
@@ -28,7 +29,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
-import net.dries007.tfc.util.config.HealthDisplayFormat;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.Color;

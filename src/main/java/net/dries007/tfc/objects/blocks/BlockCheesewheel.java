@@ -25,7 +25,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import com.eerussianguy.firmalife.ConfigFL;
+import net.dries007.eerussianguy.firmalife.ConfigFL;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.objects.te.TETickCounter;

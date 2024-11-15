@@ -14,7 +14,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import net.dries007.tfc.util.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import lombok.Getter;
 

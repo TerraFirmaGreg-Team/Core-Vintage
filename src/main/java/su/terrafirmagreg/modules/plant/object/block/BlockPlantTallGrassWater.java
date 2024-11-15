@@ -26,7 +26,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -78,7 +78,7 @@ public class BlockPlantTallGrassWater extends BlockPlantShortGrass implements IG
               ((material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == type.getWaterType()) ||
                material == Material.ICE ||
                (material == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater)))) &&
-             type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+             type.isValidTemp(Climate.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     } else {
       return this.canSustainBush(soil);
     }
@@ -175,7 +175,7 @@ public class BlockPlantTallGrassWater extends BlockPlantShortGrass implements IG
       return;
     }
 
-    if (type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+    if (type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         type.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE_4);
 
@@ -189,7 +189,7 @@ public class BlockPlantTallGrassWater extends BlockPlantShortGrass implements IG
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) ||
+    } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE_4);
 

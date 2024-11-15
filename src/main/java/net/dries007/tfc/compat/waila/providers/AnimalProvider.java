@@ -9,9 +9,9 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.IShearable;
 
 import net.dries007.tfc.compat.waila.interfaces.IWailaEntity;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.calendar.ICalendarFormatted;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
 
 import org.jetbrains.annotations.NotNull;
 

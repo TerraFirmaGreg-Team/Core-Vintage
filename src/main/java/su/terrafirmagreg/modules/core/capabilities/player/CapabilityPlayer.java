@@ -1,15 +1,14 @@
 package su.terrafirmagreg.modules.core.capabilities.player;
 
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.feature.skills.Skill;
+import su.terrafirmagreg.modules.core.feature.skills.SkillType;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-
-import net.dries007.tfc.util.skills.Skill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import org.jetbrains.annotations.Nullable;
 

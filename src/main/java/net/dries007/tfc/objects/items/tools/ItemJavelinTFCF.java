@@ -25,7 +25,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.objects.items.ItemQuiver;
-import tfcflorae.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 

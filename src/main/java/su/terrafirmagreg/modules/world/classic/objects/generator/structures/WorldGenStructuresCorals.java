@@ -16,7 +16,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
-import tfcflorae.ConfigTFCF;
+import net.dries007.tfcflorae.ConfigTFCF;
 
 import java.util.Random;
 

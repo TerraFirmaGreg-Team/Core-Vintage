@@ -36,6 +36,9 @@ public final class ConfigDeviceBlock {
   @Config.Comment("Snare")
   public final Snare SNARE = new Snare();
 
+  @Config.Comment("Anvil")
+  public final Anvil ANVIL = new Anvil();
+
   public static final class Bellows {
 
     @Config.Comment(
@@ -157,5 +160,12 @@ public final class ConfigDeviceBlock {
     @Config.Comment({"The chance for a piece of bait in a snare to be consumed if the snare fails to capture a random animal."})
     @Config.RangeDouble(min = 0.0D, max = 1.0D)
     public double baitExpireChance = 0.05D;
+  }
+
+  public static final class Anvil {
+
+    @Config.Comment("Range of pixels on either side of the working target that can be accepted to complete a smithing recipe")
+    @Config.RangeInt(min = 0)
+    public int acceptableAnvilRange = 0;
   }
 }

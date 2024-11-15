@@ -13,7 +13,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import tfcflorae.ConfigTFCF;
+import net.dries007.tfcflorae.ConfigTFCF;
 
 import java.util.Random;
 

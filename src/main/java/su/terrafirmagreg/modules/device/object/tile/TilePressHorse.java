@@ -17,10 +17,10 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 import com.google.common.collect.Lists;
-import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.recipes.HPRecipes;
-import se.gory_moon.horsepower.recipes.PressRecipe;
-import se.gory_moon.horsepower.util.Localization;
+import net.dries007.horsepower.Configs;
+import net.dries007.horsepower.recipes.HPRecipes;
+import net.dries007.horsepower.recipes.PressRecipe;
+import net.dries007.horsepower.util.Localization;
 
 import org.jetbrains.annotations.Nullable;
 

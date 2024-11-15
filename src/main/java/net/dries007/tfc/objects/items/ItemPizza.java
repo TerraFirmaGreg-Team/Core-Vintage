@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import com.eerussianguy.firmalife.FirmaLife;
+import net.dries007.eerussianguy.firmalife.FirmaLife;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 
 import org.jetbrains.annotations.Nullable;

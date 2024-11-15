@@ -6,7 +6,7 @@ import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockPlanks;
 
 import net.dries007.tfc.api.types.Tree;
-import tfcflorae.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import java.util.HashMap;
 import java.util.Map;

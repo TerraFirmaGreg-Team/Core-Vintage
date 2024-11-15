@@ -9,9 +9,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.eerussianguy.firmalife.recipe.DryingRecipe;
-import com.eerussianguy.firmalife.util.HelpersFL;
-import net.dries007.tfc.util.calendar.Calendar;
+import net.dries007.eerussianguy.firmalife.recipe.DryingRecipe;
+import net.dries007.eerussianguy.firmalife.util.HelpersFL;
+
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 

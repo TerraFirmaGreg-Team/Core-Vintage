@@ -39,9 +39,9 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -208,7 +208,7 @@ public final class EntitySpawnerWorldData {
                                              Random randomIn) {
     final BlockPos chunkBlockPos = new BlockPos(centerX, 0, centerZ);
 
-    final float temperature = ClimateTFC.getAvgTemp(worldIn, chunkBlockPos);
+    final float temperature = Climate.getAvgTemp(worldIn, chunkBlockPos);
     final float rainfall = ProviderChunkData.getRainfall(worldIn, chunkBlockPos);
     final float floraDensity = ProviderChunkData.getFloraDensity(worldIn, chunkBlockPos);
     final float floraDiversity = ProviderChunkData.getFloraDiversity(worldIn, chunkBlockPos);

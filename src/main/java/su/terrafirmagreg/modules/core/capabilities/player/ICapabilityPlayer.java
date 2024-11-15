@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.core.capabilities.player;
 
+import su.terrafirmagreg.modules.core.feature.skills.Skill;
+import su.terrafirmagreg.modules.core.feature.skills.SkillType;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -10,8 +13,6 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.network.PacketPlayerDataUpdate;
-import net.dries007.tfc.util.skills.Skill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -84,8 +85,7 @@ public interface ICapabilityPlayer extends ICapabilitySerializable<NBTTagCompoun
   default void updateAndSync() {
     EntityPlayer player = getPlayer();
     if (player instanceof EntityPlayerMP entityPlayerMP) {
-      TerraFirmaCraft.getNetwork()
-                     .sendTo(new PacketPlayerDataUpdate(serializeNBT()), entityPlayerMP);
+      TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(serializeNBT()), entityPlayerMP);
     }
   }
 

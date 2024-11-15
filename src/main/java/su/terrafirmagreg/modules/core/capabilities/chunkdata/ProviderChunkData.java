@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.core.capabilities.chunkdata;
 
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
@@ -11,11 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -89,11 +88,6 @@ public final class ProviderChunkData implements ICapabilityChunkData {
   private float floraDensity;
   @Setter
   private float floraDiversity;
-  /**
-   * Рабочая нагрузка чанка.
-   */
-  @Setter
-  private int chunkWorkage;
   /**
    * Количество тиков защиты от появления враждебных мобов. Начинается с отрицательного значения и увеличивается при наличии игроков в области.
    */
@@ -300,36 +294,6 @@ public final class ProviderChunkData implements ICapabilityChunkData {
     return protectedTicks - (24 * ICalendar.TICKS_IN_HOUR) - Calendar.PLAYER_TIME.getTicks();
   }
 
-  @Override
-  public boolean canWork(int amount) {
-    return ConfigTFC.Devices.SLUICE.maxWorkChunk == 0
-           || chunkWorkage <= ConfigTFC.Devices.SLUICE.maxWorkChunk + amount;
-  }
-
-  /**
-   * Увеличивает количество работы на указанное значение.
-   *
-   * @param amount Количество работы для добавления.
-   */
-  public void addWork(int amount) {
-    chunkWorkage += amount;
-  }
-
-  /**
-   * Увеличивает количество работы на 1.
-   */
-  public void addWork() {
-    addWork(1);
-  }
-
-  /**
-   * Устанавливает количество работы.
-   *
-   * @param amount Количество работы.
-   */
-  public void setWork(int amount) {
-    chunkWorkage = amount;
-  }
 
   /**
    * Увеличивает защиту спавна на указанный множитель.
@@ -396,8 +360,6 @@ public final class ProviderChunkData implements ICapabilityChunkData {
     this.averageTemp = avgTemp;
     this.floraDensity = floraDensity;
     this.floraDiversity = floraDiversity;
-
-    this.chunkWorkage = 0;
 
     this.lastUpdateTick = Calendar.PLAYER_TIME.getTicks();
     this.lastUpdateYear = Calendar.CALENDAR_TIME.getTotalYears();

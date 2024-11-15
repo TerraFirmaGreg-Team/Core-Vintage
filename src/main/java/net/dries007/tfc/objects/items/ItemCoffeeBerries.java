@@ -12,8 +12,8 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import pieman.caffeineaddon.CaffeineAddon;
-import pieman.caffeineaddon.init.ModItems;
+import net.dries007.caffeineaddon.CaffeineAddon;
+import net.dries007.caffeineaddon.init.ModItems;
 
 import org.jetbrains.annotations.Nullable;
 

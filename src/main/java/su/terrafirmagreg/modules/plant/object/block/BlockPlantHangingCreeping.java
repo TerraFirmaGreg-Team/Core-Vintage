@@ -20,7 +20,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -91,7 +91,7 @@ public class BlockPlantHangingCreeping extends BlockPlantCreeping implements IGr
       if (material == Material.LEAVES || material == Material.GROUND || material == Material.ROCK || material == Material.WOOD ||
           BlockHelper.isGround(blockState) || worldIn.getBlockState(pos.up())
                                                      .getBlock() == this) {
-        return type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+        return type.isValidTemp(Climate.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
       }
     }
     return false;
@@ -148,7 +148,7 @@ public class BlockPlantHangingCreeping extends BlockPlantCreeping implements IGr
       return;
     }
 
-    if (type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+    if (type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         type.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE_4);
 
@@ -168,7 +168,7 @@ public class BlockPlantHangingCreeping extends BlockPlantCreeping implements IGr
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) ||
+    } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE_4);
 

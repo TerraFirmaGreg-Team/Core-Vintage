@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.recipes;
 
+import su.terrafirmagreg.modules.core.feature.skills.SmithingSkill;
+
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -11,7 +13,6 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.util.skills.SmithingSkill;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -72,7 +72,7 @@ import net.dries007.tfc.util.agriculture.BerryBushTFCF;
 import net.dries007.tfc.util.agriculture.CropTFCF;
 import net.dries007.tfc.util.agriculture.FoodDataTFCF;
 import net.dries007.tfc.util.agriculture.SeasonalTrees;
-import tfcflorae.ConfigTFCF;
+import net.dries007.tfcflorae.ConfigTFCF;
 
 import lombok.Getter;
 

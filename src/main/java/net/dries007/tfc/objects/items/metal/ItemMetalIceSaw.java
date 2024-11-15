@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import pieman.caffeineaddon.ModConfig;
+import net.dries007.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

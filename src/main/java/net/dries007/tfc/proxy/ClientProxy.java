@@ -16,6 +16,7 @@ import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 @SuppressWarnings("unused")
 @SideOnly(Side.CLIENT)
@@ -60,8 +61,8 @@ public class ClientProxy implements IProxy {
   @NotNull
   @Override
   public String getDayName(int dayOfMonth, long totalDays) {
-    String date = net.dries007.tfc.util.calendar.Calendar.CALENDAR_TIME.getMonthOfYear().name() + dayOfMonth;
-    String birthday = net.dries007.tfc.util.calendar.Calendar.BIRTHDAYS.get(date);
+    String date = Calendar.CALENDAR_TIME.getMonthOfYear().name() + dayOfMonth;
+    String birthday = Calendar.BIRTHDAYS.get(date);
     if (birthday != null) {
       return birthday;
     }

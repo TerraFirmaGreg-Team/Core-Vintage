@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.ModuleContainer.WORLD;
+import static su.terrafirmagreg.modules.Modules.WORLD;
 
 @ModuleInfo(moduleID = WORLD)
 public final class ModuleWorld extends ModuleBase {

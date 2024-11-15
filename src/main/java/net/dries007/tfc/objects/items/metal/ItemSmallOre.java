@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.core.capabilities.heat.ProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.rock.ConfigRock;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -77,7 +78,7 @@ public class ItemSmallOre extends ItemTFC implements ICapabilityMetal {
 
   @Override
   public int getSmeltAmount(ItemStack stack) {
-    return ConfigTFC.General.MISC.smallOreMetalAmount;
+    return ConfigRock.MISC.ORE.smallOreMetalAmount;
   }
 
   @Override

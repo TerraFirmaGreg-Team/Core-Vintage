@@ -25,8 +25,8 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 
 import net.dries007.tfc.objects.blocks.plants.property.ITallPlant;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -61,7 +61,7 @@ public class BlockPlantTallGrass extends BlockPlantShortGrass implements IGrowab
     } else {
       return soil.getBlock()
                  .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) &&
-             type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+             type.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
              type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
   }
@@ -95,7 +95,7 @@ public class BlockPlantTallGrass extends BlockPlantShortGrass implements IGrowab
     }
 
     int age;
-    if (type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+    if (type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         type.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       age = state.getValue(AGE_4);
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
@@ -108,7 +108,7 @@ public class BlockPlantTallGrass extends BlockPlantShortGrass implements IGrowab
 
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) ||
+    } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       age = state.getValue(AGE_4);
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {

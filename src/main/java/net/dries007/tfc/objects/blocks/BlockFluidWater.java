@@ -9,9 +9,9 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.util.climate.ITemperatureBlock;
-import net.dries007.tfc.util.climate.IceMeltHandler;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.ITemperatureBlock;
+import su.terrafirmagreg.modules.core.feature.climate.IceMeltHandler;
 
 public class BlockFluidWater extends BlockFluidTFC implements ITemperatureBlock {
 
@@ -29,7 +29,7 @@ public class BlockFluidWater extends BlockFluidTFC implements ITemperatureBlock 
 
   @Override
   public void onTemperatureUpdateTick(World world, BlockPos pos, IBlockState state) {
-    if (world.getLightFor(EnumSkyBlock.BLOCK, pos) < 10 && ClimateTFC.getActualTemp(world, pos) < freezeThreshold && state.getValue(LEVEL) == 0) {
+    if (world.getLightFor(EnumSkyBlock.BLOCK, pos) < 10 && Climate.getActualTemp(world, pos) < freezeThreshold && state.getValue(LEVEL) == 0) {
       for (EnumFacing face : EnumFacing.HORIZONTALS) {
         if (world.getBlockState(pos.offset(face)).getBlock() != this) {
           world.setBlockState(pos, isSalt ? BlocksTFC.SEA_ICE.getDefaultState() : Blocks.ICE.getDefaultState());

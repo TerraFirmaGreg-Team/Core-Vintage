@@ -1,6 +1,8 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.feature.skills.SimpleSkill;
+import su.terrafirmagreg.modules.core.feature.skills.SkillType;
 
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
@@ -15,8 +17,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.skills.SimpleSkill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import java.util.Random;
 

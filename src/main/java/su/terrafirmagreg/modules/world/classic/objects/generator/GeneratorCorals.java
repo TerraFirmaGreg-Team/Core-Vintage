@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import java.util.Random;
 
@@ -40,7 +40,7 @@ public class GeneratorCorals implements IWorldGenerator {
     var data = CapabilityChunkData.get(world, chunkBlockPos);
 
     Biome b = world.getBiome(chunkBlockPos);
-    float avgTemperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
+    float avgTemperature = Climate.getAvgTemp(world, chunkBlockPos);
     float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
     float floraDensity = data.getFloraDensity();
     float floraDiversity = data.getFloraDiversity();

@@ -5,6 +5,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.feature.skills.Skill;
+import su.terrafirmagreg.modules.core.feature.skills.SkillType;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
@@ -20,8 +22,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import net.dries007.tfc.api.capability.food.NutritionStats;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.skills.Skill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import org.jetbrains.annotations.Nullable;
 

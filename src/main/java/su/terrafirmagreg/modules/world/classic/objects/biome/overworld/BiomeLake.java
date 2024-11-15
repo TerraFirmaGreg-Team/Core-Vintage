@@ -1,9 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.biome.overworld;
 
 import su.terrafirmagreg.api.base.biome.BaseBiome;
-import su.terrafirmagreg.api.base.biome.BaseBiomeDecorator;
+import su.terrafirmagreg.modules.world.classic.objects.biome.overworld.decorator.BiomeDecorator;
 
-import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraftforge.common.BiomeDictionary;
 
 import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.OCEAN;
@@ -19,8 +18,8 @@ public class BiomeLake extends BaseBiome {
   }
 
   @Override
-  public BiomeDecorator createBiomeDecorator() {
-    return new BaseBiomeDecorator(4, 5);
+  public net.minecraft.world.biome.BiomeDecorator createBiomeDecorator() {
+    return new BiomeDecorator(4, 5);
   }
 
   @Override

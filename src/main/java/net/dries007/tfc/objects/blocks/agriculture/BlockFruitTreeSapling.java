@@ -25,8 +25,8 @@ import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -70,7 +70,7 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
 
     if (world.isRemote) {return;}
     TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
-      float temp = ClimateTFC.getActualTemp(world, pos);
+      float temp = Climate.getActualTemp(world, pos);
       float rainfall = ProviderChunkData.getRainfall(world, pos);
       long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
       if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier) && tree.isValidForGrowth(temp, rainfall)) {
@@ -146,7 +146,7 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
 
   @Override
   public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-    float temp = ClimateTFC.getActualTemp(world, pos);
+    float temp = Climate.getActualTemp(world, pos);
     float rainfall = ProviderChunkData.getRainfall(world, pos);
     boolean canGrow = tree.isValidForGrowth(temp, rainfall);
     return canGrow ? GrowthStatus.GROWING : GrowthStatus.NOT_GROWING;

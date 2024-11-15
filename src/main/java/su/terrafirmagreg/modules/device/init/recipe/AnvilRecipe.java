@@ -14,7 +14,7 @@ import static net.dries007.tfc.api.types.Metal.ItemType.SHEET;
 import static net.dries007.tfc.util.forge.ForgeRule.BEND_SECOND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.BEND_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.PUNCH_LAST;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
+import static su.terrafirmagreg.modules.core.feature.skills.SmithingSkill.Type.GENERAL;
 
 public class AnvilRecipe {
 

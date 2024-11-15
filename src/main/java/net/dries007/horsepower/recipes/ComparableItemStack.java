@@ -1,0 +1,38 @@
+package net.dries007.horsepower.recipes;
+
+import su.terrafirmagreg.api.util.StackUtils;
+
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+
+public class ComparableItemStack {
+
+  private final ItemStack stack;
+
+  public ComparableItemStack(ItemStack stack) {
+    this.stack = stack;
+  }
+
+  @Override
+  public int hashCode() {
+    return StackUtils.getItemStackHashCode(stack);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof ComparableItemStack that)) {
+      return false;
+    }
+
+    return this.hashCode() == that.hashCode() &&
+           (that.stack.getMetadata() == OreDictionary.WILDCARD_VALUE ? stack.getItem() == that.stack.getItem() : stack.isItemEqual(that.stack));
+  }
+
+  @Override
+  public String toString() {
+    return stack.toString();
+  }
+}

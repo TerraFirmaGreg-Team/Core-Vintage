@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core.feature.falling;
 
 import su.terrafirmagreg.api.library.types.variant.Variant;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.CapabilityWorldTracker;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.spi.CollapseData;
 import su.terrafirmagreg.modules.core.object.entity.EntityFallingBlock;
@@ -23,7 +24,6 @@ import net.minecraft.world.World;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.client.TFCSounds;
 
 import org.jetbrains.annotations.NotNull;
@@ -142,7 +142,7 @@ public class FallingBlockManager {
   }
 
   public static boolean shouldFall(World world, BlockPos posToFallFrom, BlockPos originalPos, IBlockState originalState, boolean ignoreSupportChecks) {
-    return ConfigTFC.General.FALLABLE.enable && canFallThrough(world, posToFallFrom.down(), originalState.getMaterial()) &&
+    return ConfigCore.MISC.FALLABLE.enable && canFallThrough(world, posToFallFrom.down(), originalState.getMaterial()) &&
            (ignoreSupportChecks || !BlockWoodSupport.isBeingSupported(world, originalPos));
   }
 
@@ -269,7 +269,7 @@ public class FallingBlockManager {
       return false; // First, let's check if this area is loaded and is on server
     }
     if (RNG.nextDouble()
-        < ConfigTFC.General.FALLABLE.collapseChance) // Then, we check rng if a collapse should trigger
+        < ConfigCore.MISC.FALLABLE.collapseChance) // Then, we check rng if a collapse should trigger
     {
       //Rng the radius
       int radX = (RNG.nextInt(5) + 4) / 2;
@@ -319,7 +319,7 @@ public class FallingBlockManager {
           world, posAt)) {
           // Check for a possible collapse
           if (posAt.distanceSq(centerPoint) < radiusSquared &&
-              world.rand.nextFloat() < ConfigTFC.General.FALLABLE.propagateCollapseChance) {
+              world.rand.nextFloat() < ConfigCore.MISC.FALLABLE.propagateCollapseChance) {
             // This column has started to collapse. Mark the next block above as unstable for the "follow up"
             IBlockState resultState = specAt.getResultingState(stateAt);
             world.setBlockState(posAt, resultState);

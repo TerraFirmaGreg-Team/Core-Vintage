@@ -18,8 +18,8 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Metal;
-import tfctech.TFCTech;
-import tfctech.TechConfig;
+import net.dries007.tfctech.TFCTech;
+import net.dries007.tfctech.TechConfig;
 
 import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 

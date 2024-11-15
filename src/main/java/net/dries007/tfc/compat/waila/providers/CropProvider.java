@@ -18,7 +18,7 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +39,7 @@ public class CropProvider implements IWailaBlock {
         ICrop crop = blockCropTFC.getCrop();
 
         boolean isWild = state.getValue(WILD);
-        float temp = ClimateTFC.getActualTemp(world, pos, -tile.getLastUpdateTick());
+        float temp = Climate.getActualTemp(world, pos, -tile.getLastUpdateTick());
         float rainfall = ProviderChunkData.getRainfall(world, pos);
 
         if (isWild) {

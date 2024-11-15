@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.registry.provider.IProviderModel;
 
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
-import pieman.caffeineaddon.CaffeineAddon;
-import pieman.caffeineaddon.init.ModItems;
+import net.dries007.caffeineaddon.CaffeineAddon;
+import net.dries007.caffeineaddon.init.ModItems;
 
 public class ItemPotteryCA extends ItemPottery implements IProviderModel {
 

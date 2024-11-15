@@ -44,8 +44,8 @@ import net.dries007.tfc.util.agriculture.CropTFCF;
 import net.dries007.tfc.util.agriculture.FoodDataTFCF;
 import net.dries007.tfc.util.agriculture.FruitTree;
 import net.dries007.tfc.util.agriculture.FruitsTFCF;
-import tfcflorae.TFCFlorae;
-import tfcflorae.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.TFCFlorae;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import lombok.Getter;
 

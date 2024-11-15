@@ -1,5 +1,9 @@
 package net.dries007.tfc.util.agriculture;
 
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.skills.Skill;
+import su.terrafirmagreg.modules.core.feature.skills.SkillTier;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorWildCrops;
 
 import net.minecraft.client.gui.GuiScreen;
@@ -18,10 +22,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockCropSpreading;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.objects.items.food.ItemFoodTFCF;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.skills.Skill;
-import net.dries007.tfc.util.skills.SkillTier;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

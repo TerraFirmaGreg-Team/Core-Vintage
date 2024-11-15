@@ -15,10 +15,10 @@ import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import se.gory_moon.horsepower.recipes.HPRecipeBase;
-import se.gory_moon.horsepower.recipes.HPRecipes;
-import se.gory_moon.horsepower.tileentity.TileHPBase;
-import se.gory_moon.horsepower.util.Localization;
+import net.dries007.horsepower.recipes.HPRecipeBase;
+import net.dries007.horsepower.recipes.HPRecipes;
+import net.dries007.horsepower.tileentity.TileHPBase;
+import net.dries007.horsepower.util.Localization;
 
 import org.jetbrains.annotations.Nullable;
 

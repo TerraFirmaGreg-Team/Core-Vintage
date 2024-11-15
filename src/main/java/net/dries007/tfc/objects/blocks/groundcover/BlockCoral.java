@@ -37,7 +37,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -216,10 +216,10 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
       IBlockState up = worldIn.getBlockState(pos.up());
       IBlockState blockState = worldIn.getBlockState(pos.offset(face));
       if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
-              BlockHelper.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
+           BlockHelper.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
           (BlockHelper.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
            up.getBlock() instanceof BlockCoral)) {
-        return ClimateTFC.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
+        return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
       }
     }
     return false;
@@ -353,10 +353,10 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
       IBlockState up = worldIn.getBlockState(pos.up());
       IBlockState blockState = worldIn.getBlockState(pos.offset(face));
       if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID ||
-              BlockHelper.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
+           BlockHelper.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
           (BlockHelper.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
            up.getBlock() instanceof BlockCoral)) {
-        return ClimateTFC.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
+        return Climate.getAvgTemp(worldIn, pos) >= 10f && ProviderChunkData.getRainfall(worldIn, pos) >= 100f;
       }
     }
     return false;

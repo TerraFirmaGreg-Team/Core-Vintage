@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.module;
 
-import su.terrafirmagreg.modules.ModuleContainer;
+import su.terrafirmagreg.modules.Modules;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,7 +17,7 @@ public @interface ModuleInfo {
   /**
    * The ID of this module. Must be unique within its container.
    */
-  ModuleContainer moduleID();
+  Modules moduleID();
 
   /**
    * Whether this module is the "core" module for its container. Each container must have exactly one core module, which will be loaded before all other modules

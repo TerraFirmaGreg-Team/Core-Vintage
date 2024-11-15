@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.ModuleContainer.DEVICE;
+import static su.terrafirmagreg.modules.Modules.DEVICE;
 
 @ModuleInfo(moduleID = DEVICE)
 public final class ModuleDevice extends ModuleBase {

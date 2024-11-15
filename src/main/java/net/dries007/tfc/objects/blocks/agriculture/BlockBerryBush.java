@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 
 import net.minecraft.block.Block;
@@ -32,9 +32,9 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -143,7 +143,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     if (!world.isRemote) {
       var tile = TileUtils.getTile(world, pos, TETickCounter.class);
       tile.ifPresent(tileTickCounter -> {
-        float temp = ClimateTFC.getActualTemp(world, pos);
+        float temp = Climate.getActualTemp(world, pos);
         float rainfall = ProviderChunkData.getRainfall(world, pos);
         long hours = tileTickCounter.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
         if (hours > (bush.getGrowthTime() * ConfigTFC.General.FOOD.berryBushGrowthTimeModifier) && bush.isValidForGrowth(temp, rainfall)) {
@@ -245,7 +245,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 
   @Override
   public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-    float temp = ClimateTFC.getActualTemp(world, pos);
+    float temp = Climate.getActualTemp(world, pos);
     float rainfall = ProviderChunkData.getRainfall(world, pos);
     boolean canGrow = bush.isValidForGrowth(temp, rainfall);
     if (state.getValue(FRUITING)) {

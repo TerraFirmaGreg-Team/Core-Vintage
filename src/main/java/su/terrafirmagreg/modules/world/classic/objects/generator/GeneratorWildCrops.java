@@ -14,8 +14,8 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,7 +43,7 @@ public class GeneratorWildCrops implements IWorldGenerator {
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
         Collections.shuffle(CROPS);
-        float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
+        float temperature = Climate.getAvgTemp(world, chunkBlockPos);
         float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
 
         ICrop crop = CROPS.stream()

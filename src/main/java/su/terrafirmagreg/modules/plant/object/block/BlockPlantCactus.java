@@ -20,7 +20,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -59,7 +59,7 @@ public class BlockPlantCactus extends BlockPlantTall {
     }
 
     int age;
-    if (type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+    if (type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         type.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       age = state.getValue(AGE_4);
 
@@ -105,7 +105,7 @@ public class BlockPlantCactus extends BlockPlantTall {
       }
 
       return flag && soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) &&
-             type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
+             type.isValidTemp(Climate.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
     return this.canSustainBush(soil);
   }

@@ -26,7 +26,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import com.eerussianguy.firmalife.recipe.DryingRecipe;
+import net.dries007.eerussianguy.firmalife.recipe.DryingRecipe;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.te.TELeafMat;
 

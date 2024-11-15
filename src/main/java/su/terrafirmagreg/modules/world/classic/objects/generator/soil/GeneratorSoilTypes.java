@@ -10,8 +10,8 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import net.dries007.tfc.util.climate.ClimateTFC;
-import tfcflorae.ConfigTFCF;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import net.dries007.tfcflorae.ConfigTFCF;
 
 import java.util.Random;
 
@@ -33,7 +33,7 @@ public class GeneratorSoilTypes implements IWorldGenerator {
     final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
     var data = CapabilityChunkData.get(world, chunkBlockPos);
 
-    final float avgTemperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
+    final float avgTemperature = Climate.getAvgTemp(world, chunkBlockPos);
     final float rainfall = ProviderChunkData.getRainfall(world, chunkBlockPos);
     final float drainage = ProviderChunkData.getDrainage(world, chunkBlockPos);
     final float floraDensity = data.getFloraDensity(); // Use for various plant based decoration (tall grass, those vanilla jungle shrub things, etc.)

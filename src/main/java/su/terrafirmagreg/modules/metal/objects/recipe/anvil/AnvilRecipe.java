@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.recipe.anvil;
 
+import su.terrafirmagreg.modules.core.feature.skills.SmithingSkill;
 import su.terrafirmagreg.modules.metal.objects.tile.TileMetalAnvil;
 
 import net.minecraft.item.ItemStack;
@@ -10,7 +11,6 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeSteps;
-import net.dries007.tfc.util.skills.SmithingSkill;
 
 import org.jetbrains.annotations.Nullable;
 

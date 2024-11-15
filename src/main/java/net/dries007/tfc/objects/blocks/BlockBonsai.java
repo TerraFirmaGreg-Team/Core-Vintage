@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.Nullable;
 

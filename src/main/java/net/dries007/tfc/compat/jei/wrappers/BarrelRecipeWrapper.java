@@ -15,7 +15,7 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFluidMixing;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import java.util.ArrayList;
 import java.util.Collections;

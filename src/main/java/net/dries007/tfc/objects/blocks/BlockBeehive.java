@@ -30,13 +30,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.registry.ItemsFL;
+import net.dries007.eerussianguy.firmalife.init.FoodFL;
+import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -209,7 +210,7 @@ public class BlockBeehive extends Block implements ICapabilitySize {
   }
 
   private boolean isValid(World world, BlockPos pos, TEHangingPlanter tile) {
-    return tile.isClimateValid() || ClimateTFC.getDailyTemp(world, pos) > 10;
+    return tile.isClimateValid() || Climate.getDailyTemp(world, pos) > 10;
   }
 
   @Override

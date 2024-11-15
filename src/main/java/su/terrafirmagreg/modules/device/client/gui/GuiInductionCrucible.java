@@ -7,7 +7,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 
-import tfctech.client.TechGuiHandler;
+import net.dries007.tfctech.client.TechGuiHandler;
 
 public class GuiInductionCrucible extends GuiCrucible {
 

@@ -17,12 +17,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import com.eerussianguy.firmalife.registry.BlocksFL;
+import net.dries007.eerussianguy.firmalife.registry.BlocksFL;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
-import net.dries007.tfc.util.calendar.ICalendar;
+
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.Nullable;
 

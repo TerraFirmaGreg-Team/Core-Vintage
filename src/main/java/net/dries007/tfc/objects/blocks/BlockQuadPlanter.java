@@ -21,8 +21,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import com.eerussianguy.firmalife.recipe.PlanterRecipe;
-import com.eerussianguy.firmalife.render.UnlistedCropProperty;
+import net.dries007.eerussianguy.firmalife.recipe.PlanterRecipe;
+import net.dries007.eerussianguy.firmalife.render.UnlistedCropProperty;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 import net.dries007.tfc.objects.te.TEPlanter;

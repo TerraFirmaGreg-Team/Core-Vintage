@@ -25,8 +25,10 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.objects.fluids.properties.MetalProperty;
-import net.dries007.tfc.util.calendar.ICalendar;
-import pieman.caffeineaddon.potion.PotionEffects;
+
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+
+import net.dries007.caffeineaddon.potion.PotionEffects;
 
 import org.jetbrains.annotations.NotNull;
 

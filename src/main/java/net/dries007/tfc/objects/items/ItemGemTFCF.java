@@ -9,7 +9,7 @@ import net.minecraft.util.NonNullList;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.GemTFCF;
-import tfcflorae.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

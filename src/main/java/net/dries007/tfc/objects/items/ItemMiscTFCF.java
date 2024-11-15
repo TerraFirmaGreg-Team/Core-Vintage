@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.item.ItemStack;
 
-import tfcflorae.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 

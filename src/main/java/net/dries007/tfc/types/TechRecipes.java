@@ -41,7 +41,7 @@ import net.dries007.tfc.objects.items.metal.ItemTechMetal;
 import net.dries007.tfc.objects.recipes.ShapelessDamageRecipe;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.forge.ForgeRule;
-import tfctech.TechConfig;
+import net.dries007.tfctech.TechConfig;
 
 import java.util.ArrayList;
 import java.util.List;

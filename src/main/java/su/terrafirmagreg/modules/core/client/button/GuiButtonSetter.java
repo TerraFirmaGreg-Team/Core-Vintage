@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.GlStateManager;
 
 import org.jetbrains.annotations.NotNull;
 
-import tfctech.client.TechGuiHandler;
+import net.dries007.tfctech.client.TechGuiHandler;
 
 public class GuiButtonSetter extends GuiButton {
 

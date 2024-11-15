@@ -60,10 +60,6 @@ public interface ICapabilityChunkData extends ICapabilitySerializable<NBTTagComp
 
   void setFloraDiversity(float diversity);
 
-  int getChunkWorkage();
-
-  void setChunkWorkage(int workage);
-
   long getSpawnProtection();
 
   long getProtectedTicks();
@@ -77,14 +73,6 @@ public interface ICapabilityChunkData extends ICapabilitySerializable<NBTTagComp
   long getLastUpdateYear();
 
   void setLastUpdateYear(long year);
-
-  boolean canWork(int amount);
-
-  void addWork(int amount);
-
-  void addWork();
-
-  void setWork(int amount);
 
   void addSpawnProtection(int multiplier);
 

@@ -5,8 +5,8 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.item.ItemStack;
 
-import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.registry.ItemsFL;
+import net.dries007.eerussianguy.firmalife.init.FoodFL;
+import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
 import mcp.MethodsReturnNonnullByDefault;
 
 @MethodsReturnNonnullByDefault

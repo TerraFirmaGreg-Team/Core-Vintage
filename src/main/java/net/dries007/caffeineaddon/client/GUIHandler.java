@@ -1,0 +1,45 @@
+package net.dries007.caffeineaddon.client;
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+
+import net.dries007.tfc.objects.te.TEDryingMat;
+
+public class GUIHandler implements IGuiHandler {
+
+  public static final int DRYINGMATGUI = 0;
+
+  @Override
+  public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    BlockPos pos = new BlockPos(x, y, z);
+    ItemStack stack = player.getHeldItemMainhand();
+    if (ID == DRYINGMATGUI) {
+      return TileUtils.getTile(world, pos, TEDryingMat.class)
+                      .map(tile -> new ContainerDryingMat(player.inventory, tile))
+                      .orElse(null);
+    }
+    return null;
+  }
+
+  @Override
+  public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    Container container = getServerGuiElement(ID, player, world, x, y, z);
+    BlockPos pos = new BlockPos(x, y, z);
+    if (ID == DRYINGMATGUI) {
+      return TileUtils.getTile(world, pos, TEDryingMat.class)
+                      .map(tile -> new GuiDryingMat(container, player.inventory, tile,
+                                                    world.getBlockState(new BlockPos(x, y, z))
+                                                         .getBlock()
+                                                         .getTranslationKey())).orElse(null);
+
+    }
+    return null;
+  }
+
+}

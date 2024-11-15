@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core.capabilities.worldtracker;
 
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.spi.CollapseData;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 
@@ -15,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.client.TFCSounds;
 
 import org.jetbrains.annotations.NotNull;
@@ -53,7 +53,7 @@ public class ProviderWorldTracker
                 specAt.canCollapse(world, posAt)
                 && posAt.distanceSq(collapse.centerPos) < collapse.radiusSquared &&
                 MathUtils.RNG.nextFloat()
-                < ConfigTFC.General.FALLABLE.propagateCollapseChance) {
+                < ConfigCore.MISC.FALLABLE.propagateCollapseChance) {
               IBlockState fallState = specAt.getResultingState(stateAt);
               world.setBlockState(posAt, fallState);
               FallingBlockManager.checkFalling(world, posAt, fallState, true);

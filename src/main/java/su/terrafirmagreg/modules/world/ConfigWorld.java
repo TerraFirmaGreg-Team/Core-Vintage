@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.world;
 
+import su.terrafirmagreg.api.data.enums.HemisphereType;
+import su.terrafirmagreg.api.data.enums.TemperatureMode;
+
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -7,9 +10,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
-
-import net.dries007.tfc.util.config.HemisphereType;
-import net.dries007.tfc.util.config.TemperatureMode;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 import static su.terrafirmagreg.Tags.MOD_NAME;

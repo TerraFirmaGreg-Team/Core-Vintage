@@ -27,8 +27,8 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-import tfcflorae.client.GuiHandler;
-import tfcflorae.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.client.GuiHandler;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

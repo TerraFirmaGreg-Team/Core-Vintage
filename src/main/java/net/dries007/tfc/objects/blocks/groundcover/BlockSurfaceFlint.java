@@ -30,8 +30,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import tfcflorae.client.GuiHandler;
-import tfcflorae.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.client.GuiHandler;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

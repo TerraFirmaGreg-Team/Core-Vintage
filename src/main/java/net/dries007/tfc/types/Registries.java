@@ -11,12 +11,12 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
 
-import com.eerussianguy.firmalife.recipe.CrackingRecipe;
-import com.eerussianguy.firmalife.recipe.DryingRecipe;
-import com.eerussianguy.firmalife.recipe.NutRecipe;
-import com.eerussianguy.firmalife.recipe.OvenRecipe;
-import com.eerussianguy.firmalife.recipe.PlanterRecipe;
-import com.eerussianguy.firmalife.recipe.StrainingRecipe;
+import net.dries007.eerussianguy.firmalife.recipe.CrackingRecipe;
+import net.dries007.eerussianguy.firmalife.recipe.DryingRecipe;
+import net.dries007.eerussianguy.firmalife.recipe.NutRecipe;
+import net.dries007.eerussianguy.firmalife.recipe.OvenRecipe;
+import net.dries007.eerussianguy.firmalife.recipe.PlanterRecipe;
+import net.dries007.eerussianguy.firmalife.recipe.StrainingRecipe;
 import net.dries007.tfc.api.recipes.AlloyRecipe;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;

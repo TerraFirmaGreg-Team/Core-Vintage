@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
-import tfcflorae.ConfigTFCF;
+import net.dries007.tfcflorae.ConfigTFCF;
 
 import java.util.Random;
 

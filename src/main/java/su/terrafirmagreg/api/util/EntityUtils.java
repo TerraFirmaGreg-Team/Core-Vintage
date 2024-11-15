@@ -21,7 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.Lists;
-import se.gory_moon.horsepower.Configs;
+import net.dries007.horsepower.Configs;
 
 import org.jetbrains.annotations.Nullable;
 

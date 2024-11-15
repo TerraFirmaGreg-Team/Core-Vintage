@@ -41,9 +41,9 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.util.agriculture.CropTFCF;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -280,7 +280,7 @@ public class BlockPlant extends BaseBlockBush implements IPlantBlock {
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     if (!worldIn.isAreaLoaded(pos, 1)) {return;}
     int age;
-    if (type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+    if (type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         type.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
 
       age = state.getValue(AGE_4);
@@ -292,7 +292,7 @@ public class BlockPlant extends BaseBlockBush implements IPlantBlock {
 
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+    } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) || !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       age = state.getValue(AGE_4);
       if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
         if (age > 0) {
@@ -311,7 +311,7 @@ public class BlockPlant extends BaseBlockBush implements IPlantBlock {
     IBlockState soil = worldIn.getBlockState(pos.down());
     if (state.getBlock() == this) {
       return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) &&
-             type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+             type.isValidTemp(Climate.getActualTemp(worldIn, pos)) &&
              type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
     }
 

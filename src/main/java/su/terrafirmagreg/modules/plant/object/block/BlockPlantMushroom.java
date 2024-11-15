@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import java.util.Random;
 
@@ -37,7 +37,7 @@ public class BlockPlantMushroom extends BlockPlant implements IGrowable {
       return;
     }
 
-    if (type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+    if (type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
         type.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE_4);
 
@@ -50,7 +50,7 @@ public class BlockPlantMushroom extends BlockPlant implements IGrowable {
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!type.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) ||
+    } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE_4);
 

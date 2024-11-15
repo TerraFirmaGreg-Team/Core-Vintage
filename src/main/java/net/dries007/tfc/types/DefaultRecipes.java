@@ -2,6 +2,8 @@ package net.dries007.tfc.types;
 
 import su.terrafirmagreg.api.data.enums.EnumHideSize;
 import su.terrafirmagreg.api.library.Pair;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.skills.SmithingSkill;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
@@ -66,10 +68,8 @@ import net.dries007.tfc.objects.items.metal.ItemMetalArmor;
 import net.dries007.tfc.objects.items.tools.ItemRockToolHead;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Food;
-import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.fuel.FuelManager;
-import net.dries007.tfc.util.skills.SmithingSkill;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -157,11 +157,11 @@ import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_NOT_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_THIRD_LAST;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.ARMOR;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.WEAPONS;
 import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
+import static su.terrafirmagreg.modules.core.feature.skills.SmithingSkill.Type.ARMOR;
+import static su.terrafirmagreg.modules.core.feature.skills.SmithingSkill.Type.GENERAL;
+import static su.terrafirmagreg.modules.core.feature.skills.SmithingSkill.Type.TOOLS;
+import static su.terrafirmagreg.modules.core.feature.skills.SmithingSkill.Type.WEAPONS;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.BRICKS;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.SMOOTH;

@@ -18,11 +18,11 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.items.wrapper.RangedWrapper;
 
 import org.apache.commons.lang3.tuple.Pair;
-import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.HPEventHandler;
-import se.gory_moon.horsepower.recipes.HPRecipeBase;
-import se.gory_moon.horsepower.recipes.HPRecipes;
-import se.gory_moon.horsepower.tileentity.TileHPBase;
+import net.dries007.horsepower.Configs;
+import net.dries007.horsepower.HPEventHandler;
+import net.dries007.horsepower.recipes.HPRecipeBase;
+import net.dries007.horsepower.recipes.HPRecipes;
+import net.dries007.horsepower.tileentity.TileHPBase;
 
 import javax.annotation.Nullable;
 import java.util.Map;

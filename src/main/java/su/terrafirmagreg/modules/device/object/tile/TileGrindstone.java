@@ -14,7 +14,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 
-import lyeoj.tfcthings.init.TFCThingsSoundEvents;
+import net.dries007.tfcthings.init.TFCThingsSoundEvents;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.BlockFluidWater;
 

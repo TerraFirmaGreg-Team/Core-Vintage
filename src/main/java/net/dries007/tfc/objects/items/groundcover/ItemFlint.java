@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.blocks.groundcover.BlockSurfaceFlint;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-import tfcflorae.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 

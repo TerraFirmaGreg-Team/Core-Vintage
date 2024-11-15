@@ -7,7 +7,7 @@ import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.modules.ModuleContainer;
+import su.terrafirmagreg.modules.Modules;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.damage.HandlerDamageResistance;
@@ -62,7 +62,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 @ModuleInfo(
-  moduleID = ModuleContainer.CORE,
+  moduleID = Modules.CORE,
   desc = "Core TFG content. Disabling this disables the entire mod and all its module.",
   coreModule = true
 )

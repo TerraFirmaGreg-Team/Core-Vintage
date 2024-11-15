@@ -16,7 +16,7 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
-import se.gory_moon.horsepower.util.Localization;
+import net.dries007.horsepower.util.Localization;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.base.biome;
 
 import su.terrafirmagreg.api.base.biome.spi.IBiomeSettings;
 import su.terrafirmagreg.modules.world.ConfigWorld;
+import su.terrafirmagreg.modules.world.classic.objects.biome.overworld.decorator.BiomeDecorator;
 import su.terrafirmagreg.modules.world.classic.objects.spawner.EntitySpawnerWorldData;
 
 import net.minecraft.entity.Entity;
@@ -10,12 +11,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -79,14 +79,14 @@ public abstract class BaseBiome extends Biome implements IBiomeSettings {
   }
 
   @Override
-  public BiomeDecorator createBiomeDecorator() {
-    return new BaseBiomeDecorator(0, 0);
+  public net.minecraft.world.biome.BiomeDecorator createBiomeDecorator() {
+    return new BiomeDecorator(0, 0);
   }
 
   @Override
   public float getTemperature(@NotNull BlockPos pos) {
     // Vanilla spec: 0.15 = snow threshold, range = [-1, 1] for overworld temps.
-    return MathHelper.clamp(0.15f + ClimateTFC.getDailyTemp(pos) / 35, -1, 1);
+    return MathHelper.clamp(0.15f + Climate.getDailyTemp(pos) / 35, -1, 1);
   }
 
   @Override

@@ -35,8 +35,8 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import com.eerussianguy.firmalife.ConfigFL;
-import com.eerussianguy.firmalife.recipe.StrainingRecipe;
+import net.dries007.eerussianguy.firmalife.ConfigFL;
+import net.dries007.eerussianguy.firmalife.recipe.StrainingRecipe;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
 

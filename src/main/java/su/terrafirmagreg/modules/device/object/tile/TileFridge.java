@@ -32,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import gregtech.api.capability.GregtechCapabilities;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import tfctech.TechConfig;
+import net.dries007.tfctech.TechConfig;
 
 import org.jetbrains.annotations.Nullable;
 

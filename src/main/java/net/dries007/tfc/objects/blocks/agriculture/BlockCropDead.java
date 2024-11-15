@@ -2,6 +2,8 @@ package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.feature.skills.SimpleSkill;
+import su.terrafirmagreg.modules.core.feature.skills.SkillType;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlantEmergentTallWater;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlantWater;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
@@ -27,8 +29,6 @@ import net.minecraftforge.common.EnumPlantType;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.skills.SimpleSkill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import org.jetbrains.annotations.NotNull;
 

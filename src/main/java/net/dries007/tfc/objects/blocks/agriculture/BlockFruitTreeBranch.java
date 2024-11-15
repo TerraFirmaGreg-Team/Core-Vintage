@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -269,7 +269,7 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
 
   @Override
   public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-    float temp = ClimateTFC.getActualTemp(world, pos);
+    float temp = Climate.getActualTemp(world, pos);
     float rainfall = ProviderChunkData.getRainfall(world, pos);
     boolean canGrow = tree.isValidForGrowth(temp, rainfall);
     if (canGrow) {

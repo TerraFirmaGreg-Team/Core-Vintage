@@ -24,10 +24,10 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.te.TEDryingMat;
-import pieman.caffeineaddon.CaffeineAddon;
-import pieman.caffeineaddon.client.GUIHandler;
-import pieman.caffeineaddon.init.ModBlocks;
-import pieman.caffeineaddon.init.ModItems;
+import net.dries007.caffeineaddon.CaffeineAddon;
+import net.dries007.caffeineaddon.client.GUIHandler;
+import net.dries007.caffeineaddon.init.ModBlocks;
+import net.dries007.caffeineaddon.init.ModItems;
 
 import org.jetbrains.annotations.Nullable;
 

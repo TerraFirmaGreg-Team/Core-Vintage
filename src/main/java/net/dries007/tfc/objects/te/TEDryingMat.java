@@ -8,9 +8,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendarFormatted;
-import pieman.caffeineaddon.recipes.DryingMatRecipe;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
+
+import net.dries007.caffeineaddon.recipes.DryingMatRecipe;
 
 import org.jetbrains.annotations.NotNull;
 

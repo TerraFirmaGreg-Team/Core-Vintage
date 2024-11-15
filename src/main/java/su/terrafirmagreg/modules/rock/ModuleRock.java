@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.modules.ModuleContainer.ROCK;
+import static su.terrafirmagreg.modules.Modules.ROCK;
 
 @ModuleInfo(moduleID = ROCK)
 public final class ModuleRock extends ModuleBase {

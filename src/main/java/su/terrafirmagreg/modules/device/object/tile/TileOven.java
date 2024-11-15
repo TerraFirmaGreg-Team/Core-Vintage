@@ -23,10 +23,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.eerussianguy.firmalife.recipe.OvenRecipe;
+import net.dries007.eerussianguy.firmalife.recipe.OvenRecipe;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
+
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+
 import net.dries007.tfc.util.fuel.FuelManager;
 
 import java.util.Optional;

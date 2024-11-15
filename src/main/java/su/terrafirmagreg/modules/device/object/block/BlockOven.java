@@ -37,7 +37,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import com.eerussianguy.firmalife.ConfigFL;
+import net.dries007.eerussianguy.firmalife.ConfigFL;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.util.OreDictionaryHelper;
 

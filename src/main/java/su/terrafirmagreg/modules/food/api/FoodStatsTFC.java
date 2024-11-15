@@ -24,7 +24,7 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.food.NutritionStats;
 import net.dries007.tfc.network.PacketFoodStatsReplace;
 import net.dries007.tfc.network.PacketFoodStatsUpdate;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 

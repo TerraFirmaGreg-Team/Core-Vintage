@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.modules.ModuleContainer.SOIL;
+import static su.terrafirmagreg.modules.Modules.SOIL;
 
 @ModuleInfo(moduleID = SOIL)
 public final class ModuleSoil extends ModuleBase {

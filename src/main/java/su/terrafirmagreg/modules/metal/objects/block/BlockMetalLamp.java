@@ -44,7 +44,7 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.Nullable;
 

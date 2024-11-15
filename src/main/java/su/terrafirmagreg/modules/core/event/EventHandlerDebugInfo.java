@@ -15,9 +15,9 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.climate.ClimateHelper;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
 
 import java.util.List;
 
@@ -83,8 +83,8 @@ public class EventHandlerDebugInfo {
     var maxTemp = String.format("%s%.1f" + DEGREE + "C", AQUA,
                                 ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JULY.getTemperatureModifier(), blockPos.getZ()));
 
-    var monthlyTemp = String.format("%s%.1f", AQUA, ClimateTFC.getMonthlyTemp(blockPos));
-    var actualTemp = String.format("%s%.1f", AQUA, ClimateTFC.getActualTemp(blockPos));
+    var monthlyTemp = String.format("%s%.1f", AQUA, Climate.getMonthlyTemp(blockPos));
+    var actualTemp = String.format("%s%.1f", AQUA, Climate.getActualTemp(blockPos));
 
     list.add(String.format("%sRegion: %s %sAvg: %s %sMin: %s %sMax: %s", YELLOW, regionTemp, YELLOW, averageTemp, YELLOW, minTemp, YELLOW, maxTemp));
     list.add(String.format("%sTemperature: %s" + DEGREE + "C %sDaily: %s" + DEGREE + "C", YELLOW, monthlyTemp, YELLOW, actualTemp));

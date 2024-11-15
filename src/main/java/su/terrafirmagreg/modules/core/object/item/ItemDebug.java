@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-import static se.gory_moon.horsepower.util.color.Colors.RED;
+import static net.dries007.horsepower.util.color.Colors.RED;
 
 public class ItemDebug extends BaseItem {
 

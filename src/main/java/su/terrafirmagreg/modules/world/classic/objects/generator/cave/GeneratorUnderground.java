@@ -16,8 +16,8 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import net.dries007.tfc.util.climate.ClimateTFC;
-import tfcflorae.ConfigTFCF;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import net.dries007.tfcflorae.ConfigTFCF;
 
 import java.util.Random;
 
@@ -69,7 +69,7 @@ public class GeneratorUnderground implements IWorldGenerator {
 
     var data = CapabilityChunkData.get(world, chunkPos);
     Biome biome = world.getBiome(chunkPos);
-    final float avgTemperature = ClimateTFC.getAvgTemp(world, chunkPos);
+    final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
     final float rainfall = ProviderChunkData.getRainfall(world, chunkPos);
     final float floraDensity = data.getFloraDensity();
     final float floraDiversity = data.getFloraDiversity();

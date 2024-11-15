@@ -1,5 +1,6 @@
 package net.dries007.tfc.network;
 
+import su.terrafirmagreg.api.data.enums.InventoryCraftingMode;
 import su.terrafirmagreg.api.util.OreDictUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +11,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.util.config.InventoryCraftingMode;
 
 public class PacketOpenCraftingGui implements IMessageEmpty {
 

@@ -1,12 +1,12 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.data.enums.EnumFruitLeafState;
 import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.api.data.enums.EnumFruitLeafState;
-import su.terrafirmagreg.api.library.MCDate.Month;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -40,10 +40,10 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.agriculture.SeasonalTrees;
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import tfcflorae.util.OreDictionaryHelper;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -413,7 +413,7 @@ public class BlockJoshuaTreeFlower extends Block {
 
     Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int expectedStage = fruitTree.getStageForMonth(currentMonth);
-    float avgTemperature = ClimateTFC.getAvgTemp(world, pos);
+    float avgTemperature = Climate.getAvgTemp(world, pos);
 
     switch (expectedStage) {
       case 1:

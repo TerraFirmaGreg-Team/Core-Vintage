@@ -15,7 +15,7 @@ public final class BlocksMetal {
   public static MetalBlockVariant LAMP;
   public static MetalBlockVariant TRAPDOOR;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
     ANVIL = MetalBlockVariant
       .builder("anvil")

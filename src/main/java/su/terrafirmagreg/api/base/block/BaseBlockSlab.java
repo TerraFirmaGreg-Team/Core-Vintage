@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.base.block;
 
 import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
-import su.terrafirmagreg.api.base.item.BaseItemSlab;
+import su.terrafirmagreg.api.base.itemblock.BaseItemSlab;
 import su.terrafirmagreg.api.data.enums.EnumDefault;
 
 import net.minecraft.block.BlockSlab;

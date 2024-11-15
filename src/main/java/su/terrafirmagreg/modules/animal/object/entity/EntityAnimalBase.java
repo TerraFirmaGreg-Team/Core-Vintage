@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity;
 
-import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;

@@ -1,16 +1,16 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
-import su.terrafirmagreg.api.base.block.BaseBlockStairs;
-import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
+import lombok.Getter;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.util.BlockRenderLayer;
 
-import lombok.Getter;
+import su.terrafirmagreg.api.base.block.BaseBlockStairs;
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
 @Getter
 public class BlockSoilMudStairs extends BaseBlockStairs implements ISoilBlock {

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.predator;
 
-import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.helper.BiomeHelper;
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;

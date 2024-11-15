@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.metal.objects.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 import su.terrafirmagreg.modules.metal.api.types.variant.block.IMetalBlock;
 import su.terrafirmagreg.modules.metal.api.types.variant.block.MetalBlockVariant;

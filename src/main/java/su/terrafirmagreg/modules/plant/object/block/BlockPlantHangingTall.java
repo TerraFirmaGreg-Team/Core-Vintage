@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.plant.object.block;
 
-import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.data.enums.EnumPlantPart;
+import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
 import su.terrafirmagreg.modules.plant.api.types.variant.block.PlantBlockVariant;

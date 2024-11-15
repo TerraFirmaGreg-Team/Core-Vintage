@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.object.block;
 
-import su.terrafirmagreg.api.base.item.BaseItemHeat;
+import su.terrafirmagreg.api.base.itemblock.BaseItemHeat;
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;

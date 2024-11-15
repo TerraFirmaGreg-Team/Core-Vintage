@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
-
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.CLAY;
 

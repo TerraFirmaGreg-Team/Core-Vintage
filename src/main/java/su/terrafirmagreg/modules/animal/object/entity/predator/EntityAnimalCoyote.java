@@ -181,7 +181,7 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
   @Override
   protected SoundEvent getAmbientSound() {
     return MathUtils.RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_COYOTE_CRY
-                                              : SoundsAnimal.ANIMAL_COYOTE_SAY;
+                                          : SoundsAnimal.ANIMAL_COYOTE_SAY;
   }
 
   @Nullable

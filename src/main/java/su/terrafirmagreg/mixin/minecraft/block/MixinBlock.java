@@ -6,6 +6,7 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -23,31 +24,43 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
 
 @Mixin(value = Block.class, remap = false)
 public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> implements IBlockSettings {
 
+  @Mutable
+  @Final
+  protected Settings settings;
 
   @Shadow
   @Final
   public Material material;
+
   @Shadow
   protected boolean fullBlock;
 
+  @Inject(method = "<init>(Lnet/minecraft/block/material/Material;Lnet/minecraft/block/material/MapColor;)V", at = @At(value = "TAIL"), remap = false)
+  public void onConstruct(Material blockMaterialIn, MapColor blockMapColorIn, CallbackInfo ci) {
+    this.settings = Settings.of(blockMaterialIn, blockMapColorIn);
+  }
+
   @Override
   public Settings getSettings() {
-    return Settings.of(Material.AIR);
+    return settings;
   }
 
   /**
    * @author Xikaro
    * @reason Адаптация под ISettingsBlock
    */
-  @Override
   @Overwrite
   public boolean isOpaqueCube(IBlockState state) {
     return getSettings() != null && getSettings().isOpaque();
@@ -57,7 +70,6 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
    * @author Xikaro
    * @reason Адаптация под ISettingsBlock
    */
-  @Override
   @Overwrite
   public boolean getUseNeighborBrightness(IBlockState state) {
     return getSettings().isUseNeighborBrightness();
@@ -67,7 +79,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
    * @author Xikaro
    * @reason Адаптация под ISettingsBlock
    */
-  @Override
+
   @Overwrite
   public boolean isFullCube(IBlockState state) {
     return fullBlock = getSettings().isFullCube();
@@ -77,7 +89,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
    * @author Xikaro
    * @reason Адаптация под ISettingsBlock
    */
-  @Override
+
   @Overwrite
   public boolean isCollidable() {
     return getSettings().isCollidable();
@@ -87,7 +99,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
    * @author Xikaro
    * @reason Адаптация под ISettingsBlock
    */
-  @Override
+
   @Overwrite
   public SoundType getSoundType() {
     return getSettings().getSoundType();
@@ -97,7 +109,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
    * @author Xikaro
    * @reason Адаптация под ISettingsBlock
    */
-  @Override
+
   @Overwrite
   public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face) {
     return isOpaqueCube(state) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
@@ -107,7 +119,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
    * @author Xikaro
    * @reason Адаптация под ISettingsBlock
    */
-  @Override
+
   @Overwrite
   @SideOnly(Side.CLIENT)
   public BlockRenderLayer getRenderLayer() {
@@ -118,7 +130,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
    * @author Xikaro
    * @reason Адаптация под ISettingsBlock
    */
-  @Override
+
   @Overwrite
   public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
     return getSettings().getHardness().apply(blockState, worldIn, pos);
@@ -128,7 +140,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
    * @author Xikaro
    * @reason Адаптация под ISettingsBlock
    */
-  @Override
+
   @Overwrite
   public float getExplosionResistance(Entity exploder) {
     return getSettings().getResistance() / 5.0F;
@@ -138,10 +150,9 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
    * @author Xikaro
    * @reason Адаптация под ISettingsBlock
    */
-  @Override
+
   @Overwrite
-  public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos,
-                               @Nullable Entity entity) {
+  public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity) {
     return getSettings().getSlipperiness().apply(state, world, pos);
   }
 
@@ -149,33 +160,33 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
    * @author Xikaro
    * @reason Адаптация под ISettingsBlock
    */
-  @Override
+
   @Overwrite
   public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
     return getSettings().getLightValue().apply(state, world, pos);
   }
 
-  @Override
+
   public Item asItem() {
     return Item.getItemFromBlock((Block) (Object) this);
   }
 
-  @Override
+
   public boolean getHasItemSubtypes() {
     return getSettings().isHasItemSubtypes();
   }
 
-  @Override
+
   public Size getSize(ItemStack stack) {
     return getSettings().getSize();
   }
 
-  @Override
+
   public Weight getWeight(ItemStack stack) {
     return getSettings().getWeight();
   }
 
-  @Override
+
   public boolean canStack(ItemStack stack) {
     return getSettings().isCanStack();
   }

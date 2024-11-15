@@ -1,15 +1,15 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
-import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
-import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
-import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
-
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 
 @SideOnly(Side.CLIENT)
 public class GuiCharcoalForge extends BaseGuiContainerTile<TileCharcoalForge> {

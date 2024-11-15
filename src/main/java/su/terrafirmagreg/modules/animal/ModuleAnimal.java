@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.animal;
 
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.modules.animal.event.EasyBreedingEventHandler;
 import su.terrafirmagreg.modules.animal.init.BlocksAnimal;
 import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;

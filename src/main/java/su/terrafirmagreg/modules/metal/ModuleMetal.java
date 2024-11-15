@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.metal;
 
-import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
+import su.terrafirmagreg.api.base.creativetab.BaseItemGroup;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.modules.core.event.EventHandlerMaterial;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalTypeHandler;
 import su.terrafirmagreg.modules.metal.init.BlocksMetal;
@@ -35,7 +35,7 @@ public final class ModuleMetal extends ModuleBase {
 
 
   public ModuleMetal() {
-    TAB = BaseCreativeTab.of("metal", "metal/anvil/red_steel");
+    TAB = BaseItemGroup.of("metal", "metal/anvil/red_steel");
     REGISTRY = enableAutoRegistry(TAB);
     PACKET_SERVICE = enableNetwork();
 
@@ -72,7 +72,7 @@ public final class ModuleMetal extends ModuleBase {
   @Override
   public @NotNull List<Class<?>> getEventBusSubscribers() {
     ObjectList<Class<?>> list = new ObjectArrayList<>();
-    
+
     list.add(ModuleMetal.class);
     list.add(EventHandlerMaterial.class);
 

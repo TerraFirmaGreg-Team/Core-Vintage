@@ -1,8 +1,8 @@
 package su.terrafirmagreg.api.module;
 
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.helper.LoggingHelper;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;

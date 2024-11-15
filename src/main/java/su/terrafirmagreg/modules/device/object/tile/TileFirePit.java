@@ -2,11 +2,11 @@ package su.terrafirmagreg.modules.device.object.tile;
 
 import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.base.tile.spi.ITileFields;
+import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;

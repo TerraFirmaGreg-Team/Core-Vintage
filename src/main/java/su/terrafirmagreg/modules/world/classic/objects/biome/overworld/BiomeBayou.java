@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.world.classic.objects.biome.overworld;
 
-import su.terrafirmagreg.api.base.biome.BaseBiome;
-import su.terrafirmagreg.api.base.biome.BaseBiomeDecorator;
-
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraftforge.common.BiomeDictionary;
+
+import su.terrafirmagreg.api.base.biome.BaseBiome;
+import su.terrafirmagreg.api.base.biome.BaseBiomeDecorator;
 
 public class BiomeBayou extends BaseBiome {
 

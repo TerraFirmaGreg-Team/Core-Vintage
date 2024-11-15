@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.base.item;
+package su.terrafirmagreg.api.base.itemblock;
 
 import su.terrafirmagreg.api.base.block.BaseBlockSlab;
 

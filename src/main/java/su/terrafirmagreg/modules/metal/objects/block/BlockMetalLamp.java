@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.metal.objects.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
-import su.terrafirmagreg.api.base.item.BaseItemBlock;
+import su.terrafirmagreg.api.base.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.HandlerHeat;

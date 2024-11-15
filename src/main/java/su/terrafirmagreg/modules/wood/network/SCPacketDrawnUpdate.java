@@ -1,16 +1,13 @@
 package su.terrafirmagreg.modules.wood.network;
 
+import su.terrafirmagreg.api.base.packet.BasePacket;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodCart;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import io.netty.buffer.ByteBuf;
-
-public class SCPacketDrawnUpdate implements IMessage,
-                                            IMessageHandler<SCPacketDrawnUpdate, IMessage> {
+public class SCPacketDrawnUpdate extends BasePacket<SCPacketDrawnUpdate> {
 
   private int pullingId;
   private int cartId;
@@ -23,28 +20,30 @@ public class SCPacketDrawnUpdate implements IMessage,
     cartId = cartIn;
   }
 
-  @Override
-  public void fromBytes(ByteBuf buf) {
-    pullingId = buf.readInt();
-    cartId = buf.readInt();
-  }
+//  @Override
+//  public void fromBytes(ByteBuf buf) {
+//    pullingId = buf.readInt();
+//    cartId = buf.readInt();
+//  }
+//
+//  @Override
+//  public void toBytes(ByteBuf buf) {
+//    buf.writeInt(pullingId);
+//    buf.writeInt(cartId);
+//  }
 
   @Override
-  public void toBytes(ByteBuf buf) {
-    buf.writeInt(pullingId);
-    buf.writeInt(cartId);
-  }
-
-  @Override
-  public IMessage onMessage(SCPacketDrawnUpdate message, MessageContext ctx) {
+  public IMessage handleMessage(MessageContext context) {
     Minecraft.getMinecraft().addScheduledTask(() -> {
-      EntityWoodCart cart = (EntityWoodCart) Minecraft.getMinecraft().world.getEntityByID(
-        message.cartId);
-      if (message.pullingId < 0) {
-        cart.setPulling(null);
-      } else {
-        cart.setPullingId(message.pullingId);
+      EntityWoodCart cart = (EntityWoodCart) Minecraft.getMinecraft().world.getEntityByID(cartId);
+      if (cart != null) {
+        if (pullingId < 0) {
+          cart.setPulling(null);
+        } else {
+          cart.setPullingId(pullingId);
+        }
       }
+
     });
     return null;
   }

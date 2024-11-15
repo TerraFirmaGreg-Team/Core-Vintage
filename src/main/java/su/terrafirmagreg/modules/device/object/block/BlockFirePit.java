@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlockContainer;
-import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.render.TESRFirePit;
@@ -55,9 +55,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 import static su.terrafirmagreg.api.data.Properties.EnumProp.FIRE_PIT_ATTACHMENT;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 @SuppressWarnings("deprecation")
 public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumerBlock {

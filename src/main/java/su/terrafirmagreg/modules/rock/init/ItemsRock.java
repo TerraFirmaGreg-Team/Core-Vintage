@@ -12,7 +12,7 @@ public final class ItemsRock {
   public static RockItemVariant BRICK;
   public static RockItemVariant GRAVEL_LAYER;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
     LOOSE = RockItemVariant
       .builder("loose")

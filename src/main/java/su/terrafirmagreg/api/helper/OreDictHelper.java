@@ -1,5 +1,13 @@
 package su.terrafirmagreg.api.helper;
 
+import su.terrafirmagreg.modules.plant.api.types.type.PlantTypes;
+import su.terrafirmagreg.modules.plant.init.BlocksPlant;
+
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
@@ -7,15 +15,8 @@ import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-
-import su.terrafirmagreg.modules.plant.api.types.type.PlantTypes;
-import su.terrafirmagreg.modules.plant.init.BlocksPlant;
-
 public class OreDictHelper {
+
   public static void init() {
 
     OreDictionaryHelper.MAP.forEach((t, s) -> OreDictionary.registerOre(s, t.toItemStack()));

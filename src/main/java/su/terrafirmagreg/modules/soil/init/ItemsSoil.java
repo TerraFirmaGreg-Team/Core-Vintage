@@ -14,7 +14,7 @@ public final class ItemsSoil {
   public static SoilItemVariant MUD_BRICK;
   public static SoilItemVariant MUD_BRICK_WET;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
     PILE = SoilItemVariant
       .builder("pile")

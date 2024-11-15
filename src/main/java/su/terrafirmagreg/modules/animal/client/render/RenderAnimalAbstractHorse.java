@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.render;
 
-import su.terrafirmagreg.modules.animal.client.model.ModelAnimalHorse;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDonkey;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalMule;
+import com.google.common.collect.Maps;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -12,9 +10,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.google.common.collect.Maps;
-
 import org.jetbrains.annotations.NotNull;
+
+import su.terrafirmagreg.modules.animal.client.model.ModelAnimalHorse;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDonkey;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalMule;
 
 import java.util.Map;
 

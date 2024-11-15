@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.base.item;
+package su.terrafirmagreg.api.base.itemblock;
 
 import su.terrafirmagreg.modules.core.capabilities.heat.ProviderHeat;
 

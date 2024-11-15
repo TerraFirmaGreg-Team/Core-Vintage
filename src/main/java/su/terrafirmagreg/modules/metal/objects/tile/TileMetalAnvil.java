@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.metal.objects.tile;
 
-import org.apache.commons.lang3.StringUtils;
-
 import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -43,6 +41,7 @@ import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
 import net.dries007.tfc.util.skills.SkillType;
 import net.dries007.tfc.util.skills.SmithingSkill;
+import org.apache.commons.lang3.StringUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

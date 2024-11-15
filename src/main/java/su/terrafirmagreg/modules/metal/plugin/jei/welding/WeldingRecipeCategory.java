@@ -1,12 +1,5 @@
 package su.terrafirmagreg.modules.metal.plugin.jei.welding;
 
-import su.terrafirmagreg.api.plugin.jei.category.BaseRecipeCategory;
-import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.init.ItemsDevice;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -14,6 +7,13 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+
+import su.terrafirmagreg.api.plugin.jei.category.BaseRecipeCategory;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.device.init.ItemsDevice;
 
 public class WeldingRecipeCategory
   extends BaseRecipeCategory<WeldingRecipeWrapper> {

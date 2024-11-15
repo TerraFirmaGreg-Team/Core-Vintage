@@ -63,7 +63,8 @@ public class GeneratorMesaStrata implements IWorldGenerator {
               if ((y <= WorldTypeClassic.SEALEVEL + 5 &&
                    (isVariant(currentBlockState, RAW) || BlockHelper.isGround(currentBlockState) || BlockHelper.isSoil(currentBlockState))
                    && !(BlockHelper.isGrass(currentBlockState) || isVariant(currentBlockState, SAND) || isClay(currentBlockState))) ||
-                  (y > WorldTypeClassic.SEALEVEL + 5 && (isVariant(currentBlockState, RAW) || BlockHelper.isGround(currentBlockState) || BlockHelper.isSoil(currentBlockState)))) {
+                  (y > WorldTypeClassic.SEALEVEL + 5 && (isVariant(currentBlockState, RAW) || BlockHelper.isGround(currentBlockState)
+                                                         || BlockHelper.isSoil(currentBlockState)))) {
 
                 if (y >= strataLayer.getY() && y <= strataLayer.getY() + 2) {
                   world.setBlockState(currentBlock, HARDENED_CLAY, 2);

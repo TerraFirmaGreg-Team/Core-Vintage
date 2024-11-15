@@ -28,8 +28,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
 import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class BlockPlantShortGrass extends BlockPlant implements IShearable {
 

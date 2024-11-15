@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.plant;
 
-import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
+import su.terrafirmagreg.api.base.creativetab.BaseItemGroup;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantTypeHandler;
 import su.terrafirmagreg.modules.plant.init.BlocksPlant;
 import su.terrafirmagreg.modules.plant.init.ItemsPlant;
@@ -24,7 +24,7 @@ public final class ModulePlant extends ModuleBase {
   public static RegistryManager REGISTRY;
 
   public ModulePlant() {
-    TAB = BaseCreativeTab.of("flora", "plant/crop/seed/rice");
+    TAB = BaseItemGroup.of("flora", "plant/crop/seed/rice");
     REGISTRY = enableAutoRegistry(TAB);
   }
 

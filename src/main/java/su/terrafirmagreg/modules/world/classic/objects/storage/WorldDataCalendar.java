@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.storage;
 
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;

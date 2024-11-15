@@ -2,9 +2,9 @@ package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlockContainer;
 import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;

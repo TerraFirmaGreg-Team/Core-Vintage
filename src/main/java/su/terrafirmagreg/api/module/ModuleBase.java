@@ -1,5 +1,6 @@
 package su.terrafirmagreg.api.module;
 
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.network.IPacketRegistry;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
@@ -8,7 +9,6 @@ import su.terrafirmagreg.api.network.PacketService;
 import su.terrafirmagreg.api.network.ThreadedNetworkWrapper;
 import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.helper.LoggingHelper;
 
 import net.minecraft.creativetab.CreativeTabs;
 
@@ -40,9 +40,10 @@ public abstract class ModuleBase implements IModule {
   private final String name;
   private final String modID;
 
-  protected IPacketService packetService;
   protected RegistryManager registryManager;
   protected Registry registry;
+
+  protected IPacketService packetService;
   protected IPacketRegistry packetRegistry;
 
   private ThreadedNetworkWrapper threadedNetworkWrapper;

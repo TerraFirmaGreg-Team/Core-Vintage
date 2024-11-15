@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlockContainer;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;

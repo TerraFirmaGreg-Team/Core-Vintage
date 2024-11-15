@@ -1,16 +1,16 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
+import lombok.Getter;
 
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-import lombok.Getter;
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
+import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 @Getter
 public class BlockWoodFenceLog extends BlockFence implements IWoodBlock {

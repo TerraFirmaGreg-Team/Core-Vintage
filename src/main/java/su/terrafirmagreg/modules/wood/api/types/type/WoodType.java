@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.wood.api.types.type;
 
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.api.library.types.variant.Variant;
+import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;

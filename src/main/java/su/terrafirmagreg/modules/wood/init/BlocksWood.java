@@ -62,7 +62,7 @@ public final class BlocksWood {
   public static WoodBlockVariant LADDER;
   public static WoodBlockVariant CHOPPER;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
     LOG = WoodBlockVariant
       .builder("log")
@@ -222,7 +222,7 @@ public final class BlocksWood {
   }
 
   @SideOnly(Side.CLIENT)
-  public static void onClientRegister(RegistryManager registry) {
+  public static void onClientRegister(RegistryManager registryManager) {
     ModelResourceLocation blockModelLocation = new ModelResourceLocation("tfg:leaves");
     ModelResourceLocation itemModelLocation = new ModelResourceLocation("tfg:leaves", "inventory");
 

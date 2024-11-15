@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.metal.objects.entity;
 
-import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalTypes;
 import su.terrafirmagreg.modules.metal.init.BlocksMetal;
 

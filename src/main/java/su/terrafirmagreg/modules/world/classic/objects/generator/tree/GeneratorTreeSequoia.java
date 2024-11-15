@@ -65,9 +65,9 @@ public class GeneratorTreeSequoia implements ITreeGenerator {
             continue;
           }
           if (BlockHelper.isSoil(world.getBlockState(pos.add(p1)
-                                                       .down(2))) && world.getBlockState(pos.add(p1.down(1)))
-                                                                          .getMaterial()
-                                                                          .isReplaceable()) {
+                                                        .down(2))) && world.getBlockState(pos.add(p1.down(1)))
+                                                                           .getMaterial()
+                                                                           .isReplaceable()) {
             continue;
           }
         }

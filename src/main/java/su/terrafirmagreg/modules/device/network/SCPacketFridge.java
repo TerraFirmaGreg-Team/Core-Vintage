@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.network;
 
 import su.terrafirmagreg.TerraFirmaGreg;
+import su.terrafirmagreg.api.base.packet.BasePacket;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 
@@ -8,14 +9,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
-import io.netty.buffer.ByteBuf;
 
 import org.jetbrains.annotations.NotNull;
 
-public class SCPacketFridge implements IMessage, IMessageHandler<SCPacketFridge, IMessage> {
+public class SCPacketFridge extends BasePacket<SCPacketFridge> {
 
   private BlockPos pos;
   private float efficiency;
@@ -28,24 +26,24 @@ public class SCPacketFridge implements IMessage, IMessageHandler<SCPacketFridge,
     this.efficiency = efficiency;
   }
 
-  @Override
-  public void fromBytes(ByteBuf buf) {
-    pos = BlockPos.fromLong(buf.readLong());
-    efficiency = buf.readFloat();
-  }
+//  @Override
+//  public void fromBytes(ByteBuf buf) {
+//    pos = BlockPos.fromLong(buf.readLong());
+//    efficiency = buf.readFloat();
+//  }
+//
+//  @Override
+//  public void toBytes(ByteBuf buf) {
+//    buf.writeLong(pos.toLong());
+//    buf.writeFloat(efficiency);
+//  }
 
   @Override
-  public void toBytes(ByteBuf buf) {
-    buf.writeLong(pos.toLong());
-    buf.writeFloat(efficiency);
-  }
-
-  @Override
-  public IMessage onMessage(SCPacketFridge message, MessageContext ctx) {
-    EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
+  public IMessage handleMessage(MessageContext context) {
+    EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(context);
     if (player != null) {
       World world = player.getEntityWorld();
-      TileUtils.getTile(world, message.pos, TileFridge.class).ifPresent(tile -> tile.updateClient(message.efficiency));
+      TileUtils.getTile(world, pos, TileFridge.class).ifPresent(tile -> tile.updateClient(efficiency));
     }
     return null;
   }

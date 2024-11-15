@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.core;
 
 import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
+import su.terrafirmagreg.api.base.creativetab.BaseItemGroup;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.modules.ModuleContainer;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
@@ -75,7 +75,7 @@ public final class ModuleCore extends ModuleBase {
   public static IPacketService PACKET_SERVICE;
 
   public ModuleCore() {
-    TAB = BaseCreativeTab.of("misc", "core/wand");
+    TAB = BaseItemGroup.of("misc", "core/wand");
     REGISTRY = enableAutoRegistry(TAB);
     PACKET_SERVICE = enableNetwork();
   }
@@ -139,7 +139,7 @@ public final class ModuleCore extends ModuleBase {
   }
 
   public void onClientRegister() {
-    EntitiesCore.onClientRegister(registryManager);
+    EntitiesCore.onClientRegister(REGISTRY);
 
   }
 

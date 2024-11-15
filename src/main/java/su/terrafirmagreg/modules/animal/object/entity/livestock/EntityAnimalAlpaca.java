@@ -133,7 +133,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
   @Override
   protected SoundEvent getAmbientSound() {
     return MathUtils.RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_ALPACA_CRY
-                                              : SoundsAnimal.ANIMAL_ALPACA_SAY;
+                                          : SoundsAnimal.ANIMAL_ALPACA_SAY;
   }
 
   @Nullable

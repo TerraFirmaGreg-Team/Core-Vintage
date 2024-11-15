@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.tree;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.structure.template.TemplateManager;
-
 import com.google.common.collect.LinkedListMultimap;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
+
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Map;
 import java.util.Random;

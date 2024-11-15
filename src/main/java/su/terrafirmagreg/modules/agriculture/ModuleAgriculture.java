@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.agriculture;
 
-import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
+import su.terrafirmagreg.api.base.creativetab.BaseItemGroup;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.modules.agriculture.init.BlocksAgriculture;
 import su.terrafirmagreg.modules.agriculture.init.ItemsAgriculture;
 
@@ -21,7 +21,7 @@ public final class ModuleAgriculture extends ModuleBase {
 
   public ModuleAgriculture() {
 
-    TAB = BaseCreativeTab.of("agriculture", "agriculture/crop/seed/rice");
+    TAB = BaseItemGroup.of("agriculture", "agriculture/crop/seed/rice");
     REGISTRY = enableAutoRegistry(TAB);
 
   }

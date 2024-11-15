@@ -1,10 +1,10 @@
 package su.terrafirmagreg.api.base.item.spi;
 
+import su.terrafirmagreg.api.data.enums.ItemRarity;
 import su.terrafirmagreg.api.registry.provider.IProviderAutoReg;
 import su.terrafirmagreg.api.registry.provider.IProviderModel;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.api.data.enums.ItemRarity;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 

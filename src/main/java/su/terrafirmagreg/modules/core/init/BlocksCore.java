@@ -21,17 +21,17 @@ public final class BlocksCore {
   public static BlockFireBricks FIRE_BRICKS;
   public static BlockJackOLantern JACK_O_LANTERN;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
     //==== Other =================================================================================================//
 
-    DEBUG = registry.block(new BlockDebug());
-    PUDDLE = registry.block(new BlockPuddle());
-    THATCH = registry.block(new BlockThatch());
-    AGGREGATE = registry.block(new BlockAggregate());
-    INGOT_PILE = registry.block(new BlockIngotPile());
-    FIRE_CLAY = registry.block(new BlockFireClay());
-    FIRE_BRICKS = registry.block(new BlockFireBricks());
+    DEBUG = registryManager.block(new BlockDebug());
+    PUDDLE = registryManager.block(new BlockPuddle());
+    THATCH = registryManager.block(new BlockThatch());
+    AGGREGATE = registryManager.block(new BlockAggregate());
+    INGOT_PILE = registryManager.block(new BlockIngotPile());
+    FIRE_CLAY = registryManager.block(new BlockFireClay());
+    FIRE_BRICKS = registryManager.block(new BlockFireBricks());
 
 
   }

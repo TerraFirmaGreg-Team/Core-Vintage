@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.itemblock;
 
-import su.terrafirmagreg.api.base.item.BaseItemBlock;
+import su.terrafirmagreg.api.base.itemblock.BaseItemBlock;
 import su.terrafirmagreg.modules.metal.ConfigMetal;
 
 import net.minecraft.block.Block;

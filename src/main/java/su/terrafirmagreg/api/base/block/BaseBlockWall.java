@@ -35,7 +35,7 @@ public abstract class BaseBlockWall extends BlockWall implements IBlockSettings 
     super(modelBlock);
 
     this.settings = Settings
-      .copy(modelBlock)
+      .of(modelBlock)
       .ignoresProperties(VARIANT);
 
     this.modelBlock = modelBlock;

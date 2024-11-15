@@ -14,7 +14,7 @@ public enum EnumAging implements IStringSerializable {
   FRESH("fresh", 0, FoodTrait.FRESH, TextFormatting.GRAY),
   AGED("aged", 4, FoodTrait.AGED, TextFormatting.DARK_RED),
   VINTAGE("vintage", 8, FoodTrait.VINTAGE, TextFormatting.GOLD);
-  
+
   private final int ID;
   private final String name;
   private final FoodTrait trait;

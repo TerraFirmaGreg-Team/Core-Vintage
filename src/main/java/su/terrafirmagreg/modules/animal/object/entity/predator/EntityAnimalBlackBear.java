@@ -1,5 +1,17 @@
 package su.terrafirmagreg.modules.animal.object.entity.predator;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
+import org.jetbrains.annotations.Nullable;
+
 import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
@@ -10,23 +22,6 @@ import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIStandAttack;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIWanderHuntArea;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-
-import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.api.util.MathUtils.RNG;
 

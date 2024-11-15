@@ -57,33 +57,33 @@ public final class BiomesWorld {
   public static Biome MESA_PLATEAU_M;
   public static Biome MESA_BRYCE;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
-    OCEAN = registry.biome(new BiomeOcean());
-    RIVER = registry.biome(new BiomeRiver());
-    BEACH = registry.biome(new BiomeBeach());
-    GRAVEL_BEACH = registry.biome(new BiomeGravelBeach());
-    HIGH_HILLS = registry.biome(new BiomeHighHills());
-    PLAINS = registry.biome(new BiomePlains());
-    SWAMPLAND = registry.biome(new BiomeSwampland());
-    HIGH_HILLS_EDGE = registry.biome(new BiomeHighHillsEdge());
-    ROLLING_HILLS = registry.biome(new BiomeRollingHills());
-    MOUNTAINS = registry.biome(new BiomeMountains());
-    MOUNTAINS_EDGE = registry.biome(new BiomeMountainsEdge());
-    HIGH_PLAINS = registry.biome(new BiomeHighPlains());
-    DEEP_OCEAN = registry.biome(new BiomeDeepOcean());
-    LAKE = registry.biome(new BiomeLake());
-    FLATLANDS = registry.biome(new BiomeFlatlands());
-    FIELDS = registry.biome(new BiomeFields());
-    MEADOWS = registry.biome(new BiomeMeadows());
-    BAYOU = registry.biome(new BiomeBayou());
-    MANGROVE = registry.biome(new BiomeMangrove());
-    MARSH = registry.biome(new BiomeMarsh());
-    CRAG = registry.biome(new BiomeCrag());
-    MESA = registry.biome(new BiomeMesa());
-    MESA_PLATEAU = registry.biome(new BiomeMesaPlateau());
-    MESA_PLATEAU_M = registry.biome(new BiomeMesaPlateauM());
-    MESA_BRYCE = registry.biome(new BiomeMesaBryce());
+    OCEAN = registryManager.biome(new BiomeOcean());
+    RIVER = registryManager.biome(new BiomeRiver());
+    BEACH = registryManager.biome(new BiomeBeach());
+    GRAVEL_BEACH = registryManager.biome(new BiomeGravelBeach());
+    HIGH_HILLS = registryManager.biome(new BiomeHighHills());
+    PLAINS = registryManager.biome(new BiomePlains());
+    SWAMPLAND = registryManager.biome(new BiomeSwampland());
+    HIGH_HILLS_EDGE = registryManager.biome(new BiomeHighHillsEdge());
+    ROLLING_HILLS = registryManager.biome(new BiomeRollingHills());
+    MOUNTAINS = registryManager.biome(new BiomeMountains());
+    MOUNTAINS_EDGE = registryManager.biome(new BiomeMountainsEdge());
+    HIGH_PLAINS = registryManager.biome(new BiomeHighPlains());
+    DEEP_OCEAN = registryManager.biome(new BiomeDeepOcean());
+    LAKE = registryManager.biome(new BiomeLake());
+    FLATLANDS = registryManager.biome(new BiomeFlatlands());
+    FIELDS = registryManager.biome(new BiomeFields());
+    MEADOWS = registryManager.biome(new BiomeMeadows());
+    BAYOU = registryManager.biome(new BiomeBayou());
+    MANGROVE = registryManager.biome(new BiomeMangrove());
+    MARSH = registryManager.biome(new BiomeMarsh());
+    CRAG = registryManager.biome(new BiomeCrag());
+    MESA = registryManager.biome(new BiomeMesa());
+    MESA_PLATEAU = registryManager.biome(new BiomeMesaPlateau());
+    MESA_PLATEAU_M = registryManager.biome(new BiomeMesaPlateauM());
+    MESA_BRYCE = registryManager.biome(new BiomeMesaBryce());
 
   }
 }

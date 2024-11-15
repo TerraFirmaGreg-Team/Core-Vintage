@@ -1,20 +1,16 @@
 package su.terrafirmagreg.modules.device.object.container;
 
-import su.terrafirmagreg.api.base.container.BaseContainerTile;
-import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import su.terrafirmagreg.api.base.container.BaseContainerTile;
+import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 
-import static su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge.SLOT_EXTRA_MAX;
-import static su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge.SLOT_EXTRA_MIN;
-import static su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge.SLOT_FUEL_MIN;
-import static su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge.SLOT_INPUT_MAX;
-import static su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge.SLOT_INPUT_MIN;
+import static su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge.*;
 
 public class ContainerCharcoalForge extends BaseContainerTile<TileCharcoalForge> {
 

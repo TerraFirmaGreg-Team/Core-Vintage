@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.core.object.potion;
 
 import su.terrafirmagreg.api.base.effects.BasePotion;
-import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.util.MathUtils;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumParticleTypes;

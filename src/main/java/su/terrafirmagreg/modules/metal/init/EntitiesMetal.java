@@ -14,17 +14,17 @@ public final class EntitiesMetal {
 
   public static EntityEntry PIGVIL;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
-    PIGVIL = registry.entity("pigvil", EntityEntryBuilder.create()
-                                                         .entity(EntityMetalPigvil.class)
-                                                         .tracker(64, 3, true)
-                                                         .egg(0xF1AAAA, 0x555555)
+    PIGVIL = registryManager.entity("pigvil", EntityEntryBuilder.create()
+                                                                .entity(EntityMetalPigvil.class)
+                                                                .tracker(64, 3, true)
+                                                                .egg(0xF1AAAA, 0x555555)
     );
   }
 
   @SideOnly(Side.CLIENT)
-  public static void onClientRegister(RegistryManager registry) {
+  public static void onClientRegister(RegistryManager registryManager) {
 
     RenderingRegistry.registerEntityRenderingHandler(EntityMetalPigvil.class,
                                                      RenderMetalPigvil::new);

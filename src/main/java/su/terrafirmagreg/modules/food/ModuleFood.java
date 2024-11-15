@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.food;
 
-import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
+import su.terrafirmagreg.api.base.creativetab.BaseItemGroup;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.modules.food.init.BlocksFood;
 import su.terrafirmagreg.modules.food.init.ItemsFood;
 
@@ -20,7 +20,7 @@ public final class ModuleFood extends ModuleBase {
   public static RegistryManager REGISTRY;
 
   public ModuleFood() {
-    TAB = BaseCreativeTab.of("food", "food/ingredient/wheat_bread_sandwich");
+    TAB = BaseItemGroup.of("food", "food/ingredient/wheat_bread_sandwich");
     REGISTRY = enableAutoRegistry(TAB);
   }
 

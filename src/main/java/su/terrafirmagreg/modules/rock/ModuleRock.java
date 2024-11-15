@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.rock;
 
-import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
+import su.terrafirmagreg.api.base.creativetab.BaseItemGroup;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypeHandler;
 import su.terrafirmagreg.modules.rock.event.MaterialEventHandler;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
@@ -31,7 +31,7 @@ public final class ModuleRock extends ModuleBase {
   public static RegistryManager REGISTRY;
 
   public ModuleRock() {
-    TAB = BaseCreativeTab.of("rock", "rock/raw/basalt");
+    TAB = BaseItemGroup.of("rock", "rock/raw/basalt");
     REGISTRY = enableAutoRegistry(TAB);
 
     MinecraftForge.EVENT_BUS.register(new MaterialEventHandler());

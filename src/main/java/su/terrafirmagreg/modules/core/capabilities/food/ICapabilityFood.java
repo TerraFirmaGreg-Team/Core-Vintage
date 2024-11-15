@@ -1,11 +1,8 @@
 package su.terrafirmagreg.modules.core.capabilities.food;
 
-import su.terrafirmagreg.api.util.TranslatorUtil;
-import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
-import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
-import su.terrafirmagreg.modules.food.ConfigFood;
+import net.dries007.tfc.util.calendar.Calendar;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.calendar.ICalendarFormatted;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -18,12 +15,15 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.calendar.Calendar;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.calendar.ICalendarFormatted;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import su.terrafirmagreg.api.util.TranslatorUtil;
+import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
+import su.terrafirmagreg.modules.food.ConfigFood;
 
 import java.util.List;
 

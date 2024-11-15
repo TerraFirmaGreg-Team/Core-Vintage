@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.world.classic.objects.layer.datalayers.stability;
 
+import net.minecraft.world.gen.layer.IntCache;
+
 import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
 import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerBase;
-
-import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerStabilityInit extends GenLayerBase {
 

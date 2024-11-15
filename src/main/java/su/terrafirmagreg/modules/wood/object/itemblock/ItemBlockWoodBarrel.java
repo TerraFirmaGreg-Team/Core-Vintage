@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.object.itemblock;
 
-import su.terrafirmagreg.api.base.item.BaseItemBlock;
+import su.terrafirmagreg.api.base.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderItemMesh;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;

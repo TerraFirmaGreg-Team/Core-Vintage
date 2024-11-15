@@ -20,7 +20,7 @@ public abstract class BaseBlockStairs extends BlockStairs implements IBlockSetti
   protected BaseBlockStairs(Block model) {
     super(model.getDefaultState());
 
-    this.settings = Settings.copy(model);
+    this.settings = Settings.of(model);
 
   }
 

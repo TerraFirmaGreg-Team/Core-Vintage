@@ -1,8 +1,11 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
+import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
-import su.terrafirmagreg.api.util.*;
+import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -34,8 +37,6 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
-
-import su.terrafirmagreg.api.helper.BiomeHelper;
 
 import java.util.List;
 import java.util.Random;

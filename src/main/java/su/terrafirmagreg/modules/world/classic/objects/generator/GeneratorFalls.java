@@ -1,8 +1,5 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
-import su.terrafirmagreg.api.library.types.variant.Variant;
-import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -10,6 +7,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
+
+import su.terrafirmagreg.api.library.types.variant.Variant;
+import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import java.util.Random;
 

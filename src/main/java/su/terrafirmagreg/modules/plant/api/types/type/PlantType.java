@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.plant.api.types.type;
 
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.api.library.types.variant.Variant;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.plant.api.types.category.PlantCategory;
 
 import net.minecraft.block.material.Material;

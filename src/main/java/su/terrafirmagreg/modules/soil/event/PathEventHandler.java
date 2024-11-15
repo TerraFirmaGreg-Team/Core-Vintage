@@ -1,9 +1,6 @@
 package su.terrafirmagreg.modules.soil.event;
 
-import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.soil.ConfigSoil;
-import su.terrafirmagreg.modules.soil.ModuleSoil;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -17,14 +14,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
+import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.soil.ConfigSoil;
+import su.terrafirmagreg.modules.soil.ModuleSoil;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.COARSE_DIRT;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DIRT;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DRY_GRASS;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS_PATH;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.*;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.api.types.variant.item;
 
 import su.terrafirmagreg.api.base.item.spi.IItemSettings;
-import su.terrafirmagreg.api.registry.provider.IProviderItemColor;
 import su.terrafirmagreg.api.library.types.variant.item.IVariantItem;
+import su.terrafirmagreg.api.registry.provider.IProviderItemColor;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 
 import net.minecraft.client.renderer.color.IItemColor;

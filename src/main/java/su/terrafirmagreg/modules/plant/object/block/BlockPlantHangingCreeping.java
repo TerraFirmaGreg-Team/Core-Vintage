@@ -89,8 +89,8 @@ public class BlockPlantHangingCreeping extends BlockPlantCreeping implements IGr
       Material material = blockState.getMaterial();
 
       if (material == Material.LEAVES || material == Material.GROUND || material == Material.ROCK || material == Material.WOOD ||
-              BlockHelper.isGround(blockState) || worldIn.getBlockState(pos.up())
-                                                    .getBlock() == this) {
+          BlockHelper.isGround(blockState) || worldIn.getBlockState(pos.up())
+                                                     .getBlock() == this) {
         return type.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && type.isValidRain(ProviderChunkData.getRainfall(worldIn, pos));
       }
     }
@@ -113,7 +113,7 @@ public class BlockPlantHangingCreeping extends BlockPlantCreeping implements IGr
     Material material = iblockstate.getMaterial();
 
     return material == Material.LEAVES || material == Material.GROUND || material == Material.ROCK || material == Material.WOOD ||
-            BlockHelper.isGround(iblockstate);
+           BlockHelper.isGround(iblockstate);
   }
 
   @Override

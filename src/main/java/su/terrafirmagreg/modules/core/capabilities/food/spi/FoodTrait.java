@@ -5,8 +5,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import pieman.caffeineaddon.ModConfig;
-
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;

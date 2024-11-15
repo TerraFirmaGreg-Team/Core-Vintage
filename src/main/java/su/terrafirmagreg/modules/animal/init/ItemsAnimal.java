@@ -14,13 +14,15 @@ public final class ItemsAnimal {
   public static ItemAnimalMisc WOOL_CLOTH;
   public static ItemAnimalMisc SILK_CLOTH;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
-    BLADDER = registry.item(new ItemAnimalMisc("product/bladder", Settings.of().size(Size.SMALL).weight(Weight.LIGHT)));
-    WOOL = registry.item(new ItemAnimalMisc("product/wool", Settings.of().size(Size.SMALL).weight(Weight.LIGHT)));
-    WOOL_YARN = registry.item(new ItemAnimalMisc("product/wool_yarn", Settings.of().size(Size.VERY_SMALL).weight(Weight.VERY_LIGHT).oreDict("string")));
-    WOOL_CLOTH = registry.item(new ItemAnimalMisc("product/wool_cloth", Settings.of().size(Size.SMALL).weight(Weight.LIGHT).oreDict("cloth_high_quality")));
-    SILK_CLOTH = registry.item(new ItemAnimalMisc("product/silk_cloth", Settings.of().size(Size.SMALL).weight(Weight.LIGHT).oreDict("cloth_high_quality")));
+    BLADDER = registryManager.item(new ItemAnimalMisc("product/bladder", Settings.of().size(Size.SMALL).weight(Weight.LIGHT)));
+    WOOL = registryManager.item(new ItemAnimalMisc("product/wool", Settings.of().size(Size.SMALL).weight(Weight.LIGHT)));
+    WOOL_YARN = registryManager.item(new ItemAnimalMisc("product/wool_yarn", Settings.of().size(Size.VERY_SMALL).weight(Weight.VERY_LIGHT).oreDict("string")));
+    WOOL_CLOTH = registryManager.item(new ItemAnimalMisc("product/wool_cloth", Settings.of().size(Size.SMALL).weight(Weight.LIGHT)
+                                                                                       .oreDict("cloth_high_quality")));
+    SILK_CLOTH = registryManager.item(new ItemAnimalMisc("product/silk_cloth", Settings.of().size(Size.SMALL).weight(Weight.LIGHT)
+                                                                                       .oreDict("cloth_high_quality")));
 
   }
 }

@@ -14,12 +14,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public class BaseCreativeTab extends CreativeTabs {
+public class BaseItemGroup extends CreativeTabs {
 
   private final boolean hasSearchBar;
   private final Supplier<ItemStack> iconSupplier;
 
-  public BaseCreativeTab(String TabName, ResourceLocation iconSupplier, boolean hasSearchBar) {
+  public BaseItemGroup(String TabName, ResourceLocation iconSupplier, boolean hasSearchBar) {
     super(ModUtils.localize(TabName));
 
     this.iconSupplier = () -> new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(iconSupplier)));
@@ -30,12 +30,12 @@ public class BaseCreativeTab extends CreativeTabs {
     }
   }
 
-  public static BaseCreativeTab of(String TabName, String iconSupplier) {
-    return BaseCreativeTab.of(TabName, iconSupplier, false);
+  public static BaseItemGroup of(String TabName, String iconSupplier) {
+    return BaseItemGroup.of(TabName, iconSupplier, false);
   }
 
-  public static BaseCreativeTab of(String TabName, String iconSupplier, boolean hasSearchBar) {
-    return new BaseCreativeTab(TabName, ModUtils.resource(iconSupplier), hasSearchBar);
+  public static BaseItemGroup of(String TabName, String iconSupplier, boolean hasSearchBar) {
+    return new BaseItemGroup(TabName, ModUtils.resource(iconSupplier), hasSearchBar);
   }
 
   @NotNull

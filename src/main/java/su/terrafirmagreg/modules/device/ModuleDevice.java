@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.device;
 
-import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
+import su.terrafirmagreg.api.base.creativetab.BaseItemGroup;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.EntitiesDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
@@ -34,7 +34,7 @@ public final class ModuleDevice extends ModuleBase {
   public static IPacketService PACKET_SERVICE;
 
   public ModuleDevice() {
-    TAB = BaseCreativeTab.of("device", "device/bellows");
+    TAB = BaseItemGroup.of("device", "device/bellows");
     REGISTRY = enableAutoRegistry(TAB);
     PACKET_SERVICE = enableNetwork();
   }

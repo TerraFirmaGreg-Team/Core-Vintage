@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.soil;
 
-import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
+import su.terrafirmagreg.api.base.creativetab.BaseItemGroup;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleInfo;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilTypeHandler;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
@@ -29,7 +29,7 @@ public final class ModuleSoil extends ModuleBase {
   public static RegistryManager REGISTRY;
 
   public ModuleSoil() {
-    TAB = BaseCreativeTab.of("soil", "soil/grass/humus");
+    TAB = BaseItemGroup.of("soil", "soil/grass/humus");
     REGISTRY = enableAutoRegistry(TAB);
   }
 

@@ -1,8 +1,8 @@
 package su.terrafirmagreg;
 
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.api.util.AnnotationUtils;
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.proxy.IProxy;
 
 import net.minecraftforge.fml.common.Mod;

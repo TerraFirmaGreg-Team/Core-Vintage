@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.wood.network;
 
+import su.terrafirmagreg.api.base.packet.BasePacket;
 import su.terrafirmagreg.modules.core.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodCart;
 
@@ -8,27 +9,24 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import io.netty.buffer.ByteBuf;
-
-public class CSPacketToggleSlow implements IMessage, IMessageHandler<CSPacketToggleSlow, IMessage> {
+public class CSPacketToggleSlow extends BasePacket<CSPacketToggleSlow> {
 
   public CSPacketToggleSlow() {
   }
 
-  @Override
-  public void fromBytes(ByteBuf buf) {
-  }
+//  @Override
+//  public void fromBytes(ByteBuf buf) {
+//  }
+//
+//  @Override
+//  public void toBytes(ByteBuf buf) {
+//  }
 
   @Override
-  public void toBytes(ByteBuf buf) {
-  }
-
-  @Override
-  public IMessage onMessage(CSPacketToggleSlow message, MessageContext ctx) {
-    EntityPlayerMP player = ctx.getServerHandler().player;
+  public IMessage handleMessage(MessageContext context) {
+    EntityPlayerMP player = context.getServerHandler().player;
     if (player.isRiding()) {
       Entity ridden = player.getRidingEntity();
       if (ridden instanceof EntityLivingBase entityLivingBase && CapabilityPull.has(ridden)) {

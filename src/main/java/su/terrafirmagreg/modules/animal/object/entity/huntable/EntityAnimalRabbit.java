@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.huntable;
 
-import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.helper.BiomeHelper;
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;

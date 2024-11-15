@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.food.init;
 
-import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.api.library.Pair;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.food.api.types.category.FoodCategories;
 import su.terrafirmagreg.modules.food.api.types.variant.item.FoodItemVariant;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
@@ -131,7 +131,7 @@ public class ItemsFood {
   public static FoodItemVariant SALAD_MEAT;
   public static FoodItemVariant SALAD_DAIRY;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
     BANANA = new FoodItemVariant.Builder("banana")
       .category(FoodCategories.FRUIT)
       .foodData(4, 0.2f, 0f, 0f, 0f, 1f, 0f, 0f, 2f)

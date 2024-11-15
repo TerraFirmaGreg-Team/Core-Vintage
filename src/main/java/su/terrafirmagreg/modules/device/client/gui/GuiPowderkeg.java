@@ -1,13 +1,5 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
-import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
-import su.terrafirmagreg.api.base.gui.component.button.IButtonTooltip;
-import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
-import su.terrafirmagreg.modules.device.ModuleDevice;
-import su.terrafirmagreg.modules.device.client.button.GuiButtonPowderkegSeal;
-import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
@@ -17,9 +9,17 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import org.jetbrains.annotations.NotNull;
+
 import org.lwjgl.opengl.GL11;
 
-import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.base.gui.BaseGuiContainerTile;
+import su.terrafirmagreg.api.base.gui.component.button.IButtonTooltip;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
+import su.terrafirmagreg.modules.device.ModuleDevice;
+import su.terrafirmagreg.modules.device.client.button.GuiButtonPowderkegSeal;
+import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 
 import java.io.IOException;
 

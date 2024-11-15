@@ -1,11 +1,6 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
-import su.terrafirmagreg.api.base.block.BaseBlockSlab;
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
+import lombok.Getter;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -13,7 +8,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 
-import lombok.Getter;
+import su.terrafirmagreg.api.base.block.BaseBlockSlab;
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
+import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 @Getter
 public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock {

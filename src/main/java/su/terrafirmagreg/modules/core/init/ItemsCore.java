@@ -20,23 +20,23 @@ public final class ItemsCore {
   public static ItemCoreMisc HALTER;
   public static ItemCoreMisc MORTAR;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
     //==== Other =================================================================================================//
 
-    WAND = registry.item(new ItemDebug());
-    GLUE = registry.item(new ItemCoreMisc("glue", Size.TINY, Weight.LIGHT, "slimeball", "glue"));
-    GLASS_SHARD = registry.item(new ItemCoreMisc("glass_shard", Size.TINY, Weight.LIGHT));
-    ICE_SHARD = registry.item(new ItemCoreMisc("ice_shard", Size.TINY, Weight.LIGHT));
-    SEA_ICE_SHARD = registry.item(new ItemCoreMisc("sea_ice_shard", Size.TINY, Weight.LIGHT));
-    PACKED_ICE_SHARD = registry.item(new ItemCoreMisc("packed_ice_shard", Size.TINY, Weight.LIGHT));
-    STRAW = registry.item(
+    WAND = registryManager.item(new ItemDebug());
+    GLUE = registryManager.item(new ItemCoreMisc("glue", Size.TINY, Weight.LIGHT, "slimeball", "glue"));
+    GLASS_SHARD = registryManager.item(new ItemCoreMisc("glass_shard", Size.TINY, Weight.LIGHT));
+    ICE_SHARD = registryManager.item(new ItemCoreMisc("ice_shard", Size.TINY, Weight.LIGHT));
+    SEA_ICE_SHARD = registryManager.item(new ItemCoreMisc("sea_ice_shard", Size.TINY, Weight.LIGHT));
+    PACKED_ICE_SHARD = registryManager.item(new ItemCoreMisc("packed_ice_shard", Size.TINY, Weight.LIGHT));
+    STRAW = registryManager.item(
       new ItemCoreMisc("straw", Size.SMALL, Weight.VERY_LIGHT, "kindling", "straw"));
-    WOOD_ASH = registry.item(
+    WOOD_ASH = registryManager.item(
       new ItemCoreMisc("wood_ash", Size.VERY_SMALL, Weight.VERY_LIGHT, "dustAsh"));
-    JAR = registry.item(new ItemCoreMisc("jar", Size.VERY_SMALL, Weight.VERY_LIGHT));
-    HALTER = registry.item(new ItemCoreMisc("halter", Size.SMALL, Weight.LIGHT, "halter"));
-    MORTAR = registry.item(new ItemCoreMisc("mortar", Size.TINY, Weight.VERY_LIGHT, "mortar"));
+    JAR = registryManager.item(new ItemCoreMisc("jar", Size.VERY_SMALL, Weight.VERY_LIGHT));
+    HALTER = registryManager.item(new ItemCoreMisc("halter", Size.SMALL, Weight.LIGHT, "halter"));
+    MORTAR = registryManager.item(new ItemCoreMisc("mortar", Size.TINY, Weight.VERY_LIGHT, "mortar"));
 
   }
 }

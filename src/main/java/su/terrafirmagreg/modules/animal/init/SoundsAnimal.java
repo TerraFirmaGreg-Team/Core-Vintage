@@ -125,126 +125,126 @@ public final class SoundsAnimal {
 
   public static SoundEvent ANIMAL_FELINE_STEP;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
-    ANIMAL_BEAR_SAY = registry.sound("entity.animal.bear.say");
-    ANIMAL_BEAR_CRY = registry.sound("entity.animal.bear.cry");
-    ANIMAL_BEAR_HURT = registry.sound("entity.animal.bear.hurt");
-    ANIMAL_BEAR_DEATH = registry.sound("entity.animal.bear.death");
+    ANIMAL_BEAR_SAY = registryManager.sound("entity.animal.bear.say");
+    ANIMAL_BEAR_CRY = registryManager.sound("entity.animal.bear.cry");
+    ANIMAL_BEAR_HURT = registryManager.sound("entity.animal.bear.hurt");
+    ANIMAL_BEAR_DEATH = registryManager.sound("entity.animal.bear.death");
 
-    ANIMAL_DEER_SAY = registry.sound("entity.animal.deer.say");
-    ANIMAL_DEER_CRY = registry.sound("entity.animal.deer.cry");
-    ANIMAL_DEER_HURT = registry.sound("entity.animal.deer.hurt");
-    ANIMAL_DEER_DEATH = registry.sound("entity.animal.deer.death");
+    ANIMAL_DEER_SAY = registryManager.sound("entity.animal.deer.say");
+    ANIMAL_DEER_CRY = registryManager.sound("entity.animal.deer.cry");
+    ANIMAL_DEER_HURT = registryManager.sound("entity.animal.deer.hurt");
+    ANIMAL_DEER_DEATH = registryManager.sound("entity.animal.deer.death");
 
-    ANIMAL_PHEASANT_SAY = registry.sound("entity.animal.pheasant.say");
-    ANIMAL_PHEASANT_HURT = registry.sound("entity.animal.pheasant.hurt");
-    ANIMAL_PHEASANT_DEATH = registry.sound("entity.animal.pheasant.death");
+    ANIMAL_PHEASANT_SAY = registryManager.sound("entity.animal.pheasant.say");
+    ANIMAL_PHEASANT_HURT = registryManager.sound("entity.animal.pheasant.hurt");
+    ANIMAL_PHEASANT_DEATH = registryManager.sound("entity.animal.pheasant.death");
 
-    ANIMAL_ROOSTER_CRY = registry.sound("entity.animal.rooster.cry");
+    ANIMAL_ROOSTER_CRY = registryManager.sound("entity.animal.rooster.cry");
 
-    ANIMAL_ALPACA_SAY = registry.sound("entity.animal.alpaca.say");
-    ANIMAL_ALPACA_CRY = registry.sound("entity.animal.alpaca.cry");
-    ANIMAL_ALPACA_HURT = registry.sound("entity.animal.alpaca.hurt");
-    ANIMAL_ALPACA_DEATH = registry.sound("entity.animal.alpaca.death");
-    ANIMAL_ALPACA_STEP = registry.sound("entity.animal.alpaca.step");
+    ANIMAL_ALPACA_SAY = registryManager.sound("entity.animal.alpaca.say");
+    ANIMAL_ALPACA_CRY = registryManager.sound("entity.animal.alpaca.cry");
+    ANIMAL_ALPACA_HURT = registryManager.sound("entity.animal.alpaca.hurt");
+    ANIMAL_ALPACA_DEATH = registryManager.sound("entity.animal.alpaca.death");
+    ANIMAL_ALPACA_STEP = registryManager.sound("entity.animal.alpaca.step");
 
-    ANIMAL_DUCK_SAY = registry.sound("entity.animal.duck.say");
-    ANIMAL_DUCK_CRY = registry.sound("entity.animal.duck.cry");
-    ANIMAL_DUCK_HURT = registry.sound("entity.animal.duck.hurt");
-    ANIMAL_DUCK_DEATH = registry.sound("entity.animal.duck.death");
+    ANIMAL_DUCK_SAY = registryManager.sound("entity.animal.duck.say");
+    ANIMAL_DUCK_CRY = registryManager.sound("entity.animal.duck.cry");
+    ANIMAL_DUCK_HURT = registryManager.sound("entity.animal.duck.hurt");
+    ANIMAL_DUCK_DEATH = registryManager.sound("entity.animal.duck.death");
 
-    ANIMAL_GOAT_SAY = registry.sound("entity.animal.goat.say");
-    ANIMAL_GOAT_CRY = registry.sound("entity.animal.goat.cry");
-    ANIMAL_GOAT_HURT = registry.sound("entity.animal.goat.hurt");
-    ANIMAL_GOAT_DEATH = registry.sound("entity.animal.goat.death");
+    ANIMAL_GOAT_SAY = registryManager.sound("entity.animal.goat.say");
+    ANIMAL_GOAT_CRY = registryManager.sound("entity.animal.goat.cry");
+    ANIMAL_GOAT_HURT = registryManager.sound("entity.animal.goat.hurt");
+    ANIMAL_GOAT_DEATH = registryManager.sound("entity.animal.goat.death");
 
-    ANIMAL_CAMEL_SAY = registry.sound("entity.animal.camel.say");
-    ANIMAL_CAMEL_CRY = registry.sound("entity.animal.camel.cry");
-    ANIMAL_CAMEL_HURT = registry.sound("entity.animal.camel.hurt");
-    ANIMAL_CAMEL_DEATH = registry.sound("entity.animal.camel.death");
+    ANIMAL_CAMEL_SAY = registryManager.sound("entity.animal.camel.say");
+    ANIMAL_CAMEL_CRY = registryManager.sound("entity.animal.camel.cry");
+    ANIMAL_CAMEL_HURT = registryManager.sound("entity.animal.camel.hurt");
+    ANIMAL_CAMEL_DEATH = registryManager.sound("entity.animal.camel.death");
 
-    ANIMAL_PANTHER_SAY = registry.sound("entity.animal.panther.say");
-    ANIMAL_PANTHER_CRY = registry.sound("entity.animal.panther.cry");
-    ANIMAL_PANTHER_HURT = registry.sound("entity.animal.panther.hurt");
-    ANIMAL_PANTHER_DEATH = registry.sound("entity.animal.panther.death");
+    ANIMAL_PANTHER_SAY = registryManager.sound("entity.animal.panther.say");
+    ANIMAL_PANTHER_CRY = registryManager.sound("entity.animal.panther.cry");
+    ANIMAL_PANTHER_HURT = registryManager.sound("entity.animal.panther.hurt");
+    ANIMAL_PANTHER_DEATH = registryManager.sound("entity.animal.panther.death");
 
-    ANIMAL_SABERTOOTH_SAY = registry.sound("entity.animal.sabertooth.say");
-    ANIMAL_SABERTOOTH_CRY = registry.sound("entity.animal.sabertooth.cry");
-    ANIMAL_SABERTOOTH_HURT = registry.sound("entity.animal.sabertooth.hurt");
-    ANIMAL_SABERTOOTH_DEATH = registry.sound("entity.animal.sabertooth.death");
+    ANIMAL_SABERTOOTH_SAY = registryManager.sound("entity.animal.sabertooth.say");
+    ANIMAL_SABERTOOTH_CRY = registryManager.sound("entity.animal.sabertooth.cry");
+    ANIMAL_SABERTOOTH_HURT = registryManager.sound("entity.animal.sabertooth.hurt");
+    ANIMAL_SABERTOOTH_DEATH = registryManager.sound("entity.animal.sabertooth.death");
 
-    ANIMAL_LION_SAY = registry.sound("entity.animal.lion.say");
-    ANIMAL_LION_CRY = registry.sound("entity.animal.lion.cry");
-    ANIMAL_LION_HURT = registry.sound("entity.animal.lion.hurt");
-    ANIMAL_LION_DEATH = registry.sound("entity.animal.lion.death");
+    ANIMAL_LION_SAY = registryManager.sound("entity.animal.lion.say");
+    ANIMAL_LION_CRY = registryManager.sound("entity.animal.lion.cry");
+    ANIMAL_LION_HURT = registryManager.sound("entity.animal.lion.hurt");
+    ANIMAL_LION_DEATH = registryManager.sound("entity.animal.lion.death");
 
-    ANIMAL_HYENA_SAY = registry.sound("entity.animal.hyena.say");
-    ANIMAL_HYENA_CRY = registry.sound("entity.animal.hyena.cry");
-    ANIMAL_HYENA_HURT = registry.sound("entity.animal.hyena.hurt");
-    ANIMAL_HYENA_DEATH = registry.sound("entity.animal.hyena.death");
+    ANIMAL_HYENA_SAY = registryManager.sound("entity.animal.hyena.say");
+    ANIMAL_HYENA_CRY = registryManager.sound("entity.animal.hyena.cry");
+    ANIMAL_HYENA_HURT = registryManager.sound("entity.animal.hyena.hurt");
+    ANIMAL_HYENA_DEATH = registryManager.sound("entity.animal.hyena.death");
 
-    ANIMAL_ZEBU_SAY = registry.sound("entity.animal.zebu.say");
-    ANIMAL_ZEBU_HURT = registry.sound("entity.animal.zebu.hurt");
-    ANIMAL_ZEBU_DEATH = registry.sound("entity.animal.zebu.death");
+    ANIMAL_ZEBU_SAY = registryManager.sound("entity.animal.zebu.say");
+    ANIMAL_ZEBU_HURT = registryManager.sound("entity.animal.zebu.hurt");
+    ANIMAL_ZEBU_DEATH = registryManager.sound("entity.animal.zebu.death");
 
-    ANIMAL_MUSKOX_SAY = registry.sound("entity.animal.muskox.say");
-    ANIMAL_MUSKOX_HURT = registry.sound("entity.animal.muskox.hurt");
-    ANIMAL_MUSKOX_DEATH = registry.sound("entity.animal.muskox.death");
+    ANIMAL_MUSKOX_SAY = registryManager.sound("entity.animal.muskox.say");
+    ANIMAL_MUSKOX_HURT = registryManager.sound("entity.animal.muskox.hurt");
+    ANIMAL_MUSKOX_DEATH = registryManager.sound("entity.animal.muskox.death");
 
-    ANIMAL_TURKEY_SAY = registry.sound("entity.animal.turkey.say");
-    ANIMAL_TURKEY_HURT = registry.sound("entity.animal.turkey.hurt");
-    ANIMAL_TURKEY_DEATH = registry.sound("entity.animal.turkey.death");
+    ANIMAL_TURKEY_SAY = registryManager.sound("entity.animal.turkey.say");
+    ANIMAL_TURKEY_HURT = registryManager.sound("entity.animal.turkey.hurt");
+    ANIMAL_TURKEY_DEATH = registryManager.sound("entity.animal.turkey.death");
 
-    ANIMAL_BOAR_SAY = registry.sound("entity.animal.boar.say");
-    ANIMAL_BOAR_HURT = registry.sound("entity.animal.boar.hurt");
-    ANIMAL_BOAR_DEATH = registry.sound("entity.animal.boar.death");
+    ANIMAL_BOAR_SAY = registryManager.sound("entity.animal.boar.say");
+    ANIMAL_BOAR_HURT = registryManager.sound("entity.animal.boar.hurt");
+    ANIMAL_BOAR_DEATH = registryManager.sound("entity.animal.boar.death");
 
-    ANIMAL_WILDEBEEST_SAY = registry.sound("entity.animal.wildebeest.say");
-    ANIMAL_WILDEBEEST_HURT = registry.sound("entity.animal.wildebeest.hurt");
-    ANIMAL_WILDEBEEST_DEATH = registry.sound("entity.animal.wildebeest.death");
+    ANIMAL_WILDEBEEST_SAY = registryManager.sound("entity.animal.wildebeest.say");
+    ANIMAL_WILDEBEEST_HURT = registryManager.sound("entity.animal.wildebeest.hurt");
+    ANIMAL_WILDEBEEST_DEATH = registryManager.sound("entity.animal.wildebeest.death");
 
-    ANIMAL_GROUSE_SAY = registry.sound("entity.animal.grouse.say");
-    ANIMAL_GROUSE_HURT = registry.sound("entity.animal.grouse.hurt");
-    ANIMAL_GROUSE_DEATH = registry.sound("entity.animal.grouse.death");
+    ANIMAL_GROUSE_SAY = registryManager.sound("entity.animal.grouse.say");
+    ANIMAL_GROUSE_HURT = registryManager.sound("entity.animal.grouse.hurt");
+    ANIMAL_GROUSE_DEATH = registryManager.sound("entity.animal.grouse.death");
 
-    ANIMAL_QUAIL_SAY = registry.sound("entity.animal.quail.say");
-    ANIMAL_QUAIL_HURT = registry.sound("entity.animal.quail.hurt");
-    ANIMAL_QUAIL_DEATH = registry.sound("entity.animal.quail.death");
+    ANIMAL_QUAIL_SAY = registryManager.sound("entity.animal.quail.say");
+    ANIMAL_QUAIL_HURT = registryManager.sound("entity.animal.quail.hurt");
+    ANIMAL_QUAIL_DEATH = registryManager.sound("entity.animal.quail.death");
 
-    ANIMAL_COYOTE_SAY = registry.sound("entity.animal.coyote.say");
-    ANIMAL_COYOTE_CRY = registry.sound("entity.animal.coyote.cry");
-    ANIMAL_COYOTE_HURT = registry.sound("entity.animal.coyote.hurt");
-    ANIMAL_COYOTE_DEATH = registry.sound("entity.animal.coyote.death");
+    ANIMAL_COYOTE_SAY = registryManager.sound("entity.animal.coyote.say");
+    ANIMAL_COYOTE_CRY = registryManager.sound("entity.animal.coyote.cry");
+    ANIMAL_COYOTE_HURT = registryManager.sound("entity.animal.coyote.hurt");
+    ANIMAL_COYOTE_DEATH = registryManager.sound("entity.animal.coyote.death");
 
-    ANIMAL_COUGAR_SAY = registry.sound("entity.animal.cougar.say");
-    ANIMAL_COUGAR_CRY = registry.sound("entity.animal.cougar.cry");
-    ANIMAL_COUGAR_HURT = registry.sound("entity.animal.cougar.hurt");
-    ANIMAL_COUGAR_DEATH = registry.sound("entity.animal.cougar.death");
+    ANIMAL_COUGAR_SAY = registryManager.sound("entity.animal.cougar.say");
+    ANIMAL_COUGAR_CRY = registryManager.sound("entity.animal.cougar.cry");
+    ANIMAL_COUGAR_HURT = registryManager.sound("entity.animal.cougar.hurt");
+    ANIMAL_COUGAR_DEATH = registryManager.sound("entity.animal.cougar.death");
 
-    ANIMAL_GAZELLE_SAY = registry.sound("entity.animal.gazelle.say");
-    ANIMAL_GAZELLE_HURT = registry.sound("entity.animal.gazelle.hurt");
-    ANIMAL_GAZELLE_DEATH = registry.sound("entity.animal.gazelle.death");
+    ANIMAL_GAZELLE_SAY = registryManager.sound("entity.animal.gazelle.say");
+    ANIMAL_GAZELLE_HURT = registryManager.sound("entity.animal.gazelle.hurt");
+    ANIMAL_GAZELLE_DEATH = registryManager.sound("entity.animal.gazelle.death");
 
-    ANIMAL_DIREWOLF_SAY = registry.sound("entity.animal.direwolf.say");
-    ANIMAL_DIREWOLF_CRY = registry.sound("entity.animal.direwolf.cry");
-    ANIMAL_DIREWOLF_HURT = registry.sound("entity.animal.direwolf.hurt");
-    ANIMAL_DIREWOLF_DEATH = registry.sound("entity.animal.direwolf.death");
+    ANIMAL_DIREWOLF_SAY = registryManager.sound("entity.animal.direwolf.say");
+    ANIMAL_DIREWOLF_CRY = registryManager.sound("entity.animal.direwolf.cry");
+    ANIMAL_DIREWOLF_HURT = registryManager.sound("entity.animal.direwolf.hurt");
+    ANIMAL_DIREWOLF_DEATH = registryManager.sound("entity.animal.direwolf.death");
 
-    ANIMAL_YAK_SAY = registry.sound("entity.animal.yak.say");
-    ANIMAL_YAK_HURT = registry.sound("entity.animal.yak.hurt");
-    ANIMAL_YAK_DEATH = registry.sound("entity.animal.yak.death");
+    ANIMAL_YAK_SAY = registryManager.sound("entity.animal.yak.say");
+    ANIMAL_YAK_HURT = registryManager.sound("entity.animal.yak.hurt");
+    ANIMAL_YAK_DEATH = registryManager.sound("entity.animal.yak.death");
 
-    ANIMAL_JACKAL_SAY = registry.sound("entity.animal.jackal.say");
-    ANIMAL_JACKAL_CRY = registry.sound("entity.animal.jackal.cry");
-    ANIMAL_JACKAL_HURT = registry.sound("entity.animal.jackal.hurt");
-    ANIMAL_JACKAL_DEATH = registry.sound("entity.animal.jackal.death");
+    ANIMAL_JACKAL_SAY = registryManager.sound("entity.animal.jackal.say");
+    ANIMAL_JACKAL_CRY = registryManager.sound("entity.animal.jackal.cry");
+    ANIMAL_JACKAL_HURT = registryManager.sound("entity.animal.jackal.hurt");
+    ANIMAL_JACKAL_DEATH = registryManager.sound("entity.animal.jackal.death");
 
-    ANIMAL_MONGOOSE_SAY = registry.sound("entity.animal.mongoose.say");
-    ANIMAL_MONGOOSE_HURT = registry.sound("entity.animal.mongoose.hurt");
-    ANIMAL_MONGOOSE_DEATH = registry.sound("entity.animal.mongoose.death");
+    ANIMAL_MONGOOSE_SAY = registryManager.sound("entity.animal.mongoose.say");
+    ANIMAL_MONGOOSE_HURT = registryManager.sound("entity.animal.mongoose.hurt");
+    ANIMAL_MONGOOSE_DEATH = registryManager.sound("entity.animal.mongoose.death");
 
-    ANIMAL_FELINE_STEP = registry.sound("entity.animal.feline.step");
+    ANIMAL_FELINE_STEP = registryManager.sound("entity.animal.feline.step");
 
   }
 }

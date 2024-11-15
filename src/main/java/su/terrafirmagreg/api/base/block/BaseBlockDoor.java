@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.base.block;
 
 import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
-import su.terrafirmagreg.api.base.item.BaseItemDoor;
+import su.terrafirmagreg.api.base.itemblock.BaseItemDoor;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 

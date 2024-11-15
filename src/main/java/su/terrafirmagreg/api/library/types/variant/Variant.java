@@ -1,8 +1,8 @@
 package su.terrafirmagreg.api.library.types.variant;
 
-import net.minecraft.block.state.IBlockState;
-
 import su.terrafirmagreg.api.library.types.type.Type;
+
+import net.minecraft.block.state.IBlockState;
 
 import org.jetbrains.annotations.NotNull;
 

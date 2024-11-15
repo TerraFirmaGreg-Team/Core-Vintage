@@ -1,6 +1,7 @@
-package su.terrafirmagreg.api.base.item;
+package su.terrafirmagreg.api.base.itemblock;
 
 import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
+import su.terrafirmagreg.api.base.item.BaseItem;
 import su.terrafirmagreg.api.registry.provider.IProviderMultiItemBlock;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 

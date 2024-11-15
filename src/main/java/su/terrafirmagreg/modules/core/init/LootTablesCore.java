@@ -6,9 +6,9 @@ import su.terrafirmagreg.modules.core.object.loot.ApplySimpleSkill;
 
 public final class LootTablesCore {
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
-    registry.lootFunction(new ApplySimpleSkill.Serializer());
-    registry.lootFunction(new ApplyRequiredSkill.Serializer());
+    registryManager.lootFunction(new ApplySimpleSkill.Serializer());
+    registryManager.lootFunction(new ApplyRequiredSkill.Serializer());
   }
 }

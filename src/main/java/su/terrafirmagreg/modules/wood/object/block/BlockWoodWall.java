@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlockWall;
-import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;

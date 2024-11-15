@@ -26,7 +26,7 @@ public final class ItemsWood {
   public static ItemWoodMisc STICK_BUNCH;
   public static ItemWoodBucket BUCKET;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
     BOAT = WoodItemVariant
       .builder("boat")
       .factory(ItemWoodBoat::new)
@@ -57,8 +57,8 @@ public final class ItemsWood {
       .factory(ItemWoodPlowCart::new)
       .build();
 
-    STICK_BUNDLE = registry.item(new ItemWoodMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"));
-    STICK_BUNCH = registry.item(new ItemWoodMisc("stick_bunch", Size.NORMAL, Weight.LIGHT));
-    BUCKET = registry.item(new ItemWoodBucket());
+    STICK_BUNDLE = registryManager.item(new ItemWoodMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"));
+    STICK_BUNCH = registryManager.item(new ItemWoodMisc("stick_bunch", Size.NORMAL, Weight.LIGHT));
+    BUCKET = registryManager.item(new ItemWoodBucket());
   }
 }

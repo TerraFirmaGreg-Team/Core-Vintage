@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
-import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;

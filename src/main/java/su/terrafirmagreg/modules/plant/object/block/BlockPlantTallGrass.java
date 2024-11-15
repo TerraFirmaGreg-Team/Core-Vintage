@@ -32,9 +32,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
 import static su.terrafirmagreg.api.data.Properties.EnumProp.PLANT_PART;
 import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class BlockPlantTallGrass extends BlockPlantShortGrass implements IGrowable, ITallPlant {
 

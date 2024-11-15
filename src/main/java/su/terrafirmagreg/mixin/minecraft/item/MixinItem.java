@@ -9,20 +9,37 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import org.jetbrains.annotations.NotNull;
 
 @Mixin(value = Item.class, remap = false)
 public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implements IItemSettings {
 
+  @Mutable
+  @Final
+  protected Settings settings;
 
-  public Settings getSettings() {return Settings.of();}
+  @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
+  public void onConstruct(CallbackInfo ci) {
+    this.settings = Settings.of();
+  }
+
+  @Override
+  public Settings getSettings() {
+    return settings;
+  }
 
   /**
    * @author Xikaro
    * @reason Адаптация под ISettingsItem
    */
-  @Override
   @Overwrite
   public IRarity getForgeRarity(ItemStack stack) {
     return getSettings().getRarity();
@@ -32,7 +49,6 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
    * @author Xikaro
    * @reason Адаптация под ISettingsItem
    */
-  @Override
   @Overwrite
   public int getMaxDamage() {
     return getSettings().getMaxDamage();
@@ -42,20 +58,19 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
    * @author Xikaro
    * @reason Адаптация под ISettingsItem
    */
-  @Override
   @Overwrite
   public int getItemStackLimit() {
     return getSettings().getMaxCount();
   }
 
+
   /**
    * @author Xikaro
    * @reason Адаптация под ISettingsItem
    */
-  @Override
   @Overwrite
-  public int getItemStackLimit(ItemStack stack) {
-    return getStackSize(stack);
+  public int getItemStackLimit(@NotNull ItemStack stack) {
+    return this.getStackSize(stack);
   }
 
   @Override

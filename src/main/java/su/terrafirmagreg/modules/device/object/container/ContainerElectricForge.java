@@ -1,17 +1,17 @@
 package su.terrafirmagreg.modules.device.object.container;
 
-import su.terrafirmagreg.api.base.container.BaseContainerTile;
-import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
+import net.dries007.tfc.objects.container.IButtonHandler;
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.container.IButtonHandler;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-
 import org.jetbrains.annotations.Nullable;
+
+import su.terrafirmagreg.api.base.container.BaseContainerTile;
+import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
 
 public class ContainerElectricForge extends BaseContainerTile<TileElectricForge> implements
                                                                                  IButtonHandler {

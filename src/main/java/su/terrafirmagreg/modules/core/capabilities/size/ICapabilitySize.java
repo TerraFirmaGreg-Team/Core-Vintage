@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.core.capabilities.size;
 
 import su.terrafirmagreg.api.base.item.BaseItem;
-import su.terrafirmagreg.api.base.item.BaseItemBlock;
-import su.terrafirmagreg.api.util.TranslatorUtil;
+import su.terrafirmagreg.api.base.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.data.Unicode;
+import su.terrafirmagreg.api.util.TranslatorUtil;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 

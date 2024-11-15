@@ -1,9 +1,5 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
-import su.terrafirmagreg.modules.wood.ConfigWood;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -21,14 +17,15 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
+import su.terrafirmagreg.modules.wood.ConfigWood;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static su.terrafirmagreg.api.data.Properties.BoolProp.EAST;
-import static su.terrafirmagreg.api.data.Properties.BoolProp.NORTH;
-import static su.terrafirmagreg.api.data.Properties.BoolProp.SOUTH;
-import static su.terrafirmagreg.api.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.*;
 import static su.terrafirmagreg.api.data.Properties.EnumProp.AXIS;
 
 @SuppressWarnings("deprecation")

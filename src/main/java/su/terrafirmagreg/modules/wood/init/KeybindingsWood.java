@@ -10,8 +10,8 @@ public final class KeybindingsWood {
 
   public static KeyBinding ACTION_CART;
 
-  public static void onClientRegister(RegistryManager registry) {
-    ACTION_CART = registry.keyBinding("action_cart", Keyboard.KEY_R);
+  public static void onClientRegister(RegistryManager registryManager) {
+    ACTION_CART = registryManager.keyBinding("action_cart", Keyboard.KEY_R);
 
   }
 

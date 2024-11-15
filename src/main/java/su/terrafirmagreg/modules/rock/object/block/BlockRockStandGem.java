@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.rock.object.block;
 
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;

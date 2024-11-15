@@ -1,11 +1,6 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
-import su.terrafirmagreg.api.helper.BiomeHelper;
-import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.modules.animal.ConfigAnimal;
-import su.terrafirmagreg.modules.animal.api.type.ILivestock;
-import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -17,9 +12,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-import net.dries007.tfc.util.calendar.Calendar;
-
 import org.jetbrains.annotations.Nullable;
+
+import su.terrafirmagreg.api.helper.BiomeHelper;
+import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 
 import static su.terrafirmagreg.api.util.MathUtils.RNG;
 

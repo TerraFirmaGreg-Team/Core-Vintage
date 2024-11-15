@@ -1,10 +1,8 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.data.enums.EnumHideSize;
-import su.terrafirmagreg.modules.core.init.BlocksCore;
+import lombok.Getter;
+
+import net.dries007.tfc.objects.items.ItemAnimalHide;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
@@ -24,11 +22,13 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.objects.items.ItemAnimalHide;
-
 import org.jetbrains.annotations.Nullable;
 
-import lombok.Getter;
+import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
+import su.terrafirmagreg.api.data.enums.EnumHideSize;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.init.BlocksCore;
 
 import java.util.Random;
 

@@ -7,12 +7,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class ItemsPlant {
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
   }
 
   @SideOnly(Side.CLIENT)
-  public static void onClientRegister(RegistryManager registry) {
+  public static void onClientRegister(RegistryManager registryManager) {
 
   }
 }

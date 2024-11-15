@@ -83,48 +83,48 @@ public final class BlocksDevice {
   public static BlockOvenWall OVEN_WALL;
   public static BlockOvenChimney OVEN_CHIMNEY;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
     //==== Other =================================================================================================//
 
-    ALLOY_CALCULATOR = registry.block(new BlockAlloyCalculator());
-    BEAR_TRAP = registry.block(new BlockBearTrap());
-    SNARE = registry.block(new BlockSnare());
-    CRATE = registry.block(new BlockCrate());
-    BELLOWS = registry.block(new BlockBellows());
-    BLAST_FURNACE = registry.block(new BlockBlastFurnace());
-    BLOOM = registry.block(new BlockBloom());
-    BLOOMERY = registry.block(new BlockBloomery());
-    CHARCOAL_FORGE = registry.block(new BlockCharcoalForge());
-    CHARCOAL_PILE = registry.block(new BlockCharcoalPile());
-    CRUCIBLE = registry.block(new BlockCrucible());
-    FIRE_PIT = registry.block(new BlockFirePit());
-    PIT_KILN = registry.block(new BlockPitKiln());
-    QUERN_MANUAL = registry.block(new BlockQuernManual());
-    QUERN_HORSE = registry.block(new BlockQuernHorse());
-    MOLTEN = registry.block(new BlockMolten());
-    LOG_PILE = registry.block(new BlockLogPile());
-    CELLAR_SHELF = registry.block(new BlockCellarShelf());
-    CELLAR_DOOR = registry.block(new BlockCellarDoor());
-    CELLAR_WALL = registry.block(new BlockCellarWall());
-    ICE_BUNKER = registry.block(new BlockIceBunker());
-    INFECTED_AIR = registry.block(new BlockInfectedAir());
-    FREEZE_DRYER = registry.block(new BlockFreezeDryer());
-    NEST_BOX = registry.block(new BlockNestBox());
-    POWDERKEG = registry.block(new BlockPowderKeg());
-    THATCH_BED = registry.block(new BlockThatchBed());
-    GRINDSTONE_MANUAL = registry.block(new BlockGrindstoneManual());
-    ELECTRIC_FORGE = registry.block(new BlockElectricForge());
-    INDUCTION_CRUCIBLE = registry.block(new BlockInductionCrucible());
-    FRIDGE = registry.block(new BlockFridge());
-    LATEX_EXTRACTOR = registry.block(new BlockLatexExtractor());
-    SMELTERY_CAULDRON = registry.block(new BlockSmelteryCauldron());
-    SMELTERY_FIREBOX = registry.block(new BlockSmelteryFirebox());
-    GREENHOUSE_DOOR = registry.block(new BlockGreenhouseDoor());
-    GREENHOUSE_ROOF = registry.block(new BlockGreenhouseRoof());
-    GREENHOUSE_WALL = registry.block(new BlockGreenhouseWall());
-    OVEN = registry.block(new BlockOven());
-    OVEN_WALL = registry.block(new BlockOvenWall());
-    OVEN_CHIMNEY = registry.block(new BlockOvenChimney());
+    ALLOY_CALCULATOR = registryManager.block(new BlockAlloyCalculator());
+    BEAR_TRAP = registryManager.block(new BlockBearTrap());
+    SNARE = registryManager.block(new BlockSnare());
+    CRATE = registryManager.block(new BlockCrate());
+    BELLOWS = registryManager.block(new BlockBellows());
+    BLAST_FURNACE = registryManager.block(new BlockBlastFurnace());
+    BLOOM = registryManager.block(new BlockBloom());
+    BLOOMERY = registryManager.block(new BlockBloomery());
+    CHARCOAL_FORGE = registryManager.block(new BlockCharcoalForge());
+    CHARCOAL_PILE = registryManager.block(new BlockCharcoalPile());
+    CRUCIBLE = registryManager.block(new BlockCrucible());
+    FIRE_PIT = registryManager.block(new BlockFirePit());
+    PIT_KILN = registryManager.block(new BlockPitKiln());
+    QUERN_MANUAL = registryManager.block(new BlockQuernManual());
+    QUERN_HORSE = registryManager.block(new BlockQuernHorse());
+    MOLTEN = registryManager.block(new BlockMolten());
+    LOG_PILE = registryManager.block(new BlockLogPile());
+    CELLAR_SHELF = registryManager.block(new BlockCellarShelf());
+    CELLAR_DOOR = registryManager.block(new BlockCellarDoor());
+    CELLAR_WALL = registryManager.block(new BlockCellarWall());
+    ICE_BUNKER = registryManager.block(new BlockIceBunker());
+    INFECTED_AIR = registryManager.block(new BlockInfectedAir());
+    FREEZE_DRYER = registryManager.block(new BlockFreezeDryer());
+    NEST_BOX = registryManager.block(new BlockNestBox());
+    POWDERKEG = registryManager.block(new BlockPowderKeg());
+    THATCH_BED = registryManager.block(new BlockThatchBed());
+    GRINDSTONE_MANUAL = registryManager.block(new BlockGrindstoneManual());
+    ELECTRIC_FORGE = registryManager.block(new BlockElectricForge());
+    INDUCTION_CRUCIBLE = registryManager.block(new BlockInductionCrucible());
+    FRIDGE = registryManager.block(new BlockFridge());
+    LATEX_EXTRACTOR = registryManager.block(new BlockLatexExtractor());
+    SMELTERY_CAULDRON = registryManager.block(new BlockSmelteryCauldron());
+    SMELTERY_FIREBOX = registryManager.block(new BlockSmelteryFirebox());
+    GREENHOUSE_DOOR = registryManager.block(new BlockGreenhouseDoor());
+    GREENHOUSE_ROOF = registryManager.block(new BlockGreenhouseRoof());
+    GREENHOUSE_WALL = registryManager.block(new BlockGreenhouseWall());
+    OVEN = registryManager.block(new BlockOven());
+    OVEN_WALL = registryManager.block(new BlockOvenWall());
+    OVEN_CHIMNEY = registryManager.block(new BlockOvenChimney());
   }
 
 }

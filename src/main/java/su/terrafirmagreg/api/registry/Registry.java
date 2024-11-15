@@ -2,6 +2,8 @@ package su.terrafirmagreg.api.registry;
 
 import su.terrafirmagreg.api.base.biome.BaseBiome;
 import su.terrafirmagreg.api.helper.OreDictHelper;
+import su.terrafirmagreg.api.library.collection.RegistryList;
+import su.terrafirmagreg.api.library.model.CustomModelLoader;
 import su.terrafirmagreg.api.registry.builder.LootBuilder;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockState;
@@ -11,10 +13,7 @@ import su.terrafirmagreg.api.registry.provider.IProviderModel;
 import su.terrafirmagreg.api.registry.provider.IProviderOreDict;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.api.library.collection.RegistryList;
-import su.terrafirmagreg.api.library.model.CustomModelLoader;
 import su.terrafirmagreg.modules.core.object.command.CommandManager;
 
 import net.minecraft.block.Block;
@@ -51,8 +50,6 @@ import lombok.Getter;
 
 @Getter
 public class Registry {
-
-  private final RegistryManager manager;
 
   /**
    * A list of all blocks registered by the helper.
@@ -124,8 +121,7 @@ public class Registry {
    */
   private final Multimap<ResourceLocation, LootBuilder> lootTable;
 
-  public Registry(RegistryManager manager) {
-    this.manager = manager;
+  public Registry() {
 
     this.blocks = RegistryList.create();
     this.items = RegistryList.create();

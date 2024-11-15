@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator.tree;
 
-import su.terrafirmagreg.api.util.StructureUtils;
 import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.util.StructureUtils;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 
 import net.minecraft.block.BlockLog;

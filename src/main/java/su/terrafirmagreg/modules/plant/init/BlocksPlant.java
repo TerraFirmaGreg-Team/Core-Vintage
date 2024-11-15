@@ -11,7 +11,7 @@ public final class BlocksPlant {
   public static PlantBlockVariant PLANT;
   public static PlantBlockVariant FLOWER_POT;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
     PLANT = PlantBlockVariant
       .builder("plant")
@@ -25,7 +25,7 @@ public final class BlocksPlant {
   }
 
   @SideOnly(Side.CLIENT)
-  public static void onClientRegister(RegistryManager registry) {
+  public static void onClientRegister(RegistryManager registryManager) {
 
   }
 }

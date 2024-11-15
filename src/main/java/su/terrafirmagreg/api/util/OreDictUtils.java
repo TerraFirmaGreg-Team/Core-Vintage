@@ -1,25 +1,15 @@
 package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantTypes;
-import su.terrafirmagreg.modules.plant.init.BlocksPlant;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
-import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
-import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
-import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
-import net.dries007.tfc.objects.items.ItemPowder;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 

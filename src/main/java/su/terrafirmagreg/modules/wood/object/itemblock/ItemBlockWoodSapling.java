@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.object.itemblock;
 
-import su.terrafirmagreg.api.base.item.BaseItemBlock;
+import su.terrafirmagreg.api.base.itemblock.BaseItemBlock;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodSapling;
 
 import net.minecraft.entity.item.EntityItem;

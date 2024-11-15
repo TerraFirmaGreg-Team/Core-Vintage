@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.rock.init;
 
-import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.api.library.Pair;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.object.block.BlockAlabasterBricks;
 import su.terrafirmagreg.modules.rock.object.block.BlockAlabasterRaw;
@@ -81,7 +81,7 @@ public final class BlocksRock {
   public static BlockAlabasterRaw ALABASTER_RAW;
 
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
     COBBLE = RockBlockVariant
       .builder("cobble")
@@ -278,11 +278,11 @@ public final class BlocksRock {
       .factory(BlockRockStandGem::new)
       .build();
 
-    ALABASTER_BRICKS = registry.block(new BlockAlabasterBricks());
-    ALABASTER_SMOOTH = registry.block(new BlockAlabasterSmooth());
-    ALABASTER_RAW = registry.block(new BlockAlabasterRaw());
+    ALABASTER_BRICKS = registryManager.block(new BlockAlabasterBricks());
+    ALABASTER_SMOOTH = registryManager.block(new BlockAlabasterSmooth());
+    ALABASTER_RAW = registryManager.block(new BlockAlabasterRaw());
 
-    registry.blocks(ALABASTER_COLOR_BLOCKS.values());
+    registryManager.blocks(ALABASTER_COLOR_BLOCKS.values());
   }
 
 }

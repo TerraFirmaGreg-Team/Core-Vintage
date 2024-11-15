@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.soil.api.types.type;
 
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.api.library.types.variant.Variant;
+import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;

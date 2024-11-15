@@ -17,34 +17,34 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class EntitiesWood {
 
-  public static void onRegister(RegistryManager registry) {
-    registry.entity("boat",
-                    EntityEntryBuilder.create()
-                                      .entity(EntityWoodBoat.class)
-                                      .tracker(160, 20, true)
+  public static void onRegister(RegistryManager registryManager) {
+    registryManager.entity("boat",
+                           EntityEntryBuilder.create()
+                                             .entity(EntityWoodBoat.class)
+                                             .tracker(160, 20, true)
     );
 
-    registry.entity("supply_cart",
-                    EntityEntryBuilder.create()
-                                      .entity(EntityWoodSupplyCart.class)
-                                      .tracker(80, 3, false)
+    registryManager.entity("supply_cart",
+                           EntityEntryBuilder.create()
+                                             .entity(EntityWoodSupplyCart.class)
+                                             .tracker(80, 3, false)
     );
 
-    registry.entity("animal_cart",
-                    EntityEntryBuilder.create()
-                                      .entity(EntityWoodAnimalCart.class)
-                                      .tracker(80, 3, false)
+    registryManager.entity("animal_cart",
+                           EntityEntryBuilder.create()
+                                             .entity(EntityWoodAnimalCart.class)
+                                             .tracker(80, 3, false)
     );
 
-    registry.entity("plow_cart",
-                    EntityEntryBuilder.create()
-                                      .entity(EntityWoodPlowCart.class)
-                                      .tracker(80, 3, false)
+    registryManager.entity("plow_cart",
+                           EntityEntryBuilder.create()
+                                             .entity(EntityWoodPlowCart.class)
+                                             .tracker(80, 3, false)
     );
   }
 
   @SideOnly(Side.CLIENT)
-  public static void onClientRegister(RegistryManager registry) {
+  public static void onClientRegister(RegistryManager registryManager) {
     RenderingRegistry.registerEntityRenderingHandler(EntityWoodBoat.class, RenderWoodBoat::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityWoodSupplyCart.class,
                                                      RenderWoodSupplyCart::new);

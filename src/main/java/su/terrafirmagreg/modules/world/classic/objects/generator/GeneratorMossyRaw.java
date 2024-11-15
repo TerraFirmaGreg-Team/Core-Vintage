@@ -1,5 +1,12 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraftforge.fml.common.IWorldGenerator;
+
 import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
@@ -7,13 +14,6 @@ import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
-
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.EnumSkyBlock;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 

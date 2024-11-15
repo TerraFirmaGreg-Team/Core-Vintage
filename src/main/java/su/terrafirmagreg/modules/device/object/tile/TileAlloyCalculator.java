@@ -1,9 +1,8 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.tile.BaseTileInventory;
-import su.terrafirmagreg.api.registry.provider.IProviderContainer;
-import su.terrafirmagreg.modules.device.client.gui.GuiAlloyCalculator;
-import su.terrafirmagreg.modules.device.object.container.ContainerAlloyCalculator;
+import lombok.Getter;
+
+import net.dries007.tfc.util.Alloy;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,9 +11,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.Alloy;
-
-import lombok.Getter;
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
+import su.terrafirmagreg.modules.device.client.gui.GuiAlloyCalculator;
+import su.terrafirmagreg.modules.device.object.container.ContainerAlloyCalculator;
 
 @Getter
 public class TileAlloyCalculator extends BaseTileInventory implements IProviderContainer<ContainerAlloyCalculator, GuiAlloyCalculator> {

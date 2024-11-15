@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.metal.init;
 
-import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.api.library.Pair;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 import su.terrafirmagreg.modules.metal.api.types.variant.Item.MetalItemVariant;
 
@@ -76,9 +76,9 @@ public class ItemsMetal {
 
   public static MetalItemVariant BUCKET;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
-    registry.items(METAL_ITEMS.values());
+    registryManager.items(METAL_ITEMS.values());
 
   }
 

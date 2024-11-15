@@ -11,7 +11,7 @@ public final class FluidsCore {
   public static FluidWrapper SALT_WATER;
   public static FluidWrapper DISTILLED_WATER;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
     //==== Water Variants ======================================================================================================================//
 

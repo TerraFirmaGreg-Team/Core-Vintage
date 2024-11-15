@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.device.client.render.TESROven;
@@ -45,10 +45,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.CURED;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 @SuppressWarnings("deprecation")
 public class BlockOven extends BaseBlock implements IProviderTile {

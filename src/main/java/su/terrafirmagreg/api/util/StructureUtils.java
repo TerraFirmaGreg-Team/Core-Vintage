@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.modules.wood.object.block.BlockWoodSapling;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
@@ -12,8 +14,6 @@ import net.minecraft.world.gen.structure.template.BlockRotationProcessor;
 import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
-
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 
 import lombok.experimental.UtilityClass;
 
@@ -53,7 +53,7 @@ public final class StructureUtils {
 
           if (stateToReplace.getMaterial().isReplaceable()
               || stateToReplace.getBlock() instanceof BlockLeaves
-              || stateToReplace.getBlock() instanceof BlockSaplingTFC) {
+              || stateToReplace.getBlock() instanceof BlockWoodSapling) {
             worldIn.setBlockState(blockpos, stateToPlace, 2);
           }
         }

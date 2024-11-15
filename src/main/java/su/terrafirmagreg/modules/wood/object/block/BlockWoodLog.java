@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -43,9 +43,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.PLACED;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.SMALL;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 
 @Getter

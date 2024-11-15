@@ -55,7 +55,7 @@ public class RegistryManager
     this.modID = modID;
     this.tab = tab;
 
-    this.registry = new Registry(this);
+    this.registry = new Registry();
     MinecraftForge.EVENT_BUS.register(this.registry);
   }
 

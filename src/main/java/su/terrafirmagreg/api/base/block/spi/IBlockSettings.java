@@ -1,13 +1,13 @@
 package su.terrafirmagreg.api.base.block.spi;
 
-import su.terrafirmagreg.api.base.item.BaseItemBlock;
+import su.terrafirmagreg.api.base.itemblock.BaseItemBlock;
+import su.terrafirmagreg.api.data.enums.ItemRarity;
+import su.terrafirmagreg.api.library.model.CustomStateMap;
 import su.terrafirmagreg.api.registry.provider.IProviderAutoReg;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockState;
 import su.terrafirmagreg.api.registry.provider.IProviderModel;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.api.data.enums.ItemRarity;
-import su.terrafirmagreg.api.library.model.CustomStateMap;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
@@ -291,11 +291,11 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
       return new Settings(material, material.getMaterialMapColor());
     }
 
-    public static <B extends Block> Settings copy(B block) {
-      return copy(block, 0);
+    public static <B extends Block> Settings of(B block) {
+      return of(block, 0);
     }
 
-    public static <B extends Block> Settings copy(B block, int meta) {
+    public static <B extends Block> Settings of(B block, int meta) {
       IBlockState state = block.getStateFromMeta(meta);
       Settings settings = Settings.of(block.material, block.blockMapColor);
 

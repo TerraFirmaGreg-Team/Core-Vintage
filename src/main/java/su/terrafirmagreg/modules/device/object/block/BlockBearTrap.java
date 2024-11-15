@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
-import su.terrafirmagreg.api.registry.provider.IProviderTile;
-import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;

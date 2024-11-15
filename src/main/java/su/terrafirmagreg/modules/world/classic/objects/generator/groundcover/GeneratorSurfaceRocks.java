@@ -58,7 +58,7 @@ public class GeneratorSurfaceRocks
 
     if (world.isAirBlock(pos) && world.getBlockState(pos.down())
                                       .isSideSolid(world, pos.down(), EnumFacing.UP) &&
-            BlockHelper.isSoil(world.getBlockState(pos.down()))) {
+        BlockHelper.isSoil(world.getBlockState(pos.down()))) {
       world.setBlockState(pos,
                           BlocksRock.SURFACE.get(type).getDefaultState()
                                             .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(random.nextInt(4))), 2);

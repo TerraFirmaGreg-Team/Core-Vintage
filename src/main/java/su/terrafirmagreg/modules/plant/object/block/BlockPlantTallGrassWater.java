@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.plant.object.block;
 
+import su.terrafirmagreg.api.data.enums.EnumPlantPart;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.MathUtils;
-import su.terrafirmagreg.api.data.enums.EnumPlantPart;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
@@ -37,7 +37,7 @@ import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
 import static su.terrafirmagreg.api.data.Properties.IntProp.DAYPERIOD;
 
 public class BlockPlantTallGrassWater extends BlockPlantShortGrass implements IGrowable, ITallPlant {
-  
+
 
   public BlockPlantTallGrassWater(PlantBlockVariant variant, PlantType type) {
     super(variant, type);
@@ -148,7 +148,7 @@ public class BlockPlantTallGrassWater extends BlockPlantShortGrass implements IG
                                                                                        .getHarvestLevel(stack, "scythe", player, state) != -1) {
         for (int i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
           if (MathUtils.RNG.nextDouble() <= (worldIn.getBlockState(pos.up(i))
-                                                        .getValue(AGE_4) + 1) / 4.0D) //+25% change for each age
+                                                    .getValue(AGE_4) + 1) / 4.0D) //+25% change for each age
           {
             spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
           }

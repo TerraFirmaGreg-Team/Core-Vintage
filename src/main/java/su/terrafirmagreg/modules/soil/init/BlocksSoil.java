@@ -49,7 +49,7 @@ public final class BlocksSoil {
   public static BlockSoilPeatGrass PEAT_GRASS;
   public static BlockSoilPeat PEAT;
 
-  public static void onRegister(RegistryManager registry) {
+  public static void onRegister(RegistryManager registryManager) {
 
     GRASS = SoilBlockVariant
       .builder("grass")
@@ -142,8 +142,8 @@ public final class BlocksSoil {
       .factory((v, t) -> new BlockSoilMudWall(MUD_BRICKS.get(t), v, t))
       .build();
 
-    PEAT_GRASS = registry.block(new BlockSoilPeatGrass());
-    PEAT = registry.block(new BlockSoilPeat());
+    PEAT_GRASS = registryManager.block(new BlockSoilPeatGrass());
+    PEAT = registryManager.block(new BlockSoilPeat());
 
   }
 }

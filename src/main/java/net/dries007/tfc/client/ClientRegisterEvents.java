@@ -2,6 +2,7 @@ package net.dries007.tfc.client;
 
 import su.terrafirmagreg.api.data.enums.EnumGradeOre;
 import su.terrafirmagreg.api.data.enums.EnumHideSize;
+import su.terrafirmagreg.modules.food.ConfigFood;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 
@@ -33,7 +34,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -313,7 +313,7 @@ public final class ClientRegisterEvents {
     itemColors.registerItemColorHandler((stack, tintIndex) -> {
       IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
       if (food != null) {
-        return food.isRotten() ? ConfigTFC.Client.DISPLAY.rottenFoodOverlayColor : 0xFFFFFF;
+        return food.isRotten() ? ConfigFood.MISC.DECAY.rottenFoodOverlayColor : 0xFFFFFF;
       }
       return 0xFFFFFF;
     }, ForgeRegistries.ITEMS.getValuesCollection()

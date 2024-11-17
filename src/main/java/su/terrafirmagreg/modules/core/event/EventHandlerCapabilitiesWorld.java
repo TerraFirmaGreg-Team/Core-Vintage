@@ -22,7 +22,7 @@ public class EventHandlerCapabilitiesWorld {
   }
 
   @SubscribeEvent
-  public void attachWorldCapabilities(AttachCapabilitiesEvent<World> event) {
+  public static void attachWorldCapabilities(AttachCapabilitiesEvent<World> event) {
 
     event.addCapability(CapabilityWorldTracker.KEY, new ProviderWorldTracker());
   }

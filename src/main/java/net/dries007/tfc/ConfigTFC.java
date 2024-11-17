@@ -1,6 +1,5 @@
 package net.dries007.tfc;
 
-import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
 import su.terrafirmagreg.api.data.enums.InventoryCraftingMode;
 import su.terrafirmagreg.api.data.enums.QuiverSearch;
 import su.terrafirmagreg.api.data.enums.TimeTooltipMode;
@@ -581,14 +580,6 @@ public final class ConfigTFC {
     @Config.LangKey("config." + MODID_TFC + ".client.tooltip")
     public static final TooltipCFG TOOLTIP = new TooltipCFG();
 
-    @Config.Comment("Display settings")
-    @Config.LangKey("config." + MODID_TFC + ".client.display")
-    public static final DisplayCFG DISPLAY = new DisplayCFG();
-
-    @Config.Comment("Grass coloring settings")
-    @Config.LangKey("config." + MODID_TFC + ".client.grassColor")
-    public static final GrassColorCFG GRASS_COLOR = new GrassColorCFG();
-
     @Config.Comment("Render settings")
     @Config.LangKey("config." + MODID_TFC + ".client.render")
     public static final RenderCFG RENDER = new RenderCFG();
@@ -626,68 +617,6 @@ public final class ConfigTFC {
       @Config.Comment({"Time tooltip info mode."})
       @Config.LangKey("config." + MODID_TFC + ".client.tooltip.timeTooltipMode")
       public TimeTooltipMode timeTooltipMode = TimeTooltipMode.MINECRAFT_HOURS;
-    }
-
-    public static final class DisplayCFG {
-
-      @Config.Comment("If TFC health bar is enabled, this changes display health format. (Default: TFC = 1000 / 1000).")
-      @Config.LangKey("config." + MODID_TFC + ".client.display.healthDisplayFormat")
-      public HealthDisplayFormat healthDisplayFormat = HealthDisplayFormat.TFC;
-
-      @Config.Comment({"Disable TFC health bar and use vanilla instead?"})
-      @Config.LangKey("config." + MODID_TFC + ".client.display.useVanillaHealth")
-      public boolean useVanillaHealth = false;
-
-      @Config.Comment({"Disable TFC hunger bar and use vanilla instead?"})
-      @Config.LangKey("config." + MODID_TFC + ".client.display.useVanillaHunger")
-      public boolean useVanillaHunger = false;
-
-      @Config.Comment({"Hide the thirst bar?"})
-      @Config.LangKey("config." + MODID_TFC + ".client.display.hideThirstBar")
-      public boolean hideThirstBar = false;
-
-      @Config.Comment("The color to render on top of rotten food. Express as a 256 bit color value: 0xFFFFFF = white, 0x000000 = black")
-      @Config.LangKey("config." + MODID_TFC + ".client.display.rottenFoodOverlayColor")
-      public int rottenFoodOverlayColor = 0x88CC33;
-    }
-
-    public static final class GrassColorCFG {
-
-      @Config.Comment("If true, grass and foliage will be slightly varied in color.")
-      @Config.LangKey("config." + MODID_TFC + ".client.grassColor.noiseEnable")
-      public boolean noiseEnable = true;
-
-      @Config.Comment("If true, grass and foliage will be colored seasonally.")
-      @Config.LangKey("config." + MODID_TFC + ".client.grassColor.seasonColorEnable")
-      public boolean seasonColorEnable = true;
-
-      @Config.Comment("The noise scale. Default = 10")
-      @Config.LangKey("config." + MODID_TFC + ".client.grassColor.noiseScale")
-      public float noiseScale = 10f;
-
-      @Config.Comment("How many darkness levels should the noise have? Default = 5")
-      @Config.LangKey("config." + MODID_TFC + ".client.grassColor.noiseLevels")
-      public int noiseLevels = 5;
-
-      @Config.Comment("How potent should the darkness be? Default = 0.15")
-      @Config.LangKey("config." + MODID_TFC + ".client.grassColor.noiseDarkness")
-      public float noiseDarkness = 0.15f;
-
-      @Config.Comment("ARGB code for summer coloring in hexadecimal. Default: 1155FF44")
-      @Config.LangKey("config." + MODID_TFC + ".client.grassColor.seasonColorSummer")
-      public String seasonColorSummer = "1155FF44";
-
-      @Config.Comment("ARGB code for summer coloring in hexadecimal. Default: 55FFDD44")
-      @Config.LangKey("config." + MODID_TFC + ".client.grassColor.seasonColorAutumn")
-      public String seasonColorAutumn = "55FFDD44";
-
-      @Config.Comment("ARGB code for winter coloring in hexadecimal. Default: 335566FF")
-      @Config.LangKey("config." + MODID_TFC + ".client.grassColor.seasonColorWinter")
-      public String seasonColorWinter = "335566FF";
-
-      @Config.Comment("ARGB code for spring coloring in hexadecimal. Default: 3355FFBB")
-      @Config.LangKey("config." + MODID_TFC + ".client.grassColor.seasonColorSpring")
-      public String seasonColorSpring = "3355FFBB";
     }
 
     public static class RenderCFG {

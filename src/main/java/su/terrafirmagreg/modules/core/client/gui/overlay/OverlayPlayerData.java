@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.core.client.gui.overlay;
 import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
@@ -27,7 +28,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import org.lwjgl.opengl.GL11;
 
@@ -68,8 +68,8 @@ public final class OverlayPlayerData {
 
     FoodStats foodStats = player.getFoodStats();
     float displayModifier = 1;
-    if (ConfigTFC.Client.DISPLAY.healthDisplayFormat == HealthDisplayFormat.TFC
-        || ConfigTFC.Client.DISPLAY.healthDisplayFormat == HealthDisplayFormat.TFC_CURRENT_HEALTH) {
+    if (ConfigCore.MISC.DISPLAY.healthDisplayFormat == HealthDisplayFormat.TFC
+        || ConfigCore.MISC.DISPLAY.healthDisplayFormat == HealthDisplayFormat.TFC_CURRENT_HEALTH) {
       displayModifier = 50;
     }
     float baseMaxHealth = 20 * displayModifier;
@@ -79,8 +79,8 @@ public final class OverlayPlayerData {
       currentThirst = foodStatsTFC.getThirst();
     }
     // This is for air to be drawn above our bars
-    if (!ConfigTFC.Client.DISPLAY.hideThirstBar || !ConfigTFC.Client.DISPLAY.useVanillaHunger) {
-      GuiIngameForge.right_height += ConfigTFC.Client.DISPLAY.useVanillaHunger ? 6 : 10;
+    if (!ConfigCore.MISC.DISPLAY.hideThirstBar || !ConfigCore.MISC.DISPLAY.useVanillaHunger) {
+      GuiIngameForge.right_height += ConfigCore.MISC.DISPLAY.useVanillaHunger ? 6 : 10;
     }
 
     ScaledResolution sr = event.getResolution();
@@ -105,18 +105,18 @@ public final class OverlayPlayerData {
       GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
       // Food
-      if (!ConfigTFC.Client.DISPLAY.useVanillaHunger) {
+      if (!ConfigCore.MISC.DISPLAY.useVanillaHunger) {
         drawTexturedModalRect(mid + 1, healthRowHeight, 0, 20, 90, 5);
         drawTexturedModalRect(mid + 1, healthRowHeight, 0, 25, (int) (90 * percentFood), 5);
       }
 
       // Water
-      if (!ConfigTFC.Client.DISPLAY.hideThirstBar) {
+      if (!ConfigCore.MISC.DISPLAY.hideThirstBar) {
         drawTexturedModalRect(mid + 1, healthRowHeight + 5, 90, 20, 90, 5);
         drawTexturedModalRect(mid + 1, healthRowHeight + 5, 90, 25, (int) (90 * percentThirst), 5);
       }
 
-      if (!ConfigTFC.Client.DISPLAY.useVanillaHealth) {
+      if (!ConfigCore.MISC.DISPLAY.useVanillaHealth) {
         //Draw Health
         drawTexturedModalRect(mid - 91, healthRowHeight, 0, 0, 90, 10);
         float curHealth = player.getHealth() * baseMaxHealth / (float) 20;
@@ -139,8 +139,8 @@ public final class OverlayPlayerData {
           //Or just add more color bars to overlay icons.
         }
         //Draw Health value
-        String healthString = ConfigTFC.Client.DISPLAY.healthDisplayFormat.format(curHealth,
-                                                                                  baseMaxHealth);
+        String healthString = ConfigCore.MISC.DISPLAY.healthDisplayFormat.format(curHealth,
+                                                                                 baseMaxHealth);
         fontrenderer.drawString(healthString,
                                 mid - 45 - (fontrenderer.getStringWidth(healthString) / 2), healthRowHeight + 2,
                                 Color.white.getRGB());
@@ -182,7 +182,7 @@ public final class OverlayPlayerData {
 
       // Draw mount's health bar
       if (player.getRidingEntity() instanceof EntityLivingBase mount
-          && !ConfigTFC.Client.DISPLAY.useVanillaHealth) {
+          && !ConfigCore.MISC.DISPLAY.useVanillaHealth) {
         GuiIngameForge.renderHealthMount = false;
         mc.renderEngine.bindTexture(ICONS);
         drawTexturedModalRect(mid + 1, armorRowHeight, 90, 0, 90, 10);

@@ -14,15 +14,14 @@ import net.dries007.tfc.ConfigTFC;
 
 import java.util.function.BooleanSupplier;
 
-public class SCPacketSimpleMessage extends BasePacket<SCPacketSimpleMessage> {
+public class SCPacketSimple extends BasePacket<SCPacketSimple> {
 
   private ITextComponent text;
   private MessageCategory category;
 
-  public SCPacketSimpleMessage() {
-  }
+  public SCPacketSimple() {}
 
-  public SCPacketSimpleMessage(MessageCategory category, ITextComponent text) {
+  public SCPacketSimple(MessageCategory category, ITextComponent text) {
     this.text = text;
     this.category = category;
   }
@@ -30,16 +29,15 @@ public class SCPacketSimpleMessage extends BasePacket<SCPacketSimpleMessage> {
   /**
    * Utility method for making a message with just a single {@link TextComponentTranslation} element.
    */
-  public static SCPacketSimpleMessage translateMessage(MessageCategory category, String unlocalized,
-                                                       Object... args) {
-    return new SCPacketSimpleMessage(category, new TextComponentTranslation(unlocalized, args));
+  public static SCPacketSimple translateMessage(MessageCategory category, String unlocalized, Object... args) {
+    return new SCPacketSimple(category, new TextComponentTranslation(unlocalized, args));
   }
 
   /**
    * Utility method for making a message with just a single {@link TextComponentString} element.
    */
-  public static SCPacketSimpleMessage stringMessage(MessageCategory category, String localized) {
-    return new SCPacketSimpleMessage(category, new TextComponentString(localized));
+  public static SCPacketSimple stringMessage(MessageCategory category, String localized) {
+    return new SCPacketSimple(category, new TextComponentString(localized));
   }
 
 //  @Override

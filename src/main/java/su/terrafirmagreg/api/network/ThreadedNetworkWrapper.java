@@ -65,10 +65,10 @@ public class ThreadedNetworkWrapper {
   private static synchronized SimpleNetworkWrapper getParent(IMessage message, Side side) {
     final NetworkWrapper wrapper = types.get(message.getClass());
     if (wrapper == null) {
-      throw new RuntimeException("Trying to send unregistered network packet: " + message.getClass());
+      throw new RuntimeException("Trying to send unregistered network packet: " + message.getClass().getCanonicalName());
     }
     if (wrapper.getSide() != side) {
-      throw new RuntimeException("Trying to send packet from wrong side: " + message.getClass());
+      throw new RuntimeException("Trying to send packet from wrong side: " + message.getClass().getCanonicalName());
     }
     return wrapper.getParent();
   }
@@ -107,7 +107,7 @@ public class ThreadedNetworkWrapper {
    * @return The packet corresponding to the message.
    */
   public Packet<?> getPacketFrom(IMessage message) {
-    return getParent(message, Side.SERVER).getPacketFrom(message);
+    return getParent(message, Side.CLIENT).getPacketFrom(message);
   }
 
   // region ====== Send Messages ======
@@ -119,7 +119,7 @@ public class ThreadedNetworkWrapper {
    * @param entity  The entity whose tracking entities should receive the message.
    */
   public void sendToAllTracking(IMessage message, Entity entity) {
-    getParent(message, Side.SERVER).sendToAllTracking(message, entity);
+    getParent(message, Side.CLIENT).sendToAllTracking(message, entity);
   }
 
   /**
@@ -128,7 +128,7 @@ public class ThreadedNetworkWrapper {
    * @param message The message to send.
    */
   public void sendToAll(IMessage message) {
-    getParent(message, Side.SERVER).sendToAll(message);
+    getParent(message, Side.CLIENT).sendToAll(message);
   }
 
   /**
@@ -175,7 +175,7 @@ public class ThreadedNetworkWrapper {
    * @param player  The player to receive the message.
    */
   public void sendTo(IMessage message, EntityPlayerMP player) {
-    getParent(message, Side.SERVER).sendTo(message, player);
+    getParent(message, Side.CLIENT).sendTo(message, player);
   }
 
   /**
@@ -198,7 +198,7 @@ public class ThreadedNetworkWrapper {
    * @param point   The point to send the message to.
    */
   public void sendToAllAround(IMessage message, NetworkRegistry.TargetPoint point) {
-    getParent(message, Side.SERVER).sendToAllAround(message, point);
+    getParent(message, Side.CLIENT).sendToAllAround(message, point);
   }
 
   /**
@@ -208,7 +208,7 @@ public class ThreadedNetworkWrapper {
    * @param dimensionId The id of the dimension to send the message to.
    */
   public void sendToDimension(IMessage message, int dimensionId) {
-    getParent(message, Side.SERVER).sendToDimension(message, dimensionId);
+    getParent(message, Side.CLIENT).sendToDimension(message, dimensionId);
   }
 
   /**
@@ -217,7 +217,7 @@ public class ThreadedNetworkWrapper {
    * @param message The message to send.
    */
   public void sendToServer(IMessage message) {
-    getParent(message, Side.CLIENT).sendToServer(message);
+    getParent(message, Side.SERVER).sendToServer(message);
   }
 
   // endregion

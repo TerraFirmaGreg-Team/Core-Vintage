@@ -4,6 +4,9 @@ import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ICapabilityChunkData;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -14,10 +17,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
-import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class EventHandlerDebugInfo {
 
   @SubscribeEvent()
   @SideOnly(Side.CLIENT)
-  public void onRenderGameOverlayText(RenderGameOverlayEvent.Text event) {
+  public static void onRenderGameOverlayText(RenderGameOverlayEvent.Text event) {
 
     if (!GameUtils.getGameSettings().showDebugInfo) {
       return;
@@ -65,12 +64,12 @@ public class EventHandlerDebugInfo {
     addRegisteredIdsData(list);
   }
 
-  private BlockPos getPlayerBlockPos(Minecraft mc) {
+  private static BlockPos getPlayerBlockPos(Minecraft mc) {
     //noinspection ConstantConditions
     return new BlockPos(mc.getRenderViewEntity().posX, mc.getRenderViewEntity().getEntityBoundingBox().minY, mc.getRenderViewEntity().posZ);
   }
 
-  private void addChunkData(List<String> list, ICapabilityChunkData data, BlockPos blockPos) {
+  private static void addChunkData(List<String> list, ICapabilityChunkData data, BlockPos blockPos) {
 
     final int x = blockPos.getX() & 15;
     final int z = blockPos.getZ() & 15;
@@ -92,31 +91,31 @@ public class EventHandlerDebugInfo {
     list.add(String.format("%sSea level offset: %s%s", YELLOW, AQUA, data.getSeaLevelOffset(x, z)));
   }
 
-  private void addTemperatureData(List<String> list, ICapabilityChunkData data, BlockPos blockPos) {
+  private static void addTemperatureData(List<String> list, ICapabilityChunkData data, BlockPos blockPos) {
     list.add(String.format("%sFlora Density: %s%s", YELLOW, AQUA, data.getFloraDensity()));
     list.add(String.format("%sFlora Diversity: %s%s", YELLOW, AQUA, data.getFloraDiversity()));
   }
 
-  private void addRainfallData(List<String> list, ICapabilityChunkData data) {
+  private static void addRainfallData(List<String> list, ICapabilityChunkData data) {
     list.add(String.format("%sRainfall: %s%.1f", YELLOW, AQUA, data.getRainfall()));
   }
 
-  private void addFloraData(List<String> list, ICapabilityChunkData data) {
+  private static void addFloraData(List<String> list, ICapabilityChunkData data) {
     list.add(String.format("%sFlora Density: %s%s", YELLOW, AQUA, data.getFloraDensity()));
     list.add(String.format("%sFlora Diversity: %s%s", YELLOW, AQUA, data.getFloraDiversity()));
   }
 
-  private void addSpawnProtectionData(List<String> list, ICapabilityChunkData data) {
+  private static void addSpawnProtectionData(List<String> list, ICapabilityChunkData data) {
     list.add(String.format("%sSpawn Protection: %s%s", YELLOW, AQUA, data.isSpawnProtected()));
     list.add(String.format("%sSpawn Protection: %s%s", YELLOW, AQUA, data.getSpawnProtection()));
   }
 
-  private void addTimeData(List<String> list) {
+  private static void addTimeData(List<String> list) {
     list.add(I18n.format("tfc.tooltip.date", Calendar.CALENDAR_TIME.getTimeAndDate()));
     list.add(I18n.format("tfc.tooltip.debug_times", Calendar.PLAYER_TIME.getTicks(), Calendar.CALENDAR_TIME.getTicks()));
   }
 
-  private void addRegisteredIdsData(List<String> list) {
+  private static void addRegisteredIdsData(List<String> list) {
     list.add("");
     list.add(String.format("%sBiome IDs Registered: %s%s", YELLOW, AQUA, ForgeRegistries.BIOMES.getKeys().size()));
     list.add(String.format("%sBlock IDs Registered: %s%s", YELLOW, AQUA, ForgeRegistries.BLOCKS.getKeys().size()));

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.world.classic.objects.layer.biome;
 
-import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.base.biome.BaseBiomeProvider;
 import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.world.ModuleWorld;
 import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerBase;
 
 import net.minecraft.world.biome.Biome;
@@ -21,11 +21,11 @@ public class GenLayerBiome extends GenLayerBase {
     super(seed);
     this.parent = parent;
     if (ConfigCore.MISC.DEBUG.debugWorldGenSafe) {
-      TerraFirmaGreg.LOGGER.info("Worldgen biome list (ints): {}", biomes);
-      TerraFirmaGreg.LOGGER.info("Worldgen biome list (names): {}", (Object) Arrays.stream(biomes)
-                                                                                   .mapToObj(Biome::getBiomeForId)
-                                                                                   .map(Objects::toString)
-                                                                                   .toArray());
+      ModuleWorld.LOGGER.info("Worldgen biome list (ints): {}", biomes);
+      ModuleWorld.LOGGER.info("Worldgen biome list (names): {}", (Object) Arrays.stream(biomes)
+                                                                                .mapToObj(Biome::getBiomeForId)
+                                                                                .map(Objects::toString)
+                                                                                .toArray());
     }
   }
 

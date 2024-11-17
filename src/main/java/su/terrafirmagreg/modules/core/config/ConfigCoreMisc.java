@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.config;
 
+import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
 import su.terrafirmagreg.api.data.enums.OreTooltipMode;
 
 import net.minecraftforge.common.config.Config;
@@ -13,6 +14,7 @@ public final class ConfigCoreMisc {
   public final Debug DEBUG = new Debug();
   public final Calendar CALENDAR = new Calendar();
   public final Fallable FALLABLE = new Fallable();
+  public final Display DISPLAY = new Display();
 
   public static final class Weight {
 
@@ -413,5 +415,20 @@ public final class ConfigCoreMisc {
 
     @Config.Comment("Should exploding raw stone blocks cause collapses?")
     public boolean explosionCausesCollapse = true;
+  }
+
+  public static final class Display {
+
+    @Config.Comment("If TFC health bar is enabled, this changes display health format. (Default: TFC = 1000 / 1000).")
+    public HealthDisplayFormat healthDisplayFormat = HealthDisplayFormat.TFC;
+
+    @Config.Comment({"Disable TFC health bar and use vanilla instead?"})
+    public boolean useVanillaHealth = false;
+
+    @Config.Comment({"Disable TFC hunger bar and use vanilla instead?"})
+    public boolean useVanillaHunger = false;
+
+    @Config.Comment({"Hide the thirst bar?"})
+    public boolean hideThirstBar = false;
   }
 }

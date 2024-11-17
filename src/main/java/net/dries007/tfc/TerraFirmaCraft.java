@@ -1,6 +1,7 @@
 package net.dries007.tfc;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
@@ -24,9 +25,7 @@ import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
-import net.dries007.tfc.network.PacketCalendarUpdate;
 import net.dries007.tfc.network.PacketCapabilityContainerUpdate;
-import net.dries007.tfc.network.PacketChunkData;
 import net.dries007.tfc.network.PacketCycleItemMode;
 import net.dries007.tfc.network.PacketFoodStatsReplace;
 import net.dries007.tfc.network.PacketFoodStatsUpdate;
@@ -42,12 +41,11 @@ import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.proxy.IProxy;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import net.dries007.tfc.util.fuel.FuelManager;
 
 import static net.dries007.tfc.TerraFirmaCraft.GUI_FACTORY;
-import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 import static su.terrafirmagreg.Tags.MOD_VERSION;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber
@@ -107,9 +105,7 @@ public final class TerraFirmaCraft {
     network.registerMessage(new PacketStackFood.Handler(), PacketStackFood.class, ++id, Side.SERVER);
 
     // Received on client
-    network.registerMessage(new PacketChunkData.Handler(), PacketChunkData.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketCapabilityContainerUpdate.Handler(), PacketCapabilityContainerUpdate.class, ++id, Side.CLIENT);
-    network.registerMessage(new PacketCalendarUpdate.Handler(), PacketCalendarUpdate.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketFoodStatsUpdate.Handler(), PacketFoodStatsUpdate.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketFoodStatsReplace.Handler(), PacketFoodStatsReplace.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketPlayerDataUpdate.Handler(), PacketPlayerDataUpdate.class, ++id, Side.CLIENT);

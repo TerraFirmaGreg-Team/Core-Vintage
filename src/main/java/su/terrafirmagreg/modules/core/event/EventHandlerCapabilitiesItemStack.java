@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 public class EventHandlerCapabilitiesItemStack {
 
   @SubscribeEvent
-  public void attachItemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
+  public static void attachItemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
     ItemStack stack = event.getObject();
     if (stack.isEmpty()) {
       return;
@@ -36,7 +36,7 @@ public class EventHandlerCapabilitiesItemStack {
     damageResistance(event, stack);
   }
 
-  public void size(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+  public static void size(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
     if (CapabilitySize.getIItemSize(stack) != null) {
       return;
@@ -57,19 +57,19 @@ public class EventHandlerCapabilitiesItemStack {
 
   }
 
-  public void food(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+  public static void food(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
   }
 
-  public void metal(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+  public static void metal(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
   }
 
-  public void heat(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+  public static void heat(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
   }
 
-  public void sharpness(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+  public static void sharpness(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
     ICapabilityProvider provider = HandlerSharpness.getCustom(stack);
     if (provider == null) {
@@ -79,7 +79,7 @@ public class EventHandlerCapabilitiesItemStack {
     event.addCapability(CapabilitySharpness.KEY, provider);
   }
 
-  public void egg(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+  public static void egg(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
     ICapabilityProvider provider = HandlerEgg.getCustom(stack);
     if (provider == null) {
@@ -89,7 +89,7 @@ public class EventHandlerCapabilitiesItemStack {
     event.addCapability(CapabilityEgg.KEY, provider);
   }
 
-  public void damageResistance(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+  public static void damageResistance(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
     ICapabilityProvider provider = HandlerDamageResistance.getCustom(stack);
     if (provider == null) {

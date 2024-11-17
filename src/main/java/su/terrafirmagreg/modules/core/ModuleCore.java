@@ -30,6 +30,7 @@ import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayPlayerData;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayTemperature;
 import su.terrafirmagreg.modules.core.event.EventHandlerAmbiental;
+import su.terrafirmagreg.modules.core.event.EventHandlerCalendar;
 import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesChunk;
 import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesEntity;
 import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesItemStack;
@@ -148,6 +149,7 @@ public final class ModuleCore extends ModuleBase {
     ObjectList<Class<?>> list = new ObjectArrayList<>();
 
     list.add(EventHandlerAmbiental.class);
+    list.add(EventHandlerCalendar.class);
     list.add(EventHandlerCapabilitiesChunk.class);
     list.add(EventHandlerCapabilitiesWorld.class);
     list.add(EventHandlerCapabilitiesItemStack.class);

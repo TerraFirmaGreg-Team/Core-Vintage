@@ -24,7 +24,6 @@ import su.terrafirmagreg.modules.core.capabilities.player.ProviderPlayer;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
@@ -44,7 +43,6 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodSupport;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
-import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataCalendar;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -127,7 +125,6 @@ import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.network.PacketCalendarUpdate;
 import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
@@ -871,13 +868,6 @@ public final class CommonEventHandler {
   @SubscribeEvent
   public static void onWorldLoad(WorldEvent.Load event) {
     final World world = event.getWorld();
-
-    if (world.provider.getDimension() == 0 && !world.isRemote) {
-      // Calendar Sync / Initialization
-      WorldDataCalendar data = WorldDataCalendar.get(world);
-      Calendar.INSTANCE.resetTo(data.getCalendar());
-      TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(Calendar.INSTANCE));
-    }
 
     if (ConfigTFC.General.OVERRIDES.forceNoVanillaNaturalRegeneration) {
       // Natural regeneration should be disabled, allows TFC to have custom regeneration

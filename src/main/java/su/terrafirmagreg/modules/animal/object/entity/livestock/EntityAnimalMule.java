@@ -15,8 +15,9 @@ import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
-import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
+import su.terrafirmagreg.modules.core.network.SCPacketSimple;
 
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityAgeable;
@@ -46,7 +47,6 @@ import net.minecraft.world.biome.Biome;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -413,8 +413,8 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
           if (!this.world.isRemote) {
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-              ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(
-                                                   SCPacketSimpleMessage.MessageCategory.ANIMAL,
+              ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimple.translateMessage(
+                                                   SCPacketSimple.MessageCategory.ANIMAL,
                                                    ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
                                                  (EntityPlayerMP) player);
             }

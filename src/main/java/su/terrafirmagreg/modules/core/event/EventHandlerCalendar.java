@@ -1,22 +1,26 @@
-package su.terrafirmagreg.modules.core.feature.calendar;
+package su.terrafirmagreg.modules.core.event;
 
+import su.terrafirmagreg.modules.core.ModuleCore;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.network.SCPacketCalendarUpdate;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
+import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataCalendar;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.GameRuleChangeEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
 
 import java.util.List;
 import java.util.Objects;
@@ -25,8 +29,8 @@ import static net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import static net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
-@Mod.EventBusSubscriber(modid = MODID_TFC)
-public class CalendarEventHandler {
+@SuppressWarnings("unused")
+public class EventHandlerCalendar {
 
   /**
    * Called from LOGICAL SERVER Responsible for primary time tracking for player time Synced to client every second
@@ -91,7 +95,7 @@ public class CalendarEventHandler {
       // Check total players and reset player / calendar time ticking
       MinecraftServer server = event.player.getServer();
       if (server != null) {
-        TerraFirmaCraft.getLog().info("Player Logged Out - Checking for Calendar Updates.");
+        ModuleCore.LOGGER.info("Player Logged Out - Checking for Calendar Updates.");
         List<EntityPlayerMP> players = server.getPlayerList().getPlayers();
         int playerCount = players.size();
         // The player logging out doesn't count
@@ -114,7 +118,7 @@ public class CalendarEventHandler {
       // Check total players and reset player / calendar time ticking
       MinecraftServer server = event.player.getServer();
       if (server != null) {
-        TerraFirmaCraft.getLog().info("Player Logged In - Checking for Calendar Updates.");
+        ModuleCore.LOGGER.info("Player Logged In - Checking for Calendar Updates.");
         int players = server.getPlayerList().getPlayers().size();
         Calendar.INSTANCE.setPlayersLoggedOn(players > 0);
       }
@@ -131,6 +135,18 @@ public class CalendarEventHandler {
     if ("doDaylightCycle".equals(event.getRuleName())) {
       // This is only called on server, so it needs to sync to client
       Calendar.INSTANCE.setDoDaylightCycle();
+    }
+  }
+
+  @SubscribeEvent
+  public static void onWorldLoad(WorldEvent.Load event) {
+    final World world = event.getWorld();
+
+    if (world.provider.getDimension() == 0 && !world.isRemote) {
+      // Calendar Sync / Initialization
+      WorldDataCalendar data = WorldDataCalendar.get(world);
+      Calendar.INSTANCE.resetTo(data.getCalendar());
+      ModuleCore.PACKET_SERVICE.sendToAll(new SCPacketCalendarUpdate(Calendar.INSTANCE));
     }
   }
 }

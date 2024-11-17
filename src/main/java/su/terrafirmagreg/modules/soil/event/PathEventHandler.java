@@ -1,6 +1,10 @@
 package su.terrafirmagreg.modules.soil.event;
 
-import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
+import su.terrafirmagreg.api.library.types.variant.Variant;
+import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.soil.ConfigSoil;
+import su.terrafirmagreg.modules.soil.ModuleSoil;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -14,13 +18,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.soil.ConfigSoil;
-import su.terrafirmagreg.modules.soil.ModuleSoil;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.modules.soil.init.BlocksSoil.*;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.COARSE_DIRT;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DIRT;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DRY_GRASS;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS_PATH;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
@@ -67,15 +72,12 @@ public class PathEventHandler {
 
       if (!world.isRemote && state.getBlock() instanceof ISoilBlock soil && player_speed > 0.2) {
 
-        if (player_random < ConfigSoil.BLOCK.GRASS_PATH.PLAYER_GRASS_TO_DIRT
-            && soil.getVariant() == GRASS ||
-            soil.getVariant() == DRY_GRASS) {
+        if (player_random < ConfigSoil.BLOCK.GRASS_PATH.PLAYER_GRASS_TO_DIRT && Variant.isVariant(soil.getVariant(), GRASS, DRY_GRASS)) {
           world.setBlockState(posPlayer, DIRT.get(soil.getType()).getDefaultState());
           if (ConfigSoil.BLOCK.GRASS_PATH.DESTROY_VEGETATION) {
             BlockPos upPos = posPlayer.up();
             Material upMaterial = world.getBlockState(upPos).getMaterial();
-            if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(
-              upPos).getBlock() instanceof BlockPlacedItemFlat) {
+            if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos).getBlock() instanceof BlockPlacedItemFlat) {
               world.destroyBlock(upPos, true);
             }
           }

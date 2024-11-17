@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.core.event;
 import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.network.SCPacketChunkData;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 
@@ -12,8 +13,6 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.world.ChunkWatchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -38,20 +37,20 @@ public class EventHandlerCapabilitiesChunk {
   }
 
   @SubscribeEvent
-  public void attachChunkCapabilities(AttachCapabilitiesEvent<Chunk> event) {
+  public static void attachChunkCapabilities(AttachCapabilitiesEvent<Chunk> event) {
     // Per #922, if there's no world or no world type, something is seriously violating our assumptions and we will just fail.
     //noinspection ConstantConditions
 
     var world = event.getObject().getWorld();
 
-    if (event.getObject().getWorld() == null) {
+    if (world == null) {
       return;
     }
 
     chunkData(event, world);
   }
 
-  public void chunkData(AttachCapabilitiesEvent<Chunk> event, @NotNull World world) {
+  public static void chunkData(AttachCapabilitiesEvent<Chunk> event, @NotNull World world) {
 
     if (world.getWorldType() != ModuleWorld.WORLD_TYPE_CLASSIC) {
       return;

@@ -1,5 +1,9 @@
 package su.terrafirmagreg.mixin.minecraft.block;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.ITemperatureBlock;
+import su.terrafirmagreg.modules.core.feature.climate.IceMeltHandler;
+
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -15,11 +19,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
-
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
-import su.terrafirmagreg.modules.core.feature.climate.ITemperatureBlock;
-import su.terrafirmagreg.modules.core.feature.climate.IceMeltHandler;
+import net.minecraftforge.fluids.FluidRegistry;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,17 +33,16 @@ public class MixinBlockIce extends BlockBreakable implements ITemperatureBlock {
   private final float meltThreshold;
 
   public MixinBlockIce() {
-    this(FluidsTFC.FRESH_WATER.get());
+    this(FluidRegistry.getFluid("fresh_water"));
   }
 
   public MixinBlockIce(Fluid waterFluid) {
     super(Material.ICE, false);
 
     this.waterFluid = waterFluid;
-    this.meltThreshold = waterFluid ==
-                         FluidsTFC.SALT_WATER.get() ?
-                         IceMeltHandler.SALT_WATER_MELT_THRESHOLD :
-                         IceMeltHandler.ICE_MELT_THRESHOLD;
+    this.meltThreshold = waterFluid == FluidRegistry.getFluid("salt_water")
+                         ? IceMeltHandler.SALT_WATER_MELT_THRESHOLD
+                         : IceMeltHandler.ICE_MELT_THRESHOLD;
 
     this.slipperiness = 0.98F;
 

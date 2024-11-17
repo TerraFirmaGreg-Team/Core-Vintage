@@ -14,7 +14,8 @@ import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
-import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.network.SCPacketSimple;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -42,7 +43,6 @@ import net.minecraftforge.common.IShearable;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -175,7 +175,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
           TextComponentTranslation tooltip = getTooltip();
           if (tooltip != null) {
             ModuleAnimal.PACKET_SERVICE.sendTo(
-              new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
+              new SCPacketSimple(SCPacketSimple.MessageCategory.ANIMAL, tooltip),
               (EntityPlayerMP) player);
           }
         }
@@ -187,7 +187,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
           TextComponentTranslation tooltip = getTooltip();
           if (tooltip != null) {
             ModuleAnimal.PACKET_SERVICE.sendTo(
-              new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
+              new SCPacketSimple(SCPacketSimple.MessageCategory.ANIMAL, tooltip),
               (EntityPlayerMP) player);
           }
         }

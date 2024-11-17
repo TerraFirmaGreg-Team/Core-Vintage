@@ -26,7 +26,7 @@ public class EventHandlerAmbiental {
 
   // Ignore this code!
   @SubscribeEvent
-  public void onInteract(EntityInteractSpecific event) {
+  public static void onInteract(EntityInteractSpecific event) {
 
     Entity entity = event.getTarget();
     EntityPlayer player = event.getEntityPlayer();
@@ -61,7 +61,7 @@ public class EventHandlerAmbiental {
   }
 
   @SubscribeEvent
-  public void onPlayerDeath(LivingDeathEvent event) {
+  public static void onPlayerDeath(LivingDeathEvent event) {
     if (event.getEntityLiving().world.isRemote) {
       return;
     }
@@ -75,7 +75,7 @@ public class EventHandlerAmbiental {
   }
 
   @SubscribeEvent
-  public void onPlayerSpawn(LivingSpawnEvent event) {
+  public static void onPlayerSpawn(LivingSpawnEvent event) {
     if (event.getEntityLiving().world.isRemote) {
       return;
     }
@@ -86,7 +86,7 @@ public class EventHandlerAmbiental {
   }
 
   @SubscribeEvent
-  public void onPlayerUpdate(LivingUpdateEvent event) {
+  public static void onPlayerUpdate(LivingUpdateEvent event) {
     if (!(event.getEntityLiving() instanceof EntityPlayer player)) {
       return;
     }

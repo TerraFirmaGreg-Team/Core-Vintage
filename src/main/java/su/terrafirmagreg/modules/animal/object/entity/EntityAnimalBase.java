@@ -12,7 +12,9 @@ import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIPanic;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAITamableAvoidPlayer;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalWolf;
-import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.network.SCPacketSimple;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityList;
@@ -42,8 +44,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.base.Predicates;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -387,8 +387,8 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
           if (!this.world.isRemote) {
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-              ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(
-                                                   SCPacketSimpleMessage.MessageCategory.ANIMAL,
+              ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimple.translateMessage(
+                                                   SCPacketSimple.MessageCategory.ANIMAL,
                                                    ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
                                                  (EntityPlayerMP) player);
             }

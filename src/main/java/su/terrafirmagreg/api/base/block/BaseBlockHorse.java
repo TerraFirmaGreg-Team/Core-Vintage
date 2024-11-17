@@ -24,6 +24,8 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public abstract class BaseBlockHorse extends BaseBlock implements IProviderTile {
 
 
@@ -52,7 +54,7 @@ public abstract class BaseBlockHorse extends BaseBlock implements IProviderTile 
       final int y = pos.getY();
       final int z = pos.getZ();
       EntityCreature creature = null;
-      var clazzes = EntityUtils.getCreatureClasses();
+      var clazzes = getCreatureClasses();
       search:
       for (Class<? extends Entity> clazz : clazzes) {
         var entitiesWithinAABB = worldIn.getEntitiesWithinAABB(clazz, new AxisAlignedBB(
@@ -86,6 +88,10 @@ public abstract class BaseBlockHorse extends BaseBlock implements IProviderTile 
       baseTileHorse.markDirty();
       return true;
     }).orElse(false);
+  }
+
+  protected ArrayList<Class<? extends EntityCreature>> getCreatureClasses() {
+    return EntityUtils.getCreatureClasses();
   }
 
   @Override

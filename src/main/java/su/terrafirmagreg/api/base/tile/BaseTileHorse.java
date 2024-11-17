@@ -93,10 +93,11 @@ public abstract class BaseTileHorse extends TileHPBase implements ITickable {
     int z = pos.getZ();
 
     if (world != null) {
-      ArrayList<Class<? extends EntityCreature>> clazzes = EntityUtils.getCreatureClasses();
+      ArrayList<Class<? extends EntityCreature>> clazzes = getCreatureClasses();
       for (Class<? extends Entity> clazz : clazzes) {
-        for (Object entity : world.getEntitiesWithinAABB(clazz, new AxisAlignedBB((double) x - 7.0D, (double) y - 7.0D, (double) z - 7.0D, (double) x + 7.0D,
-                                                                                  (double) y + 7.0D, (double) z + 7.0D
+        for (Object entity : world.getEntitiesWithinAABB(clazz, new AxisAlignedBB(
+          (double) x - 7.0D, (double) y - 7.0D, (double) z - 7.0D,
+          (double) x + 7.0D, (double) y + 7.0D, (double) z + 7.0D
         ))) {
           if (entity instanceof EntityCreature creature) {
             if (creature.getUniqueID().equals(uuid)) {
@@ -108,6 +109,10 @@ public abstract class BaseTileHorse extends TileHPBase implements ITickable {
       }
     }
     return false;
+  }
+
+  protected ArrayList<Class<? extends EntityCreature>> getCreatureClasses() {
+    return EntityUtils.getCreatureClasses();
   }
 
   public void setWorker(EntityCreature newWorker) {

@@ -91,8 +91,8 @@ public class OverlayTemperature {
     }
     IBlockState state = player.world.getBlockState(pos2);
     Block block = state.getBlock();
-    if (block == FluidsTFC.HOT_WATER.get().getBlock() || block == FluidsTFC.SALT_WATER.get()
-                                                                                      .getBlock() ||
+    if (block == FluidsTFC.HOT_WATER.get().getBlock() ||
+        block == FluidsTFC.SALT_WATER.get().getBlock() ||
         block == FluidsTFC.FRESH_WATER.get().getBlock()) {
       offsetY = -10f;
       offsetX = 0;

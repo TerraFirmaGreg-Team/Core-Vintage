@@ -16,7 +16,7 @@ import static su.terrafirmagreg.Tags.MOD_ID;
 public class EventHandlerConfigChanged {
 
   @SubscribeEvent
-  public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+  public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
     if (event.getModID().equals(MOD_ID)) {
       ModuleCore.LOGGER.warn("Config changed");
       ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);

@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core.event;
 
 import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 
 import net.minecraft.block.Block;
@@ -29,8 +30,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
-
 import java.util.Iterator;
 import java.util.Random;
 
@@ -38,7 +37,7 @@ import java.util.Random;
 public class EventHandlerPuddles {
 
   @SubscribeEvent
-  public void placePuddles(TickEvent.ServerTickEvent event) {
+  public static void placePuddles(TickEvent.ServerTickEvent event) {
     if (event.phase == TickEvent.Phase.END) {
       WorldServer world = DimensionManager.getWorld(0);
       try {
@@ -56,7 +55,7 @@ public class EventHandlerPuddles {
             int y = world.getHeight(pos).getY() + random.nextInt(4) - random.nextInt(4);
             BlockPos puddlePos = pos.add(0, y, 0);
 
-            if (this.canSpawnPuddle(world, puddlePos)) {
+            if (canSpawnPuddle(world, puddlePos)) {
               if (random.nextInt(100) < ConfigCore.BLOCK.PUDDLE.puddleRate) {
                 world.setBlockState(puddlePos.up(), BlocksCore.PUDDLE.getDefaultState(), 2);
               }
@@ -70,7 +69,7 @@ public class EventHandlerPuddles {
   }
 
   // TODO: PuddlesMixin +
-  public boolean canSpawnPuddle(World world, BlockPos pos) {
+  public static boolean canSpawnPuddle(World world, BlockPos pos) {
     if (!world.isSideSolid(pos, EnumFacing.UP)) {
       return false;
     }
@@ -95,7 +94,7 @@ public class EventHandlerPuddles {
   }
 
   @SubscribeEvent
-  public void puddleInteract(PlayerInteractEvent.RightClickBlock event) {
+  public static void puddleInteract(PlayerInteractEvent.RightClickBlock event) {
     ItemStack stack = event.getItemStack();
     World world = event.getWorld();
     BlockPos pos = event.getPos().up();
@@ -127,7 +126,7 @@ public class EventHandlerPuddles {
   }
 
   @SubscribeEvent
-  public void makeBigSplash(LivingFallEvent event) {
+  public static void makeBigSplash(LivingFallEvent event) {
     EntityLivingBase entity = event.getEntityLiving();
     BlockPos pos = entity.getPosition();
     World world = entity.getEntityWorld();

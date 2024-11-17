@@ -39,6 +39,9 @@ public final class ConfigDeviceBlock {
   @Config.Comment("Anvil")
   public final Anvil ANVIL = new Anvil();
 
+  @Config.Comment("Anvil")
+  public final Anvil ANVIL = new Anvil();
+
   public static final class Bellows {
 
     @Config.Comment(

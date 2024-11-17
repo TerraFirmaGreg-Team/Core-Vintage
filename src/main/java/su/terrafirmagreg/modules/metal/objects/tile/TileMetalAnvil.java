@@ -11,7 +11,7 @@ import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.feature.skills.SkillType;
 import su.terrafirmagreg.modules.core.feature.skills.SmithingSkill;
-import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
+import su.terrafirmagreg.modules.core.network.SCPacketSimple;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil;
@@ -305,8 +305,8 @@ public class TileMetalAnvil extends BaseTileInventory
         // No flux
         ModuleMetal.PACKET_SERVICE
           .sendTo(
-            SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
-                                                   ModUtils.localize("tooltip", "metal.anvil_no_flux")),
+            SCPacketSimple.translateMessage(SCPacketSimple.MessageCategory.ANVIL,
+                                            ModUtils.localize("tooltip", "metal.anvil_no_flux")),
             (EntityPlayerMP) player);
         return false;
       }
@@ -317,14 +317,14 @@ public class TileMetalAnvil extends BaseTileInventory
       if (cap1 == null || cap2 == null || !cap1.isWeldable() || !cap2.isWeldable()) {
         if (cap1 instanceof ICapabilityHeat && cap2 instanceof ICapabilityHeat) {
           ModuleMetal.PACKET_SERVICE
-            .sendTo(SCPacketSimpleMessage.translateMessage(
-                      SCPacketSimpleMessage.MessageCategory.ANVIL,
+            .sendTo(SCPacketSimple.translateMessage(
+                      SCPacketSimple.MessageCategory.ANVIL,
                       ModUtils.localize("tooltip", "metal.anvil_too_cold")),
                     (EntityPlayerMP) player);
         } else {
           ModuleMetal.PACKET_SERVICE.sendTo(
-            SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
-                                                   ModUtils.localize("tooltip", "metal.anvil_not_weldable")),
+            SCPacketSimple.translateMessage(SCPacketSimple.MessageCategory.ANVIL,
+                                            ModUtils.localize("tooltip", "metal.anvil_not_weldable")),
             (EntityPlayerMP) player);
         }
         return false;
@@ -354,8 +354,8 @@ public class TileMetalAnvil extends BaseTileInventory
 
     // For when there is both inputs but no recipe that matches
     ModuleMetal.PACKET_SERVICE.sendTo(
-      SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
-                                             ModUtils.localize("tooltip", "anvil_not_weldable")), (EntityPlayerMP) player);
+      SCPacketSimple.translateMessage(SCPacketSimple.MessageCategory.ANVIL,
+                                      ModUtils.localize("tooltip", "anvil_not_weldable")), (EntityPlayerMP) player);
     return false;
   }
 

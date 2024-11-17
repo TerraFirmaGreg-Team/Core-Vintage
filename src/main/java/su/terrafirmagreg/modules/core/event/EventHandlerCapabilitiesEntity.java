@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 public class EventHandlerCapabilitiesEntity {
 
   @SubscribeEvent
-  public void attachItemCapabilities(AttachCapabilitiesEvent<Entity> event) {
+  public static void attachItemCapabilities(AttachCapabilitiesEvent<Entity> event) {
 
     Entity entity = event.getObject();
     if (entity == null) {
@@ -33,7 +33,7 @@ public class EventHandlerCapabilitiesEntity {
     //damageResistance(event, entity);
   }
 
-  public void skill(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
+  public static void skill(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
 
     if (entity instanceof EntityPlayer player) {
       // Player skills
@@ -44,7 +44,7 @@ public class EventHandlerCapabilitiesEntity {
 
   }
 
-  public void temperature(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
+  public static void temperature(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
 
     if (entity instanceof EntityPlayer player) {
       // Each player should have their own instance for each stat, as associated values may vary
@@ -56,7 +56,7 @@ public class EventHandlerCapabilitiesEntity {
     }
   }
 
-  public void pull(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
+  public static void pull(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
 
     if (entity instanceof EntityPlayer player) {
       // null check because of a compability issue with MrCrayfish's Furniture Mod and probably others
@@ -70,7 +70,7 @@ public class EventHandlerCapabilitiesEntity {
 
   }
 
-  public void damageResistance(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
+  public static void damageResistance(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
 
     // Give certain entities damage resistance
     if (!CapabilityDamageResistance.has(entity)) {

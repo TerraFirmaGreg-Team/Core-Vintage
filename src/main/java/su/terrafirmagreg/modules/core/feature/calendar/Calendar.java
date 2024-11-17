@@ -1,6 +1,8 @@
 package su.terrafirmagreg.modules.core.feature.calendar;
 
 import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.core.ModuleCore;
+import su.terrafirmagreg.modules.core.network.SCPacketCalendarUpdate;
 import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataCalendar;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,8 +12,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.network.PacketCalendarUpdate;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -137,7 +137,7 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
       world.setWorldTime(currentWorldTime + timeJump);
     }
 
-    TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
+    ModuleCore.PACKET_SERVICE.sendToAll(new SCPacketCalendarUpdate(this));
   }
 
   /**
@@ -155,7 +155,7 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     calendarTime += worldTimeJump;
     playerTime += worldTimeJump;
 
-    TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
+    ModuleCore.PACKET_SERVICE.sendToAll(new SCPacketCalendarUpdate(this));
     return worldTimeJump;
   }
 
@@ -224,7 +224,7 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     server.getEntityWorld().getGameRules().setOrCreateGameRule("doDaylightCycle", "false");
 
     resetTo(WorldDataCalendar.get(server.getEntityWorld()).getCalendar());
-    TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
+    ModuleCore.PACKET_SERVICE.sendToAll(new SCPacketCalendarUpdate(this));
   }
 
   public void resetTo(Calendar resetTo) {
@@ -245,7 +245,7 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
       playerTime++;
     }
     if (server.getTickCounter() % 10 == 0) {
-      TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
+      ModuleCore.PACKET_SERVICE.sendToAll(new SCPacketCalendarUpdate(this));
     }
   }
 
@@ -258,31 +258,28 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     }
     long deltaWorldTime = (world.getWorldTime() % ICalendar.TICKS_IN_DAY) - CALENDAR_TIME.getWorldTime();
     if (deltaWorldTime > 1 || deltaWorldTime < -1) {
-      TerraFirmaCraft.getLog().info("World time and Calendar Time are out of sync! Trying to fix...");
-      TerraFirmaCraft.getLog()
-                     .info("Calendar Time = {} ({}), Player Time = {}, World Time = {}, doDaylightCycle = {}, ArePlayersLoggedOn = {}", calendarTime,
-                           CALENDAR_TIME.getWorldTime(), playerTime, world.getWorldTime() % ICalendar.TICKS_IN_DAY, doDaylightCycle,
-                           arePlayersLoggedOn);
+      ModuleCore.LOGGER.info("World time and Calendar Time are out of sync! Trying to fix...");
+      ModuleCore.LOGGER.info("Calendar Time = {} ({}), Player Time = {}, World Time = {}, doDaylightCycle = {}, ArePlayersLoggedOn = {}",
+                             calendarTime, CALENDAR_TIME.getWorldTime(), playerTime,
+                             world.getWorldTime() % ICalendar.TICKS_IN_DAY, doDaylightCycle, arePlayersLoggedOn);
 
       // Check if tracking values are wrong
       boolean checkArePlayersLoggedOn = !server.getPlayerList().getPlayers().isEmpty();
       if (arePlayersLoggedOn != checkArePlayersLoggedOn) {
         // Whoops, somehow we missed this.
-        TerraFirmaCraft.getLog().info("Setting ArePlayersLoggedOn = {}", checkArePlayersLoggedOn);
+        ModuleCore.LOGGER.info("Setting ArePlayersLoggedOn = {}", checkArePlayersLoggedOn);
         setPlayersLoggedOn(checkArePlayersLoggedOn);
       }
       if (deltaWorldTime < 0) {
         // Calendar is ahead, so jump world time
         world.setWorldTime(world.getWorldTime() - deltaWorldTime);
-        TerraFirmaCraft.getLog()
-                       .info("Calendar is ahead by {} ticks, jumping world time to catch up", -deltaWorldTime);
+        ModuleCore.LOGGER.info("Calendar is ahead by {} ticks, jumping world time to catch up", -deltaWorldTime);
       } else {
         // World time is ahead, so jump calendar
         calendarTime += deltaWorldTime;
-        TerraFirmaCraft.getLog()
-                       .info("Calendar is behind by {} ticks, jumping calendar time to catch up", deltaWorldTime);
+        ModuleCore.LOGGER.info("Calendar is behind by {} ticks, jumping calendar time to catch up", deltaWorldTime);
       }
-      TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
+      ModuleCore.PACKET_SERVICE.sendToAll(new SCPacketCalendarUpdate(this));
     }
   }
 
@@ -291,15 +288,13 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     this.arePlayersLoggedOn = arePlayersLoggedOn;
     if (arePlayersLoggedOn) {
       rules.setOrCreateGameRule("doDaylightCycle", Boolean.toString(doDaylightCycle));
-      TerraFirmaCraft.getLog().info("Reverted doDaylightCycle to {} as players are logged in.", doDaylightCycle);
+      ModuleCore.LOGGER.info("Reverted doDaylightCycle to {} as players are logged in.", doDaylightCycle);
     } else {
       rules.setOrCreateGameRule("doDaylightCycle", Boolean.toString(false));
-      TerraFirmaCraft.getLog()
-                     .info("Forced doDaylightCycle to false as no players are logged in. Will revert to {} as soon as a player logs in.",
-                           doDaylightCycle);
+      ModuleCore.LOGGER.info("Forced doDaylightCycle to false as no players are logged in. Will revert to {} as soon as a player logs in.", doDaylightCycle);
     }
 
-    TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
+    ModuleCore.PACKET_SERVICE.sendToAll(new SCPacketCalendarUpdate(this));
   }
 
   public void setMonthLength(int newMonthLength) {
@@ -314,7 +309,7 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     this.daysInMonth = newMonthLength;
     this.calendarTime = (baseMonths * daysInMonth + newDayOfMonth) * ICalendar.TICKS_IN_DAY + baseDayTime;
 
-    TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
+    ModuleCore.PACKET_SERVICE.sendToAll(new SCPacketCalendarUpdate(this));
   }
 
   public void setDoDaylightCycle() {
@@ -322,11 +317,9 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     this.doDaylightCycle = rules.getBoolean("doDaylightCycle");
     if (!arePlayersLoggedOn) {
       rules.setOrCreateGameRule("doDaylightCycle", "false");
-      TerraFirmaCraft.getLog()
-                     .info("Forced doDaylightCycle to false as no players are logged in. Will revert to {} as soon as a player logs in.",
-                           doDaylightCycle);
+      ModuleCore.LOGGER.info("Forced doDaylightCycle to false as no players are logged in. Will revert to {} as soon as a player logs in.", doDaylightCycle);
     }
 
-    TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
+    ModuleCore.PACKET_SERVICE.sendToAll(new SCPacketCalendarUpdate(this));
   }
 }

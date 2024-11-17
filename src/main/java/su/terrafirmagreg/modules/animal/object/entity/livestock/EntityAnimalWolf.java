@@ -14,7 +14,8 @@ import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAITamableAvoidPlayer;
-import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.network.SCPacketSimple;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -44,7 +45,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -447,8 +447,8 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
               //Show tooltips
               if (this.isFertilized() && this.getType() == Type.MAMMAL) {
                 ModuleAnimal.PACKET_SERVICE.sendTo(
-                  SCPacketSimpleMessage.translateMessage(
-                    SCPacketSimpleMessage.MessageCategory.ANIMAL,
+                  SCPacketSimple.translateMessage(
+                    SCPacketSimple.MessageCategory.ANIMAL,
                     ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
                   (EntityPlayerMP) player);
               }

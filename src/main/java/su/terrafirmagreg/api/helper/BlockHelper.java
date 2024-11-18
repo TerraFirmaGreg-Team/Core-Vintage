@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.helper;
 
 import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.soil.api.spi.IGrass;
@@ -12,8 +13,6 @@ import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeat;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.CLAY;
 
@@ -26,7 +25,8 @@ public class BlockHelper {
   public static boolean isDirt(IBlockState current) {
     var block = current.getBlock();
     if (block instanceof ISoilBlock soil) {
-      return Variant.isVariant(soil.getVariant(), BlocksSoil.DIRT, BlocksSoil.COARSE_DIRT, BlocksSoil.ROOTED_DIRT);
+      return Variant.isVariant(soil.getVariant(),
+                               BlocksSoil.DIRT, BlocksSoil.COARSE_DIRT, BlocksSoil.ROOTED_DIRT);
     }
     return false;
   }
@@ -62,7 +62,8 @@ public class BlockHelper {
   public static boolean isGround(IBlockState current) {
     var block = current.getBlock();
     if (block instanceof IRockBlock rock) {
-      return Variant.isVariant(rock.getVariant(), BlocksRock.GRAVEL, BlocksRock.SAND, BlocksRock.RAW);
+      return Variant.isVariant(rock.getVariant(),
+                               BlocksRock.GRAVEL, BlocksRock.SAND, BlocksRock.RAW);
     }
     if (block instanceof ISoilBlock soil) {
       return Variant.isVariant(soil.getVariant(),
@@ -88,15 +89,15 @@ public class BlockHelper {
   }
 
   public static boolean isSaltWater(IBlockState current) {
-    return BlockUtils.isBlock(current.getBlock(), FluidsTFC.SALT_WATER.get().getBlock());
+    return BlockUtils.isBlock(current.getBlock(), FluidsCore.SALT_WATER.get().getBlock());
   }
 
   public static boolean isFreshWaterOrIce(IBlockState current) {
-    return BlockUtils.isBlock(current.getBlock(), Blocks.ICE, FluidsTFC.FRESH_WATER.get().getBlock());
+    return BlockUtils.isBlock(current.getBlock(), Blocks.ICE, FluidsCore.FRESH_WATER.get().getBlock());
   }
 
   public static boolean isFreshWater(IBlockState current) {
-    return BlockUtils.isBlock(current.getBlock(), FluidsTFC.FRESH_WATER.get().getBlock());
+    return BlockUtils.isBlock(current.getBlock(), FluidsCore.FRESH_WATER.get().getBlock());
   }
 
   public static boolean isClay(IBlockState current) {

@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.client.render;
 
 import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 
@@ -22,7 +23,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
 
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +46,7 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
 
     // Rendering liquid in the soup pot
     if (tile.getCookingPotStage() != TileFirePit.CookingPotStage.EMPTY) {
-      Fluid water = FluidsTFC.FRESH_WATER.get();
+      Fluid water = FluidsCore.FRESH_WATER.get();
 
       GlStateManager.pushMatrix();
       GlStateManager.translate(x, y, z);

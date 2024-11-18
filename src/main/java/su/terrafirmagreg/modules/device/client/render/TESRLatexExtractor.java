@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
 
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +18,6 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraftforge.fluids.Fluid;
 
 import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.BASE;
@@ -33,7 +33,7 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtra
                      int destroyStage, float alpha) {
     if (tile.hasWorld()) {
       IBlockState state = tile.getBlockState();
-      Fluid flowing = FluidsTFC.LATEX.get();
+      Fluid flowing = FluidsCore.LATEX.get();
 
       //Update state values according to TE
 

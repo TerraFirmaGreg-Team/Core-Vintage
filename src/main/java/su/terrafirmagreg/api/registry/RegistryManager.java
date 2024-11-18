@@ -7,6 +7,7 @@ import su.terrafirmagreg.api.registry.spi.IRegistryCommand;
 import su.terrafirmagreg.api.registry.spi.IRegistryDataSerializer;
 import su.terrafirmagreg.api.registry.spi.IRegistryEnchantment;
 import su.terrafirmagreg.api.registry.spi.IRegistryEntity;
+import su.terrafirmagreg.api.registry.spi.IRegistryFluid;
 import su.terrafirmagreg.api.registry.spi.IRegistryItem;
 import su.terrafirmagreg.api.registry.spi.IRegistryKeyBinding;
 import su.terrafirmagreg.api.registry.spi.IRegistryLootTable;
@@ -25,7 +26,7 @@ import lombok.Getter;
 @Getter
 public class RegistryManager
   implements IRegistryBlock, IRegistryBiome, IRegistryKeyBinding, IRegistryDataSerializer, IRegistryEnchantment, IRegistryEntity, IRegistryItem,
-             IRegistryLootTable, IRegistryPotion, IRegistryPotionType, IRegistrySound, IRegistryWorldGenerator, IRegistryCommand {
+             IRegistryLootTable, IRegistryPotion, IRegistryPotionType, IRegistrySound, IRegistryWorldGenerator, IRegistryCommand, IRegistryFluid {
 
   /**
    * The id of the mod the registry helper instance belongs to.

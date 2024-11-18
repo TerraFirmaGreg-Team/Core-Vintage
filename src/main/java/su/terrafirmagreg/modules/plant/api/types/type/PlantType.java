@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.plant.api.types.category.PlantCategory;
 
 import net.minecraft.block.material.Material;
@@ -14,7 +15,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import lombok.Getter;
 

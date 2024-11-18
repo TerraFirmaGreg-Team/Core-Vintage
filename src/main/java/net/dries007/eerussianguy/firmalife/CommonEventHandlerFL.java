@@ -6,6 +6,7 @@ import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCow;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGoat;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalYak;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalZebu;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -39,7 +40,6 @@ import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.client.gui.FLGuiHandler;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemFruitPole;
 
 import static su.terrafirmagreg.api.data.Reference.MODID_FL;
@@ -86,18 +86,18 @@ public class CommonEventHandlerFL {
                                                                   Fluid.BUCKET_VOLUME, player, false);
         if (fillResult.isSuccess() && entity instanceof EntityAnimalCow cow) {
           //we can just cast the entity to a cow to test familiarity etc
-          Fluid fluid = FluidsTFC.MILK.get();
+          Fluid fluid = FluidsCore.MILK.get();
           boolean foundMilkable = false;
           if (entity instanceof EntityAnimalYak)//have to check the original entity to get the proper instanceof however
           {
             foundMilkable = true;
-            fluid = FluidsTFC.YAK_MILK.get();
+            fluid = FluidsCore.YAK_MILK.get();
           } else if (entity instanceof EntityAnimalGoat) {
             foundMilkable = true;
-            fluid = FluidsTFC.GOAT_MILK.get();
+            fluid = FluidsCore.GOAT_MILK.get();
           } else if (entity instanceof EntityAnimalZebu) {
             foundMilkable = true;
-            fluid = FluidsTFC.ZEBU_MILK.get();
+            fluid = FluidsCore.ZEBU_MILK.get();
           }
           if (foundMilkable) {
             if (cow.getFamiliarity() > 0.15f && cow.isReadyForAnimalProduct()) {

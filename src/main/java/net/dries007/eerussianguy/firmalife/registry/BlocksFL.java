@@ -1,6 +1,7 @@
 package net.dries007.eerussianguy.firmalife.registry;
 
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,11 +15,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.eerussianguy.firmalife.init.BushFL;
 import net.dries007.eerussianguy.firmalife.init.FruitTreeFL;
 import net.dries007.eerussianguy.firmalife.init.StemCrop;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.objects.blocks.BlockBeeNest;
 import net.dries007.tfc.objects.blocks.BlockBeehive;
@@ -265,10 +266,10 @@ public class BlocksFL {
     register(TEClimateStation.class, "climate_station");
     register(TETurntable.class, "turntable");
     //needs fix
-    FluidsTFC.getWrapper(FluidsTFC.COCONUT_MILK.get());
-    FluidsTFC.getWrapper(FluidsTFC.YAK_MILK.get());
-    FluidsTFC.getWrapper(FluidsTFC.GOAT_MILK.get());
-    FluidsTFC.getWrapper(FluidsTFC.ZEBU_MILK.get());
+    FluidsTFC.getWrapper(FluidsCore.COCONUT_MILK.get());
+    FluidsTFC.getWrapper(FluidsCore.YAK_MILK.get());
+    FluidsTFC.getWrapper(FluidsCore.GOAT_MILK.get());
+    FluidsTFC.getWrapper(FluidsCore.ZEBU_MILK.get());
   }
 
   private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block) {

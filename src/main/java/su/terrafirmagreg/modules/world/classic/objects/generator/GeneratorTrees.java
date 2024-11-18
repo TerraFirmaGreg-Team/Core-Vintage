@@ -8,6 +8,7 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ICapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
@@ -36,7 +37,6 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeFlower;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.types.TreesTFCF;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import java.util.Collections;
 import java.util.HashSet;

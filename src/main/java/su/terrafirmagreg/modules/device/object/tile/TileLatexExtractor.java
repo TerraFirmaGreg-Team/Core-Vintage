@@ -3,6 +3,8 @@ package su.terrafirmagreg.modules.device.object.tile;
 import su.terrafirmagreg.api.base.tile.BaseTile;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.network.SCPacketLatex;
 
@@ -16,9 +18,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.TechItems;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -126,7 +126,7 @@ public class TileLatexExtractor extends BaseTile implements ITickable {
     IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY,
                                             null);
     if (cap != null && hasFluid()) {
-      cap.fill(new FluidStack(FluidsTFC.LATEX.get(), fluid), true);
+      cap.fill(new FluidStack(FluidsCore.LATEX.get(), fluid), true);
     }
     if (flowTicks > -1) {
       flowTicks = 0;
@@ -151,7 +151,7 @@ public class TileLatexExtractor extends BaseTile implements ITickable {
       if (cap != null) {
         FluidStack fluidStack = cap.drain(MAX_FLUID, false);
         if (fluidStack != null) {
-          if (fluidStack.getFluid() != FluidsTFC.LATEX.get()) {
+          if (fluidStack.getFluid() != FluidsCore.LATEX.get()) {
             return false;
           } else {
             fluid = Math.min(fluidStack.amount, MAX_FLUID);

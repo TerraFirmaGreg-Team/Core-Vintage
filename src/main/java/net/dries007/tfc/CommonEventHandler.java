@@ -29,6 +29,7 @@ import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.feature.skills.SmithingSkill;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockQuernManual;
@@ -131,7 +132,6 @@ import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
@@ -640,7 +640,7 @@ public final class CommonEventHandler {
                                                            .getBlock() instanceof BlockFluidTFC) {
         // Prevents squids spawning outside of salt water (eg: oceans)
         Fluid fluid = ((BlockFluidTFC) world.getBlockState(pos).getBlock()).getFluid();
-        if (FluidsTFC.SALT_WATER.get() != fluid) {
+        if (FluidsCore.SALT_WATER.get() != fluid) {
           event.setResult(Event.Result.DENY);
         }
       }
@@ -822,9 +822,9 @@ public final class CommonEventHandler {
           ((WorldServer) entityItem.world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entityItem.posX, entityItem.posY, entityItem.posZ,
                                                          42, 0.0D, 0.15D, 0.0D, 0.08D);
           if (rand <= 0.01F) {
-            entityItem.world.setBlockState(pos, FluidsTFC.FRESH_WATER.get()
-                                                                     .getBlock()
-                                                                     .getDefaultState(), 2); // 1/100 chance of the ice turning into water.
+            entityItem.world.setBlockState(pos, FluidsCore.FRESH_WATER.get()
+                                                                      .getBlock()
+                                                                      .getDefaultState(), 2); // 1/100 chance of the ice turning into water.
           }
         } else if (state.getMaterial() == Material.PACKED_ICE) {
           heatCap.setTemperature(Math.max(0, itemTemp - 125));
@@ -832,9 +832,9 @@ public final class CommonEventHandler {
           ((WorldServer) entityItem.world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entityItem.posX, entityItem.posY, entityItem.posZ,
                                                          42, 0.0D, 0.15D, 0.0D, 0.08D);
           if (rand <= 0.005F) {
-            entityItem.world.setBlockState(pos, FluidsTFC.FRESH_WATER.get()
-                                                                     .getBlock()
-                                                                     .getDefaultState(), 2); // 1/200 chance of the packed ice turning into water.
+            entityItem.world.setBlockState(pos, FluidsCore.FRESH_WATER.get()
+                                                                      .getBlock()
+                                                                      .getDefaultState(), 2); // 1/200 chance of the packed ice turning into water.
           }
         }
         event.setExtraLife(itemTemp == 0 ? lifespan : ConfigCore.MISC.HEAT.ticksBeforeAttemptToCool); // Set lifespan accordingly

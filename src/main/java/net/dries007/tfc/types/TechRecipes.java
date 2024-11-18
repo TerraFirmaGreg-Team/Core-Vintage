@@ -1,6 +1,7 @@
 package net.dries007.tfc.types;
 
 import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.init.Items;
@@ -32,7 +33,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.TechItems;
 import net.dries007.tfc.objects.items.glassworking.ItemBlowpipe;
@@ -206,24 +206,24 @@ public final class TechRecipes {
         .addInput(IIngredient.of("dustPotash"))
         .addInput(IIngredient.of("sandSilica"))
         .addInput(IIngredient.of("dustLime"))
-        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 1000), 800)
+        .setOutput(new FluidStack(FluidsCore.GLASS.get(), 1000), 800)
         .build()
         .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass")),
       new SmelteryRecipe.Builder()
         .addInput(IIngredient.of("blockGlass"))
-        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 1000), 800).build()
+        .setOutput(new FluidStack(FluidsCore.GLASS.get(), 1000), 800).build()
         .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_block")),
       new SmelteryRecipe.Builder()
         .addInput(IIngredient.of("paneGlass"))
-        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 375), 800).build()
+        .setOutput(new FluidStack(FluidsCore.GLASS.get(), 375), 800).build()
         .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_pane")),
       new SmelteryRecipe.Builder()
         .addInput(IIngredient.of(ItemsCore.GLASS_SHARD))
-        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 500), 800).build()
+        .setOutput(new FluidStack(FluidsCore.GLASS.get(), 500), 800).build()
         .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_shard")),
       new SmelteryRecipe.Builder()
         .addInput(IIngredient.of(Items.GLASS_BOTTLE))
-        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 250), 800).build()
+        .setOutput(new FluidStack(FluidsCore.GLASS.get(), 250), 800).build()
         .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_bottle"))
     );
   }

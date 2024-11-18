@@ -36,8 +36,7 @@ public class MapGenRiverRavine extends MapGenBase {
   }
 
   @Override
-  protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int originalX,
-                                   int originalZ, ChunkPrimer chunkPrimerIn) {
+  protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int originalX, int originalZ, ChunkPrimer chunkPrimerIn) {
     if (rand.nextInt(riverRavineRarity) != 0) {
       return;
     }
@@ -48,13 +47,11 @@ public class MapGenRiverRavine extends MapGenBase {
     float angleZ = (rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
     float angleX = (rand.nextFloat() * 2.0F + rand.nextFloat()) * 2.0F;
 
-    generateRavine(rand.nextLong(), chunkX, chunkZ, chunkPrimerIn, x, y, z, angleX, angleY, angleZ,
-                   y);
+    generateRavine(rand.nextLong(), chunkX, chunkZ, chunkPrimerIn, x, y, z, angleX, angleY, angleZ, y);
   }
 
-  protected void generateRavine(long seed, int chunkX, int chunkZ, ChunkPrimer primer,
-                                double startX, double startY, double startZ, float angleX,
-                                float angleY, float angleZ, double waterHeight) {
+  protected void generateRavine(long seed, int chunkX, int chunkZ, ChunkPrimer primer, double startX, double startY, double startZ,
+                                float angleX, float angleY, float angleZ, double waterHeight) {
     final Random rand = new Random(seed);
     final double worldX = chunkX * 16 + 8;
     final double worldZ = chunkZ * 16 + 8;

@@ -3,6 +3,8 @@ package net.dries007.tfc.api.recipes.barrel;
 import su.terrafirmagreg.api.util.CollectionUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -12,10 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFoodTrait;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,12 +35,12 @@ public class BarrelRecipeFoodTraits extends BarrelRecipe {
   }
 
   public static BarrelRecipe pickling(@NotNull IIngredient<ItemStack> inputStack) {
-    return new BarrelRecipeFoodTraits(IIngredient.of(FluidsTFC.VINEGAR.get(), 125), new IngredientItemFoodTrait(inputStack, FoodTrait.BRINED),
+    return new BarrelRecipeFoodTraits(IIngredient.of(FluidsCore.VINEGAR.get(), 125), new IngredientItemFoodTrait(inputStack, FoodTrait.BRINED),
                                       FoodTrait.PICKLED, 4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_pickling");
   }
 
   public static BarrelRecipe brining(@NotNull IIngredient<ItemStack> inputStack) {
-    return new BarrelRecipeFoodTraits(IIngredient.of(FluidsTFC.BRINE.get(), 125), inputStack, FoodTrait.BRINED, 4 * ICalendar.TICKS_IN_HOUR,
+    return new BarrelRecipeFoodTraits(IIngredient.of(FluidsCore.BRINE.get(), 125), inputStack, FoodTrait.BRINED, 4 * ICalendar.TICKS_IN_HOUR,
                                       "barrel_recipe_brining");
   }
 

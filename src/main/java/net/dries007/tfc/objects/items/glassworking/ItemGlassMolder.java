@@ -6,6 +6,7 @@ import su.terrafirmagreg.modules.core.capabilities.heat.ProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -25,7 +26,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.google.common.collect.Sets;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemMisc;
 
 import org.jetbrains.annotations.NotNull;
@@ -65,7 +65,7 @@ public class ItemGlassMolder extends ItemMisc {
       this.capacity = capacity;
       this.heatCapacity = 1;
       this.meltTemp = Heat.maxVisibleTemperature();
-      this.tank = new FluidWhitelistHandler(stack, capacity, Sets.newHashSet(FluidsTFC.GLASS.get()));
+      this.tank = new FluidWhitelistHandler(stack, capacity, Sets.newHashSet(FluidsCore.GLASS.get()));
       deserializeNBT(nbt);
     }
 

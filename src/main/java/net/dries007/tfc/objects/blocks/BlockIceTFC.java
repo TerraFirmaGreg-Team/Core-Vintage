@@ -1,5 +1,10 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.ITemperatureBlock;
+import su.terrafirmagreg.modules.core.feature.climate.IceMeltHandler;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+
 import net.minecraft.block.BlockIce;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -16,11 +21,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
 
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
-import su.terrafirmagreg.modules.core.feature.climate.ITemperatureBlock;
-import su.terrafirmagreg.modules.core.feature.climate.IceMeltHandler;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,13 +32,13 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
   private final float meltThreshold;
 
   public BlockIceTFC() {
-    this(FluidsTFC.FRESH_WATER.get());
+    this(FluidsCore.FRESH_WATER.get());
 
   }
 
   public BlockIceTFC(Fluid waterFluid) {
     this.waterFluid = waterFluid;
-    this.meltThreshold = waterFluid == FluidsTFC.SALT_WATER.get() ? IceMeltHandler.SALT_WATER_MELT_THRESHOLD : IceMeltHandler.ICE_MELT_THRESHOLD;
+    this.meltThreshold = waterFluid == FluidsCore.SALT_WATER.get() ? IceMeltHandler.SALT_WATER_MELT_THRESHOLD : IceMeltHandler.ICE_MELT_THRESHOLD;
 
     setHardness(0.5F);
     setLightOpacity(3);

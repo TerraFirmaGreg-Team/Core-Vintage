@@ -130,9 +130,9 @@ public final class ModuleCore extends ModuleBase {
   public void onRegister() {
 
     DataSerializersCore.onRegister(registryManager);
+    FluidsCore.onRegister(registryManager);
     BlocksCore.onRegister(registryManager);
     EntitiesCore.onRegister(registryManager);
-    FluidsCore.onRegister(registryManager);
     ItemsCore.onRegister(registryManager);
     PotionsCore.onRegister(registryManager);
     LootTablesCore.onRegister(registryManager);

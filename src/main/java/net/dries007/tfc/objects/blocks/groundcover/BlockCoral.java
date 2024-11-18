@@ -6,6 +6,8 @@ import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
@@ -36,8 +38,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -243,9 +243,9 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
   @Override
   public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
     this.onBlockHarvested(world, pos, state, player);
-    return world.setBlockState(pos, FluidsTFC.SALT_WATER.get()
-                                                        .getBlock()
-                                                        .getDefaultState(), world.isRemote ? 11 : 3);
+    return world.setBlockState(pos, FluidsCore.SALT_WATER.get()
+                                                         .getBlock()
+                                                         .getDefaultState(), world.isRemote ? 11 : 3);
   }
 
   @NotNull
@@ -365,7 +365,7 @@ public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlant
   protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
     if (!this.canBlockStay(worldIn, pos, state)) {
       this.dropBlockAsItem(worldIn, pos, state, 0);
-      worldIn.setBlockState(pos, FluidsTFC.SALT_WATER.get().getBlock().getDefaultState());
+      worldIn.setBlockState(pos, FluidsCore.SALT_WATER.get().getBlock().getDefaultState());
     }
   }
 

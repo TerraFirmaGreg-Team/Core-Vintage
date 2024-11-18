@@ -68,8 +68,8 @@ public final class OverlayPlayerData {
 
     FoodStats foodStats = player.getFoodStats();
     float displayModifier = 1;
-    if (ConfigCore.MISC.DISPLAY.healthDisplayFormat == HealthDisplayFormat.TFC
-        || ConfigCore.MISC.DISPLAY.healthDisplayFormat == HealthDisplayFormat.TFC_CURRENT_HEALTH) {
+    if (ConfigCore.MISC.DISPLAY.healthDisplayFormat == HealthDisplayFormat.TFC ||
+        ConfigCore.MISC.DISPLAY.healthDisplayFormat == HealthDisplayFormat.TFC_CURRENT_HEALTH) {
       displayModifier = 50;
     }
     float baseMaxHealth = 20 * displayModifier;

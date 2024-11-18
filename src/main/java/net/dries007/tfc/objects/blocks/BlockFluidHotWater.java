@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 
 import net.minecraft.block.Block;
@@ -14,7 +15,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 
 import java.util.Random;
 
@@ -23,7 +23,7 @@ import static su.terrafirmagreg.api.util.MathUtils.RNG;
 public class BlockFluidHotWater extends BlockFluidTFC {
 
   public BlockFluidHotWater() {
-    super(FluidsTFC.HOT_WATER.get(), Material.WATER, false);
+    super(FluidsCore.HOT_WATER.get(), Material.WATER, false);
 
     setLightOpacity(3);
     disableStats();

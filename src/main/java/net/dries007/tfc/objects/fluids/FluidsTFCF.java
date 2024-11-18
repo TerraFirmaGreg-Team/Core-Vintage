@@ -1,18 +1,16 @@
 package net.dries007.tfc.objects.fluids;
 
-import su.terrafirmagreg.api.data.Reference;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
@@ -21,125 +19,11 @@ import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
 
+import static net.dries007.tfc.objects.fluids.FluidsTFC.FLOW;
+import static net.dries007.tfc.objects.fluids.FluidsTFC.STILL;
 import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public final class FluidsTFCF {
-
-  private static final ResourceLocation STILL = new ResourceLocation(Reference.MODID_TFC, "blocks/fluid_still");
-  private static final ResourceLocation FLOW = new ResourceLocation(Reference.MODID_TFC, "blocks/fluid_flow");
-
-  private static final HashBiMap<Fluid, FluidWrapper> WRAPPERS = HashBiMap.create();
-
-  // Other
-  public static FluidWrapper DISTILLED_WATER;
-  public static FluidWrapper WASTE;
-  public static FluidWrapper BASE_POTASH_LIQUOR;
-
-  // Tea
-  public static FluidWrapper WHITE_TEA;
-  public static FluidWrapper GREEN_TEA;
-  public static FluidWrapper BLACK_TEA;
-  public static FluidWrapper CHAMOMILE_TEA;
-  public static FluidWrapper DANDELION_TEA;
-  public static FluidWrapper LABRADOR_TEA;
-
-  // Coffee & Coke
-  public static FluidWrapper COFFEE;
-  public static FluidWrapper FIRMA_COLA; //Obviously a reference to Coca Cola.
-
-  // Fermented Alcohols
-  public static FluidWrapper AGAVE_WINE;
-  public static FluidWrapper BARLEY_WINE;
-  public static FluidWrapper BANANA_WINE;
-  public static FluidWrapper BERRY_WINE;
-  public static FluidWrapper CHERRY_WINE;
-  public static FluidWrapper JUNIPER_WINE;
-  public static FluidWrapper LEMON_WINE;
-  public static FluidWrapper ORANGE_WINE;
-  public static FluidWrapper PAPAYA_WINE;
-  public static FluidWrapper PEACH_WINE;
-  public static FluidWrapper PEAR_WINE;
-  public static FluidWrapper PLUM_WINE;
-  public static FluidWrapper MEAD;
-  public static FluidWrapper RED_WINE;
-  public static FluidWrapper WHEAT_WINE;
-  public static FluidWrapper WHITE_WINE;
-
-  // Alcohols
-  public static FluidWrapper CALVADOS;
-  public static FluidWrapper GIN;
-  public static FluidWrapper TEQUILA;
-  public static FluidWrapper SHOCHU;
-  public static FluidWrapper BANANA_BRANDY;
-  public static FluidWrapper CHERRY_BRANDY;
-  public static FluidWrapper LEMON_BRANDY;
-  public static FluidWrapper ORANGE_BRANDY;
-  public static FluidWrapper PAPAYA_BRANDY;
-  public static FluidWrapper PEACH_BRANDY;
-  public static FluidWrapper PEAR_BRANDY;
-  public static FluidWrapper PLUM_BRANDY;
-  public static FluidWrapper BERRY_BRANDY;
-  public static FluidWrapper BRANDY;
-  public static FluidWrapper COGNAC;
-  public static FluidWrapper GRAPPA;
-
-  // Beer
-  public static FluidWrapper BEER_BARLEY;
-  public static FluidWrapper BEER_CORN;
-  public static FluidWrapper BEER_RYE;
-  public static FluidWrapper BEER_WHEAT;
-  public static FluidWrapper BEER_AMARANTH;
-  public static FluidWrapper BEER_BUCKWHEAT;
-  public static FluidWrapper BEER_FONIO;
-  public static FluidWrapper BEER_MILLET;
-  public static FluidWrapper BEER_QUINOA;
-  public static FluidWrapper BEER_SPELT;
-
-  // Misc
-  public static FluidWrapper SUGAR_WATER;
-  public static FluidWrapper HONEY_WATER;
-  public static FluidWrapper RICE_WATER;
-  public static FluidWrapper SOYBEAN_WATER;
-  public static FluidWrapper LINSEED_WATER;
-  public static FluidWrapper RAPE_SEED_WATER;
-  public static FluidWrapper SUNFLOWER_SEED_WATER;
-  public static FluidWrapper OPIUM_POPPY_SEED_WATER;
-  public static FluidWrapper SUGAR_BEET_WATER;
-  public static FluidWrapper SOY_MILK;
-  public static FluidWrapper LINSEED_OIL;
-  public static FluidWrapper RAPE_SEED_OIL;
-  public static FluidWrapper SUNFLOWER_SEED_OIL;
-  public static FluidWrapper OPIUM_POPPY_SEED_OIL;
-  public static FluidWrapper WORT;
-
-  // Juice - Berries
-  public static FluidWrapper JUICE_BLACKBERRY;
-  public static FluidWrapper JUICE_BLUEBERRY;
-  public static FluidWrapper JUICE_BUNCH_BERRY;
-  public static FluidWrapper JUICE_CLOUD_BERRY;
-  public static FluidWrapper JUICE_CRANBERRY;
-  public static FluidWrapper JUICE_ELDERBERRY;
-  public static FluidWrapper JUICE_GOOSEBERRY;
-  public static FluidWrapper JUICE_RASPBERRY;
-  public static FluidWrapper JUICE_SNOW_BERRY;
-  public static FluidWrapper JUICE_STRAWBERRY;
-  public static FluidWrapper JUICE_WINTERGREEN_BERRY;
-
-  // Juice - Fruits
-  public static FluidWrapper JUICE_AGAVE;
-  public static FluidWrapper JUICE_APPLE;
-  public static FluidWrapper JUICE_BANANA;
-  public static FluidWrapper JUICE_CHERRY;
-  public static FluidWrapper JUICE_GREEN_GRAPE;
-  public static FluidWrapper JUICE_JUNIPER;
-  public static FluidWrapper JUICE_LEMON;
-  public static FluidWrapper JUICE_ORANGE;
-  public static FluidWrapper JUICE_PAPAYA;
-  public static FluidWrapper JUICE_PEACH;
-  public static FluidWrapper JUICE_PEAR;
-  public static FluidWrapper JUICE_PLUM;
-  public static FluidWrapper JUICE_PURPLE_GRAPE;
-  public static FluidWrapper JUICE_BARREL_CACTUS;
 
   @Getter
   private static ImmutableSet<FluidWrapper> allFiniteFluids;
@@ -168,12 +52,12 @@ public final class FluidsTFCF {
       }
     };
 
-    DISTILLED_WATER = registerFluid(new Fluid("distilled_water", STILL, FLOW, 0xFF1F32DA)).with(DrinkableProperty.DRINKABLE, player -> {
+    FluidsCore.DISTILLED_WATER = registerFluid(new Fluid("distilled_water", STILL, FLOW, 0xFF1F32DA)).with(DrinkableProperty.DRINKABLE, player -> {
       if (player.getFoodStats() instanceof FoodStatsTFC) {
         ((FoodStatsTFC) player.getFoodStats()).addThirst(20);
       }
     });
-    WASTE = registerFluid(new Fluid("waste", STILL, FLOW, 0xFF858678)).with(DrinkableProperty.DRINKABLE, player -> {
+    FluidsCore.WASTE = registerFluid(new Fluid("waste", STILL, FLOW, 0xFF858678)).with(DrinkableProperty.DRINKABLE, player -> {
       if (player.getFoodStats() instanceof FoodStatsTFC) {
         ((FoodStatsTFC) player.getFoodStats()).addThirst(-20);
         if (RNG.nextFloat() < 0.25f) {
@@ -182,7 +66,7 @@ public final class FluidsTFCF {
         }
       }
     });
-    BASE_POTASH_LIQUOR = registerFluid(new Fluid("base_potash_liquor", STILL, FLOW, 0xFF86888B)).with(DrinkableProperty.DRINKABLE, player -> {
+    FluidsCore.BASE_POTASH_LIQUOR = registerFluid(new Fluid("base_potash_liquor", STILL, FLOW, 0xFF86888B)).with(DrinkableProperty.DRINKABLE, player -> {
       if (player.getFoodStats() instanceof FoodStatsTFC) {
         ((FoodStatsTFC) player.getFoodStats()).addThirst(-20);
         if (RNG.nextFloat() < 0.25f) {
@@ -202,17 +86,17 @@ public final class FluidsTFCF {
     };
     allTeaFluids = ImmutableSet.<FluidWrapper>builder()
                                .add(
-                                 WHITE_TEA = registerFluid(new Fluid("white_tea", STILL, FLOW, 0xFFC48E69).setRarity(EnumRarity.UNCOMMON)).with(
+                                 FluidsCore.WHITE_TEA = registerFluid(new Fluid("white_tea", STILL, FLOW, 0xFFC48E69).setRarity(EnumRarity.UNCOMMON)).with(
                                    DrinkableProperty.DRINKABLE, teaProperty),
-                                 GREEN_TEA = registerFluid(new Fluid("green_tea", STILL, FLOW, 0xFFD9D08F).setRarity(EnumRarity.UNCOMMON)).with(
+                                 FluidsCore.GREEN_TEA = registerFluid(new Fluid("green_tea", STILL, FLOW, 0xFFD9D08F).setRarity(EnumRarity.UNCOMMON)).with(
                                    DrinkableProperty.DRINKABLE, teaProperty),
-                                 BLACK_TEA = registerFluid(new Fluid("black_tea", STILL, FLOW, 0xFF923C01).setRarity(EnumRarity.UNCOMMON)).with(
+                                 FluidsCore.BLACK_TEA = registerFluid(new Fluid("black_tea", STILL, FLOW, 0xFF923C01).setRarity(EnumRarity.UNCOMMON)).with(
                                    DrinkableProperty.DRINKABLE, teaProperty),
-                                 CHAMOMILE_TEA = registerFluid(new Fluid("chamomile_tea", STILL, FLOW, 0xFFFFE089).setRarity(EnumRarity.UNCOMMON)).with(
+                                 FluidsCore.CHAMOMILE_TEA = registerFluid(new Fluid("chamomile_tea", STILL, FLOW, 0xFFFFE089).setRarity(EnumRarity.UNCOMMON)).with(
                                    DrinkableProperty.DRINKABLE, teaProperty),
-                                 DANDELION_TEA = registerFluid(new Fluid("dandelion_tea", STILL, FLOW, 0xFFE3BA66).setRarity(EnumRarity.UNCOMMON)).with(
+                                 FluidsCore.DANDELION_TEA = registerFluid(new Fluid("dandelion_tea", STILL, FLOW, 0xFFE3BA66).setRarity(EnumRarity.UNCOMMON)).with(
                                    DrinkableProperty.DRINKABLE, teaProperty),
-                                 LABRADOR_TEA = registerFluid(new Fluid("labrador_tea", STILL, FLOW, 0xFFF6E469).setRarity(EnumRarity.UNCOMMON)).with(
+                                 FluidsCore.LABRADOR_TEA = registerFluid(new Fluid("labrador_tea", STILL, FLOW, 0xFFF6E469).setRarity(EnumRarity.UNCOMMON)).with(
                                    DrinkableProperty.DRINKABLE, teaProperty)
                                )
                                .build();
@@ -226,11 +110,10 @@ public final class FluidsTFCF {
       }
     };
 
-    allCoffeeFluids = ImmutableSet.<FluidWrapper>builder()
-                                  .add(
-                                    COFFEE = registerFluid(new Fluid("coffee", STILL, FLOW, 0xFF6F4E37).setRarity(EnumRarity.UNCOMMON)).with(
+    allCoffeeFluids = ImmutableSet.<FluidWrapper>builder().add(
+                                    FluidsCore.COFFEE = registerFluid(new Fluid("coffee", STILL, FLOW, 0xFF6F4E37).setRarity(EnumRarity.UNCOMMON)).with(
                                       DrinkableProperty.DRINKABLE, coffeeProperty),
-                                    FIRMA_COLA = registerFluid(new Fluid("firma_cola", STILL, FLOW, 0xFF521810).setRarity(EnumRarity.RARE)).with(
+                                    FluidsCore.FIRMA_COLA = registerFluid(new Fluid("firma_cola", STILL, FLOW, 0xFF521810).setRarity(EnumRarity.RARE)).with(
                                       DrinkableProperty.DRINKABLE, coffeeProperty)
                                   )
                                   .build();
@@ -242,39 +125,39 @@ public final class FluidsTFCF {
     };
     allMiscFluids = ImmutableSet.<FluidWrapper>builder()
                                 .add(
-                                  SUGAR_WATER = registerFluid(new Fluid("sugar_water", STILL, FLOW, 0xFFEEEFDF).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.SUGAR_WATER = registerFluid(new Fluid("sugar_water", STILL, FLOW, 0xFFEEEFDF).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  HONEY_WATER = registerFluid(new Fluid("honey_water", STILL, FLOW, 0xFFFBE2A1).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.HONEY_WATER = registerFluid(new Fluid("honey_water", STILL, FLOW, 0xFFFBE2A1).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  RICE_WATER = registerFluid(new Fluid("rice_water", STILL, FLOW, 0xFFEFE0CB).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.RICE_WATER = registerFluid(new Fluid("rice_water", STILL, FLOW, 0xFFEFE0CB).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  SOYBEAN_WATER = registerFluid(new Fluid("soybean_water", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.SOYBEAN_WATER = registerFluid(new Fluid("soybean_water", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  LINSEED_WATER = registerFluid(new Fluid("linseed_water", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.LINSEED_WATER = registerFluid(new Fluid("linseed_water", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  RAPE_SEED_WATER = registerFluid(new Fluid("rape_seed_water", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.RAPE_SEED_WATER = registerFluid(new Fluid("rape_seed_water", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  SUNFLOWER_SEED_WATER = registerFluid(
+                                  FluidsCore.SUNFLOWER_SEED_WATER = registerFluid(
                                     new Fluid("sunflower_seed_water", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  OPIUM_POPPY_SEED_WATER = registerFluid(
+                                  FluidsCore.OPIUM_POPPY_SEED_WATER = registerFluid(
                                     new Fluid("opium_poppy_seed_water", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  SUGAR_BEET_WATER = registerFluid(new Fluid("sugar_beet_water", STILL, FLOW, 0xFFEEEFDF).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.SUGAR_BEET_WATER = registerFluid(new Fluid("sugar_beet_water", STILL, FLOW, 0xFFEEEFDF).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  SOY_MILK = registerFluid(new Fluid("soy_milk", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.SOY_MILK = registerFluid(new Fluid("soy_milk", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  LINSEED_OIL = registerFluid(new Fluid("linseed_oil", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.LINSEED_OIL = registerFluid(new Fluid("linseed_oil", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  RAPE_SEED_OIL = registerFluid(new Fluid("rape_seed_oil", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.RAPE_SEED_OIL = registerFluid(new Fluid("rape_seed_oil", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  SUNFLOWER_SEED_OIL = registerFluid(
+                                  FluidsCore.SUNFLOWER_SEED_OIL = registerFluid(
                                     new Fluid("sunflower_seed_oil", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  OPIUM_POPPY_SEED_OIL = registerFluid(
+                                  FluidsCore.OPIUM_POPPY_SEED_OIL = registerFluid(
                                     new Fluid("opium_poppy_seed_oil", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty),
-                                  WORT = registerFluid(new Fluid("wort", STILL, FLOW, 0xFF654321).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.WORT = registerFluid(new Fluid("wort", STILL, FLOW, 0xFF654321).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, miscFluidsProperty)
                                 )
                                 .build();
@@ -289,37 +172,37 @@ public final class FluidsTFCF {
     };
     allFermentedAlcoholsFluids = ImmutableSet.<FluidWrapper>builder()
                                              .add(
-                                               AGAVE_WINE = registerFluid(new Fluid("agave_wine", STILL, FLOW, 0xFFDBB35A).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.AGAVE_WINE = registerFluid(new Fluid("agave_wine", STILL, FLOW, 0xFFDBB35A).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               BARLEY_WINE = registerFluid(new Fluid("barley_wine", STILL, FLOW, 0xFF851401).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.BARLEY_WINE = registerFluid(new Fluid("barley_wine", STILL, FLOW, 0xFF851401).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               BANANA_WINE = registerFluid(new Fluid("banana_wine", STILL, FLOW, 0xFFB76A02).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.BANANA_WINE = registerFluid(new Fluid("banana_wine", STILL, FLOW, 0xFFB76A02).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               BERRY_WINE = registerFluid(new Fluid("berry_wine", STILL, FLOW, 0xFFE13F43).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.BERRY_WINE = registerFluid(new Fluid("berry_wine", STILL, FLOW, 0xFFE13F43).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               CHERRY_WINE = registerFluid(new Fluid("cherry_wine", STILL, FLOW, 0xFF790604).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.CHERRY_WINE = registerFluid(new Fluid("cherry_wine", STILL, FLOW, 0xFF790604).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               JUNIPER_WINE = registerFluid(new Fluid("juniper_wine", STILL, FLOW, 0xFF863136).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.JUNIPER_WINE = registerFluid(new Fluid("juniper_wine", STILL, FLOW, 0xFF863136).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               LEMON_WINE = registerFluid(new Fluid("lemon_wine", STILL, FLOW, 0xFFF7EAB7).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.LEMON_WINE = registerFluid(new Fluid("lemon_wine", STILL, FLOW, 0xFFF7EAB7).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               MEAD = registerFluid(new Fluid("mead", STILL, FLOW, 0xFFE1701B).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.MEAD = registerFluid(new Fluid("mead", STILL, FLOW, 0xFFE1701B).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               ORANGE_WINE = registerFluid(new Fluid("orange_wine", STILL, FLOW, 0xFFC56707).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.ORANGE_WINE = registerFluid(new Fluid("orange_wine", STILL, FLOW, 0xFFC56707).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               PAPAYA_WINE = registerFluid(new Fluid("papaya_wine", STILL, FLOW, 0xFFB37E2C).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.PAPAYA_WINE = registerFluid(new Fluid("papaya_wine", STILL, FLOW, 0xFFB37E2C).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               PEACH_WINE = registerFluid(new Fluid("peach_wine", STILL, FLOW, 0xFFD19088).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.PEACH_WINE = registerFluid(new Fluid("peach_wine", STILL, FLOW, 0xFFD19088).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               PEAR_WINE = registerFluid(new Fluid("pear_Wine", STILL, FLOW, 0xFFF2E4BD).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.PEAR_WINE = registerFluid(new Fluid("pear_Wine", STILL, FLOW, 0xFFF2E4BD).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               PLUM_WINE = registerFluid(new Fluid("plum_wine", STILL, FLOW, 0xFF870910).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.PLUM_WINE = registerFluid(new Fluid("plum_wine", STILL, FLOW, 0xFF870910).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               RED_WINE = registerFluid(new Fluid("red_wine", STILL, FLOW, 0xFF5E1224).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.RED_WINE = registerFluid(new Fluid("red_wine", STILL, FLOW, 0xFF5E1224).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               WHEAT_WINE = registerFluid(new Fluid("wheat_wine", STILL, FLOW, 0xFF7C1B18).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.WHEAT_WINE = registerFluid(new Fluid("wheat_wine", STILL, FLOW, 0xFF7C1B18).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty),
-                                               WHITE_WINE = registerFluid(new Fluid("white_wine", STILL, FLOW, 0xFFFCF1D2).setRarity(EnumRarity.UNCOMMON)).with(
+                                               FluidsCore.WHITE_WINE = registerFluid(new Fluid("white_wine", STILL, FLOW, 0xFFFCF1D2).setRarity(EnumRarity.UNCOMMON)).with(
                                                  DrinkableProperty.DRINKABLE, fermentedAlcoholProperty)
                                              )
                                              .build();
@@ -334,37 +217,37 @@ public final class FluidsTFCF {
     };
     allAlcoholsFluids = ImmutableSet.<FluidWrapper>builder()
                                     .add(
-                                      CALVADOS = registerFluid(new Fluid("calvados", STILL, FLOW, 0xFFBE2D02).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.CALVADOS = registerFluid(new Fluid("calvados", STILL, FLOW, 0xFFBE2D02).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      BANANA_BRANDY = registerFluid(new Fluid("banana_brandy", STILL, FLOW, 0xFFD49B36).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.BANANA_BRANDY = registerFluid(new Fluid("banana_brandy", STILL, FLOW, 0xFFD49B36).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      BERRY_BRANDY = registerFluid(new Fluid("berry_brandy", STILL, FLOW, 0xFF85413A).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.BERRY_BRANDY = registerFluid(new Fluid("berry_brandy", STILL, FLOW, 0xFF85413A).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      BRANDY = registerFluid(new Fluid("brandy", STILL, FLOW, 0xFF87413F).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.BRANDY = registerFluid(new Fluid("brandy", STILL, FLOW, 0xFF87413F).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      COGNAC = registerFluid(new Fluid("cognac", STILL, FLOW, 0xFFA3481B).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.COGNAC = registerFluid(new Fluid("cognac", STILL, FLOW, 0xFFA3481B).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      GIN = registerFluid(new Fluid("gin", STILL, FLOW, 0xFFDAE2C8).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.GIN = registerFluid(new Fluid("gin", STILL, FLOW, 0xFFDAE2C8).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      CHERRY_BRANDY = registerFluid(new Fluid("cherry_brandy", STILL, FLOW, 0xFFAD495D).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.CHERRY_BRANDY = registerFluid(new Fluid("cherry_brandy", STILL, FLOW, 0xFFAD495D).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      LEMON_BRANDY = registerFluid(new Fluid("lemon_brandy", STILL, FLOW, 0xFFC89C4E).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.LEMON_BRANDY = registerFluid(new Fluid("lemon_brandy", STILL, FLOW, 0xFFC89C4E).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      ORANGE_BRANDY = registerFluid(new Fluid("orange_brandy", STILL, FLOW, 0xFFCF7F26).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.ORANGE_BRANDY = registerFluid(new Fluid("orange_brandy", STILL, FLOW, 0xFFCF7F26).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      PAPAYA_BRANDY = registerFluid(new Fluid("papaya_brandy", STILL, FLOW, 0xFFDF9724).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.PAPAYA_BRANDY = registerFluid(new Fluid("papaya_brandy", STILL, FLOW, 0xFFDF9724).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      PEACH_BRANDY = registerFluid(new Fluid("peach_brandy", STILL, FLOW, 0xFFCA8550).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.PEACH_BRANDY = registerFluid(new Fluid("peach_brandy", STILL, FLOW, 0xFFCA8550).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      PEAR_BRANDY = registerFluid(new Fluid("pear_brandy", STILL, FLOW, 0xFFCC9A48).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.PEAR_BRANDY = registerFluid(new Fluid("pear_brandy", STILL, FLOW, 0xFFCC9A48).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      PLUM_BRANDY = registerFluid(new Fluid("plum_brandy", STILL, FLOW, 0xFF941254).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.PLUM_BRANDY = registerFluid(new Fluid("plum_brandy", STILL, FLOW, 0xFF941254).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      SHOCHU = registerFluid(new Fluid("shochu", STILL, FLOW, 0xFFF8F9F9).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.SHOCHU = registerFluid(new Fluid("shochu", STILL, FLOW, 0xFFF8F9F9).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      TEQUILA = registerFluid(new Fluid("tequila", STILL, FLOW, 0xFFF7D0A1).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.TEQUILA = registerFluid(new Fluid("tequila", STILL, FLOW, 0xFFF7D0A1).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty),
-                                      GRAPPA = registerFluid(new Fluid("grappa", STILL, FLOW, 0xFFF7D0A1).setRarity(EnumRarity.UNCOMMON)).with(
+                                      FluidsCore.GRAPPA = registerFluid(new Fluid("grappa", STILL, FLOW, 0xFFF7D0A1).setRarity(EnumRarity.UNCOMMON)).with(
                                         DrinkableProperty.DRINKABLE, alcoholProperty)
                                     )
                                     .build();
@@ -379,25 +262,25 @@ public final class FluidsTFCF {
     };
     allBeerFluids = ImmutableSet.<FluidWrapper>builder()
                                 .add(
-                                  BEER_BARLEY = registerFluid(new Fluid("beer_barley", STILL, FLOW, 0xFFF6B848).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.BEER_BARLEY = registerFluid(new Fluid("beer_barley", STILL, FLOW, 0xFFF6B848).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, alcoholBeer),
-                                  BEER_CORN = registerFluid(new Fluid("beer_corn", STILL, FLOW, 0xFFE9BA40).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.BEER_CORN = registerFluid(new Fluid("beer_corn", STILL, FLOW, 0xFFE9BA40).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, alcoholBeer),
-                                  BEER_RYE = registerFluid(new Fluid("beer_rye", STILL, FLOW, 0xFF8B1A02).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.BEER_RYE = registerFluid(new Fluid("beer_rye", STILL, FLOW, 0xFF8B1A02).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, alcoholBeer),
-                                  BEER_WHEAT = registerFluid(new Fluid("beer_wheat", STILL, FLOW, 0xFFE3A926).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.BEER_WHEAT = registerFluid(new Fluid("beer_wheat", STILL, FLOW, 0xFFE3A926).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, alcoholBeer),
-                                  BEER_AMARANTH = registerFluid(new Fluid("beer_amaranth", STILL, FLOW, 0xFF51150B).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.BEER_AMARANTH = registerFluid(new Fluid("beer_amaranth", STILL, FLOW, 0xFF51150B).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, alcoholBeer),
-                                  BEER_BUCKWHEAT = registerFluid(new Fluid("beer_buckwheat", STILL, FLOW, 0xFFB55506).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.BEER_BUCKWHEAT = registerFluid(new Fluid("beer_buckwheat", STILL, FLOW, 0xFFB55506).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, alcoholBeer),
-                                  BEER_FONIO = registerFluid(new Fluid("beer_fonio", STILL, FLOW, 0xFFC28A10).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.BEER_FONIO = registerFluid(new Fluid("beer_fonio", STILL, FLOW, 0xFFC28A10).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, alcoholBeer),
-                                  BEER_MILLET = registerFluid(new Fluid("beer_millet", STILL, FLOW, 0xFF982801).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.BEER_MILLET = registerFluid(new Fluid("beer_millet", STILL, FLOW, 0xFF982801).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, alcoholBeer),
-                                  BEER_QUINOA = registerFluid(new Fluid("beer_quinoa", STILL, FLOW, 0xFFB46419).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.BEER_QUINOA = registerFluid(new Fluid("beer_quinoa", STILL, FLOW, 0xFFB46419).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, alcoholBeer),
-                                  BEER_SPELT = registerFluid(new Fluid("beer_spelt", STILL, FLOW, 0xFFC87828).setRarity(EnumRarity.UNCOMMON)).with(
+                                  FluidsCore.BEER_SPELT = registerFluid(new Fluid("beer_spelt", STILL, FLOW, 0xFFC87828).setRarity(EnumRarity.UNCOMMON)).with(
                                     DrinkableProperty.DRINKABLE, alcoholBeer)
                                 )
                                 .build();
@@ -412,29 +295,29 @@ public final class FluidsTFCF {
     };
     allJuiceBerryFluids = ImmutableSet.<FluidWrapper>builder()
                                       .add(
-                                        JUICE_BLACKBERRY = registerFluid(new Fluid("juice_blackberry", STILL, FLOW, 0xFF32001B).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_BLACKBERRY = registerFluid(new Fluid("juice_blackberry", STILL, FLOW, 0xFF32001B).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceBerryProperty),
-                                        JUICE_BLUEBERRY = registerFluid(new Fluid("juice_blueberry", STILL, FLOW, 0xFF70324E).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_BLUEBERRY = registerFluid(new Fluid("juice_blueberry", STILL, FLOW, 0xFF70324E).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceBerryProperty),
-                                        JUICE_BUNCH_BERRY = registerFluid(
+                                        FluidsCore.JUICE_BUNCH_BERRY = registerFluid(
                                           new Fluid("juice_bunch_berry", STILL, FLOW, 0xFFC04C62).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceBerryProperty),
-                                        JUICE_CLOUD_BERRY = registerFluid(
+                                        FluidsCore.JUICE_CLOUD_BERRY = registerFluid(
                                           new Fluid("juice_cloud_berry", STILL, FLOW, 0xFFB6B3C0).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceBerryProperty),
-                                        JUICE_CRANBERRY = registerFluid(new Fluid("juice_cranberry", STILL, FLOW, 0xFFCB4C78).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_CRANBERRY = registerFluid(new Fluid("juice_cranberry", STILL, FLOW, 0xFFCB4C78).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceBerryProperty),
-                                        JUICE_ELDERBERRY = registerFluid(new Fluid("juice_elderberry", STILL, FLOW, 0xFF17182B).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_ELDERBERRY = registerFluid(new Fluid("juice_elderberry", STILL, FLOW, 0xFF17182B).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceBerryProperty),
-                                        JUICE_GOOSEBERRY = registerFluid(new Fluid("juice_gooseberry", STILL, FLOW, 0xFFBEC1A4).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_GOOSEBERRY = registerFluid(new Fluid("juice_gooseberry", STILL, FLOW, 0xFFBEC1A4).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceBerryProperty),
-                                        JUICE_RASPBERRY = registerFluid(new Fluid("juice_raspberry", STILL, FLOW, 0xFFE30B5D).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_RASPBERRY = registerFluid(new Fluid("juice_raspberry", STILL, FLOW, 0xFFE30B5D).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceBerryProperty),
-                                        JUICE_SNOW_BERRY = registerFluid(new Fluid("juice_snow_berry", STILL, FLOW, 0xFFF6F9E1).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_SNOW_BERRY = registerFluid(new Fluid("juice_snow_berry", STILL, FLOW, 0xFFF6F9E1).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceBerryProperty),
-                                        JUICE_STRAWBERRY = registerFluid(new Fluid("juice_strawberry", STILL, FLOW, 0xFFC83F49).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_STRAWBERRY = registerFluid(new Fluid("juice_strawberry", STILL, FLOW, 0xFFC83F49).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceBerryProperty),
-                                        JUICE_WINTERGREEN_BERRY = registerFluid(
+                                        FluidsCore.JUICE_WINTERGREEN_BERRY = registerFluid(
                                           new Fluid("juice_wintergreen_berry", STILL, FLOW, 0xFFEA3441).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceBerryProperty)
                                       )
@@ -450,35 +333,35 @@ public final class FluidsTFCF {
     };
     allJuiceFruitFluids = ImmutableSet.<FluidWrapper>builder()
                                       .add(
-                                        JUICE_AGAVE = registerFluid(new Fluid("juice_agave", STILL, FLOW, 0xFFCCD8D4).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_AGAVE = registerFluid(new Fluid("juice_agave", STILL, FLOW, 0xFFCCD8D4).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty),
-                                        JUICE_APPLE = registerFluid(new Fluid("juice_apple", STILL, FLOW, 0xFFFEB500).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_APPLE = registerFluid(new Fluid("juice_apple", STILL, FLOW, 0xFFFEB500).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty),
-                                        JUICE_BANANA = registerFluid(new Fluid("juice_banana", STILL, FLOW, 0xFFFDE39F).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_BANANA = registerFluid(new Fluid("juice_banana", STILL, FLOW, 0xFFFDE39F).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty),
-                                        JUICE_CHERRY = registerFluid(new Fluid("juice_cherry", STILL, FLOW, 0xFF5E1224).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_CHERRY = registerFluid(new Fluid("juice_cherry", STILL, FLOW, 0xFF5E1224).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty),
-                                        JUICE_GREEN_GRAPE = registerFluid(
+                                        FluidsCore.JUICE_GREEN_GRAPE = registerFluid(
                                           new Fluid("juice_green_grape", STILL, FLOW, 0xFFCCE2A0).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty),
-                                        JUICE_JUNIPER = registerFluid(new Fluid("juice_juniper", STILL, FLOW, 0xFFBDC975).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_JUNIPER = registerFluid(new Fluid("juice_juniper", STILL, FLOW, 0xFFBDC975).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty),
-                                        JUICE_LEMON = registerFluid(new Fluid("juice_lemon", STILL, FLOW, 0xFFFCFAC9).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_LEMON = registerFluid(new Fluid("juice_lemon", STILL, FLOW, 0xFFFCFAC9).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty),
-                                        JUICE_ORANGE = registerFluid(new Fluid("juice_orange", STILL, FLOW, 0xFFFCA43C).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_ORANGE = registerFluid(new Fluid("juice_orange", STILL, FLOW, 0xFFFCA43C).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty),
-                                        JUICE_PAPAYA = registerFluid(new Fluid("juice_papaya", STILL, FLOW, 0xFFFCA018).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_PAPAYA = registerFluid(new Fluid("juice_papaya", STILL, FLOW, 0xFFFCA018).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty),
-                                        JUICE_PEACH = registerFluid(new Fluid("juice_peach", STILL, FLOW, 0xFFF7C0A2).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_PEACH = registerFluid(new Fluid("juice_peach", STILL, FLOW, 0xFFF7C0A2).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty),
-                                        JUICE_PEAR = registerFluid(new Fluid("juice_pear", STILL, FLOW, 0xFFE9DF96).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_PEAR = registerFluid(new Fluid("juice_pear", STILL, FLOW, 0xFFE9DF96).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty),
-                                        JUICE_PLUM = registerFluid(new Fluid("juice_plum", STILL, FLOW, 0xFF885375).setRarity(EnumRarity.UNCOMMON)).with(
+                                        FluidsCore.JUICE_PLUM = registerFluid(new Fluid("juice_plum", STILL, FLOW, 0xFF885375).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty),
-                                        JUICE_PURPLE_GRAPE = registerFluid(
+                                        FluidsCore.JUICE_PURPLE_GRAPE = registerFluid(
                                           new Fluid("juice_purple_grape", STILL, FLOW, 0xFF63344B).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty),
-                                        JUICE_BARREL_CACTUS = registerFluid(
+                                        FluidsCore.JUICE_BARREL_CACTUS = registerFluid(
                                           new Fluid("juice_barrel_cactus", STILL, FLOW, 0xFFBBE16A).setRarity(EnumRarity.UNCOMMON)).with(
                                           DrinkableProperty.DRINKABLE, juiceFruitProperty)
                                       )
@@ -512,7 +395,7 @@ public final class FluidsTFCF {
     }
     FluidRegistry.addBucketForFluid(newFluid);
     FluidWrapper properties = FluidsTFC.getWrapper(newFluid);
-    WRAPPERS.put(newFluid, properties);
+    FluidsTFC.WRAPPERS.put(newFluid, properties);
     return properties;
   }
 }

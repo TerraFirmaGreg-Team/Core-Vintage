@@ -3,6 +3,7 @@ package su.terrafirmagreg.mixin.minecraft.block;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.feature.climate.ITemperatureBlock;
 import su.terrafirmagreg.modules.core.feature.climate.IceMeltHandler;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.SoundType;
@@ -33,7 +34,7 @@ public class MixinBlockIce extends BlockBreakable implements ITemperatureBlock {
   private final float meltThreshold;
 
   public MixinBlockIce() {
-    this(FluidRegistry.getFluid("fresh_water"));
+    this(FluidsCore.FRESH_WATER.get());
   }
 
   public MixinBlockIce(Fluid waterFluid) {
@@ -52,10 +53,7 @@ public class MixinBlockIce extends BlockBreakable implements ITemperatureBlock {
     setTickRandomly(true);
   }
 
-  public void harvestBlock(@NotNull World worldIn, EntityPlayer player, @NotNull BlockPos pos,
-                           @NotNull IBlockState state,
-                           @Nullable TileEntity tile,
-                           @NotNull ItemStack stack) {
+  public void harvestBlock(@NotNull World worldIn, EntityPlayer player, @NotNull BlockPos pos, @NotNull IBlockState state, @Nullable TileEntity tile, @NotNull ItemStack stack) {
     //noinspection ConstantConditions
     player.addStat(StatList.getBlockStats(this));
     player.addExhaustion(0.005F);

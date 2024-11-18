@@ -5,6 +5,8 @@ import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
@@ -54,8 +56,6 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -72,9 +72,10 @@ public class ChunkGenClassic implements IChunkGenerator {
 
   public static final IBlockState STONE = Blocks.STONE.getDefaultState();
   public static final IBlockState AIR = Blocks.AIR.getDefaultState();
-  public static final IBlockState SALT_WATER = FluidsTFC.SALT_WATER.get().getBlock().getDefaultState();
-  public static final IBlockState FRESH_WATER = FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState();
-  public static final IBlockState HOT_WATER = FluidsTFC.HOT_WATER.get().getBlock().getDefaultState();
+  public static final IBlockState SALT_WATER = FluidsCore.SALT_WATER.get().getBlock().getDefaultState();
+  public static final IBlockState FRESH_WATER = FluidsCore.FRESH_WATER.get().getBlock().getDefaultState();
+  public static final IBlockState HOT_WATER = FluidsCore.HOT_WATER.get().getBlock().getDefaultState();
+
   public static final IBlockState LAVA = Blocks.LAVA.getDefaultState(); // todo: replace
   public static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
   /* Layers must be one here - otherwise snow becomes non-replaceable and wrecks the rest of world gen */
@@ -675,8 +676,7 @@ public class ChunkGenClassic implements IChunkGenerator {
             }
           }
           //  && biome != BiomesWorld.OCEAN && biome != BiomesWorld.DEEP_OCEAN && biome != BiomesWorld.BEACH && biome != BiomesWorld.GRAVEL_BEACH
-          else if (inp.getBlockState(x, y, z) == SALT_WATER && !(BiomeHelper.isOceanicBiome(biome)
-                                                                 || BiomeHelper.isBeachBiome(biome))) {
+          else if (inp.getBlockState(x, y, z) == SALT_WATER && !(BiomeHelper.isOceanicBiome(biome) || BiomeHelper.isBeachBiome(biome))) {
             outp.setBlockState(x, y + yOffset, z, FRESH_WATER);
           }
         }

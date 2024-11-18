@@ -2,6 +2,7 @@ package net.dries007.tfc.compat.jei;
 
 import su.terrafirmagreg.api.data.Reference;
 import su.terrafirmagreg.api.data.enums.EnumHideSize;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
@@ -414,7 +415,7 @@ public final class TFCJEIPlugin implements IModPlugin {
     registry.addIngredientInfo(new ItemStack(Items.COAL, 1, 1), VanillaTypes.ITEM,
                                new TextComponentTranslation("jei.description.tfc.charcoal_pit").getFormattedText());
     registry.addIngredientInfo(new ItemStack(TechItems.IRON_GROOVE), VanillaTypes.ITEM, "jei.information.tfctech.groove");
-    registry.addIngredientInfo(new FluidStack(FluidsTFC.LATEX.get(), 1000), VanillaTypes.FLUID, "jei.information.tfctech.latex");
+    registry.addIngredientInfo(new FluidStack(FluidsCore.LATEX.get(), 1000), VanillaTypes.FLUID, "jei.information.tfctech.latex");
     registry.addIngredientInfo(new ItemStack(BlocksDevice.FRIDGE), VanillaTypes.ITEM, "jei.information.tfctech.fridge");
     registry.addIngredientInfo(new ItemStack(BlocksDevice.INDUCTION_CRUCIBLE), VanillaTypes.ITEM, "jei.information.tfctech.crucible");
     registry.addIngredientInfo(new ItemStack(BlocksDevice.ELECTRIC_FORGE), VanillaTypes.ITEM, "jei.information.tfctech.forge");

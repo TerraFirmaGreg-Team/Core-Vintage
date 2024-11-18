@@ -155,6 +155,15 @@ public class Registry {
     });
   }
 
+  public void onRegisterFluid() {
+
+    this.blocks.forEach(block -> {
+      if (block instanceof IProviderTile provider) {
+        TileUtils.registerTileEntity(provider.getTileClass(), provider.getTileClass().getSimpleName());
+      }
+    });
+  }
+
   public void onRegisterItem(RegistryEvent.Register<Item> event) {
 
     this.items.register(event);

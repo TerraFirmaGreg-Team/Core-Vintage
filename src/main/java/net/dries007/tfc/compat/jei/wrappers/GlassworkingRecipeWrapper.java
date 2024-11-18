@@ -1,5 +1,7 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -11,7 +13,6 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.recipes.GlassworkingRecipe;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 
 import static su.terrafirmagreg.api.data.Reference.MODID_TFCTECH;
 
@@ -35,7 +36,7 @@ public class GlassworkingRecipeWrapper implements IRecipeWrapper {
     ItemStack output = recipe.getOutput();
     ingredients.setOutput(VanillaTypes.ITEM, output);
 
-    ingredients.setInput(VanillaTypes.FLUID, new FluidStack(FluidsTFC.GLASS.get(), 250));
+    ingredients.setInput(VanillaTypes.FLUID, new FluidStack(FluidsCore.GLASS.get(), 250));
   }
 
   @Override

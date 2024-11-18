@@ -1,5 +1,7 @@
 package net.dries007.tfctech.compat.jei;
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -15,7 +17,6 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.TechItems;
 import net.dries007.tfc.objects.items.metal.ItemTechMetal;
 import net.dries007.tfctech.compat.jei.wrappers.CastingRecipeWrapper;
@@ -55,7 +56,7 @@ public class TechJEIPlugin implements IModPlugin {
     ItemStack input = new ItemStack(TechItems.MOLD_BLOCK);
     IFluidHandlerItem cap = input.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (cap != null) {
-      cap.fill(new FluidStack(FluidsTFC.GLASS.get(), 1000), true);
+      cap.fill(new FluidStack(FluidsCore.GLASS.get(), 1000), true);
     }
     unmoldList.add(new UnmoldRecipeWrapper(input, new ItemStack(Blocks.GLASS)));
     registry.addIngredientInfo(input, VanillaTypes.ITEM, "jei.information.tfctech.fill_mold");
@@ -63,7 +64,7 @@ public class TechJEIPlugin implements IModPlugin {
     input = new ItemStack(TechItems.MOLD_PANE);
     cap = input.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (cap != null) {
-      cap.fill(new FluidStack(FluidsTFC.GLASS.get(), 375), true);
+      cap.fill(new FluidStack(FluidsCore.GLASS.get(), 375), true);
     }
     unmoldList.add(new UnmoldRecipeWrapper(input, new ItemStack(Blocks.GLASS_PANE)));
     registry.addIngredientInfo(input, VanillaTypes.ITEM, "jei.information.tfctech.fill_mold");

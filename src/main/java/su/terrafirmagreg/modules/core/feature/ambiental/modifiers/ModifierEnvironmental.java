@@ -4,6 +4,8 @@ import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
 import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalEnvironmentalProvider;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
@@ -13,9 +15,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.biome.Biome;
-
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import java.util.Optional;
 
@@ -81,11 +80,11 @@ public class ModifierEnvironmental extends ModifierBase {
     if (player.isInWater()) {
       BlockPos pos = player.getPosition();
       IBlockState state = player.world.getBlockState(pos);
-      if (state.getBlock() == FluidsTFC.HOT_WATER.get().getBlock()) {
+      if (state.getBlock() == FluidsCore.HOT_WATER.get().getBlock()) {
         return ModifierBase.defined("in_hot_water", 5f, 6f);
       } else if (state.getBlock() == Blocks.LAVA) {
         return ModifierBase.defined("in_lava", 10f, 5f);
-      } else if (state.getBlock() == FluidsTFC.SALT_WATER.get().getBlock()
+      } else if (state.getBlock() == FluidsCore.SALT_WATER.get().getBlock()
                  && player.world.getBiome(pos)
                                 .getTempCategory() == Biome.TempCategory.OCEAN) {
         return ModifierBase.defined("in_ocean_water", -8f, 6f);

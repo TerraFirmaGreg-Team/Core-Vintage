@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlantCreeping;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlantHangingCreeping;
@@ -56,7 +57,6 @@ import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCassiaCinnamonSapling;
 import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
 import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLog;
 import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCeylonCinnamonSapling;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFCF;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.objects.items.food.ItemBlockRot;
@@ -437,19 +437,19 @@ public final class BlocksTFCF {
         }*/
 
     // Normal Corals
-    plantCoral.add(register(r, "coral/tube/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/brain/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/bubble/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/fire/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/horn/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/tube/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/brain/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/bubble/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/fire/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/horn/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
 
     for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
 
-      BlockCoral brainNormal = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral bubbleNormal = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral fireNormal = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral hornNormal = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral tubeNormal = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral brainNormal = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral bubbleNormal = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral fireNormal = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral hornNormal = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral tubeNormal = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
 
       plantCoral.add(register(r, "coral/brain/" + dyeColor.getName(), brainNormal, CT_FLORA));
       plantCoral.add(register(r, "coral/bubble/" + dyeColor.getName(), bubbleNormal, CT_FLORA));
@@ -465,18 +465,18 @@ public final class BlocksTFCF {
     }
 
     // Fan Corals
-    plantCoral.add(register(r, "coral/fan/tube/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/fan/brain/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/fan/bubble/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/fan/fire/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/fan/horn/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/fan/tube/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/fan/brain/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/fan/bubble/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/fan/fire/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/fan/horn/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
 
     for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-      BlockCoral brainFan = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral bubbleFan = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral fireFan = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral hornFan = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral tubeFan = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral brainFan = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral bubbleFan = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral fireFan = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral hornFan = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral tubeFan = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
 
       plantCoral.add(register(r, "coral/fan/brain/" + dyeColor.getName(), brainFan, CT_FLORA));
       plantCoral.add(register(r, "coral/fan/bubble/" + dyeColor.getName(), bubbleFan, CT_FLORA));
@@ -694,41 +694,33 @@ public final class BlocksTFCF {
 
     {
       fluids.add(
-        register(r, "fluid/distilled_water", new BlockFluidTFC(FluidsTFCF.DISTILLED_WATER.get(), Material.WATER, false)),
-        register(r, "fluid/waste", new BlockFluidTFC(FluidsTFCF.WASTE.get(), Material.WATER, false)),
-        register(r, "fluid/base_potash_liquor", new BlockFluidTFC(FluidsTFCF.BASE_POTASH_LIQUOR.get(), Material.WATER, false))
+        register(r, "fluid/distilled_water", new BlockFluidTFC(FluidsCore.DISTILLED_WATER.get(), Material.WATER, false)),
+        register(r, "fluid/waste", new BlockFluidTFC(FluidsCore.WASTE.get(), Material.WATER, false)),
+        register(r, "fluid/base_potash_liquor", new BlockFluidTFC(FluidsCore.BASE_POTASH_LIQUOR.get(), Material.WATER, false))
       );
       for (FluidWrapper wrapper : FluidsTFCF.getAllFermentedAlcoholsFluids()) {
-        fluids.add(register(r, "fluid/" + wrapper.get()
-                                                 .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+        fluids.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
       }
       for (FluidWrapper wrapper : FluidsTFCF.getAllAlcoholsFluids()) {
-        fluids.add(register(r, "fluid/" + wrapper.get()
-                                                 .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+        fluids.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
       }
       for (FluidWrapper wrapper : FluidsTFCF.getAllBeerFluids()) {
-        fluids.add(register(r, "fluid/" + wrapper.get()
-                                                 .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+        fluids.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
       }
       for (FluidWrapper wrapper : FluidsTFCF.getAllTeaFluids()) {
-        fluids.add(register(r, "fluid/" + wrapper.get()
-                                                 .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+        fluids.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
       }
       for (FluidWrapper wrapper : FluidsTFCF.getAllCoffeeFluids()) {
-        fluids.add(register(r, "fluid/" + wrapper.get()
-                                                 .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+        fluids.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
       }
       for (FluidWrapper wrapper : FluidsTFCF.getAllJuiceBerryFluids()) {
-        fluids.add(register(r, "fluid/" + wrapper.get()
-                                                 .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+        fluids.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
       }
       for (FluidWrapper wrapper : FluidsTFCF.getAllJuiceFruitFluids()) {
-        fluids.add(register(r, "fluid/" + wrapper.get()
-                                                 .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+        fluids.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
       }
       for (FluidWrapper wrapper : FluidsTFCF.getAllMiscFluids()) {
-        fluids.add(register(r, "fluid/" + wrapper.get()
-                                                 .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+        fluids.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
       }
       allFluidBlocks = fluids.build();
     }

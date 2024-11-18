@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -23,7 +24,6 @@ import net.dries007.eerussianguy.firmalife.particle.ParticlesFL;
 import net.dries007.eerussianguy.firmalife.util.GreenhouseHelpers;
 import net.dries007.eerussianguy.firmalife.util.HelpersFL;
 import net.dries007.eerussianguy.firmalife.util.IWaterable;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -128,7 +128,7 @@ public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreen
     return TileUtils.getTile(world, pos.up()).map(tile -> {
       IFluidHandler cap = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.DOWN);
       if (cap != null) {
-        return cap.drain(new FluidStack(FluidsTFC.FRESH_WATER.get(), 1), true) != null;
+        return cap.drain(new FluidStack(FluidsCore.FRESH_WATER.get(), 1), true) != null;
       }
       return null;
     }).orElse(false);

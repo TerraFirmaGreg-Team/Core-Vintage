@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlantFloatingWater;
 import su.terrafirmagreg.modules.plant.object.block.BlockPlantFlowerPot;
@@ -131,7 +132,7 @@ public final class BlocksTFC {
     Builder<ItemBlock> normalItemBlocks = ImmutableList.builder();
     Builder<ItemBlock> inventoryItemBlocks = ImmutableList.builder();
 
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockIceTFC(FluidsTFC.SALT_WATER.get()), CT_MISC)));
+    normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockIceTFC(FluidsCore.SALT_WATER.get()), CT_MISC)));
 
     normalItemBlocks.add(new ItemBlockLargeVessel(register(r, "ceramics/fired/large_vessel", new BlockLargeVessel(), CT_POTTERY)));
 
@@ -140,8 +141,8 @@ public final class BlocksTFC {
       Builder<BlockFluidBase> b = ImmutableList.builder();
       b.add(
         register(r, "fluid/hot_water", new BlockFluidHotWater()),
-        register(r, "fluid/fresh_water", new BlockFluidWater(FluidsTFC.FRESH_WATER.get(), Material.WATER, false)),
-        register(r, "fluid/salt_water", new BlockFluidWater(FluidsTFC.SALT_WATER.get(), Material.WATER, true))
+        register(r, "fluid/fresh_water", new BlockFluidWater(FluidsCore.FRESH_WATER.get(), Material.WATER, false)),
+        register(r, "fluid/salt_water", new BlockFluidWater(FluidsCore.SALT_WATER.get(), Material.WATER, true))
       );
       for (FluidWrapper wrapper : FluidsTFC.getAllAlcoholsFluids()) {
         b.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER)));

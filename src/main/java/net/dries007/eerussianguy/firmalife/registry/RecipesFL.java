@@ -1,5 +1,7 @@
 package net.dries007.eerussianguy.firmalife.registry;
 
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.item.ItemStack;
@@ -23,7 +25,6 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
@@ -31,8 +32,6 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
-
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import static su.terrafirmagreg.api.data.Reference.MODID_FL;
 
@@ -194,7 +193,7 @@ public class RecipesFL {
     ItemStack filled_coconut = new ItemStack(ItemsFL.CRACKED_COCONUT);
     IFluidHandler fluidHandler = filled_coconut.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (fluidHandler != null) {
-      fluidHandler.fill(new FluidStack(FluidsTFC.COCONUT_MILK.get(), 1000), true);
+      fluidHandler.fill(new FluidStack(FluidsCore.COCONUT_MILK.get(), 1000), true);
     }
 
     IForgeRegistry<CrackingRecipe> r = event.getRegistry();
@@ -213,11 +212,11 @@ public class RecipesFL {
   public static void inRegisterStrainingRecipeEvent(RegistryEvent.Register<StrainingRecipe> event) {
     IForgeRegistry<StrainingRecipe> r = event.getRegistry();
     r.registerAll(
-      new StrainingRecipe(IIngredient.of(FluidsTFC.CURDLED_MILK.get(), 500), new ItemStack(ItemsFL.MILK_CURD), null).setRegistryName(
+      new StrainingRecipe(IIngredient.of(FluidsCore.CURDLED_MILK.get(), 500), new ItemStack(ItemsFL.MILK_CURD), null).setRegistryName(
         "milk_curd"),
-      new StrainingRecipe(IIngredient.of(FluidsTFC.CURDLED_GOAT_MILK.get(), 500), new ItemStack(ItemsFL.GOAT_CURD), null).setRegistryName(
+      new StrainingRecipe(IIngredient.of(FluidsCore.CURDLED_GOAT_MILK.get(), 500), new ItemStack(ItemsFL.GOAT_CURD), null).setRegistryName(
         "goat_curd"),
-      new StrainingRecipe(IIngredient.of(FluidsTFC.CURDLED_YAK_MILK.get(), 500), new ItemStack(ItemsFL.YAK_CURD), null).setRegistryName(
+      new StrainingRecipe(IIngredient.of(FluidsCore.CURDLED_YAK_MILK.get(), 500), new ItemStack(ItemsFL.YAK_CURD), null).setRegistryName(
         "yak_curd")
     );
   }

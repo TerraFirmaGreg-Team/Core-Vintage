@@ -5,6 +5,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -24,7 +25,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -91,9 +91,9 @@ public class OverlayTemperature {
     }
     IBlockState state = player.world.getBlockState(pos2);
     Block block = state.getBlock();
-    if (block == FluidsTFC.HOT_WATER.get().getBlock() ||
-        block == FluidsTFC.SALT_WATER.get().getBlock() ||
-        block == FluidsTFC.FRESH_WATER.get().getBlock()) {
+    if (block == FluidsCore.HOT_WATER.get().getBlock() ||
+        block == FluidsCore.SALT_WATER.get().getBlock() ||
+        block == FluidsCore.FRESH_WATER.get().getBlock()) {
       offsetY = -10f;
       offsetX = 0;
     }

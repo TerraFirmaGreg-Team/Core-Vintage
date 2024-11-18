@@ -2,6 +2,7 @@ package net.dries007.tfc.api.recipes.barrel;
 
 import su.terrafirmagreg.api.util.CollectionUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -10,7 +11,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFoodTrait;
 
@@ -32,7 +32,7 @@ public class BarrelRecipeFoodPreservation extends BarrelRecipe {
   }
 
   public static BarrelRecipe vinegar(@NotNull IIngredient<ItemStack> inputStack) {
-    return new BarrelRecipeFoodPreservation(IIngredient.of(FluidsTFC.VINEGAR.get(), 125),
+    return new BarrelRecipeFoodPreservation(IIngredient.of(FluidsCore.VINEGAR.get(), 125),
                                             new IngredientItemFoodTrait(inputStack, FoodTrait.PICKLED), FoodTrait.VINEGAR, "barrel_recipe_vinegar");
   }
 

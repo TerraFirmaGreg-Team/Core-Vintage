@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.render.TESRFirePit;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
@@ -48,7 +49,6 @@ import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -239,7 +239,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
           if (tile.getCookingPotStage() == TileFirePit.CookingPotStage.EMPTY) {
             FluidStack fluidStack = FluidUtil.getFluidContained(held);
             if (fluidStack != null && fluidStack.amount >= 1000
-                && fluidStack.getFluid() == FluidsTFC.FRESH_WATER.get()) {
+                && fluidStack.getFluid() == FluidsCore.FRESH_WATER.get()) {
               // Add water
               tile.addWaterToCookingPot();
               IFluidHandler fluidHandler = FluidUtil.getFluidHandler(held);

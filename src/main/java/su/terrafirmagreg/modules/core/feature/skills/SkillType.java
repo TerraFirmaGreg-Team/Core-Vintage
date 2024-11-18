@@ -1,8 +1,7 @@
 package su.terrafirmagreg.modules.core.feature.skills;
 
+import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.capabilities.player.ICapabilityPlayer;
-
-import net.dries007.tfc.TerraFirmaCraft;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -73,7 +72,7 @@ public final class SkillType<S extends Skill> {
     try {
       return ((SkillType<S>) skill);
     } catch (ClassCastException e) {
-      TerraFirmaCraft.getLog().warn("Tried to cast skill '" + skill + "' to an incorrect instance type: " + name + " / " + returnClass);
+      ModuleCore.LOGGER.warn("Tried to cast skill ' {} ' to an incorrect instance type: {} / {}", skill, name, returnClass);
       return null;
     }
   }

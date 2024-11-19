@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/madagascar_ocotillo_single"
+          "model": "tfg:flora/plant/madagascar_ocotillo/single"
         }
       ]
     }, {
@@ -16,7 +16,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/madagascar_ocotillo_lower_0"
+          "model": "tfg:flora/plant/madagascar_ocotillo/lower"
         }
       ]
     }, {
@@ -26,7 +26,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/madagascar_ocotillo_upper_0"
+          "model": "tfg:flora/plant/madagascar_ocotillo/upper"
         }
       ]
     }

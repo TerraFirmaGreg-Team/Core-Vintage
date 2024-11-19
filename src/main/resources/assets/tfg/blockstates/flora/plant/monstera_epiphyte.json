@@ -6,23 +6,23 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/monstera_epiphyte_0",
+          "model": "tfg:flora/plant/monstera_epiphyte/0",
           "weight": 1,
           "x": 270
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_1",
+          "model": "tfg:flora/plant/monstera_epiphyte/1",
           "weight": 1,
           "x": 270
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_2",
+          "model": "tfg:flora/plant/monstera_epiphyte/2",
           "weight": 1,
           "x": 270
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_3",
+          "model": "tfg:flora/plant/monstera_epiphyte/3",
           "weight": 1,
           "x": 270
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_4",
+          "model": "tfg:flora/plant/monstera_epiphyte/4",
           "weight": 1,
           "x": 270
         }
@@ -33,23 +33,23 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/monstera_epiphyte_0",
+          "model": "tfg:flora/plant/monstera_epiphyte/0",
           "weight": 1,
           "x": 90
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_1",
+          "model": "tfg:flora/plant/monstera_epiphyte/1",
           "weight": 1,
           "x": 90
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_2",
+          "model": "tfg:flora/plant/monstera_epiphyte/2",
           "weight": 1,
           "x": 90
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_3",
+          "model": "tfg:flora/plant/monstera_epiphyte/3",
           "weight": 1,
           "x": 90
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_4",
+          "model": "tfg:flora/plant/monstera_epiphyte/4",
           "weight": 1,
           "x": 90
         }
@@ -60,23 +60,23 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/monstera_epiphyte_0",
+          "model": "tfg:flora/plant/monstera_epiphyte/0",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_1",
+          "model": "tfg:flora/plant/monstera_epiphyte/1",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_2",
+          "model": "tfg:flora/plant/monstera_epiphyte/2",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_3",
+          "model": "tfg:flora/plant/monstera_epiphyte/3",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_4",
+          "model": "tfg:flora/plant/monstera_epiphyte/4",
           "weight": 1,
           "y": 90
         }
@@ -87,23 +87,23 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/monstera_epiphyte_0",
+          "model": "tfg:flora/plant/monstera_epiphyte/0",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_1",
+          "model": "tfg:flora/plant/monstera_epiphyte/1",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_2",
+          "model": "tfg:flora/plant/monstera_epiphyte/2",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_3",
+          "model": "tfg:flora/plant/monstera_epiphyte/3",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_4",
+          "model": "tfg:flora/plant/monstera_epiphyte/4",
           "weight": 1,
           "y": 180
         }
@@ -114,23 +114,23 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/monstera_epiphyte_0",
+          "model": "tfg:flora/plant/monstera_epiphyte/0",
           "weight": 1,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_1",
+          "model": "tfg:flora/plant/monstera_epiphyte/1",
           "weight": 1,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_2",
+          "model": "tfg:flora/plant/monstera_epiphyte/2",
           "weight": 1,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_3",
+          "model": "tfg:flora/plant/monstera_epiphyte/3",
           "weight": 1,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_4",
+          "model": "tfg:flora/plant/monstera_epiphyte/4",
           "weight": 1,
           "y": 270
         }
@@ -141,19 +141,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/monstera_epiphyte_0",
+          "model": "tfg:flora/plant/monstera_epiphyte/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_1",
+          "model": "tfg:flora/plant/monstera_epiphyte/1",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_2",
+          "model": "tfg:flora/plant/monstera_epiphyte/2",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_3",
+          "model": "tfg:flora/plant/monstera_epiphyte/3",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/monstera_epiphyte_4",
+          "model": "tfg:flora/plant/monstera_epiphyte/4",
           "weight": 1
         }
       ]

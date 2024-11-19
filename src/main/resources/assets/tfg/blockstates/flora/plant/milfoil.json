@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfg:flora/plant/milfoil"
+          "model": "tfg:flora/plant/milfoil/0"
         }
       ]
     }

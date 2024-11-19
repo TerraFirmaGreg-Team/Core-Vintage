@@ -1,0 +1,7 @@
+{
+  "parent": "tfc:block/plants/liana_cross_0",
+  "textures": {
+    "particle": "tfg:blocks/flora/plant/liana/tip",
+    "overlay": "tfg:blocks/flora/plant/liana/tip"
+  }
+}

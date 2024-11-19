@@ -7,66 +7,66 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/king_fern_upper_0a",
+          "model": "tfg:flora/plant/king_fern/upper/0a",
           "weight": 16
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0b",
+          "model": "tfg:flora/plant/king_fern/upper/0b",
           "weight": 3
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0b",
+          "model": "tfg:flora/plant/king_fern/upper/0b",
           "y": 90,
           "weight": 3
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0b",
+          "model": "tfg:flora/plant/king_fern/upper/0b",
           "y": 180,
           "weight": 3
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0b",
+          "model": "tfg:flora/plant/king_fern/upper/0b",
           "y": 270,
           "weight": 3
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0c",
+          "model": "tfg:flora/plant/king_fern/upper/0c",
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0c",
+          "model": "tfg:flora/plant/king_fern/upper/0c",
           "y": 90,
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0c",
+          "model": "tfg:flora/plant/king_fern/upper/0c",
           "y": 180,
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0c",
+          "model": "tfg:flora/plant/king_fern/upper/0c",
           "y": 270,
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0d",
+          "model": "tfg:flora/plant/king_fern/upper/0d",
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0d",
+          "model": "tfg:flora/plant/king_fern/upper/0d",
           "y": 90,
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0d",
+          "model": "tfg:flora/plant/king_fern/upper/0d",
           "y": 180,
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0d",
+          "model": "tfg:flora/plant/king_fern/upper/0d",
           "y": 270,
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0e",
+          "model": "tfg:flora/plant/king_fern/upper/0e",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0e",
+          "model": "tfg:flora/plant/king_fern/upper/0e",
           "y": 90,
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0e",
+          "model": "tfg:flora/plant/king_fern/upper/0e",
           "y": 180,
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0e",
+          "model": "tfg:flora/plant/king_fern/upper/0e",
           "y": 270,
           "weight": 1
         }
@@ -78,7 +78,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/king_fern_lower_0"
+          "model": "tfg:flora/plant/king_fern/lower/0"
         }
       ]
     }, {
@@ -88,66 +88,66 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/king_fern_upper_0a",
+          "model": "tfg:flora/plant/king_fern/upper/0a",
           "weight": 16
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0b",
+          "model": "tfg:flora/plant/king_fern/upper/0b",
           "weight": 3
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0b",
+          "model": "tfg:flora/plant/king_fern/upper/0b",
           "y": 90,
           "weight": 3
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0b",
+          "model": "tfg:flora/plant/king_fern/upper/0b",
           "y": 180,
           "weight": 3
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0b",
+          "model": "tfg:flora/plant/king_fern/upper/0b",
           "y": 270,
           "weight": 3
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0c",
+          "model": "tfg:flora/plant/king_fern/upper/0c",
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0c",
+          "model": "tfg:flora/plant/king_fern/upper/0c",
           "y": 90,
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0c",
+          "model": "tfg:flora/plant/king_fern/upper/0c",
           "y": 180,
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0c",
+          "model": "tfg:flora/plant/king_fern/upper/0c",
           "y": 270,
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0d",
+          "model": "tfg:flora/plant/king_fern/upper/0d",
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0d",
+          "model": "tfg:flora/plant/king_fern/upper/0d",
           "y": 90,
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0d",
+          "model": "tfg:flora/plant/king_fern/upper/0d",
           "y": 180,
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0d",
+          "model": "tfg:flora/plant/king_fern/upper/0d",
           "y": 270,
           "weight": 2
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0e",
+          "model": "tfg:flora/plant/king_fern/upper/0e",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0e",
+          "model": "tfg:flora/plant/king_fern/upper/0e",
           "y": 90,
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0e",
+          "model": "tfg:flora/plant/king_fern/upper/0e",
           "y": 180,
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/king_fern_upper_0e",
+          "model": "tfg:flora/plant/king_fern/upper/0e",
           "y": 270,
           "weight": 1
         }

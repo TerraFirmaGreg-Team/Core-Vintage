@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/ocotillo_single_0"
+          "model": "tfg:flora/plant/ocotillo/single/0"
         }
       ]
     }, {
@@ -17,10 +17,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/ocotillo_single_0",
+          "model": "tfg:flora/plant/ocotillo/single/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/ocotillo_single_1",
+          "model": "tfg:flora/plant/ocotillo/single/1",
           "weight": 5
         }
       ]
@@ -31,7 +31,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/ocotillo_single_1"
+          "model": "tfg:flora/plant/ocotillo/single/1"
         }
       ]
     }, {
@@ -41,7 +41,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/ocotillo_lower_0"
+          "model": "tfg:flora/plant/ocotillo/lower/0"
         }
       ]
     }, {
@@ -51,10 +51,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/ocotillo_lower_0",
+          "model": "tfg:flora/plant/ocotillo/lower/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/ocotillo_lower_1",
+          "model": "tfg:flora/plant/ocotillo/lower/1",
           "weight": 5
         }
       ]
@@ -65,7 +65,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/ocotillo_lower_1"
+          "model": "tfg:flora/plant/ocotillo/lower/1"
         }
       ]
     }, {
@@ -75,7 +75,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/ocotillo_upper_0"
+          "model": "tfg:flora/plant/ocotillo/upper/0"
         }
       ]
     }, {
@@ -85,10 +85,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/ocotillo_upper_0",
+          "model": "tfg:flora/plant/ocotillo/upper/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/ocotillo_upper_1",
+          "model": "tfg:flora/plant/ocotillo/upper/1",
           "weight": 5
         }
       ]
@@ -99,7 +99,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/ocotillo_upper_1"
+          "model": "tfg:flora/plant/ocotillo/upper/1"
         }
       ]
     }

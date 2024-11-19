@@ -5,28 +5,28 @@
         "age": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/manatee_grass_0"
+        "model": "tfg:flora/plant/manatee_grass/0"
       }
     }, {
       "when": {
         "age": "1"
       },
       "apply": {
-        "model": "tfg:flora/plant/manatee_grass_1"
+        "model": "tfg:flora/plant/manatee_grass/1"
       }
     }, {
       "when": {
         "age": "2"
       },
       "apply": {
-        "model": "tfg:flora/plant/manatee_grass_2"
+        "model": "tfg:flora/plant/manatee_grass/2"
       }
     }, {
       "when": {
         "age": "3"
       },
       "apply": {
-        "model": "tfg:flora/plant/manatee_grass_3"
+        "model": "tfg:flora/plant/manatee_grass/3"
       }
     }
   ]

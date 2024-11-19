@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfg:flora/plant/lady_fern"
+          "model": "tfg:flora/plant/lady_fern/0"
         }
       ]
     }

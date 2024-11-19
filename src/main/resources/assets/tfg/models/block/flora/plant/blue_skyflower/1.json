@@ -1,5 +1,5 @@
 {
-  "parent": "tfc:block/plants/blue_skyflower_0",
+  "parent": "tfg:block/plants/blue_skyflower_0",
   "textures": {
     "particle": "tfg:blocks/flora/plant/blue_skyflower/blue_skyflower_1",
     "layer0": "tfg:blocks/flora/plant/blue_skyflower/blue_skyflower_1",

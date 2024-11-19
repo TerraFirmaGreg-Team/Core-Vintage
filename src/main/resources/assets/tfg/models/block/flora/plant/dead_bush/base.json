@@ -1,5 +1,5 @@
 {
-  "parent": "tfc:block/cross",
+  "parent": "tfg:block/cross",
   "textures": {
     "cross": "tfg:blocks/flora/plant/dead_bush/dead_bush",
     "particle": "tfg:blocks/flora/plant/dead_bush/dead_bush"

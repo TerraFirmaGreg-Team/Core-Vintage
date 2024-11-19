@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "tfc:blocks/plants/arrow_bamboo/sapling",
-		"leaves": "tfc:blocks/plants/arrow_bamboo/arrow_bamboo_single",
-		"stem": "tfc:blocks/plants/arrow_bamboo/arrow_bamboo_single_b"
+		"particle": "tfg:blocks/plants/arrow_bamboo/sapling",
+		"leaves": "tfg:blocks/plants/arrow_bamboo/arrow_bamboo_single",
+		"stem": "tfg:blocks/plants/arrow_bamboo/arrow_bamboo_single_b"
 	},
 	"elements": [
 		{

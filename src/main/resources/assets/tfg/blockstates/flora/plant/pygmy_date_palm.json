@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/pygmy_date_palm_single"
+          "model": "tfg:flora/plant/pygmy_date_palm/single"
         }
       ]
     }, {
@@ -16,7 +16,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/pygmy_date_palm_lower_0"
+          "model": "tfg:flora/plant/pygmy_date_palm/lower"
         }
       ]
     }, {
@@ -26,7 +26,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/pygmy_date_palm_upper_0"
+          "model": "tfg:flora/plant/pygmy_date_palm/upper"
         }
       ]
     }

@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/leafy_kelp_upper"
+          "model": "tfg:flora/plant/leafy_kelp/upper"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/leafy_kelp_lower"
+          "model": "tfg:flora/plant/leafy_kelp/lower"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/leafy_kelp_lower"
+          "model": "tfg:flora/plant/leafy_kelp/lower"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/leafy_kelp_upper"
+          "model": "tfg:flora/plant/leafy_kelp/upper"
         }
       ]
     }

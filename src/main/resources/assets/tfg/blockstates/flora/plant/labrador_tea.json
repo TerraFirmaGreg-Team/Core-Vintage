@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/labrador_tea_0"
+          "model": "tfg:flora/plant/labrador_tea/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/labrador_tea_1"
+          "model": "tfg:flora/plant/labrador_tea/1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/labrador_tea_2"
+          "model": "tfg:flora/plant/labrador_tea/2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/labrador_tea_3"
+          "model": "tfg:flora/plant/labrador_tea/3"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/labrador_tea_4"
+          "model": "tfg:flora/plant/labrador_tea/4"
         }
       ]
     }, {
@@ -51,7 +51,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/labrador_tea_5"
+          "model": "tfg:flora/plant/labrador_tea/5"
         }
       ]
     }, {
@@ -60,7 +60,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/labrador_tea_6"
+          "model": "tfg:flora/plant/labrador_tea/6"
         }
       ]
     }

@@ -1,5 +1,5 @@
 {
-  "parent": "tfc:block/plants/jade_vine_cross_0",
+  "parent": "tfg:block/plants/jade_vine_cross_0",
   "textures": {
     "cross": "tfg:blocks/flora/plant/jade_vine/jade_vine_1",
     "particle": "tfg:blocks/flora/plant/jade_vine/jade_vine_1",

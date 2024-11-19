@@ -6,19 +6,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/lily_of_the_valley_0",
+          "model": "tfg:flora/plant/lily_of_the_valley/0",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_0",
+          "model": "tfg:flora/plant/lily_of_the_valley/0",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_0",
+          "model": "tfg:flora/plant/lily_of_the_valley/0",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_0",
+          "model": "tfg:flora/plant/lily_of_the_valley/0",
           "weight": 1,
           "y": 270
         }
@@ -29,19 +29,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/lily_of_the_valley_1",
+          "model": "tfg:flora/plant/lily_of_the_valley/1",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_1",
+          "model": "tfg:flora/plant/lily_of_the_valley/1",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_1",
+          "model": "tfg:flora/plant/lily_of_the_valley/1",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_1",
+          "model": "tfg:flora/plant/lily_of_the_valley/1",
           "weight": 1,
           "y": 270
         }
@@ -52,19 +52,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/lily_of_the_valley_2",
+          "model": "tfg:flora/plant/lily_of_the_valley/2",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_2",
+          "model": "tfg:flora/plant/lily_of_the_valley/2",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_2",
+          "model": "tfg:flora/plant/lily_of_the_valley/2",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_2",
+          "model": "tfg:flora/plant/lily_of_the_valley/2",
           "weight": 1,
           "y": 270
         }
@@ -75,19 +75,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/lily_of_the_valley_3",
+          "model": "tfg:flora/plant/lily_of_the_valley/3",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_3",
+          "model": "tfg:flora/plant/lily_of_the_valley/3",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_3",
+          "model": "tfg:flora/plant/lily_of_the_valley/3",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_3",
+          "model": "tfg:flora/plant/lily_of_the_valley/3",
           "weight": 1,
           "y": 270
         }
@@ -98,19 +98,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/lily_of_the_valley_4",
+          "model": "tfg:flora/plant/lily_of_the_valley/4",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_4",
+          "model": "tfg:flora/plant/lily_of_the_valley/4",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_4",
+          "model": "tfg:flora/plant/lily_of_the_valley/4",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_4",
+          "model": "tfg:flora/plant/lily_of_the_valley/4",
           "weight": 1,
           "y": 270
         }
@@ -121,19 +121,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/lily_of_the_valley_5",
+          "model": "tfg:flora/plant/lily_of_the_valley/5",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_5",
+          "model": "tfg:flora/plant/lily_of_the_valley/5",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_5",
+          "model": "tfg:flora/plant/lily_of_the_valley/5",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/lily_of_the_valley_5",
+          "model": "tfg:flora/plant/lily_of_the_valley/5",
           "weight": 1,
           "y": 270
         }

@@ -7,7 +7,7 @@
         "stage": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/pampas_grass_shortest_0"
+        "model": "tfg:flora/plant/pampas_grass/shortest/0"
       }
     }, {
       "when": {
@@ -16,7 +16,7 @@
         "stage": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/pampas_grass_shortest_1"
+        "model": "tfg:flora/plant/pampas_grass/shortest/1"
       }
     }, {
       "when": {
@@ -25,7 +25,7 @@
         "stage": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/pampas_grass_shorter_1"
+        "model": "tfg:flora/plant/pampas_grass/shorter/1"
       }
     }, {
       "when": {
@@ -34,7 +34,7 @@
         "stage": "1"
       },
       "apply": {
-        "model": "tfg:flora/plant/pampas_grass_shortest_1"
+        "model": "tfg:flora/plant/pampas_grass/shortest/1"
       }
     }, {
       "when": {
@@ -43,7 +43,7 @@
         "stage": "1"
       },
       "apply": {
-        "model": "tfg:flora/plant/pampas_grass_shortest_1b"
+        "model": "tfg:flora/plant/pampas_grass/shortest/1b"
       }
     }, {
       "when": {
@@ -52,21 +52,21 @@
         "stage": "1"
       },
       "apply": {
-        "model": "tfg:flora/plant/pampas_grass_shorter_1b"
+        "model": "tfg:flora/plant/pampas_grass/shorter/1b"
       }
     }, {
       "when": {
         "part": "lower"
       },
       "apply": {
-        "model": "tfg:flora/plant/pampas_grass_lower"
+        "model": "tfg:flora/plant/pampas_grass/lower"
       }
     }, {
       "when": {
         "part": "middle"
       },
       "apply": {
-        "model": "tfg:flora/plant/pampas_grass_middle"
+        "model": "tfg:flora/plant/pampas_grass/middle"
       }
     }, {
       "when": {
@@ -75,7 +75,7 @@
         "stage": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/pampas_grass_short"
+        "model": "tfg:flora/plant/pampas_grass/short"
       }
     }, {
       "when": {
@@ -84,7 +84,7 @@
         "stage": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/pampas_grass_top"
+        "model": "tfg:flora/plant/pampas_grass/top"
       }
     }, {
       "when": {
@@ -93,7 +93,7 @@
         "stage": "1"
       },
       "apply": {
-        "model": "tfg:flora/plant/pampas_grass_shortb"
+        "model": "tfg:flora/plant/pampas_grass/shortb"
       }
     }, {
       "when": {
@@ -102,7 +102,7 @@
         "stage": "1"
       },
       "apply": {
-        "model": "tfg:flora/plant/pampas_grass_topb"
+        "model": "tfg:flora/plant/pampas_grass/topb"
       }
     }
   ]

@@ -3,9 +3,9 @@
   "ambientocclusion": false,
   "textures": {
     "cross": "tfg:blocks/flora/plant/sunflower/upper/2",
-    "back": "tfg:blocks/flora/plant/sunflower/back_2",
-    "particle": "tfg:blocks/flora/plant/sunflower/front_2",
-    "front": "tfg:blocks/flora/plant/sunflower/front_2"
+    "back": "tfg:blocks/flora/plant/sunflower/back/2",
+    "particle": "tfg:blocks/flora/plant/sunflower/front/2",
+    "front": "tfg:blocks/flora/plant/sunflower/front/2"
   },
   "elements": [
     {

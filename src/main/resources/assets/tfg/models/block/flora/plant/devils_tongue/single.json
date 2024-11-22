@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/devils_tongue/single/0",
-    "particle": "tfg:blocks/flora/plant/devils_tongue/single/0"
+    "cross": "tfg:blocks/flora/plant/devils_tongue/single",
+    "particle": "tfg:blocks/flora/plant/devils_tongue/single"
   },
   "elements": [
     {

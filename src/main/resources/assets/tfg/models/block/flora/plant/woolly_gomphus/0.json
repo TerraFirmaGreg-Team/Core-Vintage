@@ -1,8 +1,8 @@
 {
   "parent": "tfg:block/cross",
   "textures": {
-    "cross": "tfg:blocks/flora/plant/woolly_gomphus/woolly_gomphus",
-    "particle": "tfg:blocks/flora/plant/woolly_gomphus/woolly_gomphus"
+    "cross": "tfg:blocks/flora/plant/woolly_gomphus/0",
+    "particle": "tfg:blocks/flora/plant/woolly_gomphus/0"
   }
 }
 

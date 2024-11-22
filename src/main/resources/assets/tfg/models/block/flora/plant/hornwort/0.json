@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/hornwort/hornwort",
-    "particle": "tfg:blocks/flora/plant/hornwort/hornwort"
+    "cross": "tfg:blocks/flora/plant/hornwort/0",
+    "particle": "tfg:blocks/flora/plant/hornwort/0"
   },
   "elements": [
     {

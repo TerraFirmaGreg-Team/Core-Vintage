@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "side": "tfg:blocks/flora/plant/undergrowth_low/undergrowth_low",
+    "side": "tfg:blocks/flora/plant/undergrowth_low/side",
     "top": "tfg:blocks/flora/plant/undergrowth_low/top",
-    "particle": "tfg:blocks/flora/plant/undergrowth_shrub/undergrowth_low_top"
+    "particle": "tfg:blocks/flora/plant/undergrowth_low/top"
   },
   "elements": [
     {

@@ -1,5 +1,5 @@
 {
-  "parent": "block/cross",
+  "parent": "tfg:block/cross",
   "textures": {
     "cross": "tfg:blocks/flora/plant/labrador_tea/4",
     "particle": "tfg:blocks/flora/plant/labrador_tea/4"

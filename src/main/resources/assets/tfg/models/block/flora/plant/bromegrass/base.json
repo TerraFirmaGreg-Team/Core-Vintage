@@ -1,7 +1,7 @@
 {
   "parent": "tfg:block/tinted_cross",
   "textures": {
-    "cross": "tfg:blocks/flora/plant/bromegrass/bromegrass"
+    "cross": "tfg:blocks/flora/plant/bromegrass/normal"
   }
 }
 

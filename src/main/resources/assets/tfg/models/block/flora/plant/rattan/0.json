@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/rattan/rattan",
-    "layer0": "tfg:blocks/flora/plant/rattan/rattan"
+    "particle": "tfg:blocks/flora/plant/rattan/0",
+    "layer0": "tfg:blocks/flora/plant/rattan/0"
   },
   "elements": [
     {

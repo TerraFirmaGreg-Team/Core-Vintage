@@ -1,8 +1,7 @@
 {
   "parent": "tfg:block/cross",
   "textures": {
-    "cross": "tfg:blocks/flora/plant/tulip/4",
-    "particle": "tfg:blocks/flora/plant/tulip/4"
+    "cross": "tfg:blocks/flora/plant/tulip_pink/4"
   }
 }
 

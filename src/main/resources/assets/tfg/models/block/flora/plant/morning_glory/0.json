@@ -1,10 +1,10 @@
 {
   "parent": "tfg:block/flora/plant/morning_glory/base",
   "textures": {
-    "particle": "tfg:blocks/flora/plant/morning_glory/layer0",
+    "particle": "tfg:blocks/flora/plant/morning_glory/0",
     "layer1": "tfg:blocks/empty",
-    "middle": "tfg:blocks/flora/plant/morning_glory/middle_0",
-    "top": "tfg:blocks/flora/plant/morning_glory/top_0"
+    "middle": "tfg:blocks/flora/plant/morning_glory/middle/0",
+    "top": "tfg:blocks/flora/plant/morning_glory/top/0"
   }
 }
 

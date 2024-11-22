@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/voodoo_lily/lower/0",
-    "cross": "tfg:blocks/flora/plant/voodoo_lily/lower/0"
+    "particle": "tfg:blocks/flora/plant/voodoo_lily/lower",
+    "cross": "tfg:blocks/flora/plant/voodoo_lily/lower"
   },
   "elements": [
     {

@@ -1,8 +1,7 @@
 {
   "parent": "tfg:block/cross",
   "textures": {
-    "cross": "tfg:blocks/flora/plant/wood_blewit/wood_blewit",
-    "particle": "tfg:blocks/flora/plant/wood_blewit/wood_blewit"
+    "cross": "tfg:blocks/flora/plant/wood_blewit/0"
   }
 }
 

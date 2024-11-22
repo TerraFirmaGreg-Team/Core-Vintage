@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "leaves": "tfg:blocks/flora/plant/big_leaf_palm/upper/0",
-    "particle": "tfg:blocks/flora/plant/big_leaf_palm/upper/0"
+    "leaves": "tfg:blocks/flora/plant/big_leaf_palm/upper",
+    "particle": "tfg:blocks/flora/plant/big_leaf_palm/upper"
   },
   "elements": [
     {

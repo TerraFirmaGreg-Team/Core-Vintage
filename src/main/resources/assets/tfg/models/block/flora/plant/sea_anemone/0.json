@@ -1,7 +1,7 @@
 {
-  "parent": "block/cross",
+  "parent": "tfg:block/cross",
   "textures": {
-    "cross": "tfg:blocks/flora/plant/sea_anemone/sea_anemone"
+    "cross": "tfg:blocks/flora/plant/sea_anemone/0"
   }
 }
 

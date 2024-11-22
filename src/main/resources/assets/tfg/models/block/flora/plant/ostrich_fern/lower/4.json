@@ -3,7 +3,7 @@
   "textures": {
     "particle": "tfg:blocks/flora/plant/ostrich_fern/3",
     "singlenotint": "tfg:blocks/flora/plant/ostrich_fern/3",
-    "lowernotint": "tfg:blocks/flora/plant/ostrich_fern/bottom_3",
+    "lowernotint": "tfg:blocks/flora/plant/ostrich_fern/bottom/3",
     "fernlownotint": "tfg:blocks/flora/plant/ostrich_fern/3",
     "fernhighnotint": "tfg:blocks/flora/plant/ostrich_fern/3"
   },

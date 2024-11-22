@@ -21,10 +21,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/prairie_junegrass/shorter_1",
+          "model": "tfg:flora/plant/prairie_junegrass/shorter/1",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/prairie_junegrass/shorter_2",
+          "model": "tfg:flora/plant/prairie_junegrass/shorter/2",
           "weight": 2
         }
       ]
@@ -35,13 +35,13 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/prairie_junegrass/short_0",
+          "model": "tfg:flora/plant/prairie_junegrass/short/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/prairie_junegrass/short_1",
+          "model": "tfg:flora/plant/prairie_junegrass/short/1",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/prairie_junegrass/short_2",
+          "model": "tfg:flora/plant/prairie_junegrass/short/2",
           "weight": 2
         }, {
           "model": "tfg:flora/plant/prairie_junegrass/big/short",

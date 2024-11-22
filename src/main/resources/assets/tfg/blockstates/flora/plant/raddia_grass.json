@@ -26,7 +26,7 @@
         "age": "3"
       },
       "apply": {
-        "model": "tfg:flora/plant/raddia_grass/base"
+        "model": "tfg:flora/plant/raddia_grass/normal"
       }
     }
   ]

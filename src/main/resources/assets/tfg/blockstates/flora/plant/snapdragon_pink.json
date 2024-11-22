@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/snapdragon/0"
+          "model": "tfg:flora/plant/snapdragon_pink/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/snapdragon/pink"
+          "model": "tfg:flora/plant/snapdragon_pink/1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/snapdragon/2"
+          "model": "tfg:flora/plant/snapdragon_pink/2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/snapdragon/3"
+          "model": "tfg:flora/plant/snapdragon_pink/3"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/snapdragon/4"
+          "model": "tfg:flora/plant/snapdragon_pink/4"
         }
       ]
     }, {
@@ -51,7 +51,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/snapdragon/5"
+          "model": "tfg:flora/plant/snapdragon_pink/5"
         }
       ]
     }, {
@@ -60,7 +60,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/snapdragon/6"
+          "model": "tfg:flora/plant/snapdragon_pink/6"
         }
       ]
     }

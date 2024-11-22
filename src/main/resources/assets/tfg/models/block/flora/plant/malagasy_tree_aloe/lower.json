@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "stem": "tfg:blocks/flora/plant/malagasy_tree_aloe/lower/0b",
-    "particle": "tfg:blocks/flora/plant/malagasy_tree_aloe/lower/0"
+    "stem": "tfg:blocks/flora/plant/malagasy_tree_aloe/lower_0b",
+    "particle": "tfg:blocks/flora/plant/malagasy_tree_aloe/lower_0"
   },
   "elements": [
     {

@@ -1,8 +1,7 @@
 {
   "parent": "tfg:block/cross",
   "textures": {
-    "cross": "tfg:blocks/flora/plant/snapdragon/5",
-    "particle": "tfg:blocks/flora/plant/snapdragon/5"
+    "cross": "tfg:blocks/flora/plant/snapdragon_red/5"
   }
 }
 

@@ -1,8 +1,7 @@
 {
-  "parent": "block/cross",
+  "parent": "tfg:block/cross",
   "textures": {
-    "cross": "tfg:blocks/flora/plant/hibiscus/single/2",
-    "particle": "tfg:blocks/flora/plant/hibiscus/single/2"
+    "cross": "tfg:blocks/flora/plant/hibiscus/single/2"
   }
 }
 

@@ -2,7 +2,7 @@
   "ambientocclusion": false,
   "textures": {
     "particle": "tfg:blocks/flora/plant/ostrich_fern/0",
-    "lowernotint": "tfg:blocks/flora/plant/ostrich_fern/bottom_0"
+    "lowernotint": "tfg:blocks/flora/plant/ostrich_fern/bottom/0"
   },
   "elements": [
     {

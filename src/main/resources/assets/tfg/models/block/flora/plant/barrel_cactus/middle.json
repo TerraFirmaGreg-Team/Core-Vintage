@@ -3,7 +3,7 @@
     "particle": "tfg:blocks/flora/plant/barrel_cactus/side",
     "side": "tfg:blocks/flora/plant/barrel_cactus/side",
     "top": "tfg:blocks/flora/plant/barrel_cactus/top",
-    "spike": "tfg:blocks/flora/plant/barrel_cactus/spikes_middle"
+    "spike": "tfg:blocks/flora/plant/barrel_cactus/spikes/middle"
   },
   "elements": [
     {

@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfg:flora/plant/porcini/"
+          "model": "tfg:flora/plant/porcini/0"
         }
       ]
     }

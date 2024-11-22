@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "leaves": "tfg:blocks/flora/plant/undergrowth_shrub/undergrowth_leaves_1",
-    "particle": "tfg:blocks/flora/plant/undergrowth_shrub/undergrowth_stem_upper_0",
-    "stem": "tfg:blocks/flora/plant/undergrowth_shrub/undergrowth_stem_upper_0"
+    "leaves": "tfg:blocks/flora/plant/undergrowth_shrub/leaves/1",
+    "particle": "tfg:blocks/flora/plant/undergrowth_shrub/stem/upper",
+    "stem": "tfg:blocks/flora/plant/undergrowth_shrub/stem/upper"
   },
   "elements": [
     {

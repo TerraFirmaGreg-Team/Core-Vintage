@@ -4,7 +4,7 @@
   "textures": {
     "side": "tfg:blocks/flora/plant/undergrowth_low/shortest",
     "top": "tfg:blocks/flora/plant/undergrowth_low/top",
-    "particle": "tfg:blocks/flora/plant/undergrowth_shrub/undergrowth_low_top"
+    "particle": "tfg:blocks/flora/plant/undergrowth_low/top"
   },
   "elements": [
     {

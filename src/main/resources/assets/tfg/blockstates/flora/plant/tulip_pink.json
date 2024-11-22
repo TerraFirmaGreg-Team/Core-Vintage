@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/tulip/0"
+          "model": "tfg:flora/plant/tulip_pink/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/tulip/pink"
+          "model": "tfg:flora/plant/tulip_pink/1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/tulip/2"
+          "model": "tfg:flora/plant/tulip_pink/2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/tulip/3"
+          "model": "tfg:flora/plant/tulip_pink/3"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/tulip/4"
+          "model": "tfg:flora/plant/tulip_pink/4"
         }
       ]
     }, {
@@ -51,7 +51,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/tulip/5"
+          "model": "tfg:flora/plant/tulip_pink/5"
         }
       ]
     }

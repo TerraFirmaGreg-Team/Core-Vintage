@@ -2,7 +2,6 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "tfg:blocks/flora/plant/apache_dwarf/1",
 		"cross": "tfg:blocks/flora/plant/apache_dwarf/1"
 	},
 	"elements": [

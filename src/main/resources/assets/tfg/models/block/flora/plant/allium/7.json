@@ -1,8 +1,7 @@
 {
   "parent": "tfg:block/cross",
   "textures": {
-    "cross": "tfg:blocks/flora/plant/allium/7",
-    "particle": "tfg:blocks/flora/plant/allium/7"
+    "cross": "tfg:blocks/flora/plant/allium/7"
   }
 }
 

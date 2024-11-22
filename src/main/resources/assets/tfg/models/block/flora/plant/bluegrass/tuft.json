@@ -1,9 +1,9 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "tintedcross": "tfg:blocks/flora/plant/bluegrass/bluegrass",
-    "cross": "tfg:blocks/flora/plant/bluegrass/tuft",
-    "particle": "tfg:blocks/flora/plant/bluegrass/bluegrass"
+    "tintedcross": "tfg:blocks/flora/plant/bluegrass/normal",
+    "cross": "tfg:blocks/flora/plant/bluegrass/tuft/normal",
+    "particle": "tfg:blocks/flora/plant/bluegrass/normal"
   },
   "elements": [
     {

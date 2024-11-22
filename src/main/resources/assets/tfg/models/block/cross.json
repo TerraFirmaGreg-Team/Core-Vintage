@@ -1,7 +1,7 @@
 {
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "#all"
+		"particle": "#cross"
 	},
 	"elements": [
 		{
@@ -10,8 +10,8 @@
 			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#all"},
-				"south": {"uv": [16, 0, 0, 16], "texture": "#all"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#cross"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#cross"}
 			}
 		},
 		{
@@ -20,8 +20,8 @@
 			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
 			"faces": {
-				"east": {"uv": [16, 0, 0, 16], "texture": "#all"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "#all"}
+				"east": {"uv": [16, 0, 0, 16], "texture": "#cross"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#cross"}
 			}
 		}
 	],

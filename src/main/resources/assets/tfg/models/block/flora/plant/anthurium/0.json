@@ -1,7 +1,7 @@
 {
   "parent": "tfg:block/cross",
   "textures": {
-    "all": "tfg:blocks/flora/plant/anthurium/0"
+    "cross": "tfg:blocks/flora/plant/anthurium/0"
   }
 }
 

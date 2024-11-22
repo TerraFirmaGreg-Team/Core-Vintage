@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "leaves": "tfg:blocks/flora/plant/madagascar_ocotillo/lower/0",
-    "particle": "tfg:blocks/flora/plant/madagascar_ocotillo/lower/0"
+    "leaves": "tfg:blocks/flora/plant/madagascar_ocotillo/lower",
+    "particle": "tfg:blocks/flora/plant/madagascar_ocotillo/lower"
   },
   "elements": [
     {

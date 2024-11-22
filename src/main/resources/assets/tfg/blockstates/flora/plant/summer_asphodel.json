@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/summer_asphodel_single_0"
+          "model": "tfg:flora/plant/summer_asphodel/single/0"
         }
       ]
     }, {
@@ -17,7 +17,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/summer_asphodel_single_1"
+          "model": "tfg:flora/plant/summer_asphodel/single/1"
         }
       ]
     }, {
@@ -27,7 +27,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/summer_asphodel_lower_0"
+          "model": "tfg:flora/plant/summer_asphodel/lower/0"
         }
       ]
     }, {
@@ -37,7 +37,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/summer_asphodel_lower_1"
+          "model": "tfg:flora/plant/summer_asphodel/lower/1"
         }
       ]
     }, {
@@ -47,7 +47,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/summer_asphodel_upper_0"
+          "model": "tfg:flora/plant/summer_asphodel/upper/0"
         }
       ]
     }, {
@@ -57,7 +57,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/summer_asphodel_upper_1"
+          "model": "tfg:flora/plant/summer_asphodel/upper/1"
         }
       ]
     }

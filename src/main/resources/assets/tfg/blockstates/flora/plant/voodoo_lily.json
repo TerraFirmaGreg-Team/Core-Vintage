@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/voodoo_lily_single_0"
+          "model": "tfg:flora/plant/voodoo_lily/single"
         }
       ]
     }, {
@@ -17,7 +17,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/voodoo_lily_lower_0"
+          "model": "tfg:flora/plant/voodoo_lily/lower"
         }
       ]
     }, {
@@ -27,7 +27,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/voodoo_lily_upper_0"
+          "model": "tfg:flora/plant/voodoo_lily/upper"
         }
       ]
     }

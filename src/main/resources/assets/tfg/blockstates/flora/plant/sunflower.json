@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_single"
+          "model": "tfg:flora/plant/sunflower/single"
         }
       ]
     }, {
@@ -16,7 +16,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_upper_0"
+          "model": "tfg:flora/plant/sunflower/upper/0"
         }
       ]
     }, {
@@ -26,7 +26,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_upper_1"
+          "model": "tfg:flora/plant/sunflower/upper/1"
         }
       ]
     }, {
@@ -36,7 +36,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_upper_2"
+          "model": "tfg:flora/plant/sunflower/upper/2"
         }
       ]
     }, {
@@ -46,7 +46,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_upper_3"
+          "model": "tfg:flora/plant/sunflower/upper/3"
         }
       ]
     }, {
@@ -56,7 +56,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_upper_4"
+          "model": "tfg:flora/plant/sunflower/upper/4"
         }
       ]
     }, {
@@ -66,7 +66,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_upper_5"
+          "model": "tfg:flora/plant/sunflower/upper/5"
         }
       ]
     }, {
@@ -76,7 +76,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_upper_6"
+          "model": "tfg:flora/plant/sunflower/upper/6"
         }
       ]
     }, {
@@ -86,7 +86,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_upper_7"
+          "model": "tfg:flora/plant/sunflower/upper/7"
         }
       ]
     }, {
@@ -96,7 +96,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_upper_8"
+          "model": "tfg:flora/plant/sunflower/upper/8"
         }
       ]
     }, {
@@ -106,7 +106,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_upper_9"
+          "model": "tfg:flora/plant/sunflower/upper/9"
         }
       ]
     }, {
@@ -116,7 +116,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_lower_0"
+          "model": "tfg:flora/plant/sunflower/lower/0"
         }
       ]
     }, {
@@ -126,7 +126,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_lower_1"
+          "model": "tfg:flora/plant/sunflower/lower/1"
         }
       ]
     }, {
@@ -136,7 +136,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_lower_2"
+          "model": "tfg:flora/plant/sunflower/lower/2"
         }
       ]
     }, {
@@ -146,7 +146,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_lower_3"
+          "model": "tfg:flora/plant/sunflower/lower/3"
         }
       ]
     }, {
@@ -156,7 +156,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_lower_4"
+          "model": "tfg:flora/plant/sunflower/lower/4"
         }
       ]
     }, {
@@ -166,7 +166,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_lower_5"
+          "model": "tfg:flora/plant/sunflower/lower/5"
         }
       ]
     }, {
@@ -176,7 +176,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_lower_6"
+          "model": "tfg:flora/plant/sunflower/lower/6"
         }
       ]
     }, {
@@ -186,7 +186,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_lower_7"
+          "model": "tfg:flora/plant/sunflower/lower/7"
         }
       ]
     }, {
@@ -196,7 +196,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_lower_8"
+          "model": "tfg:flora/plant/sunflower/lower/8"
         }
       ]
     }, {
@@ -206,7 +206,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sunflower_lower_9"
+          "model": "tfg:flora/plant/sunflower/lower/9"
         }
       ]
     }

@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/trillium_0"
+          "model": "tfg:flora/plant/trillium/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/trillium_1"
+          "model": "tfg:flora/plant/trillium/1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/trillium_2"
+          "model": "tfg:flora/plant/trillium/2"
         }
       ]
     }, {
@@ -33,7 +33,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/trillium_3"
+          "model": "tfg:flora/plant/trillium/3"
         }
       ]
     }, {
@@ -42,7 +42,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/trillium_4"
+          "model": "tfg:flora/plant/trillium/4"
         }
       ]
     }

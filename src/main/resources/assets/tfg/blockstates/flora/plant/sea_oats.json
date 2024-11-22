@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sea_oats_single_0"
+          "model": "tfg:flora/plant/sea_oats/single/0"
         }
       ]
     }, {
@@ -17,7 +17,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sea_oats_single_1"
+          "model": "tfg:flora/plant/sea_oats/single/1"
         }
       ]
     }, {
@@ -27,10 +27,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sea_oats_single_1",
+          "model": "tfg:flora/plant/sea_oats/single/1",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/sea_oats_single_2",
+          "model": "tfg:flora/plant/sea_oats/single/2",
           "weight": 1
         }
       ]
@@ -41,10 +41,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sea_oats_lower_2",
+          "model": "tfg:flora/plant/sea_oats/lower/2",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/sea_oats_lower_3",
+          "model": "tfg:flora/plant/sea_oats/lower/3",
           "weight": 1
         }
       ]
@@ -55,10 +55,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sea_oats_upper_2",
+          "model": "tfg:flora/plant/sea_oats/upper/2",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/sea_oats_upper_3",
+          "model": "tfg:flora/plant/sea_oats/upper/3",
           "weight": 1
         }
       ]

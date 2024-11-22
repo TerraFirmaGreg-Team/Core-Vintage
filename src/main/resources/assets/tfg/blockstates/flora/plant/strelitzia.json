@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/strelitzia_0"
+          "model": "tfg:flora/plant/strelitzia/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/strelitzia_1"
+          "model": "tfg:flora/plant/strelitzia/1"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/strelitzia_2"
+          "model": "tfg:flora/plant/strelitzia/2"
         }
       ]
     }

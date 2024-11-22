@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sugar_cane_lower"
+          "model": "tfg:flora/plant/sugar_cane/lower"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sugar_cane_middle"
+          "model": "tfg:flora/plant/sugar_cane/middle"
         }
       ]
     }, {
@@ -24,7 +24,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sugar_cane_upper"
+          "model": "tfg:flora/plant/sugar_cane/upper"
         }
       ]
     }

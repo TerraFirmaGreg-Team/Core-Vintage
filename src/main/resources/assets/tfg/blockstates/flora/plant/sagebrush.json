@@ -6,28 +6,28 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sagebrush_0",
+          "model": "tfg:flora/plant/sagebrush/0",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/sagebrush_1",
+          "model": "tfg:flora/plant/sagebrush/1",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/sagebrush_2",
+          "model": "tfg:flora/plant/sagebrush/2",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/sagebrush_3",
+          "model": "tfg:flora/plant/sagebrush/3",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/sagebrush_4",
+          "model": "tfg:flora/plant/sagebrush/4",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/sagebrush_5",
+          "model": "tfg:flora/plant/sagebrush/5",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/sagebrush_6",
+          "model": "tfg:flora/plant/sagebrush/6",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/sagebrush_7",
+          "model": "tfg:flora/plant/sagebrush/7",
           "weight": 1
         }
       ]
@@ -37,28 +37,28 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sagebrush_0b",
+          "model": "tfg:flora/plant/sagebrush/0b",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/sagebrush_1b",
+          "model": "tfg:flora/plant/sagebrush/1b",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/sagebrush_2b",
+          "model": "tfg:flora/plant/sagebrush/2b",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/sagebrush_3b",
+          "model": "tfg:flora/plant/sagebrush/3b",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/sagebrush_4b",
+          "model": "tfg:flora/plant/sagebrush/4b",
           "weight": 5
         }, {
-          "model": "tfg:flora/plant/sagebrush_5b",
+          "model": "tfg:flora/plant/sagebrush/5b",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/sagebrush_6b",
+          "model": "tfg:flora/plant/sagebrush/6b",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/sagebrush_7b",
+          "model": "tfg:flora/plant/sagebrush/7b",
           "weight": 1
         }
       ]

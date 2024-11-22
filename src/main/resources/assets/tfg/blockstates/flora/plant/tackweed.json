@@ -6,16 +6,16 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/tackweed_0",
+          "model": "tfg:flora/plant/tackweed/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/tackweed_1",
+          "model": "tfg:flora/plant/tackweed/1",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/tackweed_2",
+          "model": "tfg:flora/plant/tackweed/2",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/tackweed_3",
+          "model": "tfg:flora/plant/tackweed/3",
           "weight": 1
         }
       ]
@@ -25,22 +25,22 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/tackweed_0",
+          "model": "tfg:flora/plant/tackweed/0",
           "weight": 1,
           "x": 270,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/tackweed_1",
+          "model": "tfg:flora/plant/tackweed/1",
           "weight": 1,
           "x": 270,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/tackweed_2",
+          "model": "tfg:flora/plant/tackweed/2",
           "weight": 1,
           "x": 270,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/tackweed_3",
+          "model": "tfg:flora/plant/tackweed/3",
           "weight": 1,
           "x": 270,
           "y": 90
@@ -52,19 +52,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/tackweed_0",
+          "model": "tfg:flora/plant/tackweed/0",
           "weight": 1,
           "x": 270
         }, {
-          "model": "tfg:flora/plant/tackweed_1",
+          "model": "tfg:flora/plant/tackweed/1",
           "weight": 1,
           "x": 270
         }, {
-          "model": "tfg:flora/plant/tackweed_2",
+          "model": "tfg:flora/plant/tackweed/2",
           "weight": 1,
           "x": 270
         }, {
-          "model": "tfg:flora/plant/tackweed_3",
+          "model": "tfg:flora/plant/tackweed/3",
           "weight": 1,
           "x": 270
         }
@@ -75,22 +75,22 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/tackweed_0",
+          "model": "tfg:flora/plant/tackweed/0",
           "weight": 1,
           "x": 270,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/tackweed_1",
+          "model": "tfg:flora/plant/tackweed/1",
           "weight": 1,
           "x": 270,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/tackweed_2",
+          "model": "tfg:flora/plant/tackweed/2",
           "weight": 1,
           "x": 270,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/tackweed_3",
+          "model": "tfg:flora/plant/tackweed/3",
           "weight": 1,
           "x": 270,
           "y": 180
@@ -102,19 +102,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/tackweed_0",
+          "model": "tfg:flora/plant/tackweed/0",
           "weight": 1,
           "x": 180
         }, {
-          "model": "tfg:flora/plant/tackweed_1",
+          "model": "tfg:flora/plant/tackweed/1",
           "weight": 1,
           "x": 180
         }, {
-          "model": "tfg:flora/plant/tackweed_2",
+          "model": "tfg:flora/plant/tackweed/2",
           "weight": 1,
           "x": 180
         }, {
-          "model": "tfg:flora/plant/tackweed_3",
+          "model": "tfg:flora/plant/tackweed/3",
           "weight": 1,
           "x": 180
         }
@@ -125,22 +125,22 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/tackweed_0",
+          "model": "tfg:flora/plant/tackweed/0",
           "weight": 1,
           "x": 270,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/tackweed_1",
+          "model": "tfg:flora/plant/tackweed/1",
           "weight": 1,
           "x": 270,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/tackweed_2",
+          "model": "tfg:flora/plant/tackweed/2",
           "weight": 1,
           "x": 270,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/tackweed_3",
+          "model": "tfg:flora/plant/tackweed/3",
           "weight": 1,
           "x": 270,
           "y": 270

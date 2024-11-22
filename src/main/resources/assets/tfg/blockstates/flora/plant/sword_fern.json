@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfg:flora/plant/sword_fern"
+          "model": "tfg:flora/plant/sword_fern/0"
         }
       ]
     }

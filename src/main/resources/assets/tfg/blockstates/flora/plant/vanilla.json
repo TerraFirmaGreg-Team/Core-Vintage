@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/vanilla_0"
+          "model": "tfg:flora/plant/vanilla/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/vanilla_1"
+          "model": "tfg:flora/plant/vanilla/1"
         }
       ]
     }

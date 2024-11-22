@@ -7,19 +7,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_single_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/0",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/0",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/0",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/0",
           "weight": 1,
           "y": 270
         }
@@ -31,19 +31,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_lower_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/0",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/0",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/0",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/0",
           "weight": 1,
           "y": 270
         }
@@ -55,19 +55,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_middle_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/0",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/0",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/0",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/0",
           "weight": 1,
           "y": 270
         }
@@ -79,19 +79,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_upper_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/0",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/0",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/0",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_0",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/0",
           "weight": 1,
           "y": 270
         }
@@ -103,19 +103,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_single_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/1",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/1",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/1",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/1",
           "weight": 1,
           "y": 270
         }
@@ -127,19 +127,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_lower_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/1",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/1",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/1",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/1",
           "weight": 1,
           "y": 270
         }
@@ -151,19 +151,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_middle_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/1",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/1",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/1",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/1",
           "weight": 1,
           "y": 270
         }
@@ -175,19 +175,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_upper_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/1",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/1",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/1",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_1",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/1",
           "weight": 1,
           "y": 270
         }
@@ -199,19 +199,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_single_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/2",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/2",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/2",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/2",
           "weight": 1,
           "y": 270
         }
@@ -223,19 +223,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_lower_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/2",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/2",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/2",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/2",
           "weight": 1,
           "y": 270
         }
@@ -247,19 +247,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_middle_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/2",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/2",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/2",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/2",
           "weight": 1,
           "y": 270
         }
@@ -271,19 +271,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_upper_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/2",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/2",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/2",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/2",
           "weight": 1,
           "y": 270
         }
@@ -295,35 +295,35 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_single_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/2",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/2",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/2",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/2",
           "weight": 1,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/3",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/3",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/3",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/3",
           "weight": 1,
           "y": 270
         }
@@ -335,35 +335,35 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_lower_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/2",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/2",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/2",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/2",
           "weight": 1,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/3",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/3",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/3",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/3",
           "weight": 1,
           "y": 270
         }
@@ -375,35 +375,35 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_middle_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/2",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/2",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/2",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/2",
           "weight": 1,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/3",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/3",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/3",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/3",
           "weight": 1,
           "y": 270
         }
@@ -415,35 +415,35 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_upper_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/2",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/2",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/2",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_2",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/2",
           "weight": 1,
           "y": 270
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/3",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/3",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/3",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/3",
           "weight": 1,
           "y": 270
         }
@@ -455,19 +455,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_single_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/3",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/3",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/3",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_single_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/single/3",
           "weight": 1,
           "y": 270
         }
@@ -479,19 +479,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_lower_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/3",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/3",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/3",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_lower_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/lower/3",
           "weight": 1,
           "y": 270
         }
@@ -503,19 +503,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_middle_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/3",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/3",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/3",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_middle_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/middle/3",
           "weight": 1,
           "y": 270
         }
@@ -527,19 +527,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/undergrowth_upper_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/3",
           "weight": 1,
           "y": 0
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/3",
           "weight": 1,
           "y": 90
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/3",
           "weight": 1,
           "y": 180
         }, {
-          "model": "tfg:flora/plant/undergrowth_upper_3",
+          "model": "tfg:flora/plant/undergrowth_shrub/upper/3",
           "weight": 1,
           "y": 270
         }

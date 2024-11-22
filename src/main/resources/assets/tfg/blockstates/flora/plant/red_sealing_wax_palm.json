@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/red_sealing_wax_palm_single"
+          "model": "tfg:flora/plant/red_sealing_wax_palm/single"
         }
       ]
     }, {
@@ -16,7 +16,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/red_sealing_wax_palm_lower_0"
+          "model": "tfg:flora/plant/red_sealing_wax_palm/lower"
         }
       ]
     }, {
@@ -26,7 +26,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/red_sealing_wax_palm_upper_0"
+          "model": "tfg:flora/plant/red_sealing_wax_palm/upper"
         }
       ]
     }

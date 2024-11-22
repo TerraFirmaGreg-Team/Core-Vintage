@@ -5,28 +5,28 @@
         "age": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/timothy_grass_shortest"
+        "model": "tfg:flora/plant/timothy_grass/shortest"
       }
     }, {
       "when": {
         "age": "1"
       },
       "apply": {
-        "model": "tfg:flora/plant/timothy_grass_shorter"
+        "model": "tfg:flora/plant/timothy_grass/shorter"
       }
     }, {
       "when": {
         "age": "2"
       },
       "apply": {
-        "model": "tfg:flora/plant/timothy_grass_short"
+        "model": "tfg:flora/plant/timothy_grass/short"
       }
     }, {
       "when": {
         "age": "3"
       },
       "apply": {
-        "model": "tfg:flora/plant/timothy_grass"
+        "model": "tfg:flora/plant/timothy_grass/base"
       }
     }
   ]

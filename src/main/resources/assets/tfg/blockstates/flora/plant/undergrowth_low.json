@@ -5,28 +5,28 @@
         "age": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/undergrowth_low_shortest"
+        "model": "tfg:flora/plant/undergrowth_low/shortest"
       }
     }, {
       "when": {
         "age": "1"
       },
       "apply": {
-        "model": "tfg:flora/plant/undergrowth_low_shorter"
+        "model": "tfg:flora/plant/undergrowth_low/shorter"
       }
     }, {
       "when": {
         "age": "2"
       },
       "apply": {
-        "model": "tfg:flora/plant/undergrowth_low_short"
+        "model": "tfg:flora/plant/undergrowth_low/short"
       }
     }, {
       "when": {
         "age": "3"
       },
       "apply": {
-        "model": "tfg:flora/plant/undergrowth_low"
+        "model": "tfg:flora/plant/undergrowth_low/base"
       }
     }
   ]

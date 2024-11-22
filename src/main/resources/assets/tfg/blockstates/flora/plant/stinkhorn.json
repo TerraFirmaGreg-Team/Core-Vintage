@@ -3,7 +3,7 @@
     {
       "apply": [
         {
-          "model": "tfg:flora/plant/stinkhorn"
+          "model": "tfg:flora/plant/stinkhorn/0"
         }
       ]
     }

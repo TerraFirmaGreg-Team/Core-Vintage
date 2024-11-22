@@ -6,7 +6,7 @@
         "age": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/ryegrass_shortest_0"
+        "model": "tfg:flora/plant/ryegrass/shortest/0"
       }
     }, {
       "when": {
@@ -14,7 +14,7 @@
         "age": "1"
       },
       "apply": {
-        "model": "tfg:flora/plant/ryegrass_shorter_0"
+        "model": "tfg:flora/plant/ryegrass/shorter/0"
       }
     }, {
       "when": {
@@ -22,7 +22,7 @@
         "age": "2"
       },
       "apply": {
-        "model": "tfg:flora/plant/ryegrass_short_0"
+        "model": "tfg:flora/plant/ryegrass/short/0"
       }
     }, {
       "when": {
@@ -30,7 +30,7 @@
         "age": "3"
       },
       "apply": {
-        "model": "tfg:flora/plant/ryegrass_0"
+        "model": "tfg:flora/plant/ryegrass/0"
       }
     }, {
       "when": {
@@ -38,7 +38,7 @@
         "age": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/ryegrass_shortest_0b"
+        "model": "tfg:flora/plant/ryegrass/shortest/0b"
       }
     }, {
       "when": {
@@ -46,7 +46,7 @@
         "age": "1"
       },
       "apply": {
-        "model": "tfg:flora/plant/ryegrass_shorter_0b"
+        "model": "tfg:flora/plant/ryegrass/shorter/0b"
       }
     }, {
       "when": {
@@ -54,7 +54,7 @@
         "age": "2"
       },
       "apply": {
-        "model": "tfg:flora/plant/ryegrass_short_0b"
+        "model": "tfg:flora/plant/ryegrass/short/0b"
       }
     }, {
       "when": {
@@ -62,7 +62,7 @@
         "age": "3"
       },
       "apply": {
-        "model": "tfg:flora/plant/ryegrass_0b"
+        "model": "tfg:flora/plant/ryegrass/0b"
       }
     }
   ]

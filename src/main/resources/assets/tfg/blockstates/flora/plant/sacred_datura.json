@@ -6,7 +6,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sacred_datura_0"
+          "model": "tfg:flora/plant/sacred_datura/0"
         }
       ]
     }, {
@@ -15,7 +15,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sacred_datura_1"
+          "model": "tfg:flora/plant/sacred_datura/1"
         }
       ]
     }, {
@@ -25,7 +25,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sacred_datura_2"
+          "model": "tfg:flora/plant/sacred_datura/2"
         }
       ]
     }, {
@@ -35,7 +35,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sacred_datura_2b"
+          "model": "tfg:flora/plant/sacred_datura/2b"
         }
       ]
     }, {
@@ -44,7 +44,7 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/sacred_datura_3"
+          "model": "tfg:flora/plant/sacred_datura/3"
         }
       ]
     }

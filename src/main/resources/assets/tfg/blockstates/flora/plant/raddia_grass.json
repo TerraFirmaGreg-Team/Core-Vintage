@@ -5,28 +5,28 @@
         "age": "0"
       },
       "apply": {
-        "model": "tfg:flora/plant/raddia_grass_shortest"
+        "model": "tfg:flora/plant/raddia_grass/shortest"
       }
     }, {
       "when": {
         "age": "1"
       },
       "apply": {
-        "model": "tfg:flora/plant/raddia_grass_shorter"
+        "model": "tfg:flora/plant/raddia_grass/shorter"
       }
     }, {
       "when": {
         "age": "2"
       },
       "apply": {
-        "model": "tfg:flora/plant/raddia_grass_short"
+        "model": "tfg:flora/plant/raddia_grass/short"
       }
     }, {
       "when": {
         "age": "3"
       },
       "apply": {
-        "model": "tfg:flora/plant/raddia_grass"
+        "model": "tfg:flora/plant/raddia_grass/base"
       }
     }
   ]

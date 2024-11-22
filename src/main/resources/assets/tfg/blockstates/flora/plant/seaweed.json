@@ -3,15 +3,15 @@
     {
       "apply": [
         {
-          "model": "tfg:flora/plant/seaweed"
+          "model": "tfg:flora/plant/seaweed/0"
         }, {
-          "model": "tfg:flora/plant/seaweed",
+          "model": "tfg:flora/plant/seaweed/0",
           "y": 90
         }, {
-          "model": "tfg:flora/plant/seaweed",
+          "model": "tfg:flora/plant/seaweed/0",
           "y": 180
         }, {
-          "model": "tfg:flora/plant/seaweed",
+          "model": "tfg:flora/plant/seaweed/0",
           "y": 270
         }
       ]

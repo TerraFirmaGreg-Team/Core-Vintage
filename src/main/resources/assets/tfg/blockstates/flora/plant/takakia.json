@@ -5,14 +5,14 @@
         "down": "true"
       },
       "apply": {
-        "model": "tfg:flora/plant/takakia"
+        "model": "tfg:flora/plant/takakia/0"
       }
     }, {
       "when": {
         "east": "true"
       },
       "apply": {
-        "model": "tfg:flora/plant/takakia",
+        "model": "tfg:flora/plant/takakia/0",
         "x": 270,
         "y": 90
       }
@@ -21,7 +21,7 @@
         "north": "true"
       },
       "apply": {
-        "model": "tfg:flora/plant/takakia",
+        "model": "tfg:flora/plant/takakia/0",
         "x": 270
       }
     }, {
@@ -29,7 +29,7 @@
         "south": "true"
       },
       "apply": {
-        "model": "tfg:flora/plant/takakia",
+        "model": "tfg:flora/plant/takakia/0",
         "x": 270,
         "y": 180
       }
@@ -38,7 +38,7 @@
         "up": "true"
       },
       "apply": {
-        "model": "tfg:flora/plant/takakia",
+        "model": "tfg:flora/plant/takakia/0",
         "x": 180
       }
     }, {
@@ -46,7 +46,7 @@
         "west": "true"
       },
       "apply": {
-        "model": "tfg:flora/plant/takakia",
+        "model": "tfg:flora/plant/takakia/0",
         "x": 270,
         "y": 270
       }

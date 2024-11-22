@@ -6,10 +6,10 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/wheatgrass_shortest_3",
+          "model": "tfg:flora/plant/wheatgrass/shortest/3",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/wheatgrass_shortest_4",
+          "model": "tfg:flora/plant/wheatgrass/shortest/4",
           "weight": 2
         }
       ]
@@ -19,16 +19,16 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/wheatgrass_shorter_1",
+          "model": "tfg:flora/plant/wheatgrass/shorter/1",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/wheatgrass_shorter_2",
+          "model": "tfg:flora/plant/wheatgrass/shorter/2",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/wheatgrass_shorter_3",
+          "model": "tfg:flora/plant/wheatgrass/shorter/3",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/wheatgrass_shorter_4",
+          "model": "tfg:flora/plant/wheatgrass/shorter/4",
           "weight": 2
         }
       ]
@@ -38,19 +38,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/wheatgrass_short_0",
+          "model": "tfg:flora/plant/wheatgrass/short/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/wheatgrass_short_1",
+          "model": "tfg:flora/plant/wheatgrass/short/1",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/wheatgrass_short_2",
+          "model": "tfg:flora/plant/wheatgrass/short/2",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/wheatgrass_short_3",
+          "model": "tfg:flora/plant/wheatgrass/short/3",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/wheatgrass_short_4",
+          "model": "tfg:flora/plant/wheatgrass/short/4",
           "weight": 2
         }
       ]
@@ -60,19 +60,19 @@
       },
       "apply": [
         {
-          "model": "tfg:flora/plant/wheatgrass_0",
+          "model": "tfg:flora/plant/wheatgrass/0",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/wheatgrass_1",
+          "model": "tfg:flora/plant/wheatgrass/1",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/wheatgrass_2",
+          "model": "tfg:flora/plant/wheatgrass/2",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/wheatgrass_3",
+          "model": "tfg:flora/plant/wheatgrass/3",
           "weight": 1
         }, {
-          "model": "tfg:flora/plant/wheatgrass_4",
+          "model": "tfg:flora/plant/wheatgrass/4",
           "weight": 2
         }
       ]

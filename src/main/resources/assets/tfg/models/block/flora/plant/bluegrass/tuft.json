@@ -2,7 +2,7 @@
   "ambientocclusion": false,
   "textures": {
     "tintedcross": "tfg:blocks/flora/plant/bluegrass/bluegrass",
-    "cross": "tfg:blocks/flora/plant/bluegrass/bluegrass_tuft",
+    "cross": "tfg:blocks/flora/plant/bluegrass/tuft",
     "particle": "tfg:blocks/flora/plant/bluegrass/bluegrass"
   },
   "elements": [
@@ -133,3 +133,4 @@
     }
   ]
 }
+

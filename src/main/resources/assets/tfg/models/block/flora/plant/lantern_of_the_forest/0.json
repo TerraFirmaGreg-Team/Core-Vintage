@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/lantern_of_the_forest/lantern_of_the_forest_0",
-    "cross": "tfg:blocks/flora/plant/lantern_of_the_forest/lantern_of_the_forest_0"
+    "particle": "tfg:blocks/flora/plant/lantern_of_the_forest/0",
+    "cross": "tfg:blocks/flora/plant/lantern_of_the_forest/0"
   },
   "elements": [
     {
@@ -51,3 +51,4 @@
     }
   ]
 }
+

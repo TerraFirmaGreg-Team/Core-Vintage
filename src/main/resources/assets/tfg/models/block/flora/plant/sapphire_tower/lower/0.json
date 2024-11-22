@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/sapphire_tower/sapphire_tower_0",
-    "particle": "tfg:blocks/flora/plant/sapphire_tower/sapphire_tower_0"
+    "cross": "tfg:blocks/flora/plant/sapphire_tower/0",
+    "particle": "tfg:blocks/flora/plant/sapphire_tower/0"
   },
   "elements": [
     {
@@ -68,3 +68,4 @@
     }
   ]
 }
+

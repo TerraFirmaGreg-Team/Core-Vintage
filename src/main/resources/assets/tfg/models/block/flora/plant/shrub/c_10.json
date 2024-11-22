@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"leaves": "tfc:blocks/plants/shrub/shrub_leaves_2",
-		"particle": "tfc:blocks/plants/shrub/shrub_stem",
-		"cross": "tfc:blocks/plants/shrub/shrub_stem"
+		"leaves": "tfg:blocks/flora/plant/shrub/leaves_2",
+		"particle": "tfg:blocks/flora/plant/shrub/stem",
+		"cross": "tfg:blocks/flora/plant/shrub/stem"
 	},
 	"elements": [
 		{

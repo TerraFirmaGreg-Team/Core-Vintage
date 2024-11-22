@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/blue_skyflower/blue_skyflower_0",
-    "particle": "tfg:blocks/flora/plant/blue_skyflower/blue_skyflower_0",
-    "overlay": "tfg:blocks/flora/plant/blue_skyflower/blue_skyflower_0b"
+    "cross": "tfg:blocks/flora/plant/blue_skyflower/0",
+    "particle": "tfg:blocks/flora/plant/blue_skyflower/0",
+    "overlay": "tfg:blocks/flora/plant/blue_skyflower/0b"
   },
   "elements": [
     {
@@ -94,3 +94,4 @@
     }
   ]
 }
+

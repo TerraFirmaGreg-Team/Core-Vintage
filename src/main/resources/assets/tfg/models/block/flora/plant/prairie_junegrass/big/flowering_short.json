@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "overlay": "tfg:blocks/flora/plant/prairie_junegrass/prairie_junegrass_4b",
-    "particle": "tfg:blocks/flora/plant/prairie_junegrass/prairie_junegrass_4",
-    "cross": "tfg:blocks/flora/plant/prairie_junegrass/prairie_junegrass_4"
+    "overlay": "tfg:blocks/flora/plant/prairie_junegrass/4b",
+    "particle": "tfg:blocks/flora/plant/prairie_junegrass/4",
+    "cross": "tfg:blocks/flora/plant/prairie_junegrass/4"
   },
   "elements": [
     {
@@ -94,3 +94,4 @@
     }
   ]
 }
+

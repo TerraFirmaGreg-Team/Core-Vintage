@@ -1,10 +1,10 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "layer0": "tfg:blocks/flora/plant/moss/moss_layer0",
-    "layer1": "tfg:blocks/flora/plant/moss/moss_layer1",
-    "layer2": "tfg:blocks/flora/plant/moss/moss_layer2",
-    "particle": "tfg:blocks/flora/plant/moss/moss_layer0"
+    "layer0": "tfg:blocks/flora/plant/moss/layer0",
+    "layer1": "tfg:blocks/flora/plant/moss/layer1",
+    "layer2": "tfg:blocks/flora/plant/moss/layer2",
+    "particle": "tfg:blocks/flora/plant/moss/layer0"
   },
   "elements": [
     {
@@ -79,3 +79,4 @@
     }
   ]
 }
+

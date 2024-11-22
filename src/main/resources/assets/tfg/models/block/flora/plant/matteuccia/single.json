@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "tintedcross": "tfg:blocks/flora/plant/matteuccia/matteuccia_single",
-    "particle": "tfg:blocks/flora/plant/matteuccia/matteuccia_single"
+    "tintedcross": "tfg:blocks/flora/plant/matteuccia/single",
+    "particle": "tfg:blocks/flora/plant/matteuccia/single"
   },
   "elements": [
     {
@@ -72,3 +72,4 @@
     }
   ]
 }
+

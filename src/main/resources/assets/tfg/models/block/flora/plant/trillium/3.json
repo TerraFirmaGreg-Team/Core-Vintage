@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "2": "tfg:blocks/flora/plant/trillium/trillium_flower_back",
-    "cross": "tfg:blocks/flora/plant/trillium/trillium_2",
-    "top": "tfg:blocks/flora/plant/trillium/trillium_flower",
+    "2": "tfg:blocks/flora/plant/trillium/flower_back",
+    "cross": "tfg:blocks/flora/plant/trillium/2",
+    "top": "tfg:blocks/flora/plant/trillium/flower",
     "particle": "tfg:blocks/flora/plant/trillium/item"
   },
   "elements": [
@@ -98,3 +98,4 @@
     }
   ]
 }
+

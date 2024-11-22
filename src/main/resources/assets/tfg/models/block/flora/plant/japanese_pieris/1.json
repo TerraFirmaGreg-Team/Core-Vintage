@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "1": "tfg:blocks/flora/plant/japanese_pieris/japanese_pieris_1b",
-    "particle": "tfg:blocks/flora/plant/japanese_pieris/japanese_pieris_1",
-    "cross": "tfg:blocks/flora/plant/japanese_pieris/japanese_pieris_1"
+    "1": "tfg:blocks/flora/plant/japanese_pieris/1b",
+    "particle": "tfg:blocks/flora/plant/japanese_pieris/1",
+    "cross": "tfg:blocks/flora/plant/japanese_pieris/1"
   },
   "elements": [
     {
@@ -94,3 +94,4 @@
     }
   ]
 }
+

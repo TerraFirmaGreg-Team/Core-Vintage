@@ -1,7 +1,8 @@
 {
-  "parent": "tfg:block/plants/icicle_0",
+  "parent": "tfg:block/flora/plant/icicle/0",
   "textures": {
-    "particle": "tfg:blocks/flora/plant/icicle/icicle_1",
-    "layer0": "tfg:blocks/flora/plant/icicle/icicle_1"
+    "particle": "tfg:blocks/flora/plant/icicle/1",
+    "layer0": "tfg:blocks/flora/plant/icicle/1"
   }
 }
+

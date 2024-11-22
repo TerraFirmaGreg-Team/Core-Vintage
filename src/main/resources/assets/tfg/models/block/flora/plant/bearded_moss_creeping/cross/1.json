@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/bearded_moss/mossbearded1",
-    "upper": "tfg:blocks/flora/plant/bearded_moss/mossbearded1",
-    "lower": "tfg:blocks/flora/plant/bearded_moss/mossbearded2"
+    "particle": "tfg:blocks/flora/plant/bearded_moss_creeping/1",
+    "upper": "tfg:blocks/flora/plant/bearded_moss_creeping/1",
+    "lower": "tfg:blocks/flora/plant/bearded_moss_creeping/2"
   },
   "elements": [
     {
@@ -122,3 +122,4 @@
     }
   ]
 }
+

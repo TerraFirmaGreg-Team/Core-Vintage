@@ -2,9 +2,9 @@
   "ambientocclusion": false,
   "textures": {
     "particle": "tfg:blocks/flora/plant/water_lily/water_lily",
-    "flower": "tfg:blocks/flora/plant/water_lily/water_lily_2_yellow",
+    "flower": "tfg:blocks/flora/plant/water_lily/2_yellow",
     "layer0": "tfg:blocks/flora/plant/water_lily/water_lily",
-    "stem": "tfg:blocks/flora/plant/water_lily/water_lily_0"
+    "stem": "tfg:blocks/flora/plant/water_lily/0"
   },
   "elements": [
     {
@@ -89,3 +89,4 @@
     }
   ]
 }
+

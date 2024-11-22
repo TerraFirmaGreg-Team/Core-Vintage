@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "tfc:blocks/plants/shrub/dry_shrub_stem",
-		"cross": "tfc:blocks/plants/shrub/dry_shrub_stem"
+		"particle": "tfg:blocks/flora/plant/shrub/dry_shrub_stem",
+		"cross": "tfg:blocks/flora/plant/shrub/dry_shrub_stem"
 	},
 	"elements": [
 		{

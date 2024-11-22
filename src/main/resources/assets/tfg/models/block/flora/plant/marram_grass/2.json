@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/marram_grass/marram_grass_2",
-    "cross": "tfg:blocks/flora/plant/marram_grass/marram_grass_2"
+    "particle": "tfg:blocks/flora/plant/marram_grass/2",
+    "cross": "tfg:blocks/flora/plant/marram_grass/2"
   },
   "elements": [
     {
@@ -49,3 +49,4 @@
     }
   ]
 }
+

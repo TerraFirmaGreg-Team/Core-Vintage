@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "stem": "tfg:blocks/flora/plant/queen_sago/queen_sago_lower_0b",
-    "leaves": "tfg:blocks/flora/plant/queen_sago/queen_sago_lower_0",
-    "particle": "tfg:blocks/flora/plant/queen_sago/queen_sago_lower_0"
+    "stem": "tfg:blocks/flora/plant/queen_sago/lower/0b",
+    "leaves": "tfg:blocks/flora/plant/queen_sago/lower/0",
+    "particle": "tfg:blocks/flora/plant/queen_sago/lower/0"
   },
   "elements": [
     {
@@ -94,3 +94,4 @@
     }
   ]
 }
+

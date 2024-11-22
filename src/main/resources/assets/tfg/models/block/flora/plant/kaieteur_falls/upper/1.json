@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/kaieteur_falls/kaieteur_falls_upper_0",
-    "particle": "tfg:blocks/flora/plant/kaieteur_falls/kaieteur_falls_upper_0"
+    "cross": "tfg:blocks/flora/plant/kaieteur_falls/upper/0",
+    "particle": "tfg:blocks/flora/plant/kaieteur_falls/upper/0"
   },
   "elements": [
     {
@@ -68,3 +68,4 @@
     }
   ]
 }
+

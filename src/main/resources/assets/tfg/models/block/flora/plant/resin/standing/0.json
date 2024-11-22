@@ -1,8 +1,8 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "tfg:blocks/flora/plant/resin/resin_0",
-    "particle": "tfg:blocks/flora/plant/resin/resin_0"
+    "0": "tfg:blocks/flora/plant/resin/0",
+    "particle": "tfg:blocks/flora/plant/resin/0"
   },
   "elements": [
     {
@@ -122,3 +122,4 @@
     }
   ]
 }
+

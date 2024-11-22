@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/ostrich_fern/ostrich_fern_0",
-    "lowernotint": "tfg:blocks/flora/plant/ostrich_fern/ostrich_fern_bottom_0"
+    "particle": "tfg:blocks/flora/plant/ostrich_fern/1",
+    "lower": "tfg:blocks/flora/plant/ostrich_fern/bottom_1"
   },
   "elements": [
     {
@@ -26,13 +26,15 @@
           "uv": [
             0, 0, 16, 16
           ],
-          "texture": "#lowernotint"
+          "texture": "#lower",
+          "tintindex": 0
         },
         "south": {
           "uv": [
             16, 0, 0, 16
           ],
-          "texture": "#lowernotint"
+          "texture": "#lower",
+          "tintindex": 0
         }
       }
     }, {
@@ -56,15 +58,18 @@
           "uv": [
             0, 0, 16, 16
           ],
-          "texture": "#lowernotint"
+          "texture": "#lower",
+          "tintindex": 0
         },
         "east": {
           "uv": [
             16, 0, 0, 16
           ],
-          "texture": "#lowernotint"
+          "texture": "#lower",
+          "tintindex": 0
         }
       }
     }
   ]
 }
+

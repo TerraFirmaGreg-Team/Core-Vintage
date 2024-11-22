@@ -1,9 +1,9 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/field_horsetail/horsetail_1",
-    "cross1": "tfg:blocks/flora/plant/field_horsetail/horsetail_2",
-    "particle": "tfg:blocks/flora/plant/field_horsetail/horsetail_1"
+    "cross": "tfg:blocks/flora/plant/field_horsetail/1",
+    "cross1": "tfg:blocks/flora/plant/field_horsetail/2",
+    "particle": "tfg:blocks/flora/plant/field_horsetail/1"
   },
   "elements": [
     {
@@ -139,3 +139,4 @@
     }
   }
 }
+

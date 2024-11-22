@@ -1,8 +1,8 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "tfg:blocks/flora/plant/hibiscus/hibiscus_2",
-    "particle": "tfg:blocks/flora/plant/hibiscus/hibiscus_2"
+    "0": "tfg:blocks/flora/plant/hibiscus/2",
+    "particle": "tfg:blocks/flora/plant/hibiscus/2"
   },
   "elements": [
     {
@@ -80,3 +80,4 @@
     }
   ]
 }
+

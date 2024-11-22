@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/cat_grass/cat_grass_2",
-    "particle": "tfg:blocks/flora/plant/cat_grass/cat_grass_2"
+    "cross": "tfg:blocks/flora/plant/cat_grass/2",
+    "particle": "tfg:blocks/flora/plant/cat_grass/2"
   },
   "elements": [
     {
@@ -72,3 +72,4 @@
     }
   ]
 }
+

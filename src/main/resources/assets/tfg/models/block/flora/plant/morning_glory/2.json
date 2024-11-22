@@ -1,11 +1,12 @@
 {
-  "parent": "tfc:block/plants/morning_glory",
+  "parent": "tfg:block/flora/plant/morning_glory/base",
   "textures": {
-    "particle": "tfg:blocks/flora/plant/morning_glory/morning_glory_bottom_2",
+    "particle": "tfg:blocks/flora/plant/morning_glory/bottom_2",
     "layer0": "tfg:blocks/empty",
     "layer1": "tfg:blocks/empty",
-    "bottom": "tfg:blocks/flora/plant/morning_glory/morning_glory_bottom_2",
-    "middle": "tfg:blocks/flora/plant/morning_glory/morning_glory_middle_2",
-    "top": "tfg:blocks/flora/plant/morning_glory/morning_glory_top_2"
+    "bottom": "tfg:blocks/flora/plant/morning_glory/bottom_2",
+    "middle": "tfg:blocks/flora/plant/morning_glory/middle_2",
+    "top": "tfg:blocks/flora/plant/morning_glory/top_2"
   }
 }
+

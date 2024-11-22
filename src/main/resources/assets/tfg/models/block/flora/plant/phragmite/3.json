@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
   "textures": {
     "0": "tfg:blocks/flora/plant/phragmite/phragmite",
-    "1": "tfg:blocks/flora/plant/phragmite/phragmite_overlay_3",
-    "particle": "tfg:blocks/flora/plant/phragmite/phragmite_overlay_3"
+    "1": "tfg:blocks/flora/plant/phragmite/overlay_3",
+    "particle": "tfg:blocks/flora/plant/phragmite/overlay_3"
   },
   "elements": [
     {
@@ -153,3 +153,4 @@
     }
   ]
 }
+

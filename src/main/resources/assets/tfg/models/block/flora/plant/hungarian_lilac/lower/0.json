@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/hungarian_lilac/hungarian_lilac_0",
-    "particle": "tfg:blocks/flora/plant/hungarian_lilac/hungarian_lilac_0"
+    "cross": "tfg:blocks/flora/plant/hungarian_lilac/0",
+    "particle": "tfg:blocks/flora/plant/hungarian_lilac/0"
   },
   "elements": [
     {
@@ -68,3 +68,4 @@
     }
   ]
 }
+

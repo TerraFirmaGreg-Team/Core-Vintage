@@ -1,6 +1,7 @@
 {
   "parent": "block/tinted_cross",
   "textures": {
-    "cross": "tfg:blocks/flora/plant/kangaroo_paw/kangaroo_paw_1"
+    "cross": "tfg:blocks/flora/plant/kangaroo_paw/1"
   }
 }
+

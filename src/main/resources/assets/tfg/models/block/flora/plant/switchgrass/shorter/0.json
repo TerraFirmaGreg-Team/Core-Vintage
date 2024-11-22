@@ -1,6 +1,7 @@
 {
-  "parent": "tfc:block/tinted_cross",
+  "parent": "tfg:block/tinted_cross",
   "textures": {
-    "cross": "tfg:blocks/flora/plant/switchgrass/switchgrass_shorter_0"
+    "cross": "tfg:blocks/flora/plant/switchgrass/shorter_0"
   }
 }
+

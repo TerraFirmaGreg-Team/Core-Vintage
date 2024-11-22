@@ -1,8 +1,8 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "tfg:blocks/flora/plant/monstera/monstera_large",
-    "particle": "tfg:blocks/flora/plant/monstera/monstera_large"
+    "0": "tfg:blocks/flora/plant/monstera/large",
+    "particle": "tfg:blocks/flora/plant/monstera/large"
   },
   "elements": [
     {
@@ -304,3 +304,4 @@
     }
   ]
 }
+

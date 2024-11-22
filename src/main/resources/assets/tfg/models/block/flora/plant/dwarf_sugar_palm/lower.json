@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "stem": "tfg:blocks/flora/plant/dwarf_sugar_palm/dwarf_sugar_palm_lower_0b",
-    "leaves": "tfg:blocks/flora/plant/dwarf_sugar_palm/dwarf_sugar_palm_lower_0",
-    "particle": "tfg:blocks/flora/plant/dwarf_sugar_palm/dwarf_sugar_palm_lower_0"
+    "stem": "tfg:blocks/flora/plant/dwarf_sugar_palm/lower/0b",
+    "leaves": "tfg:blocks/flora/plant/dwarf_sugar_palm/lower/0",
+    "particle": "tfg:blocks/flora/plant/dwarf_sugar_palm/lower/0"
   },
   "elements": [
     {
@@ -94,3 +94,4 @@
     }
   ]
 }
+

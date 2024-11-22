@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/crimson_cattleya/crimson_cattleya_0",
-    "cross": "tfg:blocks/flora/plant/crimson_cattleya/crimson_cattleya_0"
+    "particle": "tfg:blocks/flora/plant/crimson_cattleya/0",
+    "cross": "tfg:blocks/flora/plant/crimson_cattleya/0"
   },
   "elements": [
     {
@@ -47,3 +47,4 @@
     }
   ]
 }
+

@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/cinnamon_fern/cinnamon_fern_single",
-    "particle": "tfg:blocks/flora/plant/cinnamon_fern/cinnamon_fern_single"
+    "cross": "tfg:blocks/flora/plant/cinnamon_fern/single",
+    "particle": "tfg:blocks/flora/plant/cinnamon_fern/single"
   },
   "elements": [
     {
@@ -72,3 +72,4 @@
     }
   ]
 }
+

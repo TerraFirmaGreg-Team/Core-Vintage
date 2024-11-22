@@ -1,8 +1,9 @@
 {
-  "parent": "tfc:block/plants/madeira_vine_0",
+  "parent": "tfg:block/flora/plant/madeira_vine/0",
   "textures": {
-    "particle": "tfg:blocks/flora/plant/madeira_vine/madeira_vine_1",
-    "layer0": "tfg:blocks/flora/plant/madeira_vine/madeira_vine_1",
-    "overlay": "tfg:blocks/flora/plant/madeira_vine/madeira_vine_1b"
+    "particle": "tfg:blocks/flora/plant/madeira_vine/1",
+    "layer0": "tfg:blocks/flora/plant/madeira_vine/1",
+    "overlay": "tfg:blocks/flora/plant/madeira_vine/1b"
   }
 }
+

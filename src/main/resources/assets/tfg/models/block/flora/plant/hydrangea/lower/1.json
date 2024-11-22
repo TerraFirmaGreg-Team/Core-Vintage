@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/hydrangea/hydrangea_lower_1",
-    "tintedcross": "tfg:blocks/flora/plant/hydrangea/hydrangea_lower_1",
-    "cross": "tfg:blocks/flora/plant/hydrangea/hydrangea_lower_1b"
+    "particle": "tfg:blocks/flora/plant/hydrangea/lower/1",
+    "tintedcross": "tfg:blocks/flora/plant/hydrangea/lower/1",
+    "cross": "tfg:blocks/flora/plant/hydrangea/lower/1b"
   },
   "elements": [
     {
@@ -94,3 +94,4 @@
     }
   ]
 }
+

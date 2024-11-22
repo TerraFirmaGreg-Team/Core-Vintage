@@ -1,6 +1,7 @@
 {
   "parent": "block/tinted_cross",
   "textures": {
-    "cross": "tfg:blocks/flora/plant/raddia_grass/raddia_grass_short"
+    "cross": "tfg:blocks/flora/plant/raddia_grass/short"
   }
 }
+

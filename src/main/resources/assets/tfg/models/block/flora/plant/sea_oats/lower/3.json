@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/sea_oats/sea_oats_lower_3",
-    "cross": "tfg:blocks/flora/plant/sea_oats/sea_oats_lower_3"
+    "particle": "tfg:blocks/flora/plant/sea_oats/lower/3",
+    "cross": "tfg:blocks/flora/plant/sea_oats/lower/3"
   },
   "elements": [
     {
@@ -49,3 +49,4 @@
     }
   ]
 }
+

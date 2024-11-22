@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "moss": "tfg:blocks/flora/plant/bearded_moss/mossbearded0",
-    "particle": "tfg:blocks/flora/plant/bearded_moss/mossbearded0"
+    "moss": "tfg:blocks/flora/plant/bearded_moss/0",
+    "particle": "tfg:blocks/flora/plant/bearded_moss/0"
   },
   "elements": [
     {
@@ -64,3 +64,4 @@
     }
   ]
 }
+

@@ -1,9 +1,9 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "tintedcross": "tfg:blocks/flora/plant/lilac/lilac_single_0",
-    "cross": "tfg:blocks/flora/plant/lilac/lilac_single_0b",
-    "particle": "tfg:blocks/flora/plant/lilac/lilac_single_0"
+    "tintedcross": "tfg:blocks/flora/plant/lilac/single/0",
+    "cross": "tfg:blocks/flora/plant/lilac/single/0b",
+    "particle": "tfg:blocks/flora/plant/lilac/single/0"
   },
   "elements": [
     {
@@ -133,3 +133,4 @@
     }
   ]
 }
+

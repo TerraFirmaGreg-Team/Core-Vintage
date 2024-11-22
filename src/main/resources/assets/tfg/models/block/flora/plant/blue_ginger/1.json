@@ -1,6 +1,7 @@
 {
   "parent": "tfg:block/tinted_cross",
   "textures": {
-    "cross": "tfg:blocks/flora/plant/blue_ginger/blue_ginger_1"
+    "cross": "tfg:blocks/flora/plant/blue_ginger/1"
   }
 }
+

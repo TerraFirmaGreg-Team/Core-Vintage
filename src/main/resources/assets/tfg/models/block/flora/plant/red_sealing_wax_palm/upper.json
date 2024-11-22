@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "stem": "tfg:blocks/flora/plant/red_sealing_wax_palm/red_sealing_wax_palm_upper_0b",
-    "leaves": "tfg:blocks/flora/plant/red_sealing_wax_palm/red_sealing_wax_palm_upper_0",
-    "particle": "tfg:blocks/flora/plant/red_sealing_wax_palm/red_sealing_wax_palm_upper_0"
+    "stem": "tfg:blocks/flora/plant/red_sealing_wax_palm/upper/0b",
+    "leaves": "tfg:blocks/flora/plant/red_sealing_wax_palm/upper/0",
+    "particle": "tfg:blocks/flora/plant/red_sealing_wax_palm/upper/0"
   },
   "elements": [
     {
@@ -94,3 +94,4 @@
     }
   ]
 }
+

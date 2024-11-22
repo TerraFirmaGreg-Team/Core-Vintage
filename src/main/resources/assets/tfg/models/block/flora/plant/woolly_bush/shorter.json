@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/woolly_bush/woolly_bush_single",
-    "particle": "tfg:blocks/flora/plant/woolly_bush/woolly_bush_single"
+    "cross": "tfg:blocks/flora/plant/woolly_bush/single",
+    "particle": "tfg:blocks/flora/plant/woolly_bush/single"
   },
   "elements": [
     {
@@ -72,3 +72,4 @@
     }
   ]
 }
+

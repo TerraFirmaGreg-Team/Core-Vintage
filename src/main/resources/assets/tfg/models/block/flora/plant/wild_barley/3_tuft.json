@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/wild_barley/wild_barley_3_tuft",
-    "crop": "tfg:blocks/flora/plant/wild_barley/wild_barley_3_tuft"
+    "particle": "tfg:blocks/flora/plant/wild_barley/3_tuft",
+    "crop": "tfg:blocks/flora/plant/wild_barley/3_tuft"
   },
   "elements": [
     {
@@ -65,3 +65,4 @@
     }
   ]
 }
+

@@ -1,6 +1,7 @@
 {
-  "parent": "tfg:block/plants/template_seagrass",
+  "parent": "tfg:block/flora/plant/eel_grass/base",
   "textures": {
     "texture": "tfg:blocks/flora/plant/eel_grass/1"
   }
 }
+

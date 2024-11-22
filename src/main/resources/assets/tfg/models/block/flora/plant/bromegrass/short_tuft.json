@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "tintedcross": "tfg:blocks/flora/plant/bromegrass/bromegrass_short",
-    "cross": "tfg:blocks/flora/plant/bromegrass/bromegrass_short_tuft",
+    "tintedcross": "tfg:blocks/flora/plant/bromegrass/short",
+    "cross": "tfg:blocks/flora/plant/bromegrass/short_tuft",
     "particle": "tfg:blocks/flora/plant/bromegrass/bromegrass"
   },
   "elements": [
@@ -133,3 +133,4 @@
     }
   ]
 }
+

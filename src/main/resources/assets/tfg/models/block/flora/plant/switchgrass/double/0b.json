@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/switchgrass/switchgrass_0b",
-    "particle": "tfg:blocks/flora/plant/switchgrass/switchgrass_0b"
+    "cross": "tfg:blocks/flora/plant/switchgrass/0b",
+    "particle": "tfg:blocks/flora/plant/switchgrass/0b"
   },
   "elements": [
     {
@@ -68,3 +68,4 @@
     }
   ]
 }
+

@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "leaves": "tfg:blocks/flora/plant/summer_asphodel/summer_asphodel_single_0",
-    "particle": "tfg:blocks/flora/plant/summer_asphodel/summer_asphodel_single_0"
+    "leaves": "tfg:blocks/flora/plant/summer_asphodel/single/0",
+    "particle": "tfg:blocks/flora/plant/summer_asphodel/single/0"
   },
   "elements": [
     {
@@ -53,3 +53,4 @@
     }
   ]
 }
+

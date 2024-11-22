@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/foxglove/foxglove_3",
-    "particle": "tfg:blocks/flora/plant/foxglove/foxglove_3"
+    "cross": "tfg:blocks/flora/plant/foxglove/3",
+    "particle": "tfg:blocks/flora/plant/foxglove/3"
   },
   "elements": [
     {
@@ -68,3 +68,4 @@
     }
   ]
 }
+

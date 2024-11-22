@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "singlenotint": "tfg:blocks/flora/plant/ostrich_fern/ostrich_fern_0",
-    "particle": "tfg:blocks/flora/plant/ostrich_fern/ostrich_fern_0"
+    "singlenotint": "tfg:blocks/flora/plant/ostrich_fern/0",
+    "particle": "tfg:blocks/flora/plant/ostrich_fern/0"
   },
   "elements": [
     {
@@ -68,3 +68,4 @@
     }
   ]
 }
+

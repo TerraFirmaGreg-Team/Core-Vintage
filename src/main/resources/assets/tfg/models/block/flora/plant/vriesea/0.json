@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/vriesea/vriesea_0",
-    "particle": "tfg:blocks/flora/plant/vriesea/vriesea_0"
+    "cross": "tfg:blocks/flora/plant/vriesea/0",
+    "particle": "tfg:blocks/flora/plant/vriesea/0"
   },
   "elements": [
     {
@@ -66,3 +66,4 @@
     }
   ]
 }
+

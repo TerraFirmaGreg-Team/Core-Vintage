@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/water_canna/water_canna_0",
-    "particle": "tfg:blocks/flora/plant/water_canna/water_canna_0"
+    "cross": "tfg:blocks/flora/plant/water_canna/0",
+    "particle": "tfg:blocks/flora/plant/water_canna/0"
   },
   "elements": [
     {
@@ -68,3 +68,4 @@
     }
   ]
 }
+

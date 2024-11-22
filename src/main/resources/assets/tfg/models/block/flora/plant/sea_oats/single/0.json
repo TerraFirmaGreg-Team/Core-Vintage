@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/sea_oats/sea_oats_single_0",
-    "particle": "tfg:blocks/flora/plant/sea_oats/sea_oats_single_0"
+    "cross": "tfg:blocks/flora/plant/sea_oats/single/0",
+    "particle": "tfg:blocks/flora/plant/sea_oats/single/0"
   },
   "elements": [
     {
@@ -68,3 +68,4 @@
     }
   ]
 }
+

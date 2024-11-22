@@ -1,9 +1,9 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "tintedcross": "tfg:blocks/flora/plant/hydrangea/hydrangea_single_1",
-    "cross": "tfg:blocks/flora/plant/hydrangea/hydrangea_single_1b",
-    "particle": "tfg:blocks/flora/plant/hydrangea/hydrangea_single_1"
+    "tintedcross": "tfg:blocks/flora/plant/hydrangea/single/1",
+    "cross": "tfg:blocks/flora/plant/hydrangea/single/1b",
+    "particle": "tfg:blocks/flora/plant/hydrangea/single/1"
   },
   "elements": [
     {
@@ -133,3 +133,4 @@
     }
   ]
 }
+

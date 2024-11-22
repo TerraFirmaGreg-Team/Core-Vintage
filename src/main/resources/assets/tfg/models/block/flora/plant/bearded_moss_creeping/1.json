@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/bearded_moss/mossbearded1",
-    "layer0": "tfg:blocks/flora/plant/bearded_moss/mossbearded1"
+    "particle": "tfg:blocks/flora/plant/bearded_moss_creeping/1",
+    "layer0": "tfg:blocks/flora/plant/bearded_moss_creeping/1"
   },
   "elements": [
     {
@@ -22,3 +22,4 @@
     }
   ]
 }
+

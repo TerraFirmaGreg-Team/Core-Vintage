@@ -1,10 +1,9 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/ostrich_fern/ostrich_fern_2",
-    "fernlow": "tfg:blocks/flora/plant/ostrich_fern/ostrich_fern_2",
-    "lowersingle": "tfg:blocks/flora/plant/ostrich_fern/ostrich_fern_2",
-    "fernhigh": "tfg:blocks/flora/plant/ostrich_fern/ostrich_fern_2"
+    "particle": "tfg:blocks/flora/plant/ostrich_fern/2",
+    "lowersingle": "tfg:blocks/flora/plant/ostrich_fern/2",
+    "fernhigh": "tfg:blocks/flora/plant/ostrich_fern/2"
   },
   "elements": [
     {
@@ -68,130 +67,6 @@
             16, 0, 0, 16
           ],
           "texture": "#lowersingle",
-          "tintindex": 0
-        }
-      }
-    }, {
-      "from": [
-        0.8, 0, 8
-      ],
-      "to": [
-        15.2, 16, 8
-      ],
-      "rotation": {
-        "origin": [
-          8, 0, 8
-        ],
-        "axis": "x",
-        "angle": 45
-      },
-      "shade": false,
-      "faces": {
-        "north": {
-          "uv": [
-            0, 0, 16, 16
-          ],
-          "texture": "#fernlow",
-          "tintindex": 0
-        },
-        "south": {
-          "uv": [
-            16, 0, 0, 16
-          ],
-          "texture": "#fernlow",
-          "tintindex": 0
-        }
-      }
-    }, {
-      "from": [
-        0.8, 0, 8
-      ],
-      "to": [
-        15.2, 16, 8
-      ],
-      "rotation": {
-        "origin": [
-          8, 0, 8
-        ],
-        "axis": "x",
-        "angle": -45
-      },
-      "shade": false,
-      "faces": {
-        "north": {
-          "uv": [
-            0, 0, 16, 16
-          ],
-          "texture": "#fernlow",
-          "tintindex": 0
-        },
-        "south": {
-          "uv": [
-            16, 0, 0, 16
-          ],
-          "texture": "#fernlow",
-          "tintindex": 0
-        }
-      }
-    }, {
-      "from": [
-        8, 0, 0.8
-      ],
-      "to": [
-        8, 16, 15.2
-      ],
-      "rotation": {
-        "origin": [
-          8, 0, 8
-        ],
-        "axis": "z",
-        "angle": 45
-      },
-      "shade": false,
-      "faces": {
-        "east": {
-          "uv": [
-            0, 0, 16, 16
-          ],
-          "texture": "#fernlow",
-          "tintindex": 0
-        },
-        "west": {
-          "uv": [
-            16, 0, 0, 16
-          ],
-          "texture": "#fernlow",
-          "tintindex": 0
-        }
-      }
-    }, {
-      "from": [
-        8, 0, 0.8
-      ],
-      "to": [
-        8, 16, 15.2
-      ],
-      "rotation": {
-        "origin": [
-          8, 0, 8
-        ],
-        "axis": "z",
-        "angle": -45
-      },
-      "shade": false,
-      "faces": {
-        "east": {
-          "uv": [
-            0, 0, 16, 16
-          ],
-          "texture": "#fernlow",
-          "tintindex": 0
-        },
-        "west": {
-          "uv": [
-            16, 0, 0, 16
-          ],
-          "texture": "#fernlow",
           "tintindex": 0
         }
       }
@@ -322,3 +197,4 @@
     }
   ]
 }
+

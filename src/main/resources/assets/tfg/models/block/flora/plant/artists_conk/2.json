@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "tfg:blocks/flora/plant/artists_conk/artists_conk_0",
-    "1": "tfg:blocks/flora/plant/artists_conk/artists_conk_0",
-    "particle": "tfg:blocks/flora/plant/artists_conk/artists_conk_0"
+    "0": "tfg:blocks/flora/plant/artists_conk/0",
+    "1": "tfg:blocks/flora/plant/artists_conk/0",
+    "particle": "tfg:blocks/flora/plant/artists_conk/0"
   },
   "elements": [
     {
@@ -46,3 +46,4 @@
   ],
   "display": {}
 }
+

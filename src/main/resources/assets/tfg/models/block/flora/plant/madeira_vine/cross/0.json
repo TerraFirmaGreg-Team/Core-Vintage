@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/madeira_vine/madeira_vine_0",
-    "particle": "tfg:blocks/flora/plant/madeira_vine/madeira_vine_0",
-    "overlay": "tfg:blocks/flora/plant/madeira_vine/madeira_vine_0b"
+    "cross": "tfg:blocks/flora/plant/madeira_vine/0",
+    "particle": "tfg:blocks/flora/plant/madeira_vine/0",
+    "overlay": "tfg:blocks/flora/plant/madeira_vine/0b"
   },
   "elements": [
     {
@@ -94,3 +94,4 @@
     }
   ]
 }
+

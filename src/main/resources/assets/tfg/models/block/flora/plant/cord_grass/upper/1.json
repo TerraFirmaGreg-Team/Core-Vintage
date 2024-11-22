@@ -1,9 +1,9 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "tintedcross": "tfg:blocks/flora/plant/cord_grass/cord_grass_upper_1",
-    "cross": "tfg:blocks/flora/plant/cord_grass/cord_grass_upper_1b",
-    "particle": "tfg:blocks/flora/plant/cord_grass/cord_grass_upper_1"
+    "tintedcross": "tfg:blocks/flora/plant/cord_grass/upper/1",
+    "cross": "tfg:blocks/flora/plant/cord_grass/upper/1b",
+    "particle": "tfg:blocks/flora/plant/cord_grass/upper/1"
   },
   "elements": [
     {
@@ -133,3 +133,4 @@
     }
   ]
 }
+

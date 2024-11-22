@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/devils_tongue/devils_tongue_lower_0",
-    "cross": "tfg:blocks/flora/plant/devils_tongue/devils_tongue_lower_0"
+    "particle": "tfg:blocks/flora/plant/devils_tongue/lower/0",
+    "cross": "tfg:blocks/flora/plant/devils_tongue/lower/0"
   },
   "elements": [
     {
@@ -49,3 +49,4 @@
     }
   ]
 }
+

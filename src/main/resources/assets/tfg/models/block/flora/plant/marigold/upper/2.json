@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/marigold/marigold_2",
-    "marigold": "tfg:blocks/flora/plant/marigold/marigold_2",
-    "bloom": "tfg:blocks/flora/plant/marigold/marigold_2b"
+    "particle": "tfg:blocks/flora/plant/marigold/2",
+    "marigold": "tfg:blocks/flora/plant/marigold/2",
+    "bloom": "tfg:blocks/flora/plant/marigold/2b"
   },
   "elements": [
     {
@@ -94,3 +94,4 @@
     }
   ]
 }
+

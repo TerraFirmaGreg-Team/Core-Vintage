@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/halfa_grass/halfa_grass_0",
-    "particle": "tfg:blocks/flora/plant/halfa_grass/halfa_grass_0"
+    "cross": "tfg:blocks/flora/plant/halfa_grass/0",
+    "particle": "tfg:blocks/flora/plant/halfa_grass/0"
   },
   "elements": [
     {
@@ -68,3 +68,4 @@
     }
   ]
 }
+

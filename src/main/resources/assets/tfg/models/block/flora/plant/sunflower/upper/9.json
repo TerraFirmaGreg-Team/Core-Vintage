@@ -2,7 +2,7 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/sunflower/sunflower_upper_9"
+    "cross": "tfg:blocks/flora/plant/sunflower/upper/9"
   },
   "elements": [
     {
@@ -48,3 +48,4 @@
     }
   ]
 }
+

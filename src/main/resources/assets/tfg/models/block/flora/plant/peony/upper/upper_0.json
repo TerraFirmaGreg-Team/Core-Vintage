@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfg:blocks/flora/plant/peony/peony_upper_0",
-    "tintedcross": "tfg:blocks/flora/plant/peony/peony_upper_0"
+    "particle": "tfg:blocks/flora/plant/peony/upper/0",
+    "tintedcross": "tfg:blocks/flora/plant/peony/upper/0"
   },
   "elements": [
     {
@@ -53,3 +53,4 @@
     }
   ]
 }
+

@@ -6,7 +6,7 @@
         "up": "true"
       },
       "apply": {
-        "model": "tfg:flora/plant/roots/cross_0"
+        "model": "tfg:flora/plant/roots/cross/0"
       }
     }, {
       "when": {
@@ -14,7 +14,7 @@
         "up": "true"
       },
       "apply": {
-        "model": "tfg:flora/plant/roots/cross_1"
+        "model": "tfg:flora/plant/roots/cross/1"
       }
     }, {
       "when": {

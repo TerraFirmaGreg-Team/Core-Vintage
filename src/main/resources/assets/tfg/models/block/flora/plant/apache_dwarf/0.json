@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "tfg:blocks/plants/apache_dwarf/apache_dwarf_0",
-		"cross": "tfg:blocks/plants/apache_dwarf/apache_dwarf_0"
+		"particle": "tfg:blocks/flora/plant/apache_dwarf/0",
+		"cross": "tfg:blocks/flora/plant/apache_dwarf/0"
 	},
 	"elements": [
 		{
@@ -28,3 +28,4 @@
 		}
 	]
 }
+

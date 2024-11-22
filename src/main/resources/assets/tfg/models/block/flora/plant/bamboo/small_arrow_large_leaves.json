@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "leaves": "tfg:blocks/flora/plant/arrow_bamboo/arrow_bamboo_large_leaves",
-    "particle": "tfg:blocks/flora/plant/arrow_bamboo/arrow_bamboo_stalk",
-    "side": "tfg:blocks/flora/plant/arrow_bamboo/arrow_bamboo_stalk"
+    "leaves": "tfg:blocks/flora/plant/bamboo/large_leaves",
+    "particle": "tfg:blocks/flora/plant/bamboo/stalk",
+    "side": "tfg:blocks/flora/plant/bamboo/stalk"
   },
   "elements": [
     {
@@ -109,3 +109,4 @@
     }
   ]
 }
+

@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/variegated_persian_ivy/variegated_persian_ivy_0",
-    "particle": "tfg:blocks/flora/plant/variegated_persian_ivy/variegated_persian_ivy_0",
-    "overlay": "tfg:blocks/flora/plant/variegated_persian_ivy/variegated_persian_ivy_0b"
+    "cross": "tfg:blocks/flora/plant/variegated_persian_ivy/0",
+    "particle": "tfg:blocks/flora/plant/variegated_persian_ivy/0",
+    "overlay": "tfg:blocks/flora/plant/variegated_persian_ivy/0b"
   },
   "elements": [
     {
@@ -94,3 +94,4 @@
     }
   ]
 }
+

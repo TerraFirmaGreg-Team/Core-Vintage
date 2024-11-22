@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/sunflower/sunflower_lower_2",
-    "particle": "tfg:blocks/flora/plant/sunflower/sunflower_lower_2"
+    "cross": "tfg:blocks/flora/plant/sunflower/lower/2",
+    "particle": "tfg:blocks/flora/plant/sunflower/lower/2"
   },
   "elements": [
     {
@@ -68,3 +68,4 @@
     }
   ]
 }
+

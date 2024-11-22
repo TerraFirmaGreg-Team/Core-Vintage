@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/wild_rice/wild_rice_0",
-    "particle": "tfg:blocks/flora/plant/wild_rice/wild_rice_0"
+    "cross": "tfg:blocks/flora/plant/wild_rice/0",
+    "particle": "tfg:blocks/flora/plant/wild_rice/0"
   },
   "elements": [
     {
@@ -72,3 +72,4 @@
     }
   ]
 }
+

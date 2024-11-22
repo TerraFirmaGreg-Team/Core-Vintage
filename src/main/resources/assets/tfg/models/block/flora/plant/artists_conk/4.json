@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
   "textures": {
-    "0": "tfg:blocks/flora/plant/artists_conk/artists_conk_1",
-    "1": "tfg:blocks/flora/plant/artists_conk/artists_conk_0",
-    "particle": "tfg:blocks/flora/plant/artists_conk/artists_conk_1"
+    "0": "tfg:blocks/flora/plant/artists_conk/1",
+    "1": "tfg:blocks/flora/plant/artists_conk/0",
+    "particle": "tfg:blocks/flora/plant/artists_conk/1"
   },
   "elements": [
     {
@@ -74,3 +74,4 @@
     }
   }
 }
+

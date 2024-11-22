@@ -2,10 +2,10 @@
   "credit": "Made with Blockbench",
   "textures": {
     "0": "tfg:blocks/flora/plant/monstera/base0",
-    "2": "tfg:blocks/flora/plant/monstera/monstera_large",
-    "4": "tfg:blocks/flora/plant/arrowhead/arrowhead_stem",
-    "5": "tfg:blocks/flora/plant/monstera/monstera_small",
-    "particle": "tfg:blocks/flora/plant/monstera/monstera_large"
+    "2": "tfg:blocks/flora/plant/monstera/large",
+    "4": "tfg:blocks/flora/plant/arrowhead/stem",
+    "5": "tfg:blocks/flora/plant/monstera/small",
+    "particle": "tfg:blocks/flora/plant/monstera/large"
   },
   "elements": [
     {
@@ -1037,3 +1037,4 @@
     }
   ]
 }
+

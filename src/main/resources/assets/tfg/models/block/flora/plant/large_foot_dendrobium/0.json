@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "cross": "tfg:blocks/flora/plant/large_foot_dendrobium/large_foot_dendrobium_0",
-    "particle": "tfg:blocks/flora/plant/large_foot_dendrobium/large_foot_dendrobium_0"
+    "cross": "tfg:blocks/flora/plant/large_foot_dendrobium/0",
+    "particle": "tfg:blocks/flora/plant/large_foot_dendrobium/0"
   },
   "elements": [
     {
@@ -66,3 +66,4 @@
     }
   ]
 }
+

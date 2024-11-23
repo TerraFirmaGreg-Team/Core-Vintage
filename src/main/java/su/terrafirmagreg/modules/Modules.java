@@ -20,6 +20,7 @@ public enum Modules implements IStringSerializable, IModuleContainer {
   ANIMAL(true),
   PLANT(true),
   DEVICE(true),
+  FOOD(true),
   WORLD(true);
 
   // TODO переделать с enum на статические финальные поля

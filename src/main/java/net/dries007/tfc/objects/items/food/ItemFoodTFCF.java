@@ -23,7 +23,7 @@ public class ItemFoodTFCF extends ItemFood implements IItemFoodTFC {
 
   private static final Map<ItemTFCF, ItemFoodTFCF> MAP = new HashMap<>();
   public FoodData data;
-  ArrayList<PotionEffectToHave> PotionEffects = new ArrayList<PotionEffectToHave>();
+  ArrayList<PotionEffectToHave> PotionEffects = new ArrayList<>();
 
   public ItemFoodTFCF(FoodData data, Object... objs) {
     super(0, 0.0F, false);

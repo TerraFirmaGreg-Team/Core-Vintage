@@ -35,6 +35,10 @@ public class FloraItemVariant extends VariantItem<FloraItemVariant, FloraType> {
     });
   }
 
+  public static Builder builder(String name) {
+    return new Builder(name);
+  }
+
   public String getRegistryKey(FloraType type) {
     return String.format("plant/%s/%s", this.getName(), type);
   }

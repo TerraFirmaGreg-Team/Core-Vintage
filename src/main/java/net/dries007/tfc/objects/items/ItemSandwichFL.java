@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
+import net.dries007.tfc.objects.items.food.ItemFoodFL;
 import net.dries007.tfc.objects.items.food.ItemSandwich;
 
 import org.jetbrains.annotations.Nullable;

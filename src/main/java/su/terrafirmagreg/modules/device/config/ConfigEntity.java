@@ -1,5 +1,5 @@
 package su.terrafirmagreg.modules.device.config;
 
-public final class ConfigDeviceEntity {
+public final class ConfigEntity {
 
 }

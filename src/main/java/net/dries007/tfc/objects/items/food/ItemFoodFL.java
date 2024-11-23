@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.items;
+package net.dries007.tfc.objects.items.food;
 
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 

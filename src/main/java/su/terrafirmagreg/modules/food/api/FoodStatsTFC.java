@@ -1,9 +1,13 @@
 package su.terrafirmagreg.modules.food.api;
 
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.food.ModuleFood;
+import su.terrafirmagreg.modules.food.network.SCPacketFoodStatsReplace;
+import su.terrafirmagreg.modules.food.network.SCPacketFoodStatsUpdate;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -17,14 +21,9 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.food.NutritionStats;
-import net.dries007.tfc.network.PacketFoodStatsReplace;
-import net.dries007.tfc.network.PacketFoodStatsUpdate;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -56,8 +55,8 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
       player.foodStats = new FoodStatsTFC(player, player.getFoodStats());
     }
     // Send the update regardless so the client can perform the same logic
-    if (player instanceof EntityPlayerMP) {
-      TerraFirmaCraft.getNetwork().sendTo(new PacketFoodStatsReplace(), (EntityPlayerMP) player);
+    if (player instanceof EntityPlayerMP entityPlayerMP) {
+      ModuleFood.PACKET_SERVICE.sendTo(new SCPacketFoodStatsReplace(), entityPlayerMP);
     }
   }
 
@@ -113,13 +112,13 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
   @Override
   public boolean attemptDrink(float value, boolean simulate) {
     int ticksPassed = (int) (sourcePlayer.world.getTotalWorldTime() - lastDrinkTick);
-    if (ticksPassed >= ConfigTFC.General.PLAYER.drinkDelay && thirst < MAX_PLAYER_THIRST) {
+    if (ticksPassed >= ConfigCore.ENTITY.PLAYER.drinkDelay && thirst < MAX_PLAYER_THIRST) {
       if (!simulate) {
         // One drink every so often
         resetCooldown();
         addThirst(value);
         // Salty drink effect
-        if (value < 0 && RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
+        if (value < 0 && RNG.nextDouble() < ConfigCore.ENTITY.PLAYER.chanceThirstOnSaltyDrink) {
           sourcePlayer.addPotionEffect(new PotionEffect(PotionsCore.THIRST, 600, 0));
         }
       }
@@ -161,7 +160,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 
     // Extra-Peaceful Difficulty
     if (difficulty == EnumDifficulty.PEACEFUL
-        && ConfigTFC.General.PLAYER.peacefulDifficultyPassiveRegeneration) {
+        && ConfigCore.ENTITY.PLAYER.peacefulDifficultyPassiveRegeneration) {
       // Copied / Modified from EntityPlayer#onLivingUpdate
       if (player.shouldHeal() && player.ticksExisted % 20 == 0) {
         player.heal(1.0F);
@@ -179,11 +178,11 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
     } else {
       // Passive exhaustion - call the source player instead of the local method
       player.addExhaustion(PASSIVE_EXHAUSTION / EXHAUSTION_MULTIPLIER
-                           * (float) ConfigTFC.General.PLAYER.passiveExhaustionMultiplier);
+                           * (float) ConfigCore.ENTITY.PLAYER.passiveExhaustionMultiplier);
 
       // Same check as the original food stats, so hunger and thirst loss are synced
       if (originalStats.foodExhaustionLevel >= 4.0F) {
-        addThirst(-(float) ConfigTFC.General.PLAYER.thirstModifier);
+        addThirst(-(float) ConfigCore.ENTITY.PLAYER.thirstModifier);
       }
 
       if (difficulty == EnumDifficulty.PEACEFUL) {
@@ -207,7 +206,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 
       if (healTimer > 10) {
         player.heal(multiplier * PASSIVE_HEAL_AMOUNT
-                    * (float) ConfigTFC.General.PLAYER.naturalRegenerationModifier);
+                    * (float) ConfigCore.ENTITY.PLAYER.naturalRegenerationModifier);
         healTimer = 0;
       }
     }
@@ -230,10 +229,8 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
     }
 
     // Since this is only called server side, and vanilla has a custom packet for this stuff, we need our own
-    if (player instanceof EntityPlayerMP) {
-      TerraFirmaCraft.getNetwork()
-                     .sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst),
-                             (EntityPlayerMP) player);
+    if (player instanceof EntityPlayerMP entityPlayerMP) {
+      ModuleFood.PACKET_SERVICE.sendTo(new SCPacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst), entityPlayerMP);
     }
   }
 

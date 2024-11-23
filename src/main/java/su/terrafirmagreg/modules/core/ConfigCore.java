@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.core;
 
-import su.terrafirmagreg.modules.core.config.ConfigCoreBlock;
-import su.terrafirmagreg.modules.core.config.ConfigCoreEntity;
-import su.terrafirmagreg.modules.core.config.ConfigCoreItem;
-import su.terrafirmagreg.modules.core.config.ConfigCoreMisc;
+import su.terrafirmagreg.modules.core.config.ConfigBlock;
+import su.terrafirmagreg.modules.core.config.ConfigEntity;
+import su.terrafirmagreg.modules.core.config.ConfigItem;
+import su.terrafirmagreg.modules.core.config.ConfigMisc;
 
 import net.minecraftforge.common.config.Config;
 
@@ -17,19 +17,19 @@ public class ConfigCore {
 
   @Config.Name("Block")
   @Config.Comment("Block setting")
-  public static final ConfigCoreBlock BLOCK = new ConfigCoreBlock();
+  public static final ConfigBlock BLOCK = new ConfigBlock();
 
   @Config.Name("Item")
   @Config.Comment("Items settings")
-  public static final ConfigCoreItem ITEM = new ConfigCoreItem();
+  public static final ConfigItem ITEM = new ConfigItem();
 
   @Config.Name("Entity")
   @Config.Comment("Entity setting")
-  public static final ConfigCoreEntity ENTITY = new ConfigCoreEntity();
+  public static final ConfigEntity ENTITY = new ConfigEntity();
 
   @Config.Name("Misc")
   @Config.Comment("Misc setting")
-  public static final ConfigCoreMisc MISC = new ConfigCoreMisc();
+  public static final ConfigMisc MISC = new ConfigMisc();
 
   static {
     ConfigAnytime.register(ConfigCore.class);

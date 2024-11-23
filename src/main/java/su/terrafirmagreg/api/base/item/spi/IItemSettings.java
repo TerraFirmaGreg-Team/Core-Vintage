@@ -112,9 +112,7 @@ public interface IItemSettings extends IProviderAutoReg, IProviderModel {
     int maxDamage;
     IRarity rarity = ItemRarity.COMMON.getRarity();
 
-    private Settings() {
-
-    }
+    protected Settings() {}
 
     public static Settings of() {
       return new Settings();

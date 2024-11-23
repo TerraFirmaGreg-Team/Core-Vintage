@@ -29,5 +29,6 @@ public class FloraCategories {
   public static FloraCategory EMERGENT_TALL_WATER;
   public static FloraCategory EMERGENT_TALL_WATER_SEA;
   public static FloraCategory MUSHROOM;
+  public static FloraCategory CAVE_MUSHROOM;
 
 }

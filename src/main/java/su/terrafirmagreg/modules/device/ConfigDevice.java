@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device;
 
-import su.terrafirmagreg.modules.device.config.ConfigDeviceBlock;
-import su.terrafirmagreg.modules.device.config.ConfigDeviceEntity;
-import su.terrafirmagreg.modules.device.config.ConfigDeviceItem;
-import su.terrafirmagreg.modules.device.config.ConfigDeviceMisc;
+import su.terrafirmagreg.modules.device.config.ConfigBlock;
+import su.terrafirmagreg.modules.device.config.ConfigEntity;
+import su.terrafirmagreg.modules.device.config.ConfigItem;
+import su.terrafirmagreg.modules.device.config.ConfigMisc;
 
 import net.minecraftforge.common.config.Config;
 
@@ -18,19 +18,19 @@ public class ConfigDevice {
 
   @Config.Name("Block")
   @Config.Comment("Block setting")
-  public static final ConfigDeviceBlock BLOCK = new ConfigDeviceBlock();
+  public static final ConfigBlock BLOCK = new ConfigBlock();
 
   @Config.Name("Item")
   @Config.Comment("Item setting")
-  public static final ConfigDeviceItem ITEM = new ConfigDeviceItem();
+  public static final ConfigItem ITEM = new ConfigItem();
 
   @Config.Name("Entity")
   @Config.Comment("Entity setting")
-  public static final ConfigDeviceEntity ENTITY = new ConfigDeviceEntity();
+  public static final ConfigEntity ENTITY = new ConfigEntity();
 
   @Config.Name("Misc")
   @Config.Comment("Misc setting")
-  public static final ConfigDeviceMisc MISC = new ConfigDeviceMisc();
+  public static final ConfigMisc MISC = new ConfigMisc();
 
   static {
     ConfigAnytime.register(ConfigDevice.class);

@@ -2,13 +2,17 @@ package su.terrafirmagreg.modules.device.config;
 
 import net.minecraftforge.common.config.Config;
 
-public final class ConfigDeviceItem {
+public final class ConfigItem {
 
   @Config.Comment("Water Flasks")
   public final WaterFlasks WATER_FLASKS = new WaterFlasks();
 
   @Config.Comment("Sling")
   public final Sling SLING = new Sling();
+
+  @Config.Comment("Fire starter")
+  public final FireStarter FIRE_STARTER = new FireStarter();
+
 
   public static final class WaterFlasks {
 
@@ -40,5 +44,12 @@ public final class ConfigDeviceItem {
     @Config.Comment({"The speed at which the sling charges.", "Value represents number of ticks per power level (lower = faster)."})
     @Config.RangeInt(min = 1)
     public int chargeSpeed = 16;
+  }
+
+  public static final class FireStarter {
+
+    @Config.Comment("Chance for the fire starter to be successful. Default = 0.5")
+    @Config.RangeDouble(min = 0d, max = 1d)
+    public double chance = 0.5;
   }
 }

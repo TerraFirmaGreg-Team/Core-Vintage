@@ -50,7 +50,6 @@ import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -84,7 +83,6 @@ public final class ModuleCore extends ModuleBase {
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
 
-    FluidRegistry.enableUniversalBucket();
     NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaGreg.getInstance(), new GuiHandler());
 
     CapabilityChunkData.register();

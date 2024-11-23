@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import net.dries007.tfc.api.capability.food.FoodHandler;
+import net.dries007.tfc.objects.items.food.ItemFoodFL;
 
 import org.jetbrains.annotations.Nullable;
 

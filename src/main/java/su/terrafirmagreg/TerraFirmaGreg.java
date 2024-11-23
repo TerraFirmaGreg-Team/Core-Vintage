@@ -5,6 +5,7 @@ import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.api.util.AnnotationUtils;
 import su.terrafirmagreg.proxy.IProxy;
 
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
@@ -45,7 +46,10 @@ public class TerraFirmaGreg {
   private final ModuleManager moduleManager;
 
   public TerraFirmaGreg() {
+    instance = this;
+    
     this.moduleManager = ModuleManager.getInstance();
+    FluidRegistry.enableUniversalBucket();
   }
 
   @EventHandler

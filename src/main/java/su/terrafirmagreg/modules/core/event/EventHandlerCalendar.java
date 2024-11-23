@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.event;
 
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.network.SCPacketCalendarUpdate;
@@ -19,8 +20,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-
-import net.dries007.tfc.ConfigTFC;
 
 import java.util.List;
 import java.util.Objects;
@@ -78,7 +77,7 @@ public class EventHandlerCalendar {
         // Consume food/water on all online players accordingly (EXHAUSTION_MULTIPLIER is here to de-compensate)
         event.getEntity().getEntityWorld().getEntities(EntityPlayer.class, Objects::nonNull)
              .forEach(player -> player.addExhaustion(FoodStatsTFC.PASSIVE_EXHAUSTION * jump / FoodStatsTFC.EXHAUSTION_MULTIPLIER *
-                                                     (float) ConfigTFC.General.PLAYER.passiveExhaustionMultiplier));
+                                                     (float) ConfigCore.ENTITY.PLAYER.passiveExhaustionMultiplier));
 
       }
     }

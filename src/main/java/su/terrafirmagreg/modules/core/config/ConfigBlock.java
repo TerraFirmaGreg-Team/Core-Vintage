@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.config;
 
 import net.minecraftforge.common.config.Config;
 
-public final class ConfigCoreBlock {
+public final class ConfigBlock {
 
   @Config.Comment("Puddle")
   public final Puddle PUDDLE = new Puddle();

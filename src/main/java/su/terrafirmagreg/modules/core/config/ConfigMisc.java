@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.data.enums.OreTooltipMode;
 
 import net.minecraftforge.common.config.Config;
 
-public final class ConfigCoreMisc {
+public final class ConfigMisc {
 
   public final Weight WEIGHT = new Weight();
   public final Heat HEAT = new Heat();

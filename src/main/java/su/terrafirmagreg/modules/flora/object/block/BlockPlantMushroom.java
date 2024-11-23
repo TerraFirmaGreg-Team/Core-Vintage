@@ -6,9 +6,11 @@ import su.terrafirmagreg.modules.flora.api.types.variant.block.FloraBlockVariant
 
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 
 import java.util.Random;
 
@@ -41,25 +43,25 @@ public class BlockPlantMushroom extends BlockPlant implements IGrowable {
       int j = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
-          net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
+          ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
         if (j == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
           grow(worldIn, rand, pos, state);
         } else if (j < 3) {
           worldIn.setBlockState(pos, state.withProperty(AGE_4, j + 1));
         }
-        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+        ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE_4);
 
-      if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+      if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
         if (j == 0 && canShrink(worldIn, pos)) {
           shrink(worldIn, pos);
         } else if (j > 0) {
           worldIn.setBlockState(pos, state.withProperty(AGE_4, j - 1));
         }
-        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+        ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
     }
 
@@ -70,8 +72,8 @@ public class BlockPlantMushroom extends BlockPlant implements IGrowable {
   public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
     if (!worldIn.isOutsideBuildHeight(pos)) {
       IBlockState soil = worldIn.getBlockState(pos.down());
-      return type.isValidSunlight(worldIn.getLight(pos)) && soil.getBlock()
-                                                                .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
+      return type.isValidSunlight(worldIn.getLight(pos)) &&
+             soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
     } else {
       return false;
     }
@@ -115,7 +117,7 @@ public class BlockPlantMushroom extends BlockPlant implements IGrowable {
     }
   }
 
-  private boolean canShrink(World worldIn, BlockPos pos) {
+  protected boolean canShrink(World worldIn, BlockPos pos) {
     for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4))) {
       if (worldIn.getBlockState(blockpos).getBlock() == this) {
         return true;
@@ -124,7 +126,7 @@ public class BlockPlantMushroom extends BlockPlant implements IGrowable {
     return false;
   }
 
-  private void shrink(World worldIn, BlockPos pos) {
+  protected void shrink(World worldIn, BlockPos pos) {
     worldIn.setBlockToAir(pos);
   }
 }

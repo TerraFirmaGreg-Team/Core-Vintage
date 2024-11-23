@@ -1815,7 +1815,7 @@ public final class FloraTypeHandler {
 
     FloraTypes.GLOWSHROOM = FloraType
       .builder("glowshroom")
-      .category(FloraCategories.MUSHROOM)
+      .category(FloraCategories.CAVE_MUSHROOM)
       .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
       .growthTemp(-11f, 48f)
       .temp(-13f, 50f)
@@ -1826,7 +1826,7 @@ public final class FloraTypeHandler {
 
     FloraTypes.BLUESHROOM = FloraType
       .builder("blueshroom")
-      .category(FloraCategories.MUSHROOM)
+      .category(FloraCategories.CAVE_MUSHROOM)
       .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
       .growthTemp(-11f, 48f)
       .temp(-13f, 50f)
@@ -1837,7 +1837,7 @@ public final class FloraTypeHandler {
 
     FloraTypes.MAGMA_SHROOM = FloraType
       .builder("magma_shroom")
-      .category(FloraCategories.MUSHROOM)
+      .category(FloraCategories.CAVE_MUSHROOM)
       .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
       .growthTemp(-11f, 48f)
       .temp(-13f, 50f)
@@ -1848,7 +1848,7 @@ public final class FloraTypeHandler {
 
     FloraTypes.POISON_SHROOM = FloraType
       .builder("poison_shroom")
-      .category(FloraCategories.MUSHROOM)
+      .category(FloraCategories.CAVE_MUSHROOM)
       .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
       .growthTemp(-11f, 48f)
       .temp(-13f, 50f)
@@ -1859,7 +1859,7 @@ public final class FloraTypeHandler {
 
     FloraTypes.SULPHUR_SHROOM = FloraType
       .builder("sulphur_shroom")
-      .category(FloraCategories.MUSHROOM)
+      .category(FloraCategories.CAVE_MUSHROOM)
       .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
       .growthTemp(-11f, 48f)
       .temp(-13f, 50f)

@@ -4,7 +4,7 @@ import net.minecraftforge.common.config.Config;
 
 import net.dries007.tfc.util.Alloy;
 
-public final class ConfigDeviceBlock {
+public final class ConfigBlock {
 
   @Config.Comment("Bellows")
   public final Bellows BELLOWS = new Bellows();

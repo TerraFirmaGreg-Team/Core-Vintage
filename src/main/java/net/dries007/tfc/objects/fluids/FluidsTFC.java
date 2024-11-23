@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.fluids;
 
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
@@ -22,7 +23,6 @@ import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import net.dries007.caffeineaddon.potion.PotionEffects;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
@@ -103,7 +103,7 @@ public final class FluidsTFC {
     FluidsCore.SALT_WATER = registerFluid(new Fluid("salt_water", STILL, FLOW, 0xFF1F5099)).with(DrinkableProperty.DRINKABLE, player -> {
       if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
         foodStats.addThirst(-10);
-        if (MathUtils.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
+        if (MathUtils.RNG.nextDouble() < ConfigCore.ENTITY.PLAYER.chanceThirstOnSaltyDrink) {
           player.addPotionEffect(new PotionEffect(PotionsCore.THIRST, 600, 0));
         }
       }

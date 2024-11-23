@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.base.item.BaseItem;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
@@ -122,7 +122,7 @@ public class ItemFireStarter extends BaseItem {
     final BlockPos pos = result.getBlockPos().add(0, 1, 0);
     final World world = player.world;
     // Base chance
-    float chance = (float) ConfigCore.ITEM.FIRE_STARTER.chance;
+    float chance = (float) ConfigDevice.ITEM.FIRE_STARTER.chance;
     // Raining reduces chance by half
     if (world.isRainingAt(pos)) {
       chance *= 0.5F;

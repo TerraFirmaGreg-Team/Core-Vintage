@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.flora.api.types.category;
 
 import su.terrafirmagreg.modules.flora.object.block.BlockPlant;
 import su.terrafirmagreg.modules.flora.object.block.BlockPlantCactus;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantCaveMushroom;
 import su.terrafirmagreg.modules.flora.object.block.BlockPlantCreeping;
 import su.terrafirmagreg.modules.flora.object.block.BlockPlantEmergentTallWater;
 import su.terrafirmagreg.modules.flora.object.block.BlockPlantEpiphyte;
@@ -199,6 +200,14 @@ public class FloraCategoryHandler {
       .material(Material.PLANTS)
       .enumPlantType(EnumPlantType.Cave)
       .factory(BlockPlantMushroom::new)
+      .canBePotted()
+      .build();
+
+    FloraCategories.CAVE_MUSHROOM = FloraCategory
+      .builder("cave_mushroom")
+      .material(Material.PLANTS)
+      .enumPlantType(EnumPlantType.Cave)
+      .factory(BlockPlantCaveMushroom::new)
       .canBePotted()
       .build();
   }

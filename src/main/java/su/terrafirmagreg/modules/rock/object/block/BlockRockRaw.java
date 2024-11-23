@@ -20,7 +20,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import gregtech.common.items.ToolItems;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ItemGem;
 
@@ -105,7 +104,7 @@ public class BlockRockRaw extends BlockRock {
     super.getDrops(drops, world, pos, state, fortune);
 
     // Raw rocks drop random gems
-    if (RANDOM.nextDouble() < ConfigTFC.General.MISC.stoneGemDropChance) {
+    if (RANDOM.nextDouble() < ConfigRock.BLOCK.RAW.stoneGemDropChance) {
       drops.add(ItemGem.get(Gem.getRandomDropGem(RANDOM), Gem.Grade.randomGrade(RANDOM), 1));
     }
 

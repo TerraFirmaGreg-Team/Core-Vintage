@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -19,6 +20,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import lombok.Getter;
 
@@ -78,5 +81,10 @@ public class BlockPlantFlowerPot extends BaseBlock implements IFloraBlock {
     drops.clear();
     drops.add(new ItemStack(BlocksFlora.PLANT.get(type)));
     drops.add(new ItemStack(Items.FLOWER_POT));
+  }
+
+  @SideOnly(Side.CLIENT)
+  public IItemColor getItemColor() {
+    return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
   }
 }

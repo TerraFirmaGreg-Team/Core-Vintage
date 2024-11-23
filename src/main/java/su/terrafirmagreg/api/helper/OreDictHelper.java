@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.helper;
 
-import su.terrafirmagreg.modules.plant.api.types.type.PlantTypes;
-import su.terrafirmagreg.modules.plant.init.BlocksPlant;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraTypes;
+import su.terrafirmagreg.modules.flora.init.BlocksFlora;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -73,8 +73,8 @@ public class OreDictHelper {
     OreDictionary.registerOre("baleSisalFiber", new ItemStack(BlocksTFCF.SISAL_FIBER_BALE));
     OreDictionary.registerOre("baleYucca", new ItemStack(BlocksTFCF.YUCCA_BALE));
     OreDictionary.registerOre("baleYuccaFiber", new ItemStack(BlocksTFCF.YUCCA_FIBER_BALE));
-    OreDictionary.registerOre("glue", new ItemStack(BlocksPlant.PLANT.get(PlantTypes.RESIN)));
-    OreDictionary.registerOre("slimeball", new ItemStack(BlocksPlant.PLANT.get(PlantTypes.RESIN)));
+    OreDictionary.registerOre("glue", new ItemStack(BlocksFlora.PLANT.get(FloraTypes.RESIN)));
+    OreDictionary.registerOre("slimeball", new ItemStack(BlocksFlora.PLANT.get(FloraTypes.RESIN)));
 
     // Flint
     OreDictionary.registerOre("flint", new ItemStack(Items.FLINT));

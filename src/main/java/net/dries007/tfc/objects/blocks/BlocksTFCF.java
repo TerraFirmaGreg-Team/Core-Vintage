@@ -1,13 +1,13 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantCreeping;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantHangingCreeping;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantHangingTall;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantTallGrass;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantTallGrassWater;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlant;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantCreeping;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantHangingCreeping;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantHangingTall;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantShortGrass;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantTallGrass;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantTallGrassWater;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;

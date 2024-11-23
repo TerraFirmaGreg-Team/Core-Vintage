@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.items.itemblock;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
-import su.terrafirmagreg.modules.plant.init.BlocksPlant;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraType;
+import su.terrafirmagreg.modules.flora.init.BlocksFlora;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlowerPot;
@@ -20,9 +20,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBlockPlant extends ItemBlockTFC {
 
-  private final PlantType plant;
+  private final FloraType plant;
 
-  public ItemBlockPlant(Block block, PlantType plant) {
+  public ItemBlockPlant(Block block, FloraType plant) {
     super(block);
     this.plant = plant;
   }
@@ -32,7 +32,7 @@ public class ItemBlockPlant extends ItemBlockTFC {
     if (!world.isRemote && world.getBlockState(pos).getBlock() instanceof BlockFlowerPot) {
       var tile = TileUtils.getTile(world, pos, TileEntityFlowerPot.class);
       if (tile.isPresent() && tile.get().getFlowerItemStack().isEmpty()) {
-        world.setBlockState(pos, BlocksPlant.FLOWER_POT.get(plant).getDefaultState(), 3);
+        world.setBlockState(pos, BlocksFlora.FLOWER_POT.get(plant).getDefaultState(), 3);
         player.getHeldItem(hand).shrink(1);
         return EnumActionResult.SUCCESS;
       }

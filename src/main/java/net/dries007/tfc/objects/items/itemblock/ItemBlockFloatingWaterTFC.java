@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.itemblock;
 
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantFloatingWater;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantFloatingWater;
 
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;

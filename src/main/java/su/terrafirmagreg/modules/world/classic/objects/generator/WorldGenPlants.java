@@ -3,16 +3,17 @@ package su.terrafirmagreg.modules.world.classic.objects.generator;
 import su.terrafirmagreg.api.library.types.category.Category;
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
-import su.terrafirmagreg.modules.plant.init.BlocksPlant;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantEpiphyte;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantTall;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantTallGrass;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantTallGrassWater;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantTallWater;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantWater;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraType;
+import su.terrafirmagreg.modules.flora.init.BlocksFlora;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlant;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantEpiphyte;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantShortGrass;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantTall;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantTallGrass;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantTallGrassWater;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantTallWater;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantWater;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -20,39 +21,37 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
-
 import java.util.Random;
 
 import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.EPIPHYTE;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.HANGING;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.SHORT_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_PLANT;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_WATER;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_WATER_SEA;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.WATER;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.WATER_SEA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BEARDED_MOSS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GLOW_VINE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.HANGING_VINE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.JUNGLE_VINE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LIANA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SAWGRASS;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.EPIPHYTE;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.HANGING;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.SHORT_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_PLANT;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_WATER;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_WATER_SEA;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.WATER;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.WATER_SEA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BEARDED_MOSS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.GLOW_VINE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.HANGING_VINE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.JUNGLE_VINE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.LIANA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SAWGRASS;
 
 public class WorldGenPlants extends WorldGenerator {
 
-  private PlantType type;
+  private FloraType type;
 
-  public void setGeneratedPlant(PlantType plantIn) {
+  public void setGeneratedPlant(FloraType plantIn) {
     this.type = plantIn;
   }
 
   public boolean generate(World worldIn, Random rand, BlockPos position) {
     if (Category.isCategory(type.getCategory(), HANGING)) {
       if (Type.isType(type, BEARDED_MOSS, GLOW_VINE, HANGING_VINE, JUNGLE_VINE, LIANA)) {
-        var plantBlock = (BlockPlantWater) BlocksPlant.PLANT.get(type);
+        var plantBlock = (BlockPlantWater) BlocksFlora.PLANT.get(type);
         IBlockState state = plantBlock.getDefaultState();
 
         for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 4; ++i) {
@@ -75,7 +74,7 @@ public class WorldGenPlants extends WorldGenerator {
         return true;
       }
 
-      var plantBlock = BlocksPlant.PLANT.get(type);
+      var plantBlock = BlocksFlora.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
       IBlockState water = type.getWaterType();
 
@@ -95,7 +94,7 @@ public class WorldGenPlants extends WorldGenerator {
                                     state.withProperty(AGE_4, plantAge));
       }
     } else if (type.getCategory().equals(WATER) || type.getCategory().equals(WATER_SEA)) {
-      var plantBlock = (BlockPlantWater) BlocksPlant.PLANT.get(type);
+      var plantBlock = (BlockPlantWater) BlocksFlora.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
       IBlockState water = type.getWaterType();
 
@@ -115,7 +114,7 @@ public class WorldGenPlants extends WorldGenerator {
                                     state.withProperty(AGE_4, plantAge));
       }
     } else if (type.getCategory().equals(TALL_WATER) || type.getCategory().equals(TALL_WATER_SEA)) {
-      var plantBlock = (BlockPlantTallWater) BlocksPlant.PLANT.get(type);
+      var plantBlock = (BlockPlantTallWater) BlocksFlora.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
       IBlockState water = type.getWaterType();
 
@@ -142,7 +141,7 @@ public class WorldGenPlants extends WorldGenerator {
         }
       }
     } else if (type.getCategory().equals(SHORT_GRASS)) {
-      var plantBlock = (BlockPlantShortGrass) BlocksPlant.PLANT.get(type);
+      var plantBlock = (BlockPlantShortGrass) BlocksFlora.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 4; ++i) {
@@ -161,7 +160,7 @@ public class WorldGenPlants extends WorldGenerator {
       }
     } else if (type.getCategory().equals(TALL_GRASS)) {
       if (type != SAWGRASS) {
-        var plantBlock = (BlockPlantTallGrass) BlocksPlant.PLANT.get(type);
+        var plantBlock = (BlockPlantTallGrass) BlocksFlora.PLANT.get(type);
         IBlockState state = plantBlock.getDefaultState();
 
         for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 16; ++i) {
@@ -185,7 +184,7 @@ public class WorldGenPlants extends WorldGenerator {
         }
       }
       if (type == SAWGRASS) {
-        var plantBlock = (BlockPlantTallGrassWater) BlocksPlant.PLANT.get(type);
+        var plantBlock = (BlockPlantTallGrassWater) BlocksFlora.PLANT.get(type);
         IBlockState state = plantBlock.getDefaultState();
         IBlockState water = type.getWaterType();
 
@@ -211,7 +210,7 @@ public class WorldGenPlants extends WorldGenerator {
         }
       }
     } else if (type.getCategory().equals(TALL_PLANT)) {
-      var plantBlock = (BlockPlantTall) BlocksPlant.PLANT.get(type);
+      var plantBlock = (BlockPlantTall) BlocksFlora.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 16; ++i) {
@@ -234,7 +233,7 @@ public class WorldGenPlants extends WorldGenerator {
         }
       }
     } else if (type.getCategory().equals(EPIPHYTE)) {
-      var plantBlock = (BlockPlantEpiphyte) BlocksPlant.PLANT.get(type);
+      var plantBlock = (BlockPlantEpiphyte) BlocksFlora.PLANT.get(type);
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 4; ++i) {
         BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(16),
@@ -251,7 +250,7 @@ public class WorldGenPlants extends WorldGenerator {
         }
       }
     } else {
-      var plantBlock = (BlockPlant) BlocksPlant.PLANT.get(type);
+      var plantBlock = (BlockPlant) BlocksFlora.PLANT.get(type);
       IBlockState state = plantBlock.getDefaultState();
 
       for (int i = 0; i < ProviderChunkData.getRainfall(worldIn, position) / 16; ++i) {

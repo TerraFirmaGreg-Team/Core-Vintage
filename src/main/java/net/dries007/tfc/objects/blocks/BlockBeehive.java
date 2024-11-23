@@ -4,11 +4,13 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
-import su.terrafirmagreg.modules.plant.api.types.category.PlantCategories;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantFlowerPot;
+import su.terrafirmagreg.modules.flora.api.types.category.FloraCategories;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlant;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantFlowerPot;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -30,14 +32,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.eerussianguy.firmalife.init.FoodFL;
 import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfc.util.OreDictionaryHelper;
-
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -92,7 +91,7 @@ public class BlockBeehive extends Block implements ICapabilitySize {
           searchPos = pos.add(x, y, z);
           Block block = world.getBlockState(searchPos).getBlock();
           if (block instanceof BlockPlant blockPlant) {
-            if (blockPlant.getType().getCategory() == PlantCategories.STANDARD) {
+            if (blockPlant.getType().getCategory() == FloraCategories.STANDARD) {
               flowers++;
             }
           } else if (block instanceof BlockPlantFlowerPot || block instanceof BlockBushTrellis || block instanceof BlockLargePlanter ||

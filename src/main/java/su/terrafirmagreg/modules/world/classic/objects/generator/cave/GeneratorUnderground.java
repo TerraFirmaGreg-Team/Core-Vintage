@@ -4,7 +4,8 @@ import su.terrafirmagreg.api.library.types.category.Category;
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraType;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
@@ -16,26 +17,25 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import net.dries007.tfcflorae.ConfigTFCF;
 
 import java.util.Random;
 
 import static su.terrafirmagreg.api.util.MathUtils.RNG;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.CREEPING;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.HANGING;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.MUSHROOM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BEARDED_MOSS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GLOW_VINE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.HANGING_VINE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.IVY;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.JUNGLE_VINE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LIANA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MORNING_GLORY;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MOSS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.REINDEER_LICHEN;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.TACKWEED;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.TAKAKIA;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.CREEPING;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.HANGING;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.MUSHROOM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BEARDED_MOSS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.GLOW_VINE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.HANGING_VINE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.IVY;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.JUNGLE_VINE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.LIANA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MORNING_GLORY;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MOSS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.REINDEER_LICHEN;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.TACKWEED;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.TAKAKIA;
 
 public class GeneratorUnderground implements IWorldGenerator {
 
@@ -74,7 +74,7 @@ public class GeneratorUnderground implements IWorldGenerator {
     final float floraDensity = data.getFloraDensity();
     final float floraDiversity = data.getFloraDiversity();
 
-    for (PlantType plant : PlantType.getTypes()) {
+    for (FloraType plant : FloraType.getTypes()) {
       if (!plant.isValidTempForWorldGen(avgTemperature) && !plant.isValidRain(rainfall)) {return;}
       undergroundVines.setGeneratedPlant(plant);
       undergroundCreepingVines.setGeneratedPlant(plant);

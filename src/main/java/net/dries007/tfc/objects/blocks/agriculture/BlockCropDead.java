@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.feature.skills.SimpleSkill;
 import su.terrafirmagreg.modules.core.feature.skills.SkillType;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantEmergentTallWater;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantWater;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantEmergentTallWater;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantWater;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.block.Block;

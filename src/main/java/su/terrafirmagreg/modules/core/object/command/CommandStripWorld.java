@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.object.command;
 
 import su.terrafirmagreg.api.base.command.BaseCommand;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 

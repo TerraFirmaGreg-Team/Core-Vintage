@@ -7,9 +7,11 @@ import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantTypes;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantMushroom;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraType;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraTypes;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantMushroom;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorBerryBushes;
@@ -47,8 +49,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -124,7 +124,7 @@ public class WorldRegenHandler {
 
             float floraDensity = chunkData.getFloraDensity(); // Use for various plant based decoration (tall grass, those vanilla jungle shrub things, etc.)
             float floraDiversity = chunkData.getFloraDiversity();
-            PlantType mushroom = PlantTypes.PORCINI;
+            FloraType mushroom = FloraTypes.PORCINI;
             if (mushroom != null) {
               PLANT_GEN.setGeneratedPlant(mushroom);
             }

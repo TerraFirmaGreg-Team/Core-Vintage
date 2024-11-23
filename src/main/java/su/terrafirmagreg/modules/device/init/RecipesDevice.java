@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.init;
 
 import su.terrafirmagreg.api.data.enums.EnumGradeOre;
 import su.terrafirmagreg.modules.device.object.recipe.quern.IQuernRecipeManager;
-import su.terrafirmagreg.modules.plant.init.BlocksPlant;
+import su.terrafirmagreg.modules.flora.init.BlocksFlora;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypes;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
@@ -28,179 +28,179 @@ import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfcthings.init.TFCThingsItems;
 
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.ALLIUM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.ANTHURIUM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.APACHE_DWARF;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.ARROWHEAD;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.ARTISTS_CONK;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.ARUNDO;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.ATHYRIUM_FERN;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BADDERLOCKS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BARREL_CACTUS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BEARDED_MOSS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BELL_TREE_DAHLIA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BIG_LEAF_PALM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BLACK_ORCHID;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BLUEGRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BLUESHROOM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BLUE_GINGER;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BLUE_ORCHID;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BLUE_SKYFLOWER;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BROMEGRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BROMELIA_HEMISPHERICA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BROMELIA_LACINIOSA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BUNCH_GRASS_FLOATING;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BUNCH_GRASS_REED;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BURNING_BUSH;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BUR_REED;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BUTTERFLY_MILKWEED;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.CALENDULA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.CANNA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.CATTAIL;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.CAT_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.CHAMOMILE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.CINNAMON_FERN;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.CLIMBING_CACTUS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.COMMON_MISTLETOE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.COONTAIL;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.CORD_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.CREEPING_MISTLETOE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.CRIMSON_CATTLEYA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.CROWNGRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.CUTHBERTS_DENDROBIUM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.DANDELION;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.DESERT_FLAME;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.DEVILS_TONGUE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.DRAKENSBERG_CYCAD;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.DWARF_SUGAR_PALM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.EEL_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.FISH_BONE_CACTUS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.FOXGLOVE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.FRAGRANT_FERN;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GIANT_CANE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GIANT_ELEPHANT_EAR;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GIANT_FEATHER_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GIANT_KELP;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GLOWSHROOM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GLOW_VINE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GOLDENROD;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GOOSEGRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GRAPE_HYACINTH;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GUTWEED;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GUZMANIA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.HALFA_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.HANGING_VINE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.HARLEQUIN_MISTLETOE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.HELICONIA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.HIBISCUS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.HORNWORT;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.HOUSTONIA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.HYDRANGEA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.IVY;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.JADE_VINE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.JAPANESE_IVY;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.JAPANESE_PIERIS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.JUNGLE_VINE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.KAIETEUR_FALLS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.KANGAROO_PAW;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.KING_FERN;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.KING_ORCHID;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LABRADOR_TEA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LAMINARIA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LANTERN_OF_THE_FOREST;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LARGE_FOOT_DENDROBIUM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LAVANDULA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LEAFY_KELP;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LEYMUS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LIANA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LILAC;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LILY_OF_THE_VALLEY;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LIPSTICK_PALM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MADAGASCAR_OCOTILLO;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MADEIRA_VINE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MAGMA_SHROOM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MALAGASY_TREE_ALOE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MANATEE_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MARIGOLD;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MARRAM_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MATTEUCCIA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MEADS_MILKWEED;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MILFOIL;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MONSTERA_EPIPHYTE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MORNING_GLORY;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MOSS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MOUNTAIN_CABBAGE_TREE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MYSORE_TRUMPETVINE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.NASTURTIUM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.OXEYE_DAISY;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PAPYRUS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PEONY;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PEROVSKIA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PHRAGMITE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PICKERELWEED;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.POISON_SHROOM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PONDWEED;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.POPPY;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PORCINI;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PRAIRIE_JUNEGRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PRIMROSE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PULSATILLA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PYGMY_DATE_PALM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.QUEEN_SAGO;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.RATTAN;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.RED_ALGAE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.RED_SEALING_WAX_PALM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.RED_SEA_WHIP;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.REED_MANNAGRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.REINDEER_LICHEN;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.ROSE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.ROUGH_HORSETAIL;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SACRED_DATURA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SAGO;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SAPPHIRE_TOWER;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SARGASSUM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SEAGRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SEAWEED;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SEA_ANEMONE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SEA_OATS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SILVERVEIN_CREEPER;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SKY_PLANT;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SNAPDRAGON_PINK;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SNAPDRAGON_RED;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SNAPDRAGON_WHITE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SNAPDRAGON_YELLOW;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SPANISH_MOSS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.STAR_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.STRELITZIA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SUGAR_CANE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SULPHUR_SHELF;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SULPHUR_SHROOM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SUMMER_ASPHODEL;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SUNFLOWER;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SWEDISH_IVY;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.TACKWEED;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.TAKAKIA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.TAMPA_BUTTERFLY_ORCHID;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.TRILLIUM;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.TROPICAL_MILKWEED;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.TULIP_ORANGE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.TULIP_PINK;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.TULIP_RED;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.TULIP_WHITE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.TURKEY_TAIL;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.TURTLE_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.UNDERGROWTH_SHRUB;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.UNDERGROWTH_SHRUB_SMALL;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.VARIEGATED_PERSIAN_IVY;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.VOODOO_LILY;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.VRIESEA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.WATER_CANNA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.WHEATGRASS;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.WILDFIRE;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.WINGED_KELP;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.WOOLLY_BUSH;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.YUCCA;
-import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.ZIMBABWE_ALOE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.ALLIUM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.ANTHURIUM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.APACHE_DWARF;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.ARROWHEAD;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.ARTISTS_CONK;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.ARUNDO;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.ATHYRIUM_FERN;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BADDERLOCKS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BARREL_CACTUS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BEARDED_MOSS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BELL_TREE_DAHLIA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BIG_LEAF_PALM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BLACK_ORCHID;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BLUEGRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BLUESHROOM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BLUE_GINGER;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BLUE_ORCHID;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BLUE_SKYFLOWER;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BROMEGRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BROMELIA_HEMISPHERICA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BROMELIA_LACINIOSA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BUNCH_GRASS_FLOATING;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BUNCH_GRASS_REED;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BURNING_BUSH;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BUR_REED;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.BUTTERFLY_MILKWEED;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.CALENDULA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.CANNA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.CATTAIL;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.CAT_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.CHAMOMILE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.CINNAMON_FERN;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.CLIMBING_CACTUS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.COMMON_MISTLETOE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.COONTAIL;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.CORD_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.CREEPING_MISTLETOE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.CRIMSON_CATTLEYA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.CROWNGRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.CUTHBERTS_DENDROBIUM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.DANDELION;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.DESERT_FLAME;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.DEVILS_TONGUE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.DRAKENSBERG_CYCAD;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.DWARF_SUGAR_PALM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.EEL_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.FISH_BONE_CACTUS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.FOXGLOVE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.FRAGRANT_FERN;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.GIANT_CANE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.GIANT_ELEPHANT_EAR;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.GIANT_FEATHER_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.GIANT_KELP;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.GLOWSHROOM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.GLOW_VINE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.GOLDENROD;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.GOOSEGRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.GRAPE_HYACINTH;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.GUTWEED;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.GUZMANIA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.HALFA_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.HANGING_VINE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.HARLEQUIN_MISTLETOE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.HELICONIA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.HIBISCUS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.HORNWORT;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.HOUSTONIA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.HYDRANGEA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.IVY;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.JADE_VINE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.JAPANESE_IVY;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.JAPANESE_PIERIS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.JUNGLE_VINE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.KAIETEUR_FALLS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.KANGAROO_PAW;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.KING_FERN;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.KING_ORCHID;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.LABRADOR_TEA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.LAMINARIA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.LANTERN_OF_THE_FOREST;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.LARGE_FOOT_DENDROBIUM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.LAVANDULA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.LEAFY_KELP;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.LEYMUS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.LIANA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.LILAC;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.LILY_OF_THE_VALLEY;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.LIPSTICK_PALM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MADAGASCAR_OCOTILLO;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MADEIRA_VINE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MAGMA_SHROOM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MALAGASY_TREE_ALOE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MANATEE_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MARIGOLD;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MARRAM_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MATTEUCCIA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MEADS_MILKWEED;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MILFOIL;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MONSTERA_EPIPHYTE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MORNING_GLORY;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MOSS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MOUNTAIN_CABBAGE_TREE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.MYSORE_TRUMPETVINE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.NASTURTIUM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.OXEYE_DAISY;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.PAPYRUS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.PEONY;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.PEROVSKIA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.PHRAGMITE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.PICKERELWEED;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.POISON_SHROOM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.PONDWEED;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.POPPY;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.PORCINI;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.PRAIRIE_JUNEGRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.PRIMROSE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.PULSATILLA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.PYGMY_DATE_PALM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.QUEEN_SAGO;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.RATTAN;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.RED_ALGAE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.RED_SEALING_WAX_PALM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.RED_SEA_WHIP;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.REED_MANNAGRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.REINDEER_LICHEN;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.ROSE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.ROUGH_HORSETAIL;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SACRED_DATURA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SAGO;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SAPPHIRE_TOWER;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SARGASSUM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SEAGRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SEAWEED;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SEA_ANEMONE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SEA_OATS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SILVERVEIN_CREEPER;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SKY_PLANT;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SNAPDRAGON_PINK;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SNAPDRAGON_RED;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SNAPDRAGON_WHITE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SNAPDRAGON_YELLOW;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SPANISH_MOSS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.STAR_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.STRELITZIA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SUGAR_CANE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SULPHUR_SHELF;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SULPHUR_SHROOM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SUMMER_ASPHODEL;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SUNFLOWER;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.SWEDISH_IVY;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.TACKWEED;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.TAKAKIA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.TAMPA_BUTTERFLY_ORCHID;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.TRILLIUM;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.TROPICAL_MILKWEED;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.TULIP_ORANGE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.TULIP_PINK;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.TULIP_RED;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.TULIP_WHITE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.TURKEY_TAIL;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.TURTLE_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.UNDERGROWTH_SHRUB;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.UNDERGROWTH_SHRUB_SMALL;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.VARIEGATED_PERSIAN_IVY;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.VOODOO_LILY;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.VRIESEA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.WATER_CANNA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.WHEATGRASS;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.WILDFIRE;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.WINGED_KELP;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.WOOLLY_BUSH;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.YUCCA;
+import static su.terrafirmagreg.modules.flora.api.types.type.FloraTypes.ZIMBABWE_ALOE;
 import static su.terrafirmagreg.modules.rock.api.types.type.RockTypes.QUARTZITE;
 
 public final class RecipesDevice {
@@ -274,130 +274,130 @@ public final class RecipesDevice {
                       new ItemStack(Items.DYE, 9, EnumDyeColor.WHITE.getDyeDamage()));
 
     //Dye from plants
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(HOUSTONIA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(HOUSTONIA)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(OXEYE_DAISY)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(OXEYE_DAISY)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 1));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(PRIMROSE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(PRIMROSE)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(SNAPDRAGON_WHITE)),
+      IIngredient.of(BlocksFlora.PLANT.get(SNAPDRAGON_WHITE)),
       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(TRILLIUM)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(TRILLIUM)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 1));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(SPANISH_MOSS)),
+      IIngredient.of(BlocksFlora.PLANT.get(SPANISH_MOSS)),
       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(TULIP_WHITE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(TULIP_WHITE)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 1));
 
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(BUTTERFLY_MILKWEED)),
+      IIngredient.of(BlocksFlora.PLANT.get(BUTTERFLY_MILKWEED)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(CANNA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(CANNA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(NASTURTIUM)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(NASTURTIUM)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(STRELITZIA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(STRELITZIA)),
                       new ItemStack(Items.DYE, 1, EnumDyeColor.ORANGE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(TULIP_ORANGE)),
+      IIngredient.of(BlocksFlora.PLANT.get(TULIP_ORANGE)),
       new ItemStack(Items.DYE, 1, EnumDyeColor.ORANGE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(WATER_CANNA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(WATER_CANNA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
 
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(ATHYRIUM_FERN)),
+      IIngredient.of(BlocksFlora.PLANT.get(ATHYRIUM_FERN)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.MAGENTA.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(MORNING_GLORY)),
+      IIngredient.of(BlocksFlora.PLANT.get(MORNING_GLORY)),
       new ItemStack(Items.DYE, 1, EnumDyeColor.MAGENTA.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(PULSATILLA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(PULSATILLA)),
                       new ItemStack(Items.DYE, 1, EnumDyeColor.MAGENTA.getDyeDamage()));
 
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(LABRADOR_TEA)),
+      IIngredient.of(BlocksFlora.PLANT.get(LABRADOR_TEA)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.LIGHT_BLUE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(SAPPHIRE_TOWER)),
+      IIngredient.of(BlocksFlora.PLANT.get(SAPPHIRE_TOWER)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.LIGHT_BLUE.getDyeDamage()));
 
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(CALENDULA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(CALENDULA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(DANDELION)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(DANDELION)),
                       new ItemStack(Items.DYE, 1, EnumDyeColor.YELLOW.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(MEADS_MILKWEED)),
+      IIngredient.of(BlocksFlora.PLANT.get(MEADS_MILKWEED)),
       new ItemStack(Items.DYE, 1, EnumDyeColor.YELLOW.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(GOLDENROD)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(GOLDENROD)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(SNAPDRAGON_YELLOW)),
+      IIngredient.of(BlocksFlora.PLANT.get(SNAPDRAGON_YELLOW)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
 
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(MOSS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(MOSS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.LIME.getDyeDamage()));
 
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(FOXGLOVE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(FOXGLOVE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(SACRED_DATURA)),
+      IIngredient.of(BlocksFlora.PLANT.get(SACRED_DATURA)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(TULIP_PINK)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(TULIP_PINK)),
                       new ItemStack(Items.DYE, 1, EnumDyeColor.PINK.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(SNAPDRAGON_PINK)),
+      IIngredient.of(BlocksFlora.PLANT.get(SNAPDRAGON_PINK)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
 
     //No gray :c
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(YUCCA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(YUCCA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.SILVER.getDyeDamage()));
 
     //No Cyan :c
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(ALLIUM)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(ALLIUM)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PURPLE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(BLACK_ORCHID)),
+      IIngredient.of(BlocksFlora.PLANT.get(BLACK_ORCHID)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PURPLE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(PEROVSKIA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(PEROVSKIA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PURPLE.getDyeDamage()));
 
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(BLUE_ORCHID)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(BLUE_ORCHID)),
                       new ItemStack(ItemsTFC.DYE_BLUE, 2));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(GRAPE_HYACINTH)),
+      IIngredient.of(BlocksFlora.PLANT.get(GRAPE_HYACINTH)),
       new ItemStack(ItemsTFC.DYE_BLUE, 2));
 
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(ROUGH_HORSETAIL)),
+      IIngredient.of(BlocksFlora.PLANT.get(ROUGH_HORSETAIL)),
       new ItemStack(ItemsTFC.DYE_BROWN, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SARGASSUM)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SARGASSUM)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
 
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(BARREL_CACTUS)),
+      IIngredient.of(BlocksFlora.PLANT.get(BARREL_CACTUS)),
       new ItemStack(Items.DYE, 4, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(REINDEER_LICHEN)),
+      IIngredient.of(BlocksFlora.PLANT.get(REINDEER_LICHEN)),
       new ItemStack(Items.DYE, 4, EnumDyeColor.GREEN.getDyeDamage()));
 
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(GUZMANIA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(GUZMANIA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(POPPY)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(POPPY)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(PORCINI)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(PORCINI)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(ROSE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(ROSE)),
                       new ItemStack(Items.DYE, 4, EnumDyeColor.RED.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(SNAPDRAGON_RED)),
+      IIngredient.of(BlocksFlora.PLANT.get(SNAPDRAGON_RED)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(TROPICAL_MILKWEED)),
+      IIngredient.of(BlocksFlora.PLANT.get(TROPICAL_MILKWEED)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(TULIP_RED)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(TULIP_RED)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(VRIESEA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(VRIESEA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
 
     //Misc
@@ -441,322 +441,322 @@ public final class RecipesDevice {
     manager.addRecipe(IIngredient.of("pearl"), new ItemStack(ItemPowder.get(Powder.PEARL)));
     manager.addRecipe(IIngredient.of("pearlBlack"),
                       new ItemStack(ItemPowder.get(Powder.BLACK_PEARL)));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(PAPYRUS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(PAPYRUS)),
                       new ItemStack(ItemsTFCF.PAPYRUS_PULP, 3));
 
     // Dye from plants
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(CHAMOMILE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(CHAMOMILE)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(HYDRANGEA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(HYDRANGEA)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(LILY_OF_THE_VALLEY)),
+      IIngredient.of(BlocksFlora.PLANT.get(LILY_OF_THE_VALLEY)),
       new ItemStack(ItemsTFC.DYE_WHITE, 2));
     manager.addRecipe(IIngredient.of("cropMadder"),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
     manager.addRecipe(IIngredient.of("cropWoad"), new ItemStack(ItemsTFC.DYE_BLUE, 2));
     manager.addRecipe(IIngredient.of("cropIndigo"), new ItemStack(ItemsTFC.DYE_BLUE, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SUNFLOWER)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SUNFLOWER)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
     manager.addRecipe(IIngredient.of("cropWeld"),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
     manager.addRecipe(IIngredient.of("cropRape"), new ItemStack(ItemsTFC.DYE_BLUE, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(LILAC)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(LILAC)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(PEONY)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(PEONY)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(LAVANDULA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(LAVANDULA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PURPLE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(CATTAIL)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(CATTAIL)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
     manager.addRecipe(IIngredient.of("cropAgave"),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SUGAR_CANE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SUGAR_CANE)),
                       new ItemStack(Items.DYE, 4, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(BADDERLOCKS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(BADDERLOCKS)),
                       new ItemStack(Items.DYE, 4, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(GUTWEED)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(GUTWEED)),
                       new ItemStack(Items.DYE, 4, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SAGO)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SAGO)),
                       new ItemStack(Items.DYE, 4, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(IIngredient.of("resin"),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
     manager.addRecipe(IIngredient.of("treeLeavesTeak"),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SUGAR_CANE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SUGAR_CANE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(TACKWEED)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(TACKWEED)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(TAKAKIA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(TAKAKIA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(VOODOO_LILY)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(VOODOO_LILY)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(DEVILS_TONGUE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(DEVILS_TONGUE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(BROMELIA_HEMISPHERICA)),
+      IIngredient.of(BlocksFlora.PLANT.get(BROMELIA_HEMISPHERICA)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.MAGENTA.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(BROMELIA_LACINIOSA)),
+      IIngredient.of(BlocksFlora.PLANT.get(BROMELIA_LACINIOSA)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(KAIETEUR_FALLS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(KAIETEUR_FALLS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(MATTEUCCIA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(MATTEUCCIA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(CORD_GRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(CORD_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(REED_MANNAGRASS)),
+      IIngredient.of(BlocksFlora.PLANT.get(REED_MANNAGRASS)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(PRAIRIE_JUNEGRASS)),
+      IIngredient.of(BlocksFlora.PLANT.get(PRAIRIE_JUNEGRASS)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(WOOLLY_BUSH)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(WOOLLY_BUSH)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(CINNAMON_FERN)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(CINNAMON_FERN)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(JAPANESE_PIERIS)),
+      IIngredient.of(BlocksFlora.PLANT.get(JAPANESE_PIERIS)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(BURNING_BUSH)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(BURNING_BUSH)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(UNDERGROWTH_SHRUB)),
+      IIngredient.of(BlocksFlora.PLANT.get(UNDERGROWTH_SHRUB)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(UNDERGROWTH_SHRUB_SMALL)),
+      IIngredient.of(BlocksFlora.PLANT.get(UNDERGROWTH_SHRUB_SMALL)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SEA_OATS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SEA_OATS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(BUNCH_GRASS_FLOATING)),
+      IIngredient.of(BlocksFlora.PLANT.get(BUNCH_GRASS_FLOATING)),
       new ItemStack(ItemsTFC.DYE_BROWN, 2));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(BUNCH_GRASS_REED)),
+      IIngredient.of(BlocksFlora.PLANT.get(BUNCH_GRASS_REED)),
       new ItemStack(ItemsTFC.DYE_BROWN, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(CROWNGRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(CROWNGRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(CAT_GRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(CAT_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(GOOSEGRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(GOOSEGRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(WHEATGRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(WHEATGRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(HALFA_GRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(HALFA_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(LEYMUS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(LEYMUS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(MARRAM_GRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(MARRAM_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     //manager.addRecipe(IIngredient.of(BlockPlantTFC.get(PlantTypes.WILD_BARLEY)), new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     //manager.addRecipe(IIngredient.of(BlockPlantTFC.get(PlantTypes.WILD_RICE)), new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     //manager.addRecipe(IIngredient.of(BlockPlantTFC.get(PlantTypes.WILD_WHEAT)), new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(RATTAN)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(RATTAN)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(GLOW_VINE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(GLOW_VINE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(BLUE_SKYFLOWER)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(BLUE_SKYFLOWER)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.LIGHT_BLUE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(JADE_VINE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(JADE_VINE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.LIGHT_BLUE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(JAPANESE_IVY)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(JAPANESE_IVY)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(MADEIRA_VINE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(MADEIRA_VINE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(MYSORE_TRUMPETVINE)),
+      IIngredient.of(BlocksFlora.PLANT.get(MYSORE_TRUMPETVINE)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(SILVERVEIN_CREEPER)),
+      IIngredient.of(BlocksFlora.PLANT.get(SILVERVEIN_CREEPER)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SWEDISH_IVY)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SWEDISH_IVY)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(VARIEGATED_PERSIAN_IVY)),
+      IIngredient.of(BlocksFlora.PLANT.get(VARIEGATED_PERSIAN_IVY)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(APACHE_DWARF)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(APACHE_DWARF)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(ARTISTS_CONK)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(ARTISTS_CONK)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(CLIMBING_CACTUS)),
+      IIngredient.of(BlocksFlora.PLANT.get(CLIMBING_CACTUS)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(CRIMSON_CATTLEYA)),
+      IIngredient.of(BlocksFlora.PLANT.get(CRIMSON_CATTLEYA)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PURPLE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(CREEPING_MISTLETOE)),
+      IIngredient.of(BlocksFlora.PLANT.get(CREEPING_MISTLETOE)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(CUTHBERTS_DENDROBIUM)),
+      IIngredient.of(BlocksFlora.PLANT.get(CUTHBERTS_DENDROBIUM)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(FISH_BONE_CACTUS)),
+      IIngredient.of(BlocksFlora.PLANT.get(FISH_BONE_CACTUS)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.MAGENTA.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(FRAGRANT_FERN)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(FRAGRANT_FERN)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(HARLEQUIN_MISTLETOE)),
+      IIngredient.of(BlocksFlora.PLANT.get(HARLEQUIN_MISTLETOE)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(KING_ORCHID)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(KING_ORCHID)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(LANTERN_OF_THE_FOREST)),
+      IIngredient.of(BlocksFlora.PLANT.get(LANTERN_OF_THE_FOREST)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(LARGE_FOOT_DENDROBIUM)),
+      IIngredient.of(BlocksFlora.PLANT.get(LARGE_FOOT_DENDROBIUM)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(COMMON_MISTLETOE)),
+      IIngredient.of(BlocksFlora.PLANT.get(COMMON_MISTLETOE)),
       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SKY_PLANT)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SKY_PLANT)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SULPHUR_SHELF)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SULPHUR_SHELF)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.ORANGE.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(TAMPA_BUTTERFLY_ORCHID)),
+      IIngredient.of(BlocksFlora.PLANT.get(TAMPA_BUTTERFLY_ORCHID)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(TURKEY_TAIL)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(TURKEY_TAIL)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(WILDFIRE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(WILDFIRE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(BELL_TREE_DAHLIA)),
+      IIngredient.of(BlocksFlora.PLANT.get(BELL_TREE_DAHLIA)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(BIG_LEAF_PALM)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(BIG_LEAF_PALM)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(DRAKENSBERG_CYCAD)),
+      IIngredient.of(BlocksFlora.PLANT.get(DRAKENSBERG_CYCAD)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(DWARF_SUGAR_PALM)),
+      IIngredient.of(BlocksFlora.PLANT.get(DWARF_SUGAR_PALM)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(GIANT_CANE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(GIANT_CANE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(GIANT_ELEPHANT_EAR)),
+      IIngredient.of(BlocksFlora.PLANT.get(GIANT_ELEPHANT_EAR)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(GIANT_FEATHER_GRASS)),
+      IIngredient.of(BlocksFlora.PLANT.get(GIANT_FEATHER_GRASS)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(MADAGASCAR_OCOTILLO)),
+      IIngredient.of(BlocksFlora.PLANT.get(MADAGASCAR_OCOTILLO)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(MALAGASY_TREE_ALOE)),
+      IIngredient.of(BlocksFlora.PLANT.get(MALAGASY_TREE_ALOE)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(MOUNTAIN_CABBAGE_TREE)),
+      IIngredient.of(BlocksFlora.PLANT.get(MOUNTAIN_CABBAGE_TREE)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(PYGMY_DATE_PALM)),
+      IIngredient.of(BlocksFlora.PLANT.get(PYGMY_DATE_PALM)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(QUEEN_SAGO)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(QUEEN_SAGO)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(RED_SEALING_WAX_PALM)),
+      IIngredient.of(BlocksFlora.PLANT.get(RED_SEALING_WAX_PALM)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(SUMMER_ASPHODEL)),
+      IIngredient.of(BlocksFlora.PLANT.get(SUMMER_ASPHODEL)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(ZIMBABWE_ALOE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(ZIMBABWE_ALOE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(ANTHURIUM)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(ANTHURIUM)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(ARROWHEAD)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(ARROWHEAD)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(ARUNDO)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(ARUNDO)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(BLUEGRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(BLUEGRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(BLUE_GINGER)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(BLUE_GINGER)),
                       new ItemStack(ItemsTFC.DYE_BLUE, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(BROMEGRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(BROMEGRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(BUR_REED)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(BUR_REED)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(DESERT_FLAME)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(DESERT_FLAME)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(HELICONIA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(HELICONIA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(HIBISCUS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(HIBISCUS)),
                       new ItemStack(ItemsTFC.DYE_WHITE, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(KANGAROO_PAW)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(KANGAROO_PAW)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(KING_FERN)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(KING_FERN)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(LIPSTICK_PALM)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(LIPSTICK_PALM)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.MAGENTA.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(MARIGOLD)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(MARIGOLD)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.YELLOW.getDyeDamage()));
     manager.addRecipe(
-      IIngredient.of(BlocksPlant.PLANT.get(MONSTERA_EPIPHYTE)),
+      IIngredient.of(BlocksFlora.PLANT.get(MONSTERA_EPIPHYTE)),
       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     //manager.addRecipe(IIngredient.of(BlockPlantTFC.get(PlantTypes.MONSTERA_GROUND)), new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(PHRAGMITE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(PHRAGMITE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(PICKERELWEED)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(PICKERELWEED)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PURPLE.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(BADDERLOCKS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(BADDERLOCKS)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(COONTAIL)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(COONTAIL)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(EEL_GRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(EEL_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(GIANT_KELP)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(GIANT_KELP)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(GUTWEED)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(GUTWEED)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(HORNWORT)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(HORNWORT)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(LAMINARIA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(LAMINARIA)),
                       new ItemStack(ItemsTFC.DYE_BROWN, 2));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(LEAFY_KELP)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(LEAFY_KELP)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(MANATEE_GRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(MANATEE_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(MILFOIL)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(MILFOIL)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(PONDWEED)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(PONDWEED)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SAGO)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SAGO)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SEAGRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SEAGRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SEAWEED)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SEAWEED)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(STAR_GRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(STAR_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(TURTLE_GRASS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(TURTLE_GRASS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(WINGED_KELP)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(WINGED_KELP)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(RED_ALGAE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(RED_ALGAE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(RED_SEA_WHIP)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(RED_SEA_WHIP)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.RED.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SEA_ANEMONE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SEA_ANEMONE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.PINK.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(BEARDED_MOSS)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(BEARDED_MOSS)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(GLOW_VINE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(GLOW_VINE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(HANGING_VINE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(HANGING_VINE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(JUNGLE_VINE)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(JUNGLE_VINE)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(LIANA)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(LIANA)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(IVY)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(IVY)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(BLUESHROOM)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(BLUESHROOM)),
                       new ItemStack(Items.DYE, 1, EnumDyeColor.CYAN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(GLOWSHROOM)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(GLOWSHROOM)),
                       new ItemStack(Items.GLOWSTONE_DUST, 1));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(MAGMA_SHROOM)), new ItemStack(Items.MAGMA_CREAM, 1));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(POISON_SHROOM)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(MAGMA_SHROOM)), new ItemStack(Items.MAGMA_CREAM, 1));
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(POISON_SHROOM)),
                       new ItemStack(Items.DYE, 1, EnumDyeColor.MAGENTA.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SULPHUR_SHROOM)),
+    manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SULPHUR_SHROOM)),
                       new ItemStack(ItemPowder.get(Powder.SULFUR), 1));
     manager.addRecipe(IIngredient.of(BlocksTFCF.LIGHTSTONE),
                       new ItemStack(Items.GLOWSTONE_DUST, 2));

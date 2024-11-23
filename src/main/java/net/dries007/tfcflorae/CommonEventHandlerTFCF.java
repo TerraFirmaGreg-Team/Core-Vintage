@@ -1,9 +1,10 @@
 package net.dries007.tfcflorae;
 
-import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.library.MCDate.Month;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantTypes;
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraType;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraTypes;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -23,8 +24,6 @@ import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCassiaCinnamonLeaves;
 import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-
 import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
 
 @SuppressWarnings("unused")
@@ -41,8 +40,8 @@ public final class CommonEventHandlerTFCF {
     Block block = state.getBlock();
     Month month = Calendar.CALENDAR_TIME.getMonthOfYear();
 
-    for (PlantType plant : PlantType.getTypes()) {
-      if (plant == PlantTypes.BARREL_CACTUS &&
+    for (FloraType plant : FloraType.getTypes()) {
+      if (plant == FloraTypes.BARREL_CACTUS &&
           (month == Month.SEPTEMBER || month == Month.OCTOBER || month == Month.NOVEMBER)) {
         int chance = MathUtils.RNG.nextInt(2);
         if (chance == 0) {

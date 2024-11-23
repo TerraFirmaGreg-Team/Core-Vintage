@@ -3,9 +3,10 @@ package su.terrafirmagreg.modules.world.classic.objects.generator;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
-import su.terrafirmagreg.modules.plant.init.BlocksPlant;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraType;
+import su.terrafirmagreg.modules.flora.init.BlocksFlora;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlant;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
@@ -18,8 +19,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
-
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import java.util.Random;
 
@@ -91,9 +90,9 @@ public class GeneratorSoilPits implements IWorldGenerator {
         if (flag && rng.nextInt(15) == 0) {
           final BlockPos pos = world.getTopSolidOrLiquidBlock(posHorizontal);
 
-          for (PlantType plant : PlantType.getTypes()) {
+          for (FloraType plant : FloraType.getTypes()) {
             if (plant.isClayMarking()) {
-              var plantBlock = (BlockPlant) BlocksPlant.PLANT.get(plant);
+              var plantBlock = (BlockPlant) BlocksFlora.PLANT.get(plant);
               IBlockState state = plantBlock.getDefaultState();
               int plantAge = plant.getAgeForWorldgen(rng, Climate.getActualTemp(world, pos));
 

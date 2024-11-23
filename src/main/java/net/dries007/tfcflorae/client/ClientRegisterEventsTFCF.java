@@ -1,11 +1,11 @@
 package net.dries007.tfcflorae.client;
 
-import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantCreeping;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantHangingCreeping;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantHangingTall;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantTallGrassWater;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlant;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantCreeping;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantHangingCreeping;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantHangingTall;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantShortGrass;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantTallGrassWater;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 
 import net.minecraft.block.Block;
@@ -38,7 +38,6 @@ import net.dries007.tfc.objects.items.ItemGemTFCF;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfcflorae.ConfigTFCF;
 
-import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.CAN_GROW;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.DECAYABLE;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.HARVESTABLE;
@@ -46,6 +45,7 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.PLACED;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.WILD;
 import static su.terrafirmagreg.api.data.Properties.IntProp.LEVEL;
 import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_5;
+import static su.terrafirmagreg.api.data.Reference.MODID_TFCF;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = MODID_TFCF)

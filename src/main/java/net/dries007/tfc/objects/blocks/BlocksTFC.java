@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantFloatingWater;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantFlowerPot;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlant;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantFloatingWater;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantFlowerPot;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

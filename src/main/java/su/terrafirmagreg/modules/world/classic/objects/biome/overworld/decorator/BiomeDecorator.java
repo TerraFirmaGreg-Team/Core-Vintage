@@ -3,8 +3,9 @@ package su.terrafirmagreg.modules.world.classic.objects.biome.overworld.decorato
 import su.terrafirmagreg.api.base.biome.BaseBiomeDecorator;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-import su.terrafirmagreg.modules.plant.api.types.category.PlantCategories;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.flora.api.types.category.FloraCategories;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraType;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorPlant;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorSand;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorWildCrops;
@@ -17,35 +18,33 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
-
 import java.util.Random;
 
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.CACTUS;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.CREEPING;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.DESERT;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.DESERT_TALL_PLANT;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.DRY;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.DRY_TALL_PLANT;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.EMERGENT_TALL_WATER;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.EMERGENT_TALL_WATER_SEA;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.EPIPHYTE;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.FLOATING;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.FLOATING_SEA;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.HANGING;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.MUSHROOM;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.REED;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.REED_SEA;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.SHORT_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.STANDARD;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_PLANT;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_REED;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_REED_SEA;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_WATER;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_WATER_SEA;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.WATER;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.WATER_SEA;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.CACTUS;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.CREEPING;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.DESERT;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.DESERT_TALL_PLANT;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.DRY;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.DRY_TALL_PLANT;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.EMERGENT_TALL_WATER;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.EMERGENT_TALL_WATER_SEA;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.EPIPHYTE;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.FLOATING;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.FLOATING_SEA;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.HANGING;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.MUSHROOM;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.REED;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.REED_SEA;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.SHORT_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.STANDARD;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_PLANT;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_REED;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_REED_SEA;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_WATER;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_WATER_SEA;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.WATER;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.WATER_SEA;
 
 public class BiomeDecorator extends BaseBiomeDecorator {
 
@@ -89,7 +88,7 @@ public class BiomeDecorator extends BaseBiomeDecorator {
     this.sandGen = new GeneratorSand(7);
     this.wildCropsGen = new GeneratorWildCrops();
 
-    for (PlantType plant : PlantType.getTypes()) {
+    for (FloraType plant : FloraType.getTypes()) {
       if (plant.getCategory().equals(TALL_PLANT)) {
         tallCount++;
       } else if (plant.getCategory().equals(CREEPING)) {
@@ -150,8 +149,8 @@ public class BiomeDecorator extends BaseBiomeDecorator {
 
     if (TerrainGen.decorate(world, rng, forgeChunkPos,
                             DecorateBiomeEvent.Decorate.EventType.SHROOM)) {
-      for (PlantType plant : PlantType.getTypes()) {
-        if (plant.getCategory() == PlantCategories.MUSHROOM && plant.isValidTempForWorldGen(
+      for (FloraType plant : FloraType.getTypes()) {
+        if (plant.getCategory() == FloraCategories.MUSHROOM && plant.isValidTempForWorldGen(
           avgTemperature) && plant.isValidRain(rainfall)) {
           plantGen.setGeneratedPlant(plant);
 
@@ -167,8 +166,8 @@ public class BiomeDecorator extends BaseBiomeDecorator {
 
     if (TerrainGen.decorate(world, rng, forgeChunkPos,
                             DecorateBiomeEvent.Decorate.EventType.CACTUS)) {
-      for (PlantType plant : PlantType.getTypes()) {
-        if (plant.getCategory() == PlantCategories.CACTUS && plant.isValidTempForWorldGen(
+      for (FloraType plant : FloraType.getTypes()) {
+        if (plant.getCategory() == FloraCategories.CACTUS && plant.isValidTempForWorldGen(
           avgTemperature) && plant.isValidRain(rainfall)) {
           plantGen.setGeneratedPlant(plant);
 
@@ -184,7 +183,7 @@ public class BiomeDecorator extends BaseBiomeDecorator {
     }
 
     if (TerrainGen.decorate(world, rng, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.LILYPAD)) {
-      for (PlantType plant : PlantType.getTypes()) {
+      for (FloraType plant : FloraType.getTypes()) {
         if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
           plantGen.setGeneratedPlant(plant);
           if (plant.getCategory().equals(FLOATING)) {
@@ -207,7 +206,7 @@ public class BiomeDecorator extends BaseBiomeDecorator {
     }
 
     if (TerrainGen.decorate(world, rng, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.REED)) {
-      for (PlantType plant : PlantType.getTypes()) {
+      for (FloraType plant : FloraType.getTypes()) {
         if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
           plantGen.setGeneratedPlant(plant);
           if (plant.getCategory().equals(REED) || plant.getCategory().equals(TALL_REED)) {
@@ -230,7 +229,7 @@ public class BiomeDecorator extends BaseBiomeDecorator {
     }
 
     if (TerrainGen.decorate(world, rng, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.FLOWERS)) {
-      for (PlantType plant : PlantType.getTypes()) {
+      for (FloraType plant : FloraType.getTypes()) {
         if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
           plantGen.setGeneratedPlant(plant);
           if (plant.getCategory().equals(WATER) || plant.getCategory().equals(TALL_WATER) || plant.getCategory().equals(EMERGENT_TALL_WATER)) {
@@ -286,7 +285,7 @@ public class BiomeDecorator extends BaseBiomeDecorator {
 
     if (TerrainGen.decorate(world, rng, forgeChunkPos,
                             DecorateBiomeEvent.Decorate.EventType.DEAD_BUSH)) {
-      for (PlantType plant : PlantType.getTypes()) {
+      for (FloraType plant : FloraType.getTypes()) {
         if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
           plantGen.setGeneratedPlant(plant);
           if (plant.getCategory().equals(DESERT) || plant.getCategory().equals(DESERT_TALL_PLANT)) {
@@ -309,7 +308,7 @@ public class BiomeDecorator extends BaseBiomeDecorator {
     }
 
     if (TerrainGen.decorate(world, rng, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.GRASS)) {
-      for (PlantType plant : PlantType.getTypes()) {
+      for (FloraType plant : FloraType.getTypes()) {
         if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
           plantGen.setGeneratedPlant(plant);
           if (plant.getCategory().equals(SHORT_GRASS)) {

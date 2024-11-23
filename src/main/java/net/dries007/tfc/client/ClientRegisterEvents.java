@@ -2,8 +2,8 @@ package net.dries007.tfc.client;
 
 import su.terrafirmagreg.api.data.enums.EnumGradeOre;
 import su.terrafirmagreg.api.data.enums.EnumHideSize;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlant;
 import su.terrafirmagreg.modules.food.ConfigFood;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 
 import net.minecraft.block.Block;

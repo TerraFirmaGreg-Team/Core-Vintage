@@ -2,8 +2,9 @@ package su.terrafirmagreg.modules.world.classic.objects.generator;
 
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantTypes;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraType;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraTypes;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 
 import net.minecraft.block.BlockHardenedClay;
@@ -20,21 +21,20 @@ import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import net.dries007.tfcflorae.ConfigTFCF;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.EPIPHYTE;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.HANGING;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.SHORT_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.STANDARD;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_GRASS;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_PLANT;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_WATER;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.TALL_WATER_SEA;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.WATER;
-import static su.terrafirmagreg.modules.plant.api.types.category.PlantCategories.WATER_SEA;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.EPIPHYTE;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.HANGING;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.SHORT_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.STANDARD;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_GRASS;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_PLANT;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_WATER;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_WATER_SEA;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.WATER;
+import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.WATER_SEA;
 
 public class GeneratorPlants implements IWorldGenerator {
 
@@ -63,7 +63,7 @@ public class GeneratorPlants implements IWorldGenerator {
   public GeneratorPlants() {
     plantGen = new WorldGenPlants();
 
-    for (PlantType plant : PlantType.getTypes()) {
+    for (FloraType plant : FloraType.getTypes()) {
       if (plant.getCategory().equals(WATER) || plant.getCategory().equals(TALL_WATER)) {
         waterCount++;
       } else if (plant.getCategory().equals(WATER_SEA) || plant.getCategory().equals(TALL_WATER_SEA)) {
@@ -108,7 +108,7 @@ public class GeneratorPlants implements IWorldGenerator {
 
     if (TerrainGen.decorate(world, rng, forgeChunkPos,
                             DecorateBiomeEvent.Decorate.EventType.FLOWERS)) {
-      for (PlantType plant : PlantType.getTypes()) {
+      for (FloraType plant : FloraType.getTypes()) {
         if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
           plantGen.setGeneratedPlant(plant);
           if (plant.getCategory().equals(WATER)) {
@@ -135,9 +135,9 @@ public class GeneratorPlants implements IWorldGenerator {
             }
           } else if (plant.getCategory().equals(WATER_SEA)) {
             if (floraDensity >= 0.2f && floraDensity <= 0.6f && (
-              plant == PlantTypes.RED_ALGAE ||
-              plant == PlantTypes.RED_SEA_WHIP ||
-              plant == PlantTypes.SEA_ANEMONE)) {
+              plant == FloraTypes.RED_ALGAE ||
+              plant == FloraTypes.RED_SEA_WHIP ||
+              plant == FloraTypes.SEA_ANEMONE)) {
               for (int i = rng.nextInt(Math.round(waterSeaCount / floraDiversity));
                    i < floraDensity * waterSeaAlgaeCountConfig; i++) {
                 BlockPos blockPos = world.getHeight(
@@ -148,7 +148,7 @@ public class GeneratorPlants implements IWorldGenerator {
                   plantGen.generate(world, rng, blockPos);
                 }
               }
-            } else if (plant != PlantTypes.RED_SEA_WHIP || plant != PlantTypes.SEA_ANEMONE) {
+            } else if (plant != FloraTypes.RED_SEA_WHIP || plant != FloraTypes.SEA_ANEMONE) {
               for (int i = rng.nextInt(Math.round(waterSeaCount / floraDiversity));
                    i < (5 + floraDensity) * waterSeaCountConfig; i++) {
                 BlockPos blockPos = world.getHeight(
@@ -161,7 +161,7 @@ public class GeneratorPlants implements IWorldGenerator {
               }
             }
           } else if (plant.getCategory().equals(TALL_WATER_SEA)) {
-            if (floraDensity >= 0.2f && plant != PlantTypes.SEAGRASS) {
+            if (floraDensity >= 0.2f && plant != FloraTypes.SEAGRASS) {
               for (int i = rng.nextInt(Math.round(waterSeaCount / floraDiversity));
                    i < (5 + floraDensity) * waterTallSeaCountConfig; i++) {
                 BlockPos blockPos = world.getHeight(
@@ -172,7 +172,7 @@ public class GeneratorPlants implements IWorldGenerator {
                   plantGen.generate(world, rng, blockPos);
                 }
               }
-            } else if (plant == PlantTypes.SEAGRASS) {
+            } else if (plant == FloraTypes.SEAGRASS) {
               for (int i = rng.nextInt(Math.round(waterSeaCount / floraDiversity));
                    i < (5 + floraDensity) * waterSeaCountConfig; i++) {
                 BlockPos blockPos = world.getHeight(
@@ -185,7 +185,7 @@ public class GeneratorPlants implements IWorldGenerator {
               }
             }
           } else if (plant.getCategory().equals(EPIPHYTE)) {
-            if (plant == PlantTypes.MONSTERA_EPIPHYTE) {
+            if (plant == FloraTypes.MONSTERA_EPIPHYTE) {
               for (float i = rng.nextInt(Math.round(epiphyteCount / floraDiversity));
                    i < (5 + floraDensity + floraDiversity) * epiphyteCountConfig; i++) {
                 if (rainfall >= (260f + 4f * rng.nextGaussian()) &&
@@ -201,10 +201,10 @@ public class GeneratorPlants implements IWorldGenerator {
               }
             }
           } else if (plant.getCategory().equals(HANGING)) {
-            if (plant == PlantTypes.GLOW_VINE ||
-                plant == PlantTypes.HANGING_VINE ||
-                plant == PlantTypes.JUNGLE_VINE ||
-                plant == PlantTypes.LIANA) {
+            if (plant == FloraTypes.GLOW_VINE ||
+                plant == FloraTypes.HANGING_VINE ||
+                plant == FloraTypes.JUNGLE_VINE ||
+                plant == FloraTypes.LIANA) {
               for (float i = rng.nextInt(
                 Math.round((hangingCount + floraDensity) / floraDiversity));
                    i < (3 + floraDensity + floraDiversity) * hangingCountConfig; i++) {
@@ -219,7 +219,7 @@ public class GeneratorPlants implements IWorldGenerator {
                   }
                 }
               }
-            } else if (plant == PlantTypes.BEARDED_MOSS &&
+            } else if (plant == FloraTypes.BEARDED_MOSS &&
                        (b == BiomesWorld.SWAMPLAND || b == BiomesWorld.LAKE || b == BiomesWorld.BAYOU
                         || b == BiomesWorld.MANGROVE ||
                         b == BiomesWorld.MARSH)) {
@@ -248,15 +248,15 @@ public class GeneratorPlants implements IWorldGenerator {
                 }
               }
             }
-            if (plant == PlantTypes.FOXGLOVE ||
-                plant == PlantTypes.ROSE ||
-                plant == PlantTypes.SAPPHIRE_TOWER ||
-                plant == PlantTypes.HYDRANGEA ||
-                plant == PlantTypes.LILAC ||
-                plant == PlantTypes.PEONY ||
-                plant == PlantTypes.SUNFLOWER ||
-                plant == PlantTypes.HIBISCUS ||
-                plant == PlantTypes.MARIGOLD) {
+            if (plant == FloraTypes.FOXGLOVE ||
+                plant == FloraTypes.ROSE ||
+                plant == FloraTypes.SAPPHIRE_TOWER ||
+                plant == FloraTypes.HYDRANGEA ||
+                plant == FloraTypes.LILAC ||
+                plant == FloraTypes.PEONY ||
+                plant == FloraTypes.SUNFLOWER ||
+                plant == FloraTypes.HIBISCUS ||
+                plant == FloraTypes.MARIGOLD) {
               for (float i = rng.nextInt(Math.round((tallCount + 2) / floraDiversity));
                    i < (2 + floraDensity + floraDiversity) * tallCountConfig; i++) {
                 if (floraDensity <= Math.abs(0.2f - (rng.nextGaussian() / 20))
@@ -285,45 +285,45 @@ public class GeneratorPlants implements IWorldGenerator {
                 }
               }
             }
-            if (plant == PlantTypes.ALLIUM ||
-                plant == PlantTypes.BLACK_ORCHID ||
-                plant == PlantTypes.BLOOD_LILY ||
-                plant == PlantTypes.BLUE_ORCHID ||
-                plant == PlantTypes.BUTTERFLY_MILKWEED ||
-                plant == PlantTypes.CALENDULA ||
-                plant == PlantTypes.CANNA ||
-                plant == PlantTypes.DANDELION ||
-                plant == PlantTypes.GOLDENROD ||
-                plant == PlantTypes.GRAPE_HYACINTH ||
-                plant == PlantTypes.HOUSTONIA ||
-                plant == PlantTypes.LABRADOR_TEA ||
-                plant == PlantTypes.MEADS_MILKWEED ||
-                plant == PlantTypes.NASTURTIUM ||
-                plant == PlantTypes.OXEYE_DAISY ||
-                plant == PlantTypes.POPPY ||
-                plant == PlantTypes.PRIMROSE ||
-                plant == PlantTypes.PULSATILLA ||
-                plant == PlantTypes.SACRED_DATURA ||
-                plant == PlantTypes.SNAPDRAGON_PINK ||
-                plant == PlantTypes.SNAPDRAGON_RED ||
-                plant == PlantTypes.SNAPDRAGON_WHITE ||
-                plant == PlantTypes.SNAPDRAGON_YELLOW ||
-                plant == PlantTypes.STRELITZIA ||
-                plant == PlantTypes.TRILLIUM ||
-                plant == PlantTypes.TROPICAL_MILKWEED ||
-                plant == PlantTypes.TULIP_ORANGE ||
-                plant == PlantTypes.TULIP_PINK ||
-                plant == PlantTypes.TULIP_RED ||
-                plant == PlantTypes.TULIP_WHITE ||
-                plant == PlantTypes.CHAMOMILE ||
-                plant == PlantTypes.LAVANDULA ||
-                plant == PlantTypes.LILY_OF_THE_VALLEY ||
-                plant == PlantTypes.ANTHURIUM ||
-                plant == PlantTypes.BLUE_GINGER ||
-                plant == PlantTypes.DESERT_FLAME ||
-                plant == PlantTypes.HELICONIA ||
-                plant == PlantTypes.KANGAROO_PAW ||
-                plant == PlantTypes.SILVER_SPURFLOWER) {
+            if (plant == FloraTypes.ALLIUM ||
+                plant == FloraTypes.BLACK_ORCHID ||
+                plant == FloraTypes.BLOOD_LILY ||
+                plant == FloraTypes.BLUE_ORCHID ||
+                plant == FloraTypes.BUTTERFLY_MILKWEED ||
+                plant == FloraTypes.CALENDULA ||
+                plant == FloraTypes.CANNA ||
+                plant == FloraTypes.DANDELION ||
+                plant == FloraTypes.GOLDENROD ||
+                plant == FloraTypes.GRAPE_HYACINTH ||
+                plant == FloraTypes.HOUSTONIA ||
+                plant == FloraTypes.LABRADOR_TEA ||
+                plant == FloraTypes.MEADS_MILKWEED ||
+                plant == FloraTypes.NASTURTIUM ||
+                plant == FloraTypes.OXEYE_DAISY ||
+                plant == FloraTypes.POPPY ||
+                plant == FloraTypes.PRIMROSE ||
+                plant == FloraTypes.PULSATILLA ||
+                plant == FloraTypes.SACRED_DATURA ||
+                plant == FloraTypes.SNAPDRAGON_PINK ||
+                plant == FloraTypes.SNAPDRAGON_RED ||
+                plant == FloraTypes.SNAPDRAGON_WHITE ||
+                plant == FloraTypes.SNAPDRAGON_YELLOW ||
+                plant == FloraTypes.STRELITZIA ||
+                plant == FloraTypes.TRILLIUM ||
+                plant == FloraTypes.TROPICAL_MILKWEED ||
+                plant == FloraTypes.TULIP_ORANGE ||
+                plant == FloraTypes.TULIP_PINK ||
+                plant == FloraTypes.TULIP_RED ||
+                plant == FloraTypes.TULIP_WHITE ||
+                plant == FloraTypes.CHAMOMILE ||
+                plant == FloraTypes.LAVANDULA ||
+                plant == FloraTypes.LILY_OF_THE_VALLEY ||
+                plant == FloraTypes.ANTHURIUM ||
+                plant == FloraTypes.BLUE_GINGER ||
+                plant == FloraTypes.DESERT_FLAME ||
+                plant == FloraTypes.HELICONIA ||
+                plant == FloraTypes.KANGAROO_PAW ||
+                plant == FloraTypes.SILVER_SPURFLOWER) {
               for (float i = rng.nextInt(Math.round(standardCount / floraDiversity));
                    i < (3 + floraDensity + floraDiversity) * standardCountConfig; i++) {
                 if (floraDensity <= Math.abs(0.2f - (rng.nextGaussian() / 20))
@@ -345,7 +345,7 @@ public class GeneratorPlants implements IWorldGenerator {
 
     if (TerrainGen.decorate(world, rng, forgeChunkPos,
                             DecorateBiomeEvent.Decorate.EventType.GRASS)) {
-      for (PlantType plant : PlantType.getTypes()) {
+      for (FloraType plant : FloraType.getTypes()) {
         if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
           plantGen.setGeneratedPlant(plant);
           if (plant.getCategory().equals(SHORT_GRASS)) {/*if (plant != PlantTypes.WILD_BARLEY ||
@@ -416,7 +416,7 @@ public class GeneratorPlants implements IWorldGenerator {
                                 }
                             }*/
           } else if (plant.getCategory().equals(TALL_GRASS)) {
-            if (plant != PlantTypes.SAWGRASS) {
+            if (plant != FloraTypes.SAWGRASS) {
               for (int i = rng.nextInt(Math.round((tallGrassCount + 8) / floraDiversity));
                    i < (3 + floraDensity) * tallGrassCountConfig; i++) {
                 if (rainfall >= (260f + 4f * rng.nextGaussian()) &&
@@ -443,7 +443,7 @@ public class GeneratorPlants implements IWorldGenerator {
                 }
               }
             }
-            if (plant == PlantTypes.SAWGRASS
+            if (plant == FloraTypes.SAWGRASS
                 && b == BiomesWorld.MARSH) {
               for (int k = rng.nextInt(Math.round(grassCount / floraDiversity));
                    k < (5 + floraDensity) * grassCountConfig; k++) {
@@ -456,7 +456,7 @@ public class GeneratorPlants implements IWorldGenerator {
                 }
               }
             }
-            if (plant == PlantTypes.SAWGRASS &&
+            if (plant == FloraTypes.SAWGRASS &&
                 (b == BiomesWorld.BAYOU || b == BiomesWorld.MANGROVE)) {
               for (int k = rng.nextInt(Math.round(grassCount / floraDiversity));
                    k < (3 + floraDensity) * tallGrassCountConfig; k++) {
@@ -469,7 +469,7 @@ public class GeneratorPlants implements IWorldGenerator {
                 }
               }
             }
-            if (plant == PlantTypes.PAMPAS_GRASS &&
+            if (plant == FloraTypes.PAMPAS_GRASS &&
                 (b == BiomesWorld.BAYOU || b == BiomesWorld.MANGROVE || b == BiomesWorld.MARSH)) {
               for (int k = rng.nextInt(Math.round(grassCount / floraDiversity));
                    k < (2 + floraDensity) * tallGrassCountConfig; k++) {

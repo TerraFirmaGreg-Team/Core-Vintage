@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.library.types.variant.block.IVariantBlock;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlant;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 
 import net.minecraft.block.state.IBlockState;

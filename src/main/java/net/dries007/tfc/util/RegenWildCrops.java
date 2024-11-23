@@ -1,7 +1,7 @@
 package net.dries007.tfc.util;
 
 import su.terrafirmagreg.api.helper.BlockHelper;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantShortGrass;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorWildCrops;
 
 import net.minecraft.block.Block;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.util;
 
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantShortGrass;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;

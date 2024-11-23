@@ -3,10 +3,11 @@ package su.terrafirmagreg.modules.soil.api.spi;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-import su.terrafirmagreg.modules.plant.api.types.category.PlantCategories;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
-import su.terrafirmagreg.modules.plant.init.BlocksPlant;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.flora.api.types.category.FloraCategories;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraType;
+import su.terrafirmagreg.modules.flora.init.BlocksFlora;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantShortGrass;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeat;
@@ -16,8 +17,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -142,10 +141,10 @@ public interface IGrass {
         }
       }
       // Генерируем короткую траву на верхнем блоке с определенной вероятностью
-      for (PlantType plant : PlantType.getTypes()) {
-        if (plant.getCategory() == PlantCategories.SHORT_GRASS && rand.nextFloat() < 0.5f) {
+      for (FloraType plant : FloraType.getTypes()) {
+        if (plant.getCategory() == FloraCategories.SHORT_GRASS && rand.nextFloat() < 0.5f) {
           float temp = Climate.getActualTemp(world, upPos);
-          var plantBlock = (BlockPlantShortGrass) BlocksPlant.PLANT.get(plant);
+          var plantBlock = (BlockPlantShortGrass) BlocksFlora.PLANT.get(plant);
 
           if (world.isAirBlock(upPos) &&
               plant.isValidLocation(temp, ProviderChunkData.getRainfall(world, upPos),

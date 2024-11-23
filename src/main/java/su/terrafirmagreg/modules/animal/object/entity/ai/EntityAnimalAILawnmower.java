@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.object.entity.ai;
 
-import su.terrafirmagreg.modules.plant.object.block.BlockPlantShortGrass;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantShortGrass;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;

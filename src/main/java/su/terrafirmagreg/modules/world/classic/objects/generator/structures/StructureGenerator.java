@@ -7,8 +7,8 @@ import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
-import su.terrafirmagreg.modules.plant.api.types.type.PlantType;
-import su.terrafirmagreg.modules.plant.init.BlocksPlant;
+import su.terrafirmagreg.modules.flora.api.types.type.FloraType;
+import su.terrafirmagreg.modules.flora.init.BlocksFlora;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
@@ -252,9 +252,9 @@ public class StructureGenerator extends WorldGenerator {
         for (int x = 0; x < template.getSize().getX(); x++) {
           for (int z = 0; z < template.getSize().getZ(); z++) {
             for (int y = 0; y < searchRange; y++) {
-              for (PlantType plant : PlantType.getTypes()) {
+              for (FloraType plant : FloraType.getTypes()) {
                 if (world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock() == Blocks.AIR ||
-                    world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock() == BlocksPlant.PLANT.get(plant)) {
+                    world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock() == BlocksFlora.PLANT.get(plant)) {
                   final IBlockState current = world.getBlockState(position);
 
                   if (Variant.isVariant(current, SAND)) {

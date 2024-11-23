@@ -4,7 +4,7 @@ import su.terrafirmagreg.modules.core.capabilities.damage.ICapabilityDamageResis
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.modules.plant.object.block.BlockPlant;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlant;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,9 +16,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IArmorMaterialTFC;
+import net.dries007.tfcthings.main.ConfigTFCThings;
 
 import org.jetbrains.annotations.NotNull;
 

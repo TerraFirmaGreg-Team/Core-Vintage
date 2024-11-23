@@ -11,10 +11,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 
+import net.dries007.caffeineaddon.init.ModItems;
 import net.dries007.eerussianguy.firmalife.init.FoodFL;
 import net.dries007.eerussianguy.firmalife.init.Fruit;
 import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
-import net.dries007.tfcthings.init.TFCThingsItems;
 import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
@@ -26,7 +26,7 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.util.agriculture.Food;
-import net.dries007.caffeineaddon.init.ModItems;
+import net.dries007.tfcthings.init.TFCThingsItems;
 
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.ALLIUM;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.ANTHURIUM;
@@ -42,6 +42,7 @@ import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BELL_TRE
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BIG_LEAF_PALM;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BLACK_ORCHID;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BLUEGRASS;
+import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BLUESHROOM;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BLUE_GINGER;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BLUE_ORCHID;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.BLUE_SKYFLOWER;
@@ -80,6 +81,7 @@ import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GIANT_CA
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GIANT_ELEPHANT_EAR;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GIANT_FEATHER_GRASS;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GIANT_KELP;
+import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GLOWSHROOM;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GLOW_VINE;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GOLDENROD;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.GOOSEGRASS;
@@ -116,6 +118,7 @@ import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LILY_OF_
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.LIPSTICK_PALM;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MADAGASCAR_OCOTILLO;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MADEIRA_VINE;
+import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MAGMA_SHROOM;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MALAGASY_TREE_ALOE;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MANATEE_GRASS;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.MARIGOLD;
@@ -135,6 +138,7 @@ import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PEONY;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PEROVSKIA;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PHRAGMITE;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PICKERELWEED;
+import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.POISON_SHROOM;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PONDWEED;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.POPPY;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.PORCINI;
@@ -170,6 +174,7 @@ import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.STAR_GRA
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.STRELITZIA;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SUGAR_CANE;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SULPHUR_SHELF;
+import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SULPHUR_SHROOM;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SUMMER_ASPHODEL;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SUNFLOWER;
 import static su.terrafirmagreg.modules.plant.api.types.type.PlantTypes.SWEDISH_IVY;
@@ -744,14 +749,14 @@ public final class RecipesDevice {
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
     manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(IVY)),
                       new ItemStack(Items.DYE, 2, EnumDyeColor.GREEN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksTFCF.BLUESHROOM),
+    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(BLUESHROOM)),
                       new ItemStack(Items.DYE, 1, EnumDyeColor.CYAN.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksTFCF.GLOWSHROOM),
+    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(GLOWSHROOM)),
                       new ItemStack(Items.GLOWSTONE_DUST, 1));
-    manager.addRecipe(IIngredient.of(BlocksTFCF.MAGMA_SHROOM), new ItemStack(Items.MAGMA_CREAM, 1));
-    manager.addRecipe(IIngredient.of(BlocksTFCF.POISON_SHROOM),
+    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(MAGMA_SHROOM)), new ItemStack(Items.MAGMA_CREAM, 1));
+    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(POISON_SHROOM)),
                       new ItemStack(Items.DYE, 1, EnumDyeColor.MAGENTA.getDyeDamage()));
-    manager.addRecipe(IIngredient.of(BlocksTFCF.SULPHUR_SHROOM),
+    manager.addRecipe(IIngredient.of(BlocksPlant.PLANT.get(SULPHUR_SHROOM)),
                       new ItemStack(ItemPowder.get(Powder.SULFUR), 1));
     manager.addRecipe(IIngredient.of(BlocksTFCF.LIGHTSTONE),
                       new ItemStack(Items.GLOWSTONE_DUST, 2));

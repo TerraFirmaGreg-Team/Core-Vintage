@@ -1813,16 +1813,60 @@ public final class PlantTypeHandler {
       .addOreDict("mushroom_woolly_gomphus")
       .build();
 
-//    PlantTypes.GLOWSHROOM = PlantType
-//      .builder("glowshroom")
-//      .category(PlantCategories.MUSHROOM)
-//      .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
-//      .growthTemp(-11f, 48f)
-//      .temp(-13f, 50f)
-//      .rain(250f, 500f)
-//      .sun(0, 5)
-//      .movementMod(0.8D)
-//      .build();
+    PlantTypes.GLOWSHROOM = PlantType
+      .builder("glowshroom")
+      .category(PlantCategories.MUSHROOM)
+      .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
+      .growthTemp(-11f, 48f)
+      .temp(-13f, 50f)
+      .rain(250f, 500f)
+      .sun(0, 5)
+      .movementMod(0.8D)
+      .build();
+
+    PlantTypes.BLUESHROOM = PlantType
+      .builder("blueshroom")
+      .category(PlantCategories.MUSHROOM)
+      .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
+      .growthTemp(-11f, 48f)
+      .temp(-13f, 50f)
+      .rain(250f, 500f)
+      .sun(0, 5)
+      .movementMod(0.8D)
+      .build();
+
+    PlantTypes.MAGMA_SHROOM = PlantType
+      .builder("magma_shroom")
+      .category(PlantCategories.MUSHROOM)
+      .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
+      .growthTemp(-11f, 48f)
+      .temp(-13f, 50f)
+      .rain(250f, 500f)
+      .sun(0, 5)
+      .movementMod(0.8D)
+      .build();
+
+    PlantTypes.POISON_SHROOM = PlantType
+      .builder("poison_shroom")
+      .category(PlantCategories.MUSHROOM)
+      .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
+      .growthTemp(-11f, 48f)
+      .temp(-13f, 50f)
+      .rain(250f, 500f)
+      .sun(0, 5)
+      .movementMod(0.8D)
+      .build();
+
+    PlantTypes.SULPHUR_SHROOM = PlantType
+      .builder("sulphur_shroom")
+      .category(PlantCategories.MUSHROOM)
+      .stages(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
+      .growthTemp(-11f, 48f)
+      .temp(-13f, 50f)
+      .rain(250f, 500f)
+      .sun(0, 5)
+      .movementMod(0.8D)
+      .build();
 
     PlantTypes.BELL_TREE_DAHLIA = PlantType
       .builder("bell_tree_dahlia")

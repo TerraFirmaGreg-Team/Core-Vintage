@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "0": "tfg:blocks/flora/plant/pampas_grass/pampas_0",
-    "particle": "tfg:blocks/flora/plant/pampas_grass/pampas_0"
+    "0": "tfg:blocks/flora/plant/pampas_grass/0",
+    "particle": "tfg:blocks/flora/plant/pampas_grass/0"
   },
   "elements": [
     {

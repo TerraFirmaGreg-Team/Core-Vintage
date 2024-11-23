@@ -159,6 +159,10 @@ public final class PlantTypes {
   public static PlantType WOOD_BLEWIT;
   public static PlantType WOOLLY_GOMPHUS;
   public static PlantType GLOWSHROOM;
+  public static PlantType BLUESHROOM;
+  public static PlantType MAGMA_SHROOM;
+  public static PlantType POISON_SHROOM;
+  public static PlantType SULPHUR_SHROOM;
   public static PlantType BELL_TREE_DAHLIA;
   public static PlantType BIG_LEAF_PALM;
   public static PlantType DRAKENSBERG_CYCAD;

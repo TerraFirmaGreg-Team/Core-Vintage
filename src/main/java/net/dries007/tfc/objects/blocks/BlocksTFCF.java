@@ -13,7 +13,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
@@ -33,7 +32,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
-import net.dries007.tfc.objects.blocks.groundcover.BlockCaveMushroom;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
 import net.dries007.tfc.objects.blocks.groundcover.BlockDriftwood;
@@ -60,7 +58,6 @@ import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCeylonCinnamonSapling;
 import net.dries007.tfc.objects.fluids.FluidsTFCF;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.objects.items.food.ItemBlockRot;
-import net.dries007.tfc.objects.items.food.PotionEffectToHave;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTallGrassWater;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockUrn;
@@ -70,7 +67,6 @@ import net.dries007.tfc.types.TreesTFCF;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.BerryBushTFCF;
 import net.dries007.tfc.util.agriculture.CropTFCF;
-import net.dries007.tfc.util.agriculture.FoodDataTFCF;
 import net.dries007.tfc.util.agriculture.SeasonalTrees;
 import net.dries007.tfcflorae.ConfigTFCF;
 
@@ -235,21 +231,8 @@ public final class BlocksTFCF {
   @GameRegistry.ObjectHolder("coral/block/tube/dead")
   public static final BlockCoralBlock TUBE_CORAL_BLOCK_DEAD = getNull();
 
-  @GameRegistry.ObjectHolder("plants/blueshroom")
-  public static final BlockCaveMushroom BLUESHROOM = getNull();
-  @GameRegistry.ObjectHolder("plants/glowshroom")
-  public static final BlockCaveMushroom GLOWSHROOM = getNull();
-  @GameRegistry.ObjectHolder("plants/magma_shroom")
-  public static final BlockCaveMushroom MAGMA_SHROOM = getNull();
-  @GameRegistry.ObjectHolder("plants/poison_shroom")
-  public static final BlockCaveMushroom POISON_SHROOM = getNull();
-  @GameRegistry.ObjectHolder("plants/sulphur_shroom")
-  public static final BlockCaveMushroom SULPHUR_SHROOM = getNull();
-
   @GameRegistry.ObjectHolder("groundcover/lightstone")
   public static final BlockLightstone LIGHTSTONE = getNull();
-  @Getter
-  private static final ImmutableList<BlockCaveMushroom> allMushroomPlantBlocks = Helpers.getNull();
   @Getter
   private static final ImmutableList<BlockJoshuaTreeFlower> allJoshuaTreeFlowerBlocks = Helpers.getNull();
   //private static ImmutableList<MultiBlockBase> allMultiBlocks = Helpers.getNull();
@@ -521,21 +504,21 @@ public final class BlocksTFCF {
       BlockCoralBlock.TUBE_CORAL_BLOCK.put(dyeColor, tube);
     }
 
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/blueshroom",
-                                                   new BlockCaveMushroom(0.3F, FoodDataTFCF.RAW_BLUESHROOM, new PotionEffectToHave(MobEffects.HUNGER, 610, 1, 4),
-                                                                         new PotionEffectToHave(MobEffects.HASTE, 610, 1, 4), "blueshroom", "mushroom", "category_vegetable"), CT_FLORA)));
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/glowshroom",
-                                                   new BlockCaveMushroom(0.5F, FoodDataTFCF.RAW_GLOWSHROOM, new PotionEffectToHave(MobEffects.HUNGER, 610, 1, 4),
-                                                                         new PotionEffectToHave(MobEffects.GLOWING, 610, 1, 4), "glowshroom", "mushroom", "category_vegetable"), CT_FLORA)));
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/magma_shroom",
-                                                   new BlockCaveMushroom(0.2F, FoodDataTFCF.RAW_MAGMA_SHROOM, new PotionEffectToHave(MobEffects.HUNGER, 610, 1, 4),
-                                                                         new PotionEffectToHave(MobEffects.FIRE_RESISTANCE, 610, 1, 4), "magma_shroom", "mushroom", "category_vegetable"), CT_FLORA)));
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/poison_shroom",
-                                                   new BlockCaveMushroom(0.1F, FoodDataTFCF.RAW_POISON_SHROOM, new PotionEffectToHave(MobEffects.POISON, 610, 1, 4),
-                                                                         new PotionEffectToHave(MobEffects.ABSORPTION, 610, 1, 4), "poison_shroom", "mushroom", "category_vegetable"), CT_FLORA)));
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/sulphur_shroom",
-                                                   new BlockCaveMushroom(0.1F, FoodDataTFCF.RAW_SULPHUR_SHROOM, new PotionEffectToHave(MobEffects.MINING_FATIGUE, 610, 1, 4),
-                                                                         new PotionEffectToHave(MobEffects.LUCK, 610, 1, 4), "sulphur_shroom", "mushroom", "category_vegetable"), CT_FLORA)));
+//    normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/blueshroom",
+//                                                   new BlockCaveMushroom(0.3F, FoodDataTFCF.RAW_BLUESHROOM, new PotionEffectToHave(MobEffects.HUNGER, 610, 1, 4),
+//                                                                         new PotionEffectToHave(MobEffects.HASTE, 610, 1, 4), "blueshroom", "mushroom", "category_vegetable"), CT_FLORA)));
+//    normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/glowshroom",
+//                                                   new BlockCaveMushroom(0.5F, FoodDataTFCF.RAW_GLOWSHROOM, new PotionEffectToHave(MobEffects.HUNGER, 610, 1, 4),
+//                                                                         new PotionEffectToHave(MobEffects.GLOWING, 610, 1, 4), "glowshroom", "mushroom", "category_vegetable"), CT_FLORA)));
+//    normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/magma_shroom",
+//                                                   new BlockCaveMushroom(0.2F, FoodDataTFCF.RAW_MAGMA_SHROOM, new PotionEffectToHave(MobEffects.HUNGER, 610, 1, 4),
+//                                                                         new PotionEffectToHave(MobEffects.FIRE_RESISTANCE, 610, 1, 4), "magma_shroom", "mushroom", "category_vegetable"), CT_FLORA)));
+//    normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/poison_shroom",
+//                                                   new BlockCaveMushroom(0.1F, FoodDataTFCF.RAW_POISON_SHROOM, new PotionEffectToHave(MobEffects.POISON, 610, 1, 4),
+//                                                                         new PotionEffectToHave(MobEffects.ABSORPTION, 610, 1, 4), "poison_shroom", "mushroom", "category_vegetable"), CT_FLORA)));
+//    normalItemBlocks.add(new ItemBlockTFC(register(r, "plants/sulphur_shroom",
+//                                                   new BlockCaveMushroom(0.1F, FoodDataTFCF.RAW_SULPHUR_SHROOM, new PotionEffectToHave(MobEffects.MINING_FATIGUE, 610, 1, 4),
+//                                                                         new PotionEffectToHave(MobEffects.LUCK, 610, 1, 4), "sulphur_shroom", "mushroom", "category_vegetable"), CT_FLORA)));
 
     {
       Builder<BlockPlantHangingTall> plantHangingBlock = ImmutableList.builder();

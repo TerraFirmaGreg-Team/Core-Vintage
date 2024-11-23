@@ -1,0 +1,176 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "down": "true"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/blueshroom/0"
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/1"
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/2"
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/3"
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/4"
+        }
+      ]
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/blueshroom/0",
+          "x": 180
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/1",
+          "x": 180
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/2",
+          "x": 180
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/3",
+          "x": 180
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/4",
+          "x": 180
+        }
+      ]
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/blueshroom/0",
+          "x": 270,
+          "y": 90
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/1",
+          "x": 270,
+          "y": 90
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/2",
+          "x": 270,
+          "y": 90
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/3",
+          "x": 270,
+          "y": 90
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/4",
+          "x": 270,
+          "y": 90
+        }
+      ]
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/blueshroom/0",
+          "x": 270,
+          "y": 180
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/1",
+          "x": 270,
+          "y": 180
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/2",
+          "x": 270,
+          "y": 180
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/3",
+          "x": 270,
+          "y": 180
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/4",
+          "x": 270,
+          "y": 180
+        }
+      ]
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/blueshroom/0",
+          "x": 270,
+          "y": 270
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/1",
+          "x": 270,
+          "y": 270
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/2",
+          "x": 270,
+          "y": 270
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/3",
+          "x": 270,
+          "y": 270
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/4",
+          "x": 270,
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/blueshroom/0",
+          "x": 270
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/1",
+          "x": 270
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/2",
+          "x": 270
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/3",
+          "x": 270
+        },
+        {
+          "model": "tfg:flora/plant/blueshroom/4",
+          "x": 270
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "tfg:block/cross",
+  "textures": {
+    "cross": "tfg:blocks/flora/plant/blueshroom/2"
+  }
+}

@@ -24,7 +24,7 @@ public final class ModuleFlora extends ModuleBase {
   public static RegistryManager REGISTRY;
 
   public ModuleFlora() {
-    TAB = BaseItemGroup.of("flora", "plant/crop/seed/rice");
+    TAB = BaseItemGroup.of("flora", "plant/peony");
     REGISTRY = enableAutoRegistry(TAB);
   }
 

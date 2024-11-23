@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.flora.api.types.type.FloraType;
 import su.terrafirmagreg.modules.flora.api.types.variant.block.FloraBlockVariant;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -58,12 +57,6 @@ public class BlockPlantTall extends BlockPlant implements IGrowable, ITallPlant 
   }
 
   @Override
-  @NotNull
-  public Block.EnumOffsetType getOffsetType() {
-    return EnumOffsetType.XYZ;
-  }
-
-  @Override
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
   }
@@ -78,7 +71,8 @@ public class BlockPlantTall extends BlockPlant implements IGrowable, ITallPlant 
         type.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       age = state.getValue(AGE_4);
 
-      if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
+      if (rand.nextDouble() < getGrowthRate(worldIn, pos) &&
+          ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
         if (age == 3 && canGrow(worldIn, pos, state, worldIn.isRemote)) {
           grow(worldIn, rand, pos, state);
         } else if (age < 3) {
@@ -87,7 +81,8 @@ public class BlockPlantTall extends BlockPlant implements IGrowable, ITallPlant 
         }
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) || !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+    } else if (!type.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
+               !type.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       age = state.getValue(AGE_4);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -106,6 +101,7 @@ public class BlockPlantTall extends BlockPlant implements IGrowable, ITallPlant 
 
   @Override
   public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+    IBlockState water = type.getWaterType();
     int i;
     //noinspection StatementWithEmptyBody
     for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i)

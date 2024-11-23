@@ -40,6 +40,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
 
+import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.ItemsTFCF;
@@ -78,7 +79,7 @@ import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DRY_GRASS;
 
 @Getter
-public class BlockPlant extends BaseBlockBush implements IFloraBlock {
+public class BlockPlant extends BaseBlockBush implements IFloraBlock, IFluidloggable {
 
   private static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 1.0, 0.875);
 

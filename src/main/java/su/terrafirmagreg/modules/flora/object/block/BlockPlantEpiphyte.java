@@ -51,8 +51,7 @@ public class BlockPlantEpiphyte extends BlockPlant {
       BlockPos blockpos = pos.offset(facing.getOpposite());
       boolean flag = false;
 
-      if (axis.isHorizontal() && worldIn.getBlockState(blockpos)
-                                        .getBlockFaceShape(worldIn, blockpos, facing) != BlockFaceShape.SOLID) {
+      if (axis.isHorizontal() && worldIn.getBlockState(blockpos).getBlockFaceShape(worldIn, blockpos, facing) != BlockFaceShape.SOLID) {
         flag = true;
       } else if (axis.isVertical() && !this.canPlaceOn(worldIn, blockpos)) {
         flag = true;

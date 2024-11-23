@@ -26,11 +26,11 @@ public class BlockPlantEmergentTallWater extends BlockPlantTallWater {
     for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i) {}
 
     if (water == SALT_WATER) {
-      return i < type.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlockHelper.isSaltWater(worldIn.getBlockState(pos.up()))) &&
-             canBlockStay(worldIn, pos.up(), state);
+      return i < type.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlockHelper.isSaltWater(worldIn.getBlockState(pos.up())))
+             && canBlockStay(worldIn, pos.up(), state);
     } else {
-      return i < type.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlockHelper.isFreshWater(worldIn.getBlockState(pos.up()))) &&
-             canBlockStay(worldIn, pos.up(), state);
+      return i < type.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlockHelper.isFreshWater(worldIn.getBlockState(pos.up())))
+             && canBlockStay(worldIn, pos.up(), state);
     }
   }
 

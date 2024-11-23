@@ -275,9 +275,6 @@ public final class ClientRegisterEvents {
 
     blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllFruitTreeLeavesBlocks()
                                                                  .toArray(new Block[0]));
-
-    blockColors.registerBlockColorHandler(foliageColor,
-                                          BlocksTFC.getAllFlowerPots().toArray(new Block[0]));
   }
 
   @SubscribeEvent

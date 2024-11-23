@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.flora.init;
 
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.flora.api.types.variant.block.FloraBlockVariant;
+import su.terrafirmagreg.modules.flora.object.block.BlockPlantFlowerPot;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -18,10 +19,10 @@ public final class BlocksFlora {
       .factory((variant, type) -> type.getCategory().create(variant, type))
       .build();
 
-//    FLOWER_POT = PlantBlockVariant
-//      .builder("flower_pot")
-//      .factory(BlockPlantFlowerPot::new)
-//      .build();
+    FLOWER_POT = FloraBlockVariant
+      .builder("flower_pot")
+      .factory(BlockPlantFlowerPot::new)
+      .build();
   }
 
   @SideOnly(Side.CLIENT)

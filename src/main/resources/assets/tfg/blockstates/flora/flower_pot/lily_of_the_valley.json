@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/lily_of_the_valley/3"
+      "plant": "tfg:items/flora/plant/lily_of_the_valley"
     }
   },
   "variants": {

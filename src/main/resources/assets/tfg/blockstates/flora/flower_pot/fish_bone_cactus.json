@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/fish_bone_cactus/1"
+      "plant": "tfg:items/flora/plant/fish_bone_cactus"
     }
   },
   "variants": {

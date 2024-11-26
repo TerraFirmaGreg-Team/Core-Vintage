@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/undergrowth_tropical/undergrowth_tropical"
+      "plant": "tfg:items/flora/plant/undergrowth_tropical/undergrowth_tropical"
     }
   },
   "variants": {

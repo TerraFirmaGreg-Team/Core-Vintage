@@ -276,34 +276,28 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
     for (int i = 1; i < RNG.nextInt(4); i++) {
       switch (RNG.nextInt(4)) {
         case 1:
-          TFCParticles.LEAF1.sendToAllNear(world, x + RNG.nextFloat() /
-                                                      particleScale, y - RNG.nextFloat() /
-                                                                         particleScale, z + RNG.nextFloat() /
-                                                                                            particleScale, (RNG.nextFloat() - 0.5) /
-                                                                                                           particleScale, -0.15D + RNG.nextFloat() /
-                                                                                                                                   particleScale,
-                                           (RNG.nextFloat() - 0.5) /
-                                           particleScale, 90);
+          TFCParticles.LEAF1.sendToAllNear(world, x + RNG.nextFloat() / particleScale,
+                                           y - RNG.nextFloat() / particleScale,
+                                           z + RNG.nextFloat() / particleScale,
+                                           (RNG.nextFloat() - 0.5) / particleScale,
+                                           -0.15D + RNG.nextFloat() / particleScale,
+                                           (RNG.nextFloat() - 0.5) / particleScale, 90);
           break;
         case 2:
-          TFCParticles.LEAF2.sendToAllNear(world, x + RNG.nextFloat() /
-                                                      particleScale, y - RNG.nextFloat() /
-                                                                         particleScale, z + RNG.nextFloat() /
-                                                                                            particleScale, (RNG.nextFloat() - 0.5) /
-                                                                                                           particleScale, -0.15D + RNG.nextFloat() /
-                                                                                                                                   particleScale,
-                                           (RNG.nextFloat() - 0.5) /
-                                           particleScale, 70);
+          TFCParticles.LEAF2.sendToAllNear(world, x + RNG.nextFloat() / particleScale,
+                                           y - RNG.nextFloat() / particleScale,
+                                           z + RNG.nextFloat() / particleScale,
+                                           (RNG.nextFloat() - 0.5) / particleScale,
+                                           -0.15D + RNG.nextFloat() / particleScale,
+                                           (RNG.nextFloat() - 0.5) / particleScale, 70);
           break;
         case 3:
-          TFCParticles.LEAF3.sendToAllNear(world, x + RNG.nextFloat() /
-                                                      particleScale, y - RNG.nextFloat() /
-                                                                         particleScale, z + RNG.nextFloat() /
-                                                                                            particleScale, (RNG.nextFloat() - 0.5) /
-                                                                                                           particleScale, -0.15D + RNG.nextFloat() /
-                                                                                                                                   particleScale,
-                                           (RNG.nextFloat() - 0.5) /
-                                           particleScale, 80);
+          TFCParticles.LEAF3.sendToAllNear(world, x + RNG.nextFloat() / particleScale,
+                                           y - RNG.nextFloat() / particleScale,
+                                           z + RNG.nextFloat() / particleScale,
+                                           (RNG.nextFloat() - 0.5) / particleScale,
+                                           -0.15D + RNG.nextFloat() / particleScale,
+                                           (RNG.nextFloat() - 0.5) / particleScale, 80);
           break;
       }
     }
@@ -385,13 +379,11 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
   @SuppressWarnings("deprecation")
   @SideOnly(Side.CLIENT)
   @Override
-  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess,
-                                      BlockPos pos,
-                                      EnumFacing side) {
+  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
     /*
      * See comment on getRenderLayer()
      */
-    leavesFancy = GameUtils.getGameSettings().fancyGraphics;
+    this.leavesFancy = GameUtils.getGameSettings().fancyGraphics;
     return true;// super.shouldSideBeRendered(blockState, blockAccess, pos, side);
   }
 

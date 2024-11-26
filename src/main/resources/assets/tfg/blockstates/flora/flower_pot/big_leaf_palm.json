@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/big_leaf_palm/placeholder"
+      "plant": "tfg:items/flora/plant/big_leaf_palm"
     }
   },
   "variants": {

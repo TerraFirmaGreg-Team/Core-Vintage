@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/bromelia_laciniosa/0"
+      "plant": "tfg:items/flora/plant/bromelia_laciniosa"
     }
   },
   "variants": {

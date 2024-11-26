@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/black_powderpuff/0"
+      "plant": "tfg:items/flora/plant/black_powderpuff"
     }
   },
   "variants": {

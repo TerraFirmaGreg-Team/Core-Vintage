@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/lipstick_palm/small_frond_0a"
+      "plant": "tfg:items/flora/plant/lipstick_palm"
     }
   },
   "variants": {

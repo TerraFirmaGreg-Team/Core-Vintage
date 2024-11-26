@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/apache_dwarf/1"
+      "plant": "tfg:items/flora/plant/apache_dwarf"
     }
   },
   "variants": {

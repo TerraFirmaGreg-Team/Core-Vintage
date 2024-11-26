@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/desert_flame/0"
+      "plant": "tfg:items/flora/plant/desert_flame"
     }
   },
   "variants": {

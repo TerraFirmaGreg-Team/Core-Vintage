@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/grape_hyacinth/1"
+      "plant": "tfg:items/flora/plant/grape_hyacinth"
     }
   },
   "variants": {

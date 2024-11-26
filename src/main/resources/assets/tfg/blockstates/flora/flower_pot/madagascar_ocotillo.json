@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/madagascar_ocotillo/placeholder"
+      "plant": "tfg:items/flora/plant/madagascar_ocotillo"
     }
   },
   "variants": {

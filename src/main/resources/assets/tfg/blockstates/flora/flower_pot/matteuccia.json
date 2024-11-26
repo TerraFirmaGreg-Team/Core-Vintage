@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/matteuccia/placeholder"
+      "plant": "tfg:items/flora/plant/matteuccia"
     }
   },
   "variants": {

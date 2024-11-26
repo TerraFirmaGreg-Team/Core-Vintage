@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/climbing_cactus/0"
+      "plant": "tfg:items/flora/plant/climbing_cactus"
     }
   },
   "variants": {

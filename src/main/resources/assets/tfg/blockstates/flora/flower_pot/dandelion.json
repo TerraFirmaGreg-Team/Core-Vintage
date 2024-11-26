@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/dandelion/2"
+      "plant": "tfg:items/flora/plant/dandelion"
     }
   },
   "variants": {

@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/thyme/herb_Thyme2"
+      "plant": "tfg:items/flora/plant/thyme/herb_Thyme2"
     }
   },
   "variants": {

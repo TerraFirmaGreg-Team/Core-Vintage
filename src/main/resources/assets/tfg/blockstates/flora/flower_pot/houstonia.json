@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfg:flora/flower_pot/cross",
     "textures": {
-      "plant": "tfg:blocks/flora/plant/houstonia/1"
+      "plant": "tfg:items/flora/plant/houstonia"
     }
   },
   "variants": {

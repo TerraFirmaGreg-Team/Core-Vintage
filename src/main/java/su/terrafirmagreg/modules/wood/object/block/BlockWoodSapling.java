@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.base.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -32,7 +33,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.util.IGrowingPlant;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -145,7 +145,7 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 
   @Override
   public void grow(World world, Random random, BlockPos blockPos, IBlockState blockState) {
-    // this.type.makeTree(world, blockPos, random, false);
+    this.type.makeTree(world, blockPos, random, false);
   }
 
   @Override

@@ -157,10 +157,10 @@ public class BlocksFL {
 
     for (FruitTreeFL fruitTree : FruitTreeFL.values()) {
       String name = fruitTree.getName().toLowerCase();
-      register(r, name + "_branch", new BlockFruitTreeBranch(fruitTree));
+      normalIBs.add(register(r, name + "_branch", new BlockFruitTreeBranch(fruitTree)));
       fruitLeaves.add(register(r, name + "_leaves", new BlockFruitTreeLeaves(fruitTree), CT_WOOD));
       fruitSaps.add(register(r, name + "_sapling", new BlockFruitTreeSapling(fruitTree), CT_WOOD));
-      register(r, name + "_trunk", new BlockFruitTreeTrunk(fruitTree));
+      normalIBs.add(register(r, name + "_trunk", new BlockFruitTreeTrunk(fruitTree)));
       doFruitAdditions(r, name, bonsais, Optional.of(fruitTree));
     }
     doFruitAdditions(r, "cinnamon", bonsais, Optional.empty());

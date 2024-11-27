@@ -32,7 +32,6 @@ import net.dries007.eerussianguy.firmalife.FirmaLife;
 import net.dries007.eerussianguy.firmalife.init.FoodFL;
 import net.dries007.eerussianguy.firmalife.recipe.CrackingRecipe;
 import net.dries007.eerussianguy.firmalife.recipe.DryingRecipe;
-import net.dries007.eerussianguy.firmalife.recipe.NutRecipe;
 import net.dries007.eerussianguy.firmalife.recipe.OvenRecipe;
 import net.dries007.eerussianguy.firmalife.recipe.PlanterRecipe;
 import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
@@ -46,12 +45,8 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
-import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFCF;
-import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
@@ -62,7 +57,6 @@ import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.recipes.ShapelessDamageRecipe;
 import net.dries007.tfc.util.agriculture.CropTFCF;
-import net.dries007.tfc.util.agriculture.SeasonalTrees;
 import net.dries007.tfcflorae.TFCFlorae;
 
 import java.util.ArrayList;
@@ -1074,118 +1068,6 @@ public final class RecipesTFCF {
           }
         }
       }
-    }
-  }
-
-  @SubscribeEvent
-  @SuppressWarnings("ConstantConditions")
-  public static void onRegisterNutTreeEvent(RegistryEvent.Register<NutRecipe> event) {
-    if (TFCFlorae.FirmaLifeAdded) {
-      IForgeRegistry<NutRecipe> r = event.getRegistry();
-
-      Tree chestnut = TFCRegistries.TREES.getValue(DefaultTrees.CHESTNUT);
-      Tree oak = TFCRegistries.TREES.getValue(DefaultTrees.OAK);
-      Tree hickory = TFCRegistries.TREES.getValue(DefaultTrees.HICKORY);
-      Tree beech = TFCRegistries.TREES.getValue(TreesTFCF.BEECH);
-      Tree black_walnut = TFCRegistries.TREES.getValue(TreesTFCF.BLACK_WALNUT);
-      Tree butternut = TFCRegistries.TREES.getValue(TreesTFCF.BUTTERNUT);
-      Tree european_oak = TFCRegistries.TREES.getValue(TreesTFCF.EUROPEAN_OAK);
-      Tree ginkgo = TFCRegistries.TREES.getValue(TreesTFCF.GINKGO);
-      Tree hazel = TFCRegistries.TREES.getValue(TreesTFCF.HAZEL);
-      Tree hemlock = TFCRegistries.TREES.getValue(TreesTFCF.HEMLOCK);
-      Tree ironwood = TFCRegistries.TREES.getValue(TreesTFCF.IRONWOOD);
-      Tree kauri = TFCRegistries.TREES.getValue(TreesTFCF.KAURI);
-      Tree larch = TFCRegistries.TREES.getValue(TreesTFCF.LARCH);
-      Tree nordmann_fir = TFCRegistries.TREES.getValue(TreesTFCF.NORDMANN_FIR);
-      Tree norway_spruce = TFCRegistries.TREES.getValue(TreesTFCF.NORWAY_SPRUCE);
-      Tree redwood = TFCRegistries.TREES.getValue(TreesTFCF.REDWOOD);
-      Tree walnut = TFCRegistries.TREES.getValue(TreesTFCF.WALNUT);
-
-      r.registerAll(
-
-        new NutRecipe(BlockLogTFC.get(european_oak), BlockLeavesTFC.get(european_oak),
-                      new ItemStack(ItemsFL.getFood(FoodFL.ACORNS))).setRegistryName("european_oak_nut"),
-        new NutRecipe(BlockLogTFC.get(european_oak), BlockLeavesTFCF.get(SeasonalTrees.YELLOW_EUROPEAN_OAK),
-                      new ItemStack(ItemsFL.getFood(FoodFL.ACORNS))).setRegistryName("european_oak_nut_yellow"),
-        new NutRecipe(BlockLogTFC.get(european_oak), BlockLeavesTFCF.get(SeasonalTrees.ORANGE_EUROPEAN_OAK),
-                      new ItemStack(ItemsFL.getFood(FoodFL.ACORNS))).setRegistryName("european_oak_nut_orange"),
-        new NutRecipe(BlockLogTFC.get(european_oak), BlockLeavesTFCF.get(SeasonalTrees.RED_EUROPEAN_OAK),
-                      new ItemStack(ItemsFL.getFood(FoodFL.ACORNS))).setRegistryName("european_oak_nut_red"),
-        new NutRecipe(BlockLogTFC.get(oak), BlockLeavesTFCF.get(SeasonalTrees.YELLOW_OAK),
-                      new ItemStack(ItemsFL.getFood(FoodFL.ACORNS))).setRegistryName("oak_nut_yellow"),
-        new NutRecipe(BlockLogTFC.get(oak), BlockLeavesTFCF.get(SeasonalTrees.ORANGE_OAK),
-                      new ItemStack(ItemsFL.getFood(FoodFL.ACORNS))).setRegistryName("oak_nut_orange"),
-        new NutRecipe(BlockLogTFC.get(oak), BlockLeavesTFCF.get(SeasonalTrees.RED_OAK),
-                      new ItemStack(ItemsFL.getFood(FoodFL.ACORNS))).setRegistryName("oak_nut_red"),
-        new NutRecipe(BlockLogTFC.get(chestnut), BlockLeavesTFCF.get(SeasonalTrees.YELLOW_CHESTNUT),
-                      new ItemStack(ItemsFL.getFood(FoodFL.CHESTNUTS))).setRegistryName("chestnut_nut_yellow"),
-        new NutRecipe(BlockLogTFC.get(chestnut), BlockLeavesTFCF.get(SeasonalTrees.ORANGE_CHESTNUT),
-                      new ItemStack(ItemsFL.getFood(FoodFL.CHESTNUTS))).setRegistryName("chestnut_nut_orange"),
-        new NutRecipe(BlockLogTFC.get(chestnut), BlockLeavesTFCF.get(SeasonalTrees.RED_CHESTNUT),
-                      new ItemStack(ItemsFL.getFood(FoodFL.CHESTNUTS))).setRegistryName("chestnut_nut_red"),
-        new NutRecipe(BlockLogTFC.get(hickory), BlockLeavesTFCF.get(SeasonalTrees.YELLOW_HICKORY),
-                      new ItemStack(ItemsFL.getFood(FoodFL.PECAN_NUTS))).setRegistryName("hickory_nut_yellow"),
-        new NutRecipe(BlockLogTFC.get(hickory), BlockLeavesTFCF.get(SeasonalTrees.ORANGE_HICKORY),
-                      new ItemStack(ItemsFL.getFood(FoodFL.PECAN_NUTS))).setRegistryName("hickory_nut_orange"),
-        new NutRecipe(BlockLogTFC.get(hickory), BlockLeavesTFCF.get(SeasonalTrees.RED_HICKORY),
-                      new ItemStack(ItemsFL.getFood(FoodFL.PECAN_NUTS))).setRegistryName("hickory_nut_red"),
-        new NutRecipe(BlockLogTFC.get(beech), BlockLeavesTFC.get(beech), new ItemStack(ItemsTFCF.BEECHNUT)).setRegistryName("beech_nut"),
-        new NutRecipe(BlockLogTFC.get(beech), BlockLeavesTFCF.get(SeasonalTrees.YELLOW_BEECH),
-                      new ItemStack(ItemsTFCF.BEECHNUT)).setRegistryName("beech_nut_yellow"),
-        new NutRecipe(BlockLogTFC.get(beech), BlockLeavesTFCF.get(SeasonalTrees.ORANGE_BEECH),
-                      new ItemStack(ItemsTFCF.BEECHNUT)).setRegistryName("beech_nut_orange"),
-        new NutRecipe(BlockLogTFC.get(beech), BlockLeavesTFCF.get(SeasonalTrees.RED_BEECH),
-                      new ItemStack(ItemsTFCF.BEECHNUT)).setRegistryName("beech_nut_red"),
-        new NutRecipe(BlockLogTFC.get(black_walnut), BlockLeavesTFC.get(black_walnut),
-                      new ItemStack(ItemsTFCF.BLACK_WALNUT)).setRegistryName("black_walnut_nut"),
-        new NutRecipe(BlockLogTFC.get(black_walnut), BlockLeavesTFCF.get(SeasonalTrees.YELLOW_BLACK_WALNUT),
-                      new ItemStack(ItemsTFCF.BLACK_WALNUT)).setRegistryName("black_walnut_nut_yellow"),
-        new NutRecipe(BlockLogTFC.get(black_walnut), BlockLeavesTFCF.get(SeasonalTrees.ORANGE_BLACK_WALNUT),
-                      new ItemStack(ItemsTFCF.BLACK_WALNUT)).setRegistryName("black_walnut_nut_orange"),
-        new NutRecipe(BlockLogTFC.get(black_walnut), BlockLeavesTFCF.get(SeasonalTrees.RED_BLACK_WALNUT),
-                      new ItemStack(ItemsTFCF.BLACK_WALNUT)).setRegistryName("black_walnut_nut_red"),
-        new NutRecipe(BlockLogTFC.get(butternut), BlockLeavesTFC.get(butternut), new ItemStack(ItemsTFCF.BUTTERNUT)).setRegistryName(
-          "butternut_nut"),
-        new NutRecipe(BlockLogTFC.get(butternut), BlockLeavesTFCF.get(SeasonalTrees.YELLOW_BUTTERNUT),
-                      new ItemStack(ItemsTFCF.BUTTERNUT)).setRegistryName("butternut_nut_yellow"),
-        new NutRecipe(BlockLogTFC.get(butternut), BlockLeavesTFCF.get(SeasonalTrees.ORANGE_BUTTERNUT),
-                      new ItemStack(ItemsTFCF.BUTTERNUT)).setRegistryName("butternut_nut_orange"),
-        new NutRecipe(BlockLogTFC.get(butternut), BlockLeavesTFCF.get(SeasonalTrees.RED_BUTTERNUT),
-                      new ItemStack(ItemsTFCF.BUTTERNUT)).setRegistryName("butternut_nut_red"),
-        new NutRecipe(BlockLogTFC.get(ginkgo), BlockLeavesTFC.get(ginkgo), new ItemStack(ItemsTFCF.GINKGO_NUT)).setRegistryName(
-          "ginkgo_nut"),
-        new NutRecipe(BlockLogTFC.get(ginkgo), BlockLeavesTFCF.get(SeasonalTrees.GINKGO),
-                      new ItemStack(ItemsTFCF.GINKGO_NUT)).setRegistryName("ginkgo_nut_yellow"),
-        new NutRecipe(BlockLogTFC.get(hazel), BlockLeavesTFC.get(hazel), new ItemStack(ItemsTFCF.HAZELNUT)).setRegistryName("hazel_nut"),
-        new NutRecipe(BlockLogTFC.get(hazel), BlockLeavesTFCF.get(SeasonalTrees.YELLOW_HAZEL),
-                      new ItemStack(ItemsTFCF.HAZELNUT)).setRegistryName("hazel_nut_yellow"),
-        new NutRecipe(BlockLogTFC.get(hazel), BlockLeavesTFCF.get(SeasonalTrees.ORANGE_HAZEL),
-                      new ItemStack(ItemsTFCF.HAZELNUT)).setRegistryName("hazel_nut_orange"),
-        new NutRecipe(BlockLogTFC.get(hazel), BlockLeavesTFCF.get(SeasonalTrees.RED_HAZEL),
-                      new ItemStack(ItemsTFCF.HAZELNUT)).setRegistryName("hazel_nut_red"),
-        new NutRecipe(BlockLogTFC.get(hemlock), BlockLeavesTFC.get(hemlock), new ItemStack(ItemsTFCF.PINECONE)).setRegistryName(
-          "hemlock_pinecone"),
-        new NutRecipe(BlockLogTFC.get(ironwood), BlockLeavesTFC.get(ironwood), new ItemStack(ItemsTFCF.HOPS)).setRegistryName(
-          "ironwood_hops"),
-        new NutRecipe(BlockLogTFC.get(kauri), BlockLeavesTFC.get(kauri), new ItemStack(ItemsTFCF.PINECONE)).setRegistryName(
-          "kauri_pinecone"),
-        new NutRecipe(BlockLogTFC.get(larch), BlockLeavesTFCF.get(SeasonalTrees.LARCH),
-                      new ItemStack(ItemsTFCF.PINECONE)).setRegistryName("larch_pinecone"),
-        new NutRecipe(BlockLogTFC.get(nordmann_fir), BlockLeavesTFC.get(nordmann_fir), new ItemStack(ItemsTFCF.PINECONE)).setRegistryName(
-          "nordmann_fir_pinecone"),
-        new NutRecipe(BlockLogTFC.get(norway_spruce), BlockLeavesTFC.get(norway_spruce),
-                      new ItemStack(ItemsTFCF.PINECONE)).setRegistryName("norway_spruce_pinecone"),
-        new NutRecipe(BlockLogTFC.get(redwood), BlockLeavesTFC.get(redwood), new ItemStack(ItemsTFCF.PINECONE)).setRegistryName(
-          "redwood_pinecone"),
-        new NutRecipe(BlockLogTFC.get(walnut), BlockLeavesTFC.get(walnut), new ItemStack(ItemsTFCF.WALNUT)).setRegistryName(
-          "walnut_fruit"),
-        new NutRecipe(BlockLogTFC.get(walnut), BlockLeavesTFCF.get(SeasonalTrees.YELLOW_WALNUT),
-                      new ItemStack(ItemsTFCF.WALNUT)).setRegistryName("walnut_nut_yellow"),
-        new NutRecipe(BlockLogTFC.get(walnut), BlockLeavesTFCF.get(SeasonalTrees.ORANGE_WALNUT),
-                      new ItemStack(ItemsTFCF.WALNUT)).setRegistryName("walnut_nut_orange"),
-        new NutRecipe(BlockLogTFC.get(walnut), BlockLeavesTFCF.get(SeasonalTrees.RED_WALNUT),
-                      new ItemStack(ItemsTFCF.WALNUT)).setRegistryName("walnut_nut_red")
-      );
     }
   }
 

@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.util;
 
 import su.terrafirmagreg.api.helper.BlockHelper;
-import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeFruit;
+import su.terrafirmagreg.modules.wood.object.generator.GeneratorTreeFruit;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

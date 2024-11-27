@@ -44,7 +44,7 @@ public class NutRecipe extends IForgeRegistryEntry.Impl<NutRecipe> {
   }
 
   @NotNull
-  public ItemStack getNut() {
+  public ItemStack getOutputItem() {
     return outputItem;
   }
 }

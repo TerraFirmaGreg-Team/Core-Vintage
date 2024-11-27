@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.world.classic.objects.generator;
 
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.util.math.BlockPos;
@@ -13,7 +14,6 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IFruitTree;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +29,8 @@ public class GeneratorFruitTrees implements IWorldGenerator {
   }
 
   @Override
-  public void generate(Random random, int chunkX, int chunkZ, World world,
-                       IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-    if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0
-        && !TREES.isEmpty() &&
-        ConfigTFC.General.FOOD.fruitTreeRarity > 0) {
+  public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+    if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0 && !TREES.isEmpty() && ConfigTFC.General.FOOD.fruitTreeRarity > 0) {
       if (random.nextInt(ConfigTFC.General.FOOD.fruitTreeRarity) == 0) {
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 

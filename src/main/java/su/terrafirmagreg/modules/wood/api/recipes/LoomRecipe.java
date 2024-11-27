@@ -17,12 +17,12 @@ import lombok.Getter;
 
 public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements IJEISimpleRecipe {
 
-  private final IIngredient<ItemStack> inputItem;
-  private final ItemStack outputItem;
+  protected final IIngredient<ItemStack> inputItem;
+  protected final ItemStack outputItem;
   @Getter
-  private final int stepCount;
+  protected final int stepCount;
   @Getter
-  private final ResourceLocation inProgressTexture;
+  protected final ResourceLocation inProgressTexture;
 
   protected LoomRecipe(Builder builder) {
 
@@ -31,14 +31,13 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements 
     this.stepCount = builder.stepCount;
     this.inProgressTexture = builder.inProgressTexture;
 
-    if (inputItem == null || builder.inputStack.getAmount() == 0 || outputItem == null
-        || builder.stepCount == 0) {
+    if (inputItem == null || builder.inputStack.getAmount() == 0 || outputItem == null || builder.stepCount == 0) {
       throw new IllegalArgumentException("Input and output are not allowed to be empty");
     }
 
     if (builder.name.isEmpty()) {
       throw new RuntimeException(
-        String.format("LoomRecipe name must contain any character: [%s]", builder.name));
+        String.format("Recipe name must contain any character: [%s]", builder.name));
     }
 
     RegistryWood.LOOM.register(this.setRegistryName(ModUtils.resource(builder.name)));
@@ -52,6 +51,10 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements 
                             .filter(x -> x.isValidInput(item))
                             .findFirst()
                             .orElse(null);
+  }
+
+  public static Builder builder(String name) {
+    return new Builder(name);
   }
 
   private boolean isValidInput(ItemStack inputItem) {

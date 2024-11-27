@@ -2,14 +2,13 @@ package su.terrafirmagreg.modules.core.capabilities.chunkdata;
 
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
 import su.terrafirmagreg.modules.world.classic.objects.generator.vein.Vein;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-
-import net.dries007.tfc.api.types.Tree;
 
 import java.util.List;
 import java.util.Set;
@@ -122,9 +121,9 @@ public interface ICapabilityChunkData extends ICapabilitySerializable<NBTTagComp
 
   RockType getRockHeight(BlockPos pos);
 
-  List<Tree> getValidTrees();
+  List<WoodType> getValidTrees();
 
-  Tree getSparseGenTree();
+  WoodType getSparseGenTree();
 
 }
 

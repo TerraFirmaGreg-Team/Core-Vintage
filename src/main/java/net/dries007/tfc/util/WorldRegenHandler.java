@@ -14,6 +14,7 @@ import su.terrafirmagreg.modules.flora.api.types.type.FloraTypes;
 import su.terrafirmagreg.modules.flora.object.block.BlockPlantMushroom;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorBerryBushes;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorPlant;
 import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorTrees;
@@ -44,7 +45,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import com.google.common.collect.Lists;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
@@ -68,7 +68,7 @@ import static su.terrafirmagreg.api.util.MathUtils.RNG;
 @Mod.EventBusSubscriber(modid = MODID_TFC)
 public class WorldRegenHandler {
 
-  public static final GeneratorPlant PLANT_GEN = new GeneratorPlant();
+  private static final GeneratorPlant PLANT_GEN = new GeneratorPlant();
   private static final RegenRocksSticks ROCKS_GEN = new RegenRocksSticks();
   private static final RegenWildCrops CROPS_GEN = new RegenWildCrops();
   private static final GeneratorBerryBushes BUSH_GEN = new GeneratorBerryBushes();
@@ -110,7 +110,7 @@ public class WorldRegenHandler {
               ROCKS_GEN.generate(RNG, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
 
               final float density = chunkData.getFloraDensity();
-              List<Tree> trees = chunkData.getValidTrees();
+              List<WoodType> trees = chunkData.getValidTrees();
               int stickDensity = 3 + (int) (4f * density + 1.5f * trees.size() * rockModifier);
               if (trees.isEmpty()) {
                 stickDensity = 1 + (int) (1.5f * density * rockModifier);

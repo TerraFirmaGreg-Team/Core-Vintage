@@ -1,10 +1,11 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorCinnamon;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.eerussianguy.firmalife.world.WorldgenCinnamon;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.types.TreesTFCF;
 
@@ -18,6 +19,6 @@ public class BlockCinnamonSapling extends BlockSaplingTFC {
 
   @Override
   public void grow(World world, Random rand, BlockPos pos, IBlockState blockState) {
-    WorldgenCinnamon.generateCinnamon(world, rand, pos, false);
+    GeneratorCinnamon.generateCinnamon(world, rand, pos, false);
   }
 }

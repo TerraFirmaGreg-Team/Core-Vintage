@@ -9,6 +9,8 @@ import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ICapabilityChunkData;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.wood.api.generator.ITreeGenerator;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
@@ -31,12 +33,10 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeFlower;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.types.TreesTFCF;
+import net.dries007.tfc.types.DefaultTrees;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -48,41 +48,19 @@ import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
 
 public class GeneratorTrees implements IWorldGenerator {
 
-  private final GeneratorCinnamon cinnamon_trees = new GeneratorCinnamon();
-  private final GeneratorBamboo bamboo_trees = new GeneratorBamboo();
-
-  public static void generateLooseSticks(Random rand, int chunkX, int chunkZ, World world,
-                                         int amount) {
-    if (ConfigWorld.MISC.enableLooseSticks) {
-      for (int i = 0; i < amount; i++) {
-        final int x = chunkX * 16 + rand.nextInt(16) + 8;
-        final int z = chunkZ * 16 + rand.nextInt(16) + 8;
-        final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
-
-        // Use air, so it doesn't replace other replaceable world gen
-        // This matches the check in BlockPlacedItemFlat for if the block can stay
-        // Also, only add on soil, since this is called by the world regen handler later
-        IBlockState stateDown = world.getBlockState(pos.down());
-        if (world.isAirBlock(pos) && stateDown.isSideSolid(world, pos.down(), EnumFacing.UP)
-            && BlockHelper.isGround(stateDown)) {
-          world.setBlockState(pos, BlocksTFC.PLACED_ITEM_FLAT.getDefaultState());
-          var tile = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
-          tile.ifPresent(tilePlacedItemFlat -> tilePlacedItemFlat.setStack(new ItemStack(Items.STICK)));
-        }
-      }
-    }
-  }
+  //private final GeneratorCeylonCinnamon generatorCeylonCinnamon = new GeneratorCeylonCinnamon();
+  private final GeneratorBamboo generatorBamboo = new GeneratorBamboo();
+  private final GeneratorCinnamon cinnamon = new GeneratorCinnamon();
+  private final GeneratorBees bees = new GeneratorBees();
 
   @Override
-  public void generate(Random random, int chunkX, int chunkZ, World world,
-                       IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+  public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     if (!(chunkGenerator instanceof ChunkGenClassic)) {
       return;
     }
 
     final BlockPos chunkPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-    final BlockPos center = new BlockPos(chunkX * 16 + 8,
-                                         world.getHeight(chunkX * 16 + 8, chunkZ * 16 + 8), chunkZ * 16 + 8);
+    final BlockPos center = new BlockPos(chunkX * 16 + 8, world.getHeight(chunkX * 16 + 8, chunkZ * 16 + 8), chunkZ * 16 + 8);
     var chunkData = CapabilityChunkData.get(world, chunkPos);
     if (!chunkData.isInitialized()) {
       return;
@@ -102,14 +80,16 @@ public class GeneratorTrees implements IWorldGenerator {
 
     float gauss = 2f * (float) random.nextGaussian();
 
-    List<Tree> trees = chunkData.getValidTrees();
-    Collections.rotate(trees, -(int) (diversity * (trees.size() - 1f)));
+    List<WoodType> types = chunkData.getValidTrees();
+    Collections.rotate(types, -(int) (diversity * (types.size() - 1f)));
 
-    cinnamon_trees.generate(world, random, center);
-    bamboo_trees.generate(world, random, center);
+    //generatorCeylonCinnamon.generate(world, random, center);
+    cinnamon.generate(world, random, center);
+    bees.generate(world, random, center);
+    generatorBamboo.generate(world, random, center);
 
-    int stickDensity = 3 + (int) (4f * density + 1.5f * trees.size());
-    if (trees.isEmpty()) {
+    int stickDensity = 3 + (int) (4f * density + 1.5f * types.size());
+    if (types.isEmpty()) {
       stickDensity = 1 + (int) (1.5f * density);
     }
 
@@ -121,12 +101,12 @@ public class GeneratorTrees implements IWorldGenerator {
     // This is to avoid giant regions of no trees whatsoever.
     // It will create sparse trees ( < 1 per chunk) by averaging the climate data to make it more temperate
     // The thought is in very harsh conditions, a few trees might survive outside their typical temperature zone
-    if (trees.isEmpty()) {
+    if (types.isEmpty()) {
       if (random.nextFloat() > 0.2f) {
         return;
       }
 
-      Tree extra = chunkData.getSparseGenTree();
+      WoodType extra = chunkData.getSparseGenTree();
       if (extra != null) {
         final int x = chunkX * 16 + random.nextInt(16) + 8;
         final int z = chunkZ * 16 + random.nextInt(16) + 8;
@@ -137,9 +117,9 @@ public class GeneratorTrees implements IWorldGenerator {
     }
 
     final int treesPerChunk = (int) (density * 16 - 2);
-    final int maxTrees = Math.min(trees.size(),
+    final int maxTrees = Math.min(types.size(),
                                   Math.min(5, (int) (1 + (density + diversity) * 2.5f)));
-    trees = trees.subList(0, maxTrees);
+    types = types.subList(0, maxTrees);
 
     int treesPlaced = 0;
     Set<BlockPos> checkedPositions = new HashSet<>();
@@ -148,7 +128,7 @@ public class GeneratorTrees implements IWorldGenerator {
                                      chunkZ * 16 + random.nextInt(16) + 8);
       if (!checkedPositions.contains(column)) {
         final BlockPos pos = world.getTopSolidOrLiquidBlock(column);
-        final Tree tree = getTree(trees, density, random);
+        final WoodType tree = getWoodType(types, density, random);
 
         checkedPositions.add(column);
         if (tree.makeTree(manager, world, pos, random, true)) {
@@ -157,7 +137,7 @@ public class GeneratorTrees implements IWorldGenerator {
       }
     }
 
-    trees.removeIf(t -> !t.hasBushes());
+    types.removeIf(t -> !t.hasBushes());
 
     // Dense foliage chaparral/shrubland forests in dry & sparsely populated mountain regions
     // Similarly to Mediterranean and Californian areas
@@ -166,7 +146,7 @@ public class GeneratorTrees implements IWorldGenerator {
          biome == BiomesWorld.HIGH_HILLS_EDGE) &&
         (avgTemperature >= 4 + gauss)) {
       generateBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.3f, 60f + gauss, 200f + gauss,
-                   4 + random.nextInt(10), trees);
+                   4 + random.nextInt(10), types);
     }
 
     // Mid-dense foliage chaparral/shrubland forests in dry & sparsely populated hilly landscapes
@@ -174,7 +154,7 @@ public class GeneratorTrees implements IWorldGenerator {
     if ((biome == BiomesWorld.ROLLING_HILLS || biome == BiomesWorld.HIGH_PLAINS) && (avgTemperature
                                                                                      >= 1 + gauss)) {
       generateBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.3f, 70f + gauss, 230f + gauss,
-                   4 + random.nextInt(9), trees);
+                   4 + random.nextInt(9), types);
     }
 
     // Mid-dense foliage chaparral/shrubland forests in temperate regions
@@ -183,26 +163,26 @@ public class GeneratorTrees implements IWorldGenerator {
          || biome == BiomesWorld.FLATLANDS || biome == BiomesWorld.PLAINS ||
          biome == BiomesWorld.HIGH_PLAINS) && (avgTemperature <= 10 + gauss)) {
       generateBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.3f, 150f + gauss, 380f + gauss,
-                   1 + random.nextInt(7), trees);
+                   1 + random.nextInt(7), types);
     }
 
     // More foliage bushes to woodlands
     if (!(biome == BiomesWorld.OCEAN || biome == BiomesWorld.DEEP_OCEAN)) {
       generateBush(random, chunkX, chunkZ, world, chunkData, 0.3f, 1f, 150f + gauss, 500f - gauss,
-                   1 + random.nextInt(5), trees);
+                   1 + random.nextInt(5), types);
     }
 
     // Jungle Foliage
     if (!(biome == BiomesWorld.OCEAN || biome == BiomesWorld.DEEP_OCEAN) && (avgTemperature
                                                                              >= 10 + gauss)) {
       generateBush(random, chunkX, chunkZ, world, chunkData, 0.3f, 1f, 150f + gauss, 500f - gauss,
-                   5 + random.nextInt(10), trees);
+                   5 + random.nextInt(10), types);
     }
 
     // Sparse foliage were it's otherwise just completely barren and boring...
     if (!(biome == BiomesWorld.OCEAN || biome == BiomesWorld.DEEP_OCEAN)) {
       generateBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.2f, 260f + gauss, 500f - gauss,
-                   random.nextInt(5), trees);
+                   random.nextInt(5), types);
     }
 
     int treesPerChunk1 = (int) (density * 12 - 2);
@@ -274,7 +254,7 @@ public class GeneratorTrees implements IWorldGenerator {
             if (15f <= avgTemperature && 40f >= avgTemperature && 65f <= rainfall
                 && 150f >= rainfall &&
                 blockPos.getY() >= WorldTypeClassic.SEALEVEL) {
-              BlockJoshuaTreeFlower.get(TFCRegistries.TREES.getValue(TreesTFCF.JOSHUA_TREE))
+              BlockJoshuaTreeFlower.get(TFCRegistries.TREES.getValue(DefaultTrees.JOSHUA_TREE))
                                    .generatePlant(world, blockPos, random, 8);
             }
           }
@@ -284,31 +264,51 @@ public class GeneratorTrees implements IWorldGenerator {
 
     // Small bushes in high density areas
     // Density requirement is the same for jungles (kapok trees) to generate
-    if (density > 0.6f && !trees.isEmpty()) {
-      for (int i = 0; i < trees.size() * 4f * density; i++) {
+    if (density > 0.6f && !types.isEmpty()) {
+      for (int i = 0; i < types.size() * 4f * density; i++) {
         final int x = chunkX * 16 + random.nextInt(16) + 8;
         final int z = chunkZ * 16 + random.nextInt(16) + 8;
         final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
-        final Tree tree = getTree(trees, density, random);
-        ITreeGenerator bushGen = tree.getBushGen();
-        if (bushGen != null && tree.hasBushes() && bushGen.canGenerateTree(world, pos, tree)) {
-          bushGen.generateTree(manager, world, pos, tree, random, true);
+        final WoodType type = getWoodType(types, density, random);
+        ITreeGenerator bushGen = type.getBushGenerator();
+        if (bushGen != null && type.hasBushes() && bushGen.canGenerateTree(world, pos, type)) {
+          bushGen.generateTree(manager, world, pos, type, random, true);
         }
       }
     }
   }
 
-  private Tree getTree(List<Tree> trees, float density, Random random) {
-    if (trees.size() == 1 || random.nextFloat() < 0.8f - density * 0.4f) {
-      return trees.get(0);
+  public static void generateLooseSticks(Random rand, int chunkX, int chunkZ, World world, int amount) {
+    if (ConfigWorld.MISC.enableLooseSticks) {
+      for (int i = 0; i < amount; i++) {
+        final int x = chunkX * 16 + rand.nextInt(16) + 8;
+        final int z = chunkZ * 16 + rand.nextInt(16) + 8;
+        final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
+
+        // Use air, so it doesn't replace other replaceable world gen
+        // This matches the check in BlockPlacedItemFlat for if the block can stay
+        // Also, only add on soil, since this is called by the world regen handler later
+        IBlockState stateDown = world.getBlockState(pos.down());
+        if (world.isAirBlock(pos) && stateDown.isSideSolid(world, pos.down(), EnumFacing.UP)
+            && BlockHelper.isGround(stateDown)) {
+          world.setBlockState(pos, BlocksTFC.PLACED_ITEM_FLAT.getDefaultState());
+          var tile = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
+          tile.ifPresent(tilePlacedItemFlat -> tilePlacedItemFlat.setStack(new ItemStack(Items.STICK)));
+        }
+      }
     }
-    return trees.get(1 + random.nextInt(trees.size() - 1));
   }
 
-  private void generateBush(Random random, int chunkX, int chunkZ, World world,
-                            ICapabilityChunkData chunkData, float minFlora, float maxFlora,
-                            float minRainfall, float maxRainfall,
-                            int numBushes, List<Tree> trees) {
+  private WoodType getWoodType(List<WoodType> types, float density, Random random) {
+    if (types.size() == 1 || random.nextFloat() < 0.8f - density * 0.4f) {
+      return types.get(0);
+    }
+    return types.get(1 + random.nextInt(types.size() - 1));
+  }
+
+  private void generateBush(Random random, int chunkX, int chunkZ, World world, ICapabilityChunkData chunkData, float minFlora, float maxFlora,
+                            float minRainfall, float maxRainfall, int numBushes, List<WoodType> trees) {
+
     final TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
     final float density = chunkData.getFloraDensity();
     final float rainfall = chunkData.getRainfall();
@@ -319,8 +319,8 @@ public class GeneratorTrees implements IWorldGenerator {
         final int x = chunkX * 16 + random.nextInt(16) + 8;
         final int z = chunkZ * 16 + random.nextInt(16) + 8;
         final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
-        final Tree tree = getTree(trees, density, random);
-        ITreeGenerator bushGen = tree.getBushGen();
+        final WoodType tree = getWoodType(trees, density, random);
+        ITreeGenerator bushGen = tree.getBushGenerator();
         if (bushGen != null && tree.hasBushes() && bushGen.canGenerateTree(world, pos, tree)) {
           bushGen.generateTree(manager, world, pos, tree, random, true);
         }
@@ -328,8 +328,7 @@ public class GeneratorTrees implements IWorldGenerator {
     }
   }
 
-  private void generateStructure(WorldGenerator generator, World world, Random random,
-                                 BlockPos pos) {
+  private void generateStructure(WorldGenerator generator, World world, Random random, BlockPos pos) {
     generator.generate(world, random, pos);
   }
 }

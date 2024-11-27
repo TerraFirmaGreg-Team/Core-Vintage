@@ -4,9 +4,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import net.dries007.eerussianguy.firmalife.world.WorldGeneratorFL;
 import net.dries007.tfcthings.init.TFCThingsEntities;
 
 import static su.terrafirmagreg.api.data.Reference.MODID_FL;
@@ -15,7 +13,6 @@ import static su.terrafirmagreg.api.data.Reference.MODID_FL;
 public class CommonProxy {
 
   public void preInit(FMLPreInitializationEvent e) {
-    GameRegistry.registerWorldGenerator(new WorldGeneratorFL(), 0);
 
     TFCThingsEntities.registerEntities();
   }

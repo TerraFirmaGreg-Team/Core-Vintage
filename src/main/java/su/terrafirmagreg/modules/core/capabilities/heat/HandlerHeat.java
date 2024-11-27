@@ -17,7 +17,7 @@ import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemsTFCF;
-import net.dries007.tfc.types.TreesTFCF;
+import net.dries007.tfc.types.DefaultTrees;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -114,7 +114,7 @@ public class HandlerHeat {
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockLogTFCF.get(TFCRegistries.TREES.getValue(TreesTFCF.EUCALYPTUS))),
+      IIngredient.of(BlockLogTFCF.get(TFCRegistries.TREES.getValue(DefaultTrees.EUCALYPTUS))),
       () -> new ProviderHeat(1, 1599));
 
     CUSTOM_ITEMS.put(IIngredient.of(ItemsCore.STRAW),

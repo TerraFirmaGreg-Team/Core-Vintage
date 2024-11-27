@@ -1,21 +1,19 @@
 package net.dries007.tfc.api.types;
 
+import su.terrafirmagreg.modules.wood.api.generator.ITreeGenerator;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.Helpers;
 
@@ -23,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Random;
 
 import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
@@ -104,20 +101,20 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree> {
     setRegistryName(name);
   }
 
-  public boolean makeTree(World world, BlockPos pos, Random rand, boolean isWorldGen) {
-    if (!world.isRemote) {
-      return makeTree(((WorldServer) world).getStructureTemplateManager(), world, pos, rand, isWorldGen);
-    }
-    return false;
-  }
+//  public boolean makeTree(World world, BlockPos pos, Random rand, boolean isWorldGen) {
+//    if (!world.isRemote) {
+//      return makeTree(((WorldServer) world).getStructureTemplateManager(), world, pos, rand, isWorldGen);
+//    }
+//    return false;
+//  }
 
-  public boolean makeTree(TemplateManager manager, World world, BlockPos pos, Random rand, boolean isWorldGen) {
-    if (generator.canGenerateTree(world, pos, this)) {
-      generator.generateTree(manager, world, pos, this, rand, isWorldGen);
-      return true;
-    }
-    return false;
-  }
+//  public boolean makeTree(TemplateManager manager, World world, BlockPos pos, Random rand, boolean isWorldGen) {
+//    if (generator.canGenerateTree(world, pos, this)) {
+//      generator.generateTree(manager, world, pos, this, rand, isWorldGen);
+//      return true;
+//    }
+//    return false;
+//  }
 
   public boolean isValidLocation(float temp, float rain, float density) {
     return minTemp <= temp && maxTemp >= temp && minRain <= rain && maxRain >= rain && minDensity <= density && maxDensity >= density;
@@ -157,7 +154,7 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree> {
   }
 
   @Nullable
-  public ITreeGenerator getBushGen() {
+  public ITreeGenerator getBushGenerator() {
     return bushGenerator;
   }
 

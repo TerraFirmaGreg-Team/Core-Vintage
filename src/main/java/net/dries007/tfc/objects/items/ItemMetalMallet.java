@@ -1,12 +1,13 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.block.Block;
@@ -31,15 +32,15 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.eerussianguy.firmalife.ConfigFL;
 import net.dries007.eerussianguy.firmalife.init.FoodFL;
 import net.dries007.eerussianguy.firmalife.recipe.CrackingRecipe;
 import net.dries007.eerussianguy.firmalife.recipe.NutRecipe;
 import net.dries007.eerussianguy.firmalife.registry.BlocksFL;
 import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
@@ -47,8 +48,6 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -176,7 +175,7 @@ public class ItemMetalMallet extends ItemTFC implements ICapabilityMetal {
             {
               int dropCount = Math.min(RNG.nextInt(4) + 1, leafCount);
               BlockPos dropPos = logPos.offset(EnumFacing.random(RNG), RNG.nextInt(3) + 1);
-              StackUtils.spawnItemStack(worldIn, dropPos, new ItemStack(entry.getNut()
+              StackUtils.spawnItemStack(worldIn, dropPos, new ItemStack(entry.getOutputItem()
                                                                              .getItem(), RNG.nextInt(dropCount)));//should be querying nut
               TFCParticles.LEAF1.sendToAllNear(worldIn, dropPos.getX() + RNG.nextFloat() / 10, dropPos.getY() - RNG.nextFloat() / 10,
                                                dropPos.getZ() + RNG.nextFloat() / 10, (RNG.nextFloat() - 0.5) / 10, -0.15D + RNG.nextFloat() / 10,

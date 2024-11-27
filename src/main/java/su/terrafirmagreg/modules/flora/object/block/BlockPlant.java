@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.api.library.types.category.Category;
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.api.library.types.variant.Variant;
+import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
@@ -17,12 +18,14 @@ import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.flora.api.types.type.FloraType;
 import su.terrafirmagreg.modules.flora.api.types.variant.block.FloraBlockVariant;
 import su.terrafirmagreg.modules.flora.api.types.variant.block.IFloraBlock;
+import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -79,7 +82,7 @@ import static su.terrafirmagreg.modules.rock.init.BlocksRock.SAND;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DRY_GRASS;
 
 @Getter
-public class BlockPlant extends BaseBlockBush implements IFloraBlock, IFluidloggable {
+public class BlockPlant extends BaseBlockBush implements IFloraBlock, IFluidloggable, IProviderBlockColor {
 
   private static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 1.0, 0.875);
 
@@ -324,20 +327,25 @@ public class BlockPlant extends BaseBlockBush implements IFloraBlock, IFluidlogg
     return PLANT_AABB.offset(state.getOffset(source, pos));
   }
 
-  @Nullable
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-    return type.getMovementMod() == 0.0 ? blockState.getBoundingBox(worldIn, pos) : NULL_AABB;
-  }
-
   @Override
   @NotNull
   public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
     return type.getCategory().getEnumPlantType();
   }
 
+  @Nullable
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return type.getMovementMod() == 0.0 ? blockState.getBoundingBox(worldIn, pos) : NULL_AABB;
+  }
+
   @NotNull
   public FloraType.EnumType getEnumPlantType() {
     return type.getEnumPlantType();
+  }
+
+  @Override
+  public IBlockColor getBlockColor() {
+    return GrassColorHandler::computeGrassColor;
   }
 
 

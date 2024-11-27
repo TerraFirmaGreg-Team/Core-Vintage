@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.blocks.wood;
 
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -25,7 +26,6 @@ import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -151,7 +151,7 @@ public class BlockSaplingTFC extends BlockBush implements IGrowable, IGrowingPla
 
   @Override
   public void grow(World world, Random random, BlockPos blockPos, IBlockState blockState) {
-    wood.makeTree(world, blockPos, random, false);
+    // wood.makeTree(world, blockPos, random, false);
   }
 
   @Override

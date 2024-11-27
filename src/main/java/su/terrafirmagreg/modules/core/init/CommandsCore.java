@@ -2,12 +2,12 @@ package su.terrafirmagreg.modules.core.init;
 
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.core.object.command.CommandDebugInfo;
-import su.terrafirmagreg.modules.core.object.command.CommandGenTree;
 import su.terrafirmagreg.modules.core.object.command.CommandHeat;
 import su.terrafirmagreg.modules.core.object.command.CommandHorsePower;
 import su.terrafirmagreg.modules.core.object.command.CommandPlayer;
 import su.terrafirmagreg.modules.core.object.command.CommandStripWorld;
 import su.terrafirmagreg.modules.core.object.command.CommandTime;
+import su.terrafirmagreg.modules.wood.object.command.CommandGenTree;
 
 public final class CommandsCore {
 

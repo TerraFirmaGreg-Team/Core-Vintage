@@ -4,6 +4,7 @@ import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
 import su.terrafirmagreg.modules.world.classic.objects.generator.vein.Vein;
 
@@ -12,9 +13,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Tree;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -566,11 +564,11 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    *
    * @return Список допустимых типов деревьев.
    */
-  public List<Tree> getValidTrees() {
-    return TFCRegistries.TREES.getValuesCollection().stream()
-                              .filter(t -> t.isValidLocation(averageTemp, rainfall, floraDensity))
-                              .sorted((s, t) -> (int) (t.getDominance() - s.getDominance()))
-                              .collect(Collectors.toList());
+  public List<WoodType> getValidTrees() {
+    return WoodType.getTypes().stream()
+                   .filter(t -> t.isValidLocation(averageTemp, rainfall, floraDensity))
+                   .sorted((s, t) -> (int) (t.getDominance() - s.getDominance()))
+                   .collect(Collectors.toList());
   }
 
   /**
@@ -579,11 +577,11 @@ public final class ProviderChunkData implements ICapabilityChunkData {
    * @return Тип дерева для разреженной генерации.
    */
   @Nullable
-  public Tree getSparseGenTree() {
-    return TFCRegistries.TREES.getValuesCollection().stream()
-                              .filter(t -> t.isValidLocation(0.5f * averageTemp + 10f, 0.5f * rainfall + 120f, 0.5f))
-                              .min((s, t) -> (int) (t.getDominance() - s.getDominance()))
-                              .orElse(null);
+  public WoodType getSparseGenTree() {
+    return WoodType.getTypes().stream()
+                   .filter(t -> t.isValidLocation(0.5f * averageTemp + 10f, 0.5f * rainfall + 120f, 0.5f))
+                   .min((s, t) -> (int) (t.getDominance() - s.getDominance()))
+                   .orElse(null);
   }
 
   @Override

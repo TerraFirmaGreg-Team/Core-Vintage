@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.types.TreesTFCF;
+import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.Nullable;
@@ -231,7 +231,7 @@ public class BlockJoshuaTreeLog extends Block {
     if (BlockLogTFC.get(wood) != null) {
       return BlockLogTFC.get(wood).getItemDropped(state, rand, fortune);
     } else {
-      return BlockLogTFC.get(TFCRegistries.TREES.getValue(TreesTFCF.JOSHUA_TREE))
+      return BlockLogTFC.get(TFCRegistries.TREES.getValue(DefaultTrees.JOSHUA_TREE))
                         .getItemDropped(state, rand, fortune);
     }
   }
@@ -271,7 +271,7 @@ public class BlockJoshuaTreeLog extends Block {
         Block block1 = worldIn.getBlockState(blockpos.down()).getBlock();
 
         if (Variant.isVariant(worldIn.getBlockState(blockpos.down()), SAND) ||
-                BlockHelper.isSoilOrGravel(worldIn.getBlockState(blockpos.down())) ||
+            BlockHelper.isSoilOrGravel(worldIn.getBlockState(blockpos.down())) ||
             BlockUtils.isBlock(block1, this, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY)) {
           return true;
         }
@@ -280,7 +280,7 @@ public class BlockJoshuaTreeLog extends Block {
 
     Block block2 = worldIn.getBlockState(pos.down()).getBlock();
     return Variant.isVariant(worldIn.getBlockState(pos.down()), SAND) ||
-            BlockHelper.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
+           BlockHelper.isSoilOrGravel(worldIn.getBlockState(pos.down())) ||
            BlockUtils.isBlock(block2, this, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY);
   }
 }

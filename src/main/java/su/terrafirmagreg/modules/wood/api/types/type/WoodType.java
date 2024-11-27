@@ -4,6 +4,9 @@ import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.wood.api.generator.ITreeGenerator;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -11,22 +14,23 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.types.DefaultTrees;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import lombok.Getter;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -139,30 +143,30 @@ public class WoodType extends Type<WoodType> {
     return fruit;
   }
 
-//  public boolean makeTree(World world, BlockPos pos, Random rand, boolean isWorldGen) {
-//    if (!world.isRemote) {
-//      return makeTree(((WorldServer) world).getStructureTemplateManager(), world, pos, rand, isWorldGen);
-//    }
-//    return false;
-//  }
-//
-//  /**
-//   * Создает дерево с использованием менеджера шаблонов, мира, позиции, генератора случайных чисел и флага, указывающего, является ли это генерацией мира.
-//   *
-//   * @param manager    менеджер шаблонов для создания дерева
-//   * @param world      мир, в котором будет создано дерево
-//   * @param pos        позиция, где будет создано дерево
-//   * @param rand       генератор случайных чисел
-//   * @param isWorldGen флаг, указывающий, является ли это генерацией мира
-//   * @return {@code true}, если дерево было успешно создано, иначе {@code false}
-//   */
-//  public boolean makeTree(TemplateManager manager, World world, BlockPos pos, Random rand, boolean isWorldGen) {
-//    if (generator.canGenerateTree(world, pos, this)) {
-//      generator.generateTree(manager, world, pos, this, rand, isWorldGen);
-//      return true;
-//    }
-//    return false;
-//  }
+  public boolean makeTree(World world, BlockPos pos, Random rand, boolean isWorldGen) {
+    if (!world.isRemote) {
+      return makeTree(((WorldServer) world).getStructureTemplateManager(), world, pos, rand, isWorldGen);
+    }
+    return false;
+  }
+
+  /**
+   * Создает дерево с использованием менеджера шаблонов, мира, позиции, генератора случайных чисел и флага, указывающего, является ли это генерацией мира.
+   *
+   * @param manager    менеджер шаблонов для создания дерева
+   * @param world      мир, в котором будет создано дерево
+   * @param pos        позиция, где будет создано дерево
+   * @param rand       генератор случайных чисел
+   * @param isWorldGen флаг, указывающий, является ли это генерацией мира
+   * @return {@code true}, если дерево было успешно создано, иначе {@code false}
+   */
+  public boolean makeTree(TemplateManager manager, World world, BlockPos pos, Random rand, boolean isWorldGen) {
+    if (generator.canGenerateTree(world, pos, this)) {
+      generator.generateTree(manager, world, pos, this, rand, isWorldGen);
+      return true;
+    }
+    return false;
+  }
 
   /**
    * Проверяет, есть ли кусты в местоположении.

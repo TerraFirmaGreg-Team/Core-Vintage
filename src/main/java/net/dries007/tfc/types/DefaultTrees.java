@@ -1,14 +1,15 @@
 package net.dries007.tfc.types;
 
-import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeAcacia;
-import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeBushes;
-import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeComposite;
-import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeKapok;
-import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeNormal;
-import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeRandom;
-import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeSequoia;
-import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeVariants;
-import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeWillow;
+import su.terrafirmagreg.modules.wood.api.generator.ITreeGenerator;
+import su.terrafirmagreg.modules.wood.object.generator.GeneratorTreeAcacia;
+import su.terrafirmagreg.modules.wood.object.generator.GeneratorTreeBushes;
+import su.terrafirmagreg.modules.wood.object.generator.GeneratorTreeComposite;
+import su.terrafirmagreg.modules.wood.object.generator.GeneratorTreeKapok;
+import su.terrafirmagreg.modules.wood.object.generator.GeneratorTreeNormal;
+import su.terrafirmagreg.modules.wood.object.generator.GeneratorTreeRandom;
+import su.terrafirmagreg.modules.wood.object.generator.GeneratorTreeSequoia;
+import su.terrafirmagreg.modules.wood.object.generator.GeneratorTreeVariants;
+import su.terrafirmagreg.modules.wood.object.generator.GeneratorTreeWillow;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
@@ -16,7 +17,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.ITreeGenerator;
 
 import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 
@@ -47,6 +47,70 @@ public final class DefaultTrees {
   public static final ResourceLocation WILLOW = new ResourceLocation(MODID_TFC, "willow");
   public static final ResourceLocation KAPOK = new ResourceLocation(MODID_TFC, "kapok");
   public static final ResourceLocation HEVEA = new ResourceLocation(MODID_TFC, "hevea");
+  public static final ResourceLocation AFRICAN_PADAUK = new ResourceLocation(MODID_TFC, "african_padauk");
+  public static final ResourceLocation ALDER = new ResourceLocation(MODID_TFC, "alder");
+  public static final ResourceLocation ANGELIM = new ResourceLocation(MODID_TFC, "angelim");
+  public static final ResourceLocation BALD_CYPRESS = new ResourceLocation(MODID_TFC, "bald_cypress");
+  public static final ResourceLocation BAOBAB = new ResourceLocation(MODID_TFC, "baobab");
+  public static final ResourceLocation BEECH = new ResourceLocation(MODID_TFC, "beech");
+  public static final ResourceLocation BLACK_WALNUT = new ResourceLocation(MODID_TFC, "black_walnut");
+  public static final ResourceLocation BOX = new ResourceLocation(MODID_TFC, "box");
+  public static final ResourceLocation BRAZILWOOD = new ResourceLocation(MODID_TFC, "brazilwood");
+  public static final ResourceLocation BUTTERNUT = new ResourceLocation(MODID_TFC, "butternut");
+  public static final ResourceLocation COCOBOLO = new ResourceLocation(MODID_TFC, "cocobolo");
+  public static final ResourceLocation CYPRESS = new ResourceLocation(MODID_TFC, "cypress");
+  public static final ResourceLocation EBONY = new ResourceLocation(MODID_TFC, "ebony");
+  public static final ResourceLocation EUCALYPTUS = new ResourceLocation(MODID_TFC, "eucalyptus");
+  public static final ResourceLocation EUROPEAN_OAK = new ResourceLocation(MODID_TFC, "european_oak");
+  public static final ResourceLocation FEVER = new ResourceLocation(MODID_TFC, "fever");
+  public static final ResourceLocation FRUITWOOD = new ResourceLocation(MODID_TFC, "fruitwood");
+  public static final ResourceLocation GINKGO = new ResourceLocation(MODID_TFC, "ginkgo");
+  public static final ResourceLocation GREENHEART = new ResourceLocation(MODID_TFC, "greenheart");
+  public static final ResourceLocation HAWTHORN = new ResourceLocation(MODID_TFC, "hawthorn");
+  public static final ResourceLocation HAZEL = new ResourceLocation(MODID_TFC, "hazel");
+  public static final ResourceLocation HEMLOCK = new ResourceLocation(MODID_TFC, "hemlock");
+  public static final ResourceLocation HOLLY = new ResourceLocation(MODID_TFC, "holly");
+  public static final ResourceLocation HORNBEAM = new ResourceLocation(MODID_TFC, "hornbeam");
+  public static final ResourceLocation IPE = new ResourceLocation(MODID_TFC, "ipe");
+  public static final ResourceLocation IROKO = new ResourceLocation(MODID_TFC, "iroko");
+  public static final ResourceLocation IRONWOOD = new ResourceLocation(MODID_TFC, "ironwood");
+  public static final ResourceLocation JACARANDA = new ResourceLocation(MODID_TFC, "jacaranda");
+  public static final ResourceLocation JOSHUA_TREE = new ResourceLocation(MODID_TFC, "joshua_tree");
+  public static final ResourceLocation JUNIPER = new ResourceLocation(MODID_TFC, "juniper");
+  public static final ResourceLocation KAURI = new ResourceLocation(MODID_TFC, "kauri");
+  public static final ResourceLocation LARCH = new ResourceLocation(MODID_TFC, "larch");
+  public static final ResourceLocation LIMBA = new ResourceLocation(MODID_TFC, "limba");
+  public static final ResourceLocation LOCUST = new ResourceLocation(MODID_TFC, "locust");
+  public static final ResourceLocation LOGWOOD = new ResourceLocation(MODID_TFC, "logwood");
+  public static final ResourceLocation MACLURA = new ResourceLocation(MODID_TFC, "maclura");
+  public static final ResourceLocation MAHOE = new ResourceLocation(MODID_TFC, "mahoe");
+  public static final ResourceLocation MAHOGANY = new ResourceLocation(MODID_TFC, "mahogany");
+  public static final ResourceLocation MANGROVE = new ResourceLocation(MODID_TFC, "mangrove");
+  public static final ResourceLocation MARBLEWOOD = new ResourceLocation(MODID_TFC, "marblewood");
+  public static final ResourceLocation MESSMATE = new ResourceLocation(MODID_TFC, "messmate");
+  public static final ResourceLocation MOUNTAIN_ASH = new ResourceLocation(MODID_TFC, "mountain_ash");
+  public static final ResourceLocation NORDMANN_FIR = new ResourceLocation(MODID_TFC, "nordmann_fir");
+  public static final ResourceLocation NORWAY_SPRUCE = new ResourceLocation(MODID_TFC, "norway_spruce");
+  public static final ResourceLocation PINK_CHERRY = new ResourceLocation(MODID_TFC, "pink_cherry");
+  public static final ResourceLocation PINK_IVORY = new ResourceLocation(MODID_TFC, "pink_ivory");
+  public static final ResourceLocation POPLAR = new ResourceLocation(MODID_TFC, "poplar");
+  public static final ResourceLocation PURPLEHEART = new ResourceLocation(MODID_TFC, "purpleheart");
+  public static final ResourceLocation RED_CEDAR = new ResourceLocation(MODID_TFC, "red_cedar");
+  public static final ResourceLocation RED_ELM = new ResourceLocation(MODID_TFC, "red_elm");
+  public static final ResourceLocation REDWOOD = new ResourceLocation(MODID_TFC, "redwood");
+  public static final ResourceLocation ROWAN = new ResourceLocation(MODID_TFC, "rowan");
+  public static final ResourceLocation RUBBER_FIG = new ResourceLocation(MODID_TFC, "rubber_fig");
+  public static final ResourceLocation SWEETGUM = new ResourceLocation(MODID_TFC, "sweetgum");
+  public static final ResourceLocation SYZYGIUM = new ResourceLocation(MODID_TFC, "syzygium");
+  public static final ResourceLocation TEAK = new ResourceLocation(MODID_TFC, "teak");
+  public static final ResourceLocation WALNUT = new ResourceLocation(MODID_TFC, "walnut");
+  public static final ResourceLocation WENGE = new ResourceLocation(MODID_TFC, "wenge");
+  public static final ResourceLocation WHITE_CHERRY = new ResourceLocation(MODID_TFC, "white_cherry");
+  public static final ResourceLocation WHITE_ELM = new ResourceLocation(MODID_TFC, "white_elm");
+  public static final ResourceLocation WHITEBEAM = new ResourceLocation(MODID_TFC, "whitebeam");
+  public static final ResourceLocation YELLOW_MERANTI = new ResourceLocation(MODID_TFC, "yellow_meranti");
+  public static final ResourceLocation YEW = new ResourceLocation(MODID_TFC, "yew");
+  public static final ResourceLocation ZEBRAWOOD = new ResourceLocation(MODID_TFC, "zebrawood");
 
   /**
    * Simple ITreeGen instances.
@@ -62,10 +126,8 @@ public final class DefaultTrees {
   public static final ITreeGenerator GEN_SEQUOIA = new GeneratorTreeSequoia();
   public static final ITreeGenerator GEN_KAPOK_COMPOSITE = new GeneratorTreeComposite().add(0.4f, GEN_TALL).add(0.6f, GEN_KAPOK);
   public static final ITreeGenerator GEN_BUSHES = new GeneratorTreeBushes();
-
   // Custom Tree Models
   public static final ITreeGenerator GEN_ASPEN = new GeneratorTreeVariants(true, 54);
-
   public static final ITreeGenerator GEN_AFRICAN_PADAUK = new GeneratorTreeVariants(true, 34);
   public static final ITreeGenerator GEN_ALDER = new GeneratorTreeVariants(true, 30);
   public static final ITreeGenerator GEN_ANGELIM = new GeneratorTreeVariants(true, 34);
@@ -131,7 +193,6 @@ public final class DefaultTrees {
   public static final ITreeGenerator GEN_YELLOW_MERANTI = new GeneratorTreeVariants(true, 34);
   public static final ITreeGenerator GEN_YEW = new GeneratorTreeVariants(true, 19);
   public static final ITreeGenerator GEN_ZEBRAWOOD = new GeneratorTreeVariants(true, 34);
-
   public static final ITreeGenerator GEN_TALL_TFC = new GeneratorTreeNormal(3, 3);
   public static final ITreeGenerator GEN_NORMAL_2 = new GeneratorTreeRandom(1, 3, 3);
   public static final ITreeGenerator GEN_MEDIUM_2 = new GeneratorTreeRandom(2, 2, 3);
@@ -139,8 +200,6 @@ public final class DefaultTrees {
   public static final ITreeGenerator GEN_TALL_SINGLE = new GeneratorTreeRandom(3, 3, 1);
   public static final ITreeGenerator GEN_CASSIA_CINNAMON = new GeneratorTreeVariants(true, 6);
   public static final ITreeGenerator GEN_CEYLON_CINNAMON = new GeneratorTreeVariants(true, 6);
-
-
   public static final ITreeGenerator GEN_ARROW_BAMBOO = new GeneratorTreeVariants(true, 4);    // Pseudosasa japonica
   public static final ITreeGenerator GEN_BLACK_BAMBOO = new GeneratorTreeVariants(true, 4); // Phyllostachys nigra
   public static final ITreeGenerator GEN_BLUE_BAMBOO = new GeneratorTreeVariants(true, 4); // Himalayacalamus hookerianus
@@ -153,6 +212,7 @@ public final class DefaultTrees {
   public static final ITreeGenerator GEN_TIMBER_BAMBOO = new GeneratorTreeVariants(true, 4); // Phyllostachys vivax
   public static final ITreeGenerator GEN_TINWA_BAMBOO = new GeneratorTreeVariants(true, 4); // Cephalostachyum pergracile
   public static final ITreeGenerator GEN_WEAVERS_BAMBOO = new GeneratorTreeVariants(true, 4); // Bambusa textilis
+
 
   @SubscribeEvent
   public static void onPreRegisterRockCategory(TFCRegistryEvent.RegisterPreBlock<Tree> event) {

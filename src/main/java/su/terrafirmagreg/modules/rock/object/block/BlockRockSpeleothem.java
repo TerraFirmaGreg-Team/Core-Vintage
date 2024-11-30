@@ -6,14 +6,12 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -22,6 +20,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 import static su.terrafirmagreg.api.data.Properties.EnumProp.SPELEOTHEM_SIZE;
+import static su.terrafirmagreg.api.data.enums.EnumSpeleothemSize.MEDIUM;
 
 /**
  * Stalactites and stalagmites in one block!
@@ -38,18 +37,11 @@ public class BlockRockSpeleothem extends BlockRock {
       .nonCube();
 
     setDefaultState(blockState.getBaseState()
-                              .withProperty(SPELEOTHEM_SIZE, EnumSpeleothemSize.MEDIUM));
+                              .withProperty(SPELEOTHEM_SIZE, MEDIUM));
   }
 
   @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state,
-                                          BlockPos blockPos, EnumFacing face) {
-    return BlockFaceShape.UNDEFINED;
-  }
-
-  @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-                                               BlockPos pos) {
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return getBoundingBox(blockState, worldIn, pos);
   }
 
@@ -60,18 +52,7 @@ public class BlockRockSpeleothem extends BlockRock {
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(SPELEOTHEM_SIZE,
-                                          EnumSpeleothemSize.values()[Math.min(EnumSpeleothemSize.values().length - 1, meta)]);
-  }
-
-  @Override
-  public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn,
-                                    final BlockPos pos) {
-    var size = EnumSpeleothemSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
-    if (isCenter(worldIn, pos)) {
-      size = EnumSpeleothemSize.MEDIUM;
-    }
-    return state.withProperty(SPELEOTHEM_SIZE, size);
+    return getDefaultState().withProperty(SPELEOTHEM_SIZE, EnumSpeleothemSize.values()[Math.min(EnumSpeleothemSize.values().length - 1, meta)]);
   }
 
   @Override
@@ -85,8 +66,7 @@ public class BlockRockSpeleothem extends BlockRock {
   }
 
   @Override
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-                              BlockPos fromPos) {
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     int size = state.getValue(SPELEOTHEM_SIZE).strength;
     if (getBearing(worldIn, pos) < size + 1) {
       worldIn.playEvent(2001, pos, Block.getStateId(worldIn.getBlockState(pos)));
@@ -106,8 +86,7 @@ public class BlockRockSpeleothem extends BlockRock {
   }
 
   @Override
-  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-                              EntityLivingBase placer, ItemStack stack) {
+  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     var size = EnumSpeleothemSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
     worldIn.setBlockState(pos, state.withProperty(SPELEOTHEM_SIZE, size));
   }
@@ -136,10 +115,6 @@ public class BlockRockSpeleothem extends BlockRock {
     return Math.max(getStrength(world, pos.down()), getStrength(world, pos.up()));
   }
 
-  private boolean isCenter(IBlockAccess world, BlockPos pos) {
-    return isThis(world, pos.down()) && isThis(world, pos.up());
-  }
-
   private int getStrength(IBlockAccess world, BlockPos pos) {
     var state = world.getBlockState(pos);
     if (state.isFullBlock()) {
@@ -151,6 +126,10 @@ public class BlockRockSpeleothem extends BlockRock {
     }
 
     return 0;
+  }
+
+  private boolean isCenter(IBlockAccess world, BlockPos pos) {
+    return isThis(world, pos.down()) && isThis(world, pos.up());
   }
 
   private boolean isThis(IBlockAccess world, BlockPos pos) {

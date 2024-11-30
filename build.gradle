@@ -47,8 +47,10 @@ tasks.decompressDecompiledSources.enabled !propertyBool('change_minecraft_source
 java {
   toolchain {
     languageVersion.set(JavaLanguageVersion.of(propertyBool('use_modern_java_syntax') ? 17 : 8))
-    // Azul covers the most platforms for Java 8 toolchains, crucially including MacOS arm64
-    vendor.set(JvmVendorSpec.AZUL)
+    if (propertyBool('use_azul_jmv')) {
+      // Azul covers the most platforms for Java 8 toolchains, crucially including MacOS arm64
+      vendor.set(JvmVendorSpec.AZUL)
+    }
   }
 }
 
@@ -146,8 +148,8 @@ dependencies {
       transitive = false
     }
     annotationProcessor 'org.ow2.asm:asm-debug-all:5.2'
-    annotationProcessor 'com.google.guava:guava:33.1.0-jre'
-    annotationProcessor 'com.google.code.gson:gson:2.10.1'
+    annotationProcessor 'com.google.guava:guava:32.1.2-jre'
+    annotationProcessor 'com.google.code.gson:gson:2.8.9'
     annotationProcessor(mixin) {
       transitive = false
     }
@@ -237,6 +239,11 @@ runServer {
   workingDir = file('run/server')
 }
 
+wrapper {
+  gradleVersion = '8.11.1'
+  distributionUrl = distributionUrl.replace("bin", "all")
+}
+
 idea {
   module {
     inheritOutputDirs = true
@@ -287,7 +294,9 @@ tasks.withType(JavaCompile).configureEach {
     options.release.set(8)
     javaCompiler.set(javaToolchains.compilerFor {
       languageVersion.set(JavaLanguageVersion.of(17))
-      vendor.set(JvmVendorSpec.AZUL)
+      if (propertyBool('use_azul_jmv')) {
+        vendor.set(JvmVendorSpec.AZUL)
+      }
     })
   }
 }

@@ -41,15 +41,43 @@ def use_immersive = false
 def use_util = true
 
 dependencies {
+  // Example - Dependency descriptor:
+  // 'com.google.code.gson:gson:2.8.6' << group: com.google.code.gson, name:gson, version:2.8.6
+  // 'group:name:version:classifier' where classifier is optional
+  // Example - Deobfuscating dependencies:
+  // rfg.deobf('curse.maven:had-enough-items-557549:4543375')
+  // By wrapping a dependency descriptor in rfg.deobf() method call, the dependency is queued for deobfuscation
+  // When deobfuscating, RFG respects the mapping_channel + mapping_version stated in gradle.properties
+  // Example - CurseMaven dependencies:
+  // 'curse.maven:had-enough-items-557549:4543375' << had-enough-items = project slug, 557549 = project id, 4543375 = file id
+  // Full documentation: https://cursemaven.com/
+  // Example - Modrinth dependencies:
+  // 'maven.modrinth:jei:4.16.1.1000' << jei = project name, 4.16.1.1000 = file version
+  // Full documentation: https://docs.modrinth.com/docs/tutorials/maven/
+  // Common dependency types (configuration):
+  // implementation = dependency available at both compile time and runtime
+  // runtimeOnly = runtime dependency
+  // compileOnly = compile time dependency
+  // annotationProcessor = annotation processing dependencies
+  // embed = bundled dependencies (no shadow involved so no relocation)
+
+  // Transitive dependencies:
+  // (Dependencies that your dependency depends on)
+
+  // If you wish to exclude transitive dependencies in the described dependencies
+  // Use a closure as such:
+  // implementation ('com.google.code.gson:gson:2.8.6') {
+  //     transitive = false
+  // }
 
   //compileOnly fileTree(include: ["*.jar"], dir: "libs")
 
   // Утилиты
   if (use_util.toBoolean()) {
-    implementation rfg.deobf("curse.maven:had-enough-items-557549:5471944")
-    implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:5485686")
+    implementation rfg.deobf("curse.maven:had-enough-items-557549:5906628")
+    implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:5868069")
     implementation rfg.deobf("curse.maven:reid-629017:5502915")
-    implementation rfg.deobf("curse.maven:bubbles-a-baubles-fork-995393:5252395-dev-5252397")
+    implementation rfg.deobf("curse.maven:bubbles-a-baubles-fork-995393:5844968")
     implementation rfg.deobf("curse.maven:configanytime-870276:5212709")
     implementation rfg.deobf("curse.maven:modularui-624243:5153413")
     implementation rfg.deobf("curse.maven:aainfo-573154:3627065")
@@ -57,16 +85,13 @@ dependencies {
     implementation rfg.deobf("curse.maven:ctm-267602:2915363")
     implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
     implementation rfg.deobf("curse.maven:itemzoom-261725:2643616")
-    implementation rfg.deobf("curse.maven:realistic-terrain-generation-unofficial-648514:4696300")
-    implementation rfg.deobf("curse.maven:streams-229769:3109315")
-    implementation rfg.deobf("curse.maven:farseek-229708:3093852")
 
   }
 
   // Вспомогательные моды
   if (use_util.toBoolean()) {
-    implementation rfg.deobf("curse.maven:common-capabilities-247007:3053017-sources-3053019-javadoc-3053020")
-    implementation rfg.deobf("curse.maven:cyclops-core-232758:3159497-sources-3159499-javadoc-3159500")
+//    implementation rfg.deobf("curse.maven:common-capabilities-247007:3053017-sources-3053019-javadoc-3053020")
+//    implementation rfg.deobf("curse.maven:cyclops-core-232758:3159497-sources-3159499-javadoc-3159500")
 //      implementation rfg.deobf("curse.maven:realistic-terrain-generation-unofficial-648514:4696300")
 //      implementation rfg.deobf("curse.maven:future-mc-310059:3924863")
 //      implementation rfg.deobf("curse.maven:shadowfacts-forgelin-248453:2785465")
@@ -80,6 +105,9 @@ dependencies {
     compileOnly("curse.maven:nyx-rotn-edition-437663:3840824")
     compileOnly("curse.maven:industrial-craft-242638:3838713")
     compileOnly("curse.maven:crafttweaker-239197:5013567")
+    compileOnly("curse.maven:realistic-terrain-generation-unofficial-648514:4696300")
+    compileOnly("curse.maven:streams-229769:3109315")
+    compileOnly("curse.maven:farseek-229708:3093852")
   }
 
 

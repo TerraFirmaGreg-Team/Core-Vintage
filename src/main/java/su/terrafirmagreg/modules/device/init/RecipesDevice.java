@@ -17,7 +17,6 @@ import net.dries007.eerussianguy.firmalife.init.Fruit;
 import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.ItemsTFC;
@@ -758,8 +757,6 @@ public final class RecipesDevice {
                       new ItemStack(Items.DYE, 1, EnumDyeColor.MAGENTA.getDyeDamage()));
     manager.addRecipe(IIngredient.of(BlocksFlora.PLANT.get(SULPHUR_SHROOM)),
                       new ItemStack(ItemPowder.get(Powder.SULFUR), 1));
-    manager.addRecipe(IIngredient.of(BlocksTFCF.LIGHTSTONE),
-                      new ItemStack(Items.GLOWSTONE_DUST, 2));
 
     manager.addRecipe(IIngredient.of(ItemsFL.getDriedFruit(Fruit.COFFEE_CHERRIES)),
                       new ItemStack(ModItems.GreenCoffeeBeans, 1));

@@ -39,8 +39,8 @@ import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories
 import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.TALL_WATER_SEA;
 import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.WATER;
 import static su.terrafirmagreg.modules.flora.api.types.category.FloraCategories.WATER_SEA;
-import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.FRESH_WATER;
-import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER;
+import static su.terrafirmagreg.modules.worldgen.classic.ChunkGenClassic.FRESH_WATER;
+import static su.terrafirmagreg.modules.worldgen.classic.ChunkGenClassic.SALT_WATER;
 
 @Getter
 public class FloraType extends Type<FloraType> {

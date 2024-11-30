@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.core.feature.calendar;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.network.SCPacketCalendarUpdate;
-import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataCalendar;
+import su.terrafirmagreg.modules.worldgen.classic.objects.storage.WorldDataCalendar;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;

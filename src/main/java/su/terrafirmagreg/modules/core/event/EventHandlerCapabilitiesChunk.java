@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.network.SCPacketChunkData;
-import su.terrafirmagreg.modules.world.ModuleWorld;
+import su.terrafirmagreg.modules.worldgen.ModuleWorld;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;

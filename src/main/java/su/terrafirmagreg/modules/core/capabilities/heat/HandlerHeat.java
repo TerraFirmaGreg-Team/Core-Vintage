@@ -1,8 +1,10 @@
 package su.terrafirmagreg.modules.core.capabilities.heat;
 
+import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.flora.api.types.type.FloraTypes;
 import su.terrafirmagreg.modules.flora.init.BlocksFlora;
+import su.terrafirmagreg.modules.wood.init.BlocksWood;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 import net.minecraft.init.Blocks;
@@ -11,19 +13,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
-import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemsTFCF;
-import net.dries007.tfc.types.DefaultTrees;
 
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
+
+import static su.terrafirmagreg.modules.wood.api.types.type.WoodTypes.EUCALYPTUS;
 
 public class HandlerHeat {
 
@@ -114,19 +114,19 @@ public class HandlerHeat {
       () -> new ProviderHeat(1, 480));
 
     CUSTOM_ITEMS.put(
-      IIngredient.of(BlockLogTFCF.get(TFCRegistries.TREES.getValue(DefaultTrees.EUCALYPTUS))),
+      IIngredient.of(BlocksWood.LOG.get(EUCALYPTUS)),
       () -> new ProviderHeat(1, 1599));
 
     CUSTOM_ITEMS.put(IIngredient.of(ItemsCore.STRAW),
                      () -> new ProviderHeat(1, 30));
 
-    CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.TWIG),
+    CUSTOM_ITEMS.put(IIngredient.of(BlocksCore.TWIG),
                      () -> new ProviderHeat(1, 50));
 
-    CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.DRIFTWOOD),
+    CUSTOM_ITEMS.put(IIngredient.of(BlocksCore.DRIFTWOOD),
                      () -> new ProviderHeat(1, 60));
 
-    CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.BONES),
+    CUSTOM_ITEMS.put(IIngredient.of(BlocksCore.BONES),
                      () -> new ProviderHeat(1, 425));
 
     CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.BLACK_TEA),

@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorCinnamon;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorCinnamon;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;

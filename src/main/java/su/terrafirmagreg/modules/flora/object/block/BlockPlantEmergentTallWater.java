@@ -10,7 +10,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER;
+import static su.terrafirmagreg.modules.worldgen.classic.ChunkGenClassic.SALT_WATER;
 
 public class BlockPlantEmergentTallWater extends BlockPlantTallWater {
 

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.object.generator;
 
 import su.terrafirmagreg.api.util.StructureUtils;
-import su.terrafirmagreg.modules.world.ModuleWorld;
+import su.terrafirmagreg.modules.worldgen.ModuleWorld;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;

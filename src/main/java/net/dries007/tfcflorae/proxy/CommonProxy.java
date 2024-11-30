@@ -1,19 +1,18 @@
 package net.dries007.tfcflorae.proxy;
 
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorCorals;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorGourds;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorMesaStrata;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorPlants;
-import su.terrafirmagreg.modules.world.classic.objects.generator.cave.GeneratorLightstones;
-import su.terrafirmagreg.modules.world.classic.objects.generator.cave.GeneratorUnderground;
-import su.terrafirmagreg.modules.world.classic.objects.generator.groundcover.GeneratorSurfaceBones;
-import su.terrafirmagreg.modules.world.classic.objects.generator.groundcover.GeneratorSurfaceDriftwood;
-import su.terrafirmagreg.modules.world.classic.objects.generator.groundcover.GeneratorSurfaceFlint;
-import su.terrafirmagreg.modules.world.classic.objects.generator.groundcover.GeneratorSurfacePinecone;
-import su.terrafirmagreg.modules.world.classic.objects.generator.groundcover.GeneratorSurfaceSeashells;
-import su.terrafirmagreg.modules.world.classic.objects.generator.groundcover.GeneratorSurfaceTwig;
-import su.terrafirmagreg.modules.world.classic.objects.generator.structures.WorldGenStructures;
-import su.terrafirmagreg.modules.world.classic.objects.generator.structures.WorldGenStructuresCorals;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorCorals;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorGourds;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorMesaStrata;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorPlants;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.cave.GeneratorUnderground;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.groundcover.GeneratorSurfaceBones;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.groundcover.GeneratorSurfaceDriftwood;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.groundcover.GeneratorSurfaceFlint;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.groundcover.GeneratorSurfacePinecone;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.groundcover.GeneratorSurfaceSeashells;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.groundcover.GeneratorSurfaceTwig;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.structures.WorldGenStructures;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.structures.WorldGenStructuresCorals;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -56,9 +55,6 @@ public class CommonProxy {
       }
       if (ConfigTFCF.General.WORLD.enableUndergroundPlantWorldGen) {
         GameRegistry.registerWorldGenerator(new GeneratorUnderground(), 0);
-      }
-      if (ConfigTFCF.General.WORLD.enableLightstoneWorldGen) {
-        GameRegistry.registerWorldGenerator(new GeneratorLightstones(), 0);
       }
       if (ConfigTFCF.General.WORLD.enableSoilPits) {
         //GameRegistry.registerWorldGenerator(new WorldGenSoil(), 0);

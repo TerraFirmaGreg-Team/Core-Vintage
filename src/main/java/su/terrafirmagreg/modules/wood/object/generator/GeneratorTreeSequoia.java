@@ -7,7 +7,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodSapling;
-import su.terrafirmagreg.modules.world.ModuleWorld;
+import su.terrafirmagreg.modules.worldgen.ModuleWorld;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;

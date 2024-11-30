@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.gui;
 
-import su.terrafirmagreg.modules.world.classic.WorldGenSettings;
-import su.terrafirmagreg.modules.world.classic.WorldGenSettings.WorldGenSettingsBuilder;
+import su.terrafirmagreg.modules.worldgen.classic.WorldGenSettings;
+import su.terrafirmagreg.modules.worldgen.classic.WorldGenSettings.WorldGenSettingsBuilder;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiCreateWorld;

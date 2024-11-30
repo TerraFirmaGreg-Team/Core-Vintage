@@ -3,7 +3,7 @@ package su.terrafirmagreg.api.base.biome;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
-import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
+import su.terrafirmagreg.modules.worldgen.classic.ChunkGenClassic;
 
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockSand;

@@ -16,7 +16,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
 import su.terrafirmagreg.modules.wood.init.RegistryWood;
-import su.terrafirmagreg.modules.world.classic.objects.generator.vein.VeinRegistry;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.vein.VeinRegistry;
 
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;

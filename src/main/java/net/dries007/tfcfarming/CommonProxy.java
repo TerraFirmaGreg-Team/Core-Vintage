@@ -2,7 +2,7 @@ package net.dries007.tfcfarming;
 
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
-import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataFarming;
+import su.terrafirmagreg.modules.worldgen.classic.objects.storage.WorldDataFarming;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

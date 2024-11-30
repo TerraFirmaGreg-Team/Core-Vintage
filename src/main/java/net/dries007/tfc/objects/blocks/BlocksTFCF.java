@@ -34,13 +34,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
-import net.dries007.tfc.objects.blocks.groundcover.BlockDriftwood;
-import net.dries007.tfc.objects.blocks.groundcover.BlockLightstone;
-import net.dries007.tfc.objects.blocks.groundcover.BlockPinecone;
-import net.dries007.tfc.objects.blocks.groundcover.BlockSurfaceBones;
-import net.dries007.tfc.objects.blocks.groundcover.BlockSurfaceFlint;
-import net.dries007.tfc.objects.blocks.groundcover.BlockSurfaceSeashells;
-import net.dries007.tfc.objects.blocks.groundcover.BlockTwig;
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeFlower;
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeLog;
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeSapling;
@@ -68,7 +61,6 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.BerryBushTFCF;
 import net.dries007.tfc.util.agriculture.CropTFCF;
 import net.dries007.tfc.util.agriculture.SeasonalTrees;
-import net.dries007.tfcflorae.ConfigTFCF;
 
 import lombok.Getter;
 
@@ -89,19 +81,6 @@ public final class BlocksTFCF {
   public static final BlockUrn FIRED_URN = getNull();
   @GameRegistry.ObjectHolder("storage/urn_loot")
   public static final BlockUrnLoot URN_LOOT = getNull();
-
-  @GameRegistry.ObjectHolder("groundcover/bone")
-  public static final BlockSurfaceBones BONES = Helpers.getNull();
-  @GameRegistry.ObjectHolder("groundcover/driftwood")
-  public static final BlockDriftwood DRIFTWOOD = Helpers.getNull();
-  @GameRegistry.ObjectHolder("groundcover/flint")
-  public static final BlockSurfaceFlint FLINT = Helpers.getNull();
-  @GameRegistry.ObjectHolder("groundcover/pinecone")
-  public static final BlockPinecone PINECONE = Helpers.getNull();
-  @GameRegistry.ObjectHolder("groundcover/seashell")
-  public static final BlockSurfaceSeashells SEASHELLS = Helpers.getNull();
-  @GameRegistry.ObjectHolder("groundcover/twig")
-  public static final BlockTwig TWIG = Helpers.getNull();
 
   @GameRegistry.ObjectHolder("wood/fruit_tree/log/cassia_cinnamon")
   public static final BlockCassiaCinnamonLog CASSIA_CINNAMON_LOG = Helpers.getNull();
@@ -230,9 +209,6 @@ public final class BlocksTFCF {
   public static final BlockCoralBlock HORN_CORAL_BLOCK_DEAD = getNull();
   @GameRegistry.ObjectHolder("coral/block/tube/dead")
   public static final BlockCoralBlock TUBE_CORAL_BLOCK_DEAD = getNull();
-
-  @GameRegistry.ObjectHolder("groundcover/lightstone")
-  public static final BlockLightstone LIGHTSTONE = getNull();
   @Getter
   private static final ImmutableList<BlockJoshuaTreeFlower> allJoshuaTreeFlowerBlocks = Helpers.getNull();
   //private static ImmutableList<MultiBlockBase> allMultiBlocks = Helpers.getNull();
@@ -270,18 +246,6 @@ public final class BlocksTFCF {
   @Getter
   private static ImmutableList<BlockBerryBush> allBerryBushBlocks = Helpers.getNull();
   @Getter
-  private static ImmutableList<BlockSurfaceSeashells> allSurfaceSeashells = Helpers.getNull();
-  @Getter
-  private static ImmutableList<BlockSurfaceFlint> allSurfaceFlint = Helpers.getNull();
-  @Getter
-  private static ImmutableList<BlockSurfaceBones> allSurfaceBones = Helpers.getNull();
-  @Getter
-  private static ImmutableList<BlockDriftwood> allSurfaceDriftwood = Helpers.getNull();
-  @Getter
-  private static ImmutableList<BlockTwig> allSurfaceTwig = Helpers.getNull();
-  @Getter
-  private static ImmutableList<BlockPinecone> allSurfacePinecone = Helpers.getNull();
-  @Getter
   private static ImmutableList<Block> allBambooLog = Helpers.getNull();
   @Getter
   private static ImmutableList<Block> allBambooLeaves = Helpers.getNull();
@@ -307,8 +271,6 @@ public final class BlocksTFCF {
   private static ImmutableList<BlockPlantTallGrass> allTallGrassBlocks = Helpers.getNull();
   @Getter
   private static ImmutableList<BlockPlant> allStandardBlocks = Helpers.getNull();
-  @Getter
-  private static ImmutableList<BlockLightstone> allLightstoneBlocks = Helpers.getNull();
 
     /*public static ImmutableList<MultiBlockBase> getAllMultiBlocks()
     {
@@ -336,14 +298,7 @@ public final class BlocksTFCF {
     ImmutableList.Builder<BlockCropTFC> cropBlocks = ImmutableList.builder();
     ImmutableList.Builder<BlockCropDead> deadCrops = ImmutableList.builder();
     ImmutableList.Builder<BlockBerryBush> cropBerryBushBlocks = ImmutableList.builder();
-    ImmutableList.Builder<BlockSurfaceSeashells> surfaceSeashell = ImmutableList.builder();
-    ImmutableList.Builder<BlockSurfaceFlint> surfaceFlint = ImmutableList.builder();
-    ImmutableList.Builder<BlockSurfaceBones> surfaceBone = ImmutableList.builder();
-    ImmutableList.Builder<BlockDriftwood> surfaceDriftwood = ImmutableList.builder();
-    ImmutableList.Builder<BlockTwig> surfaceTwig = ImmutableList.builder();
-    ImmutableList.Builder<BlockPinecone> surfacePinecone = ImmutableList.builder();
     ImmutableList.Builder<BlockCoral> plantCoral = ImmutableList.builder();
-    ImmutableList.Builder<BlockLightstone> blockLightstone = ImmutableList.builder();
     //ImmutableList.Builder<MultiBlockBase> multiBlock = ImmutableList.builder();
 
     normalItemBlocks.add(new ItemBlockTFC(register(r, "crop/bales/yucca/yucca_bale", new BlockBale(), CT_MISC)));
@@ -593,50 +548,6 @@ public final class BlocksTFCF {
     allBerryBushBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
     allCropBlocks = cropBlocks.build();
     allDeadCrops = deadCrops.build();
-
-    {
-      blockLightstone.add(register(r, "groundcover/lightstone", new BlockLightstone(0.8f), CT_MISC));
-    }
-    allLightstoneBlocks = blockLightstone.build();
-    for (BlockLightstone lightstone : allLightstoneBlocks) {
-      normalItemBlocks.add(new ItemBlockTFC(lightstone));
-    }
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverBones) {
-      surfaceBone.add(register(r, "groundcover/bone", new BlockSurfaceBones(), CT_FLORA));
-      allSurfaceBones = surfaceBone.build();
-      allSurfaceBones.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-    }
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverDriftwood) {
-      surfaceDriftwood.add(register(r, "groundcover/driftwood", new BlockDriftwood(), CT_FLORA));
-      allSurfaceDriftwood = surfaceDriftwood.build();
-      allSurfaceDriftwood.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-    }
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverFlint) {
-      surfaceFlint.add(register(r, "groundcover/flint", new BlockSurfaceFlint(), CT_FLORA));
-      allSurfaceFlint = surfaceFlint.build();
-      allSurfaceFlint.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-    }
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverPinecone) {
-      surfacePinecone.add(register(r, "groundcover/pinecone", new BlockPinecone(), CT_FLORA));
-      allSurfacePinecone = surfacePinecone.build();
-      allSurfacePinecone.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-    }
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverSeashell) {
-      surfaceSeashell.add(register(r, "groundcover/seashell", new BlockSurfaceSeashells(), CT_FLORA));
-      allSurfaceSeashells = surfaceSeashell.build();
-      allSurfaceSeashells.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-    }
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverTwig) {
-      surfaceTwig.add(register(r, "groundcover/twig", new BlockTwig(), CT_FLORA));
-      allSurfaceTwig = surfaceTwig.build();
-      allSurfaceTwig.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-    }
 
     for (SeasonalTrees fruitTree : SeasonalTrees.values()) {
       if (fruitTree.isNormalTree) {

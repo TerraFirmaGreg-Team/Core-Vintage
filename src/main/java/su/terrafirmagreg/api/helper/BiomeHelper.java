@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.helper;
 
-import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
+import su.terrafirmagreg.modules.worldgen.classic.init.BiomesWorld;
 
 import net.minecraft.world.biome.Biome;
 

@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.StructureUtils;
 import su.terrafirmagreg.modules.wood.api.generator.ITreeGenerator;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.world.ModuleWorld;
+import su.terrafirmagreg.modules.worldgen.ModuleWorld;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;

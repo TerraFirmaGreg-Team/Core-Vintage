@@ -1,7 +1,7 @@
 package net.dries007.tfc.util.agriculture;
 
 import su.terrafirmagreg.api.library.MCDate.Month;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorBerryBushes;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorBerryBushes;
 
 import net.minecraft.item.ItemStack;
 

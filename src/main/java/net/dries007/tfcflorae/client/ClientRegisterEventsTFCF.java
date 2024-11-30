@@ -36,7 +36,6 @@ import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.items.ItemArmorTFCF;
 import net.dries007.tfc.objects.items.ItemGemTFCF;
 import net.dries007.tfc.objects.items.ItemsTFCF;
-import net.dries007.tfcflorae.ConfigTFCF;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.CAN_GROW;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.DECAYABLE;
@@ -91,42 +90,6 @@ public class ClientRegisterEventsTFCF {
 
     for (Block block : BlocksTFCF.getAllCoralPlants()) {
       ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockCoral.LEVEL).build());
-    }
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverBones) {
-      for (Block block : BlocksTFCF.getAllSurfaceBones()) {
-        ModelLoader.setCustomStateMapper(block, new StateMap.Builder().build());
-      }
-    }
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverDriftwood) {
-      for (Block block : BlocksTFCF.getAllSurfaceDriftwood()) {
-        ModelLoader.setCustomStateMapper(block, new StateMap.Builder().build());
-      }
-    }
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverFlint) {
-      for (Block block : BlocksTFCF.getAllSurfaceFlint()) {
-        ModelLoader.setCustomStateMapper(block, new StateMap.Builder().build());
-      }
-    }
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverPinecone) {
-      for (Block block : BlocksTFCF.getAllSurfacePinecone()) {
-        ModelLoader.setCustomStateMapper(block, new StateMap.Builder().build());
-      }
-    }
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverSeashell) {
-      for (Block block : BlocksTFCF.getAllSurfaceSeashells()) {
-        ModelLoader.setCustomStateMapper(block, new StateMap.Builder().build());
-      }
-    }
-
-    if (ConfigTFCF.General.WORLD.enableGroundcoverTwig) {
-      for (Block block : BlocksTFCF.getAllSurfaceTwig()) {
-        ModelLoader.setCustomStateMapper(block, new StateMap.Builder().build());
-      }
     }
 
     //        for (Block block : BlocksTFCF.getAllJoshuaTreeSaplingBlocks())

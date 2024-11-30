@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.skills.SmithingSkill;
-import su.terrafirmagreg.modules.world.ModuleWorld;
+import su.terrafirmagreg.modules.worldgen.ModuleWorld;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;

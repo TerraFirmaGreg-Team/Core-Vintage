@@ -41,6 +41,8 @@ public final class ModuleWood extends ModuleBase {
     TAB = BaseItemGroup.of("wood", "wood/log/aspen");
     REGISTRY = enableAutoRegistry(TAB);
     PACKET_SERVICE = enableNetwork();
+
+    WoodTypeHandler.init();
   }
 
   @Override
@@ -69,8 +71,6 @@ public final class ModuleWood extends ModuleBase {
 
   @Override
   public void onRegister() {
-    WoodTypeHandler.init();
-
     BlocksWood.onRegister(registryManager);
     ItemsWood.onRegister(registryManager);
     EntitiesWood.onRegister(registryManager);

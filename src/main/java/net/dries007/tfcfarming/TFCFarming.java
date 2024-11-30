@@ -2,7 +2,7 @@ package net.dries007.tfcfarming;
 
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.util.GameUtils;
-import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataFarming;
+import su.terrafirmagreg.modules.worldgen.classic.objects.storage.WorldDataFarming;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;

@@ -1,9 +1,10 @@
 package su.terrafirmagreg.api.base.biome;
 
 import su.terrafirmagreg.api.base.biome.spi.IBiomeSettings;
-import su.terrafirmagreg.modules.world.ConfigWorld;
-import su.terrafirmagreg.modules.world.classic.objects.biome.overworld.decorator.BiomeDecorator;
-import su.terrafirmagreg.modules.world.classic.objects.spawner.EntitySpawnerWorldData;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.worldgen.ConfigWorld;
+import su.terrafirmagreg.modules.worldgen.classic.objects.biome.overworld.decorator.BiomeDecorator;
+import su.terrafirmagreg.modules.worldgen.classic.objects.spawner.EntitySpawnerWorldData;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -11,11 +12,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -79,7 +77,7 @@ public abstract class BaseBiome extends Biome implements IBiomeSettings {
   }
 
   @Override
-  public net.minecraft.world.biome.BiomeDecorator createBiomeDecorator() {
+  public BiomeDecorator createBiomeDecorator() {
     return new BiomeDecorator(0, 0);
   }
 
@@ -95,9 +93,6 @@ public abstract class BaseBiome extends Biome implements IBiomeSettings {
     return getSettings().isSpawnBiome();
   }
 
-  public abstract int getBiomeWeight();
-
-  public abstract BiomeDictionary.Type[] getTypes();
 
   public BaseBiome mutate(Random rand) {
 

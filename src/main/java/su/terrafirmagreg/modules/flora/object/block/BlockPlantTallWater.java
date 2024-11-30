@@ -27,7 +27,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.data.Properties.EnumProp.PLANT_PART;
 import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_4;
 import static su.terrafirmagreg.api.data.Properties.IntProp.DAYPERIOD;
-import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER;
+import static su.terrafirmagreg.modules.worldgen.classic.ChunkGenClassic.SALT_WATER;
 
 public class BlockPlantTallWater extends BlockPlantWater implements IGrowable, ITallPlant {
 

@@ -2,7 +2,7 @@
 
 package net.dries007.eerussianguy.firmalife.init;
 
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorWildCrops;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorWildCrops;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiScreen;

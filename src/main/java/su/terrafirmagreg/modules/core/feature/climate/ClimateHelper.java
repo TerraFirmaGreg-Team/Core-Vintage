@@ -5,12 +5,12 @@ import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
-import su.terrafirmagreg.modules.world.ConfigWorld;
+import su.terrafirmagreg.modules.worldgen.ConfigWorld;
 
 import net.minecraft.util.math.MathHelper;
 
 import static su.terrafirmagreg.api.util.MathUtils.RNG;
-import static su.terrafirmagreg.modules.world.classic.WorldTypeClassic.SEALEVEL;
+import static su.terrafirmagreg.modules.worldgen.classic.WorldTypeClassic.SEALEVEL;
 
 public class ClimateHelper {
 

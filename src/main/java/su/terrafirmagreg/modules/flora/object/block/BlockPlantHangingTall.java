@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.flora.api.types.type.FloraType;
 import su.terrafirmagreg.modules.flora.api.types.variant.block.FloraBlockVariant;
-import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
+import su.terrafirmagreg.modules.worldgen.classic.WorldTypeClassic;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;

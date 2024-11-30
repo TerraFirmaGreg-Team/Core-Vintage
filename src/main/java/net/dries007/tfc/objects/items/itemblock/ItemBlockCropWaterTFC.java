@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.itemblock;
 
-import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
+import su.terrafirmagreg.modules.worldgen.classic.ChunkGenClassic;
 
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;

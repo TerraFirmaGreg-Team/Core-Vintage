@@ -4,8 +4,8 @@ import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
-import su.terrafirmagreg.modules.world.classic.objects.generator.vein.VeinRegistry;
-import su.terrafirmagreg.modules.world.classic.objects.generator.vein.VeinType;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.vein.VeinRegistry;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.vein.VeinType;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

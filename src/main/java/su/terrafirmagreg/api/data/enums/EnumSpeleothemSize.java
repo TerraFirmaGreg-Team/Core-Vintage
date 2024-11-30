@@ -3,6 +3,8 @@ package su.terrafirmagreg.api.data.enums;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 
+import org.jetbrains.annotations.NotNull;
+
 public enum EnumSpeleothemSize implements IStringSerializable {
 
   SMALL(0, 2),
@@ -20,7 +22,7 @@ public enum EnumSpeleothemSize implements IStringSerializable {
   }
 
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return name().toLowerCase();
   }
 }

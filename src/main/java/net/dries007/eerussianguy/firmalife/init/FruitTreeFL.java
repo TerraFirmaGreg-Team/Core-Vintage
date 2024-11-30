@@ -1,7 +1,7 @@
 package net.dries007.eerussianguy.firmalife.init;
 
 import su.terrafirmagreg.api.library.MCDate.Month;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorFruitTrees;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorFruitTrees;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;

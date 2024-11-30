@@ -1,7 +1,7 @@
 package net.dries007.eerussianguy.firmalife.init;
 
 import su.terrafirmagreg.api.library.MCDate.Month;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorBerryBushes;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorBerryBushes;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

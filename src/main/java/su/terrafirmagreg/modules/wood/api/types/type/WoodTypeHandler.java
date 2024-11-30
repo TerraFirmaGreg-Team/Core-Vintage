@@ -457,23 +457,6 @@ public class WoodTypeHandler {
       .cellKit("deciduous")
       .build();
 
-//    WoodTypes.ARGYLE_EUCALYPTUS = WoodType
-//      .builder("argyle_eucalyptus") //TODO
-//      .color(rgb(243, 159, 112))
-//      .burnInfo(773f, 1200)
-//      .rainInfo(320f, 500f)
-//      .tempInfo(22f, 50f)
-//      .radius(1)
-//      .decayDist(6)
-//      .minGrowthTime(18)
-//      .density(0.5f, 2f)
-//      .bushes()
-//      .generator(GEN_ANGELIM)
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-
     WoodTypes.EUCALYPTUS = WoodType
       .builder("eucalyptus")
       .color(rgb(243, 159, 112))
@@ -507,23 +490,6 @@ public class WoodTypeHandler {
       .growthLogicKit("darkoak")
       .cellKit("deciduous")
       .build();
-
-//    WoodTypes.BAMBOO = WoodType
-//      .builder("bamboo")
-//      .color(rgb(83, 97, 28))
-//      .burnInfo(770f, 1300)
-//      .rainInfo(180f, 500f)
-//      .tempInfo(10f, 38f)
-//      .dominance(0f)
-//      .density(0f, 0f)
-//      .minGrowthTime(8)
-//      .bushes()
-//      .isConifer()
-//      .generator(GEN_BALD_CYPRESS)
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
 
     WoodTypes.BAOBAB = WoodType
       .builder("baobab")
@@ -591,22 +557,6 @@ public class WoodTypeHandler {
       .cellKit("deciduous")
       .build();
 
-//    WoodTypes.BLACK_WILLOW = WoodType
-//      .builder("black_willow") //TODO
-//      .color(rgb(35, 42, 11))
-//      .burnInfo(758f, 1800)
-//      .rainInfo(180f, 300f)
-//      .tempInfo(-10f, 16f)
-//      .minGrowthTime(9)
-//      .bushes()
-//      .generator(GEN_BLACK_WALNUT)
-//      .fruit(null, 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-
     WoodTypes.BRAZILWOOD = WoodType
       .builder("brazilwood")
       .color(rgb(107, 38, 74))
@@ -638,21 +588,6 @@ public class WoodTypeHandler {
       .cellKit("deciduous")
       .build();
 
-//    WoodTypes.BUXUS = WoodType
-//      .builder("buxus")
-//      .color(rgb(212, 175, 130))
-//      .burnInfo(683f, 1500)
-//      .rainInfo(180f, 400f)
-//      .tempInfo(-8f, 15f)
-//      .minGrowthTime(8)
-//      .density(0.25f, 1f)
-//      .generator(GEN_TALL_TFC)
-//      .bushes()
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-
     WoodTypes.COCOBOLO = WoodType
       .builder("cocobolo")
       .color(rgb(76, 27, 22))
@@ -668,23 +603,6 @@ public class WoodTypeHandler {
       .growthLogicKit("darkoak")
       .cellKit("deciduous")
       .build();
-
-//    WoodTypes.EUROPEAN_OAK = WoodType
-//      .builder("european_oak")
-//      .color(rgb(196, 161, 133))
-//      .burnInfo(728f, 2250)
-//      .isCanMakeTannin()
-//      .rainInfo(140f, 430f)
-//      .tempInfo(-8f, 15f)
-//      .minGrowthTime(10)
-//      .bushes()
-//      .generator(GEN_EUROPEAN_OAK)
-//      .fruit(null, 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
 
     WoodTypes.CYPRESS = WoodType
       .builder("cypress")
@@ -729,21 +647,6 @@ public class WoodTypeHandler {
       .growthLogicKit("darkoak")
       .cellKit("deciduous")
       .build();
-
-//    WoodTypes.GHAF = WoodType
-//      .builder("ghaf")
-//      .color(rgb(95, 93, 98))
-//      .burnInfo(590f, 1000)
-//      .rainInfo(70f, 220f)
-//      .tempInfo(19f, 50f)
-//      .minGrowthTime(10)
-//      .bushes()
-//      .density(0.25f, 1f)
-//      .generator(GEN_FEVER)
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
 
     WoodTypes.GINKGO = WoodType
       .builder("ginkgo")
@@ -891,22 +794,6 @@ public class WoodTypeHandler {
       .cellKit("deciduous")
       .build();
 
-//    WoodTypes.JABUTICABEIRA = WoodType
-//      .builder("jabuticabeira") //TODO
-//      .color(rgb(147, 86, 76))
-//      .burnInfo(694f, 1170)
-//      .rainInfo(30f, 210f)
-//      .tempInfo(11f, 36f)
-//      .decayDist(6)
-//      .minGrowthTime(11)
-//      .bushes()
-//      .density(0.1f, 0.6f)
-//      .generator(GEN_IRONWOOD)
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-//
     WoodTypes.JOSHUA = WoodType
       .builder("joshua") //TODO
       .color(rgb(142, 114, 108))
@@ -973,23 +860,6 @@ public class WoodTypeHandler {
       .growthLogicKit("darkoak")
       .cellKit("deciduous")
       .build();
-
-//    WoodTypes.LAUREL = WoodType
-//      .builder("laurel")
-//      .color(rgb(202, 165, 110))
-//      .burnInfo(632f, 1250)
-//      .rainInfo(60f, 400f)
-//      .tempInfo(-12f, 15f)
-//      .minGrowthTime(8)
-//      .isConifer()
-//      .density(0.25f, 1f)
-//      .generator(GEN_LARCH)
-//      .fruit(() -> ItemsTFCF.PINECONE, 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 3, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
 
     WoodTypes.LIMBA = WoodType
       .builder("limba")
@@ -1104,22 +974,6 @@ public class WoodTypeHandler {
       .cellKit("deciduous")
       .build();
 
-//    WoodTypes.MEDLAR = WoodType
-//      .builder("medlar") //TODO
-//      .color(rgb(132, 82, 68))
-//      .burnInfo(837f, 1200)
-//      .rainInfo(180f, 500f)
-//      .tempInfo(16f, 35f)
-//      .decayDist(6)
-//      .minGrowthTime(18)
-//      .bushes()
-//      .density(0.2f, 2f)
-//      .generator(GEN_MARBLEWOOD)
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-
     WoodTypes.MESSMATE = WoodType
       .builder("messmate")
       .color(rgb(179, 166, 136))
@@ -1149,21 +1003,6 @@ public class WoodTypeHandler {
       .growthLogicKit("darkoak")
       .cellKit("deciduous")
       .build();
-//
-//    WoodTypes.MULBERRY = WoodType
-//      .builder("mulberry") //TODO
-//      .color(rgb(154, 113, 81))
-//      .burnInfo(696f, 1250)
-//      .rainInfo(80f, 270f)
-//      .tempInfo(9f, 33f)
-//      .minGrowthTime(10)
-//      .bushes()
-//      .density(0.4f, 2f)
-//      .generator(GEN_MOUNTAIN_ASH)
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
 
     WoodTypes.NORDMANN_FIR = WoodType
       .builder("nordmann_fir")
@@ -1194,52 +1033,6 @@ public class WoodTypeHandler {
       .growthLogicKit("darkoak")
       .cellKit("deciduous")
       .build();
-//
-//    WoodTypes.PEAR = WoodType
-//      .builder("pear") //TODO
-//      .color(rgb(156, 71, 34))
-//      .burnInfo(628f, 1500)
-//      .rainInfo(100f, 380f)
-//      .tempInfo(-20f, 5f)
-//      .minGrowthTime(8)
-//      .isConifer()
-//      .density(0.1f, 0.9f)
-//      .generator(GEN_NORWAY_SPRUCE)
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-//
-//    WoodTypes.PERSIMMON = WoodType
-//      .builder("persimmon") //TODO
-//      .color(rgb(81, 45, 36))
-//      .burnInfo(628f, 1500)
-//      .rainInfo(100f, 380f)
-//      .tempInfo(-20f, 5f)
-//      .minGrowthTime(8)
-//      .isConifer()
-//      .density(0.1f, 0.9f)
-//      .generator(GEN_NORWAY_SPRUCE)
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-//
-//    WoodTypes.PINK_CHERRY_BLOSSOM = WoodType
-//      .builder("pink_cherry_blossom")
-//      .color(rgb(225, 167, 160))
-//      .burnInfo(795f, 1250)
-//      .rainInfo(180f, 300f)
-//      .tempInfo(0f, 20f)
-//      .minGrowthTime(8)
-//      .density(0.25f, 2f)
-//      .generator(GEN_PINK_CHERRY)
-//      .fruit(() -> ItemFoodTFC.get(Food.CHERRY), 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 3, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
 
     WoodTypes.PINK_CHERRY = WoodType
       .builder("pink_cherry")
@@ -1341,55 +1134,6 @@ public class WoodTypeHandler {
       .growthLogicKit("darkoak")
       .cellKit("deciduous")
       .build();
-//
-//    WoodTypes.PURPLE_JACARANDA = WoodType
-//      .builder("purple_jacaranda") //TODO
-//      .color(rgb(142, 110, 91))
-//      .burnInfo(795f, 1250)
-//      .rainInfo(180f, 300f)
-//      .tempInfo(10f, 34f)
-//      .minGrowthTime(8)
-//      .density(0.25f, 2f)
-//      .generator(GEN_JACARANDA)
-//      .fruit(null, 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-//
-//    WoodTypes.QUINCE = WoodType
-//      .builder("quince") //TODO
-//      .color(rgb(183, 137, 62))
-//      .burnInfo(795f, 1250)
-//      .rainInfo(180f, 300f)
-//      .tempInfo(10f, 34f)
-//      .minGrowthTime(8)
-//      .density(0.25f, 2f)
-//      .generator(GEN_JACARANDA)
-//      .fruit(null, 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-//
-//    WoodTypes.RAINBOW_EUCALYPTUS = WoodType
-//      .builder("rainbow_eucalyptus")
-//      .color(rgb(239, 157, 109))
-//      .burnInfo(705f, 1000)
-//      .rainInfo(120f, 300f)
-//      .tempInfo(18f, 39f)
-//      .minGrowthTime(8)
-//      .bushes()
-//      .density(0.35f, 2f)
-//      .generator(GEN_EUCALYPTUS)
-//      .fruit(null, 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
 
     WoodTypes.REDWOOD = WoodType
       .builder("redwood")
@@ -1430,27 +1174,6 @@ public class WoodTypeHandler {
       .cellKit("deciduous")
       .build();
 
-//    WoodTypes.RED_CYPRESS = WoodType
-//      .builder("red_cypress") //TODO
-//      .color(rgb(109, 107, 74))
-//      .burnInfo(618f, 1750)
-//      .isCanMakeTannin()
-//      .rainInfo(10f, 240f)
-//      .tempInfo(-8f, 17f)
-//      .decayDist(6)
-//      .minGrowthTime(18)
-//      .bushes()
-//      .isConifer()
-//      .bushes()
-//      .density(0.4f, 2f)
-//      .generator(GEN_RED_CEDAR)
-//      .fruit(() -> ItemsTFCF.JUNIPER, 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 3, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-
     WoodTypes.RED_ELM = WoodType
       .builder("red_elm")
       .color(rgb(224, 159, 105))
@@ -1469,23 +1192,6 @@ public class WoodTypeHandler {
       .growthLogicKit("darkoak")
       .cellKit("deciduous")
       .build();
-//
-//    WoodTypes.RED_MANGROVE = WoodType
-//      .builder("red_mangrove")
-//      .color(rgb(99, 34, 34))
-//      .burnInfo(783f, 1100)
-//      .rainInfo(200f, 500f)
-//      .tempInfo(15f, 40f)
-//      .dominance(0f)
-//      .density(0f, 0f)
-//      .radius(1)
-//      .minGrowthTime(8)
-//      .bushes()
-//      .generator(GEN_MANGROVE)
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
 
     WoodTypes.ROWAN = WoodType
       .builder("rowan")
@@ -1518,63 +1224,6 @@ public class WoodTypeHandler {
       .growthLogicKit("darkoak")
       .cellKit("deciduous")
       .build();
-
-//    WoodTypes.SLOE = WoodType
-//      .builder("sloe") //TODO
-//      .color(rgb(205, 174, 135))
-//      .burnInfo(745f, 2000)
-//      .isCanMakeTannin()
-//      .rainInfo(140f, 360f)
-//      .tempInfo(-2f, 18f)
-//      .decayDist(6)
-//      .minGrowthTime(16)
-//      .bushes()
-//      .density(0.2f, 1f)
-//      .generator(GEN_SWEETGUM)
-//      .fruit(null, 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-//
-//    WoodTypes.SNOW_GUM_EUCALYPTUS = WoodType
-//      .builder("snow_gum_eucalyptus") //TODO
-//      .color(rgb(239, 157, 109))
-//      .burnInfo(745f, 2000)
-//      .isCanMakeTannin()
-//      .rainInfo(140f, 360f)
-//      .tempInfo(-2f, 18f)
-//      .decayDist(6)
-//      .minGrowthTime(16)
-//      .bushes()
-//      .density(0.2f, 1f)
-//      .generator(GEN_SWEETGUM)
-//      .fruit(null, 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-//
-//    WoodTypes.SORB = WoodType
-//      .builder("sorb") //TODO
-//      .color(rgb(82, 44, 41))
-//      .burnInfo(745f, 2000)
-//      .isCanMakeTannin()
-//      .rainInfo(140f, 360f)
-//      .tempInfo(-2f, 18f)
-//      .decayDist(6)
-//      .minGrowthTime(16)
-//      .bushes()
-//      .density(0.2f, 1f)
-//      .generator(GEN_SWEETGUM)
-//      .fruit(null, 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
 
     WoodTypes.SWEETGUM = WoodType
       .builder("sweetgum")
@@ -1678,22 +1327,6 @@ public class WoodTypeHandler {
       .cellKit("deciduous")
       .build();
 
-//    WoodTypes.WHITE_CHERRY_BLOSSOM = WoodType
-//      .builder("white_cherry_blossom")
-//      .color(rgb(208, 175, 163))
-//      .burnInfo(795f, 1250)
-//      .rainInfo(180f, 300f)
-//      .tempInfo(0f, 20f)
-//      .minGrowthTime(8)
-//      .density(0.25f, 2f)
-//      .generator(GEN_WHITE_CHERRY)
-//      .fruit(() -> ItemFoodTFC.get(Food.CHERRY), 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 3, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-
     WoodTypes.WHITE_CHERRY = WoodType
       .builder("white_cherry")
       .color(rgb(208, 175, 163))
@@ -1726,57 +1359,6 @@ public class WoodTypeHandler {
       .growthLogicKit("darkoak")
       .cellKit("deciduous")
       .build();
-
-//    WoodTypes.WHITE_JACARANDA = WoodType
-//      .builder("white_jacaranda") //TODO
-//      .color(rgb(144, 114, 94))
-//      .burnInfo(653f, 1750)
-//      .isCanMakeTannin()
-//      .rainInfo(60f, 290f)
-//      .tempInfo(2f, 20f)
-//      .minGrowthTime(8)
-//      .bushes()
-//      .generator(GEN_WHITE_ELM)
-//      .fruit(null, 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-//
-//    WoodTypes.WHITE_MANGROVE = WoodType
-//      .builder("white_mangrove") //TODO
-//      .color(rgb(156, 150, 150))
-//      .burnInfo(653f, 1750)
-//      .isCanMakeTannin()
-//      .rainInfo(60f, 290f)
-//      .tempInfo(2f, 20f)
-//      .minGrowthTime(8)
-//      .bushes()
-//      .generator(GEN_WHITE_ELM)
-//      .fruit(null, 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-//
-//    WoodTypes.YELLOW_JACARANDA = WoodType
-//      .builder("yellow_jacaranda") //TODO
-//      .color(rgb(144, 113, 93))
-//      .burnInfo(837f, 1200)
-//      .rainInfo(260f, 500f)
-//      .tempInfo(21f, 50f)
-//      .radius(1)
-//      .decayDist(6)
-//      .minGrowthTime(18)
-//      .bushes()
-//      .density(0.5f, 2f)
-//      .generator(GEN_YELLOW_MERANTI)
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
 
     WoodTypes.MANGROVE = WoodType
       .builder("mangrove") //TODO
@@ -2028,5 +1610,414 @@ public class WoodTypeHandler {
 //      .growthLogicKit("darkoak")
 //      .cellKit("deciduous")
 //      .build();
+//    WoodTypes.ARGYLE_EUCALYPTUS = WoodType
+//      .builder("argyle_eucalyptus") //TODO
+//      .color(rgb(243, 159, 112))
+//      .burnInfo(773f, 1200)
+//      .rainInfo(320f, 500f)
+//      .tempInfo(22f, 50f)
+//      .radius(1)
+//      .decayDist(6)
+//      .minGrowthTime(18)
+//      .density(0.5f, 2f)
+//      .bushes()
+//      .generator(GEN_ANGELIM)
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//    WoodTypes.WHITE_JACARANDA = WoodType
+//      .builder("white_jacaranda") //TODO
+//      .color(rgb(144, 114, 94))
+//      .burnInfo(653f, 1750)
+//      .isCanMakeTannin()
+//      .rainInfo(60f, 290f)
+//      .tempInfo(2f, 20f)
+//      .minGrowthTime(8)
+//      .bushes()
+//      .generator(GEN_WHITE_ELM)
+//      .fruit(null, 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//
+//    WoodTypes.WHITE_MANGROVE = WoodType
+//      .builder("white_mangrove") //TODO
+//      .color(rgb(156, 150, 150))
+//      .burnInfo(653f, 1750)
+//      .isCanMakeTannin()
+//      .rainInfo(60f, 290f)
+//      .tempInfo(2f, 20f)
+//      .minGrowthTime(8)
+//      .bushes()
+//      .generator(GEN_WHITE_ELM)
+//      .fruit(null, 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//
+//    WoodTypes.YELLOW_JACARANDA = WoodType
+//      .builder("yellow_jacaranda") //TODO
+//      .color(rgb(144, 113, 93))
+//      .burnInfo(837f, 1200)
+//      .rainInfo(260f, 500f)
+//      .tempInfo(21f, 50f)
+//      .radius(1)
+//      .decayDist(6)
+//      .minGrowthTime(18)
+//      .bushes()
+//      .density(0.5f, 2f)
+//      .generator(GEN_YELLOW_MERANTI)
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//    WoodTypes.WHITE_CHERRY_BLOSSOM = WoodType
+//      .builder("white_cherry_blossom")
+//      .color(rgb(208, 175, 163))
+//      .burnInfo(795f, 1250)
+//      .rainInfo(180f, 300f)
+//      .tempInfo(0f, 20f)
+//      .minGrowthTime(8)
+//      .density(0.25f, 2f)
+//      .generator(GEN_WHITE_CHERRY)
+//      .fruit(() -> ItemFoodTFC.get(Food.CHERRY), 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 3, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//    WoodTypes.SLOE = WoodType
+//      .builder("sloe") //TODO
+//      .color(rgb(205, 174, 135))
+//      .burnInfo(745f, 2000)
+//      .isCanMakeTannin()
+//      .rainInfo(140f, 360f)
+//      .tempInfo(-2f, 18f)
+//      .decayDist(6)
+//      .minGrowthTime(16)
+//      .bushes()
+//      .density(0.2f, 1f)
+//      .generator(GEN_SWEETGUM)
+//      .fruit(null, 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//
+//    WoodTypes.SNOW_GUM_EUCALYPTUS = WoodType
+//      .builder("snow_gum_eucalyptus") //TODO
+//      .color(rgb(239, 157, 109))
+//      .burnInfo(745f, 2000)
+//      .isCanMakeTannin()
+//      .rainInfo(140f, 360f)
+//      .tempInfo(-2f, 18f)
+//      .decayDist(6)
+//      .minGrowthTime(16)
+//      .bushes()
+//      .density(0.2f, 1f)
+//      .generator(GEN_SWEETGUM)
+//      .fruit(null, 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//
+//    WoodTypes.SORB = WoodType
+//      .builder("sorb") //TODO
+//      .color(rgb(82, 44, 41))
+//      .burnInfo(745f, 2000)
+//      .isCanMakeTannin()
+//      .rainInfo(140f, 360f)
+//      .tempInfo(-2f, 18f)
+//      .decayDist(6)
+//      .minGrowthTime(16)
+//      .bushes()
+//      .density(0.2f, 1f)
+//      .generator(GEN_SWEETGUM)
+//      .fruit(null, 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//
+//    WoodTypes.RED_MANGROVE = WoodType
+//      .builder("red_mangrove")
+//      .color(rgb(99, 34, 34))
+//      .burnInfo(783f, 1100)
+//      .rainInfo(200f, 500f)
+//      .tempInfo(15f, 40f)
+//      .dominance(0f)
+//      .density(0f, 0f)
+//      .radius(1)
+//      .minGrowthTime(8)
+//      .bushes()
+//      .generator(GEN_MANGROVE)
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//    WoodTypes.RED_CYPRESS = WoodType
+//      .builder("red_cypress") //TODO
+//      .color(rgb(109, 107, 74))
+//      .burnInfo(618f, 1750)
+//      .isCanMakeTannin()
+//      .rainInfo(10f, 240f)
+//      .tempInfo(-8f, 17f)
+//      .decayDist(6)
+//      .minGrowthTime(18)
+//      .bushes()
+//      .isConifer()
+//      .bushes()
+//      .density(0.4f, 2f)
+//      .generator(GEN_RED_CEDAR)
+//      .fruit(() -> ItemsTFCF.JUNIPER, 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 3, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//
+//    WoodTypes.PURPLE_JACARANDA = WoodType
+//      .builder("purple_jacaranda") //TODO
+//      .color(rgb(142, 110, 91))
+//      .burnInfo(795f, 1250)
+//      .rainInfo(180f, 300f)
+//      .tempInfo(10f, 34f)
+//      .minGrowthTime(8)
+//      .density(0.25f, 2f)
+//      .generator(GEN_JACARANDA)
+//      .fruit(null, 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//
+//    WoodTypes.QUINCE = WoodType
+//      .builder("quince") //TODO
+//      .color(rgb(183, 137, 62))
+//      .burnInfo(795f, 1250)
+//      .rainInfo(180f, 300f)
+//      .tempInfo(10f, 34f)
+//      .minGrowthTime(8)
+//      .density(0.25f, 2f)
+//      .generator(GEN_JACARANDA)
+//      .fruit(null, 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//
+//    WoodTypes.RAINBOW_EUCALYPTUS = WoodType
+//      .builder("rainbow_eucalyptus")
+//      .color(rgb(239, 157, 109))
+//      .burnInfo(705f, 1000)
+//      .rainInfo(120f, 300f)
+//      .tempInfo(18f, 39f)
+//      .minGrowthTime(8)
+//      .bushes()
+//      .density(0.35f, 2f)
+//      .generator(GEN_EUCALYPTUS)
+//      .fruit(null, 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//
+//    WoodTypes.PEAR = WoodType
+//      .builder("pear") //TODO
+//      .color(rgb(156, 71, 34))
+//      .burnInfo(628f, 1500)
+//      .rainInfo(100f, 380f)
+//      .tempInfo(-20f, 5f)
+//      .minGrowthTime(8)
+//      .isConifer()
+//      .density(0.1f, 0.9f)
+//      .generator(GEN_NORWAY_SPRUCE)
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//
+//    WoodTypes.PERSIMMON = WoodType
+//      .builder("persimmon") //TODO
+//      .color(rgb(81, 45, 36))
+//      .burnInfo(628f, 1500)
+//      .rainInfo(100f, 380f)
+//      .tempInfo(-20f, 5f)
+//      .minGrowthTime(8)
+//      .isConifer()
+//      .density(0.1f, 0.9f)
+//      .generator(GEN_NORWAY_SPRUCE)
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//
+//    WoodTypes.PINK_CHERRY_BLOSSOM = WoodType
+//      .builder("pink_cherry_blossom")
+//      .color(rgb(225, 167, 160))
+//      .burnInfo(795f, 1250)
+//      .rainInfo(180f, 300f)
+//      .tempInfo(0f, 20f)
+//      .minGrowthTime(8)
+//      .density(0.25f, 2f)
+//      .generator(GEN_PINK_CHERRY)
+//      .fruit(() -> ItemFoodTFC.get(Food.CHERRY), 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 3, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//
+//    WoodTypes.MULBERRY = WoodType
+//      .builder("mulberry") //TODO
+//      .color(rgb(154, 113, 81))
+//      .burnInfo(696f, 1250)
+//      .rainInfo(80f, 270f)
+//      .tempInfo(9f, 33f)
+//      .minGrowthTime(10)
+//      .bushes()
+//      .density(0.4f, 2f)
+//      .generator(GEN_MOUNTAIN_ASH)
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//    WoodTypes.MEDLAR = WoodType
+//      .builder("medlar") //TODO
+//      .color(rgb(132, 82, 68))
+//      .burnInfo(837f, 1200)
+//      .rainInfo(180f, 500f)
+//      .tempInfo(16f, 35f)
+//      .decayDist(6)
+//      .minGrowthTime(18)
+//      .bushes()
+//      .density(0.2f, 2f)
+//      .generator(GEN_MARBLEWOOD)
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//    WoodTypes.LAUREL = WoodType
+//      .builder("laurel")
+//      .color(rgb(202, 165, 110))
+//      .burnInfo(632f, 1250)
+//      .rainInfo(60f, 400f)
+//      .tempInfo(-12f, 15f)
+//      .minGrowthTime(8)
+//      .isConifer()
+//      .density(0.25f, 1f)
+//      .generator(GEN_LARCH)
+//      .fruit(() -> ItemsTFCF.PINECONE, 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 3, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+
+//    WoodTypes.BAMBOO = WoodType
+//      .builder("bamboo")
+//      .color(rgb(83, 97, 28))
+//      .burnInfo(770f, 1300)
+//      .rainInfo(180f, 500f)
+//      .tempInfo(10f, 38f)
+//      .dominance(0f)
+//      .density(0f, 0f)
+//      .minGrowthTime(8)
+//      .bushes()
+//      .isConifer()
+//      .generator(GEN_BALD_CYPRESS)
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+
+//    WoodTypes.BLACK_WILLOW = WoodType
+//      .builder("black_willow") //TODO
+//      .color(rgb(35, 42, 11))
+//      .burnInfo(758f, 1800)
+//      .rainInfo(180f, 300f)
+//      .tempInfo(-10f, 16f)
+//      .minGrowthTime(9)
+//      .bushes()
+//      .generator(GEN_BLACK_WALNUT)
+//      .fruit(null, 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+
+//    WoodTypes.BUXUS = WoodType
+//      .builder("buxus")
+//      .color(rgb(212, 175, 130))
+//      .burnInfo(683f, 1500)
+//      .rainInfo(180f, 400f)
+//      .tempInfo(-8f, 15f)
+//      .minGrowthTime(8)
+//      .density(0.25f, 1f)
+//      .generator(GEN_TALL_TFC)
+//      .bushes()
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+    //    WoodTypes.EUROPEAN_OAK = WoodType
+//      .builder("european_oak")
+//      .color(rgb(196, 161, 133))
+//      .burnInfo(728f, 2250)
+//      .isCanMakeTannin()
+//      .rainInfo(140f, 430f)
+//      .tempInfo(-8f, 15f)
+//      .minGrowthTime(10)
+//      .bushes()
+//      .generator(GEN_EUROPEAN_OAK)
+//      .fruit(null, 0.33f)
+//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+    //    WoodTypes.GHAF = WoodType
+//      .builder("ghaf")
+//      .color(rgb(95, 93, 98))
+//      .burnInfo(590f, 1000)
+//      .rainInfo(70f, 220f)
+//      .tempInfo(19f, 50f)
+//      .minGrowthTime(10)
+//      .bushes()
+//      .density(0.25f, 1f)
+//      .generator(GEN_FEVER)
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+    //    WoodTypes.JABUTICABEIRA = WoodType
+//      .builder("jabuticabeira") //TODO
+//      .color(rgb(147, 86, 76))
+//      .burnInfo(694f, 1170)
+//      .rainInfo(30f, 210f)
+//      .tempInfo(11f, 36f)
+//      .decayDist(6)
+//      .minGrowthTime(11)
+//      .bushes()
+//      .density(0.1f, 0.6f)
+//      .generator(GEN_IRONWOOD)
+//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+//      .growthLogicKit("darkoak")
+//      .cellKit("deciduous")
+//      .build();
+//
   }
 }

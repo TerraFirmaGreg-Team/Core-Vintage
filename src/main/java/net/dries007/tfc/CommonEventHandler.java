@@ -42,8 +42,8 @@ import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockAnvil;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodSupport;
-import su.terrafirmagreg.modules.world.ModuleWorld;
-import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
+import su.terrafirmagreg.modules.worldgen.ModuleWorld;
+import su.terrafirmagreg.modules.worldgen.classic.WorldTypeClassic;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;

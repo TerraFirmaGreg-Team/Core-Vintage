@@ -15,9 +15,9 @@ import su.terrafirmagreg.modules.flora.object.block.BlockPlantMushroom;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorBerryBushes;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorPlant;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorTrees;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorBerryBushes;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorPlant;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorTrees;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

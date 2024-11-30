@@ -37,16 +37,14 @@ public class BlockThatch extends BaseBlock {
 
   @SideOnly(Side.CLIENT)
   @Override
-  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos,
-                                      EnumFacing side) {
+  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
     return true;
   }
 
   @Override
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
     // Player will take damage when hitting thatch if fall is over 13 blocks, fall damage is then set to 0.
-    entityIn.fall((entityIn.fallDistance - 10),
-                  1.0F); // TODO: 17/4/18 balance fall damage reduction.
+    entityIn.fall((entityIn.fallDistance - 10), 1.0F); // TODO: 17/4/18 balance fall damage reduction.
     entityIn.fallDistance = 0;
 
     entityIn.motionX *= 0.1;
@@ -57,8 +55,7 @@ public class BlockThatch extends BaseBlock {
   }
 
   @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-                                               BlockPos pos) {
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return NULL_AABB;
   }
 }

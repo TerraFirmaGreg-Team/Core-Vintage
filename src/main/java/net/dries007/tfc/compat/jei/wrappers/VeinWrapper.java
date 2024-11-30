@@ -3,7 +3,7 @@ package net.dries007.tfc.compat.jei.wrappers;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypes;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
-import su.terrafirmagreg.modules.world.classic.objects.generator.vein.VeinType;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.vein.VeinType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

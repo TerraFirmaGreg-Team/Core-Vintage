@@ -5,8 +5,8 @@ import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.feature.skills.ProspectingSkill;
 import su.terrafirmagreg.modules.core.feature.skills.SkillType;
-import su.terrafirmagreg.modules.world.classic.objects.generator.vein.VeinRegistry;
-import su.terrafirmagreg.modules.world.classic.objects.generator.vein.VeinType;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.vein.VeinRegistry;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.vein.VeinType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

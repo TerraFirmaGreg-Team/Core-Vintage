@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.core.feature.skills.SimpleSkill;
 import su.terrafirmagreg.modules.core.feature.skills.SkillType;
 import su.terrafirmagreg.modules.flora.object.block.BlockPlantEmergentTallWater;
 import su.terrafirmagreg.modules.flora.object.block.BlockPlantWater;
-import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
+import su.terrafirmagreg.modules.worldgen.classic.ChunkGenClassic;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;

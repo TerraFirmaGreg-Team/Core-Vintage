@@ -50,6 +50,7 @@ public final class ModuleRock extends ModuleBase {
 
     BlocksRock.onRegister(registryManager);
     ItemsRock.onRegister(registryManager);
+    //GeneratorRock.onRegister(registryManager);
   }
 
   @NotNull

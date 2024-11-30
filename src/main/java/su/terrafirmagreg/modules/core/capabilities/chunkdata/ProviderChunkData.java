@@ -5,8 +5,8 @@ import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
-import su.terrafirmagreg.modules.world.classic.objects.generator.vein.Vein;
+import su.terrafirmagreg.modules.worldgen.classic.DataLayerClassic;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.vein.Vein;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -26,8 +26,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.modules.world.classic.WorldTypeClassic.ROCKLAYER2;
-import static su.terrafirmagreg.modules.world.classic.WorldTypeClassic.ROCKLAYER3;
+import static su.terrafirmagreg.modules.worldgen.classic.WorldTypeClassic.ROCKLAYER2;
+import static su.terrafirmagreg.modules.worldgen.classic.WorldTypeClassic.ROCKLAYER3;
 
 @Getter
 @SuppressWarnings("WeakerAccess")

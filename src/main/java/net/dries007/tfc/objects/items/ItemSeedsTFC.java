@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
-import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
+import su.terrafirmagreg.modules.worldgen.classic.ChunkGenClassic;
 
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;

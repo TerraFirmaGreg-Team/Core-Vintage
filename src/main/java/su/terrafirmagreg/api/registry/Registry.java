@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.registry;
 
-import su.terrafirmagreg.api.base.biome.BaseBiome;
+import su.terrafirmagreg.api.base.biome.spi.IBiomeSettings;
 import su.terrafirmagreg.api.helper.OreDictHelper;
 import su.terrafirmagreg.api.library.collection.RegistryList;
 import su.terrafirmagreg.api.library.model.CustomModelLoader;
@@ -184,7 +184,7 @@ public class Registry {
     this.biomes.register(event);
 
     this.biomes.forEach(biome -> {
-      if (biome instanceof BaseBiome provider) {
+      if (biome instanceof IBiomeSettings provider) {
         if (provider.getTypes().length > 0) {
           BiomeDictionary.addTypes(biome, provider.getTypes());
         }

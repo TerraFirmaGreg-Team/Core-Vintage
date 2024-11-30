@@ -78,6 +78,13 @@ public final class BiomeUtils {
     return biomes;
   }
 
+  public static boolean isBiomeDesired(Biome biome, Biome... biomes) {
+    for (Biome b : biomes) {
+      return b == biome;
+    }
+    return false;
+  }
+
   public static Biome getBiomeForLoc(ResourceLocation location) {
     return Biome.REGISTRY.getObject(location);
   }

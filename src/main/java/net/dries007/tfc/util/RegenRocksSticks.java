@@ -3,9 +3,9 @@ package net.dries007.tfc.util;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.modules.flora.object.block.BlockPlantShortGrass;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
-import su.terrafirmagreg.modules.world.ConfigWorld;
-import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
-import su.terrafirmagreg.modules.world.classic.objects.generator.groundcover.GeneratorSurfaceRocks;
+import su.terrafirmagreg.modules.rock.object.generator.GeneratorRockSurface;
+import su.terrafirmagreg.modules.worldgen.ConfigWorld;
+import su.terrafirmagreg.modules.worldgen.classic.ChunkGenClassic;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
@@ -15,13 +15,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 
 import java.util.Random;
 
-public class RegenRocksSticks extends GeneratorSurfaceRocks {
-
-  private static Boolean isReplaceable(World world, BlockPos pos) {
-    //Modified to allow replacement of grass during spring regen
-    Block test = world.getBlockState(pos).getBlock();
-    return test instanceof BlockPlantShortGrass || test.isAir(world.getBlockState(pos), world, pos);
-  }
+public class RegenRocksSticks extends GeneratorRockSurface {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
@@ -39,6 +33,12 @@ public class RegenRocksSticks extends GeneratorSurfaceRocks {
         generateRock(random, world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()), rock);
       }
     }
+  }
+
+  private static Boolean isReplaceable(World world, BlockPos pos) {
+    //Modified to allow replacement of grass during spring regen
+    Block test = world.getBlockState(pos).getBlock();
+    return test instanceof BlockPlantShortGrass || test.isAir(world.getBlockState(pos), world, pos);
   }
 
   @Override

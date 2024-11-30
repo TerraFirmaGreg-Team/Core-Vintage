@@ -482,6 +482,11 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
       return this;
     }
 
+    public Settings lightValue(float lightValue) {
+      this.lightValue = (state, access, pos) -> (int) (15.0F * lightValue);
+      return this;
+    }
+
     public Settings slipperiness(ContextFunction<Float> slipperiness) {
       this.slipperiness = slipperiness;
       return this;

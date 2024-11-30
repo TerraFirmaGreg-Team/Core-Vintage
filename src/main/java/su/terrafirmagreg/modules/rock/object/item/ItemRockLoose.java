@@ -7,7 +7,7 @@ import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
 import su.terrafirmagreg.modules.rock.client.gui.GuiContainerKnappingRock;
-import su.terrafirmagreg.modules.rock.object.container.ContainerKnappingRock;
+import su.terrafirmagreg.modules.rock.object.container.ContainerRockKnapping;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -36,7 +36,7 @@ import static su.terrafirmagreg.modules.rock.init.BlocksRock.RAW;
 
 @Getter
 public class ItemRockLoose extends ItemRock
-  implements IProviderContainer<ContainerKnappingRock, GuiContainerKnappingRock> {
+  implements IProviderContainer<ContainerRockKnapping, GuiContainerKnappingRock> {
 
   public ItemRockLoose(RockItemVariant variant, RockType type) {
     super(variant, type);
@@ -78,8 +78,8 @@ public class ItemRockLoose extends ItemRock
   }
 
   @Override
-  public ContainerKnappingRock getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-    return new ContainerKnappingRock(inventoryPlayer, inventoryPlayer.player.getHeldItemMainhand());
+  public ContainerRockKnapping getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new ContainerRockKnapping(inventoryPlayer, inventoryPlayer.player.getHeldItemMainhand());
   }
 
   @Override

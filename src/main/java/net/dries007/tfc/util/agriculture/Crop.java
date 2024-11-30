@@ -4,7 +4,7 @@ import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.skills.Skill;
 import su.terrafirmagreg.modules.core.feature.skills.SkillTier;
-import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorWildCrops;
+import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorWildCrops;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;

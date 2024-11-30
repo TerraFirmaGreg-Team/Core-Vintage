@@ -4,29 +4,42 @@ import su.terrafirmagreg.api.registry.provider.IProviderAutoReg;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
+
+import com.google.common.collect.Lists;
 
 import lombok.Getter;
 
 import java.awt.Color;
+import java.util.Arrays;
+import java.util.List;
 
 public interface IBiomeSettings extends IProviderAutoReg {
 
   default String getRegistryKey() {
-    return getSettings().registryKey;
+    return getSettings().getRegistryKey();
   }
 
   Settings getSettings();
 
+  int getBiomeWeight();
+
+  BiomeDictionary.Type[] getTypes();
+
   @Getter
   class Settings {
+
+    final List<BiomeDictionary.Type> types = Lists.newArrayList();
 
     final String name;
     final String registryKey;
 
     String baseBiome;
+
     int guiColour = 0xffffff;
-    Color debugColour = new Color(guiColour);
     int waterColor = 16777215;
+    int biomeWeight = 0;
+
     float baseHeight = 0.1F;
     float heightVariation = 0.2F;
     float temperature = 0.5F;
@@ -36,11 +49,18 @@ public interface IBiomeSettings extends IProviderAutoReg {
     boolean worldGen = false;
     boolean enableSnow = false;
     boolean enableRain = true;
+    boolean generateVillages = true;
+
+    Color debugColour = new Color(guiColour);
 
     public Settings(String name) {
       this.name = ModUtils.name(name);
       this.registryKey = name;
 
+    }
+
+    public static Settings of(String name) {
+      return new Settings(name);
     }
 
     public Settings baseBiome(Biome baseBiome) {
@@ -50,6 +70,16 @@ public interface IBiomeSettings extends IProviderAutoReg {
 
     public Settings baseBiome(String baseBiome) {
       this.baseBiome = baseBiome;
+      return this;
+    }
+
+    public Settings biomeWeight(int biomeWeight) {
+      this.biomeWeight = biomeWeight;
+      return this;
+    }
+
+    public Settings addType(BiomeDictionary.Type... types) {
+      this.types.addAll(Arrays.asList(types));
       return this;
     }
 

@@ -26,7 +26,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.base.Strings;
-import net.dries007.tfc.objects.GemTFCF;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
@@ -34,7 +33,6 @@ import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.items.ItemArmorTFCF;
-import net.dries007.tfc.objects.items.ItemGemTFCF;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.CAN_GROW;
@@ -63,12 +61,6 @@ public class ClientRegisterEventsTFCF {
     for (Item item : ItemsTFCF.getAllSimpleItems()) {
       ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName()
                                                                                         .toString()));
-    }
-
-    for (ItemGemTFCF item : ItemsTFCF.getAllGemTFCFItems()) {
-      for (GemTFCF.Grade grade : GemTFCF.Grade.values()) {
-        registerEnumBasedMetaItems("gem", grade, item);
-      }
     }
 
     for (Item item : ItemsTFCF.getAllItemBows()) {

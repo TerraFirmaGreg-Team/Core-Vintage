@@ -1767,15 +1767,6 @@ public final class ItemsTFCF {
       simpleItems.add(register(r, log.getRegistryName().getPath(), new ItemBlockTFC(log), CT_WOOD));
     }
 
-    // Gems
-    {
-      Builder<ItemGemTFCF> b = new Builder<>();
-      for (GemTFCF gem : GemTFCF.values()) {
-        b.add(register(r, "gem/" + gem.name().toLowerCase(), new ItemGemTFCF(gem), CT_MISC));
-      }
-      allGemTFCFItems = b.build();
-    }
-
     // Tools
     simpleItems.add(
       register(r, "tools/walking_stick", new ItemWalkingStick(ToolMaterial.WOOD, 1f, 1.5f, 0.02f, 96, "stick_wood", "walking_stick"),

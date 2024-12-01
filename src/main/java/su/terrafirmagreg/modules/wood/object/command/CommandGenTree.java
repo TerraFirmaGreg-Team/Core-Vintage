@@ -14,6 +14,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+
 import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class CommandGenTree extends BaseCommand {
@@ -60,5 +64,10 @@ public class CommandGenTree extends BaseCommand {
   @Override
   public int getRequiredPermissionLevel() {
     return 2;
+  }
+
+  @Override
+  public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
+    return getListOfStringsMatchingLastWord(args, WoodType.getTypes().stream().map(WoodType::getName).toArray(String[]::new));
   }
 }

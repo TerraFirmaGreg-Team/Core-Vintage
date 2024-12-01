@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.object.command;
 
 import su.terrafirmagreg.api.base.command.BaseCommand;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.flora.object.block.BlockPlant;
+import su.terrafirmagreg.modules.flora.api.types.variant.block.IFloraBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 
@@ -55,11 +55,9 @@ public class CommandStripWorld extends BaseCommand {
         for (int y = 255 - center.getY(); y > -center.getY(); y--) {
           final BlockPos pos = center.add(x, y, z);
           final Block current = world.getBlockState(pos).getBlock();
-          if (current instanceof BlockFluidBase || current instanceof BlockDynamicLiquid
-              || current instanceof BlockStaticLiquid) {
+          if (current instanceof BlockFluidBase || current instanceof BlockDynamicLiquid || current instanceof BlockStaticLiquid) {
             world.setBlockState(pos, fluidReplacement, 2);
-          } else if (current instanceof IRockBlock || current instanceof ISoilBlock
-                     || current instanceof BlockPlant) {
+          } else if (current instanceof IRockBlock || current instanceof ISoilBlock || current instanceof IFloraBlock) {
             world.setBlockState(pos, terrainReplacement, 2);
           }
         }

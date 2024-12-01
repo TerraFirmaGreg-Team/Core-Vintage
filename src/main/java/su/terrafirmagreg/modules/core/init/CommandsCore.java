@@ -19,15 +19,15 @@ public final class CommandsCore {
   public static CommandTime TIME;
   public static CommandHorsePower HORSE_POWER;
 
-  public static void onRegister(RegistryManager registryManager) {
+  public static void onRegister(RegistryManager manager) {
 
-    DEBUG_INFO = registryManager.command(new CommandDebugInfo());
-    STRIP_WORLD = registryManager.command(new CommandStripWorld());
-    MAKE_TREE = registryManager.command(new CommandGenTree());
-    HEAT = registryManager.command(new CommandHeat());
-    PLAYER = registryManager.command(new CommandPlayer());
-    TIME = registryManager.command(new CommandTime());
-    HORSE_POWER = registryManager.command(new CommandHorsePower());
+    DEBUG_INFO = manager.command(new CommandDebugInfo());
+    STRIP_WORLD = manager.command(new CommandStripWorld());
+    MAKE_TREE = manager.command(new CommandGenTree());
+    HEAT = manager.command(new CommandHeat());
+    PLAYER = manager.command(new CommandPlayer());
+    TIME = manager.command(new CommandTime());
+    HORSE_POWER = manager.command(new CommandHorsePower());
 
   }
 }

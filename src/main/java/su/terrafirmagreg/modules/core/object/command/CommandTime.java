@@ -1,6 +1,9 @@
 package su.terrafirmagreg.modules.core.object.command;
 
 import su.terrafirmagreg.api.base.command.BaseCommand;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.CommandResultStats;
@@ -9,9 +12,6 @@ import net.minecraft.command.WrongUsageException;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -27,7 +27,7 @@ public class CommandTime extends BaseCommand {
 
   @Override
   public String getUsage(ICommandSender sender) {
-    return "tfc.command.time.usage";
+    return ModUtils.localize("command", "time.usage");
   }
 
   @Override
@@ -36,87 +36,86 @@ public class CommandTime extends BaseCommand {
     if (args.length >= 1) {
       if ("set".equals(args[0])) {
         if (args.length < 2) {
-          throw new WrongUsageException("tfc.command.timetfc.usage_expected_second_argument_set");
+          throw new WrongUsageException(ModUtils.localize("command", "time.usage.expected_second_argument_set"));
         } else if ("monthlength".equals(args[1])) {
           int newMonthLength = parseInt(args[2], 1);
           Calendar.INSTANCE.setMonthLength(newMonthLength);
-          notifyCommandListener(sender, this, "tfc.command.timetfc.set_month_length",
-                                newMonthLength);
+          notifyCommandListener(sender, this, ModUtils.localize("command", "time.set.month_length"), newMonthLength);
         } else {
           int resultWorldTime;
           if ("day".equals(args[1])) {
             resultWorldTime = 1000;
-            notifyCommandListener(sender, this, "tfc.command.timetfc.set_day");
+            notifyCommandListener(sender, this, ModUtils.localize("command", "time.set.day"));
           } else if ("night".equals(args[1])) {
             resultWorldTime = 13000;
-            notifyCommandListener(sender, this, "tfc.command.timetfc.set_night");
+            notifyCommandListener(sender, this, ModUtils.localize("command", "time.set.night"));
           } else {
             resultWorldTime = parseInt(args[1], 0);
-            notifyCommandListener(sender, this, "tfc.command.timetfc.set_ticks", resultWorldTime);
+            notifyCommandListener(sender, this, ModUtils.localize("command", "time.set.ticks"), resultWorldTime);
           }
           setAllWorldTimes(server, resultWorldTime);
           Calendar.INSTANCE.setTimeFromWorldTime(resultWorldTime);
         }
       } else if ("add".equals(args[0])) {
         if (args.length < 2) {
-          throw new WrongUsageException("tfc.command.timetfc.usage_expected_second_argument_add");
+          throw new WrongUsageException(ModUtils.localize("command", "time.usage.expected_second_argument_add"));
         }
         long timeToAdd;
         switch (args[1]) {
           case "months":
             int months = parseInt(args[2], 0);
             timeToAdd = ICalendar.TICKS_IN_DAY * Calendar.CALENDAR_TIME.getDaysInMonth() * months;
-            notifyCommandListener(sender, this, "tfc.command.timetfc.add_months", months,
+            notifyCommandListener(sender, this, ModUtils.localize("command", "time.add.months"), months,
                                   timeToAdd);
             break;
           case "years":
             int years = parseInt(args[2], 0);
             timeToAdd =
               ICalendar.TICKS_IN_DAY * Calendar.CALENDAR_TIME.getDaysInMonth() * 12 * years;
-            notifyCommandListener(sender, this, "tfc.command.timetfc.add_years", years, timeToAdd);
+            notifyCommandListener(sender, this, ModUtils.localize("command", "time.add.years"), years, timeToAdd);
             break;
           case "days":
             int days = parseInt(args[2], 0);
             timeToAdd = (long) ICalendar.TICKS_IN_DAY * days;
-            notifyCommandListener(sender, this, "tfc.command.timetfc.add_days", days, timeToAdd);
+            notifyCommandListener(sender, this, ModUtils.localize("command", "time.add.days"), days, timeToAdd);
             break;
           default:
             timeToAdd = parseInt(args[1], 0);
-            notifyCommandListener(sender, this, "tfc.command.timetfc.add_ticks", timeToAdd);
+            notifyCommandListener(sender, this, ModUtils.localize("command", "time.add.ticks"), timeToAdd);
         }
         long newCalendarTime = Calendar.CALENDAR_TIME.getTicks() + timeToAdd;
         Calendar.INSTANCE.setTimeFromCalendarTime(newCalendarTime);
       } else if ("query".equals(args[0])) {
         if (args.length < 2) {
-          throw new WrongUsageException("tfc.command.timetfc.usage_expected_second_argument_query");
+          throw new WrongUsageException(ModUtils.localize("command", "time.usage.expected_second_argument_query"));
         } else if ("daytime".equals(args[1])) {
           int daytime = (int) (sender.getEntityWorld().getWorldTime() % ICalendar.TICKS_IN_DAY);
           sender.setCommandStat(CommandResultStats.Type.QUERY_RESULT, daytime);
-          notifyCommandListener(sender, this, "tfc.command.timetfc.query_daytime", daytime);
+          notifyCommandListener(sender, this, ModUtils.localize("command", "time.query.daytime"), daytime);
         } else if ("day".equals(args[1])) {
           int day = (int) (Calendar.CALENDAR_TIME.getTotalDays() % Integer.MAX_VALUE);
           sender.setCommandStat(CommandResultStats.Type.QUERY_RESULT, day);
-          notifyCommandListener(sender, this, "tfc.command.timetfc.query_day", day);
+          notifyCommandListener(sender, this, ModUtils.localize("command", "time.query.day"), day);
         } else if ("gametime".equals(args[1])) {
           int gameTime = (int) (sender.getEntityWorld().getTotalWorldTime() % Integer.MAX_VALUE);
           sender.setCommandStat(CommandResultStats.Type.QUERY_RESULT, gameTime);
-          notifyCommandListener(sender, this, "tfc.command.timetfc.query_gametime", gameTime);
+          notifyCommandListener(sender, this, ModUtils.localize("command", "time.query.gametime"), gameTime);
         } else if ("playerticks".equals(args[1])) {
           int gameTime = (int) (Calendar.PLAYER_TIME.getTicks() % Integer.MAX_VALUE);
           sender.setCommandStat(CommandResultStats.Type.QUERY_RESULT, gameTime);
-          notifyCommandListener(sender, this, "tfc.command.timetfc.query_playerticks", gameTime);
+          notifyCommandListener(sender, this, ModUtils.localize("command", "time.query.playerticks"), gameTime);
         } else if ("calendarticks".equals(args[1])) {
           int gameTime = (int) (Calendar.CALENDAR_TIME.getTicks() % Integer.MAX_VALUE);
           sender.setCommandStat(CommandResultStats.Type.QUERY_RESULT, gameTime);
-          notifyCommandListener(sender, this, "tfc.command.timetfc.query_calendarticks", gameTime);
+          notifyCommandListener(sender, this, ModUtils.localize("command", "time.query.calendarticks"), gameTime);
         } else {
-          throw new WrongUsageException("tfc.command.timetfc.usage_expected_second_argument_query");
+          throw new WrongUsageException(ModUtils.localize("command", "time.usage.expected_second_argument_query"));
         }
       } else {
-        throw new WrongUsageException("tfc.command.timetfc.usage_expected_first_argument");
+        throw new WrongUsageException(ModUtils.localize("command", "time.usage.expected_first_argument"));
       }
     } else {
-      throw new WrongUsageException("tfc.command.timetfc.usage_expected_first_argument");
+      throw new WrongUsageException(ModUtils.localize("command", "time.usage.expected_first_argument"));
     }
   }
 
@@ -137,8 +136,7 @@ public class CommandTime extends BaseCommand {
   }
 
   @Override
-  public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender,
-                                        String[] args, @Nullable BlockPos targetPos) {
+  public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
     if (args.length == 1) {
       return getListOfStringsMatchingLastWord(args, "set", "add", "query");
     } else if (args.length == 2) {
@@ -147,8 +145,7 @@ public class CommandTime extends BaseCommand {
       } else if ("add".equals(args[0])) {
         return getListOfStringsMatchingLastWord(args, "months", "years", "days");
       } else if ("query".equals(args[0])) {
-        return getListOfStringsMatchingLastWord(args, "daytime", "day", "gametime", "playerticks",
-                                                "calendarticks");
+        return getListOfStringsMatchingLastWord(args, "daytime", "day", "gametime", "playerticks", "calendarticks");
       }
     }
     return Collections.emptyList();

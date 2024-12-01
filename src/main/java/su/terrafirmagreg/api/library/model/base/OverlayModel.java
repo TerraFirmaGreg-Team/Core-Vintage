@@ -32,8 +32,7 @@ public class OverlayModel implements IModel {
   }
 
   @Override
-  public @NotNull IBakedModel bake(@NotNull IModelState state, @NotNull VertexFormat format,
-                                   Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+  public @NotNull IBakedModel bake(@NotNull IModelState state, @NotNull VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
 
     ModelBaker baker = ModelBaker.getInstance();
     baker.begin(state, format);

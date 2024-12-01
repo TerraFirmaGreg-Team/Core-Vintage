@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
+import su.terrafirmagreg.api.base.tesr.BaseTESR;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
 
@@ -12,10 +13,11 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.math.Vec3i;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.client.FluidSpriteCache;
 import org.lwjgl.opengl.GL11;
@@ -26,11 +28,11 @@ import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 import static su.terrafirmagreg.api.data.Properties.IntProp.CUT;
 import static su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor.MAX_FLUID;
 
-public class TESRLatexExtractor extends TileEntitySpecialRenderer<TileLatexExtractor> {
+@SideOnly(Side.CLIENT)
+public class TESRLatexExtractor extends BaseTESR<TileLatexExtractor> {
 
   @Override
-  public void render(TileLatexExtractor tile, double x, double y, double z, float partialTicks,
-                     int destroyStage, float alpha) {
+  public void render(TileLatexExtractor tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     if (tile.hasWorld()) {
       IBlockState state = tile.getBlockState();
       Fluid flowing = FluidsCore.LATEX.get();

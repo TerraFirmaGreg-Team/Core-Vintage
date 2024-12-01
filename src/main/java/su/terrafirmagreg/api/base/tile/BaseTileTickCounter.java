@@ -1,14 +1,12 @@
-package net.dries007.tfc.objects.te;
-
-import su.terrafirmagreg.api.base.tile.BaseTile;
-
-import net.minecraft.nbt.NBTTagCompound;
+package su.terrafirmagreg.api.base.tile;
 
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 import org.jetbrains.annotations.NotNull;
 
-public class TETickCounter extends BaseTile {
+public class BaseTileTickCounter extends BaseTile {
 
   private long lastUpdateTick;
 

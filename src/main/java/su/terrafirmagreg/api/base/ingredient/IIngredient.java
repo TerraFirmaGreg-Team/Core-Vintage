@@ -25,6 +25,7 @@ public interface IIngredient<T> extends Predicate<T> {
     return (IIngredient<P>) ANY;
   }
 
+
   /**
    * This is used by JEI-CT hooks, return a valid list of inputs for this IIngredient
    *

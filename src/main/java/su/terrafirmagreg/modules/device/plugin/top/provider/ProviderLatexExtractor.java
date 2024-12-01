@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
+import su.terrafirmagreg.api.plugin.top.provider.BaseProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor;
@@ -15,14 +16,13 @@ import net.minecraft.world.World;
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 
-public final class ProviderLatexExtractor implements IProbeInfoProvider {
+public final class ProviderLatexExtractor extends BaseProvider {
 
   @Override
   public String getID() {
-    return ModUtils.id("device.latex_extractor");
+    return ModUtils.localize("top", "device.latex_extractor");
   }
 
   @Override

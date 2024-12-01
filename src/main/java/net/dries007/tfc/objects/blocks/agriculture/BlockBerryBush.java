@@ -1,10 +1,14 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -31,10 +35,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.objects.te.TETickCounter;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -141,17 +141,16 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
   @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     if (!world.isRemote) {
-      var tile = TileUtils.getTile(world, pos, TETickCounter.class);
-      tile.ifPresent(tileTickCounter -> {
+      TileUtils.getTile(world, pos, BaseTileTickCounter.class).ifPresent(tile -> {
         float temp = Climate.getActualTemp(world, pos);
         float rainfall = ProviderChunkData.getRainfall(world, pos);
-        long hours = tileTickCounter.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+        long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
         if (hours > (bush.getGrowthTime() * ConfigTFC.General.FOOD.berryBushGrowthTimeModifier) && bush.isValidForGrowth(temp, rainfall)) {
           if (bush.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
             //Fruiting
             world.setBlockState(pos, world.getBlockState(pos).withProperty(FRUITING, true));
           }
-          tileTickCounter.resetCounter();
+          tile.resetCounter();
         }
       });
     }
@@ -168,7 +167,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+    TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
   }
 
   @SideOnly(Side.CLIENT)
@@ -192,7 +191,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     if (worldIn.getBlockState(pos).getValue(FRUITING)) {
       ItemHandlerHelper.giveItemToPlayer(playerIn, bush.getFoodDrop());
       worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(FRUITING, false));
-      TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+      TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
     }
     return false;
   }
@@ -226,7 +225,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
   @Nullable
   @Override
   public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TETickCounter();
+    return new BaseTileTickCounter();
   }
 
   private boolean canStay(IBlockAccess world, BlockPos pos) {

@@ -86,8 +86,7 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-    var tile = TileUtils.getTile(worldIn, pos, TileWoodSapling.class);
-    tile.ifPresent(TileWoodSapling::resetCounter);
+    TileUtils.getTile(worldIn, pos, TileWoodSapling.class).ifPresent(TileWoodSapling::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 
@@ -113,9 +112,8 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
     super.updateTick(world, pos, state, random);
 
     if (!world.isRemote) {
-      var tile = TileUtils.getTile(world, pos, TileWoodSapling.class);
-      tile.ifPresent(tileWoodSapling -> {
-        long days = tileWoodSapling.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
+      TileUtils.getTile(world, pos, TileWoodSapling.class).ifPresent(tile -> {
+        long days = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
         if (days > this.type.getMinGrowthTime()) {
           grow(world, random, pos, state);
         }

@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
+import su.terrafirmagreg.api.plugin.top.provider.BaseProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.object.block.BlockQuernHorse;
@@ -13,7 +14,6 @@ import net.minecraft.world.World;
 
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
 import net.dries007.horsepower.util.Localization;
@@ -21,7 +21,7 @@ import net.dries007.horsepower.util.Localization;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProviderQuernHorse implements IProbeInfoProvider {
+public class ProviderQuernHorse extends BaseProvider {
 
   @Override
   public String getID() {

@@ -115,5 +115,29 @@ public final class NutRecipes {
              .setOutputItem(new ItemStack(ItemsTFCF.WALNUT))
              .build();
 
+    NutRecipe.builder("chestnut")
+             .setInputLog(BlocksWood.LOG.get(WoodTypes.CHESTNUT))
+             .setInputLeaves(BlocksWood.LEAVES.get(WoodTypes.CHESTNUT))
+             .setOutputItem(new ItemStack(ItemsFL.getFood(FoodFL.CHESTNUTS)))
+             .build();
+
+    NutRecipe.builder("hickory_nut")
+             .setInputLog(BlocksWood.LOG.get(WoodTypes.HICKORY))
+             .setInputLeaves(BlocksWood.LEAVES.get(WoodTypes.HICKORY))
+             .setOutputItem(new ItemStack(ItemsFL.getFood(FoodFL.PECAN_NUTS)))
+             .build();
+
+    NutRecipe.builder("pine_pinecone")
+             .setInputLog(BlocksWood.LOG.get(WoodTypes.PINE))
+             .setInputLeaves(BlocksWood.LEAVES.get(WoodTypes.PINE))
+             .setOutputItem(new ItemStack(ItemsFL.getFood(FoodFL.PINECONE)))
+             .build();
+
+    NutRecipe.builder("coconut")
+             .setInputLog(BlocksWood.LOG.get(WoodTypes.PALM))
+             .setInputLeaves(BlocksWood.LEAVES.get(WoodTypes.PALM))
+             .setOutputItem(new ItemStack(ItemsFL.getFood(FoodFL.COCONUT)))
+             .build();
+
   }
 }

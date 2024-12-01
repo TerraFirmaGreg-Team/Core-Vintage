@@ -17,19 +17,13 @@ import net.dries007.eerussianguy.firmalife.init.FoodFL;
 import net.dries007.eerussianguy.firmalife.init.Fruit;
 import net.dries007.eerussianguy.firmalife.recipe.CrackingRecipe;
 import net.dries007.eerussianguy.firmalife.recipe.DryingRecipe;
-import net.dries007.eerussianguy.firmalife.recipe.NutRecipe;
 import net.dries007.eerussianguy.firmalife.recipe.OvenRecipe;
 import net.dries007.eerussianguy.firmalife.recipe.PlanterRecipe;
 import net.dries007.eerussianguy.firmalife.recipe.StrainingRecipe;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
-import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
 
@@ -165,28 +159,7 @@ public class RecipesFL {
 //    r.register(new PlanterRecipe(IIngredient.of(BlockPlant.get(PlantTypes.PIMENTO)), new ItemStack(BlockPlant.get(PlantTypes.PIMENTO)), 1, false).setRegistryName(PlantTypes.PIMENTO.getName()));
 //    r.register(new PlanterRecipe(IIngredient.of(BlockPlant.get(PlantTypes.VANILLA)), new ItemStack(BlockPlant.get(PlantTypes.VANILLA)), 1, false).setRegistryName(PlantTypes.VANILLA.getName()));
   }
-
-  @SubscribeEvent
-  @SuppressWarnings("ConstantConditions")
-  public static void onRegisterNutTreeEvent(RegistryEvent.Register<NutRecipe> event) {
-    IForgeRegistry<NutRecipe> r = event.getRegistry();
-    Tree chestnut = TFCRegistries.TREES.getValue(DefaultTrees.CHESTNUT);
-    Tree oak = TFCRegistries.TREES.getValue(DefaultTrees.OAK);
-    Tree hickory = TFCRegistries.TREES.getValue(DefaultTrees.HICKORY);
-    Tree pine = TFCRegistries.TREES.getValue(DefaultTrees.PINE);
-    Tree palm = TFCRegistries.TREES.getValue(DefaultTrees.PALM);
-    r.registerAll(
-      new NutRecipe(BlockLogTFC.get(chestnut), BlockLeavesTFC.get(chestnut),
-                    new ItemStack(ItemsFL.getFood(FoodFL.CHESTNUTS))).setRegistryName("chestnut"),
-      new NutRecipe(BlockLogTFC.get(oak), BlockLeavesTFC.get(oak), new ItemStack(ItemsFL.getFood(FoodFL.ACORNS))).setRegistryName("oak"),
-      new NutRecipe(BlockLogTFC.get(hickory), BlockLeavesTFC.get(hickory),
-                    new ItemStack(ItemsFL.getFood(FoodFL.PECAN_NUTS))).setRegistryName("hickory"),
-      new NutRecipe(BlockLogTFC.get(pine), BlockLeavesTFC.get(pine), new ItemStack(ItemsFL.getFood(FoodFL.PINECONE))).setRegistryName(
-        "pine"),
-      new NutRecipe(BlockLogTFC.get(palm), BlockLeavesTFC.get(palm), new ItemStack(ItemsFL.getFood(FoodFL.COCONUT))).setRegistryName(
-        "coconut")
-    );
-  }
+  
 
   @SubscribeEvent
   public static void onRegisterCrackingRecipeEvent(RegistryEvent.Register<CrackingRecipe> event) {

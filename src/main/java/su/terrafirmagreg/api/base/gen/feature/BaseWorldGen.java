@@ -6,7 +6,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
-public abstract class WorldGenBase extends WorldGenerator {
+public abstract class BaseWorldGen extends WorldGenerator {
 
   @Override
   public final boolean generate(World world, Random random, BlockPos pos) {

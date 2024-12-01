@@ -1,9 +1,12 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -25,9 +28,6 @@ import net.minecraft.world.World;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.objects.te.TETickCounter;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -157,7 +157,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
     float temp = Climate.getActualTemp(worldIn, pos);
     float rainfall = ProviderChunkData.getRainfall(worldIn, pos);
     var fruitTreeBranch = BlockFruitTreeBranch.get(tree);
-    TileUtils.getTile(worldIn, pos, TETickCounter.class)
+    TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class)
              .filter(tile -> (double) tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR
                              > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)
                              && tree.isValidForGrowth(temp, rainfall))
@@ -260,7 +260,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+    TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
   }
 
   @Override
@@ -303,7 +303,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
   @Nullable
   @Override
   public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TETickCounter();
+    return new BaseTileTickCounter();
   }
 
   @Override

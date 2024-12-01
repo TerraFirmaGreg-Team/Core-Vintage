@@ -1,9 +1,13 @@
 package net.dries007.tfc.compat.waila.providers;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.data.enums.EnumFruitLeafState;
 import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,10 +24,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeBranch;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
-import net.dries007.tfc.objects.te.TETickCounter;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,21 +35,6 @@ import static su.terrafirmagreg.api.data.Properties.EnumProp.FRUIT_LEAF_STATE;
 
 public class FruitTreeProvider implements IWailaBlock {
 
-  private static void addInfo(IFruitTree tree, TETickCounter tile, float temperature, float rainfall, List<String> currentTooltip) {
-    if (tree.isValidForGrowth(temperature, rainfall)) {
-      currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growing").getFormattedText());
-      if (tile != null) {
-        long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-        // Don't show 100% since it still needs to check on randomTick to grow
-        float perc = Math.min(0.99F, hours / (tree.getGrowthTime() * (float) ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) * 100;
-        String growth = String.format("%d%%", Math.round(perc));
-        currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
-      }
-    } else {
-      currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
-    }
-  }
-
   @NotNull
   @Override
   public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
@@ -60,7 +45,7 @@ public class FruitTreeProvider implements IWailaBlock {
       if (state.getValue(HARVESTABLE) && block.getTree().isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
         if (state.getValue(FRUIT_LEAF_STATE) != EnumFruitLeafState.FRUIT) {
 
-          TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
+          TileUtils.getTile(world, pos, BaseTileTickCounter.class).ifPresent(tile -> {
             addInfo(block.getTree(), tile, Climate.getActualTemp(world, finalPos), ProviderChunkData.getRainfall(world, finalPos), currentTooltip);
           });
         }
@@ -73,7 +58,7 @@ public class FruitTreeProvider implements IWailaBlock {
         }
       }
     } else if (state.getBlock() instanceof BlockFruitTreeSapling block) {
-      TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
+      TileUtils.getTile(world, pos, BaseTileTickCounter.class).ifPresent(tile -> {
         addInfo(block.getTree(), tile, Climate.getActualTemp(world, finalPos), ProviderChunkData.getRainfall(world, finalPos), currentTooltip);
       });
 
@@ -89,13 +74,28 @@ public class FruitTreeProvider implements IWailaBlock {
         return currentTooltip;
       }
       BlockFruitTreeTrunk block = (BlockFruitTreeTrunk) topMost.getBlock();
-      TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
+      TileUtils.getTile(world, pos, BaseTileTickCounter.class).ifPresent(tile -> {
         addInfo(block.getTree(), tile, Climate.getActualTemp(world, finalPos), ProviderChunkData.getRainfall(world, finalPos), currentTooltip);
       });
 
 
     }
     return currentTooltip;
+  }
+
+  private static void addInfo(IFruitTree tree, BaseTileTickCounter tile, float temperature, float rainfall, List<String> currentTooltip) {
+    if (tree.isValidForGrowth(temperature, rainfall)) {
+      currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growing").getFormattedText());
+      if (tile != null) {
+        long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+        // Don't show 100% since it still needs to check on randomTick to grow
+        float perc = Math.min(0.99F, hours / (tree.getGrowthTime() * (float) ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) * 100;
+        String growth = String.format("%d%%", Math.round(perc));
+        currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
+      }
+    } else {
+      currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
+    }
   }
 
   @NotNull

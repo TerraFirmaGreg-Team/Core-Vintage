@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.base.block.BaseBlockHorizontal;
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -25,7 +26,6 @@ import net.minecraft.world.World;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.te.TETickCounter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -53,16 +53,6 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements ICapabilit
     this.carving = carving;
   }
 
-  @Override
-  public @NotNull Weight getWeight(ItemStack stack) {
-    return Weight.HEAVY;
-  }
-
-  @Override
-  public @NotNull Size getSize(ItemStack stack) {
-    return Size.LARGE;
-  }
-
   @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta)).withProperty(LIT, meta >= 4);
@@ -82,13 +72,17 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements ICapabilit
     return state.withRotation(mirrorIn.toRotation(state.getValue(HORIZONTAL)));
   }
 
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, HORIZONTAL, LIT);
+  }
+
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (worldIn.isRemote) {
       return;
     }
     //taken from BlockTorchTFC
     //last twice as long as a torch. balance this by being less bright
-    TileUtils.getTile(worldIn, pos, TETickCounter.class)
+    TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class)
              .filter(tile -> tile.getTicksSinceUpdate() > (2L * ConfigTFC.General.OVERRIDES.torchTime) && ConfigTFC.General.OVERRIDES.torchTime > 0)
              .ifPresent(tile -> {
                worldIn.setBlockState(pos, state.withProperty(LIT, false));
@@ -106,7 +100,7 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements ICapabilit
     //taken from BlockTorchTFC
     if (!worldIn.isRemote) {
       ItemStack stack = playerIn.getHeldItem(hand);
-      TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(tile -> {
+      TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(tile -> {
         if (BlockTorchTFC.canLight(stack)) {
           worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
           tile.resetCounter();
@@ -126,16 +120,8 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements ICapabilit
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     //taken from BlockTorchTFC
     // Set the initial counter value
-    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+    TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-  }
-
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, HORIZONTAL, LIT);
-  }
-
-  public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-    return state.getValue(LIT) ? super.getLightValue(state, world, pos) : 0;
   }
 
   public boolean hasTileEntity(IBlockState state) {
@@ -143,7 +129,21 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements ICapabilit
   }
 
   public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TETickCounter();
+    return new BaseTileTickCounter();
+  }
+
+  public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+    return state.getValue(LIT) ? super.getLightValue(state, world, pos) : 0;
+  }
+
+  @Override
+  public @NotNull Weight getWeight(ItemStack stack) {
+    return Weight.HEAVY;
+  }
+
+  @Override
+  public @NotNull Size getSize(ItemStack stack) {
+    return Size.LARGE;
   }
 
   public Carving getCarving() {

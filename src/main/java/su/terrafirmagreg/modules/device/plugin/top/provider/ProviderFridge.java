@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
+import su.terrafirmagreg.api.plugin.top.provider.BaseProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.object.block.BlockFridge;
@@ -16,7 +17,6 @@ import net.minecraft.world.World;
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -27,7 +27,7 @@ import java.util.List;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.UPPER;
 import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
-public final class ProviderFridge implements IProbeInfoProvider {
+public final class ProviderFridge extends BaseProvider {
 
   @Override
   public String getID() {

@@ -82,7 +82,6 @@ public final class ModuleCore extends ModuleBase {
 
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
-
     NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaGreg.getInstance(), new GuiHandler());
 
     CapabilityChunkData.register();

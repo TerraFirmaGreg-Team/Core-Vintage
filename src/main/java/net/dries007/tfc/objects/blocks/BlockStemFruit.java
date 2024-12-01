@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.base.block.BaseBlockDirectional;
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
@@ -32,7 +33,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TEStemCrop;
-import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.agriculture.Crop;
 
 import org.jetbrains.annotations.NotNull;
@@ -73,6 +73,10 @@ public class BlockStemFruit extends BaseBlockDirectional implements ICapabilityS
   @Override
   public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
     return state.withRotation(mirrorIn.toRotation(state.getValue(DIRECTIONAL)));
+  }
+
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, DIRECTIONAL);
   }
 
   /**
@@ -130,10 +134,6 @@ public class BlockStemFruit extends BaseBlockDirectional implements ICapabilityS
     super.onBlockHarvested(worldIn, pos, state, player);
   }
 
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, DIRECTIONAL);
-  }
-
   @Override
   public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
     return willHarvest || super.removedByPlayer(state, world, pos, player, false); //delay deletion of the block until after getDrops
@@ -146,7 +146,7 @@ public class BlockStemFruit extends BaseBlockDirectional implements ICapabilityS
 
   @Override
   public TileEntity createTileEntity(World world, IBlockState state) {
-    TETickCounter tile = new TETickCounter();
+    BaseTileTickCounter tile = new BaseTileTickCounter();
     tile.resetCounter();
     return tile;
   }
@@ -155,7 +155,7 @@ public class BlockStemFruit extends BaseBlockDirectional implements ICapabilityS
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess blockAccess, BlockPos pos, IBlockState state, int fortune) {
     super.getDrops(drops, blockAccess, pos, state, fortune);
     if (blockAccess instanceof World world && world.isRemote) {return;}
-    TileUtils.getTile(blockAccess, pos, TETickCounter.class).ifPresent(tile -> {
+    TileUtils.getTile(blockAccess, pos, BaseTileTickCounter.class).ifPresent(tile -> {
       long currentTime = Calendar.PLAYER_TIME.getTicks();
       long foodCreationDate = currentTime - tile.getTicksSinceUpdate();
       drops.forEach(stack -> {

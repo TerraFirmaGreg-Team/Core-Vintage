@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core.object.block;
 
 import su.terrafirmagreg.api.base.block.BaseBlockHorizontal;
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -22,7 +23,6 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
-import net.dries007.tfc.objects.te.TETickCounter;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -80,7 +80,7 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
       return;
     }
     //taken from BlockTorchTFC
-    var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+    var tile = TileUtils.getTile(world, pos, BaseTileTickCounter.class);
     tile.ifPresent(tileTickCounter -> {
       //last twice as long as a torch. balance this by being less bright
       if (tileTickCounter.getTicksSinceUpdate() > 2L * ConfigTFC.General.OVERRIDES.torchTime && ConfigTFC.General.OVERRIDES.torchTime > 0) {
@@ -102,8 +102,8 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
       ItemStack stack = playerIn.getHeldItem(hand);
       if (BlockTorchTFC.canLight(stack)) {
         worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
-        var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-        tile.ifPresent(TETickCounter::resetCounter);
+        var tile = TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class);
+        tile.ifPresent(BaseTileTickCounter::resetCounter);
       }
       worldIn.setBlockState(pos, state.withProperty(LIT, false));
     }
@@ -114,20 +114,20 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderT
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     //taken from BlockTorchTFC
     // Set the initial counter value
-    var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-    tile.ifPresent(TETickCounter::resetCounter);
+    var tile = TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class);
+    tile.ifPresent(BaseTileTickCounter::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 
   @Override
-  public Class<TETickCounter> getTileClass() {
-    return TETickCounter.class;
+  public Class<BaseTileTickCounter> getTileClass() {
+    return BaseTileTickCounter.class;
   }
 
   @Nullable
   @Override
   public TileEntity createNewTileEntity(World worldIn, int meta) {
-    return new TETickCounter();
+    return new BaseTileTickCounter();
   }
 
   @Getter

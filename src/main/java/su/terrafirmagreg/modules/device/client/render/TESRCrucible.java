@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
+import su.terrafirmagreg.api.base.tesr.BaseTESR;
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 
 import net.minecraft.client.renderer.BufferBuilder;
@@ -7,7 +8,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
@@ -22,11 +22,10 @@ import org.lwjgl.opengl.GL11;
  * Render molten metal inside crucible
  */
 @SideOnly(Side.CLIENT)
-public class TESRCrucible extends TileEntitySpecialRenderer<TileCrucible> {
+public class TESRCrucible extends BaseTESR<TileCrucible> {
 
   @Override
-  public void render(TileCrucible tile, double x, double y, double z, float partialTicks,
-                     int destroyStage, float alpha) {
+  public void render(TileCrucible tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     int amount = tile.getAlloy().getAmount();
     if (amount < 1) {
       return;

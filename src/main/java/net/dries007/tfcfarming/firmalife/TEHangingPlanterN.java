@@ -1,15 +1,15 @@
 package net.dries007.tfcfarming.firmalife;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.nbt.NBTTagCompound;
 
+import net.dries007.tfc.api.types.ICrop;
+import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfcfarming.Config;
 import net.dries007.tfcfarming.CropNutrients;
 import net.dries007.tfcfarming.NutrientClass;
 import net.dries007.tfcfarming.NutrientValues;
-import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.objects.te.TEHangingPlanter;
-
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -60,7 +60,7 @@ public class TEHangingPlanterN extends TEHangingPlanter {
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound compound) {
+  public void readFromNBT(@NotNull NBTTagCompound compound) {
     int[] NPK = compound.getIntArray("nutrients");
     nutrientValues = new NutrientValues(NPK);
     cost = compound.getInteger("cost");
@@ -70,7 +70,7 @@ public class TEHangingPlanterN extends TEHangingPlanter {
   }
 
   @Override
-  public @NotNull NBTTagCompound writeToNBT(NBTTagCompound compound) {
+  public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound compound) {
     compound.setIntArray("nutrients", nutrientValues.getNPKSet());
     compound.setInteger("cost", cost);
     compound.setInteger("nutrientClass", nutrientClass.ordinal());

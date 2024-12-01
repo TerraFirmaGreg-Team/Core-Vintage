@@ -1,6 +1,7 @@
 package net.dries007.tfcfarming;
 
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -9,8 +10,6 @@ import com.google.gson.Gson;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.te.TECropBase;
-
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -124,7 +123,7 @@ public class TECropBaseN extends TECropBase {
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound compound) {
+  public void readFromNBT(@NotNull NBTTagCompound compound) {
     factor = compound.getDouble("growthUnitFactor");
     virtualFactor = compound.getDouble("virtualGrowthFactor");
 
@@ -141,7 +140,7 @@ public class TECropBaseN extends TECropBase {
   }
 
   @Override
-  public @NotNull NBTTagCompound writeToNBT(NBTTagCompound compound) {
+  public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound compound) {
     compound.setDouble("growthUnitFactor", factor);
     compound.setDouble("virtualGrowthFactor", virtualFactor);
 

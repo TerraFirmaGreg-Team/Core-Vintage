@@ -9,6 +9,7 @@ import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
+import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -44,9 +45,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.te.TETickCounter;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -98,139 +97,82 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
     BlockUtils.setFireInfo(this, 30, 60);
   }
 
-  @Override
-  public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState()
-               .withProperty(HARVESTABLE, meta > 3)
-               .withProperty(LEAF_STATE, valueOf(meta & 0b11))
-               .withProperty(DECAYABLE, (meta & 0b01) == 0b01);
-  }
-
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(LEAF_STATE).ordinal() + (state.getValue(HARVESTABLE) ? 4 : 0) + (state.getValue(DECAYABLE) ? 1 : 0);
-  }
-
-//  @Override
-//  public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-//    return state.withProperty(FANCY, GameUtils.getGameSettings().fancyGraphics);
-//  }
-
-  @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-    return Block.NULL_AABB;
-  }
-
-  @Override
-  public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-    if (!world.isAreaLoaded(pos, 1)) {
-      return;
+  public double getGrowthRate(World world, BlockPos pos) {
+    if (world.isRainingAt(pos)) {
+      return ConfigTFC.General.MISC.plantGrowthRate * 5d;
+    } else {
+      return ConfigTFC.General.MISC.plantGrowthRate;
     }
-    if (this.type.getStages() == null) {
-      return;
+  }
+
+  @Override
+  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    doLeafDecay(worldIn, pos, state);
+  }
+
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    if (state.getValue(LEAF_STATE) != WINTER) {
+      return ConfigWood.BLOCK.SAPLING.enableDrop ? Item.getItemFromBlock(BlocksWood.SAPLING.get(type)) : Items.AIR;
     }
+    return Items.AIR;
+  }
 
-    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
-    int expectedStage = this.type.getStageForMonth(currentMonth);
-
-    float avgTemperature = Climate.getAvgTemp(world, pos);
-    float tempGauss = (int) (12f + (random.nextGaussian() / 4));
-
-    switch (expectedStage) {
-      case 0:
-        if (state.getValue(LEAF_STATE) != WINTER && avgTemperature < tempGauss) {
-          world.setBlockState(pos, state.withProperty(LEAF_STATE, WINTER));
-
-        } else if (state.getValue(LEAF_STATE) != WINTER && avgTemperature >= tempGauss) {
-          world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
-        }
-        break;
-      case 1:
-        if (state.getValue(LEAF_STATE) != NORMAL) {
-          world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
-
-        } else if (state.getValue(LEAF_STATE) == FLOWERING || state.getValue(LEAF_STATE) == AUTUMN || state.getValue(LEAF_STATE) == WINTER) {
-          world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
-        }
-        break;
-      case 2:
-        if (state.getValue(LEAF_STATE) != FLOWERING) {
-          world.setBlockState(pos, state.withProperty(LEAF_STATE, FLOWERING));
-
-        }
-        break;
-      case 3:
-        if (state.getValue(LEAF_STATE) != FRUIT) {
-          var tile = TileUtils.getTile(world, pos, TileWoodLeaves.class);
-          tile.ifPresent(tileWoodLeaves -> {
-            long hours = tileWoodLeaves.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-            if (hours > (type.getMinGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
-              world.setBlockState(pos, state.withProperty(LEAF_STATE, FRUIT));
-              tileWoodLeaves.resetCounter();
-            }
-          });
-        }
-        break;
-      case 4:
-        if (state.getValue(LEAF_STATE) != AUTUMN && avgTemperature < tempGauss) {
-          world.setBlockState(pos, state.withProperty(LEAF_STATE, AUTUMN));
-
-        } else if (state.getValue(LEAF_STATE) != AUTUMN && avgTemperature >= tempGauss) {
-          world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
-
-        }
-        break;
-      default:
-        world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
-    }
-    doLeafDecay(world, pos, state);
+  @SideOnly(Side.CLIENT)
+  @Override
+  public BlockRenderLayer getRenderLayer() {
+    /*
+     * This is a way to make sure the leave settings are updated.
+     * The result of this call is cached somewhere, so it's not that important, but:
+     * The alternative would be to use `GameUtils.getGameSettings().fancyGraphics` directly in the 2 relevant methods.
+     * It's better to do that than to refer to Blocks.LEAVES, for performance reasons.
+     */
+    leavesFancy = GameUtils.getGameSettings().fancyGraphics;
+    return super.getRenderLayer();
   }
 
   @Override
-  public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-    //world.scheduleUpdate(pos, this, 0);
-    doLeafDecay(world, pos, state);
+  public BlockPlanks.EnumType getWoodType(int meta) {
+    // Unused so return whatever
+    return BlockPlanks.EnumType.OAK;
   }
 
   @Override
-  public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TileWoodLeaves.class);
-    tile.ifPresent(TETickCounter::resetCounter);
+  public void beginLeavesDecay(IBlockState state, World world, BlockPos pos) {
+    // Don't do vanilla decay
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-                                  float hitZ) {
-    if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == FRUIT && this.type.getDrop() != null) {
-      if (!worldIn.isRemote) {
-        ItemHandlerHelper.giveItemToPlayer(playerIn, this.type.getFoodDrop());
-        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, NORMAL));
-        var tile = TileUtils.getTile(worldIn, pos, TileWoodLeaves.class);
-        tile.ifPresent(TETickCounter::resetCounter);
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    if (state.getValue(LEAF_STATE) != WINTER) {
+      int chance = this.getSaplingDropChance(state);
+      if (chance > 0) {
+        if (fortune > 0) {
+          chance -= 2 << fortune;
+          if (chance < 10) {
+            chance = 10;
+          }
+        }
+
+        if (RNG.nextInt(chance) == 0) {
+          ItemStack drop = new ItemStack(getItemDropped(state, RNG, fortune), 1, damageDropped(state));
+          if (!drop.isEmpty()) {
+            drops.add(drop);
+          }
+        }
       }
-      return true;
-    }
-    return false;
-  }
-
-  @Override
-  public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-    if (!(entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative())) {
-      // Player will take damage when falling through leaves if fall is over 9 blocks, fall damage is then set to 0.
-      entityIn.fall((entityIn.fallDistance - 6), 1.0F);
-      entityIn.fallDistance = 0;
-      // Entity motion is reduced by leaves.
-      entityIn.motionX *= ConfigTFC.General.MISC.leafMovementModifier;
-      if (entityIn.motionY < 0) {
-        entityIn.motionY *= ConfigTFC.General.MISC.leafMovementModifier;
-      }
-      entityIn.motionZ *= ConfigTFC.General.MISC.leafMovementModifier;
     }
   }
 
+
+  @SideOnly(Side.CLIENT)
   @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, DECAYABLE, LEAF_STATE, HARVESTABLE);
+  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+    /*
+     * See comment on getRenderLayer()
+     */
+    this.leavesFancy = GameUtils.getGameSettings().fancyGraphics;
+    return true;// super.shouldSideBeRendered(blockState, blockAccess, pos, side);
   }
 
   private void doLeafDecay(World world, BlockPos pos, IBlockState state) {
@@ -276,115 +218,43 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
     for (int i = 1; i < RNG.nextInt(4); i++) {
       switch (RNG.nextInt(4)) {
         case 1:
-          TFCParticles.LEAF1.sendToAllNear(world, x + RNG.nextFloat() / particleScale,
-                                           y - RNG.nextFloat() / particleScale,
-                                           z + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale,
-                                           -0.15D + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale, 90);
+          TFCParticles.LEAF1.sendToAllNear(
+            world,
+            x + RNG.nextFloat() / particleScale,
+            y - RNG.nextFloat() / particleScale,
+            z + RNG.nextFloat() / particleScale,
+            (RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale,
+            (RNG.nextFloat() - 0.5) / particleScale,
+            90
+          );
           break;
         case 2:
-          TFCParticles.LEAF2.sendToAllNear(world, x + RNG.nextFloat() / particleScale,
-                                           y - RNG.nextFloat() / particleScale,
-                                           z + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale,
-                                           -0.15D + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale, 70);
+          TFCParticles.LEAF2.sendToAllNear(
+            world,
+            x + RNG.nextFloat() / particleScale,
+            y - RNG.nextFloat() / particleScale,
+            z + RNG.nextFloat() / particleScale,
+            (RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale,
+            (RNG.nextFloat() - 0.5) / particleScale,
+            70
+          );
           break;
         case 3:
-          TFCParticles.LEAF3.sendToAllNear(world, x + RNG.nextFloat() / particleScale,
-                                           y - RNG.nextFloat() / particleScale,
-                                           z + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale,
-                                           -0.15D + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale, 80);
+          TFCParticles.LEAF3.sendToAllNear(
+            world,
+            x + RNG.nextFloat() / particleScale,
+            y - RNG.nextFloat() / particleScale,
+            z + RNG.nextFloat() / particleScale,
+            (RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale,
+            (RNG.nextFloat() - 0.5) / particleScale,
+            80
+          );
           break;
       }
     }
-  }
-
-  public double getGrowthRate(World world, BlockPos pos) {
-    if (world.isRainingAt(pos)) {
-      return ConfigTFC.General.MISC.plantGrowthRate * 5d;
-    } else {
-      return ConfigTFC.General.MISC.plantGrowthRate;
-    }
-  }
-
-  @Override
-  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-    doLeafDecay(worldIn, pos, state);
-  }
-
-  @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    if (state.getValue(LEAF_STATE) != WINTER) {
-      return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(BlocksWood.SAPLING.get(type)) : Items.AIR;
-    }
-    return null;
-  }
-
-  @Override
-  protected int getSaplingDropChance(IBlockState state) {
-    return 25;
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Override
-  public BlockRenderLayer getRenderLayer() {
-    /*
-     * This is a way to make sure the leave settings are updated.
-     * The result of this call is cached somewhere, so it's not that important, but:
-     * The alternative would be to use `GameUtils.getGameSettings().fancyGraphics` directly in the 2 relevant methods.
-     * It's better to do that than to refer to Blocks.LEAVES, for performance reasons.
-     */
-    leavesFancy = GameUtils.getGameSettings().fancyGraphics;
-    return super.getRenderLayer();
-  }
-
-  @Override
-  @NotNull
-  public BlockPlanks.EnumType getWoodType(int meta) {
-    // Unused so return whatever
-    return BlockPlanks.EnumType.OAK;
-  }
-
-  @Override
-  public void beginLeavesDecay(IBlockState state, World world, BlockPos pos) {
-    // Don't do vanilla decay
-  }
-
-  @Override
-  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-    if (state.getValue(LEAF_STATE) != WINTER) {
-      int chance = this.getSaplingDropChance(state);
-      if (chance > 0) {
-        if (fortune > 0) {
-          chance -= 2 << fortune;
-          if (chance < 10) {
-            chance = 10;
-          }
-        }
-
-        if (RNG.nextInt(chance) == 0) {
-          ItemStack drop = new ItemStack(getItemDropped(state, RNG, fortune), 1, damageDropped(state));
-          if (!drop.isEmpty()) {
-            drops.add(drop);
-          }
-        }
-      }
-    }
-  }
-
-  @SuppressWarnings("deprecation")
-  @SideOnly(Side.CLIENT)
-  @Override
-  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-    /*
-     * See comment on getRenderLayer()
-     */
-    this.leavesFancy = GameUtils.getGameSettings().fancyGraphics;
-    return true;// super.shouldSideBeRendered(blockState, blockAccess, pos, side);
   }
 
   @Override
@@ -401,6 +271,146 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
   public Class<TileWoodLeaves> getTileClass() {
     return TileWoodLeaves.class;
   }
+
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState()
+               .withProperty(HARVESTABLE, meta > 3)
+               .withProperty(LEAF_STATE, valueOf(meta & 0b11))
+               .withProperty(DECAYABLE, (meta & 0b01) == 0b01);
+  }
+
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(LEAF_STATE).ordinal() + (state.getValue(HARVESTABLE) ? 4 : 0) + (state.getValue(DECAYABLE) ? 1 : 0);
+  }
+
+//  @Override
+//  public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+//    return state.withProperty(FANCY, GameUtils.getGameSettings().fancyGraphics);
+//  }
+
+
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    return NULL_AABB;
+  }
+
+
+  @Override
+  public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+    if (!world.isAreaLoaded(pos, 1)) {
+      return;
+    }
+    if (this.type.getStages() == null) {
+      return;
+    }
+
+    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
+    int expectedStage = this.type.getStageForMonth(currentMonth);
+
+    float avgTemperature = Climate.getAvgTemp(world, pos);
+    float tempGauss = (int) (12f + (random.nextGaussian() / 4));
+
+    switch (expectedStage) {
+      case 0:
+        if (state.getValue(LEAF_STATE) != WINTER && avgTemperature < tempGauss) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, WINTER));
+
+        } else if (state.getValue(LEAF_STATE) != WINTER && avgTemperature >= tempGauss) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
+        }
+        break;
+      case 1:
+        if (state.getValue(LEAF_STATE) != NORMAL) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
+
+        } else if (state.getValue(LEAF_STATE) == FLOWERING || state.getValue(LEAF_STATE) == AUTUMN || state.getValue(LEAF_STATE) == WINTER) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
+        }
+        break;
+      case 2:
+        if (state.getValue(LEAF_STATE) != FLOWERING) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, FLOWERING));
+
+        }
+        break;
+      case 3:
+        if (state.getValue(LEAF_STATE) != FRUIT) {
+          TileUtils.getTile(world, pos, TileWoodLeaves.class).ifPresent(tile -> {
+            long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+            if (hours > (type.getMinGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
+              world.setBlockState(pos, state.withProperty(LEAF_STATE, FRUIT));
+              tile.resetCounter();
+            }
+          });
+        }
+        break;
+      case 4:
+        if (state.getValue(LEAF_STATE) != AUTUMN && avgTemperature < tempGauss) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, AUTUMN));
+
+        } else if (state.getValue(LEAF_STATE) != AUTUMN && avgTemperature >= tempGauss) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
+
+        }
+        break;
+      default:
+        world.setBlockState(pos, state.withProperty(LEAF_STATE, NORMAL));
+    }
+    doLeafDecay(world, pos, state);
+  }
+
+
+  @Override
+  public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    //world.scheduleUpdate(pos, this, 0);
+    doLeafDecay(world, pos, state);
+  }
+
+
+  @Override
+  public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+    TileUtils.getTile(worldIn, pos, TileWoodLeaves.class).ifPresent(TileWoodLeaves::resetCounter);
+  }
+
+
+  @Override
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == FRUIT && this.type.getDrop() != null) {
+      if (!worldIn.isRemote) {
+        ItemHandlerHelper.giveItemToPlayer(playerIn, this.type.getFoodDrop());
+        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, NORMAL));
+        TileUtils.getTile(worldIn, pos, TileWoodLeaves.class).ifPresent(TileWoodLeaves::resetCounter);
+      }
+      return true;
+    }
+    return false;
+  }
+
+
+  @Override
+  public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+    if (!(entityIn instanceof EntityPlayer entityPlayer && entityPlayer.isCreative())) {
+      // Player will take damage when falling through leaves if fall is over 9 blocks, fall damage is then set to 0.
+      entityIn.fall((entityIn.fallDistance - 6), 1.0F);
+      entityIn.fallDistance = 0;
+      // Entity motion is reduced by leaves.
+      entityIn.motionX *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
+      if (entityIn.motionY < 0) {
+        entityIn.motionY *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
+      }
+      entityIn.motionZ *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
+    }
+  }
+
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, DECAYABLE, LEAF_STATE, HARVESTABLE);
+  }
+
 
   @Override
   public IBlockColor getBlockColor() {

@@ -19,7 +19,7 @@ public class TECropSpreading extends TECropBase {
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound nbt) {
+  public void readFromNBT(@NotNull NBTTagCompound nbt) {
     maxGrowthStage = nbt.getInteger("maxGrowthStage");
     baseAge = nbt.getInteger("baseAge");
     isSeedPlant = nbt.getBoolean("isSeedPlant");
@@ -28,7 +28,7 @@ public class TECropSpreading extends TECropBase {
 
   @NotNull
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+  public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
     nbt.setInteger("maxGrowthStage", maxGrowthStage);
     nbt.setInteger("baseAge", baseAge);
     nbt.setBoolean("isSeedPlant", isSeedPlant);

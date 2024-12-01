@@ -9,6 +9,8 @@ public interface IRegistryBase {
 
   String getModID();
 
+  String getModuleName();
+
   CreativeTabs getTab();
 
   Registry getRegistry();

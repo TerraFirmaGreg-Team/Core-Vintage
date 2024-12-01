@@ -1,6 +1,8 @@
 package su.terrafirmagreg.modules.rock.plugin.top.provider;
 
+import su.terrafirmagreg.api.plugin.top.provider.BaseProvider;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 
 import net.minecraft.block.Block;
@@ -13,14 +15,12 @@ import net.minecraft.world.World;
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProviderRockInfo implements IProbeInfoProvider {
+public class ProviderRockInfo extends BaseProvider {
 
   @Override
   public String getID() {

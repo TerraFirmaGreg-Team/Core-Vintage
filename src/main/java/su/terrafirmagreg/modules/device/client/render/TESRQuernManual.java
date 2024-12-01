@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
+import su.terrafirmagreg.api.base.tesr.BaseTESR;
 import su.terrafirmagreg.modules.device.object.tile.TileQuernManual;
 
 import net.minecraft.client.Minecraft;
@@ -8,7 +9,6 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -16,12 +16,10 @@ import net.minecraftforge.items.IItemHandler;
 
 import org.lwjgl.opengl.GL11;
 
-import org.jetbrains.annotations.NotNull;
-
-public class TESRQuernManual extends TileEntitySpecialRenderer<TileQuernManual> {
+public class TESRQuernManual extends BaseTESR<TileQuernManual> {
 
   @Override
-  public void render(@NotNull TileQuernManual tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+  public void render(TileQuernManual tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
     IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);

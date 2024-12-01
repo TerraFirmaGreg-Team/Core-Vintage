@@ -12,14 +12,14 @@ public class TEStemCrop extends TECropBase {
   private EnumFacing fruitDirection = EnumFacing.Plane.HORIZONTAL.random(RNG);
 
   @Override
-  public void readFromNBT(NBTTagCompound tag) {
+  public void readFromNBT(@NotNull NBTTagCompound tag) {
     fruitDirection = EnumFacing.byIndex(tag.getInteger("fruitDirection"));
     super.readFromNBT(tag);
   }
 
   @Override
   @NotNull
-  public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+  public NBTTagCompound writeToNBT(@NotNull NBTTagCompound tag) {
     tag.setInteger("fruitDirection", fruitDirection.getIndex());
     return super.writeToNBT(tag);
   }

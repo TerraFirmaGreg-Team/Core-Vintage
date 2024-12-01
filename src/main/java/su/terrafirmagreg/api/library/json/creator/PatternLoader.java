@@ -20,8 +20,7 @@ public final class PatternLoader {
   }
 
   public static void createItemBlock(String fileName, String modid, String name) {
-    JsonCreator.set(JsonTemplateType.ITEMBLOCK,
-                    "src/main/resources/assets/" + modid + "/models/item/" + fileName + ".json");
+    JsonCreator.set(JsonTemplateType.ITEMBLOCK, "src/main/resources/assets/" + modid + "/models/item/" + fileName + ".json");
     JsonCreator.replace("modid", modid);
     JsonCreator.replace("name", name);
     JsonCreator.end();

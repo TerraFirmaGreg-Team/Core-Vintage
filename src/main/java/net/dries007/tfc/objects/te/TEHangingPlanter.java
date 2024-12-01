@@ -1,12 +1,14 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 import net.dries007.eerussianguy.firmalife.util.GreenhouseHelpers;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TEHangingPlanter extends TETickCounter implements GreenhouseHelpers.IGreenhouseReceiver {
+public class TEHangingPlanter extends BaseTileTickCounter implements GreenhouseHelpers.IGreenhouseReceiver {
 
   private boolean isClimateValid;
   private int tier;
@@ -33,14 +35,14 @@ public class TEHangingPlanter extends TETickCounter implements GreenhouseHelpers
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound nbt) {
+  public void readFromNBT(@NotNull NBTTagCompound nbt) {
     isClimateValid = nbt.getBoolean("isClimateValid");
     tier = nbt.getInteger("tier");
     super.readFromNBT(nbt);
   }
 
   @Override
-  public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+  public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
     nbt.setBoolean("isClimateValid", isClimateValid);
     nbt.setInteger("tier", tier);
     return super.writeToNBT(nbt);

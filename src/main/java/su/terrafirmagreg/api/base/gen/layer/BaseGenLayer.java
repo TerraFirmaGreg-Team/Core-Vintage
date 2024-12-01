@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.base.world.layer;
+package su.terrafirmagreg.api.base.gen.layer;
 
 import net.minecraft.world.gen.layer.GenLayer;
 

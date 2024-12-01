@@ -1,6 +1,8 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,8 +19,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-import net.dries007.tfc.objects.te.TETickCounter;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -50,7 +50,7 @@ public class ItemBlockRot extends ItemBlockTFC {
     }
 
     if (result == EnumActionResult.SUCCESS) {
-      TileUtils.getTile(worldIn, pos.offset(facing), TETickCounter.class).ifPresent(tile -> {
+      TileUtils.getTile(worldIn, pos.offset(facing), BaseTileTickCounter.class).ifPresent(tile -> {
         long currentTime = Calendar.PLAYER_TIME.getTicks();
         tile.resetCounter(); //tile counter is at currentTime
         tile.reduceCounter(foodCreationDate - currentTime); //teCounter is now at foodCreationDate

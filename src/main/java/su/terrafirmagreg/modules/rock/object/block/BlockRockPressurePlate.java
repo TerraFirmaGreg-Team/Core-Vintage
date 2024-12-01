@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.rock.object.block;
 
+import su.terrafirmagreg.api.base.block.BaseBlockPressurePlate;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
-import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
@@ -21,35 +21,33 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class BlockRockPressurePlate extends BlockPressurePlate implements IRockBlock {
+public class BlockRockPressurePlate extends BaseBlockPressurePlate implements IRockBlock {
 
-  protected final Settings settings;
-  private final RockBlockVariant variant;
-  private final RockType type;
+  protected final RockBlockVariant variant;
+  protected final RockType type;
 
   public BlockRockPressurePlate(RockBlockVariant variant, RockType type) {
-    super(Material.ROCK, Sensitivity.MOBS);
+    super(Settings.of(Material.ROCK), Sensitivity.MOBS);
 
     this.variant = variant;
     this.type = type;
-    this.settings = Settings.of(Material.ROCK)
-                            .registryKey(type.getRegistryKey(variant))
-                            .hardness(variant.getHardness(type))
-                            .sound(SoundType.STONE)
-                            .hardness(0.5f)
-                            .oreDict(variant)
-                            .oreDict(variant, "stone")
-                            .oreDict(variant, "stone", type);
+
+    getSettings()
+      .registryKey(type.getRegistryKey(variant))
+      .hardness(variant.getHardness(type))
+      .sound(SoundType.STONE)
+      .hardness(0.5f)
+      .oreDict(variant)
+      .oreDict(variant, "stone")
+      .oreDict(variant, "stone", type);
 
   }
 
   @Override
   @SideOnly(Side.CLIENT)
-  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
-                             ITooltipFlag flagIn) {
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 
-    tooltip.add(new TextComponentTranslation("rockcategory.name")
-                  .getFormattedText() + ": " + type.getCategory().getLocalizedName());
+    tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + type.getCategory().getLocalizedName());
   }
 }

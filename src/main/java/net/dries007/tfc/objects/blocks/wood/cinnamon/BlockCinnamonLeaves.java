@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.blocks;
+package net.dries007.tfc.objects.blocks.wood.cinnamon;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -9,8 +9,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.eerussianguy.firmalife.registry.BlocksFL;
 import com.google.common.collect.ImmutableList;
+import net.dries007.eerussianguy.firmalife.registry.BlocksFL;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.types.TreesTFCF;
 

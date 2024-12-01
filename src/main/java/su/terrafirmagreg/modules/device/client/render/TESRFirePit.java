@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
+import su.terrafirmagreg.api.base.tesr.BaseTESR;
 import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
@@ -13,7 +14,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -37,11 +37,10 @@ import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_EXTR
  */
 
 @SideOnly(Side.CLIENT)
-public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
+public class TESRFirePit extends BaseTESR<TileFirePit> {
 
   @Override
-  public void render(@NotNull TileFirePit tile, double x, double y, double z, float partialTicks,
-                     int destroyStage, float alpha) {
+  public void render(@NotNull TileFirePit tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
     // Rendering liquid in the soup pot

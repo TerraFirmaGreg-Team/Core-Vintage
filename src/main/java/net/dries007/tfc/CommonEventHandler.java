@@ -254,8 +254,10 @@ public final class CommonEventHandler {
     if (!event.isSilkTouching() && block instanceof BlockLeaves) {
       // Done via event so it applies to all leaves.
       double chance = ConfigTFC.General.TREE.leafStickDropChance;
-      if (!heldItem.isEmpty() && Helpers.containsAnyOfCaseInsensitive(heldItem.getItem()
-                                                                              .getToolClasses(heldItem), ConfigTFC.General.TREE.leafStickDropChanceBonusClasses)) {
+      if (!heldItem.isEmpty() && Helpers.containsAnyOfCaseInsensitive(
+        heldItem.getItem().getToolClasses(heldItem),
+        ConfigTFC.General.TREE.leafStickDropChanceBonusClasses)) {
+
         chance = ConfigTFC.General.TREE.leafStickDropChanceBonus;
       }
       if (RNG.nextFloat() < chance) {

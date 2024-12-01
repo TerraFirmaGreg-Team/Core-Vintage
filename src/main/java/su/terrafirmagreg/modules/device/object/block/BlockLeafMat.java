@@ -1,17 +1,19 @@
-package net.dries007.tfc.objects.blocks;
+package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.api.base.block.BaseBlockContainer;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.device.client.render.TESRLeafMat;
+import su.terrafirmagreg.modules.device.object.tile.TileLeafMat;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -27,75 +29,53 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.eerussianguy.firmalife.recipe.DryingRecipe;
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.objects.te.TELeafMat;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-@MethodsReturnNonnullByDefault
-public class BlockLeafMat extends Block implements ICapabilitySize {
+@SuppressWarnings("deprecation")
+public class BlockLeafMat extends BaseBlockContainer {
 
   public static final AxisAlignedBB MAT_SHAPE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
 
   public BlockLeafMat() {
-    super(Material.PLANTS, MapColor.GREEN);
-    setHardness(1.0F);
-    setResistance(1.0F);
-    setLightOpacity(0);
-    setSoundType(SoundType.PLANT);
-    setTickRandomly(true);
+    super(Settings.of(Material.PLANTS, MapColor.GREEN));
+
+    getSettings()
+      .registryKey("device/leaf_mat")
+      .hardness(1.0F)
+      .resistance(1.0F)
+      .lightValue(0)
+      .randomTicks()
+      .nonOpaque()
+      .harvestLevel(ToolClasses.KNIFE, 0)
+      .size(Size.SMALL)
+      .weight(Weight.LIGHT)
+      .sound(SoundType.PLANT);
   }
 
   @Override
-  public @NotNull Weight getWeight(@NotNull ItemStack stack) {
-    return Weight.LIGHT;
-  }
-
-  @Override
-  public @NotNull Size getSize(@NotNull ItemStack stack) {
-    return Size.SMALL;
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  @NotNull
   public EnumBlockRenderType getRenderType(IBlockState state) {
     return EnumBlockRenderType.MODEL;
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  @NotNull
+  public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    TileUtils.getTile(world, pos, TileLeafMat.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
+    super.breakBlock(world, pos, state);
+  }
+
+  @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     return MAT_SHAPE;
-  }
-
-  @SuppressWarnings("deprecation")
-  @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-    return BlockFaceShape.UNDEFINED;
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public boolean isOpaqueCube(IBlockState state) {
-    return false;
   }
 
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (!worldIn.isRainingAt(pos.up())) {return;}
-    TileUtils.getTile(worldIn, pos, TELeafMat.class).ifPresent(TELeafMat::rain);
+    TileUtils.getTile(worldIn, pos, TileLeafMat.class).ifPresent(TileLeafMat::rain);
 
-  }
-
-  @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(world, pos, TELeafMat.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
-    super.breakBlock(world, pos, state);
   }
 
   @Override
@@ -105,7 +85,7 @@ public class BlockLeafMat extends Block implements ICapabilitySize {
     if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
       return false;
     }
-    TileUtils.getTile(world, pos, TELeafMat.class).map(tile -> {
+    TileUtils.getTile(world, pos, TileLeafMat.class).map(tile -> {
       IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
       if (inventory != null) {
         ItemStack tryStack = new ItemStack(held.getItem(), 1);
@@ -127,18 +107,21 @@ public class BlockLeafMat extends Block implements ICapabilitySize {
       return true;
     });
     return true;
+  }
 
 
+  @Override
+  public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
+    return new TileLeafMat();
   }
 
   @Override
-  public boolean hasTileEntity(IBlockState state) {
-    return true;
+  public Class<? extends TileEntity> getTileClass() {
+    return TileLeafMat.class;
   }
 
-  @Nullable
   @Override
-  public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TELeafMat();
+  public @Nullable TileEntitySpecialRenderer<?> getTileRenderer() {
+    return new TESRLeafMat();
   }
 }

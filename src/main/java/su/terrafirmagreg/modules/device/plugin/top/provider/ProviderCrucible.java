@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
+import su.terrafirmagreg.api.plugin.top.provider.BaseProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
@@ -17,14 +18,13 @@ import net.minecraft.world.World;
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.api.types.Metal;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProviderCrucible implements IProbeInfoProvider {
+public class ProviderCrucible extends BaseProvider {
 
   @Override
   public String getID() {

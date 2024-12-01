@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
+import su.terrafirmagreg.api.base.tesr.BaseTESR;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.client.model.ModelFridge;
 import su.terrafirmagreg.modules.device.object.tile.TileFridge;
@@ -7,15 +8,13 @@ import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 
-public class TESRFridge extends TileEntitySpecialRenderer<TileFridge> {
+public class TESRFridge extends BaseTESR<TileFridge> {
 
-  private static final ResourceLocation FRIDGE_TEXTURES = ModUtils.resource(
-    "textures/blocks/device/fridge/base.png");
+  private static final ResourceLocation TEXTURES = ModUtils.resource("textures/blocks/device/fridge/base.png");
   private final ModelFridge model = new ModelFridge();
 
   @Override
@@ -61,7 +60,7 @@ public class TESRFridge extends TileEntitySpecialRenderer<TileFridge> {
 
       GlStateManager.translate(0.5F, 1.5F, 0.5F);
 
-      bindTexture(FRIDGE_TEXTURES); // texture
+      bindTexture(TEXTURES); // texture
 
       GlStateManager.rotate(180, 1, 0, 0);
       switch (tile.getRotation()) {
@@ -92,7 +91,7 @@ public class TESRFridge extends TileEntitySpecialRenderer<TileFridge> {
       GlStateManager.rotate(180, 0, 1, 0);
       GlStateManager.scale(0.8F, 0.8F, 0.8F);
 
-      bindTexture(FRIDGE_TEXTURES); // texture
+      bindTexture(TEXTURES); // texture
 
       model.setOpen(0, 0, 1.0F);
 

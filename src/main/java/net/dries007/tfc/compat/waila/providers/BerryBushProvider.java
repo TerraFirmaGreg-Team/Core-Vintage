@@ -1,8 +1,12 @@
 package net.dries007.tfc.compat.waila.providers;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,10 +18,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
-import net.dries007.tfc.objects.te.TETickCounter;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -38,7 +38,7 @@ public class BerryBushProvider implements IWailaBlock {
       if (block.getBush().isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(FRUITING)) {
         float temp = Climate.getActualTemp(world, pos);
         float rainfall = ProviderChunkData.getRainfall(world, pos);
-        var tile = TileUtils.getTile(world, pos, TETickCounter.class).filter(t -> block.getBush().isValidForGrowth(temp, rainfall));
+        var tile = TileUtils.getTile(world, pos, BaseTileTickCounter.class).filter(t -> block.getBush().isValidForGrowth(temp, rainfall));
         if (tile.isPresent()) {
           long hours = tile.get().getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
           // Don't show 100% since it still needs to check on randomTick to grow

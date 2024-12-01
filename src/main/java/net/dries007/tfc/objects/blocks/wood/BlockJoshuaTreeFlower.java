@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.data.enums.EnumFruitLeafState;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.library.MCDate.Month;
@@ -10,6 +11,7 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.wood.ConfigWood;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -41,7 +43,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.agriculture.SeasonalTrees;
 import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
@@ -90,16 +91,6 @@ public class BlockJoshuaTreeFlower extends Block {
 
   public static BlockJoshuaTreeFlower get(Tree wood) {
     return MAP.get(wood);
-  }
-
-  private static boolean areAllNeighborsEmpty(World worldIn, BlockPos pos, EnumFacing excludingSide) {
-    for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
-      if (enumfacing != excludingSide && !worldIn.isAirBlock(pos.offset(enumfacing))) {
-        return false;
-      }
-    }
-
-    return true;
   }
 
   public Tree getWood() {
@@ -262,6 +253,17 @@ public class BlockJoshuaTreeFlower extends Block {
     return -1;
   }
 
+  /**
+   * Convert the given metadata into a BlockState for this Block
+   */
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState()
+               .withProperty(HARVESTABLE, meta > 3)
+               .withProperty(FRUIT_LEAF_STATE, EnumFruitLeafState.valueOf(meta & 0b11))
+               .withProperty(AGE_6, meta);
+  }
+
     /*private void growTreeRecursive(World worldIn, BlockPos currentBlock, Random rand, BlockPos baseBlock, int distFromCenter, int age)
     {
         boolean flag1 = false;
@@ -371,17 +373,6 @@ public class BlockJoshuaTreeFlower extends Block {
     }*/
 
   /**
-   * Convert the given metadata into a BlockState for this Block
-   */
-  @Override
-  public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState()
-               .withProperty(HARVESTABLE, meta > 3)
-               .withProperty(FRUIT_LEAF_STATE, EnumFruitLeafState.valueOf(meta & 0b11))
-               .withProperty(AGE_6, meta);
-  }
-
-  /**
    * Convert the BlockState into the correct metadata value
    */
   @Override
@@ -431,7 +422,7 @@ public class BlockJoshuaTreeFlower extends Block {
         break;
       case 3:
         if (state.getValue(FRUIT_LEAF_STATE) != EnumFruitLeafState.FRUIT) {
-          TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
+          TileUtils.getTile(world, pos, BaseTileTickCounter.class).ifPresent(tile -> {
             long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
             if (hours > (fruitTree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
               world.setBlockState(pos, world.getBlockState(pos).withProperty(FRUIT_LEAF_STATE, EnumFruitLeafState.FRUIT));
@@ -560,7 +551,7 @@ public class BlockJoshuaTreeFlower extends Block {
 
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+    TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
   }
 
   /**
@@ -568,7 +559,7 @@ public class BlockJoshuaTreeFlower extends Block {
    */
   @Override
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(BlockJoshuaTreeSapling.get(wood)) : Items.AIR;
+    return ConfigWood.BLOCK.SAPLING.enableDrop ? Item.getItemFromBlock(BlockJoshuaTreeSapling.get(wood)) : Items.AIR;
   }
 
   @SideOnly(Side.CLIENT)
@@ -576,12 +567,6 @@ public class BlockJoshuaTreeFlower extends Block {
   public BlockRenderLayer getRenderLayer() {
     return BlockRenderLayer.CUTOUT;
   }
-
-    /*@Override
-    protected ItemStack getSilkTouchDrop(IBlockState state)
-    {
-        return ItemStack.EMPTY;
-    }*/
 
   /**
    * Checks if this block can be placed exactly at the given position.
@@ -594,13 +579,19 @@ public class BlockJoshuaTreeFlower extends Block {
              BlockUtils.isBlock(block, Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY)));
   }
 
+    /*@Override
+    protected ItemStack getSilkTouchDrop(IBlockState state)
+    {
+        return ItemStack.EMPTY;
+    }*/
+
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (worldIn.getBlockState(pos).getValue(FRUIT_LEAF_STATE) == EnumFruitLeafState.FRUIT && fruitTree.getDrop() != null) {
       if (!worldIn.isRemote) {
         ItemHandlerHelper.giveItemToPlayer(playerIn, fruitTree.getFoodDrop());
         worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(FRUIT_LEAF_STATE, EnumFruitLeafState.NORMAL));
-        TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+        TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
       }
       return true;
     }
@@ -614,11 +605,11 @@ public class BlockJoshuaTreeFlower extends Block {
       entityIn.fall((entityIn.fallDistance - 6), 1.0F);
       entityIn.fallDistance = 0;
       // Entity motion is reduced by leaves.
-      entityIn.motionX *= ConfigTFC.General.MISC.leafMovementModifier;
+      entityIn.motionX *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
       if (entityIn.motionY < 0) {
-        entityIn.motionY *= ConfigTFC.General.MISC.leafMovementModifier;
+        entityIn.motionY *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
       }
-      entityIn.motionZ *= ConfigTFC.General.MISC.leafMovementModifier;
+      entityIn.motionZ *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
     }
   }
 
@@ -719,6 +710,16 @@ public class BlockJoshuaTreeFlower extends Block {
     } else {
       return true;
     }
+  }
+
+  private static boolean areAllNeighborsEmpty(World worldIn, BlockPos pos, EnumFacing excludingSide) {
+    for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
+      if (enumfacing != excludingSide && !worldIn.isAirBlock(pos.offset(enumfacing))) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   private void placeGrownFlower(World worldIn, BlockPos pos, int age) {

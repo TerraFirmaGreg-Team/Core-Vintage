@@ -1,8 +1,11 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -23,10 +26,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -69,7 +69,7 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
     super.updateTick(world, pos, state, random);
 
     if (world.isRemote) {return;}
-    TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
+    TileUtils.getTile(world, pos, BaseTileTickCounter.class).ifPresent(tile -> {
       float temp = Climate.getActualTemp(world, pos);
       float rainfall = ProviderChunkData.getRainfall(world, pos);
       long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
@@ -83,7 +83,7 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
 
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+    TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
   }
 
   @Override
@@ -107,7 +107,7 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
   @Nullable
   @Override
   public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TETickCounter();
+    return new BaseTileTickCounter();
   }
 
   @SuppressWarnings("deprecation")

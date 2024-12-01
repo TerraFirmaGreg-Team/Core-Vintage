@@ -11,6 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
@@ -21,6 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.OreIngredient;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -752,5 +754,21 @@ public final class StackUtils {
     }
 
     return subBlocks;
+  }
+
+  public static Ingredient asIngredient(Object object) {
+    if (object instanceof Ingredient ingredient) {
+      return ingredient;
+    } else if (object instanceof Item item) {
+      return Ingredient.fromItem(item);
+    } else if (object instanceof Block block) {
+      return Ingredient.fromStacks(new ItemStack(block));
+    } else if (object instanceof ItemStack itemStack) {
+      return Ingredient.fromStacks(itemStack);
+    } else if (object instanceof String string) {
+      return new OreIngredient(string);
+    }
+
+    throw new IllegalArgumentException("Cannot convert object of type " + object.getClass() + " to an Ingredient!");
   }
 }

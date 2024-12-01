@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.tile;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierEnvironmental;
@@ -25,7 +26,6 @@ import net.dries007.tfc.api.capability.fluid.FluidTankCallback;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.api.capability.fluid.IFluidHandlerSidedCallback;
 import net.dries007.tfc.api.capability.fluid.IFluidTankCallback;
-import net.dries007.tfc.objects.te.TETickCounter;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +36,7 @@ import lombok.Setter;
 import java.util.Optional;
 
 public class TileMetalLamp
-  extends TETickCounter
+  extends BaseTileTickCounter
   implements IFluidTankCallback, IFluidHandlerSidedCallback, IAmbientalTileProvider {
 
   public static int CAPACITY;

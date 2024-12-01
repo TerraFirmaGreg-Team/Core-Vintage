@@ -53,8 +53,9 @@ public abstract class ModuleBase implements IModule {
   private File configurationDirectory;
 
   protected ModuleBase() {
-    this.modID = this.getClass().getAnnotation(ModuleInfo.class).moduleID().getID();
-    this.name = this.getClass().getSimpleName();
+    ModuleInfo moduleInfo = this.getClass().getAnnotation(ModuleInfo.class);
+    this.modID = moduleInfo.moduleID().getID();
+    this.name = moduleInfo.moduleID().getName();
   }
 
   protected RegistryManager enableAutoRegistry() {
@@ -63,7 +64,7 @@ public abstract class ModuleBase implements IModule {
   }
 
   protected RegistryManager enableAutoRegistry(CreativeTabs tab) {
-    this.registryManager = new RegistryManager(tab, modID);
+    this.registryManager = new RegistryManager(tab, this);
     this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modID, s -> new NetworkEntityIdSupplier());
     this.registryManager.setNetworkEntityIdSupplier(this.networkEntityIdSupplier);
     this.registry = registryManager.getRegistry();

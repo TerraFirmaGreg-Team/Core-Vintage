@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -17,14 +18,15 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
 
+  private static final ResourceLocation TEXTURE = ModUtils.resource("textures/blocks/wood/planks.png");
+
   @Override
-  public void render(TileWoodLoom tile, double x, double y, double z, float partialTicks,
-                     int destroyStage, float alpha) {
+  public void render(TileWoodLoom tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     GlStateManager.pushMatrix();
     GlStateManager.translate(x + 0.5D, y + 0.03125D, z + 0.5D);
     GlStateManager.rotate((tile.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
     GlStateManager.popMatrix();
-    var woodColor = tile.getWood().getColor();
+    var woodColor = tile.getBlockType().getType().getColor();
 
     double tileZ = tile.getAnimPos();
 
@@ -32,7 +34,7 @@ public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
       GlStateManager.pushMatrix();
 
       ColourUtils.setGlColor(woodColor);
-      bindTexture(ModUtils.resource("textures/blocks/wood/planks.png"));
+      bindTexture(TEXTURE);
 
       GlStateManager.disableLighting();
 

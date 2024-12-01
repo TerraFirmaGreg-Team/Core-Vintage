@@ -1,7 +1,8 @@
 package net.dries007.tfc.objects.blocks;
 
-import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.data.enums.EnumAging;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -25,10 +26,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import net.dries007.eerussianguy.firmalife.ConfigFL;
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.eerussianguy.firmalife.ConfigFL;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -76,7 +76,7 @@ public class BlockCheesewheel extends BlockNonCube {
 
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (worldIn.isRemote) {return;}
-    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(tile -> {
+    TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(tile -> {
       long ticksSinceUpdate = tile.getTicksSinceUpdate();
       // If the cheese isn't cut and ready to age
       if (state.getValue(AGING) == EnumAging.FRESH && state.getValue(WEDGES) == 0 &&
@@ -135,7 +135,7 @@ public class BlockCheesewheel extends BlockNonCube {
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     //taken from BlockJackOLantern which in turn was taken from BlockTorchTFC
     // Set the initial counter value
-    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+    TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 
@@ -151,7 +151,7 @@ public class BlockCheesewheel extends BlockNonCube {
 
   @Override
   public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TETickCounter();
+    return new BaseTileTickCounter();
   }
 
   @Override

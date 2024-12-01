@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.worldgen.classic.objects.storage;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
 
@@ -15,15 +16,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 
-import net.dries007.tfcfarming.Config;
-import net.dries007.tfcfarming.CropNutrients;
-import net.dries007.tfcfarming.NutrientClass;
-import net.dries007.tfcfarming.NutrientValues;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.objects.te.TETickCounter;
+import net.dries007.tfcfarming.Config;
+import net.dries007.tfcfarming.CropNutrients;
+import net.dries007.tfcfarming.NutrientClass;
+import net.dries007.tfcfarming.NutrientValues;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +46,7 @@ public class WorldDataFarming
   }
 
   private final int[] maximumNaturalNPK = {255, 255, 255};
-  public TETickCounter teTickCounter = new TETickCounter();
+  public BaseTileTickCounter teTickCounter = new BaseTileTickCounter();
   public HashMap<Long, Integer> nutrientMap;
 
   private WorldDataFarming() {

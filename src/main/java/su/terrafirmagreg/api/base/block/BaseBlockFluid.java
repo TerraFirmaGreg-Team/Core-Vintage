@@ -31,7 +31,7 @@ import lombok.Getter;
 import java.util.Random;
 
 @Getter
-public class BaseBlockFluid extends BlockFluidClassic implements IBlockSettings {
+public abstract class BaseBlockFluid extends BlockFluidClassic implements IBlockSettings {
 
   protected final Settings settings;
 

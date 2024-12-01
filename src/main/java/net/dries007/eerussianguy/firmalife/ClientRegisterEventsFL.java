@@ -35,7 +35,6 @@ import net.dries007.eerussianguy.firmalife.render.LargePlanterBakedModel;
 import net.dries007.eerussianguy.firmalife.render.LargePlanterStateMapper;
 import net.dries007.eerussianguy.firmalife.render.QuadPlanterBakedModel;
 import net.dries007.eerussianguy.firmalife.render.QuadPlanterStateMapper;
-import net.dries007.eerussianguy.firmalife.render.TESRLeafMat;
 import net.dries007.eerussianguy.firmalife.render.TESRString;
 import net.dries007.eerussianguy.firmalife.render.TESRTurntable;
 import net.dries007.eerussianguy.firmalife.render.VanillaStemStateMapper;
@@ -47,13 +46,11 @@ import net.dries007.tfc.objects.blocks.BlockStemCrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.items.ItemMetalMalletMold;
-import net.dries007.tfc.objects.te.TELeafMat;
 import net.dries007.tfc.objects.te.TEString;
 import net.dries007.tfc.objects.te.TETurntable;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.data.Reference.MODID_FL;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.CAN_GROW;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.DECAYABLE;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.HARVESTABLE;
@@ -62,6 +59,7 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.WATERED;
 import static su.terrafirmagreg.api.data.Properties.IntProp.AGE_8;
 import static su.terrafirmagreg.api.data.Properties.IntProp.CLAY_LEVEL;
 import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_5;
+import static su.terrafirmagreg.api.data.Reference.MODID_FL;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = MODID_FL)
@@ -155,7 +153,6 @@ public class ClientRegisterEventsFL {
     ModelLoader.setCustomStateMapper(BlocksFL.LARGE_PLANTER, new LargePlanterStateMapper());
 
     ClientRegistry.bindTileEntitySpecialRenderer(TEString.class, new TESRString());
-    ClientRegistry.bindTileEntitySpecialRenderer(TELeafMat.class, new TESRLeafMat());
     ClientRegistry.bindTileEntitySpecialRenderer(TETurntable.class, new TESRTurntable());
   }
 

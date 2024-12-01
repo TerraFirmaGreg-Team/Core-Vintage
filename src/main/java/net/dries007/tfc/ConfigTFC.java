@@ -2,7 +2,6 @@ package net.dries007.tfc;
 
 import su.terrafirmagreg.api.data.enums.InventoryCraftingMode;
 import su.terrafirmagreg.api.data.enums.QuiverSearch;
-import su.terrafirmagreg.api.data.enums.TimeTooltipMode;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
@@ -179,10 +178,6 @@ public final class ConfigTFC {
       @Config.LangKey("config." + MODID_TFC + ".general.tree.requiresAxe")
       public boolean requiresAxe = true;
 
-      @Config.Comment("If false, leaves will not drop saplings.")
-      @Config.LangKey("config." + MODID_TFC + ".general.tree.enableSaplings")
-      public boolean enableSaplings = true;
-
       @Config.Comment("Chance per log for an item to drop when using a stone axe.")
       @Config.RangeDouble(min = 0, max = 1)
       @Config.LangKey("config." + MODID_TFC + ".general.tree.stoneAxeReturnRate")
@@ -328,11 +323,6 @@ public final class ConfigTFC {
       @Config.RangeDouble(min = 0, max = 1)
       @Config.LangKey("config." + MODID_TFC + ".general.misc.plantGrowthRate")
       public double plantGrowthRate = 0.01;
-
-      @Config.Comment("Leaf block movement modifier. Lower = Slower, Higher = Faster. 1 = No slow down. (Speed * this = slow).")
-      @Config.RangeDouble(min = 0, max = 1)
-      @Config.LangKey("config." + MODID_TFC + ".general.misc.leafMovementModifier")
-      public double leafMovementModifier = 0.1;
 
       @Config.Comment("Berry bush movement modifier. Lower = Slower, Higher = Faster. 1 = No slow down. (Speed * this = slow).")
       @Config.RangeDouble(min = 0, max = 1)
@@ -520,10 +510,7 @@ public final class ConfigTFC {
       @Config.Comment("Should animal feedback output to the actionbar? (the space just above the hotbar)")
       @Config.LangKey("config." + MODID_TFC + ".client.tooltip.animalsOutputToActionBar")
       public boolean animalsOutputToActionBar = true;
-
-      @Config.Comment({"Time tooltip info mode."})
-      @Config.LangKey("config." + MODID_TFC + ".client.tooltip.timeTooltipMode")
-      public TimeTooltipMode timeTooltipMode = TimeTooltipMode.MINECRAFT_HOURS;
+      
     }
 
     public static class RenderCFG {

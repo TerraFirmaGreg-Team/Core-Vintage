@@ -1,7 +1,8 @@
-package net.dries007.tfc.objects.te;
+package su.terrafirmagreg.modules.device.object.tile;
 
 import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -12,16 +13,14 @@ import net.minecraft.world.World;
 import net.dries007.eerussianguy.firmalife.recipe.DryingRecipe;
 import net.dries007.eerussianguy.firmalife.util.HelpersFL;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-
 import org.jetbrains.annotations.NotNull;
 
-public class TELeafMat extends BaseTileTickableInventory {
+public class TileLeafMat extends BaseTileTickableInventory {
 
   private long startTick;
   private int tickGoal;
 
-  public TELeafMat() {
+  public TileLeafMat() {
     super(1);
     startTick = 0;
     tickGoal = 0;

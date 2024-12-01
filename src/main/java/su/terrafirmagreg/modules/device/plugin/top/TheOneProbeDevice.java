@@ -6,7 +6,9 @@ import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderBloomery;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderCrucible;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderFridge;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderLatexExtractor;
+import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderLeafMat;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderLogPile;
+import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderOven;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderPitKiln;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderQuernHorse;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderQuernManual;
@@ -29,6 +31,8 @@ public final class TheOneProbeDevice {
     oneProbe.registerProvider(new ProviderBloom());
     oneProbe.registerProvider(new ProviderBloomery());
     oneProbe.registerProvider(new ProviderLogPile());
+    oneProbe.registerProvider(new ProviderOven());
+    oneProbe.registerProvider(new ProviderLeafMat());
 
   }
 }

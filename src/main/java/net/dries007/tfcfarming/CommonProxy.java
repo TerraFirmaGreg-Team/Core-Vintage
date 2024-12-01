@@ -1,6 +1,8 @@
 package net.dries007.tfcfarming;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
 import su.terrafirmagreg.modules.worldgen.classic.objects.storage.WorldDataFarming;
 
@@ -17,9 +19,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import net.dries007.floraefixes.Utils;
-import net.dries007.tfcfarming.firmalife.TEHangingPlanterN;
-import net.dries007.tfcfarming.firmalife.TEPlanterN;
-import net.dries007.tfcfarming.firmalife.TEStemCropN;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlockBonsai;
 import net.dries007.tfc.objects.blocks.BlockHangingPlanter;
@@ -29,9 +28,9 @@ import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfc.objects.te.TEPlanter;
 import net.dries007.tfc.objects.te.TEStemCrop;
-import net.dries007.tfc.objects.te.TETickCounter;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import net.dries007.tfcfarming.firmalife.TEHangingPlanterN;
+import net.dries007.tfcfarming.firmalife.TEPlanterN;
+import net.dries007.tfcfarming.firmalife.TEStemCropN;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -96,7 +95,7 @@ public class CommonProxy {
             if (hpte.isPresent()) {
               ICrop crop = Utils.readDeclaredField(ItemSeedsTFC.class, seeds, "crop");
               if (crop != null) {
-                TETickCounter teHangingPlanter = TEHangingPlanterN.class.getConstructor(ICrop.class).newInstance(crop);
+                BaseTileTickCounter teHangingPlanter = TEHangingPlanterN.class.getConstructor(ICrop.class).newInstance(crop);
                 teHangingPlanter.resetCounter();
                 event.getWorld().setTileEntity(event.getPos(), teHangingPlanter);
               }
@@ -112,7 +111,7 @@ public class CommonProxy {
   private void setTileEntity(World w, BlockPos pos) {
     TileUtils.getTile(w, pos, TECropBase.class).ifPresent(tile -> {
       if (TFCFarming.firmalifeLoaded && tile instanceof TEStemCrop && !(tile instanceof TEStemCropN)) {
-        TETickCounter teStemCropN;
+        BaseTileTickCounter teStemCropN;
         try {
           teStemCropN = TEStemCropN.class.getConstructor(TECropBase.class).newInstance(tile);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
@@ -146,7 +145,7 @@ public class CommonProxy {
 
     // cleanup and passive growth logic
     World w = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
-    TETickCounter t = TFCFarming.INSTANCE.worldStorage.teTickCounter;
+    BaseTileTickCounter t = TFCFarming.INSTANCE.worldStorage.teTickCounter;
     WorldDataFarming worldStorage = TFCFarming.INSTANCE.worldStorage;
 
     // 255 units / 8 units / month = 32 months for a full replenish

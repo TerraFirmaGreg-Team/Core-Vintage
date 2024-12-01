@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.base.world.feature.spi;
+package su.terrafirmagreg.api.base.gen.feature.spi;
 
 import su.terrafirmagreg.api.util.CollectionUtils;
 

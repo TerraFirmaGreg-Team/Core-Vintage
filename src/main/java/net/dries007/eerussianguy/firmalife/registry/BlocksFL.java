@@ -27,15 +27,11 @@ import net.dries007.tfc.objects.blocks.BlockBonsai;
 import net.dries007.tfc.objects.blocks.BlockBumper;
 import net.dries007.tfc.objects.blocks.BlockBushTrellis;
 import net.dries007.tfc.objects.blocks.BlockCheesewheel;
-import net.dries007.tfc.objects.blocks.BlockCinnamonLeaves;
-import net.dries007.tfc.objects.blocks.BlockCinnamonLog;
-import net.dries007.tfc.objects.blocks.BlockCinnamonSapling;
 import net.dries007.tfc.objects.blocks.BlockClimateStation;
 import net.dries007.tfc.objects.blocks.BlockHangingPlanter;
 import net.dries007.tfc.objects.blocks.BlockJackOLantern;
 import net.dries007.tfc.objects.blocks.BlockJars;
 import net.dries007.tfc.objects.blocks.BlockLargePlanter;
-import net.dries007.tfc.objects.blocks.BlockLeafMat;
 import net.dries007.tfc.objects.blocks.BlockQuadPlanter;
 import net.dries007.tfc.objects.blocks.BlockSpout;
 import net.dries007.tfc.objects.blocks.BlockStemCrop;
@@ -50,6 +46,9 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeBranch;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
+import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCinnamonLeaves;
+import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCinnamonLog;
+import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCinnamonSapling;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemBlockRot;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
@@ -57,7 +56,6 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TEClimateStation;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
-import net.dries007.tfc.objects.te.TELeafMat;
 import net.dries007.tfc.objects.te.TEPlanter;
 import net.dries007.tfc.objects.te.TEStemCrop;
 import net.dries007.tfc.objects.te.TEString;
@@ -86,8 +84,6 @@ public class BlocksFL {
   public static final BlockStemFruit PUMPKIN_FRUIT = Helpers.getNull();
   @GameRegistry.ObjectHolder("melon_fruit")
   public static final BlockStemFruit MELON_FRUIT = Helpers.getNull();
-  @GameRegistry.ObjectHolder("leaf_mat")
-  public static final BlockLeafMat LEAF_MAT = Helpers.getNull();
   @GameRegistry.ObjectHolder("cinnamon_log")
   public static final BlockCinnamonLog CINNAMON_LOG = Helpers.getNull();
   @GameRegistry.ObjectHolder("cinnamon_leaves")
@@ -169,7 +165,6 @@ public class BlocksFL {
       doFruitAdditions(r, name, bonsais, Optional.of(fruitTree));
     }
 
-    normalIBs.add(register(r, "leaf_mat", new BlockLeafMat(), CT_MISC));
     normalIBs.add(register(r, "cinnamon_log", new BlockCinnamonLog(), CT_WOOD));
     normalIBs.add(register(r, "cinnamon_leaves", new BlockCinnamonLeaves(), CT_WOOD));
     register(r, "cinnamon_sapling", new BlockCinnamonSapling(), CT_WOOD);
@@ -259,7 +254,6 @@ public class BlocksFL {
     allCropBlocks = cropBlocks.build();
 
     register(TEPlanter.class, "quad_planter");
-    register(TELeafMat.class, "leaf_mat");
     register(TEHangingPlanter.class, "hanging_planter");
     register(TEString.class, "string");
     register(TEStemCrop.class, "stem_crop");

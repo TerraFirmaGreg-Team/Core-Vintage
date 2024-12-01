@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.object.tile;
 
-import net.dries007.tfc.objects.te.TETickCounter;
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 
-public class TileWoodSapling extends TETickCounter {
+public class TileWoodSapling extends BaseTileTickCounter {
 
 }

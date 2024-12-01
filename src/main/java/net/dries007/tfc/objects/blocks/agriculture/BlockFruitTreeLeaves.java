@@ -1,9 +1,13 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
+import su.terrafirmagreg.api.data.enums.EnumFruitLeafState;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.api.data.enums.EnumFruitLeafState;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.wood.ConfigWood;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -31,10 +35,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -100,7 +101,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     if (!world.isRemote) {
       if (state.getValue(HARVESTABLE) && tree.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
-        var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+        var tile = TileUtils.getTile(world, pos, BaseTileTickCounter.class);
         tile.ifPresent(tileTickCounter -> {
           long hours = tileTickCounter.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
           if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
@@ -130,7 +131,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+    TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
   }
 
   @Override
@@ -140,7 +141,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
       if (!worldIn.isRemote) {
         ItemHandlerHelper.giveItemToPlayer(playerIn, tree.getFoodDrop());
         worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(FRUIT_LEAF_STATE, EnumFruitLeafState.NORMAL));
-        TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+        TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
       }
       return true;
     }
@@ -150,16 +151,16 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
   @Override
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
     // Duplicated from BlockLeavesTFC#onEntityCollision
-    if ((!(entityIn instanceof EntityPlayer) || !((EntityPlayer) entityIn).isCreative())) {
+    if ((!(entityIn instanceof EntityPlayer entityPlayer) || !entityPlayer.isCreative())) {
       // Player will take damage when falling through leaves if fall is over 9 blocks, fall damage is then set to 0.
       entityIn.fall((entityIn.fallDistance - 6), 1.0F);
       entityIn.fallDistance = 0;
       // Entity motion is reduced by leaves.
-      entityIn.motionX *= ConfigTFC.General.MISC.leafMovementModifier;
+      entityIn.motionX *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
       if (entityIn.motionY < 0) {
-        entityIn.motionY *= ConfigTFC.General.MISC.leafMovementModifier;
+        entityIn.motionY *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
       }
-      entityIn.motionZ *= ConfigTFC.General.MISC.leafMovementModifier;
+      entityIn.motionZ *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
     }
   }
 
@@ -177,7 +178,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
   @Nullable
   @Override
   public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TETickCounter();
+    return new BaseTileTickCounter();
   }
 
   private void doLeafDecay(World world, BlockPos pos, IBlockState state) {

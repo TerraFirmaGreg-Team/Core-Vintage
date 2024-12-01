@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.flora.object.block.BlockPlant;
 import su.terrafirmagreg.modules.flora.object.block.BlockPlantFloatingWater;
@@ -43,7 +44,6 @@ import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockFloatingWaterTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockLargeVessel;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockPlant;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockSaplingTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TECropSpreading;
@@ -52,7 +52,6 @@ import net.dries007.tfc.objects.te.TEMetalSheet;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.agriculture.BerryBush;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.FruitTree;
@@ -185,7 +184,6 @@ public final class BlocksTFC {
 
       //logs are special
       allLeafBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-      allSaplingBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockSaplingTFC(x)));
 
     }
 
@@ -324,7 +322,7 @@ public final class BlocksTFC {
     // Register Tile Entities
     // Putting tile entity registration in the respective block can call it multiple times. Just put here to avoid duplicates
 
-    register(TETickCounter.class, "tick_counter");
+    register(BaseTileTickCounter.class, "tick_counter");
     register(TEPlacedItem.class, "placed_item");
     register(TEPlacedItemFlat.class, "placed_item_flat");
     register(TEPlacedHide.class, "placed_hide");

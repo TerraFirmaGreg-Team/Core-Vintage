@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
+import su.terrafirmagreg.api.plugin.top.provider.BaseProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.object.block.BlockBloom;
@@ -13,21 +14,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ProviderBloom implements IProbeInfoProvider {
+public class ProviderBloom extends BaseProvider {
 
   @Override
   public String getID() {
@@ -39,25 +35,22 @@ public class ProviderBloom implements IProbeInfoProvider {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
 
+    var probeInfo = info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
+
     if (block instanceof BlockBloom) {
 
       TileUtils.getTile(world, pos, TileBloom.class).ifPresent(tile -> {
-        List<String> currentTooltip = new ArrayList<>();
 
-        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        var cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null) {
           ItemStack bloomStack = cap.getStackInSlot(0);
           IForgeable forgeCap = bloomStack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY,
                                                          null);
           if (forgeCap instanceof IForgeableMeasurableMetal bloomCap) {
-            currentTooltip.add(
-              new TextComponentTranslation(ModUtils.localize("top", "metal.output"), bloomCap.getMetalAmount(),
-                                           new TextComponentTranslation(bloomCap.getMetal().getTranslationKey()).getFormattedText()).getFormattedText());
+            probeInfo.text(new TextComponentTranslation(
+              ModUtils.localize("top", "metal.output"), bloomCap.getMetalAmount(),
+              new TextComponentTranslation(bloomCap.getMetal().getTranslationKey()).getFormattedText()).getFormattedText());
           }
-        }
-
-        for (String string : currentTooltip) {
-          info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).text(string);
         }
       });
     }

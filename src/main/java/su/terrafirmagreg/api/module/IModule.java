@@ -27,6 +27,10 @@ import java.util.Set;
 
 public interface IModule {
 
+  String getModID();
+
+  String getName();
+
   Registry getRegistry();
 
   RegistryManager getRegistryManager();

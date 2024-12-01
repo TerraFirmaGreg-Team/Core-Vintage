@@ -26,6 +26,7 @@ import su.terrafirmagreg.modules.device.object.block.BlockIceBunker;
 import su.terrafirmagreg.modules.device.object.block.BlockInductionCrucible;
 import su.terrafirmagreg.modules.device.object.block.BlockInfectedAir;
 import su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor;
+import su.terrafirmagreg.modules.device.object.block.BlockLeafMat;
 import su.terrafirmagreg.modules.device.object.block.BlockLogPile;
 import su.terrafirmagreg.modules.device.object.block.BlockMolten;
 import su.terrafirmagreg.modules.device.object.block.BlockNestBox;
@@ -82,6 +83,7 @@ public final class BlocksDevice {
   public static BlockOven OVEN;
   public static BlockOvenWall OVEN_WALL;
   public static BlockOvenChimney OVEN_CHIMNEY;
+  public static BlockLeafMat LEAF_MAT;
 
   public static void onRegister(RegistryManager registryManager) {
     //==== Other =================================================================================================//
@@ -125,6 +127,7 @@ public final class BlocksDevice {
     OVEN = registryManager.block(new BlockOven());
     OVEN_WALL = registryManager.block(new BlockOvenWall());
     OVEN_CHIMNEY = registryManager.block(new BlockOvenChimney());
+    LEAF_MAT = registryManager.block(new BlockLeafMat());
   }
 
 }

@@ -22,8 +22,7 @@ public class TESRGrindstone extends TileEntitySpecialRenderer<TileGrindstone> {
   public TESRGrindstone() {
   }
 
-  public void render(@NotNull TileGrindstone tile, double x, double y, double z, float partialTicks,
-                     int destroyStage, float alpha) {
+  public void render(@NotNull TileGrindstone tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
     IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
     if (cap != null) {
@@ -84,8 +83,7 @@ public class TESRGrindstone extends TileEntitySpecialRenderer<TileGrindstone> {
         GlStateManager.scale(0.65D, 0.65D, 0.65);
 
         IBakedModel inputModel = renderItem.getItemModelWithOverrides(input, tile.getWorld(), null);
-        inputModel = ForgeHooksClient.handleCameraTransforms(inputModel,
-                                                             ItemCameraTransforms.TransformType.GROUND, false);
+        inputModel = ForgeHooksClient.handleCameraTransforms(inputModel, ItemCameraTransforms.TransformType.GROUND, false);
         rendererDispatcher.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         renderItem.renderItem(input, inputModel);
         GlStateManager.popMatrix();

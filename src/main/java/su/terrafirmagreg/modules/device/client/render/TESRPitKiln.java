@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
+import su.terrafirmagreg.api.base.tesr.BaseTESR;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 
@@ -10,7 +11,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -21,11 +21,10 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 @SideOnly(Side.CLIENT)
-public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
+public class TESRPitKiln extends BaseTESR<TilePitKiln> {
 
   private static final ResourceLocation THATCH = ModUtils.resource("textures/blocks/thatch.png");
-  private static final ResourceLocation BARK = ModUtils.resource(
-    "textures/blocks/wood/log/oak.png");
+  private static final ResourceLocation BARK = ModUtils.resource("textures/blocks/wood/log/oak.png");
   private static final ModelStraw[] STRAW = new ModelStraw[TilePitKiln.STRAW_NEEDED];
   private static final int LOG_ROWS = 2;
   private static final int LOGS_PER_ROW = TilePitKiln.WOOD_NEEDED / LOG_ROWS;
@@ -39,8 +38,7 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
   }
 
   @Override
-  public void render(TilePitKiln tile, double x, double y, double z, float partialTicks,
-                     int destroyStage, float alpha) {
+  public void render(TilePitKiln tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
     World world = tile.getWorld();
     //noinspection ConstantConditions

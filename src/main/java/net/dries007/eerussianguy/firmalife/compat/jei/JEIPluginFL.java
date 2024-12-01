@@ -6,6 +6,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 
+import mezz.jei.api.IModPlugin;
+import mezz.jei.api.IModRegistry;
+import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.ingredients.VanillaTypes;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.dries007.eerussianguy.firmalife.compat.jei.category.CastingCategoryFL;
 import net.dries007.eerussianguy.firmalife.compat.jei.category.DryingRecipeCategory;
 import net.dries007.eerussianguy.firmalife.compat.jei.category.OvenRecipeCategory;
@@ -17,11 +22,6 @@ import net.dries007.eerussianguy.firmalife.compat.jei.wrapper.UnmoldRecipeWrappe
 import net.dries007.eerussianguy.firmalife.init.FoodFL;
 import net.dries007.eerussianguy.firmalife.registry.BlocksFL;
 import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
-import mezz.jei.api.IModPlugin;
-import mezz.jei.api.IModRegistry;
-import mezz.jei.api.JEIPlugin;
-import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
@@ -69,7 +69,7 @@ public class JEIPluginFL implements IModPlugin {
                                                             .map(DryingRecipeWrapper::new)
                                                             .collect(Collectors.toList());
     registry.addRecipes(dryList, DRY_ID);
-    registry.addRecipeCatalyst(new ItemStack(BlocksFL.LEAF_MAT, 1), DRY_ID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.LEAF_MAT, 1), DRY_ID);
 
     registry.addIngredientInfo(new ItemStack(ItemsFL.FRUIT_LEAF, 1), VanillaTypes.ITEM,
                                new TextComponentTranslation("jei.tooltip.firmalife.fruit_leaf").getFormattedText());

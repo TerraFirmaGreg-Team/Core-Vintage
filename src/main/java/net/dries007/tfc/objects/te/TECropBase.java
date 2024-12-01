@@ -1,15 +1,17 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TECropBase extends TETickCounter implements ICalendarTickable, ITickable {
+public class TECropBase extends BaseTileTickCounter implements ICalendarTickable, ITickable {
 
   protected long lastTickCalChecked;
 
@@ -35,14 +37,14 @@ public class TECropBase extends TETickCounter implements ICalendarTickable, ITic
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound nbt) {
+  public void readFromNBT(@NotNull NBTTagCompound nbt) {
     lastTickCalChecked = nbt.getLong("lastTickCalChecked");
     super.readFromNBT(nbt);
   }
 
   @NotNull
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+  public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
     nbt.setLong("lastTickCalChecked", lastTickCalChecked);
     return super.writeToNBT(nbt);
   }

@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.blocks.wood;
 
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.GameUtils;
+import su.terrafirmagreg.modules.wood.ConfigWood;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -24,7 +25,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -97,11 +97,11 @@ public class BlockLeavesTFC extends BlockLeaves {
       entityIn.fall((entityIn.fallDistance - 6), 1.0F);
       entityIn.fallDistance = 0;
       // Entity motion is reduced by leaves.
-      entityIn.motionX *= ConfigTFC.General.MISC.leafMovementModifier;
+      entityIn.motionX *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
       if (entityIn.motionY < 0) {
-        entityIn.motionY *= ConfigTFC.General.MISC.leafMovementModifier;
+        entityIn.motionY *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
       }
-      entityIn.motionZ *= ConfigTFC.General.MISC.leafMovementModifier;
+      entityIn.motionZ *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
     }
   }
 
@@ -119,7 +119,7 @@ public class BlockLeavesTFC extends BlockLeaves {
   @Override
   @NotNull
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(BlockSaplingTFC.get(wood)) : Items.AIR;
+    return ConfigWood.BLOCK.SAPLING.enableDrop ? Item.getItemFromBlock(BlockSaplingTFC.get(wood)) : Items.AIR;
   }
 
   @Override

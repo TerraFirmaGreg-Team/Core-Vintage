@@ -1,7 +1,10 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
+import su.terrafirmagreg.api.plugin.top.provider.BaseProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.object.block.BlockBloomery;
 import su.terrafirmagreg.modules.device.object.tile.TileBloomery;
 
@@ -16,21 +19,18 @@ import net.minecraft.world.World;
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
-public class ProviderBloomery implements IProbeInfoProvider {
+public class ProviderBloomery extends BaseProvider {
 
   @Override
   public String getID() {
@@ -38,8 +38,7 @@ public class ProviderBloomery implements IProbeInfoProvider {
   }
 
   @Override
-  public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world,
-                           IBlockState state, IProbeHitData hitData) {
+  public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
     Block block = state.getBlock();
     BlockPos pos = hitData.getPos();
 
@@ -53,7 +52,7 @@ public class ProviderBloomery implements IProbeInfoProvider {
           List<ItemStack> oreStacks = tile.getOreStacks();
           BloomeryRecipe recipe = !oreStacks.isEmpty() ? BloomeryRecipe.get(oreStacks.get(0)) : null;
           long remainingTicks = tile.getRemainingTicks();
-          switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {
+          switch (ConfigDevice.BLOCK.BLOOMERY.timeTooltipMode) {
             case NONE:
               break;
             case TICKS:

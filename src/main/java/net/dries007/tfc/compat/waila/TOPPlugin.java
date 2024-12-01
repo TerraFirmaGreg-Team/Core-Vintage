@@ -11,7 +11,6 @@ import net.dries007.tfc.compat.waila.providers.FruitTreeProvider;
 import net.dries007.tfc.compat.waila.providers.IngotPileProvider;
 import net.dries007.tfc.compat.waila.providers.OreProvider;
 import net.dries007.tfc.compat.waila.providers.PlacedItemProvider;
-import net.dries007.tfc.compat.waila.providers.TreeProvider;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,7 +26,6 @@ public class TOPPlugin implements Function<ITheOneProbe, Void> {
     new TOPBlockInterface(new FruitTreeProvider()),
     new TOPBlockInterface(new OreProvider()),
     new TOPBlockInterface(new PlacedItemProvider()),
-    new TOPBlockInterface(new TreeProvider()),
     new TOPBlockInterface(new IngotPileProvider())
   );
 

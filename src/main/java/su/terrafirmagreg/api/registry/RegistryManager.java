@@ -1,5 +1,6 @@
 package su.terrafirmagreg.api.registry;
 
+import su.terrafirmagreg.api.module.IModule;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.api.registry.spi.IRegistryBiome;
 import su.terrafirmagreg.api.registry.spi.IRegistryBlock;
@@ -28,32 +29,20 @@ public class RegistryManager
   implements IRegistryBlock, IRegistryBiome, IRegistryKeyBinding, IRegistryDataSerializer, IRegistryEnchantment, IRegistryEntity, IRegistryItem,
              IRegistryLootTable, IRegistryPotion, IRegistryPotionType, IRegistrySound, IRegistryWorldGenerator, IRegistryCommand, IRegistryFluid {
 
-  /**
-   * The id of the mod the registry helper instance belongs to.
-   */
+  private final IModule module;
+  private final String moduleName;
   private final String modID;
-
-  /**
-   * The creative tab used by the mod. This can be null.
-   */
+  
   @Nullable
   private final CreativeTabs tab;
-
-  /**
-   * The auto registry for the helper.
-   */
   private final Registry registry;
-
   private NetworkEntityIdSupplier networkEntityIdSupplier;
 
-  /**
-   * Constructs a new Registry. The modid for the helper is equal to that of the active mod container, and auto model registration is enabled.
-   *
-   * @param tab The tab for the registry helper.
-   */
-  public RegistryManager(@Nullable CreativeTabs tab, String modID) {
+  public RegistryManager(@Nullable CreativeTabs tab, IModule module) {
 
-    this.modID = modID;
+    this.module = module;
+    this.modID = module.getModID();
+    this.moduleName = module.getName();
     this.tab = tab;
 
     this.registry = new Registry();

@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.data.enums.EnumLeafState;
 import su.terrafirmagreg.api.library.MCDate.Month;
 import su.terrafirmagreg.api.util.BlockUtils;
@@ -8,6 +9,7 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.wood.ConfigWood;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -36,7 +38,6 @@ import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.agriculture.SeasonalTrees;
 import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
@@ -139,7 +140,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
         break;
       case 3:
         if (state.getValue(LEAF_STATE) != EnumLeafState.FRUIT) {
-          TileUtils.getTile(world, pos, TETickCounter.class).ifPresent(tile -> {
+          TileUtils.getTile(world, pos, BaseTileTickCounter.class).ifPresent(tile -> {
             long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
             if (hours > (fruitTree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
               world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumLeafState.FRUIT));
@@ -175,7 +176,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
 
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+    TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
   }
 
   @Override
@@ -184,7 +185,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
       if (!worldIn.isRemote) {
         ItemHandlerHelper.giveItemToPlayer(playerIn, fruitTree.getFoodDrop());
         worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, EnumLeafState.NORMAL));
-        TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+        TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
       }
       return true;
     }
@@ -198,11 +199,11 @@ public class BlockLeavesTFCF extends BlockLeaves {
       entityIn.fall((entityIn.fallDistance - 6), 1.0F);
       entityIn.fallDistance = 0;
       // Entity motion is reduced by leaves.
-      entityIn.motionX *= ConfigTFC.General.MISC.leafMovementModifier;
+      entityIn.motionX *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
       if (entityIn.motionY < 0) {
-        entityIn.motionY *= ConfigTFC.General.MISC.leafMovementModifier;
+        entityIn.motionY *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
       }
-      entityIn.motionZ *= ConfigTFC.General.MISC.leafMovementModifier;
+      entityIn.motionZ *= ConfigWood.BLOCK.LEAVES.leafMovementModifier;
     }
   }
 
@@ -220,7 +221,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
   @Nullable
   @Override
   public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TETickCounter();
+    return new BaseTileTickCounter();
   }
 
   private void doLeafDecay(World world, BlockPos pos, IBlockState state) {
@@ -303,7 +304,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
   @Override
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
     if (state.getValue(LEAF_STATE) != EnumLeafState.WINTER && !fruitTree.hasDeadLeaves) {
-      return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(BlockSaplingTFC.get(wood)) : Items.AIR;
+      return ConfigWood.BLOCK.SAPLING.enableDrop ? Item.getItemFromBlock(BlockSaplingTFC.get(wood)) : Items.AIR;
     }
     return null;
   }

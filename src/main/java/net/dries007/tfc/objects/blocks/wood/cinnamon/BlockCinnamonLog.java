@@ -1,8 +1,9 @@
-package net.dries007.tfc.objects.blocks;
+package net.dries007.tfc.objects.blocks.wood.cinnamon;
 
 import su.terrafirmagreg.api.helper.BlockHelper;
-import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.library.MCDate.Month;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -24,8 +25,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.util.OreDictionaryHelper;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 

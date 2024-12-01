@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.base.tile.BaseTileTickCounter;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
@@ -28,7 +29,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -48,10 +48,6 @@ public class BlockTorchTFC extends BlockTorch implements ICapabilitySize {
     setSoundType(SoundType.WOOD);
 
     OreDictionaryHelper.register(this, "torch");
-  }
-
-  public static boolean canLight(ItemStack stack) {
-    return stack.getItem() == Item.getItemFromBlock(Blocks.TORCH) || ItemFireStarter.canIgnite(stack);
   }
 
   @Override
@@ -93,7 +89,7 @@ public class BlockTorchTFC extends BlockTorch implements ICapabilitySize {
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (worldIn.isRemote) {return;}
-    TileUtils.getTile(worldIn, pos, TETickCounter.class)
+    TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class)
              .filter(tile -> tile.getTicksSinceUpdate() > ConfigTFC.General.OVERRIDES.torchTime && ConfigTFC.General.OVERRIDES.torchTime > 0)
              .ifPresent(tile -> {
                worldIn.setBlockState(pos, state.withProperty(LIT, false));
@@ -120,16 +116,20 @@ public class BlockTorchTFC extends BlockTorch implements ICapabilitySize {
     }
     if (BlockTorchTFC.canLight(stack)) {
       worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
-      TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+      TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
     }
 
     return true;
   }
 
+  public static boolean canLight(ItemStack stack) {
+    return stack.getItem() == Item.getItemFromBlock(Blocks.TORCH) || ItemFireStarter.canIgnite(stack);
+  }
+
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     // Set the initial counter value
-    TileUtils.getTile(worldIn, pos, TETickCounter.class).ifPresent(TETickCounter::resetCounter);
+    TileUtils.getTile(worldIn, pos, BaseTileTickCounter.class).ifPresent(BaseTileTickCounter::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 
@@ -146,6 +146,6 @@ public class BlockTorchTFC extends BlockTorch implements ICapabilitySize {
   @Nullable
   @Override
   public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TETickCounter();
+    return new BaseTileTickCounter();
   }
 }

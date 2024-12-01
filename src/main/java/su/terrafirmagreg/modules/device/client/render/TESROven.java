@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
+import su.terrafirmagreg.api.base.tesr.BaseTESR;
 import su.terrafirmagreg.modules.device.object.tile.TileOven;
 
 import net.minecraft.block.state.IBlockState;
@@ -7,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -21,11 +21,10 @@ import static su.terrafirmagreg.modules.device.object.tile.TileOven.SLOT_FUEL_2;
 import static su.terrafirmagreg.modules.device.object.tile.TileOven.SLOT_MAIN;
 
 @SideOnly(Side.CLIENT)
-public class TESROven extends TileEntitySpecialRenderer<TileOven> {
+public class TESROven extends BaseTESR<TileOven> {
 
   @Override
-  public void render(TileOven tile, double x, double y, double z, float partialTicks,
-                     int destroyStage, float alpha) {
+  public void render(TileOven tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
     if (tile.hasWorld()) {

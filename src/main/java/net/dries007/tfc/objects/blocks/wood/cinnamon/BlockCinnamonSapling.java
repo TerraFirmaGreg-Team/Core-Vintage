@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.blocks;
+package net.dries007.tfc.objects.blocks.wood.cinnamon;
 
 import su.terrafirmagreg.modules.worldgen.classic.objects.generator.GeneratorCinnamon;
 

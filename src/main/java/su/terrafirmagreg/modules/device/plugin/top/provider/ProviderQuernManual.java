@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
+import su.terrafirmagreg.api.plugin.top.provider.BaseProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.object.block.BlockQuernManual;
@@ -18,12 +19,11 @@ import net.minecraftforge.items.IItemHandler;
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 
 import static su.terrafirmagreg.modules.device.object.tile.TileQuernManual.SLOT_HANDSTONE;
 
-public class ProviderQuernManual implements IProbeInfoProvider {
+public class ProviderQuernManual extends BaseProvider {
 
   @Override
   public String getID() {
@@ -36,17 +36,16 @@ public class ProviderQuernManual implements IProbeInfoProvider {
     BlockPos pos = hitData.getPos();
 
     if (block instanceof BlockQuernManual) {
-      var tile = TileUtils.getTile(world, pos, TileQuernManual.class);
-      tile.ifPresent(tileQuernManual -> {
+      TileUtils.getTile(world, pos, TileQuernManual.class).ifPresent(tile -> {
 
         IItemHandler handler;
         ItemStack handstone;
 
-        if (!tileQuernManual.hasHandstone()) {
+        if (!tile.hasHandstone()) {
           return;
         }
 
-        handler = tileQuernManual.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (handler == null) {
           return;
         }

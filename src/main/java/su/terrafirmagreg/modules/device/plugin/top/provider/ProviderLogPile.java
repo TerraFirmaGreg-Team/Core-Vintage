@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.plugin.top.provider.BaseProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.object.block.BlockLogPile;
@@ -13,17 +14,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IBlockDisplayOverride;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import mcjty.theoneprobe.api.TextStyleClass;
 
-public class ProviderLogPile implements IProbeInfoProvider, IBlockDisplayOverride {
+public class ProviderLogPile extends BaseProvider implements IBlockDisplayOverride {
 
   @Override
   public String getID() {
@@ -44,7 +43,7 @@ public class ProviderLogPile implements IProbeInfoProvider, IBlockDisplayOverrid
       TileUtils.getTile(world, pos, TileLogPile.class).ifPresent(tile -> {
         ItemStack icon = ItemStack.EMPTY;
 
-        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        var cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null) {
           for (int i = 0; i < cap.getSlots(); i++) {
             ItemStack slotStack = cap.getStackInSlot(i);

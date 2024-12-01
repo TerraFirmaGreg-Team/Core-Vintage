@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.wood.object.tile;
 import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.wood.api.recipes.LoomRecipe;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.init.RegistryWood;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodLoom;
 
@@ -18,13 +17,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
 public class TileWoodLoom extends BaseTileTickableInventory {
-
-  private WoodType cachedWoodType;
 
   @Getter
   private int progress = 0;
@@ -38,14 +34,9 @@ public class TileWoodLoom extends BaseTileTickableInventory {
 
   }
 
-  @Nullable
-  public WoodType getWood() {
-    if (cachedWoodType == null) {
-      if (world != null) {
-        cachedWoodType = ((BlockWoodLoom) getBlockType()).getType();
-      }
-    }
-    return cachedWoodType;
+  @Override
+  public BlockWoodLoom getBlockType() {
+    return (BlockWoodLoom) super.getBlockType();
   }
 
   @Override

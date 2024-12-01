@@ -1,19 +1,22 @@
-package net.dries007.eerussianguy.firmalife.render;
+package su.terrafirmagreg.modules.device.client.render;
+
+import su.terrafirmagreg.api.base.tesr.BaseTESR;
+import su.terrafirmagreg.modules.device.object.tile.TileLeafMat;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.te.TELeafMat;
-
-public class TESRLeafMat extends TileEntitySpecialRenderer<TELeafMat> {
+@SideOnly(Side.CLIENT)
+public class TESRLeafMat extends BaseTESR<TileLeafMat> {
 
   @Override
-  public void render(TELeafMat tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+  public void render(TileLeafMat tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
     if (tile.hasWorld()) {

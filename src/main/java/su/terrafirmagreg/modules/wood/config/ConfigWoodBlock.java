@@ -10,6 +10,12 @@ public final class ConfigWoodBlock {
   @Config.Comment("Support")
   public final Support SUPPORT = new Support();
 
+  @Config.Comment("Sapling")
+  public final Sapling SAPLING = new Sapling();
+
+  @Config.Comment("Leaves")
+  public final Leaves LEAVES = new Leaves();
+
   public static final class Barrel {
 
     @Config.Comment("How much fluid (mB) can a barrel hold?")
@@ -71,5 +77,19 @@ public final class ConfigWoodBlock {
     @Config.Comment("Downwards support range of support beams.")
     @Config.RangeInt(min = 0, max = 3)
     public int supportBeamRangeDown = 1;
+  }
+
+  public static final class Sapling {
+
+    @Config.Comment("If false, leaves will not drop saplings.")
+    public boolean enableDrop = true;
+
+  }
+
+  public static final class Leaves {
+
+    @Config.Comment("Leaf block movement modifier. Lower = Slower, Higher = Faster. 1 = No slow down. (Speed * this = slow).")
+    @Config.RangeDouble(min = 0, max = 1)
+    public double leafMovementModifier = 0.1;
   }
 }

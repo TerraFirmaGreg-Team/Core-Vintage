@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.config;
 
+import su.terrafirmagreg.api.data.enums.TimeTooltipMode;
+
 import net.minecraftforge.common.config.Config;
 
 import net.dries007.tfc.util.Alloy;
@@ -39,6 +41,9 @@ public final class ConfigBlock {
   @Config.Comment("Anvil")
   public final Anvil ANVIL = new Anvil();
 
+  @Config.Comment("Oven")
+  public final Oven OVEN = new Oven();
+
   public static final class Bellows {
 
     @Config.Comment(
@@ -70,6 +75,9 @@ public final class ConfigBlock {
     @Config.Comment("Number of ticks required for a bloomery to complete. (1000 = 1 in game hour = 50 seconds), default is 15 hours.")
     @Config.RangeInt(min = 20)
     public int ticks = 15000;
+
+    @Config.Comment({"Time tooltip info mode."})
+    public TimeTooltipMode timeTooltipMode = TimeTooltipMode.MINECRAFT_HOURS;
   }
 
   public static final class BlastFurnace {
@@ -118,6 +126,9 @@ public final class ConfigBlock {
     @Config.Comment("Number of ticks required for a pit kiln to burn out. (1000 = 1 in game hour = 50 seconds), default is 8 hours.")
     @Config.RangeInt(min = 20)
     public int ticks = 8000;
+
+    @Config.Comment({"Time tooltip info mode."})
+    public TimeTooltipMode timeTooltipMode = TimeTooltipMode.MINECRAFT_HOURS;
   }
 
   public static final class BearTrap {
@@ -167,5 +178,11 @@ public final class ConfigBlock {
     @Config.Comment("Range of pixels on either side of the working target that can be accepted to complete a smithing recipe")
     @Config.RangeInt(min = 0)
     public int acceptableAnvilRange = 0;
+  }
+
+  public static final class Oven {
+
+    @Config.Comment({"Time tooltip info mode."})
+    public TimeTooltipMode timeTooltipMode = TimeTooltipMode.MINECRAFT_HOURS;
   }
 }

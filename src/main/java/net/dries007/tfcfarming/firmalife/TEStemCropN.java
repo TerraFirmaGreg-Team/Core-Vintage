@@ -1,21 +1,20 @@
 package net.dries007.tfcfarming.firmalife;
 
 import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-import net.dries007.tfcfarming.Config;
-import net.dries007.tfcfarming.CropNutrients;
-import net.dries007.tfcfarming.NutrientValues;
-import net.dries007.tfcfarming.TFCFarming;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TEStemCrop;
-
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import net.dries007.tfcfarming.Config;
+import net.dries007.tfcfarming.CropNutrients;
+import net.dries007.tfcfarming.NutrientValues;
+import net.dries007.tfcfarming.TFCFarming;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -134,7 +133,7 @@ public class TEStemCropN extends TEStemCrop {
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound compound) {
+  public void readFromNBT(@NotNull NBTTagCompound compound) {
     factor = compound.getDouble("growthUnitFactor");
     virtualFactor = compound.getDouble("virtualGrowthFactor");
 
@@ -151,7 +150,7 @@ public class TEStemCropN extends TEStemCrop {
   }
 
   @Override
-  public @NotNull NBTTagCompound writeToNBT(NBTTagCompound compound) {
+  public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound compound) {
     compound.setDouble("growthUnitFactor", factor);
     compound.setDouble("virtualGrowthFactor", virtualFactor);
     Gson gson = new Gson();

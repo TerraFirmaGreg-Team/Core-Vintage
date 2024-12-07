@@ -26,13 +26,13 @@ public class BlockOreMixin {
   @Final
   public Material field_149764_J;
 
-  @Inject(method = "getItemDropped", at = @At(value = "HEAD"), remap = false, cancellable = true)
+  @Inject(method = "func_180660_a", at = @At(value = "HEAD"), remap = false, cancellable = true)
   private void getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune, CallbackInfoReturnable<Item> cir) {
     var itemStack = OreDictUnifier.get(TFGOrePrefix.oreChunk, field_149764_J);
     cir.setReturnValue(itemStack.getItem());
   }
 
-  @Inject(method = "damageDropped", at = @At(value = "HEAD"), remap = false, cancellable = true)
+  @Inject(method = "func_180651_a", at = @At(value = "HEAD"), remap = false, cancellable = true)
   private void damageDropped(IBlockState state, CallbackInfoReturnable<Integer> cir) {
     var itemStack = OreDictUnifier.get(TFGOrePrefix.oreChunk, field_149764_J);
     cir.setReturnValue(itemStack.getItemDamage());

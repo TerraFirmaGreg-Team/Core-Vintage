@@ -18,12 +18,12 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketChunkData;
 import net.dries007.tfc.util.climate.ClimateTFC;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_TFC)
 public final class CapabilityChunkData {
 
-  public static final ResourceLocation CHUNK_DATA = new ResourceLocation(MOD_ID, "chunkdata");
+  public static final ResourceLocation CHUNK_DATA = new ResourceLocation(MODID_TFC, "chunkdata");
 
   public static void preInit() {
     CapabilityManager.INSTANCE.register(ChunkDataTFC.class, new ChunkDataTFC.ChunkDataStorage(), ChunkDataTFC::new);

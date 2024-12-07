@@ -17,14 +17,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderYakTFC extends RenderAnimalTFC<EntityYakTFC> {
 
-  private static final ResourceLocation TEXTURE_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/yak_young.png");
-  private static final ResourceLocation TEXTURE_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/yak_young.png");
+  private static final ResourceLocation TEXTURE_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/yak_young.png");
+  private static final ResourceLocation TEXTURE_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/yak_young.png");
 
   public RenderYakTFC(RenderManager renderManager) {
     super(renderManager, new ModelYakTFC(), 0.7F, TEXTURE_YOUNG, TEXTURE_OLD);

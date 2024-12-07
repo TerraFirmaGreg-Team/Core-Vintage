@@ -17,7 +17,7 @@ import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 //this is just TFC's HeatCategory, copied over in case i need to change it
 public class OvenRecipeCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/gui/icons/jei.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/icons/jei.png");
 
   private final IDrawableStatic slot;
   private final IDrawableStatic fire;

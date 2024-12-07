@@ -57,7 +57,7 @@ public class Waterflasks {
   public static final String MOD_ID = "waterflasks";
   public static final String MOD_NAME = "WaterFlasks";
   public static final String VERSION = "1.9";
-  public static final String DEPENDENCIES = "required-after:" + TerraFirmaCraft.MOD_ID +
+  public static final String DEPENDENCIES = "required-after:" + TerraFirmaCraft.MODID_TFC +
                                             "@[" + "1.0.0.127" + ",)";
 
   /**

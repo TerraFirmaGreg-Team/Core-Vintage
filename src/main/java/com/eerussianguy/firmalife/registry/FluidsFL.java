@@ -20,8 +20,8 @@ import javax.annotation.Nonnull;
 //duplicating the fluid registration logic from TFC as not to create conflicts
 public final class FluidsFL {
 
-  private static final ResourceLocation STILL = new ResourceLocation(TerraFirmaCraft.MOD_ID, "blocks/fluid_still");
-  private static final ResourceLocation FLOW = new ResourceLocation(TerraFirmaCraft.MOD_ID, "blocks/fluid_flow");
+  private static final ResourceLocation STILL = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "blocks/fluid_still");
+  private static final ResourceLocation FLOW = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "blocks/fluid_flow");
 
   private static final HashBiMap<Fluid, FluidWrapper> WRAPPERS = HashBiMap.create();
 

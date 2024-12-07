@@ -23,7 +23,7 @@ import net.dries007.tfc.util.Helpers;
 @SideOnly(Side.CLIENT)
 public class GuiLiquidTransfer extends GuiContainerTFC {
 
-  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/gui/single_inventory.png");
+  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/single_inventory.png");
   private final int slotIdx;
 
   public GuiLiquidTransfer(Container container, EntityPlayer player, boolean mainhand) {

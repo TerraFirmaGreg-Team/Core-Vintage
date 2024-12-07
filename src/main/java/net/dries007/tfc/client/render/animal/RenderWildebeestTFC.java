@@ -16,13 +16,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderWildebeestTFC extends RenderLiving<EntityWildebeestTFC> {
 
-  private static final ResourceLocation TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/wildebeest.png");
+  private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/wildebeest.png");
 
   public RenderWildebeestTFC(RenderManager manager) {
     super(manager, new ModelWildebeestTFC(), 0.7F);

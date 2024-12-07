@@ -22,12 +22,12 @@ import net.dries007.tfc.objects.te.TEBlastFurnace;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiBlastFurnace extends GuiContainerTE<TEBlastFurnace> {
 
-  private static final ResourceLocation BLAST_FURNACE_BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/blast_furnace.png");
+  private static final ResourceLocation BLAST_FURNACE_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/blast_furnace.png");
 
   List<Float> tempList = new ArrayList<>();
   long lastBurningTicks = 0;
@@ -82,16 +82,16 @@ public class GuiBlastFurnace extends GuiContainerTE<TEBlastFurnace> {
     }
 
     // Отображение текста с количеством руды, топлива и сплава
-    fontRenderer.drawString(I18n.format(MOD_ID + ".tooltip.blast_furnace_ore_amount"),
+    fontRenderer.drawString(I18n.format(MODID_TFC + ".tooltip.blast_furnace_ore_amount"),
                             guiLeft + 40, guiTop + 17, 0x000000);
-    fontRenderer.drawString(I18n.format(MOD_ID + ".tooltip.blast_furnace_fuel_amount"),
+    fontRenderer.drawString(I18n.format(MODID_TFC + ".tooltip.blast_furnace_fuel_amount"),
                             guiLeft + 40, guiTop + 35, 0x000000);
-    fontRenderer.drawString(I18n.format(MOD_ID + ".tooltip.blast_furnace_melt_amount"),
+    fontRenderer.drawString(I18n.format(MODID_TFC + ".tooltip.blast_furnace_melt_amount"),
                             guiLeft + 40, guiTop + 53, 0x000000);
 
     // Отображение предупреждения, если нет дымохода
     if (tile.getField(TEBlastFurnace.CHIMNEY_LEVELS) < 1) {
-      fontRenderer.drawString(I18n.format(MOD_ID + ".tooltip.blast_furnace_invalid_structure"),
+      fontRenderer.drawString(I18n.format(MODID_TFC + ".tooltip.blast_furnace_invalid_structure"),
                               guiLeft + 40, guiTop + 71, 0xDC2400);
     }
 
@@ -192,17 +192,17 @@ public class GuiBlastFurnace extends GuiContainerTE<TEBlastFurnace> {
     if (mouseX > guiLeft + 40 && mouseX < guiLeft + 120 && mouseY > guiTop + 25
         && mouseY < guiTop + 33) {
       int amount = tile.getField(TEBlastFurnace.FIELD_ORE_UNITS);
-      drawHoveringText(I18n.format(MOD_ID + ".tooltip.units", amount), mouseX, mouseY);
+      drawHoveringText(I18n.format(MODID_TFC + ".tooltip.units", amount), mouseX, mouseY);
     }
     if (mouseX > guiLeft + 40 && mouseX < guiLeft + 120 && mouseY > guiTop + 43
         && mouseY < guiTop + 51) {
       int amount = tile.getField(TEBlastFurnace.FIELD_FUEL);
-      drawHoveringText(I18n.format(MOD_ID + ".tooltip.units", amount), mouseX, mouseY);
+      drawHoveringText(I18n.format(MODID_TFC + ".tooltip.units", amount), mouseX, mouseY);
     }
     if (mouseX > guiLeft + 40 && mouseX < guiLeft + 120 && mouseY > guiTop + 61
         && mouseY < guiTop + 69) {
       int amount = tile.getField(TEBlastFurnace.FIELD_MELT);
-      drawHoveringText(I18n.format(MOD_ID + ".tooltip.units", amount), mouseX, mouseY);
+      drawHoveringText(I18n.format(MODID_TFC + ".tooltip.units", amount), mouseX, mouseY);
     }
     super.renderHoveredToolTip(mouseX, mouseY);
   }

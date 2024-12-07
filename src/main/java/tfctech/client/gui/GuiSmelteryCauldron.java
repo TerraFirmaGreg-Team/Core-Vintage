@@ -61,11 +61,11 @@ public class GuiSmelteryCauldron extends GuiContainerTE<TESmelteryCauldron>
             formatted += TextFormatting.WHITE;
             if (tile.isSolidified())
             {
-                formatted += I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.solid");
+                formatted += I18n.format(TerraFirmaCraft.MODID_TFC + ".tooltip.solid");
             }
             else
             {
-                formatted += I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.liquid");
+                formatted += I18n.format(TerraFirmaCraft.MODID_TFC + ".tooltip.liquid");
             }
             tooltip.add(formatted);
             this.drawHoveringText(tooltip, mouseX, mouseY, fontRenderer);

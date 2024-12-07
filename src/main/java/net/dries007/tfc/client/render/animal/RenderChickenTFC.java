@@ -20,19 +20,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderChickenTFC extends RenderLiving<EntityChickenTFC> {
 
-  private static final ResourceLocation CHICKEN_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/chicken_young.png");
-  private static final ResourceLocation CHICKEN_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/chicken_old.png");
+  private static final ResourceLocation CHICKEN_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/chicken_young.png");
+  private static final ResourceLocation CHICKEN_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/chicken_old.png");
 
-  private static final ResourceLocation ROOSTER_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/rooster_young.png");
-  private static final ResourceLocation ROOSTER_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/rooster_old.png");
+  private static final ResourceLocation ROOSTER_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/rooster_young.png");
+  private static final ResourceLocation ROOSTER_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/rooster_old.png");
 
-  private static final ResourceLocation CHICK_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/chick.png");
+  private static final ResourceLocation CHICK_TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/chick.png");
 
   public RenderChickenTFC(RenderManager manager) {
     super(manager, new ModelChickenTFC(), 0.3F);

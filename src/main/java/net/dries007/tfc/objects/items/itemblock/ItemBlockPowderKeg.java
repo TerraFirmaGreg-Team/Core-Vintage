@@ -46,10 +46,10 @@ public class ItemBlockPowderKeg extends ItemBlockTFC implements IItemSize {
       }
 
       if (count == 0) {
-        tooltip.add(I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.powderkeg_empty"));
+        tooltip.add(I18n.format(TerraFirmaCraft.MODID_TFC + ".tooltip.powderkeg_empty"));
       } else {
         ItemStack itemStack = stackHandler.getStackInSlot(firstSlot);
-        tooltip.add(I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.powderkeg_amount", count, itemStack.getItem().getItemStackDisplayName(itemStack)));
+        tooltip.add(I18n.format(TerraFirmaCraft.MODID_TFC + ".tooltip.powderkeg_amount", count, itemStack.getItem().getItemStackDisplayName(itemStack)));
       }
     }
   }

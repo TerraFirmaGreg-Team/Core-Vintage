@@ -52,7 +52,7 @@ import tfcflorae.util.RegenWildCropsTFCF;
 
 import java.util.*;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 /**
@@ -60,7 +60,7 @@ import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
  */
 
 //@SuppressWarnings({"unused", "WeakerAccess"})
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_TFC)
 public class WorldRegenHandler {
 
   public static final WorldGenPlantTFC PLANT_GEN = new WorldGenPlantTFC();

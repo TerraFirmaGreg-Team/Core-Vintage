@@ -40,8 +40,8 @@ public class TreeGenWillow implements ITreeGenerator {
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree, Random rand, boolean isWorldGen) {
     //noinspection ConstantConditions
-    ResourceLocation base = new ResourceLocation(TerraFirmaCraft.MOD_ID, tree.getRegistryName().getPath() + "/base");
-    ResourceLocation overlay = new ResourceLocation(TerraFirmaCraft.MOD_ID, tree.getRegistryName().getPath() + "/overlay");
+    ResourceLocation base = new ResourceLocation(TerraFirmaCraft.MODID_TFC, tree.getRegistryName().getPath() + "/base");
+    ResourceLocation overlay = new ResourceLocation(TerraFirmaCraft.MODID_TFC, tree.getRegistryName().getPath() + "/overlay");
 
     structureBase = manager.get(world.getMinecraftServer(), base);
     structureOverlay = manager.get(world.getMinecraftServer(), overlay);

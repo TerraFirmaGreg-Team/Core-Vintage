@@ -22,8 +22,8 @@ import javax.annotation.Nonnull;
 
 public final class FluidsTFCF {
 
-  private static final ResourceLocation STILL = new ResourceLocation(TerraFirmaCraft.MOD_ID, "blocks/fluid_still");
-  private static final ResourceLocation FLOW = new ResourceLocation(TerraFirmaCraft.MOD_ID, "blocks/fluid_flow");
+  private static final ResourceLocation STILL = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "blocks/fluid_still");
+  private static final ResourceLocation FLOW = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "blocks/fluid_flow");
 
   private static final HashBiMap<Fluid, FluidWrapper> WRAPPERS = HashBiMap.create();
 

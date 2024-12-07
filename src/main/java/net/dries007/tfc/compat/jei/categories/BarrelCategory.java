@@ -27,8 +27,8 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class BarrelCategory extends BaseRecipeCategory<BarrelRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/gui/icons/jei.png");
-  private static final ResourceLocation BARREL_TEXTURES = new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/gui/barrel.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/icons/jei.png");
+  private static final ResourceLocation BARREL_TEXTURES = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/barrel.png");
 
   private final IDrawableStatic fluidSlotBackgroound, fluidSlot;
   private final IDrawableStatic slot;

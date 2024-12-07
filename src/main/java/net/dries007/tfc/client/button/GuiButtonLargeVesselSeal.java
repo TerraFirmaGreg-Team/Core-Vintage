@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.GlStateManager;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
 
 
@@ -27,7 +27,7 @@ public class GuiButtonLargeVesselSeal extends GuiButtonTFC implements IButtonToo
 
   @Override
   public String getTooltip() {
-    return MOD_ID + ".tooltip." + (tile.isSealed() ? "large_vessel_unseal" : "large_vessel_seal");
+    return MODID_TFC + ".tooltip." + (tile.isSealed() ? "large_vessel_unseal" : "large_vessel_seal");
   }
 
   @Override

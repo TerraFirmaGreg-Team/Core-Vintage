@@ -101,12 +101,12 @@ import net.dries007.tfc.objects.te.TEToolRack;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 @SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MOD_ID)
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_TFC)
 public final class ClientRegisterEvents {
 
   @SubscribeEvent
@@ -144,12 +144,12 @@ public final class ClientRegisterEvents {
     }
 
     // Gold Pan
-    ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES).map(e -> new ResourceLocation(MOD_ID, "goldpan/" + e))
+    ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES).map(e -> new ResourceLocation(MODID_TFC, "goldpan/" + e))
                                                              .toArray(ResourceLocation[]::new));
     for (int meta = 0; meta < ItemGoldPan.TYPES.length; meta++) {
-      ModelLoader.setCustomModelResourceLocation(ItemsTFC.GOLDPAN, meta, new ModelResourceLocation(MOD_ID + ":goldpan/" + ItemGoldPan.TYPES[meta]));
+      ModelLoader.setCustomModelResourceLocation(ItemsTFC.GOLDPAN, meta, new ModelResourceLocation(MODID_TFC + ":goldpan/" + ItemGoldPan.TYPES[meta]));
     }
-    ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES).map(e -> new ResourceLocation(MOD_ID, "goldpan/" + e))
+    ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES).map(e -> new ResourceLocation(MODID_TFC, "goldpan/" + e))
                                                              .toArray(ResourceLocation[]::new));
 
     // Ceramic Molds
@@ -246,9 +246,9 @@ public final class ClientRegisterEvents {
     ModelLoader.setCustomStateMapper(BlocksTFC.THATCH_BED, new StateMap.Builder().ignore(BlockThatchBed.OCCUPIED).build());
 
     // Empty Models
-    final ModelResourceLocation empty = new ModelResourceLocation(MOD_ID + ":empty");
+    final ModelResourceLocation empty = new ModelResourceLocation(MODID_TFC + ":empty");
     // todo: switch to hide rack (involves changing mechanics, etc)
-    final ModelResourceLocation hideRack = new ModelResourceLocation(MOD_ID + ":hide_rack");
+    final ModelResourceLocation hideRack = new ModelResourceLocation(MODID_TFC + ":hide_rack");
 
     ModelLoader.setCustomStateMapper(BlocksTFC.PIT_KILN, blockIn -> ImmutableMap.of(BlocksTFC.PIT_KILN.getDefaultState(), empty));
     ModelLoader.setCustomStateMapper(BlocksTFC.PLACED_ITEM_FLAT, blockIn -> ImmutableMap.of(BlocksTFC.PLACED_ITEM_FLAT.getDefaultState(), empty));
@@ -358,7 +358,7 @@ public final class ClientRegisterEvents {
   private static void registerEnumBasedMetaItems(String prefix, Enum e, Item item) {
     //noinspection ConstantConditions
     String registryName = item.getRegistryName().getPath();
-    StringBuilder path = new StringBuilder(MOD_ID).append(':');
+    StringBuilder path = new StringBuilder(MODID_TFC).append(':');
     if (!Strings.isNullOrEmpty(prefix)) {path.append(prefix).append('/');}
     path.append(e.name());
     if (!Strings.isNullOrEmpty(prefix)) {

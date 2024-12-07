@@ -64,7 +64,7 @@ import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class TFCRegistry {
 
-  public static final ResourceLocation HALITE = new ResourceLocation(TerraFirmaCraft.MOD_ID, "halite");
+  public static final ResourceLocation HALITE = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "halite");
 
   @SubscribeEvent
   public static void onPreRegisterOre(TFCRegistryEvent.RegisterPreBlock<Ore> event) {

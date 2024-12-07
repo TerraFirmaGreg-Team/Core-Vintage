@@ -11,7 +11,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import com.eerussianguy.firmalife.blocks.BlockFruitDoor;
-import com.eerussianguy.firmalife.init.FoodDataFL;
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.init.Fruit;
 import com.eerussianguy.firmalife.init.FruitTreeFL;
@@ -233,23 +232,23 @@ public class ItemsFL {
     }
 
     for (String grain : new String[]{"barley", "corn", "oat", "rice", "rye", "wheat"}) {
-      ItemFoodFL flatbread_dough = new ItemFoodFL(FoodDataFL.DOUGH);
+      ItemFoodFL flatbread_dough = new ItemFoodFL(FoodData.DOUGH);
       easyItems.add(register(r, grain + "_flatbread_dough", flatbread_dough, CT_FOOD));
       OreDictionary.registerOre(grain + "_flatbread_dough", flatbread_dough);
       OreDictionary.registerOre("doughFlat", flatbread_dough);
 
-      ItemFoodFL flatbread = new ItemFoodFL(FoodDataFL.FLATBREAD);
+      ItemFoodFL flatbread = new ItemFoodFL(FoodData.FLATBREAD);
       easyItems.add(register(r, grain + "_flatbread", flatbread, CT_FOOD));
       OreDictionary.registerOre("flatbread", flatbread);
       OreDictionary.registerOre("categoryBread", flatbread);
 
-      ItemHeatableFoodFL slice = new ItemHeatableFoodFL(FoodDataFL.SLICE);
+      ItemHeatableFoodFL slice = new ItemHeatableFoodFL(FoodData.SLICE);
       easyItems.add(register(r, grain + "_slice", slice, CT_FOOD));
       OreDictionary.registerOre("slice", slice);
       OreDictionary.registerOre("categoryBread", slice);
     }
-    easyItems.add(register(r, "chestnut_slice", new ItemHeatableFoodFL(FoodDataFL.SLICE), CT_FOOD));
-    ItemSandwichFL sandwich = new ItemSandwichFL(FoodDataFL.SANDWICH);
+    easyItems.add(register(r, "chestnut_slice", new ItemHeatableFoodFL(FoodData.SLICE), CT_FOOD));
+    ItemSandwichFL sandwich = new ItemSandwichFL(FoodData.SANDWICH);
     easyItems.add(register(r, "chestnut_sandwich", sandwich, CT_FOOD));
     OreDictionary.registerOre("sandwich", sandwich);
     OreDictionary.registerOre("categoryMeal", sandwich);

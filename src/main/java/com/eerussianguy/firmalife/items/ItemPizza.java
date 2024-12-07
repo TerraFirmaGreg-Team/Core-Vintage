@@ -5,7 +5,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import com.eerussianguy.firmalife.FirmaLife;
-import com.eerussianguy.firmalife.init.FoodDataFL;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.food.Nutrient;
@@ -18,7 +17,7 @@ import java.util.List;
 public class ItemPizza extends ItemFoodFL {
 
   public ItemPizza() {
-    super(FoodDataFL.PIZZA);
+    super(FoodData.PIZZA);
   }
 
   @Nullable
@@ -43,7 +42,7 @@ public class ItemPizza extends ItemFoodFL {
       float water = 0f;
       float saturation = 2f;
       for (FoodData ingredient : ingredients) {
-        if (ingredient == FoodDataFL.PINEAPPLE) {
+        if (ingredient == FoodData.PINEAPPLE) {
           //data = new FoodData(4, water, saturation, new float[Nutrient.TOTAL], rootData.getDecayModifier());
           FirmaLife.logger.warn("Why did you put pineapple on your pizza?");
         }

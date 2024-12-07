@@ -24,7 +24,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class VeinCategory extends BaseRecipeCategory<VeinWrapper> {
 
-  private static final ResourceLocation BACKGROUND = new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/gui/jei_vein.png");
+  private static final ResourceLocation BACKGROUND = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/jei_vein.png");
 
   public VeinCategory(IGuiHelper helper, String Uid) {
     super(new BackgroundDrawable(BACKGROUND, 164, 110), Uid);

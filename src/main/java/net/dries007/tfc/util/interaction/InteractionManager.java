@@ -33,10 +33,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 import static net.dries007.tfc.objects.blocks.BlockCharcoalPile.LAYERS;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_TFC)
 public final class InteractionManager {
 
   private static final Map<Predicate<ItemStack>, IRightClickBlockAction> USE_ACTIONS = new HashMap<>();

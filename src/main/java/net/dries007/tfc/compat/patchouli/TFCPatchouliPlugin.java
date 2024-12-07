@@ -33,11 +33,11 @@ import vazkii.patchouli.api.PatchouliAPI;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 public class TFCPatchouliPlugin {
 
-  public static final ResourceLocation BOOK_UTIL_TEXTURES = new ResourceLocation(MOD_ID, "textures/gui/book.png");
+  public static final ResourceLocation BOOK_UTIL_TEXTURES = new ResourceLocation(MODID_TFC, "textures/gui/book.png");
 
   private static PatchouliAPI.IPatchouliAPI API = null;
 
@@ -62,7 +62,7 @@ public class TFCPatchouliPlugin {
   public static void init() {
     // Register multiblocks
     // '0' is the center, aka where the block would be placed
-    getAPI().registerMultiblock(new ResourceLocation(MOD_ID, "forge"), getAPI().makeMultiblock(new String[][]{
+    getAPI().registerMultiblock(new ResourceLocation(MODID_TFC, "forge"), getAPI().makeMultiblock(new String[][]{
                                                                                                  {"   ", " 0 ", "   "},
                                                                                                  {" S ", "SFS", " S "},
                                                                                                  {"   ", " S ", "   "}
@@ -73,7 +73,7 @@ public class TFCPatchouliPlugin {
                                                                                                '0', getAPI().airMatcher()
     ).setSymmetrical(true));
 
-    getAPI().registerMultiblock(new ResourceLocation(MOD_ID, "charcoal_pit_3x3"), getAPI().makeMultiblock(new String[][]{
+    getAPI().registerMultiblock(new ResourceLocation(MODID_TFC, "charcoal_pit_3x3"), getAPI().makeMultiblock(new String[][]{
                                                                                                             {"     ", " DDD ", " DDD ", " DDD ", "     "},
                                                                                                             {" DDD ", "DLLLD", "DL0LD", "DLLLD", " DDD "},
                                                                                                             {"SSSSS", "SDDDS", "SDDDS", "SDDDS", "SSSSS"}
@@ -85,7 +85,7 @@ public class TFCPatchouliPlugin {
                                                                                                           ' ', getAPI().anyMatcher()
     ).setSymmetrical(true));
 
-    getAPI().registerMultiblock(new ResourceLocation(MOD_ID, "charcoal_pit_1x1"), getAPI().makeMultiblock(new String[][]{
+    getAPI().registerMultiblock(new ResourceLocation(MODID_TFC, "charcoal_pit_1x1"), getAPI().makeMultiblock(new String[][]{
                                                                                                             {"   ", " D ", "   "},
                                                                                                             {" D ", "D0D", " D "},
                                                                                                             {"SSS", "SDS", "SSS"}
@@ -96,7 +96,7 @@ public class TFCPatchouliPlugin {
                                                                                                           ' ', getAPI().anyMatcher()
     ).setSymmetrical(true));
 
-    getAPI().registerMultiblock(new ResourceLocation(MOD_ID, "pit_kiln"), getAPI().makeMultiblock(new String[][]{
+    getAPI().registerMultiblock(new ResourceLocation(MODID_TFC, "pit_kiln"), getAPI().makeMultiblock(new String[][]{
                                                                                                     {"   ", " 0 ", "   "},
                                                                                                     {" S ", "SPS", " S "},
                                                                                                     {"   ", " S ", "   "}
@@ -108,7 +108,7 @@ public class TFCPatchouliPlugin {
                                                                                                   ' ', getAPI().anyMatcher()
     ).setSymmetrical(true));
 
-    getAPI().registerMultiblock(new ResourceLocation(MOD_ID, "bloomery"), getAPI().makeMultiblock(new String[][]{
+    getAPI().registerMultiblock(new ResourceLocation(MODID_TFC, "bloomery"), getAPI().makeMultiblock(new String[][]{
                                                                                                     {" S ", "S S", " S "},
                                                                                                     {"SS ", "BCS", "SS "},
                                                                                                     {"   ", "S0 ", "   "}
@@ -121,7 +121,7 @@ public class TFCPatchouliPlugin {
                                                                                                   ' ', getAPI().anyMatcher()
     ));
 
-    getAPI().registerMultiblock(new ResourceLocation(MOD_ID, "blast_furnace"), getAPI().makeMultiblock(new String[][]{
+    getAPI().registerMultiblock(new ResourceLocation(MODID_TFC, "blast_furnace"), getAPI().makeMultiblock(new String[][]{
                                                                                                          {"  S  ", " SFS ", "SF FS", " SFS ", "  S  "},
                                                                                                          {"     ", "     ", "  B  ", "     ", "     "},
                                                                                                          {"     ", "     ", "  0  ", "     ", "     "}
@@ -134,7 +134,7 @@ public class TFCPatchouliPlugin {
   }
 
   public static void giveBookToPlayer(EntityPlayer player) {
-    ItemStack bookStack = getAPI().getBookStack(new ResourceLocation(MOD_ID, "book").toString());
+    ItemStack bookStack = getAPI().getBookStack(new ResourceLocation(MODID_TFC, "book").toString());
     ItemHandlerHelper.giveItemToPlayer(player, bookStack);
   }
 

@@ -26,7 +26,8 @@ public enum Gem {
   RUBY(true),
   SAPPHIRE(true),
   TOPAZ(true),
-  TOURMALINE(true);
+  TOURMALINE(true),
+  AMBER(true);
 
   // list of gems that can drop
   private static final Gem[] RANDOM_DROP_GEMS = Arrays.stream(values()).filter(x -> x.canDrop).toArray(Gem[]::new);

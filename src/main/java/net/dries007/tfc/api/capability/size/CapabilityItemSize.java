@@ -33,7 +33,7 @@ import java.util.function.Supplier;
 
 public final class CapabilityItemSize {
 
-  public static final ResourceLocation KEY = new ResourceLocation(TerraFirmaCraft.MOD_ID, "item_size");
+  public static final ResourceLocation KEY = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "item_size");
   public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new LinkedHashMap<>(); //Used inside CT, set custom IItemSize for items outside TFC
   @CapabilityInject(IItemSize.class)
   public static Capability<IItemSize> ITEM_SIZE_CAPABILITY;

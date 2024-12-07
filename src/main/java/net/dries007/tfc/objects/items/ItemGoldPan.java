@@ -45,7 +45,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 /**
  * todo: this whole thing needs to be rewritten, possibly sometime after 1.14
@@ -167,7 +167,7 @@ public class ItemGoldPan extends ItemTFC {
               }
               chunkDataTFC.addWork(6);
             } else {
-              player.sendMessage(new TextComponentTranslation(MOD_ID + ".tooltip.goldpan.chunkworked"));
+              player.sendMessage(new TextComponentTranslation(MODID_TFC + ".tooltip.goldpan.chunkworked"));
             }
           }
           stack.setItemDamage(0); // Set damage to an empty pan no matter what

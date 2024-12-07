@@ -18,7 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import com.eerussianguy.firmalife.init.FoodDataFL;
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import com.eerussianguy.firmalife.te.TEString;
 import mcp.MethodsReturnNonnullByDefault;
@@ -120,7 +119,7 @@ public class BlockString extends BlockNonCube {
           boolean isFoodValid =
             (traits.contains(FoodTrait.BRINED) && OreDictionaryHelper.doesStackMatchOre(held, "categoryMeat") && HeatRecipe.get(held) != null)
             || OreDictionaryHelper.doesStackMatchOre(held, "cheese");
-          if (!traits.contains(FoodDataFL.SMOKED) && isFoodValid) {
+          if (!traits.contains(FoodTrait.SMOKED) && isFoodValid) {
             ItemStack leftover = inv.insertItem(0, held.splitStack(1), false);
             Helpers.spawnItemStack(world, pos.add(0.5D, 0.5D, 0.5D), leftover);
             te.markForSync();

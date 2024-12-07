@@ -29,6 +29,10 @@ public class FoodTrait {
   public static final FoodTrait CHARCOAL_GRILLED; // Slight debuff from cooking in a charcoal forge
   public static final FoodTrait WOOD_GRILLED; // Slight bugg when cooking in a grill
   public static final FoodTrait BURNT_TO_A_CRISP; // Cooking food in something that's WAY TOO HOT too cook food in you fool!
+  public static final FoodTrait SMOKED;
+  public static final FoodTrait FRESH; // These should eventually do something besides just modifying decay rate, for now they're here as an incomplete feature
+  public static final FoodTrait AGED;
+  public static final FoodTrait VINTAGE;
 
   private static final Map<String, FoodTrait> TRAITS = new HashMap<>();
 
@@ -43,6 +47,11 @@ public class FoodTrait {
     CHARCOAL_GRILLED = new FoodTrait("charcoal_grilled", 1.25f);
     WOOD_GRILLED = new FoodTrait("wood_grilled", 0.8f);
     BURNT_TO_A_CRISP = new FoodTrait("burnt_to_a_crisp", 2.5f); // This one is so high as it is meant to be > the existing gain from cooking meat.
+
+    SMOKED = new FoodTrait("smoked", 0.25F);
+    FRESH = new FoodTrait("fresh", 1.4F); // These should eventually do something besides just modifying decay rate, for now they're here as an incomplete feature
+    AGED = new FoodTrait("aged", 1.0F);
+    VINTAGE = new FoodTrait("vintage", 0.6F);
   }
 
   private final String name;

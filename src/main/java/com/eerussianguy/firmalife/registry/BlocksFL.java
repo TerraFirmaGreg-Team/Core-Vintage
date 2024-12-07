@@ -364,10 +364,10 @@ public class BlocksFL {
   }
 
   private static void doFruitAdditions(IForgeRegistry<Block> r, String name, Builder<BlockFruitFence> fruitFences, Builder<BlockFruitFenceGate> fruitFenceGates, Builder<BlockFruitDoor> fruitDoors, Builder<BlockFruitTrapDoor> fruitTrapdoors, Builder<BlockBonsai> bonsais, Optional<IFruitTree> optionalTree) {
-    fruitFences.add(register(r, name + "_fence", new BlockFruitFence(), CT_DECORATIONS));
-    fruitFenceGates.add(register(r, name + "_fence_gate", new BlockFruitFenceGate(), CT_DECORATIONS));
-    fruitDoors.add(register(r, name + "_door", new BlockFruitDoor(), CT_DECORATIONS));
-    fruitTrapdoors.add(register(r, name + "_trapdoor", new BlockFruitTrapDoor(), CT_DECORATIONS));
+    fruitFences.add(register(r, name + "_fence", new BlockFruitFence(), CT_WOOD));
+    fruitFenceGates.add(register(r, name + "_fence_gate", new BlockFruitFenceGate(), CT_WOOD));
+    fruitDoors.add(register(r, name + "_door", new BlockFruitDoor(), CT_WOOD));
+    fruitTrapdoors.add(register(r, name + "_trapdoor", new BlockFruitTrapDoor(), CT_WOOD));
     optionalTree.ifPresent(tree -> bonsais.add(register(r, name + "_bonsai_pot", new BlockBonsai(() -> tree.getFoodDrop()
                                                                                                            .getItem(), () -> Item.getItemFromBlock(BlockFruitTreeSapling.get(tree)), 19, 4, Material.CLAY), CT_DECORATIONS))
     );

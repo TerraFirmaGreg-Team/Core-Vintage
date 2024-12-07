@@ -16,16 +16,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderHareTFC extends RenderLiving<EntityHareTFC> {
 
-  private static final ResourceLocation BROWN = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/hare/brown.png");
-  private static final ResourceLocation SPOTTED = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/hare/spotted.png");
-  private static final ResourceLocation BLACK = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/hare/black.png");
-  private static final ResourceLocation CREAM = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/hare/cream.png");
+  private static final ResourceLocation BROWN = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/hare/brown.png");
+  private static final ResourceLocation SPOTTED = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/hare/spotted.png");
+  private static final ResourceLocation BLACK = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/hare/black.png");
+  private static final ResourceLocation CREAM = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/hare/cream.png");
 
 
   public RenderHareTFC(RenderManager renderManager) {

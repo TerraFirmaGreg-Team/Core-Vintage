@@ -24,7 +24,7 @@ import net.dries007.tfc.api.types.Tree;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -47,7 +47,7 @@ public class CommandGenTree extends CommandBase {
     if (args.length != 1) {throw new WrongUsageException("tfc.command.gentree.failed");}
 
     Tree tree = TFCRegistries.TREES.getValue(new ResourceLocation(args[0]));
-    if (tree == null) {tree = TFCRegistries.TREES.getValue(new ResourceLocation(MOD_ID, args[0]));}
+    if (tree == null) {tree = TFCRegistries.TREES.getValue(new ResourceLocation(MODID_TFC, args[0]));}
     if (tree == null) {throw new WrongUsageException("tfc.command.gentree.failed.woodtype", args[0]);}
 
     if (sender.getCommandSenderEntity() == null) {return;}

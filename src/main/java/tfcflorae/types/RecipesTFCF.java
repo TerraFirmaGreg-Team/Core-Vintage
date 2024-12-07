@@ -58,12 +58,10 @@ import net.dries007.tfc.util.calendar.ICalendar;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.TFCFlorae;
 import tfcflorae.api.knapping.KnappingTypes;
-import tfcflorae.objects.PowderTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
 import tfcflorae.objects.blocks.wood.BlockLeavesTFCF;
 import tfcflorae.objects.fluids.FluidsTFCF;
-import tfcflorae.objects.items.ItemPowderTFCF;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.objects.items.ceramics.ItemEarthenwareMold;
 import tfcflorae.objects.items.ceramics.ItemKaoliniteMold;
@@ -1284,8 +1282,8 @@ public final class RecipesTFCF {
       new QuernRecipe(IIngredient.of(ItemsTFCF.CEYLON_CINNAMON_BARK), new ItemStack(ItemsTFCF.GROUND_CEYLON_CINNAMON, 2)).setRegistryName("ground_ceylon_cinnamon"),
       //new QuernRecipe(IIngredient.of(ItemsTFCF.BLACK_PEPPER), new ItemStack(ItemsTFCF.GROUND_BLACK_PEPPER, 2)).setRegistryName("ground_black_pepper"),
       new QuernRecipe(IIngredient.of(ItemsTFCF.ROASTED_COFFEE_BEANS), new ItemStack(ItemsTFCF.COFFEE_POWDER, 2)).setRegistryName("ground_coffee_beans"),
-      new QuernRecipe(IIngredient.of("pearl"), new ItemStack(ItemPowderTFCF.get(PowderTFCF.PEARL))).setRegistryName("crushed_pearl"),
-      new QuernRecipe(IIngredient.of("pearlBlack"), new ItemStack(ItemPowderTFCF.get(PowderTFCF.BLACK_PEARL))).setRegistryName("crushed_black_pearl"),
+      new QuernRecipe(IIngredient.of("pearl"), new ItemStack(ItemPowder.get(Powder.PEARL))).setRegistryName("crushed_pearl"),
+      new QuernRecipe(IIngredient.of("pearlBlack"), new ItemStack(ItemPowder.get(Powder.BLACK_PEARL))).setRegistryName("crushed_black_pearl"),
       new QuernRecipe(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.PAPYRUS))), new ItemStack(ItemsTFCF.PAPYRUS_PULP, 3)).setRegistryName("crushed_papyrus"),
 
       // Dye from plants

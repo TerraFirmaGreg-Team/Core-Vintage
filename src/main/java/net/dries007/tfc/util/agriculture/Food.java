@@ -41,6 +41,7 @@ public enum Food {
   PLUM(FRUIT, 4, 0.5f, 5f, 0f, 0f, 0.75f, 0f, 0f, 2.8f),
   RASPBERRY(FRUIT, 4, 0.5f, 5f, 0f, 0f, 0.75f, 0f, 0f, 4.9f),
   RED_APPLE(FRUIT, 4, 0.5f, 0f, 0f, 0f, 1f, 0f, 0f, 1.7f, "apple"),
+  //COCOA_BEANS(FRUIT, 4, 0.0F, 0.1F, 0.1F, 0.0F, 0.0F, 0.1F, 0.0F, 0.5F),
   SNOW_BERRY(FRUIT, 4, 0.2f, 5f, 0f, 0f, 1f, 0f, 0f, 4.9f),
   STRAWBERRY(FRUIT, 4, 0.5f, 10f, 0f, 0f, 0.5f, 0f, 0f, 4.9f),
   WINTERGREEN_BERRY(FRUIT, 4, 0.2f, 5f, 0f, 0f, 1f, 0f, 0f, 4.9f),

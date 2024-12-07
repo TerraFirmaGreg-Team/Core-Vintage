@@ -6,9 +6,9 @@ import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
 
-import static com.eerussianguy.firmalife.init.FoodDataFL.DRIED_FRUIT_CATEGORY;
-import static com.eerussianguy.firmalife.init.FoodDataFL.DRIED_FRUIT_DECAY;
-import static com.eerussianguy.firmalife.init.FoodDataFL.DRIED_FRUIT_SATURATION;
+import static net.dries007.tfc.api.capability.food.FoodData.DRIED_FRUIT_CATEGORY;
+import static net.dries007.tfc.api.capability.food.FoodData.DRIED_FRUIT_DECAY;
+import static net.dries007.tfc.api.capability.food.FoodData.DRIED_FRUIT_SATURATION;
 
 /**
  * This is an easy way to wrap all the TFC fruits with our data

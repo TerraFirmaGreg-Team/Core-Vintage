@@ -18,9 +18,9 @@ public class ConfigFL {
   public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
     if (event.getModID().equals(MOD_ID)) {
       if (ConfigFL.General.COMPAT.logging) {FirmaLife.logger.warn("Config changed.");}
-      ConfigManager.sync(TerraFirmaCraft.MOD_ID, Config.Type.INSTANCE);
+      ConfigManager.sync(TerraFirmaCraft.MODID_TFC, Config.Type.INSTANCE);
     }
-    if (event.getModID().equals(TerraFirmaCraft.MOD_ID)) {
+    if (event.getModID().equals(TerraFirmaCraft.MODID_TFC)) {
       HelpersFL.insertWhitelist();
     }
   }

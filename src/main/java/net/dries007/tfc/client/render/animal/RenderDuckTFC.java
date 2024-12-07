@@ -20,19 +20,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderDuckTFC extends RenderLiving<EntityDuckTFC> {
 
-  private static final ResourceLocation DUCK_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/duck_old.png");
-  private static final ResourceLocation DUCK_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/duck_young.png");
+  private static final ResourceLocation DUCK_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/duck_old.png");
+  private static final ResourceLocation DUCK_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/duck_young.png");
 
-  private static final ResourceLocation DRAKE_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/drake_old.png");
-  private static final ResourceLocation DRAKE_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/drake_young.png");
+  private static final ResourceLocation DRAKE_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/drake_old.png");
+  private static final ResourceLocation DRAKE_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/drake_young.png");
 
-  private static final ResourceLocation DUCKLING_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/duckling.png");
+  private static final ResourceLocation DUCKLING_TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/duckling.png");
 
   public RenderDuckTFC(RenderManager manager) {
     super(manager, new ModelDuckTFC(), 0.3F);

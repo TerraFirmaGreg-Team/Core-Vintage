@@ -29,11 +29,11 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 public class Tree extends IForgeRegistryEntry.Impl<Tree> {
 
-  @GameRegistry.ObjectHolder(MOD_ID + ":sequoia")
+  @GameRegistry.ObjectHolder(MODID_TFC + ":sequoia")
   public static final Tree SEQUOIA = Helpers.getNull();
 
   private final int maxGrowthRadius;

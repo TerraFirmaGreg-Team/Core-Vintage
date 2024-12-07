@@ -20,19 +20,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderQuailTFC extends RenderLiving<EntityQuailTFC> {
 
-  private static final ResourceLocation FEMALE_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/quailf_young.png");
-  private static final ResourceLocation FEMALE_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/quailf_old.png");
+  private static final ResourceLocation FEMALE_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/quailf_young.png");
+  private static final ResourceLocation FEMALE_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/quailf_old.png");
 
-  private static final ResourceLocation MALE_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/quailm_young.png");
-  private static final ResourceLocation MALE_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/quailm_old.png");
+  private static final ResourceLocation MALE_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/quailm_young.png");
+  private static final ResourceLocation MALE_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/quailm_old.png");
 
-  private static final ResourceLocation CHICK_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/quail_chick.png");
+  private static final ResourceLocation CHICK_TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/quail_chick.png");
 
   public RenderQuailTFC(RenderManager manager) {
     super(manager, new ModelQuailTFC(), 0.3F);

@@ -21,34 +21,34 @@ import net.dries007.tfc.world.classic.worldgen.trees.TreeGenSequoia;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenVariants;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenWillow;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SuppressWarnings("WeakerAccess")
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_TFC)
 public final class DefaultTrees {
 
   /**
    * Default Tree ResourceLocations
    */
-  public static final ResourceLocation ACACIA = new ResourceLocation(MOD_ID, "acacia");
-  public static final ResourceLocation ASH = new ResourceLocation(MOD_ID, "ash");
-  public static final ResourceLocation ASPEN = new ResourceLocation(MOD_ID, "aspen");
-  public static final ResourceLocation BIRCH = new ResourceLocation(MOD_ID, "birch");
-  public static final ResourceLocation BLACKWOOD = new ResourceLocation(MOD_ID, "blackwood");
-  public static final ResourceLocation CHESTNUT = new ResourceLocation(MOD_ID, "chestnut");
-  public static final ResourceLocation DOUGLAS_FIR = new ResourceLocation(MOD_ID, "douglas_fir");
-  public static final ResourceLocation HICKORY = new ResourceLocation(MOD_ID, "hickory");
-  public static final ResourceLocation MAPLE = new ResourceLocation(MOD_ID, "maple");
-  public static final ResourceLocation OAK = new ResourceLocation(MOD_ID, "oak");
-  public static final ResourceLocation PALM = new ResourceLocation(MOD_ID, "palm");
-  public static final ResourceLocation PINE = new ResourceLocation(MOD_ID, "pine");
-  public static final ResourceLocation ROSEWOOD = new ResourceLocation(MOD_ID, "rosewood");
-  public static final ResourceLocation SEQUOIA = new ResourceLocation(MOD_ID, "sequoia");
-  public static final ResourceLocation SPRUCE = new ResourceLocation(MOD_ID, "spruce");
-  public static final ResourceLocation SYCAMORE = new ResourceLocation(MOD_ID, "sycamore");
-  public static final ResourceLocation WHITE_CEDAR = new ResourceLocation(MOD_ID, "white_cedar");
-  public static final ResourceLocation WILLOW = new ResourceLocation(MOD_ID, "willow");
-  public static final ResourceLocation KAPOK = new ResourceLocation(MOD_ID, "kapok");
+  public static final ResourceLocation ACACIA = new ResourceLocation(MODID_TFC, "acacia");
+  public static final ResourceLocation ASH = new ResourceLocation(MODID_TFC, "ash");
+  public static final ResourceLocation ASPEN = new ResourceLocation(MODID_TFC, "aspen");
+  public static final ResourceLocation BIRCH = new ResourceLocation(MODID_TFC, "birch");
+  public static final ResourceLocation BLACKWOOD = new ResourceLocation(MODID_TFC, "blackwood");
+  public static final ResourceLocation CHESTNUT = new ResourceLocation(MODID_TFC, "chestnut");
+  public static final ResourceLocation DOUGLAS_FIR = new ResourceLocation(MODID_TFC, "douglas_fir");
+  public static final ResourceLocation HICKORY = new ResourceLocation(MODID_TFC, "hickory");
+  public static final ResourceLocation MAPLE = new ResourceLocation(MODID_TFC, "maple");
+  public static final ResourceLocation OAK = new ResourceLocation(MODID_TFC, "oak");
+  public static final ResourceLocation PALM = new ResourceLocation(MODID_TFC, "palm");
+  public static final ResourceLocation PINE = new ResourceLocation(MODID_TFC, "pine");
+  public static final ResourceLocation ROSEWOOD = new ResourceLocation(MODID_TFC, "rosewood");
+  public static final ResourceLocation SEQUOIA = new ResourceLocation(MODID_TFC, "sequoia");
+  public static final ResourceLocation SPRUCE = new ResourceLocation(MODID_TFC, "spruce");
+  public static final ResourceLocation SYCAMORE = new ResourceLocation(MODID_TFC, "sycamore");
+  public static final ResourceLocation WHITE_CEDAR = new ResourceLocation(MODID_TFC, "white_cedar");
+  public static final ResourceLocation WILLOW = new ResourceLocation(MODID_TFC, "willow");
+  public static final ResourceLocation KAPOK = new ResourceLocation(MODID_TFC, "kapok");
 
   /**
    * Simple ITreeGenerator instances.

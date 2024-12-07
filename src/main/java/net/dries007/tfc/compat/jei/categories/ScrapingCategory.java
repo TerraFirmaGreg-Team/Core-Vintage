@@ -24,12 +24,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class ScrapingCategory extends BaseRecipeCategory<ScrapingWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/gui/icons/jei.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/icons/jei.png");
   private IDrawableStatic arrow;
   private IDrawableAnimated arrowAnimated;
 
   public ScrapingCategory(IGuiHelper helper, String Uid) {
-    super(helper.createDrawable(new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/gui/jei_leatherworking.png"), 0, 0, 154, 180), Uid);
+    super(helper.createDrawable(new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/jei_leatherworking.png"), 0, 0, 154, 180), Uid);
     arrow = helper.createDrawable(ICONS, 0, 14, 22, 16);
     IDrawableStatic arrowAnimated = helper.createDrawable(ICONS, 22, 14, 22, 16);
     this.arrowAnimated = helper.createAnimatedDrawable(arrowAnimated, 80, IDrawableAnimated.StartDirection.LEFT, false);

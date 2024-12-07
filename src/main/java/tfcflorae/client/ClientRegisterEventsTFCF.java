@@ -45,7 +45,6 @@ import tfcflorae.client.render.TESRFruitLoomTFCF;
 import tfcflorae.compat.firmalife.ceramics.ItemEarthenwareMalletMoldFL;
 import tfcflorae.compat.firmalife.ceramics.ItemKaoliniteMalletMoldFL;
 import tfcflorae.compat.firmalife.ceramics.ItemStonewareMalletMoldFL;
-import tfcflorae.objects.GemTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.blocktype.BlockRockRawTFCF;
 import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
@@ -75,7 +74,6 @@ import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitLogFenceGate;
 import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitSlab;
 import tfcflorae.objects.items.ItemArmorTFCF;
 import tfcflorae.objects.items.ItemFruitDoor;
-import tfcflorae.objects.items.ItemGemTFCF;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.objects.items.ceramics.ItemEarthenwareMold;
 import tfcflorae.objects.items.ceramics.ItemKaoliniteMold;
@@ -116,10 +114,6 @@ public class ClientRegisterEventsTFCF {
 
     for (Item item : ItemsTFCF.getAllSimpleItems()) {
       ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
-    }
-
-    for (ItemGemTFCF item : ItemsTFCF.getAllGemTFCFItems()) {
-      for (GemTFCF.Grade grade : GemTFCF.Grade.values()) {registerEnumBasedMetaItems("gem", grade, item);}
     }
 
     for (Item item : ItemsTFCF.getAllItemBows()) {

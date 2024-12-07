@@ -10,7 +10,7 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.IArmorMaterialTFC;
-import tfcflorae.objects.ArmorMaterialsTFCF;
+import net.dries007.tfc.objects.ArmorMaterialTFC;
 
 import javax.annotation.Nonnull;
 
@@ -84,15 +84,15 @@ public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResist
    */
   @Override
   public boolean hasColor(ItemStack stack) {
-    if (this.materialTFC != ArmorMaterialsTFCF.PINEAPPLE_LEATHER ||
-        this.materialTFC != ArmorMaterialsTFCF.BURLAP_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.WOOL_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.SILK_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.SISAL_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.COTTON_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.LINEN_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.HEMP_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.YUCCA_CANVAS) {
+    if (this.materialTFC != ArmorMaterialTFC.PINEAPPLE_LEATHER ||
+        this.materialTFC != ArmorMaterialTFC.BURLAP_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.WOOL_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.SILK_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.SISAL_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.COTTON_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.LINEN_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.HEMP_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.YUCCA_CANVAS) {
       return false;
     } else {
       NBTTagCompound nbttagcompound = stack.getTagCompound();
@@ -108,15 +108,15 @@ public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResist
    */
   @Override
   public int getColor(ItemStack stack) {
-    if (this.materialTFC != ArmorMaterialsTFCF.PINEAPPLE_LEATHER ||
-        this.materialTFC != ArmorMaterialsTFCF.BURLAP_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.WOOL_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.SILK_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.SISAL_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.COTTON_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.LINEN_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.HEMP_CLOTH ||
-        this.materialTFC != ArmorMaterialsTFCF.YUCCA_CANVAS) {
+    if (this.materialTFC != ArmorMaterialTFC.PINEAPPLE_LEATHER ||
+        this.materialTFC != ArmorMaterialTFC.BURLAP_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.WOOL_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.SILK_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.SISAL_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.COTTON_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.LINEN_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.HEMP_CLOTH ||
+        this.materialTFC != ArmorMaterialTFC.YUCCA_CANVAS) {
       return DEFAULT_COLOR;
     } else {
       NBTTagCompound nbttagcompound = stack.getTagCompound();
@@ -126,31 +126,31 @@ public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResist
           return nbttagcompound1.getInteger("color");
         }
       }
-      if (this.materialTFC == ArmorMaterialsTFCF.BURLAP_CLOTH) {
+      if (this.materialTFC == ArmorMaterialTFC.BURLAP_CLOTH) {
         return BURLAP_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialsTFCF.COTTON_CLOTH) {
+      if (this.materialTFC == ArmorMaterialTFC.COTTON_CLOTH) {
         return COTTON_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialsTFCF.HEMP_CLOTH) {
+      if (this.materialTFC == ArmorMaterialTFC.HEMP_CLOTH) {
         return HEMP_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialsTFCF.LINEN_CLOTH) {
+      if (this.materialTFC == ArmorMaterialTFC.LINEN_CLOTH) {
         return LINEN_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialsTFCF.PINEAPPLE_LEATHER) {
+      if (this.materialTFC == ArmorMaterialTFC.PINEAPPLE_LEATHER) {
         return PINEAPPLE_LEATHER_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialsTFCF.SILK_CLOTH) {
+      if (this.materialTFC == ArmorMaterialTFC.SILK_CLOTH) {
         return SILK_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialsTFCF.SISAL_CLOTH) {
+      if (this.materialTFC == ArmorMaterialTFC.SISAL_CLOTH) {
         return SISAL_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialsTFCF.WOOL_CLOTH) {
+      if (this.materialTFC == ArmorMaterialTFC.WOOL_CLOTH) {
         return WOOL_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialsTFCF.YUCCA_CANVAS) {
+      if (this.materialTFC == ArmorMaterialTFC.YUCCA_CANVAS) {
         return YUCCA_COLOR;
       }
     }
@@ -162,15 +162,15 @@ public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResist
    */
   @Override
   public void removeColor(ItemStack stack) {
-    if (this.materialTFC == ArmorMaterialsTFCF.PINEAPPLE_LEATHER ||
-        this.materialTFC == ArmorMaterialsTFCF.BURLAP_CLOTH ||
-        this.materialTFC == ArmorMaterialsTFCF.WOOL_CLOTH ||
-        this.materialTFC == ArmorMaterialsTFCF.SILK_CLOTH ||
-        this.materialTFC == ArmorMaterialsTFCF.SISAL_CLOTH ||
-        this.materialTFC == ArmorMaterialsTFCF.COTTON_CLOTH ||
-        this.materialTFC == ArmorMaterialsTFCF.LINEN_CLOTH ||
-        this.materialTFC == ArmorMaterialsTFCF.HEMP_CLOTH ||
-        this.materialTFC == ArmorMaterialsTFCF.YUCCA_CANVAS) {
+    if (this.materialTFC == ArmorMaterialTFC.PINEAPPLE_LEATHER ||
+        this.materialTFC == ArmorMaterialTFC.BURLAP_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.WOOL_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.SILK_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.SISAL_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.COTTON_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.LINEN_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.HEMP_CLOTH ||
+        this.materialTFC == ArmorMaterialTFC.YUCCA_CANVAS) {
       NBTTagCompound nbttagcompound = stack.getTagCompound();
       if (nbttagcompound != null) {
         NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");

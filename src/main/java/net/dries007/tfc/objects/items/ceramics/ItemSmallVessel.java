@@ -71,7 +71,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Map.Entry;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 
 @ParametersAreNonnullByDefault
@@ -101,7 +101,7 @@ public class ItemSmallVessel extends ItemPottery {
             break;
           case LIQUID_SOLID:
             TerraFirmaCraft.getNetwork()
-                           .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, MOD_ID + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
+                           .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, MODID_TFC + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
             break;
         }
       }
@@ -269,7 +269,7 @@ public class ItemSmallVessel extends ItemPottery {
             } else {
               onlySmeltables = false;
             }
-            text.add(1, I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.small_vessel_item", slot.getCount(), slot.getItem().getItemStackDisplayName(slot)));
+            text.add(1, I18n.format(TerraFirmaCraft.MODID_TFC + ".tooltip.small_vessel_item", slot.getCount(), slot.getItem().getItemStackDisplayName(slot)));
             hasContent = true;
           }
         }
@@ -283,14 +283,14 @@ public class ItemSmallVessel extends ItemPottery {
               if (key != null) {
                 int metalAmount = entry.getValue();
                 text.add(textPosition, I18n.format(
-                  TerraFirmaCraft.MOD_ID + ".tooltip.small_vessel_unit_total", I18n.format(key.getTranslationKey()), metalAmount,
+                  TerraFirmaCraft.MODID_TFC + ".tooltip.small_vessel_unit_total", I18n.format(key.getTranslationKey()), metalAmount,
                   Math.round((float) metalAmount / totalAmount * 1000) / 10f));
               }
             }
             text.add(textPosition, ""); // Separator between the contents of the vessel and the above units text, not needed but I feel that it helps visually
           }
         } else {
-          text.add(1, I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.small_vessel_empty"));
+          text.add(1, I18n.format(TerraFirmaCraft.MODID_TFC + ".tooltip.small_vessel_empty"));
         }
       }
       ISmallVesselHandler.super.addHeatInfo(stack, text);

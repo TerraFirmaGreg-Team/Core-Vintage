@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @ParametersAreNonnullByDefault
 public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
@@ -204,15 +204,15 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
   @Override
   public TextComponentTranslation getTooltip() {
     if (getGender() == Gender.MALE) {
-      return new TextComponentTranslation(MOD_ID + ".tooltip.animal.product.male_milk");
+      return new TextComponentTranslation(MODID_TFC + ".tooltip.animal.product.male_milk");
     } else if (getAge() == Age.OLD) {
-      return new TextComponentTranslation(MOD_ID + ".tooltip.animal.product.old", getAnimalName());
+      return new TextComponentTranslation(MODID_TFC + ".tooltip.animal.product.old", getAnimalName());
     } else if (getAge() == Age.CHILD) {
-      return new TextComponentTranslation(MOD_ID + ".tooltip.animal.product.young", getAnimalName());
+      return new TextComponentTranslation(MODID_TFC + ".tooltip.animal.product.young", getAnimalName());
     } else if (getFamiliarity() <= 0.15f) {
-      return new TextComponentTranslation(MOD_ID + ".tooltip.animal.product.low_familiarity", getAnimalName());
+      return new TextComponentTranslation(MODID_TFC + ".tooltip.animal.product.low_familiarity", getAnimalName());
     } else if (!hasMilk()) {
-      return new TextComponentTranslation(MOD_ID + ".tooltip.animal.product.no_milk", getAnimalName());
+      return new TextComponentTranslation(MODID_TFC + ".tooltip.animal.product.no_milk", getAnimalName());
     }
     return null;
   }

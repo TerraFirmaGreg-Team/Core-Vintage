@@ -18,7 +18,7 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 public final class CreativeTabsTFC {
 
@@ -38,7 +38,7 @@ public final class CreativeTabsTFC {
     private final ResourceLocation iconResourceLocation;
 
     private TFCCreativeTab(String label, String icon) {
-      super(MOD_ID + "." + label);
+      super(MODID_TFC + "." + label);
       iconResourceLocation = new ResourceLocation(icon);
     }
 

@@ -80,7 +80,7 @@ import net.dries007.tfc.util.skills.SmithingSkill;
 
 import javax.annotation.Nullable;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 import static net.dries007.tfc.api.types.Metal.ItemType.BOOTS;
 import static net.dries007.tfc.api.types.Metal.ItemType.CHESTPLATE;
 import static net.dries007.tfc.api.types.Metal.ItemType.DOUBLE_INGOT;
@@ -150,7 +150,7 @@ import static net.dries007.tfc.util.skills.SmithingSkill.Type.WEAPONS;
  * In 1.14+, every line in here needs to be a json file. Yay, but also ugh.
  */
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_TFC)
 public final class DefaultRecipes {
 
   @SubscribeEvent
@@ -514,7 +514,7 @@ public final class DefaultRecipes {
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_VESSEL), " XXX ", "XXXXX", "XXXXX", "XXXXX", " XXX ").setRegistryName("clay_small_vessel"),
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_JUG), " X   ", "XXXX ", "XXX X", "XXXX ", "XXX  ").setRegistryName("clay_jug"),
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_POT), "X   X", "X   X", "X   X", "XXXXX", " XXX ").setRegistryName("clay_pot"),
-      new KnappingRecipeSimple(KnappingType.CLAY, false, new ItemStack(ItemsTFC.UNFIRED_BOWL, 2), "X   X", " XXX ").setRegistryName(MOD_ID, "clay_bowl"),
+      new KnappingRecipeSimple(KnappingType.CLAY, false, new ItemStack(ItemsTFC.UNFIRED_BOWL, 2), "X   X", " XXX ").setRegistryName(MODID_TFC, "clay_bowl"),
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_BOWL, 4), "X   X", " XXX ", "     ", "X   X", " XXX ").setRegistryName("clay_bowl_2"),
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_LARGE_VESSEL), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("clay_large_vessel"),
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName("clay_brick"),
@@ -722,9 +722,9 @@ public final class DefaultRecipes {
     addAnvil(r, SHEET, UNFINISHED_BOOTS, true, ARMOR, BEND_LAST, BEND_SECOND_LAST, SHRINK_THIRD_LAST);
 
     // Blooms
-    r.register(new AnvilRecipeMeasurable(new ResourceLocation(MOD_ID, "refining_bloom"), IIngredient.of(ItemsTFC.UNREFINED_BLOOM), new ItemStack(ItemsTFC.REFINED_BLOOM), Metal.Tier.TIER_II, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
-    r.register(new AnvilRecipeSplitting(new ResourceLocation(MOD_ID, "splitting_bloom"), IIngredient.of(ItemsTFC.REFINED_BLOOM), new ItemStack(ItemsTFC.REFINED_BLOOM), 100, Metal.Tier.TIER_II, PUNCH_LAST));
-    r.register(new AnvilRecipe(new ResourceLocation(MOD_ID, "iron_bloom"), x -> {
+    r.register(new AnvilRecipeMeasurable(new ResourceLocation(MODID_TFC, "refining_bloom"), IIngredient.of(ItemsTFC.UNREFINED_BLOOM), new ItemStack(ItemsTFC.REFINED_BLOOM), Metal.Tier.TIER_II, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
+    r.register(new AnvilRecipeSplitting(new ResourceLocation(MODID_TFC, "splitting_bloom"), IIngredient.of(ItemsTFC.REFINED_BLOOM), new ItemStack(ItemsTFC.REFINED_BLOOM), 100, Metal.Tier.TIER_II, PUNCH_LAST));
+    r.register(new AnvilRecipe(new ResourceLocation(MODID_TFC, "iron_bloom"), x -> {
       if (x.getItem() == ItemsTFC.REFINED_BLOOM) {
         IForgeable cap = x.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
         if (cap instanceof IForgeableMeasurableMetal) {
@@ -791,11 +791,11 @@ public final class DefaultRecipes {
     IForgeRegistry<LoomRecipe> r = event.getRegistry();
 
     r.registerAll(
-      new LoomRecipe(new ResourceLocation(MOD_ID, "burlap_cloth"), IIngredient.of(ItemsTFC.JUTE_FIBER, 12), new ItemStack(ItemsTFC.BURLAP_CLOTH), 12, new ResourceLocation(MOD_ID, "textures/blocks/devices/loom/product/burlap.png")),
-      new LoomRecipe(new ResourceLocation(MOD_ID, "wool_cloth"), IIngredient.of(ItemsTFC.WOOL_YARN, 16), new ItemStack(ItemsTFC.WOOL_CLOTH), 16, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-      new LoomRecipe(new ResourceLocation(MOD_ID, "silk_cloth"), IIngredient.of(Items.STRING, 24), new ItemStack(ItemsTFC.SILK_CLOTH), 24, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+      new LoomRecipe(new ResourceLocation(MODID_TFC, "burlap_cloth"), IIngredient.of(ItemsTFC.JUTE_FIBER, 12), new ItemStack(ItemsTFC.BURLAP_CLOTH), 12, new ResourceLocation(MODID_TFC, "textures/blocks/devices/loom/product/burlap.png")),
+      new LoomRecipe(new ResourceLocation(MODID_TFC, "wool_cloth"), IIngredient.of(ItemsTFC.WOOL_YARN, 16), new ItemStack(ItemsTFC.WOOL_CLOTH), 16, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+      new LoomRecipe(new ResourceLocation(MODID_TFC, "silk_cloth"), IIngredient.of(Items.STRING, 24), new ItemStack(ItemsTFC.SILK_CLOTH), 24, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
 
-      new LoomRecipe(new ResourceLocation(MOD_ID, "wool_block"), IIngredient.of(ItemsTFC.WOOL_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
+      new LoomRecipe(new ResourceLocation(MODID_TFC, "wool_block"), IIngredient.of(ItemsTFC.WOOL_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
     );
   }
 
@@ -973,7 +973,7 @@ public final class DefaultRecipes {
       ItemStack output = new ItemStack(ItemMetal.get(metal, outputType));
       if (!output.isEmpty()) {
         //noinspection ConstantConditions
-        registry.register(new AnvilRecipe(new ResourceLocation(MOD_ID, (outputType.name() + "_" + metal.getRegistryName()
+        registry.register(new AnvilRecipe(new ResourceLocation(MODID_TFC, (outputType.name() + "_" + metal.getRegistryName()
                                                                                                        .getPath()).toLowerCase()), ingredient, output, metal.getTier(), skillType, rules));
       }
     }
@@ -989,7 +989,7 @@ public final class DefaultRecipes {
       ItemStack output = new ItemStack(ItemMetal.get(outputMetal, INGOT));
       if (!input.isEmpty() && !output.isEmpty()) {
         //noinspection ConstantConditions
-        registry.register(new AnvilRecipe(new ResourceLocation(MOD_ID, ("ingot_" + outputMetal.getRegistryName()
+        registry.register(new AnvilRecipe(new ResourceLocation(MODID_TFC, ("ingot_" + outputMetal.getRegistryName()
                                                                                               .getPath()).toLowerCase()), IIngredient.of(input), output, inputMetal.getTier(), skillType, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
       }
     }
@@ -1002,7 +1002,7 @@ public final class DefaultRecipes {
     if (inputMetal != null && !output.isEmpty()) {
       ItemStack input = new ItemStack(ItemMetal.get(inputMetal, inputType));
       if (!input.isEmpty() && !output.isEmpty()) {
-        registry.register(new AnvilRecipe(new ResourceLocation(MOD_ID, recipeName), IIngredient.of(input), output, tier, skillType, rules));
+        registry.register(new AnvilRecipe(new ResourceLocation(MODID_TFC, recipeName), IIngredient.of(input), output, tier, skillType, rules));
       }
     }
   }
@@ -1051,7 +1051,7 @@ public final class DefaultRecipes {
       ItemStack output = new ItemStack(outputType.isArmor() ? ItemMetalArmor.get(metal, outputType) : ItemMetal.get(metal, outputType));
       if (!output.isEmpty()) {
         // Note: Welding recipes require one less than the tier of the metal
-        registry.register(new WeldingRecipe(new ResourceLocation(MOD_ID, (outputType.name() + "_" + metal.getRegistryName()
+        registry.register(new WeldingRecipe(new ResourceLocation(MODID_TFC, (outputType.name() + "_" + metal.getRegistryName()
                                                                                                          .getPath()).toLowerCase()), ingredient1, ingredient2, output, metal.getTier()
                                                                                                                                                                             .previous(), skillType));
       }
@@ -1070,7 +1070,7 @@ public final class DefaultRecipes {
       if (!input1.isEmpty() && !input2.isEmpty() && !output.isEmpty()) {
         // Note: Welding recipes require one less than the tier of the metal
         //noinspection ConstantConditions
-        registry.register(new WeldingRecipe(new ResourceLocation(MOD_ID, ("ingot_" + outputMetal.getRegistryName()
+        registry.register(new WeldingRecipe(new ResourceLocation(MODID_TFC, ("ingot_" + outputMetal.getRegistryName()
                                                                                                 .getPath()).toLowerCase()), IIngredient.of(input1), IIngredient.of(input2), output, outputMetal.getTier()
                                                                                                                                                                                                .previous(), null));
       }

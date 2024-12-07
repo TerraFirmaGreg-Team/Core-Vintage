@@ -53,7 +53,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 public abstract class EntityAnimalTFC extends EntityAnimal implements IAnimalTFC {
 
@@ -205,7 +205,7 @@ public abstract class EntityAnimalTFC extends EntityAnimal implements IAnimalTFC
   @Override
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
-    return new TextComponentTranslation(MOD_ID + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
+    return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
   }
 
   @Nullable
@@ -367,7 +367,7 @@ public abstract class EntityAnimalTFC extends EntityAnimal implements IAnimalTFC
           if (!this.world.isRemote) {
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-              TerraFirmaCraft.getNetwork().sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MOD_ID
+              TerraFirmaCraft.getNetwork().sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC
                                                                                                                + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
             }
           }

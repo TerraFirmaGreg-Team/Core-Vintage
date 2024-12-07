@@ -18,7 +18,7 @@ import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 public interface IRidable {
 
@@ -36,10 +36,10 @@ public interface IRidable {
       // Show tooltips
       if (!world.isRemote) {
         if (animal.getAge() == Age.CHILD) {
-          TerraFirmaCraft.getNetwork().sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MOD_ID
+          TerraFirmaCraft.getNetwork().sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC
                                                                                                            + ".tooltip.animal.product.young", animal.getAnimalName()), (EntityPlayerMP) player);
         } else {
-          TerraFirmaCraft.getNetwork().sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MOD_ID
+          TerraFirmaCraft.getNetwork().sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC
                                                                                                            + ".tooltip.animal.product.low_familiarity", animal.getAnimalName()), (EntityPlayerMP) player);
         }
       }

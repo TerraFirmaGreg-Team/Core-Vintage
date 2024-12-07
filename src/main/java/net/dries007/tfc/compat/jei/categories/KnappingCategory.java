@@ -19,12 +19,12 @@ import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @ParametersAreNonnullByDefault
 public class KnappingCategory extends BaseRecipeCategory<KnappingRecipeWrapper> {
 
-  private static final ResourceLocation KNAP_TEXTURES = new ResourceLocation(MOD_ID, "textures/gui/knapping.png");
+  private static final ResourceLocation KNAP_TEXTURES = new ResourceLocation(MODID_TFC, "textures/gui/knapping.png");
 
   private final IDrawableStatic arrow, outputSlot;
 

@@ -52,14 +52,14 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 /*
  * TFC entity spawning mechanics
  * Only works in tfc type worlds
  */
 @SuppressWarnings("WeakerAccess")
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_TFC)
 public final class WorldEntitySpawnerTFC {
 
   /**

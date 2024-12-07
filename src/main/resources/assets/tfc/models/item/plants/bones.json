@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "tfcflorae:items/bones"
+    "layer0": "tfc:items/bones"
   }
 }

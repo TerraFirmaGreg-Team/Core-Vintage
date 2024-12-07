@@ -64,7 +64,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_DECORATIONS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_GEMS;
@@ -75,8 +75,8 @@ import static net.dries007.tfc.objects.CreativeTabsTFC.CT_ROCK_ITEMS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
 import static net.dries007.tfc.util.Helpers.getNull;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
-@GameRegistry.ObjectHolder(MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_TFC)
+@GameRegistry.ObjectHolder(MODID_TFC)
 public final class ItemsTFC {
 
   public static final ItemGoldPan GOLDPAN = getNull();
@@ -441,8 +441,8 @@ public final class ItemsTFC {
   }
 
   private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {
-    item.setRegistryName(MOD_ID, name);
-    item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
+    item.setRegistryName(MODID_TFC, name);
+    item.setTranslationKey(MODID_TFC + "." + name.replace('/', '.'));
     item.setCreativeTab(ct);
     r.register(item);
     return item;

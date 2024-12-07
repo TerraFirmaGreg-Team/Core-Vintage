@@ -17,7 +17,7 @@ import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.objects.ArmorMaterialTFC;
 import net.dries007.tfc.objects.ToolMaterialsTFC;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_I;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_II;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_III;
@@ -26,80 +26,80 @@ import static net.dries007.tfc.api.types.Metal.Tier.TIER_V;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_VI;
 
 @SuppressWarnings("WeakerAccess")
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_TFC)
 public final class DefaultMetals {
 
   /*
    * Metals
    */
-  public static final ResourceLocation BISMUTH = new ResourceLocation(MOD_ID, "bismuth");
-  public static final ResourceLocation BISMUTH_BRONZE = new ResourceLocation(MOD_ID, "bismuth_bronze");
-  public static final ResourceLocation BLACK_BRONZE = new ResourceLocation(MOD_ID, "black_bronze");
-  public static final ResourceLocation BRASS = new ResourceLocation(MOD_ID, "brass");
-  public static final ResourceLocation BRONZE = new ResourceLocation(MOD_ID, "bronze");
-  public static final ResourceLocation COPPER = new ResourceLocation(MOD_ID, "copper");
-  public static final ResourceLocation GOLD = new ResourceLocation(MOD_ID, "gold");
-  public static final ResourceLocation LEAD = new ResourceLocation(MOD_ID, "lead");
-  public static final ResourceLocation NICKEL = new ResourceLocation(MOD_ID, "nickel");
-  public static final ResourceLocation ROSE_GOLD = new ResourceLocation(MOD_ID, "rose_gold");
-  public static final ResourceLocation SILVER = new ResourceLocation(MOD_ID, "silver");
-  public static final ResourceLocation TIN = new ResourceLocation(MOD_ID, "tin");
-  public static final ResourceLocation ZINC = new ResourceLocation(MOD_ID, "zinc");
-  public static final ResourceLocation STERLING_SILVER = new ResourceLocation(MOD_ID, "sterling_silver");
-  public static final ResourceLocation WROUGHT_IRON = new ResourceLocation(MOD_ID, "wrought_iron");
-  public static final ResourceLocation PIG_IRON = new ResourceLocation(MOD_ID, "pig_iron");
-  public static final ResourceLocation STEEL = new ResourceLocation(MOD_ID, "steel");
-  public static final ResourceLocation PLATINUM = new ResourceLocation(MOD_ID, "platinum");
-  public static final ResourceLocation BLACK_STEEL = new ResourceLocation(MOD_ID, "black_steel");
-  public static final ResourceLocation BLUE_STEEL = new ResourceLocation(MOD_ID, "blue_steel");
-  public static final ResourceLocation RED_STEEL = new ResourceLocation(MOD_ID, "red_steel");
-  public static final ResourceLocation WEAK_STEEL = new ResourceLocation(MOD_ID, "weak_steel");
-  public static final ResourceLocation WEAK_BLUE_STEEL = new ResourceLocation(MOD_ID, "weak_blue_steel");
-  public static final ResourceLocation WEAK_RED_STEEL = new ResourceLocation(MOD_ID, "weak_red_steel");
-  public static final ResourceLocation HIGH_CARBON_STEEL = new ResourceLocation(MOD_ID, "high_carbon_steel");
-  public static final ResourceLocation HIGH_CARBON_BLUE_STEEL = new ResourceLocation(MOD_ID, "high_carbon_blue_steel");
-  public static final ResourceLocation HIGH_CARBON_RED_STEEL = new ResourceLocation(MOD_ID, "high_carbon_red_steel");
-  public static final ResourceLocation HIGH_CARBON_BLACK_STEEL = new ResourceLocation(MOD_ID, "high_carbon_black_steel");
-  public static final ResourceLocation UNKNOWN = new ResourceLocation(MOD_ID, "unknown");
+  public static final ResourceLocation BISMUTH = new ResourceLocation(MODID_TFC, "bismuth");
+  public static final ResourceLocation BISMUTH_BRONZE = new ResourceLocation(MODID_TFC, "bismuth_bronze");
+  public static final ResourceLocation BLACK_BRONZE = new ResourceLocation(MODID_TFC, "black_bronze");
+  public static final ResourceLocation BRASS = new ResourceLocation(MODID_TFC, "brass");
+  public static final ResourceLocation BRONZE = new ResourceLocation(MODID_TFC, "bronze");
+  public static final ResourceLocation COPPER = new ResourceLocation(MODID_TFC, "copper");
+  public static final ResourceLocation GOLD = new ResourceLocation(MODID_TFC, "gold");
+  public static final ResourceLocation LEAD = new ResourceLocation(MODID_TFC, "lead");
+  public static final ResourceLocation NICKEL = new ResourceLocation(MODID_TFC, "nickel");
+  public static final ResourceLocation ROSE_GOLD = new ResourceLocation(MODID_TFC, "rose_gold");
+  public static final ResourceLocation SILVER = new ResourceLocation(MODID_TFC, "silver");
+  public static final ResourceLocation TIN = new ResourceLocation(MODID_TFC, "tin");
+  public static final ResourceLocation ZINC = new ResourceLocation(MODID_TFC, "zinc");
+  public static final ResourceLocation STERLING_SILVER = new ResourceLocation(MODID_TFC, "sterling_silver");
+  public static final ResourceLocation WROUGHT_IRON = new ResourceLocation(MODID_TFC, "wrought_iron");
+  public static final ResourceLocation PIG_IRON = new ResourceLocation(MODID_TFC, "pig_iron");
+  public static final ResourceLocation STEEL = new ResourceLocation(MODID_TFC, "steel");
+  public static final ResourceLocation PLATINUM = new ResourceLocation(MODID_TFC, "platinum");
+  public static final ResourceLocation BLACK_STEEL = new ResourceLocation(MODID_TFC, "black_steel");
+  public static final ResourceLocation BLUE_STEEL = new ResourceLocation(MODID_TFC, "blue_steel");
+  public static final ResourceLocation RED_STEEL = new ResourceLocation(MODID_TFC, "red_steel");
+  public static final ResourceLocation WEAK_STEEL = new ResourceLocation(MODID_TFC, "weak_steel");
+  public static final ResourceLocation WEAK_BLUE_STEEL = new ResourceLocation(MODID_TFC, "weak_blue_steel");
+  public static final ResourceLocation WEAK_RED_STEEL = new ResourceLocation(MODID_TFC, "weak_red_steel");
+  public static final ResourceLocation HIGH_CARBON_STEEL = new ResourceLocation(MODID_TFC, "high_carbon_steel");
+  public static final ResourceLocation HIGH_CARBON_BLUE_STEEL = new ResourceLocation(MODID_TFC, "high_carbon_blue_steel");
+  public static final ResourceLocation HIGH_CARBON_RED_STEEL = new ResourceLocation(MODID_TFC, "high_carbon_red_steel");
+  public static final ResourceLocation HIGH_CARBON_BLACK_STEEL = new ResourceLocation(MODID_TFC, "high_carbon_black_steel");
+  public static final ResourceLocation UNKNOWN = new ResourceLocation(MODID_TFC, "unknown");
 
   /*
    * Ores
    */
-  public static final ResourceLocation NATIVE_COPPER = new ResourceLocation(MOD_ID, "native_copper");
-  public static final ResourceLocation NATIVE_GOLD = new ResourceLocation(MOD_ID, "native_gold");
-  public static final ResourceLocation NATIVE_PLATINUM = new ResourceLocation(MOD_ID, "native_platinum");
-  public static final ResourceLocation HEMATITE = new ResourceLocation(MOD_ID, "hematite");
-  public static final ResourceLocation NATIVE_SILVER = new ResourceLocation(MOD_ID, "native_silver");
-  public static final ResourceLocation CASSITERITE = new ResourceLocation(MOD_ID, "cassiterite");
-  public static final ResourceLocation GALENA = new ResourceLocation(MOD_ID, "galena");
-  public static final ResourceLocation BISMUTHINITE = new ResourceLocation(MOD_ID, "bismuthinite");
-  public static final ResourceLocation GARNIERITE = new ResourceLocation(MOD_ID, "garnierite");
-  public static final ResourceLocation MALACHITE = new ResourceLocation(MOD_ID, "malachite");
-  public static final ResourceLocation MAGNETITE = new ResourceLocation(MOD_ID, "magnetite");
-  public static final ResourceLocation LIMONITE = new ResourceLocation(MOD_ID, "limonite");
-  public static final ResourceLocation SPHALERITE = new ResourceLocation(MOD_ID, "sphalerite");
-  public static final ResourceLocation TETRAHEDRITE = new ResourceLocation(MOD_ID, "tetrahedrite");
-  public static final ResourceLocation BITUMINOUS_COAL = new ResourceLocation(MOD_ID, "bituminous_coal");
-  public static final ResourceLocation LIGNITE = new ResourceLocation(MOD_ID, "lignite");
-  public static final ResourceLocation KAOLINITE = new ResourceLocation(MOD_ID, "kaolinite");
-  public static final ResourceLocation GYPSUM = new ResourceLocation(MOD_ID, "gypsum");
-  public static final ResourceLocation SATINSPAR = new ResourceLocation(MOD_ID, "satinspar");
-  public static final ResourceLocation SELENITE = new ResourceLocation(MOD_ID, "selenite");
-  public static final ResourceLocation GRAPHITE = new ResourceLocation(MOD_ID, "graphite");
-  public static final ResourceLocation KIMBERLITE = new ResourceLocation(MOD_ID, "kimberlite");
-  public static final ResourceLocation PETRIFIED_WOOD = new ResourceLocation(MOD_ID, "petrified_wood");
-  public static final ResourceLocation SULFUR = new ResourceLocation(MOD_ID, "sulfur");
-  public static final ResourceLocation JET = new ResourceLocation(MOD_ID, "jet");
-  public static final ResourceLocation MICROCLINE = new ResourceLocation(MOD_ID, "microcline");
-  public static final ResourceLocation PITCHBLENDE = new ResourceLocation(MOD_ID, "pitchblende");
-  public static final ResourceLocation CINNABAR = new ResourceLocation(MOD_ID, "cinnabar");
-  public static final ResourceLocation CRYOLITE = new ResourceLocation(MOD_ID, "cryolite");
-  public static final ResourceLocation SALTPETER = new ResourceLocation(MOD_ID, "saltpeter");
-  public static final ResourceLocation SERPENTINE = new ResourceLocation(MOD_ID, "serpentine");
-  public static final ResourceLocation SYLVITE = new ResourceLocation(MOD_ID, "sylvite");
-  public static final ResourceLocation BORAX = new ResourceLocation(MOD_ID, "borax");
-  public static final ResourceLocation OLIVINE = new ResourceLocation(MOD_ID, "olivine");
-  public static final ResourceLocation LAPIS_LAZULI = new ResourceLocation(MOD_ID, "lapis_lazuli");
+  public static final ResourceLocation NATIVE_COPPER = new ResourceLocation(MODID_TFC, "native_copper");
+  public static final ResourceLocation NATIVE_GOLD = new ResourceLocation(MODID_TFC, "native_gold");
+  public static final ResourceLocation NATIVE_PLATINUM = new ResourceLocation(MODID_TFC, "native_platinum");
+  public static final ResourceLocation HEMATITE = new ResourceLocation(MODID_TFC, "hematite");
+  public static final ResourceLocation NATIVE_SILVER = new ResourceLocation(MODID_TFC, "native_silver");
+  public static final ResourceLocation CASSITERITE = new ResourceLocation(MODID_TFC, "cassiterite");
+  public static final ResourceLocation GALENA = new ResourceLocation(MODID_TFC, "galena");
+  public static final ResourceLocation BISMUTHINITE = new ResourceLocation(MODID_TFC, "bismuthinite");
+  public static final ResourceLocation GARNIERITE = new ResourceLocation(MODID_TFC, "garnierite");
+  public static final ResourceLocation MALACHITE = new ResourceLocation(MODID_TFC, "malachite");
+  public static final ResourceLocation MAGNETITE = new ResourceLocation(MODID_TFC, "magnetite");
+  public static final ResourceLocation LIMONITE = new ResourceLocation(MODID_TFC, "limonite");
+  public static final ResourceLocation SPHALERITE = new ResourceLocation(MODID_TFC, "sphalerite");
+  public static final ResourceLocation TETRAHEDRITE = new ResourceLocation(MODID_TFC, "tetrahedrite");
+  public static final ResourceLocation BITUMINOUS_COAL = new ResourceLocation(MODID_TFC, "bituminous_coal");
+  public static final ResourceLocation LIGNITE = new ResourceLocation(MODID_TFC, "lignite");
+  public static final ResourceLocation KAOLINITE = new ResourceLocation(MODID_TFC, "kaolinite");
+  public static final ResourceLocation GYPSUM = new ResourceLocation(MODID_TFC, "gypsum");
+  public static final ResourceLocation SATINSPAR = new ResourceLocation(MODID_TFC, "satinspar");
+  public static final ResourceLocation SELENITE = new ResourceLocation(MODID_TFC, "selenite");
+  public static final ResourceLocation GRAPHITE = new ResourceLocation(MODID_TFC, "graphite");
+  public static final ResourceLocation KIMBERLITE = new ResourceLocation(MODID_TFC, "kimberlite");
+  public static final ResourceLocation PETRIFIED_WOOD = new ResourceLocation(MODID_TFC, "petrified_wood");
+  public static final ResourceLocation SULFUR = new ResourceLocation(MODID_TFC, "sulfur");
+  public static final ResourceLocation JET = new ResourceLocation(MODID_TFC, "jet");
+  public static final ResourceLocation MICROCLINE = new ResourceLocation(MODID_TFC, "microcline");
+  public static final ResourceLocation PITCHBLENDE = new ResourceLocation(MODID_TFC, "pitchblende");
+  public static final ResourceLocation CINNABAR = new ResourceLocation(MODID_TFC, "cinnabar");
+  public static final ResourceLocation CRYOLITE = new ResourceLocation(MODID_TFC, "cryolite");
+  public static final ResourceLocation SALTPETER = new ResourceLocation(MODID_TFC, "saltpeter");
+  public static final ResourceLocation SERPENTINE = new ResourceLocation(MODID_TFC, "serpentine");
+  public static final ResourceLocation SYLVITE = new ResourceLocation(MODID_TFC, "sylvite");
+  public static final ResourceLocation BORAX = new ResourceLocation(MODID_TFC, "borax");
+  public static final ResourceLocation OLIVINE = new ResourceLocation(MODID_TFC, "olivine");
+  public static final ResourceLocation LAPIS_LAZULI = new ResourceLocation(MODID_TFC, "lapis_lazuli");
 
   @SubscribeEvent
   public static void onPreRegisterOre(TFCRegistryEvent.RegisterPreBlock<Ore> event) {

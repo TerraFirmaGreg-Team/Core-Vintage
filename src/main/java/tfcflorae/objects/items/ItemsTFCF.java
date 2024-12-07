@@ -24,6 +24,7 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.objects.ToolMaterialsTFC;
 import net.dries007.tfc.objects.blocks.BlockSlabTFC;
 import net.dries007.tfc.objects.items.ItemMisc;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
@@ -41,9 +42,6 @@ import tfcflorae.TFCFlorae;
 import tfcflorae.compat.firmalife.ceramics.ItemEarthenwareMalletMoldFL;
 import tfcflorae.compat.firmalife.ceramics.ItemKaoliniteMalletMoldFL;
 import tfcflorae.compat.firmalife.ceramics.ItemStonewareMalletMoldFL;
-import tfcflorae.objects.GemTFCF;
-import tfcflorae.objects.PowderTFCF;
-import tfcflorae.objects.ToolMaterialsTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.blocktype.BlockSlabTFCF;
 import tfcflorae.objects.blocks.wood.BlockLogTFCF;
@@ -80,12 +78,13 @@ import tfcflorae.util.agriculture.CropTFCF;
 import tfcflorae.util.agriculture.FoodDataTFCF;
 import tfcflorae.util.agriculture.FruitsTFCF;
 
+import lombok.Getter;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_DECORATIONS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_GEMS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_ROCK_ITEMS;
@@ -1290,48 +1289,27 @@ public final class ItemsTFCF {
   public static final ItemArmorTFCF YUCCA_CANVAS_LEGGINGS = Helpers.getNull();
   @GameRegistry.ObjectHolder("armor/boots/yucca_canvas")
   public static final ItemArmorTFCF YUCCA_CANVAS_BOOTS = Helpers.getNull();
+
   public static ItemEarthenwareMalletMoldFL malletMoldEarthenware;
   public static ItemKaoliniteMalletMoldFL malletMoldKaolinite;
   public static ItemStonewareMalletMoldFL malletMoldStoneware;
+  @Getter
   private static ImmutableList<Item> allSimpleItems;
+  @Getter
   private static ImmutableList<ItemBowTFCF> allItemBows;
+  @Getter
   private static ImmutableList<Item> allFoodItems;
-  private static ImmutableList<ItemGemTFCF> allGemTFCFItems;
+  @Getter
   private static ImmutableList<ItemFruitDoor> allFruitDoors;
+  @Getter
   private static ImmutableList<Item> allCeramicMoldItems;
+  @Getter
   private static ImmutableList<ItemArmorTFCF> allArmorItems;
   private static Map<FruitsTFCF, Item> driedFruits = new HashMap<>();
 
-  public static ImmutableList<Item> getAllSimpleItems() {
-    return allSimpleItems;
-  }
-
-  public static ImmutableList<ItemBowTFCF> getAllItemBows() {
-    return allItemBows;
-  }
-
-  public static ImmutableList<Item> getAllFoodItems() {
-    return allFoodItems;
-  }
-
-  public static ImmutableList<ItemGemTFCF> getAllGemTFCFItems() {
-    return allGemTFCFItems;
-  }
-
-  public static ImmutableList<ItemFruitDoor> getAllFruitDoors() {
-    return allFruitDoors;
-  }
 
   public static Item getDriedFruit(FruitsTFCF fruit) {
     return driedFruits.get(fruit);
-  }
-
-  public static ImmutableList<Item> getAllCeramicMoldItems() {
-    return allCeramicMoldItems;
-  }
-
-  public static ImmutableList<ItemArmorTFCF> getAllArmorItems() {
-    return allArmorItems;
   }
 
   @SuppressWarnings("ConstantConditions")
@@ -1886,24 +1864,15 @@ public final class ItemsTFCF {
       }
     }
 
-    // Gems
-    {
-      Builder<ItemGemTFCF> b = new Builder<>();
-      for (GemTFCF gem : GemTFCF.values()) {b.add(register(r, "gem/" + gem.name().toLowerCase(), new ItemGemTFCF(gem), CT_GEMS));}
-      allGemTFCFItems = b.build();
-    }
-
-    for (PowderTFCF powder : PowderTFCF.values()) {simpleItems.add(register(r, "powder/" + powder.name().toLowerCase(), new ItemPowderTFCF(powder), CT_MISC));}
-
     // Tools
     simpleItems.add(register(r, "tools/walking_stick", new ItemWalkingStick(ToolMaterial.WOOD, 1f, 1.5f, 0.02f, 96, "stick_wood", "walking_stick"), CT_MISC));
 
-    simpleItems.add(register(r, "tools/flint/axe/flint", new ItemAxeTFCF(ToolMaterialsTFCF.FLINT, 2.5f, -3f, 50, "axe", "axe_flint", "axe_stone", "axe_stone_sedimentary"), CT_ROCK_ITEMS));
-    simpleItems.add(register(r, "tools/flint/hammer/flint", new ItemHammerTFCF(ToolMaterialsTFCF.FLINT, 2.5f, -3f, 50, "hammer", "hammer_flint", "hammer_stone", "hammer_stone_sedimentary"), CT_ROCK_ITEMS));
-    simpleItems.add(register(r, "tools/flint/hoe/flint", new ItemHoeTFCF(ToolMaterialsTFCF.FLINT, 2.25f, -2f, 50, "hoe", "hoe_flint", "hoe_stone", "hoe_stone_sedimentary"), CT_ROCK_ITEMS));
-    simpleItems.add(register(r, "tools/flint/javelin/flint", new ItemJavelinTFCF(ToolMaterialsTFCF.FLINT, 1.95f, -1.8f, 50, "javelin", "javelin_flint", "javelin_stone", "javelin_stone_sedimentary"), CT_ROCK_ITEMS));
-    simpleItems.add(register(r, "tools/flint/knife/flint", new ItemKnifeTFCF(ToolMaterialsTFCF.FLINT, 1.5f, -1.5f, 50, "knife", "knife_flint", "knife_stone", "knife_stone_sedimentary"), CT_ROCK_ITEMS));
-    simpleItems.add(register(r, "tools/flint/shovel/flint", new ItemShovelTFCF(ToolMaterialsTFCF.FLINT, 1.25f, -3f, 50, "shovel", "shovel_flint", "shovel_stone", "shovel_stone_sedimentary"), CT_ROCK_ITEMS));
+    simpleItems.add(register(r, "tools/flint/axe/flint", new ItemAxeTFCF(ToolMaterialsTFC.FLINT, 2.5f, -3f, 50, "axe", "axe_flint", "axe_stone", "axe_stone_sedimentary"), CT_ROCK_ITEMS));
+    simpleItems.add(register(r, "tools/flint/hammer/flint", new ItemHammerTFCF(ToolMaterialsTFC.FLINT, 2.5f, -3f, 50, "hammer", "hammer_flint", "hammer_stone", "hammer_stone_sedimentary"), CT_ROCK_ITEMS));
+    simpleItems.add(register(r, "tools/flint/hoe/flint", new ItemHoeTFCF(ToolMaterialsTFC.FLINT, 2.25f, -2f, 50, "hoe", "hoe_flint", "hoe_stone", "hoe_stone_sedimentary"), CT_ROCK_ITEMS));
+    simpleItems.add(register(r, "tools/flint/javelin/flint", new ItemJavelinTFCF(ToolMaterialsTFC.FLINT, 1.95f, -1.8f, 50, "javelin", "javelin_flint", "javelin_stone", "javelin_stone_sedimentary"), CT_ROCK_ITEMS));
+    simpleItems.add(register(r, "tools/flint/knife/flint", new ItemKnifeTFCF(ToolMaterialsTFC.FLINT, 1.5f, -1.5f, 50, "knife", "knife_flint", "knife_stone", "knife_stone_sedimentary"), CT_ROCK_ITEMS));
+    simpleItems.add(register(r, "tools/flint/shovel/flint", new ItemShovelTFCF(ToolMaterialsTFC.FLINT, 1.25f, -3f, 50, "shovel", "shovel_flint", "shovel_stone", "shovel_stone_sedimentary"), CT_ROCK_ITEMS));
 
     // Toolheads
     simpleItems.add(register(r, "tools/flint/axe_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_axe"), CT_ROCK_ITEMS));

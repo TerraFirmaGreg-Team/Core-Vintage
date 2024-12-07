@@ -157,10 +157,10 @@ import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import java.util.Iterator;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_TFC)
 public final class CommonEventHandler {
 
   private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";

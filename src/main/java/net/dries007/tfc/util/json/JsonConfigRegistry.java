@@ -22,7 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 public enum JsonConfigRegistry {
   INSTANCE;
@@ -40,7 +40,7 @@ public enum JsonConfigRegistry {
   public void preInit(File dir) {
     // Init base config dir
     TerraFirmaCraft.getLog().info("Loading or creating TFC config directory");
-    tfcConfigDir = new File(dir, MOD_ID);
+    tfcConfigDir = new File(dir, MODID_TFC);
     if (!tfcConfigDir.exists() && !tfcConfigDir.mkdir()) {
       throw new Error("Problem creating TFC extra config directory.");
     }

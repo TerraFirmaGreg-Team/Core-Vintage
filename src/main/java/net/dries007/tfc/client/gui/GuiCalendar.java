@@ -21,12 +21,12 @@ import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiCalendar extends GuiContainerTFC {
 
-  private static final ResourceLocation BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/player_calendar.png");
+  private static final ResourceLocation BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/player_calendar.png");
 
   public GuiCalendar(Container container, InventoryPlayer playerInv) {
     super(container, playerInv, BACKGROUND);

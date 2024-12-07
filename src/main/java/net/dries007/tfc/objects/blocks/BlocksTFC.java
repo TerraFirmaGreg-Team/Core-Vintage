@@ -129,7 +129,7 @@ import net.dries007.tfc.util.agriculture.FruitTree;
 
 import lombok.Getter;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 import static net.dries007.tfc.api.types.Rock.Type.ANVIL;
 import static net.dries007.tfc.api.types.Rock.Type.BRICKS;
 import static net.dries007.tfc.api.types.Rock.Type.CLAY;
@@ -155,8 +155,8 @@ import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
 import static net.dries007.tfc.util.Helpers.getNull;
 
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = MOD_ID)
-@GameRegistry.ObjectHolder(MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_TFC)
+@GameRegistry.ObjectHolder(MODID_TFC)
 public final class BlocksTFC {
 
   @GameRegistry.ObjectHolder("ceramics/fired/large_vessel")
@@ -611,8 +611,8 @@ public final class BlocksTFC {
 
       for (FruitTree tree : FruitTree.values()) {
         fSaplings.add(register(r, "fruit_trees/sapling/" + tree.name().toLowerCase(), new BlockFruitTreeSapling(tree), CT_WOOD));
-        fTrunks.add(register(r, "fruit_trees/trunk/" + tree.name().toLowerCase(), new BlockFruitTreeTrunk(tree)));
-        fBranches.add(register(r, "fruit_trees/branch/" + tree.name().toLowerCase(), new BlockFruitTreeBranch(tree)));
+        fTrunks.add(register(r, "fruit_trees/trunk/" + tree.name().toLowerCase(), new BlockFruitTreeTrunk(tree), CT_WOOD));
+        fBranches.add(register(r, "fruit_trees/branch/" + tree.name().toLowerCase(), new BlockFruitTreeBranch(tree), CT_WOOD));
         fLeaves.add(register(r, "fruit_trees/leaves/" + tree.name().toLowerCase(), new BlockFruitTreeLeaves(tree), CT_WOOD));
       }
 
@@ -833,13 +833,13 @@ public final class BlocksTFC {
   }
 
   private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block) {
-    block.setRegistryName(MOD_ID, name);
-    block.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
+    block.setRegistryName(MODID_TFC, name);
+    block.setTranslationKey(MODID_TFC + "." + name.replace('/', '.'));
     r.register(block);
     return block;
   }
 
   private static <T extends TileEntity> void register(Class<T> te, String name) {
-    TileEntity.register(MOD_ID + ":" + name, te);
+    TileEntity.register(MODID_TFC + ":" + name, te);
   }
 }

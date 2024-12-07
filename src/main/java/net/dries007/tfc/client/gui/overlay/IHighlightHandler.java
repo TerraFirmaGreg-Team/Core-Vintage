@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 /**
  * Interfacing to pass on DrawHighlightEvent's custom implementations
@@ -84,7 +84,7 @@ public interface IHighlightHandler {
   boolean drawHighlight(World world, BlockPos pos, EntityPlayer player, RayTraceResult rayTrace, double partialTicks);
 
   @SideOnly(Side.CLIENT)
-  @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MOD_ID)
+  @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_TFC)
   final class EventHandler {
 
     /**

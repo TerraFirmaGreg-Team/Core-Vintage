@@ -22,7 +22,7 @@ public class TFCThings {
 	public static final String VERSION = "1.3.5";
 	public static final String CLIENT_PROXY = "lyeoj.tfcthings.proxy.ClientProxy";
 	public static final String COMMON_PROXY = "lyeoj.tfcthings.proxy.CommonProxy";
-	public static final String DEPENDENCIES = "required-after:" + TerraFirmaCraft.MOD_ID;
+	public static final String DEPENDENCIES = "required-after:" + TerraFirmaCraft.MODID_TFC;
 
 	@SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
 	public static CommonProxy proxy;

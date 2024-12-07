@@ -24,10 +24,10 @@ import net.dries007.tfc.network.PacketPlaceBlockSpecial;
 import net.dries007.tfc.network.PacketStackFood;
 import org.lwjgl.input.Keyboard;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
 
-@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MOD_ID)
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_TFC)
 @SideOnly(Side.CLIENT)
 public class TFCKeybindings {
 

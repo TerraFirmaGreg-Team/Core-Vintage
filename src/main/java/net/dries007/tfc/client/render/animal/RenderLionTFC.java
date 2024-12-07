@@ -17,13 +17,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderLionTFC extends RenderLiving<EntityLionTFC> {
 
-  private static final ResourceLocation LIONS_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/predators/lions.png");
+  private static final ResourceLocation LIONS_TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/predators/lions.png");
 
   public RenderLionTFC(RenderManager manager) {
     super(manager, new ModelLionTFC(), 0.3F);

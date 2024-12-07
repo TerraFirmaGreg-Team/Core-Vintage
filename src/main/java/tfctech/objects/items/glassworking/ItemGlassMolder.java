@@ -133,11 +133,11 @@ public class ItemGlassMolder extends ItemMiscTech
                 String fluidDesc = TextFormatting.DARK_GREEN + fluid.getLocalizedName() + TextFormatting.WHITE;
                 if (isSolidified())
                 {
-                    fluidDesc += I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.solid");
+                    fluidDesc += I18n.format(TerraFirmaCraft.MODID_TFC + ".tooltip.solid");
                 }
                 else if (canWork())
                 {
-                    fluidDesc += I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.liquid");
+                    fluidDesc += I18n.format(TerraFirmaCraft.MODID_TFC + ".tooltip.liquid");
                 }
                 tooltip.add(fluidDesc);
             }

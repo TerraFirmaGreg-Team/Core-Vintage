@@ -26,11 +26,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 public class CapabilityFood {
 
-  public static final ResourceLocation KEY = new ResourceLocation(MOD_ID, "food");
+  public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "food");
   public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_FOODS = new HashMap<>(); //Used inside CT, set custom IFood for food items outside TFC
   /**
    * Most TFC foods have decay modifiers in the range [1, 4] (high = faster decay) That puts decay times at 25% - 100% of this value So meat / fruit will decay

@@ -17,15 +17,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderDeerTFC extends RenderLiving<EntityDeerTFC> {
 
-  private static final ResourceLocation DEER_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/deer.png");
+  private static final ResourceLocation DEER_TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/deer.png");
 
-  private static final ResourceLocation FAWN_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/deer_fawn.png");
+  private static final ResourceLocation FAWN_TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/deer_fawn.png");
 
   public RenderDeerTFC(RenderManager manager) {
     super(manager, new ModelDeerTFC(), 0.7F);

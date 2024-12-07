@@ -26,11 +26,11 @@ import net.dries007.tfc.util.forge.ForgeSteps;
 
 import java.io.IOException;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 public class GuiAnvilTFC extends GuiContainerTE<TEAnvilTFC> {
 
-  public static final ResourceLocation ANVIL_BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/anvil.png");
+  public static final ResourceLocation ANVIL_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/anvil.png");
   public static final int BUTTON_ID_STEP_MIN = 0;
   public static final int BUTTON_ID_STEP_MAX = 7;
   public static final int BUTTON_ID_PLAN = 8;

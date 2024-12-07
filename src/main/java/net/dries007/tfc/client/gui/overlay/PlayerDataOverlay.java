@@ -37,12 +37,12 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.Color;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 public final class PlayerDataOverlay {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(MOD_ID, "textures/gui/icons/overlay.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(MODID_TFC, "textures/gui/icons/overlay.png");
   private static final ResourceLocation MC_ICONS = new ResourceLocation("minecraft:textures/gui/icons.png");
   private static final PlayerDataOverlay INSTANCE = new PlayerDataOverlay();
 

@@ -24,7 +24,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class RockLayerCategory extends BaseRecipeCategory<RockLayerWrapper> {
 
-  private static final ResourceLocation BACKGROUND = new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/gui/jei_rocklayer.png");
+  private static final ResourceLocation BACKGROUND = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/jei_rocklayer.png");
 
   public RockLayerCategory(IGuiHelper helper, String Uid) {
     super(new BackgroundDrawable(BACKGROUND, 164, 110), Uid);

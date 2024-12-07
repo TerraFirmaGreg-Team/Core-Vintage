@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @ZenClass("mods.terrafirmacraft.StoneKnapping")
 @ZenRegister
@@ -56,7 +56,7 @@ public class CTStoneKnapping {
         Rock rock = TFCRegistries.ROCKS.getValue(new ResourceLocation(rocks[i]));
         if (rock == null) {
           // Guess the mod id if it doesn't match
-          rock = TFCRegistries.ROCKS.getValue(new ResourceLocation(MOD_ID, rocks[i]));
+          rock = TFCRegistries.ROCKS.getValue(new ResourceLocation(MODID_TFC, rocks[i]));
         }
         if (rock == null) {
           throw new IllegalArgumentException("Unknown rock '" + rock + "'.");

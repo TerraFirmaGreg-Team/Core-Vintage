@@ -15,14 +15,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderPigTFC extends RenderAnimalTFC<EntityPigTFC> {
 
-  private static final ResourceLocation PIG_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/pig_young.png");
-  private static final ResourceLocation PIG_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/pig_old.png");
+  private static final ResourceLocation PIG_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/pig_young.png");
+  private static final ResourceLocation PIG_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/pig_old.png");
 
   public RenderPigTFC(RenderManager renderManager) {
     super(renderManager, new ModelPigTFC(), 0.7F, PIG_YOUNG, PIG_OLD);

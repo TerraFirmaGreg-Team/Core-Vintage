@@ -12,8 +12,8 @@ import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 
 public final class TechFluids
 {
-    private static final ResourceLocation LAVA_STILL = new ResourceLocation(TerraFirmaCraft.MOD_ID, "blocks/lava_still");
-    private static final ResourceLocation LAVA_FLOW = new ResourceLocation(TerraFirmaCraft.MOD_ID, "blocks/lava_flow");
+    private static final ResourceLocation LAVA_STILL = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "blocks/lava_still");
+    private static final ResourceLocation LAVA_FLOW = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "blocks/lava_flow");
     private static final HashBiMap<Fluid, FluidWrapper> WRAPPERS = HashBiMap.create();
 
     public static FluidWrapper LATEX;

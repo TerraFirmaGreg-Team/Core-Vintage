@@ -15,7 +15,7 @@ public enum VeinAdder {
 
   public void addVeins(File configDir) // this gets the installation's config directory
   {
-    File tfc = new File(configDir, TerraFirmaCraft.MOD_ID); // this is just /config/tfc/
+    File tfc = new File(configDir, TerraFirmaCraft.MODID_TFC); // this is just /config/tfc/
     if (!tfc.exists() && !tfc.mkdir()) {
       throw new Error("Sorry, but I couldn't find the TFC directory.");
     }

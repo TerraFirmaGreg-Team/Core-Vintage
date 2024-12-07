@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 public class TESRLoom extends TESRBase<TELoom> {
@@ -31,7 +31,7 @@ public class TESRLoom extends TESRBase<TELoom> {
   static {
     for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
       //noinspection ConstantConditions
-      PLANKS_TEXTURES.put(wood, new ResourceLocation(MOD_ID, "textures/blocks/wood/planks/" + wood.getRegistryName().getPath() + ".png"));
+      PLANKS_TEXTURES.put(wood, new ResourceLocation(MODID_TFC, "textures/blocks/wood/planks/" + wood.getRegistryName().getPath() + ".png"));
     }
   }
 

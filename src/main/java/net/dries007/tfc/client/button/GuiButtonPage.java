@@ -12,11 +12,11 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 public class GuiButtonPage extends GuiButton implements IButtonTooltip {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(MOD_ID, "textures/gui/icons.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(MODID_TFC, "textures/gui/icons.png");
   private final Type type;
   private final String tooltip; // Lang key
 

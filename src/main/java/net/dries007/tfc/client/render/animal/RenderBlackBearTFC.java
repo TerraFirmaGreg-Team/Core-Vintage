@@ -18,13 +18,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderBlackBearTFC extends RenderLiving<EntityBlackBearTFC> {
 
-  private static final ResourceLocation BLACKBEAR_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/predators/blackbear.png");
+  private static final ResourceLocation BLACKBEAR_TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/predators/blackbear.png");
 
   public RenderBlackBearTFC(RenderManager renderManager) {
     super(renderManager, new ModelBlackBearTFC(), 0.7F);

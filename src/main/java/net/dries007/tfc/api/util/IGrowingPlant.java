@@ -39,7 +39,7 @@ public interface IGrowingPlant {
 
     @Override
     public String toString() {
-      return TerraFirmaCraft.MOD_ID + ".enum.growstatus." + name().toLowerCase();
+      return TerraFirmaCraft.MODID_TFC + ".enum.growstatus." + name().toLowerCase();
     }
   }
 

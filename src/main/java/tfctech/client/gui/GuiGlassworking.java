@@ -20,7 +20,7 @@ import static tfctech.TFCTech.MODID;
 
 public class GuiGlassworking extends GuiContainerTFC
 {
-    private static final ResourceLocation BG_TEXTURE = new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/gui/knapping.png");
+    private static final ResourceLocation BG_TEXTURE = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/knapping.png");
     private static final ResourceLocation GLASS_TEXTURE = new ResourceLocation(MODID, "textures/gui/glassworking/button.png");
     private static final ResourceLocation GLASS_DISABLED_TEXTURE = new ResourceLocation(MODID, "textures/gui/glassworking/disabled.png");
 

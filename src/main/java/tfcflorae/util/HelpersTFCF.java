@@ -21,7 +21,7 @@ public class HelpersTFCF {
   }
 
   public static void insertWhitelistFluids() {
-    ConfigManager.sync(TerraFirmaCraft.MOD_ID, Config.Type.INSTANCE);
+    ConfigManager.sync(TerraFirmaCraft.MODID_TFC, Config.Type.INSTANCE);
 
     // Fluids
     String[] fluidAdditions = {

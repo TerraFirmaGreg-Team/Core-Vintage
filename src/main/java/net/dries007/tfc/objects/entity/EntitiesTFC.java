@@ -63,9 +63,9 @@ import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_TFC)
 public class EntitiesTFC {
 
   @GameRegistry.ObjectHolder("tfc:long")
@@ -150,11 +150,11 @@ public class EntitiesTFC {
   }
 
   private static void register(String name, Class<? extends Entity> cls) {
-    EntityRegistry.registerModEntity(new ResourceLocation(MOD_ID, name), cls, name, id++, TerraFirmaCraft.getInstance(), 160, 20, true);
+    EntityRegistry.registerModEntity(new ResourceLocation(MODID_TFC, name), cls, name, id++, TerraFirmaCraft.getInstance(), 160, 20, true);
   }
 
   private static void registerLiving(String name, Class<? extends Entity> cls, int eggPrimaryColor, int eggSecondaryColor) {
     //Register entity and create a spawn egg for creative
-    EntityRegistry.registerModEntity(new ResourceLocation(MOD_ID, name), cls, name, id++, TerraFirmaCraft.getInstance(), 80, 3, true, eggPrimaryColor, eggSecondaryColor);
+    EntityRegistry.registerModEntity(new ResourceLocation(MODID_TFC, name), cls, name, id++, TerraFirmaCraft.getInstance(), 80, 3, true, eggPrimaryColor, eggSecondaryColor);
   }
 }

@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 public class EntityPolarBearTFC extends EntityPolarBear implements IAnimalTFC, IPredator, EntityAIStandAttack.IEntityStandAttack {
 
@@ -229,7 +229,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimalTFC, I
   @Override
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
-    return new TextComponentTranslation(MOD_ID + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
+    return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
   }
 
   @Override

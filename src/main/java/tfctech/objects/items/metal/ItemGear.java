@@ -22,13 +22,13 @@ public class ItemGear extends ItemTechMetal
             case TIER_0:
             case TIER_I:
             case TIER_II:
-                return TFCRegistries.METALS.getValue(new ResourceLocation(TerraFirmaCraft.MOD_ID, "tin"));
+                return TFCRegistries.METALS.getValue(new ResourceLocation(TerraFirmaCraft.MODID_TFC, "tin"));
             case TIER_III:
             case TIER_IV:
-                return TFCRegistries.METALS.getValue(new ResourceLocation(TerraFirmaCraft.MOD_ID, "brass"));
+                return TFCRegistries.METALS.getValue(new ResourceLocation(TerraFirmaCraft.MODID_TFC, "brass"));
             case TIER_V:
             case TIER_VI:
-                return TFCRegistries.METALS.getValue(new ResourceLocation(TerraFirmaCraft.MOD_ID, "steel"));
+                return TFCRegistries.METALS.getValue(new ResourceLocation(TerraFirmaCraft.MODID_TFC, "steel"));
         }
     }
 }

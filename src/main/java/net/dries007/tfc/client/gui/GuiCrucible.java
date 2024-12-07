@@ -33,11 +33,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 public class GuiCrucible extends GuiContainerTE<TECrucible> {
 
-  private static final ResourceLocation CRUCIBLE_BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/crucible.png");
+  private static final ResourceLocation CRUCIBLE_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/crucible.png");
   private static final int MAX_ELEMENTS = 3;
   private int scrollPos;
   private boolean scrollPress;
@@ -62,7 +62,7 @@ public class GuiCrucible extends GuiContainerTE<TECrucible> {
         tooltip.add(I18n.format(tile.getAlloy().getResult().getTranslationKey()));
         int amount = tile.getAlloy().getAmount();
         int maxAmount = tile.getAlloy().getMaxAmount();
-        tooltip.add(I18n.format(MOD_ID + ".tooltip.crucible_units", amount, maxAmount));
+        tooltip.add(I18n.format(MODID_TFC + ".tooltip.crucible_units", amount, maxAmount));
         drawHoveringText(tooltip, mouseX, mouseY);
       }
     }
@@ -185,9 +185,9 @@ public class GuiCrucible extends GuiContainerTE<TECrucible> {
         metalName += ":";
         String units;
         if (entry.getValue() >= 1) {
-          units = I18n.format(MOD_ID + ".tooltip.units", entry.getValue().intValue());
+          units = I18n.format(MODID_TFC + ".tooltip.units", entry.getValue().intValue());
         } else {
-          units = I18n.format(MOD_ID + ".tooltip.crucible_less_than_one");
+          units = I18n.format(MODID_TFC + ".tooltip.crucible_less_than_one");
         }
         String content = String.format("  %s(%s%2.1f%%%s)", units, TextFormatting.DARK_GREEN, 100 * entry.getValue() / alloy.getAmount(), TextFormatting.RESET);
         fontRenderer.drawString(metalName, guiLeft + 10, yPos, 0x404040);

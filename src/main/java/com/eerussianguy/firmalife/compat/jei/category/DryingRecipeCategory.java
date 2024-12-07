@@ -17,7 +17,7 @@ import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 //TFC's quern recipe category
 public class DryingRecipeCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/gui/icons/jei.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/icons/jei.png");
 
   private final IDrawableStatic slot;
   private final IDrawableStatic arrow;

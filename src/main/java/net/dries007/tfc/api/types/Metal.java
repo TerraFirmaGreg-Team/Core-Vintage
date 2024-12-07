@@ -34,11 +34,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 public class Metal extends IForgeRegistryEntry.Impl<Metal> {
 
-  @GameRegistry.ObjectHolder(MOD_ID + ":unknown")
+  @GameRegistry.ObjectHolder(MODID_TFC + ":unknown")
   public static final Metal UNKNOWN = Helpers.getNull();
   @GameRegistry.ObjectHolder("tfc:wrought_iron")
   public static final Metal WROUGHT_IRON = Helpers.getNull();
@@ -127,7 +127,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
 
   public String getTranslationKey() {
     //noinspection ConstantConditions
-    return MOD_ID + ".types.metal." + getRegistryName().getPath();
+    return MODID_TFC + ".types.metal." + getRegistryName().getPath();
   }
 
   @SuppressWarnings("ConstantConditions")

@@ -18,13 +18,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderGrizzlyBearTFC extends RenderLiving<EntityGrizzlyBearTFC> {
 
-  private static final ResourceLocation BEAR_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/predators/grizzlybear.png");
+  private static final ResourceLocation BEAR_TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/predators/grizzlybear.png");
 
   public RenderGrizzlyBearTFC(RenderManager renderManager) {
     super(renderManager, new ModelGrizzlyBearTFC(), 0.7F);

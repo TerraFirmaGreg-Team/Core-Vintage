@@ -45,16 +45,16 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 public final class FluidsTFC {
 
-  private static final ResourceLocation STILL = new ResourceLocation(MOD_ID, "blocks/fluid_still");
-  private static final ResourceLocation FLOW = new ResourceLocation(MOD_ID, "blocks/fluid_flow");
+  private static final ResourceLocation STILL = new ResourceLocation(MODID_TFC, "blocks/fluid_still");
+  private static final ResourceLocation FLOW = new ResourceLocation(MODID_TFC, "blocks/fluid_flow");
 
   private static final HashBiMap<Fluid, FluidWrapper> WRAPPERS = HashBiMap.create();
-  private static final ResourceLocation LAVA_STILL = new ResourceLocation(MOD_ID, "blocks/lava_still");
-  private static final ResourceLocation LAVA_FLOW = new ResourceLocation(MOD_ID, "blocks/lava_flow");
+  private static final ResourceLocation LAVA_STILL = new ResourceLocation(MODID_TFC, "blocks/lava_still");
+  private static final ResourceLocation LAVA_FLOW = new ResourceLocation(MODID_TFC, "blocks/lava_flow");
   private static final Map<EnumDyeColor, FluidWrapper> DYE_FLUIDS = new EnumMap<>(EnumDyeColor.class);
   // Water variants
   public static FluidWrapper HOT_WATER;

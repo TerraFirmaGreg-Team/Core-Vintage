@@ -19,14 +19,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderTurkeyTFC extends RenderLiving<EntityTurkeyTFC> {
 
-  private static final ResourceLocation MALE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/turkeym.png");
-  private static final ResourceLocation FEMALE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/turkeyf.png");
+  private static final ResourceLocation MALE = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/turkeym.png");
+  private static final ResourceLocation FEMALE = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/turkeyf.png");
 
   public RenderTurkeyTFC(RenderManager manager) {
     super(manager, new ModelTurkeyTFC(), 0.5F);

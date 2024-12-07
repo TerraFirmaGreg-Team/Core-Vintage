@@ -22,7 +22,7 @@ import net.dries007.tfc.objects.entity.EntityBoatTFC;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
@@ -66,10 +66,10 @@ public class RenderBoatTFC extends Render<EntityBoatTFC> {
     final Tree wood = entity.getWood();
     if (wood != null) {
       //noinspection ConstantConditions
-      return new ResourceLocation(MOD_ID, "textures/entity/boat/" + wood.getRegistryName().getPath().toLowerCase() + ".png");
+      return new ResourceLocation(MODID_TFC, "textures/entity/boat/" + wood.getRegistryName().getPath().toLowerCase() + ".png");
     }
     // Fallback
-    return new ResourceLocation(MOD_ID, "textures/entity/boat/oak.png");
+    return new ResourceLocation(MODID_TFC, "textures/entity/boat/oak.png");
   }
 
   @Override

@@ -15,7 +15,7 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.model.ModelIngotPile;
 import net.dries007.tfc.objects.te.TEIngotPile;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 public class TESRIngotPile extends TileEntitySpecialRenderer<TEIngotPile> {
@@ -30,7 +30,7 @@ public class TESRIngotPile extends TileEntitySpecialRenderer<TEIngotPile> {
       Metal metal = te.getMetal();
       int count = te.getCount();
       //noinspection ConstantConditions
-      bindTexture(new ResourceLocation(MOD_ID, "textures/blocks/metal/" + metal.getRegistryName().getPath() + ".png"));
+      bindTexture(new ResourceLocation(MODID_TFC, "textures/blocks/metal/" + metal.getRegistryName().getPath() + ".png"));
       GlStateManager.pushMatrix();
       GlStateManager.translate(x, y, z);
 

@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 
 /**
  * Advancement criterion trigger for when an animal is familiarized
@@ -38,7 +38,7 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @MethodsReturnNonnullByDefault
 public class FamiliarizationTrigger implements ICriterionTrigger<FamiliarizationTrigger.Instance> {
 
-  private static final ResourceLocation ID = new ResourceLocation(MOD_ID, "familiarity_changed");
+  private static final ResourceLocation ID = new ResourceLocation(MODID_TFC, "familiarity_changed");
   private final Map<PlayerAdvancements, FamiliarizationTrigger.Listeners> listeners = new HashMap<>();
 
   @Override

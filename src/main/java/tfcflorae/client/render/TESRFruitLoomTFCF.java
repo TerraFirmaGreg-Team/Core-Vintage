@@ -20,7 +20,7 @@ import tfcflorae.types.TreesTFCF;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 import static tfcflorae.TFCFlorae.MODID;
 
 @SideOnly(Side.CLIENT)
@@ -46,7 +46,7 @@ public class TESRFruitLoomTFCF extends TESRBase<TEFruitLoom> {
     }
 
     for (int i = 0; i < BlocksTFCF.bamboo.length; i++) {
-      PLANKS_TEXTURES_TREE.put(BlocksTFCF.bambooTrees[i], new ResourceLocation(MOD_ID, "textures/blocks/wood/planks/" + BlocksTFCF.bamboo[i] + ".png"));
+      PLANKS_TEXTURES_TREE.put(BlocksTFCF.bambooTrees[i], new ResourceLocation(MODID_TFC, "textures/blocks/wood/planks/" + BlocksTFCF.bamboo[i] + ".png"));
     }
 
     PLANKS_TEXTURES_TREE.put(TreesTFCF.CASSIA_CINNAMON_TREE, new ResourceLocation(MODID, "textures/blocks/wood/planks/cassia_cinnamon.png"));
